@@ -4,6 +4,7 @@ import "../globals.css";
 import Header from "@/components/home/header";
 import Footer from "@/components/home/footer";
 import { Toaster } from "@/components/ui/toast";
+import { ThemeProvider } from "next-themes";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -107,12 +108,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} ${jetBrainsMono.variable} antialiased`}
+        className={`${inter.variable} ${jetBrainsMono.variable} antialiased`}
       >
-        <Header />
-        {children}
-        <Toaster position="top-center" />
-        <Footer />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Header />
+          {children}
+          <Toaster position="top-center" />
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -93,7 +93,7 @@ const Hero = () => {
 
   return (
     <section className="flex flex-col items-center justify-center text-center max-w-6xl w-[95%] mx-auto py-12 gap-5">
-      <h1 className="text-4xl md:text-5xl font-dm-sans font-medium mt-10 flex flex-col gap-3 max-w-4xl">
+      <h1 className="text-4xl md:text-5xl tracking-tight font-medium mt-10 flex flex-col gap-3 max-w-3xl">
         Beautiful, budget-friendly forms without compromises
       </h1>
       <p className="text-muted-foreground max-w-2xl">
@@ -118,11 +118,19 @@ const Hero = () => {
             </Button>
           </div>
         </form>
-
         <p className="mt-4 text-green-500 text-sm">
           {countLoading ? "0 " : waitlistCount.toLocaleString()} people have
           already joined the waitlist!
-        </p>
+        </p>{" "}
+      </div>
+      <div className="w-full mt-16">
+        <div className="relative">
+          <img
+            src="/hero/hero-image.png"
+            alt="Ikiform Dashboard Preview"
+            className="object-cover w-full h-full border rounded-card shadow-2xl/10"
+          />
+        </div>
       </div>
     </section>
   );

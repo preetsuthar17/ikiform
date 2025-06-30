@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-mono: var(--font-jetbrains-mono);
+  --font-mono: var(--hu-font-jetbrains);
+  --font-inter: var(--hu-font-inter);
 
   --radius-ele: var(--radius);
   --radius-card: var(--card-radius);
@@ -76,9 +77,18 @@
   --hu-ring: 0, 0%, 45%;
 }
 
-body {
-  background-color: hsl(var(--hu-background));
-  color: hsl(var(--hu-foreground));
+::selection {
+  background-color: hsl(var(--hu-foreground));
+  color: hsl(var(--hu-background));
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-inter;
+  }
 }
 
 .toast {
