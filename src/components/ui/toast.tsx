@@ -22,7 +22,7 @@ const toastVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 type ToasterProps = React.ComponentProps<typeof Sonner>;
