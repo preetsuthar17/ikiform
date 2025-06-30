@@ -5,7 +5,6 @@ import Header from "@/components/home/header";
 import Footer from "@/components/home/footer";
 import { Toaster } from "@/components/ui/toast";
 import { ThemeProvider } from "next-themes";
-import { Separator } from "@/components/ui/separator";
 
 const inter = Inter({
   variable: "--font-inter",
