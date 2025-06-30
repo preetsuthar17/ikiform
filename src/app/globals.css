@@ -32,6 +32,19 @@
   --color-input: hsl(var(--hu-input));
   --color-ring: hsl(var(--hu-ring));
 }
+
+@theme inline {
+  --animate-aurora: aurora 60s linear infinite;
+  @keyframes aurora {
+    from {
+      background-position: 50% 50%, 50% 50%;
+    }
+    to {
+      background-position: 350% 50%, 350% 50%;
+    }
+  }
+}
+
 :root {
   --hu-font-inter: var(--font-inter);
   --hu-font-jetbrains: var(--font-jetbrains-mono);

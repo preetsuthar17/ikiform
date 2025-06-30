@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://forms0.com",
+    url: "https://forms0.com/roadmap",
     siteName: "Forms0",
     title: "Forms0",
     description:
@@ -111,7 +111,7 @@ export default function Layout({
         className={`${inter.variable} ${jetBrainsMono.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className=" flex flex-col justify-between h-screen">
+          <div className="flex flex-col justify-between h-screen z-10 w-full">
             <Header />
             {children}
             <Toaster position="top-center" />

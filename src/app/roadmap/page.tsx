@@ -37,7 +37,7 @@ export default function Roadmap() {
       <div className="flex items-start justify-start text-left gap-2 mb-8">
         <h1 className="font-mono text-2xl font-bold tracking-tight">roadmap</h1>
       </div>
-      <div className="text-foreground bg-background font-mono text-left">
+      <div className="font-mono text-left">
         <RoadmapComponent items={roadmapItems} />
       </div>
     </div>

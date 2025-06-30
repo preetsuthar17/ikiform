@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { waitlistService } from "@/lib/supabase/waitlist";
+
 import confetti from "canvas-confetti";
+
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-
 import { toast } from "../../hooks/use-toast";
 
 const Hero = () => {
@@ -92,12 +93,14 @@ const Hero = () => {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center text-center max-w-6xl w-[95%] mx-auto py-12 gap-5">
-      <h1 className="text-4xl md:text-5xl tracking-tight font-medium mt-10 flex flex-col gap-3 max-w-3xl">
-        Beautiful, budget-friendly forms without compromises
+    <section className="flex flex-col items-center justify-center text-center max-w-6xl w-[95%] mx-auto py-12 gap-5 relative overflow-hidden">
+      <h1 className="text-4xl md:text-5xl tracking-tight font-medium mt-10 flex flex-col gap-3 max-w-3xl relative">
+        <span className="inline-block px-2 py-1 ">
+          Beautiful, budget-friendly forms without compromises
+        </span>
       </h1>
       <p className="text-muted-foreground max-w-2xl">
-        Ikiform is an open-source alternative to Typeform and Google Forms,
+        Forms0 is an open-source alternative to Typeform and Google Forms,
         designed to help you create beautiful forms effortlessly.
       </p>
 
