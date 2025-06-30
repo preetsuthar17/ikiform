@@ -3,10 +3,9 @@
 import * as React from "react";
 import { Toaster as Sonner } from "sonner";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
 
 const toastVariants = cva(
-  "group toast group-[.toaster]:bg-card group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:rounded-ele",
+  "group toast group-[.toaster]:bg-card group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:rounded-ele font-inter font-medium",
   {
     variants: {
       variant: {

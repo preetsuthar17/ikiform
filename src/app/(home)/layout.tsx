@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "../globals.css";
 import Header from "@/components/home/header";
 import Footer from "@/components/home/footer";
+import { Toaster } from "@/components/ui/toast";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -15,9 +16,87 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Beautiful, budget-friendly forms without compromises",
+  title: {
+    default: "Beautiful, budget-friendly forms without compromises - Forms0",
+    template: "%s | Forms0",
+  },
   description:
-    "Forms0 is an open-source alternative to Typeform and Google Forms, designed to help you create beautiful forms effortlessly.",
+    "Create beautiful forms with Forms0 - An open-source alternative to Typeform and Google Forms. Build surveys, collect responses, and analyze data effortlessly.",
+  applicationName: "Forms0",
+  authors: [{ name: "Preet Suthar", url: "https://forms0.com" }],
+  creator: "Forms0",
+  publisher: "Forms0",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://forms0.com"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://forms0.com",
+    siteName: "Forms0",
+    title: "Forms0",
+    description:
+      "Create beautiful, interactive forms with Forms0 - An open-source alternative to Typeform and Google Forms. Build surveys, collect responses, and analyze data effortlessly.",
+    images: [
+      {
+        url: "/og-banner.png",
+        width: 1200,
+        height: 630,
+        alt: "Forms0",
+        type: "image/png",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@Forms0",
+    creator: "@Forms0",
+    title: "Forms0",
+    description:
+      "Create beautiful, interactive forms with Forms0 - An open-source alternative to Typeform and Google Forms.",
+    images: ["/og-banner.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: [{ url: "/favicon.ico" }],
+  },
+  themeColor: [{ media: "(prefers-color-scheme: light)", color: "#ffffff" }],
+  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
+  keywords: [
+    "form builder",
+    "online forms",
+    "surveys",
+    "questionnaires",
+    "open source",
+    "typeform alternative",
+    "google forms alternative",
+    "form creator",
+    "survey tool",
+    "data collection",
+    "Forms0",
+    "form software",
+    "custom forms",
+    "interactive forms",
+    "form analytics",
+  ],
+  category: "technology",
+  classification: "Business Software",
 };
 
 export default function RootLayout({
@@ -32,6 +111,7 @@ export default function RootLayout({
       >
         <Header />
         {children}
+        <Toaster position="top-center" />
         <Footer />
       </body>
     </html>

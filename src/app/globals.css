@@ -53,7 +53,7 @@
   --hu-destructive-foreground: 0, 0%, 98%;
   --hu-border: 0, 0%, 80%;
   --hu-input: 0, 0%, 100%;
-  --hu-ring: 0 0% 3.9%;
+  --hu-ring: 0 0% 48%;
 }
 
 .dark {
@@ -79,4 +79,9 @@
 body {
   background-color: hsl(var(--hu-background));
   color: hsl(var(--hu-foreground));
+}
+
+.toast {
+  border-radius: var(--radius-ele) !important;
+  font-weight: 500 !important;
 }
