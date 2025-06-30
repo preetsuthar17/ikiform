@@ -13,7 +13,7 @@ export default function Footer() {
           <Link
             href="https://x.com/forms0dotcom"
             target="_blank"
-            className="text-blue-600"
+            className="text-blue-500"
           >
             @forms0dotcom
           </Link>
