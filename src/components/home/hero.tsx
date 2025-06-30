@@ -9,11 +9,15 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { toast } from "../../hooks/use-toast";
 
+let lastSubmit = 0;
+let submitTimestamps: number[] = [];
+
 const Hero = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [waitlistCount, setWaitlistCount] = useState<number>(0);
   const [countLoading, setCountLoading] = useState(true);
+  const [honey, setHoney] = useState("");
 
   useEffect(() => {
     const fetchCount = async () => {
@@ -59,6 +63,44 @@ const Hero = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const now = Date.now();
+    submitTimestamps = submitTimestamps.filter(
+      (ts) => now - ts < 10 * 60 * 1000
+    );
+    if (submitTimestamps.length >= 3) {
+      console.log("[RATE LIMIT] Too many submissions in 10 minutes");
+      setEmail("");
+      setHoney("");
+      return;
+    }
+    submitTimestamps.push(now);
+
+    // Log honeypot value
+    if (honey) {
+      console.log("[BOT DETECTED] Honeypot field filled:", honey);
+      setEmail("");
+      setHoney("");
+      return;
+    }
+
+    // Log rapid submissions (within 2 seconds)
+    if (lastSubmit && Date.now() - lastSubmit < 2000) {
+      console.log("[BOT DETECTED] Rapid submission detected");
+      setEmail("");
+      setHoney("");
+      return;
+    }
+    lastSubmit = Date.now();
+
+    // Log suspicious email patterns (e.g., lots of numbers or gibberish)
+    const suspiciousEmailPattern = /[0-9]{5,}|[a-z]{10,}\d{2,}/i;
+    if (suspiciousEmailPattern.test(email)) {
+      console.log("[BOT DETECTED] Suspicious email pattern:", email);
+      setEmail("");
+      setHoney("");
+      return;
+    }
+
     if (!email.trim()) {
       return;
     }
@@ -75,6 +117,7 @@ const Hero = () => {
 
       if (result.success) {
         setEmail("");
+        setHoney("");
         triggerConfetti();
         toast("Successfully joined waitlist!");
         const countResult = await waitlistService.getWaitlistCount();
@@ -106,6 +149,20 @@ const Hero = () => {
 
       <div className="w-full max-w-md mt-8">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <input
+            type="text"
+            value={honey}
+            onChange={(e) => setHoney(e.target.value)}
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              left: "-9999px",
+              opacity: 0,
+              height: 0,
+              width: 0,
+            }}
+            autoComplete="off"
+          />
           <div className="flex flex-col sm:flex-row gap-3 text-sm">
             <Input
               type="email"
@@ -122,9 +179,9 @@ const Hero = () => {
           </div>
         </form>
         <p className="mt-4 text-green-500 text-sm">
-          {countLoading ? "0 " : waitlistCount.toLocaleString()} people have
+          {countLoading ? "0" : waitlistCount.toLocaleString()} people have
           already joined the waitlist!
-        </p>{" "}
+        </p>
       </div>
     </section>
   );
