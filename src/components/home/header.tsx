@@ -16,13 +16,15 @@ export default function Header() {
   return (
     <nav className="flex justify-between flex-wrap items-center gap-8 max-w-6xl w-[95%] mx-auto py-10 text-sm font-inter max-sm:flex-col max-sm:text-center max-sm:items-center max-sm:justify-center">
       <div className="max-w-[90px]">
-        <Image
-          src="/logo.svg"
-          alt="forms0"
-          width={40}
-          height={40}
-          className="pointer-events-none rounded-ele"
-        />
+        <Link href="/">
+          <Image
+            src="/logo.svg"
+            alt="forms0"
+            width={40}
+            height={40}
+            className="pointer-events-none rounded-ele"
+          />
+        </Link>
       </div>
       <div className="flex items-center gap-4">
         <nav className="flex gap-4 text-sm">
