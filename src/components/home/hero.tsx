@@ -65,7 +65,7 @@ const Hero = () => {
 
     const now = Date.now();
     submitTimestamps = submitTimestamps.filter(
-      (ts) => now - ts < 10 * 60 * 1000
+      (ts) => now - ts < 10 * 60 * 1000,
     );
     if (submitTimestamps.length >= 3) {
       console.log("[RATE LIMIT] Too many submissions in 10 minutes");

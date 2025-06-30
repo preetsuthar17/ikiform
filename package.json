@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write . --ignore-path .gitignore --ignore-path .prettierignore",
-    "check": "tsc --noEmit && prettier --check . --ignore-path .gitignore"
+    "check": "tsc --noEmit && prettier --check . --ignore-path .gitignore",
+    "drizzle:generate": "drizzle-kit generate",
+    "drizzle:push": "drizzle-kit push",
+    "drizzle:pull": "drizzle-kit pull"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.11",
@@ -34,11 +37,14 @@
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "dotenv": "^17.0.0",
+    "drizzle-orm": "^0.44.2",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.525.0",
     "motion": "^12.19.2",
     "next": "15.3.4",
     "next-themes": "^0.4.6",
+    "postgres": "^3.4.7",
     "react": "^19.0.0",
     "react-aria-components": "^1.10.1",
     "react-dom": "^19.0.0",
@@ -53,6 +59,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "drizzle-kit": "^0.31.4",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
