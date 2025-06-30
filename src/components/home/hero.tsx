@@ -9,9 +9,6 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { toast } from "../../hooks/use-toast";
 
-let lastSubmit = 0;
-let submitTimestamps: number[] = [];
-
 const Hero = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -63,39 +60,9 @@ const Hero = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const now = Date.now();
-    submitTimestamps = submitTimestamps.filter(
-      (ts) => now - ts < 10 * 60 * 1000
-    );
-    if (submitTimestamps.length >= 3) {
-      console.log("[RATE LIMIT] Too many submissions in 10 minutes");
-      setEmail("");
-      setHoney("");
-      return;
-    }
-    submitTimestamps.push(now);
-
     // Log honeypot value
     if (honey) {
       toast.warning("Something went wrong. Please try again later.");
-      setEmail("");
-      setHoney("");
-      return;
-    }
-
-    // Log rapid submissions (within 2 seconds)
-    if (lastSubmit && Date.now() - lastSubmit < 2000) {
-      console.log("[BOT DETECTED] Rapid submission detected");
-      setEmail("");
-      setHoney("");
-      return;
-    }
-    lastSubmit = Date.now();
-
-    // Log suspicious email patterns (e.g., lots of numbers or gibberish)
-    const suspiciousEmailPattern = /[0-9]{5,}|[a-z]{10,}\d{2,}/i;
-    if (suspiciousEmailPattern.test(email)) {
-      console.log("[BOT DETECTED] Suspicious email pattern:", email);
       setEmail("");
       setHoney("");
       return;
@@ -123,9 +90,7 @@ const Hero = () => {
         const countResult = await waitlistService.getWaitlistCount();
         setWaitlistCount(countResult.count);
       } else {
-        if (result.message.toLowerCase().includes("too many requests")) {
-          toast.error("You are being rate limited. Please try again later.");
-        } else if (result.message.includes("already")) {
+        if (result.message.includes("already")) {
           toast("You've already joined waitlist!");
         } else {
           toast("Something went wrong!");
