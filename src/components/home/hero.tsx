@@ -65,7 +65,7 @@ const Hero = () => {
 
     const now = Date.now();
     submitTimestamps = submitTimestamps.filter(
-      (ts) => now - ts < 10 * 60 * 1000,
+      (ts) => now - ts < 10 * 60 * 1000
     );
     if (submitTimestamps.length >= 3) {
       console.log("[RATE LIMIT] Too many submissions in 10 minutes");
@@ -77,7 +77,7 @@ const Hero = () => {
 
     // Log honeypot value
     if (honey) {
-      console.log("[BOT DETECTED] Honeypot field filled:", honey);
+      toast.warning("Something went wrong. Please try again later.");
       setEmail("");
       setHoney("");
       return;
@@ -123,7 +123,9 @@ const Hero = () => {
         const countResult = await waitlistService.getWaitlistCount();
         setWaitlistCount(countResult.count);
       } else {
-        if (result.message.includes("already")) {
+        if (result.message.toLowerCase().includes("too many requests")) {
+          toast.error("You are being rate limited. Please try again later.");
+        } else if (result.message.includes("already")) {
           toast("You've already joined waitlist!");
         } else {
           toast("Something went wrong!");
@@ -149,21 +151,21 @@ const Hero = () => {
 
       <div className="w-full max-w-md mt-8">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <input
-            type="text"
-            value={honey}
-            onChange={(e) => setHoney(e.target.value)}
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              left: "-9999px",
-              opacity: 0,
-              height: 0,
-              width: 0,
-            }}
-            autoComplete="off"
-          />
           <div className="flex flex-col sm:flex-row gap-3 text-sm">
+            <input
+              type="text"
+              value={honey}
+              onChange={(e) => setHoney(e.target.value)}
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                left: "-9999px",
+                opacity: 0,
+                height: 0,
+                width: 0,
+              }}
+              autoComplete="off"
+            />
             <Input
               type="email"
               value={email}

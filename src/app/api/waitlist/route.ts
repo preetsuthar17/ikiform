@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     if (!email || typeof email !== "string") {
       return new Response(
         JSON.stringify({ success: false, message: "Invalid email." }),
-        { status: 400 },
+        { status: 400 }
       );
     }
     await db.insert(waitlist).values({ email });
@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
         success: true,
         message: "Successfully joined the waitlist!",
       }),
-      { status: 200 },
+      { status: 200 }
     );
   } catch (error: any) {
     if (
@@ -29,12 +29,12 @@ export async function POST(req: NextRequest) {
           success: false,
           message: "You have already joined the waitlist.",
         }),
-        { status: 200 },
+        { status: 200 }
       );
     }
     return new Response(
       JSON.stringify({ success: false, message: error.message }),
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
