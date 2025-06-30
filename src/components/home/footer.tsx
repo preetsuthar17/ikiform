@@ -1,19 +1,22 @@
 "use client";
 
-import Image from "next/image";
+import Link from "next/link";
+import { Separator } from "../ui/separator";
 
 export default function Footer() {
   return (
     <>
-      <footer className="flex  justify-between max-w-6xl w-[95%] mx-auto py-10 text-sm font-inter flex-wrap gap-8 max-sm:text-center max-sm:items-center max-sm:justify-center max-sm:flex-col">
-        <div className="max-w-[90px]">
-          <Image
-            src="/logo.svg"
-            alt="Forms0"
-            width={40}
-            height={40}
-            className="pointer-events-none rounded-ele"
-          />
+      <footer className="flex max-w-6xl w-[95%] mx-auto py-10 text-sm font-inter  text-center justify-center items-center flex-col gap-12">
+        <Separator size={"sm"} className="opacity-60" />
+        <div className="flex flex-wrap gap-1 text-muted-foreground">
+          © {new Date().getFullYear()} forms0 —
+          <Link
+            href="https://x.com/forms0dotcom"
+            target="_blank"
+            className="text-blue-600"
+          >
+            @forms0dotcom
+          </Link>
         </div>
       </footer>
     </>

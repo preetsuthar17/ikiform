@@ -123,18 +123,6 @@ const Hero = () => {
           already joined the waitlist!
         </p>{" "}
       </div>
-      <div className="w-full mt-16">
-        <div className="relative">
-          <img
-            src="/hero/hero-image.png"
-            alt="Ikiform Dashboard Preview"
-            className="object-cover w-full h-full border rounded-card shadow-2xl/10"
-          />
-          <p className="pt-4 text-muted-foreground">
-            Actual Website may differ from image.
-          </p>
-        </div>
-      </div>
     </section>
   );
 };

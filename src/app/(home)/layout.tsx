@@ -5,6 +5,7 @@ import Header from "@/components/home/header";
 import Footer from "@/components/home/footer";
 import { Toaster } from "@/components/ui/toast";
 import { ThemeProvider } from "next-themes";
+import { Separator } from "@/components/ui/separator";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -100,7 +101,7 @@ export const metadata: Metadata = {
   classification: "Business Software",
 };
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -111,10 +112,12 @@ export default function RootLayout({
         className={`${inter.variable} ${jetBrainsMono.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Header />
-          {children}
-          <Toaster position="top-center" />
-          <Footer />
+          <div className=" flex flex-col justify-between h-screen">
+            <Header />
+            {children}
+            <Toaster position="top-center" />
+            <Footer />
+          </div>
         </ThemeProvider>
       </body>
     </html>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Sun, Moon } from "lucide-react";
 import { Button } from "../ui/button";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
@@ -24,26 +25,22 @@ export default function Header() {
         />
       </div>
       <div className="flex items-center gap-4">
-        <p className="font-medium text-foreground/70 space-x-1">
-          Star us on{" "}
-          <a
+        <nav className="flex gap-4 text-sm">
+          <Link
             href="https://github.com/preetsuthar17/forms0"
-            className="underline text-foreground "
             target="_blank"
             rel="noopener noreferrer"
+            className="hover:underline"
           >
             GitHub
-          </a>{" "}
-          and follow us on{" "}
-          <a
-            href="https://x.com/preetsuthar17"
-            className="underline text-foreground"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          </Link>
+          <Link href="https://x.com/preetsuthar17" className="hover:underline">
             X (Twitter)
-          </a>
-        </p>
+          </Link>{" "}
+          <Link href="/roadmap" className="hover:underline">
+            Roadmap
+          </Link>
+        </nav>
         <Button
           aria-label="Toggle theme"
           onClick={handleToggle}
