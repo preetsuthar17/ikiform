@@ -77,8 +77,6 @@ export const metadata: Metadata = {
   icons: {
     icon: [{ url: "/favicon.ico" }],
   },
-  themeColor: [{ media: "(prefers-color-scheme: light)", color: "#ffffff" }],
-  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
   keywords: [
     "form builder",
     "online forms",
@@ -98,6 +96,13 @@ export const metadata: Metadata = {
   ],
   category: "technology",
   classification: "Business Software",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [{ media: "(prefers-color-scheme: light)", color: "#ffffff" }],
 };
 
 export default function RootLayout({
