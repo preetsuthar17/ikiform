@@ -6,6 +6,13 @@ export async function updateSession(request: NextRequest) {
     request,
   });
 
+  // Try to get JWT from Authorization header
+  const authHeader = request.headers.get("authorization");
+  let accessToken = null;
+  if (authHeader && authHeader.startsWith("Bearer ")) {
+    accessToken = authHeader.replace("Bearer ", "");
+  }
+
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -16,17 +23,22 @@ export async function updateSession(request: NextRequest) {
         },
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value, options }) =>
-            request.cookies.set(name, value),
+            request.cookies.set(name, value)
           );
           supabaseResponse = NextResponse.next({
             request,
           });
           cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options),
+            supabaseResponse.cookies.set(name, value, options)
           );
         },
       },
-    },
+      ...(accessToken && {
+        global: {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        },
+      }),
+    }
   );
 
   // Do not run code between createServerClient and

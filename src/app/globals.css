@@ -37,14 +37,10 @@
   --animate-aurora: aurora 60s linear infinite;
   @keyframes aurora {
     from {
-      background-position:
-        50% 50%,
-        50% 50%;
+      background-position: 50% 50%, 50% 50%;
     }
     to {
-      background-position:
-        350% 50%,
-        350% 50%;
+      background-position: 350% 50%, 350% 50%;
     }
   }
 }
@@ -64,7 +60,7 @@
   --hu-secondary: 0, 0%, 94%;
   --hu-secondary-foreground: 0, 0%, 20%;
   --hu-muted: 0, 0%, 95%;
-  --hu-muted-foreground: 0, 0%, 50%;
+  --hu-muted-foreground: 0, 0%, 40%;
   --hu-accent: 0, 0%, 96%;
   --hu-accent-foreground: 0, 0%, 20%;
   --hu-destructive: 0, 60%, 50%;

@@ -12,14 +12,14 @@ export async function GET(request: Request) {
 
   if (code) {
     const supabase = await createClient();
-    const { error: sessionError } =
+    const { data: sessionData, error: sessionError } =
       await supabase.auth.exchangeCodeForSession(code);
-    if (!sessionError) {
-      // Fetch user info from session
+    if (!sessionError && sessionData?.session?.access_token) {
+      // Use the access_token directly to get the user
       const {
         data: { user },
         error: userError,
-      } = await supabase.auth.getUser();
+      } = await supabase.auth.getUser(sessionData.session.access_token);
       if (user && !userError) {
         const { id: uid, email, user_metadata } = user;
         const name =

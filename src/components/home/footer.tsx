@@ -12,8 +12,8 @@ export default function Footer() {
           © {new Date().getFullYear()} forms0 —
           <Link
             href="https://x.com/forms0dotcom"
+            className="text-foreground"
             target="_blank"
-            className="text-blue-500"
           >
             @forms0dotcom
           </Link>
@@ -22,3 +22,4 @@ export default function Footer() {
     </>
   );
 }
+    
