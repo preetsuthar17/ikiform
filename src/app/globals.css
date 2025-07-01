@@ -37,14 +37,10 @@
   --animate-aurora: aurora 60s linear infinite;
   @keyframes aurora {
     from {
-      background-position:
-        50% 50%,
-        50% 50%;
+      background-position: 50% 50%, 50% 50%;
     }
     to {
-      background-position:
-        350% 50%,
-        350% 50%;
+      background-position: 350% 50%, 350% 50%;
     }
   }
 }
@@ -53,7 +49,7 @@
   --hu-font-inter: var(--font-inter);
   --hu-font-jetbrains: var(--font-jetbrains-mono);
 
-  --radius: 0.7rem;
+  --radius: 0.8rem;
   --card-radius: 1rem;
   --hu-background: 0, 0%, 98%;
   --hu-foreground: 0, 0%, 10%;
@@ -69,7 +65,7 @@
   --hu-accent-foreground: 0, 0%, 20%;
   --hu-destructive: 0, 60%, 50%;
   --hu-destructive-foreground: 0, 0%, 98%;
-  --hu-border: 0, 0%, 80%;
+  --hu-border: 0, 0%, 90%;
   --hu-input: 0, 0%, 100%;
   --hu-ring: 0 0% 48%;
 }
@@ -89,7 +85,7 @@
   --hu-accent-foreground: 0, 0%, 92%;
   --hu-destructive: 0, 60%, 50%;
   --hu-destructive-foreground: 0, 0%, 98%;
-  --hu-border: 0, 0%, 25%;
+  --hu-border: 0, 0%, 15%;
   --hu-input: 0, 0%, 14%;
   --hu-ring: 0, 0%, 45%;
 }
@@ -111,4 +107,12 @@
 .toast {
   border-radius: var(--radius-ele) !important;
   font-weight: 500 !important;
+}
+
+.go2072408551 {
+  div {
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+  }
 }

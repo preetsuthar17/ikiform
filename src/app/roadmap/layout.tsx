@@ -100,25 +100,6 @@ export const metadata: Metadata = {
   classification: "Business Software",
 };
 
-export default function Layout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${inter.variable} ${jetBrainsMono.variable} antialiased`}
-      >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="flex flex-col justify-between h-screen z-10 w-full">
-            <Header />
-            {children}
-            <Toaster position="top-center" />
-            <Footer />
-          </div>
-        </ThemeProvider>
-      </body>
-    </html>
-  );
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return children;
 }

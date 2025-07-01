@@ -1,11 +1,40 @@
 "use client";
 
 import { Button } from "../ui/button";
+import { createClient } from "@/utils/supabase/client";
+import { useAuth } from "@/hooks/use-auth";
+import Link from "next/link";
+import {
+  Modal,
+  ModalTrigger,
+  ModalContent,
+  ModalHeader,
+  ModalTitle,
+  ModalFooter,
+} from "../ui/modal";
+import React, { useEffect } from "react";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
+import { toast } from "@/hooks/use-toast";
 
 const Hero = () => {
+  const { user } = useAuth();
+  const [open, setOpen] = React.useState(false);
+
+  const handleOAuthLogin = async (provider: "github" | "google") => {
+    toast(`Redirecting to ${provider === "google" ? "Google" : "GitHub"}...`);
+    const supabase = createClient();
+    await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    });
+  };
+
   return (
-    <section className="flex flex-col items-center justify-center text-center max-w-6xl w-[95%] mx-auto py-12 gap-5 relative overflow-hidden">
-      <h1 className="text-4xl md:text-5xl tracking-tight font-medium mt-10 flex flex-col gap-3 max-w-3xl relative">
+    <section className="flex flex-col items-center justify-center text-center py-12 gap-6 relative overflow-hidden">
+      <h1 className="text-4xl md:text-5xl tracking-tight font-medium mt-10 flex flex-col gap-2 max-w-3xl relative">
         <span className="inline-block px-2 py-1 ">
           Beautiful, budget-friendly forms without compromises
         </span>
@@ -14,9 +43,55 @@ const Hero = () => {
         Forms0 is an open-source alternative to Typeform and Google Forms,
         designed to help you create beautiful forms effortlessly.
       </p>
-      <div className="w-full max-w-md mt-8 flex flex-col items-center">
-        <Button size="lg" disabled>
-          Coming Soon
+      <div className="w-full max-w-md flex gap-2 justify-center items-center flex-wrap">
+        {!user ? (
+          <Modal open={open} onOpenChange={setOpen}>
+            <ModalTrigger asChild>
+              <Button
+                className="py-6 px-4 font-medium max-[400px]:grow"
+                onClick={() => setOpen(true)}
+              >
+                Create your first form
+              </Button>
+            </ModalTrigger>
+            <ModalContent className="max-w-sm">
+              <ModalHeader>
+                <ModalTitle>Choose your login method</ModalTitle>
+              </ModalHeader>
+              <div className="flex flex-col gap-4 mt-6">
+                <Button
+                  variant="secondary"
+                  size={"lg"}
+                  onClick={() => handleOAuthLogin("google")}
+                  className="font-medium py-6 w-full flex items-center gap-2"
+                >
+                  <FcGoogle size={22} />
+                  Login with Google
+                </Button>
+                <Button
+                  variant="secondary"
+                  size={"lg"}
+                  onClick={() => handleOAuthLogin("github")}
+                  className="font-medium py-6 w-full flex items-center gap-2"
+                >
+                  <FaGithub size={22} />
+                  Login with GitHub
+                </Button>
+              </div>
+              <ModalFooter />
+            </ModalContent>
+          </Modal>
+        ) : (
+          <Button className="py-6 px-4 font-medium max-[400px]:grow" asChild>
+            <Link href="/dashboard">Go to Dashboard</Link>
+          </Button>
+        )}
+        <Button
+          className="py-6 px-4 font-medium max-[400px]:grow"
+          variant={"secondary"}
+          asChild
+        >
+          <Link href="/#pricing">Check out pricing</Link>
         </Button>
       </div>
     </section>

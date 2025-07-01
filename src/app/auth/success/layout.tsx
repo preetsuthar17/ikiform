@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import "../globals.css";
+import "../../globals.css";
 import Header from "@/components/home/header";
 import Footer from "@/components/home/footer";
 import { Toaster } from "@/components/ui/toast";

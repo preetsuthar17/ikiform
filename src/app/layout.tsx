@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import "../globals.css";
+import "./globals.css";
 import Header from "@/components/home/header";
 import Footer from "@/components/home/footer";
 import { Toaster } from "@/components/ui/toast";
@@ -100,6 +100,25 @@ export const metadata: Metadata = {
   classification: "Business Software",
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${inter.variable} ${jetBrainsMono.variable} antialiased`}
+      >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <div className="flex flex-col justify-between min-h-screen z-10 max-w-6xl w-[90%] mx-auto">
+            <Header />
+            {children}
+            <Toaster position="top-center" />
+            <Footer />
+          </div>
+        </ThemeProvider>
+      </body>
+    </html>
+  );
 }
