@@ -1,5 +1,6 @@
 "use client";
 import { useAuth } from "@/hooks/use-auth";
+import { createClient } from "@/utils/supabase/client";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -8,16 +9,59 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { MoreVertical } from "lucide-react";
+import { MoreVertical, CreditCard, Crown } from "lucide-react";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import {
   Skeleton,
   SkeletonAvatar,
   SkeletonText,
 } from "@/components/ui/skeleton";
+import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function ProfileCard() {
   const { user, signOut, loading } = useAuth();
+  const [hasPremium, setHasPremium] = useState(false);
+  const [hasCustomerPortal, setHasCustomerPortal] = useState(false);
+  const [checkingPremium, setCheckingPremium] = useState(false);
+
+  // Check user's premium status and customer portal access
+  useEffect(() => {
+    const checkPremiumStatus = async () => {
+      if (!user?.email) {
+        setHasPremium(false);
+        setHasCustomerPortal(false);
+        setCheckingPremium(false);
+        return;
+      }
+
+      setCheckingPremium(true);
+      try {
+        const supabase = createClient();
+        const { data, error } = await supabase
+          .from("users")
+          .select("has_premium, polar_customer_id")
+          .eq("email", user.email)
+          .single();
+
+        if (!error && data) {
+          setHasPremium(data.has_premium || false);
+          setHasCustomerPortal(!!data.polar_customer_id);
+        } else {
+          setHasPremium(false);
+          setHasCustomerPortal(false);
+        }
+      } catch (error) {
+        console.error("Error checking premium status:", error);
+        setHasPremium(false);
+        setHasCustomerPortal(false);
+      } finally {
+        setCheckingPremium(false);
+      }
+    };
+
+    checkPremiumStatus();
+  }, [user]);
 
   if (loading) {
     return (
@@ -71,9 +115,31 @@ export default function ProfileCard() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <CardContent className="flex flex-col space-y-1">
-        <div className="text-xl font-semibold text-center">{name}</div>
-        <div className="text-muted-foreground text-sm">{user.email}</div>
+      <CardContent className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-1 text-center">
+          <div className="text-xl font-semibold flex items-center justify-center gap-2">
+            {name}
+            {hasPremium && <Crown className="w-5 h-5 text-yellow-500" />}
+          </div>
+          <div className="text-muted-foreground text-sm">{user.email}</div>
+          {hasPremium && (
+            <div className="text-xs text-green-600 font-medium">
+              Premium Member
+            </div>
+          )}
+        </div>
+
+        {/* Customer Portal Button */}
+        {hasCustomerPortal && (
+          <div className="flex justify-center">
+            <Link href="/portal" target="_blank">
+              <Button variant="outline" size="sm" className="gap-2">
+                <CreditCard className="w-4 h-4" />
+                Manage Subscription
+              </Button>
+            </Link>
+          </div>
+        )}
       </CardContent>
     </Card>
   );

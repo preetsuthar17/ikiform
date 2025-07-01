@@ -37,10 +37,14 @@
   --animate-aurora: aurora 60s linear infinite;
   @keyframes aurora {
     from {
-      background-position: 50% 50%, 50% 50%;
+      background-position:
+        50% 50%,
+        50% 50%;
     }
     to {
-      background-position: 350% 50%, 350% 50%;
+      background-position:
+        350% 50%,
+        350% 50%;
     }
   }
 }
@@ -51,9 +55,9 @@
 
   --radius: 0.8rem;
   --card-radius: 1rem;
-  --hu-background: 0, 0%, 98%;
+  --hu-background: 0, 0%, 100%;
   --hu-foreground: 0, 0%, 10%;
-  --hu-card: 0, 0%, 100%;
+  --hu-card: 0, 0%, 98%;
   --hu-card-foreground: 0, 0%, 10%;
   --hu-primary: 0, 0%, 20%;
   --hu-primary-foreground: 0, 0%, 98%;
@@ -65,7 +69,7 @@
   --hu-accent-foreground: 0, 0%, 20%;
   --hu-destructive: 0, 60%, 50%;
   --hu-destructive-foreground: 0, 0%, 98%;
-  --hu-border: 0, 0%, 90%;
+  --hu-border: 0, 0%, 90%, 0;
   --hu-input: 0, 0%, 100%;
   --hu-ring: 0 0% 48%;
 }
@@ -85,7 +89,7 @@
   --hu-accent-foreground: 0, 0%, 92%;
   --hu-destructive: 0, 60%, 50%;
   --hu-destructive-foreground: 0, 0%, 98%;
-  --hu-border: 0, 0%, 15%;
+  --hu-border: 0, 0%, 15%, 0;
   --hu-input: 0, 0%, 14%;
   --hu-ring: 0, 0%, 45%;
 }
