@@ -37,14 +37,10 @@
   --animate-aurora: aurora 60s linear infinite;
   @keyframes aurora {
     from {
-      background-position:
-        50% 50%,
-        50% 50%;
+      background-position: 50% 50%, 50% 50%;
     }
     to {
-      background-position:
-        350% 50%,
-        350% 50%;
+      background-position: 350% 50%, 350% 50%;
     }
   }
 }
@@ -69,7 +65,7 @@
   --hu-accent-foreground: 0, 0%, 20%;
   --hu-destructive: 0, 60%, 50%;
   --hu-destructive-foreground: 0, 0%, 98%;
-  --hu-border: 0, 0%, 90%, 0;
+  --hu-border: 0, 0%, 95%;
   --hu-input: 0, 0%, 100%;
   --hu-ring: 0 0% 48%;
 }
@@ -89,7 +85,7 @@
   --hu-accent-foreground: 0, 0%, 92%;
   --hu-destructive: 0, 60%, 50%;
   --hu-destructive-foreground: 0, 0%, 98%;
-  --hu-border: 0, 0%, 15%, 0;
+  --hu-border: 0, 0%, 15%;
   --hu-input: 0, 0%, 14%;
   --hu-ring: 0, 0%, 45%;
 }
@@ -118,5 +114,103 @@
     font-size: 13px;
     font-weight: 500;
     text-align: center;
+  }
+}
+
+/* Form Builder Specific Styles */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Custom scrollbar for better design */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--hu-muted)) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--hu-muted));
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--hu-muted-foreground));
+}
+
+/* Form card hover effects */
+.form-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.dark .form-card-hover:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25),
+    0 4px 6px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient backgrounds for empty states */
+.gradient-bg {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--hu-accent)) 0%,
+    hsl(var(--hu-muted)) 100%
+  );
+}
+
+/* Button loading states */
+.button-loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.button-loading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  border-radius: inherit;
+  opacity: 0.7;
+}
+
+.button-loading::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }

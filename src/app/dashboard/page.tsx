@@ -1,10 +1,14 @@
 "use client";
 import ProfileCard from "@/components/dashboard/profile-card";
+import { FormsManagement } from "@/components/dashboard/forms-management";
 
 export default function DashboardPage() {
   return (
-    <section className="flex flex-col items-center justify-center px-4">
-      <ProfileCard />
+    <section className="max-w-[95%] mx-auto w-full px-6">
+      <div className="space-y-8">
+        <ProfileCard />
+        <FormsManagement />
+      </div>
     </section>
   );
 }

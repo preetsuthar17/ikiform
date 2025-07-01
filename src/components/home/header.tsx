@@ -22,7 +22,7 @@ export default function Header() {
   };
 
   return (
-    <nav className="flex justify-between flex-wrap items-center gap-8  py-10 text-sm font-inter max-sm:flex-col max-sm:text-center max-sm:items-center max-sm:justify-center">
+    <nav className="flex justify-between flex-wrap items-center gap-8  py-10 text-sm font-inter max-sm:flex-col max-sm:text-center max-sm:items-center max-sm:justify-center max-w-[95%] mx-auto w-full px-6">
       <div className="max-w-[90px]">
         <Link href="/">
           <Image
@@ -45,7 +45,7 @@ export default function Header() {
             GitHub
           </Link>
           <Link href="https://x.com/preetsuthar17" className="hover:underline">
-            X (Twitter)
+            X
           </Link>{" "}
           <Link href="/roadmap" className="hover:underline">
             Roadmap

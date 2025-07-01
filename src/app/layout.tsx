@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/home/header";
-import Footer from "@/components/home/footer";
 import { Toaster } from "@/components/ui/toast";
 import { ThemeProvider } from "next-themes";
+import ConditionalLayout from "./conditional-layout";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -116,12 +115,8 @@ export default function RootLayout({
         className={`${inter.variable} ${jetBrainsMono.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="flex flex-col justify-between min-h-screen z-10 max-w-6xl w-[90%] mx-auto">
-            <Header />
-            {children}
-            <Toaster position="top-center" />
-            <Footer />
-          </div>
+          <ConditionalLayout>{children}</ConditionalLayout>
+          <Toaster position="top-center" />
         </ThemeProvider>
       </body>
     </html>
