@@ -4,7 +4,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { TagInput } from "@/components/ui/tag-input";
 import { RadioGroup, RadioItem } from "@/components/ui/radio";
@@ -103,9 +109,7 @@ export function FormFieldRenderer({
                   if (checked) {
                     onChange([...currentValues, option]);
                   } else {
-                    onChange(
-                      currentValues.filter((v: string) => v !== option)
-                    );
+                    onChange(currentValues.filter((v: string) => v !== option));
                   }
                 }}
               />
@@ -117,7 +121,9 @@ export function FormFieldRenderer({
         return (
           <Select value={value || ""} onValueChange={onChange}>
             <SelectTrigger className={error ? "border-red-500" : ""}>
-              <SelectValue placeholder={field.placeholder || "Select an option..."} />
+              <SelectValue
+                placeholder={field.placeholder || "Select an option..."}
+              />
             </SelectTrigger>
             <SelectContent>
               {field.options?.map((option, index) => (

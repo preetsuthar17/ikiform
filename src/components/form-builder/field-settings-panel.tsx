@@ -406,7 +406,10 @@ export function FieldSettingsPanel({
                   />
                 </div>
                 <div>
-                  <Label htmlFor="slider-default" className="text-card-foreground">
+                  <Label
+                    htmlFor="slider-default"
+                    className="text-card-foreground"
+                  >
                     Default Value
                   </Label>
                   <Input
@@ -414,7 +417,9 @@ export function FieldSettingsPanel({
                     type="number"
                     value={field.settings?.defaultValue || 50}
                     onChange={(e) =>
-                      updateSettings({ defaultValue: parseInt(e.target.value) || 50 })
+                      updateSettings({
+                        defaultValue: parseInt(e.target.value) || 50,
+                      })
                     }
                     className="bg-input border-border"
                   />
@@ -442,7 +447,9 @@ export function FieldSettingsPanel({
                     type="number"
                     value={field.settings?.maxTags || 10}
                     onChange={(e) =>
-                      updateSettings({ maxTags: parseInt(e.target.value) || 10 })
+                      updateSettings({
+                        maxTags: parseInt(e.target.value) || 10,
+                      })
                     }
                     min="1"
                     className="bg-input border-border"
@@ -452,9 +459,14 @@ export function FieldSettingsPanel({
                   <Switch
                     id="tags-duplicates"
                     checked={field.settings?.allowDuplicates || false}
-                    onCheckedChange={(checked) => updateSettings({ allowDuplicates: checked })}
+                    onCheckedChange={(checked) =>
+                      updateSettings({ allowDuplicates: checked })
+                    }
                   />
-                  <Label htmlFor="tags-duplicates" className="text-card-foreground">
+                  <Label
+                    htmlFor="tags-duplicates"
+                    className="text-card-foreground"
+                  >
                     Allow Duplicate Tags
                   </Label>
                 </div>
@@ -476,9 +488,14 @@ export function FieldSettingsPanel({
                   <Switch
                     id="select-multiple"
                     checked={field.settings?.allowMultiple || false}
-                    onCheckedChange={(checked) => updateSettings({ allowMultiple: checked })}
+                    onCheckedChange={(checked) =>
+                      updateSettings({ allowMultiple: checked })
+                    }
                   />
-                  <Label htmlFor="select-multiple" className="text-card-foreground">
+                  <Label
+                    htmlFor="select-multiple"
+                    className="text-card-foreground"
+                  >
                     Allow Multiple Selection
                   </Label>
                 </div>
@@ -487,9 +504,13 @@ export function FieldSettingsPanel({
           )}
 
           {/* Field Type Info - Always shown */}
-          <Card className="p-4 bg-accent/50 border-accent" style={{ borderRadius: "var(--radius)" }}>
+          <Card
+            className="p-4 bg-accent/50 border-accent"
+            style={{ borderRadius: "var(--radius)" }}
+          >
             <h3 className="font-medium text-accent-foreground mb-2">
-              Field Type: {field.type.charAt(0).toUpperCase() + field.type.slice(1)}
+              Field Type:{" "}
+              {field.type.charAt(0).toUpperCase() + field.type.slice(1)}
             </h3>
             <p className="text-sm text-muted-foreground">
               {field.type === "text" &&

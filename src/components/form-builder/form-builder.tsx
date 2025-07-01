@@ -147,11 +147,12 @@ export function FormBuilder({ formId }: FormBuilderProps) {
         ? ["Option 1", "Option 2"]
         : undefined,
       validation: {},
-      settings: fieldType === "slider" 
-        ? { min: 0, max: 100, step: 1, defaultValue: 50 }
-        : fieldType === "tags"
-        ? { maxTags: 10, allowDuplicates: false }
-        : {},
+      settings:
+        fieldType === "slider"
+          ? { min: 0, max: 100, step: 1, defaultValue: 50 }
+          : fieldType === "tags"
+          ? { maxTags: 10, allowDuplicates: false }
+          : {},
     };
 
     setFormSchema((prev) => ({
