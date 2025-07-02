@@ -26,8 +26,15 @@ export function MultiStepForm({ formId, schema }: MultiStepFormProps) {
   const blocks: FormBlock[] = schema.blocks?.length
     ? schema.blocks
     : schema.fields?.length
-    ? [{ id: "default", title: "Form", description: "", fields: schema.fields }]
-    : [];
+      ? [
+          {
+            id: "default",
+            title: "Form",
+            description: "",
+            fields: schema.fields,
+          },
+        ]
+      : [];
 
   const totalSteps = blocks.length;
   const currentBlock = blocks[currentStep];

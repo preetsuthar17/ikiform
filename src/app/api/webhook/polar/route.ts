@@ -38,7 +38,7 @@ export const POST = Webhooks({
 
       if (data && data.length > 0) {
         console.log(
-          `Successfully updated premium status for user: ${userEmail}`
+          `Successfully updated premium status for user: ${userEmail}`,
         );
         console.log("Updated user data:", data[0]);
       } else {
@@ -78,7 +78,7 @@ export const POST = Webhooks({
 
       if (data && data.length > 0) {
         console.log(
-          `Successfully updated premium status for user: ${userEmail}`
+          `Successfully updated premium status for user: ${userEmail}`,
         );
         console.log("Updated user data:", data[0]);
       } else {
@@ -114,7 +114,7 @@ export const POST = Webhooks({
 
       if (data && data.length > 0) {
         console.log(
-          `Successfully revoked premium status for user: ${userEmail}`
+          `Successfully revoked premium status for user: ${userEmail}`,
         );
         console.log("Updated user data:", data[0]);
       } else {

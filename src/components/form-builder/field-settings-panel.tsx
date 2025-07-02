@@ -50,7 +50,7 @@ export function FieldSettingsPanel({
   };
 
   const updateValidation = (
-    validationUpdates: Partial<FormField["validation"]>
+    validationUpdates: Partial<FormField["validation"]>,
   ) => {
     updateField({
       validation: { ...field.validation, ...validationUpdates },

@@ -104,7 +104,7 @@ export const formsDb = {
   async submitForm(
     formId: string,
     submissionData: Record<string, any>,
-    ipAddress?: string
+    ipAddress?: string,
   ) {
     const supabase = createClient();
 

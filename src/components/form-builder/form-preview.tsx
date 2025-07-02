@@ -50,7 +50,7 @@ export function FormPreview({
   const [editingStepDescription, setEditingStepDescription] = useState(false);
   const [tempTitle, setTempTitle] = useState(schema.settings.title);
   const [tempDescription, setTempDescription] = useState(
-    schema.settings.description || ""
+    schema.settings.description || "",
   );
   const [tempStepTitle, setTempStepTitle] = useState("");
   const [tempStepDescription, setTempStepDescription] = useState("");
@@ -76,7 +76,7 @@ export function FormPreview({
   useEffect(() => {
     if (selectedBlockId && schema.blocks) {
       const blockIndex = schema.blocks.findIndex(
-        (block) => block.id === selectedBlockId
+        (block) => block.id === selectedBlockId,
       );
       if (blockIndex !== -1) {
         setCurrentStepIndex(blockIndex);
@@ -363,8 +363,8 @@ export function FormPreview({
                       index === currentStepIndex
                         ? "bg-primary text-primary-foreground"
                         : index < currentStepIndex
-                        ? "bg-primary/20 text-primary"
-                        : "bg-muted text-muted-foreground hover:bg-muted/80"
+                          ? "bg-primary/20 text-primary"
+                          : "bg-muted text-muted-foreground hover:bg-muted/80"
                     }`}
                   >
                     {index + 1}
@@ -506,7 +506,9 @@ export function FormPreview({
                               }`}
                               onClick={() =>
                                 onFieldSelect(
-                                  selectedFieldId === field.id ? null : field.id
+                                  selectedFieldId === field.id
+                                    ? null
+                                    : field.id,
                                 )
                               }
                             >
