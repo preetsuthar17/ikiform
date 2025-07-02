@@ -1,6 +1,5 @@
 import { NextRequest } from "next/server";
-import { db } from "@/db";
-import { waitlist } from "@/db/schema";
+import supabase from "@/lib/supabase/supabaseClient";
 import { checkRateLimit } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
@@ -31,7 +30,25 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-    await db.insert(waitlist).values({ email });
+    const { error } = await supabase.from("waitlist").insert([{ email }]);
+    if (error) {
+      if (
+        error.message?.includes("duplicate") ||
+        error.message?.includes("unique")
+      ) {
+        return new Response(
+          JSON.stringify({
+            success: false,
+            message: "You have already joined the waitlist.",
+          }),
+          { status: 200 }
+        );
+      }
+      return new Response(
+        JSON.stringify({ success: false, message: error.message }),
+        { status: 500 }
+      );
+    }
     return new Response(
       JSON.stringify({
         success: true,
@@ -40,18 +57,6 @@ export async function POST(req: NextRequest) {
       { status: 200 }
     );
   } catch (error: any) {
-    if (
-      error.message?.includes("duplicate") ||
-      error.message?.includes("unique")
-    ) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          message: "You have already joined the waitlist.",
-        }),
-        { status: 200 }
-      );
-    }
     return new Response(
       JSON.stringify({ success: false, message: error.message }),
       { status: 500 }
@@ -61,8 +66,11 @@ export async function POST(req: NextRequest) {
 
 export async function GET() {
   try {
-    const result = await db.select({ id: waitlist.id }).from(waitlist);
-    return new Response(JSON.stringify({ count: result.length }), {
+    const { data, error } = await supabase.from("waitlist").select("id");
+    if (error) {
+      return new Response(JSON.stringify({ count: 0 }), { status: 500 });
+    }
+    return new Response(JSON.stringify({ count: data ? data.length : 0 }), {
       status: 200,
     });
   } catch {
