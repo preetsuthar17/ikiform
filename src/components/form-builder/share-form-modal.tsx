@@ -80,7 +80,7 @@ export function ShareFormModal({
 
   return (
     <Modal open={isOpen} onOpenChange={onClose}>
-      <ModalContent className="max-w-md">
+      <ModalContent className="max-w-md flex flex-col gap-6">
         <ModalHeader>
           <ModalTitle className="flex items-center gap-2">
             <Share className="w-5 h-5" />
@@ -88,7 +88,7 @@ export function ShareFormModal({
           </ModalTitle>
         </ModalHeader>
 
-        <div className="space-y-6">
+        <div className="flex flex-col gap-6">
           {!isPublished ? (
             // Form not published yet
             <div className="text-center space-y-4">
@@ -110,8 +110,8 @@ export function ShareFormModal({
             </div>
           ) : (
             // Form is published
-            <div className="space-y-4">
-              <div className="space-y-2">
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
                 <Label htmlFor="share-url">Public Form URL</Label>
                 <div className="flex gap-2">
                   <Input
