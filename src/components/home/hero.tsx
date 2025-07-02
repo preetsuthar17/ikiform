@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { waitlistService } from "@/lib/supabase/waitlist";
+import { useTheme } from "next-themes";
 
 import confetti from "canvas-confetti";
 
@@ -15,6 +16,7 @@ const Hero = () => {
   const [waitlistCount, setWaitlistCount] = useState<number>(0);
   const [countLoading, setCountLoading] = useState(true);
   const [honey, setHoney] = useState("");
+  const { theme } = useTheme();
 
   useEffect(() => {
     const fetchCount = async () => {
@@ -149,6 +151,17 @@ const Hero = () => {
           {countLoading ? "0" : waitlistCount.toLocaleString()} people have
           already joined the waitlist!
         </p>
+      </div>
+      <div className="w-full mt-16">
+        <div className="relative ">
+          <img
+            src={
+              theme === "dark" ? "/hero/hero-dark.png" : "/hero/hero-light.png"
+            }
+            alt="Forms0 Preview"
+            className="object-cover w-full h-full border border-border rounded-card shadow-md/2"
+          />
+        </div>
       </div>
     </section>
   );
