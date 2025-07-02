@@ -111,7 +111,7 @@ export default function Layout({
         className={`${inter.variable} ${jetBrainsMono.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="flex flex-col justify-between max-h-screen overflow-hidden z-10 w-full">
+          <div className="flex flex-col justify-between z-10 w-full">
             <Header />
             {children}
             <Toaster position="top-center" />
