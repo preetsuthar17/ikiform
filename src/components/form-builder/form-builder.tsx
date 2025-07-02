@@ -15,7 +15,6 @@ import {
   Code,
   Layers,
   FileText,
-  Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -181,27 +180,6 @@ export function FormBuilder({ formId }: FormBuilderProps) {
       setShowCreationWizard(true);
     }
   }, [isNewForm, authLoading, user]);
-
-  // Check for AI-generated form on mount
-  useEffect(() => {
-    if (!formId && typeof window !== "undefined") {
-      const aiGeneratedForm = localStorage.getItem("ai_generated_form");
-      if (aiGeneratedForm) {
-        try {
-          const parsedForm = JSON.parse(aiGeneratedForm);
-          setFormSchema(parsedForm);
-          setIsNewForm(false);
-          if (parsedForm.blocks.length > 0) {
-            setSelectedBlockId(parsedForm.blocks[0].id);
-          }
-          // Clear the stored form
-          localStorage.removeItem("ai_generated_form");
-        } catch (error) {
-          console.error("Error parsing AI-generated form:", error);
-        }
-      }
-    }
-  }, [formId]);
 
   // Track unsaved changes
   useEffect(() => {
@@ -787,15 +765,6 @@ export function FormBuilder({ formId }: FormBuilderProps) {
               {formSchema.settings.multiStep ? "Multi-Step" : "Single Page"}
             </Button>
 
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => router.push("/form-builder/ai")}
-              className="gap-2"
-            >
-              <Sparkles className="w-4 h-4" />
-              AI Builder
-            </Button>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
