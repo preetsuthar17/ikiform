@@ -16,6 +16,7 @@ import type { FormField } from "@/lib/database.types";
 
 interface FieldPaletteProps {
   onAddField: (fieldType: FormField["type"]) => void;
+  compact?: boolean;
 }
 
 const fieldTypes = [
@@ -75,7 +76,36 @@ const fieldTypes = [
   },
 ];
 
-export function FieldPalette({ onAddField }: FieldPaletteProps) {
+export function FieldPalette({
+  onAddField,
+  compact = false,
+}: FieldPaletteProps) {
+  if (compact) {
+    return (
+      <div className="max-h-64 overflow-y-auto">
+        <div className="grid grid-cols-2 gap-2 p-2">
+          {fieldTypes.map((fieldType) => {
+            const Icon = fieldType.icon;
+            return (
+              <button
+                key={fieldType.type}
+                onClick={() => onAddField(fieldType.type)}
+                className="p-2 rounded-lg border border-border bg-background hover:bg-muted transition-colors text-left"
+              >
+                <div className="flex items-center gap-2">
+                  <Icon className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                  <span className="text-xs font-medium truncate">
+                    {fieldType.label}
+                  </span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="h-full bg-card border-r border-border">
       <ScrollArea className="h-full">
@@ -98,8 +128,8 @@ export function FieldPalette({ onAddField }: FieldPaletteProps) {
                   className="group p-3 bg-background border-border hover:border-ring/20 transition-all duration-200 cursor-pointer hover:shadow-md/2"
                   onClick={() => onAddField(fieldType.type)}
                 >
-                  <div className="flex items-start space-x-2">
-                    <div className="flex-shrink-0 p-1.5 bg-accent rounded-ele group-hover:bg-primary/10 transition-colors duration-200">
+                  <div className="flex items-center space-x-2">
+                    <div className="flex-shrink-0 p-1.5 bg-accent rounded-lg group-hover:bg-primary/10 transition-colors duration-200">
                       <IconComponent className="w-4 h-4 text-accent-foreground group-hover:text-primary transition-colors duration-200" />
                     </div>
                     <div className="flex-1 min-w-0">

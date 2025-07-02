@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { MoreVertical, CreditCard, Crown } from "lucide-react";
+import { MoreVertical, CreditCard, Crown, Settings } from "lucide-react";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import {
   Skeleton,
@@ -18,12 +18,14 @@ import {
 } from "@/components/ui/skeleton";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { SettingsModal } from "@/components/settings/settings-modal";
 
 export default function ProfileCard() {
   const { user, signOut, loading } = useAuth();
   const [hasPremium, setHasPremium] = useState(false);
   const [hasCustomerPortal, setHasCustomerPortal] = useState(false);
   const [checkingPremium, setCheckingPremium] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
 
   // Check user's premium status and customer portal access
   useEffect(() => {
@@ -91,7 +93,7 @@ export default function ProfileCard() {
   const avatarUrl = user.user_metadata?.avatar_url;
 
   return (
-    <Card className="flex flex-col items-center gap-6 w-full grow relative">
+    <Card className="flex flex-col items-center gap-6 w-full grow relative py-24">
       <CardHeader className="flex items-center gap-2">
         <Avatar size="xl">
           {avatarUrl ? (
@@ -101,10 +103,17 @@ export default function ProfileCard() {
           )}
         </Avatar>
       </CardHeader>
-      <div className="absolute right-3 top-3">
+      <div className="absolute right-3 top-3 flex items-center gap-2">
+        <Button
+          variant={"secondary"}
+          size={"icon"}
+          onClick={() => setShowSettings(true)}
+        >
+          <Settings />
+        </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon">
+            <Button variant="secondary" size="icon">
               <MoreVertical className="w-6 h-6" />
             </Button>
           </DropdownMenuTrigger>
@@ -141,6 +150,9 @@ export default function ProfileCard() {
           </div>
         )}
       </CardContent>
+
+      {/* Settings Modal */}
+      <SettingsModal open={showSettings} onOpenChange={setShowSettings} />
     </Card>
   );
 }

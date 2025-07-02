@@ -16,13 +16,9 @@ export default async function FormAnalyticsPage({
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) {
-    redirect("/auth");
-  }
-
   try {
     // Verify form ownership
-    const hasAccess = await formsDbServer.verifyFormOwnership(id, user.id);
+    const hasAccess = await formsDbServer.verifyFormOwnership(id, user!.id);
     if (!hasAccess) {
       notFound();
     }
@@ -33,7 +29,7 @@ export default async function FormAnalyticsPage({
       .from("forms")
       .select("*")
       .eq("id", id)
-      .eq("user_id", user.id)
+      .eq("user_id", user?.id)
       .single();
 
     if (error || !form) {

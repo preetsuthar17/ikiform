@@ -1,11 +1,14 @@
 "use client";
 
+import React from "react";
 import { FormBuilder } from "@/components/form-builder/form-builder";
 
 interface FormBuilderPageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export default function FormBuilderPage({ params }: FormBuilderPageProps) {
-  return <FormBuilder formId={params.id} />;
+  const { id } = React.use(params);
+  return <FormBuilder formId={id} />;
 }

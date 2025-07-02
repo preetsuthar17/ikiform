@@ -17,7 +17,7 @@ const switchVariants = cva(
           "data-[state=checked]:bg-secondary data-[state=unchecked]:bg-accent",
       },
       size: {
-        sm: "h-5 w-9",
+        sm: "h-4 w-7",
         default: "h-6 w-11",
         lg: "h-7 w-13",
         xl: "h-8 w-15",
@@ -27,7 +27,7 @@ const switchVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 const switchThumbVariants = cva(
@@ -39,7 +39,7 @@ const switchThumbVariants = cva(
         secondary: "bg-background",
       },
       size: {
-        sm: "h-4 w-4 data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0",
+        sm: "h-3 w-3 data-[state=checked]:translate-x-3 data-[state=unchecked]:translate-x-0",
         default:
           "h-5 w-5 data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0",
         lg: "h-6 w-6 data-[state=checked]:translate-x-6 data-[state=unchecked]:translate-x-0",
@@ -50,7 +50,7 @@ const switchThumbVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 export interface SwitchProps
@@ -78,7 +78,7 @@ const Switch = React.forwardRef<
       id,
       ...props
     },
-    ref,
+    ref
   ) => {
     const switchId = id || React.useId();
 
@@ -135,7 +135,7 @@ const Switch = React.forwardRef<
     }
 
     return switchElement;
-  },
+  }
 );
 
 Switch.displayName = SwitchPrimitive.Root.displayName;

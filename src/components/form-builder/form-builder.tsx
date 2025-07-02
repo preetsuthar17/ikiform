@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "motion/react";
 import {
   Save,
   Eye,
@@ -10,12 +11,23 @@ import {
   Globe,
   EyeOff,
   BarChart3,
+  AlertTriangle,
+  Code,
+  Layers,
+  FileText,
+  Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   ResizablePanelGroup,
@@ -33,9 +45,16 @@ import { toast } from "@/hooks/use-toast";
 import { FieldPalette } from "./field-palette";
 import { FormPreview } from "./form-preview";
 import { FieldSettingsPanel } from "./field-settings-panel";
+import { JsonViewModal } from "./json-view-modal";
+import { FormCreationWizard } from "./form-creation-wizard";
+import { BlockManager } from "./block-manager";
+import { FormSettingsModal } from "./form-settings-modal";
+import { ShareFormModal } from "./share-form-modal";
+
 import { formsDb } from "@/lib/database";
-import type { FormField, FormSchema } from "@/lib/database.types";
+import type { FormField, FormSchema, FormBlock } from "@/lib/database.types";
 import { Loader } from "../ui/loader";
+import Link from "next/link";
 
 interface FormBuilderProps {
   formId?: string;
@@ -47,24 +66,66 @@ export function FormBuilder({ formId }: FormBuilderProps) {
 
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [autoSaving, setAutoSaving] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [isPublished, setIsPublished] = useState(false);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [selectedFieldId, setSelectedFieldId] = useState<string | null>(null);
+  const [selectedBlockId, setSelectedBlockId] = useState<string | null>(null);
   const [showSettings, setShowSettings] = useState(false);
-  const [formSchema, setFormSchema] = useState<FormSchema>({
-    fields: [],
-    settings: {
-      title: "Untitled Form",
-      description: "",
-      submitText: "Submit",
-      successMessage: "Thank you for your submission!",
-      redirectUrl: "",
-    },
+  const [showFormSettings, setShowFormSettings] = useState(false);
+  const [showJsonView, setShowJsonView] = useState(false);
+  const [showCreationWizard, setShowCreationWizard] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
+
+  const [isNewForm, setIsNewForm] = useState(!formId);
+  const [formSchema, setFormSchema] = useState<FormSchema>(() => {
+    // For new forms, start with empty schema (wizard will populate it)
+    if (!formId) {
+      return {
+        blocks: [],
+        fields: [],
+        settings: {
+          title: "Untitled Form",
+          description: "",
+          submitText: "Submit",
+          successMessage: "Thank you for your submission!",
+          redirectUrl: "",
+          multiStep: false,
+          showProgress: true,
+        },
+      };
+    }
+
+    // For existing forms, start with default schema until loaded
+    return {
+      blocks: [
+        {
+          id: "default",
+          title: "Form Fields",
+          description: "",
+          fields: [],
+        },
+      ],
+      fields: [],
+      settings: {
+        title: "Untitled Form",
+        description: "",
+        submitText: "Submit",
+        successMessage: "Thank you for your submission!",
+        redirectUrl: "",
+        multiStep: false,
+        showProgress: true,
+      },
+    };
   });
 
   const draftKey = formId ? `form-draft-${formId}` : "form-draft-new";
   const isRestored = useRef(false);
   const isFormLoaded = useRef(false);
+  const autoSaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const lastSavedSchemaRef = useRef<FormSchema | null>(null);
+  const lastManuallySavedSchemaRef = useRef<FormSchema | null>(null);
 
   // Restore draft on mount (only once)
   useEffect(() => {
@@ -105,6 +166,73 @@ export function FormBuilder({ formId }: FormBuilderProps) {
     isFormLoaded.current = false;
   }, [formId]);
 
+  // Cleanup auto-save timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (autoSaveTimeoutRef.current) {
+        clearTimeout(autoSaveTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  // Show creation wizard for new forms
+  useEffect(() => {
+    if (isNewForm && !authLoading && user) {
+      setShowCreationWizard(true);
+    }
+  }, [isNewForm, authLoading, user]);
+
+  // Check for AI-generated form on mount
+  useEffect(() => {
+    if (!formId && typeof window !== "undefined") {
+      const aiGeneratedForm = localStorage.getItem("ai_generated_form");
+      if (aiGeneratedForm) {
+        try {
+          const parsedForm = JSON.parse(aiGeneratedForm);
+          setFormSchema(parsedForm);
+          setIsNewForm(false);
+          if (parsedForm.blocks.length > 0) {
+            setSelectedBlockId(parsedForm.blocks[0].id);
+          }
+          // Clear the stored form
+          localStorage.removeItem("ai_generated_form");
+        } catch (error) {
+          console.error("Error parsing AI-generated form:", error);
+        }
+      }
+    }
+  }, [formId]);
+
+  // Track unsaved changes
+  useEffect(() => {
+    if (!lastManuallySavedSchemaRef.current) {
+      // No manually saved schema yet, check if we have changes from initial state
+      const hasChanges =
+        formSchema.fields.length > 0 ||
+        (formSchema.blocks.length > 0 &&
+          formSchema.blocks[0].fields.length > 0) ||
+        formSchema.settings.title !== "Untitled Form" ||
+        formSchema.settings.description !== "" ||
+        formSchema.settings.submitText !== "Submit" ||
+        formSchema.settings.successMessage !==
+          "Thank you for your submission!" ||
+        formSchema.settings.redirectUrl !== "";
+      setHasUnsavedChanges(hasChanges);
+      console.log("No manual save ref - hasChanges:", hasChanges);
+    } else {
+      // Compare with last manually saved schema
+      const currentSchemaStr = JSON.stringify(formSchema);
+      const savedSchemaStr = JSON.stringify(lastManuallySavedSchemaRef.current);
+      const hasChanges = currentSchemaStr !== savedSchemaStr;
+      setHasUnsavedChanges(hasChanges);
+      console.log("Comparing schemas - hasChanges:", hasChanges, {
+        currentLength: currentSchemaStr.length,
+        savedLength: savedSchemaStr.length,
+        equal: currentSchemaStr === savedSchemaStr,
+      });
+    }
+  }, [formSchema]);
+
   const loadForm = async () => {
     if (!formId || !user || isFormLoaded.current) return;
 
@@ -118,6 +246,18 @@ export function FormBuilder({ formId }: FormBuilderProps) {
       }
       setFormSchema(form.schema);
       setIsPublished(form.is_published);
+      lastSavedSchemaRef.current = {
+        ...form.schema,
+        fields: [...form.schema.fields],
+      }; // Track as saved with deep copy
+      lastManuallySavedSchemaRef.current = {
+        ...form.schema,
+        fields: [...form.schema.fields],
+      }; // Track as manually saved with deep copy
+      console.log(
+        "Loaded form, set manual save ref:",
+        JSON.stringify(lastManuallySavedSchemaRef.current).length
+      );
       isFormLoaded.current = true; // Mark as loaded
 
       // Clear any existing draft for this form since we loaded from database
@@ -134,6 +274,28 @@ export function FormBuilder({ formId }: FormBuilderProps) {
 
   const generateFieldId = () => {
     return `field_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  };
+
+  const debouncedAutoSave = async (schema: FormSchema) => {
+    if (!formId || !user || saving || autoSaving) return;
+
+    // Clear existing timeout
+    if (autoSaveTimeoutRef.current) {
+      clearTimeout(autoSaveTimeoutRef.current);
+    }
+
+    // Set new timeout for auto-save
+    autoSaveTimeoutRef.current = setTimeout(async () => {
+      setAutoSaving(true);
+      try {
+        await formsDb.updateForm(formId, { schema });
+        lastSavedSchemaRef.current = schema; // Update saved schema reference
+      } catch (error) {
+        console.error("Auto-save failed:", error);
+      } finally {
+        setAutoSaving(false);
+      }
+    }, 1000); // Auto-save after 1 second of inactivity
   };
 
   const addField = (fieldType: FormField["type"]) => {
@@ -155,28 +317,62 @@ export function FormBuilder({ formId }: FormBuilderProps) {
           : {},
     };
 
-    setFormSchema((prev) => ({
-      ...prev,
-      fields: [...prev.fields, newField],
-    }));
+    setFormSchema((prev) => {
+      // Find the target block (selected block or first block)
+      const targetBlockId = selectedBlockId || prev.blocks[0]?.id;
+      const updatedBlocks = prev.blocks.map((block) =>
+        block.id === targetBlockId
+          ? { ...block, fields: [...block.fields, newField] }
+          : block
+      );
+
+      return {
+        ...prev,
+        blocks: updatedBlocks,
+        // Also add to fields for backward compatibility
+        fields: [...prev.fields, newField],
+      };
+    });
 
     setSelectedFieldId(newField.id);
   };
 
   const updateField = (updatedField: FormField) => {
-    setFormSchema((prev) => ({
-      ...prev,
-      fields: prev.fields.map((field) =>
-        field.id === updatedField.id ? updatedField : field
-      ),
-    }));
+    setFormSchema((prev) => {
+      // Update in blocks
+      const updatedBlocks = prev.blocks.map((block) => ({
+        ...block,
+        fields: block.fields.map((field) =>
+          field.id === updatedField.id ? updatedField : field
+        ),
+      }));
+
+      return {
+        ...prev,
+        blocks: updatedBlocks,
+        // Also update in fields for backward compatibility
+        fields: prev.fields.map((field) =>
+          field.id === updatedField.id ? updatedField : field
+        ),
+      };
+    });
   };
 
   const deleteField = (fieldId: string) => {
-    setFormSchema((prev) => ({
-      ...prev,
-      fields: prev.fields.filter((field) => field.id !== fieldId),
-    }));
+    setFormSchema((prev) => {
+      // Remove from blocks
+      const updatedBlocks = prev.blocks.map((block) => ({
+        ...block,
+        fields: block.fields.filter((field) => field.id !== fieldId),
+      }));
+
+      return {
+        ...prev,
+        blocks: updatedBlocks,
+        // Also remove from fields for backward compatibility
+        fields: prev.fields.filter((field) => field.id !== fieldId),
+      };
+    });
 
     if (selectedFieldId === fieldId) {
       setSelectedFieldId(null);
@@ -184,17 +380,111 @@ export function FormBuilder({ formId }: FormBuilderProps) {
   };
 
   const reorderFields = (fields: FormField[]) => {
+    setFormSchema((prev) => {
+      // Update the first block with reordered fields
+      const updatedBlocks = [...prev.blocks];
+      if (updatedBlocks.length > 0) {
+        updatedBlocks[0] = {
+          ...updatedBlocks[0],
+          fields,
+        };
+      }
+
+      return {
+        ...prev,
+        blocks: updatedBlocks,
+        // Also update fields for backward compatibility
+        fields,
+      };
+    });
+  };
+
+  // Block management functions
+  const addBlock = () => {
+    const newBlock: FormBlock = {
+      id: `step-${Date.now()}`,
+      title: `Step ${formSchema.blocks.length + 1}`,
+      description: "",
+      fields: [],
+    };
+
     setFormSchema((prev) => ({
       ...prev,
-      fields,
+      blocks: [...prev.blocks, newBlock],
+      settings: {
+        ...prev.settings,
+        multiStep: prev.blocks.length > 0, // Enable multi-step if adding to existing blocks
+      },
+    }));
+
+    setSelectedBlockId(newBlock.id);
+  };
+
+  const updateBlocks = (blocks: FormBlock[]) => {
+    setFormSchema((prev) => ({
+      ...prev,
+      blocks,
+      // Update fields array with all fields from all blocks for backward compatibility
+      fields: blocks.flatMap((block) => block.fields),
     }));
   };
 
+  const updateBlock = (blockId: string, updates: Partial<FormBlock>) => {
+    setFormSchema((prev) => {
+      const updatedBlocks = prev.blocks.map((block) =>
+        block.id === blockId ? { ...block, ...updates } : block
+      );
+
+      return {
+        ...prev,
+        blocks: updatedBlocks,
+        // Update fields array with all fields from all blocks for backward compatibility
+        fields: updatedBlocks.flatMap((block) => block.fields),
+      };
+    });
+  };
+
+  const deleteBlock = (blockId: string) => {
+    setFormSchema((prev) => {
+      const updatedBlocks = prev.blocks.filter((block) => block.id !== blockId);
+
+      return {
+        ...prev,
+        blocks: updatedBlocks,
+        // Update fields array
+        fields: updatedBlocks.flatMap((block) => block.fields),
+        settings: {
+          ...prev.settings,
+          multiStep: updatedBlocks.length > 1,
+        },
+      };
+    });
+
+    if (selectedBlockId === blockId) {
+      setSelectedBlockId(null);
+    }
+  };
+
+  const handleFormTypeSelect = (schema: FormSchema) => {
+    setFormSchema(schema);
+    setIsNewForm(false);
+    if (schema.blocks.length > 0) {
+      setSelectedBlockId(schema.blocks[0].id);
+    }
+  };
+
   const updateFormSettings = (settings: Partial<FormSchema["settings"]>) => {
-    setFormSchema((prev) => ({
-      ...prev,
-      settings: { ...prev.settings, ...settings },
-    }));
+    setFormSchema((prev) => {
+      const newSchema = {
+        ...prev,
+        settings: { ...prev.settings, ...settings },
+      };
+
+      // Trigger auto-save for existing forms
+      debouncedAutoSave(newSchema);
+
+      return newSchema;
+    });
   };
 
   const saveForm = async () => {
@@ -203,15 +493,31 @@ export function FormBuilder({ formId }: FormBuilderProps) {
       return;
     }
     setSaving(true);
+    console.log(
+      "Starting save, current schema:",
+      JSON.stringify(formSchema).length
+    );
     try {
       if (formId) {
         await formsDb.updateForm(formId, { schema: formSchema });
+        lastSavedSchemaRef.current = formSchema; // Update saved schema reference
+        lastManuallySavedSchemaRef.current = { ...formSchema }; // Update manually saved schema reference with deep copy
+        console.log(
+          "Updated manual save ref after save:",
+          JSON.stringify(lastManuallySavedSchemaRef.current).length
+        );
         toast.success("Form saved successfully!");
       } else {
         const newForm = await formsDb.createForm(
           user.id,
           formSchema.settings.title,
           formSchema
+        );
+        lastSavedSchemaRef.current = formSchema; // Update saved schema reference
+        lastManuallySavedSchemaRef.current = { ...formSchema }; // Update manually saved schema reference with deep copy
+        console.log(
+          "Updated manual save ref after create:",
+          JSON.stringify(lastManuallySavedSchemaRef.current).length
         );
         // Reset the form loaded flag since we're navigating to a new form
         isFormLoaded.current = false;
@@ -234,24 +540,33 @@ export function FormBuilder({ formId }: FormBuilderProps) {
       toast.error("Please save your form before previewing.");
       return;
     }
-    window.open(`/forms/${formId}/preview`, "_blank");
+
+    const previewUrl = `/forms/${formId}/preview`;
+    window.open(previewUrl, "_blank");
+
+    // Show a helpful message
+    toast.success("Opening form preview in new tab");
   };
 
-  const shareForm = async () => {
+  const shareForm = () => {
     if (!formId) {
       toast.error("Please save your form before sharing.");
       return;
     }
+    setShowShareModal(true);
+  };
+
+  const handlePublishForm = async () => {
+    if (!formId) return;
 
     try {
       await formsDb.togglePublishForm(formId, true);
       setIsPublished(true);
-      const shareUrl = `${window.location.origin}/forms/${formId}`;
-      await navigator.clipboard.writeText(shareUrl);
-      toast.success("Form published and link copied to clipboard!");
+      toast.success("Form published successfully!");
     } catch (error) {
-      console.error("Error sharing form:", error);
+      console.error("Error publishing form:", error);
       toast.error("Failed to publish form. Please try again.");
+      throw error;
     }
   };
 
@@ -260,6 +575,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
       toast.error("Please save your form before viewing analytics.");
       return;
     }
+    toast.success("Redirecting to analytics page...");
     router.push(`/dashboard/forms/${formId}/analytics`);
   };
 
@@ -288,6 +604,12 @@ export function FormBuilder({ formId }: FormBuilderProps) {
     }
   };
 
+  const handleStepSelection = (stepIndex: number) => {
+    if (formSchema.blocks && formSchema.blocks[stepIndex]) {
+      setSelectedBlockId(formSchema.blocks[stepIndex].id);
+    }
+  };
+
   if (authLoading || loading) {
     return (
       <div className="h-screen flex items-center justify-center ">
@@ -303,17 +625,22 @@ export function FormBuilder({ formId }: FormBuilderProps) {
       <div className="h-screen flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4">Authentication Required</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-muted-foreground mb-6">
             Please log in to use the form builder.
           </p>
-          <Button onClick={() => router.push("/auth")}>Go to Login</Button>
+          <Button onClick={() => router.push("/")}>Go to Login</Button>
         </div>
       </div>
     );
   }
 
-  const selectedField =
-    formSchema.fields.find((field) => field.id === selectedFieldId) || null;
+  const selectedField = (() => {
+    // Find field in blocks or fall back to fields array
+    const allFields = formSchema.blocks?.length
+      ? formSchema.blocks.flatMap((block) => block.fields)
+      : formSchema.fields || [];
+    return allFields.find((field) => field.id === selectedFieldId) || null;
+  })();
 
   return (
     <div className="h-screen flex flex-col overflow-hidden">
@@ -330,62 +657,235 @@ export function FormBuilder({ formId }: FormBuilderProps) {
             >
               Form Builder
             </h1>
-            <div className="text-sm text-muted-foreground">
-              {formSchema.fields.length} field
-              {formSchema.fields.length !== 1 ? "s" : ""}
+            <div className="flex items-center space-x-3">
+              <Button asChild variant={"secondary"} className="font-medium">
+                <Link href="/dashboard" className="flex items-center z-1">
+                  Go to Dashboard
+                </Link>
+              </Button>
+              <div className="text-sm text-muted-foreground">
+                {formSchema.fields.length} field
+                {formSchema.fields.length !== 1 ? "s" : ""}
+              </div>
+              {autoSaving && (
+                <div className="flex items-center space-x-1 text-xs text-muted-foreground">
+                  <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></div>
+                  <span>Saving</span>
+                </div>
+              )}
             </div>
           </div>
 
           <div className="flex items-center space-x-3">
-            <Button variant="secondary" onClick={() => setShowSettings(true)}>
-              <SettingsIcon className="w-4 h-4 " />
-              Settings
+            <Button
+              variant={formSchema.settings.multiStep ? "default" : "secondary"}
+              size="sm"
+              onClick={() => {
+                const newMultiStep = !formSchema.settings.multiStep;
+
+                console.log("Mode toggle clicked:", {
+                  currentMode: formSchema.settings.multiStep
+                    ? "multi"
+                    : "single",
+                  newMode: newMultiStep ? "multi" : "single",
+                  currentBlocks: formSchema.blocks.length,
+                  currentSchemaFields: formSchema.fields.length,
+                  blockFields: formSchema.blocks.map((b) => ({
+                    id: b.id,
+                    fieldCount: b.fields.length,
+                  })),
+                });
+
+                if (newMultiStep) {
+                  // Switching TO multi-step mode
+                  if (
+                    formSchema.blocks.length === 0 ||
+                    (formSchema.blocks.length === 1 &&
+                      formSchema.blocks[0].id === "default")
+                  ) {
+                    // Convert single-step to multi-step
+                    // Get fields from the default block if it exists, otherwise from schema.fields
+                    const defaultBlock = formSchema.blocks.find(
+                      (b) => b.id === "default"
+                    );
+                    const currentFields =
+                      defaultBlock?.fields || formSchema.fields || [];
+
+                    console.log(
+                      "Switching to multi-step mode. Current fields:",
+                      currentFields
+                    );
+
+                    const newSchema = {
+                      ...formSchema,
+                      blocks: [
+                        {
+                          id: "step-1",
+                          title: "Step 1",
+                          description: "First step of your form",
+                          fields: currentFields,
+                        },
+                      ],
+                      fields: currentFields, // Keep schema-level fields in sync
+                      settings: {
+                        ...formSchema.settings,
+                        multiStep: true,
+                        showProgress: true,
+                      },
+                    };
+                    setFormSchema(newSchema);
+                    setSelectedBlockId("step-1");
+                    setHasUnsavedChanges(true);
+                  } else {
+                    // Just enable multi-step mode
+                    updateFormSettings({
+                      multiStep: true,
+                      showProgress: true,
+                    });
+                  }
+                } else {
+                  // Switching TO single-step mode
+                  // Collect all fields from all blocks, preserving their current state
+                  const allFields = formSchema.blocks.flatMap(
+                    (block) => block.fields || []
+                  );
+
+                  console.log(
+                    "Switching to single-step mode. Collected fields:",
+                    allFields
+                  );
+
+                  const newSchema = {
+                    ...formSchema,
+                    blocks: [
+                      {
+                        id: "default",
+                        title: "Form Fields",
+                        description: "",
+                        fields: allFields,
+                      },
+                    ],
+                    fields: allFields, // Keep schema-level fields in sync
+                    settings: {
+                      ...formSchema.settings,
+                      multiStep: false,
+                      showProgress: false,
+                    },
+                  };
+                  setFormSchema(newSchema);
+                  setSelectedBlockId("default");
+                  setHasUnsavedChanges(true);
+                }
+              }}
+              className="gap-2"
+            >
+              {formSchema.settings.multiStep ? (
+                <Layers className="w-4 h-4" />
+              ) : (
+                <FileText className="w-4 h-4" />
+              )}
+              {formSchema.settings.multiStep ? "Multi-Step" : "Single Page"}
             </Button>
 
             <Button
               variant="secondary"
-              onClick={previewForm}
-              disabled={!formId}
+              size="sm"
+              onClick={() => router.push("/form-builder/ai")}
+              className="gap-2"
             >
-              <Eye className="w-4 h-4 " />
-              Preview
+              <Sparkles className="w-4 h-4" />
+              AI Builder
             </Button>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Button
+                    variant="secondary"
+                    size={"icon"}
+                    onClick={() => setShowJsonView(true)}
+                  >
+                    <Code className="w-4 h-4 shrink-0 " />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent size="sm">View JSON</TooltipContent>
+              </Tooltip>
 
-            <Button
-              variant="secondary"
-              onClick={viewAnalytics}
-              disabled={!formId}
-            >
-              <BarChart3 className="w-4 h-4 " />
-              Analytics
-            </Button>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Button
+                    variant="secondary"
+                    size={"icon"}
+                    onClick={previewForm}
+                    disabled={!formId}
+                  >
+                    <Eye className="w-4 h-4 shrink-0 " />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent size="sm">Preview</TooltipContent>
+              </Tooltip>
 
+              <Tooltip>
+                <TooltipTrigger>
+                  <Button
+                    variant="secondary"
+                    size={"icon"}
+                    onClick={viewAnalytics}
+                    disabled={!formId}
+                  >
+                    <BarChart3 className="w-4 h-4 shrink-0 " />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent size="sm">Analytics</TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger>
+                  <Button
+                    variant="secondary"
+                    size="icon"
+                    onClick={shareForm}
+                    disabled={!formId}
+                  >
+                    <Share className="w-4 h-4 shrink-0 " />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent size="sm">Share</TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Button
+                    variant="secondary"
+                    size={"icon"}
+                    onClick={() => setShowFormSettings(true)}
+                  >
+                    <SettingsIcon className="w-4 h-4 shrink-0 " />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent size="sm">Settings</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
             <Button
-              variant={isPublished ? "default" : "outline"}
               onClick={togglePublish}
+              variant="secondary"
+              loading={publishing}
               disabled={!formId || publishing}
             >
               {isPublished ? (
                 <>
-                  <Globe className="w-4 h-4 " />
-                  {publishing ? "Unpublishing..." : "Published"}
+                  {publishing ? <></> : <Globe className="w-4 h-4 shrink-0" />}
+                  {publishing ? "Unpublishing" : "Published"}
                 </>
               ) : (
                 <>
-                  <EyeOff className="w-4 h-4 " />
-                  {publishing ? "Publishing..." : "Publish"}
+                  {publishing ? <></> : <EyeOff className="w-4 h-4 shrink-0" />}
+                  {publishing ? "Publishing" : "Publish"}
                 </>
               )}
             </Button>
 
-            <Button variant="secondary" onClick={shareForm} disabled={!formId}>
-              <Share className="w-4 h-4 " />
-              Share
-            </Button>
-
-            <Button onClick={saveForm} disabled={saving}>
-              <Save className="w-4 h-4 " />
-              {saving ? "Saving..." : "Save"}
+            <Button onClick={saveForm} disabled={saving} loading={saving}>
+              {saving ? <></> : <Save className="w-4 h-4" />}
+              {saving ? "Saving" : "Save"}
             </Button>
           </div>
         </div>
@@ -394,48 +894,84 @@ export function FormBuilder({ formId }: FormBuilderProps) {
       {/* Main Content */}
       <div className="flex-1 overflow-hidden">
         <ResizablePanelGroup direction="horizontal" className="h-full">
-          {/* Left Panel - Field Palette - Resizable */}
-          <ResizablePanel defaultSize={15} minSize={15} maxSize={35}>
-            <FieldPalette onAddField={addField} />
+          {/* Left Panel - Field Palette or Block Manager */}
+          <ResizablePanel defaultSize={20} minSize={15} maxSize={35}>
+            {formSchema.settings.multiStep ? (
+              <BlockManager
+                blocks={formSchema.blocks}
+                selectedBlockId={selectedBlockId}
+                selectedFieldId={selectedFieldId}
+                onBlockSelect={setSelectedBlockId}
+                onFieldSelect={setSelectedFieldId}
+                onBlocksUpdate={updateBlocks}
+                onBlockAdd={addBlock}
+                onBlockDelete={deleteBlock}
+                onFieldDelete={deleteField}
+              />
+            ) : (
+              <FieldPalette onAddField={addField} />
+            )}
           </ResizablePanel>
 
           <ResizableHandle />
 
-          {/* Center Panel - Form Preview - Resizable */}
+          {/* Center Panel - Form Preview */}
           <ResizablePanel defaultSize={50} minSize={30}>
             <ScrollArea className="h-full">
               <FormPreview
                 schema={formSchema}
                 selectedFieldId={selectedFieldId}
+                selectedBlockId={selectedBlockId}
                 onFieldSelect={setSelectedFieldId}
                 onFieldsReorder={reorderFields}
                 onFieldDelete={deleteField}
+                onFormSettingsUpdate={updateFormSettings}
+                onBlockUpdate={updateBlock}
+                onStepSelect={handleStepSelection}
               />
             </ScrollArea>
           </ResizablePanel>
 
           <ResizableHandle />
 
-          {/* Right Panel - Field Settings - Resizable */}
-          <ResizablePanel defaultSize={15} minSize={15} maxSize={35}>
-            <FieldSettingsPanel
-              field={selectedField}
-              onFieldUpdate={updateField}
-              onClose={() => setSelectedFieldId(null)}
-            />
+          {/* Right Panel - Field Settings or Field Palette for multi-step */}
+          <ResizablePanel defaultSize={20} minSize={15} maxSize={35}>
+            {formSchema.settings.multiStep ? (
+              <div className="h-full flex flex-col">
+                <div className="flex-1 min-h-0">
+                  <FieldSettingsPanel
+                    field={selectedField}
+                    onFieldUpdate={updateField}
+                    onClose={() => setSelectedFieldId(null)}
+                  />
+                </div>
+                <div className="border-t bg-muted/30 flex-shrink-0">
+                  <div className="p-2">
+                    <h4 className="text-sm font-medium mb-2">Add Fields</h4>
+                    <FieldPalette onAddField={addField} compact />
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <FieldSettingsPanel
+                field={selectedField}
+                onFieldUpdate={updateField}
+                onClose={() => setSelectedFieldId(null)}
+              />
+            )}
           </ResizablePanel>
         </ResizablePanelGroup>
       </div>
 
       {/* Form Settings Modal */}
       <Modal open={showSettings} onOpenChange={setShowSettings}>
-        <ModalContent>
+        <ModalContent className="bg-card text-card-foreground flex flex-col gap-6 max-sm:p-4">
           <ModalHeader>
             <ModalTitle>Form Settings</ModalTitle>
           </ModalHeader>
-          <div className="p-6">
-            <div className="space-y-4">
-              <div>
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-1">
                 <Label htmlFor="form-title">Form Title</Label>
                 <Input
                   id="form-title"
@@ -447,7 +983,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
                 />
               </div>
 
-              <div>
+              <div className="flex flex-col gap-1">
                 <Label htmlFor="form-description">Description</Label>
                 <Textarea
                   id="form-description"
@@ -460,7 +996,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
                 />
               </div>
 
-              <div>
+              <div className="flex flex-col gap-1">
                 <Label htmlFor="submit-text">Submit Button Text</Label>
                 <Input
                   id="submit-text"
@@ -472,7 +1008,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
                 />
               </div>
 
-              <div>
+              <div className="flex flex-col gap-1">
                 <Label htmlFor="success-message">Success Message</Label>
                 <Textarea
                   id="success-message"
@@ -485,7 +1021,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
                 />
               </div>
 
-              <div>
+              <div className="flex flex-col gap-1">
                 <Label htmlFor="redirect-url">Redirect URL (optional)</Label>
                 <Input
                   id="redirect-url"
@@ -498,7 +1034,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
               </div>
             </div>
 
-            <div className="flex justify-end space-x-3 mt-6">
+            <div className="flex justify-end gap-2">
               <Button
                 variant="secondary"
                 onClick={() => setShowSettings(false)}
@@ -512,6 +1048,65 @@ export function FormBuilder({ formId }: FormBuilderProps) {
           </div>
         </ModalContent>
       </Modal>
+
+      {/* Unsaved Changes Indicator */}
+      <AnimatePresence>
+        {hasUnsavedChanges && !autoSaving && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 25,
+              duration: 0.3,
+            }}
+            className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50"
+          >
+            <div className="bg-accent border border-border text-accent-foreground px-4 py-2 shadow-lg flex items-center space-x-2 rounded-ele">
+              <AlertTriangle className="w-4 h-4 text-accent-foreground/80" />
+              <span className="text-sm font-medium">
+                You have unsaved changes
+              </span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Form Creation Wizard */}
+      <FormCreationWizard
+        isOpen={showCreationWizard}
+        onClose={() => setShowCreationWizard(false)}
+        onFormTypeSelect={handleFormTypeSelect}
+      />
+
+      {/* JSON View Modal */}
+      <JsonViewModal
+        schema={formSchema}
+        isOpen={showJsonView}
+        onClose={() => setShowJsonView(false)}
+      />
+
+      {/* Form Settings Modal */}
+      <FormSettingsModal
+        isOpen={showFormSettings}
+        onClose={() => setShowFormSettings(false)}
+        schema={formSchema}
+        onSchemaUpdate={(updates) => {
+          setFormSchema((prev) => ({ ...prev, ...updates }));
+          setHasUnsavedChanges(true);
+        }}
+      />
+
+      {/* Share Form Modal */}
+      <ShareFormModal
+        isOpen={showShareModal}
+        onClose={() => setShowShareModal(false)}
+        formId={formId ?? null}
+        isPublished={isPublished}
+        onPublish={handlePublishForm}
+      />
     </div>
   );
 }

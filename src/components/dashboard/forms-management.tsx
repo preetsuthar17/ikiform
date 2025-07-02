@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ConfirmationModal } from "./form-delete-confirmation-modal";
 import { useAuth } from "@/hooks/use-auth";
 import { formsDb } from "@/lib/database";
 import { toast } from "@/hooks/use-toast";
@@ -17,6 +18,15 @@ export function FormsManagement() {
   const { user } = useAuth();
   const [forms, setForms] = useState<Form[]>([]);
   const [loading, setLoading] = useState(true);
+  const [deleteModal, setDeleteModal] = useState<{
+    open: boolean;
+    formId: string;
+    formTitle: string;
+  }>({
+    open: false,
+    formId: "",
+    formTitle: "",
+  });
 
   useEffect(() => {
     if (user) {
@@ -75,16 +85,16 @@ export function FormsManagement() {
   };
 
   const deleteForm = async (formId: string, formTitle: string) => {
-    if (
-      !confirm(
-        `Are you sure you want to delete "${formTitle}"? This action cannot be undone.`
-      )
-    ) {
-      return;
-    }
+    setDeleteModal({
+      open: true,
+      formId,
+      formTitle,
+    });
+  };
 
+  const confirmDeleteForm = async () => {
     try {
-      await formsDb.deleteForm(formId);
+      await formsDb.deleteForm(deleteModal.formId);
       await loadForms(); // Refresh the forms list
       toast.success("Form deleted successfully");
     } catch (error) {
@@ -116,10 +126,7 @@ export function FormsManagement() {
         {/* Stats Skeletons */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {[...Array(3)].map((_, i) => (
-            <Card
-              key={i}
-              className="p-4 bg-card border-border rounded-[--radius-ele]"
-            >
+            <Card key={i} className="p-4 bg-card border-border rounded-ele">
               <div className="flex items-center gap-3">
                 <Skeleton className="w-10 h-10 rounded-lg" />
                 <div className="space-y-2">
@@ -173,17 +180,14 @@ export function FormsManagement() {
       {/* Header Section */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-card border border-border rounded-card">
         <div className="space-y-1">
-          <h2 className="text-3xl font-bold text-foreground tracking-tight">
+          <h2 className="text-2xl font-semibold text-foreground tracking-tight">
             Your Forms
           </h2>
           <p className="text-muted-foreground">
             Create, manage, and analyze your forms with ease
           </p>
         </div>
-        <Button
-          onClick={createNewForm}
-          className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-6 py-3 rounded-[--radius-ele] transition-all duration-200 hover:scale-105 shadow-sm"
-        >
+        <Button onClick={createNewForm}>
           <Plus className="w-5 h-5" />
           Create New Form
         </Button>
@@ -192,7 +196,7 @@ export function FormsManagement() {
       {/* Quick Stats */}
       {forms.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <Card className="p-4 bg-card border-border rounded-[--radius-ele]">
+          <Card className="p-4 bg-card border-border rounded-card">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
                 <Plus className="w-5 h-5 text-primary" />
@@ -206,7 +210,7 @@ export function FormsManagement() {
             </div>
           </Card>
 
-          <Card className="p-4 bg-card border-border rounded-[--radius-ele]">
+          <Card className="p-4 bg-card border-border rounded-card">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
                 <Eye className="w-5 h-5 text-accent-foreground" />
@@ -220,7 +224,7 @@ export function FormsManagement() {
             </div>
           </Card>
 
-          <Card className="p-4 bg-card border-border rounded-[--radius-ele]">
+          <Card className="p-4 bg-card border-border rounded-card">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center">
                 <Edit className="w-5 h-5 text-secondary-foreground" />
@@ -238,7 +242,7 @@ export function FormsManagement() {
 
       {/* Forms Grid */}
       {forms.length === 0 ? (
-        <Card className="p-16 text-center bg-card border-border rounded-card shadow-sm">
+        <Card className="p-16 text-center rounded-card ">
           <div className="max-w-md mx-auto space-y-6">
             <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto">
               <Plus className="w-10 h-10 text-accent-foreground" />
@@ -251,10 +255,7 @@ export function FormsManagement() {
                 Get started by creating your first form. It's quick and easy!
               </p>
             </div>
-            <Button
-              onClick={createNewForm}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-6 py-3 rounded-[--radius-ele] transition-all duration-200 hover:scale-105"
-            >
+            <Button onClick={createNewForm}>
               <Plus className="w-5 h-5" />
               Create Your First Form
             </Button>
@@ -351,6 +352,18 @@ export function FormsManagement() {
           ))}
         </div>
       )}
+
+      {/* Delete Confirmation Modal */}
+      <ConfirmationModal
+        open={deleteModal.open}
+        onOpenChange={(open) => setDeleteModal((prev) => ({ ...prev, open }))}
+        title="Delete Form"
+        description={`Are you sure you want to delete "${deleteModal.formTitle}"? This action cannot be undone and all form data will be permanently lost.`}
+        confirmText="Delete Form"
+        cancelText="Cancel"
+        variant="destructive"
+        onConfirm={confirmDeleteForm}
+      />
     </div>
   );
 }

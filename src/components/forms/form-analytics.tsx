@@ -4,10 +4,45 @@ import React, { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Download, Eye } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+import { DataTable, type DataTableColumn } from "@/components/ui/table";
+import {
+  Download,
+  Eye,
+  BarChart3,
+  Calendar,
+  Users,
+  FileText,
+  TrendingUp,
+  Globe,
+  Clock,
+  RefreshCw,
+  Table,
+  LayoutGrid,
+  Search,
+  X,
+} from "lucide-react";
 import { formsDb } from "@/lib/database";
 import { toast } from "@/hooks/use-toast";
+import { Loader } from "@/components/ui/loader";
 import type { Form, FormSubmission } from "@/lib/database";
+import { Separator } from "../ui/separator";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalTitle,
+  ModalTrigger,
+  ModalClose,
+} from "@/components/ui/modal";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface FormAnalyticsProps {
   form: Form;
@@ -16,6 +51,19 @@ interface FormAnalyticsProps {
 export function FormAnalytics({ form }: FormAnalyticsProps) {
   const [submissions, setSubmissions] = useState<FormSubmission[]>([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [activeView, setActiveView] = useState<"cards" | "table">("cards");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterState, setFilterState] = useState<{
+    timeRange: "all" | "today" | "week" | "month";
+    completionRate: "all" | "complete" | "partial" | "empty";
+  }>({
+    timeRange: "all",
+    completionRate: "all",
+  });
+  const [selectedSubmission, setSelectedSubmission] =
+    useState<FormSubmission | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     loadSubmissions();
@@ -31,6 +79,28 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     } finally {
       setLoading(false);
     }
+  };
+
+  const refreshData = async () => {
+    setRefreshing(true);
+    await loadSubmissions();
+    setRefreshing(false);
+    toast.success("Data refreshed!");
+  };
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
+  const getFieldLabel = (fieldId: string) => {
+    const field = form.schema.fields.find((f) => f.id === fieldId);
+    return field?.label || fieldId;
   };
 
   const exportToJSON = () => {
@@ -135,149 +205,752 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 
     toast.success("Data exported to CSV successfully!");
   };
+  // Calculate analytics
+  const totalSubmissions = submissions.length;
+  const lastSubmission = submissions.length > 0 ? submissions[0] : null;
+  const totalFields = form.schema.fields.length;
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
+  // Calculate submissions over time (last 30 days)
+  const last30Days = new Date();
+  last30Days.setDate(last30Days.getDate() - 30);
+  const recentSubmissions = submissions.filter(
+    (sub) => new Date(sub.submitted_at) >= last30Days
+  );
+
+  // Configure table columns
+  const tableColumns: DataTableColumn<FormSubmission>[] = [
+    {
+      key: "submitted_at",
+      header: "Date",
+      render: (value) => formatDate(value.toString()),
+    },
+    {
+      key: "submission_data",
+      header: "Form Data",
+      render: (value, row) => (
+        <div className="flex items-center gap-4">
+          <Badge variant="outline">{Object.keys(value).length} fields</Badge>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="ml-auto"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedSubmission(row);
+              setIsModalOpen(true);
+            }}
+          >
+            <Eye className="h-4 w-4 mr-2" />
+            View Details
+          </Button>
+        </div>
+      ),
+    },
+  ];
+
+  // Calculate completion rate and field stats
+  const fieldStats = submissions.reduce(
+    (acc, sub) => {
+      const filledFields = Object.values(sub.submission_data).filter(
+        (val) => val !== "" && val !== null && val !== undefined
+      ).length;
+      acc.totalFilledFields += filledFields;
+      acc.fieldCompletionRates[filledFields] =
+        (acc.fieldCompletionRates[filledFields] || 0) + 1;
+      return acc;
+    },
+    { totalFilledFields: 0, fieldCompletionRates: {} as Record<number, number> }
+  );
+
+  const completionRate =
+    submissions.length > 0
+      ? Math.round(
+          (fieldStats.totalFilledFields / (submissions.length * totalFields)) *
+            100
+        )
+      : 0;
+
+  // Calculate submission trends
+  const submissionsByDay = submissions.reduce((acc, sub) => {
+    const date = new Date(sub.submitted_at).toLocaleDateString();
+    acc[date] = (acc[date] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+
+  // Get most active day
+  const mostActiveDay = Object.entries(submissionsByDay).sort(
+    ([, a], [, b]) => b - a
+  )[0];
+
+  const getSubmissionCompletionRate = (submission: FormSubmission) => {
+    const filledFields = Object.values(submission.submission_data).filter(
+      (val) => val !== "" && val !== null && val !== undefined
+    ).length;
+    return (filledFields / totalFields) * 100;
+  };
+
+  const filterSubmissions = (submissions: FormSubmission[]) => {
+    return submissions.filter((submission) => {
+      // Search term filter
+      if (searchTerm) {
+        const searchString = JSON.stringify(submission).toLowerCase();
+        if (!searchString.includes(searchTerm.toLowerCase())) {
+          return false;
+        }
+      }
+
+      // Time range filter
+      const submissionDate = new Date(submission.submitted_at);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      if (filterState.timeRange !== "all") {
+        const startDate = new Date();
+        startDate.setHours(0, 0, 0, 0);
+
+        switch (filterState.timeRange) {
+          case "today":
+            if (submissionDate < today) return false;
+            break;
+          case "week":
+            startDate.setDate(startDate.getDate() - 7);
+            if (submissionDate < startDate) return false;
+            break;
+          case "month":
+            startDate.setMonth(startDate.getMonth() - 1);
+            if (submissionDate < startDate) return false;
+            break;
+        }
+      }
+
+      // Completion rate filter
+      if (filterState.completionRate !== "all") {
+        const completionRate = getSubmissionCompletionRate(submission);
+        switch (filterState.completionRate) {
+          case "complete":
+            if (completionRate < 100) return false;
+            break;
+          case "partial":
+            if (completionRate < 1 || completionRate === 100) return false;
+            break;
+          case "empty":
+            if (completionRate > 0) return false;
+            break;
+        }
+      }
+
+      return true;
     });
   };
 
-  const getFieldLabel = (fieldId: string) => {
-    const field = form.schema.fields.find((f) => f.id === fieldId);
-    return field?.label || fieldId;
+  const filteredSubmissions = filterSubmissions(submissions);
+
+  const getActiveFilters = () => {
+    const filters: string[] = [];
+
+    if (searchTerm) {
+      filters.push(`Search: "${searchTerm}"`);
+    }
+
+    if (filterState.timeRange !== "all") {
+      const ranges = {
+        today: "Today",
+        week: "Last 7 Days",
+        month: "Last 30 Days",
+      };
+      filters.push(`Time: ${ranges[filterState.timeRange]}`);
+    }
+
+    if (filterState.completionRate !== "all") {
+      const rates = {
+        complete: "Complete",
+        partial: "Partial",
+        empty: "Empty",
+      };
+      filters.push(`Completion: ${rates[filterState.completionRate]}`);
+    }
+
+    return filters;
+  };
+
+  const activeFilters = getActiveFilters();
+
+  const SubmissionDetailsModal = () => {
+    if (!selectedSubmission) return null;
+
+    return (
+      <Modal open={isModalOpen} onOpenChange={(open) => setIsModalOpen(open)}>
+        <ModalContent className="max-w-3xl">
+          <ModalHeader>
+            <ModalTitle>Submission Details</ModalTitle>
+            <ModalClose onClick={() => setIsModalOpen(false)} />
+          </ModalHeader>
+          <ScrollArea className="max-h-[70vh] px-6">
+            <div className="space-y-4 pb-6">
+              <div className="flex items-center justify-between">
+                <Badge variant="outline">
+                  {formatDate(selectedSubmission.submitted_at)}
+                </Badge>
+              </div>
+              <Separator />
+              {Object.entries(selectedSubmission.submission_data).map(
+                ([key, value]) => (
+                  <div key={key} className="space-y-1">
+                    <h3 className="text-sm font-medium">
+                      {getFieldLabel(key)}
+                    </h3>
+                    <p className="text-sm text-muted-foreground whitespace-pre-wrap">
+                      {typeof value === "object"
+                        ? JSON.stringify(value, null, 2)
+                        : String(value)}
+                    </p>
+                    <Separator />
+                  </div>
+                )
+              )}
+            </div>
+          </ScrollArea>
+        </ModalContent>
+      </Modal>
+    );
+  };
+
+  // Place this component before the return statement
+  const renderSubmissionDetailsModal = () => {
+    return <SubmissionDetailsModal />;
   };
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-12">
-        <div className="text-center">
-          <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading analytics...</p>
+      <div className="min-h-screen bg-background">
+        <div className="max-w-7xl mx-auto p-6">
+          <div className="flex items-center justify-center py-20">
+            <div className="text-center space-y-4">
+              <div className="p-4 bg-accent/10 rounded-card mx-auto w-fit">
+                <Loader />
+              </div>
+              <div className="space-y-1">
+                <p className="text-foreground font-medium">
+                  Loading analytics...
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Fetching your form data and submissions
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900">{form.title}</h2>
-          <p className="text-gray-600">Form Analytics & Submissions</p>
-        </div>
-        <div className="flex items-center space-x-3">
-          <Badge variant={form.is_published ? "default" : "secondary"}>
-            {form.is_published ? "Published" : "Draft"}
-          </Badge>
-          <Button
-            variant="outline"
-            onClick={exportToCSV}
-            disabled={submissions.length === 0}
-          >
-            <Download className="w-4 h-4 mr-2" />
-            Export CSV
-          </Button>
-          <Button variant="outline" onClick={exportToJSON}>
-            <Download className="w-4 h-4 mr-2" />
-            Export JSON
-          </Button>
-        </div>
-      </div>
-
-      {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="p-6">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">
-            Total Submissions
-          </h3>
-          <p className="text-3xl font-bold text-gray-900">
-            {submissions.length}
-          </p>
-        </Card>
-
-        <Card className="p-6">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">
-            Form Fields
-          </h3>
-          <p className="text-3xl font-bold text-gray-900">
-            {form.schema.fields.length}
-          </p>
-        </Card>
-
-        <Card className="p-6">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">
-            Last Submission
-          </h3>
-          <p className="text-lg font-bold text-gray-900">
-            {submissions.length > 0
-              ? formatDate(submissions[0].submitted_at)
-              : "No submissions yet"}
-          </p>
-        </Card>
-      </div>
-
-      {/* Submissions List */}
-      <Card className="p-6">
-        <h3 className="text-lg font-semibold mb-4">Recent Submissions</h3>
-
-        {submissions.length === 0 ? (
-          <div className="text-center py-8 text-gray-500">
-            <Eye className="w-12 h-12 mx-auto mb-4 text-gray-300" />
-            <p>No submissions yet</p>
-            <p className="text-sm">
-              Share your form to start collecting responses
+    <div className="min-h-screen bg-background">
+      <div className="max-w-7xl mx-auto p-6 space-y-8">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="space-y-2">
+            <div className="flex items-center gap-3">
+              <h1 className="text-3xl font-bold text-foreground">
+                {form.title}
+              </h1>
+              <Badge
+                variant={form.is_published ? "default" : "secondary"}
+                className="gap-1.5"
+              >
+                {form.is_published ? (
+                  <>
+                    <Globe className="w-3 h-3" />
+                    Published
+                  </>
+                ) : (
+                  <>
+                    <Eye className="w-3 h-3" />
+                    Draft
+                  </>
+                )}
+              </Badge>
+            </div>
+            <p className="text-muted-foreground flex items-center gap-2">
+              <BarChart3 className="w-4 h-4" />
+              Form Analytics & Submission Data
             </p>
           </div>
-        ) : (
-          <div className="space-y-4">
-            {submissions.slice(0, 10).map((submission) => (
-              <Card key={submission.id} className="p-4 border border-gray-200">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm text-gray-500">
-                    {formatDate(submission.submitted_at)}
-                  </span>
-                  {submission.ip_address && (
-                    <span className="text-xs text-gray-400">
-                      IP: {submission.ip_address}
-                    </span>
-                  )}
-                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {Object.entries(submission.submission_data).map(
-                    ([fieldId, value]) => (
-                      <div key={fieldId}>
-                        <label className="text-sm font-medium text-gray-700">
-                          {getFieldLabel(fieldId)}
-                        </label>
-                        <p className="text-gray-900 mt-1">
-                          {Array.isArray(value)
-                            ? value.join(", ")
-                            : typeof value === "object" && value !== null
-                            ? JSON.stringify(value)
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={refreshData}
+                disabled={refreshing}
+                className="gap-2 hover:bg-accent transition-colors"
+              >
+                <RefreshCw
+                  className={`w-4 h-4 ${refreshing ? "animate-spin" : ""}`}
+                />
+                Refresh
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={exportToCSV}
+                disabled={submissions.length === 0}
+                className="gap-2 hover:bg-accent transition-colors"
+              >
+                <Download className="w-4 h-4" />
+                Export CSV
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={exportToJSON}
+                className="gap-2 hover:bg-accent transition-colors"
+              >
+                <Download className="w-4 h-4" />
+                Export JSON
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Overview Stats */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Card className="p-6 bg-card border-border">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-primary/10 rounded-card">
+                <Users className="w-6 h-6 text-primary" />
+              </div>
+              <div className="space-y-1">
+                <p className="text-sm font-medium text-muted-foreground">
+                  Total Submissions
+                </p>
+                <p className="text-2xl font-bold text-foreground">
+                  {totalSubmissions.toLocaleString()}
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-6 bg-card border-border">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-accent rounded-card">
+                <FileText className="w-6 h-6 text-accent-foreground" />
+              </div>
+              <div className="space-y-1">
+                <p className="text-sm font-medium text-muted-foreground">
+                  Form Fields
+                </p>
+                <p className="text-2xl font-bold text-foreground">
+                  {totalFields}
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-6 bg-card border-border">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-secondary rounded-card">
+                <TrendingUp className="w-6 h-6 text-secondary-foreground" />
+              </div>
+              <div className="space-y-1">
+                <p className="text-sm font-medium text-muted-foreground">
+                  Completion Rate
+                </p>
+                <p className="text-2xl font-bold text-foreground">
+                  {completionRate}%
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-6 bg-card border-border">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-muted rounded-card">
+                <Clock className="w-6 h-6 text-muted-foreground" />
+              </div>
+              <div className="space-y-1">
+                <p className="text-sm font-medium text-muted-foreground">
+                  Last 30 Days
+                </p>
+                <p className="text-2xl font-bold text-foreground">
+                  {recentSubmissions.length}
+                </p>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        {/* Additional Info Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <Card className="p-6 bg-card border-border">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-primary/10 rounded-card">
+                <Calendar className="w-5 h-5 text-primary" />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground">
+                Last Submission
+              </h3>
+            </div>
+            {lastSubmission ? (
+              <div className="space-y-2">
+                <p className="text-foreground font-medium">
+                  {formatDate(lastSubmission.submitted_at)}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {lastSubmission.ip_address &&
+                    `From ${lastSubmission.ip_address}`}
+                </p>
+              </div>
+            ) : (
+              <p className="text-muted-foreground">No submissions yet</p>
+            )}
+          </Card>
+
+          <Card className="p-6 bg-card border-border">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-accent rounded-card">
+                <BarChart3 className="w-5 h-5 text-accent-foreground" />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground">
+                Form Status
+              </h3>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Published</span>
+                <Badge variant={form.is_published ? "default" : "secondary"}>
+                  {form.is_published ? "Yes" : "No"}
+                </Badge>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Created</span>
+                <span className="text-sm text-foreground">
+                  {formatDate(form.created_at)}
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Updated</span>
+                <span className="text-sm text-foreground">
+                  {formatDate(form.updated_at)}
+                </span>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-6 bg-card border-border">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-secondary rounded-card">
+                <TrendingUp className="w-5 h-5 text-secondary-foreground" />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground">
+                Quick Stats
+              </h3>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">
+                  Avg. Fields Completed
+                </span>
+                <span className="text-sm font-medium text-foreground">
+                  {completionRate}%
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">
+                  Most Active Day
+                </span>
+                {mostActiveDay ? (
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-foreground">
+                      {mostActiveDay[0]}
+                    </span>
+                    <Badge variant="secondary" className="text-xs">
+                      {mostActiveDay[1]} submissions
+                    </Badge>
+                  </div>
+                ) : (
+                  <span className="text-sm text-muted-foreground">N/A</span>
+                )}
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Form Type</span>
+                <Badge variant="outline">
+                  {form.schema.settings?.multiStep
+                    ? "Multi-Step"
+                    : "Single Page"}
+                </Badge>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        {/* Submissions List */}
+        <Card className="bg-card border-border">
+          <div className="p-6 border-b border-border">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-primary/10 rounded-card">
+                  <FileText className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-foreground">
+                    Form Submissions
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    View and analyze form responses
+                  </p>
+                </div>
+              </div>
+              {submissions.length > 0 && (
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center p-1 bg-accent/10 rounded-lg">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="flex-1 gap-2 data-[state=on]:bg-background"
+                      data-state={activeView === "cards" ? "on" : "off"}
+                      onClick={() => setActiveView("cards")}
+                    >
+                      <LayoutGrid className="w-4 h-4" />
+                      Cards
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="flex-1 gap-2 data-[state=on]:bg-background"
+                      data-state={activeView === "table" ? "on" : "off"}
+                      onClick={() => setActiveView("table")}
+                    >
+                      <Table className="w-4 h-4" />
+                      Table
+                    </Button>
+                  </div>
+                  <Badge variant="secondary" className="text-xs">
+                    {submissions.length} total
+                  </Badge>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="p-6">
+            {submissions.length === 0 ? (
+              <div className="text-center py-16">
+                <div className="gradient-bg w-24 h-24 rounded-card mx-auto mb-6 flex items-center justify-center">
+                  <Eye className="w-10 h-10 text-accent-foreground" />
+                </div>
+                <h4 className="text-xl font-semibold text-foreground mb-2">
+                  No submissions yet
+                </h4>
+                <p className="text-muted-foreground mb-8 max-w-md mx-auto">
+                  Once people start filling out your form, their responses will
+                  appear here with detailed analytics and insights.
+                </p>
+                {!form.is_published && (
+                  <div className="space-y-3">
+                    <Button variant="outline" size="sm" className="gap-2">
+                      <Globe className="w-4 h-4" />
+                      Publish Form
+                    </Button>
+                    <p className="text-xs text-muted-foreground">
+                      Publish your form to start collecting responses
+                    </p>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {submissions.length > 0 && (
+                  <>
+                    {activeView === "cards" ? (
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-2 flex-1">
+                          <div className="relative flex-1 max-w-md">
+                            <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
+                            <Input
+                              placeholder="Search submissions..."
+                              value={searchTerm}
+                              onChange={(e) => setSearchTerm(e.target.value)}
+                              leftIcon={<Search />}
+                            />
+                          </div>
+                          <Select
+                            value={filterState.timeRange}
+                            onValueChange={(
+                              value: typeof filterState.timeRange
+                            ) =>
+                              setFilterState((prev) => ({
+                                ...prev,
+                                timeRange: value,
+                              }))
+                            }
+                          >
+                            <SelectTrigger className="w-[180px]">
+                              <SelectValue placeholder="Select time range" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="all">All Time</SelectItem>
+                              <SelectItem value="today">Today</SelectItem>
+                              <SelectItem value="week">Last 7 Days</SelectItem>
+                              <SelectItem value="month">
+                                Last 30 Days
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <Select
+                            value={filterState.completionRate}
+                            onValueChange={(
+                              value: typeof filterState.completionRate
+                            ) =>
+                              setFilterState((prev) => ({
+                                ...prev,
+                                completionRate: value,
+                              }))
+                            }
+                          >
+                            <SelectTrigger className="w-[180px]">
+                              <SelectValue placeholder="Select completion" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="all">
+                                All Submissions
+                              </SelectItem>
+                              <SelectItem value="complete">Complete</SelectItem>
+                              <SelectItem value="partial">Partial</SelectItem>
+                              <SelectItem value="empty">Empty</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        {filteredSubmissions.slice(0, 10).map((submission) => (
+                          <div key={submission.id}>
+                            <Card
+                              key={submission.id}
+                              className="p-4 bg-accent/5 border-accent/20  transition-all duration-200 "
+                            >
+                              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                                  <span className="text-sm font-medium text-foreground">
+                                    Submission {submission.id.slice(-8)}
+                                  </span>
+                                </div>
+                                <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                                  <span className="flex items-center gap-1">
+                                    <Clock className="w-3 h-3" />
+                                    {formatDate(submission.submitted_at)}
+                                  </span>
+                                  {submission.ip_address && (
+                                    <span>IP: {submission.ip_address}</span>
+                                  )}
+                                </div>
+                              </div>
+
+                              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {Object.entries(submission.submission_data).map(
+                                  ([fieldId, value]) => (
+                                    <div key={fieldId} className="space-y-1">
+                                      <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                                        {getFieldLabel(fieldId)}
+                                      </label>
+                                      <div className="p-2 bg-background border border-border rounded-ele">
+                                        <p className="text-sm text-foreground line-clamp-2">
+                                          {Array.isArray(value)
+                                            ? value.join(", ")
+                                            : typeof value === "object" &&
+                                              value !== null
+                                            ? JSON.stringify(value)
+                                            : String(value) || "—"}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  )
+                                )}
+                              </div>
+                            </Card>
+                            <Separator />
+                          </div>
+                        ))}
+
+                        {submissions.length > 10 && (
+                          <div className="text-center pt-4 border-t border-border">
+                            <p className="text-sm text-muted-foreground mb-3">
+                              Showing 10 of {submissions.length} submissions
+                            </p>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="gap-2"
+                            >
+                              <Eye className="w-4 h-4" />
+                              View All Submissions
+                            </Button>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="-mx-6">
+                        <DataTable
+                          data={filteredSubmissions}
+                          columns={tableColumns}
+                          searchable
+                          searchPlaceholder="Search submissions..."
+                          itemsPerPage={10}
+                          showPagination
+                          hoverable
+                          bordered
+                          variant="bordered"
+                          size="default"
+                        />
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+        </Card>
+      </div>
+
+      {/* Submission Details Modal */}
+      {selectedSubmission && (
+        <Modal open={isModalOpen} onOpenChange={(open) => setIsModalOpen(open)}>
+          <ModalContent className="max-w-3xl">
+            <ModalHeader className="border-b border-border px-6 py-4">
+              <ModalTitle>Submission Details</ModalTitle>
+              <ModalClose onClick={() => setIsModalOpen(false)} />
+            </ModalHeader>
+            <div className="px-6 py-4">
+              <div className="flex items-center justify-between mb-4">
+                <Badge variant="outline">
+                  {formatDate(selectedSubmission.submitted_at)}
+                </Badge>
+              </div>
+              <ScrollArea className="h-[60vh]">
+                <div className="space-y-4 pr-4">
+                  {Object.entries(selectedSubmission.submission_data).map(
+                    ([key, value]) => (
+                      <div
+                        key={key}
+                        className="space-y-2 pb-4 border-b border-border last:border-0"
+                      >
+                        <h3 className="text-sm font-medium">
+                          {getFieldLabel(key)}
+                        </h3>
+                        <p className="text-sm text-muted-foreground whitespace-pre-wrap">
+                          {typeof value === "object"
+                            ? JSON.stringify(value, null, 2)
                             : String(value)}
                         </p>
                       </div>
                     )
                   )}
                 </div>
-              </Card>
-            ))}
-
-            {submissions.length > 10 && (
-              <p className="text-center text-gray-500 text-sm">
-                Showing 10 of {submissions.length} submissions. Export data to
-                see all.
-              </p>
-            )}
-          </div>
-        )}
-      </Card>
+              </ScrollArea>
+            </div>
+          </ModalContent>
+        </Modal>
+      )}
     </div>
   );
 }

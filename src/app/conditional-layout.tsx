@@ -14,7 +14,9 @@ export default function ConditionalLayout({
   const pathname = usePathname();
 
   const hideHeaderFooter =
-    pathname.startsWith("/form-builder") || pathname.includes("/preview");
+    pathname.startsWith("/form-builder") ||
+    pathname.includes("/preview") ||
+    pathname.includes("/forms");
 
   if (hideHeaderFooter) {
     return <>{children}</>;

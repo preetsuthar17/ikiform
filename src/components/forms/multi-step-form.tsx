@@ -3,90 +3,36 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
 import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
 import { formsDb } from "@/lib/database";
 import { toast } from "@/hooks/use-toast";
-import { MultiStepForm } from "./multi-step-form";
-import type { FormSchema } from "@/lib/database.types";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { FormField, FormSchema, FormBlock } from "@/lib/database.types";
 
-interface PublicFormProps {
+interface MultiStepFormProps {
   formId: string;
   schema: FormSchema;
 }
 
-export function PublicForm({ formId, schema }: PublicFormProps) {
-  // Check if this is a multi-step form
-  // Multi-step if explicitly enabled OR if there are multiple blocks
-  const isMultiStep = schema.settings.multiStep || schema.blocks?.length > 1;
-
-  if (isMultiStep) {
-    return <MultiStepForm formId={formId} schema={schema} />;
-  }
-
-  // For backward compatibility and single-step forms, use the original implementation
-  return <SingleStepForm formId={formId} schema={schema} />;
-}
-
-// Original single-step form implementation
-function SingleStepForm({ formId, schema }: PublicFormProps) {
+export function MultiStepForm({ formId, schema }: MultiStepFormProps) {
+  const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  // Get all fields - either from blocks or legacy fields array
-  const allFields = schema.blocks?.length
-    ? schema.blocks.flatMap((block) => block.fields)
-    : schema.fields || [];
+  // Get blocks or create default single block from fields
+  const blocks: FormBlock[] = schema.blocks?.length
+    ? schema.blocks
+    : schema.fields?.length
+    ? [{ id: "default", title: "Form", description: "", fields: schema.fields }]
+    : [];
 
-  // Get form styling classes
-  const getFormClasses = () => {
-    const maxWidthClass = {
-      sm: "max-w-sm",
-      md: "max-w-md",
-      lg: "max-w-lg",
-      xl: "max-w-xl",
-      full: "max-w-full",
-    }[schema.settings.layout?.maxWidth || "lg"];
-
-    const paddingClass = {
-      none: "p-0",
-      sm: "p-4",
-      md: "p-6",
-      lg: "p-8",
-    }[schema.settings.layout?.padding || "md"];
-
-    const spacingClass = {
-      compact: "space-y-4",
-      normal: "space-y-6",
-      relaxed: "space-y-8",
-    }[schema.settings.layout?.spacing || "normal"];
-
-    const alignmentClass = {
-      left: "text-left",
-      center: "text-center",
-      right: "text-right",
-    }[schema.settings.layout?.alignment || "left"];
-
-    return {
-      container: `mx-auto ${maxWidthClass} ${paddingClass} ${alignmentClass}`,
-      form: spacingClass,
-    };
-  };
-
-  const formClasses = getFormClasses();
-
-  // Apply theme styles
-  const getThemeStyles = () => {
-    if (!schema.settings.theme) return {};
-
-    return {
-      "--form-primary-color": schema.settings.theme.primaryColor,
-      "--form-background-color": schema.settings.theme.backgroundColor,
-      "--form-text-color": schema.settings.theme.textColor,
-      "--form-border-color": schema.settings.theme.borderColor,
-    } as React.CSSProperties;
-  };
+  const totalSteps = blocks.length;
+  const currentBlock = blocks[currentStep];
+  const progress =
+    totalSteps > 1 ? ((currentStep + 1) / totalSteps) * 100 : 100;
 
   const handleFieldValueChange = (fieldId: string, value: any) => {
     setFormData((prev) => ({
@@ -103,10 +49,11 @@ function SingleStepForm({ formId, schema }: PublicFormProps) {
     }
   };
 
-  const validateForm = () => {
+  const validateStep = (stepIndex: number) => {
+    const block = blocks[stepIndex];
     const newErrors: Record<string, string> = {};
 
-    allFields.forEach((field) => {
+    block.fields.forEach((field) => {
       const value = formData[field.id];
 
       // Required field validation
@@ -199,14 +146,25 @@ function SingleStepForm({ formId, schema }: PublicFormProps) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validateForm()) {
-      toast.error("Please fix the errors in the form");
-      return;
+  const handleNext = () => {
+    if (validateStep(currentStep)) {
+      if (currentStep < totalSteps - 1) {
+        setCurrentStep(currentStep + 1);
+      } else {
+        handleSubmit();
+      }
+    } else {
+      toast.error("Please fix the errors in this step");
     }
+  };
 
+  const handlePrevious = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const handleSubmit = async () => {
     setSubmitting(true);
 
     try {
@@ -273,22 +231,34 @@ function SingleStepForm({ formId, schema }: PublicFormProps) {
   return (
     <div className="min-h-screen bg-background py-12">
       <div className="max-w-2xl mx-auto px-4">
+        {/* Progress Bar */}
+        {totalSteps > 1 && schema.settings.showProgress !== false && (
+          <div className="mb-8">
+            <div className="flex items-center justify-end mb-2">
+              <span className="text-sm text-muted-foreground">
+                {Math.round(progress)}% Complete
+              </span>
+            </div>
+            <Progress value={progress} className="h-2" />
+          </div>
+        )}
+
         <Card className="p-8 space-y-6 rounded-card">
           {/* Form Header */}
           <div>
             <h1 className="text-3xl font-bold text-foreground mb-2">
-              {schema.settings.title}
+              {currentBlock.title || schema.settings.title}
             </h1>
-            {schema.settings.description && (
+            {(currentBlock.description || schema.settings.description) && (
               <p className="text-muted-foreground">
-                {schema.settings.description}
+                {currentBlock.description || schema.settings.description}
               </p>
             )}
           </div>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {allFields.map((field, index) => (
+          {/* Current Step Fields */}
+          <div className="space-y-6">
+            {currentBlock.fields.map((field) => (
               <div key={field.id}>
                 <FormFieldRenderer
                   field={field}
@@ -298,19 +268,41 @@ function SingleStepForm({ formId, schema }: PublicFormProps) {
                 />
               </div>
             ))}
+          </div>
 
-            <div>
-              <Button
-                type="submit"
-                className="w-full sm:w-auto"
-                disabled={submitting}
-              >
-                {submitting
-                  ? "Submitting..."
-                  : schema.settings.submitText || "Submit"}
-              </Button>
-            </div>
-          </form>
+          {/* Navigation Buttons */}
+          <div className="flex justify-between pt-6">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handlePrevious}
+              disabled={currentStep === 0}
+              className="flex items-center gap-2"
+            >
+              <ChevronLeft className="w-4 h-4" />
+              Previous
+            </Button>
+
+            <Button
+              type="button"
+              onClick={handleNext}
+              disabled={submitting}
+              className="flex items-center gap-2"
+            >
+              {currentStep === totalSteps - 1 ? (
+                submitting ? (
+                  "Submitting..."
+                ) : (
+                  schema.settings.submitText || "Submit"
+                )
+              ) : (
+                <>
+                  Next
+                  <ChevronRight className="w-4 h-4" />
+                </>
+              )}
+            </Button>
+          </div>
         </Card>
 
         {/* Powered by */}
