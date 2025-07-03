@@ -3,49 +3,49 @@ import "../globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Beautiful, budget-friendly forms without compromises - Forms0",
-    template: "%s | Forms0",
+    default: "Beautiful, budget-friendly forms without compromises - Ikiform",
+    template: "%s | Ikiform",
   },
   description:
-    "Create beautiful forms with Forms0 - An open-source alternative to Typeform and Google Forms. Build surveys, collect responses, and analyze data effortlessly.",
-  applicationName: "Forms0",
-  authors: [{ name: "Preet Suthar", url: "https://forms0.com" }],
-  creator: "Forms0",
-  publisher: "Forms0",
+    "Create beautiful forms with Ikiform - An open-source alternative to Typeform and Google Forms. Build surveys, collect responses, and analyze data effortlessly.",
+  applicationName: "Ikiform",
+  authors: [{ name: "Preet Suthar", url: "https://ikiform.com" }],
+  creator: "Ikiform",
+  publisher: "Ikiform",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://forms0.com"),
+  metadataBase: new URL("https://ikiform.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://forms0.com",
-    siteName: "Forms0",
-    title: "Forms0",
+    url: "https://ikiform.com",
+    siteName: "Ikiform",
+    title: "Ikiform",
     description:
-      "Create beautiful, interactive forms with Forms0 - An open-source alternative to Typeform and Google Forms. Build surveys, collect responses, and analyze data effortlessly.",
+      "Create beautiful, interactive forms with Ikiform - An open-source alternative to Typeform and Google Forms. Build surveys, collect responses, and analyze data effortlessly.",
     images: [
       {
         url: "/og-banner.png",
         width: 1200,
         height: 630,
-        alt: "Forms0",
+        alt: "Ikiform",
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    site: "@Forms0",
-    creator: "@Forms0",
-    title: "Forms0",
+    site: "@Ikiform",
+    creator: "@Ikiform",
+    title: "Ikiform",
     description:
-      "Create beautiful, interactive forms with Forms0 - An open-source alternative to Typeform and Google Forms.",
+      "Create beautiful, interactive forms with Ikiform - An open-source alternative to Typeform and Google Forms.",
     images: ["/og-banner.png"],
   },
   robots: {
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     "form creator",
     "survey tool",
     "data collection",
-    "Forms0",
+    "Ikiform",
     "form software",
     "custom forms",
     "interactive forms",

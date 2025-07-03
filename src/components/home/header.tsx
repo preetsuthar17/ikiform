@@ -10,7 +10,7 @@ export default function Header() {
         <Link href="/">
           <Image
             src="/logo.svg"
-            alt="forms0"
+            alt="ikiform"
             width={40}
             height={40}
             className="pointer-events-none rounded-ele"
@@ -20,7 +20,7 @@ export default function Header() {
       <div className="flex items-center gap-4">
         <nav className="flex gap-4 text-sm">
           <Link
-            href="https://github.com/preetsuthar17/forms0"
+            href="https://github.com/preetsuthar17/Ikiform"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:underline"

@@ -40,7 +40,7 @@ const Hero = () => {
         </span>
       </h1>
       <p className="text-muted-foreground max-w-2xl">
-        Forms0 is an open-source alternative to Typeform and Google Forms,
+        Ikiform is an open-source alternative to Typeform and Google Forms,
         designed to help you create beautiful forms effortlessly.
       </p>
       <div className="w-full max-w-md flex gap-2 justify-center items-center flex-wrap">

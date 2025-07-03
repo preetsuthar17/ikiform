@@ -26,15 +26,15 @@ export function MultiStepForm({ formId, schema }: MultiStepFormProps) {
   const blocks: FormBlock[] = schema.blocks?.length
     ? schema.blocks
     : schema.fields?.length
-      ? [
-          {
-            id: "default",
-            title: "Form",
-            description: "",
-            fields: schema.fields,
-          },
-        ]
-      : [];
+    ? [
+        {
+          id: "default",
+          title: "Form",
+          description: "",
+          fields: schema.fields,
+        },
+      ]
+    : [];
 
   const totalSteps = blocks.length;
   const currentBlock = blocks[currentStep];
@@ -315,7 +315,7 @@ export function MultiStepForm({ formId, schema }: MultiStepFormProps) {
         {/* Powered by */}
         <div className="text-center mt-6">
           <p className="text-sm text-muted-foreground">
-            Powered by <span className="font-medium">Forms0</span>
+            Powered by <span className="font-medium">Ikiform</span>
           </p>
         </div>
       </div>

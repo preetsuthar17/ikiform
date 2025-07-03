@@ -316,7 +316,7 @@ function SingleStepForm({ formId, schema }: PublicFormProps) {
         {/* Powered by */}
         <div className="text-center mt-6">
           <p className="text-sm text-muted-foreground">
-            Powered by <span className="font-medium">Forms0</span>
+            Powered by <span className="font-medium">Ikiform</span>
           </p>
         </div>
       </div>
