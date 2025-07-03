@@ -137,7 +137,7 @@ const Hero = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="exampe@0.email"
+              placeholder="example@you.com"
               disabled={loading}
               required
               size={"lg"}
