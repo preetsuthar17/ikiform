@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Sun, Moon } from "lucide-react";
 import { Button } from "../ui/button";
@@ -8,6 +9,11 @@ import Link from "next/link";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleToggle = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -17,7 +23,7 @@ export default function Header() {
     <nav className="flex justify-between flex-wrap items-center gap-8 max-w-6xl w-[95%] mx-auto py-10 text-sm font-inter max-sm:flex-col max-sm:text-center max-sm:items-center max-sm:justify-center">
       <div className="max-w-[90px]">
         <Link href="/">
-          {theme === "dark" ? (
+          {mounted && theme === "dark" ? (
             <Image
               src="/text-logo.svg"
               alt="Ikiform"
