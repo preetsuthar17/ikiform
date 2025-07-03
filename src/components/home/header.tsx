@@ -17,13 +17,23 @@ export default function Header() {
     <nav className="flex justify-between flex-wrap items-center gap-8 max-w-6xl w-[95%] mx-auto py-10 text-sm font-inter max-sm:flex-col max-sm:text-center max-sm:items-center max-sm:justify-center">
       <div className="max-w-[90px]">
         <Link href="/">
-          <Image
-            src="/text-logo.svg"
-            alt="Ikiform"
-            width={100}
-            height={100}
-            className="pointer-events-none"
-          />
+          {theme === "dark" ? (
+            <Image
+              src="/text-logo.svg"
+              alt="Ikiform"
+              width={100}
+              height={100}
+              className="pointer-events-none invert"
+            />
+          ) : (
+            <Image
+              src="/text-logo.svg"
+              alt="Ikiform"
+              width={100}
+              height={100}
+              className="pointer-events-none"
+            />
+          )}
         </Link>
       </div>
       <div className="flex items-center gap-4">
