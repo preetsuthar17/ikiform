@@ -112,7 +112,7 @@ const Hero = () => {
         </span>
       </h1>
       <p className="text-muted-foreground max-w-2xl">
-        Forms0 is an open-source alternative to Typeform and Google Forms,
+        Ikiform is an open-source alternative to Typeform and Google Forms,
         designed to help you create beautiful forms effortlessly.
       </p>
 
@@ -158,7 +158,7 @@ const Hero = () => {
             src={
               theme === "dark" ? "/hero/hero-dark.png" : "/hero/hero-light.png"
             }
-            alt="Forms0 Preview"
+            alt="Ikiform Preview"
             className="object-cover w-full h-full border border-border rounded-card   "
           />
           <div

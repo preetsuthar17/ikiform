@@ -9,13 +9,13 @@ export default function Footer() {
       <footer className="flex max-w-6xl w-[95%] mx-auto py-10 text-sm font-inter  text-center justify-center items-center flex-col gap-12">
         <Separator size={"sm"} className="opacity-60" />
         <div className="flex flex-wrap gap-1 text-muted-foreground">
-          © {new Date().getFullYear()} forms0 —
+          © {new Date().getFullYear()} Ikiform —
           <Link
-            href="https://x.com/forms0dotcom"
+            href="https://x.com/ikiform"
             target="_blank"
             className="text-blue-500"
           >
-            @forms0dotcom
+            @ikiform
           </Link>
         </div>
       </footer>
