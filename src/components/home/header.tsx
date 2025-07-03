@@ -1,17 +1,23 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 
 export default function Header() {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <nav className="flex justify-between flex-wrap items-center gap-8  py-10 text-sm font-inter max-sm:flex-col max-sm:text-center max-sm:items-center max-sm:justify-center max-w-[95%] mx-auto w-full px-6">
       <div className="max-w-[90px]">
         <Link href="/">
-          {theme === "dark" ? (
+          {mounted && theme === "dark" ? (
             <Image
               src="/text-logo.svg"
               alt="Ikiform"
