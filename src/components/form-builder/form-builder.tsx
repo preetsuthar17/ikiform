@@ -832,6 +832,17 @@ export function FormBuilder({ formId }: FormBuilderProps) {
             </Button>
 
             <TooltipProvider>
+              {" "}
+              <Tooltip>
+                <TooltipTrigger>
+                  <Button variant="default" size={"sm"} asChild>
+                    <Link href="/ai-builder">
+                      <Sparkles className="w-4 h-4 shrink-0" /> Use Kiko
+                    </Link>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent size="sm">AI Form builder</TooltipContent>
+              </Tooltip>
               <Tooltip>
                 <TooltipTrigger>
                   <Button
@@ -844,7 +855,6 @@ export function FormBuilder({ formId }: FormBuilderProps) {
                 </TooltipTrigger>
                 <TooltipContent size="sm">View JSON</TooltipContent>
               </Tooltip>
-
               <Tooltip>
                 <TooltipTrigger>
                   <Button
@@ -858,7 +868,6 @@ export function FormBuilder({ formId }: FormBuilderProps) {
                 </TooltipTrigger>
                 <TooltipContent size="sm">Preview</TooltipContent>
               </Tooltip>
-
               <Tooltip>
                 <TooltipTrigger>
                   <Button
@@ -872,7 +881,6 @@ export function FormBuilder({ formId }: FormBuilderProps) {
                 </TooltipTrigger>
                 <TooltipContent size="sm">Analytics</TooltipContent>
               </Tooltip>
-
               <Tooltip>
                 <TooltipTrigger>
                   <Button
@@ -898,18 +906,6 @@ export function FormBuilder({ formId }: FormBuilderProps) {
                 </TooltipTrigger>
                 <TooltipContent size="sm">Settings</TooltipContent>
               </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger>
-                  <Button variant="secondary" size="icon" asChild>
-                    <Link href="/ai-builder">
-                      <Sparkles className="w-4 h-4 shrink-0" />
-                    </Link>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent size="sm">AI Assistant</TooltipContent>
-              </Tooltip>
-
               <Tooltip>
                 <TooltipTrigger>
                   <Button
