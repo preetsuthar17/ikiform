@@ -73,6 +73,7 @@ import {
   DrawerDescription,
 } from "@/components/ui/drawer";
 import { type NextRouter } from "next/router";
+import { createClient } from "@/utils/supabase/client";
 
 interface ChatPanelProps {
   messages: any[];
@@ -404,7 +405,7 @@ function PreviewPanel({
               onClick={() => {
                 localStorage.setItem(
                   "importedFormSchema",
-                  JSON.stringify(activeForm.schema),
+                  JSON.stringify(activeForm.schema)
                 );
                 router.push("/form-builder");
               }}
@@ -435,6 +436,8 @@ function PreviewPanel({
 
 export default function AIChatPage() {
   const { user, loading: authLoading } = useAuth();
+  const [hasPremium, setHasPremium] = useState<boolean | null>(null);
+  const [checking, setChecking] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -489,6 +492,25 @@ export default function AIChatPage() {
       streamingRef.current.scrollTop = streamingRef.current.scrollHeight;
     }
   }, [streamedContent, isStreaming]);
+
+  useEffect(() => {
+    if (!user) {
+      setHasPremium(false);
+      return;
+    }
+    setChecking(true);
+    const checkPremium = async () => {
+      const supabase = createClient();
+      const { data, error } = await supabase
+        .from("users")
+        .select("has_premium")
+        .eq("email", user.email)
+        .single();
+      setHasPremium(data?.has_premium || false);
+      setChecking(false);
+    };
+    checkPremium();
+  }, [user]);
 
   const handleSend = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -545,7 +567,7 @@ export default function AIChatPage() {
     if (foundJson) {
       // Check for duplicate schema (deep equality)
       const existing = forms.find(
-        (f) => JSON.stringify(f.schema) === JSON.stringify(foundJson),
+        (f) => JSON.stringify(f.schema) === JSON.stringify(foundJson)
       );
       if (existing) {
         setActiveFormId(existing.id);
@@ -572,7 +594,7 @@ export default function AIChatPage() {
       setStreamedContent(""); // Clear the streaming block
     } else {
       setStreamError(
-        "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!",
+        "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!"
       );
     }
   };
@@ -596,7 +618,7 @@ export default function AIChatPage() {
 
   const activeForm = forms.find((f) => f.id === activeFormId);
 
-  if (authLoading) {
+  if (authLoading || checking || hasPremium === null) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <Loader />
@@ -604,24 +626,17 @@ export default function AIChatPage() {
     );
   }
 
-  if (!user) {
+  if (!user || !hasPremium) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <Card className="w-full max-w-md">
-          <CardContent className="pt-6">
-            <div className="text-center space-y-4">
-              <MessageSquare className="w-12 h-12 mx-auto text-muted-foreground" />
-              <h2 className="text-xl font-semibold">Sign in to use AI Chat</h2>
-              <p className="text-muted-foreground">
-                You need to be signed in to access the AI form builder
-                assistant.
-              </p>
-              <Link href="/">
-                <Button>Go to Home</Button>
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
+      <div className="flex flex-col items-center justify-center min-h-screen gap-6">
+        <div className="text-2xl font-semibold">Requires Premium</div>
+        <div className="text-muted-foreground text-center max-w-md">
+          You need a premium subscription to use the AI form builder. Upgrade to
+          unlock all features.
+        </div>
+        <Link href="/pricing">
+          <Button size="lg">View Pricing</Button>
+        </Link>
       </div>
     );
   }
@@ -810,7 +825,7 @@ function CopyButtonWithState({ schema }: { schema: any }) {
             size={"icon"}
             onClick={async () => {
               await navigator.clipboard.writeText(
-                JSON.stringify(schema, null, 2),
+                JSON.stringify(schema, null, 2)
               );
               setCopied(true);
               setTimeout(() => setCopied(false), 1500);
