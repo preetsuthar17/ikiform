@@ -2,6 +2,9 @@ import { cohere } from "@ai-sdk/cohere";
 import { streamText } from "ai";
 import { NextRequest } from "next/server";
 import { checkRateLimit, RateLimitSettings } from "@/lib/rate-limit";
+import { createClient } from "@/utils/supabase/server";
+import { formsDbServer } from "@/lib/database";
+import { v4 as uuidv4 } from "uuid";
 
 const systemPrompt = process.env.ANALYTICS_AI_SYSTEM_PROMPT;
 
@@ -45,7 +48,7 @@ function createErrorResponse(message: string, status: number = 500) {
 }
 
 function validateAndSanitizeMessages(
-  messages: any[],
+  messages: any[]
 ): { role: string; content: string }[] {
   if (
     !Array.isArray(messages) ||
@@ -66,7 +69,7 @@ function validateAndSanitizeMessages(
 }
 
 function analyzeConversation(
-  messages: { role: string; content: string }[],
+  messages: { role: string; content: string }[]
 ): ConversationAnalysis {
   const userMessages = messages.filter((msg) => msg.role === "user");
   const assistantMessages = messages.filter((msg) => msg.role === "assistant");
@@ -173,25 +176,25 @@ function analyzeConversation(
 
   // Analyze for follow-up questions
   const hasFollowUpQuestions = followUpKeywords.some((keyword) =>
-    currentMessage.includes(keyword.toLowerCase()),
+    currentMessage.includes(keyword.toLowerCase())
   );
 
   // Analyze for references to previous responses
   const referencesLastResponse = referenceKeywords.some((keyword) =>
-    currentMessage.includes(keyword.toLowerCase()),
+    currentMessage.includes(keyword.toLowerCase())
   );
 
   // Analyze for direct action requests
   const isDirectRequest = directActionKeywords.some((keyword) =>
-    currentMessage.includes(keyword.toLowerCase()),
+    currentMessage.includes(keyword.toLowerCase())
   );
 
   // Extract topics discussed
   const topicsDiscussed = Object.entries(topicKeywords)
     .filter(([_, keywords]) =>
       keywords.some((keyword) =>
-        previousMessages.includes(keyword.toLowerCase()),
-      ),
+        previousMessages.includes(keyword.toLowerCase())
+      )
     )
     .map(([topic, _]) => topic);
 
@@ -215,7 +218,7 @@ function analyzeConversation(
   }
   if (isDirectRequest) {
     contextualHints.push(
-      "User is making a direct request for information - be specific and helpful",
+      "User is making a direct request for information - be specific and helpful"
     );
   }
   if (topicsDiscussed.length > 0) {
@@ -254,11 +257,22 @@ export async function POST(req: NextRequest) {
       {
         status: 429,
         headers: { "Retry-After": retryAfter.toString() },
-      },
+      }
     );
   }
 
   try {
+    // Check authentication
+    const supabase = await createClient();
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+      return createErrorResponse("Unauthorized", 401);
+    }
+
     if (apiKeyValid === null) {
       apiKeyValid = !!process.env.COHERE_API_KEY;
     }
@@ -285,8 +299,40 @@ export async function POST(req: NextRequest) {
     } catch (error) {
       return createErrorResponse(
         error instanceof Error ? error.message : "Invalid request format",
-        400,
+        400
       );
+    }
+
+    // Generate or use provided session ID
+    const sessionId = requestData.sessionId || uuidv4();
+
+    // Get the last user message to save
+    const lastUserMessage = sanitizedMessages[sanitizedMessages.length - 1];
+
+    // Save the user message
+    if (lastUserMessage && lastUserMessage.role === "user") {
+      try {
+        await formsDbServer.saveAIAnalyticsMessage(
+          user.id,
+          formId,
+          sessionId,
+          "user",
+          lastUserMessage.content,
+          {
+            timestamp: new Date().toISOString(),
+            ip: ip,
+            userAgent: req.headers.get("user-agent") || "",
+            contextSnapshot: {
+              totalSubmissions: context.analytics?.totalSubmissions || 0,
+              completionRate: context.analytics?.completionRate || 0,
+              averageTime: context.analytics?.averageTime || 0,
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error saving user message:", error);
+        // Don't fail the request if saving fails
+      }
     }
 
     // Analyze conversation context
@@ -301,7 +347,7 @@ export async function POST(req: NextRequest) {
 
     // Calculate time-specific metrics
     const todaySubmissions = context.submissions.filter(
-      (sub: any) => new Date(sub.submitted_at) >= today,
+      (sub: any) => new Date(sub.submitted_at) >= today
     ).length;
 
     const yesterdaySubmissions = context.submissions.filter((sub: any) => {
@@ -310,11 +356,11 @@ export async function POST(req: NextRequest) {
     }).length;
 
     const thisWeekSubmissions = context.submissions.filter(
-      (sub: any) => new Date(sub.submitted_at) >= weekAgo,
+      (sub: any) => new Date(sub.submitted_at) >= weekAgo
     ).length;
 
     const thisMonthSubmissions = context.submissions.filter(
-      (sub: any) => new Date(sub.submitted_at) >= monthAgo,
+      (sub: any) => new Date(sub.submitted_at) >= monthAgo
     ).length;
 
     const contextString = `
@@ -368,11 +414,11 @@ export async function POST(req: NextRequest) {
     - Submissions This Month (last 30 days): ${thisMonthSubmissions}
     - Days Since Form Created: ${Math.floor(
       (now.getTime() - new Date(context.form.created_at).getTime()) /
-        (1000 * 60 * 60 * 24),
+        (1000 * 60 * 60 * 24)
     )}
     - Days Since Last Update: ${Math.floor(
       (now.getTime() - new Date(context.form.updated_at).getTime()) /
-        (1000 * 60 * 60 * 24),
+        (1000 * 60 * 60 * 24)
     )}
     
     FORM INFORMATION:
@@ -416,7 +462,7 @@ export async function POST(req: NextRequest) {
               (field: any, index: number) =>
                 `${index + 1}. ${field[1].label}: ${
                   field[1].completionRate
-                }% completion (${field[1].totalResponses} responses)`,
+                }% completion (${field[1].totalResponses} responses)`
             )
             .join("\n")
         : "No field performance data available"
@@ -430,7 +476,7 @@ export async function POST(req: NextRequest) {
               (field: any, index: number) =>
                 `${index + 1}. ${field[1].label}: ${
                   field[1].completionRate
-                }% completion (${field[1].totalResponses} responses)`,
+                }% completion (${field[1].totalResponses} responses)`
             )
             .join("\n")
         : "All fields performing well"
@@ -453,7 +499,7 @@ export async function POST(req: NextRequest) {
               (step: any, index: number) =>
                 `Step ${index + 1} - ${step.stepName}: ${step.completedCount}/${
                   context.analytics.totalSubmissions
-                } (${step.conversionRate}%)`,
+                } (${step.conversionRate}%)`
             )
             .join("\n")
         : "Not a multi-step form or no funnel data"
@@ -538,16 +584,62 @@ export async function POST(req: NextRequest) {
     const encoder = new TextEncoder();
     const { textStream } = stream;
     const reader = textStream.getReader();
+
+    // Collect the AI response for saving
+    let aiResponse = "";
+
     const responseStream = new ReadableStream({
       async start(controller) {
-        while (true) {
-          const { value, done } = await reader.read();
-          if (done) break;
-          const chunk =
-            typeof value === "string" ? value : new TextDecoder().decode(value);
-          controller.enqueue(encoder.encode(chunk));
+        try {
+          while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            const chunk =
+              typeof value === "string"
+                ? value
+                : new TextDecoder().decode(value);
+            aiResponse += chunk;
+            controller.enqueue(encoder.encode(chunk));
+          }
+
+          // Save the AI response after streaming is complete
+          if (aiResponse.trim()) {
+            try {
+              await formsDbServer.saveAIAnalyticsMessage(
+                user.id,
+                formId,
+                sessionId,
+                "assistant",
+                aiResponse,
+                {
+                  timestamp: new Date().toISOString(),
+                  model: "cohere/command",
+                  temperature: 0.3,
+                  maxTokens: 1500,
+                  topP: 0.9,
+                  conversationAnalysis: {
+                    hasFollowUpQuestions:
+                      conversationAnalysis.hasFollowUpQuestions,
+                    referencesLastResponse:
+                      conversationAnalysis.referencesLastResponse,
+                    topicsDiscussed: conversationAnalysis.topicsDiscussed,
+                    conversationTurns: conversationAnalysis.conversationTurns,
+                    needsContext: conversationAnalysis.needsContext,
+                    contextualHints: conversationAnalysis.contextualHints,
+                    hasDirectRequest: conversationAnalysis.hasDirectRequest,
+                  },
+                }
+              );
+            } catch (error) {
+              console.error("Error saving AI response:", error);
+            }
+          }
+
+          controller.close();
+        } catch (error) {
+          console.error("Error in Analytics chat stream:", error);
+          controller.error(error);
         }
-        controller.close();
       },
     });
 
@@ -559,6 +651,7 @@ export async function POST(req: NextRequest) {
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "DENY",
         "X-XSS-Protection": "1; mode=block",
+        "X-Session-ID": sessionId,
       },
     });
   } catch (error) {
@@ -578,6 +671,6 @@ export async function GET() {
     {
       status: 200,
       headers: { "Content-Type": "application/json" },
-    },
+    }
   );
 }

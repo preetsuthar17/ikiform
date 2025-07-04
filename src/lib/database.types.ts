@@ -56,6 +56,73 @@ export interface Database {
           ip_address?: string | null;
         };
       };
+      ai_builder_chat: {
+        Row: {
+          id: string;
+          user_id: string;
+          session_id: string;
+          role: "user" | "assistant" | "system";
+          content: string;
+          metadata: Record<string, any>;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          session_id: string;
+          role: "user" | "assistant" | "system";
+          content: string;
+          metadata?: Record<string, any>;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          session_id?: string;
+          role?: "user" | "assistant" | "system";
+          content?: string;
+          metadata?: Record<string, any>;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      ai_analytics_chat: {
+        Row: {
+          id: string;
+          user_id: string;
+          form_id: string;
+          session_id: string;
+          role: "user" | "assistant" | "system";
+          content: string;
+          metadata: Record<string, any>;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          form_id: string;
+          session_id: string;
+          role: "user" | "assistant" | "system";
+          content: string;
+          metadata?: Record<string, any>;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          form_id?: string;
+          session_id?: string;
+          role?: "user" | "assistant" | "system";
+          content?: string;
+          metadata?: Record<string, any>;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
     };
     Views: {
       [_ in never]: never;

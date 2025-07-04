@@ -75,6 +75,19 @@ import {
 import { type NextRouter } from "next/router";
 import { createClient } from "@/utils/supabase/client";
 
+// Simple session ID generator for client-side use
+const generateSessionId = () => {
+  return (
+    "ai-builder-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9)
+  );
+};
+
+interface ChatMessage {
+  role: "user" | "assistant";
+  content: string;
+  schema?: any;
+}
+
 interface ChatPanelProps {
   messages: any[];
   isLoading: boolean;
@@ -405,7 +418,7 @@ function PreviewPanel({
               onClick={() => {
                 localStorage.setItem(
                   "importedFormSchema",
-                  JSON.stringify(activeForm.schema),
+                  JSON.stringify(activeForm.schema)
                 );
                 router.push("/form-builder");
               }}
@@ -453,6 +466,7 @@ export default function AIChatPage() {
   }, []);
 
   // Chat state
+  const [sessionId, setSessionId] = useState<string | null>(null);
   const [messages, setMessages] = useState<any[]>([]); // { role, content, schema? }
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -497,6 +511,13 @@ export default function AIChatPage() {
   const autoSendPrompt = async (promptText: string) => {
     if (!promptText.trim()) return;
 
+    // Generate session ID if this is the first message
+    let currentSessionId = sessionId;
+    if (!currentSessionId) {
+      currentSessionId = generateSessionId();
+      setSessionId(currentSessionId);
+    }
+
     setInput(""); // Clear input immediately after sending
     setIsLoading(true);
     setIsStreaming(true);
@@ -516,6 +537,7 @@ export default function AIChatPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         messages: currentMessages,
+        sessionId: currentSessionId,
       }),
     });
 
@@ -553,7 +575,7 @@ export default function AIChatPage() {
     if (foundJson) {
       // Check for duplicate schema (deep equality)
       const existing = forms.find(
-        (f) => JSON.stringify(f.schema) === JSON.stringify(foundJson),
+        (f) => JSON.stringify(f.schema) === JSON.stringify(foundJson)
       );
       if (existing) {
         setActiveFormId(existing.id);
@@ -580,7 +602,7 @@ export default function AIChatPage() {
       setStreamedContent(""); // Clear the streaming block
     } else {
       setStreamError(
-        "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!",
+        "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!"
       );
     }
   };
@@ -632,6 +654,13 @@ export default function AIChatPage() {
     e.preventDefault();
     if (!input.trim()) return;
 
+    // Generate session ID if this is the first message
+    let currentSessionId = sessionId;
+    if (!currentSessionId) {
+      currentSessionId = generateSessionId();
+      setSessionId(currentSessionId);
+    }
+
     const currentInput = input;
     setInput("");
     setIsLoading(true);
@@ -652,6 +681,7 @@ export default function AIChatPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         messages: currentMessages,
+        sessionId: currentSessionId,
       }),
     });
 
@@ -689,7 +719,7 @@ export default function AIChatPage() {
     if (foundJson) {
       // Check for duplicate schema (deep equality)
       const existing = forms.find(
-        (f) => JSON.stringify(f.schema) === JSON.stringify(foundJson),
+        (f) => JSON.stringify(f.schema) === JSON.stringify(foundJson)
       );
       if (existing) {
         setActiveFormId(existing.id);
@@ -716,7 +746,7 @@ export default function AIChatPage() {
       setStreamedContent(""); // Clear the streaming block
     } else {
       setStreamError(
-        "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!",
+        "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!"
       );
     }
   };
@@ -947,7 +977,7 @@ function CopyButtonWithState({ schema }: { schema: any }) {
             size={"icon"}
             onClick={async () => {
               await navigator.clipboard.writeText(
-                JSON.stringify(schema, null, 2),
+                JSON.stringify(schema, null, 2)
               );
               setCopied(true);
               setTimeout(() => setCopied(false), 1500);

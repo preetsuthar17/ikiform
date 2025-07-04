@@ -2,6 +2,9 @@ import { cohere } from "@ai-sdk/cohere";
 import { streamText } from "ai";
 import { NextRequest } from "next/server";
 import { checkRateLimit } from "@/lib/rate-limit";
+import { createClient } from "@/utils/supabase/server";
+import { formsDbServer } from "@/lib/database";
+import { v4 as uuidv4 } from "uuid";
 
 const systemPrompt =
   process.env.AI_FORM_SYSTEM_PROMPT ||
@@ -27,7 +30,7 @@ function createErrorResponse(message: string, status: number = 500) {
 }
 
 function validateAndSanitizeMessages(
-  messages: any[],
+  messages: any[]
 ): { role: string; content: string }[] {
   if (
     !Array.isArray(messages) ||
@@ -63,11 +66,22 @@ export async function POST(req: NextRequest) {
       {
         status: 429,
         headers: { "Retry-After": retryAfter.toString() },
-      },
+      }
     );
   }
 
   try {
+    // Check authentication
+    const supabase = await createClient();
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+      return createErrorResponse("Unauthorized", 401);
+    }
+
     if (apiKeyValid === null) {
       apiKeyValid = !!process.env.COHERE_API_KEY;
     }
@@ -88,8 +102,34 @@ export async function POST(req: NextRequest) {
     } catch (error) {
       return createErrorResponse(
         error instanceof Error ? error.message : "Invalid request format",
-        400,
+        400
       );
+    }
+
+    // Generate or use provided session ID
+    const sessionId = requestData.sessionId || uuidv4();
+
+    // Get the last user message to save
+    const lastUserMessage = sanitizedMessages[sanitizedMessages.length - 1];
+
+    // Save the user message
+    if (lastUserMessage && lastUserMessage.role === "user") {
+      try {
+        await formsDbServer.saveAIBuilderMessage(
+          user.id,
+          sessionId,
+          "user",
+          lastUserMessage.content,
+          {
+            timestamp: new Date().toISOString(),
+            ip: ip,
+            userAgent: req.headers.get("user-agent") || "",
+          }
+        );
+      } catch (error) {
+        console.error("Error saving user message:", error);
+        // Don't fail the request if saving fails
+      }
     }
 
     const stream = await streamText({
@@ -110,16 +150,50 @@ export async function POST(req: NextRequest) {
     const encoder = new TextEncoder();
     const { textStream } = stream;
     const reader = textStream.getReader();
+
+    // Collect the AI response for saving
+    let aiResponse = "";
+
     const responseStream = new ReadableStream({
       async start(controller) {
-        while (true) {
-          const { value, done } = await reader.read();
-          if (done) break;
-          const chunk =
-            typeof value === "string" ? value : new TextDecoder().decode(value);
-          controller.enqueue(encoder.encode(chunk));
+        try {
+          while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            const chunk =
+              typeof value === "string"
+                ? value
+                : new TextDecoder().decode(value);
+            aiResponse += chunk;
+            controller.enqueue(encoder.encode(chunk));
+          }
+
+          // Save the AI response after streaming is complete
+          if (aiResponse.trim()) {
+            try {
+              await formsDbServer.saveAIBuilderMessage(
+                user.id,
+                sessionId,
+                "assistant",
+                aiResponse,
+                {
+                  timestamp: new Date().toISOString(),
+                  model: "cohere/command",
+                  temperature: 0.3,
+                  maxTokens: 1750,
+                  topP: 0.9,
+                }
+              );
+            } catch (error) {
+              console.error("Error saving AI response:", error);
+            }
+          }
+
+          controller.close();
+        } catch (error) {
+          console.error("Error in AI Builder stream:", error);
+          controller.error(error);
         }
-        controller.close();
       },
     });
 
@@ -131,9 +205,11 @@ export async function POST(req: NextRequest) {
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "DENY",
         "X-XSS-Protection": "1; mode=block",
+        "X-Session-ID": sessionId,
       },
     });
   } catch (error) {
+    console.error("AI Builder API error:", error);
     return createErrorResponse("Internal server error");
   }
 }
@@ -149,6 +225,6 @@ export async function GET() {
     {
       status: 200,
       headers: { "Content-Type": "application/json" },
-    },
+    }
   );
 }

@@ -230,17 +230,15 @@ export default function PricingClient({ products }: PricingClientProps) {
                 {/* CTA Button */}
                 {user && hasPremium ? (
                   <div className="space-y-3">
-                    <Link href="/dashboard" className="w-full block">
-                      <Button size="lg" className="w-full">
-                        <Link
-                          href="/portal"
-                          target="_blank"
-                          className="w-full block"
-                        >
-                          Manage Your Subscription
-                        </Link>
-                      </Button>
-                    </Link>
+                    <Button size="lg" className="w-full">
+                      <Link
+                        href="/portal"
+                        target="_blank"
+                        className="w-full block"
+                      >
+                        Manage Your Subscription
+                      </Link>
+                    </Button>
                   </div>
                 ) : (
                   <Link
