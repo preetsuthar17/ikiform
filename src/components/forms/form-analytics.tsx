@@ -309,7 +309,17 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   };
 
   const getFieldLabel = (fieldId: string) => {
-    const field = form.schema.fields.find((f) => f.id === fieldId);
+    // Check in direct fields array first
+    let field = form.schema.fields?.find((f) => f.id === fieldId);
+
+    // If not found, check in blocks
+    if (!field && form.schema.blocks) {
+      for (const block of form.schema.blocks) {
+        field = block.fields?.find((f) => f.id === fieldId);
+        if (field) break;
+      }
+    }
+
     return field?.label || fieldId;
   };
 
@@ -359,7 +369,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     const allFields = new Set<string>();
     submissions.forEach((submission) => {
       Object.keys(submission.submission_data).forEach((key) =>
-        allFields.add(key),
+        allFields.add(key)
       );
     });
 
@@ -397,7 +407,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     // Convert to CSV
     const csvContent = [headers, ...rows]
       .map((row) =>
-        row.map((field) => `"${String(field).replace(/"/g, '""')}"`).join(","),
+        row.map((field) => `"${String(field).replace(/"/g, '""')}"`).join(",")
       )
       .join("\n");
 
@@ -541,13 +551,20 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   // Calculate analytics
   const totalSubmissions = submissions.length;
   const lastSubmission = submissions.length > 0 ? submissions[0] : null;
-  const totalFields = form.schema.fields.length;
+
+  // Calculate total fields from both fields array and blocks
+  const fieldsFromDirectArray = form.schema.fields?.length || 0;
+  const fieldsFromBlocks =
+    form.schema.blocks?.reduce((total, block) => {
+      return total + (block.fields?.length || 0);
+    }, 0) || 0;
+  const totalFields = Math.max(fieldsFromDirectArray, fieldsFromBlocks);
 
   // Calculate submissions over time (last 30 days)
   const last30Days = new Date();
   last30Days.setDate(last30Days.getDate() - 30);
   const recentSubmissions = submissions.filter(
-    (sub) => new Date(sub.submitted_at) >= last30Days,
+    (sub) => new Date(sub.submitted_at) >= last30Days
   );
 
   // Configure table columns
@@ -585,7 +602,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const fieldStats = submissions.reduce(
     (acc, sub) => {
       const filledFields = Object.values(sub.submission_data).filter(
-        (val) => val !== "" && val !== null && val !== undefined,
+        (val) => val !== "" && val !== null && val !== undefined
       ).length;
       acc.totalFilledFields += filledFields;
       acc.fieldCompletionRates[filledFields] =
@@ -595,35 +612,34 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     {
       totalFilledFields: 0,
       fieldCompletionRates: {} as Record<number, number>,
-    },
+    }
   );
 
   const completionRate =
-    submissions.length > 0
+    submissions.length > 0 && totalFields > 0
       ? Math.round(
           (fieldStats.totalFilledFields / (submissions.length * totalFields)) *
-            100,
+            100
         )
       : 0;
 
   // Calculate submission trends
-  const submissionsByDay = submissions.reduce(
-    (acc, sub) => {
-      const date = new Date(sub.submitted_at).toLocaleDateString();
-      acc[date] = (acc[date] || 0) + 1;
-      return acc;
-    },
-    {} as Record<string, number>,
-  );
+  const submissionsByDay = submissions.reduce((acc, sub) => {
+    const date = new Date(sub.submitted_at).toLocaleDateString();
+    acc[date] = (acc[date] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
 
   // Get most active day
   const mostActiveDay = Object.entries(submissionsByDay).sort(
-    ([, a], [, b]) => b - a,
+    ([, a], [, b]) => b - a
   )[0];
 
   const getSubmissionCompletionRate = (submission: FormSubmission) => {
+    if (totalFields === 0) return 0;
+
     const filledFields = Object.values(submission.submission_data).filter(
-      (val) => val !== "" && val !== null && val !== undefined,
+      (val) => val !== "" && val !== null && val !== undefined
     ).length;
     return (filledFields / totalFields) * 100;
   };
@@ -745,7 +761,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                     </p>
                     <Separator />
                   </div>
-                ),
+                )
               )}
             </div>
           </ScrollArea>
@@ -1131,7 +1147,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                           <Select
                             value={filterState.timeRange}
                             onValueChange={(
-                              value: typeof filterState.timeRange,
+                              value: typeof filterState.timeRange
                             ) =>
                               setFilterState((prev) => ({
                                 ...prev,
@@ -1154,7 +1170,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                           <Select
                             value={filterState.completionRate}
                             onValueChange={(
-                              value: typeof filterState.completionRate,
+                              value: typeof filterState.completionRate
                             ) =>
                               setFilterState((prev) => ({
                                 ...prev,
@@ -1214,13 +1230,13 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                                           {Array.isArray(value)
                                             ? value.join(", ")
                                             : typeof value === "object" &&
-                                                value !== null
-                                              ? JSON.stringify(value)
-                                              : String(value) || "—"}
+                                              value !== null
+                                            ? JSON.stringify(value)
+                                            : String(value) || "—"}
                                         </p>
                                       </div>
                                     </div>
-                                  ),
+                                  )
                                 )}
                               </div>
                             </Card>
@@ -1299,7 +1315,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                             : String(value)}
                         </p>
                       </div>
-                    ),
+                    )
                   )}
                 </div>
               </ScrollArea>
