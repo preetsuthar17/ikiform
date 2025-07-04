@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectTrigger,
@@ -28,6 +29,13 @@ import {
   LayoutGrid,
   Search,
   X,
+  MessageCircle,
+  Send,
+  Bot,
+  User,
+  Sparkles,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import { formsDb } from "@/lib/database";
 import { toast } from "@/hooks/use-toast";
@@ -43,16 +51,185 @@ import {
   ModalClose,
 } from "@/components/ui/modal";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerDescription,
+  DrawerCloseButton,
+} from "@/components/ui/drawer";
+import { Kbd } from "@/components/ui/kbd";
+import Link from "next/link";
+import { useTheme } from "next-themes";
+import Image from "next/image";
 
 interface FormAnalyticsProps {
   form: Form;
 }
 
+interface ChatInterfaceProps {
+  chatMessages: Array<{
+    role: "user" | "assistant";
+    content: string;
+    timestamp: Date;
+  }>;
+  chatStreaming: boolean;
+  streamedContent: string;
+  chatLoading: boolean;
+  messagesEndRef: React.RefObject<HTMLDivElement | null>;
+  chatSuggestions: string[];
+  setChatInput: (value: string) => void;
+  handleChatSend: (e: React.FormEvent) => void;
+  chatInputRef: React.RefObject<HTMLTextAreaElement | null>;
+  chatInput: string;
+}
+
+const ChatInterface: React.FC<ChatInterfaceProps> = ({
+  chatMessages,
+  chatStreaming,
+  streamedContent,
+  chatLoading,
+  messagesEndRef,
+  chatSuggestions,
+  setChatInput,
+  handleChatSend,
+  chatInputRef,
+  chatInput,
+}) => (
+  <div className="flex flex-col h-full ">
+    {/* Chat Messages */}
+    <ScrollArea className="flex-1 px-4 py-4">
+      <div className="space-y-4">
+        {/* Welcome Message */}
+        {chatMessages.length === 0 && (
+          <div className="text-center py-4">
+            <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 mb-3">
+              <Image
+                src="/logo.svg"
+                alt="Ikiform"
+                width={100}
+                height={100}
+                className="pointer-events-none invert  rounded-ele"
+              />
+            </div>
+            <h3 className="text-base font-semibold mb-2">Ask Kiko</h3>
+            <p className="text-muted-foreground text-sm mb-4 max-w-xs mx-auto">
+              Talk with your forms and get quick insights and analysis
+            </p>
+          </div>
+        )}
+
+        {/* Chat Messages */}
+        {chatMessages.map((message, index) => (
+          <div
+            key={index}
+            className={`flex gap-2 ${
+              message.role === "user" ? "justify-end" : "justify-start"
+            }`}
+          >
+            <div
+              className={`max-w-[85%] p-3 rounded-ele text-sm ${
+                message.role === "user"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-muted"
+              }`}
+            >
+              <p className="whitespace-pre-wrap leading-relaxed">
+                {message.content}
+              </p>
+            </div>
+          </div>
+        ))}
+
+        {/* Streaming Response */}
+        {chatStreaming && (
+          <div className="flex gap-2 justify-start">
+            <div className="max-w-[85%] p-3 rounded-lg bg-muted text-sm">
+              <div className="flex items-center gap-2 mb-1">
+                <Bot className="w-3 h-3" />
+                <span className="text-xs opacity-70">Typing...</span>
+              </div>
+              <p className="whitespace-pre-wrap leading-relaxed">
+                {streamedContent}
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Loading indicator */}
+        {chatLoading && !chatStreaming && (
+          <div className="flex gap-2 justify-start">
+            <div className="p-3 rounded-lg bg-muted">
+              <div className="flex items-center gap-2">
+                <Bot className="w-3 h-3" />
+                <Loader />
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div ref={messagesEndRef} />
+      </div>
+    </ScrollArea>
+
+    {/* Chat Suggestions */}
+    {chatMessages.length === 0 && (
+      <div className="px-4 py-3 border-t border-border">
+        <div className="flex flex-wrap gap-1">
+          {chatSuggestions.map((suggestion, index) => (
+            <button
+              key={index}
+              onClick={() => setChatInput(suggestion)}
+              className="px-2 py-1 text-xs bg-muted hover:bg-accent transition-colors rounded-md grow"
+            >
+              {suggestion}
+            </button>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {/* Chat Input */}
+    <div className="border-t border-border p-3">
+      <form onSubmit={handleChatSend} className="flex gap-2">
+        <Textarea
+          ref={chatInputRef}
+          value={chatInput}
+          onChange={(e) => setChatInput(e.target.value)}
+          placeholder="Ask about your data..."
+          className="flex-1 min-h-[36px] max-h-[72px] resize-none text-sm"
+          disabled={chatLoading}
+          rows={1}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              handleChatSend(e);
+            }
+          }}
+        />
+        <Button
+          type="submit"
+          disabled={chatLoading || !chatInput.trim()}
+          loading={chatLoading}
+          size="icon"
+          className="self-end shrink-0"
+        >
+          {chatLoading ? <></> : <Send className="w-3 h-3" />}
+        </Button>
+      </form>
+      <div className="text-xs text-muted-foreground mt-2">
+        <Kbd size="sm">Enter</Kbd> to send
+      </div>
+    </div>
+  </div>
+);
+
 export function FormAnalytics({ form }: FormAnalyticsProps) {
   const [submissions, setSubmissions] = useState<FormSubmission[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [activeView, setActiveView] = useState<"cards" | "table">("cards");
+  const [activeView, setActiveView] = useState<"cards" | "table">("table");
   const [searchTerm, setSearchTerm] = useState("");
   const [filterState, setFilterState] = useState<{
     timeRange: "all" | "today" | "week" | "month";
@@ -65,8 +242,41 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     useState<FormSubmission | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // AI Chat States
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState<
+    Array<{
+      role: "user" | "assistant";
+      content: string;
+      timestamp: Date;
+    }>
+  >([]);
+  const [chatInput, setChatInput] = useState("");
+  const [chatLoading, setChatLoading] = useState(false);
+  const [chatStreaming, setChatStreaming] = useState(false);
+  const [streamedContent, setStreamedContent] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatInputRef = useRef<HTMLTextAreaElement>(null);
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     loadSubmissions();
+
+    // Check if mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
   }, [form.id]);
 
   const loadSubmissions = async () => {
@@ -149,7 +359,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     const allFields = new Set<string>();
     submissions.forEach((submission) => {
       Object.keys(submission.submission_data).forEach((key) =>
-        allFields.add(key),
+        allFields.add(key)
       );
     });
 
@@ -187,7 +397,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     // Convert to CSV
     const csvContent = [headers, ...rows]
       .map((row) =>
-        row.map((field) => `"${String(field).replace(/"/g, '""')}"`).join(","),
+        row.map((field) => `"${String(field).replace(/"/g, '""')}"`).join(",")
       )
       .join("\n");
 
@@ -205,6 +415,129 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 
     toast.success("Data exported to CSV successfully!");
   };
+
+  // AI Chat Functions
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [chatMessages, streamedContent]);
+
+  // Focus chat input when modal opens
+  useEffect(() => {
+    if (chatOpen && chatInputRef.current) {
+      setTimeout(() => {
+        chatInputRef.current?.focus();
+      }, 100);
+    }
+  }, [chatOpen]);
+
+  const handleChatSend = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!chatInput.trim() || chatLoading) return;
+
+    const userMessage = {
+      role: "user" as const,
+      content: chatInput,
+      timestamp: new Date(),
+    };
+
+    setChatMessages((prev) => [...prev, userMessage]);
+    setChatInput("");
+    setChatLoading(true);
+    setChatStreaming(true);
+    setStreamedContent("");
+
+    try {
+      // Prepare analytics context
+      const analyticsContext = {
+        form: {
+          id: form.id,
+          title: form.title,
+          description: form.description,
+          is_published: form.is_published,
+          created_at: form.created_at,
+          updated_at: form.updated_at,
+          schema: form.schema,
+        },
+        submissions: submissions,
+        analytics: {
+          totalSubmissions,
+          completionRate,
+          recentSubmissions: recentSubmissions.length,
+          mostActiveDay: mostActiveDay?.[0] || null,
+          lastSubmission: lastSubmission?.submitted_at || null,
+        },
+      };
+
+      const response = await fetch("/api/analytics-chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: chatMessages.concat(userMessage),
+          formId: form.id,
+          context: analyticsContext,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      const reader = response.body?.getReader();
+      if (!reader) {
+        throw new Error("No response stream");
+      }
+
+      let fullResponse = "";
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+
+        const chunk = new TextDecoder().decode(value);
+        fullResponse += chunk;
+        setStreamedContent(fullResponse);
+      }
+
+      setChatMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: fullResponse,
+          timestamp: new Date(),
+        },
+      ]);
+
+      setStreamedContent("");
+      setChatStreaming(false);
+    } catch (error) {
+      console.error("Chat error:", error);
+      toast.error("Failed to send message. Please try again.");
+      setChatMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: "Sorry, I encountered an error. Please try again.",
+          timestamp: new Date(),
+        },
+      ]);
+    } finally {
+      setChatLoading(false);
+      setChatStreaming(false);
+    }
+  };
+
+  const chatSuggestions = [
+    "How many submissions did I get today?",
+    "What questions do users skip most?",
+    "What's the completion rate?",
+    "Show recent submissions",  
+  ];
+
   // Calculate analytics
   const totalSubmissions = submissions.length;
   const lastSubmission = submissions.length > 0 ? submissions[0] : null;
@@ -214,7 +547,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const last30Days = new Date();
   last30Days.setDate(last30Days.getDate() - 30);
   const recentSubmissions = submissions.filter(
-    (sub) => new Date(sub.submitted_at) >= last30Days,
+    (sub) => new Date(sub.submitted_at) >= last30Days
   );
 
   // Configure table columns
@@ -240,7 +573,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
               setIsModalOpen(true);
             }}
           >
-            <Eye className="h-4 w-4 mr-2" />
+            <Eye className="h-4 w-4" />
             View Details
           </Button>
         </div>
@@ -252,7 +585,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const fieldStats = submissions.reduce(
     (acc, sub) => {
       const filledFields = Object.values(sub.submission_data).filter(
-        (val) => val !== "" && val !== null && val !== undefined,
+        (val) => val !== "" && val !== null && val !== undefined
       ).length;
       acc.totalFilledFields += filledFields;
       acc.fieldCompletionRates[filledFields] =
@@ -262,35 +595,32 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     {
       totalFilledFields: 0,
       fieldCompletionRates: {} as Record<number, number>,
-    },
+    }
   );
 
   const completionRate =
     submissions.length > 0
       ? Math.round(
           (fieldStats.totalFilledFields / (submissions.length * totalFields)) *
-            100,
+            100
         )
       : 0;
 
   // Calculate submission trends
-  const submissionsByDay = submissions.reduce(
-    (acc, sub) => {
-      const date = new Date(sub.submitted_at).toLocaleDateString();
-      acc[date] = (acc[date] || 0) + 1;
-      return acc;
-    },
-    {} as Record<string, number>,
-  );
+  const submissionsByDay = submissions.reduce((acc, sub) => {
+    const date = new Date(sub.submitted_at).toLocaleDateString();
+    acc[date] = (acc[date] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
 
   // Get most active day
   const mostActiveDay = Object.entries(submissionsByDay).sort(
-    ([, a], [, b]) => b - a,
+    ([, a], [, b]) => b - a
   )[0];
 
   const getSubmissionCompletionRate = (submission: FormSubmission) => {
     const filledFields = Object.values(submission.submission_data).filter(
-      (val) => val !== "" && val !== null && val !== undefined,
+      (val) => val !== "" && val !== null && val !== undefined
     ).length;
     return (filledFields / totalFields) * 100;
   };
@@ -412,7 +742,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                     </p>
                     <Separator />
                   </div>
-                ),
+                )
               )}
             </div>
           </ScrollArea>
@@ -428,8 +758,8 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background">
-        <div className="max-w-7xl mx-auto p-6">
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="mx-auto p-6">
           <div className="flex items-center justify-center py-20">
             <div className="text-center space-y-4">
               <div className="p-4 bg-accent/10 rounded-card mx-auto w-fit">
@@ -451,11 +781,16 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-7xl mx-auto p-6 space-y-8">
+    <div className="min-h-screen bg-background max-w-[95%] mx-auto w-full px-6">
+      <div className="mx-auto p-6 space-y-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div className="space-y-2">
+          <div className="flex flex-col gap-4 w">
+            <Button asChild variant={"secondary"} className="font-medium w-fit">
+              <Link href="/dashboard" className="flex items-center z-1">
+                Go to Dashboard
+              </Link>
+            </Button>
             <div className="flex items-center gap-3">
               <h1 className="text-3xl font-bold text-foreground">
                 {form.title}
@@ -515,6 +850,15 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
               >
                 <Download className="w-4 h-4" />
                 Export JSON
+              </Button>
+              <Button
+                variant="default"
+                size={"sm"}
+                onClick={() => setChatOpen(true)}
+                className="gap-2 font-medium"
+              >
+                <Sparkles className="w-4 h-4" />
+                Kiko AI
               </Button>
             </div>
           </div>
@@ -784,7 +1128,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                           <Select
                             value={filterState.timeRange}
                             onValueChange={(
-                              value: typeof filterState.timeRange,
+                              value: typeof filterState.timeRange
                             ) =>
                               setFilterState((prev) => ({
                                 ...prev,
@@ -807,7 +1151,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                           <Select
                             value={filterState.completionRate}
                             onValueChange={(
-                              value: typeof filterState.completionRate,
+                              value: typeof filterState.completionRate
                             ) =>
                               setFilterState((prev) => ({
                                 ...prev,
@@ -832,7 +1176,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                           <div key={submission.id}>
                             <Card
                               key={submission.id}
-                              className="p-4 bg-accent/5 border-accent/20  transition-all duration-200 "
+                              className="p-4  duration-200 "
                             >
                               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
                                 <div className="flex items-center gap-2">
@@ -855,26 +1199,29 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                                 {Object.entries(submission.submission_data).map(
                                   ([fieldId, value]) => (
-                                    <div key={fieldId} className="space-y-1">
+                                    <div
+                                      key={fieldId}
+                                      className="flex flex-col gap-2"
+                                    >
                                       <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                                         {getFieldLabel(fieldId)}
                                       </label>
-                                      <div className="p-2 bg-background border border-border rounded-ele">
+                                      <div className="p-2 bg-input border border-border rounded-ele">
                                         <p className="text-sm text-foreground line-clamp-2">
                                           {Array.isArray(value)
                                             ? value.join(", ")
                                             : typeof value === "object" &&
-                                                value !== null
-                                              ? JSON.stringify(value)
-                                              : String(value) || "—"}
+                                              value !== null
+                                            ? JSON.stringify(value)
+                                            : String(value) || "—"}
                                         </p>
                                       </div>
                                     </div>
-                                  ),
+                                  )
                                 )}
                               </div>
                             </Card>
-                            <Separator />
+                            <Separator className="mt-4" />
                           </div>
                         ))}
 
@@ -949,13 +1296,108 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                             : String(value)}
                         </p>
                       </div>
-                    ),
+                    )
                   )}
                 </div>
               </ScrollArea>
             </div>
           </ModalContent>
         </Modal>
+      )}
+
+      {/* Floating Chat Button */}
+      <Button
+        onClick={() => setChatOpen(true)}
+        className="fixed bottom-6 right-6 h-14 w-14 rounded-ele transition-all duration-200 z-50 border border-border bg-transparent hover:bg-transparent shadow-xl"
+        size="icon"
+      >
+        {mounted && theme === "light" ? (
+          <Image
+            src="/logo.svg"
+            alt="Ikiform"
+            width={100}
+            height={100}
+            className="pointer-events-none invert  rounded-ele"
+          />
+        ) : (
+          <Image
+            src="/logo.svg"
+            alt="Ikiform"
+            width={100}
+            height={100}
+            className="pointer-events-none  rounded-ele"
+          />
+        )}
+      </Button>
+
+      {/* Desktop: Chat Modal */}
+      {!isMobile && (
+        <Modal open={chatOpen} onOpenChange={setChatOpen}>
+          <ModalContent className="max-w-md h-[600px] flex flex-col">
+            <ModalHeader className="px-4 py-3 flex items-center justify-between">
+              <div
+                className="sr-only flex items-center gap-2"
+                aria-hidden="true"
+              >
+                <Bot className="w-4 h-4 text-primary" />
+                <span className="font-medium">Kiko</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <ModalClose onClick={() => setChatOpen(false)} />
+              </div>
+            </ModalHeader>
+
+            <div className="flex-1 min-h-0">
+              <ChatInterface
+                chatMessages={chatMessages}
+                chatStreaming={chatStreaming}
+                streamedContent={streamedContent}
+                chatLoading={chatLoading}
+                messagesEndRef={messagesEndRef}
+                chatSuggestions={chatSuggestions}
+                setChatInput={setChatInput}
+                handleChatSend={handleChatSend}
+                chatInputRef={chatInputRef}
+                chatInput={chatInput}
+              />
+            </div>
+          </ModalContent>
+        </Modal>
+      )}
+
+      {/* Mobile: Chat Drawer */}
+      {isMobile && (
+        <Drawer open={chatOpen} onOpenChange={setChatOpen}>
+          <DrawerContent className="h-[80vh]">
+            <DrawerHeader className="border-b border-border flex items-center justify-between">
+              <div className="sr-only flex items-center gap-2">
+                <Bot className="w-4 h-4 text-primary" />
+                <DrawerTitle>Kiko</DrawerTitle>
+              </div>
+              <div className="flex items-center gap-2">
+                <DrawerCloseButton />
+              </div>
+              <DrawerDescription className="sr-only">
+                Chat with AI about your form analytics
+              </DrawerDescription>
+            </DrawerHeader>
+
+            <div className="flex-1 min-h-0">
+              <ChatInterface
+                chatMessages={chatMessages}
+                chatStreaming={chatStreaming}
+                streamedContent={streamedContent}
+                chatLoading={chatLoading}
+                messagesEndRef={messagesEndRef}
+                chatSuggestions={chatSuggestions}
+                setChatInput={setChatInput}
+                handleChatSend={handleChatSend}
+                chatInputRef={chatInputRef}
+                chatInput={chatInput}
+              />
+            </div>
+          </DrawerContent>
+        </Drawer>
       )}
     </div>
   );

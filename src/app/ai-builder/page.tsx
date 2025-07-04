@@ -294,13 +294,13 @@ function ChatPanel({
       <div className="border-t bg-card/50 backdrop-blur supports-[backdrop-filter]:bg-card/50 p-4 flex-shrink-0">
         <form
           onSubmit={handleSend}
-          className="relative flex items-center bg-card rounded-ele border border-border shadow-md px-4 py-2 mt-4"
+          className="relative flex items-center bg-card rounded-ele border border-border shadow-md/2 px-4 py-2 mt-4"
         >
           <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Describe the form you want to create..."
-            className="flex-1 bg-transparent border-none outline-none resize-none min-h-[40px] max-h-[120px] pr-10 flex items-center justify-start text-left p-3"
+            className="flex-1 bg-transparent border-none outline-none resize-none min-h-[40px] max-h-[120px] pr-10 flex items-center justify-start text-left p-3 "
             style={{ boxShadow: "none" }}
             disabled={isLoading}
             rows={1}
@@ -445,6 +445,9 @@ export default function AIChatPage() {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
+  // Handle URL parameters
+  const [initialPromptProcessed, setInitialPromptProcessed] = useState(false);
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -469,61 +472,44 @@ export default function AIChatPage() {
 
   const [chatDrawerOpen, setChatDrawerOpen] = useState(false);
 
-  const suggestions = [
-    { text: "Create a contact form", icon: <Sparkles className="w-4 h-4" /> },
-    {
-      text: "Customer feedback survey",
-      icon: <Sparkles className="w-4 h-4" />,
-    },
-    { text: "Event registration form", icon: <Sparkles className="w-4 h-4" /> },
-    { text: "Job application form", icon: <Sparkles className="w-4 h-4" /> },
-  ];
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
+  // Handle URL parameters for pre-filled prompts
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    if (mounted && !initialPromptProcessed) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const promptParam = urlParams.get("prompt");
+      const sentParam = urlParams.get("sent");
 
-  useEffect(() => {
-    if (isStreaming && streamingRef.current) {
-      streamingRef.current.scrollTop = streamingRef.current.scrollHeight;
+      if (promptParam && sentParam === "true") {
+        const decodedPrompt = decodeURIComponent(promptParam);
+        setInput(decodedPrompt);
+        setShowSuggestions(false);
+        setInitialPromptProcessed(true);
+
+        // Auto-send the prompt after a short delay to ensure input is set
+        setTimeout(() => {
+          autoSendPrompt(decodedPrompt);
+        }, 500);
+      }
     }
-  }, [streamedContent, isStreaming]);
+  }, [mounted, initialPromptProcessed]);
 
-  useEffect(() => {
-    if (!user) {
-      setHasPremium(false);
-      return;
-    }
-    setChecking(true);
-    const checkPremium = async () => {
-      const supabase = createClient();
-      const { data, error } = await supabase
-        .from("users")
-        .select("has_premium")
-        .eq("email", user.email)
-        .single();
-      setHasPremium(data?.has_premium || false);
-      setChecking(false);
-    };
-    checkPremium();
-  }, [user]);
+  // Auto-send function for URL parameters
+  const autoSendPrompt = async (promptText: string) => {
+    if (!promptText.trim()) return;
 
-  const handleSend = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setInput("");
+    setInput(""); // Clear input immediately after sending
     setIsLoading(true);
     setIsStreaming(true);
     setStreamedContent("");
     setStreamError(null);
 
     // Add user message to chat
-    setMessages((prev) => [...prev, { role: "user", content: input }]);
+    setMessages((prev) => [...prev, { role: "user", content: promptText }]);
 
-    const currentMessages = [...messages, { role: "user", content: input }];
+    const currentMessages = [
+      ...messages,
+      { role: "user", content: promptText },
+    ];
 
     const res = await fetch("/api/ai-builder", {
       method: "POST",
@@ -583,7 +569,143 @@ export default function AIChatPage() {
         const newId = Date.now().toString();
         setForms((prev) => [
           ...prev,
-          { id: newId, schema: foundJson, prompt: input },
+          { id: newId, schema: foundJson, prompt: promptText },
+        ]);
+        setActiveFormId(newId);
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: fullText, schema: foundJson },
+        ]);
+      }
+      setStreamedContent(""); // Clear the streaming block
+    } else {
+      setStreamError(
+        "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!"
+      );
+    }
+  };
+
+  const suggestions = [
+    { text: "Create a contact form", icon: <Sparkles className="w-4 h-4" /> },
+    {
+      text: "Customer feedback survey",
+      icon: <Sparkles className="w-4 h-4" />,
+    },
+    { text: "Event registration form", icon: <Sparkles className="w-4 h-4" /> },
+    { text: "Job application form", icon: <Sparkles className="w-4 h-4" /> },
+  ];
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  useEffect(() => {
+    if (isStreaming && streamingRef.current) {
+      streamingRef.current.scrollTop = streamingRef.current.scrollHeight;
+    }
+  }, [streamedContent, isStreaming]);
+
+  useEffect(() => {
+    if (!user) {
+      setHasPremium(false);
+      return;
+    }
+    setChecking(true);
+    const checkPremium = async () => {
+      const supabase = createClient();
+      const { data, error } = await supabase
+        .from("users")
+        .select("has_premium")
+        .eq("email", user.email)
+        .single();
+      setHasPremium(data?.has_premium || false);
+      setChecking(false);
+    };
+    checkPremium();
+  }, [user]);
+
+  const handleSend = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+
+    const currentInput = input;
+    setInput("");
+    setIsLoading(true);
+    setIsStreaming(true);
+    setStreamedContent("");
+    setStreamError(null);
+
+    // Add user message to chat
+    setMessages((prev) => [...prev, { role: "user", content: currentInput }]);
+
+    const currentMessages = [
+      ...messages,
+      { role: "user", content: currentInput },
+    ];
+
+    const res = await fetch("/api/ai-builder", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        messages: currentMessages,
+      }),
+    });
+
+    if (!res.body) {
+      setStreamError("No response from server.");
+      setIsStreaming(false);
+      setIsLoading(false);
+      return;
+    }
+
+    const reader = res.body.getReader();
+    let fullText = "";
+    let foundJson = null;
+
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      const chunk = new TextDecoder().decode(value);
+      fullText += chunk;
+      setStreamedContent(fullText);
+
+      // Try to extract JSON as soon as possible
+      if (!foundJson) {
+        try {
+          const match = fullText.match(/\{[\s\S]*\}/);
+          if (match) foundJson = JSON.parse(match[0]);
+        } catch {}
+      }
+    }
+
+    setIsStreaming(false);
+    setIsLoading(false);
+
+    // Add AI message to chat
+    if (foundJson) {
+      // Check for duplicate schema (deep equality)
+      const existing = forms.find(
+        (f) => JSON.stringify(f.schema) === JSON.stringify(foundJson)
+      );
+      if (existing) {
+        setActiveFormId(existing.id);
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content: "This form already exists. Switched to the existing form.",
+            schema: foundJson,
+          },
+        ]);
+      } else {
+        const newId = Date.now().toString();
+        setForms((prev) => [
+          ...prev,
+          { id: newId, schema: foundJson, prompt: currentInput },
         ]);
         setActiveFormId(newId);
         setMessages((prev) => [

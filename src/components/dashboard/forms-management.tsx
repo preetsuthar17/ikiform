@@ -32,6 +32,12 @@ import {
   ModalClose,
   ModalTrigger,
 } from "@/components/ui/modal";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 
 export function FormsManagement() {
   const router = useRouter();
@@ -301,6 +307,74 @@ export function FormsManagement() {
           </div>
         )}
 
+        {/* AI Form Suggestions */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+            <Sparkles className="w-5 h-5 text-primary" /> Kiko AI
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {[
+              {
+                title: "Contact Form",
+                prompt:
+                  "Create a contact form with name, email, phone number, and message fields",
+              },
+              {
+                title: "Customer Feedback",
+                prompt:
+                  "Create a customer feedback form with rating stars, satisfaction level, and comments",
+              },
+              {
+                title: "Event Registration",
+                prompt:
+                  "Create an event registration form with participant name, email, phone, dietary preferences, and emergency contact",
+              },
+              {
+                title: "Job Application",
+                prompt:
+                  "Create a job application form with personal details, work experience, education, skills, and resume upload",
+              },
+              {
+                title: "Survey Form",
+                prompt:
+                  "Create a survey form with multiple choice questions, rating scales, and text responses",
+              },
+              {
+                title: "Order Form",
+                prompt:
+                  "Create an order form with product selection, quantity, customer details, and payment information",
+              },
+            ].map((suggestion, index) => (
+              <Card
+                key={index}
+                className="p-4 bg-card border-border rounded-card hover:shadow-md transition-shadow"
+              >
+                <div className="space-y-3 flex flex-col items-start text-left">
+                  <p className="font-medium text-muted-foreground">
+                    {suggestion.prompt}
+                  </p>
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    className="w-fit "
+                    onClick={() => {
+                      const encodedPrompt = encodeURIComponent(
+                        suggestion.prompt
+                      );
+                      router.push(
+                        `/ai-builder?prompt=${encodedPrompt}&sent=true`
+                      );
+                    }}
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    Create Form
+                  </Button>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+
         {/* Forms Grid */}
         {forms.length === 0 ? (
           <Card className="p-16 text-center rounded-card ">
@@ -402,53 +476,85 @@ export function FormsManagement() {
 
                 {/* Action Buttons */}
                 <div className="flex items-center gap-1">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => editForm(form.id)}
-                    title="Edit form"
-                  >
-                    <Edit className="w-4 h-4" />
-                  </Button>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          variant="secondary"
+                          size="icon"
+                          onClick={() => editForm(form.id)}
+                        >
+                          <Edit className="w-4 h-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent size={"sm"}>Edit form</TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
 
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => previewForm(form.id)}
-                    title="Preview form"
-                  >
-                    <Eye className="w-4 h-4" />
-                  </Button>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          variant="secondary"
+                          size="icon"
+                          onClick={() => previewForm(form.id)}
+                        >
+                          <Eye className="w-4 h-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent size={"sm"}>Preview form</TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
 
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => viewAnalytics(form.id)}
-                    title="View analytics"
-                  >
-                    <BarChart3 className="w-4 h-4" />
-                  </Button>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          variant="secondary"
+                          size="icon"
+                          onClick={() => viewAnalytics(form.id)}
+                        >
+                          <BarChart3 className="w-4 h-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent size={"sm"}>
+                        View analytics
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
 
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => shareForm(form)}
-                    title="Share form"
-                  >
-                    <Share className="w-4 h-4" />
-                  </Button>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          variant="secondary"
+                          size="icon"
+                          onClick={() => shareForm(form)}
+                        >
+                          <Share className="w-4 h-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent size={"sm"}>Share form</TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
 
                   <div className="flex-1"></div>
 
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => deleteForm(form.id, form.title)}
-                    title="Delete form"
-                    className="h-9 w-9 p-0 hover:bg-destructive/10 hover:text-destructive transition-colors"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          size="icon"
+                          variant="destructive"
+                          onClick={() => deleteForm(form.id, form.title)}
+                          className="h-9 w-9 p-0 hov"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent size={"sm"}>Delete form</TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </div>
               </Card>
             ))}
