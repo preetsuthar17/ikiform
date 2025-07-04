@@ -6,7 +6,7 @@ import { DEFAULT_RATE_LIMIT_SETTINGS } from "@/lib/form-defaults";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const { id: formId } = await params;
@@ -24,7 +24,7 @@ export async function POST(
     if (!form) {
       return NextResponse.json(
         { error: "Form not found or not published" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -48,12 +48,11 @@ export async function POST(
           {
             error: "Rate limit exceeded",
             message: rateLimitResult.message,
-            blocked: rateLimitResult.blocked,
             limit: rateLimitResult.limit,
             remaining: rateLimitResult.remaining,
             reset: rateLimitResult.reset,
           },
-          { status: 429 }
+          { status: 429 },
         );
       }
     }
@@ -62,7 +61,7 @@ export async function POST(
     const submission = await formsDbServer.submitForm(
       formId,
       submissionData,
-      ipAddress
+      ipAddress,
     );
 
     return NextResponse.json({
@@ -74,7 +73,7 @@ export async function POST(
     console.error("Form submission error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
