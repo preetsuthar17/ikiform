@@ -12,6 +12,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Check, ArrowRight, BarChart3, Layers, FileText } from "lucide-react";
 import type { FormSchema } from "@/lib/database.types";
+import { createDefaultFormSchema } from "@/lib/form-defaults";
 
 interface FormCreationWizardProps {
   isOpen: boolean;
@@ -84,41 +85,11 @@ export function FormCreationWizard({
   const handleContinue = () => {
     if (!selectedType) return;
 
-    const baseSchema: FormSchema = {
-      blocks: [],
-      fields: [],
-      settings: {
-        title: "Untitled Form",
-        description: "",
-        submitText: "Submit",
-        successMessage: "Thank you for your submission!",
-        redirectUrl: "",
-        multiStep: selectedType === "multi",
-        showProgress: selectedType === "multi",
-      },
-    };
-
-    if (selectedType === "single") {
-      // Single page form with one default block
-      baseSchema.blocks = [
-        {
-          id: "default",
-          title: "Form Fields",
-          description: "",
-          fields: [],
-        },
-      ];
-    } else {
-      // Multi-step form starts with first step
-      baseSchema.blocks = [
-        {
-          id: "step-1",
-          title: "Step 1",
-          description: "First step of your form",
-          fields: [],
-        },
-      ];
-    }
+    const baseSchema = createDefaultFormSchema({
+      title: "Untitled Form",
+      description: "",
+      multiStep: selectedType === "multi",
+    });
 
     onFormTypeSelect(baseSchema);
     onClose();

@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/client";
 import { createClient as createServerClient } from "@/utils/supabase/server";
 import type { Database, FormSchema } from "./database.types";
+import { ensureDefaultRateLimitSettings } from "./form-defaults";
 
 export type Form = Database["public"]["Tables"]["forms"]["Row"];
 export type FormSubmission =
@@ -12,12 +13,15 @@ export const formsDb = {
   async createForm(userId: string, title: string, schema: FormSchema) {
     const supabase = createClient();
 
+    // Ensure the schema has default rate limiting settings
+    const schemaWithDefaults = ensureDefaultRateLimitSettings(schema);
+
     const { data, error } = await supabase
       .from("forms")
       .insert({
         user_id: userId,
         title,
-        schema,
+        schema: schemaWithDefaults,
         is_published: false,
       })
       .select()
@@ -38,7 +42,12 @@ export const formsDb = {
       .order("updated_at", { ascending: false });
 
     if (error) throw error;
-    return data;
+
+    // Ensure all forms have default rate limiting settings for legacy forms
+    return data.map((form) => ({
+      ...form,
+      schema: ensureDefaultRateLimitSettings(form.schema),
+    }));
   },
 
   // Get a specific form
@@ -52,7 +61,12 @@ export const formsDb = {
       .single();
 
     if (error) throw error;
-    return data;
+
+    // Ensure the schema has default rate limiting settings for legacy forms
+    return {
+      ...data,
+      schema: ensureDefaultRateLimitSettings(data.schema),
+    };
   },
 
   // Update a form
@@ -104,7 +118,7 @@ export const formsDb = {
   async submitForm(
     formId: string,
     submissionData: Record<string, any>,
-    ipAddress?: string,
+    ipAddress?: string
   ) {
     const supabase = createClient();
 
@@ -151,7 +165,12 @@ export const formsDbServer = {
       .single();
 
     if (error) throw error;
-    return data;
+
+    // Ensure the schema has default rate limiting settings for legacy forms
+    return {
+      ...data,
+      schema: ensureDefaultRateLimitSettings(data.schema),
+    };
   },
 
   // Verify form ownership
@@ -167,5 +186,27 @@ export const formsDbServer = {
 
     if (error) return false;
     return !!data;
+  },
+
+  // Submit form data (server-side)
+  async submitForm(
+    formId: string,
+    submissionData: Record<string, any>,
+    ipAddress?: string
+  ) {
+    const supabase = await createServerClient();
+
+    const { data, error } = await supabase
+      .from("form_submissions")
+      .insert({
+        form_id: formId,
+        submission_data: submissionData,
+        ip_address: ipAddress,
+      })
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
   },
 };

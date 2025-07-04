@@ -18,7 +18,7 @@ const switchVariants = cva(
       },
       size: {
         sm: "h-4 w-7",
-        default: "h-5 w-10",
+        default: "h-6 w-11",
         lg: "h-7 w-13",
         xl: "h-8 w-15",
       },
@@ -27,7 +27,7 @@ const switchVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 const switchThumbVariants = cva(
@@ -41,7 +41,7 @@ const switchThumbVariants = cva(
       size: {
         sm: "h-3 w-3 data-[state=checked]:translate-x-3 data-[state=unchecked]:translate-x-0",
         default:
-          "h-4 w-4 data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0",
+          "h-5 w-5 data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0",
         lg: "h-6 w-6 data-[state=checked]:translate-x-6 data-[state=unchecked]:translate-x-0",
         xl: "h-7 w-7 data-[state=checked]:translate-x-7 data-[state=unchecked]:translate-x-0",
       },
@@ -50,7 +50,7 @@ const switchThumbVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 export interface SwitchProps
@@ -67,18 +67,8 @@ const Switch = React.forwardRef<
   SwitchProps
 >(
   (
-    {
-      className,
-      variant,
-      size,
-      label,
-      description,
-      error,
-      animated = true,
-      id,
-      ...props
-    },
-    ref,
+    { className, variant, size, label, description, error, id, ...props },
+    ref
   ) => {
     const switchId = id || React.useId();
 
@@ -91,21 +81,8 @@ const Switch = React.forwardRef<
       >
         <SwitchPrimitive.Thumb
           className={cn(switchThumbVariants({ variant, size }))}
-          asChild={animated}
         >
-          {animated ? (
-            <motion.div
-              layout
-              transition={{
-                type: "spring",
-                stiffness: 700,
-                damping: 30,
-              }}
-              className={cn(switchThumbVariants({ variant, size }))}
-            />
-          ) : (
-            <div className={cn(switchThumbVariants({ variant, size }))} />
-          )}
+          <div className={cn(switchThumbVariants({ variant, size }))} />
         </SwitchPrimitive.Thumb>
       </SwitchPrimitive.Root>
     );
@@ -135,7 +112,7 @@ const Switch = React.forwardRef<
     }
 
     return switchElement;
-  },
+  }
 );
 
 Switch.displayName = SwitchPrimitive.Root.displayName;

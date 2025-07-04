@@ -54,6 +54,10 @@ import { ShareFormModal } from "./share-form-modal";
 
 import { formsDb } from "@/lib/database";
 import type { FormField, FormSchema, FormBlock } from "@/lib/database.types";
+import {
+  createDefaultFormSchema,
+  ensureDefaultRateLimitSettings,
+} from "@/lib/form-defaults";
 import { Loader } from "../ui/loader";
 import Link from "next/link";
 
@@ -83,42 +87,19 @@ export function FormBuilder({ formId }: FormBuilderProps) {
   const [formSchema, setFormSchema] = useState<FormSchema>(() => {
     // For new forms, start with empty schema (wizard will populate it)
     if (!formId) {
-      return {
-        blocks: [],
-        fields: [],
-        settings: {
-          title: "Untitled Form",
-          description: "",
-          submitText: "Submit",
-          successMessage: "Thank you for your submission!",
-          redirectUrl: "",
-          multiStep: false,
-          showProgress: true,
-        },
-      };
+      return createDefaultFormSchema({
+        title: "Untitled Form",
+        description: "",
+        multiStep: false,
+      });
     }
 
     // For existing forms, start with default schema until loaded
-    return {
-      blocks: [
-        {
-          id: "default",
-          title: "Form Fields",
-          description: "",
-          fields: [],
-        },
-      ],
-      fields: [],
-      settings: {
-        title: "Untitled Form",
-        description: "",
-        submitText: "Submit",
-        successMessage: "Thank you for your submission!",
-        redirectUrl: "",
-        multiStep: false,
-        showProgress: true,
-      },
-    };
+    return createDefaultFormSchema({
+      title: "Untitled Form",
+      description: "",
+      multiStep: false,
+    });
   });
 
   const draftKey = formId ? `form-draft-${formId}` : "form-draft-new";
@@ -220,7 +201,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
       try {
         const schema = JSON.parse(imported);
         // Defensive: ensure all required fields exist and are correct type
-        setFormSchema({
+        const normalizedSchema = {
           blocks: Array.isArray(schema.blocks) ? schema.blocks : [],
           fields: Array.isArray(schema.fields) ? schema.fields : [],
           settings:
@@ -250,7 +231,10 @@ export function FormBuilder({ formId }: FormBuilderProps) {
                   multiStep: false,
                   showProgress: true,
                 },
-        });
+        };
+
+        // Ensure default rate limiting settings are applied
+        setFormSchema(ensureDefaultRateLimitSettings(normalizedSchema));
         setHasUnsavedChanges(true);
         importedFromAI.current = true;
       } catch {}
@@ -281,7 +265,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
       }; // Track as manually saved with deep copy
       console.log(
         "Loaded form, set manual save ref:",
-        JSON.stringify(lastManuallySavedSchemaRef.current).length,
+        JSON.stringify(lastManuallySavedSchemaRef.current).length
       );
       isFormLoaded.current = true; // Mark as loaded
 
@@ -338,8 +322,8 @@ export function FormBuilder({ formId }: FormBuilderProps) {
         fieldType === "slider"
           ? { min: 0, max: 100, step: 1, defaultValue: 50 }
           : fieldType === "tags"
-            ? { maxTags: 10, allowDuplicates: false }
-            : {},
+          ? { maxTags: 10, allowDuplicates: false }
+          : {},
     };
 
     setFormSchema((prev) => {
@@ -348,7 +332,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
       const updatedBlocks = prev.blocks.map((block) =>
         block.id === targetBlockId
           ? { ...block, fields: [...block.fields, newField] }
-          : block,
+          : block
       );
 
       return {
@@ -368,7 +352,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
       const updatedBlocks = prev.blocks.map((block) => ({
         ...block,
         fields: block.fields.map((field) =>
-          field.id === updatedField.id ? updatedField : field,
+          field.id === updatedField.id ? updatedField : field
         ),
       }));
 
@@ -377,7 +361,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
         blocks: updatedBlocks,
         // Also update in fields for backward compatibility
         fields: prev.fields.map((field) =>
-          field.id === updatedField.id ? updatedField : field,
+          field.id === updatedField.id ? updatedField : field
         ),
       };
     });
@@ -457,7 +441,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
   const updateBlock = (blockId: string, updates: Partial<FormBlock>) => {
     setFormSchema((prev) => {
       const updatedBlocks = prev.blocks.map((block) =>
-        block.id === blockId ? { ...block, ...updates } : block,
+        block.id === blockId ? { ...block, ...updates } : block
       );
 
       return {
@@ -520,7 +504,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
     setSaving(true);
     console.log(
       "Starting save, current schema:",
-      JSON.stringify(formSchema).length,
+      JSON.stringify(formSchema).length
     );
     try {
       if (formId) {
@@ -529,20 +513,20 @@ export function FormBuilder({ formId }: FormBuilderProps) {
         lastManuallySavedSchemaRef.current = { ...formSchema }; // Update manually saved schema reference with deep copy
         console.log(
           "Updated manual save ref after save:",
-          JSON.stringify(lastManuallySavedSchemaRef.current).length,
+          JSON.stringify(lastManuallySavedSchemaRef.current).length
         );
         toast.success("Form saved successfully!");
       } else {
         const newForm = await formsDb.createForm(
           user.id,
           formSchema.settings.title,
-          formSchema,
+          formSchema
         );
         lastSavedSchemaRef.current = formSchema; // Update saved schema reference
         lastManuallySavedSchemaRef.current = { ...formSchema }; // Update manually saved schema reference with deep copy
         console.log(
           "Updated manual save ref after create:",
-          JSON.stringify(lastManuallySavedSchemaRef.current).length,
+          JSON.stringify(lastManuallySavedSchemaRef.current).length
         );
         // Reset the form loaded flag since we're navigating to a new form
         isFormLoaded.current = false;
@@ -748,14 +732,14 @@ export function FormBuilder({ formId }: FormBuilderProps) {
                     // Convert single-step to multi-step
                     // Get fields from the default block if it exists, otherwise from schema.fields
                     const defaultBlock = formSchema.blocks.find(
-                      (b) => b.id === "default",
+                      (b) => b.id === "default"
                     );
                     const currentFields =
                       defaultBlock?.fields || formSchema.fields || [];
 
                     console.log(
                       "Switching to multi-step mode. Current fields:",
-                      currentFields,
+                      currentFields
                     );
 
                     const newSchema = {
@@ -789,12 +773,12 @@ export function FormBuilder({ formId }: FormBuilderProps) {
                   // Switching TO single-step mode
                   // Collect all fields from all blocks, preserving their current state
                   const allFields = formSchema.blocks.flatMap(
-                    (block) => block.fields || [],
+                    (block) => block.fields || []
                   );
 
                   console.log(
                     "Switching to single-step mode. Collected fields:",
-                    allFields,
+                    allFields
                   );
 
                   const newSchema = {

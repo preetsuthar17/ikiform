@@ -176,5 +176,12 @@ export interface FormSchema {
       showFieldNumbers?: boolean;
       animateTransitions?: boolean;
     };
+    rateLimit?: {
+      enabled?: boolean;
+      maxSubmissions?: number; // Maximum number of submissions
+      timeWindow?: number; // Time window in minutes
+      message?: string; // Custom rate limit message
+      blockDuration?: number; // How long to block after limit is reached (in minutes)
+    };
   };
 }

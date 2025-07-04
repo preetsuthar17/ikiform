@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
-import { formsDb } from "@/lib/database";
+import { RateLimitInfo } from "./rate-limit-info";
 import { toast } from "@/hooks/use-toast";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { FormField, FormSchema, FormBlock } from "@/lib/database.types";
@@ -26,15 +26,15 @@ export function MultiStepForm({ formId, schema }: MultiStepFormProps) {
   const blocks: FormBlock[] = schema.blocks?.length
     ? schema.blocks
     : schema.fields?.length
-      ? [
-          {
-            id: "default",
-            title: "Form",
-            description: "",
-            fields: schema.fields,
-          },
-        ]
-      : [];
+    ? [
+        {
+          id: "default",
+          title: "Form",
+          description: "",
+          fields: schema.fields,
+        },
+      ]
+    : [];
 
   const totalSteps = blocks.length;
   const currentBlock = blocks[currentStep];
@@ -178,7 +178,28 @@ export function MultiStepForm({ formId, schema }: MultiStepFormProps) {
       // Process form data for submission
       const submissionData = { ...formData };
 
-      await formsDb.submitForm(formId, submissionData);
+      // Use the API endpoint instead of direct database call
+      const response = await fetch(`/api/forms/${formId}/submit`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ submissionData }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        if (response.status === 429) {
+          // Rate limit exceeded
+          toast.error(
+            result.message || "Too many submissions. Please try again later."
+          );
+        } else {
+          throw new Error(result.error || "Failed to submit form");
+        }
+        return;
+      }
 
       setSubmitted(true);
       toast.success("Form submitted successfully!");
