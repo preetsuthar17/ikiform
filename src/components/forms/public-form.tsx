@@ -228,7 +228,7 @@ function SingleStepForm({ formId, schema }: PublicFormProps) {
         if (response.status === 429) {
           // Rate limit exceeded
           toast.error(
-            result.message || "Too many submissions. Please try again later."
+            result.message || "Too many submissions. Please try again later.",
           );
         } else {
           throw new Error(result.error || "Failed to submit form");

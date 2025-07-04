@@ -48,7 +48,7 @@ export function FormSettingsModal({
   };
 
   const updateRateLimit = (
-    rateLimitUpdates: Partial<NonNullable<typeof schema.settings.rateLimit>>
+    rateLimitUpdates: Partial<NonNullable<typeof schema.settings.rateLimit>>,
   ) => {
     const newSettings = {
       ...localSettings,
