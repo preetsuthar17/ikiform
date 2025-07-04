@@ -359,10 +359,10 @@ export function FormsManagement() {
                     className="w-fit "
                     onClick={() => {
                       const encodedPrompt = encodeURIComponent(
-                        suggestion.prompt
+                        suggestion.prompt,
                       );
                       router.push(
-                        `/ai-builder?prompt=${encodedPrompt}&sent=true`
+                        `/ai-builder?prompt=${encodedPrompt}&sent=true`,
                       );
                     }}
                   >

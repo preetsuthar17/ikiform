@@ -37,7 +37,7 @@ export function useAuth() {
           console.log("useAuth: User changed, updating state");
           return newUser;
         });
-      }
+      },
     );
     return () => {
       console.log("useAuth: Cleaning up auth listener");

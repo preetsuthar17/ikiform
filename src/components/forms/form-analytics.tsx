@@ -359,7 +359,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     const allFields = new Set<string>();
     submissions.forEach((submission) => {
       Object.keys(submission.submission_data).forEach((key) =>
-        allFields.add(key)
+        allFields.add(key),
       );
     });
 
@@ -397,7 +397,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     // Convert to CSV
     const csvContent = [headers, ...rows]
       .map((row) =>
-        row.map((field) => `"${String(field).replace(/"/g, '""')}"`).join(",")
+        row.map((field) => `"${String(field).replace(/"/g, '""')}"`).join(","),
       )
       .join("\n");
 
@@ -535,7 +535,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     "How many submissions did I get today?",
     "What questions do users skip most?",
     "What's the completion rate?",
-    "Show recent submissions",  
+    "Show recent submissions",
   ];
 
   // Calculate analytics
@@ -547,7 +547,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const last30Days = new Date();
   last30Days.setDate(last30Days.getDate() - 30);
   const recentSubmissions = submissions.filter(
-    (sub) => new Date(sub.submitted_at) >= last30Days
+    (sub) => new Date(sub.submitted_at) >= last30Days,
   );
 
   // Configure table columns
@@ -585,7 +585,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const fieldStats = submissions.reduce(
     (acc, sub) => {
       const filledFields = Object.values(sub.submission_data).filter(
-        (val) => val !== "" && val !== null && val !== undefined
+        (val) => val !== "" && val !== null && val !== undefined,
       ).length;
       acc.totalFilledFields += filledFields;
       acc.fieldCompletionRates[filledFields] =
@@ -595,32 +595,35 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     {
       totalFilledFields: 0,
       fieldCompletionRates: {} as Record<number, number>,
-    }
+    },
   );
 
   const completionRate =
     submissions.length > 0
       ? Math.round(
           (fieldStats.totalFilledFields / (submissions.length * totalFields)) *
-            100
+            100,
         )
       : 0;
 
   // Calculate submission trends
-  const submissionsByDay = submissions.reduce((acc, sub) => {
-    const date = new Date(sub.submitted_at).toLocaleDateString();
-    acc[date] = (acc[date] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const submissionsByDay = submissions.reduce(
+    (acc, sub) => {
+      const date = new Date(sub.submitted_at).toLocaleDateString();
+      acc[date] = (acc[date] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
 
   // Get most active day
   const mostActiveDay = Object.entries(submissionsByDay).sort(
-    ([, a], [, b]) => b - a
+    ([, a], [, b]) => b - a,
   )[0];
 
   const getSubmissionCompletionRate = (submission: FormSubmission) => {
     const filledFields = Object.values(submission.submission_data).filter(
-      (val) => val !== "" && val !== null && val !== undefined
+      (val) => val !== "" && val !== null && val !== undefined,
     ).length;
     return (filledFields / totalFields) * 100;
   };
@@ -742,7 +745,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                     </p>
                     <Separator />
                   </div>
-                )
+                ),
               )}
             </div>
           </ScrollArea>
@@ -1128,7 +1131,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                           <Select
                             value={filterState.timeRange}
                             onValueChange={(
-                              value: typeof filterState.timeRange
+                              value: typeof filterState.timeRange,
                             ) =>
                               setFilterState((prev) => ({
                                 ...prev,
@@ -1151,7 +1154,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                           <Select
                             value={filterState.completionRate}
                             onValueChange={(
-                              value: typeof filterState.completionRate
+                              value: typeof filterState.completionRate,
                             ) =>
                               setFilterState((prev) => ({
                                 ...prev,
@@ -1211,13 +1214,13 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                                           {Array.isArray(value)
                                             ? value.join(", ")
                                             : typeof value === "object" &&
-                                              value !== null
-                                            ? JSON.stringify(value)
-                                            : String(value) || "—"}
+                                                value !== null
+                                              ? JSON.stringify(value)
+                                              : String(value) || "—"}
                                         </p>
                                       </div>
                                     </div>
-                                  )
+                                  ),
                                 )}
                               </div>
                             </Card>
@@ -1296,7 +1299,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                             : String(value)}
                         </p>
                       </div>
-                    )
+                    ),
                   )}
                 </div>
               </ScrollArea>

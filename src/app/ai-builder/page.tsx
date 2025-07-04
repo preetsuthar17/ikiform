@@ -405,7 +405,7 @@ function PreviewPanel({
               onClick={() => {
                 localStorage.setItem(
                   "importedFormSchema",
-                  JSON.stringify(activeForm.schema)
+                  JSON.stringify(activeForm.schema),
                 );
                 router.push("/form-builder");
               }}
@@ -553,7 +553,7 @@ export default function AIChatPage() {
     if (foundJson) {
       // Check for duplicate schema (deep equality)
       const existing = forms.find(
-        (f) => JSON.stringify(f.schema) === JSON.stringify(foundJson)
+        (f) => JSON.stringify(f.schema) === JSON.stringify(foundJson),
       );
       if (existing) {
         setActiveFormId(existing.id);
@@ -580,7 +580,7 @@ export default function AIChatPage() {
       setStreamedContent(""); // Clear the streaming block
     } else {
       setStreamError(
-        "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!"
+        "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!",
       );
     }
   };
@@ -689,7 +689,7 @@ export default function AIChatPage() {
     if (foundJson) {
       // Check for duplicate schema (deep equality)
       const existing = forms.find(
-        (f) => JSON.stringify(f.schema) === JSON.stringify(foundJson)
+        (f) => JSON.stringify(f.schema) === JSON.stringify(foundJson),
       );
       if (existing) {
         setActiveFormId(existing.id);
@@ -716,7 +716,7 @@ export default function AIChatPage() {
       setStreamedContent(""); // Clear the streaming block
     } else {
       setStreamError(
-        "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!"
+        "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!",
       );
     }
   };
@@ -947,7 +947,7 @@ function CopyButtonWithState({ schema }: { schema: any }) {
             size={"icon"}
             onClick={async () => {
               await navigator.clipboard.writeText(
-                JSON.stringify(schema, null, 2)
+                JSON.stringify(schema, null, 2),
               );
               setCopied(true);
               setTimeout(() => setCopied(false), 1500);
