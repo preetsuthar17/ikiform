@@ -1,116 +1,52 @@
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 
+interface RateLimitSettings {
+  enabled: boolean;
+  maxSubmissions: number;
+  window: string; // e.g., "10 m"
+}
+
 const redis = Redis.fromEnv();
 
-// Default rate limiter (5 submissions per 10 minutes)
-const defaultRatelimit = new Ratelimit({
-  redis,
-  limiter: Ratelimit.fixedWindow(5, "10 m"),
-  analytics: true,
-  prefix: "@upstash/ratelimit",
-});
+// Default rate limit settings
+const defaultSettings: RateLimitSettings = {
+  enabled: true,
+  maxSubmissions: 5,
+  window: "10 m",
+};
 
-// Cache for custom rate limiters
-const customRatelimitCache = new Map<string, Ratelimit>();
+// Cache for rate limiters
+const rateLimiters = new Map<string, Ratelimit>();
 
-export async function checkRateLimit(identifier: string) {
-  const result = await defaultRatelimit.limit(identifier);
-  await result.pending;
-  return result;
-}
+// Create or get a rate limiter based on settings
+function getRateLimiter(
+  settings: RateLimitSettings,
+  prefix: string = "@upstash/ratelimit"
+): Ratelimit {
+  const key = `${settings.maxSubmissions}-${settings.window}-${prefix}`;
 
-export async function checkCustomRateLimit(
-  identifier: string,
-  maxSubmissions: number,
-  timeWindowMinutes: number,
-  formId?: string
-) {
-  // Create a cache key for this rate limit configuration
-  const cacheKey = `${maxSubmissions}-${timeWindowMinutes}`;
-
-  // Check if we have a cached rate limiter for this configuration
-  let ratelimit = customRatelimitCache.get(cacheKey);
-
-  if (!ratelimit) {
-    // Create new rate limiter with custom settings
-    ratelimit = new Ratelimit({
+  if (!rateLimiters.has(key)) {
+    const limiter = new Ratelimit({
       redis,
-      limiter: Ratelimit.fixedWindow(maxSubmissions, `${timeWindowMinutes} m`),
+      limiter: Ratelimit.fixedWindow(
+        settings.maxSubmissions,
+        settings.window as any
+      ),
       analytics: true,
-      prefix: formId ? `@form/${formId}/ratelimit` : "@upstash/ratelimit",
+      prefix,
     });
-
-    // Cache the rate limiter (limit cache size to prevent memory issues)
-    if (customRatelimitCache.size < 100) {
-      customRatelimitCache.set(cacheKey, ratelimit);
-    }
+    rateLimiters.set(key, limiter);
   }
 
-  const result = await ratelimit.limit(identifier);
-  await result.pending;
-  return result;
+  return rateLimiters.get(key)!;
 }
 
-export async function blockIdentifier(
+export async function checkRateLimit(
   identifier: string,
-  blockDurationMinutes: number,
-  formId?: string
+  settings: RateLimitSettings = defaultSettings
 ) {
-  const blockKey = formId
-    ? `@form/${formId}/blocked:${identifier}`
-    : `@blocked:${identifier}`;
-  const blockUntil = Date.now() + blockDurationMinutes * 60 * 1000;
-
-  await redis.set(blockKey, blockUntil, {
-    px: blockDurationMinutes * 60 * 1000, // Expire after block duration
-  });
-}
-
-export async function isIdentifierBlocked(
-  identifier: string,
-  formId?: string
-): Promise<boolean> {
-  const blockKey = formId
-    ? `@form/${formId}/blocked:${identifier}`
-    : `@blocked:${identifier}`;
-  const blockUntil = await redis.get(blockKey);
-
-  if (!blockUntil) {
-    return false;
-  }
-
-  const now = Date.now();
-  const blockTime =
-    typeof blockUntil === "number"
-      ? blockUntil
-      : parseInt(blockUntil as string);
-
-  return now < blockTime;
-}
-
-export interface RateLimitResult {
-  success: boolean;
-  limit: number;
-  remaining: number;
-  reset: number;
-  blocked?: boolean;
-  message?: string;
-}
-
-export async function checkFormRateLimit(
-  identifier: string,
-  formId: string,
-  rateLimit: {
-    enabled: boolean;
-    maxSubmissions: number;
-    timeWindow: number;
-    blockDuration: number;
-    message: string;
-  }
-): Promise<RateLimitResult> {
-  // If rate limiting is disabled, allow the request
-  if (!rateLimit.enabled) {
+  if (!settings.enabled) {
     return {
       success: true,
       limit: 0,
@@ -119,45 +55,30 @@ export async function checkFormRateLimit(
     };
   }
 
-  // Check if identifier is currently blocked
-  const isBlocked = await isIdentifierBlocked(identifier, formId);
-  if (isBlocked) {
+  const limiter = getRateLimiter(settings);
+  const result = await limiter.limit(identifier);
+  await result.pending;
+  return result;
+}
+
+export async function checkCustomRateLimit(
+  identifier: string,
+  settings: RateLimitSettings,
+  prefix: string = "@upstash/ratelimit"
+) {
+  if (!settings.enabled) {
     return {
-      success: false,
-      limit: rateLimit.maxSubmissions,
+      success: true,
+      limit: 0,
       remaining: 0,
       reset: 0,
-      blocked: true,
-      message: rateLimit.message,
     };
   }
 
-  // Check rate limit
-  const result = await checkCustomRateLimit(
-    identifier,
-    rateLimit.maxSubmissions,
-    rateLimit.timeWindow,
-    formId
-  );
-
-  // If rate limit exceeded, block the identifier
-  if (!result.success) {
-    await blockIdentifier(identifier, rateLimit.blockDuration, formId);
-
-    return {
-      success: false,
-      limit: result.limit,
-      remaining: result.remaining,
-      reset: result.reset,
-      blocked: true,
-      message: rateLimit.message,
-    };
-  }
-
-  return {
-    success: true,
-    limit: result.limit,
-    remaining: result.remaining,
-    reset: result.reset,
-  };
+  const limiter = getRateLimiter(settings, prefix);
+  const result = await limiter.limit(identifier);
+  await result.pending;
+  return result;
 }
+
+export type { RateLimitSettings };

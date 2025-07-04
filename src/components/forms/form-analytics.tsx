@@ -153,9 +153,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
         {chatStreaming && (
           <div className="flex gap-2 justify-start">
             <div className="max-w-[85%] p-3 rounded-lg bg-muted text-sm">
-              <div className="flex items-center gap-2 mb-1">
-                <Bot className="w-3 h-3" />
-                <span className="text-xs opacity-70">Typing...</span>
+              <div className="flex items-center gap-2">
+                {streamedContent.length === 0  && <Loader />}
               </div>
               <p className="whitespace-pre-wrap leading-relaxed">
                 {streamedContent}
@@ -171,6 +170,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
               <div className="flex items-center gap-2">
                 <Bot className="w-3 h-3" />
                 <Loader />
+                <span className="text-xs text-muted-foreground">
+                  {chatMessages.length > 0
+                    ? "Analyzing conversation context..."
+                    : "Processing your query..."}
+                </span>
               </div>
             </div>
           </div>
@@ -183,12 +187,31 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     {/* Chat Suggestions */}
     {chatMessages.length === 0 && (
       <div className="px-4 py-3 border-t border-border">
+        <div className="text-xs text-muted-foreground mb-2">Try asking:</div>
         <div className="flex flex-wrap gap-1">
           {chatSuggestions.map((suggestion, index) => (
             <button
               key={index}
               onClick={() => setChatInput(suggestion)}
               className="px-2 py-1 text-xs bg-muted hover:bg-accent transition-colors rounded-md grow"
+            >
+              {suggestion}
+            </button>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {/* Follow-up Suggestions for ongoing conversations */}
+    {chatMessages.length > 0 && chatMessages.length < 6 && (
+      <div className="px-4 py-2 border-t border-border">
+        <div className="text-xs text-muted-foreground mb-2">Follow up:</div>
+        <div className="flex flex-wrap gap-1">
+          {chatSuggestions.slice(0, 3).map((suggestion, index) => (
+            <button
+              key={index}
+              onClick={() => setChatInput(suggestion)}
+              className="px-2 py-1 text-xs bg-muted hover:bg-accent transition-colors rounded-md"
             >
               {suggestion}
             </button>
@@ -486,6 +509,18 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
           recentSubmissions: recentSubmissions.length,
           mostActiveDay: mostActiveDay?.[0] || null,
           lastSubmission: lastSubmission?.submitted_at || null,
+          avgSubmissionsPerDay,
+          bounceRate,
+          peakHour: peakHour ? `${peakHour[0]}:00` : null,
+          uniqueResponses: Object.values(fieldAnalytics).reduce(
+            (total, field) => total + field.uniqueValues,
+            0
+          ),
+          fieldAnalytics,
+          topFields,
+          worstFields,
+          submissionTrends,
+          conversionFunnel,
         },
       };
 
@@ -547,13 +582,6 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
       setChatStreaming(false);
     }
   };
-
-  const chatSuggestions = [
-    "How many submissions did I get today?",
-    "What questions do users skip most?",
-    "What's the completion rate?",
-    "Show recent submissions",
-  ];
 
   // Calculate analytics
   const totalSubmissions = submissions.length;
@@ -812,6 +840,84 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const worstFields = Object.entries(fieldAnalytics)
     .sort(([, a], [, b]) => a.completionRate - b.completionRate)
     .slice(0, 3);
+
+  // Dynamic chat suggestions based on conversation and data
+  const generateChatSuggestions = () => {
+    const hasSubmissions = submissions.length > 0;
+    const hasRecentSubmissions = recentSubmissions.length > 0;
+    const hasMultipleFields = totalFields > 1;
+    const isMultiStep = form.schema.settings?.multiStep;
+    const conversationLength = chatMessages.length;
+
+    // Base suggestions for new conversations
+    const baseSuggestions = [
+      "What are these submissions about?",
+      "Show me the most common responses",
+      "How many submissions did I get today?",
+      "Which fields do users skip most?",
+      "What's my form's completion rate?",
+    ];
+
+    // Context-aware suggestions based on data
+    const contextSuggestions = [];
+
+    if (hasSubmissions) {
+      if (hasRecentSubmissions) {
+        contextSuggestions.push("How is my form performing this week?");
+        contextSuggestions.push("What's the trend in submissions?");
+      }
+
+      if (hasMultipleFields) {
+        contextSuggestions.push("Which field has the best completion rate?");
+        contextSuggestions.push(
+          "What insights do you have about field performance?"
+        );
+      }
+
+      if (isMultiStep) {
+        contextSuggestions.push("Show me the conversion funnel");
+        contextSuggestions.push("Where do users drop off most?");
+      }
+
+      if (totalSubmissions > 50) {
+        contextSuggestions.push("What patterns do you see in the data?");
+        contextSuggestions.push("Give me optimization recommendations");
+      }
+    }
+
+    // Follow-up suggestions for ongoing conversations
+    const followUpSuggestions = [
+      "What about that field?",
+      "Tell me more about those numbers",
+      "How can I improve that?",
+      "What else should I know?",
+      "Can you expand on that insight?",
+      "What's the next step?",
+      "Show me more details",
+      "Compare that to last month",
+      "What's causing that trend?",
+      "Give me actionable recommendations",
+    ];
+
+    // Choose suggestions based on conversation state
+    if (conversationLength === 0) {
+      // New conversation - show context-aware or base suggestions
+      const suggestions =
+        contextSuggestions.length > 0 ? contextSuggestions : baseSuggestions;
+      return suggestions.slice(0, 5);
+    } else if (conversationLength < 4) {
+      // Early conversation - mix of context and follow-up
+      return [
+        ...contextSuggestions.slice(0, 3),
+        ...followUpSuggestions.slice(0, 2),
+      ];
+    } else {
+      // Ongoing conversation - focus on follow-up questions
+      return followUpSuggestions.slice(0, 5);
+    }
+  };
+
+  const chatSuggestions = generateChatSuggestions();
 
   const getSubmissionCompletionRate = (submission: FormSubmission) => {
     if (totalFields === 0) return 0;
@@ -1600,7 +1706,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
       {/* Desktop: Chat Modal */}
       {!isMobile && (
         <Modal open={chatOpen} onOpenChange={setChatOpen}>
-          <ModalContent className="max-w-md h-[600px] flex flex-col">
+          <ModalContent className="max-w-3xl h-[800px] flex flex-col">
             <ModalHeader className="px-4 py-3 flex items-center justify-between">
               <div
                 className="sr-only flex items-center gap-2"
@@ -1635,7 +1741,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
       {/* Mobile: Chat Drawer */}
       {isMobile && (
         <Drawer open={chatOpen} onOpenChange={setChatOpen}>
-          <DrawerContent className="h-[80vh]">
+          <DrawerContent className="h-[85vh]">
             <DrawerHeader className="border-b border-border flex items-center justify-between">
               <div className="sr-only flex items-center gap-2">
                 <Bot className="w-4 h-4 text-primary" />
