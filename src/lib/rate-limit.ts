@@ -81,4 +81,46 @@ export async function checkCustomRateLimit(
   return result;
 }
 
-export type { RateLimitSettings };
+// Interface for form-specific rate limiting (matches form schema)
+interface FormRateLimitSettings {
+  enabled: boolean;
+  maxSubmissions: number;
+  timeWindow: number; // minutes
+  blockDuration: number; // minutes
+  message: string;
+}
+
+export async function checkFormRateLimit(
+  ipAddress: string,
+  formId: string,
+  settings: FormRateLimitSettings
+) {
+  if (!settings.enabled) {
+    return {
+      success: true,
+      limit: 0,
+      remaining: 0,
+      reset: 0,
+      message: "",
+    };
+  }
+
+  // Convert form settings to our internal rate limit format
+  const rateLimitSettings: RateLimitSettings = {
+    enabled: settings.enabled,
+    maxSubmissions: settings.maxSubmissions,
+    window: `${settings.timeWindow} m`, // Convert minutes to string format
+  };
+
+  const prefix = `form-${formId}`;
+  const limiter = getRateLimiter(rateLimitSettings, prefix);
+  const result = await limiter.limit(ipAddress);
+  await result.pending;
+
+  return {
+    ...result,
+    message: result.success ? "" : settings.message,
+  };
+}
+
+export type { RateLimitSettings, FormRateLimitSettings };
