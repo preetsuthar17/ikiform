@@ -131,11 +131,6 @@ export default function ProfileCard() {
             {hasPremium && <Crown className="w-5 h-5 text-yellow-500" />}
           </div>
           <div className="text-muted-foreground text-sm">{user.email}</div>
-          {hasPremium && (
-            <div className="text-xs text-green-600 font-medium">
-              Premium Member
-            </div>
-          )}
         </div>
 
         {/* Customer Portal Button */}

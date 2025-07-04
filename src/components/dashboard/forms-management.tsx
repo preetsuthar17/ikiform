@@ -347,7 +347,7 @@ export function FormsManagement() {
             ].map((suggestion, index) => (
               <Card
                 key={index}
-                className="p-4 bg-card border-border rounded-card hover:shadow-md transition-shadow"
+                className="p-4 bg-card border-border rounded-card "
               >
                 <div className="space-y-3 flex flex-col items-start text-left">
                   <p className="font-medium text-muted-foreground">
@@ -359,10 +359,10 @@ export function FormsManagement() {
                     className="w-fit "
                     onClick={() => {
                       const encodedPrompt = encodeURIComponent(
-                        suggestion.prompt,
+                        suggestion.prompt
                       );
                       router.push(
-                        `/ai-builder?prompt=${encodedPrompt}&sent=true`,
+                        `/ai-builder?prompt=${encodedPrompt}&sent=true`
                       );
                     }}
                   >

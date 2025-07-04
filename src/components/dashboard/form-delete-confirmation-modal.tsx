@@ -54,7 +54,9 @@ export function ConfirmationModal({
           </ModalTitle>
         </ModalHeader>
         <div>
-          <p className="text-muted-foreground leading-relaxed">{description}</p>
+          <p className="text-muted-foreground leading-relaxed text-sm">
+            {description}
+          </p>
         </div>
         <div className="flex justify-end gap-3">
           <Button variant="outline" onClick={handleCancel}>
