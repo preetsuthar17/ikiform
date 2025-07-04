@@ -36,6 +36,13 @@ import {
   Sparkles,
   ChevronDown,
   ChevronUp,
+  MapPin,
+  Activity,
+  Target,
+  Zap,
+  PieChart,
+  AlertCircle,
+  CheckCircle,
 } from "lucide-react";
 import { formsDb } from "@/lib/database";
 import { toast } from "@/hooks/use-toast";
@@ -635,6 +642,177 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     ([, a], [, b]) => b - a
   )[0];
 
+  // Calculate additional analytics
+  const avgSubmissionsPerDay =
+    submissions.length > 0
+      ? Math.round(
+          (submissions.length /
+            Math.max(1, Object.keys(submissionsByDay).length)) *
+            10
+        ) / 10
+      : 0;
+
+  // Calculate field-specific analytics
+  const fieldAnalytics = React.useMemo(() => {
+    const analytics: Record<
+      string,
+      {
+        label: string;
+        totalResponses: number;
+        completionRate: number;
+        uniqueValues: number;
+        mostCommonValue: string | null;
+        averageLength?: number;
+      }
+    > = {};
+
+    // Get all possible fields
+    const allPossibleFields: any[] = [];
+    if (form.schema.fields) {
+      allPossibleFields.push(...form.schema.fields);
+    }
+    if (form.schema.blocks) {
+      form.schema.blocks.forEach((block) => {
+        if (block.fields) {
+          allPossibleFields.push(...block.fields);
+        }
+      });
+    }
+
+    allPossibleFields.forEach((field) => {
+      const responses = submissions
+        .map((sub) => sub.submission_data[field.id])
+        .filter((val) => val !== "" && val !== null && val !== undefined);
+
+      const valueFrequency: Record<string, number> = {};
+      let totalLength = 0;
+
+      responses.forEach((response) => {
+        const stringValue = Array.isArray(response)
+          ? response.join(", ")
+          : String(response);
+
+        valueFrequency[stringValue] = (valueFrequency[stringValue] || 0) + 1;
+        totalLength += stringValue.length;
+      });
+
+      const mostCommon = Object.entries(valueFrequency).sort(
+        ([, a], [, b]) => b - a
+      )[0];
+
+      analytics[field.id] = {
+        label: field.label,
+        totalResponses: responses.length,
+        completionRate:
+          submissions.length > 0
+            ? Math.round((responses.length / submissions.length) * 100)
+            : 0,
+        uniqueValues: Object.keys(valueFrequency).length,
+        mostCommonValue: mostCommon ? mostCommon[0] : null,
+        averageLength:
+          responses.length > 0 ? Math.round(totalLength / responses.length) : 0,
+      };
+    });
+
+    return analytics;
+  }, [submissions, form.schema]);
+
+  // Calculate submission trends (last 7 days)
+  const submissionTrends = React.useMemo(() => {
+    const trends: Record<string, number> = {};
+    const last7Days = new Date();
+    last7Days.setDate(last7Days.getDate() - 7);
+
+    for (let i = 6; i >= 0; i--) {
+      const date = new Date();
+      date.setDate(date.getDate() - i);
+      const dateKey = date.toLocaleDateString();
+      trends[dateKey] = 0;
+    }
+
+    submissions.forEach((sub) => {
+      const subDate = new Date(sub.submitted_at);
+      if (subDate >= last7Days) {
+        const dateKey = subDate.toLocaleDateString();
+        if (trends[dateKey] !== undefined) {
+          trends[dateKey]++;
+        }
+      }
+    });
+
+    return trends;
+  }, [submissions]);
+
+  // Calculate peak hours
+  const hourlySubmissions = React.useMemo(() => {
+    const hours: Record<number, number> = {};
+
+    for (let i = 0; i < 24; i++) {
+      hours[i] = 0;
+    }
+
+    submissions.forEach((sub) => {
+      const hour = new Date(sub.submitted_at).getHours();
+      hours[hour]++;
+    });
+
+    return hours;
+  }, [submissions]);
+
+  const peakHour = Object.entries(hourlySubmissions).sort(
+    ([, a], [, b]) => b - a
+  )[0];
+
+  // Calculate bounce rate (submissions with only 1 field filled)
+  const bounceRate = React.useMemo(() => {
+    if (submissions.length === 0) return 0;
+
+    const bouncedSubmissions = submissions.filter((sub) => {
+      const filledFields = Object.values(sub.submission_data).filter(
+        (val) => val !== "" && val !== null && val !== undefined
+      ).length;
+      return filledFields <= 1;
+    });
+
+    return Math.round((bouncedSubmissions.length / submissions.length) * 100);
+  }, [submissions]);
+
+  // Calculate conversion funnel for multi-step forms
+  const conversionFunnel = React.useMemo(() => {
+    if (!form.schema.settings?.multiStep || !form.schema.blocks) return null;
+
+    const funnel = form.schema.blocks.map((block) => {
+      const blockFieldIds = block.fields?.map((f) => f.id) || [];
+      const completedCount = submissions.filter((sub) => {
+        return blockFieldIds.some((fieldId) => {
+          const value = sub.submission_data[fieldId];
+          return value !== "" && value !== null && value !== undefined;
+        });
+      }).length;
+
+      return {
+        stepName: block.title,
+        completedCount,
+        conversionRate:
+          submissions.length > 0
+            ? Math.round((completedCount / submissions.length) * 100)
+            : 0,
+      };
+    });
+
+    return funnel;
+  }, [submissions, form.schema]);
+
+  // Get top field completion rates
+  const topFields = Object.entries(fieldAnalytics)
+    .sort(([, a], [, b]) => b.completionRate - a.completionRate)
+    .slice(0, 5);
+
+  // Get worst performing fields
+  const worstFields = Object.entries(fieldAnalytics)
+    .sort(([, a], [, b]) => a.completionRate - b.completionRate)
+    .slice(0, 3);
+
   const getSubmissionCompletionRate = (submission: FormSubmission) => {
     if (totalFields === 0) return 0;
 
@@ -887,8 +1065,8 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card className="p-6 bg-card border-border">
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-primary/10 rounded-card">
-                <Users className="w-6 h-6 text-primary" />
+              <div className="p-3 bg-blue-500/10 rounded-card">
+                <Users className="w-6 h-6 text-blue-600" />
               </div>
               <div className="space-y-1">
                 <p className="text-sm font-medium text-muted-foreground">
@@ -903,8 +1081,8 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 
           <Card className="p-6 bg-card border-border">
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-accent rounded-card">
-                <FileText className="w-6 h-6 text-accent-foreground" />
+              <div className="p-3 bg-emerald-500/10 rounded-card">
+                <FileText className="w-6 h-6 text-emerald-600" />
               </div>
               <div className="space-y-1">
                 <p className="text-sm font-medium text-muted-foreground">
@@ -919,8 +1097,8 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 
           <Card className="p-6 bg-card border-border">
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-secondary rounded-card">
-                <TrendingUp className="w-6 h-6 text-secondary-foreground" />
+              <div className="p-3 bg-purple-500/10 rounded-card">
+                <TrendingUp className="w-6 h-6 text-purple-600" />
               </div>
               <div className="space-y-1">
                 <p className="text-sm font-medium text-muted-foreground">
@@ -935,8 +1113,8 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 
           <Card className="p-6 bg-card border-border">
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-muted rounded-card">
-                <Clock className="w-6 h-6 text-muted-foreground" />
+              <div className="p-3 bg-orange-500/10 rounded-card">
+                <Clock className="w-6 h-6 text-orange-600" />
               </div>
               <div className="space-y-1">
                 <p className="text-sm font-medium text-muted-foreground">
@@ -944,6 +1122,76 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                 </p>
                 <p className="text-2xl font-bold text-foreground">
                   {recentSubmissions.length}
+                </p>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        {/* Enhanced Analytics Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Card className="p-6 bg-card border-border">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-green-500/10 rounded-card">
+                <Activity className="w-6 h-6 text-green-600" />
+              </div>
+              <div className="space-y-1">
+                <p className="text-sm font-medium text-muted-foreground">
+                  Avg. Daily Submissions
+                </p>
+                <p className="text-2xl font-bold text-foreground">
+                  {avgSubmissionsPerDay}
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-6 bg-card border-border">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-orange-500/10 rounded-card">
+                <Target className="w-6 h-6 text-orange-600" />
+              </div>
+              <div className="space-y-1">
+                <p className="text-sm font-medium text-muted-foreground">
+                  Bounce Rate
+                </p>
+                <p className="text-2xl font-bold text-foreground">
+                  {bounceRate}%
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-6 bg-card border-border">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-blue-500/10 rounded-card">
+                <Zap className="w-6 h-6 text-blue-600" />
+              </div>
+              <div className="space-y-1">
+                <p className="text-sm font-medium text-muted-foreground">
+                  Peak Hour
+                </p>
+                <p className="text-2xl font-bold text-foreground">
+                  {peakHour ? `${peakHour[0]}:00` : "N/A"}
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-6 bg-card border-border">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-purple-500/10 rounded-card">
+                <PieChart className="w-6 h-6 text-purple-600" />
+              </div>
+              <div className="space-y-1">
+                <p className="text-sm font-medium text-muted-foreground">
+                  Unique Responses
+                </p>
+                <p className="text-2xl font-bold text-foreground">
+                  {Object.values(fieldAnalytics).reduce(
+                    (total, field) => total + field.uniqueValues,
+                    0
+                  )}
                 </p>
               </div>
             </div>
