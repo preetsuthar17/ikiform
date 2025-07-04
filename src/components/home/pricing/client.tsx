@@ -107,6 +107,7 @@ export default function PricingClient({ products }: PricingClientProps) {
   return (
     <section
       ref={sectionRef}
+      id="pricing"
       className="flex flex-col items-center justify-center gap-16 py-28 px-8 text-center w-full"
     >
       <div className="max-w-7xl mx-auto w-full">

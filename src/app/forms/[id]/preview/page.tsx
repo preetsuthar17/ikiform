@@ -89,7 +89,7 @@ export default function PreviewFormPage({ params }: PreviewFormPageProps) {
           You need a premium subscription to preview forms. Upgrade to unlock
           all features.
         </div>
-        <Link href="/pricing">
+        <Link href="/#pricing">
           <Button size="lg">View Pricing</Button>
         </Link>
       </div>
