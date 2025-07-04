@@ -15,6 +15,8 @@ import {
   Code,
   Layers,
   FileText,
+  Sparkles,
+  Upload,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -49,6 +51,7 @@ import { FormCreationWizard } from "./form-creation-wizard";
 import { BlockManager } from "./block-manager";
 import { FormSettingsModal } from "./form-settings-modal";
 import { ShareFormModal } from "./share-form-modal";
+import { AIImportModal } from "./ai-import-modal";
 
 import { formsDb } from "@/lib/database";
 import type { FormField, FormSchema, FormBlock } from "@/lib/database.types";
@@ -76,6 +79,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
   const [showJsonView, setShowJsonView] = useState(false);
   const [showCreationWizard, setShowCreationWizard] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [showAIImportModal, setShowAIImportModal] = useState(false);
 
   const [isNewForm, setIsNewForm] = useState(!formId);
   const [formSchema, setFormSchema] = useState<FormSchema>(() => {
@@ -125,6 +129,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
   const autoSaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const lastSavedSchemaRef = useRef<FormSchema | null>(null);
   const lastManuallySavedSchemaRef = useRef<FormSchema | null>(null);
+  const importedFromAI = useRef(false);
 
   // Restore draft on mount (only once)
   useEffect(() => {
@@ -174,9 +179,9 @@ export function FormBuilder({ formId }: FormBuilderProps) {
     };
   }, []);
 
-  // Show creation wizard for new forms
+  // Show creation wizard for new forms (but NOT for AI-imported forms)
   useEffect(() => {
-    if (isNewForm && !authLoading && user) {
+    if (isNewForm && !authLoading && user && !importedFromAI.current) {
       setShowCreationWizard(true);
     }
   }, [isNewForm, authLoading, user]);
@@ -211,6 +216,50 @@ export function FormBuilder({ formId }: FormBuilderProps) {
     }
   }, [formSchema]);
 
+  useEffect(() => {
+    const imported = localStorage.getItem("importedFormSchema");
+    if (imported) {
+      try {
+        const schema = JSON.parse(imported);
+        // Defensive: ensure all required fields exist and are correct type
+        setFormSchema({
+          blocks: Array.isArray(schema.blocks) ? schema.blocks : [],
+          fields: Array.isArray(schema.fields) ? schema.fields : [],
+          settings:
+            typeof schema.settings === "object" && schema.settings
+              ? {
+                  title: schema.settings.title || "Untitled Form",
+                  description: schema.settings.description || "",
+                  submitText: schema.settings.submitText || "Submit",
+                  successMessage:
+                    schema.settings.successMessage ||
+                    "Thank you for your submission!",
+                  redirectUrl: schema.settings.redirectUrl || "",
+                  multiStep: !!schema.settings.multiStep,
+                  showProgress:
+                    "showProgress" in schema.settings
+                      ? !!schema.settings.showProgress
+                      : true,
+                  // ...spread any other settings if needed
+                  ...schema.settings,
+                }
+              : {
+                  title: "Untitled Form",
+                  description: "",
+                  submitText: "Submit",
+                  successMessage: "Thank you for your submission!",
+                  redirectUrl: "",
+                  multiStep: false,
+                  showProgress: true,
+                },
+        });
+        setHasUnsavedChanges(true);
+        importedFromAI.current = true;
+      } catch {}
+      localStorage.removeItem("importedFormSchema");
+    }
+  }, []);
+
   const loadForm = async () => {
     if (!formId || !user || isFormLoaded.current) return;
 
@@ -234,7 +283,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
       }; // Track as manually saved with deep copy
       console.log(
         "Loaded form, set manual save ref:",
-        JSON.stringify(lastManuallySavedSchemaRef.current).length,
+        JSON.stringify(lastManuallySavedSchemaRef.current).length
       );
       isFormLoaded.current = true; // Mark as loaded
 
@@ -291,8 +340,8 @@ export function FormBuilder({ formId }: FormBuilderProps) {
         fieldType === "slider"
           ? { min: 0, max: 100, step: 1, defaultValue: 50 }
           : fieldType === "tags"
-            ? { maxTags: 10, allowDuplicates: false }
-            : {},
+          ? { maxTags: 10, allowDuplicates: false }
+          : {},
     };
 
     setFormSchema((prev) => {
@@ -301,7 +350,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
       const updatedBlocks = prev.blocks.map((block) =>
         block.id === targetBlockId
           ? { ...block, fields: [...block.fields, newField] }
-          : block,
+          : block
       );
 
       return {
@@ -321,7 +370,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
       const updatedBlocks = prev.blocks.map((block) => ({
         ...block,
         fields: block.fields.map((field) =>
-          field.id === updatedField.id ? updatedField : field,
+          field.id === updatedField.id ? updatedField : field
         ),
       }));
 
@@ -330,7 +379,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
         blocks: updatedBlocks,
         // Also update in fields for backward compatibility
         fields: prev.fields.map((field) =>
-          field.id === updatedField.id ? updatedField : field,
+          field.id === updatedField.id ? updatedField : field
         ),
       };
     });
@@ -410,7 +459,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
   const updateBlock = (blockId: string, updates: Partial<FormBlock>) => {
     setFormSchema((prev) => {
       const updatedBlocks = prev.blocks.map((block) =>
-        block.id === blockId ? { ...block, ...updates } : block,
+        block.id === blockId ? { ...block, ...updates } : block
       );
 
       return {
@@ -473,7 +522,7 @@ export function FormBuilder({ formId }: FormBuilderProps) {
     setSaving(true);
     console.log(
       "Starting save, current schema:",
-      JSON.stringify(formSchema).length,
+      JSON.stringify(formSchema).length
     );
     try {
       if (formId) {
@@ -482,20 +531,20 @@ export function FormBuilder({ formId }: FormBuilderProps) {
         lastManuallySavedSchemaRef.current = { ...formSchema }; // Update manually saved schema reference with deep copy
         console.log(
           "Updated manual save ref after save:",
-          JSON.stringify(lastManuallySavedSchemaRef.current).length,
+          JSON.stringify(lastManuallySavedSchemaRef.current).length
         );
         toast.success("Form saved successfully!");
       } else {
         const newForm = await formsDb.createForm(
           user.id,
           formSchema.settings.title,
-          formSchema,
+          formSchema
         );
         lastSavedSchemaRef.current = formSchema; // Update saved schema reference
         lastManuallySavedSchemaRef.current = { ...formSchema }; // Update manually saved schema reference with deep copy
         console.log(
           "Updated manual save ref after create:",
-          JSON.stringify(lastManuallySavedSchemaRef.current).length,
+          JSON.stringify(lastManuallySavedSchemaRef.current).length
         );
         // Reset the form loaded flag since we're navigating to a new form
         isFormLoaded.current = false;
@@ -585,6 +634,23 @@ export function FormBuilder({ formId }: FormBuilderProps) {
   const handleStepSelection = (stepIndex: number) => {
     if (formSchema.blocks && formSchema.blocks[stepIndex]) {
       setSelectedBlockId(formSchema.blocks[stepIndex].id);
+    }
+  };
+
+  const handleAIImport = (importedSchema: FormSchema) => {
+    setFormSchema(importedSchema);
+    setHasUnsavedChanges(true);
+
+    // Select the first block if it exists
+    if (importedSchema.blocks.length > 0) {
+      setSelectedBlockId(importedSchema.blocks[0].id);
+    }
+
+    // Select the first field if it exists
+    const firstField =
+      importedSchema.blocks[0]?.fields[0] || importedSchema.fields[0];
+    if (firstField) {
+      setSelectedFieldId(firstField.id);
     }
   };
 
@@ -684,14 +750,14 @@ export function FormBuilder({ formId }: FormBuilderProps) {
                     // Convert single-step to multi-step
                     // Get fields from the default block if it exists, otherwise from schema.fields
                     const defaultBlock = formSchema.blocks.find(
-                      (b) => b.id === "default",
+                      (b) => b.id === "default"
                     );
                     const currentFields =
                       defaultBlock?.fields || formSchema.fields || [];
 
                     console.log(
                       "Switching to multi-step mode. Current fields:",
-                      currentFields,
+                      currentFields
                     );
 
                     const newSchema = {
@@ -725,12 +791,12 @@ export function FormBuilder({ formId }: FormBuilderProps) {
                   // Switching TO single-step mode
                   // Collect all fields from all blocks, preserving their current state
                   const allFields = formSchema.blocks.flatMap(
-                    (block) => block.fields || [],
+                    (block) => block.fields || []
                   );
 
                   console.log(
                     "Switching to single-step mode. Collected fields:",
-                    allFields,
+                    allFields
                   );
 
                   const newSchema = {
@@ -831,6 +897,30 @@ export function FormBuilder({ formId }: FormBuilderProps) {
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent size="sm">Settings</TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger>
+                  <Button variant="secondary" size="icon" asChild>
+                    <Link href="/ai-builder">
+                      <Sparkles className="w-4 h-4 shrink-0" />
+                    </Link>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent size="sm">AI Assistant</TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger>
+                  <Button
+                    variant="secondary"
+                    size="icon"
+                    onClick={() => setShowAIImportModal(true)}
+                  >
+                    <Upload className="w-4 h-4 shrink-0" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent size="sm">Import AI Form</TooltipContent>
               </Tooltip>
             </TooltipProvider>
             <Button
@@ -1075,6 +1165,13 @@ export function FormBuilder({ formId }: FormBuilderProps) {
         formId={formId ?? null}
         isPublished={isPublished}
         onPublish={handlePublishForm}
+      />
+
+      {/* AI Import Modal */}
+      <AIImportModal
+        open={showAIImportModal}
+        onOpenChange={setShowAIImportModal}
+        onImport={handleAIImport}
       />
     </div>
   );

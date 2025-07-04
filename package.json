@@ -14,6 +14,7 @@
     "drizzle:pull": "drizzle-kit pull"
   },
   "dependencies": {
+    "@ai-sdk/cohere": "^1.2.10",
     "@hello-pangea/dnd": "^18.0.1",
     "@polar-sh/nextjs": "^0.4.2",
     "@polar-sh/sdk": "^0.34.3",
@@ -40,6 +41,7 @@
     "@supabase/supabase-js": "^2.50.3",
     "@upstash/ratelimit": "^2.0.5",
     "@upstash/redis": "^1.35.1",
+    "ai": "^4.3.16",
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

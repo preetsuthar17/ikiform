@@ -153,7 +153,7 @@ export function FormCreationWizard({
                   }`}
                   onClick={() => handleTypeSelect(type.id)}
                 >
-                  <div className="flex items-start justify-between grow w-full">
+                  <div className="flex items-start justify-between grow w-full gap-3">
                     <div className="flex items-center gap-3 max-sm:flex-col max-sm:justify-center max-sm:text-center w-full">
                       <div
                         className={`p-2 rounded-lg ${
@@ -171,14 +171,9 @@ export function FormCreationWizard({
                         </p>
                       </div>
                     </div>
-                    {/* {isSelected && (
-                      <div className="p-1 bg-primary rounded-full">
-                        <Check className="w-4 h-4 text-primary-foreground" />
-                      </div>
-                    )} */}
                   </div>
 
-                  <div className="mb-4 max-sm:hidden">
+                  <div className="my-4 max-sm:hidden">
                     <h4 className="font-medium mb-2 text-sm">Features:</h4>
                     <ul className="space-y-1">
                       {type.features.map((feature, index) => (

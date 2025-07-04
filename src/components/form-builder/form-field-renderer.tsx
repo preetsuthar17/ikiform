@@ -221,7 +221,7 @@ export function FormFieldRenderer({
         htmlFor={field.id}
         className="text-sm font-medium text-foreground mb-2"
       >
-        {field.label}
+        {field.label.replace("*", "")}
         {field.required && <span className="text-destructive ml-1">*</span>}
       </Label>
 

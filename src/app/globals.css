@@ -37,14 +37,10 @@
   --animate-aurora: aurora 60s linear infinite;
   @keyframes aurora {
     from {
-      background-position:
-        50% 50%,
-        50% 50%;
+      background-position: 50% 50%, 50% 50%;
     }
     to {
-      background-position:
-        350% 50%,
-        350% 50%;
+      background-position: 350% 50%, 350% 50%;
     }
   }
 }
@@ -163,14 +159,12 @@
 
 .form-card-hover:hover {
   transform: translateY(-2px);
-  box-shadow:
-    0 10px 25px -5px rgba(0, 0, 0, 0.1),
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .dark .form-card-hover:hover {
-  box-shadow:
-    0 10px 25px -5px rgba(0, 0, 0, 0.25),
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25),
     0 4px 6px -2px rgba(0, 0, 0, 0.1);
 }
 
@@ -222,4 +216,21 @@ kbd,
 code,
 pre {
   font-family: var(--font-jetbrains-mono) !important;
+}
+
+.fade-y {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 16px,
+    black calc(100% - 16px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 16px,
+    black calc(100% - 16px),
+    transparent 100%
+  );
 }
