@@ -105,7 +105,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center text-center max-w-6xl w-[90%] mx-auto py-12 gap-5 relative overflow-hidden">
+    <section className="flex flex-col items-center justify-center text-center max-w-6xl mx-auto py-12 px-6 gap-5 relative overflow-hidden">
       <h1 className="text-4xl md:text-5xl tracking-tight font-medium mt-10 flex flex-col gap-3 max-w-3xl relative">
         <span className="inline-block px-2 py-1 ">
           Beautiful, budget-friendly forms without compromises
