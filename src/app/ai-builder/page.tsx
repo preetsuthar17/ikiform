@@ -781,12 +781,12 @@ if (typeof window !== "undefined") {
 
 function ExpandableJsonBlock({ schema }: { schema: any }) {
   const [expanded, setExpanded] = useState(false);
-  const targetHeight = expanded ? 320 : 100;
+  const targetHeight = expanded ? 100 : 300;
   return (
-    <div className="my-2 p-3 rounded-lg bg-muted/50 border border-border text-xs font-mono overflow-hidden transition-all duration-200">
+    <div className="my-2 p-3 rounded-lg bg-muted/50 border border-border text-xs font-mono overflow-hidden transition-all duration-200  ">
       <motion.div
         animate={{ height: targetHeight }}
-        transition={{ type: "spring", stiffness: 200, damping: 30 }}
+        initial={{ height: 100 }}
         style={{ overflow: "hidden" }}
       >
         <ScrollArea className="w-full h-full">
