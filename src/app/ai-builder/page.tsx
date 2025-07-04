@@ -270,7 +270,7 @@ function ChatPanel({
       </ScrollArea>
       {/* Suggestions */}
       {shouldShowSuggestions && (
-        <div className="mb-4 overflow-auto p-4 ">
+        <div className="mb-4 overflow-hidden p-4 max-sm:hidden ">
           <div className="text-xs text-muted-foreground mb-2 font-medium tracking-wide">
             Try these examples
           </div>
@@ -362,7 +362,7 @@ function PreviewPanel({
         </div>
       </div>
       {/* Mobile: Form tabs/buttons */}
-      <div className="flex gap-2 overflow-x-auto p-3">
+      <div className="max-sm:flex hidden gap-2 overflow-x-auto p-3">
         {forms.map((form, idx) => (
           <Button
             key={form.id}
@@ -657,7 +657,7 @@ export default function AIChatPage() {
       <div className="hidden md:flex w-full h-full">
         <ResizablePanelGroup direction="horizontal">
           <ResizablePanel
-            defaultSize={30}
+            defaultSize={20}
             minSize={15}
             maxSize={30}
             border="right"
@@ -697,7 +697,7 @@ export default function AIChatPage() {
       </div>
       {/* Mobile: Drawer for Chat */}
       <Drawer open={chatDrawerOpen} onOpenChange={setChatDrawerOpen}>
-        <DrawerContent className="md:hidden max-w-full w-full">
+        <DrawerContent className=" max-w-full w-full">
           <DrawerHeader>
             <DrawerTitle>Kiko AI Chat</DrawerTitle>
             <DrawerDescription className="sr-only">
@@ -705,7 +705,7 @@ export default function AIChatPage() {
             </DrawerDescription>
             <DrawerCloseButton />
           </DrawerHeader>
-          <div className="flex flex-col h-[80vh] overflow-y-auto">
+          <div className="flex flex-col h-[90vh] overflow-y-auto">
             <ChatPanel
               messages={messages}
               isLoading={isLoading}
