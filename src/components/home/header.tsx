@@ -5,6 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 
+import { FaXTwitter, FaGithub } from "react-icons/fa6";
+import { Button } from "../ui/button";
+import { Kanban } from "lucide-react";
+
 export default function Header() {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -36,22 +40,28 @@ export default function Header() {
           )}
         </Link>
       </div>
-      <div className="flex items-center gap-4">
-        <nav className="flex gap-4 text-sm">
-          <Link
-            href="https://github.com/preetsuthar17/Ikiform"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline"
-          >
-            GitHub
-          </Link>
-          <Link href="https://x.com/preetsuthar17" className="hover:underline">
-            X
-          </Link>{" "}
-          <Link href="/roadmap" className="hover:underline">
-            Roadmap
-          </Link>
+      <div className="flex items-center gap-2">
+        <nav className="flex gap-2 text-sm">
+          <Button asChild variant={"secondary"} size={"icon"}>
+            <Link
+              href="https://github.com/preetsuthar17/Ikiform"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaGithub />
+            </Link>
+          </Button>
+          <Button asChild variant={"secondary"} size={"icon"}>
+            <Link href="https://x.com/preetsuthar17">
+              <FaXTwitter />
+            </Link>
+          </Button>
+          <Button asChild variant={"secondary"}>
+            <Link href="/roadmap" className="font-medium">
+              <Kanban />
+              Roadmap
+            </Link>
+          </Button>
         </nav>
       </div>
     </nav>

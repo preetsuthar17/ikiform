@@ -7,7 +7,23 @@ import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Crown } from "lucide-react";
+import {
+  Check,
+  Crown,
+  Bot,
+  BarChart3,
+  FileText,
+  Zap,
+  Share2,
+  Settings,
+  Network,
+  Bell,
+  Star,
+  Sparkles,
+} from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { Separator } from "@/components/ui/separator";
+import { Tabs } from "@/components/ui/tabs";
 
 interface Product {
   id: string;
@@ -19,15 +35,42 @@ interface PricingClientProps {
 }
 
 const features = [
-  "Unlimited submissions",
-  "Advanced analytics",
-  "Exporting responses",
-  "Integrations",
-  "Fully customizable",
-  "Webhooks support (soon)",
-  "Priority support",
-  "and more...",
+  {
+    label: "Unlimited submissions",
+    icon: <FileText className="w-4 h-4 text-primary flex-shrink-0" />,
+  },
+  {
+    label: "Advanced analytics",
+    icon: <BarChart3 className="w-4 h-4 text-primary flex-shrink-0" />,
+  },
+  {
+    label: "AI Form builder",
+    icon: <Bot className="w-4 h-4 text-primary flex-shrink-0" />,
+  },
+  {
+    label: "AI Analytics",
+    icon: <Sparkles className="w-4 h-4 text-primary flex-shrink-0" />,
+  },
+  {
+    label: "Exporting responses",
+    icon: <Share2 className="w-4 h-4 text-primary flex-shrink-0" />,
+  },
+  {
+    label: "Integrations",
+    icon: <Network className="w-4 h-4 text-primary flex-shrink-0" />,
+  },
+  {
+    label: "Webhooks support (soon)",
+    icon: <Zap className="w-4 h-4 text-primary flex-shrink-0" />,
+  },
+  {
+    label: "Priority support",
+    icon: <Star className="w-4 h-4 text-primary flex-shrink-0" />,
+  },
 ];
+
+const MONTHLY_ID = "06a5d759-3bf0-4824-9f34-91c96f0f7376";
+const YEARLY_ID = "69f54c3d-ca06-4ca0-92ab-283459bce5e6";
 
 export default function PricingClient({ products }: PricingClientProps) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -37,6 +80,7 @@ export default function PricingClient({ products }: PricingClientProps) {
   const [purchaseLoading, setPurchaseLoading] = useState(false);
   const [hasPremium, setHasPremium] = useState(false);
   const [checkingPremium, setCheckingPremium] = useState(false);
+  const [billing, setBilling] = useState<"monthly" | "yearly">("yearly");
 
   const { user } = useAuth();
 
@@ -98,6 +142,12 @@ export default function PricingClient({ products }: PricingClientProps) {
     setPurchaseLoading(false);
   }, [user]);
 
+  const price = billing === "monthly" ? 19 : 10;
+  const oldPrice = billing === "monthly" ? 29 : 19 * 12;
+  const yearlySavings = 1 - (10 * 12) / (19 * 12);
+  const percentOff = Math.round(yearlySavings * 100); // 47%
+  const productId = billing === "monthly" ? MONTHLY_ID : YEARLY_ID;
+
   const primaryProduct = products[0];
 
   if (!primaryProduct) {
@@ -133,8 +183,18 @@ export default function PricingClient({ products }: PricingClientProps) {
             </p>
           </div>
 
-          {/* Right Side - Pricing Card */}
-          <div ref={cardRef} className="max-w-lg mx-auto lg:mx-0 w-full">
+          {/* Right Side - Pricing Card with Tabs */}
+          <div className="max-w-lg mx-auto lg:mx-0 w-full flex flex-col gap-6">
+            <Tabs
+              items={[
+                { id: "yearly", label: "Yearly" },
+                { id: "monthly", label: "Monthly" },
+              ]}
+              value={billing}
+              onValueChange={(v) => setBilling(v as "monthly" | "yearly")}
+              variant="underline"
+              className="mb-2 w-full"
+            />
             <Card className="p-8 text-left border">
               <div className="flex flex-col gap-8">
                 {/* Early Bird Discount Badge */}
@@ -145,52 +205,46 @@ export default function PricingClient({ products }: PricingClientProps) {
                 </div>
 
                 {/* Price */}
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-3">
                   <div className="flex items-baseline gap-3">
                     <span className="text-2xl font-medium text-muted-foreground line-through">
-                      $29
+                      {billing === "monthly" ? "$29" : "$19"}
                     </span>
                     <span className="text-4xl font-bold text-foreground">
-                      $19
+                      ${price}
                     </span>
                     <span className="text-muted-foreground">/month</span>
                   </div>
-                </div>
-
-                {/* Features */}
-                <div className="flex flex-col gap-3">
-                  {features.map((feature, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <Check className="w-4 h-4 text-primary flex-shrink-0" />
-                      <span className="text-sm text-foreground">{feature}</span>
+                  {billing === "yearly" && (
+                    <div className="text-xs text-green-600 font-medium flex flex-col gap-3">
+                      Billed yearly as $120{" "}
+                      <Badge
+                        variant="secondary"
+                        className="text-xs font-semibold w-fit"
+                      >
+                        Save {percentOff}%
+                      </Badge>
                     </div>
-                  ))}
+                  )}
                 </div>
-
                 {/* CTA Button */}
                 {user && hasPremium ? (
                   <div className="space-y-3">
                     <Link href="/dashboard" className="w-full block">
                       <Button size="lg" className="w-full">
-                        <div className="flex items-center gap-2">
-                          <Crown className="w-4 h-4" />
-                          Go to Dashboard
-                        </div>
-                      </Button>
-                    </Link>
-                    <Link
-                      href="/portal"
-                      target="_blank"
-                      className="w-full block"
-                    >
-                      <Button size="sm" variant="outline" className="w-full">
-                        Manage Subscription
+                        <Link
+                          href="/portal"
+                          target="_blank"
+                          className="w-full block"
+                        >
+                          Manage Your Subscription
+                        </Link>
                       </Button>
                     </Link>
                   </div>
                 ) : (
                   <Link
-                    href={`/checkout?products=${primaryProduct.id}&customerEmail=${user?.email}`}
+                    href={`/checkout?products=${productId}&customerEmail=${user?.email}`}
                     className="w-full block"
                     onClick={handlePurchaseClick}
                   >
@@ -217,6 +271,18 @@ export default function PricingClient({ products }: PricingClientProps) {
                     </Button>
                   </Link>
                 )}
+                <Separator ChildrenClassName="bg-card">Features</Separator>
+                {/* Features */}
+                <div className="flex flex-col gap-3">
+                  {features.map((feature, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      {feature.icon}
+                      <span className="text-sm text-foreground">
+                        {feature.label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </Card>
           </div>
