@@ -43,7 +43,6 @@ import toast from "react-hot-toast";
 import Link from "next/link";
 import { useAuth } from "@/hooks/use-auth";
 import { Loader } from "@/components/ui/loader";
-import { AIImportModal } from "@/components/form-builder/ai-import-modal";
 import { FormPreview } from "@/components/form-builder/form-preview";
 import { useRouter } from "next/navigation";
 import { Kbd } from "@/components/ui/kbd";
@@ -405,7 +404,7 @@ function PreviewPanel({
               onClick={() => {
                 localStorage.setItem(
                   "importedFormSchema",
-                  JSON.stringify(activeForm.schema)
+                  JSON.stringify(activeForm.schema),
                 );
                 router.push("/form-builder");
               }}
@@ -436,10 +435,7 @@ function PreviewPanel({
 
 export default function AIChatPage() {
   const { user, loading: authLoading } = useAuth();
-  const [copiedMessage, setCopiedMessage] = useState<string | null>(null);
   const [showSuggestions, setShowSuggestions] = useState(true);
-  const [showAIImportModal, setShowAIImportModal] = useState(false);
-  const [importSchema, setImportSchema] = useState<any | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
@@ -549,7 +545,7 @@ export default function AIChatPage() {
     if (foundJson) {
       // Check for duplicate schema (deep equality)
       const existing = forms.find(
-        (f) => JSON.stringify(f.schema) === JSON.stringify(foundJson)
+        (f) => JSON.stringify(f.schema) === JSON.stringify(foundJson),
       );
       if (existing) {
         setActiveFormId(existing.id);
@@ -576,7 +572,7 @@ export default function AIChatPage() {
       setStreamedContent(""); // Clear the streaming block
     } else {
       setStreamError(
-        "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!"
+        "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!",
       );
     }
   };
@@ -728,13 +724,7 @@ export default function AIChatPage() {
           activeForm={activeForm}
         />
       </div>
-      {/* AI Import Modal, JSON Modal, etc. remain outside for all views */}
-      <AIImportModal
-        open={showAIImportModal}
-        onOpenChange={setShowAIImportModal}
-        onImport={() => setShowAIImportModal(false)}
-        {...(importSchema ? { initialSchema: importSchema } : {})}
-      />
+
       {showJsonModal && activeForm?.schema && (
         <Modal open={showJsonModal} onOpenChange={setShowJsonModal}>
           <ModalContent className="max-w-lg w-[95vw]">
@@ -820,7 +810,7 @@ function CopyButtonWithState({ schema }: { schema: any }) {
             size={"icon"}
             onClick={async () => {
               await navigator.clipboard.writeText(
-                JSON.stringify(schema, null, 2)
+                JSON.stringify(schema, null, 2),
               );
               setCopied(true);
               setTimeout(() => setCopied(false), 1500);

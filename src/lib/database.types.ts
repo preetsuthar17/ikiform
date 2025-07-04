@@ -114,7 +114,7 @@ export interface FormField {
     allowDuplicates?: boolean; // For tags
     // Visual customization
     size?: "sm" | "md" | "lg"; // Field size
-    variant?: "default" | "filled" | "ghost"; // Field variant
+    variant?: "default" | "filled" | "ghost" | "underline"; // Field variant
     helpText?: string; // Additional help text
     width?: "full" | "half" | "third" | "quarter"; // Field width
   };

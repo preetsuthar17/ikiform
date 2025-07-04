@@ -62,6 +62,8 @@ export function FormFieldRenderer({
         return "bg-muted/50 border-muted";
       case "ghost":
         return "bg-transparent border-transparent shadow-none";
+      case "underline":
+        return "rounded-none border-0 border-b-2 border-input bg-transparent px-0 py-2 shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-b-2 focus-visible:border-input text-inherit placeholder:text-muted-foreground";
       default:
         return "";
     }

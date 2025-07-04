@@ -600,7 +600,11 @@ export function FieldSettingsPanel({
                   value={field.settings?.variant || "default"}
                   onValueChange={(value) =>
                     updateSettings({
-                      variant: value as "default" | "filled" | "ghost",
+                      variant: value as
+                        | "default"
+                        | "filled"
+                        | "ghost"
+                        | "underline",
                     })
                   }
                 >
@@ -611,6 +615,7 @@ export function FieldSettingsPanel({
                     <SelectItem value="default">Default</SelectItem>
                     <SelectItem value="filled">Filled</SelectItem>
                     <SelectItem value="ghost">Ghost</SelectItem>
+                    <SelectItem value="underline">Underline</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
