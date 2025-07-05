@@ -1,7 +1,7 @@
 import { createClient } from "@/utils/supabase/client";
 import { createClient as createServerClient } from "@/utils/supabase/server";
-import type { Database, FormSchema } from "./database.types";
-import { ensureDefaultFormSettings } from "./form-defaults";
+import type { Database, FormSchema } from "@/lib/database";
+import { ensureDefaultFormSettings } from "@/lib/forms";
 
 export type Form = Database["public"]["Tables"]["forms"]["Row"];
 export type FormSubmission =

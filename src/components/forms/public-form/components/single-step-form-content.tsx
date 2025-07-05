@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
 
 // Types
-import type { FormSchema, FormField } from "@/lib/database.types";
+import type { FormSchema, FormField } from "@/lib/database";
 
 interface SingleStepFormContentProps {
   schema: FormSchema;

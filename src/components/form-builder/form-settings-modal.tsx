@@ -18,11 +18,11 @@ import {
   Plus,
   X,
 } from "lucide-react";
-import type { FormSchema } from "@/lib/database.types";
+import type { FormSchema } from "@/lib/database";
 import {
   DEFAULT_RATE_LIMIT_SETTINGS,
   DEFAULT_PROFANITY_FILTER_SETTINGS,
-} from "@/lib/form-defaults";
+} from "@/lib/forms";
 
 interface FormSettingsModalProps {
   isOpen: boolean;

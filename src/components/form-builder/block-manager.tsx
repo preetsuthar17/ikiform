@@ -19,7 +19,7 @@ import {
   X,
 } from "lucide-react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import type { FormBlock, FormField } from "@/lib/database.types";
+import type { FormBlock, FormField } from "@/lib/database";
 
 interface BlockManagerProps {
   blocks: FormBlock[];
@@ -45,7 +45,7 @@ export function BlockManager({
   onFieldDelete,
 }: BlockManagerProps) {
   const [expandedBlocks, setExpandedBlocks] = useState<Set<string>>(
-    new Set(blocks.map((block) => block.id)),
+    new Set(blocks.map((block) => block.id))
   );
   const [editingBlock, setEditingBlock] = useState<string | null>(null);
   const [editTitle, setEditTitle] = useState("");
@@ -77,7 +77,7 @@ export function BlockManager({
             title: editTitle.trim(),
             description: editDescription.trim(),
           }
-        : block,
+        : block
     );
 
     onBlocksUpdate(updatedBlocks);

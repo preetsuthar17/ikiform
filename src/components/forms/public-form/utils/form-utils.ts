@@ -1,5 +1,5 @@
 // Types
-import type { FormSchema, FormField } from "@/lib/database.types";
+import type { FormSchema, FormField } from "@/lib/database";
 
 // Utility to get all fields from schema
 export const getAllFields = (schema: FormSchema): FormField[] =>

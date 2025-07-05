@@ -1,7 +1,7 @@
 import { cohere } from "@ai-sdk/cohere";
 import { streamText } from "ai";
 import { NextRequest } from "next/server";
-import { checkRateLimit } from "@/lib/rate-limit";
+import { checkRateLimit } from "@/lib/forms";
 import { createClient } from "@/utils/supabase/server";
 import { formsDbServer } from "@/lib/database";
 import { v4 as uuidv4 } from "uuid";

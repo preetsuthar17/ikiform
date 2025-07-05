@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
 
 // Types
-import type { FormSchema, FormBlock } from "@/lib/database.types";
+import type { FormSchema, FormBlock } from "@/lib/database";
 import type { FormState, FormActions } from "../types";
 
 // Utilities

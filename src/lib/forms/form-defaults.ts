@@ -1,4 +1,4 @@
-import type { FormSchema } from "./database.types";
+import type { FormSchema } from "@/lib/database";
 
 /**
  * Default rate limiting settings for all forms

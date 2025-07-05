@@ -14,7 +14,7 @@ import {
 import { Slider } from "@/components/ui/slider";
 import { TagInput } from "@/components/ui/tag-input";
 import { RadioGroup, RadioItem } from "@/components/ui/radio";
-import type { FormField } from "@/lib/database.types";
+import type { FormField } from "@/lib/database";
 
 interface FormFieldRendererProps {
   field: FormField;

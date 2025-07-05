@@ -11,8 +11,8 @@ import {
 } from "@/components/ui/modal";
 import { Badge } from "@/components/ui/badge";
 import { Check, ArrowRight, BarChart3, Layers, FileText } from "lucide-react";
-import type { FormSchema } from "@/lib/database.types";
-import { createDefaultFormSchema } from "@/lib/form-defaults";
+import type { FormSchema } from "@/lib/database";
+import { createDefaultFormSchema } from "@/lib/forms";
 
 interface FormCreationWizardProps {
   isOpen: boolean;

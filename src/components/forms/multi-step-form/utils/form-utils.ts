@@ -1,5 +1,5 @@
 // Types
-import type { FormSchema, FormBlock } from "@/lib/database.types";
+import type { FormSchema, FormBlock } from "@/lib/database";
 
 export const processFormBlocks = (schema: FormSchema): FormBlock[] => {
   return schema.blocks?.length

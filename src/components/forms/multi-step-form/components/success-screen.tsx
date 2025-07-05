@@ -6,7 +6,7 @@ import { Link } from "react-aria-components";
 import { Card } from "@/components/ui/card";
 
 // Types
-import type { FormSchema } from "@/lib/database.types";
+import type { FormSchema } from "@/lib/database";
 
 interface SuccessScreenProps {
   schema: FormSchema;

@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import type { FormField } from "@/lib/database.types";
+import type { FormField } from "@/lib/database";
 
 interface FieldPaletteProps {
   onAddField: (fieldType: FormField["type"]) => void;

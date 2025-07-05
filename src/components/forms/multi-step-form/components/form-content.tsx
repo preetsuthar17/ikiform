@@ -5,7 +5,7 @@ import React from "react";
 import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
 
 // Types
-import type { FormBlock } from "@/lib/database.types";
+import type { FormBlock } from "@/lib/database";
 
 interface FormContentProps {
   currentBlock: FormBlock;

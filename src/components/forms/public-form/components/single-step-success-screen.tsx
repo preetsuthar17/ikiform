@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Card } from "@/components/ui/card";
 
 // Types
-import type { FormSchema } from "@/lib/database.types";
+import type { FormSchema } from "@/lib/database";
 
 interface SingleStepSuccessScreenProps {
   schema: FormSchema;

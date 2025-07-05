@@ -1,5 +1,5 @@
 // Types
-import type { FormBlock } from "@/lib/database.types";
+import type { FormBlock } from "@/lib/database";
 
 export const validateStep = (
   stepIndex: number,

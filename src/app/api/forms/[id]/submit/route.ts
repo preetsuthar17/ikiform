@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { formsDbServer } from "@/lib/database";
-import { checkFormRateLimit } from "@/lib/rate-limit";
+import { checkFormRateLimit } from "@/lib/forms";
 import { headers } from "next/headers";
 import {
   DEFAULT_RATE_LIMIT_SETTINGS,
   DEFAULT_PROFANITY_FILTER_SETTINGS,
-} from "@/lib/form-defaults";
-import { createProfanityFilter } from "@/lib/profanity-filter";
+} from "@/lib/forms";
+import { createProfanityFilter } from "@/lib/validation";
 
 export async function POST(
   request: NextRequest,

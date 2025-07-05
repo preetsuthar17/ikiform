@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 // Types
-import type { FormSchema } from "@/lib/database.types";
+import type { FormSchema } from "@/lib/database";
 
 interface FormNavigationProps {
   currentStep: number;

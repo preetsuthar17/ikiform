@@ -11,7 +11,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Copy, Check } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
-import type { FormSchema } from "@/lib/database.types";
+import type { FormSchema } from "@/lib/database";
 
 interface JsonViewModalProps {
   schema: FormSchema;

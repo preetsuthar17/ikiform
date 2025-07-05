@@ -1,4 +1,4 @@
-import { api } from "@/lib/polar";
+import { api } from "@/lib/services";
 import PricingClient from "./client";
 
 export default async function Pricing() {

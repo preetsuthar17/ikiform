@@ -14,7 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Plus, X } from "lucide-react";
-import type { FormField } from "@/lib/database.types";
+import type { FormField } from "@/lib/database";
 
 interface FieldSettingsPanelProps {
   field: FormField | null;

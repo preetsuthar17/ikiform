@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { FormFieldRenderer } from "./form-field-renderer";
-import type { FormField, FormSchema, FormBlock } from "@/lib/database.types";
+import type { FormField, FormSchema, FormBlock } from "@/lib/database";
 
 interface FormPreviewProps {
   schema: FormSchema;
