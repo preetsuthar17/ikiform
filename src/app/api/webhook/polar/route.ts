@@ -8,9 +8,9 @@ if (!webhookSecret) {
 
 export const POST = Webhooks({
   webhookSecret,
-  onCheckoutCreated: async (payload) => {
-    console.log("Order created");
-    console.log("Order created:", payload);
+  onOrderPaid: async (payload) => {
+    console.log("Order paid");
+    console.log("Order paid:", payload);
 
     try {
       const supabase = await createClient();
