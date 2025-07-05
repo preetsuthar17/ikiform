@@ -8,20 +8,16 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
-  Check,
   Crown,
   Bot,
   BarChart3,
   FileText,
   Zap,
   Share2,
-  Settings,
   Network,
-  Bell,
   Star,
   Sparkles,
 } from "lucide-react";
-import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { Tabs } from "@/components/ui/tabs";
 
@@ -85,16 +81,12 @@ export default function PricingClient({ products }: PricingClientProps) {
   const { user } = useAuth();
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Check user's premium status
   useEffect(() => {
     const checkPremiumStatus = async () => {
       if (!user?.email) {
@@ -112,11 +104,7 @@ export default function PricingClient({ products }: PricingClientProps) {
           .eq("email", user.email)
           .single();
 
-        if (!error && data) {
-          setHasPremium(data.has_premium || false);
-        } else {
-          setHasPremium(false);
-        }
+        setHasPremium(!error && data ? data.has_premium || false : false);
       } catch (error) {
         console.error("Error checking premium status:", error);
         setHasPremium(false);
@@ -130,29 +118,19 @@ export default function PricingClient({ products }: PricingClientProps) {
 
   const handlePurchaseClick = () => {
     setPurchaseLoading(true);
-
-    const timeout = setTimeout(() => {
-      setPurchaseLoading(false);
-    }, 5000);
-
+    const timeout = setTimeout(() => setPurchaseLoading(false), 5000);
     return () => clearTimeout(timeout);
   };
 
-  useEffect(() => {
-    setPurchaseLoading(false);
-  }, [user]);
+  useEffect(() => setPurchaseLoading(false), [user]);
 
   const price = billing === "monthly" ? 19 : 10;
-  const oldPrice = billing === "monthly" ? 29 : 19 * 12;
   const yearlySavings = 1 - (10 * 12) / (19 * 12);
-  const percentOff = Math.round(yearlySavings * 100); // 47%
+  const percentOff = Math.round(yearlySavings * 100);
   const productId = billing === "monthly" ? MONTHLY_ID : YEARLY_ID;
 
   const primaryProduct = products[0];
-
-  if (!primaryProduct) {
-    return null;
-  }
+  if (!primaryProduct) return null;
 
   return (
     <section
@@ -162,7 +140,6 @@ export default function PricingClient({ products }: PricingClientProps) {
     >
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid lg:grid-cols-2 gap-16 items-start text-left">
-          {/* Left Side - Header Content */}
           <div
             className={`flex flex-col gap-6 ${
               isMobile
@@ -182,8 +159,6 @@ export default function PricingClient({ products }: PricingClientProps) {
               when you need more features.
             </p>
           </div>
-
-          {/* Right Side - Pricing Card with Tabs */}
           <div className="max-w-lg mx-auto lg:mx-0 w-full flex flex-col gap-6">
             <Tabs
               items={[
@@ -197,14 +172,9 @@ export default function PricingClient({ products }: PricingClientProps) {
             />
             <Card className="p-8 text-left border">
               <div className="flex flex-col gap-8">
-                {/* Early Bird Discount Badge */}
-                <div>
-                  <Badge variant="secondary" className="bg-accent/50 w-fit">
-                    🎉 Get Early Bird Discount
-                  </Badge>
-                </div>
-
-                {/* Price */}
+                <Badge variant="secondary" className="bg-accent/50 w-fit">
+                  🎉 Get Early Bird Discount
+                </Badge>
                 <div className="flex flex-col gap-3">
                   <div className="flex items-baseline gap-3">
                     <span className="text-2xl font-medium text-muted-foreground line-through">
@@ -227,19 +197,16 @@ export default function PricingClient({ products }: PricingClientProps) {
                     </div>
                   )}
                 </div>
-                {/* CTA Button */}
                 {user && hasPremium ? (
-                  <div className="space-y-3">
-                    <Button size="lg" className="w-full">
-                      <Link
-                        href="/portal"
-                        target="_blank"
-                        className="w-full block"
-                      >
-                        Manage Your Subscription
-                      </Link>
-                    </Button>
-                  </div>
+                  <Button size="lg" className="w-full">
+                    <Link
+                      href="/portal"
+                      target="_blank"
+                      className="w-full block"
+                    >
+                      Manage Your Subscription
+                    </Link>
+                  </Button>
                 ) : (
                   <Link
                     href={`/checkout?products=${productId}&customerEmail=${user?.email}`}
@@ -270,7 +237,6 @@ export default function PricingClient({ products }: PricingClientProps) {
                   </Link>
                 )}
                 <Separator ChildrenClassName="bg-card">Features</Separator>
-                {/* Features */}
                 <div className="flex flex-col gap-3">
                   {features.map((feature, index) => (
                     <div key={index} className="flex items-center gap-3">
