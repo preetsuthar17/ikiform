@@ -42,8 +42,8 @@ export default function Header() {
           )}
         </Link>
       </div>
-      <div className="flex items-center gap-4">
-        <nav className="flex gap-4">
+      <div className="flex items-center gap-2">
+        <nav className="flex gap-2">
           <Button asChild variant="secondary" size="icon">
             <Link
               href="https://github.com/preetsuthar17/Ikiform"
