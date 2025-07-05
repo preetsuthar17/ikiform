@@ -67,7 +67,7 @@ const features = [
   },
 ];
 
-const PRODUCT_ID = "06a5d759-3bf0-4824-9f34-91c96f0f7376";
+const PRODUCT_ID = "2e9b8531-0d45-40df-be1c-65482eefeb85";
 
 export default function PricingClient({ products }: PricingClientProps) {
   const sectionRef = useRef<HTMLElement>(null);
