@@ -1,5 +1,5 @@
 "use client";
-import ProfileCard from "@/components/dashboard/profile-card";
+import { ProfileCard } from "@/components/dashboard/profile-card/ProfileCard";
 import { FormsManagement } from "@/components/dashboard/forms-management";
 
 export default function DashboardPage() {
