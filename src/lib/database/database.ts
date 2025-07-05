@@ -6,6 +6,7 @@ import { ensureDefaultFormSettings } from "@/lib/forms";
 export type Form = Database["public"]["Tables"]["forms"]["Row"];
 export type FormSubmission =
   Database["public"]["Tables"]["form_submissions"]["Row"];
+export type User = Database["public"]["Tables"]["users"]["Row"];
 
 // Client-side database operations
 export const formsDb = {
@@ -199,12 +200,15 @@ export const formsDb = {
 
     if (error) throw error;
 
-    const sessions = data.reduce((acc, curr) => {
-      if (!acc[curr.session_id]) {
-        acc[curr.session_id] = curr.created_at;
-      }
-      return acc;
-    }, {} as Record<string, string>);
+    const sessions = data.reduce(
+      (acc, curr) => {
+        if (!acc[curr.session_id]) {
+          acc[curr.session_id] = curr.created_at;
+        }
+        return acc;
+      },
+      {} as Record<string, string>
+    );
 
     return Object.entries(sessions).map(([sessionId, createdAt]) => ({
       session_id: sessionId,
@@ -276,16 +280,19 @@ export const formsDb = {
 
     if (error) throw error;
 
-    const sessions = data.reduce((acc, curr) => {
-      if (!acc[curr.session_id]) {
-        acc[curr.session_id] = {
-          session_id: curr.session_id,
-          form_id: curr.form_id,
-          created_at: curr.created_at,
-        };
-      }
-      return acc;
-    }, {} as Record<string, any>);
+    const sessions = data.reduce(
+      (acc, curr) => {
+        if (!acc[curr.session_id]) {
+          acc[curr.session_id] = {
+            session_id: curr.session_id,
+            form_id: curr.form_id,
+            created_at: curr.created_at,
+          };
+        }
+        return acc;
+      },
+      {} as Record<string, any>
+    );
 
     return Object.values(sessions);
   },
@@ -402,12 +409,15 @@ export const formsDbServer = {
 
     if (error) throw error;
 
-    const sessions = data.reduce((acc, curr) => {
-      if (!acc[curr.session_id]) {
-        acc[curr.session_id] = curr.created_at;
-      }
-      return acc;
-    }, {} as Record<string, string>);
+    const sessions = data.reduce(
+      (acc, curr) => {
+        if (!acc[curr.session_id]) {
+          acc[curr.session_id] = curr.created_at;
+        }
+        return acc;
+      },
+      {} as Record<string, string>
+    );
 
     return Object.entries(sessions).map(([sessionId, createdAt]) => ({
       session_id: sessionId,
@@ -479,17 +489,134 @@ export const formsDbServer = {
 
     if (error) throw error;
 
-    const sessions = data.reduce((acc, curr) => {
-      if (!acc[curr.session_id]) {
-        acc[curr.session_id] = {
-          session_id: curr.session_id,
-          form_id: curr.form_id,
-          created_at: curr.created_at,
-        };
-      }
-      return acc;
-    }, {} as Record<string, any>);
+    const sessions = data.reduce(
+      (acc, curr) => {
+        if (!acc[curr.session_id]) {
+          acc[curr.session_id] = {
+            session_id: curr.session_id,
+            form_id: curr.form_id,
+            created_at: curr.created_at,
+          };
+        }
+        return acc;
+      },
+      {} as Record<string, any>
+    );
 
     return Object.values(sessions);
+  },
+
+  // User management operations
+  async getUser(email: string) {
+    const supabase = await createServerClient();
+
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("email", email)
+      .single();
+
+    if (error) throw error;
+    return data;
+  },
+
+  async createOrUpdateUser(
+    uid: string,
+    email: string,
+    name: string,
+    has_premium: boolean = false,
+    polar_customer_id: string | null = null
+  ) {
+    const supabase = await createServerClient();
+
+    const { data, error } = await supabase
+      .from("users")
+      .upsert(
+        {
+          uid,
+          name,
+          email,
+          has_premium,
+          polar_customer_id,
+        },
+        {
+          onConflict: "email",
+        }
+      )
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
+  },
+
+  async updateUserPremiumStatus(email: string, has_premium: boolean) {
+    const supabase = await createServerClient();
+
+    const { data, error } = await supabase
+      .from("users")
+      .update({ has_premium })
+      .eq("email", email)
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
+  },
+
+  // User management operations
+  async getUserByEmail(email: string) {
+    const supabase = createClient();
+
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("email", email)
+      .single();
+
+    if (error) throw error;
+    return data;
+  },
+
+  async updatePremiumStatus(email: string, hasPremium: boolean) {
+    const supabase = createClient();
+
+    const { data, error } = await supabase
+      .from("users")
+      .update({ has_premium: hasPremium })
+      .eq("email", email)
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
+  },
+
+  async updatePolarCustomerId(email: string, polarCustomerId: string) {
+    const supabase = createClient();
+
+    const { data, error } = await supabase
+      .from("users")
+      .update({ polar_customer_id: polarCustomerId })
+      .eq("email", email)
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
+  },
+
+  async updateUserProfile(email: string, updates: { name?: string }) {
+    const supabase = createClient();
+
+    const { data, error } = await supabase
+      .from("users")
+      .update(updates)
+      .eq("email", email)
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
   },
 };

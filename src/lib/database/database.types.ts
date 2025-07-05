@@ -123,6 +123,35 @@ export interface Database {
           updated_at?: string;
         };
       };
+      users: {
+        Row: {
+          uid: string;
+          name: string;
+          email: string;
+          has_premium: boolean;
+          polar_customer_id: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          uid: string;
+          name: string;
+          email: string;
+          has_premium?: boolean;
+          polar_customer_id?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          uid?: string;
+          name?: string;
+          email?: string;
+          has_premium?: boolean;
+          polar_customer_id?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
     };
     Views: {
       [_ in never]: never;
