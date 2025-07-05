@@ -43,6 +43,7 @@ import {
   PieChart,
   AlertCircle,
   CheckCircle,
+  Square,
 } from "lucide-react";
 import { formsDb } from "@/lib/database";
 import { toast } from "@/hooks/use-toast";
@@ -97,6 +98,8 @@ interface ChatInterfaceProps {
   handleChatSend: (e: React.FormEvent) => void;
   chatInputRef: React.RefObject<HTMLTextAreaElement | null>;
   chatInput: string;
+  abortController: AbortController | null;
+  handleStopGeneration: () => void;
 }
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({
@@ -110,6 +113,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
   handleChatSend,
   chatInputRef,
   chatInput,
+  abortController,
+  handleStopGeneration,
 }) => (
   <div className="flex flex-col h-full ">
     {/* Chat Messages */}
@@ -254,6 +259,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
         >
           {chatLoading ? <></> : <Send className="w-3 h-3" />}
         </Button>
+        {chatStreaming && abortController && (
+          <Button
+            type="button"
+            onClick={handleStopGeneration}
+            variant="destructive"
+            size="icon"
+            className="self-end shrink-0"
+          >
+            <Square className="w-3 h-3" />
+          </Button>
+        )}
       </form>
       <div className="text-xs text-muted-foreground mt-2">
         <Kbd size="sm">Enter</Kbd> to send
@@ -294,6 +310,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const [chatStreaming, setChatStreaming] = useState(false);
   const [streamedContent, setStreamedContent] = useState("");
   const [isMobile, setIsMobile] = useState(false);
+  const [abortController, setAbortController] = useState<AbortController | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatInputRef = useRef<HTMLTextAreaElement>(null);
   const { theme } = useTheme();
@@ -505,6 +522,10 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     setChatStreaming(true);
     setStreamedContent("");
 
+    // Create abort controller for this request
+    const controller = new AbortController();
+    setAbortController(controller);
+
     try {
       // Prepare analytics context
       const analyticsContext = {
@@ -550,6 +571,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
           context: analyticsContext,
           sessionId: sessionId,
         }),
+        signal: controller.signal,
       });
 
       if (!response.ok) {
@@ -589,19 +611,42 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
       setStreamedContent("");
       setChatStreaming(false);
     } catch (error) {
-      console.error("Chat error:", error);
-      toast.error("Failed to send message. Please try again.");
-      setChatMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: "Sorry, I encountered an error. Please try again.",
-          timestamp: new Date(),
-        },
-      ]);
+      if (error instanceof Error && error.name === "AbortError") {
+        // Handle abortion gracefully
+        const partialResponse = streamedContent;
+        if (partialResponse.trim()) {
+          setChatMessages((prev) => [
+            ...prev,
+            {
+              role: "assistant",
+              content: partialResponse + "\n\n[Response stopped by user]",
+              timestamp: new Date(),
+            },
+          ]);
+        }
+        setStreamedContent("");
+      } else {
+        console.error("Chat error:", error);
+        toast.error("Failed to send message. Please try again.");
+        setChatMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content: "Sorry, I encountered an error. Please try again.",
+            timestamp: new Date(),
+          },
+        ]);
+      }
     } finally {
       setChatLoading(false);
       setChatStreaming(false);
+      setAbortController(null);
+    }
+  };
+
+  const handleStopGeneration = () => {
+    if (abortController) {
+      abortController.abort();
     }
   };
 
@@ -1754,6 +1799,8 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                 handleChatSend={handleChatSend}
                 chatInputRef={chatInputRef}
                 chatInput={chatInput}
+                abortController={abortController}
+                handleStopGeneration={handleStopGeneration}
               />
             </div>
           </ModalContent>
@@ -1789,6 +1836,8 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                 handleChatSend={handleChatSend}
                 chatInputRef={chatInputRef}
                 chatInput={chatInput}
+                abortController={abortController}
+                handleStopGeneration={handleStopGeneration}
               />
             </div>
           </DrawerContent>
