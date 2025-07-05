@@ -17,7 +17,6 @@ import {
   ModalContent,
   ModalHeader,
   ModalTitle,
-  ModalFooter,
 } from "../ui/modal";
 
 const Hero = () => {
@@ -46,22 +45,23 @@ const Hero = () => {
         Ikiform is an open-source alternative to Typeform and Google Forms,
         designed to help you create beautiful forms effortlessly.
       </p>
-      <div className="w-full max-w-md flex gap-2 justify-center items-center flex-wrap">
+      <div className="flex flex-wrap gap-2 justify-center items-center max-w-md w-full">
         {!user ? (
           <Modal open={open} onOpenChange={setOpen}>
             <ModalTrigger asChild>
               <Button
-                className="font-medium grow"
+                size="lg"
+                className="font-medium h-[45px] max-sm:grow"
                 onClick={() => setOpen(true)}
               >
                 Create your first form
               </Button>
             </ModalTrigger>
-            <ModalContent className="max-w-sm">
+            <ModalContent className="max-w-sm flex flex-col gap-6">
               <ModalHeader>
                 <ModalTitle>Choose your login method</ModalTitle>
               </ModalHeader>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col items-center gap-4">
                 <Button
                   variant="secondary"
                   size="lg"
@@ -81,15 +81,23 @@ const Hero = () => {
                   Login with GitHub
                 </Button>
               </div>
-              <ModalFooter />
             </ModalContent>
           </Modal>
         ) : (
-          <Button className="font-medium grow" asChild>
+          <Button
+            className="font-medium h-[45px] max-sm:grow"
+            size="lg"
+            asChild
+          >
             <Link href="/dashboard">Go to Dashboard</Link>
           </Button>
         )}
-        <Button className="font-medium grow" variant="secondary" asChild>
+        <Button
+          className="font-medium h-[45px] max-sm:grow"
+          size="lg"
+          variant="secondary"
+          asChild
+        >
           <Link href="/#pricing">Check out pricing</Link>
         </Button>
       </div>
