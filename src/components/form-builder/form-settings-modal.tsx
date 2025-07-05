@@ -9,9 +9,20 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Settings, Save, Shield, Clock } from "lucide-react";
+import {
+  Settings,
+  Save,
+  Shield,
+  Clock,
+  AlertTriangle,
+  Plus,
+  X,
+} from "lucide-react";
 import type { FormSchema } from "@/lib/database.types";
-import { DEFAULT_RATE_LIMIT_SETTINGS } from "@/lib/form-defaults";
+import {
+  DEFAULT_RATE_LIMIT_SETTINGS,
+  DEFAULT_PROFANITY_FILTER_SETTINGS,
+} from "@/lib/form-defaults";
 
 interface FormSettingsModalProps {
   isOpen: boolean;
@@ -26,12 +37,16 @@ export function FormSettingsModal({
   schema,
   onSchemaUpdate,
 }: FormSettingsModalProps) {
-  // Initialize with default rate limit settings if not present
+  // Initialize with default rate limit and profanity filter settings if not present
   const [localSettings, setLocalSettings] = useState({
     ...schema.settings,
     rateLimit: {
       ...DEFAULT_RATE_LIMIT_SETTINGS,
       ...schema.settings.rateLimit,
+    },
+    profanityFilter: {
+      ...DEFAULT_PROFANITY_FILTER_SETTINGS,
+      ...schema.settings.profanityFilter,
     },
   });
 
@@ -43,18 +58,37 @@ export function FormSettingsModal({
         ...localSettings.rateLimit,
         ...updates.rateLimit,
       },
+      profanityFilter: {
+        ...localSettings.profanityFilter,
+        ...updates.profanityFilter,
+      },
     };
     setLocalSettings(newSettings);
   };
 
   const updateRateLimit = (
-    rateLimitUpdates: Partial<NonNullable<typeof schema.settings.rateLimit>>,
+    rateLimitUpdates: Partial<NonNullable<typeof schema.settings.rateLimit>>
   ) => {
     const newSettings = {
       ...localSettings,
       rateLimit: {
         ...localSettings.rateLimit,
         ...rateLimitUpdates,
+      },
+    };
+    setLocalSettings(newSettings);
+  };
+
+  const updateProfanityFilter = (
+    profanityFilterUpdates: Partial<
+      NonNullable<typeof schema.settings.profanityFilter>
+    >
+  ) => {
+    const newSettings = {
+      ...localSettings,
+      profanityFilter: {
+        ...localSettings.profanityFilter,
+        ...profanityFilterUpdates,
       },
     };
     setLocalSettings(newSettings);
@@ -71,6 +105,10 @@ export function FormSettingsModal({
       rateLimit: {
         ...DEFAULT_RATE_LIMIT_SETTINGS,
         ...schema.settings.rateLimit,
+      },
+      profanityFilter: {
+        ...DEFAULT_PROFANITY_FILTER_SETTINGS,
+        ...schema.settings.profanityFilter,
       },
     });
     onClose();
@@ -324,6 +362,249 @@ export function FormSettingsModal({
                       Rate limiting helps protect your form from spam and abuse
                       by limiting the number of submissions from the same IP
                       address within a specified time period.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </Card>
+
+            <Card className="p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <AlertTriangle className="w-5 h-5 text-primary" />
+                <h3 className="text-lg font-medium">Profanity Filter</h3>
+              </div>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-2">
+                  <Switch
+                    size={"sm"}
+                    id="profanity-filter-enabled"
+                    checked={localSettings.profanityFilter?.enabled || false}
+                    onCheckedChange={(checked) =>
+                      updateProfanityFilter({
+                        enabled: checked,
+                      })
+                    }
+                  />
+                  <Label
+                    htmlFor="profanity-filter-enabled"
+                    className="text-sm font-medium"
+                  >
+                    Enable Profanity Filter
+                  </Label>
+                </div>
+
+                {localSettings.profanityFilter?.enabled && (
+                  <div className="space-y-4 pl-6 border-l-2 border-border">
+                    <div className="space-y-2">
+                      <Label className="text-sm font-medium">Filter Mode</Label>
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2">
+                          <input
+                            type="radio"
+                            id="strict-mode"
+                            name="filterMode"
+                            checked={
+                              localSettings.profanityFilter?.strictMode !==
+                              false
+                            }
+                            onChange={() =>
+                              updateProfanityFilter({
+                                strictMode: true,
+                                replaceWithAsterisks: false,
+                              })
+                            }
+                            className="w-4 h-4"
+                          />
+                          <Label htmlFor="strict-mode" className="text-sm">
+                            Strict Mode - Reject submissions with profanity
+                          </Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <input
+                            type="radio"
+                            id="replace-mode"
+                            name="filterMode"
+                            checked={
+                              localSettings.profanityFilter
+                                ?.replaceWithAsterisks === true
+                            }
+                            onChange={() =>
+                              updateProfanityFilter({
+                                strictMode: false,
+                                replaceWithAsterisks: true,
+                              })
+                            }
+                            className="w-4 h-4"
+                          />
+                          <Label htmlFor="replace-mode" className="text-sm">
+                            Replace Mode - Replace profanity with asterisks
+                          </Label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label
+                        htmlFor="custom-message"
+                        className="text-sm font-medium"
+                      >
+                        Custom Message
+                      </Label>
+                      <Textarea
+                        id="custom-message"
+                        placeholder="Enter a custom message to show when profanity is detected"
+                        value={
+                          localSettings.profanityFilter?.customMessage || ""
+                        }
+                        onChange={(e) =>
+                          updateProfanityFilter({
+                            customMessage: e.target.value,
+                          })
+                        }
+                        className="text-sm"
+                        rows={2}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label className="text-sm font-medium">
+                        Custom Words to Filter
+                      </Label>
+                      <div className="space-y-2">
+                        {(localSettings.profanityFilter?.customWords || []).map(
+                          (word, index) => (
+                            <div
+                              key={index}
+                              className="flex items-center gap-2"
+                            >
+                              <Input
+                                value={word}
+                                onChange={(e) => {
+                                  const newWords = [
+                                    ...(localSettings.profanityFilter
+                                      ?.customWords || []),
+                                  ];
+                                  newWords[index] = e.target.value;
+                                  updateProfanityFilter({
+                                    customWords: newWords,
+                                  });
+                                }}
+                                className="text-sm"
+                                placeholder="Enter word to filter"
+                              />
+                              <Button
+                                type="button"
+                                variant="outline"
+                                size="icon"
+                                onClick={() => {
+                                  const newWords = [
+                                    ...(localSettings.profanityFilter
+                                      ?.customWords || []),
+                                  ];
+                                  newWords.splice(index, 1);
+                                  updateProfanityFilter({
+                                    customWords: newWords,
+                                  });
+                                }}
+                              >
+                                <X className="w-4 h-4" />
+                              </Button>
+                            </div>
+                          )
+                        )}
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            const newWords = [
+                              ...(localSettings.profanityFilter?.customWords ||
+                                []),
+                              "",
+                            ];
+                            updateProfanityFilter({ customWords: newWords });
+                          }}
+                          className="gap-2"
+                        >
+                          <Plus className="w-4 h-4" />
+                          Add Custom Word
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label className="text-sm font-medium">
+                        Whitelisted Words
+                      </Label>
+                      <div className="space-y-2">
+                        {(
+                          localSettings.profanityFilter?.whitelistedWords || []
+                        ).map((word, index) => (
+                          <div key={index} className="flex items-center gap-2">
+                            <Input
+                              value={word}
+                              onChange={(e) => {
+                                const newWords = [
+                                  ...(localSettings.profanityFilter
+                                    ?.whitelistedWords || []),
+                                ];
+                                newWords[index] = e.target.value;
+                                updateProfanityFilter({
+                                  whitelistedWords: newWords,
+                                });
+                              }}
+                              className="text-sm"
+                              placeholder="Enter word to whitelist"
+                            />
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="icon"
+                              onClick={() => {
+                                const newWords = [
+                                  ...(localSettings.profanityFilter
+                                    ?.whitelistedWords || []),
+                                ];
+                                newWords.splice(index, 1);
+                                updateProfanityFilter({
+                                  whitelistedWords: newWords,
+                                });
+                              }}
+                            >
+                              <X className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        ))}
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            const newWords = [
+                              ...(localSettings.profanityFilter
+                                ?.whitelistedWords || []),
+                              "",
+                            ];
+                            updateProfanityFilter({
+                              whitelistedWords: newWords,
+                            });
+                          }}
+                          className="gap-2"
+                        >
+                          <Plus className="w-4 h-4" />
+                          Add Whitelisted Word
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {!localSettings.profanityFilter?.enabled && (
+                  <div className="p-4 bg-muted/30 rounded-lg">
+                    <p className="text-sm text-muted-foreground">
+                      Profanity filter helps maintain a clean and professional
+                      environment by automatically detecting and filtering
+                      inappropriate content in form submissions.
                     </p>
                   </div>
                 )}

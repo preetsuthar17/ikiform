@@ -1,0 +1,233 @@
+import { Filter } from "bad-words";
+
+export interface ProfanityFilterOptions {
+  enabled?: boolean;
+  strictMode?: boolean;
+  replaceWithAsterisks?: boolean;
+  customWords?: string[];
+  customMessage?: string;
+  whitelistedWords?: string[];
+}
+
+export interface ProfanityCheckResult {
+  hasBeenFiltered: boolean;
+  cleanedText?: string;
+  originalText: string;
+  filteredWords: string[];
+  message?: string;
+}
+
+/**
+ * Profanity filter utility for form submissions
+ */
+export class ProfanityFilterService {
+  private filter: Filter;
+  private options: ProfanityFilterOptions;
+
+  constructor(options: ProfanityFilterOptions = {}) {
+    this.options = {
+      enabled: false,
+      strictMode: true,
+      replaceWithAsterisks: false,
+      customWords: [],
+      customMessage:
+        "Your submission contains inappropriate content. Please review and resubmit.",
+      whitelistedWords: [],
+      ...options,
+    };
+
+    this.filter = new Filter();
+
+    // Add custom words to filter
+    if (this.options.customWords && this.options.customWords.length > 0) {
+      this.filter.addWords(...this.options.customWords);
+    }
+
+    // Remove whitelisted words from filter
+    if (
+      this.options.whitelistedWords &&
+      this.options.whitelistedWords.length > 0
+    ) {
+      this.filter.removeWords(...this.options.whitelistedWords);
+    }
+  }
+
+  /**
+   * Check if text contains profanity
+   */
+  isProfane(text: string): boolean {
+    if (!this.options.enabled || !text) return false;
+    return this.filter.isProfane(text);
+  }
+
+  /**
+   * Clean profanity from text
+   */
+  clean(text: string): string {
+    if (!this.options.enabled || !text) return text;
+    return this.filter.clean(text);
+  }
+
+  /**
+   * Check and filter submission data
+   */
+  filterSubmissionData(submissionData: Record<string, any>): {
+    isValid: boolean;
+    filteredData: Record<string, any>;
+    violations: ProfanityCheckResult[];
+    message?: string;
+  } {
+    if (!this.options.enabled) {
+      return {
+        isValid: true,
+        filteredData: submissionData,
+        violations: [],
+      };
+    }
+
+    const violations: ProfanityCheckResult[] = [];
+    const filteredData: Record<string, any> = {};
+
+    for (const [key, value] of Object.entries(submissionData)) {
+      const result = this.checkValue(value);
+
+      if (result.hasBeenFiltered) {
+        violations.push({
+          ...result,
+          originalText: `Field "${key}": ${result.originalText}`,
+        });
+
+        if (this.options.strictMode) {
+          // In strict mode, reject the entire submission
+          return {
+            isValid: false,
+            filteredData: submissionData,
+            violations,
+            message: this.options.customMessage,
+          };
+        } else if (this.options.replaceWithAsterisks) {
+          // Replace with cleaned text
+          filteredData[key] = result.cleanedText;
+        } else {
+          // Keep original but mark as violation
+          filteredData[key] = value;
+        }
+      } else {
+        filteredData[key] = value;
+      }
+    }
+
+    return {
+      isValid: violations.length === 0 || !this.options.strictMode,
+      filteredData,
+      violations,
+      message: violations.length > 0 ? this.options.customMessage : undefined,
+    };
+  }
+
+  /**
+   * Check a single value for profanity
+   */
+  private checkValue(value: any): ProfanityCheckResult {
+    if (typeof value === "string") {
+      return this.checkText(value);
+    } else if (Array.isArray(value)) {
+      // Check array values
+      const textValues = value.filter((v) => typeof v === "string").join(" ");
+      return this.checkText(textValues);
+    } else if (typeof value === "object" && value !== null) {
+      // Check object values recursively
+      const textValues = Object.values(value)
+        .filter((v) => typeof v === "string")
+        .join(" ");
+      return this.checkText(textValues);
+    }
+
+    return {
+      hasBeenFiltered: false,
+      originalText: String(value),
+      filteredWords: [],
+    };
+  }
+
+  /**
+   * Check text for profanity and return detailed result
+   */
+  private checkText(text: string): ProfanityCheckResult {
+    if (!text || typeof text !== "string") {
+      return {
+        hasBeenFiltered: false,
+        originalText: text || "",
+        filteredWords: [],
+      };
+    }
+
+    const isProfane = this.filter.isProfane(text);
+
+    if (isProfane) {
+      const cleanedText = this.filter.clean(text);
+      const filteredWords = this.extractFilteredWords(text, cleanedText);
+
+      return {
+        hasBeenFiltered: true,
+        cleanedText,
+        originalText: text,
+        filteredWords,
+        message: this.options.customMessage,
+      };
+    }
+
+    return {
+      hasBeenFiltered: false,
+      originalText: text,
+      filteredWords: [],
+    };
+  }
+
+  /**
+   * Extract which words were filtered by comparing original and cleaned text
+   */
+  private extractFilteredWords(original: string, cleaned: string): string[] {
+    const originalWords = original.toLowerCase().split(/\s+/);
+    const cleanedWords = cleaned.toLowerCase().split(/\s+/);
+    const filtered: string[] = [];
+
+    for (let i = 0; i < originalWords.length; i++) {
+      if (cleanedWords[i] && cleanedWords[i].includes("*")) {
+        filtered.push(originalWords[i]);
+      }
+    }
+
+    return filtered;
+  }
+
+  /**
+   * Update filter options
+   */
+  updateOptions(newOptions: Partial<ProfanityFilterOptions>) {
+    this.options = { ...this.options, ...newOptions };
+
+    // Recreate filter with new settings
+    this.filter = new Filter();
+
+    if (this.options.customWords && this.options.customWords.length > 0) {
+      this.filter.addWords(...this.options.customWords);
+    }
+
+    if (
+      this.options.whitelistedWords &&
+      this.options.whitelistedWords.length > 0
+    ) {
+      this.filter.removeWords(...this.options.whitelistedWords);
+    }
+  }
+}
+
+/**
+ * Create a profanity filter instance from form settings
+ */
+export function createProfanityFilter(
+  settings: ProfanityFilterOptions
+): ProfanityFilterService {
+  return new ProfanityFilterService(settings);
+}

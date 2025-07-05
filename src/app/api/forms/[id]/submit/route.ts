@@ -2,11 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { formsDbServer } from "@/lib/database";
 import { checkFormRateLimit } from "@/lib/rate-limit";
 import { headers } from "next/headers";
-import { DEFAULT_RATE_LIMIT_SETTINGS } from "@/lib/form-defaults";
+import {
+  DEFAULT_RATE_LIMIT_SETTINGS,
+  DEFAULT_PROFANITY_FILTER_SETTINGS,
+} from "@/lib/form-defaults";
+import { createProfanityFilter } from "@/lib/profanity-filter";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id: formId } = await params;
@@ -24,7 +28,7 @@ export async function POST(
     if (!form) {
       return NextResponse.json(
         { error: "Form not found or not published" },
-        { status: 404 },
+        { status: 404 }
       );
     }
 
@@ -52,16 +56,47 @@ export async function POST(
             remaining: rateLimitResult.remaining,
             reset: rateLimitResult.reset,
           },
-          { status: 429 },
+          { status: 429 }
         );
       }
     }
 
-    // Submit the form if rate limiting passes
+    // Check profanity filter
+    const profanityFilterSettings = {
+      ...DEFAULT_PROFANITY_FILTER_SETTINGS,
+      ...form.schema.settings.profanityFilter,
+    };
+
+    let filteredSubmissionData = submissionData;
+
+    if (profanityFilterSettings.enabled) {
+      const profanityFilter = createProfanityFilter(profanityFilterSettings);
+      const filterResult = profanityFilter.filterSubmissionData(submissionData);
+
+      if (!filterResult.isValid) {
+        return NextResponse.json(
+          {
+            error: "Content validation failed",
+            message:
+              filterResult.message ||
+              "Your submission contains inappropriate content. Please review and resubmit.",
+            violations: filterResult.violations.length,
+          },
+          { status: 400 }
+        );
+      }
+
+      // Use filtered data if replacement mode is enabled
+      if (profanityFilterSettings.replaceWithAsterisks) {
+        filteredSubmissionData = filterResult.filteredData;
+      }
+    }
+
+    // Submit the form if all checks pass
     const submission = await formsDbServer.submitForm(
       formId,
-      submissionData,
-      ipAddress,
+      filteredSubmissionData,
+      ipAddress
     );
 
     return NextResponse.json({
@@ -73,7 +108,7 @@ export async function POST(
     console.error("Form submission error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

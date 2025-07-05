@@ -594,24 +594,27 @@ export async function POST(req: NextRequest) {
           while (true) {
             const { value, done } = await reader.read();
             if (done) break;
-            
+
             // Check if the client has aborted the request
             if (controller.desiredSize === null) {
               // Controller is closed, stop processing
               break;
             }
-            
+
             const chunk =
               typeof value === "string"
                 ? value
                 : new TextDecoder().decode(value);
             aiResponse += chunk;
-            
+
             try {
               controller.enqueue(encoder.encode(chunk));
             } catch (error) {
               // If controller is closed, stop processing
-              if (error instanceof Error && error.message.includes('Controller is already closed')) {
+              if (
+                error instanceof Error &&
+                error.message.includes("Controller is already closed")
+              ) {
                 break;
               }
               throw error;

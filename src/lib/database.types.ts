@@ -250,5 +250,13 @@ export interface FormSchema {
       message?: string; // Custom rate limit message
       blockDuration?: number; // How long to block after limit is reached (in minutes)
     };
+    profanityFilter?: {
+      enabled?: boolean;
+      strictMode?: boolean; // If true, reject submissions with profanity
+      replaceWithAsterisks?: boolean; // If true, replace profanity with asterisks instead of rejecting
+      customWords?: string[]; // Additional words to filter
+      customMessage?: string; // Message to show when profanity is detected
+      whitelistedWords?: string[]; // Words to exempt from filtering
+    };
   };
 }

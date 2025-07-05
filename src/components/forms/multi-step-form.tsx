@@ -26,15 +26,15 @@ export function MultiStepForm({ formId, schema }: MultiStepFormProps) {
   const blocks: FormBlock[] = schema.blocks?.length
     ? schema.blocks
     : schema.fields?.length
-      ? [
-          {
-            id: "default",
-            title: "Form",
-            description: "",
-            fields: schema.fields,
-          },
-        ]
-      : [];
+    ? [
+        {
+          id: "default",
+          title: "Form",
+          description: "",
+          fields: schema.fields,
+        },
+      ]
+    : [];
 
   const totalSteps = blocks.length;
   const currentBlock = blocks[currentStep];
@@ -193,7 +193,16 @@ export function MultiStepForm({ formId, schema }: MultiStepFormProps) {
         if (response.status === 429) {
           // Rate limit exceeded
           toast.error(
-            result.message || "Too many submissions. Please try again later.",
+            result.message || "Too many submissions. Please try again later."
+          );
+        } else if (
+          response.status === 400 &&
+          result.error === "Content validation failed"
+        ) {
+          // Profanity filter violation
+          toast.error(
+            result.message ||
+              "Your submission contains inappropriate content. Please review and resubmit."
           );
         } else {
           throw new Error(result.error || "Failed to submit form");

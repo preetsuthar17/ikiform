@@ -228,7 +228,16 @@ function SingleStepForm({ formId, schema }: PublicFormProps) {
         if (response.status === 429) {
           // Rate limit exceeded
           toast.error(
-            result.message || "Too many submissions. Please try again later.",
+            result.message || "Too many submissions. Please try again later."
+          );
+        } else if (
+          response.status === 400 &&
+          result.error === "Content validation failed"
+        ) {
+          // Profanity filter violation
+          toast.error(
+            result.message ||
+              "Your submission contains inappropriate content. Please review and resubmit."
           );
         } else {
           throw new Error(result.error || "Failed to submit form");

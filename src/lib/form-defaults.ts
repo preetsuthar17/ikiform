@@ -12,10 +12,23 @@ export const DEFAULT_RATE_LIMIT_SETTINGS = {
 };
 
 /**
- * Ensures a form schema has the default rate limiting settings
- * This is used to handle legacy forms and ensure all forms have rate limiting enabled
+ * Default profanity filter settings for all forms
  */
-export function ensureDefaultRateLimitSettings(schema: FormSchema): FormSchema {
+export const DEFAULT_PROFANITY_FILTER_SETTINGS = {
+  enabled: false,
+  strictMode: true,
+  replaceWithAsterisks: false,
+  customWords: [],
+  customMessage:
+    "Your submission contains inappropriate content. Please review and resubmit.",
+  whitelistedWords: [],
+};
+
+/**
+ * Ensures a form schema has the default rate limiting and profanity filter settings
+ * This is used to handle legacy forms and ensure all forms have these settings
+ */
+export function ensureDefaultFormSettings(schema: FormSchema): FormSchema {
   return {
     ...schema,
     settings: {
@@ -24,8 +37,17 @@ export function ensureDefaultRateLimitSettings(schema: FormSchema): FormSchema {
         ...DEFAULT_RATE_LIMIT_SETTINGS,
         ...schema.settings.rateLimit, // Keep any existing custom settings
       },
+      profanityFilter: {
+        ...DEFAULT_PROFANITY_FILTER_SETTINGS,
+        ...schema.settings.profanityFilter, // Keep any existing custom settings
+      },
     },
   };
+}
+
+// Legacy function name for backward compatibility
+export function ensureDefaultRateLimitSettings(schema: FormSchema): FormSchema {
+  return ensureDefaultFormSettings(schema);
 }
 
 /**

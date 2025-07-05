@@ -310,7 +310,8 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const [chatStreaming, setChatStreaming] = useState(false);
   const [streamedContent, setStreamedContent] = useState("");
   const [isMobile, setIsMobile] = useState(false);
-  const [abortController, setAbortController] = useState<AbortController | null>(null);
+  const [abortController, setAbortController] =
+    useState<AbortController | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatInputRef = useRef<HTMLTextAreaElement>(null);
   const { theme } = useTheme();

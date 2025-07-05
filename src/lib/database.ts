@@ -1,7 +1,7 @@
 import { createClient } from "@/utils/supabase/client";
 import { createClient as createServerClient } from "@/utils/supabase/server";
 import type { Database, FormSchema } from "./database.types";
-import { ensureDefaultRateLimitSettings } from "./form-defaults";
+import { ensureDefaultFormSettings } from "./form-defaults";
 
 export type Form = Database["public"]["Tables"]["forms"]["Row"];
 export type FormSubmission =
@@ -14,7 +14,7 @@ export const formsDb = {
     const supabase = createClient();
 
     // Ensure the schema has default rate limiting settings
-    const schemaWithDefaults = ensureDefaultRateLimitSettings(schema);
+    const schemaWithDefaults = ensureDefaultFormSettings(schema);
 
     const { data, error } = await supabase
       .from("forms")
@@ -46,7 +46,7 @@ export const formsDb = {
     // Ensure all forms have default rate limiting settings for legacy forms
     return data.map((form) => ({
       ...form,
-      schema: ensureDefaultRateLimitSettings(form.schema),
+      schema: ensureDefaultFormSettings(form.schema),
     }));
   },
 
@@ -62,10 +62,10 @@ export const formsDb = {
 
     if (error) throw error;
 
-    // Ensure the schema has default rate limiting settings for legacy forms
+    // Ensure the schema has default settings for legacy forms
     return {
       ...data,
-      schema: ensureDefaultRateLimitSettings(data.schema),
+      schema: ensureDefaultFormSettings(data.schema),
     };
   },
 
@@ -312,10 +312,10 @@ export const formsDbServer = {
 
     if (error) throw error;
 
-    // Ensure the schema has default rate limiting settings for legacy forms
+    // Ensure the schema has default settings for legacy forms
     return {
       ...data,
-      schema: ensureDefaultRateLimitSettings(data.schema),
+      schema: ensureDefaultFormSettings(data.schema),
     };
   },
 
