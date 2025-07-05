@@ -162,16 +162,16 @@ export default function PricingClient({ products }: PricingClientProps) {
                 {user && hasPremium ? (
                   <Button size="lg" className="w-full">
                     <Link
-                      href="/portal"
+                      href="/dashboard"
                       target="_blank"
                       className="w-full block"
                     >
-                      Manage Your Subscription
+                      Go to Dashboard
                     </Link>
                   </Button>
                 ) : (
                   <Link
-                    href={`/checkout?products=${PRODUCT_ID}&customerEmail=${user?.email}`}
+                    href={user ? `/purchase/${PRODUCT_ID}` : "#"}
                     className="w-full block"
                     onClick={handlePurchaseClick}
                   >
