@@ -28,10 +28,10 @@ export const POST = Webhooks({
 
       if (lookupError || !userData) {
         console.warn(
-          `⚠️ User not found in database with email: ${customerEmail}`
+          `⚠️ User not found in database with email: ${customerEmail}`,
         );
         console.log(
-          "💡 Make sure the user has signed up with this email address"
+          "💡 Make sure the user has signed up with this email address",
         );
         return;
       }
@@ -52,7 +52,7 @@ export const POST = Webhooks({
 
       if (data && data.length > 0) {
         console.log(
-          `✅ Successfully updated premium status for user: ${customerEmail} (uid: ${userData.uid})`
+          `✅ Successfully updated premium status for user: ${customerEmail} (uid: ${userData.uid})`,
         );
         console.log("👤 Updated user data:", data[0]);
       } else {
