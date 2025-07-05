@@ -1,7 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+
+// Icon imports
 import { Copy, Share, Globe, Check } from "lucide-react";
+
+// UI components
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,6 +15,8 @@ import {
   ModalHeader,
   ModalTitle,
 } from "@/components/ui/modal";
+
+// Hooks
 import { toast } from "@/hooks/use-toast";
 
 interface ShareFormModalProps {
@@ -32,9 +38,7 @@ export function ShareFormModal({
   const [publishing, setPublishing] = useState(false);
 
   const shareUrl = formId
-    ? `${
-        typeof window !== "undefined" ? window.location.origin : ""
-      }/forms/${formId}`
+    ? `${typeof window !== "undefined" ? window.location.origin : ""}/forms/${formId}`
     : "";
 
   const handleCopyLink = async () => {
@@ -42,13 +46,10 @@ export function ShareFormModal({
 
     setCopying(true);
     try {
-      // Use the modern clipboard API with proper error handling
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(shareUrl);
         toast.success("Link copied to clipboard!");
       } else {
-        // Fallback for older browsers or non-secure contexts
-        // Create a temporary textarea element
         const textarea = document.createElement("textarea");
         textarea.value = shareUrl;
         textarea.style.position = "absolute";
@@ -90,10 +91,9 @@ export function ShareFormModal({
 
         <div className="flex flex-col gap-6">
           {!isPublished ? (
-            // Form not published yet
             <div className="text-center space-y-4">
-              <div className="p-4 bg-muted/50 rounded-lg">
-                <Globe className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
+              <div className="p-4 bg-muted/50 rounded-ele flex flex-col items-center gap-2">
+                <Globe className="w-8 h-8 text-muted-foreground" />
                 <p className="text-sm text-muted-foreground">
                   Your form needs to be published before it can be shared
                   publicly.
@@ -105,11 +105,10 @@ export function ShareFormModal({
                 disabled={!formId || publishing}
                 className="w-full"
               >
-                {publishing ? "Publishing..." : "Publish Form"}
+                {publishing ? "Publishing" : "Publish Form"}
               </Button>
             </div>
           ) : (
-            // Form is published
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
                 <Label htmlFor="share-url">Public Form URL</Label>
@@ -137,15 +136,13 @@ export function ShareFormModal({
                 </div>
               </div>
 
-              <div className="p-4 bg-accent/10 border border-accent/20 rounded-lg">
-                <div className="flex items-start gap-3">
-                  <Globe className="w-5 h-5 text-accent-foreground mt-0.5" />
-                  <div className="space-y-1">
-                    <p className="text-sm font-medium">Form is live!</p>
-                    <p className="text-xs text-muted-foreground">
-                      Anyone with this link can access and submit your form.
-                    </p>
-                  </div>
+              <div className="p-4 bg-accent/10 border border-accent/20 rounded-ele flex gap-3">
+                <Globe className="w-5 h-5 text-accent-foreground" />
+                <div className="space-y-1">
+                  <p className="text-sm font-medium">Form is live!</p>
+                  <p className="text-xs text-muted-foreground">
+                    Anyone with this link can access and submit your form.
+                  </p>
                 </div>
               </div>
             </div>
