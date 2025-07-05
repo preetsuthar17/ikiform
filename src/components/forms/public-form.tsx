@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
-import { RateLimitInfo } from "./rate-limit-info";
 import { toast } from "@/hooks/use-toast";
 import { MultiStepForm } from "./multi-step-form";
 import type { FormSchema } from "@/lib/database.types";
+import Link from "next/link";
 
 interface PublicFormProps {
   formId: string;
@@ -15,91 +15,29 @@ interface PublicFormProps {
 }
 
 export function PublicForm({ formId, schema }: PublicFormProps) {
-  // Check if this is a multi-step form
-  // Multi-step if explicitly enabled OR if there are multiple blocks
   const isMultiStep = schema.settings.multiStep || schema.blocks?.length > 1;
 
-  if (isMultiStep) {
-    return <MultiStepForm formId={formId} schema={schema} />;
-  }
-
-  // For backward compatibility and single-step forms, use the original implementation
-  return <SingleStepForm formId={formId} schema={schema} />;
+  return isMultiStep ? (
+    <MultiStepForm formId={formId} schema={schema} />
+  ) : (
+    <SingleStepForm formId={formId} schema={schema} />
+  );
 }
 
-// Original single-step form implementation
 function SingleStepForm({ formId, schema }: PublicFormProps) {
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  // Get all fields - either from blocks or legacy fields array
   const allFields = schema.blocks?.length
     ? schema.blocks.flatMap((block) => block.fields)
     : schema.fields || [];
 
-  // Get form styling classes
-  const getFormClasses = () => {
-    const maxWidthClass = {
-      sm: "max-w-sm",
-      md: "max-w-md",
-      lg: "max-w-lg",
-      xl: "max-w-xl",
-      full: "max-w-full",
-    }[schema.settings.layout?.maxWidth || "lg"];
-
-    const paddingClass = {
-      none: "p-0",
-      sm: "p-4",
-      md: "p-6",
-      lg: "p-8",
-    }[schema.settings.layout?.padding || "md"];
-
-    const spacingClass = {
-      compact: "space-y-4",
-      normal: "space-y-6",
-      relaxed: "space-y-8",
-    }[schema.settings.layout?.spacing || "normal"];
-
-    const alignmentClass = {
-      left: "text-left",
-      center: "text-center",
-      right: "text-right",
-    }[schema.settings.layout?.alignment || "left"];
-
-    return {
-      container: `mx-auto ${maxWidthClass} ${paddingClass} ${alignmentClass}`,
-      form: spacingClass,
-    };
-  };
-
-  const formClasses = getFormClasses();
-
-  // Apply theme styles
-  const getThemeStyles = () => {
-    if (!schema.settings.theme) return {};
-
-    return {
-      "--form-primary-color": schema.settings.theme.primaryColor,
-      "--form-background-color": schema.settings.theme.backgroundColor,
-      "--form-text-color": schema.settings.theme.textColor,
-      "--form-border-color": schema.settings.theme.borderColor,
-    } as React.CSSProperties;
-  };
-
   const handleFieldValueChange = (fieldId: string, value: any) => {
-    setFormData((prev) => ({
-      ...prev,
-      [fieldId]: value,
-    }));
-
-    // Clear error when user starts typing
+    setFormData((prev) => ({ ...prev, [fieldId]: value }));
     if (errors[fieldId]) {
-      setErrors((prev) => ({
-        ...prev,
-        [fieldId]: "",
-      }));
+      setErrors((prev) => ({ ...prev, [fieldId]: "" }));
     }
   };
 
@@ -108,35 +46,21 @@ function SingleStepForm({ formId, schema }: PublicFormProps) {
 
     allFields.forEach((field) => {
       const value = formData[field.id];
-
-      // Required field validation
-      if (field.required) {
-        if (
-          !value ||
-          (Array.isArray(value) && value.length === 0) ||
-          value === ""
-        ) {
-          newErrors[field.id] =
-            field.validation?.requiredMessage || `This field is required`;
-          return;
-        }
-      }
-
-      // Skip other validations if field is empty and not required
-      if (!value && !field.required) return;
-
-      // Email validation
-      if (field.type === "email" && value) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value)) {
-          newErrors[field.id] =
-            field.validation?.emailMessage ||
-            "Please enter a valid email address";
-        }
-      }
-
-      // Text length validation
-      if (["text", "textarea", "email"].includes(field.type) && value) {
+      if (
+        field.required &&
+        (!value || (Array.isArray(value) && value.length === 0))
+      ) {
+        newErrors[field.id] =
+          field.validation?.requiredMessage || "This field is required";
+      } else if (
+        field.type === "email" &&
+        value &&
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+      ) {
+        newErrors[field.id] =
+          field.validation?.emailMessage ||
+          "Please enter a valid email address";
+      } else if (["text", "textarea", "email"].includes(field.type) && value) {
         if (
           field.validation?.minLength &&
           value.length < field.validation.minLength
@@ -153,10 +77,7 @@ function SingleStepForm({ formId, schema }: PublicFormProps) {
             field.validation?.maxLengthMessage ||
             `Must be no more than ${field.validation.maxLength} characters`;
         }
-      }
-
-      // Number validation
-      if (field.type === "number" && value) {
+      } else if (field.type === "number" && value) {
         const numValue = parseFloat(value);
         if (isNaN(numValue)) {
           newErrors[field.id] =
@@ -179,19 +100,13 @@ function SingleStepForm({ formId, schema }: PublicFormProps) {
               `Must be no more than ${field.validation.max}`;
           }
         }
-      }
-
-      // Pattern validation
-      if (field.validation?.pattern && value) {
-        try {
-          const regex = new RegExp(field.validation.pattern);
-          if (!regex.test(value)) {
-            newErrors[field.id] =
-              field.validation?.patternMessage || "Invalid format";
-          }
-        } catch (e) {
-          // Invalid regex pattern - skip validation
-        }
+      } else if (
+        field.validation?.pattern &&
+        value &&
+        !new RegExp(field.validation.pattern).test(value)
+      ) {
+        newErrors[field.id] =
+          field.validation?.patternMessage || "Invalid format";
       }
     });
 
@@ -201,58 +116,32 @@ function SingleStepForm({ formId, schema }: PublicFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!validateForm()) {
       toast.error("Please fix the errors in the form");
       return;
     }
 
     setSubmitting(true);
-
     try {
-      // Process form data for submission
-      const submissionData = { ...formData };
-
-      // Use the API endpoint instead of direct database call
       const response = await fetch(`/api/forms/${formId}/submit`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ submissionData }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ submissionData: formData }),
       });
 
       const result = await response.json();
-
       if (!response.ok) {
-        if (response.status === 429) {
-          // Rate limit exceeded
-          toast.error(
-            result.message || "Too many submissions. Please try again later."
-          );
-        } else if (
-          response.status === 400 &&
-          result.error === "Content validation failed"
-        ) {
-          // Profanity filter violation
-          toast.error(
-            result.message ||
-              "Your submission contains inappropriate content. Please review and resubmit."
-          );
-        } else {
-          throw new Error(result.error || "Failed to submit form");
-        }
+        toast.error(result.message || "Failed to submit form");
         return;
       }
 
       setSubmitted(true);
       toast.success("Form submitted successfully!");
-
-      // Redirect if URL is provided
       if (schema.settings.redirectUrl) {
-        setTimeout(() => {
-          window.location.href = schema.settings.redirectUrl!;
-        }, 2000);
+        setTimeout(
+          () => (window.location.href = schema.settings.redirectUrl!),
+          2000
+        );
       }
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -264,10 +153,10 @@ function SingleStepForm({ formId, schema }: PublicFormProps) {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-background py-12">
-        <div className="max-w-2xl mx-auto px-4">
-          <Card className="p-8 text-center rounded-card">
-            <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="max-w-2xl mx-auto flex flex-col gap-6 w-full">
+          <Card className="p-8 text-center rounded-card flex flex-col gap-4">
+            <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center">
               <svg
                 className="w-8 h-8 text-accent-foreground"
                 fill="none"
@@ -282,15 +171,13 @@ function SingleStepForm({ formId, schema }: PublicFormProps) {
                 />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-foreground mb-2">
-              Thank You!
-            </h2>
+            <h2 className="text-2xl font-bold text-foreground">Thank You!</h2>
             <p className="text-muted-foreground">
               {schema.settings.successMessage ||
                 "Your form has been submitted successfully."}
             </p>
             {schema.settings.redirectUrl && (
-              <p className="text-sm text-muted-foreground/70 mt-4">
+              <p className="text-sm text-muted-foreground">
                 Redirecting you in a moment...
               </p>
             )}
@@ -301,12 +188,11 @@ function SingleStepForm({ formId, schema }: PublicFormProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background py-12">
-      <div className="max-w-2xl mx-auto px-4">
-        <Card className="p-8 space-y-6 rounded-card">
-          {/* Form Header */}
-          <div>
-            <h1 className="text-3xl font-bold text-foreground mb-2">
+    <div className="min-h-screen bg-background flex items-center justify-center w-full">
+      <div className="max-w-2xl mx-auto flex flex-col gap-8 w-full">
+        <Card className="p-8 flex flex-col gap-6 rounded-card">
+          <div className="flex flex-col gap-2">
+            <h1 className="text-3xl font-bold text-foreground">
               {schema.settings.title}
             </h1>
             {schema.settings.description && (
@@ -315,10 +201,8 @@ function SingleStepForm({ formId, schema }: PublicFormProps) {
               </p>
             )}
           </div>
-
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {allFields.map((field, index) => (
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+            {allFields.map((field) => (
               <div key={field.id}>
                 <FormFieldRenderer
                   field={field}
@@ -328,25 +212,24 @@ function SingleStepForm({ formId, schema }: PublicFormProps) {
                 />
               </div>
             ))}
-
-            <div>
-              <Button
-                type="submit"
-                className="w-full sm:w-auto"
-                disabled={submitting}
-              >
-                {submitting
-                  ? "Submitting..."
-                  : schema.settings.submitText || "Submit"}
-              </Button>
-            </div>
+            <Button
+              type="submit"
+              className="w-fit ml-auto sm:w-auto"
+              disabled={submitting}
+              loading={submitting}
+            >
+              {submitting
+                ? "Submitting"
+                : schema.settings.submitText || "Submit"}
+            </Button>
           </form>
         </Card>
-
-        {/* Powered by */}
-        <div className="text-center mt-6">
+        <div className="text-center">
           <p className="text-sm text-muted-foreground">
-            Powered by <span className="font-medium">Ikiform</span>
+            Powered by{" "}
+            <span className="font-medium underline text-foreground">
+              <Link href="https://ikiform.com">Ikiform</Link>
+            </span>
           </p>
         </div>
       </div>
