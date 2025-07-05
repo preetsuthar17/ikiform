@@ -149,17 +149,19 @@ export interface FormField {
     | "slider"
     | "tags";
   label: string;
-  description?: string; // Field description shown below the field
+  description?: string;
   placeholder?: string;
   required: boolean;
-  options?: string[]; // For radio, checkbox, select
+  options?: string[];
   validation?: {
     minLength?: number;
     maxLength?: number;
     min?: number;
     max?: number;
     pattern?: string;
-    // Custom error messages
+
+    /** Custom error messages **/
+
     requiredMessage?: string;
     minLengthMessage?: string;
     maxLengthMessage?: string;
@@ -192,7 +194,7 @@ export interface FormBlock {
   title: string;
   description?: string;
   fields: FormField[];
-  // Block customization
+  /** Block settings */
   settings?: {
     showStepNumber?: boolean;
     stepNumberStyle?: "number" | "roman" | "letters";
@@ -205,15 +207,15 @@ export interface FormBlock {
 
 export interface FormSchema {
   blocks: FormBlock[];
-  fields: FormField[]; // Keep for backward compatibility
+  fields: FormField[];
   settings: {
     title: string;
     description?: string;
     submitText?: string;
     successMessage?: string;
     redirectUrl?: string;
-    multiStep?: boolean; // Enable multi-step mode
-    showProgress?: boolean; // Show progress bar
+    multiStep?: boolean;
+    showProgress?: boolean;
     // Enhanced form customization
     theme?: {
       primaryColor?: string;
@@ -245,18 +247,18 @@ export interface FormSchema {
     };
     rateLimit?: {
       enabled?: boolean;
-      maxSubmissions?: number; // Maximum number of submissions
-      timeWindow?: number; // Time window in minutes
-      message?: string; // Custom rate limit message
-      blockDuration?: number; // How long to block after limit is reached (in minutes)
+      maxSubmissions?: number;
+      timeWindow?: number;
+      message?: string;
+      blockDuration?: number;
     };
     profanityFilter?: {
       enabled?: boolean;
-      strictMode?: boolean; // If true, reject submissions with profanity
-      replaceWithAsterisks?: boolean; // If true, replace profanity with asterisks instead of rejecting
-      customWords?: string[]; // Additional words to filter
-      customMessage?: string; // Message to show when profanity is detected
-      whitelistedWords?: string[]; // Words to exempt from filtering
+      strictMode?: boolean;
+      replaceWithAsterisks?: boolean;
+      customWords?: string[];
+      customMessage?: string;
+      whitelistedWords?: string[];
     };
   };
 }

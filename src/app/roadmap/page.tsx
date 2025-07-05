@@ -22,7 +22,17 @@ const roadmapItems: RoadmapProps[] = [
   {
     title: "analytics",
     description: "view analytics and responses for forms.",
-    status: "inProgress",
+    status: "completed",
+  },
+  {
+    title: "ai features",
+    description: "integrate AI for form creations and analytics.",
+    status: "completed",
+  },
+  {
+    title: "webhooks",
+    description: "set up webhooks for real-time notifications.",
+    status: "planned",
   },
   {
     title: "form customization",
@@ -30,18 +40,8 @@ const roadmapItems: RoadmapProps[] = [
     status: "notStarted",
   },
   {
-    title: "ai features",
-    description: "integrate AI for form creations and analytics.",
-    status: "notStarted",
-  },
-  {
     title: "integrations",
     description: "connect with other tools and services.",
-    status: "notStarted",
-  },
-  {
-    title: "webhooks",
-    description: "set up webhooks for real-time notifications.",
     status: "notStarted",
   },
 ];

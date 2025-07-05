@@ -9,11 +9,9 @@ export type FormSubmission =
 
 // Client-side database operations
 export const formsDb = {
-  // Create a new form
   async createForm(userId: string, title: string, schema: FormSchema) {
     const supabase = createClient();
 
-    // Ensure the schema has default rate limiting settings
     const schemaWithDefaults = ensureDefaultFormSettings(schema);
 
     const { data, error } = await supabase
@@ -43,7 +41,6 @@ export const formsDb = {
 
     if (error) throw error;
 
-    // Ensure all forms have default rate limiting settings for legacy forms
     return data.map((form) => ({
       ...form,
       schema: ensureDefaultFormSettings(form.schema),
@@ -62,7 +59,6 @@ export const formsDb = {
 
     if (error) throw error;
 
-    // Ensure the schema has default settings for legacy forms
     return {
       ...data,
       schema: ensureDefaultFormSettings(data.schema),
@@ -197,13 +193,12 @@ export const formsDb = {
       .from("ai_builder_chat")
       .select("session_id, created_at")
       .eq("user_id", userId)
-      .eq("role", "user") // Only get user messages to identify sessions
+      .eq("role", "user")
       .order("created_at", { ascending: false })
       .limit(limit);
 
     if (error) throw error;
 
-    // Group by session_id and get the latest message per session
     const sessions = data.reduce((acc, curr) => {
       if (!acc[curr.session_id]) {
         acc[curr.session_id] = curr.created_at;
@@ -275,13 +270,12 @@ export const formsDb = {
       .from("ai_analytics_chat")
       .select("session_id, form_id, created_at")
       .eq("user_id", userId)
-      .eq("role", "user") // Only get user messages to identify sessions
+      .eq("role", "user")
       .order("created_at", { ascending: false })
       .limit(limit);
 
     if (error) throw error;
 
-    // Group by session_id and get the latest message per session
     const sessions = data.reduce((acc, curr) => {
       if (!acc[curr.session_id]) {
         acc[curr.session_id] = {
@@ -312,7 +306,6 @@ export const formsDbServer = {
 
     if (error) throw error;
 
-    // Ensure the schema has default settings for legacy forms
     return {
       ...data,
       schema: ensureDefaultFormSettings(data.schema),
@@ -403,13 +396,12 @@ export const formsDbServer = {
       .from("ai_builder_chat")
       .select("session_id, created_at")
       .eq("user_id", userId)
-      .eq("role", "user") // Only get user messages to identify sessions
+      .eq("role", "user")
       .order("created_at", { ascending: false })
       .limit(limit);
 
     if (error) throw error;
 
-    // Group by session_id and get the latest message per session
     const sessions = data.reduce((acc, curr) => {
       if (!acc[curr.session_id]) {
         acc[curr.session_id] = curr.created_at;
@@ -481,13 +473,12 @@ export const formsDbServer = {
       .from("ai_analytics_chat")
       .select("session_id, form_id, created_at")
       .eq("user_id", userId)
-      .eq("role", "user") // Only get user messages to identify sessions
+      .eq("role", "user")
       .order("created_at", { ascending: false })
       .limit(limit);
 
     if (error) throw error;
 
-    // Group by session_id and get the latest message per session
     const sessions = data.reduce((acc, curr) => {
       if (!acc[curr.session_id]) {
         acc[curr.session_id] = {

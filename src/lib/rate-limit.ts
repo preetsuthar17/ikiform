@@ -16,10 +16,8 @@ const defaultSettings: RateLimitSettings = {
   window: "10 m",
 };
 
-// Cache for rate limiters
 const rateLimiters = new Map<string, Ratelimit>();
 
-// Create or get a rate limiter based on settings
 function getRateLimiter(
   settings: RateLimitSettings,
   prefix: string = "@upstash/ratelimit",
@@ -81,7 +79,6 @@ export async function checkCustomRateLimit(
   return result;
 }
 
-// Interface for form-specific rate limiting (matches form schema)
 interface FormRateLimitSettings {
   enabled: boolean;
   maxSubmissions: number;
@@ -105,11 +102,10 @@ export async function checkFormRateLimit(
     };
   }
 
-  // Convert form settings to our internal rate limit format
   const rateLimitSettings: RateLimitSettings = {
     enabled: settings.enabled,
     maxSubmissions: settings.maxSubmissions,
-    window: `${settings.timeWindow} m`, // Convert minutes to string format
+    window: `${settings.timeWindow} m`,
   };
 
   const prefix = `form-${formId}`;

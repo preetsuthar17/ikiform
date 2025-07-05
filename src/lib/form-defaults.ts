@@ -35,17 +35,16 @@ export function ensureDefaultFormSettings(schema: FormSchema): FormSchema {
       ...schema.settings,
       rateLimit: {
         ...DEFAULT_RATE_LIMIT_SETTINGS,
-        ...schema.settings.rateLimit, // Keep any existing custom settings
+        ...schema.settings.rateLimit,
       },
       profanityFilter: {
         ...DEFAULT_PROFANITY_FILTER_SETTINGS,
-        ...schema.settings.profanityFilter, // Keep any existing custom settings
+        ...schema.settings.profanityFilter,
       },
     },
   };
 }
 
-// Legacy function name for backward compatibility
 export function ensureDefaultRateLimitSettings(schema: FormSchema): FormSchema {
   return ensureDefaultFormSettings(schema);
 }
@@ -84,7 +83,7 @@ export function createDefaultFormSchema(options: {
       successMessage: "Thank you for your submission!",
       redirectUrl: "",
       multiStep: options.multiStep || false,
-      showProgress: options.multiStep !== false, // Default to true unless explicitly single-step
+      showProgress: options.multiStep !== false,
       rateLimit: { ...DEFAULT_RATE_LIMIT_SETTINGS },
     },
   };
