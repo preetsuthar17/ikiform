@@ -43,7 +43,7 @@ export const getVariantClasses = (variant?: FieldVariant) => {
 export const getBaseClasses = (field: FormField, error?: string) => {
   const sizeClasses = getSizeClasses(field.settings?.size as FieldSize);
   const variantClasses = getVariantClasses(
-    field.settings?.variant as FieldVariant
+    field.settings?.variant as FieldVariant,
   );
   const errorClasses = error
     ? "border-destructive focus:border-destructive"

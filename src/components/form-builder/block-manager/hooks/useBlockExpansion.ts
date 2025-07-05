@@ -6,7 +6,7 @@ import type { FormBlock } from "@/lib/database";
 
 export function useBlockExpansion(blocks: FormBlock[]) {
   const [expandedBlocks, setExpandedBlocks] = useState<Set<string>>(
-    new Set(blocks.map((block) => block.id))
+    new Set(blocks.map((block) => block.id)),
   );
 
   const toggleBlockExpansion = (blockId: string) => {

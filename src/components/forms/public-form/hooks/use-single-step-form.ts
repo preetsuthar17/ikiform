@@ -15,7 +15,7 @@ import {
 export const useSingleStepForm = (
   formId: string,
   schema: FormSchema,
-  fields: FormField[]
+  fields: FormField[],
 ): SingleStepFormState & SingleStepFormActions => {
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -34,7 +34,7 @@ export const useSingleStepForm = (
 
     const { errors: validationErrors, isValid } = validateSingleStepForm(
       fields,
-      formData
+      formData,
     );
 
     if (!isValid) {

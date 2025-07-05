@@ -30,7 +30,7 @@ function createErrorResponse(message: string, status: number = 500) {
 }
 
 function validateAndSanitizeMessages(
-  messages: any[]
+  messages: any[],
 ): { role: string; content: string }[] {
   if (
     !Array.isArray(messages) ||
@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
       {
         status: 429,
         headers: { "Retry-After": retryAfter.toString() },
-      }
+      },
     );
   }
 
@@ -102,7 +102,7 @@ export async function POST(req: NextRequest) {
     } catch (error) {
       return createErrorResponse(
         error instanceof Error ? error.message : "Invalid request format",
-        400
+        400,
       );
     }
 
@@ -124,7 +124,7 @@ export async function POST(req: NextRequest) {
             timestamp: new Date().toISOString(),
             ip: ip,
             userAgent: req.headers.get("user-agent") || "",
-          }
+          },
         );
       } catch (error) {
         console.error("Error saving user message:", error);
@@ -182,7 +182,7 @@ export async function POST(req: NextRequest) {
                   temperature: 0.3,
                   maxTokens: 1750,
                   topP: 0.9,
-                }
+                },
               );
             } catch (error) {
               console.error("Error saving AI response:", error);
@@ -225,6 +225,6 @@ export async function GET() {
     {
       status: 200,
       headers: { "Content-Type": "application/json" },
-    }
+    },
   );
 }

@@ -128,7 +128,7 @@ export const AnalyticsCards: React.FC<AnalyticsCardsProps> = ({ data }) => {
           <p className="text-2xl font-bold text-foreground">
             {Object.values(data.fieldAnalytics).reduce(
               (total, field) => total + field.uniqueValues,
-              0
+              0,
             )}
           </p>
         </div>

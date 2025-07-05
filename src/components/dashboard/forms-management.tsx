@@ -45,7 +45,7 @@ const getTotalFields = (form: Form) => {
   const fieldsFromBlocks =
     form.schema?.blocks?.reduce(
       (total, block) => total + (block.fields?.length || 0),
-      0
+      0,
     ) || 0;
   return Math.max(fieldsFromDirectArray, fieldsFromBlocks);
 };
@@ -370,10 +370,10 @@ export function FormsManagement() {
                     className="w-fit "
                     onClick={() => {
                       const encodedPrompt = encodeURIComponent(
-                        suggestion.prompt
+                        suggestion.prompt,
                       );
                       router.push(
-                        `/ai-builder?prompt=${encodedPrompt}&sent=true`
+                        `/ai-builder?prompt=${encodedPrompt}&sent=true`,
                       );
                     }}
                   >

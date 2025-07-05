@@ -7,7 +7,7 @@ import type { BlockEditingState } from "../types";
 
 export function useBlockEditing(
   onBlocksUpdate: (blocks: FormBlock[]) => void,
-  blocks: FormBlock[]
+  blocks: FormBlock[],
 ) {
   const [editingState, setEditingState] = useState<BlockEditingState>({
     editingBlock: null,
@@ -33,7 +33,7 @@ export function useBlockEditing(
             title: editingState.editTitle.trim(),
             description: editingState.editDescription.trim(),
           }
-        : block
+        : block,
     );
 
     onBlocksUpdate(updatedBlocks);

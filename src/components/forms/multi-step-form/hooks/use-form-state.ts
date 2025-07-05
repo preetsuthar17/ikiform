@@ -13,7 +13,7 @@ import { submitForm } from "../utils/form-utils";
 export const useFormState = (
   formId: string,
   schema: FormSchema,
-  blocks: FormBlock[]
+  blocks: FormBlock[],
 ): FormState & FormActions => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<Record<string, any>>({});
@@ -34,7 +34,7 @@ export const useFormState = (
     const { errors: validationErrors, isValid } = validateStep(
       currentStep,
       blocks,
-      formData
+      formData,
     );
 
     if (isValid) {

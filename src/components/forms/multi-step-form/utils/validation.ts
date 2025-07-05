@@ -4,7 +4,7 @@ import type { FormBlock } from "@/lib/database";
 export const validateStep = (
   stepIndex: number,
   blocks: FormBlock[],
-  formData: Record<string, any>
+  formData: Record<string, any>,
 ): { errors: Record<string, string>; isValid: boolean } => {
   const block = blocks[stepIndex];
   const errors: Record<string, string> = {};

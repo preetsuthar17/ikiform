@@ -227,7 +227,7 @@ export class ProfanityFilterService {
  * Create a profanity filter instance from form settings
  */
 export function createProfanityFilter(
-  settings: ProfanityFilterOptions
+  settings: ProfanityFilterOptions,
 ): ProfanityFilterService {
   return new ProfanityFilterService(settings);
 }

@@ -151,7 +151,7 @@ export const useFormBuilder = (formId?: string) => {
   useEffect(() => {
     const hasChanges = hasFormChanges(
       state.formSchema,
-      lastManuallySavedSchemaRef.current
+      lastManuallySavedSchemaRef.current,
     );
     actions.setHasUnsavedChanges(hasChanges);
   }, [state.formSchema]);
@@ -268,7 +268,7 @@ export const useFormBuilder = (formId?: string) => {
 
   const selectedField = findSelectedField(
     state.formSchema,
-    state.selectedFieldId
+    state.selectedFieldId,
   );
 
   return {

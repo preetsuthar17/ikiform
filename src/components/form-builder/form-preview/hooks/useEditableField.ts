@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 
 export function useEditableField(
   initialValue: string,
-  onSave: (value: string) => void
+  onSave: (value: string) => void,
 ) {
   const [isEditing, setIsEditing] = useState(false);
   const [tempValue, setTempValue] = useState(initialValue);

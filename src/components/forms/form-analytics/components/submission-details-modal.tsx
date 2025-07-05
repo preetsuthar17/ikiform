@@ -53,7 +53,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                         : String(value)}
                     </p>
                   </div>
-                )
+                ),
               )}
             </div>
           </ScrollArea>

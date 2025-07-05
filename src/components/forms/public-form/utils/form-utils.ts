@@ -10,7 +10,7 @@ export const getAllFields = (schema: FormSchema): FormField[] =>
 // Validation logic for single-step forms
 export const validateSingleStepForm = (
   fields: FormField[],
-  formData: Record<string, any>
+  formData: Record<string, any>,
 ): { errors: Record<string, string>; isValid: boolean } => {
   const errors: Record<string, string> = {};
 
@@ -88,7 +88,7 @@ export const validateSingleStepForm = (
 // Submission logic for single-step forms
 export const submitSingleStepForm = async (
   formId: string,
-  formData: Record<string, any>
+  formData: Record<string, any>,
 ): Promise<{ success: boolean; message?: string }> => {
   try {
     const response = await fetch(`/api/forms/${formId}/submit`, {

@@ -39,7 +39,7 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
         component="textarea"
         rows={Math.max(
           (schema.settings.description || "").split("\n").length || 1,
-          1
+          1,
         )}
         className="flex items-start gap-2 min-h-[28px]"
         inputClassName="bg-background w-full"

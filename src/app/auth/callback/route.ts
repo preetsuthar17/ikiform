@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
               has_premium: false,
               polar_customer_id: null,
             },
-            { onConflict: "email" }
+            { onConflict: "email" },
           );
 
           if (!upsertError) {

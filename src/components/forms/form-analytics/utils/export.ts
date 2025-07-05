@@ -50,7 +50,9 @@ export const exportToCSV = (form: Form, submissions: FormSubmission[]) => {
 
   const allFields = new Set<string>();
   submissions.forEach((submission) =>
-    Object.keys(submission.submission_data).forEach((key) => allFields.add(key))
+    Object.keys(submission.submission_data).forEach((key) =>
+      allFields.add(key),
+    ),
   );
 
   const headers = [
@@ -72,8 +74,8 @@ export const exportToCSV = (form: Form, submissions: FormSubmission[]) => {
         Array.isArray(value)
           ? value.join(", ")
           : typeof value === "object" && value !== null
-          ? JSON.stringify(value)
-          : value || ""
+            ? JSON.stringify(value)
+            : value || "",
       );
     });
 
@@ -82,7 +84,7 @@ export const exportToCSV = (form: Form, submissions: FormSubmission[]) => {
 
   const csvContent = [headers, ...rows]
     .map((row) =>
-      row.map((field) => `"${String(field).replace(/"/g, '""')}"`).join(",")
+      row.map((field) => `"${String(field).replace(/"/g, '""')}"`).join(","),
     )
     .join("\n");
 

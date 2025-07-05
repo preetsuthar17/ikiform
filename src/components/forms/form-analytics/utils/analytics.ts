@@ -35,18 +35,18 @@ export const getTotalFields = (form: Form) => {
   const fieldsFromBlocks =
     form.schema.blocks?.reduce(
       (total, block) => total + (block.fields?.length || 0),
-      0
+      0,
     ) || 0;
   return Math.max(fieldsFromDirectArray, fieldsFromBlocks);
 };
 
 export const getSubmissionCompletionRate = (
   submission: FormSubmission,
-  totalFields: number
+  totalFields: number,
 ) => {
   if (totalFields === 0) return 0;
   const filledFields = Object.values(submission.submission_data).filter(
-    (val) => val !== "" && val !== null && val !== undefined
+    (val) => val !== "" && val !== null && val !== undefined,
   ).length;
   return (filledFields / totalFields) * 100;
 };
@@ -55,7 +55,7 @@ export const filterSubmissions = (
   submissions: FormSubmission[],
   searchTerm: string,
   filterState: FilterState,
-  totalFields: number
+  totalFields: number,
 ) => {
   return submissions.filter((submission) => {
     if (searchTerm) {
@@ -89,7 +89,7 @@ export const filterSubmissions = (
     if (filterState.completionRate !== "all") {
       const completionRate = getSubmissionCompletionRate(
         submission,
-        totalFields
+        totalFields,
       );
       switch (filterState.completionRate) {
         case "complete":
@@ -110,7 +110,7 @@ export const filterSubmissions = (
 
 export const calculateFieldAnalytics = (
   form: Form,
-  submissions: FormSubmission[]
+  submissions: FormSubmission[],
 ): Record<string, FieldAnalytics> => {
   const analytics: Record<string, FieldAnalytics> = {};
   const allPossibleFields = [
@@ -135,7 +135,7 @@ export const calculateFieldAnalytics = (
     });
 
     const mostCommon = Object.entries(valueFrequency).sort(
-      ([, a], [, b]) => b - a
+      ([, a], [, b]) => b - a,
     )[0];
 
     analytics[field.id] = {
@@ -156,7 +156,7 @@ export const calculateFieldAnalytics = (
 };
 
 export const calculateSubmissionTrends = (
-  submissions: FormSubmission[]
+  submissions: FormSubmission[],
 ): Record<string, number> => {
   const trends: Record<string, number> = {};
   const last7Days = new Date();
@@ -183,7 +183,7 @@ export const calculateSubmissionTrends = (
 };
 
 export const calculateHourlySubmissions = (
-  submissions: FormSubmission[]
+  submissions: FormSubmission[],
 ): Record<number, number> => {
   const hours: Record<number, number> = {};
 
@@ -204,7 +204,7 @@ export const calculateBounceRate = (submissions: FormSubmission[]): number => {
 
   const bouncedSubmissions = submissions.filter((sub) => {
     const filledFields = Object.values(sub.submission_data).filter(
-      (val) => val !== "" && val !== null && val !== undefined
+      (val) => val !== "" && val !== null && val !== undefined,
     ).length;
     return filledFields <= 1;
   });
@@ -214,7 +214,7 @@ export const calculateBounceRate = (submissions: FormSubmission[]): number => {
 
 export const calculateConversionFunnel = (
   form: Form,
-  submissions: FormSubmission[]
+  submissions: FormSubmission[],
 ): ConversionFunnelStep[] | null => {
   if (!form.schema.settings?.multiStep || !form.schema.blocks) return null;
 
@@ -242,7 +242,7 @@ export const calculateConversionFunnel = (
 
 export const getActiveFilters = (
   searchTerm: string,
-  filterState: FilterState
+  filterState: FilterState,
 ): string[] => {
   const filters: string[] = [];
 

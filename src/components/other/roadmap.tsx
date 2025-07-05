@@ -55,7 +55,7 @@ const RoadmapComponent: React.FC<RoadmapComponentProps> = ({
             <div className="flex items-center gap-3">
               <div
                 className={`w-2 h-2 rounded-full shrink-0 ${getStatusColor(
-                  item.status
+                  item.status,
                 )}`}
               ></div>
               <h3 className="text-lg font-medium">{item.title}</h3>
@@ -69,10 +69,10 @@ const RoadmapComponent: React.FC<RoadmapComponentProps> = ({
                   item.status === "completed"
                     ? "text-green-400"
                     : item.status === "inProgress"
-                    ? "text-blue-400"
-                    : item.status === "planned"
-                    ? "text-yellow-400"
-                    : "text-gray-400"
+                      ? "text-blue-400"
+                      : item.status === "planned"
+                        ? "text-yellow-400"
+                        : "text-gray-400"
                 }`}
               >
                 {getStatusText(item.status)}

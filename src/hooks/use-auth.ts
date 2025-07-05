@@ -27,7 +27,7 @@ export function useAuth() {
     const { data: listener } = supabase.auth.onAuthStateChange((_, session) => {
       const newUser = session?.user ?? null;
       setUser((prevUser) =>
-        prevUser?.id === newUser?.id ? prevUser : newUser
+        prevUser?.id === newUser?.id ? prevUser : newUser,
       );
     });
 

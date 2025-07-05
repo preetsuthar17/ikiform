@@ -61,15 +61,15 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
     form.schema.fields?.length || 0,
     form.schema.blocks?.reduce(
       (total, block) => total + (block.fields?.length || 0),
-      0
-    ) || 0
+      0,
+    ) || 0,
   );
 
   const filteredSubmissions = filterSubmissions(
     submissions,
     searchTerm,
     filterState,
-    totalFields
+    totalFields,
   );
 
   const tableColumns: DataTableColumn<FormSubmission>[] = [
@@ -314,13 +314,13 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                   {Array.isArray(value)
                                     ? value.join(", ")
                                     : typeof value === "object" &&
-                                      value !== null
-                                    ? JSON.stringify(value)
-                                    : String(value) || "—"}
+                                        value !== null
+                                      ? JSON.stringify(value)
+                                      : String(value) || "—"}
                                 </p>
                               </div>
                             </div>
-                          )
+                          ),
                         )}
                       </div>
                     </Card>

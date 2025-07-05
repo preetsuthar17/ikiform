@@ -38,7 +38,7 @@ export function useFormSettings(schema: FormSchema) {
   };
 
   const updateRateLimit = (
-    rateLimitUpdates: Partial<NonNullable<LocalSettings["rateLimit"]>>
+    rateLimitUpdates: Partial<NonNullable<LocalSettings["rateLimit"]>>,
   ) => {
     setLocalSettings({
       ...localSettings,
@@ -52,7 +52,7 @@ export function useFormSettings(schema: FormSchema) {
   const updateProfanityFilter = (
     profanityFilterUpdates: Partial<
       NonNullable<LocalSettings["profanityFilter"]>
-    >
+    >,
   ) => {
     setLocalSettings({
       ...localSettings,

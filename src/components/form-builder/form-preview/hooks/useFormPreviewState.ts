@@ -6,7 +6,7 @@ import type { FormSchema } from "@/lib/database";
 
 export function useFormPreviewState(
   schema: FormSchema,
-  selectedBlockId?: string | null
+  selectedBlockId?: string | null,
 ) {
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
@@ -20,7 +20,7 @@ export function useFormPreviewState(
   useEffect(() => {
     if (selectedBlockId && schema.blocks) {
       const blockIndex = schema.blocks.findIndex(
-        (block) => block.id === selectedBlockId
+        (block) => block.id === selectedBlockId,
       );
       if (blockIndex !== -1) {
         setCurrentStepIndex(blockIndex);

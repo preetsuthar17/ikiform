@@ -25,13 +25,13 @@ export async function GET(req: NextRequest) {
     if (type === "builder" || type === "both") {
       const builderSessions = await formsDbServer.getAIBuilderSessions(
         user.id,
-        limit
+        limit,
       );
       sessions = sessions.concat(
         builderSessions.map((session: any) => ({
           ...session,
           type: "ai_builder",
-        }))
+        })),
       );
     }
 
@@ -39,20 +39,20 @@ export async function GET(req: NextRequest) {
       const analyticsSessions = await formsDbServer.getAIAnalyticsSessions(
         user.id,
         "",
-        limit
+        limit,
       );
       sessions = sessions.concat(
         analyticsSessions.map((session: any) => ({
           ...session,
           type: "ai_analytics",
-        }))
+        })),
       );
     }
 
     // Sort by created_at desc
     sessions.sort(
       (a, b) =>
-        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
     );
 
     // Take only the requested limit
@@ -71,7 +71,7 @@ export async function GET(req: NextRequest) {
     console.error("Error fetching chat sessions:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

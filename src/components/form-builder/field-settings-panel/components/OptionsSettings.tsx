@@ -22,7 +22,7 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
   const { updateField } = createFieldUpdater(field, onFieldUpdate);
   const { addOption, updateOption, removeOption } = createOptionHandlers(
     field,
-    updateField
+    updateField,
   );
 
   return (
