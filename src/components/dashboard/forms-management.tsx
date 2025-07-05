@@ -39,6 +39,17 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 
+// Utility function to count total fields across blocks and direct fields
+const getTotalFields = (form: Form) => {
+  const fieldsFromDirectArray = form.schema?.fields?.length || 0;
+  const fieldsFromBlocks =
+    form.schema?.blocks?.reduce(
+      (total, block) => total + (block.fields?.length || 0),
+      0
+    ) || 0;
+  return Math.max(fieldsFromDirectArray, fieldsFromBlocks);
+};
+
 export function FormsManagement() {
   const router = useRouter();
   const { user } = useAuth();
@@ -464,12 +475,11 @@ export function FormsManagement() {
                   </Badge>
                 </div>
 
-                {/* Card Metadata */}
                 <div className="flex items-center justify-between text-sm text-muted-foreground mb-6 pt-2 border-t border-border/50">
                   <span className="flex items-center gap-1">
                     <span className="w-2 h-2 bg-accent rounded-full"></span>
-                    {form.schema.fields.length} field
-                    {form.schema.fields.length !== 1 ? "s" : ""}
+                    {getTotalFields(form)} field
+                    {getTotalFields(form) !== 1 ? "s" : ""}
                   </span>
                   <span>Updated {formatDate(form.updated_at)}</span>
                 </div>

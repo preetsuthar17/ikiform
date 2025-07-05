@@ -132,18 +132,6 @@ export default function ProfileCard() {
           </div>
           <div className="text-muted-foreground text-sm">{user.email}</div>
         </div>
-
-        {/* Customer Portal Button */}
-        {hasCustomerPortal && (
-          <div className="flex justify-center">
-            <Link href="/portal" target="_blank">
-              <Button variant="outline" size="sm" className="gap-2">
-                <CreditCard className="w-4 h-4" />
-                Manage Subscription
-              </Button>
-            </Link>
-          </div>
-        )}
       </CardContent>
 
       {/* Settings Modal */}

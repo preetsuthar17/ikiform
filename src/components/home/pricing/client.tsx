@@ -92,9 +92,15 @@ export default function PricingClient({ products }: PricingClientProps) {
           .from("users")
           .select("has_premium")
           .eq("email", user.email)
-          .single();
-
-        setHasPremium(!error && data ? data.has_premium || false : false);
+          .maybeSingle();
+        if (error) {
+          console.error("Error checking premium status:", error);
+          setHasPremium(false);
+        } else if (data) {
+          setHasPremium(data.has_premium || false);
+        } else {
+          setHasPremium(false);
+        }
       } catch (error) {
         console.error("Error checking premium status:", error);
         setHasPremium(false);
