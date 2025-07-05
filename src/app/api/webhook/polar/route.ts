@@ -8,27 +8,26 @@ if (!webhookSecret) {
 
 export const POST = Webhooks({
   webhookSecret,
-  onOrderCreated: async (payload) => {
+  onCheckoutCreated: async (payload) => {
     console.log("Order created");
     console.log("Order created:", payload);
 
     try {
       const supabase = await createClient();
-      const userEmail = payload.data.customer.email;
+      const customerId = payload.data.customerId;
 
-      if (!userEmail) {
-        console.error("No email found in payment payload");
+      if (!customerId) {
+        console.error("No customer ID found in payment payload");
         return;
       }
 
-      // Find user by email and update has_premium to true + store polar customer ID
+      // Find user by polar_customer_id and update has_premium to true
       const { data, error } = await supabase
         .from("users")
         .update({
           has_premium: true,
-          polar_customer_id: payload.data.customer.id,
         })
-        .eq("email", userEmail)
+        .eq("polar_customer_id", customerId)
         .select();
 
       if (error) {
@@ -38,11 +37,11 @@ export const POST = Webhooks({
 
       if (data && data.length > 0) {
         console.log(
-          `Successfully updated premium status for user: ${userEmail}`
+          `Successfully updated premium status for user: ${customerId}`
         );
         console.log("Updated user data:", data[0]);
       } else {
-        console.warn(`User not found with email: ${userEmail}`);
+        console.warn(`User not found with customer ID: ${customerId}`);
       }
     } catch (error) {
       console.error("Error processing payment completion:", error);
