@@ -1,5 +1,5 @@
 // React imports
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // Next.js imports
 import { useTheme } from "next-themes";
@@ -19,7 +19,7 @@ import {
 // Local imports
 import { useAuth } from "@/hooks/use-auth";
 import { useAIBuilder } from "@/hooks/ai-builder/use-ai-builder";
-import { createClient } from "@/utils/supabase/client";
+import { usePremiumStatus } from "@/hooks/use-premium-status";
 import { CHAT_SUGGESTIONS } from "@/lib/ai-builder/constants";
 import { initializeScrollbarStyles } from "@/lib/ai-builder/utils";
 import { ChatPanel } from "./chat/chat-panel";
@@ -32,8 +32,7 @@ export function AIBuilder() {
   const { user, loading: authLoading } = useAuth();
   const { theme } = useTheme();
   const router = useRouter();
-  const [hasPremium, setHasPremium] = useState<boolean | null>(null);
-  const [checking, setChecking] = useState(false);
+  const { hasPremium, checkingPremium: checking } = usePremiumStatus(user);
   const [chatDrawerOpen, setChatDrawerOpen] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
 
@@ -68,25 +67,6 @@ export function AIBuilder() {
   useEffect(() => {
     initializeScrollbarStyles();
   }, []);
-
-  useEffect(() => {
-    if (!user) {
-      setHasPremium(false);
-      return;
-    }
-    setChecking(true);
-    const checkPremium = async () => {
-      const supabase = createClient();
-      const { data } = await supabase
-        .from("users")
-        .select("has_premium")
-        .eq("email", user.email)
-        .single();
-      setHasPremium(data?.has_premium || false);
-      setChecking(false);
-    };
-    checkPremium();
-  }, [user]);
 
   const chatPanelProps = {
     messages,

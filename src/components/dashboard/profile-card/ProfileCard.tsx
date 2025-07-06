@@ -19,7 +19,7 @@ import {
 } from "./components";
 
 // Hooks
-import { usePremiumStatus } from "./hooks";
+import { usePremiumStatus } from "@/hooks/use-premium-status";
 
 // Utils
 import { extractUserName, extractAvatarUrl } from "./utils";

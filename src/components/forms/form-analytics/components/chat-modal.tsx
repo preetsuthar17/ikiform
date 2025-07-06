@@ -5,6 +5,7 @@ import {
   Modal,
   ModalContent,
   ModalHeader,
+  ModalTitle,
   ModalClose,
 } from "@/components/ui/modal";
 import {
@@ -83,9 +84,8 @@ export const ChatModal: React.FC<ChatModalProps> = ({
     <Modal open={isOpen} onOpenChange={onClose}>
       <ModalContent className="max-w-3xl h-[800px] flex flex-col focus:outline-none focus:ring-0">
         <ModalHeader className="flex items-center justify-between gap-2 px-4 py-3">
-          <div className="sr-only flex items-center gap-2" aria-hidden="true">
-            <Bot className="w-4 h-4 text-primary" />
-            <span className="font-medium">Kiko</span>
+          <div className="flex items-center gap-2">
+            <ModalTitle>Kiko</ModalTitle>
           </div>
           <ModalClose onClick={onClose} />
         </ModalHeader>

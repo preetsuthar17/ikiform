@@ -12,7 +12,7 @@ import { generateSessionId } from "../utils/analytics";
 export const useAnalyticsChat = (
   form: Form,
   submissions: FormSubmission[],
-  analyticsData: AnalyticsData,
+  analyticsData: AnalyticsData
 ) => {
   const [chatOpen, setChatOpen] = useState(false);
   const [chatSessionId, setChatSessionId] = useState<string | null>(null);
@@ -27,7 +27,9 @@ export const useAnalyticsChat = (
   const chatInputRef = useRef<HTMLTextAreaElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
   };
 
   useEffect(() => {

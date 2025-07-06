@@ -190,13 +190,13 @@ export const ChatInterface = memo(function ChatInterface({
         </em>
       ),
     }),
-    [],
+    []
   );
 
   return (
-    <div className="flex flex-col h-full bg-background">
+    <div className="flex flex-col h-[74vh] background relative">
       {/* Messages Area */}
-      <ScrollArea className="flex-1 px-6 py-6">
+      <ScrollArea className="flex-1 px-6 py-6 overflow-hidden h-[90%]">
         <div className="max-w-4xl mx-auto space-y-6">
           {/* Welcome State */}
           {isEmpty && (

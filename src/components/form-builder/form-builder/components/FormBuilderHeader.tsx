@@ -98,7 +98,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
 
           <TooltipProvider>
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <Button variant="default" size="sm" asChild>
                   <Link href="/ai-builder">
                     <Sparkles className="w-4 h-4 shrink-0" /> Use Kiko
@@ -109,7 +109,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             </Tooltip>
 
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <Button variant="secondary" size="icon" onClick={onJsonView}>
                   <Code className="w-4 h-4 shrink-0" />
                 </Button>
@@ -118,7 +118,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             </Tooltip>
 
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <Button
                   variant="secondary"
                   size="icon"
@@ -132,7 +132,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             </Tooltip>
 
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <Button
                   variant="secondary"
                   size="icon"
@@ -146,7 +146,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             </Tooltip>
 
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <Button
                   variant="secondary"
                   size="icon"
@@ -160,7 +160,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             </Tooltip>
 
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <Button variant="secondary" size="icon" onClick={onSettings}>
                   <SettingsIcon className="w-4 h-4 shrink-0" />
                 </Button>

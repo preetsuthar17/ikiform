@@ -1,8 +1,7 @@
 "use client";
 
 import { useAuth } from "@/hooks/use-auth";
-import { useEffect, useState } from "react";
-import { createClient } from "@/utils/supabase/client";
+import { usePremiumStatus } from "@/hooks/use-premium-status";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/ui/loader";
 import Link from "next/link";
@@ -10,46 +9,9 @@ import { FormBuilder } from "@/components/form-builder/form-builder";
 
 export default function NewFormBuilderPage() {
   const { user, loading } = useAuth();
-  const [hasPremium, setHasPremium] = useState<boolean | null>(null);
-  const [checking, setChecking] = useState(false);
+  const { hasPremium, checkingPremium: checking } = usePremiumStatus(user);
 
-  useEffect(() => {
-    if (!user) {
-      setHasPremium(false);
-      return;
-    }
-
-    // Prevent duplicate calls
-    if (checking) return;
-
-    setChecking(true);
-    const checkPremium = async () => {
-      try {
-        const supabase = createClient();
-        const { data, error } = await supabase
-          .from("users")
-          .select("has_premium")
-          .eq("email", user.email)
-          .single();
-
-        if (error) {
-          console.error("Premium check error:", error);
-          setHasPremium(false);
-        } else {
-          setHasPremium(data?.has_premium || false);
-        }
-      } catch (error) {
-        console.error("Premium check failed:", error);
-        setHasPremium(false);
-      } finally {
-        setChecking(false);
-      }
-    };
-
-    checkPremium();
-  }, [user, checking]);
-
-  if (loading || checking || hasPremium === null) {
+  if (loading || checking) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <Loader />

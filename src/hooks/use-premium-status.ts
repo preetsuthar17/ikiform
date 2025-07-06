@@ -1,12 +1,17 @@
-// Custom hook for managing premium status
 import { useState, useEffect, useRef } from "react";
 import type { User } from "@supabase/supabase-js";
-
-// Utils
 import { createClient } from "@/utils/supabase/client";
 
-// Types
-import type { PremiumStatus } from "../types";
+interface PremiumStatus {
+  hasPremium: boolean;
+  hasCustomerPortal: boolean;
+  checkingPremium: boolean;
+}
+
+const premiumStatusCache = new Map<
+  string,
+  { hasPremium: boolean; hasCustomerPortal: boolean }
+>();
 
 export function usePremiumStatus(user: User | null): PremiumStatus {
   const [hasPremium, setHasPremium] = useState(false);
@@ -28,6 +33,15 @@ export function usePremiumStatus(user: User | null): PremiumStatus {
         return;
       }
 
+      const cached = premiumStatusCache.get(user.email);
+      if (cached) {
+        setHasPremium(cached.hasPremium);
+        setHasCustomerPortal(cached.hasCustomerPortal);
+        setCheckingPremium(false);
+        lastCheckedEmail.current = user.email;
+        return;
+      }
+
       setCheckingPremium(true);
       try {
         const supabase = createClient();
@@ -38,8 +52,13 @@ export function usePremiumStatus(user: User | null): PremiumStatus {
           .single();
 
         if (!error && data) {
-          setHasPremium(data.has_premium || false);
-          setHasCustomerPortal(!!data.polar_customer_id);
+          const premiumData = {
+            hasPremium: data.has_premium || false,
+            hasCustomerPortal: !!data.polar_customer_id,
+          };
+          setHasPremium(premiumData.hasPremium);
+          setHasCustomerPortal(premiumData.hasCustomerPortal);
+          premiumStatusCache.set(user.email, premiumData);
         } else {
           setHasPremium(false);
           setHasCustomerPortal(false);
@@ -62,4 +81,12 @@ export function usePremiumStatus(user: User | null): PremiumStatus {
     hasCustomerPortal,
     checkingPremium,
   };
+}
+
+export function clearPremiumStatusCache(email?: string) {
+  if (email) {
+    premiumStatusCache.delete(email);
+  } else {
+    premiumStatusCache.clear();
+  }
 }

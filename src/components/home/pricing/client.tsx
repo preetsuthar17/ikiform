@@ -17,7 +17,7 @@ import {
 
 // Internal imports
 import { useAuth } from "@/hooks/use-auth";
-import { createClient } from "@/utils/supabase/client";
+import { usePremiumStatus } from "@/hooks/use-premium-status";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -72,45 +72,8 @@ const PRODUCT_ID = "2e9b8531-0d45-40df-be1c-65482eefeb85";
 export default function PricingClient({ products }: PricingClientProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [purchaseLoading, setPurchaseLoading] = useState(false);
-  const [hasPremium, setHasPremium] = useState(false);
-  const [checkingPremium, setCheckingPremium] = useState(false);
-
   const { user } = useAuth();
-
-  useEffect(() => {
-    const checkPremiumStatus = async () => {
-      if (!user?.email) {
-        setHasPremium(false);
-        setCheckingPremium(false);
-        return;
-      }
-
-      setCheckingPremium(true);
-      try {
-        const supabase = createClient();
-        const { data, error } = await supabase
-          .from("users")
-          .select("has_premium")
-          .eq("email", user.email)
-          .maybeSingle();
-        if (error) {
-          console.error("Error checking premium status:", error);
-          setHasPremium(false);
-        } else if (data) {
-          setHasPremium(data.has_premium || false);
-        } else {
-          setHasPremium(false);
-        }
-      } catch (error) {
-        console.error("Error checking premium status:", error);
-        setHasPremium(false);
-      } finally {
-        setCheckingPremium(false);
-      }
-    };
-
-    checkPremiumStatus();
-  }, [user]);
+  const { hasPremium, checkingPremium } = usePremiumStatus(user);
 
   const handlePurchaseClick = () => {
     setPurchaseLoading(true);

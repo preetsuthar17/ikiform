@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { FormBuilder } from "@/components/form-builder/form-builder";
 import { useAuth } from "@/hooks/use-auth";
-import { createClient } from "@/utils/supabase/client";
+import { usePremiumStatus } from "@/hooks/use-premium-status";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/ui/loader";
 import Link from "next/link";
@@ -15,8 +15,7 @@ interface FormBuilderPageProps {
 
 export default function FormBuilderPage({ params }: FormBuilderPageProps) {
   const { user, loading } = useAuth();
-  const [hasPremium, setHasPremium] = useState<boolean | null>(null);
-  const [checking, setChecking] = useState(false);
+  const { hasPremium, checkingPremium: checking } = usePremiumStatus(user);
   const [id, setId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -26,26 +25,7 @@ export default function FormBuilderPage({ params }: FormBuilderPageProps) {
     })();
   }, [params]);
 
-  useEffect(() => {
-    if (!user) {
-      setHasPremium(false);
-      return;
-    }
-    setChecking(true);
-    const checkPremium = async () => {
-      const supabase = createClient();
-      const { data, error } = await supabase
-        .from("users")
-        .select("has_premium")
-        .eq("email", user.email)
-        .single();
-      setHasPremium(data?.has_premium || false);
-      setChecking(false);
-    };
-    checkPremium();
-  }, [user]);
-
-  if (loading || checking || hasPremium === null || !id) {
+  if (loading || checking || !id) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <Loader />

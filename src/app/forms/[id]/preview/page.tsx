@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/hooks/use-auth";
 import { useEffect, useState } from "react";
+import { usePremiumStatus } from "@/hooks/use-premium-status";
 import { createClient } from "@/utils/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/ui/loader";
@@ -16,8 +17,7 @@ interface PreviewFormPageProps {
 
 export default function PreviewFormPage({ params }: PreviewFormPageProps) {
   const { user, loading } = useAuth();
-  const [hasPremium, setHasPremium] = useState<boolean | null>(null);
-  const [checking, setChecking] = useState(false);
+  const { hasPremium, checkingPremium: checking } = usePremiumStatus(user);
   const [form, setForm] = useState<any>(null);
   const [fetching, setFetching] = useState(true);
   const [id, setId] = useState<string | null>(null);
@@ -28,25 +28,6 @@ export default function PreviewFormPage({ params }: PreviewFormPageProps) {
       setId(p.id);
     })();
   }, [params]);
-
-  useEffect(() => {
-    if (!user) {
-      setHasPremium(false);
-      return;
-    }
-    setChecking(true);
-    const checkPremium = async () => {
-      const supabase = createClient();
-      const { data, error } = await supabase
-        .from("users")
-        .select("has_premium")
-        .eq("email", user.email)
-        .single();
-      setHasPremium(data?.has_premium || false);
-      setChecking(false);
-    };
-    checkPremium();
-  }, [user]);
 
   useEffect(() => {
     if (!id || !user || !hasPremium) return;
@@ -73,7 +54,7 @@ export default function PreviewFormPage({ params }: PreviewFormPageProps) {
     fetchForm();
   }, [id, user, hasPremium]);
 
-  if (loading || checking || hasPremium === null || !id || fetching) {
+  if (loading || checking || !id || fetching) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <Loader />
