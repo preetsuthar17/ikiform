@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioItem } from "@/components/ui/radio";
+import { TagInput } from "@/components/ui/tag-input";
 
 // Types
 import type { ProfanityFilterSectionProps } from "../types";
@@ -90,46 +92,36 @@ function FilterModeSection({
   updateProfanityFilter: (settings: any) => void;
 }) {
   return (
-    <div className="space-y-2">
-      <Label className="text-sm font-medium">Filter Mode</Label>
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <input
-            type="radio"
-            id="strict-mode"
-            name="filterMode"
-            checked={profanityFilter.strictMode !== false}
-            onChange={() =>
-              updateProfanityFilter({
-                strictMode: true,
-                replaceWithAsterisks: false,
-              })
-            }
-            className="w-4 h-4"
-          />
-          <Label htmlFor="strict-mode" className="text-sm">
-            Strict Mode - Reject submissions with profanity
-          </Label>
-        </div>
-        <div className="flex items-center gap-2">
-          <input
-            type="radio"
-            id="replace-mode"
-            name="filterMode"
-            checked={profanityFilter.replaceWithAsterisks === true}
-            onChange={() =>
-              updateProfanityFilter({
-                strictMode: false,
-                replaceWithAsterisks: true,
-              })
-            }
-            className="w-4 h-4"
-          />
-          <Label htmlFor="replace-mode" className="text-sm">
-            Replace Mode - Replace profanity with asterisks
-          </Label>
-        </div>
-      </div>
+    <div className="flex flex-col gap-2">
+      <Label className="text-sm font-medium mb-1">Filter Mode</Label>
+      <RadioGroup
+        value={profanityFilter.replaceWithAsterisks ? "replace" : "strict"}
+        onValueChange={(value) => {
+          if (value === "replace") {
+            updateProfanityFilter({
+              strictMode: false,
+              replaceWithAsterisks: true,
+            });
+          } else {
+            updateProfanityFilter({
+              strictMode: true,
+              replaceWithAsterisks: false,
+            });
+          }
+        }}
+        orientation="vertical"
+      >
+        <RadioItem
+          value="strict"
+          label="Strict Mode - Reject submissions with profanity"
+          id="strict-mode"
+        />
+        <RadioItem
+          value="replace"
+          label="Replace Mode - Replace profanity with asterisks"
+          id="replace-mode"
+        />
+      </RadioGroup>
     </div>
   );
 }
@@ -142,7 +134,7 @@ function CustomMessageSection({
   updateProfanityFilter: (settings: any) => void;
 }) {
   return (
-    <div className="space-y-2">
+    <div className="flex flex-col gap-2">
       <Label htmlFor="custom-message" className="text-sm font-medium">
         Custom Message
       </Label>
@@ -170,50 +162,19 @@ function WordManagementSection({
   updateWords: (words: string[]) => void;
 }) {
   return (
-    <div className="space-y-2">
+    <div className="flex flex-col gap-2">
       <Label className="text-sm font-medium">{title}</Label>
-      <div className="space-y-2">
-        {words.map((word, index) => (
-          <div key={index} className="flex items-center gap-2">
-            <Input
-              value={word}
-              onChange={(e) => {
-                const newWords = [...words];
-                newWords[index] = e.target.value;
-                updateWords(newWords);
-              }}
-              className="text-sm"
-              placeholder={`Enter word to ${
-                title.toLowerCase().includes("whitelist")
-                  ? "whitelist"
-                  : "filter"
-              }`}
-            />
-            <Button
-              type="button"
-              variant="outline"
-              size="icon"
-              onClick={() => {
-                const newWords = [...words];
-                newWords.splice(index, 1);
-                updateWords(newWords);
-              }}
-            >
-              <X className="w-4 h-4" />
-            </Button>
-          </div>
-        ))}
-        <Button
-          type="button"
-          variant="outline"
-          size="sm"
-          onClick={() => updateWords([...words, ""])}
-          className="gap-2"
-        >
-          <Plus className="w-4 h-4" />
-          Add {title.split(" ")[0]} Word
-        </Button>
-      </div>
+      <TagInput
+        tags={words}
+        onTagsChange={updateWords}
+        placeholder={`Enter word to ${title.toLowerCase().includes("whitelist") ? "whitelist" : "filter"}`}
+        tagVariant={
+          title.toLowerCase().includes("whitelist") ? "outline" : "secondary"
+        }
+        tagSize="sm"
+        className="w-full"
+        clearAllButton
+      />
     </div>
   );
 }
