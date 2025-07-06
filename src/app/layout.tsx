@@ -114,6 +114,41 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          crossOrigin="anonymous"
+          src="//unpkg.com/react-scan/dist/auto.global.js"
+        />
+        {/* Performance monitoring for long tasks */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof window !== 'undefined' && 'PerformanceObserver' in window) {
+                const observer = new PerformanceObserver((list) => {
+                  const entries = list.getEntries();
+                  entries.forEach((entry) => {
+                    if (entry.duration > 50) {
+                      console.warn('Long task detected:', {
+                        name: entry.name,
+                        duration: entry.duration,
+                        startTime: entry.startTime,
+                        type: entry.entryType
+                      });
+                    }
+                  });
+                });
+                
+                try {
+                  observer.observe({ entryTypes: ['longtask', 'measure', 'navigation'] });
+                } catch (e) {
+                  // Fallback for browsers that don't support longtask
+                  observer.observe({ entryTypes: ['measure', 'navigation'] });
+                }
+              }
+            `,
+          }}
+        />
+      </head>
       <body
         className={`${inter.className} ${jetBrainsMono.variable} antialiased`}
       >

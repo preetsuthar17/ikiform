@@ -18,19 +18,36 @@ export default function NewFormBuilderPage() {
       setHasPremium(false);
       return;
     }
+
+    // Prevent duplicate calls
+    if (checking) return;
+
     setChecking(true);
     const checkPremium = async () => {
-      const supabase = createClient();
-      const { data, error } = await supabase
-        .from("users")
-        .select("has_premium")
-        .eq("email", user.email)
-        .single();
-      setHasPremium(data?.has_premium || false);
-      setChecking(false);
+      try {
+        const supabase = createClient();
+        const { data, error } = await supabase
+          .from("users")
+          .select("has_premium")
+          .eq("email", user.email)
+          .single();
+
+        if (error) {
+          console.error("Premium check error:", error);
+          setHasPremium(false);
+        } else {
+          setHasPremium(data?.has_premium || false);
+        }
+      } catch (error) {
+        console.error("Premium check failed:", error);
+        setHasPremium(false);
+      } finally {
+        setChecking(false);
+      }
     };
+
     checkPremium();
-  }, [user]);
+  }, [user, checking]);
 
   if (loading || checking || hasPremium === null) {
     return (

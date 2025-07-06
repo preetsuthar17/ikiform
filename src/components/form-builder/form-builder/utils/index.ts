@@ -15,7 +15,7 @@ export const generateBlockId = (): string => {
 
 export const hasFormChanges = (
   formSchema: FormSchema,
-  lastSavedSchema: FormSchema | null,
+  lastSavedSchema: FormSchema | null
 ): boolean => {
   if (!lastSavedSchema) {
     return (
@@ -39,12 +39,28 @@ export const hasFormChanges = (
   return currentSchemaStr !== savedSchemaStr;
 };
 
+// Debounced localStorage to prevent excessive writes
+let saveTimeoutId: NodeJS.Timeout | null = null;
+
 export const saveDraftToStorage = (
   draftKey: string,
-  formSchema: FormSchema,
+  formSchema: FormSchema
 ): void => {
   if (typeof window !== "undefined") {
-    localStorage.setItem(draftKey, JSON.stringify(formSchema));
+    // Clear previous timeout
+    if (saveTimeoutId) {
+      clearTimeout(saveTimeoutId);
+    }
+
+    // Debounce localStorage writes to prevent blocking
+    saveTimeoutId = setTimeout(() => {
+      try {
+        localStorage.setItem(draftKey, JSON.stringify(formSchema));
+      } catch (error) {
+        console.warn("Failed to save draft to localStorage:", error);
+      }
+      saveTimeoutId = null;
+    }, 100); // 100ms debounce
   }
 };
 
@@ -79,7 +95,7 @@ export const removeDraftFromStorage = (draftKey: string): void => {
 
 export const findSelectedField = (
   formSchema: FormSchema,
-  selectedFieldId: string | null,
+  selectedFieldId: string | null
 ): FormField | null => {
   if (!selectedFieldId) return null;
 
@@ -98,12 +114,12 @@ export const getAllFields = (formSchema: FormSchema): FormField[] => {
 
 export const updateFieldInSchema = (
   formSchema: FormSchema,
-  updatedField: FormField,
+  updatedField: FormField
 ): FormSchema => {
   const updatedBlocks = formSchema.blocks.map((block) => ({
     ...block,
     fields: block.fields.map((field) =>
-      field.id === updatedField.id ? updatedField : field,
+      field.id === updatedField.id ? updatedField : field
     ),
   }));
 
@@ -111,14 +127,14 @@ export const updateFieldInSchema = (
     ...formSchema,
     blocks: updatedBlocks,
     fields: formSchema.fields.map((field) =>
-      field.id === updatedField.id ? updatedField : field,
+      field.id === updatedField.id ? updatedField : field
     ),
   };
 };
 
 export const removeFieldFromSchema = (
   formSchema: FormSchema,
-  fieldId: string,
+  fieldId: string
 ): FormSchema => {
   const updatedBlocks = formSchema.blocks.map((block) => ({
     ...block,
@@ -135,13 +151,13 @@ export const removeFieldFromSchema = (
 export const addFieldToSchema = (
   formSchema: FormSchema,
   newField: FormField,
-  selectedBlockId: string | null,
+  selectedBlockId: string | null
 ): FormSchema => {
   const targetBlockId = selectedBlockId || formSchema.blocks[0]?.id;
   const updatedBlocks = formSchema.blocks.map((block) =>
     block.id === targetBlockId
       ? { ...block, fields: [...block.fields, newField] }
-      : block,
+      : block
   );
 
   return {
