@@ -27,14 +27,37 @@ const tooltipVariants = cva(
       variant: "default",
       size: "md",
     },
-  },
+  }
 );
 
-const Tooltip = TooltipPrimitive.Root;
+const Tooltip: React.FC<
+  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Root>
+> = ({ delayDuration = 300, ...props }) => (
+  <TooltipPrimitive.Root delayDuration={delayDuration} {...props} />
+);
 
 const TooltipTrigger = TooltipPrimitive.Trigger;
 
-const TooltipProvider = TooltipPrimitive.Provider;
+const TooltipProvider: React.FC<
+  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Provider>
+> = ({ delayDuration = 300, skipDelayDuration = 100, ...props }) => (
+  <TooltipPrimitive.Provider
+    delayDuration={delayDuration}
+    skipDelayDuration={skipDelayDuration}
+    {...props}
+  />
+);
+
+// Quick tooltip with minimal delay
+const QuickTooltipProvider: React.FC<
+  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Provider>
+> = ({ delayDuration = 100, skipDelayDuration = 50, ...props }) => (
+  <TooltipPrimitive.Provider
+    delayDuration={delayDuration}
+    skipDelayDuration={skipDelayDuration}
+    {...props}
+  />
+);
 
 interface TooltipContentProps
   extends React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>,
@@ -82,6 +105,7 @@ export {
   TooltipTrigger,
   TooltipContent,
   TooltipProvider,
+  QuickTooltipProvider,
   tooltipVariants,
   type TooltipContentProps,
 };
