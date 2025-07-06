@@ -176,7 +176,6 @@ export default function PricingClient({ products }: PricingClientProps) {
                         ? `/checkout?products=${PRODUCT_ID}&customerEmail=${user?.email}`
                         : "#"
                     }
-                    target={user ? "_blank" : undefined}
                     className="w-full block"
                     onClick={handlePurchaseClick}
                   >
