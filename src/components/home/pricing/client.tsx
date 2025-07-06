@@ -171,7 +171,11 @@ export default function PricingClient({ products }: PricingClientProps) {
                   </Button>
                 ) : (
                   <Link
-                    href={user ? `/purchase/${PRODUCT_ID}` : "#"}
+                    href={
+                      user
+                        ? `/checkout?products=${PRODUCT_ID}&customerEmail=${user?.email}`
+                        : "#"
+                    }
                     className="w-full block"
                     onClick={handlePurchaseClick}
                   >
