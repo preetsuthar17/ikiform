@@ -1,6 +1,3 @@
-// UI components imports
-import { FormPreview } from "@/components/form-builder/form-preview";
-
 // Local imports
 import { PreviewPanelProps } from "@/lib/ai-builder/types";
 import { PreviewPanelHeader } from "./preview-panel-header";
@@ -17,7 +14,7 @@ export function PreviewPanel({
     if (activeForm?.schema) {
       localStorage.setItem(
         "importedFormSchema",
-        JSON.stringify(activeForm.schema),
+        JSON.stringify(activeForm.schema)
       );
       router.push("/form-builder");
     }
@@ -45,13 +42,10 @@ export function PreviewPanel({
       />
       <div className="flex-1 overflow-auto md:p-6 p-3">
         {activeForm?.schema ? (
-          <FormPreview
-            schema={activeForm.schema}
-            selectedFieldId={null}
-            onFieldSelect={() => {}}
-            onFieldsReorder={() => {}}
-            onFieldDelete={() => {}}
-          />
+          <div className="text-muted-foreground flex items-center justify-center text-center">
+            Form preview removed. Use the "Use Form" button to import this form
+            into the form builder.
+          </div>
         ) : (
           <div className="text-muted-foreground flex items-center justify-center text-center">
             No form selected.

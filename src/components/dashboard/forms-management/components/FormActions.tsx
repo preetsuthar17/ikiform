@@ -19,7 +19,6 @@ import type { FormActionsProps } from "../types";
 export function FormActions({
   form,
   onEdit,
-  onPreview,
   onViewAnalytics,
   onShare,
   onDelete,
@@ -38,21 +37,6 @@ export function FormActions({
             </Button>
           </TooltipTrigger>
           <TooltipContent size="sm">Edit form</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="secondary"
-              size="icon"
-              onClick={() => onPreview(form.id)}
-            >
-              <Eye className="w-4 h-4" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent size="sm">Preview form</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 

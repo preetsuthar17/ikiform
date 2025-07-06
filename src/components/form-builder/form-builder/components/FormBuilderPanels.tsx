@@ -9,7 +9,6 @@ import {
   ResizableHandle,
 } from "@/components/ui/resizable";
 import { FieldPalette } from "../../field-palette";
-import { FormPreview } from "../../form-preview";
 import { FieldSettingsPanel } from "../../field-settings-panel";
 import { BlockManager } from "../../block-manager";
 
@@ -62,29 +61,7 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
         )}
       </ResizablePanel>
 
-      <ResizableHandle />
 
-      {/* Center Panel - Form Preview */}
-      <ResizablePanel
-        defaultSize={PANEL_SIZES.CENTER_PANEL.default}
-        minSize={PANEL_SIZES.CENTER_PANEL.min}
-      >
-        <ScrollArea className="h-full">
-          <FormPreview
-            schema={formSchema}
-            selectedFieldId={selectedFieldId}
-            selectedBlockId={selectedBlockId}
-            onFieldSelect={onFieldSelect}
-            onFieldsReorder={onFieldsReorder}
-            onFieldDelete={onFieldDelete}
-            onFormSettingsUpdate={onFormSettingsUpdate}
-            onBlockUpdate={onBlockUpdate}
-            onStepSelect={onStepSelect}
-          />
-        </ScrollArea>
-      </ResizablePanel>
-
-      <ResizableHandle />
 
       {/* Right Panel - Field Settings or Field Palette for multi-step */}
       <ResizablePanel

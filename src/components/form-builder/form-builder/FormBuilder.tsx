@@ -217,16 +217,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     }
   };
 
-  const previewForm = () => {
-    if (!formId) {
-      toast.error("Please save your form before previewing.");
-      return;
-    }
 
-    const previewUrl = `/forms/${formId}/preview`;
-    window.open(previewUrl, "_blank");
-    toast.success("Opening form preview in new tab");
-  };
 
   const shareForm = () => {
     if (!formId) {
@@ -393,7 +384,6 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
         formId={formId}
         onModeToggle={handleModeToggle}
         onJsonView={() => actions.setShowJsonView(true)}
-        onPreview={previewForm}
         onAnalytics={viewAnalytics}
         onShare={shareForm}
         onSettings={() => actions.setShowFormSettings(true)}

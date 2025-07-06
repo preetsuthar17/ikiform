@@ -32,7 +32,6 @@ export function FormsManagement({ className }: FormsManagementProps) {
     // Actions
     createNewForm,
     editForm,
-    previewForm,
     viewAnalytics,
     shareForm,
     deleteForm,
@@ -75,7 +74,6 @@ export function FormsManagement({ className }: FormsManagementProps) {
         <FormsGrid
           forms={forms}
           onEdit={editForm}
-          onPreview={previewForm}
           onViewAnalytics={viewAnalytics}
           onShare={shareForm}
           onDelete={deleteForm}

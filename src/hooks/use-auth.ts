@@ -25,10 +25,7 @@ export function useAuth() {
     fetchUser();
 
     const { data: listener } = supabase.auth.onAuthStateChange((_, session) => {
-      const newUser = session?.user ?? null;
-      setUser((prevUser) =>
-        prevUser?.id === newUser?.id ? prevUser : newUser,
-      );
+      setUser(session?.user ?? null);
     });
 
     return () => listener.subscription.unsubscribe();
@@ -38,7 +35,6 @@ export function useAuth() {
     try {
       const supabase = createClient();
       await supabase.auth.signOut();
-      setUser(null);
       router.push("/");
     } catch (error) {
       console.error("Sign out error:", error);

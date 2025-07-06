@@ -41,7 +41,6 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
   formId,
   onModeToggle,
   onJsonView,
-  onPreview,
   onAnalytics,
   onShare,
   onSettings,
@@ -115,20 +114,6 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
                 </Button>
               </TooltipTrigger>
               <TooltipContent size="sm">View JSON</TooltipContent>
-            </Tooltip>
-
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="secondary"
-                  size="icon"
-                  onClick={onPreview}
-                  disabled={!formId}
-                >
-                  <Eye className="w-4 h-4 shrink-0" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent size="sm">Preview</TooltipContent>
             </Tooltip>
 
             <Tooltip>

@@ -69,7 +69,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const { theme } = useTheme();
 
   const { submissions, loading, refreshing, refreshData } = useFormSubmissions(
-    form.id,
+    form.id
   );
   const analyticsData = useAnalyticsData(form, submissions);
   const {
@@ -120,10 +120,6 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   // Form action handlers
   const handleEditForm = () => {
     router.push(`/form-builder/${form.id}`);
-  };
-
-  const handlePreviewForm = () => {
-    window.open(`/forms/${form.id}/preview`, "_blank");
   };
 
   const handleShareForm = async () => {
@@ -238,21 +234,6 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent size="sm">Edit form</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="secondary"
-                    size="icon"
-                    onClick={handlePreviewForm}
-                  >
-                    <Eye className="w-4 h-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent size="sm">Preview form</TooltipContent>
               </Tooltip>
             </TooltipProvider>
 

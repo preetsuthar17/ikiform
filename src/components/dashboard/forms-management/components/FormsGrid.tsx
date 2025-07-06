@@ -10,7 +10,6 @@ import type { Form } from "@/lib/database";
 interface FormsGridProps {
   forms: Form[];
   onEdit: (formId: string) => void;
-  onPreview: (formId: string) => void;
   onViewAnalytics: (formId: string) => void;
   onShare: (form: Form) => void;
   onDelete: (formId: string, formTitle: string) => void;
@@ -19,7 +18,6 @@ interface FormsGridProps {
 export function FormsGrid({
   forms,
   onEdit,
-  onPreview,
   onViewAnalytics,
   onShare,
   onDelete,
@@ -31,7 +29,6 @@ export function FormsGrid({
           key={form.id}
           form={form}
           onEdit={onEdit}
-          onPreview={onPreview}
           onViewAnalytics={onViewAnalytics}
           onShare={onShare}
           onDelete={onDelete}

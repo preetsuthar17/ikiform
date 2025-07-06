@@ -1,44 +1,97 @@
-import { notFound, redirect } from "next/navigation";
+"use client";
+
+import { useEffect, useState } from "react";
+import { notFound } from "next/navigation";
 import { FormAnalytics } from "@/components/forms/form-analytics";
-import { formsDbServer } from "@/lib/database";
-import { createClient } from "@/utils/supabase/server";
+import { useAuth } from "@/hooks/use-auth";
+import { usePremiumStatus } from "@/hooks/use-premium-status";
+import { Button } from "@/components/ui/button";
+import { Loader } from "@/components/ui/loader";
+import Link from "next/link";
+import { createClient } from "@/utils/supabase/client";
 
 interface FormAnalyticsPageProps {
   params: Promise<{ id: string }>;
 }
 
-export default async function FormAnalyticsPage({
-  params,
-}: FormAnalyticsPageProps) {
-  const { id } = await params;
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+export default function FormAnalyticsPage({ params }: FormAnalyticsPageProps) {
+  const { user, loading } = useAuth();
+  const { hasPremium, checkingPremium: checking } = usePremiumStatus(user);
+  const [form, setForm] = useState<any>(null);
+  const [formLoading, setFormLoading] = useState(true);
+  const [id, setId] = useState<string | null>(null);
 
-  try {
-    // Verify form ownership
-    const hasAccess = await formsDbServer.verifyFormOwnership(id, user!.id);
-    if (!hasAccess) {
-      notFound();
+  useEffect(() => {
+    const loadForm = async () => {
+      const p = await params;
+      setId(p.id);
+    };
+    loadForm();
+  }, [params]);
+
+  useEffect(() => {
+    const fetchForm = async () => {
+      if (!user || !id) return;
+
+      try {
+        const supabase = createClient();
+        const { data, error } = await supabase
+          .from("forms")
+          .select("*")
+          .eq("id", id)
+          .eq("user_id", user.id)
+          .single();
+
+        if (error || !data) {
+          notFound();
+        }
+
+        setForm(data);
+      } catch (error) {
+        console.error("Error loading form:", error);
+        notFound();
+      } finally {
+        setFormLoading(false);
+      }
+    };
+
+    if (user && id && hasPremium) {
+      fetchForm();
+    } else if (user && id && !hasPremium) {
+      setFormLoading(false);
     }
+  }, [user, id, hasPremium]);
 
-    // Get form data
-    const supabaseClient = await createClient();
-    const { data: form, error } = await supabaseClient
-      .from("forms")
-      .select("*")
-      .eq("id", id)
-      .eq("user_id", user?.id)
-      .single();
-
-    if (error || !form) {
-      notFound();
-    }
-
-    return <FormAnalytics form={form} />;
-  } catch (error) {
-    console.error("Error loading form analytics:", error);
-    notFound();
+  if (loading || checking || (hasPremium && formLoading)) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader />
+      </div>
+    );
   }
+
+  if (!user || !hasPremium) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen gap-6">
+        <div className="text-2xl font-semibold">Requires Premium</div>
+        <div className="text-muted-foreground text-center max-w-md">
+          You need a premium subscription to access form analytics. Upgrade to
+          unlock all features.
+        </div>
+        <Link href="/#pricing">
+          <Button size="lg">View Pricing</Button>
+        </Link>
+      </div>
+    );
+  }
+
+  if (!form) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader />
+      </div>
+    );
+  }
+
+  return <FormAnalytics form={form} />;
 }

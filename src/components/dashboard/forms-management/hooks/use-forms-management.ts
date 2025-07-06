@@ -25,7 +25,7 @@ export function useFormsManagement() {
   const [forms, setForms] = useState<Form[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleteModal, setDeleteModal] = useState<DeleteModalState>(
-    DEFAULT_DELETE_MODAL_STATE,
+    DEFAULT_DELETE_MODAL_STATE
   );
   const [showChoiceModal, setShowChoiceModal] = useState(false);
 
@@ -55,10 +55,6 @@ export function useFormsManagement() {
 
   const viewForm = (formId: string) => {
     window.open(`/forms/${formId}`, "_blank");
-  };
-
-  const previewForm = (formId: string) => {
-    window.open(`/forms/${formId}/preview`, "_blank");
   };
 
   const viewAnalytics = (formId: string) => {
@@ -133,7 +129,6 @@ export function useFormsManagement() {
     createNewForm,
     editForm,
     viewForm,
-    previewForm,
     viewAnalytics,
     shareForm,
     deleteForm,

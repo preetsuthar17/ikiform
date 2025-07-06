@@ -40,7 +40,7 @@ export interface FormBuilderActions {
   setShowShareModal: (show: boolean) => void;
   setIsNewForm: (isNew: boolean) => void;
   setFormSchema: (
-    schema: FormSchema | ((prev: FormSchema) => FormSchema),
+    schema: FormSchema | ((prev: FormSchema) => FormSchema)
   ) => void;
 }
 
@@ -53,7 +53,6 @@ export interface FormBuilderHeaderProps {
   formId?: string;
   onModeToggle: () => void;
   onJsonView: () => void;
-  onPreview: () => void;
   onAnalytics: () => void;
   onShare: () => void;
   onSettings: () => void;

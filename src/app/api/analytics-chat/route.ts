@@ -5,6 +5,7 @@ import { checkRateLimit, RateLimitSettings } from "@/lib/forms";
 import { createClient } from "@/utils/supabase/server";
 import { formsDbServer } from "@/lib/database";
 import { v4 as uuidv4 } from "uuid";
+import { requirePremium } from "@/lib/utils/premium-check";
 
 const systemPrompt = process.env.ANALYTICS_AI_SYSTEM_PROMPT;
 
@@ -48,7 +49,7 @@ function createErrorResponse(message: string, status: number = 500) {
 }
 
 function validateAndSanitizeMessages(
-  messages: any[],
+  messages: any[]
 ): { role: string; content: string }[] {
   if (
     !Array.isArray(messages) ||
@@ -69,7 +70,7 @@ function validateAndSanitizeMessages(
 }
 
 function analyzeConversation(
-  messages: { role: string; content: string }[],
+  messages: { role: string; content: string }[]
 ): ConversationAnalysis {
   const userMessages = messages.filter((msg) => msg.role === "user");
   const assistantMessages = messages.filter((msg) => msg.role === "assistant");
@@ -176,25 +177,25 @@ function analyzeConversation(
 
   // Analyze for follow-up questions
   const hasFollowUpQuestions = followUpKeywords.some((keyword) =>
-    currentMessage.includes(keyword.toLowerCase()),
+    currentMessage.includes(keyword.toLowerCase())
   );
 
   // Analyze for references to previous responses
   const referencesLastResponse = referenceKeywords.some((keyword) =>
-    currentMessage.includes(keyword.toLowerCase()),
+    currentMessage.includes(keyword.toLowerCase())
   );
 
   // Analyze for direct action requests
   const isDirectRequest = directActionKeywords.some((keyword) =>
-    currentMessage.includes(keyword.toLowerCase()),
+    currentMessage.includes(keyword.toLowerCase())
   );
 
   // Extract topics discussed
   const topicsDiscussed = Object.entries(topicKeywords)
     .filter(([_, keywords]) =>
       keywords.some((keyword) =>
-        previousMessages.includes(keyword.toLowerCase()),
-      ),
+        previousMessages.includes(keyword.toLowerCase())
+      )
     )
     .map(([topic, _]) => topic);
 
@@ -218,7 +219,7 @@ function analyzeConversation(
   }
   if (isDirectRequest) {
     contextualHints.push(
-      "User is making a direct request for information - be specific and helpful",
+      "User is making a direct request for information - be specific and helpful"
     );
   }
   if (topicsDiscussed.length > 0) {
@@ -257,7 +258,7 @@ export async function POST(req: NextRequest) {
       {
         status: 429,
         headers: { "Retry-After": retryAfter.toString() },
-      },
+      }
     );
   }
 
@@ -271,6 +272,12 @@ export async function POST(req: NextRequest) {
 
     if (authError || !user) {
       return createErrorResponse("Unauthorized", 401);
+    }
+
+    // Check premium status
+    const premiumCheck = await requirePremium(user.id);
+    if (!premiumCheck.hasPremium) {
+      return createErrorResponse("Premium subscription required", 403);
     }
 
     if (apiKeyValid === null) {
@@ -299,7 +306,7 @@ export async function POST(req: NextRequest) {
     } catch (error) {
       return createErrorResponse(
         error instanceof Error ? error.message : "Invalid request format",
-        400,
+        400
       );
     }
 
@@ -327,7 +334,7 @@ export async function POST(req: NextRequest) {
               completionRate: context.analytics?.completionRate || 0,
               averageTime: context.analytics?.averageTime || 0,
             },
-          },
+          }
         );
       } catch (error) {
         console.error("Error saving user message:", error);
@@ -347,7 +354,7 @@ export async function POST(req: NextRequest) {
 
     // Calculate time-specific metrics
     const todaySubmissions = context.submissions.filter(
-      (sub: any) => new Date(sub.submitted_at) >= today,
+      (sub: any) => new Date(sub.submitted_at) >= today
     ).length;
 
     const yesterdaySubmissions = context.submissions.filter((sub: any) => {
@@ -356,11 +363,11 @@ export async function POST(req: NextRequest) {
     }).length;
 
     const thisWeekSubmissions = context.submissions.filter(
-      (sub: any) => new Date(sub.submitted_at) >= weekAgo,
+      (sub: any) => new Date(sub.submitted_at) >= weekAgo
     ).length;
 
     const thisMonthSubmissions = context.submissions.filter(
-      (sub: any) => new Date(sub.submitted_at) >= monthAgo,
+      (sub: any) => new Date(sub.submitted_at) >= monthAgo
     ).length;
 
     const contextString = `
@@ -414,11 +421,11 @@ export async function POST(req: NextRequest) {
     - Submissions This Month (last 30 days): ${thisMonthSubmissions}
     - Days Since Form Created: ${Math.floor(
       (now.getTime() - new Date(context.form.created_at).getTime()) /
-        (1000 * 60 * 60 * 24),
+        (1000 * 60 * 60 * 24)
     )}
     - Days Since Last Update: ${Math.floor(
       (now.getTime() - new Date(context.form.updated_at).getTime()) /
-        (1000 * 60 * 60 * 24),
+        (1000 * 60 * 60 * 24)
     )}
     
     FORM INFORMATION:
@@ -462,7 +469,7 @@ export async function POST(req: NextRequest) {
               (field: any, index: number) =>
                 `${index + 1}. ${field[1].label}: ${
                   field[1].completionRate
-                }% completion (${field[1].totalResponses} responses)`,
+                }% completion (${field[1].totalResponses} responses)`
             )
             .join("\n")
         : "No field performance data available"
@@ -476,7 +483,7 @@ export async function POST(req: NextRequest) {
               (field: any, index: number) =>
                 `${index + 1}. ${field[1].label}: ${
                   field[1].completionRate
-                }% completion (${field[1].totalResponses} responses)`,
+                }% completion (${field[1].totalResponses} responses)`
             )
             .join("\n")
         : "All fields performing well"
@@ -499,7 +506,7 @@ export async function POST(req: NextRequest) {
               (step: any, index: number) =>
                 `Step ${index + 1} - ${step.stepName}: ${step.completedCount}/${
                   context.analytics.totalSubmissions
-                } (${step.conversionRate}%)`,
+                } (${step.conversionRate}%)`
             )
             .join("\n")
         : "Not a multi-step form or no funnel data"
@@ -647,7 +654,7 @@ export async function POST(req: NextRequest) {
                     contextualHints: conversationAnalysis.contextualHints,
                     hasDirectRequest: conversationAnalysis.hasDirectRequest,
                   },
-                },
+                }
               );
             } catch (error) {
               console.error("Error saving AI response:", error);
@@ -696,6 +703,6 @@ export async function GET() {
     {
       status: 200,
       headers: { "Content-Type": "application/json" },
-    },
+    }
   );
 }
