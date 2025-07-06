@@ -6,7 +6,7 @@ export const getModalContentStyles = (): string => {
 };
 
 export const getSidebarStyles = (): string => {
-  return "w-52 border-r border-border flex flex-col gap-2";
+  return "w-52 border-border flex flex-col gap-2";
 };
 
 export const getDesktopLayoutStyles = (): string => {
@@ -22,7 +22,7 @@ export const getNavigationItemStyles = (isActive: boolean): string => {
     "w-full text-left items-center justify-start transition-all gap-2",
     isActive
       ? "bg-secondary text-secondary-foreground"
-      : "hover:bg-accent hover:text-accent-foreground",
+      : "hover:bg-accent hover:text-accent-foreground"
   );
 };
 

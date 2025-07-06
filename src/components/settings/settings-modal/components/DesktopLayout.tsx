@@ -29,7 +29,7 @@ export function DesktopLayout({
   return (
     <div className={getDesktopLayoutStyles()}>
       <div className={`${getSidebarStyles()} gap-4`}>
-        <div className="flex items-center gap-4 border-b border-border p-6">
+        <div className="flex items-center gap-4 border-b border-border p-4 sr-only">
           <ModalHeader onClose={onClose} />
         </div>
         <SidebarNavigation
