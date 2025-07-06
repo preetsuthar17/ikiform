@@ -217,8 +217,6 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     }
   };
 
-
-
   const shareForm = () => {
     if (!formId) {
       toast.error("Please save your form before sharing.");

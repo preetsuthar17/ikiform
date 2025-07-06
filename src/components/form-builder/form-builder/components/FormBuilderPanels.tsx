@@ -61,8 +61,6 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
         )}
       </ResizablePanel>
 
-
-
       {/* Right Panel - Field Settings or Field Palette for multi-step */}
       <ResizablePanel
         defaultSize={PANEL_SIZES.RIGHT_PANEL.default}

@@ -29,12 +29,12 @@ export function createPremiumErrorResponse(): NextResponse {
         "This feature requires a premium subscription. Please upgrade to access this functionality.",
       code: "PREMIUM_REQUIRED",
     },
-    { status: 403 }
+    { status: 403 },
   );
 }
 
 export async function requirePremium(
-  userId: string
+  userId: string,
 ): Promise<{ hasPremium: boolean; error?: NextResponse }> {
   const hasPremium = await checkPremiumStatus(userId);
 

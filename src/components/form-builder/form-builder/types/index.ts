@@ -40,7 +40,7 @@ export interface FormBuilderActions {
   setShowShareModal: (show: boolean) => void;
   setIsNewForm: (isNew: boolean) => void;
   setFormSchema: (
-    schema: FormSchema | ((prev: FormSchema) => FormSchema)
+    schema: FormSchema | ((prev: FormSchema) => FormSchema),
   ) => void;
 }
 
