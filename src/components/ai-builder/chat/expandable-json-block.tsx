@@ -60,7 +60,7 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
         if (isMounted) {
           // Fallback to plain text
           setHighlightedCode(
-            `<pre class="whitespace-pre-wrap break-words">${jsonString}</pre>`
+            `<pre class="whitespace-pre-wrap break-words">${jsonString}</pre>`,
           );
         }
       }

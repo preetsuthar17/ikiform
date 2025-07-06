@@ -27,7 +27,7 @@ export async function updateSession(request: NextRequest) {
       ...(accessToken && {
         global: { headers: { Authorization: `Bearer ${accessToken}` } },
       }),
-    }
+    },
   );
 
   const {

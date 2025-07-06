@@ -53,7 +53,7 @@ export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
         console.error("Error highlighting code:", error);
         // Fallback to plain text
         setHighlightedCode(
-          `<pre class="whitespace-pre-wrap break-words">${JSON.stringify(activeForm.schema, null, 2)}</pre>`
+          `<pre class="whitespace-pre-wrap break-words">${JSON.stringify(activeForm.schema, null, 2)}</pre>`,
         );
       }
     };

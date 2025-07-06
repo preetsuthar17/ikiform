@@ -46,7 +46,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
               typeof value === "object"
                 ? JSON.stringify(value, null, 2)
                 : String(value)
-            }`
+            }`,
         )
         .join("\n\n");
 
@@ -135,7 +135,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                         : String(value)}
                     </p>
                   </div>
-                )
+                ),
               )}
             </div>
           </ScrollArea>

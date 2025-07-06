@@ -27,7 +27,7 @@ const tooltipVariants = cva(
       variant: "default",
       size: "md",
     },
-  }
+  },
 );
 
 const Tooltip: React.FC<

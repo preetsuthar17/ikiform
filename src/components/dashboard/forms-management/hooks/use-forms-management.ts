@@ -25,7 +25,7 @@ export function useFormsManagement() {
   const [forms, setForms] = useState<Form[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleteModal, setDeleteModal] = useState<DeleteModalState>(
-    DEFAULT_DELETE_MODAL_STATE
+    DEFAULT_DELETE_MODAL_STATE,
   );
   const [showChoiceModal, setShowChoiceModal] = useState(false);
 

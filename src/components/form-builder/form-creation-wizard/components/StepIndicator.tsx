@@ -71,7 +71,7 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
                     ? "bg-primary border-primary text-primary-foreground"
                     : isCurrent
                       ? "border-primary bg-primary/10 text-primary"
-                      : "border-muted-foreground/30 bg-background text-muted-foreground"
+                      : "border-muted-foreground/30 bg-background text-muted-foreground",
                 )}
               >
                 {isCompleted ? (
@@ -86,7 +86,7 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
                 <p
                   className={cn(
                     "text-sm font-medium",
-                    isActive ? "text-foreground" : "text-muted-foreground"
+                    isActive ? "text-foreground" : "text-muted-foreground",
                   )}
                 >
                   {step.title}
@@ -96,7 +96,7 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
                     "text-xs",
                     isActive
                       ? "text-muted-foreground"
-                      : "text-muted-foreground/60"
+                      : "text-muted-foreground/60",
                   )}
                 >
                   {step.description}
@@ -110,7 +110,7 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
                     "w-32 h-px mx-4",
                     isCompleted || getCurrentStepIndex() > index
                       ? "bg-primary"
-                      : "bg-muted-foreground"
+                      : "bg-muted-foreground",
                   )}
                 />
               )}
