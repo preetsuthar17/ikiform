@@ -11,12 +11,7 @@ export type {
 } from "./types";
 
 // Export utilities for external use
-export {
-  getTotalFields,
-  formatDate,
-  generateShareUrl,
-  generatePreviewUrl,
-} from "./utils";
+export { getTotalFields, formatDate, generateShareUrl } from "./utils";
 
 // Export hook for external use
 export { useFormsManagement } from "./hooks";
