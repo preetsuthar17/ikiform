@@ -50,9 +50,6 @@ export function MultiStepNavigation({
             }}
           />
         </div>
-        <div className="flex items-center gap-4 text-sm text-muted-foreground">
-          Step {currentStepIndex + 1} of {schema.blocks.length}
-        </div>
       </div>
 
       <div className="flex items-center justify-between">

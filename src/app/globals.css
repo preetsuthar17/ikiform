@@ -252,3 +252,10 @@ pre {
   background-color: var(--s-dim-bg) !important;
   color: var(--s-dim) !important;
 }
+
+.shiki .github-dark {
+  background-color: transparent !important;
+}
+pre {
+  background-color: transparent !important;
+}

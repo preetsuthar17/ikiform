@@ -52,7 +52,7 @@ export function FormPreview({
 
   return (
     <div className="min-h-full bg-background">
-      <div className="max-w-2xl mx-auto flex flex-col gap-6 p-6">
+      <div className="max-w-2xl mx-auto flex flex-col gap-6 md:p-6 p-2">
         <FormHeader
           schema={schema}
           onFormSettingsUpdate={onFormSettingsUpdate}

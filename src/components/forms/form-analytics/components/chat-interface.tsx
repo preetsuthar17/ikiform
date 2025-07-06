@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo, useMemo } from "react";
 
 // UI Components
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -24,7 +24,56 @@ import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 // Types
 import type { ChatInterfaceProps } from "../types";
 
-export const ChatInterface: React.FC<ChatInterfaceProps> = ({
+const ChatMessage = memo(function ChatMessage({
+  message,
+  index,
+  markdownComponents,
+}: {
+  message: any;
+  index: number;
+  markdownComponents: any;
+}) {
+  return (
+    <div
+      key={index}
+      className={`flex gap-4 ${
+        message.role === "user" ? "justify-end" : "justify-start"
+      }`}
+    >
+      <div
+        className={`flex gap-3 max-w-[85%] ${
+          message.role === "user" ? "flex-row-reverse" : "flex-row"
+        }`}
+      >
+        {/* Message Content */}
+        <div
+          className={`group relative px-4 py-3 rounded-2xl ${
+            message.role === "user"
+              ? "bg-primary text-primary-foreground rounded-br-md"
+              : "bg-muted/50 border rounded-bl-md"
+          }`}
+        >
+          <div className="text-sm leading-relaxed">
+            {message.role === "user" ? (
+              <div className="whitespace-pre-wrap">{message.content}</div>
+            ) : (
+              <div className="markdown-content">
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={markdownComponents}
+                >
+                  {message.content}
+                </ReactMarkdown>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+});
+
+export const ChatInterface = memo(function ChatInterface({
   chatMessages,
   chatStreaming,
   streamedContent,
@@ -37,108 +86,112 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
   chatInput,
   abortController,
   handleStopGeneration,
-}) => {
+}: ChatInterfaceProps) {
   const isEmpty = chatMessages.length === 0;
 
-  const markdownComponents = {
-    code: ({ inline, className, children, ...props }: any) => {
-      const match = /language-(\w+)/.exec(className || "");
-      return !inline && match ? (
-        <SyntaxHighlighter
-          style={oneDark}
-          language={match[1]}
-          PreTag="div"
-          className="rounded-lg my-2"
-          {...props}
-        >
-          {String(children).replace(/\n$/, "")}
-        </SyntaxHighlighter>
-      ) : (
-        <code
-          className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono"
+  // Memoize markdown components to avoid recreating on each render
+  const markdownComponents = useMemo(
+    () => ({
+      code: ({ inline, className, children, ...props }: any) => {
+        const match = /language-(\w+)/.exec(className || "");
+        return !inline && match ? (
+          <SyntaxHighlighter
+            style={oneDark}
+            language={match[1]}
+            PreTag="div"
+            className="rounded-lg my-2"
+            {...props}
+          >
+            {String(children).replace(/\n$/, "")}
+          </SyntaxHighlighter>
+        ) : (
+          <code
+            className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono"
+            {...props}
+          >
+            {children}
+          </code>
+        );
+      },
+      p: ({ children, ...props }: any) => (
+        <p className="mb-2 last:mb-0" {...props}>
+          {children}
+        </p>
+      ),
+      h1: ({ children, ...props }: any) => (
+        <h1 className="text-xl font-bold mb-2" {...props}>
+          {children}
+        </h1>
+      ),
+      h2: ({ children, ...props }: any) => (
+        <h2 className="text-lg font-semibold mb-2" {...props}>
+          {children}
+        </h2>
+      ),
+      h3: ({ children, ...props }: any) => (
+        <h3 className="text-md font-medium mb-2" {...props}>
+          {children}
+        </h3>
+      ),
+      ul: ({ children, ...props }: any) => (
+        <ul className="list-disc list-inside mb-2 space-y-1" {...props}>
+          {children}
+        </ul>
+      ),
+      ol: ({ children, ...props }: any) => (
+        <ol className="list-decimal list-inside mb-2 space-y-1" {...props}>
+          {children}
+        </ol>
+      ),
+      li: ({ children, ...props }: any) => (
+        <li className="ml-2" {...props}>
+          {children}
+        </li>
+      ),
+      blockquote: ({ children, ...props }: any) => (
+        <blockquote
+          className="border-l-4 border-primary pl-4 italic mb-2"
           {...props}
         >
           {children}
-        </code>
-      );
-    },
-    p: ({ children, ...props }: any) => (
-      <p className="mb-2 last:mb-0" {...props}>
-        {children}
-      </p>
-    ),
-    h1: ({ children, ...props }: any) => (
-      <h1 className="text-xl font-bold mb-2" {...props}>
-        {children}
-      </h1>
-    ),
-    h2: ({ children, ...props }: any) => (
-      <h2 className="text-lg font-semibold mb-2" {...props}>
-        {children}
-      </h2>
-    ),
-    h3: ({ children, ...props }: any) => (
-      <h3 className="text-md font-medium mb-2" {...props}>
-        {children}
-      </h3>
-    ),
-    ul: ({ children, ...props }: any) => (
-      <ul className="list-disc list-inside mb-2 space-y-1" {...props}>
-        {children}
-      </ul>
-    ),
-    ol: ({ children, ...props }: any) => (
-      <ol className="list-decimal list-inside mb-2 space-y-1" {...props}>
-        {children}
-      </ol>
-    ),
-    li: ({ children, ...props }: any) => (
-      <li className="ml-2" {...props}>
-        {children}
-      </li>
-    ),
-    blockquote: ({ children, ...props }: any) => (
-      <blockquote
-        className="border-l-4 border-primary pl-4 italic mb-2"
-        {...props}
-      >
-        {children}
-      </blockquote>
-    ),
-    table: ({ children, ...props }: any) => (
-      <div className="overflow-x-auto mb-2">
-        <table
-          className="min-w-full border-collapse border border-border rounded-lg"
+        </blockquote>
+      ),
+      table: ({ children, ...props }: any) => (
+        <div className="overflow-x-auto mb-2">
+          <table
+            className="min-w-full border-collapse border border-border rounded-lg"
+            {...props}
+          >
+            {children}
+          </table>
+        </div>
+      ),
+      th: ({ children, ...props }: any) => (
+        <th
+          className="border border-border px-3 py-2 bg-muted font-medium text-left"
           {...props}
         >
           {children}
-        </table>
-      </div>
-    ),
-    th: ({ children, ...props }: any) => (
-      <th
-        className="border border-border px-3 py-2 bg-muted font-medium text-left"
-        {...props}
-      >
-        {children}
-      </th>
-    ),
-    td: ({ children, ...props }: any) => (
-      <td className="border border-border px-3 py-2" {...props}>
-        {children}
-      </td>
-    ),
-    strong: ({ children, ...props }: any) => (
-      <strong className="font-semibold" {...props}>
-        {children}
-      </strong>
-    ),
-    em: ({ children, ...props }: any) => (
-      <em className="italic" {...props}>
-        {children}
-      </em>
-    ),
-  };
+        </th>
+      ),
+      td: ({ children, ...props }: any) => (
+        <td className="border border-border px-3 py-2" {...props}>
+          {children}
+        </td>
+      ),
+      strong: ({ children, ...props }: any) => (
+        <strong className="font-semibold" {...props}>
+          {children}
+        </strong>
+      ),
+      em: ({ children, ...props }: any) => (
+        <em className="italic" {...props}>
+          {children}
+        </em>
+      ),
+    }),
+    []
+  );
 
   return (
     <div className="flex flex-col h-full bg-background">
@@ -167,50 +220,12 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
 
           {/* Chat Messages */}
           {chatMessages.map((message, index) => (
-            <div
-              key={index}
-              className={`flex gap-4 ${
-                message.role === "user" ? "justify-end" : "justify-start"
-              }`}
-            >
-              <div
-                className={`flex gap-3 max-w-[85%] ${
-                  message.role === "user" ? "flex-row-reverse" : "flex-row"
-                }`}
-              >
-                {/* Message Content */}
-                <div
-                  className={`group relative px-4 py-3 rounded-2xl ${
-                    message.role === "user"
-                      ? "bg-primary text-primary-foreground rounded-br-md"
-                      : "bg-muted/50 border rounded-bl-md"
-                  }`}
-                >
-                  <div className="text-sm leading-relaxed">
-                    {message.role === "user" ? (
-                      <div className="whitespace-pre-wrap">
-                        {message.content}
-                      </div>
-                    ) : (
-                      <div className="markdown-content">
-                        <ReactMarkdown
-                          remarkPlugins={[remarkGfm]}
-                          components={markdownComponents}
-                        >
-                          {message.content}
-                        </ReactMarkdown>
-                      </div>
-                    )}
-                  </div>
-                  <div className="text-xs opacity-60 mt-2">
-                    {message.timestamp.toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ChatMessage
+              key={`${message.role}-${index}-${message.content.slice(0, 50)}`}
+              message={message}
+              index={index}
+              markdownComponents={markdownComponents}
+            />
           ))}
 
           {/* Streaming Message */}
@@ -314,4 +329,4 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
       </div>
     </div>
   );
-};
+});
