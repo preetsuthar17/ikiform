@@ -115,7 +115,7 @@ export const formsDb = {
   async submitForm(
     formId: string,
     submissionData: Record<string, any>,
-    ipAddress?: string,
+    ipAddress?: string
   ) {
     const supabase = createClient();
 
@@ -153,7 +153,7 @@ export const formsDb = {
     sessionId: string,
     role: "user" | "assistant" | "system",
     content: string,
-    metadata: Record<string, any> = {},
+    metadata: Record<string, any> = {}
   ) {
     const supabase = createClient();
 
@@ -207,7 +207,7 @@ export const formsDb = {
         }
         return acc;
       },
-      {} as Record<string, string>,
+      {} as Record<string, string>
     );
 
     return Object.entries(sessions).map(([sessionId, createdAt]) => ({
@@ -223,7 +223,7 @@ export const formsDb = {
     sessionId: string,
     role: "user" | "assistant" | "system",
     content: string,
-    metadata: Record<string, any> = {},
+    metadata: Record<string, any> = {}
   ) {
     const supabase = createClient();
 
@@ -247,7 +247,7 @@ export const formsDb = {
   async getAIAnalyticsChatHistory(
     userId: string,
     formId: string,
-    sessionId: string,
+    sessionId: string
   ) {
     const supabase = createClient();
 
@@ -266,7 +266,7 @@ export const formsDb = {
   async getAIAnalyticsSessions(
     userId: string,
     formId: string,
-    limit: number = 10,
+    limit: number = 10
   ) {
     const supabase = createClient();
 
@@ -291,7 +291,7 @@ export const formsDb = {
         }
         return acc;
       },
-      {} as Record<string, any>,
+      {} as Record<string, any>
     );
 
     return Object.values(sessions);
@@ -338,7 +338,7 @@ export const formsDbServer = {
   async submitForm(
     formId: string,
     submissionData: Record<string, any>,
-    ipAddress?: string,
+    ipAddress?: string
   ) {
     const supabase = await createServerClient();
 
@@ -362,7 +362,7 @@ export const formsDbServer = {
     sessionId: string,
     role: "user" | "assistant" | "system",
     content: string,
-    metadata: Record<string, any> = {},
+    metadata: Record<string, any> = {}
   ) {
     const supabase = await createServerClient();
 
@@ -416,7 +416,7 @@ export const formsDbServer = {
         }
         return acc;
       },
-      {} as Record<string, string>,
+      {} as Record<string, string>
     );
 
     return Object.entries(sessions).map(([sessionId, createdAt]) => ({
@@ -432,7 +432,7 @@ export const formsDbServer = {
     sessionId: string,
     role: "user" | "assistant" | "system",
     content: string,
-    metadata: Record<string, any> = {},
+    metadata: Record<string, any> = {}
   ) {
     const supabase = await createServerClient();
 
@@ -456,7 +456,7 @@ export const formsDbServer = {
   async getAIAnalyticsChatHistory(
     userId: string,
     formId: string,
-    sessionId: string,
+    sessionId: string
   ) {
     const supabase = await createServerClient();
 
@@ -475,7 +475,7 @@ export const formsDbServer = {
   async getAIAnalyticsSessions(
     userId: string,
     formId: string,
-    limit: number = 10,
+    limit: number = 10
   ) {
     const supabase = await createServerClient();
 
@@ -500,7 +500,7 @@ export const formsDbServer = {
         }
         return acc;
       },
-      {} as Record<string, any>,
+      {} as Record<string, any>
     );
 
     return Object.values(sessions);
@@ -525,7 +525,7 @@ export const formsDbServer = {
     email: string,
     name: string,
     has_premium: boolean = false,
-    polar_customer_id: string | null = null,
+    polar_customer_id: string | null = null
   ) {
     const supabase = await createServerClient();
 
@@ -541,7 +541,7 @@ export const formsDbServer = {
         },
         {
           onConflict: "email",
-        },
+        }
       )
       .select()
       .single();
@@ -618,5 +618,16 @@ export const formsDbServer = {
 
     if (error) throw error;
     return data;
+  },
+
+  // Count submissions for a form
+  async countFormSubmissions(formId: string) {
+    const supabase = await createServerClient();
+    const { count, error } = await supabase
+      .from("form_submissions")
+      .select("id", { count: "exact", head: true })
+      .eq("form_id", formId);
+    if (error) throw error;
+    return count || 0;
   },
 };

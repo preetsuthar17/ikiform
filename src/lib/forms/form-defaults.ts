@@ -25,6 +25,16 @@ export const DEFAULT_PROFANITY_FILTER_SETTINGS = {
 };
 
 /**
+ * Default response limit for all forms
+ */
+
+export const DEFAULT_RESPONSE_LIMIT_SETTINGS = {
+  enabled: false,
+  maxResponses: 100,
+  message: "This form is no longer accepting responses.",
+};
+
+/**
  * Ensures a form schema has the default rate limiting and profanity filter settings
  * This is used to handle legacy forms and ensure all forms have these settings
  */
@@ -40,6 +50,10 @@ export function ensureDefaultFormSettings(schema: FormSchema): FormSchema {
       profanityFilter: {
         ...DEFAULT_PROFANITY_FILTER_SETTINGS,
         ...schema.settings.profanityFilter,
+      },
+      responseLimit: {
+        ...DEFAULT_RESPONSE_LIMIT_SETTINGS,
+        ...schema.settings.responseLimit,
       },
     },
   };
@@ -85,6 +99,8 @@ export function createDefaultFormSchema(options: {
       multiStep: options.multiStep || false,
       showProgress: options.multiStep !== false,
       rateLimit: { ...DEFAULT_RATE_LIMIT_SETTINGS },
+      profanityFilter: { ...DEFAULT_PROFANITY_FILTER_SETTINGS },
+      responseLimit: { ...DEFAULT_RESPONSE_LIMIT_SETTINGS },
     },
   };
 }

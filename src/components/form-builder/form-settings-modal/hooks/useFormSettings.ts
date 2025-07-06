@@ -6,6 +6,7 @@ import type { FormSchema } from "@/lib/database";
 import {
   DEFAULT_RATE_LIMIT_SETTINGS,
   DEFAULT_PROFANITY_FILTER_SETTINGS,
+  DEFAULT_RESPONSE_LIMIT_SETTINGS,
 } from "@/lib/forms";
 import type { LocalSettings } from "../types";
 
@@ -20,6 +21,10 @@ export function useFormSettings(schema: FormSchema) {
       ...DEFAULT_PROFANITY_FILTER_SETTINGS,
       ...schema.settings.profanityFilter,
     },
+    responseLimit: {
+      ...DEFAULT_RESPONSE_LIMIT_SETTINGS,
+      ...schema.settings.responseLimit,
+    },
   });
 
   useEffect(() => {
@@ -32,6 +37,10 @@ export function useFormSettings(schema: FormSchema) {
       profanityFilter: {
         ...DEFAULT_PROFANITY_FILTER_SETTINGS,
         ...schema.settings.profanityFilter,
+      },
+      responseLimit: {
+        ...DEFAULT_RESPONSE_LIMIT_SETTINGS,
+        ...schema.settings.responseLimit,
       },
     });
   }, [schema.settings]);
@@ -48,11 +57,15 @@ export function useFormSettings(schema: FormSchema) {
         ...localSettings.profanityFilter,
         ...updates.profanityFilter,
       },
+      responseLimit: {
+        ...localSettings.responseLimit,
+        ...updates.responseLimit,
+      },
     });
   };
 
   const updateRateLimit = (
-    rateLimitUpdates: Partial<NonNullable<LocalSettings["rateLimit"]>>,
+    rateLimitUpdates: Partial<NonNullable<LocalSettings["rateLimit"]>>
   ) => {
     setLocalSettings({
       ...localSettings,
@@ -66,13 +79,25 @@ export function useFormSettings(schema: FormSchema) {
   const updateProfanityFilter = (
     profanityFilterUpdates: Partial<
       NonNullable<LocalSettings["profanityFilter"]>
-    >,
+    >
   ) => {
     setLocalSettings({
       ...localSettings,
       profanityFilter: {
         ...localSettings.profanityFilter,
         ...profanityFilterUpdates,
+      },
+    });
+  };
+
+  const updateResponseLimit = (
+    responseLimitUpdates: Partial<NonNullable<LocalSettings["responseLimit"]>>
+  ) => {
+    setLocalSettings({
+      ...localSettings,
+      responseLimit: {
+        ...localSettings.responseLimit,
+        ...responseLimitUpdates,
       },
     });
   };
@@ -88,6 +113,10 @@ export function useFormSettings(schema: FormSchema) {
         ...DEFAULT_PROFANITY_FILTER_SETTINGS,
         ...schema.settings.profanityFilter,
       },
+      responseLimit: {
+        ...DEFAULT_RESPONSE_LIMIT_SETTINGS,
+        ...schema.settings.responseLimit,
+      },
     });
   };
 
@@ -96,6 +125,7 @@ export function useFormSettings(schema: FormSchema) {
     updateSettings,
     updateRateLimit,
     updateProfanityFilter,
+    updateResponseLimit,
     resetSettings,
   };
 }

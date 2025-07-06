@@ -13,6 +13,7 @@ import {
   BasicInfoSection,
   RateLimitSection,
   ProfanityFilterSection,
+  ResponseLimitSection,
 } from "./components";
 import type { FormSettingsModalProps } from "./types";
 
@@ -27,6 +28,7 @@ export function FormSettingsModal({
     updateSettings,
     updateRateLimit,
     updateProfanityFilter,
+    updateResponseLimit,
     resetSettings,
   } = useFormSettings(schema);
 
@@ -69,6 +71,10 @@ export function FormSettingsModal({
               <RateLimitSection
                 localSettings={localSettings}
                 updateRateLimit={updateRateLimit}
+              />
+              <ResponseLimitSection
+                localSettings={localSettings}
+                updateResponseLimit={updateResponseLimit}
               />
               <ProfanityFilterSection
                 localSettings={localSettings}

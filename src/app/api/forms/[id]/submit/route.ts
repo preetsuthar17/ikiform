@@ -12,7 +12,7 @@ import { requirePremium } from "@/lib/utils/premium-check";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id: formId } = await params;
@@ -30,7 +30,7 @@ export async function POST(
     if (!form) {
       return NextResponse.json(
         { error: "Form not found or not published" },
-        { status: 404 },
+        { status: 404 }
       );
     }
 
@@ -71,7 +71,25 @@ export async function POST(
             remaining: rateLimitResult.remaining,
             reset: rateLimitResult.reset,
           },
-          { status: 429 },
+          { status: 429 }
+        );
+      }
+    }
+
+    // Check response limit
+    const responseLimit = form.schema.settings.responseLimit;
+    if (responseLimit?.enabled) {
+      // Count existing submissions for this form
+      const count = await formsDbServer.countFormSubmissions(formId);
+      if (count >= (responseLimit.maxResponses || 100)) {
+        return NextResponse.json(
+          {
+            error: "Response limit reached",
+            message:
+              responseLimit.message ||
+              "This form is no longer accepting responses.",
+          },
+          { status: 403 }
         );
       }
     }
@@ -97,7 +115,7 @@ export async function POST(
               "Your submission contains inappropriate content. Please review and resubmit.",
             violations: filterResult.violations.length,
           },
-          { status: 400 },
+          { status: 400 }
         );
       }
 
@@ -111,7 +129,7 @@ export async function POST(
     const submission = await formsDbServer.submitForm(
       formId,
       filteredSubmissionData,
-      ipAddress,
+      ipAddress
     );
 
     return NextResponse.json({
@@ -123,7 +141,7 @@ export async function POST(
     console.error("Form submission error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

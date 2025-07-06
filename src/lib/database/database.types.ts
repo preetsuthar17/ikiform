@@ -289,5 +289,10 @@ export interface FormSchema {
       customMessage?: string;
       whitelistedWords?: string[];
     };
+    responseLimit?: {
+      enabled?: boolean;
+      maxResponses?: number;
+      message?: string;
+    };
   };
 }

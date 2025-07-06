@@ -22,6 +22,7 @@ import { toast } from "@/hooks/use-toast";
 
 // Types
 import type { FormSchema } from "@/lib/database";
+import { Loader } from "../ui/loader";
 
 interface JsonViewModalProps {
   schema: FormSchema;
@@ -188,11 +189,8 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
           </Button>
           <ScrollArea className="h-[71vh] rounded-ele border bg-muted/30 text-foreground">
             {isHighlighting ? (
-              <div className="p-4 flex items-center justify-center h-32">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-                <span className="ml-2 text-sm text-muted-foreground">
-                  Highlighting code...
-                </span>
+              <div className="p-4 flex items-center justify-center h-[71vh]">
+                <Loader />
               </div>
             ) : (
               <div
