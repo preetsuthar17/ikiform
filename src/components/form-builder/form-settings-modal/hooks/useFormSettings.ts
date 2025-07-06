@@ -1,5 +1,5 @@
 // External imports
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Internal imports
 import type { FormSchema } from "@/lib/database";
@@ -22,6 +22,20 @@ export function useFormSettings(schema: FormSchema) {
     },
   });
 
+  useEffect(() => {
+    setLocalSettings({
+      ...schema.settings,
+      rateLimit: {
+        ...DEFAULT_RATE_LIMIT_SETTINGS,
+        ...schema.settings.rateLimit,
+      },
+      profanityFilter: {
+        ...DEFAULT_PROFANITY_FILTER_SETTINGS,
+        ...schema.settings.profanityFilter,
+      },
+    });
+  }, [schema.settings]);
+
   const updateSettings = (updates: Partial<LocalSettings>) => {
     setLocalSettings({
       ...localSettings,
@@ -38,7 +52,7 @@ export function useFormSettings(schema: FormSchema) {
   };
 
   const updateRateLimit = (
-    rateLimitUpdates: Partial<NonNullable<LocalSettings["rateLimit"]>>,
+    rateLimitUpdates: Partial<NonNullable<LocalSettings["rateLimit"]>>
   ) => {
     setLocalSettings({
       ...localSettings,
@@ -52,7 +66,7 @@ export function useFormSettings(schema: FormSchema) {
   const updateProfanityFilter = (
     profanityFilterUpdates: Partial<
       NonNullable<LocalSettings["profanityFilter"]>
-    >,
+    >
   ) => {
     setLocalSettings({
       ...localSettings,

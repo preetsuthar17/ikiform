@@ -33,10 +33,6 @@ export function BlockHeader({
   return (
     <div className="flex items-center justify-between gap-3">
       <div className="flex items-center gap-3 flex-1">
-        <div className="text-muted-foreground hover:text-foreground cursor-grab">
-          <GripVertical className="w-4 h-4" />
-        </div>
-
         <div
           className="flex-1 cursor-pointer"
           onClick={() => onBlockSelect(block.id)}
@@ -54,7 +50,7 @@ export function BlockHeader({
 
         <div className="flex items-center gap-1">
           <Button
-            size="sm"
+            size="icon"
             variant="ghost"
             onClick={() => onStartEditing(block)}
             className="h-8 w-8 p-0"
@@ -63,7 +59,7 @@ export function BlockHeader({
           </Button>
           {canDelete && (
             <Button
-              size="sm"
+              size="icon"
               variant="ghost"
               onClick={() => onBlockDelete(block.id)}
               className="h-8 w-8 p-0 text-destructive hover:text-destructive"
@@ -72,7 +68,7 @@ export function BlockHeader({
             </Button>
           )}
           <Button
-            size="sm"
+            size="icon"
             variant="ghost"
             onClick={() => onToggleExpansion(block.id)}
             className="h-8 w-8 p-0"

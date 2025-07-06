@@ -28,6 +28,11 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
   onFieldValueChange,
   onSubmit,
 }) => {
+  // Debug logging
+  console.log("Form Schema:", schema);
+  console.log("Form Fields:", fields);
+  console.log("Form Data:", formData);
+
   return (
     <Card
       className="rounded-card flex flex-col gap-6"

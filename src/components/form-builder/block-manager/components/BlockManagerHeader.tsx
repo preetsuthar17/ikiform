@@ -12,7 +12,7 @@ export function BlockManagerHeader({
   onBlockAdd,
 }: BlockManagerHeaderProps) {
   return (
-    <div className="flex flex-col gap-4 border-b bg-muted/30">
+    <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <div>
           <h3 className="font-semibold">Form Structure</h3>

@@ -31,7 +31,7 @@ export function BlockManager({
   } = useBlockEditing(onBlocksUpdate, blocks);
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col p-4 gap-8">
       <BlockManagerHeader blocksCount={blocks.length} onBlockAdd={onBlockAdd} />
       <BlocksList
         blocks={blocks}

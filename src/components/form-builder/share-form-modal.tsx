@@ -120,23 +120,22 @@ export function ShareFormModal({
                     className="font-mono text-sm"
                   />
                   <Button
-                    variant="outline"
-                    size="sm"
+                    variant="secondary"
+                    size="icon"
                     onClick={handleCopyLink}
                     disabled={copying}
-                    className="gap-2 min-w-fit"
+                    className="shrink-0 gap-2 min-w-fit"
                   >
                     {copying ? (
                       <Check className="w-4 h-4" />
                     ) : (
                       <Copy className="w-4 h-4" />
                     )}
-                    {copying ? "Copied" : "Copy"}
                   </Button>
                 </div>
               </div>
 
-              <div className="p-4 bg-accent/10 border border-accent/20 rounded-ele flex gap-3">
+              <div className="p-4 bg-accent/10 border border-accent/20 rounded-ele flex gap-3 items-center justify-center">
                 <Globe className="w-5 h-5 text-accent-foreground" />
                 <div className="space-y-1">
                   <p className="text-sm font-medium">Form is live!</p>
@@ -149,7 +148,7 @@ export function ShareFormModal({
           )}
 
           <div className="flex justify-end gap-2">
-            <Button variant="outline" onClick={onClose}>
+            <Button variant="secondary" onClick={onClose}>
               Close
             </Button>
             {isPublished && (

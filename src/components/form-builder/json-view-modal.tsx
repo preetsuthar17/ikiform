@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { bundledLanguages, createHighlighter } from "shiki";
+import { useTheme } from "next-themes";
 
 // Icon imports
 import { Copy, Check } from "lucide-react";
@@ -29,8 +31,37 @@ interface JsonViewModalProps {
 
 export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
   const [copied, setCopied] = useState(false);
+  const [highlightedCode, setHighlightedCode] = useState<string>("");
+  const { theme } = useTheme();
 
   const jsonString = JSON.stringify(schema, null, 2);
+
+  useEffect(() => {
+    const highlightCode = async () => {
+      try {
+        const highlighter = await createHighlighter({
+          langs: Object.keys(bundledLanguages),
+          themes: ["github-dark", "github-light"],
+        });
+
+        const selectedTheme = theme === "dark" ? "github-dark" : "github-light";
+
+        const html = highlighter.codeToHtml(jsonString, {
+          lang: "json",
+          theme: selectedTheme,
+        });
+
+        setHighlightedCode(html);
+      } catch (error) {
+        console.error("Failed to highlight code:", error);
+        setHighlightedCode(`<pre><code>${jsonString}</code></pre>`);
+      }
+    };
+
+    if (jsonString) {
+      highlightCode();
+    }
+  }, [jsonString, theme]);
 
   const copyToClipboard = async () => {
     try {
@@ -55,7 +86,7 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
             variant="ghost"
             size="icon"
             onClick={copyToClipboard}
-            className="ml-auto absolute top-3 right-3"
+            className="ml-auto absolute top-3 right-3 z-10"
           >
             {copied ? (
               <Check className="w-4 h-4" />
@@ -63,10 +94,11 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
               <Copy className="w-4 h-4" />
             )}
           </Button>
-          <ScrollArea className="h-full rounded-ele border bg-muted/30 text-foreground">
-            <pre className="p-4 text-sm font-mono h-full">
-              <code>{jsonString}</code>
-            </pre>
+          <ScrollArea className="h-[71vh] rounded-ele border bg-muted/30 text-foreground">
+            <div
+              className="p-4 text-sm font-mono h-full [&_pre]:!bg-transparent [&_pre]:!p-0"
+              dangerouslySetInnerHTML={{ __html: highlightedCode }}
+            />
           </ScrollArea>
         </div>
       </ModalContent>

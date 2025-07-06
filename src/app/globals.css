@@ -240,3 +240,15 @@ pre {
     transparent 100%
   );
 }
+
+[data-theme="dark"] .shiki,
+[data-theme="dark"] .shiki span {
+  background-color: var(--s-dark-bg) !important;
+  color: var(--s-dark) !important;
+}
+
+[data-theme="dim"] .shiki,
+[data-theme="dim"] .shiki span {
+  background-color: var(--s-dim-bg) !important;
+  color: var(--s-dim) !important;
+}

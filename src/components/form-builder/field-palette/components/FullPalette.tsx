@@ -15,7 +15,7 @@ export function FullPalette({
   onAddField,
 }: Pick<FieldPaletteProps, "onAddField">) {
   return (
-    <div className="h-full bg-card border-r border-border flex flex-col">
+    <div className="h-full bg-card border-r border-border flex flex-col p-4">
       <ScrollArea className="h-full">
         <div className="flex flex-col gap-4">
           <PaletteHeader

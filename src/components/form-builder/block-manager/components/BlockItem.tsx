@@ -50,7 +50,7 @@ export function BlockItem({
           ref={provided.innerRef}
           {...provided.draggableProps}
           className={`transition-all duration-200 flex flex-col gap-3 ${
-            isSelected ? "ring-2 ring-primary" : ""
+            isSelected ? "border border-primary/40" : ""
           }`}
         >
           <div className="flex items-center gap-3">

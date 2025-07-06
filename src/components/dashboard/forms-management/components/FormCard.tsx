@@ -26,7 +26,10 @@ export function FormCard({
   const formattedDate = formatDate(form.updated_at);
 
   return (
-    <Card className="group p-6 bg-card border-border rounded-card">
+    <Card
+      className="group p-6 bg-card border-border rounded-card cursor-pointer"
+      onClick={() => onViewAnalytics(form.id)}
+    >
       {/* Card Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1 min-w-0">

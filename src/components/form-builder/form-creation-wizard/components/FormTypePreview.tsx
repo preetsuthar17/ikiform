@@ -7,7 +7,7 @@ import type { FormTypePreviewProps } from "../types";
 export const FormTypePreview: React.FC<FormTypePreviewProps> = ({ type }) => {
   if (type === "single") {
     return (
-      <div className="flex flex-col p-4 bg-muted/20 rounded-lg">
+      <div className="flex flex-col p-4 bg-muted/20 rounded-lg gap-3">
         <div className="h-3 bg-muted rounded w-3/4"></div>
         <div className="h-8 bg-muted/60 rounded"></div>
         <div className="h-8 bg-muted/60 rounded"></div>
@@ -19,7 +19,7 @@ export const FormTypePreview: React.FC<FormTypePreviewProps> = ({ type }) => {
 
   if (type === "multi") {
     return (
-      <div className="flex flex-col p-4 bg-muted/20 rounded-lg">
+      <div className="flex flex-col p-4 bg-muted/20 rounded-lg gap-3">
         <div className="h-2 bg-primary rounded-full w-1/3"></div>
         <div className="text-xs text-muted-foreground">Step 1 of 3</div>
         <div className="h-3 bg-muted rounded w-2/3"></div>

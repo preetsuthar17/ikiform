@@ -69,6 +69,7 @@ export interface SubmissionDetailsModalProps {
   onClose: () => void;
   getFieldLabel: (fieldId: string) => string;
   formatDate: (dateString: string) => string;
+  onExport?: (submission: FormSubmission) => void;
 }
 
 export interface OverviewStatsProps {
@@ -93,6 +94,7 @@ export interface SubmissionsListProps {
   onRefresh: () => void;
   onExportCSV: () => void;
   onExportJSON: () => void;
+  onViewSubmission: (submission: FormSubmission) => void;
   getFieldLabel: (fieldId: string) => string;
   formatDate: (dateString: string) => string;
 }

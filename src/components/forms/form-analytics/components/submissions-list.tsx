@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { DataTable, type DataTableColumn } from "@/components/ui/table";
 import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 
 // Icons
 import {
@@ -44,6 +45,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
   onRefresh,
   onExportCSV,
   onExportJSON,
+  onViewSubmission,
   getFieldLabel,
   formatDate,
 }) => {
@@ -53,23 +55,20 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
     timeRange: "all",
     completionRate: "all",
   });
-  const [selectedSubmission, setSelectedSubmission] =
-    useState<FormSubmission | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const totalFields = Math.max(
     form.schema.fields?.length || 0,
     form.schema.blocks?.reduce(
       (total, block) => total + (block.fields?.length || 0),
-      0,
-    ) || 0,
+      0
+    ) || 0
   );
 
   const filteredSubmissions = filterSubmissions(
     submissions,
     searchTerm,
     filterState,
-    totalFields,
+    totalFields
   );
 
   const tableColumns: DataTableColumn<FormSubmission>[] = [
@@ -90,8 +89,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
             className="ml-auto"
             onClick={(e) => {
               e.stopPropagation();
-              setSelectedSubmission(row);
-              setIsModalOpen(true);
+              onViewSubmission(row);
             }}
           >
             <Eye className="h-4 w-4" />
@@ -105,7 +103,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
   if (loading) {
     return (
       <div className="flex items-center justify-center flex-col gap-4 py-20">
-        <div className="p-4 bg-accent/10 rounded-card">
+        <div className="p-4 rounded-card">
           <FileText className="w-8 h-8 text-accent" />
         </div>
         <div className="text-center">
@@ -169,28 +167,25 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                 Export JSON
               </Button>
             </div>
-            <div className="flex items-center p-1 bg-accent/10 rounded-lg gap-1">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="flex-1 gap-2 data-[state=on]:bg-background"
-                data-state={activeView === "cards" ? "on" : "off"}
-                onClick={() => setActiveView("cards")}
-              >
-                <LayoutGrid className="w-4 h-4" />
-                Cards
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="flex-1 gap-2 data-[state=on]:bg-background"
-                data-state={activeView === "table" ? "on" : "off"}
-                onClick={() => setActiveView("table")}
-              >
-                <Table className="w-4 h-4" />
-                Table
-              </Button>
-            </div>
+            <Tabs
+              value={activeView}
+              onValueChange={(value) =>
+                setActiveView(value as "cards" | "table")
+              }
+              items={[
+                {
+                  id: "cards",
+                  icon: <LayoutGrid className="w-4 h-4" />,
+                },
+                {
+                  id: "table",
+                  icon: <Table className="w-4 h-4" />,
+                },
+              ]}
+              variant="default"
+              size="sm"
+              className="w-auto"
+            />
             <Badge variant="secondary" className="text-xs">
               {submissions.length} total
             </Badge>
@@ -231,8 +226,8 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                 <Input
                   placeholder="Search submissions..."
                   value={searchTerm}
+                  leftIcon={<Search className="w-4 h-4" />}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
                 />
               </div>
               <Select
@@ -279,7 +274,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
               </Select>
             </div>
 
-            {activeView === "cards" ? (
+            <TabsContent value="cards" activeValue={activeView}>
               <div className="space-y-4">
                 {filteredSubmissions.slice(0, 10).map((submission) => (
                   <div key={submission.id}>
@@ -320,7 +315,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                 </p>
                               </div>
                             </div>
-                          ),
+                          )
                         )}
                       </div>
                     </Card>
@@ -340,7 +335,9 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                   </div>
                 )}
               </div>
-            ) : (
+            </TabsContent>
+
+            <TabsContent value="table" activeValue={activeView}>
               <div className="-mx-6">
                 <DataTable
                   data={filteredSubmissions}
@@ -355,7 +352,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                   size="default"
                 />
               </div>
-            )}
+            </TabsContent>
           </div>
         )}
       </div>

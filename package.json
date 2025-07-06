@@ -81,6 +81,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "drizzle-kit": "^0.31.4",
+    "shiki": "^3.7.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

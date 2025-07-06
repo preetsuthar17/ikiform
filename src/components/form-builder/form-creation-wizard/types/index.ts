@@ -11,6 +11,8 @@ export interface FormCreationWizardProps {
 
 export type FormType = "single" | "multi";
 
+export type WizardStep = "type" | "configure" | "review";
+
 export interface FormTypeDefinition {
   id: FormType;
   title: string;
@@ -28,4 +30,15 @@ export interface FormTypeCardProps {
 
 export interface FormTypePreviewProps {
   type: FormType;
+}
+
+export interface FormConfiguration {
+  title: string;
+  description: string;
+  type: FormType;
+}
+
+export interface FormConfigurationStepProps {
+  configuration: FormConfiguration;
+  onConfigurationChange: (config: Partial<FormConfiguration>) => void;
 }
