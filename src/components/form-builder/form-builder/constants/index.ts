@@ -18,15 +18,16 @@ export const PANEL_SIZES = {
   LEFT_PANEL: {
     default: 20,
     min: 15,
-    max: 35,
+    max: 30,
   },
-  CENTER_PANEL: {
+  PREVIEW_PANEL: {
     default: 50,
-    min: 30,
+    min: 35,
+    max: 70,
   },
   RIGHT_PANEL: {
-    default: 20,
-    min: 15,
-    max: 35,
+    default: 30,
+    min: 20,
+    max: 45,
   },
 } as const;

@@ -1,8 +1,8 @@
 "use client";
 
 // External imports
-import React from "react";
-import { Save, Settings } from "lucide-react";
+import React, { useState } from "react";
+import { Save, Settings, Eye } from "lucide-react";
 
 // Internal imports
 import { Modal, ModalContent } from "@/components/ui/modal";
@@ -42,7 +42,7 @@ export function FormSettingsModal({
 
   return (
     <Modal open={isOpen} onOpenChange={onClose}>
-      <ModalContent className="max-w-4xl h-[90vh] flex flex-col">
+      <ModalContent className="max-w-6xl h-[90vh] flex flex-col">
         <div className="flex items-center justify-between border-b border-border shrink-0 gap-6 p-6">
           <div className="flex items-center gap-3">
             <Settings className="w-5 h-5 text-primary" />
@@ -59,22 +59,24 @@ export function FormSettingsModal({
           </div>
         </div>
 
-        <ScrollArea className="flex-1 min-h-0">
-          <div className="flex flex-col gap-6 p-6">
-            <BasicInfoSection
-              localSettings={localSettings}
-              updateSettings={updateSettings}
-            />
-            <RateLimitSection
-              localSettings={localSettings}
-              updateRateLimit={updateRateLimit}
-            />
-            <ProfanityFilterSection
-              localSettings={localSettings}
-              updateProfanityFilter={updateProfanityFilter}
-            />
-          </div>
-        </ScrollArea>
+        <div className="flex-1 min-h-0">
+          <ScrollArea className="h-full">
+            <div className="flex flex-col gap-6 p-6">
+              <BasicInfoSection
+                localSettings={localSettings}
+                updateSettings={updateSettings}
+              />
+              <RateLimitSection
+                localSettings={localSettings}
+                updateRateLimit={updateRateLimit}
+              />
+              <ProfanityFilterSection
+                localSettings={localSettings}
+                updateProfanityFilter={updateProfanityFilter}
+              />
+            </div>
+          </ScrollArea>
+        </div>
       </ModalContent>
     </Modal>
   );

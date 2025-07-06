@@ -18,7 +18,7 @@ export function BlockEditForm({
   onCancel,
 }: BlockEditFormProps) {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 w-full">
       <Input
         value={title}
         onChange={(e) => onTitleChange(e.target.value)}
@@ -27,15 +27,16 @@ export function BlockEditForm({
       />
       <Textarea
         value={description}
+        className="w-full"
         onChange={(e) => onDescriptionChange(e.target.value)}
         placeholder="Step description (optional)"
         rows={2}
       />
-      <div className="flex items-center gap-3">
-        <Button size="sm" onClick={onSave}>
+      <div className="flex items-center gap-2">
+        <Button size="icon" onClick={onSave}>
           <Check className="w-4 h-4" />
         </Button>
-        <Button size="sm" variant="secondary" onClick={onCancel}>
+        <Button size="icon" variant="secondary" onClick={onCancel}>
           <X className="w-4 h-4" />
         </Button>
       </div>

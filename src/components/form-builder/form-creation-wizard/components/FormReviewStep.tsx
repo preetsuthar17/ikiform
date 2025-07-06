@@ -4,13 +4,19 @@ import React from "react";
 // UI imports
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 // Icon imports
-import { FileText, Layers, Check, Edit3 } from "lucide-react";
+import { FileText, Layers, Check, Edit3, Eye } from "lucide-react";
+
+// Component imports
+import { FormPreview } from "../../form-preview";
+
+// Utility imports
+import { createDefaultFormSchema } from "@/lib/forms";
 
 // Type imports
 import type { FormConfiguration } from "../types";
-import { Button } from "@/components/ui/button";
 
 interface FormReviewStepProps {
   configuration: FormConfiguration;
@@ -22,6 +28,13 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
   onEditStep,
 }) => {
   const isMultiStep = configuration.type === "multi";
+  const [showPreview, setShowPreview] = React.useState(false);
+
+  const previewSchema = createDefaultFormSchema({
+    title: configuration.title || "Untitled Form",
+    description: configuration.description || "",
+    multiStep: isMultiStep,
+  });
 
   return (
     <div className="flex flex-col gap-6">
@@ -93,7 +106,44 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
             </Button>
           </div>
         </Card>
+
+        {/* Preview Toggle */}
+        <Card className="p-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Eye className="w-5 h-5 text-primary" />
+              <div>
+                <p className="font-medium">Form Preview</p>
+                <p className="text-sm text-muted-foreground">
+                  See how your form will look
+                </p>
+              </div>
+            </div>
+            <Button
+              variant={showPreview ? "secondary" : "outline"}
+              onClick={() => setShowPreview(!showPreview)}
+              size="sm"
+            >
+              {showPreview ? "Hide Preview" : "Show Preview"}
+            </Button>
+          </div>
+        </Card>
       </div>
+
+      {/* Form Preview */}
+      {showPreview && (
+        <Card className="p-4">
+          <div className="border rounded-lg overflow-hidden">
+            <FormPreview
+              schema={previewSchema}
+              selectedFieldId={null}
+              onFieldSelect={() => {}}
+              onFieldsReorder={() => {}}
+              onFieldDelete={() => {}}
+            />
+          </div>
+        </Card>
+      )}
     </div>
   );
 };

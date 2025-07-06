@@ -34,10 +34,10 @@ export function BlockHeader({
     <div className="flex items-center justify-between gap-3">
       <div className="flex items-center gap-3 flex-1">
         <div
-          className="flex-1 cursor-pointer"
+          className="flex-1 cursor-pointer flex flex-col gap-2"
           onClick={() => onBlockSelect(block.id)}
         >
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <h4 className="font-medium">{block.title}</h4>
             <Badge variant="secondary" className="text-xs">
               Step {index + 1}

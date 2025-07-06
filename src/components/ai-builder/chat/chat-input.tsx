@@ -23,13 +23,13 @@ export function ChatInput({
     <div className="backdrop-blur p-4 flex flex-col gap-3">
       <form
         onSubmit={onSubmit}
-        className="relative flex items-center bg-card rounded-ele border border-border shadow-md px-4 py-2 gap-4"
+        className="relative flex items-center bg-card rounded-ele border border-border shadow-md/2 px-4 py-2 gap-4"
       >
         <Textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Describe the form you want to create..."
-          className="flex-1 bg-transparent border-none outline-none resize-none min-h-[40px] max-h-[120px] p-3 focus-visible:ring-0  focus-visible:ring-offset-0"
+          className="flex-1 bg-transparent border-none outline-none resize-none min-h-[40px] max-h-[120px] p-3 focus-visible:ring-0  focus-visible:ring-offset-0 shadow-none"
           disabled={isLoading}
           rows={1}
           onKeyDown={(e) => {

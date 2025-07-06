@@ -25,7 +25,7 @@ export const StreamingIndicator = memo(
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="my-2 p-3 rounded-lg bg-muted/50 border border-border text-sm font-mono"
+          className="my-2 p-3 rounded-card bg-muted/50 border border-border text-sm font-mono"
         >
           <div
             className="text-xs text-muted-foreground flex flex-col gap-2 h-[90px] overflow-auto scrollbar-none"
@@ -39,8 +39,8 @@ export const StreamingIndicator = memo(
           </div>
         </motion.div>
       );
-    },
-  ),
+    }
+  )
 );
 
 StreamingIndicator.displayName = "StreamingIndicator";
