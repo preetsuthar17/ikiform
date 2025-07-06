@@ -4,7 +4,7 @@ import "../globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Beautiful, budget-friendly forms without compromises - Ikiform",
+    default: "Beautiful, budget-friendly forms without compromises",
     template: "%s | Ikiform",
   },
   description:

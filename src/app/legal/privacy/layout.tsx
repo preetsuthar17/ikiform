@@ -1,28 +1,12 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
-import "../globals.css";
-import Header from "@/components/home/header";
-import Footer from "@/components/home/footer";
-import { Toaster } from "@/components/ui/toast";
-import { ThemeProvider } from "next-themes";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const jetBrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: {
-    default: "Beautiful, budget-friendly forms without compromises",
+    default: "Privacy Policy",
     template: "%s | Ikiform",
   },
   description:
-    "Create beautiful forms with Ikiform - An open-source alternative to Typeform and Google Forms. Build surveys, collect responses, and analyze data effortlessly.",
+    "Read the Privacy Policy for Ikiform. Learn how we collect, use, and protect your personal data when you use our form builder services.",
   applicationName: "Ikiform",
   authors: [{ name: "Preet Suthar", url: "https://ikiform.com" }],
   creator: "Ikiform",
@@ -34,22 +18,22 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://ikiform.com"),
   alternates: {
-    canonical: "/",
+    canonical: "/legal/privacy",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://ikiform.com",
+    url: "https://ikiform.com/legal/privacy",
     siteName: "Ikiform",
-    title: "Ikiform",
+    title: "Privacy Policy",
     description:
-      "Create beautiful, interactive forms with Ikiform - An open-source alternative to Typeform and Google Forms. Build surveys, collect responses, and analyze data effortlessly.",
+      "Read the Privacy Policy for Ikiform. Learn how we collect, use, and protect your personal data when you use our form builder services.",
     images: [
       {
         url: "/og-banner.png",
         width: 1200,
         height: 630,
-        alt: "Ikiform",
+        alt: "Ikiform Privacy Policy",
         type: "image/png",
       },
     ],
@@ -58,9 +42,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@Ikiform",
     creator: "@Ikiform",
-    title: "Ikiform",
+    title: "Privacy Policy",
     description:
-      "Create beautiful, interactive forms with Ikiform - An open-source alternative to Typeform and Google Forms.",
+      "Read the Privacy Policy for Ikiform. Learn how we collect, use, and protect your personal data when you use our form builder services.",
     images: ["/og-banner.png"],
   },
   robots: {
@@ -78,21 +62,15 @@ export const metadata: Metadata = {
     icon: [{ url: "/favicon.ico" }],
   },
   keywords: [
-    "form builder",
-    "online forms",
-    "surveys",
-    "questionnaires",
-    "open source",
-    "typeform alternative",
-    "google forms alternative",
-    "form creator",
-    "survey tool",
-    "data collection",
+    "privacy",
+    "data protection",
     "Ikiform",
-    "form software",
-    "custom forms",
-    "interactive forms",
-    "form analytics",
+    "form builder privacy",
+    "user data",
+    "data security",
+    "personal information",
+    "compliance",
+    "user rights",
   ],
   category: "technology",
   classification: "Business Software",
