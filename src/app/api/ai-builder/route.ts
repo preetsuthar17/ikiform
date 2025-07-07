@@ -9,7 +9,40 @@ import { requirePremium } from "@/lib/utils/premium-check";
 
 const systemPrompt =
   process.env.AI_FORM_SYSTEM_PROMPT ||
-  "You are an expert form builder AI. Always output ONLY the JSON schema for a form, never any explanation, markdown, or extra text.";
+  `You are an expert form builder AI. Generate ONLY a valid JSON schema for a form.
+
+IMPORTANT: The form schema must follow this exact structure:
+- Each block in the "blocks" array must contain the complete field objects directly in its "fields" array
+- Do NOT use field references or IDs in blocks - embed the full field objects
+- Each field must have: id, type, label, required, validation (if needed), settings (if needed)
+- Supported field types: text, email, textarea, number, select, radio, checkbox, slider, tags
+- For select/radio/checkbox fields, include an "options" array
+- For slider fields, include min, max, step, defaultValue in settings
+- For tags fields, include maxTags, allowDuplicates in settings
+
+Example structure:
+{
+  "settings": { "title": "Form Title", "description": "Form description" },
+  "blocks": [
+    {
+      "id": "block_1",
+      "title": "Step 1",
+      "description": "First step",
+      "fields": [
+        {
+          "id": "field_1",
+          "type": "text",
+          "label": "Full Name",
+          "required": true,
+          "validation": { "minLength": 2 }
+        }
+      ]
+    }
+  ],
+  "fields": [] // Keep empty for compatibility
+}
+
+Output ONLY the JSON, no explanations or markdown.`;
 
 let apiKeyValid: boolean | null = null;
 
@@ -31,7 +64,7 @@ function createErrorResponse(message: string, status: number = 500) {
 }
 
 function validateAndSanitizeMessages(
-  messages: any[],
+  messages: any[]
 ): { role: string; content: string }[] {
   if (
     !Array.isArray(messages) ||
@@ -67,7 +100,7 @@ export async function POST(req: NextRequest) {
       {
         status: 429,
         headers: { "Retry-After": retryAfter.toString() },
-      },
+      }
     );
   }
 
@@ -109,7 +142,7 @@ export async function POST(req: NextRequest) {
     } catch (error) {
       return createErrorResponse(
         error instanceof Error ? error.message : "Invalid request format",
-        400,
+        400
       );
     }
 
@@ -131,7 +164,7 @@ export async function POST(req: NextRequest) {
             timestamp: new Date().toISOString(),
             ip: ip,
             userAgent: req.headers.get("user-agent") || "",
-          },
+          }
         );
       } catch (error) {
         console.error("Error saving user message:", error);
@@ -189,7 +222,7 @@ export async function POST(req: NextRequest) {
                   temperature: 0.3,
                   maxTokens: 1750,
                   topP: 0.9,
-                },
+                }
               );
             } catch (error) {
               console.error("Error saving AI response:", error);
@@ -232,6 +265,6 @@ export async function GET() {
     {
       status: 200,
       headers: { "Content-Type": "application/json" },
-    },
+    }
   );
 }

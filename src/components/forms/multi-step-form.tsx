@@ -42,6 +42,8 @@ export function MultiStepForm({ formId, schema }: MultiStepFormProps) {
   const [isPasswordProtected, setIsPasswordProtected] = useState(false);
   const [passwordVerified, setPasswordVerified] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     const passwordProtection = schema.settings.passwordProtection;
@@ -49,6 +51,14 @@ export function MultiStepForm({ formId, schema }: MultiStepFormProps) {
       setIsPasswordProtected(true);
       setShowPasswordModal(true);
     }
+
+    // Show loading progress for 2 seconds
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      setShowForm(true);
+    }, 2000);
+
+    return () => clearTimeout(timer);
   }, [schema.settings.passwordProtection]);
 
   const handlePasswordSubmit = (password: string) => {
@@ -93,8 +103,27 @@ export function MultiStepForm({ formId, schema }: MultiStepFormProps) {
     );
   }
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center w-full">
+        <div className="max-w-md mx-auto flex flex-col gap-6 w-full px-4">
+          <div className="w-full bg-muted rounded-full h-2">
+            <div
+              className="bg-primary h-2 rounded-full transition-all duration-2000 ease-out"
+              style={{ width: "100%" }}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center w-full">
+    <div
+      className={`min-h-screen bg-background flex items-center justify-center w-full transition-opacity duration-500 ${
+        showForm ? "opacity-100" : "opacity-0"
+      }`}
+    >
       <div className="max-w-2xl mx-auto flex flex-col gap-8 w-full">
         <FormProgress
           progress={progress}

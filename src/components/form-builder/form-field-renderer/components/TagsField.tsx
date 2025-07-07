@@ -13,9 +13,12 @@ import type { BaseFieldProps } from "../types";
 export function TagsField({ field, value, onChange, error }: BaseFieldProps) {
   const errorClasses = getErrorClasses(error);
 
+  // Ensure value is always an array
+  const tags = Array.isArray(value) ? value : [];
+
   return (
     <TagInput
-      tags={value || []}
+      tags={tags}
       onTagsChange={onChange}
       tagVariant="default"
       tagSize="sm"

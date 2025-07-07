@@ -26,7 +26,7 @@ const tagInputVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 export interface TagInputProps
@@ -73,34 +73,37 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
       error,
       ...props
     },
-    ref,
+    ref
   ) => {
     const [inputValue, setInputValue] = React.useState("");
     const inputRef = React.useRef<HTMLInputElement>(null);
+
+    // Ensure tags is always an array
+    const safeTags = Array.isArray(tags) ? tags : [];
 
     const addTag = React.useCallback(
       (tag: string) => {
         const trimmedTag = tag.trim();
         if (!trimmedTag) return;
 
-        if (!allowDuplicates && tags.includes(trimmedTag)) return;
-        if (maxTags && tags.length >= maxTags) return;
+        if (!allowDuplicates && safeTags.includes(trimmedTag)) return;
+        if (maxTags && safeTags.length >= maxTags) return;
 
-        const newTags = [...tags, trimmedTag];
+        const newTags = [...safeTags, trimmedTag];
         onTagsChange(newTags);
         onTagAdd?.(trimmedTag);
         setInputValue("");
       },
-      [tags, onTagsChange, onTagAdd, allowDuplicates, maxTags],
+      [safeTags, onTagsChange, onTagAdd, allowDuplicates, maxTags]
     );
 
     const removeTag = React.useCallback(
       (tagToRemove: string) => {
-        const newTags = tags.filter((tag) => tag !== tagToRemove);
+        const newTags = safeTags.filter((tag) => tag !== tagToRemove);
         onTagsChange(newTags);
         onTagRemove?.(tagToRemove);
       },
-      [tags, onTagsChange, onTagRemove],
+      [safeTags, onTagsChange, onTagRemove]
     );
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -130,9 +133,9 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
       } else if (
         e.key === "Backspace" &&
         inputValue === "" &&
-        tags.length > 0
+        safeTags.length > 0
       ) {
-        removeTag(tags[tags.length - 1]);
+        removeTag(safeTags[safeTags.length - 1]);
       }
     };
 
@@ -162,13 +165,13 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
               size,
             }),
             "cursor-text",
-            className,
+            className
           )}
           onClick={handleContainerClick}
         >
           <div className="flex flex-wrap gap-1.5">
             <AnimatePresence>
-              {tags.map((tag, index) => (
+              {safeTags.map((tag, index) => (
                 <motion.div
                   key={`${tag}-${index}`}
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -198,14 +201,16 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
               value={inputValue}
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}
-              placeholder={tags.length === 0 ? placeholder : ""}
-              disabled={disabled || (maxTags ? tags.length >= maxTags : false)}
+              placeholder={safeTags.length === 0 ? placeholder : ""}
+              disabled={
+                disabled || (maxTags ? safeTags.length >= maxTags : false)
+              }
               className="flex-1 min-w-[120px] bg-transparent outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed"
               {...props}
             />
           </div>
         </div>
-        {clearAllButton && tags.length > 0 && (
+        {clearAllButton && safeTags.length > 0 && (
           <button
             type="button"
             onClick={handleClearAll}
@@ -218,7 +223,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
         )}
       </div>
     );
-  },
+  }
 );
 
 TagInput.displayName = "TagInput";

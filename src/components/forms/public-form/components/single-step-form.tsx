@@ -15,6 +15,8 @@ import { getAllFields } from "../utils/form-utils";
 import { SingleStepSuccessScreen } from "./single-step-success-screen";
 import { SingleStepFormContent } from "./single-step-form-content";
 import { PasswordProtectionModal } from "./PasswordProtectionModal";
+import { Progress } from "@/components/ui/progress";
+
 import toast from "react-hot-toast";
 
 export const SingleStepForm: React.FC<PublicFormProps> = ({
@@ -35,6 +37,8 @@ export const SingleStepForm: React.FC<PublicFormProps> = ({
   const [isPasswordProtected, setIsPasswordProtected] = useState(false);
   const [passwordVerified, setPasswordVerified] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     const passwordProtection = schema.settings.passwordProtection;
@@ -59,11 +63,19 @@ export const SingleStepForm: React.FC<PublicFormProps> = ({
     window.location.href = "/";
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      setShowForm(true);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  });
+
   if (submitted) {
     return <SingleStepSuccessScreen schema={schema} />;
   }
 
-  // Show password modal if form is password protected and password hasn't been verified
   if (isPasswordProtected && !passwordVerified) {
     return (
       <PasswordProtectionModal
@@ -78,8 +90,22 @@ export const SingleStepForm: React.FC<PublicFormProps> = ({
     );
   }
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center w-full">
+        <div className="max-w-sm mx-auto flex flex-col gap-6 w-full px-4">
+          <Progress value={100} size="sm" className="max-w-sm" />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center w-full">
+    <div
+      className={`min-h-screen bg-background flex items-center justify-center w-full transition-opacity duration-500 ${
+        showForm ? "opacity-100" : "opacity-0"
+      }`}
+    >
       <div className="max-w-2xl mx-auto flex flex-col gap-8 w-full">
         <SingleStepFormContent
           schema={schema}
