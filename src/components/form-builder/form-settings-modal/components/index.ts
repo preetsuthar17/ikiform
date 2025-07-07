@@ -3,3 +3,4 @@ export { RateLimitSection } from "./RateLimitSection";
 export { ProfanityFilterSection } from "./ProfanityFilterSection";
 export { ResponseLimitSection } from "./ResponseLimitSection";
 export { PasswordProtectionSection } from "./PasswordProtectionSection";
+export { SocialMediaSection } from "./SocialMediaSection";

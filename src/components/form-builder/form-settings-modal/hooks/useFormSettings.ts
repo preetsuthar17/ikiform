@@ -129,6 +129,23 @@ export function useFormSettings(schema: FormSchema) {
     });
   };
 
+  const updateSocialMedia = (
+    socialMediaUpdates: Partial<
+      NonNullable<NonNullable<LocalSettings["branding"]>["socialMedia"]>
+    >
+  ) => {
+    setLocalSettings({
+      ...localSettings,
+      branding: {
+        ...localSettings.branding,
+        socialMedia: {
+          ...localSettings.branding?.socialMedia,
+          ...socialMediaUpdates,
+        },
+      },
+    });
+  };
+
   const resetSettings = () => {
     setLocalSettings({
       ...schema.settings,
@@ -158,6 +175,7 @@ export function useFormSettings(schema: FormSchema) {
     updateProfanityFilter,
     updateResponseLimit,
     updatePasswordProtection,
+    updateSocialMedia,
     resetSettings,
   };
 }

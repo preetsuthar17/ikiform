@@ -176,7 +176,8 @@ export interface FormField {
     | "number"
     | "select"
     | "slider"
-    | "tags";
+    | "tags"
+    | "social";
   label: string;
   description?: string;
   placeholder?: string;
@@ -210,6 +211,10 @@ export interface FormField {
     placeholder?: string; // For select, tags
     maxTags?: number; // For tags
     allowDuplicates?: boolean; // For tags
+    // Social media settings
+    socialPlatforms?: string[]; // For social field
+    showIcons?: boolean; // For social field
+    iconSize?: "sm" | "md" | "lg"; // For social field
     // Visual customization
     size?: "sm" | "md" | "lg"; // Field size
     variant?: "default" | "filled" | "ghost" | "underline"; // Field variant
@@ -266,6 +271,21 @@ export interface FormSchema {
       customFooter?: string;
       logoUrl?: string;
       logoPosition?: "top" | "header" | "footer";
+      socialMedia?: {
+        enabled?: boolean;
+        platforms?: {
+          linkedin?: string;
+          twitter?: string;
+          youtube?: string;
+          instagram?: string;
+          facebook?: string;
+          github?: string;
+          website?: string;
+        };
+        showIcons?: boolean;
+        iconSize?: "sm" | "md" | "lg";
+        position?: "footer" | "header" | "both";
+      };
     };
     behavior?: {
       allowSaveProgress?: boolean;

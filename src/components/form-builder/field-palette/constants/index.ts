@@ -12,6 +12,7 @@ import {
   ChevronDown,
   Sliders,
   Tags,
+  Share2,
 } from "lucide-react";
 
 export const FIELD_TYPES: FieldTypeConfig[] = [
@@ -68,6 +69,12 @@ export const FIELD_TYPES: FieldTypeConfig[] = [
     label: "Tag Input",
     icon: Tags,
     description: "Enter multiple tags",
+  },
+  {
+    type: "social",
+    label: "Social Media",
+    icon: Share2,
+    description: "Add social media links",
   },
 ];
 

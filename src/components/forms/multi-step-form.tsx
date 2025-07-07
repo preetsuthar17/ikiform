@@ -142,6 +142,7 @@ export function MultiStepForm({ formId, schema }: MultiStepFormProps) {
             onFieldValueChange={handleFieldValueChange}
             title={schema.settings.title}
             description={schema.settings.description}
+            schema={schema}
           />
 
           <FormNavigation
@@ -154,7 +155,7 @@ export function MultiStepForm({ formId, schema }: MultiStepFormProps) {
           />
         </Card>
 
-        <FormFooter />
+        <FormFooter schema={schema} />
       </div>
     </div>
   );

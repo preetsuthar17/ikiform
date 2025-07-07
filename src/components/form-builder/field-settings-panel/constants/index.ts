@@ -5,6 +5,7 @@ export const FIELD_TYPES = {
   TEXTAREA_TYPE: "textarea",
   SLIDER_TYPE: "slider",
   TAGS_TYPE: "tags",
+  SOCIAL_TYPE: "social",
   SELECT_TYPE: "select",
   EMAIL_TYPE: "email",
 } as const;

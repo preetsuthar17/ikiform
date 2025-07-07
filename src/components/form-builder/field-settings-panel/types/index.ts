@@ -53,5 +53,6 @@ export interface FieldHelpers {
   isTextareaType: boolean;
   isSliderType: boolean;
   isTagsType: boolean;
+  isSocialType: boolean;
   isSelectType: boolean;
 }

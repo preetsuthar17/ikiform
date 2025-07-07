@@ -15,6 +15,23 @@ export interface LocalSettings {
   submitText?: string;
   successMessage?: string;
   redirectUrl?: string;
+  branding?: {
+    socialMedia?: {
+      enabled?: boolean;
+      platforms?: {
+        linkedin?: string;
+        twitter?: string;
+        youtube?: string;
+        instagram?: string;
+        facebook?: string;
+        github?: string;
+        website?: string;
+      };
+      showIcons?: boolean;
+      iconSize?: "sm" | "md" | "lg";
+      position?: "footer" | "header" | "both";
+    };
+  };
   rateLimit?: {
     enabled?: boolean;
     maxSubmissions?: number;
@@ -58,5 +75,14 @@ export interface ProfanityFilterSectionProps {
   localSettings: LocalSettings;
   updateProfanityFilter: (
     updates: Partial<NonNullable<LocalSettings["profanityFilter"]>>
+  ) => void;
+}
+
+export interface SocialMediaSectionProps {
+  localSettings: LocalSettings;
+  updateSocialMedia: (
+    updates: Partial<
+      NonNullable<NonNullable<LocalSettings["branding"]>["socialMedia"]>
+    >
   ) => void;
 }

@@ -15,6 +15,7 @@ import {
   ProfanityFilterSection,
   ResponseLimitSection,
   PasswordProtectionSection,
+  SocialMediaSection,
 } from "./components";
 import type { FormSettingsModalProps } from "./types";
 
@@ -31,6 +32,7 @@ export function FormSettingsModal({
     updateProfanityFilter,
     updateResponseLimit,
     updatePasswordProtection,
+    updateSocialMedia,
     resetSettings,
   } = useFormSettings(schema);
 
@@ -85,6 +87,10 @@ export function FormSettingsModal({
               <PasswordProtectionSection
                 localSettings={localSettings}
                 updatePasswordProtection={updatePasswordProtection}
+              />
+              <SocialMediaSection
+                localSettings={localSettings}
+                updateSocialMedia={updateSocialMedia}
               />
             </div>
           </ScrollArea>

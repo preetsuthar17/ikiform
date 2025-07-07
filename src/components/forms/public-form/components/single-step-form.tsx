@@ -16,6 +16,7 @@ import { SingleStepSuccessScreen } from "./single-step-success-screen";
 import { SingleStepFormContent } from "./single-step-form-content";
 import { PasswordProtectionModal } from "./PasswordProtectionModal";
 import { Progress } from "@/components/ui/progress";
+import { SocialMediaIcons } from "@/components/ui/social-media-icons";
 
 import toast from "react-hot-toast";
 
@@ -117,7 +118,17 @@ export const SingleStepForm: React.FC<PublicFormProps> = ({
           onSubmit={handleSubmit}
         />
 
-        <div className="text-center">
+        <div className="text-center space-y-4">
+          {schema.settings.branding?.socialMedia?.enabled && 
+           schema.settings.branding.socialMedia.platforms && 
+           (schema.settings.branding.socialMedia.position === "footer" || 
+            schema.settings.branding.socialMedia.position === "both") && (
+            <SocialMediaIcons
+              platforms={schema.settings.branding.socialMedia.platforms}
+              iconSize={schema.settings.branding.socialMedia.iconSize || "md"}
+              className="justify-center"
+            />
+          )}
           <p className="text-sm text-muted-foreground">
             Powered by{" "}
             <span className="font-medium underline text-foreground">

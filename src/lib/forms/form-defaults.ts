@@ -44,6 +44,14 @@ export const DEFAULT_PASSWORD_PROTECTION_SETTINGS = {
     "This form is password protected. Please enter the password to continue.",
 };
 
+export const DEFAULT_SOCIAL_MEDIA_SETTINGS = {
+  enabled: false,
+  platforms: {},
+  showIcons: true,
+  iconSize: "md" as const,
+  position: "footer" as const,
+};
+
 /**
  * Ensures a form schema has the default rate limiting and profanity filter settings
  * This is used to handle legacy forms and ensure all forms have these settings
@@ -53,6 +61,13 @@ export function ensureDefaultFormSettings(schema: FormSchema): FormSchema {
     ...schema,
     settings: {
       ...schema.settings,
+      branding: {
+        ...schema.settings.branding,
+        socialMedia: {
+          ...DEFAULT_SOCIAL_MEDIA_SETTINGS,
+          ...schema.settings.branding?.socialMedia,
+        },
+      },
       rateLimit: {
         ...DEFAULT_RATE_LIMIT_SETTINGS,
         ...schema.settings.rateLimit,
@@ -112,6 +127,9 @@ export function createDefaultFormSchema(options: {
       redirectUrl: "",
       multiStep: options.multiStep || false,
       showProgress: options.multiStep !== false,
+      branding: {
+        socialMedia: { ...DEFAULT_SOCIAL_MEDIA_SETTINGS },
+      },
       rateLimit: { ...DEFAULT_RATE_LIMIT_SETTINGS },
       profanityFilter: { ...DEFAULT_PROFANITY_FILTER_SETTINGS },
       responseLimit: { ...DEFAULT_RESPONSE_LIMIT_SETTINGS },

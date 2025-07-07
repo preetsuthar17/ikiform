@@ -3,9 +3,10 @@ import React from "react";
 
 // UI Components
 import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
+import { SocialMediaIcons } from "@/components/ui/social-media-icons";
 
 // Types
-import type { FormBlock } from "@/lib/database";
+import type { FormBlock, FormSchema } from "@/lib/database";
 
 interface FormContentProps {
   currentBlock: FormBlock;
@@ -14,6 +15,7 @@ interface FormContentProps {
   onFieldValueChange: (fieldId: string, value: any) => void;
   title?: string;
   description?: string;
+  schema: FormSchema;
 }
 
 export const FormContent: React.FC<FormContentProps> = ({
@@ -23,18 +25,32 @@ export const FormContent: React.FC<FormContentProps> = ({
   onFieldValueChange,
   title,
   description,
+  schema,
 }) => {
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold text-foreground">
-          {currentBlock.title || title}
-        </h1>
-        {(currentBlock.description || description) && (
-          <p className="text-muted-foreground">
-            {currentBlock.description || description}
-          </p>
-        )}
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-3xl font-bold text-foreground">
+            {currentBlock.title || title}
+          </h1>
+          {(currentBlock.description || description) && (
+            <p className="text-muted-foreground">
+              {currentBlock.description || description}
+            </p>
+          )}
+        </div>
+
+        {schema.settings.branding?.socialMedia?.enabled &&
+          schema.settings.branding.socialMedia.platforms &&
+          (schema.settings.branding.socialMedia.position === "header" ||
+            schema.settings.branding.socialMedia.position === "both") && (
+            <SocialMediaIcons
+              platforms={schema.settings.branding.socialMedia.platforms}
+              iconSize={schema.settings.branding.socialMedia.iconSize || "md"}
+              className="justify-center"
+            />
+          )}
       </div>
 
       <div className="flex flex-col gap-6">
