@@ -1,13 +1,10 @@
 "use client";
 
-// External imports
 import React from "react";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-
-// Internal imports
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { createClient } from "@/utils/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
 import { toast } from "@/hooks/use-toast";
@@ -17,9 +14,9 @@ import {
   ModalContent,
   ModalHeader,
   ModalTitle,
-} from "../ui/modal";
+} from "../../ui/modal";
 
-const Hero = () => {
+export default function HeroClient({ origin }: { origin: string }) {
   const { user } = useAuth();
   const [open, setOpen] = React.useState(false);
 
@@ -29,7 +26,7 @@ const Hero = () => {
     await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
+        redirectTo: `${origin}/auth/callback`,
       },
     });
   };
@@ -103,6 +100,4 @@ const Hero = () => {
       </div>
     </section>
   );
-};
-
-export default Hero;
+}
