@@ -35,6 +35,16 @@ export const DEFAULT_RESPONSE_LIMIT_SETTINGS = {
 };
 
 /**
+ * Default password protection settings for all forms
+ */
+export const DEFAULT_PASSWORD_PROTECTION_SETTINGS = {
+  enabled: false,
+  password: "",
+  message:
+    "This form is password protected. Please enter the password to continue.",
+};
+
+/**
  * Ensures a form schema has the default rate limiting and profanity filter settings
  * This is used to handle legacy forms and ensure all forms have these settings
  */
@@ -54,6 +64,10 @@ export function ensureDefaultFormSettings(schema: FormSchema): FormSchema {
       responseLimit: {
         ...DEFAULT_RESPONSE_LIMIT_SETTINGS,
         ...schema.settings.responseLimit,
+      },
+      passwordProtection: {
+        ...DEFAULT_PASSWORD_PROTECTION_SETTINGS,
+        ...schema.settings.passwordProtection,
       },
     },
   };
@@ -101,6 +115,7 @@ export function createDefaultFormSchema(options: {
       rateLimit: { ...DEFAULT_RATE_LIMIT_SETTINGS },
       profanityFilter: { ...DEFAULT_PROFANITY_FILTER_SETTINGS },
       responseLimit: { ...DEFAULT_RESPONSE_LIMIT_SETTINGS },
+      passwordProtection: { ...DEFAULT_PASSWORD_PROTECTION_SETTINGS },
     },
   };
 }

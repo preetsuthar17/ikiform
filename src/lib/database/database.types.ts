@@ -294,5 +294,10 @@ export interface FormSchema {
       maxResponses?: number;
       message?: string;
     };
+    passwordProtection?: {
+      enabled?: boolean;
+      password?: string;
+      message?: string;
+    };
   };
 }

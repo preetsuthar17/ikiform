@@ -1,5 +1,5 @@
 // Libraries
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
 // Types
@@ -14,6 +14,8 @@ import { getAllFields } from "../utils/form-utils";
 // Components
 import { SingleStepSuccessScreen } from "./single-step-success-screen";
 import { SingleStepFormContent } from "./single-step-form-content";
+import { PasswordProtectionModal } from "./PasswordProtectionModal";
+import toast from "react-hot-toast";
 
 export const SingleStepForm: React.FC<PublicFormProps> = ({
   formId,
@@ -30,8 +32,50 @@ export const SingleStepForm: React.FC<PublicFormProps> = ({
     handleSubmit,
   } = formState;
 
+  const [isPasswordProtected, setIsPasswordProtected] = useState(false);
+  const [passwordVerified, setPasswordVerified] = useState(false);
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+
+  useEffect(() => {
+    const passwordProtection = schema.settings.passwordProtection;
+    if (passwordProtection?.enabled && passwordProtection?.password) {
+      setIsPasswordProtected(true);
+      setShowPasswordModal(true);
+    }
+  }, [schema.settings.passwordProtection]);
+
+  const handlePasswordSubmit = (password: string) => {
+    const expectedPassword = schema.settings.passwordProtection?.password;
+    if (password === expectedPassword) {
+      setPasswordVerified(true);
+      setShowPasswordModal(false);
+    } else {
+      toast.error("Incorrect password!");
+    }
+  };
+
+  const handlePasswordCancel = () => {
+    // Redirect to home page or show a message
+    window.location.href = "/";
+  };
+
   if (submitted) {
     return <SingleStepSuccessScreen schema={schema} />;
+  }
+
+  // Show password modal if form is password protected and password hasn't been verified
+  if (isPasswordProtected && !passwordVerified) {
+    return (
+      <PasswordProtectionModal
+        isOpen={showPasswordModal}
+        message={
+          schema.settings.passwordProtection?.message ||
+          "This form is password protected. Please enter the password to continue."
+        }
+        onPasswordSubmit={handlePasswordSubmit}
+        onCancel={handlePasswordCancel}
+      />
+    );
   }
 
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // UI Components
 import { Card } from "@/components/ui/card";
@@ -23,6 +23,10 @@ import {
   FormFooter,
 } from "./multi-step-form/components";
 
+// Password Protection
+import { PasswordProtectionModal } from "@/components/forms/public-form/components/PasswordProtectionModal";
+import toast from "react-hot-toast";
+
 export function MultiStepForm({ formId, schema }: MultiStepFormProps) {
   const blocks = processFormBlocks(schema);
   const totalSteps = blocks.length;
@@ -35,6 +39,33 @@ export function MultiStepForm({ formId, schema }: MultiStepFormProps) {
   const currentBlock = blocks[currentStep];
   const progress = calculateProgress(currentStep, totalSteps);
 
+  const [isPasswordProtected, setIsPasswordProtected] = useState(false);
+  const [passwordVerified, setPasswordVerified] = useState(false);
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+
+  useEffect(() => {
+    const passwordProtection = schema.settings.passwordProtection;
+    if (passwordProtection?.enabled && passwordProtection?.password) {
+      setIsPasswordProtected(true);
+      setShowPasswordModal(true);
+    }
+  }, [schema.settings.passwordProtection]);
+
+  const handlePasswordSubmit = (password: string) => {
+    const expectedPassword = schema.settings.passwordProtection?.password;
+    if (password === expectedPassword) {
+      setPasswordVerified(true);
+      setShowPasswordModal(false);
+    } else {
+      toast.error("Incorrect password!");
+    }
+  };
+
+  const handlePasswordCancel = () => {
+    // Redirect to home page or show a message
+    window.location.href = "/";
+  };
+
   useFormNavigation({
     currentStep,
     totalSteps,
@@ -45,6 +76,21 @@ export function MultiStepForm({ formId, schema }: MultiStepFormProps) {
 
   if (submitted) {
     return <SuccessScreen schema={schema} />;
+  }
+
+  // Show password modal if form is password protected and password hasn't been verified
+  if (isPasswordProtected && !passwordVerified) {
+    return (
+      <PasswordProtectionModal
+        isOpen={showPasswordModal}
+        message={
+          schema.settings.passwordProtection?.message ||
+          "This form is password protected. Please enter the password to continue."
+        }
+        onPasswordSubmit={handlePasswordSubmit}
+        onCancel={handlePasswordCancel}
+      />
+    );
   }
 
   return (

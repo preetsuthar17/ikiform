@@ -35,6 +35,11 @@ export interface LocalSettings {
     maxResponses?: number;
     message?: string;
   };
+  passwordProtection?: {
+    enabled?: boolean;
+    password?: string;
+    message?: string;
+  };
 }
 
 export interface BasicInfoSectionProps {

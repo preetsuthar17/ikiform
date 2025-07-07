@@ -7,6 +7,7 @@ import {
   DEFAULT_RATE_LIMIT_SETTINGS,
   DEFAULT_PROFANITY_FILTER_SETTINGS,
   DEFAULT_RESPONSE_LIMIT_SETTINGS,
+  DEFAULT_PASSWORD_PROTECTION_SETTINGS,
 } from "@/lib/forms";
 import type { LocalSettings } from "../types";
 
@@ -25,6 +26,10 @@ export function useFormSettings(schema: FormSchema) {
       ...DEFAULT_RESPONSE_LIMIT_SETTINGS,
       ...schema.settings.responseLimit,
     },
+    passwordProtection: {
+      ...DEFAULT_PASSWORD_PROTECTION_SETTINGS,
+      ...schema.settings.passwordProtection,
+    },
   });
 
   useEffect(() => {
@@ -41,6 +46,10 @@ export function useFormSettings(schema: FormSchema) {
       responseLimit: {
         ...DEFAULT_RESPONSE_LIMIT_SETTINGS,
         ...schema.settings.responseLimit,
+      },
+      passwordProtection: {
+        ...DEFAULT_PASSWORD_PROTECTION_SETTINGS,
+        ...schema.settings.passwordProtection,
       },
     });
   }, [schema.settings]);
@@ -60,6 +69,10 @@ export function useFormSettings(schema: FormSchema) {
       responseLimit: {
         ...localSettings.responseLimit,
         ...updates.responseLimit,
+      },
+      passwordProtection: {
+        ...localSettings.passwordProtection,
+        ...updates.passwordProtection,
       },
     });
   };
@@ -102,6 +115,20 @@ export function useFormSettings(schema: FormSchema) {
     });
   };
 
+  const updatePasswordProtection = (
+    passwordProtectionUpdates: Partial<
+      NonNullable<LocalSettings["passwordProtection"]>
+    >
+  ) => {
+    setLocalSettings({
+      ...localSettings,
+      passwordProtection: {
+        ...localSettings.passwordProtection,
+        ...passwordProtectionUpdates,
+      },
+    });
+  };
+
   const resetSettings = () => {
     setLocalSettings({
       ...schema.settings,
@@ -117,6 +144,10 @@ export function useFormSettings(schema: FormSchema) {
         ...DEFAULT_RESPONSE_LIMIT_SETTINGS,
         ...schema.settings.responseLimit,
       },
+      passwordProtection: {
+        ...DEFAULT_PASSWORD_PROTECTION_SETTINGS,
+        ...schema.settings.passwordProtection,
+      },
     });
   };
 
@@ -126,6 +157,7 @@ export function useFormSettings(schema: FormSchema) {
     updateRateLimit,
     updateProfanityFilter,
     updateResponseLimit,
+    updatePasswordProtection,
     resetSettings,
   };
 }
