@@ -35,7 +35,7 @@ export default function HeroClient({ origin }: { origin: string }) {
     <section className="flex flex-col items-center justify-center text-center py-12 gap-6 relative overflow-hidden">
       <h1 className="text-4xl md:text-5xl tracking-tight font-medium flex flex-col gap-2 max-w-3xl">
         <span className="inline-block px-2 py-1">
-          Beautiful, budget-friendly forms without compromises
+          Stop settling for ugly forms and expensive subscriptions
         </span>
       </h1>
       <p className="text-muted-foreground max-w-2xl">
