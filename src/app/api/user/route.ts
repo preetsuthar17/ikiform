@@ -3,6 +3,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 // Internal imports
 import { createClient } from "@/utils/supabase/server";
+import {
+  sendWelcomeEmail,
+  sendNewLoginEmail,
+} from "@/lib/services/notifications";
 
 export async function POST(request: NextRequest) {
   try {
@@ -36,6 +40,8 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (existingUser) {
+      // Existing user: send new login email
+      await sendNewLoginEmail({ to: email, name });
       return NextResponse.json({
         success: true,
         message: "User already exists",
@@ -59,9 +65,12 @@ export async function POST(request: NextRequest) {
     if (insertError) {
       return NextResponse.json(
         { error: "Failed to create user", details: insertError.message },
-        { status: 500 },
+        { status: 500 }
       );
     }
+
+    // New user: send welcome email
+    await sendWelcomeEmail({ to: email, name });
 
     return NextResponse.json({
       success: true,
@@ -72,7 +81,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
@@ -98,7 +107,7 @@ export async function GET(request: NextRequest) {
     if (error) {
       return NextResponse.json(
         { error: "User not found in database", details: error.message },
-        { status: 404 },
+        { status: 404 }
       );
     }
 
@@ -114,7 +123,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

@@ -69,3 +69,50 @@ export async function sendFormNotification({
     throw error;
   }
 }
+
+export async function sendWelcomeEmail({
+  to,
+  name,
+  customLinks,
+}: {
+  to: string;
+  name?: string;
+  customLinks?: NotificationLink[];
+}) {
+  const subject = `Welcome to Ikiform! 🎉`;
+  const message = `# Welcome${name ? ", " + name : ""} 👋\n\nWe're excited to have you on board.\n\n- Create beautiful forms\n- Collect responses\n- Analyze your data\n\nGet started by building your first form!`;
+  const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "https://ikiform.com"}/dashboard`;
+  return sendFormNotification({
+    to,
+    subject,
+    message,
+    customLinks: [
+      { label: "Go to Dashboard", url: dashboardUrl },
+      ...(customLinks || []),
+    ],
+  });
+}
+
+export async function sendNewLoginEmail({
+  to,
+  name,
+  customLinks,
+}: {
+  to: string;
+  name?: string;
+  customLinks?: NotificationLink[];
+}) {
+  const subject = `New Login to Your Ikiform Account`;
+  const message = `# New Login${name ? ", " + name : ""}\n\nWe noticed a new login to your account. If this was you, you can safely ignore this email.\n\nIf you did not perform this login, please [contact us](mailto:hi@ikiform.com).`;
+  const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "https://ikiform.com"}/dashboard`;
+  return sendFormNotification({
+    to,
+    subject,
+    message,
+    customLinks: [
+      { label: "Go to Dashboard", url: dashboardUrl },
+      { label: "Send us a mail", url: "mailto:hi@ikiform.com" },
+      ...(customLinks || []),
+    ],
+  });
+}

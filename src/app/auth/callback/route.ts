@@ -3,8 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 // Internal imports
 import { createClient } from "@/utils/supabase/server";
+import {
+  sendWelcomeEmail,
+  sendNewLoginEmail,
+} from "@/lib/services/notifications";
 
-export async function GET(request: NextRequest) { 
+export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
   const next = searchParams.get("next") ?? "/dashboard";
@@ -60,6 +64,11 @@ export async function GET(request: NextRequest) {
 
           if (!upsertError) {
             console.log(`User ${isNewUser ? "created" : "updated"}: ${email}`);
+            if (isNewUser) {
+              await sendWelcomeEmail({ to: email, name });
+            } else {
+              await sendNewLoginEmail({ to: email, name });
+            }
           }
         }
       }
