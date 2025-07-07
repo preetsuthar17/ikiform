@@ -32,21 +32,31 @@ export async function GET(request: NextRequest) {
             "";
           const { data: existingUser } = await supabase
             .from("users")
-            .select("email")
+            .select("email, has_premium, polar_customer_id")
             .eq("email", email)
             .single();
           const isNewUser = !existingUser;
 
-          const { error: upsertError } = await supabase.from("users").upsert(
-            {
+          let upsertData;
+          if (isNewUser) {
+            upsertData = {
               uid,
               name,
               email,
               has_premium: false,
               polar_customer_id: null,
-            },
-            { onConflict: "email" },
-          );
+            };
+          } else {
+            upsertData = {
+              uid,
+              name,
+              email,
+            };
+          }
+
+          const { error: upsertError } = await supabase
+            .from("users")
+            .upsert(upsertData, { onConflict: "email" });
 
           if (!upsertError) {
             console.log(`User ${isNewUser ? "created" : "updated"}: ${email}`);
