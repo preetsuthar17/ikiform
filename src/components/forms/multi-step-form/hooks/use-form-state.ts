@@ -49,7 +49,7 @@ const initializeFormData = (blocks: FormBlock[]): Record<string, any> => {
 export const useFormState = (
   formId: string,
   schema: FormSchema,
-  blocks: FormBlock[]
+  blocks: FormBlock[],
 ): FormState & FormActions => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<Record<string, any>>({});
@@ -70,7 +70,7 @@ export const useFormState = (
     });
 
     const newFieldIds = [...allFieldIds].filter(
-      (id) => !initializedFieldsRef.current.has(id)
+      (id) => !initializedFieldsRef.current.has(id),
     );
 
     if (newFieldIds.length > 0) {
@@ -99,7 +99,7 @@ export const useFormState = (
     const { errors: validationErrors, isValid } = validateStep(
       currentStep,
       blocks,
-      formData
+      formData,
     );
 
     if (isValid) {

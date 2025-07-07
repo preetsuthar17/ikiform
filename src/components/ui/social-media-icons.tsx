@@ -64,7 +64,7 @@ export function SocialMediaIcons({
   const sizeClass = iconSizeClasses[iconSize];
 
   const activePlatforms = Object.entries(platforms).filter(
-    ([_, url]) => url && url.trim() !== ""
+    ([_, url]) => url && url.trim() !== "",
   );
 
   if (activePlatforms.length === 0) {

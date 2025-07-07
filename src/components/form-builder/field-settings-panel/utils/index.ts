@@ -18,7 +18,7 @@ export const getFieldHelpers = (field: FormField) => ({
 
 export const useFieldUpdates = (
   field: FormField | null,
-  onFieldUpdate: (field: FormField) => void
+  onFieldUpdate: (field: FormField) => void,
 ) => {
   if (!field) {
     return {
@@ -51,7 +51,7 @@ export const useFieldUpdates = (
 
 export const createFieldUpdater = (
   field: FormField,
-  onFieldUpdate: (field: FormField) => void
+  onFieldUpdate: (field: FormField) => void,
 ) => ({
   updateField: (updates: Partial<FormField>) => {
     onFieldUpdate({ ...field, ...updates });
@@ -74,7 +74,7 @@ export const createFieldUpdater = (
 
 export const createOptionHandlers = (
   field: FormField,
-  updateField: (updates: Partial<FormField>) => void
+  updateField: (updates: Partial<FormField>) => void,
 ) => ({
   addOption: () => {
     const currentOptions = field.options || [];
@@ -102,7 +102,7 @@ export const formatFieldType = (type: string): string => {
 
 export const getPlaceholderText = (
   field: FormField,
-  validationType: string
+  validationType: string,
 ): string => {
   const { validation } = field;
 

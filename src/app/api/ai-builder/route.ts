@@ -13,10 +13,6 @@ const systemPrompt =
 
 let apiKeyValid: boolean | null = null;
 
-// Input validation schemas
-const MAX_MESSAGE_LENGTH = 2000;
-const MAX_MESSAGES = 10;
-
 function createErrorResponse(message: string, status: number = 500) {
   return new Response(JSON.stringify({ success: false, message }), {
     status,
@@ -33,11 +29,7 @@ function createErrorResponse(message: string, status: number = 500) {
 function validateAndSanitizeMessages(
   messages: any[]
 ): { role: string; content: string }[] {
-  if (
-    !Array.isArray(messages) ||
-    messages.length === 0 ||
-    messages.length > MAX_MESSAGES
-  ) {
+  if (!Array.isArray(messages) || messages.length === 0) {
     throw new Error("Invalid messages array");
   }
   return messages.map((msg) => {
@@ -46,7 +38,7 @@ function validateAndSanitizeMessages(
     }
     return {
       role: msg.role,
-      content: msg.content.slice(0, MAX_MESSAGE_LENGTH),
+      content: msg.content,
     };
   });
 }
@@ -149,8 +141,6 @@ export async function POST(req: NextRequest) {
         })),
       ],
       temperature: 0.3,
-      maxTokens: 1750,
-      topP: 0.9,
     });
 
     // Stream the response to the client as it comes in
@@ -187,8 +177,6 @@ export async function POST(req: NextRequest) {
                   timestamp: new Date().toISOString(),
                   model: "cohere/command-r7b-12-2024",
                   temperature: 0.3,
-                  maxTokens: 1750,
-                  topP: 0.9,
                 }
               );
             } catch (error) {

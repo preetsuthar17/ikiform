@@ -71,38 +71,48 @@ export interface EmailValidationSettings {
 
 export function validateEmail(
   email: string,
-  settings?: EmailValidationSettings
+  settings?: EmailValidationSettings,
 ): EmailValidationResult {
   // Basic email format validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    return { 
-      isValid: false, 
-      message: settings?.customValidationMessage || "Please enter a valid email address" 
+    return {
+      isValid: false,
+      message:
+        settings?.customValidationMessage ||
+        "Please enter a valid email address",
     };
   }
 
-  const domain = email.split('@')[1]?.toLowerCase();
+  const domain = email.split("@")[1]?.toLowerCase();
 
   // Check blocked domains (temporary email services)
   const blockedDomains = [
     ...(settings?.blockedDomains || []),
-    ...TEMPORARY_EMAIL_DOMAINS
+    ...TEMPORARY_EMAIL_DOMAINS,
   ];
-  
-  if (blockedDomains.some(blocked => domain === blocked.toLowerCase())) {
-    return { 
-      isValid: false, 
-      message: settings?.customValidationMessage || "Temporary email addresses are not allowed" 
+
+  if (blockedDomains.some((blocked) => domain === blocked.toLowerCase())) {
+    return {
+      isValid: false,
+      message:
+        settings?.customValidationMessage ||
+        "Temporary email addresses are not allowed",
     };
   }
 
   // Check allowed domains
   if (settings?.allowedDomains?.length) {
-    if (!settings.allowedDomains.some(allowed => domain === allowed.toLowerCase())) {
-      return { 
-        isValid: false, 
-        message: settings?.customValidationMessage || `Only emails from ${settings.allowedDomains.join(', ')} are allowed` 
+    if (
+      !settings.allowedDomains.some(
+        (allowed) => domain === allowed.toLowerCase(),
+      )
+    ) {
+      return {
+        isValid: false,
+        message:
+          settings?.customValidationMessage ||
+          `Only emails from ${settings.allowedDomains.join(", ")} are allowed`,
       };
     }
   }
@@ -110,9 +120,11 @@ export function validateEmail(
   // Check business email requirement
   if (settings?.requireBusinessEmail) {
     if (PERSONAL_EMAIL_DOMAINS.includes(domain)) {
-      return { 
-        isValid: false, 
-        message: settings?.customValidationMessage || "Please use a business email address" 
+      return {
+        isValid: false,
+        message:
+          settings?.customValidationMessage ||
+          "Please use a business email address",
       };
     }
   }
@@ -120,18 +132,15 @@ export function validateEmail(
   return { isValid: true };
 }
 
-export function autoCompleteEmail(
-  username: string,
-  domain: string
-): string {
+export function autoCompleteEmail(username: string, domain: string): string {
   if (!username || !domain) return username;
   return `${username}@${domain}`;
 }
 
 export function extractUsername(email: string): string {
-  return email.split('@')[0] || '';
+  return email.split("@")[0] || "";
 }
 
 export function extractDomain(email: string): string {
-  return email.split('@')[1] || '';
-} 
+  return email.split("@")[1] || "";
+}

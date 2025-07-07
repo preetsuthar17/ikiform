@@ -7,20 +7,12 @@ import { Save, Settings, Eye } from "lucide-react";
 // Internal imports
 import { Modal, ModalContent } from "@/components/ui/modal";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { useFormSettings } from "./hooks";
 import {
-  BasicInfoSection,
-  RateLimitSection,
-  ProfanityFilterSection,
-  ResponseLimitSection,
-  PasswordProtectionSection,
-  SocialMediaSection,
   FormSettingsDesktopLayout,
   FormSettingsMobileLayout,
 } from "./components";
 import type { FormSettingsModalProps, FormSettingsSection } from "./types";
-import { Separator } from "@/components/ui/separator";
 
 export function FormSettingsModal({
   isOpen,

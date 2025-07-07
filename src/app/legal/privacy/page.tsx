@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Privacy() {
   return (
-      <article className="max-w-4xl mx-auto px-4 py-10 flex flex-col gap-12">
+    <article className="max-w-4xl mx-auto px-4 py-10 flex flex-col gap-12">
       <section className="flex flex-col gap-4">
         <h1 className="text-4xl font-bold">Privacy Policy</h1>
         <div className="text-sm text-muted-foreground">
@@ -260,6 +260,6 @@ export default function Privacy() {
           </Link>
         </p>
       </section>
-      </article>
+    </article>
   );
 }

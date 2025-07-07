@@ -40,7 +40,7 @@ const initializeFormData = (fields: FormField[]): Record<string, any> => {
 
 export function useFormPreviewState(
   schema: FormSchema,
-  selectedBlockId?: string | null
+  selectedBlockId?: string | null,
 ) {
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
@@ -56,7 +56,7 @@ export function useFormPreviewState(
   useEffect(() => {
     const currentFieldIds = new Set(allFields.map((field) => field.id));
     const newFieldIds = [...currentFieldIds].filter(
-      (id) => !initializedFieldsRef.current.has(id)
+      (id) => !initializedFieldsRef.current.has(id),
     );
 
     if (newFieldIds.length > 0) {
@@ -75,7 +75,7 @@ export function useFormPreviewState(
   useEffect(() => {
     if (selectedBlockId && schema.blocks) {
       const blockIndex = schema.blocks.findIndex(
-        (block) => block.id === selectedBlockId
+        (block) => block.id === selectedBlockId,
       );
       if (blockIndex !== -1) {
         setCurrentStepIndex(blockIndex);

@@ -6,7 +6,7 @@ export class AIBuilderService {
     messages: ChatMessage[],
     sessionId: string,
     onStream: (content: string) => void,
-    onError: (error: string) => void
+    onError: (error: string) => void,
   ): Promise<{ fullText: string; foundJson: any }> {
     try {
       const response = await fetch("/api/ai-builder", {

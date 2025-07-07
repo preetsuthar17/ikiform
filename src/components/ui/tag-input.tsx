@@ -26,7 +26,7 @@ const tagInputVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 export interface TagInputProps
@@ -73,7 +73,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
       error,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [inputValue, setInputValue] = React.useState("");
     const inputRef = React.useRef<HTMLInputElement>(null);
@@ -94,7 +94,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
         onTagAdd?.(trimmedTag);
         setInputValue("");
       },
-      [safeTags, onTagsChange, onTagAdd, allowDuplicates, maxTags]
+      [safeTags, onTagsChange, onTagAdd, allowDuplicates, maxTags],
     );
 
     const removeTag = React.useCallback(
@@ -103,7 +103,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
         onTagsChange(newTags);
         onTagRemove?.(tagToRemove);
       },
-      [safeTags, onTagsChange, onTagRemove]
+      [safeTags, onTagsChange, onTagRemove],
     );
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -165,7 +165,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
               size,
             }),
             "cursor-text",
-            className
+            className,
           )}
           onClick={handleContainerClick}
         >
@@ -223,7 +223,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 TagInput.displayName = "TagInput";

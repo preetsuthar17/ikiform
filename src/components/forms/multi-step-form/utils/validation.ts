@@ -7,7 +7,7 @@ import { validateEmail } from "@/lib/validation/email-validation";
 export const validateStep = (
   stepIndex: number,
   blocks: FormBlock[],
-  formData: Record<string, any>
+  formData: Record<string, any>,
 ): { errors: Record<string, string>; isValid: boolean } => {
   const block = blocks[stepIndex];
   const errors: Record<string, string> = {};
@@ -24,7 +24,7 @@ export const validateStep = (
     } else if (field.type === "email" && value) {
       const emailValidation = validateEmail(
         value,
-        field.settings?.emailValidation
+        field.settings?.emailValidation,
       );
       if (!emailValidation.isValid) {
         errors[field.id] =
