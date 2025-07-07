@@ -3,8 +3,8 @@ import { cn } from "@/lib/utils";
 
 export const getThemeCardStyles = (isSelected: boolean): string => {
   return cn(
-    "relative cursor-pointer transition-all duration-200 hover:shadow-md overflow-hidden aspect-square rounded-card",
-    isSelected && "ring-1 ring-ring ring-offset-2",
+    "relative cursor-pointer transition-all duration-200 hover:shadow-md overflow-hidden aspect-square rounded-card p-0",
+    isSelected && "ring-1 ring-ring ring-offset-2"
   );
 };
 
