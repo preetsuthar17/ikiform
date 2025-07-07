@@ -9,7 +9,6 @@ import { ChatMessage, FormSchema } from "@/lib/ai-builder/types";
 import {
   generateSessionId,
   checkForDuplicateSchema,
-  fixAIGeneratedSchema,
 } from "@/lib/ai-builder/utils";
 import { AIBuilderService } from "@/lib/ai-builder/ai-service";
 
@@ -65,7 +64,7 @@ export const useAIBuilder = () => {
 
   const processAIResponse = async (
     promptText: string,
-    currentMessages: ChatMessage[],
+    currentMessages: ChatMessage[]
   ) => {
     let currentSessionId = sessionId || generateSessionId();
     setSessionId(currentSessionId);
@@ -79,17 +78,14 @@ export const useAIBuilder = () => {
       currentMessages,
       currentSessionId,
       setStreamedContent,
-      setStreamError,
+      setStreamError
     );
 
     setIsStreaming(false);
     setIsLoading(false);
 
     if (foundJson) {
-      // Ensure the schema structure is correct
-      const fixedSchema = fixAIGeneratedSchema(foundJson);
-
-      const existing = checkForDuplicateSchema(forms, fixedSchema);
+      const existing = checkForDuplicateSchema(forms, foundJson);
       if (existing) {
         setActiveFormId(existing.id);
         setMessages((prev) => [
@@ -97,25 +93,25 @@ export const useAIBuilder = () => {
           {
             role: "assistant",
             content: "This form already exists. Switched to the existing form.",
-            schema: fixedSchema,
+            schema: foundJson,
           },
         ]);
       } else {
         const newId = Date.now().toString();
         setForms((prev) => [
           ...prev,
-          { id: newId, schema: fixedSchema, prompt: promptText },
+          { id: newId, schema: foundJson, prompt: promptText },
         ]);
         setActiveFormId(newId);
         setMessages((prev) => [
           ...prev,
-          { role: "assistant", content: fullText, schema: fixedSchema },
+          { role: "assistant", content: fullText, schema: foundJson },
         ]);
       }
       setStreamedContent("");
     } else {
       setStreamError(
-        "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!",
+        "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!"
       );
     }
   };
@@ -145,7 +141,7 @@ export const useAIBuilder = () => {
     if (activeForm?.schema) {
       localStorage.setItem(
         "importedFormSchema",
-        JSON.stringify(activeForm.schema),
+        JSON.stringify(activeForm.schema)
       );
       router.push("/form-builder");
     }

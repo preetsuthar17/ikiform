@@ -1,12 +1,12 @@
 import { ChatMessage } from "./types";
-import { extractJsonFromText, fixAIGeneratedSchema } from "./utils";
+import { extractJsonFromText } from "./utils";
 
 export class AIBuilderService {
   static async sendMessage(
     messages: ChatMessage[],
     sessionId: string,
     onStream: (content: string) => void,
-    onError: (error: string) => void,
+    onError: (error: string) => void
   ): Promise<{ fullText: string; foundJson: any }> {
     try {
       const response = await fetch("/api/ai-builder", {
@@ -23,7 +23,6 @@ export class AIBuilderService {
       const reader = response.body.getReader();
       let fullText = "";
       let foundJson = null;
-      let lastJsonAttempt = 0;
 
       while (true) {
         const { value, done } = await reader.read();
@@ -33,19 +32,8 @@ export class AIBuilderService {
         fullText += chunk;
         onStream(fullText);
 
-        if (!foundJson && fullText.length - lastJsonAttempt > 100) {
-          const extractedJson = extractJsonFromText(fullText);
-          if (extractedJson) {
-            foundJson = fixAIGeneratedSchema(extractedJson);
-          }
-          lastJsonAttempt = fullText.length;
-        }
-      }
-
-      if (!foundJson) {
-        const extractedJson = extractJsonFromText(fullText);
-        if (extractedJson) {
-          foundJson = fixAIGeneratedSchema(extractedJson);
+        if (!foundJson) {
+          foundJson = extractJsonFromText(fullText);
         }
       }
 
