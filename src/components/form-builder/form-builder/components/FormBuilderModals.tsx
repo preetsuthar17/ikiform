@@ -38,6 +38,7 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
   onFormSettingsUpdate,
   onSchemaUpdate,
   onPublish,
+  userEmail,
 }) => {
   return (
     <>
@@ -142,6 +143,7 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
         onClose={onCloseFormSettings}
         schema={formSchema}
         onSchemaUpdate={onSchemaUpdate}
+        userEmail={userEmail}
       />
 
       {/* Share Form Modal */}

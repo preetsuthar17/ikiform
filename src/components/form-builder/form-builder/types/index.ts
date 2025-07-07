@@ -40,7 +40,7 @@ export interface FormBuilderActions {
   setShowShareModal: (show: boolean) => void;
   setIsNewForm: (isNew: boolean) => void;
   setFormSchema: (
-    schema: FormSchema | ((prev: FormSchema) => FormSchema),
+    schema: FormSchema | ((prev: FormSchema) => FormSchema)
   ) => void;
 }
 
@@ -102,4 +102,5 @@ export interface FormBuilderModalsProps {
   onFormSettingsUpdate: (settings: Partial<FormSchema["settings"]>) => void;
   onSchemaUpdate: (updates: Partial<FormSchema>) => void;
   onPublish: () => Promise<void>;
+  userEmail?: string;
 }

@@ -60,6 +60,13 @@ export const DEFAULT_EMAIL_VALIDATION_SETTINGS = {
   customValidationMessage: "",
 };
 
+export const DEFAULT_NOTIFICATION_SETTINGS = {
+  enabled: true,
+  email: "", // to be set to logged-in user
+  subject: "You received a submission! 🥳",
+  message: "Whoo-hoo!! You have received a new submission on your form.",
+};
+
 /**
  * Ensures a form schema has the default rate limiting and profanity filter settings
  * This is used to handle legacy forms and ensure all forms have these settings
@@ -91,6 +98,10 @@ export function ensureDefaultFormSettings(schema: FormSchema): FormSchema {
       passwordProtection: {
         ...DEFAULT_PASSWORD_PROTECTION_SETTINGS,
         ...schema.settings.passwordProtection,
+      },
+      notifications: {
+        ...DEFAULT_NOTIFICATION_SETTINGS,
+        ...schema.settings.notifications,
       },
     },
   };

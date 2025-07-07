@@ -8,10 +8,11 @@ import {
   DEFAULT_PROFANITY_FILTER_SETTINGS,
   DEFAULT_RESPONSE_LIMIT_SETTINGS,
   DEFAULT_PASSWORD_PROTECTION_SETTINGS,
+  DEFAULT_NOTIFICATION_SETTINGS,
 } from "@/lib/forms";
 import type { LocalSettings } from "../types";
 
-export function useFormSettings(schema: FormSchema) {
+export function useFormSettings(schema: FormSchema, userEmail?: string) {
   const [localSettings, setLocalSettings] = useState<LocalSettings>({
     ...schema.settings,
     rateLimit: {
@@ -29,6 +30,11 @@ export function useFormSettings(schema: FormSchema) {
     passwordProtection: {
       ...DEFAULT_PASSWORD_PROTECTION_SETTINGS,
       ...schema.settings.passwordProtection,
+    },
+    notifications: {
+      ...DEFAULT_NOTIFICATION_SETTINGS,
+      ...schema.settings.notifications,
+      email: schema.settings.notifications?.email || userEmail || "",
     },
   });
 
@@ -51,8 +57,13 @@ export function useFormSettings(schema: FormSchema) {
         ...DEFAULT_PASSWORD_PROTECTION_SETTINGS,
         ...schema.settings.passwordProtection,
       },
+      notifications: {
+        ...DEFAULT_NOTIFICATION_SETTINGS,
+        ...schema.settings.notifications,
+        email: schema.settings.notifications?.email || userEmail || "",
+      },
     });
-  }, [schema.settings]);
+  }, [schema.settings, userEmail]);
 
   const updateSettings = (updates: Partial<LocalSettings>) => {
     setLocalSettings({

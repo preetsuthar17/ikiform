@@ -19,6 +19,7 @@ export function FormSettingsModal({
   onClose,
   schema,
   onSchemaUpdate,
+  userEmail,
 }: FormSettingsModalProps) {
   const {
     localSettings,
@@ -30,7 +31,7 @@ export function FormSettingsModal({
     updateSocialMedia,
     updateNotifications,
     resetSettings,
-  } = useFormSettings(schema);
+  } = useFormSettings(schema, userEmail);
 
   const [activeSection, setActiveSection] =
     useState<FormSettingsSection>("basic");

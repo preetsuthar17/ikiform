@@ -7,6 +7,7 @@ export interface FormSettingsModalProps {
   onClose: () => void;
   schema: FormSchema;
   onSchemaUpdate: (updates: Partial<FormSchema>) => void;
+  userEmail?: string;
 }
 
 export interface NotificationLink {
