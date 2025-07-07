@@ -9,40 +9,7 @@ import { requirePremium } from "@/lib/utils/premium-check";
 
 const systemPrompt =
   process.env.AI_FORM_SYSTEM_PROMPT ||
-  `You are an expert form builder AI. Generate ONLY a valid JSON schema for a form.
-
-IMPORTANT: The form schema must follow this exact structure:
-- Each block in the "blocks" array must contain the complete field objects directly in its "fields" array
-- Do NOT use field references or IDs in blocks - embed the full field objects
-- Each field must have: id, type, label, required, validation (if needed), settings (if needed)
-- Supported field types: text, email, textarea, number, select, radio, checkbox, slider, tags
-- For select/radio/checkbox fields, include an "options" array
-- For slider fields, include min, max, step, defaultValue in settings
-- For tags fields, include maxTags, allowDuplicates in settings
-
-Example structure:
-{
-  "settings": { "title": "Form Title", "description": "Form description" },
-  "blocks": [
-    {
-      "id": "block_1",
-      "title": "Step 1",
-      "description": "First step",
-      "fields": [
-        {
-          "id": "field_1",
-          "type": "text",
-          "label": "Full Name",
-          "required": true,
-          "validation": { "minLength": 2 }
-        }
-      ]
-    }
-  ],
-  "fields": [] // Keep empty for compatibility
-}
-
-Output ONLY the JSON, no explanations or markdown.`;
+  "You are an expert form builder AI. Always output ONLY the JSON schema for a form, never any explanation, markdown, or extra text.";
 
 let apiKeyValid: boolean | null = null;
 
@@ -173,7 +140,7 @@ export async function POST(req: NextRequest) {
     }
 
     const stream = await streamText({
-      model: cohere("command"),
+      model: cohere("command-r7b-12-2024"),
       messages: [
         { role: "system", content: systemPrompt },
         ...sanitizedMessages.map((msg) => ({
@@ -218,7 +185,7 @@ export async function POST(req: NextRequest) {
                 aiResponse,
                 {
                   timestamp: new Date().toISOString(),
-                  model: "cohere/command",
+                  model: "cohere/command-r7b-12-2024",
                   temperature: 0.3,
                   maxTokens: 1750,
                   topP: 0.9,
