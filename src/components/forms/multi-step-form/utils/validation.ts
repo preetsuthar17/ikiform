@@ -1,10 +1,13 @@
 // Types
 import type { FormBlock } from "@/lib/database";
 
+// Utility imports
+import { validateEmail } from "@/lib/validation/email-validation";
+
 export const validateStep = (
   stepIndex: number,
   blocks: FormBlock[],
-  formData: Record<string, any>,
+  formData: Record<string, any>
 ): { errors: Record<string, string>; isValid: boolean } => {
   const block = blocks[stepIndex];
   const errors: Record<string, string> = {};
@@ -18,13 +21,17 @@ export const validateStep = (
     ) {
       errors[field.id] =
         field.validation?.requiredMessage || "This field is required";
-    } else if (
-      field.type === "email" &&
-      value &&
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-    ) {
-      errors[field.id] =
-        field.validation?.emailMessage || "Please enter a valid email address";
+    } else if (field.type === "email" && value) {
+      const emailValidation = validateEmail(
+        value,
+        field.settings?.emailValidation
+      );
+      if (!emailValidation.isValid) {
+        errors[field.id] =
+          emailValidation.message ||
+          field.validation?.emailMessage ||
+          "Please enter a valid email address";
+      }
     } else if (["text", "textarea", "email"].includes(field.type) && value) {
       if (
         field.validation?.minLength &&

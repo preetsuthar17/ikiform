@@ -11,13 +11,17 @@ import type { PublicFormProps } from "./public-form/types";
 
 export function PublicForm({ formId, schema }: PublicFormProps) {
   const isMultiStep = schema.settings.multiStep || schema.blocks?.length > 1;
+  const dir = schema.settings.rtl ? "rtl" : "ltr";
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+    <div
+      dir={dir}
+      style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+    >
       {isMultiStep ? (
-        <MultiStepForm formId={formId} schema={schema} />
+        <MultiStepForm formId={formId} schema={schema} dir={dir} />
       ) : (
-        <SingleStepForm formId={formId} schema={schema} />
+        <SingleStepForm formId={formId} schema={schema} dir={dir} />
       )}
     </div>
   );

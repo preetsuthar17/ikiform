@@ -52,6 +52,14 @@ export const DEFAULT_SOCIAL_MEDIA_SETTINGS = {
   position: "footer" as const,
 };
 
+export const DEFAULT_EMAIL_VALIDATION_SETTINGS = {
+  allowedDomains: [],
+  blockedDomains: [],
+  autoCompleteDomain: "",
+  requireBusinessEmail: false,
+  customValidationMessage: "",
+};
+
 /**
  * Ensures a form schema has the default rate limiting and profanity filter settings
  * This is used to handle legacy forms and ensure all forms have these settings

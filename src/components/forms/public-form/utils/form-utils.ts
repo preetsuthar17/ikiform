@@ -1,6 +1,9 @@
 // Types
 import type { FormSchema, FormField } from "@/lib/database";
 
+// Utility imports
+import { validateEmail } from "@/lib/validation/email-validation";
+
 // Utility to get all fields from schema
 export const getAllFields = (schema: FormSchema): FormField[] =>
   schema.blocks?.length
@@ -10,7 +13,7 @@ export const getAllFields = (schema: FormSchema): FormField[] =>
 // Validation logic for single-step forms
 export const validateSingleStepForm = (
   fields: FormField[],
-  formData: Record<string, any>,
+  formData: Record<string, any>
 ): { errors: Record<string, string>; isValid: boolean } => {
   const errors: Record<string, string> = {};
 
@@ -23,13 +26,17 @@ export const validateSingleStepForm = (
     ) {
       errors[field.id] =
         field.validation?.requiredMessage || "This field is required";
-    } else if (
-      field.type === "email" &&
-      value &&
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-    ) {
-      errors[field.id] =
-        field.validation?.emailMessage || "Please enter a valid email address";
+    } else if (field.type === "email" && value) {
+      const emailValidation = validateEmail(
+        value,
+        field.settings?.emailValidation
+      );
+      if (!emailValidation.isValid) {
+        errors[field.id] =
+          emailValidation.message ||
+          field.validation?.emailMessage ||
+          "Please enter a valid email address";
+      }
     } else if (["text", "textarea", "email"].includes(field.type) && value) {
       if (
         field.validation?.minLength &&
@@ -88,7 +95,7 @@ export const validateSingleStepForm = (
 // Submission logic for single-step forms
 export const submitSingleStepForm = async (
   formId: string,
-  formData: Record<string, any>,
+  formData: Record<string, any>
 ): Promise<{ success: boolean; message?: string }> => {
   try {
     const response = await fetch(`/api/forms/${formId}/submit`, {

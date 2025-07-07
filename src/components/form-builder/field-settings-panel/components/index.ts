@@ -1,5 +1,6 @@
 export { EmptyState } from "./EmptyState";
 export { BasicSettings } from "./BasicSettings";
+export { EmailValidationSettings } from "./EmailValidationSettings";
 export { OptionsSettings } from "./OptionsSettings";
 export { ValidationSettings } from "./ValidationSettings";
 export { ErrorMessages } from "./ErrorMessages";

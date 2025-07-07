@@ -20,9 +20,10 @@ import { SocialMediaIcons } from "@/components/ui/social-media-icons";
 
 import toast from "react-hot-toast";
 
-export const SingleStepForm: React.FC<PublicFormProps> = ({
+export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
   formId,
   schema,
+  dir,
 }) => {
   const fields = getAllFields(schema);
   const formState = useSingleStepForm(formId, schema, fields);
@@ -103,7 +104,8 @@ export const SingleStepForm: React.FC<PublicFormProps> = ({
 
   return (
     <div
-      className={`min-h-screen bg-background flex items-center justify-center w-full transition-opacity duration-500 ${
+      dir={dir}
+      className={`py-24 bg-background flex items-center justify-center w-full transition-opacity duration-500 ${
         showForm ? "opacity-100" : "opacity-0"
       }`}
     >
@@ -119,16 +121,16 @@ export const SingleStepForm: React.FC<PublicFormProps> = ({
         />
 
         <div className="text-center space-y-4">
-          {schema.settings.branding?.socialMedia?.enabled && 
-           schema.settings.branding.socialMedia.platforms && 
-           (schema.settings.branding.socialMedia.position === "footer" || 
-            schema.settings.branding.socialMedia.position === "both") && (
-            <SocialMediaIcons
-              platforms={schema.settings.branding.socialMedia.platforms}
-              iconSize={schema.settings.branding.socialMedia.iconSize || "md"}
-              className="justify-center"
-            />
-          )}
+          {schema.settings.branding?.socialMedia?.enabled &&
+            schema.settings.branding.socialMedia.platforms &&
+            (schema.settings.branding.socialMedia.position === "footer" ||
+              schema.settings.branding.socialMedia.position === "both") && (
+              <SocialMediaIcons
+                platforms={schema.settings.branding.socialMedia.platforms}
+                iconSize={schema.settings.branding.socialMedia.iconSize || "md"}
+                className="justify-center"
+              />
+            )}
           <p className="text-sm text-muted-foreground">
             Powered by{" "}
             <span className="font-medium underline text-foreground">

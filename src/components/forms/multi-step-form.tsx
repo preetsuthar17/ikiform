@@ -27,7 +27,11 @@ import {
 import { PasswordProtectionModal } from "@/components/forms/public-form/components/PasswordProtectionModal";
 import toast from "react-hot-toast";
 
-export function MultiStepForm({ formId, schema }: MultiStepFormProps) {
+export function MultiStepForm({
+  formId,
+  schema,
+  dir,
+}: MultiStepFormProps & { dir?: string }) {
   const blocks = processFormBlocks(schema);
   const totalSteps = blocks.length;
 
@@ -120,7 +124,8 @@ export function MultiStepForm({ formId, schema }: MultiStepFormProps) {
 
   return (
     <div
-      className={`min-h-screen bg-background flex items-center justify-center w-full transition-opacity duration-500 ${
+      dir={dir}
+      className={`py-24 bg-background flex items-center justify-center w-full transition-opacity duration-500 ${
         showForm ? "opacity-100" : "opacity-0"
       }`}
     >

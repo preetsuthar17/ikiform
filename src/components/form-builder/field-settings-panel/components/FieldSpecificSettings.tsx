@@ -7,6 +7,9 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Card } from "@/components/ui/card";
 
+// Component imports
+import { EmailValidationSettings } from "./EmailValidationSettings";
+
 // Type imports
 import type { FormField } from "@/lib/database";
 
@@ -23,9 +26,16 @@ export function FieldSpecificSettings({
   const isSliderType = field.type === "slider";
   const isTagsType = field.type === "tags";
   const isSelectType = field.type === "select";
+  const isEmailType = field.type === "email";
 
   // Don't render if field doesn't have specific settings
-  if (!isTextareaType && !isSliderType && !isTagsType && !isSelectType) {
+  if (
+    !isTextareaType &&
+    !isSliderType &&
+    !isTagsType &&
+    !isSelectType &&
+    !isEmailType
+  ) {
     return null;
   }
 
@@ -181,6 +191,14 @@ export function FieldSpecificSettings({
             </div>
           </div>
         </Card>
+      )}
+
+      {/* Email Validation Settings */}
+      {isEmailType && (
+        <EmailValidationSettings
+          field={field}
+          onUpdateSettings={onUpdateSettings}
+        />
       )}
     </>
   );

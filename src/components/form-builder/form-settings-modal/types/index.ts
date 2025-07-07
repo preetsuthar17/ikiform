@@ -57,6 +57,7 @@ export interface LocalSettings {
     password?: string;
     message?: string;
   };
+  rtl?: boolean;
 }
 
 export interface BasicInfoSectionProps {

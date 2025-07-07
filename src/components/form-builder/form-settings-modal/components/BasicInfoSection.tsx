@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 // Types
 import type { BasicInfoSectionProps } from "../types";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export function BasicInfoSection({
   localSettings,
@@ -57,6 +58,20 @@ export function BasicInfoSection({
           placeholder="https://example.com/thank-you"
           onChange={(value) => updateSettings({ redirectUrl: value })}
         />
+        <div className="flex items-center gap-3 pt-2">
+          <input
+            type="checkbox"
+            id="rtl-toggle"
+            checked={!!localSettings.rtl}
+            onChange={(e) =>
+              updateSettings({ rtl: (e.target as HTMLInputElement).checked })
+            }
+            className="accent-primary w-4 h-4"
+          />
+          <Label htmlFor="rtl-toggle" className="cursor-pointer select-none">
+            Display form in RTL (Right-to-Left) mode
+          </Label>
+        </div>
       </div>
     </Card>
   );

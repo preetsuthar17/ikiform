@@ -215,6 +215,14 @@ export interface FormField {
     socialPlatforms?: string[]; // For social field
     showIcons?: boolean; // For social field
     iconSize?: "sm" | "md" | "lg"; // For social field
+    // Email settings
+    emailValidation?: {
+      allowedDomains?: string[]; // List of allowed domains
+      blockedDomains?: string[]; // List of blocked domains (temp email services)
+      autoCompleteDomain?: string; // Domain to auto-append
+      requireBusinessEmail?: boolean; // Only allow business domains
+      customValidationMessage?: string; // Custom validation message
+    };
     // Visual customization
     size?: "sm" | "md" | "lg"; // Field size
     variant?: "default" | "filled" | "ghost" | "underline"; // Field variant
@@ -319,5 +327,7 @@ export interface FormSchema {
       password?: string;
       message?: string;
     };
+    /** Right-to-left support for forms */
+    rtl?: boolean;
   };
 }
