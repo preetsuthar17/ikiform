@@ -16,8 +16,11 @@ import {
   ResponseLimitSection,
   PasswordProtectionSection,
   SocialMediaSection,
+  FormSettingsDesktopLayout,
+  FormSettingsMobileLayout,
 } from "./components";
-import type { FormSettingsModalProps } from "./types";
+import type { FormSettingsModalProps, FormSettingsSection } from "./types";
+import { Separator } from "@/components/ui/separator";
 
 export function FormSettingsModal({
   isOpen,
@@ -36,6 +39,19 @@ export function FormSettingsModal({
     resetSettings,
   } = useFormSettings(schema);
 
+  const [activeSection, setActiveSection] =
+    useState<FormSettingsSection>("basic");
+
+  const sectionProps = {
+    localSettings,
+    updateSettings,
+    updateRateLimit,
+    updateProfanityFilter,
+    updateResponseLimit,
+    updatePasswordProtection,
+    updateSocialMedia,
+  };
+
   const handleSave = () => {
     onSchemaUpdate({ settings: localSettings });
     onClose();
@@ -49,7 +65,7 @@ export function FormSettingsModal({
   return (
     <Modal open={isOpen} onOpenChange={onClose}>
       <ModalContent className="max-w-6xl h-[90vh] flex flex-col">
-        <div className="flex items-center justify-between border-b border-border shrink-0 gap-6 p-6">
+        <div className="flex items-center justify-between  shrink-0 gap-6 md:p-4 p-2  flex-wrap md:mt-4 mt-0">
           <div className="flex items-center gap-3">
             <Settings className="w-5 h-5 text-primary" />
             <h2 className="text-xl font-semibold">Form Settings</h2>
@@ -64,36 +80,19 @@ export function FormSettingsModal({
             </Button>
           </div>
         </div>
-
         <div className="flex-1 min-h-0">
-          <ScrollArea className="h-full">
-            <div className="flex flex-col gap-6 p-6">
-              <BasicInfoSection
-                localSettings={localSettings}
-                updateSettings={updateSettings}
-              />
-              <RateLimitSection
-                localSettings={localSettings}
-                updateRateLimit={updateRateLimit}
-              />
-              <ResponseLimitSection
-                localSettings={localSettings}
-                updateResponseLimit={updateResponseLimit}
-              />
-              <ProfanityFilterSection
-                localSettings={localSettings}
-                updateProfanityFilter={updateProfanityFilter}
-              />
-              <PasswordProtectionSection
-                localSettings={localSettings}
-                updatePasswordProtection={updatePasswordProtection}
-              />
-              <SocialMediaSection
-                localSettings={localSettings}
-                updateSocialMedia={updateSocialMedia}
-              />
-            </div>
-          </ScrollArea>
+          <FormSettingsDesktopLayout
+            activeSection={activeSection}
+            onSectionChange={setActiveSection}
+            onClose={onClose}
+            sectionProps={sectionProps}
+          />
+          <FormSettingsMobileLayout
+            activeSection={activeSection}
+            onSectionChange={setActiveSection}
+            onClose={onClose}
+            sectionProps={sectionProps}
+          />
         </div>
       </ModalContent>
     </Modal>

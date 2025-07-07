@@ -41,7 +41,7 @@ export function SocialMediaSection({
   return (
     <Card className="p-6">
       <h3 className="text-lg font-medium mb-4">Social Media</h3>
-      <div className="space-y-6">
+      <div className="flex flex-col gap-6">
         <div className="flex items-center gap-2">
           <Switch
             size="sm"
@@ -58,9 +58,9 @@ export function SocialMediaSection({
 
         {socialMedia.enabled ? (
           <>
-            <div className="space-y-4">
+            <div className="flex flex-col gap-4 border-l-2 border-muted pl-6">
               <div className="grid gap-4">
-                <div className="space-y-2">
+                <div className="flex flex-col gap-2">
                   <Label htmlFor="linkedin" className="text-sm font-medium">
                     LinkedIn
                   </Label>
@@ -75,7 +75,7 @@ export function SocialMediaSection({
                   />
                 </div>
 
-                <div className="space-y-2">
+                <div className="flex flex-col gap-2">
                   <Label htmlFor="twitter" className="text-sm font-medium">
                     X (Twitter)
                   </Label>
@@ -90,7 +90,7 @@ export function SocialMediaSection({
                   />
                 </div>
 
-                <div className="space-y-2">
+                <div className="flex flex-col gap-2">
                   <Label htmlFor="youtube" className="text-sm font-medium">
                     YouTube
                   </Label>
@@ -105,7 +105,7 @@ export function SocialMediaSection({
                   />
                 </div>
 
-                <div className="space-y-2">
+                <div className="flex flex-col gap-2">
                   <Label htmlFor="instagram" className="text-sm font-medium">
                     Instagram
                   </Label>
@@ -120,7 +120,7 @@ export function SocialMediaSection({
                   />
                 </div>
 
-                <div className="space-y-2">
+                <div className="flex flex-col gap-2">
                   <Label htmlFor="facebook" className="text-sm font-medium">
                     Facebook
                   </Label>
@@ -135,7 +135,7 @@ export function SocialMediaSection({
                   />
                 </div>
 
-                <div className="space-y-2">
+                <div className="flex flex-col gap-2">
                   <Label htmlFor="github" className="text-sm font-medium">
                     GitHub
                   </Label>
@@ -150,7 +150,7 @@ export function SocialMediaSection({
                   />
                 </div>
 
-                <div className="space-y-2">
+                <div className="flex flex-col gap-2">
                   <Label htmlFor="website" className="text-sm font-medium">
                     Website
                   </Label>
@@ -183,7 +183,7 @@ export function SocialMediaSection({
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
+                <div className="flex flex-col gap-2">
                   <Label htmlFor="icon-size" className="text-sm font-medium">
                     Icon Size
                   </Label>
@@ -204,7 +204,7 @@ export function SocialMediaSection({
                   </Select>
                 </div>
 
-                <div className="space-y-2">
+                <div className="flex flex-col gap-2">
                   <Label htmlFor="position" className="text-sm font-medium">
                     Position
                   </Label>

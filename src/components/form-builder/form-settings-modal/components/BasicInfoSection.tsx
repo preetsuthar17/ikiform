@@ -1,5 +1,6 @@
 // External libraries
 import React from "react";
+import { Info } from "lucide-react";
 
 // UI components
 import { Card } from "@/components/ui/card";
@@ -17,8 +18,11 @@ export function BasicInfoSection({
 }: BasicInfoSectionProps) {
   return (
     <Card className="p-6">
-      <h3 className="text-lg font-medium mb-4">Basic Information</h3>
-      <div className="space-y-4">
+      <div className="flex items-center gap-3 mb-4">
+        <Info className="w-5 h-5 text-primary" />
+        <h3 className="text-lg font-medium">Basic Information</h3>
+      </div>
+      <div className="flex flex-col gap-4 border-l-2 border-muted pl-6">
         <BasicInfoField
           id="form-title"
           label="Form Title"

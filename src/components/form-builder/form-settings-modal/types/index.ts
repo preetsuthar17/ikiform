@@ -87,3 +87,11 @@ export interface SocialMediaSectionProps {
     >
   ) => void;
 }
+
+export type FormSettingsSection = "basic" | "limits" | "security" | "branding";
+
+export interface FormSettingsSectionConfig {
+  id: FormSettingsSection;
+  label: string;
+  iconName: string;
+}

@@ -23,11 +23,11 @@ export function MobileLayout({
 }: MobileLayoutProps) {
   return (
     <div className={getMobileLayoutStyles()}>
-      <div className="flex items-center gap-4 border-b border-border p-4 flex-shrink-0">
+      <div className="flex items-center gap-4 md:border-b border-0 border-border md:p-4 p-2 flex-shrink-0">
         <ModalHeader onClose={onClose} />
       </div>
 
-      <div className="flex items-center gap-4 border-b border-border p-4 flex-shrink-0">
+      <div className="flex items-center gap-4 md:border-b border-0 border-border md:p-4 p-2 flex-shrink-0">
         <Tabs
           items={SETTINGS_SECTIONS}
           value={activeSection}
@@ -39,7 +39,7 @@ export function MobileLayout({
 
       <div className="flex-1 overflow-hidden">
         <ScrollArea className="h-full">
-          <div className="flex flex-col gap-4 p-4">
+          <div className="flex flex-col gap-4 md:p-4 p-0">
             {SETTINGS_SECTIONS.map((section) => (
               <TabsContent
                 key={section.id}
