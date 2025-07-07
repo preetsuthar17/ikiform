@@ -177,6 +177,19 @@ export default function GDPR() {
                   </Link>
                 </td>
               </tr>
+              <tr className="border-t">
+                <td className="px-4 py-2">Resend</td>
+                <td className="px-4 py-2">Email Delivery</td>
+                <td className="px-4 py-2">
+                  <Link
+                    href="https://resend.com"
+                    className="text-blue-500 underline"
+                    target="_blank"
+                  >
+                    resend.com
+                  </Link>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
