@@ -28,7 +28,11 @@ export function FormSettingsDesktopLayout({
       <div className="flex-1 flex flex-col gap-4">
         <ScrollArea className="flex-1">
           <div className="flex flex-col gap-4 p-8">
-            <FormSettingsContent section={activeSection} {...sectionProps} />
+            <FormSettingsContent
+              section={activeSection}
+              {...sectionProps}
+              updateNotifications={sectionProps.updateNotifications}
+            />
           </div>
         </ScrollArea>
       </div>

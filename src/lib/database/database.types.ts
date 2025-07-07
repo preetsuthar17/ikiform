@@ -327,6 +327,13 @@ export interface FormSchema {
       password?: string;
       message?: string;
     };
+    /** Notification settings for form submissions */
+    notifications?: {
+      enabled?: boolean;
+      email?: string;
+      subject?: string;
+      message?: string;
+    };
     /** Right-to-left support for forms */
     rtl?: boolean;
   };

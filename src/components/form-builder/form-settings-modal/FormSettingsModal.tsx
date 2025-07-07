@@ -28,6 +28,7 @@ export function FormSettingsModal({
     updateResponseLimit,
     updatePasswordProtection,
     updateSocialMedia,
+    updateNotifications,
     resetSettings,
   } = useFormSettings(schema);
 
@@ -42,6 +43,7 @@ export function FormSettingsModal({
     updateResponseLimit,
     updatePasswordProtection,
     updateSocialMedia,
+    updateNotifications,
   };
 
   const handleSave = () => {

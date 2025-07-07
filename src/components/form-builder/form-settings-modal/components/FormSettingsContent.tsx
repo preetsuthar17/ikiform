@@ -5,6 +5,7 @@ import { ResponseLimitSection } from "./ResponseLimitSection";
 import { ProfanityFilterSection } from "./ProfanityFilterSection";
 import { PasswordProtectionSection } from "./PasswordProtectionSection";
 import { BrandingSection } from "./SocialMediaSection";
+import { NotificationsSection } from "./NotificationsSection";
 import type { FormSettingsSection } from "../types";
 
 interface FormSettingsContentProps {
@@ -16,6 +17,7 @@ interface FormSettingsContentProps {
   updateResponseLimit: any;
   updatePasswordProtection: any;
   updateSocialMedia: any;
+  updateNotifications: any;
 }
 
 export function FormSettingsContent({
@@ -27,6 +29,7 @@ export function FormSettingsContent({
   updateResponseLimit,
   updatePasswordProtection,
   updateSocialMedia,
+  updateNotifications,
 }: FormSettingsContentProps) {
   switch (section) {
     case "basic":
@@ -71,6 +74,15 @@ export function FormSettingsContent({
             localSettings={localSettings}
             updateSocialMedia={updateSocialMedia}
             updateSettings={updateSettings}
+          />
+        </section>
+      );
+    case "notifications":
+      return (
+        <section className="flex flex-col gap-4">
+          <NotificationsSection
+            localSettings={localSettings}
+            updateNotifications={updateNotifications}
           />
         </section>
       );

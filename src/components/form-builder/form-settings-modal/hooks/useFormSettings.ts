@@ -78,7 +78,7 @@ export function useFormSettings(schema: FormSchema) {
   };
 
   const updateRateLimit = (
-    rateLimitUpdates: Partial<NonNullable<LocalSettings["rateLimit"]>>,
+    rateLimitUpdates: Partial<NonNullable<LocalSettings["rateLimit"]>>
   ) => {
     setLocalSettings({
       ...localSettings,
@@ -92,7 +92,7 @@ export function useFormSettings(schema: FormSchema) {
   const updateProfanityFilter = (
     profanityFilterUpdates: Partial<
       NonNullable<LocalSettings["profanityFilter"]>
-    >,
+    >
   ) => {
     setLocalSettings({
       ...localSettings,
@@ -104,7 +104,7 @@ export function useFormSettings(schema: FormSchema) {
   };
 
   const updateResponseLimit = (
-    responseLimitUpdates: Partial<NonNullable<LocalSettings["responseLimit"]>>,
+    responseLimitUpdates: Partial<NonNullable<LocalSettings["responseLimit"]>>
   ) => {
     setLocalSettings({
       ...localSettings,
@@ -118,7 +118,7 @@ export function useFormSettings(schema: FormSchema) {
   const updatePasswordProtection = (
     passwordProtectionUpdates: Partial<
       NonNullable<LocalSettings["passwordProtection"]>
-    >,
+    >
   ) => {
     setLocalSettings({
       ...localSettings,
@@ -132,7 +132,7 @@ export function useFormSettings(schema: FormSchema) {
   const updateSocialMedia = (
     socialMediaUpdates: Partial<
       NonNullable<NonNullable<LocalSettings["branding"]>["socialMedia"]>
-    >,
+    >
   ) => {
     setLocalSettings({
       ...localSettings,
@@ -142,6 +142,18 @@ export function useFormSettings(schema: FormSchema) {
           ...localSettings.branding?.socialMedia,
           ...socialMediaUpdates,
         },
+      },
+    });
+  };
+
+  const updateNotifications = (
+    notificationUpdates: Partial<LocalSettings["notifications"]>
+  ) => {
+    setLocalSettings({
+      ...localSettings,
+      notifications: {
+        ...localSettings.notifications,
+        ...notificationUpdates,
       },
     });
   };
@@ -176,6 +188,7 @@ export function useFormSettings(schema: FormSchema) {
     updateResponseLimit,
     updatePasswordProtection,
     updateSocialMedia,
+    updateNotifications,
     resetSettings,
   };
 }

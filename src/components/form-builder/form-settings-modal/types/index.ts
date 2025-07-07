@@ -9,6 +9,19 @@ export interface FormSettingsModalProps {
   onSchemaUpdate: (updates: Partial<FormSchema>) => void;
 }
 
+export interface NotificationLink {
+  label: string;
+  url: string;
+}
+
+export interface NotificationSettings {
+  enabled?: boolean;
+  email?: string;
+  subject?: string;
+  message?: string;
+  customLinks?: NotificationLink[];
+}
+
 export interface LocalSettings {
   title: string;
   description?: string;
@@ -59,6 +72,7 @@ export interface LocalSettings {
     message?: string;
   };
   rtl?: boolean;
+  notifications?: NotificationSettings;
 }
 
 export interface BasicInfoSectionProps {
@@ -69,14 +83,14 @@ export interface BasicInfoSectionProps {
 export interface RateLimitSectionProps {
   localSettings: LocalSettings;
   updateRateLimit: (
-    updates: Partial<NonNullable<LocalSettings["rateLimit"]>>,
+    updates: Partial<NonNullable<LocalSettings["rateLimit"]>>
   ) => void;
 }
 
 export interface ProfanityFilterSectionProps {
   localSettings: LocalSettings;
   updateProfanityFilter: (
-    updates: Partial<NonNullable<LocalSettings["profanityFilter"]>>,
+    updates: Partial<NonNullable<LocalSettings["profanityFilter"]>>
   ) => void;
 }
 
@@ -85,11 +99,16 @@ export interface SocialMediaSectionProps {
   updateSocialMedia: (
     updates: Partial<
       NonNullable<NonNullable<LocalSettings["branding"]>["socialMedia"]>
-    >,
+    >
   ) => void;
 }
 
-export type FormSettingsSection = "basic" | "limits" | "security" | "branding";
+export type FormSettingsSection =
+  | "basic"
+  | "limits"
+  | "security"
+  | "branding"
+  | "notifications";
 
 export interface FormSettingsSectionConfig {
   id: FormSettingsSection;

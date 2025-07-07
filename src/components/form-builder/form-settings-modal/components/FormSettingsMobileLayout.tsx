@@ -40,7 +40,11 @@ export function FormSettingsMobileLayout({
                 value={section.id}
                 activeValue={activeSection}
               >
-                <FormSettingsContent section={section.id} {...sectionProps} />
+                <FormSettingsContent
+                  section={section.id}
+                  {...sectionProps}
+                  updateNotifications={sectionProps.updateNotifications}
+                />
               </TabsContent>
             ))}
           </div>

@@ -9,10 +9,11 @@ import {
 import { createProfanityFilter } from "@/lib/validation";
 import { createClient } from "@/utils/supabase/server";
 import { requirePremium } from "@/lib/utils/premium-check";
+import { sendFormNotification } from "@/lib/services";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id: formId } = await params;
@@ -30,7 +31,7 @@ export async function POST(
     if (!form) {
       return NextResponse.json(
         { error: "Form not found or not published" },
-        { status: 404 },
+        { status: 404 }
       );
     }
 
@@ -71,7 +72,7 @@ export async function POST(
             remaining: rateLimitResult.remaining,
             reset: rateLimitResult.reset,
           },
-          { status: 429 },
+          { status: 429 }
         );
       }
     }
@@ -89,7 +90,7 @@ export async function POST(
               responseLimit.message ||
               "This form is no longer accepting responses.",
           },
-          { status: 403 },
+          { status: 403 }
         );
       }
     }
@@ -115,7 +116,7 @@ export async function POST(
               "Your submission contains inappropriate content. Please review and resubmit.",
             violations: filterResult.violations.length,
           },
-          { status: 400 },
+          { status: 400 }
         );
       }
 
@@ -129,8 +130,41 @@ export async function POST(
     const submission = await formsDbServer.submitForm(
       formId,
       filteredSubmissionData,
-      ipAddress,
+      ipAddress
     );
+
+    // Send notification if enabled
+    const notifications = form.schema.settings.notifications;
+    if (notifications?.enabled && notifications.email) {
+      try {
+        console.log(
+          "[Notification] Attempting to send notification email",
+          notifications
+        );
+        // Build analytics URL
+        const analyticsUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "https://ikiform.com"}/dashboard/forms/${formId}/analytics`;
+        await sendFormNotification({
+          to: notifications.email,
+          subject:
+            notifications.subject ||
+            `New Submission: ${form.schema.settings.title}`,
+          message:
+            notifications.message ||
+            `You have received a new submission on your form: ${form.schema.settings.title}.`,
+          analyticsUrl,
+          customLinks: notifications.customLinks || [],
+        });
+        console.log("[Notification] Notification email sent successfully");
+      } catch (e) {
+        // Log but do not block submission
+        console.error("[Notification] Notification send error:", e);
+      }
+    } else {
+      console.log(
+        "[Notification] Notification not sent. Settings:",
+        notifications
+      );
+    }
 
     return NextResponse.json({
       success: true,
@@ -141,7 +175,7 @@ export async function POST(
     console.error("Form submission error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
