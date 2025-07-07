@@ -58,7 +58,7 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
             <SocialMediaIcons
               platforms={schema.settings.branding.socialMedia.platforms}
               iconSize={schema.settings.branding.socialMedia.iconSize || "md"}
-              className="justify-center"
+              className="justify-start"
             />
           )}
       </div>

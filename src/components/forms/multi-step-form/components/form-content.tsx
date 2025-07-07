@@ -48,7 +48,7 @@ export const FormContent: React.FC<FormContentProps> = ({
             <SocialMediaIcons
               platforms={schema.settings.branding.socialMedia.platforms}
               iconSize={schema.settings.branding.socialMedia.iconSize || "md"}
-              className="justify-center"
+              className="justify-start"
             />
           )}
       </div>

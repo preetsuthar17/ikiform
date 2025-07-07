@@ -18,11 +18,18 @@ import { SocialMediaIcons } from "@/components/ui/social-media-icons";
 // Types
 import type { SocialMediaSectionProps } from "../types";
 
-export function SocialMediaSection({
+interface BrandingSectionProps extends SocialMediaSectionProps {
+  updateSettings: (updates: any) => void;
+}
+
+export function BrandingSection({
   localSettings,
   updateSocialMedia,
-}: SocialMediaSectionProps) {
+  updateSettings,
+}: BrandingSectionProps) {
   const socialMedia = localSettings.branding?.socialMedia || {};
+  const showIkiformBranding =
+    localSettings.branding?.showIkiformBranding !== false;
 
   const handlePlatformChange = (platform: string, url: string) => {
     const updatedPlatforms = {
@@ -36,13 +43,46 @@ export function SocialMediaSection({
     updateSocialMedia({ [key]: value });
   };
 
+  const handleBrandingToggle = (show: boolean) => {
+    updateSettings({
+      branding: { ...localSettings.branding, showIkiformBranding: show },
+    });
+  };
+
   const platforms = socialMedia.platforms || {};
 
   return (
     <Card className="p-6">
-      <h3 className="text-lg font-medium mb-4">Social Media</h3>
-      <div className="flex flex-col gap-6">
+      <div className="flex items-center gap-3 mb-4">
+        <svg
+          className="w-5 h-5 text-primary"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="2" strokeWidth="2" />
+          <path d="M16 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" />
+          <path d="M7 16a4 4 0 0 1 10 0" />
+        </svg>
+        <h3 className="text-lg font-medium">Branding</h3>
+      </div>
+      <div className="flex flex-col gap-6 border-l-2 border-muted pl-6">
         <div className="flex items-center gap-2">
+          <Switch
+            size="sm"
+            id="ikiform-branding-toggle"
+            checked={showIkiformBranding}
+            onCheckedChange={handleBrandingToggle}
+          />
+          <Label
+            htmlFor="ikiform-branding-toggle"
+            className="text-sm font-medium"
+          >
+            Show "Powered by Ikiform" branding
+          </Label>
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label className="text-base font-medium">Social Media Links</Label>
           <Switch
             size="sm"
             id="social-media-enabled"
@@ -51,122 +91,66 @@ export function SocialMediaSection({
               handleSettingChange("enabled", checked)
             }
           />
-          <Label htmlFor="social-media-enabled" className="text-sm font-medium">
-            Enable Social Media Links
-          </Label>
         </div>
-
         {socialMedia.enabled ? (
           <>
-            <div className="flex flex-col gap-4 border-l-2 border-muted pl-6">
+            <div className="flex flex-col gap-4">
               <div className="grid gap-4">
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="linkedin" className="text-sm font-medium">
-                    LinkedIn
-                  </Label>
-                  <Input
-                    id="linkedin"
-                    type="url"
-                    placeholder="https://linkedin.com/in/username"
-                    value={platforms.linkedin || ""}
-                    onChange={(e) =>
-                      handlePlatformChange("linkedin", e.target.value)
-                    }
-                  />
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="twitter" className="text-sm font-medium">
-                    X (Twitter)
-                  </Label>
-                  <Input
-                    id="twitter"
-                    type="url"
-                    placeholder="https://x.com/username"
-                    value={platforms.twitter || ""}
-                    onChange={(e) =>
-                      handlePlatformChange("twitter", e.target.value)
-                    }
-                  />
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="youtube" className="text-sm font-medium">
-                    YouTube
-                  </Label>
-                  <Input
-                    id="youtube"
-                    type="url"
-                    placeholder="https://youtube.com/@channel"
-                    value={platforms.youtube || ""}
-                    onChange={(e) =>
-                      handlePlatformChange("youtube", e.target.value)
-                    }
-                  />
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="instagram" className="text-sm font-medium">
-                    Instagram
-                  </Label>
-                  <Input
-                    id="instagram"
-                    type="url"
-                    placeholder="https://instagram.com/username"
-                    value={platforms.instagram || ""}
-                    onChange={(e) =>
-                      handlePlatformChange("instagram", e.target.value)
-                    }
-                  />
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="facebook" className="text-sm font-medium">
-                    Facebook
-                  </Label>
-                  <Input
-                    id="facebook"
-                    type="url"
-                    placeholder="https://facebook.com/username"
-                    value={platforms.facebook || ""}
-                    onChange={(e) =>
-                      handlePlatformChange("facebook", e.target.value)
-                    }
-                  />
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="github" className="text-sm font-medium">
-                    GitHub
-                  </Label>
-                  <Input
-                    id="github"
-                    type="url"
-                    placeholder="https://github.com/username"
-                    value={platforms.github || ""}
-                    onChange={(e) =>
-                      handlePlatformChange("github", e.target.value)
-                    }
-                  />
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="website" className="text-sm font-medium">
-                    Website
-                  </Label>
-                  <Input
-                    id="website"
-                    type="url"
-                    placeholder="https://example.com"
-                    value={platforms.website || ""}
-                    onChange={(e) =>
-                      handlePlatformChange("website", e.target.value)
-                    }
-                  />
-                </div>
+                {/* Social media platform fields (LinkedIn, Twitter, etc.) */}
+                {(
+                  [
+                    {
+                      id: "linkedin",
+                      label: "LinkedIn",
+                      placeholder: "https://linkedin.com/in/username",
+                    },
+                    {
+                      id: "twitter",
+                      label: "X (Twitter)",
+                      placeholder: "https://x.com/username",
+                    },
+                    {
+                      id: "youtube",
+                      label: "YouTube",
+                      placeholder: "https://youtube.com/@channel",
+                    },
+                    {
+                      id: "instagram",
+                      label: "Instagram",
+                      placeholder: "https://instagram.com/username",
+                    },
+                    {
+                      id: "facebook",
+                      label: "Facebook",
+                      placeholder: "https://facebook.com/username",
+                    },
+                    {
+                      id: "github",
+                      label: "GitHub",
+                      placeholder: "https://github.com/username",
+                    },
+                    {
+                      id: "website",
+                      label: "Website",
+                      placeholder: "https://example.com",
+                    },
+                  ] as const
+                ).map(({ id, label, placeholder }) => (
+                  <div className="flex flex-col gap-2" key={id}>
+                    <Label htmlFor={id} className="text-sm font-medium">
+                      {label}
+                    </Label>
+                    <Input
+                      id={id}
+                      type="url"
+                      placeholder={placeholder}
+                      value={platforms[id as keyof typeof platforms] || ""}
+                      onChange={(e) => handlePlatformChange(id, e.target.value)}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
-
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <Switch
@@ -181,7 +165,6 @@ export function SocialMediaSection({
                   Show Icons
                 </Label>
               </div>
-
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex flex-col gap-2">
                   <Label htmlFor="icon-size" className="text-sm font-medium">
@@ -203,7 +186,6 @@ export function SocialMediaSection({
                     </SelectContent>
                   </Select>
                 </div>
-
                 <div className="flex flex-col gap-2">
                   <Label htmlFor="position" className="text-sm font-medium">
                     Position
@@ -226,7 +208,6 @@ export function SocialMediaSection({
                 </div>
               </div>
             </div>
-
             {socialMedia.showIcons !== false && (
               <div className="border rounded-lg p-4">
                 <Label className="text-sm font-medium mb-2 block">

@@ -115,7 +115,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* <script
+        <script
           crossOrigin="anonymous"
           src="//unpkg.com/react-scan/dist/auto.global.js"
         />
@@ -146,7 +146,7 @@ export default function RootLayout({
               }
             `,
           }}
-        /> */}
+        />
       </head>
       <body
         className={`${inter.className} ${jetBrainsMono.variable} antialiased`}

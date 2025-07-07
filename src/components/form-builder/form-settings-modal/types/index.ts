@@ -31,6 +31,7 @@ export interface LocalSettings {
       iconSize?: "sm" | "md" | "lg";
       position?: "footer" | "header" | "both";
     };
+    showIkiformBranding?: boolean;
   };
   rateLimit?: {
     enabled?: boolean;

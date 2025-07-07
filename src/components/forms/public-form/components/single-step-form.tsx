@@ -131,12 +131,17 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
                 className="justify-center"
               />
             )}
-          <p className="text-sm text-muted-foreground">
-            Powered by{" "}
-            <span className="font-medium underline text-foreground">
-              <Link href="https://ikiform.com">Ikiform</Link>
-            </span>
-          </p>
+          {Boolean(
+            schema.settings.branding &&
+              (schema.settings.branding as any).showIkiformBranding !== false
+          ) && (
+            <p className="text-sm text-muted-foreground">
+              Powered by{" "}
+              <span className="font-medium underline text-foreground">
+                <Link href="https://ikiform.com">Ikiform</Link>
+              </span>
+            </p>
+          )}
         </div>
       </div>
     </div>

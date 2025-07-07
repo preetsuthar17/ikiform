@@ -4,7 +4,7 @@ import { RateLimitSection } from "./RateLimitSection";
 import { ResponseLimitSection } from "./ResponseLimitSection";
 import { ProfanityFilterSection } from "./ProfanityFilterSection";
 import { PasswordProtectionSection } from "./PasswordProtectionSection";
-import { SocialMediaSection } from "./SocialMediaSection";
+import { BrandingSection } from "./SocialMediaSection";
 import type { FormSettingsSection } from "../types";
 
 interface FormSettingsContentProps {
@@ -67,9 +67,10 @@ export function FormSettingsContent({
     case "branding":
       return (
         <section className="flex flex-col gap-4">
-          <SocialMediaSection
+          <BrandingSection
             localSettings={localSettings}
             updateSocialMedia={updateSocialMedia}
+            updateSettings={updateSettings}
           />
         </section>
       );
