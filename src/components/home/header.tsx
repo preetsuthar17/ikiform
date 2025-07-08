@@ -47,35 +47,32 @@ export default function Header() {
             <Link href="/">Features</Link>
           </Button>
         </nav>
-        <div className="flex gap-2">
-          {!user ? (
-            <Button asChild>
-              <Link
-                href="/login"
-                className="flex items-center gap-2 font-medium"
-              >
-                <LogIn />
-                Login
-              </Link>
-            </Button>
-          ) : (
-            <Button className="font-medium" size="icon" asChild>
-              <Link href="/dashboard">
-                <User />
-              </Link>
-            </Button>
-          )}
+      </div>
+      <div className="hidden sm:flex gap-2">
+        {!user ? (
           <Button asChild>
-            <Link
-              href="https://github.com/preetsuthar17/Ikiform"
-              target="_blank"
-              className="flex items-center gap-2 font-medium"
-            >
-              <FaGithub />
-              GitHub
+            <Link href="/login" className="flex items-center gap-2 font-medium">
+              <LogIn />
+              Login
             </Link>
           </Button>
-        </div>
+        ) : (
+          <Button className="font-medium" size="icon" asChild>
+            <Link href="/dashboard">
+              <User />
+            </Link>
+          </Button>
+        )}
+        <Button asChild>
+          <Link
+            href="https://github.com/preetsuthar17/Ikiform"
+            target="_blank"
+            className="flex items-center gap-2 font-medium"
+          >
+            <FaGithub />
+            GitHub
+          </Link>
+        </Button>
       </div>
       {/* Mobile nav */}
       <div className="sm:hidden flex items-center">

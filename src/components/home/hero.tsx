@@ -15,7 +15,7 @@ export default function Hero() {
 
   return (
     <section className="flex flex-col gap-10 md:gap-16 md:pb-28 pb-16 w-full max-w-[75%] max-sm:max-w-[90%] mx-auto h-dvh my-12">
-      <div className="flex flex-col gap-8 w-full h-full md:p-12 p-4 rounded-card relative  overflow-hidden">
+      <div className="flex flex-col gap-8 w-full h-full md:p-12 p-8 rounded-card relative  overflow-hidden">
         {/* Flipped Background Image */}
         <div
           className="absolute inset-0 rounded-card z-0"
@@ -28,23 +28,23 @@ export default function Hero() {
           }}
         />
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black/2 pointer-events-none rounded-card z-2" />
+        <div className="absolute inset-0 bg-black/15 pointer-events-none rounded-card z-2 backdrop-blur-[3px]" />
 
         {/* Content Container */}
-        <div className="flex flex-col gap-6 items-start text-left z-20 text-white h-full grow">
+        <div className="flex flex-col gap-6 items-center text-center  z-20 text-white h-full grow py-6 ">
           {/* Heading */}
-          <h1 className="text-5xl max-[414px]:text-4xl md:text-6xl tracking-tight leading-tight text-white  max-w-4xl">
-            Stop settling for expensive subscriptions and ugly forms
+          <h1 className="text-5xl max-[414px]:text-4xl md:text-7xl tracking-tight leading-tight text-white font-medium">
+            Forms that are affordable and beautiful
           </h1>
 
           {/* Description */}
-          <p className="md:max-w-lg md:text-lg text-white">
+          <p className="md:text-lg text-white">
             Ikiform is an open-source alternative to Typeform and Google Forms,
             designed to help you create beautiful forms effortlessly.
           </p>
 
           {/* Buttons */}
-          <div className="flex flex-wrap gap-3 items-center w-fit">
+          <div className="flex flex-wrap gap-3 items-center justify-center w-fit">
             {!user ? (
               <Button size="lg" className="font-medium h-[45px]" asChild>
                 <Link href="/login">Create your first form</Link>
