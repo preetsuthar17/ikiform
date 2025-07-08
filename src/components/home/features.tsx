@@ -39,7 +39,9 @@ export default function Features() {
             className={`flex flex-col items-center overflow-hidden  p-0`}
           >
             <div className="flex flex-col items-center justify-center gap-3 px-6 py-8 backdrop-blur-sm w-full">
-              <h3 className="text-4xl font-semibold">{feature.name}</h3>
+              <h3 className="text-3xl md:text-4xl font-semibold">
+                {feature.name}
+              </h3>
               <p className="text-md text-muted-foreground">
                 {feature.description}
               </p>

@@ -21,9 +21,10 @@ export default function Hero() {
           className="absolute inset-0 rounded-card z-0"
           style={{
             backgroundImage: `url(/hero/bg.png)`,
-            backgroundSize: "112%",
-            backgroundPosition: "left",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
             transform: "scaleX(-1)",
+            backgroundRepeat: "no-repeat",
           }}
         />
         {/* Overlay */}

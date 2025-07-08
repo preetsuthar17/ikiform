@@ -6,7 +6,13 @@ import Link from "next/link";
 
 // Internal imports
 import { Button } from "../ui/button";
-import { LogIn, User } from "lucide-react";
+import { LogIn, User, AlignJustify } from "lucide-react";
+import {
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+  DrawerClose,
+} from "../ui/drawer";
 
 // Supabase
 import { useAuth } from "@/hooks/use-auth";
@@ -16,14 +22,10 @@ export default function Header() {
   const { user } = useAuth();
 
   return (
-    <nav
-      className={`flex justify-between items-center flex-wrap gap-8 my-10 p-4 text-sm font-inter max-sm:flex-col max-sm:text-center max-sm:items-center max-sm:justify-center w-full max-w-[95%] mx-auto  `}
-    >
-      <div className="flex-shrink-0">
+    <nav className="flex justify-between items-center flex-wrap gap-8 my-10 p-4 text-sm font-inter w-full max-w-[95%] mx-auto">
+      <div className="flex-shrink-0 flex items-center gap-2">
         <Link href="/">
-          <span
-            className={`text-3xl font-semibold tracking-tight flex items-center gap-2 justify-center`}
-          >
+          <span className="text-3xl font-semibold tracking-tight flex items-center gap-2 justify-center">
             <Image
               src="/favicon.ico"
               alt="Ikiform Logo"
@@ -35,17 +37,16 @@ export default function Header() {
           </span>
         </Link>
       </div>
-      <div>
+      {/* Desktop nav */}
+      <div className="hidden sm:flex items-center gap-8">
         <nav>
-          <Button asChild variant={"ghost"}>
+          <Button asChild variant="ghost">
             <Link href="/">Pricing</Link>
           </Button>
-          <Button asChild variant={"ghost"}>
+          <Button asChild variant="ghost">
             <Link href="/">Features</Link>
           </Button>
         </nav>
-      </div>
-      <div className="flex items-center gap-2">
         <div className="flex gap-2">
           {!user ? (
             <Button asChild>
@@ -75,6 +76,71 @@ export default function Header() {
             </Link>
           </Button>
         </div>
+      </div>
+      {/* Mobile nav */}
+      <div className="sm:hidden flex items-center">
+        <Drawer>
+          <DrawerTrigger asChild>
+            <Button size="icon" variant="ghost">
+              <AlignJustify className="w-6 h-6" />
+            </Button>
+          </DrawerTrigger>
+          <DrawerContent className="p-6 pt-10 flex flex-col gap-6">
+            <div className="flex flex-col gap-4 items-center w-full">
+              <nav className="flex flex-col gap-2 w-full">
+                <Button
+                  asChild
+                  variant="ghost"
+                  className="w-full justify-start"
+                >
+                  <Link href="/">Pricing</Link>
+                </Button>
+                <Button
+                  asChild
+                  variant="ghost"
+                  className="w-full justify-start"
+                >
+                  <Link href="/">Features</Link>
+                </Button>
+              </nav>
+              <div className="flex flex-col gap-2 w-full">
+                {!user ? (
+                  <Button asChild className="w-full justify-center">
+                    <Link
+                      href="/login"
+                      className="flex items-center gap-2 font-medium"
+                    >
+                      <LogIn />
+                      Login
+                    </Link>
+                  </Button>
+                ) : (
+                  <Button className="font-medium w-full justify-center" asChild>
+                    <Link href="/dashboard">
+                      <User />
+                      Dashboard
+                    </Link>
+                  </Button>
+                )}
+                <Button asChild className="w-full justify-center">
+                  <Link
+                    href="https://github.com/preetsuthar17/Ikiform"
+                    target="_blank"
+                    className="flex items-center gap-2 font-medium"
+                  >
+                    <FaGithub />
+                    GitHub
+                  </Link>
+                </Button>
+              </div>
+              <DrawerClose asChild>
+                <Button variant="outline" className="w-full mt-4">
+                  Close
+                </Button>
+              </DrawerClose>
+            </div>
+          </DrawerContent>
+        </Drawer>
       </div>
     </nav>
   );
