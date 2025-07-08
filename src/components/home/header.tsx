@@ -39,7 +39,7 @@ export default function Header() {
       </div>
       {/* Desktop nav */}
       <div className="hidden sm:flex items-center gap-8">
-        <nav>
+        <nav className="flex items-center gap-4">
           <Button asChild variant="ghost">
             <Link href="/">Pricing</Link>
           </Button>
