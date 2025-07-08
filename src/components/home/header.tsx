@@ -16,7 +16,7 @@ export default function Header() {
 
   return (
     <nav
-      className={`flex justify-between items-center flex-wrap gap-8 mt-10 p-4 text-sm font-inter max-sm:flex-col max-sm:text-center max-sm:items-center max-sm:justify-center w-full max-w-[90%] mx-auto  `}
+      className={`flex justify-between items-center flex-wrap gap-8 my-10 p-4 text-sm font-inter max-sm:flex-col max-sm:text-center max-sm:items-center max-sm:justify-center w-full max-w-[95%] mx-auto  `}
     >
       <div className="flex-shrink-0">
         <Link href="/">
@@ -34,8 +34,18 @@ export default function Header() {
           </span>
         </Link>
       </div>
+      <div>
+        <nav>
+          <Button asChild variant={"ghost"}>
+            <Link href="/">Pricing</Link>
+          </Button>
+          <Button asChild variant={"ghost"}>
+            <Link href="/">Features</Link>
+          </Button>
+        </nav>
+      </div>
       <div className="flex items-center gap-2">
-        <nav className="flex gap-2">
+        <div className="flex gap-2">
           {!user ? (
             <Button asChild>
               <Link
@@ -53,7 +63,7 @@ export default function Header() {
               </Link>
             </Button>
           )}
-        </nav>
+        </div>
       </div>
     </nav>
   );

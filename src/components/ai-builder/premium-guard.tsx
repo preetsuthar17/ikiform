@@ -36,7 +36,7 @@ export function PremiumGuard({
           You need a premium subscription to use the AI form builder. Upgrade to
           unlock all features.
         </div>
-        <Link href="/#pricing">
+        <Link href="/pricing">
           <Button size="lg">View Pricing</Button>
         </Link>
       </div>
