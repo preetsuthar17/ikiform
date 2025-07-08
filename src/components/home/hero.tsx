@@ -60,7 +60,7 @@ export default function Hero() {
               variant="ghost"
               asChild
             >
-              <Link href="/pricing">Check out pricing</Link>
+              <Link href="/#pricing">Check out pricing</Link>
             </Button>
           </div>
           <div className="w-full my-12 h-full grow relative">

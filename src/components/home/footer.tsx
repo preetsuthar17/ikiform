@@ -29,7 +29,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-background ">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 px-4">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="py-12 lg:py-16">
           {/* Main Footer Content */}
           <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-16">
@@ -109,7 +109,7 @@ export default function Footer() {
                     </li>
                     <li>
                       <Link
-                        href="/features"
+                        href="#"
                         className="text-sm text-muted-foreground hover:text-primary hover:underline transition-colors"
                       >
                         Features
@@ -207,7 +207,7 @@ export default function Footer() {
                     </li>
                     <li>
                       <Link
-                        href="/changelogs"
+                        href="#"
                         className="text-sm text-muted-foreground hover:text-primary hover:underline transition-colors"
                       >
                         Changelogs
