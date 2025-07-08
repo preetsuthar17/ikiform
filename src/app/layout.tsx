@@ -163,7 +163,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} ${jetBrainsMono.variable} ${geist.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <ConditionalLayout>{children}</ConditionalLayout>
           <Toaster position="top-center" />
         </ThemeProvider>

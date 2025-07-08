@@ -10,6 +10,7 @@ import { LogIn, User } from "lucide-react";
 
 // Supabase
 import { useAuth } from "@/hooks/use-auth";
+import { FaGithub } from "react-icons/fa6";
 
 export default function Header() {
   const { user } = useAuth();
@@ -63,6 +64,16 @@ export default function Header() {
               </Link>
             </Button>
           )}
+          <Button asChild>
+            <Link
+              href="https://github.com/preetsuthar17/Ikiform"
+              target="_blank"
+              className="flex items-center gap-2 font-medium"
+            >
+              <FaGithub />
+              GitHub
+            </Link>
+          </Button>
         </div>
       </div>
     </nav>
