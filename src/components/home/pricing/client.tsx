@@ -1,6 +1,5 @@
 "use client";
 
-// External imports
 import React, { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import {
@@ -17,15 +16,12 @@ import {
   Clock,
   Smartphone,
 } from "lucide-react";
-
-// Internal imports
 import { useAuth } from "@/hooks/use-auth";
 import { usePremiumStatus } from "@/hooks/use-premium-status";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { motion, useScroll, useTransform } from "motion/react";
 
 interface Product {
   id: string;
@@ -71,62 +67,10 @@ const features = [
   },
 ];
 
-const soonFeatures = [
-  {
-    label: "Team collaboration",
-    icon: <Network className="w-4 h-4 text-primary flex-shrink-0" />,
-  },
-  {
-    label: "Custom domains",
-    icon: <Star className="w-4 h-4 text-primary flex-shrink-0" />,
-  },
-  {
-    label: "Flagging responses",
-    icon: <Flag className="w-4 h-4 text-primary flex-shrink-0" />,
-  },
-  {
-    label: "Integrations",
-    icon: <Network className="w-4 h-4 text-primary flex-shrink-0" />,
-  },
-  {
-    label: "Webhooks",
-    icon: <Zap className="w-4 h-4 text-primary flex-shrink-0" />,
-  },
-  {
-    label: "Logic builder",
-    icon: <Sparkles className="w-4 h-4 text-primary flex-shrink-0" />,
-  },
-  {
-    label: "Fetching form field data from API",
-    icon: <Share2 className="w-4 h-4 text-primary flex-shrink-0" />,
-  },
-  {
-    label: "Time input field",
-    icon: <Clock className="w-4 h-4 text-primary flex-shrink-0" />,
-  },
-  {
-    label: "File uploads (in few days)",
-    icon: <FileText className="w-4 h-4 text-primary flex-shrink-0" />,
-  },
-  {
-    label: "Mobile builder",
-    icon: <Smartphone className="w-4 h-4 text-primary flex-shrink-0" />,
-  },
-  {
-    label: "Advance form customization",
-    icon: <Crown className="w-4 h-4 text-primary flex-shrink-0" />,
-  },
-  {
-    label: "and more",
-    icon: <Star className="w-4 h-4 text-primary flex-shrink-0" />,
-  },
-];
-
 const PRODUCT_ID = "2e9b8531-0d45-40df-be1c-65482eefeb85";
 
 export default function PricingClient({ products }: PricingClientProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [purchaseLoading, setPurchaseLoading] = useState(false);
   const { user } = useAuth();
@@ -141,12 +85,6 @@ export default function PricingClient({ products }: PricingClientProps) {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: headerRef,
-    offset: ["start center", "end center"],
-  });
-  const headerY = useTransform(scrollYProgress, [0, 0.5, 5], [0, 0, 300]);
-
   const handlePurchaseClick = () => {
     setPurchaseLoading(true);
     const timeout = setTimeout(() => setPurchaseLoading(false), 5000);
@@ -160,40 +98,32 @@ export default function PricingClient({ products }: PricingClientProps) {
     <section
       ref={sectionRef}
       id="pricing"
-      className="flex flex-col items-center justify-center gap-16 md:py-28 py-12 md:px-8 px-4 text-center w-full"
+      className="flex flex-col items-center justify-center gap-12 md:py-28 py-12 md:px-8 px-4 text-center w-full"
     >
-      <div className="max-w-7xl mx-auto w-full">
-        <div className="grid lg:grid-cols-2 gap-16 items-start text-left">
-          <motion.div
-            ref={headerRef}
-            className={`flex flex-col gap-6 ${
-              isMobile
-                ? "text-center lg:text-left relative"
-                : "sticky top-8 h-fit"
-            }`}
-            style={!isMobile ? { y: headerY } : {}}
-          >
-            <Badge
-              variant="secondary"
-              className="px-4 py-2 w-fit  max-[1024px]:mx-auto"
-            >
-              Pricing
-            </Badge>
-            <h2 className="text-3xl font-medium">
-              Simple, transparent pricing
-            </h2>
-            <p className="text-muted-foreground">
-              Everything you need to build beautiful forms. Start free, upgrade
-              when you need more features.
-            </p>
-          </motion.div>
-          <div className="max-w-lg mx-auto lg:mx-0 w-full flex flex-col gap-6">
-            <Card className="p-8 text-left border bg-transparent shadow-md/3">
-              <div className="flex flex-col gap-8">
-                <Badge variant="secondary" className="w-fit">
+      <div className="max-w-7xl w-full mx-auto flex flex-col gap-18">
+        <div className="flex flex-col items-center gap-4 px-6">
+          <h2 className="text-3xl md:text-4xl font-semibold">Pricing</h2>
+          <p className="text-md text-muted-foreground max-w-xl mx-auto">
+            Simple, transparent pricing. Everything you need to build beautiful
+            forms. Start free, upgrade when you need more features.
+          </p>
+        </div>
+        <div
+          className="w-full max-w-7xl mx-auto flex flex-col items-center grow text-left rounded-card md:p-12 p-4"
+          style={{
+            backgroundImage: `url(/pricing-bg.png)`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            position: "relative",
+          }}
+        >
+          <Card className="w-full p-0 border shadow-md/3 overflow-hidden">
+            <div className="flex flex-col md:flex-row w-full">
+              <div className="flex flex-col gap-8 md:w-1/2 w-full p-8 items-start justify-start ">
+                <Badge variant="secondary" className="w-fit mr-auto">
                   🎉 Get Early Bird Discount
                 </Badge>
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-3 items-center">
                   <div className="flex items-baseline gap-3">
                     <span className="text-2xl font-medium text-muted-foreground line-through">
                       $49
@@ -247,7 +177,8 @@ export default function PricingClient({ products }: PricingClientProps) {
                     </Button>
                   </Link>
                 )}
-                <Separator ChildrenClassName="bg-card">Features</Separator>
+              </div>
+              <div className="flex flex-col gap-8 md:w-1/2 w-full p-8">
                 <div className="flex flex-col gap-3">
                   {features.map((feature, index) => (
                     <div key={index} className="flex items-center gap-3">
@@ -258,22 +189,9 @@ export default function PricingClient({ products }: PricingClientProps) {
                     </div>
                   ))}
                 </div>
-                <Separator ChildrenClassName="bg-card">
-                  Upcoming features
-                </Separator>
-                <div className="flex flex-col gap-3 mt-0">
-                  {soonFeatures.map((feature, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      {feature.icon}
-                      <span className="text-sm text-foreground">
-                        {feature.label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
               </div>
-            </Card>
-          </div>
+            </div>
+          </Card>
         </div>
       </div>
     </section>
