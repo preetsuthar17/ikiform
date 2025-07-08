@@ -7,7 +7,7 @@ interface EmbedFormPageProps {
 }
 
 export default async function EmbedFormPage({ params }: EmbedFormPageProps) {
-  const { id } = await params;
+  const { id } = params;
 
   try {
     const form = await formsDbServer.getPublicForm(id);
