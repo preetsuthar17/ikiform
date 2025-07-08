@@ -125,21 +125,25 @@ export function MultiStepForm({
   return (
     <div
       dir={dir}
-      className={`py-24 bg-background flex items-center justify-center w-full transition-opacity duration-500 ${
+      className={`py-12 bg-background flex items-center justify-center w-full transition-opacity duration-500 ${
         showForm ? "opacity-100" : "opacity-0"
       }`}
     >
-      <div className="max-w-2xl mx-auto flex flex-col gap-8 w-full">
-        <FormProgress
-          progress={progress}
-          totalSteps={totalSteps}
-          showProgress={schema.settings.showProgress !== false}
-        />
-
+      <div
+        className="max-w-2xl mx-auto flex flex-col gap-8 w-full"
+        id="embeddable-form"
+      >
         <Card
-          className="rounded-card flex flex-col gap-6"
-          style={{ padding: "2rem" }}
+          className={`rounded-card flex flex-col gap-6 p-8 ${schema.settings.designMode === "minimal" ? "bg-transparent border-none shadow-none hover:bg-transparent" : ""}`}
+          variant={
+            schema.settings.designMode === "minimal" ? "ghost" : "default"
+          }
         >
+          <FormProgress
+            progress={progress}
+            totalSteps={totalSteps}
+            showProgress={schema.settings.showProgress !== false}
+          />
           <FormContent
             currentBlock={currentBlock}
             formData={formData}
@@ -149,7 +153,6 @@ export function MultiStepForm({
             description={schema.settings.description}
             schema={schema}
           />
-
           <FormNavigation
             currentStep={currentStep}
             totalSteps={totalSteps}

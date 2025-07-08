@@ -6,6 +6,7 @@ import { ProfanityFilterSection } from "./ProfanityFilterSection";
 import { PasswordProtectionSection } from "./PasswordProtectionSection";
 import { BrandingSection } from "./SocialMediaSection";
 import { NotificationsSection } from "./NotificationsSection";
+import { DesignSection } from "./DesignSection";
 import type { FormSettingsSection } from "../types";
 
 interface FormSettingsContentProps {
@@ -83,6 +84,15 @@ export function FormSettingsContent({
           <NotificationsSection
             localSettings={localSettings}
             updateNotifications={updateNotifications}
+          />
+        </section>
+      );
+    case "design":
+      return (
+        <section className="flex flex-col gap-4">
+          <DesignSection
+            localSettings={localSettings}
+            updateSettings={updateSettings}
           />
         </section>
       );

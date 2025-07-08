@@ -336,5 +336,6 @@ export interface FormSchema {
     };
     /** Right-to-left support for forms */
     rtl?: boolean;
+    designMode?: "default" | "minimal";
   };
 }

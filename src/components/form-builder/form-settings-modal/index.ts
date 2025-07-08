@@ -6,6 +6,7 @@ export const FORM_SETTINGS_SECTIONS: FormSettingsSectionConfig[] = [
   { id: "security", label: "Security", iconName: "Shield" },
   { id: "branding", label: "Branding", iconName: "User" },
   { id: "notifications", label: "Notifications", iconName: "Mail" },
+  { id: "design", label: "Design", iconName: "Palette" },
 ];
 
 // Components

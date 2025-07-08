@@ -36,7 +36,8 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
 
   return (
     <Card
-      className="rounded-card flex flex-col gap-6"
+      className={`rounded-card flex flex-col gap-6${schema.settings.designMode === "minimal" ? " bg-transparent border-none shadow-none" : ""}`}
+      variant={schema.settings.designMode === "minimal" ? "ghost" : "default"}
       style={{ padding: "2rem" }}
     >
       <div className="flex flex-col gap-4">
