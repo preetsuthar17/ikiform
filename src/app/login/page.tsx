@@ -20,7 +20,7 @@ export default function Login() {
 
     const handleVideoEnd = () => {
       setCurrentVideoIndex((prevIndex) =>
-        prevIndex === videos.length - 1 ? 0 : prevIndex + 1
+        prevIndex === videos.length - 1 ? 0 : prevIndex + 1,
       );
     };
 
