@@ -17,7 +17,8 @@ export default function ConditionalLayout({
     pathname.startsWith("/form-builder") ||
     pathname.includes("/preview") ||
     pathname.includes("/forms") ||
-    pathname.includes("/ai-builder");
+    pathname.includes("/ai-builder") ||
+    pathname.includes("/login");
 
   if (hideHeaderFooter) {
     return <>{children}</>;

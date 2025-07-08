@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toast";
 import { ThemeProvider } from "next-themes";
@@ -16,6 +16,18 @@ const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
+});
+
+const geist = Geist({
+  variable: "--font-geist",
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -149,7 +161,7 @@ export default function RootLayout({
         /> */}
       </head>
       <body
-        className={`${inter.className} ${jetBrainsMono.variable} antialiased`}
+        className={`${inter.className} ${jetBrainsMono.variable} ${geist.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ConditionalLayout>{children}</ConditionalLayout>

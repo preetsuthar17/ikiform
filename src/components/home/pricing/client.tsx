@@ -160,7 +160,7 @@ export default function PricingClient({ products }: PricingClientProps) {
     <section
       ref={sectionRef}
       id="pricing"
-      className="flex flex-col items-center justify-center gap-16 py-28 px-8 text-center w-full"
+      className="flex flex-col items-center justify-center gap-16 md:py-28 py-12 md:px-8 px-4 text-center w-full"
     >
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid lg:grid-cols-2 gap-16 items-start text-left">
@@ -173,8 +173,10 @@ export default function PricingClient({ products }: PricingClientProps) {
             }`}
             style={!isMobile ? { y: headerY } : {}}
           >
-            <Badge variant="secondary" className="px-4 py-2 w-fit">
-              <Crown className="w-3 h-3" />
+            <Badge
+              variant="secondary"
+              className="px-4 py-2 w-fit  max-[1024px]:mx-auto"
+            >
               Pricing
             </Badge>
             <h2 className="text-3xl font-medium">
@@ -186,7 +188,7 @@ export default function PricingClient({ products }: PricingClientProps) {
             </p>
           </motion.div>
           <div className="max-w-lg mx-auto lg:mx-0 w-full flex flex-col gap-6">
-            <Card className="p-8 text-left border">
+            <Card className="p-8 text-left border bg-transparent shadow-md/3">
               <div className="flex flex-col gap-8">
                 <Badge variant="secondary" className="w-fit">
                   🎉 Get Early Bird Discount

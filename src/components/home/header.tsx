@@ -1,72 +1,58 @@
 "use client";
 
 // External imports
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useTheme } from "next-themes";
-import { FaXTwitter, FaGithub } from "react-icons/fa6";
 
 // Internal imports
 import { Button } from "../ui/button";
-import { Kanban } from "lucide-react";
+import { LogIn, User } from "lucide-react";
+
+// Supabase
+import { useAuth } from "@/hooks/use-auth";
 
 export default function Header() {
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const { user } = useAuth();
 
   return (
-    <nav className="flex justify-between items-center flex-wrap gap-8 py-10 text-sm font-inter max-sm:flex-col max-sm:text-center max-sm:items-center max-sm:justify-center max-w-[95%] mx-auto w-full">
+    <nav
+      className={`flex justify-between items-center flex-wrap gap-8 mt-10 p-4 text-sm font-inter max-sm:flex-col max-sm:text-center max-sm:items-center max-sm:justify-center w-full max-w-[90%] mx-auto  `}
+    >
       <div className="flex-shrink-0">
         <Link href="/">
-          {mounted && theme === "dark" ? (
+          <span
+            className={`text-3xl font-semibold tracking-tight flex items-center gap-2 justify-center`}
+          >
             <Image
-              src="/text-logo.svg"
-              alt="Ikiform"
-              width={100}
-              height={100}
-              className="pointer-events-none invert"
+              src="/favicon.ico"
+              alt="Ikiform Logo"
+              width={40}
+              height={40}
+              className="invert"
             />
-          ) : (
-            <Image
-              src="/text-logo.svg"
-              alt="Ikiform"
-              width={100}
-              height={100}
-              className="pointer-events-none"
-            />
-          )}
+            <span>Ikiform</span>
+          </span>
         </Link>
       </div>
       <div className="flex items-center gap-2">
         <nav className="flex gap-2">
-          <Button asChild variant="secondary" size="icon">
-            <Link
-              href="https://github.com/preetsuthar17/Ikiform"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaGithub />
-            </Link>
-          </Button>
-          <Button asChild variant="secondary" size="icon">
-            <Link href="https://x.com/preetsuthar17">
-              <FaXTwitter />
-            </Link>
-          </Button>
-          <Button asChild variant="secondary">
-            <Link
-              href="/roadmap"
-              className="flex items-center gap-2 font-medium"
-            >
-              <Kanban />
-              Roadmap
-            </Link>
-          </Button>
+          {!user ? (
+            <Button asChild>
+              <Link
+                href="/login"
+                className="flex items-center gap-2 font-medium"
+              >
+                <LogIn />
+                Login
+              </Link>
+            </Button>
+          ) : (
+            <Button className="font-medium h-[45px]" size="icon" asChild>
+              <Link href="/dashboard">
+                <User />
+              </Link>
+            </Button>
+          )}
         </nav>
       </div>
     </nav>

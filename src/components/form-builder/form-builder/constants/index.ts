@@ -16,12 +16,12 @@ export const DRAFT_KEYS = {
 
 export const PANEL_SIZES = {
   LEFT_PANEL: {
-    default: 20,
+    default: 30,
     min: 15,
     max: 30,
   },
   PREVIEW_PANEL: {
-    default: 50,
+    default: 40,
     min: 35,
     max: 70,
   },
