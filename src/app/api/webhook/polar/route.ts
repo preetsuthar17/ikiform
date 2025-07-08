@@ -7,6 +7,12 @@ export const POST = Webhooks({
     console.log("✅ Order paid webhook received successfully");
     console.log("📦 Order paid payload:", JSON.stringify(payload, null, 2));
 
+    // Strictly check payment status
+    if (payload.data.status !== "paid" || payload.data.paid !== true) {
+      console.warn("❌ Payment not completed. Skipping premium update.");
+      return;
+    }
+
     try {
       const supabase = createAdminClient();
 
@@ -55,11 +61,12 @@ export const POST = Webhooks({
           `✅ Successfully updated premium status for user: ${customerEmail} (uid: ${userData.uid})`
         );
         console.log("👤 Updated user data:", data[0]);
-        const { sendWelcomeEmail } = await import(
+        const { sendPremiumThankYouEmail } = await import(
           "@/lib/services/notifications"
         );
-        await sendWelcomeEmail({
+        await sendPremiumThankYouEmail({
           to: customerEmail,
+          name: payload.data.customer?.name || undefined,
         });
       } else {
         console.warn(`⚠️ Failed to update user with uid: ${userData.uid}`);

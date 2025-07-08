@@ -116,3 +116,26 @@ export async function sendNewLoginEmail({
     ],
   });
 }
+
+export async function sendPremiumThankYouEmail({
+  to,
+  name,
+  customLinks,
+}: {
+  to: string;
+  name?: string;
+  customLinks?: NotificationLink[];
+}) {
+  const subject = `Thank you for your purchase! 🎉`;
+  const message = `# Thank you${name ? ", " + name : ""} for purchasing Ikiform Premium!\n\nYou now have access to all premium features.\n\n- Unlimited submissions\n- Advanced analytics\n- Export responses\n- Integrations\n- And more...`;
+  const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "https://ikiform.com"}/dashboard`;
+  return sendFormNotification({
+    to,
+    subject,
+    message,
+    customLinks: [
+      { label: "Go to Dashboard", url: dashboardUrl },
+      ...(customLinks || []),
+    ],
+  });
+}
