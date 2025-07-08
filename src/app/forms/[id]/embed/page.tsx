@@ -2,12 +2,9 @@ import { notFound } from "next/navigation";
 import { PublicForm } from "@/components/forms/public-form";
 import { formsDbServer } from "@/lib/database";
 
-interface EmbedFormPageProps {
-  params: { id: string };
-}
-
-export default async function EmbedFormPage({ params }: EmbedFormPageProps) {
-  const { id } = params;
+type Params = Promise<{ id: string }>;
+export default async function EmbedFormPage({ params }: { params: Params }) {
+  const { id } = await params;
 
   try {
     const form = await formsDbServer.getPublicForm(id);
