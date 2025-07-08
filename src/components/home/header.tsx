@@ -47,7 +47,7 @@ export default function Header() {
               </Link>
             </Button>
           ) : (
-            <Button className="font-medium h-[45px]" size="icon" asChild>
+            <Button className="font-medium" size="icon" asChild>
               <Link href="/dashboard">
                 <User />
               </Link>
