@@ -67,6 +67,17 @@ export function FormFieldsContainer({
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     className="relative group"
+                    onKeyDown={(e) => {
+                      if (
+                        (e.key === "Enter" ||
+                          e.key === "Backspace" ||
+                          e.key === "Delete") &&
+                        (e.target instanceof HTMLInputElement ||
+                          e.target instanceof HTMLTextAreaElement)
+                      ) {
+                        e.stopPropagation();
+                      }
+                    }}
                   >
                     <Card
                       className={`p-4 transition-all duration-200 border bg-card rounded-card ${
@@ -80,7 +91,7 @@ export function FormFieldsContainer({
                       }`}
                       onClick={() =>
                         onFieldSelect(
-                          selectedFieldId === field.id ? null : field.id,
+                          selectedFieldId === field.id ? null : field.id
                         )
                       }
                     >

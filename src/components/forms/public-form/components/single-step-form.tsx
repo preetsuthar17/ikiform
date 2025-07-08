@@ -105,11 +105,11 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
   return (
     <div
       dir={dir}
-      className={`py-24 bg-background flex items-center justify-center w-full transition-opacity duration-500 ${
+      className={`bg-background flex items-center justify-center w-full transition-opacity duration-500 ${
         showForm ? "opacity-100" : "opacity-0"
       }`}
     >
-      <div className="max-w-2xl mx-auto flex flex-col gap-8 w-full">
+      <div className="flex flex-col gap-8 w-full">
         <SingleStepFormContent
           schema={schema}
           fields={fields}
@@ -133,7 +133,7 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
             )}
           {Boolean(
             schema.settings.branding &&
-              (schema.settings.branding as any).showIkiformBranding !== false,
+              (schema.settings.branding as any).showIkiformBranding !== false
           ) && (
             <p className="text-sm text-muted-foreground">
               Powered by{" "}

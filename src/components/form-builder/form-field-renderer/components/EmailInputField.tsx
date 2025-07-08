@@ -85,8 +85,22 @@ export function EmailInputField({
   };
 
   const validation = validateEmailField(inputValue);
-  const showError =
-    error || (isValidating && !validation.isValid && inputValue);
+
+  // Only show one error, and avoid duplicate messages
+  let errorMessage = "";
+  if (error && validation.message && error === validation.message) {
+    errorMessage = error;
+  } else if (error) {
+    errorMessage = error;
+  } else if (
+    isValidating &&
+    !validation.isValid &&
+    inputValue &&
+    validation.message
+  ) {
+    errorMessage = validation.message;
+  }
+  const showError = !!errorMessage;
 
   return (
     <div className="space-y-2">
@@ -149,12 +163,6 @@ export function EmailInputField({
             ))}
           </div>
         )}
-
-      {showError && (
-        <p className="text-sm text-destructive">
-          {error || validation.message}
-        </p>
-      )}
     </div>
   );
 }

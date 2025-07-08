@@ -2,21 +2,6 @@
 import React from "react";
 import Link from "next/link";
 
-// Icon imports
-import {
-  Save,
-  Eye,
-  Share,
-  Settings as SettingsIcon,
-  Globe,
-  EyeOff,
-  BarChart3,
-  Code,
-  Layers,
-  FileText,
-  Sparkles,
-} from "lucide-react";
-
 // Component imports
 import { Button } from "@/components/ui/button";
 import {
@@ -31,6 +16,20 @@ import type { FormBuilderHeaderProps } from "../types";
 
 // Constant imports
 import { FORM_BUILDER_CONSTANTS } from "../constants";
+import {
+  Save,
+  Eye,
+  Share,
+  Settings as SettingsIcon,
+  Globe,
+  EyeOff,
+  BarChart3,
+  Code,
+  Layers,
+  FileText,
+  Sparkles,
+  Container,
+} from "lucide-react";
 
 export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
   formSchema,
@@ -98,13 +97,21 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button variant="default" size="sm" asChild>
-                  <Link href="/ai-builder">
-                    <Sparkles className="w-4 h-4 shrink-0" /> Use Kiko
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  asChild
+                  disabled={!formId}
+                >
+                  <Link
+                    href={formId ? `/embed?formId=${formId}` : "/embed"}
+                    target="_blank"
+                  >
+                    <Container className="w-4 h-4 shrink-0" /> Embed
                   </Link>
                 </Button>
               </TooltipTrigger>
-              <TooltipContent size="sm">AI Form builder</TooltipContent>
+              <TooltipContent size="sm">Embed</TooltipContent>
             </Tooltip>
 
             <Tooltip>
@@ -152,11 +159,22 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               </TooltipTrigger>
               <TooltipContent size="sm">Settings</TooltipContent>
             </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="default" size="sm" asChild>
+                  <Link href="/ai-builder">
+                    <Sparkles className="w-4 h-4 shrink-0" /> Use Kiko
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent size="sm">AI Form builder</TooltipContent>
+            </Tooltip>
           </TooltipProvider>
 
           <Button
             onClick={onPublish}
             variant="secondary"
+            size="sm"
             loading={publishing}
             disabled={!formId || publishing}
           >
@@ -173,7 +191,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             )}
           </Button>
 
-          <Button onClick={onSave} disabled={saving} loading={saving}>
+          <Button size="sm" onClick={onSave} disabled={saving} loading={saving}>
             {!saving && <Save className="w-4 h-4" />}
             {saving ? "Saving" : "Save"}
           </Button>

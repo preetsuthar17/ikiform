@@ -14,10 +14,7 @@ export function PublicForm({ formId, schema }: PublicFormProps) {
   const dir = schema.settings.rtl ? "rtl" : "ltr";
 
   return (
-    <div
-      dir={dir}
-      style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
-    >
+    <div dir={dir} className="flex flex-col gap-4 w-full">
       {isMultiStep ? (
         <MultiStepForm formId={formId} schema={schema} dir={dir} />
       ) : (

@@ -125,16 +125,13 @@ export function MultiStepForm({
   return (
     <div
       dir={dir}
-      className={`py-12 bg-background flex items-center justify-center w-full transition-opacity duration-500 ${
+      className={`bg-background flex items-center justify-center w-full transition-opacity duration-500 ${
         showForm ? "opacity-100" : "opacity-0"
       }`}
     >
-      <div
-        className="max-w-2xl mx-auto flex flex-col gap-8 w-full"
-        id="embeddable-form"
-      >
+      <div className="flex flex-col gap-8 w-full" id="embeddable-form">
         <Card
-          className={`rounded-card flex flex-col gap-6 p-8 ${schema.settings.designMode === "minimal" ? "bg-transparent border-none shadow-none hover:bg-transparent" : ""}`}
+          className={`rounded-card flex flex-col w-full grow gap-6 p-8 ${schema.settings.designMode === "minimal" ? "bg-transparent border-none shadow-none hover:bg-transparent" : ""}`}
           variant={
             schema.settings.designMode === "minimal" ? "ghost" : "default"
           }
