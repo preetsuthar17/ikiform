@@ -25,7 +25,7 @@ export function createFieldComponent(
   field: FormField,
   value: any,
   onChange: (value: any) => void,
-  error?: string
+  error?: string,
 ): React.ReactElement {
   const props: BaseFieldProps = { field, value, onChange, error };
 

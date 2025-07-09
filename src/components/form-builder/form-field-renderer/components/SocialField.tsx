@@ -79,7 +79,7 @@ export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
     field.settings?.socialPlatforms || socialPlatforms.map((p) => p.platform);
 
   const filteredPlatforms = socialPlatforms.filter((p) =>
-    platformsToShow.includes(p.platform)
+    platformsToShow.includes(p.platform),
   );
 
   const customLinks = field.settings?.customLinks || [];

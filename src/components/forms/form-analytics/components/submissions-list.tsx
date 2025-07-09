@@ -60,15 +60,15 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
     form.schema.fields?.length || 0,
     form.schema.blocks?.reduce(
       (total, block) => total + (block.fields?.length || 0),
-      0
-    ) || 0
+      0,
+    ) || 0,
   );
 
   const filteredSubmissions = filterSubmissions(
     submissions,
     searchTerm,
     filterState,
-    totalFields
+    totalFields,
   );
 
   const tableColumns: DataTableColumn<FormSubmission>[] = [
@@ -303,11 +303,11 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                             const allFields = [
                               ...(form.schema.fields || []),
                               ...(form.schema.blocks?.flatMap(
-                                (block) => block.fields || []
+                                (block) => block.fields || [],
                               ) || []),
                             ];
                             const field = allFields.find(
-                              (f) => f.id === fieldId
+                              (f) => f.id === fieldId,
                             );
                             // Signature field as image
                             if (
@@ -355,7 +355,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                       if (key.startsWith("custom_")) {
                                         const idx = parseInt(
                                           key.replace("custom_", ""),
-                                          10
+                                          10,
                                         );
                                         label =
                                           customLinks[idx]?.label ||
@@ -368,7 +368,11 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                       return (
                                         <a
                                           key={key}
-                                          href={typeof url === "string" ? url : undefined}
+                                          href={
+                                            typeof url === "string"
+                                              ? url
+                                              : undefined
+                                          }
                                           target="_blank"
                                           rel="noopener noreferrer"
                                           className="text-primary underline"
@@ -402,7 +406,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                 </div>
                               </div>
                             );
-                          }
+                          },
                         )}
                       </div>
                     </Card>

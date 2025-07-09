@@ -29,7 +29,7 @@ import { OptimizedImage } from "@/components/other/optimized-image";
 
 function getFieldType(
   form: Form | undefined,
-  fieldId: string
+  fieldId: string,
 ): string | undefined {
   if (!form || !form.schema) return undefined;
   const allFields = [
@@ -61,7 +61,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
               typeof value === "object"
                 ? JSON.stringify(value, null, 2)
                 : String(value)
-            }`
+            }`,
         )
         .join("\n\n");
 
@@ -174,7 +174,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                     const allFields = [
                       ...(form.schema.fields || []),
                       ...(form.schema.blocks?.flatMap(
-                        (block) => block.fields || []
+                        (block) => block.fields || [],
                       ) || []),
                     ];
                     const field = allFields.find((f) => f.id === key);
@@ -193,7 +193,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                             if (k.startsWith("custom_")) {
                               const idx = parseInt(
                                 k.replace("custom_", ""),
-                                10
+                                10,
                               );
                               label =
                                 customLinks[idx]?.label ||
@@ -235,7 +235,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                           {urls.map((url, idx) =>
                             url && typeof url === "string" ? (
                               url.match(
-                                /^https?:.*\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i
+                                /^https?:.*\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i,
                               ) ? (
                                 <a
                                   key={idx}
@@ -260,7 +260,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                                   {url}
                                 </a>
                               )
-                            ) : null
+                            ) : null,
                           )}
                         </div>
                       </div>
@@ -282,7 +282,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                       </p>
                     </div>
                   );
-                }
+                },
               )}
             </div>
           </ScrollArea>
