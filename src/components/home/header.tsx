@@ -41,10 +41,13 @@ export default function Header() {
       <div className="hidden sm:flex items-center gap-8">
         <nav className="flex items-center gap-4">
           <Button asChild variant="ghost">
-            <Link href="/#pricing">Pricing</Link>
+            <Link href="/">Home</Link>
           </Button>
           <Button asChild variant="ghost">
             <Link href="/#features">Features</Link>
+          </Button>
+          <Button asChild variant="ghost">
+            <Link href="/#pricing">Pricing</Link>
           </Button>
         </nav>
       </div>
@@ -90,7 +93,7 @@ export default function Header() {
                   variant="ghost"
                   className="w-full justify-start"
                 >
-                  <Link href="/#pricing">Pricing</Link>
+                  <Link href="/">Home</Link>
                 </Button>
                 <Button
                   asChild
@@ -98,6 +101,13 @@ export default function Header() {
                   className="w-full justify-start"
                 >
                   <Link href="/#features">Features</Link>
+                </Button>
+                <Button
+                  asChild
+                  variant="ghost"
+                  className="w-full justify-start"
+                >
+                  <Link href="/#pricing">Pricing</Link>
                 </Button>
               </nav>
               <div className="flex flex-col gap-2 w-full">
