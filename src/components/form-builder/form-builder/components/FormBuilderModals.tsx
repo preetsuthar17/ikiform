@@ -144,6 +144,7 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
         schema={formSchema}
         onSchemaUpdate={onSchemaUpdate}
         userEmail={userEmail}
+        formId={formId}
       />
 
       {/* Share Form Modal */}

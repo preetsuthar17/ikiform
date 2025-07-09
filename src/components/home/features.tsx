@@ -1,3 +1,5 @@
+import { OptimizedImage } from "../other/optimized-image";
+
 const features = [
   {
     name: "AI Form Builder",
@@ -46,20 +48,23 @@ export default function Features() {
             <div
               className={`w-full aspect-video md:p-12 p-4 flex items-center justify-center rounded-card overflow-hidden  bg-gradient-to-b`}
               style={{
-                backgroundImage: `url(${feature.bg})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
                 position: "relative",
               }}
             >
+              <OptimizedImage
+                src={feature.bg}
+                alt={feature.name + " background"}
+                width={1920}
+                height={1080}
+                className="absolute inset-0 w-full h-full object-cover rounded-card z-0"
+              />
               <video
                 src={feature.video}
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-cover rounded-card"
-                style={{ position: "relative", zIndex: 1 }}
+                className="w-full h-full object-cover rounded-card relative z-10"
               />
             </div>
           </div>

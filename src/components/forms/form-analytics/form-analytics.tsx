@@ -53,6 +53,7 @@ import {
   SubmissionDetailsModal,
   FloatingChatButton,
   ChatModal,
+  TrendsChart,
 } from "./components";
 import { ConfirmationModal } from "@/components/dashboard/form-delete-confirmation-modal";
 
@@ -69,7 +70,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const { theme } = useTheme();
 
   const { submissions, loading, refreshing, refreshData } = useFormSubmissions(
-    form.id,
+    form.id
   );
   const analyticsData = useAnalyticsData(form, submissions);
   const {
@@ -166,11 +167,11 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="mx-auto p-6">
           <div className="flex items-center justify-center py-20">
-            <div className="text-center space-y-4">
+            <div className="text-center flex flex-col gap-4">
               <div className="p-4 rounded-card mx-auto">
                 <Loader />
               </div>
-              <div className="space-y-1">
+              <div className="flex flex-col gap-1">
                 <p className="text-foreground font-medium">
                   Loading analytics...
                 </p>
@@ -186,8 +187,8 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background max-w-[95%] mx-auto w-full px-6">
-      <div className="mx-auto p-6 space-y-8">
+    <div className="min-h-screen bg-background max-w-[95%] mx-auto w-full px-4 py-12">
+      <div className="mx-auto flex flex-col gap-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex flex-col gap-4">
             <Button asChild variant="secondary" className="font-medium">
@@ -283,6 +284,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
         </div>
         <OverviewStats data={analyticsData} />
         <AnalyticsCards data={analyticsData} />
+        <TrendsChart trends={analyticsData.submissionTrends} />
         <InfoCards form={form} data={analyticsData} formatDate={formatDate} />
         <SubmissionsList
           form={form}

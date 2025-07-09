@@ -134,12 +134,18 @@ export const ChatInterface = memo(function ChatInterface({
         </h3>
       ),
       ul: ({ children, ...props }: any) => (
-        <ul className="list-disc list-inside mb-2 space-y-1" {...props}>
+        <ul
+          className="list-disc list-inside mb-2 flex flex-col gap-1"
+          {...props}
+        >
           {children}
         </ul>
       ),
       ol: ({ children, ...props }: any) => (
-        <ol className="list-decimal list-inside mb-2 space-y-1" {...props}>
+        <ol
+          className="list-decimal list-inside mb-2 flex flex-col gap-1"
+          {...props}
+        >
           {children}
         </ol>
       ),
@@ -190,14 +196,14 @@ export const ChatInterface = memo(function ChatInterface({
         </em>
       ),
     }),
-    [],
+    []
   );
 
   return (
     <div className="flex flex-col h-[74vh] background relative">
       {/* Messages Area */}
       <ScrollArea className="flex-1 px-6 py-6 overflow-hidden h-[90%]">
-        <div className="max-w-4xl mx-auto space-y-6">
+        <div className="max-w-4xl mx-auto flex flex-col gap-6">
           {/* Welcome State */}
           {isEmpty && (
             <div className="text-center py-12 flex flex-col items-center gap-3">

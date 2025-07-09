@@ -35,7 +35,7 @@ export default function Footer() {
           <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-16">
             {/* Brand Section */}
             <div className="flex-shrink-0">
-              <div className="flex flex-col space-y-6">
+              <div className="flex flex-col flex flex-col gap-6">
                 <Link href="/" className="inline-flex">
                   <span className="text-2xl sm:text-3xl font-semibold tracking-tight flex items-center gap-2">
                     <Image
@@ -89,7 +89,7 @@ export default function Footer() {
             </div>
 
             {/* Links Section */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-12">
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-8 lg:gap-12">
               {/* Navigation Links */}
               <div>
                 <div>
@@ -98,7 +98,7 @@ export default function Footer() {
                   </h3>
                 </div>
                 <div>
-                  <ul className="space-y-3">
+                  <ul className="flex flex-col gap-3">
                     <li>
                       <Link
                         href="/"
@@ -151,7 +151,7 @@ export default function Footer() {
                   </h3>
                 </div>
                 <div>
-                  <ul className="space-y-3">
+                  <ul className="flex flex-col gap-3">
                     <li>
                       <Link
                         href="/legal/privacy"
@@ -196,7 +196,7 @@ export default function Footer() {
                   </h3>
                 </div>
                 <div>
-                  <ul className="space-y-3">
+                  <ul className="flex flex-col gap-3">
                     <li>
                       <Link
                         href="https://insigh.to/b/ikiform"
@@ -220,6 +220,37 @@ export default function Footer() {
                         className="text-sm text-muted-foreground hover:text-primary hover:underline transition-colors"
                       >
                         GitHub Repository
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* More Links */}
+              <div>
+                <div>
+                  <h3 className="text-sm font-medium text-foreground mb-4">
+                    Other
+                  </h3>
+                </div>
+                <div>
+                  <ul className="flex flex-col gap-3">
+                    <li>
+                      <Link
+                        href="https://hextaui.com"
+                        target="_blank"
+                        className="text-sm text-muted-foreground hover:text-primary hover:underline transition-colors"
+                      >
+                        HextaUI
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="https://pro.hextaui.com"
+                        target="_blank"
+                        className="text-sm text-muted-foreground hover:text-primary hover:underline transition-colors"
+                      >
+                        HextaUI Blocks
                       </Link>
                     </li>
                   </ul>

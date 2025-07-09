@@ -17,8 +17,8 @@ export function ProfileInfo({ user, hasPremium }: ProfileInfoProps) {
   const name = extractUserName(user);
 
   return (
-    <CardContent className="flex flex-col space-y-4">
-      <div className="flex flex-col space-y-1 text-center">
+    <CardContent className="flex flex-col flex flex-col gap-4">
+      <div className="flex flex-col flex flex-col gap-1 text-center">
         <div className="text-xl font-semibold flex items-center justify-center gap-2">
           {name}
           {hasPremium && <Crown className="w-5 h-5 text-yellow-500" />}

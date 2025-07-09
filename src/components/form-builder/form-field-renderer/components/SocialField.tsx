@@ -79,14 +79,14 @@ export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
     field.settings?.socialPlatforms || socialPlatforms.map((p) => p.platform);
 
   const filteredPlatforms = socialPlatforms.filter((p) =>
-    platformsToShow.includes(p.platform),
+    platformsToShow.includes(p.platform)
   );
 
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col gap-4">
       <div className="grid gap-4">
         {filteredPlatforms.map((platform) => (
-          <div key={platform.platform} className="space-y-2">
+          <div key={platform.platform} className="flex flex-col gap-2">
             <Label
               htmlFor={`${field.id}-${platform.platform}`}
               className="text-sm font-medium"
@@ -109,7 +109,7 @@ export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
 
       {field.settings?.showIcons && (
         <Card className="p-4">
-          <Label className="text-sm font-medium mb-2 block">Preview</Label>
+          <Label className="text-sm font-medium block">Preview</Label>
           <SocialMediaIcons
             platforms={socialData}
             iconSize={field.settings?.iconSize || "md"}

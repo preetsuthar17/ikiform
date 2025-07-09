@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toast";
 import { ThemeProvider } from "next-themes";
 import ConditionalLayout from "./conditional-layout";
+import CrispController from "@/components/other/CrispController";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -159,7 +160,12 @@ export default function RootLayout({
             `,
           }}
         /> */}
+        <script
+          defer
+          src="https://assets.onedollarstats.com/stonks.js"
+        ></script>
       </head>
+      <CrispController />
       <body
         className={`${inter.className} ${jetBrainsMono.variable} ${geist.variable} ${geistMono.variable} antialiased`}
       >

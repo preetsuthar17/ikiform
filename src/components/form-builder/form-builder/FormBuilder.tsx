@@ -11,6 +11,10 @@ import { FormBuilderHeader } from "./components/FormBuilderHeader";
 import { FormBuilderPanels } from "./components/FormBuilderPanels";
 import { FormBuilderModals } from "./components/FormBuilderModals";
 import { UnsavedChangesIndicator } from "./components/UnsavedChangesIndicator";
+import { Drawer, DrawerContent } from "@/components/ui/drawer";
+import { useState, useCallback } from "react";
+import { FieldPalette } from "../field-palette";
+import { FieldSettingsPanel } from "../field-settings-panel";
 
 // Hook imports
 import { toast } from "@/hooks/use-toast";
@@ -33,6 +37,18 @@ import type { FormBuilderProps } from "./types";
 
 // Constant imports
 import { DRAFT_KEYS } from "./constants";
+import { FormPreview } from "../form-preview";
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = React.useState(false);
+  React.useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return isMobile;
+}
 
 export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
   const router = useRouter();
@@ -44,6 +60,19 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     authLoading,
     debouncedAutoSave,
   } = useFormBuilder(formId);
+
+  const isMobile = useIsMobile();
+  const [showFieldPalette, setShowFieldPalette] = useState(false);
+  const [showFieldSettings, setShowFieldSettings] = useState(false);
+
+  const handleFieldSelect = useCallback(
+    (fieldId: string | null) => {
+      actions.setSelectedFieldId(fieldId);
+      if (isMobile && fieldId) setShowFieldSettings(true);
+      if (isMobile && !fieldId) setShowFieldSettings(false);
+    },
+    [actions, isMobile]
+  );
 
   // Form actions
   const addField = (fieldType: FormField["type"]) => {
@@ -73,6 +102,14 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     actions.setFormSchema(updatedSchema);
     actions.setSelectedFieldId(newField.id);
   };
+
+  const handleAddField = useCallback(
+    (fieldType: FormField["type"]) => {
+      addField(fieldType);
+      setShowFieldPalette(false);
+    },
+    [addField]
+  );
 
   const updateField = (updatedField: FormField) => {
     const updatedSchema = updateFieldInSchema(state.formSchema, updatedField);
@@ -367,6 +404,103 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           </p>
           <Button onClick={() => router.push("/")}>Go to Login</Button>
         </div>
+      </div>
+    );
+  }
+
+  if (isMobile) {
+    return (
+      <div className="h-screen flex flex-col overflow-hidden bg-background">
+        <div className="sticky top-0 z-30 shadow-sm bg-card">
+          <FormBuilderHeader
+            formSchema={state.formSchema}
+            autoSaving={state.autoSaving}
+            saving={state.saving}
+            publishing={state.publishing}
+            isPublished={state.isPublished}
+            formId={formId}
+            onModeToggle={handleModeToggle}
+            onJsonView={() => actions.setShowJsonView(true)}
+            onAnalytics={viewAnalytics}
+            onShare={shareForm}
+            onSettings={() => actions.setShowFormSettings(true)}
+            onPublish={togglePublish}
+            onSave={saveForm}
+          />
+        </div>
+        <div className="flex-1 overflow-auto relative">
+          <div className="w-full h-full">
+            <FormPreview
+              schema={state.formSchema}
+              selectedFieldId={state.selectedFieldId}
+              selectedBlockId={state.selectedBlockId}
+              onFieldSelect={handleFieldSelect}
+              onFieldsReorder={reorderFields}
+              onFieldDelete={deleteField}
+              onFormSettingsUpdate={updateFormSettings}
+              onBlockUpdate={updateBlock}
+              onStepSelect={handleStepSelection}
+              onAddField={addField}
+            />
+          </div>
+          <Drawer open={showFieldPalette} onOpenChange={setShowFieldPalette}>
+            <DrawerContent className=" mx-auto w-full rounded-t-2xl p-4">
+              <div className="w-full h-[70vh]">
+                <FieldPalette onAddField={handleAddField} />
+              </div>
+            </DrawerContent>
+          </Drawer>
+          <Drawer
+            open={showFieldSettings}
+            onOpenChange={(open) => {
+              setShowFieldSettings(open);
+              if (!open) actions.setSelectedFieldId(null);
+            }}
+          >
+            <DrawerContent className="mx-auto w-full rounded-t-2xl p-0">
+              <div className="max-h-[80vh]">
+                <FieldSettingsPanel
+                  field={selectedField}
+                  onFieldUpdate={updateField}
+                  onClose={() => {
+                    setShowFieldSettings(false);
+                    actions.setSelectedFieldId(null);
+                  }}
+                />
+              </div>
+            </DrawerContent>
+          </Drawer>
+        </div>
+        <UnsavedChangesIndicator
+          hasUnsavedChanges={state.hasUnsavedChanges}
+          autoSaving={state.autoSaving}
+        />
+        <FormBuilderModals
+          showSettings={state.showSettings}
+          showFormSettings={state.showFormSettings}
+          showJsonView={state.showJsonView}
+          showCreationWizard={state.showCreationWizard}
+          showShareModal={state.showShareModal}
+          formSchema={state.formSchema}
+          formId={formId}
+          isPublished={state.isPublished}
+          onCloseSettings={() => actions.setShowSettings(false)}
+          onCloseFormSettings={() => actions.setShowFormSettings(false)}
+          onCloseJsonView={() => actions.setShowJsonView(false)}
+          onCloseCreationWizard={() => actions.setShowCreationWizard(false)}
+          onCloseShareModal={() => actions.setShowShareModal(false)}
+          onFormTypeSelect={handleFormTypeSelect}
+          onFormSettingsUpdate={updateFormSettings}
+          onSchemaUpdate={(updates) => {
+            actions.setFormSchema((prev) => ({
+              ...prev,
+              settings: { ...prev.settings, ...updates.settings },
+            }));
+            actions.setHasUnsavedChanges(true);
+          }}
+          onPublish={handlePublishForm}
+          userEmail={user?.email}
+        />
       </div>
     );
   }

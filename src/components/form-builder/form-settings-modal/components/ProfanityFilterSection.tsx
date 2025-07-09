@@ -27,7 +27,7 @@ export function ProfanityFilterSection({
         <AlertTriangle className="w-5 h-5 text-primary" />
         <h3 className="text-lg font-medium">Profanity Filter</h3>
       </div>
-      <div className="space-y-4">
+      <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
           <Switch
             size="sm"

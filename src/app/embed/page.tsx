@@ -24,7 +24,7 @@ export default function EmbedCustomizerPage() {
   const [formId, setFormId] = useState(DEFAULT_FORM_ID);
   const [showEmbedModal, setShowEmbedModal] = useState(false);
 
-  const embedCode = `<div\n  data-ikiform-id=\"${formId}\"\n  data-width=\"${width}px\"\n  data-height=\"${fit === "fit" ? "auto" : height + "px"}\"\n  data-padding=\"${padding}\"\n  data-fit=\"${fit}\"\n  data-theme=\"${theme}\"\n  style=\"max-width:100%\"\n></div>\n<script\n defer\n src=\"https://ikiform-git-app-preetsuthars-projects.vercel.app/js/script.js\"></script>`;
+  const embedCode = `<div\n  data-ikiform-id=\"${formId}\"\n  data-width=\"${width}px\"\n  data-height=\"${fit === "fit" ? "auto" : height + "px"}\"\n  data-padding=\"${padding}\"\n  data-fit=\"${fit}\"\n  data-theme=\"${theme}\"\n  style=\"max-width:100%\"\n></div>\n<script\n defer\n src=\"https://ikiform.com/js/script.js\"></script>`;
 
   return (
     <main className="min-h-screen py-8 px-2 md:px-8">

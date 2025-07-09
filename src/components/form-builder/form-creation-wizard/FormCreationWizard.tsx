@@ -116,7 +116,7 @@ export const FormCreationWizard: React.FC<FormCreationWizardProps> = ({
     switch (currentStep) {
       case "type":
         return (
-          <div className="space-y-6">
+          <div className="flex flex-col gap-6">
             <div className="grid sm:grid-cols-2 gap-6">
               {FORM_TYPES.map((type) => (
                 <FormTypeCard

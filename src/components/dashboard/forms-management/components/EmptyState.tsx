@@ -31,11 +31,11 @@ export function EmptyState({
 }: EmptyStateExtendedProps) {
   return (
     <Card className="p-16 text-center rounded-card">
-      <div className="max-w-md mx-auto space-y-6">
+      <div className="max-w-md mx-auto flex flex-col gap-6">
         <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto">
           <Plus className="w-10 h-10 text-accent-foreground" />
         </div>
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <h3 className="text-xl font-semibold text-foreground">
             No forms yet
           </h3>

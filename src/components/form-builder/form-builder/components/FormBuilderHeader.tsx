@@ -4,6 +4,7 @@ import Link from "next/link";
 
 // Component imports
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Tooltip,
   TooltipContent,
@@ -50,24 +51,28 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
 
   return (
     <div
-      className="bg-card border-b border-border px-6 py-4 flex-shrink-0 z-20"
-      style={{ height: FORM_BUILDER_CONSTANTS.HEADER_HEIGHT }}
+      className="bg-card border-b border-border px-4 md:px-6 py-3 md:py-4 flex-shrink-0 z-20"
+      style={{ minHeight: FORM_BUILDER_CONSTANTS.HEADER_HEIGHT }}
     >
-      <div className="flex items-center justify-between h-full">
-        <div className="flex items-center gap-4">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-0 h-full">
+        <div className="flex items-center gap-3 md:gap-4">
           <h1
             className="text-xl font-semibold text-foreground opacity-0 absolute"
             aria-hidden="true"
           >
             Form Builder
           </h1>
-          <div className="flex items-center gap-3">
-            <Button asChild variant="secondary" className="font-medium">
+          <div className="flex items-center gap-2 md:gap-3">
+            <Button
+              asChild
+              variant="secondary"
+              className="font-medium text-xs md:text-sm"
+            >
               <Link href="/dashboard" className="flex items-center z-1">
                 Go to Dashboard
               </Link>
             </Button>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-xs md:text-sm text-muted-foreground">
               {fieldCount} field{fieldCount !== 1 ? "s" : ""}
             </div>
             {autoSaving && (
@@ -79,7 +84,116 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <ScrollArea className="md:hidden w-full" orientation="horizontal">
+          <div className="flex gap-2 pb-4">
+            <Button
+              variant={formSchema.settings.multiStep ? "default" : "secondary"}
+              size="sm"
+              onClick={onModeToggle}
+              className="gap-1 text-xs"
+            >
+              {formSchema.settings.multiStep ? (
+                <Layers className="w-3 h-3" />
+              ) : (
+                <FileText className="w-3 h-3" />
+              )}
+              {formSchema.settings.multiStep ? "Multi-Step" : "Single Page"}
+            </Button>
+
+            <Button
+              variant="secondary"
+              size="sm"
+              asChild
+              disabled={!formId}
+              className="text-xs"
+            >
+              <Link
+                href={formId ? `/embed?formId=${formId}` : "/embed"}
+                target="_blank"
+              >
+                <Container className="w-3 h-3 shrink-0" /> Embed
+              </Link>
+            </Button>
+
+            <Button
+              variant="secondary"
+              size="icon"
+              onClick={onJsonView}
+              className="w-8 h-8"
+            >
+              <Code className="w-3 h-3 shrink-0" />
+            </Button>
+
+            <Button
+              variant="secondary"
+              size="icon"
+              onClick={onAnalytics}
+              disabled={!formId}
+              className="w-8 h-8"
+            >
+              <BarChart3 className="w-3 h-3 shrink-0" />
+            </Button>
+
+            <Button
+              variant="secondary"
+              size="icon"
+              onClick={onShare}
+              disabled={!formId}
+              className="w-8 h-8"
+            >
+              <Share className="w-3 h-3 shrink-0" />
+            </Button>
+
+            <Button
+              variant="secondary"
+              size="icon"
+              onClick={onSettings}
+              className="w-8 h-8"
+            >
+              <SettingsIcon className="w-3 h-3 shrink-0" />
+            </Button>
+
+            <Button variant="default" size="sm" asChild className="text-xs">
+              <Link href="/ai-builder">
+                <Sparkles className="w-3 h-3 shrink-0" /> Use Kiko
+              </Link>
+            </Button>
+
+            <Button
+              onClick={onPublish}
+              variant="secondary"
+              size="sm"
+              loading={publishing}
+              disabled={!formId || publishing}
+              className="text-xs"
+            >
+              {isPublished ? (
+                <>
+                  {!publishing && <Globe className="w-3 h-3 shrink-0" />}
+                  {publishing ? "Unpublishing" : "Published"}
+                </>
+              ) : (
+                <>
+                  {!publishing && <EyeOff className="w-3 h-3 shrink-0" />}
+                  {publishing ? "Publishing" : "Publish"}
+                </>
+              )}
+            </Button>
+
+            <Button
+              size="sm"
+              onClick={onSave}
+              disabled={saving}
+              loading={saving}
+              className="text-xs"
+            >
+              {!saving && <Save className="w-3 h-3" />}
+              {saving ? "Saving" : "Save"}
+            </Button>
+          </div>
+        </ScrollArea>
+
+        <div className="hidden md:flex items-center gap-3">
           <Button
             variant={formSchema.settings.multiStep ? "default" : "secondary"}
             size="sm"

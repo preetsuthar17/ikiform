@@ -13,7 +13,7 @@ interface SettingsPanelHeaderProps {
 
 export function SettingsPanelHeader({ onClose }: SettingsPanelHeaderProps) {
   return (
-    <div className="p-4">
+    <div className="p-4 lg:flex hidden">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold text-foreground">
           Field Settings

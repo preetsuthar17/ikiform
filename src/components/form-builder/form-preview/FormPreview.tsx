@@ -15,6 +15,7 @@ import {
 
 // Utilities
 import { handleFormSubmit } from "./utils";
+import { getFormLayoutClasses } from "@/lib/utils/form-layout";
 
 // Types
 import type { FormPreviewProps } from "./types";
@@ -29,6 +30,7 @@ export function FormPreview({
   onFormSettingsUpdate,
   onBlockUpdate,
   onStepSelect,
+  onAddField,
 }: FormPreviewProps) {
   const {
     formData,
@@ -41,6 +43,9 @@ export function FormPreview({
     goToStep,
   } = useFormPreviewState(schema, selectedBlockId);
 
+  const { maxWidthClass, paddingClass, marginClass } =
+    getFormLayoutClasses(schema);
+
   const handleNextStep = () => {
     const newIndex = nextStep();
     onStepSelect?.(newIndex);
@@ -51,8 +56,10 @@ export function FormPreview({
   };
 
   return (
-    <div className="min-h-full bg-background">
-      <div className="max-w-2xl mx-auto flex flex-col gap-6 md:p-6 p-2">
+    <div className={`min-h-full bg-background ${marginClass}`}>
+      <div
+        className={`${maxWidthClass} mx-auto flex flex-col gap-6 ${paddingClass}`}
+      >
         <FormHeader
           schema={schema}
           onFormSettingsUpdate={onFormSettingsUpdate}
@@ -88,6 +95,7 @@ export function FormPreview({
             onFieldDelete={onFieldDelete}
             onFieldValueChange={handleFieldValueChange}
             isMultiStep={isMultiStep}
+            onAddField={onAddField}
           />
 
           <FormActions

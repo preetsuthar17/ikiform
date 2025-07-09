@@ -271,6 +271,7 @@ export interface FormSchema {
     layout?: {
       maxWidth?: "sm" | "md" | "lg" | "xl" | "full";
       padding?: "none" | "sm" | "md" | "lg";
+      margin?: "none" | "sm" | "md" | "lg";
       spacing?: "compact" | "normal" | "relaxed";
       alignment?: "left" | "center" | "right";
     };

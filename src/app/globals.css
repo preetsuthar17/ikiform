@@ -277,3 +277,11 @@ h2,
 h3 {
   @apply font-geist;
 }
+
+.legal {
+  @apply text-sm leading-loose;
+}
+
+.legal p {
+  @apply opacity-90;
+}

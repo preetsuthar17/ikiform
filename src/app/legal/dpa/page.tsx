@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function DPA() {
   return (
-    <article className="max-w-4xl mx-auto px-4 py-10 flex flex-col gap-12">
+    <article className="max-w-4xl mx-auto px-4 py-10 flex flex-col gap-12 legal">
       <section className="flex flex-col gap-4">
         <h1 className="text-4xl font-bold">Data Processing Agreement (DPA)</h1>
         <div className="text-sm text-muted-foreground">

@@ -2,21 +2,22 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
-// Types
-import type { PublicFormProps } from "../types";
+// UI Components
+import { Progress } from "@/components/ui/progress";
+import { SingleStepFormContent } from "./single-step-form-content";
+import { SocialMediaIcons } from "@/components/ui/social-media-icons";
+import { SingleStepSuccessScreen } from "./single-step-success-screen";
+import { PasswordProtectionModal } from "./PasswordProtectionModal";
 
 // Hooks
 import { useSingleStepForm } from "../hooks/use-single-step-form";
 
 // Utilities
 import { getAllFields } from "../utils/form-utils";
+import { getFormLayoutClasses } from "@/lib/utils/form-layout";
 
-// Components
-import { SingleStepSuccessScreen } from "./single-step-success-screen";
-import { SingleStepFormContent } from "./single-step-form-content";
-import { PasswordProtectionModal } from "./PasswordProtectionModal";
-import { Progress } from "@/components/ui/progress";
-import { SocialMediaIcons } from "@/components/ui/social-media-icons";
+// Types
+import type { PublicFormProps } from "../types";
 
 import toast from "react-hot-toast";
 
@@ -26,7 +27,6 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
   dir,
 }) => {
   const fields = getAllFields(schema);
-  const formState = useSingleStepForm(formId, schema, fields);
   const {
     formData,
     errors,
@@ -34,13 +34,15 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
     submitted,
     handleFieldValueChange,
     handleSubmit,
-  } = formState;
+  } = useSingleStepForm(formId, schema, fields);
 
   const [isPasswordProtected, setIsPasswordProtected] = useState(false);
   const [passwordVerified, setPasswordVerified] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
+
+  const { containerClass, marginClass } = getFormLayoutClasses(schema);
 
   useEffect(() => {
     const passwordProtection = schema.settings.passwordProtection;
@@ -61,7 +63,6 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
   };
 
   const handlePasswordCancel = () => {
-    // Redirect to home page or show a message
     window.location.href = "/";
   };
 
@@ -94,10 +95,8 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center w-full">
-        <div className="max-w-sm mx-auto flex flex-col gap-6 w-full px-4">
-          <Progress value={100} size="sm" className="max-w-sm" />
-        </div>
+      <div className="fixed inset-0 bg-background flex items-center justify-center">
+        <Progress value={100} size="sm" className="w-[200px]" />
       </div>
     );
   }
@@ -105,11 +104,9 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
   return (
     <div
       dir={dir}
-      className={`bg-background flex items-center justify-center w-full transition-opacity duration-500 ${
-        showForm ? "opacity-100" : "opacity-0"
-      }`}
+      className={`bg-background flex items-center justify-center w-full transition-opacity duration-500 ${showForm ? "opacity-100" : "opacity-0"} ${marginClass}`}
     >
-      <div className="flex flex-col gap-8 w-full">
+      <div className={`flex flex-col gap-8 w-full ${containerClass}`}>
         <SingleStepFormContent
           schema={schema}
           fields={fields}
@@ -120,7 +117,7 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
           onSubmit={handleSubmit}
         />
 
-        <div className="text-center space-y-4">
+        <div className="text-center flex flex-col gap-4">
           {schema.settings.branding?.socialMedia?.enabled &&
             schema.settings.branding.socialMedia.platforms &&
             (schema.settings.branding.socialMedia.position === "footer" ||

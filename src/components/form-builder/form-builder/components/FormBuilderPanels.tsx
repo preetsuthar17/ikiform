@@ -81,6 +81,7 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
             onFormSettingsUpdate={onFormSettingsUpdate}
             onBlockUpdate={onBlockUpdate}
             onStepSelect={onStepSelect}
+            onAddField={onFieldAdd}
           />
         </ScrollArea>
       </ResizablePanel>

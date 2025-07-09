@@ -55,6 +55,17 @@ export function PreviewPanelHeader({
             </Button>
           ))}
         </div>
+        {activeForm?.schema && (
+          <div className="max-sm:flex hidden px-3 pb-3">
+            <Button
+              className="w-full rounded-lg text-base font-semibold py-3"
+              size="lg"
+              onClick={onUseForm}
+            >
+              Use this form
+            </Button>
+          </div>
+        )}
       </>
     );
   }

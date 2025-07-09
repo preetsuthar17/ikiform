@@ -60,7 +60,7 @@ const fileUploadVariants = cva(
       size: "default",
       state: "idle",
     },
-  },
+  }
 );
 
 const fileItemVariants = cva(
@@ -75,7 +75,7 @@ const fileItemVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  },
+  }
 );
 
 export interface FileUploadProps
@@ -111,7 +111,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
       children,
       ...props
     },
-    ref,
+    ref
   ) => {
     const [files, setFiles] = React.useState<FileWithPreview[]>([]);
     const [isDragging, setIsDragging] = React.useState(false);
@@ -178,16 +178,16 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
             prev.map((f) =>
               newFiles.find((nf) => nf.id === f.id)
                 ? { ...f, status: "completed" as const, progress: 100 }
-                : f,
-            ),
+                : f
+            )
           );
         } catch (error) {
           setFiles((prev) =>
             prev.map((f) =>
               newFiles.find((nf) => nf.id === f.id)
                 ? { ...f, status: "error" as const }
-                : f,
-            ),
+                : f
+            )
           );
         }
       } else {
@@ -206,15 +206,15 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
         progress += Math.random() * 15;
         setFiles((prev) =>
           prev.map((f) =>
-            f.id === id ? { ...f, progress: Math.min(progress, 100) } : f,
-          ),
+            f.id === id ? { ...f, progress: Math.min(progress, 100) } : f
+          )
         );
         if (progress >= 100) {
           clearInterval(interval);
           setFiles((prev) =>
             prev.map((f) =>
-              f.id === id ? { ...f, status: "completed" as const } : f,
-            ),
+              f.id === id ? { ...f, status: "completed" as const } : f
+            )
           );
         }
       }, 200);
@@ -253,7 +253,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
     };
 
     return (
-      <div ref={ref} className="w-full space-y-4" {...props}>
+      <div ref={ref} className="w-full flex flex-col gap-4" {...props}>
         {/* Drop Zone */}
         <div
           onDragOver={onDragOver}
@@ -267,7 +267,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
               state: disabled ? "disabled" : isDragging ? "dragging" : "idle",
             }),
             "cursor-pointer",
-            className,
+            className
           )}
           role="button"
           tabIndex={disabled ? -1 : 0}
@@ -279,7 +279,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
             }
           }}
         >
-          <div className="flex flex-col items-center justify-center text-center space-y-3">
+          <div className="flex flex-col items-center justify-center text-center flex flex-col gap-3">
             <motion.div
               animate={{
                 y: isDragging ? [-2, 0, -2] : 0,
@@ -296,12 +296,12 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                   "w-12 h-12 transition-colors",
                   isDragging
                     ? "text-primary"
-                    : "text-muted-foreground group-hover:text-foreground",
+                    : "text-muted-foreground group-hover:text-foreground"
                 )}
               />
             </motion.div>
 
-            <div className="space-y-1">
+            <div className="flex flex-col gap-1">
               <h3 className="text-lg font-medium text-foreground">
                 {isDragging
                   ? "Drop files here"
@@ -343,7 +343,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
 
         {/* Files List */}
         {files.length > 0 && (
-          <div className="space-y-3">
+          <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
               <h4 className="text-sm font-medium text-foreground">
                 Files ({files.length})
@@ -358,15 +358,15 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
               )}{" "}
             </div>
 
-            <div className="space-y-2">
+            <div className="flex flex-col gap-2">
               <AnimatePresence>
                 <ScrollArea
                   className={cn(
                     "w-full rounded-md",
-                    files.length > 3 ? "h-64" : "h-auto",
+                    files.length > 3 ? "h-64" : "h-auto"
                   )}
                 >
-                  <div className="space-y-2 pr-3">
+                  <div className="flex flex-col gap-2 pr-3">
                     {files.map((file) => {
                       const IconComponent = getFileIcon(file.type);
                       return (
@@ -376,7 +376,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -20 }}
                           className={cn(
-                            fileItemVariants({ variant: itemVariant }),
+                            fileItemVariants({ variant: itemVariant })
                           )}
                         >
                           {/* File Icon/Preview */}
@@ -400,7 +400,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                           </div>
 
                           {/* File Info */}
-                          <div className="flex-1 min-w-0 space-y-1">
+                          <div className="flex-1 min-w-0 flex flex-col gap-1">
                             <div className="flex items-center justify-between gap-2">
                               <p className="text-sm font-medium text-foreground truncate">
                                 {file.name}
@@ -463,7 +463,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
         )}
       </div>
     );
-  },
+  }
 );
 
 FileUpload.displayName = "FileUpload";

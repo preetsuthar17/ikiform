@@ -61,7 +61,7 @@ const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
       style,
       ...props
     },
-    ref,
+    ref
   ) => {
     const customStyle = {
       width: typeof width === "number" ? `${width}px` : width,
@@ -78,13 +78,13 @@ const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
           shimmer && "relative overflow-hidden",
           shimmer &&
             "before:absolute before:inset-0 before:-translate-x-full before:animate-shimmer before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent",
-          className,
+          className
         )}
         style={customStyle}
         {...props}
       />
     );
-  },
+  }
 );
 Skeleton.displayName = "Skeleton";
 
@@ -166,27 +166,27 @@ const SkeletonCard = React.forwardRef<
       showFooter = true,
       ...props
     },
-    ref,
+    ref
   ) => (
     <div
       ref={ref}
       className={cn(
         "rounded-ele border bg-card p-0 overflow-hidden",
-        className,
+        className
       )}
       {...props}
     >
       {showImage && (
         <Skeleton className="w-full h-48 rounded-none rounded-t-xl" />
       )}
-      <div className="p-6 space-y-4">
+      <div className="p-6 flex flex-col gap-4">
         {showHeader && (
-          <div className="space-y-2">
+          <div className="flex flex-col gap-2">
             <Skeleton className="h-6 w-3/4" />
             <Skeleton className="h-4 w-1/2" />
           </div>
         )}
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Skeleton className="h-4 w-full" />
           <Skeleton className="h-4 w-4/5" />
           <Skeleton className="h-4 w-3/5" />
@@ -199,7 +199,7 @@ const SkeletonCard = React.forwardRef<
         )}
       </div>
     </div>
-  ),
+  )
 );
 SkeletonCard.displayName = "SkeletonCard";
 

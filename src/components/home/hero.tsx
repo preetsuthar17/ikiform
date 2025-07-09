@@ -7,6 +7,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { Modal, ModalContent, ModalHeader, ModalTitle } from "../ui/modal";
 import DemoFormBuilder from "@/components/form-builder/form-builder/DemoFormBuilder";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { OptimizedImage } from "../other/optimized-image";
 
 export default function Hero() {
   const { user } = useAuth();
@@ -17,18 +18,16 @@ export default function Hero() {
     <section className="flex flex-col gap-10 md:gap-16 md:pb-28 pb-16 w-full max-w-[75%] max-sm:max-w-[90%] mx-auto h-dvh my-12">
       <div className="flex flex-col gap-8 w-full h-full md:p-12 p-8 rounded-card relative  overflow-hidden">
         {/* Flipped Background Image */}
-        <div
-          className="absolute inset-0 rounded-card z-0"
-          style={{
-            backgroundImage: `url(/hero/bg.png)`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            transform: "scaleX(-1)",
-            backgroundRepeat: "no-repeat",
-          }}
+        <OptimizedImage
+          src="/hero/bg.png"
+          alt="Hero background"
+          width={1920}
+          height={1080}
+          className="absolute inset-0 w-full h-full object-cover rounded-card z-0"
+          style={{ transform: "scaleX(-1)" }}
         />
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black/15 pointer-events-none rounded-card z-2 backdrop-blur-[3px]" />
+        <div className="absolute inset-0 bg-black/15 pointer-events-none rounded-card z-2 backdrop-blur-[1px]" />
 
         {/* Content Container */}
         <div className="flex flex-col gap-6 items-center text-center  z-20 text-white h-full grow py-6 ">
@@ -65,7 +64,7 @@ export default function Hero() {
           </div>
           <div className="w-full my-12 h-full grow relative">
             <div
-              className="absolute inset-0 z-30 flex items-center justify-center bg-foreground/10 cursor-pointer transition-opacity hover:bg-foreground/20 rounded-card"
+              className="absolute inset-0 z-5 flex items-center justify-center bg-foreground/10 cursor-pointer transition-opacity hover:bg-foreground/20 rounded-card"
               onClick={() => setOpen(true)}
             >
               <span className="sr-only">Interactive demo</span>
@@ -75,7 +74,7 @@ export default function Hero() {
             </div>
             {/* Modal for interactive demo */}
             <Modal open={open} onOpenChange={setOpen}>
-              <ModalContent className="max-w-[90%] w-full flex flex-col gap-6 z-99">
+              <ModalContent className="max-w-[90%] w-full flex flex-col gap-6 z-50">
                 <ModalHeader>
                   <ModalTitle>Interactive Demo</ModalTitle>
                 </ModalHeader>

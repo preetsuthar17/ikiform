@@ -21,15 +21,17 @@ export function FormSettingsMobileLayout({
   return (
     <div className="md:hidden flex flex-col h-full gap-4">
       <div className="flex items-center gap-4 md:border-b border-0 border-border md:p-4 p-2 flex-shrink-0">
-        <Tabs
-          items={FORM_SETTINGS_SECTIONS}
-          value={activeSection}
-          onValueChange={(value) =>
-            onSectionChange(value as FormSettingsSection)
-          }
-          variant="underline"
-          size="sm"
-        />
+        <ScrollArea orientation="horizontal" className="pb-4">
+          <Tabs
+            items={FORM_SETTINGS_SECTIONS}
+            value={activeSection}
+            onValueChange={(value) =>
+              onSectionChange(value as FormSettingsSection)
+            }
+            variant="underline"
+            size="sm"
+          />
+        </ScrollArea>
       </div>
       <div className="flex-1 overflow-hidden">
         <ScrollArea className="h-full">

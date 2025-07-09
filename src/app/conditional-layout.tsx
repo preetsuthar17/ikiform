@@ -26,7 +26,7 @@ export default function ConditionalLayout({
   }
 
   return (
-    <div className="flex flex-col justify-between min-h-screen z-10">
+    <div className="flex flex-col justify-between min-h-screen z-10 gap-12">
       <Header />
       {children}
       <Footer />

@@ -27,7 +27,7 @@ export const UnsavedChangesIndicator: React.FC<
         >
           <div className="bg-accent border border-border text-accent-foreground shadow-lg flex items-center gap-2 rounded-ele p-2">
             <AlertTriangle className="w-4 h-4 text-accent-foreground/80" />
-            <span className="text-sm font-medium">
+            <span className="text-sm font-medium text-center">
               You have unsaved changes
             </span>
           </div>

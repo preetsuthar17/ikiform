@@ -17,10 +17,10 @@ import type { LoadingSkeletonProps } from "../types";
 
 export function LoadingSkeleton({ className }: LoadingSkeletonProps) {
   return (
-    <div className={`space-y-8 ${className || ""}`}>
+    <div className={`flex flex-col gap-8 ${className || ""}`}>
       {/* Header Skeleton */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-card border border-border rounded-card">
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Skeleton className="h-8 w-48" />
           <Skeleton className="h-5 w-72" />
         </div>
@@ -33,7 +33,7 @@ export function LoadingSkeleton({ className }: LoadingSkeletonProps) {
           <Card key={i} className="p-4 bg-card border-border rounded-ele">
             <div className="flex items-center gap-3">
               <Skeleton className="w-10 h-10 rounded-lg" />
-              <div className="space-y-2">
+              <div className="flex flex-col gap-2">
                 <Skeleton className="h-7 w-8" />
                 <Skeleton className="h-4 w-16" />
               </div>
@@ -48,7 +48,7 @@ export function LoadingSkeleton({ className }: LoadingSkeletonProps) {
           <Card key={i} className="p-6 bg-card border-border rounded-card">
             {/* Card Header Skeleton */}
             <div className="flex items-start justify-between mb-4">
-              <div className="flex-1 min-w-0 space-y-2">
+              <div className="flex-1 min-w-0 flex flex-col gap-2">
                 <Skeleton className="h-6 w-3/4" />
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-2/3" />

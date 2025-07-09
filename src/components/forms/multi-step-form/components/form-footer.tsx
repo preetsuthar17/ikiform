@@ -10,7 +10,7 @@ interface FormFooterProps {
 
 export const FormFooter: React.FC<FormFooterProps> = ({ schema }) => {
   return (
-    <div className="text-center space-y-4">
+    <div className="text-center flex flex-col gap-4">
       {schema.settings.branding?.socialMedia?.enabled &&
         schema.settings.branding.socialMedia.platforms &&
         (schema.settings.branding.socialMedia.position === "footer" ||
@@ -23,7 +23,7 @@ export const FormFooter: React.FC<FormFooterProps> = ({ schema }) => {
         )}
       {Boolean(
         schema.settings.branding &&
-          (schema.settings.branding as any).showIkiformBranding !== false,
+          (schema.settings.branding as any).showIkiformBranding !== false
       ) && (
         <p className="text-sm text-muted-foreground">
           Powered by{" "}

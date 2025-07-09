@@ -17,7 +17,7 @@ export function PreviewPanel({
     if (activeForm?.schema) {
       localStorage.setItem(
         "importedFormSchema",
-        JSON.stringify(activeForm.schema),
+        JSON.stringify(activeForm.schema)
       );
       router.push("/form-builder");
     }
@@ -43,7 +43,7 @@ export function PreviewPanel({
         onUseForm={handleUseForm}
         isMobile={false}
       />
-      <div className="flex-1 overflow-auto md:p-6 p-3">
+      <div className="flex-1 overflow-auto md:p-6 p-3 my-12">
         {activeForm?.schema ? (
           <FormPreview
             schema={activeForm.schema}

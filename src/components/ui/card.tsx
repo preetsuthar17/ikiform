@@ -24,7 +24,7 @@ const cardVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 export interface CardProps
@@ -38,7 +38,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       className={cn(cardVariants({ variant, size }), className)}
       {...props}
     />
-  ),
+  )
 );
 Card.displayName = "Card";
 
@@ -48,7 +48,7 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-col space-y-2", className)}
+    className={cn("flex flex-col flex flex-col gap-2", className)}
     {...props}
   />
 ));
@@ -62,7 +62,7 @@ const CardTitle = React.forwardRef<
     ref={ref}
     className={cn(
       "text-xl font-semibold leading-tight tracking-tight text-foreground",
-      className,
+      className
     )}
     {...props}
   />
@@ -85,7 +85,7 @@ const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("space-y-4", className)} {...props} />
+  <div ref={ref} className={cn("flex flex-col gap-4", className)} {...props} />
 ));
 CardContent.displayName = "CardContent";
 

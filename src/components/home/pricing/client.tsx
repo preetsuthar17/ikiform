@@ -22,6 +22,8 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import FeatureComparisonTable from "./feature-comparison-table";
+import { OptimizedImage } from "@/components/other/optimized-image";
 
 interface Product {
   id: string;
@@ -108,16 +110,18 @@ export default function PricingClient({ products }: PricingClientProps) {
             forms. Start free, upgrade when you need more features.
           </p>
         </div>
-        <div
-          className="w-full max-w-7xl mx-auto flex flex-col items-center grow text-left rounded-card md:p-12 p-4"
-          style={{
-            backgroundImage: `url(/pricing-bg.png)`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            position: "relative",
-          }}
-        >
-          <Card className="w-full p-0 border shadow-md/3 overflow-hidden">
+        <div className="w-full max-w-7xl mx-auto flex flex-col items-center grow text-left rounded-card md:p-12 p-4 relative">
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/15 pointer-events-none rounded-card z-2 backdrop-blur-[5px]" />
+
+          <OptimizedImage
+            src={"/pricing-bg.png"}
+            alt={"CTA background image"}
+            width={1920}
+            height={1080}
+            className="absolute inset-0 w-full h-full object-cover rounded-card z-0"
+          />
+          <Card className="w-full p-0 border shadow-md/3 overflow-hidden z-5">
             <div className="flex flex-col md:flex-row w-full">
               <div className="flex flex-col gap-8 md:w-1/2 w-full p-8 items-start justify-start ">
                 <Badge variant="secondary" className="w-fit mr-auto">
@@ -191,6 +195,7 @@ export default function PricingClient({ products }: PricingClientProps) {
                 </div>
               </div>
             </div>
+            <FeatureComparisonTable />
           </Card>
         </div>
       </div>

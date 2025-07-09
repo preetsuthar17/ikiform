@@ -60,15 +60,15 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
     form.schema.fields?.length || 0,
     form.schema.blocks?.reduce(
       (total, block) => total + (block.fields?.length || 0),
-      0,
-    ) || 0,
+      0
+    ) || 0
   );
 
   const filteredSubmissions = filterSubmissions(
     submissions,
     searchTerm,
     filterState,
-    totalFields,
+    totalFields
   );
 
   const tableColumns: DataTableColumn<FormSubmission>[] = [
@@ -219,7 +219,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
             )}
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <div className="relative flex-1 max-w-md">
                 <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
@@ -275,7 +275,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
             </div>
 
             <TabsContent value="cards" activeValue={activeView}>
-              <div className="space-y-4">
+              <div className="flex flex-col gap-4">
                 {filteredSubmissions.slice(0, 10).map((submission) => (
                   <div key={submission.id}>
                     <Card className="p-4">
@@ -315,7 +315,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                 </p>
                               </div>
                             </div>
-                          ),
+                          )
                         )}
                       </div>
                     </Card>

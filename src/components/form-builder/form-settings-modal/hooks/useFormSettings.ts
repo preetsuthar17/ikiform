@@ -10,12 +10,20 @@ import {
   DEFAULT_PASSWORD_PROTECTION_SETTINGS,
   DEFAULT_NOTIFICATION_SETTINGS,
 } from "@/lib/forms";
+import { DEFAULT_FORM_DESIGN } from "../constants";
 import type { LocalSettings } from "../types";
 
 export function useFormSettings(schema: FormSchema, userEmail?: string) {
   const [localSettings, setLocalSettings] = useState<LocalSettings>({
     ...schema.settings,
-    designMode: schema.settings.designMode || "default",
+    designMode: schema.settings.designMode || DEFAULT_FORM_DESIGN.designMode,
+    layout: {
+      maxWidth:
+        schema.settings.layout?.maxWidth || DEFAULT_FORM_DESIGN.maxWidth,
+      padding: schema.settings.layout?.padding || DEFAULT_FORM_DESIGN.padding,
+      spacing: schema.settings.layout?.spacing || "normal",
+      alignment: schema.settings.layout?.alignment || "left",
+    },
     rateLimit: {
       ...DEFAULT_RATE_LIMIT_SETTINGS,
       ...schema.settings.rateLimit,
@@ -42,7 +50,14 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
   useEffect(() => {
     setLocalSettings({
       ...schema.settings,
-      designMode: schema.settings.designMode || "default",
+      designMode: schema.settings.designMode || DEFAULT_FORM_DESIGN.designMode,
+      layout: {
+        maxWidth:
+          schema.settings.layout?.maxWidth || DEFAULT_FORM_DESIGN.maxWidth,
+        padding: schema.settings.layout?.padding || DEFAULT_FORM_DESIGN.padding,
+        spacing: schema.settings.layout?.spacing || "normal",
+        alignment: schema.settings.layout?.alignment || "left",
+      },
       rateLimit: {
         ...DEFAULT_RATE_LIMIT_SETTINGS,
         ...schema.settings.rateLimit,
@@ -71,6 +86,10 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
     setLocalSettings({
       ...localSettings,
       ...updates,
+      layout: {
+        ...localSettings.layout,
+        ...updates.layout,
+      },
       rateLimit: {
         ...localSettings.rateLimit,
         ...updates.rateLimit,

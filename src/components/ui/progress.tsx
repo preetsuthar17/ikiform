@@ -27,7 +27,7 @@ const progressVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 const progressIndicatorVariants = cva(
@@ -45,7 +45,7 @@ const progressIndicatorVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  },
+  }
 );
 
 const circularProgressVariants = cva(
@@ -61,7 +61,7 @@ const circularProgressVariants = cva(
     defaultVariants: {
       size: "default",
     },
-  },
+  }
 );
 
 export interface ProgressProps
@@ -92,7 +92,7 @@ const Progress = React.forwardRef<
       label,
       ...props
     },
-    ref,
+    ref
   ) => {
     const progress = Math.min(Math.max(value, 0), 100);
     if (type === "circular") {
@@ -102,7 +102,7 @@ const Progress = React.forwardRef<
       const strokeDashoffset = circumference - (progress / 100) * circumference;
 
       return (
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2 w-full items-center">
           {label && <div className="text-sm  text-foreground">{label}</div>}
           <div className={cn(circularProgressVariants({ size }), className)}>
             <svg
@@ -175,7 +175,7 @@ const Progress = React.forwardRef<
       );
     }
     return (
-      <div className="space-y-2">
+      <div className="flex flex-col gap-2 w-full items-center">
         {label && <div className="text-sm  text-foreground">{label}</div>}
         <ProgressPrimitive.Root
           ref={ref}
@@ -208,7 +208,7 @@ const Progress = React.forwardRef<
         )}
       </div>
     );
-  },
+  }
 );
 
 Progress.displayName = ProgressPrimitive.Root.displayName;

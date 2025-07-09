@@ -15,7 +15,7 @@ export default async function Success({
   }
 
   return (
-    <div className="text-center text-muted-foreground space-y-3">
+    <div className="text-center text-muted-foreground flex flex-col gap-3">
       <p>Checkout successful! ID: {checkoutId}</p>
       <Link href="/dashboard" className="text-foreground underline">
         Go to dashboard

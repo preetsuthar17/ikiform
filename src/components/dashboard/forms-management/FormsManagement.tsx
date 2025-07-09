@@ -49,7 +49,7 @@ export function FormsManagement({ className }: FormsManagementProps) {
   }
 
   return (
-    <div className={`space-y-8 ${className || ""}`}>
+    <div className={`flex flex-col gap-8 ${className || ""}`}>
       {/* Header Section */}
       <FormsHeader
         onCreateForm={createNewForm}
@@ -61,7 +61,7 @@ export function FormsManagement({ className }: FormsManagementProps) {
       <FormStats forms={forms} />
 
       {/* AI Form Suggestions */}
-      <AIFormSuggestions onCreateForm={handleCreateFromPrompt} />
+      {/* <AIFormSuggestions onCreateForm={handleCreateFromPrompt} /> */}
 
       {/* Forms Grid or Empty State */}
       {forms.length === 0 ? (

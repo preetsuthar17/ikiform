@@ -8,6 +8,7 @@ export interface FormSettingsModalProps {
   schema: FormSchema;
   onSchemaUpdate: (updates: Partial<FormSchema>) => void;
   userEmail?: string;
+  formId?: string;
 }
 
 export interface NotificationLink {
@@ -30,6 +31,13 @@ export interface LocalSettings {
   successMessage?: string;
   redirectUrl?: string;
   designMode?: "default" | "minimal";
+  layout?: {
+    maxWidth?: "sm" | "md" | "lg" | "xl" | "full";
+    padding?: "none" | "sm" | "md" | "lg";
+    margin?: "none" | "sm" | "md" | "lg";
+    spacing?: "compact" | "normal" | "relaxed";
+    alignment?: "left" | "center" | "right";
+  };
   branding?: {
     socialMedia?: {
       enabled?: boolean;

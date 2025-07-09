@@ -12,6 +12,7 @@ export interface FormPreviewProps {
   onFormSettingsUpdate?: (settings: Partial<FormSchema["settings"]>) => void;
   onBlockUpdate?: (blockId: string, updates: Partial<FormBlock>) => void;
   onStepSelect?: (stepIndex: number) => void;
+  onAddField?: (fieldType: FormField["type"]) => void;
 }
 
 // Props for FormHeader component
@@ -45,6 +46,7 @@ export interface FormFieldsContainerProps {
   onFieldDelete: (fieldId: string) => void;
   onFieldValueChange: (fieldId: string, value: any) => void;
   isMultiStep: boolean;
+  onAddField?: (fieldType: FormField["type"]) => void;
 }
 
 // Props for FormActions component

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function GDPR() {
   return (
-    <article className="max-w-4xl mx-auto px-4 py-10 flex flex-col gap-12">
+    <article className="max-w-4xl mx-auto px-4 py-10 flex flex-col gap-12 legal">
       <section className="flex flex-col gap-4">
         <h1 className="text-4xl font-bold">GDPR Policy</h1>
         <p>
@@ -101,9 +101,9 @@ export default function GDPR() {
           and links to their privacy policies:
         </p>
         <div className="overflow-x-auto">
-          <table className="min-w-full border border-gray-200 text-left text-sm">
+          <table className="min-w-full border text-left text-sm">
             <thead>
-              <tr className="bg-gray-50">
+              <tr className="bg-accent">
                 <th className="px-4 py-2 font-semibold">Name</th>
                 <th className="px-4 py-2 font-semibold">Use</th>
                 <th className="px-4 py-2 font-semibold">Link</th>
@@ -187,6 +187,19 @@ export default function GDPR() {
                     target="_blank"
                   >
                     resend.com
+                  </Link>
+                </td>
+              </tr>
+              <tr className="border-t">
+                <td className="px-4 py-2">Crisp</td>
+                <td className="px-4 py-2">Customer Support</td>
+                <td className="px-4 py-2">
+                  <Link
+                    href="http://crisp.chat/"
+                    className="text-blue-500 underline"
+                    target="_blank"
+                  >
+                    http://crisp.chat/
                   </Link>
                 </td>
               </tr>

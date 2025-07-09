@@ -23,3 +23,5 @@ export function PublicForm({ formId, schema }: PublicFormProps) {
     </div>
   );
 }
+
+export default PublicForm;

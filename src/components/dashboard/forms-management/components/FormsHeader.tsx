@@ -30,7 +30,7 @@ export function FormsHeader({
 }: FormsHeaderProps) {
   return (
     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-card border border-border rounded-card">
-      <div className="space-y-1">
+      <div className="flex flex-col gap-1">
         <h2 className="text-2xl font-semibold text-foreground tracking-tight">
           Your Forms
         </h2>

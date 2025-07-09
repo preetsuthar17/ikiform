@@ -13,6 +13,7 @@ import { useFormNavigation, useFormState } from "./multi-step-form/hooks";
 
 // Utilities
 import { processFormBlocks, calculateProgress } from "./multi-step-form/utils";
+import { getFormLayoutClasses } from "@/lib/utils/form-layout";
 
 // Form Components
 import {
@@ -48,6 +49,8 @@ export function MultiStepForm({
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
+
+  const { containerClass } = getFormLayoutClasses(schema);
 
   useEffect(() => {
     const passwordProtection = schema.settings.passwordProtection;
@@ -110,7 +113,7 @@ export function MultiStepForm({
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center w-full">
-        <div className="max-w-md mx-auto flex flex-col gap-6 w-full px-4">
+        <div className={`${containerClass} flex flex-col gap-6 w-full px-4`}>
           <div className="w-full bg-muted rounded-full h-2">
             <div
               className="bg-primary h-2 rounded-full transition-all duration-2000 ease-out"
@@ -129,7 +132,10 @@ export function MultiStepForm({
         showForm ? "opacity-100" : "opacity-0"
       }`}
     >
-      <div className="flex flex-col gap-8 w-full" id="embeddable-form">
+      <div
+        className={`flex flex-col gap-8 w-full ${containerClass}`}
+        id="embeddable-form"
+      >
         <Card
           className={`rounded-card flex flex-col w-full grow gap-6 p-8 ${schema.settings.designMode === "minimal" ? "bg-transparent border-none shadow-none hover:bg-transparent" : ""}`}
           variant={

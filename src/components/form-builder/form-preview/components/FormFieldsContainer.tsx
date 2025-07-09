@@ -1,17 +1,36 @@
 // External libraries
 import React from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import { GripVertical, Trash2 } from "lucide-react";
+import { GripVertical, Trash2, Plus, ChevronDown } from "lucide-react";
 
 // UI components
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 // Internal components
 import { FormFieldRenderer } from "../../form-field-renderer";
 
 // Types
 import type { FormFieldsContainerProps } from "../types";
+
+const FIELD_TYPES = [
+  { type: "text", label: "Text Input" },
+  { type: "email", label: "Email" },
+  { type: "textarea", label: "Text Area" },
+  { type: "number", label: "Number" },
+  { type: "select", label: "Dropdown" },
+  { type: "radio", label: "Radio Buttons" },
+  { type: "checkbox", label: "Checkboxes" },
+  { type: "slider", label: "Slider" },
+  { type: "tags", label: "Tags" },
+  { type: "social", label: "Social Media" },
+] as const;
 
 export function FormFieldsContainer({
   fields,
@@ -22,6 +41,7 @@ export function FormFieldsContainer({
   onFieldDelete,
   onFieldValueChange,
   isMultiStep,
+  onAddField,
 }: FormFieldsContainerProps) {
   const handleDragEnd = (result: any) => {
     if (!result.destination) return;
@@ -32,6 +52,31 @@ export function FormFieldsContainer({
 
     onFieldsReorder(items);
   };
+
+  const AddFieldButton = () => (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="outline"
+          className="w-full h-42 border-dashed border-2 hover:border-primary/50 hover:bg-accent/10 transition-colors"
+        >
+          <Plus className="w-4 h-4 mr-2" />
+          Add Field
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="center" className="w-48">
+        {FIELD_TYPES.map((fieldType) => (
+          <DropdownMenuItem
+            key={fieldType.type}
+            onClick={() => onAddField?.(fieldType.type)}
+            className="cursor-pointer"
+          >
+            {fieldType.label}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
 
   if (fields.length === 0) {
     return (
@@ -47,6 +92,7 @@ export function FormFieldsContainer({
             ? "Add fields from the palette to this step"
             : "Add fields from the left panel to start building your form"}
         </p>
+        {onAddField && <AddFieldButton />}
       </div>
     );
   }
@@ -133,6 +179,7 @@ export function FormFieldsContainer({
               </Draggable>
             ))}
             {provided.placeholder}
+            {onAddField && <AddFieldButton />}
           </div>
         )}
       </Droppable>
