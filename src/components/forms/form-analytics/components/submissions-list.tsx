@@ -368,7 +368,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                       return (
                                         <a
                                           key={key}
-                                          href={url}
+                                          href={typeof url === "string" ? url : undefined}
                                           target="_blank"
                                           rel="noopener noreferrer"
                                           className="text-primary underline"

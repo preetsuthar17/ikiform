@@ -18,7 +18,6 @@ import {
   SocialField,
   DateInputField,
   SignatureField,
-  FileUploadField,
 } from "../components";
 import type { BaseFieldProps } from "../types";
 
