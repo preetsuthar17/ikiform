@@ -1,5 +1,6 @@
 import { Kbd } from "@/components/ui/kbd";
 import { Check } from "lucide-react";
+import React from "react";
 
 const featureCategories = [
   {
@@ -118,13 +119,13 @@ const featureCategories = [
 
 export default function FeatureComparisonTable() {
   return (
-    <div className="w-full px-4 md:px-8 mx-auto overflow-x-auto">
+    <div className="w-full px-4 md:px-8 pb-8 mx-auto overflow-x-auto">
       <div className="w-full bg-background rounded-card shadow-md/2 border">
         <table className="w-full border-collapse text-left rounded-card overflow-hidden">
           <tbody>
             {featureCategories.map((category) => (
-              <>
-                <tr key={category.name}>
+              <React.Fragment key={category.name}>
+                <tr>
                   <td
                     colSpan={2}
                     className="bg-muted p-4 font-medium text-base"
@@ -157,7 +158,7 @@ export default function FeatureComparisonTable() {
                     </td>
                   </tr>
                 ))}
-              </>
+              </React.Fragment>
             ))}
           </tbody>
         </table>

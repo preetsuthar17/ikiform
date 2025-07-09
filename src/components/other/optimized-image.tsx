@@ -19,7 +19,7 @@ export const OptimizedImage = ({
   width,
   height,
   className = "",
-  quality = 75,
+  quality = 10,
   ...props
 }: OptimizedImageProps) => {
   const [isLoading, setLoading] = useState(true);
