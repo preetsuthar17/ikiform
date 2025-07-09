@@ -93,14 +93,14 @@ export interface BasicInfoSectionProps {
 export interface RateLimitSectionProps {
   localSettings: LocalSettings;
   updateRateLimit: (
-    updates: Partial<NonNullable<LocalSettings["rateLimit"]>>
+    updates: Partial<NonNullable<LocalSettings["rateLimit"]>>,
   ) => void;
 }
 
 export interface ProfanityFilterSectionProps {
   localSettings: LocalSettings;
   updateProfanityFilter: (
-    updates: Partial<NonNullable<LocalSettings["profanityFilter"]>>
+    updates: Partial<NonNullable<LocalSettings["profanityFilter"]>>,
   ) => void;
 }
 
@@ -109,7 +109,7 @@ export interface SocialMediaSectionProps {
   updateSocialMedia: (
     updates: Partial<
       NonNullable<NonNullable<LocalSettings["branding"]>["socialMedia"]>
-    >
+    >,
   ) => void;
 }
 
