@@ -43,7 +43,7 @@ export function ProfileCard({ className }: ProfileCardProps) {
 
   return (
     <Card
-      className={`flex flex-col items-center gap-6 w-full grow relative py-24 ${className || ""}`}
+      className={`flex flex-col items-center gap-6 w-full grow relative py-24 bg-card ${className || ""}`}
     >
       <CardHeader className="flex items-center gap-2">
         <UserAvatar name={name} avatarUrl={avatarUrl} size="xl" />

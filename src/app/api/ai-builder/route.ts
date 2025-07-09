@@ -1,7 +1,7 @@
 import { cohere } from "@ai-sdk/cohere";
 import { streamText } from "ai";
 import { NextRequest } from "next/server";
-import { checkRateLimit } from "@/lib/forms";
+import { checkRateLimit, RateLimitSettings } from "@/lib/forms";
 import { createClient } from "@/utils/supabase/server";
 import { formsDbServer } from "@/lib/database";
 import { v4 as uuidv4 } from "uuid";
@@ -27,7 +27,7 @@ function createErrorResponse(message: string, status: number = 500) {
 }
 
 function validateAndSanitizeMessages(
-  messages: any[],
+  messages: any[]
 ): { role: string; content: string }[] {
   if (!Array.isArray(messages) || messages.length === 0) {
     throw new Error("Invalid messages array");
@@ -43,9 +43,15 @@ function validateAndSanitizeMessages(
   });
 }
 
+const AIBuilderRateLimit: RateLimitSettings = {
+  enabled: true,
+  maxSubmissions: 10,
+  window: "5 m",
+};
+
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for") || "global";
-  const rate = await checkRateLimit(ip);
+  const rate = await checkRateLimit(ip, AIBuilderRateLimit);
 
   if (!rate.success) {
     const retryAfter = rate.reset
@@ -59,7 +65,7 @@ export async function POST(req: NextRequest) {
       {
         status: 429,
         headers: { "Retry-After": retryAfter.toString() },
-      },
+      }
     );
   }
 
@@ -101,7 +107,7 @@ export async function POST(req: NextRequest) {
     } catch (error) {
       return createErrorResponse(
         error instanceof Error ? error.message : "Invalid request format",
-        400,
+        400
       );
     }
 
@@ -123,7 +129,7 @@ export async function POST(req: NextRequest) {
             timestamp: new Date().toISOString(),
             ip: ip,
             userAgent: req.headers.get("user-agent") || "",
-          },
+          }
         );
       } catch (error) {
         console.error("Error saving user message:", error);
@@ -177,7 +183,7 @@ export async function POST(req: NextRequest) {
                   timestamp: new Date().toISOString(),
                   model: "cohere/command-r7b-12-2024",
                   temperature: 0.3,
-                },
+                }
               );
             } catch (error) {
               console.error("Error saving AI response:", error);
@@ -220,6 +226,6 @@ export async function GET() {
     {
       status: 200,
       headers: { "Content-Type": "application/json" },
-    },
+    }
   );
 }
