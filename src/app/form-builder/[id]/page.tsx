@@ -41,7 +41,7 @@ export default function FormBuilderPage({ params }: FormBuilderPageProps) {
           You need a premium subscription to use the form builder. Upgrade to
           unlock all features.
         </div>
-        <Link href="/pricing">
+        <Link href="/#pricing">
           <Button size="lg">View Pricing</Button>
         </Link>
       </div>

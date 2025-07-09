@@ -78,7 +78,7 @@ export default function FormAnalyticsPage({ params }: FormAnalyticsPageProps) {
           You need a premium subscription to access form analytics. Upgrade to
           unlock all features.
         </div>
-        <Link href="/pricing">
+        <Link href="/#pricing">
           <Button size="lg">View Pricing</Button>
         </Link>
       </div>
