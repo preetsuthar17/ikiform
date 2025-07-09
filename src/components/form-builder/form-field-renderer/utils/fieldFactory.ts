@@ -16,6 +16,9 @@ import {
   SliderField,
   TagsField,
   SocialField,
+  DateInputField,
+  SignatureField,
+  FileUploadField,
 } from "../components";
 import type { BaseFieldProps } from "../types";
 
@@ -23,7 +26,7 @@ export function createFieldComponent(
   field: FormField,
   value: any,
   onChange: (value: any) => void,
-  error?: string,
+  error?: string
 ): React.ReactElement {
   const props: BaseFieldProps = { field, value, onChange, error };
 
@@ -48,6 +51,10 @@ export function createFieldComponent(
       return React.createElement(TagsField, props);
     case "social":
       return React.createElement(SocialField, props);
+    case "date":
+      return React.createElement(DateInputField, props);
+    case "signature":
+      return React.createElement(SignatureField, props);
     default:
       return React.createElement("div", {}, "Unsupported field type");
   }

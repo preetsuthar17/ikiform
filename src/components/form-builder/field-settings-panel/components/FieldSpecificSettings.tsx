@@ -1,11 +1,21 @@
 // External imports
 import React from "react";
+import { useState } from "react";
 
 // Component imports
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
 
 // Component imports
 import { EmailValidationSettings } from "./EmailValidationSettings";
@@ -27,6 +37,9 @@ export function FieldSpecificSettings({
   const isTagsType = field.type === "tags";
   const isSelectType = field.type === "select";
   const isEmailType = field.type === "email";
+  const isDateType = field.type === "date";
+  const isSocialType = field.type === "social";
+  const isFileType = field.type === "file";
 
   // Don't render if field doesn't have specific settings
   if (
@@ -34,13 +47,60 @@ export function FieldSpecificSettings({
     !isSliderType &&
     !isTagsType &&
     !isSelectType &&
-    !isEmailType
+    !isEmailType &&
+    !isDateType &&
+    !isSocialType &&
+    !isFileType
   ) {
     return null;
   }
 
+  // Helper for file type options
+  const COMMON_FILE_TYPES = [
+    { value: "image/", label: "Images" },
+    { value: ".pdf", label: "PDF" },
+    { value: "video/", label: "Videos" },
+    { value: "audio/", label: "Audio" },
+    { value: ".doc,.docx", label: "Word Docs" },
+    { value: ".xls,.xlsx", label: "Excel Sheets" },
+    { value: ".ppt,.pptx", label: "PowerPoint" },
+    { value: ".zip,.rar", label: "Archives (zip/rar)" },
+  ];
+  const [customType, setCustomType] = useState("");
+  const allowedTypes = field.settings?.allowedTypes || [];
+
   return (
     <>
+      {/* Email Validation Settings */}
+      {isEmailType && (
+        <EmailValidationSettings
+          field={field}
+          onUpdateSettings={onUpdateSettings}
+        />
+      )}
+
+      {/* Date Field Settings */}
+      {isDateType && (
+        <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
+          <h3 className="font-medium text-card-foreground">Date Input Mode</h3>
+          <div className="flex items-center gap-2">
+            <Switch
+              size={"sm"}
+              id="date-input-mode"
+              checked={field.settings?.dateInputMode === "human-friendly"}
+              onCheckedChange={(checked) =>
+                onUpdateSettings({
+                  dateInputMode: checked ? "human-friendly" : "classic",
+                })
+              }
+            />
+            <Label htmlFor="date-input-mode" className="text-card-foreground">
+              Use human-friendly input (e.g. "next Friday at 2pm")
+            </Label>
+          </div>
+        </Card>
+      )}
+
       {/* Textarea Settings */}
       {isTextareaType && (
         <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
@@ -193,12 +253,104 @@ export function FieldSpecificSettings({
         </Card>
       )}
 
-      {/* Email Validation Settings */}
-      {isEmailType && (
-        <EmailValidationSettings
-          field={field}
-          onUpdateSettings={onUpdateSettings}
-        />
+      {/* Social Field Settings */}
+      {isSocialType && (
+        <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
+          <h3 className="font-medium text-card-foreground">Social Platforms</h3>
+          <div className="flex flex-wrap gap-3 mb-2">
+            {[
+              { key: "github", label: "GitHub" },
+              { key: "twitter", label: "Twitter" },
+              { key: "linkedin", label: "LinkedIn" },
+              { key: "facebook", label: "Facebook" },
+              { key: "instagram", label: "Instagram" },
+              { key: "youtube", label: "YouTube" },
+              { key: "website", label: "Website" },
+            ].map((platform) => (
+              <label
+                key={platform.key}
+                className="flex items-center gap-2 cursor-pointer"
+              >
+                <input
+                  type="checkbox"
+                  checked={
+                    field.settings?.socialPlatforms?.includes(platform.key) ||
+                    false
+                  }
+                  onChange={(e) => {
+                    const prev = field.settings?.socialPlatforms || [];
+                    onUpdateSettings({
+                      socialPlatforms: e.target.checked
+                        ? [...prev, platform.key]
+                        : prev.filter((p) => p !== platform.key),
+                    });
+                  }}
+                />
+                {platform.label}
+              </label>
+            ))}
+          </div>
+          <h4 className="font-medium text-card-foreground mt-4">
+            Custom Links
+          </h4>
+          <div className="flex flex-col gap-2">
+            {(field.settings?.customLinks || []).map((link, idx) => (
+              <div key={idx} className="flex gap-2 items-center">
+                <Input
+                  type="text"
+                  placeholder="Label"
+                  value={link.label}
+                  onChange={(e) => {
+                    const updated = [...(field.settings?.customLinks || [])];
+                    updated[idx] = { ...updated[idx], label: e.target.value };
+                    onUpdateSettings({ customLinks: updated });
+                  }}
+                />
+                <Input
+                  type="text"
+                  placeholder="Placeholder (optional)"
+                  value={link.placeholder || ""}
+                  onChange={(e) => {
+                    const updated = [...(field.settings?.customLinks || [])];
+                    updated[idx] = {
+                      ...updated[idx],
+                      placeholder: e.target.value,
+                    };
+                    onUpdateSettings({ customLinks: updated });
+                  }}
+                />
+                <Button
+                  type="button"
+                  size="icon"
+                  variant="destructive"
+                  className="shrink-0"
+                  onClick={() => {
+                    const updated = [...(field.settings?.customLinks || [])];
+                    updated.splice(idx, 1);
+                    onUpdateSettings({ customLinks: updated });
+                  }}
+                >
+                  ×
+                </Button>
+              </div>
+            ))}
+            <Button
+              type="button"
+              size="sm"
+              variant="outline"
+              className="w-fit mt-2"
+              onClick={() => {
+                const updated = [
+                  ...(field.settings?.customLinks || []),
+                  { label: "", placeholder: "" },
+                ];
+                onUpdateSettings({ customLinks: updated });
+              }}
+            >
+              + Add Custom Link
+            </Button>
+          </div>
+        </Card>
       )}
     </>
   );

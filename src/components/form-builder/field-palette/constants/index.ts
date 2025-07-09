@@ -13,6 +13,9 @@ import {
   Sliders,
   Tags,
   Share2,
+  Calendar,
+  PenLine,
+  FileUp,
 } from "lucide-react";
 
 export const FIELD_TYPES: FieldTypeConfig[] = [
@@ -75,6 +78,18 @@ export const FIELD_TYPES: FieldTypeConfig[] = [
     label: "Social Media",
     icon: Share2,
     description: "Add social media links",
+  },
+  {
+    type: "date",
+    label: "Date",
+    icon: Calendar,
+    description: "Date input (calendar or human-friendly)",
+  },
+  {
+    type: "signature",
+    label: "Signature",
+    icon: PenLine,
+    description: "Digital signature input (draw with mouse or touch)",
   },
 ];
 

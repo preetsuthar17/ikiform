@@ -27,6 +27,10 @@ const getDefaultValueForField = (field: FormField): any => {
       return field.settings?.defaultValue || 50;
     case "number":
       return "";
+    case "date":
+      return "";
+    case "signature":
+      return "";
     case "text":
     case "email":
     case "textarea":
@@ -49,7 +53,7 @@ const initializeFormData = (fields: FormField[]): Record<string, any> => {
 export const useSingleStepForm = (
   formId: string,
   schema: FormSchema,
-  fields: FormField[],
+  fields: FormField[]
 ): SingleStepFormState & SingleStepFormActions => {
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -61,7 +65,7 @@ export const useSingleStepForm = (
   useEffect(() => {
     const currentFieldIds = new Set(fields.map((field) => field.id));
     const newFieldIds = [...currentFieldIds].filter(
-      (id) => !initializedFieldsRef.current.has(id),
+      (id) => !initializedFieldsRef.current.has(id)
     );
 
     if (newFieldIds.length > 0) {
@@ -89,7 +93,7 @@ export const useSingleStepForm = (
 
     const { errors: validationErrors, isValid } = validateSingleStepForm(
       fields,
-      formData,
+      formData
     );
 
     if (!isValid) {

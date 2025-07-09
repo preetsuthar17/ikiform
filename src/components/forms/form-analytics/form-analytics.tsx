@@ -70,7 +70,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const { theme } = useTheme();
 
   const { submissions, loading, refreshing, refreshData } = useFormSubmissions(
-    form.id,
+    form.id
   );
   const analyticsData = useAnalyticsData(form, submissions);
   const {
@@ -306,6 +306,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
         getFieldLabel={getFieldLabelForForm}
         formatDate={formatDate}
         onExport={handleExportSubmission}
+        form={form}
       />
       <ConfirmationModal
         open={isDeleteModalOpen}

@@ -28,7 +28,7 @@ const datePickerVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 interface DatePickerProps extends VariantProps<typeof datePickerVariants> {
@@ -72,7 +72,7 @@ export function DatePicker({
     // Set portal container on client side only
     if (typeof document !== "undefined") {
       setPortalContainer(
-        document.getElementById("portal-root") || document.body,
+        document.getElementById("portal-root") || document.body
       );
     }
   }, []);
@@ -126,7 +126,7 @@ export function DatePicker({
 
       // Check if click is inside any calendar popup using the data attribute
       const calendarElement = document.querySelector(
-        '[data-datepicker-calendar="true"]',
+        '[data-datepicker-calendar="true"]'
       );
       const isClickInsideCalendar = calendarElement?.contains(target);
 
@@ -180,16 +180,16 @@ export function DatePicker({
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -10, scale: 0.95 }}
           transition={{ duration: 0.2 }}
-          className="z-[9999] rounded-ele border border-border bg-background shadow-xl"
+          className="z-[9999] rounded-ele w-fit mx-auto"
           data-datepicker-calendar="true"
           style={{
             position: "fixed",
             top: calendarPosition.top,
             left: calendarPosition.left,
-            width: calendarPosition.width,
           }}
         >
           <Calendar
+            className="w-full"
             selected={value}
             onSelect={handleSelect}
             minDate={minDate}
@@ -224,7 +224,7 @@ export function DatePicker({
         <ChevronDown
           className={cn(
             "h-4 w-4 opacity-50 transition-transform duration-200",
-            isOpen && "rotate-180",
+            isOpen && "rotate-180"
           )}
         />
       </Button>
@@ -329,7 +329,7 @@ export function DateRangePicker({
 
       // Check if click is inside any calendar popup using the data attribute
       const calendarElement = document.querySelector(
-        '[data-datepicker-calendar="true"]',
+        '[data-datepicker-calendar="true"]'
       );
       const isClickInsideCalendar = calendarElement?.contains(target);
 
@@ -390,7 +390,7 @@ export function DateRangePicker({
         <ChevronDown
           className={cn(
             "h-4 w-4 opacity-50 transition-transform duration-200",
-            isOpen && "rotate-180",
+            isOpen && "rotate-180"
           )}
         />
       </button>
@@ -404,13 +404,12 @@ export function DateRangePicker({
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
                 transition={{ duration: 0.2 }}
-                className="z-[9999] rounded-ele border border-border bg-background shadow-xl"
+                className="z-[9999] rounded-ele w-fit mx-auto"
                 data-datepicker-calendar="true"
                 style={{
                   position: "fixed",
                   top: calendarPosition.top,
                   left: calendarPosition.left,
-                  width: calendarPosition.width,
                 }}
               >
                 <Calendar
@@ -426,7 +425,7 @@ export function DateRangePicker({
               </motion.div>
             )}
           </AnimatePresence>,
-          document.getElementById("portal-root") || document.body,
+          document.getElementById("portal-root") || document.body
         )}
     </div>
   );

@@ -12,3 +12,5 @@ export { SelectField } from "./SelectField";
 export { SliderField } from "./SliderField";
 export { TagsField } from "./TagsField";
 export { SocialField } from "./SocialField";
+export { DateInputField } from "./DateInputField";
+export { SignatureField } from "./SignatureField";

@@ -84,6 +84,7 @@ export const validateSingleStepForm = (
     ) {
       errors[field.id] = field.validation?.patternMessage || "Invalid format";
     }
+    // No extra validation for signature field for now
   });
 
   return {

@@ -60,15 +60,15 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
     form.schema.fields?.length || 0,
     form.schema.blocks?.reduce(
       (total, block) => total + (block.fields?.length || 0),
-      0,
-    ) || 0,
+      0
+    ) || 0
   );
 
   const filteredSubmissions = filterSubmissions(
     submissions,
     searchTerm,
     filterState,
-    totalFields,
+    totalFields
   );
 
   const tableColumns: DataTableColumn<FormSubmission>[] = [
@@ -299,23 +299,110 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {Object.entries(submission.submission_data).map(
-                          ([fieldId, value]) => (
-                            <div key={fieldId} className="flex flex-col gap-2">
-                              <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                                {getFieldLabel(fieldId)}
-                              </label>
-                              <div className="p-2 bg-input border border-border rounded-ele">
-                                <p className="text-sm text-foreground line-clamp-2">
-                                  {Array.isArray(value)
-                                    ? value.join(", ")
-                                    : typeof value === "object" &&
-                                        value !== null
-                                      ? JSON.stringify(value)
-                                      : String(value) || "—"}
-                                </p>
+                          ([fieldId, value]) => {
+                            const allFields = [
+                              ...(form.schema.fields || []),
+                              ...(form.schema.blocks?.flatMap(
+                                (block) => block.fields || []
+                              ) || []),
+                            ];
+                            const field = allFields.find(
+                              (f) => f.id === fieldId
+                            );
+                            // Signature field as image
+                            if (
+                              field?.type === "signature" &&
+                              typeof value === "string" &&
+                              value.startsWith("data:image")
+                            ) {
+                              return (
+                                <div
+                                  key={fieldId}
+                                  className="flex flex-col gap-2"
+                                >
+                                  <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                                    {getFieldLabel(fieldId)}
+                                  </label>
+                                  <div className="p-2 bg-input border border-border rounded-ele flex items-center justify-center">
+                                    <img
+                                      src={value}
+                                      alt="Signature"
+                                      className="max-h-24 max-w-full border rounded"
+                                    />
+                                  </div>
+                                </div>
+                              );
+                            }
+                            // Social field as labeled links
+                            if (
+                              field?.type === "social" &&
+                              typeof value === "object" &&
+                              value !== null
+                            ) {
+                              const customLinks =
+                                field.settings?.customLinks || [];
+                              return (
+                                <div
+                                  key={fieldId}
+                                  className="flex flex-col gap-2"
+                                >
+                                  <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                                    {getFieldLabel(fieldId)}
+                                  </label>
+                                  <div className="p-2 bg-input border border-border rounded-ele flex flex-col gap-1">
+                                    {Object.entries(value).map(([key, url]) => {
+                                      let label = key;
+                                      if (key.startsWith("custom_")) {
+                                        const idx = parseInt(
+                                          key.replace("custom_", ""),
+                                          10
+                                        );
+                                        label =
+                                          customLinks[idx]?.label ||
+                                          `Custom Link ${idx + 1}`;
+                                      } else {
+                                        label =
+                                          key.charAt(0).toUpperCase() +
+                                          key.slice(1);
+                                      }
+                                      return (
+                                        <a
+                                          key={key}
+                                          href={url}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="text-primary underline"
+                                        >
+                                          {label}
+                                        </a>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              );
+                            }
+                            // Default rendering
+                            return (
+                              <div
+                                key={fieldId}
+                                className="flex flex-col gap-2"
+                              >
+                                <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                                  {getFieldLabel(fieldId)}
+                                </label>
+                                <div className="p-2 bg-input border border-border rounded-ele">
+                                  <p className="text-sm text-foreground line-clamp-2">
+                                    {Array.isArray(value)
+                                      ? value.join(", ")
+                                      : typeof value === "object" &&
+                                          value !== null
+                                        ? JSON.stringify(value)
+                                        : String(value) || "—"}
+                                  </p>
+                                </div>
                               </div>
-                            </div>
-                          ),
+                            );
+                          }
                         )}
                       </div>
                     </Card>

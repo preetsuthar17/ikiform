@@ -70,6 +70,7 @@ export interface SubmissionDetailsModalProps {
   getFieldLabel: (fieldId: string) => string;
   formatDate: (dateString: string) => string;
   onExport?: (submission: FormSubmission) => void;
+  form?: Form;
 }
 
 export interface OverviewStatsProps {

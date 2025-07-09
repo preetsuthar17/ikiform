@@ -234,7 +234,7 @@ export const calculateConversionFunnel = (
         submissions.length > 0
           ? Math.round((completedCount / submissions.length) * 100)
           : 0,
-    };
+    };` 12q `
   });
 
   return funnel;

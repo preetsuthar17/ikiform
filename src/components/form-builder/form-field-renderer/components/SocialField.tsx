@@ -79,8 +79,10 @@ export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
     field.settings?.socialPlatforms || socialPlatforms.map((p) => p.platform);
 
   const filteredPlatforms = socialPlatforms.filter((p) =>
-    platformsToShow.includes(p.platform),
+    platformsToShow.includes(p.platform)
   );
+
+  const customLinks = field.settings?.customLinks || [];
 
   return (
     <div className="flex flex-col gap-4">
@@ -101,6 +103,30 @@ export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
               onChange={(e) =>
                 handlePlatformChange(platform.platform, e.target.value)
               }
+              className={baseClasses}
+            />
+          </div>
+        ))}
+        {customLinks.map((link, idx) => (
+          <div key={`custom-${idx}`} className="flex flex-col gap-2">
+            <Label
+              htmlFor={`${field.id}-custom-${idx}`}
+              className="text-sm font-medium"
+            >
+              {link.label || `Custom Link ${idx + 1}`}
+            </Label>
+            <Input
+              id={`${field.id}-custom-${idx}`}
+              type="url"
+              placeholder={link.placeholder || "https://example.com"}
+              value={socialData[`custom_${idx}`] || ""}
+              onChange={(e) => {
+                const updatedData = {
+                  ...socialData,
+                  [`custom_${idx}`]: e.target.value,
+                };
+                onChange(updatedData);
+              }}
               className={baseClasses}
             />
           </div>

@@ -177,7 +177,10 @@ export interface FormField {
     | "select"
     | "slider"
     | "tags"
-    | "social";
+    | "social"
+    | "date"
+    | "signature"
+    | "file";
   label: string;
   description?: string;
   placeholder?: string;
@@ -207,14 +210,14 @@ export interface FormField {
     max?: number; // For slider
     step?: number; // For slider
     defaultValue?: any; // For slider
-    allowMultiple?: boolean; // For select
     placeholder?: string; // For select, tags
-    maxTags?: number; // For tags
+    maxTags?: number; // For tags 
     allowDuplicates?: boolean; // For tags
     // Social media settings
-    socialPlatforms?: string[]; // For social field
+    socialPlatforms?: string[]; // For social field: built-in platforms to show
     showIcons?: boolean; // For social field
     iconSize?: "sm" | "md" | "lg"; // For social field
+    customLinks?: { label: string; placeholder?: string }[]; // For social field: custom links
     // Email settings
     emailValidation?: {
       allowedDomains?: string[]; // List of allowed domains
@@ -223,11 +226,20 @@ export interface FormField {
       requireBusinessEmail?: boolean; // Only allow business domains
       customValidationMessage?: string; // Custom validation message
     };
+    // Date field settings
+    dateInputMode?: "classic" | "human-friendly"; // For date field: classic calendar or human-friendly input
     // Visual customization
     size?: "sm" | "md" | "lg"; // Field size
     variant?: "default" | "filled" | "ghost" | "underline"; // Field variant
     helpText?: string; // Additional help text
     width?: "full" | "half" | "third" | "quarter"; // Field width
+    // File upload settings
+    maxFiles?: number;
+    allowedTypes?: string[];
+    maxSizeMB?: number;
+    allowMultiple?: boolean;
+    fileLabel?: string;
+    filePlaceholder?: string;
   };
 }
 

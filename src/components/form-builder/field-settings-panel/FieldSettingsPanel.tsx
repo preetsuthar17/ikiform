@@ -33,7 +33,7 @@ export function FieldSettingsPanel({
 }: FieldSettingsPanelProps) {
   const { updateField, updateValidation, updateSettings } = useFieldUpdates(
     field,
-    onFieldUpdate,
+    onFieldUpdate
   );
 
   if (!field) {
@@ -45,8 +45,13 @@ export function FieldSettingsPanel({
       <ScrollArea className="h-full">
         <SettingsPanelHeader onClose={onClose} />
 
-        <div className="flex flex-col gap-4 p-4 flex flex-col gap-4">
+        <div className="flex flex-col gap-4 p-4">
           <BasicSettings field={field} onFieldUpdate={onFieldUpdate} />
+
+          <FieldSpecificSettings
+            field={field}
+            onUpdateSettings={updateSettings}
+          />
 
           <OptionsSettings field={field} onFieldUpdate={onFieldUpdate} />
 
@@ -58,11 +63,6 @@ export function FieldSettingsPanel({
           <ErrorMessages field={field} onUpdateValidation={updateValidation} />
 
           <VisualSettings field={field} onUpdateSettings={updateSettings} />
-
-          <FieldSpecificSettings
-            field={field}
-            onUpdateSettings={updateSettings}
-          />
         </div>
       </ScrollArea>
     </div>
