@@ -29,7 +29,10 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="flex flex-col items-center justify-center gap-12 md:py-28 py-12 md:px-8 px-4 text-center w-full">
+    <section
+      className="flex flex-col items-center justify-center gap-12 md:py-28 py-12 md:px-8 px-4 text-center w-full"
+      id="features"
+    >
       <div className="max-w-7xl w-full mx-auto flex flex-col gap-18">
         {features.map((feature, idx) => (
           <div

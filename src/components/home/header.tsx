@@ -44,7 +44,7 @@ export default function Header() {
             <Link href="/#pricing">Pricing</Link>
           </Button>
           <Button asChild variant="ghost">
-            <Link href="#">Features</Link>
+            <Link href="/#features">Features</Link>
           </Button>
         </nav>
       </div>
@@ -97,7 +97,7 @@ export default function Header() {
                   variant="ghost"
                   className="w-full justify-start"
                 >
-                  <Link href="#">Features</Link>
+                  <Link href="/#features">Features</Link>
                 </Button>
               </nav>
               <div className="flex flex-col gap-2 w-full">
