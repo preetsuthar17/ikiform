@@ -64,7 +64,6 @@ export default function Hero() {
           </div>
           <div className="w-full my-12 h-full grow relative">
             <div
-              data-s:event="Interactive demo click"
               className="absolute inset-0 z-5 flex items-center justify-center bg-foreground/10 cursor-pointer transition-opacity hover:bg-foreground/20 rounded-card"
               onClick={() => setOpen(true)}
             >
