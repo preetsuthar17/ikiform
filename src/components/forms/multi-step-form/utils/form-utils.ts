@@ -18,19 +18,28 @@ export const processFormBlocks = (schema: FormSchema): FormBlock[] => {
 
 export const calculateProgress = (
   currentStep: number,
-  totalSteps: number,
+  totalSteps: number
 ): number => {
   return totalSteps > 1 ? ((currentStep + 1) / totalSteps) * 100 : 100;
 };
 
 export const submitForm = async (
   formId: string,
-  formData: Record<string, any>,
+  formData: Record<string, any>
 ): Promise<{ success: boolean; message?: string }> => {
   try {
+    let headers: Record<string, string> = {
+      "Content-Type": "application/json",
+    };
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+      }
+    }
     const response = await fetch(`/api/forms/${formId}/submit`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers,
       body: JSON.stringify({ submissionData: formData }),
     });
 
