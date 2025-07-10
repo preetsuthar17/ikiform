@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Script from "next/script";
 
 export default async function Success({
   searchParams,
@@ -15,11 +16,23 @@ export default async function Success({
   }
 
   return (
-    <div className="text-center text-muted-foreground flex flex-col gap-3">
-      <p>Checkout successful! ID: {checkoutId}</p>
-      <Link href="/dashboard" className="text-foreground underline">
-        Go to dashboard
-      </Link>
-    </div>
+    <>
+      <Script id="google-ads-conversion" strategy="afterInteractive">
+        {`
+          gtag('event', 'conversion', {
+              'send_to': 'AW-16554309213/GGsACJHg9KwZEN3s2tU9',
+              'value': 1.0,
+              'currency': 'USD',
+              'transaction_id': '${checkoutId || ""}'
+          });
+        `}
+      </Script>
+      <div className="text-center text-muted-foreground flex flex-col gap-3">
+        <p>Checkout successful! ID: {checkoutId}</p>
+        <Link href="/dashboard" className="text-foreground underline">
+          Go to dashboard
+        </Link>
+      </div>
+    </>
   );
 }
