@@ -72,6 +72,7 @@ export default function Hero() {
                   muted
                   loop
                   playsInline
+                  poster="/hero/demo-video-poster.png"
                 >
                   <source src="/hero/demo-video.mp4" type="video/mp4" />
                 </video>
@@ -95,11 +96,9 @@ export default function Hero() {
                   <Button
                     size="lg"
                     className="w-full max-w-xs font-medium"
-                   asChild
+                    asChild
                   >
-                    <Link href="/demo-form-builder">
-                    Form Builder Demo
-                    </Link>
+                    <Link href="/demo-form-builder">Form Builder Demo</Link>
                   </Button>
                   <Button
                     size="lg"
@@ -130,6 +129,7 @@ export default function Hero() {
                     muted
                     loop
                     playsInline
+                    poster="/hero/bg.webp"
                   >
                     <source src="/hero/demo-video.mp4" type="video/mp4" />
                   </video>
