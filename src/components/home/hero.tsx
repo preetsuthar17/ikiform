@@ -59,14 +59,14 @@ export default function Hero() {
               className="font-medium h-[45px] text-white"
               size="lg"
               variant="ghost"
-              asChild
+              onClick={() => setOpen(true)}
             >
-              <Link href="/#pricing">Check out pricing</Link>
+              Try Demo
             </Button>
           </div>
           <div className="w-full my-12 h-full grow relative">
             <div className="w-full h-full">
-              <div className="lg:hidden w-full h-full relative">
+              <div className="w-full h-full relative">
                 <video
                   className="w-full h-full object-cover rounded-card"
                   muted
@@ -84,25 +84,36 @@ export default function Hero() {
                   </div>
                 </div>
               </div>
-              <div className="hidden lg:block w-full h-full">
-                <div
-                  className="absolute inset-0 z-5 flex items-center justify-center bg-foreground/10 cursor-pointer transition-opacity hover:bg-foreground/20 rounded-card"
-                  onClick={() => setOpen(true)}
-                >
-                  <span className="sr-only">Interactive demo</span>
-                </div>
-                <DemoFormBuilder />
-              </div>
             </div>
-            {/* Modal for interactive demo */}
+            {/* Modal for demo options */}
             <Modal open={open} onOpenChange={setOpen}>
-              <ModalContent className="max-w-[90%] w-full flex flex-col gap-6 z-50">
+              <ModalContent className="max-w-xs w-full flex flex-col gap-6 z-50 items-center justify-center">
                 <ModalHeader>
-                  <ModalTitle>Interactive Demo</ModalTitle>
+                  <ModalTitle>Choose a Demo</ModalTitle>
                 </ModalHeader>
-                <ScrollArea className="w-full h-[82dvh]">
-                  <DemoFormBuilder />
-                </ScrollArea>
+                <div className="flex flex-col gap-4 w-full items-center">
+                  <Button
+                    size="lg"
+                    className="w-full max-w-xs font-medium"
+                   asChild
+                  >
+                    <Link href="/demo-form-builder">
+                    Form Builder Demo
+                    </Link>
+                  </Button>
+                  <Button
+                    size="lg"
+                    className="w-full max-w-xs font-medium"
+                    asChild
+                  >
+                    <Link
+                      href="https://www.ikiform.com/forms/a2675039-5901-4052-88c0-b60977d3d048"
+                      target="_blank"
+                    >
+                      Form Demo
+                    </Link>
+                  </Button>
+                </div>
               </ModalContent>
             </Modal>
             {/* Modal for video demo */}
