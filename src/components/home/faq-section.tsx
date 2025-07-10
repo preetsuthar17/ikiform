@@ -80,6 +80,35 @@ const faqs = [
       </>
     ),
   },
+  {
+    question: "Is the data I submit shared with anyone?",
+    answer:
+      "No, your data is not sold or shared with third parties except trusted providers needed to run Ikiform.",
+  },
+  {
+    question: "Where is my data stored?",
+    answer:
+      "Your data is encrypted and securely stored in the EU using Supabase.",
+  },
+  {
+    question: "How is my data kept safe?",
+    answer:
+      "We use strong security measures and only authorized staff can access your data.",
+  },
+  {
+    question: "Will my data be deleted if I cancel my account?",
+    answer:
+      "Yes. You can delete your data anytime. Deleted data is removed from backups within 30 days.",
+  },
+  {
+    question: "Can I access or delete my data?",
+    answer:
+      "Yes. You can request access or deletion of your data at any time by emailing hi@ikiform.com.",
+  },
+  {
+    question: "Who owns the data collected through my forms?",
+    answer: "You own all data you collect. Ikiform just stores it for you.",
+  },
 ];
 
 export default function FAQSection() {
