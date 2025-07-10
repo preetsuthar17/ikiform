@@ -15,10 +15,11 @@ export function FormFieldRenderer({
   value,
   onChange,
   error,
+  fieldRef,
 }: FormFieldRendererProps) {
   return (
     <FieldWrapper field={field} error={error}>
-      {createFieldComponent(field, value, onChange, error)}
+      {createFieldComponent(field, value, onChange, error, fieldRef)}
     </FieldWrapper>
   );
 }

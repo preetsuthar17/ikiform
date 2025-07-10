@@ -15,6 +15,7 @@ export function TextareaField({
   value,
   onChange,
   error,
+  fieldRef,
 }: BaseFieldProps) {
   const baseClasses = getBaseClasses(field, error);
 
@@ -26,6 +27,7 @@ export function TextareaField({
       onChange={(e) => onChange(e.target.value)}
       rows={field.settings?.rows || 4}
       className={`flex gap-2 ${baseClasses}`}
+      ref={fieldRef}
     />
   );
 }

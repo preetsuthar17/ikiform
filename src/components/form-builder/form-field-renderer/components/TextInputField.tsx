@@ -9,8 +9,9 @@ import { getBaseClasses } from "../utils";
 
 // Type imports
 import type { BaseFieldProps } from "../types";
+import { FormField } from "@/lib";
 
-export function getLivePatternError(field, value) {
+export function getLivePatternError(field: FormField, value: string) {
   if (
     field?.validation?.pattern &&
     value &&
@@ -32,6 +33,7 @@ export function TextInputField({
   value,
   onChange,
   error,
+  fieldRef,
 }: BaseFieldProps) {
   const baseClasses = getBaseClasses(field, error);
   const livePatternError = getLivePatternError(field, value);
@@ -45,6 +47,7 @@ export function TextInputField({
         value={value || ""}
         onChange={(e) => onChange(e.target.value)}
         className={`flex gap-2 ${baseClasses}`}
+        ref={fieldRef}
       />
       {livePatternError && (
         <div className="text-destructive text-xs mt-1">{livePatternError}</div>

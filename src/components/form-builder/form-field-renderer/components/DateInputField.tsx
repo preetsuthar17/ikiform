@@ -12,6 +12,7 @@ export function DateInputField({
   value,
   onChange,
   error,
+  fieldRef,
 }: BaseFieldProps) {
   const mode = field.settings?.dateInputMode || "human-friendly";
   const baseClasses = getBaseClasses(field, error);
@@ -61,15 +62,12 @@ export function DateInputField({
   return (
     <div className="flex flex-col gap-2 relative">
       <Input
-        type="text"
+        type="date"
         id={field.id}
-        placeholder={field.placeholder || "e.g. next Friday at 2pm"}
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        onFocus={() => setShowSuggestions(suggestions.length > 0)}
-        onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
-        className={baseClasses}
-        autoComplete="off"
+        value={value || ""}
+        onChange={(e) => onChange(e.target.value)}
+        className={`flex gap-2 ${baseClasses}`}
+        ref={fieldRef}
       />
       {showSuggestions && suggestions.length > 0 && (
         <div className="absolute top-full left-0 right-0 mt-1 bg-accent border border-border rounded-md p-2 z-888 shadow-lg flex flex-col gap-1">

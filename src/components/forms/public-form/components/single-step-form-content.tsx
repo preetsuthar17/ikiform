@@ -1,5 +1,5 @@
 // Libraries
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 // UI Components
 import { Button } from "@/components/ui/button";
@@ -35,6 +35,13 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
   console.log("Form Fields:", fields);
   console.log("Form Data:", formData);
 
+  const firstFieldRef = useRef<any>(null);
+  useEffect(() => {
+    if (firstFieldRef.current) {
+      firstFieldRef.current.focus();
+    }
+  }, []);
+
   return (
     <Card
       id="embeddable-form"
@@ -66,13 +73,14 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
       </div>
 
       <form onSubmit={onSubmit} className="flex flex-col gap-6">
-        {fields.map((field) => (
+        {fields.map((field, idx) => (
           <div key={field.id}>
             <FormFieldRenderer
               field={field}
               value={formData[field.id]}
               onChange={(value) => onFieldValueChange(field.id, value)}
               error={errors[field.id]}
+              fieldRef={idx === 0 ? firstFieldRef : undefined}
             />
           </div>
         ))}

@@ -1,5 +1,6 @@
 // Type imports
 import type { FormField } from "@/lib/database";
+import type { RefObject } from "react";
 
 // Interfaces
 export interface FormFieldRendererProps {
@@ -7,6 +8,7 @@ export interface FormFieldRendererProps {
   value: any;
   onChange: (value: any) => void;
   error?: string;
+  fieldRef?: RefObject<any>;
 }
 
 export interface FieldWrapperProps {
@@ -20,6 +22,7 @@ export interface BaseFieldProps {
   value: any;
   onChange: (value: any) => void;
   error?: string;
+  fieldRef?: RefObject<any>;
   className?: string;
 }
 

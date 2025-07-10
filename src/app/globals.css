@@ -76,7 +76,7 @@
   --hu-destructive-foreground: 0, 0%, 98%;
   --hu-border: 0, 0%, 95%;
   --hu-input: 0, 0%, 100%;
-  --hu-ring: 0 0% 48%;
+  --hu-ring: 0, 0%, 50%;
 }
 
 .dark {
@@ -96,7 +96,7 @@
   --hu-destructive-foreground: 0, 0%, 98%;
   --hu-border: 0, 0%, 15%;
   --hu-input: 0, 0%, 14%;
-  --hu-ring: 0, 0%, 15%;
+  --hu-ring: 0 0% 48%;
 }
 
 ::selection {
@@ -284,4 +284,9 @@ h3 {
 
 .legal p {
   @apply opacity-90;
+}
+
+::placeholder {
+  color: hsl(var(--hu-muted-foreground)) !important;
+  opacity: 0.5 !important;
 }

@@ -1,5 +1,5 @@
 // Libraries
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 // UI Components
 import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
@@ -27,6 +27,13 @@ export const FormContent: React.FC<FormContentProps> = ({
   description,
   schema,
 }) => {
+  const firstFieldRef = useRef<any>(null);
+  useEffect(() => {
+    if (firstFieldRef.current) {
+      firstFieldRef.current.focus();
+    }
+  }, [currentBlock]);
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-4">
@@ -54,13 +61,14 @@ export const FormContent: React.FC<FormContentProps> = ({
       </div>
 
       <div className="flex flex-col gap-6">
-        {currentBlock.fields.map((field) => (
+        {currentBlock.fields.map((field, idx) => (
           <div key={field.id}>
             <FormFieldRenderer
               field={field}
               value={formData[field.id]}
               onChange={(value) => onFieldValueChange(field.id, value)}
               error={errors[field.id]}
+              fieldRef={idx === 0 ? firstFieldRef : undefined}
             />
           </div>
         ))}
