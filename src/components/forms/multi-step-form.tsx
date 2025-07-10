@@ -14,6 +14,7 @@ import { useFormNavigation, useFormState } from "./multi-step-form/hooks";
 // Utilities
 import { processFormBlocks, calculateProgress } from "./multi-step-form/utils";
 import { getFormLayoutClasses } from "@/lib/utils/form-layout";
+import { getLivePatternError } from "@/components/form-builder/form-field-renderer/components/TextInputField";
 
 // Form Components
 import {
@@ -43,6 +44,15 @@ export function MultiStepForm({
 
   const currentBlock = blocks[currentStep];
   const progress = calculateProgress(currentStep, totalSteps);
+
+  // Determine if navigation should be blocked due to errors or disabled state
+  const hasStepErrors = currentBlock.fields.some((field) => errors[field.id]);
+  const hasLivePatternError = currentBlock.fields.some(
+    (field) =>
+      ["text", "email", "textarea"].includes(field.type) &&
+      getLivePatternError(field, formData[field.id])
+  );
+  const isStepDisabled = submitting || hasStepErrors || hasLivePatternError;
 
   const [isPasswordProtected, setIsPasswordProtected] = useState(false);
   const [passwordVerified, setPasswordVerified] = useState(false);
@@ -86,9 +96,10 @@ export function MultiStepForm({
   useFormNavigation({
     currentStep,
     totalSteps,
-    onNext: handleNext,
+    onNext: isStepDisabled ? () => {} : handleNext,
     onPrevious: handlePrevious,
-    onSubmit: handleSubmit,
+    onSubmit: isStepDisabled ? () => {} : handleSubmit,
+    isStepDisabled,
   });
 
   if (submitted) {

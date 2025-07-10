@@ -6,6 +6,7 @@ interface UseFormNavigationProps {
   onNext: () => void;
   onPrevious: () => void;
   onSubmit: () => void;
+  isStepDisabled?: boolean;
 }
 
 export const useFormNavigation = ({
@@ -14,9 +15,11 @@ export const useFormNavigation = ({
   onNext,
   onPrevious,
   onSubmit,
+  isStepDisabled,
 }: UseFormNavigationProps) => {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      if (isStepDisabled) return;
       if (event.key === "ArrowRight") {
         onNext();
       } else if (event.key === "ArrowLeft") {
@@ -32,5 +35,5 @@ export const useFormNavigation = ({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentStep, totalSteps, onNext, onPrevious, onSubmit]);
+  }, [currentStep, totalSteps, onNext, onPrevious, onSubmit, isStepDisabled]);
 };
