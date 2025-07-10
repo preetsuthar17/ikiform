@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write . --ignore-path .gitignore --ignore-path .prettierignore",
@@ -59,6 +60,7 @@
     "marked": "^16.0.0",
     "motion": "^12.23.0",
     "next": "15.3.5",
+    "next-sitemap": "^4.2.3",
     "next-themes": "^0.4.6",
     "postgres": "^3.4.7",
     "prettier": "^3.6.2",
