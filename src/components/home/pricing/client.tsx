@@ -130,10 +130,10 @@ export default function PricingClient({ products }: PricingClientProps) {
                 <div className="flex flex-col gap-3 items-center">
                   <div className="flex items-baseline gap-3">
                     <span className="text-2xl font-medium text-muted-foreground line-through">
-                      $49
+                      $69
                     </span>
                     <span className="text-4xl font-bold text-foreground">
-                      $39
+                      $59
                     </span>
                     <span className="text-muted-foreground">one-time</span>
                   </div>
