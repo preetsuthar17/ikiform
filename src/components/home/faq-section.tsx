@@ -57,7 +57,10 @@ const faqs = [
       <>
         <p>
           Ikiform is completely open-source and available on{" "}
-          <Link className="underline" href="https://github.com">
+          <Link
+            className="underline"
+            href="https://github.com/preetsuthar17/Ikiform"
+          >
             GitHub
           </Link>
         </p>

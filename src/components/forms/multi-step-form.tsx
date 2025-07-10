@@ -50,7 +50,7 @@ export function MultiStepForm({
   const [isLoading, setIsLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
 
-  const { containerClass } = getFormLayoutClasses(schema);
+  const { containerClass, marginClass } = getFormLayoutClasses(schema);
 
   useEffect(() => {
     const passwordProtection = schema.settings.passwordProtection;
@@ -128,9 +128,7 @@ export function MultiStepForm({
   return (
     <div
       dir={dir}
-      className={`bg-background flex items-center justify-center w-full transition-opacity duration-500 ${
-        showForm ? "opacity-100" : "opacity-0"
-      }`}
+      className={`bg-background flex items-center justify-center w-full transition-opacity duration-500 ${showForm ? "opacity-100" : "opacity-0"} ${marginClass}`}
     >
       <div
         className={`flex flex-col gap-8 w-full ${containerClass}`}
