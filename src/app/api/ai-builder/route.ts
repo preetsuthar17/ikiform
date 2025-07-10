@@ -1,4 +1,4 @@
-import { cohere } from "@ai-sdk/cohere";
+import { groq } from "@ai-sdk/groq";
 import { streamText } from "ai";
 import { NextRequest } from "next/server";
 import { checkRateLimit, RateLimitSettings } from "@/lib/forms";
@@ -27,7 +27,7 @@ function createErrorResponse(message: string, status: number = 500) {
 }
 
 function validateAndSanitizeMessages(
-  messages: any[],
+  messages: any[]
 ): { role: string; content: string }[] {
   if (!Array.isArray(messages) || messages.length === 0) {
     throw new Error("Invalid messages array");
@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
       {
         status: 429,
         headers: { "Retry-After": retryAfter.toString() },
-      },
+      }
     );
   }
 
@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (apiKeyValid === null) {
-      apiKeyValid = !!process.env.COHERE_API_KEY;
+      apiKeyValid = !!process.env.GROQ_API_KEY;
     }
     if (!apiKeyValid) {
       return createErrorResponse("AI service temporarily unavailable", 503);
@@ -107,7 +107,7 @@ export async function POST(req: NextRequest) {
     } catch (error) {
       return createErrorResponse(
         error instanceof Error ? error.message : "Invalid request format",
-        400,
+        400
       );
     }
 
@@ -129,7 +129,7 @@ export async function POST(req: NextRequest) {
             timestamp: new Date().toISOString(),
             ip: ip,
             userAgent: req.headers.get("user-agent") || "",
-          },
+          }
         );
       } catch (error) {
         console.error("Error saving user message:", error);
@@ -138,7 +138,7 @@ export async function POST(req: NextRequest) {
     }
 
     const stream = await streamText({
-      model: cohere("command-r7b-12-2024"),
+      model: groq("llama-3.1-8b-instant"),
       messages: [
         { role: "system", content: systemPrompt },
         ...sanitizedMessages.map((msg) => ({
@@ -181,9 +181,9 @@ export async function POST(req: NextRequest) {
                 aiResponse,
                 {
                   timestamp: new Date().toISOString(),
-                  model: "cohere/command-r7b-12-2024",
+                  model: "groq/llama3-70b-8192",
                   temperature: 0.3,
-                },
+                }
               );
             } catch (error) {
               console.error("Error saving AI response:", error);
@@ -226,6 +226,6 @@ export async function GET() {
     {
       status: 200,
       headers: { "Content-Type": "application/json" },
-    },
+    }
   );
 }
