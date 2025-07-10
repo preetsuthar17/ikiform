@@ -8,11 +8,13 @@ import { Modal, ModalContent, ModalHeader, ModalTitle } from "../ui/modal";
 import DemoFormBuilder from "@/components/form-builder/form-builder/DemoFormBuilder";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { OptimizedImage } from "../other/optimized-image";
+import { Play } from "lucide-react";
 
 export default function Hero() {
   const { user } = useAuth();
 
   const [open, setOpen] = React.useState(false);
+  const [videoOpen, setVideoOpen] = React.useState(false);
 
   return (
     <section className="flex flex-col gap-10 md:gap-16 md:pb-28 pb-16 w-full max-w-[75%] max-sm:max-w-[90%] mx-auto h-dvh my-12">
@@ -63,14 +65,34 @@ export default function Hero() {
             </Button>
           </div>
           <div className="w-full my-12 h-full grow relative">
-            <div
-              className="absolute inset-0 z-5 flex items-center justify-center bg-foreground/10 cursor-pointer transition-opacity hover:bg-foreground/20 rounded-card"
-              onClick={() => setOpen(true)}
-            >
-              <span className="sr-only">Interactive demo</span>
-            </div>
             <div className="w-full h-full">
-              <DemoFormBuilder />
+              <div className="lg:hidden w-full h-full relative">
+                <video
+                  className="w-full h-full object-cover rounded-card"
+                  muted
+                  loop
+                  playsInline
+                >
+                  <source src="/hero/demo-video.mp4" type="video/mp4" />
+                </video>
+                <div
+                  className="absolute inset-0 z-5 flex items-center justify-center bg-foreground/10 cursor-pointer transition-opacity hover:bg-foreground/20 rounded-card"
+                  onClick={() => setVideoOpen(true)}
+                >
+                  <div className="flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full">
+                    <Play className="w-8 h-8 text-white ml-1" fill="white" />
+                  </div>
+                </div>
+              </div>
+              <div className="hidden lg:block w-full h-full">
+                <div
+                  className="absolute inset-0 z-5 flex items-center justify-center bg-foreground/10 cursor-pointer transition-opacity hover:bg-foreground/20 rounded-card"
+                  onClick={() => setOpen(true)}
+                >
+                  <span className="sr-only">Interactive demo</span>
+                </div>
+                <DemoFormBuilder />
+              </div>
             </div>
             {/* Modal for interactive demo */}
             <Modal open={open} onOpenChange={setOpen}>
@@ -81,6 +103,26 @@ export default function Hero() {
                 <ScrollArea className="w-full h-[82dvh]">
                   <DemoFormBuilder />
                 </ScrollArea>
+              </ModalContent>
+            </Modal>
+            {/* Modal for video demo */}
+            <Modal open={videoOpen} onOpenChange={setVideoOpen}>
+              <ModalContent className="max-w-[90%] aspect-video w-full flex flex-col gap-6 z-50">
+                <ModalHeader className="sr-only">
+                  <ModalTitle>Demo Video</ModalTitle>
+                </ModalHeader>
+                <div className="w-full aspect-video">
+                  <video
+                    className="w-full h-full object-cover rounded-lg"
+                    controls
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  >
+                    <source src="/hero/demo-video.mp4" type="video/mp4" />
+                  </video>
+                </div>
               </ModalContent>
             </Modal>
           </div>
