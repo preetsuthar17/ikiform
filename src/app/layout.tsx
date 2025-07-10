@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toast";
 import { ThemeProvider } from "next-themes";
 import ConditionalLayout from "./conditional-layout";
 import CrispController from "@/components/other/CrispController";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -127,6 +128,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <GoogleTagManager gtmId="AW-16554309213" />
       <head>
         {/* <script
           crossOrigin="anonymous"
