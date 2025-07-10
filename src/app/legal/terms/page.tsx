@@ -27,10 +27,11 @@ export default function Terms() {
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">2. Use License</h2>
         <p>
-          Permission is granted to temporarily download one copy of the
-          materials (information or software) on Ikiform's website for personal,
-          non-commercial transitory viewing only. This is the grant of a
-          license, not a transfer of title, and under this license you may not:
+          Permission is granted to use, copy, modify, and distribute this
+          software and its accompanying materials in accordance with the terms
+          of the open-source license provided with the project (e.g., MIT, GPL,
+          etc.). This license grants rights to use the software for both
+          personal and commercial purposes, subject to the following conditions:
         </p>
         <ul className="list-disc pl-6 flex flex-col gap-1">
           <li>modify or copy the materials;</li>
