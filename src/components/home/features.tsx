@@ -6,7 +6,7 @@ const features = [
     description:
       "Generate forms instantly using AI. Just describe your needs and let our AI build your form in seconds.",
     video: "/features-demo/ai-form-builder-demo.mp4",
-    bg: "/features-demo/features-bg/01.png",
+    bg: "/features-demo/features-bg/01.webp",
     id: "ai-builder-feature",
   },
   {
@@ -14,7 +14,7 @@ const features = [
     description:
       "Drag and drop to create beautiful forms. Customize fields, layout, and design with ease.",
     video: "/features-demo/form-builder-demo.mp4",
-    bg: "/features-demo/features-bg/02.png",
+    bg: "/features-demo/features-bg/02.webp",
     id: "intuitive-form-builder-feature",
   },
   {
@@ -22,7 +22,7 @@ const features = [
     description:
       "Get instant insights and analytics powered by AI. Visualize responses and trends effortlessly.",
     video: "/features-demo/ai-powered-analytics-demo.mp4",
-    bg: "/features-demo/features-bg/03.png",
+    bg: "/features-demo/features-bg/03.webp",
     id: "ai-powered-analytics-feature",
   },
 ];

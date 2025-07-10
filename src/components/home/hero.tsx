@@ -21,7 +21,7 @@ export default function Hero() {
       <div className="flex flex-col gap-8 w-full h-full md:p-12 p-8 rounded-card relative  overflow-hidden">
         {/* Flipped Background Image */}
         <OptimizedImage
-          src="/hero/bg.png"
+          src="/hero/bg.webp"
           alt="Hero background"
           width={1920}
           height={1080}
