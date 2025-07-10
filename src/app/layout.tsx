@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     template: "%s | Ikiform",
   },
   description:
-    "Create beautiful forms with Ikiform - An open-source alternative to Typeform and Google Forms. Build surveys, collect responses, and analyze data effortlessly.",
+    "Create beautiful forms with Ikiform - An open-source alternative to Google Forms. Build surveys, collect responses, and analyze data effortlessly.",
   applicationName: "Ikiform",
   authors: [{ name: "Preet Suthar", url: "https://ikiform.com" }],
   creator: "Ikiform",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     siteName: "Ikiform",
     title: "Ikiform",
     description:
-      "Create beautiful, interactive forms with Ikiform - An open-source alternative to Typeform and Google Forms. Build surveys, collect responses, and analyze data effortlessly.",
+      "Create beautiful, interactive forms with Ikiform - An open-source alternative to Google Forms. Build surveys, collect responses, and analyze data effortlessly.",
     images: [
       {
         url: "/og-banner.png",
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     creator: "@Ikiform",
     title: "Ikiform",
     description:
-      "Create beautiful, interactive forms with Ikiform - An open-source alternative to Typeform and Google Forms.",
+      "Create beautiful, interactive forms with Ikiform - An open-source alternative to Google Forms.",
     images: ["/og-banner.png"],
   },
   robots: {

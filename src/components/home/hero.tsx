@@ -40,8 +40,8 @@ export default function Hero() {
 
           {/* Description */}
           <p className="md:text-lg text-white">
-            Ikiform is an open-source alternative to Typeform and Google Forms,
-            designed to help you create beautiful forms effortlessly.
+            Ikiform is an open-source alternative to Google Forms, designed to
+            help you create beautiful forms effortlessly.
           </p>
 
           {/* Buttons */}

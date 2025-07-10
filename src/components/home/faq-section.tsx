@@ -14,7 +14,7 @@ const faqs = [
   {
     question: "What is Ikiform?",
     answer:
-      "Ikiform is an open-source alternative to Typeform and Google Forms. It helps you create beautiful, interactive forms easily.",
+      "Ikiform is an open-source alternative to Google Forms. It helps you create beautiful, interactive forms easily.",
   },
   {
     question: "Why use Ikiform instead of Typeform or Google Forms?",
