@@ -161,6 +161,8 @@ export function MultiStepForm({
             onNext={handleNext}
             onPrevious={handlePrevious}
             schema={schema}
+            currentFields={currentBlock.fields}
+            formData={formData}
           />
         </Card>
 

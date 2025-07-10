@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
 import { SocialMediaIcons } from "@/components/ui/social-media-icons";
+import { getLivePatternError } from "@/components/form-builder/form-field-renderer/components/TextInputField";
 
 // Types
 import type { FormSchema, FormField } from "@/lib/database";
@@ -76,11 +77,35 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
           </div>
         ))}
 
+        {(() => {
+          // Check for any live regex error in text fields
+          for (const field of fields) {
+            if (
+              ["text", "email", "textarea"].includes(field.type) &&
+              getLivePatternError(field, formData[field.id])
+            ) {
+              return (
+                <div className="text-destructive text-xs mb-2">
+                  Please fix the highlighted errors before submitting.
+                </div>
+              );
+            }
+          }
+          return null;
+        })()}
+
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <Button
             type="submit"
             className="w-fit sm:w-auto"
-            disabled={submitting}
+            disabled={
+              submitting ||
+              fields.some(
+                (field) =>
+                  ["text", "email", "textarea"].includes(field.type) &&
+                  getLivePatternError(field, formData[field.id])
+              )
+            }
             loading={submitting}
           >
             {submitting ? "Submitting" : schema.settings.submitText || "Submit"}

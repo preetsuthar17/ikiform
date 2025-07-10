@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // UI Components
 import { Button } from "@/components/ui/button";
+import { getLivePatternError } from "@/components/form-builder/form-field-renderer/components/TextInputField";
 
 // Types
 import type { FormSchema } from "@/lib/database";
@@ -15,6 +16,8 @@ interface FormNavigationProps {
   onNext: () => void;
   onPrevious: () => void;
   schema: FormSchema;
+  currentFields: any[];
+  formData: Record<string, any>;
 }
 
 export const FormNavigation: React.FC<FormNavigationProps> = ({
@@ -24,8 +27,16 @@ export const FormNavigation: React.FC<FormNavigationProps> = ({
   onNext,
   onPrevious,
   schema,
+  currentFields,
+  formData,
 }) => {
   const isLastStep = currentStep === totalSteps - 1;
+
+  const hasLivePatternError = currentFields.some(
+    (field) =>
+      ["text", "email", "textarea"].includes(field.type) &&
+      getLivePatternError(field, formData[field.id])
+  );
 
   return (
     <div className="flex justify-end gap-4">
@@ -43,7 +54,7 @@ export const FormNavigation: React.FC<FormNavigationProps> = ({
       <Button
         type="button"
         onClick={onNext}
-        disabled={submitting}
+        disabled={submitting || hasLivePatternError}
         loading={submitting}
         className="flex items-center gap-2"
       >
