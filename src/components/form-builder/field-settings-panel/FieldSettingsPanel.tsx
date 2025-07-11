@@ -33,7 +33,7 @@ export function FieldSettingsPanel({
 }: FieldSettingsPanelProps) {
   const { updateField, updateValidation, updateSettings } = useFieldUpdates(
     field,
-    onFieldUpdate,
+    onFieldUpdate
   );
 
   if (!field) {
@@ -51,6 +51,7 @@ export function FieldSettingsPanel({
           <FieldSpecificSettings
             field={field}
             onUpdateSettings={updateSettings}
+            onFieldUpdate={onFieldUpdate}
           />
 
           <OptionsSettings field={field} onFieldUpdate={onFieldUpdate} />
