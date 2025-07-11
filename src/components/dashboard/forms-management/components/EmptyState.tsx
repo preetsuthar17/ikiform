@@ -32,7 +32,7 @@ export function EmptyState({
   return (
     <Card className="p-16 text-center rounded-card">
       <div className="max-w-md mx-auto flex flex-col gap-6">
-        <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto">
+        <div className="w-20 h-20 bg-accent rounded-card flex items-center justify-center mx-auto">
           <Plus className="w-10 h-10 text-accent-foreground" />
         </div>
         <div className="flex flex-col gap-2">
