@@ -10,10 +10,25 @@ import { createProfanityFilter } from "@/lib/validation";
 import { createClient } from "@/utils/supabase/server";
 import { requirePremium } from "@/lib/utils/premium-check";
 import { sendFormNotification } from "@/lib/services";
+import { sanitizeString } from "@/lib/utils/sanitize";
+
+// Recursively sanitize all string fields in an object
+function sanitizeObjectStrings(obj: any): any {
+  if (typeof obj === "string") return sanitizeString(obj);
+  if (Array.isArray(obj)) return obj.map(sanitizeObjectStrings);
+  if (obj && typeof obj === "object") {
+    const result: any = {};
+    for (const key in obj) {
+      result[key] = sanitizeObjectStrings(obj[key]);
+    }
+    return result;
+  }
+  return obj;
+}
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id: formId } = await params;
@@ -31,7 +46,7 @@ export async function POST(
     if (!form) {
       return NextResponse.json(
         { error: "Form not found or not published" },
-        { status: 404 },
+        { status: 404 }
       );
     }
 
@@ -72,7 +87,7 @@ export async function POST(
             remaining: rateLimitResult.remaining,
             reset: rateLimitResult.reset,
           },
-          { status: 429 },
+          { status: 429 }
         );
       }
     }
@@ -90,7 +105,7 @@ export async function POST(
               responseLimit.message ||
               "This form is no longer accepting responses.",
           },
-          { status: 403 },
+          { status: 403 }
         );
       }
     }
@@ -101,11 +116,13 @@ export async function POST(
       ...form.schema.settings.profanityFilter,
     };
 
-    let filteredSubmissionData = submissionData;
+    let filteredSubmissionData = sanitizeObjectStrings(submissionData);
 
     if (profanityFilterSettings.enabled) {
       const profanityFilter = createProfanityFilter(profanityFilterSettings);
-      const filterResult = profanityFilter.filterSubmissionData(submissionData);
+      const filterResult = profanityFilter.filterSubmissionData(
+        filteredSubmissionData
+      );
 
       if (!filterResult.isValid) {
         return NextResponse.json(
@@ -116,7 +133,7 @@ export async function POST(
               "Your submission contains inappropriate content. Please review and resubmit.",
             violations: filterResult.violations.length,
           },
-          { status: 400 },
+          { status: 400 }
         );
       }
 
@@ -130,7 +147,7 @@ export async function POST(
     const submission = await formsDbServer.submitForm(
       formId,
       filteredSubmissionData,
-      ipAddress,
+      ipAddress
     );
 
     // Send notification if enabled
@@ -139,7 +156,7 @@ export async function POST(
       try {
         console.log(
           "[Notification] Attempting to send notification email",
-          notifications,
+          notifications
         );
         // Build analytics URL
         const analyticsUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "https://ikiform.com"}/dashboard/forms/${formId}/analytics`;
@@ -162,7 +179,7 @@ export async function POST(
     } else {
       console.log(
         "[Notification] Notification not sent. Settings:",
-        notifications,
+        notifications
       );
     }
 
@@ -175,7 +192,7 @@ export async function POST(
     console.error("Form submission error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

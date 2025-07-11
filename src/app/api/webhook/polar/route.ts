@@ -1,5 +1,6 @@
 import { Webhooks } from "@polar-sh/nextjs";
 import { createAdminClient } from "@/utils/supabase/admin";
+import { sanitizeString } from "@/lib/utils/sanitize";
 
 export const POST = Webhooks({
   webhookSecret: process.env.POLAR_WEBHOOK_SECRET!,
@@ -17,7 +18,7 @@ export const POST = Webhooks({
       const supabase = createAdminClient();
 
       // Get customer email from the payload
-      const customerEmail = payload.data.customer?.email;
+      const customerEmail = sanitizeString(payload.data.customer?.email || "");
       if (!customerEmail) {
         console.error("❌ No customer email found in payload");
         return;
@@ -34,10 +35,10 @@ export const POST = Webhooks({
 
       if (lookupError || !userData) {
         console.warn(
-          `⚠️ User not found in database with email: ${customerEmail}`,
+          `⚠️ User not found in database with email: ${customerEmail}`
         );
         console.log(
-          "💡 Make sure the user has signed up with this email address",
+          "💡 Make sure the user has signed up with this email address"
         );
         return;
       }
@@ -58,7 +59,7 @@ export const POST = Webhooks({
 
       if (data && data.length > 0) {
         console.log(
-          `✅ Successfully updated premium status for user: ${customerEmail} (uid: ${userData.uid})`,
+          `✅ Successfully updated premium status for user: ${customerEmail} (uid: ${userData.uid})`
         );
         console.log("👤 Updated user data:", data[0]);
         const { sendPremiumThankYouEmail } = await import(
@@ -66,7 +67,7 @@ export const POST = Webhooks({
         );
         await sendPremiumThankYouEmail({
           to: customerEmail,
-          name: payload.data.customer?.name || undefined,
+          name: sanitizeString(payload.data.customer?.name || "") || undefined,
         });
       } else {
         console.warn(`⚠️ Failed to update user with uid: ${userData.uid}`);

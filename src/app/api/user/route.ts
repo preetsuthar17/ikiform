@@ -7,6 +7,7 @@ import {
   sendWelcomeEmail,
   sendNewLoginEmail,
 } from "@/lib/services/notifications";
+import { sanitizeString } from "@/lib/utils/sanitize";
 
 export async function POST(request: NextRequest) {
   try {
@@ -27,21 +28,22 @@ export async function POST(request: NextRequest) {
     }
 
     const name =
-      user_metadata?.full_name ||
-      user_metadata?.name ||
-      user_metadata?.user_name ||
-      email.split("@")[0] ||
+      sanitizeString(user_metadata?.full_name) ||
+      sanitizeString(user_metadata?.name) ||
+      sanitizeString(user_metadata?.user_name) ||
+      sanitizeString(email.split("@")[0]) ||
       "";
+    const sanitizedEmail = sanitizeString(email);
 
     const { data: existingUser } = await supabase
       .from("users")
       .select("email")
-      .eq("email", email)
+      .eq("email", sanitizedEmail)
       .single();
 
     if (existingUser) {
       // Existing user: send new login email
-      await sendNewLoginEmail({ to: email, name });
+      await sendNewLoginEmail({ to: sanitizedEmail, name });
       return NextResponse.json({
         success: true,
         message: "User already exists",
@@ -55,7 +57,7 @@ export async function POST(request: NextRequest) {
       .insert({
         uid,
         name,
-        email,
+        email: sanitizedEmail,
         has_premium: false,
         polar_customer_id: null,
       })
@@ -65,12 +67,12 @@ export async function POST(request: NextRequest) {
     if (insertError) {
       return NextResponse.json(
         { error: "Failed to create user", details: insertError.message },
-        { status: 500 },
+        { status: 500 }
       );
     }
 
     // New user: send welcome email
-    await sendWelcomeEmail({ to: email, name });
+    await sendWelcomeEmail({ to: sanitizedEmail, name });
 
     return NextResponse.json({
       success: true,
@@ -81,7 +83,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
@@ -107,7 +109,7 @@ export async function GET(request: NextRequest) {
     if (error) {
       return NextResponse.json(
         { error: "User not found in database", details: error.message },
-        { status: 404 },
+        { status: 404 }
       );
     }
 
@@ -123,7 +125,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

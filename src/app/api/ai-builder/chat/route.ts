@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 import { formsDbServer } from "@/lib/database";
 import { requirePremium } from "@/lib/utils/premium-check";
+import { sanitizeString } from "@/lib/utils/sanitize";
 
 export async function GET(req: NextRequest) {
   try {
@@ -29,14 +30,14 @@ export async function GET(req: NextRequest) {
     if (!sessionId) {
       return NextResponse.json(
         { error: "Session ID is required" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
     // Get chat history for the session
     const chatHistory = await formsDbServer.getAIBuilderChatHistory(
       user.id,
-      sessionId,
+      sessionId
     );
 
     return NextResponse.json({
@@ -51,7 +52,7 @@ export async function GET(req: NextRequest) {
     console.error("Error fetching AI Builder chat history:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
@@ -81,24 +82,27 @@ export async function POST(req: NextRequest) {
     if (!sessionId || !role || !content) {
       return NextResponse.json(
         { error: "Session ID, role, and content are required" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
     if (!["user", "assistant", "system"].includes(role)) {
       return NextResponse.json(
         { error: "Invalid role. Must be 'user', 'assistant', or 'system'" },
-        { status: 400 },
+        { status: 400 }
       );
     }
+
+    // Sanitize content
+    const sanitizedContent = sanitizeString(content);
 
     // Save the message
     const savedMessage = await formsDbServer.saveAIBuilderMessage(
       user.id,
       sessionId,
       role,
-      content,
-      metadata,
+      sanitizedContent,
+      metadata
     );
 
     return NextResponse.json({
@@ -109,7 +113,7 @@ export async function POST(req: NextRequest) {
     console.error("Error saving AI Builder message:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
