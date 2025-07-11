@@ -51,7 +51,7 @@ export function MultiStepForm({
   const hasLivePatternError = currentBlock.fields.some(
     (field) =>
       ["text", "email", "textarea"].includes(field.type) &&
-      getLivePatternError(field, formData[field.id])
+      getLivePatternError(field, formData[field.id]),
   );
   const isStepDisabled = submitting || hasStepErrors || hasLivePatternError;
 

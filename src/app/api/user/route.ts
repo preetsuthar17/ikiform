@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
     if (insertError) {
       return NextResponse.json(
         { error: "Failed to create user", details: insertError.message },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -109,7 +109,7 @@ export async function GET(request: NextRequest) {
     if (error) {
       return NextResponse.json(
         { error: "User not found in database", details: error.message },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -125,7 +125,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

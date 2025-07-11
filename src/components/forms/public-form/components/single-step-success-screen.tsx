@@ -54,7 +54,7 @@ export const SingleStepSuccessScreen: React.FC<
         <div className="text-center">
           {Boolean(
             schema.settings.branding &&
-              (schema.settings.branding as any).showIkiformBranding !== false
+              (schema.settings.branding as any).showIkiformBranding !== false,
           ) && (
             <p className="text-sm text-muted-foreground">
               Powered by{" "}

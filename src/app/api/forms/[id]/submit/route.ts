@@ -28,7 +28,7 @@ function sanitizeObjectStrings(obj: any): any {
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const { id: formId } = await params;
@@ -46,7 +46,7 @@ export async function POST(
     if (!form) {
       return NextResponse.json(
         { error: "Form not found or not published" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -87,7 +87,7 @@ export async function POST(
             remaining: rateLimitResult.remaining,
             reset: rateLimitResult.reset,
           },
-          { status: 429 }
+          { status: 429 },
         );
       }
     }
@@ -105,7 +105,7 @@ export async function POST(
               responseLimit.message ||
               "This form is no longer accepting responses.",
           },
-          { status: 403 }
+          { status: 403 },
         );
       }
     }
@@ -121,7 +121,7 @@ export async function POST(
     if (profanityFilterSettings.enabled) {
       const profanityFilter = createProfanityFilter(profanityFilterSettings);
       const filterResult = profanityFilter.filterSubmissionData(
-        filteredSubmissionData
+        filteredSubmissionData,
       );
 
       if (!filterResult.isValid) {
@@ -133,7 +133,7 @@ export async function POST(
               "Your submission contains inappropriate content. Please review and resubmit.",
             violations: filterResult.violations.length,
           },
-          { status: 400 }
+          { status: 400 },
         );
       }
 
@@ -147,7 +147,7 @@ export async function POST(
     const submission = await formsDbServer.submitForm(
       formId,
       filteredSubmissionData,
-      ipAddress
+      ipAddress,
     );
 
     // Send notification if enabled
@@ -156,7 +156,7 @@ export async function POST(
       try {
         console.log(
           "[Notification] Attempting to send notification email",
-          notifications
+          notifications,
         );
         // Build analytics URL
         const analyticsUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "https://ikiform.com"}/dashboard/forms/${formId}/analytics`;
@@ -179,7 +179,7 @@ export async function POST(
     } else {
       console.log(
         "[Notification] Notification not sent. Settings:",
-        notifications
+        notifications,
       );
     }
 
@@ -192,7 +192,7 @@ export async function POST(
     console.error("Form submission error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

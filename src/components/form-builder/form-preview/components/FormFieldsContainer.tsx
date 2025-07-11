@@ -125,7 +125,7 @@ export function FormFieldsContainer({
                       }`}
                       onClick={() =>
                         onFieldSelect(
-                          selectedFieldId === field.id ? null : field.id
+                          selectedFieldId === field.id ? null : field.id,
                         )
                       }
                     >
