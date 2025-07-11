@@ -71,7 +71,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
       if (isMobile && fieldId) setShowFieldSettings(true);
       if (isMobile && !fieldId) setShowFieldSettings(false);
     },
-    [actions, isMobile],
+    [actions, isMobile]
   );
 
   // Form actions
@@ -91,13 +91,15 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           ? { min: 0, max: 100, step: 1, defaultValue: 50 }
           : fieldType === "tags"
             ? { maxTags: 10, allowDuplicates: false }
-            : {},
+            : fieldType === "poll"
+              ? { pollOptions: ["Option 1", "Option 2"] }
+              : {},
     };
 
     const updatedSchema = addFieldToSchema(
       state.formSchema,
       newField,
-      state.selectedBlockId,
+      state.selectedBlockId
     );
     actions.setFormSchema(updatedSchema);
     actions.setSelectedFieldId(newField.id);
@@ -108,7 +110,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
       addField(fieldType);
       setShowFieldPalette(false);
     },
-    [addField],
+    [addField]
   );
 
   const updateField = (updatedField: FormField) => {
@@ -174,7 +176,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
   const updateBlock = (blockId: string, updates: Partial<FormBlock>) => {
     actions.setFormSchema((prev) => {
       const updatedBlocks = prev.blocks.map((block) =>
-        block.id === blockId ? { ...block, ...updates } : block,
+        block.id === blockId ? { ...block, ...updates } : block
       );
 
       return {
@@ -240,7 +242,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
         const newForm = await formsDb.createForm(
           user.id,
           state.formSchema.settings.title,
-          state.formSchema,
+          state.formSchema
         );
         router.push(`/form-builder/${newForm.id}`);
         toast.success("Form created successfully!");
@@ -326,7 +328,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           state.formSchema.blocks[0].id === "default")
       ) {
         const defaultBlock = state.formSchema.blocks.find(
-          (b) => b.id === "default",
+          (b) => b.id === "default"
         );
         const currentFields =
           defaultBlock?.fields || state.formSchema.fields || [];
@@ -358,7 +360,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
       }
     } else {
       const allFields = state.formSchema.blocks.flatMap(
-        (block) => block.fields || [],
+        (block) => block.fields || []
       );
 
       const newSchema = {

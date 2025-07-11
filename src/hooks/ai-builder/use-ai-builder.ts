@@ -64,7 +64,7 @@ export const useAIBuilder = () => {
 
   const processAIResponse = async (
     promptText: string,
-    currentMessages: ChatMessage[],
+    currentMessages: ChatMessage[]
   ) => {
     let currentSessionId = sessionId || generateSessionId();
     setSessionId(currentSessionId);
@@ -78,7 +78,7 @@ export const useAIBuilder = () => {
       currentMessages,
       currentSessionId,
       setStreamedContent,
-      setStreamError,
+      setStreamError
     );
 
     setIsStreaming(false);
@@ -111,7 +111,7 @@ export const useAIBuilder = () => {
       setStreamedContent("");
     } else {
       setStreamError(
-        "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!",
+        "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!"
       );
     }
   };
@@ -141,7 +141,7 @@ export const useAIBuilder = () => {
     if (activeForm?.schema) {
       localStorage.setItem(
         "importedFormSchema",
-        JSON.stringify(activeForm.schema),
+        JSON.stringify(activeForm.schema)
       );
       router.push("/form-builder");
     }

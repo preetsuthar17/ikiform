@@ -136,7 +136,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
             "absolute z-10",
             variant === "underline"
               ? "bottom-0 h-0.5 rounded-none"
-              : "top-1 bottom-1 rounded-ele"
+              : "top-1 bottom-1 rounded-card"
           )}
           style={{
             backgroundColor:

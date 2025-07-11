@@ -18,6 +18,8 @@ import {
   SocialField,
   DateInputField,
   SignatureField,
+  PollField,
+  RatingField,
 } from "../components";
 import type { BaseFieldProps } from "../types";
 
@@ -26,7 +28,7 @@ export function createFieldComponent(
   value: any,
   onChange: (value: any) => void,
   error?: string,
-  fieldRef?: React.RefObject<any>,
+  fieldRef?: React.RefObject<any>
 ): React.ReactElement {
   const props: BaseFieldProps = { field, value, onChange, error, fieldRef };
 
@@ -55,6 +57,10 @@ export function createFieldComponent(
       return React.createElement(DateInputField, props);
     case "signature":
       return React.createElement(SignatureField, props);
+    case "poll":
+      return React.createElement(PollField, props);
+    case "rating":
+      return React.createElement(RatingField, props);
     default:
       return React.createElement("div", {}, "Unsupported field type");
   }

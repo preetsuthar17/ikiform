@@ -28,6 +28,7 @@ import {
 // Password Protection
 import { PasswordProtectionModal } from "@/components/forms/public-form/components/PasswordProtectionModal";
 import toast from "react-hot-toast";
+import { Progress } from "../ui/progress";
 
 export function MultiStepForm({
   formId,
@@ -123,15 +124,8 @@ export function MultiStepForm({
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center w-full">
-        <div className={`${containerClass} flex flex-col gap-6 w-full px-4`}>
-          <div className="w-full bg-muted rounded-card h-2">
-            <div
-              className="bg-primary h-2 rounded-card transition-all duration-2000 ease-out"
-              style={{ width: "100%" }}
-            />
-          </div>
-        </div>
+      <div className="fixed inset-0 bg-background flex items-center justify-center">
+        <Progress value={100} size="sm" className="w-[200px]" />
       </div>
     );
   }

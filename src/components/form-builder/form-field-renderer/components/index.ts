@@ -14,3 +14,5 @@ export { TagsField } from "./TagsField";
 export { SocialField } from "./SocialField";
 export { DateInputField } from "./DateInputField";
 export { SignatureField } from "./SignatureField";
+export { PollField } from "./PollField";
+export { RatingField } from "./RatingField";

@@ -16,6 +16,8 @@ import {
   Calendar,
   PenLine,
   FileUp,
+  BarChart3,
+  Star,
 } from "lucide-react";
 
 export const FIELD_TYPES: FieldTypeConfig[] = [
@@ -83,13 +85,25 @@ export const FIELD_TYPES: FieldTypeConfig[] = [
     type: "date",
     label: "Date",
     icon: Calendar,
-    description: "Date input (calendar or human-friendly)",
+    description: "Date input (calendar)",
   },
   {
     type: "signature",
     label: "Signature",
     icon: PenLine,
     description: "Digital signature input (draw with mouse or touch)",
+  },
+  {
+    type: "poll",
+    label: "Poll",
+    icon: BarChart3,
+    description: "Create a poll with multiple options for users to vote",
+  },
+  {
+    type: "rating",
+    label: "Rating",
+    icon: Star,
+    description: "Collect star or custom icon ratings from users",
   },
 ];
 

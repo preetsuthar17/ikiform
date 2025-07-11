@@ -13,7 +13,7 @@ export function CompactFieldItem({
   return (
     <button
       onClick={() => onAddField(fieldType.type)}
-      className="rounded-card border border-border bg-background hover:bg-muted transition-colors text-left flex gap-2 items-center p-3"
+      className="rounded-ele border border-border bg-background hover:bg-muted transition-colors text-left flex gap-2 items-center p-3"
     >
       <Icon className="w-4 h-4 text-muted-foreground flex-shrink-0" />
       <span className="text-xs font-medium truncate">{fieldType.label}</span>

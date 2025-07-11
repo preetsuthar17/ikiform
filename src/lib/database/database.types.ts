@@ -180,7 +180,9 @@ export interface FormField {
     | "social"
     | "date"
     | "signature"
-    | "file";
+    | "file"
+    | "poll"
+    | "rating";
   label: string;
   description?: string;
   placeholder?: string;
@@ -227,19 +229,21 @@ export interface FormField {
       customValidationMessage?: string; // Custom validation message
     };
     // Date field settings
-    dateInputMode?: "classic" | "human-friendly"; // For date field: classic calendar or human-friendly input
     // Visual customization
     size?: "sm" | "md" | "lg"; // Field size
     variant?: "default" | "filled" | "ghost" | "underline"; // Field variant
     helpText?: string; // Additional help text
     width?: "full" | "half" | "third" | "quarter"; // Field width
-    // File upload settings
-    maxFiles?: number;
-    allowedTypes?: string[];
-    maxSizeMB?: number;
-    allowMultiple?: boolean;
-    fileLabel?: string;
-    filePlaceholder?: string;
+    // Poll field settings
+    pollOptions?: string[]; // List of poll options
+    showResults?: boolean; // Show results after voting
+    // Checkbox field settings
+    allowMultiple?: boolean; // Allow multiple selection for checkbox fields only
+    // Rating field settings
+    starCount?: number; // Number of stars
+    icon?: string; // Icon type (e.g., star, heart)
+    color?: string; // Color of the stars
+    starSize?: number; // Size of the stars/icons in px
   };
 }
 

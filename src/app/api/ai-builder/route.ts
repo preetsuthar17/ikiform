@@ -10,7 +10,7 @@ import { sanitizeString } from "@/lib/utils/sanitize";
 
 const systemPrompt =
   process.env.AI_FORM_SYSTEM_PROMPT ||
-  "You are an expert form builder AI. Always output ONLY the JSON schema for a form, never any explanation, markdown, or extra text.";
+  "You are an expert form builder AI. Always output ONLY the JSON schema for a form, never any explanation, markdown, or extra text. If the form is multi-step (has more than one step or block), always set 'multiStep': true in the schema's settings object.";
 
 let apiKeyValid: boolean | null = null;
 

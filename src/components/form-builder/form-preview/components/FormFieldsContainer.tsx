@@ -15,22 +15,10 @@ import {
 
 // Internal components
 import { FormFieldRenderer } from "../../form-field-renderer";
+import { FIELD_TYPES } from "../../field-palette/constants";
 
 // Types
 import type { FormFieldsContainerProps } from "../types";
-
-const FIELD_TYPES = [
-  { type: "text", label: "Text Input" },
-  { type: "email", label: "Email" },
-  { type: "textarea", label: "Text Area" },
-  { type: "number", label: "Number" },
-  { type: "select", label: "Dropdown" },
-  { type: "radio", label: "Radio Buttons" },
-  { type: "checkbox", label: "Checkboxes" },
-  { type: "slider", label: "Slider" },
-  { type: "tags", label: "Tags" },
-  { type: "social", label: "Social Media" },
-] as const;
 
 export function FormFieldsContainer({
   fields,
@@ -137,7 +125,7 @@ export function FormFieldsContainer({
                       }`}
                       onClick={() =>
                         onFieldSelect(
-                          selectedFieldId === field.id ? null : field.id,
+                          selectedFieldId === field.id ? null : field.id
                         )
                       }
                     >
