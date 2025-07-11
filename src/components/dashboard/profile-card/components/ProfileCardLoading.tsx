@@ -23,7 +23,7 @@ export function ProfileCardLoading({ className }: ProfileLoadingProps) {
       <div className="absolute right-3 top-3">
         <Skeleton className="w-8 h-8 rounded-card" />
       </div>
-      <CardContent className="flex flex-col flex flex-col gap-1 w-full items-center">
+      <CardContent className="flex flex-col gap-1 w-full items-center">
         <SkeletonText className="h-7 w-32 mb-2" />
         <SkeletonText className="h-5 w-40" />
       </CardContent>
