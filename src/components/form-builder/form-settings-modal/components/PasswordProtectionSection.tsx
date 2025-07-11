@@ -106,7 +106,7 @@ export function PasswordProtectionSection({
             </div>
           </div>
         ) : (
-          <div className="bg-muted/30 rounded-lg p-4">
+          <div className="bg-muted/30 rounded-card p-4">
             <p className="text-sm text-muted-foreground">
               Password protection restricts access to your form by requiring
               users to enter a password before they can view and submit the

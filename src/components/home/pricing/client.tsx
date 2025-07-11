@@ -165,12 +165,12 @@ export default function PricingClient({ products }: PricingClientProps) {
                     >
                       {purchaseLoading ? (
                         <div className="flex items-center gap-2">
-                          <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                          <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-card animate-spin" />
                           Processing...
                         </div>
                       ) : checkingPremium ? (
                         <div className="flex items-center gap-2">
-                          <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                          <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-card animate-spin" />
                           Checking...
                         </div>
                       ) : user ? (

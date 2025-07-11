@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const kbdVariants = cva(
-  "inline-flex items-center justify-center font-mono text-xs bg-muted text-muted-foreground border border-border rounded-md border-b-3 transition-all duration-75 cursor-pointer select-none active:translate-y-[1px] active:border-b-[1px]  hover:bg-muted/80 shadow-sm/2",
+  "inline-flex items-center justify-center font-mono text-xs bg-muted text-muted-foreground border border-border rounded-ele border-b-3 transition-all duration-75 cursor-pointer select-none active:translate-y-[1px] active:border-b-[1px]  hover:bg-muted/80 shadow-sm/2",
   {
     variants: {
       variant: {
@@ -27,7 +27,7 @@ const kbdVariants = cva(
       variant: "default",
       size: "sm",
     },
-  },
+  }
 );
 
 export interface KbdProps
@@ -75,7 +75,7 @@ const Kbd = React.forwardRef<HTMLElement, KbdProps>(
         {children}
       </kbd>
     );
-  },
+  }
 );
 
 Kbd.displayName = "Kbd";

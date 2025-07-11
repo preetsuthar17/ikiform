@@ -133,7 +133,7 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
       {/* Form Preview */}
       {showPreview && (
         <Card className="p-4">
-          <div className="border rounded-lg overflow-hidden">
+          <div className="border rounded-card overflow-hidden">
             <FormPreview
               schema={previewSchema}
               selectedFieldId={null}

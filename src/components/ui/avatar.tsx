@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/tooltip";
 
 const avatarVariants = cva(
-  "relative flex shrink-0 overflow-hidden rounded-full shadow-sm/2 bg-background",
+  "relative flex shrink-0 overflow-hidden rounded-card shadow-sm/2 bg-background",
   {
     variants: {
       size: {
@@ -27,7 +27,7 @@ const avatarVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  },
+  }
 );
 
 interface AvatarProps
@@ -85,8 +85,8 @@ const AvatarFallback = React.forwardRef<
   <AvatarPrimitive.Fallback
     ref={ref}
     className={cn(
-      "flex h-full w-full items-center justify-center rounded-full bg-muted text-muted-foreground font-medium",
-      className,
+      "flex h-full w-full items-center justify-center rounded-card bg-muted text-muted-foreground font-medium",
+      className
     )}
     {...props}
   />
@@ -109,7 +109,7 @@ const avatarGroupSpacing = {
 const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
   (
     { className, max = 3, spacing = "normal", size = "md", children, ...props },
-    ref,
+    ref
   ) => {
     const avatarsToShow = children.slice(0, max);
     const remainingCount = Math.max(0, children.length - max);
@@ -120,7 +120,7 @@ const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
         className={cn(
           "flex items-center",
           avatarGroupSpacing[spacing],
-          className,
+          className
         )}
         {...props}
       >
@@ -131,7 +131,7 @@ const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
               size,
               className: cn(
                 "border-2 border-background",
-                (child.props as any)?.className,
+                (child.props as any)?.className
               ),
             } as any);
           }
@@ -146,7 +146,7 @@ const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
         )}
       </div>
     );
-  },
+  }
 );
 AvatarGroup.displayName = "AvatarGroup";
 

@@ -24,13 +24,13 @@ export default function Review({
         </div>
         <p className="text-center">{review}</p>
         <div className="flex items-center justify-center gap-3">
-          <div className="rounded-full overflow-ellipsis">
+          <div className="rounded-card overflow-ellipsis">
             <OptimizedImage
               src={image}
               width={45}
               height={45}
               alt={name}
-              className="rounded-full"
+              className="rounded-card"
             />
           </div>
           <div className="flex items-start justify-center flex-col">

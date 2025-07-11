@@ -77,7 +77,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             </div>
             {autoSaving && (
               <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></div>
+                <div className="w-1.5 h-1.5 bg-primary rounded-card animate-pulse"></div>
                 <span>Saving</span>
               </div>
             )}

@@ -32,7 +32,7 @@ export function LoadingSkeleton({ className }: LoadingSkeletonProps) {
         {[...Array(SKELETON_STATS_COUNT)].map((_, i) => (
           <Card key={i} className="p-4 bg-card border-border rounded-ele">
             <div className="flex items-center gap-3">
-              <Skeleton className="w-10 h-10 rounded-lg" />
+              <Skeleton className="w-10 h-10 rounded-card" />
               <div className="flex flex-col gap-2">
                 <Skeleton className="h-7 w-8" />
                 <Skeleton className="h-4 w-16" />
@@ -53,13 +53,13 @@ export function LoadingSkeleton({ className }: LoadingSkeletonProps) {
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-2/3" />
               </div>
-              <Skeleton className="h-6 w-16 rounded-full" />
+              <Skeleton className="h-6 w-16 rounded-card" />
             </div>
 
             {/* Metadata Skeleton */}
             <div className="flex items-center justify-between text-sm mb-6 pt-2 border-t border-border/50">
               <div className="flex items-center gap-1">
-                <Skeleton className="w-2 h-2 rounded-full" />
+                <Skeleton className="w-2 h-2 rounded-card" />
                 <Skeleton className="h-4 w-12" />
               </div>
               <Skeleton className="h-4 w-20" />
@@ -68,7 +68,7 @@ export function LoadingSkeleton({ className }: LoadingSkeletonProps) {
             {/* Action Buttons Skeleton */}
             <div className="flex items-center gap-1">
               {[...Array(SKELETON_BUTTONS_COUNT)].map((_, btnIndex) => (
-                <Skeleton key={btnIndex} className="h-9 w-9 rounded-md" />
+                <Skeleton key={btnIndex} className="h-9 w-9 rounded-ele" />
               ))}
               <div className="flex-1"></div>
             </div>

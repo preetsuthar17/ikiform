@@ -23,7 +23,7 @@ export function RateLimitInfo({
   return (
     <Card className={`p-4 bg-muted/30 border-muted ${className}`}>
       <div className="flex items-start gap-3">
-        <div className="p-2 bg-primary/10 rounded-lg">
+        <div className="p-2 bg-primary/10 rounded-card">
           <Shield className="w-4 h-4 text-primary" />
         </div>
         <div className="flex-1">
@@ -68,7 +68,7 @@ export function RateLimitExceeded({
   return (
     <Card className="p-4 bg-destructive/10 border-destructive/20">
       <div className="flex items-start gap-3">
-        <div className="p-2 bg-destructive/10 rounded-lg">
+        <div className="p-2 bg-destructive/10 rounded-card">
           <AlertTriangle className="w-4 h-4 text-destructive" />
         </div>
         <div className="flex-1">

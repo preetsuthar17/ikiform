@@ -23,7 +23,7 @@ export const SingleStepSuccessScreen: React.FC<
           style={{ padding: "2rem" }}
         >
           <div className="flex flex-col items-center gap-4">
-            <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 bg-accent rounded-card flex items-center justify-center">
               <svg
                 className="w-8 h-8 text-accent-foreground"
                 fill="none"
@@ -54,7 +54,7 @@ export const SingleStepSuccessScreen: React.FC<
         <div className="text-center">
           {Boolean(
             schema.settings.branding &&
-              (schema.settings.branding as any).showIkiformBranding !== false,
+              (schema.settings.branding as any).showIkiformBranding !== false
           ) && (
             <p className="text-sm text-muted-foreground">
               Powered by{" "}

@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { type LucideIcon, X } from "lucide-react";
 
 const chipVariants = cva(
-  "inline-flex items-center justify-center rounded-full border text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center rounded-card border text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -31,7 +31,7 @@ const chipVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 export interface ChipProps
@@ -56,7 +56,7 @@ const Chip = React.forwardRef<HTMLDivElement, ChipProps>(
       children,
       ...props
     },
-    ref,
+    ref
   ) => {
     const iconSize = size === "sm" ? 12 : size === "lg" ? 14 : 12;
     const closeIconSize = size === "sm" ? 10 : size === "lg" ? 12 : 10;
@@ -83,7 +83,7 @@ const Chip = React.forwardRef<HTMLDivElement, ChipProps>(
           <button
             type="button"
             onClick={handleDismiss}
-            className="shrink-0 rounded-full p-0.5 hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+            className="shrink-0 rounded-card p-0.5 hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
             aria-label="Remove"
           >
             <X size={closeIconSize} />
@@ -91,7 +91,7 @@ const Chip = React.forwardRef<HTMLDivElement, ChipProps>(
         )}
       </div>
     );
-  },
+  }
 );
 
 Chip.displayName = "Chip";

@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 
 const switchVariants = cva(
-  "peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input",
+  "peer inline-flex shrink-0 cursor-pointer items-center rounded-card border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input",
   {
     variants: {
       variant: {
@@ -27,11 +27,11 @@ const switchVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 const switchThumbVariants = cva(
-  "pointer-events-none block rounded-full bg-background shadow-lg ring-0 transition-transform",
+  "pointer-events-none block rounded-card bg-background shadow-lg ring-0 transition-transform",
   {
     variants: {
       variant: {
@@ -50,7 +50,7 @@ const switchThumbVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 export interface SwitchProps
@@ -68,7 +68,7 @@ const Switch = React.forwardRef<
 >(
   (
     { className, variant, size, label, description, error, id, ...props },
-    ref,
+    ref
   ) => {
     const switchId = id || React.useId();
 
@@ -112,7 +112,7 @@ const Switch = React.forwardRef<
     }
 
     return switchElement;
-  },
+  }
 );
 
 Switch.displayName = SwitchPrimitive.Root.displayName;

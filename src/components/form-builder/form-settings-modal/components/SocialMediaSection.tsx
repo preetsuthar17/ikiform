@@ -209,7 +209,7 @@ export function BrandingSection({
               </div>
             </div>
             {socialMedia.showIcons !== false && (
-              <div className="border rounded-lg p-4">
+              <div className="border rounded-card p-4">
                 <Label className="text-sm font-medium mb-2 block">
                   Preview
                 </Label>
@@ -222,7 +222,7 @@ export function BrandingSection({
             )}
           </>
         ) : (
-          <div className="bg-muted/30 rounded-lg p-4">
+          <div className="bg-muted/30 rounded-card p-4">
             <p className="text-sm text-muted-foreground">
               Enable social media links to display your social profiles on your
               forms. This helps visitors connect with you across different

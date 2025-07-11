@@ -18,7 +18,7 @@ export const SuccessScreen: React.FC<SuccessScreenProps> = ({ schema }) => {
       <div className="max-w-2xl mx-auto flex flex-col gap-4 w-full">
         <Card className="rounded-card flex flex-col gap-6 p-8">
           <div className="flex flex-col items-center gap-6">
-            <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 bg-accent rounded-card flex items-center justify-center">
               <svg
                 className="w-8 h-8 text-accent-foreground"
                 fill="none"

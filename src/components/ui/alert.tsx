@@ -7,7 +7,7 @@ import { type LucideIcon, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 const alertVariants = cva(
-  "relative w-full rounded-lg border p-4 text-sm transition-colors shadow-sm/2",
+  "relative w-full rounded-card border p-4 text-sm transition-colors shadow-sm/2",
   {
     variants: {
       variant: {
@@ -24,7 +24,7 @@ const alertVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  },
+  }
 );
 
 export interface AlertProps
@@ -48,7 +48,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
       children,
       ...props
     },
-    ref,
+    ref
   ) => {
     const [isVisible, setIsVisible] = React.useState(true);
 
@@ -102,7 +102,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
                 <div className="flex-shrink-0 ml-3">
                   <button
                     type="button"
-                    className="inline-flex rounded-md p-1.5 transition-colors hover:bg-black/5 dark:hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring"
+                    className="inline-flex rounded-ele p-1.5 transition-colors hover:bg-black/5 dark:hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring"
                     onClick={handleDismiss}
                     aria-label="Dismiss alert"
                   >
@@ -115,7 +115,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         )}
       </AnimatePresence>
     );
-  },
+  }
 );
 
 Alert.displayName = "Alert";

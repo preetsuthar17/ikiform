@@ -76,6 +76,7 @@
     "react-signature-canvas": "1.1.0-alpha.2",
     "react-syntax-highlighter": "^15.6.1",
     "recharts": "^3.1.0",
+    "rehype-sanitize": "^6.0.0",
     "remark-gfm": "^4.0.1",
     "resend": "^4.6.0",
     "sonner": "^2.0.6",

@@ -13,7 +13,7 @@ export function FieldItem({ fieldType, onAddField }: FieldItemProps) {
       onClick={() => onAddField(fieldType.type)}
     >
       <div className="flex items-center gap-3 p-3">
-        <div className="flex-shrink-0 bg-accent rounded-lg group-hover:bg-primary/10 transition-colors duration-200 flex items-center justify-center p-2">
+        <div className="flex-shrink-0 bg-accent rounded-card group-hover:bg-primary/10 transition-colors duration-200 flex items-center justify-center p-2">
           <IconComponent className="w-4 h-4 text-accent-foreground group-hover:text-primary transition-colors duration-200" />
         </div>
         <div className="flex-1 min-w-0">

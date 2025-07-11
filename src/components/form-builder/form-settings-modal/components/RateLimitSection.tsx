@@ -105,7 +105,7 @@ export function RateLimitSection({
             <RateLimitSummary rateLimit={rateLimit} />
           </div>
         ) : (
-          <div className="bg-muted/30 rounded-lg p-4">
+          <div className="bg-muted/30 rounded-card p-4">
             <p className="text-sm text-muted-foreground">
               Rate limiting helps protect your form from spam and abuse by
               limiting the number of submissions from the same IP address within
@@ -156,7 +156,7 @@ function RateLimitInput({
 
 function RateLimitSummary({ rateLimit }: { rateLimit: any }) {
   return (
-    <div className="bg-muted/50 rounded-lg p-4">
+    <div className="bg-muted/50 rounded-card p-4">
       <div className="flex items-center gap-2 mb-2">
         <Clock className="w-4 h-4 text-muted-foreground" />
         <span className="text-sm font-medium">Current Settings</span>

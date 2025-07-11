@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 
 const progressVariants = cva(
-  "relative overflow-hidden rounded-full bg-secondary",
+  "relative overflow-hidden rounded-card bg-secondary",
   {
     variants: {
       variant: {
@@ -27,11 +27,11 @@ const progressVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 const progressIndicatorVariants = cva(
-  "h-full w-full flex-1 rounded-full transition-all duration-500 ease-out",
+  "h-full w-full flex-1 rounded-card transition-all duration-500 ease-out",
   {
     variants: {
       variant: {
@@ -45,7 +45,7 @@ const progressIndicatorVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  },
+  }
 );
 
 const circularProgressVariants = cva(
@@ -61,7 +61,7 @@ const circularProgressVariants = cva(
     defaultVariants: {
       size: "default",
     },
-  },
+  }
 );
 
 export interface ProgressProps
@@ -92,7 +92,7 @@ const Progress = React.forwardRef<
       label,
       ...props
     },
-    ref,
+    ref
   ) => {
     const progress = Math.min(Math.max(value, 0), 100);
     if (type === "circular") {
@@ -208,7 +208,7 @@ const Progress = React.forwardRef<
         )}
       </div>
     );
-  },
+  }
 );
 
 Progress.displayName = ProgressPrimitive.Root.displayName;

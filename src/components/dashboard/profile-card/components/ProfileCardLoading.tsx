@@ -21,7 +21,7 @@ export function ProfileCardLoading({ className }: ProfileLoadingProps) {
         <SkeletonAvatar size="xl" />
       </CardHeader>
       <div className="absolute right-3 top-3">
-        <Skeleton className="w-8 h-8 rounded-full" />
+        <Skeleton className="w-8 h-8 rounded-card" />
       </div>
       <CardContent className="flex flex-col flex flex-col gap-1 w-full items-center">
         <SkeletonText className="h-7 w-32 mb-2" />

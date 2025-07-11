@@ -9,9 +9,9 @@ const skeletonVariants = cva("animate-pulse rounded-ele bg-accent", {
     variant: {
       default: "bg-accent",
       secondary: "bg-accent/20",
-      text: "bg-accent rounded-md",
-      circle: "rounded-full",
-      avatar: "rounded-full bg-accent",
+      text: "bg-accent rounded-ele",
+      circle: "rounded-card",
+      avatar: "rounded-card bg-accent",
     },
     size: {
       sm: "h-4",
@@ -61,7 +61,7 @@ const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
       style,
       ...props
     },
-    ref,
+    ref
   ) => {
     const customStyle = {
       width: typeof width === "number" ? `${width}px` : width,
@@ -78,13 +78,13 @@ const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
           shimmer && "relative overflow-hidden",
           shimmer &&
             "before:absolute before:inset-0 before:-translate-x-full before:animate-shimmer before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent",
-          className,
+          className
         )}
         style={customStyle}
         {...props}
       />
     );
-  },
+  }
 );
 Skeleton.displayName = "Skeleton";
 
@@ -166,13 +166,13 @@ const SkeletonCard = React.forwardRef<
       showFooter = true,
       ...props
     },
-    ref,
+    ref
   ) => (
     <div
       ref={ref}
       className={cn(
         "rounded-ele border bg-card p-0 overflow-hidden",
-        className,
+        className
       )}
       {...props}
     >
@@ -199,7 +199,7 @@ const SkeletonCard = React.forwardRef<
         )}
       </div>
     </div>
-  ),
+  )
 );
 SkeletonCard.displayName = "SkeletonCard";
 

@@ -100,7 +100,7 @@ export function AIBuilder() {
         <div className="fixed bottom-4 max-w-[90%] w-full left-1/2 -translate-x-1/2 z-50 md:hidden">
           <Button
             size="lg"
-            className="rounded-full shadow-lg w-full"
+            className="rounded-card shadow-lg w-full"
             onClick={() => setChatDrawerOpen(true)}
           >
             Create Form with Kiko

@@ -17,7 +17,7 @@ export function ChatSuggestions({
             key={i}
             size={"sm"}
             variant={"secondary"}
-            className="rounded-full grow"
+            className="rounded-card grow"
             onClick={() => onSuggestionClick(s.text)}
           >
             {s.text}

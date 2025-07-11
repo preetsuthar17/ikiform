@@ -273,7 +273,7 @@ export function ShareFormModal({
                           <div className="w-48 h-48 flex items-center justify-center">
                             {generatingQR ? (
                               <div className="flex flex-col items-center gap-3">
-                                <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary border-t-transparent"></div>
+                                <div className="animate-spin rounded-card h-8 w-8 border-2 border-primary border-t-transparent"></div>
                                 <span className="text-sm text-muted-foreground">
                                   Generating QR code...
                                 </span>

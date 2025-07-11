@@ -49,7 +49,7 @@ export function FormCard({
       {/* Metadata */}
       <div className="flex items-center justify-between text-sm text-muted-foreground mb-6 pt-2 border-t border-border/50">
         <span className="flex items-center gap-1">
-          <span className="w-2 h-2 bg-accent rounded-full"></span>
+          <span className="w-2 h-2 bg-accent rounded-card"></span>
           {totalFields} field{totalFields !== 1 ? "s" : ""}
         </span>
         <span>Updated {formattedDate}</span>

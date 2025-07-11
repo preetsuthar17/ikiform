@@ -42,7 +42,7 @@ export function MultiStepNavigation({
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <div className="flex-1 bg-muted rounded-full h-2 overflow-hidden">
+        <div className="flex-1 bg-muted rounded-card h-2 overflow-hidden">
           <div
             className="h-full bg-primary transition-all duration-300"
             style={{
@@ -68,7 +68,7 @@ export function MultiStepNavigation({
             <button
               key={index}
               onClick={() => handleStepClick(index)}
-              className={`w-8 h-8 rounded-full text-sm font-medium transition-colors ${
+              className={`w-8 h-8 rounded-card text-sm font-medium transition-colors ${
                 index === currentStepIndex
                   ? "bg-primary text-primary-foreground"
                   : index < currentStepIndex

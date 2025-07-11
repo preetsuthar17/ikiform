@@ -80,7 +80,7 @@ export function ResponseLimitSection({
             </div>
           </div>
         ) : (
-          <div className="bg-muted/30 rounded-lg p-4">
+          <div className="bg-muted/30 rounded-card p-4">
             <p className="text-sm text-muted-foreground">
               Limit the total number of responses this form can accept. Once the
               limit is reached, new submissions will be blocked.

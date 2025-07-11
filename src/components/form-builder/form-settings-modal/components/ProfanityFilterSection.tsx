@@ -71,7 +71,7 @@ export function ProfanityFilterSection({
             />
           </div>
         ) : (
-          <div className="bg-muted/30 rounded-lg p-4">
+          <div className="bg-muted/30 rounded-card p-4">
             <p className="text-sm text-muted-foreground">
               Profanity filter helps maintain a clean and professional
               environment by automatically detecting and filtering inappropriate

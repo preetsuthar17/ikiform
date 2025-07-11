@@ -14,7 +14,7 @@ export const StreamingIndicator = memo(
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="my-2 p-3 rounded-lg bg-destructive/10 border border-destructive text-sm"
+            className="my-2 p-3 rounded-card bg-destructive/10 border border-destructive text-sm"
           >
             {streamError}
           </motion.div>
@@ -39,8 +39,8 @@ export const StreamingIndicator = memo(
           </div>
         </motion.div>
       );
-    },
-  ),
+    }
+  )
 );
 
 StreamingIndicator.displayName = "StreamingIndicator";

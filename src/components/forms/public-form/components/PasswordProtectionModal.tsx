@@ -43,7 +43,7 @@ export function PasswordProtectionModal({
     <div className="fixed inset-0 bg-foreground/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <Card className="w-full max-w-md flex flex-col gap-4">
         <CardHeader className="text-center flex flex-col gap-4">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-card bg-primary/10">
             <Lock className="h-6 w-6 text-primary" />
           </div>
           <CardTitle>Password Required</CardTitle>

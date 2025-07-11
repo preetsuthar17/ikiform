@@ -17,7 +17,7 @@ export function WelcomeMessage({ mounted, theme }: WelcomeMessageProps) {
       animate={{ opacity: 1, y: 0 }}
       className="text-center py-8 flex flex-col gap-4 items-center"
     >
-      <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
+      <div className="flex items-center justify-center w-12 h-12 rounded-card bg-primary/10">
         <Link href="/">
           <Image
             src="/logo.svg"

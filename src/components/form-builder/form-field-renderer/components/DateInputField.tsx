@@ -70,7 +70,7 @@ export function DateInputField({
         ref={fieldRef}
       />
       {showSuggestions && suggestions.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-accent border border-border rounded-md p-2 z-888 shadow-lg flex flex-col gap-1">
+        <div className="absolute top-full left-0 right-0 mt-1 bg-accent border border-border rounded-ele p-2 z-888 shadow-lg flex flex-col gap-1">
           {suggestions.map((s, idx) => (
             <Button
               key={idx}

@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "motion/react";
 
 const checkboxVariants = cva(
-  "peer shrink-0 rounded-sm border border-border focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=checked]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground data-[state=indeterminate]:border-primary bg-accent text-foreground  focus-visible:ring-offset-background focus-visible:ring-offset-2 transition-colors shadow-sm/2",
+  "peer shrink-0 rounded-ele border border-border focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=checked]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground data-[state=indeterminate]:border-primary bg-accent text-foreground  focus-visible:ring-offset-background focus-visible:ring-offset-2 transition-colors shadow-sm/2",
   {
     variants: {
       size: {
@@ -19,7 +19,7 @@ const checkboxVariants = cva(
     defaultVariants: {
       size: "default",
     },
-  },
+  }
 );
 
 interface CheckboxProps
@@ -114,7 +114,7 @@ const CheckboxRoot = React.forwardRef<
               <label
                 htmlFor={checkboxId}
                 className={cn(
-                  "text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer",
+                  "text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
                 )}
               >
                 {label}

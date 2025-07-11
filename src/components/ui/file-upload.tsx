@@ -60,7 +60,7 @@ const fileUploadVariants = cva(
       size: "default",
       state: "idle",
     },
-  },
+  }
 );
 
 const fileItemVariants = cva(
@@ -75,7 +75,7 @@ const fileItemVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  },
+  }
 );
 
 export interface FileUploadProps
@@ -111,7 +111,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
       children,
       ...props
     },
-    ref,
+    ref
   ) => {
     const [files, setFiles] = React.useState<FileWithPreview[]>([]);
     const [isDragging, setIsDragging] = React.useState(false);
@@ -178,16 +178,16 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
             prev.map((f) =>
               newFiles.find((nf) => nf.id === f.id)
                 ? { ...f, status: "completed" as const, progress: 100 }
-                : f,
-            ),
+                : f
+            )
           );
         } catch (error) {
           setFiles((prev) =>
             prev.map((f) =>
               newFiles.find((nf) => nf.id === f.id)
                 ? { ...f, status: "error" as const }
-                : f,
-            ),
+                : f
+            )
           );
         }
       } else {
@@ -206,15 +206,15 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
         progress += Math.random() * 15;
         setFiles((prev) =>
           prev.map((f) =>
-            f.id === id ? { ...f, progress: Math.min(progress, 100) } : f,
-          ),
+            f.id === id ? { ...f, progress: Math.min(progress, 100) } : f
+          )
         );
         if (progress >= 100) {
           clearInterval(interval);
           setFiles((prev) =>
             prev.map((f) =>
-              f.id === id ? { ...f, status: "completed" as const } : f,
-            ),
+              f.id === id ? { ...f, status: "completed" as const } : f
+            )
           );
         }
       }, 200);
@@ -267,7 +267,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
               state: disabled ? "disabled" : isDragging ? "dragging" : "idle",
             }),
             "cursor-pointer",
-            className,
+            className
           )}
           role="button"
           tabIndex={disabled ? -1 : 0}
@@ -296,7 +296,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                   "w-12 h-12 transition-colors",
                   isDragging
                     ? "text-primary"
-                    : "text-muted-foreground group-hover:text-foreground",
+                    : "text-muted-foreground group-hover:text-foreground"
                 )}
               />
             </motion.div>
@@ -362,8 +362,8 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
               <AnimatePresence>
                 <ScrollArea
                   className={cn(
-                    "w-full rounded-md",
-                    files.length > 3 ? "h-64" : "h-auto",
+                    "w-full rounded-ele",
+                    files.length > 3 ? "h-64" : "h-auto"
                   )}
                 >
                   <div className="flex flex-col gap-2 pr-3">
@@ -376,7 +376,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -20 }}
                           className={cn(
-                            fileItemVariants({ variant: itemVariant }),
+                            fileItemVariants({ variant: itemVariant })
                           )}
                         >
                           {/* File Icon/Preview */}
@@ -385,16 +385,16 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                               <img
                                 src={file.preview}
                                 alt={file.name}
-                                className="w-10 h-10 rounded-md object-cover border border-border"
+                                className="w-10 h-10 rounded-ele object-cover border border-border"
                               />
                             ) : (
-                              <div className="w-10 h-10 rounded-md bg-accent flex items-center justify-center">
+                              <div className="w-10 h-10 rounded-ele bg-accent flex items-center justify-center">
                                 <IconComponent className="w-5 h-5 text-muted-foreground" />
                               </div>
                             )}
                             {file.status === "completed" && (
                               <div className="absolute -top-1 -right-1">
-                                <CheckCircle className="w-4 h-4 text-primary bg-background rounded-full" />
+                                <CheckCircle className="w-4 h-4 text-primary bg-background rounded-card" />
                               </div>
                             )}
                           </div>
@@ -407,7 +407,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                               </p>
                               <button
                                 onClick={() => removeFile(file.id)}
-                                className="flex-shrink-0 p-1 hover:bg-accent rounded-md transition-colors"
+                                className="flex-shrink-0 p-1 hover:bg-accent rounded-ele transition-colors"
                                 aria-label={`Remove ${file.name}`}
                               >
                                 <X className="w-4 h-4 text-muted-foreground hover:text-destructive" />
@@ -442,12 +442,12 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
 
                             {/* Progress Bar */}
                             {file.status === "uploading" && (
-                              <div className="w-full h-1.5 bg-accent rounded-full overflow-hidden">
+                              <div className="w-full h-1.5 bg-accent rounded-card overflow-hidden">
                                 <motion.div
                                   initial={{ width: 0 }}
                                   animate={{ width: `${file.progress}%` }}
                                   transition={{ duration: 0.3 }}
-                                  className="h-full bg-primary rounded-full"
+                                  className="h-full bg-primary rounded-card"
                                 />
                               </div>
                             )}
@@ -463,7 +463,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
         )}
       </div>
     );
-  },
+  }
 );
 
 FileUpload.displayName = "FileUpload";

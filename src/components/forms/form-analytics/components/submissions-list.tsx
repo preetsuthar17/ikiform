@@ -60,15 +60,15 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
     form.schema.fields?.length || 0,
     form.schema.blocks?.reduce(
       (total, block) => total + (block.fields?.length || 0),
-      0,
-    ) || 0,
+      0
+    ) || 0
   );
 
   const filteredSubmissions = filterSubmissions(
     submissions,
     searchTerm,
     filterState,
-    totalFields,
+    totalFields
   );
 
   const tableColumns: DataTableColumn<FormSubmission>[] = [
@@ -281,7 +281,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                     <Card className="p-4">
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
                         <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-primary rounded-full"></div>
+                          <div className="w-2 h-2 bg-primary rounded-card"></div>
                           <span className="text-sm font-medium text-foreground">
                             Submission {submission.id.slice(-8)}
                           </span>
@@ -303,11 +303,11 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                             const allFields = [
                               ...(form.schema.fields || []),
                               ...(form.schema.blocks?.flatMap(
-                                (block) => block.fields || [],
+                                (block) => block.fields || []
                               ) || []),
                             ];
                             const field = allFields.find(
-                              (f) => f.id === fieldId,
+                              (f) => f.id === fieldId
                             );
                             // Signature field as image
                             if (
@@ -355,7 +355,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                       if (key.startsWith("custom_")) {
                                         const idx = parseInt(
                                           key.replace("custom_", ""),
-                                          10,
+                                          10
                                         );
                                         label =
                                           customLinks[idx]?.label ||
@@ -406,7 +406,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                 </div>
                               </div>
                             );
-                          },
+                          }
                         )}
                       </div>
                     </Card>

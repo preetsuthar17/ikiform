@@ -60,7 +60,7 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
         if (isMounted) {
           // Fallback to plain text
           setHighlightedCode(
-            `<pre class="whitespace-pre-wrap break-words">${jsonString}</pre>`,
+            `<pre class="whitespace-pre-wrap break-words">${jsonString}</pre>`
           );
         }
       }
@@ -76,7 +76,7 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
   }, [jsonString, theme]);
 
   return (
-    <div className="my-2 p-3 rounded-lg bg-muted/50 border border-border text-xs font-mono">
+    <div className="my-2 p-3 rounded-card bg-muted/50 border border-border text-xs font-mono">
       <motion.div
         animate={{ height: targetHeight }}
         initial={{ height: 100 }}

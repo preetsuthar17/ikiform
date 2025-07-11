@@ -23,7 +23,7 @@ export function AIFormSuggestions({ onCreateForm }: AIFormSuggestionsProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {AI_FORM_SUGGESTIONS.map((suggestion, index) => (
           <Card key={index} className="p-4 bg-card border-border rounded-card">
-            <div className="flex flex-col gap-3 flex flex-col items-start text-left">
+            <div className="flex flex-col gap-3 items-start text-left">
               <p className="font-medium text-muted-foreground">
                 {suggestion.prompt}
               </p>

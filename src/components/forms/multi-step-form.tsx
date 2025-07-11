@@ -125,9 +125,9 @@ export function MultiStepForm({
     return (
       <div className="min-h-screen bg-background flex items-center justify-center w-full">
         <div className={`${containerClass} flex flex-col gap-6 w-full px-4`}>
-          <div className="w-full bg-muted rounded-full h-2">
+          <div className="w-full bg-muted rounded-card h-2">
             <div
-              className="bg-primary h-2 rounded-full transition-all duration-2000 ease-out"
+              className="bg-primary h-2 rounded-card transition-all duration-2000 ease-out"
               style={{ width: "100%" }}
             />
           </div>

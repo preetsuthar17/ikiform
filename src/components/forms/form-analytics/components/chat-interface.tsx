@@ -20,6 +20,8 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+// @ts-ignore
+import rehypeSanitize from "rehype-sanitize";
 
 // Types
 import type { ChatInterfaceProps } from "../types";
@@ -47,7 +49,7 @@ const ChatMessage = memo(function ChatMessage({
       >
         {/* Message Content */}
         <div
-          className={`group relative px-4 py-3 rounded-2xl ${
+          className={`group relative px-4 py-3 rounded-card ${
             message.role === "user"
               ? "bg-primary text-primary-foreground rounded-br-md"
               : "bg-muted/50 border rounded-bl-md"
@@ -60,6 +62,7 @@ const ChatMessage = memo(function ChatMessage({
               <div className="markdown-content">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
+                  rehypePlugins={[rehypeSanitize]}
                   components={markdownComponents}
                 >
                   {message.content}
@@ -99,7 +102,7 @@ export const ChatInterface = memo(function ChatInterface({
             style={oneDark}
             language={match[1]}
             PreTag="div"
-            className="rounded-lg my-2"
+            className="rounded-card my-2"
             {...props}
           >
             {String(children).replace(/\n$/, "")}
@@ -165,7 +168,7 @@ export const ChatInterface = memo(function ChatInterface({
       table: ({ children, ...props }: any) => (
         <div className="overflow-x-auto mb-2">
           <table
-            className="min-w-full border-collapse border border-border rounded-lg"
+            className="min-w-full border-collapse border border-border rounded-card"
             {...props}
           >
             {children}
@@ -196,7 +199,7 @@ export const ChatInterface = memo(function ChatInterface({
         </em>
       ),
     }),
-    [],
+    []
   );
 
   return (
@@ -207,7 +210,7 @@ export const ChatInterface = memo(function ChatInterface({
           {/* Welcome State */}
           {isEmpty && (
             <div className="text-center py-12 flex flex-col items-center gap-3">
-              <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
+              <div className="w-20 h-20 rounded-card bg-primary/10 flex items-center justify-center">
                 <Image
                   src="/logo.svg"
                   alt="Ikiform"
@@ -238,18 +241,19 @@ export const ChatInterface = memo(function ChatInterface({
           {chatStreaming && (
             <div className="flex gap-4 justify-start">
               <div className="flex gap-3 max-w-[85%]">
-                <div className="group relative px-4 py-3 rounded-2xl bg-muted/50 border rounded-bl-md">
+                <div className="group relative px-4 py-3 rounded-card bg-muted/50 border rounded-bl-md">
                   {streamedContent ? (
                     <div className="text-sm leading-relaxed">
                       <div className="markdown-content">
                         <ReactMarkdown
                           remarkPlugins={[remarkGfm]}
+                          rehypePlugins={[rehypeSanitize]}
                           components={markdownComponents}
                         >
                           {streamedContent}
                         </ReactMarkdown>
                       </div>
-                      <span className="inline-block w-2 h-4 bg-primary animate-pulse ml-1 rounded-sm"></span>
+                      <span className="inline-block w-2 h-4 bg-primary animate-pulse ml-1 rounded-ele"></span>
                     </div>
                   ) : (
                     <Loader />
@@ -293,7 +297,7 @@ export const ChatInterface = memo(function ChatInterface({
                 placeholder="Ask about your form analytics..."
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
-                className="min-h-[60px] resize-none pr-16 rounded-2xl flex-1"
+                className="min-h-[60px] resize-none pr-16 rounded-card flex-1"
                 disabled={chatLoading}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !e.shiftKey) {

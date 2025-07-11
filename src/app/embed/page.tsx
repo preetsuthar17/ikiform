@@ -35,7 +35,7 @@ export default function EmbedCustomizerPage() {
       />
       <ResizablePanelGroup
         direction="horizontal"
-        className="h-screen rounded-lg border bg-background shadow-lg"
+        className="h-screen rounded-card border bg-background shadow-lg"
       >
         <ResizablePanel
           minSize={30}
@@ -125,7 +125,7 @@ export default function EmbedCustomizerPage() {
                 Show Embed Code
               </Button>
             </div>
-            <div className="rounded-lg border bg-muted p-4 flex items-center justify-center min-h-[400px]">
+            <div className="rounded-card border bg-muted p-4 flex items-center justify-center min-h-[400px]">
               <div
                 ref={(el) => {
                   if (!el) return;

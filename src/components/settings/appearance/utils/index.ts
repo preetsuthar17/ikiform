@@ -4,12 +4,12 @@ import { cn } from "@/lib/utils";
 export const getThemeCardStyles = (isSelected: boolean): string => {
   return cn(
     "relative cursor-pointer transition-all duration-200 hover:shadow-md overflow-hidden aspect-square rounded-card p-0",
-    isSelected && "ring-1 ring-ring ring-offset-2",
+    isSelected && "ring-1 ring-ring ring-offset-2"
   );
 };
 
 export const getSelectionIndicatorStyles = (): string => {
-  return "absolute top-3 right-3 w-5 h-5 bg-primary rounded-full flex items-center justify-center z-10";
+  return "absolute top-3 right-3 w-5 h-5 bg-primary rounded-card flex items-center justify-center z-10";
 };
 
 export const getImageContainerStyles = (): string => {

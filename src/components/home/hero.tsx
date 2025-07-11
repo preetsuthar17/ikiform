@@ -80,7 +80,7 @@ export default function Hero() {
                   className="absolute inset-0 z-5 flex items-center justify-center bg-foreground/10 cursor-pointer transition-opacity hover:bg-foreground/20 rounded-card"
                   onClick={() => setVideoOpen(true)}
                 >
-                  <div className="flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full">
+                  <div className="flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-sm rounded-card">
                     <Play className="w-8 h-8 text-white ml-1" fill="white" />
                   </div>
                 </div>
@@ -123,7 +123,7 @@ export default function Hero() {
                 </ModalHeader>
                 <div className="w-full aspect-video">
                   <video
-                    className="w-full h-full object-cover rounded-lg"
+                    className="w-full h-full object-cover rounded-card"
                     controls
                     autoPlay
                     muted

@@ -21,7 +21,7 @@ export function FormStats({ forms }: FormStatsProps) {
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
       <Card className="p-4 bg-card border-border rounded-card">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+          <div className="w-10 h-10 bg-primary/10 rounded-card flex items-center justify-center">
             <Plus className="w-5 h-5 text-primary" />
           </div>
           <div>
@@ -33,7 +33,7 @@ export function FormStats({ forms }: FormStatsProps) {
 
       <Card className="p-4 bg-card border-border rounded-card">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
+          <div className="w-10 h-10 bg-accent rounded-card flex items-center justify-center">
             <Eye className="w-5 h-5 text-accent-foreground" />
           </div>
           <div>
@@ -47,7 +47,7 @@ export function FormStats({ forms }: FormStatsProps) {
 
       <Card className="p-4 bg-card border-border rounded-card">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center">
+          <div className="w-10 h-10 bg-secondary rounded-card flex items-center justify-center">
             <Edit className="w-5 h-5 text-secondary-foreground" />
           </div>
           <div>

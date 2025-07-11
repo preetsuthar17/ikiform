@@ -121,7 +121,7 @@ export function EmailInputField({
         />
 
         {showAutoComplete && emailSettings?.autoCompleteDomain && (
-          <div className="absolute top-full left-0 right-0 mt-1 bg-accent border border-border rounded-md p-2 z-10">
+          <div className="absolute top-full left-0 right-0 mt-1 bg-accent border border-border rounded-ele p-2 z-10">
             <div className="flex items-center justify-between">
               <span className="text-sm text-muted-foreground">
                 Press Tab or click to complete:{" "}

@@ -19,7 +19,7 @@ const radioGroupVariants = cva("grid gap-2", {
 });
 
 const radioVariants = cva(
-  "aspect-square rounded-full border border-border text-primary focus:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary shadow-sm/2",
+  "aspect-square rounded-card border border-border text-primary focus:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary shadow-sm/2",
   {
     variants: {
       size: {
@@ -31,7 +31,7 @@ const radioVariants = cva(
     defaultVariants: {
       size: "default",
     },
-  },
+  }
 );
 
 interface RadioGroupProps
@@ -58,7 +58,7 @@ const RadioGroup = React.forwardRef<
 >(
   (
     { className, orientation, label, description, error, id, ...props },
-    ref,
+    ref
   ) => {
     const groupId = id || React.useId();
 
@@ -87,7 +87,7 @@ const RadioGroup = React.forwardRef<
         {error && <p className="text-xs text-destructive">{error}</p>}
       </div>
     );
-  },
+  }
 );
 
 RadioGroup.displayName = "RadioGroup";
@@ -113,7 +113,7 @@ const RadioItem = React.forwardRef<
               <AnimatePresence>
                 <motion.div
                   key="dot"
-                  className="rounded-full bg-primary"
+                  className="rounded-card bg-primary"
                   style={{
                     width: dotSize,
                     height: dotSize,
