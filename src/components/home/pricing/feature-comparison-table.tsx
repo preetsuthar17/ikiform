@@ -53,7 +53,7 @@ const featureCategories = [
   },
 
   {
-    name: "Coming Soon",
+    name: "Upcoming features",
     features: [
       {
         label: "Team collaboration",
