@@ -33,6 +33,11 @@ const featureCategories = [
         description: "Build and manage forms easily from your mobile device.",
         included: true,
       },
+      {
+        label: "Logic builder",
+        description: "Create logic and conditional flows for your forms.",
+        included: true,
+      },
     ],
   },
   {
@@ -81,12 +86,7 @@ const featureCategories = [
         description: "Enhanced webhook support for advanced workflows.",
         included: false,
       },
-      {
-        label: "Logic builder",
-        description:
-          "Create complex logic and conditional flows for your forms.",
-        included: false,
-      },
+
       {
         label: "Fetching form field data from API",
         description: "Populate form fields dynamically from external APIs.",
