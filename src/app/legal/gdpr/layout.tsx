@@ -30,7 +30,7 @@ export const metadata: Metadata = {
       "Read the GDPR compliance policy for Ikiform. Learn how we protect your data, comply with EU regulations, and support your privacy rights.",
     images: [
       {
-        url: "/og-banner.png",
+        url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
         width: 1200,
         height: 630,
         alt: "Ikiform GDPR Policy",
@@ -45,7 +45,9 @@ export const metadata: Metadata = {
     title: "GDPR Policy",
     description:
       "Read the GDPR compliance policy for Ikiform. Learn how we protect your data, comply with EU regulations, and support your privacy rights.",
-    images: ["/og-banner.png"],
+    images: [
+      "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+    ],
   },
   robots: {
     index: true,

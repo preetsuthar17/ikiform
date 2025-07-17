@@ -12,7 +12,7 @@ export default function CTASection() {
         <div className="absolute inset-0 bg-black/15 pointer-events-none rounded-card z-2 backdrop-blur-[1px]" />
 
         <OptimizedImage
-          src={"/cta/cta-bg.webp"}
+          src={"https://av5on64jc4.ufs.sh/f/jYAIyA6pXign3ME7HreLQ4dr2ZgV83EaAYobCju17ih06NpT"}
           alt={"CTA background image"}
           width={1920}
           height={1080}

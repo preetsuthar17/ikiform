@@ -9,9 +9,9 @@ export default function Login() {
 
   // Array of video sources - add your other video paths here
   const videos = [
-    "/features-demo/ai-form-builder-demo.mp4",
-    "/features-demo/ai-powered-analytics-demo.mp4",
-    "/features-demo/form-builder-demo.mp4",
+    "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignHpXfl2SkSqKmkIdQ5AiYXwezrn1sLTg2DCWc",
+    "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignsNKhM5BuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+    "https://av5on64jc4.ufs.sh/f/jYAIyA6pXign9LzlJhGEK7MOW2HtS8VrgBIdbz6GCRw3QsY1",
   ];
 
   useEffect(() => {

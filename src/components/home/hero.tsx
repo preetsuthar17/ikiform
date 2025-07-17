@@ -21,7 +21,7 @@ export default function Hero() {
       <div className="flex flex-col gap-8 w-full h-full md:p-12 p-8 rounded-card relative  overflow-hidden">
         {/* Flipped Background Image */}
         <OptimizedImage
-          src="/hero/bg.webp"
+          src="https://av5on64jc4.ufs.sh/f/jYAIyA6pXignqJWGPAydcGjOVJB5FWLa3M9CXA0uUgsZ48yo"
           alt="Hero background"
           width={1920}
           height={1080}
@@ -72,9 +72,12 @@ export default function Hero() {
                   muted
                   loop
                   playsInline
-                  poster="/hero/demo-video-poster.png"
+                  poster="https://av5on64jc4.ufs.sh/f/jYAIyA6pXignGqQATXK0tHoJKUbaeVrBSA5DZGMjxyd1qTkn"
                 >
-                  <source src="/hero/demo-video.mp4" type="video/mp4" />
+                  <source
+                    src="https://av5on64jc4.ufs.sh/f/jYAIyA6pXignfWh6w6a3obyWxJCaFlVO6zhMk0rpTSDi5EQf"
+                    type="video/mp4"
+                  />
                 </video>
                 <div
                   className="absolute inset-0 z-5 flex items-center justify-center bg-foreground/10 cursor-pointer transition-opacity hover:bg-foreground/20 rounded-card"
@@ -129,9 +132,12 @@ export default function Hero() {
                     muted
                     loop
                     playsInline
-                    poster="/hero/bg.webp"
+                    poster="https://av5on64jc4.ufs.sh/f/jYAIyA6pXignqJWGPAydcGjOVJB5FWLa3M9CXA0uUgsZ48yo"
                   >
-                    <source src="/hero/demo-video.mp4" type="video/mp4" />
+                    <source
+                      src="https://av5on64jc4.ufs.sh/f/jYAIyA6pXignfWh6w6a3obyWxJCaFlVO6zhMk0rpTSDi5EQf"
+                      type="video/mp4"
+                    />
                   </video>
                 </div>
               </ModalContent>

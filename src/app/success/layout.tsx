@@ -32,7 +32,7 @@ export const metadata: Metadata = {
       "Create beautiful, interactive forms with Ikiform - An open-source alternative to Google Forms. Build surveys, collect responses, and analyze data effortlessly.",
     images: [
       {
-        url: "/og-banner.png",
+        url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
         width: 1200,
         height: 630,
         alt: "Ikiform",
@@ -47,7 +47,9 @@ export const metadata: Metadata = {
     title: "Ikiform",
     description:
       "Create beautiful, interactive forms with Ikiform - An open-source alternative to Google Forms.",
-    images: ["/og-banner.png"],
+    images: [
+      "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+    ],
   },
   robots: {
     index: true,

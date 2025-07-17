@@ -30,7 +30,7 @@ export const metadata: Metadata = {
       "Read the Privacy Policy for Ikiform. Learn how we collect, use, and protect your personal data when you use our form builder services.",
     images: [
       {
-        url: "/og-banner.png",
+        url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
         width: 1200,
         height: 630,
         alt: "Ikiform Privacy Policy",
@@ -45,7 +45,9 @@ export const metadata: Metadata = {
     title: "Privacy Policy",
     description:
       "Read the Privacy Policy for Ikiform. Learn how we collect, use, and protect your personal data when you use our form builder services.",
-    images: ["/og-banner.png"],
+    images: [
+      "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+    ],
   },
   robots: {
     index: true,

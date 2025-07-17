@@ -115,7 +115,9 @@ export default function PricingClient({ products }: PricingClientProps) {
           <div className="absolute inset-0 bg-black/15 pointer-events-none rounded-card z-2 backdrop-blur-[5px]" />
 
           <OptimizedImage
-            src={"/pricing/pricing-bg.webp"}
+            src={
+              "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignjTkuSWpXignmaOlP5cRt3oEBh7bKq40kjD9L"
+            }
             alt={"Pricing background image"}
             width={1920}
             height={1080}

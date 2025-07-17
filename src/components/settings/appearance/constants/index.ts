@@ -9,19 +9,22 @@ export const THEMES: Theme[] = [
     id: "light",
     name: "Light",
     icon: Sun,
-    image: "./theme-preview/light.png",
+    image:
+      "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignNcDw6E5eyVbgp2n7JYomGh6T4jEWUOKDLF0v",
   },
   {
     id: "dark",
     name: "Dark",
     icon: Moon,
-    image: "./theme-preview/dark.png",
+    image:
+      "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignnWP3fXToBGdrcNZ1v6W3QOjouaypsXtEPR07",
   },
   {
     id: "system",
     name: "System",
     icon: Monitor,
-    image: "./theme-preview/system.png",
+    image:
+      "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignMyADVA2dw6Ha45juWrfNDgBbtFiz0UICck7Y",
   },
 ];
 
