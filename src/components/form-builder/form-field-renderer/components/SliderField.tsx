@@ -10,7 +10,13 @@ import { getErrorRingClasses } from "../utils";
 // Type imports
 import type { BaseFieldProps } from "../types";
 
-export function SliderField({ field, value, onChange, error }: BaseFieldProps) {
+export function SliderField({
+  field,
+  value,
+  onChange,
+  error,
+  disabled,
+}: BaseFieldProps) {
   const errorRingClasses = getErrorRingClasses(error);
 
   return (
@@ -22,6 +28,7 @@ export function SliderField({ field, value, onChange, error }: BaseFieldProps) {
       step={field.settings?.step || 1}
       className={`flex gap-2 ${errorRingClasses}`}
       showValue
+      disabled={disabled}
     />
   );
 }

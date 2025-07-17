@@ -11,6 +11,7 @@ import {
   validateSingleStepForm,
   submitSingleStepForm,
 } from "../utils/form-utils";
+import { evaluateLogic } from "@/lib/forms/logic";
 
 // Utility function to get default value for a field type
 const getDefaultValueForField = (field: FormField): any => {
@@ -25,6 +26,8 @@ const getDefaultValueForField = (field: FormField): any => {
       return "";
     case "slider":
       return field.settings?.defaultValue || 50;
+    case "rating":
+      return null;
     case "number":
       return "";
     case "date":
@@ -54,7 +57,11 @@ export const useSingleStepForm = (
   formId: string,
   schema: FormSchema,
   fields: FormField[],
-): SingleStepFormState & SingleStepFormActions => {
+): SingleStepFormState &
+  SingleStepFormActions & {
+    fieldVisibility: Record<string, { visible: boolean; disabled: boolean }>;
+    logicMessages: string[];
+  } => {
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -80,6 +87,41 @@ export const useSingleStepForm = (
       newFieldIds.forEach((id) => initializedFieldsRef.current.add(id));
     }
   }, [fields.length]);
+
+  // Logic evaluation for field visibility/enabled state
+  const logic = schema.logic || [];
+  const logicActions = evaluateLogic(logic, formData);
+  // Build a map: fieldId -> { visible, disabled }
+  const fieldVisibility: Record<
+    string,
+    { visible: boolean; disabled: boolean }
+  > = {};
+  fields.forEach((field) => {
+    fieldVisibility[field.id] = { visible: true, disabled: false };
+  });
+  const logicMessages: string[] = [];
+  logicActions.forEach((action) => {
+    if (action.target && fieldVisibility[action.target]) {
+      if (action.type === "hide")
+        fieldVisibility[action.target].visible = false;
+      if (action.type === "show") fieldVisibility[action.target].visible = true;
+      if (action.type === "disable")
+        fieldVisibility[action.target].disabled = true;
+      if (action.type === "enable")
+        fieldVisibility[action.target].disabled = false;
+      if (action.type === "set_value" && typeof action.target === "string") {
+        if (formData[action.target] !== action.value) {
+          setFormData((prev) => ({
+            ...prev,
+            [action.target as string]: action.value,
+          }));
+        }
+      }
+    }
+    if (action.type === "show_message" && action.value) {
+      logicMessages.push(String(action.value));
+    }
+  });
 
   const handleFieldValueChange = (fieldId: string, value: any) => {
     setFormData((prev) => ({ ...prev, [fieldId]: value }));
@@ -137,5 +179,7 @@ export const useSingleStepForm = (
     setSubmitted,
     handleFieldValueChange,
     handleSubmit,
+    fieldVisibility,
+    logicMessages,
   };
 };

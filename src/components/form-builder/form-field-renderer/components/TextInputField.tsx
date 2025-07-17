@@ -34,6 +34,7 @@ export function TextInputField({
   onChange,
   error,
   fieldRef,
+  disabled,
 }: BaseFieldProps) {
   const baseClasses = getBaseClasses(field, error);
   const livePatternError = getLivePatternError(field, value);
@@ -48,6 +49,7 @@ export function TextInputField({
         onChange={(e) => onChange(e.target.value)}
         className={`flex gap-2 ${baseClasses}`}
         ref={fieldRef}
+        disabled={disabled}
       />
       {livePatternError && (
         <div className="text-destructive text-xs mt-1">{livePatternError}</div>

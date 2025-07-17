@@ -41,6 +41,7 @@ export function FormPreview({
     handleFieldValueChange,
     nextStep,
     goToStep,
+    fieldVisibility,
   } = useFormPreviewState(schema, selectedBlockId);
 
   const { maxWidthClass, paddingClass, marginClass } =
@@ -96,6 +97,8 @@ export function FormPreview({
             onFieldValueChange={handleFieldValueChange}
             isMultiStep={isMultiStep}
             onAddField={onAddField}
+            fieldVisibility={fieldVisibility}
+            showLogicCues={true}
           />
 
           <FormActions

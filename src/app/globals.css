@@ -114,7 +114,7 @@
 }
 
 .toast {
-  border-radius: var(--radius-ele) !important;
+  border-radius: var(--radius-card) !important;
   font-weight: 500 !important;
 }
 

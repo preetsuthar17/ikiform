@@ -19,6 +19,8 @@ interface SingleStepFormContentProps {
   submitting: boolean;
   onFieldValueChange: (fieldId: string, value: any) => void;
   onSubmit: (e: React.FormEvent) => Promise<void>;
+  fieldVisibility?: Record<string, { visible: boolean; disabled: boolean }>;
+  logicMessages?: string[];
 }
 
 export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
@@ -29,11 +31,13 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
   submitting,
   onFieldValueChange,
   onSubmit,
+  fieldVisibility,
+  logicMessages,
 }) => {
   // Debug logging
-  console.log("Form Schema:", schema);
-  console.log("Form Fields:", fields);
-  console.log("Form Data:", formData);
+  // console.log("Form Schema:", schema);
+  // console.log("Form Fields:", fields);
+  // console.log("Form Data:", formData);
 
   const firstFieldRef = useRef<any>(null);
   useEffect(() => {
@@ -41,6 +45,11 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
       firstFieldRef.current.focus();
     }
   }, []);
+
+  // Filter fields by logic visibility
+  const visibleFields = fieldVisibility
+    ? fields.filter((field) => fieldVisibility[field.id]?.visible !== false)
+    : fields;
 
   return (
     <Card
@@ -70,24 +79,37 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
               className="justify-start"
             />
           )}
+        {logicMessages && logicMessages.length > 0 && (
+          <div className="bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 p-3 rounded-md mb-2">
+            {logicMessages.map((msg, i) => (
+              <div key={i}>{msg}</div>
+            ))}
+          </div>
+        )}
       </div>
 
       <form onSubmit={onSubmit} className="flex flex-col gap-6">
-        {fields.map((field, idx) => (
-          <div key={field.id}>
+        {visibleFields.map((field, idx) => (
+          <div
+            key={field.id}
+            style={
+              fieldVisibility?.[field.id]?.disabled ? { opacity: 0.5 } : {}
+            }
+          >
             <FormFieldRenderer
               field={field}
               value={formData[field.id]}
               onChange={(value) => onFieldValueChange(field.id, value)}
               error={errors[field.id]}
               fieldRef={idx === 0 ? firstFieldRef : undefined}
+              disabled={fieldVisibility?.[field.id]?.disabled}
             />
           </div>
         ))}
 
         {(() => {
           // Check for any live regex error in text fields
-          for (const field of fields) {
+          for (const field of visibleFields) {
             if (
               ["text", "email", "textarea"].includes(field.type) &&
               getLivePatternError(field, formData[field.id])
@@ -108,7 +130,7 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
             className="w-fit sm:w-auto"
             disabled={
               submitting ||
-              fields.some(
+              visibleFields.some(
                 (field) =>
                   ["text", "email", "textarea"].includes(field.type) &&
                   getLivePatternError(field, formData[field.id]),

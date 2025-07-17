@@ -16,6 +16,8 @@ interface FormContentProps {
   title?: string;
   description?: string;
   schema: FormSchema;
+  fieldVisibility?: Record<string, { visible: boolean; disabled: boolean }>;
+  logicMessages?: string[];
 }
 
 export const FormContent: React.FC<FormContentProps> = ({
@@ -26,6 +28,8 @@ export const FormContent: React.FC<FormContentProps> = ({
   title,
   description,
   schema,
+  fieldVisibility,
+  logicMessages,
 }) => {
   const firstFieldRef = useRef<any>(null);
   useEffect(() => {
@@ -33,6 +37,13 @@ export const FormContent: React.FC<FormContentProps> = ({
       firstFieldRef.current.focus();
     }
   }, [currentBlock]);
+
+  // Filter fields by logic visibility
+  const visibleFields = fieldVisibility
+    ? currentBlock.fields.filter(
+        (field) => fieldVisibility[field.id]?.visible !== false,
+      )
+    : currentBlock.fields;
 
   return (
     <div className="flex flex-col gap-6">
@@ -58,17 +69,30 @@ export const FormContent: React.FC<FormContentProps> = ({
               className="justify-start"
             />
           )}
+        {logicMessages && logicMessages.length > 0 && (
+          <div className="bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 p-3 rounded-md mb-2">
+            {logicMessages.map((msg, i) => (
+              <div key={i}>{msg}</div>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="flex flex-col gap-6">
-        {currentBlock.fields.map((field, idx) => (
-          <div key={field.id}>
+        {visibleFields.map((field, idx) => (
+          <div
+            key={field.id}
+            style={
+              fieldVisibility?.[field.id]?.disabled ? { opacity: 0.5 } : {}
+            }
+          >
             <FormFieldRenderer
               field={field}
               value={formData[field.id]}
               onChange={(value) => onFieldValueChange(field.id, value)}
               error={errors[field.id]}
               fieldRef={idx === 0 ? firstFieldRef : undefined}
+              disabled={fieldVisibility?.[field.id]?.disabled}
             />
           </div>
         ))}

@@ -34,6 +34,7 @@ import {
 // Type imports
 import type { FormField, FormSchema, FormBlock } from "@/lib/database";
 import type { FormBuilderProps } from "./types";
+import type { FormLogic } from "@/components/form-builder/logic-builder/types";
 
 // Constant imports
 import { DRAFT_KEYS } from "./constants";
@@ -75,7 +76,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
   );
 
   // Form actions
-  const addField = (fieldType: FormField["type"]) => {
+  const addField = (fieldType: FormField["type"], index?: number) => {
     const newField: FormField = {
       id: generateFieldId(),
       type: fieldType,
@@ -100,14 +101,15 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
       state.formSchema,
       newField,
       state.selectedBlockId,
+      index,
     );
     actions.setFormSchema(updatedSchema);
     actions.setSelectedFieldId(newField.id);
   };
 
   const handleAddField = useCallback(
-    (fieldType: FormField["type"]) => {
-      addField(fieldType);
+    (fieldType: FormField["type"], index?: number) => {
+      addField(fieldType, index);
       setShowFieldPalette(false);
     },
     [addField],
@@ -385,6 +387,13 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     }
   };
 
+  const handleLogicChange = (logic: FormLogic) => {
+    actions.setFormSchema((prev) => ({
+      ...prev,
+      logic,
+    }));
+  };
+
   // Loading states
   if (authLoading || state.loading) {
     return (
@@ -525,7 +534,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
         onSave={saveForm}
       />
 
-      <div className="flex-1 overflow-hidden">
+      <div className="overflow-hidden">
         <FormBuilderPanels
           formSchema={state.formSchema}
           selectedFieldId={state.selectedFieldId}
@@ -543,6 +552,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           onBlockDelete={deleteBlock}
           onFormSettingsUpdate={updateFormSettings}
           onStepSelect={handleStepSelection}
+          onLogicChange={handleLogicChange}
         />
       </div>
 

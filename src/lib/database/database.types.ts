@@ -1,3 +1,5 @@
+import type { FormLogic } from "@/components/form-builder/logic-builder/types";
+
 export interface Database {
   public: {
     Tables: {
@@ -355,4 +357,5 @@ export interface FormSchema {
     rtl?: boolean;
     designMode?: "default" | "minimal";
   };
+  logic?: FormLogic;
 }

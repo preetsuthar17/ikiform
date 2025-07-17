@@ -47,6 +47,7 @@ export interface FormFieldsContainerProps {
   onFieldValueChange: (fieldId: string, value: any) => void;
   isMultiStep: boolean;
   onAddField?: (fieldType: FormField["type"]) => void;
+  fieldVisibility?: Record<string, { visible: boolean; disabled: boolean }>;
 }
 
 // Props for FormActions component

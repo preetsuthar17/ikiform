@@ -15,6 +15,7 @@ export function NumberInputField({
   value,
   onChange,
   error,
+  disabled,
 }: BaseFieldProps) {
   const baseClasses = getBaseClasses(field, error);
 
@@ -28,6 +29,7 @@ export function NumberInputField({
       min={field.validation?.min}
       max={field.validation?.max}
       className={`flex gap-2 ${baseClasses}`}
+      disabled={disabled}
     />
   );
 }

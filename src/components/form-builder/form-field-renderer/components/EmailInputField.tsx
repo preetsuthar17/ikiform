@@ -21,6 +21,7 @@ export function EmailInputField({
   value,
   onChange,
   error,
+  disabled,
 }: BaseFieldProps) {
   const baseClasses = getBaseClasses(field, error);
   const [inputValue, setInputValue] = useState(value || "");
@@ -118,6 +119,7 @@ export function EmailInputField({
           onChange={handleInputChange}
           onBlur={handleBlur}
           className={`flex gap-2 ${baseClasses}`}
+          disabled={disabled}
         />
 
         {showAutoComplete && emailSettings?.autoCompleteDomain && (

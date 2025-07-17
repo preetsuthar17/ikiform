@@ -12,12 +12,17 @@ import { FieldPalette } from "../../field-palette";
 import { FieldSettingsPanel } from "../../field-settings-panel";
 import { BlockManager } from "../../block-manager";
 import { FormPreview } from "../../form-preview";
+import { LogicBuilderPanel } from "../../logic-builder";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { Settings, Zap } from "lucide-react";
 
 // Type imports
 import type { FormBuilderPanelsProps } from "../types";
+import type { FormLogic } from "@/components/form-builder/logic-builder/types";
 
 // Constant imports
 import { PANEL_SIZES } from "../constants";
+import { getAllFields } from "../utils";
 
 export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
   formSchema,
@@ -36,7 +41,17 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
   onBlockDelete,
   onFormSettingsUpdate,
   onStepSelect,
+  onLogicChange,
 }) => {
+  const [activeTab, setActiveTab] = React.useState("field-settings");
+  const tabItems = [
+    { id: "field-settings", label: "Field Settings", icon: <Settings /> },
+    { id: "logic-builder", label: "Logic Builder", icon: <Zap /> },
+  ];
+  const handleLogicChange = (logic: FormLogic) => {
+    if (onLogicChange) onLogicChange(logic);
+  };
+  const allFields = getAllFields(formSchema);
   return (
     <ResizablePanelGroup direction="horizontal" className="h-full">
       {/* Left Panel - Field Palette or Block Manager */}
@@ -88,35 +103,32 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
 
       <ResizableHandle />
 
-      {/* Right Panel - Field Settings or Field Palette for multi-step */}
+      {/* Right Panel - Tabs for Field Settings and Logic Builder */}
       <ResizablePanel
         defaultSize={PANEL_SIZES.RIGHT_PANEL.default}
         minSize={PANEL_SIZES.RIGHT_PANEL.min}
         maxSize={PANEL_SIZES.RIGHT_PANEL.max}
       >
-        {formSchema.settings.multiStep ? (
-          <div className="h-full flex flex-col">
-            <div className="flex-1 min-h-0">
-              <FieldSettingsPanel
-                field={selectedField}
-                onFieldUpdate={onFieldUpdate}
-                onClose={() => onFieldSelect(null)}
-              />
-            </div>
-            <div className="border-t bg-muted/30 flex-shrink-0">
-              <div className="p-2">
-                <h4 className="text-sm font-medium mb-2">Add Fields</h4>
-                <FieldPalette onAddField={onFieldAdd} compact />
-              </div>
-            </div>
-          </div>
-        ) : (
-          <FieldSettingsPanel
-            field={selectedField}
-            onFieldUpdate={onFieldUpdate}
-            onClose={() => onFieldSelect(null)}
+        <div className="h-full flex flex-col">
+          {formSchema.settings.multiStep ? (
+            <FieldSettingsPanel
+              field={selectedField}
+              onFieldUpdate={onFieldUpdate}
+              onClose={() => onFieldSelect(null)}
+            />
+          ) : (
+            <FieldSettingsPanel
+              field={selectedField}
+              onFieldUpdate={onFieldUpdate}
+              onClose={() => onFieldSelect(null)}
+            />
+          )}
+          <LogicBuilderPanel
+            logic={formSchema.logic || []}
+            onLogicChange={handleLogicChange}
+            fields={allFields}
           />
-        )}
+        </div>
       </ResizablePanel>
     </ResizablePanelGroup>
   );

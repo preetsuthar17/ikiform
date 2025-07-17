@@ -39,7 +39,15 @@ export function MultiStepForm({
   const totalSteps = blocks.length;
 
   const formState = useFormState(formId, schema, blocks);
-  const { currentStep, formData, errors, submitting, submitted } = formState;
+  const {
+    currentStep,
+    formData,
+    errors,
+    submitting,
+    submitted,
+    fieldVisibility,
+    logicMessages,
+  } = formState;
   const { handleNext, handlePrevious, handleSubmit, handleFieldValueChange } =
     formState;
 
@@ -158,6 +166,8 @@ export function MultiStepForm({
             title={schema.settings.title}
             description={schema.settings.description}
             schema={schema}
+            fieldVisibility={fieldVisibility}
+            logicMessages={logicMessages}
           />
           <FormNavigation
             currentStep={currentStep}

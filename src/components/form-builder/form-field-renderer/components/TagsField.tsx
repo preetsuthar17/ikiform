@@ -10,7 +10,13 @@ import { getErrorClasses } from "../utils";
 // Type imports
 import type { BaseFieldProps } from "../types";
 
-export function TagsField({ field, value, onChange, error }: BaseFieldProps) {
+export function TagsField({
+  field,
+  value,
+  onChange,
+  error,
+  disabled,
+}: BaseFieldProps) {
   const errorClasses = getErrorClasses(error);
 
   // Ensure value is always an array
@@ -26,6 +32,7 @@ export function TagsField({ field, value, onChange, error }: BaseFieldProps) {
       maxTags={field.settings?.maxTags}
       allowDuplicates={field.settings?.allowDuplicates}
       className={`flex gap-2 ${errorClasses}`}
+      disabled={disabled}
     />
   );
 }

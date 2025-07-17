@@ -16,12 +16,21 @@ import { getErrorClasses } from "../utils";
 // Type imports
 import type { BaseFieldProps } from "../types";
 
-export function SelectField({ field, value, onChange, error }: BaseFieldProps) {
+export function SelectField({
+  field,
+  value,
+  onChange,
+  error,
+  disabled,
+}: BaseFieldProps) {
   const errorClasses = getErrorClasses(error);
 
   return (
-    <Select value={value || ""} onValueChange={onChange}>
-      <SelectTrigger className={`flex gap-2 ${errorClasses}`}>
+    <Select value={value || ""} onValueChange={onChange} disabled={disabled}>
+      <SelectTrigger
+        className={`flex gap-2 ${errorClasses}`}
+        disabled={disabled}
+      >
         <SelectValue placeholder={field.placeholder || "Select an option..."} />
       </SelectTrigger>
       <SelectContent>

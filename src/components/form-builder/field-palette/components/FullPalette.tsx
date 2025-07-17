@@ -1,9 +1,10 @@
 import React from "react";
+import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 
 // Components
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PaletteHeader } from "./PaletteHeader";
-import { FieldItem } from "./FieldItem";
+import { FieldItem, PALETTE_DRAG_TYPE } from "./FieldItem";
 
 // Constants
 import { FIELD_TYPES, PALETTE_CONFIG } from "../constants";
@@ -22,15 +23,31 @@ export function FullPalette({
             title={PALETTE_CONFIG.HEADER.TITLE}
             description={PALETTE_CONFIG.HEADER.DESCRIPTION}
           />
-          <div className="flex flex-col gap-2">
-            {FIELD_TYPES.map((fieldType) => (
-              <FieldItem
-                key={fieldType.type}
-                fieldType={fieldType}
-                onAddField={onAddField}
-              />
-            ))}
-          </div>
+          <DragDropContext onDragEnd={() => {}}>
+            <Droppable
+              droppableId="palette-droppable"
+              isDropDisabled={true}
+              direction="vertical"
+            >
+              {(provided) => (
+                <div
+                  className="flex flex-col gap-2"
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  {FIELD_TYPES.map((fieldType, idx) => (
+                    <FieldItem
+                      key={fieldType.type}
+                      fieldType={fieldType}
+                      onAddField={onAddField}
+                      index={idx}
+                    />
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
         </div>
       </ScrollArea>
     </div>

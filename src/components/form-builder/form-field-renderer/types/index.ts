@@ -9,6 +9,7 @@ export interface FormFieldRendererProps {
   onChange: (value: any) => void;
   error?: string;
   fieldRef?: RefObject<any>;
+  disabled?: boolean;
 }
 
 export interface FieldWrapperProps {
@@ -24,6 +25,7 @@ export interface BaseFieldProps {
   error?: string;
   fieldRef?: RefObject<any>;
   className?: string;
+  disabled?: boolean;
 }
 
 // Type definitions

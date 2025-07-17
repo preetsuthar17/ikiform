@@ -12,15 +12,17 @@ export function DateInputField({
   value,
   onChange,
   error,
-  fieldRef,
+  disabled,
 }: BaseFieldProps) {
   const baseClasses = getBaseClasses(field, error);
   return (
-    <DatePicker
-      value={value ? new Date(value) : undefined}
-      onChange={(date) => onChange(date ? date.toISOString() : "")}
-      placeholder={field.placeholder || "Pick a date"}
+    <Input
+      type="date"
+      id={field.id}
+      value={value || ""}
+      onChange={(e) => onChange(e.target.value)}
       className={baseClasses}
+      disabled={disabled}
     />
   );
 }

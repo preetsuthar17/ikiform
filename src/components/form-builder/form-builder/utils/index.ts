@@ -152,17 +152,39 @@ export const addFieldToSchema = (
   formSchema: FormSchema,
   newField: FormField,
   selectedBlockId: string | null,
+  index?: number,
 ): FormSchema => {
   const targetBlockId = selectedBlockId || formSchema.blocks[0]?.id;
-  const updatedBlocks = formSchema.blocks.map((block) =>
-    block.id === targetBlockId
-      ? { ...block, fields: [...block.fields, newField] }
-      : block,
-  );
-
+  const updatedBlocks = formSchema.blocks.map((block) => {
+    if (block.id === targetBlockId) {
+      const newFields = [...block.fields];
+      if (
+        typeof index === "number" &&
+        index >= 0 &&
+        index <= newFields.length
+      ) {
+        newFields.splice(index, 0, newField);
+      } else {
+        newFields.push(newField);
+      }
+      return { ...block, fields: newFields };
+    }
+    return block;
+  });
+  // Update top-level fields array as well
+  let newFieldsArray = [...formSchema.fields];
+  if (
+    typeof index === "number" &&
+    index >= 0 &&
+    index <= newFieldsArray.length
+  ) {
+    newFieldsArray.splice(index, 0, newField);
+  } else {
+    newFieldsArray.push(newField);
+  }
   return {
     ...formSchema,
     blocks: updatedBlocks,
-    fields: [...formSchema.fields, newField],
+    fields: newFieldsArray,
   };
 };

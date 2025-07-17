@@ -5,10 +5,12 @@ import { toast } from "@/hooks/use-toast";
 // Types
 import type { FormSchema, FormBlock, FormField } from "@/lib/database";
 import type { FormState, FormActions } from "../types";
+import type { LogicAction } from "@/lib/forms/logic";
 
 // Utilities
 import { validateStep } from "../utils/validation";
 import { submitForm } from "../utils/form-utils";
+import { evaluateLogic } from "@/lib/forms/logic";
 
 // Utility function to get default value for a field type
 const getDefaultValueForField = (field: FormField): any => {
@@ -23,6 +25,8 @@ const getDefaultValueForField = (field: FormField): any => {
       return "";
     case "slider":
       return field.settings?.defaultValue || 50;
+    case "rating":
+      return null;
     case "number":
       return "";
     case "text":
@@ -50,7 +54,11 @@ export const useFormState = (
   formId: string,
   schema: FormSchema,
   blocks: FormBlock[],
-): FormState & FormActions => {
+): FormState &
+  FormActions & {
+    fieldVisibility: Record<string, { visible: boolean; disabled: boolean }>;
+    logicMessages: string[];
+  } => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -87,6 +95,64 @@ export const useFormState = (
       newFieldIds.forEach((id) => initializedFieldsRef.current.add(id));
     }
   }, [blocks.length]);
+
+  // Logic evaluation for field visibility/enabled state
+  const logic = schema.logic || [];
+  const logicActions = evaluateLogic(logic, formData);
+  // Build a map: fieldId -> { visible, disabled }
+  const fieldVisibility: Record<
+    string,
+    { visible: boolean; disabled: boolean }
+  > = {};
+  blocks.forEach((block) => {
+    block.fields.forEach((field) => {
+      fieldVisibility[field.id] = { visible: true, disabled: false };
+    });
+  });
+  const logicMessages: string[] = [];
+
+  // Collect all actions for each field
+  const actionsByField: Record<string, LogicAction[]> = {};
+  logicActions.forEach((action) => {
+    if (action.target) {
+      if (!actionsByField[action.target]) actionsByField[action.target] = [];
+      actionsByField[action.target].push(action);
+    }
+  });
+
+  // Apply logic: hide > show > default
+  Object.entries(fieldVisibility).forEach(([fieldId, vis]) => {
+    const actions = actionsByField[fieldId] || [];
+    if (actions.some((a) => a.type === "hide")) {
+      vis.visible = false;
+    } else if (actions.some((a) => a.type === "show")) {
+      vis.visible = true;
+    } // else leave as default
+    if (actions.some((a) => a.type === "disable")) {
+      vis.disabled = true;
+    } else if (actions.some((a) => a.type === "enable")) {
+      vis.disabled = false;
+    }
+  });
+
+  logicActions.forEach((action) => {
+    if (action.target && fieldVisibility[action.target]) {
+      if (
+        action.type === "set_value" &&
+        typeof action.target === "string" &&
+        Object.prototype.hasOwnProperty.call(formData, action.target)
+      ) {
+        if (formData[action.target] !== action.value)
+          setFormData((prev) => ({
+            ...prev,
+            [action.target as string]: action.value,
+          }));
+      }
+    }
+    if (action.type === "show_message" && action.value) {
+      logicMessages.push(String(action.value));
+    }
+  });
 
   const handleFieldValueChange = (fieldId: string, value: any) => {
     setFormData((prev) => ({ ...prev, [fieldId]: value }));
@@ -160,5 +226,7 @@ export const useFormState = (
     handleNext,
     handlePrevious,
     handleSubmit,
+    fieldVisibility,
+    logicMessages,
   };
 };

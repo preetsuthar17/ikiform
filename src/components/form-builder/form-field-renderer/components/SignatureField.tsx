@@ -9,6 +9,7 @@ export function SignatureField({
   value,
   onChange,
   error,
+  disabled,
 }: BaseFieldProps) {
   const sigRef = useRef<SignatureCanvas>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -57,18 +58,30 @@ export function SignatureField({
         <SignatureCanvas
           ref={sigRef}
           penColor={penColor}
+          backgroundColor="#fff"
           canvasProps={{
             width: canvasWidth,
             height: canvasHeight,
             style: { display: "block", width: "100%", height: canvasHeight },
-            className:
-              "border rounded-card bg-background cursor-crosshair w-full",
           }}
-          onEnd={handleEnd}
+          onEnd={disabled ? undefined : handleEnd}
+          // Prevent drawing if disabled
+          {...(disabled && {
+            onMouseDown: (e: { preventDefault: () => any }) =>
+              e.preventDefault(),
+            onTouchStart: (e: { preventDefault: () => any }) =>
+              e.preventDefault(),
+          })}
         />
       </div>
       <div className="flex gap-2">
-        <Button type="button" size="sm" variant="outline" onClick={handleClear}>
+        <Button
+          type="button"
+          size="sm"
+          variant="outline"
+          onClick={handleClear}
+          disabled={disabled}
+        >
           Clear
         </Button>
       </div>

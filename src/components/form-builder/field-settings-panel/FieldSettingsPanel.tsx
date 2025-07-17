@@ -41,29 +41,21 @@ export function FieldSettingsPanel({
   }
 
   return (
-    <div className="h-full bg-card border-border">
-      <ScrollArea className="h-full">
+    <div className="h-[90%] min-h-0 flex flex-col bg-card border-border">
+      <ScrollArea className="flex-1 h-[90%]">
         <SettingsPanelHeader onClose={onClose} />
-
         <div className="flex flex-col gap-4 p-4">
           <BasicSettings field={field} onFieldUpdate={onFieldUpdate} />
-
           <FieldSpecificSettings
             field={field}
             onUpdateSettings={updateSettings}
             onFieldUpdate={onFieldUpdate}
           />
-
           <OptionsSettings field={field} onFieldUpdate={onFieldUpdate} />
-
           <ValidationSettings
             field={field}
             onUpdateValidation={updateValidation}
           />
-
-          <ErrorMessages field={field} onUpdateValidation={updateValidation} />
-
-          <VisualSettings field={field} onUpdateSettings={updateSettings} />
         </div>
       </ScrollArea>
     </div>

@@ -10,7 +10,13 @@ import { getErrorRingClasses } from "../utils";
 // Type imports
 import type { BaseFieldProps } from "../types";
 
-export function RadioField({ field, value, onChange, error }: BaseFieldProps) {
+export function RadioField({
+  field,
+  value,
+  onChange,
+  error,
+  disabled,
+}: BaseFieldProps) {
   const errorRingClasses = getErrorRingClasses(error);
 
   return (
@@ -18,6 +24,7 @@ export function RadioField({ field, value, onChange, error }: BaseFieldProps) {
       value={value || ""}
       onValueChange={onChange}
       className={`flex gap-2 ${errorRingClasses}`}
+      disabled={disabled}
     >
       {field.options?.map((option, index) => (
         <RadioItem
@@ -25,6 +32,7 @@ export function RadioField({ field, value, onChange, error }: BaseFieldProps) {
           value={option}
           id={`${field.id}-${index}`}
           label={option}
+          disabled={disabled}
         />
       ))}
     </RadioGroup>

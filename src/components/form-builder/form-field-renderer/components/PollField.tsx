@@ -8,6 +8,7 @@ export function PollField({
   onChange,
   error,
   fieldRef,
+  disabled,
 }: BaseFieldProps) {
   const options = field.settings?.pollOptions || [];
   const showResults = !!field.settings?.showResults;
@@ -20,9 +21,19 @@ export function PollField({
   const totalVotes = fakeResults.reduce((sum, o) => sum + o.votes, 0);
 
   return (
-    <RadioGroup value={value || ""} onValueChange={onChange} error={error}>
+    <RadioGroup
+      value={value || ""}
+      onValueChange={onChange}
+      error={error}
+      disabled={disabled}
+    >
       {options.map((option, idx) => (
-        <RadioItem key={idx} value={option} label={option} />
+        <RadioItem
+          key={idx}
+          value={option}
+          label={option}
+          disabled={disabled}
+        />
       ))}
     </RadioGroup>
   );

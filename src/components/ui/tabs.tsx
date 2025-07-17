@@ -211,7 +211,7 @@ const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
       <motion.div
         ref={ref}
         className={cn(
-          "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+          "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 h-auto",
           className,
         )}
         initial={{ opacity: 0, y: 4 }}

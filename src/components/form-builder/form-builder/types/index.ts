@@ -1,5 +1,6 @@
 // Type imports
 import type { FormField, FormSchema, FormBlock } from "@/lib/database";
+import type { FormLogic } from "@/components/form-builder/logic-builder/types";
 
 // Interfaces
 export interface FormBuilderProps {
@@ -82,6 +83,7 @@ export interface FormBuilderPanelsProps {
   onBlockDelete: (blockId: string) => void;
   onFormSettingsUpdate: (settings: Partial<FormSchema["settings"]>) => void;
   onStepSelect: (stepIndex: number) => void;
+  onLogicChange?: (logic: FormLogic) => void;
 }
 
 export interface FormBuilderModalsProps {

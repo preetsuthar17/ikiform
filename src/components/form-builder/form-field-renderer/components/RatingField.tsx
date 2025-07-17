@@ -7,7 +7,13 @@ const ICONS: Record<string, React.ElementType> = {
   heart: Heart,
 };
 
-export function RatingField({ field, value, onChange, error }: BaseFieldProps) {
+export function RatingField({
+  field,
+  value,
+  onChange,
+  error,
+  disabled,
+}: BaseFieldProps) {
   const starCount = field.settings?.starCount || 5;
   const iconType = field.settings?.icon || "star";
   const color = field.settings?.color || "#fbbf24";
@@ -24,6 +30,7 @@ export function RatingField({ field, value, onChange, error }: BaseFieldProps) {
             onClick={() => onChange(idx + 1)}
             className="focus:outline-none"
             aria-label={`Rate ${idx + 1} ${iconType}`}
+            disabled={disabled}
           >
             <Icon
               size={starSize}

@@ -34,6 +34,8 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
     submitted,
     handleFieldValueChange,
     handleSubmit,
+    fieldVisibility,
+    logicMessages,
   } = useSingleStepForm(formId, schema, fields);
 
   const [isPasswordProtected, setIsPasswordProtected] = useState(false);
@@ -115,6 +117,8 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
           submitting={submitting}
           onFieldValueChange={handleFieldValueChange}
           onSubmit={handleSubmit}
+          fieldVisibility={fieldVisibility}
+          logicMessages={logicMessages}
         />
 
         <div className="text-center flex flex-col gap-4">

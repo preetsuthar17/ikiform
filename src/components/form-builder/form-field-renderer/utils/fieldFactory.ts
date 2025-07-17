@@ -29,8 +29,16 @@ export function createFieldComponent(
   onChange: (value: any) => void,
   error?: string,
   fieldRef?: React.RefObject<any>,
+  disabled?: boolean,
 ): React.ReactElement {
-  const props: BaseFieldProps = { field, value, onChange, error, fieldRef };
+  const props: BaseFieldProps = {
+    field,
+    value,
+    onChange,
+    error,
+    fieldRef,
+    disabled,
+  };
 
   switch (field.type) {
     case "text":

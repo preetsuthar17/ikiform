@@ -7,7 +7,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 // Type imports
 import type { BaseFieldProps } from "../types";
 
-export function CheckboxField({ field, value, onChange }: BaseFieldProps) {
+export function CheckboxField({
+  field,
+  value,
+  onChange,
+  disabled,
+}: BaseFieldProps) {
   return (
     <div className="flex flex-col gap-2">
       {field.options?.map((option, index) => (
@@ -24,6 +29,7 @@ export function CheckboxField({ field, value, onChange }: BaseFieldProps) {
               onChange(currentValues.filter((v: string) => v !== option));
             }
           }}
+          disabled={disabled}
         />
       ))}
     </div>
