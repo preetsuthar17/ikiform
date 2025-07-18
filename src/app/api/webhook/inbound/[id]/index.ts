@@ -7,10 +7,10 @@ import { formsDbServer } from "@/lib/database";
 // POST /api/webhook/inbound/[id] - Receive and process inbound webhook
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    const mappingId = params.id;
+    const mappingId = (await params).id;
     const supabase = createAdminClient();
     // 1. Fetch the inbound mapping
     const { data: mapping, error } = await supabase

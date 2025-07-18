@@ -9,7 +9,7 @@ import {
 // PUT /api/webhook/inbound/[id] - Update inbound mapping
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const body = await req.json();
@@ -19,7 +19,7 @@ export async function PUT(
         { status: 400 },
       );
     }
-    const mapping = await updateInboundMapping(params.id, body);
+    const mapping = await updateInboundMapping((await params).id, body);
     return NextResponse.json(mapping);
   } catch (error: any) {
     return NextResponse.json(
@@ -32,10 +32,10 @@ export async function PUT(
 // DELETE /api/webhook/inbound/[id] - Delete inbound mapping
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    await deleteInboundMapping(params.id);
+    await deleteInboundMapping((await params).id);
     return NextResponse.json({ success: true });
   } catch (error: any) {
     return NextResponse.json(

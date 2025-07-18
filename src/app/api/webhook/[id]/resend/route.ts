@@ -6,22 +6,22 @@ import { resendWebhookDelivery } from "@/lib/webhooks/outbound";
 // POST /api/webhook/[id]/resend - Re-send a failed delivery
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const body = await req.json();
     if (!body.logId) {
       return NextResponse.json(
         { error: "Missing logId in request body" },
-        { status: 400 },
+        { status: 400 }
       );
     }
-    const result = await resendWebhookDelivery(params.id, body);
+    const result = await resendWebhookDelivery((await params).id, body);
     return NextResponse.json(result);
   } catch (error: any) {
     return NextResponse.json(
       { error: error.message || "Failed to resend webhook delivery" },
-      { status: 400 },
+      { status: 400 }
     );
   }
 }
