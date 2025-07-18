@@ -38,6 +38,11 @@ const featureCategories = [
         description: "Create logic and conditional flows for your forms.",
         included: true,
       },
+      {
+        label: "Webhooks",
+        description: "Enhanced webhook support for advanced workflows.",
+        included: true,
+      },
     ],
   },
   {
@@ -81,12 +86,6 @@ const featureCategories = [
         description: "More integrations with popular tools coming soon.",
         included: false,
       },
-      {
-        label: "Webhooks",
-        description: "Enhanced webhook support for advanced workflows.",
-        included: false,
-      },
-
       {
         label: "Fetching form field data from API",
         description: "Populate form fields dynamically from external APIs.",
