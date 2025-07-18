@@ -6,7 +6,7 @@ import { testWebhook } from "@/lib/webhooks/outbound";
 // POST /api/webhook/[id]/test - Test a webhook (send sample payload)
 export async function POST(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     let samplePayload = undefined;
@@ -18,7 +18,7 @@ export async function POST(
   } catch (error: any) {
     return NextResponse.json(
       { error: error.message || "Failed to test webhook" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }

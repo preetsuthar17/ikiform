@@ -143,10 +143,7 @@ export function MultiStepForm({
       dir={dir}
       className={`bg-background flex items-center justify-center w-full transition-opacity duration-500 ${showForm ? "opacity-100" : "opacity-0"} ${marginClass}`}
     >
-      <div
-        className={`flex flex-col gap-8 w-full ${containerClass}`}
-        id="embeddable-form"
-      >
+      <div className={`flex flex-col gap-8 w-full ${containerClass}`}>
         <Card
           className={`rounded-card flex flex-col w-full grow gap-6 p-8 ${schema.settings.designMode === "minimal" ? "bg-transparent border-none shadow-none hover:bg-transparent" : ""}`}
           variant={

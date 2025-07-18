@@ -53,7 +53,6 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
 
   return (
     <Card
-      id="embeddable-form"
       className={`rounded-card flex flex-col gap-6 p-8 w-full grow ${schema.settings.designMode === "minimal" ? "bg-transparent border-none shadow-none hover:bg-transparent" : ""}`}
       variant={schema.settings.designMode === "minimal" ? "ghost" : "default"}
     >

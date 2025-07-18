@@ -19,8 +19,7 @@ export default function ConditionalLayout({
     pathname.includes("/forms") ||
     pathname.includes("/ai-builder") ||
     pathname.includes("/login") ||
-    pathname.includes("/demo-form-builder") ||
-    pathname.includes("/embed");
+    pathname.includes("/demo-form-builder");
 
   if (hideHeaderFooter) {
     return <>{children}</>;

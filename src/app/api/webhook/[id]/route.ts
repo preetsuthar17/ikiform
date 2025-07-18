@@ -6,7 +6,7 @@ import { updateWebhook, deleteWebhook } from "@/lib/webhooks/outbound";
 // PUT /api/webhook/[id] - Update a webhook
 export async function PUT(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const body = await req.json();
@@ -15,7 +15,7 @@ export async function PUT(
   } catch (error: any) {
     return NextResponse.json(
       { error: error.message || "Failed to update webhook" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }
@@ -23,7 +23,7 @@ export async function PUT(
 // DELETE /api/webhook/[id] - Delete a webhook
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     await deleteWebhook((await params).id);
@@ -31,7 +31,7 @@ export async function DELETE(
   } catch (error: any) {
     return NextResponse.json(
       { error: error.message || "Failed to delete webhook" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }

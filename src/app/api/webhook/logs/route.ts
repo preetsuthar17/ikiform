@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
   } catch (error: any) {
     return NextResponse.json(
       { error: error.message || "Failed to fetch webhook logs" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }

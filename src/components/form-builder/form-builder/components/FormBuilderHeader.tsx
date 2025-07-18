@@ -99,22 +99,6 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               )}
               {formSchema.settings.multiStep ? "Multi-Step" : "Single Page"}
             </Button>
-
-            <Button
-              variant="secondary"
-              size="sm"
-              asChild
-              disabled={!formId}
-              className="text-xs"
-            >
-              <Link
-                href={formId ? `/embed?formId=${formId}` : "/embed"}
-                target="_blank"
-              >
-                <Container className="w-3 h-3 shrink-0" /> Embed
-              </Link>
-            </Button>
-
             <Button
               variant="secondary"
               size="icon"
@@ -123,7 +107,6 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             >
               <Code className="w-3 h-3 shrink-0" />
             </Button>
-
             <Button
               variant="secondary"
               size="icon"
@@ -133,7 +116,6 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             >
               <BarChart3 className="w-3 h-3 shrink-0" />
             </Button>
-
             <Button
               variant="secondary"
               size="icon"
@@ -143,7 +125,6 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             >
               <Share className="w-3 h-3 shrink-0" />
             </Button>
-
             <Button
               variant="secondary"
               size="icon"
@@ -207,27 +188,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             )}
             {formSchema.settings.multiStep ? "Multi-Step" : "Single Page"}
           </Button>
-
           <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  asChild
-                  disabled={!formId}
-                >
-                  <Link
-                    href={formId ? `/embed?formId=${formId}` : "/embed"}
-                    target="_blank"
-                  >
-                    <Container className="w-4 h-4 shrink-0" /> Embed
-                  </Link>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent size="sm">Embed</TooltipContent>
-            </Tooltip>
-
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="secondary" size="icon" onClick={onJsonView}>
@@ -236,7 +197,6 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               </TooltipTrigger>
               <TooltipContent size="sm">View JSON</TooltipContent>
             </Tooltip>
-
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
@@ -250,7 +210,6 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               </TooltipTrigger>
               <TooltipContent size="sm">Analytics</TooltipContent>
             </Tooltip>
-
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
@@ -264,7 +223,6 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               </TooltipTrigger>
               <TooltipContent size="sm">Share</TooltipContent>
             </Tooltip>
-
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="secondary" size="icon" onClick={onSettings}>
