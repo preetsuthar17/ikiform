@@ -76,4 +76,5 @@ export const DEFAULT_FORM_DESIGN = {
   maxWidth: "md",
   padding: "md",
   designMode: "default",
+  margin: "lg",
 } as const;

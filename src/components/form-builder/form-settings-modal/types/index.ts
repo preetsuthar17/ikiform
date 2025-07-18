@@ -119,7 +119,8 @@ export type FormSettingsSection =
   | "security"
   | "branding"
   | "notifications"
-  | "design";
+  | "design"
+  | "webhooks";
 
 export interface FormSettingsSectionConfig {
   id: FormSettingsSection;

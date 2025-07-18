@@ -7,7 +7,9 @@ import { PasswordProtectionSection } from "./PasswordProtectionSection";
 import { BrandingSection } from "./SocialMediaSection";
 import { NotificationsSection } from "./NotificationsSection";
 import { DesignSection } from "./DesignSection";
+import { WebhooksSettingsSection } from "./WebhooksSettingsSection";
 import type { FormSettingsSection } from "../types";
+import { useParams } from "next/navigation";
 
 interface FormSettingsContentProps {
   section: FormSettingsSection;
@@ -32,6 +34,8 @@ export function FormSettingsContent({
   updateSocialMedia,
   updateNotifications,
 }: FormSettingsContentProps) {
+  const params = useParams();
+  const formId = params?.id as string | undefined;
   switch (section) {
     case "basic":
       return (
@@ -94,6 +98,12 @@ export function FormSettingsContent({
             localSettings={localSettings}
             updateSettings={updateSettings}
           />
+        </section>
+      );
+    case "webhooks":
+      return (
+        <section className="flex flex-col gap-4">
+          <WebhooksSettingsSection formId={formId || ""} />
         </section>
       );
     default:

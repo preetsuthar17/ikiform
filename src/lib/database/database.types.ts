@@ -359,3 +359,51 @@ export interface FormSchema {
   };
   logic?: FormLogic;
 }
+
+// --- Webhook System Types ---
+
+export type WebhookEventType =
+  | "form_submitted"
+  | "form_updated"
+  | "user_registered"
+  | "analytics_event"
+  | "custom";
+
+export interface WebhookConfig {
+  id: string;
+  formId?: string; // Optional for account-level webhooks
+  accountId?: string;
+  url: string;
+  events: WebhookEventType[];
+  secret?: string; // Stored securely, never sent to client
+  method: "POST" | "PUT";
+  headers?: Record<string, string>;
+  payloadTemplate?: string; // e.g., mustache/handlebars style
+  enabled: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface WebhookLog {
+  id: string;
+  webhook_id: string;
+  event: WebhookEventType;
+  status: "success" | "failed" | "pending";
+  request_payload: any;
+  response_status?: number;
+  response_body?: string;
+  error?: string;
+  timestamp: string;
+  attempt: number;
+}
+
+export interface InboundWebhookMapping {
+  id: string;
+  endpoint: string; // e.g., /api/webhook/inbound/:id
+  targetFormId: string;
+  mappingRules: Record<string, string>; // e.g., { "externalField": "formField" }
+  secret?: string;
+  enabled: boolean;
+  createdAt: string;
+  updatedAt: string;
+}

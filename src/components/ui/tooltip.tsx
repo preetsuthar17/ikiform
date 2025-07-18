@@ -40,7 +40,7 @@ const TooltipTrigger = TooltipPrimitive.Trigger;
 
 const TooltipProvider: React.FC<
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Provider>
-> = ({ delayDuration = 300, skipDelayDuration = 100, ...props }) => (
+> = ({ delayDuration = 100, skipDelayDuration = 50, ...props }) => (
   <TooltipPrimitive.Provider
     delayDuration={delayDuration}
     skipDelayDuration={skipDelayDuration}

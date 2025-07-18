@@ -11,6 +11,8 @@ import { createClient } from "@/utils/supabase/server";
 import { requirePremium } from "@/lib/utils/premium-check";
 import { sendFormNotification } from "@/lib/services";
 import { sanitizeString } from "@/lib/utils/sanitize";
+import { triggerWebhooks } from "@/lib/webhooks/outbound";
+import { formatHumanFriendlyPayload } from "@/lib/webhooks/outbound";
 
 // Recursively sanitize all string fields in an object
 function sanitizeObjectStrings(obj: any): any {
@@ -149,6 +151,21 @@ export async function POST(
       filteredSubmissionData,
       ipAddress,
     );
+
+    // Trigger outbound webhooks (non-blocking)
+    const formatted = await formatHumanFriendlyPayload(
+      formId,
+      filteredSubmissionData,
+    );
+    try {
+      await triggerWebhooks("form_submitted", {
+        ...formatted,
+        submissionId: submission.id,
+        ipAddress,
+      });
+    } catch (e) {
+      console.error("[Webhook] Delivery error:", e);
+    }
 
     // Send notification if enabled
     const notifications = form.schema.settings.notifications;

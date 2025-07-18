@@ -10,3 +10,4 @@ export { FormSettingsMobileLayout } from "./FormSettingsMobileLayout";
 export { FormSettingsContent } from "./FormSettingsContent";
 export { NotificationsSection } from "./NotificationsSection";
 export { DesignSection } from "./DesignSection";
+export { WebhooksSettingsSection } from "./WebhooksSettingsSection";

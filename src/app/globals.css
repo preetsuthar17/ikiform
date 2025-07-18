@@ -58,8 +58,8 @@
 }
 
 :root {
-  --radius: 0rem;
-  --card-radius: 0rem;
+  --radius: 0px;
+  --card-radius: 0px;
   --hu-background: 0, 0%, 99%;
   --hu-foreground: 0, 0%, 10%;
   --hu-card: 0, 0%, 98%;
