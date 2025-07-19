@@ -15,14 +15,18 @@ export function DateInputField({
   disabled,
 }: BaseFieldProps) {
   const baseClasses = getBaseClasses(field, error);
+  // Convert string value to Date for DatePicker (assume value is ISO string)
+  const dateValue = value ? new Date(value) : undefined;
   return (
-    <Input
-      type="date"
-      id={field.id}
-      value={value || ""}
-      onChange={(e) => onChange(e.target.value)}
+    <DatePicker
+      value={dateValue}
+      onChange={(date) => {
+        // Convert Date object back to string (ISO format)
+        onChange(date ? date.toISOString().slice(0, 10) : "");
+      }}
       className={baseClasses}
       disabled={disabled}
+      placeholder={field.placeholder || "Pick a date"}
     />
   );
 }
