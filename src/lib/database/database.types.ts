@@ -168,6 +168,9 @@ export interface Database {
 }
 
 export interface FormField {
+  /** Custom mapping keys for API data */
+  valueKey?: string;
+  labelKey?: string;
   id: string;
   type:
     | "text"
@@ -189,7 +192,8 @@ export interface FormField {
   description?: string;
   placeholder?: string;
   required: boolean;
-  options?: string[];
+  options?: Array<string | { value: string; label?: string }>;
+  optionsApi?: string;
   validation?: {
     minLength?: number;
     maxLength?: number;

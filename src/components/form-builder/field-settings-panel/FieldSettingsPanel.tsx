@@ -51,7 +51,9 @@ export function FieldSettingsPanel({
             onUpdateSettings={updateSettings}
             onFieldUpdate={onFieldUpdate}
           />
-          <OptionsSettings field={field} onFieldUpdate={onFieldUpdate} />
+          {field.type !== "poll" && (
+            <OptionsSettings field={field} onFieldUpdate={onFieldUpdate} />
+          )}
           <ValidationSettings
             field={field}
             onUpdateValidation={updateValidation}

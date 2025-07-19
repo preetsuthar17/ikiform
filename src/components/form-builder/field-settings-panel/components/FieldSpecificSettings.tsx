@@ -23,6 +23,7 @@ import { EmailValidationSettings } from "./EmailValidationSettings";
 // Type imports
 import type { FormField } from "@/lib/database";
 import { Cross, X } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 interface FieldSpecificSettingsProps {
   field: FormField;
@@ -378,6 +379,84 @@ export function FieldSpecificSettings({
                 </div>
               ))}
             </div>
+            <Separator>OR</Separator>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="poll-options" className="text-card-foreground">
+                Fetch Options from API
+              </Label>
+              <Input
+                id="poll-options-api"
+                type="url"
+                placeholder="https://your-api.com/options"
+                value={field.optionsApi || ""}
+                onChange={(e) =>
+                  onFieldUpdate({ ...field, optionsApi: e.target.value })
+                }
+                className="bg-input border-border mb-2"
+              />
+              <div className="flex gap-2 mb-2">
+                <Input
+                  id="poll-valueKey"
+                  type="text"
+                  placeholder="Value key (e.g. id)"
+                  value={field.valueKey || ""}
+                  onChange={(e) =>
+                    onFieldUpdate({ ...field, valueKey: e.target.value })
+                  }
+                  className="bg-input border-border"
+                />
+                <Input
+                  id="poll-labelKey"
+                  type="text"
+                  placeholder="Label key (e.g. name)"
+                  value={field.labelKey || ""}
+                  onChange={(e) =>
+                    onFieldUpdate({ ...field, labelKey: e.target.value })
+                  }
+                  className="bg-input border-border"
+                />
+              </div>
+              {field.optionsApi && (
+                <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded text-xs text-blue-900">
+                  <strong>API Data Guidance:</strong> This field will fetch
+                  options from the API endpoint:
+                  <br />
+                  <span className="font-mono text-xs">{field.optionsApi}</span>
+                  <br />
+                  <span>
+                    The API should return either:
+                    <ul className="list-disc ml-6 mt-1">
+                      <li>
+                        <code>["Option 1", "Option 2", ...]</code>{" "}
+                        <em>(array of strings)</em>
+                      </li>
+                      <li>
+                        <code>
+                          [&#123; value: "opt1", label: "Option 1" &#125;, ...]
+                        </code>{" "}
+                        <em>(array of objects)</em>
+                      </li>
+                      <li>
+                        <code>&#123; options: [...] &#125;</code>{" "}
+                        <em>(object with options array)</em>
+                      </li>
+                      <li>
+                        <code>
+                          [&#123; id: "opt1", name: "Option 1" &#125;, ...]
+                        </code>{" "}
+                        <em>(custom keys)</em>
+                      </li>
+                    </ul>
+                    <span className="block mt-1">
+                      You can specify custom keys above to map your API data.
+                      <br />
+                      Each option must have a <code>value</code> property (or
+                      your custom key). <code>label</code> is optional.
+                    </span>
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
           <div className="flex items-center gap-2">
             <Switch
@@ -465,7 +544,6 @@ export function FieldSpecificSettings({
         </Card>
       )}
 
-      {/* Checkbox Settings */}
       {field.type === "checkbox" && (
         <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
           <h3 className="font-medium text-card-foreground">Checkbox Options</h3>
@@ -511,7 +589,11 @@ export function FieldSpecificSettings({
             <div className="flex flex-col gap-1 mt-2">
               {(field.options || []).map((option, idx) => (
                 <div key={idx} className="flex items-center gap-2">
-                  <span className="flex-1 truncate">{option}</span>
+                  <span className="flex-1 truncate">
+                    {typeof option === "string"
+                      ? option
+                      : (option.label ?? option.value)}
+                  </span>
                   <Button
                     type="button"
                     size="icon"
