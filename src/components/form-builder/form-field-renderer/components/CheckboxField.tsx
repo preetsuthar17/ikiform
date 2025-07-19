@@ -6,6 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 // Type imports
 import type { BaseFieldProps } from "../types";
+import { sanitizeOptions } from "../utils/sanitizeOptions";
 
 export function CheckboxField({
   field,
@@ -42,7 +43,7 @@ export function CheckboxField({
               };
             });
           }
-          setApiOptions(options);
+          setApiOptions(sanitizeOptions(options));
           setLoading(false);
         })
         .catch((err) => {
@@ -75,7 +76,7 @@ export function CheckboxField({
                 onChange([...currentValues, optionValue]);
               } else {
                 onChange(
-                  currentValues.filter((v: string) => v !== optionValue),
+                  currentValues.filter((v: string) => v !== optionValue)
                 );
               }
             }}

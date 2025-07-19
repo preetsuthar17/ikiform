@@ -9,6 +9,7 @@ import { getErrorRingClasses } from "../utils";
 
 // Type imports
 import type { BaseFieldProps } from "../types";
+import { sanitizeOptions } from "../utils/sanitizeOptions";
 
 export function RadioField({
   field,
@@ -47,7 +48,7 @@ export function RadioField({
               };
             });
           }
-          setApiOptions(options);
+          setApiOptions(sanitizeOptions(options));
           setLoading(false);
         })
         .catch((err) => {

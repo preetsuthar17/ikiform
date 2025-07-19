@@ -15,6 +15,7 @@ import { getErrorClasses } from "../utils";
 
 // Type imports
 import type { BaseFieldProps } from "../types";
+import { sanitizeOptions } from "../utils/sanitizeOptions";
 
 export function SelectField({
   field,
@@ -51,7 +52,7 @@ export function SelectField({
               };
             });
           }
-          setApiOptions(options);
+          setApiOptions(sanitizeOptions(options));
           setLoading(false);
         })
         .catch((err) => {

@@ -1,5 +1,6 @@
 import React from "react";
 import type { BaseFieldProps } from "../types";
+import { sanitizeOptions } from "../utils/sanitizeOptions";
 import { RadioGroup, RadioItem } from "@/components/ui/radio";
 
 export function PollField({
@@ -39,7 +40,7 @@ export function PollField({
               };
             });
           }
-          setApiOptions(options);
+          setApiOptions(sanitizeOptions(options));
           setLoading(false);
         })
         .catch((err) => {

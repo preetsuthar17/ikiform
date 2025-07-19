@@ -23,8 +23,13 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
   const { updateField } = createFieldUpdater(field, onFieldUpdate);
   const { addOption, updateOption, removeOption } = createOptionHandlers(
     field,
-    updateField,
+    updateField
   );
+
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const {
+    sanitizeOptions,
+  } = require("@/components/form-builder/form-field-renderer/utils/sanitizeOptions");
 
   return (
     <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
@@ -42,36 +47,38 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
       </div>
 
       <div className="flex flex-col gap-2">
-        {(field.options || []).map((option, index) => {
-          let value = "";
-          if (typeof option === "string") {
-            value = option;
-          } else if (
-            option &&
-            typeof option === "object" &&
-            "value" in option
-          ) {
-            value = option.value;
+        {sanitizeOptions(field.options || []).map(
+          (option: any, index: number) => {
+            let value = "";
+            if (typeof option === "string") {
+              value = option;
+            } else if (
+              option &&
+              typeof option === "object" &&
+              "value" in option
+            ) {
+              value = option.value;
+            }
+            return (
+              <div key={index} className="flex items-center gap-2">
+                <Input
+                  value={value}
+                  onChange={(e) => updateOption(index, e.target.value)}
+                  placeholder={`Option ${index + 1}`}
+                  className="bg-input border-border"
+                />
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => removeOption(index)}
+                  className="text-destructive hover:text-destructive/80 flex gap-2"
+                >
+                  <X className="w-4 h-4" />
+                </Button>
+              </div>
+            );
           }
-          return (
-            <div key={index} className="flex items-center gap-2">
-              <Input
-                value={value}
-                onChange={(e) => updateOption(index, e.target.value)}
-                placeholder={`Option ${index + 1}`}
-                className="bg-input border-border"
-              />
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => removeOption(index)}
-                className="text-destructive hover:text-destructive/80 flex gap-2"
-              >
-                <X className="w-4 h-4" />
-              </Button>
-            </div>
-          );
-        })}
+        )}
         {(field.options || []).length === 0 && (
           <p className="text-sm text-muted-foreground">No options added yet</p>
         )}
