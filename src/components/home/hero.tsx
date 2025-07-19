@@ -5,8 +5,12 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { useAuth } from "@/hooks/use-auth";
 import { Modal, ModalContent, ModalHeader, ModalTitle } from "../ui/modal";
-import DemoFormBuilder from "@/components/form-builder/form-builder/DemoFormBuilder";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
+} from "../ui/tooltip";
 import { OptimizedImage } from "../other/optimized-image";
 import { Play } from "lucide-react";
 
@@ -15,6 +19,14 @@ export default function Hero() {
 
   const [open, setOpen] = React.useState(false);
   const [videoOpen, setVideoOpen] = React.useState(false);
+  const [showTooltip, setShowTooltip] = React.useState(false);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowTooltip(true);
+    }, 400);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <section className="flex flex-col gap-10 md:gap-16 md:pb-28 pb-16 w-full max-w-[75%] max-sm:max-w-[90%] mx-auto h-dvh my-12">
@@ -55,14 +67,27 @@ export default function Hero() {
                 <Link href="/dashboard">Go to Dashboard</Link>
               </Button>
             )}
-            <Button
-              className="font-medium h-[45px] text-white"
-              size="lg"
-              variant="ghost"
-              onClick={() => setOpen(true)}
-            >
-              Try Demo
-            </Button>
+            <TooltipProvider>
+              <Tooltip
+                open={showTooltip}
+                onOpenChange={setShowTooltip}
+                delayDuration={0}
+              >
+                <TooltipTrigger asChild>
+                  <Button
+                    className="font-medium h-[45px] text-white"
+                    size="lg"
+                    variant="ghost"
+                    onClick={() => setOpen(true)}
+                  >
+                    Try Demo
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="top" variant="dark" size="md">
+                  Try a live demo here!
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
           <div className="w-full my-12 h-full grow relative">
             <div className="w-full h-full">
