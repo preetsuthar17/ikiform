@@ -67,6 +67,12 @@ export const DEFAULT_NOTIFICATION_SETTINGS = {
   message: "Whoo-hoo!! You have received a new submission on your form.",
 };
 
+export const DEFAULT_LAYOUT_SETTINGS = {
+  margin: "lg" as "lg",
+  padding: "md" as "md",
+  maxWidth: "md" as "md",
+};
+
 /**
  * Ensures a form schema has the default rate limiting and profanity filter settings
  * This is used to handle legacy forms and ensure all forms have these settings
@@ -82,6 +88,10 @@ export function ensureDefaultFormSettings(schema: FormSchema): FormSchema {
           ...DEFAULT_SOCIAL_MEDIA_SETTINGS,
           ...schema.settings.branding?.socialMedia,
         },
+      },
+      layout: {
+        ...DEFAULT_LAYOUT_SETTINGS,
+        ...schema.settings.layout,
       },
       rateLimit: {
         ...DEFAULT_RATE_LIMIT_SETTINGS,
@@ -153,6 +163,7 @@ export function createDefaultFormSchema(options: {
       profanityFilter: { ...DEFAULT_PROFANITY_FILTER_SETTINGS },
       responseLimit: { ...DEFAULT_RESPONSE_LIMIT_SETTINGS },
       passwordProtection: { ...DEFAULT_PASSWORD_PROTECTION_SETTINGS },
+      layout: { ...DEFAULT_LAYOUT_SETTINGS },
     },
   };
 }
