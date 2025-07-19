@@ -7,7 +7,9 @@ export const AppearanceHeader: React.FC = () => {
   return (
     <div className="flex flex-col gap-2">
       <h2 className="text-2xl font-semibold">{APPEARANCE_SETTINGS.TITLE}</h2>
-      <p className="text-muted-foreground">{APPEARANCE_SETTINGS.DESCRIPTION}</p>
+      <p className="text-muted-foreground">
+        <span>{APPEARANCE_SETTINGS.DESCRIPTION}</span>
+      </p>
     </div>
   );
 };

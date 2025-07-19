@@ -12,7 +12,7 @@ export const AdditionalOptions: React.FC = () => {
         {APPEARANCE_SETTINGS.ADDITIONAL_OPTIONS_LABEL}
       </Label>
       <div className="text-sm text-muted-foreground">
-        {APPEARANCE_SETTINGS.ADDITIONAL_OPTIONS_DESCRIPTION}
+        <span>{APPEARANCE_SETTINGS.ADDITIONAL_OPTIONS_DESCRIPTION}</span>
       </div>
     </div>
   );

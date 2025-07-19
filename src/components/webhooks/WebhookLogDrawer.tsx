@@ -99,7 +99,7 @@ function PayloadViewer({ payload }: { payload: any }) {
               )}
             </div>
             <div className="text-sm text-muted-foreground">
-              {formatValue(field.value)}
+              <span>{formatValue(field.value)}</span>
             </div>
           </div>
         ))}

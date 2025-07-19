@@ -22,7 +22,7 @@ export default function Header() {
   const { user } = useAuth();
 
   return (
-    <nav className="flex justify-between items-center flex-wrap gap-8 my-10 p-4 text-sm font-inter w-full max-w-[95%] mx-auto">
+    <nav className="flex justify-between items-center flex-wrap gap-8 mt-10 p-4 text-sm font-inter w-full max-w-[95%] mx-auto">
       <div className="flex-shrink-0 flex items-center gap-2">
         <Link href="/">
           <span className="text-3xl font-semibold tracking-tight flex items-center gap-2 justify-center">
@@ -81,7 +81,8 @@ export default function Header() {
       <div className="sm:hidden flex items-center">
         <Drawer>
           <DrawerTrigger asChild>
-            <Button size="icon" variant="ghost">
+            <Button size="icon" aria-label="open-sidebar" variant="ghost">
+              <span className="sr-only">Open sidebar</span>
               <AlignJustify className="w-6 h-6" />
             </Button>
           </DrawerTrigger>

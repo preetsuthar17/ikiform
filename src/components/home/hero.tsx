@@ -83,7 +83,7 @@ export default function Hero() {
                     Try Demo
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent side="top" variant="dark" size="md">
+              <TooltipContent side="bottom" variant="dark" size="md">
                   Try a live demo here!
                 </TooltipContent>
               </Tooltip>
