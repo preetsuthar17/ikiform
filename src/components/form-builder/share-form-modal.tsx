@@ -68,6 +68,13 @@ export function ShareFormModal({
     }
   }, [isOpen, isPublished, shareUrl]);
 
+  // Copy link automatically when modal opens and form is published
+  useEffect(() => {
+    if (isOpen && isPublished && shareUrl) {
+      handleCopyLink();
+    }
+  }, [isOpen, isPublished, shareUrl]);
+
   const generateQRCode = async () => {
     if (!shareUrl) return;
 

@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 
 // Local Components
 import { FormActions } from "./FormActions";
+import { ShareFormModal } from "@/components/form-builder/share-form-modal";
 
 // Utils
 import { getTotalFields, formatDate } from "../utils";
@@ -23,6 +24,12 @@ export function FormCard({
 }: FormCardProps) {
   const totalFields = getTotalFields(form);
   const formattedDate = formatDate(form.updated_at);
+  const [isShareModalOpen, setIsShareModalOpen] = React.useState(false);
+
+  const handleShare = () => {
+    setIsShareModalOpen(true);
+    if (onShare) onShare(form);
+  };
 
   return (
     <Card className="group p-6 bg-card border-border rounded-card cursor-pointer">
@@ -60,8 +67,18 @@ export function FormCard({
         form={form}
         onEdit={onEdit}
         onViewAnalytics={onViewAnalytics}
-        onShare={onShare}
+        onShare={handleShare}
         onDelete={onDelete}
+      />
+      <ShareFormModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        formId={form?.id || null}
+        isPublished={!!form?.is_published}
+        onPublish={async () => {
+          // You may want to refetch or update form state after publish
+          if (onShare) onShare(form);
+        }}
       />
     </Card>
   );

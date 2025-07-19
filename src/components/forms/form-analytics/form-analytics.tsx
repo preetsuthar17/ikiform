@@ -56,6 +56,7 @@ import {
   TrendsChart,
 } from "./components";
 import { ConfirmationModal } from "@/components/dashboard/form-delete-confirmation-modal";
+import { ShareFormModal } from "@/components/form-builder/share-form-modal";
 
 // Local types
 import { FormAnalyticsProps } from "./types";
@@ -65,6 +66,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const [selectedSubmission, setSelectedSubmission] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
@@ -123,18 +125,8 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     router.push(`/form-builder/${form.id}`);
   };
 
-  const handleShareForm = async () => {
-    try {
-      if (!form.is_published) {
-        await formsDb.togglePublishForm(form.id, true);
-      }
-      const shareUrl = `${window.location.origin}/forms/${form.id}`;
-      await navigator.clipboard.writeText(shareUrl);
-      toast.success("Form link copied to clipboard!");
-    } catch (error) {
-      console.error("Error sharing form:", error);
-      toast.error("Failed to share form");
-    }
+  const handleShareForm = () => {
+    setIsShareModalOpen(true);
   };
 
   const handleDeleteForm = async () => {
@@ -317,6 +309,16 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
         cancelText="Cancel"
         variant="destructive"
         onConfirm={handleDeleteForm}
+      />
+      <ShareFormModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        formId={form?.id || null}
+        isPublished={!!form?.is_published}
+        onPublish={async () => {
+          await formsDb.togglePublishForm(form.id, true);
+          toast.success("Form published!");
+        }}
       />
       <FloatingChatButton
         onClick={() => setChatOpen(true)}

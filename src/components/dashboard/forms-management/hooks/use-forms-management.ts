@@ -70,7 +70,6 @@ export function useFormsManagement() {
 
       const shareUrl = generateShareUrl(form.id);
       await copyToClipboard(shareUrl);
-      toast.success("Form link copied to clipboard!");
     } catch (error) {
       console.error("Error sharing form:", error);
       toast.error("Failed to share form");

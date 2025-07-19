@@ -76,7 +76,7 @@ export function CheckboxField({
                 onChange([...currentValues, optionValue]);
               } else {
                 onChange(
-                  currentValues.filter((v: string) => v !== optionValue)
+                  currentValues.filter((v: string) => v !== optionValue),
                 );
               }
             }}

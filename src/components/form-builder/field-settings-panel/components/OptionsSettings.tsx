@@ -23,7 +23,7 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
   const { updateField } = createFieldUpdater(field, onFieldUpdate);
   const { addOption, updateOption, removeOption } = createOptionHandlers(
     field,
-    updateField
+    updateField,
   );
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -77,7 +77,7 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
                 </Button>
               </div>
             );
-          }
+          },
         )}
         {(field.options || []).length === 0 && (
           <p className="text-sm text-muted-foreground">No options added yet</p>
