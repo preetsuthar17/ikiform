@@ -10,12 +10,12 @@ export default function Review({
   name: string;
   image: string;
   review: string;
-  role: string;
+  role?: string;
 }) {
   return (
     <>
       <div className="flex items-center justify-center max-w-xl mx-auto flex-col gap-8">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <Star size={20} fill="#eab308" stroke="none" />
           <Star size={20} fill="#eab308" stroke="none" />
           <Star size={20} fill="#eab308" stroke="none" />

@@ -19,6 +19,13 @@ The AI is really neat I just got a form up in no time, and it just has built-in 
           image="https://pbs.twimg.com/profile_images/1929279033180618752/0z6QXRbm_400x400.jpg"
         />
         <Features />
+        <Review
+          name="Trust F. Òbe"
+          review={`Very nice work with Ikiform.
+
+I was immediately sold when I saw your article about Typeform being too expensive. `}
+          image="https://api.dicebear.com/9.x/micah/svg?seed=TrustF"
+        />
         <Pricing />
         <FAQSection />
         <CTASection />
