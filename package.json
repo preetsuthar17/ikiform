@@ -15,6 +15,7 @@
     "drizzle:pull": "drizzle-kit pull"
   },
   "dependencies": {
+    "@ai-sdk/cohere": "^1.2.10",
     "@ai-sdk/groq": "^1.2.9",
     "@hello-pangea/dnd": "^18.0.1",
     "@next/third-parties": "^15.4.2",

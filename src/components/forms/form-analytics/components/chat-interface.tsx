@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from "react";
+import React, { memo, useEffect, useMemo } from "react";
 
 // UI Components
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -25,6 +25,57 @@ import rehypeSanitize from "rehype-sanitize";
 
 // Types
 import type { ChatInterfaceProps } from "../types";
+// Updated formatContent function with better object handling
+function formatContent(content: any): string {
+  if (content === null || content === undefined) {
+    return String(content);
+  }
+
+  if (typeof content === "object") {
+    // Handle arrays
+    if (Array.isArray(content)) {
+      // If it's an array of objects, format each one
+      const formattedItems = content.map((item, index) => {
+        if (typeof item === "object" && item !== null) {
+          // For objects in arrays, create a readable format
+          const entries = Object.entries(item)
+            .map(([key, value]) => `${key}: ${formatValue(value)}`)
+            .join(", ");
+          return `Item ${index + 1}: {${entries}}`;
+        }
+        return formatValue(item);
+      });
+      return formattedItems.join("\n");
+    }
+
+    // Handle regular objects
+    return Object.entries(content)
+      .map(([key, value]) => `- **${key}**: ${formatValue(value)}`)
+      .join("\n");
+  }
+
+  return String(content);
+}
+
+// Helper function to safely format any value
+function formatValue(value: any): string {
+  if (value === null || value === undefined) {
+    return String(value);
+  }
+
+  if (typeof value === "object") {
+    if (Array.isArray(value)) {
+      return `[${value.map(formatValue).join(", ")}]`;
+    }
+    // For nested objects, create a compact representation
+    const entries = Object.entries(value)
+      .map(([k, v]) => `${k}: ${formatValue(v)}`)
+      .join(", ");
+    return `{${entries}}`;
+  }
+
+  return String(value);
+}
 
 const ChatMessage = memo(function ChatMessage({
   message,
@@ -35,6 +86,9 @@ const ChatMessage = memo(function ChatMessage({
   index: number;
   markdownComponents: any;
 }) {
+  // Ensure content is always a string
+  const formattedContent = formatContent(message.content);
+
   return (
     <div
       key={index}
@@ -57,7 +111,7 @@ const ChatMessage = memo(function ChatMessage({
         >
           <div className="text-sm leading-relaxed">
             {message.role === "user" ? (
-              <div className="whitespace-pre-wrap">{message.content}</div>
+              <div className="whitespace-pre-wrap">{formattedContent}</div>
             ) : (
               <div className="markdown-content">
                 <ReactMarkdown
@@ -65,7 +119,7 @@ const ChatMessage = memo(function ChatMessage({
                   rehypePlugins={[rehypeSanitize]}
                   components={markdownComponents}
                 >
-                  {message.content}
+                  {formattedContent}
                 </ReactMarkdown>
               </div>
             )}
@@ -199,8 +253,18 @@ export const ChatInterface = memo(function ChatInterface({
         </em>
       ),
     }),
-    [],
+    []
   );
+
+  useEffect(() => {
+    if (
+      chatInputRef &&
+      typeof chatInputRef !== "function" &&
+      chatInputRef.current
+    ) {
+      chatInputRef.current.focus();
+    }
+  }, [chatInputRef]);
 
   return (
     <div className="flex flex-col h-[74vh] background relative">
@@ -250,7 +314,7 @@ export const ChatInterface = memo(function ChatInterface({
                           rehypePlugins={[rehypeSanitize]}
                           components={markdownComponents}
                         >
-                          {streamedContent}
+                          {formatContent(streamedContent)}
                         </ReactMarkdown>
                       </div>
                       <span className="inline-block w-2 h-4 bg-primary animate-pulse ml-1 rounded-ele"></span>
@@ -290,7 +354,7 @@ export const ChatInterface = memo(function ChatInterface({
             {/* Input Form */}
             <form
               onSubmit={handleChatSend}
-              className="relative flex items-center"
+              className="relative flex items-center  max-w-[90%] mx-auto"
             >
               <Textarea
                 ref={chatInputRef}
