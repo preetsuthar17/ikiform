@@ -1,10 +1,9 @@
 import { Kbd } from "@/components/ui/kbd";
-import { Check } from "lucide-react";
 import React from "react";
 
 const featureCategories = [
   {
-    name: "Core Features",
+    name: "Features",
     features: [
       {
         label: "Unlimited submissions",
@@ -42,6 +41,11 @@ const featureCategories = [
         label: "Webhooks",
         description: "Enhanced webhook support for advanced workflows.",
         included: true,
+      },
+      {
+        label: "Fetching form field data from API",
+        description: "Populate form fields dynamically from external APIs.",
+        included: false,
       },
     ],
   },
@@ -86,11 +90,7 @@ const featureCategories = [
         description: "More integrations with popular tools coming soon.",
         included: false,
       },
-      {
-        label: "Fetching form field data from API",
-        description: "Populate form fields dynamically from external APIs.",
-        included: false,
-      },
+
       {
         label: "Time input field",
         description: "Add time selection fields to your forms.",
@@ -101,7 +101,6 @@ const featureCategories = [
         description: "Allow users to upload files with their form submissions.",
         included: false,
       },
-
       {
         label: "Advance form customization",
         description: "Unlock more customization options for your forms.",
