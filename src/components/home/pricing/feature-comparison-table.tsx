@@ -45,7 +45,7 @@ const featureCategories = [
       {
         label: "Fetching form field data from API",
         description: "Populate form fields dynamically from external APIs.",
-        included: false,
+        included: true,
       },
     ],
   },
