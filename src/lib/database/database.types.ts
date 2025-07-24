@@ -187,7 +187,8 @@ export interface FormField {
     | "signature"
     | "file"
     | "poll"
-    | "rating";
+    | "rating"
+    | "time";
   label: string;
   description?: string;
   placeholder?: string;
@@ -250,6 +251,7 @@ export interface FormField {
     icon?: string; // Icon type (e.g., star, heart)
     color?: string; // Color of the stars
     starSize?: number; // Size of the stars/icons in px
+    showCurrentTimeButton?: boolean; // Allow showing current time button
   };
 }
 

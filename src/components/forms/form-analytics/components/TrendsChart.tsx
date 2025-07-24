@@ -9,10 +9,10 @@ interface TrendsChartProps {
 
 const getFilteredTrends = (
   trends: Record<string, number>,
-  range: "7" | "30" | "all"
+  range: "7" | "30" | "all",
 ) => {
   const dates = Object.keys(trends).sort(
-    (a, b) => new Date(a).getTime() - new Date(b).getTime()
+    (a, b) => new Date(a).getTime() - new Date(b).getTime(),
   );
   let filteredDates = dates;
   if (range === "7") filteredDates = dates.slice(-7);

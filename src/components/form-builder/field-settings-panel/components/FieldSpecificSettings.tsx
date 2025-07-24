@@ -43,6 +43,7 @@ export function FieldSpecificSettings({
   const isEmailType = field.type === "email";
   const isDateType = field.type === "date";
   const isSocialType = field.type === "social";
+  const isTimeType = field.type === "time";
 
   // Don't render if field doesn't have specific settings
   if (
@@ -53,10 +54,31 @@ export function FieldSpecificSettings({
     !isEmailType &&
     !isDateType &&
     !isSocialType &&
+    !isTimeType &&
     field.type !== "poll" &&
     field.type !== "rating"
   ) {
     return null;
+  }
+  if (isTimeType) {
+    return (
+      <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
+        <h3 className="font-medium text-card-foreground">
+          Time Field Settings
+        </h3>
+        <div className="flex items-center gap-2">
+          <Switch
+            id="showCurrentTimeButton"
+            checked={!!field.settings?.showCurrentTimeButton}
+            onCheckedChange={(checked) =>
+              onUpdateSettings({ showCurrentTimeButton: checked })
+            }
+            label="Show 'Set Current Time' Button"
+            size="sm"
+          />
+        </div>
+      </Card>
+    );
   }
 
   const [newOption, setNewOption] = useState("");
