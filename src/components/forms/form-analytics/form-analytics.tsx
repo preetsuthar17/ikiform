@@ -72,7 +72,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const { theme } = useTheme();
 
   const { submissions, loading, refreshing, refreshData } = useFormSubmissions(
-    form.id
+    form.id,
   );
   const analyticsData = useAnalyticsData(form, submissions);
   const {

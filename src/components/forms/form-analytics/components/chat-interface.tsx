@@ -253,7 +253,7 @@ export const ChatInterface = memo(function ChatInterface({
         </em>
       ),
     }),
-    []
+    [],
   );
 
   useEffect(() => {

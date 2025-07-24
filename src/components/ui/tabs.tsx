@@ -24,7 +24,7 @@ const tabsVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 const tabTriggerVariants = cva(
@@ -49,7 +49,7 @@ const tabTriggerVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 export interface TabItem {
@@ -81,10 +81,10 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
       indicatorColor = "hsl(var(--hu-accent))",
       ...props
     },
-    ref
+    ref,
   ) => {
     const [activeValue, setActiveValue] = React.useState(
-      value || defaultValue || items[0]?.id
+      value || defaultValue || items[0]?.id,
     );
     const [activeTabBounds, setActiveTabBounds] = React.useState({
       left: 0,
@@ -101,7 +101,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
 
     React.useEffect(() => {
       const activeIndex = items.findIndex(
-        (item: TabItem) => item.id === activeValue
+        (item: TabItem) => item.id === activeValue,
       );
       const activeTab = tabRefs.current[activeIndex];
 
@@ -136,7 +136,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
             "absolute z-10",
             variant === "underline"
               ? "bottom-0 h-0.5 rounded-none"
-              : "top-1 bottom-1 rounded-card"
+              : "top-1 bottom-1 rounded-card",
           )}
           style={{
             backgroundColor:
@@ -167,7 +167,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
               }}
               className={cn(
                 tabTriggerVariants({ variant, size }),
-                "relative z-20 text-muted-foreground data-[state=active]:text-accent-foreground gap-2"
+                "relative z-20 text-muted-foreground data-[state=active]:text-accent-foreground gap-2",
               )}
               data-state={isActive ? "active" : "inactive"}
               onClick={() => handleTabClick(item.id)}
@@ -187,7 +187,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
         })}
       </div>
     );
-  }
+  },
 );
 
 Tabs.displayName = "Tabs";
@@ -219,7 +219,7 @@ const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
         ref={ref}
         className={cn(
           "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 h-auto",
-          className
+          className,
         )}
         initial={{ opacity: 0, y: 4 }}
         animate={{ opacity: 1, y: 0 }}
@@ -230,7 +230,7 @@ const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
         {children}
       </motion.div>
     );
-  }
+  },
 );
 
 TabsContent.displayName = "TabsContent";

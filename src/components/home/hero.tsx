@@ -51,8 +51,8 @@ export default function Hero() {
                   aria-label="Vercel logo"
                 >
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M8 1L16 15H0L8 1Z"
                     fill="currentColor"
                   ></path>

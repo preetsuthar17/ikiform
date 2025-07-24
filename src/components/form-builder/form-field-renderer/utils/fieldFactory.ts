@@ -1,6 +1,4 @@
-// External libraries
 import React from "react";
-
 // Types import
 import type { FormField } from "@/lib/database";
 
@@ -18,6 +16,7 @@ import {
   SocialField,
   DateInputField,
   SignatureField,
+  TimeInputField,
   PollField,
   RatingField,
 } from "../components";
@@ -69,6 +68,8 @@ export function createFieldComponent(
       return React.createElement(PollField, props);
     case "rating":
       return React.createElement(RatingField, props);
+    case "time":
+      return React.createElement(TimeInputField, props);
     default:
       return React.createElement("div", {}, "Unsupported field type");
   }

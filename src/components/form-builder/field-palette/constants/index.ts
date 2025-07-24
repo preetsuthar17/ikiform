@@ -15,9 +15,9 @@ import {
   Share2,
   Calendar,
   PenLine,
-  FileUp,
   BarChart3,
   Star,
+  Clock,
 } from "lucide-react";
 
 export const FIELD_TYPES: FieldTypeConfig[] = [
@@ -86,6 +86,12 @@ export const FIELD_TYPES: FieldTypeConfig[] = [
     label: "Date",
     icon: Calendar,
     description: "Date input (calendar)",
+  },
+  {
+    type: "time",
+    label: "Time",
+    icon: Clock,
+    description: "Select or type a time (HH:MM AM/PM)",
   },
   {
     type: "signature",

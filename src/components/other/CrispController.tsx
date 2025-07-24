@@ -12,6 +12,9 @@ export default function CrispController() {
     (pathname.startsWith("/dashboard/forms/") &&
       pathname.includes("/analytics"))
   ) {
+    return null; // Existing logic to return null for specific paths
+  }
+  if (!pathname) {
     return null;
   }
   return <CrispWithNoSSR />;
