@@ -9,8 +9,7 @@ export default function CrispController() {
   if (
     pathname.startsWith("/forms") ||
     pathname.startsWith("/dashboard/forms") ||
-    (pathname.startsWith("/dashboard/forms/") &&
-      pathname.includes("/analytics"))
+    (pathname.startsWith("/dashboard/forms/") && pathname.includes("analytics"))
   ) {
     return null;
   }
