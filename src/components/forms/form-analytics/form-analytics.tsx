@@ -55,6 +55,7 @@ import {
   ChatModal,
   TrendsChart,
 } from "./components";
+import { DropoffAnalytics } from "./components/dropoff-analytics";
 import { ConfirmationModal } from "@/components/dashboard/form-delete-confirmation-modal";
 import { ShareFormModal } from "@/components/form-builder/share-form-modal";
 
@@ -72,7 +73,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const { theme } = useTheme();
 
   const { submissions, loading, refreshing, refreshData } = useFormSubmissions(
-    form.id,
+    form.id
   );
   const analyticsData = useAnalyticsData(form, submissions);
   const {
@@ -276,6 +277,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
         <OverviewStats data={analyticsData} />
         <AnalyticsCards data={analyticsData} />
         <TrendsChart trends={analyticsData.submissionTrends} />
+        <DropoffAnalytics form={form} submissions={submissions} />
         <InfoCards form={form} data={analyticsData} formatDate={formatDate} />
         <SubmissionsList
           form={form}
