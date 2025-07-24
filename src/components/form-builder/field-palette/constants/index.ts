@@ -22,6 +22,12 @@ import {
 
 export const FIELD_TYPES: FieldTypeConfig[] = [
   {
+    type: "scheduler",
+    label: "Scheduler",
+    icon: Calendar, // You may want to use a different icon
+    description: "Embed a scheduling link (cal.com, Calendly, etc.)",
+  },
+  {
     type: "text",
     label: "Text Input",
     icon: Type,

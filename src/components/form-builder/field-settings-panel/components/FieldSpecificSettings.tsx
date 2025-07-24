@@ -16,6 +16,13 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalTitle,
+} from "@/components/ui/modal";
 
 // Component imports
 import { EmailValidationSettings } from "./EmailValidationSettings";
@@ -44,8 +51,8 @@ export function FieldSpecificSettings({
   const isDateType = field.type === "date";
   const isSocialType = field.type === "social";
   const isTimeType = field.type === "time";
+  const isSchedulerType = field.type === "scheduler";
 
-  // Don't render if field doesn't have specific settings
   if (
     !isTextareaType &&
     !isSliderType &&
@@ -55,11 +62,18 @@ export function FieldSpecificSettings({
     !isDateType &&
     !isSocialType &&
     !isTimeType &&
+    !isSchedulerType &&
     field.type !== "poll" &&
     field.type !== "rating"
   ) {
     return null;
   }
+  // Scheduler Field Settings
+  const [schedulerModalOpen, setSchedulerModalOpen] = useState(false);
+  {
+    /* Scheduler Field Settings */
+  }
+
   if (isTimeType) {
     return (
       <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
@@ -91,6 +105,157 @@ export function FieldSpecificSettings({
           field={field}
           onUpdateSettings={onUpdateSettings}
         />
+      )}
+
+      {isSchedulerType && (
+        <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
+          <h3 className="font-medium text-card-foreground">
+            Scheduler Settings
+          </h3>
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <Label
+                htmlFor="scheduler-provider"
+                className="text-card-foreground"
+              >
+                Scheduler Provider
+              </Label>
+              <Select
+                value={field.settings?.schedulerProvider || ""}
+                onValueChange={(val) =>
+                  onUpdateSettings({ schedulerProvider: val as any })
+                }
+              >
+                <SelectTrigger
+                  id="scheduler-provider"
+                  className="bg-input border-border"
+                >
+                  <SelectValue placeholder="Select provider" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="calcom">Cal.com</SelectItem>
+                  <SelectItem value="calendly">Calendly</SelectItem>
+                  <SelectItem value="tidycal">TidyCal</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            {/* Provider-specific link input */}
+            {field.settings?.schedulerProvider && (
+              <div className="flex flex-col gap-2">
+                <Label
+                  htmlFor="scheduler-link"
+                  className="text-card-foreground"
+                >
+                  {(() => {
+                    switch (field.settings?.schedulerProvider) {
+                      case "calcom":
+                        return "Cal.com Link";
+                      case "calendly":
+                        return "Calendly Link";
+                      case "tidycal":
+                        return "TidyCal Link";
+                      default:
+                        return "Scheduler Link";
+                    }
+                  })()}
+                </Label>
+                <Input
+                  id="scheduler-link"
+                  type="url"
+                  placeholder="https://..."
+                  value={
+                    field.settings && field.settings.schedulerProvider
+                      ? field.settings.schedulerLinks?.[
+                          field.settings.schedulerProvider
+                        ] || ""
+                      : ""
+                  }
+                  onChange={(e) => {
+                    if (!field.settings || !field.settings.schedulerProvider)
+                      return;
+                    onUpdateSettings({
+                      schedulerLinks: {
+                        ...(field.settings.schedulerLinks || {}),
+                        [field.settings.schedulerProvider]: e.target.value,
+                      },
+                    });
+                  }}
+                  className="bg-input border-border"
+                />
+              </div>
+            )}
+            <div className="flex flex-col gap-2">
+              <Label
+                htmlFor="scheduler-button-text"
+                className="text-card-foreground"
+              >
+                Calendar Opener Button Text
+              </Label>
+              <Input
+                id="scheduler-button-text"
+                type="text"
+                placeholder="e.g. Book a Call"
+                value={field.settings?.schedulerButtonText || ""}
+                onChange={(e) =>
+                  onUpdateSettings({ schedulerButtonText: e.target.value })
+                }
+                className="bg-input border-border"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label className="text-card-foreground">Preview</Label>
+              <Button
+                className="w-fit bg-foreground/80 text-background hover:bg-foreground"
+                type="button"
+                onClick={() => setSchedulerModalOpen(true)}
+                disabled={
+                  !field.settings?.schedulerProvider ||
+                  !field.settings?.schedulerLinks?.[
+                    field.settings.schedulerProvider
+                  ]
+                }
+              >
+                {field.settings?.schedulerButtonText || "Open Scheduler"}
+              </Button>
+              {/* Modal for embedded calendar */}
+              <Modal
+                open={schedulerModalOpen}
+                onOpenChange={setSchedulerModalOpen}
+              >
+                <ModalContent className="max-w-[95%] h-[95%] w-full flex flex-col gap-4">
+                  <ModalHeader>
+                    <ModalTitle>Scheduler Preview</ModalTitle>
+                  </ModalHeader>
+                  <div className="h-full">
+                    {field.settings?.schedulerProvider &&
+                      field.settings?.schedulerLinks?.[
+                        field.settings.schedulerProvider
+                      ] && (
+                        <iframe
+                          src={
+                            field.settings.schedulerLinks[
+                              field.settings.schedulerProvider
+                            ]
+                          }
+                          title="Scheduler Embed"
+                          className="w-full h-full border-none rounded-ele"
+                          allow="camera; microphone; fullscreen"
+                        />
+                      )}
+                  </div>
+                  <ModalFooter>
+                    <Button
+                      onClick={() => setSchedulerModalOpen(false)}
+                      variant="outline"
+                    >
+                      Close
+                    </Button>
+                  </ModalFooter>
+                </ModalContent>
+              </Modal>
+            </div>
+          </div>
+        </Card>
       )}
 
       {/* Date Field Settings */}
@@ -515,7 +680,7 @@ export function FieldSpecificSettings({
                 onUpdateSettings({
                   starCount: Math.max(
                     1,
-                    Math.min(10, parseInt(e.target.value) || 5),
+                    Math.min(10, parseInt(e.target.value) || 5)
                   ),
                 })
               }

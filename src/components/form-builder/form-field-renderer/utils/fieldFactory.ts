@@ -19,6 +19,7 @@ import {
   TimeInputField,
   PollField,
   RatingField,
+  SchedulerField,
 } from "../components";
 import type { BaseFieldProps } from "../types";
 
@@ -28,7 +29,7 @@ export function createFieldComponent(
   onChange: (value: any) => void,
   error?: string,
   fieldRef?: React.RefObject<any>,
-  disabled?: boolean,
+  disabled?: boolean
 ): React.ReactElement {
   const props: BaseFieldProps = {
     field,
@@ -70,6 +71,8 @@ export function createFieldComponent(
       return React.createElement(RatingField, props);
     case "time":
       return React.createElement(TimeInputField, props);
+    case "scheduler":
+      return React.createElement(SchedulerField, props);
     default:
       return React.createElement("div", {}, "Unsupported field type");
   }

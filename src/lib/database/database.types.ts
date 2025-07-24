@@ -188,7 +188,8 @@ export interface FormField {
     | "file"
     | "poll"
     | "rating"
-    | "time";
+    | "time"
+    | "scheduler";
   label: string;
   description?: string;
   placeholder?: string;
@@ -235,6 +236,14 @@ export interface FormField {
       requireBusinessEmail?: boolean; // Only allow business domains
       customValidationMessage?: string; // Custom validation message
     };
+    // Scheduler field settings
+    schedulerProvider?: "calcom" | "calendly" | "tidycal";
+    schedulerLinks?: {
+      calcom?: string;
+      calendly?: string;
+      tidycal?: string;
+    };
+    schedulerButtonText?: string;
     // Date field settings
     // Visual customization
     size?: "sm" | "md" | "lg"; // Field size

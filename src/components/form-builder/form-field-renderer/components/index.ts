@@ -17,3 +17,4 @@ export { SignatureField } from "./SignatureField";
 export { PollField } from "./PollField";
 export { RatingField } from "./RatingField";
 export { TimeInputField } from "./TimeInputField";
+export { SchedulerField } from "./SchedulerField";
