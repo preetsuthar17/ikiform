@@ -46,7 +46,7 @@ export default function Hero() {
                 <svg
                   height="13"
                   width="13"
-                  stroke-linejoin="round"
+                  strokeLinejoin="round"
                   viewBox="0 0 16 16"
                   aria-label="Vercel logo"
                 >
