@@ -5,10 +5,10 @@ import type { RefObject } from "react";
 // Interfaces
 export interface FormFieldRendererProps {
   field: FormField;
-  value: string | number | boolean | object | null;
-  onChange: (value: string | number | boolean | object | null) => void;
+  value: any;
+  onChange: (value: any) => void;
   error?: string;
-  fieldRef?: RefObject<unknown>;
+  fieldRef?: RefObject<any>;
   disabled?: boolean;
 }
 
@@ -20,10 +20,10 @@ export interface FieldWrapperProps {
 
 export interface BaseFieldProps {
   field: FormField;
-  value: string | number | boolean | object | null;
-  onChange: (value: string | number | boolean | object | null) => void;
+  value: any;
+  onChange: (value: any) => void;
   error?: string;
-  fieldRef?: RefObject<unknown>;
+  fieldRef?: RefObject<any>;
   className?: string;
   disabled?: boolean;
 }
