@@ -12,6 +12,11 @@ const featureCategories = [
         included: true,
       },
       {
+        label: "Remove Ikiform branding",
+        description: "Customize your forms without Ikiform branding.",
+        included: true,
+      },
+      {
         label: "AI Form builder",
         description: "Generate forms instantly using AI based on your needs.",
         included: true,
@@ -47,6 +52,16 @@ const featureCategories = [
         description: "Populate form fields dynamically from external APIs.",
         included: true,
       },
+      {
+        label: "Email notifications",
+        description: "Receive email notifications for form submissions.",
+        included: true,
+      },
+      {
+        label: "Advance customization",
+        description: "Customize your forms with advanced styling options.",
+        included: true,
+      },
     ],
   },
   {
@@ -59,8 +74,23 @@ const featureCategories = [
         included: true,
       },
       {
+        label: "Form visit analytics",
+        description: "Track visits and interactions with your forms.",
+        included: true,
+      },
+      {
         label: "AI Analytics",
         description: "Get AI-powered suggestions and analytics for your forms.",
+        included: true,
+      },
+      {
+        label: "Trend analytics",
+        description: "Analyze trends and patterns in your form responses.",
+        included: true,
+      },
+      {
+        label: "Drop-off analytics",
+        description: "Understand where users drop off in your forms.",
         included: true,
       },
     ],
@@ -90,20 +120,9 @@ const featureCategories = [
         description: "More integrations with popular tools coming soon.",
         included: false,
       },
-
-      {
-        label: "Time input field",
-        description: "Add time selection fields to your forms.",
-        included: false,
-      },
       {
         label: "File uploads (in few days)",
         description: "Allow users to upload files with their form submissions.",
-        included: false,
-      },
-      {
-        label: "Advance form customization",
-        description: "Unlock more customization options for your forms.",
         included: false,
       },
       {
