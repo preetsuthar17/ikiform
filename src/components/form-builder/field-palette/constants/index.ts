@@ -22,12 +22,6 @@ import {
 
 export const FIELD_TYPES: FieldTypeConfig[] = [
   {
-    type: "scheduler",
-    label: "Scheduler",
-    icon: Calendar, // You may want to use a different icon
-    description: "Embed a scheduling link (cal.com, Calendly, etc.)",
-  },
-  {
     type: "text",
     label: "Text Input",
     icon: Type,
@@ -38,6 +32,12 @@ export const FIELD_TYPES: FieldTypeConfig[] = [
     label: "Email",
     icon: Mail,
     description: "Email address input",
+  },
+  {
+    type: "statement",
+    label: "Statement",
+    icon: MessageSquare,
+    description: "Show a heading, intro, or description in your form.",
   },
   {
     type: "textarea",
@@ -98,6 +98,12 @@ export const FIELD_TYPES: FieldTypeConfig[] = [
     label: "Time",
     icon: Clock,
     description: "Select or type a time (HH:MM AM/PM)",
+  },
+  {
+    type: "scheduler",
+    label: "Scheduler",
+    icon: Calendar,
+    description: "Embed a scheduling link (cal.com, Calendly, etc.)",
   },
   {
     type: "signature",

@@ -189,7 +189,8 @@ export interface FormField {
     | "poll"
     | "rating"
     | "time"
-    | "scheduler";
+    | "scheduler"
+    | "statement";
   label: string;
   description?: string;
   placeholder?: string;
@@ -261,6 +262,11 @@ export interface FormField {
     color?: string; // Color of the stars
     starSize?: number; // Size of the stars/icons in px
     showCurrentTimeButton?: boolean; // Allow showing current time button
+    // Statement field settings
+    statementHeading?: string;
+    statementDescription?: string;
+    statementAlign?: "left" | "center" | "right";
+    statementSize?: "sm" | "md" | "lg";
   };
 }
 

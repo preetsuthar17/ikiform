@@ -11,28 +11,32 @@ import { getWidthClass } from "../utils";
 import type { FieldWrapperProps } from "../types";
 
 export function FieldWrapper({ field, error, children }: FieldWrapperProps) {
+  const isStatement = field.type === "statement";
   return (
     <div
       className={`flex flex-col gap-2 ${getWidthClass(field.settings?.width as any)}`}
     >
-      <Label htmlFor={field.id} className="text-sm font-medium text-foreground">
-        {field.label.replace("*", "")}
-        {field.required && <span className="text-destructive ml-1">*</span>}
-      </Label>
-
-      {field.description && (
-        <p className="text-sm text-muted-foreground">{field.description}</p>
+      {!isStatement && (
+        <>
+          <Label
+            htmlFor={field.id}
+            className="text-sm font-medium text-foreground"
+          >
+            {field.label.replace("*", "")}
+            {field.required && <span className="text-destructive ml-1">*</span>}
+          </Label>
+          {field.description && (
+            <p className="text-sm text-muted-foreground">{field.description}</p>
+          )}
+        </>
       )}
-
       {children}
-
-      {field.settings?.helpText && (
+      {!isStatement && field.settings?.helpText && (
         <p className="text-xs text-muted-foreground">
           {field.settings.helpText}
         </p>
       )}
-
-      {error && (
+      {!isStatement && error && (
         <p className="text-sm text-destructive flex items-start gap-1">
           {error}
         </p>

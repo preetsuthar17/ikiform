@@ -20,6 +20,7 @@ import {
   PollField,
   RatingField,
   SchedulerField,
+  StatementField,
 } from "../components";
 import type { BaseFieldProps } from "../types";
 
@@ -73,6 +74,8 @@ export function createFieldComponent(
       return React.createElement(TimeInputField, props);
     case "scheduler":
       return React.createElement(SchedulerField, props);
+    case "statement":
+      return React.createElement(StatementField, props);
     default:
       return React.createElement("div", {}, "Unsupported field type");
   }

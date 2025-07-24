@@ -27,6 +27,7 @@ import { PALETTE_DRAG_TYPE } from "../../field-palette/components/FieldItem";
 
 // Types
 import type { FormFieldsContainerProps } from "../types";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function FormFieldsContainer({
   fields,
@@ -71,16 +72,22 @@ export function FormFieldsContainer({
           Add Field
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="center" className="w-48">
-        {FIELD_TYPES.map((fieldType) => (
-          <DropdownMenuItem
-            key={fieldType.type}
-            onClick={() => onAddField?.(fieldType.type)}
-            className="cursor-pointer"
-          >
-            {fieldType.label}
-          </DropdownMenuItem>
-        ))}
+      <DropdownMenuContent align="center" className="w-48 h-42">
+        <ScrollArea type="always">
+          {FIELD_TYPES.map((fieldType: { type: string; label: string }) => (
+            <DropdownMenuItem
+              key={fieldType.type}
+              onClick={() =>
+                onAddField?.(
+                  fieldType.type as (typeof FIELD_TYPES)[number]["type"]
+                )
+              }
+              className="cursor-pointer"
+            >
+              {fieldType.label}
+            </DropdownMenuItem>
+          ))}
+        </ScrollArea>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -160,7 +167,7 @@ export function FormFieldsContainer({
                         }`}
                         onClick={() =>
                           onFieldSelect(
-                            selectedFieldId === field.id ? null : field.id,
+                            selectedFieldId === field.id ? null : field.id
                           )
                         }
                       >
