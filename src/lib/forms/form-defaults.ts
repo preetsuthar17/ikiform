@@ -71,6 +71,7 @@ export const DEFAULT_LAYOUT_SETTINGS = {
   margin: "lg" as "lg",
   padding: "md" as "md",
   maxWidth: "md" as "md",
+  borderRadius: "md" as "md",
 };
 
 /**

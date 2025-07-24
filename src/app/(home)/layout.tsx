@@ -4,7 +4,7 @@ import "../globals.css";
 export const metadata: Metadata = {
   title: {
     default: "Beautiful, budget-friendly forms without compromises",
-    template: "%s | Ikiform",
+    template: "%s — Ikiform",
   },
   description:
     "Create beautiful forms with Ikiform - An open-source alternative to Google Forms. Build surveys, collect responses, and analyze data effortlessly.",

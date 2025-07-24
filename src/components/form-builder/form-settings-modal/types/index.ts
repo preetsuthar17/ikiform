@@ -35,6 +35,7 @@ export interface LocalSettings {
     maxWidth?: "sm" | "md" | "lg" | "xl" | "full";
     padding?: "none" | "sm" | "md" | "lg";
     margin?: "none" | "sm" | "md" | "lg";
+    borderRadius?: "none" | "sm" | "md" | "lg" | "xl";
     spacing?: "compact" | "normal" | "relaxed";
     alignment?: "left" | "center" | "right";
   };

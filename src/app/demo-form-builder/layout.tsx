@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import "@/app/globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "GDPR Policy",
+    default: "Demo Form Builder",
     template: "%s — Ikiform",
   },
   description:
-    "Read the GDPR compliance policy for Ikiform. Learn how we protect your data, comply with EU regulations, and support your privacy rights.",
+    "Try out the Ikiform Demo Form Builder. Experiment with building, editing, and managing forms in a live, interactive environment.",
   applicationName: "Ikiform",
-  authors: [{ name: "Preet Suthar", url: "https://ikiform.com" }],
+  authors: [{ name: "Preet Suthar", url: "https://preetsuthar.me" }],
   creator: "Ikiform",
   publisher: "Ikiform",
   formatDetection: {
@@ -16,24 +17,24 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://ikiform.com"),
+  metadataBase: new URL("https://ikiform.com/demo-form-builder"),
   alternates: {
-    canonical: "/legal/gdpr",
+    canonical: "/demo-form-builder",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://ikiform.com/legal/gdpr",
+    url: "https://ikiform.com/demo-form-builder",
     siteName: "Ikiform",
-    title: "GDPR Policy",
+    title: "Demo Form Builder | Ikiform",
     description:
-      "Read the GDPR compliance policy for Ikiform. Learn how we protect your data, comply with EU regulations, and support your privacy rights.",
+      "Test and explore Ikiform's Demo Form Builder. Drag-and-drop fields, customize layouts, and see your changes in real time.",
     images: [
       {
         url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
         width: 1200,
         height: 630,
-        alt: "Ikiform GDPR Policy",
+        alt: "Ikiform Demo Form Builder",
         type: "image/png",
       },
     ],
@@ -42,9 +43,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@Ikiform",
     creator: "@Ikiform",
-    title: "GDPR Policy",
+    title: "Demo Form Builder | Ikiform",
     description:
-      "Read the GDPR compliance policy for Ikiform. Learn how we protect your data, comply with EU regulations, and support your privacy rights.",
+      "Experiment with Ikiform's Demo Form Builder. Build and customize forms instantly in a live demo.",
     images: [
       "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
     ],
@@ -64,16 +65,16 @@ export const metadata: Metadata = {
     icon: [{ url: "/favicon.ico" }],
   },
   keywords: [
-    "GDPR",
-    "privacy",
-    "data protection",
-    "compliance",
-    "EU regulations",
-    "Ikiform",
-    "form builder privacy",
-    "data rights",
-    "user rights",
-    "data security",
+    "demo form builder",
+    "form builder demo",
+    "Ikiform demo",
+    "interactive form builder",
+    "form customization demo",
+    "open source form builder",
+    "live form editor",
+    "form creation demo",
+    "survey builder demo",
+    "form management demo",
   ],
   category: "technology",
   classification: "Business Software",

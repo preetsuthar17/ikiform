@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: {
     default: "Data Processing Agreement (DPA)",
-    template: "%s | Ikiform",
+    template: "%s — Ikiform",
   },
   description:
     "Read the Data Processing Agreement (DPA) for Ikiform. Understand how we process and protect your data as part of our form builder services.",

@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import "@/app/globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "GDPR Policy",
+    default: "Analytics",
     template: "%s — Ikiform",
   },
   description:
-    "Read the GDPR compliance policy for Ikiform. Learn how we protect your data, comply with EU regulations, and support your privacy rights.",
+    "Analyze your form responses with Ikiform Analytics. Gain insights, visualize trends, and make data-driven decisions with our open-source analytics tools.",
   applicationName: "Ikiform",
-  authors: [{ name: "Preet Suthar", url: "https://ikiform.com" }],
+  authors: [{ name: "Preet Suthar", url: "https://preetsuthar.me" }],
   creator: "Ikiform",
   publisher: "Ikiform",
   formatDetection: {
@@ -16,24 +17,24 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://ikiform.com"),
+  metadataBase: new URL("https://ikiform.com/dashboard/forms/analytics"),
   alternates: {
-    canonical: "/legal/gdpr",
+    canonical: "/dashboard/forms/analytics",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://ikiform.com/legal/gdpr",
+    url: "https://ikiform.com/dashboard/forms/analytics",
     siteName: "Ikiform",
-    title: "GDPR Policy",
+    title: "Analytics | Ikiform",
     description:
-      "Read the GDPR compliance policy for Ikiform. Learn how we protect your data, comply with EU regulations, and support your privacy rights.",
+      "Visualize and analyze your form data with Ikiform Analytics. Unlock actionable insights and improve your workflow.",
     images: [
       {
         url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
         width: 1200,
         height: 630,
-        alt: "Ikiform GDPR Policy",
+        alt: "Ikiform Analytics Dashboard",
         type: "image/png",
       },
     ],
@@ -42,9 +43,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@Ikiform",
     creator: "@Ikiform",
-    title: "GDPR Policy",
+    title: "Analytics | Ikiform",
     description:
-      "Read the GDPR compliance policy for Ikiform. Learn how we protect your data, comply with EU regulations, and support your privacy rights.",
+      "Explore analytics for your forms and responses with Ikiform. Visualize trends and make informed decisions.",
     images: [
       "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
     ],
@@ -64,16 +65,16 @@ export const metadata: Metadata = {
     icon: [{ url: "/favicon.ico" }],
   },
   keywords: [
-    "GDPR",
-    "privacy",
-    "data protection",
-    "compliance",
-    "EU regulations",
-    "Ikiform",
-    "form builder privacy",
-    "data rights",
-    "user rights",
-    "data security",
+    "analytics",
+    "form analytics",
+    "data visualization",
+    "Ikiform analytics",
+    "survey insights",
+    "data trends",
+    "form responses",
+    "open source analytics",
+    "dashboard",
+    "data-driven decisions",
   ],
   category: "technology",
   classification: "Business Software",

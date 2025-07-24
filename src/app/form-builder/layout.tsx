@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import "@/app/globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "GDPR Policy",
+    default: "Form Builder",
     template: "%s — Ikiform",
   },
   description:
-    "Read the GDPR compliance policy for Ikiform. Learn how we protect your data, comply with EU regulations, and support your privacy rights.",
+    "Create and customize forms easily with Ikiform Form Builder. Drag and drop fields, configure settings, and launch powerful forms in minutes.",
   applicationName: "Ikiform",
-  authors: [{ name: "Preet Suthar", url: "https://ikiform.com" }],
+  authors: [{ name: "Preet Suthar", url: "https://preetsuthar.me" }],
   creator: "Ikiform",
   publisher: "Ikiform",
   formatDetection: {
@@ -16,24 +17,24 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://ikiform.com"),
+  metadataBase: new URL("https://ikiform.com/form-builder"),
   alternates: {
-    canonical: "/legal/gdpr",
+    canonical: "/form-builder",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://ikiform.com/legal/gdpr",
+    url: "https://ikiform.com/form-builder",
     siteName: "Ikiform",
-    title: "GDPR Policy",
+    title: "Form Builder | Ikiform",
     description:
-      "Read the GDPR compliance policy for Ikiform. Learn how we protect your data, comply with EU regulations, and support your privacy rights.",
+      "Build forms visually with Ikiform Form Builder. Drag, drop, and configure fields to create forms for any use case.",
     images: [
       {
-        url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+        url: "https://av5on64jc4.ufs.sh/f/4Qw2vQ4pXjF8b6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
         width: 1200,
         height: 630,
-        alt: "Ikiform GDPR Policy",
+        alt: "Ikiform Form Builder Dashboard",
         type: "image/png",
       },
     ],
@@ -42,11 +43,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@Ikiform",
     creator: "@Ikiform",
-    title: "GDPR Policy",
+    title: "Form Builder | Ikiform",
     description:
-      "Read the GDPR compliance policy for Ikiform. Learn how we protect your data, comply with EU regulations, and support your privacy rights.",
+      "Design and launch forms quickly with Ikiform Form Builder. Drag and drop interface for effortless form creation.",
     images: [
-      "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+      "https://av5on64jc4.ufs.sh/f/4Qw2vQ4pXjF8b6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
     ],
   },
   robots: {
@@ -64,16 +65,16 @@ export const metadata: Metadata = {
     icon: [{ url: "/favicon.ico" }],
   },
   keywords: [
-    "GDPR",
-    "privacy",
-    "data protection",
-    "compliance",
-    "EU regulations",
-    "Ikiform",
-    "form builder privacy",
-    "data rights",
-    "user rights",
-    "data security",
+    "form builder",
+    "drag and drop forms",
+    "custom forms",
+    "Ikiform form builder",
+    "form creation",
+    "survey builder",
+    "online forms",
+    "form customization",
+    "no code forms",
+    "form design",
   ],
   category: "technology",
   classification: "Business Software",

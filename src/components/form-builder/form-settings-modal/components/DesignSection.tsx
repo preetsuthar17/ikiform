@@ -10,6 +10,7 @@ import {
   FORM_PADDING_OPTIONS,
   FORM_DESIGN_MODES,
   DEFAULT_FORM_DESIGN,
+  FORM_BORDER_RADIUS_OPTIONS,
 } from "../constants";
 import { Button } from "@/components/ui/button";
 
@@ -34,8 +35,18 @@ export function DesignSection({
   const currentPadding =
     localSettings.layout?.padding || DEFAULT_FORM_DESIGN.padding;
   const currentMargin = localSettings.layout?.margin || "none";
+  const currentBorderRadius =
+    localSettings.layout?.borderRadius || DEFAULT_FORM_DESIGN.borderRadius;
   const currentDesignMode =
     localSettings.designMode || DEFAULT_FORM_DESIGN.designMode;
+  const handleBorderRadiusChange = (value: string) => {
+    updateSettings({
+      layout: {
+        ...localSettings.layout,
+        borderRadius: value as "none" | "sm" | "md" | "lg" | "xl",
+      },
+    });
+  };
 
   const handleWidthChange = (value: string) => {
     updateSettings({
@@ -142,6 +153,30 @@ export function DesignSection({
                   }
                   transition
                 `}
+                type="button"
+              >
+                {option.label}
+              </Button>
+            ))}
+          </div>
+        </div>
+        {/* Border Radius */}
+        <div className="flex flex-col gap-2">
+          <Label>Border Radius</Label>
+          <div className="flex flex-wrap gap-2">
+            {FORM_BORDER_RADIUS_OPTIONS.map((option) => (
+              <Button
+                key={option.value}
+                onClick={() => handleBorderRadiusChange(option.value)}
+                className={`
+                text-sm font-medium
+                ${
+                  currentBorderRadius === option.value
+                    ? ""
+                    : "bg-transparent hover:bg-accent text-foreground border"
+                }
+                transition
+              `}
                 type="button"
               >
                 {option.label}

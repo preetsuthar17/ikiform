@@ -47,6 +47,25 @@ export function FormPreview({
   const { maxWidthClass, paddingClass, marginClass } =
     getFormLayoutClasses(schema);
 
+  // Map borderRadius value to actual CSS value
+  const borderRadiusValue = (() => {
+    const val = schema.settings.layout?.borderRadius || "md";
+    switch (val) {
+      case "none":
+        return "0px";
+      case "sm":
+        return "4px";
+      case "md":
+        return "8px";
+      case "lg":
+        return "16px";
+      case "xl":
+        return "24px";
+      default:
+        return "8px";
+    }
+  })();
+
   const handleNextStep = () => {
     const newIndex = nextStep();
     onStepSelect?.(newIndex);
@@ -57,7 +76,15 @@ export function FormPreview({
   };
 
   return (
-    <div className={`min-h-full bg-background ${marginClass}`}>
+    <div
+      className={`min-h-full bg-background ${marginClass}`}
+      style={
+        {
+          "--radius": borderRadiusValue,
+          "--card-radius": borderRadiusValue,
+        } as React.CSSProperties
+      }
+    >
       <div
         className={`${maxWidthClass} mx-auto flex flex-col gap-6 ${paddingClass}`}
       >

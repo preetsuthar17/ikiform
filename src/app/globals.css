@@ -5,6 +5,7 @@
   --font-inter: var(--font-inter) !important;
   --font-geist: var(--font-geist) !important;
   --font-geist-mono: var(--font-geist-mono) !important;
+  --font-poppins: var(--font-poppins) !important;
 
   --radius-ele: var(--radius);
   --radius-card: var(--card-radius);
@@ -64,13 +65,13 @@
   --hu-foreground: 0, 0%, 10%;
   --hu-card: 0, 0%, 98%;
   --hu-card-foreground: 0, 0%, 10%;
-  --hu-primary: 0, 0%, 20%;
+  --hu-primary: 228, 79%, 52%;
   --hu-primary-foreground: 0, 0%, 98%;
   --hu-secondary: 0, 0%, 94%;
   --hu-secondary-foreground: 0, 0%, 20%;
   --hu-muted: 0, 0%, 95%;
   --hu-muted-foreground: 0, 0%, 40%;
-  --hu-accent: 0, 0%, 96%;
+  --hu-accent: 0, 0%, 93%;
   --hu-accent-foreground: 0, 0%, 20%;
   --hu-destructive: 0, 60%, 50%;
   --hu-destructive-foreground: 0, 0%, 98%;
@@ -84,8 +85,8 @@
   --hu-foreground: 0, 0%, 100%;
   --hu-card: 0, 0%, 10%;
   --hu-card-foreground: 0, 0%, 92%;
-  --hu-primary: 0, 0%, 100%;
-  --hu-primary-foreground: 0, 0%, 0%;
+  --hu-primary: 228, 79%, 52%;
+  --hu-primary-foreground: 0, 0%, 98%;
   --hu-secondary: 0, 0%, 14%;
   --hu-secondary-foreground: 0, 0%, 92%;
   --hu-muted: 0, 0%, 14%;
@@ -275,7 +276,7 @@ pre {
 h1,
 h2,
 h3 {
-  @apply font-geist;
+  @apply font-poppins;
 }
 
 .legal {

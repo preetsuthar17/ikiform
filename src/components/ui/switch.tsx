@@ -35,7 +35,7 @@ const switchThumbVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-background",
+        default: "bg-primary-foreground",
         secondary: "bg-background",
       },
       size: {

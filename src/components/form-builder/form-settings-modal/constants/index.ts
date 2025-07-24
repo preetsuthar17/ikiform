@@ -32,6 +32,39 @@ export const FORM_WIDTH_OPTIONS = [
   },
 ] as const;
 
+export const FORM_BORDER_RADIUS_OPTIONS = [
+  {
+    value: "none",
+    label: "None",
+    description: "0px (sharp corners)",
+    preview: "rounded-none",
+  },
+  {
+    value: "sm",
+    label: "Small",
+    description: "4px border radius",
+    preview: "rounded-sm",
+  },
+  {
+    value: "md",
+    label: "Medium",
+    description: "8px border radius",
+    preview: "rounded-md",
+  },
+  {
+    value: "lg",
+    label: "Large",
+    description: "16px border radius",
+    preview: "rounded-lg",
+  },
+  {
+    value: "xl",
+    label: "Extra Large",
+    description: "24px border radius",
+    preview: "rounded-xl",
+  },
+] as const;
+
 export const FORM_PADDING_OPTIONS = [
   {
     value: "none",
@@ -77,4 +110,5 @@ export const DEFAULT_FORM_DESIGN = {
   padding: "md",
   designMode: "default",
   margin: "lg",
+  borderRadius: "md",
 } as const;

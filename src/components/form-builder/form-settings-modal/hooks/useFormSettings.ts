@@ -24,6 +24,9 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
       spacing: schema.settings.layout?.spacing || "normal",
       alignment: schema.settings.layout?.alignment || "left",
       margin: schema.settings.layout?.margin || DEFAULT_FORM_DESIGN.margin,
+      borderRadius:
+        schema.settings.layout?.borderRadius ||
+        DEFAULT_FORM_DESIGN.borderRadius,
     },
     rateLimit: {
       ...DEFAULT_RATE_LIMIT_SETTINGS,
@@ -59,6 +62,9 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
         spacing: schema.settings.layout?.spacing || "normal",
         alignment: schema.settings.layout?.alignment || "left",
         margin: schema.settings.layout?.margin || DEFAULT_FORM_DESIGN.margin,
+        borderRadius:
+          schema.settings.layout?.borderRadius ||
+          DEFAULT_FORM_DESIGN.borderRadius,
       },
       rateLimit: {
         ...DEFAULT_RATE_LIMIT_SETTINGS,
@@ -92,6 +98,8 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
         ...localSettings.layout,
         ...updates.layout,
         margin: updates.layout?.margin ?? localSettings.layout?.margin,
+        borderRadius:
+          updates.layout?.borderRadius ?? localSettings.layout?.borderRadius,
       },
       rateLimit: {
         ...localSettings.rateLimit,

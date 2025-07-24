@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter, JetBrains_Mono } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Inter,
+  JetBrains_Mono,
+  Poppins,
+} from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toast";
 import { ThemeProvider } from "next-themes";
@@ -9,6 +15,12 @@ import { GoogleTagManager } from "@next/third-parties/google";
 
 const inter = Inter({
   variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
@@ -35,7 +47,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: {
     default: "Beautiful, budget-friendly forms without compromises",
-    template: "%s | Ikiform",
+    template: "%s — Ikiform",
   },
   description:
     "Create beautiful forms with Ikiform - An open-source alternative to Google Forms. Build surveys, collect responses, and analyze data effortlessly.",
@@ -171,7 +183,7 @@ export default function RootLayout({
       </head>
       <CrispController />
       <body
-        className={`${inter.className} ${jetBrainsMono.variable} ${geist.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.className} ${jetBrainsMono.variable} ${geist.variable} ${geistMono.variable} ${poppins.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <ConditionalLayout>{children}</ConditionalLayout>
