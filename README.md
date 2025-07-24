@@ -32,7 +32,7 @@ Ikiform/
 
 ## Roadmap
 
-You can view the project roadmap at [https://ikiform.com/roadmap](https://ikiform.com/roadmap)
+You can view the project roadmap at [https://www.ikiform.com/roadmap](https://www.ikiform.com/roadmap)
 
 ## Contributing
 

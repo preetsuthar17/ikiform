@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Read the Privacy Policy for Ikiform. Learn how we collect, use, and protect your personal data when you use our form builder services.",
   applicationName: "Ikiform",
-  authors: [{ name: "Preet Suthar", url: "https://ikiform.com" }],
+  authors: [{ name: "Preet Suthar", url: "https://preetsuthar.me" }],
   creator: "Ikiform",
   publisher: "Ikiform",
   formatDetection: {
@@ -16,14 +16,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://ikiform.com"),
+  metadataBase: new URL("https://www.ikiform.com"),
   alternates: {
     canonical: "/legal/privacy",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://ikiform.com/legal/privacy",
+    url: "https://www.ikiform.com/legal/privacy",
     siteName: "Ikiform",
     title: "Privacy Policy",
     description:

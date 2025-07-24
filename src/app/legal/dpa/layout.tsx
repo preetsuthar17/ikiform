@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Read the Data Processing Agreement (DPA) for Ikiform. Understand how we process and protect your data as part of our form builder services.",
   applicationName: "Ikiform",
-  authors: [{ name: "Preet Suthar", url: "https://ikiform.com" }],
+  authors: [{ name: "Preet Suthar", url: "https://preetsuthar.me" }],
   creator: "Ikiform",
   publisher: "Ikiform",
   formatDetection: {
@@ -16,14 +16,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://ikiform.com"),
+  metadataBase: new URL("https://www.ikiform.com"),
   alternates: {
     canonical: "/legal/dpa",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://ikiform.com/legal/dpa",
+    url: "https://www.ikiform.com/legal/dpa",
     siteName: "Ikiform",
     title: "Data Processing Agreement (DPA)",
     description:

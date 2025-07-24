@@ -26,7 +26,7 @@ export async function generateMetadata({
       openGraph: {
         title,
         description,
-        url: `https://ikiform.com/forms/${id}`,
+        url: `https://www.ikiform.com/forms/${id}`,
         type: "website",
       },
       twitter: {

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Read the GDPR compliance policy for Ikiform. Learn how we protect your data, comply with EU regulations, and support your privacy rights.",
   applicationName: "Ikiform",
-  authors: [{ name: "Preet Suthar", url: "https://ikiform.com" }],
+  authors: [{ name: "Preet Suthar", url: "https://preetsuthar.me" }],
   creator: "Ikiform",
   publisher: "Ikiform",
   formatDetection: {
@@ -16,14 +16,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://ikiform.com"),
+  metadataBase: new URL("https://www.ikiform.com"),
   alternates: {
     canonical: "/legal/gdpr",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://ikiform.com/legal/gdpr",
+    url: "https://www.ikiform.com/legal/gdpr",
     siteName: "Ikiform",
     title: "GDPR Policy",
     description:

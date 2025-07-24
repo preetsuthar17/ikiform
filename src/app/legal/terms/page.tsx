@@ -13,8 +13,11 @@ export default function Terms() {
         <h2 className="text-2xl font-semibold">1. Terms</h2>
         <p>
           By accessing the website at{" "}
-          <Link href="https://ikiform.com" className="text-blue-500 underline">
-            https://ikiform.com
+          <Link
+            href="https://www.ikiform.com"
+            className="text-blue-500 underline"
+          >
+            https://www.ikiform.com
           </Link>
           , you agree to be bound by these terms of service, all applicable laws
           and regulations, and agree that you are responsible for compliance

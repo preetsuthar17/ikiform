@@ -50,7 +50,7 @@ export const SuccessScreen: React.FC<SuccessScreenProps> = ({ schema }) => {
           <p className="text-sm text-muted-foreground">
             Powered by{" "}
             <span className="font-medium underline text-foreground">
-              <Link href="https://ikiform.com">Ikiform</Link>
+              <Link href="https://www.ikiform.com">Ikiform</Link>
             </span>
           </p>
         </div>

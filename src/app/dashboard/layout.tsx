@@ -17,14 +17,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://ikiform.com/dashboard"),
+  metadataBase: new URL("https://www.ikiform.com/dashboard"),
   alternates: {
     canonical: "/dashboard",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://ikiform.com/dashboard",
+    url: "https://www.ikiform.com/dashboard",
     siteName: "Ikiform",
     title: "Dashboard | Ikiform",
     description:

@@ -23,12 +23,12 @@ export const FormFooter: React.FC<FormFooterProps> = ({ schema }) => {
         )}
       {Boolean(
         schema.settings.branding &&
-          (schema.settings.branding as any).showIkiformBranding !== false,
+          (schema.settings.branding as any).showIkiformBranding !== false
       ) && (
         <p className="text-sm text-muted-foreground">
           Powered by{" "}
           <span className="font-medium underline text-foreground">
-            <Link href="https://ikiform.com">Ikiform</Link>
+            <Link href="https://www.ikiform.com">Ikiform</Link>
           </span>
         </p>
       )}
