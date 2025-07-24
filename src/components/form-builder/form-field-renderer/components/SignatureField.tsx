@@ -1,19 +1,21 @@
 import React, { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 import SignatureCanvas from "react-signature-canvas";
 import { Button } from "@/components/ui/button";
 import type { BaseFieldProps } from "../types";
 import { useTheme } from "next-themes";
 
 export function SignatureField({
-  field,
   value,
   onChange,
-  error,
   disabled,
-}: BaseFieldProps) {
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  disabled?: boolean;
+}) {
   const sigRef = useRef<SignatureCanvas>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { theme } = useTheme();
   const [canvasWidth, setCanvasWidth] = useState(400);
   const canvasHeight = 120;
 
@@ -71,9 +73,9 @@ export function SignatureField({
           onEnd={disabled ? undefined : handleEnd}
           // Prevent drawing if disabled
           {...(disabled && {
-            onMouseDown: (e: { preventDefault: () => any }) =>
+            onMouseDown: (e: React.MouseEvent<HTMLCanvasElement>) =>
               e.preventDefault(),
-            onTouchStart: (e: { preventDefault: () => any }) =>
+            onTouchStart: (e: React.TouchEvent<HTMLCanvasElement>) =>
               e.preventDefault(),
           })}
         />
@@ -90,11 +92,13 @@ export function SignatureField({
         </Button>
       </div>
       {value && (
-        <img
+        <Image
           src={value}
           alt="Signature preview"
           className="mt-2 border rounded-card w-full"
           style={{ height: canvasHeight, objectFit: "contain" }}
+          width={canvasWidth}
+          height={canvasHeight}
         />
       )}
     </div>
