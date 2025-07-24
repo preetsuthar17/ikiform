@@ -41,7 +41,7 @@ export default function Hero() {
               target="_blank"
               className="flex items-center justify-center gap-2"
             >
-              Sponsored by
+              Backed by
               <span className="flex items-center gap-2 justify-center">
                 <svg
                   height="13"
