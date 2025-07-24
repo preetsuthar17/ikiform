@@ -33,7 +33,7 @@ export function FieldSettingsPanel({
 }: FieldSettingsPanelProps) {
   const { updateField, updateValidation, updateSettings } = useFieldUpdates(
     field,
-    onFieldUpdate,
+    onFieldUpdate
   );
 
   if (!field) {
@@ -51,7 +51,8 @@ export function FieldSettingsPanel({
             onUpdateSettings={updateSettings}
             onFieldUpdate={onFieldUpdate}
           />
-          {field.type !== "poll" && (
+          {/* Only show OptionsSettings for field types that support options */}
+          {["select", "radio", "checkbox", "poll"].includes(field.type) && (
             <OptionsSettings field={field} onFieldUpdate={onFieldUpdate} />
           )}
           <ValidationSettings
