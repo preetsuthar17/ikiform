@@ -29,14 +29,14 @@ export async function GET(req: NextRequest) {
     if (!sessionId) {
       return NextResponse.json(
         { error: "Session ID is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     // Get chat history for the session
     const chatHistory = await formsDbServer.getAIBuilderChatHistory(
       user.id,
-      sessionId
+      sessionId,
     );
 
     return NextResponse.json({
@@ -51,7 +51,7 @@ export async function GET(req: NextRequest) {
     console.error("Error fetching AI Builder chat history:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -81,14 +81,14 @@ export async function POST(req: NextRequest) {
     if (!sessionId || !role || !content) {
       return NextResponse.json(
         { error: "Session ID, role, and content are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (!["user", "assistant", "system"].includes(role)) {
       return NextResponse.json(
         { error: "Invalid role. Must be 'user', 'assistant', or 'system'" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -101,7 +101,7 @@ export async function POST(req: NextRequest) {
       sessionId,
       role,
       sanitizedContent,
-      metadata
+      metadata,
     );
 
     return NextResponse.json({
@@ -112,7 +112,7 @@ export async function POST(req: NextRequest) {
     console.error("Error saving AI Builder message:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
