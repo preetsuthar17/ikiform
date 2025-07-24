@@ -29,29 +29,17 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="flex flex-col gap-10 md:gap-16 md:pb-28 pb-16 w-full max-w-[75%] max-sm:max-w-[90%] mx-auto h-dvh my-12">
-      <div className="flex flex-col gap-8 w-full h-full md:p-12 p-8 rounded-card relative  overflow-hidden">
-        {/* Flipped Background Image */}
-        <OptimizedImage
-          src="https://av5on64jc4.ufs.sh/f/jYAIyA6pXignqJWGPAydcGjOVJB5FWLa3M9CXA0uUgsZ48yo"
-          alt="Hero background"
-          width={1920}
-          height={1080}
-          className="absolute inset-0 w-full h-full object-cover rounded-card z-0"
-          style={{ transform: "scaleX(-1)" }}
-        />
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/15 pointer-events-none rounded-card z-2 backdrop-blur-[1px]" />
-
+    <section className="flex flex-col gap-10 md:gap-16 w-full max-w-[75%] max-sm:max-w-[90%] mx-auto">
+      <div className="flex flex-col gap-8 w-full h-full md:p-12 p-8 rounded-card relative">
         {/* Content Container */}
-        <div className="flex flex-col gap-6 items-center text-center  z-20 text-white h-full grow py-6 ">
+        <div className="flex flex-col gap-6 items-center text-center  z-20  h-full grow py-6 ">
           {/* Heading */}
-          <h1 className="text-5xl max-[414px]:text-4xl md:text-7xl tracking-tight leading-tight text-white font-medium">
+          <h1 className="text-5xl max-[414px]:text-4xl md:text-7xl tracking-tight leading-tight  font-medium">
             Forms that are affordable and beautiful
           </h1>
 
           {/* Description */}
-          <p className="md:text-lg text-white">
+          <p className="md:text-lg ">
             Ikiform is an open-source alternative to Google Forms, designed to
             help you create beautiful forms effortlessly.
           </p>
@@ -75,15 +63,15 @@ export default function Hero() {
               >
                 <TooltipTrigger asChild>
                   <Button
-                    className="font-medium h-[45px] text-white"
+                    className="font-medium h-[45px]"
                     size="lg"
-                    variant="ghost"
+                    variant="secondary"
                     onClick={() => setOpen(true)}
                   >
                     Try Demo
                   </Button>
                 </TooltipTrigger>
-              <TooltipContent side="bottom" variant="dark" size="md">
+                <TooltipContent side="bottom" variant="dark" size="md">
                   Try a live demo here!
                 </TooltipContent>
               </Tooltip>
