@@ -9,10 +9,10 @@ interface TrendsChartProps {
 
 const getFilteredTrends = (
   trends: Record<string, number>,
-  range: "7" | "30" | "all",
+  range: "7" | "30" | "all"
 ) => {
   const dates = Object.keys(trends).sort(
-    (a, b) => new Date(a).getTime() - new Date(b).getTime(),
+    (a, b) => new Date(a).getTime() - new Date(b).getTime()
   );
   let filteredDates = dates;
   if (range === "7") filteredDates = dates.slice(-7);
@@ -23,30 +23,11 @@ const getFilteredTrends = (
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
-      <div
-        style={{
-          backgroundColor: "hsl(var(--hu-card))",
-          border: "1px solid hsl(var(--hu-border))",
-          borderRadius: "var(--radius-ele)",
-          padding: "8px 12px",
-          boxShadow:
-            "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-        }}
-      >
-        <p
-          style={{
-            color: "hsl(var(--hu-foreground))",
-            fontWeight: "600",
-            margin: "0 0 4px 0",
-          }}
-        >
-          {label}
-        </p>
-        <p style={{ color: "hsl(var(--hu-muted-foreground))", margin: 0 }}>
+      <div className="bg-card border border-border rounded-ele px-3 py-2 shadow-lg">
+        <p className="text-foreground font-semibold mb-1">{label}</p>
+        <p className="text-muted-foreground m-0">
           Submissions:{" "}
-          <span
-            style={{ color: "hsl(var(--hu-foreground))", fontWeight: "500" }}
-          >
+          <span className="text-foreground font-medium">
             {payload[0].value}
           </span>
         </p>
@@ -94,14 +75,14 @@ export const TrendsChart: React.FC<TrendsChartProps> = ({ trends }) => {
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={data}
-            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+            margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
           >
             <defs>
               <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
                   stopColor="hsl(var(--hu-primary))"
-                  stopOpacity={0.8}
+                  stopOpacity={0.5}
                 />
                 <stop
                   offset="95%"

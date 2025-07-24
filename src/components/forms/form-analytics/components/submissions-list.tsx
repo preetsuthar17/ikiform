@@ -60,15 +60,15 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
     form.schema.fields?.length || 0,
     form.schema.blocks?.reduce(
       (total, block) => total + (block.fields?.length || 0),
-      0,
-    ) || 0,
+      0
+    ) || 0
   );
 
   const filteredSubmissions = filterSubmissions(
     submissions,
     searchTerm,
     filterState,
-    totalFields,
+    totalFields
   );
 
   const tableColumns: DataTableColumn<FormSubmission>[] = [
@@ -117,9 +117,9 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
   }
 
   return (
-    <Card className="bg-card border-border">
-      <div className="p-6 border-b border-border flex items-center justify-between">
-        <div className="flex items-center gap-3">
+    <Card className="bg-card border-border p-6 flex flex-col gap-6">
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
           <div className="p-2 bg-primary/10 rounded-card">
             <FileText className="w-5 h-5 text-primary" />
           </div>
@@ -192,8 +192,8 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
           </div>
         )}
       </div>
-
-      <div className="p-6">
+      <Separator />
+      <div>
         {submissions.length === 0 ? (
           <div className="flex flex-col items-center gap-6 py-16">
             <div className="gradient-bg w-24 h-24 rounded-card flex items-center justify-center">
@@ -222,7 +222,6 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <div className="relative flex-1 max-w-md">
-                <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
                 <Input
                   placeholder="Search submissions..."
                   value={searchTerm}
@@ -303,11 +302,11 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                             const allFields = [
                               ...(form.schema.fields || []),
                               ...(form.schema.blocks?.flatMap(
-                                (block) => block.fields || [],
+                                (block) => block.fields || []
                               ) || []),
                             ];
                             const field = allFields.find(
-                              (f) => f.id === fieldId,
+                              (f) => f.id === fieldId
                             );
                             // Signature field as image
                             if (
@@ -355,7 +354,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                       if (key.startsWith("custom_")) {
                                         const idx = parseInt(
                                           key.replace("custom_", ""),
-                                          10,
+                                          10
                                         );
                                         label =
                                           customLinks[idx]?.label ||
@@ -406,7 +405,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                 </div>
                               </div>
                             );
-                          },
+                          }
                         )}
                       </div>
                     </Card>
@@ -429,7 +428,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
             </TabsContent>
 
             <TabsContent value="table" activeValue={activeView}>
-              <div className="-mx-6">
+              <div className="-mx-6 p-4">
                 <DataTable
                   data={filteredSubmissions}
                   columns={tableColumns}

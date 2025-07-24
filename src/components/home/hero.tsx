@@ -13,6 +13,8 @@ import {
 } from "../ui/tooltip";
 import { OptimizedImage } from "../other/optimized-image";
 import { Play } from "lucide-react";
+import { Badge } from "../ui/badge";
+import { Chip } from "../ui/chip";
 
 export default function Hero() {
   const { user } = useAuth();
@@ -33,6 +35,32 @@ export default function Hero() {
       <div className="flex flex-col gap-8 w-full h-full md:p-12 p-8 rounded-card relative">
         {/* Content Container */}
         <div className="flex flex-col gap-6 items-center text-center  z-20  h-full grow py-6 ">
+          <Chip variant={"secondary"}>
+            <Link
+              href="https://vercel.com?utm_source=ikiform"
+              target="_blank"
+              className="flex items-center justify-center gap-2"
+            >
+              Sponsored by
+              <span className="flex items-center gap-2 justify-center">
+                <svg
+                  height="13"
+                  width="13"
+                  stroke-linejoin="round"
+                  viewBox="0 0 16 16"
+                  aria-label="Vercel logo"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M8 1L16 15H0L8 1Z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+                Vercel OSS
+              </span>
+            </Link>
+          </Chip>
           {/* Heading */}
           <h1 className="text-5xl max-[414px]:text-4xl md:text-7xl tracking-tight leading-tight  font-medium">
             Forms that are affordable and beautiful
@@ -71,8 +99,8 @@ export default function Hero() {
                     Try Demo
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent side="bottom" variant="dark" size="md">
-                  Try a live demo here!
+                <TooltipContent side="bottom" variant="dark" size="sm">
+                  Try form builder or form demo
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
