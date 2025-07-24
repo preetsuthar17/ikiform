@@ -14,7 +14,6 @@ export function SignatureField({
   const sigRef = useRef<SignatureCanvas>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
-  const penColor = theme === "dark" ? "white" : "black";
   const [canvasWidth, setCanvasWidth] = useState(400);
   const canvasHeight = 120;
 
@@ -54,15 +53,20 @@ export function SignatureField({
       className="flex flex-col gap-2 w-full"
       style={{ alignItems: "flex-start" }}
     >
-      <div ref={containerRef} className="w-full">
+      <div ref={containerRef} className="w-full rounded-card">
         <SignatureCanvas
           ref={sigRef}
-          penColor={penColor}
+          penColor="#000"
           backgroundColor="#fff"
           canvasProps={{
             width: canvasWidth,
             height: canvasHeight,
-            style: { display: "block", width: "100%", height: canvasHeight },
+            style: {
+              display: "block",
+              width: "100%",
+              height: canvasHeight,
+              borderRadius: "var(--card-radius)",
+            },
           }}
           onEnd={disabled ? undefined : handleEnd}
           // Prevent drawing if disabled

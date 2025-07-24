@@ -27,7 +27,7 @@ const selectTriggerVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 const selectContentVariants = cva(
@@ -43,7 +43,7 @@ const selectContentVariants = cva(
     defaultVariants: {
       position: "popper",
     },
-  },
+  }
 );
 
 const Select = SelectPrimitive.Root;
@@ -82,14 +82,14 @@ const SelectTrigger = React.forwardRef<
 >(
   (
     { className, children, variant, size, icon: Icon, placeholder, ...props },
-    ref,
+    ref
   ) => (
     <SelectPrimitive.Trigger
       ref={ref}
       className={cn(
         "group",
         selectTriggerVariants({ variant, size }),
-        className,
+        className
       )}
       {...props}
     >
@@ -104,7 +104,7 @@ const SelectTrigger = React.forwardRef<
         />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
-  ),
+  )
 );
 SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;
 
@@ -134,7 +134,7 @@ const SelectContent = React.forwardRef<
           className={cn(
             "p-2 max-h-[280px] overflow-y-auto scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent",
             position === "popper" &&
-              "h-fit w-full min-w-[var(--radix-select-trigger-width)]",
+              "h-fit w-full min-w-[var(--radix-select-trigger-width)]"
           )}
         >
           {children}
@@ -153,7 +153,7 @@ const SelectLabel = React.forwardRef<
     ref={ref}
     className={cn(
       "px-3 py-2 text-xs font-semibold text-muted-foreground",
-      className,
+      className
     )}
     {...props}
   />
@@ -163,41 +163,53 @@ SelectLabel.displayName = SelectPrimitive.Label.displayName;
 interface SelectItemProps
   extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item> {
   icon?: LucideIcon;
+  disableCheckAnimation?: boolean;
 }
 
-const SelectItem = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Item>,
-  SelectItemProps
->(({ className, children, icon: Icon, ...props }, ref) => (
-  <SelectPrimitive.Item
-    ref={ref}
-    className={cn(
-      "relative flex w-full cursor-default select-none items-center rounded-ele py-2 pl-3 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[disabled]:text-muted-foreground",
-      className,
-    )}
-    {...props}
-  >
-    <motion.div
-      className="flex w-full items-center gap-2"
-      whileHover={{ x: 2 }}
-      transition={{ duration: 0.1 }}
-    >
-      {Icon && <Icon size={16} className="shrink-0" />}
-      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-    </motion.div>
-    <span className="absolute right-3 flex h-3.5 w-3.5 items-center justify-center">
-      <SelectPrimitive.ItemIndicator>
+const SelectItem = React.memo(
+  React.forwardRef<
+    React.ElementRef<typeof SelectPrimitive.Item>,
+    SelectItemProps
+  >(
+    (
+      { className, children, icon: Icon, disableCheckAnimation, ...props },
+      ref
+    ) => (
+      <SelectPrimitive.Item
+        ref={ref}
+        className={cn(
+          "relative flex w-full cursor-default select-none items-center rounded-ele py-2 pl-3 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[disabled]:text-muted-foreground",
+          className
+        )}
+        {...props}
+      >
         <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
+          className="flex w-full items-center gap-2"
+          whileHover={{ x: 2 }}
           transition={{ duration: 0.1 }}
         >
-          <Check size={16} />
+          {Icon && <Icon size={16} className="shrink-0" />}
+          <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
         </motion.div>
-      </SelectPrimitive.ItemIndicator>
-    </span>
-  </SelectPrimitive.Item>
-));
+        <span className="absolute right-3 flex h-3.5 w-3.5 items-center justify-center">
+          <SelectPrimitive.ItemIndicator>
+            {disableCheckAnimation ? (
+              <Check size={16} />
+            ) : (
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.1 }}
+              >
+                <Check size={16} />
+              </motion.div>
+            )}
+          </SelectPrimitive.ItemIndicator>
+        </span>
+      </SelectPrimitive.Item>
+    )
+  )
+);
 SelectItem.displayName = SelectPrimitive.Item.displayName;
 
 const SelectSeparator = React.forwardRef<
@@ -223,3 +235,5 @@ export {
   SelectSeparator,
   selectTriggerVariants,
 };
+
+export const MemoizedSelectItem = React.memo(SelectItem);
