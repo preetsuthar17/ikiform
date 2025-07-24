@@ -14,14 +14,18 @@ export function StatementField({ field }: BaseFieldProps) {
       className={cn(
         "flex flex-col gap-1",
         align === "center" && "items-center",
-        align === "right" && "items-end"
+        align === "right" && "items-end",
       )}
     >
       {heading && (
         <div
           className={cn(
             "font-semibold text-foreground",
-            size === "lg" ? "text-2xl" : size === "sm" ? "text-base" : "text-xl"
+            size === "lg"
+              ? "text-2xl"
+              : size === "sm"
+                ? "text-base"
+                : "text-xl",
           )}
         >
           {heading}

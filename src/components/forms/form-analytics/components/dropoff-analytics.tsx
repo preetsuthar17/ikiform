@@ -18,7 +18,7 @@ function getDropoffCounts(form: Form, submissions: FormSubmission[]) {
         (f) =>
           sub.submission_data[f.id] !== undefined &&
           sub.submission_data[f.id] !== null &&
-          sub.submission_data[f.id] !== ""
+          sub.submission_data[f.id] !== "",
       );
       if (hasAny) {
         dropoffCounts[block.id]++;

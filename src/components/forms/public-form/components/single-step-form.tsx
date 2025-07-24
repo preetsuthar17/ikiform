@@ -134,7 +134,7 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
             )}
           {Boolean(
             schema.settings.branding &&
-              (schema.settings.branding as any).showIkiformBranding !== false
+              (schema.settings.branding as any).showIkiformBranding !== false,
           ) && (
             <p className="text-sm text-muted-foreground">
               Powered by{" "}

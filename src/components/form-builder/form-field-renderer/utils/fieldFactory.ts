@@ -30,7 +30,7 @@ export function createFieldComponent(
   onChange: (value: any) => void,
   error?: string,
   fieldRef?: React.RefObject<any>,
-  disabled?: boolean
+  disabled?: boolean,
 ): React.ReactElement {
   const props: BaseFieldProps = {
     field,

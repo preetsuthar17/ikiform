@@ -680,7 +680,7 @@ export function FieldSpecificSettings({
                 onUpdateSettings({
                   starCount: Math.max(
                     1,
-                    Math.min(10, parseInt(e.target.value) || 5)
+                    Math.min(10, parseInt(e.target.value) || 5),
                   ),
                 })
               }
