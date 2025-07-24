@@ -141,7 +141,7 @@ export default function Hero() {
                     asChild
                   >
                     <Link
-                      href="https://www.ikiform.com/forms/a2675039-5901-4052-88c0-b60977d3d048"
+                      href="/forms/87e66b9a-26b9-4a7b-bb92-8bac3a4ea74a"
                       target="_blank"
                     >
                       Form Demo
