@@ -226,18 +226,18 @@ export default function Footer() {
                 </div>
               </div>
 
-              {/* More Links */}
+              {/* Products Links */}
               <div>
                 <div>
                   <h3 className="text-sm font-medium text-foreground mb-4">
-                    Other
+                    Products
                   </h3>
                 </div>
                 <div>
                   <ul className="flex flex-col gap-3">
                     <li>
                       <Link
-                        href="https://hextaui.com"
+                        href="https://hextaui.com?ref=ikiform"
                         target="_blank"
                         className="text-sm text-muted-foreground hover:text-primary hover:underline transition-colors"
                       >
@@ -246,11 +246,20 @@ export default function Footer() {
                     </li>
                     <li>
                       <Link
-                        href="https://pro.hextaui.com"
+                        href="https://pro.hextaui.com?ref=ikiform"
                         target="_blank"
                         className="text-sm text-muted-foreground hover:text-primary hover:underline transition-colors"
                       >
                         HextaUI Blocks
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="https://iki.preetsuthar.me?ref=ikiform"
+                        target="_blank"
+                        className="text-sm text-muted-foreground hover:text-primary hover:underline transition-colors"
+                      >
+                        Iki
                       </Link>
                     </li>
                   </ul>
