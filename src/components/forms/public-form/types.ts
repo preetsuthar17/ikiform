@@ -3,6 +3,7 @@ import type { FormSchema } from "@/lib/database";
 export interface PublicFormProps {
   formId: string;
   schema: FormSchema;
+  theme?: string;
 }
 
 export interface SingleStepFormState {

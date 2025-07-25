@@ -9,7 +9,7 @@ import { SingleStepForm } from "./public-form/components";
 // Types
 import type { PublicFormProps } from "./public-form/types";
 
-export function PublicForm({ formId, schema }: PublicFormProps) {
+export function PublicForm({ formId, schema, theme }: PublicFormProps) {
   const isMultiStep = schema.settings.multiStep || schema.blocks?.length > 1;
   const dir = schema.settings.rtl ? "rtl" : "ltr";
 
@@ -43,7 +43,7 @@ export function PublicForm({ formId, schema }: PublicFormProps) {
     document.documentElement.style.setProperty("--radius", borderRadiusValue);
     document.documentElement.style.setProperty(
       "--card-radius",
-      cardRadiusValue,
+      cardRadiusValue
     );
     return () => {
       document.documentElement.style.setProperty("--radius", "0.7rem");
@@ -52,7 +52,10 @@ export function PublicForm({ formId, schema }: PublicFormProps) {
   }, [schema?.settings?.layout?.borderRadius]);
 
   return (
-    <div dir={dir} className="flex flex-col gap-4 w-full">
+    <div
+      dir={dir}
+      className={`flex flex-col gap-4 w-full${theme ? ` theme-${theme}` : ""}`}
+    >
       {isMultiStep ? (
         <MultiStepForm formId={formId} schema={schema} dir={dir} />
       ) : (

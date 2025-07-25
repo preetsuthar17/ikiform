@@ -4,6 +4,7 @@ import { formsDbServer } from "@/lib/database";
 
 interface PublicFormPageProps {
   params: Promise<{ id: string }>;
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 export async function generateMetadata({
@@ -40,8 +41,13 @@ export async function generateMetadata({
   }
 }
 
-export default async function PublicFormPage({ params }: PublicFormPageProps) {
+export default async function PublicFormPage({
+  params,
+  searchParams,
+}: PublicFormPageProps) {
   const { id } = await params;
+  const theme =
+    typeof searchParams?.theme === "string" ? searchParams.theme : undefined;
 
   try {
     const form = await formsDbServer.getPublicForm(id);
@@ -50,7 +56,9 @@ export default async function PublicFormPage({ params }: PublicFormPageProps) {
       notFound();
     }
 
-    return <PublicFormClient formId={form.id} schema={form.schema} />;
+    return (
+      <PublicFormClient formId={form.id} schema={form.schema} theme={theme} />
+    );
   } catch (error) {
     console.error("Error loading form:", error);
     notFound();
