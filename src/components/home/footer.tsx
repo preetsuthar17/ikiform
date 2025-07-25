@@ -229,6 +229,15 @@ export default function Footer() {
                         GitHub Repository
                       </Link>
                     </li>
+                    <li>
+                      <Link
+                        href="/forms/de330706-1cdc-494c-9d04-7afef3d3e20b"
+                        target="_blank"
+                        className="text-sm text-muted-foreground hover:text-primary hover:underline transition-colors"
+                      >
+                        Feedback
+                      </Link>
+                    </li>
                   </ul>
                 </div>
               </div>
