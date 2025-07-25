@@ -92,6 +92,17 @@ export default function Footer() {
                     src="https://vercel.com/oss/program-badge.svg"
                   />
                 </a>
+                <a
+                  href="https://startupfa.me/s/ikiform.com?utm_source=www.ikiform.com"
+                  target="_blank"
+                >
+                  <img
+                    src="https://startupfa.me/badges/featured/default.webp"
+                    alt="Featured on Startup Fame"
+                    width="171"
+                    height="54"
+                  />
+                </a>
               </div>
             </div>
 
