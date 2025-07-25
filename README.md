@@ -1,5 +1,14 @@
 # Ikiform
 
+<br />
+<br />
+<a href="https://vercel.com/oss">
+  <img alt="Vercel OSS Program" src="https://vercel.com/oss/program-badge.svg" />
+</a>
+<br />
+<br />
+<br />
+
 Ikiform is a modern, AI-powered form builder and analytics platform. It allows users to create, manage, and analyze forms with advanced features such as AI-assisted form creation, analytics, and integrations. Built with Next.js, React, Supabase, and Tailwind CSS, Ikiform is designed for scalability and developer productivity.
 
 - AI-powered form builder
