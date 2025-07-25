@@ -6,7 +6,7 @@ import Link from "next/link";
 
 // Internal imports
 import { Button } from "../ui/button";
-import { LogIn, User, AlignJustify } from "lucide-react";
+import { LogIn, User, AlignJustify, MessageCircleIcon } from "lucide-react";
 import {
   Drawer,
   DrawerTrigger,
@@ -16,7 +16,6 @@ import {
 
 // Supabase
 import { useAuth } from "@/hooks/use-auth";
-import { FaGithub } from "react-icons/fa6";
 
 export default function Header() {
   const { user } = useAuth();
@@ -68,12 +67,11 @@ export default function Header() {
         )}
         <Button asChild>
           <Link
-            href="https://github.com/preetsuthar17/Ikiform"
-            target="_blank"
+            href="/forms/de330706-1cdc-494c-9d04-7afef3d3e20b"
             className="flex items-center gap-2 font-medium"
           >
-            <FaGithub />
-            GitHub
+            <MessageCircleIcon />
+            Feedback
           </Link>
         </Button>
       </div>
@@ -132,12 +130,11 @@ export default function Header() {
                 )}
                 <Button asChild className="w-full justify-center">
                   <Link
-                    href="https://github.com/preetsuthar17/Ikiform"
-                    target="_blank"
+                    href="/forms/de330706-1cdc-494c-9d04-7afef3d3e20b"
                     className="flex items-center gap-2 font-medium"
                   >
-                    <FaGithub />
-                    GitHub
+                    <MessageCircleIcon />
+                    Feedback
                   </Link>
                 </Button>
               </div>

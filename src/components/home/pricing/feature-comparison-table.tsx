@@ -62,6 +62,26 @@ const featureCategories = [
         description: "Customize your forms with advanced styling options.",
         included: true,
       },
+      {
+        label: "Basic logic builder",
+        description: "Set up simple conditional logic for your forms.",
+        included: true,
+      },
+      {
+        label: "Password protection",
+        description: "Protect your forms with password access.",
+        included: true,
+      },
+      {
+        label: "Redirect to URL",
+        description: "Redirect users to a custom URL after submission.",
+        included: true,
+      },
+      {
+        label: "Conditional field rendering",
+        description: "Show or hide fields based on user input.",
+        included: true,
+      },
     ],
   },
   {
@@ -123,6 +143,111 @@ const featureCategories = [
       {
         label: "File uploads (in few days)",
         description: "Allow users to upload files with their form submissions.",
+        included: false,
+      },
+      {
+        label: "Feedback modal",
+        description: "Collect feedback directly from users via a modal dialog.",
+        included: false,
+      },
+      {
+        label: "Form embedding",
+        description: "Embed forms easily into your website or app.",
+        included: false,
+      },
+      {
+        label: "Form internationalization",
+        description: "Support multiple languages for your forms.",
+        included: false,
+      },
+      {
+        label: "File upload field",
+        description: "Add file upload fields to your forms.",
+        included: false,
+      },
+      {
+        label: "Address field",
+        description: "Collect address information with a dedicated field.",
+        included: false,
+      },
+      {
+        label: "Phone number field",
+        description: "Add phone number fields with validation.",
+        included: false,
+      },
+      {
+        label: "Link fields",
+        description: "Allow users to submit links in your forms.",
+        included: false,
+      },
+      {
+        label: "Refactoring code",
+        description: "Continuous improvements and codebase refactoring.",
+        included: false,
+      },
+      {
+        label: "Slack integration",
+        description: "Send form responses directly to Slack channels.",
+        included: false,
+      },
+      {
+        label: "Zapier integration",
+        description: "Automate workflows with Zapier integration.",
+        included: false,
+      },
+      {
+        label: "Google Sheets integration",
+        description: "Sync form responses to Google Sheets automatically.",
+        included: false,
+      },
+      {
+        label: "Customizing form metadata",
+        description: "Edit and customize metadata for your forms.",
+        included: false,
+      },
+      {
+        label: "Workspaces (folders)",
+        description: "Organize your forms into folders or workspaces.",
+        included: false,
+      },
+      {
+        label: "Inviting team members",
+        description: "Invite others to collaborate on your forms.",
+        included: false,
+      },
+      {
+        label: "Pre-populating fields",
+        description: "Save time by pre-filling form fields with known data.",
+        included: false,
+      },
+      {
+        label: "Scoring (quiz system)",
+        description: "Add scoring and quiz functionality to your forms.",
+        included: false,
+      },
+      {
+        label: "Form templates",
+        description: "Start quickly with ready-made form templates.",
+        included: false,
+      },
+      {
+        label: "Calendly integration",
+        description: "Integrate Calendly scheduling into your forms.",
+        included: false,
+      },
+      {
+        label: "Cal.com integration",
+        description: "Integrate Cal.com scheduling into your forms.",
+        included: false,
+      },
+      {
+        label: "Collect signature",
+        description: "Allow users to sign forms digitally.",
+        included: false,
+      },
+      {
+        label: "Discord webhook integration",
+        description: "Send form responses directly to Discord channels.",
         included: false,
       },
       {
