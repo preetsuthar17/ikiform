@@ -85,6 +85,13 @@ export default function Footer() {
                     </Link>
                   </p>
                 </div>
+                <Separator />
+                <a href="https://vercel.com/oss?utm_source=ikiform">
+                  <img
+                    alt="Vercel OSS Program"
+                    src="https://vercel.com/oss/program-badge.svg"
+                  />
+                </a>
               </div>
             </div>
 

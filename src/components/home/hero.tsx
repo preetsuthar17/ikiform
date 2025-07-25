@@ -21,7 +21,7 @@ export default function Hero() {
         <div className="flex flex-col gap-6 items-center text-center  z-20  h-full grow py-6 ">
           <Chip variant={"secondary"}>
             <Link
-              href="https://vercel.com?utm_source=ikiform"
+              href="https://vercel.com/oss?utm_source=ikiform"
               target="_blank"
               className="flex items-center justify-center gap-2"
             >

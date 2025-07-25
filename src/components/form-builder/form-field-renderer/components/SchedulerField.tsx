@@ -23,7 +23,7 @@ export function SchedulerField({ field, error, disabled }: BaseFieldProps) {
         type="button"
         onClick={() => setModalOpen(true)}
         disabled={disabled || !provider}
-        className={`${baseClasses} bg-foreground/80 text-background hover:bg-foreground flex items-center justify-center w-fit text-sm h-8 px-4`}
+        className={`${baseClasses} bg-foreground/80 text-background hover:bg-foreground flex items-center justify-center w-fit text-sm h-9 px-4`}
       >
         {buttonText}
       </Button>
