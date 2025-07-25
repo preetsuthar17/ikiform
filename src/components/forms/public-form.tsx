@@ -43,7 +43,7 @@ export function PublicForm({ formId, schema, theme }: PublicFormProps) {
     document.documentElement.style.setProperty("--radius", borderRadiusValue);
     document.documentElement.style.setProperty(
       "--card-radius",
-      cardRadiusValue
+      cardRadiusValue,
     );
     return () => {
       document.documentElement.style.setProperty("--radius", "0.7rem");
