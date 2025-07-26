@@ -9,9 +9,12 @@ import {
 import "./globals.css";
 import { Toaster } from "@/components/ui/toast";
 import { ThemeProvider } from "next-themes";
+
 import ConditionalLayout from "./conditional-layout";
 import CrispController from "@/components/other/CrispController";
+
 import { GoogleTagManager } from "@next/third-parties/google";
+import { Databuddy } from "@databuddy/sdk";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -187,6 +190,20 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <ConditionalLayout>{children}</ConditionalLayout>
+          <Databuddy
+            clientId="jDhbBGL7-4rwsNXj-GcgK"
+            trackHashChanges={true}
+            trackAttributes={true}
+            trackOutgoingLinks={true}
+            trackInteractions={true}
+            trackEngagement={true}
+            trackScrollDepth={true}
+            trackExitIntent={true}
+            trackBounceRate={true}
+            trackWebVitals={true}
+            trackErrors={true}
+            enableBatching={true}
+          />{" "}
           <Toaster position="top-center" />
         </ThemeProvider>
       </body>
