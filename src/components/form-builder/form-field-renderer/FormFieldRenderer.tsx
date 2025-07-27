@@ -1,14 +1,12 @@
 // External libraries
-import React from "react";
+import React from 'react';
 
 // Internal components
-import { FieldWrapper } from "./components";
-
-// Utilities
-import { createFieldComponent } from "./utils";
-
+import { FieldWrapper } from './components';
 // Types
-import type { FormFieldRendererProps } from "./types";
+import type { FormFieldRendererProps } from './types';
+// Utilities
+import { createFieldComponent } from './utils';
 
 export function FormFieldRenderer({
   field,
@@ -19,7 +17,7 @@ export function FormFieldRenderer({
   disabled,
 }: FormFieldRendererProps) {
   return (
-    <FieldWrapper field={field} error={error}>
+    <FieldWrapper error={error} field={field}>
       {createFieldComponent(field, value, onChange, error, fieldRef, disabled)}
     </FieldWrapper>
   );

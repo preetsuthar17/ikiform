@@ -1,5 +1,5 @@
-import { Ratelimit } from "@upstash/ratelimit";
-import { Redis } from "@upstash/redis";
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
 
 interface RateLimitSettings {
   enabled: boolean;
@@ -13,14 +13,14 @@ const redis = Redis.fromEnv();
 const defaultSettings: RateLimitSettings = {
   enabled: true,
   maxSubmissions: 5,
-  window: "10 m",
+  window: '10 m',
 };
 
 const rateLimiters = new Map<string, Ratelimit>();
 
 function getRateLimiter(
   settings: RateLimitSettings,
-  prefix: string = "@upstash/ratelimit",
+  prefix = '@upstash/ratelimit'
 ): Ratelimit {
   const key = `${settings.maxSubmissions}-${settings.window}-${prefix}`;
 
@@ -29,7 +29,7 @@ function getRateLimiter(
       redis,
       limiter: Ratelimit.fixedWindow(
         settings.maxSubmissions,
-        settings.window as any,
+        settings.window as any
       ),
       analytics: true,
       prefix,
@@ -42,7 +42,7 @@ function getRateLimiter(
 
 export async function checkRateLimit(
   identifier: string,
-  settings: RateLimitSettings = defaultSettings,
+  settings: RateLimitSettings = defaultSettings
 ) {
   if (!settings.enabled) {
     return {
@@ -62,7 +62,7 @@ export async function checkRateLimit(
 export async function checkCustomRateLimit(
   identifier: string,
   settings: RateLimitSettings,
-  prefix: string = "@upstash/ratelimit",
+  prefix = '@upstash/ratelimit'
 ) {
   if (!settings.enabled) {
     return {
@@ -90,7 +90,7 @@ interface FormRateLimitSettings {
 export async function checkFormRateLimit(
   ipAddress: string,
   formId: string,
-  settings: FormRateLimitSettings,
+  settings: FormRateLimitSettings
 ) {
   if (!settings.enabled) {
     return {
@@ -98,7 +98,7 @@ export async function checkFormRateLimit(
       limit: 0,
       remaining: 0,
       reset: 0,
-      message: "",
+      message: '',
     };
   }
 
@@ -115,7 +115,7 @@ export async function checkFormRateLimit(
 
   return {
     ...result,
-    message: result.success ? "" : settings.message,
+    message: result.success ? '' : settings.message,
   };
 }
 

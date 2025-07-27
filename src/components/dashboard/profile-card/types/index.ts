@@ -1,5 +1,5 @@
 // Types for profile card component
-import type { User } from "@supabase/supabase-js";
+import type { User } from '@supabase/supabase-js';
 
 export interface ProfileCardProps {
   className?: string;
@@ -36,5 +36,5 @@ export interface ProfileLoadingProps {
 export interface UserAvatarProps {
   name: string;
   avatarUrl?: string;
-  size?: "sm" | "md" | "lg" | "xl";
+  size?: 'sm' | 'md' | 'lg' | 'xl';
 }

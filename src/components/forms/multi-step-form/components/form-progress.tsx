@@ -1,8 +1,8 @@
 // Libraries
-import React from "react";
+import type React from 'react';
 
 // UI Components
-import { Progress } from "@/components/ui/progress";
+import { Progress } from '@/components/ui/progress';
 
 interface FormProgressProps {
   progress: number;
@@ -19,7 +19,7 @@ export const FormProgress: React.FC<FormProgressProps> = ({
 
   return (
     <div className="flex flex-col gap-2">
-      <Progress value={progress} className="h-2" showValue={false} />
+      <Progress className="h-2" showValue={false} value={progress} />
     </div>
   );
 };

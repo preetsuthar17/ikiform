@@ -1,3 +1,4 @@
 // Validation and filtering utilities
-export * from "./profanity-filter";
-export * from "./email-validation";
+
+export * from './email-validation';
+export * from './profanity-filter';

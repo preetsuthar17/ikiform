@@ -1,12 +1,12 @@
-import { groq } from "@ai-sdk/groq";
-import { streamText } from "ai";
-import { NextRequest } from "next/server";
-import { checkRateLimit, RateLimitSettings } from "@/lib/forms";
-import { createClient } from "@/utils/supabase/server";
-import { formsDbServer } from "@/lib/database";
-import { v4 as uuidv4 } from "uuid";
-import { requirePremium } from "@/lib/utils/premium-check";
-import { sanitizeString } from "@/lib/utils/sanitize";
+import { groq } from '@ai-sdk/groq';
+import { streamText } from 'ai';
+import type { NextRequest } from 'next/server';
+import { v4 as uuidv4 } from 'uuid';
+import { formsDbServer } from '@/lib/database';
+import { checkRateLimit, type RateLimitSettings } from '@/lib/forms';
+import { requirePremium } from '@/lib/utils/premium-check';
+import { sanitizeString } from '@/lib/utils/sanitize';
+import { createClient } from '@/utils/supabase/server';
 
 const systemPrompt =
   process.env.AI_FORM_SYSTEM_PROMPT ||
@@ -14,15 +14,15 @@ const systemPrompt =
 
 let apiKeyValid: boolean | null = null;
 
-function createErrorResponse(message: string, status: number = 500) {
+function createErrorResponse(message: string, status = 500) {
   return new Response(JSON.stringify({ success: false, message }), {
     status,
     headers: {
-      "Content-Type": "application/json",
-      "Cache-Control": "no-store",
-      "X-Content-Type-Options": "nosniff",
-      "X-Frame-Options": "DENY",
-      "X-XSS-Protection": "1; mode=block",
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-store',
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'DENY',
+      'X-XSS-Protection': '1; mode=block',
     },
   });
 }
@@ -31,11 +31,11 @@ type AIMessage = { role: string; content: string };
 
 function validateAndSanitizeMessages(messages: AIMessage[]): AIMessage[] {
   if (!Array.isArray(messages) || messages.length === 0) {
-    throw new Error("Invalid messages array");
+    throw new Error('Invalid messages array');
   }
   return messages.map((msg) => {
-    if (!msg.role || typeof msg.content !== "string") {
-      throw new Error("Invalid message format");
+    if (!msg.role || typeof msg.content !== 'string') {
+      throw new Error('Invalid message format');
     }
     return {
       role: msg.role,
@@ -47,11 +47,11 @@ function validateAndSanitizeMessages(messages: AIMessage[]): AIMessage[] {
 const AIBuilderRateLimit: RateLimitSettings = {
   enabled: true,
   maxSubmissions: 10,
-  window: "5 m",
+  window: '5 m',
 };
 
 export async function POST(req: NextRequest) {
-  const ip = req.headers.get("x-forwarded-for") || "global";
+  const ip = req.headers.get('x-forwarded-for') || 'global';
   const rate = await checkRateLimit(ip, AIBuilderRateLimit);
 
   if (!rate.success) {
@@ -61,12 +61,12 @@ export async function POST(req: NextRequest) {
     return new Response(
       JSON.stringify({
         success: false,
-        message: "Too many requests. Please try again later.",
+        message: 'Too many requests. Please try again later.',
       }),
       {
         status: 429,
-        headers: { "Retry-After": retryAfter.toString() },
-      },
+        headers: { 'Retry-After': retryAfter.toString() },
+      }
     );
   }
 
@@ -79,20 +79,20 @@ export async function POST(req: NextRequest) {
     } = await supabase.auth.getUser();
 
     if (authError || !user) {
-      return createErrorResponse("Unauthorized", 401);
+      return createErrorResponse('Unauthorized', 401);
     }
 
     // Check premium status
     const premiumCheck = await requirePremium(user.id);
     if (!premiumCheck.hasPremium) {
-      return createErrorResponse("Premium subscription required", 403);
+      return createErrorResponse('Premium subscription required', 403);
     }
 
     if (apiKeyValid === null) {
       apiKeyValid = !!process.env.GROQ_API_KEY;
     }
     if (!apiKeyValid) {
-      return createErrorResponse("AI service temporarily unavailable", 503);
+      return createErrorResponse('AI service temporarily unavailable', 503);
     }
 
     type RequestData = {
@@ -104,7 +104,7 @@ export async function POST(req: NextRequest) {
     try {
       requestData = await req.json();
     } catch {
-      return createErrorResponse("Invalid JSON in request body", 400);
+      return createErrorResponse('Invalid JSON in request body', 400);
     }
 
     let sanitizedMessages: { role: string; content: string }[];
@@ -112,8 +112,8 @@ export async function POST(req: NextRequest) {
       sanitizedMessages = validateAndSanitizeMessages(requestData.messages);
     } catch (error) {
       return createErrorResponse(
-        error instanceof Error ? error.message : "Invalid request format",
-        400,
+        error instanceof Error ? error.message : 'Invalid request format',
+        400
       );
     }
 
@@ -124,32 +124,32 @@ export async function POST(req: NextRequest) {
     const lastUserMessage = sanitizedMessages[sanitizedMessages.length - 1];
 
     // Save the user message
-    if (lastUserMessage && lastUserMessage.role === "user") {
+    if (lastUserMessage && lastUserMessage.role === 'user') {
       try {
         await formsDbServer.saveAIBuilderMessage(
           user.id,
           sessionId,
-          "user",
+          'user',
           lastUserMessage.content,
           {
             timestamp: new Date().toISOString(),
-            ip: ip,
-            userAgent: req.headers.get("user-agent") || "",
-          },
+            ip,
+            userAgent: req.headers.get('user-agent') || '',
+          }
         );
       } catch (error) {
-        console.error("Error saving user message:", error);
+        console.error('Error saving user message:', error);
         // Don't fail the request if saving fails
       }
     }
 
     const stream = await streamText({
-      model: groq("llama-3.1-8b-instant"),
+      model: groq('llama-3.1-8b-instant'),
       messages: [
-        { role: "system", content: systemPrompt },
+        { role: 'system', content: systemPrompt },
         ...sanitizedMessages.map((msg) => ({
           ...msg,
-          role: msg.role as "system" | "user" | "assistant" | "data",
+          role: msg.role as 'system' | 'user' | 'assistant' | 'data',
         })),
       ],
       temperature: 0.3,
@@ -161,7 +161,7 @@ export async function POST(req: NextRequest) {
     const reader = textStream.getReader();
 
     // Collect the AI response for saving
-    let aiResponse = "";
+    let aiResponse = '';
 
     const responseStream = new ReadableStream({
       async start(controller) {
@@ -170,7 +170,7 @@ export async function POST(req: NextRequest) {
             const { value, done } = await reader.read();
             if (done) break;
             const chunk =
-              typeof value === "string"
+              typeof value === 'string'
                 ? value
                 : new TextDecoder().decode(value);
             aiResponse += chunk;
@@ -183,22 +183,22 @@ export async function POST(req: NextRequest) {
               await formsDbServer.saveAIBuilderMessage(
                 user.id,
                 sessionId,
-                "assistant",
+                'assistant',
                 aiResponse,
                 {
                   timestamp: new Date().toISOString(),
-                  model: "groq/llama3-70b-8192",
+                  model: 'groq/llama3-70b-8192',
                   temperature: 0.3,
-                },
+                }
               );
             } catch (error) {
-              console.error("Error saving AI response:", error);
+              console.error('Error saving AI response:', error);
             }
           }
 
           controller.close();
         } catch (error) {
-          console.error("Error in AI Builder stream:", error);
+          console.error('Error in AI Builder stream:', error);
           controller.error(error);
         }
       },
@@ -207,17 +207,17 @@ export async function POST(req: NextRequest) {
     return new Response(responseStream, {
       status: 200,
       headers: {
-        "Content-Type": "text/plain; charset=utf-8",
-        "Cache-Control": "no-store",
-        "X-Content-Type-Options": "nosniff",
-        "X-Frame-Options": "DENY",
-        "X-XSS-Protection": "1; mode=block",
-        "X-Session-ID": sessionId,
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'no-store',
+        'X-Content-Type-Options': 'nosniff',
+        'X-Frame-Options': 'DENY',
+        'X-XSS-Protection': '1; mode=block',
+        'X-Session-ID': sessionId,
       },
     });
   } catch (error) {
-    console.error("AI Builder API error:", error);
-    return createErrorResponse("Internal server error");
+    console.error('AI Builder API error:', error);
+    return createErrorResponse('Internal server error');
   }
 }
 
@@ -225,13 +225,13 @@ export async function POST(req: NextRequest) {
 export async function GET() {
   return new Response(
     JSON.stringify({
-      status: "healthy",
-      service: "form-builder-ai",
+      status: 'healthy',
+      service: 'form-builder-ai',
       timestamp: new Date().toISOString(),
     }),
     {
       status: 200,
-      headers: { "Content-Type": "application/json" },
-    },
+      headers: { 'Content-Type': 'application/json' },
+    }
   );
 }

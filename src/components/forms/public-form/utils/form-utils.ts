@@ -1,8 +1,8 @@
 // Types
-import type { FormSchema, FormField } from "@/lib/database";
+import type { FormField, FormSchema } from '@/lib/database';
 
 // Utility imports
-import { validateEmail } from "@/lib/validation/email-validation";
+import { validateEmail } from '@/lib/validation/email-validation';
 
 // Utility to get all fields from schema
 export const getAllFields = (schema: FormSchema): FormField[] =>
@@ -13,7 +13,7 @@ export const getAllFields = (schema: FormSchema): FormField[] =>
 // Validation logic for single-step forms
 export const validateSingleStepForm = (
   fields: FormField[],
-  formData: Record<string, any>,
+  formData: Record<string, any>
 ): { errors: Record<string, string>; isValid: boolean } => {
   const errors: Record<string, string> = {};
 
@@ -25,19 +25,19 @@ export const validateSingleStepForm = (
       (!value || (Array.isArray(value) && value.length === 0))
     ) {
       errors[field.id] =
-        field.validation?.requiredMessage || "This field is required";
-    } else if (field.type === "email" && value) {
+        field.validation?.requiredMessage || 'This field is required';
+    } else if (field.type === 'email' && value) {
       const emailValidation = validateEmail(
         value,
-        field.settings?.emailValidation,
+        field.settings?.emailValidation
       );
       if (!emailValidation.isValid) {
         errors[field.id] =
           emailValidation.message ||
           field.validation?.emailMessage ||
-          "Please enter a valid email address";
+          'Please enter a valid email address';
       }
-    } else if (["text", "textarea", "email"].includes(field.type) && value) {
+    } else if (['text', 'textarea', 'email'].includes(field.type) && value) {
       if (
         field.validation?.minLength &&
         value.length < field.validation.minLength
@@ -54,11 +54,11 @@ export const validateSingleStepForm = (
           field.validation?.maxLengthMessage ||
           `Must be no more than ${field.validation.maxLength} characters`;
       }
-    } else if (field.type === "number" && value) {
-      const numValue = parseFloat(value);
+    } else if (field.type === 'number' && value) {
+      const numValue = Number.parseFloat(value);
       if (isNaN(numValue)) {
         errors[field.id] =
-          field.validation?.numberMessage || "Please enter a valid number";
+          field.validation?.numberMessage || 'Please enter a valid number';
       } else {
         if (
           field.validation?.min !== undefined &&
@@ -82,7 +82,7 @@ export const validateSingleStepForm = (
       value &&
       !new RegExp(field.validation.pattern).test(value)
     ) {
-      errors[field.id] = field.validation?.patternMessage || "Invalid format";
+      errors[field.id] = field.validation?.patternMessage || 'Invalid format';
     }
     // No extra validation for signature field for now
   });
@@ -96,20 +96,20 @@ export const validateSingleStepForm = (
 // Submission logic for single-step forms
 export const submitSingleStepForm = async (
   formId: string,
-  formData: Record<string, any>,
+  formData: Record<string, any>
 ): Promise<{ success: boolean; message?: string }> => {
   try {
-    let headers: Record<string, string> = {
-      "Content-Type": "application/json",
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
     };
-    if (typeof window !== "undefined") {
-      const token = localStorage.getItem("token");
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('token');
       if (token) {
-        headers["Authorization"] = `Bearer ${token}`;
+        headers['Authorization'] = `Bearer ${token}`;
       }
     }
     const response = await fetch(`/api/forms/${formId}/submit`, {
-      method: "POST",
+      method: 'POST',
       headers,
       body: JSON.stringify({ submissionData: formData }),
     });
@@ -119,16 +119,16 @@ export const submitSingleStepForm = async (
     if (!response.ok) {
       return {
         success: false,
-        message: result.message || "Failed to submit form",
+        message: result.message || 'Failed to submit form',
       };
     }
 
     return { success: true };
   } catch (error) {
-    console.error("Error submitting form:", error);
+    console.error('Error submitting form:', error);
     return {
       success: false,
-      message: "Failed to submit form. Please try again.",
+      message: 'Failed to submit form. Please try again.',
     };
   }
 };

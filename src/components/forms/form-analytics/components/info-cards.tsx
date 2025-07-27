@@ -1,14 +1,12 @@
-import React from "react";
-
-// UI Components
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-
 // Icons
-import { Calendar, BarChart3, TrendingUp } from "lucide-react";
+import { BarChart3, Calendar, TrendingUp } from 'lucide-react';
+import type React from 'react';
+import { Badge } from '@/components/ui/badge';
+// UI Components
+import { Card } from '@/components/ui/card';
 
 // Types
-import type { InfoCardsProps } from "../types";
+import type { InfoCardsProps } from '../types';
 
 export const InfoCards: React.FC<InfoCardsProps> = ({
   form,
@@ -16,22 +14,22 @@ export const InfoCards: React.FC<InfoCardsProps> = ({
   formatDate,
 }) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <Card className="flex flex-col gap-4 p-6 bg-card border-border">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <Card className="flex flex-col gap-4 border-border bg-card p-6">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-primary/10 rounded-card">
-            <Calendar className="w-5 h-5 text-primary" />
+          <div className="rounded-card bg-primary/10 p-2">
+            <Calendar className="h-5 w-5 text-primary" />
           </div>
-          <h3 className="text-lg font-semibold text-foreground">
+          <h3 className="font-semibold text-foreground text-lg">
             Last Submission
           </h3>
         </div>
         {data.lastSubmission ? (
           <div className="flex flex-col gap-2">
-            <p className="text-foreground font-medium">
+            <p className="font-medium text-foreground">
               {formatDate(data.lastSubmission.submitted_at)}
             </p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               {data.lastSubmission.ip_address &&
                 `From ${data.lastSubmission.ip_address}`}
             </p>
@@ -41,72 +39,72 @@ export const InfoCards: React.FC<InfoCardsProps> = ({
         )}
       </Card>
 
-      <Card className="flex flex-col gap-4 p-6 bg-card border-border">
+      <Card className="flex flex-col gap-4 border-border bg-card p-6">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-primary/10 rounded-card">
-            <BarChart3 className="w-5 h-5 text-primary" />
+          <div className="rounded-card bg-primary/10 p-2">
+            <BarChart3 className="h-5 w-5 text-primary" />
           </div>
-          <h3 className="text-lg font-semibold text-foreground">Form Status</h3>
+          <h3 className="font-semibold text-foreground text-lg">Form Status</h3>
         </div>
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-muted-foreground">Published</span>
-            <Badge variant={form.is_published ? "default" : "secondary"}>
-              {form.is_published ? "Yes" : "No"}
+            <span className="text-muted-foreground text-sm">Published</span>
+            <Badge variant={form.is_published ? 'default' : 'secondary'}>
+              {form.is_published ? 'Yes' : 'No'}
             </Badge>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-muted-foreground">Created</span>
-            <span className="text-sm text-foreground">
+            <span className="text-muted-foreground text-sm">Created</span>
+            <span className="text-foreground text-sm">
               {formatDate(form.created_at)}
             </span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-muted-foreground">Updated</span>
-            <span className="text-sm text-foreground">
+            <span className="text-muted-foreground text-sm">Updated</span>
+            <span className="text-foreground text-sm">
               {formatDate(form.updated_at)}
             </span>
           </div>
         </div>
       </Card>
 
-      <Card className="flex flex-col gap-4 p-6 bg-card border-border">
+      <Card className="flex flex-col gap-4 border-border bg-card p-6">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-primary/10 rounded-card">
-            <TrendingUp className="w-5 h-5 text-primary" />
+          <div className="rounded-card bg-primary/10 p-2">
+            <TrendingUp className="h-5 w-5 text-primary" />
           </div>
-          <h3 className="text-lg font-semibold text-foreground">Quick Stats</h3>
+          <h3 className="font-semibold text-foreground text-lg">Quick Stats</h3>
         </div>
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-muted-foreground">
+            <span className="text-muted-foreground text-sm">
               Avg. Fields Completed
             </span>
-            <span className="text-sm font-medium text-foreground">
+            <span className="font-medium text-foreground text-sm">
               {data.completionRate}%
             </span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-muted-foreground">
+            <span className="text-muted-foreground text-sm">
               Most Active Day
             </span>
             {data.mostActiveDay ? (
               <div className="flex items-center gap-2">
-                <span className="text-sm font-medium text-foreground">
+                <span className="font-medium text-foreground text-sm">
                   {data.mostActiveDay[0]}
                 </span>
-                <Badge variant="secondary" className="text-xs">
+                <Badge className="text-xs" variant="secondary">
                   {data.mostActiveDay[1]} submissions
                 </Badge>
               </div>
             ) : (
-              <span className="text-sm text-muted-foreground">N/A</span>
+              <span className="text-muted-foreground text-sm">N/A</span>
             )}
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-muted-foreground">Form Type</span>
+            <span className="text-muted-foreground text-sm">Form Type</span>
             <Badge variant="outline">
-              {form.schema.settings?.multiStep ? "Multi-Step" : "Single Page"}
+              {form.schema.settings?.multiStep ? 'Multi-Step' : 'Single Page'}
             </Badge>
           </div>
         </div>

@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
+import { cva, type VariantProps } from 'class-variance-authority';
+import * as React from 'react';
+import { cn } from '@/lib/utils';
 
 const labelVariants = cva(
-  "text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+  'text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
   {
     variants: {
       variant: {
-        default: "text-foreground",
-        destructive: "text-destructive",
-        muted: "text-muted-foreground",
+        default: 'text-foreground',
+        destructive: 'text-destructive',
+        muted: 'text-muted-foreground',
       },
       size: {
-        default: "text-sm",
-        sm: "text-xs",
-        lg: "text-base",
+        default: 'text-sm',
+        sm: 'text-xs',
+        lg: 'text-base',
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: 'default',
+      size: 'default',
     },
-  },
+  }
 );
 
 export interface LabelProps
@@ -36,30 +36,30 @@ export interface LabelProps
 const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
   (
     { className, variant, size, required, optional, children, ...props },
-    ref,
+    ref
   ) => {
     return (
       <label
-        ref={ref}
         className={cn(labelVariants({ variant, size, className }))}
+        ref={ref}
         {...props}
       >
         {children}
         {required && (
-          <span className="text-destructive ml-1" aria-label="required">
+          <span aria-label="required" className="ml-1 text-destructive">
             *
           </span>
         )}
         {optional && !required && (
-          <span className="text-muted-foreground ml-1 font-normal">
+          <span className="ml-1 font-normal text-muted-foreground">
             (optional)
           </span>
         )}
       </label>
     );
-  },
+  }
 );
 
-Label.displayName = "Label";
+Label.displayName = 'Label';
 
 export { Label, labelVariants };

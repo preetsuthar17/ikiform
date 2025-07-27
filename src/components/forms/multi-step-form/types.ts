@@ -1,4 +1,4 @@
-import type { FormSchema, FormBlock } from "@/lib/database";
+import type { FormBlock, FormSchema } from '@/lib/database';
 
 export interface MultiStepFormProps {
   formId: string;

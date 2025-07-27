@@ -1,16 +1,16 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function DPA() {
   return (
-    <article className="max-w-4xl mx-auto px-4 py-10 flex flex-col gap-12 legal">
+    <article className="legal mx-auto flex max-w-4xl flex-col gap-12 px-4 py-10">
       <section className="flex flex-col gap-4">
-        <h1 className="text-4xl font-bold">Data Processing Agreement (DPA)</h1>
-        <div className="text-sm text-muted-foreground">
+        <h1 className="font-bold text-4xl">Data Processing Agreement (DPA)</h1>
+        <div className="text-muted-foreground text-sm">
           Last updated: 06th July 2025
         </div>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">1. Introduction</h2>
+        <h2 className="font-semibold text-2xl">1. Introduction</h2>
         <p>
           This Data Processing Agreement ("DPA") is part of the Terms of Service
           ("Principal Agreement") between Ikiform ("Processor", "we", "us", or
@@ -23,8 +23,8 @@ export default function DPA() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">2. Definitions</h2>
-        <ul className="list-disc pl-6 flex flex-col gap-1">
+        <h2 className="font-semibold text-2xl">2. Definitions</h2>
+        <ul className="flex list-disc flex-col gap-1 pl-6">
           <li>
             <b>Personal Data</b>: Any information relating to an identified or
             identifiable natural person.
@@ -48,7 +48,7 @@ export default function DPA() {
         </ul>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">3. Scope and Roles</h2>
+        <h2 className="font-semibold text-2xl">3. Scope and Roles</h2>
         <p>
           You, as the Customer, are the Data Controller of any Personal Data
           collected through forms created on Ikiform. Ikiform acts as the Data
@@ -56,10 +56,10 @@ export default function DPA() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">
+        <h2 className="font-semibold text-2xl">
           4. Processing of Personal Data
         </h2>
-        <ul className="list-disc pl-6 flex flex-col gap-1">
+        <ul className="flex list-disc flex-col gap-1 pl-6">
           <li>
             We process Personal Data only on your documented instructions,
             unless required by law to act otherwise.
@@ -88,11 +88,11 @@ export default function DPA() {
         </ul>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">5. Subprocessors</h2>
+        <h2 className="font-semibold text-2xl">5. Subprocessors</h2>
         <p>
           Ikiform may engage Subprocessors to process Personal Data on your
-          behalf. A current list of Subprocessors is available in our{" "}
-          <Link href="/legal/gdpr" className="text-blue-500 underline">
+          behalf. A current list of Subprocessors is available in our{' '}
+          <Link className="text-blue-500 underline" href="/legal/gdpr">
             GDPR Policy
           </Link>
           .
@@ -103,7 +103,7 @@ export default function DPA() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">
+        <h2 className="font-semibold text-2xl">
           6. International Data Transfers
         </h2>
         <p>
@@ -114,7 +114,7 @@ export default function DPA() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">7. Data Subject Rights</h2>
+        <h2 className="font-semibold text-2xl">7. Data Subject Rights</h2>
         <p>
           We assist you, to the extent reasonably possible, in fulfilling your
           obligations to respond to requests by Data Subjects to exercise their
@@ -123,7 +123,7 @@ export default function DPA() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">8. Security Measures</h2>
+        <h2 className="font-semibold text-2xl">8. Security Measures</h2>
         <p>
           Ikiform implements and maintains appropriate technical and
           organizational security measures to protect Personal Data against
@@ -133,7 +133,7 @@ export default function DPA() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">9. Personal Data Breach</h2>
+        <h2 className="font-semibold text-2xl">9. Personal Data Breach</h2>
         <p>
           In the event of a Personal Data breach affecting your Personal Data,
           Ikiform will notify you without undue delay and provide all necessary
@@ -142,7 +142,7 @@ export default function DPA() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">10. Termination</h2>
+        <h2 className="font-semibold text-2xl">10. Termination</h2>
         <p>
           Upon termination of the Principal Agreement, you may request deletion
           of your Personal Data processed by Ikiform. We will comply with such a
@@ -151,7 +151,7 @@ export default function DPA() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">11. Governing Law</h2>
+        <h2 className="font-semibold text-2xl">11. Governing Law</h2>
         <p>
           This DPA is governed by and construed in accordance with the laws of
           India.

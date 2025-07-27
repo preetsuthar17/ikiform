@@ -1,8 +1,8 @@
 // Components
-import { FieldItem } from "./FieldItem";
 
 // Types
-import type { BlockFieldsListProps } from "../types";
+import type { BlockFieldsListProps } from '../types';
+import { FieldItem } from './FieldItem';
 
 export function BlockFieldsList({
   fields,
@@ -12,7 +12,7 @@ export function BlockFieldsList({
 }: BlockFieldsListProps) {
   if (fields.length === 0) {
     return (
-      <p className="text-sm text-muted-foreground italic flex py-3">
+      <p className="flex py-3 text-muted-foreground text-sm italic">
         No fields yet. Add fields from the palette on the right.
       </p>
     );
@@ -22,11 +22,11 @@ export function BlockFieldsList({
     <div className="flex flex-col gap-3">
       {fields.map((field) => (
         <FieldItem
-          key={field.id}
           field={field}
           isSelected={selectedFieldId === field.id}
-          onFieldSelect={onFieldSelect}
+          key={field.id}
           onFieldDelete={onFieldDelete}
+          onFieldSelect={onFieldSelect}
         />
       ))}
     </div>

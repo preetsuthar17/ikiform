@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Input } from "@/components/ui/input";
-import { DatePicker } from "@/components/ui/date-picker";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import type { BaseFieldProps } from "../types";
-import { getBaseClasses } from "../utils";
-import { parseDate } from "yeezy-dates";
+import React, { useEffect, useState } from 'react';
+import { parseDate } from 'yeezy-dates';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { DatePicker } from '@/components/ui/date-picker';
+import { Input } from '@/components/ui/input';
+import type { BaseFieldProps } from '../types';
+import { getBaseClasses } from '../utils';
 
 export function DateInputField({
   field,
@@ -19,14 +19,14 @@ export function DateInputField({
   const dateValue = value ? new Date(value) : undefined;
   return (
     <DatePicker
-      value={dateValue}
-      onChange={(date) => {
-        // Convert Date object back to string (ISO format)
-        onChange(date ? date.toISOString().slice(0, 10) : "");
-      }}
       className={baseClasses}
       disabled={disabled}
-      placeholder={field.placeholder || "Pick a date"}
+      onChange={(date) => {
+        // Convert Date object back to string (ISO format)
+        onChange(date ? date.toISOString().slice(0, 10) : '');
+      }}
+      placeholder={field.placeholder || 'Pick a date'}
+      value={dateValue}
     />
   );
 }

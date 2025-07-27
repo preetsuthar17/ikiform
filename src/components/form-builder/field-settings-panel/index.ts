@@ -1,14 +1,11 @@
 // Main component export
-export { FieldSettingsPanel } from "./FieldSettingsPanel";
 
 // Component exports
-export * from "./components";
-
-// Type exports
-export * from "./types";
-
-// Utility exports
-export * from "./utils";
-
+export * from './components';
 // Constant exports
-export * from "./constants";
+export * from './constants';
+export { FieldSettingsPanel } from './FieldSettingsPanel';
+// Type exports
+export * from './types';
+// Utility exports
+export * from './utils';

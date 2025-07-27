@@ -1,17 +1,17 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { FORM_SETTINGS_SECTIONS } from "../index";
-import type { FormSettingsSection } from "../types";
 import {
-  Info,
   BarChart2,
-  Shield,
-  User,
+  Info,
+  Link2,
   Mail,
   Palette,
-  Link2,
-} from "lucide-react";
+  Shield,
+  User,
+} from 'lucide-react';
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { FORM_SETTINGS_SECTIONS } from '../index';
+import type { FormSettingsSection } from '../types';
 
 const iconMap = { Info, BarChart2, Shield, User, Mail, Palette, Link2 };
 
@@ -25,7 +25,7 @@ export function FormSettingsSidebarNavigation({
   onSectionChange,
 }: FormSettingsSidebarNavigationProps) {
   return (
-    <ScrollArea className="flex-1 flex flex-col gap-4 mt-8">
+    <ScrollArea className="mt-8 flex flex-1 flex-col gap-4">
       <nav className="flex flex-col gap-2">
         {FORM_SETTINGS_SECTIONS.map((section) => {
           const isActive = activeSection === section.id;
@@ -33,17 +33,17 @@ export function FormSettingsSidebarNavigation({
             iconMap[section.iconName as keyof typeof iconMap];
           return (
             <Button
-              key={section.id}
-              variant={isActive ? "secondary" : "ghost"}
               className={
-                "w-full text-left items-center justify-start transition-all gap-2" +
+                'w-full items-center justify-start gap-2 text-left transition-all' +
                 (isActive
-                  ? " bg-secondary text-secondary-foreground"
-                  : " hover:bg-accent hover:text-accent-foreground")
+                  ? ' bg-secondary text-secondary-foreground'
+                  : ' hover:bg-accent hover:text-accent-foreground')
               }
+              key={section.id}
               onClick={() => onSectionChange(section.id)}
+              variant={isActive ? 'secondary' : 'ghost'}
             >
-              <IconComponent className="w-4 h-4" />
+              <IconComponent className="h-4 w-4" />
               <span className="font-medium text-sm">{section.label}</span>
             </Button>
           );

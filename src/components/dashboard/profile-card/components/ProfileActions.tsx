@@ -1,34 +1,33 @@
 // Profile action buttons component
-import React from "react";
-
-// UI Components
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
 
 // Icons
-import { MoreVertical, Settings } from "lucide-react";
+import { MoreVertical, Settings } from 'lucide-react';
+import React from 'react';
+// UI Components
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 // Types
-import type { ProfileActionsProps } from "../types";
+import type { ProfileActionsProps } from '../types';
 
 export function ProfileActions({
   onSettingsClick,
   onSignOut,
 }: ProfileActionsProps) {
   return (
-    <div className="absolute right-3 top-3 flex items-center gap-2">
-      <Button variant="secondary" size="icon" onClick={onSettingsClick}>
+    <div className="absolute top-3 right-3 flex items-center gap-2">
+      <Button onClick={onSettingsClick} size="icon" variant="secondary">
         <Settings />
       </Button>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="secondary" size="icon">
-            <MoreVertical className="w-6 h-6" />
+          <Button size="icon" variant="secondary">
+            <MoreVertical className="h-6 w-6" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="font-medium shadow-md/2">

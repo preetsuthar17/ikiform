@@ -1,9 +1,9 @@
-import React from "react";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
-import { FORM_SETTINGS_SECTIONS } from "../index";
-import { FormSettingsContent } from "./FormSettingsContent";
-import type { FormSettingsSection } from "../types";
+import React from 'react';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Tabs, TabsContent } from '@/components/ui/tabs';
+import { FORM_SETTINGS_SECTIONS } from '../index';
+import type { FormSettingsSection } from '../types';
+import { FormSettingsContent } from './FormSettingsContent';
 
 interface FormSettingsMobileLayoutProps {
   activeSection: FormSettingsSection;
@@ -19,28 +19,28 @@ export function FormSettingsMobileLayout({
   sectionProps,
 }: FormSettingsMobileLayoutProps) {
   return (
-    <div className="md:hidden flex flex-col h-full gap-4">
-      <div className="flex items-center gap-4 md:border-b border-0 border-border md:p-4 p-2 flex-shrink-0">
-        <ScrollArea orientation="horizontal" className="pb-4">
+    <div className="flex h-full flex-col gap-4 md:hidden">
+      <div className="flex flex-shrink-0 items-center gap-4 border-0 border-border p-2 md:border-b md:p-4">
+        <ScrollArea className="pb-4" orientation="horizontal">
           <Tabs
             items={FORM_SETTINGS_SECTIONS}
-            value={activeSection}
             onValueChange={(value) =>
               onSectionChange(value as FormSettingsSection)
             }
-            variant="underline"
             size="sm"
+            value={activeSection}
+            variant="underline"
           />
         </ScrollArea>
       </div>
       <div className="flex-1 overflow-hidden">
         <ScrollArea className="h-full">
-          <div className="flex flex-col gap-4 md:p-4 p-0">
+          <div className="flex flex-col gap-4 p-0 md:p-4">
             {FORM_SETTINGS_SECTIONS.map((section) => (
               <TabsContent
+                activeValue={activeSection}
                 key={section.id}
                 value={section.id}
-                activeValue={activeSection}
               >
                 <FormSettingsContent
                   section={section.id}

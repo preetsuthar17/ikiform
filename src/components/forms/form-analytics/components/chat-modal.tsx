@@ -1,30 +1,26 @@
-import React from "react";
-
+// Icons
+import { Bot } from 'lucide-react';
+import type React from 'react';
+import {
+  Drawer,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+} from '@/components/ui/drawer';
 // UI Components
 import {
   Modal,
+  ModalClose,
   ModalContent,
   ModalHeader,
   ModalTitle,
-  ModalClose,
-} from "@/components/ui/modal";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerDescription,
-  DrawerCloseButton,
-} from "@/components/ui/drawer";
-
-// Icons
-import { Bot } from "lucide-react";
-
-// Chat Interface
-import { ChatInterface } from "./chat-interface";
-
+} from '@/components/ui/modal';
 // Types
-import type { ChatModalProps } from "../types";
+import type { ChatModalProps } from '../types';
+// Chat Interface
+import { ChatInterface } from './chat-interface';
 
 export const ChatModal: React.FC<ChatModalProps> = ({
   isOpen,
@@ -60,11 +56,11 @@ export const ChatModal: React.FC<ChatModalProps> = ({
 
   if (isMobile) {
     return (
-      <Drawer open={isOpen} onOpenChange={onClose}>
-        <DrawerContent className="h-[85vh] flex flex-col focus:outline-none focus:ring-0">
-          <DrawerHeader className="border-b border-border flex items-center justify-between gap-2">
+      <Drawer onOpenChange={onClose} open={isOpen}>
+        <DrawerContent className="flex h-[85vh] flex-col focus:outline-none focus:ring-0">
+          <DrawerHeader className="flex items-center justify-between gap-2 border-border border-b">
             <div className="sr-only flex items-center gap-2">
-              <Bot className="w-4 h-4 text-primary" />
+              <Bot className="h-4 w-4 text-primary" />
               <DrawerTitle>Kiko</DrawerTitle>
             </div>
             <DrawerCloseButton />
@@ -81,8 +77,8 @@ export const ChatModal: React.FC<ChatModalProps> = ({
   }
 
   return (
-    <Modal open={isOpen} onOpenChange={onClose}>
-      <ModalContent className="max-w-3xl h-[800px] flex flex-col focus:outline-none focus:ring-0">
+    <Modal onOpenChange={onClose} open={isOpen}>
+      <ModalContent className="flex h-[800px] max-w-3xl flex-col focus:outline-none focus:ring-0">
         <ModalHeader className="flex items-center justify-between gap-2 px-4 py-3">
           <div className="flex items-center gap-2">
             <ModalTitle>Kiko</ModalTitle>

@@ -1,24 +1,22 @@
 // External imports
-import React from "react";
+import React from 'react';
 
 // Component imports
-import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  EmptyState,
-  BasicSettings,
-  OptionsSettings,
-  ValidationSettings,
-  ErrorMessages,
-  VisualSettings,
-  FieldSpecificSettings,
-  SettingsPanelHeader,
-} from "./components";
-
-// Utility imports
-import { useFieldUpdates } from "./utils";
-
+import { ScrollArea } from '@/components/ui/scroll-area';
 // Type imports
-import type { FormField } from "@/lib/database";
+import type { FormField } from '@/lib/database';
+import {
+  BasicSettings,
+  EmptyState,
+  ErrorMessages,
+  FieldSpecificSettings,
+  OptionsSettings,
+  SettingsPanelHeader,
+  ValidationSettings,
+  VisualSettings,
+} from './components';
+// Utility imports
+import { useFieldUpdates } from './utils';
 
 interface FieldSettingsPanelProps {
   field: FormField | null;
@@ -33,7 +31,7 @@ export function FieldSettingsPanel({
 }: FieldSettingsPanelProps) {
   const { updateField, updateValidation, updateSettings } = useFieldUpdates(
     field,
-    onFieldUpdate,
+    onFieldUpdate
   );
 
   if (!field) {
@@ -41,17 +39,17 @@ export function FieldSettingsPanel({
   }
 
   return (
-    <div className="h-[90%] min-h-0 flex flex-col bg-card border-border">
-      <ScrollArea className="flex-1 h-[90%]">
+    <div className="flex h-[90%] min-h-0 flex-col border-border bg-card">
+      <ScrollArea className="h-[90%] flex-1">
         <SettingsPanelHeader onClose={onClose} />
         <div className="flex flex-col gap-4 p-4">
           <BasicSettings field={field} onFieldUpdate={onFieldUpdate} />
           <FieldSpecificSettings
             field={field}
-            onUpdateSettings={updateSettings}
             onFieldUpdate={onFieldUpdate}
+            onUpdateSettings={updateSettings}
           />
-          {["select", "radio", "checkbox", "poll"].includes(field.type) && (
+          {['select', 'radio', 'checkbox', 'poll'].includes(field.type) && (
             <OptionsSettings field={field} onFieldUpdate={onFieldUpdate} />
           )}
           <ValidationSettings

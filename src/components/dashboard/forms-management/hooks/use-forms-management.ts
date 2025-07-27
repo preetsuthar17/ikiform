@@ -1,23 +1,20 @@
 // Custom hooks for forms management
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 // External Dependencies
-import { useAuth } from "@/hooks/use-auth";
-import { toast } from "@/hooks/use-toast";
-
-// Database
-import { formsDb } from "@/lib/database";
-
+import { useAuth } from '@/hooks/use-auth';
+import { toast } from '@/hooks/use-toast';
 // Types
-import type { Form } from "@/lib/database";
-import type { DeleteModalState } from "../types";
-
-// Utils
-import { generateShareUrl, copyToClipboard } from "../utils";
-
+import type { Form } from '@/lib/database';
+// Database
+import { formsDb } from '@/lib/database';
 // Constants
-import { DEFAULT_DELETE_MODAL_STATE } from "../constants";
+import { DEFAULT_DELETE_MODAL_STATE } from '../constants';
+import type { DeleteModalState } from '../types';
+// Utils
+import { copyToClipboard, generateShareUrl } from '../utils';
 
 export function useFormsManagement() {
   const router = useRouter();
@@ -25,7 +22,7 @@ export function useFormsManagement() {
   const [forms, setForms] = useState<Form[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleteModal, setDeleteModal] = useState<DeleteModalState>(
-    DEFAULT_DELETE_MODAL_STATE,
+    DEFAULT_DELETE_MODAL_STATE
   );
   const [showChoiceModal, setShowChoiceModal] = useState(false);
 
@@ -37,8 +34,8 @@ export function useFormsManagement() {
       const userForms = await formsDb.getUserForms(user.id);
       setForms(userForms);
     } catch (error) {
-      console.error("Error loading forms:", error);
-      toast.error("Failed to load forms");
+      console.error('Error loading forms:', error);
+      toast.error('Failed to load forms');
     } finally {
       setLoading(false);
     }
@@ -54,7 +51,7 @@ export function useFormsManagement() {
   };
 
   const viewForm = (formId: string) => {
-    window.open(`/forms/${formId}`, "_blank");
+    window.open(`/forms/${formId}`, '_blank');
   };
 
   const viewAnalytics = (formId: string) => {
@@ -71,8 +68,8 @@ export function useFormsManagement() {
       const shareUrl = generateShareUrl(form.id);
       await copyToClipboard(shareUrl);
     } catch (error) {
-      console.error("Error sharing form:", error);
-      toast.error("Failed to share form");
+      console.error('Error sharing form:', error);
+      toast.error('Failed to share form');
     }
   };
 
@@ -88,21 +85,21 @@ export function useFormsManagement() {
     try {
       await formsDb.deleteForm(deleteModal.formId);
       await loadForms(); // Refresh the forms list
-      toast.success("Form deleted successfully");
+      toast.success('Form deleted successfully');
     } catch (error) {
-      console.error("Error deleting form:", error);
-      toast.error("Failed to delete form");
+      console.error('Error deleting form:', error);
+      toast.error('Failed to delete form');
     }
   };
 
   const handleCreateWithAI = () => {
     setShowChoiceModal(false);
-    router.push("/ai-builder");
+    router.push('/ai-builder');
   };
 
   const handleCreateManually = () => {
     setShowChoiceModal(false);
-    router.push("/form-builder");
+    router.push('/form-builder');
   };
 
   const handleCreateFromPrompt = (prompt: string) => {

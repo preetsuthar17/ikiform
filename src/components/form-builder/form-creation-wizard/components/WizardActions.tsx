@@ -1,11 +1,10 @@
 // External imports
-import React from "react";
-
-// Component imports
-import { Button } from "@/components/ui/button";
 
 // Icon imports
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from 'lucide-react';
+import type React from 'react';
+// Component imports
+import { Button } from '@/components/ui/button';
 
 interface WizardActionsProps {
   onCancel: () => void;
@@ -19,17 +18,17 @@ export const WizardActions: React.FC<WizardActionsProps> = ({
   canContinue,
 }) => {
   return (
-    <div className="flex justify-end flex-wrap">
-      <Button variant="outline" onClick={onCancel} className="flex-grow">
+    <div className="flex flex-wrap justify-end">
+      <Button className="flex-grow" onClick={onCancel} variant="outline">
         Cancel
       </Button>
       <Button
-        onClick={onContinue}
+        className="flex flex-grow items-center gap-2"
         disabled={!canContinue}
-        className="flex-grow flex items-center gap-2"
+        onClick={onContinue}
       >
         Continue
-        <ArrowRight className="w-4 h-4" />
+        <ArrowRight className="h-4 w-4" />
       </Button>
     </div>
   );

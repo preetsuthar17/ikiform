@@ -1,9 +1,9 @@
-"use client";
-import React from "react";
-import dynamic from "next/dynamic";
-import { useTheme } from "next-themes";
+'use client';
+import dynamic from 'next/dynamic';
+import { useTheme } from 'next-themes';
+import React from 'react';
 
-const PublicForm = dynamic(() => import("@/components/forms/public-form"), {
+const PublicForm = dynamic(() => import('@/components/forms/public-form'), {
   ssr: false,
 });
 

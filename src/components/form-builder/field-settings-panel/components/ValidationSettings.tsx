@@ -1,85 +1,84 @@
 // External imports
-import React from "react";
-
+import React from 'react';
+import { Card } from '@/components/ui/card';
 // Component imports
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card } from "@/components/ui/card";
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 // Type imports
-import type { FormField } from "@/lib/database";
+import type { FormField } from '@/lib/database';
 
 interface ValidationSettingsProps {
   field: FormField;
-  onUpdateValidation: (updates: Partial<FormField["validation"]>) => void;
+  onUpdateValidation: (updates: Partial<FormField['validation']>) => void;
 }
 
 export function ValidationSettings({
   field,
   onUpdateValidation,
 }: ValidationSettingsProps) {
-  const isTextType = ["text", "email", "textarea"].includes(field.type);
-  const isNumberType = field.type === "number";
+  const isTextType = ['text', 'email', 'textarea'].includes(field.type);
+  const isNumberType = field.type === 'number';
 
   // Don't render if field doesn't support validation
-  if (!isTextType && !isNumberType) {
+  if (!(isTextType || isNumberType)) {
     return null;
   }
 
   return (
-    <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
-      <h3 className="font-medium mb-3 text-card-foreground">Validation</h3>
+    <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
+      <h3 className="mb-3 font-medium text-card-foreground">Validation</h3>
       <div className="flex flex-col gap-4">
         {isTextType && (
           <>
             <div className="flex flex-col gap-1">
-              <Label htmlFor="min-length" className="text-card-foreground">
+              <Label className="text-card-foreground" htmlFor="min-length">
                 Minimum Length
               </Label>
               <Input
+                className="border-border bg-input"
                 id="min-length"
-                type="number"
-                value={field.validation?.minLength || ""}
                 onChange={(e) =>
                   onUpdateValidation({
-                    minLength: parseInt(e.target.value) || undefined,
+                    minLength: Number.parseInt(e.target.value) || undefined,
                   })
                 }
                 placeholder="Min characters"
-                className="bg-input border-border"
+                type="number"
+                value={field.validation?.minLength || ''}
               />
             </div>
             <div className="flex flex-col gap-1">
-              <Label htmlFor="max-length" className="text-card-foreground">
+              <Label className="text-card-foreground" htmlFor="max-length">
                 Maximum Length
               </Label>
               <Input
+                className="border-border bg-input"
                 id="max-length"
-                type="number"
-                value={field.validation?.maxLength || ""}
                 onChange={(e) =>
                   onUpdateValidation({
-                    maxLength: parseInt(e.target.value) || undefined,
+                    maxLength: Number.parseInt(e.target.value) || undefined,
                   })
                 }
                 placeholder="Max characters"
-                className="bg-input border-border"
+                type="number"
+                value={field.validation?.maxLength || ''}
               />
             </div>
             <div className="flex flex-col gap-1">
-              <Label htmlFor="pattern" className="text-card-foreground">
+              <Label className="text-card-foreground" htmlFor="pattern">
                 Pattern (Regex)
               </Label>
               <Input
+                className="border-border bg-input"
                 id="pattern"
-                value={field.validation?.pattern || ""}
                 onChange={(e) =>
                   onUpdateValidation({
                     pattern: e.target.value || undefined,
                   })
                 }
                 placeholder="Regular expression"
-                className="bg-input border-border"
+                value={field.validation?.pattern || ''}
               />
             </div>
           </>
@@ -88,37 +87,37 @@ export function ValidationSettings({
         {isNumberType && (
           <>
             <div className="flex flex-col gap-1">
-              <Label htmlFor="min-value" className="text-card-foreground">
+              <Label className="text-card-foreground" htmlFor="min-value">
                 Minimum Value
               </Label>
               <Input
+                className="border-border bg-input"
                 id="min-value"
-                type="number"
-                value={field.validation?.min || ""}
                 onChange={(e) =>
                   onUpdateValidation({
-                    min: parseInt(e.target.value) || undefined,
+                    min: Number.parseInt(e.target.value) || undefined,
                   })
                 }
                 placeholder="Min value"
-                className="bg-input border-border"
+                type="number"
+                value={field.validation?.min || ''}
               />
             </div>
             <div className="flex flex-col gap-1">
-              <Label htmlFor="max-value" className="text-card-foreground">
+              <Label className="text-card-foreground" htmlFor="max-value">
                 Maximum Value
               </Label>
               <Input
+                className="border-border bg-input"
                 id="max-value"
-                type="number"
-                value={field.validation?.max || ""}
                 onChange={(e) =>
                   onUpdateValidation({
-                    max: parseInt(e.target.value) || undefined,
+                    max: Number.parseInt(e.target.value) || undefined,
                   })
                 }
                 placeholder="Max value"
-                className="bg-input border-border"
+                type="number"
+                value={field.validation?.max || ''}
               />
             </div>
           </>

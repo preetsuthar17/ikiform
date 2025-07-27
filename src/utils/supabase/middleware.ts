@@ -1,14 +1,14 @@
 // External imports
-import { createServerClient } from "@supabase/ssr";
-import { NextResponse, type NextRequest } from "next/server";
+import { createServerClient } from '@supabase/ssr';
+import { type NextRequest, NextResponse } from 'next/server';
 
 // Function to update the session
 export async function updateSession(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({ request });
+  const supabaseResponse = NextResponse.next({ request });
 
-  const authHeader = request.headers.get("authorization");
-  const accessToken = authHeader?.startsWith("Bearer ")
-    ? authHeader.replace("Bearer ", "")
+  const authHeader = request.headers.get('authorization');
+  const accessToken = authHeader?.startsWith('Bearer ')
+    ? authHeader.replace('Bearer ', '')
     : null;
 
   const supabase = createServerClient(
@@ -27,7 +27,7 @@ export async function updateSession(request: NextRequest) {
       ...(accessToken && {
         global: { headers: { Authorization: `Bearer ${accessToken}` } },
       }),
-    },
+    }
   );
 
   const {
@@ -35,12 +35,14 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   if (
-    !user &&
-    !request.nextUrl.pathname.startsWith("/login") &&
-    !request.nextUrl.pathname.startsWith("/auth")
+    !(
+      user ||
+      request.nextUrl.pathname.startsWith('/login') ||
+      request.nextUrl.pathname.startsWith('/auth')
+    )
   ) {
     const url = request.nextUrl.clone();
-    url.pathname = "/login";
+    url.pathname = '/login';
     return NextResponse.redirect(url);
   }
 

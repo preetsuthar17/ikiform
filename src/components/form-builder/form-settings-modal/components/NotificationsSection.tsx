@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Switch } from "@/components/ui/switch";
-import { Button } from "@/components/ui/button";
-import type { LocalSettings, NotificationSettings } from "../types";
-import { Bell } from "lucide-react";
+import { Bell } from 'lucide-react';
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Textarea } from '@/components/ui/textarea';
+import type { LocalSettings, NotificationSettings } from '../types';
 
 interface NotificationsSectionProps {
   localSettings: LocalSettings;
@@ -19,12 +19,12 @@ export function NotificationsSection({
 }: NotificationsSectionProps) {
   const notifications = localSettings.notifications || {};
   const customLinks = notifications.customLinks || [];
-  const [newLink, setNewLink] = useState({ label: "", url: "" });
+  const [newLink, setNewLink] = useState({ label: '', url: '' });
 
   const handleAddLink = () => {
     if (newLink.label && newLink.url) {
       updateNotifications({ customLinks: [...customLinks, newLink] });
-      setNewLink({ label: "", url: "" });
+      setNewLink({ label: '', url: '' });
     }
   };
 
@@ -35,23 +35,23 @@ export function NotificationsSection({
 
   return (
     <Card className="p-6">
-      <div className="flex items-center gap-3 mb-4">
-        <Bell className="w-5 h-5 text-primary" />
-        <h3 className="text-lg font-medium">Notifications</h3>
+      <div className="mb-4 flex items-center gap-3">
+        <Bell className="h-5 w-5 text-primary" />
+        <h3 className="font-medium text-lg">Notifications</h3>
       </div>
-      <div className="flex flex-col gap-4 border-l-2 border-muted pl-6">
+      <div className="flex flex-col gap-4 border-muted border-l-2 pl-6">
         <div className="flex items-center gap-3">
           <Switch
-            size={"sm"}
-            id="notifications-enabled"
             checked={!!notifications.enabled}
+            id="notifications-enabled"
             onCheckedChange={(checked) =>
               updateNotifications({ enabled: checked })
             }
+            size={'sm'}
           />
           <Label
-            htmlFor="notifications-enabled"
             className="cursor-pointer select-none"
+            htmlFor="notifications-enabled"
           >
             Enable email notifications for new submissions
           </Label>
@@ -59,97 +59,97 @@ export function NotificationsSection({
         <div className="flex flex-col gap-2">
           <Label htmlFor="notification-email">Notification Email</Label>
           <Input
+            disabled={!notifications.enabled}
             id="notification-email"
-            type="email"
-            value={notifications.email || ""}
             onChange={(e) => updateNotifications({ email: e.target.value })}
             placeholder="owner@email.com"
-            disabled={!notifications.enabled}
+            type="email"
+            value={notifications.email || ''}
           />
         </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="notification-subject">Email Subject</Label>
           <Input
+            disabled={!notifications.enabled}
             id="notification-subject"
-            value={notifications.subject || "New Form Submission"}
             onChange={(e) => updateNotifications({ subject: e.target.value })}
             placeholder="New Form Submission"
-            disabled={!notifications.enabled}
+            value={notifications.subject || 'New Form Submission'}
           />
         </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="notification-message">Email Message</Label>
           <Textarea
+            disabled={!notifications.enabled}
             id="notification-message"
-            value={
-              notifications.message ||
-              "You have received a new submission on your form."
-            }
             onChange={(e) => updateNotifications({ message: e.target.value })}
             placeholder="You have received a new submission on your form."
             rows={3}
-            disabled={!notifications.enabled}
+            value={
+              notifications.message ||
+              'You have received a new submission on your form.'
+            }
           />
         </div>
         <div className="flex flex-col gap-2">
           <Label>Custom Links</Label>
           <div className="flex flex-col gap-2">
             {customLinks.map((link, idx) => (
-              <div key={idx} className="flex items-center gap-2">
+              <div className="flex items-center gap-2" key={idx}>
                 <Input
-                  value={link.label}
+                  disabled={!notifications.enabled}
                   onChange={(e) => {
                     const updated = [...customLinks];
                     updated[idx] = { ...updated[idx], label: e.target.value };
                     updateNotifications({ customLinks: updated });
                   }}
                   placeholder="Label"
-                  disabled={!notifications.enabled}
+                  value={link.label}
                 />
                 <Input
-                  value={link.url}
+                  disabled={!notifications.enabled}
                   onChange={(e) => {
                     const updated = [...customLinks];
                     updated[idx] = { ...updated[idx], url: e.target.value };
                     updateNotifications({ customLinks: updated });
                   }}
                   placeholder="https://example.com"
-                  disabled={!notifications.enabled}
+                  value={link.url}
                 />
                 <Button
-                  type="button"
-                  size="sm"
-                  variant="destructive"
-                  onClick={() => handleRemoveLink(idx)}
                   disabled={!notifications.enabled}
+                  onClick={() => handleRemoveLink(idx)}
+                  size="sm"
+                  type="button"
+                  variant="destructive"
                 >
                   Remove
                 </Button>
               </div>
             ))}
           </div>
-          <div className="flex gap-2 mt-2">
+          <div className="mt-2 flex gap-2">
             <Input
-              value={newLink.label}
+              disabled={!notifications.enabled}
               onChange={(e) =>
                 setNewLink((l) => ({ ...l, label: e.target.value }))
               }
               placeholder="Label"
-              disabled={!notifications.enabled}
+              value={newLink.label}
             />
             <Input
-              value={newLink.url}
+              disabled={!notifications.enabled}
               onChange={(e) =>
                 setNewLink((l) => ({ ...l, url: e.target.value }))
               }
               placeholder="https://example.com"
-              disabled={!notifications.enabled}
+              value={newLink.url}
             />
             <Button
-              type="button"
-              size="sm"
-              onClick={handleAddLink}
               disabled={!notifications.enabled}
+              onClick={handleAddLink}
+              size="sm"
+              type="button"
             >
               Add
             </Button>

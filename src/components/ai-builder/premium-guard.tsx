@@ -1,9 +1,9 @@
 // UI components imports
-import { Button } from "@/components/ui/button";
-import { Loader } from "@/components/ui/loader";
 
 // Next.js imports
-import Link from "next/link";
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Loader } from '@/components/ui/loader';
 
 interface PremiumGuardProps {
   user: any;
@@ -22,17 +22,17 @@ export function PremiumGuard({
 }: PremiumGuardProps) {
   if (authLoading || checking || hasPremium === null) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex min-h-screen items-center justify-center">
         <Loader />
       </div>
     );
   }
 
-  if (!user || !hasPremium) {
+  if (!(user && hasPremium)) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen gap-6">
-        <div className="text-2xl font-semibold">Requires Premium</div>
-        <div className="text-muted-foreground text-center max-w-md">
+      <div className="flex min-h-screen flex-col items-center justify-center gap-6">
+        <div className="font-semibold text-2xl">Requires Premium</div>
+        <div className="max-w-md text-center text-muted-foreground">
           You need a premium subscription to use the AI form builder. Upgrade to
           unlock all features.
         </div>

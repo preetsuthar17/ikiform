@@ -1,40 +1,37 @@
 // External imports
-import React from "react";
-import { useState } from "react";
 
+import { Cross, X } from 'lucide-react';
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 // Component imports
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Slider } from "@/components/ui/slider";
-import {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectValue,
-} from "@/components/ui/select";
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Modal,
   ModalContent,
-  ModalHeader,
   ModalFooter,
+  ModalHeader,
   ModalTitle,
-} from "@/components/ui/modal";
-
-// Component imports
-import { EmailValidationSettings } from "./EmailValidationSettings";
-
+} from '@/components/ui/modal';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Separator } from '@/components/ui/separator';
+import { Slider } from '@/components/ui/slider';
+import { Switch } from '@/components/ui/switch';
 // Type imports
-import type { FormField } from "@/lib/database";
-import { Cross, X } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
+import type { FormField } from '@/lib/database';
+// Component imports
+import { EmailValidationSettings } from './EmailValidationSettings';
 
 interface FieldSpecificSettingsProps {
   field: FormField;
-  onUpdateSettings: (updates: Partial<FormField["settings"]>) => void;
+  onUpdateSettings: (updates: Partial<FormField['settings']>) => void;
   onFieldUpdate: (field: FormField) => void;
 }
 
@@ -43,51 +40,50 @@ export function FieldSpecificSettings({
   onUpdateSettings,
   onFieldUpdate,
 }: FieldSpecificSettingsProps) {
-  const isTextareaType = field.type === "textarea";
-  const isSliderType = field.type === "slider";
-  const isTagsType = field.type === "tags";
-  const isSelectType = field.type === "select";
-  const isEmailType = field.type === "email";
-  const isDateType = field.type === "date";
-  const isSocialType = field.type === "social";
-  const isTimeType = field.type === "time";
-  const isSchedulerType = field.type === "scheduler";
+  const isTextareaType = field.type === 'textarea';
+  const isSliderType = field.type === 'slider';
+  const isTagsType = field.type === 'tags';
+  const isSelectType = field.type === 'select';
+  const isEmailType = field.type === 'email';
+  const isDateType = field.type === 'date';
+  const isSocialType = field.type === 'social';
+  const isTimeType = field.type === 'time';
+  const isSchedulerType = field.type === 'scheduler';
 
   if (
-    !isTextareaType &&
-    !isSliderType &&
-    !isTagsType &&
-    !isSelectType &&
-    !isEmailType &&
-    !isDateType &&
-    !isSocialType &&
-    !isTimeType &&
-    !isSchedulerType &&
-    field.type !== "poll" &&
-    field.type !== "rating"
+    !(
+      isTextareaType ||
+      isSliderType ||
+      isTagsType ||
+      isSelectType ||
+      isEmailType ||
+      isDateType ||
+      isSocialType ||
+      isTimeType ||
+      isSchedulerType
+    ) &&
+    field.type !== 'poll' &&
+    field.type !== 'rating'
   ) {
     return null;
   }
   // Scheduler Field Settings
   const [schedulerModalOpen, setSchedulerModalOpen] = useState(false);
-  {
-    /* Scheduler Field Settings */
-  }
 
   if (isTimeType) {
     return (
-      <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
+      <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
         <h3 className="font-medium text-card-foreground">
           Time Field Settings
         </h3>
         <div className="flex items-center gap-2">
           <Switch
-            id="showCurrentTimeButton"
             checked={!!field.settings?.showCurrentTimeButton}
+            id="showCurrentTimeButton"
+            label="Show 'Set Current Time' Button"
             onCheckedChange={(checked) =>
               onUpdateSettings({ showCurrentTimeButton: checked })
             }
-            label="Show 'Set Current Time' Button"
             size="sm"
           />
         </div>
@@ -95,7 +91,7 @@ export function FieldSpecificSettings({
     );
   }
 
-  const [newOption, setNewOption] = useState("");
+  const [newOption, setNewOption] = useState('');
 
   return (
     <>
@@ -108,27 +104,27 @@ export function FieldSpecificSettings({
       )}
 
       {isSchedulerType && (
-        <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
+        <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
           <h3 className="font-medium text-card-foreground">
             Scheduler Settings
           </h3>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               <Label
-                htmlFor="scheduler-provider"
                 className="text-card-foreground"
+                htmlFor="scheduler-provider"
               >
                 Scheduler Provider
               </Label>
               <Select
-                value={field.settings?.schedulerProvider || ""}
                 onValueChange={(val) =>
                   onUpdateSettings({ schedulerProvider: val as any })
                 }
+                value={field.settings?.schedulerProvider || ''}
               >
                 <SelectTrigger
+                  className="border-border bg-input"
                   id="scheduler-provider"
-                  className="bg-input border-border"
                 >
                   <SelectValue placeholder="Select provider" />
                 </SelectTrigger>
@@ -143,35 +139,27 @@ export function FieldSpecificSettings({
             {field.settings?.schedulerProvider && (
               <div className="flex flex-col gap-2">
                 <Label
-                  htmlFor="scheduler-link"
                   className="text-card-foreground"
+                  htmlFor="scheduler-link"
                 >
                   {(() => {
                     switch (field.settings?.schedulerProvider) {
-                      case "calcom":
-                        return "Cal.com Link";
-                      case "calendly":
-                        return "Calendly Link";
-                      case "tidycal":
-                        return "TidyCal Link";
+                      case 'calcom':
+                        return 'Cal.com Link';
+                      case 'calendly':
+                        return 'Calendly Link';
+                      case 'tidycal':
+                        return 'TidyCal Link';
                       default:
-                        return "Scheduler Link";
+                        return 'Scheduler Link';
                     }
                   })()}
                 </Label>
                 <Input
+                  className="border-border bg-input"
                   id="scheduler-link"
-                  type="url"
-                  placeholder="https://..."
-                  value={
-                    field.settings && field.settings.schedulerProvider
-                      ? field.settings.schedulerLinks?.[
-                          field.settings.schedulerProvider
-                        ] || ""
-                      : ""
-                  }
                   onChange={(e) => {
-                    if (!field.settings || !field.settings.schedulerProvider)
+                    if (!(field.settings && field.settings.schedulerProvider))
                       return;
                     onUpdateSettings({
                       schedulerLinks: {
@@ -180,49 +168,59 @@ export function FieldSpecificSettings({
                       },
                     });
                   }}
-                  className="bg-input border-border"
+                  placeholder="https://..."
+                  type="url"
+                  value={
+                    field.settings && field.settings.schedulerProvider
+                      ? field.settings.schedulerLinks?.[
+                          field.settings.schedulerProvider
+                        ] || ''
+                      : ''
+                  }
                 />
               </div>
             )}
             <div className="flex flex-col gap-2">
               <Label
-                htmlFor="scheduler-button-text"
                 className="text-card-foreground"
+                htmlFor="scheduler-button-text"
               >
                 Calendar Opener Button Text
               </Label>
               <Input
+                className="border-border bg-input"
                 id="scheduler-button-text"
-                type="text"
-                placeholder="e.g. Book a Call"
-                value={field.settings?.schedulerButtonText || ""}
                 onChange={(e) =>
                   onUpdateSettings({ schedulerButtonText: e.target.value })
                 }
-                className="bg-input border-border"
+                placeholder="e.g. Book a Call"
+                type="text"
+                value={field.settings?.schedulerButtonText || ''}
               />
             </div>
             <div className="flex flex-col gap-2">
               <Label className="text-card-foreground">Preview</Label>
               <Button
                 className="w-fit bg-foreground/80 text-background hover:bg-foreground"
-                type="button"
-                onClick={() => setSchedulerModalOpen(true)}
                 disabled={
-                  !field.settings?.schedulerProvider ||
-                  !field.settings?.schedulerLinks?.[
-                    field.settings.schedulerProvider
-                  ]
+                  !(
+                    field.settings?.schedulerProvider &&
+                    field.settings?.schedulerLinks?.[
+                      field.settings.schedulerProvider
+                    ]
+                  )
                 }
+                onClick={() => setSchedulerModalOpen(true)}
+                type="button"
               >
-                {field.settings?.schedulerButtonText || "Open Scheduler"}
+                {field.settings?.schedulerButtonText || 'Open Scheduler'}
               </Button>
               {/* Modal for embedded calendar */}
               <Modal
-                open={schedulerModalOpen}
                 onOpenChange={setSchedulerModalOpen}
+                open={schedulerModalOpen}
               >
-                <ModalContent className="max-w-[95%] h-[95%] w-full flex flex-col gap-4">
+                <ModalContent className="flex h-[95%] w-full max-w-[95%] flex-col gap-4">
                   <ModalHeader>
                     <ModalTitle>Scheduler Preview</ModalTitle>
                   </ModalHeader>
@@ -232,14 +230,14 @@ export function FieldSpecificSettings({
                         field.settings.schedulerProvider
                       ] && (
                         <iframe
+                          allow="camera; microphone; fullscreen"
+                          className="h-full w-full rounded-ele border-none"
                           src={
                             field.settings.schedulerLinks[
                               field.settings.schedulerProvider
                             ]
                           }
                           title="Scheduler Embed"
-                          className="w-full h-full border-none rounded-ele"
-                          allow="camera; microphone; fullscreen"
                         />
                       )}
                   </div>
@@ -263,23 +261,25 @@ export function FieldSpecificSettings({
 
       {/* Textarea Settings */}
       {isTextareaType && (
-        <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
+        <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
           <h3 className="font-medium text-card-foreground">Field Settings</h3>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
-              <Label htmlFor="textarea-rows" className="text-card-foreground">
+              <Label className="text-card-foreground" htmlFor="textarea-rows">
                 Number of Rows
               </Label>
               <Input
+                className="border-border bg-input"
                 id="textarea-rows"
+                max="20"
+                min="2"
+                onChange={(e) =>
+                  onUpdateSettings({
+                    rows: Number.parseInt(e.target.value) || 4,
+                  })
+                }
                 type="number"
                 value={field.settings?.rows || 4}
-                onChange={(e) =>
-                  onUpdateSettings({ rows: parseInt(e.target.value) || 4 })
-                }
-                min="2"
-                max="20"
-                className="bg-input border-border"
               />
             </div>
           </div>
@@ -288,66 +288,72 @@ export function FieldSpecificSettings({
 
       {/* Slider Settings */}
       {isSliderType && (
-        <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
+        <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
           <h3 className="font-medium text-card-foreground">Slider Settings</h3>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
-              <Label htmlFor="slider-min" className="text-card-foreground">
+              <Label className="text-card-foreground" htmlFor="slider-min">
                 Minimum Value
               </Label>
               <Input
+                className="border-border bg-input"
                 id="slider-min"
+                onChange={(e) =>
+                  onUpdateSettings({
+                    min: Number.parseInt(e.target.value) || 0,
+                  })
+                }
                 type="number"
                 value={field.settings?.min || 0}
-                onChange={(e) =>
-                  onUpdateSettings({ min: parseInt(e.target.value) || 0 })
-                }
-                className="bg-input border-border"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <Label htmlFor="slider-max" className="text-card-foreground">
+              <Label className="text-card-foreground" htmlFor="slider-max">
                 Maximum Value
               </Label>
               <Input
+                className="border-border bg-input"
                 id="slider-max"
+                onChange={(e) =>
+                  onUpdateSettings({
+                    max: Number.parseInt(e.target.value) || 100,
+                  })
+                }
                 type="number"
                 value={field.settings?.max || 100}
-                onChange={(e) =>
-                  onUpdateSettings({ max: parseInt(e.target.value) || 100 })
-                }
-                className="bg-input border-border"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <Label htmlFor="slider-step" className="text-card-foreground">
+              <Label className="text-card-foreground" htmlFor="slider-step">
                 Step Size
               </Label>
               <Input
+                className="border-border bg-input"
                 id="slider-step"
+                min="1"
+                onChange={(e) =>
+                  onUpdateSettings({
+                    step: Number.parseInt(e.target.value) || 1,
+                  })
+                }
                 type="number"
                 value={field.settings?.step || 1}
-                onChange={(e) =>
-                  onUpdateSettings({ step: parseInt(e.target.value) || 1 })
-                }
-                min="1"
-                className="bg-input border-border"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <Label htmlFor="slider-default" className="text-card-foreground">
+              <Label className="text-card-foreground" htmlFor="slider-default">
                 Default Value
               </Label>
               <Input
+                className="border-border bg-input"
                 id="slider-default"
-                type="number"
-                value={field.settings?.defaultValue || 50}
                 onChange={(e) =>
                   onUpdateSettings({
-                    defaultValue: parseInt(e.target.value) || 50,
+                    defaultValue: Number.parseInt(e.target.value) || 50,
                   })
                 }
-                className="bg-input border-border"
+                type="number"
+                value={field.settings?.defaultValue || 50}
               />
             </div>
           </div>
@@ -356,35 +362,35 @@ export function FieldSpecificSettings({
 
       {/* Tags Settings */}
       {isTagsType && (
-        <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
+        <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
           <h3 className="font-medium text-card-foreground">Tags Settings</h3>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
-              <Label htmlFor="tags-max" className="text-card-foreground">
+              <Label className="text-card-foreground" htmlFor="tags-max">
                 Maximum Tags
               </Label>
               <Input
+                className="border-border bg-input"
                 id="tags-max"
-                type="number"
-                value={field.settings?.maxTags || 10}
+                min="1"
                 onChange={(e) =>
                   onUpdateSettings({
-                    maxTags: parseInt(e.target.value) || 10,
+                    maxTags: Number.parseInt(e.target.value) || 10,
                   })
                 }
-                min="1"
-                className="bg-input border-border"
+                type="number"
+                value={field.settings?.maxTags || 10}
               />
             </div>
             <div className="flex items-center gap-2">
               <Switch
+                checked={field.settings?.allowDuplicates}
                 id="tags-duplicates"
-                checked={field.settings?.allowDuplicates || false}
                 onCheckedChange={(checked) =>
                   onUpdateSettings({ allowDuplicates: checked })
                 }
               />
-              <Label htmlFor="tags-duplicates" className="text-card-foreground">
+              <Label className="text-card-foreground" htmlFor="tags-duplicates">
                 Allow Duplicate Tags
               </Label>
             </div>
@@ -394,28 +400,26 @@ export function FieldSpecificSettings({
 
       {/* Social Field Settings */}
       {isSocialType && (
-        <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
+        <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
           <h3 className="font-medium text-card-foreground">Social Platforms</h3>
-          <div className="flex flex-wrap gap-3 mb-2">
+          <div className="mb-2 flex flex-wrap gap-3">
             {[
-              { key: "github", label: "GitHub" },
-              { key: "twitter", label: "Twitter" },
-              { key: "linkedin", label: "LinkedIn" },
-              { key: "facebook", label: "Facebook" },
-              { key: "instagram", label: "Instagram" },
-              { key: "youtube", label: "YouTube" },
-              { key: "website", label: "Website" },
+              { key: 'github', label: 'GitHub' },
+              { key: 'twitter', label: 'Twitter' },
+              { key: 'linkedin', label: 'LinkedIn' },
+              { key: 'facebook', label: 'Facebook' },
+              { key: 'instagram', label: 'Instagram' },
+              { key: 'youtube', label: 'YouTube' },
+              { key: 'website', label: 'Website' },
             ].map((platform) => (
               <label
+                className="flex cursor-pointer items-center gap-2"
                 key={platform.key}
-                className="flex items-center gap-2 cursor-pointer"
               >
                 <input
-                  type="checkbox"
-                  checked={
-                    field.settings?.socialPlatforms?.includes(platform.key) ||
-                    false
-                  }
+                  checked={field.settings?.socialPlatforms?.includes(
+                    platform.key
+                  )}
                   onChange={(e) => {
                     const prev = field.settings?.socialPlatforms || [];
                     onUpdateSettings({
@@ -424,31 +428,29 @@ export function FieldSpecificSettings({
                         : prev.filter((p) => p !== platform.key),
                     });
                   }}
+                  type="checkbox"
                 />
                 {platform.label}
               </label>
             ))}
           </div>
-          <h4 className="font-medium text-card-foreground mt-4">
+          <h4 className="mt-4 font-medium text-card-foreground">
             Custom Links
           </h4>
           <div className="flex flex-col gap-2">
             {(field.settings?.customLinks || []).map((link, idx) => (
-              <div key={idx} className="flex gap-2 items-center">
+              <div className="flex items-center gap-2" key={idx}>
                 <Input
-                  type="text"
-                  placeholder="Label"
-                  value={link.label}
                   onChange={(e) => {
                     const updated = [...(field.settings?.customLinks || [])];
                     updated[idx] = { ...updated[idx], label: e.target.value };
                     onUpdateSettings({ customLinks: updated });
                   }}
+                  placeholder="Label"
+                  type="text"
+                  value={link.label}
                 />
                 <Input
-                  type="text"
-                  placeholder="Placeholder (optional)"
-                  value={link.placeholder || ""}
                   onChange={(e) => {
                     const updated = [...(field.settings?.customLinks || [])];
                     updated[idx] = {
@@ -457,34 +459,37 @@ export function FieldSpecificSettings({
                     };
                     onUpdateSettings({ customLinks: updated });
                   }}
+                  placeholder="Placeholder (optional)"
+                  type="text"
+                  value={link.placeholder || ''}
                 />
                 <Button
-                  type="button"
-                  size="icon"
-                  variant="destructive"
                   className="shrink-0"
                   onClick={() => {
                     const updated = [...(field.settings?.customLinks || [])];
                     updated.splice(idx, 1);
                     onUpdateSettings({ customLinks: updated });
                   }}
+                  size="icon"
+                  type="button"
+                  variant="destructive"
                 >
                   ×
                 </Button>
               </div>
             ))}
             <Button
-              type="button"
-              size="sm"
-              variant="outline"
-              className="w-fit mt-2"
+              className="mt-2 w-fit"
               onClick={() => {
                 const updated = [
                   ...(field.settings?.customLinks || []),
-                  { label: "", placeholder: "" },
+                  { label: '', placeholder: '' },
                 ];
                 onUpdateSettings({ customLinks: updated });
               }}
+              size="sm"
+              type="button"
+              variant="outline"
             >
               + Add Custom Link
             </Button>
@@ -492,36 +497,35 @@ export function FieldSpecificSettings({
         </Card>
       )}
 
-      {field.type === "poll" && (
-        <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
+      {field.type === 'poll' && (
+        <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
           <h3 className="font-medium text-card-foreground">Poll Settings</h3>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="poll-options" className="text-card-foreground">
+            <Label className="text-card-foreground" htmlFor="poll-options">
               Poll Options
             </Label>
             <div className="flex gap-2">
               <Input
-                id="poll-option-input"
-                type="text"
-                value={newOption || ""}
-                onChange={(e) => setNewOption(e.target.value)}
-                placeholder="Add option"
                 className="flex-1"
+                id="poll-option-input"
+                onChange={(e) => setNewOption(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter" && newOption.trim()) {
+                  if (e.key === 'Enter' && newOption.trim()) {
                     onUpdateSettings({
                       pollOptions: [
                         ...(field.settings?.pollOptions || []),
                         newOption.trim(),
                       ],
                     });
-                    setNewOption("");
+                    setNewOption('');
                   }
                 }}
+                placeholder="Add option"
+                type="text"
+                value={newOption || ''}
               />
               <Button
-                type="button"
-                size="sm"
+                disabled={!(newOption && newOption.trim())}
                 onClick={() => {
                   if (newOption && newOption.trim()) {
                     onUpdateSettings({
@@ -530,36 +534,37 @@ export function FieldSpecificSettings({
                         newOption.trim(),
                       ],
                     });
-                    setNewOption("");
+                    setNewOption('');
                   }
                 }}
-                disabled={!newOption || !newOption.trim()}
+                size="sm"
+                type="button"
               >
                 Add
               </Button>
             </div>
-            <div className="flex flex-col gap-1 mt-2">
+            <div className="mt-2 flex flex-col gap-1">
               {(field.settings?.pollOptions || []).map((option, idx) => (
-                <div key={idx} className="flex items-center gap-2">
+                <div className="flex items-center gap-2" key={idx}>
                   <Input
-                    type="text"
-                    value={option}
                     className="flex-1"
                     onChange={(e) => {
                       const updated = [...(field.settings?.pollOptions || [])];
                       updated[idx] = e.target.value;
                       onUpdateSettings({ pollOptions: updated });
                     }}
+                    type="text"
+                    value={option}
                   />
                   <Button
-                    type="button"
-                    size="icon"
-                    variant="ghost"
                     onClick={() => {
                       const updated = [...(field.settings?.pollOptions || [])];
                       updated.splice(idx, 1);
                       onUpdateSettings({ pollOptions: updated });
                     }}
+                    size="icon"
+                    type="button"
+                    variant="ghost"
                   >
                     <X />
                   </Button>
@@ -568,43 +573,43 @@ export function FieldSpecificSettings({
             </div>
             <Separator>OR</Separator>
             <div className="flex flex-col gap-2">
-              <Label htmlFor="poll-options" className="text-card-foreground">
+              <Label className="text-card-foreground" htmlFor="poll-options">
                 Fetch Options from API
               </Label>
               <Input
+                className="mb-2 border-border bg-input"
                 id="poll-options-api"
-                type="url"
-                placeholder="https://your-api.com/options"
-                value={field.optionsApi || ""}
                 onChange={(e) =>
                   onFieldUpdate({ ...field, optionsApi: e.target.value })
                 }
-                className="bg-input border-border mb-2"
+                placeholder="https://your-api.com/options"
+                type="url"
+                value={field.optionsApi || ''}
               />
-              <div className="flex gap-2 mb-2">
+              <div className="mb-2 flex gap-2">
                 <Input
+                  className="border-border bg-input"
                   id="poll-valueKey"
-                  type="text"
-                  placeholder="Value key (e.g. id)"
-                  value={field.valueKey || ""}
                   onChange={(e) =>
                     onFieldUpdate({ ...field, valueKey: e.target.value })
                   }
-                  className="bg-input border-border"
+                  placeholder="Value key (e.g. id)"
+                  type="text"
+                  value={field.valueKey || ''}
                 />
                 <Input
+                  className="border-border bg-input"
                   id="poll-labelKey"
-                  type="text"
-                  placeholder="Label key (e.g. name)"
-                  value={field.labelKey || ""}
                   onChange={(e) =>
                     onFieldUpdate({ ...field, labelKey: e.target.value })
                   }
-                  className="bg-input border-border"
+                  placeholder="Label key (e.g. name)"
+                  type="text"
+                  value={field.labelKey || ''}
                 />
               </div>
               {field.optionsApi && (
-                <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded text-xs text-blue-900">
+                <div className="mt-2 rounded border border-blue-200 bg-blue-50 p-2 text-blue-900 text-xs">
                   <strong>API Data Guidance:</strong> This field will fetch
                   options from the API endpoint:
                   <br />
@@ -612,29 +617,29 @@ export function FieldSpecificSettings({
                   <br />
                   <span>
                     The API should return either:
-                    <ul className="list-disc ml-6 mt-1">
+                    <ul className="mt-1 ml-6 list-disc">
                       <li>
-                        <code>["Option 1", "Option 2", ...]</code>{" "}
+                        <code>["Option 1", "Option 2", ...]</code>{' '}
                         <em>(array of strings)</em>
                       </li>
                       <li>
                         <code>
                           [&#123; value: "opt1", label: "Option 1" &#125;, ...]
-                        </code>{" "}
+                        </code>{' '}
                         <em>(array of objects)</em>
                       </li>
                       <li>
-                        <code>&#123; options: [...] &#125;</code>{" "}
+                        <code>&#123; options: [...] &#125;</code>{' '}
                         <em>(object with options array)</em>
                       </li>
                       <li>
                         <code>
                           [&#123; id: "opt1", name: "Option 1" &#125;, ...]
-                        </code>{" "}
+                        </code>{' '}
                         <em>(custom keys)</em>
                       </li>
                     </ul>
-                    <span className="block mt-1">
+                    <span className="mt-1 block">
                       You can specify custom keys above to map your API data.
                       <br />
                       Each option must have a <code>value</code> property (or
@@ -647,67 +652,67 @@ export function FieldSpecificSettings({
           </div>
           <div className="flex items-center gap-2">
             <Switch
-              size={"sm"}
-              id="poll-show-results"
               checked={!!field.settings?.showResults}
+              id="poll-show-results"
               onCheckedChange={(checked) =>
                 onUpdateSettings({ showResults: checked })
               }
+              size={'sm'}
             />
-            <Label htmlFor="poll-show-results" className="text-card-foreground">
+            <Label className="text-card-foreground" htmlFor="poll-show-results">
               Show results after voting
             </Label>
           </div>
         </Card>
       )}
 
-      {field.type === "rating" && (
-        <Card className="p-4 bg-background flex flex-col gap-3 rounded-card ">
-          <h3 className="font-medium text-card-foreground mb-2">
+      {field.type === 'rating' && (
+        <Card className="flex flex-col gap-3 rounded-card bg-background p-4 ">
+          <h3 className="mb-2 font-medium text-card-foreground">
             Rating Settings
           </h3>
-          <div className="grid grid-cols-2 gap-2 items-center">
-            <Label htmlFor="rating-star-count" className="text-card-foreground">
+          <div className="grid grid-cols-2 items-center gap-2">
+            <Label className="text-card-foreground" htmlFor="rating-star-count">
               Number of Stars
             </Label>
             <Input
+              className="w-20"
               id="rating-star-count"
-              type="number"
-              min={1}
               max={10}
-              value={field.settings?.starCount || 5}
+              min={1}
               onChange={(e) =>
                 onUpdateSettings({
                   starCount: Math.max(
                     1,
-                    Math.min(10, parseInt(e.target.value) || 5),
+                    Math.min(10, Number.parseInt(e.target.value) || 5)
                   ),
                 })
               }
-              className="w-20"
+              type="number"
+              value={field.settings?.starCount || 5}
             />
-            <Label htmlFor="rating-star-size" className="text-card-foreground">
+            <Label className="text-card-foreground" htmlFor="rating-star-size">
               Star Size
             </Label>
             <div className="flex items-center gap-2">
               <Slider
-                min={16}
+                className="w-28"
                 max={64}
+                min={16}
+                onValueChange={([val]) => onUpdateSettings({ starSize: val })}
                 step={1}
                 value={[field.settings?.starSize || 28]}
-                onValueChange={([val]) => onUpdateSettings({ starSize: val })}
-                className="w-28"
               />
-              <span className="text-xs text-muted-foreground w-8 text-right">
+              <span className="w-8 text-right text-muted-foreground text-xs">
                 {field.settings?.starSize || 28}px
               </span>
             </div>
-            <Label htmlFor="rating-icon" className="text-card-foreground">
+            <Label className="text-card-foreground" htmlFor="rating-icon">
               Icon Type
             </Label>
             <Select
-              value={field.settings?.icon || "star"}
               onValueChange={(val) => onUpdateSettings({ icon: val })}
+              value={field.settings?.icon || 'star'}
             >
               <SelectTrigger className="w-24">
                 <SelectValue />
@@ -717,79 +722,79 @@ export function FieldSpecificSettings({
                 <SelectItem value="heart">Heart</SelectItem>
               </SelectContent>
             </Select>
-            <Label htmlFor="rating-color" className="text-card-foreground">
+            <Label className="text-card-foreground" htmlFor="rating-color">
               Icon Color
             </Label>
             <Input
+              className="h-8 w-12 border-none bg-transparent p-0"
               id="rating-color"
-              type="color"
-              value={field.settings?.color || "#fbbf24"}
               onChange={(e) => onUpdateSettings({ color: e.target.value })}
-              className="w-12 h-8 p-0 border-none bg-transparent"
+              type="color"
+              value={field.settings?.color || '#fbbf24'}
             />
           </div>
         </Card>
       )}
 
-      {field.type === "checkbox" && (
-        <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
+      {field.type === 'checkbox' && (
+        <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
           <h3 className="font-medium text-card-foreground">Checkbox Options</h3>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="checkbox-options" className="text-card-foreground">
+            <Label className="text-card-foreground" htmlFor="checkbox-options">
               Options
             </Label>
             <div className="flex gap-2">
               <Input
-                id="checkbox-option-input"
-                type="text"
-                value={newOption || ""}
-                onChange={(e) => setNewOption(e.target.value)}
-                placeholder="Add option"
                 className="flex-1"
+                id="checkbox-option-input"
+                onChange={(e) => setNewOption(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter" && newOption.trim()) {
+                  if (e.key === 'Enter' && newOption.trim()) {
                     onFieldUpdate({
                       ...field,
                       options: [...(field.options || []), newOption.trim()],
                     });
-                    setNewOption("");
+                    setNewOption('');
                   }
                 }}
+                placeholder="Add option"
+                type="text"
+                value={newOption || ''}
               />
               <Button
-                type="button"
-                size="sm"
+                disabled={!(newOption && newOption.trim())}
                 onClick={() => {
                   if (newOption && newOption.trim()) {
                     onFieldUpdate({
                       ...field,
                       options: [...(field.options || []), newOption.trim()],
                     });
-                    setNewOption("");
+                    setNewOption('');
                   }
                 }}
-                disabled={!newOption || !newOption.trim()}
+                size="sm"
+                type="button"
               >
                 Add
               </Button>
             </div>
-            <div className="flex flex-col gap-1 mt-2">
+            <div className="mt-2 flex flex-col gap-1">
               {(field.options || []).map((option, idx) => (
-                <div key={idx} className="flex items-center gap-2">
+                <div className="flex items-center gap-2" key={idx}>
                   <span className="flex-1 truncate">
-                    {typeof option === "string"
+                    {typeof option === 'string'
                       ? option
                       : (option.label ?? option.value)}
                   </span>
                   <Button
-                    type="button"
-                    size="icon"
-                    variant="ghost"
                     onClick={() => {
                       const updated = [...(field.options || [])];
                       updated.splice(idx, 1);
                       onFieldUpdate({ ...field, options: updated });
                     }}
+                    size="icon"
+                    type="button"
+                    variant="ghost"
                   >
                     <X />
                   </Button>
@@ -797,23 +802,23 @@ export function FieldSpecificSettings({
               ))}
             </div>
           </div>
-          <div className="flex items-center gap-2 mt-2">
+          <div className="mt-2 flex items-center gap-2">
             <Switch
-              id="checkbox-allow-multiple"
               checked={!!field.settings?.allowMultiple}
+              id="checkbox-allow-multiple"
               onCheckedChange={(checked) =>
                 onUpdateSettings({ allowMultiple: checked })
               }
               size="sm"
             />
             <Label
-              htmlFor="checkbox-allow-multiple"
               className="text-card-foreground"
+              htmlFor="checkbox-allow-multiple"
             >
               Allow multiple selection
             </Label>
           </div>
-          <p className="text-xs text-muted-foreground ml-8">
+          <p className="ml-8 text-muted-foreground text-xs">
             If enabled, users can select more than one option. If disabled, only
             one option can be selected.
           </p>

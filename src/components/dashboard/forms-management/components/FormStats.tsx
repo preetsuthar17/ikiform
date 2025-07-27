@@ -1,14 +1,13 @@
 // Stats component for forms management
-import React from "react";
-
-// UI Components
-import { Card } from "@/components/ui/card";
 
 // Icons
-import { Plus, Eye, Edit } from "lucide-react";
+import { Edit, Eye, Plus } from 'lucide-react';
+import React from 'react';
+// UI Components
+import { Card } from '@/components/ui/card';
 
 // Types
-import type { FormStatsProps } from "../types";
+import type { FormStatsProps } from '../types';
 
 export function FormStats({ forms }: FormStatsProps) {
   if (forms.length === 0) return null;
@@ -18,41 +17,41 @@ export function FormStats({ forms }: FormStatsProps) {
   const draftForms = forms.filter((f) => !f.is_published).length;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      <Card className="p-4 bg-card border-border rounded-card">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <Card className="rounded-card border-border bg-card p-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-primary/10 rounded-card flex items-center justify-center">
-            <Plus className="w-5 h-5 text-primary" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-card bg-primary/10">
+            <Plus className="h-5 w-5 text-primary" />
           </div>
           <div>
-            <p className="text-2xl font-bold text-foreground">{totalForms}</p>
-            <p className="text-sm text-muted-foreground">Total Forms</p>
+            <p className="font-bold text-2xl text-foreground">{totalForms}</p>
+            <p className="text-muted-foreground text-sm">Total Forms</p>
           </div>
         </div>
       </Card>
 
-      <Card className="p-4 bg-card border-border rounded-card">
+      <Card className="rounded-card border-border bg-card p-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-green-600/10 rounded-card flex items-center justify-center">
-            <Eye className="w-5 h-5 text-green-600" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-card bg-green-600/10">
+            <Eye className="h-5 w-5 text-green-600" />
           </div>
           <div>
-            <p className="text-2xl font-bold text-foreground">
+            <p className="font-bold text-2xl text-foreground">
               {publishedForms}
             </p>
-            <p className="text-sm text-muted-foreground">Published</p>
+            <p className="text-muted-foreground text-sm">Published</p>
           </div>
         </div>
       </Card>
 
-      <Card className="p-4 bg-card border-border rounded-card">
+      <Card className="rounded-card border-border bg-card p-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-yellow-600/10 rounded-card flex items-center justify-center">
-            <Edit className="w-5 h-5 text-yellow-600" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-card bg-yellow-600/10">
+            <Edit className="h-5 w-5 text-yellow-600" />
           </div>
           <div>
-            <p className="text-2xl font-bold text-foreground">{draftForms}</p>
-            <p className="text-sm text-muted-foreground">Drafts</p>
+            <p className="font-bold text-2xl text-foreground">{draftForms}</p>
+            <p className="text-muted-foreground text-sm">Drafts</p>
           </div>
         </div>
       </Card>

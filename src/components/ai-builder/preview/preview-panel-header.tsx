@@ -1,12 +1,11 @@
 // Icon imports
-import { ArrowLeft } from "lucide-react";
-
+import { ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
 // UI components imports
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Button } from '@/components/ui/button';
 
 // Local imports
-import { FormSchema } from "@/lib/ai-builder/types";
+import type { FormSchema } from '@/lib/ai-builder/types';
 
 interface PreviewPanelHeaderProps {
   forms: FormSchema[];
@@ -30,24 +29,24 @@ export function PreviewPanelHeader({
   if (isMobile) {
     return (
       <>
-        <div className="md:hidden flex items-center gap-3 border-b bg-card/50 backdrop-blur p-4">
-          <Button asChild variant="ghost" size="icon">
+        <div className="flex items-center gap-3 border-b bg-card/50 p-4 backdrop-blur md:hidden">
+          <Button asChild size="icon" variant="ghost">
             <Link href="/form-builder">
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="h-4 w-4" />
             </Link>
           </Button>
           <div className="inline-flex items-center gap-2">
-            <span className="w-2 h-2 bg-muted-foreground rounded-card"></span>
-            <span className="text-lg font-semibold">Kiko AI</span>
+            <span className="h-2 w-2 rounded-card bg-muted-foreground" />
+            <span className="font-semibold text-lg">Kiko AI</span>
           </div>
         </div>
-        <div className="max-sm:flex hidden gap-2 overflow-x-auto p-3">
+        <div className="hidden gap-2 overflow-x-auto p-3 max-sm:flex">
           {forms.map((form, idx) => (
             <Button
               key={form.id}
-              size="sm"
-              variant={form.id === activeFormId ? "secondary" : "outline"}
               onClick={() => setActiveFormId(form.id)}
+              size="sm"
+              variant={form.id === activeFormId ? 'secondary' : 'outline'}
             >
               {form.prompt
                 ? `${form.prompt.slice(0, 12)}...`
@@ -56,11 +55,11 @@ export function PreviewPanelHeader({
           ))}
         </div>
         {activeForm?.schema && (
-          <div className="max-sm:flex hidden px-3 pb-3">
+          <div className="hidden px-3 pb-3 max-sm:flex">
             <Button
-              className="w-full rounded-card text-base font-semibold py-3"
-              size="lg"
+              className="w-full rounded-card py-3 font-semibold text-base"
               onClick={onUseForm}
+              size="lg"
             >
               Use this form
             </Button>
@@ -71,13 +70,13 @@ export function PreviewPanelHeader({
   }
 
   return (
-    <div className="hidden md:flex items-center justify-between border-b bg-card/50 p-4 gap-4">
+    <div className="hidden items-center justify-between gap-4 border-b bg-card/50 p-4 md:flex">
       <div className="flex gap-2">
         {forms.map((form, idx) => (
           <Button
             key={form.id}
-            variant={form.id === activeFormId ? "secondary" : "outline"}
             onClick={() => setActiveFormId(form.id)}
+            variant={form.id === activeFormId ? 'secondary' : 'outline'}
           >
             {form.prompt ? `${form.prompt.slice(0, 20)}...` : `Form ${idx + 1}`}
           </Button>
@@ -86,13 +85,13 @@ export function PreviewPanelHeader({
       {activeForm?.schema && (
         <div className="flex items-center gap-2">
           <Button
+            onClick={() => setShowJsonModal(true)}
             size="sm"
             variant="outline"
-            onClick={() => setShowJsonModal(true)}
           >
             View JSON
           </Button>
-          <Button size="sm" onClick={onUseForm}>
+          <Button onClick={onUseForm} size="sm">
             Use this form
           </Button>
         </div>

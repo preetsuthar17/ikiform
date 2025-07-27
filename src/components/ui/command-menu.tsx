@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import * as DialogPrimitive from "@radix-ui/react-dialog";
-import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
-import { motion } from "motion/react";
-import { Search, X } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Kbd } from "@/components/ui/kbd";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import * as DialogPrimitive from '@radix-ui/react-dialog';
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
+import { Search, X } from 'lucide-react';
+import { motion } from 'motion/react';
+import * as React from 'react';
+import { Kbd } from '@/components/ui/kbd';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { cn } from '@/lib/utils';
 
 // Utility function to detect OS and return appropriate modifier key
 const getModifierKey = () => {
-  if (typeof navigator === "undefined") return { key: "Ctrl", symbol: "Ctrl" };
+  if (typeof navigator === 'undefined') return { key: 'Ctrl', symbol: 'Ctrl' };
 
   const isMac =
-    navigator.platform.toUpperCase().indexOf("MAC") >= 0 ||
-    navigator.userAgent.toUpperCase().indexOf("MAC") >= 0;
+    navigator.platform.toUpperCase().indexOf('MAC') >= 0 ||
+    navigator.userAgent.toUpperCase().indexOf('MAC') >= 0;
 
-  return isMac ? { key: "cmd", symbol: "⌘" } : { key: "ctrl", symbol: "Ctrl" };
+  return isMac ? { key: 'cmd', symbol: '⌘' } : { key: 'ctrl', symbol: 'Ctrl' };
 };
 
 // Context for sharing state between components
@@ -26,7 +26,7 @@ interface CommandMenuContextType {
   setValue: (value: string) => void;
   selectedIndex: number;
   setSelectedIndex: (index: number) => void;
-  scrollType?: "auto" | "always" | "scroll" | "hover";
+  scrollType?: 'auto' | 'always' | 'scroll' | 'hover';
   scrollHideDelay?: number;
 }
 
@@ -40,7 +40,7 @@ const CommandMenuProvider: React.FC<{
   setValue: (value: string) => void;
   selectedIndex: number;
   setSelectedIndex: (index: number) => void;
-  scrollType?: "auto" | "always" | "scroll" | "hover";
+  scrollType?: 'auto' | 'always' | 'scroll' | 'hover';
   scrollHideDelay?: number;
 }> = ({
   children,
@@ -68,7 +68,7 @@ const CommandMenuProvider: React.FC<{
 const useCommandMenu = () => {
   const context = React.useContext(CommandMenuContext);
   if (!context) {
-    throw new Error("useCommandMenu must be used within CommandMenuProvider");
+    throw new Error('useCommandMenu must be used within CommandMenuProvider');
   }
   return context;
 };
@@ -85,27 +85,27 @@ const CommandMenuTitle = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
-    ref={ref}
     className={cn(
-      "text-lg font-semibold leading-none tracking-tight text-foreground",
-      className,
+      'font-semibold text-foreground text-lg leading-none tracking-tight',
+      className
     )}
+    ref={ref}
     {...props}
   />
 ));
-CommandMenuTitle.displayName = "CommandMenuTitle";
+CommandMenuTitle.displayName = 'CommandMenuTitle';
 
 const CommandMenuDescription = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
+    className={cn('text-muted-foreground text-sm', className)}
     ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
     {...props}
   />
 ));
-CommandMenuDescription.displayName = "CommandMenuDescription";
+CommandMenuDescription.displayName = 'CommandMenuDescription';
 
 // Overlay with backdrop blur
 const CommandMenuOverlay = React.forwardRef<
@@ -113,22 +113,22 @@ const CommandMenuOverlay = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Overlay
-    ref={ref}
     className={cn(
-      "fixed inset-0 z-50 bg-black/50 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-      className,
+      'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50 backdrop-blur-sm data-[state=closed]:animate-out data-[state=open]:animate-in',
+      className
     )}
+    ref={ref}
     {...props}
   />
 ));
-CommandMenuOverlay.displayName = "CommandMenuOverlay";
+CommandMenuOverlay.displayName = 'CommandMenuOverlay';
 
 // Main content container with keyboard navigation
 const CommandMenuContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
     showShortcut?: boolean;
-    scrollType?: "auto" | "always" | "scroll" | "hover";
+    scrollType?: 'auto' | 'always' | 'scroll' | 'hover';
     scrollHideDelay?: number;
   }
 >(
@@ -137,32 +137,32 @@ const CommandMenuContent = React.forwardRef<
       className,
       children,
       showShortcut = true,
-      scrollType = "hover",
+      scrollType = 'hover',
       scrollHideDelay = 600,
       ...props
     },
-    ref,
+    ref
   ) => {
-    const [value, setValue] = React.useState("");
+    const [value, setValue] = React.useState('');
     const [selectedIndex, setSelectedIndex] = React.useState(0);
 
     // Keyboard navigation
     React.useEffect(() => {
       const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "ArrowDown") {
+        if (e.key === 'ArrowDown') {
           e.preventDefault();
           // Logic will be handled by CommandMenuList
-        } else if (e.key === "ArrowUp") {
+        } else if (e.key === 'ArrowUp') {
           e.preventDefault();
           // Logic will be handled by CommandMenuList
-        } else if (e.key === "Enter") {
+        } else if (e.key === 'Enter') {
           e.preventDefault();
           // Logic will be handled by CommandMenuItem
         }
       };
 
-      document.addEventListener("keydown", handleKeyDown);
-      return () => document.removeEventListener("keydown", handleKeyDown);
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
     }, []);
 
     return (
@@ -170,25 +170,25 @@ const CommandMenuContent = React.forwardRef<
         <CommandMenuOverlay />
         <DialogPrimitive.Content asChild ref={ref} {...props}>
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
             className={cn(
-              "fixed left-[50%] top-[30%] z-50 w-[95%] max-w-2xl translate-x-[-50%] translate-y-[-50%]",
-              "bg-background border border-border rounded-card shadow-lg",
-              "overflow-hidden",
-              className,
+              'fixed top-[30%] left-[50%] z-50 w-[95%] max-w-2xl translate-x-[-50%] translate-y-[-50%]',
+              'rounded-card border border-border bg-background shadow-lg',
+              'overflow-hidden',
+              className
             )}
+            exit={{ opacity: 0, scale: 0.95, y: -20 }}
+            initial={{ opacity: 0, scale: 0.95, y: -20 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
           >
-            {" "}
+            {' '}
             <CommandMenuProvider
-              value={value}
-              setValue={setValue}
+              scrollHideDelay={scrollHideDelay}
+              scrollType={scrollType}
               selectedIndex={selectedIndex}
               setSelectedIndex={setSelectedIndex}
-              scrollType={scrollType}
-              scrollHideDelay={scrollHideDelay}
+              setValue={setValue}
+              value={value}
             >
               <VisuallyHidden.Root>
                 <CommandMenuTitle>Command Menu</CommandMenuTitle>
@@ -196,13 +196,13 @@ const CommandMenuContent = React.forwardRef<
 
               {children}
 
-              <CommandMenuClose className="absolute right-3 top-3 rounded-card p-1.5 text-muted-foreground hover:text-foreground hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-colors">
+              <CommandMenuClose className="absolute top-3 right-3 rounded-card p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
                 <X size={14} />
                 <span className="sr-only">Close</span>
               </CommandMenuClose>
 
               {showShortcut && (
-                <div className="absolute right-12 top-3 flex items-center justify-center gap-1 h-6.5">
+                <div className="absolute top-3 right-12 flex h-6.5 items-center justify-center gap-1">
                   <Kbd size="xs">{getModifierKey().symbol}</Kbd>
                   <Kbd size="xs">K</Kbd>
                 </div>
@@ -212,9 +212,9 @@ const CommandMenuContent = React.forwardRef<
         </DialogPrimitive.Content>
       </CommandMenuPortal>
     );
-  },
+  }
 );
-CommandMenuContent.displayName = "CommandMenuContent";
+CommandMenuContent.displayName = 'CommandMenuContent';
 
 // Input component for search
 const CommandMenuInput = React.forwardRef<
@@ -224,30 +224,30 @@ const CommandMenuInput = React.forwardRef<
   }
 >(
   (
-    { className, placeholder = "Type a command or search...", ...props },
-    ref,
+    { className, placeholder = 'Type a command or search...', ...props },
+    ref
   ) => {
     const { value, setValue } = useCommandMenu();
 
     return (
-      <div className="flex items-center border-b border-border px-3 py-0">
+      <div className="flex items-center border-border border-b px-3 py-0">
         <Search className="mr-3 h-4 w-4 shrink-0 text-muted-foreground" />
         <input
+          className={cn(
+            'flex h-12 w-full rounded-none border-0 bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
+            className
+          )}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder={placeholder}
           ref={ref}
           value={value}
-          onChange={(e) => setValue(e.target.value)}
-          className={cn(
-            "flex h-12 w-full rounded-none border-0 bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
-            className,
-          )}
-          placeholder={placeholder}
           {...props}
         />
       </div>
     );
-  },
+  }
 );
-CommandMenuInput.displayName = "CommandMenuInput";
+CommandMenuInput.displayName = 'CommandMenuInput';
 
 // List container for command items with scroll area
 const CommandMenuList = React.forwardRef<
@@ -255,21 +255,21 @@ const CommandMenuList = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement> & {
     maxHeight?: string;
   }
->(({ className, children, maxHeight = "300px", ...props }, ref) => {
+>(({ className, children, maxHeight = '300px', ...props }, ref) => {
   const {
     selectedIndex,
     setSelectedIndex,
-    scrollType = "hover",
+    scrollType = 'hover',
     scrollHideDelay = 600,
   } = useCommandMenu();
 
   // Handle keyboard navigation
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      const items = document.querySelectorAll("[data-command-item]");
+      const items = document.querySelectorAll('[data-command-item]');
       const maxIndex = items.length - 1;
 
-      if (e.key === "ArrowDown") {
+      if (e.key === 'ArrowDown') {
         e.preventDefault();
         const newIndex = Math.min(selectedIndex + 1, maxIndex);
         setSelectedIndex(newIndex);
@@ -278,11 +278,11 @@ const CommandMenuList = React.forwardRef<
         const selectedItem = items[newIndex] as HTMLElement;
         if (selectedItem) {
           selectedItem.scrollIntoView({
-            block: "nearest",
-            behavior: "smooth",
+            block: 'nearest',
+            behavior: 'smooth',
           });
         }
-      } else if (e.key === "ArrowUp") {
+      } else if (e.key === 'ArrowUp') {
         e.preventDefault();
         const newIndex = Math.max(selectedIndex - 1, 0);
         setSelectedIndex(newIndex);
@@ -291,31 +291,31 @@ const CommandMenuList = React.forwardRef<
         const selectedItem = items[newIndex] as HTMLElement;
         if (selectedItem) {
           selectedItem.scrollIntoView({
-            block: "nearest",
-            behavior: "smooth",
+            block: 'nearest',
+            behavior: 'smooth',
           });
         }
       }
     };
 
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, [selectedIndex, setSelectedIndex]);
 
   return (
-    <div ref={ref} className="p-1" {...props}>
+    <div className="p-1" ref={ref} {...props}>
       <ScrollArea
-        className={cn("w-full", className)}
+        className={cn('w-full', className)}
+        scrollHideDelay={scrollHideDelay}
         style={{ height: maxHeight }}
         type={scrollType}
-        scrollHideDelay={scrollHideDelay}
       >
         <div className="flex flex-col gap-1 p-1">{children}</div>
       </ScrollArea>
     </div>
   );
 });
-CommandMenuList.displayName = "CommandMenuList";
+CommandMenuList.displayName = 'CommandMenuList';
 
 // Command group with optional heading
 const CommandMenuGroup = React.forwardRef<
@@ -324,16 +324,16 @@ const CommandMenuGroup = React.forwardRef<
     heading?: string;
   }
 >(({ className, children, heading, ...props }, ref) => (
-  <div ref={ref} className={cn("", className)} {...props}>
+  <div className={cn('', className)} ref={ref} {...props}>
     {heading && (
-      <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wider">
+      <div className="px-2 py-1.5 font-medium text-muted-foreground text-xs uppercase tracking-wider">
         {heading}
       </div>
     )}
     {children}
   </div>
 ));
-CommandMenuGroup.displayName = "CommandMenuGroup";
+CommandMenuGroup.displayName = 'CommandMenuGroup';
 
 // Individual command item
 const CommandMenuItem = React.forwardRef<
@@ -357,7 +357,7 @@ const CommandMenuItem = React.forwardRef<
       index = 0,
       ...props
     },
-    ref,
+    ref
   ) => {
     const { selectedIndex, setSelectedIndex } = useCommandMenu();
     const isSelected = selectedIndex === index;
@@ -371,55 +371,55 @@ const CommandMenuItem = React.forwardRef<
 
     React.useEffect(() => {
       const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Enter" && isSelected) {
+        if (e.key === 'Enter' && isSelected) {
           e.preventDefault();
           handleSelect();
         }
       };
 
-      document.addEventListener("keydown", handleKeyDown);
-      return () => document.removeEventListener("keydown", handleKeyDown);
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
     }, [isSelected, handleSelect]);
 
     return (
       <div
-        ref={ref}
-        data-command-item
         className={cn(
-          "relative flex cursor-default select-none items-center rounded-ele px-2 py-2 text-sm outline-none transition-colors gap-2",
-          "hover:bg-accent hover:text-accent-foreground",
-          isSelected && "bg-accent text-accent-foreground",
-          disabled && "pointer-events-none opacity-50",
-          className,
+          'relative flex cursor-default select-none items-center gap-2 rounded-ele px-2 py-2 text-sm outline-none transition-colors',
+          'hover:bg-accent hover:text-accent-foreground',
+          isSelected && 'bg-accent text-accent-foreground',
+          disabled && 'pointer-events-none opacity-50',
+          className
         )}
+        data-command-item
         onClick={handleSelect}
         onMouseEnter={() => setSelectedIndex(index)}
+        ref={ref}
         {...props}
       >
         {icon && (
-          <div className="h-4 w-4 flex items-center justify-center">{icon}</div>
+          <div className="flex h-4 w-4 items-center justify-center">{icon}</div>
         )}
 
         <div className="flex-1">{children}</div>
 
         {shortcut && (
           <div className="ml-auto flex items-center gap-1">
-            {shortcut.split("+").map((key, i) => (
+            {shortcut.split('+').map((key, i) => (
               <React.Fragment key={key}>
                 {i > 0 && (
                   <span className="text-muted-foreground text-xs">+</span>
                 )}
                 <Kbd size="xs">
-                  {key === "cmd" || key === "⌘"
+                  {key === 'cmd' || key === '⌘'
                     ? getModifierKey().symbol
-                    : key === "shift"
-                      ? "⇧"
-                      : key === "alt"
-                        ? "⌥"
-                        : key === "ctrl"
-                          ? getModifierKey().key === "cmd"
-                            ? "⌃"
-                            : "Ctrl"
+                    : key === 'shift'
+                      ? '⇧'
+                      : key === 'alt'
+                        ? '⌥'
+                        : key === 'ctrl'
+                          ? getModifierKey().key === 'cmd'
+                            ? '⌃'
+                            : 'Ctrl'
                           : key}
                 </Kbd>
               </React.Fragment>
@@ -428,9 +428,9 @@ const CommandMenuItem = React.forwardRef<
         )}
       </div>
     );
-  },
+  }
 );
-CommandMenuItem.displayName = "CommandMenuItem";
+CommandMenuItem.displayName = 'CommandMenuItem';
 
 // Separator between groups
 const CommandMenuSeparator = React.forwardRef<
@@ -438,40 +438,40 @@ const CommandMenuSeparator = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div
+    className={cn('-mx-1 my-1 h-px bg-border', className)}
     ref={ref}
-    className={cn("-mx-1 my-1 h-px bg-border", className)}
     {...props}
   />
 ));
-CommandMenuSeparator.displayName = "CommandMenuSeparator";
+CommandMenuSeparator.displayName = 'CommandMenuSeparator';
 
 // Empty state
 const CommandMenuEmpty = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, children = "No results found.", ...props }, ref) => (
+>(({ className, children = 'No results found.', ...props }, ref) => (
   <div
+    className={cn('py-6 text-center text-muted-foreground text-sm', className)}
     ref={ref}
-    className={cn("py-6 text-center text-sm text-muted-foreground", className)}
     {...props}
   >
     {children}
   </div>
 ));
-CommandMenuEmpty.displayName = "CommandMenuEmpty";
+CommandMenuEmpty.displayName = 'CommandMenuEmpty';
 
 // Hook for global keyboard shortcut
 export const useCommandMenuShortcut = (callback: () => void) => {
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         callback();
       }
     };
 
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, [callback]);
 };
 

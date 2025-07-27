@@ -1,96 +1,96 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import * as SliderPrimitive from "@radix-ui/react-slider";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
+import * as SliderPrimitive from '@radix-ui/react-slider';
+import { cva, type VariantProps } from 'class-variance-authority';
+import * as React from 'react';
+import { cn } from '@/lib/utils';
 
 const sliderVariants = cva(
-  "relative flex w-full touch-none select-none items-center",
+  'relative flex w-full touch-none select-none items-center',
   {
     variants: {
       variant: {
-        default: "",
-        destructive: "",
-        ghost: "",
+        default: '',
+        destructive: '',
+        ghost: '',
       },
       size: {
-        sm: "h-3",
-        default: "h-4",
-        lg: "h-5",
-        xl: "h-6",
+        sm: 'h-3',
+        default: 'h-4',
+        lg: 'h-5',
+        xl: 'h-6',
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: 'default',
+      size: 'default',
     },
-  },
+  }
 );
 
 const sliderTrackVariants = cva(
-  "relative w-full grow overflow-hidden rounded-card",
+  'relative w-full grow overflow-hidden rounded-card',
   {
     variants: {
       variant: {
-        default: "bg-muted",
-        destructive: "bg-destructive/20",
-        ghost: "bg-accent",
+        default: 'bg-muted',
+        destructive: 'bg-destructive/20',
+        ghost: 'bg-accent',
       },
       size: {
-        sm: "h-1.5",
-        default: "h-2",
-        lg: "h-2.5",
-        xl: "h-3",
+        sm: 'h-1.5',
+        default: 'h-2',
+        lg: 'h-2.5',
+        xl: 'h-3',
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: 'default',
+      size: 'default',
     },
-  },
+  }
 );
 
-const sliderRangeVariants = cva("absolute h-full rounded-card", {
+const sliderRangeVariants = cva('absolute h-full rounded-card', {
   variants: {
     variant: {
-      default: "bg-primary",
-      destructive: "bg-destructive",
-      ghost: "bg-foreground",
+      default: 'bg-primary',
+      destructive: 'bg-destructive',
+      ghost: 'bg-foreground',
     },
   },
   defaultVariants: {
-    variant: "default",
+    variant: 'default',
   },
 });
 
 const sliderThumbVariants = cva(
-  "block rounded-card border-2 bg-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:shadow-md",
+  'block rounded-card border-2 bg-background transition-all hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        default: "border-primary hover:border-primary/80",
-        destructive: "border-destructive hover:border-destructive/80",
-        ghost: "border-foreground hover:border-foreground/80",
+        default: 'border-primary hover:border-primary/80',
+        destructive: 'border-destructive hover:border-destructive/80',
+        ghost: 'border-foreground hover:border-foreground/80',
       },
       size: {
-        sm: "h-3 w-3",
-        default: "h-4 w-4",
-        lg: "h-5 w-5",
-        xl: "h-6 w-6",
+        sm: 'h-3 w-3',
+        default: 'h-4 w-4',
+        lg: 'h-5 w-5',
+        xl: 'h-6 w-6',
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: 'default',
+      size: 'default',
     },
-  },
+  }
 );
 
 export interface SliderProps
   extends Omit<
       React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>,
-      "size"
+      'size'
     >,
     VariantProps<typeof sliderVariants> {
   label?: string;
@@ -124,17 +124,17 @@ const Slider = React.forwardRef<
       defaultValue,
       onValueChange,
       disabled,
-      orientation = "horizontal",
+      orientation = 'horizontal',
       ...props
     },
-    ref,
+    ref
   ) => {
     const [internalValue, setInternalValue] = React.useState<number[]>(
-      defaultValue || value || [min],
+      defaultValue || value || [min]
     );
 
     const currentValue = value || internalValue;
-    const effectiveVariant = error ? "destructive" : variant;
+    const effectiveVariant = error ? 'destructive' : variant;
 
     const handleValueChange = React.useCallback(
       (newValue: number[]) => {
@@ -143,7 +143,7 @@ const Slider = React.forwardRef<
         }
         onValueChange?.(newValue);
       },
-      [value, onValueChange],
+      [value, onValueChange]
     );
 
     const sliderId = React.useId();
@@ -151,25 +151,25 @@ const Slider = React.forwardRef<
 
     const sliderElement = (
       <SliderPrimitive.Root
-        ref={ref}
-        id={sliderId}
+        aria-describedby={description ? descriptionId : undefined}
         className={cn(
           sliderVariants({ variant: effectiveVariant, size }),
-          className,
+          className
         )}
-        value={currentValue}
-        onValueChange={handleValueChange}
-        min={min}
-        max={max}
-        step={step}
         disabled={disabled}
+        id={sliderId}
+        max={max}
+        min={min}
+        onValueChange={handleValueChange}
         orientation={orientation}
-        aria-describedby={description ? descriptionId : undefined}
+        ref={ref}
+        step={step}
+        value={currentValue}
         {...props}
       >
         <SliderPrimitive.Track
           className={cn(
-            sliderTrackVariants({ variant: effectiveVariant, size }),
+            sliderTrackVariants({ variant: effectiveVariant, size })
           )}
         >
           <SliderPrimitive.Range
@@ -178,10 +178,10 @@ const Slider = React.forwardRef<
         </SliderPrimitive.Track>
         {currentValue.map((_, index) => (
           <SliderPrimitive.Thumb
-            key={index}
             className={cn(
-              sliderThumbVariants({ variant: effectiveVariant, size }),
+              sliderThumbVariants({ variant: effectiveVariant, size })
             )}
+            key={index}
           />
         ))}
       </SliderPrimitive.Root>
@@ -195,17 +195,17 @@ const Slider = React.forwardRef<
             <div className="flex items-center justify-between">
               {label && (
                 <label
+                  className="font-medium text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   htmlFor={sliderId}
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
                   {label}
                 </label>
               )}
               {showValue && (
-                <span className="text-sm text-muted-foreground">
+                <span className="text-muted-foreground text-sm">
                   {currentValue.length === 1
                     ? formatValue(currentValue[0])
-                    : currentValue.map(formatValue).join(" - ")}
+                    : currentValue.map(formatValue).join(' - ')}
                 </span>
               )}
             </div>
@@ -217,7 +217,7 @@ const Slider = React.forwardRef<
 
             {/* Min/Max labels */}
             {showMinMax && (
-              <div className="flex justify-between text-xs text-muted-foreground">
+              <div className="flex justify-between text-muted-foreground text-xs">
                 <span>{formatValue(min)}</span>
                 <span>{formatValue(max)}</span>
               </div>
@@ -228,12 +228,12 @@ const Slider = React.forwardRef<
           {(description || error) && (
             <div className="flex flex-col gap-1">
               {description && (
-                <p id={descriptionId} className="text-sm text-muted-foreground">
+                <p className="text-muted-foreground text-sm" id={descriptionId}>
                   {description}
                 </p>
               )}
-              {error && typeof error === "string" && (
-                <p className="text-sm text-destructive">{error}</p>
+              {error && typeof error === 'string' && (
+                <p className="text-destructive text-sm">{error}</p>
               )}
             </div>
           )}
@@ -242,7 +242,7 @@ const Slider = React.forwardRef<
     }
 
     return sliderElement;
-  },
+  }
 );
 
 Slider.displayName = SliderPrimitive.Root.displayName;

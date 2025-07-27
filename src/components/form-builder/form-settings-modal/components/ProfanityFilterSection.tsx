@@ -1,19 +1,20 @@
 // External libraries
-import React from "react";
-import { AlertTriangle, Plus, X } from "lucide-react";
+
+import { AlertTriangle, Plus, X } from 'lucide-react';
+import React from 'react';
 
 // UI components
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import { Textarea } from "@/components/ui/textarea";
-import { RadioGroup, RadioItem } from "@/components/ui/radio";
-import { TagInput } from "@/components/ui/tag-input";
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioItem } from '@/components/ui/radio';
+import { Switch } from '@/components/ui/switch';
+import { TagInput } from '@/components/ui/tag-input';
+import { Textarea } from '@/components/ui/textarea';
 
 // Types
-import type { ProfanityFilterSectionProps } from "../types";
+import type { ProfanityFilterSectionProps } from '../types';
 
 export function ProfanityFilterSection({
   localSettings,
@@ -23,30 +24,30 @@ export function ProfanityFilterSection({
 
   return (
     <Card className="p-6">
-      <div className="flex items-center gap-3 mb-4">
-        <AlertTriangle className="w-5 h-5 text-primary" />
-        <h3 className="text-lg font-medium">Profanity Filter</h3>
+      <div className="mb-4 flex items-center gap-3">
+        <AlertTriangle className="h-5 w-5 text-primary" />
+        <h3 className="font-medium text-lg">Profanity Filter</h3>
       </div>
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
           <Switch
-            size="sm"
+            checked={profanityFilter.enabled}
             id="profanity-filter-enabled"
-            checked={profanityFilter.enabled || false}
             onCheckedChange={(checked) =>
               updateProfanityFilter({ enabled: checked })
             }
+            size="sm"
           />
           <Label
+            className="font-medium text-sm"
             htmlFor="profanity-filter-enabled"
-            className="text-sm font-medium"
           >
             Enable Profanity Filter
           </Label>
         </div>
 
         {profanityFilter.enabled ? (
-          <div className="flex flex-col gap-4 border-l-2 border-muted pl-6">
+          <div className="flex flex-col gap-4 border-muted border-l-2 pl-6">
             <FilterModeSection
               profanityFilter={profanityFilter}
               updateProfanityFilter={updateProfanityFilter}
@@ -57,22 +58,22 @@ export function ProfanityFilterSection({
             />
             <WordManagementSection
               title="Custom Words to Filter"
-              words={profanityFilter.customWords || []}
               updateWords={(words) =>
                 updateProfanityFilter({ customWords: words })
               }
+              words={profanityFilter.customWords || []}
             />
             <WordManagementSection
               title="Whitelisted Words"
-              words={profanityFilter.whitelistedWords || []}
               updateWords={(words) =>
                 updateProfanityFilter({ whitelistedWords: words })
               }
+              words={profanityFilter.whitelistedWords || []}
             />
           </div>
         ) : (
-          <div className="bg-muted/30 rounded-card p-4">
-            <p className="text-sm text-muted-foreground">
+          <div className="rounded-card bg-muted/30 p-4">
+            <p className="text-muted-foreground text-sm">
               Profanity filter helps maintain a clean and professional
               environment by automatically detecting and filtering inappropriate
               content in form submissions.
@@ -93,11 +94,10 @@ function FilterModeSection({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <Label className="text-sm font-medium mb-1">Filter Mode</Label>
+      <Label className="mb-1 font-medium text-sm">Filter Mode</Label>
       <RadioGroup
-        value={profanityFilter.replaceWithAsterisks ? "replace" : "strict"}
         onValueChange={(value) => {
-          if (value === "replace") {
+          if (value === 'replace') {
             updateProfanityFilter({
               strictMode: false,
               replaceWithAsterisks: true,
@@ -110,16 +110,17 @@ function FilterModeSection({
           }
         }}
         orientation="vertical"
+        value={profanityFilter.replaceWithAsterisks ? 'replace' : 'strict'}
       >
         <RadioItem
-          value="strict"
-          label="Strict Mode - Reject submissions with profanity"
           id="strict-mode"
+          label="Strict Mode - Reject submissions with profanity"
+          value="strict"
         />
         <RadioItem
-          value="replace"
-          label="Replace Mode - Replace profanity with asterisks"
           id="replace-mode"
+          label="Replace Mode - Replace profanity with asterisks"
+          value="replace"
         />
       </RadioGroup>
     </div>
@@ -135,18 +136,18 @@ function CustomMessageSection({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <Label htmlFor="custom-message" className="text-sm font-medium">
+      <Label className="font-medium text-sm" htmlFor="custom-message">
         Custom Message
       </Label>
       <Textarea
+        className="text-sm"
         id="custom-message"
-        placeholder="Enter a custom message to show when profanity is detected"
-        value={profanityFilter.customMessage || ""}
         onChange={(e) =>
           updateProfanityFilter({ customMessage: e.target.value })
         }
-        className="text-sm"
+        placeholder="Enter a custom message to show when profanity is detected"
         rows={2}
+        value={profanityFilter.customMessage || ''}
       />
     </div>
   );
@@ -163,17 +164,17 @@ function WordManagementSection({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <Label className="text-sm font-medium">{title}</Label>
+      <Label className="font-medium text-sm">{title}</Label>
       <TagInput
-        tags={words}
-        onTagsChange={updateWords}
-        placeholder={`Enter word to ${title.toLowerCase().includes("whitelist") ? "whitelist" : "filter"}`}
-        tagVariant={
-          title.toLowerCase().includes("whitelist") ? "outline" : "secondary"
-        }
-        tagSize="sm"
         className="w-full"
         clearAllButton
+        onTagsChange={updateWords}
+        placeholder={`Enter word to ${title.toLowerCase().includes('whitelist') ? 'whitelist' : 'filter'}`}
+        tagSize="sm"
+        tags={words}
+        tagVariant={
+          title.toLowerCase().includes('whitelist') ? 'outline' : 'secondary'
+        }
       />
     </div>
   );

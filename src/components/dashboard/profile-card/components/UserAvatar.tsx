@@ -1,20 +1,18 @@
 // User avatar component with fallback
-import React from "react";
+import React from 'react';
 
 // UI Components
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-
-// Utils
-import { getUserInitials } from "../utils";
-
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 // Types
-import type { UserAvatarProps } from "../types";
+import type { UserAvatarProps } from '../types';
+// Utils
+import { getUserInitials } from '../utils';
 
-export function UserAvatar({ name, avatarUrl, size = "xl" }: UserAvatarProps) {
+export function UserAvatar({ name, avatarUrl, size = 'xl' }: UserAvatarProps) {
   return (
     <Avatar size={size}>
       {avatarUrl ? (
-        <AvatarImage src={avatarUrl} alt={name} />
+        <AvatarImage alt={name} src={avatarUrl} />
       ) : (
         <AvatarFallback>{getUserInitials(name)}</AvatarFallback>
       )}

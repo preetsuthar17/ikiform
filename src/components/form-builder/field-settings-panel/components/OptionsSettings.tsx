@@ -1,20 +1,18 @@
 // External imports
-import React from "react";
-
-// Component imports
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 
 // Icon imports
-import { Plus, X } from "lucide-react";
-
-// Utility imports
-import { createFieldUpdater, createOptionHandlers } from "../utils";
+import { Plus, X } from 'lucide-react';
+import type React from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+// Component imports
+import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
 
 // Type imports
-import type { OptionsSettingsProps } from "../types";
-import { Separator } from "@/components/ui/separator";
+import type { OptionsSettingsProps } from '../types';
+// Utility imports
+import { createFieldUpdater, createOptionHandlers } from '../utils';
 
 export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
   field,
@@ -23,25 +21,25 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
   const { updateField } = createFieldUpdater(field, onFieldUpdate);
   const { addOption, updateOption, removeOption } = createOptionHandlers(
     field,
-    updateField,
+    updateField
   );
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const {
     sanitizeOptions,
-  } = require("@/components/form-builder/form-field-renderer/utils/sanitizeOptions");
+  } = require('@/components/form-builder/form-field-renderer/utils/sanitizeOptions');
 
   return (
-    <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
+    <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
       <div className="flex items-center justify-between">
         <h3 className="font-medium text-card-foreground">Options</h3>
         <Button
-          variant="outline"
-          size="sm"
-          onClick={addOption}
           className="flex gap-2"
+          onClick={addOption}
+          size="sm"
+          variant="outline"
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="h-4 w-4" />
           Add Option
         </Button>
       </div>
@@ -49,93 +47,93 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
       <div className="flex flex-col gap-2">
         {sanitizeOptions(field.options || []).map(
           (option: any, index: number) => {
-            let value = "";
-            if (typeof option === "string") {
+            let value = '';
+            if (typeof option === 'string') {
               value = option;
             } else if (
               option &&
-              typeof option === "object" &&
-              "value" in option
+              typeof option === 'object' &&
+              'value' in option
             ) {
               value = option.value;
             }
             return (
-              <div key={index} className="flex items-center gap-2">
+              <div className="flex items-center gap-2" key={index}>
                 <Input
-                  value={value}
+                  className="border-border bg-input"
                   onChange={(e) => updateOption(index, e.target.value)}
                   placeholder={`Option ${index + 1}`}
-                  className="bg-input border-border"
+                  value={value}
                 />
                 <Button
-                  variant="ghost"
-                  size="icon"
+                  className="flex gap-2 text-destructive hover:text-destructive/80"
                   onClick={() => removeOption(index)}
-                  className="text-destructive hover:text-destructive/80 flex gap-2"
+                  size="icon"
+                  variant="ghost"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="h-4 w-4" />
                 </Button>
               </div>
             );
-          },
+          }
         )}
         {(field.options || []).length === 0 && (
-          <p className="text-sm text-muted-foreground">No options added yet</p>
+          <p className="text-muted-foreground text-sm">No options added yet</p>
         )}
       </div>
       <Separator>OR</Separator>
       <div className="flex flex-col gap-4">
         <h3 className="font-medium text-card-foreground">Fetch from API</h3>
         <Input
+          className="border-border bg-input"
           id="optionsApi"
-          type="url"
-          placeholder="https://your-api.com/options"
-          value={field.optionsApi || ""}
           onChange={(e) => updateField({ optionsApi: e.target.value })}
-          className="bg-input border-border"
+          placeholder="https://your-api.com/options"
+          type="url"
+          value={field.optionsApi || ''}
         />
         <div className="flex gap-2">
           <Input
+            className="border-border bg-input"
             id="valueKey"
-            type="text"
-            placeholder="Value key (e.g. id)"
-            value={field.valueKey || ""}
             onChange={(e) => updateField({ valueKey: e.target.value })}
-            className="bg-input border-border"
+            placeholder="Value key (e.g. id)"
+            type="text"
+            value={field.valueKey || ''}
           />
           <Input
+            className="border-border bg-input"
             id="labelKey"
-            type="text"
-            placeholder="Label key (e.g. name)"
-            value={field.labelKey || ""}
             onChange={(e) => updateField({ labelKey: e.target.value })}
-            className="bg-input border-border"
+            placeholder="Label key (e.g. name)"
+            type="text"
+            value={field.labelKey || ''}
           />
         </div>
         {field.optionsApi && (
-          <div className="flex flex-col gap-2 p-2 bg-blue-50 border border-blue-200 rounded text-xs text-blue-900">
+          <div className="flex flex-col gap-2 rounded border border-blue-200 bg-blue-50 p-2 text-blue-900 text-xs">
             <strong>API Data Guidance:</strong> This field will fetch options
             from the API endpoint:
             <span className="font-mono text-xs">{field.optionsApi}</span>
             <span>
               The API should return either:
-              <ul className="list-disc ml-6">
+              <ul className="ml-6 list-disc">
                 <li>
-                  <code>["Option 1", "Option 2", ...]</code>{" "}
+                  <code>["Option 1", "Option 2", ...]</code>{' '}
                   <em>(array of strings)</em>
                 </li>
                 <li>
                   <code>
                     [&#123; value: "opt1", label: "Option 1" &#125;, ...]
-                  </code>{" "}
+                  </code>{' '}
                   <em>(array of objects)</em>
                 </li>
                 <li>
-                  <code>&#123; options: [...] &#125;</code>{" "}
+                  <code>&#123; options: [...] &#125;</code>{' '}
                   <em>(object with options array)</em>
                 </li>
                 <li>
-                  <code>[&#123; id: "opt1", name: "Option 1" &#125;, ...]</code>{" "}
+                  <code>[&#123; id: "opt1", name: "Option 1" &#125;, ...]</code>{' '}
                   <em>(custom keys)</em>
                 </li>
               </ul>

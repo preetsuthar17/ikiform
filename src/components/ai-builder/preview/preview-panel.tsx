@@ -1,9 +1,9 @@
 // UI components imports
-import { FormPreview } from "@/components/form-builder/form-preview";
+import { FormPreview } from '@/components/form-builder/form-preview';
 
 // Local imports
-import { PreviewPanelProps } from "@/lib/ai-builder/types";
-import { PreviewPanelHeader } from "./preview-panel-header";
+import type { PreviewPanelProps } from '@/lib/ai-builder/types';
+import { PreviewPanelHeader } from './preview-panel-header';
 
 export function PreviewPanel({
   forms,
@@ -16,44 +16,44 @@ export function PreviewPanel({
   const handleUseForm = () => {
     if (activeForm?.schema) {
       localStorage.setItem(
-        "importedFormSchema",
-        JSON.stringify(activeForm.schema),
+        'importedFormSchema',
+        JSON.stringify(activeForm.schema)
       );
-      router.push("/form-builder");
+      router.push('/form-builder');
     }
   };
 
   return (
-    <div className="flex flex-col flex-1 h-full gap-4">
+    <div className="flex h-full flex-1 flex-col gap-4">
       <PreviewPanelHeader
-        forms={forms}
-        activeFormId={activeFormId}
-        setActiveFormId={setActiveFormId}
         activeForm={activeForm}
-        setShowJsonModal={setShowJsonModal}
-        onUseForm={handleUseForm}
+        activeFormId={activeFormId}
+        forms={forms}
         isMobile={true}
+        onUseForm={handleUseForm}
+        setActiveFormId={setActiveFormId}
+        setShowJsonModal={setShowJsonModal}
       />
       <PreviewPanelHeader
-        forms={forms}
-        activeFormId={activeFormId}
-        setActiveFormId={setActiveFormId}
         activeForm={activeForm}
-        setShowJsonModal={setShowJsonModal}
-        onUseForm={handleUseForm}
+        activeFormId={activeFormId}
+        forms={forms}
         isMobile={false}
+        onUseForm={handleUseForm}
+        setActiveFormId={setActiveFormId}
+        setShowJsonModal={setShowJsonModal}
       />
-      <div className="flex-1 overflow-auto md:p-6 p-3 my-12">
+      <div className="my-12 flex-1 overflow-auto p-3 md:p-6">
         {activeForm?.schema ? (
           <FormPreview
-            schema={activeForm.schema}
-            selectedFieldId={null}
+            onFieldDelete={() => {}}
             onFieldSelect={() => {}}
             onFieldsReorder={() => {}}
-            onFieldDelete={() => {}}
+            schema={activeForm.schema}
+            selectedFieldId={null}
           />
         ) : (
-          <div className="text-muted-foreground flex items-center justify-center text-center">
+          <div className="flex items-center justify-center text-center text-muted-foreground">
             No form selected.
           </div>
         )}

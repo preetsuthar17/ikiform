@@ -1,16 +1,16 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function Privacy() {
   return (
-    <article className="max-w-4xl mx-auto px-4 py-10 flex flex-col gap-12 legal">
+    <article className="legal mx-auto flex max-w-4xl flex-col gap-12 px-4 py-10">
       <section className="flex flex-col gap-4">
-        <h1 className="text-4xl font-bold">Privacy Policy</h1>
-        <div className="text-sm text-muted-foreground">
+        <h1 className="font-bold text-4xl">Privacy Policy</h1>
+        <div className="text-muted-foreground text-sm">
           Last updated: 06th July 2025
         </div>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">1. Introduction</h2>
+        <h2 className="font-semibold text-2xl">1. Introduction</h2>
         <p>
           Welcome to Ikiform ("us", "we", or "our") which operates Ikiform
           (website/mobile application) (hereinafter referred to as "Service").
@@ -27,8 +27,8 @@ export default function Privacy() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">2. Definitions</h2>
-        <ul className="list-disc pl-6 flex flex-col gap-1">
+        <h2 className="font-semibold text-2xl">2. Definitions</h2>
+        <ul className="flex list-disc flex-col gap-1 pl-6">
           <li>
             <b>Cookies</b>: Small files stored on your device (computer or
             mobile device);
@@ -69,7 +69,7 @@ export default function Privacy() {
         </ul>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">
+        <h2 className="font-semibold text-2xl">
           3. Information Collection and Use
         </h2>
         <p>
@@ -78,17 +78,17 @@ export default function Privacy() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">4. Types of Data Collected</h2>
+        <h2 className="font-semibold text-2xl">4. Types of Data Collected</h2>
         <div className="flex flex-col gap-4">
           <div>
-            <h3 className="text-lg font-semibold">a. Personal Data</h3>
+            <h3 className="font-semibold text-lg">a. Personal Data</h3>
             <p>
               While using our Service, we may ask you to provide us with certain
               personally identifiable information that can be used to contact or
               identify you ("Personal Data"). Personally identifiable
               information may include, but is not limited to:
             </p>
-            <ul className="list-disc pl-6 flex flex-col gap-1">
+            <ul className="flex list-disc flex-col gap-1 pl-6">
               <li>Email address;</li>
               <li>First name and last name;</li>
               <li>Phone number;</li>
@@ -100,10 +100,10 @@ export default function Privacy() {
               marketing or promotional materials and other information that may
               be of interest to you. You may opt out of receiving any, or all,
               of these communications from us by following the unsubscribe link
-              or by emailing to{" "}
+              or by emailing to{' '}
               <Link
-                href="mailto:hi@ikiform.com"
                 className="text-blue-500 underline"
+                href="mailto:hi@ikiform.com"
               >
                 hi@ikiform.com
               </Link>
@@ -111,7 +111,7 @@ export default function Privacy() {
             </p>
           </div>
           <div>
-            <h3 className="text-lg font-semibold">b. Usage Data</h3>
+            <h3 className="font-semibold text-lg">b. Usage Data</h3>
             <p>
               We may also collect information that your browser sends whenever
               you visit our Service or when you access Service by or through a
@@ -131,9 +131,9 @@ export default function Privacy() {
         </div>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">5. Use of Data</h2>
+        <h2 className="font-semibold text-2xl">5. Use of Data</h2>
         <p>Ikiform uses the collected data for various purposes such as:</p>
-        <ul className="list-disc pl-6 flex flex-col gap-1">
+        <ul className="flex list-disc flex-col gap-1 pl-6">
           <li>To provide and maintain our Service;</li>
           <li>To notify you about changes to our Service;</li>
           <li>
@@ -171,7 +171,7 @@ export default function Privacy() {
         </ul>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">6. Retention of Data</h2>
+        <h2 className="font-semibold text-2xl">6. Retention of Data</h2>
         <p>
           We will retain your Personal Data only for as long as is necessary for
           the purposes set out in this Privacy Policy. We will retain and use
@@ -188,7 +188,7 @@ export default function Privacy() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">7. Transfer of Data</h2>
+        <h2 className="font-semibold text-2xl">7. Transfer of Data</h2>
         <p>
           Your information, including Personal Data, may be transferred to and
           maintained on computers located outside of your state, province,
@@ -212,15 +212,15 @@ export default function Privacy() {
           including the security of your data and other personal information.
         </p>
         <p>
-          For more details about our subprocessors, please see our{" "}
-          <Link href="/legal/gdpr" className="text-blue-500 underline">
+          For more details about our subprocessors, please see our{' '}
+          <Link className="text-blue-500 underline" href="/legal/gdpr">
             GDPR Compliance Page
           </Link>
           .
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">8. Payments</h2>
+        <h2 className="font-semibold text-2xl">8. Payments</h2>
         <p>
           We may provide paid products and/or services within Service. In that
           case, we use third-party services for payment processing (e.g. payment
@@ -234,7 +234,7 @@ export default function Privacy() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">
+        <h2 className="font-semibold text-2xl">
           9. Changes to This Privacy Policy
         </h2>
         <p>
@@ -248,13 +248,13 @@ export default function Privacy() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">10. Contact Us</h2>
+        <h2 className="font-semibold text-2xl">10. Contact Us</h2>
         <p>
           If you have any questions about this Privacy Policy, please contact
-          us:{" "}
+          us:{' '}
           <Link
-            href="mailto:hi@ikiform.com"
             className="text-blue-500 underline"
+            href="mailto:hi@ikiform.com"
           >
             hi@ikiform.com
           </Link>

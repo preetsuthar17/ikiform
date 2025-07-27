@@ -1,5 +1,5 @@
-import { OptimizedImage } from "./optimized-image";
-import { Star } from "lucide-react";
+import { Star } from 'lucide-react';
+import { OptimizedImage } from './optimized-image';
 
 export default function Review({
   name,
@@ -14,26 +14,26 @@ export default function Review({
 }) {
   return (
     <>
-      <div className="flex items-center justify-center max-w-xl mx-auto flex-col gap-8">
+      <div className="mx-auto flex max-w-xl flex-col items-center justify-center gap-8">
         <div className="flex items-center gap-1">
-          <Star size={20} fill="#eab308" stroke="none" />
-          <Star size={20} fill="#eab308" stroke="none" />
-          <Star size={20} fill="#eab308" stroke="none" />
-          <Star size={20} fill="#eab308" stroke="none" />
-          <Star size={20} fill="#eab308" stroke="none" />
+          <Star fill="#eab308" size={20} stroke="none" />
+          <Star fill="#eab308" size={20} stroke="none" />
+          <Star fill="#eab308" size={20} stroke="none" />
+          <Star fill="#eab308" size={20} stroke="none" />
+          <Star fill="#eab308" size={20} stroke="none" />
         </div>
         <p className="text-center">{review}</p>
         <div className="flex items-center justify-center gap-3">
-          <div className="rounded-card overflow-ellipsis">
+          <div className="overflow-ellipsis rounded-card">
             <OptimizedImage
-              src={image}
-              width={45}
-              height={45}
               alt={name}
               className="rounded-card"
+              height={45}
+              src={image}
+              width={45}
             />
           </div>
-          <div className="flex items-start justify-center flex-col">
+          <div className="flex flex-col items-start justify-center">
             <p>{name}</p>
             <p className="text-muted-foreground text-sm">{role}</p>
           </div>

@@ -1,23 +1,23 @@
-import React from "react";
-import type { LogicAction } from "./types";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Plus, Trash2 } from "lucide-react";
-import type { FormField } from "@/lib/database";
+import { Plus, Trash2 } from 'lucide-react';
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import {
   Select,
-  SelectTrigger,
-  SelectValue,
   SelectContent,
   SelectItem,
-} from "@/components/ui/select";
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import type { FormField } from '@/lib/database';
+import type { LogicAction } from './types';
 
 const availableActionTypes = [
-  { value: "show", label: "Show Field" },
-  { value: "hide", label: "Hide Field" },
-  { value: "enable", label: "Enable Field" },
-  { value: "disable", label: "Disable Field" },
+  { value: 'show', label: 'Show Field' },
+  { value: 'hide', label: 'Hide Field' },
+  { value: 'enable', label: 'Enable Field' },
+  { value: 'disable', label: 'Disable Field' },
 ];
 
 function ActionListEditor({
@@ -36,8 +36,8 @@ function ActionListEditor({
       ...actions,
       {
         id: `action-${Date.now()}`,
-        type: "show",
-        target: fields[0]?.id || "",
+        type: 'show',
+        target: fields[0]?.id || '',
       },
     ]);
   };
@@ -57,12 +57,12 @@ function ActionListEditor({
   return (
     <div className="space-y-2">
       {actions.map((action, idx) => (
-        <Card key={action.id} className="flex items-center gap-2 p-3">
+        <Card className="flex items-center gap-2 p-3" key={action.id}>
           <Select
-            value={action.type}
             onValueChange={(v) => handleUpdate(idx, { type: v as any })}
+            value={action.type}
           >
-            <SelectTrigger size="sm" className="w-36">
+            <SelectTrigger className="w-36" size="sm">
               <SelectValue placeholder="Action Type" />
             </SelectTrigger>
             <SelectContent>
@@ -74,10 +74,10 @@ function ActionListEditor({
             </SelectContent>
           </Select>
           <Select
-            value={action.target}
             onValueChange={(v) => handleUpdate(idx, { target: v })}
+            value={action.target}
           >
-            <SelectTrigger size="sm" className="w-36">
+            <SelectTrigger className="w-36" size="sm">
               <SelectValue placeholder="Target Field" />
             </SelectTrigger>
             <SelectContent>
@@ -92,18 +92,18 @@ function ActionListEditor({
           {/* Remove value input for set_value, show_message, etc. */}
           {!singleAction && (
             <Button
+              onClick={() => handleDelete(idx)}
               size="icon"
               variant="ghost"
-              onClick={() => handleDelete(idx)}
             >
-              <Trash2 className="w-4 h-4" />
+              <Trash2 className="h-4 w-4" />
             </Button>
           )}
         </Card>
       ))}
       {!singleAction && (
-        <Button size="sm" variant="outline" onClick={handleAddAction}>
-          <Plus className="w-3 h-3 mr-1" /> Add Action
+        <Button onClick={handleAddAction} size="sm" variant="outline">
+          <Plus className="mr-1 h-3 w-3" /> Add Action
         </Button>
       )}
     </div>

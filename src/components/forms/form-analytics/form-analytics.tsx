@@ -1,66 +1,60 @@
-"use client";
+'use client';
 
-// React imports
-import React, { useState, useEffect } from "react";
+// Icon imports
+import {
+  BarChart3,
+  Edit,
+  Eye,
+  Globe,
+  Share,
+  Sparkles,
+  Trash2,
+} from 'lucide-react';
 
 // Next.js imports
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useTheme } from "next-themes";
-
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useTheme } from 'next-themes';
+// React imports
+import React, { useEffect, useState } from 'react';
+import { ConfirmationModal } from '@/components/dashboard/form-delete-confirmation-modal';
+import { ShareFormModal } from '@/components/form-builder/share-form-modal';
+import { Badge } from '@/components/ui/badge';
 // UI component imports
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Loader } from "@/components/ui/loader";
+import { Button } from '@/components/ui/button';
+import { Loader } from '@/components/ui/loader';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-
-// Icon imports
-import {
-  Globe,
-  Eye,
-  BarChart3,
-  Sparkles,
-  Edit,
-  Share,
-  Trash2,
-} from "lucide-react";
-
-// Local hooks
-import {
-  useFormSubmissions,
-  useAnalyticsData,
-  useAnalyticsChat,
-} from "./hooks";
-
+} from '@/components/ui/tooltip';
+import { toast } from '@/hooks/use-toast';
 // Database and utilities
-import { formsDb } from "@/lib/database";
-import { toast } from "@/hooks/use-toast";
-
-// Local utilities
-import { formatDate, getFieldLabel, exportToCSV, exportToJSON } from "./utils";
+import { formsDb } from '@/lib/database';
 
 // Local components
 import {
-  OverviewStats,
   AnalyticsCards,
-  InfoCards,
-  SubmissionsList,
-  SubmissionDetailsModal,
-  FloatingChatButton,
   ChatModal,
+  FloatingChatButton,
+  InfoCards,
+  OverviewStats,
+  SubmissionDetailsModal,
+  SubmissionsList,
   TrendsChart,
-} from "./components";
-import { DropoffAnalytics } from "./components/dropoff-analytics";
-import { ConfirmationModal } from "@/components/dashboard/form-delete-confirmation-modal";
-import { ShareFormModal } from "@/components/form-builder/share-form-modal";
-
+} from './components';
+import { DropoffAnalytics } from './components/dropoff-analytics';
+// Local hooks
+import {
+  useAnalyticsChat,
+  useAnalyticsData,
+  useFormSubmissions,
+} from './hooks';
 // Local types
-import { FormAnalyticsProps } from "./types";
+import type { FormAnalyticsProps } from './types';
+// Local utilities
+import { exportToCSV, exportToJSON, formatDate, getFieldLabel } from './utils';
 
 export function FormAnalytics({ form }: FormAnalyticsProps) {
   const router = useRouter();
@@ -73,7 +67,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const { theme } = useTheme();
 
   const { submissions, loading, refreshing, refreshData } = useFormSubmissions(
-    form.id,
+    form.id
   );
   const analyticsData = useAnalyticsData(form, submissions);
   const {
@@ -106,14 +100,14 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     };
 
     const dataStr = JSON.stringify(submissionData, null, 2);
-    const dataBlob = new Blob([dataStr], { type: "application/json" });
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
     const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement("a");
+    const link = document.createElement('a');
     link.href = url;
     link.download = `submission_${submission.id.slice(-8)}.json`;
     link.click();
     URL.revokeObjectURL(url);
-    toast.success("Submission exported successfully");
+    toast.success('Submission exported successfully');
   };
 
   const handleViewSubmission = (submission: any) => {
@@ -133,11 +127,11 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const handleDeleteForm = async () => {
     try {
       await formsDb.deleteForm(form.id);
-      toast.success("Form deleted successfully");
-      router.push("/dashboard");
+      toast.success('Form deleted successfully');
+      router.push('/dashboard');
     } catch (error) {
-      console.error("Error deleting form:", error);
-      toast.error("Failed to delete form");
+      console.error('Error deleting form:', error);
+      toast.error('Failed to delete form');
     }
   };
 
@@ -151,24 +145,24 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     };
 
     checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center bg-background">
         <div className="mx-auto p-6">
           <div className="flex items-center justify-center py-20">
-            <div className="text-center flex flex-col gap-4">
-              <div className="p-4 rounded-card mx-auto">
+            <div className="flex flex-col gap-4 text-center">
+              <div className="mx-auto rounded-card p-4">
                 <Loader />
               </div>
               <div className="flex flex-col gap-1">
-                <p className="text-foreground font-medium">
+                <p className="font-medium text-foreground">
                   Loading analytics...
                 </p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-muted-foreground text-sm">
                   Fetching your form data and submissions
                 </p>
               </div>
@@ -180,38 +174,38 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background max-w-[95%] mx-auto w-full px-4 py-12">
+    <div className="mx-auto min-h-screen w-full max-w-[95%] bg-background px-4 py-12">
       <div className="mx-auto flex flex-col gap-8">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col gap-4">
-            <Button asChild variant="secondary" className="font-medium">
-              <Link href="/dashboard" className="flex items-center w-fit">
+            <Button asChild className="font-medium" variant="secondary">
+              <Link className="flex w-fit items-center" href="/dashboard">
                 Go to Dashboard
               </Link>
             </Button>
             <div className="flex items-center gap-3">
-              <h1 className="text-3xl font-bold text-foreground">
+              <h1 className="font-bold text-3xl text-foreground">
                 {form.title}
               </h1>
               <Badge
-                variant={form.is_published ? "default" : "secondary"}
                 className="gap-1.5"
+                variant={form.is_published ? 'default' : 'secondary'}
               >
                 {form.is_published ? (
                   <>
-                    <Globe className="w-3 h-3" />
+                    <Globe className="h-3 w-3" />
                     Published
                   </>
                 ) : (
                   <>
-                    <Eye className="w-3 h-3" />
+                    <Eye className="h-3 w-3" />
                     Draft
                   </>
                 )}
               </Badge>
             </div>
-            <p className="text-muted-foreground flex items-center gap-2">
-              <BarChart3 className="w-4 h-4" />
+            <p className="flex items-center gap-2 text-muted-foreground">
+              <BarChart3 className="h-4 w-4" />
               Form Analytics & Submission Data
             </p>
           </div>
@@ -220,11 +214,11 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
-                    variant="secondary"
-                    size="icon"
                     onClick={handleEditForm}
+                    size="icon"
+                    variant="secondary"
                   >
-                    <Edit className="w-4 h-4" />
+                    <Edit className="h-4 w-4" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent size="sm">Edit form</TooltipContent>
@@ -235,11 +229,11 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
-                    variant="secondary"
-                    size="icon"
                     onClick={handleShareForm}
+                    size="icon"
+                    variant="secondary"
                   >
-                    <Share className="w-4 h-4" />
+                    <Share className="h-4 w-4" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent size="sm">Share form</TooltipContent>
@@ -250,26 +244,26 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
+                    className="h-9 w-9 p-0"
+                    onClick={() => setIsDeleteModalOpen(true)}
                     size="icon"
                     variant="destructive"
-                    onClick={() => setIsDeleteModalOpen(true)}
-                    className="h-9 w-9 p-0"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="h-4 w-4" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent size="sm">Delete form</TooltipContent>
               </Tooltip>
             </TooltipProvider>
 
-            <div className="w-px h-6 bg-border mx-2"></div>
+            <div className="mx-2 h-6 w-px bg-border" />
 
             <Button
-              variant="default"
-              onClick={() => setChatOpen(true)}
               className="gap-2 font-medium"
+              onClick={() => setChatOpen(true)}
+              variant="default"
             >
-              <Sparkles className="w-4 h-4" />
+              <Sparkles className="h-4 w-4" />
               Kiko AI
             </Button>
           </div>
@@ -278,70 +272,70 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
         <AnalyticsCards data={analyticsData} />
         <TrendsChart trends={analyticsData.submissionTrends} />
         <DropoffAnalytics form={form} submissions={submissions} />
-        <InfoCards form={form} data={analyticsData} formatDate={formatDate} />
+        <InfoCards data={analyticsData} form={form} formatDate={formatDate} />
         <SubmissionsList
           form={form}
-          submissions={submissions}
+          formatDate={formatDate}
+          getFieldLabel={getFieldLabelForForm}
           loading={loading}
-          refreshing={refreshing}
-          onRefresh={refreshData}
           onExportCSV={handleExportCSV}
           onExportJSON={handleExportJSON}
+          onRefresh={refreshData}
           onViewSubmission={handleViewSubmission}
-          getFieldLabel={getFieldLabelForForm}
-          formatDate={formatDate}
+          refreshing={refreshing}
+          submissions={submissions}
         />
       </div>
       <SubmissionDetailsModal
-        submission={selectedSubmission}
+        form={form}
+        formatDate={formatDate}
+        getFieldLabel={getFieldLabelForForm}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        getFieldLabel={getFieldLabelForForm}
-        formatDate={formatDate}
         onExport={handleExportSubmission}
-        form={form}
+        submission={selectedSubmission}
       />
       <ConfirmationModal
-        open={isDeleteModalOpen}
-        onOpenChange={setIsDeleteModalOpen}
-        title="Delete Form"
-        description={`Are you sure you want to delete "${form.title}"? This action cannot be undone and will permanently remove the form and all its submissions.`}
-        confirmText="Delete Form"
         cancelText="Cancel"
-        variant="destructive"
+        confirmText="Delete Form"
+        description={`Are you sure you want to delete "${form.title}"? This action cannot be undone and will permanently remove the form and all its submissions.`}
         onConfirm={handleDeleteForm}
+        onOpenChange={setIsDeleteModalOpen}
+        open={isDeleteModalOpen}
+        title="Delete Form"
+        variant="destructive"
       />
       <ShareFormModal
-        isOpen={isShareModalOpen}
-        onClose={() => setIsShareModalOpen(false)}
         formId={form?.id || null}
+        isOpen={isShareModalOpen}
         isPublished={!!form?.is_published}
+        onClose={() => setIsShareModalOpen(false)}
         onPublish={async () => {
           await formsDb.togglePublishForm(form.id, true);
-          toast.success("Form published!");
+          toast.success('Form published!');
         }}
       />
       <FloatingChatButton
+        mounted={mounted}
         onClick={() => setChatOpen(true)}
         theme={theme}
-        mounted={mounted}
       />
       <ChatModal
-        isOpen={chatOpen}
-        onClose={() => setChatOpen(false)}
-        isMobile={isMobile}
+        abortController={abortController}
+        chatInput={chatInput}
+        chatInputRef={chatInputRef}
+        chatLoading={chatLoading}
         chatMessages={chatMessages}
         chatStreaming={chatStreaming}
-        streamedContent={streamedContent}
-        chatLoading={chatLoading}
-        messagesEndRef={messagesEndRef}
         chatSuggestions={chatSuggestions}
-        setChatInput={setChatInput}
         handleChatSend={handleChatSend}
-        chatInputRef={chatInputRef}
-        chatInput={chatInput}
-        abortController={abortController}
         handleStopGeneration={handleStopGeneration}
+        isMobile={isMobile}
+        isOpen={chatOpen}
+        messagesEndRef={messagesEndRef}
+        onClose={() => setChatOpen(false)}
+        setChatInput={setChatInput}
+        streamedContent={streamedContent}
       />
     </div>
   );

@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { InboundWebhookFormModal } from "./InboundWebhookFormModal";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import {
+  type InboundWebhookMapping,
   useInboundWebhookManagement,
-  InboundWebhookMapping,
-} from "./hooks/useInboundWebhookManagement";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { ScrollArea } from "@/components/ui/scroll-area";
+} from './hooks/useInboundWebhookManagement';
+import { InboundWebhookFormModal } from './InboundWebhookFormModal';
 
 function InboundWebhookDocsDrawer({
   mapping,
@@ -20,13 +20,13 @@ function InboundWebhookDocsDrawer({
   onClose: () => void;
 }) {
   const [copied, setCopied] = useState<string | null>(null);
-  if (!open || !mapping) return null;
+  if (!(open && mapping)) return null;
   const samplePayload = Object.keys(mapping.mappingRules).reduce(
     (acc, ext) => {
       acc[ext] = `example_${ext}`;
       return acc;
     },
-    {} as Record<string, string>,
+    {} as Record<string, string>
   );
   function handleCopy(text: string, type: string) {
     navigator.clipboard.writeText(text);
@@ -34,58 +34,58 @@ function InboundWebhookDocsDrawer({
     setTimeout(() => setCopied(null), 1200);
   }
   return (
-    <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center bg-black bg-opacity-40">
-      <Card className="bg-white rounded-t-lg md:rounded-lg shadow-lg w-full max-w-lg p-6 max-h-[80vh] overflow-y-auto relative">
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black bg-opacity-40 md:items-center">
+      <Card className="relative max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-t-lg bg-white p-6 shadow-lg md:rounded-lg">
         <Button
-          variant="ghost"
-          size="sm"
+          aria-label="Close"
           className="absolute top-2 right-2"
           onClick={onClose}
-          aria-label="Close"
+          size="sm"
+          variant="ghost"
         >
           &times;
         </Button>
-        <h3 className="text-xl font-bold mb-4">
+        <h3 className="mb-4 font-bold text-xl">
           Inbound Webhook Documentation
         </h3>
         <div className="mb-2">
           <b>Endpoint:</b>
           <div className="flex items-center gap-2">
             <Input
-              className="bg-gray-100 cursor-not-allowed text-xs mt-1 flex-1"
-              value={mapping.endpoint}
-              readOnly
+              className="mt-1 flex-1 cursor-not-allowed bg-gray-100 text-xs"
               disabled
+              readOnly
+              value={mapping.endpoint}
             />
             <Button
+              onClick={() => handleCopy(mapping.endpoint, 'endpoint')}
               size="sm"
               variant="outline"
-              onClick={() => handleCopy(mapping.endpoint, "endpoint")}
             >
-              {copied === "endpoint" ? "Copied!" : "Copy"}
+              {copied === 'endpoint' ? 'Copied!' : 'Copy'}
             </Button>
           </div>
         </div>
         <div className="mb-2">
           <b>Sample Payload:</b>
           <div className="flex items-center gap-2">
-            <pre className="bg-gray-100 rounded p-2 text-xs mt-1 flex-1">
+            <pre className="mt-1 flex-1 rounded bg-gray-100 p-2 text-xs">
               {JSON.stringify(samplePayload, null, 2)}
             </pre>
             <Button
+              onClick={() =>
+                handleCopy(JSON.stringify(samplePayload, null, 2), 'payload')
+              }
               size="sm"
               variant="outline"
-              onClick={() =>
-                handleCopy(JSON.stringify(samplePayload, null, 2), "payload")
-              }
             >
-              {copied === "payload" ? "Copied!" : "Copy"}
+              {copied === 'payload' ? 'Copied!' : 'Copy'}
             </Button>
           </div>
         </div>
         <div className="mb-2">
           <b>Security:</b>
-          <ul className="list-disc ml-6 text-xs">
+          <ul className="ml-6 list-disc text-xs">
             <li>Use a secret or token for authentication if enabled.</li>
             <li>Requests without valid authentication will be rejected.</li>
           </ul>
@@ -101,7 +101,7 @@ export function InboundWebhookList() {
     useState<InboundWebhookMapping | null>(null);
   const [docsOpen, setDocsOpen] = useState(false);
   const [docsMapping, setDocsMapping] = useState<InboundWebhookMapping | null>(
-    null,
+    null
   );
   const {
     mappings,
@@ -144,47 +144,43 @@ export function InboundWebhookList() {
   }
 
   return (
-    <section className="p-4 max-w-3xl mx-auto">
+    <section className="mx-auto max-w-3xl p-4">
       <header className="mb-6 flex items-center justify-between">
-        <h2 className="text-2xl font-bold">Inbound Webhooks</h2>
-        <Button variant="default" onClick={handleAdd} disabled={loading}>
-          {loading ? "Loading..." : "Add Inbound Webhook"}
+        <h2 className="font-bold text-2xl">Inbound Webhooks</h2>
+        <Button disabled={loading} onClick={handleAdd} variant="default">
+          {loading ? 'Loading...' : 'Add Inbound Webhook'}
         </Button>
       </header>
       {loading ? (
-        <div className="text-center py-8">Loading inbound webhooks...</div>
-      ) : !mappings.length ? (
-        <div className="text-center py-8 text-gray-500">
-          No inbound webhooks found.
-        </div>
-      ) : (
+        <div className="py-8 text-center">Loading inbound webhooks...</div>
+      ) : mappings.length ? (
         <ScrollArea className="max-h-[60vh]">
           <ul className="space-y-4">
             {mappings.map((webhook) => (
               <Card
+                className="flex flex-col gap-4 rounded-lg p-4 shadow md:flex-row md:items-center md:justify-between"
                 key={webhook.id}
-                className="rounded-lg shadow p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
               >
                 <div>
-                  <div className="font-mono text-sm text-gray-700 break-all">
+                  <div className="break-all font-mono text-gray-700 text-sm">
                     {webhook.endpoint}
                   </div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    Target Form:{" "}
+                  <div className="mt-1 text-gray-500 text-xs">
+                    Target Form:{' '}
                     <span className="font-semibold">
                       {webhook.targetFormId}
                     </span>
                   </div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    Mapping:{" "}
+                  <div className="mt-1 text-gray-500 text-xs">
+                    Mapping:{' '}
                     {Object.entries(webhook.mappingRules)
                       .map(([ext, form]) => `${ext} → ${form}`)
-                      .join(", ")}
+                      .join(', ')}
                   </div>
-                  <div className="mt-2 text-xs text-gray-500">
-                    Status:{" "}
+                  <div className="mt-2 text-gray-500 text-xs">
+                    Status:{' '}
                     {webhook.enabled ? (
-                      <span className="text-green-600 font-semibold">
+                      <span className="font-semibold text-green-600">
                         Enabled
                       </span>
                     ) : (
@@ -192,28 +188,28 @@ export function InboundWebhookList() {
                     )}
                   </div>
                 </div>
-                <div className="flex gap-2 items-center flex-wrap">
+                <div className="flex flex-wrap items-center gap-2">
                   <Button
-                    variant="secondary"
-                    size="sm"
-                    onClick={() => handleEdit(webhook)}
                     disabled={loading}
+                    onClick={() => handleEdit(webhook)}
+                    size="sm"
+                    variant="secondary"
                   >
                     Edit
                   </Button>
                   <Button
-                    variant="destructive"
-                    size="sm"
-                    onClick={() => handleDelete(webhook.id)}
                     disabled={loading}
+                    onClick={() => handleDelete(webhook.id)}
+                    size="sm"
+                    variant="destructive"
                   >
                     Delete
                   </Button>
                   <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleViewDocs(webhook)}
                     disabled={loading}
+                    onClick={() => handleViewDocs(webhook)}
+                    size="sm"
+                    variant="outline"
                   >
                     View Docs
                   </Button>
@@ -222,21 +218,25 @@ export function InboundWebhookList() {
             ))}
           </ul>
         </ScrollArea>
+      ) : (
+        <div className="py-8 text-center text-gray-500">
+          No inbound webhooks found.
+        </div>
       )}
       <InboundWebhookFormModal
-        open={modalOpen}
+        initialMapping={editingMapping || undefined}
+        loading={loading}
         onClose={() => {
           setModalOpen(false);
           setEditingMapping(null);
         }}
-        initialMapping={editingMapping || undefined}
         onSave={handleSave}
-        loading={loading}
+        open={modalOpen}
       />
       <InboundWebhookDocsDrawer
         mapping={docsMapping}
-        open={docsOpen}
         onClose={() => setDocsOpen(false)}
+        open={docsOpen}
       />
     </section>
   );

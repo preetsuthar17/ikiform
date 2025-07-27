@@ -1,11 +1,9 @@
 // Forms grid component
-import React from "react";
-
-// Local Components
-import { FormCard } from "./FormCard";
-
+import React from 'react';
 // Types
-import type { Form } from "@/lib/database";
+import type { Form } from '@/lib/database';
+// Local Components
+import { FormCard } from './FormCard';
 
 interface FormsGridProps {
   forms: Form[];
@@ -23,15 +21,15 @@ export function FormsGrid({
   onDelete,
 }: FormsGridProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
       {forms.map((form) => (
         <FormCard
-          key={form.id}
           form={form}
-          onEdit={onEdit}
-          onViewAnalytics={onViewAnalytics}
-          onShare={onShare}
+          key={form.id}
           onDelete={onDelete}
+          onEdit={onEdit}
+          onShare={onShare}
+          onViewAnalytics={onViewAnalytics}
         />
       ))}
     </div>

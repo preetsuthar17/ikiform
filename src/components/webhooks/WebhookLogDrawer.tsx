@@ -1,25 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+import { Alert } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   Drawer,
+  DrawerCloseButton,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
-  DrawerCloseButton,
-} from "@/components/ui/drawer";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Loader } from "@/components/ui/loader";
-import { Alert } from "@/components/ui/alert";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
+} from '@/components/ui/drawer';
+import { Loader } from '@/components/ui/loader';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Tabs, TabsContent } from '@/components/ui/tabs';
 
 interface WebhookLog {
   id: string;
   webhook_id: string;
   event: string;
-  status: "success" | "failed" | "pending";
+  status: 'success' | 'failed' | 'pending';
   request_payload: any;
   response_status?: number;
   response_body?: string;
@@ -37,15 +37,15 @@ interface WebhookLogDrawerProps {
 // Simple code block component (no syntax highlighting)
 function CodeBlock({
   code,
-  className = "",
+  className = '',
 }: {
   code: string;
   className?: string;
 }) {
   return (
     <pre
-      className={`rounded bg-muted p-4 text-xs overflow-x-auto whitespace-pre-wrap font-mono ${className}`}
-      style={{ fontFamily: "var(--font-mono, monospace)" }}
+      className={`overflow-x-auto whitespace-pre-wrap rounded bg-muted p-4 font-mono text-xs ${className}`}
+      style={{ fontFamily: 'var(--font-mono, monospace)' }}
     >
       {code}
     </pre>
@@ -54,11 +54,11 @@ function CodeBlock({
 
 // Component to format and display webhook payload
 function PayloadViewer({ payload }: { payload: any }) {
-  const [viewMode, setViewMode] = useState<"formatted" | "raw">("formatted");
+  const [viewMode, setViewMode] = useState<'formatted' | 'raw'>('formatted');
 
   // Parse payload if it's a string
   let parsedPayload = payload;
-  if (typeof payload === "string") {
+  if (typeof payload === 'string') {
     try {
       parsedPayload = JSON.parse(payload);
     } catch {
@@ -77,7 +77,7 @@ function PayloadViewer({ payload }: { payload: any }) {
       if (payload.embeds[0].description) return payload.embeds[0].description;
     }
     // 3. Fallback: undefined
-    return undefined;
+    return;
   }
 
   // Format form fields for display
@@ -87,18 +87,18 @@ function PayloadViewer({ payload }: { payload: any }) {
     return (
       <div className="space-y-3">
         {fields.map((field, index) => (
-          <div key={index} className="border rounded-md p-3 bg-muted/50">
-            <div className="flex items-center gap-2 mb-2">
+          <div className="rounded-md border bg-muted/50 p-3" key={index}>
+            <div className="mb-2 flex items-center gap-2">
               <span className="font-medium text-sm">
                 {field.label || field.id}
               </span>
               {field.type && (
-                <Badge variant="outline" className="text-xs">
+                <Badge className="text-xs" variant="outline">
                   {field.type}
                 </Badge>
               )}
             </div>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-muted-foreground text-sm">
               <span>{formatValue(field.value)}</span>
             </div>
           </div>
@@ -109,27 +109,27 @@ function PayloadViewer({ payload }: { payload: any }) {
 
   // Format individual values
   function formatValue(value: any): string {
-    if (value === null || value === undefined) return "N/A";
-    if (typeof value === "string") return value;
-    if (typeof value === "number" || typeof value === "boolean")
+    if (value === null || value === undefined) return 'N/A';
+    if (typeof value === 'string') return value;
+    if (typeof value === 'number' || typeof value === 'boolean')
       return String(value);
     if (Array.isArray(value)) {
       // If array of objects, show as JSON, else join
-      if (value.length > 0 && typeof value[0] === "object") {
+      if (value.length > 0 && typeof value[0] === 'object') {
         try {
           return JSON.stringify(value, null, 2);
         } catch {
-          return "[Complex Array]";
+          return '[Complex Array]';
         }
       }
-      return value.join(", ");
+      return value.join(', ');
     }
-    if (typeof value === "object") {
+    if (typeof value === 'object') {
       // Show as JSON string, but compact for single-line objects
       try {
         return JSON.stringify(value, null, 2);
       } catch {
-        return "[Complex Object]";
+        return '[Complex Object]';
       }
     }
     return String(value);
@@ -138,13 +138,13 @@ function PayloadViewer({ payload }: { payload: any }) {
   // Helper: get additional data keys (excluding known ones)
   function getAdditionalDataKeys(payload: any) {
     const knownKeys = [
-      "event",
-      "formId",
-      "formName",
-      "submissionId",
-      "ipAddress",
-      "fields",
-      "rawData",
+      'event',
+      'formId',
+      'formName',
+      'submissionId',
+      'ipAddress',
+      'fields',
+      'rawData',
     ];
     return Object.keys(payload).filter((key) => !knownKeys.includes(key));
   }
@@ -156,19 +156,19 @@ function PayloadViewer({ payload }: { payload: any }) {
     return (
       <div className="space-y-4">
         {/* Event Information */}
-        <div className="border rounded-md p-4">
-          <h4 className="font-semibold mb-3 text-sm">Event Information</h4>
+        <div className="rounded-md border p-4">
+          <h4 className="mb-3 font-semibold text-sm">Event Information</h4>
           <div className="grid grid-cols-1 gap-2 text-sm">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Event:</span>
-              <span className="flex items-center justify-center gap-1.5 rounded-[calc(var(--radius)-4px)] border text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border-border text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring shadow-sm/2 h-6 px-2.5">
-                {eventName || "Unknown"}
+              <span className="flex h-6 items-center justify-center gap-1.5 rounded-[calc(var(--radius)-4px)] border border-border px-2.5 font-medium text-foreground text-xs shadow-sm/2 transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+                {eventName || 'Unknown'}
               </span>
             </div>
             {parsedPayload.formId && (
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Form ID:</span>
-                <code className="text-xs bg-muted px-2 py-1 rounded">
+                <code className="rounded bg-muted px-2 py-1 text-xs">
                   {parsedPayload.formId}
                 </code>
               </div>
@@ -182,7 +182,7 @@ function PayloadViewer({ payload }: { payload: any }) {
             {parsedPayload.submissionId && (
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Submission ID:</span>
-                <code className="text-xs bg-muted px-2 py-1 rounded">
+                <code className="rounded bg-muted px-2 py-1 text-xs">
                   {parsedPayload.submissionId}
                 </code>
               </div>
@@ -190,7 +190,7 @@ function PayloadViewer({ payload }: { payload: any }) {
             {parsedPayload.ipAddress && (
               <div className="flex justify-between">
                 <span className="text-muted-foreground">IP Address:</span>
-                <code className="text-xs bg-muted px-2 py-1 rounded">
+                <code className="rounded bg-muted px-2 py-1 text-xs">
                   {parsedPayload.ipAddress}
                 </code>
               </div>
@@ -200,26 +200,26 @@ function PayloadViewer({ payload }: { payload: any }) {
 
         {/* Form Fields */}
         {parsedPayload.fields && (
-          <div className="border rounded-md p-4">
-            <h4 className="font-semibold mb-3 text-sm">Form Fields</h4>
+          <div className="rounded-md border p-4">
+            <h4 className="mb-3 font-semibold text-sm">Form Fields</h4>
             {formatFormFields(parsedPayload.fields)}
           </div>
         )}
 
         {/* Raw Form Data */}
         {parsedPayload.rawData && (
-          <div className="border rounded-md p-4">
-            <h4 className="font-semibold mb-3 text-sm">Raw Form Data</h4>
+          <div className="rounded-md border p-4">
+            <h4 className="mb-3 font-semibold text-sm">Raw Form Data</h4>
             <div className="space-y-2">
               {Object.entries(parsedPayload.rawData).map(([key, value]) => (
                 <div
+                  className="flex items-start justify-between gap-2"
                   key={key}
-                  className="flex justify-between items-start gap-2"
                 >
-                  <span className="text-muted-foreground text-sm font-medium min-w-0 flex-shrink-0">
+                  <span className="min-w-0 flex-shrink-0 font-medium text-muted-foreground text-sm">
                     {key}:
                   </span>
-                  <span className="text-sm text-right break-words">
+                  <span className="break-words text-right text-sm">
                     {formatValue(value)}
                   </span>
                 </div>
@@ -230,36 +230,36 @@ function PayloadViewer({ payload }: { payload: any }) {
 
         {/* Additional Data */}
         {getAdditionalDataKeys(parsedPayload).length > 0 && (
-          <div className="border rounded-md p-4">
-            <h4 className="font-semibold mb-3 text-sm">Additional Data</h4>
+          <div className="rounded-md border p-4">
+            <h4 className="mb-3 font-semibold text-sm">Additional Data</h4>
             <div className="space-y-2">
               {getAdditionalDataKeys(parsedPayload).map((key) => {
                 const value = parsedPayload[key];
                 // For objects/arrays, show as pretty JSON, else as string
                 let displayValue: React.ReactNode;
-                if (typeof value === "object" && value !== null) {
+                if (typeof value === 'object' && value !== null) {
                   displayValue = (
                     <CodeBlock
+                      className="max-w-full overflow-x-auto whitespace-pre-wrap rounded bg-muted p-2 text-xs"
                       code={JSON.stringify(value, null, 2)}
-                      className="text-xs bg-muted rounded p-2 overflow-x-auto whitespace-pre-wrap max-w-full"
                     />
                   );
                 } else {
                   displayValue = (
-                    <span className="text-sm text-right break-words">
+                    <span className="break-words text-right text-sm">
                       {formatValue(value)}
                     </span>
                   );
                 }
                 return (
                   <div
-                    key={key}
                     className="flex flex-col items-start justify-center gap-2"
+                    key={key}
                   >
-                    <span className="text-muted-foreground text-sm font-medium min-w-0 flex-shrink-0">
+                    <span className="min-w-0 flex-shrink-0 font-medium text-muted-foreground text-sm">
                       {key}:
                     </span>
-                    <div className="flex-1 min-w-0">{displayValue}</div>
+                    <div className="min-w-0 flex-1">{displayValue}</div>
                   </div>
                 );
               })}
@@ -273,30 +273,30 @@ function PayloadViewer({ payload }: { payload: any }) {
   function RawView() {
     return (
       <CodeBlock
+        className="overflow-x-auto whitespace-pre-wrap rounded bg-muted p-4 text-xs"
         code={JSON.stringify(parsedPayload, null, 2)}
-        className="bg-muted rounded p-4 text-xs overflow-x-auto whitespace-pre-wrap"
       />
     );
   }
 
   // Use new Tabs API: items + controlled value
   const tabItems = [
-    { id: "formatted", label: "Formatted" },
-    { id: "raw", label: "Raw JSON" },
+    { id: 'formatted', label: 'Formatted' },
+    { id: 'raw', label: 'Raw JSON' },
   ];
 
   return (
     <div className="space-y-4">
       <Tabs
-        items={tabItems}
-        value={viewMode}
-        onValueChange={(value) => setViewMode(value as "formatted" | "raw")}
         className="w-full"
+        items={tabItems}
+        onValueChange={(value) => setViewMode(value as 'formatted' | 'raw')}
+        value={viewMode}
       />
-      <TabsContent value="formatted" activeValue={viewMode} className="mt-4">
+      <TabsContent activeValue={viewMode} className="mt-4" value="formatted">
         <FormattedView />
       </TabsContent>
-      <TabsContent value="raw" activeValue={viewMode} className="mt-4">
+      <TabsContent activeValue={viewMode} className="mt-4" value="raw">
         <RawView />
       </TabsContent>
     </div>
@@ -319,18 +319,18 @@ export function WebhookLogDrawer({
     setError(null);
     try {
       const res = await fetch(`/api/webhook/logs?webhookId=${webhookId}`);
-      if (!res.ok) throw new Error("Failed to fetch logs");
+      if (!res.ok) throw new Error('Failed to fetch logs');
       const data = await res.json();
       setLogs(Array.isArray(data) ? data : []);
     } catch (e: any) {
-      setError(e.message || "Failed to fetch logs");
+      setError(e.message || 'Failed to fetch logs');
     } finally {
       setLoading(false);
     }
   }
 
   useEffect(() => {
-    if (!open || !webhookId) return;
+    if (!(open && webhookId)) return;
     fetchLogs();
     // eslint-disable-next-line
   }, [open, webhookId]);
@@ -339,8 +339,8 @@ export function WebhookLogDrawer({
     if (!webhookId) return;
     try {
       const res = await fetch(`/api/webhook/${webhookId}/resend`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ logId: log.id }),
       });
       const data = await res.json();
@@ -351,86 +351,82 @@ export function WebhookLogDrawer({
   }
 
   return (
-    <Drawer open={open} onOpenChange={onClose} direction="right">
-      <DrawerContent className="max-w-lg w-full">
+    <Drawer direction="right" onOpenChange={onClose} open={open}>
+      <DrawerContent className="w-full max-w-lg">
         <DrawerHeader>
           <DrawerTitle>Webhook Delivery Logs</DrawerTitle>
           <DrawerCloseButton onClick={onClose} />
         </DrawerHeader>
-        <div className="px-4 pb-4 flex flex-col gap-4 h-[100vh]">
+        <div className="flex h-[100vh] flex-col gap-4 px-4 pb-4">
           {loading ? (
-            <div className="flex flex-col items-center justify-center h-64">
+            <div className="flex h-64 flex-col items-center justify-center">
               <Loader size="lg" />
               <span className="mt-4 text-muted-foreground">
                 Loading logs...
               </span>
             </div>
           ) : error ? (
-            <Alert variant="destructive" title="Error">
+            <Alert title="Error" variant="destructive">
               {error}
             </Alert>
-          ) : !logs.length ? (
-            <Alert variant="info" title="No Logs">
-              No webhook delivery logs found for this webhook.
-            </Alert>
-          ) : (
+          ) : logs.length ? (
             <ScrollArea className="flex-1 pr-2">
               <ul className="space-y-4">
                 {logs.map((log) => (
                   <li key={log.id}>
-                    <Card className="shadow-sm border">
-                      <CardContent className="py-4 px-4 flex flex-col gap-2">
+                    <Card className="border shadow-sm">
+                      <CardContent className="flex flex-col gap-2 px-4 py-4">
                         <div className="flex items-center gap-2">
                           <Badge
                             size="sm"
                             variant={
-                              log.status === "success"
-                                ? "default"
-                                : log.status === "failed"
-                                  ? "destructive"
-                                  : "secondary"
+                              log.status === 'success'
+                                ? 'default'
+                                : log.status === 'failed'
+                                  ? 'destructive'
+                                  : 'secondary'
                             }
                           >
                             {log.status.toUpperCase()}
                           </Badge>
-                          <span className="text-xs text-muted-foreground">
+                          <span className="text-muted-foreground text-xs">
                             {new Date(log.timestamp).toLocaleString()}
                           </span>
-                          <span className="ml-auto text-xs text-muted-foreground">
+                          <span className="ml-auto text-muted-foreground text-xs">
                             Attempt {log.attempt + 1}
                           </span>
                         </div>
-                        <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+                        <div className="flex flex-wrap gap-2 text-muted-foreground text-xs">
                           <span>Event: {log.event}</span>
-                          {typeof log.response_status !== "undefined" && (
+                          {typeof log.response_status !== 'undefined' && (
                             <span>Response: {log.response_status}</span>
                           )}
                         </div>
                         {log.response_body && (
-                          <div className="text-xs text-muted-foreground truncate">
-                            <span className="font-medium">Response Body:</span>{" "}
+                          <div className="truncate text-muted-foreground text-xs">
+                            <span className="font-medium">Response Body:</span>{' '}
                             {log.response_body}
                           </div>
                         )}
                         {log.error && (
-                          <Alert variant="destructive" className="mt-2">
+                          <Alert className="mt-2" variant="destructive">
                             <span className="text-xs">Error: {log.error}</span>
                           </Alert>
                         )}
-                        <div className="flex gap-2 mt-2">
-                          {log.status === "failed" && (
+                        <div className="mt-2 flex gap-2">
+                          {log.status === 'failed' && (
                             <Button
-                              variant="default"
-                              size="sm"
                               onClick={() => handleResend(log)}
+                              size="sm"
+                              variant="default"
                             >
                               Resend
                             </Button>
                           )}
                           <Button
-                            variant="outline"
-                            size="sm"
                             onClick={() => setViewPayload(log.request_payload)}
+                            size="sm"
+                            variant="outline"
                           >
                             View Payload
                           </Button>
@@ -441,21 +437,25 @@ export function WebhookLogDrawer({
                 ))}
               </ul>
             </ScrollArea>
+          ) : (
+            <Alert title="No Logs" variant="info">
+              No webhook delivery logs found for this webhook.
+            </Alert>
           )}
         </div>
         {/* Enhanced Payload Modal */}
         {viewPayload && (
           <Drawer
-            open={!!viewPayload}
-            onOpenChange={() => setViewPayload(null)}
             direction="right"
+            onOpenChange={() => setViewPayload(null)}
+            open={!!viewPayload}
           >
-            <DrawerContent className="max-w-2xl w-full">
+            <DrawerContent className="w-full max-w-2xl">
               <DrawerHeader>
                 <DrawerTitle>Webhook Payload</DrawerTitle>
                 <DrawerCloseButton onClick={() => setViewPayload(null)} />
               </DrawerHeader>
-              <div className="px-4 pb-4 h-[100vh] overflow-hidden">
+              <div className="h-[100vh] overflow-hidden px-4 pb-4">
                 <ScrollArea className="h-full">
                   <PayloadViewer payload={viewPayload} />
                 </ScrollArea>

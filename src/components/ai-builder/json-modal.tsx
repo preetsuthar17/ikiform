@@ -1,25 +1,23 @@
 // React imports
-import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
 
-// UI components imports
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Button } from "@/components/ui/button";
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
+// Syntax highlighting
+import { createHighlighter } from 'shiki';
+import { Button } from '@/components/ui/button';
 import {
   Modal,
+  ModalClose,
   ModalContent,
+  ModalFooter,
   ModalHeader,
   ModalTitle,
-  ModalFooter,
-  ModalClose,
-} from "@/components/ui/modal";
-
-// Syntax highlighting
-import { createHighlighter } from "shiki";
-
+} from '@/components/ui/modal';
+// UI components imports
+import { ScrollArea } from '@/components/ui/scroll-area';
+import type { FormSchema } from '@/lib/ai-builder/types';
 // Local imports
-import { CopyButton } from "./copy-button";
-import { FormSchema } from "@/lib/ai-builder/types";
+import { CopyButton } from './copy-button';
 
 interface JsonModalProps {
   isOpen: boolean;
@@ -28,7 +26,7 @@ interface JsonModalProps {
 }
 
 export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
-  const [highlightedCode, setHighlightedCode] = useState<string>("");
+  const [highlightedCode, setHighlightedCode] = useState<string>('');
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -37,23 +35,23 @@ export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
     const highlightCode = async () => {
       try {
         const highlighter = await createHighlighter({
-          themes: ["github-dark", "github-light"],
-          langs: ["json"],
+          themes: ['github-dark', 'github-light'],
+          langs: ['json'],
         });
 
         const jsonString = JSON.stringify(activeForm.schema, null, 2);
-        const selectedTheme = theme === "dark" ? "github-dark" : "github-light";
+        const selectedTheme = theme === 'dark' ? 'github-dark' : 'github-light';
         const html = highlighter.codeToHtml(jsonString, {
-          lang: "json",
+          lang: 'json',
           theme: selectedTheme,
         });
 
         setHighlightedCode(html);
       } catch (error) {
-        console.error("Error highlighting code:", error);
+        console.error('Error highlighting code:', error);
         // Fallback to plain text
         setHighlightedCode(
-          `<pre class="whitespace-pre-wrap break-words">${JSON.stringify(activeForm.schema, null, 2)}</pre>`,
+          `<pre class="whitespace-pre-wrap break-words">${JSON.stringify(activeForm.schema, null, 2)}</pre>`
         );
       }
     };
@@ -64,14 +62,14 @@ export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
   if (!activeForm?.schema) return null;
 
   return (
-    <Modal open={isOpen} onOpenChange={onClose}>
-      <ModalContent className="max-w-lg w-[95vw] flex flex-col gap-4">
+    <Modal onOpenChange={onClose} open={isOpen}>
+      <ModalContent className="flex w-[95vw] max-w-lg flex-col gap-4">
         <ModalHeader>
           <ModalTitle>Form JSON Schema</ModalTitle>
         </ModalHeader>
-        <ScrollArea className="bg-muted rounded-ele text-xs max-h-[60vh] min-h-[120px] h-[40rem] w-full border p-4 gap-4">
+        <ScrollArea className="h-[40rem] max-h-[60vh] min-h-[120px] w-full gap-4 rounded-ele border bg-muted p-4 text-xs">
           <div
-            className="shiki-container text-xs [&_pre]:m-0 [&_pre]:p-0 [&_pre]:bg-transparent [&_pre]:whitespace-pre-wrap [&_pre]:break-words"
+            className="shiki-container text-xs [&_pre]:m-0 [&_pre]:whitespace-pre-wrap [&_pre]:break-words [&_pre]:bg-transparent [&_pre]:p-0"
             dangerouslySetInnerHTML={{ __html: highlightedCode }}
           />
         </ScrollArea>

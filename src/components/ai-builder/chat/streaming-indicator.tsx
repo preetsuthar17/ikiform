@@ -1,5 +1,5 @@
-import { forwardRef, memo } from "react";
-import { motion } from "motion/react";
+import { motion } from 'motion/react';
+import { forwardRef, memo } from 'react';
 
 interface StreamingIndicatorProps {
   streamedContent: string;
@@ -12,9 +12,9 @@ export const StreamingIndicator = memo(
       if (streamError) {
         return (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="my-2 p-3 rounded-card bg-destructive/10 border border-destructive text-sm"
+            className="my-2 rounded-card border border-destructive bg-destructive/10 p-3 text-sm"
+            initial={{ opacity: 0, y: 20 }}
           >
             {streamError}
           </motion.div>
@@ -23,14 +23,14 @@ export const StreamingIndicator = memo(
 
       return (
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="my-2 p-3 rounded-card bg-muted/50 border border-border text-sm font-mono"
+          className="my-2 rounded-card border border-border bg-muted/50 p-3 font-mono text-sm"
+          initial={{ opacity: 0, y: 20 }}
         >
           <div
-            className="text-xs text-muted-foreground flex flex-col gap-2 h-[90px] overflow-auto scrollbar-none"
+            className="scrollbar-none flex h-[90px] flex-col gap-2 overflow-auto text-muted-foreground text-xs"
             ref={ref}
-            style={{ scrollBehavior: "smooth" }}
+            style={{ scrollBehavior: 'smooth' }}
           >
             Generating form...
             <pre className="whitespace-pre-wrap break-words">
@@ -39,8 +39,8 @@ export const StreamingIndicator = memo(
           </div>
         </motion.div>
       );
-    },
-  ),
+    }
+  )
 );
 
-StreamingIndicator.displayName = "StreamingIndicator";
+StreamingIndicator.displayName = 'StreamingIndicator';

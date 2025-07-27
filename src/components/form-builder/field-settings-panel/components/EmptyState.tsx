@@ -1,17 +1,17 @@
 // External imports
-import React from "react";
+import type React from 'react';
 
 // Type imports
-import type { EmptyStateProps } from "../types";
+import type { EmptyStateProps } from '../types';
 
 export const EmptyState: React.FC<EmptyStateProps> = ({ onClose }) => {
   return (
-    <div className="h-full bg-background border-border flex flex-col items-center justify-center gap-2 pt-12">
-      <div className="p-6 bg-accent/50 rounded-card flex flex-col items-center">
-        <div className="w-12 h-12 bg-muted rounded-ele"></div>
+    <div className="flex h-full flex-col items-center justify-center gap-2 border-border bg-background pt-12">
+      <div className="flex flex-col items-center rounded-card bg-accent/50 p-6">
+        <div className="h-12 w-12 rounded-ele bg-muted" />
       </div>
-      <p className="text-lg font-medium text-foreground">No field selected</p>
-      <p className="text-sm text-muted-foreground">
+      <p className="font-medium text-foreground text-lg">No field selected</p>
+      <p className="text-muted-foreground text-sm">
         Click on a field in the preview to edit its settings
       </p>
     </div>

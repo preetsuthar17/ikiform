@@ -1,19 +1,16 @@
 // Individual form card component
-import React from "react";
-
+import React from 'react';
+import { ShareFormModal } from '@/components/form-builder/share-form-modal';
+import { Badge } from '@/components/ui/badge';
 // UI Components
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-
-// Local Components
-import { FormActions } from "./FormActions";
-import { ShareFormModal } from "@/components/form-builder/share-form-modal";
+import { Card } from '@/components/ui/card';
+// Types
+import type { FormCardProps } from '../types';
 
 // Utils
-import { getTotalFields, formatDate } from "../utils";
-
-// Types
-import type { FormCardProps } from "../types";
+import { formatDate, getTotalFields } from '../utils';
+// Local Components
+import { FormActions } from './FormActions';
 
 export function FormCard({
   form,
@@ -32,32 +29,32 @@ export function FormCard({
   };
 
   return (
-    <Card className="group p-6 bg-card border-border rounded-card cursor-pointer">
+    <Card className="group cursor-pointer rounded-card border-border bg-card p-6">
       {/* Card Header */}
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-foreground mb-2 line-clamp-2 text-lg leading-tight">
+      <div className="mb-4 flex items-start justify-between">
+        <div className="min-w-0 flex-1">
+          <h3 className="mb-2 line-clamp-2 font-semibold text-foreground text-lg leading-tight">
             {form.title}
           </h3>
           {form.description && (
-            <p className="text-muted-foreground text-sm line-clamp-2 leading-relaxed">
+            <p className="line-clamp-2 text-muted-foreground text-sm leading-relaxed">
               {form.description}
             </p>
           )}
         </div>
         <Badge
-          variant={form.is_published ? "default" : "secondary"}
           className="flex-shrink-0 font-medium"
+          variant={form.is_published ? 'default' : 'secondary'}
         >
-          {form.is_published ? "Published" : "Draft"}
+          {form.is_published ? 'Published' : 'Draft'}
         </Badge>
       </div>
 
       {/* Metadata */}
-      <div className="flex items-center justify-between text-sm text-muted-foreground mb-6 pt-2 border-t border-border/50">
+      <div className="mb-6 flex items-center justify-between border-border/50 border-t pt-2 text-muted-foreground text-sm">
         <span className="flex items-center gap-1">
-          <span className="w-2 h-2 bg-accent rounded-card"></span>
-          {totalFields} field{totalFields !== 1 ? "s" : ""}
+          <span className="h-2 w-2 rounded-card bg-accent" />
+          {totalFields} field{totalFields !== 1 ? 's' : ''}
         </span>
         <span>Updated {formattedDate}</span>
       </div>
@@ -65,16 +62,16 @@ export function FormCard({
       {/* Action Buttons */}
       <FormActions
         form={form}
-        onEdit={onEdit}
-        onViewAnalytics={onViewAnalytics}
-        onShare={handleShare}
         onDelete={onDelete}
+        onEdit={onEdit}
+        onShare={handleShare}
+        onViewAnalytics={onViewAnalytics}
       />
       <ShareFormModal
-        isOpen={isShareModalOpen}
-        onClose={() => setIsShareModalOpen(false)}
         formId={form?.id || null}
+        isOpen={isShareModalOpen}
         isPublished={!!form?.is_published}
+        onClose={() => setIsShareModalOpen(false)}
         onPublish={async () => {
           // You may want to refetch or update form state after publish
           if (onShare) onShare(form);

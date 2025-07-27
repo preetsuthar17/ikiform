@@ -1,31 +1,26 @@
 // Main profile card component
-"use client";
+'use client';
 
-import React, { useState } from "react";
-
-// External Dependencies
-import { useAuth } from "@/hooks/use-auth";
+import React, { useState } from 'react';
+import { SettingsModal } from '@/components/settings/settings-modal';
 
 // UI Components
-import { Card, CardHeader } from "@/components/ui/card";
-import { SettingsModal } from "@/components/settings/settings-modal";
-
+import { Card, CardHeader } from '@/components/ui/card';
+// External Dependencies
+import { useAuth } from '@/hooks/use-auth';
+// Hooks
+import { usePremiumStatus } from '@/hooks/use-premium-status';
 // Local Components
 import {
-  ProfileCardLoading,
-  UserAvatar,
   ProfileActions,
+  ProfileCardLoading,
   ProfileInfo,
-} from "./components";
-
-// Hooks
-import { usePremiumStatus } from "@/hooks/use-premium-status";
-
-// Utils
-import { extractUserName, extractAvatarUrl } from "./utils";
-
+  UserAvatar,
+} from './components';
 // Types
-import type { ProfileCardProps } from "./types";
+import type { ProfileCardProps } from './types';
+// Utils
+import { extractAvatarUrl, extractUserName } from './utils';
 
 export function ProfileCard({ className }: ProfileCardProps) {
   const { user, signOut, loading } = useAuth();
@@ -43,10 +38,10 @@ export function ProfileCard({ className }: ProfileCardProps) {
 
   return (
     <Card
-      className={`flex flex-col items-center gap-6 w-full grow relative py-24 bg-card ${className || ""}`}
+      className={`relative flex w-full grow flex-col items-center gap-6 bg-card py-24 ${className || ''}`}
     >
       <CardHeader className="flex items-center gap-2">
-        <UserAvatar name={name} avatarUrl={avatarUrl} size="xl" />
+        <UserAvatar avatarUrl={avatarUrl} name={name} size="xl" />
       </CardHeader>
 
       <ProfileActions
@@ -54,9 +49,9 @@ export function ProfileCard({ className }: ProfileCardProps) {
         onSignOut={signOut}
       />
 
-      <ProfileInfo user={user} hasPremium={hasPremium} />
+      <ProfileInfo hasPremium={hasPremium} user={user} />
 
-      <SettingsModal open={showSettings} onOpenChange={setShowSettings} />
+      <SettingsModal onOpenChange={setShowSettings} open={showSettings} />
     </Card>
   );
 }

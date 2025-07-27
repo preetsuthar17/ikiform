@@ -1,17 +1,17 @@
 // External imports
-import React, { useState } from "react";
 
+import { X } from 'lucide-react';
+import React, { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 // Component imports
-import { Card } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
-import { Badge } from "@/components/ui/badge";
-import { X } from "lucide-react";
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
 
 // Type imports
-import type { FormField } from "@/lib/database";
+import type { FormField } from '@/lib/database';
 
 interface EmailValidationSettingsProps {
   field: FormField;
@@ -22,9 +22,9 @@ export function EmailValidationSettings({
   field,
   onUpdateSettings,
 }: EmailValidationSettingsProps) {
-  const [newAllowedDomain, setNewAllowedDomain] = useState("");
-  const [newBlockedDomain, setNewBlockedDomain] = useState("");
-  const [newAutoCompleteDomain, setNewAutoCompleteDomain] = useState("");
+  const [newAllowedDomain, setNewAllowedDomain] = useState('');
+  const [newBlockedDomain, setNewBlockedDomain] = useState('');
+  const [newAutoCompleteDomain, setNewAutoCompleteDomain] = useState('');
 
   const emailSettings = field.settings?.emailValidation || {};
 
@@ -45,13 +45,13 @@ export function EmailValidationSettings({
         newAllowedDomain.trim(),
       ];
       updateEmailSettings({ allowedDomains: domains });
-      setNewAllowedDomain("");
+      setNewAllowedDomain('');
     }
   };
 
   const removeAllowedDomain = (domain: string) => {
     const domains = (emailSettings.allowedDomains || []).filter(
-      (d) => d !== domain,
+      (d) => d !== domain
     );
     updateEmailSettings({ allowedDomains: domains });
   };
@@ -63,13 +63,13 @@ export function EmailValidationSettings({
         newBlockedDomain.trim(),
       ];
       updateEmailSettings({ blockedDomains: domains });
-      setNewBlockedDomain("");
+      setNewBlockedDomain('');
     }
   };
 
   const removeBlockedDomain = (domain: string) => {
     const domains = (emailSettings.blockedDomains || []).filter(
-      (d) => d !== domain,
+      (d) => d !== domain
     );
     updateEmailSettings({ blockedDomains: domains });
   };
@@ -77,7 +77,7 @@ export function EmailValidationSettings({
   const setAutoCompleteDomain = () => {
     if (newAutoCompleteDomain.trim()) {
       updateEmailSettings({ autoCompleteDomain: newAutoCompleteDomain.trim() });
-      setNewAutoCompleteDomain("");
+      setNewAutoCompleteDomain('');
     }
   };
 
@@ -86,7 +86,7 @@ export function EmailValidationSettings({
   };
 
   return (
-    <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
+    <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
       <h3 className="font-medium text-card-foreground">Email Validation</h3>
 
       <div className="flex flex-col gap-4">
@@ -95,15 +95,15 @@ export function EmailValidationSettings({
           <Label className="text-card-foreground">Auto-complete Domain</Label>
           <div className="flex gap-2">
             <Input
+              className="border-border bg-input"
+              onChange={(e) => setNewAutoCompleteDomain(e.target.value)}
               placeholder="e.g., business.com"
               value={newAutoCompleteDomain}
-              onChange={(e) => setNewAutoCompleteDomain(e.target.value)}
-              className="bg-input border-border"
             />
             <Button
-              size="sm"
-              onClick={setAutoCompleteDomain}
               disabled={!newAutoCompleteDomain.trim()}
+              onClick={setAutoCompleteDomain}
+              size="sm"
             >
               Set
             </Button>
@@ -114,16 +114,16 @@ export function EmailValidationSettings({
                 @{emailSettings.autoCompleteDomain}
               </Badge>
               <Button
+                className="h-6 w-6 p-0"
+                onClick={removeAutoCompleteDomain}
                 size="sm"
                 variant="ghost"
-                onClick={removeAutoCompleteDomain}
-                className="h-6 w-6 p-0"
               >
                 <X className="h-3 w-3" />
               </Button>
             </div>
           )}
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             Users can enter just their username and the domain will be
             auto-completed
           </p>
@@ -134,15 +134,15 @@ export function EmailValidationSettings({
           <Label className="text-card-foreground">Allowed Domains</Label>
           <div className="flex gap-2">
             <Input
+              className="border-border bg-input"
+              onChange={(e) => setNewAllowedDomain(e.target.value)}
               placeholder="e.g., company.com"
               value={newAllowedDomain}
-              onChange={(e) => setNewAllowedDomain(e.target.value)}
-              className="bg-input border-border"
             />
             <Button
-              size="sm"
-              onClick={addAllowedDomain}
               disabled={!newAllowedDomain.trim()}
+              onClick={addAllowedDomain}
+              size="sm"
             >
               Add
             </Button>
@@ -152,16 +152,16 @@ export function EmailValidationSettings({
               <div className="flex flex-wrap gap-1">
                 {emailSettings.allowedDomains.map((domain, index) => (
                   <Badge
+                    className="flex items-center gap-1"
                     key={index}
                     variant="outline"
-                    className="flex items-center gap-1"
                   >
                     @{domain}
                     <Button
+                      className="h-4 w-4 p-0 hover:bg-transparent"
+                      onClick={() => removeAllowedDomain(domain)}
                       size="sm"
                       variant="ghost"
-                      onClick={() => removeAllowedDomain(domain)}
-                      className="h-4 w-4 p-0 hover:bg-transparent"
                     >
                       <X className="h-3 w-3" />
                     </Button>
@@ -169,7 +169,7 @@ export function EmailValidationSettings({
                 ))}
               </div>
             )}
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             Only emails from these domains will be accepted
           </p>
         </div>
@@ -179,15 +179,15 @@ export function EmailValidationSettings({
           <Label className="text-card-foreground">Blocked Domains</Label>
           <div className="flex gap-2">
             <Input
+              className="border-border bg-input"
+              onChange={(e) => setNewBlockedDomain(e.target.value)}
               placeholder="e.g., temp-mail.org"
               value={newBlockedDomain}
-              onChange={(e) => setNewBlockedDomain(e.target.value)}
-              className="bg-input border-border"
             />
             <Button
-              size="sm"
-              onClick={addBlockedDomain}
               disabled={!newBlockedDomain.trim()}
+              onClick={addBlockedDomain}
+              size="sm"
             >
               Add
             </Button>
@@ -196,16 +196,16 @@ export function EmailValidationSettings({
             <div className="flex flex-wrap gap-1">
               {emailSettings.blockedDomains.map((domain, index) => (
                 <Badge
+                  className="flex items-center gap-1"
                   key={index}
                   variant="destructive"
-                  className="flex items-center gap-1"
                 >
                   @{domain}
                   <Button
+                    className="h-4 w-4 p-0 hover:bg-transparent"
+                    onClick={() => removeBlockedDomain(domain)}
                     size="sm"
                     variant="ghost"
-                    onClick={() => removeBlockedDomain(domain)}
-                    className="h-4 w-4 p-0 hover:bg-transparent"
                   >
                     <X className="h-3 w-3" />
                   </Button>
@@ -213,7 +213,7 @@ export function EmailValidationSettings({
               ))}
             </div>
           )}
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             Emails from these domains will be rejected (temporary email services
             are blocked by default)
           </p>
@@ -225,16 +225,16 @@ export function EmailValidationSettings({
             <Label className="text-card-foreground">
               Require Business Email
             </Label>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-muted-foreground text-xs">
               Only allow business domains (blocks Gmail, Yahoo, etc.)
             </p>
           </div>
           <Switch
-            size={"sm"}
-            checked={emailSettings.requireBusinessEmail || false}
+            checked={emailSettings.requireBusinessEmail}
             onCheckedChange={(checked) =>
               updateEmailSettings({ requireBusinessEmail: checked })
             }
+            size={'sm'}
           />
         </div>
 
@@ -244,16 +244,16 @@ export function EmailValidationSettings({
             Custom Validation Message
           </Label>
           <Input
-            placeholder="Custom error message for email validation"
-            value={emailSettings.customValidationMessage || ""}
+            className="border-border bg-input"
             onChange={(e) =>
               updateEmailSettings({
                 customValidationMessage: e.target.value || undefined,
               })
             }
-            className="bg-input border-border"
+            placeholder="Custom error message for email validation"
+            value={emailSettings.customValidationMessage || ''}
           />
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             Leave empty to use default messages
           </p>
         </div>

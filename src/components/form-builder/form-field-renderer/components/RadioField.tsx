@@ -1,15 +1,13 @@
 // External imports
-import React from "react";
+import React from 'react';
 
 // Component imports
-import { RadioGroup, RadioItem } from "@/components/ui/radio";
-
-// Utility imports
-import { getErrorRingClasses } from "../utils";
-
+import { RadioGroup, RadioItem } from '@/components/ui/radio';
 // Type imports
-import type { BaseFieldProps } from "../types";
-import { sanitizeOptions } from "../utils/sanitizeOptions";
+import type { BaseFieldProps } from '../types';
+// Utility imports
+import { getErrorRingClasses } from '../utils';
+import { sanitizeOptions } from '../utils/sanitizeOptions';
 
 export function RadioField({
   field,
@@ -52,43 +50,44 @@ export function RadioField({
           setLoading(false);
         })
         .catch((err) => {
-          setFetchError("Failed to fetch options");
+          setFetchError('Failed to fetch options');
           setLoading(false);
         });
     } else {
       setApiOptions(null);
     }
-  }, [field.optionsApi, field.valueKey ?? "", field.labelKey ?? ""]);
+  }, [field.optionsApi, field.valueKey ?? '', field.labelKey ?? '']);
 
   const options = apiOptions ?? field.options ?? [];
 
   return (
     <RadioGroup
-      value={value || ""}
-      onValueChange={onChange}
       className={`flex gap-2 ${errorRingClasses}`}
       disabled={disabled || loading}
+      onValueChange={onChange}
+      value={value || ''}
     >
-      {fetchError && <div className="text-red-500 p-2">{fetchError}</div>}
+      {fetchError && <div className="p-2 text-red-500">{fetchError}</div>}
       {options.map((option, index) => {
-        if (typeof option === "string") {
+        if (typeof option === 'string') {
           return (
             <RadioItem
-              key={index}
-              value={option}
-              id={`${field.id}-${index}`}
-              label={option}
               disabled={disabled || loading}
+              id={`${field.id}-${index}`}
+              key={index}
+              label={option}
+              value={option}
             />
           );
-        } else if (option && typeof option === "object" && option.value) {
+        }
+        if (option && typeof option === 'object' && option.value) {
           return (
             <RadioItem
-              key={index}
-              value={option.value}
-              id={`${field.id}-${index}`}
-              label={option.label || option.value}
               disabled={disabled || loading}
+              id={`${field.id}-${index}`}
+              key={index}
+              label={option.label || option.value}
+              value={option.value}
             />
           );
         }

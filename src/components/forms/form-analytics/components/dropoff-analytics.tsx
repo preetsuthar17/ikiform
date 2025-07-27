@@ -1,7 +1,7 @@
-import React from "react";
-import type { Form, FormSubmission } from "@/lib/database";
-import { Card } from "@/components/ui/card";
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle } from 'lucide-react';
+import type React from 'react';
+import { Card } from '@/components/ui/card';
+import type { Form, FormSubmission } from '@/lib/database';
 
 function getDropoffCounts(form: Form, submissions: FormSubmission[]) {
   // For multi-step forms, count how many users reach each block (step)
@@ -18,7 +18,7 @@ function getDropoffCounts(form: Form, submissions: FormSubmission[]) {
         (f) =>
           sub.submission_data[f.id] !== undefined &&
           sub.submission_data[f.id] !== null &&
-          sub.submission_data[f.id] !== "",
+          sub.submission_data[f.id] !== ''
       );
       if (hasAny) {
         dropoffCounts[block.id]++;
@@ -43,15 +43,15 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
 }) => {
   if (!form.schema?.blocks || form.schema.blocks.length === 0) {
     return (
-      <Card className="flex items-center gap-4 p-6 bg-card border-border">
-        <div className="p-3 bg-orange-500/10 rounded-card">
-          <AlertTriangle className="w-6 h-6 text-orange-600" />
+      <Card className="flex items-center gap-4 border-border bg-card p-6">
+        <div className="rounded-card bg-orange-500/10 p-3">
+          <AlertTriangle className="h-6 w-6 text-orange-600" />
         </div>
         <div className="flex flex-col gap-1">
-          <span className="font-semibold text-lg text-foreground">
+          <span className="font-semibold text-foreground text-lg">
             Drop-off analytics
           </span>
-          <span className="text-sm text-muted-foreground">
+          <span className="text-muted-foreground text-sm">
             Drop-off analytics are only available for multi-step forms.
           </span>
         </div>
@@ -61,22 +61,22 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
   const dropoffCounts = getDropoffCounts(form, submissions);
   const total = submissions.length;
   return (
-    <Card className="flex flex-col gap-4 p-6 bg-card border-border">
-      <div className="flex items-center gap-4 mb-2">
-        <div className="p-3 bg-orange-500/10 rounded-card">
-          <AlertTriangle className="w-6 h-6 text-orange-600" />
+    <Card className="flex flex-col gap-4 border-border bg-card p-6">
+      <div className="mb-2 flex items-center gap-4">
+        <div className="rounded-card bg-orange-500/10 p-3">
+          <AlertTriangle className="h-6 w-6 text-orange-600" />
         </div>
         <div className="flex flex-col gap-1">
-          <span className="font-semibold text-lg text-foreground">
+          <span className="font-semibold text-foreground text-lg">
             Drop-off analytics
           </span>
-          <span className="text-sm text-muted-foreground">
+          <span className="text-muted-foreground text-sm">
             Understand where users drop off in your forms.
           </span>
         </div>
       </div>
       <div className="overflow-x-auto">
-        <table className="min-w-full text-sm border-collapse">
+        <table className="min-w-full border-collapse text-sm">
           <thead>
             <tr>
               <th className="px-3 py-2 text-left font-semibold">Step</th>
@@ -91,8 +91,8 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
                 total > 0 ? 100 - Math.round((reached / total) * 100) : 0;
               return (
                 <tr
+                  className="border-border border-b last:border-0"
                   key={block.id}
-                  className="border-b border-border last:border-0"
                 >
                   <td className="px-3 py-2 font-medium text-foreground">
                     {block.label ? block.label : `Step ${idx + 1}`}
@@ -105,7 +105,7 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
           </tbody>
         </table>
       </div>
-      <div className="text-xs text-muted-foreground">
+      <div className="text-muted-foreground text-xs">
         Drop-off % shows the percentage of users who did not reach each step.
       </div>
     </Card>

@@ -1,16 +1,15 @@
 // UI components imports
 import {
   Drawer,
+  DrawerCloseButton,
   DrawerContent,
+  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-  DrawerCloseButton,
-  DrawerDescription,
-} from "@/components/ui/drawer";
-
+} from '@/components/ui/drawer';
+import type { ChatPanelProps } from '@/lib/ai-builder/types';
 // Local imports
-import { ChatPanel } from "./chat/chat-panel";
-import { ChatPanelProps } from "@/lib/ai-builder/types";
+import { ChatPanel } from './chat/chat-panel';
 
 interface MobileChatDrawerProps extends ChatPanelProps {
   isOpen: boolean;
@@ -23,8 +22,8 @@ export function MobileChatDrawer({
   ...chatPanelProps
 }: MobileChatDrawerProps) {
   return (
-    <Drawer open={isOpen} onOpenChange={onOpenChange}>
-      <DrawerContent className="max-w-full w-full">
+    <Drawer onOpenChange={onOpenChange} open={isOpen}>
+      <DrawerContent className="w-full max-w-full">
         <DrawerHeader>
           <DrawerTitle>Kiko AI Chat</DrawerTitle>
           <DrawerDescription className="sr-only">
@@ -32,7 +31,7 @@ export function MobileChatDrawer({
           </DrawerDescription>
           <DrawerCloseButton />
         </DrawerHeader>
-        <div className="flex flex-col h-[90vh] overflow-y-auto gap-4">
+        <div className="flex h-[90vh] flex-col gap-4 overflow-y-auto">
           <ChatPanel {...chatPanelProps} />
         </div>
       </DrawerContent>

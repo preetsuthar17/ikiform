@@ -1,12 +1,13 @@
 // Libraries
-import React, { useEffect, useRef } from "react";
+import type React from 'react';
+import { useEffect, useRef } from 'react';
 
 // UI Components
-import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
-import { SocialMediaIcons } from "@/components/ui/social-media-icons";
+import { FormFieldRenderer } from '@/components/form-builder/form-field-renderer';
+import { SocialMediaIcons } from '@/components/ui/social-media-icons';
 
 // Types
-import type { FormBlock, FormSchema } from "@/lib/database";
+import type { FormBlock, FormSchema } from '@/lib/database';
 
 interface FormContentProps {
   currentBlock: FormBlock;
@@ -41,7 +42,7 @@ export const FormContent: React.FC<FormContentProps> = ({
   // Filter fields by logic visibility
   const visibleFields = fieldVisibility
     ? currentBlock.fields.filter(
-        (field) => fieldVisibility[field.id]?.visible !== false,
+        (field) => fieldVisibility[field.id]?.visible !== false
       )
     : currentBlock.fields;
 
@@ -49,7 +50,7 @@ export const FormContent: React.FC<FormContentProps> = ({
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-bold text-foreground">
+          <h1 className="font-bold text-3xl text-foreground">
             {currentBlock.title || title}
           </h1>
           {(currentBlock.description || description) && (
@@ -61,16 +62,16 @@ export const FormContent: React.FC<FormContentProps> = ({
 
         {schema.settings.branding?.socialMedia?.enabled &&
           schema.settings.branding.socialMedia.platforms &&
-          (schema.settings.branding.socialMedia.position === "header" ||
-            schema.settings.branding.socialMedia.position === "both") && (
+          (schema.settings.branding.socialMedia.position === 'header' ||
+            schema.settings.branding.socialMedia.position === 'both') && (
             <SocialMediaIcons
-              platforms={schema.settings.branding.socialMedia.platforms}
-              iconSize={schema.settings.branding.socialMedia.iconSize || "md"}
               className="justify-start"
+              iconSize={schema.settings.branding.socialMedia.iconSize || 'md'}
+              platforms={schema.settings.branding.socialMedia.platforms}
             />
           )}
         {logicMessages && logicMessages.length > 0 && (
-          <div className="bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 p-3 rounded-md mb-2">
+          <div className="mb-2 rounded-md border-yellow-400 border-l-4 bg-yellow-50 p-3 text-yellow-800">
             {logicMessages.map((msg, i) => (
               <div key={i}>{msg}</div>
             ))}
@@ -87,12 +88,12 @@ export const FormContent: React.FC<FormContentProps> = ({
             }
           >
             <FormFieldRenderer
-              field={field}
-              value={formData[field.id]}
-              onChange={(value) => onFieldValueChange(field.id, value)}
-              error={errors[field.id]}
-              fieldRef={idx === 0 ? firstFieldRef : undefined}
               disabled={fieldVisibility?.[field.id]?.disabled}
+              error={errors[field.id]}
+              field={field}
+              fieldRef={idx === 0 ? firstFieldRef : undefined}
+              onChange={(value) => onFieldValueChange(field.id, value)}
+              value={formData[field.id]}
             />
           </div>
         ))}

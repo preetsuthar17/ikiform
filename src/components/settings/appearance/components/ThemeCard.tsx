@@ -1,21 +1,22 @@
 // External imports
-import React from "react";
-import { Check } from "lucide-react";
+
+import { Check } from 'lucide-react';
+import type React from 'react';
 
 // UI components
-import { Card } from "@/components/ui/card";
+import { Card } from '@/components/ui/card';
 
 // types and utilities
-import { Theme } from "../types";
+import type { Theme } from '../types';
 import {
-  getThemeCardStyles,
-  getSelectionIndicatorStyles,
+  getGradientOverlayStyles,
   getImageContainerStyles,
   getImageStyles,
+  getSelectionIndicatorStyles,
   getSelectionOverlayStyles,
-  getGradientOverlayStyles,
+  getThemeCardStyles,
   getThemeNameOverlayStyles,
-} from "../utils";
+} from '../utils';
 
 interface ThemeCardProps {
   theme: Theme;
@@ -37,20 +38,20 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
     >
       {isSelected && (
         <div className={getSelectionIndicatorStyles()}>
-          <Check className="w-3 h-3 text-primary-foreground" />
+          <Check className="h-3 w-3 text-primary-foreground" />
         </div>
       )}
       <div className={getImageContainerStyles()}>
         <img
-          src={theme.image}
           alt={`${theme.name} theme preview`}
           className={getImageStyles()}
+          src={theme.image}
         />
         {isSelected && <div className={getSelectionOverlayStyles()} />}
         <div className={getGradientOverlayStyles()} />
         <div className={getThemeNameOverlayStyles()}>
-          <Icon className="w-4 h-4 text-white" />
-          <span className="font-medium text-white text-sm">{theme.name}</span>
+          <Icon className="h-4 w-4 text-white" />
+          <span className="font-medium text-sm text-white">{theme.name}</span>
         </div>
       </div>
     </Card>

@@ -1,9 +1,9 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Plus, Pencil, Trash2 } from "lucide-react";
-import type { FormField } from "@/lib/database";
-import type { LogicActionCondition } from "./types";
+import { Pencil, Plus, Trash2 } from 'lucide-react';
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import type { FormField } from '@/lib/database';
+import type { LogicActionCondition } from './types';
 
 function RuleList({
   rules = [],
@@ -20,22 +20,22 @@ function RuleList({
 }) {
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between mb-2">
-        <h3 className="text-base font-semibold">Logic Rules</h3>
-        <Button size="sm" variant="outline" onClick={onAddRule}>
-          <Plus className="w-4 h-4 mr-1" /> Add Rule
+      <div className="mb-2 flex items-center justify-between">
+        <h3 className="font-semibold text-base">Logic Rules</h3>
+        <Button onClick={onAddRule} size="sm" variant="outline">
+          <Plus className="mr-1 h-4 w-4" /> Add Rule
         </Button>
       </div>
       {rules.length === 0 ? (
-        <div className="text-muted-foreground text-sm text-center py-8">
+        <div className="py-8 text-center text-muted-foreground text-sm">
           No logic rules yet.
         </div>
       ) : (
         <div className="space-y-2">
           {rules.map((rule) => (
             <Card
-              key={rule.id}
               className="flex items-center justify-between p-3"
+              key={rule.id}
             >
               <div>
                 <span className="font-medium">{rule.id}</span>
@@ -43,18 +43,18 @@ function RuleList({
               </div>
               <div className="flex gap-2">
                 <Button
+                  onClick={() => onEditRule?.(rule.id)}
                   size="icon"
                   variant="ghost"
-                  onClick={() => onEditRule?.(rule.id)}
                 >
-                  <Pencil className="w-4 h-4" />
+                  <Pencil className="h-4 w-4" />
                 </Button>
                 <Button
+                  onClick={() => onDeleteRule?.(rule.id)}
                   size="icon"
                   variant="ghost"
-                  onClick={() => onDeleteRule?.(rule.id)}
                 >
-                  <Trash2 className="w-4 h-4" />
+                  <Trash2 className="h-4 w-4" />
                 </Button>
               </div>
             </Card>

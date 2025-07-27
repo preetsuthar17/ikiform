@@ -1,37 +1,37 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import * as TogglePrimitive from "@radix-ui/react-toggle";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
+import * as TogglePrimitive from '@radix-ui/react-toggle';
+import { cva, type VariantProps } from 'class-variance-authority';
+import * as React from 'react';
+import { cn } from '@/lib/utils';
 
 const toggleVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-ele text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow-sm/2",
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-ele text-sm shadow-sm/2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
   {
     variants: {
       variant: {
         default:
-          "border border-border text-foreground hover:bg-accent hover:text-accent-foreground data-[state=on]:bg-primary data-[state=on]:text-primary-foreground focus-visible:ring-ring",
+          'border border-border text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring data-[state=on]:bg-primary data-[state=on]:text-primary-foreground',
         outline:
-          "border border-border text-foreground hover:bg-accent hover:text-accent-foreground data-[state=on]:bg-accent data-[state=on]:text-accent-foreground data-[state=on]:border-primary focus-visible:ring-ring",
+          'border border-border text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring data-[state=on]:border-primary data-[state=on]:bg-accent data-[state=on]:text-accent-foreground',
         ghost:
-          "text-foreground hover:bg-accent hover:text-accent-foreground data-[state=on]:bg-accent data-[state=on]:text-accent-foreground focus-visible:ring-ring",
+          'text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring data-[state=on]:bg-accent data-[state=on]:text-accent-foreground',
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80 data-[state=on]:bg-primary data-[state=on]:text-primary-foreground focus-visible:ring-ring",
+          'bg-secondary text-secondary-foreground hover:bg-secondary/80 focus-visible:ring-ring data-[state=on]:bg-primary data-[state=on]:text-primary-foreground',
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 px-3 text-xs",
-        lg: "h-10 px-8",
-        xl: "h-12 px-10 text-base",
-        icon: "h-9 w-9",
+        default: 'h-9 px-4 py-2',
+        sm: 'h-8 px-3 text-xs',
+        lg: 'h-10 px-8',
+        xl: 'h-12 px-10 text-base',
+        icon: 'h-9 w-9',
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: 'default',
+      size: 'default',
     },
-  },
+  }
 );
 
 export interface ToggleProps
@@ -47,18 +47,18 @@ const Toggle = React.forwardRef<
 >(
   (
     { className, variant, size, leftIcon, rightIcon, children, ...props },
-    ref,
+    ref
   ) => (
     <TogglePrimitive.Root
-      ref={ref}
       className={cn(toggleVariants({ variant, size, className }))}
+      ref={ref}
       {...props}
     >
       {leftIcon && leftIcon}
       {children}
       {rightIcon && rightIcon}
     </TogglePrimitive.Root>
-  ),
+  )
 );
 
 Toggle.displayName = TogglePrimitive.Root.displayName;

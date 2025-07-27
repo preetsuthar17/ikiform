@@ -1,33 +1,33 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
+import { cva, type VariantProps } from 'class-variance-authority';
+import * as React from 'react';
+import { cn } from '@/lib/utils';
 
 const kbdVariants = cva(
-  "inline-flex items-center justify-center font-mono text-xs bg-muted text-muted-foreground border border-border rounded-ele border-b-3 transition-all duration-75 cursor-pointer select-none active:translate-y-[1px] active:border-b-[1px]  hover:bg-muted/80 shadow-sm/2",
+  'inline-flex cursor-pointer select-none items-center justify-center rounded-ele border border-border border-b-3 bg-muted font-mono text-muted-foreground text-xs shadow-sm/2 transition-all duration-75 hover:bg-muted/80 active:translate-y-[1px] active:border-b-[1px]',
   {
     variants: {
       variant: {
-        default: "bg-muted text-muted-foreground border-border",
-        outline: "bg-transparent border-border text-foreground hover:bg-accent",
+        default: 'border-border bg-muted text-muted-foreground',
+        outline: 'border-border bg-transparent text-foreground hover:bg-accent',
         solid:
-          "bg-foreground text-background border-foreground hover:bg-foreground/90",
+          'border-foreground bg-foreground text-background hover:bg-foreground/90',
         secondary:
-          "bg-secondary text-secondary-foreground border-border hover:bg-secondary/80",
+          'border-border bg-secondary text-secondary-foreground hover:bg-secondary/80',
       },
       size: {
-        xs: "h-5 px-1.5 text-[10px] min-w-[1.25rem]",
-        sm: "h-6 px-2 text-xs min-w-[1.5rem]",
-        md: "h-7 px-2.5 text-sm min-w-[1.75rem]",
-        lg: "h-8 px-3 text-sm min-w-[2rem]",
+        xs: 'h-5 min-w-[1.25rem] px-1.5 text-[10px]',
+        sm: 'h-6 min-w-[1.5rem] px-2 text-xs',
+        md: 'h-7 min-w-[1.75rem] px-2.5 text-sm',
+        lg: 'h-8 min-w-[2rem] px-3 text-sm',
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "sm",
+      variant: 'default',
+      size: 'sm',
     },
-  },
+  }
 );
 
 export interface KbdProps
@@ -44,8 +44,8 @@ const Kbd = React.forwardRef<HTMLElement, KbdProps>(
       return (
         <span
           className="inline-flex items-center gap-1"
-          ref={ref as React.Ref<HTMLSpanElement>}
           onClick={onClick}
+          ref={ref as React.Ref<HTMLSpanElement>}
         >
           {keys.map((key, index) => (
             <React.Fragment key={index}>
@@ -56,7 +56,7 @@ const Kbd = React.forwardRef<HTMLElement, KbdProps>(
                 {key}
               </kbd>
               {index < keys.length - 1 && (
-                <span className="text-muted-foreground text-xs px-1">+</span>
+                <span className="px-1 text-muted-foreground text-xs">+</span>
               )}
             </React.Fragment>
           ))}
@@ -68,16 +68,16 @@ const Kbd = React.forwardRef<HTMLElement, KbdProps>(
     return (
       <kbd
         className={cn(kbdVariants({ variant, size }), className)}
-        ref={ref}
         onClick={onClick}
+        ref={ref}
         {...props}
       >
         {children}
       </kbd>
     );
-  },
+  }
 );
 
-Kbd.displayName = "Kbd";
+Kbd.displayName = 'Kbd';
 
 export { Kbd, kbdVariants };

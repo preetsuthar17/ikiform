@@ -1,28 +1,26 @@
 // External imports
-import React from "react";
 
-// Component imports
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Settings, Zap } from 'lucide-react';
+import React from 'react';
+import type { FormLogic } from '@/components/form-builder/logic-builder/types';
 import {
-  ResizablePanelGroup,
-  ResizablePanel,
   ResizableHandle,
-} from "@/components/ui/resizable";
-import { FieldPalette } from "../../field-palette";
-import { FieldSettingsPanel } from "../../field-settings-panel";
-import { BlockManager } from "../../block-manager";
-import { FormPreview } from "../../form-preview";
-import { LogicBuilderPanel } from "../../logic-builder";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
-import { Settings, Zap } from "lucide-react";
-
-// Type imports
-import type { FormBuilderPanelsProps } from "../types";
-import type { FormLogic } from "@/components/form-builder/logic-builder/types";
-
+  ResizablePanel,
+  ResizablePanelGroup,
+} from '@/components/ui/resizable';
+// Component imports
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Tabs, TabsContent } from '@/components/ui/tabs';
+import { BlockManager } from '../../block-manager';
+import { FieldPalette } from '../../field-palette';
+import { FieldSettingsPanel } from '../../field-settings-panel';
+import { FormPreview } from '../../form-preview';
+import { LogicBuilderPanel } from '../../logic-builder';
 // Constant imports
-import { PANEL_SIZES } from "../constants";
-import { getAllFields } from "../utils";
+import { PANEL_SIZES } from '../constants';
+// Type imports
+import type { FormBuilderPanelsProps } from '../types';
+import { getAllFields } from '../utils';
 
 export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
   formSchema,
@@ -43,34 +41,34 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
   onStepSelect,
   onLogicChange,
 }) => {
-  const [activeTab, setActiveTab] = React.useState("field-settings");
+  const [activeTab, setActiveTab] = React.useState('field-settings');
   const tabItems = [
-    { id: "field-settings", label: "Field Settings", icon: <Settings /> },
-    { id: "logic-builder", label: "Logic Builder", icon: <Zap /> },
+    { id: 'field-settings', label: 'Field Settings', icon: <Settings /> },
+    { id: 'logic-builder', label: 'Logic Builder', icon: <Zap /> },
   ];
   const handleLogicChange = (logic: FormLogic) => {
     if (onLogicChange) onLogicChange(logic);
   };
   const allFields = getAllFields(formSchema);
   return (
-    <ResizablePanelGroup direction="horizontal" className="h-full">
+    <ResizablePanelGroup className="h-full" direction="horizontal">
       {/* Left Panel - Field Palette or Block Manager */}
       <ResizablePanel
         defaultSize={PANEL_SIZES.LEFT_PANEL.default}
-        minSize={PANEL_SIZES.LEFT_PANEL.min}
         maxSize={PANEL_SIZES.LEFT_PANEL.max}
+        minSize={PANEL_SIZES.LEFT_PANEL.min}
       >
         {formSchema.settings.multiStep ? (
           <BlockManager
             blocks={formSchema.blocks}
-            selectedBlockId={selectedBlockId}
-            selectedFieldId={selectedFieldId}
-            onBlockSelect={onBlockSelect}
-            onFieldSelect={onFieldSelect}
-            onBlocksUpdate={onBlocksUpdate}
             onBlockAdd={onBlockAdd}
             onBlockDelete={onBlockDelete}
+            onBlockSelect={onBlockSelect}
+            onBlocksUpdate={onBlocksUpdate}
             onFieldDelete={onFieldDelete}
+            onFieldSelect={onFieldSelect}
+            selectedBlockId={selectedBlockId}
+            selectedFieldId={selectedFieldId}
           />
         ) : (
           <FieldPalette onAddField={onFieldAdd} />
@@ -82,21 +80,21 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
       {/* Center Panel - Form Preview */}
       <ResizablePanel
         defaultSize={PANEL_SIZES.PREVIEW_PANEL.default}
-        minSize={PANEL_SIZES.PREVIEW_PANEL.min}
         maxSize={PANEL_SIZES.PREVIEW_PANEL.max}
+        minSize={PANEL_SIZES.PREVIEW_PANEL.min}
       >
         <ScrollArea className="h-full">
           <FormPreview
-            schema={formSchema}
-            selectedFieldId={selectedFieldId}
-            selectedBlockId={selectedBlockId}
+            onAddField={onFieldAdd}
+            onBlockUpdate={onBlockUpdate}
+            onFieldDelete={onFieldDelete}
             onFieldSelect={onFieldSelect}
             onFieldsReorder={onFieldsReorder}
-            onFieldDelete={onFieldDelete}
             onFormSettingsUpdate={onFormSettingsUpdate}
-            onBlockUpdate={onBlockUpdate}
             onStepSelect={onStepSelect}
-            onAddField={onFieldAdd}
+            schema={formSchema}
+            selectedBlockId={selectedBlockId}
+            selectedFieldId={selectedFieldId}
           />
         </ScrollArea>
       </ResizablePanel>
@@ -106,27 +104,27 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
       {/* Right Panel - Tabs for Field Settings and Logic Builder */}
       <ResizablePanel
         defaultSize={PANEL_SIZES.RIGHT_PANEL.default}
-        minSize={PANEL_SIZES.RIGHT_PANEL.min}
         maxSize={PANEL_SIZES.RIGHT_PANEL.max}
+        minSize={PANEL_SIZES.RIGHT_PANEL.min}
       >
-        <div className="h-full flex flex-col">
+        <div className="flex h-full flex-col">
           {formSchema.settings.multiStep ? (
             <FieldSettingsPanel
               field={selectedField}
-              onFieldUpdate={onFieldUpdate}
               onClose={() => onFieldSelect(null)}
+              onFieldUpdate={onFieldUpdate}
             />
           ) : (
             <FieldSettingsPanel
               field={selectedField}
-              onFieldUpdate={onFieldUpdate}
               onClose={() => onFieldSelect(null)}
+              onFieldUpdate={onFieldUpdate}
             />
           )}
           <LogicBuilderPanel
+            fields={allFields}
             logic={formSchema.logic || []}
             onLogicChange={handleLogicChange}
-            fields={allFields}
           />
         </div>
       </ResizablePanel>

@@ -1,11 +1,11 @@
 // Components
-import { Button } from "@/components/ui/button";
 
 // Icons
-import { Plus } from "lucide-react";
+import { Plus } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 // Types
-import type { BlockManagerHeaderProps } from "../types";
+import type { BlockManagerHeaderProps } from '../types';
 
 export function BlockManagerHeader({
   blocksCount,
@@ -16,16 +16,16 @@ export function BlockManagerHeader({
       <div className="flex items-center justify-between">
         <div>
           <h3 className="font-semibold">Form Structure</h3>
-          <p className="text-sm text-muted-foreground">
-            {blocksCount} {blocksCount === 1 ? "step" : "steps"}
+          <p className="text-muted-foreground text-sm">
+            {blocksCount} {blocksCount === 1 ? 'step' : 'steps'}
           </p>
         </div>
         <Button
-          size="sm"
-          onClick={onBlockAdd}
           className="flex items-center gap-2"
+          onClick={onBlockAdd}
+          size="sm"
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="h-4 w-4" />
           Add Step
         </Button>
       </div>

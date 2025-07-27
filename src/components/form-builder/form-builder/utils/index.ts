@@ -1,8 +1,8 @@
 // Type imports
-import type { FormField, FormSchema } from "@/lib/database";
+import type { FormField, FormSchema } from '@/lib/database';
 
 // Constant imports
-import { FORM_BUILDER_CONSTANTS } from "../constants";
+import { FORM_BUILDER_CONSTANTS } from '../constants';
 
 // Utility functions
 export const generateFieldId = (): string => {
@@ -15,7 +15,7 @@ export const generateBlockId = (): string => {
 
 export const hasFormChanges = (
   formSchema: FormSchema,
-  lastSavedSchema: FormSchema | null,
+  lastSavedSchema: FormSchema | null
 ): boolean => {
   if (!lastSavedSchema) {
     return (
@@ -44,9 +44,9 @@ let saveTimeoutId: NodeJS.Timeout | null = null;
 
 export const saveDraftToStorage = (
   draftKey: string,
-  formSchema: FormSchema,
+  formSchema: FormSchema
 ): void => {
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     // Clear previous timeout
     if (saveTimeoutId) {
       clearTimeout(saveTimeoutId);
@@ -57,7 +57,7 @@ export const saveDraftToStorage = (
       try {
         localStorage.setItem(draftKey, JSON.stringify(formSchema));
       } catch (error) {
-        console.warn("Failed to save draft to localStorage:", error);
+        console.warn('Failed to save draft to localStorage:', error);
       }
       saveTimeoutId = null;
     }, 100); // 100ms debounce
@@ -65,7 +65,7 @@ export const saveDraftToStorage = (
 };
 
 export const loadDraftFromStorage = (draftKey: string): FormSchema | null => {
-  if (typeof window === "undefined") return null;
+  if (typeof window === 'undefined') return null;
 
   const draft = localStorage.getItem(draftKey);
   if (!draft) return null;
@@ -74,7 +74,7 @@ export const loadDraftFromStorage = (draftKey: string): FormSchema | null => {
     const parsed = JSON.parse(draft);
     if (
       parsed &&
-      typeof parsed === "object" &&
+      typeof parsed === 'object' &&
       parsed.fields &&
       parsed.settings
     ) {
@@ -88,14 +88,14 @@ export const loadDraftFromStorage = (draftKey: string): FormSchema | null => {
 };
 
 export const removeDraftFromStorage = (draftKey: string): void => {
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     localStorage.removeItem(draftKey);
   }
 };
 
 export const findSelectedField = (
   formSchema: FormSchema,
-  selectedFieldId: string | null,
+  selectedFieldId: string | null
 ): FormField | null => {
   if (!selectedFieldId) return null;
 
@@ -114,12 +114,12 @@ export const getAllFields = (formSchema: FormSchema): FormField[] => {
 
 export const updateFieldInSchema = (
   formSchema: FormSchema,
-  updatedField: FormField,
+  updatedField: FormField
 ): FormSchema => {
   const updatedBlocks = formSchema.blocks.map((block) => ({
     ...block,
     fields: block.fields.map((field) =>
-      field.id === updatedField.id ? updatedField : field,
+      field.id === updatedField.id ? updatedField : field
     ),
   }));
 
@@ -127,14 +127,14 @@ export const updateFieldInSchema = (
     ...formSchema,
     blocks: updatedBlocks,
     fields: formSchema.fields.map((field) =>
-      field.id === updatedField.id ? updatedField : field,
+      field.id === updatedField.id ? updatedField : field
     ),
   };
 };
 
 export const removeFieldFromSchema = (
   formSchema: FormSchema,
-  fieldId: string,
+  fieldId: string
 ): FormSchema => {
   const updatedBlocks = formSchema.blocks.map((block) => ({
     ...block,
@@ -152,14 +152,14 @@ export const addFieldToSchema = (
   formSchema: FormSchema,
   newField: FormField,
   selectedBlockId: string | null,
-  index?: number,
+  index?: number
 ): FormSchema => {
   const targetBlockId = selectedBlockId || formSchema.blocks[0]?.id;
   const updatedBlocks = formSchema.blocks.map((block) => {
     if (block.id === targetBlockId) {
       const newFields = [...block.fields];
       if (
-        typeof index === "number" &&
+        typeof index === 'number' &&
         index >= 0 &&
         index <= newFields.length
       ) {
@@ -172,9 +172,9 @@ export const addFieldToSchema = (
     return block;
   });
   // Update top-level fields array as well
-  let newFieldsArray = [...formSchema.fields];
+  const newFieldsArray = [...formSchema.fields];
   if (
-    typeof index === "number" &&
+    typeof index === 'number' &&
     index >= 0 &&
     index <= newFieldsArray.length
   ) {

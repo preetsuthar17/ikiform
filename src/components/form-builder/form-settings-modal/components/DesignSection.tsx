@@ -1,24 +1,24 @@
-import React from "react";
-import { Card } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioItem } from "@/components/ui/radio";
-import { Separator } from "@/components/ui/separator";
-import type { LocalSettings } from "../types";
-import { Palette, Maximize2, Move, Square } from "lucide-react";
+import { Maximize2, Move, Palette, Square } from 'lucide-react';
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioItem } from '@/components/ui/radio';
+import { Separator } from '@/components/ui/separator';
 import {
-  FORM_WIDTH_OPTIONS,
-  FORM_PADDING_OPTIONS,
-  FORM_DESIGN_MODES,
   DEFAULT_FORM_DESIGN,
   FORM_BORDER_RADIUS_OPTIONS,
-} from "../constants";
-import { Button } from "@/components/ui/button";
+  FORM_DESIGN_MODES,
+  FORM_PADDING_OPTIONS,
+  FORM_WIDTH_OPTIONS,
+} from '../constants';
+import type { LocalSettings } from '../types';
 
 const FORM_MARGIN_OPTIONS = [
-  { value: "none", label: "None", preview: "", description: "No margin" },
-  { value: "sm", label: "Small", preview: "", description: "8px" },
-  { value: "md", label: "Medium", preview: "", description: "16px" },
-  { value: "lg", label: "Large", preview: "", description: "32px" },
+  { value: 'none', label: 'None', preview: '', description: 'No margin' },
+  { value: 'sm', label: 'Small', preview: '', description: '8px' },
+  { value: 'md', label: 'Medium', preview: '', description: '16px' },
+  { value: 'lg', label: 'Large', preview: '', description: '32px' },
 ];
 
 interface DesignSectionProps {
@@ -34,7 +34,7 @@ export function DesignSection({
     localSettings.layout?.maxWidth || DEFAULT_FORM_DESIGN.maxWidth;
   const currentPadding =
     localSettings.layout?.padding || DEFAULT_FORM_DESIGN.padding;
-  const currentMargin = localSettings.layout?.margin || "none";
+  const currentMargin = localSettings.layout?.margin || 'none';
   const currentBorderRadius =
     localSettings.layout?.borderRadius || DEFAULT_FORM_DESIGN.borderRadius;
   const currentDesignMode =
@@ -43,7 +43,7 @@ export function DesignSection({
     updateSettings({
       layout: {
         ...localSettings.layout,
-        borderRadius: value as "none" | "sm" | "md" | "lg" | "xl",
+        borderRadius: value as 'none' | 'sm' | 'md' | 'lg' | 'xl',
       },
     });
   };
@@ -52,7 +52,7 @@ export function DesignSection({
     updateSettings({
       layout: {
         ...localSettings.layout,
-        maxWidth: value as "sm" | "md" | "lg" | "xl" | "full",
+        maxWidth: value as 'sm' | 'md' | 'lg' | 'xl' | 'full',
       },
     });
   };
@@ -61,7 +61,7 @@ export function DesignSection({
     updateSettings({
       layout: {
         ...localSettings.layout,
-        padding: value as "none" | "sm" | "md" | "lg",
+        padding: value as 'none' | 'sm' | 'md' | 'lg',
       },
     });
   };
@@ -70,41 +70,37 @@ export function DesignSection({
     updateSettings({
       layout: {
         ...localSettings.layout,
-        margin: value as "none" | "sm" | "md" | "lg",
+        margin: value as 'none' | 'sm' | 'md' | 'lg',
       },
     });
   };
 
   const handleDesignModeChange = (value: string) => {
     updateSettings({
-      designMode: value as "default" | "minimal",
+      designMode: value as 'default' | 'minimal',
     });
   };
 
   return (
     <Card className="p-6">
-      <h3 className="text-lg font-semibold mb-6 flex items-center gap-2">
-        <Palette className="w-5 h-5 text-primary" />
+      <h3 className="mb-6 flex items-center gap-2 font-semibold text-lg">
+        <Palette className="h-5 w-5 text-primary" />
         Design
       </h3>
-      <div className="flex flex-col gap-4 border-l-2 border-muted pl-6">
+      <div className="flex flex-col gap-4 border-muted border-l-2 pl-6">
         {/* Width */}
         <div className="flex flex-col gap-2">
           <Label>Form Width</Label>
           <div className="flex flex-wrap gap-2">
             {FORM_WIDTH_OPTIONS.map((option) => (
               <Button
+                className={`font-medium text-sm ${
+                  currentWidth === option.value
+                    ? ''
+                    : 'border bg-transparent text-foreground hover:bg-accent'
+                }transition `}
                 key={option.value}
                 onClick={() => handleWidthChange(option.value)}
-                className={`
-                  text-sm font-medium
-                  ${
-                    currentWidth === option.value
-                      ? ""
-                      : "bg-transparent hover:bg-accent text-foreground border"
-                  }
-                  transition
-                `}
                 type="button"
               >
                 {option.label}
@@ -118,17 +114,13 @@ export function DesignSection({
           <div className="flex flex-wrap gap-2">
             {FORM_PADDING_OPTIONS.map((option) => (
               <Button
+                className={`font-medium text-sm ${
+                  currentPadding === option.value
+                    ? ''
+                    : 'border bg-transparent text-foreground hover:bg-accent'
+                }transition `}
                 key={option.value}
                 onClick={() => handlePaddingChange(option.value)}
-                className={`
-                  text-sm font-medium
-                  ${
-                    currentPadding === option.value
-                      ? ""
-                      : "bg-transparent hover:bg-accent text-foreground border"
-                  }
-                  transition
-                `}
                 type="button"
               >
                 {option.label}
@@ -142,17 +134,13 @@ export function DesignSection({
           <div className="flex flex-wrap gap-2">
             {FORM_MARGIN_OPTIONS.map((option) => (
               <Button
+                className={`font-medium text-sm ${
+                  currentMargin === option.value
+                    ? ''
+                    : 'border bg-transparent text-foreground hover:bg-accent'
+                }transition `}
                 key={option.value}
                 onClick={() => handleMarginChange(option.value)}
-                className={`
-                  text-sm font-medium
-                  ${
-                    currentMargin === option.value
-                      ? ""
-                      : "bg-transparent hover:bg-accent text-foreground border"
-                  }
-                  transition
-                `}
                 type="button"
               >
                 {option.label}
@@ -166,17 +154,13 @@ export function DesignSection({
           <div className="flex flex-wrap gap-2">
             {FORM_BORDER_RADIUS_OPTIONS.map((option) => (
               <Button
+                className={`font-medium text-sm ${
+                  currentBorderRadius === option.value
+                    ? ''
+                    : 'border bg-transparent text-foreground hover:bg-accent'
+                }transition `}
                 key={option.value}
                 onClick={() => handleBorderRadiusChange(option.value)}
-                className={`
-                text-sm font-medium
-                ${
-                  currentBorderRadius === option.value
-                    ? ""
-                    : "bg-transparent hover:bg-accent text-foreground border"
-                }
-                transition
-              `}
                 type="button"
               >
                 {option.label}
@@ -188,17 +172,17 @@ export function DesignSection({
         <div className="flex flex-col gap-2">
           <Label>Design Mode</Label>
           <RadioGroup
-            value={currentDesignMode}
+            className="flex gap-4"
             onValueChange={handleDesignModeChange}
             orientation="horizontal"
-            className="flex gap-4"
+            value={currentDesignMode}
           >
             {FORM_DESIGN_MODES.map((mode) => (
               <RadioItem
+                className="font-medium text-sm"
                 key={mode.value}
-                value={mode.value}
                 label={mode.label}
-                className="text-sm font-medium"
+                value={mode.value}
               />
             ))}
           </RadioGroup>

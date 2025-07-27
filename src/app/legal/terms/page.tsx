@@ -1,21 +1,21 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function Terms() {
   return (
-    <article className="max-w-4xl mx-auto px-4 py-10 flex flex-col gap-12 legal">
+    <article className="legal mx-auto flex max-w-4xl flex-col gap-12 px-4 py-10">
       <section className="flex flex-col gap-4">
-        <h1 className="text-4xl font-bold">Terms of Service</h1>
-        <div className="text-sm text-muted-foreground">
+        <h1 className="font-bold text-4xl">Terms of Service</h1>
+        <div className="text-muted-foreground text-sm">
           Last updated: 06th July 2025
         </div>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">1. Terms</h2>
+        <h2 className="font-semibold text-2xl">1. Terms</h2>
         <p>
-          By accessing the website at{" "}
+          By accessing the website at{' '}
           <Link
-            href="https://www.ikiform.com"
             className="text-blue-500 underline"
+            href="https://www.ikiform.com"
           >
             https://www.ikiform.com
           </Link>
@@ -28,7 +28,7 @@ export default function Terms() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">2. Use License</h2>
+        <h2 className="font-semibold text-2xl">2. Use License</h2>
         <p>
           Permission is granted to use, copy, modify, and distribute this
           software and its accompanying materials in accordance with the terms
@@ -36,7 +36,7 @@ export default function Terms() {
           etc.). This license grants rights to use the software for both
           personal and commercial purposes, subject to the following conditions:
         </p>
-        <ul className="list-disc pl-6 flex flex-col gap-1">
+        <ul className="flex list-disc flex-col gap-1 pl-6">
           <li>modify or copy the materials;</li>
           <li>
             use the materials for any commercial purpose, or for any public
@@ -69,7 +69,7 @@ export default function Terms() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">3. Disclaimer</h2>
+        <h2 className="font-semibold text-2xl">3. Disclaimer</h2>
         <p>
           The materials on Ikiform's website and services are provided on an 'as
           is' basis. Ikiform makes no warranties, expressed or implied, and
@@ -80,15 +80,15 @@ export default function Terms() {
           warrant or make any representations concerning the accuracy, likely
           results, or reliability of the use of the materials on its website or
           otherwise relating to such materials or on any sites linked to this
-          site. Please review our{" "}
-          <Link href="/legal/privacy" className="text-blue-500 underline">
+          site. Please review our{' '}
+          <Link className="text-blue-500 underline" href="/legal/privacy">
             Privacy Policy
-          </Link>{" "}
+          </Link>{' '}
           in tandem with these terms.
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">4. Limitations</h2>
+        <h2 className="font-semibold text-2xl">4. Limitations</h2>
         <p>
           In no event shall Ikiform or its suppliers be liable for any damages
           (including, without limitation, damages for loss of data or profit, or
@@ -102,7 +102,7 @@ export default function Terms() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">5. Accuracy of Materials</h2>
+        <h2 className="font-semibold text-2xl">5. Accuracy of Materials</h2>
         <p>
           The materials appearing on Ikiform's website or app could include
           technical, typographical, or photographic errors. Ikiform does not
@@ -113,7 +113,7 @@ export default function Terms() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">6. Links</h2>
+        <h2 className="font-semibold text-2xl">6. Links</h2>
         <p>
           Ikiform has not reviewed all of the sites linked to its website and is
           not responsible for the contents of any such linked site. The
@@ -122,7 +122,7 @@ export default function Terms() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">7. Cancellation & Refunds</h2>
+        <h2 className="font-semibold text-2xl">7. Cancellation & Refunds</h2>
         <p>
           You can cancel your subscription at any time. Ikiform has a no-refund
           policy except in cases of technical issues originating from the
@@ -134,7 +134,7 @@ export default function Terms() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">8. Fair Usage Policy</h2>
+        <h2 className="font-semibold text-2xl">8. Fair Usage Policy</h2>
         <p>
           You may use Ikiform for personal and commercial purposes within fair
           usage limits. Abuse of the platform is strictly prohibited. You may
@@ -144,7 +144,7 @@ export default function Terms() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">9. Modifications</h2>
+        <h2 className="font-semibold text-2xl">9. Modifications</h2>
         <p>
           Ikiform may revise these terms of service for its website or services
           at any time without notice. By using this website or app you are
@@ -153,7 +153,7 @@ export default function Terms() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">10. Governing Law</h2>
+        <h2 className="font-semibold text-2xl">10. Governing Law</h2>
         <p>
           These terms and conditions are governed by and construed in accordance
           with the laws of India and you irrevocably submit to the exclusive

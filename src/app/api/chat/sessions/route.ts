@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/utils/supabase/server";
-import { formsDbServer } from "@/lib/database";
-import { requirePremium } from "@/lib/utils/premium-check";
+import { type NextRequest, NextResponse } from 'next/server';
+import { formsDbServer } from '@/lib/database';
+import { requirePremium } from '@/lib/utils/premium-check';
+import { createClient } from '@/utils/supabase/server';
 
 // Get all chat sessions for a user
 export async function GET(req: NextRequest) {
@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
     } = await supabase.auth.getUser();
 
     if (authError || !user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     // Check premium status
@@ -24,42 +24,42 @@ export async function GET(req: NextRequest) {
     }
 
     const { searchParams } = new URL(req.url);
-    const limit = parseInt(searchParams.get("limit") || "10");
-    const type = searchParams.get("type") || "both"; // "builder", "analytics", or "both"
+    const limit = Number.parseInt(searchParams.get('limit') || '10');
+    const type = searchParams.get('type') || 'both'; // "builder", "analytics", or "both"
 
     let sessions: any[] = [];
 
-    if (type === "builder" || type === "both") {
+    if (type === 'builder' || type === 'both') {
       const builderSessions = await formsDbServer.getAIBuilderSessions(
         user.id,
-        limit,
+        limit
       );
       sessions = sessions.concat(
         builderSessions.map((session: any) => ({
           ...session,
-          type: "ai_builder",
-        })),
+          type: 'ai_builder',
+        }))
       );
     }
 
-    if (type === "analytics" || type === "both") {
+    if (type === 'analytics' || type === 'both') {
       const analyticsSessions = await formsDbServer.getAIAnalyticsSessions(
         user.id,
-        "",
-        limit,
+        '',
+        limit
       );
       sessions = sessions.concat(
         analyticsSessions.map((session: any) => ({
           ...session,
-          type: "ai_analytics",
-        })),
+          type: 'ai_analytics',
+        }))
       );
     }
 
     // Sort by created_at desc
     sessions.sort(
       (a, b) =>
-        new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
     );
 
     // Take only the requested limit
@@ -75,10 +75,10 @@ export async function GET(req: NextRequest) {
       },
     });
   } catch (error) {
-    console.error("Error fetching chat sessions:", error);
+    console.error('Error fetching chat sessions:', error);
     return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 },
+      { error: 'Internal server error' },
+      { status: 500 }
     );
   }
 }

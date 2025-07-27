@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import React from "react";
-import Link from "next/link";
+import Link from 'next/link';
+import React from 'react';
 import {
-  FaLinkedin,
-  FaXTwitter,
-  FaYoutube,
-  FaInstagram,
   FaFacebook,
   FaGithub,
   FaGlobe,
-} from "react-icons/fa6";
+  FaInstagram,
+  FaLinkedin,
+  FaXTwitter,
+  FaYoutube,
+} from 'react-icons/fa6';
 
 interface SocialMediaPlatforms {
   linkedin?: string;
@@ -24,15 +24,15 @@ interface SocialMediaPlatforms {
 
 interface SocialMediaIconsProps {
   platforms: SocialMediaPlatforms;
-  iconSize?: "sm" | "md" | "lg";
+  iconSize?: 'sm' | 'md' | 'lg';
   className?: string;
   showLabels?: boolean;
 }
 
 const iconSizeClasses = {
-  sm: "w-4 h-4",
-  md: "w-5 h-5",
-  lg: "w-6 h-6",
+  sm: 'w-4 h-4',
+  md: 'w-5 h-5',
+  lg: 'w-6 h-6',
 };
 
 const socialIcons = {
@@ -46,25 +46,25 @@ const socialIcons = {
 };
 
 const socialLabels = {
-  linkedin: "LinkedIn",
-  twitter: "X (Twitter)",
-  youtube: "YouTube",
-  instagram: "Instagram",
-  facebook: "Facebook",
-  github: "GitHub",
-  website: "Website",
+  linkedin: 'LinkedIn',
+  twitter: 'X (Twitter)',
+  youtube: 'YouTube',
+  instagram: 'Instagram',
+  facebook: 'Facebook',
+  github: 'GitHub',
+  website: 'Website',
 };
 
 export function SocialMediaIcons({
   platforms,
-  iconSize = "md",
-  className = "",
+  iconSize = 'md',
+  className = '',
   showLabels = false,
 }: SocialMediaIconsProps) {
   const sizeClass = iconSizeClasses[iconSize];
 
   const activePlatforms = Object.entries(platforms).filter(
-    ([_, url]) => url && url.trim() !== "",
+    ([_, url]) => url && url.trim() !== ''
   );
 
   if (activePlatforms.length === 0) {
@@ -77,15 +77,15 @@ export function SocialMediaIcons({
         const Icon = socialIcons[platform as keyof typeof socialIcons];
         const label = socialLabels[platform as keyof typeof socialLabels];
 
-        if (!Icon || !url) return null;
+        if (typeof Icon !== 'function' || !url) return null;
 
         return (
           <Link
-            key={platform}
+            className="flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
             href={url}
-            target="_blank"
+            key={platform}
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+            target="_blank"
             title={label}
           >
             <Icon className={sizeClass} />

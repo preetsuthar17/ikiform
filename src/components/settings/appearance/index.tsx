@@ -1,18 +1,16 @@
-"use client";
+'use client';
 
+import { useTheme } from 'next-themes';
 // External imports
-import React from "react";
-import { useTheme } from "next-themes";
-
-// constants
-import { THEMES } from "./constants";
-
+import type React from 'react';
 // components
 import {
+  AdditionalOptions,
   AppearanceHeader,
   ThemeSelector,
-  AdditionalOptions,
-} from "./components";
+} from './components';
+// constants
+import { THEMES } from './constants';
 
 export const AppearanceSettings: React.FC = () => {
   const { theme, setTheme } = useTheme();
@@ -21,9 +19,9 @@ export const AppearanceSettings: React.FC = () => {
     <div className="flex flex-col gap-8">
       <AppearanceHeader />
       <ThemeSelector
-        themes={THEMES}
-        selectedTheme={theme}
         onThemeChange={setTheme}
+        selectedTheme={theme}
+        themes={THEMES}
       />
       <AdditionalOptions />
     </div>

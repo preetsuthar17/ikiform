@@ -1,16 +1,16 @@
 // External libraries
-import React from "react";
-import { Info } from "lucide-react";
+
+import { Info } from 'lucide-react';
+import React from 'react';
 
 // UI components
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-
+import { Card } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 // Types
-import type { BasicInfoSectionProps } from "../types";
-import { Checkbox } from "@/components/ui/checkbox";
+import type { BasicInfoSectionProps } from '../types';
 
 export function BasicInfoSection({
   localSettings,
@@ -18,61 +18,61 @@ export function BasicInfoSection({
 }: BasicInfoSectionProps) {
   return (
     <Card className="p-6">
-      <div className="flex items-center gap-3 mb-4">
-        <Info className="w-5 h-5 text-primary" />
-        <h3 className="text-lg font-medium">Basic Information</h3>
+      <div className="mb-4 flex items-center gap-3">
+        <Info className="h-5 w-5 text-primary" />
+        <h3 className="font-medium text-lg">Basic Information</h3>
       </div>
-      <div className="flex flex-col gap-4 border-l-2 border-muted pl-6">
+      <div className="flex flex-col gap-4 border-muted border-l-2 pl-6">
         <BasicInfoField
           id="form-title"
           label="Form Title"
-          value={localSettings.title}
-          placeholder="Enter form title"
           onChange={(value) => updateSettings({ title: value })}
+          placeholder="Enter form title"
+          value={localSettings.title}
         />
         <BasicInfoField
           id="form-description"
-          label="Form Description"
-          value={localSettings.description || ""}
-          placeholder="Enter form description"
-          onChange={(value) => updateSettings({ description: value })}
           isTextarea
+          label="Form Description"
+          onChange={(value) => updateSettings({ description: value })}
+          placeholder="Enter form description"
           rows={3}
+          value={localSettings.description || ''}
         />
         <BasicInfoField
           id="submit-text"
           label="Submit Button Text"
-          value={localSettings.submitText || "Submit"}
-          placeholder="Submit"
           onChange={(value) => updateSettings({ submitText: value })}
+          placeholder="Submit"
+          value={localSettings.submitText || 'Submit'}
         />
         <BasicInfoField
           id="success-message"
-          label="Success Message"
-          value={localSettings.successMessage || ""}
-          placeholder="Thank you for your submission!"
-          onChange={(value) => updateSettings({ successMessage: value })}
           isTextarea
+          label="Success Message"
+          onChange={(value) => updateSettings({ successMessage: value })}
+          placeholder="Thank you for your submission!"
           rows={2}
+          value={localSettings.successMessage || ''}
         />
         <BasicInfoField
           id="redirect-url"
           label="Redirect URL (optional)"
-          value={localSettings.redirectUrl || ""}
-          placeholder="https://example.com/thank-you"
           onChange={(value) => updateSettings({ redirectUrl: value })}
+          placeholder="https://example.com/thank-you"
+          value={localSettings.redirectUrl || ''}
         />
         <div className="flex items-center gap-3 pt-2">
           <input
-            type="checkbox"
-            id="rtl-toggle"
             checked={!!localSettings.rtl}
+            className="h-4 w-4 accent-primary"
+            id="rtl-toggle"
             onChange={(e) =>
               updateSettings({ rtl: (e.target as HTMLInputElement).checked })
             }
-            className="accent-primary w-4 h-4"
+            type="checkbox"
           />
-          <Label htmlFor="rtl-toggle" className="cursor-pointer select-none">
+          <Label className="cursor-pointer select-none" htmlFor="rtl-toggle">
             Display form in RTL (Right-to-Left) mode
           </Label>
         </div>
@@ -104,17 +104,17 @@ function BasicInfoField({
       {isTextarea ? (
         <Textarea
           id={id}
-          value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
           rows={rows}
+          value={value}
         />
       ) : (
         <Input
           id={id}
-          value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
+          value={value}
         />
       )}
     </div>

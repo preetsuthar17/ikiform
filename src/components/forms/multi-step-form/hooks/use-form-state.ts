@@ -1,39 +1,38 @@
 // Libraries
-import { useState, useEffect, useRef } from "react";
-import { toast } from "@/hooks/use-toast";
+import { useEffect, useRef, useState } from 'react';
+import { toast } from '@/hooks/use-toast';
 
 // Types
-import type { FormSchema, FormBlock, FormField } from "@/lib/database";
-import type { FormState, FormActions } from "../types";
-import type { LogicAction } from "@/lib/forms/logic";
-
+import type { FormBlock, FormField, FormSchema } from '@/lib/database';
+import type { LogicAction } from '@/lib/forms/logic';
+import { evaluateLogic } from '@/lib/forms/logic';
+import type { FormActions, FormState } from '../types';
+import { submitForm } from '../utils/form-utils';
 // Utilities
-import { validateStep } from "../utils/validation";
-import { submitForm } from "../utils/form-utils";
-import { evaluateLogic } from "@/lib/forms/logic";
+import { validateStep } from '../utils/validation';
 
 // Utility function to get default value for a field type
 const getDefaultValueForField = (field: FormField): any => {
   switch (field.type) {
-    case "tags":
+    case 'tags':
       return [];
-    case "checkbox":
+    case 'checkbox':
       return [];
-    case "radio":
-      return "";
-    case "select":
-      return "";
-    case "slider":
+    case 'radio':
+      return '';
+    case 'select':
+      return '';
+    case 'slider':
       return field.settings?.defaultValue || 50;
-    case "rating":
+    case 'rating':
       return null;
-    case "number":
-      return "";
-    case "text":
-    case "email":
-    case "textarea":
+    case 'number':
+      return '';
+    case 'text':
+    case 'email':
+    case 'textarea':
     default:
-      return "";
+      return '';
   }
 };
 
@@ -53,7 +52,7 @@ const initializeFormData = (blocks: FormBlock[]): Record<string, any> => {
 export const useFormState = (
   formId: string,
   schema: FormSchema,
-  blocks: FormBlock[],
+  blocks: FormBlock[]
 ): FormState &
   FormActions & {
     fieldVisibility: Record<string, { visible: boolean; disabled: boolean }>;
@@ -78,7 +77,7 @@ export const useFormState = (
     });
 
     const newFieldIds = [...allFieldIds].filter(
-      (id) => !initializedFieldsRef.current.has(id),
+      (id) => !initializedFieldsRef.current.has(id)
     );
 
     if (newFieldIds.length > 0) {
@@ -123,33 +122,32 @@ export const useFormState = (
   // Apply logic: hide > show > default
   Object.entries(fieldVisibility).forEach(([fieldId, vis]) => {
     const actions = actionsByField[fieldId] || [];
-    if (actions.some((a) => a.type === "hide")) {
+    if (actions.some((a) => a.type === 'hide')) {
       vis.visible = false;
-    } else if (actions.some((a) => a.type === "show")) {
+    } else if (actions.some((a) => a.type === 'show')) {
       vis.visible = true;
     } // else leave as default
-    if (actions.some((a) => a.type === "disable")) {
+    if (actions.some((a) => a.type === 'disable')) {
       vis.disabled = true;
-    } else if (actions.some((a) => a.type === "enable")) {
+    } else if (actions.some((a) => a.type === 'enable')) {
       vis.disabled = false;
     }
   });
 
   logicActions.forEach((action) => {
-    if (action.target && fieldVisibility[action.target]) {
-      if (
-        action.type === "set_value" &&
-        typeof action.target === "string" &&
-        Object.prototype.hasOwnProperty.call(formData, action.target)
-      ) {
-        if (formData[action.target] !== action.value)
-          setFormData((prev) => ({
-            ...prev,
-            [action.target as string]: action.value,
-          }));
-      }
-    }
-    if (action.type === "show_message" && action.value) {
+    if (
+      action.target &&
+      fieldVisibility[action.target] &&
+      action.type === 'set_value' &&
+      typeof action.target === 'string' &&
+      Object.hasOwn(formData, action.target) &&
+      formData[action.target] !== action.value
+    )
+      setFormData((prev) => ({
+        ...prev,
+        [action.target as string]: action.value,
+      }));
+    if (action.type === 'show_message' && action.value) {
       logicMessages.push(String(action.value));
     }
   });
@@ -157,7 +155,7 @@ export const useFormState = (
   const handleFieldValueChange = (fieldId: string, value: any) => {
     setFormData((prev) => ({ ...prev, [fieldId]: value }));
     if (errors[fieldId]) {
-      setErrors((prev) => ({ ...prev, [fieldId]: "" }));
+      setErrors((prev) => ({ ...prev, [fieldId]: '' }));
     }
   };
 
@@ -165,7 +163,7 @@ export const useFormState = (
     const { errors: validationErrors, isValid } = validateStep(
       currentStep,
       blocks,
-      formData,
+      formData
     );
 
     if (isValid) {
@@ -176,7 +174,7 @@ export const useFormState = (
       }
     } else {
       setErrors(validationErrors);
-      toast.error("Please fix the errors in this step");
+      toast.error('Please fix the errors in this step');
     }
   };
 
@@ -194,7 +192,7 @@ export const useFormState = (
 
       if (result.success) {
         setSubmitted(true);
-        toast.success("Form submitted successfully!");
+        toast.success('Form submitted successfully!');
 
         if (schema.settings.redirectUrl) {
           setTimeout(() => {
@@ -202,10 +200,10 @@ export const useFormState = (
           }, 2000);
         }
       } else {
-        toast.error(result.message || "Failed to submit form");
+        toast.error(result.message || 'Failed to submit form');
       }
     } catch {
-      toast.error("Failed to submit form. Please try again.");
+      toast.error('Failed to submit form. Please try again.');
     } finally {
       setSubmitting(false);
     }

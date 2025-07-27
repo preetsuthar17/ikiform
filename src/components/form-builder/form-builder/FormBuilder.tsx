@@ -1,52 +1,46 @@
-"use client";
+'use client';
 
+import { useRouter } from 'next/navigation';
 // External imports
-import React from "react";
-import { useRouter } from "next/navigation";
-
+import React, { useCallback, useState } from 'react';
+import type { FormLogic } from '@/components/form-builder/logic-builder/types';
 // Component imports
-import { Button } from "@/components/ui/button";
-import { Loader } from "../../ui/loader";
-import { FormBuilderHeader } from "./components/FormBuilderHeader";
-import { FormBuilderPanels } from "./components/FormBuilderPanels";
-import { FormBuilderModals } from "./components/FormBuilderModals";
-import { UnsavedChangesIndicator } from "./components/UnsavedChangesIndicator";
-import { Drawer, DrawerContent } from "@/components/ui/drawer";
-import { useState, useCallback } from "react";
-import { FieldPalette } from "../field-palette";
-import { FieldSettingsPanel } from "../field-settings-panel";
-
+import { Button } from '@/components/ui/button';
+import { Drawer, DrawerContent } from '@/components/ui/drawer';
 // Hook imports
-import { toast } from "@/hooks/use-toast";
-import { useFormBuilder } from "./hooks/useFormBuilder";
-
-// Utility imports
-import { formsDb } from "@/lib/database";
-import {
-  generateFieldId,
-  generateBlockId,
-  addFieldToSchema,
-  updateFieldInSchema,
-  removeFieldFromSchema,
-  removeDraftFromStorage,
-} from "./utils";
-
+import { toast } from '@/hooks/use-toast';
 // Type imports
-import type { FormField, FormSchema, FormBlock } from "@/lib/database";
-import type { FormBuilderProps } from "./types";
-import type { FormLogic } from "@/components/form-builder/logic-builder/types";
-
+import type { FormBlock, FormField, FormSchema } from '@/lib/database';
+// Utility imports
+import { formsDb } from '@/lib/database';
+import { Loader } from '../../ui/loader';
+import { FieldPalette } from '../field-palette';
+import { FieldSettingsPanel } from '../field-settings-panel';
+import { FormPreview } from '../form-preview';
+import { FormBuilderHeader } from './components/FormBuilderHeader';
+import { FormBuilderModals } from './components/FormBuilderModals';
+import { FormBuilderPanels } from './components/FormBuilderPanels';
+import { UnsavedChangesIndicator } from './components/UnsavedChangesIndicator';
 // Constant imports
-import { DRAFT_KEYS } from "./constants";
-import { FormPreview } from "../form-preview";
+import { DRAFT_KEYS } from './constants';
+import { useFormBuilder } from './hooks/useFormBuilder';
+import type { FormBuilderProps } from './types';
+import {
+  addFieldToSchema,
+  generateBlockId,
+  generateFieldId,
+  removeDraftFromStorage,
+  removeFieldFromSchema,
+  updateFieldInSchema,
+} from './utils';
 
 function useIsMobile() {
   const [isMobile, setIsMobile] = React.useState(false);
   React.useEffect(() => {
     const check = () => setIsMobile(window.innerWidth <= 1024);
     check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
   }, []);
   return isMobile;
 }
@@ -72,28 +66,28 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
       if (isMobile && fieldId) setShowFieldSettings(true);
       if (isMobile && !fieldId) setShowFieldSettings(false);
     },
-    [actions, isMobile],
+    [actions, isMobile]
   );
 
   // Form actions
-  const addField = (fieldType: FormField["type"], index?: number) => {
+  const addField = (fieldType: FormField['type'], index?: number) => {
     const newField: FormField = {
       id: generateFieldId(),
       type: fieldType,
       label: `${fieldType.charAt(0).toUpperCase() + fieldType.slice(1)} Field`,
-      placeholder: "",
+      placeholder: '',
       required: false,
-      options: ["select", "radio", "checkbox"].includes(fieldType)
-        ? ["Option 1", "Option 2"]
+      options: ['select', 'radio', 'checkbox'].includes(fieldType)
+        ? ['Option 1', 'Option 2']
         : undefined,
       validation: {},
       settings:
-        fieldType === "slider"
+        fieldType === 'slider'
           ? { min: 0, max: 100, step: 1, defaultValue: 50 }
-          : fieldType === "tags"
+          : fieldType === 'tags'
             ? { maxTags: 10, allowDuplicates: false }
-            : fieldType === "poll"
-              ? { pollOptions: ["Option 1", "Option 2"] }
+            : fieldType === 'poll'
+              ? { pollOptions: ['Option 1', 'Option 2'] }
               : {},
     };
 
@@ -101,18 +95,18 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
       state.formSchema,
       newField,
       state.selectedBlockId,
-      index,
+      index
     );
     actions.setFormSchema(updatedSchema);
     actions.setSelectedFieldId(newField.id);
   };
 
   const handleAddField = useCallback(
-    (fieldType: FormField["type"], index?: number) => {
+    (fieldType: FormField['type'], index?: number) => {
       addField(fieldType, index);
       setShowFieldPalette(false);
     },
-    [addField],
+    [addField]
   );
 
   const updateField = (updatedField: FormField) => {
@@ -151,7 +145,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     const newBlock: FormBlock = {
       id: generateBlockId(),
       title: `Step ${state.formSchema.blocks.length + 1}`,
-      description: "",
+      description: '',
       fields: [],
     };
 
@@ -178,7 +172,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
   const updateBlock = (blockId: string, updates: Partial<FormBlock>) => {
     actions.setFormSchema((prev) => {
       const updatedBlocks = prev.blocks.map((block) =>
-        block.id === blockId ? { ...block, ...updates } : block,
+        block.id === blockId ? { ...block, ...updates } : block
       );
 
       return {
@@ -217,7 +211,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     }
   };
 
-  const updateFormSettings = (settings: Partial<FormSchema["settings"]>) => {
+  const updateFormSettings = (settings: Partial<FormSchema['settings']>) => {
     actions.setFormSchema((prev) => {
       const newSchema = {
         ...prev,
@@ -231,7 +225,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 
   const saveForm = async () => {
     if (!user) {
-      toast.error("Please log in to save your form.");
+      toast.error('Please log in to save your form.');
       return;
     }
 
@@ -239,20 +233,20 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     try {
       if (formId) {
         await formsDb.updateForm(formId, { schema: state.formSchema });
-        toast.success("Form saved successfully!");
+        toast.success('Form saved successfully!');
       } else {
         const newForm = await formsDb.createForm(
           user.id,
           state.formSchema.settings.title,
-          state.formSchema,
+          state.formSchema
         );
         router.push(`/form-builder/${newForm.id}`);
-        toast.success("Form created successfully!");
+        toast.success('Form created successfully!');
       }
       removeDraftFromStorage(DRAFT_KEYS.getDraftKey(formId));
     } catch (error) {
-      console.error("Error saving form:", error);
-      toast.error("Failed to save form. Please try again.");
+      console.error('Error saving form:', error);
+      toast.error('Failed to save form. Please try again.');
     } finally {
       actions.setSaving(false);
     }
@@ -260,7 +254,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 
   const shareForm = () => {
     if (!formId) {
-      toast.error("Please save your form before sharing.");
+      toast.error('Please save your form before sharing.');
       return;
     }
     actions.setShowShareModal(true);
@@ -272,26 +266,26 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     try {
       await formsDb.togglePublishForm(formId, true);
       actions.setIsPublished(true);
-      toast.success("Form published successfully!");
+      toast.success('Form published successfully!');
     } catch (error) {
-      console.error("Error publishing form:", error);
-      toast.error("Failed to publish form. Please try again.");
+      console.error('Error publishing form:', error);
+      toast.error('Failed to publish form. Please try again.');
       throw error;
     }
   };
 
   const viewAnalytics = () => {
     if (!formId) {
-      toast.error("Please save your form before viewing analytics.");
+      toast.error('Please save your form before viewing analytics.');
       return;
     }
-    toast.success("Redirecting to analytics page...");
+    toast.success('Redirecting to analytics page...');
     router.push(`/dashboard/forms/${formId}/analytics`);
   };
 
   const togglePublish = async () => {
     if (!formId) {
-      toast.error("Please save your form before publishing.");
+      toast.error('Please save your form before publishing.');
       return;
     }
 
@@ -302,13 +296,13 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
       actions.setIsPublished(newPublishState);
 
       if (newPublishState) {
-        toast.success("Form published successfully!");
+        toast.success('Form published successfully!');
       } else {
-        toast.success("Form unpublished successfully!");
+        toast.success('Form unpublished successfully!');
       }
     } catch (error) {
-      console.error("Error toggling publish state:", error);
-      toast.error("Failed to update form status. Please try again.");
+      console.error('Error toggling publish state:', error);
+      toast.error('Failed to update form status. Please try again.');
     } finally {
       actions.setPublishing(false);
     }
@@ -327,10 +321,10 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
       if (
         state.formSchema.blocks.length === 0 ||
         (state.formSchema.blocks.length === 1 &&
-          state.formSchema.blocks[0].id === "default")
+          state.formSchema.blocks[0].id === 'default')
       ) {
         const defaultBlock = state.formSchema.blocks.find(
-          (b) => b.id === "default",
+          (b) => b.id === 'default'
         );
         const currentFields =
           defaultBlock?.fields || state.formSchema.fields || [];
@@ -339,9 +333,9 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           ...state.formSchema,
           blocks: [
             {
-              id: "step-1",
-              title: "Step 1",
-              description: "First step of your form",
+              id: 'step-1',
+              title: 'Step 1',
+              description: 'First step of your form',
               fields: currentFields,
             },
           ],
@@ -353,7 +347,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           },
         };
         actions.setFormSchema(newSchema);
-        actions.setSelectedBlockId("step-1");
+        actions.setSelectedBlockId('step-1');
       } else {
         updateFormSettings({
           multiStep: true,
@@ -362,16 +356,16 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
       }
     } else {
       const allFields = state.formSchema.blocks.flatMap(
-        (block) => block.fields || [],
+        (block) => block.fields || []
       );
 
       const newSchema = {
         ...state.formSchema,
         blocks: [
           {
-            id: "default",
-            title: "Form Fields",
-            description: "",
+            id: 'default',
+            title: 'Form Fields',
+            description: '',
             fields: allFields,
           },
         ],
@@ -383,7 +377,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
         },
       };
       actions.setFormSchema(newSchema);
-      actions.setSelectedBlockId("default");
+      actions.setSelectedBlockId('default');
     }
   };
 
@@ -397,8 +391,8 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
   // Loading states
   if (authLoading || state.loading) {
     return (
-      <div className="h-screen flex items-center justify-center">
-        <div className="text-center flex flex-col gap-3">
+      <div className="flex h-screen items-center justify-center">
+        <div className="flex flex-col gap-3 text-center">
           <Loader />
         </div>
       </div>
@@ -407,13 +401,13 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 
   if (!user) {
     return (
-      <div className="h-screen flex items-center justify-center">
+      <div className="flex h-screen items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Authentication Required</h2>
-          <p className="text-muted-foreground mb-6">
+          <h2 className="mb-4 font-bold text-2xl">Authentication Required</h2>
+          <p className="mb-6 text-muted-foreground">
             Please log in to use the form builder.
           </p>
-          <Button onClick={() => router.push("/")}>Go to Login</Button>
+          <Button onClick={() => router.push('/')}>Go to Login</Button>
         </div>
       </div>
     );
@@ -421,87 +415,83 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 
   if (isMobile) {
     return (
-      <div className="h-screen flex flex-col overflow-hidden bg-background">
-        <div className="sticky top-0 z-30 shadow-sm bg-card">
+      <div className="flex h-screen flex-col overflow-hidden bg-background">
+        <div className="sticky top-0 z-30 bg-card shadow-sm">
           <FormBuilderHeader
-            formSchema={state.formSchema}
             autoSaving={state.autoSaving}
-            saving={state.saving}
-            publishing={state.publishing}
-            isPublished={state.isPublished}
             formId={formId}
-            onModeToggle={handleModeToggle}
-            onJsonView={() => actions.setShowJsonView(true)}
+            formSchema={state.formSchema}
+            isPublished={state.isPublished}
             onAnalytics={viewAnalytics}
-            onShare={shareForm}
-            onSettings={() => actions.setShowFormSettings(true)}
+            onJsonView={() => actions.setShowJsonView(true)}
+            onModeToggle={handleModeToggle}
             onPublish={togglePublish}
             onSave={saveForm}
+            onSettings={() => actions.setShowFormSettings(true)}
+            onShare={shareForm}
+            publishing={state.publishing}
+            saving={state.saving}
           />
         </div>
-        <div className="flex-1 overflow-auto relative">
-          <div className="w-full h-full">
+        <div className="relative flex-1 overflow-auto">
+          <div className="h-full w-full">
             <FormPreview
-              schema={state.formSchema}
-              selectedFieldId={state.selectedFieldId}
-              selectedBlockId={state.selectedBlockId}
+              onAddField={addField}
+              onBlockUpdate={updateBlock}
+              onFieldDelete={deleteField}
               onFieldSelect={handleFieldSelect}
               onFieldsReorder={reorderFields}
-              onFieldDelete={deleteField}
               onFormSettingsUpdate={updateFormSettings}
-              onBlockUpdate={updateBlock}
               onStepSelect={handleStepSelection}
-              onAddField={addField}
+              schema={state.formSchema}
+              selectedBlockId={state.selectedBlockId}
+              selectedFieldId={state.selectedFieldId}
             />
           </div>
-          <Drawer open={showFieldPalette} onOpenChange={setShowFieldPalette}>
+          <Drawer onOpenChange={setShowFieldPalette} open={showFieldPalette}>
             <DrawerContent className=" mx-auto w-full rounded-t-2xl p-4">
-              <div className="w-full h-[70vh]">
+              <div className="h-[70vh] w-full">
                 <FieldPalette onAddField={handleAddField} />
               </div>
             </DrawerContent>
           </Drawer>
           <Drawer
-            open={showFieldSettings}
             onOpenChange={(open) => {
               setShowFieldSettings(open);
               if (!open) actions.setSelectedFieldId(null);
             }}
+            open={showFieldSettings}
           >
             <DrawerContent className="mx-auto w-full rounded-t-2xl p-0">
               <div className="max-h-[80vh]">
                 <FieldSettingsPanel
                   field={selectedField}
-                  onFieldUpdate={updateField}
                   onClose={() => {
                     setShowFieldSettings(false);
                     actions.setSelectedFieldId(null);
                   }}
+                  onFieldUpdate={updateField}
                 />
               </div>
             </DrawerContent>
           </Drawer>
         </div>
         <UnsavedChangesIndicator
-          hasUnsavedChanges={state.hasUnsavedChanges}
           autoSaving={state.autoSaving}
+          hasUnsavedChanges={state.hasUnsavedChanges}
         />
         <FormBuilderModals
-          showSettings={state.showSettings}
-          showFormSettings={state.showFormSettings}
-          showJsonView={state.showJsonView}
-          showCreationWizard={state.showCreationWizard}
-          showShareModal={state.showShareModal}
-          formSchema={state.formSchema}
           formId={formId}
+          formSchema={state.formSchema}
           isPublished={state.isPublished}
-          onCloseSettings={() => actions.setShowSettings(false)}
+          onCloseCreationWizard={() => actions.setShowCreationWizard(false)}
           onCloseFormSettings={() => actions.setShowFormSettings(false)}
           onCloseJsonView={() => actions.setShowJsonView(false)}
-          onCloseCreationWizard={() => actions.setShowCreationWizard(false)}
+          onCloseSettings={() => actions.setShowSettings(false)}
           onCloseShareModal={() => actions.setShowShareModal(false)}
-          onFormTypeSelect={handleFormTypeSelect}
           onFormSettingsUpdate={updateFormSettings}
+          onFormTypeSelect={handleFormTypeSelect}
+          onPublish={handlePublishForm}
           onSchemaUpdate={(updates) => {
             actions.setFormSchema((prev) => ({
               ...prev,
@@ -509,7 +499,11 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
             }));
             actions.setHasUnsavedChanges(true);
           }}
-          onPublish={handlePublishForm}
+          showCreationWizard={state.showCreationWizard}
+          showFormSettings={state.showFormSettings}
+          showJsonView={state.showJsonView}
+          showSettings={state.showSettings}
+          showShareModal={state.showShareModal}
           userEmail={user?.email}
         />
       </div>
@@ -517,66 +511,62 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
   }
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden">
+    <div className="flex h-screen flex-col overflow-hidden">
       <FormBuilderHeader
-        formSchema={state.formSchema}
         autoSaving={state.autoSaving}
-        saving={state.saving}
-        publishing={state.publishing}
-        isPublished={state.isPublished}
         formId={formId}
-        onModeToggle={handleModeToggle}
-        onJsonView={() => actions.setShowJsonView(true)}
+        formSchema={state.formSchema}
+        isPublished={state.isPublished}
         onAnalytics={viewAnalytics}
-        onShare={shareForm}
-        onSettings={() => actions.setShowFormSettings(true)}
+        onJsonView={() => actions.setShowJsonView(true)}
+        onModeToggle={handleModeToggle}
         onPublish={togglePublish}
         onSave={saveForm}
+        onSettings={() => actions.setShowFormSettings(true)}
+        onShare={shareForm}
+        publishing={state.publishing}
+        saving={state.saving}
       />
 
       <div className="overflow-hidden">
         <FormBuilderPanels
           formSchema={state.formSchema}
-          selectedFieldId={state.selectedFieldId}
-          selectedBlockId={state.selectedBlockId}
-          selectedField={selectedField}
-          onFieldAdd={addField}
-          onFieldSelect={actions.setSelectedFieldId}
-          onFieldUpdate={updateField}
-          onFieldDelete={deleteField}
-          onFieldsReorder={reorderFields}
+          onBlockAdd={addBlock}
+          onBlockDelete={deleteBlock}
           onBlockSelect={actions.setSelectedBlockId}
           onBlocksUpdate={updateBlocks}
-          onBlockAdd={addBlock}
           onBlockUpdate={updateBlock}
-          onBlockDelete={deleteBlock}
+          onFieldAdd={addField}
+          onFieldDelete={deleteField}
+          onFieldSelect={actions.setSelectedFieldId}
+          onFieldsReorder={reorderFields}
+          onFieldUpdate={updateField}
           onFormSettingsUpdate={updateFormSettings}
-          onStepSelect={handleStepSelection}
           onLogicChange={handleLogicChange}
+          onStepSelect={handleStepSelection}
+          selectedBlockId={state.selectedBlockId}
+          selectedField={selectedField}
+          selectedFieldId={state.selectedFieldId}
         />
       </div>
 
       <UnsavedChangesIndicator
-        hasUnsavedChanges={state.hasUnsavedChanges}
         autoSaving={state.autoSaving}
+        hasUnsavedChanges={state.hasUnsavedChanges}
       />
 
       <FormBuilderModals
-        showSettings={state.showSettings}
-        showFormSettings={state.showFormSettings}
-        showJsonView={state.showJsonView}
-        showCreationWizard={state.showCreationWizard}
-        showShareModal={state.showShareModal}
-        formSchema={state.formSchema}
         formId={formId}
+        formSchema={state.formSchema}
         isPublished={state.isPublished}
-        onCloseSettings={() => actions.setShowSettings(false)}
+        onCloseCreationWizard={() => actions.setShowCreationWizard(false)}
         onCloseFormSettings={() => actions.setShowFormSettings(false)}
         onCloseJsonView={() => actions.setShowJsonView(false)}
-        onCloseCreationWizard={() => actions.setShowCreationWizard(false)}
+        onCloseSettings={() => actions.setShowSettings(false)}
         onCloseShareModal={() => actions.setShowShareModal(false)}
-        onFormTypeSelect={handleFormTypeSelect}
         onFormSettingsUpdate={updateFormSettings}
+        onFormTypeSelect={handleFormTypeSelect}
+        onPublish={handlePublishForm}
         onSchemaUpdate={(updates) => {
           actions.setFormSchema((prev) => ({
             ...prev,
@@ -584,7 +574,11 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           }));
           actions.setHasUnsavedChanges(true);
         }}
-        onPublish={handlePublishForm}
+        showCreationWizard={state.showCreationWizard}
+        showFormSettings={state.showFormSettings}
+        showJsonView={state.showJsonView}
+        showSettings={state.showSettings}
+        showShareModal={state.showShareModal}
         userEmail={user?.email}
       />
     </div>

@@ -1,10 +1,10 @@
-import React from "react";
-import { Users } from "lucide-react";
-import { Card } from "@/components/ui/card";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Users } from 'lucide-react';
+import React from 'react';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Textarea } from '@/components/ui/textarea';
 
 export function ResponseLimitSection({
   localSettings,
@@ -17,44 +17,44 @@ export function ResponseLimitSection({
 
   return (
     <Card className="p-6">
-      <div className="flex items-center gap-3 mb-4">
-        <Users className="w-5 h-5 text-primary" />
-        <h3 className="text-lg font-medium">Response Limit</h3>
+      <div className="mb-4 flex items-center gap-3">
+        <Users className="h-5 w-5 text-primary" />
+        <h3 className="font-medium text-lg">Response Limit</h3>
       </div>
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
           <Switch
-            size="sm"
+            checked={responseLimit.enabled}
             id="response-limit-enabled"
-            checked={responseLimit.enabled || false}
             onCheckedChange={(checked) =>
               updateResponseLimit({ enabled: checked })
             }
+            size="sm"
           />
           <Label
+            className="font-medium text-sm"
             htmlFor="response-limit-enabled"
-            className="text-sm font-medium"
           >
             Enable Response Limit
           </Label>
         </div>
         {responseLimit.enabled ? (
-          <div className="flex flex-col gap-4 border-l-2 border-muted pl-6">
+          <div className="flex flex-col gap-4 border-muted border-l-2 pl-6">
             <div className="flex flex-col gap-2">
               <Label htmlFor="max-responses">Max Responses</Label>
               <Input
                 id="max-responses"
-                type="number"
                 min={1}
-                value={responseLimit.maxResponses || 100}
                 onChange={(e) =>
                   updateResponseLimit({
-                    maxResponses: parseInt(e.target.value) || 1,
+                    maxResponses: Number.parseInt(e.target.value) || 1,
                   })
                 }
                 placeholder="100"
+                type="number"
+                value={responseLimit.maxResponses || 100}
               />
-              <p className="text-xs text-muted-foreground">
+              <p className="text-muted-foreground text-xs">
                 The maximum number of responses allowed for this form.
               </p>
             </div>
@@ -64,24 +64,24 @@ export function ResponseLimitSection({
               </Label>
               <Textarea
                 id="response-limit-message"
-                value={
-                  responseLimit.message ||
-                  "This form is no longer accepting responses."
-                }
                 onChange={(e) =>
                   updateResponseLimit({ message: e.target.value })
                 }
                 placeholder="This form is no longer accepting responses."
                 rows={2}
+                value={
+                  responseLimit.message ||
+                  'This form is no longer accepting responses.'
+                }
               />
-              <p className="text-xs text-muted-foreground">
+              <p className="text-muted-foreground text-xs">
                 Message shown when the response limit is reached.
               </p>
             </div>
           </div>
         ) : (
-          <div className="bg-muted/30 rounded-card p-4">
-            <p className="text-sm text-muted-foreground">
+          <div className="rounded-card bg-muted/30 p-4">
+            <p className="text-muted-foreground text-sm">
               Limit the total number of responses this form can accept. Once the
               limit is reached, new submissions will be blocked.
             </p>

@@ -1,27 +1,23 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
+'use client';
 
 // Icon imports
-import { Copy, Share, Globe, Check, Download, QrCode } from "lucide-react";
-
+import { Check, Copy, Download, Globe, QrCode, Share } from 'lucide-react';
+// QR Code library
+import QRCode from 'qrcode';
+import React, { useEffect, useState } from 'react';
 // UI components
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Modal,
   ModalContent,
   ModalHeader,
   ModalTitle,
-} from "@/components/ui/modal";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
-
+} from '@/components/ui/modal';
+import { Tabs, TabsContent } from '@/components/ui/tabs';
 // Hooks
-import { toast } from "@/hooks/use-toast";
-
-// QR Code library
-import QRCode from "qrcode";
+import { toast } from '@/hooks/use-toast';
 
 interface ShareFormModalProps {
   isOpen: boolean;
@@ -32,8 +28,8 @@ interface ShareFormModalProps {
 }
 
 const QR_CODE_STYLE = {
-  primaryColor: "#6366f1",
-  backgroundColor: "#FFFFFF",
+  primaryColor: '#6366f1',
+  backgroundColor: '#FFFFFF',
   logoSize: 32,
   cornerRadius: 6,
 };
@@ -47,18 +43,18 @@ export function ShareFormModal({
 }: ShareFormModalProps) {
   const [copying, setCopying] = useState(false);
   const [publishing, setPublishing] = useState(false);
-  const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string>("");
+  const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string>('');
   const [downloading, setDownloading] = useState(false);
-  const [activeTab, setActiveTab] = useState("link");
+  const [activeTab, setActiveTab] = useState('link');
   const [generatingQR, setGeneratingQR] = useState(false);
 
   const shareUrl = formId
-    ? `${typeof window !== "undefined" ? window.location.origin : ""}/forms/${formId}`
-    : "";
+    ? `${typeof window !== 'undefined' ? window.location.origin : ''}/forms/${formId}`
+    : '';
 
   const tabItems = [
-    { id: "link", label: "Link" },
-    { id: "qr", label: "QR Code" },
+    { id: 'link', label: 'Link' },
+    { id: 'qr', label: 'QR Code' },
   ];
 
   // Generate QR code when modal opens and form is published
@@ -86,7 +82,7 @@ export function ShareFormModal({
       const qrDataUrl = await QRCode.toDataURL(shareUrl, {
         width: 256,
         margin: 4, // Increased margin for better scannability
-        errorCorrectionLevel: "M", // Medium error correction for logo overlay
+        errorCorrectionLevel: 'M', // Medium error correction for logo overlay
         color: {
           dark: style.primaryColor,
           light: style.backgroundColor,
@@ -94,9 +90,9 @@ export function ShareFormModal({
       });
 
       // Create canvas to overlay logo
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-      if (!ctx) throw new Error("Could not get canvas context");
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) throw new Error('Could not get canvas context');
 
       canvas.width = 256;
       canvas.height = 256;
@@ -118,10 +114,10 @@ export function ShareFormModal({
       ctx.lineWidth = 2;
       ctx.strokeRect(1, 1, 254, 254);
 
-      setQrCodeDataUrl(canvas.toDataURL("image/png"));
+      setQrCodeDataUrl(canvas.toDataURL('image/png'));
     } catch (error) {
-      console.error("Error generating QR code:", error);
-      toast.error("Failed to generate QR code");
+      console.error('Error generating QR code:', error);
+      toast.error('Failed to generate QR code');
     } finally {
       setGeneratingQR(false);
     }
@@ -134,21 +130,21 @@ export function ShareFormModal({
     try {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(shareUrl);
-        toast.success("Link copied to clipboard!");
+        toast.success('Link copied to clipboard!');
       } else {
-        const textarea = document.createElement("textarea");
+        const textarea = document.createElement('textarea');
         textarea.value = shareUrl;
-        textarea.style.position = "absolute";
-        textarea.style.left = "-9999px";
+        textarea.style.position = 'absolute';
+        textarea.style.left = '-9999px';
         document.body.appendChild(textarea);
         textarea.select();
-        document.execCommand("copy");
+        document.execCommand('copy');
         document.body.removeChild(textarea);
-        toast.success("Link copied to clipboard!");
+        toast.success('Link copied to clipboard!');
       }
     } catch (error) {
-      console.error("Failed to copy link:", error);
-      toast.error("Failed to copy link. Please copy manually.");
+      console.error('Failed to copy link:', error);
+      toast.error('Failed to copy link. Please copy manually.');
     } finally {
       setCopying(false);
     }
@@ -159,16 +155,16 @@ export function ShareFormModal({
 
     setDownloading(true);
     try {
-      const link = document.createElement("a");
+      const link = document.createElement('a');
       link.download = `ikiform-qr-${formId}.png`;
       link.href = qrCodeDataUrl;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      toast.success("QR code downloaded successfully!");
+      toast.success('QR code downloaded successfully!');
     } catch (error) {
-      console.error("Failed to download QR code:", error);
-      toast.error("Failed to download QR code");
+      console.error('Failed to download QR code:', error);
+      toast.error('Failed to download QR code');
     } finally {
       setDownloading(false);
     }
@@ -179,85 +175,67 @@ export function ShareFormModal({
     try {
       await onPublish();
     } catch (error) {
-      console.error("Failed to publish form:", error);
+      console.error('Failed to publish form:', error);
     } finally {
       setPublishing(false);
     }
   };
 
   return (
-    <Modal open={isOpen} onOpenChange={onClose}>
-      <ModalContent className="max-w-lg flex flex-col gap-6">
+    <Modal onOpenChange={onClose} open={isOpen}>
+      <ModalContent className="flex max-w-lg flex-col gap-6">
         <ModalHeader className="text-center">
           <ModalTitle className="flex items-center justify-center gap-2">
-            <Share className="w-5 h-5" />
+            <Share className="h-5 w-5" />
             Share Form
           </ModalTitle>
         </ModalHeader>
 
         <div className="flex flex-col gap-6 px-2">
-          {!isPublished ? (
-            <div className="text-center flex flex-col gap-4">
-              <div className="p-4 bg-muted/50 rounded-ele flex flex-col items-center gap-2">
-                <Globe className="w-8 h-8 text-muted-foreground" />
-                <p className="text-sm text-muted-foreground">
-                  Your form needs to be published before it can be shared
-                  publicly.
-                </p>
-              </div>
-              <Button
-                onClick={handlePublish}
-                loading={publishing}
-                disabled={!formId || publishing}
-                className="w-full"
-              >
-                {publishing ? "Publishing" : "Publish Form"}
-              </Button>
-            </div>
-          ) : (
+          {isPublished ? (
             <div className="flex flex-col gap-4">
               <Tabs
-                items={tabItems}
-                defaultValue="link"
-                value={activeTab}
-                onValueChange={setActiveTab}
                 className="w-full"
+                defaultValue="link"
+                items={tabItems}
+                onValueChange={setActiveTab}
+                value={activeTab}
               />
 
-              <TabsContent value="link" activeValue={activeTab}>
+              <TabsContent activeValue={activeTab} value="link">
                 <div className="flex flex-col gap-6">
                   <div className="flex flex-col gap-2">
-                    <Label htmlFor="share-url" className="text-sm font-medium">
+                    <Label className="font-medium text-sm" htmlFor="share-url">
                       Public Form URL
                     </Label>
                     <div className="flex gap-2">
                       <Input
-                        id="share-url"
-                        value={shareUrl}
-                        readOnly
                         className="font-mono text-sm"
+                        id="share-url"
+                        readOnly
+                        value={shareUrl}
                       />
                       <Button
-                        variant="secondary"
-                        size="icon"
-                        onClick={handleCopyLink}
+                        className="min-w-fit shrink-0 gap-2"
                         disabled={copying}
-                        className="shrink-0 gap-2 min-w-fit"
+                        onClick={handleCopyLink}
+                        size="icon"
+                        variant="secondary"
                       >
                         {copying ? (
-                          <Check className="w-4 h-4" />
+                          <Check className="h-4 w-4" />
                         ) : (
-                          <Copy className="w-4 h-4" />
+                          <Copy className="h-4 w-4" />
                         )}
                       </Button>
                     </div>
                   </div>
 
-                  <div className="p-4 bg-accent/10 border border-accent/20 rounded-ele flex gap-3 items-center">
-                    <Globe className="w-5 h-5 text-accent-foreground shrink-0" />
+                  <div className="flex items-center gap-3 rounded-ele border border-accent/20 bg-accent/10 p-4">
+                    <Globe className="h-5 w-5 shrink-0 text-accent-foreground" />
                     <div className="flex flex-col gap-1">
-                      <p className="text-sm font-medium">Form is live!</p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="font-medium text-sm">Form is live!</p>
+                      <p className="text-muted-foreground text-xs">
                         Anyone with this link can access and submit your form.
                       </p>
                     </div>
@@ -265,30 +243,30 @@ export function ShareFormModal({
                 </div>
               </TabsContent>
 
-              <TabsContent value="qr" activeValue={activeTab}>
+              <TabsContent activeValue={activeTab} value="qr">
                 <div className="flex flex-col gap-6">
                   <div className="flex justify-center">
                     <div className="relative">
-                      <div className="p-2 bg-white  border shadow-sm">
+                      <div className="border bg-white p-2 shadow-sm">
                         {qrCodeDataUrl && !generatingQR ? (
                           <img
-                            src={qrCodeDataUrl}
                             alt="QR Code for form"
-                            className="w-48 h-48"
+                            className="h-48 w-48"
+                            src={qrCodeDataUrl}
                           />
                         ) : (
-                          <div className="w-48 h-48 flex items-center justify-center">
+                          <div className="flex h-48 w-48 items-center justify-center">
                             {generatingQR ? (
                               <div className="flex flex-col items-center gap-3">
-                                <div className="animate-spin rounded-card h-8 w-8 border-2 border-primary border-t-transparent"></div>
-                                <span className="text-sm text-muted-foreground">
+                                <div className="h-8 w-8 animate-spin rounded-card border-2 border-primary border-t-transparent" />
+                                <span className="text-muted-foreground text-sm">
                                   Generating QR code...
                                 </span>
                               </div>
                             ) : (
                               <div className="flex flex-col items-center gap-3">
-                                <QrCode className="w-12 h-12 text-muted-foreground" />
-                                <span className="text-sm text-muted-foreground">
+                                <QrCode className="h-12 w-12 text-muted-foreground" />
+                                <span className="text-muted-foreground text-sm">
                                   QR code will appear here
                                 </span>
                               </div>
@@ -299,40 +277,58 @@ export function ShareFormModal({
                     </div>
                   </div>
 
-                  <div className="text-center flex flex-col gap-2">
-                    <p className="text-sm font-medium">Scan to access form</p>
-                    <p className="text-xs text-muted-foreground">
+                  <div className="flex flex-col gap-2 text-center">
+                    <p className="font-medium text-sm">Scan to access form</p>
+                    <p className="text-muted-foreground text-xs">
                       Share this QR code for easy mobile access
                     </p>
                   </div>
 
                   <div className="flex justify-center">
                     <Button
-                      onClick={handleDownloadQR}
-                      disabled={!qrCodeDataUrl || downloading || generatingQR}
-                      variant="outline"
                       className="gap-2"
+                      disabled={!qrCodeDataUrl || downloading || generatingQR}
+                      onClick={handleDownloadQR}
+                      variant="outline"
                     >
-                      <Download className="w-4 h-4" />
-                      {downloading ? "Downloading..." : "Download QR Code"}
+                      <Download className="h-4 w-4" />
+                      {downloading ? 'Downloading...' : 'Download QR Code'}
                     </Button>
                   </div>
                 </div>
               </TabsContent>
             </div>
+          ) : (
+            <div className="flex flex-col gap-4 text-center">
+              <div className="flex flex-col items-center gap-2 rounded-ele bg-muted/50 p-4">
+                <Globe className="h-8 w-8 text-muted-foreground" />
+                <p className="text-muted-foreground text-sm">
+                  Your form needs to be published before it can be shared
+                  publicly.
+                </p>
+              </div>
+              <Button
+                className="w-full"
+                disabled={!formId || publishing}
+                loading={publishing}
+                onClick={handlePublish}
+              >
+                {publishing ? 'Publishing' : 'Publish Form'}
+              </Button>
+            </div>
           )}
 
           <div className="flex justify-end gap-3 pt-2">
-            <Button variant="secondary" onClick={onClose}>
+            <Button onClick={onClose} variant="secondary">
               Close
             </Button>
             {isPublished && (
               <Button
-                onClick={handleCopyLink}
-                disabled={copying}
                 className="gap-2"
+                disabled={copying}
+                onClick={handleCopyLink}
               >
-                <Copy className="w-4 h-4" />
+                <Copy className="h-4 w-4" />
                 Copy Link
               </Button>
             )}

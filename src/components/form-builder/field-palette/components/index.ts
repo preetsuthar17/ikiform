@@ -1,5 +1,5 @@
-export { PaletteHeader } from "./PaletteHeader";
-export { CompactFieldItem } from "./CompactFieldItem";
-export { FieldItem } from "./FieldItem";
-export { CompactPalette } from "./CompactPalette";
-export { FullPalette } from "./FullPalette";
+export { CompactFieldItem } from './CompactFieldItem';
+export { CompactPalette } from './CompactPalette';
+export { FieldItem } from './FieldItem';
+export { FullPalette } from './FullPalette';
+export { PaletteHeader } from './PaletteHeader';

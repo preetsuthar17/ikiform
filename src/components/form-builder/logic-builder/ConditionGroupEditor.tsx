@@ -1,28 +1,28 @@
-import React from "react";
-import type { LogicConditionGroup, LogicCondition } from "./types";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Plus, Trash2 } from "lucide-react";
-import type { FormField } from "@/lib/database";
+import { Plus, Trash2 } from 'lucide-react';
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import {
   Select,
-  SelectTrigger,
-  SelectValue,
   SelectContent,
   SelectItem,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import type { FormField } from '@/lib/database';
+import type { LogicCondition, LogicConditionGroup } from './types';
 
 const availableOperators = [
-  { value: "equals", label: "Equals" },
-  { value: "not_equals", label: "Not Equals" },
-  { value: "greater_than", label: "Greater Than" },
-  { value: "less_than", label: "Less Than" },
-  { value: "contains", label: "Contains" },
-  { value: "not_contains", label: "Not Contains" },
-  { value: "is_empty", label: "Is Empty" },
-  { value: "is_not_empty", label: "Is Not Empty" },
-  { value: "includes", label: "Includes" },
+  { value: 'equals', label: 'Equals' },
+  { value: 'not_equals', label: 'Not Equals' },
+  { value: 'greater_than', label: 'Greater Than' },
+  { value: 'less_than', label: 'Less Than' },
+  { value: 'contains', label: 'Contains' },
+  { value: 'not_contains', label: 'Not Contains' },
+  { value: 'is_empty', label: 'Is Empty' },
+  { value: 'is_not_empty', label: 'Is Not Empty' },
+  { value: 'includes', label: 'Includes' },
 ];
 
 function ConditionGroupEditor({
@@ -37,7 +37,7 @@ function ConditionGroupEditor({
   fields: FormField[];
 }) {
   // Handler for changing group logic (AND/OR)
-  const handleLogicChange = (logic: "AND" | "OR") => {
+  const handleLogicChange = (logic: 'AND' | 'OR') => {
     onChange({ ...group, logic });
   };
 
@@ -45,9 +45,9 @@ function ConditionGroupEditor({
   const handleAddCondition = () => {
     const newCond: LogicCondition = {
       id: `cond-${Date.now()}`,
-      field: fields[0]?.id || "",
+      field: fields[0]?.id || '',
       operator: availableOperators[0].value as any,
-      value: "",
+      value: '',
     };
     onChange({ ...group, conditions: [...group.conditions, newCond] });
   };
@@ -56,7 +56,7 @@ function ConditionGroupEditor({
   const handleAddGroup = () => {
     const newGroup: LogicConditionGroup = {
       id: `group-${Date.now()}`,
-      logic: "AND",
+      logic: 'AND',
       conditions: [],
     };
     onChange({ ...group, conditions: [...group.conditions, newGroup] });
@@ -65,7 +65,7 @@ function ConditionGroupEditor({
   // Handler for updating a condition or group
   const handleUpdate = (
     idx: number,
-    updated: LogicCondition | LogicConditionGroup,
+    updated: LogicCondition | LogicConditionGroup
   ) => {
     const updatedConds = group.conditions.slice();
     updatedConds[idx] = updated;
@@ -80,14 +80,14 @@ function ConditionGroupEditor({
   };
 
   return (
-    <Card className="p-3 mb-2">
-      <div className="flex items-center gap-2 mb-2">
+    <Card className="mb-2 p-3">
+      <div className="mb-2 flex items-center gap-2">
         <span className="font-medium">Group</span>
         <Select
+          onValueChange={(v) => handleLogicChange(v as 'AND' | 'OR')}
           value={group.logic}
-          onValueChange={(v) => handleLogicChange(v as "AND" | "OR")}
         >
-          <SelectTrigger size="sm" className="w-24">
+          <SelectTrigger className="w-24" size="sm">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -96,28 +96,28 @@ function ConditionGroupEditor({
           </SelectContent>
         </Select>
         {onDelete && (
-          <Button size="icon" variant="ghost" onClick={onDelete}>
-            <Trash2 className="w-4 h-4" />
+          <Button onClick={onDelete} size="icon" variant="ghost">
+            <Trash2 className="h-4 w-4" />
           </Button>
         )}
       </div>
       <div className="space-y-2">
         {group.conditions.map((cond, idx) =>
-          "logic" in cond ? (
+          'logic' in cond ? (
             <ConditionGroupEditor
-              key={cond.id}
+              fields={fields}
               group={cond}
+              key={cond.id}
               onChange={(updated) => handleUpdate(idx, updated)}
               onDelete={() => handleDelete(idx)}
-              fields={fields}
             />
           ) : (
-            <div key={cond.id} className="flex items-center gap-2">
+            <div className="flex items-center gap-2" key={cond.id}>
               <Select
-                value={cond.field}
                 onValueChange={(v) => handleUpdate(idx, { ...cond, field: v })}
+                value={cond.field}
               >
-                <SelectTrigger size="sm" className="w-32">
+                <SelectTrigger className="w-32" size="sm">
                   <SelectValue placeholder="Field" />
                 </SelectTrigger>
                 <SelectContent>
@@ -129,12 +129,12 @@ function ConditionGroupEditor({
                 </SelectContent>
               </Select>
               <Select
-                value={cond.operator}
                 onValueChange={(v) =>
                   handleUpdate(idx, { ...cond, operator: v as any })
                 }
+                value={cond.operator}
               >
-                <SelectTrigger size="sm" className="w-32">
+                <SelectTrigger className="w-32" size="sm">
                   <SelectValue placeholder="Operator" />
                 </SelectTrigger>
                 <SelectContent>
@@ -147,29 +147,29 @@ function ConditionGroupEditor({
               </Select>
               <Input
                 className="input input-xs"
-                value={cond.value}
                 onChange={(e) =>
                   handleUpdate(idx, { ...cond, value: e.target.value })
                 }
                 placeholder="Value"
+                value={cond.value}
               />
               <Button
+                onClick={() => handleDelete(idx)}
                 size="icon"
                 variant="ghost"
-                onClick={() => handleDelete(idx)}
               >
-                <Trash2 className="w-4 h-4" />
+                <Trash2 className="h-4 w-4" />
               </Button>
             </div>
-          ),
+          )
         )}
       </div>
-      <div className="flex gap-2 mt-2">
-        <Button size="sm" variant="outline" onClick={handleAddCondition}>
-          <Plus className="w-3 h-3 mr-1" /> Add Condition
+      <div className="mt-2 flex gap-2">
+        <Button onClick={handleAddCondition} size="sm" variant="outline">
+          <Plus className="mr-1 h-3 w-3" /> Add Condition
         </Button>
-        <Button size="sm" variant="outline" onClick={handleAddGroup}>
-          <Plus className="w-3 h-3 mr-1" /> Add Group
+        <Button onClick={handleAddGroup} size="sm" variant="outline">
+          <Plus className="mr-1 h-3 w-3" /> Add Group
         </Button>
       </div>
     </Card>

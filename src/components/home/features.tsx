@@ -1,50 +1,50 @@
-import { OptimizedImage } from "../other/optimized-image";
+import { OptimizedImage } from '../other/optimized-image';
 
 const features = [
   {
-    name: "AI Form Builder",
+    name: 'AI Form Builder',
     description:
-      "Generate forms instantly using AI. Just describe your needs and let our AI build your form in seconds.",
+      'Generate forms instantly using AI. Just describe your needs and let our AI build your form in seconds.',
     video:
-      "https://av5on64jc4.ufs.sh/f/jYAIyA6pXign9LzlJhGEK7MOW2HtS8VrgBIdbz6GCRw3QsY1",
-    bg: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignPZD9G8W5N7VbwqPstFU0fyT6Hxu3QEav8ckM",
-    id: "ai-builder-feature",
+      'https://av5on64jc4.ufs.sh/f/jYAIyA6pXign9LzlJhGEK7MOW2HtS8VrgBIdbz6GCRw3QsY1',
+    bg: 'https://av5on64jc4.ufs.sh/f/jYAIyA6pXignPZD9G8W5N7VbwqPstFU0fyT6Hxu3QEav8ckM',
+    id: 'ai-builder-feature',
   },
   {
-    name: "Intuitive Form Builder",
+    name: 'Intuitive Form Builder',
     description:
-      "Drag and drop to create beautiful forms. Customize fields, layout, and design with ease.",
+      'Drag and drop to create beautiful forms. Customize fields, layout, and design with ease.',
     video:
-      "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignHpXfl2SkSqKmkIdQ5AiYXwezrn1sLTg2DCWc",
-    bg: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignSP3QW1Hngdl5e9VoXjF4Dcsz3U6nhiRQCNx1",
-    id: "intuitive-form-builder-feature",
+      'https://av5on64jc4.ufs.sh/f/jYAIyA6pXignHpXfl2SkSqKmkIdQ5AiYXwezrn1sLTg2DCWc',
+    bg: 'https://av5on64jc4.ufs.sh/f/jYAIyA6pXignSP3QW1Hngdl5e9VoXjF4Dcsz3U6nhiRQCNx1',
+    id: 'intuitive-form-builder-feature',
   },
   {
-    name: "AI-Powered Analytics",
+    name: 'AI-Powered Analytics',
     description:
-      "Get instant insights and analytics powered by AI. Visualize responses and trends effortlessly.",
+      'Get instant insights and analytics powered by AI. Visualize responses and trends effortlessly.',
     video:
-      "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignsNKhM5BuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
-    bg: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignRgOlE1vEfXweUJ69CKsLboN1IaMcAjVlh0nH",
-    id: "ai-powered-analytics-feature",
+      'https://av5on64jc4.ufs.sh/f/jYAIyA6pXignsNKhM5BuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa',
+    bg: 'https://av5on64jc4.ufs.sh/f/jYAIyA6pXignRgOlE1vEfXweUJ69CKsLboN1IaMcAjVlh0nH',
+    id: 'ai-powered-analytics-feature',
   },
 ];
 
 export default function Features() {
   return (
     <section
-      className="flex flex-col items-center justify-center gap-12 md:py-28 py-12 md:px-8 px-4 text-center w-full"
+      className="flex w-full flex-col items-center justify-center gap-12 px-4 py-12 text-center md:px-8 md:py-28"
       id="features"
     >
-      <div className="max-w-7xl w-full mx-auto flex flex-col gap-18">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-18">
         {features.map((feature, idx) => (
           <div
-            key={feature.name}
+            className={'flex flex-col items-center gap-8 overflow-hidden p-0'}
             id={feature.id}
-            className={`flex flex-col items-center overflow-hidden p-0 gap-8`}
+            key={feature.name}
           >
-            <div className="flex flex-col items-center justify-center gap-3 px-6 py-8 backdrop-blur-sm w-full">
-              <h2 className="text-3xl md:text-4xl font-semibold">
+            <div className="flex w-full flex-col items-center justify-center gap-3 px-6 py-8 backdrop-blur-sm">
+              <h2 className="font-semibold text-3xl md:text-4xl">
                 {feature.name}
               </h2>
               <p className="text-md text-muted-foreground">
@@ -52,25 +52,27 @@ export default function Features() {
               </p>
             </div>
             <div
-              className={`w-full aspect-video md:p-12 p-4 flex items-center justify-center rounded-card overflow-hidden  bg-gradient-to-b`}
+              className={
+                'flex aspect-video w-full items-center justify-center overflow-hidden rounded-card bg-gradient-to-b p-4 md:p-12'
+              }
               style={{
-                position: "relative",
+                position: 'relative',
               }}
             >
               <OptimizedImage
-                src={feature.bg}
-                alt={feature.name + " background"}
-                width={1920}
+                alt={feature.name + ' background'}
+                className="absolute inset-0 z-0 h-full w-full rounded-card object-cover"
                 height={1080}
-                className="absolute inset-0 w-full h-full object-cover rounded-card z-0"
+                src={feature.bg}
+                width={1920}
               />
               <video
-                src={feature.video}
                 autoPlay
+                className="relative z-10 h-full w-full rounded-card object-cover"
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-cover rounded-card relative z-10"
+                src={feature.video}
               />
             </div>
           </div>

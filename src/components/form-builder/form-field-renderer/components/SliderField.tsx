@@ -1,14 +1,12 @@
 // External imports
-import React from "react";
+import React from 'react';
 
 // Component imports
-import { Slider } from "@/components/ui/slider";
-
-// Utility imports
-import { getErrorRingClasses } from "../utils";
-
+import { Slider } from '@/components/ui/slider';
 // Type imports
-import type { BaseFieldProps } from "../types";
+import type { BaseFieldProps } from '../types';
+// Utility imports
+import { getErrorRingClasses } from '../utils';
 
 export function SliderField({
   field,
@@ -21,14 +19,14 @@ export function SliderField({
 
   return (
     <Slider
-      value={[value || field.settings?.defaultValue || 0]}
-      onValueChange={(values) => onChange(values[0])}
-      min={field.settings?.min || 0}
-      max={field.settings?.max || 100}
-      step={field.settings?.step || 1}
       className={`flex gap-2 ${errorRingClasses}`}
-      showValue
       disabled={disabled}
+      max={field.settings?.max || 100}
+      min={field.settings?.min || 0}
+      onValueChange={(values) => onChange(values[0])}
+      showValue
+      step={field.settings?.step || 1}
+      value={[value || field.settings?.defaultValue || 0]}
     />
   );
 }

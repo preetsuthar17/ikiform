@@ -1,3 +1,4 @@
 // External service integrations
-export * from "./polar";
-export * from "./notifications";
+
+export * from './notifications';
+export * from './polar';

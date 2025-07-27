@@ -1,43 +1,41 @@
-"use client";
+'use client';
 
+import { AlignJustify, LogIn, MessageCircleIcon, User } from 'lucide-react';
 // External imports
-import Image from "next/image";
-import Link from "next/link";
-
+import Image from 'next/image';
+import Link from 'next/link';
+// Supabase
+import { useAuth } from '@/hooks/use-auth';
 // Internal imports
-import { Button } from "../ui/button";
-import { LogIn, User, AlignJustify, MessageCircleIcon } from "lucide-react";
+import { Button } from '../ui/button';
 import {
   Drawer,
-  DrawerTrigger,
-  DrawerContent,
   DrawerClose,
-} from "../ui/drawer";
-
-// Supabase
-import { useAuth } from "@/hooks/use-auth";
+  DrawerContent,
+  DrawerTrigger,
+} from '../ui/drawer';
 
 export default function Header() {
   const { user } = useAuth();
 
   return (
-    <nav className="flex justify-between items-center flex-wrap gap-8 mt-10 p-4 text-sm font-inter w-full max-w-[95%] mx-auto">
-      <div className="flex-shrink-0 flex items-center gap-2">
+    <nav className="mx-auto mt-10 flex w-full max-w-[95%] flex-wrap items-center justify-between gap-8 p-4 font-inter text-sm">
+      <div className="flex flex-shrink-0 items-center gap-2">
         <Link href="/">
-          <span className="text-3xl font-semibold tracking-tight flex items-center gap-2 justify-center">
+          <span className="flex items-center justify-center gap-2 font-semibold text-3xl tracking-tight">
             <Image
-              src="/favicon.ico"
               alt="Ikiform Logo"
-              width={40}
-              height={40}
               className="invert"
+              height={40}
+              src="/favicon.ico"
+              width={40}
             />
             <span>Ikiform</span>
           </span>
         </Link>
       </div>
       {/* Desktop nav */}
-      <div className="hidden sm:flex items-center gap-8">
+      <div className="hidden items-center gap-8 sm:flex">
         <nav className="flex items-center gap-4">
           <Button asChild variant="ghost">
             <Link href="/">Home</Link>
@@ -50,25 +48,25 @@ export default function Header() {
           </Button>
         </nav>
       </div>
-      <div className="hidden sm:flex gap-2">
-        {!user ? (
-          <Button asChild>
-            <Link href="/login" className="flex items-center gap-2 font-medium">
-              <LogIn />
-              Login
+      <div className="hidden gap-2 sm:flex">
+        {user ? (
+          <Button asChild className="font-medium" size="icon">
+            <Link href="/dashboard">
+              <User />
             </Link>
           </Button>
         ) : (
-          <Button className="font-medium" size="icon" asChild>
-            <Link href="/dashboard">
-              <User />
+          <Button asChild>
+            <Link className="flex items-center gap-2 font-medium" href="/login">
+              <LogIn />
+              Login
             </Link>
           </Button>
         )}
         <Button asChild>
           <Link
-            href="/forms/de330706-1cdc-494c-9d04-7afef3d3e20b"
             className="flex items-center gap-2 font-medium"
+            href="/forms/de330706-1cdc-494c-9d04-7afef3d3e20b"
           >
             <MessageCircleIcon />
             Feedback
@@ -76,62 +74,62 @@ export default function Header() {
         </Button>
       </div>
       {/* Mobile nav */}
-      <div className="sm:hidden flex items-center">
+      <div className="flex items-center sm:hidden">
         <Drawer>
           <DrawerTrigger asChild>
-            <Button size="icon" aria-label="open-sidebar" variant="ghost">
+            <Button aria-label="open-sidebar" size="icon" variant="ghost">
               <span className="sr-only">Open sidebar</span>
-              <AlignJustify className="w-6 h-6" />
+              <AlignJustify className="h-6 w-6" />
             </Button>
           </DrawerTrigger>
-          <DrawerContent className="p-6 pt-10 flex flex-col gap-6">
-            <div className="flex flex-col gap-4 items-center w-full">
-              <nav className="flex flex-col gap-2 w-full">
+          <DrawerContent className="flex flex-col gap-6 p-6 pt-10">
+            <div className="flex w-full flex-col items-center gap-4">
+              <nav className="flex w-full flex-col gap-2">
                 <Button
                   asChild
-                  variant="ghost"
                   className="w-full justify-start"
+                  variant="ghost"
                 >
                   <Link href="/">Home</Link>
                 </Button>
                 <Button
                   asChild
-                  variant="ghost"
                   className="w-full justify-start"
+                  variant="ghost"
                 >
                   <Link href="/#features">Features</Link>
                 </Button>
                 <Button
                   asChild
-                  variant="ghost"
                   className="w-full justify-start"
+                  variant="ghost"
                 >
                   <Link href="/#pricing">Pricing</Link>
                 </Button>
               </nav>
-              <div className="flex flex-col gap-2 w-full">
-                {!user ? (
-                  <Button asChild className="w-full justify-center">
-                    <Link
-                      href="/login"
-                      className="flex items-center gap-2 font-medium"
-                    >
-                      <LogIn />
-                      Login
-                    </Link>
-                  </Button>
-                ) : (
-                  <Button className="font-medium w-full justify-center" asChild>
+              <div className="flex w-full flex-col gap-2">
+                {user ? (
+                  <Button asChild className="w-full justify-center font-medium">
                     <Link href="/dashboard">
                       <User />
                       Dashboard
                     </Link>
                   </Button>
+                ) : (
+                  <Button asChild className="w-full justify-center">
+                    <Link
+                      className="flex items-center gap-2 font-medium"
+                      href="/login"
+                    >
+                      <LogIn />
+                      Login
+                    </Link>
+                  </Button>
                 )}
                 <Button asChild className="w-full justify-center">
                   <Link
-                    href="/forms/de330706-1cdc-494c-9d04-7afef3d3e20b"
                     className="flex items-center gap-2 font-medium"
+                    href="/forms/de330706-1cdc-494c-9d04-7afef3d3e20b"
                   >
                     <MessageCircleIcon />
                     Feedback
@@ -139,7 +137,7 @@ export default function Header() {
                 </Button>
               </div>
               <DrawerClose asChild>
-                <Button variant="outline" className="w-full mt-4">
+                <Button className="mt-4 w-full" variant="outline">
                   Close
                 </Button>
               </DrawerClose>

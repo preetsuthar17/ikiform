@@ -1,20 +1,18 @@
 // External imports
-import React, { useState, useEffect } from "react";
-
+import type React from 'react';
+import { useEffect, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 // Component imports
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-
-// Utility imports
-import { getBaseClasses } from "../utils";
+import { Input } from '@/components/ui/input';
 import {
-  validateEmail,
   autoCompleteEmail,
-} from "@/lib/validation/email-validation";
-
+  validateEmail,
+} from '@/lib/validation/email-validation';
 // Type imports
-import type { BaseFieldProps } from "../types";
+import type { BaseFieldProps } from '../types';
+// Utility imports
+import { getBaseClasses } from '../utils';
 
 export function EmailInputField({
   field,
@@ -24,14 +22,14 @@ export function EmailInputField({
   disabled,
 }: BaseFieldProps) {
   const baseClasses = getBaseClasses(field, error);
-  const [inputValue, setInputValue] = useState(value || "");
+  const [inputValue, setInputValue] = useState(value || '');
   const [showAutoComplete, setShowAutoComplete] = useState(false);
   const [isValidating, setIsValidating] = useState(false);
 
   const emailSettings = field.settings?.emailValidation;
 
   useEffect(() => {
-    setInputValue(value || "");
+    setInputValue(value || '');
   }, [value]);
 
   const validateEmailField = (email: string) => {
@@ -43,7 +41,7 @@ export function EmailInputField({
     setInputValue(newValue);
 
     // Show auto-complete suggestion if user is typing username and auto-complete is enabled
-    if (emailSettings?.autoCompleteDomain && !newValue.includes("@")) {
+    if (emailSettings?.autoCompleteDomain && !newValue.includes('@')) {
       setShowAutoComplete(true);
     } else {
       setShowAutoComplete(false);
@@ -62,7 +60,7 @@ export function EmailInputField({
     if (
       emailSettings?.autoCompleteDomain &&
       inputValue &&
-      !inputValue.includes("@")
+      !inputValue.includes('@')
     ) {
       const completedEmail = `${inputValue}@${emailSettings.autoCompleteDomain}`;
       setInputValue(completedEmail);
@@ -79,7 +77,7 @@ export function EmailInputField({
     if (
       emailSettings?.autoCompleteDomain &&
       inputValue &&
-      !inputValue.includes("@")
+      !inputValue.includes('@')
     ) {
       handleAutoComplete();
     }
@@ -88,7 +86,7 @@ export function EmailInputField({
   const validation = validateEmailField(inputValue);
 
   // Only show one error, and avoid duplicate messages
-  let errorMessage = "";
+  let errorMessage = '';
   if (error && validation.message && error === validation.message) {
     errorMessage = error;
   } else if (error) {
@@ -107,35 +105,35 @@ export function EmailInputField({
     <div className="flex flex-col gap-2">
       <div className="relative">
         <Input
-          type="email"
+          className={`flex gap-2 ${baseClasses}`}
+          disabled={disabled}
           id={field.id}
+          onBlur={handleBlur}
+          onChange={handleInputChange}
           placeholder={
             field.placeholder ||
             (emailSettings?.autoCompleteDomain
               ? `username@${emailSettings.autoCompleteDomain}`
-              : "Enter email address")
+              : 'Enter email address')
           }
+          type="email"
           value={inputValue}
-          onChange={handleInputChange}
-          onBlur={handleBlur}
-          className={`flex gap-2 ${baseClasses}`}
-          disabled={disabled}
         />
 
         {showAutoComplete && emailSettings?.autoCompleteDomain && (
-          <div className="absolute top-full left-0 right-0 mt-1 bg-accent border border-border rounded-ele p-2 z-10">
+          <div className="absolute top-full right-0 left-0 z-10 mt-1 rounded-ele border border-border bg-accent p-2">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">
-                Press Tab or click to complete:{" "}
+              <span className="text-muted-foreground text-sm">
+                Press Tab or click to complete:{' '}
                 <strong>
                   {inputValue}@{emailSettings.autoCompleteDomain}
                 </strong>
               </span>
               <Button
+                className="h-6 px-2 text-xs"
+                onClick={handleAutoComplete}
                 size="sm"
                 variant="outline"
-                onClick={handleAutoComplete}
-                className="h-6 px-2 text-xs"
               >
                 Complete
               </Button>
@@ -146,7 +144,7 @@ export function EmailInputField({
 
       {emailSettings?.autoCompleteDomain && (
         <div className="flex items-center gap-2">
-          <Badge variant="secondary" className="text-xs">
+          <Badge className="text-xs" variant="secondary">
             Auto-complete: @{emailSettings.autoCompleteDomain}
           </Badge>
         </div>
@@ -155,11 +153,11 @@ export function EmailInputField({
       {emailSettings?.allowedDomains &&
         emailSettings.allowedDomains.length > 0 && (
           <div className="flex flex-wrap gap-1">
-            <span className="text-xs text-muted-foreground">
+            <span className="text-muted-foreground text-xs">
               Allowed domains:
             </span>
             {emailSettings.allowedDomains.map((domain, index) => (
-              <Badge key={index} variant="outline" className="text-xs">
+              <Badge className="text-xs" key={index} variant="outline">
                 @{domain}
               </Badge>
             ))}

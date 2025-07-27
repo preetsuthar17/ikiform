@@ -1,19 +1,19 @@
-import { useState } from "react";
-import { WebhookList } from "./WebhookList";
-import { WebhookFormModal } from "./WebhookFormModal";
-import { WebhookLogDrawer } from "./WebhookLogDrawer";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { useAuth } from '@/hooks/use-auth';
 import {
   useWebhookManagement,
-  WebhookConfig,
-} from "./hooks/useWebhookManagement";
-import { Button } from "@/components/ui/button";
-import { useAuth } from "@/hooks/use-auth";
+  type WebhookConfig,
+} from './hooks/useWebhookManagement';
+import { WebhookFormModal } from './WebhookFormModal';
+import { WebhookList } from './WebhookList';
+import { WebhookLogDrawer } from './WebhookLogDrawer';
 
 export function WebhookManagementPanel({ formId }: { formId?: string }) {
   const { user } = useAuth();
   const [modalOpen, setModalOpen] = useState(false);
   const [editingWebhook, setEditingWebhook] = useState<WebhookConfig | null>(
-    null,
+    null
   );
   const [logDrawerOpen, setLogDrawerOpen] = useState(false);
   const [logWebhookId, setLogWebhookId] = useState<string | null>(null);
@@ -66,12 +66,12 @@ export function WebhookManagementPanel({ formId }: { formId?: string }) {
   async function handleTest(webhook: WebhookConfig) {
     try {
       const res = await fetch(`/api/webhook/${webhook.id}/test`, {
-        method: "POST",
+        method: 'POST',
       });
       const data = await res.json();
-      alert(data.message || "Test sent");
+      alert(data.message || 'Test sent');
     } catch (e) {
-      alert("Test failed");
+      alert('Test failed');
     }
   }
 
@@ -81,48 +81,48 @@ export function WebhookManagementPanel({ formId }: { formId?: string }) {
   }
 
   return (
-    <section className="p-4 max-w-3xl mx-auto">
+    <section className="mx-auto max-w-3xl p-4">
       <header className="mb-6 flex items-center justify-center">
         <Button
-          variant="default"
-          onClick={handleAdd}
           disabled={loading}
           loading={loading}
+          onClick={handleAdd}
+          variant="default"
         >
-          {loading ? "Loading" : "Add Webhook"}
+          {loading ? 'Loading' : 'Add Webhook'}
         </Button>
       </header>
       <WebhookList
-        webhooks={webhooks}
         loading={loading}
-        onEdit={handleEdit}
         onDelete={deleteWebhook}
-        onToggleEnabled={handleToggleEnabled}
+        onEdit={handleEdit}
         onTest={handleTest}
+        onToggleEnabled={handleToggleEnabled}
         onViewLogs={handleViewLogs}
+        webhooks={webhooks}
       />
       <WebhookFormModal
-        open={modalOpen}
-        onClose={() => {
-          setModalOpen(false);
-          setEditingWebhook(null);
-        }}
         initialWebhook={
           editingWebhook
             ? {
                 ...editingWebhook,
                 headers: editingWebhook.headers ?? {},
-                payloadTemplate: editingWebhook.payloadTemplate ?? "",
+                payloadTemplate: editingWebhook.payloadTemplate ?? '',
               }
             : undefined
         }
-        onSave={handleSave}
         loading={loading}
+        onClose={() => {
+          setModalOpen(false);
+          setEditingWebhook(null);
+        }}
+        onSave={handleSave}
+        open={modalOpen}
       />
       <WebhookLogDrawer
-        webhookId={logWebhookId}
-        open={logDrawerOpen}
         onClose={() => setLogDrawerOpen(false)}
+        open={logDrawerOpen}
+        webhookId={logWebhookId}
       />
     </section>
   );

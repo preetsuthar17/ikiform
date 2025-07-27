@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 interface WebhookListItemProps {
   webhook: {
@@ -25,41 +25,41 @@ export function WebhookListItem({
   onViewLogs,
 }: WebhookListItemProps) {
   return (
-    <div className="p-4 flex flex-col gap-4">
+    <div className="flex flex-col gap-4 p-4">
       <div>
-        <div className="font-mono text-sm text-muted-foreground break-all">
+        <div className="break-all font-mono text-muted-foreground text-sm">
           {webhook.url}
         </div>
-        <div className="flex flex-wrap gap-2 mt-2">
+        <div className="mt-2 flex flex-wrap gap-2">
           {webhook.events.map((event) => (
-            <Badge key={event} size="sm" className="bg-blue-100 text-blue-700">
+            <Badge className="bg-blue-100 text-blue-700" key={event} size="sm">
               {event}
             </Badge>
           ))}
         </div>
-        <div className="mt-2 text-xs text-gray-500">
-          Status:{" "}
+        <div className="mt-2 text-gray-500 text-xs">
+          Status:{' '}
           {webhook.enabled ? (
-            <span className="text-green-600 font-semibold">Enabled</span>
+            <span className="font-semibold text-green-600">Enabled</span>
           ) : (
             <span className="text-muted-foreground">Disabled</span>
           )}
         </div>
       </div>
-      <div className="flex gap-2 items-center flex-wrap">
-        <Button variant="secondary" size="sm" onClick={onEdit}>
+      <div className="flex flex-wrap items-center gap-2">
+        <Button onClick={onEdit} size="sm" variant="secondary">
           Edit
         </Button>
-        <Button variant="destructive" size="sm" onClick={onDelete}>
+        <Button onClick={onDelete} size="sm" variant="destructive">
           Delete
         </Button>
-        <Button variant="outline" size="sm" onClick={onToggleEnabled}>
-          {webhook.enabled ? "Disable" : "Enable"}
+        <Button onClick={onToggleEnabled} size="sm" variant="outline">
+          {webhook.enabled ? 'Disable' : 'Enable'}
         </Button>
-        <Button variant="default" size="sm" onClick={onTest}>
+        <Button onClick={onTest} size="sm" variant="default">
           Test
         </Button>
-        <Button variant="outline" size="sm" onClick={onViewLogs}>
+        <Button onClick={onViewLogs} size="sm" variant="outline">
           View Logs
         </Button>
       </div>

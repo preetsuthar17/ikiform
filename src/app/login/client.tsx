@@ -1,32 +1,31 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa6";
-
-import { createClient } from "@/utils/supabase/client";
-import { useAuth } from "@/hooks/use-auth";
-import { toast } from "@/hooks/use-toast";
-import { redirect } from "next/navigation";
+import Image from 'next/image';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import { FaGithub } from 'react-icons/fa6';
+import { FcGoogle } from 'react-icons/fc';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "@/components/ui/card";
-import Link from "next/link";
-import Image from "next/image";
-import { Separator } from "@/components/ui/separator";
+} from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { useAuth } from '@/hooks/use-auth';
+import { toast } from '@/hooks/use-toast';
+import { createClient } from '@/utils/supabase/client';
 
 export default function LoginForm() {
   const { user } = useAuth();
 
   if (user) {
-    redirect("/dashboard");
+    redirect('/dashboard');
   }
 
-  const handleOAuthLogin = async (provider: "github" | "google") => {
-    toast(`Redirecting to ${provider === "google" ? "Google" : "GitHub"}...`);
+  const handleOAuthLogin = async (provider: 'github' | 'google') => {
+    toast(`Redirecting to ${provider === 'google' ? 'Google' : 'GitHub'}...`);
     const supabase = createClient();
     await supabase.auth.signInWithOAuth({
       provider,
@@ -38,19 +37,21 @@ export default function LoginForm() {
 
   return (
     <>
-      <div className="flex flex-col items-center gap-4 scale-110">
-        <Card className="max-w-sm w-full flex flex-col gap-6 items-center justify-center text-center bg-[#fafafa] border-black/10  shadow-md/2">
+      <div className="flex scale-110 flex-col items-center gap-4">
+        <Card className="flex w-full max-w-sm flex-col items-center justify-center gap-6 border-black/10 bg-[#fafafa] text-center shadow-md/2">
           <CardHeader>
             <div className="flex-shrink-0">
               <Link href="/">
                 <span
-                  className={`text-3xl font-semibold tracking-tight flex items-center gap-2 justify-center`}
+                  className={
+                    'flex items-center justify-center gap-2 font-semibold text-3xl tracking-tight'
+                  }
                 >
                   <Image
-                    src="/favicon.ico"
                     alt="Ikiform Logo"
-                    width={40}
                     height={40}
+                    src="/favicon.ico"
+                    width={40}
                   />
                   <span className="text-black">Ikiform</span>
                 </span>
@@ -60,32 +61,32 @@ export default function LoginForm() {
           <Separator className="opacity-10" />
           <CardContent className="w-full">
             <Button
-              variant="secondary"
+              className="flex w-full items-center gap-2 font-medium"
+              onClick={() => handleOAuthLogin('google')}
               size="lg"
-              onClick={() => handleOAuthLogin("google")}
-              className="font-medium w-full flex items-center gap-2"
+              variant="secondary"
             >
               <FcGoogle size={22} />
               Login with Google
             </Button>
             <Button
-              variant="secondary"
+              className="flex w-full items-center gap-2 font-medium"
+              onClick={() => handleOAuthLogin('github')}
               size="lg"
-              onClick={() => handleOAuthLogin("github")}
-              className="font-medium w-full flex items-center gap-2"
+              variant="secondary"
             >
               <FaGithub size={22} />
               Login with GitHub
             </Button>
           </CardContent>
         </Card>
-        <div className="text-muted-foreground text-sm text-center">
+        <div className="text-center text-muted-foreground text-sm">
           <p>
-            By signing up, you agree our{" "}
+            By signing up, you agree our{' '}
             <Link
+              className="text-muted-foreground underline"
               href="/legal/terms"
               target="_blank"
-              className="underline text-muted-foreground"
             >
               Terms of Services
             </Link>

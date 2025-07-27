@@ -1,47 +1,47 @@
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
 import {
   Modal,
   ModalContent,
-  ModalHeader,
   ModalFooter,
+  ModalHeader,
   ModalTitle,
-} from "@/components/ui/modal";
-import type { BaseFieldProps } from "../types";
-import { getBaseClasses } from "../utils";
+} from '@/components/ui/modal';
+import type { BaseFieldProps } from '../types';
+import { getBaseClasses } from '../utils';
 
 export function SchedulerField({ field, error, disabled }: BaseFieldProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const provider = field.settings?.schedulerProvider;
-  const link = provider ? field.settings?.schedulerLinks?.[provider] : "";
-  const buttonText = field.settings?.schedulerButtonText || "Open Scheduler";
+  const link = provider ? field.settings?.schedulerLinks?.[provider] : '';
+  const buttonText = field.settings?.schedulerButtonText || 'Open Scheduler';
   const baseClasses = getBaseClasses(field, error);
 
   return (
     <div className="flex flex-col gap-2">
       <Button
-        type="button"
-        onClick={() => setModalOpen(true)}
+        className={`${baseClasses} flex h-9 w-fit items-center justify-center bg-foreground/80 px-4 text-background text-sm hover:bg-foreground`}
         disabled={disabled || !provider}
-        className={`${baseClasses} bg-foreground/80 text-background hover:bg-foreground flex items-center justify-center w-fit text-sm h-9 px-4`}
+        onClick={() => setModalOpen(true)}
+        type="button"
       >
         {buttonText}
       </Button>
-      <Modal open={modalOpen} onOpenChange={setModalOpen}>
-        <ModalContent className="max-w-[95%] h-[95%] w-full flex flex-col gap-4">
+      <Modal onOpenChange={setModalOpen} open={modalOpen}>
+        <ModalContent className="flex h-[95%] w-full max-w-[95%] flex-col gap-4">
           <ModalHeader>
             <ModalTitle>Scheduler</ModalTitle>
           </ModalHeader>
           <div className="h-full">
             {provider && link ? (
               <iframe
+                allow="camera; microphone; fullscreen"
+                className="h-full w-full rounded-ele border-none"
                 src={link}
                 title="Scheduler Embed"
-                className="w-full h-full border-none rounded-ele"
-                allow="camera; microphone; fullscreen"
               />
             ) : (
-              <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
+              <div className="flex h-full items-center justify-center text-muted-foreground text-sm">
                 No scheduler link configured.
               </div>
             )}

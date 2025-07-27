@@ -1,36 +1,36 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
-import { Eye, EyeOff, X } from "lucide-react";
+import { cva, type VariantProps } from 'class-variance-authority';
+import { Eye, EyeOff, X } from 'lucide-react';
+import * as React from 'react';
+import { cn } from '@/lib/utils';
 
 const inputVariants = cva(
-  "flex w-full rounded-ele border border-border bg-input px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all shadow-sm/2",
+  'flex w-full rounded-ele border border-border bg-input px-3 py-2 text-sm shadow-sm/2 ring-offset-background transition-all file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       variant: {
-        default: "border-border",
-        destructive: "border-destructive focus-visible:ring-destructive",
+        default: 'border-border',
+        destructive: 'border-destructive focus-visible:ring-destructive',
         ghost:
-          "border-transparent bg-accent focus-visible:bg-input focus-visible:border-border",
+          'border-transparent bg-accent focus-visible:border-border focus-visible:bg-input',
       },
       size: {
-        default: "h-9 px-3 py-2",
-        sm: "h-8 px-2 py-1 text-xs",
-        lg: "h-10 px-4 py-2",
-        xl: "h-12 px-6 py-3 text-base",
+        default: 'h-9 px-3 py-2',
+        sm: 'h-8 px-2 py-1 text-xs',
+        lg: 'h-10 px-4 py-2',
+        xl: 'h-12 px-6 py-3 text-base',
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: 'default',
+      size: 'default',
     },
-  },
+  }
 );
 
 export interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>,
     VariantProps<typeof inputVariants> {
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
@@ -45,7 +45,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       className,
       variant,
       size,
-      type = "text",
+      type = 'text',
       leftIcon,
       rightIcon,
       error,
@@ -54,20 +54,20 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       value,
       ...props
     },
-    ref,
+    ref
   ) => {
     const [showPassword, setShowPassword] = React.useState(false);
     const [internalValue, setInternalValue] = React.useState(
-      props.defaultValue || "",
+      props.defaultValue || ''
     );
     const inputRef = React.useRef<HTMLInputElement>(null);
 
     // Combine external ref with internal ref
     React.useImperativeHandle(ref, () => inputRef.current!);
 
-    const inputVariant = error ? "destructive" : variant;
-    const isPassword = type === "password";
-    const actualType = isPassword && showPassword ? "text" : type;
+    const inputVariant = error ? 'destructive' : variant;
+    const isPassword = type === 'password';
+    const actualType = isPassword && showPassword ? 'text' : type;
 
     // Determine if this is a controlled component
     const isControlled = value !== undefined;
@@ -85,7 +85,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const handleClear = () => {
       // Clear the internal state for uncontrolled inputs
       if (!isControlled) {
-        setInternalValue("");
+        setInternalValue('');
       }
 
       // Call the onClear callback if provided
@@ -96,13 +96,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         const input = inputRef.current;
 
         // Set the input's value directly
-        input.value = "";
+        input.value = '';
 
         // Create a synthetic React ChangeEvent
         const syntheticEvent = {
           target: input,
           currentTarget: input,
-          nativeEvent: new Event("input", { bubbles: true }),
+          nativeEvent: new Event('input', { bubbles: true }),
           isDefaultPrevented: () => false,
           isPropagationStopped: () => false,
           persist: () => {},
@@ -114,7 +114,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           eventPhase: 0,
           isTrusted: true,
           timeStamp: Date.now(),
-          type: "change",
+          type: 'change',
         } as React.ChangeEvent<HTMLInputElement>;
 
         // Trigger the onChange handler
@@ -132,18 +132,18 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="relative w-full">
         {leftIcon && (
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground [&_svg]:size-4 [&_svg]:shrink-0 z-10">
+          <div className="-translate-y-1/2 absolute top-1/2 left-3 z-10 text-muted-foreground [&_svg]:size-4 [&_svg]:shrink-0">
             {leftIcon}
           </div>
-        )}{" "}
+        )}{' '}
         <input
-          type={actualType}
           className={cn(
             inputVariants({ variant: inputVariant, size, className }),
-            leftIcon && "pl-10",
-            rightIcon || isPassword || showClearButton,
+            leftIcon && 'pl-10',
+            rightIcon || isPassword || showClearButton
           )}
           ref={inputRef}
+          type={actualType}
           {...(isControlled
             ? { value: inputValue }
             : { defaultValue: props.defaultValue })}
@@ -152,7 +152,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         />
         {/* Right side icons container */}
         {(rightIcon || isPassword || showClearButton) && (
-          <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 z-10">
+          <div className="-translate-y-1/2 absolute top-1/2 right-3 z-10 flex items-center gap-1">
             {/* Custom right icon */}
             {rightIcon && (
               <div className="text-muted-foreground [&_svg]:size-4 [&_svg]:shrink-0">
@@ -163,10 +163,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {/* Clear button */}
             {showClearButton && (
               <button
-                type="button"
+                className="text-muted-foreground transition-colors hover:text-foreground [&_svg]:size-4 [&_svg]:shrink-0"
                 onClick={handleClear}
-                className="text-muted-foreground hover:text-foreground transition-colors [&_svg]:size-4 [&_svg]:shrink-0"
                 tabIndex={-1}
+                type="button"
               >
                 <X />
               </button>
@@ -175,10 +175,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {/* Password visibility toggle */}
             {isPassword && (
               <button
-                type="button"
+                className="text-muted-foreground transition-colors hover:text-foreground [&_svg]:size-4 [&_svg]:shrink-0"
                 onClick={togglePasswordVisibility}
-                className="text-muted-foreground hover:text-foreground transition-colors [&_svg]:size-4 [&_svg]:shrink-0"
                 tabIndex={-1}
+                type="button"
               >
                 {showPassword ? <EyeOff /> : <Eye />}
               </button>
@@ -187,9 +187,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         )}
       </div>
     );
-  },
+  }
 );
 
-Input.displayName = "Input";
+Input.displayName = 'Input';
 
 export { Input, inputVariants };

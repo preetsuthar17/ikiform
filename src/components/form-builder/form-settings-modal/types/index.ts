@@ -1,5 +1,5 @@
 // External imports
-import type { FormSchema } from "@/lib/database";
+import type { FormSchema } from '@/lib/database';
 
 // Interfaces
 export interface FormSettingsModalProps {
@@ -30,14 +30,14 @@ export interface LocalSettings {
   submitText?: string;
   successMessage?: string;
   redirectUrl?: string;
-  designMode?: "default" | "minimal";
+  designMode?: 'default' | 'minimal';
   layout?: {
-    maxWidth?: "sm" | "md" | "lg" | "xl" | "full";
-    padding?: "none" | "sm" | "md" | "lg";
-    margin?: "none" | "sm" | "md" | "lg";
-    borderRadius?: "none" | "sm" | "md" | "lg" | "xl";
-    spacing?: "compact" | "normal" | "relaxed";
-    alignment?: "left" | "center" | "right";
+    maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+    padding?: 'none' | 'sm' | 'md' | 'lg';
+    margin?: 'none' | 'sm' | 'md' | 'lg';
+    borderRadius?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
+    spacing?: 'compact' | 'normal' | 'relaxed';
+    alignment?: 'left' | 'center' | 'right';
   };
   branding?: {
     socialMedia?: {
@@ -52,8 +52,8 @@ export interface LocalSettings {
         website?: string;
       };
       showIcons?: boolean;
-      iconSize?: "sm" | "md" | "lg";
-      position?: "footer" | "header" | "both";
+      iconSize?: 'sm' | 'md' | 'lg';
+      position?: 'footer' | 'header' | 'both';
     };
     showIkiformBranding?: boolean;
   };
@@ -94,14 +94,14 @@ export interface BasicInfoSectionProps {
 export interface RateLimitSectionProps {
   localSettings: LocalSettings;
   updateRateLimit: (
-    updates: Partial<NonNullable<LocalSettings["rateLimit"]>>,
+    updates: Partial<NonNullable<LocalSettings['rateLimit']>>
   ) => void;
 }
 
 export interface ProfanityFilterSectionProps {
   localSettings: LocalSettings;
   updateProfanityFilter: (
-    updates: Partial<NonNullable<LocalSettings["profanityFilter"]>>,
+    updates: Partial<NonNullable<LocalSettings['profanityFilter']>>
   ) => void;
 }
 
@@ -109,19 +109,19 @@ export interface SocialMediaSectionProps {
   localSettings: LocalSettings;
   updateSocialMedia: (
     updates: Partial<
-      NonNullable<NonNullable<LocalSettings["branding"]>["socialMedia"]>
-    >,
+      NonNullable<NonNullable<LocalSettings['branding']>['socialMedia']>
+    >
   ) => void;
 }
 
 export type FormSettingsSection =
-  | "basic"
-  | "limits"
-  | "security"
-  | "branding"
-  | "notifications"
-  | "design"
-  | "webhooks";
+  | 'basic'
+  | 'limits'
+  | 'security'
+  | 'branding'
+  | 'notifications'
+  | 'design'
+  | 'webhooks';
 
 export interface FormSettingsSectionConfig {
   id: FormSettingsSection;

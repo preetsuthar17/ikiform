@@ -1,1 +1,1 @@
-export { useFormSettings } from "./useFormSettings";
+export { useFormSettings } from './useFormSettings';

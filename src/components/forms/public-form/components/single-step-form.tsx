@@ -1,25 +1,23 @@
 // Libraries
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
 
+import Link from 'next/link';
+import type React from 'react';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 // UI Components
-import { Progress } from "@/components/ui/progress";
-import { SingleStepFormContent } from "./single-step-form-content";
-import { SocialMediaIcons } from "@/components/ui/social-media-icons";
-import { SingleStepSuccessScreen } from "./single-step-success-screen";
-import { PasswordProtectionModal } from "./PasswordProtectionModal";
-
+import { Progress } from '@/components/ui/progress';
+import { SocialMediaIcons } from '@/components/ui/social-media-icons';
+import { getFormLayoutClasses } from '@/lib/utils/form-layout';
 // Hooks
-import { useSingleStepForm } from "../hooks/use-single-step-form";
+import { useSingleStepForm } from '../hooks/use-single-step-form';
+// Types
+import type { PublicFormProps } from '../types';
 
 // Utilities
-import { getAllFields } from "../utils/form-utils";
-import { getFormLayoutClasses } from "@/lib/utils/form-layout";
-
-// Types
-import type { PublicFormProps } from "../types";
-
-import toast from "react-hot-toast";
+import { getAllFields } from '../utils/form-utils';
+import { PasswordProtectionModal } from './PasswordProtectionModal';
+import { SingleStepFormContent } from './single-step-form-content';
+import { SingleStepSuccessScreen } from './single-step-success-screen';
 
 export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
   formId,
@@ -60,12 +58,12 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
       setPasswordVerified(true);
       setShowPasswordModal(false);
     } else {
-      toast.error("Incorrect password!");
+      toast.error('Incorrect password!');
     }
   };
 
   const handlePasswordCancel = () => {
-    window.location.href = "/";
+    window.location.href = '/';
   };
 
   useEffect(() => {
@@ -87,58 +85,58 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
         isOpen={showPasswordModal}
         message={
           schema.settings.passwordProtection?.message ||
-          "This form is password protected. Please enter the password to continue."
+          'This form is password protected. Please enter the password to continue.'
         }
-        onPasswordSubmit={handlePasswordSubmit}
         onCancel={handlePasswordCancel}
+        onPasswordSubmit={handlePasswordSubmit}
       />
     );
   }
 
   if (isLoading) {
     return (
-      <div className="fixed inset-0 bg-background flex items-center justify-center">
-        <Progress value={100} size="sm" className="w-[200px]" />
+      <div className="fixed inset-0 flex items-center justify-center bg-background">
+        <Progress className="w-[200px]" size="sm" value={100} />
       </div>
     );
   }
 
   return (
     <div
+      className={`flex w-full items-center justify-center bg-background transition-opacity duration-500 ${showForm ? 'opacity-100' : 'opacity-0'} ${marginClass}`}
       dir={dir}
-      className={`bg-background flex items-center justify-center w-full transition-opacity duration-500 ${showForm ? "opacity-100" : "opacity-0"} ${marginClass}`}
     >
-      <div className={`flex flex-col gap-8 w-full ${containerClass}`}>
+      <div className={`flex w-full flex-col gap-8 ${containerClass}`}>
         <SingleStepFormContent
-          schema={schema}
-          fields={fields}
-          formData={formData}
           errors={errors}
-          submitting={submitting}
+          fields={fields}
+          fieldVisibility={fieldVisibility}
+          formData={formData}
+          logicMessages={logicMessages}
           onFieldValueChange={handleFieldValueChange}
           onSubmit={handleSubmit}
-          fieldVisibility={fieldVisibility}
-          logicMessages={logicMessages}
+          schema={schema}
+          submitting={submitting}
         />
 
-        <div className="text-center flex flex-col gap-4">
+        <div className="flex flex-col gap-4 text-center">
           {schema.settings.branding?.socialMedia?.enabled &&
             schema.settings.branding.socialMedia.platforms &&
-            (schema.settings.branding.socialMedia.position === "footer" ||
-              schema.settings.branding.socialMedia.position === "both") && (
+            (schema.settings.branding.socialMedia.position === 'footer' ||
+              schema.settings.branding.socialMedia.position === 'both') && (
               <SocialMediaIcons
-                platforms={schema.settings.branding.socialMedia.platforms}
-                iconSize={schema.settings.branding.socialMedia.iconSize || "md"}
                 className="justify-center"
+                iconSize={schema.settings.branding.socialMedia.iconSize || 'md'}
+                platforms={schema.settings.branding.socialMedia.platforms}
               />
             )}
           {Boolean(
             schema.settings.branding &&
-              (schema.settings.branding as any).showIkiformBranding !== false,
+              (schema.settings.branding as any).showIkiformBranding !== false
           ) && (
-            <p className="text-sm text-muted-foreground">
-              Powered by{" "}
-              <span className="font-medium underline text-foreground">
+            <p className="text-muted-foreground text-sm">
+              Powered by{' '}
+              <span className="font-medium text-foreground underline">
                 <Link href="https://www.ikiform.com">Ikiform</Link>
               </span>
             </p>

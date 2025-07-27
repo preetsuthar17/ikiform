@@ -1,22 +1,22 @@
 // External libraries
-import React from "react";
+import React from 'react';
 
 // UI components
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { SocialMediaIcons } from "@/components/ui/social-media-icons";
+} from '@/components/ui/select';
+import { SocialMediaIcons } from '@/components/ui/social-media-icons';
+import { Switch } from '@/components/ui/switch';
 
 // Types
-import type { SocialMediaSectionProps } from "../types";
+import type { SocialMediaSectionProps } from '../types';
 
 interface BrandingSectionProps extends SocialMediaSectionProps {
   updateSettings: (updates: any) => void;
@@ -53,43 +53,43 @@ export function BrandingSection({
 
   return (
     <Card className="p-6">
-      <div className="flex items-center gap-3 mb-4">
+      <div className="mb-4 flex items-center gap-3">
         <svg
-          className="w-5 h-5 text-primary"
-          viewBox="0 0 24 24"
+          className="h-5 w-5 text-primary"
           fill="none"
           stroke="currentColor"
+          viewBox="0 0 24 24"
         >
-          <rect x="3" y="3" width="18" height="18" rx="2" strokeWidth="2" />
+          <rect height="18" rx="2" strokeWidth="2" width="18" x="3" y="3" />
           <path d="M16 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" />
           <path d="M7 16a4 4 0 0 1 10 0" />
         </svg>
-        <h3 className="text-lg font-medium">Branding</h3>
+        <h3 className="font-medium text-lg">Branding</h3>
       </div>
-      <div className="flex flex-col gap-6 border-l-2 border-muted pl-6">
+      <div className="flex flex-col gap-6 border-muted border-l-2 pl-6">
         <div className="flex items-center gap-2">
           <Switch
-            size="sm"
-            id="ikiform-branding-toggle"
             checked={showIkiformBranding}
+            id="ikiform-branding-toggle"
             onCheckedChange={handleBrandingToggle}
+            size="sm"
           />
           <Label
+            className="font-medium text-sm"
             htmlFor="ikiform-branding-toggle"
-            className="text-sm font-medium"
           >
             Show "Powered by Ikiform" branding
           </Label>
         </div>
         <div className="flex flex-col gap-2">
-          <Label className="text-base font-medium">Social Media Links</Label>
+          <Label className="font-medium text-base">Social Media Links</Label>
           <Switch
-            size="sm"
+            checked={socialMedia.enabled}
             id="social-media-enabled"
-            checked={socialMedia.enabled || false}
             onCheckedChange={(checked) =>
-              handleSettingChange("enabled", checked)
+              handleSettingChange('enabled', checked)
             }
+            size="sm"
           />
         </div>
         {socialMedia.enabled ? (
@@ -100,52 +100,52 @@ export function BrandingSection({
                 {(
                   [
                     {
-                      id: "linkedin",
-                      label: "LinkedIn",
-                      placeholder: "https://linkedin.com/in/username",
+                      id: 'linkedin',
+                      label: 'LinkedIn',
+                      placeholder: 'https://linkedin.com/in/username',
                     },
                     {
-                      id: "twitter",
-                      label: "X (Twitter)",
-                      placeholder: "https://x.com/username",
+                      id: 'twitter',
+                      label: 'X (Twitter)',
+                      placeholder: 'https://x.com/username',
                     },
                     {
-                      id: "youtube",
-                      label: "YouTube",
-                      placeholder: "https://youtube.com/@channel",
+                      id: 'youtube',
+                      label: 'YouTube',
+                      placeholder: 'https://youtube.com/@channel',
                     },
                     {
-                      id: "instagram",
-                      label: "Instagram",
-                      placeholder: "https://instagram.com/username",
+                      id: 'instagram',
+                      label: 'Instagram',
+                      placeholder: 'https://instagram.com/username',
                     },
                     {
-                      id: "facebook",
-                      label: "Facebook",
-                      placeholder: "https://facebook.com/username",
+                      id: 'facebook',
+                      label: 'Facebook',
+                      placeholder: 'https://facebook.com/username',
                     },
                     {
-                      id: "github",
-                      label: "GitHub",
-                      placeholder: "https://github.com/username",
+                      id: 'github',
+                      label: 'GitHub',
+                      placeholder: 'https://github.com/username',
                     },
                     {
-                      id: "website",
-                      label: "Website",
-                      placeholder: "https://example.com",
+                      id: 'website',
+                      label: 'Website',
+                      placeholder: 'https://example.com',
                     },
                   ] as const
                 ).map(({ id, label, placeholder }) => (
                   <div className="flex flex-col gap-2" key={id}>
-                    <Label htmlFor={id} className="text-sm font-medium">
+                    <Label className="font-medium text-sm" htmlFor={id}>
                       {label}
                     </Label>
                     <Input
                       id={id}
-                      type="url"
-                      placeholder={placeholder}
-                      value={platforms[id as keyof typeof platforms] || ""}
                       onChange={(e) => handlePlatformChange(id, e.target.value)}
+                      placeholder={placeholder}
+                      type="url"
+                      value={platforms[id as keyof typeof platforms] || ''}
                     />
                   </div>
                 ))}
@@ -154,27 +154,27 @@ export function BrandingSection({
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-2">
                 <Switch
-                  size="sm"
-                  id="show-icons"
                   checked={socialMedia.showIcons !== false}
+                  id="show-icons"
                   onCheckedChange={(checked) =>
-                    handleSettingChange("showIcons", checked)
+                    handleSettingChange('showIcons', checked)
                   }
+                  size="sm"
                 />
-                <Label htmlFor="show-icons" className="text-sm font-medium">
+                <Label className="font-medium text-sm" htmlFor="show-icons">
                   Show Icons
                 </Label>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="icon-size" className="text-sm font-medium">
+                  <Label className="font-medium text-sm" htmlFor="icon-size">
                     Icon Size
                   </Label>
                   <Select
-                    value={socialMedia.iconSize || "md"}
                     onValueChange={(value) =>
-                      handleSettingChange("iconSize", value)
+                      handleSettingChange('iconSize', value)
                     }
+                    value={socialMedia.iconSize || 'md'}
                   >
                     <SelectTrigger>
                       <SelectValue />
@@ -187,14 +187,14 @@ export function BrandingSection({
                   </Select>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="position" className="text-sm font-medium">
+                  <Label className="font-medium text-sm" htmlFor="position">
                     Position
                   </Label>
                   <Select
-                    value={socialMedia.position || "footer"}
                     onValueChange={(value) =>
-                      handleSettingChange("position", value)
+                      handleSettingChange('position', value)
                     }
+                    value={socialMedia.position || 'footer'}
                   >
                     <SelectTrigger>
                       <SelectValue />
@@ -209,21 +209,21 @@ export function BrandingSection({
               </div>
             </div>
             {socialMedia.showIcons !== false && (
-              <div className="border rounded-card p-4">
-                <Label className="text-sm font-medium mb-2 block">
+              <div className="rounded-card border p-4">
+                <Label className="mb-2 block font-medium text-sm">
                   Preview
                 </Label>
                 <SocialMediaIcons
-                  platforms={platforms}
-                  iconSize={socialMedia.iconSize || "md"}
                   className="justify-center"
+                  iconSize={socialMedia.iconSize || 'md'}
+                  platforms={platforms}
                 />
               </div>
             )}
           </>
         ) : (
-          <div className="bg-muted/30 rounded-card p-4">
-            <p className="text-sm text-muted-foreground">
+          <div className="rounded-card bg-muted/30 p-4">
+            <p className="text-muted-foreground text-sm">
               Enable social media links to display your social profiles on your
               forms. This helps visitors connect with you across different
               platforms.

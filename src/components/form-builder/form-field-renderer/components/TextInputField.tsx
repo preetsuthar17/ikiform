@@ -1,21 +1,20 @@
 // External imports
-import React from "react";
+import React from 'react';
 
 // Component imports
-import { Input } from "@/components/ui/input";
-
-// Utility imports
-import { getBaseClasses } from "../utils";
+import { Input } from '@/components/ui/input';
+import type { FormField } from '@/lib';
 
 // Type imports
-import type { BaseFieldProps } from "../types";
-import { FormField } from "@/lib";
+import type { BaseFieldProps } from '../types';
+// Utility imports
+import { getBaseClasses } from '../utils';
 
 export function getLivePatternError(field: FormField, value: string) {
   if (
     field?.validation?.pattern &&
     value &&
-    !(function () {
+    !(() => {
       try {
         return new RegExp(field.validation.pattern).test(value);
       } catch {
@@ -23,9 +22,9 @@ export function getLivePatternError(field: FormField, value: string) {
       }
     })()
   ) {
-    return field.validation?.patternMessage || "Invalid format";
+    return field.validation?.patternMessage || 'Invalid format';
   }
-  return "";
+  return '';
 }
 
 export function TextInputField({
@@ -42,17 +41,17 @@ export function TextInputField({
   return (
     <>
       <Input
-        type="text"
-        id={field.id}
-        placeholder={field.placeholder}
-        value={value || ""}
-        onChange={(e) => onChange(e.target.value)}
         className={`flex gap-2 ${baseClasses}`}
-        ref={fieldRef}
         disabled={disabled}
+        id={field.id}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={field.placeholder}
+        ref={fieldRef}
+        type="text"
+        value={value || ''}
       />
       {livePatternError && (
-        <div className="text-destructive text-xs mt-1">{livePatternError}</div>
+        <div className="mt-1 text-destructive text-xs">{livePatternError}</div>
       )}
     </>
   );

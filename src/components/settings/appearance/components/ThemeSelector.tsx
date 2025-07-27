@@ -1,15 +1,14 @@
 // External imports
-import React from "react";
+import type React from 'react';
 
 // UI components
-import { Label } from "@/components/ui/label";
-
+import { Label } from '@/components/ui/label';
+import { APPEARANCE_SETTINGS } from '../constants';
 // types and constants
-import { Theme } from "../types";
-import { APPEARANCE_SETTINGS } from "../constants";
+import type { Theme } from '../types';
 
 // components
-import { ThemeCard } from "./ThemeCard";
+import { ThemeCard } from './ThemeCard';
 
 interface ThemeSelectorProps {
   themes: Theme[];
@@ -24,16 +23,16 @@ export const ThemeSelector: React.FC<ThemeSelectorProps> = ({
 }) => {
   return (
     <div className="flex flex-col gap-4">
-      <Label className="text-base font-medium">
+      <Label className="font-medium text-base">
         {APPEARANCE_SETTINGS.THEME_LABEL}
       </Label>
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {themes.map((theme) => (
           <ThemeCard
-            key={theme.id}
-            theme={theme}
             isSelected={selectedTheme === theme.id}
+            key={theme.id}
             onSelect={onThemeChange}
+            theme={theme}
           />
         ))}
       </div>

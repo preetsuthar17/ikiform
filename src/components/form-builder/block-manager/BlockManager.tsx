@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
 // Components
-import { BlockManagerHeader, BlocksList } from "./components";
+import { BlockManagerHeader, BlocksList } from './components';
 
 // Hooks
-import { useBlockExpansion, useBlockEditing } from "./hooks";
+import { useBlockEditing, useBlockExpansion } from './hooks';
 
 // Types
-import type { BlockManagerProps } from "./types";
+import type { BlockManagerProps } from './types';
 
 export function BlockManager({
   blocks,
@@ -31,27 +31,27 @@ export function BlockManager({
   } = useBlockEditing(onBlocksUpdate, blocks);
 
   return (
-    <div className="h-full flex flex-col p-4 gap-8">
+    <div className="flex h-full flex-col gap-8 p-4">
       <BlockManagerHeader blocksCount={blocks.length} onBlockAdd={onBlockAdd} />
       <BlocksList
         blocks={blocks}
-        expandedBlocks={expandedBlocks}
-        selectedBlockId={selectedBlockId}
-        selectedFieldId={selectedFieldId}
+        editDescription={editingState.editDescription}
         editingBlock={editingState.editingBlock}
         editTitle={editingState.editTitle}
-        editDescription={editingState.editDescription}
-        onBlockSelect={onBlockSelect}
-        onFieldSelect={onFieldSelect}
-        onToggleExpansion={toggleBlockExpansion}
-        onStartEditing={startEditingBlock}
+        expandedBlocks={expandedBlocks}
         onBlockDelete={onBlockDelete}
-        onFieldDelete={onFieldDelete}
+        onBlockSelect={onBlockSelect}
         onBlocksUpdate={onBlocksUpdate}
-        onTitleChange={updateEditTitle}
-        onDescriptionChange={updateEditDescription}
-        onSaveEdit={saveBlockEdit}
         onCancelEdit={cancelBlockEdit}
+        onDescriptionChange={updateEditDescription}
+        onFieldDelete={onFieldDelete}
+        onFieldSelect={onFieldSelect}
+        onSaveEdit={saveBlockEdit}
+        onStartEditing={startEditingBlock}
+        onTitleChange={updateEditTitle}
+        onToggleExpansion={toggleBlockExpansion}
+        selectedBlockId={selectedBlockId}
+        selectedFieldId={selectedFieldId}
       />
     </div>
   );

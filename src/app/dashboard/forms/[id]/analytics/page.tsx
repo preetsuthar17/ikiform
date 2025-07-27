@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { notFound } from "next/navigation";
-import { FormAnalytics } from "@/components/forms/form-analytics";
-import { useAuth } from "@/hooks/use-auth";
-import { usePremiumStatus } from "@/hooks/use-premium-status";
-import { Button } from "@/components/ui/button";
-import { Loader } from "@/components/ui/loader";
-import Link from "next/link";
-import { createClient } from "@/utils/supabase/client";
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { FormAnalytics } from '@/components/forms/form-analytics';
+import { Button } from '@/components/ui/button';
+import { Loader } from '@/components/ui/loader';
+import { useAuth } from '@/hooks/use-auth';
+import { usePremiumStatus } from '@/hooks/use-premium-status';
+import { createClient } from '@/utils/supabase/client';
 
 interface FormAnalyticsPageProps {
   params: Promise<{ id: string }>;
@@ -31,15 +31,15 @@ export default function FormAnalyticsPage({ params }: FormAnalyticsPageProps) {
 
   useEffect(() => {
     const fetchForm = async () => {
-      if (!user || !id) return;
+      if (!(user && id)) return;
 
       try {
         const supabase = createClient();
         const { data, error } = await supabase
-          .from("forms")
-          .select("*")
-          .eq("id", id)
-          .eq("user_id", user.id)
+          .from('forms')
+          .select('*')
+          .eq('id', id)
+          .eq('user_id', user.id)
           .single();
 
         if (error || !data) {
@@ -48,7 +48,7 @@ export default function FormAnalyticsPage({ params }: FormAnalyticsPageProps) {
 
         setForm(data);
       } catch (error) {
-        console.error("Error loading form:", error);
+        console.error('Error loading form:', error);
         notFound();
       } finally {
         setFormLoading(false);
@@ -64,17 +64,17 @@ export default function FormAnalyticsPage({ params }: FormAnalyticsPageProps) {
 
   if (loading || checking || (hasPremium && formLoading)) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex min-h-screen items-center justify-center">
         <Loader />
       </div>
     );
   }
 
-  if (!user || !hasPremium) {
+  if (!(user && hasPremium)) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen gap-6">
-        <div className="text-2xl font-semibold">Requires Premium</div>
-        <div className="text-muted-foreground text-center max-w-md">
+      <div className="flex min-h-screen flex-col items-center justify-center gap-6">
+        <div className="font-semibold text-2xl">Requires Premium</div>
+        <div className="max-w-md text-center text-muted-foreground">
           You need a premium subscription to access form analytics. Upgrade to
           unlock all features.
         </div>
@@ -87,7 +87,7 @@ export default function FormAnalyticsPage({ params }: FormAnalyticsPageProps) {
 
   if (!form) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex min-h-screen items-center justify-center">
         <Loader />
       </div>
     );

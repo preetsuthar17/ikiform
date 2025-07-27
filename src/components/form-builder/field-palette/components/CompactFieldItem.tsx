@@ -1,8 +1,8 @@
 // Types
-import type { CompactFieldItemProps } from "../types";
 
 // React
-import React from "react";
+import React from 'react';
+import type { CompactFieldItemProps } from '../types';
 
 export function CompactFieldItem({
   fieldType,
@@ -12,11 +12,11 @@ export function CompactFieldItem({
 
   return (
     <button
+      className="flex items-center gap-2 rounded-ele border border-border bg-background p-3 text-left transition-colors hover:bg-muted"
       onClick={() => onAddField(fieldType.type)}
-      className="rounded-ele border border-border bg-background hover:bg-muted transition-colors text-left flex gap-2 items-center p-3"
     >
-      <Icon className="w-4 h-4 text-muted-foreground flex-shrink-0" />
-      <span className="text-xs font-medium truncate">{fieldType.label}</span>
+      <Icon className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
+      <span className="truncate font-medium text-xs">{fieldType.label}</span>
     </button>
   );
 }

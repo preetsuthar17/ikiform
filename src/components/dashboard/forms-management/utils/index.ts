@@ -1,5 +1,5 @@
 // Utility functions for forms management
-import type { Form } from "@/lib/database";
+import type { Form } from '@/lib/database';
 
 /**
  * Count total fields across blocks and direct fields
@@ -9,7 +9,7 @@ export function getTotalFields(form: Form): number {
   const fieldsFromBlocks =
     form.schema?.blocks?.reduce(
       (total, block) => total + (block.fields?.length || 0),
-      0,
+      0
     ) || 0;
   return Math.max(fieldsFromDirectArray, fieldsFromBlocks);
 }
@@ -18,10 +18,10 @@ export function getTotalFields(form: Form): number {
  * Format date string for display
  */
 export function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
   });
 }
 

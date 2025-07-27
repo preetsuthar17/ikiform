@@ -1,42 +1,42 @@
-import { NextRequest, NextResponse } from "next/server";
-import { createAdminClient } from "@/utils/supabase/admin";
-import { formsDbServer } from "@/lib/database";
+import { type NextRequest, NextResponse } from 'next/server';
+import { formsDbServer } from '@/lib/database';
+import { createAdminClient } from '@/utils/supabase/admin';
 
 // --- Inbound Webhook Receiver API ---
 
 // POST /api/webhook/inbound/[id] - Receive and process inbound webhook
 export async function POST(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const mappingId = (await params).id;
     const supabase = createAdminClient();
     // 1. Fetch the inbound mapping
     const { data: mapping, error } = await supabase
-      .from("inbound_webhook_mappings")
-      .select("*")
-      .eq("id", mappingId)
+      .from('inbound_webhook_mappings')
+      .select('*')
+      .eq('id', mappingId)
       .single();
     if (error || !mapping) {
       return NextResponse.json(
-        { error: "Inbound mapping not found" },
-        { status: 404 },
+        { error: 'Inbound mapping not found' },
+        { status: 404 }
       );
     }
     if (!mapping.enabled) {
       return NextResponse.json(
-        { error: "Inbound mapping is disabled" },
-        { status: 403 },
+        { error: 'Inbound mapping is disabled' },
+        { status: 403 }
       );
     }
     // 2. Validate secret if set
     if (mapping.secret) {
-      const headerSecret = req.headers.get("x-inbound-secret");
+      const headerSecret = req.headers.get('x-inbound-secret');
       if (!headerSecret || headerSecret !== mapping.secret) {
         return NextResponse.json(
-          { error: "Invalid or missing secret" },
-          { status: 401 },
+          { error: 'Invalid or missing secret' },
+          { status: 401 }
         );
       }
     }
@@ -50,13 +50,13 @@ export async function POST(
     // 4. Submit to target form
     const result = await formsDbServer.submitForm(
       mapping.target_form_id,
-      mapped,
+      mapped
     );
     return NextResponse.json({ success: true, submission: result });
   } catch (error: any) {
     return NextResponse.json(
-      { error: error.message || "Failed to process inbound webhook" },
-      { status: 400 },
+      { error: error.message || 'Failed to process inbound webhook' },
+      { status: 400 }
     );
   }
 }

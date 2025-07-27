@@ -1,33 +1,33 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import { cva, type VariantProps } from "class-variance-authority";
-import { motion, AnimatePresence } from "motion/react";
-import { cn } from "@/lib/utils";
+import * as TooltipPrimitive from '@radix-ui/react-tooltip';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { AnimatePresence, motion } from 'motion/react';
+import * as React from 'react';
+import { cn } from '@/lib/utils';
 
 const tooltipVariants = cva(
-  "z-50 overflow-hidden rounded-card border border-border bg-card px-3 py-1.5 text-xs text-card-foreground shadow-sm/2 ",
+  'z-50 overflow-hidden rounded-card border border-border bg-card px-3 py-1.5 text-card-foreground text-xs shadow-sm/2 ',
   {
     variants: {
       variant: {
-        default: "bg-card text-card-foreground",
-        dark: "bg-foreground text-background border-foreground",
-        light: "bg-background text-foreground border-border",
+        default: 'bg-card text-card-foreground',
+        dark: 'border-foreground bg-foreground text-background',
+        light: 'border-border bg-background text-foreground',
         destructive:
-          "bg-destructive text-primary-foreground border-destructive",
+          'border-destructive bg-destructive text-primary-foreground',
       },
       size: {
-        sm: "px-2 py-1 text-xs",
-        md: "px-3 py-1.5 text-sm",
-        lg: "px-4 py-2 text-base",
+        sm: 'px-2 py-1 text-xs',
+        md: 'px-3 py-1.5 text-sm',
+        lg: 'px-4 py-2 text-base',
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "md",
+      variant: 'default',
+      size: 'md',
     },
-  },
+  }
 );
 
 const Tooltip: React.FC<
@@ -72,25 +72,25 @@ const TooltipContent = React.forwardRef<
   return (
     <AnimatePresence>
       <TooltipPrimitive.Content
+        asChild
+        className={cn('relative', className)}
+        onAnimationEnd={() => setIsVisible(false)}
+        onAnimationStart={() => setIsVisible(true)}
         ref={ref}
         sideOffset={sideOffset}
-        className={cn("relative", className)}
-        onAnimationStart={() => setIsVisible(true)}
-        onAnimationEnd={() => setIsVisible(false)}
-        asChild
         {...props}
       >
         <motion.div
-          initial={{ opacity: 0, scale: 0.8, y: 5 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
+          className={cn(tooltipVariants({ variant, size }), className)}
           exit={{ opacity: 0, scale: 0.8, y: 5 }}
+          initial={{ opacity: 0, scale: 0.8, y: 5 }}
           transition={{
-            type: "spring",
+            type: 'spring',
             stiffness: 300,
             damping: 20,
             duration: 0.1,
           }}
-          className={cn(tooltipVariants({ variant, size }), className)}
         >
           {props.children}
         </motion.div>

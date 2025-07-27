@@ -1,15 +1,13 @@
 // External libraries
-import React from "react";
-
-// Internal components
-import { EditableField } from "./EditableField";
-
+import React from 'react';
 // Types
-import type { FormHeaderProps } from "../types";
+import type { FormHeaderProps } from '../types';
+// Internal components
+import { EditableField } from './EditableField';
 
 export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
   const handleTitleUpdate = (title: string) => {
-    onFormSettingsUpdate?.({ title: title || "Untitled Form" });
+    onFormSettingsUpdate?.({ title: title || 'Untitled Form' });
   };
 
   const handleDescriptionUpdate = (description: string) => {
@@ -19,33 +17,33 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
   return (
     <div className="flex flex-col gap-2">
       <EditableField
-        value={schema.settings.title}
-        placeholder="Click to add title..."
-        onSave={handleTitleUpdate}
+        className="flex min-h-[44px] items-center gap-2"
         disabled={!onFormSettingsUpdate}
-        className="flex items-center gap-2 min-h-[44px]"
         inputClassName="text-3xl font-bold bg-background w-full"
+        onSave={handleTitleUpdate}
+        placeholder="Click to add title..."
+        value={schema.settings.title}
       >
-        <h1 className="text-3xl font-bold text-foreground truncate">
-          {schema.settings.title || "Untitled Form"}
+        <h1 className="truncate font-bold text-3xl text-foreground">
+          {schema.settings.title || 'Untitled Form'}
         </h1>
       </EditableField>
 
       <EditableField
-        value={schema.settings.description || ""}
-        placeholder="Click to add a description..."
-        onSave={handleDescriptionUpdate}
-        disabled={!onFormSettingsUpdate}
+        className="flex min-h-[28px] items-start gap-2"
         component="textarea"
-        rows={Math.max(
-          (schema.settings.description || "").split("\n").length || 1,
-          1,
-        )}
-        className="flex items-start gap-2 min-h-[28px]"
+        disabled={!onFormSettingsUpdate}
         inputClassName="bg-background w-full"
+        onSave={handleDescriptionUpdate}
+        placeholder="Click to add a description..."
+        rows={Math.max(
+          (schema.settings.description || '').split('\n').length || 1,
+          1
+        )}
+        value={schema.settings.description || ''}
       >
         {schema.settings.description ? (
-          <p className="text-muted-foreground whitespace-pre-wrap">
+          <p className="whitespace-pre-wrap text-muted-foreground">
             {schema.settings.description}
           </p>
         ) : onFormSettingsUpdate ? (

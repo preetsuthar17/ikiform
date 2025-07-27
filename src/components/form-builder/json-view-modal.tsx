@@ -1,28 +1,27 @@
-"use client";
-
-import React, { useState, useEffect, useMemo, useRef } from "react";
-import { createHighlighter, type Highlighter } from "shiki";
-import { useTheme } from "next-themes";
+'use client';
 
 // Icon imports
-import { Copy, Check } from "lucide-react";
+import { Check, Copy } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { createHighlighter, type Highlighter } from 'shiki';
 
 // UI components
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Modal,
   ModalContent,
   ModalHeader,
   ModalTitle,
-} from "@/components/ui/modal";
-import { ScrollArea } from "@/components/ui/scroll-area";
+} from '@/components/ui/modal';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 // Hooks
-import { toast } from "@/hooks/use-toast";
+import { toast } from '@/hooks/use-toast';
 
 // Types
-import type { FormSchema } from "@/lib/database";
-import { Loader } from "../ui/loader";
+import type { FormSchema } from '@/lib/database';
+import { Loader } from '../ui/loader';
 
 interface JsonViewModalProps {
   schema: FormSchema;
@@ -45,8 +44,8 @@ const getHighlighter = async (): Promise<Highlighter> => {
   }
 
   highlighterPromise = createHighlighter({
-    langs: ["json"], // Only load JSON language
-    themes: ["github-dark", "github-light"],
+    langs: ['json'], // Only load JSON language
+    themes: ['github-dark', 'github-light'],
   }).then((highlighter) => {
     highlighterInstance = highlighter;
     highlighterPromise = null;
@@ -58,7 +57,7 @@ const getHighlighter = async (): Promise<Highlighter> => {
 
 export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
   const [copied, setCopied] = useState(false);
-  const [highlightedCode, setHighlightedCode] = useState<string>("");
+  const [highlightedCode, setHighlightedCode] = useState<string>('');
   const [isHighlighting, setIsHighlighting] = useState(false);
   const { theme } = useTheme();
   const abortControllerRef = useRef<AbortController | null>(null);
@@ -68,8 +67,8 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
     try {
       return JSON.stringify(schema, null, 2);
     } catch (error) {
-      console.error("Failed to stringify schema:", error);
-      return "{}";
+      console.error('Failed to stringify schema:', error);
+      return '{}';
     }
   }, [schema]);
 
@@ -97,7 +96,7 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
 
         if (abortController.signal.aborted) return;
 
-        const selectedTheme = theme === "dark" ? "github-dark" : "github-light";
+        const selectedTheme = theme === 'dark' ? 'github-dark' : 'github-light';
 
         // Use requestIdleCallback for non-blocking highlighting
         const highlight = () => {
@@ -105,7 +104,7 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
 
           try {
             const html = highlighter.codeToHtml(jsonString, {
-              lang: "json",
+              lang: 'json',
               theme: selectedTheme,
             });
 
@@ -113,7 +112,7 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
               setHighlightedCode(html);
             }
           } catch (error) {
-            console.error("Failed to highlight code:", error);
+            console.error('Failed to highlight code:', error);
             if (!abortController.signal.aborted) {
               setHighlightedCode(`<pre><code>${jsonString}</code></pre>`);
             }
@@ -125,14 +124,14 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
         };
 
         // Use requestIdleCallback if available, otherwise setTimeout
-        if ("requestIdleCallback" in window) {
+        if ('requestIdleCallback' in window) {
           requestIdleCallback(highlight);
         } else {
           setTimeout(highlight, 0);
         }
       } catch (error) {
         if (!abortController.signal.aborted) {
-          console.error("Failed to create highlighter:", error);
+          console.error('Failed to create highlighter:', error);
           setHighlightedCode(`<pre><code>${jsonString}</code></pre>`);
           setIsHighlighting(false);
         }
@@ -159,42 +158,42 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
     try {
       await navigator.clipboard.writeText(jsonString);
       setCopied(true);
-      toast.success("JSON copied to clipboard!");
+      toast.success('JSON copied to clipboard!');
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
-      toast.error("Failed to copy JSON");
+      toast.error('Failed to copy JSON');
     }
   };
 
   return (
-    <Modal open={isOpen} onOpenChange={onClose}>
-      <ModalContent className="max-w-4xl h-[80vh] flex flex-col gap-4">
+    <Modal onOpenChange={onClose} open={isOpen}>
+      <ModalContent className="flex h-[80vh] max-w-4xl flex-col gap-4">
         <ModalHeader>
           <ModalTitle>Form Schema JSON</ModalTitle>
         </ModalHeader>
 
-        <div className="flex-1 relative flex flex-col">
+        <div className="relative flex flex-1 flex-col">
           <Button
-            variant="ghost"
-            size="icon"
-            onClick={copyToClipboard}
-            className="ml-auto absolute top-3 right-3 z-10"
+            className="absolute top-3 right-3 z-10 ml-auto"
             disabled={isHighlighting}
+            onClick={copyToClipboard}
+            size="icon"
+            variant="ghost"
           >
             {copied ? (
-              <Check className="w-4 h-4" />
+              <Check className="h-4 w-4" />
             ) : (
-              <Copy className="w-4 h-4" />
+              <Copy className="h-4 w-4" />
             )}
           </Button>
           <ScrollArea className="h-[71vh] rounded-ele border bg-muted/30 text-foreground">
             {isHighlighting ? (
-              <div className="p-4 flex items-center justify-center h-[71vh]">
+              <div className="flex h-[71vh] items-center justify-center p-4">
                 <Loader />
               </div>
             ) : (
               <div
-                className="p-4 text-sm font-mono h-full [&_pre]:!bg-transparent [&_pre]:!p-0"
+                className="[&_pre]:!bg-transparent [&_pre]:!p-0 h-full p-4 font-mono text-sm"
                 dangerouslySetInnerHTML={{ __html: highlightedCode }}
               />
             )}

@@ -1,38 +1,35 @@
 // External imports
-import React from "react";
-
-// UI imports
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 
 // Icon imports
-import { FileText, Layers, Check, Edit3, Eye } from "lucide-react";
-
-// Component imports
-import { FormPreview } from "../../form-preview";
-
+import { Check, Edit3, Eye, FileText, Layers } from 'lucide-react';
+import React from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+// UI imports
+import { Card } from '@/components/ui/card';
 // Utility imports
-import { createDefaultFormSchema } from "@/lib/forms";
+import { createDefaultFormSchema } from '@/lib/forms';
+// Component imports
+import { FormPreview } from '../../form-preview';
 
 // Type imports
-import type { FormConfiguration } from "../types";
+import type { FormConfiguration } from '../types';
 
 interface FormReviewStepProps {
   configuration: FormConfiguration;
-  onEditStep: (step: "type" | "configure") => void;
+  onEditStep: (step: 'type' | 'configure') => void;
 }
 
 export const FormReviewStep: React.FC<FormReviewStepProps> = ({
   configuration,
   onEditStep,
 }) => {
-  const isMultiStep = configuration.type === "multi";
+  const isMultiStep = configuration.type === 'multi';
   const [showPreview, setShowPreview] = React.useState(false);
 
   const previewSchema = createDefaultFormSchema({
-    title: configuration.title || "Untitled Form",
-    description: configuration.description || "",
+    title: configuration.title || 'Untitled Form',
+    description: configuration.description || '',
     multiStep: isMultiStep,
   });
 
@@ -44,28 +41,28 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               {isMultiStep ? (
-                <Layers className="w-5 h-5 text-primary" />
+                <Layers className="h-5 w-5 text-primary" />
               ) : (
-                <FileText className="w-5 h-5 text-primary" />
+                <FileText className="h-5 w-5 text-primary" />
               )}
               <div>
                 <p className="font-medium">Form Type</p>
-                <p className="text-sm text-muted-foreground">
-                  {isMultiStep ? "Multi-Step Form" : "Single Page Form"}
+                <p className="text-muted-foreground text-sm">
+                  {isMultiStep ? 'Multi-Step Form' : 'Single Page Form'}
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <Badge variant="outline">
-                {isMultiStep ? "Multi-Step" : "Single Page"}
+                {isMultiStep ? 'Multi-Step' : 'Single Page'}
               </Badge>
               <Button
-                size={"icon"}
-                variant={"secondary"}
-                onClick={() => onEditStep("type")}
+                onClick={() => onEditStep('type')}
+                size={'icon'}
                 title="Edit form type"
+                variant={'secondary'}
               >
-                <Edit3 className="w-4 h-4 text-muted-foreground hover:text-foreground" />
+                <Edit3 className="h-4 w-4 text-muted-foreground hover:text-foreground" />
               </Button>
             </div>
           </div>
@@ -75,21 +72,21 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
         <Card className="p-4">
           <div className="flex items-start justify-between">
             <div className="flex-1">
-              <div className="flex items-center gap-2 mb-3">
-                <FileText className="w-5 h-5 text-primary" />
+              <div className="mb-3 flex items-center gap-2">
+                <FileText className="h-5 w-5 text-primary" />
                 <p className="font-medium">Form Configuration</p>
               </div>
               <div className="flex flex-col gap-2">
                 <div>
-                  <p className="text-sm font-medium">Title</p>
-                  <p className="text-sm text-muted-foreground">
-                    {configuration.title || "Untitled Form"}
+                  <p className="font-medium text-sm">Title</p>
+                  <p className="text-muted-foreground text-sm">
+                    {configuration.title || 'Untitled Form'}
                   </p>
                 </div>
                 {configuration.description && (
                   <div>
-                    <p className="text-sm font-medium">Description</p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="font-medium text-sm">Description</p>
+                    <p className="text-muted-foreground text-sm">
                       {configuration.description}
                     </p>
                   </div>
@@ -97,12 +94,12 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
               </div>
             </div>
             <Button
-              size={"icon"}
-              variant={"secondary"}
-              onClick={() => onEditStep("configure")}
+              onClick={() => onEditStep('configure')}
+              size={'icon'}
               title="Edit form configuration"
+              variant={'secondary'}
             >
-              <Edit3 className="w-4 h-4 text-muted-foreground hover:text-foreground" />
+              <Edit3 className="h-4 w-4 text-muted-foreground hover:text-foreground" />
             </Button>
           </div>
         </Card>
@@ -111,20 +108,20 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
         <Card className="p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Eye className="w-5 h-5 text-primary" />
+              <Eye className="h-5 w-5 text-primary" />
               <div>
                 <p className="font-medium">Form Preview</p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-muted-foreground text-sm">
                   See how your form will look
                 </p>
               </div>
             </div>
             <Button
-              variant={showPreview ? "secondary" : "outline"}
               onClick={() => setShowPreview(!showPreview)}
               size="sm"
+              variant={showPreview ? 'secondary' : 'outline'}
             >
-              {showPreview ? "Hide Preview" : "Show Preview"}
+              {showPreview ? 'Hide Preview' : 'Show Preview'}
             </Button>
           </div>
         </Card>
@@ -133,13 +130,13 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
       {/* Form Preview */}
       {showPreview && (
         <Card className="p-4">
-          <div className="border rounded-card overflow-hidden">
+          <div className="overflow-hidden rounded-card border">
             <FormPreview
-              schema={previewSchema}
-              selectedFieldId={null}
+              onFieldDelete={() => {}}
               onFieldSelect={() => {}}
               onFieldsReorder={() => {}}
-              onFieldDelete={() => {}}
+              schema={previewSchema}
+              selectedFieldId={null}
             />
           </div>
         </Card>

@@ -1,14 +1,13 @@
 // External imports
-import React from "react";
-
-// UI imports
-import { cn } from "@/lib/utils";
 
 // Icon imports
-import { Check, FileText, Settings, Eye } from "lucide-react";
+import { Check, Eye, FileText, Settings } from 'lucide-react';
+import type React from 'react';
+// UI imports
+import { cn } from '@/lib/utils';
 
 // Type imports
-import type { WizardStep } from "../types";
+import type { WizardStep } from '../types';
 
 interface StepIndicatorProps {
   currentStep: WizardStep;
@@ -17,22 +16,22 @@ interface StepIndicatorProps {
 
 const steps = [
   {
-    id: "type" as WizardStep,
-    title: "Choose Type",
+    id: 'type' as WizardStep,
+    title: 'Choose Type',
     icon: FileText,
-    description: "Select form type",
+    description: 'Select form type',
   },
   {
-    id: "configure" as WizardStep,
-    title: "Configure",
+    id: 'configure' as WizardStep,
+    title: 'Configure',
     icon: Settings,
-    description: "Set up form details",
+    description: 'Set up form details',
   },
   {
-    id: "review" as WizardStep,
-    title: "Review",
+    id: 'review' as WizardStep,
+    title: 'Review',
     icon: Eye,
-    description: "Review and create",
+    description: 'Review and create',
   },
 ];
 
@@ -53,8 +52,8 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
   };
 
   return (
-    <div className="flex items-center justify-between w-full">
-      <div className="flex items-center w-full justify-between space-x-4">
+    <div className="flex w-full items-center justify-between">
+      <div className="flex w-full items-center justify-between space-x-4">
         {steps.map((step, index) => {
           const Icon = step.icon;
           const isCompleted = isStepCompleted(step.id);
@@ -62,22 +61,22 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
           const isActive = isCompleted || isCurrent;
 
           return (
-            <div key={step.id} className="flex items-center">
+            <div className="flex items-center" key={step.id}>
               {/* Step Circle */}
               <div
                 className={cn(
-                  "flex items-center justify-center w-10 h-10 rounded-card border-2 transition-all",
+                  'flex h-10 w-10 items-center justify-center rounded-card border-2 transition-all',
                   isCompleted
-                    ? "bg-primary border-primary text-primary-foreground"
+                    ? 'border-primary bg-primary text-primary-foreground'
                     : isCurrent
-                      ? "border-primary bg-primary/10 text-primary"
-                      : "border-muted-foreground/30 bg-background text-muted-foreground",
+                      ? 'border-primary bg-primary/10 text-primary'
+                      : 'border-muted-foreground/30 bg-background text-muted-foreground'
                 )}
               >
                 {isCompleted ? (
-                  <Check className="w-5 h-5" />
+                  <Check className="h-5 w-5" />
                 ) : (
-                  <Icon className="w-5 h-5" />
+                  <Icon className="h-5 w-5" />
                 )}
               </div>
 
@@ -85,18 +84,18 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
               <div className="ml-3 hidden sm:block">
                 <p
                   className={cn(
-                    "text-sm font-medium",
-                    isActive ? "text-foreground" : "text-muted-foreground",
+                    'font-medium text-sm',
+                    isActive ? 'text-foreground' : 'text-muted-foreground'
                   )}
                 >
                   {step.title}
                 </p>
                 <p
                   className={cn(
-                    "text-xs",
+                    'text-xs',
                     isActive
-                      ? "text-muted-foreground"
-                      : "text-muted-foreground/60",
+                      ? 'text-muted-foreground'
+                      : 'text-muted-foreground/60'
                   )}
                 >
                   {step.description}
@@ -107,10 +106,10 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
               {index < steps.length - 1 && (
                 <div
                   className={cn(
-                    "w-32 h-px mx-4",
+                    'mx-4 h-px w-32',
                     isCompleted || getCurrentStepIndex() > index
-                      ? "bg-primary"
-                      : "bg-muted-foreground",
+                      ? 'bg-primary'
+                      : 'bg-muted-foreground'
                   )}
                 />
               )}

@@ -1,12 +1,13 @@
 // External libraries
-import React from "react";
-import { ChevronRight } from "lucide-react";
+
+import { ChevronRight } from 'lucide-react';
+import React from 'react';
 
 // UI components
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 // Types
-import type { FormActionsProps } from "../types";
+import type { FormActionsProps } from '../types';
 
 export function FormActions({
   schema,
@@ -21,15 +22,15 @@ export function FormActions({
     !isMultiStep || currentStepIndex === (schema.blocks?.length || 1) - 1;
 
   return (
-    <div className="flex justify-between items-center gap-4">
+    <div className="flex items-center justify-between gap-4">
       {isLastStep ? (
-        <Button type="submit" className="w-full sm:w-auto">
-          {schema.settings.submitText || "Submit"}
+        <Button className="w-full sm:w-auto" type="submit">
+          {schema.settings.submitText || 'Submit'}
         </Button>
       ) : (
-        <Button onClick={onNextStep} className="flex items-center gap-2">
+        <Button className="flex items-center gap-2" onClick={onNextStep}>
           Continue to Next Step
-          <ChevronRight className="w-4 h-4" />
+          <ChevronRight className="h-4 w-4" />
         </Button>
       )}
     </div>

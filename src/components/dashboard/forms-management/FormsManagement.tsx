@@ -1,26 +1,26 @@
 // Main forms management component
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
 // UI Components
-import { ConfirmationModal } from "../form-delete-confirmation-modal";
+import { ConfirmationModal } from '../form-delete-confirmation-modal';
 
 // Local Components
 import {
-  LoadingSkeleton,
-  FormsHeader,
-  FormStats,
   AIFormSuggestions,
   EmptyState,
+  FormStats,
   FormsGrid,
-} from "./components";
+  FormsHeader,
+  LoadingSkeleton,
+} from './components';
 
 // Hooks
-import { useFormsManagement } from "./hooks";
+import { useFormsManagement } from './hooks';
 
 // Types
-import type { FormsManagementProps } from "./types";
+import type { FormsManagementProps } from './types';
 
 export function FormsManagement({ className }: FormsManagementProps) {
   const {
@@ -49,12 +49,12 @@ export function FormsManagement({ className }: FormsManagementProps) {
   }
 
   return (
-    <div className={`flex flex-col gap-8 ${className || ""}`}>
+    <div className={`flex flex-col gap-8 ${className || ''}`}>
       {/* Header Section */}
       <FormsHeader
         onCreateForm={createNewForm}
-        onCreateWithAI={handleCreateWithAI}
         onCreateManually={handleCreateManually}
+        onCreateWithAI={handleCreateWithAI}
       />
 
       {/* Quick Stats */}
@@ -67,29 +67,29 @@ export function FormsManagement({ className }: FormsManagementProps) {
       {forms.length === 0 ? (
         <EmptyState
           onCreateForm={createNewForm}
-          onCreateWithAI={handleCreateWithAI}
           onCreateManually={handleCreateManually}
+          onCreateWithAI={handleCreateWithAI}
         />
       ) : (
         <FormsGrid
           forms={forms}
-          onEdit={editForm}
-          onViewAnalytics={viewAnalytics}
-          onShare={shareForm}
           onDelete={deleteForm}
+          onEdit={editForm}
+          onShare={shareForm}
+          onViewAnalytics={viewAnalytics}
         />
       )}
 
       {/* Delete Confirmation Modal */}
       <ConfirmationModal
-        open={deleteModal.open}
-        onOpenChange={(open) => setDeleteModal((prev) => ({ ...prev, open }))}
-        title="Delete Form"
-        description={`Are you sure you want to delete "${deleteModal.formTitle}"? This action cannot be undone and all form data will be permanently lost.`}
-        confirmText="Delete Form"
         cancelText="Cancel"
-        variant="destructive"
+        confirmText="Delete Form"
+        description={`Are you sure you want to delete "${deleteModal.formTitle}"? This action cannot be undone and all form data will be permanently lost.`}
         onConfirm={confirmDeleteForm}
+        onOpenChange={(open) => setDeleteModal((prev) => ({ ...prev, open }))}
+        open={deleteModal.open}
+        title="Delete Form"
+        variant="destructive"
       />
     </div>
   );

@@ -1,16 +1,17 @@
 // Components
-export { FormPreview } from "./FormPreview";
+
 export {
   EditableField,
+  FormActions,
+  FormFieldsContainer,
   FormHeader,
   MultiStepNavigation,
   StepHeader,
-  FormFieldsContainer,
-  FormActions,
-} from "./components";
+} from './components';
+export { FormPreview } from './FormPreview';
 
 // Hooks
-export { useFormPreviewState, useEditableField } from "./hooks";
+export { useEditableField, useFormPreviewState } from './hooks';
 
 // Types
-export type * from "./types";
+export type * from './types';

@@ -1,19 +1,17 @@
 // External imports
-import React from "react";
-import { ScrollArea } from "@/components/ui/scroll-area";
-
-// components
-import { ModalHeader } from "./ModalHeader";
-import { SidebarNavigation } from "./SidebarNavigation";
-import { SettingsContent } from "./SettingsContent";
-
+import React from 'react';
+import { ScrollArea } from '@/components/ui/scroll-area';
 // types and utilities
-import { SettingsSection } from "../types";
+import type { SettingsSection } from '../types';
 import {
-  getSidebarStyles,
-  getDesktopLayoutStyles,
   getContentAreaStyles,
-} from "../utils";
+  getDesktopLayoutStyles,
+  getSidebarStyles,
+} from '../utils';
+// components
+import { ModalHeader } from './ModalHeader';
+import { SettingsContent } from './SettingsContent';
+import { SidebarNavigation } from './SidebarNavigation';
 
 interface DesktopLayoutProps {
   activeSection: SettingsSection;
@@ -29,7 +27,7 @@ export function DesktopLayout({
   return (
     <div className={getDesktopLayoutStyles()}>
       <div className={`${getSidebarStyles()} gap-4`}>
-        <div className="flex items-center gap-4 border-b border-border p-4 sr-only">
+        <div className="sr-only flex items-center gap-4 border-border border-b p-4">
           <ModalHeader onClose={onClose} />
         </div>
         <SidebarNavigation

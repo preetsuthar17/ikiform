@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
-import { cva, type VariantProps } from "class-variance-authority";
-import { GripVertical } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cva, type VariantProps } from 'class-variance-authority';
+import { GripVertical } from 'lucide-react';
+import * as React from 'react';
+import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
+import { cn } from '@/lib/utils';
 
-const resizablePanelVariants = cva("relative", {
+const resizablePanelVariants = cva('relative', {
   variants: {
     border: {
-      none: "",
-      left: "border-l",
-      right: "border-r",
-      top: "border-t",
-      bottom: "border-b",
-      all: "border",
-      vertical: "border-l border-r",
-      horizontal: "border-t border-b",
+      none: '',
+      left: 'border-l',
+      right: 'border-r',
+      top: 'border-t',
+      bottom: 'border-b',
+      all: 'border',
+      vertical: 'border-r border-l',
+      horizontal: 'border-t border-b',
     },
   },
   defaultVariants: {
-    border: "none",
+    border: 'none',
   },
 });
 
@@ -29,15 +29,15 @@ const ResizablePanelGroup = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof PanelGroup>
 >(({ className, ...props }, ref) => (
   <PanelGroup
-    ref={ref}
     className={cn(
-      "flex h-full w-full data-[panel-group-direction=vertical]:flex-col",
-      className,
+      'flex h-full w-full data-[panel-group-direction=vertical]:flex-col',
+      className
     )}
+    ref={ref}
     {...props}
   />
 ));
-ResizablePanelGroup.displayName = "ResizablePanelGroup";
+ResizablePanelGroup.displayName = 'ResizablePanelGroup';
 
 interface ResizablePanelProps
   extends React.ComponentPropsWithoutRef<typeof Panel>,
@@ -48,12 +48,12 @@ const ResizablePanel = React.forwardRef<
   ResizablePanelProps
 >(({ className, border, ...props }, ref) => (
   <Panel
-    ref={ref}
     className={cn(resizablePanelVariants({ border }), className)}
+    ref={ref}
     {...props}
   />
 ));
-ResizablePanel.displayName = "ResizablePanel";
+ResizablePanel.displayName = 'ResizablePanel';
 
 const ResizableHandle = ({
   withHandle = true,
@@ -64,8 +64,8 @@ const ResizableHandle = ({
 }) => (
   <PanelResizeHandle
     className={cn(
-      "relative flex w-px items-center justify-center bg-border after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 data-[panel-group-direction=vertical]:h-px data-[panel-group-direction=vertical]:w-full data-[panel-group-direction=vertical]:after:left-0 data-[panel-group-direction=vertical]:after:h-1 data-[panel-group-direction=vertical]:after:w-full data-[panel-group-direction=vertical]:after:-translate-y-1/2 data-[panel-group-direction=vertical]:after:translate-x-0 [&[data-panel-group-direction=vertical]>div]:rotate-90",
-      className,
+      'after:-translate-x-1/2 data-[panel-group-direction=vertical]:after:-translate-y-1/2 relative flex w-px items-center justify-center bg-border after:absolute after:inset-y-0 after:left-1/2 after:w-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 data-[panel-group-direction=vertical]:h-px data-[panel-group-direction=vertical]:w-full data-[panel-group-direction=vertical]:after:left-0 data-[panel-group-direction=vertical]:after:h-1 data-[panel-group-direction=vertical]:after:w-full data-[panel-group-direction=vertical]:after:translate-x-0 [&[data-panel-group-direction=vertical]>div]:rotate-90',
+      className
     )}
     {...props}
   >

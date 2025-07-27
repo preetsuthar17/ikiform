@@ -1,14 +1,14 @@
 // TimePicker.tsx
-"use client";
-import * as React from "react";
+'use client';
+import * as React from 'react';
 import {
   Select,
-  SelectTrigger,
   SelectContent,
   SelectItem,
+  SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Button } from "./button";
+} from '@/components/ui/select';
+import { Button } from './button';
 
 export interface TimePickerProps {
   value?: string;
@@ -31,19 +31,19 @@ export const TimePicker: React.FC<TimePickerProps> = ({
     const now = new Date();
     let h = now.getHours();
     const m = now.getMinutes();
-    const ap = h >= 12 ? "PM" : "AM";
+    const ap = h >= 12 ? 'PM' : 'AM';
     h = h % 12;
     if (h === 0) h = 12;
     return {
-      hour: String(h).padStart(2, "0"),
-      minute: String(m).padStart(2, "0"),
+      hour: String(h).padStart(2, '0'),
+      minute: String(m).padStart(2, '0'),
       amPm: ap,
     };
   }, []);
 
-  const [hour, setHour] = React.useState<string>("");
-  const [minute, setMinute] = React.useState<string>("");
-  const [amPm, setAmPm] = React.useState<string>("AM");
+  const [hour, setHour] = React.useState<string>('');
+  const [minute, setMinute] = React.useState<string>('');
+  const [amPm, setAmPm] = React.useState<string>('AM');
 
   // Handler to set current time
   const handleSetCurrentTime = React.useCallback(() => {
@@ -71,11 +71,11 @@ export const TimePicker: React.FC<TimePickerProps> = ({
     }
     // If value is provided, parse it once on mount
     else if (
-      typeof value === "string" &&
+      typeof value === 'string' &&
       value.match(/^\d{1,2}:\d{2} (AM|PM)$/)
     ) {
-      const [hm, ap] = value.split(" ");
-      const [h, m] = hm.split(":");
+      const [hm, ap] = value.split(' ');
+      const [h, m] = hm.split(':');
       setHour(h);
       setMinute(m);
       setAmPm(ap);
@@ -96,33 +96,33 @@ export const TimePicker: React.FC<TimePickerProps> = ({
         }
       }
     },
-    [onChange, value],
+    [onChange, value]
   );
 
   return (
     <div
       className={
         className ??
-        "flex gap-2 items-center w-full flex-col" +
-          (error ? " border border-red-500 p-2 rounded" : "")
+        'flex w-full flex-col items-center gap-2' +
+          (error ? ' rounded border border-red-500 p-2' : '')
       }
     >
-      <div className="flex gap-2 items-center w-full">
+      <div className="flex w-full items-center gap-2">
         <div className="w-16">
           <Select
-            value={hour}
+            disabled={disabled}
             onValueChange={React.useCallback(
               (val: string) => handleChange(val, minute, amPm),
-              [minute, amPm, handleChange],
+              [minute, amPm, handleChange]
             )}
-            disabled={disabled}
+            value={hour}
           >
             <SelectTrigger size="sm">
               <SelectValue placeholder="HH" />
             </SelectTrigger>
             <SelectContent>
               {Array.from({ length: 12 }, (_, i) =>
-                String(i + 1).padStart(2, "0"),
+                String(i + 1).padStart(2, '0')
               ).map((h) => (
                 <SelectItem key={h} value={h}>
                   {h}
@@ -134,21 +134,21 @@ export const TimePicker: React.FC<TimePickerProps> = ({
         <span>:</span>
         <div className="w-16">
           <Select
-            value={minute}
+            disabled={disabled}
             onValueChange={React.useCallback(
               (val: string) => handleChange(hour, val, amPm),
-              [hour, amPm, handleChange],
+              [hour, amPm, handleChange]
             )}
-            disabled={disabled}
+            value={minute}
           >
             <SelectTrigger size="sm">
               <SelectValue placeholder="MM" />
             </SelectTrigger>
             <SelectContent>
               {Array.from({ length: 60 }, (_, i) =>
-                String(i).padStart(2, "0"),
+                String(i).padStart(2, '0')
               ).map((m) => (
-                <SelectItem key={m} value={m} disableCheckAnimation>
+                <SelectItem disableCheckAnimation key={m} value={m}>
                   {m}
                 </SelectItem>
               ))}
@@ -157,12 +157,12 @@ export const TimePicker: React.FC<TimePickerProps> = ({
         </div>
         <div className="w-16">
           <Select
-            value={amPm}
+            disabled={disabled}
             onValueChange={React.useCallback(
               (val: string) => handleChange(hour, minute, val),
-              [hour, minute, handleChange],
+              [hour, minute, handleChange]
             )}
-            disabled={disabled}
+            value={amPm}
           >
             <SelectTrigger size="sm">
               <SelectValue placeholder="AM/PM" />
@@ -176,10 +176,10 @@ export const TimePicker: React.FC<TimePickerProps> = ({
       </div>
       {showCurrentTimeButton && (
         <button
-          type="button"
-          className="mt-2 px-3 py-1 rounded bg-muted text-xs border border-border hover:bg-accent transition"
-          onClick={handleSetCurrentTime}
+          className="mt-2 rounded border border-border bg-muted px-3 py-1 text-xs transition hover:bg-accent"
           disabled={disabled}
+          onClick={handleSetCurrentTime}
+          type="button"
         >
           Set Current Time
         </button>

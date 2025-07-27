@@ -1,13 +1,13 @@
 export type LogicOperator =
-  | "equals"
-  | "not_equals"
-  | "greater_than"
-  | "less_than"
-  | "contains"
-  | "not_contains"
-  | "is_empty"
-  | "is_not_empty"
-  | "includes";
+  | 'equals'
+  | 'not_equals'
+  | 'greater_than'
+  | 'less_than'
+  | 'contains'
+  | 'not_contains'
+  | 'is_empty'
+  | 'is_not_empty'
+  | 'includes';
 
 export type LogicCondition = {
   id: string;
@@ -18,17 +18,17 @@ export type LogicCondition = {
 
 export type LogicConditionGroup = {
   id: string;
-  logic: "AND" | "OR";
+  logic: 'AND' | 'OR';
   conditions: Array<LogicCondition | LogicConditionGroup>;
 };
 
 export type LogicActionType =
-  | "show"
-  | "hide"
-  | "enable"
-  | "disable"
-  | "set_value"
-  | "show_message";
+  | 'show'
+  | 'hide'
+  | 'enable'
+  | 'disable'
+  | 'set_value'
+  | 'show_message';
 
 export type LogicAction = {
   id: string;

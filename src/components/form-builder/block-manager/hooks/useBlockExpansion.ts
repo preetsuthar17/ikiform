@@ -1,12 +1,12 @@
 // React
-import { useState } from "react";
+import { useState } from 'react';
 
 // Types
-import type { FormBlock } from "@/lib/database";
+import type { FormBlock } from '@/lib/database';
 
 export function useBlockExpansion(blocks: FormBlock[]) {
   const [expandedBlocks, setExpandedBlocks] = useState<Set<string>>(
-    new Set(blocks.map((block) => block.id)),
+    new Set(blocks.map((block) => block.id))
   );
 
   const toggleBlockExpansion = (blockId: string) => {

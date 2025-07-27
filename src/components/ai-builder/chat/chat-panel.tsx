@@ -1,19 +1,17 @@
 // Animation imports
-import { AnimatePresence, motion } from "motion/react";
-
+import { AnimatePresence, motion } from 'motion/react';
+import { Loader } from '@/components/ui/loader';
 // UI components imports
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Loader } from "@/components/ui/loader";
-
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Separator } from '@/components/ui/separator';
 // Local imports
-import { ChatPanelProps } from "@/lib/ai-builder/types";
-import { ChatHeader } from "./chat-header";
-import { WelcomeMessage } from "./welcome-message";
-import { ChatMessageItem } from "./chat-message-item";
-import { ChatSuggestions } from "./chat-suggestions";
-import { ChatInput } from "./chat-input";
-import { StreamingIndicator } from "./streaming-indicator";
-import { Separator } from "@/components/ui/separator";
+import type { ChatPanelProps } from '@/lib/ai-builder/types';
+import { ChatHeader } from './chat-header';
+import { ChatInput } from './chat-input';
+import { ChatMessageItem } from './chat-message-item';
+import { ChatSuggestions } from './chat-suggestions';
+import { StreamingIndicator } from './streaming-indicator';
+import { WelcomeMessage } from './welcome-message';
 
 export function ChatPanel({
   messages,
@@ -42,9 +40,9 @@ export function ChatPanel({
   };
 
   return (
-    <div className="flex flex-col h-full gap-4">
+    <div className="flex h-full flex-col gap-4">
       <ChatHeader />
-      <ScrollArea className="flex-1 relative p-4">
+      <ScrollArea className="relative flex-1 p-4">
         <div className="flex flex-col gap-4">
           {messages.length === 0 && (
             <WelcomeMessage mounted={mounted} theme={theme} />
@@ -52,17 +50,17 @@ export function ChatPanel({
           <AnimatePresence>
             {messages.map((message, index) => (
               <ChatMessageItem
+                index={index}
                 key={`${message.role}-${index}-${message.content.slice(0, 50)}`}
                 message={message}
-                index={index}
               />
             ))}
           </AnimatePresence>
           {isLoading && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="flex gap-3"
+              initial={{ opacity: 0, y: 20 }}
             >
               <Loader />
             </motion.div>
@@ -70,8 +68,8 @@ export function ChatPanel({
           {isStreaming && (
             <StreamingIndicator
               ref={streamingRef}
-              streamedContent={streamedContent}
               streamError={streamError}
+              streamedContent={streamedContent}
             />
           )}
           <div ref={messagesEndRef} />
@@ -80,17 +78,17 @@ export function ChatPanel({
       {shouldShowSuggestions && (
         <div className="p-4">
           <ChatSuggestions
-            suggestions={suggestions}
             onSuggestionClick={handleSuggestionClick}
+            suggestions={suggestions}
           />
         </div>
       )}
       <Separator />
       <ChatInput
         input={input}
-        setInput={setInput}
-        onSubmit={handleSend}
         isLoading={isLoading}
+        onSubmit={handleSend}
+        setInput={setInput}
       />
     </div>
   );

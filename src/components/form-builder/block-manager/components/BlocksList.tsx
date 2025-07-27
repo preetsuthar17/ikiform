@@ -1,15 +1,14 @@
 // Components
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { BlockItem } from "./BlockItem";
 
 // Libraries
-import { DragDropContext, Droppable } from "@hello-pangea/dnd";
+import { DragDropContext, Droppable } from '@hello-pangea/dnd';
+import { ScrollArea } from '@/components/ui/scroll-area';
+// Types
+import type { FormBlock } from '@/lib/database';
 
 // Utilities
-import { handleBlockReorder, canDeleteBlock } from "../utils";
-
-// Types
-import type { FormBlock } from "@/lib/database";
+import { canDeleteBlock, handleBlockReorder } from '../utils';
+import { BlockItem } from './BlockItem';
 
 interface BlocksListProps {
   blocks: FormBlock[];
@@ -64,31 +63,31 @@ export function BlocksList({
             {(provided) => (
               <div
                 {...provided.droppableProps}
-                ref={provided.innerRef}
                 className="flex flex-col gap-3"
+                ref={provided.innerRef}
               >
                 {blocks.map((block, index) => (
                   <BlockItem
-                    key={block.id}
                     block={block}
+                    canDelete={canDeleteBlock(blocks)}
+                    editDescription={editDescription}
+                    editTitle={editTitle}
                     index={index}
+                    isEditing={editingBlock === block.id}
                     isExpanded={expandedBlocks.has(block.id)}
                     isSelected={selectedBlockId === block.id}
-                    isEditing={editingBlock === block.id}
-                    selectedFieldId={selectedFieldId}
-                    onBlockSelect={onBlockSelect}
-                    onFieldSelect={onFieldSelect}
-                    onToggleExpansion={onToggleExpansion}
-                    onStartEditing={onStartEditing}
+                    key={block.id}
                     onBlockDelete={onBlockDelete}
-                    onFieldDelete={onFieldDelete}
-                    canDelete={canDeleteBlock(blocks)}
-                    editTitle={editTitle}
-                    editDescription={editDescription}
-                    onTitleChange={onTitleChange}
-                    onDescriptionChange={onDescriptionChange}
-                    onSaveEdit={onSaveEdit}
+                    onBlockSelect={onBlockSelect}
                     onCancelEdit={onCancelEdit}
+                    onDescriptionChange={onDescriptionChange}
+                    onFieldDelete={onFieldDelete}
+                    onFieldSelect={onFieldSelect}
+                    onSaveEdit={onSaveEdit}
+                    onStartEditing={onStartEditing}
+                    onTitleChange={onTitleChange}
+                    onToggleExpansion={onToggleExpansion}
+                    selectedFieldId={selectedFieldId}
                   />
                 ))}
                 {provided.placeholder}

@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
+import type { User } from '@supabase/supabase-js';
+import { useRouter } from 'next/navigation';
 // External imports
-import { useEffect, useState } from "react";
-import type { User } from "@supabase/supabase-js";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from 'react';
 
 // Internal imports
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from '@/utils/supabase/client';
 
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null);
@@ -35,9 +35,9 @@ export function useAuth() {
     try {
       const supabase = createClient();
       await supabase.auth.signOut();
-      router.push("/");
+      router.push('/');
     } catch (error) {
-      console.error("Sign out error:", error);
+      console.error('Sign out error:', error);
     }
   };
 

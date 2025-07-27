@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Modal,
   ModalContent,
+  ModalFooter,
   ModalHeader,
   ModalTitle,
-  ModalFooter,
-} from "@/components/ui/modal";
-import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
-import { Input } from "@/components/ui/input";
-import type { LogicRule, LogicConditionGroup, LogicAction } from "./types";
-import { ConditionGroupEditor } from "./ConditionGroupEditor";
-import { ActionListEditor } from "./ActionListEditor";
-import type { FormField } from "@/lib/database";
+} from '@/components/ui/modal';
+import { Switch } from '@/components/ui/switch';
+import type { FormField } from '@/lib/database';
+import { ActionListEditor } from './ActionListEditor';
+import { ConditionGroupEditor } from './ConditionGroupEditor';
+import type { LogicAction, LogicConditionGroup, LogicRule } from './types';
 
 function RuleEditor({
   open,
@@ -28,45 +28,45 @@ function RuleEditor({
   fields: FormField[];
 }) {
   // Local state for editing
-  const [name, setName] = React.useState(rule?.name || "");
+  const [name, setName] = React.useState(rule?.name || '');
   const [enabled, setEnabled] = React.useState(rule?.enabled ?? true);
   const [conditions, setConditions] = React.useState<LogicConditionGroup>(
     rule?.conditions || {
       id: `group-${Date.now()}`,
-      logic: "AND",
+      logic: 'AND',
       conditions: [],
-    },
+    }
   );
   const [actions, setActions] = React.useState<LogicAction[]>(
-    rule?.actions || [],
+    rule?.actions || []
   );
 
   React.useEffect(() => {
-    setName(rule?.name || "");
+    setName(rule?.name || '');
     setEnabled(rule?.enabled ?? true);
     setConditions(
       rule?.conditions || {
         id: `group-${Date.now()}`,
-        logic: "AND",
+        logic: 'AND',
         conditions: [],
-      },
+      }
     );
     setActions(rule?.actions || []);
   }, [rule]);
 
   return (
-    <Modal open={open} onOpenChange={onClose}>
+    <Modal onOpenChange={onClose} open={open}>
       <ModalContent className="max-w-lg">
         <ModalHeader>
-          <ModalTitle>{rule ? "Edit Rule" : "Add Rule"}</ModalTitle>
+          <ModalTitle>{rule ? 'Edit Rule' : 'Add Rule'}</ModalTitle>
         </ModalHeader>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Rule Name</label>
+            <label className="mb-1 block font-medium text-sm">Rule Name</label>
             <Input
-              value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g. Show SSN for US Adults"
+              value={name}
             />
           </div>
           <div className="flex items-center gap-2">
@@ -74,24 +74,24 @@ function RuleEditor({
             <span className="text-sm">Enabled</span>
           </div>
           <div className="border-t pt-4">
-            <div className="font-semibold mb-2">Conditions</div>
+            <div className="mb-2 font-semibold">Conditions</div>
             <ConditionGroupEditor
+              fields={fields}
               group={conditions}
               onChange={setConditions}
-              fields={fields}
             />
           </div>
           <div className="border-t pt-4">
-            <div className="font-semibold mb-2">Actions</div>
+            <div className="mb-2 font-semibold">Actions</div>
             <ActionListEditor
               actions={actions}
-              onChange={setActions}
               fields={fields}
+              onChange={setActions}
             />
           </div>
         </div>
         <ModalFooter>
-          <Button variant="outline" onClick={onClose}>
+          <Button onClick={onClose} variant="outline">
             Cancel
           </Button>
           <Button

@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useAuth } from "@/hooks/use-auth";
-import { usePremiumStatus } from "@/hooks/use-premium-status";
-import { Button } from "@/components/ui/button";
-import { Loader } from "@/components/ui/loader";
-import Link from "next/link";
-import { FormBuilder } from "@/components/form-builder/form-builder";
+import Link from 'next/link';
+import { FormBuilder } from '@/components/form-builder/form-builder';
+import { Button } from '@/components/ui/button';
+import { Loader } from '@/components/ui/loader';
+import { useAuth } from '@/hooks/use-auth';
+import { usePremiumStatus } from '@/hooks/use-premium-status';
 
 export default function NewFormBuilderPage() {
   const { user, loading } = useAuth();
@@ -13,17 +13,17 @@ export default function NewFormBuilderPage() {
 
   if (loading || checking) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex min-h-screen items-center justify-center">
         <Loader />
       </div>
     );
   }
 
-  if (!user || !hasPremium) {
+  if (!(user && hasPremium)) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen gap-6">
-        <div className="text-2xl font-semibold">Requires Premium</div>
-        <div className="text-muted-foreground text-center max-w-md">
+      <div className="flex min-h-screen flex-col items-center justify-center gap-6">
+        <div className="font-semibold text-2xl">Requires Premium</div>
+        <div className="max-w-md text-center text-muted-foreground">
           You need a premium subscription to use the form builder. Upgrade to
           unlock all features.
         </div>

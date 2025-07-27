@@ -1,31 +1,31 @@
-"use client";
+'use client';
 
-import React, { useState, useMemo } from "react";
-import { Button } from "@/components/ui/button";
-import { FormBuilderPanels } from "./components/FormBuilderPanels";
-import { createDefaultFormSchema } from "@/lib/forms/form-defaults";
+import React, { useMemo, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import type { FormBlock, FormField, FormSchema } from '@/lib/database';
+import { createDefaultFormSchema } from '@/lib/forms/form-defaults';
+import { FormBuilderHeader } from './components/FormBuilderHeader';
+import { FormBuilderModals } from './components/FormBuilderModals';
+import { FormBuilderPanels } from './components/FormBuilderPanels';
 import {
-  generateFieldId,
-  generateBlockId,
   addFieldToSchema,
-  updateFieldInSchema,
+  findSelectedField,
+  generateBlockId,
+  generateFieldId,
   removeFieldFromSchema,
-} from "./utils";
-import { findSelectedField } from "./utils";
-import type { FormField, FormSchema, FormBlock } from "@/lib/database";
-import { FormBuilderHeader } from "./components/FormBuilderHeader";
-import { FormBuilderModals } from "./components/FormBuilderModals";
+  updateFieldInSchema,
+} from './utils';
 
 export default function DemoFormBuilder() {
   const [formSchema, setFormSchema] = useState<FormSchema>(() =>
     createDefaultFormSchema({
-      title: "Demo Form",
-      description: "Try building a form!",
-    }),
+      title: 'Demo Form',
+      description: 'Try building a form!',
+    })
   );
   const [selectedFieldId, setSelectedFieldId] = useState<string | null>(null);
   const [selectedBlockId, setSelectedBlockId] = useState<string | null>(
-    formSchema.blocks[0]?.id || null,
+    formSchema.blocks[0]?.id || null
   );
   const [showFormSettings, setShowFormSettings] = useState(false);
   const [showJsonView, setShowJsonView] = useState(false);
@@ -35,31 +35,31 @@ export default function DemoFormBuilder() {
 
   const selectedField = useMemo(
     () => findSelectedField(formSchema, selectedFieldId),
-    [formSchema, selectedFieldId],
+    [formSchema, selectedFieldId]
   );
 
-  const addField = (fieldType: FormField["type"]) => {
+  const addField = (fieldType: FormField['type']) => {
     const newField: FormField = {
       id: generateFieldId(),
       type: fieldType,
       label: `${fieldType.charAt(0).toUpperCase() + fieldType.slice(1)} Field`,
-      placeholder: "",
+      placeholder: '',
       required: false,
-      options: ["select", "radio", "checkbox"].includes(fieldType)
-        ? ["Option 1", "Option 2"]
+      options: ['select', 'radio', 'checkbox'].includes(fieldType)
+        ? ['Option 1', 'Option 2']
         : undefined,
       validation: {},
       settings:
-        fieldType === "slider"
+        fieldType === 'slider'
           ? { min: 0, max: 100, step: 1, defaultValue: 50 }
-          : fieldType === "tags"
+          : fieldType === 'tags'
             ? { maxTags: 10, allowDuplicates: false }
             : {},
     };
     const updatedSchema = addFieldToSchema(
       formSchema,
       newField,
-      selectedBlockId,
+      selectedBlockId
     );
     setFormSchema(updatedSchema);
     setSelectedFieldId(newField.id);
@@ -97,7 +97,7 @@ export default function DemoFormBuilder() {
     const newBlock: FormBlock = {
       id: generateBlockId(),
       title: `Step ${formSchema.blocks.length + 1}`,
-      description: "",
+      description: '',
       fields: [],
     };
     setFormSchema((prev) => ({
@@ -122,7 +122,7 @@ export default function DemoFormBuilder() {
   const updateBlock = (blockId: string, updates: Partial<FormBlock>) => {
     setFormSchema((prev) => {
       const updatedBlocks = prev.blocks.map((block) =>
-        block.id === blockId ? { ...block, ...updates } : block,
+        block.id === blockId ? { ...block, ...updates } : block
       );
       return {
         ...prev,
@@ -148,7 +148,7 @@ export default function DemoFormBuilder() {
     if (selectedBlockId === blockId) setSelectedBlockId(null);
   };
 
-  const updateFormSettings = (settings: Partial<FormSchema["settings"]>) => {
+  const updateFormSettings = (settings: Partial<FormSchema['settings']>) => {
     setFormSchema((prev) => ({
       ...prev,
       settings: { ...prev.settings, ...settings },
@@ -167,17 +167,17 @@ export default function DemoFormBuilder() {
       if (
         formSchema.blocks.length === 0 ||
         (formSchema.blocks.length === 1 &&
-          formSchema.blocks[0].id === "default")
+          formSchema.blocks[0].id === 'default')
       ) {
-        const defaultBlock = formSchema.blocks.find((b) => b.id === "default");
+        const defaultBlock = formSchema.blocks.find((b) => b.id === 'default');
         const currentFields = defaultBlock?.fields || formSchema.fields || [];
         const newSchema = {
           ...formSchema,
           blocks: [
             {
-              id: "step-1",
-              title: "Step 1",
-              description: "First step of your form",
+              id: 'step-1',
+              title: 'Step 1',
+              description: 'First step of your form',
               fields: currentFields,
             },
           ],
@@ -189,7 +189,7 @@ export default function DemoFormBuilder() {
           },
         };
         setFormSchema(newSchema);
-        setSelectedBlockId("step-1");
+        setSelectedBlockId('step-1');
       } else {
         updateFormSettings({
           multiStep: true,
@@ -198,15 +198,15 @@ export default function DemoFormBuilder() {
       }
     } else {
       const allFields = formSchema.blocks.flatMap(
-        (block) => block.fields || [],
+        (block) => block.fields || []
       );
       const newSchema = {
         ...formSchema,
         blocks: [
           {
-            id: "default",
-            title: "Form Fields",
-            description: "",
+            id: 'default',
+            title: 'Form Fields',
+            description: '',
             fields: allFields,
           },
         ],
@@ -218,19 +218,19 @@ export default function DemoFormBuilder() {
         },
       };
       setFormSchema(newSchema);
-      setSelectedBlockId("default");
+      setSelectedBlockId('default');
     }
   };
 
   const handleReset = () => {
     setFormSchema(
       createDefaultFormSchema({
-        title: "Demo Form",
-        description: "Try building a form!",
-      }),
+        title: 'Demo Form',
+        description: 'Try building a form!',
+      })
     );
     setSelectedFieldId(null);
-    setSelectedBlockId("default");
+    setSelectedBlockId('default');
   };
 
   // No-op handlers for demo
@@ -238,60 +238,60 @@ export default function DemoFormBuilder() {
   const asyncNoop = async () => {};
 
   return (
-    <div className="border rounded-card shadow-lg/2 bg-background overflow-hidden flex flex-col h-[900px] w-full mx-auto">
+    <div className="mx-auto flex h-[900px] w-full flex-col overflow-hidden rounded-card border bg-background shadow-lg/2">
       <FormBuilderHeader
-        formSchema={formSchema}
         autoSaving={false}
-        saving={false}
-        publishing={false}
-        isPublished={false}
         formId={undefined}
-        onModeToggle={handleModeToggle}
-        onJsonView={() => setShowJsonView(true)}
+        formSchema={formSchema}
+        isPublished={false}
         onAnalytics={noop}
-        onShare={noop}
-        onSettings={() => setShowFormSettings(true)}
+        onJsonView={() => setShowJsonView(true)}
+        onModeToggle={handleModeToggle}
         onPublish={noop}
         onSave={noop}
+        onSettings={() => setShowFormSettings(true)}
+        onShare={noop}
+        publishing={false}
+        saving={false}
       />
-      <div className="flex-1 min-h-0">
+      <div className="min-h-0 flex-1">
         <FormBuilderPanels
           formSchema={formSchema}
-          selectedFieldId={selectedFieldId}
-          selectedBlockId={selectedBlockId}
-          selectedField={selectedField}
-          onFieldAdd={addField}
-          onFieldSelect={setSelectedFieldId}
-          onFieldUpdate={updateField}
-          onFieldDelete={deleteField}
-          onFieldsReorder={reorderFields}
+          onBlockAdd={addBlock}
+          onBlockDelete={deleteBlock}
           onBlockSelect={setSelectedBlockId}
           onBlocksUpdate={updateBlocks}
-          onBlockAdd={addBlock}
           onBlockUpdate={updateBlock}
-          onBlockDelete={deleteBlock}
+          onFieldAdd={addField}
+          onFieldDelete={deleteField}
+          onFieldSelect={setSelectedFieldId}
+          onFieldsReorder={reorderFields}
+          onFieldUpdate={updateField}
           onFormSettingsUpdate={updateFormSettings}
           onStepSelect={handleStepSelection}
+          selectedBlockId={selectedBlockId}
+          selectedField={selectedField}
+          selectedFieldId={selectedFieldId}
         />
       </div>
       <FormBuilderModals
-        showSettings={showSettings}
-        showFormSettings={showFormSettings}
-        showJsonView={showJsonView}
-        showCreationWizard={showCreationWizard}
-        showShareModal={showShareModal}
-        formSchema={formSchema}
         formId={undefined}
+        formSchema={formSchema}
         isPublished={false}
-        onCloseSettings={() => setShowSettings(false)}
+        onCloseCreationWizard={() => setShowCreationWizard(false)}
         onCloseFormSettings={() => setShowFormSettings(false)}
         onCloseJsonView={() => setShowJsonView(false)}
-        onCloseCreationWizard={() => setShowCreationWizard(false)}
+        onCloseSettings={() => setShowSettings(false)}
         onCloseShareModal={() => setShowShareModal(false)}
-        onFormTypeSelect={noop}
         onFormSettingsUpdate={noop}
-        onSchemaUpdate={noop}
+        onFormTypeSelect={noop}
         onPublish={asyncNoop}
+        onSchemaUpdate={noop}
+        showCreationWizard={showCreationWizard}
+        showFormSettings={showFormSettings}
+        showJsonView={showJsonView}
+        showSettings={showSettings}
+        showShareModal={showShareModal}
         userEmail={undefined}
       />
     </div>

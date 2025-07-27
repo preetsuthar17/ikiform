@@ -1,32 +1,30 @@
 // React imports
-import { useState, useEffect, useRef } from "react";
-
-// Next.js imports
-import { useTheme } from "next-themes";
-import { useRouter } from "next/navigation";
 
 // Icon imports
-import { Sparkles } from "lucide-react";
+import { Sparkles } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+// Next.js imports
+import { useTheme } from 'next-themes';
+import { useEffect, useRef, useState } from 'react';
 
 // UI components imports
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
-  ResizablePanelGroup,
-  ResizablePanel,
   ResizableHandle,
-} from "@/components/ui/resizable";
-
+  ResizablePanel,
+  ResizablePanelGroup,
+} from '@/components/ui/resizable';
+import { useAIBuilder } from '@/hooks/ai-builder/use-ai-builder';
 // Local imports
-import { useAuth } from "@/hooks/use-auth";
-import { useAIBuilder } from "@/hooks/ai-builder/use-ai-builder";
-import { usePremiumStatus } from "@/hooks/use-premium-status";
-import { CHAT_SUGGESTIONS } from "@/lib/ai-builder/constants";
-import { initializeScrollbarStyles } from "@/lib/ai-builder/utils";
-import { ChatPanel } from "./chat/chat-panel";
-import { PreviewPanel } from "./preview/preview-panel";
-import { MobileChatDrawer } from "./mobile-chat-drawer";
-import { JsonModal } from "./json-modal";
-import { PremiumGuard } from "./premium-guard";
+import { useAuth } from '@/hooks/use-auth';
+import { usePremiumStatus } from '@/hooks/use-premium-status';
+import { CHAT_SUGGESTIONS } from '@/lib/ai-builder/constants';
+import { initializeScrollbarStyles } from '@/lib/ai-builder/utils';
+import { ChatPanel } from './chat/chat-panel';
+import { JsonModal } from './json-modal';
+import { MobileChatDrawer } from './mobile-chat-drawer';
+import { PremiumGuard } from './premium-guard';
+import { PreviewPanel } from './preview/preview-panel';
 
 export function AIBuilder() {
   const { user, loading: authLoading } = useAuth();
@@ -61,7 +59,7 @@ export function AIBuilder() {
 
   const suggestions = CHAT_SUGGESTIONS.map((text) => ({
     text,
-    icon: <Sparkles className="w-4 h-4" />,
+    icon: <Sparkles className="h-4 w-4" />,
   }));
 
   useEffect(() => {
@@ -90,43 +88,43 @@ export function AIBuilder() {
 
   return (
     <PremiumGuard
-      user={user}
-      hasPremium={hasPremium}
       authLoading={authLoading}
       checking={checking}
+      hasPremium={hasPremium}
+      user={user}
     >
-      <div className="flex h-screen w-full bg-background flex-col md:flex-row gap-4">
+      <div className="flex h-screen w-full flex-col gap-4 bg-background md:flex-row">
         {/* Mobile: Chat Drawer Trigger */}
-        <div className="fixed bottom-4 max-w-[90%] w-full left-1/2 -translate-x-1/2 z-50 md:hidden">
+        <div className="-translate-x-1/2 fixed bottom-4 left-1/2 z-50 w-full max-w-[90%] md:hidden">
           <Button
-            size="lg"
-            className="rounded-card shadow-lg w-full"
+            className="w-full rounded-card shadow-lg"
             onClick={() => setChatDrawerOpen(true)}
+            size="lg"
           >
             Create Form with Kiko
           </Button>
         </div>
 
         {/* Desktop: Resizable Chat + Preview */}
-        <div className="hidden md:flex w-full h-full">
+        <div className="hidden h-full w-full md:flex">
           <ResizablePanelGroup direction="horizontal">
             <ResizablePanel
-              defaultSize={20}
-              minSize={15}
-              maxSize={30}
               border="right"
+              defaultSize={20}
+              maxSize={30}
+              minSize={15}
             >
               <ChatPanel {...chatPanelProps} />
             </ResizablePanel>
             <ResizableHandle />
             <ResizablePanel defaultSize={80}>
               <PreviewPanel
-                forms={forms}
-                activeFormId={activeFormId}
-                setActiveFormId={setActiveFormId}
-                router={router}
-                setShowJsonModal={setShowJsonModal}
                 activeForm={activeForm}
+                activeFormId={activeFormId}
+                forms={forms}
+                router={router}
+                setActiveFormId={setActiveFormId}
+                setShowJsonModal={setShowJsonModal}
               />
             </ResizablePanel>
           </ResizablePanelGroup>
@@ -140,21 +138,21 @@ export function AIBuilder() {
         />
 
         {/* Mobile: Main page is always the preview */}
-        <div className="flex-1 md:hidden flex flex-col h-full">
+        <div className="flex h-full flex-1 flex-col md:hidden">
           <PreviewPanel
-            forms={forms}
-            activeFormId={activeFormId}
-            setActiveFormId={setActiveFormId}
-            router={router}
-            setShowJsonModal={setShowJsonModal}
             activeForm={activeForm}
+            activeFormId={activeFormId}
+            forms={forms}
+            router={router}
+            setActiveFormId={setActiveFormId}
+            setShowJsonModal={setShowJsonModal}
           />
         </div>
 
         <JsonModal
+          activeForm={activeForm}
           isOpen={showJsonModal}
           onClose={() => setShowJsonModal(false)}
-          activeForm={activeForm}
         />
       </div>
     </PremiumGuard>

@@ -1,18 +1,15 @@
 // External imports
-import React from "react";
-
+import type React from 'react';
+import { Card } from '@/components/ui/card';
 // Component imports
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import { Card } from "@/components/ui/card";
-
-// Utility imports
-import { createFieldUpdater } from "../utils";
-
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Textarea } from '@/components/ui/textarea';
 // Type imports
-import type { BasicSettingsProps } from "../types";
+import type { BasicSettingsProps } from '../types';
+// Utility imports
+import { createFieldUpdater } from '../utils';
 
 export const BasicSettings: React.FC<BasicSettingsProps> = ({
   field,
@@ -21,57 +18,57 @@ export const BasicSettings: React.FC<BasicSettingsProps> = ({
   const { updateField } = createFieldUpdater(field, onFieldUpdate);
 
   return (
-    <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
+    <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
       <h3 className="font-medium text-card-foreground">Basic Settings</h3>
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <Label htmlFor="field-label" className="text-card-foreground">
+          <Label className="text-card-foreground" htmlFor="field-label">
             Field Label
           </Label>
           <Input
+            className="border-border bg-input"
             id="field-label"
-            value={field.label}
             onChange={(e) => updateField({ label: e.target.value })}
             placeholder="Enter field label"
-            className="bg-input border-border"
+            value={field.label}
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label htmlFor="field-placeholder" className="text-card-foreground">
+          <Label className="text-card-foreground" htmlFor="field-placeholder">
             Placeholder
           </Label>
           <Input
+            className="border-border bg-input"
             id="field-placeholder"
-            value={field.placeholder || ""}
             onChange={(e) => updateField({ placeholder: e.target.value })}
             placeholder="Enter placeholder text"
-            className="bg-input border-border"
+            value={field.placeholder || ''}
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label htmlFor="field-description" className="text-card-foreground">
+          <Label className="text-card-foreground" htmlFor="field-description">
             Description
           </Label>
           <Textarea
+            className="border-border bg-input"
             id="field-description"
-            value={field.description || ""}
             onChange={(e) => updateField({ description: e.target.value })}
             placeholder="Enter field description (shown below the field)"
-            className="bg-input border-border"
             rows={2}
+            value={field.description || ''}
           />
         </div>
 
         <div className="flex items-center gap-2">
           <Switch
-            size="sm"
-            id="field-required"
             checked={field.required}
+            id="field-required"
             onCheckedChange={(required) => updateField({ required })}
+            size="sm"
           />
-          <Label htmlFor="field-required" className="text-card-foreground">
+          <Label className="text-card-foreground" htmlFor="field-required">
             Required field
           </Label>
         </div>

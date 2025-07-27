@@ -1,28 +1,28 @@
-import React from "react";
+import React from 'react';
 // Types import
-import type { FormField } from "@/lib/database";
+import type { FormField } from '@/lib/database';
 
 // Components import
 import {
-  TextInputField,
+  CheckboxField,
+  DateInputField,
   EmailInputField,
   NumberInputField,
-  TextareaField,
-  RadioField,
-  CheckboxField,
-  SelectField,
-  SliderField,
-  TagsField,
-  SocialField,
-  DateInputField,
-  SignatureField,
-  TimeInputField,
   PollField,
+  RadioField,
   RatingField,
   SchedulerField,
+  SelectField,
+  SignatureField,
+  SliderField,
+  SocialField,
   StatementField,
-} from "../components";
-import type { BaseFieldProps } from "../types";
+  TagsField,
+  TextareaField,
+  TextInputField,
+  TimeInputField,
+} from '../components';
+import type { BaseFieldProps } from '../types';
 
 export function createFieldComponent(
   field: FormField,
@@ -30,7 +30,7 @@ export function createFieldComponent(
   onChange: (value: any) => void,
   error?: string,
   fieldRef?: React.RefObject<any>,
-  disabled?: boolean,
+  disabled?: boolean
 ): React.ReactElement {
   const props: BaseFieldProps = {
     field,
@@ -42,41 +42,41 @@ export function createFieldComponent(
   };
 
   switch (field.type) {
-    case "text":
+    case 'text':
       return React.createElement(TextInputField, props);
-    case "email":
+    case 'email':
       return React.createElement(EmailInputField, props);
-    case "number":
+    case 'number':
       return React.createElement(NumberInputField, props);
-    case "textarea":
+    case 'textarea':
       return React.createElement(TextareaField, props);
-    case "radio":
+    case 'radio':
       return React.createElement(RadioField, props);
-    case "checkbox":
+    case 'checkbox':
       return React.createElement(CheckboxField, props);
-    case "select":
+    case 'select':
       return React.createElement(SelectField, props);
-    case "slider":
+    case 'slider':
       return React.createElement(SliderField, props);
-    case "tags":
+    case 'tags':
       return React.createElement(TagsField, props);
-    case "social":
+    case 'social':
       return React.createElement(SocialField, props);
-    case "date":
+    case 'date':
       return React.createElement(DateInputField, props);
-    case "signature":
+    case 'signature':
       return React.createElement(SignatureField, props);
-    case "poll":
+    case 'poll':
       return React.createElement(PollField, props);
-    case "rating":
+    case 'rating':
       return React.createElement(RatingField, props);
-    case "time":
+    case 'time':
       return React.createElement(TimeInputField, props);
-    case "scheduler":
+    case 'scheduler':
       return React.createElement(SchedulerField, props);
-    case "statement":
+    case 'statement':
       return React.createElement(StatementField, props);
     default:
-      return React.createElement("div", {}, "Unsupported field type");
+      return React.createElement('div', {}, 'Unsupported field type');
   }
 }

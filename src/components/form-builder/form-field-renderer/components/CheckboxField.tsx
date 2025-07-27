@@ -1,12 +1,12 @@
 // External imports
-import React from "react";
+import React from 'react';
 
 // Component imports
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from '@/components/ui/checkbox';
 
 // Type imports
-import type { BaseFieldProps } from "../types";
-import { sanitizeOptions } from "../utils/sanitizeOptions";
+import type { BaseFieldProps } from '../types';
+import { sanitizeOptions } from '../utils/sanitizeOptions';
 
 export function CheckboxField({
   field,
@@ -47,40 +47,40 @@ export function CheckboxField({
           setLoading(false);
         })
         .catch((err) => {
-          setFetchError("Failed to fetch options");
+          setFetchError('Failed to fetch options');
           setLoading(false);
         });
     } else {
       setApiOptions(null);
     }
-  }, [field.optionsApi, field.valueKey ?? "", field.labelKey ?? ""]);
+  }, [field.optionsApi, field.valueKey ?? '', field.labelKey ?? '']);
 
   const options = apiOptions ?? field.options ?? [];
 
   return (
     <div className="flex flex-col gap-2">
-      {fetchError && <div className="text-red-500 p-2">{fetchError}</div>}
+      {fetchError && <div className="p-2 text-red-500">{fetchError}</div>}
       {options.map((option, index) => {
-        const optionValue = typeof option === "string" ? option : option.value;
+        const optionValue = typeof option === 'string' ? option : option.value;
         const optionLabel =
-          typeof option === "string" ? option : option.label || option.value;
+          typeof option === 'string' ? option : option.label || option.value;
         return (
           <Checkbox
-            key={index}
-            id={`${field.id}-${index}`}
-            label={optionLabel}
             checked={(value || []).includes(optionValue)}
+            disabled={disabled || loading}
+            id={`${field.id}-${index}`}
+            key={index}
+            label={optionLabel}
             onCheckedChange={(checked) => {
               const currentValues = value || [];
               if (checked) {
                 onChange([...currentValues, optionValue]);
               } else {
                 onChange(
-                  currentValues.filter((v: string) => v !== optionValue),
+                  currentValues.filter((v: string) => v !== optionValue)
                 );
               }
             }}
-            disabled={disabled || loading}
           />
         );
       })}

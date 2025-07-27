@@ -1,17 +1,17 @@
 // External imports
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from '@supabase/supabase-js';
 
 // Type imports
-import type { Database } from "@/lib/database";
+import type { Database } from '@/lib/database';
 
 // Function to create an admin Supabase client
 export function createAdminClient() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-  if (!supabaseUrl || !supabaseServiceRoleKey) {
+  if (!(supabaseUrl && supabaseServiceRoleKey)) {
     throw new Error(
-      "Missing environment variables: NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY",
+      'Missing environment variables: NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY'
     );
   }
 

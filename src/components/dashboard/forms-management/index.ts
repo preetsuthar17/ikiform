@@ -1,17 +1,13 @@
 // Main export for forms management module
-export { FormsManagement } from "./FormsManagement";
-export { FormsManagement as default } from "./FormsManagement";
-
+export { FormsManagement, FormsManagement as default } from './FormsManagement';
+// Export hook for external use
+export { useFormsManagement } from './hooks';
 // Export types for external use
 export type {
-  FormsManagementProps,
+  AIFormSuggestionsProps,
   FormCardProps,
   FormStatsProps,
-  AIFormSuggestionsProps,
-} from "./types";
-
+  FormsManagementProps,
+} from './types';
 // Export utilities for external use
-export { getTotalFields, formatDate, generateShareUrl } from "./utils";
-
-// Export hook for external use
-export { useFormsManagement } from "./hooks";
+export { formatDate, generateShareUrl, getTotalFields } from './utils';

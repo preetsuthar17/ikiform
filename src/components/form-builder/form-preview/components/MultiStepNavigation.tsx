@@ -1,12 +1,13 @@
 // External libraries
-import React from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React from 'react';
 
 // UI components
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 // Types
-import type { MultiStepNavigationProps } from "../types";
+import type { MultiStepNavigationProps } from '../types';
 
 export function MultiStepNavigation({
   schema,
@@ -42,7 +43,7 @@ export function MultiStepNavigation({
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <div className="flex-1 bg-muted rounded-card h-2 overflow-hidden">
+        <div className="h-2 flex-1 overflow-hidden rounded-card bg-muted">
           <div
             className="h-full bg-primary transition-all duration-300"
             style={{
@@ -54,27 +55,27 @@ export function MultiStepNavigation({
 
       <div className="flex items-center justify-between">
         <Button
-          variant="outline"
-          onClick={handlePrevStep}
-          disabled={currentStepIndex === 0}
           className="flex items-center gap-2"
+          disabled={currentStepIndex === 0}
+          onClick={handlePrevStep}
+          variant="outline"
         >
-          <ChevronLeft className="w-4 h-4" />
+          <ChevronLeft className="h-4 w-4" />
           Previous
         </Button>
 
         <div className="flex gap-2">
           {schema.blocks.map((_, index) => (
             <button
+              className={`h-8 w-8 rounded-card font-medium text-sm transition-colors ${
+                index === currentStepIndex
+                  ? 'bg-primary text-primary-foreground'
+                  : index < currentStepIndex
+                    ? 'bg-primary/20 text-primary'
+                    : 'bg-muted text-muted-foreground hover:bg-muted/80'
+              }`}
               key={index}
               onClick={() => handleStepClick(index)}
-              className={`w-8 h-8 rounded-card text-sm font-medium transition-colors ${
-                index === currentStepIndex
-                  ? "bg-primary text-primary-foreground"
-                  : index < currentStepIndex
-                    ? "bg-primary/20 text-primary"
-                    : "bg-muted text-muted-foreground hover:bg-muted/80"
-              }`}
             >
               {index + 1}
             </button>
@@ -82,13 +83,13 @@ export function MultiStepNavigation({
         </div>
 
         <Button
-          variant="outline"
-          onClick={handleNextStep}
-          disabled={currentStepIndex === schema.blocks.length - 1}
           className="flex items-center gap-2"
+          disabled={currentStepIndex === schema.blocks.length - 1}
+          onClick={handleNextStep}
+          variant="outline"
         >
           Next
-          <ChevronRight className="w-4 h-4" />
+          <ChevronRight className="h-4 w-4" />
         </Button>
       </div>
     </div>

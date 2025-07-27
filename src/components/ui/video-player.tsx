@@ -1,35 +1,35 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
+import { cva, type VariantProps } from 'class-variance-authority';
 import {
-  Play,
-  Pause,
-  Volume2,
-  VolumeX,
   Maximize,
   Minimize,
+  Pause,
+  Play,
+  Settings,
   SkipBack,
   SkipForward,
-  Settings,
-} from "lucide-react";
+  Volume2,
+  VolumeX,
+} from 'lucide-react';
+import * as React from 'react';
+import { cn } from '@/lib/utils';
 
 const videoPlayerVariants = cva(
-  "relative w-full bg-black rounded-card overflow-hidden group",
+  'group relative w-full overflow-hidden rounded-card bg-black',
   {
     variants: {
       size: {
-        sm: "max-w-md",
-        default: "max-w-2xl",
-        lg: "max-w-4xl",
-        full: "w-full",
+        sm: 'max-w-md',
+        default: 'max-w-2xl',
+        lg: 'max-w-4xl',
+        full: 'w-full',
       },
     },
     defaultVariants: {
-      size: "default",
+      size: 'default',
     },
-  },
+  }
 );
 
 export interface VideoPlayerProps
@@ -53,7 +53,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
       autoHide = true,
       ...props
     },
-    ref,
+    ref
   ) => {
     const [isPlaying, setIsPlaying] = React.useState(false);
     const [currentTime, setCurrentTime] = React.useState(0);
@@ -75,11 +75,11 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
       const seconds = Math.floor(time % 60);
 
       if (hours > 0) {
-        return `${hours}:${minutes.toString().padStart(2, "0")}:${seconds
+        return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds
           .toString()
-          .padStart(2, "0")}`;
+          .padStart(2, '0')}`;
       }
-      return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+      return `${minutes}:${seconds.toString().padStart(2, '0')}`;
     };
 
     const togglePlay = () => {
@@ -100,7 +100,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
     };
 
     const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const newVolume = parseFloat(e.target.value);
+      const newVolume = Number.parseFloat(e.target.value);
       setVolume(newVolume);
       if (videoRef.current) {
         videoRef.current.volume = newVolume;
@@ -109,7 +109,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
     };
 
     const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const newTime = parseFloat(e.target.value);
+      const newTime = Number.parseFloat(e.target.value);
       setCurrentTime(newTime);
       if (videoRef.current) {
         videoRef.current.currentTime = newTime;
@@ -117,12 +117,12 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
     };
 
     const toggleFullscreen = () => {
-      if (!document.fullscreenElement) {
-        containerRef.current?.requestFullscreen();
-        setIsFullscreen(true);
-      } else {
+      if (document.fullscreenElement) {
         document.exitFullscreen();
         setIsFullscreen(false);
+      } else {
+        containerRef.current?.requestFullscreen();
+        setIsFullscreen(true);
       }
     };
 
@@ -130,7 +130,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
       if (videoRef.current) {
         videoRef.current.currentTime = Math.max(
           0,
-          Math.min(duration, currentTime + seconds),
+          Math.min(duration, currentTime + seconds)
         );
       }
     };
@@ -182,18 +182,18 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
         setIsMuted(video.muted);
       };
 
-      video.addEventListener("loadedmetadata", handleLoadedMetadata);
-      video.addEventListener("timeupdate", handleTimeUpdate);
-      video.addEventListener("play", handlePlay);
-      video.addEventListener("pause", handlePause);
-      video.addEventListener("volumechange", handleVolumeChange);
+      video.addEventListener('loadedmetadata', handleLoadedMetadata);
+      video.addEventListener('timeupdate', handleTimeUpdate);
+      video.addEventListener('play', handlePlay);
+      video.addEventListener('pause', handlePause);
+      video.addEventListener('volumechange', handleVolumeChange);
 
       return () => {
-        video.removeEventListener("loadedmetadata", handleLoadedMetadata);
-        video.removeEventListener("timeupdate", handleTimeUpdate);
-        video.removeEventListener("play", handlePlay);
-        video.removeEventListener("pause", handlePause);
-        video.removeEventListener("volumechange", handleVolumeChange);
+        video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+        video.removeEventListener('timeupdate', handleTimeUpdate);
+        video.removeEventListener('play', handlePlay);
+        video.removeEventListener('pause', handlePause);
+        video.removeEventListener('volumechange', handleVolumeChange);
         if (hideControlsTimeoutRef.current) {
           clearTimeout(hideControlsTimeoutRef.current);
         }
@@ -205,11 +205,11 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
         setIsFullscreen(!!document.fullscreenElement);
       };
 
-      document.addEventListener("fullscreenchange", handleFullscreenChange);
+      document.addEventListener('fullscreenchange', handleFullscreenChange);
       return () => {
         document.removeEventListener(
-          "fullscreenchange",
-          handleFullscreenChange,
+          'fullscreenchange',
+          handleFullscreenChange
         );
       };
     }, []);
@@ -219,103 +219,96 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
         if (!containerRef.current?.contains(document.activeElement)) return;
 
         switch (e.key) {
-          case " ":
-          case "k":
+          case ' ':
+          case 'k':
             e.preventDefault();
             togglePlay();
             break;
-          case "m":
+          case 'm':
             e.preventDefault();
             toggleMute();
             break;
-          case "f":
+          case 'f':
             e.preventDefault();
             toggleFullscreen();
             break;
-          case "ArrowLeft":
+          case 'ArrowLeft':
             e.preventDefault();
             skip(-10);
             break;
-          case "ArrowRight":
+          case 'ArrowRight':
             e.preventDefault();
             skip(10);
             break;
-          case "ArrowUp":
+          case 'ArrowUp':
             e.preventDefault();
             setVolume((prev) => Math.min(1, prev + 0.1));
             break;
-          case "ArrowDown":
+          case 'ArrowDown':
             e.preventDefault();
             setVolume((prev) => Math.max(0, prev - 0.1));
             break;
         }
       };
 
-      document.addEventListener("keydown", handleKeyDown);
-      return () => document.removeEventListener("keydown", handleKeyDown);
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
     }, [currentTime, duration]);
 
     return (
       <div
-        ref={containerRef}
         className={cn(videoPlayerVariants({ size }), className)}
-        onMouseMove={handleMouseMove}
         onMouseLeave={() =>
           autoHide && isPlaying && setShowControlsState(false)
         }
+        onMouseMove={handleMouseMove}
+        ref={containerRef}
         tabIndex={0}
       >
         <video
+          className="h-full w-full object-cover"
+          onClick={togglePlay}
+          poster={poster}
           ref={videoRef}
           src={src}
-          poster={poster}
-          className="w-full h-full object-cover"
-          onClick={togglePlay}
           {...props}
         />
 
         {showControls && (
           <div
             className={cn(
-              "absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent",
-              "flex flex-col justify-end transition-opacity duration-300",
-              showControlsState ? "opacity-100" : "opacity-0",
+              'absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent',
+              'flex flex-col justify-end transition-opacity duration-300',
+              showControlsState ? 'opacity-100' : 'opacity-0'
             )}
           >
             {/* Play/Pause Overlay */}
             <div className="absolute inset-0 flex items-center justify-center">
               <button
+                className="group flex h-16 w-16 items-center justify-center rounded-card border border-white/30 bg-white/20 text-white backdrop-blur-sm transition-all duration-200 hover:bg-white/30"
                 onClick={togglePlay}
-                className="w-16 h-16 rounded-card bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white/30 transition-all duration-200 group"
               >
                 {isPlaying ? (
-                  <Pause className="w-6 h-6 ml-0.5" />
+                  <Pause className="ml-0.5 h-6 w-6" />
                 ) : (
-                  <Play className="w-6 h-6 ml-1" />
+                  <Play className="ml-1 h-6 w-6" />
                 )}
               </button>
             </div>
 
             {/* Controls Bar */}
-            <div className="p-4 flex flex-col gap-3">
+            <div className="flex flex-col gap-3 p-4">
               {/* Progress Bar */}
-              <div className="flex items-center gap-2 text-white text-sm">
-                <span className="min-w-0 text-xs font-mono">
+              <div className="flex items-center gap-2 text-sm text-white">
+                <span className="min-w-0 font-mono text-xs">
                   {formatTime(currentTime)}
                 </span>
-                <div className="flex-1 relative group/progress">
+                <div className="group/progress relative flex-1">
                   <input
-                    type="range"
-                    min={0}
+                    className="h-1 w-full cursor-pointer appearance-none rounded-card bg-white/30 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-card [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-sm [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:duration-200 group-hover/progress:[&::-webkit-slider-thumb]:scale-125"
                     max={duration || 0}
-                    value={currentTime}
+                    min={0}
                     onChange={handleSeek}
-                    className="w-full h-1 bg-white/30 rounded-card appearance-none cursor-pointer
-                      [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 
-                      [&::-webkit-slider-thumb]:rounded-card [&::-webkit-slider-thumb]:bg-white 
-                      [&::-webkit-slider-thumb]:shadow-sm [&::-webkit-slider-thumb]:cursor-pointer
-                      [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:duration-200
-                      group-hover/progress:[&::-webkit-slider-thumb]:scale-125"
                     style={{
                       background: `linear-gradient(to right, #ffffff 0%, #ffffff ${
                         (currentTime / duration) * 100
@@ -323,9 +316,11 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
                         (currentTime / duration) * 100
                       }%, rgba(255,255,255,0.3) 100%)`,
                     }}
+                    type="range"
+                    value={currentTime}
                   />
                 </div>
-                <span className="min-w-0 text-xs font-mono">
+                <span className="min-w-0 font-mono text-xs">
                   {formatTime(duration)}
                 </span>
               </div>
@@ -334,54 +329,49 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <button
+                    className="rounded-ele p-2 text-white transition-colors hover:bg-white/20"
                     onClick={() => skip(-10)}
-                    className="p-2 text-white hover:bg-white/20 rounded-ele transition-colors"
                   >
-                    <SkipBack className="w-4 h-4" />
+                    <SkipBack className="h-4 w-4" />
                   </button>
 
                   <button
+                    className="rounded-ele p-2 text-white transition-colors hover:bg-white/20"
                     onClick={togglePlay}
-                    className="p-2 text-white hover:bg-white/20 rounded-ele transition-colors"
                   >
                     {isPlaying ? (
-                      <Pause className="w-4 h-4" />
+                      <Pause className="h-4 w-4" />
                     ) : (
-                      <Play className="w-4 h-4 ml-0.5" />
+                      <Play className="ml-0.5 h-4 w-4" />
                     )}
                   </button>
 
                   <button
+                    className="rounded-ele p-2 text-white transition-colors hover:bg-white/20"
                     onClick={() => skip(10)}
-                    className="p-2 text-white hover:bg-white/20 rounded-ele transition-colors"
                   >
-                    <SkipForward className="w-4 h-4" />
+                    <SkipForward className="h-4 w-4" />
                   </button>
 
-                  <div className="flex items-center gap-2 group/volume">
+                  <div className="group/volume flex items-center gap-2">
                     <button
+                      className="rounded-ele p-2 text-white transition-colors hover:bg-white/20"
                       onClick={toggleMute}
-                      className="p-2 text-white hover:bg-white/20 rounded-ele transition-colors"
                     >
                       {isMuted || volume === 0 ? (
-                        <VolumeX className="w-4 h-4" />
+                        <VolumeX className="h-4 w-4" />
                       ) : (
-                        <Volume2 className="w-4 h-4" />
+                        <Volume2 className="h-4 w-4" />
                       )}
                     </button>
 
-                    <div className="w-0 group-hover/volume:w-20 transition-all duration-200 overflow-hidden">
+                    <div className="w-0 overflow-hidden transition-all duration-200 group-hover/volume:w-20">
                       <input
-                        type="range"
-                        min={0}
+                        className="h-1 w-full cursor-pointer appearance-none rounded-card bg-white/30 [&::-webkit-slider-thumb]:h-2 [&::-webkit-slider-thumb]:w-2 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-card [&::-webkit-slider-thumb]:bg-white"
                         max={1}
-                        step={0.1}
-                        value={isMuted ? 0 : volume}
+                        min={0}
                         onChange={handleVolumeChange}
-                        className="w-full h-1 bg-white/30 rounded-card appearance-none cursor-pointer
-                          [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-2 [&::-webkit-slider-thumb]:h-2 
-                          [&::-webkit-slider-thumb]:rounded-card [&::-webkit-slider-thumb]:bg-white 
-                          [&::-webkit-slider-thumb]:cursor-pointer"
+                        step={0.1}
                         style={{
                           background: `linear-gradient(to right, #ffffff 0%, #ffffff ${
                             (isMuted ? 0 : volume) * 100
@@ -389,6 +379,8 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
                             (isMuted ? 0 : volume) * 100
                           }%, rgba(255,255,255,0.3) 100%)`,
                         }}
+                        type="range"
+                        value={isMuted ? 0 : volume}
                       />
                     </div>
                   </div>
@@ -396,13 +388,13 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
 
                 <div className="flex items-center gap-2">
                   <button
+                    className="rounded-ele p-2 text-white transition-colors hover:bg-white/20"
                     onClick={toggleFullscreen}
-                    className="p-2 text-white hover:bg-white/20 rounded-ele transition-colors"
                   >
                     {isFullscreen ? (
-                      <Minimize className="w-4 h-4" />
+                      <Minimize className="h-4 w-4" />
                     ) : (
-                      <Maximize className="w-4 h-4" />
+                      <Maximize className="h-4 w-4" />
                     )}
                   </button>
                 </div>
@@ -412,9 +404,9 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
         )}
       </div>
     );
-  },
+  }
 );
 
-VideoPlayer.displayName = "VideoPlayer";
+VideoPlayer.displayName = 'VideoPlayer';
 
 export { VideoPlayer, videoPlayerVariants };

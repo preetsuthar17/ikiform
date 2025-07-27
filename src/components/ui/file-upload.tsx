@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
-import { motion, AnimatePresence } from "motion/react";
+import { cva, type VariantProps } from 'class-variance-authority';
 import {
-  UploadCloud,
-  File as FileIcon,
-  Trash2,
-  Loader,
-  CheckCircle,
-  X,
-  Image as ImageIcon,
-  FileText,
-  Video,
-  Music,
   Archive,
-} from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
+  CheckCircle,
+  File as FileIcon,
+  FileText,
+  Image as ImageIcon,
+  Loader,
+  Music,
+  Trash2,
+  UploadCloud,
+  Video,
+  X,
+} from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+import * as React from 'react';
+import { Badge } from '@/components/ui/badge';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { cn } from '@/lib/utils';
 
 interface FileWithPreview {
   id: string;
@@ -29,57 +29,57 @@ interface FileWithPreview {
   type: string;
   lastModified?: number;
   file?: File;
-  status: "uploading" | "completed" | "error";
+  status: 'uploading' | 'completed' | 'error';
 }
 
 const fileUploadVariants = cva(
-  "relative rounded-card border transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 group w-full",
+  'group relative w-full rounded-card border transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
   {
     variants: {
       variant: {
         default:
-          "border-border bg-card hover:border-primary/30 focus-visible:ring-ring",
+          'border-border bg-card hover:border-primary/30 focus-visible:ring-ring',
         dashed:
-          "border-dashed border-border bg-background hover:border-primary/50 hover:bg-accent focus-visible:ring-ring",
+          'border-border border-dashed bg-background hover:border-primary/50 hover:bg-accent focus-visible:ring-ring',
         ghost:
-          "border-transparent bg-accent/50 hover:bg-accent focus-visible:ring-ring",
+          'border-transparent bg-accent/50 hover:bg-accent focus-visible:ring-ring',
       },
       size: {
-        sm: "p-4 min-h-[120px]",
-        default: "p-6 min-h-[160px]",
-        lg: "p-8 min-h-[200px]",
+        sm: 'min-h-[120px] p-4',
+        default: 'min-h-[160px] p-6',
+        lg: 'min-h-[200px] p-8',
       },
       state: {
-        idle: "",
-        dragging: "border-primary bg-primary/5 scale-[1.02]",
-        disabled: "opacity-50 pointer-events-none",
+        idle: '',
+        dragging: 'scale-[1.02] border-primary bg-primary/5',
+        disabled: 'pointer-events-none opacity-50',
       },
     },
     defaultVariants: {
-      variant: "dashed",
-      size: "default",
-      state: "idle",
+      variant: 'dashed',
+      size: 'default',
+      state: 'idle',
     },
-  },
+  }
 );
 
 const fileItemVariants = cva(
-  "flex items-start gap-3 p-4 rounded-ele transition-all duration-200",
+  'flex items-start gap-3 rounded-ele p-4 transition-all duration-200',
   {
     variants: {
       variant: {
-        default: "bg-card border border-border",
-        ghost: "bg-accent hover:bg-accent/80",
+        default: 'border border-border bg-card',
+        ghost: 'bg-accent hover:bg-accent/80',
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: 'default',
     },
-  },
+  }
 );
 
 export interface FileUploadProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange">,
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'>,
     VariantProps<typeof fileUploadVariants> {
   accept?: string;
   multiple?: boolean;
@@ -89,7 +89,7 @@ export interface FileUploadProps
   onFilesChange?: (files: FileWithPreview[]) => void;
   onUpload?: (files: File[]) => Promise<void>;
   showPreview?: boolean;
-  itemVariant?: "default" | "ghost";
+  itemVariant?: 'default' | 'ghost';
 }
 
 const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
@@ -99,7 +99,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
       variant,
       size,
       state,
-      accept = "image/*,application/pdf,video/*,audio/*,text/*,application/zip",
+      accept = 'image/*,application/pdf,video/*,audio/*,text/*,application/zip',
       multiple = true,
       maxFiles = 10,
       maxSize = 10 * 1024 * 1024, // 10MB
@@ -107,31 +107,31 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
       onFilesChange,
       onUpload,
       showPreview = true,
-      itemVariant = "default",
+      itemVariant = 'default',
       children,
       ...props
     },
-    ref,
+    ref
   ) => {
     const [files, setFiles] = React.useState<FileWithPreview[]>([]);
     const [isDragging, setIsDragging] = React.useState(false);
     const inputRef = React.useRef<HTMLInputElement>(null);
 
     const getFileIcon = (type: string) => {
-      if (type.startsWith("image/")) return ImageIcon;
-      if (type.startsWith("video/")) return Video;
-      if (type.startsWith("audio/")) return Music;
-      if (type.includes("pdf") || type.includes("document")) return FileText;
-      if (type.includes("zip") || type.includes("archive")) return Archive;
+      if (type.startsWith('image/')) return ImageIcon;
+      if (type.startsWith('video/')) return Video;
+      if (type.startsWith('audio/')) return Music;
+      if (type.includes('pdf') || type.includes('document')) return FileText;
+      if (type.includes('zip') || type.includes('archive')) return Archive;
       return FileIcon;
     };
 
     const formatFileSize = (bytes: number): string => {
-      if (!bytes) return "0 Bytes";
+      if (!bytes) return '0 Bytes';
       const k = 1024;
-      const sizes = ["Bytes", "KB", "MB", "GB"];
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
       const i = Math.floor(Math.log(bytes) / Math.log(k));
-      return `${(bytes / Math.pow(k, i)).toFixed(1)} ${sizes[i]}`;
+      return `${(bytes / k ** i).toFixed(1)} ${sizes[i]}`;
     };
 
     const validateFile = (file: File): string | null => {
@@ -150,7 +150,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
           const error = validateFile(file);
           return {
             id: `${Date.now()}-${Math.random()}`,
-            preview: file.type.startsWith("image/")
+            preview: file.type.startsWith('image/')
               ? URL.createObjectURL(file)
               : undefined,
             progress: 0,
@@ -159,7 +159,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
             type: file.type,
             lastModified: file.lastModified,
             file,
-            status: error ? ("error" as const) : ("uploading" as const),
+            status: error ? ('error' as const) : ('uploading' as const),
           };
         });
 
@@ -170,30 +170,30 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
       // Simulate upload or call actual upload
       if (onUpload) {
         const validFiles = newFiles
-          .filter((f) => f.status === "uploading")
+          .filter((f) => f.status === 'uploading')
           .map((f) => f.file!);
         try {
           await onUpload(validFiles);
           setFiles((prev) =>
             prev.map((f) =>
               newFiles.find((nf) => nf.id === f.id)
-                ? { ...f, status: "completed" as const, progress: 100 }
-                : f,
-            ),
+                ? { ...f, status: 'completed' as const, progress: 100 }
+                : f
+            )
           );
         } catch (error) {
           setFiles((prev) =>
             prev.map((f) =>
               newFiles.find((nf) => nf.id === f.id)
-                ? { ...f, status: "error" as const }
-                : f,
-            ),
+                ? { ...f, status: 'error' as const }
+                : f
+            )
           );
         }
       } else {
         // Simulate upload progress
         newFiles.forEach((fileItem) => {
-          if (fileItem.status === "uploading") {
+          if (fileItem.status === 'uploading') {
             simulateUpload(fileItem.id);
           }
         });
@@ -206,15 +206,15 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
         progress += Math.random() * 15;
         setFiles((prev) =>
           prev.map((f) =>
-            f.id === id ? { ...f, progress: Math.min(progress, 100) } : f,
-          ),
+            f.id === id ? { ...f, progress: Math.min(progress, 100) } : f
+          )
         );
         if (progress >= 100) {
           clearInterval(interval);
           setFiles((prev) =>
             prev.map((f) =>
-              f.id === id ? { ...f, status: "completed" as const } : f,
-            ),
+              f.id === id ? { ...f, status: 'completed' as const } : f
+            )
           );
         }
       }, 200);
@@ -253,33 +253,33 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
     };
 
     return (
-      <div ref={ref} className="w-full flex flex-col gap-4" {...props}>
+      <div className="flex w-full flex-col gap-4" ref={ref} {...props}>
         {/* Drop Zone */}
         <div
-          onDragOver={onDragOver}
-          onDragLeave={onDragLeave}
-          onDrop={onDrop}
-          onClick={openFileDialog}
+          aria-label="Upload files"
           className={cn(
             fileUploadVariants({
               variant,
               size,
-              state: disabled ? "disabled" : isDragging ? "dragging" : "idle",
+              state: disabled ? 'disabled' : isDragging ? 'dragging' : 'idle',
             }),
-            "cursor-pointer",
-            className,
+            'cursor-pointer',
+            className
           )}
-          role="button"
-          tabIndex={disabled ? -1 : 0}
-          aria-label="Upload files"
+          onClick={openFileDialog}
+          onDragLeave={onDragLeave}
+          onDragOver={onDragOver}
+          onDrop={onDrop}
           onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
+            if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
               openFileDialog();
             }
           }}
+          role="button"
+          tabIndex={disabled ? -1 : 0}
         >
-          <div className="flex flex-col items-center justify-center text-center flex flex-col gap-3">
+          <div className="flex flex flex-col flex-col items-center justify-center gap-3 text-center">
             <motion.div
               animate={{
                 y: isDragging ? [-2, 0, -2] : 0,
@@ -287,41 +287,41 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
               }}
               transition={{
                 duration: 1.5,
-                repeat: isDragging ? Infinity : 0,
-                ease: "easeInOut",
+                repeat: isDragging ? Number.POSITIVE_INFINITY : 0,
+                ease: 'easeInOut',
               }}
             >
               <UploadCloud
                 className={cn(
-                  "w-12 h-12 transition-colors",
+                  'h-12 w-12 transition-colors',
                   isDragging
-                    ? "text-primary"
-                    : "text-muted-foreground group-hover:text-foreground",
+                    ? 'text-primary'
+                    : 'text-muted-foreground group-hover:text-foreground'
                 )}
               />
             </motion.div>
 
             <div className="flex flex-col gap-1">
-              <h3 className="text-lg font-medium text-foreground">
+              <h3 className="font-medium text-foreground text-lg">
                 {isDragging
-                  ? "Drop files here"
+                  ? 'Drop files here'
                   : files.length
-                    ? "Add more files"
-                    : "Upload files"}
+                    ? 'Add more files'
+                    : 'Upload files'}
               </h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 {isDragging ? (
-                  <span className="text-primary font-medium">
+                  <span className="font-medium text-primary">
                     Release to upload
                   </span>
                 ) : (
                   <>
-                    Drag and drop files here, or{" "}
-                    <span className="text-primary font-medium">browse</span>
+                    Drag and drop files here, or{' '}
+                    <span className="font-medium text-primary">browse</span>
                   </>
                 )}
               </p>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-muted-foreground text-xs">
                 Max {maxFiles} files, up to {formatFileSize(maxSize)} each
               </p>
             </div>
@@ -330,14 +330,14 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
           </div>
 
           <input
+            accept={accept}
+            aria-describedby="file-upload-description"
+            className="sr-only"
+            disabled={disabled}
+            multiple={multiple}
+            onChange={onSelect}
             ref={inputRef}
             type="file"
-            multiple={multiple}
-            accept={accept}
-            disabled={disabled}
-            className="sr-only"
-            onChange={onSelect}
-            aria-describedby="file-upload-description"
           />
         </div>
 
@@ -345,25 +345,25 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
         {files.length > 0 && (
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
-              <h4 className="text-sm font-medium text-foreground">
+              <h4 className="font-medium text-foreground text-sm">
                 Files ({files.length})
               </h4>
               {files.length > 1 && (
                 <button
+                  className="text-muted-foreground text-xs transition-colors hover:text-destructive"
                   onClick={clearAll}
-                  className="text-xs text-muted-foreground hover:text-destructive transition-colors"
                 >
                   Clear all
                 </button>
-              )}{" "}
+              )}{' '}
             </div>
 
             <div className="flex flex-col gap-2">
               <AnimatePresence>
                 <ScrollArea
                   className={cn(
-                    "w-full rounded-ele",
-                    files.length > 3 ? "h-64" : "h-auto",
+                    'w-full rounded-ele',
+                    files.length > 3 ? 'h-64' : 'h-auto'
                   )}
                 >
                   <div className="flex flex-col gap-2 pr-3">
@@ -371,69 +371,69 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                       const IconComponent = getFileIcon(file.type);
                       return (
                         <motion.div
-                          key={file.id}
-                          initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -20 }}
                           className={cn(
-                            fileItemVariants({ variant: itemVariant }),
+                            fileItemVariants({ variant: itemVariant })
                           )}
+                          exit={{ opacity: 0, y: -20 }}
+                          initial={{ opacity: 0, y: 20 }}
+                          key={file.id}
                         >
                           {/* File Icon/Preview */}
-                          <div className="flex-shrink-0 relative">
+                          <div className="relative flex-shrink-0">
                             {showPreview && file.preview ? (
                               <img
-                                src={file.preview}
                                 alt={file.name}
-                                className="w-10 h-10 rounded-ele object-cover border border-border"
+                                className="h-10 w-10 rounded-ele border border-border object-cover"
+                                src={file.preview}
                               />
                             ) : (
-                              <div className="w-10 h-10 rounded-ele bg-accent flex items-center justify-center">
-                                <IconComponent className="w-5 h-5 text-muted-foreground" />
+                              <div className="flex h-10 w-10 items-center justify-center rounded-ele bg-accent">
+                                <IconComponent className="h-5 w-5 text-muted-foreground" />
                               </div>
                             )}
-                            {file.status === "completed" && (
-                              <div className="absolute -top-1 -right-1">
-                                <CheckCircle className="w-4 h-4 text-primary bg-background rounded-card" />
+                            {file.status === 'completed' && (
+                              <div className="-top-1 -right-1 absolute">
+                                <CheckCircle className="h-4 w-4 rounded-card bg-background text-primary" />
                               </div>
                             )}
                           </div>
 
                           {/* File Info */}
-                          <div className="flex-1 min-w-0 flex flex-col gap-1">
+                          <div className="flex min-w-0 flex-1 flex-col gap-1">
                             <div className="flex items-center justify-between gap-2">
-                              <p className="text-sm font-medium text-foreground truncate">
+                              <p className="truncate font-medium text-foreground text-sm">
                                 {file.name}
                               </p>
                               <button
-                                onClick={() => removeFile(file.id)}
-                                className="flex-shrink-0 p-1 hover:bg-accent rounded-ele transition-colors"
                                 aria-label={`Remove ${file.name}`}
+                                className="flex-shrink-0 rounded-ele p-1 transition-colors hover:bg-accent"
+                                onClick={() => removeFile(file.id)}
                               >
-                                <X className="w-4 h-4 text-muted-foreground hover:text-destructive" />
+                                <X className="h-4 w-4 text-muted-foreground hover:text-destructive" />
                               </button>
                             </div>
 
                             <div className="flex items-center justify-between gap-2">
-                              <p className="text-xs text-muted-foreground">
+                              <p className="text-muted-foreground text-xs">
                                 {formatFileSize(file.size)}
                               </p>
                               <div className="flex items-center gap-2">
-                                {file.status === "uploading" && (
+                                {file.status === 'uploading' && (
                                   <>
-                                    <span className="text-xs text-muted-foreground">
+                                    <span className="text-muted-foreground text-xs">
                                       {Math.round(file.progress)}%
                                     </span>
-                                    <Loader className="w-3 h-3 animate-spin text-primary" />
+                                    <Loader className="h-3 w-3 animate-spin text-primary" />
                                   </>
                                 )}
-                                {file.status === "completed" && (
-                                  <Badge variant="secondary" size="sm">
+                                {file.status === 'completed' && (
+                                  <Badge size="sm" variant="secondary">
                                     Uploaded
                                   </Badge>
                                 )}
-                                {file.status === "error" && (
-                                  <Badge variant="destructive" size="sm">
+                                {file.status === 'error' && (
+                                  <Badge size="sm" variant="destructive">
                                     Error
                                   </Badge>
                                 )}
@@ -441,13 +441,13 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                             </div>
 
                             {/* Progress Bar */}
-                            {file.status === "uploading" && (
-                              <div className="w-full h-1.5 bg-accent rounded-card overflow-hidden">
+                            {file.status === 'uploading' && (
+                              <div className="h-1.5 w-full overflow-hidden rounded-card bg-accent">
                                 <motion.div
-                                  initial={{ width: 0 }}
                                   animate={{ width: `${file.progress}%` }}
+                                  className="h-full rounded-card bg-primary"
+                                  initial={{ width: 0 }}
                                   transition={{ duration: 0.3 }}
-                                  className="h-full bg-primary rounded-card"
                                 />
                               </div>
                             )}
@@ -463,10 +463,10 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
         )}
       </div>
     );
-  },
+  }
 );
 
-FileUpload.displayName = "FileUpload";
+FileUpload.displayName = 'FileUpload';
 
 export { FileUpload, fileUploadVariants };
 export type { FileWithPreview };

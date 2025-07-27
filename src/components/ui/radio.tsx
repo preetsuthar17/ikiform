@@ -1,43 +1,43 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
-import { motion, AnimatePresence } from "motion/react";
+import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { AnimatePresence, motion } from 'motion/react';
+import * as React from 'react';
+import { cn } from '@/lib/utils';
 
-const radioGroupVariants = cva("grid gap-2", {
+const radioGroupVariants = cva('grid gap-2', {
   variants: {
     orientation: {
-      vertical: "grid-cols-1",
-      horizontal: "grid-flow-col auto-cols-max",
+      vertical: 'grid-cols-1',
+      horizontal: 'auto-cols-max grid-flow-col',
     },
   },
   defaultVariants: {
-    orientation: "vertical",
+    orientation: 'vertical',
   },
 });
 
 const radioVariants = cva(
-  "aspect-square rounded-card border border-border text-primary focus:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary shadow-sm/2",
+  'aspect-square rounded-card border border-border text-primary shadow-sm/2 focus:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary',
   {
     variants: {
       size: {
-        sm: "h-3 w-3",
-        default: "h-4 w-4",
-        lg: "h-5 w-5",
+        sm: 'h-3 w-3',
+        default: 'h-4 w-4',
+        lg: 'h-5 w-5',
       },
     },
     defaultVariants: {
-      size: "default",
+      size: 'default',
     },
-  },
+  }
 );
 
 interface RadioGroupProps
   extends Omit<
       React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>,
-      "orientation"
+      'orientation'
     >,
     VariantProps<typeof radioGroupVariants> {
   label?: string;
@@ -58,7 +58,7 @@ const RadioGroup = React.forwardRef<
 >(
   (
     { className, orientation, label, description, error, id, ...props },
-    ref,
+    ref
   ) => {
     const groupId = id || React.useId();
 
@@ -67,63 +67,63 @@ const RadioGroup = React.forwardRef<
         {(label || description) && (
           <div className="grid gap-1.5">
             {label && (
-              <label htmlFor={groupId} className="text-sm  leading-none">
+              <label className="text-sm leading-none" htmlFor={groupId}>
                 {label}
               </label>
             )}
             {description && (
-              <p className="text-xs text-muted-foreground">{description}</p>
+              <p className="text-muted-foreground text-xs">{description}</p>
             )}
           </div>
         )}
 
         <RadioGroupPrimitive.Root
-          ref={ref}
-          id={groupId}
           className={cn(radioGroupVariants({ orientation }), className)}
+          id={groupId}
+          ref={ref}
           {...props}
         />
 
-        {error && <p className="text-xs text-destructive">{error}</p>}
+        {error && <p className="text-destructive text-xs">{error}</p>}
       </div>
     );
-  },
+  }
 );
 
-RadioGroup.displayName = "RadioGroup";
+RadioGroup.displayName = 'RadioGroup';
 
 const RadioItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
   RadioItemProps
 >(({ className, size, label, description, id, ...props }, ref) => {
   const itemId = id || React.useId();
-  const dotSize = size === "sm" ? 5 : size === "lg" ? 8 : 6;
+  const dotSize = size === 'sm' ? 5 : size === 'lg' ? 8 : 6;
 
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-start gap-2">
         <RadioGroupPrimitive.Item
-          ref={ref}
-          id={itemId}
           className={cn(radioVariants({ size }), className)}
+          id={itemId}
+          ref={ref}
           {...props}
         >
           <RadioGroupPrimitive.Indicator asChild>
-            <div className="flex items-center justify-center w-full h-full">
+            <div className="flex h-full w-full items-center justify-center">
               <AnimatePresence>
                 <motion.div
-                  key="dot"
+                  animate={{ scale: 1, opacity: 1 }}
                   className="rounded-card bg-primary"
+                  exit={{ scale: 0, opacity: 0 }}
+                  initial={{ scale: 0, opacity: 0 }}
+                  key="dot"
                   style={{
                     width: dotSize,
                     height: dotSize,
                   }}
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0, opacity: 0 }}
                   transition={{
                     duration: 0.2,
-                    ease: "easeInOut",
+                    ease: 'easeInOut',
                   }}
                 />
               </AnimatePresence>
@@ -135,14 +135,14 @@ const RadioItem = React.forwardRef<
           <div className="grid gap-1.5 leading-none">
             {label && (
               <label
+                className="cursor-pointer text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 htmlFor={itemId}
-                className="text-sm  leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
               >
                 {label}
               </label>
             )}
             {description && (
-              <p className="text-xs text-muted-foreground peer-disabled:opacity-70">
+              <p className="text-muted-foreground text-xs peer-disabled:opacity-70">
                 {description}
               </p>
             )}
@@ -153,7 +153,7 @@ const RadioItem = React.forwardRef<
   );
 });
 
-RadioItem.displayName = "RadioItem";
+RadioItem.displayName = 'RadioItem';
 
 export {
   RadioGroup,

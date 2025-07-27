@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import React, { useRef, useEffect, useState } from "react";
-import Link from "next/link";
 import {
-  Crown,
-  Bot,
   BarChart3,
-  FileText,
-  Zap,
-  Share2,
-  Network,
-  Star,
-  Sparkles,
-  Flag,
+  Bot,
   Clock,
+  Crown,
+  FileText,
+  Flag,
+  Network,
+  Share2,
   Smartphone,
-} from "lucide-react";
-import { useAuth } from "@/hooks/use-auth";
-import { usePremiumStatus } from "@/hooks/use-premium-status";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import FeatureComparisonTable from "./feature-comparison-table";
-import { OptimizedImage } from "@/components/other/optimized-image";
+  Sparkles,
+  Star,
+  Zap,
+} from 'lucide-react';
+import Link from 'next/link';
+import React, { useEffect, useRef, useState } from 'react';
+import { OptimizedImage } from '@/components/other/optimized-image';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { useAuth } from '@/hooks/use-auth';
+import { usePremiumStatus } from '@/hooks/use-premium-status';
+import FeatureComparisonTable from './feature-comparison-table';
 
 interface Product {
   id: string;
@@ -36,40 +36,40 @@ interface PricingClientProps {
 
 const features = [
   {
-    label: "Unlimited submissions",
-    icon: <FileText className="w-4 h-4 text-primary flex-shrink-0" />,
+    label: 'Unlimited submissions',
+    icon: <FileText className="h-4 w-4 flex-shrink-0 text-primary" />,
   },
   {
-    label: "Advanced analytics",
-    icon: <BarChart3 className="w-4 h-4 text-primary flex-shrink-0" />,
+    label: 'Advanced analytics',
+    icon: <BarChart3 className="h-4 w-4 flex-shrink-0 text-primary" />,
   },
   {
-    label: "AI Form builder",
-    icon: <Bot className="w-4 h-4 text-primary flex-shrink-0" />,
+    label: 'AI Form builder',
+    icon: <Bot className="h-4 w-4 flex-shrink-0 text-primary" />,
   },
   {
-    label: "AI Analytics",
-    icon: <Sparkles className="w-4 h-4 text-primary flex-shrink-0" />,
+    label: 'AI Analytics',
+    icon: <Sparkles className="h-4 w-4 flex-shrink-0 text-primary" />,
   },
   {
-    label: "Exporting responses",
-    icon: <Share2 className="w-4 h-4 text-primary flex-shrink-0" />,
+    label: 'Exporting responses',
+    icon: <Share2 className="h-4 w-4 flex-shrink-0 text-primary" />,
   },
   {
-    label: "Integrations",
-    icon: <Network className="w-4 h-4 text-primary flex-shrink-0" />,
+    label: 'Integrations',
+    icon: <Network className="h-4 w-4 flex-shrink-0 text-primary" />,
   },
   {
-    label: "Webhook",
-    icon: <Zap className="w-4 h-4 text-primary flex-shrink-0" />,
+    label: 'Webhook',
+    icon: <Zap className="h-4 w-4 flex-shrink-0 text-primary" />,
   },
   {
-    label: "Priority support",
-    icon: <Star className="w-4 h-4 text-primary flex-shrink-0" />,
+    label: 'Priority support',
+    icon: <Star className="h-4 w-4 flex-shrink-0 text-primary" />,
   },
 ];
 
-const PRODUCT_ID = "2e9b8531-0d45-40df-be1c-65482eefeb85";
+const PRODUCT_ID = '2e9b8531-0d45-40df-be1c-65482eefeb85';
 
 export default function PricingClient({ products }: PricingClientProps) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -83,8 +83,8 @@ export default function PricingClient({ products }: PricingClientProps) {
       setIsMobile(window.innerWidth < 1024);
     };
     checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const handlePurchaseClick = () => {
@@ -98,98 +98,98 @@ export default function PricingClient({ products }: PricingClientProps) {
 
   return (
     <section
-      ref={sectionRef}
+      className="flex w-full flex-col items-center justify-center gap-12 px-4 py-12 text-center md:px-8 md:py-28"
       id="pricing"
-      className="flex flex-col items-center justify-center gap-12 md:py-28 py-12 md:px-8 px-4 text-center w-full"
+      ref={sectionRef}
     >
-      <div className="max-w-7xl w-full mx-auto flex flex-col gap-18">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-18">
         <div className="flex flex-col items-center gap-4 px-6">
-          <h2 className="text-3xl md:text-4xl font-semibold">Pricing</h2>
-          <p className="text-md text-muted-foreground max-w-xl mx-auto">
+          <h2 className="font-semibold text-3xl md:text-4xl">Pricing</h2>
+          <p className="mx-auto max-w-xl text-md text-muted-foreground">
             Simple, transparent pricing. Everything you need to build beautiful
             forms. Start free, upgrade when you need more features.
           </p>
         </div>
-        <div className="w-full max-w-7xl mx-auto flex flex-col items-center grow text-left rounded-card md:p-12 p-4 relative">
+        <div className="relative mx-auto flex w-full max-w-7xl grow flex-col items-center rounded-card p-4 text-left md:p-12">
           {/* Overlay */}
-          <div className="absolute inset-0 bg-black/15 pointer-events-none rounded-card z-2 backdrop-blur-[5px]" />
+          <div className="pointer-events-none absolute inset-0 z-2 rounded-card bg-black/15 backdrop-blur-[5px]" />
 
           <OptimizedImage
-            src={
-              "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignjTkuSWpXignmaOlP5cRt3oEBh7bKq40kjD9L"
-            }
-            alt={"Pricing background image"}
-            width={1920}
+            alt={'Pricing background image'}
+            className="absolute inset-0 z-0 h-full w-full rounded-card object-cover"
             height={1080}
-            className="absolute inset-0 w-full h-full object-cover rounded-card z-0"
+            src={
+              'https://av5on64jc4.ufs.sh/f/jYAIyA6pXignjTkuSWpXignmaOlP5cRt3oEBh7bKq40kjD9L'
+            }
+            width={1920}
           />
-          <Card className="w-full p-0 border shadow-md/3 overflow-hidden z-5">
-            <div className="flex flex-col md:flex-row w-full">
-              <div className="flex flex-col gap-8 md:w-1/2 w-full p-8 items-start justify-start ">
-                <Badge variant="secondary" className="w-fit mr-auto">
+          <Card className="z-5 w-full overflow-hidden border p-0 shadow-md/3">
+            <div className="flex w-full flex-col md:flex-row">
+              <div className="flex w-full flex-col items-start justify-start gap-8 p-8 md:w-1/2 ">
+                <Badge className="mr-auto w-fit" variant="secondary">
                   🎉 Get Early Bird Discount
                 </Badge>
-                <div className="flex flex-col gap-3 items-center">
+                <div className="flex flex-col items-center gap-3">
                   <div className="flex items-baseline gap-3">
-                    <span className="text-2xl font-medium text-muted-foreground line-through">
+                    <span className="font-medium text-2xl text-muted-foreground line-through">
                       $69
                     </span>
-                    <span className="text-4xl font-bold text-foreground">
+                    <span className="font-bold text-4xl text-foreground">
                       $59
                     </span>
                     <span className="text-muted-foreground">one-time</span>
                   </div>
                 </div>
                 {user && hasPremium ? (
-                  <Button size="lg" className="w-full">
+                  <Button className="w-full" size="lg">
                     <Link
+                      className="block w-full"
                       href="/dashboard"
                       target="_blank"
-                      className="w-full block"
                     >
                       Go to Dashboard
                     </Link>
                   </Button>
                 ) : (
                   <Link
+                    className="block w-full"
                     href={
                       user
                         ? `/checkout?products=${PRODUCT_ID}&customerEmail=${user?.email}`
-                        : "#"
+                        : '#'
                     }
-                    className="w-full block"
                     onClick={handlePurchaseClick}
                   >
                     <Button
-                      size="lg"
                       className="w-full"
                       disabled={purchaseLoading || checkingPremium}
+                      size="lg"
                     >
                       {purchaseLoading ? (
                         <div className="flex items-center gap-2">
-                          <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-card animate-spin" />
+                          <div className="h-4 w-4 animate-spin rounded-card border-2 border-current border-t-transparent" />
                           Processing...
                         </div>
                       ) : checkingPremium ? (
                         <div className="flex items-center gap-2">
-                          <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-card animate-spin" />
+                          <div className="h-4 w-4 animate-spin rounded-card border-2 border-current border-t-transparent" />
                           Checking...
                         </div>
                       ) : user ? (
-                        "Get Started"
+                        'Get Started'
                       ) : (
-                        "Sign In to Get Started"
+                        'Sign In to Get Started'
                       )}
                     </Button>
                   </Link>
                 )}
               </div>
-              <div className="flex flex-col gap-8 md:w-1/2 w-full p-8">
+              <div className="flex w-full flex-col gap-8 p-8 md:w-1/2">
                 <div className="flex flex-col gap-3">
                   {features.map((feature, index) => (
-                    <div key={index} className="flex items-center gap-3">
+                    <div className="flex items-center gap-3" key={index}>
                       {feature.icon}
-                      <span className="text-sm text-foreground">
+                      <span className="text-foreground text-sm">
                         {feature.label}
                       </span>
                     </div>

@@ -1,6 +1,6 @@
-import { notFound } from "next/navigation";
-import PublicFormClient from "./PublicFormClient";
-import { formsDbServer } from "@/lib/database";
+import { notFound } from 'next/navigation';
+import { formsDbServer } from '@/lib/database';
+import PublicFormClient from './PublicFormClient';
 
 interface PublicFormPageProps {
   params: Promise<{ id: string }>;
@@ -16,11 +16,11 @@ export async function generateMetadata({
   try {
     const form = await formsDbServer.getPublicForm(id);
     if (!form) return {};
-    const title = form.schema?.settings?.title || form.title || "Form";
+    const title = form.schema?.settings?.title || form.title || 'Form';
     const description =
       form.schema?.settings?.description ||
       form.description ||
-      "Fill out this form.";
+      'Fill out this form.';
     return {
       title,
       description,
@@ -28,10 +28,10 @@ export async function generateMetadata({
         title,
         description,
         url: `https://www.ikiform.com/forms/${id}`,
-        type: "website",
+        type: 'website',
       },
       twitter: {
-        card: "summary_large_image",
+        card: 'summary_large_image',
         title,
         description,
       },
@@ -48,7 +48,7 @@ export default async function PublicFormPage({
   const { id } = await params;
   const resolvedSearchParams = await searchParams;
   const theme =
-    typeof resolvedSearchParams?.theme === "string"
+    typeof resolvedSearchParams?.theme === 'string'
       ? resolvedSearchParams.theme
       : undefined;
 
@@ -61,7 +61,7 @@ export default async function PublicFormPage({
 
     return <PublicFormClient formId={id} schema={form.schema} theme={theme} />;
   } catch (error) {
-    console.error("Error loading form:", error);
+    console.error('Error loading form:', error);
     notFound();
   }
 }

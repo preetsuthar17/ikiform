@@ -1,7 +1,7 @@
-import React from "react";
-import { Card } from "@/components/ui/card";
-import { FormTypePreview } from "./FormTypePreview";
-import type { FormTypeCardProps } from "../types";
+import type React from 'react';
+import { Card } from '@/components/ui/card';
+import type { FormTypeCardProps } from '../types';
+import { FormTypePreview } from './FormTypePreview';
 
 export const FormTypeCard: React.FC<FormTypeCardProps> = ({
   type,
@@ -12,36 +12,36 @@ export const FormTypeCard: React.FC<FormTypeCardProps> = ({
 
   return (
     <Card
-      className={`p-6 cursor-pointer transition-all duration-200 hover:shadow-md w-full ${
-        isSelected ? "ring-2 ring-primary bg-primary/5" : "hover:bg-muted/30"
+      className={`w-full cursor-pointer p-6 transition-all duration-200 hover:shadow-md ${
+        isSelected ? 'bg-primary/5 ring-2 ring-primary' : 'hover:bg-muted/30'
       }`}
       onClick={() => onSelect(type.id)}
     >
-      <div className="flex items-start justify-between grow w-full gap-3">
-        <div className="flex items-center gap-3 max-sm:flex-col max-sm:justify-center max-sm:text-center w-full">
+      <div className="flex w-full grow items-start justify-between gap-3">
+        <div className="flex w-full items-center gap-3 max-sm:flex-col max-sm:justify-center max-sm:text-center">
           <div
-            className={`p-2 rounded-card ${
-              isSelected ? "bg-primary text-primary-foreground" : "bg-muted"
+            className={`rounded-card p-2 ${
+              isSelected ? 'bg-primary text-primary-foreground' : 'bg-muted'
             }`}
           >
-            <Icon className="w-5 h-5" />
+            <Icon className="h-5 w-5" />
           </div>
           <div>
             <h3 className="font-semibold text-lg">{type.title}</h3>
-            <p className="text-sm text-muted-foreground">{type.description}</p>
+            <p className="text-muted-foreground text-sm">{type.description}</p>
           </div>
         </div>
       </div>
 
       <div className="my-4 max-sm:hidden">
-        <h4 className="font-medium mb-2 text-sm">Features:</h4>
+        <h4 className="mb-2 font-medium text-sm">Features:</h4>
         <ul className="flex flex-col gap-1">
           {type.features.map((feature, index) => (
             <li
+              className="flex items-center gap-2 text-muted-foreground text-sm"
               key={index}
-              className="text-sm text-muted-foreground flex items-center gap-2"
             >
-              <div className="w-1 h-1 bg-primary rounded-card"></div>
+              <div className="h-1 w-1 rounded-card bg-primary" />
               {feature}
             </li>
           ))}

@@ -1,14 +1,12 @@
 // External imports
-import React from "react";
+import React from 'react';
 
 // Component imports
-import { Input } from "@/components/ui/input";
-
-// Utility imports
-import { getBaseClasses } from "../utils";
-
+import { Input } from '@/components/ui/input';
 // Type imports
-import type { BaseFieldProps } from "../types";
+import type { BaseFieldProps } from '../types';
+// Utility imports
+import { getBaseClasses } from '../utils';
 
 export function NumberInputField({
   field,
@@ -21,15 +19,15 @@ export function NumberInputField({
 
   return (
     <Input
-      type="number"
-      id={field.id}
-      placeholder={field.placeholder}
-      value={value || ""}
-      onChange={(e) => onChange(e.target.value)}
-      min={field.validation?.min}
-      max={field.validation?.max}
       className={`flex gap-2 ${baseClasses}`}
       disabled={disabled}
+      id={field.id}
+      max={field.validation?.max}
+      min={field.validation?.min}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder={field.placeholder}
+      type="number"
+      value={value || ''}
     />
   );
 }

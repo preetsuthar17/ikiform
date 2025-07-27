@@ -1,17 +1,14 @@
 // External imports
-import React from "react";
-
+import React from 'react';
+import { Card } from '@/components/ui/card';
 // Component imports
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card } from "@/components/ui/card";
-import { SocialMediaIcons } from "@/components/ui/social-media-icons";
-
-// Utility imports
-import { getBaseClasses } from "../utils";
-
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { SocialMediaIcons } from '@/components/ui/social-media-icons';
 // Type imports
-import type { BaseFieldProps } from "../types";
+import type { BaseFieldProps } from '../types';
+// Utility imports
+import { getBaseClasses } from '../utils';
 
 interface SocialPlatform {
   platform: string;
@@ -22,46 +19,46 @@ interface SocialPlatform {
 
 const socialPlatforms: SocialPlatform[] = [
   {
-    platform: "linkedin",
-    label: "LinkedIn",
-    placeholder: "https://linkedin.com/in/username",
-    icon: "linkedin",
+    platform: 'linkedin',
+    label: 'LinkedIn',
+    placeholder: 'https://linkedin.com/in/username',
+    icon: 'linkedin',
   },
   {
-    platform: "twitter",
-    label: "X (Twitter)",
-    placeholder: "https://x.com/username",
-    icon: "twitter",
+    platform: 'twitter',
+    label: 'X (Twitter)',
+    placeholder: 'https://x.com/username',
+    icon: 'twitter',
   },
   {
-    platform: "youtube",
-    label: "YouTube",
-    placeholder: "https://youtube.com/@channel",
-    icon: "youtube",
+    platform: 'youtube',
+    label: 'YouTube',
+    placeholder: 'https://youtube.com/@channel',
+    icon: 'youtube',
   },
   {
-    platform: "instagram",
-    label: "Instagram",
-    placeholder: "https://instagram.com/username",
-    icon: "instagram",
+    platform: 'instagram',
+    label: 'Instagram',
+    placeholder: 'https://instagram.com/username',
+    icon: 'instagram',
   },
   {
-    platform: "facebook",
-    label: "Facebook",
-    placeholder: "https://facebook.com/username",
-    icon: "facebook",
+    platform: 'facebook',
+    label: 'Facebook',
+    placeholder: 'https://facebook.com/username',
+    icon: 'facebook',
   },
   {
-    platform: "github",
-    label: "GitHub",
-    placeholder: "https://github.com/username",
-    icon: "github",
+    platform: 'github',
+    label: 'GitHub',
+    placeholder: 'https://github.com/username',
+    icon: 'github',
   },
   {
-    platform: "website",
-    label: "Website",
-    placeholder: "https://example.com",
-    icon: "website",
+    platform: 'website',
+    label: 'Website',
+    placeholder: 'https://example.com',
+    icon: 'website',
   },
 ];
 
@@ -79,7 +76,7 @@ export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
     field.settings?.socialPlatforms || socialPlatforms.map((p) => p.platform);
 
   const filteredPlatforms = socialPlatforms.filter((p) =>
-    platformsToShow.includes(p.platform),
+    platformsToShow.includes(p.platform)
   );
 
   const customLinks = field.settings?.customLinks || [];
@@ -88,38 +85,36 @@ export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
     <div className="flex flex-col gap-4">
       <div className="grid gap-4">
         {filteredPlatforms.map((platform) => (
-          <div key={platform.platform} className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2" key={platform.platform}>
             <Label
+              className="font-medium text-sm"
               htmlFor={`${field.id}-${platform.platform}`}
-              className="text-sm font-medium"
             >
               {platform.label}
             </Label>
             <Input
+              className={baseClasses}
               id={`${field.id}-${platform.platform}`}
-              type="url"
-              placeholder={platform.placeholder}
-              value={socialData[platform.platform] || ""}
               onChange={(e) =>
                 handlePlatformChange(platform.platform, e.target.value)
               }
-              className={baseClasses}
+              placeholder={platform.placeholder}
+              type="url"
+              value={socialData[platform.platform] || ''}
             />
           </div>
         ))}
         {customLinks.map((link, idx) => (
-          <div key={`custom-${idx}`} className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2" key={`custom-${idx}`}>
             <Label
+              className="font-medium text-sm"
               htmlFor={`${field.id}-custom-${idx}`}
-              className="text-sm font-medium"
             >
               {link.label || `Custom Link ${idx + 1}`}
             </Label>
             <Input
+              className={baseClasses}
               id={`${field.id}-custom-${idx}`}
-              type="url"
-              placeholder={link.placeholder || "https://example.com"}
-              value={socialData[`custom_${idx}`] || ""}
               onChange={(e) => {
                 const updatedData = {
                   ...socialData,
@@ -127,7 +122,9 @@ export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
                 };
                 onChange(updatedData);
               }}
-              className={baseClasses}
+              placeholder={link.placeholder || 'https://example.com'}
+              type="url"
+              value={socialData[`custom_${idx}`] || ''}
             />
           </div>
         ))}
@@ -135,11 +132,11 @@ export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
 
       {field.settings?.showIcons && (
         <Card className="p-4">
-          <Label className="text-sm font-medium block">Preview</Label>
+          <Label className="block font-medium text-sm">Preview</Label>
           <SocialMediaIcons
-            platforms={socialData}
-            iconSize={field.settings?.iconSize || "md"}
             className="justify-center"
+            iconSize={field.settings?.iconSize || 'md'}
+            platforms={socialData}
           />
         </Card>
       )}

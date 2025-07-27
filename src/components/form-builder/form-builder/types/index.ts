@@ -1,6 +1,7 @@
 // Type imports
-import type { FormField, FormSchema, FormBlock } from "@/lib/database";
-import type { FormLogic } from "@/components/form-builder/logic-builder/types";
+
+import type { FormLogic } from '@/components/form-builder/logic-builder/types';
+import type { FormBlock, FormField, FormSchema } from '@/lib/database';
 
 // Interfaces
 export interface FormBuilderProps {
@@ -41,7 +42,7 @@ export interface FormBuilderActions {
   setShowShareModal: (show: boolean) => void;
   setIsNewForm: (isNew: boolean) => void;
   setFormSchema: (
-    schema: FormSchema | ((prev: FormSchema) => FormSchema),
+    schema: FormSchema | ((prev: FormSchema) => FormSchema)
   ) => void;
 }
 
@@ -71,7 +72,7 @@ export interface FormBuilderPanelsProps {
   selectedFieldId: string | null;
   selectedBlockId: string | null;
   selectedField: FormField | null;
-  onFieldAdd: (fieldType: FormField["type"]) => void;
+  onFieldAdd: (fieldType: FormField['type']) => void;
   onFieldSelect: (fieldId: string | null) => void;
   onFieldUpdate: (field: FormField) => void;
   onFieldDelete: (fieldId: string) => void;
@@ -81,7 +82,7 @@ export interface FormBuilderPanelsProps {
   onBlockAdd: () => void;
   onBlockUpdate: (blockId: string, updates: Partial<FormBlock>) => void;
   onBlockDelete: (blockId: string) => void;
-  onFormSettingsUpdate: (settings: Partial<FormSchema["settings"]>) => void;
+  onFormSettingsUpdate: (settings: Partial<FormSchema['settings']>) => void;
   onStepSelect: (stepIndex: number) => void;
   onLogicChange?: (logic: FormLogic) => void;
 }
@@ -101,7 +102,7 @@ export interface FormBuilderModalsProps {
   onCloseCreationWizard: () => void;
   onCloseShareModal: () => void;
   onFormTypeSelect: (schema: FormSchema) => void;
-  onFormSettingsUpdate: (settings: Partial<FormSchema["settings"]>) => void;
+  onFormSettingsUpdate: (settings: Partial<FormSchema['settings']>) => void;
   onSchemaUpdate: (updates: Partial<FormSchema>) => void;
   onPublish: () => Promise<void>;
   userEmail?: string;

@@ -1,24 +1,21 @@
-"use client";
-import React from "react";
-
-// Hooks
-import { useFormPreviewState } from "./hooks";
+'use client';
+import type React from 'react';
+import { getFormLayoutClasses } from '@/lib/utils/form-layout';
 
 // Components
 import {
+  FormActions,
+  FormFieldsContainer,
   FormHeader,
   MultiStepNavigation,
   StepHeader,
-  FormFieldsContainer,
-  FormActions,
-} from "./components";
-
-// Utilities
-import { handleFormSubmit } from "./utils";
-import { getFormLayoutClasses } from "@/lib/utils/form-layout";
-
+} from './components';
+// Hooks
+import { useFormPreviewState } from './hooks';
 // Types
-import type { FormPreviewProps } from "./types";
+import type { FormPreviewProps } from './types';
+// Utilities
+import { handleFormSubmit } from './utils';
 
 export function FormPreview({
   schema,
@@ -49,20 +46,20 @@ export function FormPreview({
 
   // Map borderRadius value to actual CSS value
   const borderRadiusValue = (() => {
-    const val = schema.settings.layout?.borderRadius || "md";
+    const val = schema.settings.layout?.borderRadius || 'md';
     switch (val) {
-      case "none":
-        return "0px";
-      case "sm":
-        return "4px";
-      case "md":
-        return "8px";
-      case "lg":
-        return "16px";
-      case "xl":
-        return "24px";
+      case 'none':
+        return '0px';
+      case 'sm':
+        return '4px';
+      case 'md':
+        return '8px';
+      case 'lg':
+        return '16px';
+      case 'xl':
+        return '24px';
       default:
-        return "8px";
+        return '8px';
     }
   })();
 
@@ -80,8 +77,8 @@ export function FormPreview({
       className={`min-h-full bg-background ${marginClass}`}
       style={
         {
-          "--radius": borderRadiusValue,
-          "--card-radius": borderRadiusValue,
+          '--radius': borderRadiusValue,
+          '--card-radius': borderRadiusValue,
         } as React.CSSProperties
       }
     >
@@ -89,16 +86,16 @@ export function FormPreview({
         className={`${maxWidthClass} mx-auto flex flex-col gap-6 ${paddingClass}`}
       >
         <FormHeader
-          schema={schema}
           onFormSettingsUpdate={onFormSettingsUpdate}
+          schema={schema}
         />
 
         {isMultiStep && (
           <MultiStepNavigation
-            schema={schema}
             currentStepIndex={currentStepIndex}
-            onStepSelect={onStepSelect}
             onStepChange={handleStepChange}
+            onStepSelect={onStepSelect}
+            schema={schema}
           />
         )}
 
@@ -111,29 +108,29 @@ export function FormPreview({
         )}
 
         <form
-          onSubmit={(e) => handleFormSubmit(e, formData)}
           className="flex flex-col gap-6"
+          onSubmit={(e) => handleFormSubmit(e, formData)}
         >
           <FormFieldsContainer
             fields={currentStepFields}
-            selectedFieldId={selectedFieldId}
+            fieldVisibility={fieldVisibility}
             formData={formData}
-            onFieldSelect={onFieldSelect}
-            onFieldsReorder={onFieldsReorder}
-            onFieldDelete={onFieldDelete}
-            onFieldValueChange={handleFieldValueChange}
             isMultiStep={isMultiStep}
             onAddField={onAddField}
-            fieldVisibility={fieldVisibility}
+            onFieldDelete={onFieldDelete}
+            onFieldSelect={onFieldSelect}
+            onFieldsReorder={onFieldsReorder}
+            onFieldValueChange={handleFieldValueChange}
+            selectedFieldId={selectedFieldId}
             showLogicCues={true}
           />
 
           <FormActions
-            schema={schema}
             currentStepIndex={currentStepIndex}
             fieldsLength={currentStepFields.length}
             isMultiStep={isMultiStep}
             onNextStep={handleNextStep}
+            schema={schema}
           />
         </form>
       </div>

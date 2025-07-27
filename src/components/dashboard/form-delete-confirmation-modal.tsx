@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
+import { AlertTriangle } from 'lucide-react';
 // External imports
-import React from "react";
-import { AlertTriangle } from "lucide-react";
+import React from 'react';
 
 // Internal component imports
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Modal,
   ModalContent,
-  ModalTitle,
   ModalHeader,
-} from "@/components/ui/modal";
+  ModalTitle,
+} from '@/components/ui/modal';
 
 interface ConfirmationModalProps {
   open: boolean;
@@ -20,7 +20,7 @@ interface ConfirmationModalProps {
   description: string;
   confirmText?: string;
   cancelText?: string;
-  variant?: "default" | "destructive";
+  variant?: 'default' | 'destructive';
   onConfirm: () => void;
 }
 
@@ -29,9 +29,9 @@ export function ConfirmationModal({
   onOpenChange,
   title,
   description,
-  confirmText = "Confirm",
-  cancelText = "Cancel",
-  variant = "default",
+  confirmText = 'Confirm',
+  cancelText = 'Cancel',
+  variant = 'default',
   onConfirm,
 }: ConfirmationModalProps) {
   const handleConfirm = () => {
@@ -44,30 +44,30 @@ export function ConfirmationModal({
   };
 
   return (
-    <Modal open={open} onOpenChange={onOpenChange}>
-      <ModalContent className="max-w-md flex flex-col gap-3">
+    <Modal onOpenChange={onOpenChange} open={open}>
+      <ModalContent className="flex max-w-md flex-col gap-3">
         <ModalHeader>
           <ModalTitle className="flex items-center gap-3">
-            {variant === "destructive" && (
-              <div className="w-10 h-10 bg-destructive/10 rounded-card flex items-center justify-center">
-                <AlertTriangle className="w-5 h-5 text-destructive" />
+            {variant === 'destructive' && (
+              <div className="flex h-10 w-10 items-center justify-center rounded-card bg-destructive/10">
+                <AlertTriangle className="h-5 w-5 text-destructive" />
               </div>
             )}
             <span>{title}</span>
           </ModalTitle>
         </ModalHeader>
         <div>
-          <p className="text-muted-foreground leading-relaxed text-sm">
+          <p className="text-muted-foreground text-sm leading-relaxed">
             {description}
           </p>
         </div>
         <div className="flex justify-end gap-3">
-          <Button variant="outline" onClick={handleCancel}>
+          <Button onClick={handleCancel} variant="outline">
             {cancelText}
           </Button>
           <Button
-            variant={variant === "destructive" ? "destructive" : "default"}
             onClick={handleConfirm}
+            variant={variant === 'destructive' ? 'destructive' : 'default'}
           >
             {confirmText}
           </Button>

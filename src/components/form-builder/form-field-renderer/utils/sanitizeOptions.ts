@@ -1,17 +1,17 @@
 export function sanitizeOptions(options: Array<any>): Array<any> {
   return options.map((opt) => {
     // If string, escape HTML
-    if (typeof opt === "string") {
+    if (typeof opt === 'string') {
       return escapeHtml(opt);
     }
     // If object, sanitize value and label
-    if (opt && typeof opt === "object") {
+    if (opt && typeof opt === 'object') {
       return {
         ...opt,
         value:
-          typeof opt.value === "string" ? escapeHtml(opt.value) : opt.value,
+          typeof opt.value === 'string' ? escapeHtml(opt.value) : opt.value,
         label:
-          typeof opt.label === "string" ? escapeHtml(opt.label) : opt.label,
+          typeof opt.label === 'string' ? escapeHtml(opt.label) : opt.label,
       };
     }
     return opt;
@@ -20,9 +20,9 @@ export function sanitizeOptions(options: Array<any>): Array<any> {
 
 function escapeHtml(str: string): string {
   return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }

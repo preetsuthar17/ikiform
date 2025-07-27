@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { Lock } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
+import { Lock } from 'lucide-react';
+import type React from 'react';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 interface PasswordProtectionModalProps {
   isOpen: boolean;
@@ -18,68 +19,68 @@ export function PasswordProtectionModal({
   onPasswordSubmit,
   onCancel,
 }: PasswordProtectionModalProps) {
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!password.trim()) {
-      setError("Please enter a password");
+      setError('Please enter a password');
       return;
     }
-    setError("");
+    setError('');
     onPasswordSubmit(password);
   };
 
   const handlePasswordChange = (value: string) => {
     setPassword(value);
-    if (error) setError("");
+    if (error) setError('');
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-foreground/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md flex flex-col gap-4">
-        <CardHeader className="text-center flex flex-col gap-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/80 p-4 backdrop-blur-sm">
+      <Card className="flex w-full max-w-md flex-col gap-4">
+        <CardHeader className="flex flex-col gap-4 text-center">
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-card bg-primary/10">
             <Lock className="h-6 w-6 text-primary" />
           </div>
           <CardTitle>Password Required</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground text-center mb-6">
+          <p className="mb-6 text-center text-muted-foreground text-sm">
             {message}
           </p>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-2">
               <Label htmlFor="password">Password</Label>
               <div className="relative">
                 <Input
+                  autoFocus
                   id="password"
-                  size="lg"
-                  type={showPassword ? "text" : "password"}
-                  value={password}
                   onChange={(e) => handlePasswordChange(e.target.value)}
                   placeholder="Enter password"
-                  autoFocus
+                  size="lg"
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
                 />
               </div>
-              {error && <p className="text-sm text-destructive">{error}</p>}
+              {error && <p className="text-destructive text-sm">{error}</p>}
             </div>
 
             <div className="flex gap-2">
               <Button
+                className="flex-1"
+                onClick={onCancel}
                 type="button"
                 variant="outline"
-                onClick={onCancel}
-                className="flex-1"
               >
                 Cancel
               </Button>
-              <Button type="submit" className="flex-1">
+              <Button className="flex-1" type="submit">
                 Continue
               </Button>
             </div>

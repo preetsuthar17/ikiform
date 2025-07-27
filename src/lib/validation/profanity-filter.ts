@@ -1,4 +1,4 @@
-import { Filter } from "bad-words";
+import { Filter } from 'bad-words';
 
 export interface ProfanityFilterOptions {
   enabled?: boolean;
@@ -31,7 +31,7 @@ export class ProfanityFilterService {
       replaceWithAsterisks: false,
       customWords: [],
       customMessage:
-        "Your submission contains inappropriate content. Please review and resubmit.",
+        'Your submission contains inappropriate content. Please review and resubmit.',
       whitelistedWords: [],
       ...options,
     };
@@ -56,7 +56,7 @@ export class ProfanityFilterService {
    * Check if text contains profanity
    */
   isProfane(text: string): boolean {
-    if (!this.options.enabled || !text) return false;
+    if (!(this.options.enabled && text)) return false;
     return this.filter.isProfane(text);
   }
 
@@ -64,7 +64,7 @@ export class ProfanityFilterService {
    * Clean profanity from text
    */
   clean(text: string): string {
-    if (!this.options.enabled || !text) return text;
+    if (!(this.options.enabled && text)) return text;
     return this.filter.clean(text);
   }
 
@@ -105,7 +105,8 @@ export class ProfanityFilterService {
             violations,
             message: this.options.customMessage,
           };
-        } else if (this.options.replaceWithAsterisks) {
+        }
+        if (this.options.replaceWithAsterisks) {
           // Replace with cleaned text
           filteredData[key] = result.cleanedText;
         } else {
@@ -129,17 +130,19 @@ export class ProfanityFilterService {
    * Check a single value for profanity
    */
   private checkValue(value: any): ProfanityCheckResult {
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       return this.checkText(value);
-    } else if (Array.isArray(value)) {
+    }
+    if (Array.isArray(value)) {
       // Check array values
-      const textValues = value.filter((v) => typeof v === "string").join(" ");
+      const textValues = value.filter((v) => typeof v === 'string').join(' ');
       return this.checkText(textValues);
-    } else if (typeof value === "object" && value !== null) {
+    }
+    if (typeof value === 'object' && value !== null) {
       // Check object values recursively
       const textValues = Object.values(value)
-        .filter((v) => typeof v === "string")
-        .join(" ");
+        .filter((v) => typeof v === 'string')
+        .join(' ');
       return this.checkText(textValues);
     }
 
@@ -154,10 +157,10 @@ export class ProfanityFilterService {
    * Check text for profanity and return detailed result
    */
   private checkText(text: string): ProfanityCheckResult {
-    if (!text || typeof text !== "string") {
+    if (!text || typeof text !== 'string') {
       return {
         hasBeenFiltered: false,
-        originalText: text || "",
+        originalText: text || '',
         filteredWords: [],
       };
     }
@@ -193,7 +196,7 @@ export class ProfanityFilterService {
     const filtered: string[] = [];
 
     for (let i = 0; i < originalWords.length; i++) {
-      if (cleanedWords[i] && cleanedWords[i].includes("*")) {
+      if (cleanedWords[i] && cleanedWords[i].includes('*')) {
         filtered.push(originalWords[i]);
       }
     }
@@ -227,7 +230,7 @@ export class ProfanityFilterService {
  * Create a profanity filter instance from form settings
  */
 export function createProfanityFilter(
-  settings: ProfanityFilterOptions,
+  settings: ProfanityFilterOptions
 ): ProfanityFilterService {
   return new ProfanityFilterService(settings);
 }

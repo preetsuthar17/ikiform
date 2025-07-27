@@ -1,4 +1,4 @@
-import type { FormSchema } from "@/lib/database";
+import type { FormSchema } from '@/lib/database';
 
 export interface PublicFormProps {
   formId: string;

@@ -1,9 +1,10 @@
-import React, { useRef, useEffect, useState } from "react";
-import Image from "next/image";
-import SignatureCanvas from "react-signature-canvas";
-import { Button } from "@/components/ui/button";
-import type { BaseFieldProps } from "../types";
-import { useTheme } from "next-themes";
+import Image from 'next/image';
+import { useTheme } from 'next-themes';
+import type React from 'react';
+import { useEffect, useRef, useState } from 'react';
+import SignatureCanvas from 'react-signature-canvas';
+import { Button } from '@/components/ui/button';
+import type { BaseFieldProps } from '../types';
 
 export function SignatureField({
   value,
@@ -26,8 +27,8 @@ export function SignatureField({
       }
     }
     updateWidth();
-    window.addEventListener("resize", updateWidth);
-    return () => window.removeEventListener("resize", updateWidth);
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
   }, []);
 
   useEffect(() => {
@@ -40,37 +41,37 @@ export function SignatureField({
 
   const handleEnd = () => {
     if (sigRef.current) {
-      const dataUrl = sigRef.current.getTrimmedCanvas().toDataURL("image/png");
+      const dataUrl = sigRef.current.getTrimmedCanvas().toDataURL('image/png');
       onChange(dataUrl);
     }
   };
 
   const handleClear = () => {
     sigRef.current?.clear();
-    onChange("");
+    onChange('');
   };
 
   return (
     <div
-      className="flex flex-col gap-2 w-full"
-      style={{ alignItems: "flex-start" }}
+      className="flex w-full flex-col gap-2"
+      style={{ alignItems: 'flex-start' }}
     >
-      <div ref={containerRef} className="w-full rounded-card">
+      <div className="w-full rounded-card" ref={containerRef}>
         <SignatureCanvas
-          ref={sigRef}
-          penColor="#000"
           backgroundColor="#fff"
           canvasProps={{
             width: canvasWidth,
             height: canvasHeight,
             style: {
-              display: "block",
-              width: "100%",
+              display: 'block',
+              width: '100%',
               height: canvasHeight,
-              borderRadius: "var(--card-radius)",
+              borderRadius: 'var(--card-radius)',
             },
           }}
           onEnd={disabled ? undefined : handleEnd}
+          penColor="#000"
+          ref={sigRef}
           // Prevent drawing if disabled
           {...(disabled && {
             onMouseDown: (e: React.MouseEvent<HTMLCanvasElement>) =>
@@ -82,23 +83,23 @@ export function SignatureField({
       </div>
       <div className="flex gap-2">
         <Button
-          type="button"
-          size="sm"
-          variant="outline"
-          onClick={handleClear}
           disabled={disabled}
+          onClick={handleClear}
+          size="sm"
+          type="button"
+          variant="outline"
         >
           Clear
         </Button>
       </div>
       {value && (
         <Image
-          src={value}
           alt="Signature preview"
-          className="mt-2 border rounded-card w-full"
-          style={{ height: canvasHeight, objectFit: "contain" }}
-          width={canvasWidth}
+          className="mt-2 w-full rounded-card border"
           height={canvasHeight}
+          src={value}
+          style={{ height: canvasHeight, objectFit: 'contain' }}
+          width={canvasWidth}
         />
       )}
     </div>

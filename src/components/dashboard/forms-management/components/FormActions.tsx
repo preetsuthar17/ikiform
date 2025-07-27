@@ -1,20 +1,19 @@
 // Form actions component with tooltips
-import React from "react";
 
+// Icons
+import { BarChart3, Edit, Eye, Share, Trash2 } from 'lucide-react';
+import React from 'react';
 // UI Components
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-
-// Icons
-import { Edit, Eye, BarChart3, Share, Trash2 } from "lucide-react";
+} from '@/components/ui/tooltip';
 
 // Types
-import type { FormActionsProps } from "../types";
+import type { FormActionsProps } from '../types';
 
 export function FormActions({
   form,
@@ -29,11 +28,11 @@ export function FormActions({
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
-              variant="secondary"
-              size="icon"
               onClick={() => onEdit(form.id)}
+              size="icon"
+              variant="secondary"
             >
-              <Edit className="w-4 h-4" />
+              <Edit className="h-4 w-4" />
             </Button>
           </TooltipTrigger>
           <TooltipContent size="sm">Edit form</TooltipContent>
@@ -44,11 +43,11 @@ export function FormActions({
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
-              variant="secondary"
-              size="icon"
               onClick={() => onViewAnalytics(form.id)}
+              size="icon"
+              variant="secondary"
             >
-              <BarChart3 className="w-4 h-4" />
+              <BarChart3 className="h-4 w-4" />
             </Button>
           </TooltipTrigger>
           <TooltipContent size="sm">View analytics</TooltipContent>
@@ -59,29 +58,29 @@ export function FormActions({
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
-              variant="secondary"
-              size="icon"
               onClick={() => onShare(form)}
+              size="icon"
+              variant="secondary"
             >
-              <Share className="w-4 h-4" />
+              <Share className="h-4 w-4" />
             </Button>
           </TooltipTrigger>
           <TooltipContent size="sm">Share form</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 
-      <div className="flex-1"></div>
+      <div className="flex-1" />
 
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
+              className="h-9 w-9 p-0"
+              onClick={() => onDelete(form.id, form.title)}
               size="icon"
               variant="destructive"
-              onClick={() => onDelete(form.id, form.title)}
-              className="h-9 w-9 p-0"
             >
-              <Trash2 className="w-4 h-4" />
+              <Trash2 className="h-4 w-4" />
             </Button>
           </TooltipTrigger>
           <TooltipContent size="sm">Delete form</TooltipContent>

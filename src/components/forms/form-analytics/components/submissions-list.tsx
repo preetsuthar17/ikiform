@@ -1,41 +1,40 @@
-import React, { useState } from "react";
-
-// UI Components
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
-import { DataTable, type DataTableColumn } from "@/components/ui/table";
-import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
-
 // Icons
 import {
+  Clock,
   Download,
   Eye,
   FileText,
-  RefreshCw,
-  Table,
-  LayoutGrid,
-  Search,
-  Clock,
   Globe,
-} from "lucide-react";
+  LayoutGrid,
+  RefreshCw,
+  Search,
+  Table,
+} from 'lucide-react';
+import type React from 'react';
+import { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+// UI Components
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Separator } from '@/components/ui/separator';
+import { DataTable, type DataTableColumn } from '@/components/ui/table';
+import { Tabs, TabsContent } from '@/components/ui/tabs';
 
 // Types and Utilities
-import type { Form, FormSubmission } from "@/lib/database";
-import type { SubmissionsListProps, FilterState } from "../types";
+import type { Form, FormSubmission } from '@/lib/database';
+import type { FilterState, SubmissionsListProps } from '../types';
 import {
   filterSubmissions,
   getSubmissionCompletionRate,
-} from "../utils/analytics";
+} from '../utils/analytics';
 
 export const SubmissionsList: React.FC<SubmissionsListProps> = ({
   form,
@@ -49,48 +48,48 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
   getFieldLabel,
   formatDate,
 }) => {
-  const [activeView, setActiveView] = useState<"cards" | "table">("table");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [activeView, setActiveView] = useState<'cards' | 'table'>('table');
+  const [searchTerm, setSearchTerm] = useState('');
   const [filterState, setFilterState] = useState<FilterState>({
-    timeRange: "all",
-    completionRate: "all",
+    timeRange: 'all',
+    completionRate: 'all',
   });
 
   const totalFields = Math.max(
     form.schema.fields?.length || 0,
     form.schema.blocks?.reduce(
       (total, block) => total + (block.fields?.length || 0),
-      0,
-    ) || 0,
+      0
+    ) || 0
   );
 
   const filteredSubmissions = filterSubmissions(
     submissions,
     searchTerm,
     filterState,
-    totalFields,
+    totalFields
   );
 
   const tableColumns: DataTableColumn<FormSubmission>[] = [
     {
-      key: "submitted_at",
-      header: "Date",
+      key: 'submitted_at',
+      header: 'Date',
       render: (value) => formatDate(value.toString()),
     },
     {
-      key: "submission_data",
-      header: "Form Data",
+      key: 'submission_data',
+      header: 'Form Data',
       render: (value, row) => (
         <div className="flex items-center gap-4">
           <Badge variant="outline">{Object.keys(value).length} fields</Badge>
           <Button
-            variant="ghost"
-            size="sm"
             className="ml-auto"
             onClick={(e) => {
               e.stopPropagation();
               onViewSubmission(row);
             }}
+            size="sm"
+            variant="ghost"
           >
             <Eye className="h-4 w-4" />
             View Details
@@ -102,13 +101,13 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center flex-col gap-4 py-20">
-        <div className="p-4 rounded-card">
-          <FileText className="w-8 h-8 text-accent" />
+      <div className="flex flex-col items-center justify-center gap-4 py-20">
+        <div className="rounded-card p-4">
+          <FileText className="h-8 w-8 text-accent" />
         </div>
         <div className="text-center">
-          <p className="text-foreground font-medium">Loading submissions...</p>
-          <p className="text-sm text-muted-foreground">
+          <p className="font-medium text-foreground">Loading submissions...</p>
+          <p className="text-muted-foreground text-sm">
             Fetching your form data
           </p>
         </div>
@@ -117,17 +116,17 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
   }
 
   return (
-    <Card className="bg-card border-border p-6 flex flex-col gap-6">
+    <Card className="flex flex-col gap-6 border-border bg-card p-6">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <div className="p-2 bg-primary/10 rounded-card">
-            <FileText className="w-5 h-5 text-primary" />
+          <div className="rounded-card bg-primary/10 p-2">
+            <FileText className="h-5 w-5 text-primary" />
           </div>
           <div>
-            <h3 className="text-xl font-semibold text-foreground">
+            <h3 className="font-semibold text-foreground text-xl">
               Form Submissions
             </h3>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               View and analyze form responses
             </p>
           </div>
@@ -136,57 +135,57 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">
               <Button
-                variant="outline"
-                size="sm"
-                onClick={onRefresh}
+                className="gap-2 transition-colors hover:bg-accent"
                 disabled={refreshing}
-                className="gap-2 hover:bg-accent transition-colors"
+                onClick={onRefresh}
+                size="sm"
+                variant="outline"
               >
                 <RefreshCw
-                  className={`w-4 h-4 ${refreshing ? "animate-spin" : ""}`}
+                  className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`}
                 />
                 Refresh
               </Button>
               <Button
-                variant="outline"
-                size="sm"
-                onClick={onExportCSV}
+                className="gap-2 transition-colors hover:bg-accent"
                 disabled={submissions.length === 0}
-                className="gap-2 hover:bg-accent transition-colors"
+                onClick={onExportCSV}
+                size="sm"
+                variant="outline"
               >
-                <Download className="w-4 h-4" />
+                <Download className="h-4 w-4" />
                 Export CSV
               </Button>
               <Button
-                variant="outline"
-                size="sm"
+                className="gap-2 transition-colors hover:bg-accent"
                 onClick={onExportJSON}
-                className="gap-2 hover:bg-accent transition-colors"
+                size="sm"
+                variant="outline"
               >
-                <Download className="w-4 h-4" />
+                <Download className="h-4 w-4" />
                 Export JSON
               </Button>
             </div>
             <Tabs
-              value={activeView}
-              onValueChange={(value) =>
-                setActiveView(value as "cards" | "table")
-              }
+              className="w-auto"
               items={[
                 {
-                  id: "cards",
-                  icon: <LayoutGrid className="w-4 h-4" />,
+                  id: 'cards',
+                  icon: <LayoutGrid className="h-4 w-4" />,
                 },
                 {
-                  id: "table",
-                  icon: <Table className="w-4 h-4" />,
+                  id: 'table',
+                  icon: <Table className="h-4 w-4" />,
                 },
               ]}
-              variant="default"
+              onValueChange={(value) =>
+                setActiveView(value as 'cards' | 'table')
+              }
               size="sm"
-              className="w-auto"
+              value={activeView}
+              variant="default"
             />
-            <Badge variant="secondary" className="text-xs">
+            <Badge className="text-xs" variant="secondary">
               {submissions.length} total
             </Badge>
           </div>
@@ -196,23 +195,23 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
       <div>
         {submissions.length === 0 ? (
           <div className="flex flex-col items-center gap-6 py-16">
-            <div className="gradient-bg w-24 h-24 rounded-card flex items-center justify-center">
-              <Eye className="w-10 h-10 text-accent-foreground" />
+            <div className="gradient-bg flex h-24 w-24 items-center justify-center rounded-card">
+              <Eye className="h-10 w-10 text-accent-foreground" />
             </div>
-            <h4 className="text-xl font-semibold text-foreground">
+            <h4 className="font-semibold text-foreground text-xl">
               No submissions yet
             </h4>
-            <p className="text-muted-foreground max-w-md text-center">
+            <p className="max-w-md text-center text-muted-foreground">
               Once people start filling out your form, their responses will
               appear here with detailed analytics and insights.
             </p>
             {!form.is_published && (
               <div className="flex flex-col items-center gap-3">
-                <Button variant="outline" size="sm" className="gap-2">
-                  <Globe className="w-4 h-4" />
+                <Button className="gap-2" size="sm" variant="outline">
+                  <Globe className="h-4 w-4" />
                   Publish Form
                 </Button>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-muted-foreground text-xs">
                   Publish your form to start collecting responses
                 </p>
               </div>
@@ -221,22 +220,22 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
         ) : (
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
-              <div className="relative flex-1 max-w-md">
+              <div className="relative max-w-md flex-1">
                 <Input
+                  leftIcon={<Search className="h-4 w-4" />}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search submissions..."
                   value={searchTerm}
-                  leftIcon={<Search className="w-4 h-4" />}
-                  onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </div>
               <Select
-                value={filterState.timeRange}
                 onValueChange={(value) =>
                   setFilterState((prev) => ({
                     ...prev,
-                    timeRange: value as "all" | "today" | "week" | "month",
+                    timeRange: value as 'all' | 'today' | 'week' | 'month',
                   }))
                 }
+                value={filterState.timeRange}
               >
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Select time range" />
@@ -249,17 +248,17 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                 </SelectContent>
               </Select>
               <Select
-                value={filterState.completionRate}
                 onValueChange={(value) =>
                   setFilterState((prev) => ({
                     ...prev,
                     completionRate: value as
-                      | "all"
-                      | "complete"
-                      | "partial"
-                      | "empty",
+                      | 'all'
+                      | 'complete'
+                      | 'partial'
+                      | 'empty',
                   }))
                 }
+                value={filterState.completionRate}
               >
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Select completion" />
@@ -273,21 +272,21 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
               </Select>
             </div>
 
-            <TabsContent value="cards" activeValue={activeView}>
+            <TabsContent activeValue={activeView} value="cards">
               <div className="flex flex-col gap-4">
                 {filteredSubmissions.slice(0, 10).map((submission) => (
                   <div key={submission.id}>
                     <Card className="p-4">
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+                      <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                         <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-primary rounded-card"></div>
-                          <span className="text-sm font-medium text-foreground">
+                          <div className="h-2 w-2 rounded-card bg-primary" />
+                          <span className="font-medium text-foreground text-sm">
                             Submission {submission.id.slice(-8)}
                           </span>
                         </div>
-                        <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                        <div className="flex items-center gap-4 text-muted-foreground text-xs">
                           <span className="flex items-center gap-1">
-                            <Clock className="w-3 h-3" />
+                            <Clock className="h-3 w-3" />
                             {formatDate(submission.submitted_at)}
                           </span>
                           {submission.ip_address && (
@@ -296,37 +295,37 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         {Object.entries(submission.submission_data).map(
                           ([fieldId, value]) => {
                             const allFields = [
                               ...(form.schema.fields || []),
                               ...(form.schema.blocks?.flatMap(
-                                (block) => block.fields || [],
+                                (block) => block.fields || []
                               ) || []),
                             ];
                             const field = allFields.find(
-                              (f) => f.id === fieldId,
+                              (f) => f.id === fieldId
                             );
                             // Signature field as image
                             if (
-                              field?.type === "signature" &&
-                              typeof value === "string" &&
-                              value.startsWith("data:image")
+                              field?.type === 'signature' &&
+                              typeof value === 'string' &&
+                              value.startsWith('data:image')
                             ) {
                               return (
                                 <div
-                                  key={fieldId}
                                   className="flex flex-col gap-2"
+                                  key={fieldId}
                                 >
-                                  <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                                  <label className="font-medium text-muted-foreground text-xs uppercase tracking-wider">
                                     {getFieldLabel(fieldId)}
                                   </label>
-                                  <div className="p-2 bg-input border border-border rounded-ele flex items-center justify-center">
+                                  <div className="flex items-center justify-center rounded-ele border border-border bg-input p-2">
                                     <img
-                                      src={value}
                                       alt="Signature"
-                                      className="max-h-24 max-w-full border rounded"
+                                      className="max-h-24 max-w-full rounded border"
+                                      src={value}
                                     />
                                   </div>
                                 </div>
@@ -334,27 +333,27 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                             }
                             // Social field as labeled links
                             if (
-                              field?.type === "social" &&
-                              typeof value === "object" &&
+                              field?.type === 'social' &&
+                              typeof value === 'object' &&
                               value !== null
                             ) {
                               const customLinks =
                                 field.settings?.customLinks || [];
                               return (
                                 <div
-                                  key={fieldId}
                                   className="flex flex-col gap-2"
+                                  key={fieldId}
                                 >
-                                  <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                                  <label className="font-medium text-muted-foreground text-xs uppercase tracking-wider">
                                     {getFieldLabel(fieldId)}
                                   </label>
-                                  <div className="p-2 bg-input border border-border rounded-ele flex flex-col gap-1">
+                                  <div className="flex flex-col gap-1 rounded-ele border border-border bg-input p-2">
                                     {Object.entries(value).map(([key, url]) => {
                                       let label = key;
-                                      if (key.startsWith("custom_")) {
-                                        const idx = parseInt(
-                                          key.replace("custom_", ""),
-                                          10,
+                                      if (key.startsWith('custom_')) {
+                                        const idx = Number.parseInt(
+                                          key.replace('custom_', ''),
+                                          10
                                         );
                                         label =
                                           customLinks[idx]?.label ||
@@ -366,15 +365,15 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                       }
                                       return (
                                         <a
-                                          key={key}
+                                          className="text-primary underline"
                                           href={
-                                            typeof url === "string"
+                                            typeof url === 'string'
                                               ? url
                                               : undefined
                                           }
-                                          target="_blank"
+                                          key={key}
                                           rel="noopener noreferrer"
-                                          className="text-primary underline"
+                                          target="_blank"
                                         >
                                           {label}
                                         </a>
@@ -387,25 +386,25 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                             // Default rendering
                             return (
                               <div
-                                key={fieldId}
                                 className="flex flex-col gap-2"
+                                key={fieldId}
                               >
-                                <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                                <label className="font-medium text-muted-foreground text-xs uppercase tracking-wider">
                                   {getFieldLabel(fieldId)}
                                 </label>
-                                <div className="p-2 bg-input border border-border rounded-ele">
-                                  <p className="text-sm text-foreground line-clamp-2">
+                                <div className="rounded-ele border border-border bg-input p-2">
+                                  <p className="line-clamp-2 text-foreground text-sm">
                                     {Array.isArray(value)
-                                      ? value.join(", ")
-                                      : typeof value === "object" &&
+                                      ? value.join(', ')
+                                      : typeof value === 'object' &&
                                           value !== null
                                         ? JSON.stringify(value)
-                                        : String(value) || "—"}
+                                        : String(value) || '—'}
                                   </p>
                                 </div>
                               </div>
                             );
-                          },
+                          }
                         )}
                       </div>
                     </Card>
@@ -414,12 +413,12 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                 ))}
 
                 {filteredSubmissions.length > 10 && (
-                  <div className="text-center pt-4 border-t border-border">
-                    <p className="text-sm text-muted-foreground mb-3">
+                  <div className="border-border border-t pt-4 text-center">
+                    <p className="mb-3 text-muted-foreground text-sm">
                       Showing 10 of {filteredSubmissions.length} submissions
                     </p>
-                    <Button variant="outline" size="sm" className="gap-2">
-                      <Eye className="w-4 h-4" />
+                    <Button className="gap-2" size="sm" variant="outline">
+                      <Eye className="h-4 w-4" />
                       View All Submissions
                     </Button>
                   </div>
@@ -427,19 +426,19 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
               </div>
             </TabsContent>
 
-            <TabsContent value="table" activeValue={activeView}>
+            <TabsContent activeValue={activeView} value="table">
               <div className="-mx-6 p-4">
                 <DataTable
-                  data={filteredSubmissions}
+                  bordered
                   columns={tableColumns}
+                  data={filteredSubmissions}
+                  hoverable
+                  itemsPerPage={10}
                   searchable
                   searchPlaceholder="Search submissions..."
-                  itemsPerPage={10}
                   showPagination
-                  hoverable
-                  bordered
-                  variant="bordered"
                   size="default"
+                  variant="bordered"
                 />
               </div>
             </TabsContent>

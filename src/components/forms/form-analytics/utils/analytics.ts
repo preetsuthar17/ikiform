@@ -1,22 +1,22 @@
 // Type imports
-import type { Form, FormSubmission } from "@/lib/database";
+import type { Form, FormSubmission } from '@/lib/database';
 import type {
-  FieldAnalytics,
   ConversionFunnelStep,
+  FieldAnalytics,
   FilterState,
-} from "../types";
+} from '../types';
 
 // Utility functions
 export const generateSessionId = () =>
   `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
 export const formatDate = (dateString: string) =>
-  new Date(dateString).toLocaleString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
+  new Date(dateString).toLocaleString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
   });
 
 export const getFieldLabel = (form: Form, fieldId: string) => {
@@ -35,18 +35,18 @@ export const getTotalFields = (form: Form) => {
   const fieldsFromBlocks =
     form.schema.blocks?.reduce(
       (total, block) => total + (block.fields?.length || 0),
-      0,
+      0
     ) || 0;
   return Math.max(fieldsFromDirectArray, fieldsFromBlocks);
 };
 
 export const getSubmissionCompletionRate = (
   submission: FormSubmission,
-  totalFields: number,
+  totalFields: number
 ) => {
   if (totalFields === 0) return 0;
   const filledFields = Object.values(submission.submission_data).filter(
-    (val) => val !== "" && val !== null && val !== undefined,
+    (val) => val !== '' && val !== null && val !== undefined
   ).length;
   return (filledFields / totalFields) * 100;
 };
@@ -55,7 +55,7 @@ export const filterSubmissions = (
   submissions: FormSubmission[],
   searchTerm: string,
   filterState: FilterState,
-  totalFields: number,
+  totalFields: number
 ) => {
   return submissions.filter((submission) => {
     if (searchTerm) {
@@ -67,38 +67,38 @@ export const filterSubmissions = (
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    if (filterState.timeRange !== "all") {
+    if (filterState.timeRange !== 'all') {
       const startDate = new Date();
       startDate.setHours(0, 0, 0, 0);
 
       switch (filterState.timeRange) {
-        case "today":
+        case 'today':
           if (submissionDate < today) return false;
           break;
-        case "week":
+        case 'week':
           startDate.setDate(startDate.getDate() - 7);
           if (submissionDate < startDate) return false;
           break;
-        case "month":
+        case 'month':
           startDate.setMonth(startDate.getMonth() - 1);
           if (submissionDate < startDate) return false;
           break;
       }
     }
 
-    if (filterState.completionRate !== "all") {
+    if (filterState.completionRate !== 'all') {
       const completionRate = getSubmissionCompletionRate(
         submission,
-        totalFields,
+        totalFields
       );
       switch (filterState.completionRate) {
-        case "complete":
+        case 'complete':
           if (completionRate < 100) return false;
           break;
-        case "partial":
+        case 'partial':
           if (completionRate < 1 || completionRate === 100) return false;
           break;
-        case "empty":
+        case 'empty':
           if (completionRate > 0) return false;
           break;
       }
@@ -110,7 +110,7 @@ export const filterSubmissions = (
 
 export const calculateFieldAnalytics = (
   form: Form,
-  submissions: FormSubmission[],
+  submissions: FormSubmission[]
 ): Record<string, FieldAnalytics> => {
   const analytics: Record<string, FieldAnalytics> = {};
   const allPossibleFields = [
@@ -121,21 +121,21 @@ export const calculateFieldAnalytics = (
   allPossibleFields.forEach((field) => {
     const responses = submissions
       .map((sub) => sub.submission_data[field.id])
-      .filter((val) => val !== "" && val !== null && val !== undefined);
+      .filter((val) => val !== '' && val !== null && val !== undefined);
 
     const valueFrequency: Record<string, number> = {};
     let totalLength = 0;
 
     responses.forEach((response) => {
       const stringValue = Array.isArray(response)
-        ? response.join(", ")
+        ? response.join(', ')
         : String(response);
       valueFrequency[stringValue] = (valueFrequency[stringValue] || 0) + 1;
       totalLength += stringValue.length;
     });
 
     const mostCommon = Object.entries(valueFrequency).sort(
-      ([, a], [, b]) => b - a,
+      ([, a], [, b]) => b - a
     )[0];
 
     analytics[field.id] = {
@@ -156,7 +156,7 @@ export const calculateFieldAnalytics = (
 };
 
 export const calculateSubmissionTrends = (
-  submissions: FormSubmission[],
+  submissions: FormSubmission[]
 ): Record<string, number> => {
   const trends: Record<string, number> = {};
   const last7Days = new Date();
@@ -183,7 +183,7 @@ export const calculateSubmissionTrends = (
 };
 
 export const calculateHourlySubmissions = (
-  submissions: FormSubmission[],
+  submissions: FormSubmission[]
 ): Record<number, number> => {
   const hours: Record<number, number> = {};
 
@@ -204,7 +204,7 @@ export const calculateBounceRate = (submissions: FormSubmission[]): number => {
 
   const bouncedSubmissions = submissions.filter((sub) => {
     const filledFields = Object.values(sub.submission_data).filter(
-      (val) => val !== "" && val !== null && val !== undefined,
+      (val) => val !== '' && val !== null && val !== undefined
     ).length;
     return filledFields <= 1;
   });
@@ -214,16 +214,16 @@ export const calculateBounceRate = (submissions: FormSubmission[]): number => {
 
 export const calculateConversionFunnel = (
   form: Form,
-  submissions: FormSubmission[],
+  submissions: FormSubmission[]
 ): ConversionFunnelStep[] | null => {
-  if (!form.schema.settings?.multiStep || !form.schema.blocks) return null;
+  if (!(form.schema.settings?.multiStep && form.schema.blocks)) return null;
 
   const funnel = form.schema.blocks.map((block) => {
     const blockFieldIds = block.fields?.map((f) => f.id) || [];
     const completedCount = submissions.filter((sub) => {
       return blockFieldIds.some((fieldId) => {
         const value = sub.submission_data[fieldId];
-        return value !== "" && value !== null && value !== undefined;
+        return value !== '' && value !== null && value !== undefined;
       });
     }).length;
 
@@ -235,7 +235,7 @@ export const calculateConversionFunnel = (
           ? Math.round((completedCount / submissions.length) * 100)
           : 0,
     };
-    ` 12q `;
+    (' 12q ');
   });
 
   return funnel;
@@ -243,7 +243,7 @@ export const calculateConversionFunnel = (
 
 export const getActiveFilters = (
   searchTerm: string,
-  filterState: FilterState,
+  filterState: FilterState
 ): string[] => {
   const filters: string[] = [];
 
@@ -251,20 +251,20 @@ export const getActiveFilters = (
     filters.push(`Search: "${searchTerm}"`);
   }
 
-  if (filterState.timeRange !== "all") {
+  if (filterState.timeRange !== 'all') {
     const ranges = {
-      today: "Today",
-      week: "Last 7 Days",
-      month: "Last 30 Days",
+      today: 'Today',
+      week: 'Last 7 Days',
+      month: 'Last 30 Days',
     };
     filters.push(`Time: ${ranges[filterState.timeRange]}`);
   }
 
-  if (filterState.completionRate !== "all") {
+  if (filterState.completionRate !== 'all') {
     const rates = {
-      complete: "Complete",
-      partial: "Partial",
-      empty: "Empty",
+      complete: 'Complete',
+      partial: 'Partial',
+      empty: 'Empty',
     };
     filters.push(`Completion: ${rates[filterState.completionRate]}`);
   }

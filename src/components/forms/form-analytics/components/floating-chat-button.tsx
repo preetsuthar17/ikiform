@@ -1,13 +1,11 @@
-import React from "react";
-
-// UI Components
-import { Button } from "@/components/ui/button";
-
 // Next.js Components
-import Image from "next/image";
+import Image from 'next/image';
+import type React from 'react';
+// UI Components
+import { Button } from '@/components/ui/button';
 
 // Types
-import type { FloatingChatButtonProps } from "../types";
+import type { FloatingChatButtonProps } from '../types';
 
 export const FloatingChatButton: React.FC<FloatingChatButtonProps> = ({
   onClick,
@@ -17,18 +15,18 @@ export const FloatingChatButton: React.FC<FloatingChatButtonProps> = ({
   return (
     <div className="cursor-pointer">
       <Button
+        className="fixed right-5 bottom-5 z-50 flex h-14 w-14 cursor-pointer items-center justify-center rounded-ele border border-border bg-transparent shadow-xl transition-all duration-200 hover:bg-transparent"
         onClick={onClick}
-        className="fixed bottom-5 right-5 h-14 w-14 rounded-ele flex items-center justify-center transition-all duration-200 z-50 border border-border bg-transparent shadow-xl cursor-pointer hover:bg-transparent"
         size="icon"
       >
         <Image
-          src="/logo.svg"
           alt="Ikiform"
-          width={100}
-          height={100}
-          className={`pointer-events-none rounded-ele cursor-pointer ${
-            mounted && theme === "light" ? "invert" : ""
+          className={`pointer-events-none cursor-pointer rounded-ele ${
+            mounted && theme === 'light' ? 'invert' : ''
           }`}
+          height={100}
+          src="/logo.svg"
+          width={100}
         />
       </Button>
     </div>

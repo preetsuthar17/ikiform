@@ -1,17 +1,15 @@
 // Components
-import { Card } from "@/components/ui/card";
-import { BlockHeader } from "./BlockHeader";
-import { BlockEditForm } from "./BlockEditForm";
-import { BlockFieldsList } from "./BlockFieldsList";
 
 // Libraries
-import { Draggable } from "@hello-pangea/dnd";
-
+import { Draggable } from '@hello-pangea/dnd';
 // Icons
-import { GripVertical } from "lucide-react";
-
+import { GripVertical } from 'lucide-react';
+import { Card } from '@/components/ui/card';
 // Types
-import type { BlockItemProps } from "../types";
+import type { BlockItemProps } from '../types';
+import { BlockEditForm } from './BlockEditForm';
+import { BlockFieldsList } from './BlockFieldsList';
+import { BlockHeader } from './BlockHeader';
 
 interface DraggableBlockItemProps extends BlockItemProps {
   editTitle: string;
@@ -44,45 +42,45 @@ export function BlockItem({
   onCancelEdit,
 }: DraggableBlockItemProps) {
   return (
-    <Draggable key={block.id} draggableId={block.id} index={index}>
+    <Draggable draggableId={block.id} index={index} key={block.id}>
       {(provided) => (
         <Card
           ref={provided.innerRef}
           {...provided.draggableProps}
-          className={`transition-all duration-200 flex flex-col gap-3 ${
-            isSelected ? "border border-primary/40" : ""
+          className={`flex flex-col gap-3 transition-all duration-200 ${
+            isSelected ? 'border border-primary/40' : ''
           }`}
         >
           <div className="flex items-center gap-3">
             <div
               {...provided.dragHandleProps}
-              className="text-muted-foreground hover:text-foreground cursor-grab"
+              className="cursor-grab text-muted-foreground hover:text-foreground"
             >
-              <GripVertical className="w-4 h-4" />
+              <GripVertical className="h-4 w-4" />
             </div>
 
             {isEditing ? (
               <BlockEditForm
-                title={editTitle}
                 description={editDescription}
-                onTitleChange={onTitleChange}
+                onCancel={onCancelEdit}
                 onDescriptionChange={onDescriptionChange}
                 onSave={onSaveEdit}
-                onCancel={onCancelEdit}
+                onTitleChange={onTitleChange}
+                title={editTitle}
               />
             ) : (
               <div className="flex-1">
                 <BlockHeader
                   block={block}
+                  canDelete={canDelete}
                   index={index}
-                  isSelected={isSelected}
                   isEditing={isEditing}
+                  isExpanded={isExpanded}
+                  isSelected={isSelected}
+                  onBlockDelete={onBlockDelete}
                   onBlockSelect={onBlockSelect}
                   onStartEditing={onStartEditing}
-                  onBlockDelete={onBlockDelete}
                   onToggleExpansion={onToggleExpansion}
-                  isExpanded={isExpanded}
-                  canDelete={canDelete}
                 />
               </div>
             )}
@@ -92,9 +90,9 @@ export function BlockItem({
             <div className="flex flex-col gap-3">
               <BlockFieldsList
                 fields={block.fields}
-                selectedFieldId={selectedFieldId}
-                onFieldSelect={onFieldSelect}
                 onFieldDelete={onFieldDelete}
+                onFieldSelect={onFieldSelect}
+                selectedFieldId={selectedFieldId}
               />
             </div>
           )}

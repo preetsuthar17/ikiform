@@ -1,15 +1,14 @@
 // Components
-export { FieldPalette } from "./FieldPalette";
-
-// Types
-export type { FieldPaletteProps, FieldTypeConfig } from "./types";
 
 // Constants
-export { FIELD_TYPES } from "./constants";
+export { FIELD_TYPES } from './constants';
+export { FieldPalette } from './FieldPalette';
+// Types
+export type { FieldPaletteProps, FieldTypeConfig } from './types';
 
 // Utilities
 export {
-  getFieldTypeConfig,
   getAllFieldTypes,
+  getFieldTypeConfig,
   getFieldTypesByCategory,
-} from "./utils";
+} from './utils';

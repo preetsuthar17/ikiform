@@ -1,37 +1,35 @@
-import React, { useState } from "react";
-import toast from "react-hot-toast";
-
+// Icons
+import { Check, Copy, Download } from 'lucide-react';
+import type React from 'react';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { OptimizedImage } from '@/components/other/optimized-image';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 // UI Components
 import {
   Modal,
+  ModalClose,
   ModalContent,
   ModalHeader,
   ModalTitle,
-  ModalClose,
-} from "@/components/ui/modal";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/modal';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-
-// Icons
-import { Download, Copy, Check } from "lucide-react";
-
+} from '@/components/ui/tooltip';
+import type { Form } from '@/lib/database';
 // Types
-import type { SubmissionDetailsModalProps } from "../types";
-import type { Form } from "@/lib/database";
-import { OptimizedImage } from "@/components/other/optimized-image";
+import type { SubmissionDetailsModalProps } from '../types';
 
 function getFieldType(
   form: Form | undefined,
-  fieldId: string,
+  fieldId: string
 ): string | undefined {
-  if (!form || !form.schema) return undefined;
+  if (!(form && form.schema)) return;
   const allFields = [
     ...(form.schema.fields || []),
     ...(form.schema.blocks?.flatMap((block) => block.fields || []) || []),
@@ -58,36 +56,36 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
         .map(
           ([key, value]) =>
             `${getFieldLabel(key)}: ${
-              typeof value === "object"
+              typeof value === 'object'
                 ? JSON.stringify(value, null, 2)
                 : String(value)
-            }`,
+            }`
         )
-        .join("\n\n");
+        .join('\n\n');
 
       await navigator.clipboard.writeText(submissionText);
-      toast.success("Submission data copied to clipboard");
+      toast.success('Submission data copied to clipboard');
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
-      console.error("Failed to copy submission data:", error);
+      console.error('Failed to copy submission data:', error);
     }
   };
 
   return (
-    <Modal open={isOpen} onOpenChange={onClose}>
+    <Modal onOpenChange={onClose} open={isOpen}>
       <ModalContent className="max-w-3xl">
-        <ModalHeader className="border-b border-border flex items-left gap-4">
+        <ModalHeader className="items-left flex gap-4 border-border border-b">
           <ModalTitle>Submission Details</ModalTitle>
           <ModalClose onClick={onClose} />
         </ModalHeader>
         <div className="flex flex-col gap-4 p-2 md:p-4">
-          <div className="flex items-center justify-between flex-wrap gap-3">
-            <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <Badge variant="outline">
                 {formatDate(submission.submitted_at)}
               </Badge>
-              <Badge variant="secondary" className="text-xs">
+              <Badge className="text-xs" variant="secondary">
                 ID: {submission.id.slice(-8)}
               </Badge>
             </div>
@@ -98,14 +96,14 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
-                      variant="secondary"
-                      size="icon"
                       onClick={handleCopySubmissionData}
+                      size="icon"
+                      variant="secondary"
                     >
                       {copied ? (
-                        <Check className="w-4 h-4" />
+                        <Check className="h-4 w-4" />
                       ) : (
-                        <Copy className="w-4 h-4" />
+                        <Copy className="h-4 w-4" />
                       )}
                     </Button>
                   </TooltipTrigger>
@@ -120,11 +118,11 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Button
-                        variant="secondary"
-                        size="icon"
                         onClick={() => onExport(submission)}
+                        size="icon"
+                        variant="secondary"
                       >
-                        <Download className="w-4 h-4" />
+                        <Download className="h-4 w-4" />
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent size="sm">Export submission</TooltipContent>
@@ -140,24 +138,24 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                   const fieldType = getFieldType(form, key);
                   // Signature field as image
                   if (
-                    fieldType === "signature" &&
-                    typeof value === "string" &&
-                    value.startsWith("data:image")
+                    fieldType === 'signature' &&
+                    typeof value === 'string' &&
+                    value.startsWith('data:image')
                   ) {
                     return (
                       <div
+                        className="flex flex-col gap-2 border-border border-b py-4 last:border-0"
                         key={key}
-                        className="flex flex-col gap-2 py-4 border-b border-border last:border-0"
                       >
-                        <h3 className="text-sm font-medium">
+                        <h3 className="font-medium text-sm">
                           {getFieldLabel(key)}
                         </h3>
-                        <div className=" ml-2 pl-3 border-l max-w-xs">
+                        <div className=" ml-2 max-w-xs border-l pl-3">
                           <OptimizedImage
-                            src={`${value}`}
                             alt="Signature"
-                            className="h-auto w-full max-w-full border rounded-ele"
+                            className="h-auto w-full max-w-full rounded-ele border"
                             height={50}
+                            src={`${value}`}
                             width={500}
                           />
                         </div>
@@ -166,34 +164,34 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                   }
                   // Social field as labeled links
                   if (
-                    fieldType === "social" &&
-                    typeof value === "object" &&
+                    fieldType === 'social' &&
+                    typeof value === 'object' &&
                     value !== null &&
                     form
                   ) {
                     const allFields = [
                       ...(form.schema.fields || []),
                       ...(form.schema.blocks?.flatMap(
-                        (block) => block.fields || [],
+                        (block) => block.fields || []
                       ) || []),
                     ];
                     const field = allFields.find((f) => f.id === key);
                     const customLinks = field?.settings?.customLinks || [];
                     return (
                       <div
+                        className="flex flex-col gap-2 border-border border-b py-4 last:border-0"
                         key={key}
-                        className="flex flex-col gap-2 py-4 border-b border-border last:border-0"
                       >
-                        <h3 className="text-sm font-medium">
+                        <h3 className="font-medium text-sm">
                           {getFieldLabel(key)}
                         </h3>
-                        <div className="flex flex-col gap-1 ml-2 pl-3 border-l">
+                        <div className="ml-2 flex flex-col gap-1 border-l pl-3">
                           {Object.entries(value).map(([k, url]) => {
                             let label = k;
-                            if (k.startsWith("custom_")) {
-                              const idx = parseInt(
-                                k.replace("custom_", ""),
-                                10,
+                            if (k.startsWith('custom_')) {
+                              const idx = Number.parseInt(
+                                k.replace('custom_', ''),
+                                10
                               );
                               label =
                                 customLinks[idx]?.label ||
@@ -202,16 +200,16 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                               label = k.charAt(0).toUpperCase() + k.slice(1);
                             }
                             return (
-                              <div className="flex gap-2 text-sm flex-wrap">
+                              <div className="flex flex-wrap gap-2 text-sm">
                                 {label}:
                                 <a
-                                  key={k}
-                                  href={`${url}`}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
                                   className="text-primary underline"
+                                  href={`${url}`}
+                                  key={k}
+                                  rel="noopener noreferrer"
+                                  target="_blank"
                                 >
-                                  {typeof url === "string" ? url : ""}
+                                  {typeof url === 'string' ? url : ''}
                                 </a>
                               </div>
                             );
@@ -221,46 +219,46 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                     );
                   }
                   // File upload field as links/previews
-                  if (fieldType === "file" && value) {
+                  if (fieldType === 'file' && value) {
                     const urls = Array.isArray(value) ? value : [value];
                     return (
                       <div
+                        className="flex flex-col gap-2 border-border border-b py-4 last:border-0"
                         key={key}
-                        className="flex flex-col gap-2 py-4 border-b border-border last:border-0"
                       >
-                        <h3 className="text-sm font-medium">
+                        <h3 className="font-medium text-sm">
                           {getFieldLabel(key)}
                         </h3>
-                        <div className="flex flex-col gap-2 ml-2 pl-3 border-l">
+                        <div className="ml-2 flex flex-col gap-2 border-l pl-3">
                           {urls.map((url, idx) =>
-                            url && typeof url === "string" ? (
+                            url && typeof url === 'string' ? (
                               url.match(
-                                /^https?:.*\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i,
+                                /^https?:.*\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i
                               ) ? (
                                 <a
-                                  key={idx}
                                   href={url}
-                                  target="_blank"
+                                  key={idx}
                                   rel="noopener noreferrer"
+                                  target="_blank"
                                 >
                                   <img
-                                    src={url}
                                     alt="Uploaded file"
-                                    className="h-24 max-w-xs border rounded-ele"
+                                    className="h-24 max-w-xs rounded-ele border"
+                                    src={url}
                                   />
                                 </a>
                               ) : (
                                 <a
-                                  key={idx}
-                                  href={url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
                                   className="text-primary underline"
+                                  href={url}
+                                  key={idx}
+                                  rel="noopener noreferrer"
+                                  target="_blank"
                                 >
                                   {url}
                                 </a>
                               )
-                            ) : null,
+                            ) : null
                           )}
                         </div>
                       </div>
@@ -269,20 +267,20 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                   // Default rendering
                   return (
                     <div
+                      className="flex flex-col gap-2 border-border border-b pb-8 last:border-0"
                       key={key}
-                      className="flex flex-col gap-2 pb-8 border-b border-border last:border-0"
                     >
-                      <h3 className="text-sm font-medium">
+                      <h3 className="font-medium text-sm">
                         {getFieldLabel(key)}
                       </h3>
-                      <p className="text-sm text-muted-foreground whitespace-pre-wrap ml-2 pl-3 border-l">
-                        {typeof value === "object"
+                      <p className="ml-2 whitespace-pre-wrap border-l pl-3 text-muted-foreground text-sm">
+                        {typeof value === 'object'
                           ? JSON.stringify(value, null, 2)
                           : String(value)}
                       </p>
                     </div>
                   );
-                },
+                }
               )}
             </div>
           </ScrollArea>

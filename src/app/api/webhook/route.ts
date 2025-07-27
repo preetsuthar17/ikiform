@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
-import { createWebhook, getWebhooks } from "@/lib/webhooks/outbound";
+import { type NextRequest, NextResponse } from 'next/server';
+import { createWebhook, getWebhooks } from '@/lib/webhooks/outbound';
 
 // --- Outbound Webhook Management API ---
 
@@ -7,14 +7,14 @@ import { createWebhook, getWebhooks } from "@/lib/webhooks/outbound";
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const formId = searchParams.get("formId") || undefined;
-    const accountId = searchParams.get("accountId") || undefined;
+    const formId = searchParams.get('formId') || undefined;
+    const accountId = searchParams.get('accountId') || undefined;
     const webhooks = await getWebhooks({ formId, accountId });
     return NextResponse.json(webhooks);
   } catch (error: any) {
     return NextResponse.json(
-      { error: error.message || "Failed to list webhooks" },
-      { status: 400 },
+      { error: error.message || 'Failed to list webhooks' },
+      { status: 400 }
     );
   }
 }
@@ -28,8 +28,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(webhook, { status: 201 });
   } catch (error: any) {
     return NextResponse.json(
-      { error: error.message || "Failed to create webhook" },
-      { status: 400 },
+      { error: error.message || 'Failed to create webhook' },
+      { status: 400 }
     );
   }
 }

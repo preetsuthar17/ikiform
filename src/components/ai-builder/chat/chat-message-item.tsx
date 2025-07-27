@@ -1,13 +1,13 @@
 // Animation imports
-import { motion } from "motion/react";
-import { memo, useMemo } from "react";
+import { motion } from 'motion/react';
+import { memo, useMemo } from 'react';
 
 // UI components imports
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 // Local imports
-import { ChatMessage } from "@/lib/ai-builder/types";
-import { ExpandableJsonBlock } from "./expandable-json-block";
+import type { ChatMessage } from '@/lib/ai-builder/types';
+import { ExpandableJsonBlock } from './expandable-json-block';
 
 interface ChatMessageItemProps {
   message: ChatMessage;
@@ -19,54 +19,54 @@ export const ChatMessageItem = memo(function ChatMessageItem({
   index,
 }: ChatMessageItemProps) {
   const contentLines = useMemo(() => {
-    if (message.role === "user") {
-      return message.content.split("\n");
+    if (message.role === 'user') {
+      return message.content.split('\n');
     }
     return null;
   }, [message.content, message.role]);
 
   return (
     <motion.div
-      key={index}
-      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
       className={`flex gap-3 ${
-        message.role === "user" ? "justify-end" : "justify-start"
+        message.role === 'user' ? 'justify-end' : 'justify-start'
       }`}
+      exit={{ opacity: 0, y: -20 }}
+      initial={{ opacity: 0, y: 20 }}
+      key={index}
     >
       <Card
         className={`max-w-[90%] p-2 ${
-          message.role === "user"
-            ? "bg-primary text-primary-foreground"
-            : "bg-muted/50"
+          message.role === 'user'
+            ? 'bg-primary text-primary-foreground'
+            : 'bg-muted/50'
         }`}
       >
-        {message.role === "assistant" && (
+        {message.role === 'assistant' && (
           <CardHeader className="p-2">
             <div className="flex items-center gap-1">
-              <div className="w-2 h-2 bg-muted-foreground rounded-card"></div>
-              <p className="text-xs font-medium">Kiko</p>
+              <div className="h-2 w-2 rounded-card bg-muted-foreground" />
+              <p className="font-medium text-xs">Kiko</p>
             </div>
           </CardHeader>
         )}
         <CardContent className="p-1">
           <div className="flex flex-col gap-2">
             <div className="prose prose-sm max-w-none">
-              {message.role === "user" && contentLines && (
+              {message.role === 'user' && contentLines && (
                 <div>
                   {contentLines.map((line: string, i: number) => (
-                    <p key={i} className="text-sm">
+                    <p className="text-sm" key={i}>
                       {line}
                     </p>
                   ))}
                 </div>
               )}
-              {message.role === "assistant" && message.schema && (
+              {message.role === 'assistant' && message.schema && (
                 <ExpandableJsonBlock schema={message.schema} />
               )}
-              {message.role === "assistant" && !message.schema && (
-                <div className="text-sm whitespace-pre-wrap break-words">
+              {message.role === 'assistant' && !message.schema && (
+                <div className="whitespace-pre-wrap break-words text-sm">
                   {message.content}
                 </div>
               )}

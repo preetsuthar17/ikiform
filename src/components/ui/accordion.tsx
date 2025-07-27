@@ -1,81 +1,81 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
-import { ChevronDown } from "lucide-react";
+import * as AccordionPrimitive from '@radix-ui/react-accordion';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { ChevronDown } from 'lucide-react';
+import * as React from 'react';
+import { cn } from '@/lib/utils';
 
-const accordionVariants = cva("w-full ", {
+const accordionVariants = cva('w-full ', {
   variants: {
     variant: {
-      default: "border border-border rounded-card overflow-hidden shadow-sm/2",
-      ghost: "",
-      outline: "border border-border rounded-card shadow-sm/2",
+      default: 'overflow-hidden rounded-card border border-border shadow-sm/2',
+      ghost: '',
+      outline: 'rounded-card border border-border shadow-sm/2',
     },
     size: {
-      sm: "text-sm max-w-lg",
-      default: "",
-      lg: "text-lg max-w-4xl",
+      sm: 'max-w-lg text-sm',
+      default: '',
+      lg: 'max-w-4xl text-lg',
     },
   },
   defaultVariants: {
-    variant: "default",
-    size: "default",
+    variant: 'default',
+    size: 'default',
   },
 });
 
-const accordionItemVariants = cva("border-b border-border last:border-b-0", {
+const accordionItemVariants = cva('border-border border-b last:border-b-0', {
   variants: {
     variant: {
-      default: "",
-      ghost: "border-b border-border last:border-b-0 mb-2 last:mb-0",
-      outline: "",
+      default: '',
+      ghost: 'mb-2 border-border border-b last:mb-0 last:border-b-0',
+      outline: '',
     },
   },
   defaultVariants: {
-    variant: "default",
+    variant: 'default',
   },
 });
 
 const accordionTriggerVariants = cva(
-  "flex flex-1 items-center justify-between py-4 px-6 text-left font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 group",
+  'group flex flex-1 items-center justify-between px-6 py-4 text-left font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        default: "",
-        ghost: "px-0",
-        outline: "",
+        default: '',
+        ghost: 'px-0',
+        outline: '',
       },
       size: {
-        sm: "py-3 px-4 text-sm",
-        default: "py-4 px-6",
-        lg: "py-5 px-6 text-lg",
+        sm: 'px-4 py-3 text-sm',
+        default: 'px-6 py-4',
+        lg: 'px-6 py-5 text-lg',
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: 'default',
+      size: 'default',
     },
-  },
+  }
 );
 
-const accordionContentVariants = cva("px-6 pb-4 pt-0 text-muted-foreground", {
+const accordionContentVariants = cva('px-6 pt-0 pb-4 text-muted-foreground', {
   variants: {
     variant: {
-      default: "",
-      ghost: "px-0",
-      outline: "",
+      default: '',
+      ghost: 'px-0',
+      outline: '',
     },
     size: {
-      sm: "px-4 pb-3 text-sm",
-      default: "px-6 pb-4",
-      lg: "px-6 pb-5",
+      sm: 'px-4 pb-3 text-sm',
+      default: 'px-6 pb-4',
+      lg: 'px-6 pb-5',
     },
   },
   defaultVariants: {
-    variant: "default",
-    size: "default",
+    variant: 'default',
+    size: 'default',
   },
 });
 
@@ -86,7 +86,7 @@ export interface AccordionProps extends VariantProps<typeof accordionVariants> {
 
 // Single accordion props
 export interface AccordionSingleProps extends AccordionProps {
-  type: "single";
+  type: 'single';
   collapsible?: boolean;
   defaultValue?: string;
   value?: string;
@@ -95,7 +95,7 @@ export interface AccordionSingleProps extends AccordionProps {
 
 // Multiple accordion props
 export interface AccordionMultipleProps extends AccordionProps {
-  type: "multiple";
+  type: 'multiple';
   defaultValue?: string[];
   value?: string[];
   onValueChange?: (value: string[]) => void;
@@ -133,28 +133,28 @@ const Accordion = React.forwardRef<
   AccordionCombinedProps
 >(({ className, variant, size, children, ...props }, ref) => (
   <AccordionPrimitive.Root
-    ref={ref}
     className={cn(accordionVariants({ variant, size }), className)}
+    ref={ref}
     {...props}
   >
     {children}
   </AccordionPrimitive.Root>
 ));
-Accordion.displayName = "Accordion";
+Accordion.displayName = 'Accordion';
 
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
   AccordionItemProps
 >(({ className, variant, children, ...props }, ref) => (
   <AccordionPrimitive.Item
-    ref={ref}
     className={cn(accordionItemVariants({ variant }), className)}
+    ref={ref}
     {...props}
   >
     {children}
   </AccordionPrimitive.Item>
 ));
-AccordionItem.displayName = "AccordionItem";
+AccordionItem.displayName = 'AccordionItem';
 
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
@@ -162,17 +162,17 @@ const AccordionTrigger = React.forwardRef<
 >(
   (
     { className, children, variant, size, icon, hideChevron = false, ...props },
-    ref,
+    ref
   ) => (
     <AccordionPrimitive.Header className="flex">
       <AccordionPrimitive.Trigger
-        ref={ref}
         className={cn(accordionTriggerVariants({ variant, size }), className)}
+        ref={ref}
         {...props}
       >
         <div className="flex items-center gap-2">
           {icon && <span className="shrink-0">{icon}</span>}
-          <span className="text-left group-hover:underline transition-all duration-200">
+          <span className="text-left transition-all duration-200 group-hover:underline">
             {children}
           </span>
         </div>
@@ -181,7 +181,7 @@ const AccordionTrigger = React.forwardRef<
         )}
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
-  ),
+  )
 );
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
 
@@ -190,8 +190,8 @@ const AccordionContent = React.forwardRef<
   AccordionContentProps
 >(({ className, children, variant, size, ...props }, ref) => (
   <AccordionPrimitive.Content
-    ref={ref}
     className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    ref={ref}
     {...props}
   >
     <div className={cn(accordionContentVariants({ variant, size }), className)}>

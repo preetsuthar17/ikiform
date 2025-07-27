@@ -1,14 +1,12 @@
 // External imports
-import React from "react";
+import React from 'react';
 
 // Component imports
-import { Textarea } from "@/components/ui/textarea";
-
-// Utility imports
-import { getBaseClasses } from "../utils";
-
+import { Textarea } from '@/components/ui/textarea';
 // Type imports
-import type { BaseFieldProps } from "../types";
+import type { BaseFieldProps } from '../types';
+// Utility imports
+import { getBaseClasses } from '../utils';
 
 export function TextareaField({
   field,
@@ -22,14 +20,14 @@ export function TextareaField({
 
   return (
     <Textarea
-      id={field.id}
-      placeholder={field.placeholder}
-      value={value || ""}
-      onChange={(e) => onChange(e.target.value)}
-      rows={field.settings?.rows || 4}
       className={`flex gap-2 ${baseClasses}`}
-      ref={fieldRef}
       disabled={disabled}
+      id={field.id}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder={field.placeholder}
+      ref={fieldRef}
+      rows={field.settings?.rows || 4}
+      value={value || ''}
     />
   );
 }

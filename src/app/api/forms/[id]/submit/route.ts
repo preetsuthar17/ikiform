@@ -1,24 +1,26 @@
-import { NextRequest, NextResponse } from "next/server";
-import { formsDbServer } from "@/lib/database";
-import { checkFormRateLimit } from "@/lib/forms";
-import { headers } from "next/headers";
+import { headers } from 'next/headers';
+import { type NextRequest, NextResponse } from 'next/server';
+import { formsDbServer } from '@/lib/database';
 import {
-  DEFAULT_RATE_LIMIT_SETTINGS,
+  checkFormRateLimit,
   DEFAULT_PROFANITY_FILTER_SETTINGS,
-} from "@/lib/forms";
-import { createProfanityFilter } from "@/lib/validation";
-import { createClient } from "@/utils/supabase/server";
-import { requirePremium } from "@/lib/utils/premium-check";
-import { sendFormNotification } from "@/lib/services";
-import { sanitizeString } from "@/lib/utils/sanitize";
-import { triggerWebhooks } from "@/lib/webhooks/outbound";
-import { formatHumanFriendlyPayload } from "@/lib/webhooks/outbound";
+  DEFAULT_RATE_LIMIT_SETTINGS,
+} from '@/lib/forms';
+import { sendFormNotification } from '@/lib/services';
+import { requirePremium } from '@/lib/utils/premium-check';
+import { sanitizeString } from '@/lib/utils/sanitize';
+import { createProfanityFilter } from '@/lib/validation';
+import {
+  formatHumanFriendlyPayload,
+  triggerWebhooks,
+} from '@/lib/webhooks/outbound';
+import { createClient } from '@/utils/supabase/server';
 
 // Recursively sanitize all string fields in an object
 function sanitizeObjectStrings(obj: any): any {
-  if (typeof obj === "string") return sanitizeString(obj);
+  if (typeof obj === 'string') return sanitizeString(obj);
   if (Array.isArray(obj)) return obj.map(sanitizeObjectStrings);
-  if (obj && typeof obj === "object") {
+  if (obj && typeof obj === 'object') {
     const result: any = {};
     for (const key in obj) {
       result[key] = sanitizeObjectStrings(obj[key]);
@@ -30,7 +32,7 @@ function sanitizeObjectStrings(obj: any): any {
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id: formId } = await params;
@@ -39,16 +41,16 @@ export async function POST(
 
     // Get client IP address for rate limiting
     const headersList = await headers();
-    const forwardedFor = headersList.get("x-forwarded-for");
-    const realIp = headersList.get("x-real-ip");
-    const ipAddress = forwardedFor?.split(",")[0] || realIp || "unknown";
+    const forwardedFor = headersList.get('x-forwarded-for');
+    const realIp = headersList.get('x-real-ip');
+    const ipAddress = forwardedFor?.split(',')[0] || realIp || 'unknown';
 
     // Get the form to check rate limiting settings
     const form = await formsDbServer.getPublicForm(formId);
     if (!form) {
       return NextResponse.json(
-        { error: "Form not found or not published" },
-        { status: 404 },
+        { error: 'Form not found or not published' },
+        { status: 404 }
       );
     }
 
@@ -83,13 +85,13 @@ export async function POST(
       if (!rateLimitResult.success) {
         return NextResponse.json(
           {
-            error: "Rate limit exceeded",
+            error: 'Rate limit exceeded',
             message: rateLimitResult.message,
             limit: rateLimitResult.limit,
             remaining: rateLimitResult.remaining,
             reset: rateLimitResult.reset,
           },
-          { status: 429 },
+          { status: 429 }
         );
       }
     }
@@ -102,12 +104,12 @@ export async function POST(
       if (count >= (responseLimit.maxResponses || 100)) {
         return NextResponse.json(
           {
-            error: "Response limit reached",
+            error: 'Response limit reached',
             message:
               responseLimit.message ||
-              "This form is no longer accepting responses.",
+              'This form is no longer accepting responses.',
           },
-          { status: 403 },
+          { status: 403 }
         );
       }
     }
@@ -123,19 +125,19 @@ export async function POST(
     if (profanityFilterSettings.enabled) {
       const profanityFilter = createProfanityFilter(profanityFilterSettings);
       const filterResult = profanityFilter.filterSubmissionData(
-        filteredSubmissionData,
+        filteredSubmissionData
       );
 
       if (!filterResult.isValid) {
         return NextResponse.json(
           {
-            error: "Content validation failed",
+            error: 'Content validation failed',
             message:
               filterResult.message ||
-              "Your submission contains inappropriate content. Please review and resubmit.",
+              'Your submission contains inappropriate content. Please review and resubmit.',
             violations: filterResult.violations.length,
           },
-          { status: 400 },
+          { status: 400 }
         );
       }
 
@@ -149,22 +151,22 @@ export async function POST(
     const submission = await formsDbServer.submitForm(
       formId,
       filteredSubmissionData,
-      ipAddress,
+      ipAddress
     );
 
     // Trigger outbound webhooks (non-blocking)
     const formatted = await formatHumanFriendlyPayload(
       formId,
-      filteredSubmissionData,
+      filteredSubmissionData
     );
     try {
-      await triggerWebhooks("form_submitted", {
+      await triggerWebhooks('form_submitted', {
         ...formatted,
         submissionId: submission.id,
         ipAddress,
       });
     } catch (e) {
-      console.error("[Webhook] Delivery error:", e);
+      console.error('[Webhook] Delivery error:', e);
     }
 
     // Send notification if enabled
@@ -172,11 +174,11 @@ export async function POST(
     if (notifications?.enabled && notifications.email) {
       try {
         console.log(
-          "[Notification] Attempting to send notification email",
-          notifications,
+          '[Notification] Attempting to send notification email',
+          notifications
         );
         // Build analytics URL
-        const analyticsUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.ikiform.com"}/dashboard/forms/${formId}/analytics`;
+        const analyticsUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ikiform.com'}/dashboard/forms/${formId}/analytics`;
         await sendFormNotification({
           to: notifications.email,
           subject:
@@ -188,28 +190,28 @@ export async function POST(
           analyticsUrl,
           customLinks: notifications.customLinks || [],
         });
-        console.log("[Notification] Notification email sent successfully");
+        console.log('[Notification] Notification email sent successfully');
       } catch (e) {
         // Log but do not block submission
-        console.error("[Notification] Notification send error:", e);
+        console.error('[Notification] Notification send error:', e);
       }
     } else {
       console.log(
-        "[Notification] Notification not sent. Settings:",
-        notifications,
+        '[Notification] Notification not sent. Settings:',
+        notifications
       );
     }
 
     return NextResponse.json({
       success: true,
       submissionId: submission.id,
-      message: "Form submitted successfully",
+      message: 'Form submitted successfully',
     });
   } catch (error) {
-    console.error("Form submission error:", error);
+    console.error('Form submission error:', error);
     return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 },
+      { error: 'Internal server error' },
+      { status: 500 }
     );
   }
 }

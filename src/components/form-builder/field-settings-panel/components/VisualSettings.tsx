@@ -1,24 +1,23 @@
 // External imports
-import React from "react";
-
-// Component imports
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Card } from "@/components/ui/card";
+import React from 'react';
+import { Card } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
+// Component imports
+import { Textarea } from '@/components/ui/textarea';
 
 // Type imports
-import type { FormField } from "@/lib/database";
+import type { FormField } from '@/lib/database';
 
 interface VisualSettingsProps {
   field: FormField;
-  onUpdateSettings: (updates: Partial<FormField["settings"]>) => void;
+  onUpdateSettings: (updates: Partial<FormField['settings']>) => void;
 }
 
 export function VisualSettings({
@@ -26,39 +25,39 @@ export function VisualSettings({
   onUpdateSettings,
 }: VisualSettingsProps) {
   return (
-    <Card className="p-4 bg-background flex flex-col gap-4 rounded-card">
-      <h3 className="font-medium mb-3 text-card-foreground">Visual Settings</h3>
+    <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
+      <h3 className="mb-3 font-medium text-card-foreground">Visual Settings</h3>
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <Label htmlFor="help-text" className="text-card-foreground">
+          <Label className="text-card-foreground" htmlFor="help-text">
             Help Text
           </Label>
           <Textarea
+            className="border-border bg-input"
             id="help-text"
-            value={field.settings?.helpText || ""}
             onChange={(e) =>
               onUpdateSettings({ helpText: e.target.value || undefined })
             }
             placeholder="Additional help text shown below the field"
-            className="bg-input border-border"
             rows={2}
+            value={field.settings?.helpText || ''}
           />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div className="flex flex-col gap-2">
-            <Label htmlFor="field-size" className="text-card-foreground">
+            <Label className="text-card-foreground" htmlFor="field-size">
               Size
             </Label>
             <Select
-              value={field.settings?.size || "md"}
               onValueChange={(value) =>
                 onUpdateSettings({
-                  size: value as "sm" | "md" | "lg",
+                  size: value as 'sm' | 'md' | 'lg',
                 })
               }
+              value={field.settings?.size || 'md'}
             >
-              <SelectTrigger className="bg-input border-border">
+              <SelectTrigger className="border-border bg-input">
                 <SelectValue placeholder="Select size" />
               </SelectTrigger>
               <SelectContent>
@@ -70,18 +69,18 @@ export function VisualSettings({
           </div>
 
           <div className="flex flex-col gap-2">
-            <Label htmlFor="field-width" className="text-card-foreground">
+            <Label className="text-card-foreground" htmlFor="field-width">
               Width
             </Label>
             <Select
-              value={field.settings?.width || "full"}
               onValueChange={(value) =>
                 onUpdateSettings({
-                  width: value as "full" | "half" | "third" | "quarter",
+                  width: value as 'full' | 'half' | 'third' | 'quarter',
                 })
               }
+              value={field.settings?.width || 'full'}
             >
-              <SelectTrigger className="bg-input border-border">
+              <SelectTrigger className="border-border bg-input">
                 <SelectValue placeholder="Select width" />
               </SelectTrigger>
               <SelectContent>
@@ -95,18 +94,18 @@ export function VisualSettings({
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label htmlFor="field-variant" className="text-card-foreground">
+          <Label className="text-card-foreground" htmlFor="field-variant">
             Variant
           </Label>
           <Select
-            value={field.settings?.variant || "default"}
             onValueChange={(value) =>
               onUpdateSettings({
-                variant: value as "default" | "filled" | "ghost" | "underline",
+                variant: value as 'default' | 'filled' | 'ghost' | 'underline',
               })
             }
+            value={field.settings?.variant || 'default'}
           >
-            <SelectTrigger className="bg-input border-border">
+            <SelectTrigger className="border-border bg-input">
               <SelectValue placeholder="Select variant" />
             </SelectTrigger>
             <SelectContent>

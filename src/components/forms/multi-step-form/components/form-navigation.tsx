@@ -1,13 +1,13 @@
 // Libraries
-import React from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import type React from 'react';
+import { getLivePatternError } from '@/components/form-builder/form-field-renderer/components/TextInputField';
 // UI Components
-import { Button } from "@/components/ui/button";
-import { getLivePatternError } from "@/components/form-builder/form-field-renderer/components/TextInputField";
+import { Button } from '@/components/ui/button';
 
 // Types
-import type { FormSchema } from "@/lib/database";
+import type { FormSchema } from '@/lib/database';
 
 interface FormNavigationProps {
   currentStep: number;
@@ -34,40 +34,40 @@ export const FormNavigation: React.FC<FormNavigationProps> = ({
 
   const hasLivePatternError = currentFields.some(
     (field) =>
-      ["text", "email", "textarea"].includes(field.type) &&
-      getLivePatternError(field, formData[field.id]),
+      ['text', 'email', 'textarea'].includes(field.type) &&
+      getLivePatternError(field, formData[field.id])
   );
 
   return (
     <div className="flex justify-end gap-4">
       <Button
+        className="flex items-center gap-2"
+        disabled={currentStep === 0}
+        onClick={onPrevious}
         type="button"
         variant="outline"
-        onClick={onPrevious}
-        disabled={currentStep === 0}
-        className="flex items-center gap-2"
       >
-        <ChevronLeft className="w-4 h-4" />
+        <ChevronLeft className="h-4 w-4" />
         Previous
       </Button>
 
       <Button
-        type="button"
-        onClick={onNext}
+        className="flex items-center gap-2"
         disabled={submitting || hasLivePatternError}
         loading={submitting}
-        className="flex items-center gap-2"
+        onClick={onNext}
+        type="button"
       >
         {isLastStep ? (
           submitting ? (
-            "Submitting"
+            'Submitting'
           ) : (
-            schema.settings.submitText || "Submit"
+            schema.settings.submitText || 'Submit'
           )
         ) : (
           <>
             Next
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="h-4 w-4" />
           </>
         )}
       </Button>

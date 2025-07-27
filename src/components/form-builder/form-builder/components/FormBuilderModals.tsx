@@ -1,24 +1,24 @@
 // External imports
-import React from "react";
+import type React from 'react';
 
 // Component imports
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Modal,
   ModalContent,
   ModalHeader,
   ModalTitle,
-} from "@/components/ui/modal";
-import { JsonViewModal } from "../../json-view-modal";
-import { FormCreationWizard } from "../../form-creation-wizard";
-import { FormSettingsModal } from "../../form-settings-modal";
-import { ShareFormModal } from "../../share-form-modal";
+} from '@/components/ui/modal';
+import { Textarea } from '@/components/ui/textarea';
+import { FormCreationWizard } from '../../form-creation-wizard';
+import { FormSettingsModal } from '../../form-settings-modal';
+import { JsonViewModal } from '../../json-view-modal';
+import { ShareFormModal } from '../../share-form-modal';
 
 // Type imports
-import type { FormBuilderModalsProps } from "../types";
+import type { FormBuilderModalsProps } from '../types';
 
 export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
   showSettings,
@@ -43,8 +43,8 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
   return (
     <>
       {/* Form Settings Modal */}
-      <Modal open={showSettings} onOpenChange={onCloseSettings}>
-        <ModalContent className="bg-card text-card-foreground flex flex-col gap-6 max-sm:p-4">
+      <Modal onOpenChange={onCloseSettings} open={showSettings}>
+        <ModalContent className="flex flex-col gap-6 bg-card text-card-foreground max-sm:p-4">
           <ModalHeader>
             <ModalTitle>Form Settings</ModalTitle>
           </ModalHeader>
@@ -54,11 +54,11 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
                 <Label htmlFor="form-title">Form Title</Label>
                 <Input
                   id="form-title"
-                  value={formSchema.settings.title}
                   onChange={(e) =>
                     onFormSettingsUpdate({ title: e.target.value })
                   }
                   placeholder="Enter form title"
+                  value={formSchema.settings.title}
                 />
               </div>
 
@@ -66,12 +66,12 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
                 <Label htmlFor="form-description">Description</Label>
                 <Textarea
                   id="form-description"
-                  value={formSchema.settings.description || ""}
                   onChange={(e) =>
                     onFormSettingsUpdate({ description: e.target.value })
                   }
                   placeholder="Enter form description"
                   rows={3}
+                  value={formSchema.settings.description || ''}
                 />
               </div>
 
@@ -79,11 +79,11 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
                 <Label htmlFor="submit-text">Submit Button Text</Label>
                 <Input
                   id="submit-text"
-                  value={formSchema.settings.submitText || "Submit"}
                   onChange={(e) =>
                     onFormSettingsUpdate({ submitText: e.target.value })
                   }
                   placeholder="Submit button text"
+                  value={formSchema.settings.submitText || 'Submit'}
                 />
               </div>
 
@@ -91,12 +91,12 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
                 <Label htmlFor="success-message">Success Message</Label>
                 <Textarea
                   id="success-message"
-                  value={formSchema.settings.successMessage || ""}
                   onChange={(e) =>
                     onFormSettingsUpdate({ successMessage: e.target.value })
                   }
                   placeholder="Message shown after successful submission"
                   rows={2}
+                  value={formSchema.settings.successMessage || ''}
                 />
               </div>
 
@@ -104,17 +104,17 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
                 <Label htmlFor="redirect-url">Redirect URL (optional)</Label>
                 <Input
                   id="redirect-url"
-                  value={formSchema.settings.redirectUrl || ""}
                   onChange={(e) =>
                     onFormSettingsUpdate({ redirectUrl: e.target.value })
                   }
                   placeholder="https://example.com/thank-you"
+                  value={formSchema.settings.redirectUrl || ''}
                 />
               </div>
             </div>
 
             <div className="flex justify-end gap-2">
-              <Button variant="secondary" onClick={onCloseSettings}>
+              <Button onClick={onCloseSettings} variant="secondary">
                 Cancel
               </Button>
               <Button onClick={onCloseSettings}>Save Settings</Button>
@@ -132,27 +132,27 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
 
       {/* JSON View Modal */}
       <JsonViewModal
-        schema={formSchema}
         isOpen={showJsonView}
         onClose={onCloseJsonView}
+        schema={formSchema}
       />
 
       {/* Form Settings Modal */}
       <FormSettingsModal
+        formId={formId}
         isOpen={showFormSettings}
         onClose={onCloseFormSettings}
-        schema={formSchema}
         onSchemaUpdate={onSchemaUpdate}
+        schema={formSchema}
         userEmail={userEmail}
-        formId={formId}
       />
 
       {/* Share Form Modal */}
       <ShareFormModal
-        isOpen={showShareModal}
-        onClose={onCloseShareModal}
         formId={formId ?? null}
+        isOpen={showShareModal}
         isPublished={isPublished}
+        onClose={onCloseShareModal}
         onPublish={onPublish}
       />
     </>

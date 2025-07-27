@@ -1,16 +1,16 @@
-import { Webhooks } from "@polar-sh/nextjs";
-import { createAdminClient } from "@/utils/supabase/admin";
-import { sanitizeString } from "@/lib/utils/sanitize";
+import { Webhooks } from '@polar-sh/nextjs';
+import { sanitizeString } from '@/lib/utils/sanitize';
+import { createAdminClient } from '@/utils/supabase/admin';
 
 export const POST = Webhooks({
   webhookSecret: process.env.POLAR_WEBHOOK_SECRET!,
   onOrderPaid: async (payload) => {
-    console.log("✅ Order paid webhook received successfully");
-    console.log("📦 Order paid payload:", JSON.stringify(payload, null, 2));
+    console.log('✅ Order paid webhook received successfully');
+    console.log('📦 Order paid payload:', JSON.stringify(payload, null, 2));
 
     // Strictly check payment status
-    if (payload.data.status !== "paid" || payload.data.paid !== true) {
-      console.warn("❌ Payment not completed. Skipping premium update.");
+    if (payload.data.status !== 'paid' || payload.data.paid !== true) {
+      console.warn('❌ Payment not completed. Skipping premium update.');
       return;
     }
 
@@ -18,62 +18,62 @@ export const POST = Webhooks({
       const supabase = createAdminClient();
 
       // Get customer email from the payload
-      const customerEmail = sanitizeString(payload.data.customer?.email || "");
+      const customerEmail = sanitizeString(payload.data.customer?.email || '');
       if (!customerEmail) {
-        console.error("❌ No customer email found in payload");
+        console.error('❌ No customer email found in payload');
         return;
       }
 
-      console.log("🔍 Looking for user with email:", customerEmail);
+      console.log('🔍 Looking for user with email:', customerEmail);
 
       // First, find the user by email to get their uid
       const { data: userData, error: lookupError } = await supabase
-        .from("users")
-        .select("uid, email")
-        .eq("email", customerEmail)
+        .from('users')
+        .select('uid, email')
+        .eq('email', customerEmail)
         .single();
 
       if (lookupError || !userData) {
         console.warn(
-          `⚠️ User not found in database with email: ${customerEmail}`,
+          `⚠️ User not found in database with email: ${customerEmail}`
         );
         console.log(
-          "💡 Make sure the user has signed up with this email address",
+          '💡 Make sure the user has signed up with this email address'
         );
         return;
       }
 
-      console.log("🔍 Found user with uid:", userData.uid);
+      console.log('🔍 Found user with uid:', userData.uid);
 
       // Update the user's premium status by uid
       const { data, error } = await supabase
-        .from("users")
+        .from('users')
         .update({ has_premium: true })
-        .eq("uid", userData.uid)
+        .eq('uid', userData.uid)
         .select();
 
       if (error) {
-        console.error("❌ Error updating user premium status:", error);
+        console.error('❌ Error updating user premium status:', error);
         return;
       }
 
       if (data && data.length > 0) {
         console.log(
-          `✅ Successfully updated premium status for user: ${customerEmail} (uid: ${userData.uid})`,
+          `✅ Successfully updated premium status for user: ${customerEmail} (uid: ${userData.uid})`
         );
-        console.log("👤 Updated user data:", data[0]);
+        console.log('👤 Updated user data:', data[0]);
         const { sendPremiumThankYouEmail } = await import(
-          "@/lib/services/notifications"
+          '@/lib/services/notifications'
         );
         await sendPremiumThankYouEmail({
           to: customerEmail,
-          name: sanitizeString(payload.data.customer?.name || "") || undefined,
+          name: sanitizeString(payload.data.customer?.name || '') || undefined,
         });
       } else {
         console.warn(`⚠️ Failed to update user with uid: ${userData.uid}`);
       }
     } catch (error) {
-      console.error("❌ Error processing payment completion:", error);
+      console.error('❌ Error processing payment completion:', error);
     }
   },
 });

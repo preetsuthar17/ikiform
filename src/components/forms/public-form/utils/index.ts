@@ -1,5 +1,5 @@
 export {
   getAllFields,
-  validateSingleStepForm,
   submitSingleStepForm,
-} from "./form-utils";
+  validateSingleStepForm,
+} from './form-utils';

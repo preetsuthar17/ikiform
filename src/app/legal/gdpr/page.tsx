@@ -1,10 +1,10 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function GDPR() {
   return (
-    <article className="max-w-4xl mx-auto px-4 py-10 flex flex-col gap-12 legal">
+    <article className="legal mx-auto flex max-w-4xl flex-col gap-12 px-4 py-10">
       <section className="flex flex-col gap-4">
-        <h1 className="text-4xl font-bold">GDPR Policy</h1>
+        <h1 className="font-bold text-4xl">GDPR Policy</h1>
         <p>
           The General Data Protection Regulation (GDPR) is a privacy law in the
           European Union (EU) that grants EU citizens and residents the right to
@@ -12,12 +12,12 @@ export default function GDPR() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">Is Ikiform GDPR compliant?</h2>
+        <h2 className="font-semibold text-2xl">Is Ikiform GDPR compliant?</h2>
         <p>
           Yes. Ikiform's data centers and servers are located in the EU, and we
           fully comply with the GDPR framework.
         </p>
-        <ul className="list-disc pl-6 flex flex-col gap-1">
+        <ul className="flex list-disc flex-col gap-1 pl-6">
           <li>
             Our Privacy Policy explains what data we collect, how long we retain
             it, how it may be transferred, and your data protection rights.
@@ -37,7 +37,7 @@ export default function GDPR() {
         <p>Please check the Ikiform DPA for more details.</p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">
+        <h2 className="font-semibold text-2xl">
           Do you have a Data Processing Agreement?
         </h2>
         <p>
@@ -48,7 +48,7 @@ export default function GDPR() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">What happens with form data?</h2>
+        <h2 className="font-semibold text-2xl">What happens with form data?</h2>
         <p>
           Ikiform provides the form-building service but does not own the
           responses collected through forms. The form creator is responsible for
@@ -56,7 +56,7 @@ export default function GDPR() {
           information. Ikiform acts as the data processor, storing data on
           behalf of form creators.
         </p>
-        <ul className="list-disc pl-6 flex flex-col gap-1">
+        <ul className="flex list-disc flex-col gap-1 pl-6">
           <li>
             As long as your account remains active, you (the form creator)
             retain full control over the data you collect and how long you
@@ -73,7 +73,7 @@ export default function GDPR() {
         </ul>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">
+        <h2 className="font-semibold text-2xl">
           How Ikiform uses your personal data
         </h2>
         <p>
@@ -81,7 +81,7 @@ export default function GDPR() {
           provide to us in order to use our service (such as registration
           details).
         </p>
-        <ul className="list-disc pl-6 flex flex-col gap-1">
+        <ul className="flex list-disc flex-col gap-1 pl-6">
           <li>
             We do not sell personal data to third parties, nor do we use it for
             marketing or advertising purposes.
@@ -94,7 +94,7 @@ export default function GDPR() {
         </ul>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">Subprocessors</h2>
+        <h2 className="font-semibold text-2xl">Subprocessors</h2>
         <p>
           We use trusted third-party subprocessors to provide and support
           Ikiform services. Here is a list of our main subprocessors, their use,
@@ -115,8 +115,8 @@ export default function GDPR() {
                 <td className="px-4 py-2">Hosting</td>
                 <td className="px-4 py-2">
                   <Link
-                    href="https://vercel.com"
                     className="text-blue-500 underline"
+                    href="https://vercel.com"
                     target="_blank"
                   >
                     vercel.com
@@ -128,8 +128,8 @@ export default function GDPR() {
                 <td className="px-4 py-2">Database, Authentication</td>
                 <td className="px-4 py-2">
                   <Link
-                    href="https://supabase.com"
                     className="text-blue-500 underline"
+                    href="https://supabase.com"
                     target="_blank"
                   >
                     supabase.com
@@ -141,8 +141,8 @@ export default function GDPR() {
                 <td className="px-4 py-2">Redis (Rate Limiting, Caching)</td>
                 <td className="px-4 py-2">
                   <Link
-                    href="https://upstash.com/legal"
                     className="text-blue-500 underline"
+                    href="https://upstash.com/legal"
                     target="_blank"
                   >
                     upstash.com
@@ -154,8 +154,8 @@ export default function GDPR() {
                 <td className="px-4 py-2">Payment Processing</td>
                 <td className="px-4 py-2">
                   <Link
-                    href="https://polar.sh"
                     className="text-blue-500 underline"
+                    href="https://polar.sh"
                     target="_blank"
                   >
                     polar.sh
@@ -169,8 +169,8 @@ export default function GDPR() {
                 </td>
                 <td className="px-4 py-2">
                   <Link
-                    href="https://cohere.com/"
                     className="text-blue-500 underline"
+                    href="https://cohere.com/"
                     target="_blank"
                   >
                     cohere.com
@@ -182,8 +182,8 @@ export default function GDPR() {
                 <td className="px-4 py-2">Email Delivery</td>
                 <td className="px-4 py-2">
                   <Link
-                    href="https://resend.com"
                     className="text-blue-500 underline"
+                    href="https://resend.com"
                     target="_blank"
                   >
                     resend.com
@@ -195,8 +195,8 @@ export default function GDPR() {
                 <td className="px-4 py-2">Customer Support</td>
                 <td className="px-4 py-2">
                   <Link
-                    href="http://crisp.chat/"
                     className="text-blue-500 underline"
+                    href="http://crisp.chat/"
                     target="_blank"
                   >
                     http://crisp.chat/
@@ -208,7 +208,7 @@ export default function GDPR() {
         </div>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">
+        <h2 className="font-semibold text-2xl">
           Contacting Us About Data Privacy
         </h2>
         <p>
@@ -218,10 +218,10 @@ export default function GDPR() {
         <div className="flex flex-col gap-1">
           <div>DPO Name: Preet Suthar</div>
           <div>
-            Email:{" "}
+            Email:{' '}
             <Link
-              href="mailto:hi@ikiform.com"
               className="text-blue-500 underline"
+              href="mailto:hi@ikiform.com"
             >
               hi@ikiform.com
             </Link>
