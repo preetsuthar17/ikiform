@@ -8,7 +8,7 @@ export interface LayoutClasses {
 }
 
 export const getFormLayoutClasses = (schema: FormSchema): LayoutClasses => {
-  const layout = schema.settings.layout;
+  const layout = schema.settings?.layout || {};
 
   // Get max width class
   let maxWidthClass = 'max-w-2xl'; // default

@@ -45,6 +45,66 @@ interface DatePickerProps extends VariantProps<typeof datePickerVariants> {
   formatDate?: (date: Date) => string;
 }
 
+// Helper function to calculate optimal calendar position
+const calculateCalendarPosition = (
+  triggerRect: DOMRect,
+  calendarHeight: number = 350, // Approximate calendar height
+  calendarWidth: number = 280,   // Approximate calendar width
+  margin: number = 8
+) => {
+  const viewport = {
+    width: window.innerWidth,
+    height: window.innerHeight,
+  };
+
+  let top = triggerRect.bottom + margin;
+  let left = triggerRect.left;
+  let placement: 'bottom' | 'top' | 'bottom-start' | 'top-start' | 'bottom-end' | 'top-end' = 'bottom';
+
+  // Check if calendar would go below viewport
+  if (top + calendarHeight > viewport.height) {
+    // Try placing it above
+    const topPlacement = triggerRect.top - calendarHeight - margin;
+    if (topPlacement >= 0) {
+      top = topPlacement;
+      placement = 'top';
+    } else {
+      // If neither above nor below fits, place it at the best available position
+      const spaceBelow = viewport.height - triggerRect.bottom - margin;
+      const spaceAbove = triggerRect.top - margin;
+      
+      if (spaceBelow > spaceAbove) {
+        top = triggerRect.bottom + margin;
+        placement = 'bottom';
+      } else {
+        top = Math.max(margin, triggerRect.top - calendarHeight - margin);
+        placement = 'top';
+      }
+    }
+  }
+
+  // Check horizontal positioning
+  if (left + calendarWidth > viewport.width) {
+    // Try aligning to the right edge of trigger
+    const rightAlignedLeft = triggerRect.right - calendarWidth;
+    if (rightAlignedLeft >= 0) {
+      left = rightAlignedLeft;
+      placement = placement.includes('top') ? 'top-end' : 'bottom-end';
+    } else {
+      // If it still doesn't fit, align to the right edge of viewport
+      left = Math.max(margin, viewport.width - calendarWidth - margin);
+    }
+  }
+
+  // Ensure calendar doesn't go off the left edge
+  if (left < margin) {
+    left = margin;
+    placement = placement.includes('top') ? 'top-start' : 'bottom-start';
+  }
+
+  return { top, left, placement };
+};
+
 export function DatePicker({
   value,
   onChange,
@@ -64,6 +124,7 @@ export function DatePicker({
   const [isOpen, setIsOpen] = React.useState(false);
   const [focusedDate, setFocusedDate] = React.useState(value || new Date());
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const calendarRef = React.useRef<HTMLDivElement>(null);
   const [portalContainer, setPortalContainer] = React.useState<
     Element | DocumentFragment | null
   >(null);
@@ -159,16 +220,47 @@ export function DatePicker({
     top: 0,
     left: 0,
     width: 0,
+    placement: 'bottom' as 'bottom' | 'top' | 'bottom-start' | 'top-start' | 'bottom-end' | 'top-end',
   });
 
   React.useEffect(() => {
     if (isOpen && containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
+      const position = calculateCalendarPosition(rect);
+      
       setCalendarPosition({
-        top: rect.bottom + 8, // 8px margin
-        left: rect.left,
+        top: position.top,
+        left: position.left,
         width: rect.width,
+        placement: position.placement,
       });
+    }
+  }, [isOpen]);
+
+  // Handle window resize and scroll to reposition calendar
+  React.useEffect(() => {
+    const handleReposition = () => {
+      if (isOpen && containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const position = calculateCalendarPosition(rect);
+        
+        setCalendarPosition({
+          top: position.top,
+          left: position.left,
+          width: rect.width,
+          placement: position.placement,
+        });
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener('resize', handleReposition);
+      window.addEventListener('scroll', handleReposition, true);
+      
+      return () => {
+        window.removeEventListener('resize', handleReposition);
+        window.removeEventListener('scroll', handleReposition, true);
+      };
     }
   }, [isOpen]);
 
@@ -176,15 +268,19 @@ export function DatePicker({
     <AnimatePresence>
       {isOpen && (
         <motion.div
+          ref={calendarRef}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          className="z-[9999] mx-auto w-fit rounded-ele"
+          className="z-[9999] mx-auto w-fit rounded-ele shadow-lg"
           data-datepicker-calendar="true"
-          exit={{ opacity: 0, y: -10, scale: 0.95 }}
-          initial={{ opacity: 0, y: -10, scale: 0.95 }}
+          exit={{ opacity: 0, y: calendarPosition.placement.includes('top') ? 10 : -10, scale: 0.95 }}
+          initial={{ opacity: 0, y: calendarPosition.placement.includes('top') ? 10 : -10, scale: 0.95 }}
           style={{
             position: 'fixed',
             top: calendarPosition.top,
             left: calendarPosition.left,
+            transformOrigin: calendarPosition.placement.includes('top') 
+              ? 'bottom center' 
+              : 'top center',
           }}
           transition={{ duration: 0.2 }}
         >
@@ -261,10 +357,12 @@ export function DateRangePicker({
 }: DateRangePickerProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const calendarRef = React.useRef<HTMLDivElement>(null);
   const [calendarPosition, setCalendarPosition] = React.useState({
     top: 0,
     left: 0,
     width: 0,
+    placement: 'bottom' as 'bottom' | 'top' | 'bottom-start' | 'top-start' | 'bottom-end' | 'top-end',
   });
 
   const defaultFormatDate = (date: Date) => {
@@ -306,13 +404,10 @@ export function DateRangePicker({
   // Body scroll lock effect
   React.useEffect(() => {
     if (isOpen && typeof document !== 'undefined') {
-      // Store original overflow
       const originalOverflow = document.body.style.overflow;
-      // Disable scrolling
       document.body.style.overflow = 'hidden';
 
       return () => {
-        // Restore original overflow when component unmounts or closes
         document.body.style.overflow = originalOverflow;
       };
     }
@@ -327,7 +422,6 @@ export function DateRangePicker({
       const isClickInsideContainer =
         containerRef.current && containerRef.current.contains(target);
 
-      // Check if click is inside any calendar popup using the data attribute
       const calendarElement = document.querySelector(
         '[data-datepicker-calendar="true"]'
       );
@@ -361,11 +455,41 @@ export function DateRangePicker({
   React.useEffect(() => {
     if (isOpen && containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
+      const position = calculateCalendarPosition(rect);
+      
       setCalendarPosition({
-        top: rect.bottom + 8, // 8px margin
-        left: rect.left,
+        top: position.top,
+        left: position.left,
         width: rect.width,
+        placement: position.placement,
       });
+    }
+  }, [isOpen]);
+
+  // Handle window resize and scroll to reposition calendar
+  React.useEffect(() => {
+    const handleReposition = () => {
+      if (isOpen && containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const position = calculateCalendarPosition(rect);
+        
+        setCalendarPosition({
+          top: position.top,
+          left: position.left,
+          width: rect.width,
+          placement: position.placement,
+        });
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener('resize', handleReposition);
+      window.addEventListener('scroll', handleReposition, true);
+      
+      return () => {
+        window.removeEventListener('resize', handleReposition);
+        window.removeEventListener('scroll', handleReposition, true);
+      };
     }
   }, [isOpen]);
 
@@ -400,15 +524,19 @@ export function DateRangePicker({
           <AnimatePresence>
             {isOpen && (
               <motion.div
+                ref={calendarRef}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                className="z-[9999] mx-auto w-fit rounded-ele"
+                className="z-[9999] mx-auto w-fit rounded-ele shadow-lg"
                 data-datepicker-calendar="true"
-                exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                exit={{ opacity: 0, y: calendarPosition.placement.includes('top') ? 10 : -10, scale: 0.95 }}
+                initial={{ opacity: 0, y: calendarPosition.placement.includes('top') ? 10 : -10, scale: 0.95 }}
                 style={{
                   position: 'fixed',
                   top: calendarPosition.top,
                   left: calendarPosition.left,
+                  transformOrigin: calendarPosition.placement.includes('top') 
+                    ? 'bottom center' 
+                    : 'top center',
                 }}
                 transition={{ duration: 0.2 }}
               >
