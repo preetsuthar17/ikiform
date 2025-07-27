@@ -146,6 +146,9 @@ importers:
       postgres:
         specifier: ^3.4.7
         version: 3.4.7
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
       qrcode:
         specifier: ^1.5.4
         version: 1.5.4
