@@ -1,5 +1,5 @@
-import { streamText } from 'ai';
 import { createGroq } from '@ai-sdk/groq';
+import { streamText } from 'ai';
 import type { NextRequest } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
 import { formsDbServer } from '@/lib/database';
@@ -114,7 +114,13 @@ async function saveMessageAsync(
   metadata: any
 ) {
   try {
-    await formsDbServer.saveAIBuilderMessage(userId, sessionId, role, content, metadata);
+    await formsDbServer.saveAIBuilderMessage(
+      userId,
+      sessionId,
+      role,
+      content,
+      metadata
+    );
   } catch (error) {
     console.error(`Error saving ${role} message:`, error);
   }
@@ -122,17 +128,17 @@ async function saveMessageAsync(
 
 function getGroqModel() {
   const modelPreference = process.env.GROQ_MODEL || 'fastest';
-  
+
   switch (modelPreference) {
     case 'fastest':
-      return 'llama-3.1-8b-instant'; 
+      return 'llama-3.1-8b-instant';
     case 'balanced':
-      return 'llama-3.1-70b-versatile'; 
+      return 'llama-3.1-70b-versatile';
     case 'quality':
       return 'llama-3.2-90b-text-preview';
     case 'fast':
     default:
-      return 'llama-3.1-8b-instant'; 
+      return 'llama-3.1-8b-instant';
   }
 }
 
@@ -150,7 +156,7 @@ async function streamAIResponse({
   ip: string;
 }) {
   const modelName = getGroqModel();
-  
+
   const stream = await streamText({
     model: groq(modelName),
     messages: [
@@ -180,24 +186,18 @@ async function streamAIResponse({
           // Stream each chunk immediately to show real-time typing
           controller.enqueue(encoder.encode(chunk));
         }
-        
+
         // Save the complete AI response asynchronously (non-blocking)
         if (aiResponse.trim()) {
           // Don't await this - let it run in background
-          saveMessageAsync(
-            user.id,
-            sessionId,
-            'assistant',
-            aiResponse,
-            {
-              timestamp: new Date().toISOString(),
-              model: modelName,
-              temperature: 0.1,
-              provider: 'groq',
-            }
-          );
+          saveMessageAsync(user.id, sessionId, 'assistant', aiResponse, {
+            timestamp: new Date().toISOString(),
+            model: modelName,
+            temperature: 0.1,
+            provider: 'groq',
+          });
         }
-        
+
         controller.close();
       } catch (error) {
         console.error('Groq streaming error:', error);
@@ -218,7 +218,7 @@ async function streamAIResponse({
       'X-Model': modelName,
       // Essential streaming headers
       'Transfer-Encoding': 'chunked',
-      'Connection': 'keep-alive',
+      Connection: 'keep-alive',
     },
   });
 }
@@ -241,7 +241,7 @@ export async function POST(req: NextRequest) {
       }
     );
   }
-  
+
   try {
     const authResult = await authenticateAndCheckPremium(req);
     if ('error' in authResult) return authResult.error;
@@ -264,17 +264,11 @@ export async function POST(req: NextRequest) {
     // Save the user message asynchronously (non-blocking)
     if (lastUserMessage && lastUserMessage.role === 'user') {
       // Don't await this - let it run in background
-      saveMessageAsync(
-        user.id,
-        sid,
-        'user',
-        lastUserMessage.content,
-        {
-          timestamp: new Date().toISOString(),
-          ip,
-          userAgent: req.headers.get('user-agent') || '',
-        }
-      );
+      saveMessageAsync(user.id, sid, 'user', lastUserMessage.content, {
+        timestamp: new Date().toISOString(),
+        ip,
+        userAgent: req.headers.get('user-agent') || '',
+      });
     }
 
     return await streamAIResponse({
@@ -302,7 +296,7 @@ export async function GET() {
       available_models: [
         'llama-3.1-8b-instant (fastest)',
         'llama-3.1-70b-versatile (balanced)',
-        'llama-3.2-90b-text-preview (highest quality)'
+        'llama-3.2-90b-text-preview (highest quality)',
       ],
     }),
     {

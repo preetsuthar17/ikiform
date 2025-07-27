@@ -13,7 +13,10 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(webhooks);
   } catch (error: unknown) {
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Failed to list webhooks' },
+      {
+        error:
+          error instanceof Error ? error.message : 'Failed to list webhooks',
+      },
       { status: 400 }
     );
   }
@@ -28,7 +31,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(webhook, { status: 201 });
   } catch (error: unknown) {
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Failed to create webhook' },
+      {
+        error:
+          error instanceof Error ? error.message : 'Failed to create webhook',
+      },
       { status: 400 }
     );
   }

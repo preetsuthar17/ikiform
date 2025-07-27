@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioItem } from '@/components/ui/radio';
 import { Separator } from '@/components/ui/separator';
+import { Switch } from '@/components/ui/switch';
 import {
   DEFAULT_FORM_DESIGN,
   FORM_BORDER_RADIUS_OPTIONS,
@@ -12,7 +13,6 @@ import {
   FORM_PADDING_OPTIONS,
   FORM_WIDTH_OPTIONS,
 } from '../constants';
-import { Switch } from '@/components/ui/switch';
 import type { LocalSettings } from '../types';
 
 const FORM_MARGIN_OPTIONS = [
@@ -94,10 +94,15 @@ export function DesignSection({
           <Switch
             checked={!!localSettings.showProgress}
             id="show-progress-toggle"
-            onCheckedChange={(checked) => updateSettings({ showProgress: checked })}
+            onCheckedChange={(checked) =>
+              updateSettings({ showProgress: checked })
+            }
             size="sm"
           />
-          <Label htmlFor="show-progress-toggle" className="cursor-pointer select-none">
+          <Label
+            className="cursor-pointer select-none"
+            htmlFor="show-progress-toggle"
+          >
             Show Progress Bar
           </Label>
         </div>

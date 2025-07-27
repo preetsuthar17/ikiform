@@ -48,9 +48,9 @@ interface DatePickerProps extends VariantProps<typeof datePickerVariants> {
 // Helper function to calculate optimal calendar position
 const calculateCalendarPosition = (
   triggerRect: DOMRect,
-  calendarHeight: number = 350, // Approximate calendar height
-  calendarWidth: number = 280,   // Approximate calendar width
-  margin: number = 8
+  calendarHeight = 350, // Approximate calendar height
+  calendarWidth = 280, // Approximate calendar width
+  margin = 8
 ) => {
   const viewport = {
     width: window.innerWidth,
@@ -59,7 +59,13 @@ const calculateCalendarPosition = (
 
   let top = triggerRect.bottom + margin;
   let left = triggerRect.left;
-  let placement: 'bottom' | 'top' | 'bottom-start' | 'top-start' | 'bottom-end' | 'top-end' = 'bottom';
+  let placement:
+    | 'bottom'
+    | 'top'
+    | 'bottom-start'
+    | 'top-start'
+    | 'bottom-end'
+    | 'top-end' = 'bottom';
 
   // Check if calendar would go below viewport
   if (top + calendarHeight > viewport.height) {
@@ -72,7 +78,7 @@ const calculateCalendarPosition = (
       // If neither above nor below fits, place it at the best available position
       const spaceBelow = viewport.height - triggerRect.bottom - margin;
       const spaceAbove = triggerRect.top - margin;
-      
+
       if (spaceBelow > spaceAbove) {
         top = triggerRect.bottom + margin;
         placement = 'bottom';
@@ -220,14 +226,20 @@ export function DatePicker({
     top: 0,
     left: 0,
     width: 0,
-    placement: 'bottom' as 'bottom' | 'top' | 'bottom-start' | 'top-start' | 'bottom-end' | 'top-end',
+    placement: 'bottom' as
+      | 'bottom'
+      | 'top'
+      | 'bottom-start'
+      | 'top-start'
+      | 'bottom-end'
+      | 'top-end',
   });
 
   React.useEffect(() => {
     if (isOpen && containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
       const position = calculateCalendarPosition(rect);
-      
+
       setCalendarPosition({
         top: position.top,
         left: position.left,
@@ -243,7 +255,7 @@ export function DatePicker({
       if (isOpen && containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
         const position = calculateCalendarPosition(rect);
-        
+
         setCalendarPosition({
           top: position.top,
           left: position.left,
@@ -256,7 +268,7 @@ export function DatePicker({
     if (isOpen) {
       window.addEventListener('resize', handleReposition);
       window.addEventListener('scroll', handleReposition, true);
-      
+
       return () => {
         window.removeEventListener('resize', handleReposition);
         window.removeEventListener('scroll', handleReposition, true);
@@ -268,18 +280,26 @@ export function DatePicker({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          ref={calendarRef}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           className="z-[9999] mx-auto w-fit rounded-ele shadow-lg"
           data-datepicker-calendar="true"
-          exit={{ opacity: 0, y: calendarPosition.placement.includes('top') ? 10 : -10, scale: 0.95 }}
-          initial={{ opacity: 0, y: calendarPosition.placement.includes('top') ? 10 : -10, scale: 0.95 }}
+          exit={{
+            opacity: 0,
+            y: calendarPosition.placement.includes('top') ? 10 : -10,
+            scale: 0.95,
+          }}
+          initial={{
+            opacity: 0,
+            y: calendarPosition.placement.includes('top') ? 10 : -10,
+            scale: 0.95,
+          }}
+          ref={calendarRef}
           style={{
             position: 'fixed',
             top: calendarPosition.top,
             left: calendarPosition.left,
-            transformOrigin: calendarPosition.placement.includes('top') 
-              ? 'bottom center' 
+            transformOrigin: calendarPosition.placement.includes('top')
+              ? 'bottom center'
               : 'top center',
           }}
           transition={{ duration: 0.2 }}
@@ -362,7 +382,13 @@ export function DateRangePicker({
     top: 0,
     left: 0,
     width: 0,
-    placement: 'bottom' as 'bottom' | 'top' | 'bottom-start' | 'top-start' | 'bottom-end' | 'top-end',
+    placement: 'bottom' as
+      | 'bottom'
+      | 'top'
+      | 'bottom-start'
+      | 'top-start'
+      | 'bottom-end'
+      | 'top-end',
   });
 
   const defaultFormatDate = (date: Date) => {
@@ -456,7 +482,7 @@ export function DateRangePicker({
     if (isOpen && containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
       const position = calculateCalendarPosition(rect);
-      
+
       setCalendarPosition({
         top: position.top,
         left: position.left,
@@ -472,7 +498,7 @@ export function DateRangePicker({
       if (isOpen && containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
         const position = calculateCalendarPosition(rect);
-        
+
         setCalendarPosition({
           top: position.top,
           left: position.left,
@@ -485,7 +511,7 @@ export function DateRangePicker({
     if (isOpen) {
       window.addEventListener('resize', handleReposition);
       window.addEventListener('scroll', handleReposition, true);
-      
+
       return () => {
         window.removeEventListener('resize', handleReposition);
         window.removeEventListener('scroll', handleReposition, true);
@@ -524,18 +550,26 @@ export function DateRangePicker({
           <AnimatePresence>
             {isOpen && (
               <motion.div
-                ref={calendarRef}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 className="z-[9999] mx-auto w-fit rounded-ele shadow-lg"
                 data-datepicker-calendar="true"
-                exit={{ opacity: 0, y: calendarPosition.placement.includes('top') ? 10 : -10, scale: 0.95 }}
-                initial={{ opacity: 0, y: calendarPosition.placement.includes('top') ? 10 : -10, scale: 0.95 }}
+                exit={{
+                  opacity: 0,
+                  y: calendarPosition.placement.includes('top') ? 10 : -10,
+                  scale: 0.95,
+                }}
+                initial={{
+                  opacity: 0,
+                  y: calendarPosition.placement.includes('top') ? 10 : -10,
+                  scale: 0.95,
+                }}
+                ref={calendarRef}
                 style={{
                   position: 'fixed',
                   top: calendarPosition.top,
                   left: calendarPosition.left,
-                  transformOrigin: calendarPosition.placement.includes('top') 
-                    ? 'bottom center' 
+                  transformOrigin: calendarPosition.placement.includes('top')
+                    ? 'bottom center'
                     : 'top center',
                 }}
                 transition={{ duration: 0.2 }}

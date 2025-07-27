@@ -12,7 +12,7 @@ export function FieldWrapper({ field, error, children }: FieldWrapperProps) {
   const isStatement = field.type === 'statement';
   return (
     <div
-      className={`flex flex-col gap-2 ${!field.label ? "-mt-2" : ""} ${getWidthClass(field.settings?.width as any)}`}
+      className={`flex flex-col gap-2 ${field.label ? '' : '-mt-2'} ${getWidthClass(field.settings?.width as any)}`}
     >
       {!isStatement && (
         <>
@@ -21,7 +21,9 @@ export function FieldWrapper({ field, error, children }: FieldWrapperProps) {
             htmlFor={field.id}
           >
             {field.label && field.label.replace('*', '')}
-            {field.label && field.required && <span className="text-destructive ml-1">*</span>}
+            {field.label && field.required && (
+              <span className="ml-1 text-destructive">*</span>
+            )}
           </Label>
           {field.description && (
             <p className="text-muted-foreground text-sm">{field.description}</p>

@@ -2,10 +2,9 @@
 'use client';
 
 import React from 'react';
-
+import { Separator } from '@/components/ui/separator';
 // UI Components
 import { ConfirmationModal } from '../form-delete-confirmation-modal';
-
 // Local Components
 import {
   AIFormSuggestions,
@@ -15,13 +14,10 @@ import {
   FormsHeader,
   LoadingSkeleton,
 } from './components';
-
 // Hooks
 import { useFormsManagement } from './hooks';
-
 // Types
 import type { FormsManagementProps } from './types';
-import { Separator } from '@/components/ui/separator';
 
 export function FormsManagement({ className }: FormsManagementProps) {
   const {
@@ -57,36 +53,36 @@ export function FormsManagement({ className }: FormsManagementProps) {
         onCreateManually={handleCreateManually}
         onCreateWithAI={handleCreateWithAI}
       />
-      
-      <Separator/>
+
+      <Separator />
 
       {/* Quick Stats */}
       <FormStats forms={forms} />
 
-      <Separator/>
+      <Separator />
 
       {/* Forms Grid or Empty State */}
       {forms.length === 0 ? (
         <EmptyState
-        onCreateForm={createNewForm}
-        onCreateManually={handleCreateManually}
+          onCreateForm={createNewForm}
+          onCreateManually={handleCreateManually}
           onCreateWithAI={handleCreateWithAI}
-          />
-        ) : (
-          <FormsGrid
+        />
+      ) : (
+        <FormsGrid
           forms={forms}
           onDelete={deleteForm}
           onEdit={editForm}
           onShare={shareForm}
           onViewAnalytics={viewAnalytics}
-          />
-        )}
+        />
+      )}
 
-      <Separator/>
+      <Separator />
       {/* AI Form Suggestions */}
       <AIFormSuggestions onCreateForm={handleCreateFromPrompt} />
 
-      <Separator/>
+      <Separator />
       {/* Delete Confirmation Modal */}
       <ConfirmationModal
         cancelText="Cancel"

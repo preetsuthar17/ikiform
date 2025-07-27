@@ -19,7 +19,7 @@ export const FormProgress: React.FC<FormProgressProps> = ({
 
   return (
     <div className="flex flex-col gap-2">
-      <Progress className="w-full h-2" showValue={false} value={progress} />
+      <Progress className="h-2 w-full" showValue={false} value={progress} />
     </div>
   );
 };
