@@ -7,7 +7,7 @@ import { EditableField } from './EditableField';
 
 export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
   const handleTitleUpdate = (title: string) => {
-    onFormSettingsUpdate?.({ title: title || 'Untitled Form' });
+    onFormSettingsUpdate?.({ title: title || '' });
   };
 
   const handleDescriptionUpdate = (description: string) => {
@@ -25,7 +25,7 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
         value={schema.settings.title}
       >
         <h1 className="truncate font-bold text-3xl text-foreground">
-          {schema.settings.title || 'Untitled Form'}
+          {schema.settings.title || ''}
         </h1>
       </EditableField>
 

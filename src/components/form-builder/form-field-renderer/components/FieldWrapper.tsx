@@ -20,8 +20,8 @@ export function FieldWrapper({ field, error, children }: FieldWrapperProps) {
             className="font-medium text-foreground text-sm"
             htmlFor={field.id}
           >
-            {field.label.replace('*', '')}
-            {field.required && <span className="ml-1 text-destructive">*</span>}
+            {field.label && field.label.replace('*', '')}
+            {field.label && field.required && <span className="text-destructive ml-1">*</span>}
           </Label>
           {field.description && (
             <p className="text-muted-foreground text-sm">{field.description}</p>

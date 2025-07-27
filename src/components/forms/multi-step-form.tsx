@@ -135,7 +135,7 @@ export function MultiStepForm({
 
   return (
     <div
-      className={`flex w-full items-center justify-center bg-background transition-opacity duration-500 ${showForm ? 'opacity-100' : 'opacity-0'} ${marginClass}`}
+      className={`flex items-center justify-center bg-background transition-opacity duration-500 ${showForm ? 'opacity-100' : 'opacity-0'} ${marginClass}`}
       dir={dir}
     >
       <div className={`flex w-full flex-col gap-8 ${containerClass}`}>

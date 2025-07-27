@@ -53,7 +53,7 @@ export function PublicForm({ formId, schema, theme }: PublicFormProps) {
 
   return (
     <div
-      className={`flex flex-col gap-4 w-full${theme ? ` theme-${theme}` : ''}`}
+      className={`flex flex-col gap-4 ${theme ? ` theme-${theme}` : ''}`}
       dir={dir}
     >
       {isMultiStep ? (

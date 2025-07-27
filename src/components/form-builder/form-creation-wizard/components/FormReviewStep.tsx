@@ -28,7 +28,7 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
   const [showPreview, setShowPreview] = React.useState(false);
 
   const previewSchema = createDefaultFormSchema({
-    title: configuration.title || 'Untitled Form',
+    title: configuration.title || '',
     description: configuration.description || '',
     multiStep: isMultiStep,
   });
@@ -80,7 +80,7 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
                 <div>
                   <p className="font-medium text-sm">Title</p>
                   <p className="text-muted-foreground text-sm">
-                    {configuration.title || 'Untitled Form'}
+                    {configuration.title || ''}
                   </p>
                 </div>
                 {configuration.description && (

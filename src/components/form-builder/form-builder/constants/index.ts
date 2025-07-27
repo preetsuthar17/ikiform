@@ -1,6 +1,6 @@
 export const FORM_BUILDER_CONSTANTS = {
   AUTOSAVE_DELAY: 1000,
-  DEFAULT_FORM_TITLE: 'Untitled Form',
+  DEFAULT_FORM_TITLE: '',
   DEFAULT_FORM_DESCRIPTION: '',
   DEFAULT_SUBMIT_TEXT: 'Submit',
   DEFAULT_SUCCESS_MESSAGE: 'Thank you for your submission!',

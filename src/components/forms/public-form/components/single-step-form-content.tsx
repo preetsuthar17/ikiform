@@ -53,7 +53,7 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
 
   return (
     <Card
-      className={`flex w-full grow flex-col gap-6 rounded-card p-8 ${schema.settings.designMode === 'minimal' ? 'border-none bg-transparent shadow-none hover:bg-transparent' : ''}`}
+      className={`flex grow flex-col gap-6 rounded-card p-8 ${schema.settings.designMode === 'minimal' ? 'border-none bg-transparent shadow-none hover:bg-transparent' : ''}`}
       variant={schema.settings.designMode === 'minimal' ? 'ghost' : 'default'}
     >
       <div className="flex flex-col gap-4">
