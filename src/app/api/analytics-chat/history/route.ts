@@ -50,8 +50,7 @@ export async function GET(req: NextRequest) {
         count: chatHistory.length,
       },
     });
-  } catch (error) {
-    console.error('Error fetching AI Analytics chat history:', error);
+  } catch (_error) {
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -112,8 +111,7 @@ export async function POST(req: NextRequest) {
       success: true,
       data: savedMessage,
     });
-  } catch (error) {
-    console.error('Error saving AI Analytics message:', error);
+  } catch (_error) {
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

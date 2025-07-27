@@ -11,9 +11,9 @@ export async function GET(req: NextRequest) {
     const accountId = searchParams.get('accountId') || undefined;
     const webhooks = await getWebhooks({ formId, accountId });
     return NextResponse.json(webhooks);
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message || 'Failed to list webhooks' },
+      { error: error instanceof Error ? error.message : 'Failed to list webhooks' },
       { status: 400 }
     );
   }
@@ -26,9 +26,9 @@ export async function POST(req: NextRequest) {
     // Optionally: validate with Zod here
     const webhook = await createWebhook(body);
     return NextResponse.json(webhook, { status: 201 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message || 'Failed to create webhook' },
+      { error: error instanceof Error ? error.message : 'Failed to create webhook' },
       { status: 400 }
     );
   }

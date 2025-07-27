@@ -18,9 +18,14 @@ export async function POST(
     }
     const result = await resendWebhookDelivery((await params).id, body);
     return NextResponse.json(result);
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message || 'Failed to resend webhook delivery' },
+      {
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to resend webhook delivery',
+      },
       { status: 400 }
     );
   }

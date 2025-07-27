@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
-export async function GET(req: NextRequest) {
+export function GET(req: NextRequest) {
   // Example: switch format by query param
   const format = new URL(req.url).searchParams.get('format') || 'array';
 

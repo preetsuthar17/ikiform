@@ -21,9 +21,14 @@ export async function PUT(
     }
     const mapping = await updateInboundMapping((await params).id, body);
     return NextResponse.json(mapping);
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message || 'Failed to update inbound mapping' },
+      {
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to update inbound mapping',
+      },
       { status: 400 }
     );
   }
@@ -31,15 +36,20 @@ export async function PUT(
 
 // DELETE /api/webhook/inbound/[id] - Delete inbound mapping
 export async function DELETE(
-  req: NextRequest,
+  _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await deleteInboundMapping((await params).id);
     return NextResponse.json({ success: true });
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message || 'Failed to delete inbound mapping' },
+      {
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to delete inbound mapping',
+      },
       { status: 400 }
     );
   }

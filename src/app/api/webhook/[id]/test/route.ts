@@ -9,15 +9,20 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    let samplePayload;
+    let samplePayload: unknown;
     try {
       samplePayload = await req.json();
-    } catch {}
+    } catch {
+      // Intentionally ignore JSON parse errors for empty payload
+    }
     const result = await testWebhook((await params).id, samplePayload);
     return NextResponse.json(result);
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message || 'Failed to test webhook' },
+      {
+        error:
+          error instanceof Error ? error.message : 'Failed to test webhook',
+      },
       { status: 400 }
     );
   }

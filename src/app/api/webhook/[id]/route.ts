@@ -12,9 +12,12 @@ export async function PUT(
     const body = await req.json();
     const webhook = await updateWebhook((await params).id, body);
     return NextResponse.json(webhook);
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message || 'Failed to update webhook' },
+      {
+        error:
+          error instanceof Error ? error.message : 'Failed to update webhook',
+      },
       { status: 400 }
     );
   }
@@ -22,15 +25,18 @@ export async function PUT(
 
 // DELETE /api/webhook/[id] - Delete a webhook
 export async function DELETE(
-  req: NextRequest,
+  _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await deleteWebhook((await params).id);
     return NextResponse.json({ success: true });
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message || 'Failed to delete webhook' },
+      {
+        error:
+          error instanceof Error ? error.message : 'Failed to delete webhook',
+      },
       { status: 400 }
     );
   }

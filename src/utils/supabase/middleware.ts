@@ -11,24 +11,25 @@ export async function updateSession(request: NextRequest) {
     ? authHeader.replace('Bearer ', '')
     : null;
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll: () => request.cookies.getAll(),
-        setAll: (cookiesToSet) => {
-          cookiesToSet.forEach(({ name, value, options }) => {
-            request.cookies.set(name, value);
-            supabaseResponse.cookies.set(name, value, options);
-          });
-        },
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!(supabaseUrl && supabaseAnonKey)) {
+    throw new Error('Supabase environment variables are not set');
+  }
+  const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
+    cookies: {
+      getAll: () => request.cookies.getAll(),
+      setAll: (cookiesToSet) => {
+        for (const { name, value, options } of cookiesToSet) {
+          request.cookies.set(name, value);
+          supabaseResponse.cookies.set(name, value, options);
+        }
       },
-      ...(accessToken && {
-        global: { headers: { Authorization: `Bearer ${accessToken}` } },
-      }),
-    }
-  );
+    },
+    ...(accessToken && {
+      global: { headers: { Authorization: `Bearer ${accessToken}` } },
+    }),
+  });
 
   const {
     data: { user },

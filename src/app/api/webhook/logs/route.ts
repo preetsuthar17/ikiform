@@ -12,9 +12,14 @@ export async function GET(req: NextRequest) {
     const accountId = searchParams.get('accountId') || undefined;
     const logs = await getWebhookLogs({ webhookId, formId, accountId });
     return NextResponse.json(logs);
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message || 'Failed to fetch webhook logs' },
+      {
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to fetch webhook logs',
+      },
       { status: 400 }
     );
   }

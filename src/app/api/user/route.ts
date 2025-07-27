@@ -8,7 +8,7 @@ import { sanitizeString } from '@/lib/utils/sanitize';
 // Internal imports
 import { createClient } from '@/utils/supabase/server';
 
-export async function POST(request: NextRequest) {
+export async function POST(_request: NextRequest) {
   try {
     const supabase = await createClient();
     const {
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
       user: data,
       isNewUser: true,
     });
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     const supabase = await createClient();
     const {
@@ -121,7 +121,7 @@ export async function GET(request: NextRequest) {
         metadata: user.user_metadata,
       },
     });
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

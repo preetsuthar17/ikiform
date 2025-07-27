@@ -43,7 +43,7 @@ export async function POST(
     // 3. Parse and map payload
     const incoming = await req.json();
     const mappingRules = mapping.mapping_rules || {};
-    const mapped: Record<string, any> = {};
+    const mapped: Record<string, unknown> = {};
     for (const [external, formField] of Object.entries(mappingRules)) {
       mapped[formField as string] = incoming[external as string];
     }
@@ -53,9 +53,14 @@ export async function POST(
       mapped
     );
     return NextResponse.json({ success: true, submission: result });
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message || 'Failed to process inbound webhook' },
+      {
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to process inbound webhook',
+      },
       { status: 400 }
     );
   }
