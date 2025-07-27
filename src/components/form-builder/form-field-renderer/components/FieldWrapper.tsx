@@ -12,7 +12,7 @@ export function FieldWrapper({ field, error, children }: FieldWrapperProps) {
   const isStatement = field.type === 'statement';
   return (
     <div
-      className={`flex flex-col gap-2 ${getWidthClass(field.settings?.width as any)}`}
+      className={`flex flex-col gap-2 ${!field.label ? "-mt-2" : ""} ${getWidthClass(field.settings?.width as any)}`}
     >
       {!isStatement && (
         <>
