@@ -145,11 +145,11 @@ export function MultiStepForm({
             schema.settings.designMode === 'minimal' ? 'ghost' : 'default'
           }
         >
-          <FormProgress
-            progress={progress}
-            showProgress={schema.settings.showProgress !== false}
-            totalSteps={totalSteps}
-          />
+            <FormProgress
+              progress={progress}
+              showProgress={schema.settings.showProgress !== false}
+              totalSteps={totalSteps}
+            />
           <FormContent
             currentBlock={currentBlock}
             description={schema.settings.description}

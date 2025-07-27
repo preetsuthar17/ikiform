@@ -21,6 +21,7 @@ import { useFormsManagement } from './hooks';
 
 // Types
 import type { FormsManagementProps } from './types';
+import { Separator } from '@/components/ui/separator';
 
 export function FormsManagement({ className }: FormsManagementProps) {
   const {
@@ -56,30 +57,36 @@ export function FormsManagement({ className }: FormsManagementProps) {
         onCreateManually={handleCreateManually}
         onCreateWithAI={handleCreateWithAI}
       />
+      
+      <Separator/>
 
       {/* Quick Stats */}
       <FormStats forms={forms} />
 
-      {/* AI Form Suggestions */}
-      {/* <AIFormSuggestions onCreateForm={handleCreateFromPrompt} /> */}
+      <Separator/>
 
       {/* Forms Grid or Empty State */}
       {forms.length === 0 ? (
         <EmptyState
-          onCreateForm={createNewForm}
-          onCreateManually={handleCreateManually}
+        onCreateForm={createNewForm}
+        onCreateManually={handleCreateManually}
           onCreateWithAI={handleCreateWithAI}
-        />
-      ) : (
-        <FormsGrid
+          />
+        ) : (
+          <FormsGrid
           forms={forms}
           onDelete={deleteForm}
           onEdit={editForm}
           onShare={shareForm}
           onViewAnalytics={viewAnalytics}
-        />
-      )}
+          />
+        )}
 
+      <Separator/>
+      {/* AI Form Suggestions */}
+      <AIFormSuggestions onCreateForm={handleCreateFromPrompt} />
+
+      <Separator/>
       {/* Delete Confirmation Modal */}
       <ConfirmationModal
         cancelText="Cancel"

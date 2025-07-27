@@ -84,6 +84,7 @@ export interface LocalSettings {
   };
   rtl?: boolean;
   notifications?: NotificationSettings;
+  showProgress?: boolean;
 }
 
 export interface BasicInfoSectionProps {

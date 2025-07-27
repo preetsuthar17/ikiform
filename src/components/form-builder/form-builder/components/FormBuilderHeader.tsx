@@ -50,7 +50,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
 
   return (
     <div
-      className="z-20 flex-shrink-0 border-border border-b bg-card px-4 py-3 md:px-6 md:py-4"
+      className="z-20 flex-shrink-0 border-border border-b bg-card px-4 py-3 md:py-4"
       style={{ minHeight: FORM_BUILDER_CONSTANTS.HEADER_HEIGHT }}
     >
       <div className="flex h-full flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-0">

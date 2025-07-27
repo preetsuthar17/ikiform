@@ -56,5 +56,6 @@ export interface LoadingSkeletonProps {
 
 export interface AISuggestion {
   title: string;
+  summary: string;
   prompt: string;
 }

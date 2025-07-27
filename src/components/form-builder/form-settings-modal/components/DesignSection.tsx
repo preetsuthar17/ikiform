@@ -12,6 +12,7 @@ import {
   FORM_PADDING_OPTIONS,
   FORM_WIDTH_OPTIONS,
 } from '../constants';
+import { Switch } from '@/components/ui/switch';
 import type { LocalSettings } from '../types';
 
 const FORM_MARGIN_OPTIONS = [
@@ -88,6 +89,18 @@ export function DesignSection({
         Design
       </h3>
       <div className="flex flex-col gap-4 border-muted border-l-2 pl-6">
+        {/* Show Progress Bar */}
+        <div className="flex items-center gap-3">
+          <Switch
+            checked={!!localSettings.showProgress}
+            id="show-progress-toggle"
+            onCheckedChange={(checked) => updateSettings({ showProgress: checked })}
+            size="sm"
+          />
+          <Label htmlFor="show-progress-toggle" className="cursor-pointer select-none">
+            Show Progress Bar
+          </Label>
+        </div>
         {/* Width */}
         <div className="flex flex-col gap-2">
           <Label>Form Width</Label>
