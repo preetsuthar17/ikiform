@@ -82,6 +82,26 @@ const featureCategories = [
         description: 'Show or hide fields based on user input.',
         included: true,
       },
+      {
+        label: 'Calendly integration',
+        description: 'Integrate Calendly scheduling into your forms.',
+        included: true,
+      },
+      {
+        label: 'Cal.com integration',
+        description: 'Integrate Cal.com scheduling into your forms.',
+        included: true,
+      },
+      {
+        label: 'Collect signature',
+        description: 'Allow users to sign forms digitally.',
+        included: true,
+      },
+      {
+        label: 'Discord webhook integration',
+        description: 'Send form responses directly to Discord channels.',
+        included: true,
+      },
     ],
   },
   {
@@ -146,11 +166,6 @@ const featureCategories = [
         included: false,
       },
       {
-        label: 'Feedback modal',
-        description: 'Collect feedback directly from users via a modal dialog.',
-        included: false,
-      },
-      {
         label: 'Form embedding',
         description: 'Embed forms easily into your website or app.',
         included: false,
@@ -178,11 +193,6 @@ const featureCategories = [
       {
         label: 'Link fields',
         description: 'Allow users to submit links in your forms.',
-        included: false,
-      },
-      {
-        label: 'Refactoring code',
-        description: 'Continuous improvements and codebase refactoring.',
         included: false,
       },
       {
@@ -230,26 +240,7 @@ const featureCategories = [
         description: 'Start quickly with ready-made form templates.',
         included: false,
       },
-      {
-        label: 'Calendly integration',
-        description: 'Integrate Calendly scheduling into your forms.',
-        included: false,
-      },
-      {
-        label: 'Cal.com integration',
-        description: 'Integrate Cal.com scheduling into your forms.',
-        included: false,
-      },
-      {
-        label: 'Collect signature',
-        description: 'Allow users to sign forms digitally.',
-        included: false,
-      },
-      {
-        label: 'Discord webhook integration',
-        description: 'Send form responses directly to Discord channels.',
-        included: false,
-      },
+      
       {
         label: 'and more',
         description: 'We are constantly adding new features and improvements.',
