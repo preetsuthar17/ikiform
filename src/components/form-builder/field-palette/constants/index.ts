@@ -9,9 +9,12 @@ import {
   Circle,
   Clock,
   Hash,
+  Link2,
   Mail,
+  MapPin,
   MessageSquare,
   PenLine,
+  Phone,
   Share2,
   Sliders,
   Star,
@@ -123,11 +126,30 @@ export const FIELD_TYPES: FieldTypeConfig[] = [
     icon: Star,
     description: 'Collect star or custom icon ratings from users',
   },
+  {
+    type: 'phone',
+    label: 'Phone Number',
+    icon: Phone,
+    description: 'Phone number input with validation',
+  },
+  {
+    type: 'address',
+    label: 'Address',
+    icon: MapPin,
+    description: 'Address input with multiple lines',
+  },
+  {
+    type: 'link',
+    label: 'Link',
+    icon: Link2,
+    description: 'URL input with validation',
+  },
 ];
 
 export const PALETTE_CONFIG = {
   COMPACT_GRID_COLS: 2,
   COMPACT_MAX_HEIGHT: 'max-h-64',
+
   HEADER: {
     TITLE: 'Form Fields',
     DESCRIPTION: 'Click to add fields to your form',

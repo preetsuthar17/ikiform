@@ -190,7 +190,10 @@ export interface FormField {
     | 'rating'
     | 'time'
     | 'scheduler'
-    | 'statement';
+    | 'statement'
+    | 'phone'
+    | 'address'
+    | 'link';
   label: string;
   description?: string;
   placeholder?: string;
@@ -203,9 +206,7 @@ export interface FormField {
     min?: number;
     max?: number;
     pattern?: string;
-
     /** Custom error messages **/
-
     requiredMessage?: string;
     minLengthMessage?: string;
     maxLengthMessage?: string;
@@ -214,6 +215,12 @@ export interface FormField {
     patternMessage?: string;
     emailMessage?: string;
     numberMessage?: string;
+    /** Phone field validation **/
+    phoneMessage?: string;
+    /** Address field validation **/
+    addressMessage?: string;
+    /** Link field validation **/
+    linkMessage?: string;
   };
   settings?: {
     rows?: number; // For textarea
@@ -259,7 +266,7 @@ export interface FormField {
     // Rating field settings
     starCount?: number; // Number of stars
     icon?: string; // Icon type (e.g., star, heart)
-    color?: string; // Color of the stars
+    color?: string; // Color of the stars/icons in px
     starSize?: number; // Size of the stars/icons in px
     showCurrentTimeButton?: boolean; // Allow showing current time button
     // Statement field settings
@@ -267,6 +274,15 @@ export interface FormField {
     statementDescription?: string;
     statementAlign?: 'left' | 'center' | 'right';
     statementSize?: 'sm' | 'md' | 'lg';
+    /** Phone field settings **/
+    pattern?: string; // Custom regex for phone
+    patternMessage?: string; // Custom error message for phone
+    /** Address field settings **/
+    requiredLines?: number; // Number of required address lines
+    requiredMessage?: string; // Custom error message for address
+    /** Link field settings **/
+    // Custom regex for link field
+    // Custom error message for link field
   };
 }
 

@@ -72,6 +72,29 @@ export const validateStep = (
             `Must be no more than ${field.validation.max}`;
         }
       }
+    } else if (field.type === 'phone' && value) {
+      const phoneValidation =
+        require('@/lib/validation/phone-validation').validatePhoneNumber(value);
+      if (!phoneValidation.isValid) {
+        errors[field.id] =
+          phoneValidation.message || 'Please enter a valid phone number';
+      }
+    } else if (field.type === 'link' && value) {
+      const urlValidation =
+        require('@/lib/validation/url-validation').validateUrl(value);
+      if (!urlValidation.isValid) {
+        errors[field.id] = urlValidation.message || 'Please enter a valid URL';
+      }
+    } else if (field.type === 'address' && value) {
+      // Check required address fields
+      const requiredKeys = ['line1', 'city', 'state', 'zip', 'country'];
+      for (const key of requiredKeys) {
+        if (!value[key]) {
+          errors[field.id] =
+            `Please enter ${key.replace(/\b\w/g, (c) => c.toUpperCase())}`;
+          break;
+        }
+      }
     } else if (
       field.validation?.pattern &&
       value &&

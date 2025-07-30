@@ -49,6 +49,13 @@ export function FieldSpecificSettings({
   const isSocialType = field.type === 'social';
   const isTimeType = field.type === 'time';
   const isSchedulerType = field.type === 'scheduler';
+  const isPhoneType = field.type === 'phone';
+  const isAddressType = field.type === 'address';
+  const isLinkType = field.type === 'link';
+
+  // Always declare hooks at the top level
+  const [schedulerModalOpen, setSchedulerModalOpen] = useState(false);
+  const [newOption, setNewOption] = useState('');
 
   if (
     !(
@@ -60,16 +67,137 @@ export function FieldSpecificSettings({
       isDateType ||
       isSocialType ||
       isTimeType ||
-      isSchedulerType
+      isSchedulerType ||
+      isPhoneType ||
+      isAddressType ||
+      isLinkType
     ) &&
     field.type !== 'poll' &&
-    field.type !== 'rating'
+    field.type !== 'rating' &&
+    field.type !== 'checkbox'
   ) {
     return null;
   }
-  // Scheduler Field Settings
-  const [schedulerModalOpen, setSchedulerModalOpen] = useState(false);
+  // Phone Field Settings
+  if (isPhoneType) {
+    return (
+      <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
+        <h3 className="font-medium text-card-foreground">
+          Phone Field Settings
+        </h3>
+        <div className="flex flex-col gap-2">
+          <Label className="text-card-foreground" htmlFor="phone-pattern">
+            Custom Regex Pattern
+          </Label>
+          <Input
+            className="border-border bg-input"
+            id="phone-pattern"
+            onChange={(e) => onUpdateSettings({ pattern: e.target.value })}
+            placeholder="e.g. ^\\+?[0-9]{10,15}$"
+            value={field.settings?.pattern ?? ''}
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label className="text-card-foreground" htmlFor="phone-message">
+            Custom Error Message
+          </Label>
+          <Input
+            className="border-border bg-input"
+            id="phone-message"
+            onChange={(e) =>
+              onUpdateSettings({ patternMessage: e.target.value })
+            }
+            placeholder="Please enter a valid phone number"
+            value={field.settings?.patternMessage ?? ''}
+          />
+        </div>
+      </Card>
+    );
+  }
 
+  // Link Field Settings
+  if (isLinkType) {
+    return (
+      <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
+        <h3 className="font-medium text-card-foreground">
+          Link Field Settings
+        </h3>
+        <div className="flex flex-col gap-2">
+          <Label className="text-card-foreground" htmlFor="link-pattern">
+            Custom Regex Pattern
+          </Label>
+          <Input
+            className="border-border bg-input"
+            id="link-pattern"
+            onChange={(e) => onUpdateSettings({ pattern: e.target.value })}
+            placeholder="e.g. ^https?://.+$"
+            value={field.settings?.pattern ?? ''}
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label className="text-card-foreground" htmlFor="link-message">
+            Custom Error Message
+          </Label>
+          <Input
+            className="border-border bg-input"
+            id="link-message"
+            onChange={(e) =>
+              onUpdateSettings({ patternMessage: e.target.value })
+            }
+            placeholder="Please enter a valid URL"
+            value={field.settings?.patternMessage ?? ''}
+          />
+        </div>
+      </Card>
+    );
+  }
+
+  // Address Field Settings
+  if (isAddressType) {
+    return (
+      <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
+        <h3 className="font-medium text-card-foreground">
+          Address Field Settings
+        </h3>
+        <div className="flex flex-col gap-2">
+          <Label
+            className="text-card-foreground"
+            htmlFor="address-required-lines"
+          >
+            Required Address Lines
+          </Label>
+          <Input
+            className="border-border bg-input"
+            id="address-required-lines"
+            max={5}
+            min={1}
+            onChange={(e) =>
+              onUpdateSettings({
+                requiredLines: Number.parseInt(e.target.value),
+              })
+            }
+            placeholder="e.g. 2 (Address Line 1 & City required)"
+            type="number"
+            value={field.settings?.requiredLines ?? ''}
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label className="text-card-foreground" htmlFor="address-message">
+            Custom Error Message
+          </Label>
+          <Input
+            className="border-border bg-input"
+            id="address-message"
+            onChange={(e) =>
+              onUpdateSettings({ requiredMessage: e.target.value })
+            }
+            placeholder="Please complete all required address fields"
+            value={field.settings?.requiredMessage ?? ''}
+          />
+        </div>
+      </Card>
+    );
+  }
   if (isTimeType) {
     return (
       <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
@@ -90,8 +218,6 @@ export function FieldSpecificSettings({
       </Card>
     );
   }
-
-  const [newOption, setNewOption] = useState('');
 
   return (
     <>

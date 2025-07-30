@@ -22,6 +22,9 @@ import {
   TextInputField,
   TimeInputField,
 } from '../components';
+import { AddressField } from '../components/AddressField';
+import { LinkInputField } from '../components/LinkInputField';
+import { PhoneInputField } from '../components/PhoneInputField';
 import type { BaseFieldProps } from '../types';
 
 export function createFieldComponent(
@@ -76,6 +79,12 @@ export function createFieldComponent(
       return React.createElement(SchedulerField, props);
     case 'statement':
       return React.createElement(StatementField, props);
+    case 'phone':
+      return React.createElement(PhoneInputField, props);
+    case 'address':
+      return React.createElement(AddressField, props);
+    case 'link':
+      return React.createElement(LinkInputField, props);
     default:
       return React.createElement('div', {}, 'Unsupported field type');
   }
