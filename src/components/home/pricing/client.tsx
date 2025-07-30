@@ -13,6 +13,7 @@ import {
   Sparkles,
   Star,
   Zap,
+  Check,
 } from 'lucide-react';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
@@ -21,6 +22,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { Switch } from '@/components/ui/switch';
 import { useAuth } from '@/hooks/use-auth';
 import { usePremiumStatus } from '@/hooks/use-premium-status';
 import FeatureComparisonTable from './feature-comparison-table';
@@ -69,12 +71,33 @@ const features = [
   },
 ];
 
-const PRODUCT_ID = '2e9b8531-0d45-40df-be1c-65482eefeb85';
+// Subscription product IDs
+const MONTHLY_PRODUCT_ID = '05f52efa-2102-4dd0-9d1d-1538210d6712';
+const YEARLY_PRODUCT_ID = '4eff4c1d-56de-4111-96de-b5ec8124dd4b';
+
+// Pricing configuration
+const PRICING = {
+  monthly: {
+    price: 29,
+    originalPrice: 39,
+    period: 'month',
+    billedAs: '$29/month',
+    savings: null,
+  },
+  yearly: {
+    price: 19,
+    originalPrice: 29,
+    period: 'month',
+    billedAs: 'Billed yearly as $228',
+    savings: Math.round((1 - (19 * 12) / (29 * 12)) * 100), // ~34% savings
+  },
+};
 
 export default function PricingClient({ products }: PricingClientProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [purchaseLoading, setPurchaseLoading] = useState(false);
+  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
   const { user } = useAuth();
   const { hasPremium, checkingPremium } = usePremiumStatus(user);
 
@@ -87,11 +110,22 @@ export default function PricingClient({ products }: PricingClientProps) {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  useEffect(() => {
+    setPurchaseLoading(false);
+  }, [user]);
+
   const handlePurchaseClick = () => {
     setPurchaseLoading(true);
     const timeout = setTimeout(() => setPurchaseLoading(false), 5000);
     return () => clearTimeout(timeout);
   };
+
+  const handleBillingToggle = (checked: boolean) => {
+    setBillingPeriod(checked ? 'yearly' : 'monthly');
+  };
+
+  const currentPricing = PRICING[billingPeriod];
+  const productId = billingPeriod === 'monthly' ? MONTHLY_PRODUCT_ID : YEARLY_PRODUCT_ID;
 
   const primaryProduct = products[0];
   if (!primaryProduct) return null;
@@ -109,7 +143,26 @@ export default function PricingClient({ products }: PricingClientProps) {
             Simple, transparent pricing. Everything you need to build beautiful
             forms. Start free, upgrade when you need more features.
           </p>
+          
+          {/* Billing Period Toggle */}
+          <div className="flex items-center gap-4 mt-6">
+            <span className={`text-sm ${billingPeriod === 'monthly' ? 'text-foreground font-medium' : 'text-muted-foreground'}`}>
+              Monthly
+            </span>
+            <Switch
+              checked={billingPeriod === 'yearly'}
+              onCheckedChange={handleBillingToggle}
+              className="data-[state=checked]:bg-primary"
+            />
+            <span className={`text-sm ${billingPeriod === 'yearly' ? 'text-foreground font-medium' : 'text-muted-foreground'}`}>
+              Yearly
+            </span>
+              <Badge variant="secondary" className="ml-2 bg-green-100 text-green-700 border-green-200">
+                Save 34%
+              </Badge>
+          </div>
         </div>
+
         <div className="relative mx-auto flex w-full max-w-7xl grow flex-col items-center rounded-card p-4 text-left md:p-12">
           {/* Overlay */}
           <div className="pointer-events-none absolute inset-0 z-2 rounded-card bg-black/15 backdrop-blur-[5px]" />
@@ -129,33 +182,65 @@ export default function PricingClient({ products }: PricingClientProps) {
                 <Badge className="mr-auto w-fit" variant="secondary">
                   🎉 Get Early Bird Discount
                 </Badge>
-                <div className="flex flex-col items-center gap-3">
+                
+                {/* Pricing Display */}
+                <div className="flex flex-col items-start gap-3">
                   <div className="flex items-baseline gap-3">
                     <span className="font-medium text-2xl text-muted-foreground line-through">
-                      $69
+                      ${currentPricing.originalPrice}
                     </span>
                     <span className="font-bold text-4xl text-foreground">
-                      $59
+                      ${currentPricing.price}
                     </span>
-                    <span className="text-muted-foreground">one-time</span>
+                    <span className="text-muted-foreground">per {currentPricing.period}</span>
+                  </div>
+                  
+                  {/* Billing Details */}
+                  <div className="flex flex-col gap-2">
+                    {billingPeriod === 'yearly' && (
+                      <div className="text-sm text-muted-foreground">
+                        {currentPricing.billedAs}
+                      </div>
+                    )}
+                    {currentPricing.savings && (
+                      <div className="flex items-center gap-2">
+                        <Badge variant="outline" className="text-xs font-medium text-green-600 border-green-200">
+                          <Check className="h-3 w-3 mr-1" />
+                          Save {currentPricing.savings}% vs monthly
+                        </Badge>
+                      </div>
+                    )}
                   </div>
                 </div>
+
+                {/* Action Button */}
                 {user && hasPremium ? (
-                  <Button className="w-full" size="lg">
-                    <Link
-                      className="block w-full"
-                      href="/dashboard"
-                      target="_blank"
-                    >
-                      Go to Dashboard
-                    </Link>
-                  </Button>
+                  <div className="w-full space-y-3">
+                    <Button className="w-full" size="lg">
+                      <Link
+                        className="block w-full"
+                        href="/dashboard"
+                        target="_blank"
+                      >
+                        Go to Dashboard
+                      </Link>
+                    </Button>
+                    <Button className="w-full" variant="outline" size="sm">
+                      <Link
+                        className="block w-full"
+                        href="/portal"
+                        target="_blank"
+                      >
+                        Manage Subscription
+                      </Link>
+                    </Button>
+                  </div>
                 ) : (
                   <Link
                     className="block w-full"
                     href={
                       user
-                        ? `/checkout?products=${PRODUCT_ID}&customerEmail=${user?.email}`
+                        ? `/checkout?products=${productId}&customerEmail=${user?.email}`
                         : '#'
                     }
                     onClick={handlePurchaseClick}
@@ -176,15 +261,31 @@ export default function PricingClient({ products }: PricingClientProps) {
                           Checking...
                         </div>
                       ) : user ? (
-                        'Get Started'
+                        `Get started with Ikiform`
                       ) : (
                         'Sign In to Get Started'
                       )}
                     </Button>
                   </Link>
                 )}
+
+                {/* Plan Period Indicator */}
+                <div className="w-full text-center">
+                  <p className="text-xs text-muted-foreground">
+                    {billingPeriod === 'yearly' 
+                      ? 'Billed annually • Cancel anytime' 
+                      : 'Billed monthly • Cancel anytime'
+                    }
+                  </p>
+                </div>
               </div>
-              <div className="flex w-full flex-col gap-8 p-8 md:w-1/2">
+
+              <div className="flex w-full flex-col gap-6 p-8 md:w-1/2">
+                <div className="flex items-center gap-2 mb-2">
+                  <Crown className="h-4 w-4 text-primary" />
+                  <span className="font-medium text-sm">Premium Features</span>
+                </div>
+                
                 <div className="flex flex-col gap-3">
                   {features.map((feature, index) => (
                     <div className="flex items-center gap-3" key={index}>
@@ -195,6 +296,8 @@ export default function PricingClient({ products }: PricingClientProps) {
                     </div>
                   ))}
                 </div>
+
+                
               </div>
             </div>
             <FeatureComparisonTable />

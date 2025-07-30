@@ -188,7 +188,7 @@ export default function RootLayout({
           <Databuddy
             clientId="jDhbBGL7-4rwsNXj-GcgK"
             enableBatching={true}
-            trackAttributes={true}
+            trackAttributes={true}  
             trackBounceRate={true}
             trackEngagement={true}
             trackErrors={true}

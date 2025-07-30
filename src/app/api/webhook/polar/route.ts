@@ -2,8 +2,86 @@ import { Webhooks } from '@polar-sh/nextjs';
 import { sanitizeString } from '@/lib/utils/sanitize';
 import { createAdminClient } from '@/utils/supabase/admin';
 
+const webhookSecret = process.env.POLAR_WEBHOOK_SECRET;
+if (!webhookSecret) {
+  throw new Error('POLAR_WEBHOOK_SECRET environment variable is not set');
+}
+
+// Helper function to find user by email (consistent with original implementation)
+const findUserByEmail = async (supabase: any, email: string) => {
+  console.log('🔍 Looking for user with email:', email);
+  
+  const { data: userData, error: lookupError } = await supabase
+    .from('users')
+    .select('uid, email')
+    .eq('email', email)
+    .single();
+
+  if (lookupError || !userData) {
+    console.warn(`⚠️ User not found in database with email: ${email}`);
+    console.log('💡 Make sure the user has signed up with this email address');
+    return null;
+  }
+
+  console.log('🔍 Found user with uid:', userData.uid);
+  return userData;
+};
+
+// Helper function to update user premium status
+const updateUserPremiumStatus = async (
+  supabase: any,
+  uid: string,
+  email: string,
+  hasPremium: boolean,
+  polarCustomerId?: string
+) => {
+  const updateData: any = { has_premium: hasPremium };
+  
+  // Store polar customer ID if provided
+  if (polarCustomerId) {
+    updateData.polar_customer_id = polarCustomerId;
+  }
+
+  const { data, error } = await supabase
+    .from('users')
+    .update(updateData)
+    .eq('uid', uid)
+    .select();
+
+  if (error) {
+    console.error('❌ Error updating user premium status:', error);
+    return null;
+  }
+
+  if (data && data.length > 0) {
+    const statusText = hasPremium ? 'granted' : 'revoked';
+    console.log(`✅ Successfully ${statusText} premium status for user: ${email} (uid: ${uid})`);
+    console.log('👤 Updated user data:', data[0]);
+    return data[0];
+  } else {
+    console.warn(`⚠️ Failed to update user with uid: ${uid}`);
+    return null;
+  }
+};
+
+// Helper function to send thank you email (consistent with original)
+const sendThankYouEmail = async (email: string, customerName?: string) => {
+  try {
+    const { sendPremiumThankYouEmail } = await import('@/lib/services/notifications');
+    await sendPremiumThankYouEmail({
+      to: email,
+      name: customerName || undefined,
+    });
+    console.log('📧 Thank you email sent successfully');
+  } catch (emailError) {
+    console.error('❌ Error sending thank you email:', emailError);
+  }
+};
+
 export const POST = Webhooks({
-  webhookSecret: process.env.POLAR_WEBHOOK_SECRET!,
+  webhookSecret,
+  
+  // Handle one-time payment completion (maintaining original functionality)
   onOrderPaid: async (payload) => {
     console.log('✅ Order paid webhook received successfully');
     console.log('📦 Order paid payload:', JSON.stringify(payload, null, 2));
@@ -16,64 +94,216 @@ export const POST = Webhooks({
 
     try {
       const supabase = createAdminClient();
-
-      // Get customer email from the payload
       const customerEmail = sanitizeString(payload.data.customer?.email || '');
+      
       if (!customerEmail) {
         console.error('❌ No customer email found in payload');
         return;
       }
 
-      console.log('🔍 Looking for user with email:', customerEmail);
+      const userData = await findUserByEmail(supabase, customerEmail);
+      if (!userData) return;
 
-      // First, find the user by email to get their uid
-      const { data: userData, error: lookupError } = await supabase
-        .from('users')
-        .select('uid, email')
-        .eq('email', customerEmail)
-        .single();
+      const updatedUser = await updateUserPremiumStatus(
+        supabase,
+        userData.uid,
+        customerEmail,
+        true,
+        payload.data.customer?.id
+      );
 
-      if (lookupError || !userData) {
-        console.warn(
-          `⚠️ User not found in database with email: ${customerEmail}`
+      if (updatedUser) {
+        await sendThankYouEmail(
+          customerEmail,
+          sanitizeString(payload.data.customer?.name || '')
         );
-        console.log(
-          '💡 Make sure the user has signed up with this email address'
-        );
-        return;
-      }
-
-      console.log('🔍 Found user with uid:', userData.uid);
-
-      // Update the user's premium status by uid
-      const { data, error } = await supabase
-        .from('users')
-        .update({ has_premium: true })
-        .eq('uid', userData.uid)
-        .select();
-
-      if (error) {
-        console.error('❌ Error updating user premium status:', error);
-        return;
-      }
-
-      if (data && data.length > 0) {
-        console.log(
-          `✅ Successfully updated premium status for user: ${customerEmail} (uid: ${userData.uid})`
-        );
-        console.log('👤 Updated user data:', data[0]);
-        const { sendPremiumThankYouEmail } = await import(
-          '@/lib/services/notifications'
-        );
-        await sendPremiumThankYouEmail({
-          to: customerEmail,
-          name: sanitizeString(payload.data.customer?.name || '') || undefined,
-        });
-      } else {
-        console.warn(`⚠️ Failed to update user with uid: ${userData.uid}`);
       }
     } catch (error) {
       console.error('❌ Error processing payment completion:', error);
+    }
+  },
+
+  // Handle subscription creation
+  onSubscriptionCreated: async (payload) => {
+    console.log('🎉 Subscription created webhook received successfully');
+    console.log('📋 Subscription created payload:', JSON.stringify(payload, null, 2));
+
+    try {
+      const supabase = createAdminClient();
+      const customerEmail = sanitizeString(payload.data.customer?.email || '');
+      
+      if (!customerEmail) {
+        console.error('❌ No customer email found in subscription payload');
+        return;
+      }
+
+      const userData = await findUserByEmail(supabase, customerEmail);
+      if (!userData) return;
+
+      const updatedUser = await updateUserPremiumStatus(
+        supabase,
+        userData.uid,
+        customerEmail,
+        true,
+        payload.data.customer?.id
+      );
+
+      if (updatedUser) {
+        console.log('🔄 Subscription status:', payload.data.status);
+        console.log('💳 Subscription ID:', payload.data.id);
+        
+        await sendThankYouEmail(
+          customerEmail,
+          sanitizeString(payload.data.customer?.name || '')
+        );
+      }
+    } catch (error) {
+      console.error('❌ Error processing subscription creation:', error);
+    }
+  },
+
+  // Handle subscription activation
+  onSubscriptionActive: async (payload) => {
+    console.log('🟢 Subscription activated webhook received successfully');
+    console.log('📋 Subscription activated payload:', JSON.stringify(payload, null, 2));
+
+    try {
+      const supabase = createAdminClient();
+      const customerEmail = sanitizeString(payload.data.customer?.email || '');
+      
+      if (!customerEmail) {
+        console.error('❌ No customer email found in subscription payload');
+        return;
+      }
+
+      const userData = await findUserByEmail(supabase, customerEmail);
+      if (!userData) return;
+
+      const updatedUser = await updateUserPremiumStatus(
+        supabase,
+        userData.uid,
+        customerEmail,
+        true,
+        payload.data.customer?.id
+      );
+
+      if (updatedUser) {
+        console.log('🔄 Subscription status:', payload.data.status);
+        console.log('💳 Subscription ID:', payload.data.id);
+      }
+    } catch (error) {
+      console.error('❌ Error processing subscription activation:', error);
+    }
+  },
+
+  // Handle subscription updates (plan changes, payment method updates, etc.)
+  onSubscriptionUpdated: async (payload) => {
+    console.log('🔄 Subscription updated webhook received successfully');
+    console.log('📋 Subscription updated payload:', JSON.stringify(payload, null, 2));
+
+    try {
+      const supabase = createAdminClient();
+      const customerEmail = sanitizeString(payload.data.customer?.email || '');
+      
+      if (!customerEmail) {
+        console.error('❌ No customer email found in subscription payload');
+        return;
+      }
+
+      const userData = await findUserByEmail(supabase, customerEmail);
+      if (!userData) return;
+
+      // Determine if subscription should grant premium access based on status
+      const shouldHavePremium = ['active', 'trialing'].includes(payload.data.status);
+      
+      const updatedUser = await updateUserPremiumStatus(
+        supabase,
+        userData.uid,
+        customerEmail,
+        shouldHavePremium,
+        payload.data.customer?.id
+      );
+
+      if (updatedUser) {
+        console.log('🔄 Updated subscription status:', payload.data.status);
+        console.log('💳 Subscription ID:', payload.data.id);
+        console.log('🎯 Premium access:', shouldHavePremium ? 'granted' : 'revoked');
+      }
+    } catch (error) {
+      console.error('❌ Error processing subscription update:', error);
+    }
+  },
+
+  // Handle subscription cancellation/revocation
+  onSubscriptionRevoked: async (payload) => {
+    console.log('🔴 Subscription revoked webhook received successfully');
+    console.log('📋 Subscription revoked payload:', JSON.stringify(payload, null, 2));
+
+    try {
+      const supabase = createAdminClient();
+      const customerEmail = sanitizeString(payload.data.customer?.email || '');
+      
+      if (!customerEmail) {
+        console.error('❌ No customer email found in subscription payload');
+        return;
+      }
+
+      const userData = await findUserByEmail(supabase, customerEmail);
+      if (!userData) return;
+
+      const updatedUser = await updateUserPremiumStatus(
+        supabase,
+        userData.uid,
+        customerEmail,
+        false
+      );
+
+      if (updatedUser) {
+        console.log('🔄 Subscription status:', payload.data.status);
+        console.log('💳 Subscription ID:', payload.data.id);
+        console.log('📅 Revocation reason: Subscription cancelled/expired');
+      }
+    } catch (error) {
+      console.error('❌ Error processing subscription revocation:', error);
+    }
+  },
+
+  // Handle subscription cancellation (when user cancels but may still have access until period end)
+  onSubscriptionCanceled: async (payload) => {
+    console.log('⚠️ Subscription canceled webhook received successfully');
+    console.log('📋 Subscription canceled payload:', JSON.stringify(payload, null, 2));
+
+    try {
+      const supabase = createAdminClient();
+      const customerEmail = sanitizeString(payload.data.customer?.email || '');
+      
+      if (!customerEmail) {
+        console.error('❌ No customer email found in subscription payload');
+        return;
+      }
+
+      const userData = await findUserByEmail(supabase, customerEmail);
+      if (!userData) return;
+
+      // For cancellation, check if subscription is still active (user may have access until period end)
+      const shouldHavePremium = ['active', 'trialing'].includes(payload.data.status);
+      
+      const updatedUser = await updateUserPremiumStatus(
+        supabase,
+        userData.uid,
+        customerEmail,
+        shouldHavePremium,
+        payload.data.customer?.id
+      );
+
+      if (updatedUser) {
+        console.log('🔄 Subscription status:', payload.data.status);
+        console.log('💳 Subscription ID:', payload.data.id);
+        console.log('📅 Cancellation noted - access may continue until period end');
+        console.log('🎯 Current premium access:', shouldHavePremium ? 'maintained' : 'revoked');
+      }
+    } catch (error) {
+      console.error('❌ Error processing subscription cancellation:', error);
     }
   },
 });

@@ -59,7 +59,7 @@
 }
 
 :root {
-  --radius: 7px;
+  --radius: 8px;
   --card-radius: 10px;
   --hu-background: 0, 0%, 99%;
   --hu-foreground: 0, 0%, 10%;
