@@ -3,6 +3,7 @@
 import {
   BarChart3,
   Bot,
+  Check,
   Clock,
   Crown,
   FileText,
@@ -13,7 +14,6 @@ import {
   Sparkles,
   Star,
   Zap,
-  Check,
 } from 'lucide-react';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
@@ -97,7 +97,9 @@ export default function PricingClient({ products }: PricingClientProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [purchaseLoading, setPurchaseLoading] = useState(false);
-  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
+  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>(
+    'monthly'
+  );
   const { user } = useAuth();
   const { hasPremium, checkingPremium } = usePremiumStatus(user);
 
@@ -125,7 +127,8 @@ export default function PricingClient({ products }: PricingClientProps) {
   };
 
   const currentPricing = PRICING[billingPeriod];
-  const productId = billingPeriod === 'monthly' ? MONTHLY_PRODUCT_ID : YEARLY_PRODUCT_ID;
+  const productId =
+    billingPeriod === 'monthly' ? MONTHLY_PRODUCT_ID : YEARLY_PRODUCT_ID;
 
   const primaryProduct = products[0];
   if (!primaryProduct) return null;
@@ -143,23 +146,30 @@ export default function PricingClient({ products }: PricingClientProps) {
             Simple, transparent pricing. Everything you need to build beautiful
             forms. Start free, upgrade when you need more features.
           </p>
-          
+
           {/* Billing Period Toggle */}
-          <div className="flex items-center gap-4 mt-6">
-            <span className={`text-sm ${billingPeriod === 'monthly' ? 'text-foreground font-medium' : 'text-muted-foreground'}`}>
+          <div className="mt-6 flex items-center gap-4">
+            <span
+              className={`text-sm ${billingPeriod === 'monthly' ? 'font-medium text-foreground' : 'text-muted-foreground'}`}
+            >
               Monthly
             </span>
             <Switch
               checked={billingPeriod === 'yearly'}
-              onCheckedChange={handleBillingToggle}
               className="data-[state=checked]:bg-primary"
+              onCheckedChange={handleBillingToggle}
             />
-            <span className={`text-sm ${billingPeriod === 'yearly' ? 'text-foreground font-medium' : 'text-muted-foreground'}`}>
+            <span
+              className={`text-sm ${billingPeriod === 'yearly' ? 'font-medium text-foreground' : 'text-muted-foreground'}`}
+            >
               Yearly
             </span>
-              <Badge variant="secondary" className="ml-2 bg-green-100 text-green-700 border-green-200">
-                Save 34%
-              </Badge>
+            <Badge
+              className="ml-2 border-green-200 bg-green-100 text-green-700"
+              variant="secondary"
+            >
+              Save 34%
+            </Badge>
           </div>
         </div>
 
@@ -182,7 +192,7 @@ export default function PricingClient({ products }: PricingClientProps) {
                 <Badge className="mr-auto w-fit" variant="secondary">
                   🎉 Get Early Bird Discount
                 </Badge>
-                
+
                 {/* Pricing Display */}
                 <div className="flex flex-col items-start gap-3">
                   <div className="flex items-baseline gap-3">
@@ -192,20 +202,25 @@ export default function PricingClient({ products }: PricingClientProps) {
                     <span className="font-bold text-4xl text-foreground">
                       ${currentPricing.price}
                     </span>
-                    <span className="text-muted-foreground">per {currentPricing.period}</span>
+                    <span className="text-muted-foreground">
+                      per {currentPricing.period}
+                    </span>
                   </div>
-                  
+
                   {/* Billing Details */}
                   <div className="flex flex-col gap-2">
                     {billingPeriod === 'yearly' && (
-                      <div className="text-sm text-muted-foreground">
+                      <div className="text-muted-foreground text-sm">
                         {currentPricing.billedAs}
                       </div>
                     )}
                     {currentPricing.savings && (
                       <div className="flex items-center gap-2">
-                        <Badge variant="outline" className="text-xs font-medium text-green-600 border-green-200">
-                          <Check className="h-3 w-3 mr-1" />
+                        <Badge
+                          className="border-green-200 font-medium text-green-600 text-xs"
+                          variant="outline"
+                        >
+                          <Check className="mr-1 h-3 w-3" />
                           Save {currentPricing.savings}% vs monthly
                         </Badge>
                       </div>
@@ -225,7 +240,7 @@ export default function PricingClient({ products }: PricingClientProps) {
                         Go to Dashboard
                       </Link>
                     </Button>
-                    <Button className="w-full" variant="outline" size="sm">
+                    <Button className="w-full" size="sm" variant="outline">
                       <Link
                         className="block w-full"
                         href="/portal"
@@ -261,7 +276,7 @@ export default function PricingClient({ products }: PricingClientProps) {
                           Checking...
                         </div>
                       ) : user ? (
-                        `Get started with Ikiform`
+                        'Get started with Ikiform'
                       ) : (
                         'Sign In to Get Started'
                       )}
@@ -271,21 +286,20 @@ export default function PricingClient({ products }: PricingClientProps) {
 
                 {/* Plan Period Indicator */}
                 <div className="w-full text-center">
-                  <p className="text-xs text-muted-foreground">
-                    {billingPeriod === 'yearly' 
-                      ? 'Billed annually • Cancel anytime' 
-                      : 'Billed monthly • Cancel anytime'
-                    }
+                  <p className="text-muted-foreground text-xs">
+                    {billingPeriod === 'yearly'
+                      ? 'Billed annually • Cancel anytime'
+                      : 'Billed monthly • Cancel anytime'}
                   </p>
                 </div>
               </div>
 
               <div className="flex w-full flex-col gap-6 p-8 md:w-1/2">
-                <div className="flex items-center gap-2 mb-2">
+                <div className="mb-2 flex items-center gap-2">
                   <Crown className="h-4 w-4 text-primary" />
                   <span className="font-medium text-sm">Premium Features</span>
                 </div>
-                
+
                 <div className="flex flex-col gap-3">
                   {features.map((feature, index) => (
                     <div className="flex items-center gap-3" key={index}>
@@ -296,8 +310,6 @@ export default function PricingClient({ products }: PricingClientProps) {
                     </div>
                   ))}
                 </div>
-
-                
               </div>
             </div>
             <FeatureComparisonTable />

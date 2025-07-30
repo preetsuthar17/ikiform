@@ -240,7 +240,7 @@ const featureCategories = [
         description: 'Start quickly with ready-made form templates.',
         included: false,
       },
-      
+
       {
         label: 'and more',
         description: 'We are constantly adding new features and improvements.',
