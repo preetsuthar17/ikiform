@@ -101,7 +101,8 @@ const featureCategories = [
         label: 'Discord webhook integration',
         description: 'Send form responses directly to Discord channels.',
         included: true,
-      }, {
+      },
+      {
         label: 'Address field',
         description: 'Collect address information with a dedicated field.',
         included: true,
@@ -194,7 +195,7 @@ const featureCategories = [
         description: 'Add file upload fields to your forms.',
         included: false,
       },
-     
+
       {
         label: 'Slack integration',
         description: 'Send form responses directly to Slack channels.',
