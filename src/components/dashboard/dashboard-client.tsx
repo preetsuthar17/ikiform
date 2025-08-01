@@ -2,7 +2,6 @@
 
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
-import { DashboardSkeleton } from '@/components/dashboard/dashboard-skeleton';
 
 const ProfileCard = dynamic(
   () => import('@/components/dashboard/profile-card/ProfileCard'),

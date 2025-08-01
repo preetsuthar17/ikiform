@@ -23,19 +23,19 @@ export function useFormsManagement() {
   );
   const [showChoiceModal, setShowChoiceModal] = useState(false);
 
-  const loadForms = async () => {
-    if (!user) return;
+const loadForms = async () => {
+  if (!user) return;
 
-    try {
-      const userForms = await formsDb.getUserForms(user.id);
-      setForms(userForms);
-    } catch (error) {
-      console.error('Error loading forms:', error);
-      toast.error('Failed to load forms');
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    const userForms = await formsDb.getUserForms(user.id);
+    setForms(userForms); // Now works with proper typing
+  } catch (error) {
+    console.error('Error loading forms:', error);
+    toast.error('Failed to load forms');
+  } finally {
+    setLoading(false);
+  }
+};
 
   const createNewForm = () => {
     setShowChoiceModal(true);
@@ -113,7 +113,6 @@ export function useFormsManagement() {
     loading,
     deleteModal,
     showChoiceModal,
-
     createNewForm,
     editForm,
     viewForm,
@@ -124,7 +123,6 @@ export function useFormsManagement() {
     handleCreateWithAI,
     handleCreateManually,
     handleCreateFromPrompt,
-
     setDeleteModal,
     setShowChoiceModal,
   };

@@ -17,7 +17,6 @@ export function FormCard({
   onShare,
   onDelete,
 }: FormCardProps) {
-  const totalFields = getTotalFields(form);
   const formattedDate = formatDate(form.updated_at);
   const [isShareModalOpen, setIsShareModalOpen] = React.useState(false);
 
@@ -50,10 +49,7 @@ export function FormCard({
 
       {}
       <div className="mb-6 flex items-center justify-between border-border/50 border-t pt-2 text-muted-foreground text-sm">
-        <span className="flex items-center gap-1">
-          <span className="h-2 w-2 rounded-card bg-accent" />
-          {totalFields} field{totalFields !== 1 ? 's' : ''}
-        </span>
+      
         <span>Updated {formattedDate}</span>
       </div>
 

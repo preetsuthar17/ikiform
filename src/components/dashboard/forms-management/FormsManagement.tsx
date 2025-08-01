@@ -23,7 +23,6 @@ export function FormsManagement({ className }: FormsManagementProps) {
     forms,
     loading,
     deleteModal,
-
     createNewForm,
     editForm,
     viewAnalytics,
@@ -33,7 +32,6 @@ export function FormsManagement({ className }: FormsManagementProps) {
     handleCreateWithAI,
     handleCreateManually,
     handleCreateFromPrompt,
-
     setDeleteModal,
   } = useFormsManagement();
 
