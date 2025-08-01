@@ -9,21 +9,12 @@ interface SuspenseButtonProps extends ButtonProps {
   suspenseFallback?: React.ReactNode;
 }
 
-/**
- * Button component with Suspense wrapper for enhanced loading states
- */
 export function SuspenseButton({
-  loading = false,
   suspenseFallback,
   ...props
 }: SuspenseButtonProps) {
-  const defaultFallback = <Skeleton className="h-9 w-20" />;
-
+  const defaultFallback = <Skeleton className="h-8 w-20" />;
   const fallback = suspenseFallback || defaultFallback;
-
-  if (loading) {
-    return fallback;
-  }
 
   return (
     <Suspense fallback={fallback}>
@@ -31,6 +22,7 @@ export function SuspenseButton({
     </Suspense>
   );
 }
+
 
 export const Button = SuspenseButton;
 export type { ButtonProps, SuspenseButtonProps };
