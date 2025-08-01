@@ -9,7 +9,6 @@ const MultiStepForm = dynamic(
       default: mod.MultiStepForm,
     })),
   {
-    ssr: false,
     loading: () => <FormSkeleton showProgress={true} variant="multi-step" />,
   }
 );
@@ -20,7 +19,6 @@ const SingleStepForm = dynamic(
       default: mod.SingleStepForm,
     })),
   {
-    ssr: false,
     loading: () => <FormSkeleton variant="single-step" />,
   }
 );

@@ -3,7 +3,6 @@ import { Suspense } from 'react';
 import { LoginSkeleton } from '@/components/auth/login-skeleton';
 
 const LoginClient = dynamic(() => import('./client'), {
-  ssr: false,
   loading: () => <LoginSkeleton />,
 });
 

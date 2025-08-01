@@ -5,7 +5,6 @@ import { FormBuilderSkeleton } from '@/components/form-builder/form-builder-skel
 const DemoFormBuilder = dynamic(
   () => import('@/components/form-builder/form-builder/DemoFormBuilder'),
   {
-    ssr: false,
     loading: () => <FormBuilderSkeleton />,
   }
 );
