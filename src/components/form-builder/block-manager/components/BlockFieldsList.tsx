@@ -1,6 +1,3 @@
-// Components
-
-// Types
 import type { BlockFieldsListProps } from '../types';
 import { FieldItem } from './FieldItem';
 

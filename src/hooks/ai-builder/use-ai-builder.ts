@@ -1,142 +1,222 @@
-// React imports
-
-// Next.js imports
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react';
 import { AIBuilderService } from '@/lib/ai-builder/ai-service';
-// Local imports
+
 import type { ChatMessage, FormSchema } from '@/lib/ai-builder/types';
 import {
   checkForDuplicateSchema,
   generateSessionId,
 } from '@/lib/ai-builder/utils';
 
-export const useAIBuilder = () => {
+interface AIBuilderState {
+  sessionId: string | null;
+  messages: ChatMessage[];
+  input: string;
+  isLoading: boolean;
+  forms: FormSchema[];
+  activeFormId: string | null;
+  isStreaming: boolean;
+  streamedContent: string;
+  streamError: string | null;
+  showJsonModal: boolean;
+}
+
+type AIBuilderAction =
+  | { type: 'SET_SESSION_ID'; payload: string }
+  | { type: 'ADD_MESSAGE'; payload: ChatMessage }
+  | { type: 'SET_MESSAGES'; payload: ChatMessage[] }
+  | { type: 'SET_INPUT'; payload: string }
+  | { type: 'SET_LOADING'; payload: boolean }
+  | { type: 'ADD_FORM'; payload: FormSchema }
+  | { type: 'SET_ACTIVE_FORM_ID'; payload: string | null }
+  | { type: 'SET_STREAMING'; payload: boolean }
+  | { type: 'SET_STREAMED_CONTENT'; payload: string }
+  | { type: 'SET_STREAM_ERROR'; payload: string | null }
+  | { type: 'SET_SHOW_JSON_MODAL'; payload: boolean }
+  | { type: 'RESET_STREAM_STATE' };
+
+const initialState: AIBuilderState = {
+  sessionId: null,
+  messages: [],
+  input: '',
+  isLoading: false,
+  forms: [],
+  activeFormId: null,
+  isStreaming: false,
+  streamedContent: '',
+  streamError: null,
+  showJsonModal: false,
+};
+
+function aiBuilderReducer(
+  state: AIBuilderState,
+  action: AIBuilderAction
+): AIBuilderState {
+  switch (action.type) {
+    case 'SET_SESSION_ID':
+      return { ...state, sessionId: action.payload };
+    case 'ADD_MESSAGE':
+      return { ...state, messages: [...state.messages, action.payload] };
+    case 'SET_MESSAGES':
+      return { ...state, messages: action.payload };
+    case 'SET_INPUT':
+      return { ...state, input: action.payload };
+    case 'SET_LOADING':
+      return { ...state, isLoading: action.payload };
+    case 'ADD_FORM':
+      return { ...state, forms: [...state.forms, action.payload] };
+    case 'SET_ACTIVE_FORM_ID':
+      return { ...state, activeFormId: action.payload };
+    case 'SET_STREAMING':
+      return { ...state, isStreaming: action.payload };
+    case 'SET_STREAMED_CONTENT':
+      return { ...state, streamedContent: action.payload };
+    case 'SET_STREAM_ERROR':
+      return { ...state, streamError: action.payload };
+    case 'SET_SHOW_JSON_MODAL':
+      return { ...state, showJsonModal: action.payload };
+    case 'RESET_STREAM_STATE':
+      return { ...state, streamedContent: '', streamError: null };
+    default:
+      return state;
+  }
+}
+
+export const useAIBuilder = (initialPrompt?: string) => {
   const router = useRouter();
+  const [state, dispatch] = useReducer(aiBuilderReducer, initialState);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const streamingRef = useRef<HTMLDivElement>(null);
+  const initialPromptProcessedRef = useRef(false);
 
-  const [sessionId, setSessionId] = useState<string | null>(null);
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [forms, setForms] = useState<FormSchema[]>([]);
-  const [activeFormId, setActiveFormId] = useState<string | null>(null);
-  const [isStreaming, setIsStreaming] = useState(false);
-  const [streamedContent, setStreamedContent] = useState('');
-  const [streamError, setStreamError] = useState<string | null>(null);
-  const [showJsonModal, setShowJsonModal] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const [initialPromptProcessed, setInitialPromptProcessed] = useState(false);
+  const processInitialPrompt = useCallback(() => {
+    if (initialPromptProcessedRef.current) return;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const promptParam = urlParams.get('prompt');
+    const sentParam = urlParams.get('sent');
+
+    if (promptParam && sentParam === 'true') {
+      const decodedPrompt = decodeURIComponent(promptParam);
+      dispatch({ type: 'SET_INPUT', payload: decodedPrompt });
+      initialPromptProcessedRef.current = true;
+
+      setTimeout(() => {
+        autoSendPrompt(decodedPrompt);
+      }, 100);
+    } else if (initialPrompt) {
+      dispatch({ type: 'SET_INPUT', payload: initialPrompt });
+      initialPromptProcessedRef.current = true;
+
+      setTimeout(() => {
+        autoSendPrompt(initialPrompt);
+      }, 100);
+    }
+  }, [initialPrompt]);
 
   useEffect(() => {
-    setMounted(true);
+    processInitialPrompt();
+  }, [processInitialPrompt]);
+
+  const scrollToBottom = useCallback(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
-  useEffect(() => {
-    if (mounted && !initialPromptProcessed) {
-      const urlParams = new URLSearchParams(window.location.search);
-      const promptParam = urlParams.get('prompt');
-      const sentParam = urlParams.get('sent');
-
-      if (promptParam && sentParam === 'true') {
-        const decodedPrompt = decodeURIComponent(promptParam);
-        setInput(decodedPrompt);
-        setInitialPromptProcessed(true);
-
-        setTimeout(() => {
-          autoSendPrompt(decodedPrompt);
-        }, 500);
-      }
-    }
-  }, [mounted, initialPromptProcessed]);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
-
-  useEffect(() => {
-    if (isStreaming && streamingRef.current) {
+  const scrollStreamingToBottom = useCallback(() => {
+    if (state.isStreaming && streamingRef.current) {
       streamingRef.current.scrollTop = streamingRef.current.scrollHeight;
     }
-  }, [streamedContent, isStreaming]);
+  }, [state.isStreaming]);
 
-  const processAIResponse = async (
-    promptText: string,
-    currentMessages: ChatMessage[]
-  ) => {
-    const currentSessionId = sessionId || generateSessionId();
-    setSessionId(currentSessionId);
+  const processAIResponse = useCallback(
+    async (promptText: string, currentMessages: ChatMessage[]) => {
+      const currentSessionId = state.sessionId || generateSessionId();
+      dispatch({ type: 'SET_SESSION_ID', payload: currentSessionId });
 
-    setIsLoading(true);
-    setIsStreaming(true);
-    setStreamedContent('');
-    setStreamError(null);
+      dispatch({ type: 'SET_LOADING', payload: true });
+      dispatch({ type: 'SET_STREAMING', payload: true });
+      dispatch({ type: 'RESET_STREAM_STATE' });
 
-    const { fullText, foundJson } = await AIBuilderService.sendMessage(
-      currentMessages,
-      currentSessionId,
-      setStreamedContent,
-      setStreamError
-    );
-
-    setIsStreaming(false);
-    setIsLoading(false);
-
-    if (foundJson) {
-      const existing = checkForDuplicateSchema(forms, foundJson);
-      if (existing) {
-        setActiveFormId(existing.id);
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: 'assistant',
-            content: 'This form already exists. Switched to the existing form.',
-            schema: foundJson,
-          },
-        ]);
-      } else {
-        const newId = Date.now().toString();
-        setForms((prev) => [
-          ...prev,
-          { id: newId, schema: foundJson, prompt: promptText },
-        ]);
-        setActiveFormId(newId);
-        setMessages((prev) => [
-          ...prev,
-          { role: 'assistant', content: fullText, schema: foundJson },
-        ]);
-      }
-      setStreamedContent('');
-    } else {
-      setStreamError(
-        "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!"
+      const { fullText, foundJson } = await AIBuilderService.sendMessage(
+        currentMessages,
+        currentSessionId,
+        (content: string) =>
+          dispatch({ type: 'SET_STREAMED_CONTENT', payload: content }),
+        (error: string) =>
+          dispatch({ type: 'SET_STREAM_ERROR', payload: error })
       );
-    }
-  };
 
-  const autoSendPrompt = async (promptText: string) => {
-    if (!promptText.trim()) return;
+      dispatch({ type: 'SET_STREAMING', payload: false });
+      dispatch({ type: 'SET_LOADING', payload: false });
 
-    const newMessage: ChatMessage = { role: 'user', content: promptText };
-    setMessages((prev) => [...prev, newMessage]);
-    await processAIResponse(promptText, [...messages, newMessage]);
-  };
+      if (foundJson) {
+        const existing = checkForDuplicateSchema(state.forms, foundJson);
+        if (existing) {
+          dispatch({ type: 'SET_ACTIVE_FORM_ID', payload: existing.id });
+          dispatch({
+            type: 'ADD_MESSAGE',
+            payload: {
+              role: 'assistant',
+              content:
+                'This form already exists. Switched to the existing form.',
+              schema: foundJson,
+            },
+          });
+        } else {
+          const newId = Date.now().toString();
+          const newForm = { id: newId, schema: foundJson, prompt: promptText };
+          dispatch({ type: 'ADD_FORM', payload: newForm });
+          dispatch({ type: 'SET_ACTIVE_FORM_ID', payload: newId });
+          dispatch({
+            type: 'ADD_MESSAGE',
+            payload: {
+              role: 'assistant',
+              content: fullText,
+              schema: foundJson,
+            },
+          });
+        }
+        dispatch({ type: 'SET_STREAMED_CONTENT', payload: '' });
+      } else {
+        dispatch({
+          type: 'SET_STREAM_ERROR',
+          payload:
+            "Sorry, I couldn't generate a form from your input. Please try rephrasing your request or provide more details!",
+        });
+      }
+    },
+    [state.sessionId, state.forms]
+  );
 
-  const handleSend = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!input.trim()) return;
+  const autoSendPrompt = useCallback(
+    async (promptText: string) => {
+      if (!promptText.trim()) return;
 
-    const currentInput = input;
-    setInput('');
+      const newMessage: ChatMessage = { role: 'user', content: promptText };
+      dispatch({ type: 'ADD_MESSAGE', payload: newMessage });
+      await processAIResponse(promptText, [...state.messages, newMessage]);
+    },
+    [state.messages, processAIResponse]
+  );
 
-    const newMessage: ChatMessage = { role: 'user', content: currentInput };
-    setMessages((prev) => [...prev, newMessage]);
-    await processAIResponse(currentInput, [...messages, newMessage]);
-  };
+  const handleSend = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (!state.input.trim()) return;
 
-  const handleUseForm = () => {
-    const activeForm = forms.find((f) => f.id === activeFormId);
+      const currentInput = state.input;
+      dispatch({ type: 'SET_INPUT', payload: '' });
+
+      const newMessage: ChatMessage = { role: 'user', content: currentInput };
+      dispatch({ type: 'ADD_MESSAGE', payload: newMessage });
+      await processAIResponse(currentInput, [...state.messages, newMessage]);
+    },
+    [state.input, state.messages, processAIResponse]
+  );
+
+  const handleUseForm = useCallback(() => {
+    const activeForm = state.forms.find((f) => f.id === state.activeFormId);
     if (activeForm?.schema) {
       localStorage.setItem(
         'importedFormSchema',
@@ -144,28 +224,50 @@ export const useAIBuilder = () => {
       );
       router.push('/form-builder');
     }
-  };
+  }, [state.forms, state.activeFormId, router]);
+
+  const activeForm = useMemo(
+    () => state.forms.find((f) => f.id === state.activeFormId),
+    [state.forms, state.activeFormId]
+  );
+
+  const actions = useMemo(
+    () => ({
+      setInput: (value: string) =>
+        dispatch({ type: 'SET_INPUT', payload: value }),
+      setActiveFormId: (id: string | null) =>
+        dispatch({ type: 'SET_ACTIVE_FORM_ID', payload: id }),
+      setStreamedContent: (content: string) =>
+        dispatch({ type: 'SET_STREAMED_CONTENT', payload: content }),
+      setStreamError: (error: string | null) =>
+        dispatch({ type: 'SET_STREAM_ERROR', payload: error }),
+      setShowJsonModal: (show: boolean) =>
+        dispatch({ type: 'SET_SHOW_JSON_MODAL', payload: show }),
+    }),
+    []
+  );
 
   return {
-    messages,
-    input,
-    isLoading,
-    forms,
-    activeFormId,
-    isStreaming,
-    streamedContent,
-    streamError,
-    showJsonModal,
-    mounted,
+    messages: state.messages,
+    input: state.input,
+    isLoading: state.isLoading,
+    forms: state.forms,
+    activeFormId: state.activeFormId,
+    isStreaming: state.isStreaming,
+    streamedContent: state.streamedContent,
+    streamError: state.streamError,
+    showJsonModal: state.showJsonModal,
+    activeForm,
+
     messagesEndRef,
     streamingRef,
-    setInput,
-    setActiveFormId,
-    setStreamedContent,
-    setStreamError,
-    setShowJsonModal,
+
+    ...actions,
     handleSend,
     handleUseForm,
-    activeForm: forms.find((f) => f.id === activeFormId),
+
+    processInitialPrompt,
+    scrollToBottom,
+    scrollStreamingToBottom,
   };
 };

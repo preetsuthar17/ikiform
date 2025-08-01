@@ -1,4 +1,3 @@
-// Utility functions for forms management
 import type { Form } from '@/lib/database';
 
 /**

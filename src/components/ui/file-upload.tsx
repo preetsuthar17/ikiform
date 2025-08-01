@@ -84,7 +84,7 @@ export interface FileUploadProps
   accept?: string;
   multiple?: boolean;
   maxFiles?: number;
-  maxSize?: number; // in bytes
+  maxSize?: number;
   disabled?: boolean;
   onFilesChange?: (files: FileWithPreview[]) => void;
   onUpload?: (files: File[]) => Promise<void>;
@@ -102,7 +102,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
       accept = 'image/*,application/pdf,video/*,audio/*,text/*,application/zip',
       multiple = true,
       maxFiles = 10,
-      maxSize = 10 * 1024 * 1024, // 10MB
+      maxSize = 10 * 1024 * 1024,
       disabled = false,
       onFilesChange,
       onUpload,
@@ -167,7 +167,6 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
       setFiles(updatedFiles);
       onFilesChange?.(updatedFiles);
 
-      // Simulate upload or call actual upload
       if (onUpload) {
         const validFiles = newFiles
           .filter((f) => f.status === 'uploading')
@@ -191,7 +190,6 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
           );
         }
       } else {
-        // Simulate upload progress
         newFiles.forEach((fileItem) => {
           if (fileItem.status === 'uploading') {
             simulateUpload(fileItem.id);
@@ -254,7 +252,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
 
     return (
       <div className="flex w-full flex-col gap-4" ref={ref} {...props}>
-        {/* Drop Zone */}
+        {}
         <div
           aria-label="Upload files"
           className={cn(
@@ -341,7 +339,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
           />
         </div>
 
-        {/* Files List */}
+        {}
         {files.length > 0 && (
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
@@ -379,7 +377,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                           initial={{ opacity: 0, y: 20 }}
                           key={file.id}
                         >
-                          {/* File Icon/Preview */}
+                          {}
                           <div className="relative flex-shrink-0">
                             {showPreview && file.preview ? (
                               <img
@@ -399,7 +397,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                             )}
                           </div>
 
-                          {/* File Info */}
+                          {}
                           <div className="flex min-w-0 flex-1 flex-col gap-1">
                             <div className="flex items-center justify-between gap-2">
                               <p className="truncate font-medium text-foreground text-sm">
@@ -440,7 +438,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                               </div>
                             </div>
 
-                            {/* Progress Bar */}
+                            {}
                             {file.status === 'uploading' && (
                               <div className="h-1.5 w-full overflow-hidden rounded-card bg-accent">
                                 <motion.div

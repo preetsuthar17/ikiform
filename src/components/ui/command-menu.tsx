@@ -9,7 +9,6 @@ import { Kbd } from '@/components/ui/kbd';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 
-// Utility function to detect OS and return appropriate modifier key
 const getModifierKey = () => {
   if (typeof navigator === 'undefined') return { key: 'Ctrl', symbol: 'Ctrl' };
 
@@ -20,7 +19,6 @@ const getModifierKey = () => {
   return isMac ? { key: 'cmd', symbol: '⌘' } : { key: 'ctrl', symbol: 'Ctrl' };
 };
 
-// Context for sharing state between components
 interface CommandMenuContextType {
   value: string;
   setValue: (value: string) => void;
@@ -73,13 +71,11 @@ const useCommandMenu = () => {
   return context;
 };
 
-// Core CommandMenu component using Dialog
 const CommandMenu = DialogPrimitive.Root;
 const CommandMenuTrigger = DialogPrimitive.Trigger;
 const CommandMenuPortal = DialogPrimitive.Portal;
 const CommandMenuClose = DialogPrimitive.Close;
 
-// Title components for accessibility
 const CommandMenuTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
@@ -107,7 +103,6 @@ const CommandMenuDescription = React.forwardRef<
 ));
 CommandMenuDescription.displayName = 'CommandMenuDescription';
 
-// Overlay with backdrop blur
 const CommandMenuOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
@@ -123,7 +118,6 @@ const CommandMenuOverlay = React.forwardRef<
 ));
 CommandMenuOverlay.displayName = 'CommandMenuOverlay';
 
-// Main content container with keyboard navigation
 const CommandMenuContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
@@ -146,18 +140,14 @@ const CommandMenuContent = React.forwardRef<
     const [value, setValue] = React.useState('');
     const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-    // Keyboard navigation
     React.useEffect(() => {
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'ArrowDown') {
           e.preventDefault();
-          // Logic will be handled by CommandMenuList
         } else if (e.key === 'ArrowUp') {
           e.preventDefault();
-          // Logic will be handled by CommandMenuList
         } else if (e.key === 'Enter') {
           e.preventDefault();
-          // Logic will be handled by CommandMenuItem
         }
       };
 
@@ -216,7 +206,6 @@ const CommandMenuContent = React.forwardRef<
 );
 CommandMenuContent.displayName = 'CommandMenuContent';
 
-// Input component for search
 const CommandMenuInput = React.forwardRef<
   HTMLInputElement,
   React.InputHTMLAttributes<HTMLInputElement> & {
@@ -249,7 +238,6 @@ const CommandMenuInput = React.forwardRef<
 );
 CommandMenuInput.displayName = 'CommandMenuInput';
 
-// List container for command items with scroll area
 const CommandMenuList = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & {
@@ -263,7 +251,6 @@ const CommandMenuList = React.forwardRef<
     scrollHideDelay = 600,
   } = useCommandMenu();
 
-  // Handle keyboard navigation
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const items = document.querySelectorAll('[data-command-item]');
@@ -274,7 +261,6 @@ const CommandMenuList = React.forwardRef<
         const newIndex = Math.min(selectedIndex + 1, maxIndex);
         setSelectedIndex(newIndex);
 
-        // Scroll selected item into view
         const selectedItem = items[newIndex] as HTMLElement;
         if (selectedItem) {
           selectedItem.scrollIntoView({
@@ -287,7 +273,6 @@ const CommandMenuList = React.forwardRef<
         const newIndex = Math.max(selectedIndex - 1, 0);
         setSelectedIndex(newIndex);
 
-        // Scroll selected item into view
         const selectedItem = items[newIndex] as HTMLElement;
         if (selectedItem) {
           selectedItem.scrollIntoView({
@@ -317,7 +302,6 @@ const CommandMenuList = React.forwardRef<
 });
 CommandMenuList.displayName = 'CommandMenuList';
 
-// Command group with optional heading
 const CommandMenuGroup = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & {
@@ -335,7 +319,6 @@ const CommandMenuGroup = React.forwardRef<
 ));
 CommandMenuGroup.displayName = 'CommandMenuGroup';
 
-// Individual command item
 const CommandMenuItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & {
@@ -362,7 +345,6 @@ const CommandMenuItem = React.forwardRef<
     const { selectedIndex, setSelectedIndex } = useCommandMenu();
     const isSelected = selectedIndex === index;
 
-    // Handle click and enter key
     const handleSelect = React.useCallback(() => {
       if (!disabled && onSelect) {
         onSelect();
@@ -432,7 +414,6 @@ const CommandMenuItem = React.forwardRef<
 );
 CommandMenuItem.displayName = 'CommandMenuItem';
 
-// Separator between groups
 const CommandMenuSeparator = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -445,7 +426,6 @@ const CommandMenuSeparator = React.forwardRef<
 ));
 CommandMenuSeparator.displayName = 'CommandMenuSeparator';
 
-// Empty state
 const CommandMenuEmpty = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -460,7 +440,6 @@ const CommandMenuEmpty = React.forwardRef<
 ));
 CommandMenuEmpty.displayName = 'CommandMenuEmpty';
 
-// Hook for global keyboard shortcut
 export const useCommandMenuShortcut = (callback: () => void) => {
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

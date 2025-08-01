@@ -7,7 +7,6 @@ import { AnimatePresence, motion } from 'motion/react';
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 
-// Tree Context
 interface TreeContextType {
   expandedIds: Set<string>;
   selectedIds: string[];
@@ -33,7 +32,6 @@ const useTree = () => {
   return context;
 };
 
-// Tree variants
 const treeVariants = cva(
   'w-full rounded-ele border border-border bg-background shadow-sm/2',
   {
@@ -78,7 +76,6 @@ const treeItemVariants = cva(
   }
 );
 
-// Provider Props
 export interface TreeProviderProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof treeVariants> {
@@ -95,7 +92,6 @@ export interface TreeProviderProps
   indent?: number;
 }
 
-// Tree Provider
 const TreeProvider = React.forwardRef<HTMLDivElement, TreeProviderProps>(
   (
     {
@@ -201,12 +197,10 @@ const TreeProvider = React.forwardRef<HTMLDivElement, TreeProviderProps>(
 
 TreeProvider.displayName = 'TreeProvider';
 
-// Tree Props
 export interface TreeProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
 }
 
-// Tree
 const Tree = React.forwardRef<HTMLDivElement, TreeProps>(
   ({ className, asChild = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : 'div';
@@ -225,7 +219,6 @@ const Tree = React.forwardRef<HTMLDivElement, TreeProps>(
 
 Tree.displayName = 'Tree';
 
-// Tree Item Props
 export interface TreeItemProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof treeItemVariants> {
@@ -240,7 +233,6 @@ export interface TreeItemProps
   asChild?: boolean;
 }
 
-// Tree Item
 const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
   (
     {
@@ -306,7 +298,7 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
           style={{ paddingLeft: level * indent + 8 }}
           whileTap={{ scale: 0.98, transition: { duration: 0.1 } }}
         >
-          {/* Tree Lines */}
+          {}
           {showLines && level > 0 && (
             <div className="pointer-events-none absolute top-0 bottom-0 left-0">
               {currentPath.map((isLastInPath, pathIndex) => (
@@ -342,7 +334,7 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
             </div>
           )}
 
-          {/* Expand Icon */}
+          {}
           <motion.div
             animate={{ rotate: hasChildren && isExpanded ? 90 : 0 }}
             className="mr-1 flex h-4 w-4 items-center justify-center"
@@ -353,7 +345,7 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
             )}
           </motion.div>
 
-          {/* Node Icon */}
+          {}
           {showIcons && (
             <motion.div
               className="mr-2 flex h-4 w-4 items-center justify-center text-muted-foreground"
@@ -364,13 +356,13 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
             </motion.div>
           )}
 
-          {/* Label */}
+          {}
           <span className="flex-1 truncate text-foreground text-sm">
             {label}
           </span>
         </motion.div>
 
-        {/* Children */}
+        {}
         <AnimatePresence>
           {hasChildren && isExpanded && children && (
             <motion.div

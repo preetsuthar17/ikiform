@@ -1,25 +1,23 @@
-// Main profile card component
 'use client';
 
 import React, { useState } from 'react';
 import { SettingsModal } from '@/components/settings/settings-modal';
 
-// UI Components
 import { Card, CardHeader } from '@/components/ui/card';
-// External Dependencies
+
 import { useAuth } from '@/hooks/use-auth';
-// Hooks
+
 import { usePremiumStatus } from '@/hooks/use-premium-status';
-// Local Components
+
 import {
   ProfileActions,
   ProfileCardLoading,
   ProfileInfo,
   UserAvatar,
 } from './components';
-// Types
+
 import type { ProfileCardProps } from './types';
-// Utils
+
 import { extractAvatarUrl, extractUserName } from './utils';
 
 export function ProfileCard({ className }: ProfileCardProps) {

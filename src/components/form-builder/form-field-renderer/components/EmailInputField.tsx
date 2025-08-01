@@ -1,17 +1,16 @@
-// External imports
 import type React from 'react';
 import { useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-// Component imports
+
 import { Input } from '@/components/ui/input';
 import {
   autoCompleteEmail,
   validateEmail,
 } from '@/lib/validation/email-validation';
-// Type imports
+
 import type { BaseFieldProps } from '../types';
-// Utility imports
+
 import { getBaseClasses } from '../utils';
 
 export function EmailInputField({
@@ -40,19 +39,17 @@ export function EmailInputField({
     const newValue = e.target.value;
     setInputValue(newValue);
 
-    // Show auto-complete suggestion if user is typing username and auto-complete is enabled
     if (emailSettings?.autoCompleteDomain && !newValue.includes('@')) {
       setShowAutoComplete(true);
     } else {
       setShowAutoComplete(false);
     }
 
-    // Validate and update parent
     const validation = validateEmailField(newValue);
     if (validation.isValid || !newValue) {
       onChange(newValue);
     } else {
-      onChange(newValue); // Still update the value but validation will show error
+      onChange(newValue);
     }
   };
 
@@ -73,7 +70,6 @@ export function EmailInputField({
     setShowAutoComplete(false);
     setIsValidating(true);
 
-    // Auto-complete on blur if user only entered username
     if (
       emailSettings?.autoCompleteDomain &&
       inputValue &&
@@ -85,7 +81,6 @@ export function EmailInputField({
 
   const validation = validateEmailField(inputValue);
 
-  // Only show one error, and avoid duplicate messages
   let errorMessage = '';
   if (error && validation.message && error === validation.message) {
     errorMessage = error;

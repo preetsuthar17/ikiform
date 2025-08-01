@@ -1,11 +1,7 @@
-// External imports
-
-// Icons
 import { AlertTriangle } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import type React from 'react';
 
-// Types
 import type { UnsavedChangesIndicatorProps } from '../types';
 
 export const UnsavedChangesIndicator: React.FC<

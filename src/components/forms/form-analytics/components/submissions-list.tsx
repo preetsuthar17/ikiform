@@ -1,4 +1,3 @@
-// Icons
 import {
   Clock,
   Download,
@@ -14,7 +13,7 @@ import type React from 'react';
 import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-// UI Components
+
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import {
@@ -28,7 +27,6 @@ import { Separator } from '@/components/ui/separator';
 import { DataTable, type DataTableColumn } from '@/components/ui/table';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
 
-// Types and Utilities
 import type { Form, FormSubmission } from '@/lib/database';
 import type { FilterState, SubmissionsListProps } from '../types';
 import {
@@ -307,7 +305,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                             const field = allFields.find(
                               (f) => f.id === fieldId
                             );
-                            // Signature field as image
+
                             if (
                               field?.type === 'signature' &&
                               typeof value === 'string' &&
@@ -331,7 +329,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                 </div>
                               );
                             }
-                            // Social field as labeled links
+
                             if (
                               field?.type === 'social' &&
                               typeof value === 'object' &&
@@ -383,7 +381,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                 </div>
                               );
                             }
-                            // Default rendering
+
                             return (
                               <div
                                 className="flex flex-col gap-2"

@@ -1,11 +1,8 @@
-// Animation imports
 import { motion } from 'motion/react';
 import { memo, useMemo } from 'react';
 
-// UI components imports
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
-// Local imports
 import type { ChatMessage } from '@/lib/ai-builder/types';
 import { ExpandableJsonBlock } from './expandable-json-block';
 

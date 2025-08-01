@@ -8,7 +8,6 @@ import {
 } from 'next/font/google';
 import './globals.css';
 import { Databuddy } from '@databuddy/sdk';
-import { GoogleTagManager } from '@next/third-parties/google';
 import { ThemeProvider } from 'next-themes';
 import CrispController from '@/components/other/CrispController';
 import { Toaster } from '@/components/ui/toast';
@@ -143,7 +142,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <GoogleTagManager gtmId="AW-16554309213" />
       <head>
         {/* <script
           crossOrigin="anonymous"
@@ -170,7 +168,7 @@ export default function RootLayout({
                 try {
                   observer.observe({ entryTypes: ['longtask', 'measure', 'navigation'] });
                 } catch (e) {
-                  // Fallback for browsers that don't support longtask
+                  
                   observer.observe({ entryTypes: ['measure', 'navigation'] });
                 }
               }

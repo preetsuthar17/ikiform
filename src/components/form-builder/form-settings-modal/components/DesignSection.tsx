@@ -89,7 +89,7 @@ export function DesignSection({
         Design
       </h3>
       <div className="flex flex-col gap-4 border-muted border-l-2 pl-6">
-        {/* Show Progress Bar */}
+        {}
         <div className="flex items-center gap-3">
           <Switch
             checked={!!localSettings.showProgress}
@@ -106,7 +106,7 @@ export function DesignSection({
             Show Progress Bar
           </Label>
         </div>
-        {/* Width */}
+        {}
         <div className="flex flex-col gap-2">
           <Label>Form Width</Label>
           <div className="flex flex-wrap gap-2">
@@ -126,7 +126,7 @@ export function DesignSection({
             ))}
           </div>
         </div>
-        {/* Padding */}
+        {}
         <div className="flex flex-col gap-2">
           <Label>Form Padding</Label>
           <div className="flex flex-wrap gap-2">
@@ -146,7 +146,7 @@ export function DesignSection({
             ))}
           </div>
         </div>
-        {/* Margin */}
+        {}
         <div className="flex flex-col gap-2">
           <Label>Form Margin</Label>
           <div className="flex flex-wrap gap-2">
@@ -166,7 +166,7 @@ export function DesignSection({
             ))}
           </div>
         </div>
-        {/* Border Radius */}
+        {}
         <div className="flex flex-col gap-2">
           <Label>Border Radius</Label>
           <div className="flex flex-wrap gap-2">
@@ -186,7 +186,7 @@ export function DesignSection({
             ))}
           </div>
         </div>
-        {/* Design Mode */}
+        {}
         <div className="flex flex-col gap-2">
           <Label>Design Mode</Label>
           <RadioGroup

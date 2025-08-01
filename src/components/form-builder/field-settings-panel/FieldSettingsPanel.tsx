@@ -1,9 +1,7 @@
-// External imports
 import React from 'react';
 
-// Component imports
 import { ScrollArea } from '@/components/ui/scroll-area';
-// Type imports
+
 import type { FormField } from '@/lib/database';
 import {
   BasicSettings,
@@ -15,7 +13,7 @@ import {
   ValidationSettings,
   VisualSettings,
 } from './components';
-// Utility imports
+
 import { useFieldUpdates } from './utils';
 
 interface FieldSettingsPanelProps {

@@ -1,5 +1,3 @@
-// External imports
-
 import {
   BarChart3,
   Code,
@@ -16,7 +14,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import type React from 'react';
-// Component imports
+
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import {
@@ -26,9 +24,8 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 
-// Constant imports
 import { FORM_BUILDER_CONSTANTS } from '../constants';
-// Type imports
+
 import type { FormBuilderHeaderProps } from '../types';
 
 export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({

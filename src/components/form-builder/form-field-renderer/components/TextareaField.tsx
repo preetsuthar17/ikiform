@@ -1,11 +1,9 @@
-// External imports
 import React from 'react';
 
-// Component imports
 import { Textarea } from '@/components/ui/textarea';
-// Type imports
+
 import type { BaseFieldProps } from '../types';
-// Utility imports
+
 import { getBaseClasses } from '../utils';
 
 export function TextareaField({

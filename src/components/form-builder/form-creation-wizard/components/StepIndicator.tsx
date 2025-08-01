@@ -1,12 +1,8 @@
-// External imports
-
-// Icon imports
 import { Check, Eye, FileText, Settings } from 'lucide-react';
 import type React from 'react';
-// UI imports
+
 import { cn } from '@/lib/utils';
 
-// Type imports
 import type { WizardStep } from '../types';
 
 interface StepIndicatorProps {
@@ -62,7 +58,7 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
 
           return (
             <div className="flex items-center" key={step.id}>
-              {/* Step Circle */}
+              {}
               <div
                 className={cn(
                   'flex h-10 w-10 items-center justify-center rounded-card border-2 transition-all',
@@ -80,7 +76,7 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
                 )}
               </div>
 
-              {/* Step Details */}
+              {}
               <div className="ml-3 hidden sm:block">
                 <p
                   className={cn(
@@ -102,7 +98,7 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
                 </p>
               </div>
 
-              {/* Connector Line */}
+              {}
               {index < steps.length - 1 && (
                 <div
                   className={cn(

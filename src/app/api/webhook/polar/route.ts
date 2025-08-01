@@ -7,7 +7,6 @@ if (!webhookSecret) {
   throw new Error('POLAR_WEBHOOK_SECRET environment variable is not set');
 }
 
-// Helper function to find user by email (consistent with original implementation)
 const findUserByEmail = async (supabase: any, email: string) => {
   console.log('🔍 Looking for user with email:', email);
 
@@ -27,7 +26,6 @@ const findUserByEmail = async (supabase: any, email: string) => {
   return userData;
 };
 
-// Helper function to update user premium status
 const updateUserPremiumStatus = async (
   supabase: any,
   uid: string,
@@ -38,12 +36,10 @@ const updateUserPremiumStatus = async (
 ) => {
   const updateData: any = { has_premium: hasPremium };
 
-  // Store polar customer ID if provided
   if (polarCustomerId) {
     updateData.polar_customer_id = polarCustomerId;
   }
 
-  // Store customer name if provided (optional - add to your database schema if needed)
   if (customerName) {
     updateData.customer_name = customerName;
   }
@@ -71,7 +67,6 @@ const updateUserPremiumStatus = async (
   return null;
 };
 
-// Helper function to send thank you email (consistent with original)
 const sendThankYouEmail = async (email: string, customerName?: string) => {
   try {
     const { sendPremiumThankYouEmail } = await import(
@@ -90,12 +85,10 @@ const sendThankYouEmail = async (email: string, customerName?: string) => {
 export const POST = Webhooks({
   webhookSecret,
 
-  // Handle one-time payment completion (maintaining original functionality)
   onOrderPaid: async (payload) => {
     console.log('✅ Order paid webhook received successfully');
     console.log('📦 Order paid payload:', JSON.stringify(payload, null, 2));
 
-    // Strictly check payment status
     if (payload.data.status !== 'paid' || payload.data.paid !== true) {
       console.warn('❌ Payment not completed. Skipping premium update.');
       return;
@@ -133,7 +126,6 @@ export const POST = Webhooks({
     }
   },
 
-  // Handle subscription creation
   onSubscriptionCreated: async (payload) => {
     console.log('🎉 Subscription created webhook received successfully');
     console.log(
@@ -176,7 +168,6 @@ export const POST = Webhooks({
     }
   },
 
-  // Handle subscription activation
   onSubscriptionActive: async (payload) => {
     console.log('🟢 Subscription activated webhook received successfully');
     console.log(
@@ -214,7 +205,6 @@ export const POST = Webhooks({
     }
   },
 
-  // Handle subscription updates (plan changes, payment method updates, etc.)
   onSubscriptionUpdated: async (payload) => {
     console.log('🔄 Subscription updated webhook received successfully');
     console.log(
@@ -234,7 +224,6 @@ export const POST = Webhooks({
       const userData = await findUserByEmail(supabase, customerEmail);
       if (!userData) return;
 
-      // Determine if subscription should grant premium access based on status
       const shouldHavePremium = ['active', 'trialing'].includes(
         payload.data.status
       );
@@ -261,7 +250,6 @@ export const POST = Webhooks({
     }
   },
 
-  // Handle subscription cancellation/revocation
   onSubscriptionRevoked: async (payload) => {
     console.log('🔴 Subscription revoked webhook received successfully');
     console.log(
@@ -298,7 +286,6 @@ export const POST = Webhooks({
     }
   },
 
-  // Handle subscription cancellation (when user cancels but may still have access until period end)
   onSubscriptionCanceled: async (payload) => {
     console.log('⚠️ Subscription canceled webhook received successfully');
     console.log(
@@ -318,7 +305,6 @@ export const POST = Webhooks({
       const userData = await findUserByEmail(supabase, customerEmail);
       if (!userData) return;
 
-      // For cancellation, check if subscription is still active (user may have access until period end)
       const shouldHavePremium = ['active', 'trialing'].includes(
         payload.data.status
       );

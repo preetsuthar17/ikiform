@@ -1,7 +1,5 @@
-// External imports
 import type { FormSchema } from '@/lib/database';
 
-// Interfaces
 export interface FormSettingsModalProps {
   isOpen: boolean;
   onClose: () => void;

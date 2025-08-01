@@ -78,7 +78,6 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
     const [inputValue, setInputValue] = React.useState('');
     const inputRef = React.useRef<HTMLInputElement>(null);
 
-    // Ensure tags is always an array
     const safeTags = Array.isArray(tags) ? tags : [];
 
     const addTag = React.useCallback(

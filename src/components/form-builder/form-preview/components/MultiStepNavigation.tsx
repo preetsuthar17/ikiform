@@ -1,12 +1,8 @@
-// External libraries
-
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import React from 'react';
 
-// UI components
 import { Button } from '@/components/ui/button';
 
-// Types
 import type { MultiStepNavigationProps } from '../types';
 
 export function MultiStepNavigation({

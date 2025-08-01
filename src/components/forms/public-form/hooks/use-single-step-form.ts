@@ -1,18 +1,15 @@
-// Hooks
 import { useEffect, useRef, useState } from 'react';
 import { toast } from '@/hooks/use-toast';
 
-// Types
 import type { FormField, FormSchema } from '@/lib/database';
 import { evaluateLogic } from '@/lib/forms/logic';
 import type { SingleStepFormActions, SingleStepFormState } from '../types';
-// Utilities
+
 import {
   submitSingleStepForm,
   validateSingleStepForm,
 } from '../utils/form-utils';
 
-// Utility function to get default value for a field type
 const getDefaultValueForField = (field: FormField): any => {
   switch (field.type) {
     case 'tags':
@@ -41,7 +38,6 @@ const getDefaultValueForField = (field: FormField): any => {
   }
 };
 
-// Utility function to initialize form data with proper defaults
 const initializeFormData = (fields: FormField[]): Record<string, any> => {
   const formData: Record<string, any> = {};
 
@@ -67,7 +63,6 @@ export const useSingleStepForm = (
   const [submitted, setSubmitted] = useState(false);
   const initializedFieldsRef = useRef<Set<string>>(new Set());
 
-  // Initialize form data when fields change - only when new fields are added
   useEffect(() => {
     const currentFieldIds = new Set(fields.map((field) => field.id));
     const newFieldIds = [...currentFieldIds].filter(
@@ -75,7 +70,6 @@ export const useSingleStepForm = (
     );
 
     if (newFieldIds.length > 0) {
-      // Preserve existing form data and only initialize new fields
       const newFormData = { ...formData };
       fields.forEach((field) => {
         if (newFieldIds.includes(field.id)) {
@@ -87,10 +81,9 @@ export const useSingleStepForm = (
     }
   }, [fields.length]);
 
-  // Logic evaluation for field visibility/enabled state
   const logic = schema.logic || [];
   const logicActions = evaluateLogic(logic, formData);
-  // Build a map: fieldId -> { visible, disabled }
+
   const fieldVisibility: Record<
     string,
     { visible: boolean; disabled: boolean }

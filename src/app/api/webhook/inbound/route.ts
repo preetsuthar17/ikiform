@@ -4,9 +4,6 @@ import {
   getInboundMappings,
 } from '@/lib/webhooks/inbound';
 
-// --- Inbound Webhook Mapping Management API ---
-
-// GET /api/webhook/inbound - List inbound mappings (optionally filter by targetFormId)
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -26,11 +23,10 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// POST /api/webhook/inbound - Create inbound mapping
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    // Basic validation
+
     if (!(body.endpoint && body.targetFormId && body.mappingRules)) {
       return NextResponse.json(
         {

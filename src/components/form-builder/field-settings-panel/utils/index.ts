@@ -1,10 +1,7 @@
-// Type imports
 import type { FormField } from '@/lib/database';
 
-// Constant imports
 import { FIELD_TYPES } from '../constants';
 
-// Utility functions
 export const getFieldHelpers = (field: FormField) => ({
   hasOptions: FIELD_TYPES.OPTION_TYPES.includes(field.type as any),
   isTextType: FIELD_TYPES.TEXT_TYPES.includes(field.type as any),

@@ -1,10 +1,7 @@
-// Empty state component for forms management
-
-// Icons
 import { Plus, Sparkles } from 'lucide-react';
 import React from 'react';
 import { Button } from '@/components/ui/button';
-// UI Components
+
 import { Card } from '@/components/ui/card';
 import {
   Modal,
@@ -15,7 +12,6 @@ import {
   ModalTrigger,
 } from '@/components/ui/modal';
 
-// Types
 import type { EmptyStateProps } from '../types';
 
 interface EmptyStateExtendedProps extends EmptyStateProps {

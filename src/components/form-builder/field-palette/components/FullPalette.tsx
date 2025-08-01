@@ -1,11 +1,10 @@
 import { DragDropContext, Droppable } from '@hello-pangea/dnd';
 import React from 'react';
 
-// Components
 import { ScrollArea } from '@/components/ui/scroll-area';
-// Constants
+
 import { FIELD_TYPES, PALETTE_CONFIG } from '../constants';
-// Types
+
 import type { FieldPaletteProps } from '../types';
 import { FieldItem, PALETTE_DRAG_TYPE } from './FieldItem';
 import { PaletteHeader } from './PaletteHeader';

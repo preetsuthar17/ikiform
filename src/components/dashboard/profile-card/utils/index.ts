@@ -1,4 +1,3 @@
-// Utility functions for profile card
 import type { User } from '@supabase/supabase-js';
 
 /**

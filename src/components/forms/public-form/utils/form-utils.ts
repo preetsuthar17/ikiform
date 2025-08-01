@@ -1,16 +1,12 @@
-// Types
 import type { FormField, FormSchema } from '@/lib/database';
 
-// Utility imports
 import { validateEmail } from '@/lib/validation/email-validation';
 
-// Utility to get all fields from schema
 export const getAllFields = (schema: FormSchema): FormField[] =>
   schema.blocks?.length
     ? schema.blocks.flatMap((block) => block.fields)
     : schema.fields || [];
 
-// Validation logic for single-step forms
 export const validateSingleStepForm = (
   fields: FormField[],
   formData: Record<string, any>
@@ -91,7 +87,6 @@ export const validateSingleStepForm = (
         errors[field.id] = urlValidation.message || 'Please enter a valid URL';
       }
     } else if (field.type === 'address' && value) {
-      // Check required address fields
       const requiredKeys = ['line1', 'city', 'state', 'zip', 'country'];
       for (const key of requiredKeys) {
         if (!value[key]) {
@@ -107,7 +102,6 @@ export const validateSingleStepForm = (
     ) {
       errors[field.id] = field.validation?.patternMessage || 'Invalid format';
     }
-    // No extra validation for signature field for now
   });
 
   return {
@@ -116,7 +110,6 @@ export const validateSingleStepForm = (
   };
 };
 
-// Submission logic for single-step forms
 export const submitSingleStepForm = async (
   formId: string,
   formData: Record<string, any>

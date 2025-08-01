@@ -1,7 +1,5 @@
-// External imports
 import { Monitor, Moon, Sun } from 'lucide-react';
 
-// types
 import type { Theme } from '../types';
 
 export const THEMES: Theme[] = [

@@ -1,10 +1,8 @@
-// External imports
-
 import { Cross, X } from 'lucide-react';
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-// Component imports
+
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
@@ -24,9 +22,9 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
-// Type imports
+
 import type { FormField } from '@/lib/database';
-// Component imports
+
 import { EmailValidationSettings } from './EmailValidationSettings';
 
 interface FieldSpecificSettingsProps {
@@ -53,7 +51,6 @@ export function FieldSpecificSettings({
   const isAddressType = field.type === 'address';
   const isLinkType = field.type === 'link';
 
-  // Always declare hooks at the top level
   const [schedulerModalOpen, setSchedulerModalOpen] = useState(false);
   const [newOption, setNewOption] = useState('');
 
@@ -78,7 +75,7 @@ export function FieldSpecificSettings({
   ) {
     return null;
   }
-  // Phone Field Settings
+
   if (isPhoneType) {
     return (
       <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
@@ -115,7 +112,6 @@ export function FieldSpecificSettings({
     );
   }
 
-  // Link Field Settings
   if (isLinkType) {
     return (
       <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
@@ -152,7 +148,6 @@ export function FieldSpecificSettings({
     );
   }
 
-  // Address Field Settings
   if (isAddressType) {
     return (
       <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
@@ -221,7 +216,7 @@ export function FieldSpecificSettings({
 
   return (
     <>
-      {/* Email Validation Settings */}
+      {}
       {isEmailType && (
         <EmailValidationSettings
           field={field}
@@ -261,7 +256,7 @@ export function FieldSpecificSettings({
                 </SelectContent>
               </Select>
             </div>
-            {/* Provider-specific link input */}
+            {}
             {field.settings?.schedulerProvider && (
               <div className="flex flex-col gap-2">
                 <Label
@@ -341,7 +336,7 @@ export function FieldSpecificSettings({
               >
                 {field.settings?.schedulerButtonText || 'Open Scheduler'}
               </Button>
-              {/* Modal for embedded calendar */}
+              {}
               <Modal
                 onOpenChange={setSchedulerModalOpen}
                 open={schedulerModalOpen}
@@ -382,10 +377,10 @@ export function FieldSpecificSettings({
         </Card>
       )}
 
-      {/* Date Field Settings */}
+      {}
       {isDateType && null}
 
-      {/* Textarea Settings */}
+      {}
       {isTextareaType && (
         <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
           <h3 className="font-medium text-card-foreground">Field Settings</h3>
@@ -412,7 +407,7 @@ export function FieldSpecificSettings({
         </Card>
       )}
 
-      {/* Slider Settings */}
+      {}
       {isSliderType && (
         <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
           <h3 className="font-medium text-card-foreground">Slider Settings</h3>
@@ -486,7 +481,7 @@ export function FieldSpecificSettings({
         </Card>
       )}
 
-      {/* Tags Settings */}
+      {}
       {isTagsType && (
         <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
           <h3 className="font-medium text-card-foreground">Tags Settings</h3>
@@ -524,7 +519,7 @@ export function FieldSpecificSettings({
         </Card>
       )}
 
-      {/* Social Field Settings */}
+      {}
       {isSocialType && (
         <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
           <h3 className="font-medium text-card-foreground">Social Platforms</h3>

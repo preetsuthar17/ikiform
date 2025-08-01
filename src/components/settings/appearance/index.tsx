@@ -1,15 +1,15 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-// External imports
+
 import type React from 'react';
-// components
+
 import {
   AdditionalOptions,
   AppearanceHeader,
   ThemeSelector,
 } from './components';
-// constants
+
 import { THEMES } from './constants';
 
 export const AppearanceSettings: React.FC = () => {

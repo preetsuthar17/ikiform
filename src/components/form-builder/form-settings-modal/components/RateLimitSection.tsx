@@ -1,16 +1,12 @@
-// External libraries
-
 import { Clock, Shield } from 'lucide-react';
 import React from 'react';
 
-// UI components
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 
-// Types
 import type { RateLimitSectionProps } from '../types';
 
 export function RateLimitSection({

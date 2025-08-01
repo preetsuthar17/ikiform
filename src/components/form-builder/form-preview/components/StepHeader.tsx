@@ -1,11 +1,10 @@
-// External libraries
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
-// UI components
+
 import { Card } from '@/components/ui/card';
-// Types
+
 import type { StepHeaderProps } from '../types';
-// Internal components
+
 import { EditableField } from './EditableField';
 
 export function StepHeader({

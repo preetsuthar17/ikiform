@@ -3,14 +3,13 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { getLivePatternError } from '@/components/form-builder/form-field-renderer/components/TextInputField';
-// Password Protection
+
 import { PasswordProtectionModal } from '@/components/forms/public-form/components/PasswordProtectionModal';
-// UI Components
+
 import { Card } from '@/components/ui/card';
 import { getFormLayoutClasses } from '@/lib/utils/form-layout';
 import { Progress } from '../ui/progress';
 
-// Form Components
 import {
   FormContent,
   FormFooter,
@@ -18,11 +17,11 @@ import {
   FormProgress,
   SuccessScreen,
 } from './multi-step-form/components';
-// Hooks
+
 import { useFormNavigation, useFormState } from './multi-step-form/hooks';
-// Types
+
 import type { MultiStepFormProps } from './multi-step-form/types';
-// Utilities
+
 import { calculateProgress, processFormBlocks } from './multi-step-form/utils';
 
 export function MultiStepForm({
@@ -49,7 +48,6 @@ export function MultiStepForm({
   const currentBlock = blocks[currentStep];
   const progress = calculateProgress(currentStep, totalSteps);
 
-  // Determine if navigation should be blocked due to errors or disabled state
   const hasStepErrors = currentBlock.fields.some((field) => errors[field.id]);
   const hasLivePatternError = currentBlock.fields.some(
     (field) =>
@@ -73,7 +71,6 @@ export function MultiStepForm({
       setShowPasswordModal(true);
     }
 
-    // Show loading progress for 2 seconds
     const timer = setTimeout(() => {
       setIsLoading(false);
       setShowForm(true);
@@ -93,7 +90,6 @@ export function MultiStepForm({
   };
 
   const handlePasswordCancel = () => {
-    // Redirect to home page or show a message
     window.location.href = '/';
   };
 
@@ -110,7 +106,6 @@ export function MultiStepForm({
     return <SuccessScreen schema={schema} />;
   }
 
-  // Show password modal if form is password protected and password hasn't been verified
   if (isPasswordProtected && !passwordVerified) {
     return (
       <PasswordProtectionModal

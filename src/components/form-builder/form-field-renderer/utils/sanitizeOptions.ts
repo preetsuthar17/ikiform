@@ -1,10 +1,9 @@
 export function sanitizeOptions(options: Array<any>): Array<any> {
   return options.map((opt) => {
-    // If string, escape HTML
     if (typeof opt === 'string') {
       return escapeHtml(opt);
     }
-    // If object, sanitize value and label
+
     if (opt && typeof opt === 'object') {
       return {
         ...opt,

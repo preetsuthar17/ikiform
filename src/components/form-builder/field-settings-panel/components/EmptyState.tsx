@@ -1,7 +1,5 @@
-// External imports
 import type React from 'react';
 
-// Type imports
 import type { EmptyStateProps } from '../types';
 
 export const EmptyState: React.FC<EmptyStateProps> = ({ onClose }) => {

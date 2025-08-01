@@ -1,7 +1,5 @@
-// Libraries
 import type React from 'react';
 
-// UI Components
 import { Progress } from '@/components/ui/progress';
 
 interface FormProgressProps {

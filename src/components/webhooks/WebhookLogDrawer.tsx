@@ -34,7 +34,6 @@ interface WebhookLogDrawerProps {
   onClose: () => void;
 }
 
-// Simple code block component (no syntax highlighting)
 function CodeBlock({
   code,
   className = '',
@@ -52,11 +51,9 @@ function CodeBlock({
   );
 }
 
-// Component to format and display webhook payload
 function PayloadViewer({ payload }: { payload: any }) {
   const [viewMode, setViewMode] = useState<'formatted' | 'raw'>('formatted');
 
-  // Parse payload if it's a string
   let parsedPayload = payload;
   if (typeof payload === 'string') {
     try {
@@ -66,21 +63,17 @@ function PayloadViewer({ payload }: { payload: any }) {
     }
   }
 
-  // Try to extract event from various possible locations
   function getEventName(payload: any): string | undefined {
-    // 1. Direct event property
     if (payload.event) return payload.event;
-    // 2. Discord-style: embeds[0].title or embeds[0].description
+
     if (Array.isArray(payload.embeds) && payload.embeds.length > 0) {
-      // Try title or description as event
       if (payload.embeds[0].title) return payload.embeds[0].title;
       if (payload.embeds[0].description) return payload.embeds[0].description;
     }
-    // 3. Fallback: undefined
+
     return;
   }
 
-  // Format form fields for display
   function formatFormFields(fields: any[]) {
     if (!Array.isArray(fields)) return null;
 
@@ -107,14 +100,12 @@ function PayloadViewer({ payload }: { payload: any }) {
     );
   }
 
-  // Format individual values
   function formatValue(value: any): string {
     if (value === null || value === undefined) return 'N/A';
     if (typeof value === 'string') return value;
     if (typeof value === 'number' || typeof value === 'boolean')
       return String(value);
     if (Array.isArray(value)) {
-      // If array of objects, show as JSON, else join
       if (value.length > 0 && typeof value[0] === 'object') {
         try {
           return JSON.stringify(value, null, 2);
@@ -125,7 +116,6 @@ function PayloadViewer({ payload }: { payload: any }) {
       return value.join(', ');
     }
     if (typeof value === 'object') {
-      // Show as JSON string, but compact for single-line objects
       try {
         return JSON.stringify(value, null, 2);
       } catch {
@@ -135,7 +125,6 @@ function PayloadViewer({ payload }: { payload: any }) {
     return String(value);
   }
 
-  // Helper: get additional data keys (excluding known ones)
   function getAdditionalDataKeys(payload: any) {
     const knownKeys = [
       'event',
@@ -150,12 +139,11 @@ function PayloadViewer({ payload }: { payload: any }) {
   }
 
   function FormattedView() {
-    // Try to extract event name
     const eventName = getEventName(parsedPayload);
 
     return (
       <div className="space-y-4">
-        {/* Event Information */}
+        {}
         <div className="rounded-md border p-4">
           <h4 className="mb-3 font-semibold text-sm">Event Information</h4>
           <div className="grid grid-cols-1 gap-2 text-sm">
@@ -198,7 +186,7 @@ function PayloadViewer({ payload }: { payload: any }) {
           </div>
         </div>
 
-        {/* Form Fields */}
+        {}
         {parsedPayload.fields && (
           <div className="rounded-md border p-4">
             <h4 className="mb-3 font-semibold text-sm">Form Fields</h4>
@@ -206,7 +194,7 @@ function PayloadViewer({ payload }: { payload: any }) {
           </div>
         )}
 
-        {/* Raw Form Data */}
+        {}
         {parsedPayload.rawData && (
           <div className="rounded-md border p-4">
             <h4 className="mb-3 font-semibold text-sm">Raw Form Data</h4>
@@ -228,14 +216,14 @@ function PayloadViewer({ payload }: { payload: any }) {
           </div>
         )}
 
-        {/* Additional Data */}
+        {}
         {getAdditionalDataKeys(parsedPayload).length > 0 && (
           <div className="rounded-md border p-4">
             <h4 className="mb-3 font-semibold text-sm">Additional Data</h4>
             <div className="space-y-2">
               {getAdditionalDataKeys(parsedPayload).map((key) => {
                 const value = parsedPayload[key];
-                // For objects/arrays, show as pretty JSON, else as string
+
                 let displayValue: React.ReactNode;
                 if (typeof value === 'object' && value !== null) {
                   displayValue = (
@@ -279,7 +267,6 @@ function PayloadViewer({ payload }: { payload: any }) {
     );
   }
 
-  // Use new Tabs API: items + controlled value
   const tabItems = [
     { id: 'formatted', label: 'Formatted' },
     { id: 'raw', label: 'Raw JSON' },
@@ -332,7 +319,6 @@ export function WebhookLogDrawer({
   useEffect(() => {
     if (!(open && webhookId)) return;
     fetchLogs();
-    // eslint-disable-next-line
   }, [open, webhookId]);
 
   async function handleResend(log: WebhookLog) {
@@ -345,9 +331,7 @@ export function WebhookLogDrawer({
       });
       const data = await res.json();
       fetchLogs();
-    } catch (e) {
-      // Optionally show error
-    }
+    } catch (e) {}
   }
 
   return (
@@ -443,7 +427,7 @@ export function WebhookLogDrawer({
             </Alert>
           )}
         </div>
-        {/* Enhanced Payload Modal */}
+        {}
         {viewPayload && (
           <Drawer
             direction="right"

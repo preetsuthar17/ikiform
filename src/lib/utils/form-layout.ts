@@ -10,8 +10,7 @@ export interface LayoutClasses {
 export const getFormLayoutClasses = (schema: FormSchema): LayoutClasses => {
   const layout = schema.settings?.layout || {};
 
-  // Get max width class
-  let maxWidthClass = 'max-w-2xl'; // default
+  let maxWidthClass = 'max-w-2xl';
   switch (layout?.maxWidth) {
     case 'sm':
       maxWidthClass = 'max-w-sm';
@@ -30,8 +29,7 @@ export const getFormLayoutClasses = (schema: FormSchema): LayoutClasses => {
       break;
   }
 
-  // Get padding class
-  let paddingClass = 'md:p-6 p-2'; // default
+  let paddingClass = 'md:p-6 p-2';
   switch (layout?.padding) {
     case 'none':
       paddingClass = 'p-0';
@@ -47,8 +45,7 @@ export const getFormLayoutClasses = (schema: FormSchema): LayoutClasses => {
       break;
   }
 
-  // Get container class (for public forms)
-  let containerClass = 'max-w-2xl mx-auto'; // default
+  let containerClass = 'max-w-2xl mx-auto';
   switch (layout?.maxWidth) {
     case 'sm':
       containerClass = 'max-w-sm mx-auto';
@@ -67,7 +64,6 @@ export const getFormLayoutClasses = (schema: FormSchema): LayoutClasses => {
       break;
   }
 
-  // Get margin class (outer spacing)
   let marginClass = '';
   switch (layout?.margin) {
     case 'sm':

@@ -1,12 +1,10 @@
 'use client';
 
-// Icon imports
 import { Check, Copy } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createHighlighter, type Highlighter } from 'shiki';
 
-// UI components
 import { Button } from '@/components/ui/button';
 import {
   Modal,
@@ -16,10 +14,8 @@ import {
 } from '@/components/ui/modal';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
-// Hooks
 import { toast } from '@/hooks/use-toast';
 
-// Types
 import type { FormSchema } from '@/lib/database';
 import { Loader } from '../ui/loader';
 
@@ -29,11 +25,9 @@ interface JsonViewModalProps {
   onClose: () => void;
 }
 
-// Singleton highlighter instance to avoid recreation
 let highlighterInstance: Highlighter | null = null;
 let highlighterPromise: Promise<Highlighter> | null = null;
 
-// Create highlighter with only JSON language for performance
 const getHighlighter = async (): Promise<Highlighter> => {
   if (highlighterInstance) {
     return highlighterInstance;
@@ -44,7 +38,7 @@ const getHighlighter = async (): Promise<Highlighter> => {
   }
 
   highlighterPromise = createHighlighter({
-    langs: ['json'], // Only load JSON language
+    langs: ['json'],
     themes: ['github-dark', 'github-light'],
   }).then((highlighter) => {
     highlighterInstance = highlighter;
@@ -62,7 +56,6 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
   const { theme } = useTheme();
   const abortControllerRef = useRef<AbortController | null>(null);
 
-  // Memoize JSON string to avoid unnecessary re-stringification
   const jsonString = useMemo(() => {
     try {
       return JSON.stringify(schema, null, 2);
@@ -73,12 +66,10 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
   }, [schema]);
 
   useEffect(() => {
-    // Don't highlight if modal is not open
     if (!isOpen) {
       return;
     }
 
-    // Cancel previous highlighting operation
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
     }
@@ -98,7 +89,6 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
 
         const selectedTheme = theme === 'dark' ? 'github-dark' : 'github-light';
 
-        // Use requestIdleCallback for non-blocking highlighting
         const highlight = () => {
           if (abortController.signal.aborted) return;
 
@@ -123,7 +113,6 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
           }
         };
 
-        // Use requestIdleCallback if available, otherwise setTimeout
         if ('requestIdleCallback' in window) {
           requestIdleCallback(highlight);
         } else {
@@ -145,7 +134,6 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
     };
   }, [jsonString, theme, isOpen]);
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (abortControllerRef.current) {

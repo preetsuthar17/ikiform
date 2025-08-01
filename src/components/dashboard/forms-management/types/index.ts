@@ -1,4 +1,3 @@
-// Types for forms management component
 import type { Form } from '@/lib/database';
 
 export interface FormsManagementProps {

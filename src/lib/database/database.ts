@@ -8,7 +8,6 @@ export type FormSubmission =
   Database['public']['Tables']['form_submissions']['Row'];
 export type User = Database['public']['Tables']['users']['Row'];
 
-// Client-side database operations
 export const formsDb = {
   async createForm(userId: string, title: string, schema: FormSchema) {
     const supabase = createClient();
@@ -30,7 +29,6 @@ export const formsDb = {
     return data;
   },
 
-  // Get all forms for a user
   async getUserForms(userId: string) {
     const supabase = createClient();
 
@@ -48,7 +46,6 @@ export const formsDb = {
     }));
   },
 
-  // Get a specific form
   async getForm(formId: string) {
     const supabase = createClient();
 
@@ -66,7 +63,6 @@ export const formsDb = {
     };
   },
 
-  // Update a form
   async updateForm(formId: string, updates: Partial<Form>) {
     const supabase = createClient();
 
@@ -84,7 +80,6 @@ export const formsDb = {
     return data;
   },
 
-  // Delete a form
   async deleteForm(formId: string) {
     const supabase = createClient();
 
@@ -93,7 +88,6 @@ export const formsDb = {
     if (error) throw error;
   },
 
-  // Publish/unpublish a form
   async togglePublishForm(formId: string, isPublished: boolean) {
     const supabase = createClient();
 
@@ -111,7 +105,6 @@ export const formsDb = {
     return data;
   },
 
-  // Submit form data
   async submitForm(
     formId: string,
     submissionData: Record<string, any>,
@@ -133,7 +126,6 @@ export const formsDb = {
     return data;
   },
 
-  // Get form submissions
   async getFormSubmissions(formId: string) {
     const supabase = createClient();
 
@@ -147,7 +139,6 @@ export const formsDb = {
     return data;
   },
 
-  // AI Builder Chat Operations
   async saveAIBuilderMessage(
     userId: string,
     sessionId: string,
@@ -216,7 +207,6 @@ export const formsDb = {
     }));
   },
 
-  // AI Analytics Chat Operations
   async saveAIAnalyticsMessage(
     userId: string,
     formId: string,
@@ -294,9 +284,7 @@ export const formsDb = {
   },
 };
 
-// Server-side database operations
 export const formsDbServer = {
-  // Get a public form (for viewing/submitting)
   async getPublicForm(formId: string) {
     const supabase = await createServerClient();
 
@@ -315,7 +303,6 @@ export const formsDbServer = {
     };
   },
 
-  // Verify form ownership
   async verifyFormOwnership(formId: string, userId: string) {
     const supabase = await createServerClient();
 
@@ -330,7 +317,6 @@ export const formsDbServer = {
     return !!data;
   },
 
-  // Submit form data (server-side)
   async submitForm(
     formId: string,
     submissionData: Record<string, any>,
@@ -352,7 +338,6 @@ export const formsDbServer = {
     return data;
   },
 
-  // AI Builder Chat Operations (Server-side)
   async saveAIBuilderMessage(
     userId: string,
     sessionId: string,
@@ -421,7 +406,6 @@ export const formsDbServer = {
     }));
   },
 
-  // AI Analytics Chat Operations (Server-side)
   async saveAIAnalyticsMessage(
     userId: string,
     formId: string,
@@ -498,7 +482,6 @@ export const formsDbServer = {
     return Object.values(sessions);
   },
 
-  // User management operations
   async getUser(email: string) {
     const supabase = await createServerClient();
 
@@ -556,7 +539,6 @@ export const formsDbServer = {
     return data;
   },
 
-  // User management operations
   async getUserByEmail(email: string) {
     const supabase = createClient();
 
@@ -612,7 +594,6 @@ export const formsDbServer = {
     return data;
   },
 
-  // Count submissions for a form
   async countFormSubmissions(formId: string) {
     const supabase = await createServerClient();
     const { count, error } = await supabase

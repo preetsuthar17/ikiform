@@ -97,7 +97,6 @@ export function useWebhookManagement(options?: { formId?: string }) {
 
   useEffect(() => {
     fetchWebhooks();
-    // eslint-disable-next-line
   }, [formId]);
 
   return {

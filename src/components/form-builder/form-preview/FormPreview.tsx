@@ -2,7 +2,6 @@
 import type React from 'react';
 import { getFormLayoutClasses } from '@/lib/utils/form-layout';
 
-// Components
 import {
   FormActions,
   FormFieldsContainer,
@@ -10,11 +9,11 @@ import {
   MultiStepNavigation,
   StepHeader,
 } from './components';
-// Hooks
+
 import { useFormPreviewState } from './hooks';
-// Types
+
 import type { FormPreviewProps } from './types';
-// Utilities
+
 import { handleFormSubmit } from './utils';
 
 export function FormPreview({
@@ -44,7 +43,6 @@ export function FormPreview({
   const { maxWidthClass, paddingClass, marginClass } =
     getFormLayoutClasses(schema);
 
-  // Map borderRadius value to actual CSS value
   const borderRadiusValue = (() => {
     const val = schema.settings.layout?.borderRadius || 'md';
     switch (val) {

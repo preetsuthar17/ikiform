@@ -1,10 +1,7 @@
-// External imports
 import { toast } from '@/hooks/use-toast';
 
-// Type imports
 import type { Form, FormSubmission } from '@/lib/database';
 
-// Export data to JSON
 export const exportToJSON = (form: Form, submissions: FormSubmission[]) => {
   const exportData = {
     form: {
@@ -41,7 +38,6 @@ export const exportToJSON = (form: Form, submissions: FormSubmission[]) => {
   toast.success('Data exported successfully!');
 };
 
-// Export data to CSV
 export const exportToCSV = (form: Form, submissions: FormSubmission[]) => {
   if (!submissions.length) {
     toast.error('No data to export');

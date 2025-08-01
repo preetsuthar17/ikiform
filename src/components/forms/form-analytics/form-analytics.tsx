@@ -1,6 +1,5 @@
 'use client';
 
-// Icon imports
 import {
   BarChart3,
   Edit,
@@ -11,16 +10,15 @@ import {
   Trash2,
 } from 'lucide-react';
 
-// Next.js imports
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
-// React imports
+
 import React, { useEffect, useState } from 'react';
 import { ConfirmationModal } from '@/components/dashboard/form-delete-confirmation-modal';
 import { ShareFormModal } from '@/components/form-builder/share-form-modal';
 import { Badge } from '@/components/ui/badge';
-// UI component imports
+
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/ui/loader';
 import {
@@ -30,10 +28,9 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { toast } from '@/hooks/use-toast';
-// Database and utilities
+
 import { formsDb } from '@/lib/database';
 
-// Local components
 import {
   AnalyticsCards,
   ChatModal,
@@ -45,15 +42,15 @@ import {
   TrendsChart,
 } from './components';
 import { DropoffAnalytics } from './components/dropoff-analytics';
-// Local hooks
+
 import {
   useAnalyticsChat,
   useAnalyticsData,
   useFormSubmissions,
 } from './hooks';
-// Local types
+
 import type { FormAnalyticsProps } from './types';
-// Local utilities
+
 import { exportToCSV, exportToJSON, formatDate, getFieldLabel } from './utils';
 
 export function FormAnalytics({ form }: FormAnalyticsProps) {
@@ -115,7 +112,6 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     setIsModalOpen(true);
   };
 
-  // Form action handlers
   const handleEditForm = () => {
     router.push(`/form-builder/${form.id}`);
   };

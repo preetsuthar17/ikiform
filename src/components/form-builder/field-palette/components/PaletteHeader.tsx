@@ -1,6 +1,3 @@
-// Types
-
-// React
 import React from 'react';
 import type { PaletteHeaderProps } from '../types';
 

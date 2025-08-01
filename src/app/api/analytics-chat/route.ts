@@ -11,7 +11,6 @@ import { createClient } from '@/utils/supabase/server';
 
 const systemPrompt = process.env.ANALYTICS_AI_SYSTEM_PROMPT;
 
-// Custom rate limit settings for analytics chat
 const chatRateLimitSettings: RateLimitSettings = {
   enabled: true,
   maxSubmissions: 20,
@@ -20,10 +19,8 @@ const chatRateLimitSettings: RateLimitSettings = {
 
 let apiKeyValid: boolean | null = null;
 
-// Input validation
 const MAX_MESSAGES = 20;
 
-// Conversation analysis types
 interface ConversationAnalysis {
   hasFollowUpQuestions: boolean;
   referencesLastResponse: boolean;
@@ -81,7 +78,6 @@ function analyzeConversation(
   const lastAIResponse =
     assistantMessages[assistantMessages.length - 1]?.content || null;
 
-  // Keywords that indicate follow-up questions
   const followUpKeywords = [
     'what about',
     'how about',
@@ -111,7 +107,6 @@ function analyzeConversation(
     'with respect to',
   ];
 
-  // Keywords that reference previous responses
   const referenceKeywords = [
     'you mentioned',
     'you said',
@@ -139,7 +134,6 @@ function analyzeConversation(
     'this',
   ];
 
-  // Direct action keywords
   const directActionKeywords = [
     'list',
     'show',
@@ -156,7 +150,6 @@ function analyzeConversation(
     'enumerate',
   ];
 
-  // Topic extraction keywords
   const topicKeywords = {
     completion: ['completion', 'complete', 'finished', 'submit'],
     conversion: ['conversion', 'convert', 'funnel', 'drop-off', 'abandon'],
@@ -176,22 +169,18 @@ function analyzeConversation(
     .map((m) => m.content.toLowerCase())
     .join(' ');
 
-  // Analyze for follow-up questions
   const hasFollowUpQuestions = followUpKeywords.some((keyword) =>
     currentMessage.includes(keyword.toLowerCase())
   );
 
-  // Analyze for references to previous responses
   const referencesLastResponse = referenceKeywords.some((keyword) =>
     currentMessage.includes(keyword.toLowerCase())
   );
 
-  // Analyze for direct action requests
   const isDirectRequest = directActionKeywords.some((keyword) =>
     currentMessage.includes(keyword.toLowerCase())
   );
 
-  // Extract topics discussed
   const topicsDiscussed = Object.entries(topicKeywords)
     .filter(([_, keywords]) =>
       keywords.some((keyword) =>
@@ -200,7 +189,6 @@ function analyzeConversation(
     )
     .map(([topic, _]) => topic);
 
-  // Determine if context is needed
   const needsContext =
     hasFollowUpQuestions ||
     referencesLastResponse ||
@@ -210,7 +198,6 @@ function analyzeConversation(
     currentMessage.includes('these') ||
     currentMessage.includes('them');
 
-  // Generate contextual hints
   const contextualHints = [];
   if (hasFollowUpQuestions) {
     contextualHints.push('User is asking a follow-up question');
@@ -264,7 +251,6 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    // Check authentication
     const supabase = await createClient();
     const {
       data: { user },
@@ -275,7 +261,6 @@ export async function POST(req: NextRequest) {
       return createErrorResponse('Unauthorized', 401);
     }
 
-    // Check premium status
     const premiumCheck = await requirePremium(user.id);
     if (!premiumCheck.hasPremium) {
       return createErrorResponse('Premium subscription required', 403);
@@ -311,13 +296,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Generate or use provided session ID
     const sessionId = requestData.sessionId || uuidv4();
 
-    // Get the last user message to save
     const lastUserMessage = sanitizedMessages[sanitizedMessages.length - 1];
 
-    // Save the user message
     if (lastUserMessage && lastUserMessage.role === 'user') {
       try {
         await formsDbServer.saveAIAnalyticsMessage(
@@ -339,21 +321,17 @@ export async function POST(req: NextRequest) {
         );
       } catch (error) {
         console.error('Error saving user message:', error);
-        // Don't fail the request if saving fails
       }
     }
 
-    // Analyze conversation context
     const conversationAnalysis = analyzeConversation(sanitizedMessages);
 
-    // Create context string from form data
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const yesterday = new Date(today.getTime() - 24 * 60 * 60 * 1000);
     const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
     const monthAgo = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
 
-    // Calculate time-specific metrics
     const todaySubmissions = context.submissions.filter(
       (sub: any) => new Date(sub.submitted_at) >= today
     ).length;
@@ -520,7 +498,6 @@ export async function POST(req: NextRequest) {
         submission_data: Object.fromEntries(
           Object.entries(sub.submission_data).map(([key, value]) => {
             if (typeof value === 'object' && value !== null) {
-              // If it's an array or object, serialize as JSON
               return [
                 key,
                 Array.isArray(value)
@@ -528,7 +505,7 @@ export async function POST(req: NextRequest) {
                   : JSON.stringify(value),
               ];
             }
-            // If it's a primitive (string, number, boolean), show as is
+
             return [key, value];
           })
         ),
@@ -548,7 +525,7 @@ export async function POST(req: NextRequest) {
     ${context.submissions
       .map((sub: any) => {
         const website = sub.submission_data?.website;
-        // If website is an object or array, serialize it, else show as text
+
         if (typeof website === 'object' && website !== null) {
           return JSON.stringify(website);
         }
@@ -621,12 +598,10 @@ export async function POST(req: NextRequest) {
       topP: 0.8,
     });
 
-    // Stream the response
     const encoder = new TextEncoder();
     const { textStream } = stream;
     const reader = textStream.getReader();
 
-    // Collect the AI response for saving
     let aiResponse = '';
 
     const responseStream = new ReadableStream({
@@ -636,9 +611,7 @@ export async function POST(req: NextRequest) {
             const { value, done } = await reader.read();
             if (done) break;
 
-            // Check if the client has aborted the request
             if (controller.desiredSize === null) {
-              // Controller is closed, stop processing
               break;
             }
 
@@ -651,7 +624,6 @@ export async function POST(req: NextRequest) {
             try {
               controller.enqueue(encoder.encode(chunk));
             } catch (error) {
-              // If controller is closed, stop processing
               if (
                 error instanceof Error &&
                 error.message.includes('Controller is already closed')
@@ -662,7 +634,6 @@ export async function POST(req: NextRequest) {
             }
           }
 
-          // Save the AI response after streaming is complete
           if (aiResponse.trim()) {
             try {
               await formsDbServer.saveAIAnalyticsMessage(
@@ -695,13 +666,12 @@ export async function POST(req: NextRequest) {
             }
           }
 
-          // Only close controller if it's not already closed
           if (controller.desiredSize !== null) {
             controller.close();
           }
         } catch (error) {
           console.error('Error in Analytics chat stream:', error);
-          // Only error controller if it's not already closed
+
           if (controller.desiredSize !== null) {
             controller.error(error);
           }
@@ -726,7 +696,6 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// Health check endpoint
 export async function GET() {
   return new Response(
     JSON.stringify({

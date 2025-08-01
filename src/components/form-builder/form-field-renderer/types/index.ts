@@ -1,9 +1,6 @@
-// Type imports
-
 import type { RefObject } from 'react';
 import type { FormField } from '@/lib/database';
 
-// Interfaces
 export interface FormFieldRendererProps {
   field: FormField;
   value: any;
@@ -29,7 +26,6 @@ export interface BaseFieldProps {
   disabled?: boolean;
 }
 
-// Type definitions
 export type FieldSize = 'sm' | 'lg' | 'default';
 export type FieldVariant = 'filled' | 'ghost' | 'underline' | 'default';
 export type FieldWidth = 'half' | 'third' | 'quarter' | 'full';

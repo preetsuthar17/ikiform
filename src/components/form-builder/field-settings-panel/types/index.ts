@@ -1,7 +1,5 @@
-// Type imports
 import type { FormField } from '@/lib/database';
 
-// Interfaces
 export interface FieldSettingsPanelProps {
   field: FormField | null;
   onFieldUpdate: (field: FormField) => void;

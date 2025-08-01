@@ -1,4 +1,3 @@
-// Types
 import type { FormBlock } from '@/lib/database';
 import type { DragEndResult } from '../types';
 

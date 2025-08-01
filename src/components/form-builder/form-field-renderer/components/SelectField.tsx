@@ -1,7 +1,5 @@
-// External imports
 import React from 'react';
 
-// Component imports
 import {
   Select,
   SelectContent,
@@ -9,9 +7,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-// Type imports
+
 import type { BaseFieldProps } from '../types';
-// Utility imports
+
 import { getErrorClasses } from '../utils';
 import { sanitizeOptions } from '../utils/sanitizeOptions';
 
@@ -39,7 +37,7 @@ export function SelectField({
           } else if (Array.isArray(data.options)) {
             options = data.options;
           }
-          // Custom mapping
+
           if (field.valueKey || field.labelKey) {
             options = options.map((item: any) => {
               return {

@@ -1,9 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { getWebhookLogs } from '@/lib/webhooks/outbound';
 
-// --- Webhook Logs API ---
-
-// GET /api/webhook/logs - List delivery logs (by webhook/form/account)
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);

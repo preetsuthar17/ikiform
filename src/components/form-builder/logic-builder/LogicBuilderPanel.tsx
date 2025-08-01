@@ -25,7 +25,6 @@ import type {
   LogicConditionGroup,
 } from './types';
 
-// Singleton highlighter for Shiki
 let highlighterInstance: any = null;
 let highlighterPromise: Promise<any> | null = null;
 const getHighlighter = async () => {
@@ -83,7 +82,6 @@ function summarizeConditionGroup(
 }
 
 function getFieldLogicMap(logic: LogicActionCondition[], fields: FormField[]) {
-  // Map: fieldId -> array of { rule, actionType }
   const map: Record<
     string,
     { rule: LogicActionCondition; actionType: string }[]
@@ -110,7 +108,6 @@ function LogicItemEditor({
   onSave: (item: LogicActionCondition) => void;
   fields: FormField[];
 }) {
-  // Robust fallback for condition group
   const initialCondition: LogicConditionGroup =
     item?.condition && Array.isArray(item.condition.conditions)
       ? item.condition
@@ -130,11 +127,9 @@ function LogicItemEditor({
   );
 
   React.useEffect(() => {
-    // Debug log for tracing condition state
     if (open) {
-      // eslint-disable-next-line no-console
       console.log('[LogicItemEditor] Editing item:', item);
-      // eslint-disable-next-line no-console
+
       console.log('[LogicItemEditor] Initial condition:', initialCondition);
     }
   }, [open, item, initialCondition]);
@@ -309,7 +304,6 @@ function LogicBuilderPanelContent({
     return () => {
       cancelled = true;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showJson, logic, theme]);
 
   const handleAddItem = () => {
@@ -345,9 +339,7 @@ function LogicBuilderPanelContent({
       await navigator.clipboard.writeText(JSON.stringify(logic, null, 2));
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // ignore
-    }
+    } catch {}
   };
 
   const fieldLogicMap = React.useMemo(
@@ -368,7 +360,7 @@ function LogicBuilderPanelContent({
           value={activeTab}
         />
         <TabsContent activeValue={activeTab} value="rules">
-          {/* Existing logic rules UI */}
+          {}
           <div className="mb-4 space-y-4">
             <div className="mb-2 flex items-center justify-between gap-2">
               <h3 className="font-semibold text-base">Logic Items</h3>
@@ -403,7 +395,7 @@ function LogicBuilderPanelContent({
                       </Alert>
                     );
                   }
-                  // Color for action type
+
                   const actionColor =
                     item.action.type === 'show'
                       ? 'secondary'

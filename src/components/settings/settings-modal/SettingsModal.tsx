@@ -1,9 +1,7 @@
 'use client';
 
-// External imports
 import React, { useState } from 'react';
 
-// Internal imports
 import { Modal, ModalContent, ModalTitle } from '@/components/ui/modal';
 import { DesktopLayout, MobileLayout } from './components';
 import type { SettingsModalProps, SettingsSection } from './types';

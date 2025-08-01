@@ -49,11 +49,10 @@ function validateAndSanitizeMessages(messages: AIMessage[]): AIMessage[] {
 
 const AIBuilderRateLimit: RateLimitSettings = {
   enabled: true,
-  maxSubmissions: 20, // Increased since Groq is much faster
+  maxSubmissions: 20,
   window: '5 m',
 };
 
-// --- Helper functions for POST ---
 async function authenticateAndCheckPremium(req: NextRequest) {
   const supabase = await createClient();
   const {
@@ -105,7 +104,6 @@ async function parseAndSanitizeRequest(req: NextRequest) {
   return { sanitizedMessages, sessionId: requestData.sessionId };
 }
 
-// Async function to save messages without blocking the stream
 async function saveMessageAsync(
   userId: string,
   sessionId: string,
@@ -166,9 +164,9 @@ async function streamAIResponse({
         role: msg.role as 'system' | 'user' | 'assistant' | 'data',
       })),
     ],
-    temperature: 0.1, // Low temperature for consistent JSON output
+    temperature: 0.1,
     maxTokens: 4000,
-    // Groq-specific optimizations
+
     topP: 0.9,
     frequencyPenalty: 0,
     presencePenalty: 0,
@@ -177,19 +175,16 @@ async function streamAIResponse({
   let aiResponse = '';
   const encoder = new TextEncoder();
 
-  // Create a proper streaming response
   const responseStream = new ReadableStream({
     async start(controller) {
       try {
         for await (const chunk of stream.textStream) {
           aiResponse += chunk;
-          // Stream each chunk immediately to show real-time typing
+
           controller.enqueue(encoder.encode(chunk));
         }
 
-        // Save the complete AI response asynchronously (non-blocking)
         if (aiResponse.trim()) {
-          // Don't await this - let it run in background
           saveMessageAsync(user.id, sessionId, 'assistant', aiResponse, {
             timestamp: new Date().toISOString(),
             model: modelName,
@@ -216,7 +211,7 @@ async function streamAIResponse({
       'X-XSS-Protection': '1; mode=block',
       'X-Session-ID': sessionId,
       'X-Model': modelName,
-      // Essential streaming headers
+
       'Transfer-Encoding': 'chunked',
       Connection: 'keep-alive',
     },
@@ -255,15 +250,11 @@ export async function POST(req: NextRequest) {
     const sanitizedMessages = parseResult.sanitizedMessages;
     const sessionId = parseResult.sessionId;
 
-    // Generate or use provided session ID
     const sid = sessionId || uuidv4();
 
-    // Get the last user message to save
     const lastUserMessage = sanitizedMessages.at(-1);
 
-    // Save the user message asynchronously (non-blocking)
     if (lastUserMessage && lastUserMessage.role === 'user') {
-      // Don't await this - let it run in background
       saveMessageAsync(user.id, sid, 'user', lastUserMessage.content, {
         timestamp: new Date().toISOString(),
         ip,
@@ -284,7 +275,6 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// Health check with model info
 export async function GET() {
   return new Response(
     JSON.stringify({

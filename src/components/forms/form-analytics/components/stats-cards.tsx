@@ -1,4 +1,3 @@
-// Icons
 import {
   Activity,
   Clock,
@@ -10,10 +9,9 @@ import {
   Zap,
 } from 'lucide-react';
 import type React from 'react';
-// UI Components
+
 import { Card } from '@/components/ui/card';
 
-// Types
 import type { AnalyticsCardsProps, OverviewStatsProps } from '../types';
 
 export const OverviewStats: React.FC<OverviewStatsProps> = ({ data }) => {

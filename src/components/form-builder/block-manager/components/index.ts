@@ -1,5 +1,3 @@
-// Components
-
 export { BlockEditForm } from './BlockEditForm';
 export { BlockFieldsList } from './BlockFieldsList';
 export { BlockHeader } from './BlockHeader';

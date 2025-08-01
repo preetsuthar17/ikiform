@@ -182,7 +182,6 @@ export const Marquee = React.forwardRef<HTMLDivElement, MarqueeProps>(
 
 Marquee.displayName = 'Marquee';
 
-// Convenience components for common use cases
 export const MarqueeItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>

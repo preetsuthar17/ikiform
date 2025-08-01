@@ -1,6 +1,5 @@
 import type React from 'react';
 
-// constants
 import { APPEARANCE_SETTINGS } from '../constants';
 
 export const AppearanceHeader: React.FC = () => {

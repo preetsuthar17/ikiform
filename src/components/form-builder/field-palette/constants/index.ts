@@ -1,6 +1,3 @@
-// Types
-
-// Icons
 import {
   BarChart3,
   Calendar,

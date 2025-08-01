@@ -45,11 +45,10 @@ interface DatePickerProps extends VariantProps<typeof datePickerVariants> {
   formatDate?: (date: Date) => string;
 }
 
-// Helper function to calculate optimal calendar position
 const calculateCalendarPosition = (
   triggerRect: DOMRect,
-  calendarHeight = 350, // Approximate calendar height
-  calendarWidth = 280, // Approximate calendar width
+  calendarHeight = 350,
+  calendarWidth = 280,
   margin = 8
 ) => {
   const viewport = {
@@ -67,15 +66,12 @@ const calculateCalendarPosition = (
     | 'bottom-end'
     | 'top-end' = 'bottom';
 
-  // Check if calendar would go below viewport
   if (top + calendarHeight > viewport.height) {
-    // Try placing it above
     const topPlacement = triggerRect.top - calendarHeight - margin;
     if (topPlacement >= 0) {
       top = topPlacement;
       placement = 'top';
     } else {
-      // If neither above nor below fits, place it at the best available position
       const spaceBelow = viewport.height - triggerRect.bottom - margin;
       const spaceAbove = triggerRect.top - margin;
 
@@ -89,20 +85,16 @@ const calculateCalendarPosition = (
     }
   }
 
-  // Check horizontal positioning
   if (left + calendarWidth > viewport.width) {
-    // Try aligning to the right edge of trigger
     const rightAlignedLeft = triggerRect.right - calendarWidth;
     if (rightAlignedLeft >= 0) {
       left = rightAlignedLeft;
       placement = placement.includes('top') ? 'top-end' : 'bottom-end';
     } else {
-      // If it still doesn't fit, align to the right edge of viewport
       left = Math.max(margin, viewport.width - calendarWidth - margin);
     }
   }
 
-  // Ensure calendar doesn't go off the left edge
   if (left < margin) {
     left = margin;
     placement = placement.includes('top') ? 'top-start' : 'bottom-start';
@@ -136,7 +128,6 @@ export function DatePicker({
   >(null);
 
   React.useEffect(() => {
-    // Set portal container on client side only
     if (typeof document !== 'undefined') {
       setPortalContainer(
         document.getElementById('portal-root') || document.body
@@ -191,7 +182,6 @@ export function DatePicker({
       const isClickInsideContainer =
         containerRef.current && containerRef.current.contains(target);
 
-      // Check if click is inside any calendar popup using the data attribute
       const calendarElement = document.querySelector(
         '[data-datepicker-calendar="true"]'
       );
@@ -249,7 +239,6 @@ export function DatePicker({
     }
   }, [isOpen]);
 
-  // Handle window resize and scroll to reposition calendar
   React.useEffect(() => {
     const handleReposition = () => {
       if (isOpen && containerRef.current) {
@@ -351,7 +340,6 @@ export function DatePicker({
   );
 }
 
-// Date Range Picker Component
 interface DateRangePickerProps
   extends Omit<DatePickerProps, 'value' | 'onChange'> {
   value?: { from: Date; to?: Date };
@@ -427,7 +415,6 @@ export function DateRangePicker({
     }
   };
 
-  // Body scroll lock effect
   React.useEffect(() => {
     if (isOpen && typeof document !== 'undefined') {
       const originalOverflow = document.body.style.overflow;
@@ -439,7 +426,6 @@ export function DateRangePicker({
     }
   }, [isOpen]);
 
-  // Close dropdown when clicking outside
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (typeof document === 'undefined') return;
@@ -492,7 +478,6 @@ export function DateRangePicker({
     }
   }, [isOpen]);
 
-  // Handle window resize and scroll to reposition calendar
   React.useEffect(() => {
     const handleReposition = () => {
       if (isOpen && containerRef.current) {

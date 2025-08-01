@@ -1,10 +1,9 @@
 'use client';
 
 import { AlertTriangle } from 'lucide-react';
-// External imports
+
 import React from 'react';
 
-// Internal component imports
 import { Button } from '@/components/ui/button';
 import {
   Modal,

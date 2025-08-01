@@ -1,12 +1,8 @@
-// Stats component for forms management
-
-// Icons
 import { Edit, Eye, Plus } from 'lucide-react';
 import React from 'react';
-// UI Components
+
 import { Card } from '@/components/ui/card';
 
-// Types
 import type { FormStatsProps } from '../types';
 
 export function FormStats({ forms }: FormStatsProps) {

@@ -1,4 +1,3 @@
-// Form design constants
 export const FORM_WIDTH_OPTIONS = [
   {
     value: 'sm',

@@ -1,14 +1,13 @@
-// External imports
 import type React from 'react';
 import { Card } from '@/components/ui/card';
-// Component imports
+
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
-// Type imports
+
 import type { BasicSettingsProps } from '../types';
-// Utility imports
+
 import { createFieldUpdater } from '../utils';
 
 export const BasicSettings: React.FC<BasicSettingsProps> = ({

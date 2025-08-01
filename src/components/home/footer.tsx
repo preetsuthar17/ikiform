@@ -2,13 +2,13 @@
 
 import { Monitor, Moon, Sun } from 'lucide-react';
 import Image from 'next/image';
-// External imports
+
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import React from 'react';
 import { FaGithub, FaXTwitter } from 'react-icons/fa6';
 import { Button } from '../ui/button';
-// Internal imports
+
 import { Separator } from '../ui/separator';
 import { Tabs } from '../ui/tabs';
 
@@ -30,9 +30,9 @@ export default function Footer() {
     <footer className="w-full bg-background ">
       <div className=" mx-auto w-full max-w-[95%] px-4 md:px-8">
         <div className="py-12 lg:py-16">
-          {/* Main Footer Content */}
+          {}
           <div className="flex flex-col justify-between gap-12 lg:flex-row lg:gap-16">
-            {/* Brand Section */}
+            {}
             <div className="flex-shrink-0">
               <div className="flex flex-col gap-6">
                 <Link className="inline-flex" href="/">
@@ -50,7 +50,7 @@ export default function Footer() {
                   </span>
                 </Link>
 
-                {/* Social Links */}
+                {}
                 <div className="flex gap-3">
                   <Button asChild size="icon" variant="secondary">
                     <Link
@@ -72,7 +72,7 @@ export default function Footer() {
                   </Button>
                 </div>
 
-                {/* Copyright */}
+                {}
                 <div className="text-foreground/60 text-sm">
                   <p>
                     © {new Date().getFullYear()} Made by —{' '}
@@ -106,9 +106,9 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Links Section */}
+            {}
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-4 lg:gap-12">
-              {/* Navigation Links */}
+              {}
               <div>
                 <div>
                   <h3 className="mb-4 font-medium text-foreground text-sm">
@@ -161,7 +161,7 @@ export default function Footer() {
                 </div>
               </div>
 
-              {/* Legal Links */}
+              {}
               <div>
                 <div>
                   <h3 className="mb-4 font-medium text-foreground text-sm">
@@ -206,7 +206,7 @@ export default function Footer() {
                 </div>
               </div>
 
-              {/* Resources Links */}
+              {}
               <div>
                 <div>
                   <h3 className="mb-4 font-medium text-foreground text-sm">
@@ -253,7 +253,7 @@ export default function Footer() {
                 </div>
               </div>
 
-              {/* Products Links */}
+              {}
               <div>
                 <div>
                   <h3 className="mb-4 font-medium text-foreground text-sm">
@@ -295,7 +295,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Theme Selector - Bottom Section */}
+          {}
           <div className="mt-12 border-border border-t pt-8">
             <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
               <div className="flex-1" />

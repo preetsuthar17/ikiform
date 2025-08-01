@@ -1,12 +1,9 @@
-// Libraries
 import type React from 'react';
 import { useEffect, useRef } from 'react';
 
-// UI Components
 import { FormFieldRenderer } from '@/components/form-builder/form-field-renderer';
 import { SocialMediaIcons } from '@/components/ui/social-media-icons';
 
-// Types
 import type { FormBlock, FormSchema } from '@/lib/database';
 
 interface FormContentProps {
@@ -39,7 +36,6 @@ export const FormContent: React.FC<FormContentProps> = ({
     }
   }, [currentBlock]);
 
-  // Filter fields by logic visibility
   const visibleFields = fieldVisibility
     ? currentBlock.fields.filter(
         (field) => fieldVisibility[field.id]?.visible !== false

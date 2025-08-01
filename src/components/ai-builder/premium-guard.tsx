@@ -1,6 +1,3 @@
-// UI components imports
-
-// Next.js imports
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/ui/loader';

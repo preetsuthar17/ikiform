@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { formsDbServer } from '@/lib/database';
-import PublicFormClient from './PublicFormClient';
+import PublicFormServerWrapper from './components/PublicFormServerWrapper';
 
 interface PublicFormPageProps {
   params: Promise<{ id: string }>;
@@ -59,7 +59,9 @@ export default async function PublicFormPage({
       notFound();
     }
 
-    return <PublicFormClient formId={id} schema={form.schema} theme={theme} />;
+    return (
+      <PublicFormServerWrapper formId={id} schema={form.schema} theme={theme} />
+    );
   } catch (error) {
     console.error('Error loading form:', error);
     notFound();

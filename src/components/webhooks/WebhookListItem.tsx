@@ -7,7 +7,6 @@ interface WebhookListItemProps {
     url: string;
     events: string[];
     enabled: boolean;
-    // lastDelivery: string | null; // Remove for now
   };
   onEdit: () => void;
   onDelete: () => void;

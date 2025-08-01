@@ -7,9 +7,6 @@ import type {
 } from '@/lib/database/database.types';
 import { createAdminClient } from '@/utils/supabase/admin';
 
-// --- Outbound Webhook Logic ---
-
-// Helper to map DB row to WebhookConfig (camelCase)
 function mapWebhookRow(row: any): WebhookConfig {
   const { created_at, updated_at, ...rest } = row;
   return {
@@ -19,7 +16,6 @@ function mapWebhookRow(row: any): WebhookConfig {
   } as WebhookConfig;
 }
 
-// Get webhooks by formId/accountId
 export async function getWebhooks({
   formId,
   accountId,
@@ -33,15 +29,13 @@ export async function getWebhooks({
   if (accountId) query = query.eq('account_id', accountId);
   const { data, error } = await query;
   if (error) throw new Error(error.message);
-  // Never return secrets in API response
+
   return (data || []).map(({ secret, ...rest }) => mapWebhookRow(rest));
 }
 
-// Create a new webhook
 export async function createWebhook(
   data: Partial<WebhookConfig>
 ): Promise<WebhookConfig> {
-  // Validate required fields
   if (!(data.url && data.events && data.method)) {
     throw new Error('Missing required fields: url, events, or method');
   }
@@ -61,7 +55,6 @@ export async function createWebhook(
   delete insertData.accountId;
   delete insertData.payloadTemplate;
 
-  // Insert into 'webhooks' table (assumed table name)
   const { data: result, error } = await supabase
     .from('webhooks')
     .insert([insertData])
@@ -78,12 +71,10 @@ export async function createWebhook(
     throw new Error(error?.message || 'Failed to create webhook');
   }
 
-  // Never return secret in API response
   const { secret, ...safeResult } = result;
   return mapWebhookRow(safeResult);
 }
 
-// Update a webhook
 export async function updateWebhook(
   id: string,
   data: Partial<WebhookConfig>
@@ -119,14 +110,12 @@ export async function updateWebhook(
   return mapWebhookRow(safeResult);
 }
 
-// Delete a webhook
 export async function deleteWebhook(id: string): Promise<void> {
   const supabase = createAdminClient();
   const { error } = await supabase.from('webhooks').delete().eq('id', id);
   if (error) throw new Error(error.message);
 }
 
-// Get webhook delivery logs
 export async function getWebhookLogs({
   webhookId,
   formId,
@@ -147,27 +136,26 @@ export async function getWebhookLogs({
   return Array.isArray(data) ? data : [];
 }
 
-// Re-send a failed webhook delivery
 export async function resendWebhookDelivery(
   id: string,
   body: { logId: string }
 ): Promise<any> {
   const supabase = createAdminClient();
-  // 1. Fetch the log
+
   const { data: log, error: logError } = await supabase
     .from('webhook_logs')
     .select('*')
     .eq('id', body.logId)
     .single();
   if (logError || !log) throw new Error('Log not found');
-  // 2. Fetch the webhook
+
   const { data: webhook, error: webhookError } = await supabase
     .from('webhooks')
     .select('*')
     .eq('id', log.webhook_id)
     .single();
   if (webhookError || !webhook) throw new Error('Webhook not found');
-  // 3. Prepare payload and headers
+
   let payload = log.request_payload;
   let headers: Record<string, string> = {
     'Content-Type': 'application/json',
@@ -176,7 +164,7 @@ export async function resendWebhookDelivery(
   if (webhook.secret) {
     headers['X-Webhook-Signature'] = signPayload(payload, webhook.secret);
   }
-  // Discord/Slack special handling
+
   if (isDiscordWebhook(webhook.url)) {
     payload = JSON.stringify(
       buildDiscordEmbedPayload(JSON.parse(payload), webhook.form_id || '')
@@ -186,7 +174,7 @@ export async function resendWebhookDelivery(
     payload = JSON.stringify(buildSlackMessagePayload(JSON.parse(payload)));
     headers = { 'Content-Type': 'application/json' };
   }
-  // 4. Send the webhook (no retry)
+
   let status = 0;
   let responseBody = '';
   let errorMsg = '';
@@ -203,7 +191,7 @@ export async function resendWebhookDelivery(
   } catch (err: any) {
     errorMsg = String(err);
   }
-  // 5. Log the resend attempt
+
   await supabase.from('webhook_logs').insert([
     {
       webhook_id: webhook.id,
@@ -223,13 +211,12 @@ export async function resendWebhookDelivery(
   return { status, responseBody };
 }
 
-// Test a webhook (send sample payload)
 export async function testWebhook(
   id: string,
   samplePayload?: any
 ): Promise<any> {
   const supabase = createAdminClient();
-  // Fetch the webhook config
+
   const { data: webhook, error } = await supabase
     .from('webhooks')
     .select('*')
@@ -237,7 +224,6 @@ export async function testWebhook(
     .single();
   if (error || !webhook) throw new Error('Webhook not found');
 
-  // Prepare test payload
   const payload = samplePayload || {
     test: true,
     message: 'This is a test webhook from Ikiform.',
@@ -253,7 +239,6 @@ export async function testWebhook(
     headers['X-Webhook-Signature'] = signPayload(body, webhook.secret);
   }
 
-  // Discord/Slack special handling
   if (isDiscordWebhook(webhook.url)) {
     body = JSON.stringify(
       buildDiscordEmbedPayload(payload, webhook.form_id || '')
@@ -264,7 +249,6 @@ export async function testWebhook(
     headers = { 'Content-Type': 'application/json' };
   }
 
-  // Send the webhook (no retry)
   let status = 0;
   let responseBody = '';
   let errorMsg = '';
@@ -282,7 +266,6 @@ export async function testWebhook(
     errorMsg = String(err);
   }
 
-  // Log the test attempt
   await supabase.from('webhook_logs').insert([
     {
       webhook_id: webhook.id,
@@ -303,7 +286,6 @@ export async function testWebhook(
   return { status, responseBody };
 }
 
-// Helper: Sign payload with HMAC SHA256
 function signPayload(payload: string, secret: string): string {
   return crypto.createHmac('sha256', secret).update(payload).digest('hex');
 }
@@ -316,7 +298,6 @@ function buildDiscordEmbedPayload(
   formData: Record<string, any>,
   formId: string
 ) {
-  // Helper function to safely convert values to strings
   function formatValue(value: any): string {
     if (value === null || value === undefined) {
       return 'N/A';
@@ -345,10 +326,8 @@ function buildDiscordEmbedPayload(
     return String(value);
   }
 
-  // Build fields array, handling the nested structure properly
   const fields: { name: any; value: string; inline: boolean }[] = [];
 
-  // If formData has a 'fields' property (from your formatted payload)
   if (formData.fields && Array.isArray(formData.fields)) {
     formData.fields.forEach((field: any) => {
       fields.push({
@@ -358,9 +337,7 @@ function buildDiscordEmbedPayload(
       });
     });
   } else {
-    // If it's raw form data, process it directly
     Object.entries(formData).forEach(([key, value]) => {
-      // Skip meta fields that shouldn't be displayed
       if (
         [
           'event',
@@ -389,7 +366,7 @@ function buildDiscordEmbedPayload(
         title: 'Form Submission',
         description: `Form ID: \`${formId}\``,
         fields,
-        color: 5_814_783, // Blue color
+        color: 5_814_783,
         timestamp: new Date().toISOString(),
         footer: {
           text: `Submission ID: ${formData.submissionId || 'N/A'}`,
@@ -434,7 +411,6 @@ function buildSlackMessagePayload(formData: Record<string, any>) {
 
   const fields: { title: any; value: string; short: boolean }[] = [];
 
-  // If formData has a 'fields' property (from your formatted payload)
   if (formData.fields && Array.isArray(formData.fields)) {
     formData.fields.forEach((field: any) => {
       fields.push({
@@ -444,9 +420,7 @@ function buildSlackMessagePayload(formData: Record<string, any>) {
       });
     });
   } else {
-    // If it's raw form data, process it directly
     Object.entries(formData).forEach(([key, value]) => {
-      // Skip meta fields that shouldn't be displayed
       if (
         [
           'event',
@@ -480,7 +454,7 @@ function buildSlackMessagePayload(formData: Record<string, any>) {
     ],
   };
 }
-// Helper: Render a template string with {{variables}} from context (supports dot notation)
+
 function renderTemplate(
   template: string,
   context: Record<string, any>
@@ -503,12 +477,10 @@ function renderTemplate(
   });
 }
 
-// Helper: Format human-friendly payload for webhooks/logs
 export async function formatHumanFriendlyPayload(
   formId: string,
   formData: Record<string, any>
 ) {
-  // Fetch form schema
   const form = await formsDbServer.getPublicForm(formId);
   const schema = form.schema;
   const allFields = schema.blocks?.length
@@ -517,7 +489,7 @@ export async function formatHumanFriendlyPayload(
   const fields = Object.entries(formData).map(([fieldId, value]) => {
     const field = allFields.find((f: any) => f.id === fieldId);
     return {
-      id: fieldId, // <-- Add fieldId to the output
+      id: fieldId,
       label: field?.label || fieldId,
       type: field?.type || 'unknown',
       value,
@@ -531,13 +503,12 @@ export async function formatHumanFriendlyPayload(
   };
 }
 
-// Trigger webhooks for an event
 export async function triggerWebhooks(
   event: WebhookEventType,
   payload: any
 ): Promise<void> {
   const supabase = createAdminClient();
-  // Find all enabled webhooks for this event (by formId/accountId if present)
+
   const { formId, accountId } = payload;
   console.log('[Webhook] triggerWebhooks called:', { event, payload });
   const { data: webhooks, error } = await supabase
@@ -578,7 +549,7 @@ export async function triggerWebhooks(
   );
   for (const webhook of webhooks) {
     let body: string;
-    // Use human-friendly formatting for form_submitted
+
     if (event === 'form_submitted' && payload.formId && payload.formData) {
       const formatted = await formatHumanFriendlyPayload(
         payload.formId,
@@ -596,7 +567,7 @@ export async function triggerWebhooks(
         ? renderTemplate(webhook.payloadTemplate, { event, ...payload })
         : JSON.stringify({ event, ...payload });
     }
-    // Prepare headers
+
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
       ...(webhook.headers || {}),
@@ -604,12 +575,11 @@ export async function triggerWebhooks(
     if (webhook.secret) {
       headers['X-Webhook-Signature'] = signPayload(body, webhook.secret);
     }
-    // Deliver asynchronously
+
     deliverWithRetry(webhook, body, headers, 0);
   }
 }
 
-// Deliver webhook with retries, signing, and logging
 export async function deliverWithRetry(
   webhook: WebhookConfig,
   body: string,
@@ -620,7 +590,7 @@ export async function deliverWithRetry(
   try {
     let finalBody = body;
     let finalHeaders = { ...headers };
-    // Discord webhook: override body and headers
+
     if (isDiscordWebhook(webhook.url)) {
       try {
         const parsed = JSON.parse(body);
@@ -634,9 +604,7 @@ export async function deliverWithRetry(
         finalBody = JSON.stringify(buildDiscordEmbedPayload({}, ''));
       }
       finalHeaders = { 'Content-Type': 'application/json' };
-    }
-    // Slack webhook: override body and headers
-    else if (isSlackWebhook(webhook.url)) {
+    } else if (isSlackWebhook(webhook.url)) {
       try {
         const parsed = JSON.parse(body);
         finalBody = JSON.stringify(
@@ -655,7 +623,7 @@ export async function deliverWithRetry(
       timeout: 10_000,
     });
     const responseBody = await res.text();
-    // Log success
+
     await supabase.from('webhook_logs').insert([
       {
         webhook_id: webhook.id,
@@ -669,7 +637,6 @@ export async function deliverWithRetry(
       },
     ]);
   } catch (err: any) {
-    // Log failure
     await supabase.from('webhook_logs').insert([
       {
         webhook_id: webhook.id,
@@ -681,7 +648,7 @@ export async function deliverWithRetry(
         attempt,
       },
     ]);
-    // Retry with exponential backoff (max 3 attempts)
+
     if (attempt < 3) {
       setTimeout(
         () => deliverWithRetry(webhook, body, headers, attempt + 1),

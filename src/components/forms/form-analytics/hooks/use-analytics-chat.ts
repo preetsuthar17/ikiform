@@ -1,12 +1,9 @@
-// External imports
 import { useEffect, useRef, useState } from 'react';
 import { toast } from '@/hooks/use-toast';
 
-// Type imports
 import type { Form, FormSubmission } from '@/lib/database';
 import type { AnalyticsData, ChatMessage } from '../types';
 
-// Utility imports
 import { generateSessionId } from '../utils/analytics';
 
 export const useAnalyticsChat = (

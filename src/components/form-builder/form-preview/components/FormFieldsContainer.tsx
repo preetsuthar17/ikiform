@@ -1,5 +1,3 @@
-// External libraries
-
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
 import {
   ChevronDown,
@@ -11,7 +9,6 @@ import {
 } from 'lucide-react';
 import React from 'react';
 
-// UI components
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import {
@@ -23,9 +20,9 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { PALETTE_DRAG_TYPE } from '../../field-palette/components/FieldItem';
 import { FIELD_TYPES } from '../../field-palette/constants';
-// Internal components
+
 import { FormFieldRenderer } from '../../form-field-renderer';
-// Types
+
 import type { FormFieldsContainerProps } from '../types';
 
 export function FormFieldsContainer({
@@ -43,17 +40,16 @@ export function FormFieldsContainer({
 }: FormFieldsContainerProps & { showLogicCues?: boolean }) {
   const handleDragEnd = (result: any) => {
     if (!result.destination) return;
-    // Handle palette drag
+
     if (
       result.type === PALETTE_DRAG_TYPE ||
       result.source.droppableId === 'palette-droppable'
     ) {
-      // Get field type from draggableId
       const type = result.draggableId.replace('palette-', '');
       if (onAddField) onAddField(type);
       return;
     }
-    // Internal reorder
+
     const items = [...fields];
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
@@ -91,7 +87,6 @@ export function FormFieldsContainer({
     </DropdownMenu>
   );
 
-  // If showLogicCues is true, show all fields, not just visible ones
   const renderFields = showLogicCues
     ? fields
     : fieldVisibility
@@ -170,7 +165,7 @@ export function FormFieldsContainer({
                           )
                         }
                       >
-                        {/* Logic cues badges/icons */}
+                        {}
                         {showLogicCues && (isHidden || isDisabled) && (
                           <div className="absolute top-2 left-2 z-20 flex items-center gap-2">
                             {isHidden && (

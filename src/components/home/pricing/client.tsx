@@ -71,11 +71,9 @@ const features = [
   },
 ];
 
-// Subscription product IDs
 const MONTHLY_PRODUCT_ID = '05f52efa-2102-4dd0-9d1d-1538210d6712';
 const YEARLY_PRODUCT_ID = '4eff4c1d-56de-4111-96de-b5ec8124dd4b';
 
-// Pricing configuration
 const PRICING = {
   monthly: {
     price: 29,
@@ -89,7 +87,7 @@ const PRICING = {
     originalPrice: 29,
     period: 'month',
     billedAs: 'Billed yearly as $228',
-    savings: Math.round((1 - (19 * 12) / (29 * 12)) * 100), // ~34% savings
+    savings: Math.round((1 - (19 * 12) / (29 * 12)) * 100),
   },
 };
 
@@ -147,7 +145,7 @@ export default function PricingClient({ products }: PricingClientProps) {
             forms. Start free, upgrade when you need more features.
           </p>
 
-          {/* Billing Period Toggle */}
+          {}
           <div className="mt-6 flex items-center gap-4">
             <span
               className={`text-sm ${billingPeriod === 'monthly' ? 'font-medium text-foreground' : 'text-muted-foreground'}`}
@@ -174,7 +172,7 @@ export default function PricingClient({ products }: PricingClientProps) {
         </div>
 
         <div className="relative mx-auto flex w-full max-w-7xl grow flex-col items-center rounded-card p-4 text-left md:p-12">
-          {/* Overlay */}
+          {}
           <div className="pointer-events-none absolute inset-0 z-2 rounded-card bg-black/15 backdrop-blur-[5px]" />
 
           <OptimizedImage
@@ -193,7 +191,7 @@ export default function PricingClient({ products }: PricingClientProps) {
                   🎉 Get Early Bird Discount
                 </Badge>
 
-                {/* Pricing Display */}
+                {}
                 <div className="flex flex-col items-start gap-3">
                   <div className="flex items-baseline gap-3">
                     <span className="font-medium text-2xl text-muted-foreground line-through">
@@ -207,7 +205,7 @@ export default function PricingClient({ products }: PricingClientProps) {
                     </span>
                   </div>
 
-                  {/* Billing Details */}
+                  {}
                   <div className="flex flex-col gap-2">
                     {billingPeriod === 'yearly' && (
                       <div className="text-muted-foreground text-sm">
@@ -228,7 +226,7 @@ export default function PricingClient({ products }: PricingClientProps) {
                   </div>
                 </div>
 
-                {/* Action Button */}
+                {}
                 {user && hasPremium ? (
                   <div className="w-full space-y-3">
                     <Button className="w-full" size="lg">
@@ -284,7 +282,7 @@ export default function PricingClient({ products }: PricingClientProps) {
                   </Link>
                 )}
 
-                {/* Plan Period Indicator */}
+                {}
                 <div className="w-full text-center">
                   <p className="text-muted-foreground text-xs">
                     {billingPeriod === 'yearly'

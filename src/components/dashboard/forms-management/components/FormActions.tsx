@@ -1,9 +1,6 @@
-// Form actions component with tooltips
-
-// Icons
 import { BarChart3, Edit, Eye, Share, Trash2 } from 'lucide-react';
 import React from 'react';
-// UI Components
+
 import { Button } from '@/components/ui/button';
 import {
   Tooltip,
@@ -12,7 +9,6 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 
-// Types
 import type { FormActionsProps } from '../types';
 
 export function FormActions({

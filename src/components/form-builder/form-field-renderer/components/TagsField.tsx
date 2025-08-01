@@ -1,11 +1,9 @@
-// External imports
 import React from 'react';
 
-// Component imports
 import { TagInput } from '@/components/ui/tag-input';
-// Type imports
+
 import type { BaseFieldProps } from '../types';
-// Utility imports
+
 import { getErrorClasses } from '../utils';
 
 export function TagsField({
@@ -17,7 +15,6 @@ export function TagsField({
 }: BaseFieldProps) {
   const errorClasses = getErrorClasses(error);
 
-  // Ensure value is always an array
   const tags = Array.isArray(value) ? value : [];
 
   return (

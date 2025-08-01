@@ -1,4 +1,3 @@
-// Icons
 import { Bot } from 'lucide-react';
 import type React from 'react';
 import {
@@ -9,7 +8,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
-// UI Components
+
 import {
   Modal,
   ModalClose,
@@ -17,9 +16,9 @@ import {
   ModalHeader,
   ModalTitle,
 } from '@/components/ui/modal';
-// Types
+
 import type { ChatModalProps } from '../types';
-// Chat Interface
+
 import { ChatInterface } from './chat-interface';
 
 export const ChatModal: React.FC<ChatModalProps> = ({

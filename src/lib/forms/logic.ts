@@ -26,7 +26,6 @@ export function evaluateLogic(
   return actions;
 }
 
-// Helper to determine default visibility/enabled state for each field
 export function getLogicFieldDefaults(
   logicItems: LogicActionCondition[],
   allFieldIds: string[]

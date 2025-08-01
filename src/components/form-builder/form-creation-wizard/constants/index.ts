@@ -1,7 +1,5 @@
-// Icon imports
 import { FileText, Layers } from 'lucide-react';
 
-// Type imports
 import type { FormTypeDefinition } from '../types';
 
 export const FORM_TYPES: FormTypeDefinition[] = [

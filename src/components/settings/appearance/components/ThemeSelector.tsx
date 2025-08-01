@@ -1,13 +1,10 @@
-// External imports
 import type React from 'react';
 
-// UI components
 import { Label } from '@/components/ui/label';
 import { APPEARANCE_SETTINGS } from '../constants';
-// types and constants
+
 import type { Theme } from '../types';
 
-// components
 import { ThemeCard } from './ThemeCard';
 
 interface ThemeSelectorProps {

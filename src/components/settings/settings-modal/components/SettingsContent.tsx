@@ -1,7 +1,6 @@
-// External imports
 import React from 'react';
 import { AppearanceSettings } from '../../appearance-settings';
-// Internal imports
+
 import type { SettingsSection } from '../types';
 
 interface SettingsContentProps {

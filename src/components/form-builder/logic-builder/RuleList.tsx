@@ -39,7 +39,7 @@ function RuleList({
             >
               <div>
                 <span className="font-medium">{rule.id}</span>
-                {/* Optionally, add a summary of the action/condition here */}
+                {}
               </div>
               <div className="flex gap-2">
                 <Button

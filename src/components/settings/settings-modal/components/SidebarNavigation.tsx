@@ -1,9 +1,6 @@
-// External imports
-
 import { Bell, Palette } from 'lucide-react';
 import React from 'react';
 
-// Internal imports
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { SETTINGS_SECTIONS } from '../constants';

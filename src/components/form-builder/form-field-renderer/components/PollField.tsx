@@ -29,7 +29,7 @@ export function PollField({
           } else if (Array.isArray(data.options)) {
             options = data.options;
           }
-          // Custom mapping
+
           if (field.valueKey || field.labelKey) {
             options = options.map((item: any) => {
               return {
@@ -55,7 +55,6 @@ export function PollField({
   const options = apiOptions ?? field.settings?.pollOptions ?? [];
   const showResults = !!field.settings?.showResults;
 
-  // For demo: fake results
   const fakeResults = options.map((opt, i) => ({
     label: typeof opt === 'string' ? opt : opt.label || opt.value,
     votes: Math.floor(Math.random() * 20),

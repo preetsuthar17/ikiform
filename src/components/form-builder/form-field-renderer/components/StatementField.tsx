@@ -3,7 +3,6 @@ import { cn } from '@/lib/utils';
 import type { BaseFieldProps } from '../types';
 
 export function StatementField({ field }: BaseFieldProps) {
-  // Use settings for custom heading/description, fallback to label/description
   const heading = field.settings?.statementHeading || field.label;
   const description = field.settings?.statementDescription || field.description;
   const align = field.settings?.statementAlign || 'left';

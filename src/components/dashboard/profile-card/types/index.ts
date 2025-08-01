@@ -1,4 +1,3 @@
-// Types for profile card component
 import type { User } from '@supabase/supabase-js';
 
 export interface ProfileCardProps {

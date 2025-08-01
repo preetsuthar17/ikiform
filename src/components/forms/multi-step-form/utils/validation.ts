@@ -1,7 +1,5 @@
-// Types
 import type { FormBlock } from '@/lib/database';
 
-// Utility imports
 import { validateEmail } from '@/lib/validation/email-validation';
 
 export const validateStep = (
@@ -86,7 +84,6 @@ export const validateStep = (
         errors[field.id] = urlValidation.message || 'Please enter a valid URL';
       }
     } else if (field.type === 'address' && value) {
-      // Check required address fields
       const requiredKeys = ['line1', 'city', 'state', 'zip', 'country'];
       for (const key of requiredKeys) {
         if (!value[key]) {

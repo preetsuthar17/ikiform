@@ -1,11 +1,7 @@
-// Components
-
 import { ScrollArea } from '@/components/ui/scroll-area';
 
-// Constants
 import { FIELD_TYPES, PALETTE_CONFIG } from '../constants';
 
-// Types
 import type { FieldPaletteProps } from '../types';
 import { CompactFieldItem } from './CompactFieldItem';
 

@@ -1,11 +1,8 @@
-// External imports
 import { useMemo } from 'react';
 
-// Type imports
 import type { Form, FormSubmission } from '@/lib/database';
 import type { AnalyticsData } from '../types';
 
-// Utility imports
 import {
   calculateBounceRate,
   calculateConversionFunnel,

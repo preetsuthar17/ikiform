@@ -1,8 +1,7 @@
 import React from 'react';
-// Types import
+
 import type { FormField } from '@/lib/database';
 
-// Components import
 import {
   CheckboxField,
   DateInputField,

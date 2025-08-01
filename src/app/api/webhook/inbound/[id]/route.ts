@@ -4,9 +4,6 @@ import {
   updateInboundMapping,
 } from '@/lib/webhooks/inbound';
 
-// --- Inbound Webhook Mapping Update/Delete API ---
-
-// PUT /api/webhook/inbound/[id] - Update inbound mapping
 export async function PUT(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -34,7 +31,6 @@ export async function PUT(
   }
 }
 
-// DELETE /api/webhook/inbound/[id] - Delete inbound mapping
 export async function DELETE(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }

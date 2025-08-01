@@ -1,12 +1,8 @@
-// External imports
-
 import { Check } from 'lucide-react';
 import type React from 'react';
 
-// UI components
 import { Card } from '@/components/ui/card';
 
-// types and utilities
 import type { Theme } from '../types';
 import {
   getGradientOverlayStyles,

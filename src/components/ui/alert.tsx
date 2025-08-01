@@ -56,10 +56,9 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
       setIsVisible(false);
       setTimeout(() => {
         onDismiss?.();
-      }, 150); // Match the exit animation duration
+      }, 150);
     };
 
-    // Extract motion-conflicting props
     const {
       onDrag,
       onDragStart,

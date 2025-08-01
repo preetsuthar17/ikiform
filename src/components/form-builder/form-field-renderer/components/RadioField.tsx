@@ -1,11 +1,9 @@
-// External imports
 import React from 'react';
 
-// Component imports
 import { RadioGroup, RadioItem } from '@/components/ui/radio';
-// Type imports
+
 import type { BaseFieldProps } from '../types';
-// Utility imports
+
 import { getErrorRingClasses } from '../utils';
 import { sanitizeOptions } from '../utils/sanitizeOptions';
 
@@ -35,7 +33,7 @@ export function RadioField({
           } else if (Array.isArray(data.options)) {
             options = data.options;
           }
-          // Custom mapping
+
           if (field.valueKey || field.labelKey) {
             options = options.map((item: any) => {
               return {

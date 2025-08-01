@@ -11,9 +11,9 @@ export type LogicOperator =
 
 export type LogicCondition = {
   id: string;
-  field: string; // field id
+  field: string;
   operator: LogicOperator;
-  value?: any; // value to compare against
+  value?: any;
 };
 
 export type LogicConditionGroup = {
@@ -33,8 +33,8 @@ export type LogicActionType =
 export type LogicAction = {
   id: string;
   type: LogicActionType;
-  target?: string; // field id, optional for show_message
-  value?: any; // for set_value and show_message
+  target?: string;
+  value?: any;
 };
 
 export type LogicActionCondition = {

@@ -1,11 +1,9 @@
-// External imports
 import React from 'react';
 import { Card } from '@/components/ui/card';
-// UI components
+
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-// Types
 import type { FormField } from '@/lib/database';
 
 interface ErrorMessagesProps {
@@ -20,7 +18,6 @@ export function ErrorMessages({
   const isTextType = ['text', 'email', 'textarea'].includes(field.type);
   const isNumberType = field.type === 'number';
 
-  // Don't render if field doesn't support validation or isn't required
   if (!(field.required || isTextType || isNumberType)) {
     return null;
   }

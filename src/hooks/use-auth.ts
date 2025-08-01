@@ -2,10 +2,9 @@
 
 import type { User } from '@supabase/supabase-js';
 import { useRouter } from 'next/navigation';
-// External imports
+
 import { useEffect, useState } from 'react';
 
-// Internal imports
 import { createClient } from '@/utils/supabase/client';
 
 export function useAuth() {

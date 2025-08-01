@@ -1,11 +1,9 @@
-// External imports
 import React from 'react';
 
-// Component imports
 import { Slider } from '@/components/ui/slider';
-// Type imports
+
 import type { BaseFieldProps } from '../types';
-// Utility imports
+
 import { getErrorRingClasses } from '../utils';
 
 export function SliderField({

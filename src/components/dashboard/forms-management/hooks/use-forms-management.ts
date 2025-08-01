@@ -1,19 +1,16 @@
-// Custom hooks for forms management
-
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-// External Dependencies
 import { useAuth } from '@/hooks/use-auth';
 import { toast } from '@/hooks/use-toast';
-// Types
+
 import type { Form } from '@/lib/database';
-// Database
+
 import { formsDb } from '@/lib/database';
-// Constants
+
 import { DEFAULT_DELETE_MODAL_STATE } from '../constants';
 import type { DeleteModalState } from '../types';
-// Utils
+
 import { copyToClipboard, generateShareUrl } from '../utils';
 
 export function useFormsManagement() {
@@ -26,7 +23,6 @@ export function useFormsManagement() {
   );
   const [showChoiceModal, setShowChoiceModal] = useState(false);
 
-  // Load forms from database
   const loadForms = async () => {
     if (!user) return;
 
@@ -41,7 +37,6 @@ export function useFormsManagement() {
     }
   };
 
-  // Form actions
   const createNewForm = () => {
     setShowChoiceModal(true);
   };
@@ -62,7 +57,7 @@ export function useFormsManagement() {
     try {
       if (!form.is_published) {
         await formsDb.togglePublishForm(form.id, true);
-        await loadForms(); // Refresh the forms list
+        await loadForms();
       }
 
       const shareUrl = generateShareUrl(form.id);
@@ -84,7 +79,7 @@ export function useFormsManagement() {
   const confirmDeleteForm = async () => {
     try {
       await formsDb.deleteForm(deleteModal.formId);
-      await loadForms(); // Refresh the forms list
+      await loadForms();
       toast.success('Form deleted successfully');
     } catch (error) {
       console.error('Error deleting form:', error);
@@ -107,7 +102,6 @@ export function useFormsManagement() {
     router.push(`/ai-builder?prompt=${encodedPrompt}&sent=true`);
   };
 
-  // Load forms on mount
   useEffect(() => {
     if (user) {
       loadForms();
@@ -115,13 +109,11 @@ export function useFormsManagement() {
   }, [user]);
 
   return {
-    // State
     forms,
     loading,
     deleteModal,
     showChoiceModal,
 
-    // Actions
     createNewForm,
     editForm,
     viewForm,
@@ -133,7 +125,6 @@ export function useFormsManagement() {
     handleCreateManually,
     handleCreateFromPrompt,
 
-    // Setters
     setDeleteModal,
     setShowChoiceModal,
   };

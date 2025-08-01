@@ -1,4 +1,3 @@
-// TimePicker.tsx
 'use client';
 import * as React from 'react';
 import {
@@ -45,7 +44,6 @@ export const TimePicker: React.FC<TimePickerProps> = ({
   const [minute, setMinute] = React.useState<string>('');
   const [amPm, setAmPm] = React.useState<string>('AM');
 
-  // Handler to set current time
   const handleSetCurrentTime = React.useCallback(() => {
     const def = getDefaultTime();
     setHour(def.hour);
@@ -57,7 +55,6 @@ export const TimePicker: React.FC<TimePickerProps> = ({
     }
   }, [getDefaultTime, onChange]);
 
-  // Set initial value only once on mount if no value is provided
   React.useEffect(() => {
     if (!value) {
       const def = getDefaultTime();
@@ -68,9 +65,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
         const newValue = `${def.hour}:${def.minute} ${def.amPm}`;
         onChange(newValue);
       }
-    }
-    // If value is provided, parse it once on mount
-    else if (
+    } else if (
       typeof value === 'string' &&
       value.match(/^\d{1,2}:\d{2} (AM|PM)$/)
     ) {
@@ -80,8 +75,6 @@ export const TimePicker: React.FC<TimePickerProps> = ({
       setMinute(m);
       setAmPm(ap);
     }
-    // Only run on mount
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = React.useCallback(

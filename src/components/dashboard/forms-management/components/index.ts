@@ -1,5 +1,3 @@
-// Export all components
-
 export { AIFormSuggestions } from './AIFormSuggestions';
 export { EmptyState } from './EmptyState';
 export { FormActions } from './FormActions';

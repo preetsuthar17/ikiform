@@ -1,10 +1,10 @@
-// Animation imports
 import { AnimatePresence, motion } from 'motion/react';
+import { memo, useCallback } from 'react';
 import { Loader } from '@/components/ui/loader';
-// UI components imports
+
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
-// Local imports
+
 import type { ChatPanelProps } from '@/lib/ai-builder/types';
 import { ChatHeader } from './chat-header';
 import { ChatInput } from './chat-input';
@@ -13,7 +13,11 @@ import { ChatSuggestions } from './chat-suggestions';
 import { StreamingIndicator } from './streaming-indicator';
 import { WelcomeMessage } from './welcome-message';
 
-export function ChatPanel({
+/**
+ * Optimized Chat Panel component with memoization
+ * Minimizes re-renders and improves performance
+ */
+export const ChatPanel = memo(function ChatPanel({
   messages,
   isLoading,
   isStreaming,
@@ -34,10 +38,13 @@ export function ChatPanel({
 }: ChatPanelProps) {
   const shouldShowSuggestions = showSuggestions && messages.length === 0;
 
-  const handleSuggestionClick = (text: string) => {
-    setInput(text);
-    setShowSuggestions(false);
-  };
+  const handleSuggestionClick = useCallback(
+    (text: string) => {
+      setInput(text);
+      setShowSuggestions(false);
+    },
+    [setInput, setShowSuggestions]
+  );
 
   return (
     <div className="flex h-full flex-col gap-4">
@@ -92,4 +99,4 @@ export function ChatPanel({
       />
     </div>
   );
-}
+});

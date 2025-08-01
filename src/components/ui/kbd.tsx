@@ -39,7 +39,6 @@ export interface KbdProps
 
 const Kbd = React.forwardRef<HTMLElement, KbdProps>(
   ({ className, variant, size, keys, children, onClick, ...props }, ref) => {
-    // If keys array is provided, render multiple kbd elements
     if (keys && keys.length > 0) {
       return (
         <span
@@ -64,7 +63,6 @@ const Kbd = React.forwardRef<HTMLElement, KbdProps>(
       );
     }
 
-    // Single kbd element
     return (
       <kbd
         className={cn(kbdVariants({ variant, size }), className)}

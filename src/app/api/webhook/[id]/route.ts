@@ -1,9 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { deleteWebhook, updateWebhook } from '@/lib/webhooks/outbound';
 
-// --- Outbound Webhook Update/Delete API ---
-
-// PUT /api/webhook/[id] - Update a webhook
 export async function PUT(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -23,7 +20,6 @@ export async function PUT(
   }
 }
 
-// DELETE /api/webhook/[id] - Delete a webhook
 export async function DELETE(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }

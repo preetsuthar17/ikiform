@@ -88,8 +88,8 @@ function ActionListEditor({
               ))}
             </SelectContent>
           </Select>
-          {/* Value input for set_value or show_message */}
-          {/* Remove value input for set_value, show_message, etc. */}
+          {}
+          {}
           {!singleAction && (
             <Button
               onClick={() => handleDelete(idx)}

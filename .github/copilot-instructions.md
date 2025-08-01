@@ -379,7 +379,6 @@ Ultracite enforces strict type safety, accessibility standards, and consistent c
 ## Example: Error Handling
 
 ```typescript
-// ✅ Good: Comprehensive error handling
 try {
   const result = await fetchData();
   return { success: true, data: result };
@@ -388,7 +387,6 @@ try {
   return { success: false, error: error.message };
 }
 
-// ❌ Bad: Swallowing errors
 try {
   return await fetchData();
 } catch (e) {

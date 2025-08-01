@@ -48,7 +48,6 @@ const TooltipProvider: React.FC<
   />
 );
 
-// Quick tooltip with minimal delay
 const QuickTooltipProvider: React.FC<
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Provider>
 > = ({ delayDuration = 100, skipDelayDuration = 50, ...props }) => (

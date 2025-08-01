@@ -1,12 +1,8 @@
-// External libraries
-
 import { ChevronRight } from 'lucide-react';
 import React from 'react';
 
-// UI components
 import { Button } from '@/components/ui/button';
 
-// Types
 import type { FormActionsProps } from '../types';
 
 export function FormActions({

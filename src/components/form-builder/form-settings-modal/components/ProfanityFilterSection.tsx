@@ -1,9 +1,6 @@
-// External libraries
-
 import { AlertTriangle, Plus, X } from 'lucide-react';
 import React from 'react';
 
-// UI components
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -13,7 +10,6 @@ import { Switch } from '@/components/ui/switch';
 import { TagInput } from '@/components/ui/tag-input';
 import { Textarea } from '@/components/ui/textarea';
 
-// Types
 import type { ProfanityFilterSectionProps } from '../types';
 
 export function ProfanityFilterSection({

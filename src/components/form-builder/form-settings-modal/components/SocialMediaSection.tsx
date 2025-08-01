@@ -1,7 +1,5 @@
-// External libraries
 import React from 'react';
 
-// UI components
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -15,7 +13,6 @@ import {
 import { SocialMediaIcons } from '@/components/ui/social-media-icons';
 import { Switch } from '@/components/ui/switch';
 
-// Types
 import type { SocialMediaSectionProps } from '../types';
 
 interface BrandingSectionProps extends SocialMediaSectionProps {
@@ -96,7 +93,7 @@ export function BrandingSection({
           <>
             <div className="flex flex-col gap-4">
               <div className="grid gap-4">
-                {/* Social media platform fields (LinkedIn, Twitter, etc.) */}
+                {}
                 {(
                   [
                     {

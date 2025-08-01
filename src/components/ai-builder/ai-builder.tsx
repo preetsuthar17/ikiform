@@ -1,13 +1,9 @@
-// React imports
-
-// Icon imports
 import { Sparkles } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-// Next.js imports
+
 import { useTheme } from 'next-themes';
 import { useEffect, useRef, useState } from 'react';
 
-// UI components imports
 import { Button } from '@/components/ui/button';
 import {
   ResizableHandle,
@@ -15,7 +11,7 @@ import {
   ResizablePanelGroup,
 } from '@/components/ui/resizable';
 import { useAIBuilder } from '@/hooks/ai-builder/use-ai-builder';
-// Local imports
+
 import { useAuth } from '@/hooks/use-auth';
 import { usePremiumStatus } from '@/hooks/use-premium-status';
 import { CHAT_SUGGESTIONS } from '@/lib/ai-builder/constants';
@@ -33,6 +29,7 @@ export function AIBuilder() {
   const { hasPremium, checkingPremium: checking } = usePremiumStatus(user);
   const [chatDrawerOpen, setChatDrawerOpen] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   const {
     messages,
@@ -44,7 +41,6 @@ export function AIBuilder() {
     streamedContent,
     streamError,
     showJsonModal,
-    mounted,
     messagesEndRef,
     streamingRef,
     setInput,
@@ -64,6 +60,7 @@ export function AIBuilder() {
 
   useEffect(() => {
     initializeScrollbarStyles();
+    setMounted(true);
   }, []);
 
   const chatPanelProps = {
@@ -94,7 +91,7 @@ export function AIBuilder() {
       user={user}
     >
       <div className="flex h-screen w-full flex-col gap-4 bg-background md:flex-row">
-        {/* Mobile: Chat Drawer Trigger */}
+        {}
         <div className="-translate-x-1/2 fixed bottom-4 left-1/2 z-50 w-full max-w-[90%] md:hidden">
           <Button
             className="w-full rounded-card shadow-lg"
@@ -105,7 +102,7 @@ export function AIBuilder() {
           </Button>
         </div>
 
-        {/* Desktop: Resizable Chat + Preview */}
+        {}
         <div className="hidden h-full w-full md:flex">
           <ResizablePanelGroup direction="horizontal">
             <ResizablePanel
@@ -130,14 +127,14 @@ export function AIBuilder() {
           </ResizablePanelGroup>
         </div>
 
-        {/* Mobile: Drawer for Chat */}
+        {}
         <MobileChatDrawer
           isOpen={chatDrawerOpen}
           onOpenChange={setChatDrawerOpen}
           {...chatPanelProps}
         />
 
-        {/* Mobile: Main page is always the preview */}
+        {}
         <div className="flex h-full flex-1 flex-col md:hidden">
           <PreviewPanel
             activeForm={activeForm}

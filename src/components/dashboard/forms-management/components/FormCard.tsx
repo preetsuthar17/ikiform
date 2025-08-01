@@ -1,15 +1,13 @@
-// Individual form card component
 import React from 'react';
 import { ShareFormModal } from '@/components/form-builder/share-form-modal';
 import { Badge } from '@/components/ui/badge';
-// UI Components
+
 import { Card } from '@/components/ui/card';
-// Types
+
 import type { FormCardProps } from '../types';
 
-// Utils
 import { formatDate, getTotalFields } from '../utils';
-// Local Components
+
 import { FormActions } from './FormActions';
 
 export function FormCard({
@@ -30,7 +28,7 @@ export function FormCard({
 
   return (
     <Card className="group cursor-pointer rounded-card border-border bg-card p-6">
-      {/* Card Header */}
+      {}
       <div className="mb-4 flex items-start justify-between">
         <div className="min-w-0 flex-1">
           <h3 className="mb-2 line-clamp-2 font-semibold text-foreground text-lg leading-tight">
@@ -50,7 +48,7 @@ export function FormCard({
         </Badge>
       </div>
 
-      {/* Metadata */}
+      {}
       <div className="mb-6 flex items-center justify-between border-border/50 border-t pt-2 text-muted-foreground text-sm">
         <span className="flex items-center gap-1">
           <span className="h-2 w-2 rounded-card bg-accent" />
@@ -59,7 +57,7 @@ export function FormCard({
         <span>Updated {formattedDate}</span>
       </div>
 
-      {/* Action Buttons */}
+      {}
       <FormActions
         form={form}
         onDelete={onDelete}
@@ -73,7 +71,6 @@ export function FormCard({
         isPublished={!!form?.is_published}
         onClose={() => setIsShareModalOpen(false)}
         onPublish={async () => {
-          // You may want to refetch or update form state after publish
           if (onShare) onShare(form);
         }}
       />

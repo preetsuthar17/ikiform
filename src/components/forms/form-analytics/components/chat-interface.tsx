@@ -1,9 +1,8 @@
-// Icons
 import { Send, Square } from 'lucide-react';
-// Next.js Components
+
 import Image from 'next/image';
 import React, { memo, useEffect, useMemo } from 'react';
-// Markdown Components
+
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -13,27 +12,22 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Kbd } from '@/components/ui/kbd';
 import { Loader } from '@/components/ui/loader';
-// UI Components
+
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
 
-// Types
 import type { ChatInterfaceProps } from '../types';
 
-// Updated formatContent function with better object handling
 function formatContent(content: any): string {
   if (content === null || content === undefined) {
     return String(content);
   }
 
   if (typeof content === 'object') {
-    // Handle arrays
     if (Array.isArray(content)) {
-      // If it's an array of objects, format each one
       const formattedItems = content.map((item, index) => {
         if (typeof item === 'object' && item !== null) {
-          // For objects in arrays, create a readable format
           const entries = Object.entries(item)
             .map(([key, value]) => `${key}: ${formatValue(value)}`)
             .join(', ');
@@ -44,7 +38,6 @@ function formatContent(content: any): string {
       return formattedItems.join('\n');
     }
 
-    // Handle regular objects
     return Object.entries(content)
       .map(([key, value]) => `- **${key}**: ${formatValue(value)}`)
       .join('\n');
@@ -53,7 +46,6 @@ function formatContent(content: any): string {
   return String(content);
 }
 
-// Helper function to safely format any value
 function formatValue(value: any): string {
   if (value === null || value === undefined) {
     return String(value);
@@ -63,7 +55,7 @@ function formatValue(value: any): string {
     if (Array.isArray(value)) {
       return `[${value.map(formatValue).join(', ')}]`;
     }
-    // For nested objects, create a compact representation
+
     const entries = Object.entries(value)
       .map(([k, v]) => `${k}: ${formatValue(v)}`)
       .join(', ');
@@ -82,7 +74,6 @@ const ChatMessage = memo(function ChatMessage({
   index: number;
   markdownComponents: any;
 }) {
-  // Ensure content is always a string
   const formattedContent = formatContent(message.content);
 
   return (
@@ -97,7 +88,7 @@ const ChatMessage = memo(function ChatMessage({
           message.role === 'user' ? 'flex-row-reverse' : 'flex-row'
         }`}
       >
-        {/* Message Content */}
+        {}
         <div
           className={`group relative rounded-card px-4 py-3 ${
             message.role === 'user'
@@ -142,7 +133,6 @@ export const ChatInterface = memo(function ChatInterface({
 }: ChatInterfaceProps) {
   const isEmpty = chatMessages.length === 0;
 
-  // Memoize markdown components to avoid recreating on each render
   const markdownComponents = useMemo(
     () => ({
       code: ({ inline, className, children, ...props }: any) => {
@@ -264,10 +254,10 @@ export const ChatInterface = memo(function ChatInterface({
 
   return (
     <div className="background relative flex h-[74vh] flex-col">
-      {/* Messages Area */}
+      {}
       <ScrollArea className="h-[90%] flex-1 overflow-hidden px-6 py-6">
         <div className="mx-auto flex max-w-4xl flex-col gap-6">
-          {/* Welcome State */}
+          {}
           {isEmpty && (
             <div className="flex flex-col items-center gap-3 py-12 text-center">
               <div className="flex h-20 w-20 items-center justify-center rounded-card bg-primary/10">
@@ -287,7 +277,7 @@ export const ChatInterface = memo(function ChatInterface({
             </div>
           )}
 
-          {/* Chat Messages */}
+          {}
           {chatMessages.map((message, index) => (
             <ChatMessage
               index={index}
@@ -297,7 +287,7 @@ export const ChatInterface = memo(function ChatInterface({
             />
           ))}
 
-          {/* Streaming Message */}
+          {}
           {chatStreaming && (
             <div className="flex justify-start gap-4">
               <div className="flex max-w-[85%] gap-3">
@@ -323,7 +313,7 @@ export const ChatInterface = memo(function ChatInterface({
             </div>
           )}
 
-          {/* Quick Actions for Existing Conversations */}
+          {}
           {!isEmpty && chatSuggestions.length > 0 && (
             <div className="flex flex-wrap justify-center gap-2 pt-4">
               {chatSuggestions.slice(0, 3).map((suggestion, index) => (
@@ -347,7 +337,7 @@ export const ChatInterface = memo(function ChatInterface({
         <Separator />
         <div className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="mx-auto max-w-4xl">
-            {/* Input Form */}
+            {}
             <form
               className="relative mx-auto flex max-w-[90%] items-center"
               onSubmit={handleChatSend}
@@ -367,7 +357,7 @@ export const ChatInterface = memo(function ChatInterface({
                 value={chatInput}
               />
               <div className="absolute top-0 right-3 flex h-full items-center gap-2">
-                {/* Stop Generation */}
+                {}
                 {chatStreaming && abortController && (
                   <Button
                     onClick={handleStopGeneration}
@@ -377,7 +367,7 @@ export const ChatInterface = memo(function ChatInterface({
                     <Square className="h-4 w-4" />
                   </Button>
                 )}
-                {/* Send Button */}
+                {}
                 <Button
                   disabled={!chatInput.trim() || chatLoading}
                   size="icon"
@@ -387,7 +377,7 @@ export const ChatInterface = memo(function ChatInterface({
                 </Button>
               </div>
             </form>
-            {/* Helper Text */}
+            {}
             <div className="mt-3 flex items-center justify-center text-muted-foreground text-xs">
               <span>
                 Press <Kbd size="sm">Enter</Kbd> to send,{' '}

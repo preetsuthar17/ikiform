@@ -15,11 +15,9 @@ export {
   ProfanityFilterSection,
   RateLimitSection,
 } from './components';
-// Components
+
 export { FormSettingsModal } from './FormSettingsModal';
 
-// Hooks
 export { useFormSettings } from './hooks';
 
-// Types
 export type * from './types';

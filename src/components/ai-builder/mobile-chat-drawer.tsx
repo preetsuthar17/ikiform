@@ -1,4 +1,3 @@
-// UI components imports
 import {
   Drawer,
   DrawerCloseButton,
@@ -8,7 +7,7 @@ import {
   DrawerTitle,
 } from '@/components/ui/drawer';
 import type { ChatPanelProps } from '@/lib/ai-builder/types';
-// Local imports
+
 import { ChatPanel } from './chat/chat-panel';
 
 interface MobileChatDrawerProps extends ChatPanelProps {

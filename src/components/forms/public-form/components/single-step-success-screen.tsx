@@ -1,12 +1,8 @@
-// Libraries
-
 import Link from 'next/link';
 import type React from 'react';
 
-// UI Components
 import { Card } from '@/components/ui/card';
 
-// Types
 import type { FormSchema } from '@/lib/database';
 
 interface SingleStepSuccessScreenProps {

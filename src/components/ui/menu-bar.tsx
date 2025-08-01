@@ -154,7 +154,6 @@ const MenuBarTrigger = React.forwardRef<
     },
     ref
   ) => {
-    // Responsive icon sizes
     const iconSize = size === 'sm' ? 14 : size === 'lg' ? 18 : 16;
     const mobileIconSize = size === 'sm' ? 12 : size === 'lg' ? 16 : 14;
 
@@ -423,7 +422,6 @@ const MenuBarSeparator = React.forwardRef<
 ));
 MenuBarSeparator.displayName = 'MenuBarSeparator';
 
-// Animation variants for staggered menu items
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -453,7 +451,6 @@ const itemVariants = {
   },
 };
 
-// Animated container for menu items
 const AnimatedMenuContainer = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>

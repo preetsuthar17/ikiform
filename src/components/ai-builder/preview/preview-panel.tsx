@@ -1,7 +1,5 @@
-// UI components imports
 import { FormPreview } from '@/components/form-builder/form-preview';
 
-// Local imports
 import type { PreviewPanelProps } from '@/lib/ai-builder/types';
 import { PreviewPanelHeader } from './preview-panel-header';
 

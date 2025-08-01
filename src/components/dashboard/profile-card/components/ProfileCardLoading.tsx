@@ -1,7 +1,5 @@
-// Loading state component for profile card
 import React from 'react';
 
-// UI Components
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import {
   Skeleton,
@@ -9,7 +7,6 @@ import {
   SkeletonText,
 } from '@/components/ui/skeleton';
 
-// Types
 import type { ProfileLoadingProps } from '../types';
 
 export function ProfileCardLoading({ className }: ProfileLoadingProps) {

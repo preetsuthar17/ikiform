@@ -4,14 +4,12 @@ import { Card } from '@/components/ui/card';
 import type { Form, FormSubmission } from '@/lib/database';
 
 function getDropoffCounts(form: Form, submissions: FormSubmission[]) {
-  // For multi-step forms, count how many users reach each block (step)
   const blocks = form.schema.blocks || [];
   const blockIds = blocks.map((block) => block.id);
   const dropoffCounts: Record<string, number> = {};
   blockIds.forEach((id) => (dropoffCounts[id] = 0));
 
   submissions.forEach((sub) => {
-    // For each block, if any field in the block is filled, count as reached
     let reached = false;
     for (const block of blocks) {
       const hasAny = (block.fields || []).some(
@@ -24,7 +22,6 @@ function getDropoffCounts(form: Form, submissions: FormSubmission[]) {
         dropoffCounts[block.id]++;
         reached = true;
       } else if (reached) {
-        // User dropped off before this block
         break;
       }
     }

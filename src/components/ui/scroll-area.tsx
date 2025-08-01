@@ -52,7 +52,6 @@ const ScrollArea = React.forwardRef<
     },
     ref
   ) => {
-    // Ensure orientation is always set and stable
     const orientation = propOrientation || 'vertical';
     return (
       <ScrollAreaPrimitive.Root

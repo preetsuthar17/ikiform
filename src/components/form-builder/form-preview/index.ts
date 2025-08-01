@@ -1,5 +1,3 @@
-// Components
-
 export {
   EditableField,
   FormActions,
@@ -10,8 +8,6 @@ export {
 } from './components';
 export { FormPreview } from './FormPreview';
 
-// Hooks
 export { useEditableField, useFormPreviewState } from './hooks';
 
-// Types
 export type * from './types';

@@ -1,10 +1,9 @@
-// External imports
 import { type NextRequest, NextResponse } from 'next/server';
 import {
   sendNewLoginEmail,
   sendWelcomeEmail,
 } from '@/lib/services/notifications';
-// Internal imports
+
 import { createClient } from '@/utils/supabase/server';
 
 export async function GET(request: NextRequest) {

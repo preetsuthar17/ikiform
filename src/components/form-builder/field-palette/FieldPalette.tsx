@@ -1,7 +1,5 @@
-// Components
 import { CompactPalette, FullPalette } from './components';
 
-// Types
 import type { FieldPaletteProps } from './types';
 
 export function FieldPalette({

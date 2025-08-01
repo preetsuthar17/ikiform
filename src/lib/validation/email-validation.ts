@@ -1,4 +1,3 @@
-// Temporary email domains to block
 const TEMPORARY_EMAIL_DOMAINS = [
   '10minutemail.com',
   'guerrillamail.com',
@@ -42,7 +41,6 @@ const TEMPORARY_EMAIL_DOMAINS = [
   'tempr.email',
 ];
 
-// Personal email domains for business email validation
 const PERSONAL_EMAIL_DOMAINS = [
   'gmail.com',
   'yahoo.com',
@@ -73,7 +71,6 @@ export function validateEmail(
   email: string,
   settings?: EmailValidationSettings
 ): EmailValidationResult {
-  // Basic email format validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     return {
@@ -86,7 +83,6 @@ export function validateEmail(
 
   const domain = email.split('@')[1]?.toLowerCase();
 
-  // Check blocked domains (temporary email services)
   const blockedDomains = [
     ...(settings?.blockedDomains || []),
     ...TEMPORARY_EMAIL_DOMAINS,
@@ -101,7 +97,6 @@ export function validateEmail(
     };
   }
 
-  // Check allowed domains
   if (
     settings?.allowedDomains?.length &&
     !settings.allowedDomains.some((allowed) => domain === allowed.toLowerCase())
@@ -114,7 +109,6 @@ export function validateEmail(
     };
   }
 
-  // Check business email requirement
   if (
     settings?.requireBusinessEmail &&
     PERSONAL_EMAIL_DOMAINS.includes(domain)

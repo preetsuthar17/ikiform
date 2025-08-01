@@ -1,7 +1,5 @@
-// External imports
 import React from 'react';
 
-// Internal imports
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { SETTINGS_SECTIONS } from '../constants';

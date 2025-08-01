@@ -130,7 +130,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
         {...props}
       >
         {' '}
-        {/* Animated indicator */}
+        {}
         <motion.div
           animate={{
             left: activeTabBounds.left,
@@ -155,7 +155,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
             damping: 30,
           }}
         />
-        {/* Tab triggers */}
+        {}
         {items.map((item: TabItem, index: number) => {
           const isActive = activeValue === item.id;
 
@@ -192,7 +192,6 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
 
 Tabs.displayName = 'Tabs';
 
-// Content component for tab panels
 export interface TabsContentProps extends React.HTMLAttributes<HTMLDivElement> {
   value: string;
   activeValue?: string;

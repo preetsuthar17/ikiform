@@ -37,7 +37,6 @@ const CheckboxRoot = React.forwardRef<
   const checkboxId = id || React.useId();
   const iconSize = size === 'sm' ? 10 : size === 'lg' ? 14 : 12;
 
-  // Custom SVG check path for drawing animation
   const checkPath = 'M3 6l3 3 6-6';
   const minusPath = 'M3 6h8';
 
@@ -136,7 +135,6 @@ const CheckboxRoot = React.forwardRef<
 
 CheckboxRoot.displayName = 'Checkbox';
 
-// Simple wrapper that maintains the same API
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
   CheckboxProps

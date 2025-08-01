@@ -1,4 +1,3 @@
-// Libraries
 import type React from 'react';
 import { Link } from 'react-aria-components';
 import { SocialMediaIcons } from '@/components/ui/social-media-icons';

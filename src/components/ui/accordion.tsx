@@ -84,7 +84,6 @@ export interface AccordionProps extends VariantProps<typeof accordionVariants> {
   children?: React.ReactNode;
 }
 
-// Single accordion props
 export interface AccordionSingleProps extends AccordionProps {
   type: 'single';
   collapsible?: boolean;
@@ -93,7 +92,6 @@ export interface AccordionSingleProps extends AccordionProps {
   onValueChange?: (value: string) => void;
 }
 
-// Multiple accordion props
 export interface AccordionMultipleProps extends AccordionProps {
   type: 'multiple';
   defaultValue?: string[];

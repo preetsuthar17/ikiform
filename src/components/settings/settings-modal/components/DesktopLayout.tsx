@@ -1,14 +1,13 @@
-// External imports
 import React from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
-// types and utilities
+
 import type { SettingsSection } from '../types';
 import {
   getContentAreaStyles,
   getDesktopLayoutStyles,
   getSidebarStyles,
 } from '../utils';
-// components
+
 import { ModalHeader } from './ModalHeader';
 import { SettingsContent } from './SettingsContent';
 import { SidebarNavigation } from './SidebarNavigation';

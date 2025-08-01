@@ -1,5 +1,3 @@
-// External imports
-
 import { Settings, Zap } from 'lucide-react';
 import React from 'react';
 import type { FormLogic } from '@/components/form-builder/logic-builder/types';
@@ -8,7 +6,7 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from '@/components/ui/resizable';
-// Component imports
+
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { BlockManager } from '../../block-manager';
@@ -16,9 +14,9 @@ import { FieldPalette } from '../../field-palette';
 import { FieldSettingsPanel } from '../../field-settings-panel';
 import { FormPreview } from '../../form-preview';
 import { LogicBuilderPanel } from '../../logic-builder';
-// Constant imports
+
 import { PANEL_SIZES } from '../constants';
-// Type imports
+
 import type { FormBuilderPanelsProps } from '../types';
 import { getAllFields } from '../utils';
 
@@ -52,7 +50,7 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
   const allFields = getAllFields(formSchema);
   return (
     <ResizablePanelGroup className="h-full" direction="horizontal">
-      {/* Left Panel - Field Palette or Block Manager */}
+      {}
       <ResizablePanel
         defaultSize={PANEL_SIZES.LEFT_PANEL.default}
         maxSize={PANEL_SIZES.LEFT_PANEL.max}
@@ -77,7 +75,7 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
 
       <ResizableHandle />
 
-      {/* Center Panel - Form Preview */}
+      {}
       <ResizablePanel
         defaultSize={PANEL_SIZES.PREVIEW_PANEL.default}
         maxSize={PANEL_SIZES.PREVIEW_PANEL.max}
@@ -101,7 +99,7 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
 
       <ResizableHandle />
 
-      {/* Right Panel - Tabs for Field Settings and Logic Builder */}
+      {}
       <ResizablePanel
         defaultSize={PANEL_SIZES.RIGHT_PANEL.default}
         maxSize={PANEL_SIZES.RIGHT_PANEL.max}

@@ -38,12 +38,10 @@ export class ProfanityFilterService {
 
     this.filter = new Filter();
 
-    // Add custom words to filter
     if (this.options.customWords && this.options.customWords.length > 0) {
       this.filter.addWords(...this.options.customWords);
     }
 
-    // Remove whitelisted words from filter
     if (
       this.options.whitelistedWords &&
       this.options.whitelistedWords.length > 0
@@ -98,7 +96,6 @@ export class ProfanityFilterService {
         });
 
         if (this.options.strictMode) {
-          // In strict mode, reject the entire submission
           return {
             isValid: false,
             filteredData: submissionData,
@@ -107,10 +104,8 @@ export class ProfanityFilterService {
           };
         }
         if (this.options.replaceWithAsterisks) {
-          // Replace with cleaned text
           filteredData[key] = result.cleanedText;
         } else {
-          // Keep original but mark as violation
           filteredData[key] = value;
         }
       } else {
@@ -134,12 +129,10 @@ export class ProfanityFilterService {
       return this.checkText(value);
     }
     if (Array.isArray(value)) {
-      // Check array values
       const textValues = value.filter((v) => typeof v === 'string').join(' ');
       return this.checkText(textValues);
     }
     if (typeof value === 'object' && value !== null) {
-      // Check object values recursively
       const textValues = Object.values(value)
         .filter((v) => typeof v === 'string')
         .join(' ');
@@ -210,7 +203,6 @@ export class ProfanityFilterService {
   updateOptions(newOptions: Partial<ProfanityFilterOptions>) {
     this.options = { ...this.options, ...newOptions };
 
-    // Recreate filter with new settings
     this.filter = new Filter();
 
     if (this.options.customWords && this.options.customWords.length > 0) {

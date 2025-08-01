@@ -1,13 +1,10 @@
-// Profile information display component
-
-// Icons
 import { Crown } from 'lucide-react';
 import React from 'react';
-// UI Components
+
 import { CardContent } from '@/components/ui/card';
-// Types
+
 import type { ProfileInfoProps } from '../types';
-// Utils
+
 import { extractUserName } from '../utils';
 
 export function ProfileInfo({ user, hasPremium }: ProfileInfoProps) {

@@ -1,17 +1,16 @@
 'use client';
 
-// External imports
 import type React from 'react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-// Component imports
+
 import {
   Modal,
   ModalContent,
   ModalHeader,
   ModalTitle,
 } from '@/components/ui/modal';
-// Utility imports
+
 import { createDefaultFormSchema } from '@/lib/forms';
 import {
   FormConfigurationStep,
@@ -20,11 +19,11 @@ import {
   StepIndicator,
   WizardActions,
 } from './components';
-// Constant imports
+
 import { FORM_TYPES } from './constants';
-// Hook imports
+
 import { useFormCreationWizard } from './hooks/useFormCreationWizard';
-// Type imports
+
 import type {
   FormConfiguration,
   FormCreationWizardProps,

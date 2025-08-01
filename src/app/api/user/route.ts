@@ -1,11 +1,10 @@
-// External imports
 import { type NextRequest, NextResponse } from 'next/server';
 import {
   sendNewLoginEmail,
   sendWelcomeEmail,
 } from '@/lib/services/notifications';
 import { sanitizeString } from '@/lib/utils/sanitize';
-// Internal imports
+
 import { createClient } from '@/utils/supabase/server';
 
 export async function POST(_request: NextRequest) {
@@ -41,7 +40,6 @@ export async function POST(_request: NextRequest) {
       .single();
 
     if (existingUser) {
-      // Existing user: send new login email
       await sendNewLoginEmail({ to: sanitizedEmail, name });
       return NextResponse.json({
         success: true,
@@ -70,7 +68,6 @@ export async function POST(_request: NextRequest) {
       );
     }
 
-    // New user: send welcome email
     await sendWelcomeEmail({ to: sanitizedEmail, name });
 
     return NextResponse.json({

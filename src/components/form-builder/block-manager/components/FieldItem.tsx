@@ -1,9 +1,7 @@
 import React from 'react';
 
-// Components
 import { Badge } from '@/components/ui/badge';
 
-// Types
 import type { FieldItemProps } from '../types';
 
 export function FieldItem({

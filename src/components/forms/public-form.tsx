@@ -2,11 +2,9 @@
 
 import React, { useEffect } from 'react';
 
-// Components
 import { MultiStepForm } from './multi-step-form';
 import { SingleStepForm } from './public-form/components';
 
-// Types
 import type { PublicFormProps } from './public-form/types';
 
 export function PublicForm({ formId, schema, theme }: PublicFormProps) {
@@ -15,7 +13,7 @@ export function PublicForm({ formId, schema, theme }: PublicFormProps) {
 
   useEffect(() => {
     const val = schema?.settings?.layout?.borderRadius || 'md';
-    // Map to px values
+
     let borderRadiusValue = '8px';
     let cardRadiusValue = '16px';
     switch (val) {

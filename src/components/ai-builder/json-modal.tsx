@@ -1,8 +1,6 @@
-// React imports
-
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-// Syntax highlighting
+
 import { createHighlighter } from 'shiki';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,10 +11,10 @@ import {
   ModalHeader,
   ModalTitle,
 } from '@/components/ui/modal';
-// UI components imports
+
 import { ScrollArea } from '@/components/ui/scroll-area';
 import type { FormSchema } from '@/lib/ai-builder/types';
-// Local imports
+
 import { CopyButton } from './copy-button';
 
 interface JsonModalProps {
@@ -49,7 +47,7 @@ export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
         setHighlightedCode(html);
       } catch (error) {
         console.error('Error highlighting code:', error);
-        // Fallback to plain text
+
         setHighlightedCode(
           `<pre class="whitespace-pre-wrap break-words">${JSON.stringify(activeForm.schema, null, 2)}</pre>`
         );

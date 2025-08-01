@@ -16,7 +16,6 @@ import {
 } from '@/lib/webhooks/outbound';
 import { createClient } from '@/utils/supabase/server';
 
-// Recursively sanitize all string fields in an object
 function sanitizeObjectStrings(obj: any): any {
   if (typeof obj === 'string') return sanitizeString(obj);
   if (Array.isArray(obj)) return obj.map(sanitizeObjectStrings);
@@ -39,13 +38,11 @@ export async function POST(
     const body = await request.json();
     const { submissionData } = body;
 
-    // Get client IP address for rate limiting
     const headersList = await headers();
     const forwardedFor = headersList.get('x-forwarded-for');
     const realIp = headersList.get('x-real-ip');
     const ipAddress = forwardedFor?.split(',')[0] || realIp || 'unknown';
 
-    // Get the form to check rate limiting settings
     const form = await formsDbServer.getPublicForm(formId);
     if (!form) {
       return NextResponse.json(
@@ -54,7 +51,6 @@ export async function POST(
       );
     }
 
-    // Check if form owner has premium subscription
     const supabase = await createClient();
     const {
       data: { user },
@@ -67,7 +63,6 @@ export async function POST(
       }
     }
 
-    // Check rate limiting - enabled by default
     const rateLimit = {
       ...DEFAULT_RATE_LIMIT_SETTINGS,
       ...form.schema.settings.rateLimit,
@@ -96,10 +91,8 @@ export async function POST(
       }
     }
 
-    // Check response limit
     const responseLimit = form.schema.settings.responseLimit;
     if (responseLimit?.enabled) {
-      // Count existing submissions for this form
       const count = await formsDbServer.countFormSubmissions(formId);
       if (count >= (responseLimit.maxResponses || 100)) {
         return NextResponse.json(
@@ -114,7 +107,6 @@ export async function POST(
       }
     }
 
-    // Check profanity filter
     const profanityFilterSettings = {
       ...DEFAULT_PROFANITY_FILTER_SETTINGS,
       ...form.schema.settings.profanityFilter,
@@ -141,20 +133,17 @@ export async function POST(
         );
       }
 
-      // Use filtered data if replacement mode is enabled
       if (profanityFilterSettings.replaceWithAsterisks) {
         filteredSubmissionData = filterResult.filteredData;
       }
     }
 
-    // Submit the form if all checks pass
     const submission = await formsDbServer.submitForm(
       formId,
       filteredSubmissionData,
       ipAddress
     );
 
-    // Trigger outbound webhooks (non-blocking)
     const formatted = await formatHumanFriendlyPayload(
       formId,
       filteredSubmissionData
@@ -169,7 +158,6 @@ export async function POST(
       console.error('[Webhook] Delivery error:', e);
     }
 
-    // Send notification if enabled
     const notifications = form.schema.settings.notifications;
     if (notifications?.enabled && notifications.email) {
       try {
@@ -177,7 +165,7 @@ export async function POST(
           '[Notification] Attempting to send notification email',
           notifications
         );
-        // Build analytics URL
+
         const analyticsUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ikiform.com'}/dashboard/forms/${formId}/analytics`;
         await sendFormNotification({
           to: notifications.email,
@@ -192,7 +180,6 @@ export async function POST(
         });
         console.log('[Notification] Notification email sent successfully');
       } catch (e) {
-        // Log but do not block submission
         console.error('[Notification] Notification send error:', e);
       }
     } else {

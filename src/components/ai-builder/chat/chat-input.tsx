@@ -1,7 +1,5 @@
-// Icon imports
 import { Send } from 'lucide-react';
 
-// UI components imports
 import { Button } from '@/components/ui/button';
 import { Kbd } from '@/components/ui/kbd';
 import { Textarea } from '@/components/ui/textarea';

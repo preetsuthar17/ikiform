@@ -74,11 +74,9 @@ export function DataTable<T extends Record<string, any>>({
     {}
   );
 
-  // Filter data based on search and column filters
   const filteredData = useMemo(() => {
     let filtered = [...data];
 
-    // Global search
     if (search) {
       filtered = filtered.filter((row) =>
         columns.some((column) => {
@@ -88,7 +86,6 @@ export function DataTable<T extends Record<string, any>>({
       );
     }
 
-    // Column filters
     Object.entries(columnFilters).forEach(([key, value]) => {
       if (value) {
         filtered = filtered.filter((row) => {
@@ -104,7 +101,6 @@ export function DataTable<T extends Record<string, any>>({
     return filtered;
   }, [data, search, columnFilters, columns]);
 
-  // Sort data
   const sortedData = useMemo(() => {
     if (!sortConfig.key) return filteredData;
 
@@ -122,7 +118,6 @@ export function DataTable<T extends Record<string, any>>({
     });
   }, [filteredData, sortConfig]);
 
-  // Pagination
   const paginatedData = useMemo(() => {
     if (!showPagination) return sortedData;
 
@@ -198,16 +193,16 @@ export function DataTable<T extends Record<string, any>>({
         )}
       >
         <div className="p-6">
-          {/* Search skeleton */}
+          {}
           {searchable && (
             <div className="mb-6">
               <Skeleton className="h-10 w-full max-w-sm" />
             </div>
           )}
 
-          {/* Table skeleton */}
+          {}
           <div className="overflow-hidden rounded-ele border border-border">
-            {/* Header skeleton */}
+            {}
             <div
               className={cn(
                 'bg-muted/20',
@@ -232,7 +227,7 @@ export function DataTable<T extends Record<string, any>>({
               </div>
             </div>
 
-            {/* Rows skeleton */}
+            {}
             {Array.from({ length: itemsPerPage || 5 }).map((_, rowIndex) => (
               <div
                 className={cn(
@@ -254,7 +249,6 @@ export function DataTable<T extends Record<string, any>>({
                       key={colIndex}
                     >
                       {colIndex === 0 ? (
-                        // First column - often contains user info
                         <div className="flex items-center gap-3">
                           <SkeletonAvatar size="sm" />
                           <div className="flex flex-1 flex-col gap-1">
@@ -263,12 +257,10 @@ export function DataTable<T extends Record<string, any>>({
                           </div>
                         </div>
                       ) : colIndex === columns.length - 1 ? (
-                        // Last column - often actions
                         <div className="flex justify-end">
                           <Skeleton className="h-8 w-8 rounded-ele" />
                         </div>
                       ) : (
-                        // Middle columns
                         <div className="flex flex-col gap-1">
                           <Skeleton
                             className={cn(
@@ -288,7 +280,7 @@ export function DataTable<T extends Record<string, any>>({
             ))}
           </div>
 
-          {/* Pagination skeleton */}
+          {}
           {showPagination && (
             <div className="mt-6 flex flex-col items-center justify-between gap-4 sm:flex-row">
               <Skeleton className="h-4 w-48" />
@@ -315,7 +307,7 @@ export function DataTable<T extends Record<string, any>>({
         className
       )}
     >
-      {/* Search and Filters */}
+      {}
       {searchable && (
         <div className="flex flex-col items-start gap-4 p-6 pb-4 sm:flex-row sm:items-center">
           <div className="relative w-full sm:w-auto sm:max-w-sm sm:flex-1">
@@ -355,7 +347,7 @@ export function DataTable<T extends Record<string, any>>({
         </div>
       )}
 
-      {/* Table */}
+      {}
       <div
         className={cn(
           'overflow-hidden',
@@ -426,7 +418,7 @@ export function DataTable<T extends Record<string, any>>({
                         </div>
                       )}
                     </div>
-                    {/* Column Filter */}
+                    {}
                     {column.filterable && (
                       <div className="mt-2">
                         <Input
@@ -507,7 +499,7 @@ export function DataTable<T extends Record<string, any>>({
         </div>
       </div>
 
-      {/* Pagination */}
+      {}
       {showPagination && totalPages > 1 && (
         <div className="flex flex-col items-center justify-between gap-4 border-border border-t bg-card p-6 pt-4 sm:flex-row">
           <div className="order-2 text-muted-foreground text-sm sm:order-1">

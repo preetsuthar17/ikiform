@@ -1,10 +1,7 @@
-// External imports
 import React from 'react';
 
-// Component imports
 import { Checkbox } from '@/components/ui/checkbox';
 
-// Type imports
 import type { BaseFieldProps } from '../types';
 import { sanitizeOptions } from '../utils/sanitizeOptions';
 
@@ -32,7 +29,7 @@ export function CheckboxField({
           } else if (Array.isArray(data.options)) {
             options = data.options;
           }
-          // Custom mapping
+
           if (field.valueKey || field.labelKey) {
             options = options.map((item: any) => {
               return {

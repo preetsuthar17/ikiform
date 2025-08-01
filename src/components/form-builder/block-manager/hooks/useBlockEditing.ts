@@ -1,7 +1,5 @@
-// React
 import { useState } from 'react';
 
-// Types
 import type { FormBlock } from '@/lib/database';
 import type { BlockEditingState } from '../types';
 

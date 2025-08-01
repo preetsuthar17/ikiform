@@ -1,9 +1,6 @@
-// Type imports
-
 import type { LucideIcon } from 'lucide-react';
 import type { FormSchema } from '@/lib/database';
 
-// Interfaces
 export interface FormCreationWizardProps {
   isOpen: boolean;
   onClose: () => void;

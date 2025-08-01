@@ -1,20 +1,17 @@
-// External imports
-
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
-// Hook imports
 import { useAuth } from '@/hooks/use-auth';
 import { toast } from '@/hooks/use-toast';
-// Type imports
+
 import type { FormSchema } from '@/lib/database';
-// Utility imports
+
 import { formsDb } from '@/lib/database';
 import {
   createDefaultFormSchema,
   ensureDefaultRateLimitSettings,
 } from '@/lib/forms';
-// Constant imports
+
 import { DRAFT_KEYS, FORM_BUILDER_CONSTANTS } from '../constants';
 import type { FormBuilderActions, FormBuilderState } from '../types';
 import {
@@ -34,7 +31,6 @@ export const useFormBuilder = (formId?: string) => {
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
 
-  // State
   const [state, setState] = useState<FormBuilderState>({
     loading: false,
     saving: false,
@@ -57,7 +53,6 @@ export const useFormBuilder = (formId?: string) => {
     }),
   });
 
-  // Refs
   const draftKey = DRAFT_KEYS.getDraftKey(formId);
   const isRestored = useRef(false);
   const isFormLoaded = useRef(false);
@@ -66,7 +61,6 @@ export const useFormBuilder = (formId?: string) => {
   const lastManuallySavedSchemaRef = useRef<FormSchema | null>(null);
   const importedFromAI = useRef(false);
 
-  // Actions
   const actions: FormBuilderActions = {
     setLoading: (loading) => setState((prev) => ({ ...prev, loading })),
     setSaving: (saving) => setState((prev) => ({ ...prev, saving })),
@@ -101,7 +95,6 @@ export const useFormBuilder = (formId?: string) => {
       })),
   };
 
-  // Restore draft on mount
   useEffect(() => {
     if (isRestored.current) return;
     isRestored.current = true;
@@ -112,24 +105,20 @@ export const useFormBuilder = (formId?: string) => {
     }
   }, [draftKey]);
 
-  // Save draft on formSchema change
   useEffect(() => {
     saveDraftToStorage(draftKey, state.formSchema);
   }, [state.formSchema, draftKey]);
 
-  // Load existing form if formId is provided
   useEffect(() => {
     if (formId && user && !isFormLoaded.current) {
       loadForm();
     }
   }, [formId, user]);
 
-  // Reset form loaded flag when formId changes
   useEffect(() => {
     isFormLoaded.current = false;
   }, [formId]);
 
-  // Cleanup auto-save timeout on unmount
   useEffect(() => {
     return () => {
       if (autoSaveTimeoutRef.current) {
@@ -138,14 +127,12 @@ export const useFormBuilder = (formId?: string) => {
     };
   }, []);
 
-  // Show creation wizard for new forms
   useEffect(() => {
     if (state.isNewForm && !authLoading && user && !importedFromAI.current) {
       actions.setShowCreationWizard(true);
     }
   }, [state.isNewForm, authLoading, user]);
 
-  // Track unsaved changes
   useEffect(() => {
     const hasChanges = hasFormChanges(
       state.formSchema,
@@ -154,7 +141,6 @@ export const useFormBuilder = (formId?: string) => {
     actions.setHasUnsavedChanges(hasChanges);
   }, [state.formSchema]);
 
-  // Handle AI import
   useEffect(() => {
     const imported = localStorage.getItem(DRAFT_KEYS.IMPORTED_FORM_SCHEMA);
     if (imported) {
@@ -203,14 +189,11 @@ export const useFormBuilder = (formId?: string) => {
         actions.setFormSchema(ensureDefaultRateLimitSettings(normalizedSchema));
         actions.setHasUnsavedChanges(true);
         importedFromAI.current = true;
-      } catch {
-        // Ignore parse errors
-      }
+      } catch {}
       localStorage.removeItem(DRAFT_KEYS.IMPORTED_FORM_SCHEMA);
     }
   }, []);
 
-  // Helper functions
   const loadForm = async () => {
     if (!(formId && user) || isFormLoaded.current) return;
 

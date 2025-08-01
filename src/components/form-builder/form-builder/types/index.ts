@@ -1,9 +1,6 @@
-// Type imports
-
 import type { FormLogic } from '@/components/form-builder/logic-builder/types';
 import type { FormBlock, FormField, FormSchema } from '@/lib/database';
 
-// Interfaces
 export interface FormBuilderProps {
   formId?: string;
 }

@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "pnpx ultracite@latest lint",
     "format": "pnpx ultracite@latest format",
+    "prettier": "prettier --write . --ignore-path .gitignore",
     "check": "tsc --noEmit && prettier --check . --ignore-path .gitignore"
   },
   "dependencies": {

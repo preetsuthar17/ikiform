@@ -1,11 +1,10 @@
-// Main forms management component
 'use client';
 
 import React from 'react';
 import { Separator } from '@/components/ui/separator';
-// UI Components
+
 import { ConfirmationModal } from '../form-delete-confirmation-modal';
-// Local Components
+
 import {
   AIFormSuggestions,
   EmptyState,
@@ -14,19 +13,17 @@ import {
   FormsHeader,
   LoadingSkeleton,
 } from './components';
-// Hooks
+
 import { useFormsManagement } from './hooks';
-// Types
+
 import type { FormsManagementProps } from './types';
 
 export function FormsManagement({ className }: FormsManagementProps) {
   const {
-    // State
     forms,
     loading,
     deleteModal,
 
-    // Actions
     createNewForm,
     editForm,
     viewAnalytics,
@@ -37,7 +34,6 @@ export function FormsManagement({ className }: FormsManagementProps) {
     handleCreateManually,
     handleCreateFromPrompt,
 
-    // Setters
     setDeleteModal,
   } = useFormsManagement();
 
@@ -47,7 +43,7 @@ export function FormsManagement({ className }: FormsManagementProps) {
 
   return (
     <div className={`flex flex-col gap-8 ${className || ''}`}>
-      {/* Header Section */}
+      {}
       <FormsHeader
         onCreateForm={createNewForm}
         onCreateManually={handleCreateManually}
@@ -56,12 +52,12 @@ export function FormsManagement({ className }: FormsManagementProps) {
 
       <Separator />
 
-      {/* Quick Stats */}
+      {}
       <FormStats forms={forms} />
 
       <Separator />
 
-      {/* Forms Grid or Empty State */}
+      {}
       {forms.length === 0 ? (
         <EmptyState
           onCreateForm={createNewForm}
@@ -79,11 +75,11 @@ export function FormsManagement({ className }: FormsManagementProps) {
       )}
 
       <Separator />
-      {/* AI Form Suggestions */}
+      {}
       <AIFormSuggestions onCreateForm={handleCreateFromPrompt} />
 
       <Separator />
-      {/* Delete Confirmation Modal */}
+      {}
       <ConfirmationModal
         cancelText="Cancel"
         confirmText="Delete Form"

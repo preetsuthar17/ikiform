@@ -1,11 +1,9 @@
-// External imports
 import React from 'react';
 
-// Component imports
 import { Input } from '@/components/ui/input';
-// Type imports
+
 import type { BaseFieldProps } from '../types';
-// Utility imports
+
 import { getBaseClasses } from '../utils';
 
 export function NumberInputField({

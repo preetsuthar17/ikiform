@@ -1,13 +1,12 @@
-// External imports
 import React from 'react';
 import { Card } from '@/components/ui/card';
-// Component imports
+
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { SocialMediaIcons } from '@/components/ui/social-media-icons';
-// Type imports
+
 import type { BaseFieldProps } from '../types';
-// Utility imports
+
 import { getBaseClasses } from '../utils';
 
 interface SocialPlatform {

@@ -1,6 +1,5 @@
-import type React from 'react'; // External imports
+import type React from 'react';
 
-// Interfaces
 export interface RoadmapProps {
   title: string;
   description: string;
@@ -12,7 +11,6 @@ interface RoadmapComponentProps {
   title?: string;
 }
 
-// Component
 const RoadmapComponent: React.FC<RoadmapComponentProps> = ({
   items,
   title = 'Roadmap',

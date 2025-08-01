@@ -1,15 +1,12 @@
-// External libraries
-
 import { Info } from 'lucide-react';
 import React from 'react';
 
-// UI components
 import { Card } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-// Types
+
 import type { BasicInfoSectionProps } from '../types';
 
 export function BasicInfoSection({

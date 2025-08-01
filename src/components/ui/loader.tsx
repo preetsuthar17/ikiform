@@ -1,5 +1,3 @@
-'use client';
-
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 import { cn } from '@/lib/utils';
@@ -32,18 +30,12 @@ export interface LoaderProps
 
 const Loader = React.forwardRef<SVGSVGElement, LoaderProps>(
   ({ className, size, variant, ...props }, ref) => {
-    const [isMounted, setIsMounted] = React.useState(false);
-
-    React.useEffect(() => {
-      setIsMounted(true);
-    }, []);
-
     return (
       <svg
         aria-label="Loading"
         className={cn(
           loaderVariants({ size, variant }),
-          isMounted && 'animate-spin',
+          'animate-spin',
           className
         )}
         fill="none"

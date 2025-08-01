@@ -1,9 +1,6 @@
-// Profile action buttons component
-
-// Icons
 import { MoreVertical, Settings } from 'lucide-react';
 import React from 'react';
-// UI Components
+
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -12,7 +9,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-// Types
 import type { ProfileActionsProps } from '../types';
 
 export function ProfileActions({

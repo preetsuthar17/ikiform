@@ -1,8 +1,6 @@
-// Type imports
 import type { FormField } from '@/lib/database';
 import type { FieldSize, FieldVariant, FieldWidth } from '../types';
 
-// Utility functions
 export const getWidthClass = (width?: FieldWidth) => {
   switch (width) {
     case 'half':
@@ -60,5 +58,4 @@ export const getErrorRingClasses = (error?: string) => {
   return error ? 'ring-2 ring-destructive/20' : '';
 };
 
-// Exporting field factory
 export { createFieldComponent } from './fieldFactory';

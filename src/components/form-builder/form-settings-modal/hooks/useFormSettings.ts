@@ -1,7 +1,5 @@
-// External imports
 import { useEffect, useState } from 'react';
 
-// Internal imports
 import type { FormSchema } from '@/lib/database';
 import {
   DEFAULT_NOTIFICATION_SETTINGS,

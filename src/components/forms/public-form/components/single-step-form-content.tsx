@@ -1,14 +1,12 @@
-// Libraries
 import type React from 'react';
 import { useEffect, useRef } from 'react';
 import { FormFieldRenderer } from '@/components/form-builder/form-field-renderer';
 import { getLivePatternError } from '@/components/form-builder/form-field-renderer/components/TextInputField';
-// UI Components
+
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SocialMediaIcons } from '@/components/ui/social-media-icons';
 
-// Types
 import type { FormField, FormSchema } from '@/lib/database';
 
 interface SingleStepFormContentProps {
@@ -34,11 +32,6 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
   fieldVisibility,
   logicMessages,
 }) => {
-  // Debug logging
-  // console.log("Form Schema:", schema);
-  // console.log("Form Fields:", fields);
-  // console.log("Form Data:", formData);
-
   const firstFieldRef = useRef<any>(null);
   useEffect(() => {
     if (firstFieldRef.current) {
@@ -46,7 +39,6 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
     }
   }, []);
 
-  // Filter fields by logic visibility
   const visibleFields = fieldVisibility
     ? fields.filter((field) => fieldVisibility[field.id]?.visible !== false)
     : fields;
@@ -107,7 +99,6 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
         ))}
 
         {(() => {
-          // Check for any live regex error in text fields
           for (const field of visibleFields) {
             if (
               ['text', 'email', 'textarea'].includes(field.type) &&

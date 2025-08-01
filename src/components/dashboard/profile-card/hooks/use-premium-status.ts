@@ -1,12 +1,8 @@
-// Custom hook for managing premium status
-
 import type { User } from '@supabase/supabase-js';
 import { useEffect, useRef, useState } from 'react';
 
-// Utils
 import { createClient } from '@/utils/supabase/client';
 
-// Types
 import type { PremiumStatus } from '../types';
 
 export function usePremiumStatus(user: User | null): PremiumStatus {

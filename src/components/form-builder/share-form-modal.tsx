@@ -1,11 +1,10 @@
 'use client';
 
-// Icon imports
 import { Check, Copy, Download, Globe, QrCode, Share } from 'lucide-react';
-// QR Code library
+
 import QRCode from 'qrcode';
 import React, { useEffect, useState } from 'react';
-// UI components
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -16,7 +15,7 @@ import {
   ModalTitle,
 } from '@/components/ui/modal';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
-// Hooks
+
 import { toast } from '@/hooks/use-toast';
 
 interface ShareFormModalProps {
@@ -57,14 +56,12 @@ export function ShareFormModal({
     { id: 'qr', label: 'QR Code' },
   ];
 
-  // Generate QR code when modal opens and form is published
   useEffect(() => {
     if (isOpen && isPublished && shareUrl) {
       generateQRCode();
     }
   }, [isOpen, isPublished, shareUrl]);
 
-  // Copy link automatically when modal opens and form is published
   useEffect(() => {
     if (isOpen && isPublished && shareUrl) {
       handleCopyLink();
@@ -78,18 +75,16 @@ export function ShareFormModal({
     try {
       const style = QR_CODE_STYLE;
 
-      // Generate base QR code
       const qrDataUrl = await QRCode.toDataURL(shareUrl, {
         width: 256,
-        margin: 4, // Increased margin for better scannability
-        errorCorrectionLevel: 'M', // Medium error correction for logo overlay
+        margin: 4,
+        errorCorrectionLevel: 'M',
         color: {
           dark: style.primaryColor,
           light: style.backgroundColor,
         },
       });
 
-      // Create canvas to overlay logo
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       if (!ctx) throw new Error('Could not get canvas context');
@@ -97,7 +92,6 @@ export function ShareFormModal({
       canvas.width = 256;
       canvas.height = 256;
 
-      // Load QR code image
       const qrImage = new Image();
       qrImage.src = qrDataUrl;
 
@@ -106,10 +100,8 @@ export function ShareFormModal({
         qrImage.onerror = reject;
       });
 
-      // Draw QR code
       ctx.drawImage(qrImage, 0, 0, 256, 256);
 
-      // Add subtle border
       ctx.strokeStyle = style.primaryColor;
       ctx.lineWidth = 2;
       ctx.strokeRect(1, 1, 254, 254);

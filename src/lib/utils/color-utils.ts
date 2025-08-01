@@ -21,7 +21,6 @@ export const formatLabels: Record<ColorFormat, string> = {
  * Converts RGB values (0-1) to XYZ color space
  */
 function rgbToXyz(r: number, g: number, b: number): [number, number, number] {
-  // Convert sRGB to linear RGB
   const toLinear = (c: number) => {
     return c <= 0.040_45 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
   };
@@ -30,7 +29,6 @@ function rgbToXyz(r: number, g: number, b: number): [number, number, number] {
   const gLinear = toLinear(g);
   const bLinear = toLinear(b);
 
-  // Convert to XYZ using sRGB matrix
   const x =
     rLinear * 0.412_456_4 + gLinear * 0.357_576_1 + bLinear * 0.180_437_5;
   const y = rLinear * 0.212_672_9 + gLinear * 0.715_152_2 + bLinear * 0.072_175;
@@ -43,7 +41,6 @@ function rgbToXyz(r: number, g: number, b: number): [number, number, number] {
  * Converts XYZ to LAB color space
  */
 function xyzToLab(x: number, y: number, z: number): [number, number, number] {
-  // Reference white point D65
   const xn = 0.950_47;
   const yn = 1.0;
   const zn = 1.088_83;
@@ -71,10 +68,6 @@ function xyzToLab(x: number, y: number, z: number): [number, number, number] {
  * Converts XYZ to OKLCH color space (simplified conversion)
  */
 function xyzToOklch(x: number, y: number, z: number): [number, number, number] {
-  // Simplified conversion to OKLCH
-  // In practice, you'd want to use a proper color library like colorjs.io
-
-  // Convert to OKLab first (simplified)
   const l = Math.cbrt(
     0.818_933_010_1 * x + 0.361_866_742_4 * y - 0.128_859_713_7 * z
   );
@@ -89,7 +82,6 @@ function xyzToOklch(x: number, y: number, z: number): [number, number, number] {
   const okA = 1.977_998_495_1 * l - 2.428_592_205 * m + 0.450_593_709_9 * s;
   const okB = 0.025_904_037_1 * l + 0.782_771_766_2 * m - 0.808_675_766 * s;
 
-  // Convert to LCH
   const L_oklch = okL;
   const C = Math.sqrt(okA * okA + okB * okB);
   const H = (Math.atan2(okB, okA) * 180) / Math.PI;
@@ -129,7 +121,7 @@ export function formatColorValue(color: Color, format: ColorFormat): string {
       return `hsl(${h}, ${s}%, ${l}%)`;
     }
     case 'hsv': {
-      const hsv = color.toFormat('hsb'); // HSB is HSV in react-aria-components
+      const hsv = color.toFormat('hsb');
       const h = Math.round(hsv.getChannelValue('hue'));
       const s = Math.round(hsv.getChannelValue('saturation'));
       const v = Math.round(hsv.getChannelValue('brightness'));
@@ -187,13 +179,11 @@ export function parseColorFromFormat(
   format: ColorFormat
 ): Color | null {
   try {
-    // For formats that react-aria-components supports directly
     if (format === 'hex' || format === 'rgb' || format === 'hsl') {
       return parseColor(value);
     }
 
     if (format === 'hsv') {
-      // Try to parse HSV/HSB format
       const hsvMatch = value.match(/hsva?\(([^)]+)\)/);
       if (hsvMatch) {
         const parts = hsvMatch[1].split(',').map((p) => p.trim());
@@ -202,7 +192,6 @@ export function parseColorFromFormat(
         const v = Number.parseFloat(parts[2]) || 0;
         const a = parts[3] ? Number.parseFloat(parts[3]) : 1;
 
-        // Convert HSV to HSL for react-aria-components
         const hslL = (v * (2 - s / 100)) / 2;
         const hslS = (v * s) / (100 - Math.abs(2 * hslL - 100));
 
@@ -211,7 +200,6 @@ export function parseColorFromFormat(
     }
 
     if (format === 'oklch') {
-      // Parse OKLCH and convert to HSL as approximation
       const oklchMatch = value.match(/oklch\(([^)]+)\)/);
       if (oklchMatch) {
         const parts = oklchMatch[1].split(/[\s/]+/);
@@ -220,7 +208,6 @@ export function parseColorFromFormat(
         const H = Number.parseFloat(parts[2]) || 0;
         const alpha = parts[3] ? Number.parseFloat(parts[3]) : 1;
 
-        // Simplified conversion back to HSL
         return parseColor(
           `hsla(${H}, ${Math.min(C * 100, 100)}%, ${L}%, ${alpha})`
         );
@@ -228,7 +215,6 @@ export function parseColorFromFormat(
     }
 
     if (format === 'lab') {
-      // Parse LAB and convert to HSL as approximation
       const labMatch = value.match(/lab\(([^)]+)\)/);
       if (labMatch) {
         const parts = labMatch[1].split(/[\s/]+/);
@@ -237,7 +223,6 @@ export function parseColorFromFormat(
         const b = Number.parseFloat(parts[2]) || 0;
         const alpha = parts[3] ? Number.parseFloat(parts[3]) : 1;
 
-        // Simplified conversion back to HSL
         const chroma = Math.sqrt(a * a + b * b);
         const hue = (Math.atan2(b, a) * 180) / Math.PI;
 
@@ -250,7 +235,6 @@ export function parseColorFromFormat(
       }
     }
 
-    // Fallback: try to parse as any supported format
     return parseColor(value);
   } catch {
     return null;

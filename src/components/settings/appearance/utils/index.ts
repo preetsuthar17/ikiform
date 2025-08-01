@@ -1,4 +1,3 @@
-// utilities
 import { cn } from '@/lib/utils';
 
 export const getThemeCardStyles = (isSelected: boolean): string => {

@@ -1,11 +1,8 @@
-// Components
-
-// Libraries
 import { Draggable } from '@hello-pangea/dnd';
-// Icons
+
 import { GripVertical } from 'lucide-react';
 import { Card } from '@/components/ui/card';
-// Types
+
 import type { BlockItemProps } from '../types';
 import { BlockEditForm } from './BlockEditForm';
 import { BlockFieldsList } from './BlockFieldsList';

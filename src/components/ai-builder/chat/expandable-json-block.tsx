@@ -10,7 +10,6 @@ interface ExpandableJsonBlockProps {
   schema: any;
 }
 
-// Global highlighter instance to avoid recreating it
 let highlighterInstance: any = null;
 let highlighterPromise: Promise<any> | null = null;
 
@@ -35,7 +34,6 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
   const { theme } = useTheme();
   const targetHeight = expanded ? 300 : 100;
 
-  // Memoize the JSON string to avoid recreating it on every render
   const jsonString = useMemo(() => JSON.stringify(schema, null, 2), [schema]);
 
   useEffect(() => {
@@ -58,7 +56,6 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
       } catch (error) {
         console.error('Error highlighting code:', error);
         if (isMounted) {
-          // Fallback to plain text
           setHighlightedCode(
             `<pre class="whitespace-pre-wrap break-words">${jsonString}</pre>`
           );
@@ -66,7 +63,6 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
       }
     };
 
-    // Debounce the highlighting to avoid excessive calls
     const timeoutId = setTimeout(highlightCode, 100);
 
     return () => {

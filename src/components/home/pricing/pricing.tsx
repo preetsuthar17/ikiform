@@ -1,4 +1,3 @@
-// Internal imports
 import { api } from '@/lib/services';
 import PricingClient from './client';
 

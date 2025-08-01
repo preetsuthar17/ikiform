@@ -127,7 +127,6 @@
   }
 }
 
-/* Form Builder Specific Styles */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -142,7 +141,6 @@
   overflow: hidden;
 }
 
-/* Custom scrollbar for better design */
 .custom-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: hsl(var(--hu-muted)) transparent;
@@ -165,7 +163,6 @@
   background-color: hsl(var(--hu-muted-foreground));
 }
 
-/* Form card hover effects */
 .form-card-hover {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -183,7 +180,6 @@
     0 4px 6px -2px rgba(0, 0, 0, 0.1);
 }
 
-/* Gradient backgrounds for empty states */
 .gradient-bg {
   background: linear-gradient(
     135deg,
@@ -192,7 +188,6 @@
   );
 }
 
-/* Button loading states */
 .button-loading {
   position: relative;
   pointer-events: none;
@@ -290,4 +285,13 @@ h3 {
 ::placeholder {
   color: hsl(var(--hu-muted-foreground)) !important;
   opacity: 0.5 !important;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }

@@ -3,6 +3,17 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Pipette } from 'lucide-react';
 import * as React from 'react';
+
+declare global {
+  interface Window {
+    EyeDropper?: {
+      new (): {
+        open(): Promise<{ sRGBHex: string }>;
+      };
+    };
+  }
+}
+
 import {
   ColorArea as AriaColorArea,
   type ColorAreaProps as AriaColorAreaProps,
@@ -236,11 +247,14 @@ const EyeDropperButton = React.forwardRef<
 
   const handleEyeDropper = async () => {
     try {
+      if (!window.EyeDropper) {
+        console.warn('EyeDropper API not supported');
+        return;
+      }
       const eyeDropper = new window.EyeDropper();
       const result = await eyeDropper.open();
       state.setColor(parseColor(result.sRGBHex));
     } catch (error) {
-      // User cancelled or error occurred
       console.warn('EyeDropper operation cancelled or failed:', error);
     }
   };

@@ -27,7 +27,6 @@ function RuleEditor({
   onSave?: (rule: LogicRule) => void;
   fields: FormField[];
 }) {
-  // Local state for editing
   const [name, setName] = React.useState(rule?.name || '');
   const [enabled, setEnabled] = React.useState(rule?.enabled ?? true);
   const [conditions, setConditions] = React.useState<LogicConditionGroup>(

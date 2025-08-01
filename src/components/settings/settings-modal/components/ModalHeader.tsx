@@ -1,9 +1,6 @@
-// External imports
-
 import { X } from 'lucide-react';
 import React from 'react';
 
-// Internal imports
 import { Button } from '@/components/ui/button';
 
 interface ModalHeaderProps {

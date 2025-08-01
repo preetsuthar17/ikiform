@@ -1,27 +1,28 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-// External imports
+
 import React, { useCallback, useState } from 'react';
 import type { FormLogic } from '@/components/form-builder/logic-builder/types';
-// Component imports
+
 import { Button } from '@/components/ui/button';
 import { Drawer, DrawerContent } from '@/components/ui/drawer';
-// Hook imports
+
 import { toast } from '@/hooks/use-toast';
-// Type imports
+
 import type { FormBlock, FormField, FormSchema } from '@/lib/database';
-// Utility imports
+
 import { formsDb } from '@/lib/database';
 import { Loader } from '../../ui/loader';
 import { FieldPalette } from '../field-palette';
 import { FieldSettingsPanel } from '../field-settings-panel';
+import { FormBuilderSkeleton } from '../form-builder-skeleton';
 import { FormPreview } from '../form-preview';
 import { FormBuilderHeader } from './components/FormBuilderHeader';
 import { FormBuilderModals } from './components/FormBuilderModals';
 import { FormBuilderPanels } from './components/FormBuilderPanels';
 import { UnsavedChangesIndicator } from './components/UnsavedChangesIndicator';
-// Constant imports
+
 import { DRAFT_KEYS } from './constants';
 import { useFormBuilder } from './hooks/useFormBuilder';
 import type { FormBuilderProps } from './types';
@@ -69,7 +70,6 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     [actions, isMobile]
   );
 
-  // Form actions
   const addField = (fieldType: FormField['type'], index?: number) => {
     const newField: FormField = {
       id: generateFieldId(),
@@ -388,13 +388,10 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     }));
   };
 
-  // Loading states
   if (authLoading || state.loading) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="flex flex-col gap-3 text-center">
-          <Loader />
-        </div>
+      <div className="flex h-screen items-center justify-center w-full">
+          <FormBuilderSkeleton />
       </div>
     );
   }

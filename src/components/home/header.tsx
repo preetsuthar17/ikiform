@@ -1,12 +1,12 @@
 'use client';
 
 import { AlignJustify, LogIn, MessageCircleIcon, User } from 'lucide-react';
-// External imports
+
 import Image from 'next/image';
 import Link from 'next/link';
-// Supabase
+
 import { useAuth } from '@/hooks/use-auth';
-// Internal imports
+
 import { Button } from '../ui/button';
 import {
   Drawer,
@@ -34,7 +34,7 @@ export default function Header() {
           </span>
         </Link>
       </div>
-      {/* Desktop nav */}
+      {}
       <div className="hidden items-center gap-8 sm:flex">
         <nav className="flex items-center gap-4">
           <Button asChild variant="ghost">
@@ -73,7 +73,7 @@ export default function Header() {
           </Link>
         </Button>
       </div>
-      {/* Mobile nav */}
+      {}
       <div className="flex items-center sm:hidden">
         <Drawer>
           <DrawerTrigger asChild>

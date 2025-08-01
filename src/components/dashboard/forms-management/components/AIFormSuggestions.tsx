@@ -1,16 +1,11 @@
-// AI form suggestions component
-
-// Icons
 import { Sparkles } from 'lucide-react';
 import React from 'react';
 import { Button } from '@/components/ui/button';
-// UI Components
+
 import { Card } from '@/components/ui/card';
 
-// Constants
 import { AI_FORM_SUGGESTIONS } from '../constants';
 
-// Types
 import type { AIFormSuggestionsProps } from '../types';
 
 export function AIFormSuggestions({ onCreateForm }: AIFormSuggestionsProps) {

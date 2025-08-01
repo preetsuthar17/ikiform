@@ -4,12 +4,11 @@ import { Redis } from '@upstash/redis';
 interface RateLimitSettings {
   enabled: boolean;
   maxSubmissions: number;
-  window: string; // e.g., "10 m"
+  window: string;
 }
 
 const redis = Redis.fromEnv();
 
-// Default rate limit settings
 const defaultSettings: RateLimitSettings = {
   enabled: true,
   maxSubmissions: 5,
@@ -82,8 +81,8 @@ export async function checkCustomRateLimit(
 interface FormRateLimitSettings {
   enabled: boolean;
   maxSubmissions: number;
-  timeWindow: number; // minutes
-  blockDuration: number; // minutes
+  timeWindow: number;
+  blockDuration: number;
   message: string;
 }
 

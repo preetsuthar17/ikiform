@@ -1,11 +1,9 @@
-// External imports
 import React from 'react';
 import { Card } from '@/components/ui/card';
-// Component imports
+
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-// Type imports
 import type { FormField } from '@/lib/database';
 
 interface ValidationSettingsProps {
@@ -20,7 +18,6 @@ export function ValidationSettings({
   const isTextType = ['text', 'email', 'textarea'].includes(field.type);
   const isNumberType = field.type === 'number';
 
-  // Don't render if field doesn't support validation
   if (!(isTextType || isNumberType)) {
     return null;
   }

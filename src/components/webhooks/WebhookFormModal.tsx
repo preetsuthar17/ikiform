@@ -70,7 +70,6 @@ export function WebhookFormModal({
   );
   const [enabled, setEnabled] = useState(initialWebhook?.enabled ?? true);
   const [showDiscordInfo, setShowDiscordInfo] = useState(false);
-  // Removed showSlackInfo and showZapierInfo state
 
   useEffect(() => {
     setUrl(initialWebhook?.url || '');
@@ -80,14 +79,13 @@ export function WebhookFormModal({
     setPayloadTemplate(initialWebhook?.payloadTemplate || '');
     setEnabled(initialWebhook?.enabled ?? true);
     setShowDiscordInfo(false);
-    // Removed showSlackInfo and showZapierInfo reset
   }, [initialWebhook, open]);
 
   if (!open) return null;
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // Validation: url, events (non-empty array), method
+
     if (!(url && Array.isArray(events)) || events.length === 0 || !method) {
       alert(
         'Please provide a webhook URL, select at least one event, and choose a method.'
@@ -131,7 +129,7 @@ export function WebhookFormModal({
           >
             Discord Preset
           </Button>
-          {/* Only Discord preset remains */}
+          {}
         </div>
         {showDiscordInfo && (
           <div className="mb-4 rounded border border-blue-200 bg-blue-50 p-3 text-blue-900 text-sm">
@@ -161,7 +159,7 @@ export function WebhookFormModal({
             </div>
           </div>
         )}
-        {/* Removed Slack and Zapier info sections */}
+        {}
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
             <Label className="mb-1" htmlFor="webhook-url">
@@ -331,7 +329,6 @@ export function WebhookFormModal({
                       <pre className="whitespace-pre-wrap break-words font-mono text-foreground text-xs">
                         {(() => {
                           try {
-                            // Fake preview context
                             const previewContext = {
                               event: 'form_submitted',
                               formId: 'form-123',
@@ -360,7 +357,7 @@ export function WebhookFormModal({
                                 },
                               },
                             };
-                            // Simple mustache-like replacement for preview
+
                             let preview =
                               payloadTemplate ||
                               '{"event": "{{event}}", "formId": "{{formId}}", "fields": {{formatted.fields}} }';

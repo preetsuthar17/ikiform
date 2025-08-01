@@ -32,10 +32,30 @@ export const StreamingIndicator = memo(
             ref={ref}
             style={{ scrollBehavior: 'smooth' }}
           >
-            Generating form...
-            <pre className="whitespace-pre-wrap break-words">
+            <motion.p
+              animate={{ backgroundPosition: '-200% 0' }}
+              className="bg-[length:200%_100%] bg-[linear-gradient(110deg,#404040,35%,#fff,50%,#404040,75%,#404040)] bg-clip-text font-geist-mono text-sm text-transparent"
+              initial={{ backgroundPosition: '200% 0' }}
+              transition={{
+                repeat: Number.POSITIVE_INFINITY,
+                duration: 2,
+                ease: 'linear',
+              }}
+            >
+              Generating form...
+            </motion.p>
+            <motion.pre
+              animate={{ backgroundPosition: '-200% 0' }}
+              className="whitespace-pre-wrap break-words bg-[length:200%_100%] bg-[linear-gradient(110deg,#404040,35%,#fff,50%,#404040,75%,#404040)] bg-clip-text font-mono text-sm text-transparent"
+              initial={{ backgroundPosition: '200% 0' }}
+              transition={{
+                repeat: Number.POSITIVE_INFINITY,
+                duration: 2,
+                ease: 'linear',
+              }}
+            >
               {streamedContent}
-            </pre>
+            </motion.pre>
           </div>
         </motion.div>
       );

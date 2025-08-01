@@ -1,10 +1,7 @@
-// React hooks
 import { useEffect, useRef, useState } from 'react';
 
-// Types
 import type { FormField, FormSchema } from '@/lib/database';
 
-// Utility function to get default value for a field type
 const getDefaultValueForField = (field: FormField): any => {
   switch (field.type) {
     case 'tags':
@@ -27,7 +24,6 @@ const getDefaultValueForField = (field: FormField): any => {
   }
 };
 
-// Utility function to initialize form data with proper defaults
 const initializeFormData = (fields: FormField[]): Record<string, any> => {
   const formData: Record<string, any> = {};
 
@@ -54,7 +50,6 @@ export function useFormPreviewState(
   const currentStep = isMultiStep ? schema.blocks?.[currentStepIndex] : null;
   const currentStepFields = isMultiStep ? currentStep?.fields || [] : allFields;
 
-  // Initialize form data when fields change - only when new fields are added
   useEffect(() => {
     const currentFieldIds = new Set(allFields.map((field) => field.id));
     const newFieldIds = [...currentFieldIds].filter(
@@ -62,7 +57,6 @@ export function useFormPreviewState(
     );
 
     if (newFieldIds.length > 0) {
-      // Preserve existing form data and only initialize new fields
       const newFormData = { ...formData };
       allFields.forEach((field) => {
         if (newFieldIds.includes(field.id)) {
@@ -113,10 +107,9 @@ export function useFormPreviewState(
     }
   };
 
-  // Logic evaluation for field visibility/enabled state
   const logic = schema.logic || [];
   const logicActions = evaluateLogic(logic, formData);
-  // Build a map: fieldId -> { visible, disabled } using new defaults logic
+
   const fieldDefaults = getLogicFieldDefaults(
     logic,
     allFields.map((f) => f.id)

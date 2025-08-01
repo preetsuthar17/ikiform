@@ -1,7 +1,5 @@
-// Types from external modules
 import type { FormBlock, FormField, FormSchema } from '@/lib/database';
 
-// Props for FormPreview component
 export interface FormPreviewProps {
   schema: FormSchema;
   selectedFieldId: string | null;
@@ -15,13 +13,11 @@ export interface FormPreviewProps {
   onAddField?: (fieldType: FormField['type']) => void;
 }
 
-// Props for FormHeader component
 export interface FormHeaderProps {
   schema: FormSchema;
   onFormSettingsUpdate?: (settings: Partial<FormSchema['settings']>) => void;
 }
 
-// Props for MultiStepNavigation component
 export interface MultiStepNavigationProps {
   schema: FormSchema;
   currentStepIndex: number;
@@ -29,14 +25,12 @@ export interface MultiStepNavigationProps {
   onStepChange: (index: number) => void;
 }
 
-// Props for StepHeader component
 export interface StepHeaderProps {
   currentStep: FormBlock;
   currentStepIndex: number;
   onBlockUpdate?: (blockId: string, updates: Partial<FormBlock>) => void;
 }
 
-// Props for FormFieldsContainer component
 export interface FormFieldsContainerProps {
   fields: FormField[];
   selectedFieldId: string | null;
@@ -50,7 +44,6 @@ export interface FormFieldsContainerProps {
   fieldVisibility?: Record<string, { visible: boolean; disabled: boolean }>;
 }
 
-// Props for FormActions component
 export interface FormActionsProps {
   schema: FormSchema;
   currentStepIndex: number;
@@ -59,7 +52,6 @@ export interface FormActionsProps {
   onNextStep: () => void;
 }
 
-// Props for EditableField component
 export interface EditableFieldProps {
   value: string;
   placeholder?: string;

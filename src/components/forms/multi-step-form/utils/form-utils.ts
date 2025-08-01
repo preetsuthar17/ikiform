@@ -1,4 +1,3 @@
-// Types
 import type { FormBlock, FormSchema } from '@/lib/database';
 
 export const processFormBlocks = (schema: FormSchema): FormBlock[] => {

@@ -1,8 +1,6 @@
-// External imports
 import { createServerClient } from '@supabase/ssr';
 import { type NextRequest, NextResponse } from 'next/server';
 
-// Function to update the session
 export async function updateSession(request: NextRequest) {
   const supabaseResponse = NextResponse.next({ request });
 

@@ -1,7 +1,5 @@
-// External imports
 import type React from 'react';
 
-// Type imports
 import type { FormTypePreviewProps } from '../types';
 
 export const FormTypePreview: React.FC<FormTypePreviewProps> = ({ type }) => {

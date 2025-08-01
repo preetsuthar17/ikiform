@@ -1,12 +1,8 @@
-// Components
-
-// Libraries
 import { DragDropContext, Droppable } from '@hello-pangea/dnd';
 import { ScrollArea } from '@/components/ui/scroll-area';
-// Types
+
 import type { FormBlock } from '@/lib/database';
 
-// Utilities
 import { canDeleteBlock, handleBlockReorder } from '../utils';
 import { BlockItem } from './BlockItem';
 

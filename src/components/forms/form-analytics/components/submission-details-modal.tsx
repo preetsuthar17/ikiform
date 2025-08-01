@@ -1,4 +1,3 @@
-// Icons
 import { Check, Copy, Download } from 'lucide-react';
 import type React from 'react';
 import { useState } from 'react';
@@ -6,7 +5,7 @@ import toast from 'react-hot-toast';
 import { OptimizedImage } from '@/components/other/optimized-image';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-// UI Components
+
 import {
   Modal,
   ModalClose,
@@ -22,7 +21,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import type { Form } from '@/lib/database';
-// Types
+
 import type { SubmissionDetailsModalProps } from '../types';
 
 function getFieldType(
@@ -90,7 +89,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
               </Badge>
             </div>
 
-            {/* Action Buttons */}
+            {}
             <div className="flex items-center gap-1">
               <TooltipProvider>
                 <Tooltip>
@@ -136,7 +135,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
               {Object.entries(submission.submission_data).map(
                 ([key, value]) => {
                   const fieldType = getFieldType(form, key);
-                  // Signature field as image
+
                   if (
                     fieldType === 'signature' &&
                     typeof value === 'string' &&
@@ -162,7 +161,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                       </div>
                     );
                   }
-                  // Social field as labeled links
+
                   if (
                     fieldType === 'social' &&
                     typeof value === 'object' &&
@@ -218,7 +217,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                       </div>
                     );
                   }
-                  // File upload field as links/previews
+
                   if (fieldType === 'file' && value) {
                     const urls = Array.isArray(value) ? value : [value];
                     return (
@@ -264,7 +263,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                       </div>
                     );
                   }
-                  // Default rendering
+
                   return (
                     <div
                       className="flex flex-col gap-2 border-border border-b pb-8 last:border-0"

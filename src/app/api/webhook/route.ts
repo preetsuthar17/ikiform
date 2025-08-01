@@ -1,9 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { createWebhook, getWebhooks } from '@/lib/webhooks/outbound';
 
-// --- Outbound Webhook Management API ---
-
-// GET /api/webhook - List webhooks (by form/account)
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -22,11 +19,10 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// POST /api/webhook - Create a new webhook
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    // Optionally: validate with Zod here
+
     const webhook = await createWebhook(body);
     return NextResponse.json(webhook, { status: 201 });
   } catch (error: unknown) {

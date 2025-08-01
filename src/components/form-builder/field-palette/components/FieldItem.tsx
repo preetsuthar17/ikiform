@@ -1,15 +1,10 @@
-// Components
-
 import { Draggable } from '@hello-pangea/dnd';
 import { Card } from '@/components/ui/card';
 
-// Types
 import type { FieldItemProps } from '../types';
 
 export const PALETTE_DRAG_TYPE = 'palette-field-type';
 
-// NOTE: FieldItem should be rendered inside a DragDropContext and Droppable in the palette for DnD to work.
-// Pass the correct index prop from the parent (FullPalette or CompactPalette).
 export function FieldItem({
   fieldType,
   onAddField,

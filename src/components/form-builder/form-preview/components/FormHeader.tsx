@@ -1,8 +1,7 @@
-// External libraries
 import React from 'react';
-// Types
+
 import type { FormHeaderProps } from '../types';
-// Internal components
+
 import { EditableField } from './EditableField';
 
 export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {

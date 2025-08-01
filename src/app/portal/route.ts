@@ -9,7 +9,6 @@ export const GET = CustomerPortal({
     try {
       const supabase = await createClient();
 
-      // Get the authenticated user
       const {
         data: { user },
         error: authError,
@@ -20,7 +19,6 @@ export const GET = CustomerPortal({
         throw new Error('Unauthorized');
       }
 
-      // Get the user's Polar customer ID from the database
       const { data, error } = await supabase
         .from('users')
         .select('polar_customer_id')

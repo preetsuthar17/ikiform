@@ -190,7 +190,7 @@ const Slider = React.forwardRef<
     if (label || description || showValue || showMinMax || error) {
       return (
         <div className="flex flex-col gap-2">
-          {/* Header with label and value */}
+          {}
           {(label || showValue) && (
             <div className="flex items-center justify-between">
               {label && (
@@ -211,11 +211,11 @@ const Slider = React.forwardRef<
             </div>
           )}
 
-          {/* Slider */}
+          {}
           <div className="flex flex-col gap-2">
             {sliderElement}
 
-            {/* Min/Max labels */}
+            {}
             {showMinMax && (
               <div className="flex justify-between text-muted-foreground text-xs">
                 <span>{formatValue(min)}</span>
@@ -224,7 +224,7 @@ const Slider = React.forwardRef<
             )}
           </div>
 
-          {/* Description and error */}
+          {}
           {(description || error) && (
             <div className="flex flex-col gap-1">
               {description && (

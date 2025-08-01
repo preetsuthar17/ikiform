@@ -1,4 +1,3 @@
-// Internal imports
 import { cn } from '@/lib/utils';
 
 export const getModalContentStyles = (): string => {

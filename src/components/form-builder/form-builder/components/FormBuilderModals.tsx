@@ -1,7 +1,5 @@
-// External imports
 import type React from 'react';
 
-// Component imports
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -17,7 +15,6 @@ import { FormSettingsModal } from '../../form-settings-modal';
 import { JsonViewModal } from '../../json-view-modal';
 import { ShareFormModal } from '../../share-form-modal';
 
-// Type imports
 import type { FormBuilderModalsProps } from '../types';
 
 export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
@@ -42,7 +39,7 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
 }) => {
   return (
     <>
-      {/* Form Settings Modal */}
+      {}
       <Modal onOpenChange={onCloseSettings} open={showSettings}>
         <ModalContent className="flex flex-col gap-6 bg-card text-card-foreground max-sm:p-4">
           <ModalHeader>
@@ -123,21 +120,21 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
         </ModalContent>
       </Modal>
 
-      {/* Form Creation Wizard */}
+      {}
       <FormCreationWizard
         isOpen={showCreationWizard}
         onClose={onCloseCreationWizard}
         onFormTypeSelect={onFormTypeSelect}
       />
 
-      {/* JSON View Modal */}
+      {}
       <JsonViewModal
         isOpen={showJsonView}
         onClose={onCloseJsonView}
         schema={formSchema}
       />
 
-      {/* Form Settings Modal */}
+      {}
       <FormSettingsModal
         formId={formId}
         isOpen={showFormSettings}
@@ -147,7 +144,7 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
         userEmail={userEmail}
       />
 
-      {/* Share Form Modal */}
+      {}
       <ShareFormModal
         formId={formId ?? null}
         isOpen={showShareModal}

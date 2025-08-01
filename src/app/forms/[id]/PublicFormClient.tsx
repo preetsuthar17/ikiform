@@ -1,37 +1,41 @@
 'use client';
-import dynamic from 'next/dynamic';
-import { useTheme } from 'next-themes';
-import React from 'react';
 
-const PublicForm = dynamic(() => import('@/components/forms/public-form'), {
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
+import { FormSkeleton } from './components/FormSkeletons';
+
+const ThemeProvider = dynamic(() => import('./components/ThemeProvider'), {
   ssr: false,
 });
+
+const PublicFormContent = dynamic(
+  () => import('./components/PublicFormContent'),
+  {
+    ssr: false,
+    loading: () => <FormSkeleton variant="single-step" />,
+  }
+);
+
+interface PublicFormClientProps {
+  formId: string;
+  schema: any;
+  theme?: string;
+}
+
+function PublicFormSkeleton() {
+  return <FormSkeleton variant="single-step" />;
+}
 
 export default function PublicFormClient({
   formId,
   schema,
   theme,
-}: {
-  formId: string;
-  schema: any;
-  theme?: string;
-}) {
-  const { setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  React.useEffect(() => {
-    if (mounted && theme) {
-      setTheme(theme);
-    }
-  }, [theme, setTheme, mounted]);
-
-  if (!mounted) {
-    return null;
-  }
-
-  return <PublicForm formId={formId} schema={schema} theme={theme} />;
+}: PublicFormClientProps) {
+  return (
+    <Suspense fallback={<PublicFormSkeleton />}>
+      <ThemeProvider theme={theme}>
+        <PublicFormContent formId={formId} schema={schema} theme={theme} />
+      </ThemeProvider>
+    </Suspense>
+  );
 }

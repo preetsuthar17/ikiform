@@ -1,10 +1,8 @@
-// Icon imports
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-// UI components imports
+
 import { Button } from '@/components/ui/button';
 
-// Local imports
 import type { FormSchema } from '@/lib/ai-builder/types';
 
 interface PreviewPanelHeaderProps {

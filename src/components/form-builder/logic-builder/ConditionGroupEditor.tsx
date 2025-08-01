@@ -36,12 +36,10 @@ function ConditionGroupEditor({
   onDelete?: () => void;
   fields: FormField[];
 }) {
-  // Handler for changing group logic (AND/OR)
   const handleLogicChange = (logic: 'AND' | 'OR') => {
     onChange({ ...group, logic });
   };
 
-  // Handler for adding a new condition
   const handleAddCondition = () => {
     const newCond: LogicCondition = {
       id: `cond-${Date.now()}`,
@@ -52,7 +50,6 @@ function ConditionGroupEditor({
     onChange({ ...group, conditions: [...group.conditions, newCond] });
   };
 
-  // Handler for adding a new group
   const handleAddGroup = () => {
     const newGroup: LogicConditionGroup = {
       id: `group-${Date.now()}`,
@@ -62,7 +59,6 @@ function ConditionGroupEditor({
     onChange({ ...group, conditions: [...group.conditions, newGroup] });
   };
 
-  // Handler for updating a condition or group
   const handleUpdate = (
     idx: number,
     updated: LogicCondition | LogicConditionGroup
@@ -72,7 +68,6 @@ function ConditionGroupEditor({
     onChange({ ...group, conditions: updatedConds });
   };
 
-  // Handler for deleting a condition or group
   const handleDelete = (idx: number) => {
     const updatedConds = group.conditions.slice();
     updatedConds.splice(idx, 1);

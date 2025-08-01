@@ -1,4 +1,3 @@
-// Constants for forms management
 import type { AISuggestion } from '../types';
 
 export const AI_FORM_SUGGESTIONS: AISuggestion[] = [

@@ -1,18 +1,14 @@
-// External imports
-
-// Icon imports
 import { Check, Edit3, Eye, FileText, Layers } from 'lucide-react';
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-// UI imports
+
 import { Card } from '@/components/ui/card';
-// Utility imports
+
 import { createDefaultFormSchema } from '@/lib/forms';
-// Component imports
+
 import { FormPreview } from '../../form-preview';
 
-// Type imports
 import type { FormConfiguration } from '../types';
 
 interface FormReviewStepProps {
@@ -36,7 +32,7 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-4">
-        {/* Form Type */}
+        {}
         <Card className="p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -68,7 +64,7 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
           </div>
         </Card>
 
-        {/* Form Configuration */}
+        {}
         <Card className="p-4">
           <div className="flex items-start justify-between">
             <div className="flex-1">
@@ -104,7 +100,7 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
           </div>
         </Card>
 
-        {/* Preview Toggle */}
+        {}
         <Card className="p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -127,7 +123,7 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
         </Card>
       </div>
 
-      {/* Form Preview */}
+      {}
       {showPreview && (
         <Card className="p-4">
           <div className="overflow-hidden rounded-card border">

@@ -1,17 +1,14 @@
-// Libraries
 import { useEffect, useRef, useState } from 'react';
 import { toast } from '@/hooks/use-toast';
 
-// Types
 import type { FormBlock, FormField, FormSchema } from '@/lib/database';
 import type { LogicAction } from '@/lib/forms/logic';
 import { evaluateLogic } from '@/lib/forms/logic';
 import type { FormActions, FormState } from '../types';
 import { submitForm } from '../utils/form-utils';
-// Utilities
+
 import { validateStep } from '../utils/validation';
 
-// Utility function to get default value for a field type
 const getDefaultValueForField = (field: FormField): any => {
   switch (field.type) {
     case 'tags':
@@ -36,7 +33,6 @@ const getDefaultValueForField = (field: FormField): any => {
   }
 };
 
-// Utility function to initialize form data with proper defaults
 const initializeFormData = (blocks: FormBlock[]): Record<string, any> => {
   const formData: Record<string, any> = {};
 
@@ -67,7 +63,6 @@ export const useFormState = (
 
   const totalSteps = blocks.length;
 
-  // Initialize form data when blocks change - only when new fields are added
   useEffect(() => {
     const allFieldIds = new Set<string>();
     blocks.forEach((block) => {
@@ -81,7 +76,6 @@ export const useFormState = (
     );
 
     if (newFieldIds.length > 0) {
-      // Preserve existing form data and only initialize new fields
       const newFormData = { ...formData };
       blocks.forEach((block) => {
         block.fields?.forEach((field) => {
@@ -95,10 +89,9 @@ export const useFormState = (
     }
   }, [blocks.length]);
 
-  // Logic evaluation for field visibility/enabled state
   const logic = schema.logic || [];
   const logicActions = evaluateLogic(logic, formData);
-  // Build a map: fieldId -> { visible, disabled }
+
   const fieldVisibility: Record<
     string,
     { visible: boolean; disabled: boolean }
@@ -110,7 +103,6 @@ export const useFormState = (
   });
   const logicMessages: string[] = [];
 
-  // Collect all actions for each field
   const actionsByField: Record<string, LogicAction[]> = {};
   logicActions.forEach((action) => {
     if (action.target) {
@@ -119,14 +111,13 @@ export const useFormState = (
     }
   });
 
-  // Apply logic: hide > show > default
   Object.entries(fieldVisibility).forEach(([fieldId, vis]) => {
     const actions = actionsByField[fieldId] || [];
     if (actions.some((a) => a.type === 'hide')) {
       vis.visible = false;
     } else if (actions.some((a) => a.type === 'show')) {
       vis.visible = true;
-    } // else leave as default
+    }
     if (actions.some((a) => a.type === 'disable')) {
       vis.disabled = true;
     } else if (actions.some((a) => a.type === 'enable')) {

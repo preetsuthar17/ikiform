@@ -141,7 +141,6 @@ const InputOTPSlot = React.forwardRef<
 
     const currentState = isActive ? 'active' : char ? 'filled' : 'default';
 
-    // Determine position based on index and total slots
     const totalSlots = inputOTPContext.slots.length;
     const position =
       totalSlots === 1

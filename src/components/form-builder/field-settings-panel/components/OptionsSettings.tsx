@@ -1,17 +1,13 @@
-// External imports
-
-// Icon imports
 import { Plus, X } from 'lucide-react';
 import type React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-// Component imports
+
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 
-// Type imports
 import type { OptionsSettingsProps } from '../types';
-// Utility imports
+
 import { createFieldUpdater, createOptionHandlers } from '../utils';
 
 export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
@@ -24,7 +20,6 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
     updateField
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const {
     sanitizeOptions,
   } = require('@/components/form-builder/form-field-renderer/utils/sanitizeOptions');

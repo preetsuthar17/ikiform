@@ -1,8 +1,7 @@
-// Forms grid component
 import React from 'react';
-// Types
+
 import type { Form } from '@/lib/database';
-// Local Components
+
 import { FormCard } from './FormCard';
 
 interface FormsGridProps {

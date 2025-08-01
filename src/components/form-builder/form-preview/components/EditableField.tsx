@@ -1,16 +1,11 @@
-// External libraries
-
 import { Edit3 } from 'lucide-react';
 import type React from 'react';
 
-// UI components
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
-// Hooks
 import { useEditableField } from '../hooks/useEditableField';
 
-// Types
 interface EditableFieldProps {
   value: string;
   placeholder?: string;

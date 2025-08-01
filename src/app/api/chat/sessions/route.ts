@@ -3,10 +3,8 @@ import { formsDbServer } from '@/lib/database';
 import { requirePremium } from '@/lib/utils/premium-check';
 import { createClient } from '@/utils/supabase/server';
 
-// Get all chat sessions for a user
 export async function GET(req: NextRequest) {
   try {
-    // Check authentication
     const supabase = await createClient();
     const {
       data: { user },
@@ -17,7 +15,6 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Check premium status
     const premiumCheck = await requirePremium(user.id);
     if (!premiumCheck.hasPremium) {
       return premiumCheck.error;
@@ -25,7 +22,7 @@ export async function GET(req: NextRequest) {
 
     const { searchParams } = new URL(req.url);
     const limit = Number.parseInt(searchParams.get('limit') || '10', 10);
-    const type = searchParams.get('type') || 'both'; // "builder", "analytics", or "both"
+    const type = searchParams.get('type') || 'both';
 
     type Session = {
       id: string;
@@ -71,14 +68,12 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Sort by created_at desc
     sessions.sort(
       (a, b) =>
         new Date(String(b.created_at)).getTime() -
         new Date(String(a.created_at)).getTime()
     );
 
-    // Take only the requested limit
     if (sessions.length > limit) {
       sessions = sessions.slice(0, limit);
     }

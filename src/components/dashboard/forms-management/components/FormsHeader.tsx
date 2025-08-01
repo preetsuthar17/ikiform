@@ -1,9 +1,6 @@
-// Header component for forms management
-
-// Icons
 import { Plus, Sparkles } from 'lucide-react';
 import React from 'react';
-// UI Components
+
 import { Button } from '@/components/ui/button';
 import {
   Modal,
@@ -14,7 +11,6 @@ import {
   ModalTrigger,
 } from '@/components/ui/modal';
 
-// Types
 import type { FormHeaderProps } from '../types';
 
 interface FormsHeaderProps extends FormHeaderProps {

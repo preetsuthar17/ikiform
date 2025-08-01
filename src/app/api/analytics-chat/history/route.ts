@@ -6,7 +6,6 @@ import { createClient } from '@/utils/supabase/server';
 
 export async function GET(req: NextRequest) {
   try {
-    // Check authentication
     const supabase = await createClient();
     const {
       data: { user },
@@ -17,7 +16,6 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Check premium status
     const premiumCheck = await requirePremium(user.id);
     if (!premiumCheck.hasPremium) {
       return premiumCheck.error;
@@ -34,7 +32,6 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Get specific session history
     const chatHistory = await formsDbServer.getAIAnalyticsChatHistory(
       user.id,
       formId,
@@ -60,7 +57,6 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    // Check authentication
     const supabase = await createClient();
     const {
       data: { user },
@@ -71,7 +67,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Check premium status
     const premiumCheck = await requirePremium(user.id);
     if (!premiumCheck.hasPremium) {
       return premiumCheck.error;
@@ -94,10 +89,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Sanitize content
     const sanitizedContent = sanitizeString(content);
 
-    // Save the message
     const savedMessage = await formsDbServer.saveAIAnalyticsMessage(
       user.id,
       formId,

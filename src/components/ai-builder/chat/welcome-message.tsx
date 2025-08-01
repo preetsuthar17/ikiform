@@ -1,7 +1,5 @@
-// Animation imports
 import { motion } from 'motion/react';
 
-// Next.js imports
 import Image from 'next/image';
 import Link from 'next/link';
 

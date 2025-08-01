@@ -1,19 +1,16 @@
-// Libraries
-
 import Link from 'next/link';
 import type React from 'react';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-// UI Components
+
 import { Progress } from '@/components/ui/progress';
 import { SocialMediaIcons } from '@/components/ui/social-media-icons';
 import { getFormLayoutClasses } from '@/lib/utils/form-layout';
-// Hooks
+
 import { useSingleStepForm } from '../hooks/use-single-step-form';
-// Types
+
 import type { PublicFormProps } from '../types';
 
-// Utilities
 import { getAllFields } from '../utils/form-utils';
 import { PasswordProtectionModal } from './PasswordProtectionModal';
 import { SingleStepFormContent } from './single-step-form-content';

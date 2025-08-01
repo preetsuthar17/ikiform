@@ -72,7 +72,6 @@ export function SignatureField({
           onEnd={disabled ? undefined : handleEnd}
           penColor="#000"
           ref={sigRef}
-          // Prevent drawing if disabled
           {...(disabled && {
             onMouseDown: (e: React.MouseEvent<HTMLCanvasElement>) =>
               e.preventDefault(),

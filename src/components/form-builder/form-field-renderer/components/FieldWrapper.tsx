@@ -1,11 +1,9 @@
-// External imports
 import React from 'react';
 
-// Component imports
 import { Label } from '@/components/ui/label';
-// Type imports
+
 import type { FieldWrapperProps } from '../types';
-// Utility imports
+
 import { getWidthClass } from '../utils';
 
 export function FieldWrapper({ field, error, children }: FieldWrapperProps) {

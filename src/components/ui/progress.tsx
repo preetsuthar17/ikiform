@@ -110,7 +110,7 @@ const Progress = React.forwardRef<
               height={circleSize}
               width={circleSize}
             >
-              {/* Background circle */}
+              {}
               <circle
                 className="opacity-20"
                 cx={circleSize / 2}
@@ -120,7 +120,7 @@ const Progress = React.forwardRef<
                 stroke="hsl(var(--hu-secondary))"
                 strokeWidth={strokeWidth || 8}
               />
-              {/* Progress circle */}
+              {}
               <motion.circle
                 animate={{
                   strokeDashoffset: animated

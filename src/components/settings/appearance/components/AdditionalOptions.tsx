@@ -1,8 +1,6 @@
-// External imports
 import type React from 'react';
 import { Label } from '@/components/ui/label';
 
-// constants
 import { APPEARANCE_SETTINGS } from '../constants';
 
 export const AdditionalOptions: React.FC = () => {

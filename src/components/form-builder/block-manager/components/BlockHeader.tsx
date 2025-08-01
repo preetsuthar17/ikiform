@@ -1,6 +1,3 @@
-// Components
-
-// Icons
 import {
   ChevronDown,
   ChevronRight,
@@ -11,7 +8,6 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
-// Types
 import type { BlockHeaderProps } from '../types';
 
 export function BlockHeader({

@@ -6,8 +6,8 @@ import type { FormSchema } from '@/lib/database';
 export const DEFAULT_RATE_LIMIT_SETTINGS = {
   enabled: true,
   maxSubmissions: 5,
-  timeWindow: 10, // minutes
-  blockDuration: 60, // minutes
+  timeWindow: 10,
+  blockDuration: 60,
   message: 'Too many submissions. Please try again later.',
 };
 
@@ -62,7 +62,7 @@ export const DEFAULT_EMAIL_VALIDATION_SETTINGS = {
 
 export const DEFAULT_NOTIFICATION_SETTINGS = {
   enabled: true,
-  email: '', // to be set to logged-in user
+  email: '',
   subject: 'You received a submission! 🥳',
   message: 'Whoo-hoo!! You have received a new submission on your form.',
 };

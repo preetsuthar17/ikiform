@@ -17,7 +17,7 @@ export default function Hero() {
   return (
     <section className="mx-auto flex w-full max-w-[75%] flex-col gap-10 max-sm:max-w-[90%] md:gap-16">
       <div className="relative flex h-full w-full flex-col gap-8 rounded-card p-8 md:p-12">
-        {/* Content Container */}
+        {}
         <div className="z-20 flex h-full grow flex-col items-center gap-6 py-6 text-center ">
           <Chip variant={'secondary'}>
             <Link
@@ -45,18 +45,18 @@ export default function Hero() {
               </span>
             </Link>
           </Chip>
-          {/* Heading */}
+          {}
           <h1 className="font-medium text-5xl leading-tight tracking-tight max-[414px]:text-4xl md:text-6xl">
             Forms that are affordable and beautiful
           </h1>
 
-          {/* Description */}
+          {}
           <p className="md:text-lg ">
             Ikiform is an open-source alternative to Google Forms, designed to
             help you create beautiful forms effortlessly.
           </p>
 
-          {/* Buttons */}
+          {}
           <div className="flex w-fit flex-wrap items-center justify-center gap-3">
             {user ? (
               <Button asChild className="h-[45px] font-medium" size="lg">
@@ -121,7 +121,7 @@ export default function Hero() {
                 </div>
               </div>
             </div>
-            {/* Modal for demo options */}
+            {}
             <Modal onOpenChange={setOpen} open={open}>
               <ModalContent className="z-50 flex w-full max-w-xs flex-col items-center justify-center gap-6">
                 <ModalHeader>
@@ -150,7 +150,7 @@ export default function Hero() {
                 </div>
               </ModalContent>
             </Modal>
-            {/* Modal for video demo */}
+            {}
             <Modal onOpenChange={setVideoOpen} open={videoOpen}>
               <ModalContent className="z-50 flex aspect-video w-full max-w-[90%] flex-col gap-6">
                 <ModalHeader className="sr-only">

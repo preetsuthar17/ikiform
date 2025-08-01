@@ -1,10 +1,8 @@
-// Next.js Components
 import Image from 'next/image';
 import type React from 'react';
-// UI Components
+
 import { Button } from '@/components/ui/button';
 
-// Types
 import type { FloatingChatButtonProps } from '../types';
 
 export const FloatingChatButton: React.FC<FloatingChatButtonProps> = ({

@@ -1,4 +1,3 @@
-// Type imports
 import type { Form, FormSubmission } from '@/lib/database';
 import type {
   ConversionFunnelStep,
@@ -6,7 +5,6 @@ import type {
   FilterState,
 } from '../types';
 
-// Utility functions
 export const generateSessionId = () =>
   `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 

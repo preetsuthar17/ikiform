@@ -1,4 +1,3 @@
-// Type imports
 import { useState } from 'react';
 import type { FormType } from '../types';
 

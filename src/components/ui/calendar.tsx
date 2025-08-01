@@ -128,24 +128,20 @@ function Calendar({
   const currentMonth = currentDate.getMonth();
   const currentYear = currentDate.getFullYear();
 
-  // Generate year range for year picker (current year ± 50 years)
   const yearRange = Array.from({ length: 101 }, (_, i) => currentYear - 50 + i);
 
-  // Get first day of the month and calculate calendar grid
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
   const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
   const firstDayOfWeek = firstDayOfMonth.getDay();
   const daysInMonth = lastDayOfMonth.getDate();
 
-  // Calculate previous month days to show
   const prevMonthLastDay = new Date(currentYear, currentMonth, 0).getDate();
   const prevMonthDays = Array.from(
     { length: firstDayOfWeek },
     (_, i) => prevMonthLastDay - firstDayOfWeek + i + 1
   );
 
-  // Calculate next month days to show
-  const totalCells = 42; // 6 rows × 7 days
+  const totalCells = 42;
   const currentMonthDays = Array.from({ length: daysInMonth }, (_, i) => i + 1);
   const remainingCells =
     totalCells - prevMonthDays.length - currentMonthDays.length;
@@ -195,7 +191,6 @@ function Calendar({
     }
     if (mode === 'range' && selectedRange) {
       if (!selectedRange.to) {
-        // Only from date is selected
         return isSameDay(date, selectedRange.from);
       }
       const dateTime = date.getTime();
@@ -247,10 +242,8 @@ function Calendar({
       onSelectMultiple?.(newDates);
     } else if (mode === 'range') {
       if (!selectedRange || (selectedRange.from && selectedRange.to)) {
-        // Start new range selection - only set the 'from' date
         onSelectRange?.({ from: clickedDate });
       } else if (selectedRange.from && !selectedRange.to) {
-        // Complete the range selection
         const from =
           selectedRange.from <= clickedDate ? selectedRange.from : clickedDate;
         const to =
@@ -307,7 +300,7 @@ function Calendar({
       {...props}
     >
       {' '}
-      {/* Header */}
+      {}
       <div className="flex items-center justify-between">
         <button
           className="inline-flex items-center justify-center rounded-ele p-1 transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-1.5"
@@ -384,7 +377,7 @@ function Calendar({
           <ChevronRight className="h-4 w-4" />
         </button>
       </div>
-      {/* Days of week header */}
+      {}
       <div className="grid grid-cols-7 gap-1">
         {DAYS_OF_WEEK.map((day) => (
           <div
@@ -396,7 +389,7 @@ function Calendar({
           </div>
         ))}
       </div>
-      {/* Calendar grid */}
+      {}
       <div className="relative overflow-hidden">
         <AnimatePresence custom={direction} mode="wait">
           <motion.div
@@ -412,7 +405,7 @@ function Calendar({
             }}
             variants={slideVariants}
           >
-            {/* Previous month days */}
+            {}
             {showOutsideDays &&
               prevMonthDays.map((day) => (
                 <button
@@ -429,7 +422,7 @@ function Calendar({
                 </button>
               ))}
 
-            {/* Current month days */}
+            {}
             {currentMonthDays.map((day) => (
               <button
                 className={cn(
@@ -445,7 +438,7 @@ function Calendar({
               </button>
             ))}
 
-            {/* Next month days */}
+            {}
             {showOutsideDays &&
               nextMonthDays.map((day) => (
                 <button
@@ -468,7 +461,6 @@ function Calendar({
   );
 }
 
-// Helper function to check if two dates are the same day
 function isSameDay(date1: Date, date2: Date): boolean {
   return (
     date1.getDate() === date2.getDate() &&

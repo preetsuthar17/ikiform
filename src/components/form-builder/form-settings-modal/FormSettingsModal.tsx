@@ -1,10 +1,10 @@
 'use client';
 
 import { Eye, Save, Settings } from 'lucide-react';
-// External imports
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-// Internal imports
+
 import { Modal, ModalContent } from '@/components/ui/modal';
 import { toast } from '@/hooks/use-toast';
 import { formsDb } from '@/lib/database';

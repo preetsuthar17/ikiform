@@ -1,9 +1,6 @@
-// External imports
-
-// Icon imports
 import { ArrowRight } from 'lucide-react';
 import type React from 'react';
-// Component imports
+
 import { Button } from '@/components/ui/button';
 
 interface WizardActionsProps {

@@ -1,6 +1,5 @@
-// Types
 import type { FormField } from '@/lib/database';
-// Constants
+
 import { FIELD_TYPES } from '../constants';
 import type { FieldTypeConfig } from '../types';
 

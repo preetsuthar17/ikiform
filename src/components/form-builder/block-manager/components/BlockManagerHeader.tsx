@@ -1,10 +1,6 @@
-// Components
-
-// Icons
 import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-// Types
 import type { BlockManagerHeaderProps } from '../types';
 
 export function BlockManagerHeader({

@@ -282,7 +282,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
               showControlsState ? 'opacity-100' : 'opacity-0'
             )}
           >
-            {/* Play/Pause Overlay */}
+            {}
             <div className="absolute inset-0 flex items-center justify-center">
               <button
                 className="group flex h-16 w-16 items-center justify-center rounded-card border border-white/30 bg-white/20 text-white backdrop-blur-sm transition-all duration-200 hover:bg-white/30"
@@ -296,9 +296,9 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
               </button>
             </div>
 
-            {/* Controls Bar */}
+            {}
             <div className="flex flex-col gap-3 p-4">
-              {/* Progress Bar */}
+              {}
               <div className="flex items-center gap-2 text-sm text-white">
                 <span className="min-w-0 font-mono text-xs">
                   {formatTime(currentTime)}
@@ -325,7 +325,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
                 </span>
               </div>
 
-              {/* Control Buttons */}
+              {}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <button

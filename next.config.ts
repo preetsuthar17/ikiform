@@ -1,8 +1,5 @@
 import type { NextConfig } from 'next';
 
-const nextConfig: NextConfig = {
-  /* config options here */
-  // Remove images.remotePatterns config for Cloudflare
-};
+const nextConfig: NextConfig = {};
 
 export default nextConfig;

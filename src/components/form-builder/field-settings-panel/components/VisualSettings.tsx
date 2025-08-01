@@ -1,4 +1,3 @@
-// External imports
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -9,10 +8,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-// Component imports
+
 import { Textarea } from '@/components/ui/textarea';
 
-// Type imports
 import type { FormField } from '@/lib/database';
 
 interface VisualSettingsProps {

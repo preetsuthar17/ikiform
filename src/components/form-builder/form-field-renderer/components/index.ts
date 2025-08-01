@@ -1,5 +1,3 @@
-// Wrapper export
-
 export { CheckboxField } from './CheckboxField';
 export { DateInputField } from './DateInputField';
 export { EmailInputField } from './EmailInputField';
@@ -16,6 +14,6 @@ export { SocialField } from './SocialField';
 export { StatementField } from './StatementField';
 export { TagsField } from './TagsField';
 export { TextareaField } from './TextareaField';
-// Field exports
+
 export { TextInputField } from './TextInputField';
 export { TimeInputField } from './TimeInputField';

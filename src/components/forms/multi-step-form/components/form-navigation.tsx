@@ -1,12 +1,9 @@
-// Libraries
-
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type React from 'react';
 import { getLivePatternError } from '@/components/form-builder/form-field-renderer/components/TextInputField';
-// UI Components
+
 import { Button } from '@/components/ui/button';
 
-// Types
 import type { FormSchema } from '@/lib/database';
 
 interface FormNavigationProps {

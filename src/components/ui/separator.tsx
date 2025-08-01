@@ -1,5 +1,3 @@
-'use client';
-
 import * as SeparatorPrimitive from '@radix-ui/react-separator';
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
@@ -98,7 +96,6 @@ const Separator = React.forwardRef<
     },
     ref
   ) => {
-    // If children are provided, render separator with text
     if (children) {
       return (
         <div
@@ -150,7 +147,6 @@ const Separator = React.forwardRef<
       );
     }
 
-    // Default separator without text
     return (
       <SeparatorPrimitive.Root
         className={cn(separatorVariants({ orientation, size }), className)}

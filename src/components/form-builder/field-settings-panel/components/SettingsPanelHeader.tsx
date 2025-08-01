@@ -1,9 +1,6 @@
-// External imports
-
-// Icon imports
 import { X } from 'lucide-react';
 import React from 'react';
-// Component imports
+
 import { Button } from '@/components/ui/button';
 
 interface SettingsPanelHeaderProps {

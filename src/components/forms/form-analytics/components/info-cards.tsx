@@ -1,11 +1,9 @@
-// Icons
 import { BarChart3, Calendar, TrendingUp } from 'lucide-react';
 import type React from 'react';
 import { Badge } from '@/components/ui/badge';
-// UI Components
+
 import { Card } from '@/components/ui/card';
 
-// Types
 import type { InfoCardsProps } from '../types';
 
 export const InfoCards: React.FC<InfoCardsProps> = ({

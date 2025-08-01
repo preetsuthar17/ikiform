@@ -20,14 +20,12 @@ const DropdownMenuSub = DropdownMenuPrimitive.Sub;
 
 const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;
 
-// Motion wrapper for animations
 const MotionContent = React.forwardRef<
   React.ElementRef<typeof motion.div>,
   React.ComponentPropsWithoutRef<typeof motion.div> & {
     side?: 'top' | 'right' | 'bottom' | 'left';
   }
 >(({ children, side = 'bottom', ...props }, ref) => {
-  // Dynamic animation based on dropdown side
   const getInitialPosition = () => {
     switch (side) {
       case 'top':
@@ -36,7 +34,7 @@ const MotionContent = React.forwardRef<
         return { x: -8 };
       case 'left':
         return { x: 8 };
-      default: // bottom
+      default:
         return { y: -8 };
     }
   };

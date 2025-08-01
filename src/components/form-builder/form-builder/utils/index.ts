@@ -1,10 +1,7 @@
-// Type imports
 import type { FormField, FormSchema } from '@/lib/database';
 
-// Constant imports
 import { FORM_BUILDER_CONSTANTS } from '../constants';
 
-// Utility functions
 export const generateFieldId = (): string => {
   return `field_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 };
@@ -39,7 +36,6 @@ export const hasFormChanges = (
   return currentSchemaStr !== savedSchemaStr;
 };
 
-// Debounced localStorage to prevent excessive writes
 let saveTimeoutId: NodeJS.Timeout | null = null;
 
 export const saveDraftToStorage = (
@@ -47,12 +43,10 @@ export const saveDraftToStorage = (
   formSchema: FormSchema
 ): void => {
   if (typeof window !== 'undefined') {
-    // Clear previous timeout
     if (saveTimeoutId) {
       clearTimeout(saveTimeoutId);
     }
 
-    // Debounce localStorage writes to prevent blocking
     saveTimeoutId = setTimeout(() => {
       try {
         localStorage.setItem(draftKey, JSON.stringify(formSchema));
@@ -60,7 +54,7 @@ export const saveDraftToStorage = (
         console.warn('Failed to save draft to localStorage:', error);
       }
       saveTimeoutId = null;
-    }, 100); // 100ms debounce
+    }, 100);
   }
 };
 
@@ -80,9 +74,7 @@ export const loadDraftFromStorage = (draftKey: string): FormSchema | null => {
     ) {
       return parsed;
     }
-  } catch {
-    // Ignore parse errors
-  }
+  } catch {}
 
   return null;
 };
@@ -171,7 +163,7 @@ export const addFieldToSchema = (
     }
     return block;
   });
-  // Update top-level fields array as well
+
   const newFieldsArray = [...formSchema.fields];
   if (
     typeof index === 'number' &&

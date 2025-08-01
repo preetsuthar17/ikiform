@@ -1,10 +1,6 @@
-// React imports
-
-// Icon imports
 import { Check, Copy } from 'lucide-react';
 import { useState } from 'react';
 
-// UI components imports
 import { Button } from '@/components/ui/button';
 import {
   Tooltip,

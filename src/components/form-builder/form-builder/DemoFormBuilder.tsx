@@ -233,7 +233,6 @@ export default function DemoFormBuilder() {
     setSelectedBlockId('default');
   };
 
-  // No-op handlers for demo
   const noop = () => {};
   const asyncNoop = async () => {};
 

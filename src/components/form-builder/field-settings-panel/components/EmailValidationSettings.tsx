@@ -1,16 +1,13 @@
-// External imports
-
 import { X } from 'lucide-react';
 import React, { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-// Component imports
+
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 
-// Type imports
 import type { FormField } from '@/lib/database';
 
 interface EmailValidationSettingsProps {
@@ -90,7 +87,7 @@ export function EmailValidationSettings({
       <h3 className="font-medium text-card-foreground">Email Validation</h3>
 
       <div className="flex flex-col gap-4">
-        {/* Auto-complete Domain */}
+        {}
         <div className="flex flex-col gap-2">
           <Label className="text-card-foreground">Auto-complete Domain</Label>
           <div className="flex gap-2">
@@ -129,7 +126,7 @@ export function EmailValidationSettings({
           </p>
         </div>
 
-        {/* Allowed Domains */}
+        {}
         <div className="flex flex-col gap-2">
           <Label className="text-card-foreground">Allowed Domains</Label>
           <div className="flex gap-2">
@@ -174,7 +171,7 @@ export function EmailValidationSettings({
           </p>
         </div>
 
-        {/* Blocked Domains */}
+        {}
         <div className="flex flex-col gap-2">
           <Label className="text-card-foreground">Blocked Domains</Label>
           <div className="flex gap-2">
@@ -219,7 +216,7 @@ export function EmailValidationSettings({
           </p>
         </div>
 
-        {/* Business Email Requirement */}
+        {}
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-1">
             <Label className="text-card-foreground">
@@ -238,7 +235,7 @@ export function EmailValidationSettings({
           />
         </div>
 
-        {/* Custom Validation Message */}
+        {}
         <div className="flex flex-col gap-2">
           <Label className="text-card-foreground">
             Custom Validation Message

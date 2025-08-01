@@ -1,9 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { resendWebhookDelivery } from '@/lib/webhooks/outbound';
 
-// --- Webhook Resend API ---
-
-// POST /api/webhook/[id]/resend - Re-send a failed delivery
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
