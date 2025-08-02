@@ -97,7 +97,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
       className={
         className ??
         'flex w-full flex-col items-center gap-2' +
-          (error ? ' rounded border border-red-500 p-2' : '')
+          (error ? 'rounded border border-red-500 p-2' : '')
       }
     >
       <div className="flex w-full items-center gap-2">

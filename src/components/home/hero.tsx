@@ -18,7 +18,7 @@ export default function Hero() {
     <section className="mx-auto flex w-full max-w-[75%] flex-col gap-10 max-sm:max-w-[90%] md:gap-16">
       <div className="relative flex h-full w-full flex-col gap-8 rounded-card p-8 md:p-12">
         {}
-        <div className="z-20 flex h-full grow flex-col items-center gap-6 py-6 text-center ">
+        <div className="z-20 flex h-full grow flex-col items-center gap-6 py-6 text-center">
           <Chip variant={'secondary'}>
             <Link
               className="flex items-center justify-center gap-2"
@@ -51,7 +51,7 @@ export default function Hero() {
           </h1>
 
           {}
-          <p className="md:text-lg ">
+          <p className="md:text-lg">
             Ikiform is an open-source alternative to Google Forms, designed to
             help you create beautiful forms effortlessly.
           </p>

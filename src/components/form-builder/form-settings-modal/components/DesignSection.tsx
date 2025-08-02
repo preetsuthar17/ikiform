@@ -116,7 +116,7 @@ export function DesignSection({
                   currentWidth === option.value
                     ? ''
                     : 'border bg-transparent text-foreground hover:bg-accent'
-                }transition `}
+                }transition`}
                 key={option.value}
                 onClick={() => handleWidthChange(option.value)}
                 type="button"
@@ -136,7 +136,7 @@ export function DesignSection({
                   currentPadding === option.value
                     ? ''
                     : 'border bg-transparent text-foreground hover:bg-accent'
-                }transition `}
+                }transition`}
                 key={option.value}
                 onClick={() => handlePaddingChange(option.value)}
                 type="button"
@@ -156,7 +156,7 @@ export function DesignSection({
                   currentMargin === option.value
                     ? ''
                     : 'border bg-transparent text-foreground hover:bg-accent'
-                }transition `}
+                }transition`}
                 key={option.value}
                 onClick={() => handleMarginChange(option.value)}
                 type="button"
@@ -176,7 +176,7 @@ export function DesignSection({
                   currentBorderRadius === option.value
                     ? ''
                     : 'border bg-transparent text-foreground hover:bg-accent'
-                }transition `}
+                }transition`}
                 key={option.value}
                 onClick={() => handleBorderRadiusChange(option.value)}
                 type="button"

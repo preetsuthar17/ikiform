@@ -36,8 +36,8 @@ export function FormSettingsSidebarNavigation({
               className={
                 'w-full items-center justify-start gap-2 text-left transition-all' +
                 (isActive
-                  ? ' bg-secondary text-secondary-foreground'
-                  : ' hover:bg-accent hover:text-accent-foreground')
+                  ? 'bg-secondary text-secondary-foreground'
+                  : 'hover:bg-accent hover:text-accent-foreground')
               }
               key={section.id}
               onClick={() => onSectionChange(section.id)}

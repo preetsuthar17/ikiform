@@ -9,7 +9,7 @@ const cardVariants = cva(
       variant: {
         default: 'border border-border',
         outline: 'border-2 border-border',
-        ghost: 'border-transparent hover:bg-accent ',
+        ghost: 'border-transparent hover:bg-accent',
       },
       size: {
         sm: 'p-4',

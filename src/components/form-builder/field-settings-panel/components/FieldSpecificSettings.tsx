@@ -788,7 +788,7 @@ export function FieldSpecificSettings({
       )}
 
       {field.type === 'rating' && (
-        <Card className="flex flex-col gap-3 rounded-card bg-background p-4 ">
+        <Card className="flex flex-col gap-3 rounded-card bg-background p-4">
           <h3 className="mb-2 font-medium text-card-foreground">
             Rating Settings
           </h3>

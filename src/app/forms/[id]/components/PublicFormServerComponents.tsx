@@ -12,7 +12,7 @@ export function PublicFormServerLayout({
 }) {
   return (
     <div
-      className={`flex flex-col gap-4${theme ? ` theme-${theme}` : ''}`}
+      className={`flex flex-col gap-4${theme ? `theme-${theme}` : ''}`}
       dir={dir}
     >
       <Suspense

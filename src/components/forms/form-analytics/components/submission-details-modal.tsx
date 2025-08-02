@@ -149,7 +149,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                         <h3 className="font-medium text-sm">
                           {getFieldLabel(key)}
                         </h3>
-                        <div className=" ml-2 max-w-xs border-l pl-3">
+                        <div className="ml-2 max-w-xs border-l pl-3">
                           <OptimizedImage
                             alt="Signature"
                             className="h-auto w-full max-w-full rounded-ele border"

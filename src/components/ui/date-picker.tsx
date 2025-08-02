@@ -14,7 +14,7 @@ const datePickerVariants = cva(
   {
     variants: {
       variant: {
-        default: ' shadow-sm/2',
+        default: 'shadow-sm/2',
         outline: 'border-2 shadow-sm/2',
         ghost: 'border-transparent hover:border-border',
       },

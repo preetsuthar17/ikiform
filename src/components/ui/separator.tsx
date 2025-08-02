@@ -109,7 +109,7 @@ const Separator = React.forwardRef<
                   'flex-1'
                 )}
               />
-              <span className={cn(ChildrenClassName, 'px-3 text-sm ')}>
+              <span className={cn(ChildrenClassName, 'px-3 text-sm')}>
                 {children}
               </span>
               <div

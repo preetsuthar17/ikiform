@@ -186,7 +186,7 @@ export default function PricingClient({ products }: PricingClientProps) {
           />
           <Card className="z-5 w-full overflow-hidden border p-0 shadow-md/3">
             <div className="flex w-full flex-col md:flex-row">
-              <div className="flex w-full flex-col items-start justify-start gap-8 p-8 md:w-1/2 ">
+              <div className="flex w-full flex-col items-start justify-start gap-8 p-8 md:w-1/2">
                 <Badge className="mr-auto w-fit" variant="secondary">
                   🎉 Get Early Bird Discount
                 </Badge>

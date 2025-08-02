@@ -262,7 +262,7 @@ const MenuBarSubContent = React.forwardRef<
   <MenubarPrimitive.SubContent
     asChild
     className={cn(
-      'z-50 min-w-[10rem] max-w-[95vw] overflow-hidden rounded-ele border border-border bg-background p-1.5 text-foreground shadow-xl sm:max-w-[280px] sm:p-2 ',
+      'z-50 min-w-[10rem] max-w-[95vw] overflow-hidden rounded-ele border border-border bg-background p-1.5 text-foreground shadow-xl sm:max-w-[280px] sm:p-2',
       className
     )}
     ref={ref}

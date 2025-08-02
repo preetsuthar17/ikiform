@@ -16,7 +16,7 @@ export function WebhooksSettingsSection({ formId }: { formId: string }) {
     <Card className="p-6">
       <div className="flex items-center gap-3">
         <Link2 className="h-5 w-5 text-primary" />
-        <h3 className="flex items-center gap-2 font-medium text-lg ">
+        <h3 className="flex items-center gap-2 font-medium text-lg">
           Webhooks
           <TooltipProvider>
             <Tooltip>

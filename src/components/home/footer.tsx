@@ -27,8 +27,8 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full bg-background ">
-      <div className=" mx-auto w-full max-w-[95%] px-4 md:px-8">
+    <footer className="w-full bg-background">
+      <div className="mx-auto w-full max-w-[95%] px-4 md:px-8">
         <div className="py-12 lg:py-16">
           {}
           <div className="flex flex-col justify-between gap-12 lg:flex-row lg:gap-16">

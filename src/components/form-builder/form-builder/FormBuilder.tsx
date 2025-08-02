@@ -446,7 +446,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
             />
           </div>
           <Drawer onOpenChange={setShowFieldPalette} open={showFieldPalette}>
-            <DrawerContent className=" mx-auto w-full rounded-t-2xl p-4">
+            <DrawerContent className="mx-auto w-full rounded-t-2xl p-4">
               <div className="h-[70vh] w-full">
                 <FieldPalette onAddField={handleAddField} />
               </div>
