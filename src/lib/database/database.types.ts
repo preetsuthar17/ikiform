@@ -9,7 +9,7 @@ export interface Database {
           user_id: string;
           title: string;
           description: string | null;
-          slug: string | null;
+          slug?: string | null;
           schema: FormSchema;
           is_published: boolean;
           created_at: string;

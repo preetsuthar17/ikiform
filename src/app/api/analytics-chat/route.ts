@@ -590,11 +590,10 @@ export async function POST(req: NextRequest) {
         },
         ...sanitizedMessages.map((msg) => ({
           ...msg,
-          role: msg.role as 'system' | 'user' | 'assistant' | 'data',
+          role: msg.role as 'system' | 'user' | 'assistant',
         })),
       ],
       temperature: 0.1,
-      maxTokens: 500,
       topP: 0.8,
     });
 

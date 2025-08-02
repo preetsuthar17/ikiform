@@ -8,6 +8,8 @@ import { requirePremium } from '@/lib/utils/premium-check';
 import { sanitizeString } from '@/lib/utils/sanitize';
 import { createClient } from '@/utils/supabase/server';
 
+import { convertToModelMessages } from 'ai';
+
 const systemPrompt =
   process.env.AI_FORM_SYSTEM_PROMPT ||
   "You are an expert form builder AI. Always output ONLY the JSON schema for a form, never any explanation, markdown, or extra text. If the form is multi-step (has more than one step or block), always set 'multiStep': true in the schema's settings object.";
@@ -155,17 +157,17 @@ async function streamAIResponse({
 }) {
   const modelName = getGroqModel();
 
+
   const stream = await streamText({
     model: groq(modelName),
     messages: [
       { role: 'system', content: systemPrompt },
       ...sanitizedMessages.map((msg) => ({
         ...msg,
-        role: msg.role as 'system' | 'user' | 'assistant' | 'data',
+        role: msg.role as 'system' | 'user' | 'assistant',
       })),
     ],
     temperature: 0.1,
-    maxTokens: 4000,
 
     topP: 0.9,
     frequencyPenalty: 0,
