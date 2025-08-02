@@ -1,6 +1,6 @@
 import type { FormLogic } from '@/components/form-builder/logic-builder/types';
 
-// Pre-population configuration types
+
 export interface PrepopulationConfig {
  
   urlParam?: string;
@@ -37,7 +37,7 @@ export interface PrepopulationSettings {
   config: PrepopulationConfig;
 }
 
-// Enhanced FormField type with prepopulation support
+
 export interface FormFieldWithPrepopulation {
   id: string;
   type: string;
@@ -49,7 +49,7 @@ export interface FormFieldWithPrepopulation {
  
 }
 
-// Template management types
+
 export interface PrepopulationTemplate {
   id: string;
   user_id: string;
@@ -60,7 +60,7 @@ export interface PrepopulationTemplate {
   updated_at: string;
 }
 
-// Analytics and logging types
+
 export interface PrepopulationLog {
   id: string;
   form_id: string;
@@ -72,7 +72,7 @@ export interface PrepopulationLog {
   created_at: string;
 }
 
-// Privacy and consent types
+
 export interface PrivacySettings {
   requireConsent: boolean;
   consentMessage: string;
@@ -81,7 +81,7 @@ export interface PrivacySettings {
   anonymizeData: boolean;
 }
 
-// Engine response types
+
 export interface PrepopulationResult {
   success: boolean;
   value?: any;
@@ -90,7 +90,7 @@ export interface PrepopulationResult {
   executionTime: number;
 }
 
-// Field mapping types for complex scenarios
+
 export interface FieldMapping {
   sourceField: string;
   targetFieldId: string;
@@ -98,7 +98,7 @@ export interface FieldMapping {
   validation?: (value: any) => boolean;
 }
 
-// API engine specific types
+
 export interface ApiEngineConfig extends PrepopulationConfig {
   retryAttempts?: number;
   retryDelay?: number;
@@ -106,7 +106,7 @@ export interface ApiEngineConfig extends PrepopulationConfig {
   cacheTTL?: number;
 }
 
-// Previous submission engine types
+
 export interface PreviousSubmissionConfig extends PrepopulationConfig {
   matchCriteria: 'email' | 'ip' | 'custom';
   customMatchField?: string;

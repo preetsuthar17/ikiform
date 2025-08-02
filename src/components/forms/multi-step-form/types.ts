@@ -1,4 +1,5 @@
 import type { FormBlock, FormSchema } from '@/lib/database';
+import type { FormProgress } from '@/lib/form-progress/types';
 
 export interface MultiStepFormProps {
   formId: string;
@@ -11,6 +12,11 @@ export interface FormState {
   errors: Record<string, string>;
   submitting: boolean;
   submitted: boolean;
+ 
+  progress: FormProgress | null;
+  progressLoading: boolean;
+  progressSaving: boolean;
+  progressError: string | null;
 }
 
 export interface FormActions {
@@ -23,6 +29,7 @@ export interface FormActions {
   handleNext: () => void;
   handlePrevious: () => void;
   handleSubmit: () => Promise<void>;
+  clearProgress: () => Promise<void>;
 }
 
 export interface FormBlockData {

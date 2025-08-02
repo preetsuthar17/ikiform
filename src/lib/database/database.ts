@@ -8,7 +8,7 @@ export type FormSubmission =
   Database['public']['Tables']['form_submissions']['Row'];
 export type User = Database['public']['Tables']['users']['Row'];
 
-// In-memory cache with TTL
+
 const cache = new Map<string, { data: any; expires: number }>();
 const CACHE_TTL = 5 * 60 * 1000;
 
@@ -36,12 +36,16 @@ export const formsDb = {
   async createForm(userId: string, title: string, schema: FormSchema) {
     const supabase = createClient();
     const schemaWithDefaults = ensureDefaultFormSettings(schema);
+    const { generateUniqueSlug } = await import('@/lib/utils/slug');
+    
+    const slug = generateUniqueSlug(title);
 
     const { data, error } = await supabase
       .from('forms')
       .insert({
         user_id: userId,
         title,
+        slug,
         schema: schemaWithDefaults,
         is_published: false,
       })
@@ -50,7 +54,6 @@ export const formsDb = {
 
     if (error) throw error;
 
-   
     const userFormsKey = getCacheKey('getUserForms', userId);
     cache.delete(userFormsKey);
 
@@ -204,6 +207,11 @@ export const formsDb = {
   async updateForm(formId: string, updates: Partial<Form>) {
     const supabase = createClient();
 
+    if (updates.title && !updates.slug) {
+      const { generateUniqueSlug } = await import('@/lib/utils/slug');
+      updates.slug = generateUniqueSlug(updates.title);
+    }
+
     const { data, error } = await supabase
       .from('forms')
       .update({
@@ -216,13 +224,11 @@ export const formsDb = {
 
     if (error) throw error;
 
-   
     const formCacheKey = getCacheKey('getForm', formId);
     const basicCacheKey = getCacheKey('getFormBasic', formId);
     cache.delete(formCacheKey);
     cache.delete(basicCacheKey);
 
-   
     if (data.user_id) {
       const userFormsKey = getCacheKey('getUserForms', data.user_id);
       const userFormsDetailKey = getCacheKey(
@@ -600,17 +606,24 @@ export const formsDb = {
   },
 };
 
-// Server-side database functions (unchanged but can be optimized similarly)
-export const formsDbServer = {
-  async getPublicForm(formId: string) {
-    const supabase = await createServerClient();
 
-    const { data, error } = await supabase
+export const formsDbServer = {
+  async getPublicForm(identifier: string) {
+    const supabase = await createServerClient();
+    const { isUUID } = await import('@/lib/utils/slug');
+
+    let query = supabase
       .from('forms')
       .select('*')
-      .eq('id', formId)
-      .eq('is_published', true)
-      .single();
+      .eq('is_published', true);
+
+    if (isUUID(identifier)) {
+      query = query.eq('id', identifier);
+    } else {
+      query = query.eq('slug', identifier);
+    }
+
+    const { data, error } = await query.single();
 
     if (error) throw error;
 

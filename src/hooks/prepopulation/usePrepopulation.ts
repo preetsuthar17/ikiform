@@ -158,7 +158,7 @@ export function usePrepopulation(fields: FormField[]): UsePrepopulationResult {
   };
 }
 
-// Hook specifically for URL prepopulation (backward compatibility)
+
 export function useUrlPrepopulation(fields: FormField[]) {
   const urlFields = fields.filter(field => 
     field.prepopulation?.enabled && field.prepopulation.source === 'url'
@@ -169,7 +169,7 @@ export function useUrlPrepopulation(fields: FormField[]) {
   return { prepopulatedData, loading, errors };
 }
 
-// Hook for API prepopulation
+
 export function useApiPrepopulation(fields: FormField[]) {
   const apiFields = fields.filter(field => 
     field.prepopulation?.enabled && field.prepopulation.source === 'api'

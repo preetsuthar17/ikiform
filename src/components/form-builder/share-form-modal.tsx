@@ -22,6 +22,7 @@ interface ShareFormModalProps {
   isOpen: boolean;
   onClose: () => void;
   formId: string | null;
+  formSlug?: string | null;
   isPublished: boolean;
   onPublish: () => Promise<void>;
 }
@@ -37,6 +38,7 @@ export function ShareFormModal({
   isOpen,
   onClose,
   formId,
+  formSlug,
   isPublished,
   onPublish,
 }: ShareFormModalProps) {
@@ -48,7 +50,7 @@ export function ShareFormModal({
   const [generatingQR, setGeneratingQR] = useState(false);
 
   const shareUrl = formId
-    ? `${typeof window !== 'undefined' ? window.location.origin : ''}/forms/${formId}`
+    ? `${typeof window !== 'undefined' ? window.location.origin : ''}/f/${formSlug || formId}`
     : '';
 
   const tabItems = [

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { toast } from '@/hooks/use-toast';
 import { usePrepopulation } from '@/hooks/prepopulation/usePrepopulation';
+import { useFormProgress } from '@/hooks/form-progress';
 
 import type { FormField, FormSchema } from '@/lib/database';
 import { evaluateLogic } from '@/lib/forms/logic';
@@ -65,7 +66,29 @@ export const useSingleStepForm = (
   const initializedFieldsRef = useRef<Set<string>>(new Set());
 
  
+  const {
+    progress,
+    loading: progressLoading,
+    saving: progressSaving,
+    error: progressError,
+    saveProgress,
+    loadProgress,
+    clearProgress,
+  } = useFormProgress(formId, fields.length, {
+    enabled: true,
+    storage: 'localStorage',
+    autoSaveInterval: 3000,
+    retentionDays: 7,
+  });
+
   const { prepopulatedData, loading: prepopLoading, errors: prepopErrors } = usePrepopulation(fields);
+
+  useEffect(() => {
+    if (formId) {
+      console.log('Loading progress for form:', formId);
+      loadProgress();
+    }
+  }, [formId, loadProgress]);
 
   useEffect(() => {
     const currentFieldIds = new Set(fields.map((field) => field.id));
@@ -112,9 +135,51 @@ export const useSingleStepForm = (
     Object.entries(prepopErrors).forEach(([fieldId, error]) => {
       const field = fields.find(f => f.id === fieldId);
       const fieldLabel = field?.label || 'Field';
-      toast.error(`Failed to prepopulate ${fieldLabel}: ${error}`);
+     
     });
   }, [prepopErrors, fields]);
+
+ 
+  useEffect(() => {
+    if (progress && Object.keys(progress.formData).length > 0) {
+      setFormData(prevFormData => {
+        const hasUserInput = Object.entries(prevFormData).some(([fieldId, value]) => {
+          const field = fields.find(f => f.id === fieldId);
+          if (!field) return false;
+          
+          const defaultValue = getDefaultValueForField(field);
+          
+          if (Array.isArray(value) && Array.isArray(defaultValue)) {
+            return value.length > 0;
+          }
+          
+          return value !== defaultValue && value !== '' && value !== null && value !== undefined;
+        });
+        
+        if (!hasUserInput) {
+          console.log('Restoring form progress:', progress.formData);
+          return { ...prevFormData, ...progress.formData };
+        }
+        
+        return prevFormData;
+      });
+    }
+  }, [progress]);
+
+ 
+  useEffect(() => {
+    if (Object.keys(formData).length > 0) {
+      const filledFields = Object.values(formData).filter(value => 
+        value !== '' && value !== null && value !== undefined && 
+        !(Array.isArray(value) && value.length === 0)
+      ).length;
+      
+     
+      if (filledFields > 0) {
+        saveProgress(formData, 0);
+      }
+    }
+  }, [formData, saveProgress]);
 
   const logic = schema.logic || [];
   const logicActions = evaluateLogic(logic, formData);
@@ -181,6 +246,9 @@ export const useSingleStepForm = (
       if (result.success) {
         setSubmitted(true);
         toast.success('Form submitted successfully!');
+        
+       
+        clearProgress();
 
         if (schema.settings.redirectUrl) {
           setTimeout(() => {
@@ -210,5 +278,11 @@ export const useSingleStepForm = (
     handleSubmit,
     fieldVisibility,
     logicMessages,
+   
+    progress,
+    progressLoading,
+    progressSaving,
+    progressError,
+    clearProgress,
   };
 };

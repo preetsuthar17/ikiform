@@ -1,4 +1,5 @@
 import type { FormSchema } from '@/lib/database';
+import type { FormProgress } from '@/lib/form-progress/types';
 
 export interface PublicFormProps {
   formId: string;
@@ -11,6 +12,11 @@ export interface SingleStepFormState {
   errors: Record<string, string>;
   submitting: boolean;
   submitted: boolean;
+ 
+  progress: FormProgress | null;
+  progressLoading: boolean;
+  progressSaving: boolean;
+  progressError: string | null;
 }
 
 export interface SingleStepFormActions {
@@ -20,4 +26,5 @@ export interface SingleStepFormActions {
   setSubmitted: (submitted: boolean) => void;
   handleFieldValueChange: (fieldId: string, value: any) => void;
   handleSubmit: (e: React.FormEvent) => Promise<void>;
+  clearProgress: () => Promise<void>;
 }

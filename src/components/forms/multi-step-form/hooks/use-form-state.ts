@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { toast } from '@/hooks/use-toast';
 import { usePrepopulation } from '@/hooks/prepopulation/usePrepopulation';
+import { useFormProgress } from '@/hooks/form-progress';
 
 import type { FormBlock, FormField, FormSchema } from '@/lib/database';
 import type { LogicAction } from '@/lib/forms/logic';
@@ -68,7 +69,30 @@ export const useFormState = (
   const allFields = blocks.flatMap(block => block.fields || []);
   
  
+  const {
+    progress,
+    loading: progressLoading,
+    saving: progressSaving,
+    error: progressError,
+    saveProgress,
+    loadProgress,
+    clearProgress,
+  } = useFormProgress(formId, allFields.length, {
+    enabled: true,
+    storage: 'localStorage',
+    autoSaveInterval: 3000,
+    retentionDays: 7,
+  });
+
+  // Prepopulation hook
   const { prepopulatedData, loading: prepopLoading, errors: prepopErrors } = usePrepopulation(allFields);
+
+  // Initialize form and load any saved progress
+  useEffect(() => {
+    if (formId) {
+      loadProgress();
+    }
+  }, [formId, loadProgress]);
 
   useEffect(() => {
     const allFieldIds = new Set<string>();
@@ -123,9 +147,59 @@ export const useFormState = (
     Object.entries(prepopErrors).forEach(([fieldId, error]) => {
       const field = allFields.find(f => f.id === fieldId);
       const fieldLabel = field?.label || 'Field';
-      toast.error(`Failed to prepopulate ${fieldLabel}: ${error}`);
+     
     });
   }, [prepopErrors, allFields]);
+
+ 
+  useEffect(() => {
+    if (progress && Object.keys(progress.formData).length > 0) {
+      setFormData(prevFormData => {
+        // Check if current form data is essentially empty (only default values)
+        const hasUserInput = Object.entries(prevFormData).some(([fieldId, value]) => {
+          const field = allFields.find(f => f.id === fieldId);
+          if (!field) return false;
+          
+          const defaultValue = getDefaultValueForField(field);
+          
+          // Check if current value is different from default value
+          if (Array.isArray(value) && Array.isArray(defaultValue)) {
+            return value.length > 0;
+          }
+          
+          return value !== defaultValue && value !== '' && value !== null && value !== undefined;
+        });
+        
+        // Only restore if user hasn't started filling the form
+        if (!hasUserInput) {
+          console.log('Restoring form progress:', progress.formData);
+          return { ...prevFormData, ...progress.formData };
+        }
+        
+        return prevFormData;
+      });
+      
+      // Restore current step if available
+      if (progress.currentStep >= 0 && progress.currentStep < totalSteps) {
+        setCurrentStep(progress.currentStep);
+      }
+    }
+  }, [progress, totalSteps, allFields]);
+
+ 
+  useEffect(() => {
+    if (Object.keys(formData).length > 0) {
+      const filledFields = Object.values(formData).filter(value => 
+        value !== '' && value !== null && value !== undefined && 
+        !(Array.isArray(value) && value.length === 0)
+      ).length;
+      
+     
+      if (filledFields > 0) {
+        saveProgress(formData, currentStep);
+      }
+    }
+  }, [formData, currentStep, saveProgress]);
 
   const logic = schema.logic || [];
   const logicActions = evaluateLogic(logic, formData);
@@ -221,6 +295,7 @@ export const useFormState = (
 
       if (result.success) {
         setSubmitted(true);
+        clearProgress();
         toast.success('Form submitted successfully!');
 
         if (schema.settings.redirectUrl) {
@@ -244,6 +319,10 @@ export const useFormState = (
     errors,
     submitting,
     submitted,
+    progress,
+    progressLoading,
+    progressSaving,
+    progressError,
     setCurrentStep,
     setFormData,
     setErrors,
@@ -253,6 +332,7 @@ export const useFormState = (
     handleNext,
     handlePrevious,
     handleSubmit,
+    clearProgress,
     fieldVisibility,
     logicMessages,
   };
