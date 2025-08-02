@@ -25,7 +25,7 @@ export default function Hero() {
               href="https://vercel.com/oss?utm_source=ikiform"
               target="_blank"
             >
-              Backed by
+              Sponsored by
               <span className="flex items-center justify-center gap-2">
                 <svg
                   aria-label="Vercel logo"
