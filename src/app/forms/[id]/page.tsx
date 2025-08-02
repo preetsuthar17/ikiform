@@ -21,13 +21,14 @@ export async function generateMetadata({
       form.schema?.settings?.description ||
       form.description ||
       'Fill out this form.';
+    const identifier = form.slug || id;
     return {
       title,
       description,
       openGraph: {
         title,
         description,
-        url: `https://www.ikiform.com/forms/${id}`,
+        url: `https://www.ikiform.com/f/${identifier}`,
         type: 'website',
       },
       twitter: {

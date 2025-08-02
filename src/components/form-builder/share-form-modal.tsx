@@ -122,22 +122,15 @@ export function ShareFormModal({
 
     setCopying(true);
     try {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(shareUrl);
-        toast.success('Link copied to clipboard!');
-      } else {
-        const textarea = document.createElement('textarea');
-        textarea.value = shareUrl;
-        textarea.style.position = 'absolute';
-        textarea.style.left = '-9999px';
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-        toast.success('Link copied to clipboard!');
-      }
+      const { copyWithToast } = await import('@/lib/utils/clipboard');
+      await copyWithToast(
+        shareUrl,
+        'Link copied to clipboard!',
+        'Failed to copy link. Please copy manually.'
+      );
     } catch (error) {
       console.error('Failed to copy link:', error);
+      const { toast } = await import('@/hooks/use-toast');
       toast.error('Failed to copy link. Please copy manually.');
     } finally {
       setCopying(false);

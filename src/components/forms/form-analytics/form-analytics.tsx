@@ -303,6 +303,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
       />
       <ShareFormModal
         formId={form?.id || null}
+        formSlug={form?.slug || null}
         isOpen={isShareModalOpen}
         isPublished={!!form?.is_published}
         onClose={() => setIsShareModalOpen(false)}

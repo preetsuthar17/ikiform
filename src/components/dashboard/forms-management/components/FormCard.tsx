@@ -13,6 +13,7 @@ import { FormActions } from './FormActions';
 export function FormCard({
   form,
   onEdit,
+  onViewForm,
   onViewAnalytics,
   onShare,
   onDelete,
@@ -57,11 +58,13 @@ export function FormCard({
         form={form}
         onDelete={onDelete}
         onEdit={onEdit}
+        onViewForm={onViewForm}
         onShare={handleShare}
         onViewAnalytics={onViewAnalytics}
       />
       <ShareFormModal
         formId={form?.id || null}
+        formSlug={form?.slug || null}
         isOpen={isShareModalOpen}
         isPublished={!!form?.is_published}
         onClose={() => setIsShareModalOpen(false)}

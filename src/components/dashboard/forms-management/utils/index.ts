@@ -27,8 +27,9 @@ export function formatDate(dateString: string): string {
 /**
  * Generate share URL for a form
  */
-export function generateShareUrl(formId: string): string {
-  return `${window.location.origin}/forms/${formId}`;
+export function generateShareUrl(form: Form): string {
+  const identifier = form.slug || form.id;
+  return `${window.location.origin}/f/${identifier}`;
 }
 
 /**
@@ -42,5 +43,6 @@ export function encodePromptForUrl(prompt: string): string {
  * Copy text to clipboard
  */
 export async function copyToClipboard(text: string): Promise<void> {
-  await navigator.clipboard.writeText(text);
+  const { copyToClipboard: robustCopy } = await import('@/lib/utils/clipboard');
+  await robustCopy(text);
 }

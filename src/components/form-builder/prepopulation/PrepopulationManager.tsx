@@ -139,7 +139,7 @@ export function PrepopulationManager({
     toast.success('Disabled prepopulation for all fields');
   };
 
-  const generatePreviewUrl = () => {
+  const generatePreviewUrl = async () => {
     const baseUrl =
       typeof window !== 'undefined'
         ? window.location.origin + window.location.pathname
@@ -167,8 +167,13 @@ export function PrepopulationManager({
     });
 
     const previewUrl = `${baseUrl}?${params.toString()}`;
-    navigator.clipboard.writeText(previewUrl);
-    toast.success('Preview URL copied to clipboard!');
+    
+    const { copyWithToast } = await import('@/lib/utils/clipboard');
+    await copyWithToast(
+      previewUrl,
+      'Preview URL copied to clipboard!',
+      'Failed to copy preview URL'
+    );
   };
 
   return (

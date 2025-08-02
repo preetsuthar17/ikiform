@@ -45,8 +45,9 @@ export function useFormsManagement() {
     router.push(`/form-builder/${formId}`);
   };
 
-  const viewForm = (formId: string) => {
-    window.open(`/forms/${formId}`, '_blank');
+  const viewForm = (form: Form) => {
+    const identifier = form.slug || form.id;
+    window.open(`/f/${identifier}`, '_blank');
   };
 
   const viewAnalytics = (formId: string) => {
@@ -60,7 +61,7 @@ export function useFormsManagement() {
         await loadForms();
       }
 
-      const shareUrl = generateShareUrl(form.id);
+      const shareUrl = generateShareUrl(form);
       await copyToClipboard(shareUrl);
     } catch (error) {
       console.error('Error sharing form:', error);

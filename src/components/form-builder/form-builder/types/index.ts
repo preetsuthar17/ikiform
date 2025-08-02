@@ -21,6 +21,7 @@ export interface FormBuilderState {
   showShareModal: boolean;
   isNewForm: boolean;
   formSchema: FormSchema;
+  formSlug: string | null;
 }
 
 export interface FormBuilderActions {
@@ -38,6 +39,7 @@ export interface FormBuilderActions {
   setShowCreationWizard: (show: boolean) => void;
   setShowShareModal: (show: boolean) => void;
   setIsNewForm: (isNew: boolean) => void;
+  setFormSlug: (slug: string | null) => void;
   setFormSchema: (
     schema: FormSchema | ((prev: FormSchema) => FormSchema)
   ) => void;
@@ -92,6 +94,7 @@ export interface FormBuilderModalsProps {
   showShareModal: boolean;
   formSchema: FormSchema;
   formId?: string;
+  formSlug?: string | null;
   isPublished: boolean;
   onCloseSettings: () => void;
   onCloseFormSettings: () => void;

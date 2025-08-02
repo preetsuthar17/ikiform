@@ -139,7 +139,7 @@ export function BulkPrepopulation({
     toast(`Disabled prepopulation for ${disabled} fields`);
   };
 
-  const generatePreviewUrl = () => {
+  const generatePreviewUrl = async () => {
     const currentPath = window.location.pathname;
     const formIdMatch = currentPath.match(/\/form-builder\/([^/]+)/);
     const formId = formIdMatch ? formIdMatch[1] : 'form-id';
@@ -160,9 +160,13 @@ export function BulkPrepopulation({
     });
 
     const previewUrl = `${baseUrl}?${params.toString()}`;
-    navigator.clipboard.writeText(previewUrl);
-
-    toast('Preview URL with sample data has been copied to your clipboard');
+    
+    const { copyWithToast } = await import('@/lib/utils/clipboard');
+    await copyWithToast(
+      previewUrl,
+      'Preview URL with sample data has been copied to your clipboard',
+      'Failed to copy preview URL'
+    );
   };
 
   const toggleBulkPrepopulation = (enabled: boolean) => {

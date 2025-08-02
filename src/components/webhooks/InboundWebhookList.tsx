@@ -28,10 +28,14 @@ function InboundWebhookDocsDrawer({
     },
     {} as Record<string, string>
   );
-  function handleCopy(text: string, type: string) {
-    navigator.clipboard.writeText(text);
-    setCopied(type);
-    setTimeout(() => setCopied(null), 1200);
+  async function handleCopy(text: string, type: string) {
+    const { copyToClipboard } = await import('@/lib/utils/clipboard');
+    const success = await copyToClipboard(text);
+    
+    if (success) {
+      setCopied(type);
+      setTimeout(() => setCopied(null), 1200);
+    }
   }
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black bg-opacity-40 md:items-center">

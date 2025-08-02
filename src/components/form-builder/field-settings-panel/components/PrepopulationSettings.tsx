@@ -48,7 +48,7 @@ export function PrepopulationSettings({
     });
   };
 
-  const generatePreviewUrl = () => {
+  const generatePreviewUrl = async () => {
     if (!prepopulation.config.urlParam) {
       toast.error('Please enter a URL parameter name first');
       return;
@@ -65,8 +65,13 @@ export function PrepopulationSettings({
     const url = `${baseUrl}?${params.toString()}`;
 
     setPreviewUrl(url);
-    navigator.clipboard.writeText(url);
-    toast.success('Preview URL copied to clipboard!');
+    
+    const { copyWithToast } = await import('@/lib/utils/clipboard');
+    await copyWithToast(
+      url,
+      'Preview URL copied to clipboard!',
+      'Failed to copy preview URL'
+    );
   };
 
   const testApiEndpoint = async () => {

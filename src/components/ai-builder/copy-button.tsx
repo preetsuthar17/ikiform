@@ -8,6 +8,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { copyWithToast } from '@/lib/utils/clipboard';
 
 interface CopyButtonProps {
   schema: any;
@@ -17,9 +18,16 @@ export function CopyButton({ schema }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(JSON.stringify(schema, null, 2));
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+    const success = await copyWithToast(
+      JSON.stringify(schema, null, 2),
+      'Schema copied to clipboard!',
+      'Failed to copy schema'
+    );
+    
+    if (success) {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    }
   };
 
   return (

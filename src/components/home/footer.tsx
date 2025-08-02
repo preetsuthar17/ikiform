@@ -243,7 +243,7 @@ export default function Footer() {
                     <li>
                       <Link
                         className="text-muted-foreground text-sm transition-colors hover:text-primary hover:underline"
-                        href="/forms/de330706-1cdc-494c-9d04-7afef3d3e20b"
+                        href="/f/de330706-1cdc-494c-9d04-7afef3d3e20b"
                         target="_blank"
                       >
                         Feedback

@@ -127,7 +127,8 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
 
   const getFormUrl = () => {
     const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
-    return `${baseUrl}/forms/${form.id}`;
+    const identifier = form.slug || form.id;
+    return `${baseUrl}/f/${identifier}`;
   };
 
   const getFieldLabelForForm = (fieldId: string) =>
@@ -274,6 +275,7 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
 
         <ShareFormModal
           formId={form.id}
+          formSlug={form.slug || null}
           isOpen={isShareModalOpen}
           isPublished={form.is_published}
           onClose={() => setIsShareModalOpen(false)}

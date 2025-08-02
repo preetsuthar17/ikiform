@@ -1,6 +1,6 @@
 import { Check, Copy, Download } from 'lucide-react';
 import type React from 'react';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { OptimizedImage } from '@/components/other/optimized-image';
 import { Badge } from '@/components/ui/badge';
@@ -13,7 +13,6 @@ import {
   ModalHeader,
   ModalTitle,
 } from '@/components/ui/modal';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import {
   Tooltip,
   TooltipContent,
@@ -47,9 +46,15 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
 }) => {
   const [copied, setCopied] = useState(false);
 
+  useEffect(() => {
+    if (!isOpen) {
+      setCopied(false);
+    }
+  }, [isOpen, submission?.id]);
+
   if (!submission) return null;
 
-  const handleCopySubmissionData = async () => {
+  const handleCopySubmissionData = useCallback(async () => {
     try {
       const submissionText = Object.entries(submission.submission_data)
         .map(
@@ -62,17 +67,24 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
         )
         .join('\n\n');
 
-      await navigator.clipboard.writeText(submissionText);
-      toast.success('Submission data copied to clipboard');
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      const { copyWithToast } = await import('@/lib/utils/clipboard');
+      const success = await copyWithToast(
+        submissionText,
+        'Submission data copied to clipboard',
+        'Failed to copy submission data'
+      );
+      
+      if (success) {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }
     } catch (error) {
       console.error('Failed to copy submission data:', error);
     }
-  };
+  }, [submission.submission_data, getFieldLabel]);
 
   return (
-    <Modal onOpenChange={onClose} open={isOpen}>
+    <Modal key={submission?.id} onOpenChange={onClose} open={isOpen}>
       <ModalContent className="max-w-3xl">
         <ModalHeader className="items-left flex gap-4 border-border border-b">
           <ModalTitle>Submission Details</ModalTitle>
@@ -90,8 +102,8 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
             </div>
 
             {}
-            <div className="flex items-center gap-1">
-              <TooltipProvider>
+            <TooltipProvider>
+              <div className="flex items-center gap-1">
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
@@ -110,10 +122,8 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                     Copy submission data
                   </TooltipContent>
                 </Tooltip>
-              </TooltipProvider>
 
-              {onExport && (
-                <TooltipProvider>
+                {onExport && (
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Button
@@ -126,11 +136,11 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                     </TooltipTrigger>
                     <TooltipContent size="sm">Export submission</TooltipContent>
                   </Tooltip>
-                </TooltipProvider>
-              )}
-            </div>
+                )}
+              </div>
+            </TooltipProvider>
           </div>
-          <ScrollArea className="h-[60vh]">
+          <div className="max-h-[60vh] overflow-y-auto">
             <div className="flex flex-col gap-4">
               {Object.entries(submission.submission_data).map(
                 ([key, value]) => {
@@ -282,7 +292,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                 }
               )}
             </div>
-          </ScrollArea>
+          </div>
         </div>
       </ModalContent>
     </Modal>

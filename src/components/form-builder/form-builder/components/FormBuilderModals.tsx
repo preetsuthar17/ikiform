@@ -25,6 +25,7 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
   showShareModal,
   formSchema,
   formId,
+  formSlug,
   isPublished,
   onCloseSettings,
   onCloseFormSettings,
@@ -147,6 +148,7 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
       {}
       <ShareFormModal
         formId={formId ?? null}
+        formSlug={formSlug ?? null}
         isOpen={showShareModal}
         isPublished={isPublished}
         onClose={onCloseShareModal}

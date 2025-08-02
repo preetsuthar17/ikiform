@@ -46,6 +46,7 @@ export const useFormBuilder = (formId?: string) => {
     showCreationWizard: false,
     showShareModal: false,
     isNewForm: !formId,
+    formSlug: null,
     formSchema: createDefaultFormSchema({
       title: FORM_BUILDER_CONSTANTS.DEFAULT_FORM_TITLE,
       description: FORM_BUILDER_CONSTANTS.DEFAULT_FORM_DESCRIPTION,
@@ -87,6 +88,7 @@ export const useFormBuilder = (formId?: string) => {
     setShowShareModal: (showShareModal) =>
       setState((prev) => ({ ...prev, showShareModal })),
     setIsNewForm: (isNewForm) => setState((prev) => ({ ...prev, isNewForm })),
+    setFormSlug: (formSlug) => setState((prev) => ({ ...prev, formSlug })),
     setFormSchema: (schema) =>
       setState((prev) => ({
         ...prev,
@@ -208,6 +210,7 @@ export const useFormBuilder = (formId?: string) => {
 
       actions.setFormSchema(form.schema);
       actions.setIsPublished(form.is_published);
+      actions.setFormSlug(form.slug || null);
       lastSavedSchemaRef.current = {
         ...form.schema,
         fields: [...form.schema.fields],

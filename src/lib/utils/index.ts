@@ -1,3 +1,4 @@
+export * from './clipboard';
 export * from './color-utils';
 export * from './premium-check';
 export * from './utils';

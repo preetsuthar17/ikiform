@@ -336,10 +336,20 @@ function LogicBuilderPanelContent({
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(JSON.stringify(logic, null, 2));
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {}
+      const { copyWithToast } = await import('@/lib/utils/clipboard');
+      const success = await copyWithToast(
+        JSON.stringify(logic, null, 2),
+        'Logic rules copied to clipboard!',
+        'Failed to copy logic rules'
+      );
+      
+      if (success) {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }
+    } catch (error) {
+      console.error('Failed to copy logic rules:', error);
+    }
   };
 
   const fieldLogicMap = React.useMemo(

@@ -141,7 +141,7 @@ export default function Hero() {
                     size="lg"
                   >
                     <Link
-                      href="/forms/24ec3d8d-40ef-4143-b289-4e43c112d80e"
+                      href="/f/24ec3d8d-40ef-4143-b289-4e43c112d80e"
                       target="_blank"
                     >
                       Form Demo

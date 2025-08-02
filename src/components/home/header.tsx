@@ -66,7 +66,7 @@ export default function Header() {
         <Button asChild>
           <Link
             className="flex items-center gap-2 font-medium"
-            href="/forms/de330706-1cdc-494c-9d04-7afef3d3e20b"
+            href="/f/de330706-1cdc-494c-9d04-7afef3d3e20b"
           >
             <MessageCircleIcon />
             Feedback
@@ -129,7 +129,7 @@ export default function Header() {
                 <Button asChild className="w-full justify-center">
                   <Link
                     className="flex items-center gap-2 font-medium"
-                    href="/forms/de330706-1cdc-494c-9d04-7afef3d3e20b"
+                    href="/f/de330706-1cdc-494c-9d04-7afef3d3e20b"
                   >
                     <MessageCircleIcon />
                     Feedback

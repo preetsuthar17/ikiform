@@ -7,6 +7,7 @@ import { FormCard } from './FormCard';
 interface FormsGridProps {
   forms: Form[];
   onEdit: (formId: string) => void;
+  onViewForm: (form: Form) => void;
   onViewAnalytics: (formId: string) => void;
   onShare: (form: Form) => void;
   onDelete: (formId: string, formTitle: string) => void;
@@ -15,6 +16,7 @@ interface FormsGridProps {
 export function FormsGrid({
   forms,
   onEdit,
+  onViewForm,
   onViewAnalytics,
   onShare,
   onDelete,
@@ -27,6 +29,7 @@ export function FormsGrid({
           key={form.id}
           onDelete={onDelete}
           onEdit={onEdit}
+          onViewForm={onViewForm}
           onShare={onShare}
           onViewAnalytics={onViewAnalytics}
         />

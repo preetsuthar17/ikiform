@@ -479,6 +479,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
         />
         <FormBuilderModals
           formId={formId}
+          formSlug={state.formSlug}
           formSchema={state.formSchema}
           isPublished={state.isPublished}
           onCloseCreationWizard={() => actions.setShowCreationWizard(false)}
@@ -554,6 +555,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 
       <FormBuilderModals
         formId={formId}
+        formSlug={state.formSlug}
         formSchema={state.formSchema}
         isPublished={state.isPublished}
         onCloseCreationWizard={() => actions.setShowCreationWizard(false)}
