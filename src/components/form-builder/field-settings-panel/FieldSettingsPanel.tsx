@@ -9,6 +9,7 @@ import {
   ErrorMessages,
   FieldSpecificSettings,
   OptionsSettings,
+  PrepopulationSettings,
   SettingsPanelHeader,
   ValidationSettings,
   VisualSettings,
@@ -50,6 +51,7 @@ export function FieldSettingsPanel({
           {['select', 'radio', 'checkbox', 'poll'].includes(field.type) && (
             <OptionsSettings field={field} onFieldUpdate={onFieldUpdate} />
           )}
+          <PrepopulationSettings field={field} onFieldUpdate={onFieldUpdate} />
           <ValidationSettings
             field={field}
             onUpdateValidation={updateValidation}

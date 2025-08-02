@@ -1,6 +1,7 @@
 import { Settings, Zap } from 'lucide-react';
 import React from 'react';
 import type { FormLogic } from '@/components/form-builder/logic-builder/types';
+import type { FormSchema } from '@/lib/database';
 import {
   ResizableHandle,
   ResizablePanel,
@@ -48,6 +49,21 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
     if (onLogicChange) onLogicChange(logic);
   };
   const allFields = getAllFields(formSchema);
+
+  const handleSchemaUpdate = (updatedSchema: FormSchema) => {
+   
+    if (updatedSchema.fields && updatedSchema.fields !== formSchema.fields) {
+      onFieldsReorder(updatedSchema.fields);
+    }
+   
+    if (updatedSchema.blocks && updatedSchema.blocks !== formSchema.blocks) {
+      onBlocksUpdate(updatedSchema.blocks);
+    }
+   
+    if (updatedSchema.settings && updatedSchema.settings !== formSchema.settings) {
+      onFormSettingsUpdate(updatedSchema.settings);
+    }
+  };
   return (
     <ResizablePanelGroup className="h-full" direction="horizontal">
       {}
@@ -69,7 +85,11 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
             selectedFieldId={selectedFieldId}
           />
         ) : (
-          <FieldPalette onAddField={onFieldAdd} />
+          <FieldPalette 
+            onAddField={onFieldAdd} 
+            formSchema={formSchema}
+            onSchemaUpdate={handleSchemaUpdate}
+          />
         )}
       </ResizablePanel>
 

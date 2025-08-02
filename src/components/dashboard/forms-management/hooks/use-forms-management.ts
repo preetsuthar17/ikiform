@@ -28,7 +28,7 @@ export function useFormsManagement() {
 
     try {
       const userForms = await formsDb.getUserForms(user.id);
-      setForms(userForms); // Now works with proper typing
+      setForms(userForms);
     } catch (error) {
       console.error('Error loading forms:', error);
       toast.error('Failed to load forms');

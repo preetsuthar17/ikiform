@@ -11,7 +11,9 @@ import { PaletteHeader } from './PaletteHeader';
 
 export function FullPalette({
   onAddField,
-}: Pick<FieldPaletteProps, 'onAddField'>) {
+  formSchema,
+  onSchemaUpdate,
+}: Pick<FieldPaletteProps, 'onAddField' | 'formSchema' | 'onSchemaUpdate'>) {
   return (
     <div className="flex h-full flex-col border-border bg-card p-2 lg:border-r lg:p-4">
       <ScrollArea className="h-full">
@@ -20,6 +22,7 @@ export function FullPalette({
             description={PALETTE_CONFIG.HEADER.DESCRIPTION}
             title={PALETTE_CONFIG.HEADER.TITLE}
           />
+          
           <DragDropContext onDragEnd={() => {}}>
             <Droppable
               direction="vertical"

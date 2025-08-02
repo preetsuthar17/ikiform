@@ -10,7 +10,7 @@ export type User = Database['public']['Tables']['users']['Row'];
 
 // In-memory cache with TTL
 const cache = new Map<string, { data: any; expires: number }>();
-const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+const CACHE_TTL = 5 * 60 * 1000;
 
 function getCacheKey(method: string, ...args: any[]): string {
   return `${method}:${JSON.stringify(args)}`;
@@ -50,7 +50,7 @@ export const formsDb = {
 
     if (error) throw error;
 
-    // Invalidate user forms cache
+   
     const userFormsKey = getCacheKey('getUserForms', userId);
     cache.delete(userFormsKey);
 
@@ -64,7 +64,7 @@ export const formsDb = {
 
     const supabase = createClient();
 
-    // Optimize: Only select necessary fields for list view
+   
     const { data, error } = await supabase
       .from('forms')
       .select(
@@ -77,7 +77,7 @@ export const formsDb = {
 
     const forms = data.map((form) => ({
       ...form,
-      schema: {} as FormSchema, // Empty schema object instead of null for type consistency
+      schema: {} as FormSchema,
     }));
 
     setCache(cacheKey, forms);
@@ -139,7 +139,7 @@ export const formsDb = {
 
     const supabase = createClient();
 
-    // Only fetch essential fields
+   
     const { data, error } = await supabase
       .from('forms')
       .select(
@@ -157,7 +157,7 @@ export const formsDb = {
   async getMultipleForms(formIds: string[]) {
     if (formIds.length === 0) return [];
 
-    // Check cache for each form
+   
     const cachedForms: Form[] = [];
     const uncachedIds: string[] = [];
 
@@ -177,7 +177,7 @@ export const formsDb = {
 
     const supabase = createClient();
 
-    // Batch fetch uncached forms
+   
     const { data, error } = await supabase
       .from('forms')
       .select('*')
@@ -191,7 +191,7 @@ export const formsDb = {
         schema: ensureDefaultFormSettings(form.schema),
       };
 
-      // Cache each form
+     
       const cacheKey = getCacheKey('getForm', form.id);
       setCache(cacheKey, processedForm);
 
@@ -216,13 +216,13 @@ export const formsDb = {
 
     if (error) throw error;
 
-    // Invalidate caches
+   
     const formCacheKey = getCacheKey('getForm', formId);
     const basicCacheKey = getCacheKey('getFormBasic', formId);
     cache.delete(formCacheKey);
     cache.delete(basicCacheKey);
 
-    // Also invalidate user forms cache if we have user_id
+   
     if (data.user_id) {
       const userFormsKey = getCacheKey('getUserForms', data.user_id);
       const userFormsDetailKey = getCacheKey(
@@ -239,14 +239,14 @@ export const formsDb = {
   async deleteForm(formId: string) {
     const supabase = createClient();
 
-    // Get form first to invalidate user cache
+   
     const form = await this.getFormBasic(formId);
 
     const { error } = await supabase.from('forms').delete().eq('id', formId);
 
     if (error) throw error;
 
-    // Invalidate caches
+   
     const formCacheKey = getCacheKey('getForm', formId);
     const basicCacheKey = getCacheKey('getFormBasic', formId);
     cache.delete(formCacheKey);
@@ -278,7 +278,7 @@ export const formsDb = {
 
     if (error) throw error;
 
-    // Invalidate caches
+   
     const formCacheKey = getCacheKey('getForm', formId);
     const basicCacheKey = getCacheKey('getFormBasic', formId);
     cache.delete(formCacheKey);
@@ -316,7 +316,7 @@ export const formsDb = {
 
     if (error) throw error;
 
-    // Invalidate submissions cache
+   
     const submissionsCacheKey = getCacheKey('getFormSubmissions', formId);
     cache.delete(submissionsCacheKey);
 
@@ -374,7 +374,7 @@ export const formsDb = {
     return data;
   },
 
-  // AI Builder methods with caching
+ 
   async saveAIBuilderMessage(
     userId: string,
     sessionId: string,
@@ -398,7 +398,7 @@ export const formsDb = {
 
     if (error) throw error;
 
-    // Invalidate chat history cache
+   
     const historyCacheKey = getCacheKey(
       'getAIBuilderChatHistory',
       userId,
@@ -465,7 +465,7 @@ export const formsDb = {
     return result;
   },
 
-  // AI Analytics methods with caching
+ 
   async saveAIAnalyticsMessage(
     userId: string,
     formId: string,
@@ -491,7 +491,7 @@ export const formsDb = {
 
     if (error) throw error;
 
-    // Invalidate chat history cache
+   
     const historyCacheKey = getCacheKey(
       'getAIAnalyticsChatHistory',
       userId,
@@ -574,7 +574,7 @@ export const formsDb = {
     return result;
   },
 
-  // Cache management utilities
+ 
   clearCache() {
     cache.clear();
   },

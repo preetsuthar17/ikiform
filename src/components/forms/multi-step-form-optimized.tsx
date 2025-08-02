@@ -1,14 +1,13 @@
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 import type { MultiStepFormProps } from './multi-step-form/types';
-import { MultiStepFormSkeleton } from './multi-step-form-skeleton';
 
 const MultiStepFormClient = dynamic(
   () =>
     import('./multi-step-form-client').then((mod) => mod.MultiStepFormClient),
   {
     ssr: false,
-    loading: () => <MultiStepFormSkeleton />,
+    loading: () => <></>,
   }
 );
 
@@ -21,7 +20,7 @@ export function MultiStepFormOptimized(
   props: MultiStepFormProps & { dir?: string }
 ) {
   return (
-    <Suspense fallback={<MultiStepFormSkeleton />}>
+    <Suspense fallback={<></>}>
       <MultiStepFormClient {...props} />
     </Suspense>
   );

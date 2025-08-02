@@ -83,7 +83,7 @@ const AIFormBuilderPreview = () => {
       if (currentStep < steps.length) {
         setCurrentStep((prev) => prev + 1);
       } else {
-        // Complete cycle, wait a bit then restart
+       
         setIsGenerating(false);
         setTimeout(() => {
           resetAndStart();
@@ -263,13 +263,13 @@ const AnalyticsPreview = () => {
     }, 500);
 
     return () => clearInterval(interval);
-  }, [isHovered, baseHeights.length]); // Fixed: use baseHeights.length instead of baseHeights array
+  }, [isHovered, baseHeights.length]);
 
   useEffect(() => {
     if (!isHovered) {
       setAnimatedHeights(baseHeights);
     }
-  }, [isHovered]); // Fixed: removed baseHeights dependency
+  }, [isHovered]);
 
   return (
     <div

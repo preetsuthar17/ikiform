@@ -1,9 +1,11 @@
 import type { LucideIcon } from 'lucide-react';
-import type { FormField } from '@/lib/database';
+import type { FormField, FormSchema } from '@/lib/database';
 
 export interface FieldPaletteProps {
   onAddField: (fieldType: FormField['type']) => void;
   compact?: boolean;
+  formSchema?: FormSchema;
+  onSchemaUpdate?: (schema: FormSchema) => void;
 }
 
 export interface FieldTypeConfig {

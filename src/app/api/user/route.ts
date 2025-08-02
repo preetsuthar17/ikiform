@@ -95,7 +95,7 @@ export async function POST(_request: NextRequest) {
     setCachedUser(sanitizedEmail, upsertedUser);
 
     const isNewUser =
-      new Date(upsertedUser.created_at).getTime() > Date.now() - 5000; // 5 seconds tolerance
+      new Date(upsertedUser.created_at).getTime() > Date.now() - 5000;
 
     if (isNewUser) {
       sendWelcomeEmail({ to: sanitizedEmail, name }).catch(console.error);

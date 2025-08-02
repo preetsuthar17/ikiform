@@ -1,0 +1,393 @@
+import React, { useState } from 'react';
+import { Card } from '@/components/ui/card';
+import { Switch } from '@/components/ui/switch';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalTitle,
+  ModalTrigger,
+} from '@/components/ui/modal';
+import { 
+  Settings,
+  Zap, 
+  Globe, 
+  User, 
+  History,
+  CheckCircle,
+  AlertCircle,
+  HelpCircle,
+  Save,
+  Eye,
+  Copy,
+  Trash2,
+  Plus
+} from 'lucide-react';
+import { toast } from '@/hooks/use-toast';
+import type { FormField, FormSchema } from '@/lib/database';
+
+interface PrepopulationManagerProps {
+  schema: FormSchema;
+  onSchemaUpdate: (schema: FormSchema) => void;
+}
+
+interface GlobalPrepopulationTemplate {
+  id: string;
+  name: string;
+  description: string;
+  config: {
+    source: 'url' | 'api' | 'profile' | 'previous';
+    mappings: Array<{
+      fieldId: string;
+      sourceKey: string;
+      fallbackValue?: string;
+    }>;
+    apiEndpoint?: string;
+    apiMethod?: 'GET' | 'POST';
+    requireConsent?: boolean;
+  };
+}
+
+export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationManagerProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [templates, setTemplates] = useState<GlobalPrepopulationTemplate[]>([]);
+  const [selectedTemplate, setSelectedTemplate] = useState<string>('');
+
+  const fieldsWithPrepopulation = schema.fields?.filter(field => field.prepopulation?.enabled) || [];
+  const prepopulationSources = Array.from(new Set(fieldsWithPrepopulation.map(field => field.prepopulation?.source))).filter(Boolean);
+
+  const getSourceIcon = (source: string) => {
+    switch (source) {
+      case 'url':
+        return <Globe className="h-3 w-3" />;
+      case 'api':
+        return <Zap className="h-3 w-3" />;
+      case 'profile':
+        return <User className="h-3 w-3" />;
+      case 'previous':
+        return <History className="h-3 w-3" />;
+      default:
+        return <HelpCircle className="h-3 w-3" />;
+    }
+  };
+
+  const bulkEnablePrepopulation = (source: 'url' | 'api' | 'profile' | 'previous') => {
+    if (!schema.fields) return;
+
+    const updatedFields = schema.fields.map(field => {
+     
+      const shouldEnable = ['text', 'email', 'phone', 'address'].includes(field.type);
+      
+      if (shouldEnable) {
+        return {
+          ...field,
+          prepopulation: {
+            enabled: true,
+            source,
+            config: {
+              urlParam: field.type === 'email' ? 'email' : field.label.toLowerCase().replace(/\s+/g, '_'),
+              fallbackValue: '',
+              overwriteExisting: false,
+              requireConsent: false,
+            }
+          }
+        };
+      }
+      return field;
+    });
+
+    onSchemaUpdate({
+      ...schema,
+      fields: updatedFields
+    });
+
+    toast.success(`Enabled ${source} prepopulation for compatible fields`);
+  };
+
+  const disableAllPrepopulation = () => {
+    if (!schema.fields) return;
+
+    const updatedFields = schema.fields.map(field => ({
+      ...field,
+      prepopulation: field.prepopulation ? { ...field.prepopulation, enabled: false } : undefined
+    }));
+
+    onSchemaUpdate({
+      ...schema,
+      fields: updatedFields
+    });
+
+    toast.success('Disabled prepopulation for all fields');
+  };
+
+  const generatePreviewUrl = () => {
+    const baseUrl = typeof window !== 'undefined' 
+      ? window.location.origin + window.location.pathname
+      : 'https://yoursite.com/form/123';
+    
+    const urlFields = fieldsWithPrepopulation.filter(field => 
+      field.prepopulation?.source === 'url' && field.prepopulation.config.urlParam
+    );
+
+    if (urlFields.length === 0) {
+      toast.error('No URL parameters configured');
+      return;
+    }
+
+    const params = new URLSearchParams();
+    urlFields.forEach(field => {
+      if (field.prepopulation?.config.urlParam) {
+        params.set(field.prepopulation.config.urlParam, `Sample ${field.label}`);
+      }
+    });
+
+    const previewUrl = `${baseUrl}?${params.toString()}`;
+    navigator.clipboard.writeText(previewUrl);
+    toast.success('Preview URL copied to clipboard!');
+  };
+
+  return (
+    <Modal open={isOpen} onOpenChange={setIsOpen}>
+      <ModalTrigger asChild>
+        <Button variant="outline" className="flex items-center gap-2">
+          <Settings className="h-4 w-4" />
+          Prepopulation Manager
+          {fieldsWithPrepopulation.length > 0 && (
+            <Badge variant="secondary">{fieldsWithPrepopulation.length}</Badge>
+          )}
+        </Button>
+      </ModalTrigger>
+      
+      <ModalContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+        <ModalHeader>
+          <ModalTitle className="flex items-center gap-2">
+            <Zap className="h-5 w-5 text-primary" />
+            Prepopulation Manager
+          </ModalTitle>
+        </ModalHeader>
+
+        <div className="space-y-6 p-6">
+          {/* Overview Section */}
+          <Card className="p-4">
+            <h3 className="font-medium mb-3">Current Prepopulation Status</h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              <div className="flex items-center gap-2 p-3 rounded-md bg-blue-50 border border-blue-200">
+                <CheckCircle className="h-4 w-4 text-blue-600" />
+                <div>
+                  <div className="font-medium text-blue-900">{fieldsWithPrepopulation.length}</div>
+                  <div className="text-blue-700 text-sm">Fields Enabled</div>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-2 p-3 rounded-md bg-green-50 border border-green-200">
+                <Zap className="h-4 w-4 text-green-600" />
+                <div>
+                  <div className="font-medium text-green-900">{prepopulationSources.length}</div>
+                  <div className="text-green-700 text-sm">Data Sources</div>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-2 p-3 rounded-md bg-purple-50 border border-purple-200">
+                <Settings className="h-4 w-4 text-purple-600" />
+                <div>
+                  <div className="font-medium text-purple-900">{schema.fields?.length || 0}</div>
+                  <div className="text-purple-700 text-sm">Total Fields</div>
+                </div>
+              </div>
+            </div>
+
+            {prepopulationSources.length > 0 && (
+              <div className="space-y-2">
+                <h4 className="font-medium">Active Data Sources:</h4>
+                <div className="flex flex-wrap gap-2">
+                  {prepopulationSources.map(source => (
+                    <Badge key={source} variant="outline" className="flex items-center gap-1">
+                      {getSourceIcon(source!)}
+                      {source!.toUpperCase()}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {fieldsWithPrepopulation.length > 0 && (
+              <div className="mt-4 space-y-2">
+                <h4 className="font-medium">Enabled Fields:</h4>
+                <div className="space-y-1">
+                  {fieldsWithPrepopulation.map(field => (
+                    <div key={field.id} className="flex items-center justify-between p-2 rounded border">
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium">{field.label}</span>
+                        <Badge variant="secondary" className="flex items-center gap-1">
+                          {getSourceIcon(field.prepopulation!.source)}
+                          {field.prepopulation!.source.toUpperCase()}
+                        </Badge>
+                      </div>
+                      <span className="text-muted-foreground text-sm">{field.type}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </Card>
+
+          {/* Bulk Actions Section */}
+          <Card className="p-4">
+            <h3 className="font-medium mb-3">Bulk Enable Prepopulation</h3>
+            <p className="text-muted-foreground text-sm mb-4">
+              Quickly enable prepopulation for all compatible fields using a specific data source.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Button
+                onClick={() => bulkEnablePrepopulation('url')}
+                variant="outline"
+                className="flex items-center gap-2 h-auto p-4"
+              >
+                <Globe className="h-5 w-5 text-blue-600" />
+                <div className="text-left">
+                  <div className="font-medium">URL Parameters</div>
+                  <div className="text-muted-foreground text-sm">
+                    Enable for text, email, phone fields
+                  </div>
+                </div>
+              </Button>
+
+              <Button
+                onClick={() => bulkEnablePrepopulation('api')}
+                variant="outline"
+                className="flex items-center gap-2 h-auto p-4"
+              >
+                <Zap className="h-5 w-5 text-purple-600" />
+                <div className="text-left">
+                  <div className="font-medium">External API</div>
+                  <div className="text-muted-foreground text-sm">
+                    Setup API endpoints for all fields
+                  </div>
+                </div>
+              </Button>
+
+              <Button
+                onClick={() => bulkEnablePrepopulation('profile')}
+                variant="outline"
+                className="flex items-center gap-2 h-auto p-4"
+              >
+                <User className="h-5 w-5 text-green-600" />
+                <div className="text-left">
+                  <div className="font-medium">User Profile</div>
+                  <div className="text-muted-foreground text-sm">
+                    Map to user profile data
+                  </div>
+                </div>
+              </Button>
+
+              <Button
+                onClick={() => bulkEnablePrepopulation('previous')}
+                variant="outline"
+                className="flex items-center gap-2 h-auto p-4"
+              >
+                <History className="h-5 w-5 text-orange-600" />
+                <div className="text-left">
+                  <div className="font-medium">Previous Submissions</div>
+                  <div className="text-muted-foreground text-sm">
+                    Reuse previous form data
+                  </div>
+                </div>
+              </Button>
+            </div>
+
+            <div className="mt-6 pt-4 border-t">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="font-medium">Bulk Actions</h4>
+                  <p className="text-muted-foreground text-sm">
+                    Apply actions to all prepopulation settings
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  {fieldsWithPrepopulation.length > 0 && (
+                    <Button
+                      onClick={generatePreviewUrl}
+                      variant="outline"
+                      size="sm"
+                      className="flex items-center gap-2"
+                    >
+                      <Eye className="h-4 w-4" />
+                      Preview URL
+                    </Button>
+                  )}
+                  <Button
+                    onClick={disableAllPrepopulation}
+                    variant="destructive"
+                    size="sm"
+                    className="flex items-center gap-2"
+                    disabled={fieldsWithPrepopulation.length === 0}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                    Disable All
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          {/* Settings Section */}
+          <Card className="p-4">
+            <h3 className="font-medium mb-3">Global Prepopulation Settings</h3>
+            
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <Label>Enable Prepopulation Analytics</Label>
+                  <p className="text-muted-foreground text-sm">
+                    Track prepopulation success rates and performance
+                  </p>
+                </div>
+                <Switch size="sm" />
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div>
+                  <Label>Cache API Responses</Label>
+                  <p className="text-muted-foreground text-sm">
+                    Improve performance by caching API data for 5 minutes
+                  </p>
+                </div>
+                <Switch size="sm" defaultChecked />
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div>
+                  <Label>Privacy Mode</Label>
+                  <p className="text-muted-foreground text-sm">
+                    Require user consent for all prepopulation by default
+                  </p>
+                </div>
+                <Switch size="sm" />
+              </div>
+
+              <div className="space-y-2">
+                <Label>Default Consent Message</Label>
+                <Textarea
+                  placeholder="We'd like to pre-fill some fields with your information to save you time. Is that okay?"
+                  rows={2}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label>API Request Timeout (seconds)</Label>
+                <Input type="number" min="5" max="30" defaultValue="10" />
+              </div>
+            </div>
+          </Card>
+        </div>
+      </ModalContent>
+    </Modal>
+  );
+}

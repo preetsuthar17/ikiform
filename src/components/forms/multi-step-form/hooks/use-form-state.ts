@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { toast } from '@/hooks/use-toast';
+import { usePrepopulation } from '@/hooks/prepopulation/usePrepopulation';
 
 import type { FormBlock, FormField, FormSchema } from '@/lib/database';
 import type { LogicAction } from '@/lib/forms/logic';
@@ -63,6 +64,12 @@ export const useFormState = (
 
   const totalSteps = blocks.length;
 
+ 
+  const allFields = blocks.flatMap(block => block.fields || []);
+  
+ 
+  const { prepopulatedData, loading: prepopLoading, errors: prepopErrors } = usePrepopulation(allFields);
+
   useEffect(() => {
     const allFieldIds = new Set<string>();
     blocks.forEach((block) => {
@@ -80,14 +87,45 @@ export const useFormState = (
       blocks.forEach((block) => {
         block.fields?.forEach((field) => {
           if (newFieldIds.includes(field.id)) {
-            newFormData[field.id] = getDefaultValueForField(field);
+           
+            const prepopValue = prepopulatedData[field.id];
+            newFormData[field.id] = prepopValue !== undefined ? prepopValue : getDefaultValueForField(field);
           }
         });
       });
       setFormData(newFormData);
       newFieldIds.forEach((id) => initializedFieldsRef.current.add(id));
     }
-  }, [blocks.length]);
+  }, [blocks.length, prepopulatedData, formData]);
+
+ 
+  useEffect(() => {
+    if (Object.keys(prepopulatedData).length > 0) {
+      setFormData(prevFormData => {
+        const updatedFormData = { ...prevFormData };
+        let hasChanges = false;
+        
+        Object.entries(prepopulatedData).forEach(([fieldId, value]) => {
+         
+          if (fieldId in updatedFormData && (updatedFormData[fieldId] === '' || updatedFormData[fieldId] === getDefaultValueForField(allFields.find(f => f.id === fieldId)!))) {
+            updatedFormData[fieldId] = value;
+            hasChanges = true;
+          }
+        });
+        
+        return hasChanges ? updatedFormData : prevFormData;
+      });
+    }
+  }, [prepopulatedData, allFields]);
+
+ 
+  useEffect(() => {
+    Object.entries(prepopErrors).forEach(([fieldId, error]) => {
+      const field = allFields.find(f => f.id === fieldId);
+      const fieldLabel = field?.label || 'Field';
+      toast.error(`Failed to prepopulate ${fieldLabel}: ${error}`);
+    });
+  }, [prepopErrors, allFields]);
 
   const logic = schema.logic || [];
   const logicActions = evaluateLogic(logic, formData);
