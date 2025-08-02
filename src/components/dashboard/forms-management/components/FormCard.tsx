@@ -58,9 +58,9 @@ export function FormCard({
         form={form}
         onDelete={onDelete}
         onEdit={onEdit}
-        onViewForm={onViewForm}
         onShare={handleShare}
         onViewAnalytics={onViewAnalytics}
+        onViewForm={onViewForm}
       />
       <ShareFormModal
         formId={form?.id || null}

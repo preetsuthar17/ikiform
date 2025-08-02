@@ -342,7 +342,7 @@ function LogicBuilderPanelContent({
         'Logic rules copied to clipboard!',
         'Failed to copy logic rules'
       );
-      
+
       if (success) {
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);

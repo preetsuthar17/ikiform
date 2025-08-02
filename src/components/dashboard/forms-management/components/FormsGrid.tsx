@@ -29,9 +29,9 @@ export function FormsGrid({
           key={form.id}
           onDelete={onDelete}
           onEdit={onEdit}
-          onViewForm={onViewForm}
           onShare={onShare}
           onViewAnalytics={onViewAnalytics}
+          onViewForm={onViewForm}
         />
       ))}
     </div>

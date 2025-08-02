@@ -34,27 +34,28 @@ export async function copyToClipboard(
           toast.success(successMessage);
         }
         return true;
-      } else {
-        // Document is not focused, try to focus it first
-        window.focus();
-        
-        // Wait a brief moment for focus to take effect
-        await new Promise(resolve => setTimeout(resolve, 50));
-        
-        if (document.hasFocus()) {
-          await navigator.clipboard.writeText(text);
-          if (showSuccessToast) {
-            const { toast } = await import('@/hooks/use-toast');
-            toast.success(successMessage);
-          }
-          return true;
-        } else {
-          // Still not focused, fall back to the manual method
-          return fallbackCopyToClipboard(text, options);
-        }
       }
+      // Document is not focused, try to focus it first
+      window.focus();
+
+      // Wait a brief moment for focus to take effect
+      await new Promise((resolve) => setTimeout(resolve, 50));
+
+      if (document.hasFocus()) {
+        await navigator.clipboard.writeText(text);
+        if (showSuccessToast) {
+          const { toast } = await import('@/hooks/use-toast');
+          toast.success(successMessage);
+        }
+        return true;
+      }
+      // Still not focused, fall back to the manual method
+      return fallbackCopyToClipboard(text, options);
     } catch (error) {
-      console.warn('Clipboard API failed, falling back to manual method:', error);
+      console.warn(
+        'Clipboard API failed, falling back to manual method:',
+        error
+      );
       return fallbackCopyToClipboard(text, options);
     }
   }
@@ -81,7 +82,7 @@ function fallbackCopyToClipboard(
     // Create a temporary textarea element
     const textarea = document.createElement('textarea');
     textarea.value = text;
-    
+
     // Position it off-screen
     textarea.style.position = 'absolute';
     textarea.style.left = '-9999px';
@@ -89,19 +90,19 @@ function fallbackCopyToClipboard(
     textarea.style.opacity = '0';
     textarea.style.pointerEvents = 'none';
     textarea.setAttribute('readonly', '');
-    
+
     // Add to DOM
     document.body.appendChild(textarea);
-    
+
     // Select and copy
     textarea.select();
-    textarea.setSelectionRange(0, 99999); // For mobile devices
-    
+    textarea.setSelectionRange(0, 99_999); // For mobile devices
+
     const successful = document.execCommand('copy');
-    
+
     // Clean up
     document.body.removeChild(textarea);
-    
+
     if (successful) {
       if (showSuccessToast) {
         import('@/hooks/use-toast').then(({ toast }) => {
@@ -109,9 +110,8 @@ function fallbackCopyToClipboard(
         });
       }
       return true;
-    } else {
-      throw new Error('execCommand copy failed');
     }
+    throw new Error('execCommand copy failed');
   } catch (error) {
     console.error('Fallback copy method failed:', error);
     if (showErrorToast) {

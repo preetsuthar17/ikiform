@@ -31,7 +31,7 @@ function InboundWebhookDocsDrawer({
   async function handleCopy(text: string, type: string) {
     const { copyToClipboard } = await import('@/lib/utils/clipboard');
     const success = await copyToClipboard(text);
-    
+
     if (success) {
       setCopied(type);
       setTimeout(() => setCopied(null), 1200);

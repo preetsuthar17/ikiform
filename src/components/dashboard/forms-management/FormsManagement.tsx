@@ -68,9 +68,9 @@ export function FormsManagement({ className }: FormsManagementProps) {
           forms={forms}
           onDelete={deleteForm}
           onEdit={editForm}
-          onViewForm={viewForm}
           onShare={shareForm}
           onViewAnalytics={viewAnalytics}
+          onViewForm={viewForm}
         />
       )}
 

@@ -160,7 +160,7 @@ export function BulkPrepopulation({
     });
 
     const previewUrl = `${baseUrl}?${params.toString()}`;
-    
+
     const { copyWithToast } = await import('@/lib/utils/clipboard');
     await copyWithToast(
       previewUrl,

@@ -73,7 +73,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
         'Submission data copied to clipboard',
         'Failed to copy submission data'
       );
-      
+
       if (success) {
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);

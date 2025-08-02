@@ -144,14 +144,16 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
 
   const copyToClipboard = async () => {
     try {
-      const { copyToClipboard: robustCopy } = await import('@/lib/utils/clipboard');
+      const { copyToClipboard: robustCopy } = await import(
+        '@/lib/utils/clipboard'
+      );
       const success = await robustCopy(jsonString, {
         showSuccessToast: true,
         successMessage: 'JSON copied to clipboard!',
         showErrorToast: true,
-        errorMessage: 'Failed to copy JSON'
+        errorMessage: 'Failed to copy JSON',
       });
-      
+
       if (success) {
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);

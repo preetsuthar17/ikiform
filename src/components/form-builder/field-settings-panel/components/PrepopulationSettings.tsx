@@ -65,7 +65,7 @@ export function PrepopulationSettings({
     const url = `${baseUrl}?${params.toString()}`;
 
     setPreviewUrl(url);
-    
+
     const { copyWithToast } = await import('@/lib/utils/clipboard');
     await copyWithToast(
       url,

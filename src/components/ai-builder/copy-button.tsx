@@ -23,7 +23,7 @@ export function CopyButton({ schema }: CopyButtonProps) {
       'Schema copied to clipboard!',
       'Failed to copy schema'
     );
-    
+
     if (success) {
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
