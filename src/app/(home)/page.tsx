@@ -1,3 +1,4 @@
+import BentoFeatures from '@/components/home/bento-features';
 import CTASection from '@/components/home/cta-section';
 import FAQSection from '@/components/home/faq-section';
 import Features from '@/components/home/features';
@@ -16,7 +17,7 @@ export default function Home() {
 
 The AI is really neat I just got a form up in no time, and it just has built-in rate limiting and content filtering that's INSANE!`}
       />
-      <Features />
+      <BentoFeatures />
       <Review
         image="https://api.dicebear.com/9.x/micah/svg?seed=TrustF"
         name="Trust F. Òbe"
@@ -24,6 +25,7 @@ The AI is really neat I just got a form up in no time, and it just has built-in 
 
 I was immediately sold when I saw your article about Typeform being too expensive. `}
       />
+      <Features />
       <Pricing />
       <FAQSection />
       <CTASection />
