@@ -67,7 +67,9 @@ export const formsDb = {
     // Optimize: Only select necessary fields for list view
     const { data, error } = await supabase
       .from('forms')
-      .select('id, title, description, is_published, created_at, updated_at, user_id')
+      .select(
+        'id, title, description, is_published, created_at, updated_at, user_id'
+      )
       .eq('user_id', userId)
       .order('updated_at', { ascending: false });
 
@@ -140,7 +142,9 @@ export const formsDb = {
     // Only fetch essential fields
     const { data, error } = await supabase
       .from('forms')
-      .select('id, title, description, is_published, user_id, created_at, updated_at')
+      .select(
+        'id, title, description, is_published, user_id, created_at, updated_at'
+      )
       .eq('id', formId)
       .single();
 
@@ -157,7 +161,7 @@ export const formsDb = {
     const cachedForms: Form[] = [];
     const uncachedIds: string[] = [];
 
-    formIds.forEach(id => {
+    formIds.forEach((id) => {
       const cacheKey = getCacheKey('getForm', id);
       const cached = getFromCache<Form>(cacheKey);
       if (cached) {
@@ -186,11 +190,11 @@ export const formsDb = {
         ...form,
         schema: ensureDefaultFormSettings(form.schema),
       };
-      
+
       // Cache each form
       const cacheKey = getCacheKey('getForm', form.id);
       setCache(cacheKey, processedForm);
-      
+
       return processedForm;
     });
 
@@ -221,7 +225,10 @@ export const formsDb = {
     // Also invalidate user forms cache if we have user_id
     if (data.user_id) {
       const userFormsKey = getCacheKey('getUserForms', data.user_id);
-      const userFormsDetailKey = getCacheKey('getUserFormsWithDetails', data.user_id);
+      const userFormsDetailKey = getCacheKey(
+        'getUserFormsWithDetails',
+        data.user_id
+      );
       cache.delete(userFormsKey);
       cache.delete(userFormsDetailKey);
     }
@@ -234,7 +241,7 @@ export const formsDb = {
 
     // Get form first to invalidate user cache
     const form = await this.getFormBasic(formId);
-    
+
     const { error } = await supabase.from('forms').delete().eq('id', formId);
 
     if (error) throw error;
@@ -247,7 +254,10 @@ export const formsDb = {
 
     if (form.user_id) {
       const userFormsKey = getCacheKey('getUserForms', form.user_id);
-      const userFormsDetailKey = getCacheKey('getUserFormsWithDetails', form.user_id);
+      const userFormsDetailKey = getCacheKey(
+        'getUserFormsWithDetails',
+        form.user_id
+      );
       cache.delete(userFormsKey);
       cache.delete(userFormsDetailKey);
     }
@@ -276,7 +286,10 @@ export const formsDb = {
 
     if (data.user_id) {
       const userFormsKey = getCacheKey('getUserForms', data.user_id);
-      const userFormsDetailKey = getCacheKey('getUserFormsWithDetails', data.user_id);
+      const userFormsDetailKey = getCacheKey(
+        'getUserFormsWithDetails',
+        data.user_id
+      );
       cache.delete(userFormsKey);
       cache.delete(userFormsDetailKey);
     }
@@ -335,13 +348,14 @@ export const formsDb = {
     return data;
   },
 
-  async getFormSubmissionsPaginated(
-    formId: string,
-    page: number = 1,
-    pageSize: number = 50
-  ) {
+  async getFormSubmissionsPaginated(formId: string, page = 1, pageSize = 50) {
     const offset = (page - 1) * pageSize;
-    const cacheKey = getCacheKey('getFormSubmissionsPaginated', formId, page, pageSize);
+    const cacheKey = getCacheKey(
+      'getFormSubmissionsPaginated',
+      formId,
+      page,
+      pageSize
+    );
     const cached = getFromCache<FormSubmission[]>(cacheKey);
     if (cached) return cached;
 
@@ -385,7 +399,11 @@ export const formsDb = {
     if (error) throw error;
 
     // Invalidate chat history cache
-    const historyCacheKey = getCacheKey('getAIBuilderChatHistory', userId, sessionId);
+    const historyCacheKey = getCacheKey(
+      'getAIBuilderChatHistory',
+      userId,
+      sessionId
+    );
     cache.delete(historyCacheKey);
 
     return data;
@@ -474,7 +492,12 @@ export const formsDb = {
     if (error) throw error;
 
     // Invalidate chat history cache
-    const historyCacheKey = getCacheKey('getAIAnalyticsChatHistory', userId, formId, sessionId);
+    const historyCacheKey = getCacheKey(
+      'getAIAnalyticsChatHistory',
+      userId,
+      formId,
+      sessionId
+    );
     cache.delete(historyCacheKey);
 
     return data;
@@ -485,7 +508,12 @@ export const formsDb = {
     formId: string,
     sessionId: string
   ) {
-    const cacheKey = getCacheKey('getAIAnalyticsChatHistory', userId, formId, sessionId);
+    const cacheKey = getCacheKey(
+      'getAIAnalyticsChatHistory',
+      userId,
+      formId,
+      sessionId
+    );
     const cached = getFromCache<any[]>(cacheKey);
     if (cached) return cached;
 
@@ -506,7 +534,12 @@ export const formsDb = {
   },
 
   async getAIAnalyticsSessions(userId: string, formId: string, limit = 10) {
-    const cacheKey = getCacheKey('getAIAnalyticsSessions', userId, formId, limit);
+    const cacheKey = getCacheKey(
+      'getAIAnalyticsSessions',
+      userId,
+      formId,
+      limit
+    );
     const cached = getFromCache<any[]>(cacheKey);
     if (cached) return cached;
 
@@ -553,7 +586,7 @@ export const formsDb = {
         keysToDelete.push(key);
       }
     }
-    keysToDelete.forEach(key => cache.delete(key));
+    keysToDelete.forEach((key) => cache.delete(key));
   },
 
   clearFormCache(formId: string) {
@@ -563,7 +596,7 @@ export const formsDb = {
         keysToDelete.push(key);
       }
     }
-    keysToDelete.forEach(key => cache.delete(key));
+    keysToDelete.forEach((key) => cache.delete(key));
   },
 };
 

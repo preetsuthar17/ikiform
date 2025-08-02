@@ -23,6 +23,5 @@ export function SuspenseButton({
   );
 }
 
-
 export const Button = SuspenseButton;
 export type { ButtonProps, SuspenseButtonProps };

@@ -390,8 +390,8 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 
   if (authLoading || state.loading) {
     return (
-      <div className="flex h-screen items-center justify-center w-full">
-          <FormBuilderSkeleton />
+      <div className="flex h-screen w-full items-center justify-center">
+        <FormBuilderSkeleton />
       </div>
     );
   }

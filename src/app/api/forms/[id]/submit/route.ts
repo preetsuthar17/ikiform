@@ -27,7 +27,10 @@ function sanitizeObjectStrings(obj: any): any {
   return obj;
 }
 
-export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function POST(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
     const { id: formId } = await params;
     const body = await request.json();
@@ -41,7 +44,10 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
 
     const form = await formsDbServer.getPublicForm(formId);
     if (!form) {
-      return NextResponse.json({ error: 'Form not found or not published' }, { status: 404 });
+      return NextResponse.json(
+        { error: 'Form not found or not published' },
+        { status: 404 }
+      );
     }
 
     const supabase = await createClient();
@@ -53,9 +59,16 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       if (!premiumCheck.hasPremium) return premiumCheck.error;
     }
 
-    const rateLimit = { ...DEFAULT_RATE_LIMIT_SETTINGS, ...form.schema.settings.rateLimit };
+    const rateLimit = {
+      ...DEFAULT_RATE_LIMIT_SETTINGS,
+      ...form.schema.settings.rateLimit,
+    };
     if (rateLimit.enabled) {
-      const rateLimitResult = await checkFormRateLimit(ipAddress, formId, rateLimit);
+      const rateLimitResult = await checkFormRateLimit(
+        ipAddress,
+        formId,
+        rateLimit
+      );
       if (!rateLimitResult.success) {
         return NextResponse.json(
           {
@@ -95,7 +108,9 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
 
     if (profanityFilterSettings.enabled) {
       const profanityFilter = createProfanityFilter(profanityFilterSettings);
-      const result = profanityFilter.filterSubmissionData(filteredSubmissionData);
+      const result = profanityFilter.filterSubmissionData(
+        filteredSubmissionData
+      );
       if (!result.isValid) {
         return NextResponse.json(
           {
@@ -113,7 +128,11 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       }
     }
 
-    const submission = await formsDbServer.submitForm(formId, filteredSubmissionData, ipAddress);
+    const submission = await formsDbServer.submitForm(
+      formId,
+      filteredSubmissionData,
+      ipAddress
+    );
 
     const [formatted] = await Promise.all([
       formatHumanFriendlyPayload(formId, filteredSubmissionData),
@@ -129,13 +148,16 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       sendFormNotification({
         to: notifications.email,
         subject:
-          notifications.subject || `New Submission: ${form.schema.settings.title}`,
+          notifications.subject ||
+          `New Submission: ${form.schema.settings.title}`,
         message:
           notifications.message ||
           `You have received a new submission on your form: ${form.schema.settings.title}.`,
         analyticsUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ikiform.com'}/dashboard/forms/${formId}/analytics`,
         customLinks: notifications.customLinks || [],
-      }).catch((e) => console.error('[Notification] Notification send error:', e));
+      }).catch((e) =>
+        console.error('[Notification] Notification send error:', e)
+      );
     }
 
     return NextResponse.json({
@@ -144,6 +166,9 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       message: 'Form submitted successfully',
     });
   } catch {
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }

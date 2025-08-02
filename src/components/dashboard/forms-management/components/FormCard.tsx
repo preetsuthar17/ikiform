@@ -49,7 +49,6 @@ export function FormCard({
 
       {}
       <div className="mb-6 flex items-center justify-between border-border/50 border-t pt-2 text-muted-foreground text-sm">
-      
         <span>Updated {formattedDate}</span>
       </div>
 

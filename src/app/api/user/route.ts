@@ -7,7 +7,7 @@ import { sanitizeString } from '@/lib/utils/sanitize';
 import { createClient } from '@/utils/supabase/server';
 
 const userCache = new Map<string, { data: any; timestamp: number }>();
-const CACHE_TTL = 30000;
+const CACHE_TTL = 30_000;
 
 function getCachedUser(email: string) {
   const cached = userCache.get(email);
@@ -32,7 +32,7 @@ function setCachedUser(email: string, data: any) {
 export async function POST(_request: NextRequest) {
   try {
     const supabase = await createClient();
-    
+
     const {
       data: { user },
       error: authError,
@@ -44,18 +44,19 @@ export async function POST(_request: NextRequest) {
 
     const { id: uid, email, user_metadata } = user;
     const sanitizedEmail = sanitizeString(email);
-    
-    const name = sanitizeString(
-      user_metadata?.full_name || 
-      user_metadata?.name || 
-      user_metadata?.user_name || 
-      email.split('@')[0]
-    ) || '';
+
+    const name =
+      sanitizeString(
+        user_metadata?.full_name ||
+          user_metadata?.name ||
+          user_metadata?.user_name ||
+          email.split('@')[0]
+      ) || '';
 
     const cachedUser = getCachedUser(sanitizedEmail);
     if (cachedUser) {
       sendNewLoginEmail({ to: sanitizedEmail, name }).catch(console.error);
-      
+
       return NextResponse.json({
         success: true,
         message: 'User already exists',
@@ -74,12 +75,14 @@ export async function POST(_request: NextRequest) {
           has_premium: false,
           polar_customer_id: null,
         },
-        { 
+        {
           onConflict: 'email',
-          ignoreDuplicates: false 
+          ignoreDuplicates: false,
         }
       )
-      .select('uid, email, name, has_premium, polar_customer_id, created_at, updated_at')
+      .select(
+        'uid, email, name, has_premium, polar_customer_id, created_at, updated_at'
+      )
       .single();
 
     if (upsertError) {
@@ -91,7 +94,8 @@ export async function POST(_request: NextRequest) {
 
     setCachedUser(sanitizedEmail, upsertedUser);
 
-    const isNewUser = new Date(upsertedUser.created_at).getTime() > Date.now() - 5000; // 5 seconds tolerance
+    const isNewUser =
+      new Date(upsertedUser.created_at).getTime() > Date.now() - 5000; // 5 seconds tolerance
 
     if (isNewUser) {
       sendWelcomeEmail({ to: sanitizedEmail, name }).catch(console.error);
@@ -105,17 +109,19 @@ export async function POST(_request: NextRequest) {
       user: upsertedUser,
       isNewUser,
     });
-
   } catch (error) {
     console.error('[User API] POST error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }
 
 export async function GET(_request: NextRequest) {
   try {
     const supabase = await createClient();
-    
+
     const {
       data: { user },
       error: authError,
@@ -140,7 +146,9 @@ export async function GET(_request: NextRequest) {
 
     const { data, error } = await supabase
       .from('users')
-      .select('uid, email, name, has_premium, polar_customer_id, created_at, updated_at')
+      .select(
+        'uid, email, name, has_premium, polar_customer_id, created_at, updated_at'
+      )
       .eq('email', user.email)
       .single();
 
@@ -162,9 +170,11 @@ export async function GET(_request: NextRequest) {
         metadata: user.user_metadata,
       },
     });
-
   } catch (error) {
     console.error('[User API] GET error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }
