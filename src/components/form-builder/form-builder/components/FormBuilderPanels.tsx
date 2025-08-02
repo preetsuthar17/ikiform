@@ -1,15 +1,14 @@
 import { Settings, Zap } from 'lucide-react';
 import React from 'react';
 import type { FormLogic } from '@/components/form-builder/logic-builder/types';
-import type { FormSchema } from '@/lib/database';
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from '@/components/ui/resizable';
-
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
+import type { FormSchema } from '@/lib/database';
 import { BlockManager } from '../../block-manager';
 import { FieldPalette } from '../../field-palette';
 import { FieldSettingsPanel } from '../../field-settings-panel';
@@ -51,16 +50,18 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
   const allFields = getAllFields(formSchema);
 
   const handleSchemaUpdate = (updatedSchema: FormSchema) => {
-   
     if (updatedSchema.fields && updatedSchema.fields !== formSchema.fields) {
       onFieldsReorder(updatedSchema.fields);
     }
-   
+
     if (updatedSchema.blocks && updatedSchema.blocks !== formSchema.blocks) {
       onBlocksUpdate(updatedSchema.blocks);
     }
-   
-    if (updatedSchema.settings && updatedSchema.settings !== formSchema.settings) {
+
+    if (
+      updatedSchema.settings &&
+      updatedSchema.settings !== formSchema.settings
+    ) {
       onFormSettingsUpdate(updatedSchema.settings);
     }
   };
@@ -85,9 +86,9 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
             selectedFieldId={selectedFieldId}
           />
         ) : (
-          <FieldPalette 
-            onAddField={onFieldAdd} 
+          <FieldPalette
             formSchema={formSchema}
+            onAddField={onFieldAdd}
             onSchemaUpdate={handleSchemaUpdate}
           />
         )}

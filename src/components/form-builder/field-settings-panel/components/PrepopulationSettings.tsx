@@ -1,10 +1,9 @@
+import { Copy, ExternalLink, Globe, History, User, Zap } from 'lucide-react';
 import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Switch } from '@/components/ui/switch';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
 import {
   Select,
   SelectContent,
@@ -12,14 +11,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { 
-  Copy, 
-  Zap, 
-  Globe, 
-  User, 
-  History,
-  ExternalLink
-} from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
+import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
 import type { FormField } from '@/lib/database';
 
@@ -47,7 +40,9 @@ export function PrepopulationSettings({
     });
   };
 
-  const updateConfig = (configUpdates: Partial<typeof prepopulation.config>) => {
+  const updateConfig = (
+    configUpdates: Partial<typeof prepopulation.config>
+  ) => {
     updatePrepopulation({
       config: { ...prepopulation.config, ...configUpdates },
     });
@@ -59,10 +54,11 @@ export function PrepopulationSettings({
       return;
     }
 
-    const baseUrl = typeof window !== 'undefined' 
-      ? window.location.origin + '/form/123'
-      : 'https://yoursite.com/form/123';
-    
+    const baseUrl =
+      typeof window !== 'undefined'
+        ? window.location.origin + '/form/123'
+        : 'https://yoursite.com/form/123';
+
     const exampleValue = `Sample ${field.label}`;
     const params = new URLSearchParams();
     params.set(prepopulation.config.urlParam, exampleValue);
@@ -82,30 +78,37 @@ export function PrepopulationSettings({
     try {
       const response = await fetch(prepopulation.config.apiEndpoint, {
         method: prepopulation.config.apiMethod || 'GET',
-        headers: typeof prepopulation.config.apiHeaders === 'string' 
-          ? JSON.parse(prepopulation.config.apiHeaders) 
-          : prepopulation.config.apiHeaders,
+        headers:
+          typeof prepopulation.config.apiHeaders === 'string'
+            ? JSON.parse(prepopulation.config.apiHeaders)
+            : prepopulation.config.apiHeaders,
       });
 
       if (response.ok) {
         toast.success('API endpoint is reachable!');
       } else {
-        toast.error(`API test failed: ${response.status} ${response.statusText}`);
+        toast.error(
+          `API test failed: ${response.status} ${response.statusText}`
+        );
       }
     } catch (error) {
-      toast.error(`API test failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      toast.error(
+        `API test failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+      );
     }
   };
 
   return (
     <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
       <h3 className="font-medium text-card-foreground">Pre-population</h3>
-      
+
       <div className="flex flex-col gap-4">
         {/* Enable/Disable Switch */}
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-1">
-            <Label className="text-card-foreground">Enable Pre-population</Label>
+            <Label className="text-card-foreground">
+              Enable Pre-population
+            </Label>
             <p className="text-muted-foreground text-xs">
               Automatically fill this field with existing data
             </p>
@@ -123,7 +126,9 @@ export function PrepopulationSettings({
             <div className="flex flex-col gap-2">
               <Label className="text-card-foreground">Data Source</Label>
               <Select
-                onValueChange={(source) => updatePrepopulation({ source: source as any })}
+                onValueChange={(source) =>
+                  updatePrepopulation({ source: source as any })
+                }
                 value={prepopulation.source}
               >
                 <SelectTrigger className="border-border bg-input">
@@ -162,7 +167,9 @@ export function PrepopulationSettings({
             {prepopulation.source === 'url' && (
               <div className="space-y-3">
                 <div className="flex flex-col gap-2">
-                  <Label className="text-card-foreground">URL Parameter Name</Label>
+                  <Label className="text-card-foreground">
+                    URL Parameter Name
+                  </Label>
                   <Input
                     className="border-border bg-input"
                     onChange={(e) => updateConfig({ urlParam: e.target.value })}
@@ -178,7 +185,9 @@ export function PrepopulationSettings({
                   <Label className="text-card-foreground">Fallback Value</Label>
                   <Input
                     className="border-border bg-input"
-                    onChange={(e) => updateConfig({ fallbackValue: e.target.value })}
+                    onChange={(e) =>
+                      updateConfig({ fallbackValue: e.target.value })
+                    }
                     placeholder="Default value if parameter is missing"
                     value={prepopulation.config.fallbackValue || ''}
                   />
@@ -186,14 +195,18 @@ export function PrepopulationSettings({
 
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col gap-1">
-                    <Label className="text-card-foreground">Overwrite Existing</Label>
+                    <Label className="text-card-foreground">
+                      Overwrite Existing
+                    </Label>
                     <p className="text-muted-foreground text-xs">
                       Replace user input with pre-populated value
                     </p>
                   </div>
                   <Switch
-                    checked={prepopulation.config.overwriteExisting || false}
-                    onCheckedChange={(overwriteExisting) => updateConfig({ overwriteExisting })}
+                    checked={prepopulation.config.overwriteExisting}
+                    onCheckedChange={(overwriteExisting) =>
+                      updateConfig({ overwriteExisting })
+                    }
                     size="sm"
                   />
                 </div>
@@ -201,10 +214,10 @@ export function PrepopulationSettings({
                 {prepopulation.config.urlParam && (
                   <div className="flex gap-2">
                     <Button
+                      className="flex items-center gap-2"
                       onClick={generatePreviewUrl}
                       size="sm"
                       variant="outline"
-                      className="flex items-center gap-2"
                     >
                       <Copy className="h-4 w-4" />
                       Generate Preview URL
@@ -216,7 +229,10 @@ export function PrepopulationSettings({
                   <div className="flex flex-col gap-2 rounded border border-blue-200 bg-blue-50 p-3 text-blue-900 text-sm">
                     <strong>Preview URL:</strong>
                     <code className="break-all text-xs">{previewUrl}</code>
-                    <p className="text-xs">This URL will pre-populate the field with "Sample {field.label}"</p>
+                    <p className="text-xs">
+                      This URL will pre-populate the field with "Sample{' '}
+                      {field.label}"
+                    </p>
                   </div>
                 )}
               </div>
@@ -229,7 +245,9 @@ export function PrepopulationSettings({
                   <Label className="text-card-foreground">API Endpoint</Label>
                   <Input
                     className="border-border bg-input"
-                    onChange={(e) => updateConfig({ apiEndpoint: e.target.value })}
+                    onChange={(e) =>
+                      updateConfig({ apiEndpoint: e.target.value })
+                    }
                     placeholder="https://api.example.com/user-data"
                     type="url"
                     value={prepopulation.config.apiEndpoint || ''}
@@ -239,7 +257,9 @@ export function PrepopulationSettings({
                 <div className="flex flex-col gap-2">
                   <Label className="text-card-foreground">HTTP Method</Label>
                   <Select
-                    onValueChange={(method) => updateConfig({ apiMethod: method as 'GET' | 'POST' })}
+                    onValueChange={(method) =>
+                      updateConfig({ apiMethod: method as 'GET' | 'POST' })
+                    }
                     value={prepopulation.config.apiMethod || 'GET'}
                   >
                     <SelectTrigger className="border-border bg-input">
@@ -253,22 +273,36 @@ export function PrepopulationSettings({
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <Label className="text-card-foreground">Request Headers (JSON)</Label>
+                  <Label className="text-card-foreground">
+                    Request Headers (JSON)
+                  </Label>
                   <Textarea
                     className="border-border bg-input"
-                    onChange={(e) => updateConfig({ apiHeaders: e.target.value as any })}
-                    placeholder={'{\n  "Authorization": "Bearer token",\n  "Content-Type": "application/json"\n}'}
+                    onChange={(e) =>
+                      updateConfig({ apiHeaders: e.target.value as any })
+                    }
+                    placeholder={
+                      '{\n  "Authorization": "Bearer token",\n  "Content-Type": "application/json"\n}'
+                    }
                     rows={3}
-                    value={typeof prepopulation.config.apiHeaders === 'string' ? prepopulation.config.apiHeaders : JSON.stringify(prepopulation.config.apiHeaders || {}, null, 2)}
+                    value={
+                      typeof prepopulation.config.apiHeaders === 'string'
+                        ? prepopulation.config.apiHeaders
+                        : JSON.stringify(
+                            prepopulation.config.apiHeaders || {},
+                            null,
+                            2
+                          )
+                    }
                   />
                 </div>
 
                 {prepopulation.config.apiEndpoint && (
                   <Button
+                    className="flex items-center gap-2"
                     onClick={testApiEndpoint}
                     size="sm"
                     variant="outline"
-                    className="flex items-center gap-2"
                   >
                     <ExternalLink className="h-4 w-4" />
                     Test API Endpoint
@@ -280,13 +314,15 @@ export function PrepopulationSettings({
             {/* Coming Soon Messages */}
             {prepopulation.source === 'profile' && (
               <div className="rounded border border-orange-200 bg-orange-50 p-3 text-orange-900 text-sm">
-                <strong>Coming Soon:</strong> User profile pre-population will be available in a future update.
+                <strong>Coming Soon:</strong> User profile pre-population will
+                be available in a future update.
               </div>
             )}
 
             {prepopulation.source === 'previous' && (
               <div className="rounded border border-orange-200 bg-orange-50 p-3 text-orange-900 text-sm">
-                <strong>Coming Soon:</strong> Previous submission pre-population will be available in a future update.
+                <strong>Coming Soon:</strong> Previous submission pre-population
+                will be available in a future update.
               </div>
             )}
           </>

@@ -12,7 +12,7 @@ export interface SingleStepFormState {
   errors: Record<string, string>;
   submitting: boolean;
   submitted: boolean;
- 
+
   progress: FormProgress | null;
   progressLoading: boolean;
   progressSaving: boolean;

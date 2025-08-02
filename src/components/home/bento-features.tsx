@@ -83,7 +83,6 @@ const AIFormBuilderPreview = () => {
       if (currentStep < steps.length) {
         setCurrentStep((prev) => prev + 1);
       } else {
-       
         setIsGenerating(false);
         setTimeout(() => {
           resetAndStart();

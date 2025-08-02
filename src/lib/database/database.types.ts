@@ -286,31 +286,24 @@ export interface FormField {
     enabled: boolean;
     source: 'url' | 'api' | 'profile' | 'previous' | 'template';
     config: {
-     
       urlParam?: string;
-      
-     
+
       apiEndpoint?: string;
       apiMethod?: 'GET' | 'POST';
       apiHeaders?: Record<string, string>;
       apiBodyTemplate?: string;
       jsonPath?: string;
-      
-     
+
       lookbackDays?: number;
       matchingFields?: string[];
-      
-     
+
       profileField?: 'name' | 'email' | 'phone' | 'address' | 'custom';
-      
-     
+
       templateId?: string;
-      
-     
+
       fallbackValue?: any;
       overwriteExisting?: boolean;
-      
-     
+
       requireConsent?: boolean;
       consentMessage?: string;
     };

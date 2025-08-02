@@ -8,7 +8,6 @@ export type FormSubmission =
   Database['public']['Tables']['form_submissions']['Row'];
 export type User = Database['public']['Tables']['users']['Row'];
 
-
 const cache = new Map<string, { data: any; expires: number }>();
 const CACHE_TTL = 5 * 60 * 1000;
 
@@ -37,7 +36,7 @@ export const formsDb = {
     const supabase = createClient();
     const schemaWithDefaults = ensureDefaultFormSettings(schema);
     const { generateUniqueSlug } = await import('@/lib/utils/slug');
-    
+
     const slug = generateUniqueSlug(title);
 
     const { data, error } = await supabase
@@ -67,7 +66,6 @@ export const formsDb = {
 
     const supabase = createClient();
 
-   
     const { data, error } = await supabase
       .from('forms')
       .select(
@@ -142,7 +140,6 @@ export const formsDb = {
 
     const supabase = createClient();
 
-   
     const { data, error } = await supabase
       .from('forms')
       .select(
@@ -160,7 +157,6 @@ export const formsDb = {
   async getMultipleForms(formIds: string[]) {
     if (formIds.length === 0) return [];
 
-   
     const cachedForms: Form[] = [];
     const uncachedIds: string[] = [];
 
@@ -180,7 +176,6 @@ export const formsDb = {
 
     const supabase = createClient();
 
-   
     const { data, error } = await supabase
       .from('forms')
       .select('*')
@@ -194,7 +189,6 @@ export const formsDb = {
         schema: ensureDefaultFormSettings(form.schema),
       };
 
-     
       const cacheKey = getCacheKey('getForm', form.id);
       setCache(cacheKey, processedForm);
 
@@ -245,14 +239,12 @@ export const formsDb = {
   async deleteForm(formId: string) {
     const supabase = createClient();
 
-   
     const form = await this.getFormBasic(formId);
 
     const { error } = await supabase.from('forms').delete().eq('id', formId);
 
     if (error) throw error;
 
-   
     const formCacheKey = getCacheKey('getForm', formId);
     const basicCacheKey = getCacheKey('getFormBasic', formId);
     cache.delete(formCacheKey);
@@ -284,7 +276,6 @@ export const formsDb = {
 
     if (error) throw error;
 
-   
     const formCacheKey = getCacheKey('getForm', formId);
     const basicCacheKey = getCacheKey('getFormBasic', formId);
     cache.delete(formCacheKey);
@@ -322,7 +313,6 @@ export const formsDb = {
 
     if (error) throw error;
 
-   
     const submissionsCacheKey = getCacheKey('getFormSubmissions', formId);
     cache.delete(submissionsCacheKey);
 
@@ -380,7 +370,6 @@ export const formsDb = {
     return data;
   },
 
- 
   async saveAIBuilderMessage(
     userId: string,
     sessionId: string,
@@ -404,7 +393,6 @@ export const formsDb = {
 
     if (error) throw error;
 
-   
     const historyCacheKey = getCacheKey(
       'getAIBuilderChatHistory',
       userId,
@@ -471,7 +459,6 @@ export const formsDb = {
     return result;
   },
 
- 
   async saveAIAnalyticsMessage(
     userId: string,
     formId: string,
@@ -497,7 +484,6 @@ export const formsDb = {
 
     if (error) throw error;
 
-   
     const historyCacheKey = getCacheKey(
       'getAIAnalyticsChatHistory',
       userId,
@@ -580,7 +566,6 @@ export const formsDb = {
     return result;
   },
 
- 
   clearCache() {
     cache.clear();
   },
@@ -606,16 +591,12 @@ export const formsDb = {
   },
 };
 
-
 export const formsDbServer = {
   async getPublicForm(identifier: string) {
     const supabase = await createServerClient();
     const { isUUID } = await import('@/lib/utils/slug');
 
-    let query = supabase
-      .from('forms')
-      .select('*')
-      .eq('is_published', true);
+    let query = supabase.from('forms').select('*').eq('is_published', true);
 
     if (isUUID(identifier)) {
       query = query.eq('id', identifier);

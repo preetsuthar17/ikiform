@@ -18,8 +18,7 @@ export class LocalStorageAdapter implements ProgressStorageAdapter {
       if (!stored) return null;
 
       const data = JSON.parse(stored) as FormProgress;
-      
-     
+
       if (new Date() > new Date(data.expiresAt)) {
         await this.delete(key);
         return null;
@@ -42,11 +41,11 @@ export class LocalStorageAdapter implements ProgressStorageAdapter {
 
   async clear(): Promise<void> {
     try {
-      const keys = Object.keys(localStorage).filter(key => 
+      const keys = Object.keys(localStorage).filter((key) =>
         key.startsWith(this.prefix)
       );
-      
-      keys.forEach(key => localStorage.removeItem(key));
+
+      keys.forEach((key) => localStorage.removeItem(key));
     } catch (error) {
       console.warn(`Failed to clear progress from localStorage: ${error}`);
     }
@@ -71,8 +70,7 @@ export class SessionStorageAdapter implements ProgressStorageAdapter {
       if (!stored) return null;
 
       const data = JSON.parse(stored) as FormProgress;
-      
-     
+
       if (new Date() > new Date(data.expiresAt)) {
         await this.delete(key);
         return null;
@@ -95,11 +93,11 @@ export class SessionStorageAdapter implements ProgressStorageAdapter {
 
   async clear(): Promise<void> {
     try {
-      const keys = Object.keys(sessionStorage).filter(key => 
+      const keys = Object.keys(sessionStorage).filter((key) =>
         key.startsWith(this.prefix)
       );
-      
-      keys.forEach(key => sessionStorage.removeItem(key));
+
+      keys.forEach((key) => sessionStorage.removeItem(key));
     } catch (error) {
       console.warn(`Failed to clear progress from sessionStorage: ${error}`);
     }
@@ -134,7 +132,7 @@ export class ServerStorageAdapter implements ProgressStorageAdapter {
   async load(key: string): Promise<FormProgress | null> {
     try {
       const response = await fetch(`${this.baseUrl}/${key}`);
-      
+
       if (response.status === 404) {
         return null;
       }
@@ -143,9 +141,8 @@ export class ServerStorageAdapter implements ProgressStorageAdapter {
         throw new Error(`Server responded with ${response.status}`);
       }
 
-      const data = await response.json() as FormProgress;
-      
-     
+      const data = (await response.json()) as FormProgress;
+
       if (new Date() > new Date(data.expiresAt)) {
         await this.delete(key);
         return null;

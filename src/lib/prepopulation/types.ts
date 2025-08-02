@@ -1,32 +1,24 @@
 import type { FormLogic } from '@/components/form-builder/logic-builder/types';
 
-
 export interface PrepopulationConfig {
- 
   urlParam?: string;
-  
- 
+
   apiEndpoint?: string;
   apiMethod?: 'GET' | 'POST';
   apiHeaders?: Record<string, string>;
   apiBodyTemplate?: string;
   jsonPath?: string;
-  
- 
+
   lookbackDays?: number;
   matchingFields?: string[];
-  
- 
+
   profileField?: 'name' | 'email' | 'phone' | 'address' | 'custom';
-  
- 
+
   templateId?: string;
-  
- 
+
   fallbackValue?: any;
   overwriteExisting?: boolean;
-  
- 
+
   requireConsent?: boolean;
   consentMessage?: string;
 }
@@ -37,7 +29,6 @@ export interface PrepopulationSettings {
   config: PrepopulationConfig;
 }
 
-
 export interface FormFieldWithPrepopulation {
   id: string;
   type: string;
@@ -46,9 +37,7 @@ export interface FormFieldWithPrepopulation {
   placeholder?: string;
   required: boolean;
   prepopulation?: PrepopulationSettings;
- 
 }
-
 
 export interface PrepopulationTemplate {
   id: string;
@@ -59,7 +48,6 @@ export interface PrepopulationTemplate {
   created_at: string;
   updated_at: string;
 }
-
 
 export interface PrepopulationLog {
   id: string;
@@ -72,7 +60,6 @@ export interface PrepopulationLog {
   created_at: string;
 }
 
-
 export interface PrivacySettings {
   requireConsent: boolean;
   consentMessage: string;
@@ -80,7 +67,6 @@ export interface PrivacySettings {
   allowOptOut: boolean;
   anonymizeData: boolean;
 }
-
 
 export interface PrepopulationResult {
   success: boolean;
@@ -90,14 +76,12 @@ export interface PrepopulationResult {
   executionTime: number;
 }
 
-
 export interface FieldMapping {
   sourceField: string;
   targetFieldId: string;
   transform?: (value: any) => any;
   validation?: (value: any) => boolean;
 }
-
 
 export interface ApiEngineConfig extends PrepopulationConfig {
   retryAttempts?: number;
@@ -106,16 +90,23 @@ export interface ApiEngineConfig extends PrepopulationConfig {
   cacheTTL?: number;
 }
 
-
 export interface PreviousSubmissionConfig extends PrepopulationConfig {
   matchCriteria: 'email' | 'ip' | 'custom';
   customMatchField?: string;
   prioritizeRecent?: boolean;
 }
 
-export type PrepopulationSource = 'url' | 'api' | 'profile' | 'previous' | 'template';
+export type PrepopulationSource =
+  | 'url'
+  | 'api'
+  | 'profile'
+  | 'previous'
+  | 'template';
 
 export interface PrepopulationEngine {
-  getValue(config: PrepopulationConfig, context?: any): Promise<PrepopulationResult>;
+  getValue(
+    config: PrepopulationConfig,
+    context?: any
+  ): Promise<PrepopulationResult>;
   validateConfig(config: PrepopulationConfig): boolean;
 }

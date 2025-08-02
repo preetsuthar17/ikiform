@@ -37,8 +37,8 @@ export default function LoginForm() {
 
   return (
     <>
-      <div className="flex flex-col h-screen justify-center items-center gap-4">
-        <Card className="flex w-full max-w-sm flex-col items-center justify-center gap-6  text-center shadow-md/2">
+      <div className="flex h-screen flex-col items-center justify-center gap-4">
+        <Card className="flex w-full max-w-sm flex-col items-center justify-center gap-6 text-center shadow-md/2">
           <CardHeader>
             <div className="flex-shrink-0">
               <Link href="/">

@@ -11,9 +11,9 @@ export function FieldPalette({
   return compact ? (
     <CompactPalette onAddField={onAddField} />
   ) : (
-    <FullPalette 
-      onAddField={onAddField} 
+    <FullPalette
       formSchema={formSchema}
+      onAddField={onAddField}
       onSchemaUpdate={onSchemaUpdate}
     />
   );

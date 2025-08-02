@@ -22,7 +22,7 @@ export function FullPalette({
             description={PALETTE_CONFIG.HEADER.DESCRIPTION}
             title={PALETTE_CONFIG.HEADER.TITLE}
           />
-          
+
           <DragDropContext onDragEnd={() => {}}>
             <Droppable
               direction="vertical"

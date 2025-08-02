@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { toast } from '@/hooks/use-toast';
-import { usePrepopulation } from '@/hooks/prepopulation/usePrepopulation';
 import { useFormProgress } from '@/hooks/form-progress';
+import { usePrepopulation } from '@/hooks/prepopulation/usePrepopulation';
+import { toast } from '@/hooks/use-toast';
 
 import type { FormBlock, FormField, FormSchema } from '@/lib/database';
 import type { LogicAction } from '@/lib/forms/logic';
@@ -65,10 +65,8 @@ export const useFormState = (
 
   const totalSteps = blocks.length;
 
- 
-  const allFields = blocks.flatMap(block => block.fields || []);
-  
- 
+  const allFields = blocks.flatMap((block) => block.fields || []);
+
   const {
     progress,
     loading: progressLoading,
@@ -85,7 +83,11 @@ export const useFormState = (
   });
 
   // Prepopulation hook
-  const { prepopulatedData, loading: prepopLoading, errors: prepopErrors } = usePrepopulation(allFields);
+  const {
+    prepopulatedData,
+    loading: prepopLoading,
+    errors: prepopErrors,
+  } = usePrepopulation(allFields);
 
   // Initialize form and load any saved progress
   useEffect(() => {
@@ -111,9 +113,11 @@ export const useFormState = (
       blocks.forEach((block) => {
         block.fields?.forEach((field) => {
           if (newFieldIds.includes(field.id)) {
-           
             const prepopValue = prepopulatedData[field.id];
-            newFormData[field.id] = prepopValue !== undefined ? prepopValue : getDefaultValueForField(field);
+            newFormData[field.id] =
+              prepopValue !== undefined
+                ? prepopValue
+                : getDefaultValueForField(field);
           }
         });
       });
@@ -122,63 +126,72 @@ export const useFormState = (
     }
   }, [blocks.length, prepopulatedData, formData]);
 
- 
   useEffect(() => {
     if (Object.keys(prepopulatedData).length > 0) {
-      setFormData(prevFormData => {
+      setFormData((prevFormData) => {
         const updatedFormData = { ...prevFormData };
         let hasChanges = false;
-        
+
         Object.entries(prepopulatedData).forEach(([fieldId, value]) => {
-         
-          if (fieldId in updatedFormData && (updatedFormData[fieldId] === '' || updatedFormData[fieldId] === getDefaultValueForField(allFields.find(f => f.id === fieldId)!))) {
+          if (
+            fieldId in updatedFormData &&
+            (updatedFormData[fieldId] === '' ||
+              updatedFormData[fieldId] ===
+                getDefaultValueForField(
+                  allFields.find((f) => f.id === fieldId)!
+                ))
+          ) {
             updatedFormData[fieldId] = value;
             hasChanges = true;
           }
         });
-        
+
         return hasChanges ? updatedFormData : prevFormData;
       });
     }
   }, [prepopulatedData, allFields]);
 
- 
   useEffect(() => {
     Object.entries(prepopErrors).forEach(([fieldId, error]) => {
-      const field = allFields.find(f => f.id === fieldId);
+      const field = allFields.find((f) => f.id === fieldId);
       const fieldLabel = field?.label || 'Field';
-     
     });
   }, [prepopErrors, allFields]);
 
- 
   useEffect(() => {
     if (progress && Object.keys(progress.formData).length > 0) {
-      setFormData(prevFormData => {
+      setFormData((prevFormData) => {
         // Check if current form data is essentially empty (only default values)
-        const hasUserInput = Object.entries(prevFormData).some(([fieldId, value]) => {
-          const field = allFields.find(f => f.id === fieldId);
-          if (!field) return false;
-          
-          const defaultValue = getDefaultValueForField(field);
-          
-          // Check if current value is different from default value
-          if (Array.isArray(value) && Array.isArray(defaultValue)) {
-            return value.length > 0;
+        const hasUserInput = Object.entries(prevFormData).some(
+          ([fieldId, value]) => {
+            const field = allFields.find((f) => f.id === fieldId);
+            if (!field) return false;
+
+            const defaultValue = getDefaultValueForField(field);
+
+            // Check if current value is different from default value
+            if (Array.isArray(value) && Array.isArray(defaultValue)) {
+              return value.length > 0;
+            }
+
+            return (
+              value !== defaultValue &&
+              value !== '' &&
+              value !== null &&
+              value !== undefined
+            );
           }
-          
-          return value !== defaultValue && value !== '' && value !== null && value !== undefined;
-        });
-        
+        );
+
         // Only restore if user hasn't started filling the form
         if (!hasUserInput) {
           console.log('Restoring form progress:', progress.formData);
           return { ...prevFormData, ...progress.formData };
         }
-        
+
         return prevFormData;
       });
-      
+
       // Restore current step if available
       if (progress.currentStep >= 0 && progress.currentStep < totalSteps) {
         setCurrentStep(progress.currentStep);
@@ -186,15 +199,16 @@ export const useFormState = (
     }
   }, [progress, totalSteps, allFields]);
 
- 
   useEffect(() => {
     if (Object.keys(formData).length > 0) {
-      const filledFields = Object.values(formData).filter(value => 
-        value !== '' && value !== null && value !== undefined && 
-        !(Array.isArray(value) && value.length === 0)
+      const filledFields = Object.values(formData).filter(
+        (value) =>
+          value !== '' &&
+          value !== null &&
+          value !== undefined &&
+          !(Array.isArray(value) && value.length === 0)
       ).length;
-      
-     
+
       if (filledFields > 0) {
         saveProgress(formData, currentStep);
       }

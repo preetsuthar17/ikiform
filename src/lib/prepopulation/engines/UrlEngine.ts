@@ -1,42 +1,46 @@
-import type { PrepopulationConfig, PrepopulationResult, PrepopulationEngine } from '../types';
+import type {
+  PrepopulationConfig,
+  PrepopulationEngine,
+  PrepopulationResult,
+} from '../types';
 
 export class UrlEngine implements PrepopulationEngine {
   private urlParams: URLSearchParams;
 
   constructor() {
-    this.urlParams = typeof window !== 'undefined' 
-      ? new URLSearchParams(window.location.search)
-      : new URLSearchParams();
+    this.urlParams =
+      typeof window !== 'undefined'
+        ? new URLSearchParams(window.location.search)
+        : new URLSearchParams();
   }
 
   async getValue(config: PrepopulationConfig): Promise<PrepopulationResult> {
     const startTime = Date.now();
-    
+
     try {
       if (!config.urlParam) {
         throw new Error('URL parameter name is required');
       }
 
       const value = this.urlParams.get(config.urlParam);
-      
+
       if (value === null || value === '') {
         return {
           success: false,
           value: config.fallbackValue || null,
           error: 'Parameter not found in URL',
           source: 'url',
-          executionTime: Date.now() - startTime
+          executionTime: Date.now() - startTime,
         };
       }
 
-     
       const sanitizedValue = this.sanitizeValue(decodeURIComponent(value));
-      
+
       return {
         success: true,
         value: sanitizedValue,
         source: 'url',
-        executionTime: Date.now() - startTime
+        executionTime: Date.now() - startTime,
       };
     } catch (error) {
       return {
@@ -44,7 +48,7 @@ export class UrlEngine implements PrepopulationEngine {
         value: config.fallbackValue || null,
         error: error instanceof Error ? error.message : 'Unknown error',
         source: 'url',
-        executionTime: Date.now() - startTime
+        executionTime: Date.now() - startTime,
       };
     }
   }
@@ -54,7 +58,6 @@ export class UrlEngine implements PrepopulationEngine {
   }
 
   private sanitizeValue(value: string): string {
-   
     return value
       .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
       .replace(/javascript:/gi, '')
@@ -63,8 +66,10 @@ export class UrlEngine implements PrepopulationEngine {
       .trim();
   }
 
- 
-  static generatePreviewUrl(baseUrl: string, fieldMappings: Record<string, string>): string {
+  static generatePreviewUrl(
+    baseUrl: string,
+    fieldMappings: Record<string, string>
+  ): string {
     const url = new URL(baseUrl);
     Object.entries(fieldMappings).forEach(([param, value]) => {
       url.searchParams.set(param, encodeURIComponent(value));
@@ -72,7 +77,6 @@ export class UrlEngine implements PrepopulationEngine {
     return url.toString();
   }
 
- 
   getAllParameters(): Record<string, string> {
     const params: Record<string, string> = {};
     this.urlParams.forEach((value, key) => {
@@ -81,7 +85,6 @@ export class UrlEngine implements PrepopulationEngine {
     return params;
   }
 
- 
   hasParameter(paramName: string): boolean {
     return this.urlParams.has(paramName);
   }

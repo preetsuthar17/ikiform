@@ -21,7 +21,6 @@ interface PublicFormClientProps {
   theme?: string;
 }
 
-
 export default function PublicFormClient({
   formId,
   schema,

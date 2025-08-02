@@ -1,7 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { FormProgress, FormProgressActions, FormProgressConfig, FormProgressState, SaveProgressOptions } from '../../lib/form-progress/types';
 import { FormProgressStorage } from '../../lib/form-progress/storage';
-
+import type {
+  FormProgress,
+  FormProgressActions,
+  FormProgressConfig,
+  FormProgressState,
+  SaveProgressOptions,
+} from '../../lib/form-progress/types';
 
 const DEFAULT_CONFIG: FormProgressConfig = {
   enabled: true,
@@ -11,7 +16,6 @@ const DEFAULT_CONFIG: FormProgressConfig = {
   compressionEnabled: false,
   encryptionEnabled: false,
 };
-
 
 const DEFAULT_SAVE_OPTIONS: SaveProgressOptions = {
   debounceMs: 500,
@@ -40,13 +44,11 @@ export function useFormProgress(
   const finalConfig = { ...DEFAULT_CONFIG, ...config };
   const finalOptions = { ...DEFAULT_SAVE_OPTIONS, ...options };
 
- 
   const storageRef = useRef<FormProgressStorage | null>(null);
   const sessionIdRef = useRef<string | null>(null);
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const autoSaveIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
- 
   useEffect(() => {
     if (!storageRef.current) {
       storageRef.current = new FormProgressStorage(finalConfig);
@@ -54,9 +56,8 @@ export function useFormProgress(
     }
   }, [finalConfig]);
 
- 
   const debouncedSave = useCallback(
-    async (formData: Record<string, any>, currentStep: number = 0, totalSteps: number = 1) => {
+    async (formData: Record<string, any>, currentStep = 0, totalSteps = 1) => {
       if (!finalOptions.enableAutoSave) return;
 
       if (saveTimeoutRef.current) {
@@ -73,15 +74,18 @@ export function useFormProgress(
     [finalOptions.debounceMs, finalOptions.enableAutoSave]
   );
 
- 
   const saveProgress = useCallback(
-    async (formData: Record<string, any>, currentStep: number = 0, totalSteps: number = 1) => {
-      if (!storageRef.current || !sessionIdRef.current || !finalConfig.enabled) return;
+    async (formData: Record<string, any>, currentStep = 0, totalSteps = 1) => {
+      if (!(storageRef.current && sessionIdRef.current && finalConfig.enabled))
+        return;
 
       try {
-        setState((prev: FormProgressState) => ({ ...prev, saving: true, error: null }));
+        setState((prev: FormProgressState) => ({
+          ...prev,
+          saving: true,
+          error: null,
+        }));
 
-       
         const filteredFormData = { ...formData };
         finalOptions.skipFields?.forEach((fieldId: string) => {
           delete filteredFormData[fieldId];
@@ -97,86 +101,89 @@ export function useFormProgress(
 
         await storageRef.current.saveProgress(progress);
 
-        setState((prev: FormProgressState) => ({ 
-          ...prev, 
-          progress, 
+        setState((prev: FormProgressState) => ({
+          ...prev,
+          progress,
           saving: false,
-          error: null 
+          error: null,
         }));
       } catch (error) {
-        setState((prev: FormProgressState) => ({ 
-          ...prev, 
-          saving: false, 
-          error: error instanceof Error ? error.message : 'Failed to save progress' 
+        setState((prev: FormProgressState) => ({
+          ...prev,
+          saving: false,
+          error:
+            error instanceof Error ? error.message : 'Failed to save progress',
         }));
       }
     },
     [formId, finalConfig.enabled, finalOptions.skipFields]
   );
 
- 
   const loadProgress = useCallback(async () => {
-    if (!storageRef.current || !sessionIdRef.current || !finalConfig.enabled) return;
+    if (!(storageRef.current && sessionIdRef.current && finalConfig.enabled))
+      return;
 
     try {
-      setState((prev: FormProgressState) => ({ ...prev, loading: true, error: null }));
+      setState((prev: FormProgressState) => ({
+        ...prev,
+        loading: true,
+        error: null,
+      }));
 
-      const progress = await storageRef.current.loadProgress(formId, sessionIdRef.current);
+      const progress = await storageRef.current.loadProgress(
+        formId,
+        sessionIdRef.current
+      );
 
-      setState((prev: FormProgressState) => ({ 
-        ...prev, 
-        progress, 
+      setState((prev: FormProgressState) => ({
+        ...prev,
+        progress,
         loading: false,
-        error: null 
+        error: null,
       }));
     } catch (error) {
-      setState((prev: FormProgressState) => ({ 
-        ...prev, 
-        loading: false, 
-        error: error instanceof Error ? error.message : 'Failed to load progress' 
+      setState((prev: FormProgressState) => ({
+        ...prev,
+        loading: false,
+        error:
+          error instanceof Error ? error.message : 'Failed to load progress',
       }));
     }
   }, [formId, finalConfig.enabled]);
 
- 
   const clearProgress = useCallback(async () => {
-    if (!storageRef.current || !sessionIdRef.current) return;
+    if (!(storageRef.current && sessionIdRef.current)) return;
 
     try {
       await storageRef.current.deleteProgress(formId, sessionIdRef.current);
-      
-      setState((prev: FormProgressState) => ({ 
-        ...prev, 
+
+      setState((prev: FormProgressState) => ({
+        ...prev,
         progress: null,
-        error: null 
+        error: null,
       }));
     } catch (error) {
-      setState((prev: FormProgressState) => ({ 
-        ...prev, 
-        error: error instanceof Error ? error.message : 'Failed to clear progress' 
+      setState((prev: FormProgressState) => ({
+        ...prev,
+        error:
+          error instanceof Error ? error.message : 'Failed to clear progress',
       }));
     }
   }, [formId]);
 
- 
-  const restoreProgress = useCallback(() => {
-   
-   
-  }, []);
+  const restoreProgress = useCallback(() => {}, []);
 
- 
   useEffect(() => {
     loadProgress();
   }, [loadProgress]);
 
- 
   useEffect(() => {
     if (finalConfig.autoSaveInterval > 0 && state.progress) {
       autoSaveIntervalRef.current = setInterval(() => {
         if (state.progress) {
           saveProgress(
-            state.progress.formData, 
-            state.progress.currentStep, 
+            state.progress.formData,
+            state.progress.currentStep,
             state.progress.totalSteps
           );
         }
@@ -190,7 +197,6 @@ export function useFormProgress(
     }
   }, [finalConfig.autoSaveInterval, state.progress, saveProgress]);
 
- 
   useEffect(() => {
     return () => {
       if (saveTimeoutRef.current) {

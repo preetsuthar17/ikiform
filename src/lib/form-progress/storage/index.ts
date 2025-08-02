@@ -1,5 +1,13 @@
-import type { FormProgress, FormProgressConfig, ProgressStorageAdapter } from '../types';
-import { LocalStorageAdapter, SessionStorageAdapter, ServerStorageAdapter } from './adapters';
+import type {
+  FormProgress,
+  FormProgressConfig,
+  ProgressStorageAdapter,
+} from '../types';
+import {
+  LocalStorageAdapter,
+  ServerStorageAdapter,
+  SessionStorageAdapter,
+} from './adapters';
 
 /**
  * Form Progress Storage Manager
@@ -14,7 +22,9 @@ export class FormProgressStorage {
     this.adapter = this.createAdapter(config.storage);
   }
 
-  private createAdapter(storageType: FormProgressConfig['storage']): ProgressStorageAdapter {
+  private createAdapter(
+    storageType: FormProgressConfig['storage']
+  ): ProgressStorageAdapter {
     switch (storageType) {
       case 'localStorage':
         return new LocalStorageAdapter();
@@ -23,7 +33,6 @@ export class FormProgressStorage {
       case 'server':
         return new ServerStorageAdapter();
       case 'indexedDB':
-       
         throw new Error('IndexedDB adapter not yet implemented');
       default:
         return new LocalStorageAdapter();
@@ -53,7 +62,7 @@ export class FormProgressStorage {
   ): number {
     if (totalFields === 0) return 0;
 
-    const filledFields = Object.values(formData).filter(value => {
+    const filledFields = Object.values(formData).filter((value) => {
       if (value === null || value === undefined || value === '') return false;
       if (Array.isArray(value) && value.length === 0) return false;
       return true;
@@ -69,16 +78,20 @@ export class FormProgressStorage {
     formId: string,
     sessionId: string,
     formData: Record<string, any>,
-    currentStep: number = 0,
-    totalSteps: number = 1,
+    currentStep = 0,
+    totalSteps = 1,
     userId?: string
   ): FormProgress {
     const now = new Date();
-    const expiresAt = new Date(now.getTime() + (this.config.retentionDays * 24 * 60 * 60 * 1000));
-    
-   
+    const expiresAt = new Date(
+      now.getTime() + this.config.retentionDays * 24 * 60 * 60 * 1000
+    );
+
     const totalFields = Object.keys(formData).length;
-    const completionPercentage = this.calculateCompletionPercentage(formData, totalFields);
+    const completionPercentage = this.calculateCompletionPercentage(
+      formData,
+      totalFields
+    );
 
     return {
       id: this.generateKey(formId, sessionId),
@@ -112,7 +125,10 @@ export class FormProgressStorage {
   /**
    * Load form progress
    */
-  async loadProgress(formId: string, sessionId: string): Promise<FormProgress | null> {
+  async loadProgress(
+    formId: string,
+    sessionId: string
+  ): Promise<FormProgress | null> {
     if (!this.config.enabled) return null;
 
     try {

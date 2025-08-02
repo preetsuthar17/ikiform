@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { toast } from '@/hooks/use-toast';
-import { usePrepopulation } from '@/hooks/prepopulation/usePrepopulation';
 import { useFormProgress } from '@/hooks/form-progress';
+import { usePrepopulation } from '@/hooks/prepopulation/usePrepopulation';
+import { toast } from '@/hooks/use-toast';
 
 import type { FormField, FormSchema } from '@/lib/database';
 import { evaluateLogic } from '@/lib/forms/logic';
@@ -65,7 +65,6 @@ export const useSingleStepForm = (
   const [submitted, setSubmitted] = useState(false);
   const initializedFieldsRef = useRef<Set<string>>(new Set());
 
- 
   const {
     progress,
     loading: progressLoading,
@@ -81,7 +80,11 @@ export const useSingleStepForm = (
     retentionDays: 7,
   });
 
-  const { prepopulatedData, loading: prepopLoading, errors: prepopErrors } = usePrepopulation(fields);
+  const {
+    prepopulatedData,
+    loading: prepopLoading,
+    errors: prepopErrors,
+  } = usePrepopulation(fields);
 
   useEffect(() => {
     if (formId) {
@@ -100,9 +103,11 @@ export const useSingleStepForm = (
       const newFormData = { ...formData };
       fields.forEach((field) => {
         if (newFieldIds.includes(field.id)) {
-         
           const prepopValue = prepopulatedData[field.id];
-          newFormData[field.id] = prepopValue !== undefined ? prepopValue : getDefaultValueForField(field);
+          newFormData[field.id] =
+            prepopValue !== undefined
+              ? prepopValue
+              : getDefaultValueForField(field);
         }
       });
       setFormData(newFormData);
@@ -110,71 +115,79 @@ export const useSingleStepForm = (
     }
   }, [fields.length, prepopulatedData, formData]);
 
- 
   useEffect(() => {
     if (Object.keys(prepopulatedData).length > 0) {
-      setFormData(prevFormData => {
+      setFormData((prevFormData) => {
         const updatedFormData = { ...prevFormData };
         let hasChanges = false;
-        
+
         Object.entries(prepopulatedData).forEach(([fieldId, value]) => {
-         
-          if (fieldId in updatedFormData && (updatedFormData[fieldId] === '' || updatedFormData[fieldId] === getDefaultValueForField(fields.find(f => f.id === fieldId)!))) {
+          if (
+            fieldId in updatedFormData &&
+            (updatedFormData[fieldId] === '' ||
+              updatedFormData[fieldId] ===
+                getDefaultValueForField(fields.find((f) => f.id === fieldId)!))
+          ) {
             updatedFormData[fieldId] = value;
             hasChanges = true;
           }
         });
-        
+
         return hasChanges ? updatedFormData : prevFormData;
       });
     }
   }, [prepopulatedData, fields]);
 
- 
   useEffect(() => {
     Object.entries(prepopErrors).forEach(([fieldId, error]) => {
-      const field = fields.find(f => f.id === fieldId);
+      const field = fields.find((f) => f.id === fieldId);
       const fieldLabel = field?.label || 'Field';
-     
     });
   }, [prepopErrors, fields]);
 
- 
   useEffect(() => {
     if (progress && Object.keys(progress.formData).length > 0) {
-      setFormData(prevFormData => {
-        const hasUserInput = Object.entries(prevFormData).some(([fieldId, value]) => {
-          const field = fields.find(f => f.id === fieldId);
-          if (!field) return false;
-          
-          const defaultValue = getDefaultValueForField(field);
-          
-          if (Array.isArray(value) && Array.isArray(defaultValue)) {
-            return value.length > 0;
+      setFormData((prevFormData) => {
+        const hasUserInput = Object.entries(prevFormData).some(
+          ([fieldId, value]) => {
+            const field = fields.find((f) => f.id === fieldId);
+            if (!field) return false;
+
+            const defaultValue = getDefaultValueForField(field);
+
+            if (Array.isArray(value) && Array.isArray(defaultValue)) {
+              return value.length > 0;
+            }
+
+            return (
+              value !== defaultValue &&
+              value !== '' &&
+              value !== null &&
+              value !== undefined
+            );
           }
-          
-          return value !== defaultValue && value !== '' && value !== null && value !== undefined;
-        });
-        
+        );
+
         if (!hasUserInput) {
           console.log('Restoring form progress:', progress.formData);
           return { ...prevFormData, ...progress.formData };
         }
-        
+
         return prevFormData;
       });
     }
   }, [progress]);
 
- 
   useEffect(() => {
     if (Object.keys(formData).length > 0) {
-      const filledFields = Object.values(formData).filter(value => 
-        value !== '' && value !== null && value !== undefined && 
-        !(Array.isArray(value) && value.length === 0)
+      const filledFields = Object.values(formData).filter(
+        (value) =>
+          value !== '' &&
+          value !== null &&
+          value !== undefined &&
+          !(Array.isArray(value) && value.length === 0)
       ).length;
-      
-     
+
       if (filledFields > 0) {
         saveProgress(formData, 0);
       }
@@ -246,8 +259,7 @@ export const useSingleStepForm = (
       if (result.success) {
         setSubmitted(true);
         toast.success('Form submitted successfully!');
-        
-       
+
         clearProgress();
 
         if (schema.settings.redirectUrl) {
@@ -278,7 +290,7 @@ export const useSingleStepForm = (
     handleSubmit,
     fieldVisibility,
     logicMessages,
-   
+
     progress,
     progressLoading,
     progressSaving,

@@ -19,7 +19,10 @@ export interface FormProgressState {
 }
 
 export interface FormProgressActions {
-  saveProgress: (formData: Record<string, any>, currentStep?: number) => Promise<void>;
+  saveProgress: (
+    formData: Record<string, any>,
+    currentStep?: number
+  ) => Promise<void>;
   loadProgress: () => Promise<void>;
   clearProgress: () => Promise<void>;
   restoreProgress: () => void;

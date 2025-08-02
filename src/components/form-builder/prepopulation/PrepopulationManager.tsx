@@ -1,11 +1,24 @@
+import {
+  AlertCircle,
+  CheckCircle,
+  Copy,
+  Eye,
+  Globe,
+  HelpCircle,
+  History,
+  Plus,
+  Save,
+  Settings,
+  Trash2,
+  User,
+  Zap,
+} from 'lucide-react';
 import React, { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Switch } from '@/components/ui/switch';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Textarea } from '@/components/ui/textarea';
 import {
   Modal,
   ModalContent,
@@ -13,21 +26,8 @@ import {
   ModalTitle,
   ModalTrigger,
 } from '@/components/ui/modal';
-import { 
-  Settings,
-  Zap, 
-  Globe, 
-  User, 
-  History,
-  CheckCircle,
-  AlertCircle,
-  HelpCircle,
-  Save,
-  Eye,
-  Copy,
-  Trash2,
-  Plus
-} from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
+import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
 import type { FormField, FormSchema } from '@/lib/database';
 
@@ -53,13 +53,19 @@ interface GlobalPrepopulationTemplate {
   };
 }
 
-export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationManagerProps) {
+export function PrepopulationManager({
+  schema,
+  onSchemaUpdate,
+}: PrepopulationManagerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [templates, setTemplates] = useState<GlobalPrepopulationTemplate[]>([]);
   const [selectedTemplate, setSelectedTemplate] = useState<string>('');
 
-  const fieldsWithPrepopulation = schema.fields?.filter(field => field.prepopulation?.enabled) || [];
-  const prepopulationSources = Array.from(new Set(fieldsWithPrepopulation.map(field => field.prepopulation?.source))).filter(Boolean);
+  const fieldsWithPrepopulation =
+    schema.fields?.filter((field) => field.prepopulation?.enabled) || [];
+  const prepopulationSources = Array.from(
+    new Set(fieldsWithPrepopulation.map((field) => field.prepopulation?.source))
+  ).filter(Boolean);
 
   const getSourceIcon = (source: string) => {
     switch (source) {
@@ -76,13 +82,16 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
     }
   };
 
-  const bulkEnablePrepopulation = (source: 'url' | 'api' | 'profile' | 'previous') => {
+  const bulkEnablePrepopulation = (
+    source: 'url' | 'api' | 'profile' | 'previous'
+  ) => {
     if (!schema.fields) return;
 
-    const updatedFields = schema.fields.map(field => {
-     
-      const shouldEnable = ['text', 'email', 'phone', 'address'].includes(field.type);
-      
+    const updatedFields = schema.fields.map((field) => {
+      const shouldEnable = ['text', 'email', 'phone', 'address'].includes(
+        field.type
+      );
+
       if (shouldEnable) {
         return {
           ...field,
@@ -90,12 +99,15 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
             enabled: true,
             source,
             config: {
-              urlParam: field.type === 'email' ? 'email' : field.label.toLowerCase().replace(/\s+/g, '_'),
+              urlParam:
+                field.type === 'email'
+                  ? 'email'
+                  : field.label.toLowerCase().replace(/\s+/g, '_'),
               fallbackValue: '',
               overwriteExisting: false,
               requireConsent: false,
-            }
-          }
+            },
+          },
         };
       }
       return field;
@@ -103,7 +115,7 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
 
     onSchemaUpdate({
       ...schema,
-      fields: updatedFields
+      fields: updatedFields,
     });
 
     toast.success(`Enabled ${source} prepopulation for compatible fields`);
@@ -112,26 +124,31 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
   const disableAllPrepopulation = () => {
     if (!schema.fields) return;
 
-    const updatedFields = schema.fields.map(field => ({
+    const updatedFields = schema.fields.map((field) => ({
       ...field,
-      prepopulation: field.prepopulation ? { ...field.prepopulation, enabled: false } : undefined
+      prepopulation: field.prepopulation
+        ? { ...field.prepopulation, enabled: false }
+        : undefined,
     }));
 
     onSchemaUpdate({
       ...schema,
-      fields: updatedFields
+      fields: updatedFields,
     });
 
     toast.success('Disabled prepopulation for all fields');
   };
 
   const generatePreviewUrl = () => {
-    const baseUrl = typeof window !== 'undefined' 
-      ? window.location.origin + window.location.pathname
-      : 'https://yoursite.com/form/123';
-    
-    const urlFields = fieldsWithPrepopulation.filter(field => 
-      field.prepopulation?.source === 'url' && field.prepopulation.config.urlParam
+    const baseUrl =
+      typeof window !== 'undefined'
+        ? window.location.origin + window.location.pathname
+        : 'https://yoursite.com/form/123';
+
+    const urlFields = fieldsWithPrepopulation.filter(
+      (field) =>
+        field.prepopulation?.source === 'url' &&
+        field.prepopulation.config.urlParam
     );
 
     if (urlFields.length === 0) {
@@ -140,9 +157,12 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
     }
 
     const params = new URLSearchParams();
-    urlFields.forEach(field => {
+    urlFields.forEach((field) => {
       if (field.prepopulation?.config.urlParam) {
-        params.set(field.prepopulation.config.urlParam, `Sample ${field.label}`);
+        params.set(
+          field.prepopulation.config.urlParam,
+          `Sample ${field.label}`
+        );
       }
     });
 
@@ -152,9 +172,9 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
   };
 
   return (
-    <Modal open={isOpen} onOpenChange={setIsOpen}>
+    <Modal onOpenChange={setIsOpen} open={isOpen}>
       <ModalTrigger asChild>
-        <Button variant="outline" className="flex items-center gap-2">
+        <Button className="flex items-center gap-2" variant="outline">
           <Settings className="h-4 w-4" />
           Prepopulation Manager
           {fieldsWithPrepopulation.length > 0 && (
@@ -162,8 +182,8 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
           )}
         </Button>
       </ModalTrigger>
-      
-      <ModalContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+
+      <ModalContent className="max-h-[90vh] max-w-4xl overflow-y-auto">
         <ModalHeader>
           <ModalTitle className="flex items-center gap-2">
             <Zap className="h-5 w-5 text-primary" />
@@ -174,29 +194,35 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
         <div className="space-y-6 p-6">
           {/* Overview Section */}
           <Card className="p-4">
-            <h3 className="font-medium mb-3">Current Prepopulation Status</h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-              <div className="flex items-center gap-2 p-3 rounded-md bg-blue-50 border border-blue-200">
+            <h3 className="mb-3 font-medium">Current Prepopulation Status</h3>
+
+            <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-3">
+              <div className="flex items-center gap-2 rounded-md border border-blue-200 bg-blue-50 p-3">
                 <CheckCircle className="h-4 w-4 text-blue-600" />
                 <div>
-                  <div className="font-medium text-blue-900">{fieldsWithPrepopulation.length}</div>
+                  <div className="font-medium text-blue-900">
+                    {fieldsWithPrepopulation.length}
+                  </div>
                   <div className="text-blue-700 text-sm">Fields Enabled</div>
                 </div>
               </div>
-              
-              <div className="flex items-center gap-2 p-3 rounded-md bg-green-50 border border-green-200">
+
+              <div className="flex items-center gap-2 rounded-md border border-green-200 bg-green-50 p-3">
                 <Zap className="h-4 w-4 text-green-600" />
                 <div>
-                  <div className="font-medium text-green-900">{prepopulationSources.length}</div>
+                  <div className="font-medium text-green-900">
+                    {prepopulationSources.length}
+                  </div>
                   <div className="text-green-700 text-sm">Data Sources</div>
                 </div>
               </div>
-              
-              <div className="flex items-center gap-2 p-3 rounded-md bg-purple-50 border border-purple-200">
+
+              <div className="flex items-center gap-2 rounded-md border border-purple-200 bg-purple-50 p-3">
                 <Settings className="h-4 w-4 text-purple-600" />
                 <div>
-                  <div className="font-medium text-purple-900">{schema.fields?.length || 0}</div>
+                  <div className="font-medium text-purple-900">
+                    {schema.fields?.length || 0}
+                  </div>
                   <div className="text-purple-700 text-sm">Total Fields</div>
                 </div>
               </div>
@@ -206,8 +232,12 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
               <div className="space-y-2">
                 <h4 className="font-medium">Active Data Sources:</h4>
                 <div className="flex flex-wrap gap-2">
-                  {prepopulationSources.map(source => (
-                    <Badge key={source} variant="outline" className="flex items-center gap-1">
+                  {prepopulationSources.map((source) => (
+                    <Badge
+                      className="flex items-center gap-1"
+                      key={source}
+                      variant="outline"
+                    >
                       {getSourceIcon(source!)}
                       {source!.toUpperCase()}
                     </Badge>
@@ -220,16 +250,24 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
               <div className="mt-4 space-y-2">
                 <h4 className="font-medium">Enabled Fields:</h4>
                 <div className="space-y-1">
-                  {fieldsWithPrepopulation.map(field => (
-                    <div key={field.id} className="flex items-center justify-between p-2 rounded border">
+                  {fieldsWithPrepopulation.map((field) => (
+                    <div
+                      className="flex items-center justify-between rounded border p-2"
+                      key={field.id}
+                    >
                       <div className="flex items-center gap-2">
                         <span className="font-medium">{field.label}</span>
-                        <Badge variant="secondary" className="flex items-center gap-1">
+                        <Badge
+                          className="flex items-center gap-1"
+                          variant="secondary"
+                        >
                           {getSourceIcon(field.prepopulation!.source)}
                           {field.prepopulation!.source.toUpperCase()}
                         </Badge>
                       </div>
-                      <span className="text-muted-foreground text-sm">{field.type}</span>
+                      <span className="text-muted-foreground text-sm">
+                        {field.type}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -239,16 +277,17 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
 
           {/* Bulk Actions Section */}
           <Card className="p-4">
-            <h3 className="font-medium mb-3">Bulk Enable Prepopulation</h3>
-            <p className="text-muted-foreground text-sm mb-4">
-              Quickly enable prepopulation for all compatible fields using a specific data source.
+            <h3 className="mb-3 font-medium">Bulk Enable Prepopulation</h3>
+            <p className="mb-4 text-muted-foreground text-sm">
+              Quickly enable prepopulation for all compatible fields using a
+              specific data source.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <Button
+                className="flex h-auto items-center gap-2 p-4"
                 onClick={() => bulkEnablePrepopulation('url')}
                 variant="outline"
-                className="flex items-center gap-2 h-auto p-4"
               >
                 <Globe className="h-5 w-5 text-blue-600" />
                 <div className="text-left">
@@ -260,9 +299,9 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
               </Button>
 
               <Button
+                className="flex h-auto items-center gap-2 p-4"
                 onClick={() => bulkEnablePrepopulation('api')}
                 variant="outline"
-                className="flex items-center gap-2 h-auto p-4"
               >
                 <Zap className="h-5 w-5 text-purple-600" />
                 <div className="text-left">
@@ -274,9 +313,9 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
               </Button>
 
               <Button
+                className="flex h-auto items-center gap-2 p-4"
                 onClick={() => bulkEnablePrepopulation('profile')}
                 variant="outline"
-                className="flex items-center gap-2 h-auto p-4"
               >
                 <User className="h-5 w-5 text-green-600" />
                 <div className="text-left">
@@ -288,9 +327,9 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
               </Button>
 
               <Button
+                className="flex h-auto items-center gap-2 p-4"
                 onClick={() => bulkEnablePrepopulation('previous')}
                 variant="outline"
-                className="flex items-center gap-2 h-auto p-4"
               >
                 <History className="h-5 w-5 text-orange-600" />
                 <div className="text-left">
@@ -302,7 +341,7 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
               </Button>
             </div>
 
-            <div className="mt-6 pt-4 border-t">
+            <div className="mt-6 border-t pt-4">
               <div className="flex items-center justify-between">
                 <div>
                   <h4 className="font-medium">Bulk Actions</h4>
@@ -313,21 +352,21 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
                 <div className="flex gap-2">
                   {fieldsWithPrepopulation.length > 0 && (
                     <Button
-                      onClick={generatePreviewUrl}
-                      variant="outline"
-                      size="sm"
                       className="flex items-center gap-2"
+                      onClick={generatePreviewUrl}
+                      size="sm"
+                      variant="outline"
                     >
                       <Eye className="h-4 w-4" />
                       Preview URL
                     </Button>
                   )}
                   <Button
-                    onClick={disableAllPrepopulation}
-                    variant="destructive"
-                    size="sm"
                     className="flex items-center gap-2"
                     disabled={fieldsWithPrepopulation.length === 0}
+                    onClick={disableAllPrepopulation}
+                    size="sm"
+                    variant="destructive"
                   >
                     <Trash2 className="h-4 w-4" />
                     Disable All
@@ -339,8 +378,8 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
 
           {/* Settings Section */}
           <Card className="p-4">
-            <h3 className="font-medium mb-3">Global Prepopulation Settings</h3>
-            
+            <h3 className="mb-3 font-medium">Global Prepopulation Settings</h3>
+
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -359,7 +398,7 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
                     Improve performance by caching API data for 5 minutes
                   </p>
                 </div>
-                <Switch size="sm" defaultChecked />
+                <Switch defaultChecked size="sm" />
               </div>
 
               <div className="flex items-center justify-between">
@@ -382,7 +421,7 @@ export function PrepopulationManager({ schema, onSchemaUpdate }: PrepopulationMa
 
               <div className="space-y-2">
                 <Label>API Request Timeout (seconds)</Label>
-                <Input type="number" min="5" max="30" defaultValue="10" />
+                <Input defaultValue="10" max="30" min="5" type="number" />
               </div>
             </div>
           </Card>
