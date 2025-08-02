@@ -62,20 +62,10 @@ The app will be available at `http://localhost:3000` by default.
 
 ### Environment Variables
 
-Create a `.env.local` file in the project root. Use `.env.example` as a template. The following variables are required:
+Create a `.env.local` file in the project root and configure the required environment variables:
 
-```env
-NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
-SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
-RESEND_API_KEY=your-resend-api-key
-NEXT_PUBLIC_BASE_URL=http://localhost:3000
-POLAR_ACCESS_TOKEN=your-polar-access-token
-POLAR_SUCCESS_URL=http://localhost:3000/success
-POLAR_WEBHOOK_SECRET=your-polar-webhook-secret
-ANALYTICS_AI_SYSTEM_PROMPT=your-analytics-ai-system-prompt
-GROQ_API_KEY=your-groq-api-key
-AI_FORM_SYSTEM_PROMPT=your-ai-form-system-prompt
+```bash
+cp .env.example .env.local
 ```
 
 ### Code Quality
