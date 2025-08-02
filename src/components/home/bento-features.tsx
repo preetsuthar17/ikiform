@@ -747,13 +747,13 @@ export default function BentoFeatures() {
             title="AI Analytics"
           />
 
-          {/* Logic Builder */}
+          {/* Email Notifications */}
           <FeatureCard
             className="col-span-2"
-            description="Create complex conditional flows with an intuitive drag-and-drop interface. Build smart forms that adapt to user responses."
-            icon={<GitBranch className="h-5 w-5" />}
-            preview={<LogicBuilderPreview />}
-            title="Visual Logic Builder"
+            description="Automated email notifications and custom triggers for form submissions."
+            icon={<Mail className="h-5 w-5" />}
+            preview={<EmailNotificationsPreview />}
+            title="Smart Notifications"
           />
 
           {/* API Integration */}
@@ -774,13 +774,13 @@ export default function BentoFeatures() {
             title="Digital Signatures"
           />
 
-          {/* Email Notifications */}
+          {/* Logic Builder */}
           <FeatureCard
             className="col-span-2"
-            description="Automated email notifications and custom triggers for form submissions."
-            icon={<Mail className="h-5 w-5" />}
-            preview={<EmailNotificationsPreview />}
-            title="Smart Notifications"
+            description="Create complex conditional flows with an intuitive drag-and-drop interface. Build smart forms that adapt to user responses."
+            icon={<GitBranch className="h-5 w-5" />}
+            preview={<LogicBuilderPreview />}
+            title="Visual Logic Builder"
           />
         </div>
       </div>
