@@ -51,6 +51,7 @@
     "clsx": "^2.1.1",
     "crisp-sdk-web": "^1.0.25",
     "input-otp": "^1.4.2",
+    "lru-cache": "^11.1.0",
     "lucide-react": "^0.536.0",
     "marked": "^16.1.1",
     "motion": "^12.23.12",
