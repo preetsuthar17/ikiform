@@ -86,7 +86,7 @@ export function QuizSection({
 
             {/* Allow Retake */}
             <QuizToggleField
-              checked={quizSettings.allowRetake}
+              checked={quizSettings.allowRetake ?? false}
               description="Let users retake the quiz to improve their score"
               id="allow-retake"
               label="Allow Retake"
