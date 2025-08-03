@@ -73,10 +73,10 @@ export function AdminDashboard() {
       <Tabs
         className="mb-6"
         items={[
-          { id: 'analytics', label: 'Analytics', icon: <BarChart3 /> },
-          { id: 'users', label: 'Users', icon: <Users /> },
-          { id: 'forms', label: 'Forms', icon: <FileText /> },
-          { id: 'database', label: 'Database', icon: <Database /> },
+          { id: 'analytics', icon: <BarChart3 /> },
+          { id: 'users', icon: <Users /> },
+          { id: 'forms', icon: <FileText /> },
+          { id: 'database', icon: <Database /> },
         ]}
         onValueChange={setActiveTab}
         value={activeTab}
