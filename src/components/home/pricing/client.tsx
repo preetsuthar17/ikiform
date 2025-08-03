@@ -74,22 +74,41 @@ const features = [
 const MONTHLY_PRODUCT_ID = '05f52efa-2102-4dd0-9d1d-1538210d6712';
 const YEARLY_PRODUCT_ID = '4eff4c1d-56de-4111-96de-b5ec8124dd4b';
 
-const PRICING = {
+const PRICING: {
   monthly: {
-    price: 29,
-    originalPrice: 39,
-    period: 'month',
-    billedAs: '$29/month',
-    savings: null,
-  },
+    price: number;
+    originalPrice: number;
+    period: string;
+    billedAs: string;
+    savings: number | null;
+  };
   yearly: {
+    price: number;
+    originalPrice: number;
+    period: string;
+    billedAs: string;
+    savings: number | null;
+  };
+} = {
+  monthly: {
     price: 19,
     originalPrice: 29,
     period: 'month',
-    billedAs: 'Billed yearly as $228',
-    savings: Math.round((1 - (19 * 12) / (29 * 12)) * 100),
+    billedAs: '$19/month',
+    savings: null,
+  },
+  yearly: {
+    price: 9,
+    originalPrice: 19,
+    period: 'month',
+    billedAs: 'Billed yearly as $108',
+    savings: null,
   },
 };
+
+PRICING.yearly.savings = Math.round(
+  (1 - (PRICING.yearly.price * 12) / (PRICING.monthly.price * 12)) * 100
+);
 
 export default function PricingClient({ products }: PricingClientProps) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -166,7 +185,7 @@ export default function PricingClient({ products }: PricingClientProps) {
               className="ml-2 border-green-200 bg-green-100 text-green-700"
               variant="secondary"
             >
-              Save 34%
+              Save 53%
             </Badge>
           </div>
         </div>
