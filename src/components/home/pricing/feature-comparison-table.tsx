@@ -117,6 +117,16 @@ const featureCategories = [
         description: 'Allow users to submit links in your forms.',
         included: true,
       },
+      {
+        label: 'Pre-populating fields',
+        description: 'Save time by pre-filling form fields with known data.',
+        included: true,
+      },
+      {
+        label: 'Scoring (quiz system)',
+        description: 'Add scoring and quiz functionality to your forms.',
+        included: true,
+      },
     ],
   },
   {
@@ -224,16 +234,6 @@ const featureCategories = [
       {
         label: 'Inviting team members',
         description: 'Invite others to collaborate on your forms.',
-        included: false,
-      },
-      {
-        label: 'Pre-populating fields',
-        description: 'Save time by pre-filling form fields with known data.',
-        included: false,
-      },
-      {
-        label: 'Scoring (quiz system)',
-        description: 'Add scoring and quiz functionality to your forms.',
         included: false,
       },
       {
