@@ -2,14 +2,14 @@ import type React from 'react';
 import { useEffect, useRef } from 'react';
 import { FormFieldRenderer } from '@/components/form-builder/form-field-renderer';
 import { getLivePatternError } from '@/components/form-builder/form-field-renderer/components/TextInputField';
-
+import { Separator } from '@/components/ui';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SocialMediaIcons } from '@/components/ui/social-media-icons';
-
 import type { FormField, FormSchema } from '@/lib/database';
 
 interface SingleStepFormContentProps {
+  formId: string;
   schema: FormSchema;
   fields: FormField[];
   formData: Record<string, any>;
@@ -22,6 +22,7 @@ interface SingleStepFormContentProps {
 }
 
 export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
+  formId,
   schema,
   fields,
   formData,
@@ -59,6 +60,7 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
             </p>
           )}
         </div>
+        <Separator />
 
         {schema.settings.branding?.socialMedia?.enabled &&
           schema.settings.branding.socialMedia.platforms &&

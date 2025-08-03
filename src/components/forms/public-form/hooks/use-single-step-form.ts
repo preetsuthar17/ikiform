@@ -5,6 +5,7 @@ import { toast } from '@/hooks/use-toast';
 
 import type { FormField, FormSchema } from '@/lib/database';
 import { evaluateLogic } from '@/lib/forms/logic';
+import { calculateQuizScore, type QuizResult } from '@/lib/quiz/scoring';
 import type { SingleStepFormActions, SingleStepFormState } from '../types';
 
 import {
@@ -63,6 +64,7 @@ export const useSingleStepForm = (
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [quizResults, setQuizResults] = useState<QuizResult | null>(null);
   const initializedFieldsRef = useRef<Set<string>>(new Set());
 
   const {
@@ -257,12 +259,22 @@ export const useSingleStepForm = (
       const result = await submitSingleStepForm(formId, formData);
 
       if (result.success) {
+        if (schema.settings.quiz?.enabled) {
+          const quizResult = calculateQuizScore(schema, formData);
+          setQuizResults(quizResult);
+        }
+
         setSubmitted(true);
         toast.success('Form submitted successfully!');
 
         clearProgress();
 
-        if (schema.settings.redirectUrl) {
+        const shouldShowQuizResults =
+          schema.settings.quiz?.enabled &&
+          (schema.settings.quiz?.showScore !== false ||
+            schema.settings.quiz?.showCorrectAnswers !== false);
+
+        if (schema.settings.redirectUrl && !shouldShowQuizResults) {
           setTimeout(() => {
             window.location.href = `${schema.settings.redirectUrl}?ref=ikiform`;
           }, 2000);
@@ -290,6 +302,7 @@ export const useSingleStepForm = (
     handleSubmit,
     fieldVisibility,
     logicMessages,
+    quizResults,
 
     progress,
     progressLoading,

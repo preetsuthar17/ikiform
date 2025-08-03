@@ -1,8 +1,10 @@
 import type { Form, FormSubmission } from '@/lib/database';
+import { calculateQuizScore } from '@/lib/quiz/scoring';
 import type {
   ConversionFunnelStep,
   FieldAnalytics,
   FilterState,
+  QuizAnalytics,
 } from '../types';
 
 export const generateSessionId = () =>
@@ -268,4 +270,116 @@ export const getActiveFilters = (
   }
 
   return filters;
+};
+
+export const calculateQuizAnalytics = (
+  form: Form,
+  submissions: FormSubmission[]
+): QuizAnalytics => {
+  const isQuizForm = form.schema.settings?.quiz?.enabled;
+
+  if (!isQuizForm) {
+    return {
+      isQuizForm: false,
+      totalQuizSubmissions: 0,
+      averageScore: 0,
+      averagePercentage: 0,
+      passRate: 0,
+      topPerformers: [],
+      questionAnalytics: [],
+    };
+  }
+
+  const allFields = [
+    ...(form.schema.fields || []),
+    ...(form.schema.blocks?.flatMap((block) => block.fields || []) || []),
+  ];
+  const quizFields = allFields.filter((field) => field.settings?.isQuizField);
+
+  if (quizFields.length === 0) {
+    return {
+      isQuizForm: true,
+      totalQuizSubmissions: 0,
+      averageScore: 0,
+      averagePercentage: 0,
+      passRate: 0,
+      topPerformers: [],
+      questionAnalytics: [],
+    };
+  }
+
+  const quizResults = submissions
+    .map((submission) => {
+      const result = calculateQuizScore(
+        form.schema,
+        submission.submission_data
+      );
+      return {
+        submissionId: submission.id,
+        result,
+        submission,
+      };
+    })
+    .filter((item) => item.result.answeredQuestions > 0);
+
+  if (quizResults.length === 0) {
+    return {
+      isQuizForm: true,
+      totalQuizSubmissions: 0,
+      averageScore: 0,
+      averagePercentage: 0,
+      passRate: 0,
+      topPerformers: [],
+      questionAnalytics: [],
+    };
+  }
+
+  const totalScore = quizResults.reduce(
+    (sum, item) => sum + item.result.score,
+    0
+  );
+  const totalPercentage = quizResults.reduce(
+    (sum, item) => sum + item.result.percentage,
+    0
+  );
+  const passCount = quizResults.filter((item) => item.result.passed).length;
+  const passingScore = form.schema.settings?.quiz?.passingScore || 70;
+
+  const questionAnalytics = quizFields.map((field) => {
+    const fieldResults = quizResults.flatMap((item) =>
+      item.result.fieldResults.filter((fr) => fr.fieldId === field.id)
+    );
+
+    const correctAnswers = fieldResults.filter((fr) => fr.isCorrect).length;
+    const totalAnswers = fieldResults.length;
+
+    return {
+      fieldId: field.id,
+      label: field.label,
+      correctAnswers,
+      totalAnswers,
+      accuracyRate:
+        totalAnswers > 0 ? (correctAnswers / totalAnswers) * 100 : 0,
+    };
+  });
+
+  const topPerformers = quizResults
+    .sort((a, b) => b.result.percentage - a.result.percentage)
+    .slice(0, 5)
+    .map((item) => ({
+      submissionId: item.submissionId,
+      score: item.result.score,
+      percentage: item.result.percentage,
+    }));
+
+  return {
+    isQuizForm: true,
+    totalQuizSubmissions: quizResults.length,
+    averageScore: Math.round((totalScore / quizResults.length) * 100) / 100,
+    averagePercentage:
+      Math.round((totalPercentage / quizResults.length) * 100) / 100,
+    passRate: Math.round((passCount / quizResults.length) * 100 * 100) / 100,
+    topPerformers,
+    questionAnalytics,
+  };
 };

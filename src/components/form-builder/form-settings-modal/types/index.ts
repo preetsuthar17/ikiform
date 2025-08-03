@@ -83,6 +83,18 @@ export interface LocalSettings {
   rtl?: boolean;
   notifications?: NotificationSettings;
   showProgress?: boolean;
+  quiz?: {
+    enabled?: boolean;
+    passingScore?: number;
+    showScore?: boolean;
+    showCorrectAnswers?: boolean;
+    allowRetake?: boolean;
+    timeLimit?: number;
+    resultMessage?: {
+      pass?: string;
+      fail?: string;
+    };
+  };
 }
 
 export interface BasicInfoSectionProps {
@@ -120,7 +132,8 @@ export type FormSettingsSection =
   | 'branding'
   | 'notifications'
   | 'design'
-  | 'webhooks';
+  | 'webhooks'
+  | 'quiz';
 
 export interface FormSettingsSectionConfig {
   id: FormSettingsSection;

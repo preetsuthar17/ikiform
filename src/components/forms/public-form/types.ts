@@ -1,5 +1,6 @@
 import type { FormSchema } from '@/lib/database';
 import type { FormProgress } from '@/lib/form-progress/types';
+import type { QuizResult } from '@/lib/quiz/scoring';
 
 export interface PublicFormProps {
   formId: string;
@@ -12,6 +13,7 @@ export interface SingleStepFormState {
   errors: Record<string, string>;
   submitting: boolean;
   submitted: boolean;
+  quizResults: QuizResult | null;
 
   progress: FormProgress | null;
   progressLoading: boolean;

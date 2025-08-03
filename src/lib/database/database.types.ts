@@ -281,6 +281,12 @@ export interface FormField {
 
     requiredLines?: number;
     requiredMessage?: string;
+
+    isQuizField?: boolean;
+    correctAnswer?: string | string[];
+    points?: number;
+    showCorrectAnswer?: boolean;
+    explanation?: string;
   };
   prepopulation?: {
     enabled: boolean;
@@ -414,6 +420,19 @@ export interface FormSchema {
       email?: string;
       subject?: string;
       message?: string;
+    };
+
+    quiz?: {
+      enabled?: boolean;
+      passingScore?: number;
+      showScore?: boolean;
+      showCorrectAnswers?: boolean;
+      allowRetake?: boolean;
+      timeLimit?: number;
+      resultMessage?: {
+        pass?: string;
+        fail?: string;
+      };
     };
 
     rtl?: boolean;

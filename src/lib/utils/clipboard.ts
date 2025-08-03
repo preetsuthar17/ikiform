@@ -23,10 +23,8 @@ export async function copyToClipboard(
     errorMessage = 'Failed to copy to clipboard',
   } = options;
 
-  // First try the modern Clipboard API if available and secure context
   if (navigator.clipboard && window.isSecureContext) {
     try {
-      // Check if document is focused
       if (document.hasFocus()) {
         await navigator.clipboard.writeText(text);
         if (showSuccessToast) {
@@ -35,10 +33,9 @@ export async function copyToClipboard(
         }
         return true;
       }
-      // Document is not focused, try to focus it first
+
       window.focus();
 
-      // Wait a brief moment for focus to take effect
       await new Promise((resolve) => setTimeout(resolve, 50));
 
       if (document.hasFocus()) {
@@ -49,7 +46,7 @@ export async function copyToClipboard(
         }
         return true;
       }
-      // Still not focused, fall back to the manual method
+
       return fallbackCopyToClipboard(text, options);
     } catch (error) {
       console.warn(
@@ -60,7 +57,6 @@ export async function copyToClipboard(
     }
   }
 
-  // Fallback for browsers without Clipboard API or insecure contexts
   return fallbackCopyToClipboard(text, options);
 }
 
@@ -79,11 +75,9 @@ function fallbackCopyToClipboard(
   } = options;
 
   try {
-    // Create a temporary textarea element
     const textarea = document.createElement('textarea');
     textarea.value = text;
 
-    // Position it off-screen
     textarea.style.position = 'absolute';
     textarea.style.left = '-9999px';
     textarea.style.top = '-9999px';
@@ -91,16 +85,13 @@ function fallbackCopyToClipboard(
     textarea.style.pointerEvents = 'none';
     textarea.setAttribute('readonly', '');
 
-    // Add to DOM
     document.body.appendChild(textarea);
 
-    // Select and copy
     textarea.select();
-    textarea.setSelectionRange(0, 99_999); // For mobile devices
+    textarea.setSelectionRange(0, 99_999);
 
     const successful = document.execCommand('copy');
 
-    // Clean up
     document.body.removeChild(textarea);
 
     if (successful) {

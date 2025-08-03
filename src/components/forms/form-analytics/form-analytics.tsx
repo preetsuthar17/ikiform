@@ -37,6 +37,7 @@ import {
   FloatingChatButton,
   InfoCards,
   OverviewStats,
+  QuizAnalyticsCard,
   SubmissionDetailsModal,
   SubmissionsList,
   TrendsChart,
@@ -265,6 +266,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
           </div>
         </div>
         <OverviewStats data={analyticsData} />
+        <QuizAnalyticsCard quizAnalytics={analyticsData.quizAnalytics} />
         <AnalyticsCards data={analyticsData} />
         <TrendsChart trends={analyticsData.submissionTrends} />
         <DropoffAnalytics form={form} submissions={submissions} />

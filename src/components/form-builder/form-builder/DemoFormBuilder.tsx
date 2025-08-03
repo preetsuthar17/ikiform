@@ -85,10 +85,16 @@ export default function DemoFormBuilder() {
           fields,
         };
       }
+
+      let updatedFields = prev.fields;
+      if (!prev.blocks || prev.blocks.length === 0) {
+        updatedFields = fields;
+      }
+
       return {
         ...prev,
         blocks: updatedBlocks,
-        fields,
+        fields: updatedFields,
       };
     });
   };

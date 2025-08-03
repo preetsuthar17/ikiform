@@ -1,3 +1,4 @@
+import { CheckCircle } from 'lucide-react';
 import React from 'react';
 
 import { RadioGroup, RadioItem } from '@/components/ui/radio';
@@ -20,6 +21,14 @@ export function RadioField({
   > | null>(null);
   const [loading, setLoading] = React.useState(false);
   const [fetchError, setFetchError] = React.useState<string | null>(null);
+
+  const isFormBuilder =
+    typeof window !== 'undefined' &&
+    (window.location.pathname.includes('/form-builder') ||
+      window.location.pathname.includes('/demo-form-builder'));
+
+  const isQuizField = field.settings?.isQuizField;
+  const correctAnswer = field.settings?.correctAnswer;
 
   React.useEffect(() => {
     if (field.optionsApi) {
@@ -60,33 +69,49 @@ export function RadioField({
 
   return (
     <RadioGroup
-      className={`flex gap-2 ${errorRingClasses}`}
+      className={`flex flex-col gap-2 ${errorRingClasses}`}
       disabled={disabled || loading}
       onValueChange={onChange}
       value={value || ''}
     >
       {fetchError && <div className="p-2 text-red-500">{fetchError}</div>}
-      {options.map((option, index) => {
+      {options.filter(Boolean).map((option, index) => {
+        let optionValue = '';
+        let optionLabel = '';
+
         if (typeof option === 'string') {
-          return (
-            <RadioItem
-              disabled={disabled || loading}
-              id={`${field.id}-${index}`}
-              key={index}
-              label={option}
-              value={option}
-            />
-          );
+          optionValue = option;
+          optionLabel = option;
+        } else if (option && typeof option === 'object') {
+          optionValue = option.value || '';
+          optionLabel = option.label || option.value || '';
         }
-        if (option && typeof option === 'object' && option.value) {
+
+        if (!optionValue) return null;
+
+        const isCorrect = isQuizField && correctAnswer === optionValue;
+
+        if (typeof option === 'string' || optionValue) {
           return (
-            <RadioItem
-              disabled={disabled || loading}
-              id={`${field.id}-${index}`}
+            <div
+              className={`relative ${isFormBuilder && isCorrect ? 'rounded-md bg-green-50 p-1 ring-1 ring-green-200' : ''}`}
               key={index}
-              label={option.label || option.value}
-              value={option.value}
-            />
+            >
+              <RadioItem
+                disabled={disabled || loading}
+                id={`${field.id}-${index}`}
+                label={optionLabel}
+                value={optionValue}
+              />
+              {isFormBuilder && isCorrect && (
+                <div
+                  className="-translate-y-1/2 absolute top-1/2 right-2 transform"
+                  title="Correct Answer"
+                >
+                  <CheckCircle className="h-4 w-4 text-green-600" />
+                </div>
+              )}
+            </div>
           );
         }
         return null;

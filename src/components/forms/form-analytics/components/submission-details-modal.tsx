@@ -44,17 +44,13 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
   onExport,
   form,
 }) => {
-  const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    if (!isOpen) {
-      setCopied(false);
-    }
-  }, [isOpen, submission?.id]);
-
   if (!submission) return null;
 
+  const [copied, setCopied] = useState(false);
+
   const handleCopySubmissionData = useCallback(async () => {
+    if (!submission) return;
+
     try {
       const submissionText = Object.entries(submission.submission_data)
         .map(
@@ -81,7 +77,13 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
     } catch (error) {
       console.error('Failed to copy submission data:', error);
     }
-  }, [submission.submission_data, getFieldLabel]);
+  }, [submission?.submission_data, getFieldLabel]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      setCopied(false);
+    }
+  }, [isOpen, submission?.id]);
 
   return (
     <Modal key={submission?.id} onOpenChange={onClose} open={isOpen}>

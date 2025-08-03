@@ -8,6 +8,7 @@ import {
   calculateConversionFunnel,
   calculateFieldAnalytics,
   calculateHourlySubmissions,
+  calculateQuizAnalytics,
   calculateSubmissionTrends,
   getTotalFields,
 } from '../utils/analytics';
@@ -92,6 +93,8 @@ export const useAnalyticsData = (
       .sort(([, a], [, b]) => a.completionRate - b.completionRate)
       .slice(0, 3);
 
+    const quizAnalytics = calculateQuizAnalytics(form, submissions);
+
     return {
       totalSubmissions,
       completionRate,
@@ -108,6 +111,7 @@ export const useAnalyticsData = (
       conversionFunnel,
       hourlySubmissions,
       totalFields,
+      quizAnalytics,
     };
   }, [form, submissions]);
 };

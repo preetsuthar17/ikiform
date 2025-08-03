@@ -7,6 +7,7 @@ export { FormSettingsSidebarNavigation } from './FormSettingsSidebarNavigation';
 export { NotificationsSection } from './NotificationsSection';
 export { PasswordProtectionSection } from './PasswordProtectionSection';
 export { ProfanityFilterSection } from './ProfanityFilterSection';
+export { QuizSection } from './QuizSection';
 export { RateLimitSection } from './RateLimitSection';
 export { ResponseLimitSection } from './ResponseLimitSection';
 export { BrandingSection } from './SocialMediaSection';

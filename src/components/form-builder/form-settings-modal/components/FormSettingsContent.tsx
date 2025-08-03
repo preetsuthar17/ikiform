@@ -6,6 +6,7 @@ import { DesignSection } from './DesignSection';
 import { NotificationsSection } from './NotificationsSection';
 import { PasswordProtectionSection } from './PasswordProtectionSection';
 import { ProfanityFilterSection } from './ProfanityFilterSection';
+import { QuizSection } from './QuizSection';
 import { RateLimitSection } from './RateLimitSection';
 import { ResponseLimitSection } from './ResponseLimitSection';
 import { BrandingSection } from './SocialMediaSection';
@@ -88,6 +89,15 @@ export function FormSettingsContent({
           <NotificationsSection
             localSettings={localSettings}
             updateNotifications={updateNotifications}
+          />
+        </section>
+      );
+    case 'quiz':
+      return (
+        <section className="flex flex-col gap-4">
+          <QuizSection
+            localSettings={localSettings}
+            updateSettings={updateSettings}
           />
         </section>
       );

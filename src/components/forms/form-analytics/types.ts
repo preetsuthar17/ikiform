@@ -45,6 +45,26 @@ export interface ConversionFunnelStep {
   conversionRate: number;
 }
 
+export interface QuizAnalytics {
+  isQuizForm: boolean;
+  totalQuizSubmissions: number;
+  averageScore: number;
+  averagePercentage: number;
+  passRate: number;
+  topPerformers: Array<{
+    submissionId: string;
+    score: number;
+    percentage: number;
+  }>;
+  questionAnalytics: Array<{
+    fieldId: string;
+    label: string;
+    correctAnswers: number;
+    totalAnswers: number;
+    accuracyRate: number;
+  }>;
+}
+
 export interface AnalyticsData {
   totalSubmissions: number;
   completionRate: number;
@@ -61,6 +81,7 @@ export interface AnalyticsData {
   conversionFunnel: ConversionFunnelStep[] | null;
   hourlySubmissions: Record<number, number>;
   totalFields: number;
+  quizAnalytics: QuizAnalytics;
 }
 
 export interface SubmissionDetailsModalProps {

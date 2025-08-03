@@ -151,6 +151,7 @@ export function MultiStepForm({
             errors={errors}
             fieldVisibility={fieldVisibility}
             formData={formData}
+            formId={formId}
             logicMessages={logicMessages}
             onFieldValueChange={handleFieldValueChange}
             schema={schema}

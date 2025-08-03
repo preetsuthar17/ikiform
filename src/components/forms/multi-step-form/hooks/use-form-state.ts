@@ -82,14 +82,12 @@ export const useFormState = (
     retentionDays: 7,
   });
 
-  // Prepopulation hook
   const {
     prepopulatedData,
     loading: prepopLoading,
     errors: prepopErrors,
   } = usePrepopulation(allFields);
 
-  // Initialize form and load any saved progress
   useEffect(() => {
     if (formId) {
       loadProgress();
@@ -161,7 +159,6 @@ export const useFormState = (
   useEffect(() => {
     if (progress && Object.keys(progress.formData).length > 0) {
       setFormData((prevFormData) => {
-        // Check if current form data is essentially empty (only default values)
         const hasUserInput = Object.entries(prevFormData).some(
           ([fieldId, value]) => {
             const field = allFields.find((f) => f.id === fieldId);
@@ -169,7 +166,6 @@ export const useFormState = (
 
             const defaultValue = getDefaultValueForField(field);
 
-            // Check if current value is different from default value
             if (Array.isArray(value) && Array.isArray(defaultValue)) {
               return value.length > 0;
             }
@@ -183,7 +179,6 @@ export const useFormState = (
           }
         );
 
-        // Only restore if user hasn't started filling the form
         if (!hasUserInput) {
           console.log('Restoring form progress:', progress.formData);
           return { ...prevFormData, ...progress.formData };
@@ -192,7 +187,6 @@ export const useFormState = (
         return prevFormData;
       });
 
-      // Restore current step if available
       if (progress.currentStep >= 0 && progress.currentStep < totalSteps) {
         setCurrentStep(progress.currentStep);
       }

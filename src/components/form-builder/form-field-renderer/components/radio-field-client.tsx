@@ -76,13 +76,18 @@ export function RadioFieldClient({
   const getOptionValue = (
     option: string | { value: string; label?: string }
   ): string => {
-    return typeof option === 'string' ? option : option.value;
+    if (typeof option === 'string') return option;
+    if (option && typeof option === 'object') return option.value || '';
+    return '';
   };
 
   const getOptionLabel = (
     option: string | { value: string; label?: string }
   ): string => {
-    return typeof option === 'string' ? option : option.label || option.value;
+    if (typeof option === 'string') return option;
+    if (option && typeof option === 'object')
+      return option.label || option.value || '';
+    return '';
   };
 
   const errorClasses = error ? 'border-red-500 ring-red-500' : '';
@@ -133,9 +138,12 @@ export function RadioFieldClient({
       )}
 
       <div className={`space-y-3 ${errorClasses}`}>
-        {options.map((option, index) => {
+        {options.filter(Boolean).map((option, index) => {
           const optionValue = getOptionValue(option);
           const optionLabel = getOptionLabel(option);
+
+          if (!optionValue) return null;
+
           const isSelected = value === optionValue;
 
           return (

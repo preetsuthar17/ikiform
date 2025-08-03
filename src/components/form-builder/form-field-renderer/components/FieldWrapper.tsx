@@ -8,11 +8,13 @@ import { getWidthClass } from '../utils';
 
 export function FieldWrapper({ field, error, children }: FieldWrapperProps) {
   const isStatement = field.type === 'statement';
+  const isQuizField = field.settings?.isQuizField;
+
   return (
     <div
       className={`flex flex-col gap-2 ${field.label ? '' : '-mt-2'} ${getWidthClass(field.settings?.width as any)}`}
     >
-      {!isStatement && (
+      {!(isStatement || isQuizField) && (
         <>
           <Label
             className="font-medium text-foreground text-sm"

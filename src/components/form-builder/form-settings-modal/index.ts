@@ -4,6 +4,7 @@ export const FORM_SETTINGS_SECTIONS: FormSettingsSectionConfig[] = [
   { id: 'basic', label: 'Basic Info', iconName: 'Info' },
   { id: 'limits', label: 'Limits', iconName: 'BarChart2' },
   { id: 'security', label: 'Security', iconName: 'Shield' },
+  { id: 'quiz', label: 'Quiz & Scoring', iconName: 'Trophy' },
   { id: 'branding', label: 'Branding', iconName: 'User' },
   { id: 'notifications', label: 'Notifications', iconName: 'Mail' },
   { id: 'webhooks', label: 'Webhooks', iconName: 'Link2' },
@@ -12,8 +13,15 @@ export const FORM_SETTINGS_SECTIONS: FormSettingsSectionConfig[] = [
 
 export {
   BasicInfoSection,
+  BrandingSection,
+  DesignSection,
+  NotificationsSection,
+  PasswordProtectionSection,
   ProfanityFilterSection,
+  QuizSection,
   RateLimitSection,
+  ResponseLimitSection,
+  WebhooksSettingsSection,
 } from './components';
 
 export { FormSettingsModal } from './FormSettingsModal';

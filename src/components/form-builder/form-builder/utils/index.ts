@@ -133,10 +133,15 @@ export const removeFieldFromSchema = (
     fields: block.fields.filter((field) => field.id !== fieldId),
   }));
 
+  let updatedFields = formSchema.fields;
+  if (!formSchema.blocks || formSchema.blocks.length === 0) {
+    updatedFields = formSchema.fields.filter((field) => field.id !== fieldId);
+  }
+
   return {
     ...formSchema,
     blocks: updatedBlocks,
-    fields: formSchema.fields.filter((field) => field.id !== fieldId),
+    fields: updatedFields,
   };
 };
 
@@ -164,19 +169,24 @@ export const addFieldToSchema = (
     return block;
   });
 
-  const newFieldsArray = [...formSchema.fields];
-  if (
-    typeof index === 'number' &&
-    index >= 0 &&
-    index <= newFieldsArray.length
-  ) {
-    newFieldsArray.splice(index, 0, newField);
-  } else {
-    newFieldsArray.push(newField);
+  let updatedFields = formSchema.fields;
+  if (!formSchema.blocks || formSchema.blocks.length === 0) {
+    const newFieldsArray = [...formSchema.fields];
+    if (
+      typeof index === 'number' &&
+      index >= 0 &&
+      index <= newFieldsArray.length
+    ) {
+      newFieldsArray.splice(index, 0, newField);
+    } else {
+      newFieldsArray.push(newField);
+    }
+    updatedFields = newFieldsArray;
   }
+
   return {
     ...formSchema,
     blocks: updatedBlocks,
-    fields: newFieldsArray,
+    fields: updatedFields,
   };
 };

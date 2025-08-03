@@ -2,11 +2,12 @@ import type React from 'react';
 import { useEffect, useRef } from 'react';
 
 import { FormFieldRenderer } from '@/components/form-builder/form-field-renderer';
+import { Separator } from '@/components/ui';
 import { SocialMediaIcons } from '@/components/ui/social-media-icons';
-
 import type { FormBlock, FormSchema } from '@/lib/database';
 
 interface FormContentProps {
+  formId: string;
   currentBlock: FormBlock;
   formData: Record<string, any>;
   errors: Record<string, string>;
@@ -19,6 +20,7 @@ interface FormContentProps {
 }
 
 export const FormContent: React.FC<FormContentProps> = ({
+  formId,
   currentBlock,
   formData,
   errors,
@@ -55,7 +57,7 @@ export const FormContent: React.FC<FormContentProps> = ({
             </p>
           )}
         </div>
-
+        <Separator />
         {schema.settings.branding?.socialMedia?.enabled &&
           schema.settings.branding.socialMedia.platforms &&
           (schema.settings.branding.socialMedia.position === 'header' ||

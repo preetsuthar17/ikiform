@@ -19,7 +19,7 @@ const radioGroupVariants = cva('grid gap-2', {
 });
 
 const radioVariants = cva(
-  'aspect-square rounded-card border border-border text-primary shadow-sm/2 focus:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary',
+  'aspect-square cursor-pointer rounded-card border border-foreground text-primary shadow-sm/2 focus:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary',
   {
     variants: {
       size: {
@@ -101,7 +101,10 @@ const RadioItem = React.forwardRef<
 
   return (
     <div className="flex flex-col gap-1">
-      <div className="flex items-start gap-2">
+      <label
+        className="flex cursor-pointer items-center gap-2"
+        htmlFor={itemId}
+      >
         <RadioGroupPrimitive.Item
           className={cn(radioVariants({ size }), className)}
           id={itemId}
@@ -134,12 +137,9 @@ const RadioItem = React.forwardRef<
         {(label || description) && (
           <div className="grid gap-1.5 leading-none">
             {label && (
-              <label
-                className="cursor-pointer text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                htmlFor={itemId}
-              >
+              <span className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                 {label}
-              </label>
+              </span>
             )}
             {description && (
               <p className="text-muted-foreground text-xs peer-disabled:opacity-70">
@@ -148,7 +148,7 @@ const RadioItem = React.forwardRef<
             )}
           </div>
         )}
-      </div>
+      </label>
     </div>
   );
 });

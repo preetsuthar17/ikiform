@@ -24,6 +24,7 @@ import {
 import { AddressField } from '../components/AddressField';
 import { LinkInputField } from '../components/LinkInputField';
 import { PhoneInputField } from '../components/PhoneInputField';
+import { QuizField } from '../components/QuizField';
 import type { BaseFieldProps } from '../types';
 
 export function createFieldComponent(
@@ -53,6 +54,9 @@ export function createFieldComponent(
     case 'textarea':
       return React.createElement(TextareaField, props);
     case 'radio':
+      if (field.settings?.isQuizField) {
+        return React.createElement(QuizField, props);
+      }
       return React.createElement(RadioField, props);
     case 'checkbox':
       return React.createElement(CheckboxField, props);

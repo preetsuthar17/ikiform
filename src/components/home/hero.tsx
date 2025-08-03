@@ -19,7 +19,7 @@ export default function Hero() {
       <div className="relative flex h-full w-full flex-col gap-8 rounded-card p-8 md:p-12">
         {}
         <div className="z-20 flex h-full grow flex-col items-center gap-6 py-6 text-center">
-          <Chip variant={'secondary'}>
+          <Chip className="rounded-full" variant={'secondary'}>
             <Link
               className="flex items-center justify-center gap-2"
               href="https://vercel.com/oss?utm_source=ikiform"

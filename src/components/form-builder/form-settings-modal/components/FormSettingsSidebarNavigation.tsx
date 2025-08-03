@@ -5,6 +5,7 @@ import {
   Mail,
   Palette,
   Shield,
+  Trophy,
   User,
 } from 'lucide-react';
 import React from 'react';
@@ -13,7 +14,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { FORM_SETTINGS_SECTIONS } from '../index';
 import type { FormSettingsSection } from '../types';
 
-const iconMap = { Info, BarChart2, Shield, User, Mail, Palette, Link2 };
+const iconMap = { Info, BarChart2, Shield, Trophy, User, Mail, Palette, Link2 };
 
 interface FormSettingsSidebarNavigationProps {
   activeSection: FormSettingsSection;

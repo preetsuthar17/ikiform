@@ -4,6 +4,7 @@ export { EmailInputField } from './EmailInputField';
 export { FieldWrapper } from './FieldWrapper';
 export { NumberInputField } from './NumberInputField';
 export { PollField } from './PollField';
+export { QuizField } from './QuizField';
 export { RadioField } from './RadioField';
 export { RatingField } from './RatingField';
 export { SchedulerField } from './SchedulerField';

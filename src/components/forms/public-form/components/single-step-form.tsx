@@ -31,6 +31,7 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
     handleSubmit,
     fieldVisibility,
     logicMessages,
+    quizResults,
   } = useSingleStepForm(formId, schema, fields);
 
   const [isPasswordProtected, setIsPasswordProtected] = useState(false);
@@ -73,7 +74,9 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
   });
 
   if (submitted) {
-    return <SingleStepSuccessScreen schema={schema} />;
+    return (
+      <SingleStepSuccessScreen quizResults={quizResults} schema={schema} />
+    );
   }
 
   if (isPasswordProtected && !passwordVerified) {
@@ -109,6 +112,7 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
           fields={fields}
           fieldVisibility={fieldVisibility}
           formData={formData}
+          formId={formId}
           logicMessages={logicMessages}
           onFieldValueChange={handleFieldValueChange}
           onSubmit={handleSubmit}
