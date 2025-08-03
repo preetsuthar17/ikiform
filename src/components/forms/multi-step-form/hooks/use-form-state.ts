@@ -158,7 +158,11 @@ export const useFormState = (
   }, [prepopErrors, allFields]);
 
   useEffect(() => {
-    if (progress && Object.keys(progress.formData).length > 0 && isLoadingProgress) {
+    if (
+      progress &&
+      Object.keys(progress.formData).length > 0 &&
+      isLoadingProgress
+    ) {
       setFormData((prevFormData) => {
         const hasUserInput = Object.entries(prevFormData).some(
           ([fieldId, value]) => {
@@ -192,7 +196,7 @@ export const useFormState = (
       if (progress.currentStep >= 0 && progress.currentStep < totalSteps) {
         setCurrentStep(progress.currentStep);
       }
-      
+
       // Mark that we've loaded the initial progress
       setIsLoadingProgress(false);
     }
@@ -280,7 +284,7 @@ export const useFormState = (
       setCurrentStep(currentStep + 1);
       return;
     }
-    
+
     const { errors: validationErrors, isValid } = validateStep(
       currentStep,
       blocks,

@@ -3,14 +3,10 @@
 import { Eye, EyeOff } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from '@/hooks/use-toast';
@@ -31,20 +27,22 @@ export default function ResetPasswordClient() {
   useEffect(() => {
     const handleRecoverySession = async () => {
       const supabase = createClient();
-      
+
       const accessToken = searchParams.get('access_token');
       const refreshToken = searchParams.get('refresh_token');
-      
+
       if (accessToken && refreshToken) {
         try {
           const { data, error } = await supabase.auth.setSession({
             access_token: accessToken,
             refresh_token: refreshToken,
           });
-          
+
           if (error) {
             console.error('Session error:', error);
-            toast.error('Invalid or expired reset link. Please request a new one.');
+            toast.error(
+              'Invalid or expired reset link. Please request a new one.'
+            );
             router.push('/login');
           } else if (data.session) {
             setSessionReady(true);
@@ -57,7 +55,9 @@ export default function ResetPasswordClient() {
           router.push('/login');
         }
       } else {
-        toast.error('No reset token found. Please request a new password reset.');
+        toast.error(
+          'No reset token found. Please request a new password reset.'
+        );
         router.push('/login');
       }
     };
@@ -66,43 +66,43 @@ export default function ResetPasswordClient() {
   }, [searchParams, router]);
 
   const handlePasswordChange = (field: string, value: string) => {
-    setPasswords(prev => ({ ...prev, [field]: value }));
+    setPasswords((prev) => ({ ...prev, [field]: value }));
   };
 
   const validatePasswords = () => {
     const { password, confirmPassword } = passwords;
-    
-    if (!password || !confirmPassword) {
+
+    if (!(password && confirmPassword)) {
       toast.error('Please fill in both password fields');
       return false;
     }
-    
+
     if (password.length < 6) {
       toast.error('Password must be at least 6 characters long');
       return false;
     }
-    
+
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
       return false;
     }
-    
+
     return true;
   };
 
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validatePasswords()) return;
-    
+
     setLoading(true);
     const supabase = createClient();
-    
+
     try {
       const { error } = await supabase.auth.updateUser({
         password: passwords.password,
       });
-      
+
       if (error) {
         toast.error(error.message);
       } else {
@@ -123,7 +123,7 @@ export default function ResetPasswordClient() {
         <Card className="flex w-full max-w-sm flex-col items-center justify-center gap-6 text-center shadow-md/2">
           <CardContent className="py-8">
             <div className="flex flex-col items-center gap-4">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+              <div className="h-8 w-8 animate-spin rounded-full border-primary border-b-2" />
               <p className="text-muted-foreground text-sm">
                 Verifying reset token...
               </p>
@@ -158,29 +158,31 @@ export default function ResetPasswordClient() {
             </p>
           </div>
         </CardHeader>
-        
+
         <CardContent className="w-full space-y-4">
-          <form onSubmit={handleResetPassword} className="space-y-4">
+          <form className="space-y-4" onSubmit={handleResetPassword}>
             <div className="space-y-2">
               <Label htmlFor="password">New Password</Label>
               <div className="relative">
                 <Input
-                  id="password"
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder="Enter your new password"
-                  value={passwords.password}
-                  onChange={(e) => handlePasswordChange('password', e.target.value)}
-                  disabled={loading || !sessionReady}
-                  required
                   className="pr-10"
+                  disabled={loading || !sessionReady}
+                  id="password"
+                  onChange={(e) =>
+                    handlePasswordChange('password', e.target.value)
+                  }
+                  placeholder="Enter your new password"
+                  required
+                  type={showPassword ? 'text' : 'password'}
+                  value={passwords.password}
                 />
                 <Button
+                  className="absolute top-0 right-0 h-full px-3 py-2 hover:bg-transparent"
+                  disabled={loading || !sessionReady}
+                  onClick={() => setShowPassword(!showPassword)}
+                  size="sm"
                   type="button"
                   variant="ghost"
-                  size="sm"
-                  className="absolute top-0 right-0 h-full px-3 py-2 hover:bg-transparent"
-                  onClick={() => setShowPassword(!showPassword)}
-                  disabled={loading || !sessionReady}
                 >
                   {showPassword ? (
                     <EyeOff className="h-4 w-4" />
@@ -190,27 +192,29 @@ export default function ResetPasswordClient() {
                 </Button>
               </div>
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="confirmPassword">Confirm New Password</Label>
               <div className="relative">
                 <Input
-                  id="confirmPassword"
-                  type={showConfirmPassword ? 'text' : 'password'}
-                  placeholder="Confirm your new password"
-                  value={passwords.confirmPassword}
-                  onChange={(e) => handlePasswordChange('confirmPassword', e.target.value)}
-                  disabled={loading || !sessionReady}
-                  required
                   className="pr-10"
+                  disabled={loading || !sessionReady}
+                  id="confirmPassword"
+                  onChange={(e) =>
+                    handlePasswordChange('confirmPassword', e.target.value)
+                  }
+                  placeholder="Confirm your new password"
+                  required
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  value={passwords.confirmPassword}
                 />
                 <Button
+                  className="absolute top-0 right-0 h-full px-3 py-2 hover:bg-transparent"
+                  disabled={loading || !sessionReady}
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  size="sm"
                   type="button"
                   variant="ghost"
-                  size="sm"
-                  className="absolute top-0 right-0 h-full px-3 py-2 hover:bg-transparent"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  disabled={loading || !sessionReady}
                 >
                   {showConfirmPassword ? (
                     <EyeOff className="h-4 w-4" />
@@ -223,27 +227,20 @@ export default function ResetPasswordClient() {
                 Password must be at least 6 characters long
               </p>
             </div>
-            
-            <Button 
-              type="submit" 
-              className="w-full" 
-              size="lg"
+
+            <Button
+              className="w-full"
               disabled={loading || !sessionReady}
+              size="lg"
+              type="submit"
             >
               {loading ? 'Updating...' : 'Update Password'}
             </Button>
           </form>
-          
+
           <div className="text-center">
-            <Button
-              type="button"
-              variant="link"
-              asChild
-              className="text-sm"
-            >
-              <Link href="/login">
-                Back to Sign In
-              </Link>
+            <Button asChild className="text-sm" type="button" variant="link">
+              <Link href="/login">Back to Sign In</Link>
             </Button>
           </div>
         </CardContent>

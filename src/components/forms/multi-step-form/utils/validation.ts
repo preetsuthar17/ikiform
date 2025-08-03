@@ -15,7 +15,7 @@ export const validateStep = (
 
     if (field.required) {
       let isEmpty = false;
-      
+
       if (Array.isArray(value)) {
         isEmpty = value.length === 0;
       } else if (field.type === 'radio' || field.settings?.isQuizField) {
@@ -23,13 +23,13 @@ export const validateStep = (
       } else {
         isEmpty = !value || (typeof value === 'string' && value.trim() === '');
       }
-      
+
       if (isEmpty) {
         errors[field.id] =
           field.validation?.requiredMessage || 'This field is required';
       }
     }
-    
+
     if (value && field.type === 'email') {
       const emailValidation = validateEmail(
         value,
