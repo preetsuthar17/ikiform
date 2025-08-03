@@ -61,6 +61,7 @@ export const useFormState = (
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isLoadingProgress, setIsLoadingProgress] = useState(true);
   const initializedFieldsRef = useRef<Set<string>>(new Set());
 
   const totalSteps = blocks.length;
@@ -157,7 +158,7 @@ export const useFormState = (
   }, [prepopErrors, allFields]);
 
   useEffect(() => {
-    if (progress && Object.keys(progress.formData).length > 0) {
+    if (progress && Object.keys(progress.formData).length > 0 && isLoadingProgress) {
       setFormData((prevFormData) => {
         const hasUserInput = Object.entries(prevFormData).some(
           ([fieldId, value]) => {
@@ -187,11 +188,15 @@ export const useFormState = (
         return prevFormData;
       });
 
+      // Only restore currentStep on initial load, not during navigation
       if (progress.currentStep >= 0 && progress.currentStep < totalSteps) {
         setCurrentStep(progress.currentStep);
       }
+      
+      // Mark that we've loaded the initial progress
+      setIsLoadingProgress(false);
     }
-  }, [progress, totalSteps, allFields]);
+  }, [progress, totalSteps, allFields, isLoadingProgress]);
 
   useEffect(() => {
     if (Object.keys(formData).length > 0) {
@@ -271,6 +276,11 @@ export const useFormState = (
   };
 
   const handleNext = () => {
+    if (currentStep < totalSteps - 1) {
+      setCurrentStep(currentStep + 1);
+      return;
+    }
+    
     const { errors: validationErrors, isValid } = validateStep(
       currentStep,
       blocks,
@@ -278,14 +288,10 @@ export const useFormState = (
     );
 
     if (isValid) {
-      if (currentStep < totalSteps - 1) {
-        setCurrentStep(currentStep + 1);
-      } else {
-        handleSubmit();
-      }
+      handleSubmit();
     } else {
       setErrors(validationErrors);
-      toast.error('Please fix the errors in this step');
+      toast.error('Please fix the errors before submitting');
     }
   };
 

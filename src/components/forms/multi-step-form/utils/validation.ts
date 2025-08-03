@@ -13,13 +13,24 @@ export const validateStep = (
   block.fields.forEach((field) => {
     const value = formData[field.id];
 
-    if (
-      field.required &&
-      (!value || (Array.isArray(value) && value.length === 0))
-    ) {
-      errors[field.id] =
-        field.validation?.requiredMessage || 'This field is required';
-    } else if (field.type === 'email' && value) {
+    if (field.required) {
+      let isEmpty = false;
+      
+      if (Array.isArray(value)) {
+        isEmpty = value.length === 0;
+      } else if (field.type === 'radio' || field.settings?.isQuizField) {
+        isEmpty = !value || value === '';
+      } else {
+        isEmpty = !value || (typeof value === 'string' && value.trim() === '');
+      }
+      
+      if (isEmpty) {
+        errors[field.id] =
+          field.validation?.requiredMessage || 'This field is required';
+      }
+    }
+    
+    if (value && field.type === 'email') {
       const emailValidation = validateEmail(
         value,
         field.settings?.emailValidation

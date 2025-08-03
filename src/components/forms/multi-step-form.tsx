@@ -48,13 +48,12 @@ export function MultiStepForm({
   const currentBlock = blocks[currentStep];
   const progress = calculateProgress(currentStep, totalSteps);
 
-  const hasStepErrors = currentBlock.fields.some((field) => errors[field.id]);
   const hasLivePatternError = currentBlock.fields.some(
     (field) =>
       ['text', 'email', 'textarea'].includes(field.type) &&
       getLivePatternError(field, formData[field.id])
   );
-  const isStepDisabled = submitting || hasStepErrors || hasLivePatternError;
+  const isStepDisabled = submitting || hasLivePatternError;
 
   const [isPasswordProtected, setIsPasswordProtected] = useState(false);
   const [passwordVerified, setPasswordVerified] = useState(false);
