@@ -191,7 +191,7 @@ export default function LoginForm() {
 
   return (
     <>
-      <div className="m-3 flex h-screen flex-col items-center justify-center gap-4">
+      <div className="mx-3  flex overflow-hidden h-screen flex-col items-center justify-center gap-4">
         <Card className="flex w-full max-w-sm flex-col items-center justify-center gap-6 text-center shadow-md/2">
           <CardHeader>
             <div>

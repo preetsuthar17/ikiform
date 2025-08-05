@@ -193,7 +193,7 @@ const AIFormBuilderPreview = () => {
 
 const UnlimitedPreview = () => {
   return (
-    <div className="flex h-full flex-col items-center justify-center overflow-hidden rounded-ele bg-gradient-to-t from-secondary to-accent/20 p-4">
+    <div className="flex h-full flex-col items-center justify-center overflow-hidden rounded-card bg-gradient-to-t from-secondary to-accent/20 p-4">
       <div className="space-y-3 text-center">
         <motion.div
           animate={{
@@ -272,7 +272,7 @@ const AnalyticsPreview = () => {
 
   return (
     <div
-      className="h-full overflow-hidden rounded-ele bg-gradient-to-br from-accent/20 to-secondary/30 p-4"
+      className="h-full overflow-hidden rounded-card bg-gradient-to-br from-accent/20 to-secondary/30 p-4"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -329,7 +329,7 @@ const LogicBuilderPreview = () => {
   }, []);
 
   return (
-    <div className="h-full overflow-hidden rounded-ele bg-gradient-to-r from-secondary/50 to-accent/30 p-4">
+    <div className="h-full overflow-hidden rounded-card bg-gradient-to-r from-secondary/50 to-accent/30 p-4">
       <div className="space-y-4">
         <motion.div
           animate={{ opacity: 1, y: 0 }}
@@ -409,7 +409,7 @@ const APIIntegrationPreview = () => {
   }, []);
 
   return (
-    <div className="h-full overflow-hidden rounded-ele bg-gradient-to-t from-accent/20 to-secondary/40 p-4">
+    <div className="h-full overflow-hidden rounded-card bg-gradient-to-t from-accent/20 to-secondary/40 p-4">
       <div className="space-y-3">
         <motion.div
           animate={{ opacity: 1 }}
@@ -451,7 +451,7 @@ const APIIntegrationPreview = () => {
           {showData && (
             <motion.div
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              className="space-y-2 rounded-ele border border-border bg-card p-3"
+              className="space-y-2 rounded-card border border-border bg-card p-3"
               initial={{ opacity: 0, scale: 0.9, y: 10 }}
               transition={{
                 type: 'spring',
@@ -499,7 +499,7 @@ const DigitalSignaturesPreview = () => {
   }, []);
 
   return (
-    <div className="h-full overflow-hidden rounded-ele bg-gradient-to-br from-accent/30 to-secondary/20 p-4">
+    <div className="h-full overflow-hidden rounded-card bg-gradient-to-br from-accent/30 to-secondary/20 p-4">
       <motion.div
         animate={{
           borderColor: isVerified
@@ -509,7 +509,7 @@ const DigitalSignaturesPreview = () => {
             ? 'hsl(var(--hu-primary) / 0.05)'
             : 'transparent',
         }}
-        className="flex h-full flex-col justify-center rounded-ele border-2 border-border border-dashed p-3"
+        className="flex h-full flex-col justify-center rounded-card border-2 border-border border-dashed p-3"
         transition={{ duration: 0.3 }}
       >
         <div className="space-y-2 text-center">
@@ -614,7 +614,7 @@ const EmailNotificationsPreview = () => {
   }, [addNotification]);
 
   return (
-    <div className="h-full overflow-hidden rounded-ele bg-gradient-to-t from-secondary/40 to-accent/30 p-4">
+    <div className="h-full overflow-hidden rounded-card bg-gradient-to-t from-secondary/40 to-accent/30 p-4">
       <div className="space-y-3">
         <motion.div
           animate={{
@@ -648,7 +648,7 @@ const EmailNotificationsPreview = () => {
                   zIndex: notifications.length - index,
                   rotateZ: index * 1.5,
                 }}
-                className="absolute w-full space-y-1 rounded-ele border border-border bg-card p-3 shadow-sm"
+                className="absolute w-full space-y-1 rounded-card border border-border bg-card p-3 shadow-sm"
                 exit={{
                   opacity: 0,
                   y: 150,
