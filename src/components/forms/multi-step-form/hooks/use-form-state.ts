@@ -280,22 +280,27 @@ export const useFormState = (
   };
 
   const handleNext = () => {
-    if (currentStep < totalSteps - 1) {
-      setCurrentStep(currentStep + 1);
-      return;
-    }
-
+    // Validate current step before proceeding
     const { errors: validationErrors, isValid } = validateStep(
       currentStep,
       blocks,
-      formData
+      formData,
+      fieldVisibility
     );
 
-    if (isValid) {
-      handleSubmit();
-    } else {
+    if (!isValid) {
       setErrors(validationErrors);
-      toast.error('Please fix the errors before submitting');
+      toast.error('Please fix the errors before continuing');
+      return;
+    }
+
+    // Clear any existing errors for this step
+    setErrors({});
+
+    if (currentStep < totalSteps - 1) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      handleSubmit();
     }
   };
 
@@ -306,6 +311,30 @@ export const useFormState = (
   };
 
   const handleSubmit = async () => {
+    // Validate all steps before final submission
+    let allValid = true;
+    const allErrors: Record<string, string> = {};
+
+    for (let stepIndex = 0; stepIndex < blocks.length; stepIndex++) {
+      const { errors: stepErrors, isValid } = validateStep(
+        stepIndex,
+        blocks,
+        formData,
+        fieldVisibility
+      );
+
+      if (!isValid) {
+        allValid = false;
+        Object.assign(allErrors, stepErrors);
+      }
+    }
+
+    if (!allValid) {
+      setErrors(allErrors);
+      toast.error('Please fix all errors before submitting');
+      return;
+    }
+
     setSubmitting(true);
 
     try {

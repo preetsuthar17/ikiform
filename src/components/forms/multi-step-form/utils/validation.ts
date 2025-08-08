@@ -5,12 +5,18 @@ import { validateEmail } from '@/lib/validation/email-validation';
 export const validateStep = (
   stepIndex: number,
   blocks: FormBlock[],
-  formData: Record<string, any>
+  formData: Record<string, any>,
+  fieldVisibility?: Record<string, { visible: boolean; disabled: boolean }>
 ): { errors: Record<string, string>; isValid: boolean } => {
   const block = blocks[stepIndex];
   const errors: Record<string, string> = {};
 
   block.fields.forEach((field) => {
+    // Skip validation for hidden fields
+    if (fieldVisibility?.[field.id]?.visible === false) {
+      return;
+    }
+
     const value = formData[field.id];
 
     if (field.required) {
@@ -20,8 +26,16 @@ export const validateStep = (
         isEmpty = value.length === 0;
       } else if (field.type === 'radio' || field.settings?.isQuizField) {
         isEmpty = !value || value === '';
+      } else if (field.type === 'rating' || field.type === 'slider') {
+        isEmpty = value === null || value === undefined;
+      } else if (field.type === 'checkbox') {
+        isEmpty = !Array.isArray(value) || value.length === 0;
+      } else if (field.type === 'select') {
+        isEmpty = !value || value === '';
+      } else if (typeof value === 'string') {
+        isEmpty = value.trim() === '';
       } else {
-        isEmpty = !value || (typeof value === 'string' && value.trim() === '');
+        isEmpty = !value || value === '' || value === null || value === undefined;
       }
 
       if (isEmpty) {
