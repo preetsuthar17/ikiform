@@ -4,6 +4,7 @@ import {
   BarChart3,
   Database,
   FileText,
+  Gift,
   RefreshCw,
   Shield,
   Trash2,
@@ -20,6 +21,7 @@ import { AdminDatabase } from './components/AdminDatabase';
 import { AdminForms } from './components/AdminForms';
 import { AdminUsers } from './components/AdminUsers';
 import { GradientAreaChart } from './components/charts';
+import { RedemptionCodeManager } from './components/RedemptionCodeManager';
 import { useAdminData } from './hooks/useAdminData';
 
 export function AdminDashboard() {
@@ -76,6 +78,7 @@ export function AdminDashboard() {
           { id: 'analytics', icon: <BarChart3 /> },
           { id: 'users', icon: <Users /> },
           { id: 'forms', icon: <FileText /> },
+          { id: 'redemption-codes', icon: <Gift /> },
           { id: 'database', icon: <Database /> },
         ]}
         onValueChange={setActiveTab}
@@ -92,6 +95,10 @@ export function AdminDashboard() {
 
       <TabsContent activeValue={activeTab} value="forms">
         <AdminForms />
+      </TabsContent>
+
+      <TabsContent activeValue={activeTab} value="redemption-codes">
+        <RedemptionCodeManager isAdmin={true} />
       </TabsContent>
 
       <TabsContent activeValue={activeTab} value="database">

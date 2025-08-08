@@ -1,18 +1,18 @@
 'use client';
 
+import Link from 'next/link';
+import type React from 'react';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import Link from 'next/link';
-import React from 'react';
 
 interface FAQ {
   question: string;
   answer: React.ReactNode;
-};
+}
 
 const faqs = [
   {
@@ -130,7 +130,7 @@ export default function FAQSection() {
             Answers to common questions about Ikiform, features, and usage.
           </p>
         </div>
-        <div className="mx-auto w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 text-left gap-2">
+        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-2 text-left lg:grid-cols-2">
           <FAQList faqs={firstHalf} />
           <FAQList faqs={secondHalf} />
         </div>
@@ -143,10 +143,23 @@ const FAQList = ({ faqs }: { faqs: FAQ[] }) => {
   return (
     <div className="mx-auto flex w-full max-w-7xl grow flex-col gap-2 text-left">
       {faqs.map((faq, i) => (
-        <Accordion className="my-0 w-full" key={i} type="single" variant='ghost' collapsible>
-          <AccordionItem className="w-full bg-muted rounded-lg" value={String(i)}>
-            <AccordionTrigger className="font-medium">{faq.question}</AccordionTrigger>
-            <AccordionContent className="text-sm">{faq.answer}</AccordionContent>
+        <Accordion
+          className="my-0 w-full"
+          collapsible
+          key={i}
+          type="single"
+          variant="ghost"
+        >
+          <AccordionItem
+            className="w-full rounded-lg bg-muted"
+            value={String(i)}
+          >
+            <AccordionTrigger className="font-medium">
+              {faq.question}
+            </AccordionTrigger>
+            <AccordionContent className="text-sm">
+              {faq.answer}
+            </AccordionContent>
           </AccordionItem>
         </Accordion>
       ))}

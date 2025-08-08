@@ -94,9 +94,7 @@ export function HeaderClient({
 
               <DrawerClose asChild>
                 <Button asChild className="w-full justify-start font-medium">
-                  <Link href="/f/feedback-form-evtu2f">
-                    Feedback
-                  </Link>
+                  <Link href="/f/feedback-form-evtu2f">Feedback</Link>
                 </Button>
               </DrawerClose>
             </div>

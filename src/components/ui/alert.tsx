@@ -89,8 +89,8 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
                   <Icon className="mt-0.5 h-4 w-4" />
                 </div>
               )}
-              <div className={cn('flex-1', Icon && 'ml-3')}>
-                {title && <h3 className="mb-1 font-medium text-sm">{title}</h3>}
+              <div className={cn('flex flex-1 items-center', Icon && 'ml-3')}>
+                {title && <h3 className="font-medium text-sm">{title}</h3>}
                 <div
                   className={cn('text-sm', title && 'text-muted-foreground')}
                 >

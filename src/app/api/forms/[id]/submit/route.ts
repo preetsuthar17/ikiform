@@ -54,7 +54,6 @@ export async function POST(
     const { data } = await supabase.auth.getUser();
     const user = data.user;
 
-
     const rateLimit = {
       ...DEFAULT_RATE_LIMIT_SETTINGS,
       ...form.schema.settings.rateLimit,

@@ -29,7 +29,17 @@ export default function LoginForm() {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   if (user) {
-    redirect('/dashboard');
+    // Check if there's a redirect URL stored in sessionStorage
+    const redirectUrl =
+      typeof window !== 'undefined'
+        ? sessionStorage.getItem('redirectAfterLogin')
+        : null;
+    if (redirectUrl) {
+      sessionStorage.removeItem('redirectAfterLogin');
+      redirect(redirectUrl);
+    } else {
+      redirect('/dashboard');
+    }
   }
 
   const handleInputChange = (field: string, value: string) => {
@@ -191,7 +201,7 @@ export default function LoginForm() {
 
   return (
     <>
-      <div className="mx-3  flex overflow-hidden h-screen flex-col items-center justify-center gap-4">
+      <div className="mx-3 flex h-screen flex-col items-center justify-center gap-4 overflow-hidden">
         <Card className="flex w-full max-w-sm flex-col items-center justify-center gap-6 text-center shadow-md/2">
           <CardHeader>
             <div>

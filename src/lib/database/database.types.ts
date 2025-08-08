@@ -157,6 +157,50 @@ export interface Database {
           updated_at?: string;
         };
       };
+      redemption_codes: {
+        Row: {
+          id: string;
+          code: string;
+          redeemer_email: string | null;
+          redeemer_user_id: string | null;
+          redeemed_at: string | null;
+          created_at: string;
+          updated_at: string;
+          is_active: boolean;
+          max_uses: number;
+          current_uses: number;
+          expires_at: string | null;
+          metadata: Record<string, any>;
+        };
+        Insert: {
+          id?: string;
+          code: string;
+          redeemer_email?: string | null;
+          redeemer_user_id?: string | null;
+          redeemed_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+          is_active?: boolean;
+          max_uses?: number;
+          current_uses?: number;
+          expires_at?: string | null;
+          metadata?: Record<string, any>;
+        };
+        Update: {
+          id?: string;
+          code?: string;
+          redeemer_email?: string | null;
+          redeemer_user_id?: string | null;
+          redeemed_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+          is_active?: boolean;
+          max_uses?: number;
+          current_uses?: number;
+          expires_at?: string | null;
+          metadata?: Record<string, any>;
+        };
+      };
     };
     Views: {
       [_ in never]: never;
