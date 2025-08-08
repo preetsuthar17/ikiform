@@ -54,10 +54,6 @@ export async function POST(
     const { data } = await supabase.auth.getUser();
     const user = data.user;
 
-    if (user) {
-      const premiumCheck = await requirePremium(user.id);
-      if (!premiumCheck.hasPremium) return premiumCheck.error;
-    }
 
     const rateLimit = {
       ...DEFAULT_RATE_LIMIT_SETTINGS,
