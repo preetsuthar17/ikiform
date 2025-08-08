@@ -23,6 +23,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Switch } from '@/components/ui/switch';
+import { Tabs } from '@/components/ui/tabs';
 import { useAuth } from '@/hooks/use-auth';
 import { usePremiumStatus } from '@/hooks/use-premium-status';
 import FeatureComparisonTable from './feature-comparison-table';
@@ -73,6 +74,7 @@ const features = [
 
 const MONTHLY_PRODUCT_ID = '05f52efa-2102-4dd0-9d1d-1538210d6712';
 const YEARLY_PRODUCT_ID = '4eff4c1d-56de-4111-96de-b5ec8124dd4b';
+const ONETIME_PRODUCT_ID = '2e9b8531-0d45-40df-be1c-65482eefeb85';
 
 const PRICING: {
   monthly: {
@@ -83,6 +85,13 @@ const PRICING: {
     savings: number | null;
   };
   yearly: {
+    price: number;
+    originalPrice: number;
+    period: string;
+    billedAs: string;
+    savings: number | null;
+  };
+  onetime: {
     price: number;
     originalPrice: number;
     period: string;
@@ -104,18 +113,29 @@ const PRICING: {
     billedAs: 'Billed yearly as $108',
     savings: null,
   },
+  onetime: {
+    price: 119,
+    originalPrice: 139,
+    period: 'lifetime',
+    billedAs: 'One-time payment',
+    savings: null,
+  },
 };
 
 PRICING.yearly.savings = Math.round(
   (1 - (PRICING.yearly.price * 12) / (PRICING.monthly.price * 12)) * 100
 );
 
+PRICING.onetime.savings = Math.round(
+  (1 - PRICING.onetime.price / (PRICING.monthly.price * 12)) * 100
+);
+
 export default function PricingClient({ products }: PricingClientProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [purchaseLoading, setPurchaseLoading] = useState(false);
-  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>(
-    'monthly'
+  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly' | 'onetime'>(
+    'onetime'
   );
   const { user } = useAuth();
   const { hasPremium, checkingPremium } = usePremiumStatus(user);
@@ -143,9 +163,17 @@ export default function PricingClient({ products }: PricingClientProps) {
     setBillingPeriod(checked ? 'yearly' : 'monthly');
   };
 
+  const handlePricingTabChange = (value: string) => {
+    setBillingPeriod(value as 'monthly' | 'yearly' | 'onetime');
+  };
+
   const currentPricing = PRICING[billingPeriod];
   const productId =
-    billingPeriod === 'monthly' ? MONTHLY_PRODUCT_ID : YEARLY_PRODUCT_ID;
+    billingPeriod === 'monthly' 
+      ? MONTHLY_PRODUCT_ID 
+      : billingPeriod === 'yearly'
+      ? YEARLY_PRODUCT_ID
+      : ONETIME_PRODUCT_ID;
 
   const primaryProduct = products[0];
   if (!primaryProduct) return null;
@@ -164,30 +192,29 @@ export default function PricingClient({ products }: PricingClientProps) {
             forms. Start free, upgrade when you need more features.
           </p>
 
-          {}
-          <div className="mt-6 flex items-center gap-4">
-            <span
-              className={`text-sm ${billingPeriod === 'monthly' ? 'font-medium text-foreground' : 'text-muted-foreground'}`}
-            >
-              Monthly
-            </span>
-            <Switch
-              checked={billingPeriod === 'yearly'}
-              className="data-[state=checked]:bg-primary"
-              onCheckedChange={handleBillingToggle}
+          {/* Pricing Tabs */}
+          <div className="mt-6 flex w-full max-w-md justify-center">
+            <Tabs
+              items={[
+                { id: 'monthly', label: 'Monthly' },
+                { id: 'yearly', label: 'Yearly' },
+                { id: 'onetime', label: 'Lifetime' },
+              ]}
+              value={billingPeriod}
+              onValueChange={handlePricingTabChange}
+              className="w-full"
             />
-            <span
-              className={`text-sm ${billingPeriod === 'yearly' ? 'font-medium text-foreground' : 'text-muted-foreground'}`}
-            >
-              Yearly
-            </span>
+          </div>
+
+          {/* Savings Badge */}
+          {(billingPeriod === 'yearly' || billingPeriod === 'onetime') && (
             <Badge
-              className="ml-2 border-green-200 bg-green-100 text-green-700"
+              className="border-green-200 bg-green-100 text-green-700"
               variant="secondary"
             >
-              Save 53%
+              {billingPeriod === 'yearly' ? 'Save 53%' : 'Best Value - Save 48%'}
             </Badge>
-          </div>
+          )}
         </div>
 
         <div className="relative mx-auto flex w-full max-w-7xl grow flex-col items-center rounded-card p-4 text-left md:p-12">
@@ -220,15 +247,20 @@ export default function PricingClient({ products }: PricingClientProps) {
                       ${currentPricing.price}
                     </span>
                     <span className="text-muted-foreground">
-                      per {currentPricing.period}
+                      {billingPeriod === 'onetime' ? '' : `per ${currentPricing.period}`}
                     </span>
                   </div>
 
-                  {}
+                  {/* Additional pricing info */}
                   <div className="flex flex-col gap-2">
                     {billingPeriod === 'yearly' && (
                       <div className="text-muted-foreground text-sm">
                         {currentPricing.billedAs}
+                      </div>
+                    )}
+                    {billingPeriod === 'onetime' && (
+                      <div className="text-muted-foreground text-sm">
+                        {currentPricing.billedAs} • Access forever
                       </div>
                     )}
                     {currentPricing.savings && (
@@ -301,11 +333,13 @@ export default function PricingClient({ products }: PricingClientProps) {
                   </Link>
                 )}
 
-                {}
+                {/* Billing info */}
                 <div className="w-full text-center">
                   <p className="text-muted-foreground text-xs">
                     {billingPeriod === 'yearly'
                       ? 'Billed annually • Cancel anytime'
+                      : billingPeriod === 'onetime'
+                      ? 'One-time payment • Lifetime access'
                       : 'Billed monthly • Cancel anytime'}
                   </p>
                 </div>
