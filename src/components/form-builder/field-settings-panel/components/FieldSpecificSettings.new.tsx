@@ -43,6 +43,8 @@ export function FieldSpecificSettings({
     radio: RadioFieldSettings,
     scheduler: SchedulerFieldSettings,
     time: TimeFieldSettings,
+    // Note: date field returns null in original, so not included
+    // select field doesn't have specific settings in original
   };
 
   const FieldComponent = fieldSettingsMap[field.type];
