@@ -134,9 +134,9 @@ export default function PricingClient({ products }: PricingClientProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [purchaseLoading, setPurchaseLoading] = useState(false);
-  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly' | 'onetime'>(
-    'onetime'
-  );
+  const [billingPeriod, setBillingPeriod] = useState<
+    'monthly' | 'yearly' | 'onetime'
+  >('onetime');
   const { user } = useAuth();
   const { hasPremium, checkingPremium } = usePremiumStatus(user);
 
@@ -169,11 +169,11 @@ export default function PricingClient({ products }: PricingClientProps) {
 
   const currentPricing = PRICING[billingPeriod];
   const productId =
-    billingPeriod === 'monthly' 
-      ? MONTHLY_PRODUCT_ID 
+    billingPeriod === 'monthly'
+      ? MONTHLY_PRODUCT_ID
       : billingPeriod === 'yearly'
-      ? YEARLY_PRODUCT_ID
-      : ONETIME_PRODUCT_ID;
+        ? YEARLY_PRODUCT_ID
+        : ONETIME_PRODUCT_ID;
 
   const primaryProduct = products[0];
   if (!primaryProduct) return null;
@@ -195,14 +195,14 @@ export default function PricingClient({ products }: PricingClientProps) {
           {/* Pricing Tabs */}
           <div className="mt-6 flex w-full max-w-md justify-center">
             <Tabs
+              className="w-full"
               items={[
                 { id: 'monthly', label: 'Monthly' },
                 { id: 'yearly', label: 'Yearly' },
                 { id: 'onetime', label: 'Lifetime' },
               ]}
-              value={billingPeriod}
               onValueChange={handlePricingTabChange}
-              className="w-full"
+              value={billingPeriod}
             />
           </div>
 
@@ -212,7 +212,9 @@ export default function PricingClient({ products }: PricingClientProps) {
               className="border-green-200 bg-green-100 text-green-700"
               variant="secondary"
             >
-              {billingPeriod === 'yearly' ? 'Save 53%' : 'Best Value - Save 48%'}
+              {billingPeriod === 'yearly'
+                ? 'Save 53%'
+                : 'Best Value - Save 48%'}
             </Badge>
           )}
         </div>
@@ -247,7 +249,9 @@ export default function PricingClient({ products }: PricingClientProps) {
                       ${currentPricing.price}
                     </span>
                     <span className="text-muted-foreground">
-                      {billingPeriod === 'onetime' ? '' : `per ${currentPricing.period}`}
+                      {billingPeriod === 'onetime'
+                        ? ''
+                        : `per ${currentPricing.period}`}
                     </span>
                   </div>
 
@@ -339,8 +343,8 @@ export default function PricingClient({ products }: PricingClientProps) {
                     {billingPeriod === 'yearly'
                       ? 'Billed annually • Cancel anytime'
                       : billingPeriod === 'onetime'
-                      ? 'One-time payment • Lifetime access'
-                      : 'Billed monthly • Cancel anytime'}
+                        ? 'One-time payment • Lifetime access'
+                        : 'Billed monthly • Cancel anytime'}
                   </p>
                 </div>
               </div>

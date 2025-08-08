@@ -12,28 +12,19 @@ export const validateStep = (
   const errors: Record<string, string> = {};
 
   // Debug logging
-  console.log('🔍 Validating step:', stepIndex);
-  console.log('📦 Block:', block);
-  console.log('📋 Fields in block:', block?.fields);
-  console.log('💾 Form data:', formData);
-  console.log('👁️ Field visibility:', fieldVisibility);
 
-  if (!block || !block.fields) {
+  if (!(block && block.fields)) {
     console.warn('⚠️ Block or fields not found for step:', stepIndex);
     return { errors, isValid: true };
   }
 
   block.fields.forEach((field) => {
-    console.log(`🔍 Checking field: ${field.id} (${field.type}) - Required: ${field.required}`);
-    
     // Skip validation for hidden fields
     if (fieldVisibility?.[field.id]?.visible === false) {
-      console.log(`⏭️ Skipping hidden field: ${field.id}`);
       return;
     }
 
     const value = formData[field.id];
-    console.log(`📊 Field ${field.id} value:`, value);
 
     if (field.required) {
       let isEmpty = false;
@@ -51,15 +42,13 @@ export const validateStep = (
       } else if (typeof value === 'string') {
         isEmpty = value.trim() === '';
       } else {
-        isEmpty = !value || value === '' || value === null || value === undefined;
+        isEmpty =
+          !value || value === '' || value === null || value === undefined;
       }
-
-      console.log(`🎯 Field ${field.id} isEmpty: ${isEmpty}`);
 
       if (isEmpty) {
         errors[field.id] =
           field.validation?.requiredMessage || 'This field is required';
-        console.log(`❌ Validation error for ${field.id}:`, errors[field.id]);
       }
     }
 
@@ -146,7 +135,6 @@ export const validateStep = (
   });
 
   const isValid = Object.keys(errors).length === 0;
-  console.log('📊 Validation result:', { errors, isValid });
 
   return {
     errors,

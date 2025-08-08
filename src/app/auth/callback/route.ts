@@ -61,7 +61,6 @@ export async function GET(request: NextRequest) {
             .upsert(upsertData, { onConflict: 'email' });
 
           if (!upsertError) {
-            console.log(`User ${isNewUser ? 'created' : 'updated'}: ${email}`);
             if (isNewUser) {
               await sendWelcomeEmail({ to: email, name });
             } else {

@@ -3,5 +3,4 @@ export const handleFormSubmit = (
   formData: Record<string, any>
 ): void => {
   e.preventDefault();
-  console.log('Form submission (preview):', formData);
 };

@@ -389,7 +389,5 @@ try {
 
 try {
   return await fetchData();
-} catch (e) {
-  console.log(e);
-}
+} catch (e) {}
 ```

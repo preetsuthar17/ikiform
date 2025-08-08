@@ -130,11 +130,6 @@ async function handleBulkInsert(adminSupabase: any, codes: string[]) {
       }
 
       results.push(...(data || []));
-
-      // Log progress
-      console.log(
-        `Inserted batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(codeRows.length / batchSize)}`
-      );
     }
 
     return NextResponse.json({

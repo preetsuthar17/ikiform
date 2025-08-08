@@ -185,7 +185,6 @@ export const useFormState = (
         );
 
         if (!hasUserInput) {
-          console.log('Restoring form progress:', progress.formData);
           return { ...prevFormData, ...progress.formData };
         }
 

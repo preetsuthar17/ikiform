@@ -90,7 +90,6 @@ export const useSingleStepForm = (
 
   useEffect(() => {
     if (formId) {
-      console.log('Loading progress for form:', formId);
       loadProgress();
     }
   }, [formId, loadProgress]);
@@ -171,7 +170,6 @@ export const useSingleStepForm = (
         );
 
         if (!hasUserInput) {
-          console.log('Restoring form progress:', progress.formData);
           return { ...prevFormData, ...progress.formData };
         }
 

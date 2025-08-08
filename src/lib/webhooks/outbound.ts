@@ -510,7 +510,7 @@ export async function triggerWebhooks(
   const supabase = createAdminClient();
 
   const { formId, accountId } = payload;
-  console.log('[Webhook] triggerWebhooks called:', { event, payload });
+
   const { data: webhooks, error } = await supabase
     .from('webhooks')
     .select('*')
@@ -526,27 +526,8 @@ export async function triggerWebhooks(
     );
   if (error) throw new Error(error.message);
   if (!webhooks || webhooks.length === 0) {
-    console.log(
-      '[Webhook] No webhooks found for event',
-      event,
-      'formId',
-      formId,
-      'accountId',
-      accountId
-    );
     return;
   }
-  console.log(
-    '[Webhook] Found webhooks:',
-    webhooks.map((w) => ({
-      id: w.id,
-      url: w.url,
-      events: w.events,
-      enabled: w.enabled,
-      form_id: w.form_id,
-      account_id: w.account_id,
-    }))
-  );
   for (const webhook of webhooks) {
     let body: string;
 

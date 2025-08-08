@@ -42,16 +42,8 @@ export async function sendFormNotification({
   customLinks,
 }: SendNotificationOptions) {
   if (!process.env.RESEND_API_KEY) {
-    console.error('[Resend] API key not configured');
     throw new Error('Resend API key not configured');
   }
-  console.log('[Resend] Sending email', {
-    to,
-    subject,
-    from,
-    analyticsUrl,
-    customLinks,
-  });
   try {
     const htmlMessage = marked.parse(message || '');
     const linksHtml = renderLinks(analyticsUrl, customLinks);
@@ -62,10 +54,8 @@ export async function sendFormNotification({
       subject,
       html,
     });
-    console.log('[Resend] Email send result', result);
     return result;
   } catch (error) {
-    console.error('[Resend] Email send error', error);
     throw error;
   }
 }

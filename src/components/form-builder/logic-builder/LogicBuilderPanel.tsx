@@ -128,9 +128,6 @@ function LogicItemEditor({
 
   React.useEffect(() => {
     if (open) {
-      console.log('[LogicItemEditor] Editing item:', item);
-
-      console.log('[LogicItemEditor] Initial condition:', initialCondition);
     }
   }, [open, item, initialCondition]);
 

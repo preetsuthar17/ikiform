@@ -8,8 +8,6 @@ if (!webhookSecret) {
 }
 
 const findUserByEmail = async (supabase: any, email: string) => {
-  console.log('🔍 Looking for user with email:', email);
-
   const { data: userData, error: lookupError } = await supabase
     .from('users')
     .select('uid, email')
@@ -18,11 +16,9 @@ const findUserByEmail = async (supabase: any, email: string) => {
 
   if (lookupError || !userData) {
     console.warn(`⚠️ User not found in database with email: ${email}`);
-    console.log('💡 Make sure the user has signed up with this email address');
     return null;
   }
 
-  console.log('🔍 Found user with uid:', userData.uid);
   return userData;
 };
 
@@ -56,11 +52,6 @@ const updateUserPremiumStatus = async (
   }
 
   if (data && data.length > 0) {
-    const statusText = hasPremium ? 'granted' : 'revoked';
-    console.log(
-      `✅ Successfully ${statusText} premium status for user: ${email} (uid: ${uid})`
-    );
-    console.log('👤 Updated user data:', data[0]);
     return data[0];
   }
   console.warn(`⚠️ Failed to update user with uid: ${uid}`);
@@ -76,7 +67,6 @@ const sendThankYouEmail = async (email: string, customerName?: string) => {
       to: email,
       name: customerName || undefined,
     });
-    console.log('📧 Thank you email sent successfully');
   } catch (emailError) {
     console.error('❌ Error sending thank you email:', emailError);
   }
@@ -86,9 +76,6 @@ export const POST = Webhooks({
   webhookSecret,
 
   onOrderPaid: async (payload) => {
-    console.log('✅ Order paid webhook received successfully');
-    console.log('📦 Order paid payload:', JSON.stringify(payload, null, 2));
-
     if (payload.data.status !== 'paid' || payload.data.paid !== true) {
       console.warn('❌ Payment not completed. Skipping premium update.');
       return;
@@ -127,12 +114,6 @@ export const POST = Webhooks({
   },
 
   onSubscriptionCreated: async (payload) => {
-    console.log('🎉 Subscription created webhook received successfully');
-    console.log(
-      '📋 Subscription created payload:',
-      JSON.stringify(payload, null, 2)
-    );
-
     try {
       const supabase = createAdminClient();
       const customerEmail = sanitizeString(payload.data.customer?.email || '');
@@ -155,9 +136,6 @@ export const POST = Webhooks({
       );
 
       if (updatedUser) {
-        console.log('🔄 Subscription status:', payload.data.status);
-        console.log('💳 Subscription ID:', payload.data.id);
-
         await sendThankYouEmail(
           customerEmail,
           sanitizeString(payload.data.customer?.name || '')
@@ -169,12 +147,6 @@ export const POST = Webhooks({
   },
 
   onSubscriptionActive: async (payload) => {
-    console.log('🟢 Subscription activated webhook received successfully');
-    console.log(
-      '📋 Subscription activated payload:',
-      JSON.stringify(payload, null, 2)
-    );
-
     try {
       const supabase = createAdminClient();
       const customerEmail = sanitizeString(payload.data.customer?.email || '');
@@ -197,8 +169,6 @@ export const POST = Webhooks({
       );
 
       if (updatedUser) {
-        console.log('🔄 Subscription status:', payload.data.status);
-        console.log('💳 Subscription ID:', payload.data.id);
       }
     } catch (error) {
       console.error('❌ Error processing subscription activation:', error);
@@ -206,12 +176,6 @@ export const POST = Webhooks({
   },
 
   onSubscriptionUpdated: async (payload) => {
-    console.log('🔄 Subscription updated webhook received successfully');
-    console.log(
-      '📋 Subscription updated payload:',
-      JSON.stringify(payload, null, 2)
-    );
-
     try {
       const supabase = createAdminClient();
       const customerEmail = sanitizeString(payload.data.customer?.email || '');
@@ -238,12 +202,6 @@ export const POST = Webhooks({
       );
 
       if (updatedUser) {
-        console.log('🔄 Updated subscription status:', payload.data.status);
-        console.log('💳 Subscription ID:', payload.data.id);
-        console.log(
-          '🎯 Premium access:',
-          shouldHavePremium ? 'granted' : 'revoked'
-        );
       }
     } catch (error) {
       console.error('❌ Error processing subscription update:', error);
@@ -251,12 +209,6 @@ export const POST = Webhooks({
   },
 
   onSubscriptionRevoked: async (payload) => {
-    console.log('🔴 Subscription revoked webhook received successfully');
-    console.log(
-      '📋 Subscription revoked payload:',
-      JSON.stringify(payload, null, 2)
-    );
-
     try {
       const supabase = createAdminClient();
       const customerEmail = sanitizeString(payload.data.customer?.email || '');
@@ -277,9 +229,6 @@ export const POST = Webhooks({
       );
 
       if (updatedUser) {
-        console.log('🔄 Subscription status:', payload.data.status);
-        console.log('💳 Subscription ID:', payload.data.id);
-        console.log('📅 Revocation reason: Subscription cancelled/expired');
       }
     } catch (error) {
       console.error('❌ Error processing subscription revocation:', error);
@@ -287,12 +236,6 @@ export const POST = Webhooks({
   },
 
   onSubscriptionCanceled: async (payload) => {
-    console.log('⚠️ Subscription canceled webhook received successfully');
-    console.log(
-      '📋 Subscription canceled payload:',
-      JSON.stringify(payload, null, 2)
-    );
-
     try {
       const supabase = createAdminClient();
       const customerEmail = sanitizeString(payload.data.customer?.email || '');
@@ -319,15 +262,6 @@ export const POST = Webhooks({
       );
 
       if (updatedUser) {
-        console.log('🔄 Subscription status:', payload.data.status);
-        console.log('💳 Subscription ID:', payload.data.id);
-        console.log(
-          '📅 Cancellation noted - access may continue until period end'
-        );
-        console.log(
-          '🎯 Current premium access:',
-          shouldHavePremium ? 'maintained' : 'revoked'
-        );
       }
     } catch (error) {
       console.error('❌ Error processing subscription cancellation:', error);
