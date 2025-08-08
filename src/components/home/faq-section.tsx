@@ -1,14 +1,18 @@
 'use client';
 
-import Link from 'next/link';
-import React, { useState } from 'react';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { Badge } from '@/components/ui/badge';
+import Link from 'next/link';
+import React from 'react';
+
+interface FAQ {
+  question: string;
+  answer: React.ReactNode;
+};
 
 const faqs = [
   {
@@ -112,7 +116,8 @@ const faqs = [
 ];
 
 export default function FAQSection() {
-  const [hovered, setHovered] = useState<number | null>(null);
+  const firstHalf = faqs.slice(0, Math.ceil(faqs.length / 2));
+  const secondHalf = faqs.slice(Math.ceil(faqs.length / 2));
 
   return (
     <section className="flex w-full flex-col items-center justify-center gap-12 px-4 py-12 text-center md:px-8 md:py-28">
@@ -125,39 +130,26 @@ export default function FAQSection() {
             Answers to common questions about Ikiform, features, and usage.
           </p>
         </div>
-        <div className="mx-auto flex w-full max-w-7xl grow flex-col text-left">
-          {faqs.map((faq, i) => (
-            <Accordion
-              className="my-0 w-full border-b"
-              collapsible
-              defaultValue="0"
-              key={i}
-              type="single"
-              variant={'ghost'}
-            >
-              <div
-                className={`transition-all ${
-                  hovered !== null && hovered !== i
-                    ? 'opacity-50 grayscale'
-                    : 'opacity-100'
-                }`}
-                key={i}
-                onMouseEnter={() => setHovered(i)}
-                onMouseLeave={() => setHovered(null)}
-              >
-                <AccordionItem className="w-full" value={String(i)}>
-                  <AccordionTrigger className="font-normal">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-sm">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              </div>
-            </Accordion>
-          ))}
+        <div className="mx-auto w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 text-left gap-2">
+          <FAQList faqs={firstHalf} />
+          <FAQList faqs={secondHalf} />
         </div>
       </div>
     </section>
   );
 }
+
+const FAQList = ({ faqs }: { faqs: FAQ[] }) => {
+  return (
+    <div className="mx-auto flex w-full max-w-7xl grow flex-col gap-2 text-left">
+      {faqs.map((faq, i) => (
+        <Accordion className="my-0 w-full" key={i} type="single" variant='ghost' collapsible>
+          <AccordionItem className="w-full bg-muted rounded-lg" value={String(i)}>
+            <AccordionTrigger className="font-medium">{faq.question}</AccordionTrigger>
+            <AccordionContent className="text-sm">{faq.answer}</AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      ))}
+    </div>
+  );
+};
