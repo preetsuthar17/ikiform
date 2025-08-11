@@ -22,7 +22,7 @@ export default function Hero() {
           <Chip className="rounded-full" variant={'secondary'}>
             <Link
               className="flex items-center justify-center gap-2"
-              href="https://vercel.com/oss?utm_source=ikiform"
+              href="https://vercel.com/open-source-program?utm_source=ikiform"
               target="_blank"
             >
               Sponsored by
