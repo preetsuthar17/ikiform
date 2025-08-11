@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "../styles/form-customization.css";
 
 @theme {
   --font-mono: var(--font-jetbrains-mono) !important;
@@ -34,6 +35,9 @@
   --color-border: hsl(var(--hu-border));
   --color-input: hsl(var(--hu-input));
   --color-ring: hsl(var(--hu-ring));
+
+  --color-popover: hsl(var(--hu-popover, var(--hu-card, 0,0%,98%)));
+  --color-popover-foreground: hsl(var(--hu-popover-foreground, var(--hu-card-foreground, 0,0%,10%)));
 }
 
 @theme inline {
@@ -89,6 +93,8 @@
   --hu-input: 0, 0%, 100%;
   --hu-ring: 0, 0%, 50%;
   --hu-home-card-bg: 228, 79%, 52%;
+  --hu-popover: var(--hu-card, 0,0%,98%);
+  --hu-popover-foreground: var(--hu-card-foreground, 0,0%,10%);
 }
 
 .dark {
@@ -110,6 +116,8 @@
   --hu-input: 0, 0%, 14%;
   --hu-ring: 0 0% 48%;
   --hu-home-card-bg: 228, 79%, 52%;
+  --hu-popover: var(--hu-card, 0,0%,10%);
+  --hu-popover-foreground: var(--hu-card-foreground, 0,0%,92%);
 }
 
 ::selection {

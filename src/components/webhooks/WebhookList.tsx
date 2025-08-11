@@ -37,7 +37,7 @@ export function WebhookList({
     );
   return (
     <ScrollArea className="max-h-[60vh]">
-      <ul className="space-y-4">
+      <ul className="flex flex-col gap-4">
         {webhooks.map((webhook) => (
           <Card className="p-0" key={webhook.id}>
             <WebhookListItem

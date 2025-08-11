@@ -78,7 +78,7 @@ function PayloadViewer({ payload }: { payload: any }) {
     if (!Array.isArray(fields)) return null;
 
     return (
-      <div className="space-y-3">
+      <div className="flex flex-col gap-3">
         {fields.map((field, index) => (
           <div className="rounded-md border bg-muted/50 p-3" key={index}>
             <div className="mb-2 flex items-center gap-2">
@@ -142,7 +142,7 @@ function PayloadViewer({ payload }: { payload: any }) {
     const eventName = getEventName(parsedPayload);
 
     return (
-      <div className="space-y-4">
+      <div className="flex flex-col gap-4">
         {}
         <div className="rounded-md border p-4">
           <h4 className="mb-3 font-semibold text-sm">Event Information</h4>
@@ -198,7 +198,7 @@ function PayloadViewer({ payload }: { payload: any }) {
         {parsedPayload.rawData && (
           <div className="rounded-md border p-4">
             <h4 className="mb-3 font-semibold text-sm">Raw Form Data</h4>
-            <div className="space-y-2">
+            <div className="flex flex-col gap-2">
               {Object.entries(parsedPayload.rawData).map(([key, value]) => (
                 <div
                   className="flex items-start justify-between gap-2"
@@ -220,7 +220,7 @@ function PayloadViewer({ payload }: { payload: any }) {
         {getAdditionalDataKeys(parsedPayload).length > 0 && (
           <div className="rounded-md border p-4">
             <h4 className="mb-3 font-semibold text-sm">Additional Data</h4>
-            <div className="space-y-2">
+            <div className="flex flex-col gap-2">
               {getAdditionalDataKeys(parsedPayload).map((key) => {
                 const value = parsedPayload[key];
 
@@ -273,7 +273,7 @@ function PayloadViewer({ payload }: { payload: any }) {
   ];
 
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col gap-4">
       <Tabs
         className="w-full"
         items={tabItems}
@@ -355,7 +355,7 @@ export function WebhookLogDrawer({
             </Alert>
           ) : logs.length ? (
             <ScrollArea className="flex-1 pr-2">
-              <ul className="space-y-4">
+              <ul className="flex flex-col gap-4">
                 {logs.map((log) => (
                   <li key={log.id}>
                     <Card className="border shadow-sm">

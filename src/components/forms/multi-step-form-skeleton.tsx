@@ -11,7 +11,7 @@ export function MultiStepFormSkeleton() {
       <div className="flex w-full max-w-2xl flex-col gap-8">
         <Card className="flex w-full grow flex-col gap-6 rounded-card p-8">
           {}
-          <div className="space-y-2">
+          <div className="flex flex-col gap-2">
             <Skeleton className="h-2 w-full rounded-full" />
             <div className="flex justify-between">
               <Skeleton className="h-4 w-16" />
@@ -20,25 +20,25 @@ export function MultiStepFormSkeleton() {
           </div>
 
           {}
-          <div className="space-y-3">
+          <div className="flex flex-col gap-3">
             <Skeleton className="h-8 w-3/4" />
             <Skeleton className="h-4 w-full" />
             <Skeleton className="h-4 w-2/3" />
           </div>
 
           {}
-          <div className="space-y-6">
-            <div className="space-y-2">
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-2">
               <Skeleton className="h-4 w-32" />
               <Skeleton className="h-10 w-full" />
             </div>
-            <div className="space-y-2">
+            <div className="flex flex-col gap-2">
               <Skeleton className="h-4 w-24" />
               <Skeleton className="h-24 w-full" />
             </div>
-            <div className="space-y-2">
+            <div className="flex flex-col gap-2">
               <Skeleton className="h-4 w-28" />
-              <div className="space-y-2">
+              <div className="flex flex-col gap-2">
                 <Skeleton className="h-4 w-20" />
                 <Skeleton className="h-4 w-24" />
                 <Skeleton className="h-4 w-18" />

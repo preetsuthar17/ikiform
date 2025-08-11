@@ -73,7 +73,7 @@ export function QuizAnalyticsCard({ quizAnalytics }: QuizAnalyticsCardProps) {
             <Award className="h-5 w-5 text-yellow-600" />
             <h3 className="font-semibold">Top Performers</h3>
           </div>
-          <div className="space-y-3">
+          <div className="flex flex-col gap-3">
             {quizAnalytics.topPerformers.map((performer, index) => (
               <div
                 className="flex items-center justify-between rounded-lg bg-muted/30 p-3"
@@ -108,9 +108,9 @@ export function QuizAnalyticsCard({ quizAnalytics }: QuizAnalyticsCardProps) {
             <TrendingUp className="h-5 w-5 text-blue-600" />
             <h3 className="font-semibold">Question Performance</h3>
           </div>
-          <div className="space-y-4">
+          <div className="flex flex-col gap-4">
             {quizAnalytics.questionAnalytics.map((question) => (
-              <div className="space-y-2" key={question.fieldId}>
+              <div className="flex flex-col gap-2" key={question.fieldId}>
                 <div className="flex items-center justify-between">
                   <span className="font-medium text-sm">{question.label}</span>
                   <span className="text-muted-foreground text-sm">

@@ -138,10 +138,10 @@ export function FileFieldSettings({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-6">
       {/* Basic Settings */}
-      <div className="space-y-4">
-        <div className="space-y-2">
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="maxFiles">Maximum Files</Label>
           <Input
             id="maxFiles"
@@ -159,7 +159,7 @@ export function FileFieldSettings({
           </p>
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="maxSize">Maximum File Size</Label>
           <div className="flex gap-2">
             <Input
@@ -199,11 +199,11 @@ export function FileFieldSettings({
       </div>
 
       {/* File Type Settings */}
-      <div className="space-y-4">
+      <div className="flex flex-col gap-4">
         <Label>Allowed File Types</Label>
 
         {/* Common file type toggles */}
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <p className="text-sm text-muted-foreground">Quick Select:</p>
           <div className="flex flex-wrap gap-2">
             {COMMON_FILE_TYPES.map((typeConfig) => {
@@ -225,7 +225,7 @@ export function FileFieldSettings({
         </div>
 
         {/* Custom file types */}
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="customType">Custom File Extensions:</Label>
           <div className="flex gap-2">
             <Input
@@ -263,7 +263,7 @@ export function FileFieldSettings({
 
         {/* Display selected types */}
         {allowedTypes.length > 0 && (
-          <div className="space-y-2">
+          <div className="flex flex-col gap-2">
             <p className="text-sm text-muted-foreground">
               Selected extensions:
             </p>
@@ -284,7 +284,7 @@ export function FileFieldSettings({
         )}
 
         {/* Accept attribute (readonly) */}
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="accept">HTML Accept Attribute (readonly)</Label>
           <Input
             id="accept"
@@ -299,7 +299,7 @@ export function FileFieldSettings({
       </div>
 
       {/* Help Text */}
-      <div className="space-y-2">
+      <div className="flex flex-col gap-2">
         <Label htmlFor="helpText">Help Text</Label>
         <Textarea
           id="helpText"

@@ -19,7 +19,7 @@ function RuleList({
   fields: FormField[];
 }) {
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col gap-4">
       <div className="mb-2 flex items-center justify-between">
         <h3 className="font-semibold text-base">Logic Rules</h3>
         <Button onClick={onAddRule} size="sm" variant="outline">
@@ -31,7 +31,7 @@ function RuleList({
           No logic rules yet.
         </div>
       ) : (
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           {rules.map((rule) => (
             <Card
               className="flex items-center justify-between p-3"

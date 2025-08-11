@@ -12,8 +12,13 @@ export function PublicForm({ formId, schema, theme }: PublicFormProps) {
   const dir = schema.settings.rtl ? "rtl" : "ltr";
 
   useEffect(() => {
-    const val = schema?.settings?.layout?.borderRadius || "md";
+    const settings = schema?.settings;
+    const layout = settings?.layout;
+    const colors = (settings as any)?.colors;
+    const typography = (settings as any)?.typography;
 
+    // Set border radius
+    const val = layout?.borderRadius || "md";
     let borderRadiusValue = "8px";
     let cardRadiusValue = "16px";
     switch (val) {
@@ -38,20 +43,46 @@ export function PublicForm({ formId, schema, theme }: PublicFormProps) {
         cardRadiusValue = "32px";
         break;
     }
-    document.documentElement.style.setProperty("--radius", borderRadiusValue);
-    document.documentElement.style.setProperty(
-      "--card-radius",
-      cardRadiusValue,
-    );
+
+    // Set CSS custom properties
+    const root = document.documentElement;
+    root.style.setProperty("--radius", borderRadiusValue);
+    root.style.setProperty("--card-radius", cardRadiusValue);
+
+    // Set custom width if specified
+    if ((layout as any)?.maxWidth === "custom" && (layout as any)?.customWidth) {
+      root.style.setProperty("--form-custom-width", (layout as any).customWidth);
+    }
+
+    // Set color variables for CSS
+    if (colors?.primary) {
+      root.style.setProperty("--form-primary-color", colors.primary);
+    }
+    if (colors?.text) {
+      root.style.setProperty("--form-text-color", colors.text);
+    }
+    if (colors?.background) {
+      root.style.setProperty("--form-background-color", colors.background);
+    }
+    if (colors?.border) {
+      root.style.setProperty("--form-border-color", colors.border);
+    }
+
     return () => {
-      document.documentElement.style.setProperty("--radius", "0.7rem");
-      document.documentElement.style.setProperty("--card-radius", "1rem");
+      // Cleanup
+      root.style.setProperty("--radius", "0.7rem");
+      root.style.setProperty("--card-radius", "1rem");
+      root.style.removeProperty("--form-custom-width");
+      root.style.removeProperty("--form-primary-color");
+      root.style.removeProperty("--form-text-color");
+      root.style.removeProperty("--form-background-color");
+      root.style.removeProperty("--form-border-color");
     };
-  }, [schema?.settings?.layout?.borderRadius]);
+  }, [schema?.settings]);
 
   return (
     <div
-      className={`flex flex-col gap-4 ${theme ? `theme-${theme}` : ""}`}
+      className={`flex flex-col w-full gap-4 ${theme ? `theme-${theme}` : ""}`}
       dir={dir}
     >
       {isMultiStep ? (

@@ -299,11 +299,11 @@ export function AdminAnalytics() {
 
   if (loading) {
     return (
-      <div className="space-y-6">
+      <div className="flex flex-col gap-6">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
           {[...Array(8)].map((_, i) => (
             <Card className="p-4" key={i}>
-              <div className="animate-pulse space-y-2">
+              <div className="animate-pulse flex flex-col gap-2">
                 <div className="h-4 w-3/4 rounded bg-muted" />
                 <div className="h-8 w-1/2 rounded bg-muted" />
               </div>
@@ -318,7 +318,7 @@ export function AdminAnalytics() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="rounded-md bg-primary/10 p-2">
@@ -412,7 +412,7 @@ export function AdminAnalytics() {
             <Activity className="h-5 w-5 text-green-500" />
             <h3 className="font-semibold">Today's Activity</h3>
           </div>
-          <div className="space-y-2">
+          <div className="flex flex-col gap-2">
             <div className="flex justify-between">
               <span className="text-sm">New Users</span>
               <Badge variant="outline">{analytics.overview.usersToday}</Badge>
@@ -435,7 +435,7 @@ export function AdminAnalytics() {
             <Zap className="h-5 w-5 text-yellow-500" />
             <h3 className="font-semibold">Performance</h3>
           </div>
-          <div className="space-y-2">
+          <div className="flex flex-col gap-2">
             <div className="flex justify-between">
               <span className="text-sm">Published Forms</span>
               <Badge variant="outline">
@@ -466,7 +466,7 @@ export function AdminAnalytics() {
             <Calendar className="h-5 w-5 text-blue-500" />
             <h3 className="font-semibold">Growth Metrics</h3>
           </div>
-          <div className="space-y-2">
+          <div className="flex flex-col gap-2">
             <div className="flex justify-between">
               <span className="text-sm">Weekly User Growth</span>
               <Badge className="text-green-600" variant="outline">

@@ -1,17 +1,12 @@
-import { Maximize2, Move, Palette, Square } from "lucide-react";
+import { Settings2, ExternalLink } from "lucide-react";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioItem } from "@/components/ui/radio";
-import { Separator } from "@/components/ui/separator";
+
 import { Switch } from "@/components/ui/switch";
 import {
   DEFAULT_FORM_DESIGN,
-  FORM_BORDER_RADIUS_OPTIONS,
-  FORM_DESIGN_MODES,
-  FORM_PADDING_OPTIONS,
-  FORM_WIDTH_OPTIONS,
 } from "../constants";
 import type { LocalSettings } from "../types";
 
@@ -25,71 +20,25 @@ const FORM_MARGIN_OPTIONS = [
 interface DesignSectionProps {
   localSettings: LocalSettings;
   updateSettings: (updates: Partial<LocalSettings>) => void;
+  formId?: string;
 }
 
 export function DesignSection({
   localSettings,
   updateSettings,
+  formId,
 }: DesignSectionProps) {
-  const currentWidth =
-    localSettings.layout?.maxWidth || DEFAULT_FORM_DESIGN.maxWidth;
-  const currentPadding =
-    localSettings.layout?.padding || DEFAULT_FORM_DESIGN.padding;
-  const currentMargin = localSettings.layout?.margin || "none";
-  const currentBorderRadius =
-    localSettings.layout?.borderRadius || DEFAULT_FORM_DESIGN.borderRadius;
-  const currentDesignMode =
-    localSettings.designMode || DEFAULT_FORM_DESIGN.designMode;
-  const handleBorderRadiusChange = (value: string) => {
-    updateSettings({
-      layout: {
-        ...localSettings.layout,
-        borderRadius: value as "none" | "sm" | "md" | "lg" | "xl",
-      },
-    });
-  };
 
-  const handleWidthChange = (value: string) => {
-    updateSettings({
-      layout: {
-        ...localSettings.layout,
-        maxWidth: value as "sm" | "md" | "lg" | "xl" | "full",
-      },
-    });
-  };
-
-  const handlePaddingChange = (value: string) => {
-    updateSettings({
-      layout: {
-        ...localSettings.layout,
-        padding: value as "none" | "sm" | "md" | "lg",
-      },
-    });
-  };
-
-  const handleMarginChange = (value: string) => {
-    updateSettings({
-      layout: {
-        ...localSettings.layout,
-        margin: value as "none" | "sm" | "md" | "lg",
-      },
-    });
-  };
-
-  const handleDesignModeChange = (value: string) => {
-    updateSettings({
-      designMode: value as "default" | "minimal",
-    });
-  };
 
   return (
     <Card className="p-6">
       <h3 className="mb-6 flex items-center gap-2 font-semibold text-lg">
-        <Palette className="h-5 w-5 text-primary" />
-        Design
+        <Settings2 className="h-5 w-5 text-primary" />
+        Basic Design Settings
       </h3>
-      <div className="flex flex-col gap-4 border-muted border-l-2 pl-6">
-        {}
+
+      <div className="flex flex-col gap-6">
+        {/* Progress Bar Toggle */}
         <div className="flex items-center gap-3">
           <Switch
             checked={!!localSettings.showProgress}
@@ -106,104 +55,31 @@ export function DesignSection({
             Show Progress Bar
           </Label>
         </div>
-        {}
-        <div className="flex flex-col gap-2">
-          <Label>Form Width</Label>
-          <div className="flex flex-wrap gap-2">
-            {FORM_WIDTH_OPTIONS.map((option) => (
+
+        {/* Form Customization CTA */}
+        <div className="rounded-lg border border-border bg-muted/30 p-4">
+          <div className="flex items-start gap-3">
+            <Settings2 className="mt-0.5 h-5 w-5 text-primary" />
+            <div className="flex-1">
+              <h4 className="font-medium text-sm">Advanced Form Customization</h4>
+              <p className="text-muted-foreground text-xs mt-1">
+                Customize colors, typography, layout, and more with our advanced design tools.
+              </p>
               <Button
-                className={`font-medium text-sm ${
-                  currentWidth === option.value
-                    ? ""
-                    : "border bg-transparent text-foreground hover:bg-accent"
-                }transition`}
-                key={option.value}
-                onClick={() => handleWidthChange(option.value)}
-                type="button"
+                className="mt-3 gap-2"
+                onClick={() => {
+                  if (formId) {
+                    window.open(`/form-builder/${formId}/customize`, '_blank');
+                  }
+                }}
+                size="sm"
+                variant="outline"
               >
-                {option.label}
+                <ExternalLink className="h-4 w-4" />
+                Open Customization Panel
               </Button>
-            ))}
+            </div>
           </div>
-        </div>
-        {}
-        <div className="flex flex-col gap-2">
-          <Label>Form Padding</Label>
-          <div className="flex flex-wrap gap-2">
-            {FORM_PADDING_OPTIONS.map((option) => (
-              <Button
-                className={`font-medium text-sm ${
-                  currentPadding === option.value
-                    ? ""
-                    : "border bg-transparent text-foreground hover:bg-accent"
-                }transition`}
-                key={option.value}
-                onClick={() => handlePaddingChange(option.value)}
-                type="button"
-              >
-                {option.label}
-              </Button>
-            ))}
-          </div>
-        </div>
-        {}
-        <div className="flex flex-col gap-2">
-          <Label>Form Margin</Label>
-          <div className="flex flex-wrap gap-2">
-            {FORM_MARGIN_OPTIONS.map((option) => (
-              <Button
-                className={`font-medium text-sm ${
-                  currentMargin === option.value
-                    ? ""
-                    : "border bg-transparent text-foreground hover:bg-accent"
-                }transition`}
-                key={option.value}
-                onClick={() => handleMarginChange(option.value)}
-                type="button"
-              >
-                {option.label}
-              </Button>
-            ))}
-          </div>
-        </div>
-        {}
-        <div className="flex flex-col gap-2">
-          <Label>Border Radius</Label>
-          <div className="flex flex-wrap gap-2">
-            {FORM_BORDER_RADIUS_OPTIONS.map((option) => (
-              <Button
-                className={`font-medium text-sm ${
-                  currentBorderRadius === option.value
-                    ? ""
-                    : "border bg-transparent text-foreground hover:bg-accent"
-                }transition`}
-                key={option.value}
-                onClick={() => handleBorderRadiusChange(option.value)}
-                type="button"
-              >
-                {option.label}
-              </Button>
-            ))}
-          </div>
-        </div>
-        {}
-        <div className="flex flex-col gap-2">
-          <Label>Design Mode</Label>
-          <RadioGroup
-            className="flex gap-4"
-            onValueChange={handleDesignModeChange}
-            orientation="horizontal"
-            value={currentDesignMode}
-          >
-            {FORM_DESIGN_MODES.map((mode) => (
-              <RadioItem
-                className="font-medium text-sm"
-                key={mode.value}
-                label={mode.label}
-                value={mode.value}
-              />
-            ))}
-          </RadioGroup>
         </div>
       </div>
     </Card>

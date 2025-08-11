@@ -55,7 +55,7 @@ function ActionListEditor({
   };
 
   return (
-    <div className="space-y-2">
+    <div className="flex flex-col gap-2">
       {actions.map((action, idx) => (
         <Card className="flex items-center gap-2 p-3" key={action.id}>
           <Select

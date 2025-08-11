@@ -54,7 +54,7 @@ export function QuizResults({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-6">
       {/* Main Score Card */}
       <Card className="p-8 text-center">
         <div className="mb-6 flex justify-center">
@@ -84,7 +84,7 @@ export function QuizResults({
         )}
 
         {/* Score Display */}
-        <div className="mb-6 space-y-4">
+        <div className="mb-6 flex flex-col gap-4">
           <div className="flex items-center justify-center gap-4">
             <div className="text-center">
               <div className={`font-bold text-4xl ${getScoreColor()}`}>
@@ -158,7 +158,7 @@ export function QuizResults({
             </h3>
           </div>
 
-          <div className="space-y-4">
+          <div className="flex flex-col gap-4">
             {fieldResults.map((fieldResult, index) => (
               <div key={fieldResult.fieldId}>
                 <div className="flex items-start justify-between gap-4">
@@ -174,7 +174,7 @@ export function QuizResults({
                       )}
                     </div>
 
-                    <div className="space-y-2 text-sm">
+                    <div className="flex flex-col gap-2 text-sm">
                       <div className="flex gap-4">
                         <span className="text-muted-foreground">
                           Your answer:

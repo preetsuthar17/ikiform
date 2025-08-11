@@ -58,8 +58,8 @@ export function FormSettingsModal({
     setSaving(true);
     try {
       const newSchema = { ...schema, settings: localSettings };
-      await formsDb.updateForm(formId, { schema: newSchema });
-      onSchemaUpdate({ settings: localSettings });
+      await formsDb.updateForm(formId, { schema: newSchema as any });
+      onSchemaUpdate({ settings: localSettings as any });
       toast.success("Settings saved!");
       onClose();
     } catch (e) {

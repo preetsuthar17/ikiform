@@ -28,9 +28,9 @@ export function SuspenseWrapper({
         {}
         <div className="flex flex-1 gap-4 p-4">
           {}
-          <div className="w-1/4 space-y-4">
+          <div className="w-1/4 flex flex-col gap-4">
             <Skeleton className="h-10 w-full" />
-            <div className="space-y-2">
+            <div className="flex flex-col gap-2">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Skeleton className="h-16 w-full" key={i} />
               ))}
@@ -38,7 +38,7 @@ export function SuspenseWrapper({
           </div>
 
           {}
-          <div className="flex-1 space-y-4">
+          <div className="flex-1 flex flex-col gap-4">
             <Skeleton className="h-64 w-full" />
             <div className="grid grid-cols-2 gap-4">
               <Skeleton className="h-32 w-full" />

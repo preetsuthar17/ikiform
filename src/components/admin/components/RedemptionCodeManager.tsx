@@ -148,7 +148,7 @@ export function RedemptionCodeManager({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-6">
       <Card>
         <CardHeader>
           <div className="flex items-center gap-3">
@@ -163,9 +163,9 @@ export function RedemptionCodeManager({
             </div>
           </div>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="flex flex-col gap-6">
           {/* Generate Codes Section */}
-          <div className="space-y-4">
+          <div className="flex flex-col gap-4">
             <h3 className="font-medium text-lg">Generate Codes</h3>
             <div className="flex gap-4">
               <div className="flex-1">
@@ -206,7 +206,7 @@ export function RedemptionCodeManager({
 
           {/* Actions Section */}
           {generatedCodes.length > 0 && (
-            <div className="space-y-4">
+            <div className="flex flex-col gap-4">
               <h3 className="font-medium text-lg">Actions</h3>
               <div className="flex gap-4">
                 <Button
@@ -255,7 +255,7 @@ export function RedemptionCodeManager({
 
           {/* Preview Section */}
           {generatedCodes.length > 0 && (
-            <div className="space-y-4">
+            <div className="flex flex-col gap-4">
               <h3 className="font-medium text-lg">Preview (First 10 codes)</h3>
               <div className="max-h-40 overflow-y-auto rounded-md bg-muted p-4">
                 <div className="grid grid-cols-1 gap-1 font-mono text-sm">

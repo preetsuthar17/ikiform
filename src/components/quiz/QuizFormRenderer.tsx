@@ -67,7 +67,7 @@ export function QuizFormRenderer({
     const allowRetake = schema.settings?.quiz?.allowRetake;
 
     return (
-      <div className="space-y-6">
+      <div className="flex flex-col gap-6">
         <QuizResults
           allowRetake={allowRetake}
           customMessage={quizState.resultMessage}
@@ -80,7 +80,7 @@ export function QuizFormRenderer({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-6">
       {/* Quiz Progress (only show in quiz mode) */}
       {quizState.isQuizMode && (
         <QuizProgress
@@ -116,7 +116,7 @@ export function QuizFormRenderer({
         )}
 
       {/* Form Fields */}
-      <div className="space-y-4">
+      <div className="flex flex-col gap-4">
         {fields.map((field) => (
           <FormFieldRenderer
             disabled={disabled || quizState.isSubmitted}

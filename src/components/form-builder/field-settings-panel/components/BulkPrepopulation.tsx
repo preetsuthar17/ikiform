@@ -315,7 +315,7 @@ export function BulkPrepopulation({
               </Badge>
             </div>
 
-            <div className="max-h-48 space-y-2 overflow-y-auto">
+            <div className="max-h-48 flex flex-col gap-2 overflow-y-auto">
               {fieldsWithPrepopulation.map((field) => (
                 <div
                   className="flex items-center justify-between rounded-md border border-border bg-card p-3"

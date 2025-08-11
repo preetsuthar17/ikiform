@@ -40,7 +40,7 @@ export function QuizProgress({
 
   return (
     <Card className={`p-4 ${className}`}>
-      <div className="space-y-3">
+      <div className="flex flex-col gap-3">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -58,7 +58,7 @@ export function QuizProgress({
         </div>
 
         {/* Progress Bar */}
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between text-sm">
             <span className="text-muted-foreground">
               Question {Math.min(currentQuestion, totalQuestions)} of{" "}

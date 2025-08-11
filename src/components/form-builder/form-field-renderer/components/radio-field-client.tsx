@@ -94,14 +94,14 @@ export function RadioFieldClient({
 
   if (loading) {
     return (
-      <div className="space-y-2">
+      <div className="flex flex-col gap-2">
         {field.label && (
           <label className="font-medium text-foreground text-sm">
             {field.label}
             {field.required && <span className="ml-1 text-destructive">*</span>}
           </label>
         )}
-        <div className="space-y-3">
+        <div className="flex flex-col gap-3">
           {Array.from({ length: 3 }).map((_, index) => (
             <div className="flex items-center space-x-3" key={index}>
               <div className="h-4 w-4 animate-pulse rounded-full bg-accent" />
@@ -116,7 +116,7 @@ export function RadioFieldClient({
 
   if (fetchError) {
     return (
-      <div className="space-y-2">
+      <div className="flex flex-col gap-2">
         {field.label && (
           <label className="font-medium text-foreground text-sm">
             {field.label}
@@ -129,7 +129,7 @@ export function RadioFieldClient({
   }
 
   return (
-    <div className="space-y-2">
+    <div className="flex flex-col gap-2">
       {field.label && (
         <label className="font-medium text-foreground text-sm">
           {field.label}
@@ -137,7 +137,7 @@ export function RadioFieldClient({
         </label>
       )}
 
-      <div className={`space-y-3 ${errorClasses}`}>
+      <div className={`flex flex-col gap-3 ${errorClasses}`}>
         {options.filter(Boolean).map((option, index) => {
           const optionValue = getOptionValue(option);
           const optionLabel = getOptionLabel(option);

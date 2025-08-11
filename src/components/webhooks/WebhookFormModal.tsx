@@ -160,7 +160,7 @@ export function WebhookFormModal({
           </div>
         )}
         {}
-        <form className="space-y-4" onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <div>
             <Label className="mb-1" htmlFor="webhook-url">
               Webhook URL

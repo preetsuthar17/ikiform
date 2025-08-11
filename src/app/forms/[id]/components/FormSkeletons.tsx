@@ -16,9 +16,9 @@ export function FormSkeleton({
 }: FormSkeletonProps) {
   if (variant === "multi-step") {
     return (
-      <div className="mx-auto max-w-2xl space-y-6 p-4">
+      <div className="mx-auto max-w-2xl flex flex-col gap-6 p-4">
         {showProgress && (
-          <div className="space-y-2">
+          <div className="flex flex-col gap-2">
             <SkeletonText className="h-4 w-24" />
             <Skeleton className="h-2 w-full rounded-full" />
           </div>
@@ -40,19 +40,19 @@ export function FormSkeleton({
   }
 
   return (
-    <div className="mx-auto max-w-2xl space-y-6 p-4">
-      <div className="space-y-4">
+    <div className="mx-auto max-w-2xl flex flex-col gap-6 p-4">
+      <div className="flex flex-col gap-4">
         {}
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Skeleton className="h-8 w-3/4" />
           <SkeletonText className="h-4 w-full" />
           <SkeletonText className="h-4 w-2/3" />
         </div>
 
         {}
-        <div className="space-y-6">
+        <div className="flex flex-col gap-6">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div className="space-y-2" key={i}>
+            <div className="flex flex-col gap-2" key={i}>
               <SkeletonText className="h-4 w-32" />
               <Skeleton className="h-10 w-full rounded-ele" />
             </div>
@@ -70,7 +70,7 @@ export function FormSkeleton({
 
 export function FormFieldSkeleton() {
   return (
-    <div className="space-y-2">
+    <div className="flex flex-col gap-2">
       <SkeletonText className="h-4 w-32" />
       <Skeleton className="h-10 w-full rounded-ele" />
     </div>
@@ -79,7 +79,7 @@ export function FormFieldSkeleton() {
 
 export function FormProgressSkeleton() {
   return (
-    <div className="space-y-2">
+    <div className="flex flex-col gap-2">
       <div className="flex justify-between">
         <SkeletonText className="h-4 w-24" />
         <SkeletonText className="h-4 w-16" />

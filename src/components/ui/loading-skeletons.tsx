@@ -6,18 +6,18 @@ import { Skeleton } from "@/components/ui/skeleton";
  */
 export function FormPreviewSkeleton() {
   return (
-    <div className="mx-auto w-full max-w-2xl space-y-6 p-6">
+    <div className="mx-auto w-full max-w-2xl flex flex-col gap-6 p-6">
       {}
-      <div className="space-y-2">
+      <div className="flex flex-col gap-2">
         <Skeleton className="h-8 w-3/4" />
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-2/3" />
       </div>
 
       {}
-      <div className="space-y-4">
+      <div className="flex flex-col gap-4">
         {Array.from({ length: 4 }).map((_, i) => (
-          <div className="space-y-2" key={i}>
+          <div className="flex flex-col gap-2" key={i}>
             <Skeleton className="h-4 w-1/4" />
             <Skeleton className="h-10 w-full" />
           </div>
@@ -36,11 +36,11 @@ export function FormPreviewSkeleton() {
  */
 export function ChatMessageSkeleton() {
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col gap-4">
       {Array.from({ length: 3 }).map((_, i) => (
         <div className="flex gap-3" key={i}>
           <Skeleton className="h-8 w-8 rounded-full" />
-          <div className="flex-1 space-y-2">
+          <div className="flex-1 flex flex-col gap-2">
             <Skeleton className="h-4 w-3/4" />
             <Skeleton className="h-4 w-1/2" />
           </div>
@@ -162,9 +162,9 @@ export function FormBuilderPanelSkeleton() {
   return (
     <div className="flex h-full">
       {}
-      <div className="w-1/4 space-y-4 border-r p-4">
+      <div className="w-1/4 flex flex-col gap-4 border-r p-4">
         <Skeleton className="h-8 w-full" />
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           {Array.from({ length: 6 }).map((_, i) => (
             <Skeleton className="h-12 w-full" key={i} />
           ))}
@@ -172,7 +172,7 @@ export function FormBuilderPanelSkeleton() {
       </div>
 
       {}
-      <div className="flex-1 space-y-4 p-4">
+      <div className="flex-1 flex flex-col gap-4 p-4">
         <div className="flex items-center justify-between">
           <Skeleton className="h-8 w-48" />
           <div className="flex gap-2">
@@ -184,11 +184,11 @@ export function FormBuilderPanelSkeleton() {
       </div>
 
       {}
-      <div className="w-1/4 space-y-4 border-l p-4">
+      <div className="w-1/4 flex flex-col gap-4 border-l p-4">
         <Skeleton className="h-8 w-full" />
-        <div className="space-y-3">
+        <div className="flex flex-col gap-3">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div className="space-y-2" key={i}>
+            <div className="flex flex-col gap-2" key={i}>
               <Skeleton className="h-4 w-1/3" />
               <Skeleton className="h-8 w-full" />
             </div>

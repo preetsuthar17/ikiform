@@ -480,7 +480,7 @@ export interface FormSchema {
     };
 
     rtl?: boolean;
-    designMode?: "default" | "minimal";
+
   };
   logic?: FormLogic;
 }

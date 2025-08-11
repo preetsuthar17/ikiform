@@ -5,10 +5,10 @@ import type { FormAnalyticsProps } from "./types";
 
 function FormAnalyticsSkeleton() {
   return (
-    <div className="mx-auto w-full max-w-[95%] space-y-6 px-6">
+    <div className="mx-auto w-full max-w-[95%] flex flex-col gap-6 px-6">
       {}
       <div className="flex items-center justify-between">
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Skeleton className="h-8 w-48" />
           <Skeleton className="h-4 w-64" />
         </div>
@@ -25,7 +25,7 @@ function FormAnalyticsSkeleton() {
           <div className="rounded-card border bg-card p-6" key={i}>
             <div className="flex items-center gap-4">
               <Skeleton className="h-12 w-12" variant="circle" />
-              <div className="space-y-2">
+              <div className="flex flex-col gap-2">
                 <Skeleton className="h-4 w-20" />
                 <Skeleton className="h-6 w-12" />
               </div>
@@ -43,7 +43,7 @@ function FormAnalyticsSkeleton() {
       {}
       <div className="rounded-card border bg-card p-6">
         <Skeleton className="mb-4 h-6 w-32" />
-        <div className="space-y-3">
+        <div className="flex flex-col gap-3">
           {Array.from({ length: 5 }).map((_, i) => (
             <div className="flex items-center gap-4" key={i}>
               <Skeleton className="h-10 w-full" />

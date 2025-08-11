@@ -3,6 +3,7 @@ import type React from "react";
 import { getLivePatternError } from "@/components/form-builder/form-field-renderer/components/TextInputField";
 
 import { Button } from "@/components/ui/button";
+import { useFormStyling } from "@/hooks/use-form-styling";
 
 import type { FormSchema } from "@/lib/database";
 
@@ -28,6 +29,7 @@ export const FormNavigation: React.FC<FormNavigationProps> = ({
   formData,
 }) => {
   const isLastStep = currentStep === totalSteps - 1;
+  const { getButtonStyles } = useFormStyling(schema);
 
   const hasLivePatternError = currentFields.some(
     (field) =>
@@ -53,6 +55,7 @@ export const FormNavigation: React.FC<FormNavigationProps> = ({
         disabled={submitting || hasLivePatternError}
         loading={submitting}
         onClick={onNext}
+        style={getButtonStyles(true)}
         type="button"
       >
         {isLastStep ? (

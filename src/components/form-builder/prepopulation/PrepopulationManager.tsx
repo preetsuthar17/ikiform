@@ -198,7 +198,7 @@ export function PrepopulationManager({
           </ModalTitle>
         </ModalHeader>
 
-        <div className="space-y-6 p-6">
+        <div className="flex flex-col gap-6 p-6">
           {/* Overview Section */}
           <Card className="p-4">
             <h3 className="mb-3 font-medium">Current Prepopulation Status</h3>
@@ -236,7 +236,7 @@ export function PrepopulationManager({
             </div>
 
             {prepopulationSources.length > 0 && (
-              <div className="space-y-2">
+              <div className="flex flex-col gap-2">
                 <h4 className="font-medium">Active Data Sources:</h4>
                 <div className="flex flex-wrap gap-2">
                   {prepopulationSources.map((source) => (
@@ -254,9 +254,9 @@ export function PrepopulationManager({
             )}
 
             {fieldsWithPrepopulation.length > 0 && (
-              <div className="mt-4 space-y-2">
+              <div className="mt-4 flex flex-col gap-2">
                 <h4 className="font-medium">Enabled Fields:</h4>
-                <div className="space-y-1">
+                <div className="flex flex-col gap-1">
                   {fieldsWithPrepopulation.map((field) => (
                     <div
                       className="flex items-center justify-between rounded border p-2"
@@ -387,7 +387,7 @@ export function PrepopulationManager({
           <Card className="p-4">
             <h3 className="mb-3 font-medium">Global Prepopulation Settings</h3>
 
-            <div className="space-y-4">
+            <div className="flex flex-col gap-4">
               <div className="flex items-center justify-between">
                 <div>
                   <Label>Enable Prepopulation Analytics</Label>
@@ -418,7 +418,7 @@ export function PrepopulationManager({
                 <Switch size="sm" />
               </div>
 
-              <div className="space-y-2">
+              <div className="flex flex-col gap-2">
                 <Label>Default Consent Message</Label>
                 <Textarea
                   placeholder="We'd like to pre-fill some fields with your information to save you time. Is that okay?"
@@ -426,7 +426,7 @@ export function PrepopulationManager({
                 />
               </div>
 
-              <div className="space-y-2">
+              <div className="flex flex-col gap-2">
                 <Label>API Request Timeout (seconds)</Label>
                 <Input defaultValue="10" max="30" min="5" type="number" />
               </div>

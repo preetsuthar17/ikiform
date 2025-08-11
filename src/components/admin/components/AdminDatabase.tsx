@@ -105,7 +105,7 @@ export function AdminDatabase() {
   if (loading) {
     return (
       <Card className="p-6">
-        <div className="animate-pulse space-y-4">
+        <div className="animate-pulse flex flex-col gap-4">
           <div className="h-8 w-1/4 rounded bg-muted" />
           <div className="grid grid-cols-3 gap-4">
             {[...Array(3)].map((_, i) => (
@@ -141,7 +141,7 @@ export function AdminDatabase() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-6">
       <Card className="p-6">
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -233,14 +233,14 @@ export function AdminDatabase() {
         />
 
         <TabsContent activeValue={activeTab} value="overview">
-          <div className="space-y-6">
+          <div className="flex flex-col gap-6">
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
               <Card className="p-4">
                 <div className="mb-4 flex items-center gap-2">
                   <Activity className="h-5 w-5 text-green-500" />
                   <h3 className="font-semibold">Recent Activity</h3>
                 </div>
-                <div className="space-y-3">
+                <div className="flex flex-col gap-3">
                   {submissions.slice(0, 5).map((submission, index) => (
                     <div
                       className="flex items-center justify-between text-sm"
@@ -266,7 +266,7 @@ export function AdminDatabase() {
                   <Calendar className="h-5 w-5 text-blue-500" />
                   <h3 className="font-semibold">Growth Metrics</h3>
                 </div>
-                <div className="space-y-3">
+                <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-between">
                     <span className="text-sm">Users this week</span>
                     <Badge variant="secondary">

@@ -14,7 +14,7 @@ import type { LocalSettings } from "../types";
 export function useFormSettings(schema: FormSchema, userEmail?: string) {
   const [localSettings, setLocalSettings] = useState<LocalSettings>({
     ...schema.settings,
-    designMode: schema.settings.designMode || DEFAULT_FORM_DESIGN.designMode,
+
     layout: {
       maxWidth:
         schema.settings.layout?.maxWidth || DEFAULT_FORM_DESIGN.maxWidth,
@@ -52,7 +52,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
   useEffect(() => {
     setLocalSettings({
       ...schema.settings,
-      designMode: schema.settings.designMode || DEFAULT_FORM_DESIGN.designMode,
+  
       layout: {
         maxWidth:
           schema.settings.layout?.maxWidth || DEFAULT_FORM_DESIGN.maxWidth,

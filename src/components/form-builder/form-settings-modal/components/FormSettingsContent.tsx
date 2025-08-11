@@ -3,6 +3,7 @@ import React from "react";
 import type { FormSettingsSection } from "../types";
 import { BasicInfoSection } from "./BasicInfoSection";
 import { DesignSection } from "./DesignSection";
+import { FormDesignPreview } from "./FormDesignPreview";
 import { NotificationsSection } from "./NotificationsSection";
 import { PasswordProtectionSection } from "./PasswordProtectionSection";
 import { ProfanityFilterSection } from "./ProfanityFilterSection";
@@ -107,6 +108,7 @@ export function FormSettingsContent({
           <DesignSection
             localSettings={localSettings}
             updateSettings={updateSettings}
+            formId={formId}
           />
         </section>
       );

@@ -48,7 +48,7 @@ export function AdminDashboard() {
   });
 
   return (
-    <div className="container mx-auto space-y-6 p-6">
+    <div className="container mx-auto flex flex-col gap-6 p-6">
       <div className="flex items-center justify-between">
         <div className="flex gap-2">
           <Button

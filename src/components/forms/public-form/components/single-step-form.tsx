@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { Progress } from "@/components/ui/progress";
 import { SocialMediaIcons } from "@/components/ui/social-media-icons";
 import { getFormLayoutClasses } from "@/lib/utils/form-layout";
+import { useFormStyling } from "@/hooks/use-form-styling";
 
 import { useSingleStepForm } from "../hooks/use-single-step-form";
 
@@ -41,6 +42,10 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
   const [showForm, setShowForm] = useState(false);
 
   const { containerClass, marginClass } = getFormLayoutClasses(schema);
+  const { customStyles, fontLoaded, getFormClasses } = useFormStyling(schema);
+  
+  // Check if custom width is used
+  const isCustomWidth = (schema.settings?.layout as any)?.maxWidth === "custom" && (schema.settings?.layout as any)?.customWidth;
 
   useEffect(() => {
     const passwordProtection = schema.settings.passwordProtection;
@@ -103,24 +108,30 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
 
   return (
     <div
-      className={`flex items-center justify-center bg-background transition-opacity duration-500 ${showForm ? "opacity-100" : "opacity-0"} ${marginClass}`}
+      className={`flex items-center justify-center transition-opacity duration-500 ${showForm ? "opacity-100" : "opacity-0"} ${marginClass} ${getFormClasses()}`}
       dir={dir}
+      style={customStyles.containerStyle}
     >
-      <div className={`flex w-full flex-col gap-8 ${containerClass}`}>
-        <SingleStepFormContent
-          errors={errors}
-          fields={fields}
-          fieldVisibility={fieldVisibility}
-          formData={formData}
-          formId={formId}
-          logicMessages={logicMessages}
-          onFieldValueChange={handleFieldValueChange}
-          onSubmit={handleSubmit}
-          schema={schema}
-          submitting={submitting}
-        />
+      <div 
+        className={`flex w-full flex-col gap-8 ${containerClass} ${isCustomWidth ? 'ikiform-custom-width' : ''}`} 
+        style={customStyles.containerStyle}
+      >
+        <div style={customStyles.formStyle}>
+          <SingleStepFormContent
+            errors={errors}
+            fields={fields}
+            fieldVisibility={fieldVisibility}
+            formData={formData}
+            formId={formId}
+            logicMessages={logicMessages}
+            onFieldValueChange={handleFieldValueChange}
+            onSubmit={handleSubmit}
+            schema={schema}
+            submitting={submitting}
+          />
+        </div>
 
-        <div className="flex flex-col gap-4 text-center">
+        <div className="flex flex-col gap-4 text-center" style={customStyles.textStyle}>
           {schema.settings.branding?.socialMedia?.enabled &&
             schema.settings.branding.socialMedia.platforms &&
             (schema.settings.branding.socialMedia.position === "footer" ||
@@ -135,7 +146,8 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
             schema.settings.branding &&
               (schema.settings.branding as any).showIkiformBranding !== false,
           ) && (
-            <p className="text-muted-foreground text-sm">
+
+            <p className="text-sm">
               Powered by{" "}
               <span className="font-medium text-foreground underline">
                 <Link href="https://www.ikiform.com">Ikiform</Link>

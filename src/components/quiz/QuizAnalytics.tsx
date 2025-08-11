@@ -34,7 +34,7 @@ export function QuizAnalytics({
   }
 
   return (
-    <div className={`space-y-6 ${className}`}>
+    <div className={`flex flex-col gap-6 ${className}`}>
       <div className="flex items-center gap-3">
         <Trophy className="h-6 w-6 text-yellow-500" />
         <h2 className="font-semibold text-xl">Quiz Analytics</h2>
@@ -93,7 +93,7 @@ export function QuizAnalytics({
 
       {/* Question Performance */}
       {stats.questionStats.length > 0 && (
-        <div className="space-y-4">
+        <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
             <CheckCircle className="h-5 w-5 text-green-500" />
             <h3 className="font-semibold text-lg">Question Performance</h3>
@@ -128,7 +128,7 @@ export function QuizAnalytics({
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {stats.questionStats.map((questionStat, index) => (
               <Card className="p-4" key={questionStat.fieldId}>
-                <div className="space-y-3">
+                <div className="flex flex-col gap-3">
                   {/* Question Header */}
                   <div>
                     <div className="mb-2 flex items-start justify-between gap-2">
@@ -156,7 +156,7 @@ export function QuizAnalytics({
                   </div>
 
                   {/* Progress Bar */}
-                  <div className="space-y-2">
+                  <div className="flex flex-col gap-2">
                     <Progress
                       className="h-2"
                       value={questionStat.correctRate}
@@ -220,7 +220,7 @@ export function QuizAnalytics({
           <h3 className="font-semibold text-lg">Performance Insights</h3>
         </div>
 
-        <div className="space-y-3">
+        <div className="flex flex-col gap-3">
           {stats.passRate >= 80 && (
             <div className="flex items-start gap-3 rounded-lg border border-green-200 bg-green-50 p-3">
               <CheckCircle className="mt-0.5 h-5 w-5 text-green-600" />

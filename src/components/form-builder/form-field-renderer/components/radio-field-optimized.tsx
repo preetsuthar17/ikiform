@@ -12,7 +12,7 @@ export function RadioFieldOptimized(props: BaseFieldProps) {
 
   if (!field.optionsApi && field.options?.length) {
     return (
-      <div className="space-y-2">
+      <div className="flex flex-col gap-2">
         {field.label && (
           <label className="font-medium text-foreground text-sm">
             {field.label}

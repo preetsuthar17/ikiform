@@ -159,7 +159,7 @@ export function InboundWebhookList() {
         <div className="py-8 text-center">Loading inbound webhooks...</div>
       ) : mappings.length ? (
         <ScrollArea className="max-h-[60vh]">
-          <ul className="space-y-4">
+          <ul className="flex flex-col gap-4">
             {mappings.map((webhook) => (
               <Card
                 className="flex flex-col gap-4 rounded-lg p-4 shadow md:flex-row md:items-center md:justify-between"

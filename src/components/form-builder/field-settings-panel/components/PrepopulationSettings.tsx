@@ -170,7 +170,7 @@ export function PrepopulationSettings({
 
             {/* URL Parameters Configuration */}
             {prepopulation.source === "url" && (
-              <div className="space-y-3">
+              <div className="flex flex-col gap-3">
                 <div className="flex flex-col gap-2">
                   <Label className="text-card-foreground">
                     URL Parameter Name
@@ -245,7 +245,7 @@ export function PrepopulationSettings({
 
             {/* API Configuration */}
             {prepopulation.source === "api" && (
-              <div className="space-y-3">
+              <div className="flex flex-col gap-3">
                 <div className="flex flex-col gap-2">
                   <Label className="text-card-foreground">API Endpoint</Label>
                   <Input

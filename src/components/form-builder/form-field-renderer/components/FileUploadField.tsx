@@ -163,7 +163,7 @@ export function FileUploadField({
   );
 
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col gap-4">
       {!fallbackFormId && (
         <div className="text-xs text-muted-foreground bg-muted/50 px-2 py-1 rounded">
           📋 Preview Mode - Files will be shown for demo purposes
@@ -191,7 +191,7 @@ export function FileUploadField({
 
       {/* Display uploaded files */}
       {uploadedFiles.length > 0 && (
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <h4 className="text-sm font-medium">
             Uploaded Files ({uploadedFiles.length})
           </h4>

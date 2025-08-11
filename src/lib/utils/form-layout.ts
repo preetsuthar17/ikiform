@@ -1,4 +1,6 @@
 import type { FormSchema } from "@/lib/database";
+import { generateFormStyles, getMaxWidthValue, getPaddingValue, getMarginValue, getBorderRadiusValue, getFontSizeValue, getFontWeightValue } from "./form-styles";
+import { loadGoogleFont } from "./google-fonts";
 
 export interface LayoutClasses {
   maxWidthClass: string;
@@ -7,26 +9,46 @@ export interface LayoutClasses {
   marginClass: string;
 }
 
+export interface FormCustomStyles {
+  containerStyle: React.CSSProperties;
+  cardStyle: React.CSSProperties;
+  formStyle: React.CSSProperties;
+  textStyle: React.CSSProperties;
+}
+
 export const getFormLayoutClasses = (schema: FormSchema): LayoutClasses => {
   const layout = schema.settings?.layout || {};
 
   let maxWidthClass = "max-w-2xl";
-  switch (layout?.maxWidth) {
-    case "sm":
-      maxWidthClass = "max-w-sm";
-      break;
-    case "md":
-      maxWidthClass = "max-w-2xl";
-      break;
-    case "lg":
-      maxWidthClass = "max-w-4xl";
-      break;
-    case "xl":
-      maxWidthClass = "max-w-6xl";
-      break;
-    case "full":
-      maxWidthClass = "max-w-full";
-      break;
+  let containerClass = "max-w-2xl mx-auto";
+
+  // Handle custom width
+  if ((layout as any)?.maxWidth === "custom" && (layout as any)?.customWidth) {
+    maxWidthClass = "";
+    containerClass = "mx-auto";
+  } else {
+    switch (layout?.maxWidth) {
+      case "sm":
+        maxWidthClass = "max-w-sm";
+        containerClass = "max-w-sm mx-auto";
+        break;
+      case "md":
+        maxWidthClass = "max-w-2xl";
+        containerClass = "max-w-2xl mx-auto";
+        break;
+      case "lg":
+        maxWidthClass = "max-w-4xl";
+        containerClass = "max-w-4xl mx-auto";
+        break;
+      case "xl":
+        maxWidthClass = "max-w-6xl";
+        containerClass = "max-w-6xl mx-auto";
+        break;
+      case "full":
+        maxWidthClass = "max-w-full";
+        containerClass = "w-full";
+        break;
+    }
   }
 
   let paddingClass = "md:p-6 p-2";
@@ -42,25 +64,6 @@ export const getFormLayoutClasses = (schema: FormSchema): LayoutClasses => {
       break;
     case "lg":
       paddingClass = "md:p-8 p-4";
-      break;
-  }
-
-  let containerClass = "max-w-2xl mx-auto";
-  switch (layout?.maxWidth) {
-    case "sm":
-      containerClass = "max-w-sm mx-auto";
-      break;
-    case "md":
-      containerClass = "max-w-2xl mx-auto";
-      break;
-    case "lg":
-      containerClass = "max-w-4xl mx-auto";
-      break;
-    case "xl":
-      containerClass = "max-w-6xl mx-auto";
-      break;
-    case "full":
-      containerClass = "w-full";
       break;
   }
 
@@ -82,8 +85,63 @@ export const getFormLayoutClasses = (schema: FormSchema): LayoutClasses => {
   return { maxWidthClass, paddingClass, containerClass, marginClass };
 };
 
-export const getDesignModeClass = (designMode?: string) => {
-  return designMode === "minimal"
-    ? "bg-transparent border-none shadow-none hover:bg-transparent"
-    : "";
+export const getFormCustomStyles = async (schema: FormSchema): Promise<FormCustomStyles> => {
+  const settings = schema.settings || {};
+  const colors = (settings as any).colors || {};
+  const typography = (settings as any).typography || {};
+  const layout = settings.layout || {};
+
+  // Load Google Font if specified
+  if (typography.fontFamily && typeof window !== "undefined") {
+    try {
+      await loadGoogleFont(typography.fontFamily);
+    } catch (error) {
+      console.warn("Failed to load Google Font:", typography.fontFamily, error);
+    }
+  }
+
+  const containerStyle: React.CSSProperties = {
+    backgroundColor: colors.background || undefined,
+    color: colors.text || undefined,
+    fontFamily: typography.fontFamily 
+      ? `"${typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`
+      : undefined,
+    fontSize: typography.fontSize ? getFontSizeValue(typography.fontSize) : undefined,
+    fontWeight: typography.fontWeight ? getFontWeightValue(typography.fontWeight) : undefined,
+    maxWidth: (layout as any).maxWidth === "custom" && (layout as any).customWidth 
+      ? (layout as any).customWidth 
+      : layout.maxWidth ? getMaxWidthValue(layout.maxWidth) : undefined,
+    width: (layout as any).maxWidth === "custom" && (layout as any).customWidth 
+      ? (layout as any).customWidth 
+      : undefined,
+    margin: layout.margin ? `${getMarginValue(layout.margin)} auto` : "0 auto",
+  };
+
+  const cardStyle: React.CSSProperties = {
+    backgroundColor: colors.background || undefined,
+    borderColor: colors.border || undefined,
+    borderRadius: layout.borderRadius ? getBorderRadiusValue(layout.borderRadius) : undefined,
+    padding: layout.padding ? getPaddingValue(layout.padding) : undefined,
+  };
+
+  const formStyle: React.CSSProperties = {
+    fontFamily: typography.fontFamily 
+      ? `"${typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`
+      : undefined,
+  };
+
+  const textStyle: React.CSSProperties = {
+    color: colors.text || undefined,
+  };
+
+  return {
+    containerStyle,
+    cardStyle,
+    formStyle,
+    textStyle,
+  };
+};
+
+export const getDesignModeClass = () => {
+  return "bg-transparent border-none shadow-none hover:bg-transparent";
 };

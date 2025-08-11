@@ -56,7 +56,7 @@ export default function EmbedTestPage() {
             </Button>
           </div>
 
-          <div className="space-y-8">
+          <div className="flex flex-col gap-8">
             {/* Standard Embed */}
             <Card>
               <CardHeader>
@@ -257,7 +257,7 @@ export default function EmbeddedForm() {
                       <Badge variant="outline">2</Badge>
                       <h3 className="font-semibold">Customize Your Embed</h3>
                     </div>
-                    <ul className="text-muted-foreground space-y-1">
+                    <ul className="text-muted-foreground flex flex-col gap-1">
                       <li>• Adjust width and height dimensions</li>
                       <li>• Choose theme (light, dark, auto)</li>
                       <li>• Configure borders and styling</li>

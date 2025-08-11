@@ -238,7 +238,7 @@ export function AdminUsers() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-6">
       <Card className="p-6">
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-3">

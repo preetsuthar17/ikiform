@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SocialMediaIcons } from "@/components/ui/social-media-icons";
+import { useFormStyling } from "@/hooks/use-form-styling";
 import type { FormField, FormSchema } from "@/lib/database";
 
 interface SingleStepFormContentProps {
@@ -34,6 +35,8 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
   logicMessages,
 }) => {
   const firstFieldRef = useRef<any>(null);
+  const { customStyles, getFieldStyles, getButtonStyles } = useFormStyling(schema);
+  
   useEffect(() => {
     if (firstFieldRef.current) {
       firstFieldRef.current.focus();
@@ -46,8 +49,9 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
 
   return (
     <Card
-      className={`flex grow flex-col gap-6 rounded-card p-8 ${schema.settings.designMode === "minimal" ? "border-none bg-transparent shadow-none hover:bg-transparent" : ""}`}
-      variant={schema.settings.designMode === "minimal" ? "ghost" : "default"}
+      className="flex grow flex-col gap-6 rounded-card border-none bg-transparent shadow-none hover:bg-transparent"
+      style={customStyles.cardStyle}
+      variant="ghost"
     >
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
@@ -129,6 +133,7 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
               )
             }
             loading={submitting}
+            style={getButtonStyles(true)}
             type="submit"
           >
             {submitting ? "Submitting" : schema.settings.submitText || "Submit"}

@@ -4,15 +4,15 @@ export function LoginSkeleton() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted">
       <div className="w-full max-w-xs sm:max-w-sm md:max-w-md">
-        <div className="rounded-xl bg-white p-6 shadow-md border space-y-6">
+        <div className="rounded-xl bg-white p-6 shadow-md border flex flex-col gap-6">
           {/* Title and subtitle */}
-          <div className="space-y-2 text-center">
+          <div className="flex flex-col gap-2 text-center">
             <Skeleton className="mx-auto h-6 w-32" />
             <Skeleton className="mx-auto h-4 w-24" />
           </div>
 
           {/* Email and password fields */}
-          <div className="space-y-4">
+          <div className="flex flex-col gap-4">
             <Skeleton className="h-10 w-full" />
             <Skeleton className="h-10 w-full" />
           </div>
@@ -33,7 +33,7 @@ export function LoginSkeleton() {
           </div>
 
           {/* Social login buttons */}
-          <div className="space-y-2">
+          <div className="flex flex-col gap-2">
             <Skeleton className="h-8 w-full" />
             <Skeleton className="h-8 w-full" />
           </div>

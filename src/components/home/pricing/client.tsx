@@ -246,7 +246,7 @@ export default function PricingClient({ products }: PricingClientProps) {
 
                 {}
                 {user && hasPremium ? (
-                  <div className="w-full space-y-3">
+                  <div className="w-full flex flex-col gap-3">
                     <Button className="w-full" size="lg">
                       <Link
                         className="block w-full"

@@ -28,14 +28,28 @@ export interface LocalSettings {
   submitText?: string;
   successMessage?: string;
   redirectUrl?: string;
-  designMode?: "default" | "minimal";
+
   layout?: {
-    maxWidth?: "sm" | "md" | "lg" | "xl" | "full";
+    maxWidth?: "sm" | "md" | "lg" | "xl" | "full" | "custom";
+    customWidth?: string;
     padding?: "none" | "sm" | "md" | "lg";
     margin?: "none" | "sm" | "md" | "lg";
     borderRadius?: "none" | "sm" | "md" | "lg" | "xl";
     spacing?: "compact" | "normal" | "relaxed";
     alignment?: "left" | "center" | "right";
+  };
+  colors?: {
+    background?: string;
+    text?: string;
+    primary?: string;
+    border?: string;
+  };
+  typography?: {
+    fontFamily?: string;
+    fontSize?: "xs" | "sm" | "base" | "lg" | "xl";
+    fontWeight?: "light" | "normal" | "medium" | "semibold" | "bold";
+    lineHeight?: "tight" | "normal" | "relaxed";
+    letterSpacing?: "tight" | "normal" | "wide";
   };
   branding?: {
     socialMedia?: {

@@ -17,7 +17,7 @@ export function PublicFormServerLayout({
     >
       <Suspense
         fallback={
-          <div className="mx-auto max-w-2xl space-y-6 p-4">
+          <div className="mx-auto max-w-2xl flex flex-col gap-6 p-4">
             <SkeletonCard
               className="min-h-[400px]"
               showFooter={true}

@@ -327,7 +327,7 @@ export default function EmbedCodeGenerator({
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold text-foreground">
           Get Embed Code
@@ -414,7 +414,7 @@ export default function EmbedCodeGenerator({
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-sm text-muted-foreground space-y-2">
+          <div className="text-sm text-muted-foreground flex flex-col gap-2">
             {embedMode === "html" && (
               <p>
                 Copy the HTML code and paste it directly into your website where
@@ -474,7 +474,7 @@ export default function EmbedCodeGenerator({
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <ul className="text-sm text-muted-foreground space-y-1">
+          <ul className="text-sm text-muted-foreground flex flex-col gap-1">
             <li className="flex items-center gap-2">
               <Shield className="h-3 w-3" />
               The iframe includes security sandbox attributes for safe embedding

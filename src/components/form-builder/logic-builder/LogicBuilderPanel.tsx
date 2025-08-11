@@ -368,7 +368,7 @@ function LogicBuilderPanelContent({
         />
         <TabsContent activeValue={activeTab} value="rules">
           {}
-          <div className="mb-4 space-y-4">
+          <div className="mb-4 flex flex-col gap-4">
             <div className="mb-2 flex items-center justify-between gap-2">
               <h3 className="font-semibold text-base">Logic Items</h3>
               <div className="flex gap-2">
@@ -389,7 +389,7 @@ function LogicBuilderPanelContent({
                 No logic items yet.
               </div>
             ) : (
-              <div className="space-y-2">
+              <div className="flex flex-col gap-2">
                 {logic.map((item) => {
                   if (!(item && item.action && item.action.type)) {
                     return (
@@ -460,7 +460,7 @@ function LogicBuilderPanelContent({
           </div>
         </TabsContent>
         <TabsContent activeValue={activeTab} value="fields">
-          <div className="space-y-6">
+          <div className="flex flex-col gap-6">
             {fields.map((field) => {
               const rules = fieldLogicMap[field.id];
               return (
@@ -476,7 +476,7 @@ function LogicBuilderPanelContent({
                       No logic rules affect this field.
                     </div>
                   ) : (
-                    <div className="space-y-1">
+                    <div className="flex flex-col gap-1">
                       {rules.map(({ rule, actionType }) => {
                         const actionColor =
                           actionType === "show"

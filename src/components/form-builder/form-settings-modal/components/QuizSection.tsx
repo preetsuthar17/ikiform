@@ -112,7 +112,7 @@ export function QuizSection({
             />
 
             {/* Custom Result Messages */}
-            <div className="space-y-4 pt-2">
+            <div className="flex flex-col gap-4 pt-2">
               <Label className="font-medium text-sm">
                 Custom Result Messages
               </Label>
@@ -190,7 +190,7 @@ function QuizField({
     <div className="flex flex-col gap-2">
       <Label htmlFor={id}>{label}</Label>
       {type === "slider" ? (
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
             <span className="text-muted-foreground text-sm">{description}</span>
             <span className="font-medium text-sm">{value}%</span>

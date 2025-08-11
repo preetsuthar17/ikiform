@@ -144,10 +144,10 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
 
   return (
     <TooltipProvider>
-      <div className="mx-auto w-full max-w-[95%] space-y-6 px-6">
+      <div className="mx-auto w-full max-w-[95%] flex flex-col gap-6 px-6">
         {}
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <div className="space-y-1">
+          <div className="flex flex-col gap-1">
             <div className="flex items-center gap-3">
               <h1 className="font-semibold text-2xl text-foreground">
                 {form.title}

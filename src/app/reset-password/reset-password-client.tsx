@@ -159,9 +159,9 @@ export default function ResetPasswordClient() {
           </div>
         </CardHeader>
 
-        <CardContent className="w-full space-y-4">
-          <form className="space-y-4" onSubmit={handleResetPassword}>
-            <div className="space-y-2">
+        <CardContent className="w-full flex flex-col gap-4">
+          <form className="flex flex-col gap-4" onSubmit={handleResetPassword}>
+            <div className="flex flex-col gap-2">
               <Label htmlFor="password">New Password</Label>
               <div className="relative">
                 <Input
@@ -193,7 +193,7 @@ export default function ResetPasswordClient() {
               </div>
             </div>
 
-            <div className="space-y-2">
+            <div className="flex flex-col gap-2">
               <Label htmlFor="confirmPassword">Confirm New Password</Label>
               <div className="relative">
                 <Input

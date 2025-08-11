@@ -9,6 +9,7 @@ import { PasswordProtectionModal } from "@/components/forms/public-form/componen
 import { Card } from "@/components/ui/card";
 import { getFormLayoutClasses } from "@/lib/utils/form-layout";
 import { Progress } from "../ui/progress";
+import { useFormStyling } from "@/hooks/use-form-styling";
 
 import {
   FormContent,
@@ -62,6 +63,10 @@ export function MultiStepForm({
   const [showForm, setShowForm] = useState(false);
 
   const { containerClass, marginClass } = getFormLayoutClasses(schema);
+  const { customStyles, fontLoaded, getFormClasses } = useFormStyling(schema);
+  
+  // Check if custom width is used
+  const isCustomWidth = (schema.settings?.layout as any)?.maxWidth === "custom" && (schema.settings?.layout as any)?.customWidth;
 
   useEffect(() => {
     const passwordProtection = schema.settings.passwordProtection;
@@ -129,33 +134,38 @@ export function MultiStepForm({
 
   return (
     <div
-      className={`flex items-center justify-center bg-background transition-opacity duration-500 ${showForm ? "opacity-100" : "opacity-0"} ${marginClass}`}
+      className={`flex items-center justify-center transition-opacity duration-500 ${showForm ? "opacity-100" : "opacity-0"} ${marginClass} ${getFormClasses()}`}
       dir={dir}
+      style={customStyles.containerStyle}
     >
-      <div className={`flex w-full flex-col gap-8 ${containerClass}`}>
+      <div 
+        className={`flex w-full flex-col gap-8 ${containerClass} ${isCustomWidth ? 'ikiform-custom-width' : ''}`} 
+        style={customStyles.containerStyle}
+      >
         <Card
-          className={`flex w-full grow flex-col gap-6 rounded-card p-8 ${schema.settings.designMode === "minimal" ? "border-none bg-transparent shadow-none hover:bg-transparent" : ""}`}
-          variant={
-            schema.settings.designMode === "minimal" ? "ghost" : "default"
-          }
+          className="flex w-full grow flex-col gap-6 rounded-card border-none bg-transparent shadow-none hover:bg-transparent"
+          style={customStyles.cardStyle}
+          variant="ghost"
         >
           <FormProgress
             progress={progress}
             showProgress={schema.settings.showProgress !== false}
             totalSteps={totalSteps}
           />
-          <FormContent
-            currentBlock={currentBlock}
-            description={schema.settings.description}
-            errors={errors}
-            fieldVisibility={fieldVisibility}
-            formData={formData}
-            formId={formId}
-            logicMessages={logicMessages}
-            onFieldValueChange={handleFieldValueChange}
-            schema={schema}
-            title={schema.settings.title}
-          />
+          <div style={customStyles.formStyle}>
+            <FormContent
+              currentBlock={currentBlock}
+              description={schema.settings.description}
+              errors={errors}
+              fieldVisibility={fieldVisibility}
+              formData={formData}
+              formId={formId}
+              logicMessages={logicMessages}
+              onFieldValueChange={handleFieldValueChange}
+              schema={schema}
+              title={schema.settings.title}
+            />
+          </div>
           <FormNavigation
             currentFields={currentBlock.fields}
             currentStep={currentStep}

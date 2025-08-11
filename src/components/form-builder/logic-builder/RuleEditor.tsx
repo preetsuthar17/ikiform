@@ -59,7 +59,7 @@ function RuleEditor({
         <ModalHeader>
           <ModalTitle>{rule ? "Edit Rule" : "Add Rule"}</ModalTitle>
         </ModalHeader>
-        <div className="space-y-4">
+        <div className="flex flex-col gap-4">
           <div>
             <label className="mb-1 block font-medium text-sm">Rule Name</label>
             <Input

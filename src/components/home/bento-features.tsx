@@ -87,7 +87,7 @@ const AIFormBuilderPreview = () => {
 
   return (
     <div className="flex h-full flex-col justify-between overflow-hidden rounded-card bg-gradient-to-br from-accent/30 to-secondary/50 p-6">
-      <div className="space-y-4">
+      <div className="flex flex-col gap-4">
         <motion.div
           animate={{ opacity: isGenerating ? 1 : 0.7 }}
           className="flex items-center gap-3"
@@ -113,14 +113,14 @@ const AIFormBuilderPreview = () => {
           </span>
         </motion.div>
 
-        <div className="space-y-3">
+        <div className="flex flex-col gap-3">
           {steps.map((step, index) => (
             <motion.div
               animate={{
                 opacity: currentStep > index ? 1 : 0.3,
                 y: currentStep > index ? 0 : -20,
               }}
-              className="space-y-2"
+              className="flex flex-col gap-2"
               initial={{ opacity: 0, y: -20 }}
               key={index}
               transition={{
@@ -186,7 +186,7 @@ const AIFormBuilderPreview = () => {
 const UnlimitedPreview = () => {
   return (
     <div className="flex h-full flex-col items-center justify-center overflow-hidden rounded-card bg-gradient-to-t from-secondary to-accent/20 p-4">
-      <div className="space-y-3 text-center">
+      <div className="flex flex-col gap-3 text-center">
         <motion.div
           animate={{
             rotate: [0, 5, -5, 0],
@@ -203,7 +203,7 @@ const UnlimitedPreview = () => {
         </motion.div>
         <motion.div
           animate={{ opacity: 1, y: 0 }}
-          className="space-y-1"
+          className="flex flex-col gap-1"
           initial={{ opacity: 0, y: 10 }}
           transition={{ delay: 0.2 }}
         >
@@ -268,7 +268,7 @@ const AnalyticsPreview = () => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="space-y-3">
+      <div className="flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <span className="font-medium text-foreground text-xs">
             Weekly Trends
@@ -322,7 +322,7 @@ const LogicBuilderPreview = () => {
 
   return (
     <div className="h-full overflow-hidden rounded-card bg-gradient-to-r from-secondary/50 to-accent/30 p-4">
-      <div className="space-y-4">
+      <div className="flex flex-col gap-4">
         <motion.div
           animate={{ opacity: 1, y: 0 }}
           className="flex items-center gap-2"
@@ -341,7 +341,7 @@ const LogicBuilderPreview = () => {
           {showBranches && (
             <motion.div
               animate={{ opacity: 1, height: "auto" }}
-              className="ml-6 space-y-2"
+              className="ml-6 flex flex-col gap-2"
               exit={{ opacity: 0, height: 0 }}
               initial={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.5, staggerChildren: 0.1 }}
@@ -394,7 +394,7 @@ const APIIntegrationPreview = () => {
 
   return (
     <div className="h-full overflow-hidden rounded-card bg-gradient-to-t from-accent/20 to-secondary/40 p-4">
-      <div className="space-y-3">
+      <div className="flex flex-col gap-3">
         <motion.div
           animate={{ opacity: 1 }}
           className="flex items-center gap-2"
@@ -435,7 +435,7 @@ const APIIntegrationPreview = () => {
           {showData && (
             <motion.div
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              className="space-y-2 rounded-card border border-border bg-card p-3"
+              className="flex flex-col gap-2 rounded-card border border-border bg-card p-3"
               initial={{ opacity: 0, scale: 0.9, y: 10 }}
               transition={{
                 type: "spring",
@@ -496,7 +496,7 @@ const DigitalSignaturesPreview = () => {
         className="flex h-full flex-col justify-center rounded-card border-2 border-border border-dashed p-3"
         transition={{ duration: 0.3 }}
       >
-        <div className="space-y-2 text-center">
+        <div className="flex flex-col gap-2 text-center">
           <div className="font-medium text-foreground text-xs">
             {isSigning
               ? "Signing..."
@@ -599,7 +599,7 @@ const EmailNotificationsPreview = () => {
 
   return (
     <div className="h-full overflow-hidden rounded-card bg-gradient-to-t from-secondary/40 to-accent/30 p-4">
-      <div className="space-y-3">
+      <div className="flex flex-col gap-3">
         <motion.div
           animate={{
             scale: notifications.length > 0 ? [1, 1.05, 1] : 1,
@@ -632,7 +632,7 @@ const EmailNotificationsPreview = () => {
                   zIndex: notifications.length - index,
                   rotateZ: index * 1.5,
                 }}
-                className="absolute w-full space-y-1 rounded-card border border-border bg-card p-3 shadow-sm"
+                className="absolute w-full flex flex-col gap-1 rounded-card border border-border bg-card p-3 shadow-sm"
                 exit={{
                   opacity: 0,
                   y: 150,

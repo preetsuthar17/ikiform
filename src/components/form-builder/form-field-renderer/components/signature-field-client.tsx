@@ -59,7 +59,7 @@ export function SignatureFieldClient({
   };
 
   return (
-    <div className="w-full space-y-2">
+    <div className="w-full flex flex-col gap-2">
       <div
         className="relative w-full overflow-hidden rounded-md border-2 border-muted border-dashed bg-background"
         ref={containerRef}

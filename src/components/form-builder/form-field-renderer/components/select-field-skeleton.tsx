@@ -5,7 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
  */
 export function SelectFieldSkeleton() {
   return (
-    <div className="space-y-2">
+    <div className="flex flex-col gap-2">
       <Skeleton className="h-10 w-full rounded-md border" />
     </div>
   );

@@ -97,7 +97,7 @@ export function InboundWebhookFormModal({
           </Button>
         </CardHeader>
         <form onSubmit={handleSubmit}>
-          <CardContent className="space-y-4">
+          <CardContent className="flex flex-col gap-4">
             <div>
               <Label className="mb-1" htmlFor="endpoint">
                 Endpoint
@@ -128,7 +128,7 @@ export function InboundWebhookFormModal({
             </div>
             <div>
               <Label className="mb-1">Mapping Rules</Label>
-              <div className="space-y-2">
+              <div className="flex flex-col gap-2">
                 {Object.entries(mappingRules).map(([ext, form]) => (
                   <div className="flex items-center gap-2" key={ext}>
                     <Input

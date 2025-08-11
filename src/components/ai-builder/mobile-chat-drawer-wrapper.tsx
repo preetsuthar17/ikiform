@@ -31,13 +31,13 @@ export function MobileChatDrawerWrapper({
       fallback={
         <div className="fixed inset-0 z-50 md:hidden">
           <div className="fixed inset-y-0 right-0 w-full border-l bg-background">
-            <div className="space-y-4 p-4">
+            <div className="flex flex-col gap-4 p-4">
               <div className="flex items-center justify-between">
                 <Skeleton className="h-6 w-32" />
                 <Skeleton className="h-8 w-8 rounded-full" />
               </div>
               <Skeleton className="h-40 w-full" />
-              <div className="space-y-2">
+              <div className="flex flex-col gap-2">
                 <Skeleton className="h-10 w-full" />
                 <Skeleton className="h-10 w-full" />
               </div>
