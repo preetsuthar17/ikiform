@@ -65,6 +65,7 @@ export const useSingleStepForm = (
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [quizResults, setQuizResults] = useState<QuizResult | null>(null);
+  const [isLoadingProgress, setIsLoadingProgress] = useState(true);
   const initializedFieldsRef = useRef<Set<string>>(new Set());
 
   const {
@@ -89,32 +90,37 @@ export const useSingleStepForm = (
   } = usePrepopulation(fields);
 
   useEffect(() => {
-    if (formId) {
-      loadProgress();
-    }
-  }, [formId, loadProgress]);
-
-  useEffect(() => {
     const currentFieldIds = new Set(fields.map((field) => field.id));
     const newFieldIds = [...currentFieldIds].filter(
       (id) => !initializedFieldsRef.current.has(id),
     );
 
     if (newFieldIds.length > 0) {
-      const newFormData = { ...formData };
-      fields.forEach((field) => {
-        if (newFieldIds.includes(field.id)) {
-          const prepopValue = prepopulatedData[field.id];
-          newFormData[field.id] =
-            prepopValue !== undefined
-              ? prepopValue
-              : getDefaultValueForField(field);
-        }
+      setFormData(prevFormData => {
+        const newFormData = { ...prevFormData };
+        fields.forEach((field) => {
+          if (newFieldIds.includes(field.id)) {
+            newFormData[field.id] = getDefaultValueForField(field);
+          }
+        });
+        return newFormData;
       });
-      setFormData(newFormData);
+
       newFieldIds.forEach((id) => initializedFieldsRef.current.add(id));
     }
-  }, [fields.length, prepopulatedData, formData]);
+
+    if (isLoadingProgress && progress?.formData) {
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        ...progress.formData
+      }));
+      setIsLoadingProgress(false);
+    }
+
+    if (formId && !progress) {
+      loadProgress();
+    }
+  }, [formId, fields, progress, isLoadingProgress, loadProgress, formData]);
 
   useEffect(() => {
     if (Object.keys(prepopulatedData).length > 0) {
@@ -146,37 +152,7 @@ export const useSingleStepForm = (
     });
   }, [prepopErrors, fields]);
 
-  useEffect(() => {
-    if (progress && Object.keys(progress.formData).length > 0) {
-      setFormData((prevFormData) => {
-        const hasUserInput = Object.entries(prevFormData).some(
-          ([fieldId, value]) => {
-            const field = fields.find((f) => f.id === fieldId);
-            if (!field) return false;
 
-            const defaultValue = getDefaultValueForField(field);
-
-            if (Array.isArray(value) && Array.isArray(defaultValue)) {
-              return value.length > 0;
-            }
-
-            return (
-              value !== defaultValue &&
-              value !== "" &&
-              value !== null &&
-              value !== undefined
-            );
-          },
-        );
-
-        if (!hasUserInput) {
-          return { ...prevFormData, ...progress.formData };
-        }
-
-        return prevFormData;
-      });
-    }
-  }, [progress]);
 
   useEffect(() => {
     if (Object.keys(formData).length > 0) {

@@ -11,7 +11,7 @@ import type {
 const DEFAULT_CONFIG: FormProgressConfig = {
   enabled: true,
   storage: "localStorage",
-  autoSaveInterval: 2000,
+  autoSaveInterval: 1000,
   retentionDays: 7,
   compressionEnabled: false,
   encryptionEnabled: false,
@@ -24,10 +24,6 @@ const DEFAULT_SAVE_OPTIONS: SaveProgressOptions = {
   enableAutoSave: true,
 };
 
-/**
- * Custom hook for managing form filling progress
- * Automatically saves user progress as they fill out forms
- */
 export function useFormProgress(
   formId: string,
   totalFields: number,
@@ -52,9 +48,19 @@ export function useFormProgress(
   useEffect(() => {
     if (!storageRef.current) {
       storageRef.current = new FormProgressStorage(finalConfig);
-      sessionIdRef.current = storageRef.current.generateSessionId();
+      // Try to get existing session ID from localStorage first
+      const existingSessionKey = `ikiform_session_${formId}`;
+      const existingSessionId = localStorage.getItem(existingSessionKey);
+      
+      if (existingSessionId) {
+        sessionIdRef.current = existingSessionId;
+      } else {
+        // Generate new session ID only if none exists
+        sessionIdRef.current = storageRef.current.generateSessionId();
+        localStorage.setItem(existingSessionKey, sessionIdRef.current);
+      }
     }
-  }, [finalConfig]);
+  }, [finalConfig, formId]);
 
   const debouncedSave = useCallback(
     async (formData: Record<string, any>, currentStep = 0, totalSteps = 1) => {
@@ -120,8 +126,9 @@ export function useFormProgress(
   );
 
   const loadProgress = useCallback(async () => {
-    if (!(storageRef.current && sessionIdRef.current && finalConfig.enabled))
+    if (!(storageRef.current && sessionIdRef.current && finalConfig.enabled)) {
       return;
+    }
 
     try {
       setState((prev: FormProgressState) => ({
@@ -156,6 +163,10 @@ export function useFormProgress(
 
     try {
       await storageRef.current.deleteProgress(formId, sessionIdRef.current);
+      
+      // Also clear the session ID from localStorage
+      const existingSessionKey = `ikiform_session_${formId}`;
+      localStorage.removeItem(existingSessionKey);
 
       setState((prev: FormProgressState) => ({
         ...prev,

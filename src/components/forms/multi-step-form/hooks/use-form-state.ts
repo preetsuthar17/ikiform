@@ -158,45 +158,40 @@ export const useFormState = (
   }, [prepopErrors, allFields]);
 
   useEffect(() => {
-    if (
-      progress &&
-      Object.keys(progress.formData).length > 0 &&
-      isLoadingProgress
-    ) {
-      setFormData((prevFormData) => {
-        const hasUserInput = Object.entries(prevFormData).some(
-          ([fieldId, value]) => {
-            const field = allFields.find((f) => f.id === fieldId);
-            if (!field) return false;
+    if (isLoadingProgress) {
+      if (progress && Object.keys(progress.formData).length > 0) {
+        setFormData((prevFormData) => {
+          const hasUserInput = Object.entries(prevFormData).some(
+            ([fieldId, value]) => {
+              const field = allFields.find((f) => f.id === fieldId);
+              if (!field) return false;
 
-            const defaultValue = getDefaultValueForField(field);
+              const defaultValue = getDefaultValueForField(field);
 
-            if (Array.isArray(value) && Array.isArray(defaultValue)) {
-              return value.length > 0;
-            }
+              if (Array.isArray(value) && Array.isArray(defaultValue)) {
+                return value.length > 0;
+              }
 
-            return (
-              value !== defaultValue &&
-              value !== "" &&
-              value !== null &&
-              value !== undefined
-            );
-          },
-        );
+              return (
+                value !== defaultValue &&
+                value !== "" &&
+                value !== null &&
+                value !== undefined
+              );
+            },
+          );
 
-        if (!hasUserInput) {
-          return { ...prevFormData, ...progress.formData };
+          if (!hasUserInput) {
+            return { ...prevFormData, ...progress.formData };
+          }
+          return prevFormData;
+        });
+
+        if (progress.currentStep >= 0 && progress.currentStep < totalSteps) {
+          setCurrentStep(progress.currentStep);
         }
-
-        return prevFormData;
-      });
-
-      // Only restore currentStep on initial load, not during navigation
-      if (progress.currentStep >= 0 && progress.currentStep < totalSteps) {
-        setCurrentStep(progress.currentStep);
       }
-
-      // Mark that we've loaded the initial progress
+      
       setIsLoadingProgress(false);
     }
   }, [progress, totalSteps, allFields, isLoadingProgress]);
