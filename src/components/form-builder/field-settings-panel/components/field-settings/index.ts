@@ -1,5 +1,6 @@
 export { AddressFieldSettings } from './AddressFieldSettings';
 export { CheckboxFieldSettings } from './CheckboxFieldSettings';
+export { FileFieldSettings } from './FileFieldSettings';
 export { LinkFieldSettings } from './LinkFieldSettings';
 export { PhoneFieldSettings } from './PhoneFieldSettings';
 export { PollFieldSettings } from './PollFieldSettings';

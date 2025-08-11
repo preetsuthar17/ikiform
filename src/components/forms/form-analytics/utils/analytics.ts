@@ -127,9 +127,31 @@ export const calculateFieldAnalytics = (
     let totalLength = 0;
 
     responses.forEach((response) => {
-      const stringValue = Array.isArray(response)
-        ? response.join(', ')
-        : String(response);
+      let stringValue: string;
+      
+      // Handle file uploads specially
+      if (field.type === 'file') {
+        if (Array.isArray(response)) {
+          const fileCount = response.length;
+          const fileTypes = response.map(file => {
+            if (typeof file === 'object' && file.type) {
+              return file.type.split('/')[0]; // e.g., 'image', 'video', 'application'
+            }
+            return 'unknown';
+          });
+          const uniqueTypes = [...new Set(fileTypes)];
+          stringValue = `${fileCount} file${fileCount !== 1 ? 's' : ''} (${uniqueTypes.join(', ')})`;
+        } else if (typeof response === 'object' && response.type) {
+          stringValue = `1 file (${response.type.split('/')[0]})`;
+        } else {
+          stringValue = '1 file';
+        }
+      } else {
+        stringValue = Array.isArray(response)
+          ? response.join(', ')
+          : String(response);
+      }
+      
       valueFrequency[stringValue] = (valueFrequency[stringValue] || 0) + 1;
       totalLength += stringValue.length;
     });

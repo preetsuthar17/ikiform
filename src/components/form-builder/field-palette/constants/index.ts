@@ -17,6 +17,7 @@ import {
   Star,
   Tags,
   Type,
+  Upload,
 } from 'lucide-react';
 import type { FieldTypeConfig } from '../types';
 
@@ -140,6 +141,12 @@ export const FIELD_TYPES: FieldTypeConfig[] = [
     label: 'Link',
     icon: Link2,
     description: 'URL input with validation',
+  },
+  {
+    type: 'file',
+    label: 'File Upload',
+    icon: Upload,
+    description: 'Upload files with customizable size and type restrictions',
   },
 ];
 

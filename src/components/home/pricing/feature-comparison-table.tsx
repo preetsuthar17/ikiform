@@ -127,6 +127,11 @@ const featureCategories = [
         description: 'Add scoring and quiz functionality to your forms.',
         included: true,
       },
+      {
+        label: 'File upload field',
+        description: 'Add file upload fields to your forms.',
+        included: true,
+      },
     ],
   },
   {
@@ -186,11 +191,6 @@ const featureCategories = [
         included: false,
       },
       {
-        label: 'File uploads (in few days)',
-        description: 'Allow users to upload files with their form submissions.',
-        included: false,
-      },
-      {
         label: 'Form embedding',
         description: 'Embed forms easily into your website or app.',
         included: false,
@@ -200,12 +200,6 @@ const featureCategories = [
         description: 'Support multiple languages for your forms.',
         included: false,
       },
-      {
-        label: 'File upload field',
-        description: 'Add file upload fields to your forms.',
-        included: false,
-      },
-
       {
         label: 'Slack integration',
         description: 'Send form responses directly to Slack channels.',

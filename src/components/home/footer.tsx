@@ -72,7 +72,6 @@ export default function Footer() {
                   </Button>
                 </div>
 
-                {}
                 <div className="text-foreground/60 text-sm">
                   <p>
                     © {new Date().getFullYear()} Made by —{' '}
@@ -98,9 +97,22 @@ export default function Footer() {
                 >
                   <img
                     alt="Featured on Startup Fame"
-                    height="54"
+                    height={54}
                     src="https://startupfa.me/badges/featured/default.webp"
-                    width="171"
+                    width={171}
+                  />
+                </a>
+                <a
+                  href="https://www.producthunt.com/products/ikiform?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-ikiform-2"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img
+                    src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1003917&theme=light&t=1754896632153"
+                    alt="Ikiform - An open-source alternative to Google Forms and Typeform | Product Hunt"
+                    style={{ width: 250, height: 54 }}
+                    width={250}
+                    height={54}
                   />
                 </a>
               </div>

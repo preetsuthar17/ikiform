@@ -6,6 +6,7 @@ import {
   CheckboxField,
   DateInputField,
   EmailInputField,
+  FileUploadField,
   NumberInputField,
   PollField,
   RadioField,
@@ -33,7 +34,8 @@ export function createFieldComponent(
   onChange: (value: any) => void,
   error?: string,
   fieldRef?: React.RefObject<any>,
-  disabled?: boolean
+  disabled?: boolean,
+  formId?: string
 ): React.ReactElement {
   const props: BaseFieldProps = {
     field,
@@ -42,6 +44,7 @@ export function createFieldComponent(
     error,
     fieldRef,
     disabled,
+    formId,
   };
 
   switch (field.type) {
@@ -88,6 +91,8 @@ export function createFieldComponent(
       return React.createElement(AddressField, props);
     case 'link':
       return React.createElement(LinkInputField, props);
+    case 'file':
+      return React.createElement(FileUploadField, props);
     default:
       return React.createElement('div', {}, 'Unsupported field type');
   }

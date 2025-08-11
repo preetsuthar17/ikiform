@@ -13,10 +13,11 @@ export function FormFieldRenderer({
   error,
   fieldRef,
   disabled,
+  formId,
 }: FormFieldRendererProps) {
   return (
     <FieldWrapper error={error} field={field}>
-      {createFieldComponent(field, value, onChange, error, fieldRef, disabled)}
+      {createFieldComponent(field, value, onChange, error, fieldRef, disabled, formId)}
     </FieldWrapper>
   );
 }

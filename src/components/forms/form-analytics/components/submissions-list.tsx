@@ -382,6 +382,66 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                               );
                             }
 
+                            // Handle file uploads
+                            if (field?.type === 'file' && value) {
+                              const files = Array.isArray(value) ? value : [value];
+                              const fileCount = files.length;
+                              const hasImages = files.some(file => 
+                                (typeof file === 'object' && file.type?.startsWith('image/')) ||
+                                (typeof file === 'string' && file.match(/\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i))
+                              );
+
+                              return (
+                                <div
+                                  className="flex flex-col gap-2"
+                                  key={fieldId}
+                                >
+                                  <label className="font-medium text-muted-foreground text-xs uppercase tracking-wider">
+                                    {getFieldLabel(fieldId)}
+                                  </label>
+                                  <div className="rounded-ele border border-border bg-input p-2">
+                                    <div className="flex items-center gap-2">
+                                      <div className="flex -space-x-1">
+                                        {files.slice(0, 3).map((file, idx) => {
+                                          const isFileObj = typeof file === 'object' && file.signedUrl;
+                                          const isImage = isFileObj 
+                                            ? file.type?.startsWith('image/')
+                                            : typeof file === 'string' && file.match(/\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i);
+                                          const url = isFileObj ? file.signedUrl : file;
+
+                                          return isImage ? (
+                                            <img
+                                              key={idx}
+                                              src={url}
+                                              alt="File preview"
+                                              className="h-8 w-8 rounded border border-white object-cover"
+                                            />
+                                          ) : (
+                                            <div 
+                                              key={idx}
+                                              className="h-8 w-8 rounded border border-white bg-accent flex items-center justify-center"
+                                            >
+                                              <span className="text-xs font-mono">
+                                                {isFileObj ? file.name?.split('.').pop()?.slice(0, 3).toUpperCase() : 'FILE'}
+                                              </span>
+                                            </div>
+                                          );
+                                        })}
+                                        {fileCount > 3 && (
+                                          <div className="h-8 w-8 rounded border border-white bg-muted flex items-center justify-center">
+                                            <span className="text-xs">+{fileCount - 3}</span>
+                                          </div>
+                                        )}
+                                      </div>
+                                      <span className="text-xs text-muted-foreground">
+                                        {fileCount} file{fileCount !== 1 ? 's' : ''} {hasImages ? '(with images)' : ''}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            }
+
                             return (
                               <div
                                 className="flex flex-col gap-2"

@@ -8,6 +8,7 @@ export interface FormFieldRendererProps {
   error?: string;
   fieldRef?: RefObject<any>;
   disabled?: boolean;
+  formId?: string; // Optional form ID for file uploads
 }
 
 export interface FieldWrapperProps {
@@ -24,6 +25,7 @@ export interface BaseFieldProps {
   fieldRef?: RefObject<any>;
   className?: string;
   disabled?: boolean;
+  formId?: string; // Optional form ID for file uploads
 }
 
 export type FieldSize = 'sm' | 'lg' | 'default';

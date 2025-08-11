@@ -33,16 +33,35 @@ interface FileWithPreview {
 }
 
 const fileUploadVariants = cva(
-  'group relative w-full rounded-card border transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+  [
+    'group',
+    'relative',
+    'w-full',
+    'rounded-ele',
+    'border',
+    'transition-all',
+    'duration-300',
+    'bg-background',
+    'focus-visible:outline-none',
+    'focus-visible:ring-2',
+    'focus-visible:ring-primary',
+    'focus-visible:shadow-lg',
+    'focus-visible:border-primary',
+    'hover:shadow-md',
+    'hover:border-primary/60',
+    'active:shadow',
+    'disabled:pointer-events-none',
+    'disabled:opacity-50',
+  ].join(' '),
   {
     variants: {
       variant: {
         default:
-          'border-border bg-card hover:border-primary/30 focus-visible:ring-ring',
+          'border-border bg-background hover:border-primary/40 focus-visible:ring-primary focus-visible:shadow-lg',
         dashed:
-          'border-border border-dashed bg-background hover:border-primary/50 hover:bg-accent focus-visible:ring-ring',
+          'border-border border-dashed bg-background hover:border-primary/60 hover:bg-accent/60 focus-visible:ring-primary focus-visible:shadow-lg',
         ghost:
-          'border-transparent bg-accent/50 hover:bg-accent focus-visible:ring-ring',
+          'border-transparent bg-accent/40 hover:bg-accent/70 focus-visible:ring-primary focus-visible:shadow-lg',
       },
       size: {
         sm: 'min-h-[120px] p-4',
@@ -51,7 +70,8 @@ const fileUploadVariants = cva(
       },
       state: {
         idle: '',
-        dragging: 'scale-[1.02] border-primary bg-primary/5',
+        dragging:
+          'scale-[1.03] border-primary bg-primary/10 shadow-xl ring-2 ring-primary',
         disabled: 'pointer-events-none opacity-50',
       },
     },

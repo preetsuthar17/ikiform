@@ -90,6 +90,7 @@ export const FormContent: React.FC<FormContentProps> = ({
               error={errors[field.id]}
               field={field}
               fieldRef={idx === 0 ? firstFieldRef : undefined}
+              formId={formId}
               onChange={(value) => onFieldValueChange(field.id, value)}
               value={formData[field.id]}
             />

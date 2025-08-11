@@ -231,7 +231,8 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                   }
 
                   if (fieldType === 'file' && value) {
-                    const urls = Array.isArray(value) ? value : [value];
+                    // Handle new UploadedFile structure or legacy string URLs
+                    const files = Array.isArray(value) ? value : [value];
                     return (
                       <div
                         className="flex flex-col gap-2 border-border border-b py-4 last:border-0"
@@ -241,13 +242,68 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                           {getFieldLabel(key)}
                         </h3>
                         <div className="ml-2 flex flex-col gap-2 border-l pl-3">
-                          {urls.map((url, idx) =>
-                            url && typeof url === 'string' ? (
-                              url.match(
-                                /^https?:.*\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i
-                              ) ? (
+                          {files.map((file, idx) => {
+                            // Handle new file object structure
+                            if (file && typeof file === 'object' && file.signedUrl) {
+                              const isImage = file.type?.startsWith('image/') || 
+                                file.signedUrl.match(/\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i);
+                              
+                              return (
+                                <div key={file.id || idx} className="flex items-start gap-3 p-2 rounded-lg border bg-card">
+                                  {isImage ? (
+                                    <a
+                                      href={file.signedUrl}
+                                      rel="noopener noreferrer"
+                                      target="_blank"
+                                      className="flex-shrink-0"
+                                    >
+                                      <img
+                                        alt={file.name || 'Uploaded file'}
+                                        className="h-16 w-16 rounded-md border object-cover"
+                                        src={file.signedUrl}
+                                      />
+                                    </a>
+                                  ) : (
+                                    <div className="flex h-16 w-16 items-center justify-center rounded-md bg-accent">
+                                      <span className="text-xs font-medium">
+                                        {file.name?.split('.').pop()?.toUpperCase() || 'FILE'}
+                                      </span>
+                                    </div>
+                                  )}
+                                  
+                                  <div className="flex-1 min-w-0">
+                                    <p className="font-medium text-sm truncate">
+                                      {file.name || 'Unknown file'}
+                                    </p>
+                                    <div className="flex items-center gap-2 mt-1">
+                                      <Badge variant="secondary" size="sm">
+                                        {file.size ? `${(file.size / 1024 / 1024).toFixed(1)} MB` : 'Unknown size'}
+                                      </Badge>
+                                      {file.type && (
+                                        <Badge variant="outline" size="sm">
+                                          {file.type}
+                                        </Badge>
+                                      )}
+                                    </div>
+                                    <a
+                                      href={file.signedUrl}
+                                      rel="noopener noreferrer"
+                                      target="_blank"
+                                      className="text-primary hover:underline text-xs mt-1 inline-block"
+                                    >
+                                      Download
+                                    </a>
+                                  </div>
+                                </div>
+                              );
+                            }
+                            
+                            // Handle legacy string URLs
+                            if (file && typeof file === 'string') {
+                              const isImage = file.match(/\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i);
+                              return isImage ? (
                                 <a
-                                  href={url}
+                                  href={file}
                                   key={idx}
                                   rel="noopener noreferrer"
                                   target="_blank"
@@ -255,22 +311,24 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                                   <img
                                     alt="Uploaded file"
                                     className="h-24 max-w-xs rounded-ele border"
-                                    src={url}
+                                    src={file}
                                   />
                                 </a>
                               ) : (
                                 <a
                                   className="text-primary underline"
-                                  href={url}
+                                  href={file}
                                   key={idx}
                                   rel="noopener noreferrer"
                                   target="_blank"
                                 >
-                                  {url}
+                                  {file}
                                 </a>
-                              )
-                            ) : null
-                          )}
+                              );
+                            }
+                            
+                            return null;
+                          })}
                         </div>
                       </div>
                     );

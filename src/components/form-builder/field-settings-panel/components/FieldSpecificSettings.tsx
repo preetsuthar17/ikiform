@@ -4,6 +4,7 @@ import { EmailValidationSettings } from './EmailValidationSettings';
 import {
   AddressFieldSettings,
   CheckboxFieldSettings,
+  FileFieldSettings,
   LinkFieldSettings,
   PhoneFieldSettings,
   PollFieldSettings,
@@ -43,6 +44,7 @@ export function FieldSpecificSettings({
     radio: RadioFieldSettings,
     scheduler: SchedulerFieldSettings,
     time: TimeFieldSettings,
+    file: FileFieldSettings,
   };
 
   const FieldComponent = fieldSettingsMap[field.type];

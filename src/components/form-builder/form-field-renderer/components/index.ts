@@ -2,6 +2,7 @@ export { CheckboxField } from './CheckboxField';
 export { DateInputField } from './DateInputField';
 export { EmailInputField } from './EmailInputField';
 export { FieldWrapper } from './FieldWrapper';
+export { FileUploadField } from './FileUploadField';
 export { NumberInputField } from './NumberInputField';
 export { PollField } from './PollField';
 export { QuizField } from './QuizField';
