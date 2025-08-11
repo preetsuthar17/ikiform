@@ -16,6 +16,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import { useChartColors } from '@/lib/utils/chart-colors';
 
 interface GradientAreaChartProps {
   data: any[];
@@ -68,6 +69,7 @@ export function GradientAreaChart({
   title,
   className = '',
 }: GradientAreaChartProps) {
+  const { tooltipStyle } = useChartColors();
   return (
     <div className={`w-full ${className}`}>
       {title && <h3 className="mb-4 font-semibold text-lg">{title}</h3>}
@@ -89,14 +91,7 @@ export function GradientAreaChart({
             tickLine={false}
           />
           <YAxis hide={true} />
-          <Tooltip
-            contentStyle={{
-              backgroundColor: 'hsl(var(--hu-card))',
-              border: '1px solid hsl(var(--hu-border))',
-              borderRadius: '8px',
-              boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
-            }}
-          />
+          <Tooltip contentStyle={tooltipStyle} />
           <Area
             dataKey={dataKey}
             fill={`url(#${gradientId})`}
@@ -118,6 +113,7 @@ export function MultiAreaChart({
   height = 300,
   title,
 }: MultiAreaChartProps) {
+  const { tooltipStyle } = useChartColors();
   return (
     <div className="w-full">
       {title && <h3 className="mb-4 font-semibold text-lg">{title}</h3>}
@@ -148,14 +144,7 @@ export function MultiAreaChart({
             tickLine={false}
           />
           <YAxis hide={true} />
-          <Tooltip
-            contentStyle={{
-              backgroundColor: 'hsl(var(--hu-card))',
-              border: '1px solid hsl(var(--hu-border))',
-              borderRadius: '8px',
-              boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
-            }}
-          />
+          <Tooltip contentStyle={tooltipStyle} />
           {areas.map((area) => (
             <Area
               dataKey={area.dataKey}
@@ -182,6 +171,7 @@ export function GradientBarChart({
   color = '#10b981',
   title,
 }: BarChartProps) {
+  const { tooltipStyle } = useChartColors();
   return (
     <div className="w-full">
       {title && <h3 className="mb-4 font-semibold text-lg">{title}</h3>}
@@ -203,14 +193,7 @@ export function GradientBarChart({
             tickLine={false}
           />
           <YAxis hide={true} />
-          <Tooltip
-            contentStyle={{
-              backgroundColor: 'hsl(var(--hu-card))',
-              border: '1px solid hsl(var(--hu-border))',
-              borderRadius: '8px',
-              boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
-            }}
-          />
+          <Tooltip contentStyle={tooltipStyle} />
           <Bar
             dataKey={dataKey}
             fill="url(#barGradient)"
@@ -230,6 +213,7 @@ export function GradientPieChart({
   colors = ['#8b5cf6', '#10b981', '#f59e0b', '#ef4444', '#3b82f6', '#ec4899'],
   title,
 }: PieChartProps) {
+  const { tooltipStyle } = useChartColors();
   return (
     <div className="w-full">
       {title && <h3 className="mb-4 font-semibold text-lg">{title}</h3>}
@@ -251,14 +235,7 @@ export function GradientPieChart({
               />
             ))}
           </Pie>
-          <Tooltip
-            contentStyle={{
-              backgroundColor: 'hsl(var(--hu-card))',
-              border: '1px solid hsl(var(--hu-border))',
-              borderRadius: '8px',
-              boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
-            }}
-          />
+          <Tooltip contentStyle={tooltipStyle} />
         </PieChart>
       </ResponsiveContainer>
     </div>
@@ -273,6 +250,7 @@ export function GradientLineChart({
   color = '#3b82f6',
   title,
 }: GradientAreaChartProps) {
+  const { tooltipStyle } = useChartColors();
   return (
     <div className="w-full">
       {title && <h3 className="mb-4 font-semibold text-lg">{title}</h3>}
@@ -288,14 +266,7 @@ export function GradientLineChart({
             tickLine={false}
           />
           <YAxis hide={true} />
-          <Tooltip
-            contentStyle={{
-              backgroundColor: 'hsl(var(--hu-card))',
-              border: '1px solid hsl(var(--hu-border))',
-              borderRadius: '8px',
-              boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
-            }}
-          />
+          <Tooltip contentStyle={tooltipStyle} />
           <Line
             activeDot={{ r: 6, stroke: color, strokeWidth: 2 }}
             dataKey={dataKey}

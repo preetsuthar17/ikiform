@@ -50,6 +50,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "crisp-sdk-web": "^1.0.25",
+    "dotenv": "^17.2.1",
     "input-otp": "^1.4.2",
     "lru-cache": "^11.1.0",
     "lucide-react": "^0.536.0",

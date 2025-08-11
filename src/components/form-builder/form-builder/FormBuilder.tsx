@@ -284,7 +284,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
       toast.error('Please save your form before viewing analytics.');
       return;
     }
-    toast.success('Redirecting to analytics page...');
+    toast.success('Loading Analytics');
     router.push(`/dashboard/forms/${formId}/analytics`);
   };
 

@@ -50,19 +50,12 @@ export default function Features() {
             </div>
             <div
               className={
-                'flex aspect-video w-full items-center justify-center overflow-hidden rounded-card bg-gradient-to-b p-4 md:p-12'
+                'flex aspect-video w-full items-center justify-center overflow-hidden rounded-card bg-gradient-to-b p-4 md:p-12 shadow-[inset_0px_-24px_66px_-11px_hsl(var(--hu-home-card-bg),0.1)]'
               }
               style={{
                 position: 'relative',
               }}
             >
-              <OptimizedImage
-                alt={feature.name + ' background'}
-                className="absolute inset-0 z-0 h-full w-full rounded-card object-cover"
-                height={1080}
-                src={feature.bg}
-                width={1920}
-              />
               <video
                 autoPlay
                 className="relative z-10 h-full w-full rounded-card object-cover"

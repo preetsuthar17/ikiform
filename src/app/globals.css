@@ -70,12 +70,12 @@
 
 :root {
   --radius: 8px;
-  --card-radius: 12px;
-  --hu-background: 0, 0%, 99%;
+  --card-radius: 10px;
+    --hu-background: 0, 0%, 99%;
   --hu-foreground: 0, 0%, 10%;
   --hu-card: 0, 0%, 98%;
   --hu-card-foreground: 0, 0%, 10%;
-  --hu-primary: 228, 79%, 52%;
+  --hu-primary: 0, 0%, 20%;
   --hu-primary-foreground: 0, 0%, 98%;
   --hu-secondary: 0, 0%, 94%;
   --hu-secondary-foreground: 0, 0%, 20%;
@@ -88,6 +88,7 @@
   --hu-border: 0, 0%, 95%;
   --hu-input: 0, 0%, 100%;
   --hu-ring: 0, 0%, 50%;
+  --hu-home-card-bg: 228,79%,52%;
 }
 
 .dark {
@@ -95,8 +96,8 @@
   --hu-foreground: 0, 0%, 100%;
   --hu-card: 0, 0%, 10%;
   --hu-card-foreground: 0, 0%, 92%;
-  --hu-primary: 228, 79%, 52%;
-  --hu-primary-foreground: 0, 0%, 98%;
+  --hu-primary: 0, 0%, 100%;
+  --hu-primary-foreground: 0, 0%, 0%;
   --hu-secondary: 0, 0%, 14%;
   --hu-secondary-foreground: 0, 0%, 92%;
   --hu-muted: 0, 0%, 14%;
@@ -108,6 +109,7 @@
   --hu-border: 0, 0%, 15%;
   --hu-input: 0, 0%, 14%;
   --hu-ring: 0 0% 48%;
+  --hu-home-card-bg: 228,79%,52%;
 }
 
 ::selection {
@@ -251,6 +253,23 @@ pre {
     transparent 0%,
     black 16px,
     black calc(100% - 16px),
+    transparent 100%
+  );
+}
+
+.fade-bottom {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 16px,
+    black calc(100% - 16px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 0,
+    black calc(100% - 150px),
     transparent 100%
   );
 }

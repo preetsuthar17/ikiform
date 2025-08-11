@@ -219,20 +219,8 @@ export default function PricingClient({ products }: PricingClientProps) {
           )}
         </div>
 
-        <div className="relative mx-auto flex w-full max-w-7xl grow flex-col items-center rounded-card p-4 text-left md:p-12">
-          {}
-          <div className="pointer-events-none absolute inset-0 z-2 rounded-card bg-black/15 backdrop-blur-[5px]" />
-
-          <OptimizedImage
-            alt={'Pricing background image'}
-            className="absolute inset-0 z-0 h-full w-full rounded-card object-cover"
-            height={1080}
-            src={
-              'https://av5on64jc4.ufs.sh/f/jYAIyA6pXignjTkuSWpXignmaOlP5cRt3oEBh7bKq40kjD9L'
-            }
-            width={1920}
-          />
-          <Card className="z-5 w-full overflow-hidden border p-0 shadow-md/3">
+        <div className="relative mx-auto flex w-full max-w-7xl grow flex-col items-center rounded-card p-4 text-left md:p-12 shadow-[inset_0px_-24px_66px_-11px_hsl(var(--hu-home-card-bg),0.1)]">
+          <Card className="z-5 w-full overflow-hidden border p-0 shadow-md/3 bg-transparent border-transparent shadow-none">
             <div className="flex w-full flex-col md:flex-row">
               <div className="flex w-full flex-col items-start justify-start gap-8 p-8 md:w-1/2">
                 <Badge className="mr-auto w-fit" variant="secondary">
@@ -253,31 +241,6 @@ export default function PricingClient({ products }: PricingClientProps) {
                         ? ''
                         : `per ${currentPricing.period}`}
                     </span>
-                  </div>
-
-                  {/* Additional pricing info */}
-                  <div className="flex flex-col gap-2">
-                    {billingPeriod === 'yearly' && (
-                      <div className="text-muted-foreground text-sm">
-                        {currentPricing.billedAs}
-                      </div>
-                    )}
-                    {billingPeriod === 'onetime' && (
-                      <div className="text-muted-foreground text-sm">
-                        {currentPricing.billedAs} • Access forever
-                      </div>
-                    )}
-                    {currentPricing.savings && (
-                      <div className="flex items-center gap-2">
-                        <Badge
-                          className="border-green-200 font-medium text-green-600 text-xs"
-                          variant="outline"
-                        >
-                          <Check className="mr-1 h-3 w-3" />
-                          Save {currentPricing.savings}% vs monthly
-                        </Badge>
-                      </div>
-                    )}
                   </div>
                 </div>
 

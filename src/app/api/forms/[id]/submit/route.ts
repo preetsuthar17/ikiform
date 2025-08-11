@@ -5,7 +5,7 @@ import {
   checkFormRateLimit,
   DEFAULT_PROFANITY_FILTER_SETTINGS,
   DEFAULT_RATE_LIMIT_SETTINGS,
-} from '@/lib/forms';
+} from '@/lib/forms/server';
 import { sendFormNotification } from '@/lib/services';
 import { requirePremium } from '@/lib/utils/premium-check';
 import { sanitizeString } from '@/lib/utils/sanitize';

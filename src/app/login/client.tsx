@@ -189,7 +189,7 @@ export default function LoginForm() {
   };
 
   const handleOAuthLogin = async (provider: 'github' | 'google') => {
-    toast(`Redirecting to ${provider === 'google' ? 'Google' : 'GitHub'}...`);
+    toast(`Logging in with ${provider === 'google' ? 'Google' : 'GitHub'}`);
     const supabase = createClient();
     await supabase.auth.signInWithOAuth({
       provider,

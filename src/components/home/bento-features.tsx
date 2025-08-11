@@ -35,15 +35,12 @@ const FeatureCard = ({
       className={`overflow-hidden border border-border bg-card p-4 transition-all duration-300 ease-out hover:shadow-lg/2 ${className}`}
     >
       <div className="flex h-full w-full flex-col p-6">
+        {/* Preview */}
+        <div className="flex-1 overflow-hidden">
+          <div className="h-full fade-bottom">{preview}</div>
+        </div>
         {/* Header */}
-        <div className="mb-4 flex flex-col items-start gap-4 text-left">
-          <motion.div
-            className="flex-shrink-0 rounded-ele bg-accent/50 p-2 text-accent-foreground transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground"
-            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-            whileHover={{ scale: 1.1, rotate: 5 }}
-          >
-            {icon}
-          </motion.div>
+        <div className="mt-4 flex flex-col items-start gap-4 text-left">
           <div className="min-w-0 flex-1">
             <h3 className="mb-2 font-semibold text-foreground text-lg leading-tight">
               {title}
@@ -54,10 +51,6 @@ const FeatureCard = ({
           </div>
         </div>
 
-        {/* Preview */}
-        <div className="flex-1 overflow-hidden">
-          <div className="h-full">{preview}</div>
-        </div>
       </div>
     </Card>
   );
@@ -338,13 +331,7 @@ const LogicBuilderPreview = () => {
           transition={{ duration: 0.5 }}
         >
           <motion.div
-            animate={{
-              boxShadow: showBranches
-                ? '0 0 10px hsl(var(--hu-primary))'
-                : 'none',
-            }}
             className="flex h-4 w-4 items-center justify-center rounded-ele bg-primary"
-            whileHover={{ scale: 1.2 }}
           >
             <div className="h-2 w-2 rounded-card bg-primary-foreground" />
           </motion.div>

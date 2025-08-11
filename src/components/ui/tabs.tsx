@@ -4,6 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { motion } from 'motion/react';
 import * as React from 'react';
 import { cn } from '@/lib/utils';
+import { useMotionColors } from '@/lib/utils/motion-colors';
 
 const tabsVariants = cva(
   'relative inline-flex w-full items-center justify-center rounded-card transition-all duration-300',
@@ -78,11 +79,12 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
       defaultValue,
       value,
       onValueChange,
-      indicatorColor = 'hsl(var(--hu-accent))',
+      indicatorColor,
       ...props
     },
     ref
   ) => {
+    const { getColor } = useMotionColors();
     const [activeValue, setActiveValue] = React.useState(
       value || defaultValue || items[0]?.id
     );
@@ -146,8 +148,8 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
           style={{
             backgroundColor:
               variant === 'underline'
-                ? 'hsl(var(--hu-foreground))'
-                : indicatorColor,
+                ? getColor('foreground')
+                : indicatorColor || getColor('accent'),
           }}
           transition={{
             type: 'spring',

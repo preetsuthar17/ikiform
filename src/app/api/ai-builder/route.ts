@@ -3,7 +3,7 @@ import { convertToModelMessages, streamText } from 'ai';
 import type { NextRequest } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
 import { formsDbServer } from '@/lib/database';
-import { checkRateLimit, type RateLimitSettings } from '@/lib/forms';
+import { checkRateLimit, type RateLimitSettings } from '@/lib/forms/server';
 import { requirePremium } from '@/lib/utils/premium-check';
 import { sanitizeString } from '@/lib/utils/sanitize';
 import { createClient } from '@/utils/supabase/server';

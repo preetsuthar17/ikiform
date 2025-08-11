@@ -20,7 +20,8 @@ export default function Header() {
 
   return (
     <nav className="mx-auto mt-10 flex w-full max-w-[95%] flex-wrap items-center justify-between gap-8 p-4 font-inter text-sm">
-      <div className="flex flex-shrink-0 items-center gap-2">
+
+      <div className="flex-1 justify-start flex flex-shrink-0 items-center gap-2">
         <Link href="/">
           <span className="flex items-center justify-center gap-2 font-semibold text-3xl tracking-tight">
             <Image
@@ -34,8 +35,7 @@ export default function Header() {
           </span>
         </Link>
       </div>
-      {}
-      <div className="hidden items-center gap-8 sm:flex">
+      <div className="flex-1 justify-center hidden items-center gap-8 md:flex">
         <nav className="flex items-center gap-4">
           <Button asChild variant="ghost">
             <Link href="/">Home</Link>
@@ -48,7 +48,7 @@ export default function Header() {
           </Button>
         </nav>
       </div>
-      <div className="hidden gap-2 sm:flex">
+      <div className="flex-1 justify-end hidden gap-2 md:flex">
         {user ? (
           <Button asChild className="font-medium" size="icon">
             <Link href="/dashboard">
@@ -73,8 +73,8 @@ export default function Header() {
           </Link>
         </Button>
       </div>
-      {}
-      <div className="flex items-center sm:hidden">
+
+      <div className="flex items-center md:hidden">
         <Drawer>
           <DrawerTrigger asChild>
             <Button aria-label="open-sidebar" size="icon" variant="ghost">

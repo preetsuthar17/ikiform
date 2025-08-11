@@ -7,7 +7,31 @@ interface RateLimitSettings {
   window: string;
 }
 
-const redis = Redis.fromEnv();
+let redis: Redis | null = null;
+
+function getRedisClient(): Redis {
+  if (typeof window !== 'undefined') {
+    throw new Error('Redis client cannot be used on the client side');
+  }
+  
+  if (!redis) {
+    const url = process.env.UPSTASH_REDIS_REST_URL;
+    const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+    
+    if (!url || !token) {
+      throw new Error(
+        'Missing required environment variables: UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN'
+      );
+    }
+    
+    redis = new Redis({
+      url,
+      token,
+    });
+  }
+  
+  return redis;
+}
 
 const defaultSettings: RateLimitSettings = {
   enabled: true,
@@ -24,8 +48,9 @@ function getRateLimiter(
   const key = `${settings.maxSubmissions}-${settings.window}-${prefix}`;
 
   if (!rateLimiters.has(key)) {
+    const redisClient = getRedisClient();
     const limiter = new Ratelimit({
-      redis,
+      redis: redisClient,
       limiter: Ratelimit.fixedWindow(
         settings.maxSubmissions,
         settings.window as any
@@ -43,6 +68,10 @@ export async function checkRateLimit(
   identifier: string,
   settings: RateLimitSettings = defaultSettings
 ) {
+  if (typeof window !== 'undefined') {
+    throw new Error('Rate limiting can only be used on the server side');
+  }
+
   if (!settings.enabled) {
     return {
       success: true,
@@ -63,6 +92,10 @@ export async function checkCustomRateLimit(
   settings: RateLimitSettings,
   prefix = '@upstash/ratelimit'
 ) {
+  if (typeof window !== 'undefined') {
+    throw new Error('Rate limiting can only be used on the server side');
+  }
+
   if (!settings.enabled) {
     return {
       success: true,
@@ -91,6 +124,10 @@ export async function checkFormRateLimit(
   formId: string,
   settings: FormRateLimitSettings
 ) {
+  if (typeof window !== 'undefined') {
+    throw new Error('Rate limiting can only be used on the server side');
+  }
+
   if (!settings.enabled) {
     return {
       success: true,
