@@ -1,4 +1,4 @@
-import { BarChart3, Edit, Eye, Share, Trash2 } from 'lucide-react';
+import { BarChart3, Code2, Edit, Eye, Share, Trash2 } from 'lucide-react';
 import React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -78,6 +78,21 @@ export function FormActions({
             </Button>
           </TooltipTrigger>
           <TooltipContent size="sm">Share form</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              onClick={() => window.open(`/embed?formid=${form.id}`, '_blank')}
+              size="icon"
+              variant="secondary"
+            >
+              <Code2 className="h-4 w-4" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent size="sm">Embed form</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { Check, Copy, Download, Globe, QrCode, Share } from 'lucide-react';
+import { Check, Code2, Copy, Download, Globe, QrCode, Share } from 'lucide-react';
 
 import QRCode from 'qrcode';
 import React, { useEffect, useState } from 'react';
@@ -56,6 +56,7 @@ export function ShareFormModal({
   const tabItems = [
     { id: 'link', label: 'Link' },
     { id: 'qr', label: 'QR Code' },
+    { id: 'embed', label: 'Embed' },
   ];
 
   useEffect(() => {
@@ -281,6 +282,49 @@ export function ShareFormModal({
                       <Download className="h-4 w-4" />
                       {downloading ? 'Downloading...' : 'Download QR Code'}
                     </Button>
+                  </div>
+                </div>
+              </TabsContent>
+
+              <TabsContent activeValue={activeTab} value="embed">
+                <div className="flex flex-col gap-6">
+                  <div className="flex items-center gap-3 rounded-ele border border-accent/20 bg-accent/10 p-4">
+                    <Code2 className="h-5 w-5 shrink-0 text-accent-foreground" />
+                    <div className="flex flex-col gap-1">
+                      <p className="font-medium text-sm">Embed your form</p>
+                      <p className="text-muted-foreground text-xs">
+                        Customize and integrate your form into any website.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="text-center">
+                    <p className="text-muted-foreground text-sm mb-4">
+                      Get customizable embed codes for HTML, React, Next.js, and more
+                    </p>
+                    <Button
+                      className="gap-2"
+                      onClick={() => window.open(`/embed?formid=${formId}`, '_blank')}
+                      variant="default"
+                    >
+                      <Code2 className="h-4 w-4" />
+                      Open Embed Customizer
+                    </Button>
+                  </div>
+
+                  <div className="rounded-lg border bg-muted/20 p-4">
+                    <h4 className="font-medium text-sm mb-2">Quick HTML Embed:</h4>
+                    <div className="bg-gray-900 text-green-400 p-3 rounded text-xs font-mono overflow-x-auto">
+                      {`<iframe
+  src="${shareUrl}"
+  width="100%"
+  height="600px"
+  frameborder="0"
+></iframe>`}
+                    </div>
+                    <p className="text-muted-foreground text-xs mt-2">
+                      For more customization options, use the embed customizer.
+                    </p>
                   </div>
                 </div>
               </TabsContent>

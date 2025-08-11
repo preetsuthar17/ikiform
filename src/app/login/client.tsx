@@ -1,7 +1,6 @@
 'use client';
 
 import { Eye, EyeOff } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { useState } from 'react';
@@ -29,7 +28,6 @@ export default function LoginForm() {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   if (user) {
-    // Check if there's a redirect URL stored in sessionStorage
     const redirectUrl =
       typeof window !== 'undefined'
         ? sessionStorage.getItem('redirectAfterLogin')
@@ -42,50 +40,42 @@ export default function LoginForm() {
     }
   }
 
-  const handleInputChange = (field: string, value: string) => {
+  function handleInputChange(field: string, value: string) {
     setFormData((prev) => ({ ...prev, [field]: value }));
-  };
+  }
 
-  const validateForm = () => {
+  function validateForm() {
     const { email, password, name } = formData;
-
     if (!(email && password)) {
       toast.error('Email and password are required');
       return false;
     }
-
     if (!email.includes('@')) {
       toast.error('Please enter a valid email address');
       return false;
     }
-
     if (password.length < 6) {
       toast.error('Password must be at least 6 characters long');
       return false;
     }
-
     if (isSignUp && !name.trim()) {
       toast.error('Name is required for sign up');
       return false;
     }
-
     return true;
-  };
+  }
 
-  const handleForgotPassword = async () => {
+  async function handleForgotPassword() {
     if (!formData.email) {
       toast.error('Please enter your email address first');
       return;
     }
-
     if (!formData.email.includes('@')) {
       toast.error('Please enter a valid email address');
       return;
     }
-
     setLoading(true);
     const supabase = createClient();
-
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(
         formData.email,
@@ -93,7 +83,6 @@ export default function LoginForm() {
           redirectTo: `${window.location.origin}/reset-password`,
         }
       );
-
       if (error) {
         toast.error(error.message);
       } else {
@@ -101,18 +90,15 @@ export default function LoginForm() {
         setShowForgotPassword(false);
       }
     } catch (error) {
-      console.error('Password reset error:', error);
       toast.error('An unexpected error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
-  };
+  }
 
-  const handleEmailAuth = async (e: React.FormEvent) => {
+  async function handleEmailAuth(e: React.FormEvent) {
     e.preventDefault();
-
     if (!validateForm()) return;
-
     setLoading(true);
     const supabase = createClient();
 
@@ -138,13 +124,9 @@ export default function LoginForm() {
             toast.error(error.message);
           }
         } else if (data.user) {
-          // Call the user API to create the database record
           try {
             await fetch('/api/user', { method: 'POST' });
-          } catch (apiError) {
-            console.error('Error creating user record:', apiError);
-          }
-
+          } catch {}
           if (data.user.email_confirmed_at) {
             toast.success('Account created and verified successfully!');
           } else {
@@ -170,25 +152,25 @@ export default function LoginForm() {
             toast.error(error.message);
           }
         } else if (data.user) {
-          // Call the user API to ensure the database record exists
+          // Only create user record if it does not exist, to avoid overwriting columns like has_premium
           try {
-            await fetch('/api/user', { method: 'POST' });
-          } catch (apiError) {
-            console.error('Error updating user record:', apiError);
-          }
-
+            await fetch('/api/user', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ ensureOnly: true }),
+            });
+          } catch {}
           toast.success('Signed in successfully!');
         }
       }
     } catch (error) {
-      console.error('Auth error:', error);
       toast.error('An unexpected error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
-  };
+  }
 
-  const handleOAuthLogin = async (provider: 'github' | 'google') => {
+  async function handleOAuthLogin(provider: 'github' | 'google') {
     toast(`Logging in with ${provider === 'google' ? 'Google' : 'GitHub'}`);
     const supabase = createClient();
     await supabase.auth.signInWithOAuth({
@@ -197,7 +179,7 @@ export default function LoginForm() {
         redirectTo: `${origin}/auth/callback`,
       },
     });
-  };
+  }
 
   return (
     <>
@@ -217,7 +199,6 @@ export default function LoginForm() {
           </CardHeader>
 
           <CardContent className="flex w-full flex-col gap-4">
-            {/* Email/Password Form */}
             <form className="flex flex-col gap-4" onSubmit={handleEmailAuth}>
               {isSignUp && (
                 <div className="flex w-full flex-col items-start justify-center gap-2">
@@ -291,16 +272,16 @@ export default function LoginForm() {
                 disabled={loading}
                 size="lg"
                 type="submit"
+                loading={loading}
               >
                 {loading
-                  ? 'Please wait...'
+                  ? ''
                   : isSignUp
                     ? 'Create account'
                     : 'Sign in'}
               </Button>
             </form>
 
-            {/* Forgot Password */}
             {!isSignUp && (
               <div className="text-center">
                 <Button
@@ -315,7 +296,6 @@ export default function LoginForm() {
               </div>
             )}
 
-            {/* Toggle between sign in/up */}
             <div className="text-center">
               <Button
                 className="text-sm"
@@ -344,7 +324,6 @@ export default function LoginForm() {
               </div>
             </div>
 
-            {/* OAuth Buttons */}
             <div className="flex w-full flex-col items-start justify-center gap-2">
               <Button
                 className="flex w-full items-center gap-2 font-medium"
