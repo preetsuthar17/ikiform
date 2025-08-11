@@ -2,15 +2,69 @@
 
 import { Monitor, Moon, Sun } from "lucide-react";
 import Image from "next/image";
-
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import React from "react";
 import { FaGithub, FaXTwitter } from "react-icons/fa6";
 import { Button } from "../ui/button";
-
 import { Separator } from "../ui/separator";
 import { Tabs } from "../ui/tabs";
+
+const BADGES = [
+  {
+    href: "https://www.producthunt.com/products/ikiform?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-ikiform-2",
+    img: {
+      src: "https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1003917&theme=light&t=1754896632153",
+      alt: "Ikiform - An open-source alternative to Google Forms and Typeform | Product Hunt",
+      width: 120,
+      height: 32,
+    },
+  },
+  {
+    href: "https://startupfa.me/s/ikiform.com?utm_source=www.ikiform.com",
+    img: {
+      src: "https://startupfa.me/badges/featured/default.webp",
+      alt: "Featured on Startup Fame",
+      width: 120,
+      height: 32,
+    },
+  },
+  {
+    href: "https://twelve.tools",
+    img: {
+      src: "https://twelve.tools/badge3-light.svg",
+      alt: "Featured on Twelve Tools",
+      width: 120,
+      height: 32,
+    },
+  },
+] as const;
+
+function FooterBadges() {
+  return (
+    <div className="flex flex-wrap gap-3 items-center justify-start">
+      {BADGES.map((badge) => (
+        <a
+          key={badge.href}
+          href={badge.href}
+          target="_blank"
+          rel="noopener"
+          className="transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-primary rounded"
+          tabIndex={0}
+        >
+          <img
+            src={badge.img.src}
+            alt={badge.img.alt}
+            width={badge.img.width}
+            height={badge.img.height}
+            className="object-contain h-8 w-auto"
+            loading="lazy"
+            />
+        </a>
+      ))}
+    </div>
+  );
+}
 
 export default function Footer() {
   const { theme, setTheme } = useTheme();
@@ -30,9 +84,7 @@ export default function Footer() {
     <footer className="w-full bg-background">
       <div className="mx-auto w-full max-w-[95%] px-4 md:px-8">
         <div className="py-12 lg:py-16">
-          {}
           <div className="flex flex-col justify-between gap-12 lg:flex-row lg:gap-16">
-            {}
             <div className="flex-shrink-0">
               <div className="flex flex-col gap-6">
                 <Link className="inline-flex" href="/">
@@ -49,8 +101,6 @@ export default function Footer() {
                     <span>Ikiform</span>
                   </span>
                 </Link>
-
-                {}
                 <div className="flex gap-3">
                   <Button asChild size="icon" variant="secondary">
                     <Link
@@ -71,7 +121,6 @@ export default function Footer() {
                     </Link>
                   </Button>
                 </div>
-
                 <div className="text-foreground/60 text-sm">
                   <p>
                     © {new Date().getFullYear()} Made by —{" "}
@@ -84,43 +133,17 @@ export default function Footer() {
                   </p>
                 </div>
                 <Separator />
-                <a href="https://vercel.com/oss?utm_source=ikiform">
+                  <a href="https://vercel.com/oss?utm_source=ikiform">
                   <img
                     alt="Vercel OSS Program"
                     src="https://vercel.com/oss/program-badge.svg"
                   />
                 </a>
-                <a
-                  href="https://startupfa.me/s/ikiform.com?utm_source=www.ikiform.com"
-                  rel="noopener"
-                  target="_blank"
-                >
-                  <img
-                    alt="Featured on Startup Fame"
-                    height={54}
-                    src="https://startupfa.me/badges/featured/default.webp"
-                    width={171}
-                  />
-                </a>
-                <a
-                  href="https://www.producthunt.com/products/ikiform?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-ikiform-2"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <img
-                    src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1003917&theme=light&t=1754896632153"
-                    alt="Ikiform - An open-source alternative to Google Forms and Typeform | Product Hunt"
-                    style={{ width: 250, height: 54 }}
-                    width={250}
-                    height={54}
-                  />
-                </a>
+
+                <FooterBadges />
               </div>
             </div>
-
-            {}
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-4 lg:gap-12">
-              {}
               <div>
                 <div>
                   <h3 className="mb-4 font-medium text-foreground text-sm">
@@ -172,8 +195,6 @@ export default function Footer() {
                   </ul>
                 </div>
               </div>
-
-              {}
               <div>
                 <div>
                   <h3 className="mb-4 font-medium text-foreground text-sm">
@@ -217,8 +238,6 @@ export default function Footer() {
                   </ul>
                 </div>
               </div>
-
-              {}
               <div>
                 <div>
                   <h3 className="mb-4 font-medium text-foreground text-sm">
@@ -264,8 +283,6 @@ export default function Footer() {
                   </ul>
                 </div>
               </div>
-
-              {}
               <div>
                 <div>
                   <h3 className="mb-4 font-medium text-foreground text-sm">
@@ -306,8 +323,6 @@ export default function Footer() {
               </div>
             </div>
           </div>
-
-          {}
           <div className="mt-12 border-border border-t pt-8">
             <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
               <div className="flex-1" />
