@@ -1,9 +1,9 @@
-import { Edit, Eye, Plus } from 'lucide-react';
-import React from 'react';
+import { Edit, Eye, Plus } from "lucide-react";
+import React from "react";
 
-import { Card } from '@/components/ui/card';
+import { Card } from "@/components/ui/card";
 
-import type { FormStatsProps } from '../types';
+import type { FormStatsProps } from "../types";
 
 export function FormStats({ forms }: FormStatsProps) {
   if (forms.length === 0) return null;

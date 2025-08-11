@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { Eye, EyeOff } from 'lucide-react';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import { useState } from 'react';
-import { FaGithub } from 'react-icons/fa6';
-import { FcGoogle } from 'react-icons/fc';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
-import { useAuth } from '@/hooks/use-auth';
-import { toast } from '@/hooks/use-toast';
-import { createClient } from '@/utils/supabase/client';
+import { Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { useState } from "react";
+import { FaGithub } from "react-icons/fa6";
+import { FcGoogle } from "react-icons/fc";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { useAuth } from "@/hooks/use-auth";
+import { toast } from "@/hooks/use-toast";
+import { createClient } from "@/utils/supabase/client";
 
 export default function LoginForm() {
   const { user } = useAuth();
@@ -21,22 +21,22 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    name: '',
+    email: "",
+    password: "",
+    name: "",
   });
   const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   if (user) {
     const redirectUrl =
-      typeof window !== 'undefined'
-        ? sessionStorage.getItem('redirectAfterLogin')
+      typeof window !== "undefined"
+        ? sessionStorage.getItem("redirectAfterLogin")
         : null;
     if (redirectUrl) {
-      sessionStorage.removeItem('redirectAfterLogin');
+      sessionStorage.removeItem("redirectAfterLogin");
       redirect(redirectUrl);
     } else {
-      redirect('/dashboard');
+      redirect("/dashboard");
     }
   }
 
@@ -47,19 +47,19 @@ export default function LoginForm() {
   function validateForm() {
     const { email, password, name } = formData;
     if (!(email && password)) {
-      toast.error('Email and password are required');
+      toast.error("Email and password are required");
       return false;
     }
-    if (!email.includes('@')) {
-      toast.error('Please enter a valid email address');
+    if (!email.includes("@")) {
+      toast.error("Please enter a valid email address");
       return false;
     }
     if (password.length < 6) {
-      toast.error('Password must be at least 6 characters long');
+      toast.error("Password must be at least 6 characters long");
       return false;
     }
     if (isSignUp && !name.trim()) {
-      toast.error('Name is required for sign up');
+      toast.error("Name is required for sign up");
       return false;
     }
     return true;
@@ -67,11 +67,11 @@ export default function LoginForm() {
 
   async function handleForgotPassword() {
     if (!formData.email) {
-      toast.error('Please enter your email address first');
+      toast.error("Please enter your email address first");
       return;
     }
-    if (!formData.email.includes('@')) {
-      toast.error('Please enter a valid email address');
+    if (!formData.email.includes("@")) {
+      toast.error("Please enter a valid email address");
       return;
     }
     setLoading(true);
@@ -81,16 +81,16 @@ export default function LoginForm() {
         formData.email,
         {
           redirectTo: `${window.location.origin}/reset-password`,
-        }
+        },
       );
       if (error) {
         toast.error(error.message);
       } else {
-        toast.success('Password reset link sent to your email!');
+        toast.success("Password reset link sent to your email!");
         setShowForgotPassword(false);
       }
     } catch (error) {
-      toast.error('An unexpected error occurred. Please try again.');
+      toast.error("An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -116,22 +116,22 @@ export default function LoginForm() {
         });
 
         if (error) {
-          if (error.message.includes('already registered')) {
+          if (error.message.includes("already registered")) {
             toast.error(
-              'This email is already registered. Try signing in instead.'
+              "This email is already registered. Try signing in instead.",
             );
           } else {
             toast.error(error.message);
           }
         } else if (data.user) {
           try {
-            await fetch('/api/user', { method: 'POST' });
+            await fetch("/api/user", { method: "POST" });
           } catch {}
           if (data.user.email_confirmed_at) {
-            toast.success('Account created and verified successfully!');
+            toast.success("Account created and verified successfully!");
           } else {
             toast.success(
-              'Account created successfully! Please check your email for verification.'
+              "Account created successfully! Please check your email for verification.",
             );
           }
         }
@@ -142,11 +142,11 @@ export default function LoginForm() {
         });
 
         if (error) {
-          if (error.message.includes('Invalid login credentials')) {
-            toast.error('Invalid email or password. Please try again.');
-          } else if (error.message.includes('Email not confirmed')) {
+          if (error.message.includes("Invalid login credentials")) {
+            toast.error("Invalid email or password. Please try again.");
+          } else if (error.message.includes("Email not confirmed")) {
             toast.error(
-              'Please check your email and click the verification link before signing in.'
+              "Please check your email and click the verification link before signing in.",
             );
           } else {
             toast.error(error.message);
@@ -154,24 +154,24 @@ export default function LoginForm() {
         } else if (data.user) {
           // Only create user record if it does not exist, to avoid overwriting columns like has_premium
           try {
-            await fetch('/api/user', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+            await fetch("/api/user", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ ensureOnly: true }),
             });
           } catch {}
-          toast.success('Signed in successfully!');
+          toast.success("Signed in successfully!");
         }
       }
     } catch (error) {
-      toast.error('An unexpected error occurred. Please try again.');
+      toast.error("An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
   }
 
-  async function handleOAuthLogin(provider: 'github' | 'google') {
-    toast(`Logging in with ${provider === 'google' ? 'Google' : 'GitHub'}`);
+  async function handleOAuthLogin(provider: "github" | "google") {
+    toast(`Logging in with ${provider === "google" ? "Google" : "GitHub"}`);
     const supabase = createClient();
     await supabase.auth.signInWithOAuth({
       provider,
@@ -188,12 +188,12 @@ export default function LoginForm() {
           <CardHeader>
             <div>
               <h2 className="font-semibold text-2xl">
-                {isSignUp ? 'Create account' : 'Welcome back'}
+                {isSignUp ? "Create account" : "Welcome back"}
               </h2>
               <p className="text-muted-foreground text-sm">
                 {isSignUp
-                  ? 'Sign up to get started with Ikiform'
-                  : 'Sign in to your account'}
+                  ? "Sign up to get started with Ikiform"
+                  : "Sign in to your account"}
               </p>
             </div>
           </CardHeader>
@@ -206,7 +206,7 @@ export default function LoginForm() {
                   <Input
                     disabled={loading}
                     id="name"
-                    onChange={(e) => handleInputChange('name', e.target.value)}
+                    onChange={(e) => handleInputChange("name", e.target.value)}
                     placeholder="Enter your name"
                     required={isSignUp}
                     size="lg"
@@ -221,7 +221,7 @@ export default function LoginForm() {
                 <Input
                   disabled={loading}
                   id="email"
-                  onChange={(e) => handleInputChange('email', e.target.value)}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
                   placeholder="Enter your email"
                   required
                   size="lg"
@@ -237,12 +237,12 @@ export default function LoginForm() {
                     disabled={loading}
                     id="password"
                     onChange={(e) =>
-                      handleInputChange('password', e.target.value)
+                      handleInputChange("password", e.target.value)
                     }
                     placeholder="Enter your password"
                     required
                     size="lg"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     value={formData.password}
                   />
                   <Button
@@ -274,11 +274,7 @@ export default function LoginForm() {
                 type="submit"
                 loading={loading}
               >
-                {loading
-                  ? ''
-                  : isSignUp
-                    ? 'Create account'
-                    : 'Sign in'}
+                {loading ? "" : isSignUp ? "Create account" : "Sign in"}
               </Button>
             </form>
 
@@ -302,13 +298,13 @@ export default function LoginForm() {
                 disabled={loading}
                 onClick={() => {
                   setIsSignUp(!isSignUp);
-                  setFormData({ email: '', password: '', name: '' });
+                  setFormData({ email: "", password: "", name: "" });
                 }}
                 type="button"
                 variant="link"
               >
                 {isSignUp
-                  ? 'Already have an account? Sign in'
+                  ? "Already have an account? Sign in"
                   : "Don't have an account? Sign up"}
               </Button>
             </div>
@@ -328,7 +324,7 @@ export default function LoginForm() {
               <Button
                 className="flex w-full items-center gap-2 font-medium"
                 disabled={loading}
-                onClick={() => handleOAuthLogin('google')}
+                onClick={() => handleOAuthLogin("google")}
                 size="lg"
                 type="button"
                 variant="secondary"
@@ -339,7 +335,7 @@ export default function LoginForm() {
               <Button
                 className="flex w-full items-center gap-2 font-medium"
                 disabled={loading}
-                onClick={() => handleOAuthLogin('github')}
+                onClick={() => handleOAuthLogin("github")}
                 size="lg"
                 type="button"
                 variant="secondary"
@@ -353,7 +349,7 @@ export default function LoginForm() {
 
         <div className="text-center text-muted-foreground text-sm">
           <p>
-            By signing {isSignUp ? 'up' : 'in'}, you agree to our{' '}
+            By signing {isSignUp ? "up" : "in"}, you agree to our{" "}
             <Link
               className="text-muted-foreground underline"
               href="/legal/terms"

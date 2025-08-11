@@ -1,5 +1,5 @@
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 interface WebhookListItemProps {
   webhook: {
@@ -37,7 +37,7 @@ export function WebhookListItem({
           ))}
         </div>
         <div className="mt-2 text-gray-500 text-xs">
-          Status:{' '}
+          Status:{" "}
           {webhook.enabled ? (
             <span className="font-semibold text-green-600">Enabled</span>
           ) : (
@@ -53,7 +53,7 @@ export function WebhookListItem({
           Delete
         </Button>
         <Button onClick={onToggleEnabled} size="sm" variant="outline">
-          {webhook.enabled ? 'Disable' : 'Enable'}
+          {webhook.enabled ? "Disable" : "Enable"}
         </Button>
         <Button onClick={onTest} size="sm" variant="default">
           Test

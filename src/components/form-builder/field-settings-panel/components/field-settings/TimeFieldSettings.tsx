@@ -1,8 +1,8 @@
-import React from 'react';
-import { Card } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import type { FieldSettingsProps } from './types';
+import React from "react";
+import { Card } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import type { FieldSettingsProps } from "./types";
 
 export function TimeFieldSettings({
   field,

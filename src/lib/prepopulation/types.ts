@@ -1,10 +1,10 @@
-import type { FormLogic } from '@/components/form-builder/logic-builder/types';
+import type { FormLogic } from "@/components/form-builder/logic-builder/types";
 
 export interface PrepopulationConfig {
   urlParam?: string;
 
   apiEndpoint?: string;
-  apiMethod?: 'GET' | 'POST';
+  apiMethod?: "GET" | "POST";
   apiHeaders?: Record<string, string>;
   apiBodyTemplate?: string;
   jsonPath?: string;
@@ -12,7 +12,7 @@ export interface PrepopulationConfig {
   lookbackDays?: number;
   matchingFields?: string[];
 
-  profileField?: 'name' | 'email' | 'phone' | 'address' | 'custom';
+  profileField?: "name" | "email" | "phone" | "address" | "custom";
 
   templateId?: string;
 
@@ -25,7 +25,7 @@ export interface PrepopulationConfig {
 
 export interface PrepopulationSettings {
   enabled: boolean;
-  source: 'url' | 'api' | 'profile' | 'previous' | 'template';
+  source: "url" | "api" | "profile" | "previous" | "template";
   config: PrepopulationConfig;
 }
 
@@ -53,7 +53,7 @@ export interface PrepopulationLog {
   id: string;
   form_id: string;
   field_id: string;
-  source_type: 'url' | 'api' | 'profile' | 'previous' | 'template';
+  source_type: "url" | "api" | "profile" | "previous" | "template";
   success: boolean;
   error_message?: string;
   execution_time_ms: number;
@@ -91,22 +91,22 @@ export interface ApiEngineConfig extends PrepopulationConfig {
 }
 
 export interface PreviousSubmissionConfig extends PrepopulationConfig {
-  matchCriteria: 'email' | 'ip' | 'custom';
+  matchCriteria: "email" | "ip" | "custom";
   customMatchField?: string;
   prioritizeRecent?: boolean;
 }
 
 export type PrepopulationSource =
-  | 'url'
-  | 'api'
-  | 'profile'
-  | 'previous'
-  | 'template';
+  | "url"
+  | "api"
+  | "profile"
+  | "previous"
+  | "template";
 
 export interface PrepopulationEngine {
   getValue(
     config: PrepopulationConfig,
-    context?: any
+    context?: any,
   ): Promise<PrepopulationResult>;
   validateConfig(config: PrepopulationConfig): boolean;
 }

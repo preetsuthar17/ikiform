@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Input } from '@/components/ui/input';
-import type { BaseFieldProps } from '../types';
-import { getBaseClasses } from '../utils';
+import React, { useEffect, useState } from "react";
+import { Input } from "@/components/ui/input";
+import type { BaseFieldProps } from "../types";
+import { getBaseClasses } from "../utils";
 
 const addressFields = [
-  { key: 'line1', label: 'Address Line 1', required: true },
-  { key: 'line2', label: 'Address Line 2', required: false },
-  { key: 'city', label: 'City', required: true },
-  { key: 'state', label: 'State', required: true },
-  { key: 'zip', label: 'Zip Code', required: true },
-  { key: 'country', label: 'Country', required: true },
+  { key: "line1", label: "Address Line 1", required: true },
+  { key: "line2", label: "Address Line 2", required: false },
+  { key: "city", label: "City", required: true },
+  { key: "state", label: "State", required: true },
+  { key: "zip", label: "Zip Code", required: true },
+  { key: "country", label: "Country", required: true },
 ];
 
 export function AddressField({
@@ -43,7 +43,7 @@ export function AddressField({
           onChange={(e) => handleChange(f.key, e.target.value)}
           placeholder={f.label}
           required={f.required}
-          value={address[f.key] || ''}
+          value={address[f.key] || ""}
         />
       ))}
       {error && <span className="text-destructive text-xs">{error}</span>}

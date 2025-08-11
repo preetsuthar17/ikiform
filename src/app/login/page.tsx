@@ -1,8 +1,8 @@
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
-import { LoginSkeleton } from '@/components/auth/login-skeleton';
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import { LoginSkeleton } from "@/components/auth/login-skeleton";
 
-const LoginClient = dynamic(() => import('./client'), {
+const LoginClient = dynamic(() => import("./client"), {
   loading: () => <LoginSkeleton />,
 });
 

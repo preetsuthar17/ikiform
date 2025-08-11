@@ -1,20 +1,20 @@
-import Link from 'next/link';
-import type React from 'react';
-import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
+import Link from "next/link";
+import type React from "react";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
-import { Progress } from '@/components/ui/progress';
-import { SocialMediaIcons } from '@/components/ui/social-media-icons';
-import { getFormLayoutClasses } from '@/lib/utils/form-layout';
+import { Progress } from "@/components/ui/progress";
+import { SocialMediaIcons } from "@/components/ui/social-media-icons";
+import { getFormLayoutClasses } from "@/lib/utils/form-layout";
 
-import { useSingleStepForm } from '../hooks/use-single-step-form';
+import { useSingleStepForm } from "../hooks/use-single-step-form";
 
-import type { PublicFormProps } from '../types';
+import type { PublicFormProps } from "../types";
 
-import { getAllFields } from '../utils/form-utils';
-import { PasswordProtectionModal } from './PasswordProtectionModal';
-import { SingleStepFormContent } from './single-step-form-content';
-import { SingleStepSuccessScreen } from './single-step-success-screen';
+import { getAllFields } from "../utils/form-utils";
+import { PasswordProtectionModal } from "./PasswordProtectionModal";
+import { SingleStepFormContent } from "./single-step-form-content";
+import { SingleStepSuccessScreen } from "./single-step-success-screen";
 
 export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
   formId,
@@ -56,12 +56,12 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
       setPasswordVerified(true);
       setShowPasswordModal(false);
     } else {
-      toast.error('Incorrect password!');
+      toast.error("Incorrect password!");
     }
   };
 
   const handlePasswordCancel = () => {
-    window.location.href = '/';
+    window.location.href = "/";
   };
 
   useEffect(() => {
@@ -85,7 +85,7 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
         isOpen={showPasswordModal}
         message={
           schema.settings.passwordProtection?.message ||
-          'This form is password protected. Please enter the password to continue.'
+          "This form is password protected. Please enter the password to continue."
         }
         onCancel={handlePasswordCancel}
         onPasswordSubmit={handlePasswordSubmit}
@@ -103,7 +103,7 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
 
   return (
     <div
-      className={`flex items-center justify-center bg-background transition-opacity duration-500 ${showForm ? 'opacity-100' : 'opacity-0'} ${marginClass}`}
+      className={`flex items-center justify-center bg-background transition-opacity duration-500 ${showForm ? "opacity-100" : "opacity-0"} ${marginClass}`}
       dir={dir}
     >
       <div className={`flex w-full flex-col gap-8 ${containerClass}`}>
@@ -123,20 +123,20 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
         <div className="flex flex-col gap-4 text-center">
           {schema.settings.branding?.socialMedia?.enabled &&
             schema.settings.branding.socialMedia.platforms &&
-            (schema.settings.branding.socialMedia.position === 'footer' ||
-              schema.settings.branding.socialMedia.position === 'both') && (
+            (schema.settings.branding.socialMedia.position === "footer" ||
+              schema.settings.branding.socialMedia.position === "both") && (
               <SocialMediaIcons
                 className="justify-center"
-                iconSize={schema.settings.branding.socialMedia.iconSize || 'md'}
+                iconSize={schema.settings.branding.socialMedia.iconSize || "md"}
                 platforms={schema.settings.branding.socialMedia.platforms}
               />
             )}
           {Boolean(
             schema.settings.branding &&
-              (schema.settings.branding as any).showIkiformBranding !== false
+              (schema.settings.branding as any).showIkiformBranding !== false,
           ) && (
             <p className="text-muted-foreground text-sm">
-              Powered by{' '}
+              Powered by{" "}
               <span className="font-medium text-foreground underline">
                 <Link href="https://www.ikiform.com">Ikiform</Link>
               </span>

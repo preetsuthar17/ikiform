@@ -1,9 +1,9 @@
-import { lazy, Suspense } from 'react';
-import { Skeleton } from '@/components/ui/skeleton';
-import type { FormSchema } from '@/lib/ai-builder/types';
+import { lazy, Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import type { FormSchema } from "@/lib/ai-builder/types";
 
 const JsonModalLazy = lazy(() =>
-  import('./json-modal').then((module) => ({ default: module.JsonModal }))
+  import("./json-modal").then((module) => ({ default: module.JsonModal })),
 );
 
 interface JsonModalWrapperProps {

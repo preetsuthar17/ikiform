@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { usePathname } from 'next/navigation';
-import Footer from '@/components/home/footer';
-import Header from '@/components/home/header';
+import { usePathname } from "next/navigation";
+import Footer from "@/components/home/footer";
+import Header from "@/components/home/header";
 
 interface ConditionalLayoutProps {
   children: React.ReactNode;
@@ -14,13 +14,13 @@ export default function ConditionalLayout({
   const pathname = usePathname();
 
   const hideHeaderFooter =
-    pathname.startsWith('/form-builder') ||
-    pathname.includes('/preview') ||
-    pathname.includes('/forms') ||
-    pathname.includes('/ai-builder') ||
-    pathname.includes('/login') ||
-    pathname.includes('/f') ||
-    pathname.includes('/demo-form-builder');
+    pathname.startsWith("/form-builder") ||
+    pathname.includes("/preview") ||
+    pathname.includes("/forms") ||
+    pathname.includes("/ai-builder") ||
+    pathname.includes("/login") ||
+    pathname.includes("/f") ||
+    pathname.includes("/demo-form-builder");
 
   if (hideHeaderFooter) {
     return <>{children}</>;

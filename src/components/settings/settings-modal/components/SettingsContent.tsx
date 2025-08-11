@@ -1,7 +1,7 @@
-import React from 'react';
-import { AppearanceSettings } from '../../appearance-settings';
+import React from "react";
+import { AppearanceSettings } from "../../appearance-settings";
 
-import type { SettingsSection } from '../types';
+import type { SettingsSection } from "../types";
 
 interface SettingsContentProps {
   section: SettingsSection;
@@ -9,10 +9,10 @@ interface SettingsContentProps {
 
 export function SettingsContent({ section }: SettingsContentProps) {
   switch (section) {
-    case 'appearance':
+    case "appearance":
       return <AppearanceSettings />;
 
-    case 'notifications':
+    case "notifications":
       return (
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">

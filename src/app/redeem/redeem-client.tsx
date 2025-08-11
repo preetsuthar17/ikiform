@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { Gift, Loader2, LogIn } from 'lucide-react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { Loader } from '@/components/ui';
-import { Alert } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
+import { Gift, Loader2, LogIn } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Loader } from "@/components/ui";
+import { Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -14,23 +14,23 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { useAuth } from '@/hooks/use-auth';
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { useAuth } from "@/hooks/use-auth";
 
 export default function RedeemClient() {
   const { user, loading: authLoading } = useAuth();
   const router = useRouter();
-  const [code, setCode] = useState('');
+  const [code, setCode] = useState("");
   const [isRedeeming, setIsRedeeming] = useState(false);
   const [message, setMessage] = useState<{
-    type: 'success' | 'error';
+    type: "success" | "error";
     text: string;
   } | null>(null);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !user && !authLoading) {
-      sessionStorage.setItem('redirectAfterLogin', '/redeem');
+    if (typeof window !== "undefined" && !user && !authLoading) {
+      sessionStorage.setItem("redirectAfterLogin", "/redeem");
     }
   }, [user, authLoading]);
 
@@ -75,7 +75,7 @@ export default function RedeemClient() {
     e.preventDefault();
 
     if (!code.trim()) {
-      setMessage({ type: 'error', text: 'Please enter a redemption code' });
+      setMessage({ type: "error", text: "Please enter a redemption code" });
       return;
     }
 
@@ -83,9 +83,9 @@ export default function RedeemClient() {
     setMessage(null);
 
     try {
-      const response = await fetch('/api/redeem', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/redeem", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code: code.trim() }),
       });
 
@@ -93,20 +93,20 @@ export default function RedeemClient() {
 
       if (response.ok) {
         setMessage({
-          type: 'success',
-          text: result.message || 'Code redeemed successfully!',
+          type: "success",
+          text: result.message || "Code redeemed successfully!",
         });
-        setCode('');
+        setCode("");
       } else {
         setMessage({
-          type: 'error',
-          text: result.message || 'Failed to redeem code',
+          type: "error",
+          text: result.message || "Failed to redeem code",
         });
       }
     } catch {
       setMessage({
-        type: 'error',
-        text: 'Something went wrong. Please try again.',
+        type: "error",
+        text: "Something went wrong. Please try again.",
       });
     } finally {
       setIsRedeeming(false);
@@ -146,7 +146,7 @@ export default function RedeemClient() {
               <Alert
                 dismissible
                 onDismiss={() => setMessage(null)}
-                variant={message.type === 'error' ? 'destructive' : 'success'}
+                variant={message.type === "error" ? "destructive" : "success"}
               >
                 {message.text}
               </Alert>
@@ -159,7 +159,7 @@ export default function RedeemClient() {
                 loading={isRedeeming}
                 type="submit"
               >
-                {!isRedeeming && 'Redeem Code'}
+                {!isRedeeming && "Redeem Code"}
               </Button>
               <Button asChild className="w-full" variant="ghost">
                 <Link href="/dashboard">Back to Dashboard</Link>

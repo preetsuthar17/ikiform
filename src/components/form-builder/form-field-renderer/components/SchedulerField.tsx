@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Modal,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalTitle,
-} from '@/components/ui/modal';
-import type { BaseFieldProps } from '../types';
-import { getBaseClasses } from '../utils';
+} from "@/components/ui/modal";
+import type { BaseFieldProps } from "../types";
+import { getBaseClasses } from "../utils";
 
 export function SchedulerField({ field, error, disabled }: BaseFieldProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const provider = field.settings?.schedulerProvider;
-  const link = provider ? field.settings?.schedulerLinks?.[provider] : '';
-  const buttonText = field.settings?.schedulerButtonText || 'Open Scheduler';
+  const link = provider ? field.settings?.schedulerLinks?.[provider] : "";
+  const buttonText = field.settings?.schedulerButtonText || "Open Scheduler";
   const baseClasses = getBaseClasses(field, error);
 
   return (

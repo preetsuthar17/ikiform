@@ -1,13 +1,13 @@
-import { Clock, Shield } from 'lucide-react';
-import React from 'react';
+import { Clock, Shield } from "lucide-react";
+import React from "react";
 
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { Textarea } from '@/components/ui/textarea';
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 
-import type { RateLimitSectionProps } from '../types';
+import type { RateLimitSectionProps } from "../types";
 
 export function RateLimitSection({
   localSettings,
@@ -35,7 +35,7 @@ export function RateLimitSection({
                 timeWindow: checked ? rateLimit.timeWindow || 10 : undefined,
                 message: checked
                   ? rateLimit.message ||
-                    'Too many submissions. Please try again later.'
+                    "Too many submissions. Please try again later."
                   : undefined,
                 blockDuration: checked
                   ? rateLimit.blockDuration || 60
@@ -92,7 +92,7 @@ export function RateLimitSection({
                 rows={2}
                 value={
                   rateLimit.message ||
-                  'Too many submissions. Please try again later.'
+                  "Too many submissions. Please try again later."
                 }
               />
               <p className="text-muted-foreground text-xs">
@@ -159,12 +159,12 @@ function RateLimitSummary({ rateLimit }: { rateLimit: any }) {
         <span className="font-medium text-sm">Current Settings</span>
       </div>
       <p className="text-muted-foreground text-sm">
-        Allow{' '}
-        <span className="font-medium">{rateLimit.maxSubmissions || 5}</span>{' '}
-        submissions every{' '}
-        <span className="font-medium">{rateLimit.timeWindow || 10}</span>{' '}
-        minutes. Block for{' '}
-        <span className="font-medium">{rateLimit.blockDuration || 60}</span>{' '}
+        Allow{" "}
+        <span className="font-medium">{rateLimit.maxSubmissions || 5}</span>{" "}
+        submissions every{" "}
+        <span className="font-medium">{rateLimit.timeWindow || 10}</span>{" "}
+        minutes. Block for{" "}
+        <span className="font-medium">{rateLimit.blockDuration || 60}</span>{" "}
         minutes when exceeded.
       </p>
     </div>

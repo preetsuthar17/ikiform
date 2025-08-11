@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { toast } from '@/hooks/use-toast';
+import { useEffect, useState } from "react";
+import { toast } from "@/hooks/use-toast";
 
 interface AdminUser {
   uid: string;
@@ -41,14 +41,14 @@ export function useAdminData() {
   const loadAllData = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/admin/data');
+      const response = await fetch("/api/admin/data");
 
       if (!response.ok) {
         if (response.status === 401) {
-          toast.error('Unauthorized access to admin data');
+          toast.error("Unauthorized access to admin data");
           return;
         }
-        throw new Error('Failed to fetch admin data');
+        throw new Error("Failed to fetch admin data");
       }
 
       const data = await response.json();
@@ -56,8 +56,8 @@ export function useAdminData() {
       setAllForms(data.forms || []);
       setSubmissions(data.submissions || []);
     } catch (error) {
-      console.error('Error loading admin data:', error);
-      toast.error('Failed to load admin data');
+      console.error("Error loading admin data:", error);
+      toast.error("Failed to load admin data");
     } finally {
       setLoading(false);
     }
@@ -65,13 +65,13 @@ export function useAdminData() {
 
   const toggleUserPremium = async (email: string, hasPremium: boolean) => {
     try {
-      const response = await fetch('/api/admin/actions', {
-        method: 'POST',
+      const response = await fetch("/api/admin/actions", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          action: 'toggle_user_premium',
+          action: "toggle_user_premium",
           email,
           hasPremium,
         }),
@@ -79,131 +79,131 @@ export function useAdminData() {
 
       if (!response.ok) {
         if (response.status === 401) {
-          toast.error('Unauthorized access');
+          toast.error("Unauthorized access");
           return;
         }
-        throw new Error('Failed to update user premium status');
+        throw new Error("Failed to update user premium status");
       }
 
       const result = await response.json();
       toast.success(result.message);
       await loadAllData(); // Refresh data
     } catch (error) {
-      console.error('Error updating user premium status:', error);
-      toast.error('Failed to update user premium status');
+      console.error("Error updating user premium status:", error);
+      toast.error("Failed to update user premium status");
     }
   };
 
   const deleteForm = async (formId: string) => {
     try {
-      const response = await fetch('/api/admin/actions', {
-        method: 'POST',
+      const response = await fetch("/api/admin/actions", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          action: 'delete_form',
+          action: "delete_form",
           formId,
         }),
       });
 
       if (!response.ok) {
         if (response.status === 401) {
-          toast.error('Unauthorized access');
+          toast.error("Unauthorized access");
           return;
         }
-        throw new Error('Failed to delete form');
+        throw new Error("Failed to delete form");
       }
 
       const result = await response.json();
       toast.success(result.message);
       await loadAllData(); // Refresh data
     } catch (error) {
-      console.error('Error deleting form:', error);
-      toast.error('Failed to delete form');
+      console.error("Error deleting form:", error);
+      toast.error("Failed to delete form");
     }
   };
 
   const deleteUser = async (uid: string) => {
     try {
-      const response = await fetch('/api/admin/actions', {
-        method: 'POST',
+      const response = await fetch("/api/admin/actions", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          action: 'delete_user',
+          action: "delete_user",
           uid,
         }),
       });
 
       if (!response.ok) {
         if (response.status === 401) {
-          toast.error('Unauthorized access');
+          toast.error("Unauthorized access");
           return;
         }
-        throw new Error('Failed to delete user');
+        throw new Error("Failed to delete user");
       }
 
       const result = await response.json();
       toast.success(result.message);
       await loadAllData(); // Refresh data
     } catch (error) {
-      console.error('Error deleting user:', error);
-      toast.error('Failed to delete user');
+      console.error("Error deleting user:", error);
+      toast.error("Failed to delete user");
     }
   };
 
   const deleteSubmission = async (submissionId: string) => {
     try {
-      const response = await fetch('/api/admin/actions', {
-        method: 'POST',
+      const response = await fetch("/api/admin/actions", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          action: 'delete_submission',
+          action: "delete_submission",
           submissionId,
         }),
       });
 
       if (!response.ok) {
         if (response.status === 401) {
-          toast.error('Unauthorized access');
+          toast.error("Unauthorized access");
           return;
         }
-        throw new Error('Failed to delete submission');
+        throw new Error("Failed to delete submission");
       }
 
       const result = await response.json();
       toast.success(result.message);
       await loadAllData(); // Refresh data
     } catch (error) {
-      console.error('Error deleting submission:', error);
-      toast.error('Failed to delete submission');
+      console.error("Error deleting submission:", error);
+      toast.error("Failed to delete submission");
     }
   };
 
   const clearCache = async () => {
     try {
-      const response = await fetch('/api/admin/cache', {
-        method: 'DELETE',
+      const response = await fetch("/api/admin/cache", {
+        method: "DELETE",
       });
 
       if (!response.ok) {
         if (response.status === 401) {
-          toast.error('Unauthorized access');
+          toast.error("Unauthorized access");
           return;
         }
-        throw new Error('Failed to clear cache');
+        throw new Error("Failed to clear cache");
       }
 
       const result = await response.json();
       toast.success(result.message);
       await loadAllData(); // Refresh data after clearing cache
     } catch (error) {
-      console.error('Error clearing cache:', error);
-      toast.error('Failed to clear cache');
+      console.error("Error clearing cache:", error);
+      toast.error("Failed to clear cache");
     }
   };
 

@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { Play } from 'lucide-react';
-import Link from 'next/link';
-import React from 'react';
-import { useAuth } from '@/hooks/use-auth';
-import { Button } from '../ui/button';
-import { Chip } from '../ui/chip';
-import { Modal, ModalContent, ModalHeader, ModalTitle } from '../ui/modal';
+import { Play } from "lucide-react";
+import Link from "next/link";
+import React from "react";
+import { useAuth } from "@/hooks/use-auth";
+import { Button } from "../ui/button";
+import { Chip } from "../ui/chip";
+import { Modal, ModalContent, ModalHeader, ModalTitle } from "../ui/modal";
 
 export default function Hero() {
   const { user } = useAuth();
@@ -19,7 +19,7 @@ export default function Hero() {
       <div className="relative flex h-full w-full flex-col gap-8 rounded-card p-8 md:p-12">
         {}
         <div className="z-20 flex h-full grow flex-col items-center gap-6 py-6 text-center">
-          <Chip className="rounded-full" variant={'secondary'}>
+          <Chip className="rounded-full" variant={"secondary"}>
             <Link
               className="flex items-center justify-center gap-2"
               href="https://vercel.com/open-source-program?utm_source=ikiform"
@@ -61,7 +61,7 @@ export default function Hero() {
             {user ? (
               <Button asChild className="h-[45px] font-medium" size="lg">
                 <Link href="/dashboard">
-                  Go to Dashboard{' '}
+                  Go to Dashboard{" "}
                   <svg
                     height="1em"
                     viewBox="0 0 24 24"
@@ -87,7 +87,7 @@ export default function Hero() {
               size="lg"
               variant="link"
             >
-              Demo{' '}
+              Demo{" "}
               <svg height="1em" viewBox="0 0 24 24" width="1em">
                 <path
                   d="M18 19H6c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h5c.55 0 1-.45 1-1s-.45-1-1-1H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6c0-.55-.45-1-1-1s-1 .45-1 1v5c0 .55-.45 1-1 1zM14 4c0 .55.45 1 1 1h2.59l-9.13 9.13a.996.996 0 1 0 1.41 1.41L19 6.41V9c0 .55.45 1 1 1s1-.45 1-1V4c0-.55-.45-1-1-1h-5c-.55 0-1 .45-1 1z"

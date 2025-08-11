@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useTheme } from 'next-themes';
-import type React from 'react';
-import { useEffect, useRef, useState } from 'react';
-import SignatureCanvas from 'react-signature-canvas';
-import { Button } from '@/components/ui/button';
-import type { BaseFieldProps } from '../types';
+import Image from "next/image";
+import { useTheme } from "next-themes";
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
+import SignatureCanvas from "react-signature-canvas";
+import { Button } from "@/components/ui/button";
+import type { BaseFieldProps } from "../types";
 
 /**
  * Client-side SignatureField component
@@ -34,8 +34,8 @@ export function SignatureFieldClient({
       }
     }
     updateWidth();
-    window.addEventListener('resize', updateWidth);
-    return () => window.removeEventListener('resize', updateWidth);
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
   }, []);
 
   useEffect(() => {
@@ -48,14 +48,14 @@ export function SignatureFieldClient({
 
   const handleEnd = () => {
     if (sigRef.current) {
-      const dataUrl = sigRef.current.getTrimmedCanvas().toDataURL('image/png');
+      const dataUrl = sigRef.current.getTrimmedCanvas().toDataURL("image/png");
       onChange(dataUrl);
     }
   };
 
   const handleClear = () => {
     sigRef.current?.clear();
-    onChange('');
+    onChange("");
   };
 
   return (
@@ -79,7 +79,7 @@ export function SignatureFieldClient({
           canvasProps={{
             width: canvasWidth,
             height: canvasHeight,
-            className: value ? 'invisible' : 'block',
+            className: value ? "invisible" : "block",
           }}
           onEnd={handleEnd}
           penColor="#000000"
@@ -107,7 +107,7 @@ export function SignatureFieldClient({
             onClick={() => {
               if (sigRef.current) {
                 sigRef.current.clear();
-                onChange('');
+                onChange("");
               }
             }}
             size="sm"

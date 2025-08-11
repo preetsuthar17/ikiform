@@ -1,1 +1,1 @@
-export { FormAnalytics } from './form-analytics/form-analytics';
+export { FormAnalytics } from "./form-analytics/form-analytics";

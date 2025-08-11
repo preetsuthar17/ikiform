@@ -1,8 +1,8 @@
-import { type NextRequest, NextResponse } from 'next/server';
-import { formsDbServer } from '@/lib/database';
-import { requirePremium } from '@/lib/utils/premium-check';
-import { sanitizeString } from '@/lib/utils/sanitize';
-import { createClient } from '@/utils/supabase/server';
+import { type NextRequest, NextResponse } from "next/server";
+import { formsDbServer } from "@/lib/database";
+import { requirePremium } from "@/lib/utils/premium-check";
+import { sanitizeString } from "@/lib/utils/sanitize";
+import { createClient } from "@/utils/supabase/server";
 
 export async function GET(req: NextRequest) {
   try {
@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     } = await supabase.auth.getUser();
 
     if (authError || !user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const premiumCheck = await requirePremium(user.id);
@@ -22,18 +22,18 @@ export async function GET(req: NextRequest) {
     }
 
     const { searchParams } = new URL(req.url);
-    const sessionId = searchParams.get('sessionId');
+    const sessionId = searchParams.get("sessionId");
 
     if (!sessionId) {
       return NextResponse.json(
-        { error: 'Session ID is required' },
-        { status: 400 }
+        { error: "Session ID is required" },
+        { status: 400 },
       );
     }
 
     const chatHistory = await formsDbServer.getAIBuilderChatHistory(
       user.id,
-      sessionId
+      sessionId,
     );
 
     return NextResponse.json({
@@ -46,8 +46,8 @@ export async function GET(req: NextRequest) {
     });
   } catch (_error) {
     return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
+      { error: "Internal server error" },
+      { status: 500 },
     );
   }
 }
@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
     } = await supabase.auth.getUser();
 
     if (authError || !user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const premiumCheck = await requirePremium(user.id);
@@ -74,15 +74,15 @@ export async function POST(req: NextRequest) {
 
     if (!(sessionId && role && content)) {
       return NextResponse.json(
-        { error: 'Session ID, role, and content are required' },
-        { status: 400 }
+        { error: "Session ID, role, and content are required" },
+        { status: 400 },
       );
     }
 
-    if (!['user', 'assistant', 'system'].includes(role)) {
+    if (!["user", "assistant", "system"].includes(role)) {
       return NextResponse.json(
         { error: "Invalid role. Must be 'user', 'assistant', or 'system'" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -93,7 +93,7 @@ export async function POST(req: NextRequest) {
       sessionId,
       role,
       sanitizedContent,
-      metadata
+      metadata,
     );
 
     return NextResponse.json({
@@ -102,8 +102,8 @@ export async function POST(req: NextRequest) {
     });
   } catch (_error) {
     return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
+      { error: "Internal server error" },
+      { status: 500 },
     );
   }
 }

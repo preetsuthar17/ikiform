@@ -1,7 +1,7 @@
-import { AlertTriangle } from 'lucide-react';
-import type React from 'react';
-import { Card } from '@/components/ui/card';
-import type { Form, FormSubmission } from '@/lib/database';
+import { AlertTriangle } from "lucide-react";
+import type React from "react";
+import { Card } from "@/components/ui/card";
+import type { Form, FormSubmission } from "@/lib/database";
 
 function getDropoffCounts(form: Form, submissions: FormSubmission[]) {
   const blocks = form.schema.blocks || [];
@@ -16,7 +16,7 @@ function getDropoffCounts(form: Form, submissions: FormSubmission[]) {
         (f) =>
           sub.submission_data[f.id] !== undefined &&
           sub.submission_data[f.id] !== null &&
-          sub.submission_data[f.id] !== ''
+          sub.submission_data[f.id] !== "",
       );
       if (hasAny) {
         dropoffCounts[block.id]++;

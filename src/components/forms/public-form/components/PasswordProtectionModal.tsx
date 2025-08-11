@@ -1,10 +1,10 @@
-import { Lock } from 'lucide-react';
-import type React from 'react';
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Lock } from "lucide-react";
+import type React from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 interface PasswordProtectionModalProps {
   isOpen: boolean;
@@ -19,23 +19,23 @@ export function PasswordProtectionModal({
   onPasswordSubmit,
   onCancel,
 }: PasswordProtectionModalProps) {
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!password.trim()) {
-      setError('Please enter a password');
+      setError("Please enter a password");
       return;
     }
-    setError('');
+    setError("");
     onPasswordSubmit(password);
   };
 
   const handlePasswordChange = (value: string) => {
     setPassword(value);
-    if (error) setError('');
+    if (error) setError("");
   };
 
   if (!isOpen) return null;
@@ -64,7 +64,7 @@ export function PasswordProtectionModal({
                   onChange={(e) => handlePasswordChange(e.target.value)}
                   placeholder="Enter password"
                   size="lg"
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   value={password}
                 />
               </div>

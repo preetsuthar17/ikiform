@@ -1,10 +1,10 @@
-import BentoFeatures from '@/components/home/bento-features';
-import CTASection from '@/components/home/cta-section';
-import FAQSection from '@/components/home/faq-section';
-import Features from '@/components/home/features';
-import Hero from '@/components/home/hero';
-import Pricing from '@/components/home/pricing/pricing';
-import Review from '@/components/other/reivew';
+import BentoFeatures from "@/components/home/bento-features";
+import CTASection from "@/components/home/cta-section";
+import FAQSection from "@/components/home/faq-section";
+import Features from "@/components/home/features";
+import Hero from "@/components/home/hero";
+import Pricing from "@/components/home/pricing/pricing";
+import Review from "@/components/other/reivew";
 
 export default function Home() {
   return (

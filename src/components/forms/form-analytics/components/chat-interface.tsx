@@ -1,46 +1,46 @@
-import { Send, Square } from 'lucide-react';
+import { Send, Square } from "lucide-react";
 
-import Image from 'next/image';
-import React, { memo, useEffect, useMemo } from 'react';
+import Image from "next/image";
+import React, { memo, useEffect, useMemo } from "react";
 
-import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import rehypeSanitize from 'rehype-sanitize';
-import remarkGfm from 'remark-gfm';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Kbd } from '@/components/ui/kbd';
-import { Loader } from '@/components/ui/loader';
+import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import rehypeSanitize from "rehype-sanitize";
+import remarkGfm from "remark-gfm";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Kbd } from "@/components/ui/kbd";
+import { Loader } from "@/components/ui/loader";
 
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
-import { Textarea } from '@/components/ui/textarea';
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { Textarea } from "@/components/ui/textarea";
 
-import type { ChatInterfaceProps } from '../types';
+import type { ChatInterfaceProps } from "../types";
 
 function formatContent(content: any): string {
   if (content === null || content === undefined) {
     return String(content);
   }
 
-  if (typeof content === 'object') {
+  if (typeof content === "object") {
     if (Array.isArray(content)) {
       const formattedItems = content.map((item, index) => {
-        if (typeof item === 'object' && item !== null) {
+        if (typeof item === "object" && item !== null) {
           const entries = Object.entries(item)
             .map(([key, value]) => `${key}: ${formatValue(value)}`)
-            .join(', ');
+            .join(", ");
           return `Item ${index + 1}: {${entries}}`;
         }
         return formatValue(item);
       });
-      return formattedItems.join('\n');
+      return formattedItems.join("\n");
     }
 
     return Object.entries(content)
       .map(([key, value]) => `- **${key}**: ${formatValue(value)}`)
-      .join('\n');
+      .join("\n");
   }
 
   return String(content);
@@ -51,14 +51,14 @@ function formatValue(value: any): string {
     return String(value);
   }
 
-  if (typeof value === 'object') {
+  if (typeof value === "object") {
     if (Array.isArray(value)) {
-      return `[${value.map(formatValue).join(', ')}]`;
+      return `[${value.map(formatValue).join(", ")}]`;
     }
 
     const entries = Object.entries(value)
       .map(([k, v]) => `${k}: ${formatValue(v)}`)
-      .join(', ');
+      .join(", ");
     return `{${entries}}`;
   }
 
@@ -79,25 +79,25 @@ const ChatMessage = memo(function ChatMessage({
   return (
     <div
       className={`flex gap-4 ${
-        message.role === 'user' ? 'justify-end' : 'justify-start'
+        message.role === "user" ? "justify-end" : "justify-start"
       }`}
       key={index}
     >
       <div
         className={`flex max-w-[85%] gap-3 ${
-          message.role === 'user' ? 'flex-row-reverse' : 'flex-row'
+          message.role === "user" ? "flex-row-reverse" : "flex-row"
         }`}
       >
         {}
         <div
           className={`group relative rounded-card px-4 py-3 ${
-            message.role === 'user'
-              ? 'rounded-br-md bg-primary text-primary-foreground'
-              : 'rounded-bl-md border bg-muted/50'
+            message.role === "user"
+              ? "rounded-br-md bg-primary text-primary-foreground"
+              : "rounded-bl-md border bg-muted/50"
           }`}
         >
           <div className="text-sm leading-relaxed">
-            {message.role === 'user' ? (
+            {message.role === "user" ? (
               <div className="whitespace-pre-wrap">{formattedContent}</div>
             ) : (
               <div className="markdown-content">
@@ -136,7 +136,7 @@ export const ChatInterface = memo(function ChatInterface({
   const markdownComponents = useMemo(
     () => ({
       code: ({ inline, className, children, ...props }: any) => {
-        const match = /language-(\w+)/.exec(className || '');
+        const match = /language-(\w+)/.exec(className || "");
         return !inline && match ? (
           <SyntaxHighlighter
             className="my-2 rounded-card"
@@ -145,7 +145,7 @@ export const ChatInterface = memo(function ChatInterface({
             style={oneDark}
             {...props}
           >
-            {String(children).replace(/\n$/, '')}
+            {String(children).replace(/\n$/, "")}
           </SyntaxHighlighter>
         ) : (
           <code
@@ -239,13 +239,13 @@ export const ChatInterface = memo(function ChatInterface({
         </em>
       ),
     }),
-    []
+    [],
   );
 
   useEffect(() => {
     if (
       chatInputRef &&
-      typeof chatInputRef !== 'function' &&
+      typeof chatInputRef !== "function" &&
       chatInputRef.current
     ) {
       chatInputRef.current.focus();
@@ -347,7 +347,7 @@ export const ChatInterface = memo(function ChatInterface({
                 disabled={chatLoading}
                 onChange={(e) => setChatInput(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' && !e.shiftKey) {
+                  if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault();
                     handleChatSend(e);
                   }
@@ -380,7 +380,7 @@ export const ChatInterface = memo(function ChatInterface({
             {}
             <div className="mt-3 flex items-center justify-center text-muted-foreground text-xs">
               <span>
-                Press <Kbd size="sm">Enter</Kbd> to send,{' '}
+                Press <Kbd size="sm">Enter</Kbd> to send,{" "}
                 <Kbd size="sm">Shift+Enter</Kbd> for new line
               </span>
             </div>

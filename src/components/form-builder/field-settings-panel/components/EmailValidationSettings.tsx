@@ -1,14 +1,14 @@
-import { X } from 'lucide-react';
-import React, { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { X } from "lucide-react";
+import React, { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 
-import type { FormField } from '@/lib/database';
+import type { FormField } from "@/lib/database";
 
 interface EmailValidationSettingsProps {
   field: FormField;
@@ -19,9 +19,9 @@ export function EmailValidationSettings({
   field,
   onUpdateSettings,
 }: EmailValidationSettingsProps) {
-  const [newAllowedDomain, setNewAllowedDomain] = useState('');
-  const [newBlockedDomain, setNewBlockedDomain] = useState('');
-  const [newAutoCompleteDomain, setNewAutoCompleteDomain] = useState('');
+  const [newAllowedDomain, setNewAllowedDomain] = useState("");
+  const [newBlockedDomain, setNewBlockedDomain] = useState("");
+  const [newAutoCompleteDomain, setNewAutoCompleteDomain] = useState("");
 
   const emailSettings = field.settings?.emailValidation || {};
 
@@ -42,13 +42,13 @@ export function EmailValidationSettings({
         newAllowedDomain.trim(),
       ];
       updateEmailSettings({ allowedDomains: domains });
-      setNewAllowedDomain('');
+      setNewAllowedDomain("");
     }
   };
 
   const removeAllowedDomain = (domain: string) => {
     const domains = (emailSettings.allowedDomains || []).filter(
-      (d) => d !== domain
+      (d) => d !== domain,
     );
     updateEmailSettings({ allowedDomains: domains });
   };
@@ -60,13 +60,13 @@ export function EmailValidationSettings({
         newBlockedDomain.trim(),
       ];
       updateEmailSettings({ blockedDomains: domains });
-      setNewBlockedDomain('');
+      setNewBlockedDomain("");
     }
   };
 
   const removeBlockedDomain = (domain: string) => {
     const domains = (emailSettings.blockedDomains || []).filter(
-      (d) => d !== domain
+      (d) => d !== domain,
     );
     updateEmailSettings({ blockedDomains: domains });
   };
@@ -74,7 +74,7 @@ export function EmailValidationSettings({
   const setAutoCompleteDomain = () => {
     if (newAutoCompleteDomain.trim()) {
       updateEmailSettings({ autoCompleteDomain: newAutoCompleteDomain.trim() });
-      setNewAutoCompleteDomain('');
+      setNewAutoCompleteDomain("");
     }
   };
 
@@ -231,7 +231,7 @@ export function EmailValidationSettings({
             onCheckedChange={(checked) =>
               updateEmailSettings({ requireBusinessEmail: checked })
             }
-            size={'sm'}
+            size={"sm"}
           />
         </div>
 
@@ -248,7 +248,7 @@ export function EmailValidationSettings({
               })
             }
             placeholder="Custom error message for email validation"
-            value={emailSettings.customValidationMessage || ''}
+            value={emailSettings.customValidationMessage || ""}
           />
           <p className="text-muted-foreground text-xs">
             Leave empty to use default messages

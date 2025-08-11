@@ -8,31 +8,31 @@ import {
   RefreshCw,
   Search,
   Table,
-} from 'lucide-react';
-import type React from 'react';
-import { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+} from "lucide-react";
+import type React from "react";
+import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Separator } from '@/components/ui/separator';
-import { DataTable, type DataTableColumn } from '@/components/ui/table';
-import { Tabs, TabsContent } from '@/components/ui/tabs';
+} from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import { DataTable, type DataTableColumn } from "@/components/ui/table";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 
-import type { Form, FormSubmission } from '@/lib/database';
-import type { FilterState, SubmissionsListProps } from '../types';
+import type { Form, FormSubmission } from "@/lib/database";
+import type { FilterState, SubmissionsListProps } from "../types";
 import {
   filterSubmissions,
   getSubmissionCompletionRate,
-} from '../utils/analytics';
+} from "../utils/analytics";
 
 export const SubmissionsList: React.FC<SubmissionsListProps> = ({
   form,
@@ -46,37 +46,37 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
   getFieldLabel,
   formatDate,
 }) => {
-  const [activeView, setActiveView] = useState<'cards' | 'table'>('table');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [activeView, setActiveView] = useState<"cards" | "table">("table");
+  const [searchTerm, setSearchTerm] = useState("");
   const [filterState, setFilterState] = useState<FilterState>({
-    timeRange: 'all',
-    completionRate: 'all',
+    timeRange: "all",
+    completionRate: "all",
   });
 
   const totalFields = Math.max(
     form.schema.fields?.length || 0,
     form.schema.blocks?.reduce(
       (total, block) => total + (block.fields?.length || 0),
-      0
-    ) || 0
+      0,
+    ) || 0,
   );
 
   const filteredSubmissions = filterSubmissions(
     submissions,
     searchTerm,
     filterState,
-    totalFields
+    totalFields,
   );
 
   const tableColumns: DataTableColumn<FormSubmission>[] = [
     {
-      key: 'submitted_at',
-      header: 'Date',
+      key: "submitted_at",
+      header: "Date",
       render: (value) => formatDate(value.toString()),
     },
     {
-      key: 'submission_data',
-      header: 'Form Data',
+      key: "submission_data",
+      header: "Form Data",
       render: (value, row) => (
         <div className="flex items-center gap-4">
           <Badge variant="outline">{Object.keys(value).length} fields</Badge>
@@ -140,7 +140,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                 variant="outline"
               >
                 <RefreshCw
-                  className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`}
+                  className={`h-4 w-4 ${refreshing ? "animate-spin" : ""}`}
                 />
                 Refresh
               </Button>
@@ -168,16 +168,16 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
               className="w-auto"
               items={[
                 {
-                  id: 'cards',
+                  id: "cards",
                   icon: <LayoutGrid className="h-4 w-4" />,
                 },
                 {
-                  id: 'table',
+                  id: "table",
                   icon: <Table className="h-4 w-4" />,
                 },
               ]}
               onValueChange={(value) =>
-                setActiveView(value as 'cards' | 'table')
+                setActiveView(value as "cards" | "table")
               }
               size="sm"
               value={activeView}
@@ -230,7 +230,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                 onValueChange={(value) =>
                   setFilterState((prev) => ({
                     ...prev,
-                    timeRange: value as 'all' | 'today' | 'week' | 'month',
+                    timeRange: value as "all" | "today" | "week" | "month",
                   }))
                 }
                 value={filterState.timeRange}
@@ -250,10 +250,10 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                   setFilterState((prev) => ({
                     ...prev,
                     completionRate: value as
-                      | 'all'
-                      | 'complete'
-                      | 'partial'
-                      | 'empty',
+                      | "all"
+                      | "complete"
+                      | "partial"
+                      | "empty",
                   }))
                 }
                 value={filterState.completionRate}
@@ -299,17 +299,17 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                             const allFields = [
                               ...(form.schema.fields || []),
                               ...(form.schema.blocks?.flatMap(
-                                (block) => block.fields || []
+                                (block) => block.fields || [],
                               ) || []),
                             ];
                             const field = allFields.find(
-                              (f) => f.id === fieldId
+                              (f) => f.id === fieldId,
                             );
 
                             if (
-                              field?.type === 'signature' &&
-                              typeof value === 'string' &&
-                              value.startsWith('data:image')
+                              field?.type === "signature" &&
+                              typeof value === "string" &&
+                              value.startsWith("data:image")
                             ) {
                               return (
                                 <div
@@ -331,8 +331,8 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                             }
 
                             if (
-                              field?.type === 'social' &&
-                              typeof value === 'object' &&
+                              field?.type === "social" &&
+                              typeof value === "object" &&
                               value !== null
                             ) {
                               const customLinks =
@@ -348,10 +348,10 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                   <div className="flex flex-col gap-1 rounded-ele border border-border bg-input p-2">
                                     {Object.entries(value).map(([key, url]) => {
                                       let label = key;
-                                      if (key.startsWith('custom_')) {
+                                      if (key.startsWith("custom_")) {
                                         const idx = Number.parseInt(
-                                          key.replace('custom_', ''),
-                                          10
+                                          key.replace("custom_", ""),
+                                          10,
                                         );
                                         label =
                                           customLinks[idx]?.label ||
@@ -365,7 +365,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                         <a
                                           className="text-primary underline"
                                           href={
-                                            typeof url === 'string'
+                                            typeof url === "string"
                                               ? url
                                               : undefined
                                           }
@@ -383,12 +383,19 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                             }
 
                             // Handle file uploads
-                            if (field?.type === 'file' && value) {
-                              const files = Array.isArray(value) ? value : [value];
+                            if (field?.type === "file" && value) {
+                              const files = Array.isArray(value)
+                                ? value
+                                : [value];
                               const fileCount = files.length;
-                              const hasImages = files.some(file => 
-                                (typeof file === 'object' && file.type?.startsWith('image/')) ||
-                                (typeof file === 'string' && file.match(/\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i))
+                              const hasImages = files.some(
+                                (file) =>
+                                  (typeof file === "object" &&
+                                    file.type?.startsWith("image/")) ||
+                                  (typeof file === "string" &&
+                                    file.match(
+                                      /\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i,
+                                    )),
                               );
 
                               return (
@@ -403,11 +410,18 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                     <div className="flex items-center gap-2">
                                       <div className="flex -space-x-1">
                                         {files.slice(0, 3).map((file, idx) => {
-                                          const isFileObj = typeof file === 'object' && file.signedUrl;
-                                          const isImage = isFileObj 
-                                            ? file.type?.startsWith('image/')
-                                            : typeof file === 'string' && file.match(/\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i);
-                                          const url = isFileObj ? file.signedUrl : file;
+                                          const isFileObj =
+                                            typeof file === "object" &&
+                                            file.signedUrl;
+                                          const isImage = isFileObj
+                                            ? file.type?.startsWith("image/")
+                                            : typeof file === "string" &&
+                                              file.match(
+                                                /\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i,
+                                              );
+                                          const url = isFileObj
+                                            ? file.signedUrl
+                                            : file;
 
                                           return isImage ? (
                                             <img
@@ -417,24 +431,34 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                               className="h-8 w-8 rounded border border-white object-cover"
                                             />
                                           ) : (
-                                            <div 
+                                            <div
                                               key={idx}
                                               className="h-8 w-8 rounded border border-white bg-accent flex items-center justify-center"
                                             >
                                               <span className="text-xs font-mono">
-                                                {isFileObj ? file.name?.split('.').pop()?.slice(0, 3).toUpperCase() : 'FILE'}
+                                                {isFileObj
+                                                  ? file.name
+                                                      ?.split(".")
+                                                      .pop()
+                                                      ?.slice(0, 3)
+                                                      .toUpperCase()
+                                                  : "FILE"}
                                               </span>
                                             </div>
                                           );
                                         })}
                                         {fileCount > 3 && (
                                           <div className="h-8 w-8 rounded border border-white bg-muted flex items-center justify-center">
-                                            <span className="text-xs">+{fileCount - 3}</span>
+                                            <span className="text-xs">
+                                              +{fileCount - 3}
+                                            </span>
                                           </div>
                                         )}
                                       </div>
                                       <span className="text-xs text-muted-foreground">
-                                        {fileCount} file{fileCount !== 1 ? 's' : ''} {hasImages ? '(with images)' : ''}
+                                        {fileCount} file
+                                        {fileCount !== 1 ? "s" : ""}{" "}
+                                        {hasImages ? "(with images)" : ""}
                                       </span>
                                     </div>
                                   </div>
@@ -453,16 +477,16 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                 <div className="rounded-ele border border-border bg-input p-2">
                                   <p className="line-clamp-2 text-foreground text-sm">
                                     {Array.isArray(value)
-                                      ? value.join(', ')
-                                      : typeof value === 'object' &&
+                                      ? value.join(", ")
+                                      : typeof value === "object" &&
                                           value !== null
                                         ? JSON.stringify(value)
-                                        : String(value) || '—'}
+                                        : String(value) || "—"}
                                   </p>
                                 </div>
                               </div>
                             );
-                          }
+                          },
                         )}
                       </div>
                     </Card>

@@ -1,7 +1,7 @@
-import { Plus } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-import type { BlockManagerHeaderProps } from '../types';
+import type { BlockManagerHeaderProps } from "../types";
 
 export function BlockManagerHeader({
   blocksCount,
@@ -13,7 +13,7 @@ export function BlockManagerHeader({
         <div>
           <h3 className="font-semibold">Form Structure</h3>
           <p className="text-muted-foreground text-sm">
-            {blocksCount} {blocksCount === 1 ? 'step' : 'steps'}
+            {blocksCount} {blocksCount === 1 ? "step" : "steps"}
           </p>
         </div>
         <Button

@@ -1,8 +1,8 @@
-import { Plus, Sparkles } from 'lucide-react';
-import React from 'react';
-import { Button } from '@/components/ui/button';
+import { Plus, Sparkles } from "lucide-react";
+import React from "react";
+import { Button } from "@/components/ui/button";
 
-import { Card } from '@/components/ui/card';
+import { Card } from "@/components/ui/card";
 import {
   Modal,
   ModalContent,
@@ -10,9 +10,9 @@ import {
   ModalHeader,
   ModalTitle,
   ModalTrigger,
-} from '@/components/ui/modal';
+} from "@/components/ui/modal";
 
-import type { EmptyStateProps } from '../types';
+import type { EmptyStateProps } from "../types";
 
 interface EmptyStateExtendedProps extends EmptyStateProps {
   onCreateWithAI: () => void;

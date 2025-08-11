@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
 import {
   Select,
@@ -8,12 +8,12 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from "@/components/ui/select";
 
-import type { BaseFieldProps } from '../types';
+import type { BaseFieldProps } from "../types";
 
-import { getErrorClasses } from '../utils';
-import { sanitizeOptions } from '../utils/sanitizeOptions';
+import { getErrorClasses } from "../utils";
+import { sanitizeOptions } from "../utils/sanitizeOptions";
 
 /**
  * Client-side SelectField component
@@ -59,13 +59,13 @@ export function SelectFieldClient({
           setLoading(false);
         })
         .catch((err) => {
-          setFetchError('Failed to fetch options');
+          setFetchError("Failed to fetch options");
           setLoading(false);
         });
     } else {
       setApiOptions(null);
     }
-  }, [field.optionsApi, field.valueKey ?? '', field.labelKey ?? '']);
+  }, [field.optionsApi, field.valueKey ?? "", field.labelKey ?? ""]);
 
   const options = apiOptions ?? field.options ?? [];
 
@@ -74,7 +74,7 @@ export function SelectFieldClient({
       <Select
         disabled={disabled || loading}
         onValueChange={onChange}
-        value={value || ''}
+        value={value || ""}
       >
         <SelectTrigger
           className={`flex gap-2 ${errorClasses}`}
@@ -83,21 +83,21 @@ export function SelectFieldClient({
           <SelectValue
             placeholder={
               field.placeholder ||
-              (loading ? 'Loading...' : 'Select an option...')
+              (loading ? "Loading..." : "Select an option...")
             }
           />
         </SelectTrigger>
         <SelectContent>
           {fetchError && <div className="p-2 text-red-500">{fetchError}</div>}
           {options.map((option, index) => {
-            if (typeof option === 'string') {
+            if (typeof option === "string") {
               return (
                 <SelectItem key={index} value={option}>
                   {option}
                 </SelectItem>
               );
             }
-            if (option && typeof option === 'object' && option.value) {
+            if (option && typeof option === "object" && option.value) {
               return (
                 <SelectItem key={index} value={option.value}>
                   {option.label || option.value}

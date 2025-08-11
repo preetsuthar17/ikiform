@@ -1,34 +1,34 @@
-'use client';
+"use client";
 
-import type React from 'react';
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import type React from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 import {
   Modal,
   ModalContent,
   ModalHeader,
   ModalTitle,
-} from '@/components/ui/modal';
+} from "@/components/ui/modal";
 
-import { createDefaultFormSchema } from '@/lib/forms';
+import { createDefaultFormSchema } from "@/lib/forms";
 import {
   FormConfigurationStep,
   FormReviewStep,
   FormTypeCard,
   StepIndicator,
   WizardActions,
-} from './components';
+} from "./components";
 
-import { FORM_TYPES } from './constants';
+import { FORM_TYPES } from "./constants";
 
-import { useFormCreationWizard } from './hooks/useFormCreationWizard';
+import { useFormCreationWizard } from "./hooks/useFormCreationWizard";
 
 import type {
   FormConfiguration,
   FormCreationWizardProps,
   WizardStep,
-} from './types';
+} from "./types";
 
 export const FormCreationWizard: React.FC<FormCreationWizardProps> = ({
   isOpen,
@@ -36,12 +36,12 @@ export const FormCreationWizard: React.FC<FormCreationWizardProps> = ({
   onFormTypeSelect,
 }) => {
   const { selectedType, selectType, resetSelection } = useFormCreationWizard();
-  const [currentStep, setCurrentStep] = useState<WizardStep>('type');
+  const [currentStep, setCurrentStep] = useState<WizardStep>("type");
   const [completedSteps, setCompletedSteps] = useState<WizardStep[]>([]);
   const [configuration, setConfiguration] = useState<FormConfiguration>({
-    title: '',
-    description: '',
-    type: 'single',
+    title: "",
+    description: "",
+    type: "single",
   });
 
   const handleConfigurationChange = (updates: Partial<FormConfiguration>) => {
@@ -49,21 +49,21 @@ export const FormCreationWizard: React.FC<FormCreationWizardProps> = ({
   };
 
   const handleNext = () => {
-    if (currentStep === 'type' && selectedType) {
+    if (currentStep === "type" && selectedType) {
       setConfiguration((prev) => ({ ...prev, type: selectedType }));
-      setCompletedSteps((prev) => [...prev, 'type']);
-      setCurrentStep('configure');
-    } else if (currentStep === 'configure') {
-      setCompletedSteps((prev) => [...prev, 'configure']);
-      setCurrentStep('review');
+      setCompletedSteps((prev) => [...prev, "type"]);
+      setCurrentStep("configure");
+    } else if (currentStep === "configure") {
+      setCompletedSteps((prev) => [...prev, "configure"]);
+      setCurrentStep("review");
     }
   };
 
   const handleBack = () => {
-    if (currentStep === 'configure') {
-      setCurrentStep('type');
-    } else if (currentStep === 'review') {
-      setCurrentStep('configure');
+    if (currentStep === "configure") {
+      setCurrentStep("type");
+    } else if (currentStep === "review") {
+      setCurrentStep("configure");
     }
   };
 
@@ -75,9 +75,9 @@ export const FormCreationWizard: React.FC<FormCreationWizardProps> = ({
     if (!configuration.type) return;
 
     const baseSchema = createDefaultFormSchema({
-      title: configuration.title || '',
-      description: configuration.description || '',
-      multiStep: configuration.type === 'multi',
+      title: configuration.title || "",
+      description: configuration.description || "",
+      multiStep: configuration.type === "multi",
     });
 
     onFormTypeSelect(baseSchema);
@@ -92,24 +92,24 @@ export const FormCreationWizard: React.FC<FormCreationWizardProps> = ({
 
   const resetWizard = () => {
     resetSelection();
-    setCurrentStep('type');
+    setCurrentStep("type");
     setCompletedSteps([]);
     setConfiguration({
-      title: '',
-      description: '',
-      type: 'single',
+      title: "",
+      description: "",
+      type: "single",
     });
   };
 
   const canContinue = () => {
-    if (currentStep === 'type') return !!selectedType;
-    if (currentStep === 'configure') return !!configuration.title.trim();
+    if (currentStep === "type") return !!selectedType;
+    if (currentStep === "configure") return !!configuration.title.trim();
     return true;
   };
 
   const renderStepContent = () => {
     switch (currentStep) {
-      case 'type':
+      case "type":
         return (
           <div className="flex flex-col gap-6">
             <div className="grid gap-6 sm:grid-cols-2">
@@ -124,14 +124,14 @@ export const FormCreationWizard: React.FC<FormCreationWizardProps> = ({
             </div>
           </div>
         );
-      case 'configure':
+      case "configure":
         return (
           <FormConfigurationStep
             configuration={configuration}
             onConfigurationChange={handleConfigurationChange}
           />
         );
-      case 'review':
+      case "review":
         return (
           <FormReviewStep
             configuration={configuration}
@@ -147,14 +147,14 @@ export const FormCreationWizard: React.FC<FormCreationWizardProps> = ({
     return (
       <div className="flex items-center justify-between">
         <Button
-          onClick={currentStep === 'type' ? handleClose : handleBack}
+          onClick={currentStep === "type" ? handleClose : handleBack}
           variant="outline"
         >
-          {currentStep === 'type' ? 'Cancel' : 'Back'}
+          {currentStep === "type" ? "Cancel" : "Back"}
         </Button>
 
         <div className="flex items-center gap-2">
-          {currentStep === 'review' ? (
+          {currentStep === "review" ? (
             <Button className="min-w-[100px]" onClick={handleFinish}>
               Create Form
             </Button>
@@ -164,7 +164,7 @@ export const FormCreationWizard: React.FC<FormCreationWizardProps> = ({
               disabled={!canContinue()}
               onClick={handleNext}
             >
-              {currentStep === 'configure' ? 'Review' : 'Next'}
+              {currentStep === "configure" ? "Review" : "Next"}
             </Button>
           )}
         </div>

@@ -1,7 +1,7 @@
-import type React from 'react';
-import { Label } from '@/components/ui/label';
+import type React from "react";
+import { Label } from "@/components/ui/label";
 
-import { APPEARANCE_SETTINGS } from '../constants';
+import { APPEARANCE_SETTINGS } from "../constants";
 
 export const AdditionalOptions: React.FC = () => {
   return (

@@ -1,14 +1,14 @@
-import type React from 'react';
-import { Card } from '@/components/ui/card';
+import type React from "react";
+import { Card } from "@/components/ui/card";
 
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { Textarea } from '@/components/ui/textarea';
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 
-import type { BasicSettingsProps } from '../types';
+import type { BasicSettingsProps } from "../types";
 
-import { createFieldUpdater } from '../utils';
+import { createFieldUpdater } from "../utils";
 
 export const BasicSettings: React.FC<BasicSettingsProps> = ({
   field,
@@ -42,7 +42,7 @@ export const BasicSettings: React.FC<BasicSettingsProps> = ({
             id="field-placeholder"
             onChange={(e) => updateField({ placeholder: e.target.value })}
             placeholder="Enter placeholder text"
-            value={field.placeholder || ''}
+            value={field.placeholder || ""}
           />
         </div>
 
@@ -56,7 +56,7 @@ export const BasicSettings: React.FC<BasicSettingsProps> = ({
             onChange={(e) => updateField({ description: e.target.value })}
             placeholder="Enter field description (shown below the field)"
             rows={2}
-            value={field.description || ''}
+            value={field.description || ""}
           />
         </div>
 

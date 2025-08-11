@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { Monitor, Moon, Sun } from 'lucide-react';
-import Image from 'next/image';
+import { Monitor, Moon, Sun } from "lucide-react";
+import Image from "next/image";
 
-import Link from 'next/link';
-import { useTheme } from 'next-themes';
-import React from 'react';
-import { FaGithub, FaXTwitter } from 'react-icons/fa6';
-import { Button } from '../ui/button';
+import Link from "next/link";
+import { useTheme } from "next-themes";
+import React from "react";
+import { FaGithub, FaXTwitter } from "react-icons/fa6";
+import { Button } from "../ui/button";
 
-import { Separator } from '../ui/separator';
-import { Tabs } from '../ui/tabs';
+import { Separator } from "../ui/separator";
+import { Tabs } from "../ui/tabs";
 
 export default function Footer() {
   const { theme, setTheme } = useTheme();
@@ -21,9 +21,9 @@ export default function Footer() {
   }, []);
 
   const themeTabs = [
-    { id: 'light', icon: <Sun className="h-4 w-4" /> },
-    { id: 'dark', icon: <Moon className="h-4 w-4" /> },
-    { id: 'system', icon: <Monitor className="h-4 w-4" /> },
+    { id: "light", icon: <Sun className="h-4 w-4" /> },
+    { id: "dark", icon: <Moon className="h-4 w-4" /> },
+    { id: "system", icon: <Monitor className="h-4 w-4" /> },
   ];
 
   return (
@@ -74,7 +74,7 @@ export default function Footer() {
 
                 <div className="text-foreground/60 text-sm">
                   <p>
-                    © {new Date().getFullYear()} Made by —{' '}
+                    © {new Date().getFullYear()} Made by —{" "}
                     <Link
                       className="text-foreground transition-colors hover:underline"
                       href="https://x.com/preetsuthar17"

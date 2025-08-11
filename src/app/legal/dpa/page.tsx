@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function DPA() {
   return (
@@ -91,7 +91,7 @@ export default function DPA() {
         <h2 className="font-semibold text-2xl">5. Subprocessors</h2>
         <p>
           Ikiform may engage Subprocessors to process Personal Data on your
-          behalf. A current list of Subprocessors is available in our{' '}
+          behalf. A current list of Subprocessors is available in our{" "}
           <Link className="text-blue-500 underline" href="/legal/gdpr">
             GDPR Policy
           </Link>

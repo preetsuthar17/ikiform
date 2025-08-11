@@ -1,12 +1,12 @@
-import type { Metadata } from 'next';
-import { Suspense } from 'react';
+import type { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: 'AI Form Builder - Create Forms with AI | ikiform',
+  title: "AI Form Builder - Create Forms with AI | ikiform",
   description:
-    'Create beautiful forms using our AI-powered form builder. Design, customize, and deploy forms in minutes with intelligent assistance.',
+    "Create beautiful forms using our AI-powered form builder. Design, customize, and deploy forms in minutes with intelligent assistance.",
   keywords:
-    'AI form builder, form creator, form generator, drag and drop forms',
+    "AI form builder, form creator, form generator, drag and drop forms",
 };
 
 interface LayoutProps {

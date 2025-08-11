@@ -1,10 +1,10 @@
-import { Edit3 } from 'lucide-react';
-import type React from 'react';
+import { Edit3 } from "lucide-react";
+import type React from "react";
 
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
-import { useEditableField } from '../hooks/useEditableField';
+import { useEditableField } from "../hooks/useEditableField";
 
 interface EditableFieldProps {
   value: string;
@@ -12,7 +12,7 @@ interface EditableFieldProps {
   onSave: (value: string) => void;
   className?: string;
   inputClassName?: string;
-  component?: 'input' | 'textarea';
+  component?: "input" | "textarea";
   rows?: number;
   disabled?: boolean;
   children?: React.ReactNode;
@@ -22,9 +22,9 @@ export function EditableField({
   value,
   placeholder,
   onSave,
-  className = '',
-  inputClassName = '',
-  component = 'input',
+  className = "",
+  inputClassName = "",
+  component = "input",
   rows = 1,
   disabled = false,
   children,
@@ -53,7 +53,7 @@ export function EditableField({
   return (
     <div className={`group relative flex flex-col gap-2 ${className}`}>
       {isEditing ? (
-        component === 'textarea' ? (
+        component === "textarea" ? (
           <Textarea
             className={inputClassName}
             onBlur={handleSave}

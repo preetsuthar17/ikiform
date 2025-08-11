@@ -1,32 +1,32 @@
-'use client';
+"use client";
 
-import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
-import { cva, type VariantProps } from 'class-variance-authority';
-import * as React from 'react';
-import { cn } from '@/lib/utils';
+import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
+import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
-const scrollAreaVariants = cva('relative overflow-hidden', {
+const scrollAreaVariants = cva("relative overflow-hidden", {
   variants: {
     orientation: {
-      vertical: 'h-full',
-      horizontal: 'w-full',
-      both: 'h-full w-full',
+      vertical: "h-full",
+      horizontal: "w-full",
+      both: "h-full w-full",
     },
   },
   defaultVariants: {
-    orientation: 'vertical',
+    orientation: "vertical",
   },
 });
 
-const scrollBarVariants = cva('flex touch-none select-none transition-colors', {
+const scrollBarVariants = cva("flex touch-none select-none transition-colors", {
   variants: {
     orientation: {
-      vertical: 'h-full w-2.5 border-l border-l-transparent p-[1px]',
-      horizontal: 'h-2.5 w-full border-t border-t-transparent p-[1px]',
+      vertical: "h-full w-2.5 border-l border-l-transparent p-[1px]",
+      horizontal: "h-2.5 w-full border-t border-t-transparent p-[1px]",
     },
   },
   defaultVariants: {
-    orientation: 'vertical',
+    orientation: "vertical",
   },
 });
 
@@ -34,7 +34,7 @@ export interface ScrollAreaProps
   extends React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>,
     VariantProps<typeof scrollAreaVariants> {
   scrollHideDelay?: number;
-  type?: 'auto' | 'always' | 'scroll' | 'hover';
+  type?: "auto" | "always" | "scroll" | "hover";
 }
 
 const ScrollArea = React.forwardRef<
@@ -47,12 +47,12 @@ const ScrollArea = React.forwardRef<
       children,
       orientation: propOrientation,
       scrollHideDelay = 600,
-      type = 'hover',
+      type = "hover",
       ...props
     },
-    ref
+    ref,
   ) => {
-    const orientation = propOrientation || 'vertical';
+    const orientation = propOrientation || "vertical";
     return (
       <ScrollAreaPrimitive.Root
         className={cn(scrollAreaVariants({ orientation }), className)}
@@ -62,14 +62,14 @@ const ScrollArea = React.forwardRef<
         <ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]">
           {children}
         </ScrollAreaPrimitive.Viewport>
-        {(orientation === 'vertical' || orientation === 'both') && (
+        {(orientation === "vertical" || orientation === "both") && (
           <ScrollBar
             orientation="vertical"
             scrollHideDelay={scrollHideDelay}
             type={type}
           />
         )}
-        {(orientation === 'horizontal' || orientation === 'both') && (
+        {(orientation === "horizontal" || orientation === "both") && (
           <ScrollBar
             orientation="horizontal"
             scrollHideDelay={scrollHideDelay}
@@ -79,7 +79,7 @@ const ScrollArea = React.forwardRef<
         <ScrollAreaPrimitive.Corner />
       </ScrollAreaPrimitive.Root>
     );
-  }
+  },
 );
 
 ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName;
@@ -89,7 +89,7 @@ interface ScrollBarProps
     typeof ScrollAreaPrimitive.ScrollAreaScrollbar
   > {
   scrollHideDelay?: number;
-  type?: 'auto' | 'always' | 'scroll' | 'hover';
+  type?: "auto" | "always" | "scroll" | "hover";
 }
 
 const ScrollBar = React.forwardRef<
@@ -97,15 +97,15 @@ const ScrollBar = React.forwardRef<
   ScrollBarProps
 >(
   (
-    { className, orientation = 'vertical', scrollHideDelay, type, ...props },
-    ref
+    { className, orientation = "vertical", scrollHideDelay, type, ...props },
+    ref,
   ) => {
     return (
       <ScrollAreaPrimitive.ScrollAreaScrollbar
         className={cn(
           scrollBarVariants({ orientation }),
-          'hover:bg-accent',
-          className
+          "hover:bg-accent",
+          className,
         )}
         orientation={orientation}
         ref={ref}
@@ -116,7 +116,7 @@ const ScrollBar = React.forwardRef<
         <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-card bg-border transition-colors hover:bg-foreground/30" />
       </ScrollAreaPrimitive.ScrollAreaScrollbar>
     );
-  }
+  },
 );
 
 ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName;

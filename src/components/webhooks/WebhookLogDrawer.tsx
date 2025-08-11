@@ -1,25 +1,25 @@
-import { useEffect, useState } from 'react';
-import { Alert } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { useEffect, useState } from "react";
+import { Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Drawer,
   DrawerCloseButton,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
-} from '@/components/ui/drawer';
-import { Loader } from '@/components/ui/loader';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Tabs, TabsContent } from '@/components/ui/tabs';
+} from "@/components/ui/drawer";
+import { Loader } from "@/components/ui/loader";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 
 interface WebhookLog {
   id: string;
   webhook_id: string;
   event: string;
-  status: 'success' | 'failed' | 'pending';
+  status: "success" | "failed" | "pending";
   request_payload: any;
   response_status?: number;
   response_body?: string;
@@ -36,7 +36,7 @@ interface WebhookLogDrawerProps {
 
 function CodeBlock({
   code,
-  className = '',
+  className = "",
 }: {
   code: string;
   className?: string;
@@ -44,7 +44,7 @@ function CodeBlock({
   return (
     <pre
       className={`overflow-x-auto whitespace-pre-wrap rounded bg-muted p-4 font-mono text-xs ${className}`}
-      style={{ fontFamily: 'var(--font-mono, monospace)' }}
+      style={{ fontFamily: "var(--font-mono, monospace)" }}
     >
       {code}
     </pre>
@@ -52,10 +52,10 @@ function CodeBlock({
 }
 
 function PayloadViewer({ payload }: { payload: any }) {
-  const [viewMode, setViewMode] = useState<'formatted' | 'raw'>('formatted');
+  const [viewMode, setViewMode] = useState<"formatted" | "raw">("formatted");
 
   let parsedPayload = payload;
-  if (typeof payload === 'string') {
+  if (typeof payload === "string") {
     try {
       parsedPayload = JSON.parse(payload);
     } catch {
@@ -101,25 +101,25 @@ function PayloadViewer({ payload }: { payload: any }) {
   }
 
   function formatValue(value: any): string {
-    if (value === null || value === undefined) return 'N/A';
-    if (typeof value === 'string') return value;
-    if (typeof value === 'number' || typeof value === 'boolean')
+    if (value === null || value === undefined) return "N/A";
+    if (typeof value === "string") return value;
+    if (typeof value === "number" || typeof value === "boolean")
       return String(value);
     if (Array.isArray(value)) {
-      if (value.length > 0 && typeof value[0] === 'object') {
+      if (value.length > 0 && typeof value[0] === "object") {
         try {
           return JSON.stringify(value, null, 2);
         } catch {
-          return '[Complex Array]';
+          return "[Complex Array]";
         }
       }
-      return value.join(', ');
+      return value.join(", ");
     }
-    if (typeof value === 'object') {
+    if (typeof value === "object") {
       try {
         return JSON.stringify(value, null, 2);
       } catch {
-        return '[Complex Object]';
+        return "[Complex Object]";
       }
     }
     return String(value);
@@ -127,13 +127,13 @@ function PayloadViewer({ payload }: { payload: any }) {
 
   function getAdditionalDataKeys(payload: any) {
     const knownKeys = [
-      'event',
-      'formId',
-      'formName',
-      'submissionId',
-      'ipAddress',
-      'fields',
-      'rawData',
+      "event",
+      "formId",
+      "formName",
+      "submissionId",
+      "ipAddress",
+      "fields",
+      "rawData",
     ];
     return Object.keys(payload).filter((key) => !knownKeys.includes(key));
   }
@@ -150,7 +150,7 @@ function PayloadViewer({ payload }: { payload: any }) {
             <div className="flex justify-between">
               <span className="text-muted-foreground">Event:</span>
               <span className="flex h-6 items-center justify-center gap-1.5 rounded-[calc(var(--radius)-4px)] border border-border px-2.5 font-medium text-foreground text-xs shadow-sm/2 transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                {eventName || 'Unknown'}
+                {eventName || "Unknown"}
               </span>
             </div>
             {parsedPayload.formId && (
@@ -225,7 +225,7 @@ function PayloadViewer({ payload }: { payload: any }) {
                 const value = parsedPayload[key];
 
                 let displayValue: React.ReactNode;
-                if (typeof value === 'object' && value !== null) {
+                if (typeof value === "object" && value !== null) {
                   displayValue = (
                     <CodeBlock
                       className="max-w-full overflow-x-auto whitespace-pre-wrap rounded bg-muted p-2 text-xs"
@@ -268,8 +268,8 @@ function PayloadViewer({ payload }: { payload: any }) {
   }
 
   const tabItems = [
-    { id: 'formatted', label: 'Formatted' },
-    { id: 'raw', label: 'Raw JSON' },
+    { id: "formatted", label: "Formatted" },
+    { id: "raw", label: "Raw JSON" },
   ];
 
   return (
@@ -277,7 +277,7 @@ function PayloadViewer({ payload }: { payload: any }) {
       <Tabs
         className="w-full"
         items={tabItems}
-        onValueChange={(value) => setViewMode(value as 'formatted' | 'raw')}
+        onValueChange={(value) => setViewMode(value as "formatted" | "raw")}
         value={viewMode}
       />
       <TabsContent activeValue={viewMode} className="mt-4" value="formatted">
@@ -306,11 +306,11 @@ export function WebhookLogDrawer({
     setError(null);
     try {
       const res = await fetch(`/api/webhook/logs?webhookId=${webhookId}`);
-      if (!res.ok) throw new Error('Failed to fetch logs');
+      if (!res.ok) throw new Error("Failed to fetch logs");
       const data = await res.json();
       setLogs(Array.isArray(data) ? data : []);
     } catch (e: any) {
-      setError(e.message || 'Failed to fetch logs');
+      setError(e.message || "Failed to fetch logs");
     } finally {
       setLoading(false);
     }
@@ -325,8 +325,8 @@ export function WebhookLogDrawer({
     if (!webhookId) return;
     try {
       const res = await fetch(`/api/webhook/${webhookId}/resend`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ logId: log.id }),
       });
       const data = await res.json();
@@ -364,11 +364,11 @@ export function WebhookLogDrawer({
                           <Badge
                             size="sm"
                             variant={
-                              log.status === 'success'
-                                ? 'default'
-                                : log.status === 'failed'
-                                  ? 'destructive'
-                                  : 'secondary'
+                              log.status === "success"
+                                ? "default"
+                                : log.status === "failed"
+                                  ? "destructive"
+                                  : "secondary"
                             }
                           >
                             {log.status.toUpperCase()}
@@ -382,13 +382,13 @@ export function WebhookLogDrawer({
                         </div>
                         <div className="flex flex-wrap gap-2 text-muted-foreground text-xs">
                           <span>Event: {log.event}</span>
-                          {typeof log.response_status !== 'undefined' && (
+                          {typeof log.response_status !== "undefined" && (
                             <span>Response: {log.response_status}</span>
                           )}
                         </div>
                         {log.response_body && (
                           <div className="truncate text-muted-foreground text-xs">
-                            <span className="font-medium">Response Body:</span>{' '}
+                            <span className="font-medium">Response Body:</span>{" "}
                             {log.response_body}
                           </div>
                         )}
@@ -398,7 +398,7 @@ export function WebhookLogDrawer({
                           </Alert>
                         )}
                         <div className="mt-2 flex gap-2">
-                          {log.status === 'failed' && (
+                          {log.status === "failed" && (
                             <Button
                               onClick={() => handleResend(log)}
                               size="sm"

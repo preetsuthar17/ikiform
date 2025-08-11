@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Card } from '@/components/ui/card';
+import { Card } from "@/components/ui/card";
 
 interface ChartSkeletonProps {
   height?: number;
@@ -11,7 +11,7 @@ interface ChartSkeletonProps {
 export function ChartSkeleton({
   height = 300,
   title = true,
-  className = '',
+  className = "",
 }: ChartSkeletonProps) {
   return (
     <Card className={`p-4 ${className}`}>
@@ -33,7 +33,7 @@ export function ChartSkeleton({
                 key={i}
                 style={{
                   height: `${Math.random() * 60 + 20}%`,
-                  width: '12%',
+                  width: "12%",
                 }}
               />
             ))}
@@ -47,7 +47,7 @@ export function ChartSkeleton({
 export function AreaChartSkeleton({
   height = 300,
   title = true,
-  className = '',
+  className = "",
 }: ChartSkeletonProps) {
   return (
     <Card className={`p-4 ${className}`}>
@@ -87,7 +87,7 @@ export function AreaChartSkeleton({
 export function PieChartSkeleton({
   height = 300,
   title = true,
-  className = '',
+  className = "",
 }: ChartSkeletonProps) {
   return (
     <Card className={`p-4 ${className}`}>

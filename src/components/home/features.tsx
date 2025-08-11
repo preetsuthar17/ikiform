@@ -1,32 +1,32 @@
-import { OptimizedImage } from '../other/optimized-image';
+import { OptimizedImage } from "../other/optimized-image";
 
 const features = [
   {
-    name: 'AI Form Builder',
+    name: "AI Form Builder",
     description:
-      'Generate forms instantly using AI. Just describe your needs and let our AI build your form in seconds.',
+      "Generate forms instantly using AI. Just describe your needs and let our AI build your form in seconds.",
     video:
-      'https://av5on64jc4.ufs.sh/f/jYAIyA6pXign9LzlJhGEK7MOW2HtS8VrgBIdbz6GCRw3QsY1',
-    bg: 'https://av5on64jc4.ufs.sh/f/jYAIyA6pXignPZD9G8W5N7VbwqPstFU0fyT6Hxu3QEav8ckM',
-    id: 'ai-builder-feature',
+      "https://av5on64jc4.ufs.sh/f/jYAIyA6pXign9LzlJhGEK7MOW2HtS8VrgBIdbz6GCRw3QsY1",
+    bg: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignPZD9G8W5N7VbwqPstFU0fyT6Hxu3QEav8ckM",
+    id: "ai-builder-feature",
   },
   {
-    name: 'Intuitive Form Builder',
+    name: "Intuitive Form Builder",
     description:
-      'Drag and drop to create beautiful forms. Customize fields, layout, and design with ease.',
+      "Drag and drop to create beautiful forms. Customize fields, layout, and design with ease.",
     video:
-      'https://av5on64jc4.ufs.sh/f/jYAIyA6pXignHpXfl2SkSqKmkIdQ5AiYXwezrn1sLTg2DCWc',
-    bg: 'https://av5on64jc4.ufs.sh/f/jYAIyA6pXignSP3QW1Hngdl5e9VoXjF4Dcsz3U6nhiRQCNx1',
-    id: 'intuitive-form-builder-feature',
+      "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignHpXfl2SkSqKmkIdQ5AiYXwezrn1sLTg2DCWc",
+    bg: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignSP3QW1Hngdl5e9VoXjF4Dcsz3U6nhiRQCNx1",
+    id: "intuitive-form-builder-feature",
   },
   {
-    name: 'AI-Powered Analytics',
+    name: "AI-Powered Analytics",
     description:
-      'Get instant insights and analytics powered by AI. Visualize responses and trends effortlessly.',
+      "Get instant insights and analytics powered by AI. Visualize responses and trends effortlessly.",
     video:
-      'https://av5on64jc4.ufs.sh/f/jYAIyA6pXignsNKhM5BuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa',
-    bg: 'https://av5on64jc4.ufs.sh/f/jYAIyA6pXignRgOlE1vEfXweUJ69CKsLboN1IaMcAjVlh0nH',
-    id: 'ai-powered-analytics-feature',
+      "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignsNKhM5BuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+    bg: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignRgOlE1vEfXweUJ69CKsLboN1IaMcAjVlh0nH",
+    id: "ai-powered-analytics-feature",
   },
 ];
 
@@ -36,7 +36,7 @@ export default function Features() {
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-18">
         {features.map((feature, idx) => (
           <div
-            className={'flex flex-col items-center gap-8 overflow-hidden p-0'}
+            className={"flex flex-col items-center gap-8 overflow-hidden p-0"}
             id={feature.id}
             key={feature.name}
           >
@@ -50,10 +50,10 @@ export default function Features() {
             </div>
             <div
               className={
-                'flex aspect-video w-full items-center justify-center overflow-hidden rounded-card bg-gradient-to-b p-4 md:p-12 shadow-[inset_0px_-24px_66px_-11px_hsl(var(--hu-home-card-bg),0.1)]'
+                "flex aspect-video w-full items-center justify-center overflow-hidden rounded-card bg-gradient-to-b p-4 md:p-12 shadow-[inset_0px_-24px_66px_-11px_hsl(var(--hu-home-card-bg),0.1)]"
               }
               style={{
-                position: 'relative',
+                position: "relative",
               }}
             >
               <video

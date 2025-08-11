@@ -1,7 +1,7 @@
-import type { FormProgress, ProgressStorageAdapter } from '../types';
+import type { FormProgress, ProgressStorageAdapter } from "../types";
 
 export class LocalStorageAdapter implements ProgressStorageAdapter {
-  private prefix = 'ikiform_progress_';
+  private prefix = "ikiform_progress_";
 
   async save(key: string, data: FormProgress): Promise<void> {
     try {
@@ -42,7 +42,7 @@ export class LocalStorageAdapter implements ProgressStorageAdapter {
   async clear(): Promise<void> {
     try {
       const keys = Object.keys(localStorage).filter((key) =>
-        key.startsWith(this.prefix)
+        key.startsWith(this.prefix),
       );
 
       keys.forEach((key) => localStorage.removeItem(key));
@@ -53,7 +53,7 @@ export class LocalStorageAdapter implements ProgressStorageAdapter {
 }
 
 export class SessionStorageAdapter implements ProgressStorageAdapter {
-  private prefix = 'ikiform_progress_';
+  private prefix = "ikiform_progress_";
 
   async save(key: string, data: FormProgress): Promise<void> {
     try {
@@ -94,7 +94,7 @@ export class SessionStorageAdapter implements ProgressStorageAdapter {
   async clear(): Promise<void> {
     try {
       const keys = Object.keys(sessionStorage).filter((key) =>
-        key.startsWith(this.prefix)
+        key.startsWith(this.prefix),
       );
 
       keys.forEach((key) => sessionStorage.removeItem(key));
@@ -109,14 +109,14 @@ export class SessionStorageAdapter implements ProgressStorageAdapter {
  * Stores data on the server via API endpoints
  */
 export class ServerStorageAdapter implements ProgressStorageAdapter {
-  private baseUrl = '/api/form-progress';
+  private baseUrl = "/api/form-progress";
 
   async save(key: string, data: FormProgress): Promise<void> {
     try {
       const response = await fetch(`${this.baseUrl}/${key}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
@@ -158,7 +158,7 @@ export class ServerStorageAdapter implements ProgressStorageAdapter {
   async delete(key: string): Promise<void> {
     try {
       await fetch(`${this.baseUrl}/${key}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
     } catch (error) {
       console.warn(`Failed to delete progress from server: ${error}`);
@@ -168,7 +168,7 @@ export class ServerStorageAdapter implements ProgressStorageAdapter {
   async clear(): Promise<void> {
     try {
       await fetch(`${this.baseUrl}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
     } catch (error) {
       console.warn(`Failed to clear progress from server: ${error}`);

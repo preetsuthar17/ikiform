@@ -1,1 +1,1 @@
-export { BlockManager } from './block-manager/BlockManager';
+export { BlockManager } from "./block-manager/BlockManager";

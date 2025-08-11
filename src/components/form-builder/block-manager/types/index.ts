@@ -1,4 +1,4 @@
-import type { FormBlock, FormField } from '@/lib/database';
+import type { FormBlock, FormField } from "@/lib/database";
 
 export interface BlockManagerProps {
   blocks: FormBlock[];

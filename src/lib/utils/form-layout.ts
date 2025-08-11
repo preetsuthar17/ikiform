@@ -1,4 +1,4 @@
-import type { FormSchema } from '@/lib/database';
+import type { FormSchema } from "@/lib/database";
 
 export interface LayoutClasses {
   maxWidthClass: string;
@@ -10,80 +10,80 @@ export interface LayoutClasses {
 export const getFormLayoutClasses = (schema: FormSchema): LayoutClasses => {
   const layout = schema.settings?.layout || {};
 
-  let maxWidthClass = 'max-w-2xl';
+  let maxWidthClass = "max-w-2xl";
   switch (layout?.maxWidth) {
-    case 'sm':
-      maxWidthClass = 'max-w-sm';
+    case "sm":
+      maxWidthClass = "max-w-sm";
       break;
-    case 'md':
-      maxWidthClass = 'max-w-2xl';
+    case "md":
+      maxWidthClass = "max-w-2xl";
       break;
-    case 'lg':
-      maxWidthClass = 'max-w-4xl';
+    case "lg":
+      maxWidthClass = "max-w-4xl";
       break;
-    case 'xl':
-      maxWidthClass = 'max-w-6xl';
+    case "xl":
+      maxWidthClass = "max-w-6xl";
       break;
-    case 'full':
-      maxWidthClass = 'max-w-full';
+    case "full":
+      maxWidthClass = "max-w-full";
       break;
   }
 
-  let paddingClass = 'md:p-6 p-2';
+  let paddingClass = "md:p-6 p-2";
   switch (layout?.padding) {
-    case 'none':
-      paddingClass = 'p-0';
+    case "none":
+      paddingClass = "p-0";
       break;
-    case 'sm':
-      paddingClass = 'md:p-4 p-2';
+    case "sm":
+      paddingClass = "md:p-4 p-2";
       break;
-    case 'md':
-      paddingClass = 'md:p-6 p-2';
+    case "md":
+      paddingClass = "md:p-6 p-2";
       break;
-    case 'lg':
-      paddingClass = 'md:p-8 p-4';
+    case "lg":
+      paddingClass = "md:p-8 p-4";
       break;
   }
 
-  let containerClass = 'max-w-2xl mx-auto';
+  let containerClass = "max-w-2xl mx-auto";
   switch (layout?.maxWidth) {
-    case 'sm':
-      containerClass = 'max-w-sm mx-auto';
+    case "sm":
+      containerClass = "max-w-sm mx-auto";
       break;
-    case 'md':
-      containerClass = 'max-w-2xl mx-auto';
+    case "md":
+      containerClass = "max-w-2xl mx-auto";
       break;
-    case 'lg':
-      containerClass = 'max-w-4xl mx-auto';
+    case "lg":
+      containerClass = "max-w-4xl mx-auto";
       break;
-    case 'xl':
-      containerClass = 'max-w-6xl mx-auto';
+    case "xl":
+      containerClass = "max-w-6xl mx-auto";
       break;
-    case 'full':
-      containerClass = 'w-full';
+    case "full":
+      containerClass = "w-full";
       break;
   }
 
-  let marginClass = '';
+  let marginClass = "";
   switch (layout?.margin) {
-    case 'sm':
-      marginClass = 'my-2';
+    case "sm":
+      marginClass = "my-2";
       break;
-    case 'md':
-      marginClass = 'my-4';
+    case "md":
+      marginClass = "my-4";
       break;
-    case 'lg':
-      marginClass = 'my-8';
+    case "lg":
+      marginClass = "my-8";
       break;
     default:
-      marginClass = '';
+      marginClass = "";
   }
 
   return { maxWidthClass, paddingClass, containerClass, marginClass };
 };
 
 export const getDesignModeClass = (designMode?: string) => {
-  return designMode === 'minimal'
-    ? 'bg-transparent border-none shadow-none hover:bg-transparent'
-    : '';
+  return designMode === "minimal"
+    ? "bg-transparent border-none shadow-none hover:bg-transparent"
+    : "";
 };

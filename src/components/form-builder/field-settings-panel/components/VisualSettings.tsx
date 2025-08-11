@@ -1,21 +1,21 @@
-import React from 'react';
-import { Card } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
+import React from "react";
+import { Card } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from "@/components/ui/select";
 
-import { Textarea } from '@/components/ui/textarea';
+import { Textarea } from "@/components/ui/textarea";
 
-import type { FormField } from '@/lib/database';
+import type { FormField } from "@/lib/database";
 
 interface VisualSettingsProps {
   field: FormField;
-  onUpdateSettings: (updates: Partial<FormField['settings']>) => void;
+  onUpdateSettings: (updates: Partial<FormField["settings"]>) => void;
 }
 
 export function VisualSettings({
@@ -38,7 +38,7 @@ export function VisualSettings({
             }
             placeholder="Additional help text shown below the field"
             rows={2}
-            value={field.settings?.helpText || ''}
+            value={field.settings?.helpText || ""}
           />
         </div>
 
@@ -50,10 +50,10 @@ export function VisualSettings({
             <Select
               onValueChange={(value) =>
                 onUpdateSettings({
-                  size: value as 'sm' | 'md' | 'lg',
+                  size: value as "sm" | "md" | "lg",
                 })
               }
-              value={field.settings?.size || 'md'}
+              value={field.settings?.size || "md"}
             >
               <SelectTrigger className="border-border bg-input">
                 <SelectValue placeholder="Select size" />
@@ -73,10 +73,10 @@ export function VisualSettings({
             <Select
               onValueChange={(value) =>
                 onUpdateSettings({
-                  width: value as 'full' | 'half' | 'third' | 'quarter',
+                  width: value as "full" | "half" | "third" | "quarter",
                 })
               }
-              value={field.settings?.width || 'full'}
+              value={field.settings?.width || "full"}
             >
               <SelectTrigger className="border-border bg-input">
                 <SelectValue placeholder="Select width" />
@@ -98,10 +98,10 @@ export function VisualSettings({
           <Select
             onValueChange={(value) =>
               onUpdateSettings({
-                variant: value as 'default' | 'filled' | 'ghost' | 'underline',
+                variant: value as "default" | "filled" | "ghost" | "underline",
               })
             }
-            value={field.settings?.variant || 'default'}
+            value={field.settings?.variant || "default"}
           >
             <SelectTrigger className="border-border bg-input">
               <SelectValue placeholder="Select variant" />

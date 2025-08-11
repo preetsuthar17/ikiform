@@ -1,9 +1,9 @@
-import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 
-import type { FormSchema } from '@/lib/ai-builder/types';
+import type { FormSchema } from "@/lib/ai-builder/types";
 
 interface PreviewPanelHeaderProps {
   forms: FormSchema[];
@@ -44,7 +44,7 @@ export function PreviewPanelHeader({
               key={form.id}
               onClick={() => setActiveFormId(form.id)}
               size="sm"
-              variant={form.id === activeFormId ? 'secondary' : 'outline'}
+              variant={form.id === activeFormId ? "secondary" : "outline"}
             >
               {form.prompt
                 ? `${form.prompt.slice(0, 12)}...`
@@ -74,7 +74,7 @@ export function PreviewPanelHeader({
           <Button
             key={form.id}
             onClick={() => setActiveFormId(form.id)}
-            variant={form.id === activeFormId ? 'secondary' : 'outline'}
+            variant={form.id === activeFormId ? "secondary" : "outline"}
           >
             {form.prompt ? `${form.prompt.slice(0, 20)}...` : `Form ${idx + 1}`}
           </Button>

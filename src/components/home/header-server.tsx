@@ -1,9 +1,9 @@
-import { LogIn, MessageCircleIcon } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { createClient } from '@/utils/supabase/server';
-import { Button } from '../ui/button';
-import { HeaderClient } from './header-client';
+import { LogIn, MessageCircleIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { createClient } from "@/utils/supabase/server";
+import { Button } from "../ui/button";
+import { HeaderClient } from "./header-client";
 
 /**
  * Server-rendered header component with authentication state

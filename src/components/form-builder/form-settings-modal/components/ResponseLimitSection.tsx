@@ -1,10 +1,10 @@
-import { Users } from 'lucide-react';
-import React from 'react';
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { Textarea } from '@/components/ui/textarea';
+import { Users } from "lucide-react";
+import React from "react";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 
 export function ResponseLimitSection({
   localSettings,
@@ -71,7 +71,7 @@ export function ResponseLimitSection({
                 rows={2}
                 value={
                   responseLimit.message ||
-                  'This form is no longer accepting responses.'
+                  "This form is no longer accepting responses."
                 }
               />
               <p className="text-muted-foreground text-xs">

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Separator } from '@/components/ui/separator';
+import React from "react";
+import { Separator } from "@/components/ui/separator";
 
-import { ConfirmationModal } from '../form-delete-confirmation-modal';
+import { ConfirmationModal } from "../form-delete-confirmation-modal";
 
 import {
   AIFormSuggestions,
@@ -12,11 +12,11 @@ import {
   FormsGrid,
   FormsHeader,
   LoadingSkeleton,
-} from './components';
+} from "./components";
 
-import { useFormsManagement } from './hooks';
+import { useFormsManagement } from "./hooks";
 
-import type { FormsManagementProps } from './types';
+import type { FormsManagementProps } from "./types";
 
 export function FormsManagement({ className }: FormsManagementProps) {
   const {
@@ -41,7 +41,7 @@ export function FormsManagement({ className }: FormsManagementProps) {
   }
 
   return (
-    <div className={`flex flex-col gap-8 ${className || ''}`}>
+    <div className={`flex flex-col gap-8 ${className || ""}`}>
       {}
       <FormsHeader
         onCreateForm={createNewForm}

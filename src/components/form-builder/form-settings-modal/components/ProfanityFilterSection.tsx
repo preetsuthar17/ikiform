@@ -1,16 +1,16 @@
-import { AlertTriangle, Plus, X } from 'lucide-react';
-import React from 'react';
+import { AlertTriangle, Plus, X } from "lucide-react";
+import React from "react";
 
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioItem } from '@/components/ui/radio';
-import { Switch } from '@/components/ui/switch';
-import { TagInput } from '@/components/ui/tag-input';
-import { Textarea } from '@/components/ui/textarea';
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioItem } from "@/components/ui/radio";
+import { Switch } from "@/components/ui/switch";
+import { TagInput } from "@/components/ui/tag-input";
+import { Textarea } from "@/components/ui/textarea";
 
-import type { ProfanityFilterSectionProps } from '../types';
+import type { ProfanityFilterSectionProps } from "../types";
 
 export function ProfanityFilterSection({
   localSettings,
@@ -93,7 +93,7 @@ function FilterModeSection({
       <Label className="mb-1 font-medium text-sm">Filter Mode</Label>
       <RadioGroup
         onValueChange={(value) => {
-          if (value === 'replace') {
+          if (value === "replace") {
             updateProfanityFilter({
               strictMode: false,
               replaceWithAsterisks: true,
@@ -106,7 +106,7 @@ function FilterModeSection({
           }
         }}
         orientation="vertical"
-        value={profanityFilter.replaceWithAsterisks ? 'replace' : 'strict'}
+        value={profanityFilter.replaceWithAsterisks ? "replace" : "strict"}
       >
         <RadioItem
           id="strict-mode"
@@ -143,7 +143,7 @@ function CustomMessageSection({
         }
         placeholder="Enter a custom message to show when profanity is detected"
         rows={2}
-        value={profanityFilter.customMessage || ''}
+        value={profanityFilter.customMessage || ""}
       />
     </div>
   );
@@ -165,11 +165,11 @@ function WordManagementSection({
         className="w-full"
         clearAllButton
         onTagsChange={updateWords}
-        placeholder={`Enter word to ${title.toLowerCase().includes('whitelist') ? 'whitelist' : 'filter'}`}
+        placeholder={`Enter word to ${title.toLowerCase().includes("whitelist") ? "whitelist" : "filter"}`}
         tagSize="sm"
         tags={words}
         tagVariant={
-          title.toLowerCase().includes('whitelist') ? 'outline' : 'secondary'
+          title.toLowerCase().includes("whitelist") ? "outline" : "secondary"
         }
       />
     </div>

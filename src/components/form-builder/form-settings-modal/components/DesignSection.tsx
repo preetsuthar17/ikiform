@@ -1,25 +1,25 @@
-import { Maximize2, Move, Palette, Square } from 'lucide-react';
-import React from 'react';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioItem } from '@/components/ui/radio';
-import { Separator } from '@/components/ui/separator';
-import { Switch } from '@/components/ui/switch';
+import { Maximize2, Move, Palette, Square } from "lucide-react";
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioItem } from "@/components/ui/radio";
+import { Separator } from "@/components/ui/separator";
+import { Switch } from "@/components/ui/switch";
 import {
   DEFAULT_FORM_DESIGN,
   FORM_BORDER_RADIUS_OPTIONS,
   FORM_DESIGN_MODES,
   FORM_PADDING_OPTIONS,
   FORM_WIDTH_OPTIONS,
-} from '../constants';
-import type { LocalSettings } from '../types';
+} from "../constants";
+import type { LocalSettings } from "../types";
 
 const FORM_MARGIN_OPTIONS = [
-  { value: 'none', label: 'None', preview: '', description: 'No margin' },
-  { value: 'sm', label: 'Small', preview: '', description: '8px' },
-  { value: 'md', label: 'Medium', preview: '', description: '16px' },
-  { value: 'lg', label: 'Large', preview: '', description: '32px' },
+  { value: "none", label: "None", preview: "", description: "No margin" },
+  { value: "sm", label: "Small", preview: "", description: "8px" },
+  { value: "md", label: "Medium", preview: "", description: "16px" },
+  { value: "lg", label: "Large", preview: "", description: "32px" },
 ];
 
 interface DesignSectionProps {
@@ -35,7 +35,7 @@ export function DesignSection({
     localSettings.layout?.maxWidth || DEFAULT_FORM_DESIGN.maxWidth;
   const currentPadding =
     localSettings.layout?.padding || DEFAULT_FORM_DESIGN.padding;
-  const currentMargin = localSettings.layout?.margin || 'none';
+  const currentMargin = localSettings.layout?.margin || "none";
   const currentBorderRadius =
     localSettings.layout?.borderRadius || DEFAULT_FORM_DESIGN.borderRadius;
   const currentDesignMode =
@@ -44,7 +44,7 @@ export function DesignSection({
     updateSettings({
       layout: {
         ...localSettings.layout,
-        borderRadius: value as 'none' | 'sm' | 'md' | 'lg' | 'xl',
+        borderRadius: value as "none" | "sm" | "md" | "lg" | "xl",
       },
     });
   };
@@ -53,7 +53,7 @@ export function DesignSection({
     updateSettings({
       layout: {
         ...localSettings.layout,
-        maxWidth: value as 'sm' | 'md' | 'lg' | 'xl' | 'full',
+        maxWidth: value as "sm" | "md" | "lg" | "xl" | "full",
       },
     });
   };
@@ -62,7 +62,7 @@ export function DesignSection({
     updateSettings({
       layout: {
         ...localSettings.layout,
-        padding: value as 'none' | 'sm' | 'md' | 'lg',
+        padding: value as "none" | "sm" | "md" | "lg",
       },
     });
   };
@@ -71,14 +71,14 @@ export function DesignSection({
     updateSettings({
       layout: {
         ...localSettings.layout,
-        margin: value as 'none' | 'sm' | 'md' | 'lg',
+        margin: value as "none" | "sm" | "md" | "lg",
       },
     });
   };
 
   const handleDesignModeChange = (value: string) => {
     updateSettings({
-      designMode: value as 'default' | 'minimal',
+      designMode: value as "default" | "minimal",
     });
   };
 
@@ -114,8 +114,8 @@ export function DesignSection({
               <Button
                 className={`font-medium text-sm ${
                   currentWidth === option.value
-                    ? ''
-                    : 'border bg-transparent text-foreground hover:bg-accent'
+                    ? ""
+                    : "border bg-transparent text-foreground hover:bg-accent"
                 }transition`}
                 key={option.value}
                 onClick={() => handleWidthChange(option.value)}
@@ -134,8 +134,8 @@ export function DesignSection({
               <Button
                 className={`font-medium text-sm ${
                   currentPadding === option.value
-                    ? ''
-                    : 'border bg-transparent text-foreground hover:bg-accent'
+                    ? ""
+                    : "border bg-transparent text-foreground hover:bg-accent"
                 }transition`}
                 key={option.value}
                 onClick={() => handlePaddingChange(option.value)}
@@ -154,8 +154,8 @@ export function DesignSection({
               <Button
                 className={`font-medium text-sm ${
                   currentMargin === option.value
-                    ? ''
-                    : 'border bg-transparent text-foreground hover:bg-accent'
+                    ? ""
+                    : "border bg-transparent text-foreground hover:bg-accent"
                 }transition`}
                 key={option.value}
                 onClick={() => handleMarginChange(option.value)}
@@ -174,8 +174,8 @@ export function DesignSection({
               <Button
                 className={`font-medium text-sm ${
                   currentBorderRadius === option.value
-                    ? ''
-                    : 'border bg-transparent text-foreground hover:bg-accent'
+                    ? ""
+                    : "border bg-transparent text-foreground hover:bg-accent"
                 }transition`}
                 key={option.value}
                 onClick={() => handleBorderRadiusChange(option.value)}

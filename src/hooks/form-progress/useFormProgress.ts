@@ -1,16 +1,16 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { FormProgressStorage } from '../../lib/form-progress/storage';
+import { useCallback, useEffect, useRef, useState } from "react";
+import { FormProgressStorage } from "../../lib/form-progress/storage";
 import type {
   FormProgress,
   FormProgressActions,
   FormProgressConfig,
   FormProgressState,
   SaveProgressOptions,
-} from '../../lib/form-progress/types';
+} from "../../lib/form-progress/types";
 
 const DEFAULT_CONFIG: FormProgressConfig = {
   enabled: true,
-  storage: 'localStorage',
+  storage: "localStorage",
   autoSaveInterval: 2000,
   retentionDays: 7,
   compressionEnabled: false,
@@ -32,7 +32,7 @@ export function useFormProgress(
   formId: string,
   totalFields: number,
   config: Partial<FormProgressConfig> = {},
-  options: Partial<SaveProgressOptions> = {}
+  options: Partial<SaveProgressOptions> = {},
 ): FormProgressState & FormProgressActions {
   const [state, setState] = useState<FormProgressState>({
     progress: null,
@@ -71,7 +71,7 @@ export function useFormProgress(
         }, finalOptions.debounceMs);
       });
     },
-    [finalOptions.debounceMs, finalOptions.enableAutoSave]
+    [finalOptions.debounceMs, finalOptions.enableAutoSave],
   );
 
   const saveProgress = useCallback(
@@ -96,7 +96,7 @@ export function useFormProgress(
           sessionIdRef.current,
           filteredFormData,
           currentStep,
-          totalSteps
+          totalSteps,
         );
 
         await storageRef.current.saveProgress(progress);
@@ -112,11 +112,11 @@ export function useFormProgress(
           ...prev,
           saving: false,
           error:
-            error instanceof Error ? error.message : 'Failed to save progress',
+            error instanceof Error ? error.message : "Failed to save progress",
         }));
       }
     },
-    [formId, finalConfig.enabled, finalOptions.skipFields]
+    [formId, finalConfig.enabled, finalOptions.skipFields],
   );
 
   const loadProgress = useCallback(async () => {
@@ -132,7 +132,7 @@ export function useFormProgress(
 
       const progress = await storageRef.current.loadProgress(
         formId,
-        sessionIdRef.current
+        sessionIdRef.current,
       );
 
       setState((prev: FormProgressState) => ({
@@ -146,7 +146,7 @@ export function useFormProgress(
         ...prev,
         loading: false,
         error:
-          error instanceof Error ? error.message : 'Failed to load progress',
+          error instanceof Error ? error.message : "Failed to load progress",
       }));
     }
   }, [formId, finalConfig.enabled]);
@@ -166,7 +166,7 @@ export function useFormProgress(
       setState((prev: FormProgressState) => ({
         ...prev,
         error:
-          error instanceof Error ? error.message : 'Failed to clear progress',
+          error instanceof Error ? error.message : "Failed to clear progress",
       }));
     }
   }, [formId]);
@@ -184,7 +184,7 @@ export function useFormProgress(
           saveProgress(
             state.progress.formData,
             state.progress.currentStep,
-            state.progress.totalSteps
+            state.progress.totalSteps,
           );
         }
       }, finalConfig.autoSaveInterval);

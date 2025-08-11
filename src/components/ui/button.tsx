@@ -1,1 +1,1 @@
-export { Button, type ButtonProps, SuspenseButton } from './button-wrapper';
+export { Button, type ButtonProps, SuspenseButton } from "./button-wrapper";

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   BarChart3,
@@ -8,28 +8,28 @@ import {
   Share,
   Sparkles,
   Trash2,
-} from 'lucide-react';
+} from "lucide-react";
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useTheme } from 'next-themes';
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
 
-import React, { useEffect, useState } from 'react';
-import { ConfirmationModal } from '@/components/dashboard/form-delete-confirmation-modal';
-import { ShareFormModal } from '@/components/form-builder/share-form-modal';
-import { Badge } from '@/components/ui/badge';
+import React, { useEffect, useState } from "react";
+import { ConfirmationModal } from "@/components/dashboard/form-delete-confirmation-modal";
+import { ShareFormModal } from "@/components/form-builder/share-form-modal";
+import { Badge } from "@/components/ui/badge";
 
-import { Button } from '@/components/ui/button';
-import { Loader } from '@/components/ui/loader';
+import { Button } from "@/components/ui/button";
+import { Loader } from "@/components/ui/loader";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { toast } from '@/hooks/use-toast';
+} from "@/components/ui/tooltip";
+import { toast } from "@/hooks/use-toast";
 
-import { formsDb } from '@/lib/database';
+import { formsDb } from "@/lib/database";
 
 import {
   AnalyticsCards,
@@ -41,18 +41,18 @@ import {
   SubmissionDetailsModal,
   SubmissionsList,
   TrendsChart,
-} from './components';
-import { DropoffAnalytics } from './components/dropoff-analytics';
+} from "./components";
+import { DropoffAnalytics } from "./components/dropoff-analytics";
 
 import {
   useAnalyticsChat,
   useAnalyticsData,
   useFormSubmissions,
-} from './hooks';
+} from "./hooks";
 
-import type { FormAnalyticsProps } from './types';
+import type { FormAnalyticsProps } from "./types";
 
-import { exportToCSV, exportToJSON, formatDate, getFieldLabel } from './utils';
+import { exportToCSV, exportToJSON, formatDate, getFieldLabel } from "./utils";
 
 export function FormAnalytics({ form }: FormAnalyticsProps) {
   const router = useRouter();
@@ -65,7 +65,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const { theme } = useTheme();
 
   const { submissions, loading, refreshing, refreshData } = useFormSubmissions(
-    form.id
+    form.id,
   );
   const analyticsData = useAnalyticsData(form, submissions);
   const {
@@ -98,14 +98,14 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     };
 
     const dataStr = JSON.stringify(submissionData, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const dataBlob = new Blob([dataStr], { type: "application/json" });
     const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
     link.download = `submission_${submission.id.slice(-8)}.json`;
     link.click();
     URL.revokeObjectURL(url);
-    toast.success('Submission exported successfully');
+    toast.success("Submission exported successfully");
   };
 
   const handleViewSubmission = (submission: any) => {
@@ -124,11 +124,11 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const handleDeleteForm = async () => {
     try {
       await formsDb.deleteForm(form.id);
-      toast.success('Form deleted successfully');
-      router.push('/dashboard');
+      toast.success("Form deleted successfully");
+      router.push("/dashboard");
     } catch (error) {
-      console.error('Error deleting form:', error);
-      toast.error('Failed to delete form');
+      console.error("Error deleting form:", error);
+      toast.error("Failed to delete form");
     }
   };
 
@@ -142,8 +142,8 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
     };
 
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   if (loading) {
@@ -186,7 +186,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
               </h1>
               <Badge
                 className="gap-1.5"
-                variant={form.is_published ? 'default' : 'secondary'}
+                variant={form.is_published ? "default" : "secondary"}
               >
                 {form.is_published ? (
                   <>
@@ -311,7 +311,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
         onClose={() => setIsShareModalOpen(false)}
         onPublish={async () => {
           await formsDb.togglePublishForm(form.id, true);
-          toast.success('Form published!');
+          toast.success("Form published!");
         }}
       />
       <FloatingChatButton

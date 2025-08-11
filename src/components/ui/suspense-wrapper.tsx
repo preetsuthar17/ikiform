@@ -1,5 +1,5 @@
-import { Suspense } from 'react';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface SuspenseWrapperProps {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ interface SuspenseWrapperProps {
 export function SuspenseWrapper({
   children,
   fallback,
-  className = 'h-full w-full',
+  className = "h-full w-full",
 }: SuspenseWrapperProps) {
   const defaultFallback = (
     <div className={className}>

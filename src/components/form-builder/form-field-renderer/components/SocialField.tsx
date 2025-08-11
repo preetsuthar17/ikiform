@@ -1,13 +1,13 @@
-import React from 'react';
-import { Card } from '@/components/ui/card';
+import React from "react";
+import { Card } from "@/components/ui/card";
 
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { SocialMediaIcons } from '@/components/ui/social-media-icons';
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { SocialMediaIcons } from "@/components/ui/social-media-icons";
 
-import type { BaseFieldProps } from '../types';
+import type { BaseFieldProps } from "../types";
 
-import { getBaseClasses } from '../utils';
+import { getBaseClasses } from "../utils";
 
 interface SocialPlatform {
   platform: string;
@@ -18,46 +18,46 @@ interface SocialPlatform {
 
 const socialPlatforms: SocialPlatform[] = [
   {
-    platform: 'linkedin',
-    label: 'LinkedIn',
-    placeholder: 'https://linkedin.com/in/username',
-    icon: 'linkedin',
+    platform: "linkedin",
+    label: "LinkedIn",
+    placeholder: "https://linkedin.com/in/username",
+    icon: "linkedin",
   },
   {
-    platform: 'twitter',
-    label: 'X (Twitter)',
-    placeholder: 'https://x.com/username',
-    icon: 'twitter',
+    platform: "twitter",
+    label: "X (Twitter)",
+    placeholder: "https://x.com/username",
+    icon: "twitter",
   },
   {
-    platform: 'youtube',
-    label: 'YouTube',
-    placeholder: 'https://youtube.com/@channel',
-    icon: 'youtube',
+    platform: "youtube",
+    label: "YouTube",
+    placeholder: "https://youtube.com/@channel",
+    icon: "youtube",
   },
   {
-    platform: 'instagram',
-    label: 'Instagram',
-    placeholder: 'https://instagram.com/username',
-    icon: 'instagram',
+    platform: "instagram",
+    label: "Instagram",
+    placeholder: "https://instagram.com/username",
+    icon: "instagram",
   },
   {
-    platform: 'facebook',
-    label: 'Facebook',
-    placeholder: 'https://facebook.com/username',
-    icon: 'facebook',
+    platform: "facebook",
+    label: "Facebook",
+    placeholder: "https://facebook.com/username",
+    icon: "facebook",
   },
   {
-    platform: 'github',
-    label: 'GitHub',
-    placeholder: 'https://github.com/username',
-    icon: 'github',
+    platform: "github",
+    label: "GitHub",
+    placeholder: "https://github.com/username",
+    icon: "github",
   },
   {
-    platform: 'website',
-    label: 'Website',
-    placeholder: 'https://example.com',
-    icon: 'website',
+    platform: "website",
+    label: "Website",
+    placeholder: "https://example.com",
+    icon: "website",
   },
 ];
 
@@ -75,7 +75,7 @@ export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
     field.settings?.socialPlatforms || socialPlatforms.map((p) => p.platform);
 
   const filteredPlatforms = socialPlatforms.filter((p) =>
-    platformsToShow.includes(p.platform)
+    platformsToShow.includes(p.platform),
   );
 
   const customLinks = field.settings?.customLinks || [];
@@ -99,7 +99,7 @@ export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
               }
               placeholder={platform.placeholder}
               type="url"
-              value={socialData[platform.platform] || ''}
+              value={socialData[platform.platform] || ""}
             />
           </div>
         ))}
@@ -121,9 +121,9 @@ export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
                 };
                 onChange(updatedData);
               }}
-              placeholder={link.placeholder || 'https://example.com'}
+              placeholder={link.placeholder || "https://example.com"}
               type="url"
-              value={socialData[`custom_${idx}`] || ''}
+              value={socialData[`custom_${idx}`] || ""}
             />
           </div>
         ))}
@@ -134,7 +134,7 @@ export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
           <Label className="block font-medium text-sm">Preview</Label>
           <SocialMediaIcons
             className="justify-center"
-            iconSize={field.settings?.iconSize || 'md'}
+            iconSize={field.settings?.iconSize || "md"}
             platforms={socialData}
           />
         </Card>

@@ -1,6 +1,6 @@
-'use client';
-import type React from 'react';
-import { getFormLayoutClasses } from '@/lib/utils/form-layout';
+"use client";
+import type React from "react";
+import { getFormLayoutClasses } from "@/lib/utils/form-layout";
 
 import {
   FormActions,
@@ -8,13 +8,13 @@ import {
   FormHeader,
   MultiStepNavigation,
   StepHeader,
-} from './components';
+} from "./components";
 
-import { useFormPreviewState } from './hooks';
+import { useFormPreviewState } from "./hooks";
 
-import type { FormPreviewProps } from './types';
+import type { FormPreviewProps } from "./types";
 
-import { handleFormSubmit } from './utils';
+import { handleFormSubmit } from "./utils";
 
 export function FormPreview({
   schema,
@@ -44,20 +44,20 @@ export function FormPreview({
     getFormLayoutClasses(schema);
 
   const borderRadiusValue = (() => {
-    const val = schema.settings.layout?.borderRadius || 'md';
+    const val = schema.settings.layout?.borderRadius || "md";
     switch (val) {
-      case 'none':
-        return '0px';
-      case 'sm':
-        return '4px';
-      case 'md':
-        return '8px';
-      case 'lg':
-        return '16px';
-      case 'xl':
-        return '24px';
+      case "none":
+        return "0px";
+      case "sm":
+        return "4px";
+      case "md":
+        return "8px";
+      case "lg":
+        return "16px";
+      case "xl":
+        return "24px";
       default:
-        return '8px';
+        return "8px";
     }
   })();
 
@@ -75,8 +75,8 @@ export function FormPreview({
       className={`min-h-full bg-background ${marginClass}`}
       style={
         {
-          '--radius': borderRadiusValue,
-          '--card-radius': borderRadiusValue,
+          "--radius": borderRadiusValue,
+          "--card-radius": borderRadiusValue,
         } as React.CSSProperties
       }
     >

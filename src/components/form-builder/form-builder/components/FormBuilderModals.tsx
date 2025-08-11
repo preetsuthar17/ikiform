@@ -1,21 +1,21 @@
-import type React from 'react';
+import type React from "react";
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Modal,
   ModalContent,
   ModalHeader,
   ModalTitle,
-} from '@/components/ui/modal';
-import { Textarea } from '@/components/ui/textarea';
-import { FormCreationWizard } from '../../form-creation-wizard';
-import { FormSettingsModal } from '../../form-settings-modal';
-import { JsonViewModal } from '../../json-view-modal';
-import { ShareFormModal } from '../../share-form-modal';
+} from "@/components/ui/modal";
+import { Textarea } from "@/components/ui/textarea";
+import { FormCreationWizard } from "../../form-creation-wizard";
+import { FormSettingsModal } from "../../form-settings-modal";
+import { JsonViewModal } from "../../json-view-modal";
+import { ShareFormModal } from "../../share-form-modal";
 
-import type { FormBuilderModalsProps } from '../types';
+import type { FormBuilderModalsProps } from "../types";
 
 export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
   showSettings,
@@ -69,7 +69,7 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
                   }
                   placeholder="Enter form description"
                   rows={3}
-                  value={formSchema.settings.description || ''}
+                  value={formSchema.settings.description || ""}
                 />
               </div>
 
@@ -81,7 +81,7 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
                     onFormSettingsUpdate({ submitText: e.target.value })
                   }
                   placeholder="Submit button text"
-                  value={formSchema.settings.submitText || 'Submit'}
+                  value={formSchema.settings.submitText || "Submit"}
                 />
               </div>
 
@@ -94,7 +94,7 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
                   }
                   placeholder="Message shown after successful submission"
                   rows={2}
-                  value={formSchema.settings.successMessage || ''}
+                  value={formSchema.settings.successMessage || ""}
                 />
               </div>
 
@@ -106,7 +106,7 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
                     onFormSettingsUpdate({ redirectUrl: e.target.value })
                   }
                   placeholder="https://example.com/thank-you"
-                  value={formSchema.settings.redirectUrl || ''}
+                  value={formSchema.settings.redirectUrl || ""}
                 />
               </div>
             </div>

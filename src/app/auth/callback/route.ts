@@ -1,15 +1,15 @@
-import { type NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from "next/server";
 import {
   sendNewLoginEmail,
   sendWelcomeEmail,
-} from '@/lib/services/notifications';
+} from "@/lib/services/notifications";
 
-import { createClient } from '@/utils/supabase/server';
+import { createClient } from "@/utils/supabase/server";
 
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
-  const code = searchParams.get('code');
-  const next = searchParams.get('next') ?? '/dashboard';
+  const code = searchParams.get("code");
+  const next = searchParams.get("next") ?? "/dashboard";
 
   if (code) {
     const supabase = await createClient();
@@ -30,12 +30,12 @@ export async function GET(request: NextRequest) {
             user_metadata?.full_name ||
             user_metadata?.name ||
             user_metadata?.user_name ||
-            email.split('@')[0] ||
-            '';
+            email.split("@")[0] ||
+            "";
           const { data: existingUser } = await supabase
-            .from('users')
-            .select('email, has_premium, polar_customer_id')
-            .eq('email', email)
+            .from("users")
+            .select("email, has_premium, polar_customer_id")
+            .eq("email", email)
             .single();
           const isNewUser = !existingUser;
 
@@ -57,8 +57,8 @@ export async function GET(request: NextRequest) {
           }
 
           const { error: upsertError } = await supabase
-            .from('users')
-            .upsert(upsertData, { onConflict: 'email' });
+            .from("users")
+            .upsert(upsertData, { onConflict: "email" });
 
           if (!upsertError) {
             if (isNewUser) {

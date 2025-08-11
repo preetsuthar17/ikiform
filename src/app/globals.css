@@ -71,7 +71,7 @@
 :root {
   --radius: 8px;
   --card-radius: 10px;
-    --hu-background: 0, 0%, 99%;
+  --hu-background: 0, 0%, 99%;
   --hu-foreground: 0, 0%, 10%;
   --hu-card: 0, 0%, 98%;
   --hu-card-foreground: 0, 0%, 10%;
@@ -88,7 +88,7 @@
   --hu-border: 0, 0%, 95%;
   --hu-input: 0, 0%, 100%;
   --hu-ring: 0, 0%, 50%;
-  --hu-home-card-bg: 228,79%,52%;
+  --hu-home-card-bg: 228, 79%, 52%;
 }
 
 .dark {
@@ -109,7 +109,7 @@
   --hu-border: 0, 0%, 15%;
   --hu-input: 0, 0%, 14%;
   --hu-ring: 0 0% 48%;
-  --hu-home-card-bg: 228,79%,52%;
+  --hu-home-card-bg: 228, 79%, 52%;
 }
 
 ::selection {

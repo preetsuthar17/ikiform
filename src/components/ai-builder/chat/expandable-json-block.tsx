@@ -1,10 +1,10 @@
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import { motion } from 'motion/react';
-import { useTheme } from 'next-themes';
-import { memo, useEffect, useMemo, useState } from 'react';
-import { createHighlighter } from 'shiki';
-import { Button } from '@/components/ui/button';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { motion } from "motion/react";
+import { useTheme } from "next-themes";
+import { memo, useEffect, useMemo, useState } from "react";
+import { createHighlighter } from "shiki";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface ExpandableJsonBlockProps {
   schema: any;
@@ -18,8 +18,8 @@ const getHighlighter = async () => {
   if (highlighterPromise) return highlighterPromise;
 
   highlighterPromise = createHighlighter({
-    themes: ['github-dark', 'github-light'],
-    langs: ['json'],
+    themes: ["github-dark", "github-light"],
+    langs: ["json"],
   });
 
   highlighterInstance = await highlighterPromise;
@@ -30,7 +30,7 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
   schema,
 }: ExpandableJsonBlockProps) {
   const [expanded, setExpanded] = useState(false);
-  const [highlightedCode, setHighlightedCode] = useState<string>('');
+  const [highlightedCode, setHighlightedCode] = useState<string>("");
   const { theme } = useTheme();
   const targetHeight = expanded ? 300 : 100;
 
@@ -44,9 +44,9 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
         const highlighter = await getHighlighter();
         if (!isMounted) return;
 
-        const selectedTheme = theme === 'dark' ? 'github-dark' : 'github-light';
+        const selectedTheme = theme === "dark" ? "github-dark" : "github-light";
         const html = highlighter.codeToHtml(jsonString, {
-          lang: 'json',
+          lang: "json",
           theme: selectedTheme,
         });
 
@@ -54,10 +54,10 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
           setHighlightedCode(html);
         }
       } catch (error) {
-        console.error('Error highlighting code:', error);
+        console.error("Error highlighting code:", error);
         if (isMounted) {
           setHighlightedCode(
-            `<pre class="whitespace-pre-wrap break-words">${jsonString}</pre>`
+            `<pre class="whitespace-pre-wrap break-words">${jsonString}</pre>`,
           );
         }
       }
@@ -76,7 +76,7 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
       <motion.div
         animate={{ height: targetHeight }}
         initial={{ height: 100 }}
-        style={{ overflow: 'hidden' }}
+        style={{ overflow: "hidden" }}
       >
         <ScrollArea className="h-full w-full">
           <div
@@ -97,7 +97,7 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
           ) : (
             <ChevronDown className="h-4 w-4" />
           )}
-          {expanded ? 'Collapse' : 'Expand'}
+          {expanded ? "Collapse" : "Expand"}
         </Button>
       </div>
     </div>

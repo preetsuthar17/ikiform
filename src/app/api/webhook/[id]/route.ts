@@ -1,9 +1,9 @@
-import { type NextRequest, NextResponse } from 'next/server';
-import { deleteWebhook, updateWebhook } from '@/lib/webhooks/outbound';
+import { type NextRequest, NextResponse } from "next/server";
+import { deleteWebhook, updateWebhook } from "@/lib/webhooks/outbound";
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const body = await req.json();
@@ -13,16 +13,16 @@ export async function PUT(
     return NextResponse.json(
       {
         error:
-          error instanceof Error ? error.message : 'Failed to update webhook',
+          error instanceof Error ? error.message : "Failed to update webhook",
       },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }
 
 export async function DELETE(
   _req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     await deleteWebhook((await params).id);
@@ -31,9 +31,9 @@ export async function DELETE(
     return NextResponse.json(
       {
         error:
-          error instanceof Error ? error.message : 'Failed to delete webhook',
+          error instanceof Error ? error.message : "Failed to delete webhook",
       },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }

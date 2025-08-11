@@ -1,19 +1,19 @@
-import { X } from 'lucide-react';
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
-import { Switch } from '@/components/ui/switch';
-import type { FieldSettingsProps } from './types';
+import { X } from "lucide-react";
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { Switch } from "@/components/ui/switch";
+import type { FieldSettingsProps } from "./types";
 
 export function PollFieldSettings({
   field,
   onUpdateSettings,
   onFieldUpdate,
 }: FieldSettingsProps) {
-  const [newOption, setNewOption] = useState('');
+  const [newOption, setNewOption] = useState("");
 
   return (
     <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
@@ -28,19 +28,19 @@ export function PollFieldSettings({
             id="poll-option-input"
             onChange={(e) => setNewOption(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' && newOption.trim()) {
+              if (e.key === "Enter" && newOption.trim()) {
                 onUpdateSettings({
                   pollOptions: [
                     ...(field.settings?.pollOptions || []),
                     newOption.trim(),
                   ],
                 });
-                setNewOption('');
+                setNewOption("");
               }
             }}
             placeholder="Add option"
             type="text"
-            value={newOption || ''}
+            value={newOption || ""}
           />
           <Button
             disabled={!(newOption && newOption.trim())}
@@ -52,7 +52,7 @@ export function PollFieldSettings({
                     newOption.trim(),
                   ],
                 });
-                setNewOption('');
+                setNewOption("");
               }
             }}
             size="sm"
@@ -102,7 +102,7 @@ export function PollFieldSettings({
             }
             placeholder="https://your-api.com/options"
             type="url"
-            value={field.optionsApi || ''}
+            value={field.optionsApi || ""}
           />
           <div className="mb-2 flex gap-2">
             <Input
@@ -113,7 +113,7 @@ export function PollFieldSettings({
               }
               placeholder="Value key (e.g. id)"
               type="text"
-              value={field.valueKey || ''}
+              value={field.valueKey || ""}
             />
             <Input
               className="border-border bg-input"
@@ -123,7 +123,7 @@ export function PollFieldSettings({
               }
               placeholder="Label key (e.g. name)"
               type="text"
-              value={field.labelKey || ''}
+              value={field.labelKey || ""}
             />
           </div>
           {field.optionsApi && (
@@ -137,23 +137,23 @@ export function PollFieldSettings({
                 The API should return either:
                 <ul className="mt-1 ml-6 list-disc">
                   <li>
-                    <code>["Option 1", "Option 2", ...]</code>{' '}
+                    <code>["Option 1", "Option 2", ...]</code>{" "}
                     <em>(array of strings)</em>
                   </li>
                   <li>
                     <code>
                       [&#123; value: "opt1", label: "Option 1" &#125;, ...]
-                    </code>{' '}
+                    </code>{" "}
                     <em>(array of objects)</em>
                   </li>
                   <li>
-                    <code>&#123; options: [...] &#125;</code>{' '}
+                    <code>&#123; options: [...] &#125;</code>{" "}
                     <em>(object with options array)</em>
                   </li>
                   <li>
                     <code>
                       [&#123; id: "opt1", name: "Option 1" &#125;, ...]
-                    </code>{' '}
+                    </code>{" "}
                     <em>(custom keys)</em>
                   </li>
                 </ul>
@@ -175,7 +175,7 @@ export function PollFieldSettings({
           onCheckedChange={(checked) =>
             onUpdateSettings({ showResults: checked })
           }
-          size={'sm'}
+          size={"sm"}
         />
         <Label className="text-card-foreground" htmlFor="poll-show-results">
           Show results after voting

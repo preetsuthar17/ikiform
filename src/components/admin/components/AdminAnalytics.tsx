@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Activity,
@@ -15,20 +15,20 @@ import {
   TrendingUp,
   Users,
   Zap,
-} from 'lucide-react';
-import { useMemo } from 'react';
-import { formatDate } from '@/components/dashboard/forms-management/utils';
-import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
-import { DataTable, type DataTableColumn } from '@/components/ui/table';
-import { useAdminData } from '../hooks/useAdminData';
+} from "lucide-react";
+import { useMemo } from "react";
+import { formatDate } from "@/components/dashboard/forms-management/utils";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { DataTable, type DataTableColumn } from "@/components/ui/table";
+import { useAdminData } from "../hooks/useAdminData";
 import {
   GradientAreaChart,
   GradientBarChart,
   GradientLineChart,
   GradientPieChart,
   MultiAreaChart,
-} from './charts';
+} from "./charts";
 
 interface AnalyticsData {
   form_id: string;
@@ -66,23 +66,23 @@ export function AdminAnalytics() {
     const publishedForms = allForms.filter((f) => f.is_published).length;
 
     const usersThisWeek = users.filter(
-      (u) => new Date(u.created_at) >= weekAgo
+      (u) => new Date(u.created_at) >= weekAgo,
     ).length;
     const formsThisWeek = allForms.filter(
-      (f) => new Date(f.created_at) >= weekAgo
+      (f) => new Date(f.created_at) >= weekAgo,
     ).length;
     const submissionsThisWeek = submissions.filter(
-      (s) => new Date(s.submitted_at) >= weekAgo
+      (s) => new Date(s.submitted_at) >= weekAgo,
     ).length;
 
     const usersToday = users.filter(
-      (u) => new Date(u.created_at) >= today
+      (u) => new Date(u.created_at) >= today,
     ).length;
     const formsToday = allForms.filter(
-      (f) => new Date(f.created_at) >= today
+      (f) => new Date(f.created_at) >= today,
     ).length;
     const submissionsToday = submissions.filter(
-      (s) => new Date(s.submitted_at) >= today
+      (s) => new Date(s.submitted_at) >= today,
     ).length;
 
     const premiumUsers = users.filter((u) => u.has_premium).length;
@@ -94,21 +94,21 @@ export function AdminAnalytics() {
     const formAnalytics: AnalyticsData[] = allForms.map((form) => {
       const formSubmissions = submissions.filter((s) => s.form_id === form.id);
       const submissionsToday = formSubmissions.filter(
-        (s) => new Date(s.submitted_at) >= today
+        (s) => new Date(s.submitted_at) >= today,
       ).length;
       const submissionsThisWeek = formSubmissions.filter(
-        (s) => new Date(s.submitted_at) >= weekAgo
+        (s) => new Date(s.submitted_at) >= weekAgo,
       ).length;
       const submissionsThisMonth = formSubmissions.filter(
-        (s) => new Date(s.submitted_at) >= monthAgo
+        (s) => new Date(s.submitted_at) >= monthAgo,
       ).length;
 
       const formAge = Math.max(
         1,
         Math.floor(
           (now.getTime() - new Date(form.created_at).getTime()) /
-            (1000 * 60 * 60 * 24)
-        )
+            (1000 * 60 * 60 * 24),
+        ),
       );
       const avgDaily = formSubmissions.length / formAge;
 
@@ -141,7 +141,7 @@ export function AdminAnalytics() {
             ? formSubmissions.sort(
                 (a, b) =>
                   new Date(b.submitted_at).getTime() -
-                  new Date(a.submitted_at).getTime()
+                  new Date(a.submitted_at).getTime(),
               )[0].submitted_at
             : form.created_at,
         created_at: form.created_at,
@@ -154,12 +154,12 @@ export function AdminAnalytics() {
     const timeSeries: TimeSeriesData[] = [];
     for (let i = 29; i >= 0; i--) {
       const date = new Date(today.getTime() - i * 24 * 60 * 60 * 1000);
-      const dateStr = date.toISOString().split('T')[0];
+      const dateStr = date.toISOString().split("T")[0];
 
       timeSeries.push({
         date: dateStr,
         submissions: submissions.filter((s) =>
-          s.submitted_at.startsWith(dateStr)
+          s.submitted_at.startsWith(dateStr),
         ).length,
         forms_created: allForms.filter((f) => f.created_at.startsWith(dateStr))
           .length,
@@ -190,8 +190,8 @@ export function AdminAnalytics() {
 
   const columns: DataTableColumn<AnalyticsData>[] = [
     {
-      key: 'form_title',
-      header: 'Form',
+      key: "form_title",
+      header: "Form",
       sortable: true,
       filterable: true,
       render: (value, row) => (
@@ -211,10 +211,10 @@ export function AdminAnalytics() {
       ),
     },
     {
-      key: 'total_submissions',
-      header: 'Total',
+      key: "total_submissions",
+      header: "Total",
       sortable: true,
-      align: 'center',
+      align: "center",
       render: (value) => (
         <div className="text-center">
           <div className="font-semibold text-lg">{value}</div>
@@ -223,55 +223,55 @@ export function AdminAnalytics() {
       ),
     },
     {
-      key: 'submissions_today',
-      header: 'Today',
+      key: "submissions_today",
+      header: "Today",
       sortable: true,
-      align: 'center',
+      align: "center",
       render: (value) => (
         <Badge
           className="font-mono"
-          variant={value > 0 ? 'default' : 'secondary'}
+          variant={value > 0 ? "default" : "secondary"}
         >
           {value}
         </Badge>
       ),
     },
     {
-      key: 'submissions_this_week',
-      header: 'This Week',
+      key: "submissions_this_week",
+      header: "This Week",
       sortable: true,
-      align: 'center',
+      align: "center",
       render: (value) => (
         <Badge
           className="font-mono"
-          variant={value > 0 ? 'default' : 'secondary'}
+          variant={value > 0 ? "default" : "secondary"}
         >
           {value}
         </Badge>
       ),
     },
     {
-      key: 'avg_daily_submissions',
-      header: 'Avg/Day',
+      key: "avg_daily_submissions",
+      header: "Avg/Day",
       sortable: true,
-      align: 'center',
+      align: "center",
       render: (value) => (
         <div className="text-center text-sm">{value.toFixed(1)}</div>
       ),
     },
     {
-      key: 'growth_rate',
-      header: 'Growth',
+      key: "growth_rate",
+      header: "Growth",
       sortable: true,
-      align: 'center',
+      align: "center",
       render: (value) => (
         <div
           className={`flex items-center justify-center gap-1 text-center ${
             value > 0
-              ? 'text-green-600'
+              ? "text-green-600"
               : value < 0
-                ? 'text-red-600'
-                : 'text-gray-500'
+                ? "text-red-600"
+                : "text-gray-500"
           }`}
         >
           {value > 0 ? (
@@ -288,8 +288,8 @@ export function AdminAnalytics() {
       ),
     },
     {
-      key: 'last_submission',
-      header: 'Last Activity',
+      key: "last_submission",
+      header: "Last Activity",
       sortable: true,
       render: (value) => (
         <div className="text-muted-foreground text-sm">{formatDate(value)}</div>
@@ -453,7 +453,7 @@ export function AdminAnalytics() {
               <Badge variant="outline">
                 {
                   analytics.formAnalytics.filter(
-                    (f) => f.submissions_this_week > 0
+                    (f) => f.submissions_this_week > 0,
                   ).length
                 }
               </Badge>
@@ -476,7 +476,7 @@ export function AdminAnalytics() {
                     Math.max(
                       analytics.overview.totalUsers -
                         analytics.overview.usersThisWeek,
-                      1
+                      1,
                     )) *
                   100
                 ).toFixed(1)}

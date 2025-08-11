@@ -1,12 +1,12 @@
-import { Draggable } from '@hello-pangea/dnd';
+import { Draggable } from "@hello-pangea/dnd";
 
-import { GripVertical } from 'lucide-react';
-import { Card } from '@/components/ui/card';
+import { GripVertical } from "lucide-react";
+import { Card } from "@/components/ui/card";
 
-import type { BlockItemProps } from '../types';
-import { BlockEditForm } from './BlockEditForm';
-import { BlockFieldsList } from './BlockFieldsList';
-import { BlockHeader } from './BlockHeader';
+import type { BlockItemProps } from "../types";
+import { BlockEditForm } from "./BlockEditForm";
+import { BlockFieldsList } from "./BlockFieldsList";
+import { BlockHeader } from "./BlockHeader";
 
 interface DraggableBlockItemProps extends BlockItemProps {
   editTitle: string;
@@ -45,7 +45,7 @@ export function BlockItem({
           ref={provided.innerRef}
           {...provided.draggableProps}
           className={`flex flex-col gap-3 transition-all duration-200 ${
-            isSelected ? 'border border-primary/40' : ''
+            isSelected ? "border border-primary/40" : ""
           }`}
         >
           <div className="flex items-center gap-3">

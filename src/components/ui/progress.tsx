@@ -1,67 +1,67 @@
-'use client';
+"use client";
 
-import * as ProgressPrimitive from '@radix-ui/react-progress';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { motion } from 'motion/react';
-import * as React from 'react';
-import { cn } from '@/lib/utils';
+import * as ProgressPrimitive from "@radix-ui/react-progress";
+import { cva, type VariantProps } from "class-variance-authority";
+import { motion } from "motion/react";
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
 const progressVariants = cva(
-  'relative overflow-hidden rounded-card bg-secondary',
+  "relative overflow-hidden rounded-card bg-secondary",
   {
     variants: {
       variant: {
-        default: 'bg-secondary',
-        primary: 'bg-primary/10',
-        secondary: 'bg-secondary',
-        destructive: 'bg-destructive/10',
-        outline: 'border border-border bg-accent',
+        default: "bg-secondary",
+        primary: "bg-primary/10",
+        secondary: "bg-secondary",
+        destructive: "bg-destructive/10",
+        outline: "border border-border bg-accent",
       },
       size: {
-        sm: 'h-1.5',
-        default: 'h-2.5',
-        lg: 'h-3',
+        sm: "h-1.5",
+        default: "h-2.5",
+        lg: "h-3",
       },
     },
     defaultVariants: {
-      variant: 'default',
-      size: 'default',
+      variant: "default",
+      size: "default",
     },
-  }
+  },
 );
 
 const progressIndicatorVariants = cva(
-  'h-full w-full flex-1 rounded-card transition-all duration-500 ease-out',
+  "h-full w-full flex-1 rounded-card transition-all duration-500 ease-out",
   {
     variants: {
       variant: {
-        default: 'bg-primary',
-        primary: 'bg-primary',
-        secondary: 'bg-foreground',
-        destructive: 'bg-destructive',
-        outline: 'bg-primary',
+        default: "bg-primary",
+        primary: "bg-primary",
+        secondary: "bg-foreground",
+        destructive: "bg-destructive",
+        outline: "bg-primary",
       },
     },
     defaultVariants: {
-      variant: 'default',
+      variant: "default",
     },
-  }
+  },
 );
 
 const circularProgressVariants = cva(
-  'relative flex items-center justify-center',
+  "relative flex items-center justify-center",
   {
     variants: {
       size: {
-        sm: 'h-12 w-12',
-        default: 'h-16 w-16',
-        lg: 'h-20 w-20',
+        sm: "h-12 w-12",
+        default: "h-16 w-16",
+        lg: "h-20 w-20",
       },
     },
     defaultVariants: {
-      size: 'default',
+      size: "default",
     },
-  }
+  },
 );
 
 export interface ProgressProps
@@ -70,7 +70,7 @@ export interface ProgressProps
   value?: number;
   showValue?: boolean;
   animated?: boolean;
-  type?: 'linear' | 'circular';
+  type?: "linear" | "circular";
   strokeWidth?: number;
   label?: string;
 }
@@ -87,16 +87,16 @@ const Progress = React.forwardRef<
       size,
       showValue = false,
       animated = true,
-      type = 'linear',
+      type = "linear",
       strokeWidth,
       label,
       ...props
     },
-    ref
+    ref,
   ) => {
     const progress = Math.min(Math.max(value, 0), 100);
-    if (type === 'circular') {
-      const circleSize = size === 'sm' ? 48 : size === 'lg' ? 80 : 64;
+    if (type === "circular") {
+      const circleSize = size === "sm" ? 48 : size === "lg" ? 80 : 64;
       const radius = (circleSize - (strokeWidth || 8)) / 2;
       const circumference = 2 * Math.PI * radius;
       const strokeDashoffset = circumference - (progress / 100) * circumference;
@@ -133,20 +133,20 @@ const Progress = React.forwardRef<
                 initial={{ strokeDashoffset: circumference }}
                 r={radius}
                 stroke={
-                  variant === 'destructive'
-                    ? 'hsl(var(--hu-destructive))'
-                    : variant === 'secondary'
-                      ? 'hsl(var(--hu-secondary-foreground))'
-                      : variant === 'outline'
-                        ? 'hsl(var(--hu-foreground))'
-                        : 'hsl(var(--hu-primary))'
+                  variant === "destructive"
+                    ? "hsl(var(--hu-destructive))"
+                    : variant === "secondary"
+                      ? "hsl(var(--hu-secondary-foreground))"
+                      : variant === "outline"
+                        ? "hsl(var(--hu-foreground))"
+                        : "hsl(var(--hu-primary))"
                 }
                 strokeDasharray={circumference}
                 strokeLinecap="round"
                 strokeWidth={strokeWidth || 8}
                 transition={{
                   duration: animated ? 1.5 : 0,
-                  ease: 'easeInOut',
+                  ease: "easeInOut",
                 }}
               />
             </svg>
@@ -188,10 +188,10 @@ const Progress = React.forwardRef<
           >
             <motion.div
               animate={{ transform: `translateX(-${100 - progress}%)` }}
-              initial={{ transform: 'translateX(-100%)' }}
+              initial={{ transform: "translateX(-100%)" }}
               transition={{
                 duration: animated ? 1.2 : 0,
-                ease: 'easeInOut',
+                ease: "easeInOut",
               }}
             />
           </ProgressPrimitive.Indicator>
@@ -208,7 +208,7 @@ const Progress = React.forwardRef<
         )}
       </div>
     );
-  }
+  },
 );
 
 Progress.displayName = ProgressPrimitive.Root.displayName;

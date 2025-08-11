@@ -1,5 +1,5 @@
-import { Ratelimit } from '@upstash/ratelimit';
-import { Redis } from '@upstash/redis';
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
 
 interface RateLimitSettings {
   enabled: boolean;
@@ -10,40 +10,40 @@ interface RateLimitSettings {
 let redis: Redis | null = null;
 
 function getRedisClient(): Redis {
-  if (typeof window !== 'undefined') {
-    throw new Error('Redis client cannot be used on the client side');
+  if (typeof window !== "undefined") {
+    throw new Error("Redis client cannot be used on the client side");
   }
-  
+
   if (!redis) {
     const url = process.env.UPSTASH_REDIS_REST_URL;
     const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-    
+
     if (!url || !token) {
       throw new Error(
-        'Missing required environment variables: UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN'
+        "Missing required environment variables: UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN",
       );
     }
-    
+
     redis = new Redis({
       url,
       token,
     });
   }
-  
+
   return redis;
 }
 
 const defaultSettings: RateLimitSettings = {
   enabled: true,
   maxSubmissions: 5,
-  window: '10 m',
+  window: "10 m",
 };
 
 const rateLimiters = new Map<string, Ratelimit>();
 
 function getRateLimiter(
   settings: RateLimitSettings,
-  prefix = '@upstash/ratelimit'
+  prefix = "@upstash/ratelimit",
 ): Ratelimit {
   const key = `${settings.maxSubmissions}-${settings.window}-${prefix}`;
 
@@ -53,7 +53,7 @@ function getRateLimiter(
       redis: redisClient,
       limiter: Ratelimit.fixedWindow(
         settings.maxSubmissions,
-        settings.window as any
+        settings.window as any,
       ),
       analytics: true,
       prefix,
@@ -66,10 +66,10 @@ function getRateLimiter(
 
 export async function checkRateLimit(
   identifier: string,
-  settings: RateLimitSettings = defaultSettings
+  settings: RateLimitSettings = defaultSettings,
 ) {
-  if (typeof window !== 'undefined') {
-    throw new Error('Rate limiting can only be used on the server side');
+  if (typeof window !== "undefined") {
+    throw new Error("Rate limiting can only be used on the server side");
   }
 
   if (!settings.enabled) {
@@ -90,10 +90,10 @@ export async function checkRateLimit(
 export async function checkCustomRateLimit(
   identifier: string,
   settings: RateLimitSettings,
-  prefix = '@upstash/ratelimit'
+  prefix = "@upstash/ratelimit",
 ) {
-  if (typeof window !== 'undefined') {
-    throw new Error('Rate limiting can only be used on the server side');
+  if (typeof window !== "undefined") {
+    throw new Error("Rate limiting can only be used on the server side");
   }
 
   if (!settings.enabled) {
@@ -122,10 +122,10 @@ interface FormRateLimitSettings {
 export async function checkFormRateLimit(
   ipAddress: string,
   formId: string,
-  settings: FormRateLimitSettings
+  settings: FormRateLimitSettings,
 ) {
-  if (typeof window !== 'undefined') {
-    throw new Error('Rate limiting can only be used on the server side');
+  if (typeof window !== "undefined") {
+    throw new Error("Rate limiting can only be used on the server side");
   }
 
   if (!settings.enabled) {
@@ -134,7 +134,7 @@ export async function checkFormRateLimit(
       limit: 0,
       remaining: 0,
       reset: 0,
-      message: '',
+      message: "",
     };
   }
 
@@ -151,7 +151,7 @@ export async function checkFormRateLimit(
 
   return {
     ...result,
-    message: result.success ? '' : settings.message,
+    message: result.success ? "" : settings.message,
   };
 }
 

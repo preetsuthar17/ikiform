@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   AlertTriangle,
@@ -11,18 +11,18 @@ import {
   User,
   UserCheck,
   UserX,
-} from 'lucide-react';
-import { formatDate } from '@/components/dashboard/forms-management/utils';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { DataTable, type DataTableColumn } from '@/components/ui/table';
-import { useAdminData } from '../hooks/useAdminData';
+} from "lucide-react";
+import { formatDate } from "@/components/dashboard/forms-management/utils";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { DataTable, type DataTableColumn } from "@/components/ui/table";
+import { useAdminData } from "../hooks/useAdminData";
 import {
   GradientAreaChart,
   GradientBarChart,
   GradientPieChart,
-} from './charts';
+} from "./charts";
 
 interface AdminUser {
   uid: string;
@@ -36,7 +36,7 @@ interface AdminUser {
   submission_count?: number;
 }
 
-const FOUNDER_USER_ID = '2be7479a-bf3c-4951-ab71-65bb148b235c';
+const FOUNDER_USER_ID = "2be7479a-bf3c-4951-ab71-65bb148b235c";
 
 export function AdminUsers() {
   const { users, loading, toggleUserPremium, deleteUser } = useAdminData();
@@ -44,7 +44,7 @@ export function AdminUsers() {
   const handleTogglePremium = async (user: AdminUser) => {
     if (
       confirm(
-        `${user.has_premium ? 'Remove' : 'Grant'} premium access for ${user.email}?`
+        `${user.has_premium ? "Remove" : "Grant"} premium access for ${user.email}?`,
       )
     ) {
       await toggleUserPremium(user.email, !user.has_premium);
@@ -53,17 +53,17 @@ export function AdminUsers() {
 
   const handleDeleteUser = async (user: AdminUser) => {
     if (user.uid === FOUNDER_USER_ID) {
-      alert('Cannot delete the founder account!');
+      alert("Cannot delete the founder account!");
       return;
     }
 
     if (
       confirm(
-        `⚠️ DELETE USER: ${user.email}\n\nThis will permanently delete:\n- The user account\n- All their forms\n- All submissions to their forms\n- All AI chat data\n\nThis action cannot be undone!\n\nType "DELETE" to confirm:`
+        `⚠️ DELETE USER: ${user.email}\n\nThis will permanently delete:\n- The user account\n- All their forms\n- All submissions to their forms\n- All AI chat data\n\nThis action cannot be undone!\n\nType "DELETE" to confirm:`,
       )
     ) {
       const confirmation = prompt('Type "DELETE" to confirm this action:');
-      if (confirmation === 'DELETE') {
+      if (confirmation === "DELETE") {
         await deleteUser(user.uid);
       }
     }
@@ -71,8 +71,8 @@ export function AdminUsers() {
 
   const columns: DataTableColumn<AdminUser>[] = [
     {
-      key: 'email',
-      header: 'User',
+      key: "email",
+      header: "User",
       sortable: true,
       filterable: true,
       render: (value, row) => (
@@ -80,8 +80,8 @@ export function AdminUsers() {
           <div
             className={`mt-1 rounded-md p-2 ${
               row.uid === FOUNDER_USER_ID
-                ? 'bg-yellow-100 text-yellow-700'
-                : 'bg-primary/10'
+                ? "bg-yellow-100 text-yellow-700"
+                : "bg-primary/10"
             }`}
           >
             {row.uid === FOUNDER_USER_ID ? (
@@ -118,33 +118,33 @@ export function AdminUsers() {
       ),
     },
     {
-      key: 'has_premium',
-      header: 'Plan',
+      key: "has_premium",
+      header: "Plan",
       sortable: true,
       filterable: true,
-      align: 'center',
+      align: "center",
       render: (value, row) => (
-        <Badge className="gap-1" variant={value ? 'default' : 'secondary'}>
+        <Badge className="gap-1" variant={value ? "default" : "secondary"}>
           {value ? (
             <Crown className="h-3 w-3" />
           ) : (
             <UserCheck className="h-3 w-3" />
           )}
-          {value ? 'Premium' : 'Free'}
+          {value ? "Premium" : "Free"}
         </Badge>
       ),
     },
     {
-      key: 'updated_at',
-      header: 'Last Updated',
+      key: "updated_at",
+      header: "Last Updated",
       sortable: true,
       render: (value) => (
         <div className="text-muted-foreground text-sm">{formatDate(value)}</div>
       ),
     },
     {
-      key: 'created_at',
-      header: 'Joined',
+      key: "created_at",
+      header: "Joined",
       sortable: true,
       render: (value) => (
         <div className="flex items-center gap-2 text-sm">
@@ -153,8 +153,8 @@ export function AdminUsers() {
             <div>{formatDate(value)}</div>
             <div className="text-muted-foreground text-xs">
               {new Date(value).toLocaleTimeString([], {
-                hour: '2-digit',
-                minute: '2-digit',
+                hour: "2-digit",
+                minute: "2-digit",
               })}
             </div>
           </div>
@@ -162,23 +162,23 @@ export function AdminUsers() {
       ),
     },
     {
-      key: 'uid',
-      header: 'Actions',
-      align: 'center',
+      key: "uid",
+      header: "Actions",
+      align: "center",
       render: (value, row) => (
         <div className="flex items-center gap-1">
           {row.uid !== FOUNDER_USER_ID && (
             <>
               <Button
                 className={
-                  row.has_premium ? 'text-orange-600' : 'text-green-600'
+                  row.has_premium ? "text-orange-600" : "text-green-600"
                 }
                 onClick={(e) => {
                   e.stopPropagation();
                   handleTogglePremium(row);
                 }}
                 size="sm"
-                title={row.has_premium ? 'Remove Premium' : 'Grant Premium'}
+                title={row.has_premium ? "Remove Premium" : "Grant Premium"}
                 variant="ghost"
               >
                 <Crown className="h-4 w-4" />
@@ -218,23 +218,23 @@ export function AdminUsers() {
   const chartData = Array.from({ length: 30 }, (_, i) => {
     const date = new Date();
     date.setDate(date.getDate() - (29 - i));
-    const dateStr = date.toISOString().split('T')[0];
+    const dateStr = date.toISOString().split("T")[0];
 
     return {
-      date: date.toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
+      date: date.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
       }),
       users: users.filter((u) => u.created_at.startsWith(dateStr)).length,
       premium_signups: users.filter(
-        (u) => u.created_at.startsWith(dateStr) && u.has_premium
+        (u) => u.created_at.startsWith(dateStr) && u.has_premium,
       ).length,
     };
   });
 
   const userTypeData = [
-    { name: 'Premium Users', value: users.filter((u) => u.has_premium).length },
-    { name: 'Free Users', value: users.filter((u) => !u.has_premium).length },
+    { name: "Premium Users", value: users.filter((u) => u.has_premium).length },
+    { name: "Free Users", value: users.filter((u) => !u.has_premium).length },
   ];
 
   return (
@@ -248,7 +248,7 @@ export function AdminUsers() {
             <div>
               <h2 className="font-semibold text-xl">Users Management</h2>
               <p className="text-muted-foreground text-sm">
-                {users.length} users total •{' '}
+                {users.length} users total •{" "}
                 {users.filter((u) => u.has_premium).length} premium
               </p>
             </div>

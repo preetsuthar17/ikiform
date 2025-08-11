@@ -4,8 +4,8 @@ import {
   ChatWelcomeSkeleton,
   FormPreviewSkeleton,
   PreviewPanelHeaderSkeleton,
-} from '@/components/ui/loading-skeletons';
-import { Skeleton } from '@/components/ui/skeleton';
+} from "@/components/ui/loading-skeletons";
+import { Skeleton } from "@/components/ui/skeleton";
 
 /**
  * Precise skeleton loader for AI Builder that matches the exact layout
@@ -35,7 +35,7 @@ export function AIBuilderSkeleton() {
         {}
         <div
           className="flex w-1/5 min-w-[15%] max-w-[30%] flex-col border-r"
-          style={{ width: '20%' }}
+          style={{ width: "20%" }}
         >
           {}
           <ChatHeaderSkeleton />
@@ -69,7 +69,7 @@ export function AIBuilderSkeleton() {
         <div className="w-1 cursor-col-resize bg-border transition-colors hover:bg-border/80" />
 
         {}
-        <div className="flex flex-1 flex-col" style={{ width: '80%' }}>
+        <div className="flex flex-1 flex-col" style={{ width: "80%" }}>
           {}
           <PreviewPanelHeaderSkeleton isMobile={false} />
 

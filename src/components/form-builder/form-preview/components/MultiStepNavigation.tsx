@@ -1,9 +1,9 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import React from 'react';
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import React from "react";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 
-import type { MultiStepNavigationProps } from '../types';
+import type { MultiStepNavigationProps } from "../types";
 
 export function MultiStepNavigation({
   schema,
@@ -65,10 +65,10 @@ export function MultiStepNavigation({
             <button
               className={`h-8 w-8 rounded-card font-medium text-sm transition-colors ${
                 index === currentStepIndex
-                  ? 'bg-primary text-primary-foreground'
+                  ? "bg-primary text-primary-foreground"
                   : index < currentStepIndex
-                    ? 'bg-primary/20 text-primary'
-                    : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                    ? "bg-primary/20 text-primary"
+                    : "bg-muted text-muted-foreground hover:bg-muted/80"
               }`}
               key={index}
               onClick={() => handleStepClick(index)}

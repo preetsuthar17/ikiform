@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Privacy() {
   return (
@@ -100,7 +100,7 @@ export default function Privacy() {
               marketing or promotional materials and other information that may
               be of interest to you. You may opt out of receiving any, or all,
               of these communications from us by following the unsubscribe link
-              or by emailing to{' '}
+              or by emailing to{" "}
               <Link
                 className="text-blue-500 underline"
                 href="mailto:hi@ikiform.com"
@@ -212,7 +212,7 @@ export default function Privacy() {
           including the security of your data and other personal information.
         </p>
         <p>
-          For more details about our subprocessors, please see our{' '}
+          For more details about our subprocessors, please see our{" "}
           <Link className="text-blue-500 underline" href="/legal/gdpr">
             GDPR Compliance Page
           </Link>
@@ -251,7 +251,7 @@ export default function Privacy() {
         <h2 className="font-semibold text-2xl">10. Contact Us</h2>
         <p>
           If you have any questions about this Privacy Policy, please contact
-          us:{' '}
+          us:{" "}
           <Link
             className="text-blue-500 underline"
             href="mailto:hi@ikiform.com"

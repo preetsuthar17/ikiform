@@ -1,16 +1,16 @@
-import React from 'react';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import React from "react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
-import type { SettingsSection } from '../types';
+import type { SettingsSection } from "../types";
 import {
   getContentAreaStyles,
   getDesktopLayoutStyles,
   getSidebarStyles,
-} from '../utils';
+} from "../utils";
 
-import { ModalHeader } from './ModalHeader';
-import { SettingsContent } from './SettingsContent';
-import { SidebarNavigation } from './SidebarNavigation';
+import { ModalHeader } from "./ModalHeader";
+import { SettingsContent } from "./SettingsContent";
+import { SidebarNavigation } from "./SidebarNavigation";
 
 interface DesktopLayoutProps {
   activeSection: SettingsSection;

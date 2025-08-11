@@ -1,6 +1,6 @@
-import type React from 'react';
+import type React from "react";
 
-import { APPEARANCE_SETTINGS } from '../constants';
+import { APPEARANCE_SETTINGS } from "../constants";
 
 export const AppearanceHeader: React.FC = () => {
   return (

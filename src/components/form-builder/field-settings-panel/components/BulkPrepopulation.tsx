@@ -7,22 +7,22 @@ import {
   Trash2,
   User,
   Zap,
-} from 'lucide-react';
-import React, { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
+} from "lucide-react";
+import React, { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Switch } from '@/components/ui/switch';
-import { toast } from '@/hooks/use-toast';
-import type { FormField, FormSchema } from '@/lib/database';
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { toast } from "@/hooks/use-toast";
+import type { FormField, FormSchema } from "@/lib/database";
 
 interface BulkPrepopulationProps {
   schema: FormSchema;
@@ -33,30 +33,30 @@ export function BulkPrepopulation({
   schema,
   onFieldUpdate,
 }: BulkPrepopulationProps) {
-  const [bulkSource, setBulkSource] = useState<'url' | 'api' | 'profile'>(
-    'url'
+  const [bulkSource, setBulkSource] = useState<"url" | "api" | "profile">(
+    "url",
   );
 
   const compatibleFields =
     schema.fields?.filter((field) =>
-      ['text', 'email', 'textarea', 'select', 'checkbox', 'date'].includes(
-        field.type
-      )
+      ["text", "email", "textarea", "select", "checkbox", "date"].includes(
+        field.type,
+      ),
     ) || [];
 
   const fieldsWithPrepopulation = compatibleFields.filter(
-    (field) => field.prepopulation?.enabled
+    (field) => field.prepopulation?.enabled,
   );
 
   const bulkPrepopulationEnabled = fieldsWithPrepopulation.length > 0;
 
   const getSourceIcon = (source: string) => {
     switch (source) {
-      case 'url':
+      case "url":
         return <Globe className="h-4 w-4" />;
-      case 'api':
+      case "api":
         return <Zap className="h-4 w-4" />;
-      case 'profile':
+      case "profile":
         return <User className="h-4 w-4" />;
       default:
         return <Settings className="h-4 w-4" />;
@@ -65,14 +65,14 @@ export function BulkPrepopulation({
 
   const getSourceDescription = (source: string) => {
     switch (source) {
-      case 'url':
-        return 'Pre-fill fields using URL parameters (e.g., ?name=John&email=john@example.com)';
-      case 'api':
-        return 'Fetch data from external API endpoints to populate fields automatically';
-      case 'profile':
-        return 'Use logged-in user profile data to pre-populate form fields';
+      case "url":
+        return "Pre-fill fields using URL parameters (e.g., ?name=John&email=john@example.com)";
+      case "api":
+        return "Fetch data from external API endpoints to populate fields automatically";
+      case "profile":
+        return "Use logged-in user profile data to pre-populate form fields";
       default:
-        return '';
+        return "";
     }
   };
 
@@ -82,25 +82,25 @@ export function BulkPrepopulation({
       if (!field.prepopulation?.enabled) {
         const urlParam = field.label
           .toLowerCase()
-          .replace(/\s+/g, '_')
-          .replace(/[^a-z0-9_]/g, '');
+          .replace(/\s+/g, "_")
+          .replace(/[^a-z0-9_]/g, "");
 
         let profileField:
-          | 'email'
-          | 'phone'
-          | 'address'
-          | 'name'
-          | 'custom'
+          | "email"
+          | "phone"
+          | "address"
+          | "name"
+          | "custom"
           | undefined;
-        if (bulkSource === 'profile') {
-          if (field.type === 'email') profileField = 'email';
-          else if (field.label.toLowerCase().includes('phone'))
-            profileField = 'phone';
-          else if (field.label.toLowerCase().includes('address'))
-            profileField = 'address';
-          else if (field.label.toLowerCase().includes('name'))
-            profileField = 'name';
-          else profileField = 'custom';
+        if (bulkSource === "profile") {
+          if (field.type === "email") profileField = "email";
+          else if (field.label.toLowerCase().includes("phone"))
+            profileField = "phone";
+          else if (field.label.toLowerCase().includes("address"))
+            profileField = "address";
+          else if (field.label.toLowerCase().includes("name"))
+            profileField = "name";
+          else profileField = "custom";
         }
 
         onFieldUpdate(field.id, {
@@ -108,8 +108,8 @@ export function BulkPrepopulation({
             enabled: true,
             source: bulkSource,
             config: {
-              urlParam: bulkSource === 'url' ? urlParam : undefined,
-              apiEndpoint: bulkSource === 'api' ? '' : undefined,
+              urlParam: bulkSource === "url" ? urlParam : undefined,
+              apiEndpoint: bulkSource === "api" ? "" : undefined,
               profileField,
             },
           },
@@ -119,7 +119,7 @@ export function BulkPrepopulation({
     });
 
     toast(
-      `Enabled prepopulation for ${enabled} fields using ${bulkSource.toUpperCase()} source`
+      `Enabled prepopulation for ${enabled} fields using ${bulkSource.toUpperCase()} source`,
     );
   };
 
@@ -129,7 +129,7 @@ export function BulkPrepopulation({
       onFieldUpdate(field.id, {
         prepopulation: {
           enabled: false,
-          source: 'url',
+          source: "url",
           config: {},
         },
       });
@@ -142,30 +142,30 @@ export function BulkPrepopulation({
   const generatePreviewUrl = async () => {
     const currentPath = window.location.pathname;
     const formIdMatch = currentPath.match(/\/form-builder\/([^/]+)/);
-    const formId = formIdMatch ? formIdMatch[1] : 'form-id';
+    const formId = formIdMatch ? formIdMatch[1] : "form-id";
 
     const baseUrl = `${window.location.origin}/form/${formId}`;
     const params = new URLSearchParams();
 
     fieldsWithPrepopulation.forEach((field) => {
       if (
-        field.prepopulation?.source === 'url' &&
+        field.prepopulation?.source === "url" &&
         field.prepopulation.config.urlParam
       ) {
         params.append(
           field.prepopulation.config.urlParam,
-          `sample_${field.type}_value`
+          `sample_${field.type}_value`,
         );
       }
     });
 
     const previewUrl = `${baseUrl}?${params.toString()}`;
 
-    const { copyWithToast } = await import('@/lib/utils/clipboard');
+    const { copyWithToast } = await import("@/lib/utils/clipboard");
     await copyWithToast(
       previewUrl,
-      'Preview URL with sample data has been copied to your clipboard',
-      'Failed to copy preview URL'
+      "Preview URL with sample data has been copied to your clipboard",
+      "Failed to copy preview URL",
     );
   };
 
@@ -335,7 +335,7 @@ export function BulkPrepopulation({
                   </div>
 
                   <div className="flex shrink-0 items-center gap-2">
-                    {field.prepopulation?.source === 'url' &&
+                    {field.prepopulation?.source === "url" &&
                       field.prepopulation.config.urlParam && (
                         <code className="rounded bg-muted px-2 py-1 font-mono text-xs">
                           ?{field.prepopulation.config.urlParam}=...

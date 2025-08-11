@@ -1,12 +1,12 @@
-import type React from 'react';
-import { useEffect, useRef } from 'react';
-import { FormFieldRenderer } from '@/components/form-builder/form-field-renderer';
-import { getLivePatternError } from '@/components/form-builder/form-field-renderer/components/TextInputField';
-import { Separator } from '@/components/ui';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { SocialMediaIcons } from '@/components/ui/social-media-icons';
-import type { FormField, FormSchema } from '@/lib/database';
+import type React from "react";
+import { useEffect, useRef } from "react";
+import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
+import { getLivePatternError } from "@/components/form-builder/form-field-renderer/components/TextInputField";
+import { Separator } from "@/components/ui";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { SocialMediaIcons } from "@/components/ui/social-media-icons";
+import type { FormField, FormSchema } from "@/lib/database";
 
 interface SingleStepFormContentProps {
   formId: string;
@@ -46,8 +46,8 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
 
   return (
     <Card
-      className={`flex grow flex-col gap-6 rounded-card p-8 ${schema.settings.designMode === 'minimal' ? 'border-none bg-transparent shadow-none hover:bg-transparent' : ''}`}
-      variant={schema.settings.designMode === 'minimal' ? 'ghost' : 'default'}
+      className={`flex grow flex-col gap-6 rounded-card p-8 ${schema.settings.designMode === "minimal" ? "border-none bg-transparent shadow-none hover:bg-transparent" : ""}`}
+      variant={schema.settings.designMode === "minimal" ? "ghost" : "default"}
     >
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
@@ -64,11 +64,11 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
 
         {schema.settings.branding?.socialMedia?.enabled &&
           schema.settings.branding.socialMedia.platforms &&
-          (schema.settings.branding.socialMedia.position === 'header' ||
-            schema.settings.branding.socialMedia.position === 'both') && (
+          (schema.settings.branding.socialMedia.position === "header" ||
+            schema.settings.branding.socialMedia.position === "both") && (
             <SocialMediaIcons
               className="justify-start"
-              iconSize={schema.settings.branding.socialMedia.iconSize || 'md'}
+              iconSize={schema.settings.branding.socialMedia.iconSize || "md"}
               platforms={schema.settings.branding.socialMedia.platforms}
             />
           )}
@@ -104,7 +104,7 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
         {(() => {
           for (const field of visibleFields) {
             if (
-              ['text', 'email', 'textarea'].includes(field.type) &&
+              ["text", "email", "textarea"].includes(field.type) &&
               getLivePatternError(field, formData[field.id])
             ) {
               return (
@@ -117,21 +117,21 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
           return null;
         })()}
 
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <Button
             className="w-fit sm:w-auto"
             disabled={
               submitting ||
               visibleFields.some(
                 (field) =>
-                  ['text', 'email', 'textarea'].includes(field.type) &&
-                  getLivePatternError(field, formData[field.id])
+                  ["text", "email", "textarea"].includes(field.type) &&
+                  getLivePatternError(field, formData[field.id]),
               )
             }
             loading={submitting}
             type="submit"
           >
-            {submitting ? 'Submitting' : schema.settings.submitText || 'Submit'}
+            {submitting ? "Submitting" : schema.settings.submitText || "Submit"}
           </Button>
         </div>
       </form>

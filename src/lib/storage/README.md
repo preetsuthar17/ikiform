@@ -62,6 +62,7 @@ form-files/
 ### File Type Configuration
 
 **Quick Select Presets**:
+
 - Images: jpg, jpeg, png, gif, webp
 - Documents: pdf, doc, docx
 - Spreadsheets: xls, xlsx
@@ -77,12 +78,12 @@ Files are stored as arrays of objects:
 
 ```typescript
 interface UploadedFile {
-  id: string;           // Unique file identifier
-  name: string;         // Original filename
-  size: number;         // File size in bytes
-  type: string;         // MIME type
-  url: string;          // Storage path
-  signedUrl: string;    // Secure signed URL (expires in 24 hours)
+  id: string; // Unique file identifier
+  name: string; // Original filename
+  size: number; // File size in bytes
+  type: string; // MIME type
+  url: string; // Storage path
+  signedUrl: string; // Secure signed URL (expires in 24 hours)
 }
 ```
 
@@ -112,6 +113,7 @@ interface UploadedFile {
 ### Submission Details
 
 Files are displayed with:
+
 - **Image Previews**: Thumbnail display for images
 - **File Information**: Name, size, type badges
 - **Download Links**: Direct access to files
@@ -120,6 +122,7 @@ Files are displayed with:
 ### Submissions List
 
 File uploads show:
+
 - **File Count**: Number of uploaded files
 - **Type Indicators**: Image preview thumbnails
 - **Quick Stats**: File counts and types
@@ -127,6 +130,7 @@ File uploads show:
 ### Field Analytics
 
 File fields provide:
+
 - **Upload Rates**: Completion statistics
 - **File Type Distribution**: Most common file types
 - **Usage Patterns**: Upload frequency analysis
@@ -223,6 +227,7 @@ SELECT cleanup_orphaned_files();
 ### Storage Metrics
 
 Monitor via Supabase dashboard:
+
 - Storage usage by bucket
 - Upload/download bandwidth
 - Request counts and errors

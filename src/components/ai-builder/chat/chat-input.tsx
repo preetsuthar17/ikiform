@@ -1,8 +1,8 @@
-import { Send } from 'lucide-react';
+import { Send } from "lucide-react";
 
-import { Button } from '@/components/ui/button';
-import { Kbd } from '@/components/ui/kbd';
-import { Textarea } from '@/components/ui/textarea';
+import { Button } from "@/components/ui/button";
+import { Kbd } from "@/components/ui/kbd";
+import { Textarea } from "@/components/ui/textarea";
 
 interface ChatInputProps {
   input: string;
@@ -28,7 +28,7 @@ export function ChatInput({
           disabled={isLoading}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
+            if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
               (e.target as HTMLTextAreaElement).form?.requestSubmit();
             }
@@ -48,7 +48,7 @@ export function ChatInput({
         </Button>
       </form>
       <div className="gap-2 text-center text-muted-foreground text-xs">
-        Press <Kbd size="sm">Enter</Kbd> to send,{' '}
+        Press <Kbd size="sm">Enter</Kbd> to send,{" "}
         <Kbd size="sm">Shift+Enter</Kbd> for new line
       </div>
     </div>

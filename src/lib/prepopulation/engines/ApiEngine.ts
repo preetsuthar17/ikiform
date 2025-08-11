@@ -3,7 +3,7 @@ import type {
   PrepopulationConfig,
   PrepopulationEngine,
   PrepopulationResult,
-} from '../types';
+} from "../types";
 
 export class ApiEngine implements PrepopulationEngine {
   private static cache = new Map<string, { data: any; timestamp: number }>();
@@ -18,7 +18,7 @@ export class ApiEngine implements PrepopulationEngine {
 
     try {
       if (!this.validateConfig(config)) {
-        throw new Error('Invalid API configuration');
+        throw new Error("Invalid API configuration");
       }
 
       const cacheKey = this.generateCacheKey(config);
@@ -29,7 +29,7 @@ export class ApiEngine implements PrepopulationEngine {
         return {
           success: true,
           value: extractedValue,
-          source: 'api-cache',
+          source: "api-cache",
           executionTime: Date.now() - startTime,
         };
       }
@@ -42,15 +42,15 @@ export class ApiEngine implements PrepopulationEngine {
       return {
         success: true,
         value: extractedValue,
-        source: 'api',
+        source: "api",
         executionTime: Date.now() - startTime,
       };
     } catch (error) {
       return {
         success: false,
         value: config.fallbackValue || null,
-        error: error instanceof Error ? error.message : 'Unknown API error',
-        source: 'api',
+        error: error instanceof Error ? error.message : "Unknown API error",
+        source: "api",
         executionTime: Date.now() - startTime,
       };
     }
@@ -86,18 +86,18 @@ export class ApiEngine implements PrepopulationEngine {
 
     try {
       const headers = {
-        'Content-Type': 'application/json',
-        'User-Agent': 'Ikiform-Prepopulation/1.0',
+        "Content-Type": "application/json",
+        "User-Agent": "Ikiform-Prepopulation/1.0",
         ...config.apiHeaders,
       };
 
       const requestConfig: RequestInit = {
-        method: config.apiMethod || 'GET',
+        method: config.apiMethod || "GET",
         headers,
         signal: controller.signal,
       };
 
-      if (config.apiMethod === 'POST' && config.apiBodyTemplate) {
+      if (config.apiMethod === "POST" && config.apiBodyTemplate) {
         requestConfig.body = this.processBodyTemplate(config.apiBodyTemplate);
       }
 
@@ -105,12 +105,12 @@ export class ApiEngine implements PrepopulationEngine {
 
       if (!response.ok) {
         throw new Error(
-          `API request failed: ${response.status} ${response.statusText}`
+          `API request failed: ${response.status} ${response.statusText}`,
         );
       }
 
-      const contentType = response.headers.get('content-type');
-      if (contentType && contentType.includes('application/json')) {
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
         return await response.json();
       }
       return await response.text();
@@ -129,19 +129,19 @@ export class ApiEngine implements PrepopulationEngine {
     try {
       return this.evaluateJsonPath(data, jsonPath);
     } catch (error) {
-      console.warn('Failed to extract value using JSONPath:', jsonPath, error);
+      console.warn("Failed to extract value using JSONPath:", jsonPath, error);
       return null;
     }
   }
 
   private evaluateJsonPath(data: any, path: string): any {
-    if (path === '$') return data;
+    if (path === "$") return data;
 
-    if (!path.startsWith('$.')) {
-      throw new Error('JSONPath must start with $.');
+    if (!path.startsWith("$.")) {
+      throw new Error("JSONPath must start with $.");
     }
 
-    const pathParts = path.substring(2).split('.');
+    const pathParts = path.substring(2).split(".");
     let current = data;
 
     for (const part of pathParts) {
@@ -153,7 +153,7 @@ export class ApiEngine implements PrepopulationEngine {
         current = current[fieldName];
 
         if (Array.isArray(current)) {
-          if (indexOrWildcard === '*') {
+          if (indexOrWildcard === "*") {
             return current;
           }
           const index = Number.parseInt(indexOrWildcard, 10);
@@ -176,7 +176,7 @@ export class ApiEngine implements PrepopulationEngine {
         method: config.apiMethod,
         headers: config.apiHeaders,
         body: config.apiBodyTemplate,
-      })
+      }),
     );
   }
 

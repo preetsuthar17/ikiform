@@ -1,14 +1,14 @@
-import { Check, Copy } from 'lucide-react';
-import { useState } from 'react';
+import { Check, Copy } from "lucide-react";
+import { useState } from "react";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { copyWithToast } from '@/lib/utils/clipboard';
+} from "@/components/ui/tooltip";
+import { copyWithToast } from "@/lib/utils/clipboard";
 
 interface CopyButtonProps {
   schema: any;
@@ -20,8 +20,8 @@ export function CopyButton({ schema }: CopyButtonProps) {
   const handleCopy = async () => {
     const success = await copyWithToast(
       JSON.stringify(schema, null, 2),
-      'Schema copied to clipboard!',
-      'Failed to copy schema'
+      "Schema copied to clipboard!",
+      "Failed to copy schema",
     );
 
     if (success) {
@@ -48,7 +48,7 @@ export function CopyButton({ schema }: CopyButtonProps) {
             )}
           </Button>
         </TooltipTrigger>
-        <TooltipContent size="sm">{copied ? 'Copied' : 'Copy'}</TooltipContent>
+        <TooltipContent size="sm">{copied ? "Copied" : "Copy"}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

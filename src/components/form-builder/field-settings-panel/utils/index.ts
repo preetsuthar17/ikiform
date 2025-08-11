@@ -1,6 +1,6 @@
-import type { FormField } from '@/lib/database';
+import type { FormField } from "@/lib/database";
 
-import { FIELD_TYPES } from '../constants';
+import { FIELD_TYPES } from "../constants";
 
 export const getFieldHelpers = (field: FormField) => ({
   hasOptions: FIELD_TYPES.OPTION_TYPES.includes(field.type as any),
@@ -15,7 +15,7 @@ export const getFieldHelpers = (field: FormField) => ({
 
 export const useFieldUpdates = (
   field: FormField | null,
-  onFieldUpdate: (field: FormField) => void
+  onFieldUpdate: (field: FormField) => void,
 ) => {
   if (!field) {
     return {
@@ -30,14 +30,14 @@ export const useFieldUpdates = (
       onFieldUpdate({ ...field, ...updates });
     },
 
-    updateValidation: (validationUpdates: Partial<FormField['validation']>) => {
+    updateValidation: (validationUpdates: Partial<FormField["validation"]>) => {
       onFieldUpdate({
         ...field,
         validation: { ...field.validation, ...validationUpdates },
       });
     },
 
-    updateSettings: (settingsUpdates: Partial<FormField['settings']>) => {
+    updateSettings: (settingsUpdates: Partial<FormField["settings"]>) => {
       onFieldUpdate({
         ...field,
         settings: { ...field.settings, ...settingsUpdates },
@@ -48,20 +48,20 @@ export const useFieldUpdates = (
 
 export const createFieldUpdater = (
   field: FormField,
-  onFieldUpdate: (field: FormField) => void
+  onFieldUpdate: (field: FormField) => void,
 ) => ({
   updateField: (updates: Partial<FormField>) => {
     onFieldUpdate({ ...field, ...updates });
   },
 
-  updateValidation: (validationUpdates: Partial<FormField['validation']>) => {
+  updateValidation: (validationUpdates: Partial<FormField["validation"]>) => {
     onFieldUpdate({
       ...field,
       validation: { ...field.validation, ...validationUpdates },
     });
   },
 
-  updateSettings: (settingsUpdates: Partial<FormField['settings']>) => {
+  updateSettings: (settingsUpdates: Partial<FormField["settings"]>) => {
     onFieldUpdate({
       ...field,
       settings: { ...field.settings, ...settingsUpdates },
@@ -71,7 +71,7 @@ export const createFieldUpdater = (
 
 export const createOptionHandlers = (
   field: FormField,
-  updateField: (updates: Partial<FormField>) => void
+  updateField: (updates: Partial<FormField>) => void,
 ) => ({
   addOption: () => {
     const currentOptions = field.options || [];
@@ -99,28 +99,28 @@ export const formatFieldType = (type: string): string => {
 
 export const getPlaceholderText = (
   field: FormField,
-  validationType: string
+  validationType: string,
 ): string => {
   const { validation } = field;
 
   switch (validationType) {
-    case 'minLength':
+    case "minLength":
       return `Must be at least ${validation?.minLength} characters`;
-    case 'maxLength':
+    case "maxLength":
       return `Must be no more than ${validation?.maxLength} characters`;
-    case 'minValue':
+    case "minValue":
       return `Must be at least ${validation?.min}`;
-    case 'maxValue':
+    case "maxValue":
       return `Must be no more than ${validation?.max}`;
-    case 'email':
-      return 'Please enter a valid email address';
-    case 'number':
-      return 'Please enter a valid number';
-    case 'pattern':
-      return 'Please enter a valid format';
-    case 'required':
-      return 'This field is required';
+    case "email":
+      return "Please enter a valid email address";
+    case "number":
+      return "Please enter a valid number";
+    case "pattern":
+      return "Please enter a valid format";
+    case "required":
+      return "This field is required";
     default:
-      return '';
+      return "";
   }
 };

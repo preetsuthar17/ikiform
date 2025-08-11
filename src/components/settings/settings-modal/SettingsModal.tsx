@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { Modal, ModalContent, ModalTitle } from '@/components/ui/modal';
-import { DesktopLayout, MobileLayout } from './components';
-import type { SettingsModalProps, SettingsSection } from './types';
-import { getModalContentStyles } from './utils';
+import { Modal, ModalContent, ModalTitle } from "@/components/ui/modal";
+import { DesktopLayout, MobileLayout } from "./components";
+import type { SettingsModalProps, SettingsSection } from "./types";
+import { getModalContentStyles } from "./utils";
 
 export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
   const [activeSection, setActiveSection] =
-    useState<SettingsSection>('appearance');
+    useState<SettingsSection>("appearance");
 
   const handleClose = () => onOpenChange(false);
 

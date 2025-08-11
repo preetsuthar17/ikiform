@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { AlertTriangle } from 'lucide-react';
+import { AlertTriangle } from "lucide-react";
 
-import React from 'react';
+import React from "react";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Modal,
   ModalContent,
   ModalHeader,
   ModalTitle,
-} from '@/components/ui/modal';
+} from "@/components/ui/modal";
 
 interface ConfirmationModalProps {
   open: boolean;
@@ -19,7 +19,7 @@ interface ConfirmationModalProps {
   description: string;
   confirmText?: string;
   cancelText?: string;
-  variant?: 'default' | 'destructive';
+  variant?: "default" | "destructive";
   onConfirm: () => void;
 }
 
@@ -28,9 +28,9 @@ export function ConfirmationModal({
   onOpenChange,
   title,
   description,
-  confirmText = 'Confirm',
-  cancelText = 'Cancel',
-  variant = 'default',
+  confirmText = "Confirm",
+  cancelText = "Cancel",
+  variant = "default",
   onConfirm,
 }: ConfirmationModalProps) {
   const handleConfirm = () => {
@@ -47,7 +47,7 @@ export function ConfirmationModal({
       <ModalContent className="flex max-w-md flex-col gap-3">
         <ModalHeader>
           <ModalTitle className="flex items-center gap-3">
-            {variant === 'destructive' && (
+            {variant === "destructive" && (
               <div className="flex h-10 w-10 items-center justify-center rounded-card bg-destructive/10">
                 <AlertTriangle className="h-5 w-5 text-destructive" />
               </div>
@@ -66,7 +66,7 @@ export function ConfirmationModal({
           </Button>
           <Button
             onClick={handleConfirm}
-            variant={variant === 'destructive' ? 'destructive' : 'default'}
+            variant={variant === "destructive" ? "destructive" : "default"}
           >
             {confirmText}
           </Button>

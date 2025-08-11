@@ -1,11 +1,11 @@
-import { Bell, Palette } from 'lucide-react';
-import React from 'react';
+import { Bell, Palette } from "lucide-react";
+import React from "react";
 
-import { Button } from '@/components/ui/button';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { SETTINGS_SECTIONS } from '../constants';
-import type { SettingsSection } from '../types';
-import { getNavigationItemStyles } from '../utils';
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { SETTINGS_SECTIONS } from "../constants";
+import type { SettingsSection } from "../types";
+import { getNavigationItemStyles } from "../utils";
 
 interface SidebarNavigationProps {
   activeSection: SettingsSection;
@@ -33,7 +33,7 @@ export function SidebarNavigation({
               className={getNavigationItemStyles(isActive)}
               key={section.id}
               onClick={() => onSectionChange(section.id)}
-              variant={isActive ? 'secondary' : 'ghost'}
+              variant={isActive ? "secondary" : "ghost"}
             >
               <IconComponent className="h-4 w-4" />
               <span className="font-medium text-sm">{section.label}</span>

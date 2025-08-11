@@ -1,22 +1,30 @@
-'use client';
+"use client";
 
-import { Check, Code2, Copy, Download, Globe, QrCode, Share } from 'lucide-react';
+import {
+  Check,
+  Code2,
+  Copy,
+  Download,
+  Globe,
+  QrCode,
+  Share,
+} from "lucide-react";
 
-import QRCode from 'qrcode';
-import React, { useEffect, useState } from 'react';
+import QRCode from "qrcode";
+import React, { useEffect, useState } from "react";
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Modal,
   ModalContent,
   ModalHeader,
   ModalTitle,
-} from '@/components/ui/modal';
-import { Tabs, TabsContent } from '@/components/ui/tabs';
+} from "@/components/ui/modal";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 
-import { toast } from '@/hooks/use-toast';
+import { toast } from "@/hooks/use-toast";
 
 interface ShareFormModalProps {
   isOpen: boolean;
@@ -28,8 +36,8 @@ interface ShareFormModalProps {
 }
 
 const QR_CODE_STYLE = {
-  primaryColor: '#6366f1',
-  backgroundColor: '#FFFFFF',
+  primaryColor: "#6366f1",
+  backgroundColor: "#FFFFFF",
   logoSize: 32,
   cornerRadius: 6,
 };
@@ -44,19 +52,19 @@ export function ShareFormModal({
 }: ShareFormModalProps) {
   const [copying, setCopying] = useState(false);
   const [publishing, setPublishing] = useState(false);
-  const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string>('');
+  const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string>("");
   const [downloading, setDownloading] = useState(false);
-  const [activeTab, setActiveTab] = useState('link');
+  const [activeTab, setActiveTab] = useState("link");
   const [generatingQR, setGeneratingQR] = useState(false);
 
   const shareUrl = formId
-    ? `${typeof window !== 'undefined' ? window.location.origin : ''}/f/${formSlug || formId}`
-    : '';
+    ? `${typeof window !== "undefined" ? window.location.origin : ""}/f/${formSlug || formId}`
+    : "";
 
   const tabItems = [
-    { id: 'link', label: 'Link' },
-    { id: 'qr', label: 'QR Code' },
-    { id: 'embed', label: 'Embed' },
+    { id: "link", label: "Link" },
+    { id: "qr", label: "QR Code" },
+    { id: "embed", label: "Embed" },
   ];
 
   useEffect(() => {
@@ -81,16 +89,16 @@ export function ShareFormModal({
       const qrDataUrl = await QRCode.toDataURL(shareUrl, {
         width: 256,
         margin: 4,
-        errorCorrectionLevel: 'M',
+        errorCorrectionLevel: "M",
         color: {
           dark: style.primaryColor,
           light: style.backgroundColor,
         },
       });
 
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      if (!ctx) throw new Error('Could not get canvas context');
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      if (!ctx) throw new Error("Could not get canvas context");
 
       canvas.width = 256;
       canvas.height = 256;
@@ -109,10 +117,10 @@ export function ShareFormModal({
       ctx.lineWidth = 2;
       ctx.strokeRect(1, 1, 254, 254);
 
-      setQrCodeDataUrl(canvas.toDataURL('image/png'));
+      setQrCodeDataUrl(canvas.toDataURL("image/png"));
     } catch (error) {
-      console.error('Error generating QR code:', error);
-      toast.error('Failed to generate QR code');
+      console.error("Error generating QR code:", error);
+      toast.error("Failed to generate QR code");
     } finally {
       setGeneratingQR(false);
     }
@@ -123,16 +131,16 @@ export function ShareFormModal({
 
     setCopying(true);
     try {
-      const { copyWithToast } = await import('@/lib/utils/clipboard');
+      const { copyWithToast } = await import("@/lib/utils/clipboard");
       await copyWithToast(
         shareUrl,
-        'Link copied to clipboard!',
-        'Failed to copy link. Please copy manually.'
+        "Link copied to clipboard!",
+        "Failed to copy link. Please copy manually.",
       );
     } catch (error) {
-      console.error('Failed to copy link:', error);
-      const { toast } = await import('@/hooks/use-toast');
-      toast.error('Failed to copy link. Please copy manually.');
+      console.error("Failed to copy link:", error);
+      const { toast } = await import("@/hooks/use-toast");
+      toast.error("Failed to copy link. Please copy manually.");
     } finally {
       setCopying(false);
     }
@@ -143,16 +151,16 @@ export function ShareFormModal({
 
     setDownloading(true);
     try {
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.download = `ikiform-qr-${formId}.png`;
       link.href = qrCodeDataUrl;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      toast.success('QR code downloaded successfully!');
+      toast.success("QR code downloaded successfully!");
     } catch (error) {
-      console.error('Failed to download QR code:', error);
-      toast.error('Failed to download QR code');
+      console.error("Failed to download QR code:", error);
+      toast.error("Failed to download QR code");
     } finally {
       setDownloading(false);
     }
@@ -163,7 +171,7 @@ export function ShareFormModal({
     try {
       await onPublish();
     } catch (error) {
-      console.error('Failed to publish form:', error);
+      console.error("Failed to publish form:", error);
     } finally {
       setPublishing(false);
     }
@@ -280,7 +288,7 @@ export function ShareFormModal({
                       variant="outline"
                     >
                       <Download className="h-4 w-4" />
-                      {downloading ? 'Downloading...' : 'Download QR Code'}
+                      {downloading ? "Downloading..." : "Download QR Code"}
                     </Button>
                   </div>
                 </div>
@@ -300,11 +308,14 @@ export function ShareFormModal({
 
                   <div className="text-center">
                     <p className="text-muted-foreground text-sm mb-4">
-                      Get customizable embed codes for HTML, React, Next.js, and more
+                      Get customizable embed codes for HTML, React, Next.js, and
+                      more
                     </p>
                     <Button
                       className="gap-2"
-                      onClick={() => window.open(`/embed?formid=${formId}`, '_blank')}
+                      onClick={() =>
+                        window.open(`/embed?formid=${formId}`, "_blank")
+                      }
                       variant="default"
                     >
                       <Code2 className="h-4 w-4" />
@@ -313,7 +324,9 @@ export function ShareFormModal({
                   </div>
 
                   <div className="rounded-lg border bg-muted/20 p-4">
-                    <h4 className="font-medium text-sm mb-2">Quick HTML Embed:</h4>
+                    <h4 className="font-medium text-sm mb-2">
+                      Quick HTML Embed:
+                    </h4>
                     <div className="bg-gray-900 text-green-400 p-3 rounded text-xs font-mono overflow-x-auto">
                       {`<iframe
   src="${shareUrl}"
@@ -344,7 +357,7 @@ export function ShareFormModal({
                 loading={publishing}
                 onClick={handlePublish}
               >
-                {publishing ? 'Publishing' : 'Publish Form'}
+                {publishing ? "Publishing" : "Publish Form"}
               </Button>
             </div>
           )}

@@ -1,19 +1,19 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { useAuth } from '@/hooks/use-auth';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/use-auth";
 import {
   useWebhookManagement,
   type WebhookConfig,
-} from './hooks/useWebhookManagement';
-import { WebhookFormModal } from './WebhookFormModal';
-import { WebhookList } from './WebhookList';
-import { WebhookLogDrawer } from './WebhookLogDrawer';
+} from "./hooks/useWebhookManagement";
+import { WebhookFormModal } from "./WebhookFormModal";
+import { WebhookList } from "./WebhookList";
+import { WebhookLogDrawer } from "./WebhookLogDrawer";
 
 export function WebhookManagementPanel({ formId }: { formId?: string }) {
   const { user } = useAuth();
   const [modalOpen, setModalOpen] = useState(false);
   const [editingWebhook, setEditingWebhook] = useState<WebhookConfig | null>(
-    null
+    null,
   );
   const [logDrawerOpen, setLogDrawerOpen] = useState(false);
   const [logWebhookId, setLogWebhookId] = useState<string | null>(null);
@@ -66,12 +66,12 @@ export function WebhookManagementPanel({ formId }: { formId?: string }) {
   async function handleTest(webhook: WebhookConfig) {
     try {
       const res = await fetch(`/api/webhook/${webhook.id}/test`, {
-        method: 'POST',
+        method: "POST",
       });
       const data = await res.json();
-      alert(data.message || 'Test sent');
+      alert(data.message || "Test sent");
     } catch (e) {
-      alert('Test failed');
+      alert("Test failed");
     }
   }
 
@@ -89,7 +89,7 @@ export function WebhookManagementPanel({ formId }: { formId?: string }) {
           onClick={handleAdd}
           variant="default"
         >
-          {loading ? 'Loading' : 'Add Webhook'}
+          {loading ? "Loading" : "Add Webhook"}
         </Button>
       </header>
       <WebhookList
@@ -107,7 +107,7 @@ export function WebhookManagementPanel({ formId }: { formId?: string }) {
             ? {
                 ...editingWebhook,
                 headers: editingWebhook.headers ?? {},
-                payloadTemplate: editingWebhook.payloadTemplate ?? '',
+                payloadTemplate: editingWebhook.payloadTemplate ?? "",
               }
             : undefined
         }

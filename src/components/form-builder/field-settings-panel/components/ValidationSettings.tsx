@@ -1,22 +1,22 @@
-import React from 'react';
-import { Card } from '@/components/ui/card';
+import React from "react";
+import { Card } from "@/components/ui/card";
 
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
-import type { FormField } from '@/lib/database';
+import type { FormField } from "@/lib/database";
 
 interface ValidationSettingsProps {
   field: FormField;
-  onUpdateValidation: (updates: Partial<FormField['validation']>) => void;
+  onUpdateValidation: (updates: Partial<FormField["validation"]>) => void;
 }
 
 export function ValidationSettings({
   field,
   onUpdateValidation,
 }: ValidationSettingsProps) {
-  const isTextType = ['text', 'email', 'textarea'].includes(field.type);
-  const isNumberType = field.type === 'number';
+  const isTextType = ["text", "email", "textarea"].includes(field.type);
+  const isNumberType = field.type === "number";
 
   if (!(isTextType || isNumberType)) {
     return null;
@@ -42,7 +42,7 @@ export function ValidationSettings({
                 }
                 placeholder="Min characters"
                 type="number"
-                value={field.validation?.minLength || ''}
+                value={field.validation?.minLength || ""}
               />
             </div>
             <div className="flex flex-col gap-1">
@@ -59,7 +59,7 @@ export function ValidationSettings({
                 }
                 placeholder="Max characters"
                 type="number"
-                value={field.validation?.maxLength || ''}
+                value={field.validation?.maxLength || ""}
               />
             </div>
             <div className="flex flex-col gap-1">
@@ -75,7 +75,7 @@ export function ValidationSettings({
                   })
                 }
                 placeholder="Regular expression"
-                value={field.validation?.pattern || ''}
+                value={field.validation?.pattern || ""}
               />
             </div>
           </>
@@ -97,7 +97,7 @@ export function ValidationSettings({
                 }
                 placeholder="Min value"
                 type="number"
-                value={field.validation?.min || ''}
+                value={field.validation?.min || ""}
               />
             </div>
             <div className="flex flex-col gap-1">
@@ -114,7 +114,7 @@ export function ValidationSettings({
                 }
                 placeholder="Max value"
                 type="number"
-                value={field.validation?.max || ''}
+                value={field.validation?.max || ""}
               />
             </div>
           </>

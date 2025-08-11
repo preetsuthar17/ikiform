@@ -1,13 +1,13 @@
-'use client';
-import * as React from 'react';
+"use client";
+import * as React from "react";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Button } from './button';
+} from "@/components/ui/select";
+import { Button } from "./button";
 
 export interface TimePickerProps {
   value?: string;
@@ -30,19 +30,19 @@ export const TimePicker: React.FC<TimePickerProps> = ({
     const now = new Date();
     let h = now.getHours();
     const m = now.getMinutes();
-    const ap = h >= 12 ? 'PM' : 'AM';
+    const ap = h >= 12 ? "PM" : "AM";
     h = h % 12;
     if (h === 0) h = 12;
     return {
-      hour: String(h).padStart(2, '0'),
-      minute: String(m).padStart(2, '0'),
+      hour: String(h).padStart(2, "0"),
+      minute: String(m).padStart(2, "0"),
       amPm: ap,
     };
   }, []);
 
-  const [hour, setHour] = React.useState<string>('');
-  const [minute, setMinute] = React.useState<string>('');
-  const [amPm, setAmPm] = React.useState<string>('AM');
+  const [hour, setHour] = React.useState<string>("");
+  const [minute, setMinute] = React.useState<string>("");
+  const [amPm, setAmPm] = React.useState<string>("AM");
 
   const handleSetCurrentTime = React.useCallback(() => {
     const def = getDefaultTime();
@@ -66,11 +66,11 @@ export const TimePicker: React.FC<TimePickerProps> = ({
         onChange(newValue);
       }
     } else if (
-      typeof value === 'string' &&
+      typeof value === "string" &&
       value.match(/^\d{1,2}:\d{2} (AM|PM)$/)
     ) {
-      const [hm, ap] = value.split(' ');
-      const [h, m] = hm.split(':');
+      const [hm, ap] = value.split(" ");
+      const [h, m] = hm.split(":");
       setHour(h);
       setMinute(m);
       setAmPm(ap);
@@ -89,15 +89,15 @@ export const TimePicker: React.FC<TimePickerProps> = ({
         }
       }
     },
-    [onChange, value]
+    [onChange, value],
   );
 
   return (
     <div
       className={
         className ??
-        'flex w-full flex-col items-center gap-2' +
-          (error ? 'rounded border border-red-500 p-2' : '')
+        "flex w-full flex-col items-center gap-2" +
+          (error ? "rounded border border-red-500 p-2" : "")
       }
     >
       <div className="flex w-full items-center gap-2">
@@ -106,7 +106,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
             disabled={disabled}
             onValueChange={React.useCallback(
               (val: string) => handleChange(val, minute, amPm),
-              [minute, amPm, handleChange]
+              [minute, amPm, handleChange],
             )}
             value={hour}
           >
@@ -115,7 +115,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
             </SelectTrigger>
             <SelectContent>
               {Array.from({ length: 12 }, (_, i) =>
-                String(i + 1).padStart(2, '0')
+                String(i + 1).padStart(2, "0"),
               ).map((h) => (
                 <SelectItem key={h} value={h}>
                   {h}
@@ -130,7 +130,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
             disabled={disabled}
             onValueChange={React.useCallback(
               (val: string) => handleChange(hour, val, amPm),
-              [hour, amPm, handleChange]
+              [hour, amPm, handleChange],
             )}
             value={minute}
           >
@@ -139,7 +139,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
             </SelectTrigger>
             <SelectContent>
               {Array.from({ length: 60 }, (_, i) =>
-                String(i).padStart(2, '0')
+                String(i).padStart(2, "0"),
               ).map((m) => (
                 <SelectItem disableCheckAnimation key={m} value={m}>
                   {m}
@@ -153,7 +153,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
             disabled={disabled}
             onValueChange={React.useCallback(
               (val: string) => handleChange(hour, minute, val),
-              [hour, minute, handleChange]
+              [hour, minute, handleChange],
             )}
             value={amPm}
           >

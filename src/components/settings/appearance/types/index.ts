@@ -1,4 +1,4 @@
-import type { LucideIcon } from 'lucide-react';
+import type { LucideIcon } from "lucide-react";
 
 export interface Theme {
   id: string;
@@ -7,4 +7,4 @@ export interface Theme {
   image: string;
 }
 
-export type ThemeId = 'light' | 'dark' | 'system';
+export type ThemeId = "light" | "dark" | "system";

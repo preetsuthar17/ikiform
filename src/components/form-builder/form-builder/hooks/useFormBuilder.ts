@@ -1,19 +1,19 @@
-import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
-import { useAuth } from '@/hooks/use-auth';
-import { toast } from '@/hooks/use-toast';
+import { useAuth } from "@/hooks/use-auth";
+import { toast } from "@/hooks/use-toast";
 
-import type { FormSchema } from '@/lib/database';
+import type { FormSchema } from "@/lib/database";
 
-import { formsDb } from '@/lib/database';
+import { formsDb } from "@/lib/database";
 import {
   createDefaultFormSchema,
   ensureDefaultRateLimitSettings,
-} from '@/lib/forms';
+} from "@/lib/forms";
 
-import { DRAFT_KEYS, FORM_BUILDER_CONSTANTS } from '../constants';
-import type { FormBuilderActions, FormBuilderState } from '../types';
+import { DRAFT_KEYS, FORM_BUILDER_CONSTANTS } from "../constants";
+import type { FormBuilderActions, FormBuilderState } from "../types";
 import {
   addFieldToSchema,
   findSelectedField,
@@ -25,7 +25,7 @@ import {
   removeFieldFromSchema,
   saveDraftToStorage,
   updateFieldInSchema,
-} from '../utils';
+} from "../utils";
 
 export const useFormBuilder = (formId?: string) => {
   const router = useRouter();
@@ -93,7 +93,7 @@ export const useFormBuilder = (formId?: string) => {
       setState((prev) => ({
         ...prev,
         formSchema:
-          typeof schema === 'function' ? schema(prev.formSchema) : schema,
+          typeof schema === "function" ? schema(prev.formSchema) : schema,
       })),
   };
 
@@ -138,7 +138,7 @@ export const useFormBuilder = (formId?: string) => {
   useEffect(() => {
     const hasChanges = hasFormChanges(
       state.formSchema,
-      lastManuallySavedSchemaRef.current
+      lastManuallySavedSchemaRef.current,
     );
     actions.setHasUnsavedChanges(hasChanges);
   }, [state.formSchema]);
@@ -152,7 +152,7 @@ export const useFormBuilder = (formId?: string) => {
           blocks: Array.isArray(schema.blocks) ? schema.blocks : [],
           fields: Array.isArray(schema.fields) ? schema.fields : [],
           settings:
-            typeof schema.settings === 'object' && schema.settings
+            typeof schema.settings === "object" && schema.settings
               ? {
                   title:
                     schema.settings.title ||
@@ -171,7 +171,7 @@ export const useFormBuilder = (formId?: string) => {
                     FORM_BUILDER_CONSTANTS.DEFAULT_REDIRECT_URL,
                   multiStep: !!schema.settings.multiStep,
                   showProgress:
-                    'showProgress' in schema.settings
+                    "showProgress" in schema.settings
                       ? !!schema.settings.showProgress
                       : true,
                   ...schema.settings,
@@ -203,8 +203,8 @@ export const useFormBuilder = (formId?: string) => {
     try {
       const form = await formsDb.getForm(formId);
       if (form.user_id !== user.id) {
-        toast.error('You do not have permission to edit this form.');
-        router.push('/dashboard');
+        toast.error("You do not have permission to edit this form.");
+        router.push("/dashboard");
         return;
       }
 
@@ -223,8 +223,8 @@ export const useFormBuilder = (formId?: string) => {
 
       removeDraftFromStorage(draftKey);
     } catch (error) {
-      console.error('Error loading form:', error);
-      toast.error('Failed to load form. Please try again.');
+      console.error("Error loading form:", error);
+      toast.error("Failed to load form. Please try again.");
     } finally {
       actions.setLoading(false);
     }
@@ -243,7 +243,7 @@ export const useFormBuilder = (formId?: string) => {
         await formsDb.updateForm(formId, { schema });
         lastSavedSchemaRef.current = schema;
       } catch (error) {
-        console.error('Auto-save failed:', error);
+        console.error("Auto-save failed:", error);
       } finally {
         actions.setAutoSaving(false);
       }
@@ -252,7 +252,7 @@ export const useFormBuilder = (formId?: string) => {
 
   const selectedField = findSelectedField(
     state.formSchema,
-    state.selectedFieldId
+    state.selectedFieldId,
   );
 
   return {

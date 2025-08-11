@@ -1,10 +1,10 @@
-import Link from 'next/link';
-import { notFound, redirect } from 'next/navigation';
-import { Suspense } from 'react';
-import { FormBuilder } from '@/components/form-builder/form-builder';
-import { Button } from '@/components/ui/button';
-import { Loader } from '@/components/ui/loader';
-import { createClient } from '@/utils/supabase/server';
+import Link from "next/link";
+import { notFound, redirect } from "next/navigation";
+import { Suspense } from "react";
+import { FormBuilder } from "@/components/form-builder/form-builder";
+import { Button } from "@/components/ui/button";
+import { Loader } from "@/components/ui/loader";
+import { createClient } from "@/utils/supabase/server";
 
 interface FormBuilderPageProps {
   params: Promise<{ id: string }>;
@@ -14,10 +14,10 @@ async function getFormData(id: string, userId: string) {
   const supabase = await createClient();
 
   const { data, error } = await supabase
-    .from('forms')
-    .select('*')
-    .eq('id', id)
-    .eq('user_id', userId)
+    .from("forms")
+    .select("*")
+    .eq("id", id)
+    .eq("user_id", userId)
     .single();
 
   if (error || !data) {
@@ -36,13 +36,13 @@ async function getUserAndPremiumStatus() {
   } = await supabase.auth.getUser();
 
   if (userError || !user) {
-    redirect('/auth/signin');
+    redirect("/auth/signin");
   }
 
   const { data: subscription } = await supabase
-    .from('users')
-    .select('has_premium')
-    .eq('uid', user.id)
+    .from("users")
+    .select("has_premium")
+    .eq("uid", user.id)
     .single();
 
   const hasPremium = subscription?.has_premium;

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Terms() {
   return (
@@ -12,7 +12,7 @@ export default function Terms() {
       <section className="flex flex-col gap-4">
         <h2 className="font-semibold text-2xl">1. Terms</h2>
         <p>
-          By accessing the website at{' '}
+          By accessing the website at{" "}
           <Link
             className="text-blue-500 underline"
             href="https://www.ikiform.com"
@@ -80,10 +80,10 @@ export default function Terms() {
           warrant or make any representations concerning the accuracy, likely
           results, or reliability of the use of the materials on its website or
           otherwise relating to such materials or on any sites linked to this
-          site. Please review our{' '}
+          site. Please review our{" "}
           <Link className="text-blue-500 underline" href="/legal/privacy">
             Privacy Policy
-          </Link>{' '}
+          </Link>{" "}
           in tandem with these terms.
         </p>
       </section>

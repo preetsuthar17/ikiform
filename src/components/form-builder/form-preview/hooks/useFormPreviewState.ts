@@ -1,26 +1,26 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
-import type { FormField, FormSchema } from '@/lib/database';
+import type { FormField, FormSchema } from "@/lib/database";
 
 const getDefaultValueForField = (field: FormField): any => {
   switch (field.type) {
-    case 'tags':
+    case "tags":
       return [];
-    case 'checkbox':
+    case "checkbox":
       return [];
-    case 'radio':
-      return '';
-    case 'select':
-      return '';
-    case 'slider':
+    case "radio":
+      return "";
+    case "select":
+      return "";
+    case "slider":
       return field.settings?.defaultValue || 50;
-    case 'number':
-      return '';
-    case 'text':
-    case 'email':
-    case 'textarea':
+    case "number":
+      return "";
+    case "text":
+    case "email":
+    case "textarea":
     default:
-      return '';
+      return "";
   }
 };
 
@@ -34,11 +34,11 @@ const initializeFormData = (fields: FormField[]): Record<string, any> => {
   return formData;
 };
 
-import { evaluateLogic, getLogicFieldDefaults } from '@/lib/forms/logic';
+import { evaluateLogic, getLogicFieldDefaults } from "@/lib/forms/logic";
 
 export function useFormPreviewState(
   schema: FormSchema,
-  selectedBlockId?: string | null
+  selectedBlockId?: string | null,
 ) {
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
@@ -53,7 +53,7 @@ export function useFormPreviewState(
   useEffect(() => {
     const currentFieldIds = new Set(allFields.map((field) => field.id));
     const newFieldIds = [...currentFieldIds].filter(
-      (id) => !initializedFieldsRef.current.has(id)
+      (id) => !initializedFieldsRef.current.has(id),
     );
 
     if (newFieldIds.length > 0) {
@@ -71,7 +71,7 @@ export function useFormPreviewState(
   useEffect(() => {
     if (selectedBlockId && schema.blocks) {
       const blockIndex = schema.blocks.findIndex(
-        (block) => block.id === selectedBlockId
+        (block) => block.id === selectedBlockId,
       );
       if (blockIndex !== -1) {
         setCurrentStepIndex(blockIndex);
@@ -112,7 +112,7 @@ export function useFormPreviewState(
 
   const fieldDefaults = getLogicFieldDefaults(
     logic,
-    allFields.map((f) => f.id)
+    allFields.map((f) => f.id),
   );
   const fieldVisibility: Record<
     string,
@@ -120,12 +120,12 @@ export function useFormPreviewState(
   > = { ...fieldDefaults };
   logicActions.forEach((action) => {
     if (action.target && fieldVisibility[action.target]) {
-      if (action.type === 'hide')
+      if (action.type === "hide")
         fieldVisibility[action.target].visible = false;
-      if (action.type === 'show') fieldVisibility[action.target].visible = true;
-      if (action.type === 'disable')
+      if (action.type === "show") fieldVisibility[action.target].visible = true;
+      if (action.type === "disable")
         fieldVisibility[action.target].disabled = true;
-      if (action.type === 'enable')
+      if (action.type === "enable")
         fieldVisibility[action.target].disabled = false;
     }
   });

@@ -37,7 +37,7 @@ function createSeededRandom(seed: string) {
 export function shuffleFieldOptions(
   options: Array<string | { value: string; label?: string }>,
   shuffleEnabled?: boolean,
-  fieldId?: string
+  fieldId?: string,
 ): Array<string | { value: string; label?: string }> {
   if (!(shuffleEnabled && options) || options.length <= 1) {
     return options;
@@ -55,7 +55,7 @@ export function shuffleQuizFields(
   fields: any[],
   randomizeEnabled?: boolean,
   shuffleQuizOnly = true,
-  formId?: string
+  formId?: string,
 ): any[] {
   if (!(randomizeEnabled && fields) || fields.length <= 1) {
     return fields;
@@ -66,7 +66,7 @@ export function shuffleQuizFields(
   if (shuffleQuizOnly) {
     const quizFields = fields.filter((field) => field.settings?.isQuizField);
     const nonQuizFields = fields.filter(
-      (field) => !field.settings?.isQuizField
+      (field) => !field.settings?.isQuizField,
     );
 
     const shuffledQuizFields = shuffleArray(quizFields, seed);
@@ -91,12 +91,12 @@ export function shuffleQuizFields(
  * This ensures the same user gets the same shuffle order during their session
  */
 function getSessionSeed(): string {
-  if (typeof window === 'undefined') return 'server';
+  if (typeof window === "undefined") return "server";
 
-  let sessionSeed = sessionStorage.getItem('quiz_shuffle_seed');
+  let sessionSeed = sessionStorage.getItem("quiz_shuffle_seed");
   if (!sessionSeed) {
     sessionSeed = Math.random().toString(36).substring(2, 15);
-    sessionStorage.setItem('quiz_shuffle_seed', sessionSeed);
+    sessionStorage.setItem("quiz_shuffle_seed", sessionSeed);
   }
   return sessionSeed;
 }

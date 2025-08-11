@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 interface UseFormNavigationProps {
   currentStep: number;
@@ -20,11 +20,11 @@ export const useFormNavigation = ({
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (isStepDisabled) return;
-      if (event.key === 'ArrowRight') {
+      if (event.key === "ArrowRight") {
         onNext();
-      } else if (event.key === 'ArrowLeft') {
+      } else if (event.key === "ArrowLeft") {
         onPrevious();
-      } else if (event.key === 'Enter') {
+      } else if (event.key === "Enter") {
         if (currentStep === totalSteps - 1) {
           onSubmit();
         } else {
@@ -33,7 +33,7 @@ export const useFormNavigation = ({
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [currentStep, totalSteps, onNext, onPrevious, onSubmit, isStepDisabled]);
 };

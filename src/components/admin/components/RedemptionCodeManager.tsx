@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { Download, Gift, Loader2, Upload } from 'lucide-react';
-import { useState } from 'react';
-import { Alert } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
+import { Download, Gift, Loader2, Upload } from "lucide-react";
+import { useState } from "react";
+import { Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
 interface RedemptionCodeManagerProps {
   isAdmin?: boolean;
@@ -20,11 +20,11 @@ interface RedemptionCodeManagerProps {
 export function RedemptionCodeManager({
   isAdmin = false,
 }: RedemptionCodeManagerProps) {
-  const [generateCount, setGenerateCount] = useState('1000');
+  const [generateCount, setGenerateCount] = useState("1000");
   const [isGenerating, setIsGenerating] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [message, setMessage] = useState<{
-    type: 'success' | 'error';
+    type: "success" | "error";
     text: string;
   } | null>(null);
   const [generatedCodes, setGeneratedCodes] = useState<string[]>([]);
@@ -45,7 +45,7 @@ export function RedemptionCodeManager({
   const generateCodes = () => {
     const count = Number.parseInt(generateCount);
     if (count <= 0 || count > 10_000) {
-      setMessage({ type: 'error', text: 'Count must be between 1 and 10,000' });
+      setMessage({ type: "error", text: "Count must be between 1 and 10,000" });
       return;
     }
 
@@ -67,39 +67,39 @@ export function RedemptionCodeManager({
     setGeneratedCodes(codes);
     setIsGenerating(false);
     setMessage({
-      type: 'success',
+      type: "success",
       text: `Generated ${codes.length} unique codes`,
     });
   };
 
   const generateRedemptionCode = () => {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    const segments = ['XXXX', 'XXXX', 'XXXX'];
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const segments = ["XXXX", "XXXX", "XXXX"];
 
     return segments
       .map((segment) =>
         segment
-          .split('')
+          .split("")
           .map(() => chars.charAt(Math.floor(Math.random() * chars.length)))
-          .join('')
+          .join(""),
       )
-      .join('-');
+      .join("-");
   };
 
   const downloadCSV = () => {
     if (generatedCodes.length === 0) {
-      setMessage({ type: 'error', text: 'No codes to download' });
+      setMessage({ type: "error", text: "No codes to download" });
       return;
     }
 
     const csvContent = [
-      'code,is_active,max_uses,current_uses,expires_at,metadata',
+      "code,is_active,max_uses,current_uses,expires_at,metadata",
       ...generatedCodes.map((code) => `${code},true,1,0,,"{}"`),
-    ].join('\n');
+    ].join("\n");
 
-    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const blob = new Blob([csvContent], { type: "text/csv" });
     const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
     a.download = `redemption-codes-${new Date().toISOString().slice(0, 10)}.csv`;
     document.body.appendChild(a);
@@ -110,7 +110,7 @@ export function RedemptionCodeManager({
 
   const uploadToDatabase = async () => {
     if (generatedCodes.length === 0) {
-      setMessage({ type: 'error', text: 'No codes to upload' });
+      setMessage({ type: "error", text: "No codes to upload" });
       return;
     }
 
@@ -118,10 +118,10 @@ export function RedemptionCodeManager({
     setMessage(null);
 
     try {
-      const response = await fetch('/api/admin/redemption-codes', {
-        method: 'POST',
+      const response = await fetch("/api/admin/redemption-codes", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ codes: generatedCodes }),
       });
@@ -130,18 +130,18 @@ export function RedemptionCodeManager({
 
       if (response.ok) {
         setMessage({
-          type: 'success',
+          type: "success",
           text: `Successfully uploaded ${result.insertedCount} codes to database`,
         });
         setGeneratedCodes([]); // Clear generated codes after successful upload
       } else {
         setMessage({
-          type: 'error',
-          text: result.message || 'Failed to upload codes',
+          type: "error",
+          text: result.message || "Failed to upload codes",
         });
       }
     } catch (error) {
-      setMessage({ type: 'error', text: 'Error uploading codes to database' });
+      setMessage({ type: "error", text: "Error uploading codes to database" });
     } finally {
       setIsUploading(false);
     }
@@ -197,7 +197,7 @@ export function RedemptionCodeManager({
                       Generating...
                     </>
                   ) : (
-                    'Generate Codes'
+                    "Generate Codes"
                   )}
                 </Button>
               </div>
@@ -247,7 +247,7 @@ export function RedemptionCodeManager({
             <Alert
               dismissible
               onDismiss={() => setMessage(null)}
-              variant={message.type === 'error' ? 'destructive' : 'success'}
+              variant={message.type === "error" ? "destructive" : "success"}
             >
               {message.text}
             </Alert>

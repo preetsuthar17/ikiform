@@ -1,8 +1,8 @@
-import { redirect } from 'next/navigation';
-import { AdminDashboard } from '@/components/admin/AdminDashboard';
-import { createClient } from '@/utils/supabase/server';
+import { redirect } from "next/navigation";
+import { AdminDashboard } from "@/components/admin/AdminDashboard";
+import { createClient } from "@/utils/supabase/server";
 
-const FOUNDER_USER_ID = '2be7479a-bf3c-4951-ab71-65bb148b235c';
+const FOUNDER_USER_ID = "2be7479a-bf3c-4951-ab71-65bb148b235c";
 
 export default async function AdminPage() {
   const supabase = await createClient();
@@ -12,7 +12,7 @@ export default async function AdminPage() {
   } = await supabase.auth.getUser();
 
   if (!user || user.id !== FOUNDER_USER_ID) {
-    redirect('/');
+    redirect("/");
   }
 
   return (

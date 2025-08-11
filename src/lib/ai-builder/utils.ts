@@ -1,6 +1,6 @@
 export const generateSessionId = () => {
   return (
-    'ai-builder-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9)
+    "ai-builder-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9)
   );
 };
 
@@ -19,8 +19,8 @@ export const checkForDuplicateSchema = (forms: any[], schema: any) => {
 };
 
 export const initializeScrollbarStyles = () => {
-  if (typeof window !== 'undefined') {
-    const style = document.createElement('style');
+  if (typeof window !== "undefined") {
+    const style = document.createElement("style");
     style.innerHTML = `
       .scrollbar-none {
         scrollbar-width: none;

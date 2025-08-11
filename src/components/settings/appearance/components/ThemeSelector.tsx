@@ -1,11 +1,11 @@
-import type React from 'react';
+import type React from "react";
 
-import { Label } from '@/components/ui/label';
-import { APPEARANCE_SETTINGS } from '../constants';
+import { Label } from "@/components/ui/label";
+import { APPEARANCE_SETTINGS } from "../constants";
 
-import type { Theme } from '../types';
+import type { Theme } from "../types";
 
-import { ThemeCard } from './ThemeCard';
+import { ThemeCard } from "./ThemeCard";
 
 interface ThemeSelectorProps {
   themes: Theme[];

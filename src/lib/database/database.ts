@@ -1,12 +1,12 @@
-import type { Database, FormSchema } from '@/lib/database';
-import { ensureDefaultFormSettings } from '@/lib/forms';
-import { createClient } from '@/utils/supabase/client';
-import { createClient as createServerClient } from '@/utils/supabase/server';
+import type { Database, FormSchema } from "@/lib/database";
+import { ensureDefaultFormSettings } from "@/lib/forms";
+import { createClient } from "@/utils/supabase/client";
+import { createClient as createServerClient } from "@/utils/supabase/server";
 
-export type Form = Database['public']['Tables']['forms']['Row'];
+export type Form = Database["public"]["Tables"]["forms"]["Row"];
 export type FormSubmission =
-  Database['public']['Tables']['form_submissions']['Row'];
-export type User = Database['public']['Tables']['users']['Row'];
+  Database["public"]["Tables"]["form_submissions"]["Row"];
+export type User = Database["public"]["Tables"]["users"]["Row"];
 
 const cache = new Map<string, { data: any; expires: number }>();
 const CACHE_TTL = 5 * 60 * 1000;
@@ -35,12 +35,12 @@ export const formsDb = {
   async createForm(userId: string, title: string, schema: FormSchema) {
     const supabase = createClient();
     const schemaWithDefaults = ensureDefaultFormSettings(schema);
-    const { generateUniqueSlug } = await import('@/lib/utils/slug');
+    const { generateUniqueSlug } = await import("@/lib/utils/slug");
 
     const slug = generateUniqueSlug(title);
 
     const { data, error } = await supabase
-      .from('forms')
+      .from("forms")
       .insert({
         user_id: userId,
         title,
@@ -53,26 +53,26 @@ export const formsDb = {
 
     if (error) throw error;
 
-    const userFormsKey = getCacheKey('getUserForms', userId);
+    const userFormsKey = getCacheKey("getUserForms", userId);
     cache.delete(userFormsKey);
 
     return data;
   },
 
   async getUserForms(userId: string) {
-    const cacheKey = getCacheKey('getUserForms', userId);
+    const cacheKey = getCacheKey("getUserForms", userId);
     const cached = getFromCache<Form[]>(cacheKey);
     if (cached) return cached;
 
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('forms')
+      .from("forms")
       .select(
-        'id, title, description, is_published, created_at, updated_at, user_id'
+        "id, title, description, is_published, created_at, updated_at, user_id",
       )
-      .eq('user_id', userId)
-      .order('updated_at', { ascending: false });
+      .eq("user_id", userId)
+      .order("updated_at", { ascending: false });
 
     if (error) throw error;
 
@@ -86,17 +86,17 @@ export const formsDb = {
   },
 
   async getUserFormsWithDetails(userId: string) {
-    const cacheKey = getCacheKey('getUserFormsWithDetails', userId);
+    const cacheKey = getCacheKey("getUserFormsWithDetails", userId);
     const cached = getFromCache<Form[]>(cacheKey);
     if (cached) return cached;
 
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('forms')
-      .select('*')
-      .eq('user_id', userId)
-      .order('updated_at', { ascending: false });
+      .from("forms")
+      .select("*")
+      .eq("user_id", userId)
+      .order("updated_at", { ascending: false });
 
     if (error) throw error;
 
@@ -110,16 +110,16 @@ export const formsDb = {
   },
 
   async getForm(formId: string) {
-    const cacheKey = getCacheKey('getForm', formId);
+    const cacheKey = getCacheKey("getForm", formId);
     const cached = getFromCache<Form>(cacheKey);
     if (cached) return cached;
 
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('forms')
-      .select('*')
-      .eq('id', formId)
+      .from("forms")
+      .select("*")
+      .eq("id", formId)
       .single();
 
     if (error) throw error;
@@ -134,18 +134,18 @@ export const formsDb = {
   },
 
   async getFormBasic(formId: string): Promise<Partial<Form>> {
-    const cacheKey = getCacheKey('getFormBasic', formId);
+    const cacheKey = getCacheKey("getFormBasic", formId);
     const cached = getFromCache<Partial<Form>>(cacheKey);
     if (cached) return cached;
 
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('forms')
+      .from("forms")
       .select(
-        'id, title, description, is_published, user_id, created_at, updated_at'
+        "id, title, description, is_published, user_id, created_at, updated_at",
       )
-      .eq('id', formId)
+      .eq("id", formId)
       .single();
 
     if (error) throw error;
@@ -161,7 +161,7 @@ export const formsDb = {
     const uncachedIds: string[] = [];
 
     formIds.forEach((id) => {
-      const cacheKey = getCacheKey('getForm', id);
+      const cacheKey = getCacheKey("getForm", id);
       const cached = getFromCache<Form>(cacheKey);
       if (cached) {
         cachedForms.push(cached);
@@ -177,9 +177,9 @@ export const formsDb = {
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('forms')
-      .select('*')
-      .in('id', uncachedIds);
+      .from("forms")
+      .select("*")
+      .in("id", uncachedIds);
 
     if (error) throw error;
 
@@ -189,7 +189,7 @@ export const formsDb = {
         schema: ensureDefaultFormSettings(form.schema),
       };
 
-      const cacheKey = getCacheKey('getForm', form.id);
+      const cacheKey = getCacheKey("getForm", form.id);
       setCache(cacheKey, processedForm);
 
       return processedForm;
@@ -202,32 +202,32 @@ export const formsDb = {
     const supabase = createClient();
 
     if (updates.title && !updates.slug) {
-      const { generateUniqueSlug } = await import('@/lib/utils/slug');
+      const { generateUniqueSlug } = await import("@/lib/utils/slug");
       updates.slug = generateUniqueSlug(updates.title);
     }
 
     const { data, error } = await supabase
-      .from('forms')
+      .from("forms")
       .update({
         ...updates,
         updated_at: new Date().toISOString(),
       })
-      .eq('id', formId)
+      .eq("id", formId)
       .select()
       .single();
 
     if (error) throw error;
 
-    const formCacheKey = getCacheKey('getForm', formId);
-    const basicCacheKey = getCacheKey('getFormBasic', formId);
+    const formCacheKey = getCacheKey("getForm", formId);
+    const basicCacheKey = getCacheKey("getFormBasic", formId);
     cache.delete(formCacheKey);
     cache.delete(basicCacheKey);
 
     if (data.user_id) {
-      const userFormsKey = getCacheKey('getUserForms', data.user_id);
+      const userFormsKey = getCacheKey("getUserForms", data.user_id);
       const userFormsDetailKey = getCacheKey(
-        'getUserFormsWithDetails',
-        data.user_id
+        "getUserFormsWithDetails",
+        data.user_id,
       );
       cache.delete(userFormsKey);
       cache.delete(userFormsDetailKey);
@@ -241,20 +241,20 @@ export const formsDb = {
 
     const form = await this.getFormBasic(formId);
 
-    const { error } = await supabase.from('forms').delete().eq('id', formId);
+    const { error } = await supabase.from("forms").delete().eq("id", formId);
 
     if (error) throw error;
 
-    const formCacheKey = getCacheKey('getForm', formId);
-    const basicCacheKey = getCacheKey('getFormBasic', formId);
+    const formCacheKey = getCacheKey("getForm", formId);
+    const basicCacheKey = getCacheKey("getFormBasic", formId);
     cache.delete(formCacheKey);
     cache.delete(basicCacheKey);
 
     if (form.user_id) {
-      const userFormsKey = getCacheKey('getUserForms', form.user_id);
+      const userFormsKey = getCacheKey("getUserForms", form.user_id);
       const userFormsDetailKey = getCacheKey(
-        'getUserFormsWithDetails',
-        form.user_id
+        "getUserFormsWithDetails",
+        form.user_id,
       );
       cache.delete(userFormsKey);
       cache.delete(userFormsDetailKey);
@@ -265,27 +265,27 @@ export const formsDb = {
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('forms')
+      .from("forms")
       .update({
         is_published: isPublished,
         updated_at: new Date().toISOString(),
       })
-      .eq('id', formId)
+      .eq("id", formId)
       .select()
       .single();
 
     if (error) throw error;
 
-    const formCacheKey = getCacheKey('getForm', formId);
-    const basicCacheKey = getCacheKey('getFormBasic', formId);
+    const formCacheKey = getCacheKey("getForm", formId);
+    const basicCacheKey = getCacheKey("getFormBasic", formId);
     cache.delete(formCacheKey);
     cache.delete(basicCacheKey);
 
     if (data.user_id) {
-      const userFormsKey = getCacheKey('getUserForms', data.user_id);
+      const userFormsKey = getCacheKey("getUserForms", data.user_id);
       const userFormsDetailKey = getCacheKey(
-        'getUserFormsWithDetails',
-        data.user_id
+        "getUserFormsWithDetails",
+        data.user_id,
       );
       cache.delete(userFormsKey);
       cache.delete(userFormsDetailKey);
@@ -297,12 +297,12 @@ export const formsDb = {
   async submitForm(
     formId: string,
     submissionData: Record<string, any>,
-    ipAddress?: string
+    ipAddress?: string,
   ) {
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('form_submissions')
+      .from("form_submissions")
       .insert({
         form_id: formId,
         submission_data: submissionData,
@@ -313,24 +313,24 @@ export const formsDb = {
 
     if (error) throw error;
 
-    const submissionsCacheKey = getCacheKey('getFormSubmissions', formId);
+    const submissionsCacheKey = getCacheKey("getFormSubmissions", formId);
     cache.delete(submissionsCacheKey);
 
     return data;
   },
 
   async getFormSubmissions(formId: string, limit?: number) {
-    const cacheKey = getCacheKey('getFormSubmissions', formId, limit);
+    const cacheKey = getCacheKey("getFormSubmissions", formId, limit);
     const cached = getFromCache<FormSubmission[]>(cacheKey);
     if (cached) return cached;
 
     const supabase = createClient();
 
     let query = supabase
-      .from('form_submissions')
-      .select('*')
-      .eq('form_id', formId)
-      .order('submitted_at', { ascending: false });
+      .from("form_submissions")
+      .select("*")
+      .eq("form_id", formId)
+      .order("submitted_at", { ascending: false });
 
     if (limit) {
       query = query.limit(limit);
@@ -347,10 +347,10 @@ export const formsDb = {
   async getFormSubmissionsPaginated(formId: string, page = 1, pageSize = 50) {
     const offset = (page - 1) * pageSize;
     const cacheKey = getCacheKey(
-      'getFormSubmissionsPaginated',
+      "getFormSubmissionsPaginated",
       formId,
       page,
-      pageSize
+      pageSize,
     );
     const cached = getFromCache<FormSubmission[]>(cacheKey);
     if (cached) return cached;
@@ -358,10 +358,10 @@ export const formsDb = {
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('form_submissions')
-      .select('*')
-      .eq('form_id', formId)
-      .order('submitted_at', { ascending: false })
+      .from("form_submissions")
+      .select("*")
+      .eq("form_id", formId)
+      .order("submitted_at", { ascending: false })
       .range(offset, offset + pageSize - 1);
 
     if (error) throw error;
@@ -373,14 +373,14 @@ export const formsDb = {
   async saveAIBuilderMessage(
     userId: string,
     sessionId: string,
-    role: 'user' | 'assistant' | 'system',
+    role: "user" | "assistant" | "system",
     content: string,
-    metadata: Record<string, any> = {}
+    metadata: Record<string, any> = {},
   ) {
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('ai_builder_chat')
+      .from("ai_builder_chat")
       .insert({
         user_id: userId,
         session_id: sessionId,
@@ -394,9 +394,9 @@ export const formsDb = {
     if (error) throw error;
 
     const historyCacheKey = getCacheKey(
-      'getAIBuilderChatHistory',
+      "getAIBuilderChatHistory",
       userId,
-      sessionId
+      sessionId,
     );
     cache.delete(historyCacheKey);
 
@@ -404,18 +404,18 @@ export const formsDb = {
   },
 
   async getAIBuilderChatHistory(userId: string, sessionId: string) {
-    const cacheKey = getCacheKey('getAIBuilderChatHistory', userId, sessionId);
+    const cacheKey = getCacheKey("getAIBuilderChatHistory", userId, sessionId);
     const cached = getFromCache<any[]>(cacheKey);
     if (cached) return cached;
 
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('ai_builder_chat')
-      .select('*')
-      .eq('user_id', userId)
-      .eq('session_id', sessionId)
-      .order('created_at', { ascending: true });
+      .from("ai_builder_chat")
+      .select("*")
+      .eq("user_id", userId)
+      .eq("session_id", sessionId)
+      .order("created_at", { ascending: true });
 
     if (error) throw error;
 
@@ -424,18 +424,18 @@ export const formsDb = {
   },
 
   async getAIBuilderSessions(userId: string, limit = 10) {
-    const cacheKey = getCacheKey('getAIBuilderSessions', userId, limit);
+    const cacheKey = getCacheKey("getAIBuilderSessions", userId, limit);
     const cached = getFromCache<any[]>(cacheKey);
     if (cached) return cached;
 
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('ai_builder_chat')
-      .select('session_id, created_at')
-      .eq('user_id', userId)
-      .eq('role', 'user')
-      .order('created_at', { ascending: false })
+      .from("ai_builder_chat")
+      .select("session_id, created_at")
+      .eq("user_id", userId)
+      .eq("role", "user")
+      .order("created_at", { ascending: false })
       .limit(limit);
 
     if (error) throw error;
@@ -447,7 +447,7 @@ export const formsDb = {
         }
         return acc;
       },
-      {} as Record<string, string>
+      {} as Record<string, string>,
     );
 
     const result = Object.entries(sessions).map(([sessionId, createdAt]) => ({
@@ -463,14 +463,14 @@ export const formsDb = {
     userId: string,
     formId: string,
     sessionId: string,
-    role: 'user' | 'assistant' | 'system',
+    role: "user" | "assistant" | "system",
     content: string,
-    metadata: Record<string, any> = {}
+    metadata: Record<string, any> = {},
   ) {
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('ai_analytics_chat')
+      .from("ai_analytics_chat")
       .insert({
         user_id: userId,
         form_id: formId,
@@ -485,10 +485,10 @@ export const formsDb = {
     if (error) throw error;
 
     const historyCacheKey = getCacheKey(
-      'getAIAnalyticsChatHistory',
+      "getAIAnalyticsChatHistory",
       userId,
       formId,
-      sessionId
+      sessionId,
     );
     cache.delete(historyCacheKey);
 
@@ -498,13 +498,13 @@ export const formsDb = {
   async getAIAnalyticsChatHistory(
     userId: string,
     formId: string,
-    sessionId: string
+    sessionId: string,
   ) {
     const cacheKey = getCacheKey(
-      'getAIAnalyticsChatHistory',
+      "getAIAnalyticsChatHistory",
       userId,
       formId,
-      sessionId
+      sessionId,
     );
     const cached = getFromCache<any[]>(cacheKey);
     if (cached) return cached;
@@ -512,12 +512,12 @@ export const formsDb = {
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('ai_analytics_chat')
-      .select('*')
-      .eq('user_id', userId)
-      .eq('form_id', formId)
-      .eq('session_id', sessionId)
-      .order('created_at', { ascending: true });
+      .from("ai_analytics_chat")
+      .select("*")
+      .eq("user_id", userId)
+      .eq("form_id", formId)
+      .eq("session_id", sessionId)
+      .order("created_at", { ascending: true });
 
     if (error) throw error;
 
@@ -527,10 +527,10 @@ export const formsDb = {
 
   async getAIAnalyticsSessions(userId: string, formId: string, limit = 10) {
     const cacheKey = getCacheKey(
-      'getAIAnalyticsSessions',
+      "getAIAnalyticsSessions",
       userId,
       formId,
-      limit
+      limit,
     );
     const cached = getFromCache<any[]>(cacheKey);
     if (cached) return cached;
@@ -538,11 +538,11 @@ export const formsDb = {
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('ai_analytics_chat')
-      .select('session_id, form_id, created_at')
-      .eq('user_id', userId)
-      .eq('role', 'user')
-      .order('created_at', { ascending: false })
+      .from("ai_analytics_chat")
+      .select("session_id, form_id, created_at")
+      .eq("user_id", userId)
+      .eq("role", "user")
+      .order("created_at", { ascending: false })
       .limit(limit);
 
     if (error) throw error;
@@ -558,7 +558,7 @@ export const formsDb = {
         }
         return acc;
       },
-      {} as Record<string, any>
+      {} as Record<string, any>,
     );
 
     const result = Object.values(sessions);
@@ -594,14 +594,14 @@ export const formsDb = {
 export const formsDbServer = {
   async getPublicForm(identifier: string) {
     const supabase = await createServerClient();
-    const { isUUID } = await import('@/lib/utils/slug');
+    const { isUUID } = await import("@/lib/utils/slug");
 
-    let query = supabase.from('forms').select('*').eq('is_published', true);
+    let query = supabase.from("forms").select("*").eq("is_published", true);
 
     if (isUUID(identifier)) {
-      query = query.eq('id', identifier);
+      query = query.eq("id", identifier);
     } else {
-      query = query.eq('slug', identifier);
+      query = query.eq("slug", identifier);
     }
 
     const { data, error } = await query.single();
@@ -618,10 +618,10 @@ export const formsDbServer = {
     const supabase = await createServerClient();
 
     const { data, error } = await supabase
-      .from('forms')
-      .select('id')
-      .eq('id', formId)
-      .eq('user_id', userId)
+      .from("forms")
+      .select("id")
+      .eq("id", formId)
+      .eq("user_id", userId)
       .single();
 
     if (error) return false;
@@ -631,12 +631,12 @@ export const formsDbServer = {
   async submitForm(
     formId: string,
     submissionData: Record<string, any>,
-    ipAddress?: string
+    ipAddress?: string,
   ) {
     const supabase = await createServerClient();
 
     const { data, error } = await supabase
-      .from('form_submissions')
+      .from("form_submissions")
       .insert({
         form_id: formId,
         submission_data: submissionData,
@@ -652,14 +652,14 @@ export const formsDbServer = {
   async saveAIBuilderMessage(
     userId: string,
     sessionId: string,
-    role: 'user' | 'assistant' | 'system',
+    role: "user" | "assistant" | "system",
     content: string,
-    metadata: Record<string, any> = {}
+    metadata: Record<string, any> = {},
   ) {
     const supabase = await createServerClient();
 
     const { data, error } = await supabase
-      .from('ai_builder_chat')
+      .from("ai_builder_chat")
       .insert({
         user_id: userId,
         session_id: sessionId,
@@ -678,11 +678,11 @@ export const formsDbServer = {
     const supabase = await createServerClient();
 
     const { data, error } = await supabase
-      .from('ai_builder_chat')
-      .select('*')
-      .eq('user_id', userId)
-      .eq('session_id', sessionId)
-      .order('created_at', { ascending: true });
+      .from("ai_builder_chat")
+      .select("*")
+      .eq("user_id", userId)
+      .eq("session_id", sessionId)
+      .order("created_at", { ascending: true });
 
     if (error) throw error;
     return data;
@@ -692,11 +692,11 @@ export const formsDbServer = {
     const supabase = await createServerClient();
 
     const { data, error } = await supabase
-      .from('ai_builder_chat')
-      .select('session_id, created_at')
-      .eq('user_id', userId)
-      .eq('role', 'user')
-      .order('created_at', { ascending: false })
+      .from("ai_builder_chat")
+      .select("session_id, created_at")
+      .eq("user_id", userId)
+      .eq("role", "user")
+      .order("created_at", { ascending: false })
       .limit(limit);
 
     if (error) throw error;
@@ -708,7 +708,7 @@ export const formsDbServer = {
         }
         return acc;
       },
-      {} as Record<string, string>
+      {} as Record<string, string>,
     );
 
     return Object.entries(sessions).map(([sessionId, createdAt]) => ({
@@ -721,14 +721,14 @@ export const formsDbServer = {
     userId: string,
     formId: string,
     sessionId: string,
-    role: 'user' | 'assistant' | 'system',
+    role: "user" | "assistant" | "system",
     content: string,
-    metadata: Record<string, any> = {}
+    metadata: Record<string, any> = {},
   ) {
     const supabase = await createServerClient();
 
     const { data, error } = await supabase
-      .from('ai_analytics_chat')
+      .from("ai_analytics_chat")
       .insert({
         user_id: userId,
         form_id: formId,
@@ -747,17 +747,17 @@ export const formsDbServer = {
   async getAIAnalyticsChatHistory(
     userId: string,
     formId: string,
-    sessionId: string
+    sessionId: string,
   ) {
     const supabase = await createServerClient();
 
     const { data, error } = await supabase
-      .from('ai_analytics_chat')
-      .select('*')
-      .eq('user_id', userId)
-      .eq('form_id', formId)
-      .eq('session_id', sessionId)
-      .order('created_at', { ascending: true });
+      .from("ai_analytics_chat")
+      .select("*")
+      .eq("user_id", userId)
+      .eq("form_id", formId)
+      .eq("session_id", sessionId)
+      .order("created_at", { ascending: true });
 
     if (error) throw error;
     return data;
@@ -767,11 +767,11 @@ export const formsDbServer = {
     const supabase = await createServerClient();
 
     const { data, error } = await supabase
-      .from('ai_analytics_chat')
-      .select('session_id, form_id, created_at')
-      .eq('user_id', userId)
-      .eq('role', 'user')
-      .order('created_at', { ascending: false })
+      .from("ai_analytics_chat")
+      .select("session_id, form_id, created_at")
+      .eq("user_id", userId)
+      .eq("role", "user")
+      .order("created_at", { ascending: false })
       .limit(limit);
 
     if (error) throw error;
@@ -787,7 +787,7 @@ export const formsDbServer = {
         }
         return acc;
       },
-      {} as Record<string, any>
+      {} as Record<string, any>,
     );
 
     return Object.values(sessions);
@@ -797,9 +797,9 @@ export const formsDbServer = {
     const supabase = await createServerClient();
 
     const { data, error } = await supabase
-      .from('users')
-      .select('*')
-      .eq('email', email)
+      .from("users")
+      .select("*")
+      .eq("email", email)
       .single();
 
     if (error) throw error;
@@ -811,12 +811,12 @@ export const formsDbServer = {
     email: string,
     name: string,
     has_premium = false,
-    polar_customer_id: string | null = null
+    polar_customer_id: string | null = null,
   ) {
     const supabase = await createServerClient();
 
     const { data, error } = await supabase
-      .from('users')
+      .from("users")
       .upsert(
         {
           uid,
@@ -826,8 +826,8 @@ export const formsDbServer = {
           polar_customer_id,
         },
         {
-          onConflict: 'email',
-        }
+          onConflict: "email",
+        },
       )
       .select()
       .single();
@@ -840,9 +840,9 @@ export const formsDbServer = {
     const supabase = await createServerClient();
 
     const { data, error } = await supabase
-      .from('users')
+      .from("users")
       .update({ has_premium })
-      .eq('email', email)
+      .eq("email", email)
       .select()
       .single();
 
@@ -854,9 +854,9 @@ export const formsDbServer = {
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('users')
-      .select('*')
-      .eq('email', email)
+      .from("users")
+      .select("*")
+      .eq("email", email)
       .single();
 
     if (error) throw error;
@@ -867,9 +867,9 @@ export const formsDbServer = {
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('users')
+      .from("users")
       .update({ has_premium: hasPremium })
-      .eq('email', email)
+      .eq("email", email)
       .select()
       .single();
 
@@ -881,9 +881,9 @@ export const formsDbServer = {
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('users')
+      .from("users")
       .update({ polar_customer_id: polarCustomerId })
-      .eq('email', email)
+      .eq("email", email)
       .select()
       .single();
 
@@ -895,9 +895,9 @@ export const formsDbServer = {
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('users')
+      .from("users")
       .update(updates)
-      .eq('email', email)
+      .eq("email", email)
       .select()
       .single();
 
@@ -908,9 +908,9 @@ export const formsDbServer = {
   async countFormSubmissions(formId: string) {
     const supabase = await createServerClient();
     const { count, error } = await supabase
-      .from('form_submissions')
-      .select('id', { count: 'exact', head: true })
-      .eq('form_id', formId);
+      .from("form_submissions")
+      .select("id", { count: "exact", head: true })
+      .eq("form_id", formId);
     if (error) throw error;
     return count || 0;
   },

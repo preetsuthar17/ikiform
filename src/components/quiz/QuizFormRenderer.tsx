@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect } from 'react';
-import { FormFieldRenderer } from '@/components/form-builder/form-field-renderer';
-import { QuizProgress } from '@/components/quiz/QuizProgress';
-import { QuizResults } from '@/components/quiz/QuizResults';
-import { QuizScoreDisplay } from '@/components/quiz/QuizScoreDisplay';
-import { useQuizState } from '@/hooks/quiz/use-quiz-state';
-import type { FormField, FormSchema } from '@/lib/database';
+import React, { useCallback, useEffect } from "react";
+import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
+import { QuizProgress } from "@/components/quiz/QuizProgress";
+import { QuizResults } from "@/components/quiz/QuizResults";
+import { QuizScoreDisplay } from "@/components/quiz/QuizScoreDisplay";
+import { useQuizState } from "@/hooks/quiz/use-quiz-state";
+import type { FormField, FormSchema } from "@/lib/database";
 
 interface QuizFormRendererProps {
   schema: FormSchema;
@@ -42,7 +42,7 @@ export function QuizFormRenderer({
     resetQuiz();
 
     Object.keys(values).forEach((fieldId) => {
-      onChange(fieldId, '');
+      onChange(fieldId, "");
     });
   }, [resetQuiz, values, onChange]);
 
@@ -51,7 +51,7 @@ export function QuizFormRenderer({
 
     const quizFields = fields.filter((field) => field.settings?.isQuizField);
     const currentFieldIndex = quizFields.findIndex(
-      (field) => field.id in errors || !values[field.id]
+      (field) => field.id in errors || !values[field.id],
     );
 
     return currentFieldIndex >= 0 ? currentFieldIndex + 1 : quizFields.length;
@@ -104,7 +104,7 @@ export function QuizFormRenderer({
               percentage:
                 quizState.totalPossible > 0
                   ? Math.round(
-                      (quizState.currentScore / quizState.totalPossible) * 100
+                      (quizState.currentScore / quizState.totalPossible) * 100,
                     )
                   : 0,
               passed: false,
@@ -137,8 +137,8 @@ export function QuizFormRenderer({
           <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4">
             <div className="flex items-center">
               <div className="text-yellow-800">
-                <strong>Time Warning:</strong> Only{' '}
-                {Math.floor(quizState.timeRemaining / 60)} minutes and{' '}
+                <strong>Time Warning:</strong> Only{" "}
+                {Math.floor(quizState.timeRemaining / 60)} minutes and{" "}
                 {quizState.timeRemaining % 60} seconds remaining!
               </div>
             </div>

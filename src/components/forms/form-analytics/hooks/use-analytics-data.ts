@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
-import type { Form, FormSubmission } from '@/lib/database';
-import type { AnalyticsData } from '../types';
+import type { Form, FormSubmission } from "@/lib/database";
+import type { AnalyticsData } from "../types";
 
 import {
   calculateBounceRate,
@@ -11,11 +11,11 @@ import {
   calculateQuizAnalytics,
   calculateSubmissionTrends,
   getTotalFields,
-} from '../utils/analytics';
+} from "../utils/analytics";
 
 export const useAnalyticsData = (
   form: Form,
-  submissions: FormSubmission[]
+  submissions: FormSubmission[],
 ): AnalyticsData => {
   return useMemo(() => {
     const totalSubmissions = submissions.length;
@@ -25,13 +25,13 @@ export const useAnalyticsData = (
     const last30Days = new Date();
     last30Days.setDate(last30Days.getDate() - 30);
     const recentSubmissions = submissions.filter(
-      (sub) => new Date(sub.submitted_at) >= last30Days
+      (sub) => new Date(sub.submitted_at) >= last30Days,
     );
 
     const fieldStats = submissions.reduce(
       (acc, sub) => {
         const filledFields = Object.values(sub.submission_data).filter(
-          (val) => val !== '' && val !== null && val !== undefined
+          (val) => val !== "" && val !== null && val !== undefined,
         ).length;
         acc.totalFilledFields += filledFields;
         acc.fieldCompletionRates[filledFields] =
@@ -41,7 +41,7 @@ export const useAnalyticsData = (
       {
         totalFilledFields: 0,
         fieldCompletionRates: {} as Record<number, number>,
-      }
+      },
     );
 
     const completionRate =
@@ -49,7 +49,7 @@ export const useAnalyticsData = (
         ? Math.round(
             (fieldStats.totalFilledFields /
               (submissions.length * totalFields)) *
-              100
+              100,
           )
         : 0;
 
@@ -59,11 +59,11 @@ export const useAnalyticsData = (
         acc[date] = (acc[date] || 0) + 1;
         return acc;
       },
-      {} as Record<string, number>
+      {} as Record<string, number>,
     );
 
     const mostActiveDay = Object.entries(submissionsByDay).sort(
-      ([, a], [, b]) => b - a
+      ([, a], [, b]) => b - a,
     )[0];
 
     const avgSubmissionsPerDay =
@@ -71,7 +71,7 @@ export const useAnalyticsData = (
         ? Math.round(
             (submissions.length /
               Math.max(1, Object.keys(submissionsByDay).length)) *
-              10
+              10,
           ) / 10
         : 0;
 
@@ -82,7 +82,7 @@ export const useAnalyticsData = (
     const conversionFunnel = calculateConversionFunnel(form, submissions);
 
     const peakHour = Object.entries(hourlySubmissions).sort(
-      ([, a], [, b]) => b - a
+      ([, a], [, b]) => b - a,
     )[0];
 
     const topFields = Object.entries(fieldAnalytics)

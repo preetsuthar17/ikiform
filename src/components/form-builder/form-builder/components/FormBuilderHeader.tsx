@@ -11,22 +11,22 @@ import {
   Settings as SettingsIcon,
   Share,
   Sparkles,
-} from 'lucide-react';
-import Link from 'next/link';
-import type React from 'react';
+} from "lucide-react";
+import Link from "next/link";
+import type React from "react";
 
-import { Button } from '@/components/ui/button';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
+} from "@/components/ui/tooltip";
 
-import { FORM_BUILDER_CONSTANTS } from '../constants';
+import { FORM_BUILDER_CONSTANTS } from "../constants";
 
-import type { FormBuilderHeaderProps } from '../types';
+import type { FormBuilderHeaderProps } from "../types";
 
 export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
   formSchema,
@@ -69,7 +69,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               </Link>
             </Button>
             <div className="text-muted-foreground text-xs md:text-sm">
-              {fieldCount} field{fieldCount !== 1 ? 's' : ''}
+              {fieldCount} field{fieldCount !== 1 ? "s" : ""}
             </div>
             {autoSaving && (
               <div className="flex items-center gap-1 text-muted-foreground text-xs">
@@ -86,14 +86,14 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               className="gap-1 text-xs"
               onClick={onModeToggle}
               size="sm"
-              variant={formSchema.settings.multiStep ? 'default' : 'secondary'}
+              variant={formSchema.settings.multiStep ? "default" : "secondary"}
             >
               {formSchema.settings.multiStep ? (
                 <Layers className="h-3 w-3" />
               ) : (
                 <FileText className="h-3 w-3" />
               )}
-              {formSchema.settings.multiStep ? 'Multi-Step' : 'Single Page'}
+              {formSchema.settings.multiStep ? "Multi-Step" : "Single Page"}
             </Button>
             <Button
               className="h-8 w-8"
@@ -147,12 +147,12 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               {isPublished ? (
                 <>
                   {!publishing && <Globe className="h-3 w-3 shrink-0" />}
-                  {publishing ? 'Unpublishing' : 'Published'}
+                  {publishing ? "Unpublishing" : "Published"}
                 </>
               ) : (
                 <>
                   {!publishing && <EyeOff className="h-3 w-3 shrink-0" />}
-                  {publishing ? 'Publishing' : 'Publish'}
+                  {publishing ? "Publishing" : "Publish"}
                 </>
               )}
             </Button>
@@ -165,7 +165,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               size="sm"
             >
               {!saving && <Save className="h-3 w-3" />}
-              {saving ? 'Saving' : 'Save'}
+              {saving ? "Saving" : "Save"}
             </Button>
           </div>
         </ScrollArea>
@@ -175,14 +175,14 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             className="gap-2"
             onClick={onModeToggle}
             size="sm"
-            variant={formSchema.settings.multiStep ? 'default' : 'secondary'}
+            variant={formSchema.settings.multiStep ? "default" : "secondary"}
           >
             {formSchema.settings.multiStep ? (
               <Layers className="h-4 w-4" />
             ) : (
               <FileText className="h-4 w-4" />
             )}
-            {formSchema.settings.multiStep ? 'Multi-Step' : 'Single Page'}
+            {formSchema.settings.multiStep ? "Multi-Step" : "Single Page"}
           </Button>
           <TooltipProvider>
             <Tooltip>
@@ -249,19 +249,19 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             {isPublished ? (
               <>
                 {!publishing && <Globe className="h-4 w-4 shrink-0" />}
-                {publishing ? 'Unpublishing' : 'Published'}
+                {publishing ? "Unpublishing" : "Published"}
               </>
             ) : (
               <>
                 {!publishing && <EyeOff className="h-4 w-4 shrink-0" />}
-                {publishing ? 'Publishing' : 'Publish'}
+                {publishing ? "Publishing" : "Publish"}
               </>
             )}
           </Button>
 
           <Button disabled={saving} loading={saving} onClick={onSave} size="sm">
             {!saving && <Save className="h-4 w-4" />}
-            {saving ? 'Saving' : 'Save'}
+            {saving ? "Saving" : "Save"}
           </Button>
         </div>
       </div>

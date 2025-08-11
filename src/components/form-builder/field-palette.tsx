@@ -1,1 +1,1 @@
-export { FieldPalette } from './field-palette/FieldPalette';
+export { FieldPalette } from "./field-palette/FieldPalette";

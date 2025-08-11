@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Tabs, TabsContent } from '@/components/ui/tabs';
-import { SETTINGS_SECTIONS } from '../constants';
-import type { SettingsSection } from '../types';
-import { getMobileLayoutStyles } from '../utils';
-import { ModalHeader } from './ModalHeader';
-import { SettingsContent } from './SettingsContent';
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { SETTINGS_SECTIONS } from "../constants";
+import type { SettingsSection } from "../types";
+import { getMobileLayoutStyles } from "../utils";
+import { ModalHeader } from "./ModalHeader";
+import { SettingsContent } from "./SettingsContent";
 
 interface MobileLayoutProps {
   activeSection: SettingsSection;

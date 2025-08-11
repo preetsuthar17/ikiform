@@ -3,18 +3,18 @@ import {
   SkeletonButton,
   SkeletonCard,
   SkeletonText,
-} from '@/components/ui/skeleton';
+} from "@/components/ui/skeleton";
 
 interface FormSkeletonProps {
-  variant?: 'single-step' | 'multi-step';
+  variant?: "single-step" | "multi-step";
   showProgress?: boolean;
 }
 
 export function FormSkeleton({
-  variant = 'single-step',
+  variant = "single-step",
   showProgress = false,
 }: FormSkeletonProps) {
-  if (variant === 'multi-step') {
+  if (variant === "multi-step") {
     return (
       <div className="mx-auto max-w-2xl space-y-6 p-4">
         {showProgress && (

@@ -1,5 +1,5 @@
-export { BlockManager } from './BlockManager';
+export { BlockManager } from "./BlockManager";
 
-export type { BlockManagerProps } from './types';
+export type { BlockManagerProps } from "./types";
 
-export { canDeleteBlock, getBlockStats } from './utils';
+export { canDeleteBlock, getBlockStats } from "./utils";

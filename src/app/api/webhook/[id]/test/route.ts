@@ -1,9 +1,9 @@
-import { type NextRequest, NextResponse } from 'next/server';
-import { testWebhook } from '@/lib/webhooks/outbound';
+import { type NextRequest, NextResponse } from "next/server";
+import { testWebhook } from "@/lib/webhooks/outbound";
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     let samplePayload: unknown;
@@ -16,9 +16,9 @@ export async function POST(
     return NextResponse.json(
       {
         error:
-          error instanceof Error ? error.message : 'Failed to test webhook',
+          error instanceof Error ? error.message : "Failed to test webhook",
       },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }

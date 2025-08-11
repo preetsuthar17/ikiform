@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { refreshSignedUrls } from '@/lib/storage/supabase-storage';
+import { NextRequest, NextResponse } from "next/server";
+import { refreshSignedUrls } from "@/lib/storage/supabase-storage";
 
 export async function POST(request: NextRequest) {
   try {
@@ -7,8 +7,8 @@ export async function POST(request: NextRequest) {
 
     if (!filePaths || !Array.isArray(filePaths)) {
       return NextResponse.json(
-        { error: 'filePaths array is required' },
-        { status: 400 }
+        { error: "filePaths array is required" },
+        { status: 400 },
       );
     }
 
@@ -23,10 +23,10 @@ export async function POST(request: NextRequest) {
       signedUrls,
     });
   } catch (error) {
-    console.error('Refresh URLs error:', error);
+    console.error("Refresh URLs error:", error);
     return NextResponse.json(
-      { error: 'Failed to refresh URLs' },
-      { status: 500 }
+      { error: "Failed to refresh URLs" },
+      { status: 500 },
     );
   }
 }

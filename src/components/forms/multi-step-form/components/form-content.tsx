@@ -1,10 +1,10 @@
-import type React from 'react';
-import { useEffect, useRef } from 'react';
+import type React from "react";
+import { useEffect, useRef } from "react";
 
-import { FormFieldRenderer } from '@/components/form-builder/form-field-renderer';
-import { Separator } from '@/components/ui';
-import { SocialMediaIcons } from '@/components/ui/social-media-icons';
-import type { FormBlock, FormSchema } from '@/lib/database';
+import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
+import { Separator } from "@/components/ui";
+import { SocialMediaIcons } from "@/components/ui/social-media-icons";
+import type { FormBlock, FormSchema } from "@/lib/database";
 
 interface FormContentProps {
   formId: string;
@@ -40,7 +40,7 @@ export const FormContent: React.FC<FormContentProps> = ({
 
   const visibleFields = fieldVisibility
     ? currentBlock.fields.filter(
-        (field) => fieldVisibility[field.id]?.visible !== false
+        (field) => fieldVisibility[field.id]?.visible !== false,
       )
     : currentBlock.fields;
 
@@ -60,11 +60,11 @@ export const FormContent: React.FC<FormContentProps> = ({
         <Separator />
         {schema.settings.branding?.socialMedia?.enabled &&
           schema.settings.branding.socialMedia.platforms &&
-          (schema.settings.branding.socialMedia.position === 'header' ||
-            schema.settings.branding.socialMedia.position === 'both') && (
+          (schema.settings.branding.socialMedia.position === "header" ||
+            schema.settings.branding.socialMedia.position === "both") && (
             <SocialMediaIcons
               className="justify-start"
-              iconSize={schema.settings.branding.socialMedia.iconSize || 'md'}
+              iconSize={schema.settings.branding.socialMedia.iconSize || "md"}
               platforms={schema.settings.branding.socialMedia.platforms}
             />
           )}

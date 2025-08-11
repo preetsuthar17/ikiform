@@ -1,12 +1,19 @@
-'use client';
+"use client";
 
-import React, { useCallback, useState, useEffect, useMemo } from 'react';
-import { FileUpload } from '@/components/ui/file-upload';
-import { Alert } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { X, FileText, Image as ImageIcon, Music, Video, Archive } from 'lucide-react';
-import type { BaseFieldProps } from '../types';
+import React, { useCallback, useState, useEffect, useMemo } from "react";
+import { FileUpload } from "@/components/ui/file-upload";
+import { Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  X,
+  FileText,
+  Image as ImageIcon,
+  Music,
+  Video,
+  Archive,
+} from "lucide-react";
+import type { BaseFieldProps } from "../types";
 
 interface FileUploadSettings {
   accept?: string;
@@ -24,13 +31,20 @@ interface UploadedFile {
   signedUrl: string;
 }
 
-export function FileUploadField({ field, value, onChange, error, disabled, formId }: BaseFieldProps) {
+export function FileUploadField({
+  field,
+  value,
+  onChange,
+  error,
+  disabled,
+  formId,
+}: BaseFieldProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
 
   const fallbackFormId = useMemo(() => {
     if (formId) return formId;
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const path = window.location.pathname;
       const match = path.match(/^\/f\/([^/]+)/);
       return match?.[1] || null;
@@ -38,104 +52,115 @@ export function FileUploadField({ field, value, onChange, error, disabled, formI
     return null;
   }, [formId]);
 
-  const settings = useMemo(() => field.settings as FileUploadSettings, [field.settings]);
+  const settings = useMemo(
+    () => field.settings as FileUploadSettings,
+    [field.settings],
+  );
   const maxSize = settings?.maxSize || 50 * 1024 * 1024;
   const maxFiles = settings?.maxFiles || 10;
-  const accept = settings?.accept || 'image/*,application/pdf,video/*,audio/*,text/*,application/zip';
+  const accept =
+    settings?.accept ||
+    "image/*,application/pdf,video/*,audio/*,text/*,application/zip";
 
-  const uploadedFiles: UploadedFile[] = useMemo(() => 
-    Array.isArray(value) ? value : [], 
-    [value]
+  const uploadedFiles: UploadedFile[] = useMemo(
+    () => (Array.isArray(value) ? value : []),
+    [value],
   );
 
   useEffect(() => {
-    if (value === undefined || value === null || value === '') {
+    if (value === undefined || value === null || value === "") {
       onChange([]);
     }
   }, []);
 
   const getFileIcon = useCallback((type: string) => {
-    if (type.startsWith('image/')) return ImageIcon;
-    if (type.startsWith('video/')) return Video;
-    if (type.startsWith('audio/')) return Music;
-    if (type.includes('pdf') || type.includes('document')) return FileText;
-    if (type.includes('zip') || type.includes('archive')) return Archive;
+    if (type.startsWith("image/")) return ImageIcon;
+    if (type.startsWith("video/")) return Video;
+    if (type.startsWith("audio/")) return Music;
+    if (type.includes("pdf") || type.includes("document")) return FileText;
+    if (type.includes("zip") || type.includes("archive")) return Archive;
     return FileText;
   }, []);
 
   const formatFileSize = useCallback((bytes: number): string => {
-    if (!bytes) return '0 Bytes';
+    if (!bytes) return "0 Bytes";
     const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const sizes = ["Bytes", "KB", "MB", "GB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return `${(bytes / k ** i).toFixed(1)} ${sizes[i]}`;
   }, []);
 
+  const handleUpload = useCallback(
+    async (files: File[]) => {
+      const actualFormId = fallbackFormId;
 
+      if (!actualFormId) {
+        const mockFiles = files.map((file, index) => ({
+          id: `preview-${Date.now()}-${index}`,
+          name: file.name,
+          size: file.size,
+          type: file.type,
+          url: `preview/${file.name}`,
+          signedUrl: URL.createObjectURL(file),
+        }));
 
-  const handleUpload = useCallback(async (files: File[]) => {
-    const actualFormId = fallbackFormId;
+        const currentFiles = Array.isArray(value) ? value : [];
+        onChange([...currentFiles, ...mockFiles]);
+        return;
+      }
 
-    if (!actualFormId) {
-      const mockFiles = files.map((file, index) => ({
-        id: `preview-${Date.now()}-${index}`,
-        name: file.name,
-        size: file.size,
-        type: file.type,
-        url: `preview/${file.name}`,
-        signedUrl: URL.createObjectURL(file),
-      }));
+      setIsUploading(true);
+      setUploadError(null);
 
-      const currentFiles = Array.isArray(value) ? value : [];
-      onChange([...currentFiles, ...mockFiles]);
-      return;
-    }
+      try {
+        const uploadPromises = files.map(async (file) => {
+          const formData = new FormData();
+          formData.append("file", file);
+          formData.append("formId", actualFormId);
+          formData.append("fieldId", field.id);
 
-    setIsUploading(true);
-    setUploadError(null);
+          const response = await fetch("/api/upload", {
+            method: "POST",
+            body: formData,
+          });
 
-        try {
-      const uploadPromises = files.map(async (file) => {
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('formId', actualFormId);
-        formData.append('fieldId', field.id);
-        
-        const response = await fetch('/api/upload', {
-          method: 'POST',
-          body: formData,
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || "Upload failed");
+          }
+
+          const result = await response.json();
+          return result.file;
         });
 
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || 'Upload failed');
-        }
+        const newUploadedFiles = await Promise.all(uploadPromises);
+        const currentFiles = Array.isArray(value) ? value : [];
+        onChange([...currentFiles, ...newUploadedFiles]);
+      } catch (error) {
+        setUploadError(
+          error instanceof Error ? error.message : "Upload failed",
+        );
+        throw error;
+      } finally {
+        setIsUploading(false);
+      }
+    },
+    [fallbackFormId, field.id, value, onChange],
+  );
 
-        const result = await response.json();
-        return result.file;
-      });
-
-      const newUploadedFiles = await Promise.all(uploadPromises);
+  const handleRemoveFile = useCallback(
+    (fileId: string) => {
       const currentFiles = Array.isArray(value) ? value : [];
-      onChange([...currentFiles, ...newUploadedFiles]);
-    } catch (error) {
-      setUploadError(error instanceof Error ? error.message : 'Upload failed');
-      throw error;
-    } finally {
-      setIsUploading(false);
-    }
-  }, [fallbackFormId, field.id, value, onChange]);
+      const fileToRemove = currentFiles.find((file) => file.id === fileId);
 
-  const handleRemoveFile = useCallback((fileId: string) => {
-    const currentFiles = Array.isArray(value) ? value : [];
-    const fileToRemove = currentFiles.find(file => file.id === fileId);
-    
-    if (fileToRemove && fileToRemove.signedUrl.startsWith('blob:')) {
-      URL.revokeObjectURL(fileToRemove.signedUrl);
-    }
+      if (fileToRemove && fileToRemove.signedUrl.startsWith("blob:")) {
+        URL.revokeObjectURL(fileToRemove.signedUrl);
+      }
 
-    onChange(currentFiles.filter(file => file.id !== fileId));
-  }, [value, onChange]);
+      onChange(currentFiles.filter((file) => file.id !== fileId));
+    },
+    [value, onChange],
+  );
 
   return (
     <div className="space-y-4">
@@ -144,7 +169,7 @@ export function FileUploadField({ field, value, onChange, error, disabled, formI
           📋 Preview Mode - Files will be shown for demo purposes
         </div>
       )}
-      
+
       <FileUpload
         accept={accept}
         disabled={disabled || isUploading}
@@ -167,12 +192,14 @@ export function FileUploadField({ field, value, onChange, error, disabled, formI
       {/* Display uploaded files */}
       {uploadedFiles.length > 0 && (
         <div className="space-y-2">
-          <h4 className="text-sm font-medium">Uploaded Files ({uploadedFiles.length})</h4>
+          <h4 className="text-sm font-medium">
+            Uploaded Files ({uploadedFiles.length})
+          </h4>
           <div className="grid gap-2">
             {uploadedFiles.map((file) => {
               const IconComponent = getFileIcon(file.type);
-              const isImage = file.type.startsWith('image/');
-              
+              const isImage = file.type.startsWith("image/");
+
               return (
                 <div
                   key={file.id}
@@ -224,9 +251,11 @@ export function FileUploadField({ field, value, onChange, error, disabled, formI
 
       {/* File constraints info */}
       <div className="text-xs text-muted-foreground">
-        <p>Max {maxFiles} files, up to {formatFileSize(maxSize)} each</p>
+        <p>
+          Max {maxFiles} files, up to {formatFileSize(maxSize)} each
+        </p>
         {settings?.allowedTypes && (
-          <p>Allowed types: {settings.allowedTypes.join(', ')}</p>
+          <p>Allowed types: {settings.allowedTypes.join(", ")}</p>
         )}
       </div>
     </div>

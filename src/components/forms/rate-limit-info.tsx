@@ -1,6 +1,6 @@
-import { AlertTriangle, Clock, Shield } from 'lucide-react';
-import React from 'react';
-import { Card } from '@/components/ui/card';
+import { AlertTriangle, Clock, Shield } from "lucide-react";
+import React from "react";
+import { Card } from "@/components/ui/card";
 
 interface RateLimitInfoProps {
   rateLimit: {
@@ -14,7 +14,7 @@ interface RateLimitInfoProps {
 
 export function RateLimitInfo({
   rateLimit,
-  className = '',
+  className = "",
 }: RateLimitInfoProps) {
   if (!rateLimit.enabled) {
     return null;
@@ -39,9 +39,9 @@ export function RateLimitInfo({
             </div>
           </div>
           <p className="text-muted-foreground text-xs">
-            This form is protected against spam. You can submit up to{' '}
-            <span className="font-medium">{rateLimit.maxSubmissions}</span>{' '}
-            times every{' '}
+            This form is protected against spam. You can submit up to{" "}
+            <span className="font-medium">{rateLimit.maxSubmissions}</span>{" "}
+            times every{" "}
             <span className="font-medium">{rateLimit.timeWindow}</span> minutes.
           </p>
         </div>

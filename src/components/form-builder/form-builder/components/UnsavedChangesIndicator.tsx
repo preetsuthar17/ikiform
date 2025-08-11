@@ -1,8 +1,8 @@
-import { AlertTriangle } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
-import type React from 'react';
+import { AlertTriangle } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import type React from "react";
 
-import type { UnsavedChangesIndicatorProps } from '../types';
+import type { UnsavedChangesIndicatorProps } from "../types";
 
 export const UnsavedChangesIndicator: React.FC<
   UnsavedChangesIndicatorProps
@@ -16,7 +16,7 @@ export const UnsavedChangesIndicator: React.FC<
           exit={{ opacity: 0, y: 20, scale: 0.95 }}
           initial={{ opacity: 0, y: 20, scale: 0.95 }}
           transition={{
-            type: 'spring',
+            type: "spring",
             stiffness: 300,
             damping: 25,
           }}

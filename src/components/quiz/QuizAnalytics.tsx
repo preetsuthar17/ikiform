@@ -7,14 +7,14 @@ import {
   Trophy,
   Users,
   XCircle,
-} from 'lucide-react';
-import React from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Separator } from '@/components/ui/separator';
-import type { FormSchema, FormSubmission } from '@/lib/database';
-import { getQuizStatistics } from '@/lib/quiz/scoring';
+} from "lucide-react";
+import React from "react";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import type { FormSchema, FormSubmission } from "@/lib/database";
+import { getQuizStatistics } from "@/lib/quiz/scoring";
 
 interface QuizAnalyticsProps {
   schema: FormSchema;
@@ -25,7 +25,7 @@ interface QuizAnalyticsProps {
 export function QuizAnalytics({
   schema,
   submissions,
-  className = '',
+  className = "",
 }: QuizAnalyticsProps) {
   const stats = getQuizStatistics(schema, submissions);
 
@@ -104,9 +104,9 @@ export function QuizAnalytics({
             <div className="flex items-center justify-between">
               <div className="text-muted-foreground text-sm">
                 Analyzing {stats.questionStats.length} question
-                {stats.questionStats.length !== 1 ? 's' : ''} across{' '}
+                {stats.questionStats.length !== 1 ? "s" : ""} across{" "}
                 {stats.totalAttempts} attempt
-                {stats.totalAttempts !== 1 ? 's' : ''}
+                {stats.totalAttempts !== 1 ? "s" : ""}
               </div>
               <div className="flex items-center gap-4 text-xs">
                 <div className="flex items-center gap-1">
@@ -139,8 +139,8 @@ export function QuizAnalytics({
                         className="text-xs"
                         variant={
                           questionStat.correctRate >= 70
-                            ? 'default'
-                            : 'destructive'
+                            ? "default"
+                            : "destructive"
                         }
                       >
                         {questionStat.correctRate.toFixed(1)}%
@@ -151,7 +151,7 @@ export function QuizAnalytics({
                     </h4>
                     <p className="text-muted-foreground text-xs">
                       {questionStat.totalAnswers} response
-                      {questionStat.totalAnswers !== 1 ? 's' : ''}
+                      {questionStat.totalAnswers !== 1 ? "s" : ""}
                     </p>
                   </div>
 
@@ -166,16 +166,16 @@ export function QuizAnalytics({
                       <span className="font-medium text-green-600">
                         {Math.round(
                           (questionStat.correctRate / 100) *
-                            questionStat.totalAnswers
-                        )}{' '}
+                            questionStat.totalAnswers,
+                        )}{" "}
                         correct
                       </span>
                       <span className="font-medium text-red-600">
                         {questionStat.totalAnswers -
                           Math.round(
                             (questionStat.correctRate / 100) *
-                              questionStat.totalAnswers
-                          )}{' '}
+                              questionStat.totalAnswers,
+                          )}{" "}
                         incorrect
                       </span>
                     </div>

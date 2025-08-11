@@ -1,7 +1,7 @@
-import { FormPreview } from '@/components/form-builder/form-preview';
+import { FormPreview } from "@/components/form-builder/form-preview";
 
-import type { PreviewPanelProps } from '@/lib/ai-builder/types';
-import { PreviewPanelHeader } from './preview-panel-header';
+import type { PreviewPanelProps } from "@/lib/ai-builder/types";
+import { PreviewPanelHeader } from "./preview-panel-header";
 
 export function PreviewPanel({
   forms,
@@ -14,10 +14,10 @@ export function PreviewPanel({
   const handleUseForm = () => {
     if (activeForm?.schema) {
       localStorage.setItem(
-        'importedFormSchema',
-        JSON.stringify(activeForm.schema)
+        "importedFormSchema",
+        JSON.stringify(activeForm.schema),
       );
-      router.push('/form-builder');
+      router.push("/form-builder");
     }
   };
 

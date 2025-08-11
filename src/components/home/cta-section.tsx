@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { Button } from '../ui/button';
+import Link from "next/link";
+import { Button } from "../ui/button";
 
 export default function CTASection() {
   return (

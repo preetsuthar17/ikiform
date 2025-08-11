@@ -1,7 +1,7 @@
-import type React from 'react';
-import { Card } from '@/components/ui/card';
-import type { FormTypeCardProps } from '../types';
-import { FormTypePreview } from './FormTypePreview';
+import type React from "react";
+import { Card } from "@/components/ui/card";
+import type { FormTypeCardProps } from "../types";
+import { FormTypePreview } from "./FormTypePreview";
 
 export const FormTypeCard: React.FC<FormTypeCardProps> = ({
   type,
@@ -13,7 +13,7 @@ export const FormTypeCard: React.FC<FormTypeCardProps> = ({
   return (
     <Card
       className={`w-full cursor-pointer p-6 transition-all duration-200 hover:shadow-md ${
-        isSelected ? 'bg-primary/5 ring-2 ring-primary' : 'hover:bg-muted/30'
+        isSelected ? "bg-primary/5 ring-2 ring-primary" : "hover:bg-muted/30"
       }`}
       onClick={() => onSelect(type.id)}
     >
@@ -21,7 +21,7 @@ export const FormTypeCard: React.FC<FormTypeCardProps> = ({
         <div className="flex w-full items-center gap-3 max-sm:flex-col max-sm:justify-center max-sm:text-center">
           <div
             className={`rounded-card p-2 ${
-              isSelected ? 'bg-primary text-primary-foreground' : 'bg-muted'
+              isSelected ? "bg-primary text-primary-foreground" : "bg-muted"
             }`}
           >
             <Icon className="h-5 w-5" />

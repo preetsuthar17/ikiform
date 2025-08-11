@@ -1,43 +1,43 @@
-import { useEffect, useRef, useState } from 'react';
-import { useFormProgress } from '@/hooks/form-progress';
-import { usePrepopulation } from '@/hooks/prepopulation/usePrepopulation';
-import { toast } from '@/hooks/use-toast';
+import { useEffect, useRef, useState } from "react";
+import { useFormProgress } from "@/hooks/form-progress";
+import { usePrepopulation } from "@/hooks/prepopulation/usePrepopulation";
+import { toast } from "@/hooks/use-toast";
 
-import type { FormField, FormSchema } from '@/lib/database';
-import { evaluateLogic } from '@/lib/forms/logic';
-import { calculateQuizScore, type QuizResult } from '@/lib/quiz/scoring';
-import type { SingleStepFormActions, SingleStepFormState } from '../types';
+import type { FormField, FormSchema } from "@/lib/database";
+import { evaluateLogic } from "@/lib/forms/logic";
+import { calculateQuizScore, type QuizResult } from "@/lib/quiz/scoring";
+import type { SingleStepFormActions, SingleStepFormState } from "../types";
 
 import {
   submitSingleStepForm,
   validateSingleStepForm,
-} from '../utils/form-utils';
+} from "../utils/form-utils";
 
 const getDefaultValueForField = (field: FormField): any => {
   switch (field.type) {
-    case 'tags':
+    case "tags":
       return [];
-    case 'checkbox':
+    case "checkbox":
       return [];
-    case 'radio':
-      return '';
-    case 'select':
-      return '';
-    case 'slider':
+    case "radio":
+      return "";
+    case "select":
+      return "";
+    case "slider":
       return field.settings?.defaultValue || 50;
-    case 'rating':
+    case "rating":
       return null;
-    case 'number':
-      return '';
-    case 'date':
-      return '';
-    case 'signature':
-      return '';
-    case 'text':
-    case 'email':
-    case 'textarea':
+    case "number":
+      return "";
+    case "date":
+      return "";
+    case "signature":
+      return "";
+    case "text":
+    case "email":
+    case "textarea":
     default:
-      return '';
+      return "";
   }
 };
 
@@ -54,7 +54,7 @@ const initializeFormData = (fields: FormField[]): Record<string, any> => {
 export const useSingleStepForm = (
   formId: string,
   schema: FormSchema,
-  fields: FormField[]
+  fields: FormField[],
 ): SingleStepFormState &
   SingleStepFormActions & {
     fieldVisibility: Record<string, { visible: boolean; disabled: boolean }>;
@@ -77,7 +77,7 @@ export const useSingleStepForm = (
     clearProgress,
   } = useFormProgress(formId, fields.length, {
     enabled: true,
-    storage: 'localStorage',
+    storage: "localStorage",
     autoSaveInterval: 3000,
     retentionDays: 7,
   });
@@ -97,7 +97,7 @@ export const useSingleStepForm = (
   useEffect(() => {
     const currentFieldIds = new Set(fields.map((field) => field.id));
     const newFieldIds = [...currentFieldIds].filter(
-      (id) => !initializedFieldsRef.current.has(id)
+      (id) => !initializedFieldsRef.current.has(id),
     );
 
     if (newFieldIds.length > 0) {
@@ -125,7 +125,7 @@ export const useSingleStepForm = (
         Object.entries(prepopulatedData).forEach(([fieldId, value]) => {
           if (
             fieldId in updatedFormData &&
-            (updatedFormData[fieldId] === '' ||
+            (updatedFormData[fieldId] === "" ||
               updatedFormData[fieldId] ===
                 getDefaultValueForField(fields.find((f) => f.id === fieldId)!))
           ) {
@@ -142,7 +142,7 @@ export const useSingleStepForm = (
   useEffect(() => {
     Object.entries(prepopErrors).forEach(([fieldId, error]) => {
       const field = fields.find((f) => f.id === fieldId);
-      const fieldLabel = field?.label || 'Field';
+      const fieldLabel = field?.label || "Field";
     });
   }, [prepopErrors, fields]);
 
@@ -162,11 +162,11 @@ export const useSingleStepForm = (
 
             return (
               value !== defaultValue &&
-              value !== '' &&
+              value !== "" &&
               value !== null &&
               value !== undefined
             );
-          }
+          },
         );
 
         if (!hasUserInput) {
@@ -182,10 +182,10 @@ export const useSingleStepForm = (
     if (Object.keys(formData).length > 0) {
       const filledFields = Object.values(formData).filter(
         (value) =>
-          value !== '' &&
+          value !== "" &&
           value !== null &&
           value !== undefined &&
-          !(Array.isArray(value) && value.length === 0)
+          !(Array.isArray(value) && value.length === 0),
       ).length;
 
       if (filledFields > 0) {
@@ -207,16 +207,16 @@ export const useSingleStepForm = (
   const logicMessages: string[] = [];
   logicActions.forEach((action) => {
     if (action.target && fieldVisibility[action.target]) {
-      if (action.type === 'hide')
+      if (action.type === "hide")
         fieldVisibility[action.target].visible = false;
-      if (action.type === 'show') fieldVisibility[action.target].visible = true;
-      if (action.type === 'disable')
+      if (action.type === "show") fieldVisibility[action.target].visible = true;
+      if (action.type === "disable")
         fieldVisibility[action.target].disabled = true;
-      if (action.type === 'enable')
+      if (action.type === "enable")
         fieldVisibility[action.target].disabled = false;
       if (
-        action.type === 'set_value' &&
-        typeof action.target === 'string' &&
+        action.type === "set_value" &&
+        typeof action.target === "string" &&
         formData[action.target] !== action.value
       ) {
         setFormData((prev) => ({
@@ -225,7 +225,7 @@ export const useSingleStepForm = (
         }));
       }
     }
-    if (action.type === 'show_message' && action.value) {
+    if (action.type === "show_message" && action.value) {
       logicMessages.push(String(action.value));
     }
   });
@@ -233,7 +233,7 @@ export const useSingleStepForm = (
   const handleFieldValueChange = (fieldId: string, value: any) => {
     setFormData((prev) => ({ ...prev, [fieldId]: value }));
     if (errors[fieldId]) {
-      setErrors((prev) => ({ ...prev, [fieldId]: '' }));
+      setErrors((prev) => ({ ...prev, [fieldId]: "" }));
     }
   };
 
@@ -242,12 +242,12 @@ export const useSingleStepForm = (
 
     const { errors: validationErrors, isValid } = validateSingleStepForm(
       fields,
-      formData
+      formData,
     );
 
     if (!isValid) {
       setErrors(validationErrors);
-      toast.error('Please fix the errors in the form');
+      toast.error("Please fix the errors in the form");
       return;
     }
 
@@ -263,7 +263,7 @@ export const useSingleStepForm = (
         }
 
         setSubmitted(true);
-        toast.success('Form submitted successfully!');
+        toast.success("Form submitted successfully!");
 
         clearProgress();
 
@@ -278,10 +278,10 @@ export const useSingleStepForm = (
           }, 2000);
         }
       } else {
-        toast.error(result.message || 'Failed to submit form');
+        toast.error(result.message || "Failed to submit form");
       }
     } catch {
-      toast.error('Failed to submit form. Please try again.');
+      toast.error("Failed to submit form. Please try again.");
     } finally {
       setSubmitting(false);
     }

@@ -1,18 +1,18 @@
-import type { SettingsSection } from '../types';
+import type { SettingsSection } from "../types";
 
 export const SETTINGS_SECTIONS: Array<{
   id: SettingsSection;
   label: string;
-  iconName: 'Palette' | 'Bell';
+  iconName: "Palette" | "Bell";
 }> = [
   {
-    id: 'appearance',
-    label: 'Appearance',
-    iconName: 'Palette',
+    id: "appearance",
+    label: "Appearance",
+    iconName: "Palette",
   },
   {
-    id: 'notifications',
-    label: 'Notifications',
-    iconName: 'Bell',
+    id: "notifications",
+    label: "Notifications",
+    iconName: "Bell",
   },
 ];

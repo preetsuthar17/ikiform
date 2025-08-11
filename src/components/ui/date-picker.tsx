@@ -1,34 +1,34 @@
-'use client';
+"use client";
 
-import { cva, type VariantProps } from 'class-variance-authority';
-import { CalendarIcon, ChevronDown } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
-import * as React from 'react';
-import ReactDOM from 'react-dom';
-import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
-import { cn } from '@/lib/utils';
+import { cva, type VariantProps } from "class-variance-authority";
+import { CalendarIcon, ChevronDown } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import * as React from "react";
+import ReactDOM from "react-dom";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { cn } from "@/lib/utils";
 
 const datePickerVariants = cva(
-  'inline-flex h-9 w-full items-center justify-between rounded-ele border border border-border border-border bg-background bg-input px-3 py-2 font-medium text-foreground text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
+  "inline-flex h-9 w-full items-center justify-between rounded-ele border border border-border border-border bg-background bg-input px-3 py-2 font-medium text-foreground text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: 'shadow-sm/2',
-        outline: 'border-2 shadow-sm/2',
-        ghost: 'border-transparent hover:border-border',
+        default: "shadow-sm/2",
+        outline: "border-2 shadow-sm/2",
+        ghost: "border-transparent hover:border-border",
       },
       size: {
-        sm: 'h-7 px-2 text-xs sm:h-8',
-        default: 'h-8 px-2 text-xs sm:h-9 sm:px-3 sm:text-sm',
-        lg: 'h-12 px-3 text-sm sm:h-10 sm:px-4',
+        sm: "h-7 px-2 text-xs sm:h-8",
+        default: "h-8 px-2 text-xs sm:h-9 sm:px-3 sm:text-sm",
+        lg: "h-12 px-3 text-sm sm:h-10 sm:px-4",
       },
     },
     defaultVariants: {
-      variant: 'default',
-      size: 'default',
+      variant: "default",
+      size: "default",
     },
-  }
+  },
 );
 
 interface DatePickerProps extends VariantProps<typeof datePickerVariants> {
@@ -49,7 +49,7 @@ const calculateCalendarPosition = (
   triggerRect: DOMRect,
   calendarHeight = 350,
   calendarWidth = 280,
-  margin = 8
+  margin = 8,
 ) => {
   const viewport = {
     width: window.innerWidth,
@@ -59,28 +59,28 @@ const calculateCalendarPosition = (
   let top = triggerRect.bottom + margin;
   let left = triggerRect.left;
   let placement:
-    | 'bottom'
-    | 'top'
-    | 'bottom-start'
-    | 'top-start'
-    | 'bottom-end'
-    | 'top-end' = 'bottom';
+    | "bottom"
+    | "top"
+    | "bottom-start"
+    | "top-start"
+    | "bottom-end"
+    | "top-end" = "bottom";
 
   if (top + calendarHeight > viewport.height) {
     const topPlacement = triggerRect.top - calendarHeight - margin;
     if (topPlacement >= 0) {
       top = topPlacement;
-      placement = 'top';
+      placement = "top";
     } else {
       const spaceBelow = viewport.height - triggerRect.bottom - margin;
       const spaceAbove = triggerRect.top - margin;
 
       if (spaceBelow > spaceAbove) {
         top = triggerRect.bottom + margin;
-        placement = 'bottom';
+        placement = "bottom";
       } else {
         top = Math.max(margin, triggerRect.top - calendarHeight - margin);
-        placement = 'top';
+        placement = "top";
       }
     }
   }
@@ -89,7 +89,7 @@ const calculateCalendarPosition = (
     const rightAlignedLeft = triggerRect.right - calendarWidth;
     if (rightAlignedLeft >= 0) {
       left = rightAlignedLeft;
-      placement = placement.includes('top') ? 'top-end' : 'bottom-end';
+      placement = placement.includes("top") ? "top-end" : "bottom-end";
     } else {
       left = Math.max(margin, viewport.width - calendarWidth - margin);
     }
@@ -97,7 +97,7 @@ const calculateCalendarPosition = (
 
   if (left < margin) {
     left = margin;
-    placement = placement.includes('top') ? 'top-start' : 'bottom-start';
+    placement = placement.includes("top") ? "top-start" : "bottom-start";
   }
 
   return { top, left, placement };
@@ -106,14 +106,14 @@ const calculateCalendarPosition = (
 export function DatePicker({
   value,
   onChange,
-  placeholder = 'Pick a date',
+  placeholder = "Pick a date",
   className,
   disabled = false,
   showIcon = true,
   minDate,
   maxDate,
   disabledDates,
-  locale = 'en-US',
+  locale = "en-US",
   formatDate,
   variant,
   size,
@@ -128,18 +128,18 @@ export function DatePicker({
   >(null);
 
   React.useEffect(() => {
-    if (typeof document !== 'undefined') {
+    if (typeof document !== "undefined") {
       setPortalContainer(
-        document.getElementById('portal-root') || document.body
+        document.getElementById("portal-root") || document.body,
       );
     }
   }, []);
 
   const defaultFormatDate = (date: Date) => {
     return date.toLocaleDateString(locale, {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
+      year: "numeric",
+      month: "short",
+      day: "numeric",
     });
   };
 
@@ -155,18 +155,18 @@ export function DatePicker({
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' || event.key === ' ') {
+    if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       handleToggleOpen();
-    } else if (event.key === 'Escape') {
+    } else if (event.key === "Escape") {
       setIsOpen(false);
     }
   };
 
   React.useEffect(() => {
-    if (isOpen && typeof document !== 'undefined') {
+    if (isOpen && typeof document !== "undefined") {
       const originalOverflow = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
 
       return () => {
         document.body.style.overflow = originalOverflow;
@@ -176,14 +176,14 @@ export function DatePicker({
 
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (typeof document === 'undefined') return;
+      if (typeof document === "undefined") return;
 
       const target = event.target as Node;
       const isClickInsideContainer =
         containerRef.current && containerRef.current.contains(target);
 
       const calendarElement = document.querySelector(
-        '[data-datepicker-calendar="true"]'
+        '[data-datepicker-calendar="true"]',
       );
       const isClickInsideCalendar = calendarElement?.contains(target);
 
@@ -192,21 +192,21 @@ export function DatePicker({
       }
     };
 
-    if (isOpen && typeof document !== 'undefined') {
-      document.addEventListener('mousedown', handleClickOutside);
+    if (isOpen && typeof document !== "undefined") {
+      document.addEventListener("mousedown", handleClickOutside);
       return () =>
-        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener("mousedown", handleClickOutside);
     }
   }, [isOpen]);
 
   React.useEffect(() => {
-    if (typeof document !== 'undefined') {
-      const portalRoot = document.getElementById('portal-root');
+    if (typeof document !== "undefined") {
+      const portalRoot = document.getElementById("portal-root");
       if (!portalRoot) {
-        const newPortalRoot = document.createElement('div');
-        newPortalRoot.id = 'portal-root';
-        newPortalRoot.style.position = 'relative';
-        newPortalRoot.style.zIndex = '9999';
+        const newPortalRoot = document.createElement("div");
+        newPortalRoot.id = "portal-root";
+        newPortalRoot.style.position = "relative";
+        newPortalRoot.style.zIndex = "9999";
         document.body.appendChild(newPortalRoot);
       }
     }
@@ -216,13 +216,13 @@ export function DatePicker({
     top: 0,
     left: 0,
     width: 0,
-    placement: 'bottom' as
-      | 'bottom'
-      | 'top'
-      | 'bottom-start'
-      | 'top-start'
-      | 'bottom-end'
-      | 'top-end',
+    placement: "bottom" as
+      | "bottom"
+      | "top"
+      | "bottom-start"
+      | "top-start"
+      | "bottom-end"
+      | "top-end",
   });
 
   React.useEffect(() => {
@@ -255,12 +255,12 @@ export function DatePicker({
     };
 
     if (isOpen) {
-      window.addEventListener('resize', handleReposition);
-      window.addEventListener('scroll', handleReposition, true);
+      window.addEventListener("resize", handleReposition);
+      window.addEventListener("scroll", handleReposition, true);
 
       return () => {
-        window.removeEventListener('resize', handleReposition);
-        window.removeEventListener('scroll', handleReposition, true);
+        window.removeEventListener("resize", handleReposition);
+        window.removeEventListener("scroll", handleReposition, true);
       };
     }
   }, [isOpen]);
@@ -274,22 +274,22 @@ export function DatePicker({
           data-datepicker-calendar="true"
           exit={{
             opacity: 0,
-            y: calendarPosition.placement.includes('top') ? 10 : -10,
+            y: calendarPosition.placement.includes("top") ? 10 : -10,
             scale: 0.95,
           }}
           initial={{
             opacity: 0,
-            y: calendarPosition.placement.includes('top') ? 10 : -10,
+            y: calendarPosition.placement.includes("top") ? 10 : -10,
             scale: 0.95,
           }}
           ref={calendarRef}
           style={{
-            position: 'fixed',
+            position: "fixed",
             top: calendarPosition.top,
             left: calendarPosition.left,
-            transformOrigin: calendarPosition.placement.includes('top')
-              ? 'bottom center'
-              : 'top center',
+            transformOrigin: calendarPosition.placement.includes("top")
+              ? "bottom center"
+              : "top center",
           }}
           transition={{ duration: 0.2 }}
         >
@@ -322,14 +322,14 @@ export function DatePicker({
       >
         <span className="flex items-center gap-2">
           {showIcon && <CalendarIcon className="h-4 w-4 opacity-50" />}
-          <span className={cn(!value && 'text-muted-foreground')}>
+          <span className={cn(!value && "text-muted-foreground")}>
             {value ? formatDateFn(value) : placeholder}
           </span>
         </span>
         <ChevronDown
           className={cn(
-            'h-4 w-4 opacity-50 transition-transform duration-200',
-            isOpen && 'rotate-180'
+            "h-4 w-4 opacity-50 transition-transform duration-200",
+            isOpen && "rotate-180",
           )}
         />
       </Button>
@@ -341,7 +341,7 @@ export function DatePicker({
 }
 
 interface DateRangePickerProps
-  extends Omit<DatePickerProps, 'value' | 'onChange'> {
+  extends Omit<DatePickerProps, "value" | "onChange"> {
   value?: { from: Date; to?: Date };
   onChange?: (range: { from: Date; to?: Date } | undefined) => void;
   placeholder?: string;
@@ -350,14 +350,14 @@ interface DateRangePickerProps
 export function DateRangePicker({
   value,
   onChange,
-  placeholder = 'Pick a date range',
+  placeholder = "Pick a date range",
   className,
   disabled = false,
   showIcon = true,
   minDate,
   maxDate,
   disabledDates,
-  locale = 'en-US',
+  locale = "en-US",
   formatDate,
   variant,
   size,
@@ -370,20 +370,20 @@ export function DateRangePicker({
     top: 0,
     left: 0,
     width: 0,
-    placement: 'bottom' as
-      | 'bottom'
-      | 'top'
-      | 'bottom-start'
-      | 'top-start'
-      | 'bottom-end'
-      | 'top-end',
+    placement: "bottom" as
+      | "bottom"
+      | "top"
+      | "bottom-start"
+      | "top-start"
+      | "bottom-end"
+      | "top-end",
   });
 
   const defaultFormatDate = (date: Date) => {
     return date.toLocaleDateString(locale, {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
+      year: "numeric",
+      month: "short",
+      day: "numeric",
     });
   };
 
@@ -397,7 +397,7 @@ export function DateRangePicker({
   };
 
   const formatRange = (range: { from: Date; to?: Date }) => {
-    if (!range.from) return '';
+    if (!range.from) return "";
     if (!range.to) return formatDateFn(range.from);
     return `${formatDateFn(range.from)} - ${formatDateFn(range.to)}`;
   };
@@ -407,18 +407,18 @@ export function DateRangePicker({
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' || event.key === ' ') {
+    if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       handleToggleOpen();
-    } else if (event.key === 'Escape') {
+    } else if (event.key === "Escape") {
       setIsOpen(false);
     }
   };
 
   React.useEffect(() => {
-    if (isOpen && typeof document !== 'undefined') {
+    if (isOpen && typeof document !== "undefined") {
       const originalOverflow = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
 
       return () => {
         document.body.style.overflow = originalOverflow;
@@ -428,14 +428,14 @@ export function DateRangePicker({
 
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (typeof document === 'undefined') return;
+      if (typeof document === "undefined") return;
 
       const target = event.target as Node;
       const isClickInsideContainer =
         containerRef.current && containerRef.current.contains(target);
 
       const calendarElement = document.querySelector(
-        '[data-datepicker-calendar="true"]'
+        '[data-datepicker-calendar="true"]',
       );
       const isClickInsideCalendar = calendarElement?.contains(target);
 
@@ -444,21 +444,21 @@ export function DateRangePicker({
       }
     };
 
-    if (isOpen && typeof document !== 'undefined') {
-      document.addEventListener('mousedown', handleClickOutside);
+    if (isOpen && typeof document !== "undefined") {
+      document.addEventListener("mousedown", handleClickOutside);
       return () =>
-        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener("mousedown", handleClickOutside);
     }
   }, [isOpen]);
 
   React.useEffect(() => {
-    if (typeof document !== 'undefined') {
-      const portalRoot = document.getElementById('portal-root');
+    if (typeof document !== "undefined") {
+      const portalRoot = document.getElementById("portal-root");
       if (!portalRoot) {
-        const newPortalRoot = document.createElement('div');
-        newPortalRoot.id = 'portal-root';
-        newPortalRoot.style.position = 'relative';
-        newPortalRoot.style.zIndex = '9999';
+        const newPortalRoot = document.createElement("div");
+        newPortalRoot.id = "portal-root";
+        newPortalRoot.style.position = "relative";
+        newPortalRoot.style.zIndex = "9999";
         document.body.appendChild(newPortalRoot);
       }
     }
@@ -494,12 +494,12 @@ export function DateRangePicker({
     };
 
     if (isOpen) {
-      window.addEventListener('resize', handleReposition);
-      window.addEventListener('scroll', handleReposition, true);
+      window.addEventListener("resize", handleReposition);
+      window.addEventListener("scroll", handleReposition, true);
 
       return () => {
-        window.removeEventListener('resize', handleReposition);
-        window.removeEventListener('scroll', handleReposition, true);
+        window.removeEventListener("resize", handleReposition);
+        window.removeEventListener("scroll", handleReposition, true);
       };
     }
   }, [isOpen]);
@@ -518,19 +518,19 @@ export function DateRangePicker({
       >
         <span className="flex items-center gap-2">
           {showIcon && <CalendarIcon className="h-4 w-4 opacity-50" />}
-          <span className={cn(!value && 'text-muted-foreground')}>
+          <span className={cn(!value && "text-muted-foreground")}>
             {value ? formatRange(value) : placeholder}
           </span>
         </span>
         <ChevronDown
           className={cn(
-            'h-4 w-4 opacity-50 transition-transform duration-200',
-            isOpen && 'rotate-180'
+            "h-4 w-4 opacity-50 transition-transform duration-200",
+            isOpen && "rotate-180",
           )}
         />
       </button>
 
-      {typeof document !== 'undefined' &&
+      {typeof document !== "undefined" &&
         ReactDOM.createPortal(
           <AnimatePresence>
             {isOpen && (
@@ -540,22 +540,22 @@ export function DateRangePicker({
                 data-datepicker-calendar="true"
                 exit={{
                   opacity: 0,
-                  y: calendarPosition.placement.includes('top') ? 10 : -10,
+                  y: calendarPosition.placement.includes("top") ? 10 : -10,
                   scale: 0.95,
                 }}
                 initial={{
                   opacity: 0,
-                  y: calendarPosition.placement.includes('top') ? 10 : -10,
+                  y: calendarPosition.placement.includes("top") ? 10 : -10,
                   scale: 0.95,
                 }}
                 ref={calendarRef}
                 style={{
-                  position: 'fixed',
+                  position: "fixed",
                   top: calendarPosition.top,
                   left: calendarPosition.left,
-                  transformOrigin: calendarPosition.placement.includes('top')
-                    ? 'bottom center'
-                    : 'top center',
+                  transformOrigin: calendarPosition.placement.includes("top")
+                    ? "bottom center"
+                    : "top center",
                 }}
                 transition={{ duration: 0.2 }}
               >
@@ -572,7 +572,7 @@ export function DateRangePicker({
               </motion.div>
             )}
           </AnimatePresence>,
-          document.getElementById('portal-root') || document.body
+          document.getElementById("portal-root") || document.body,
         )}
     </div>
   );

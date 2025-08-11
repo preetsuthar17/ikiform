@@ -1,1 +1,1 @@
-export { FormPreview } from './form-preview/FormPreview';
+export { FormPreview } from "./form-preview/FormPreview";

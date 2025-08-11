@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
-const ThemeProvider = dynamic(() => import('./components/ThemeProvider'), {
+const ThemeProvider = dynamic(() => import("./components/ThemeProvider"), {
   ssr: false,
 });
 
 const PublicFormContent = dynamic(
-  () => import('./components/PublicFormContent'),
+  () => import("./components/PublicFormContent"),
   {
     ssr: false,
     loading: () => <></>,
-  }
+  },
 );
 
 interface PublicFormClientProps {
