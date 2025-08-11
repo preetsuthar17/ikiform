@@ -132,6 +132,11 @@ const featureCategories = [
         description: "Add file upload fields to your forms.",
         included: true,
       },
+      {
+        label: "Form embedding",
+        description: "Embed forms easily into your website or app.",
+        included: true,
+      },
     ],
   },
   {
@@ -190,11 +195,7 @@ const featureCategories = [
         description: "More integrations with popular tools coming soon.",
         included: false,
       },
-      {
-        label: "Form embedding",
-        description: "Embed forms easily into your website or app.",
-        included: false,
-      },
+
       {
         label: "Form internationalization",
         description: "Support multiple languages for your forms.",
@@ -235,7 +236,6 @@ const featureCategories = [
         description: "Start quickly with ready-made form templates.",
         included: false,
       },
-
       {
         label: "and more",
         description: "We are constantly adding new features and improvements.",
