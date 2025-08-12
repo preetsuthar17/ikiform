@@ -10,7 +10,8 @@
     "lint": "pnpx ultracite@latest lint",
     "format": "pnpx ultracite@latest format",
     "prettier": "prettier --write . --ignore-path .gitignore",
-    "check": "tsc --noEmit && prettier --check . --ignore-path .gitignore"
+    "check": "tsc --noEmit && prettier --check . --ignore-path .gitignore",
+    "polar:setup": "tsx scripts/create-polar-products.ts"
   },
   "dependencies": {
     "@ai-sdk/cohere": "^2.0.1",
