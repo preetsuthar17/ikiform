@@ -72,9 +72,9 @@ const features = [
   },
 ];
 
-const MONTHLY_PRODUCT_ID = "05f52efa-2102-4dd0-9d1d-1538210d6712";
-const YEARLY_PRODUCT_ID = "4eff4c1d-56de-4111-96de-b5ec8124dd4b";
-const ONETIME_PRODUCT_ID = "2e9b8531-0d45-40df-be1c-65482eefeb85";
+const MONTHLY_PRODUCT_ID = "f4c70364-2a3e-4397-ac2e-9d7884d645c9";
+const YEARLY_PRODUCT_ID = "ea14c1ae-f1af-4173-8e37-a713345f8840";
+const ONETIME_PRODUCT_ID = "9d111ea1-3a74-4789-9f10-2d858b0ff476";
 
 const PRICING: {
   monthly: {
