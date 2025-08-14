@@ -122,7 +122,7 @@ export function useFormProgress(
         }));
       }
     },
-    [formId, finalConfig.enabled, finalOptions.skipFields],
+    [formId],
   );
 
   const loadProgress = useCallback(async () => {
@@ -156,7 +156,7 @@ export function useFormProgress(
           error instanceof Error ? error.message : "Failed to load progress",
       }));
     }
-  }, [formId, finalConfig.enabled]);
+  }, [formId]);
 
   const clearProgress = useCallback(async () => {
     if (!(storageRef.current && sessionIdRef.current)) return;
@@ -184,9 +184,14 @@ export function useFormProgress(
 
   const restoreProgress = useCallback(() => {}, []);
 
+  const hasLoadedRef = useRef(false);
+  
   useEffect(() => {
-    loadProgress();
-  }, [loadProgress]);
+    if (!hasLoadedRef.current && finalConfig.enabled && storageRef.current && sessionIdRef.current) {
+      hasLoadedRef.current = true;
+      loadProgress();
+    }
+  }, [finalConfig.enabled, loadProgress]);
 
   useEffect(() => {
     if (finalConfig.autoSaveInterval > 0 && state.progress) {

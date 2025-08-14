@@ -108,7 +108,9 @@ export const useSingleStepForm = (
 
       newFieldIds.forEach((id) => initializedFieldsRef.current.add(id));
     }
+  }, [fields]);
 
+  useEffect(() => {
     if (isLoadingProgress && progress?.formData) {
       setFormData(prevFormData => ({
         ...prevFormData,
@@ -116,11 +118,15 @@ export const useSingleStepForm = (
       }));
       setIsLoadingProgress(false);
     }
+  }, [progress, isLoadingProgress]);
 
-    if (formId && !progress) {
+  const hasTriedLoadingRef = useRef(false);
+  useEffect(() => {
+    if (formId && !progress && !hasTriedLoadingRef.current) {
+      hasTriedLoadingRef.current = true;
       loadProgress();
     }
-  }, [formId, fields, progress, isLoadingProgress, loadProgress, formData]);
+  }, [formId, progress, loadProgress]);
 
   useEffect(() => {
     if (Object.keys(prepopulatedData).length > 0) {
