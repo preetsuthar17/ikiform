@@ -1,10 +1,3 @@
-import BentoFeatures from "@/components/home/bento-features";
-import CTASection from "@/components/home/cta-section";
-import FAQSection from "@/components/home/faq-section";
-import Features from "@/components/home/features";
-import Hero from "@/components/home/hero";
-import Pricing from "@/components/home/pricing/pricing";
-import Review from "@/components/other/reivew";
 import { CSSProperties } from "react";
 
   interface EmbeddedFormProps {
@@ -12,15 +5,18 @@ import { CSSProperties } from "react";
     style?: CSSProperties;
   }
 
-export function EmbeddedForm({ className, style }: EmbeddedFormProps) {
+
+export default function Feedback() {
   const iframeStyle: CSSProperties = {
-    width: '100%',
-    height: '600px',
-    border: '1px solid #e5e7eb',
-    borderRadius: '8px',
-    backgroundColor: '#ffffff',
-    ...style,
-  };
+ width: '100%',
+ height: '600px',
+ border: '1px solid #e5e7eb',
+ borderRadius: '8px',
+ backgroundColor: '#ffffff',
+
+};
+  return (
+    <main>
 
   return (
     <iframe
@@ -33,13 +29,6 @@ export function EmbeddedForm({ className, style }: EmbeddedFormProps) {
         frameBorder="0"
       />
   );
-}
-
-export default function Home() {
-
-  return (
-    <main>
-      <EmbeddedForm />
     </main>
   );
 }
