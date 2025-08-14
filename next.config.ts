@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
         source: '/github',
         destination: 'https://github.com/preetsuthar17/ikiform',
         permanent: false, 
+      },
+      {
+        source: '/discord',
+        destination: 'https://discord.gg/jM5BgDMaGX',
+        permanent: false, 
       }
     ]
   },
