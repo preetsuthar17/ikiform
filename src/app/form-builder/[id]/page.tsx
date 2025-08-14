@@ -36,7 +36,7 @@ async function getUserAndPremiumStatus() {
   } = await supabase.auth.getUser();
 
   if (userError || !user) {
-    redirect("/auth/signin");
+    redirect("/login");
   }
 
   const { data: subscription } = await supabase

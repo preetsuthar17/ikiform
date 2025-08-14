@@ -1,6 +1,7 @@
 import { Suspense } from "react";
-import { redirect } from "next/navigation";
-import { formsDb } from "@/lib/database";
+import { redirect, notFound } from "next/navigation";
+import { createClient } from "@/utils/supabase/server";
+import { ensureDefaultFormSettings } from "@/lib/forms";
 import { FormCustomizePage } from "@/components/form-builder/form-customize";
 
 interface PageProps {
@@ -9,15 +10,60 @@ interface PageProps {
   }>;
 }
 
+async function getFormData(id: string, userId: string) {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from("forms")
+    .select("*")
+    .eq("id", id)
+    .eq("user_id", userId)
+    .single();
+
+  if (error || !data) {
+    notFound();
+  }
+
+  return {
+    ...data,
+    schema: ensureDefaultFormSettings(data.schema),
+  };
+}
+
+async function getUserAndPremiumStatus() {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    redirect("/login");
+  }
+
+  const { data: subscription } = await supabase
+    .from("users")
+    .select("has_premium")
+    .eq("uid", user.id)
+    .single();
+
+  const hasPremium = subscription?.has_premium;
+
+  return { user, hasPremium };
+}
+
 export default async function CustomizePage({ params }: PageProps) {
   const { id } = await params;
-
+  
   try {
-    const form = await formsDb.getForm(id);
+    const { user, hasPremium } = await getUserAndPremiumStatus();
 
-    if (!form) {
+    if (!hasPremium) {
       redirect("/dashboard");
     }
+
+    const form = await getFormData(id, user.id);
 
     return (
       <Suspense fallback={<div>Loading customization...</div>}>
@@ -34,10 +80,11 @@ export async function generateMetadata({ params }: PageProps) {
   const { id } = await params;
 
   try {
-    const form = await formsDb.getForm(id);
+    const { user } = await getUserAndPremiumStatus();
+    const form = await getFormData(id, user.id);
     
     return {
-      title: form ? `Customize ${form.schema.settings.title}` : "Customize Form",
+      title: `Customize ${form.schema.settings.title}`,
       description: "Customize the design and appearance of your form",
     };
   } catch {
