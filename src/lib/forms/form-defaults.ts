@@ -6,21 +6,20 @@ import type { FormSchema } from "@/lib/database";
 export const DEFAULT_RATE_LIMIT_SETTINGS = {
   enabled: true,
   maxSubmissions: 5,
-  timeWindow: 10,
+  timeWindow: 30,
   blockDuration: 60,
-  message: "Too many submissions. Please try again later.",
+  message: "Please wait before submitting another request.",
 };
 
 /**
  * Default profanity filter settings for all forms
  */
 export const DEFAULT_PROFANITY_FILTER_SETTINGS = {
-  enabled: false,
+  enabled: true,
   strictMode: true,
   replaceWithAsterisks: false,
   customWords: [],
-  customMessage:
-    "Your submission contains inappropriate content. Please review and resubmit.",
+  customMessage: "Please keep your submission respectful.",
   whitelistedWords: [],
 };
 
@@ -45,8 +44,11 @@ export const DEFAULT_PASSWORD_PROTECTION_SETTINGS = {
 };
 
 export const DEFAULT_SOCIAL_MEDIA_SETTINGS = {
-  enabled: false,
-  platforms: {},
+  enabled: true,
+  platforms: {
+    github: "https://github.com/preetsuthar17",
+    twitter: "https://x.com/preetsuthar17",
+  },
   showIcons: true,
   iconSize: "md" as const,
   position: "footer" as const,
@@ -68,10 +70,33 @@ export const DEFAULT_NOTIFICATION_SETTINGS = {
 };
 
 export const DEFAULT_LAYOUT_SETTINGS = {
-  margin: "lg" as const,
-  padding: "md" as const,
+  margin: "md" as const,
+  padding: "lg" as const,
   maxWidth: "md" as const,
   borderRadius: "md" as const,
+  spacing: "normal" as const,
+  alignment: "left" as const,
+};
+
+/**
+ * Default color settings for all forms
+ */
+export const DEFAULT_COLOR_SETTINGS = {
+  text: "#1f2937",
+  border: "#e5e7eb",
+  primary: "#3b82f6",
+  background: "transparent",
+};
+
+/**
+ * Default typography settings for all forms
+ */
+export const DEFAULT_TYPOGRAPHY_SETTINGS = {
+  fontSize: "base" as const,
+  fontFamily: "Inter",
+  fontWeight: "normal" as const,
+  lineHeight: "normal" as const,
+  letterSpacing: "normal" as const,
 };
 
 /**
@@ -83,6 +108,14 @@ export function ensureDefaultFormSettings(schema: FormSchema): FormSchema {
     ...schema,
     settings: {
       ...schema.settings,
+      colors: {
+        ...DEFAULT_COLOR_SETTINGS,
+        ...schema.settings.colors,
+      },
+      typography: {
+        ...DEFAULT_TYPOGRAPHY_SETTINGS,
+        ...schema.settings.typography,
+      },
       branding: {
         ...schema.settings.branding,
         socialMedia: {
@@ -157,14 +190,17 @@ export function createDefaultFormSchema(options: {
       redirectUrl: "",
       multiStep: options.multiStep,
       showProgress: options.multiStep !== false,
+      colors: { ...DEFAULT_COLOR_SETTINGS },
+      typography: { ...DEFAULT_TYPOGRAPHY_SETTINGS },
       branding: {
         socialMedia: { ...DEFAULT_SOCIAL_MEDIA_SETTINGS },
       },
+      layout: { ...DEFAULT_LAYOUT_SETTINGS },
       rateLimit: { ...DEFAULT_RATE_LIMIT_SETTINGS },
       profanityFilter: { ...DEFAULT_PROFANITY_FILTER_SETTINGS },
       responseLimit: { ...DEFAULT_RESPONSE_LIMIT_SETTINGS },
       passwordProtection: { ...DEFAULT_PASSWORD_PROTECTION_SETTINGS },
-      layout: { ...DEFAULT_LAYOUT_SETTINGS },
+      notifications: { ...DEFAULT_NOTIFICATION_SETTINGS },
     },
   };
 }

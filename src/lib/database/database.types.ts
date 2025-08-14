@@ -388,14 +388,18 @@ export interface FormSchema {
     multiStep?: boolean;
     showProgress?: boolean;
 
-    theme?: {
-      primaryColor?: string;
-      backgroundColor?: string;
-      textColor?: string;
-      borderColor?: string;
-      borderRadius?: "none" | "sm" | "md" | "lg" | "xl";
-      fontFamily?: "system" | "serif" | "mono";
-      fontSize?: "sm" | "md" | "lg";
+    colors?: {
+      background?: string;
+      text?: string;
+      primary?: string;
+      border?: string;
+    };
+    typography?: {
+      fontFamily?: string;
+      fontSize?: "xs" | "sm" | "base" | "lg" | "xl";
+      fontWeight?: "light" | "normal" | "medium" | "semibold" | "bold";
+      lineHeight?: "tight" | "normal" | "relaxed";
+      letterSpacing?: "tight" | "normal" | "wide";
     };
     layout?: {
       maxWidth?: "sm" | "md" | "lg" | "xl" | "full";
