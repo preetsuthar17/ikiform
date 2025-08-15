@@ -1,9 +1,9 @@
-import { Suspense } from "react";
-import { SkeletonCard } from "@/components/ui/skeleton";
+import { Suspense } from 'react';
+import { SkeletonCard } from '@/components/ui/skeleton';
 
 export function PublicFormServerLayout({
   children,
-  dir = "ltr",
+  dir = 'ltr',
   theme,
 }: {
   children: React.ReactNode;
@@ -12,12 +12,12 @@ export function PublicFormServerLayout({
 }) {
   return (
     <div
-      className={`flex flex-col gap-4${theme ? `theme-${theme}` : ""}`}
+      className={`flex flex-col gap-4${theme ? `theme-${theme}` : ''}`}
       dir={dir}
     >
       <Suspense
         fallback={
-          <div className="mx-auto max-w-2xl flex flex-col gap-6 p-4">
+          <div className="mx-auto flex max-w-2xl flex-col gap-6 p-4">
             <SkeletonCard
               className="min-h-[400px]"
               showFooter={true}
@@ -35,8 +35,8 @@ export function PublicFormServerLayout({
 
 export function PublicFormMetadata({ schema }: { schema: any }) {
   const isMultiStep = schema.settings?.multiStep || schema.blocks?.length > 1;
-  const dir = schema.settings?.rtl ? "rtl" : "ltr";
-  const borderRadius = schema?.settings?.layout?.borderRadius || "md";
+  const dir = schema.settings?.rtl ? 'rtl' : 'ltr';
+  const borderRadius = schema?.settings?.layout?.borderRadius || 'md';
 
   return {
     isMultiStep,

@@ -1,5 +1,5 @@
-import { Star } from "lucide-react";
-import { OptimizedImage } from "./optimized-image";
+import { Star } from 'lucide-react';
+import { OptimizedImage } from './optimized-image';
 
 export default function Review({
   name,

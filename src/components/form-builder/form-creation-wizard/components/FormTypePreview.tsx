@@ -1,9 +1,9 @@
-import type React from "react";
+import type React from 'react';
 
-import type { FormTypePreviewProps } from "../types";
+import type { FormTypePreviewProps } from '../types';
 
 export const FormTypePreview: React.FC<FormTypePreviewProps> = ({ type }) => {
-  if (type === "single") {
+  if (type === 'single') {
     return (
       <div className="flex flex-col gap-3 rounded-card bg-muted/20 p-4">
         <div className="h-3 w-3/4 rounded bg-muted" />
@@ -15,7 +15,7 @@ export const FormTypePreview: React.FC<FormTypePreviewProps> = ({ type }) => {
     );
   }
 
-  if (type === "multi") {
+  if (type === 'multi') {
     return (
       <div className="flex flex-col gap-3 rounded-card bg-muted/20 p-4">
         <div className="h-2 w-1/3 rounded-card bg-primary" />

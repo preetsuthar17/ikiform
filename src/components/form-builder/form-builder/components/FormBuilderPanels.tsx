@@ -1,24 +1,24 @@
-import { Settings, Zap } from "lucide-react";
-import React from "react";
-import type { FormLogic } from "@/components/form-builder/logic-builder/types";
+import { Settings, Zap } from 'lucide-react';
+import React from 'react';
+import type { FormLogic } from '@/components/form-builder/logic-builder/types';
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from "@/components/ui/resizable";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
-import type { FormSchema } from "@/lib/database";
-import { BlockManager } from "../../block-manager";
-import { FieldPalette } from "../../field-palette";
-import { FieldSettingsPanel } from "../../field-settings-panel";
-import { FormPreview } from "../../form-preview";
-import { LogicBuilderPanel } from "../../logic-builder";
+} from '@/components/ui/resizable';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Tabs, TabsContent } from '@/components/ui/tabs';
+import type { FormSchema } from '@/lib/database';
+import { BlockManager } from '../../block-manager';
+import { FieldPalette } from '../../field-palette';
+import { FieldSettingsPanel } from '../../field-settings-panel';
+import { FormPreview } from '../../form-preview';
+import { LogicBuilderPanel } from '../../logic-builder';
 
-import { PANEL_SIZES } from "../constants";
+import { PANEL_SIZES } from '../constants';
 
-import type { FormBuilderPanelsProps } from "../types";
-import { getAllFields } from "../utils";
+import type { FormBuilderPanelsProps } from '../types';
+import { getAllFields } from '../utils';
 
 export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
   formSchema,
@@ -39,10 +39,10 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
   onStepSelect,
   onLogicChange,
 }) => {
-  const [activeTab, setActiveTab] = React.useState("field-settings");
+  const [activeTab, setActiveTab] = React.useState('field-settings');
   const tabItems = [
-    { id: "field-settings", label: "Field Settings", icon: <Settings /> },
-    { id: "logic-builder", label: "Logic Builder", icon: <Zap /> },
+    { id: 'field-settings', label: 'Field Settings', icon: <Settings /> },
+    { id: 'logic-builder', label: 'Logic Builder', icon: <Zap /> },
   ];
   const handleLogicChange = (logic: FormLogic) => {
     if (onLogicChange) onLogicChange(logic);

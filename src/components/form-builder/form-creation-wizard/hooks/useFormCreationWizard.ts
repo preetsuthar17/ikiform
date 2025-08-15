@@ -1,5 +1,5 @@
-import { useState } from "react";
-import type { FormType } from "../types";
+import { useState } from 'react';
+import type { FormType } from '../types';
 
 export const useFormCreationWizard = () => {
   const [selectedType, setSelectedType] = useState<FormType | null>(null);

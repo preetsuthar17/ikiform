@@ -1,13 +1,17 @@
-"use client";
+'use client';
 
-import React, { useState, useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input-base";
-import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Palette, Pipette } from "lucide-react";
-import { TRANSPARENT_PATTERN } from "@/components/form-builder/form-settings-modal/constants";
+import { Palette, Pipette } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { TRANSPARENT_PATTERN } from '@/components/form-builder/form-settings-modal/constants';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input-base';
+import { Label } from '@/components/ui/label';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { Slider } from '@/components/ui/slider';
 
 interface EnhancedColorPickerProps {
   value: string;
@@ -28,13 +32,15 @@ export function EnhancedColorPicker({
   const colorInputRef = useRef<HTMLInputElement>(null);
 
   // Convert color to hex if needed
-  const hexColor = value === "transparent" ? "#ffffff" : value;
-  
+  const hexColor = value === 'transparent' ? '#ffffff' : value;
+
   // Handle color changes from native picker
   const handleColorChange = (newColor: string) => {
     if (opacity < 100) {
       // Apply opacity
-      const alpha = Math.round((opacity / 100) * 255).toString(16).padStart(2, '0');
+      const alpha = Math.round((opacity / 100) * 255)
+        .toString(16)
+        .padStart(2, '0');
       onChange(newColor + alpha);
     } else if (brightness !== 100) {
       // Apply brightness
@@ -49,11 +55,13 @@ export function EnhancedColorPicker({
   const handleOpacityChange = ([newOpacity]: number[]) => {
     setOpacity(newOpacity);
     if (newOpacity === 0) {
-      onChange("transparent");
+      onChange('transparent');
     } else if (newOpacity === 100) {
       onChange(hexColor);
     } else {
-      const alpha = Math.round((newOpacity / 100) * 255).toString(16).padStart(2, '0');
+      const alpha = Math.round((newOpacity / 100) * 255)
+        .toString(16)
+        .padStart(2, '0');
       onChange(hexColor + alpha);
     }
   };
@@ -67,9 +75,9 @@ export function EnhancedColorPicker({
 
   // Adjust brightness of a hex color
   const adjustBrightness = (hex: string, factor: number): string => {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
+    const r = Number.parseInt(hex.slice(1, 3), 16);
+    const g = Number.parseInt(hex.slice(3, 5), 16);
+    const b = Number.parseInt(hex.slice(5, 7), 16);
 
     const newR = Math.round(Math.min(255, Math.max(0, r * factor)));
     const newG = Math.round(Math.min(255, Math.max(0, g * factor)));
@@ -91,23 +99,26 @@ export function EnhancedColorPicker({
     }
   };
 
-  const displayValue = value === "transparent" ? "Transparent" : value;
+  const displayValue = value === 'transparent' ? 'Transparent' : value;
 
   return (
     <div className="flex flex-col gap-2">
-      {label && <Label className="text-sm font-medium">{label}</Label>}
-      
+      {label && <Label className="font-medium text-sm">{label}</Label>}
+
       <div className="flex gap-2">
         {/* Color Preview Button */}
-        <Popover open={isOpen} onOpenChange={setIsOpen}>
+        <Popover onOpenChange={setIsOpen} open={isOpen}>
           <PopoverTrigger asChild>
             <Button
-              variant="outline"
-              className="w-12 h-10 p-0 border-2"
+              className="h-10 w-12 border-2 p-0"
               style={{
-                backgroundColor: value === "transparent" ? undefined : value,
-                backgroundImage: value === "transparent" ? `url("${TRANSPARENT_PATTERN}")` : undefined,
+                backgroundColor: value === 'transparent' ? undefined : value,
+                backgroundImage:
+                  value === 'transparent'
+                    ? `url("${TRANSPARENT_PATTERN}")`
+                    : undefined,
               }}
+              variant="outline"
             >
               <Palette className="h-4 w-4" />
             </Button>
@@ -118,24 +129,24 @@ export function EnhancedColorPicker({
                 <Label>Color</Label>
                 <div className="flex gap-2">
                   <input
+                    className="h-10 w-12 cursor-pointer rounded border border-border"
+                    onChange={(e) => handleColorChange(e.target.value)}
                     ref={colorInputRef}
                     type="color"
                     value={hexColor}
-                    onChange={(e) => handleColorChange(e.target.value)}
-                    className="w-12 h-10 rounded border border-border cursor-pointer"
                   />
                   <Input
-                    value={hexColor}
+                    className="flex-1"
                     onChange={(e) => handleColorChange(e.target.value)}
                     placeholder="#000000"
-                    className="flex-1"
+                    value={hexColor}
                   />
-                  {('EyeDropper' in window) && (
+                  {'EyeDropper' in window && (
                     <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={handleEyeDropper}
                       className="px-3"
+                      onClick={handleEyeDropper}
+                      size="sm"
+                      variant="outline"
                     >
                       <Pipette className="h-4 w-4" />
                     </Button>
@@ -147,12 +158,12 @@ export function EnhancedColorPicker({
                 <div className="flex flex-col gap-2">
                   <Label>Opacity: {opacity}%</Label>
                   <Slider
-                    value={[opacity]}
-                    onValueChange={handleOpacityChange}
+                    className="w-full"
                     max={100}
                     min={0}
+                    onValueChange={handleOpacityChange}
                     step={1}
-                    className="w-full"
+                    value={[opacity]}
                   />
                 </div>
               )}
@@ -160,34 +171,34 @@ export function EnhancedColorPicker({
               <div className="flex flex-col gap-2">
                 <Label>Brightness: {brightness}%</Label>
                 <Slider
-                  value={[brightness]}
-                  onValueChange={handleBrightnessChange}
+                  className="w-full"
                   max={200}
                   min={0}
+                  onValueChange={handleBrightnessChange}
                   step={1}
-                  className="w-full"
+                  value={[brightness]}
                 />
               </div>
 
               {allowTransparent && (
                 <div className="flex gap-2">
                   <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => onChange("transparent")}
                     className="flex-1"
+                    onClick={() => onChange('transparent')}
+                    size="sm"
+                    variant="outline"
                   >
                     Transparent
                   </Button>
                   <Button
-                    variant="outline"
-                    size="sm"
+                    className="flex-1"
                     onClick={() => {
                       setOpacity(100);
                       setBrightness(100);
-                      onChange("#ffffff");
+                      onChange('#ffffff');
                     }}
-                    className="flex-1"
+                    size="sm"
+                    variant="outline"
                   >
                     Reset
                   </Button>
@@ -199,10 +210,10 @@ export function EnhancedColorPicker({
 
         {/* Color Value Input */}
         <Input
-          value={displayValue}
+          className="flex-1"
           onChange={(e) => onChange(e.target.value)}
           placeholder="Color value"
-          className="flex-1"
+          value={displayValue}
         />
       </div>
     </div>

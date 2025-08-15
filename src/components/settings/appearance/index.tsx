@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { useTheme } from "next-themes";
+import { useTheme } from 'next-themes';
 
-import type React from "react";
+import type React from 'react';
 
 import {
   AdditionalOptions,
   AppearanceHeader,
   ThemeSelector,
-} from "./components";
+} from './components';
 
-import { THEMES } from "./constants";
+import { THEMES } from './constants';
 
 export const AppearanceSettings: React.FC = () => {
   const { theme, setTheme } = useTheme();

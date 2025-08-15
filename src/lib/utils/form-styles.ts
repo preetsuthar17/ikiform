@@ -1,4 +1,4 @@
-import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
+import type { LocalSettings } from '@/components/form-builder/form-settings-modal/types';
 
 export interface FormStyleConfig {
   colors?: {
@@ -27,78 +27,82 @@ export function generateFormStyles(settings: LocalSettings): FormStyleConfig {
     typography: settings.typography,
     layout: {
       ...settings.layout,
-      maxWidth: settings.layout?.maxWidth === "custom" 
-        ? settings.layout.customWidth || "600px"
-        : getMaxWidthValue(settings.layout?.maxWidth),
+      maxWidth:
+        settings.layout?.maxWidth === 'custom'
+          ? settings.layout.customWidth || '600px'
+          : getMaxWidthValue(settings.layout?.maxWidth),
     },
   };
 }
 
 export function getMaxWidthValue(size?: string): string {
   const widthMap = {
-    sm: "400px",
-    md: "600px", 
-    lg: "800px",
-    xl: "1000px",
-    full: "100%",
+    sm: '400px',
+    md: '600px',
+    lg: '800px',
+    xl: '1000px',
+    full: '100%',
   };
-  return widthMap[size as keyof typeof widthMap] || "600px";
+  return widthMap[size as keyof typeof widthMap] || '600px';
 }
 
 export function getPaddingValue(size?: string): string {
   const paddingMap = {
-    none: "0",
-    sm: "16px",
-    md: "24px", 
-    lg: "32px",
+    none: '0',
+    sm: '16px',
+    md: '24px',
+    lg: '32px',
   };
-  return paddingMap[size as keyof typeof paddingMap] || "24px";
+  return paddingMap[size as keyof typeof paddingMap] || '24px';
 }
 
 export function getMarginValue(size?: string): string {
   const marginMap = {
-    none: "0",
-    sm: "8px",
-    md: "16px",
-    lg: "32px",
+    none: '0',
+    sm: '8px',
+    md: '16px',
+    lg: '32px',
   };
-  return marginMap[size as keyof typeof marginMap] || "16px";
+  return marginMap[size as keyof typeof marginMap] || '16px';
 }
 
 export function getBorderRadiusValue(size?: string): string {
   const radiusMap = {
-    none: "0",
-    sm: "4px",
-    md: "8px",
-    lg: "16px", 
-    xl: "24px",
+    none: '0',
+    sm: '4px',
+    md: '8px',
+    lg: '16px',
+    xl: '24px',
   };
-  return radiusMap[size as keyof typeof radiusMap] || "8px";
+  return radiusMap[size as keyof typeof radiusMap] || '8px';
 }
 
 export function getFontSizeValue(size?: string): string {
   const sizeMap = {
-    xs: "12px",
-    sm: "14px",
-    base: "16px",
-    lg: "18px",
-    xl: "20px",
+    xs: '12px',
+    sm: '14px',
+    base: '16px',
+    lg: '18px',
+    xl: '20px',
   };
-  return sizeMap[size as keyof typeof sizeMap] || "16px";
+  return sizeMap[size as keyof typeof sizeMap] || '16px';
 }
 
 export function getFontWeightValue(weight?: string): string {
   const weightMap = {
-    light: "300",
-    normal: "400",
-    medium: "500",
-    semibold: "600",
-    bold: "700",
+    light: '300',
+    normal: '400',
+    medium: '500',
+    semibold: '600',
+    bold: '700',
   };
-  return weightMap[weight as keyof typeof weightMap] || "400";
+  return weightMap[weight as keyof typeof weightMap] || '400';
 }
 
-export function injectFormStyles(styleConfig: FormStyleConfig, formId: string): void {
+export function injectFormStyles(
+  styleConfig: FormStyleConfig,
+  formId: string
+): void {
   // Remove existing styles for this form
   const existingStyle = document.getElementById(`form-styles-${formId}`);
   if (existingStyle) {
@@ -106,7 +110,7 @@ export function injectFormStyles(styleConfig: FormStyleConfig, formId: string): 
   }
 
   // Generate CSS
-  let css = `
+  const css = `
     .form-container-${formId} {
       ${styleConfig.colors?.background ? `background-color: ${styleConfig.colors.background};` : ''}
       ${styleConfig.colors?.text ? `color: ${styleConfig.colors.text};` : ''}
@@ -149,7 +153,7 @@ export function removeFormStyles(formId: string): void {
 
 export function generateCSSSelectorStyles(settings: LocalSettings): string {
   const config = generateFormStyles(settings);
-  
+
   return `
     .ikiform-customized {
       ${config.colors?.background ? `background-color: ${config.colors.background} !important;` : ''}
@@ -167,7 +171,7 @@ export function generateCSSSelectorStyles(settings: LocalSettings): string {
     .ikiform-customized textarea,
     .ikiform-customized select {
       ${config.colors?.border ? `border-color: ${config.colors.border} !important;` : ''}
-      ${config.typography?.fontFamily ? `font-family: inherit !important;` : ''}
+      ${config.typography?.fontFamily ? 'font-family: inherit !important;' : ''}
     }
     
     .ikiform-customized .primary-button,

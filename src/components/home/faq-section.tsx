@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import type React from "react";
+import Link from 'next/link';
+import type React from 'react';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from '@/components/ui/accordion';
 
 interface FAQ {
   question: string;
@@ -16,51 +16,51 @@ interface FAQ {
 
 const faqs = [
   {
-    question: "What is Ikiform?",
+    question: 'What is Ikiform?',
     answer:
-      "Ikiform is an open-source alternative to Google Forms. It helps you create beautiful, interactive forms easily.",
+      'Ikiform is an open-source alternative to Google Forms. It helps you create beautiful, interactive forms easily.',
   },
   {
-    question: "Why use Ikiform instead of Typeform or Google Forms?",
+    question: 'Why use Ikiform instead of Typeform or Google Forms?',
     answer:
-      "Ikiform is open source and gives you full control over your data and branding. There are no hidden costs, and you can self-host for extra privacy and flexibility.",
+      'Ikiform is open source and gives you full control over your data and branding. There are no hidden costs, and you can self-host for extra privacy and flexibility.',
   },
   {
-    question: "What types of forms can I create?",
+    question: 'What types of forms can I create?',
     answer:
-      "You can create single-page forms and multi-step forms with progress tracking.",
+      'You can create single-page forms and multi-step forms with progress tracking.',
   },
   {
-    question: "What field types are supported?",
+    question: 'What field types are supported?',
     answer:
-      "Supported fields include text, email, textarea, radio, checkbox, number, select, slider, tags, and social fields.",
+      'Supported fields include text, email, textarea, radio, checkbox, number, select, slider, tags, and social fields.',
   },
   {
-    question: "How does the AI Builder help?",
+    question: 'How does the AI Builder help?',
     answer:
-      "The AI Builder can generate forms for you based on your prompt, making form creation faster.",
+      'The AI Builder can generate forms for you based on your prompt, making form creation faster.',
   },
   {
-    question: "Can I analyze form results?",
+    question: 'Can I analyze form results?',
     answer:
-      "Yes, you get analytics like submission trends, field stats, and can export data as CSV or JSON.",
+      'Yes, you get analytics like submission trends, field stats, and can export data as CSV or JSON.',
   },
   {
-    question: "Can I customize my forms?",
+    question: 'Can I customize my forms?',
     answer:
-      "You can change colors, fonts, layout, add your logo, and control the look of each field.",
+      'You can change colors, fonts, layout, add your logo, and control the look of each field.',
   },
   {
-    question: "How is my data protected?",
+    question: 'How is my data protected?',
     answer:
-      "Forms can have password protection, rate limiting, profanity filters, and are GDPR compliant.",
+      'Forms can have password protection, rate limiting, profanity filters, and are GDPR compliant.',
   },
   {
-    question: "Is Ikiform open source?",
+    question: 'Is Ikiform open source?',
     answer: (
       <>
         <p>
-          Ikiform is completely open-source and available on{" "}
+          Ikiform is completely open-source and available on{' '}
           <Link
             className="underline"
             href="https://github.com/preetsuthar17/Ikiform"
@@ -72,11 +72,11 @@ const faqs = [
     ),
   },
   {
-    question: "Where can I suggest features?",
+    question: 'Where can I suggest features?',
     answer: (
       <>
         <p>
-          You can suggest any features at{" "}
+          You can suggest any features at{' '}
           <Link className="underline" href="https://insigh.to/b/ikiform">
             Feature Board
           </Link>
@@ -85,33 +85,33 @@ const faqs = [
     ),
   },
   {
-    question: "Is the data I submit shared with anyone?",
+    question: 'Is the data I submit shared with anyone?',
     answer:
-      "No, your data is not sold or shared with third parties except trusted providers needed to run Ikiform.",
+      'No, your data is not sold or shared with third parties except trusted providers needed to run Ikiform.',
   },
   {
-    question: "Where is my data stored?",
+    question: 'Where is my data stored?',
     answer:
-      "Your data is encrypted and securely stored in the EU using Supabase.",
+      'Your data is encrypted and securely stored in the EU using Supabase.',
   },
   {
-    question: "How is my data kept safe?",
+    question: 'How is my data kept safe?',
     answer:
-      "We use strong security measures and only authorized staff can access your data.",
+      'We use strong security measures and only authorized staff can access your data.',
   },
   {
-    question: "Will my data be deleted if I cancel my account?",
+    question: 'Will my data be deleted if I cancel my account?',
     answer:
-      "Yes. You can delete your data anytime. Deleted data is removed from backups within 30 days.",
+      'Yes. You can delete your data anytime. Deleted data is removed from backups within 30 days.',
   },
   {
-    question: "Can I access or delete my data?",
+    question: 'Can I access or delete my data?',
     answer:
-      "Yes. You can request access or deletion of your data at any time by emailing hi@ikiform.com.",
+      'Yes. You can request access or deletion of your data at any time by emailing hi@ikiform.com.',
   },
   {
-    question: "Who owns the data collected through my forms?",
-    answer: "You own all data you collect. Ikiform just stores it for you.",
+    question: 'Who owns the data collected through my forms?',
+    answer: 'You own all data you collect. Ikiform just stores it for you.',
   },
 ];
 

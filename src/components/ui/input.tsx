@@ -1,1 +1,1 @@
-export { Input, type InputProps, SuspenseInput } from "./input-wrapper";
+export { Input, type InputProps, SuspenseInput } from './input-wrapper';

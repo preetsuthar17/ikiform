@@ -1,6 +1,6 @@
-import { Suspense } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
-import { SuspenseWrapper } from "@/components/ui/suspense-wrapper";
+import { Suspense } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
+import { SuspenseWrapper } from '@/components/ui/suspense-wrapper';
 
 /**
  * Server component for loading AI Builder initial data
@@ -20,7 +20,7 @@ export function AIBuilderServerWrapper() {
       className="h-screen w-full"
       fallback={
         <div className="flex h-screen w-full items-center justify-center bg-background">
-          <div className="w-full max-w-md flex flex-col gap-4">
+          <div className="flex w-full max-w-md flex-col gap-4">
             <Skeleton className="mx-auto h-8 w-3/4" />
             <Skeleton className="h-64 w-full" />
             <div className="flex flex-col gap-2">

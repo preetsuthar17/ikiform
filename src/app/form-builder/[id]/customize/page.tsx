@@ -1,8 +1,8 @@
-import { Suspense } from "react";
-import { redirect, notFound } from "next/navigation";
-import { createClient } from "@/utils/supabase/server";
-import { ensureDefaultFormSettings } from "@/lib/forms";
-import { FormCustomizePage } from "@/components/form-builder/form-customize";
+import { notFound, redirect } from 'next/navigation';
+import { Suspense } from 'react';
+import { FormCustomizePage } from '@/components/form-builder/form-customize';
+import { ensureDefaultFormSettings } from '@/lib/forms';
+import { createClient } from '@/utils/supabase/server';
 
 interface PageProps {
   params: Promise<{
@@ -14,10 +14,10 @@ async function getFormData(id: string, userId: string) {
   const supabase = await createClient();
 
   const { data, error } = await supabase
-    .from("forms")
-    .select("*")
-    .eq("id", id)
-    .eq("user_id", userId)
+    .from('forms')
+    .select('*')
+    .eq('id', id)
+    .eq('user_id', userId)
     .single();
 
   if (error || !data) {
@@ -39,13 +39,13 @@ async function getUserAndPremiumStatus() {
   } = await supabase.auth.getUser();
 
   if (userError || !user) {
-    redirect("/login");
+    redirect('/login');
   }
 
   const { data: subscription } = await supabase
-    .from("users")
-    .select("has_premium")
-    .eq("uid", user.id)
+    .from('users')
+    .select('has_premium')
+    .eq('uid', user.id)
     .single();
 
   const hasPremium = subscription?.has_premium;
@@ -55,12 +55,12 @@ async function getUserAndPremiumStatus() {
 
 export default async function CustomizePage({ params }: PageProps) {
   const { id } = await params;
-  
+
   try {
     const { user, hasPremium } = await getUserAndPremiumStatus();
 
     if (!hasPremium) {
-      redirect("/dashboard");
+      redirect('/dashboard');
     }
 
     const form = await getFormData(id, user.id);
@@ -71,8 +71,8 @@ export default async function CustomizePage({ params }: PageProps) {
       </Suspense>
     );
   } catch (error) {
-    console.error("Error loading form for customization:", error);
-    redirect("/dashboard");
+    console.error('Error loading form for customization:', error);
+    redirect('/dashboard');
   }
 }
 
@@ -82,15 +82,15 @@ export async function generateMetadata({ params }: PageProps) {
   try {
     const { user } = await getUserAndPremiumStatus();
     const form = await getFormData(id, user.id);
-    
+
     return {
       title: `Customize ${form.schema.settings.title}`,
-      description: "Customize the design and appearance of your form",
+      description: 'Customize the design and appearance of your form',
     };
   } catch {
     return {
-      title: "Customize Form",
-      description: "Customize the design and appearance of your form",
+      title: 'Customize Form',
+      description: 'Customize the design and appearance of your form',
     };
   }
 }

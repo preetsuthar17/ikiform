@@ -1,8 +1,8 @@
-import React from "react";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import type { FieldSettingsProps } from "./types";
+import React from 'react';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import type { FieldSettingsProps } from './types';
 
 export function LinkFieldSettings({
   field,
@@ -20,7 +20,7 @@ export function LinkFieldSettings({
           id="link-pattern"
           onChange={(e) => onUpdateSettings({ pattern: e.target.value })}
           placeholder="e.g. ^https?://.+$"
-          value={field.settings?.pattern ?? ""}
+          value={field.settings?.pattern ?? ''}
         />
       </div>
       <div className="flex flex-col gap-2">
@@ -32,7 +32,7 @@ export function LinkFieldSettings({
           id="link-message"
           onChange={(e) => onUpdateSettings({ patternMessage: e.target.value })}
           placeholder="Please enter a valid URL"
-          value={field.settings?.patternMessage ?? ""}
+          value={field.settings?.patternMessage ?? ''}
         />
       </div>
     </Card>

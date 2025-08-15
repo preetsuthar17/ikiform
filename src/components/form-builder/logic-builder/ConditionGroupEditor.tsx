@@ -1,28 +1,28 @@
-import { Plus, Trash2 } from "lucide-react";
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Plus, Trash2 } from 'lucide-react';
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import type { FormField } from "@/lib/database";
-import type { LogicCondition, LogicConditionGroup } from "./types";
+} from '@/components/ui/select';
+import type { FormField } from '@/lib/database';
+import type { LogicCondition, LogicConditionGroup } from './types';
 
 const availableOperators = [
-  { value: "equals", label: "Equals" },
-  { value: "not_equals", label: "Not Equals" },
-  { value: "greater_than", label: "Greater Than" },
-  { value: "less_than", label: "Less Than" },
-  { value: "contains", label: "Contains" },
-  { value: "not_contains", label: "Not Contains" },
-  { value: "is_empty", label: "Is Empty" },
-  { value: "is_not_empty", label: "Is Not Empty" },
-  { value: "includes", label: "Includes" },
+  { value: 'equals', label: 'Equals' },
+  { value: 'not_equals', label: 'Not Equals' },
+  { value: 'greater_than', label: 'Greater Than' },
+  { value: 'less_than', label: 'Less Than' },
+  { value: 'contains', label: 'Contains' },
+  { value: 'not_contains', label: 'Not Contains' },
+  { value: 'is_empty', label: 'Is Empty' },
+  { value: 'is_not_empty', label: 'Is Not Empty' },
+  { value: 'includes', label: 'Includes' },
 ];
 
 function ConditionGroupEditor({
@@ -36,16 +36,16 @@ function ConditionGroupEditor({
   onDelete?: () => void;
   fields: FormField[];
 }) {
-  const handleLogicChange = (logic: "AND" | "OR") => {
+  const handleLogicChange = (logic: 'AND' | 'OR') => {
     onChange({ ...group, logic });
   };
 
   const handleAddCondition = () => {
     const newCond: LogicCondition = {
       id: `cond-${Date.now()}`,
-      field: fields[0]?.id || "",
+      field: fields[0]?.id || '',
       operator: availableOperators[0].value as any,
-      value: "",
+      value: '',
     };
     onChange({ ...group, conditions: [...group.conditions, newCond] });
   };
@@ -53,7 +53,7 @@ function ConditionGroupEditor({
   const handleAddGroup = () => {
     const newGroup: LogicConditionGroup = {
       id: `group-${Date.now()}`,
-      logic: "AND",
+      logic: 'AND',
       conditions: [],
     };
     onChange({ ...group, conditions: [...group.conditions, newGroup] });
@@ -61,7 +61,7 @@ function ConditionGroupEditor({
 
   const handleUpdate = (
     idx: number,
-    updated: LogicCondition | LogicConditionGroup,
+    updated: LogicCondition | LogicConditionGroup
   ) => {
     const updatedConds = group.conditions.slice();
     updatedConds[idx] = updated;
@@ -79,7 +79,7 @@ function ConditionGroupEditor({
       <div className="mb-2 flex items-center gap-2">
         <span className="font-medium">Group</span>
         <Select
-          onValueChange={(v) => handleLogicChange(v as "AND" | "OR")}
+          onValueChange={(v) => handleLogicChange(v as 'AND' | 'OR')}
           value={group.logic}
         >
           <SelectTrigger className="w-24" size="sm">
@@ -98,7 +98,7 @@ function ConditionGroupEditor({
       </div>
       <div className="flex flex-col gap-2">
         {group.conditions.map((cond, idx) =>
-          "logic" in cond ? (
+          'logic' in cond ? (
             <ConditionGroupEditor
               fields={fields}
               group={cond}
@@ -156,7 +156,7 @@ function ConditionGroupEditor({
                 <Trash2 className="h-4 w-4" />
               </Button>
             </div>
-          ),
+          )
         )}
       </div>
       <div className="mt-2 flex gap-2">

@@ -1,12 +1,12 @@
-import { FileText, Info } from "lucide-react";
-import type React from "react";
-import { Card } from "@/components/ui/card";
+import { FileText, Info } from 'lucide-react';
+import type React from 'react';
+import { Card } from '@/components/ui/card';
 
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 
-import type { FormConfigurationStepProps } from "../types";
+import type { FormConfigurationStepProps } from '../types';
 
 export const FormConfigurationStep: React.FC<FormConfigurationStepProps> = ({
   configuration,

@@ -1,11 +1,11 @@
-import type { Form, FormSubmission } from "@/lib/database";
+import type { Form, FormSubmission } from '@/lib/database';
 
 export interface FormAnalyticsProps {
   form: Form;
 }
 
 export interface ChatMessage {
-  role: "user" | "assistant";
+  role: 'user' | 'assistant';
   content: string;
   timestamp: Date;
 }
@@ -26,8 +26,8 @@ export interface ChatInterfaceProps {
 }
 
 export interface FilterState {
-  timeRange: "all" | "today" | "week" | "month";
-  completionRate: "all" | "complete" | "partial" | "empty";
+  timeRange: 'all' | 'today' | 'week' | 'month';
+  completionRate: 'all' | 'complete' | 'partial' | 'empty';
 }
 
 export interface FieldAnalytics {

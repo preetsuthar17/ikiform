@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { getLivePatternError } from "@/components/form-builder/form-field-renderer/components/TextInputField";
+import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import { getLivePatternError } from '@/components/form-builder/form-field-renderer/components/TextInputField';
 
-import { PasswordProtectionModal } from "@/components/forms/public-form/components/PasswordProtectionModal";
+import { PasswordProtectionModal } from '@/components/forms/public-form/components/PasswordProtectionModal';
 
-import { Card } from "@/components/ui/card";
-import { getFormLayoutClasses } from "@/lib/utils/form-layout";
-import { Progress } from "../ui/progress";
-import { useFormStyling } from "@/hooks/use-form-styling";
+import { Card } from '@/components/ui/card';
+import { useFormStyling } from '@/hooks/use-form-styling';
+import { getFormLayoutClasses } from '@/lib/utils/form-layout';
+import { Progress } from '../ui/progress';
 
 import {
   FormContent,
@@ -17,13 +17,13 @@ import {
   FormNavigation,
   FormProgress,
   SuccessScreen,
-} from "./multi-step-form/components";
+} from './multi-step-form/components';
 
-import { useFormNavigation, useFormState } from "./multi-step-form/hooks";
+import { useFormNavigation, useFormState } from './multi-step-form/hooks';
 
-import type { MultiStepFormProps } from "./multi-step-form/types";
+import type { MultiStepFormProps } from './multi-step-form/types';
 
-import { calculateProgress, processFormBlocks } from "./multi-step-form/utils";
+import { calculateProgress, processFormBlocks } from './multi-step-form/utils';
 
 export function MultiStepForm({
   formId,
@@ -51,8 +51,8 @@ export function MultiStepForm({
 
   const hasLivePatternError = currentBlock.fields.some(
     (field) =>
-      ["text", "email", "textarea"].includes(field.type) &&
-      getLivePatternError(field, formData[field.id]),
+      ['text', 'email', 'textarea'].includes(field.type) &&
+      getLivePatternError(field, formData[field.id])
   );
   const isStepDisabled = submitting || hasLivePatternError;
 
@@ -64,9 +64,11 @@ export function MultiStepForm({
 
   const { containerClass, marginClass } = getFormLayoutClasses(schema);
   const { customStyles, fontLoaded, getFormClasses } = useFormStyling(schema);
-  
+
   // Check if custom width is used
-  const isCustomWidth = (schema.settings?.layout as any)?.maxWidth === "custom" && (schema.settings?.layout as any)?.customWidth;
+  const isCustomWidth =
+    (schema.settings?.layout as any)?.maxWidth === 'custom' &&
+    (schema.settings?.layout as any)?.customWidth;
 
   useEffect(() => {
     const passwordProtection = schema.settings.passwordProtection;
@@ -89,12 +91,12 @@ export function MultiStepForm({
       setPasswordVerified(true);
       setShowPasswordModal(false);
     } else {
-      toast.error("Incorrect password!");
+      toast.error('Incorrect password!');
     }
   };
 
   const handlePasswordCancel = () => {
-    window.location.href = "/";
+    window.location.href = '/';
   };
 
   useFormNavigation({
@@ -116,7 +118,7 @@ export function MultiStepForm({
         isOpen={showPasswordModal}
         message={
           schema.settings.passwordProtection?.message ||
-          "This form is password protected. Please enter the password to continue."
+          'This form is password protected. Please enter the password to continue.'
         }
         onCancel={handlePasswordCancel}
         onPasswordSubmit={handlePasswordSubmit}
@@ -134,12 +136,12 @@ export function MultiStepForm({
 
   return (
     <div
-      className={`flex items-center justify-center transition-opacity duration-500 ${showForm ? "opacity-100" : "opacity-0"} ${marginClass} ${getFormClasses()}`}
+      className={`flex items-center justify-center transition-opacity duration-500 ${showForm ? 'opacity-100' : 'opacity-0'} ${marginClass} ${getFormClasses()}`}
       dir={dir}
       style={customStyles.containerStyle}
     >
-      <div 
-        className={`flex w-full flex-col gap-8 ${containerClass} ${isCustomWidth ? 'ikiform-custom-width' : ''}`} 
+      <div
+        className={`flex w-full flex-col gap-8 ${containerClass} ${isCustomWidth ? 'ikiform-custom-width' : ''}`}
         style={customStyles.containerStyle}
       >
         <Card

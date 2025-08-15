@@ -1,2 +1,5 @@
-export { useFormSettings } from "./useFormSettings";
-export { useFormDesignSettings, useColorValidation } from "./useFormDesignSettings";
+export {
+  useColorValidation,
+  useFormDesignSettings,
+} from './useFormDesignSettings';
+export { useFormSettings } from './useFormSettings';

@@ -17,7 +17,7 @@
 .ikiform-customized textarea:focus,
 .ikiform-customized select:focus {
   border-color: var(--form-border-color, hsl(var(--border))) !important;
-  box-shadow: 0 0 0 2px var(--form-primary-color, hsl(var(--primary)))40 !important;
+  box-shadow: 0 0 0 2px var(--form-primary-color, hsl(var(--primary))) 40 !important;
   outline: none !important;
 }
 
@@ -30,8 +30,16 @@
 
 .ikiform-customized button[type="submit"]:hover,
 .ikiform-customized .primary-button:hover {
-  background-color: color-mix(in srgb, var(--form-primary-color, hsl(var(--primary))) 90%, black) !important;
-  border-color: color-mix(in srgb, var(--form-primary-color, hsl(var(--primary))) 90%, black) !important;
+  background-color: color-mix(
+    in srgb,
+    var(--form-primary-color, hsl(var(--primary))) 90%,
+    black
+  ) !important;
+  border-color: color-mix(
+    in srgb,
+    var(--form-primary-color, hsl(var(--primary))) 90%,
+    black
+  ) !important;
 }
 
 /* Minimal design mode */
@@ -75,7 +83,7 @@
 
 .ikiform-customized [data-radix-select-trigger]:focus {
   border-color: var(--form-border-color, hsl(var(--border))) !important;
-  box-shadow: 0 0 0 2px var(--form-primary-color, hsl(var(--primary)))40 !important;
+  box-shadow: 0 0 0 2px var(--form-primary-color, hsl(var(--primary))) 40 !important;
   outline: none !important;
 }
 
@@ -91,7 +99,7 @@
 
 .ikiform-customized .date-picker-input:focus {
   border-color: var(--form-border-color, hsl(var(--border))) !important;
-  box-shadow: 0 0 0 2px var(--form-primary-color, hsl(var(--primary)))40 !important;
+  box-shadow: 0 0 0 2px var(--form-primary-color, hsl(var(--primary))) 40 !important;
   outline: none !important;
 }
 

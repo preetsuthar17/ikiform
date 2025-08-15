@@ -1,8 +1,8 @@
-import { Card } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Loader } from "../ui/loader";
-import type { WebhookConfig } from "./hooks/useWebhookManagement";
-import { WebhookListItem } from "./WebhookListItem";
+import { Card } from '@/components/ui/card';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Loader } from '../ui/loader';
+import type { WebhookConfig } from './hooks/useWebhookManagement';
+import { WebhookListItem } from './WebhookListItem';
 
 interface WebhookListProps {
   webhooks: WebhookConfig[];

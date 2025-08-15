@@ -1,14 +1,14 @@
-import React from "react";
-import { ShareFormModal } from "@/components/form-builder/share-form-modal";
-import { Badge } from "@/components/ui/badge";
+import React from 'react';
+import { ShareFormModal } from '@/components/form-builder/share-form-modal';
+import { Badge } from '@/components/ui/badge';
 
-import { Card } from "@/components/ui/card";
+import { Card } from '@/components/ui/card';
 
-import type { FormCardProps } from "../types";
+import type { FormCardProps } from '../types';
 
-import { formatDate, getTotalFields } from "../utils";
+import { formatDate, getTotalFields } from '../utils';
 
-import { FormActions } from "./FormActions";
+import { FormActions } from './FormActions';
 
 export function FormCard({
   form,
@@ -42,9 +42,9 @@ export function FormCard({
         </div>
         <Badge
           className="flex-shrink-0 font-medium"
-          variant={form.is_published ? "default" : "secondary"}
+          variant={form.is_published ? 'default' : 'secondary'}
         >
-          {form.is_published ? "Published" : "Draft"}
+          {form.is_published ? 'Published' : 'Draft'}
         </Badge>
       </div>
 

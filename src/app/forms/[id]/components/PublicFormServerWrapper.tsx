@@ -1,6 +1,6 @@
-import { Suspense } from "react";
-import PublicFormClient from "../PublicFormClient";
-import { FormSkeleton } from "./FormSkeletons";
+import { Suspense } from 'react';
+import PublicFormClient from '../PublicFormClient';
+import { FormSkeleton } from './FormSkeletons';
 
 interface PublicFormServerWrapperProps {
   formId: string;
@@ -20,7 +20,7 @@ export default function PublicFormServerWrapper({
       fallback={
         <FormSkeleton
           showProgress={isMultiStep}
-          variant={isMultiStep ? "multi-step" : "single-step"}
+          variant={isMultiStep ? 'multi-step' : 'single-step'}
         />
       }
     >

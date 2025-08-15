@@ -1,7 +1,7 @@
-import { motion } from "motion/react";
+import { motion } from 'motion/react';
 
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
 interface WelcomeMessageProps {
   mounted: boolean;
@@ -20,7 +20,7 @@ export function WelcomeMessage({ mounted, theme }: WelcomeMessageProps) {
           <Image
             alt="Ikiform"
             className={`pointer-events-none ${
-              mounted && theme === "light" ? "invert" : ""
+              mounted && theme === 'light' ? 'invert' : ''
             }`}
             height={69}
             src="/logo.svg"

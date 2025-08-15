@@ -1,4 +1,4 @@
-import type { FormLogic } from "@/components/form-builder/logic-builder/types";
+import type { FormLogic } from '@/components/form-builder/logic-builder/types';
 
 export interface Database {
   public: {
@@ -66,7 +66,7 @@ export interface Database {
           id: string;
           user_id: string;
           session_id: string;
-          role: "user" | "assistant" | "system";
+          role: 'user' | 'assistant' | 'system';
           content: string;
           metadata: Record<string, any>;
           created_at: string;
@@ -76,7 +76,7 @@ export interface Database {
           id?: string;
           user_id: string;
           session_id: string;
-          role: "user" | "assistant" | "system";
+          role: 'user' | 'assistant' | 'system';
           content: string;
           metadata?: Record<string, any>;
           created_at?: string;
@@ -86,7 +86,7 @@ export interface Database {
           id?: string;
           user_id?: string;
           session_id?: string;
-          role?: "user" | "assistant" | "system";
+          role?: 'user' | 'assistant' | 'system';
           content?: string;
           metadata?: Record<string, any>;
           created_at?: string;
@@ -99,7 +99,7 @@ export interface Database {
           user_id: string;
           form_id: string;
           session_id: string;
-          role: "user" | "assistant" | "system";
+          role: 'user' | 'assistant' | 'system';
           content: string;
           metadata: Record<string, any>;
           created_at: string;
@@ -110,7 +110,7 @@ export interface Database {
           user_id: string;
           form_id: string;
           session_id: string;
-          role: "user" | "assistant" | "system";
+          role: 'user' | 'assistant' | 'system';
           content: string;
           metadata?: Record<string, any>;
           created_at?: string;
@@ -121,7 +121,7 @@ export interface Database {
           user_id?: string;
           form_id?: string;
           session_id?: string;
-          role?: "user" | "assistant" | "system";
+          role?: 'user' | 'assistant' | 'system';
           content?: string;
           metadata?: Record<string, any>;
           created_at?: string;
@@ -219,27 +219,27 @@ export interface FormField {
   labelKey?: string;
   id: string;
   type:
-    | "text"
-    | "email"
-    | "textarea"
-    | "radio"
-    | "checkbox"
-    | "number"
-    | "select"
-    | "slider"
-    | "tags"
-    | "social"
-    | "date"
-    | "signature"
-    | "file"
-    | "poll"
-    | "rating"
-    | "time"
-    | "scheduler"
-    | "statement"
-    | "phone"
-    | "address"
-    | "link";
+    | 'text'
+    | 'email'
+    | 'textarea'
+    | 'radio'
+    | 'checkbox'
+    | 'number'
+    | 'select'
+    | 'slider'
+    | 'tags'
+    | 'social'
+    | 'date'
+    | 'signature'
+    | 'file'
+    | 'poll'
+    | 'rating'
+    | 'time'
+    | 'scheduler'
+    | 'statement'
+    | 'phone'
+    | 'address'
+    | 'link';
   label: string;
   description?: string;
   placeholder?: string;
@@ -280,7 +280,7 @@ export interface FormField {
 
     socialPlatforms?: string[];
     showIcons?: boolean;
-    iconSize?: "sm" | "md" | "lg";
+    iconSize?: 'sm' | 'md' | 'lg';
     customLinks?: { label: string; placeholder?: string }[];
 
     emailValidation?: {
@@ -291,7 +291,7 @@ export interface FormField {
       customValidationMessage?: string;
     };
 
-    schedulerProvider?: "calcom" | "calendly" | "tidycal";
+    schedulerProvider?: 'calcom' | 'calendly' | 'tidycal';
     schedulerLinks?: {
       calcom?: string;
       calendly?: string;
@@ -299,10 +299,10 @@ export interface FormField {
     };
     schedulerButtonText?: string;
 
-    size?: "sm" | "md" | "lg";
-    variant?: "default" | "filled" | "ghost" | "underline";
+    size?: 'sm' | 'md' | 'lg';
+    variant?: 'default' | 'filled' | 'ghost' | 'underline';
     helpText?: string;
-    width?: "full" | "half" | "third" | "quarter";
+    width?: 'full' | 'half' | 'third' | 'quarter';
 
     pollOptions?: string[];
     showResults?: boolean;
@@ -317,8 +317,8 @@ export interface FormField {
 
     statementHeading?: string;
     statementDescription?: string;
-    statementAlign?: "left" | "center" | "right";
-    statementSize?: "sm" | "md" | "lg";
+    statementAlign?: 'left' | 'center' | 'right';
+    statementSize?: 'sm' | 'md' | 'lg';
 
     pattern?: string;
     patternMessage?: string;
@@ -334,12 +334,12 @@ export interface FormField {
   };
   prepopulation?: {
     enabled: boolean;
-    source: "url" | "api" | "profile" | "previous" | "template";
+    source: 'url' | 'api' | 'profile' | 'previous' | 'template';
     config: {
       urlParam?: string;
 
       apiEndpoint?: string;
-      apiMethod?: "GET" | "POST";
+      apiMethod?: 'GET' | 'POST';
       apiHeaders?: Record<string, string>;
       apiBodyTemplate?: string;
       jsonPath?: string;
@@ -347,7 +347,7 @@ export interface FormField {
       lookbackDays?: number;
       matchingFields?: string[];
 
-      profileField?: "name" | "email" | "phone" | "address" | "custom";
+      profileField?: 'name' | 'email' | 'phone' | 'address' | 'custom';
 
       templateId?: string;
 
@@ -368,9 +368,9 @@ export interface FormBlock {
 
   settings?: {
     showStepNumber?: boolean;
-    stepNumberStyle?: "number" | "roman" | "letters";
-    layout?: "single" | "two-column" | "three-column";
-    spacing?: "compact" | "normal" | "relaxed";
+    stepNumberStyle?: 'number' | 'roman' | 'letters';
+    layout?: 'single' | 'two-column' | 'three-column';
+    spacing?: 'compact' | 'normal' | 'relaxed';
     backgroundColor?: string;
     borderColor?: string;
   };
@@ -396,24 +396,24 @@ export interface FormSchema {
     };
     typography?: {
       fontFamily?: string;
-      fontSize?: "xs" | "sm" | "base" | "lg" | "xl";
-      fontWeight?: "light" | "normal" | "medium" | "semibold" | "bold";
-      lineHeight?: "tight" | "normal" | "relaxed";
-      letterSpacing?: "tight" | "normal" | "wide";
+      fontSize?: 'xs' | 'sm' | 'base' | 'lg' | 'xl';
+      fontWeight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
+      lineHeight?: 'tight' | 'normal' | 'relaxed';
+      letterSpacing?: 'tight' | 'normal' | 'wide';
     };
     layout?: {
-      maxWidth?: "sm" | "md" | "lg" | "xl" | "full";
-      padding?: "none" | "sm" | "md" | "lg";
-      margin?: "none" | "sm" | "md" | "lg";
-      borderRadius?: "none" | "sm" | "md" | "lg" | "xl";
-      spacing?: "compact" | "normal" | "relaxed";
-      alignment?: "left" | "center" | "right";
+      maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+      padding?: 'none' | 'sm' | 'md' | 'lg';
+      margin?: 'none' | 'sm' | 'md' | 'lg';
+      borderRadius?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
+      spacing?: 'compact' | 'normal' | 'relaxed';
+      alignment?: 'left' | 'center' | 'right';
     };
     branding?: {
       showPoweredBy?: boolean;
       customFooter?: string;
       logoUrl?: string;
-      logoPosition?: "top" | "header" | "footer";
+      logoPosition?: 'top' | 'header' | 'footer';
       socialMedia?: {
         enabled?: boolean;
         platforms?: {
@@ -426,8 +426,8 @@ export interface FormSchema {
           website?: string;
         };
         showIcons?: boolean;
-        iconSize?: "sm" | "md" | "lg";
-        position?: "footer" | "header" | "both";
+        iconSize?: 'sm' | 'md' | 'lg';
+        position?: 'footer' | 'header' | 'both';
       };
     };
     behavior?: {
@@ -484,17 +484,16 @@ export interface FormSchema {
     };
 
     rtl?: boolean;
-
   };
   logic?: FormLogic;
 }
 
 export type WebhookEventType =
-  | "form_submitted"
-  | "form_updated"
-  | "user_registered"
-  | "analytics_event"
-  | "custom";
+  | 'form_submitted'
+  | 'form_updated'
+  | 'user_registered'
+  | 'analytics_event'
+  | 'custom';
 
 export interface WebhookConfig {
   id: string;
@@ -503,7 +502,7 @@ export interface WebhookConfig {
   url: string;
   events: WebhookEventType[];
   secret?: string;
-  method: "POST" | "PUT";
+  method: 'POST' | 'PUT';
   headers?: Record<string, string>;
   payloadTemplate?: string;
   enabled: boolean;
@@ -515,7 +514,7 @@ export interface WebhookLog {
   id: string;
   webhook_id: string;
   event: WebhookEventType;
-  status: "success" | "failed" | "pending";
+  status: 'success' | 'failed' | 'pending';
   request_payload: any;
   response_status?: number;
   response_body?: string;

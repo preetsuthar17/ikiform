@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import { TagInput } from "@/components/ui/tag-input";
+import { TagInput } from '@/components/ui/tag-input';
 
-import type { BaseFieldProps } from "../types";
+import type { BaseFieldProps } from '../types';
 
-import { getErrorClasses } from "../utils";
+import { getErrorClasses } from '../utils';
 
 export function TagsField({
   field,
@@ -24,7 +24,7 @@ export function TagsField({
       disabled={disabled}
       maxTags={field.settings?.maxTags}
       onTagsChange={onChange}
-      placeholder={field.placeholder || "Type and press Enter..."}
+      placeholder={field.placeholder || 'Type and press Enter...'}
       tagSize="sm"
       tags={tags}
       tagVariant="default"

@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 interface ChatSuggestionsProps {
   suggestions: { text: string; icon: React.ReactNode }[];
@@ -17,8 +17,8 @@ export function ChatSuggestions({
             className="grow rounded-card"
             key={i}
             onClick={() => onSuggestionClick(s.text)}
-            size={"sm"}
-            variant={"secondary"}
+            size={'sm'}
+            variant={'secondary'}
           >
             {s.text}
           </Button>

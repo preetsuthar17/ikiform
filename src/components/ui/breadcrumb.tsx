@@ -1,81 +1,81 @@
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
-import { ChevronRight, MoreHorizontal } from "lucide-react";
-import * as React from "react";
-import { cn } from "@/lib/utils";
+import { Slot } from '@radix-ui/react-slot';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { ChevronRight, MoreHorizontal } from 'lucide-react';
+import * as React from 'react';
+import { cn } from '@/lib/utils';
 
-const breadcrumbVariants = cva("", {
+const breadcrumbVariants = cva('', {
   variants: {},
   defaultVariants: {},
 });
 
 const breadcrumbListVariants = cva(
-  "flex flex-wrap items-center gap-1.5 break-words text-muted-foreground text-sm",
+  'flex flex-wrap items-center gap-1.5 break-words text-muted-foreground text-sm',
   {
     variants: {
       size: {
-        sm: "gap-1 text-xs",
-        default: "gap-1.5 text-sm",
-        lg: "gap-2 text-base",
+        sm: 'gap-1 text-xs',
+        default: 'gap-1.5 text-sm',
+        lg: 'gap-2 text-base',
       },
     },
     defaultVariants: {
-      size: "default",
+      size: 'default',
     },
-  },
+  }
 );
 
-const breadcrumbItemVariants = cva("inline-flex items-center gap-1.5", {
+const breadcrumbItemVariants = cva('inline-flex items-center gap-1.5', {
   variants: {},
   defaultVariants: {},
 });
 
 const breadcrumbLinkVariants = cva(
-  "flex items-center gap-1 rounded-ele transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+  'flex items-center gap-1 rounded-ele transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
   {
     variants: {},
     defaultVariants: {},
-  },
+  }
 );
 
-const breadcrumbPageVariants = cva("font-normal text-foreground", {
+const breadcrumbPageVariants = cva('font-normal text-foreground', {
   variants: {
     variant: {
-      default: "",
-      highlighted: "font-medium",
-      muted: "text-muted-foreground",
+      default: '',
+      highlighted: 'font-medium',
+      muted: 'text-muted-foreground',
     },
   },
   defaultVariants: {
-    variant: "default",
+    variant: 'default',
   },
 });
 
-export interface BreadcrumbProps extends React.ComponentPropsWithoutRef<"nav"> {
+export interface BreadcrumbProps extends React.ComponentPropsWithoutRef<'nav'> {
   separator?: React.ReactNode;
 }
 
 export interface BreadcrumbListProps
-  extends React.ComponentPropsWithoutRef<"ol">,
+  extends React.ComponentPropsWithoutRef<'ol'>,
     VariantProps<typeof breadcrumbListVariants> {}
 
 export interface BreadcrumbItemProps
-  extends React.ComponentPropsWithoutRef<"li"> {}
+  extends React.ComponentPropsWithoutRef<'li'> {}
 
 export interface BreadcrumbLinkProps
-  extends React.ComponentPropsWithoutRef<"a"> {
+  extends React.ComponentPropsWithoutRef<'a'> {
   asChild?: boolean;
 }
 
 export interface BreadcrumbPageProps
-  extends React.ComponentPropsWithoutRef<"span">,
+  extends React.ComponentPropsWithoutRef<'span'>,
     VariantProps<typeof breadcrumbPageVariants> {}
 
-export interface BreadcrumbSeparatorProps extends React.ComponentProps<"li"> {
+export interface BreadcrumbSeparatorProps extends React.ComponentProps<'li'> {
   children?: React.ReactNode;
 }
 
-export interface BreadcrumbEllipsisProps extends React.ComponentProps<"span"> {}
+export interface BreadcrumbEllipsisProps extends React.ComponentProps<'span'> {}
 
 const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
   ({ className, ...props }, ref) => (
@@ -85,9 +85,9 @@ const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
       ref={ref}
       {...props}
     />
-  ),
+  )
 );
-Breadcrumb.displayName = "Breadcrumb";
+Breadcrumb.displayName = 'Breadcrumb';
 
 const BreadcrumbList = React.forwardRef<HTMLOListElement, BreadcrumbListProps>(
   ({ className, size, ...props }, ref) => (
@@ -96,9 +96,9 @@ const BreadcrumbList = React.forwardRef<HTMLOListElement, BreadcrumbListProps>(
       ref={ref}
       {...props}
     />
-  ),
+  )
 );
-BreadcrumbList.displayName = "BreadcrumbList";
+BreadcrumbList.displayName = 'BreadcrumbList';
 
 const BreadcrumbItem = React.forwardRef<HTMLLIElement, BreadcrumbItemProps>(
   ({ className, ...props }, ref) => (
@@ -107,13 +107,13 @@ const BreadcrumbItem = React.forwardRef<HTMLLIElement, BreadcrumbItemProps>(
       ref={ref}
       {...props}
     />
-  ),
+  )
 );
-BreadcrumbItem.displayName = "BreadcrumbItem";
+BreadcrumbItem.displayName = 'BreadcrumbItem';
 
 const BreadcrumbLink = React.forwardRef<HTMLAnchorElement, BreadcrumbLinkProps>(
   ({ asChild, className, ...props }, ref) => {
-    const Comp = asChild ? Slot : "a";
+    const Comp = asChild ? Slot : 'a';
 
     return (
       <Comp
@@ -122,9 +122,9 @@ const BreadcrumbLink = React.forwardRef<HTMLAnchorElement, BreadcrumbLinkProps>(
         {...props}
       />
     );
-  },
+  }
 );
-BreadcrumbLink.displayName = "BreadcrumbLink";
+BreadcrumbLink.displayName = 'BreadcrumbLink';
 
 const BreadcrumbPage = React.forwardRef<HTMLSpanElement, BreadcrumbPageProps>(
   ({ className, variant, ...props }, ref) => (
@@ -136,9 +136,9 @@ const BreadcrumbPage = React.forwardRef<HTMLSpanElement, BreadcrumbPageProps>(
       role="link"
       {...props}
     />
-  ),
+  )
 );
-BreadcrumbPage.displayName = "BreadcrumbPage";
+BreadcrumbPage.displayName = 'BreadcrumbPage';
 
 const BreadcrumbSeparator: React.FC<BreadcrumbSeparatorProps> = ({
   children,
@@ -148,8 +148,8 @@ const BreadcrumbSeparator: React.FC<BreadcrumbSeparatorProps> = ({
   <li
     aria-hidden="true"
     className={cn(
-      "flex items-center [&>svg]:size-3.5 [&>svg]:shrink-0",
-      className,
+      'flex items-center [&>svg]:size-3.5 [&>svg]:shrink-0',
+      className
     )}
     role="presentation"
     {...props}
@@ -157,7 +157,7 @@ const BreadcrumbSeparator: React.FC<BreadcrumbSeparatorProps> = ({
     {children ?? <ChevronRight />}
   </li>
 );
-BreadcrumbSeparator.displayName = "BreadcrumbSeparator";
+BreadcrumbSeparator.displayName = 'BreadcrumbSeparator';
 
 const BreadcrumbEllipsis: React.FC<BreadcrumbEllipsisProps> = ({
   className,
@@ -165,7 +165,7 @@ const BreadcrumbEllipsis: React.FC<BreadcrumbEllipsisProps> = ({
 }) => (
   <span
     aria-hidden="true"
-    className={cn("flex h-9 w-9 items-center justify-center", className)}
+    className={cn('flex h-9 w-9 items-center justify-center', className)}
     role="presentation"
     {...props}
   >
@@ -173,7 +173,7 @@ const BreadcrumbEllipsis: React.FC<BreadcrumbEllipsisProps> = ({
     <span className="sr-only">More</span>
   </span>
 );
-BreadcrumbEllipsis.displayName = "BreadcrumbEllipsis";
+BreadcrumbEllipsis.displayName = 'BreadcrumbEllipsis';
 
 export {
   Breadcrumb,

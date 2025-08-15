@@ -1,4 +1,4 @@
-import { AIBuilderWrapper } from "@/components/ai-builder/ai-builder-wrapper";
+import { AIBuilderWrapper } from '@/components/ai-builder/ai-builder-wrapper';
 
 /**
  * AI Builder page - Optimized Server Component

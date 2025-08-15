@@ -1,18 +1,18 @@
-import { X } from "lucide-react";
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import type { FieldSettingsProps } from "./types";
+import { X } from 'lucide-react';
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import type { FieldSettingsProps } from './types';
 
 export function CheckboxFieldSettings({
   field,
   onUpdateSettings,
   onFieldUpdate,
 }: FieldSettingsProps) {
-  const [newOption, setNewOption] = useState("");
+  const [newOption, setNewOption] = useState('');
 
   return (
     <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
@@ -27,17 +27,17 @@ export function CheckboxFieldSettings({
             id="checkbox-option-input"
             onChange={(e) => setNewOption(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === "Enter" && newOption.trim()) {
+              if (e.key === 'Enter' && newOption.trim()) {
                 onFieldUpdate({
                   ...field,
                   options: [...(field.options || []), newOption.trim()],
                 });
-                setNewOption("");
+                setNewOption('');
               }
             }}
             placeholder="Add option"
             type="text"
-            value={newOption || ""}
+            value={newOption || ''}
           />
           <Button
             disabled={!(newOption && newOption.trim())}
@@ -47,7 +47,7 @@ export function CheckboxFieldSettings({
                   ...field,
                   options: [...(field.options || []), newOption.trim()],
                 });
-                setNewOption("");
+                setNewOption('');
               }
             }}
             size="sm"
@@ -60,7 +60,7 @@ export function CheckboxFieldSettings({
           {(field.options || []).map((option, idx) => (
             <div className="flex items-center gap-2" key={idx}>
               <span className="flex-1 truncate">
-                {typeof option === "string"
+                {typeof option === 'string'
                   ? option
                   : (option.label ?? option.value)}
               </span>

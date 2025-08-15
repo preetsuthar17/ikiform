@@ -3,7 +3,7 @@ export interface SettingsModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export type SettingsSection = "appearance" | "notifications";
+export type SettingsSection = 'appearance' | 'notifications';
 
 export interface SettingsSectionConfig {
   id: SettingsSection;

@@ -1,10 +1,10 @@
-import { CheckCircle, Clock, Target, TrendingUp, Trophy } from "lucide-react";
-import type React from "react";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Separator } from "@/components/ui/separator";
-import type { QuizResult } from "@/lib/quiz/scoring";
+import { CheckCircle, Clock, Target, TrendingUp, Trophy } from 'lucide-react';
+import type React from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Separator } from '@/components/ui/separator';
+import type { QuizResult } from '@/lib/quiz/scoring';
 
 interface QuizScoreDisplayProps {
   result: QuizResult;
@@ -15,7 +15,7 @@ interface QuizScoreDisplayProps {
 export function QuizScoreDisplay({
   result,
   isVisible = true,
-  className = "",
+  className = '',
 }: QuizScoreDisplayProps) {
   if (!isVisible) return null;
 
@@ -29,17 +29,17 @@ export function QuizScoreDisplay({
   } = result;
 
   const getScoreColor = () => {
-    if (percentage >= 90) return "text-green-600";
-    if (percentage >= 70) return "text-blue-600";
-    if (percentage >= 50) return "text-yellow-600";
-    return "text-red-600";
+    if (percentage >= 90) return 'text-green-600';
+    if (percentage >= 70) return 'text-blue-600';
+    if (percentage >= 50) return 'text-yellow-600';
+    return 'text-red-600';
   };
 
   const getProgressColor = () => {
-    if (percentage >= 90) return "bg-green-500";
-    if (percentage >= 70) return "bg-blue-500";
-    if (percentage >= 50) return "bg-yellow-500";
-    return "bg-red-500";
+    if (percentage >= 90) return 'bg-green-500';
+    if (percentage >= 70) return 'bg-blue-500';
+    if (percentage >= 50) return 'bg-yellow-500';
+    return 'bg-red-500';
   };
 
   return (
@@ -52,7 +52,7 @@ export function QuizScoreDisplay({
         )}
         <div>
           <h3 className="font-semibold text-lg">
-            {passed ? "Quiz Passed!" : "Quiz Complete"}
+            {passed ? 'Quiz Passed!' : 'Quiz Complete'}
           </h3>
           <p className="text-muted-foreground text-sm">
             Your performance summary
@@ -73,7 +73,7 @@ export function QuizScoreDisplay({
             className="h-3"
             style={
               {
-                "--progress-color": getProgressColor(),
+                '--progress-color': getProgressColor(),
               } as React.CSSProperties
             }
             value={percentage}
@@ -106,7 +106,7 @@ export function QuizScoreDisplay({
 
         {/* Status Badge */}
         <div className="flex justify-center">
-          <Badge className="text-sm" variant={passed ? "default" : "secondary"}>
+          <Badge className="text-sm" variant={passed ? 'default' : 'secondary'}>
             {passed ? (
               <>
                 <Trophy className="mr-2 h-3 w-3" />

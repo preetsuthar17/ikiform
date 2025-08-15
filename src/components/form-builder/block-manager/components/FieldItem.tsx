@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import { Badge } from "@/components/ui/badge";
+import { Badge } from '@/components/ui/badge';
 
-import type { FieldItemProps } from "../types";
+import type { FieldItemProps } from '../types';
 
 export function FieldItem({
   field,
@@ -12,7 +12,7 @@ export function FieldItem({
   return (
     <div
       className={`flex cursor-pointer items-center justify-between gap-3 rounded-ele transition-colors ${
-        isSelected ? "border border-primary/20 bg-primary/10" : "bg-accent"
+        isSelected ? 'border border-primary/20 bg-primary/10' : 'bg-accent'
       }`}
       onClick={() => onFieldSelect(field.id)}
     >

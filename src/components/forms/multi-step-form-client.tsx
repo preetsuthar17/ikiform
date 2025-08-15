@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { getLivePatternError } from "@/components/form-builder/form-field-renderer/components/TextInputField";
+import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import { getLivePatternError } from '@/components/form-builder/form-field-renderer/components/TextInputField';
 
-import { PasswordProtectionModal } from "@/components/forms/public-form/components/PasswordProtectionModal";
+import { PasswordProtectionModal } from '@/components/forms/public-form/components/PasswordProtectionModal';
 
-import { Card } from "@/components/ui/card";
-import { getFormLayoutClasses } from "@/lib/utils/form-layout";
-import { Progress } from "../ui/progress";
+import { Card } from '@/components/ui/card';
+import { getFormLayoutClasses } from '@/lib/utils/form-layout';
+import { Progress } from '../ui/progress';
 
 import {
   FormContent,
@@ -16,13 +16,13 @@ import {
   FormNavigation,
   FormProgress,
   SuccessScreen,
-} from "./multi-step-form/components";
+} from './multi-step-form/components';
 
-import { useFormNavigation, useFormState } from "./multi-step-form/hooks";
+import { useFormNavigation, useFormState } from './multi-step-form/hooks';
 
-import type { MultiStepFormProps } from "./multi-step-form/types";
+import type { MultiStepFormProps } from './multi-step-form/types';
 
-import { calculateProgress, processFormBlocks } from "./multi-step-form/utils";
+import { calculateProgress, processFormBlocks } from './multi-step-form/utils';
 
 export function MultiStepFormClient({
   formId,
@@ -50,8 +50,8 @@ export function MultiStepFormClient({
 
   const hasLivePatternError = currentBlock.fields.some(
     (field) =>
-      ["text", "email", "textarea"].includes(field.type) &&
-      getLivePatternError(field, formData[field.id]),
+      ['text', 'email', 'textarea'].includes(field.type) &&
+      getLivePatternError(field, formData[field.id])
   );
   const isStepDisabled = submitting || hasLivePatternError;
 
@@ -84,12 +84,12 @@ export function MultiStepFormClient({
       setPasswordVerified(true);
       setShowPasswordModal(false);
     } else {
-      toast.error("Incorrect password!");
+      toast.error('Incorrect password!');
     }
   };
 
   const handlePasswordCancel = () => {
-    window.location.href = "/";
+    window.location.href = '/';
   };
 
   useFormNavigation({
@@ -111,7 +111,7 @@ export function MultiStepFormClient({
         isOpen={showPasswordModal}
         message={
           schema.settings.passwordProtection?.message ||
-          "This form is password protected. Please enter the password to continue."
+          'This form is password protected. Please enter the password to continue.'
         }
         onCancel={handlePasswordCancel}
         onPasswordSubmit={handlePasswordSubmit}
@@ -129,12 +129,12 @@ export function MultiStepFormClient({
 
   return (
     <div
-      className={`flex items-center justify-center bg-background transition-opacity duration-500 ${showForm ? "opacity-100" : "opacity-0"} ${marginClass}`}
+      className={`flex items-center justify-center bg-background transition-opacity duration-500 ${showForm ? 'opacity-100' : 'opacity-0'} ${marginClass}`}
       dir={dir}
     >
       <div className={`flex w-full flex-col gap-8 ${containerClass}`}>
         <Card
-          className="flex w-full grow flex-col gap-6 rounded-card p-8 border-none bg-transparent shadow-none hover:bg-transparent"
+          className="flex w-full grow flex-col gap-6 rounded-card border-none bg-transparent p-8 shadow-none hover:bg-transparent"
           variant="ghost"
         >
           <FormProgress

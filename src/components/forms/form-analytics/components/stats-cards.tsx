@@ -7,12 +7,12 @@ import {
   TrendingUp,
   Users,
   Zap,
-} from "lucide-react";
-import type React from "react";
+} from 'lucide-react';
+import type React from 'react';
 
-import { Card } from "@/components/ui/card";
+import { Card } from '@/components/ui/card';
 
-import type { AnalyticsCardsProps, OverviewStatsProps } from "../types";
+import type { AnalyticsCardsProps, OverviewStatsProps } from '../types';
 
 export const OverviewStats: React.FC<OverviewStatsProps> = ({ data }) => {
   return (
@@ -109,7 +109,7 @@ export const AnalyticsCards: React.FC<AnalyticsCardsProps> = ({ data }) => {
         <div className="flex flex-col gap-1">
           <p className="font-medium text-muted-foreground text-sm">Peak Hour</p>
           <p className="font-bold text-2xl text-foreground">
-            {data.peakHour ? `${data.peakHour[0]}:00` : "N/A"}
+            {data.peakHour ? `${data.peakHour[0]}:00` : 'N/A'}
           </p>
         </div>
       </Card>
@@ -124,7 +124,7 @@ export const AnalyticsCards: React.FC<AnalyticsCardsProps> = ({ data }) => {
           <p className="font-bold text-2xl text-foreground">
             {Object.values(data.fieldAnalytics).reduce(
               (total, field) => total + field.uniqueValues,
-              0,
+              0
             )}
           </p>
         </div>

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   BarChart3,
@@ -8,28 +8,28 @@ import {
   Share,
   Sparkles,
   Trash2,
-} from "lucide-react";
+} from 'lucide-react';
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useTheme } from "next-themes";
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useTheme } from 'next-themes';
 
-import React, { useEffect, useState } from "react";
-import { ConfirmationModal } from "@/components/dashboard/form-delete-confirmation-modal";
-import { ShareFormModal } from "@/components/form-builder/share-form-modal";
-import { Badge } from "@/components/ui/badge";
+import React, { useEffect, useState } from 'react';
+import { ConfirmationModal } from '@/components/dashboard/form-delete-confirmation-modal';
+import { ShareFormModal } from '@/components/form-builder/share-form-modal';
+import { Badge } from '@/components/ui/badge';
 
-import { Button } from "@/components/ui/button";
-import { Loader } from "@/components/ui/loader";
+import { Button } from '@/components/ui/button';
+import { Loader } from '@/components/ui/loader';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { toast } from "@/hooks/use-toast";
+} from '@/components/ui/tooltip';
+import { toast } from '@/hooks/use-toast';
 
-import { formsDb } from "@/lib/database";
+import { formsDb } from '@/lib/database';
 
 import {
   AnalyticsCards,
@@ -40,18 +40,18 @@ import {
   SubmissionDetailsModal,
   SubmissionsList,
   TrendsChart,
-} from "./components";
-import { DropoffAnalytics } from "./components/dropoff-analytics";
+} from './components';
+import { DropoffAnalytics } from './components/dropoff-analytics';
 
 import {
   useAnalyticsChat,
   useAnalyticsData,
   useFormSubmissions,
-} from "./hooks";
+} from './hooks';
 
-import type { FormAnalyticsProps } from "./types";
+import type { FormAnalyticsProps } from './types';
 
-import { exportToCSV, exportToJSON, formatDate, getFieldLabel } from "./utils";
+import { exportToCSV, exportToJSON, formatDate, getFieldLabel } from './utils';
 
 /**
  * Client component for FormAnalytics
@@ -67,7 +67,7 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
   const [isMobile, setIsMobile] = useState(false);
 
   const { submissions, loading, refreshing, refreshData } = useFormSubmissions(
-    form.id,
+    form.id
   );
 
   const analyticsData = useAnalyticsData(form, submissions);
@@ -97,18 +97,18 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
     };
 
     checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const handleDeleteForm = async () => {
     try {
       await formsDb.deleteForm(form.id);
-      toast.success("Form deleted successfully");
-      router.push("/dashboard");
+      toast.success('Form deleted successfully');
+      router.push('/dashboard');
     } catch (error) {
-      console.error("Error deleting form:", error);
-      toast.error("Failed to delete form");
+      console.error('Error deleting form:', error);
+      toast.error('Failed to delete form');
     }
   };
 
@@ -126,7 +126,7 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
   };
 
   const getFormUrl = () => {
-    const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
+    const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
     const identifier = form.slug || form.id;
     return `${baseUrl}/f/${identifier}`;
   };
@@ -144,7 +144,7 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
 
   return (
     <TooltipProvider>
-      <div className="mx-auto w-full max-w-[95%] flex flex-col gap-6 px-6">
+      <div className="mx-auto flex w-full max-w-[95%] flex-col gap-6 px-6">
         {}
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex flex-col gap-1">
@@ -152,8 +152,8 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
               <h1 className="font-semibold text-2xl text-foreground">
                 {form.title}
               </h1>
-              <Badge variant={form.is_published ? "default" : "secondary"}>
-                {form.is_published ? "Published" : "Draft"}
+              <Badge variant={form.is_published ? 'default' : 'secondary'}>
+                {form.is_published ? 'Published' : 'Draft'}
               </Badge>
             </div>
             <p className="text-muted-foreground text-sm">
@@ -281,7 +281,7 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
           onClose={() => setIsShareModalOpen(false)}
           onPublish={async () => {
             await formsDb.togglePublishForm(form.id, true);
-            toast.success("Form published!");
+            toast.success('Form published!');
           }}
         />
 

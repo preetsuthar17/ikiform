@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   Calendar,
@@ -10,13 +10,13 @@ import {
   Trash2,
   User,
   XCircle,
-} from "lucide-react";
-import { formatDate } from "@/components/dashboard/forms-management/utils";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { DataTable, type DataTableColumn } from "@/components/ui/table";
-import { useAdminData } from "../hooks/useAdminData";
+} from 'lucide-react';
+import { formatDate } from '@/components/dashboard/forms-management/utils';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { DataTable, type DataTableColumn } from '@/components/ui/table';
+import { useAdminData } from '../hooks/useAdminData';
 
 interface AdminForm {
   id: string;
@@ -35,18 +35,18 @@ export function AdminForms() {
 
   const handleViewForm = (form: AdminForm) => {
     if (form.slug) {
-      window.open(`/f/${form.slug}`, "_blank");
+      window.open(`/f/${form.slug}`, '_blank');
     }
   };
 
   const handleEditForm = (form: AdminForm) => {
-    window.open(`/form-builder/${form.id}`, "_blank");
+    window.open(`/form-builder/${form.id}`, '_blank');
   };
 
   const handleDeleteForm = async (form: AdminForm) => {
     if (
       confirm(
-        `⚠️ DELETE FORM: "${form.title}"\n\nThis will permanently delete:\n- The form\n- All submissions to this form\n\nThis action cannot be undone!\n\nContinue?`,
+        `⚠️ DELETE FORM: "${form.title}"\n\nThis will permanently delete:\n- The form\n- All submissions to this form\n\nThis action cannot be undone!\n\nContinue?`
       )
     ) {
       await deleteForm(form.id);
@@ -55,8 +55,8 @@ export function AdminForms() {
 
   const columns: DataTableColumn<AdminForm>[] = [
     {
-      key: "title",
-      header: "Form",
+      key: 'title',
+      header: 'Form',
       sortable: true,
       filterable: true,
       render: (value, row) => (
@@ -88,32 +88,32 @@ export function AdminForms() {
       ),
     },
     {
-      key: "is_published",
-      header: "Status",
+      key: 'is_published',
+      header: 'Status',
       sortable: true,
       filterable: true,
-      align: "center",
+      align: 'center',
       render: (value) => (
-        <Badge className="gap-1" variant={value ? "default" : "secondary"}>
+        <Badge className="gap-1" variant={value ? 'default' : 'secondary'}>
           {value ? (
             <CheckCircle className="h-3 w-3" />
           ) : (
             <XCircle className="h-3 w-3" />
           )}
-          {value ? "Published" : "Draft"}
+          {value ? 'Published' : 'Draft'}
         </Badge>
       ),
     },
     {
-      key: "submission_count",
-      header: "Submissions",
+      key: 'submission_count',
+      header: 'Submissions',
       sortable: true,
-      align: "center",
+      align: 'center',
       render: (value) => <div className="font-medium">{value || 0}</div>,
     },
     {
-      key: "created_at",
-      header: "Created",
+      key: 'created_at',
+      header: 'Created',
       sortable: true,
       render: (value) => (
         <div className="flex items-center gap-2 text-sm">
@@ -122,8 +122,8 @@ export function AdminForms() {
             <div>{formatDate(value)}</div>
             <div className="text-muted-foreground text-xs">
               {new Date(value).toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
+                hour: '2-digit',
+                minute: '2-digit',
               })}
             </div>
           </div>
@@ -131,17 +131,17 @@ export function AdminForms() {
       ),
     },
     {
-      key: "updated_at",
-      header: "Last Updated",
+      key: 'updated_at',
+      header: 'Last Updated',
       sortable: true,
       render: (value) => (
         <div className="text-muted-foreground text-sm">{formatDate(value)}</div>
       ),
     },
     {
-      key: "id",
-      header: "Actions",
-      align: "right",
+      key: 'id',
+      header: 'Actions',
+      align: 'right',
       render: (value, row) => (
         <div className="flex items-center gap-1">
           <Button

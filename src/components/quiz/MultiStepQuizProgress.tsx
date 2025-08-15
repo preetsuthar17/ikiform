@@ -1,6 +1,6 @@
-import { Check, ChevronRight } from "lucide-react";
-import React from "react";
-import { cn } from "@/lib/utils";
+import { Check, ChevronRight } from 'lucide-react';
+import React from 'react';
+import { cn } from '@/lib/utils';
 
 interface MultiStepQuizProgressProps {
   steps: Array<{
@@ -18,12 +18,12 @@ interface MultiStepQuizProgressProps {
 export function MultiStepQuizProgress({
   steps,
   currentStepIndex,
-  className = "",
+  className = '',
 }: MultiStepQuizProgressProps) {
   if (steps.length <= 1) return null;
 
   return (
-    <div className={cn("w-full", className)}>
+    <div className={cn('w-full', className)}>
       <nav aria-label="Quiz progress">
         <ol className="flex w-full items-center justify-between">
           {steps.map((step, index) => {
@@ -34,8 +34,8 @@ export function MultiStepQuizProgress({
             return (
               <li
                 className={cn(
-                  "flex items-center",
-                  index !== steps.length - 1 && "flex-1",
+                  'flex items-center',
+                  index !== steps.length - 1 && 'flex-1'
                 )}
                 key={step.id}
               >
@@ -44,12 +44,12 @@ export function MultiStepQuizProgress({
                   <div className="flex flex-col items-center">
                     <div
                       className={cn(
-                        "flex h-8 w-8 items-center justify-center rounded-full border-2 font-medium text-sm",
+                        'flex h-8 w-8 items-center justify-center rounded-full border-2 font-medium text-sm',
                         isCompleted || isPast
-                          ? "border-green-500 bg-green-500 text-white"
+                          ? 'border-green-500 bg-green-500 text-white'
                           : isCurrent
-                            ? "border-blue-500 bg-blue-500 text-white"
-                            : "border-gray-300 bg-white text-gray-500",
+                            ? 'border-blue-500 bg-blue-500 text-white'
+                            : 'border-gray-300 bg-white text-gray-500'
                       )}
                     >
                       {isCompleted || isPast ? (
@@ -63,12 +63,12 @@ export function MultiStepQuizProgress({
                     <div className="mt-2 text-center">
                       <div
                         className={cn(
-                          "font-medium text-xs",
+                          'font-medium text-xs',
                           isCurrent
-                            ? "text-blue-600"
+                            ? 'text-blue-600'
                             : isCompleted || isPast
-                              ? "text-green-600"
-                              : "text-gray-500",
+                              ? 'text-green-600'
+                              : 'text-gray-500'
                         )}
                       >
                         {step.title}
@@ -91,8 +91,8 @@ export function MultiStepQuizProgress({
                   <div className="mx-4 flex-1">
                     <div
                       className={cn(
-                        "h-0.5 w-full",
-                        isCompleted || isPast ? "bg-green-500" : "bg-gray-300",
+                        'h-0.5 w-full',
+                        isCompleted || isPast ? 'bg-green-500' : 'bg-gray-300'
                       )}
                     />
                   </div>

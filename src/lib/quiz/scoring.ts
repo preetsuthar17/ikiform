@@ -1,4 +1,4 @@
-import type { FormField, FormSchema, FormSubmission } from "@/lib/database";
+import type { FormField, FormSchema, FormSubmission } from '@/lib/database';
 
 export interface QuizResult {
   score: number;
@@ -26,7 +26,7 @@ export interface QuizFieldResult {
  */
 export function calculateQuizScore(
   schema: FormSchema,
-  submissionData: Record<string, any>,
+  submissionData: Record<string, any>
 ): QuizResult {
   const allFields = getAllFields(schema);
   const quizFields = allFields.filter((field) => field.settings?.isQuizField);
@@ -57,7 +57,7 @@ export function calculateQuizScore(
     totalPossible += points;
 
     const isAnswered =
-      userAnswer !== undefined && userAnswer !== null && userAnswer !== "";
+      userAnswer !== undefined && userAnswer !== null && userAnswer !== '';
     if (isAnswered) {
       answeredQuestions++;
     }
@@ -74,8 +74,8 @@ export function calculateQuizScore(
     fieldResults.push({
       fieldId: field.id,
       fieldLabel: field.label,
-      userAnswer: userAnswer || "",
-      correctAnswer: correctAnswer || "",
+      userAnswer: userAnswer || '',
+      correctAnswer: correctAnswer || '',
       isCorrect,
       points: isCorrect ? points : 0,
       maxPoints: points,
@@ -104,9 +104,9 @@ export function calculateQuizScore(
  */
 function isAnswerCorrect(
   userAnswer: any,
-  correctAnswer: string | string[],
+  correctAnswer: string | string[]
 ): boolean {
-  if (typeof correctAnswer === "string") {
+  if (typeof correctAnswer === 'string') {
     return (
       String(userAnswer).toLowerCase().trim() ===
       correctAnswer.toLowerCase().trim()
@@ -130,7 +130,7 @@ function isAnswerCorrect(
       .sort();
 
     return normalizedUser.every(
-      (ans, index) => ans === normalizedCorrect[index],
+      (ans, index) => ans === normalizedCorrect[index]
     );
   }
 
@@ -157,23 +157,23 @@ function getAllFields(schema: FormSchema): FormField[] {
  */
 export function generateQuizResultMessage(
   result: QuizResult,
-  schema: FormSchema,
+  schema: FormSchema
 ): string {
   const { passed, percentage, score, totalPossible } = result;
   const quizSettings = schema.settings.quiz;
 
   if (passed && quizSettings?.resultMessage?.pass) {
     return quizSettings.resultMessage.pass
-      .replace("{score}", String(score))
-      .replace("{percentage}", String(percentage))
-      .replace("{total}", String(totalPossible));
+      .replace('{score}', String(score))
+      .replace('{percentage}', String(percentage))
+      .replace('{total}', String(totalPossible));
   }
 
   if (!passed && quizSettings?.resultMessage?.fail) {
     return quizSettings.resultMessage.fail
-      .replace("{score}", String(score))
-      .replace("{percentage}", String(percentage))
-      .replace("{total}", String(totalPossible));
+      .replace('{score}', String(score))
+      .replace('{percentage}', String(percentage))
+      .replace('{total}', String(totalPossible));
   }
 
   if (passed) {
@@ -195,7 +195,7 @@ export function isQuizForm(schema: FormSchema): boolean {
  */
 export function getQuizStatistics(
   schema: FormSchema,
-  submissions: FormSubmission[],
+  submissions: FormSubmission[]
 ): {
   averageScore: number;
   passRate: number;
@@ -266,7 +266,7 @@ export function getQuizStatistics(
       correctRate:
         stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0,
       totalAnswers: stats.total,
-    }),
+    })
   );
 
   return {

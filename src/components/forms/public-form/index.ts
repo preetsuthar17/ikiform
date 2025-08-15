@@ -1,2 +1,2 @@
-export { PublicForm } from "../public-form";
-export type { PublicFormProps } from "./types";
+export { PublicForm } from '../public-form';
+export type { PublicFormProps } from './types';

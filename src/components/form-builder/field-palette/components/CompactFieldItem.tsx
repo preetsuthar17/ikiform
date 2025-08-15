@@ -1,5 +1,5 @@
-import React from "react";
-import type { CompactFieldItemProps } from "../types";
+import React from 'react';
+import type { CompactFieldItemProps } from '../types';
 
 export function CompactFieldItem({
   fieldType,

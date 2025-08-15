@@ -1,6 +1,6 @@
-import { CompactPalette, FullPalette } from "./components";
+import { CompactPalette, FullPalette } from './components';
 
-import type { FieldPaletteProps } from "./types";
+import type { FieldPaletteProps } from './types';
 
 export function FieldPalette({
   onAddField,

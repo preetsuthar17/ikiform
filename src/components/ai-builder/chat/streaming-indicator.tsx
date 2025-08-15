@@ -1,5 +1,5 @@
-import { motion } from "motion/react";
-import { forwardRef, memo } from "react";
+import { motion } from 'motion/react';
+import { forwardRef, memo } from 'react';
 
 interface StreamingIndicatorProps {
   streamedContent: string;
@@ -30,28 +30,28 @@ export const StreamingIndicator = memo(
           <div
             className="scrollbar-none flex h-[90px] flex-col gap-2 overflow-auto text-muted-foreground text-xs"
             ref={ref}
-            style={{ scrollBehavior: "smooth" }}
+            style={{ scrollBehavior: 'smooth' }}
           >
             <motion.p
-              animate={{ backgroundPosition: "-200% 0" }}
+              animate={{ backgroundPosition: '-200% 0' }}
               className="bg-[length:200%_100%] bg-[linear-gradient(110deg,#404040,35%,#fff,50%,#404040,75%,#404040)] bg-clip-text font-geist-mono text-sm text-transparent"
-              initial={{ backgroundPosition: "200% 0" }}
+              initial={{ backgroundPosition: '200% 0' }}
               transition={{
                 repeat: Number.POSITIVE_INFINITY,
                 duration: 2,
-                ease: "linear",
+                ease: 'linear',
               }}
             >
               Generating form...
             </motion.p>
             <motion.pre
-              animate={{ backgroundPosition: "-200% 0" }}
+              animate={{ backgroundPosition: '-200% 0' }}
               className="whitespace-pre-wrap break-words bg-[length:200%_100%] bg-[linear-gradient(110deg,#404040,35%,#fff,50%,#404040,75%,#404040)] bg-clip-text font-mono text-sm text-transparent"
-              initial={{ backgroundPosition: "200% 0" }}
+              initial={{ backgroundPosition: '200% 0' }}
               transition={{
                 repeat: Number.POSITIVE_INFINITY,
                 duration: 2,
-                ease: "linear",
+                ease: 'linear',
               }}
             >
               {streamedContent}
@@ -59,8 +59,8 @@ export const StreamingIndicator = memo(
           </div>
         </motion.div>
       );
-    },
-  ),
+    }
+  )
 );
 
-StreamingIndicator.displayName = "StreamingIndicator";
+StreamingIndicator.displayName = 'StreamingIndicator';

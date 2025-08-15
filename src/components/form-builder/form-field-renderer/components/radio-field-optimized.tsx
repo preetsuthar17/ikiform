@@ -1,7 +1,7 @@
-import { Suspense } from "react";
-import type { BaseFieldProps } from "../types";
-import { RadioFieldClient } from "./radio-field-client";
-import { RadioFieldSkeleton } from "./radio-field-skeleton";
+import { Suspense } from 'react';
+import type { BaseFieldProps } from '../types';
+import { RadioFieldClient } from './radio-field-client';
+import { RadioFieldSkeleton } from './radio-field-skeleton';
 
 /**
  * Server component wrapper for RadioField

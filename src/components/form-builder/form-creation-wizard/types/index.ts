@@ -1,5 +1,5 @@
-import type { LucideIcon } from "lucide-react";
-import type { FormSchema } from "@/lib/database";
+import type { LucideIcon } from 'lucide-react';
+import type { FormSchema } from '@/lib/database';
 
 export interface FormCreationWizardProps {
   isOpen: boolean;
@@ -7,9 +7,9 @@ export interface FormCreationWizardProps {
   onFormTypeSelect: (schema: FormSchema) => void;
 }
 
-export type FormType = "single" | "multi";
+export type FormType = 'single' | 'multi';
 
-export type WizardStep = "type" | "configure" | "review";
+export type WizardStep = 'type' | 'configure' | 'review';
 
 export interface FormTypeDefinition {
   id: FormType;

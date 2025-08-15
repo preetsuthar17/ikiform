@@ -1,9 +1,9 @@
-import { Check } from "lucide-react";
-import type React from "react";
+import { Check } from 'lucide-react';
+import type React from 'react';
 
-import { Card } from "@/components/ui/card";
+import { Card } from '@/components/ui/card';
 
-import type { Theme } from "../types";
+import type { Theme } from '../types';
 import {
   getGradientOverlayStyles,
   getImageContainerStyles,
@@ -12,7 +12,7 @@ import {
   getSelectionOverlayStyles,
   getThemeCardStyles,
   getThemeNameOverlayStyles,
-} from "../utils";
+} from '../utils';
 
 interface ThemeCardProps {
   theme: Theme;

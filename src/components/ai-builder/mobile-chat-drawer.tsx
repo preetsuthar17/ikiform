@@ -5,10 +5,10 @@ import {
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-} from "@/components/ui/drawer";
-import type { ChatPanelProps } from "@/lib/ai-builder/types";
+} from '@/components/ui/drawer';
+import type { ChatPanelProps } from '@/lib/ai-builder/types';
 
-import { ChatPanel } from "./chat/chat-panel";
+import { ChatPanel } from './chat/chat-panel';
 
 interface MobileChatDrawerProps extends ChatPanelProps {
   isOpen: boolean;

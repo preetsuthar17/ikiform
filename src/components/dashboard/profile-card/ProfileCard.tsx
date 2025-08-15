@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { SettingsModal } from "@/components/settings/settings-modal";
+import React, { useState } from 'react';
+import { SettingsModal } from '@/components/settings/settings-modal';
 
-import { Card, CardHeader } from "@/components/ui/card";
+import { Card, CardHeader } from '@/components/ui/card';
 
-import { useAuth } from "@/hooks/use-auth";
+import { useAuth } from '@/hooks/use-auth';
 
-import { usePremiumStatus } from "@/hooks/use-premium-status";
+import { usePremiumStatus } from '@/hooks/use-premium-status';
 
 import {
   ProfileActions,
   ProfileCardLoading,
   ProfileInfo,
   UserAvatar,
-} from "./components";
+} from './components';
 
-import type { ProfileCardProps } from "./types";
+import type { ProfileCardProps } from './types';
 
-import { extractAvatarUrl, extractUserName } from "./utils";
+import { extractAvatarUrl, extractUserName } from './utils';
 
 export function ProfileCard({ className }: ProfileCardProps) {
   const { user, signOut, loading } = useAuth();
@@ -36,7 +36,7 @@ export function ProfileCard({ className }: ProfileCardProps) {
 
   return (
     <Card
-      className={`relative flex w-full grow flex-col items-center gap-6 bg-card py-24 ${className || ""}`}
+      className={`relative flex w-full grow flex-col items-center gap-6 bg-card py-24 ${className || ''}`}
     >
       <CardHeader className="flex items-center gap-2">
         <UserAvatar avatarUrl={avatarUrl} name={name} size="xl" />

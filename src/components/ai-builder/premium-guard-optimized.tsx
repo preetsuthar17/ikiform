@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { AIBuilderSkeleton } from "./ai-builder-skeleton";
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { AIBuilderSkeleton } from './ai-builder-skeleton';
 
 interface PremiumGuardProps {
   user: any;

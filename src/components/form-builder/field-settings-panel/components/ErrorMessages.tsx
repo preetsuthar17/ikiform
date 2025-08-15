@@ -1,22 +1,22 @@
-import React from "react";
-import { Card } from "@/components/ui/card";
+import React from 'react';
+import { Card } from '@/components/ui/card';
 
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
-import type { FormField } from "@/lib/database";
+import type { FormField } from '@/lib/database';
 
 interface ErrorMessagesProps {
   field: FormField;
-  onUpdateValidation: (updates: Partial<FormField["validation"]>) => void;
+  onUpdateValidation: (updates: Partial<FormField['validation']>) => void;
 }
 
 export function ErrorMessages({
   field,
   onUpdateValidation,
 }: ErrorMessagesProps) {
-  const isTextType = ["text", "email", "textarea"].includes(field.type);
-  const isNumberType = field.type === "number";
+  const isTextType = ['text', 'email', 'textarea'].includes(field.type);
+  const isNumberType = field.type === 'number';
 
   if (!(field.required || isTextType || isNumberType)) {
     return null;
@@ -42,7 +42,7 @@ export function ErrorMessages({
                 })
               }
               placeholder="This field is required"
-              value={field.validation?.requiredMessage || ""}
+              value={field.validation?.requiredMessage || ''}
             />
           </div>
         )}
@@ -66,7 +66,7 @@ export function ErrorMessages({
                     })
                   }
                   placeholder={`Must be at least ${field.validation.minLength} characters`}
-                  value={field.validation?.minLengthMessage || ""}
+                  value={field.validation?.minLengthMessage || ''}
                 />
               </div>
             )}
@@ -88,7 +88,7 @@ export function ErrorMessages({
                     })
                   }
                   placeholder={`Must be no more than ${field.validation.maxLength} characters`}
-                  value={field.validation?.maxLengthMessage || ""}
+                  value={field.validation?.maxLengthMessage || ''}
                 />
               </div>
             )}
@@ -110,12 +110,12 @@ export function ErrorMessages({
                     })
                   }
                   placeholder="Please enter a valid format"
-                  value={field.validation?.patternMessage || ""}
+                  value={field.validation?.patternMessage || ''}
                 />
               </div>
             )}
 
-            {field.type === "email" && (
+            {field.type === 'email' && (
               <div className="flex flex-col gap-2">
                 <Label className="text-card-foreground" htmlFor="email-message">
                   Email Error Message
@@ -129,7 +129,7 @@ export function ErrorMessages({
                     })
                   }
                   placeholder="Please enter a valid email address"
-                  value={field.validation?.emailMessage || ""}
+                  value={field.validation?.emailMessage || ''}
                 />
               </div>
             )}
@@ -155,7 +155,7 @@ export function ErrorMessages({
                     })
                   }
                   placeholder={`Must be at least ${field.validation.min}`}
-                  value={field.validation?.minMessage || ""}
+                  value={field.validation?.minMessage || ''}
                 />
               </div>
             )}
@@ -177,7 +177,7 @@ export function ErrorMessages({
                     })
                   }
                   placeholder={`Must be no more than ${field.validation.max}`}
-                  value={field.validation?.maxMessage || ""}
+                  value={field.validation?.maxMessage || ''}
                 />
               </div>
             )}
@@ -195,7 +195,7 @@ export function ErrorMessages({
                   })
                 }
                 placeholder="Please enter a valid number"
-                value={field.validation?.numberMessage || ""}
+                value={field.validation?.numberMessage || ''}
               />
             </div>
           </>

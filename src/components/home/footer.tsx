@@ -1,39 +1,39 @@
-"use client";
+'use client';
 
-import { Monitor, Moon, Sun } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { useTheme } from "next-themes";
-import React from "react";
-import { FaGithub, FaXTwitter } from "react-icons/fa6";
-import { Button } from "../ui/button";
-import { Separator } from "../ui/separator";
-import { Tabs } from "../ui/tabs";
+import { Monitor, Moon, Sun } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useTheme } from 'next-themes';
+import React from 'react';
+import { FaGithub, FaXTwitter } from 'react-icons/fa6';
+import { Button } from '../ui/button';
+import { Separator } from '../ui/separator';
+import { Tabs } from '../ui/tabs';
 
 const BADGES = [
   {
-    href: "https://www.producthunt.com/products/ikiform?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-ikiform-2",
+    href: 'https://www.producthunt.com/products/ikiform?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-ikiform-2',
     img: {
-      src: "https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1003917&theme=light&t=1754896632153",
-      alt: "Ikiform - An open-source alternative to Google Forms and Typeform | Product Hunt",
+      src: 'https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1003917&theme=light&t=1754896632153',
+      alt: 'Ikiform - An open-source alternative to Google Forms and Typeform | Product Hunt',
       width: 120,
       height: 32,
     },
   },
   {
-    href: "https://startupfa.me/s/ikiform.com?utm_source=www.ikiform.com",
+    href: 'https://startupfa.me/s/ikiform.com?utm_source=www.ikiform.com',
     img: {
-      src: "https://startupfa.me/badges/featured/default.webp",
-      alt: "Featured on Startup Fame",
+      src: 'https://startupfa.me/badges/featured/default.webp',
+      alt: 'Featured on Startup Fame',
       width: 120,
       height: 32,
     },
   },
   {
-    href: "https://twelve.tools",
+    href: 'https://twelve.tools',
     img: {
-      src: "https://twelve.tools/badge3-light.svg",
-      alt: "Featured on Twelve Tools",
+      src: 'https://twelve.tools/badge3-light.svg',
+      alt: 'Featured on Twelve Tools',
       width: 120,
       height: 32,
     },
@@ -42,24 +42,24 @@ const BADGES = [
 
 function FooterBadges() {
   return (
-    <div className="flex flex-wrap gap-3 items-center justify-start">
+    <div className="flex flex-wrap items-center justify-start gap-3">
       {BADGES.map((badge) => (
         <a
-          key={badge.href}
+          className="rounded transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-primary"
           href={badge.href}
-          target="_blank"
+          key={badge.href}
           rel="noopener"
-          className="transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-primary rounded"
           tabIndex={0}
+          target="_blank"
         >
           <img
-            src={badge.img.src}
             alt={badge.img.alt}
-            width={badge.img.width}
+            className="h-8 w-auto object-contain"
             height={badge.img.height}
-            className="object-contain h-8 w-auto"
             loading="lazy"
-            />
+            src={badge.img.src}
+            width={badge.img.width}
+          />
         </a>
       ))}
     </div>
@@ -75,9 +75,9 @@ export default function Footer() {
   }, []);
 
   const themeTabs = [
-    { id: "light", icon: <Sun className="h-4 w-4" /> },
-    { id: "dark", icon: <Moon className="h-4 w-4" /> },
-    { id: "system", icon: <Monitor className="h-4 w-4" /> },
+    { id: 'light', icon: <Sun className="h-4 w-4" /> },
+    { id: 'dark', icon: <Moon className="h-4 w-4" /> },
+    { id: 'system', icon: <Monitor className="h-4 w-4" /> },
   ];
 
   return (
@@ -123,7 +123,7 @@ export default function Footer() {
                 </div>
                 <div className="text-foreground/60 text-sm">
                   <p>
-                    © {new Date().getFullYear()} Made by —{" "}
+                    © {new Date().getFullYear()} Made by —{' '}
                     <Link
                       className="text-foreground transition-colors hover:underline"
                       href="https://x.com/preetsuthar17"
@@ -133,7 +133,7 @@ export default function Footer() {
                   </p>
                 </div>
                 <Separator />
-                  <a href="https://vercel.com/oss?utm_source=ikiform">
+                <a href="https://vercel.com/oss?utm_source=ikiform">
                   <img
                     alt="Vercel OSS Program"
                     src="https://vercel.com/oss/program-badge.svg"

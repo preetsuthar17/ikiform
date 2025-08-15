@@ -1,9 +1,9 @@
-import { ChevronRight } from "lucide-react";
-import React from "react";
+import { ChevronRight } from 'lucide-react';
+import React from 'react';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
-import type { FormActionsProps } from "../types";
+import type { FormActionsProps } from '../types';
 
 export function FormActions({
   schema,
@@ -21,7 +21,7 @@ export function FormActions({
     <div className="flex items-center justify-between gap-4">
       {isLastStep ? (
         <Button className="w-full sm:w-auto" type="submit">
-          {schema.settings.submitText || "Submit"}
+          {schema.settings.submitText || 'Submit'}
         </Button>
       ) : (
         <Button className="flex items-center gap-2" onClick={onNextStep}>

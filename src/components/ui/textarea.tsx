@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React, { Suspense } from "react";
-import { Skeleton } from "./skeleton";
-import { Textarea as BaseTextarea, type TextareaProps } from "./textarea-base";
+import React, { Suspense } from 'react';
+import { Skeleton } from './skeleton';
+import { Textarea as BaseTextarea, type TextareaProps } from './textarea-base';
 
 interface SuspenseTextareaProps extends TextareaProps {
   loading?: boolean;
@@ -31,7 +31,7 @@ export const SuspenseTextarea = React.forwardRef<
   );
 });
 
-SuspenseTextarea.displayName = "SuspenseTextarea";
+SuspenseTextarea.displayName = 'SuspenseTextarea';
 
 export const Textarea = SuspenseTextarea;
 export type { TextareaProps, SuspenseTextareaProps };

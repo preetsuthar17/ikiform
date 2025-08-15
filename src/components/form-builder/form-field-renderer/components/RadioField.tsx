@@ -1,12 +1,12 @@
-import { CheckCircle } from "lucide-react";
-import React from "react";
+import { CheckCircle } from 'lucide-react';
+import React from 'react';
 
-import { RadioGroup, RadioItem } from "@/components/ui/radio";
+import { RadioGroup, RadioItem } from '@/components/ui/radio';
 
-import type { BaseFieldProps } from "../types";
+import type { BaseFieldProps } from '../types';
 
-import { getErrorRingClasses } from "../utils";
-import { sanitizeOptions } from "../utils/sanitizeOptions";
+import { getErrorRingClasses } from '../utils';
+import { sanitizeOptions } from '../utils/sanitizeOptions';
 
 export function RadioField({
   field,
@@ -23,9 +23,9 @@ export function RadioField({
   const [fetchError, setFetchError] = React.useState<string | null>(null);
 
   const isFormBuilder =
-    typeof window !== "undefined" &&
-    (window.location.pathname.includes("/form-builder") ||
-      window.location.pathname.includes("/demo-form-builder"));
+    typeof window !== 'undefined' &&
+    (window.location.pathname.includes('/form-builder') ||
+      window.location.pathname.includes('/demo-form-builder'));
 
   const isQuizField = field.settings?.isQuizField;
   const correctAnswer = field.settings?.correctAnswer;
@@ -57,13 +57,13 @@ export function RadioField({
           setLoading(false);
         })
         .catch((err) => {
-          setFetchError("Failed to fetch options");
+          setFetchError('Failed to fetch options');
           setLoading(false);
         });
     } else {
       setApiOptions(null);
     }
-  }, [field.optionsApi, field.valueKey ?? "", field.labelKey ?? ""]);
+  }, [field.optionsApi, field.valueKey ?? '', field.labelKey ?? '']);
 
   const options = apiOptions ?? field.options ?? [];
 
@@ -72,29 +72,29 @@ export function RadioField({
       className={`flex flex-col gap-2 ${errorRingClasses}`}
       disabled={disabled || loading}
       onValueChange={onChange}
-      value={value || ""}
+      value={value || ''}
     >
       {fetchError && <div className="p-2 text-red-500">{fetchError}</div>}
       {options.filter(Boolean).map((option, index) => {
-        let optionValue = "";
-        let optionLabel = "";
+        let optionValue = '';
+        let optionLabel = '';
 
-        if (typeof option === "string") {
+        if (typeof option === 'string') {
           optionValue = option;
           optionLabel = option;
-        } else if (option && typeof option === "object") {
-          optionValue = option.value || "";
-          optionLabel = option.label || option.value || "";
+        } else if (option && typeof option === 'object') {
+          optionValue = option.value || '';
+          optionLabel = option.label || option.value || '';
         }
 
         if (!optionValue) return null;
 
         const isCorrect = isQuizField && correctAnswer === optionValue;
 
-        if (typeof option === "string" || optionValue) {
+        if (typeof option === 'string' || optionValue) {
           return (
             <div
-              className={`relative ${isFormBuilder && isCorrect ? "rounded-md bg-green-50 p-1 ring-1 ring-green-200" : ""}`}
+              className={`relative ${isFormBuilder && isCorrect ? 'rounded-md bg-green-50 p-1 ring-1 ring-green-200' : ''}`}
               key={index}
             >
               <RadioItem

@@ -1,4 +1,4 @@
-import type { FormField } from "@/lib/database";
+import type { FormField } from '@/lib/database';
 
 export interface FieldSettingsPanelProps {
   field: FormField | null;
@@ -40,9 +40,9 @@ export interface FieldSpecificSettingsProps {
   onFieldUpdate: (field: FormField) => void;
 }
 
-export type FieldSize = "sm" | "md" | "lg";
-export type FieldWidth = "full" | "half" | "third" | "quarter";
-export type FieldVariant = "default" | "filled" | "ghost" | "underline";
+export type FieldSize = 'sm' | 'md' | 'lg';
+export type FieldWidth = 'full' | 'half' | 'third' | 'quarter';
+export type FieldVariant = 'default' | 'filled' | 'ghost' | 'underline';
 
 export interface FieldHelpers {
   hasOptions: boolean;

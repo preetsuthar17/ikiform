@@ -1,20 +1,18 @@
-import { Settings2, ExternalLink } from "lucide-react";
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
+import { ExternalLink, Settings2 } from 'lucide-react';
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
 
-import { Switch } from "@/components/ui/switch";
-import {
-  DEFAULT_FORM_DESIGN,
-} from "../constants";
-import type { LocalSettings } from "../types";
+import { Switch } from '@/components/ui/switch';
+import { DEFAULT_FORM_DESIGN } from '../constants';
+import type { LocalSettings } from '../types';
 
 const FORM_MARGIN_OPTIONS = [
-  { value: "none", label: "None", preview: "", description: "No margin" },
-  { value: "sm", label: "Small", preview: "", description: "8px" },
-  { value: "md", label: "Medium", preview: "", description: "16px" },
-  { value: "lg", label: "Large", preview: "", description: "32px" },
+  { value: 'none', label: 'None', preview: '', description: 'No margin' },
+  { value: 'sm', label: 'Small', preview: '', description: '8px' },
+  { value: 'md', label: 'Medium', preview: '', description: '16px' },
+  { value: 'lg', label: 'Large', preview: '', description: '32px' },
 ];
 
 interface DesignSectionProps {
@@ -28,8 +26,6 @@ export function DesignSection({
   updateSettings,
   formId,
 }: DesignSectionProps) {
-
-
   return (
     <Card className="p-6">
       <h3 className="mb-6 flex items-center gap-2 font-semibold text-lg">
@@ -61,9 +57,12 @@ export function DesignSection({
           <div className="flex items-start gap-3">
             <Settings2 className="mt-0.5 h-5 w-5 text-primary" />
             <div className="flex-1">
-              <h4 className="font-medium text-sm">Advanced Form Customization</h4>
-              <p className="text-muted-foreground text-xs mt-1">
-                Customize colors, typography, layout, and more with our advanced design tools.
+              <h4 className="font-medium text-sm">
+                Advanced Form Customization
+              </h4>
+              <p className="mt-1 text-muted-foreground text-xs">
+                Customize colors, typography, layout, and more with our advanced
+                design tools.
               </p>
               <Button
                 className="mt-3 gap-2"

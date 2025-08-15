@@ -1,5 +1,5 @@
-import { marked } from "marked";
-import { Resend } from "resend";
+import { marked } from 'marked';
+import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -18,7 +18,7 @@ export interface SendNotificationOptions {
 }
 
 function renderLinks(analyticsUrl?: string, customLinks?: NotificationLink[]) {
-  let linksHtml = "";
+  let linksHtml = '';
   if (analyticsUrl) {
     linksHtml += `<li><a href="${analyticsUrl}">View Form Analytics</a></li>`;
   }
@@ -30,7 +30,7 @@ function renderLinks(analyticsUrl?: string, customLinks?: NotificationLink[]) {
   if (linksHtml) {
     return `<ul>${linksHtml}</ul>`;
   }
-  return "";
+  return '';
 }
 
 export async function sendFormNotification({
@@ -42,14 +42,14 @@ export async function sendFormNotification({
   customLinks,
 }: SendNotificationOptions) {
   if (!process.env.RESEND_API_KEY) {
-    throw new Error("Resend API key not configured");
+    throw new Error('Resend API key not configured');
   }
   try {
-    const htmlMessage = marked.parse(message || "");
+    const htmlMessage = marked.parse(message || '');
     const linksHtml = renderLinks(analyticsUrl, customLinks);
     const html = `${htmlMessage}${linksHtml}`;
     const result = await resend.emails.send({
-      from: from || "Ikiform <no-reply@ikiform.com>",
+      from: from || 'Ikiform <no-reply@ikiform.com>',
       to,
       subject,
       html,
@@ -69,15 +69,15 @@ export async function sendWelcomeEmail({
   name?: string;
   customLinks?: NotificationLink[];
 }) {
-  const subject = "Welcome to Ikiform! 🎉";
-  const message = `# Welcome${name ? ", " + name : ""} 👋\n\nWe're excited to have you on board.\n\n- Create beautiful forms\n- Collect responses\n- Analyze your data\n\nGet started by building your first form!`;
-  const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.ikiform.com"}/dashboard`;
+  const subject = 'Welcome to Ikiform! 🎉';
+  const message = `# Welcome${name ? ', ' + name : ''} 👋\n\nWe're excited to have you on board.\n\n- Create beautiful forms\n- Collect responses\n- Analyze your data\n\nGet started by building your first form!`;
+  const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ikiform.com'}/dashboard`;
   return sendFormNotification({
     to,
     subject,
     message,
     customLinks: [
-      { label: "Go to Dashboard", url: dashboardUrl },
+      { label: 'Go to Dashboard', url: dashboardUrl },
       ...(customLinks || []),
     ],
   });
@@ -92,16 +92,16 @@ export async function sendNewLoginEmail({
   name?: string;
   customLinks?: NotificationLink[];
 }) {
-  const subject = "New Login to Your Ikiform Account";
-  const message = `# New Login${name ? ", " + name : ""}\n\nWe noticed a new login to your account. If this was you, you can safely ignore this email.\n\nIf you did not perform this login, please [contact us](mailto:hi@ikiform.com).`;
-  const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.ikiform.com"}/dashboard`;
+  const subject = 'New Login to Your Ikiform Account';
+  const message = `# New Login${name ? ', ' + name : ''}\n\nWe noticed a new login to your account. If this was you, you can safely ignore this email.\n\nIf you did not perform this login, please [contact us](mailto:hi@ikiform.com).`;
+  const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ikiform.com'}/dashboard`;
   return sendFormNotification({
     to,
     subject,
     message,
     customLinks: [
-      { label: "Go to Dashboard", url: dashboardUrl },
-      { label: "Send us a mail", url: "mailto:hi@ikiform.com" },
+      { label: 'Go to Dashboard', url: dashboardUrl },
+      { label: 'Send us a mail', url: 'mailto:hi@ikiform.com' },
       ...(customLinks || []),
     ],
   });
@@ -116,15 +116,15 @@ export async function sendPremiumThankYouEmail({
   name?: string;
   customLinks?: NotificationLink[];
 }) {
-  const subject = "Thank you for your purchase! 🎉";
-  const message = `# Thank you${name ? ", " + name : ""} for purchasing Ikiform Premium!\n\nYou now have access to all premium features.\n\n- Unlimited submissions\n- Advanced analytics\n- Export responses\n- Integrations\n- And more...`;
-  const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.ikiform.com"}/dashboard`;
+  const subject = 'Thank you for your purchase! 🎉';
+  const message = `# Thank you${name ? ', ' + name : ''} for purchasing Ikiform Premium!\n\nYou now have access to all premium features.\n\n- Unlimited submissions\n- Advanced analytics\n- Export responses\n- Integrations\n- And more...`;
+  const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ikiform.com'}/dashboard`;
   return sendFormNotification({
     to,
     subject,
     message,
     customLinks: [
-      { label: "Go to Dashboard", url: dashboardUrl },
+      { label: 'Go to Dashboard', url: dashboardUrl },
       ...(customLinks || []),
     ],
   });

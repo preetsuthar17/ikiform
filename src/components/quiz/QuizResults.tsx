@@ -7,14 +7,14 @@ import {
   TrendingUp,
   Trophy,
   XCircle,
-} from "lucide-react";
-import React from "react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Separator } from "@/components/ui/separator";
-import type { QuizResult } from "@/lib/quiz/scoring";
+} from 'lucide-react';
+import React from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Separator } from '@/components/ui/separator';
+import type { QuizResult } from '@/lib/quiz/scoring';
 
 interface QuizResultsProps {
   result: QuizResult;
@@ -42,15 +42,15 @@ export function QuizResults({
   } = result;
 
   const getScoreColor = () => {
-    if (percentage >= 90) return "text-green-600";
-    if (percentage >= 70) return "text-blue-600";
-    if (percentage >= 50) return "text-yellow-600";
-    return "text-red-600";
+    if (percentage >= 90) return 'text-green-600';
+    if (percentage >= 70) return 'text-blue-600';
+    if (percentage >= 50) return 'text-yellow-600';
+    return 'text-red-600';
   };
 
   const getScoreBadgeVariant = () => {
-    if (passed) return "default";
-    return "destructive";
+    if (passed) return 'default';
+    return 'destructive';
   };
 
   return (
@@ -70,7 +70,7 @@ export function QuizResults({
         </div>
 
         <h2 className="mb-4 font-bold text-2xl text-foreground">
-          {passed ? "Congratulations!" : "Quiz Complete"}
+          {passed ? 'Congratulations!' : 'Quiz Complete'}
         </h2>
 
         {customMessage ? (
@@ -79,7 +79,7 @@ export function QuizResults({
           <p className="mb-6 text-muted-foreground">
             {passed
               ? "You've successfully completed the quiz!"
-              : "Thanks for taking the quiz. Keep practicing!"}
+              : 'Thanks for taking the quiz. Keep practicing!'}
           </p>
         )}
 
@@ -182,13 +182,13 @@ export function QuizResults({
                         <span
                           className={
                             fieldResult.isCorrect
-                              ? "text-green-600"
-                              : "text-red-600"
+                              ? 'text-green-600'
+                              : 'text-red-600'
                           }
                         >
                           {Array.isArray(fieldResult.userAnswer)
-                            ? fieldResult.userAnswer.join(", ")
-                            : fieldResult.userAnswer || "No answer"}
+                            ? fieldResult.userAnswer.join(', ')
+                            : fieldResult.userAnswer || 'No answer'}
                         </span>
                       </div>
 
@@ -199,7 +199,7 @@ export function QuizResults({
                           </span>
                           <span className="text-green-600">
                             {Array.isArray(fieldResult.correctAnswer)
-                              ? fieldResult.correctAnswer.join(", ")
+                              ? fieldResult.correctAnswer.join(', ')
                               : fieldResult.correctAnswer}
                           </span>
                         </div>

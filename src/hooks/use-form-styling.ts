@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import type { FormSchema } from "@/lib/database";
-import type { FormCustomStyles } from "@/lib/utils/form-layout";
-import { getFormCustomStyles } from "@/lib/utils/form-layout";
-import { loadGoogleFont } from "@/lib/utils/google-fonts";
+import { useEffect, useState } from 'react';
+import type { FormSchema } from '@/lib/database';
+import type { FormCustomStyles } from '@/lib/utils/form-layout';
+import { getFormCustomStyles } from '@/lib/utils/form-layout';
+import { loadGoogleFont } from '@/lib/utils/google-fonts';
 
 export function useFormStyling(schema: FormSchema) {
   const [customStyles, setCustomStyles] = useState<FormCustomStyles>({
@@ -20,17 +20,17 @@ export function useFormStyling(schema: FormSchema) {
       try {
         const styles = await getFormCustomStyles(schema);
         setCustomStyles(styles);
-        
+
         // Load Google Font if specified
         const fontFamily = (schema.settings as any)?.typography?.fontFamily;
-        if (fontFamily && typeof window !== "undefined") {
+        if (fontFamily && typeof window !== 'undefined') {
           await loadGoogleFont(fontFamily);
           setFontLoaded(true);
         } else {
           setFontLoaded(true);
         }
       } catch (error) {
-        console.warn("Failed to load form styles:", error);
+        console.warn('Failed to load form styles:', error);
         setFontLoaded(true);
       }
     }
@@ -40,12 +40,12 @@ export function useFormStyling(schema: FormSchema) {
 
   // Create CSS variables for dynamic styling
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === 'undefined') return;
 
     const colors = (schema.settings as any)?.colors;
     if (colors) {
       const root = document.documentElement;
-      
+
       if (colors.primary) {
         root.style.setProperty('--form-primary-color', colors.primary);
       }
@@ -70,8 +70,8 @@ export function useFormStyling(schema: FormSchema) {
 
   // Generate custom CSS class names based on settings
   const getFormClasses = () => {
-    const classes = ["ikiform-customized", "w-full", "ikiform-minimal"];
-    return classes.join(" ");
+    const classes = ['ikiform-customized', 'w-full', 'ikiform-minimal'];
+    return classes.join(' ');
   };
 
   const getFieldStyles = () => {
@@ -82,7 +82,7 @@ export function useFormStyling(schema: FormSchema) {
     };
   };
 
-  const getButtonStyles = (isPrimary: boolean = false) => {
+  const getButtonStyles = (isPrimary = false) => {
     const colors = (schema.settings as any)?.colors;
     if (isPrimary && colors?.primary) {
       return {

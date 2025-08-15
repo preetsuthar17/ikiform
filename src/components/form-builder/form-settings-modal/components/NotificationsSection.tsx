@@ -1,12 +1,12 @@
-import { Bell } from "lucide-react";
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import { Textarea } from "@/components/ui/textarea";
-import type { LocalSettings, NotificationSettings } from "../types";
+import { Bell } from 'lucide-react';
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Textarea } from '@/components/ui/textarea';
+import type { LocalSettings, NotificationSettings } from '../types';
 
 interface NotificationsSectionProps {
   localSettings: LocalSettings;
@@ -19,12 +19,12 @@ export function NotificationsSection({
 }: NotificationsSectionProps) {
   const notifications = localSettings.notifications || {};
   const customLinks = notifications.customLinks || [];
-  const [newLink, setNewLink] = useState({ label: "", url: "" });
+  const [newLink, setNewLink] = useState({ label: '', url: '' });
 
   const handleAddLink = () => {
     if (newLink.label && newLink.url) {
       updateNotifications({ customLinks: [...customLinks, newLink] });
-      setNewLink({ label: "", url: "" });
+      setNewLink({ label: '', url: '' });
     }
   };
 
@@ -47,7 +47,7 @@ export function NotificationsSection({
             onCheckedChange={(checked) =>
               updateNotifications({ enabled: checked })
             }
-            size={"sm"}
+            size={'sm'}
           />
           <Label
             className="cursor-pointer select-none"
@@ -64,7 +64,7 @@ export function NotificationsSection({
             onChange={(e) => updateNotifications({ email: e.target.value })}
             placeholder="owner@email.com"
             type="email"
-            value={notifications.email || ""}
+            value={notifications.email || ''}
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -74,7 +74,7 @@ export function NotificationsSection({
             id="notification-subject"
             onChange={(e) => updateNotifications({ subject: e.target.value })}
             placeholder="New Form Submission"
-            value={notifications.subject || "New Form Submission"}
+            value={notifications.subject || 'New Form Submission'}
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -87,7 +87,7 @@ export function NotificationsSection({
             rows={3}
             value={
               notifications.message ||
-              "You have received a new submission on your form."
+              'You have received a new submission on your form.'
             }
           />
         </div>

@@ -1,5 +1,5 @@
-import type { RefObject } from "react";
-import type { FormField } from "@/lib/database";
+import type { RefObject } from 'react';
+import type { FormField } from '@/lib/database';
 
 export interface FormFieldRendererProps {
   field: FormField;
@@ -28,6 +28,6 @@ export interface BaseFieldProps {
   formId?: string; // Optional form ID for file uploads
 }
 
-export type FieldSize = "sm" | "lg" | "default";
-export type FieldVariant = "filled" | "ghost" | "underline" | "default";
-export type FieldWidth = "half" | "third" | "quarter" | "full";
+export type FieldSize = 'sm' | 'lg' | 'default';
+export type FieldVariant = 'filled' | 'ghost' | 'underline' | 'default';
+export type FieldWidth = 'half' | 'third' | 'quarter' | 'full';

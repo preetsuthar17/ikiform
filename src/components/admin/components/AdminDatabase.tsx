@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   Activity,
@@ -11,31 +11,31 @@ import {
   Server,
   Trash2,
   Users,
-} from "lucide-react";
-import { useState } from "react";
-import { formatDate } from "@/components/dashboard/forms-management/utils";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { DataTable, type DataTableColumn } from "@/components/ui/table";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
-import { useAdminData } from "../hooks/useAdminData";
+} from 'lucide-react';
+import { useState } from 'react';
+import { formatDate } from '@/components/dashboard/forms-management/utils';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { DataTable, type DataTableColumn } from '@/components/ui/table';
+import { Tabs, TabsContent } from '@/components/ui/tabs';
+import { useAdminData } from '../hooks/useAdminData';
 import {
   GradientAreaChart,
   GradientBarChart,
   GradientPieChart,
   MultiAreaChart,
-} from "./charts";
+} from './charts';
 
 export function AdminDatabase() {
   const { users, allForms, submissions, loading, deleteSubmission } =
     useAdminData();
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState('overview');
 
   const handleDeleteSubmission = async (submissionId: string) => {
     if (
       confirm(
-        "⚠️ DELETE SUBMISSION\n\nThis will permanently delete this submission. This action cannot be undone!\n\nContinue?",
+        '⚠️ DELETE SUBMISSION\n\nThis will permanently delete this submission. This action cannot be undone!\n\nContinue?'
       )
     ) {
       await deleteSubmission(submissionId);
@@ -44,23 +44,23 @@ export function AdminDatabase() {
 
   const submissionsColumns: DataTableColumn<any>[] = [
     {
-      key: "id",
-      header: "Submission ID",
+      key: 'id',
+      header: 'Submission ID',
       sortable: true,
       render: (value) => (
         <div className="font-mono text-sm">{value.slice(0, 8)}...</div>
       ),
     },
     {
-      key: "form_id",
-      header: "Form",
+      key: 'form_id',
+      header: 'Form',
       sortable: true,
       filterable: true,
       render: (value) => {
         const form = allForms.find((f) => f.id === value);
         return (
           <div>
-            <div className="font-medium">{form?.title || "Unknown Form"}</div>
+            <div className="font-medium">{form?.title || 'Unknown Form'}</div>
             <div className="font-mono text-muted-foreground text-xs">
               {value.slice(0, 8)}...
             </div>
@@ -69,25 +69,25 @@ export function AdminDatabase() {
       },
     },
     {
-      key: "user_id",
-      header: "User",
+      key: 'user_id',
+      header: 'User',
       sortable: true,
       render: (value) => (
         <div className="font-mono text-sm">
-          {value ? `${value.slice(0, 8)}...` : "Anonymous"}
+          {value ? `${value.slice(0, 8)}...` : 'Anonymous'}
         </div>
       ),
     },
     {
-      key: "submitted_at",
-      header: "Submitted",
+      key: 'submitted_at',
+      header: 'Submitted',
       sortable: true,
       render: (value) => <div className="text-sm">{formatDate(value)}</div>,
     },
     {
-      key: "id",
-      header: "Actions",
-      align: "right",
+      key: 'id',
+      header: 'Actions',
+      align: 'right',
       render: (value) => (
         <Button
           className="text-red-600 hover:bg-red-50 hover:text-red-700"
@@ -105,7 +105,7 @@ export function AdminDatabase() {
   if (loading) {
     return (
       <Card className="p-6">
-        <div className="animate-pulse flex flex-col gap-4">
+        <div className="flex animate-pulse flex-col gap-4">
           <div className="h-8 w-1/4 rounded bg-muted" />
           <div className="grid grid-cols-3 gap-4">
             {[...Array(3)].map((_, i) => (
@@ -119,10 +119,10 @@ export function AdminDatabase() {
   }
 
   const tabItems = [
-    { id: "overview", label: "Overview", icon: <Database /> },
-    { id: "users", label: "Users Table", icon: <Users /> },
-    { id: "forms", label: "Forms Table", icon: <FileText /> },
-    { id: "submissions", label: "Submissions", icon: <Send /> },
+    { id: 'overview', label: 'Overview', icon: <Database /> },
+    { id: 'users', label: 'Users Table', icon: <Users /> },
+    { id: 'forms', label: 'Forms Table', icon: <FileText /> },
+    { id: 'submissions', label: 'Submissions', icon: <Send /> },
   ];
 
   // Database statistics
@@ -135,7 +135,7 @@ export function AdminDatabase() {
         (users.length * 0.5 +
           allForms.length * 2.1 +
           submissions.length * 1.3) *
-          100,
+          100
       ) / 100, // Mock calculation
     lastBackup: new Date(Date.now() - Math.random() * 86_400_000 * 7), // Random date in last week
   };
@@ -250,7 +250,7 @@ export function AdminDatabase() {
                         <span className="font-medium">New submission</span>
                         <span className="ml-2 text-muted-foreground">
                           {allForms.find((f) => f.id === submission.form_id)
-                            ?.title || "Unknown Form"}
+                            ?.title || 'Unknown Form'}
                         </span>
                       </div>
                       <span className="text-muted-foreground">
@@ -315,23 +315,23 @@ export function AdminDatabase() {
           </div>
           <DataTable
             columns={[
-              { key: "uid", header: "UID", sortable: true },
+              { key: 'uid', header: 'UID', sortable: true },
               {
-                key: "email",
-                header: "Email",
+                key: 'email',
+                header: 'Email',
                 sortable: true,
                 filterable: true,
               },
-              { key: "name", header: "Name", sortable: true, filterable: true },
+              { key: 'name', header: 'Name', sortable: true, filterable: true },
               {
-                key: "has_premium",
-                header: "Premium",
+                key: 'has_premium',
+                header: 'Premium',
                 sortable: true,
-                render: (value) => (value ? "Yes" : "No"),
+                render: (value) => (value ? 'Yes' : 'No'),
               },
               {
-                key: "created_at",
-                header: "Created",
+                key: 'created_at',
+                header: 'Created',
                 sortable: true,
                 render: (value) => formatDate(value),
               },
@@ -350,32 +350,32 @@ export function AdminDatabase() {
           <DataTable
             columns={[
               {
-                key: "id",
-                header: "Form ID",
+                key: 'id',
+                header: 'Form ID',
                 sortable: true,
                 render: (value) => `${value.slice(0, 8)}...`,
               },
               {
-                key: "title",
-                header: "Title",
+                key: 'title',
+                header: 'Title',
                 sortable: true,
                 filterable: true,
               },
               {
-                key: "user_id",
-                header: "Owner",
+                key: 'user_id',
+                header: 'Owner',
                 sortable: true,
                 render: (value) => `${value.slice(0, 8)}...`,
               },
               {
-                key: "is_published",
-                header: "Published",
+                key: 'is_published',
+                header: 'Published',
                 sortable: true,
-                render: (value) => (value ? "Yes" : "No"),
+                render: (value) => (value ? 'Yes' : 'No'),
               },
               {
-                key: "created_at",
-                header: "Created",
+                key: 'created_at',
+                header: 'Created',
                 sortable: true,
                 render: (value) => formatDate(value),
               },

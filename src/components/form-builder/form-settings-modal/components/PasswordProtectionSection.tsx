@@ -1,11 +1,11 @@
-import { Eye, EyeOff, Lock } from "lucide-react";
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import { Textarea } from "@/components/ui/textarea";
+import { Eye, EyeOff, Lock } from 'lucide-react';
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Textarea } from '@/components/ui/textarea';
 
 interface PasswordProtectionSectionProps {
   localSettings: any;
@@ -20,9 +20,9 @@ export function PasswordProtectionSection({
 
   const passwordProtection = localSettings.passwordProtection || {
     enabled: false,
-    password: "",
+    password: '',
     message:
-      "This form is password protected. Please enter the password to continue.",
+      'This form is password protected. Please enter the password to continue.',
   };
 
   const handleToggle = (enabled: boolean) => {
@@ -69,7 +69,7 @@ export function PasswordProtectionSection({
                   id="form-password"
                   onChange={(e) => handlePasswordChange(e.target.value)}
                   placeholder="Enter form password"
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword ? 'text' : 'password'}
                   value={passwordProtection.password}
                 />
                 <Button

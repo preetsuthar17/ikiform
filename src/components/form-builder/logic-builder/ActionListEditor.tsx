@@ -1,23 +1,23 @@
-import { Plus, Trash2 } from "lucide-react";
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Plus, Trash2 } from 'lucide-react';
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import type { FormField } from "@/lib/database";
-import type { LogicAction } from "./types";
+} from '@/components/ui/select';
+import type { FormField } from '@/lib/database';
+import type { LogicAction } from './types';
 
 const availableActionTypes = [
-  { value: "show", label: "Show Field" },
-  { value: "hide", label: "Hide Field" },
-  { value: "enable", label: "Enable Field" },
-  { value: "disable", label: "Disable Field" },
+  { value: 'show', label: 'Show Field' },
+  { value: 'hide', label: 'Hide Field' },
+  { value: 'enable', label: 'Enable Field' },
+  { value: 'disable', label: 'Disable Field' },
 ];
 
 function ActionListEditor({
@@ -36,8 +36,8 @@ function ActionListEditor({
       ...actions,
       {
         id: `action-${Date.now()}`,
-        type: "show",
-        target: fields[0]?.id || "",
+        type: 'show',
+        target: fields[0]?.id || '',
       },
     ]);
   };

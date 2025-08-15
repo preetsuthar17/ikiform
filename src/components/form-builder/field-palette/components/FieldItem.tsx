@@ -1,9 +1,9 @@
-import { Draggable } from "@hello-pangea/dnd";
-import { Card } from "@/components/ui/card";
+import { Draggable } from '@hello-pangea/dnd';
+import { Card } from '@/components/ui/card';
 
-import type { FieldItemProps } from "../types";
+import type { FieldItemProps } from '../types';
 
-export const PALETTE_DRAG_TYPE = "palette-field-type";
+export const PALETTE_DRAG_TYPE = 'palette-field-type';
 
 export function FieldItem({
   fieldType,

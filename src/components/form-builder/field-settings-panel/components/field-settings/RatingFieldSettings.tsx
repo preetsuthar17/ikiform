@@ -1,16 +1,16 @@
-import React from "react";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import React from 'react';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
-import type { FieldSettingsProps } from "./types";
+} from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
+import type { FieldSettingsProps } from './types';
 
 export function RatingFieldSettings({
   field,
@@ -32,7 +32,7 @@ export function RatingFieldSettings({
             onUpdateSettings({
               starCount: Math.max(
                 1,
-                Math.min(10, Number.parseInt(e.target.value) || 5),
+                Math.min(10, Number.parseInt(e.target.value) || 5)
               ),
             })
           }
@@ -60,7 +60,7 @@ export function RatingFieldSettings({
         </Label>
         <Select
           onValueChange={(val) => onUpdateSettings({ icon: val })}
-          value={field.settings?.icon || "star"}
+          value={field.settings?.icon || 'star'}
         >
           <SelectTrigger className="w-24">
             <SelectValue />
@@ -78,7 +78,7 @@ export function RatingFieldSettings({
           id="rating-color"
           onChange={(e) => onUpdateSettings({ color: e.target.value })}
           type="color"
-          value={field.settings?.color || "#fbbf24"}
+          value={field.settings?.color || '#fbbf24'}
         />
       </div>
     </Card>

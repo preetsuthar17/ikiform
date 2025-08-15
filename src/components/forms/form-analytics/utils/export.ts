@@ -1,6 +1,6 @@
-import { toast } from "@/hooks/use-toast";
+import { toast } from '@/hooks/use-toast';
 
-import type { Form, FormSubmission } from "@/lib/database";
+import type { Form, FormSubmission } from '@/lib/database';
 
 export const exportToJSON = (form: Form, submissions: FormSubmission[]) => {
   const exportData = {
@@ -21,57 +21,55 @@ export const exportToJSON = (form: Form, submissions: FormSubmission[]) => {
   };
 
   const blob = new Blob([JSON.stringify(exportData, null, 2)], {
-    type: "application/json",
+    type: 'application/json',
   });
 
   const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
+  const a = document.createElement('a');
   a.href = url;
   a.download = `${form.title
-    .replace(/[^a-z0-9]/gi, "_")
+    .replace(/[^a-z0-9]/gi, '_')
     .toLowerCase()}_data.json`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 
-  toast.success("Data exported successfully!");
+  toast.success('Data exported successfully!');
 };
 
 export const exportToCSV = (form: Form, submissions: FormSubmission[]) => {
   if (!submissions.length) {
-    toast.error("No data to export");
+    toast.error('No data to export');
     return;
   }
 
   const allFields = new Set<string>();
   submissions.forEach((submission) =>
-    Object.keys(submission.submission_data).forEach((key) =>
-      allFields.add(key),
-    ),
+    Object.keys(submission.submission_data).forEach((key) => allFields.add(key))
   );
 
   const headers = [
-    "Submission ID",
-    "Submitted At",
-    "IP Address",
+    'Submission ID',
+    'Submitted At',
+    'IP Address',
     ...Array.from(allFields),
   ];
   const rows = submissions.map((submission) => {
     const row = [
       submission.id,
       new Date(submission.submitted_at).toISOString(),
-      submission.ip_address || "",
+      submission.ip_address || '',
     ];
 
     Array.from(allFields).forEach((field) => {
       const value = submission.submission_data[field];
       row.push(
         Array.isArray(value)
-          ? value.join(", ")
-          : typeof value === "object" && value !== null
+          ? value.join(', ')
+          : typeof value === 'object' && value !== null
             ? JSON.stringify(value)
-            : value || "",
+            : value || ''
       );
     });
 
@@ -80,21 +78,21 @@ export const exportToCSV = (form: Form, submissions: FormSubmission[]) => {
 
   const csvContent = [headers, ...rows]
     .map((row) =>
-      row.map((field) => `"${String(field).replace(/"/g, '""')}"`).join(","),
+      row.map((field) => `"${String(field).replace(/"/g, '""')}"`).join(',')
     )
-    .join("\n");
+    .join('\n');
 
-  const blob = new Blob([csvContent], { type: "text/csv" });
+  const blob = new Blob([csvContent], { type: 'text/csv' });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
+  const a = document.createElement('a');
   a.href = url;
   a.download = `${form.title
-    .replace(/[^a-z0-9]/gi, "_")
+    .replace(/[^a-z0-9]/gi, '_')
     .toLowerCase()}_data.csv`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 
-  toast.success("Data exported to CSV successfully!");
+  toast.success('Data exported to CSV successfully!');
 };
