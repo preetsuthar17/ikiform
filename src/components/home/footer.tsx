@@ -3,12 +3,9 @@
 import { Monitor, Moon, Sun } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTheme } from 'next-themes';
 import React from 'react';
-import { FaGithub, FaXTwitter } from 'react-icons/fa6';
-import { Button } from '../ui/button';
-import { Separator } from '../ui/separator';
-import { Tabs } from '../ui/tabs';
+import { FaDiscord, FaGithub, FaXTwitter } from 'react-icons/fa6';
+import { Separator } from '../ui';
 
 const BADGES = [
   {
@@ -67,94 +64,69 @@ function FooterBadges() {
 }
 
 export default function Footer() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const themeTabs = [
-    { id: 'light', icon: <Sun className="h-4 w-4" /> },
-    { id: 'dark', icon: <Moon className="h-4 w-4" /> },
-    { id: 'system', icon: <Monitor className="h-4 w-4" /> },
-  ];
-
   return (
-    <footer className="w-full bg-background">
-      <div className="mx-auto w-full max-w-[95%] px-4 md:px-8">
-        <div className="py-12 lg:py-16">
-          <div className="flex flex-col justify-between gap-12 lg:flex-row lg:gap-16">
-            <div className="flex-shrink-0">
-              <div className="flex flex-col gap-6">
-                <Link className="inline-flex" href="/">
-                  <span className="flex items-center gap-2 font-semibold text-2xl tracking-tight sm:text-3xl">
-                    <Image
-                      alt="Ikiform Logo"
-                      className="invert sm:h-10 sm:w-10"
-                      height={32}
-                      loading="lazy"
-                      quality={75}
-                      src="/favicon.ico"
-                      width={32}
-                    />
-                    <span>Ikiform</span>
-                  </span>
-                </Link>
-                <div className="flex gap-3">
-                  <Button asChild size="icon" variant="secondary">
-                    <Link
-                      aria-label="GitHub"
-                      href="https://github.com/preetsuthar17/ikiform"
-                      target="_blank"
-                    >
-                      <FaGithub className="h-4 w-4" />
-                    </Link>
-                  </Button>
-                  <Button asChild size="icon" variant="secondary">
-                    <Link
-                      aria-label="Twitter/X"
-                      href="https://x.com/ikiform"
-                      target="_blank"
-                    >
-                      <FaXTwitter className="h-4 w-4" />
-                    </Link>
-                  </Button>
-                </div>
-                <div className="text-foreground/60 text-sm">
-                  <p>
+    <footer className="mx-auto mt-22 mb-12 w-full max-w-7xl bg-background">
+      <div className="mx-auto flex w-full flex-col px-4 md:px-8">
+        {/* Rounded container matching the image */}
+        <div className="rounded-4xl bg-card p-8 md:p-12">
+          <div className="flex flex-col gap-8">
+            {/* Top section with logo and navigation */}
+            <div className="flex flex-col gap-8 lg:flex-row lg:justify-between">
+              {/* Header section with logo */}
+              <div className="flex flex-shrink-0 flex-col gap-8">
+                <div className="flex flex-shrink-0 flex-col gap-4">
+                  <Link className="inline-flex" href="/">
+                    <span className="flex items-center gap-3 text-3xl tracking-tight">
+                      <Image
+                        alt="Ikiform Logo"
+                        className="h-10 w-10 rounded-lg"
+                        height={40}
+                        loading="lazy"
+                        quality={75}
+                        src="/favicon.ico"
+                        width={40}
+                      />
+                      <span className="font-dm-sans font-semibold text-foreground">
+                        Ikiform
+                      </span>
+                    </span>
+                  </Link>
+                  <p className="max-w-sm text-muted-foreground text-sm">
                     © {new Date().getFullYear()} Made by —{' '}
                     <Link
-                      className="text-foreground transition-colors hover:underline"
+                      className="font-medium text-foreground transition-colors hover:underline"
                       href="https://x.com/preetsuthar17"
+                      target="_blank"
                     >
                       @preetsuthar17
                     </Link>
                   </p>
                 </div>
-                <Separator />
-                <a href="https://vercel.com/oss?utm_source=ikiform">
-                  <img
-                    alt="Vercel OSS Program"
-                    src="https://vercel.com/oss/program-badge.svg"
-                  />
-                </a>
 
-                <FooterBadges />
+                {/* Badges section */}
+                <div className="flex flex-col gap-4">
+                  <a href="https://vercel.com/open-source-program?utm_source=ikiform">
+                    <img
+                      alt="Vercel OSS Program"
+                      src="https://vercel.com/oss/program-badge.svg"
+                    />
+                  </a>
+                  <Separator />
+
+                  <FooterBadges />
+                </div>
               </div>
-            </div>
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-4 lg:gap-12">
-              <div>
-                <div>
-                  <h3 className="mb-4 font-medium text-foreground text-sm">
+              <Separator className="flex lg:hidden" />
+              {/* Navigation sections */}
+              <div className="flex flex-wrap gap-8 md:grid md:grid-cols-4 md:gap-10">
+                <div className="flex flex-col gap-4">
+                  <h3 className="font-dm-sans font-medium text-foreground">
                     Navigation
                   </h3>
-                </div>
-                <div>
-                  <ul className="flex flex-col gap-3">
+                  <ul className="flex flex-col gap-2">
                     <li>
                       <Link
-                        className="text-muted-foreground text-sm transition-colors hover:text-primary hover:underline"
+                        className="text-muted-foreground text-sm transition-colors hover:text-foreground"
                         href="/"
                       >
                         Home
@@ -162,15 +134,23 @@ export default function Footer() {
                     </li>
                     <li>
                       <Link
-                        className="text-muted-foreground text-sm transition-colors hover:text-primary hover:underline"
-                        href="#"
+                        className="text-muted-foreground text-sm transition-colors hover:text-foreground"
+                        href="/#features"
                       >
                         Features
                       </Link>
                     </li>
                     <li>
                       <Link
-                        className="text-muted-foreground text-sm transition-colors hover:text-primary hover:underline"
+                        className="text-muted-foreground text-sm transition-colors hover:text-foreground"
+                        href="/#pricing"
+                      >
+                        Pricing
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="text-muted-foreground text-sm transition-colors hover:text-foreground"
                         href="/login"
                       >
                         Login
@@ -178,7 +158,7 @@ export default function Footer() {
                     </li>
                     <li>
                       <Link
-                        className="text-muted-foreground text-sm transition-colors hover:text-primary hover:underline"
+                        className="text-muted-foreground text-sm transition-colors hover:text-foreground"
                         href="/ai-builder"
                       >
                         AI Builder
@@ -186,7 +166,7 @@ export default function Footer() {
                     </li>
                     <li>
                       <Link
-                        className="text-muted-foreground text-sm transition-colors hover:text-primary hover:underline"
+                        className="text-muted-foreground text-sm transition-colors hover:text-foreground"
                         href="/dashboard"
                       >
                         Dashboard
@@ -194,18 +174,15 @@ export default function Footer() {
                     </li>
                   </ul>
                 </div>
-              </div>
-              <div>
-                <div>
-                  <h3 className="mb-4 font-medium text-foreground text-sm">
+
+                <div className="flex flex-col gap-4">
+                  <h3 className="font-dm-sans font-medium text-foreground">
                     Legal
                   </h3>
-                </div>
-                <div>
-                  <ul className="flex flex-col gap-3">
+                  <ul className="flex flex-col gap-2">
                     <li>
                       <Link
-                        className="text-muted-foreground text-sm transition-colors hover:text-primary hover:underline"
+                        className="text-muted-foreground text-sm transition-colors hover:text-foreground"
                         href="/legal/privacy"
                       >
                         Privacy Policy
@@ -213,15 +190,15 @@ export default function Footer() {
                     </li>
                     <li>
                       <Link
-                        className="text-muted-foreground text-sm transition-colors hover:text-primary hover:underline"
+                        className="text-muted-foreground text-sm transition-colors hover:text-foreground"
                         href="/legal/terms"
                       >
-                        Terms & Conditions
+                        Terms & Condition
                       </Link>
                     </li>
                     <li>
                       <Link
-                        className="text-muted-foreground text-sm transition-colors hover:text-primary hover:underline"
+                        className="text-muted-foreground text-sm transition-colors hover:text-foreground"
                         href="/legal/gdpr"
                       >
                         GDPR
@@ -229,7 +206,7 @@ export default function Footer() {
                     </li>
                     <li>
                       <Link
-                        className="text-muted-foreground text-sm transition-colors hover:text-primary hover:underline"
+                        className="text-muted-foreground text-sm transition-colors hover:text-foreground"
                         href="/legal/dpa"
                       >
                         DPA
@@ -237,63 +214,58 @@ export default function Footer() {
                     </li>
                   </ul>
                 </div>
-              </div>
-              <div>
-                <div>
-                  <h3 className="mb-4 font-medium text-foreground text-sm">
+
+                <div className="flex flex-col gap-4">
+                  <h3 className="font-dm-sans font-medium text-foreground">
                     Resources
                   </h3>
-                </div>
-                <div>
-                  <ul className="flex flex-col gap-3">
+                  <ul className="flex flex-col gap-2">
                     <li>
                       <Link
-                        className="text-muted-foreground text-sm transition-colors hover:text-primary hover:underline"
-                        href="https://insigh.to/b/ikiform"
-                      >
-                        Feature request
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        className="text-muted-foreground text-sm transition-colors hover:text-primary hover:underline"
-                        href="#"
-                      >
-                        Changelogs
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        className="text-muted-foreground text-sm transition-colors hover:text-primary hover:underline"
-                        href="https://github.com/preetsuthar17/ikiform"
+                        className="text-muted-foreground text-sm transition-colors hover:text-foreground"
+                        href="https://www.ikiform.com/feature-request"
                         target="_blank"
                       >
-                        GitHub Repository
+                        Feature Request
                       </Link>
                     </li>
                     <li>
                       <Link
-                        className="text-muted-foreground text-sm transition-colors hover:text-primary hover:underline"
-                        href="/f/feedback-form-evtu2f"
+                        className="text-muted-foreground text-sm transition-colors hover:text-foreground"
+                        href="https://www.ikiform.com/feedback"
                         target="_blank"
                       >
                         Feedback
                       </Link>
                     </li>
-                  </ul>
-                </div>
-              </div>
-              <div>
-                <div>
-                  <h3 className="mb-4 font-medium text-foreground text-sm">
-                    Products
-                  </h3>
-                </div>
-                <div>
-                  <ul className="flex flex-col gap-3">
                     <li>
                       <Link
-                        className="text-muted-foreground text-sm transition-colors hover:text-primary hover:underline"
+                        className="text-muted-foreground text-sm transition-colors hover:text-foreground"
+                        href="https://www.ikiform.com/bug-report"
+                      >
+                        Bug Report
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="text-muted-foreground text-sm transition-colors hover:text-foreground"
+                        href="https://www.ikiform.com/github"
+                        target="_blank"
+                      >
+                        GitHub Repository
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="flex flex-col gap-4">
+                  <h3 className="font-dm-sans font-medium text-foreground">
+                    Products
+                  </h3>
+                  <ul className="flex flex-col gap-2">
+                    <li>
+                      <Link
+                        className="text-muted-foreground text-sm transition-colors hover:text-foreground"
                         href="https://hextaui.com?ref=ikiform"
                         target="_blank"
                       >
@@ -302,40 +274,56 @@ export default function Footer() {
                     </li>
                     <li>
                       <Link
-                        className="text-muted-foreground text-sm transition-colors hover:text-primary hover:underline"
+                        className="text-muted-foreground text-sm transition-colors hover:text-foreground"
                         href="https://pro.hextaui.com?ref=ikiform"
                         target="_blank"
                       >
                         HextaUI Blocks
                       </Link>
                     </li>
-                    <li>
-                      <Link
-                        className="text-muted-foreground text-sm transition-colors hover:text-primary hover:underline"
-                        href="https://iki.preetsuthar.me?ref=ikiform"
-                        target="_blank"
-                      >
-                        Iki
-                      </Link>
-                    </li>
                   </ul>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="mt-12 border-border border-t pt-8">
-            <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-              <div className="flex-1" />
-              {mounted && (
-                <div className="flex items-center gap-2">
-                  <Tabs
-                    items={themeTabs}
-                    onValueChange={setTheme}
-                    size="sm"
-                    value={theme}
-                  />
+
+            <Separator />
+            {/* Bottom section with social links */}
+            <div className="flex w-full flex-col items-end justify-center gap-6">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-sm">
+                  <Link
+                    className="flex items-center gap-2 transition-colors hover:text-foreground"
+                    href="https://www.ikiform.com/github"
+                    target="_blank"
+                  >
+                    <FaGithub className="h-4 w-4" />
+                  </Link>
+                  <span>//</span>
+                  <Link
+                    className="flex items-center gap-2 transition-colors hover:text-foreground"
+                    href="https://www.ikiform.com/twitter"
+                    target="_blank"
+                  >
+                    <FaXTwitter className="h-4 w-4" />
+                  </Link>
+                  <span>//</span>
+                  <Link
+                    className="flex items-center gap-2 transition-colors hover:text-foreground"
+                    href="https://www.ikiform.com/discord"
+                    target="_blank"
+                  >
+                    <FaDiscord className="h-5 w-5" />
+                  </Link>
+                  <span>//</span>
+                  <Link
+                    className="flex items-center gap-2 transition-colors hover:text-foreground"
+                    href="https://www.ikiform.com/email"
+                    target="_blank"
+                  >
+                    hi@ikiform.com
+                  </Link>
                 </div>
-              )}
+              </div>
             </div>
           </div>
         </div>

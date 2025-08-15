@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import {
+  DM_Sans,
   Geist,
   Geist_Mono,
   Inter,
@@ -19,8 +20,8 @@ const inter = Inter({
   weight: ['400', '500', '600', '700'],
 });
 
-const poppins = Poppins({
-  variable: '--font-poppins',
+const dmSans = DM_Sans({
+  variable: '--font-dm-sans',
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
 });
@@ -179,7 +180,7 @@ export default function RootLayout({
       </head>
       <CrispController />
       <body
-        className={`${inter.className} ${jetBrainsMono.variable} ${geist.variable} ${geistMono.variable} ${poppins.variable} antialiased`}
+        className={` ${geist.className} ${inter.variable} ${jetBrainsMono.variable} ${geistMono.variable} ${dmSans.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <ConditionalLayout>{children}</ConditionalLayout>

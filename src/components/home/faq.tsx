@@ -21,7 +21,7 @@ const faqs = [
       'Ikiform is an open-source alternative to Google Forms. It helps you create beautiful, interactive forms easily.',
   },
   {
-    question: 'Why use Ikiform instead of Typeform or Google Forms?',
+    question: 'Why use Ikiform instead of google form or typeform?',
     answer:
       'Ikiform is open source and gives you full control over your data and branding. There are no hidden costs, and you can self-host for extra privacy and flexibility.',
   },
@@ -31,24 +31,9 @@ const faqs = [
       'You can create single-page forms and multi-step forms with progress tracking.',
   },
   {
-    question: 'What field types are supported?',
+    question: 'What fields are supported?',
     answer:
       'Supported fields include text, email, textarea, radio, checkbox, number, select, slider, tags, and social fields.',
-  },
-  {
-    question: 'How does the AI Builder help?',
-    answer:
-      'The AI Builder can generate forms for you based on your prompt, making form creation faster.',
-  },
-  {
-    question: 'Can I analyze form results?',
-    answer:
-      'Yes, you get analytics like submission trends, field stats, and can export data as CSV or JSON.',
-  },
-  {
-    question: 'Can I customize my forms?',
-    answer:
-      'You can change colors, fonts, layout, add your logo, and control the look of each field.',
   },
   {
     question: 'How is my data protected?',
@@ -56,23 +41,17 @@ const faqs = [
       'Forms can have password protection, rate limiting, profanity filters, and are GDPR compliant.',
   },
   {
-    question: 'Is Ikiform open source?',
-    answer: (
-      <>
-        <p>
-          Ikiform is completely open-source and available on{' '}
-          <Link
-            className="underline"
-            href="https://github.com/preetsuthar17/Ikiform"
-          >
-            GitHub
-          </Link>
-        </p>
-      </>
-    ),
+    question: 'Is the data I submit shared with anyone?',
+    answer:
+      'No, your data is not sold or shared with third parties except trusted providers needed to run Ikiform.',
   },
   {
-    question: 'Where can I suggest features?',
+    question: 'Can I customize my forms?',
+    answer:
+      'You can change colors, fonts, layout, add your logo, and control the look of each field.',
+  },
+  {
+    question: 'Where can I suggest new features?',
     answer: (
       <>
         <p>
@@ -83,11 +62,6 @@ const faqs = [
         </p>
       </>
     ),
-  },
-  {
-    question: 'Is the data I submit shared with anyone?',
-    answer:
-      'No, your data is not sold or shared with third parties except trusted providers needed to run Ikiform.',
   },
   {
     question: 'Where is my data stored?',
@@ -105,13 +79,29 @@ const faqs = [
       'Yes. You can delete your data anytime. Deleted data is removed from backups within 30 days.',
   },
   {
-    question: 'Can I access or delete my data?',
+    question: 'Can I delete my data?',
     answer:
       'Yes. You can request access or deletion of your data at any time by emailing hi@ikiform.com.',
   },
   {
-    question: 'Who owns the data collected through my forms?',
+    question: 'Who owns my form submission data?',
     answer: 'You own all data you collect. Ikiform just stores it for you.',
+  },
+  {
+    question: 'Is Ikiform open-source?',
+    answer: (
+      <>
+        <p>
+          Ikiform is completely open-source and available on{' '}
+          <Link
+            className="underline"
+            href="https://github.com/preetsuthar17/Ikiform"
+          >
+            GitHub
+          </Link>
+        </p>
+      </>
+    ),
   },
 ];
 
@@ -120,19 +110,26 @@ export default function FAQSection() {
   const secondHalf = faqs.slice(Math.ceil(faqs.length / 2));
 
   return (
-    <section className="flex w-full flex-col items-center justify-center gap-12 px-4 py-12 text-center md:px-8 md:py-28">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-18">
-        <div className="flex flex-col items-center gap-4 px-6">
-          <h2 className="font-semibold text-3xl md:text-4xl">
-            Frequently Asked Questions
-          </h2>
-          <p className="mx-auto max-w-xl text-md text-muted-foreground">
-            Answers to common questions about Ikiform, features, and usage.
+    <section className="mx-auto w-full max-w-7xl bg-background">
+      <div className="mx-auto flex w-full flex-col gap-18 px-4 md:px-8">
+        {/* Header section */}
+        <div className="flex flex-col gap-8 text-center">
+          <p className="text-center text-base text-muted-foreground md:text-lg">
+            Frequently Asked Questions{' '}
           </p>
+          <h2 className="mx-auto max-w-2xl text-center font-dm-sans font-medium text-2xl text-foreground leading-normal tracking-tight md:text-3xl lg:text-4xl">
+            Answers to common questions about Ikiform, features, and usage
+          </h2>
         </div>
-        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-2 text-left lg:grid-cols-2">
-          <FAQList faqs={firstHalf} />
-          <FAQList faqs={secondHalf} />
+        {/* Rounded container matching the footer/CTA styling */}
+        <div className="rounded-4xl bg-card p-8 md:p-12">
+          <div className="flex flex-col items-center gap-12">
+            {/* FAQ Grid */}
+            <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
+              <FAQList faqs={firstHalf} />
+              <FAQList faqs={secondHalf} />
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -141,23 +138,22 @@ export default function FAQSection() {
 
 const FAQList = ({ faqs }: { faqs: FAQ[] }) => {
   return (
-    <div className="mx-auto flex w-full max-w-7xl grow flex-col gap-2 text-left">
+    <div className="flex flex-col gap-4">
       {faqs.map((faq, i) => (
         <Accordion
-          className="my-0 w-full"
+          className="w-full rounded-3xl border-none"
           collapsible
           key={i}
           type="single"
-          variant="ghost"
         >
           <AccordionItem
-            className="w-full rounded-lg bg-muted"
+            className="w-full rounded-2xl border-none bg-background"
             value={String(i)}
           >
-            <AccordionTrigger className="font-medium">
+            <AccordionTrigger className="px-6 py-6 text-left font-medium text-foreground hover:no-underline">
               {faq.question}
             </AccordionTrigger>
-            <AccordionContent className="text-sm">
+            <AccordionContent className="px-6 pb-6 text-muted-foreground">
               {faq.answer}
             </AccordionContent>
           </AccordionItem>

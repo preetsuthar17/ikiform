@@ -26,7 +26,6 @@ import { Switch } from '@/components/ui/switch';
 import { Tabs } from '@/components/ui/tabs';
 import { useAuth } from '@/hooks/use-auth';
 import { usePremiumStatus } from '@/hooks/use-premium-status';
-import FeatureComparisonTable from './feature-comparison-table';
 
 interface Product {
   id: string;
@@ -38,38 +37,16 @@ interface PricingClientProps {
 }
 
 const features = [
-  {
-    label: 'Unlimited submissions',
-    icon: <FileText className="h-4 w-4 flex-shrink-0 text-primary" />,
-  },
-  {
-    label: 'Advanced analytics',
-    icon: <BarChart3 className="h-4 w-4 flex-shrink-0 text-primary" />,
-  },
-  {
-    label: 'AI Form builder',
-    icon: <Bot className="h-4 w-4 flex-shrink-0 text-primary" />,
-  },
-  {
-    label: 'AI Analytics',
-    icon: <Sparkles className="h-4 w-4 flex-shrink-0 text-primary" />,
-  },
-  {
-    label: 'Exporting responses',
-    icon: <Share2 className="h-4 w-4 flex-shrink-0 text-primary" />,
-  },
-  {
-    label: 'Integrations',
-    icon: <Network className="h-4 w-4 flex-shrink-0 text-primary" />,
-  },
-  {
-    label: 'Webhook',
-    icon: <Zap className="h-4 w-4 flex-shrink-0 text-primary" />,
-  },
-  {
-    label: 'Priority support',
-    icon: <Star className="h-4 w-4 flex-shrink-0 text-primary" />,
-  },
+  'Unlimited forms and submissions',
+  'AI Form builder and AI analytics',
+  'Scoring (quiz system)',
+  'Webhooks',
+  'Fetching form field data from API',
+  'Collect signature',
+  'File upload field',
+  'Form embedding',
+  'Design customization & custom branding',
+  'and much more!',
 ];
 
 const MONTHLY_PRODUCT_ID = '05f52efa-2102-4dd0-9d1d-1538210d6712';
@@ -102,33 +79,25 @@ const PRICING: {
   monthly: {
     price: 19,
     originalPrice: 29,
-    period: 'month',
-    billedAs: '$19/month',
+    period: '/Mo',
+    billedAs: 'Billed monthly • Cancel anytime',
     savings: null,
   },
   yearly: {
     price: 9,
     originalPrice: 19,
-    period: 'month',
-    billedAs: 'Billed yearly as $108',
+    period: '/Mo',
+    billedAs: 'Billed annually • Cancel anytime',
     savings: null,
   },
   onetime: {
     price: 119,
     originalPrice: 139,
-    period: 'lifetime',
-    billedAs: 'One-time payment',
+    period: '',
+    billedAs: 'One-time payment • Lifetime access',
     savings: null,
   },
 };
-
-PRICING.yearly.savings = Math.round(
-  (1 - (PRICING.yearly.price * 12) / (PRICING.monthly.price * 12)) * 100
-);
-
-PRICING.onetime.savings = Math.round(
-  (1 - PRICING.onetime.price / (PRICING.monthly.price * 12)) * 100
-);
 
 export default function PricingClient({ products }: PricingClientProps) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -136,7 +105,7 @@ export default function PricingClient({ products }: PricingClientProps) {
   const [purchaseLoading, setPurchaseLoading] = useState(false);
   const [billingPeriod, setBillingPeriod] = useState<
     'monthly' | 'yearly' | 'onetime'
-  >('onetime');
+  >('monthly');
   const { user } = useAuth();
   const { hasPremium, checkingPremium } = usePremiumStatus(user);
 
@@ -159,14 +128,6 @@ export default function PricingClient({ products }: PricingClientProps) {
     return () => clearTimeout(timeout);
   };
 
-  const handleBillingToggle = (checked: boolean) => {
-    setBillingPeriod(checked ? 'yearly' : 'monthly');
-  };
-
-  const handlePricingTabChange = (value: string) => {
-    setBillingPeriod(value as 'monthly' | 'yearly' | 'onetime');
-  };
-
   const currentPricing = PRICING[billingPeriod];
   const productId =
     billingPeriod === 'monthly'
@@ -180,158 +141,286 @@ export default function PricingClient({ products }: PricingClientProps) {
 
   return (
     <section
-      className="flex w-full flex-col items-center justify-center gap-12 px-4 py-12 text-center md:px-8 md:py-28"
+      className="mx-auto w-full max-w-7xl bg-background"
       id="pricing"
       ref={sectionRef}
     >
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-18">
-        <div className="flex flex-col items-center gap-4 px-6">
-          <h2 className="font-semibold text-3xl md:text-4xl">Pricing</h2>
-          <p className="mx-auto max-w-xl text-md text-muted-foreground">
-            Simple, transparent pricing. Everything you need to build beautiful
-            forms. Start free, upgrade when you need more features.
-          </p>
-
-          {/* Pricing Tabs */}
-          <div className="mt-6 flex w-full max-w-md justify-center">
-            <Tabs
-              className="w-full"
-              items={[
-                { id: 'monthly', label: 'Monthly' },
-                { id: 'yearly', label: 'Yearly' },
-                { id: 'onetime', label: 'Lifetime' },
-              ]}
-              onValueChange={handlePricingTabChange}
-              value={billingPeriod}
-            />
+      <div className="mx-auto flex w-full flex-col">
+        <div className="mx-auto flex w-full flex-col gap-18 px-4 md:px-8">
+          <div className="flex flex-col gap-8 text-center">
+            <p className="text-center text-base text-muted-foreground md:text-lg">
+              Pricing{' '}
+            </p>
+            <h2 className="mx-auto max-w-2xl text-center font-dm-sans font-medium text-2xl text-foreground leading-normal tracking-tight md:text-3xl lg:text-4xl">
+              Simple, transparent pricing. Everything you need to build
+              beautiful forms
+            </h2>
           </div>
-
-          {/* Savings Badge */}
-          {(billingPeriod === 'yearly' || billingPeriod === 'onetime') && (
-            <Badge
-              className="border-green-200 bg-green-100 text-green-700"
-              variant="secondary"
-            >
-              {billingPeriod === 'yearly'
-                ? 'Save 53%'
-                : 'Best Value - Save 48%'}
-            </Badge>
-          )}
-        </div>
-
-        <div className="relative mx-auto flex w-full max-w-7xl grow flex-col items-center rounded-card p-4 text-left shadow-[inset_0px_-24px_66px_-11px_hsl(var(--hu-home-card-bg),0.1)] md:p-12">
-          <Card className="z-5 w-full overflow-hidden border border-transparent bg-transparent p-0 shadow-md/3 shadow-none">
-            <div className="flex w-full flex-col md:flex-row">
-              <div className="flex w-full flex-col items-start justify-start gap-8 p-8 md:w-1/2">
-                <Badge className="mr-auto w-fit" variant="secondary">
-                  🎉 Get Early Bird Discount
-                </Badge>
-
-                {}
-                <div className="flex flex-col items-start gap-3">
-                  <div className="flex items-baseline gap-3">
-                    <span className="font-medium text-2xl text-muted-foreground line-through">
-                      ${currentPricing.originalPrice}
-                    </span>
-                    <span className="font-bold text-4xl text-foreground">
-                      ${currentPricing.price}
-                    </span>
-                    <span className="text-muted-foreground">
-                      {billingPeriod === 'onetime'
-                        ? ''
-                        : `per ${currentPricing.period}`}
-                    </span>
-                  </div>
-                </div>
-
-                {}
-                {user && hasPremium ? (
-                  <div className="flex w-full flex-col gap-3">
-                    <Button className="w-full" size="lg">
-                      <Link
-                        className="block w-full"
-                        href="/dashboard"
-                        target="_blank"
+          <div className="rounded-3xl bg-card p-8 md:p-12">
+            <div className="flex flex-col gap-12">
+              {/* 2x1 Grid with equal width sides */}
+              <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+                {/* Left side - Pricing options with testimonial */}
+                <div className="rounded-3xl bg-card">
+                  <div className="flex h-full flex-col gap-8">
+                    {/* Pricing options */}
+                    <div className="flex flex-col gap-4 sm:gap-6">
+                      {/* Monthly Option */}
+                      <div
+                        className={`cursor-pointer rounded-2xl sm:rounded-3xl p-4 sm:p-6 transition-all ${
+                          billingPeriod === 'monthly'
+                            ? 'bg-card outline-2 outline-border'
+                            : 'bg-background outline-2 outline-transparent'
+                        }`}
+                        onClick={() => setBillingPeriod('monthly')}
+                        tabIndex={0}
+                        role="button"
+                        aria-pressed={billingPeriod === 'monthly'}
                       >
-                        Go to Dashboard
-                      </Link>
-                    </Button>
-                    <Button className="w-full" size="sm" variant="outline">
-                      <Link
-                        className="block w-full"
-                        href="/portal"
-                        target="_blank"
+                        <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-2">
+                          <div className="flex flex-col gap-1">
+                            <h3 className="font-medium text-foreground text-base sm:text-lg">
+                              Monthly
+                            </h3>
+                            <p className="text-muted-foreground text-xs sm:text-sm">
+                              Billed monthly • Cancel anytime
+                            </p>
+                          </div>
+                          <div className="flex items-baseline gap-1 sm:gap-2 mt-1 xs:mt-0">
+                            <span className="text-muted-foreground text-xs sm:text-sm line-through">
+                              $29
+                            </span>
+                            <span className="font-medium text-xl sm:text-2xl text-foreground">
+                              $19
+                            </span>
+                            <span className="text-muted-foreground text-xs sm:text-sm">
+                              /Mo
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Yearly Option */}
+                      <div
+                        className={`cursor-pointer rounded-2xl sm:rounded-3xl p-4 sm:p-6 transition-all ${
+                          billingPeriod === 'yearly'
+                            ? 'bg-card outline-2 outline-border'
+                            : 'bg-background outline-2 outline-transparent'
+                        }`}
+                        onClick={() => setBillingPeriod('yearly')}
+                        tabIndex={0}
+                        role="button"
+                        aria-pressed={billingPeriod === 'yearly'}
                       >
-                        Manage Subscription
-                      </Link>
-                    </Button>
-                  </div>
-                ) : (
-                  <Link
-                    className="block w-full"
-                    href={
-                      user
-                        ? `/checkout?products=${productId}&customerEmail=${user?.email}`
-                        : '#'
-                    }
-                    onClick={handlePurchaseClick}
-                  >
-                    <Button
-                      className="w-full"
-                      disabled={purchaseLoading || checkingPremium}
-                      size="lg"
-                    >
-                      {purchaseLoading ? (
-                        <div className="flex items-center gap-2">
-                          <div className="h-4 w-4 animate-spin rounded-card border-2 border-current border-t-transparent" />
-                          Processing...
+                        <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-2">
+                          <div className="flex flex-col gap-1">
+                            <h3 className="font-medium text-foreground text-base sm:text-lg">
+                              Yearly
+                            </h3>
+                            <p className="text-muted-foreground text-xs sm:text-sm">
+                              Billed annually • Cancel anytime
+                            </p>
+                          </div>
+                          <div className="flex items-baseline gap-1 sm:gap-2 mt-1 xs:mt-0">
+                            <span className="text-muted-foreground text-xs sm:text-sm line-through">
+                              $19
+                            </span>
+                            <span className="font-medium text-xl sm:text-2xl text-foreground">
+                              $9
+                            </span>
+                            <span className="text-muted-foreground text-xs sm:text-sm">
+                              /Mo
+                            </span>
+                          </div>
                         </div>
-                      ) : checkingPremium ? (
-                        <div className="flex items-center gap-2">
-                          <div className="h-4 w-4 animate-spin rounded-card border-2 border-current border-t-transparent" />
-                          Checking...
+                      </div>
+
+                      {/* Lifetime Option */}
+                      <div
+                        className={`cursor-pointer rounded-2xl sm:rounded-3xl p-4 sm:p-6 transition-all ${
+                          billingPeriod === 'onetime'
+                            ? 'bg-card outline-2 outline-border'
+                            : 'bg-background outline-2 outline-transparent'
+                        }`}
+                        onClick={() => setBillingPeriod('onetime')}
+                        tabIndex={0}
+                        role="button"
+                        aria-pressed={billingPeriod === 'onetime'}
+                      >
+                        <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-2">
+                          <div className="flex flex-col gap-1">
+                            <h3 className="font-medium text-foreground text-base sm:text-lg">
+                              Lifetime
+                            </h3>
+                            <p className="text-muted-foreground text-xs sm:text-sm">
+                              One-time payment • Lifetime access
+                            </p>
+                          </div>
+                          <div className="flex items-baseline gap-1 sm:gap-2 mt-1 xs:mt-0">
+                            <span className="text-muted-foreground text-xs sm:text-sm line-through">
+                              $139
+                            </span>
+                            <span className="font-medium text-xl sm:text-2xl text-foreground">
+                              $119
+                            </span>
+                          </div>
                         </div>
-                      ) : user ? (
-                        'Get started with Ikiform'
-                      ) : (
-                        'Sign In to Get Started'
-                      )}
-                    </Button>
-                  </Link>
-                )}
-
-                {/* Billing info */}
-                <div className="w-full text-center">
-                  <p className="text-muted-foreground text-xs">
-                    {billingPeriod === 'yearly'
-                      ? 'Billed annually • Cancel anytime'
-                      : billingPeriod === 'onetime'
-                        ? 'One-time payment • Lifetime access'
-                        : 'Billed monthly • Cancel anytime'}
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex w-full flex-col gap-6 p-8 md:w-1/2">
-                <div className="mb-2 flex items-center gap-2">
-                  <Crown className="h-4 w-4 text-primary" />
-                  <span className="font-medium text-sm">Premium Features</span>
-                </div>
-
-                <div className="flex flex-col gap-3">
-                  {features.map((feature, index) => (
-                    <div className="flex items-center gap-3" key={index}>
-                      {feature.icon}
-                      <span className="text-foreground text-sm">
-                        {feature.label}
-                      </span>
+                      </div>
                     </div>
-                  ))}
+
+                    {/* Testimonial at bottom */}
+                    <div className="mt-auto">
+                      <div className="rounded-3xl bg-background p-4 sm:p-6">
+                        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary font-medium text-lg text-primary-foreground mx-auto sm:mx-0">
+                            T
+                          </div>
+                          <div className="flex flex-col gap-2 w-full">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 items-center">
+                              <h4 className="font-medium text-foreground">
+                                Trust F. Obe
+                              </h4>
+                              <div className="flex items-center gap-1">
+                                {[...Array(5)].map((_, i) => (
+                                  <Star
+                                    className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                                    key={i}
+                                  />
+                                ))}
+                              </div>
+                            </div>
+                            <p className="text-foreground">
+                              Very nice work with Ikiform. I was immediately
+                              sold when I saw your article about Typeform being
+                              too expensive.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right side - Main pricing card */}
+                <div className="rounded-3xl bg-background p-4 sm:p-6">
+                  <div className="flex h-full flex-col gap-8">
+                    {/* Header */}
+                    <div className="flex flex-col gap-4">
+                      <h3 className="font-medium text-2xl text-foreground">
+                        {billingPeriod === 'monthly'
+                          ? 'Monthly'
+                          : billingPeriod === 'yearly'
+                            ? 'Yearly'
+                            : 'Lifetime'}
+                      </h3>
+                      <p className="text-muted-foreground text-sm">
+                        {currentPricing.billedAs}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-grow flex-col gap-8 rounded-3xl bg-card p-4 sm:p-6">
+                      <div className="flex items-baseline gap-3">
+                        <span className="text-lg text-muted-foreground line-through">
+                          ${currentPricing.originalPrice}
+                        </span>
+                        <span className="font-medium text-4xl text-foreground">
+                          ${currentPricing.price}
+                        </span>
+                        <span className="text-muted-foreground">
+                          {currentPricing.period}
+                        </span>
+                      </div>
+                      {/* Features */}
+                      <div className="flex flex-col md:gap-2 gap-3">
+                        {features.map((feature, index) => (
+                          <div className="flex items-center gap-3" key={index}>
+                            <span className="opacity-90">
+                              <svg
+                                height="22"
+                                viewBox="0 0 20 20"
+                                width="22"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="m8.46 1.897l.99.39a1.5 1.5 0 0 0 1.099 0l.99-.39a2.42 2.42 0 0 1 3.102 1.285l.424.975a1.5 1.5 0 0 0 .777.777l.975.424a2.42 2.42 0 0 1 1.285 3.103l-.39.99a1.5 1.5 0 0 0 0 1.098l.39.99a2.42 2.42 0 0 1-1.285 3.102l-.975.424a1.5 1.5 0 0 0-.777.777l-.424.975a2.42 2.42 0 0 1-3.103 1.285l-.99-.39a1.5 1.5 0 0 0-1.098 0l-.99.39a2.42 2.42 0 0 1-3.102-1.285l-.424-.975a1.5 1.5 0 0 0-.777-.777l-.975-.424a2.42 2.42 0 0 1-1.285-3.103l.39-.99a1.5 1.5 0 0 0 0-1.098l-.39-.99a2.42 2.42 0 0 1 1.285-3.102l.975-.424a1.5 1.5 0 0 0 .777-.777l.424-.975a2.42 2.42 0 0 1 3.103-1.285m4.166 5.77l-3.648 4.104l-1.625-1.625a.5.5 0 0 0-.707.707l2 2a.5.5 0 0 0 .727-.021l4-4.5a.5.5 0 0 0-.747-.665"
+                                  fill="currentColor"
+                                />
+                              </svg>
+                            </span>
+                            <span className="text-foreground text-sm">
+                              {feature}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* CTA Button */}
+                      <div className="mt-auto flex flex-col gap-4">
+                        {user && hasPremium ? (
+                          <div className="flex flex-col gap-3">
+                            <Button className="w-full rounded-full" size="lg">
+                              <Link
+                                className="block w-full"
+                                href="/dashboard"
+                                target="_blank"
+                              >
+                                Go to Dashboard
+                              </Link>
+                            </Button>
+                            <Button
+                              className="w-full rounded-full"
+                              size="sm"
+                              variant="outline"
+                            >
+                              <Link
+                                className="block w-full"
+                                href="/portal"
+                                target="_blank"
+                              >
+                                Manage Subscription
+                              </Link>
+                            </Button>
+                          </div>
+                        ) : (
+                          <Link
+                            className="block w-full"
+                            href={
+                              user
+                                ? `/checkout?products=${productId}&customerEmail=${user?.email}`
+                                : '/login'
+                            }
+                            onClick={handlePurchaseClick}
+                          >
+                            <Button
+                              className="w-full rounded-full bg-foreground text-background hover:bg-foreground/90"
+                              disabled={purchaseLoading || checkingPremium}
+                              size="lg"
+                            >
+                              {purchaseLoading ? (
+                                <div className="flex items-center gap-2">
+                                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                                  Processing...
+                                </div>
+                              ) : checkingPremium ? (
+                                <div className="flex items-center gap-2">
+                                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                                  Checking...
+                                </div>
+                              ) : user ? (
+                                'Purchase Plan →'
+                              ) : (
+                                'Sign In to Get Started'
+                              )}
+                            </Button>
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <FeatureComparisonTable />
-          </Card>
+          </div>
         </div>
       </div>
     </section>
