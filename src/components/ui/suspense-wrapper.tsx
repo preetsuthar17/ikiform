@@ -1,5 +1,5 @@
-import { Suspense } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Suspense } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface SuspenseWrapperProps {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ interface SuspenseWrapperProps {
 export function SuspenseWrapper({
   children,
   fallback,
-  className = "h-full w-full",
+  className = 'h-full w-full',
 }: SuspenseWrapperProps) {
   const defaultFallback = (
     <div className={className}>
@@ -28,7 +28,7 @@ export function SuspenseWrapper({
         {}
         <div className="flex flex-1 gap-4 p-4">
           {}
-          <div className="w-1/4 flex flex-col gap-4">
+          <div className="flex w-1/4 flex-col gap-4">
             <Skeleton className="h-10 w-full" />
             <div className="flex flex-col gap-2">
               {Array.from({ length: 5 }).map((_, i) => (
@@ -38,7 +38,7 @@ export function SuspenseWrapper({
           </div>
 
           {}
-          <div className="flex-1 flex flex-col gap-4">
+          <div className="flex flex-1 flex-col gap-4">
             <Skeleton className="h-64 w-full" />
             <div className="grid grid-cols-2 gap-4">
               <Skeleton className="h-32 w-full" />

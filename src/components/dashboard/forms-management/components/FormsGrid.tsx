@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import type { Form } from "@/lib/database";
+import type { Form } from '@/lib/database';
 
-import { FormCard } from "./FormCard";
+import { FormCard } from './FormCard';
 
 interface FormsGridProps {
   forms: Form[];

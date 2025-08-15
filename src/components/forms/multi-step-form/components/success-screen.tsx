@@ -1,9 +1,9 @@
-import type React from "react";
-import { Link } from "react-aria-components";
+import type React from 'react';
+import { Link } from 'react-aria-components';
 
-import { Card } from "@/components/ui/card";
+import { Card } from '@/components/ui/card';
 
-import type { FormSchema } from "@/lib/database";
+import type { FormSchema } from '@/lib/database';
 
 interface SuccessScreenProps {
   schema: FormSchema;
@@ -33,7 +33,7 @@ export const SuccessScreen: React.FC<SuccessScreenProps> = ({ schema }) => {
             <h2 className="font-bold text-2xl text-foreground">Thank You!</h2>
             <p className="text-center text-muted-foreground">
               {schema.settings.successMessage ||
-                "Your form has been submitted successfully."}
+                'Your form has been submitted successfully.'}
             </p>
             {schema.settings.redirectUrl && (
               <p className="text-muted-foreground/70 text-sm">
@@ -45,7 +45,7 @@ export const SuccessScreen: React.FC<SuccessScreenProps> = ({ schema }) => {
 
         <div className="text-center">
           <p className="text-muted-foreground text-sm">
-            Powered by{" "}
+            Powered by{' '}
             <span className="font-medium text-foreground underline">
               <Link href="https://www.ikiform.com">Ikiform</Link>
             </span>

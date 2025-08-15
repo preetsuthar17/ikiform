@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import type { User as SupabaseUser } from "@supabase/supabase-js";
-import { AlignJustify, LogIn, User } from "lucide-react";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useAuth } from "@/hooks/use-auth";
-import { Button } from "../ui/button";
+import type { User as SupabaseUser } from '@supabase/supabase-js';
+import { AlignJustify, LogIn, User } from 'lucide-react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useAuth } from '@/hooks/use-auth';
+import { Button } from '../ui/button';
 import {
   Drawer,
   DrawerClose,
   DrawerContent,
   DrawerTrigger,
-} from "../ui/drawer";
+} from '../ui/drawer';
 
 interface HeaderClientProps {
   initialUser: SupabaseUser | null;

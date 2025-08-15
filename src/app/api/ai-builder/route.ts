@@ -1,12 +1,12 @@
-import { createGroq } from "@ai-sdk/groq";
-import { convertToModelMessages, streamText } from "ai";
-import type { NextRequest } from "next/server";
-import { v4 as uuidv4 } from "uuid";
-import { formsDbServer } from "@/lib/database";
-import { checkRateLimit, type RateLimitSettings } from "@/lib/forms/server";
-import { requirePremium } from "@/lib/utils/premium-check";
-import { sanitizeString } from "@/lib/utils/sanitize";
-import { createClient } from "@/utils/supabase/server";
+import { createGroq } from '@ai-sdk/groq';
+import { convertToModelMessages, streamText } from 'ai';
+import type { NextRequest } from 'next/server';
+import { v4 as uuidv4 } from 'uuid';
+import { formsDbServer } from '@/lib/database';
+import { checkRateLimit, type RateLimitSettings } from '@/lib/forms/server';
+import { requirePremium } from '@/lib/utils/premium-check';
+import { sanitizeString } from '@/lib/utils/sanitize';
+import { createClient } from '@/utils/supabase/server';
 
 const systemPrompt =
   process.env.AI_FORM_SYSTEM_PROMPT ||
@@ -21,11 +21,11 @@ function createErrorResponse(message: string, status = 500) {
   return new Response(JSON.stringify({ success: false, message }), {
     status,
     headers: {
-      "Content-Type": "application/json",
-      "Cache-Control": "no-store",
-      "X-Content-Type-Options": "nosniff",
-      "X-Frame-Options": "DENY",
-      "X-XSS-Protection": "1; mode=block",
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-store',
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'DENY',
+      'X-XSS-Protection': '1; mode=block',
     },
   });
 }
@@ -34,11 +34,11 @@ type AIMessage = { role: string; content: string };
 
 function validateAndSanitizeMessages(messages: AIMessage[]): AIMessage[] {
   if (!Array.isArray(messages) || messages.length === 0) {
-    throw new Error("Invalid messages array");
+    throw new Error('Invalid messages array');
   }
   return messages.map((msg) => {
-    if (!msg.role || typeof msg.content !== "string") {
-      throw new Error("Invalid message format");
+    if (!msg.role || typeof msg.content !== 'string') {
+      throw new Error('Invalid message format');
     }
     return {
       role: msg.role,
@@ -50,7 +50,7 @@ function validateAndSanitizeMessages(messages: AIMessage[]): AIMessage[] {
 const AIBuilderRateLimit: RateLimitSettings = {
   enabled: true,
   maxSubmissions: 20,
-  window: "5 m",
+  window: '5 m',
 };
 
 async function authenticateAndCheckPremium(req: NextRequest) {
@@ -60,11 +60,11 @@ async function authenticateAndCheckPremium(req: NextRequest) {
     error: authError,
   } = await supabase.auth.getUser();
   if (authError || !user) {
-    return { error: createErrorResponse("Unauthorized", 401) };
+    return { error: createErrorResponse('Unauthorized', 401) };
   }
   const premiumCheck = await requirePremium(user.id);
   if (!premiumCheck.hasPremium) {
-    return { error: createErrorResponse("Premium subscription required", 403) };
+    return { error: createErrorResponse('Premium subscription required', 403) };
   }
   return { user };
 }
@@ -74,7 +74,7 @@ function validateApiKey() {
     apiKeyValid = !!process.env.GROQ_API_KEY;
   }
   if (!apiKeyValid) {
-    return createErrorResponse("AI service temporarily unavailable", 503);
+    return createErrorResponse('AI service temporarily unavailable', 503);
   }
   return null;
 }
@@ -88,7 +88,7 @@ async function parseAndSanitizeRequest(req: NextRequest) {
   try {
     requestData = await req.json();
   } catch {
-    return { error: createErrorResponse("Invalid JSON in request body", 400) };
+    return { error: createErrorResponse('Invalid JSON in request body', 400) };
   }
   let sanitizedMessages: { role: string; content: string }[];
   try {
@@ -96,8 +96,8 @@ async function parseAndSanitizeRequest(req: NextRequest) {
   } catch (error) {
     return {
       error: createErrorResponse(
-        error instanceof Error ? error.message : "Invalid request format",
-        400,
+        error instanceof Error ? error.message : 'Invalid request format',
+        400
       ),
     };
   }
@@ -107,9 +107,9 @@ async function parseAndSanitizeRequest(req: NextRequest) {
 async function saveMessageAsync(
   userId: string,
   sessionId: string,
-  role: "user" | "assistant" | "system",
+  role: 'user' | 'assistant' | 'system',
   content: string,
-  metadata: any,
+  metadata: any
 ) {
   try {
     await formsDbServer.saveAIBuilderMessage(
@@ -117,7 +117,7 @@ async function saveMessageAsync(
       sessionId,
       role,
       content,
-      metadata,
+      metadata
     );
   } catch (error) {
     console.error(`Error saving ${role} message:`, error);
@@ -125,18 +125,18 @@ async function saveMessageAsync(
 }
 
 function getGroqModel() {
-  const modelPreference = process.env.GROQ_MODEL || "fastest";
+  const modelPreference = process.env.GROQ_MODEL || 'fastest';
 
   switch (modelPreference) {
-    case "fastest":
-      return "llama-3.1-8b-instant";
-    case "balanced":
-      return "llama-3.1-70b-versatile";
-    case "quality":
-      return "llama-3.2-90b-text-preview";
-    case "fast":
+    case 'fastest':
+      return 'llama-3.1-8b-instant';
+    case 'balanced':
+      return 'llama-3.1-70b-versatile';
+    case 'quality':
+      return 'llama-3.2-90b-text-preview';
+    case 'fast':
     default:
-      return "llama-3.1-8b-instant";
+      return 'llama-3.1-8b-instant';
   }
 }
 
@@ -158,10 +158,10 @@ async function streamAIResponse({
   const stream = await streamText({
     model: groq(modelName),
     messages: [
-      { role: "system", content: systemPrompt },
+      { role: 'system', content: systemPrompt },
       ...sanitizedMessages.map((msg) => ({
         ...msg,
-        role: msg.role as "system" | "user" | "assistant",
+        role: msg.role as 'system' | 'user' | 'assistant',
       })),
     ],
     temperature: 0.1,
@@ -171,7 +171,7 @@ async function streamAIResponse({
     presencePenalty: 0,
   });
 
-  let aiResponse = "";
+  let aiResponse = '';
   const encoder = new TextEncoder();
 
   const responseStream = new ReadableStream({
@@ -184,17 +184,17 @@ async function streamAIResponse({
         }
 
         if (aiResponse.trim()) {
-          saveMessageAsync(user.id, sessionId, "assistant", aiResponse, {
+          saveMessageAsync(user.id, sessionId, 'assistant', aiResponse, {
             timestamp: new Date().toISOString(),
             model: modelName,
             temperature: 0.1,
-            provider: "groq",
+            provider: 'groq',
           });
         }
 
         controller.close();
       } catch (error) {
-        console.error("Groq streaming error:", error);
+        console.error('Groq streaming error:', error);
         controller.error(error);
       }
     },
@@ -203,22 +203,22 @@ async function streamAIResponse({
   return new Response(responseStream, {
     status: 200,
     headers: {
-      "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "no-store",
-      "X-Content-Type-Options": "nosniff",
-      "X-Frame-Options": "DENY",
-      "X-XSS-Protection": "1; mode=block",
-      "X-Session-ID": sessionId,
-      "X-Model": modelName,
+      'Content-Type': 'text/plain; charset=utf-8',
+      'Cache-Control': 'no-store',
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'DENY',
+      'X-XSS-Protection': '1; mode=block',
+      'X-Session-ID': sessionId,
+      'X-Model': modelName,
 
-      "Transfer-Encoding": "chunked",
-      Connection: "keep-alive",
+      'Transfer-Encoding': 'chunked',
+      Connection: 'keep-alive',
     },
   });
 }
 
 export async function POST(req: NextRequest) {
-  const ip = req.headers.get("x-forwarded-for") || "global";
+  const ip = req.headers.get('x-forwarded-for') || 'global';
   const rate = await checkRateLimit(ip, AIBuilderRateLimit);
   if (!rate.success) {
     const retryAfter = rate.reset
@@ -227,25 +227,25 @@ export async function POST(req: NextRequest) {
     return new Response(
       JSON.stringify({
         success: false,
-        message: "Too many requests. Please try again later.",
+        message: 'Too many requests. Please try again later.',
       }),
       {
         status: 429,
-        headers: { "Retry-After": retryAfter.toString() },
-      },
+        headers: { 'Retry-After': retryAfter.toString() },
+      }
     );
   }
 
   try {
     const authResult = await authenticateAndCheckPremium(req);
-    if ("error" in authResult) return authResult.error;
+    if ('error' in authResult) return authResult.error;
     const user = authResult.user;
 
     const apiKeyError = validateApiKey();
     if (apiKeyError) return apiKeyError;
 
     const parseResult = await parseAndSanitizeRequest(req);
-    if ("error" in parseResult) return parseResult.error;
+    if ('error' in parseResult) return parseResult.error;
     const sanitizedMessages = parseResult.sanitizedMessages;
     const sessionId = parseResult.sessionId;
 
@@ -253,11 +253,11 @@ export async function POST(req: NextRequest) {
 
     const lastUserMessage = sanitizedMessages.at(-1);
 
-    if (lastUserMessage && lastUserMessage.role === "user") {
-      saveMessageAsync(user.id, sid, "user", lastUserMessage.content, {
+    if (lastUserMessage && lastUserMessage.role === 'user') {
+      saveMessageAsync(user.id, sid, 'user', lastUserMessage.content, {
         timestamp: new Date().toISOString(),
         ip,
-        userAgent: req.headers.get("user-agent") || "",
+        userAgent: req.headers.get('user-agent') || '',
       });
     }
 
@@ -269,28 +269,28 @@ export async function POST(req: NextRequest) {
       ip,
     });
   } catch (error) {
-    console.error("AI Builder API error:", error);
-    return createErrorResponse("Internal server error");
+    console.error('AI Builder API error:', error);
+    return createErrorResponse('Internal server error');
   }
 }
 
 export async function GET() {
   return new Response(
     JSON.stringify({
-      status: "healthy",
-      service: "form-builder-ai",
+      status: 'healthy',
+      service: 'form-builder-ai',
       timestamp: new Date().toISOString(),
-      provider: "groq",
+      provider: 'groq',
       model: getGroqModel(),
       available_models: [
-        "llama-3.1-8b-instant (fastest)",
-        "llama-3.1-70b-versatile (balanced)",
-        "llama-3.2-90b-text-preview (highest quality)",
+        'llama-3.1-8b-instant (fastest)',
+        'llama-3.1-70b-versatile (balanced)',
+        'llama-3.2-90b-text-preview (highest quality)',
       ],
     }),
     {
       status: 200,
-      headers: { "Content-Type": "application/json" },
-    },
+      headers: { 'Content-Type': 'application/json' },
+    }
   );
 }

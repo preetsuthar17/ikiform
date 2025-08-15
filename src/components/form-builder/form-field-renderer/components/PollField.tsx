@@ -1,7 +1,7 @@
-import React from "react";
-import { RadioGroup, RadioItem } from "@/components/ui/radio";
-import type { BaseFieldProps } from "../types";
-import { sanitizeOptions } from "../utils/sanitizeOptions";
+import React from 'react';
+import { RadioGroup, RadioItem } from '@/components/ui/radio';
+import type { BaseFieldProps } from '../types';
+import { sanitizeOptions } from '../utils/sanitizeOptions';
 
 export function PollField({
   field,
@@ -44,19 +44,19 @@ export function PollField({
           setLoading(false);
         })
         .catch((err) => {
-          setFetchError("Failed to fetch options");
+          setFetchError('Failed to fetch options');
           setLoading(false);
         });
     } else {
       setApiOptions(null);
     }
-  }, [field.optionsApi, field.valueKey ?? "", field.labelKey ?? ""]);
+  }, [field.optionsApi, field.valueKey ?? '', field.labelKey ?? '']);
 
   const options = apiOptions ?? field.settings?.pollOptions ?? [];
   const showResults = !!field.settings?.showResults;
 
   const fakeResults = options.map((opt, i) => ({
-    label: typeof opt === "string" ? opt : opt.label || opt.value,
+    label: typeof opt === 'string' ? opt : opt.label || opt.value,
     votes: Math.floor(Math.random() * 20),
   }));
   const totalVotes = fakeResults.reduce((sum, o) => sum + o.votes, 0);
@@ -66,13 +66,13 @@ export function PollField({
       disabled={disabled || loading}
       error={error}
       onValueChange={onChange}
-      value={value || ""}
+      value={value || ''}
     >
       {fetchError && <div className="p-2 text-red-500">{fetchError}</div>}
       {options.map((option, idx) => {
-        const optionValue = typeof option === "string" ? option : option.value;
+        const optionValue = typeof option === 'string' ? option : option.value;
         const optionLabel =
-          typeof option === "string" ? option : option.label || option.value;
+          typeof option === 'string' ? option : option.label || option.value;
         return (
           <RadioItem
             disabled={disabled || loading}

@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Form Customization",
-  description: "Customize the design and appearance of your form",
+  title: 'Form Customization',
+  description: 'Customize the design and appearance of your form',
 };
 
 export default function CustomizeLayout({
@@ -10,9 +10,5 @@ export default function CustomizeLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className="min-h-screen bg-background">
-      {children}
-    </div>
-  );
+  return <div className="min-h-screen bg-background">{children}</div>;
 }

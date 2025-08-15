@@ -1,11 +1,11 @@
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
-import type { FormAnalyticsProps } from "./types";
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
+import type { FormAnalyticsProps } from './types';
 
 function FormAnalyticsSkeleton() {
   return (
-    <div className="mx-auto w-full max-w-[95%] flex flex-col gap-6 px-6">
+    <div className="mx-auto flex w-full max-w-[95%] flex-col gap-6 px-6">
       {}
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-2">
@@ -57,13 +57,13 @@ function FormAnalyticsSkeleton() {
 
 const FormAnalyticsClient = dynamic(
   () =>
-    import("./form-analytics-client").then((mod) => ({
+    import('./form-analytics-client').then((mod) => ({
       default: mod.FormAnalyticsClient,
     })),
   {
     ssr: false,
     loading: () => <FormAnalyticsSkeleton />,
-  },
+  }
 );
 
 /**

@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 interface InboundWebhookFormModalProps {
   open: boolean;
@@ -33,17 +33,17 @@ export function InboundWebhookFormModal({
   loading,
 }: InboundWebhookFormModalProps) {
   const [targetFormId, setTargetFormId] = useState(
-    initialMapping?.targetFormId || "",
+    initialMapping?.targetFormId || ''
   );
   const [mappingRules, setMappingRules] = useState<Record<string, string>>(
-    initialMapping?.mappingRules || { externalField: "formField" },
+    initialMapping?.mappingRules || { externalField: 'formField' }
   );
   const [enabled, setEnabled] = useState(initialMapping?.enabled ?? true);
 
   useEffect(() => {
-    setTargetFormId(initialMapping?.targetFormId || "");
+    setTargetFormId(initialMapping?.targetFormId || '');
     setMappingRules(
-      initialMapping?.mappingRules || { externalField: "formField" },
+      initialMapping?.mappingRules || { externalField: 'formField' }
     );
     setEnabled(initialMapping?.enabled ?? true);
   }, [initialMapping, open]);
@@ -57,7 +57,7 @@ export function InboundWebhookFormModal({
   function handleAddRule() {
     setMappingRules((prev) => ({
       ...prev,
-      ["newField" + Object.keys(prev).length]: "",
+      ['newField' + Object.keys(prev).length]: '',
     }));
   }
 
@@ -74,8 +74,8 @@ export function InboundWebhookFormModal({
 
   function handleClose() {
     onClose();
-    setTargetFormId("");
-    setMappingRules({ externalField: "formField" });
+    setTargetFormId('');
+    setMappingRules({ externalField: 'formField' });
     setEnabled(true);
   }
 
@@ -84,7 +84,7 @@ export function InboundWebhookFormModal({
       <Card className="relative w-full max-w-lg">
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <CardTitle>
-            {initialMapping ? "Edit Inbound Webhook" : "Add Inbound Webhook"}
+            {initialMapping ? 'Edit Inbound Webhook' : 'Add Inbound Webhook'}
           </CardTitle>
           <Button
             aria-label="Close"
@@ -109,7 +109,7 @@ export function InboundWebhookFormModal({
                 readOnly
                 type="text"
                 value={
-                  initialMapping?.endpoint || "/api/webhook/inbound/[generated]"
+                  initialMapping?.endpoint || '/api/webhook/inbound/[generated]'
                 }
               />
             </div>
@@ -194,7 +194,7 @@ export function InboundWebhookFormModal({
               type="submit"
               variant="default"
             >
-              {loading ? "Saving..." : "Save"}
+              {loading ? 'Saving...' : 'Save'}
             </Button>
           </CardFooter>
         </form>

@@ -1,71 +1,71 @@
-"use client";
+'use client';
 
-import { cva, type VariantProps } from "class-variance-authority";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
-import * as React from "react";
+import { cva, type VariantProps } from 'class-variance-authority';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+import * as React from 'react';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/select';
+import { cn } from '@/lib/utils';
 
 const calendarVariants = cva(
-  "relative mx-auto inline-block flex w-full max-w-sm flex-col gap-4 rounded-card border border-border bg-background shadow-sm/2",
+  'relative mx-auto inline-block flex w-full max-w-sm flex-col gap-4 rounded-card border border-border bg-background shadow-sm/2',
   {
     variants: {
       size: {
-        sm: "p-2 text-sm sm:p-3",
-        default: "p-3 sm:p-4",
-        lg: "p-4 text-base sm:p-5",
+        sm: 'p-2 text-sm sm:p-3',
+        default: 'p-3 sm:p-4',
+        lg: 'p-4 text-base sm:p-5',
       },
       alwaysOnTop: {
-        true: "z-9999",
-        false: "z-10",
+        true: 'z-9999',
+        false: 'z-10',
       },
     },
     defaultVariants: {
-      size: "default",
+      size: 'default',
       alwaysOnTop: true,
     },
-  },
+  }
 );
 
 const dayVariants = cva(
-  "inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-ele text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 sm:h-9 sm:w-9",
+  'inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-ele text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 sm:h-9 sm:w-9',
   {
     variants: {
       variant: {
         default:
-          "text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring",
+          'text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring',
         selected:
-          "bg-primary font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring",
+          'bg-primary font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring',
         today:
-          "bg-accent font-semibold text-accent-foreground hover:bg-accent/80 focus-visible:ring-ring",
+          'bg-accent font-semibold text-accent-foreground hover:bg-accent/80 focus-visible:ring-ring',
         outside:
-          "text-muted-foreground opacity-50 hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring",
-        disabled: "cursor-not-allowed text-muted-foreground opacity-30",
-        "range-start":
-          "rounded-r-none bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring",
-        "range-end":
-          "rounded-l-none bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring",
-        "range-middle":
-          "rounded-none bg-primary/20 text-foreground hover:bg-primary/30 focus-visible:ring-ring",
+          'text-muted-foreground opacity-50 hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring',
+        disabled: 'cursor-not-allowed text-muted-foreground opacity-30',
+        'range-start':
+          'rounded-r-none bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring',
+        'range-end':
+          'rounded-l-none bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring',
+        'range-middle':
+          'rounded-none bg-primary/20 text-foreground hover:bg-primary/30 focus-visible:ring-ring',
       },
       size: {
-        sm: "h-6 w-6 text-xs sm:h-7 sm:w-7",
-        default: "h-8 w-8 text-sm sm:h-9 sm:w-9",
-        lg: "h-9 w-9 text-base sm:h-10 sm:w-10",
+        sm: 'h-6 w-6 text-xs sm:h-7 sm:w-7',
+        default: 'h-8 w-8 text-sm sm:h-9 sm:w-9',
+        lg: 'h-9 w-9 text-base sm:h-10 sm:w-10',
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: 'default',
+      size: 'default',
     },
-  },
+  }
 );
 
 interface CalendarProps extends VariantProps<typeof calendarVariants> {
@@ -77,7 +77,7 @@ interface CalendarProps extends VariantProps<typeof calendarVariants> {
   showOutsideDays?: boolean;
   minDate?: Date;
   maxDate?: Date;
-  mode?: "single" | "multiple" | "range";
+  mode?: 'single' | 'multiple' | 'range';
   selectedDates?: Date[];
   selectedRange?: { from: Date; to?: Date };
   onSelectMultiple?: (dates: Date[]) => void;
@@ -86,33 +86,33 @@ interface CalendarProps extends VariantProps<typeof calendarVariants> {
   alwaysOnTop?: boolean;
 }
 
-const DAYS_OF_WEEK = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const DAYS_OF_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const MONTHS = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ];
 
 function Calendar({
   selected,
   onSelect,
   disabled,
-  locale = "en-US",
+  locale = 'en-US',
   className,
   size,
   showOutsideDays = true,
   minDate,
   maxDate,
-  mode = "single",
+  mode = 'single',
   selectedDates = [],
   selectedRange,
   onSelectMultiple,
@@ -123,7 +123,7 @@ function Calendar({
 }: CalendarProps) {
   const [currentDate, setCurrentDate] = React.useState(selected || new Date());
   const [isAnimating, setIsAnimating] = React.useState(false);
-  const [direction, setDirection] = React.useState<"left" | "right">("right");
+  const [direction, setDirection] = React.useState<'left' | 'right'>('right');
   const today = new Date();
   const currentMonth = currentDate.getMonth();
   const currentYear = currentDate.getFullYear();
@@ -138,7 +138,7 @@ function Calendar({
   const prevMonthLastDay = new Date(currentYear, currentMonth, 0).getDate();
   const prevMonthDays = Array.from(
     { length: firstDayOfWeek },
-    (_, i) => prevMonthLastDay - firstDayOfWeek + i + 1,
+    (_, i) => prevMonthLastDay - firstDayOfWeek + i + 1
   );
 
   const totalCells = 42;
@@ -146,13 +146,13 @@ function Calendar({
   const remainingCells =
     totalCells - prevMonthDays.length - currentMonthDays.length;
   const nextMonthDays = Array.from({ length: remainingCells }, (_, i) => i + 1);
-  const navigateMonth = (direction: "prev" | "next") => {
+  const navigateMonth = (direction: 'prev' | 'next') => {
     setIsAnimating(true);
-    setDirection(direction === "prev" ? "left" : "right");
+    setDirection(direction === 'prev' ? 'left' : 'right');
 
     setTimeout(() => {
       const newDate = new Date(currentDate);
-      if (direction === "prev") {
+      if (direction === 'prev') {
         newDate.setMonth(currentMonth - 1);
       } else {
         newDate.setMonth(currentMonth + 1);
@@ -183,13 +183,13 @@ function Calendar({
     return false;
   };
   const isDateSelected = (date: Date) => {
-    if (mode === "single") {
+    if (mode === 'single') {
       return selected && isSameDay(date, selected);
     }
-    if (mode === "multiple") {
+    if (mode === 'multiple') {
       return selectedDates.some((d) => isSameDay(d, date));
     }
-    if (mode === "range" && selectedRange) {
+    if (mode === 'range' && selectedRange) {
       if (!selectedRange.to) {
         return isSameDay(date, selectedRange.from);
       }
@@ -202,7 +202,7 @@ function Calendar({
   };
 
   const isDateInRange = (date: Date) => {
-    if (mode === "range" && selectedRange) {
+    if (mode === 'range' && selectedRange) {
       if (!selectedRange.to) return isSameDay(date, selectedRange.from);
       const dateTime = date.getTime();
       const fromTime = selectedRange.from.getTime();
@@ -213,14 +213,14 @@ function Calendar({
   };
 
   const isRangeStart = (date: Date) => {
-    if (mode === "range" && selectedRange) {
+    if (mode === 'range' && selectedRange) {
       return isSameDay(date, selectedRange.from);
     }
     return false;
   };
 
   const isRangeEnd = (date: Date) => {
-    if (mode === "range" && selectedRange && selectedRange.to) {
+    if (mode === 'range' && selectedRange && selectedRange.to) {
       return isSameDay(date, selectedRange.to);
     }
     return false;
@@ -233,14 +233,14 @@ function Calendar({
 
     if (isDateDisabled(clickedDate)) return;
 
-    if (mode === "single") {
+    if (mode === 'single') {
       onSelect?.(clickedDate);
-    } else if (mode === "multiple") {
+    } else if (mode === 'multiple') {
       const newDates = selectedDates.some((d) => isSameDay(d, clickedDate))
         ? selectedDates.filter((d) => !isSameDay(d, clickedDate))
         : [...selectedDates, clickedDate];
       onSelectMultiple?.(newDates);
-    } else if (mode === "range") {
+    } else if (mode === 'range') {
       if (!selectedRange || (selectedRange.from && selectedRange.to)) {
         onSelectRange?.({ from: clickedDate });
       } else if (selectedRange.from && !selectedRange.to) {
@@ -254,33 +254,33 @@ function Calendar({
   };
   const getDayVariant = (
     day: number,
-    monthOffset = 0,
+    monthOffset = 0
   ):
-    | "default"
-    | "selected"
-    | "today"
-    | "outside"
-    | "disabled"
-    | "range-start"
-    | "range-end"
-    | "range-middle" => {
+    | 'default'
+    | 'selected'
+    | 'today'
+    | 'outside'
+    | 'disabled'
+    | 'range-start'
+    | 'range-end'
+    | 'range-middle' => {
     const date = new Date(currentYear, currentMonth + monthOffset, day);
 
-    if (isDateDisabled(date)) return "disabled";
-    if (mode === "range" && selectedRange) {
-      if (isRangeStart(date)) return "range-start";
-      if (isRangeEnd(date)) return "range-end";
-      if (isDateInRange(date)) return "range-middle";
+    if (isDateDisabled(date)) return 'disabled';
+    if (mode === 'range' && selectedRange) {
+      if (isRangeStart(date)) return 'range-start';
+      if (isRangeEnd(date)) return 'range-end';
+      if (isDateInRange(date)) return 'range-middle';
     }
-    if (isDateSelected(date)) return "selected";
-    if (isToday(date)) return "today";
-    if (monthOffset !== 0) return "outside";
-    return "default";
+    if (isDateSelected(date)) return 'selected';
+    if (isToday(date)) return 'today';
+    if (monthOffset !== 0) return 'outside';
+    return 'default';
   };
 
   const slideVariants = {
     enter: (direction: string) => ({
-      x: direction === "right" ? 300 : -300,
+      x: direction === 'right' ? 300 : -300,
       opacity: 0,
     }),
     center: {
@@ -290,7 +290,7 @@ function Calendar({
     },
     exit: (direction: string) => ({
       zIndex: 0,
-      x: direction === "right" ? -300 : 300,
+      x: direction === 'right' ? -300 : 300,
       opacity: 0,
     }),
   };
@@ -299,13 +299,13 @@ function Calendar({
       className={cn(calendarVariants({ size, alwaysOnTop }), className)}
       {...props}
     >
-      {" "}
+      {' '}
       {}
       <div className="flex items-center justify-between">
         <button
           className="inline-flex items-center justify-center rounded-ele p-1 transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-1.5"
           disabled={isAnimating}
-          onClick={() => navigateMonth("prev")}
+          onClick={() => navigateMonth('prev')}
         >
           <ChevronLeft className="h-4 w-4" />
         </button>
@@ -372,7 +372,7 @@ function Calendar({
         <button
           className="inline-flex items-center justify-center rounded-ele p-1 transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-1.5"
           disabled={isAnimating}
-          onClick={() => navigateMonth("next")}
+          onClick={() => navigateMonth('next')}
         >
           <ChevronRight className="h-4 w-4" />
         </button>
@@ -400,7 +400,7 @@ function Calendar({
             initial="enter"
             key={`${currentMonth}-${currentYear}`}
             transition={{
-              x: { type: "spring", stiffness: 500, damping: 30 },
+              x: { type: 'spring', stiffness: 500, damping: 30 },
               opacity: { duration: 0.2 },
             }}
             variants={slideVariants}
@@ -410,10 +410,10 @@ function Calendar({
               prevMonthDays.map((day) => (
                 <button
                   className={cn(
-                    dayVariants({ variant: getDayVariant(day, -1), size }),
+                    dayVariants({ variant: getDayVariant(day, -1), size })
                   )}
                   disabled={isDateDisabled(
-                    new Date(currentYear, currentMonth - 1, day),
+                    new Date(currentYear, currentMonth - 1, day)
                   )}
                   key={`prev-${day}`}
                   onClick={() => handleDateClick(day, -1)}
@@ -426,10 +426,10 @@ function Calendar({
             {currentMonthDays.map((day) => (
               <button
                 className={cn(
-                  dayVariants({ variant: getDayVariant(day), size }),
+                  dayVariants({ variant: getDayVariant(day), size })
                 )}
                 disabled={isDateDisabled(
-                  new Date(currentYear, currentMonth, day),
+                  new Date(currentYear, currentMonth, day)
                 )}
                 key={`current-${day}`}
                 onClick={() => handleDateClick(day)}
@@ -443,10 +443,10 @@ function Calendar({
               nextMonthDays.map((day) => (
                 <button
                   className={cn(
-                    dayVariants({ variant: getDayVariant(day, 1), size }),
+                    dayVariants({ variant: getDayVariant(day, 1), size })
                   )}
                   disabled={isDateDisabled(
-                    new Date(currentYear, currentMonth + 1, day),
+                    new Date(currentYear, currentMonth + 1, day)
                   )}
                   key={`next-${day}`}
                   onClick={() => handleDateClick(day, 1)}

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { toast } from "sonner";
+import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 export interface InboundWebhookMapping {
   id: string;
@@ -20,13 +20,13 @@ export function useInboundWebhookManagement() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/webhook/inbound");
-      if (!res.ok) throw new Error("Failed to fetch inbound webhooks");
+      const res = await fetch('/api/webhook/inbound');
+      if (!res.ok) throw new Error('Failed to fetch inbound webhooks');
       const data = await res.json();
       setMappings(data);
     } catch (e: any) {
       setError(e.message);
-      toast.error(e.message || "Failed to fetch inbound webhooks");
+      toast.error(e.message || 'Failed to fetch inbound webhooks');
     } finally {
       setLoading(false);
     }
@@ -36,17 +36,17 @@ export function useInboundWebhookManagement() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/webhook/inbound", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/webhook/inbound', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(mapping),
       });
-      if (!res.ok) throw new Error("Failed to create inbound webhook");
-      toast.success("Inbound webhook created!");
+      if (!res.ok) throw new Error('Failed to create inbound webhook');
+      toast.success('Inbound webhook created!');
       await fetchMappings();
     } catch (e: any) {
       setError(e.message);
-      toast.error(e.message || "Failed to create inbound webhook");
+      toast.error(e.message || 'Failed to create inbound webhook');
     } finally {
       setLoading(false);
     }
@@ -54,22 +54,22 @@ export function useInboundWebhookManagement() {
 
   async function updateMapping(
     id: string,
-    mapping: Partial<InboundWebhookMapping>,
+    mapping: Partial<InboundWebhookMapping>
   ) {
     setLoading(true);
     setError(null);
     try {
       const res = await fetch(`/api/webhook/inbound/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(mapping),
       });
-      if (!res.ok) throw new Error("Failed to update inbound webhook");
-      toast.success("Inbound webhook updated!");
+      if (!res.ok) throw new Error('Failed to update inbound webhook');
+      toast.success('Inbound webhook updated!');
       await fetchMappings();
     } catch (e: any) {
       setError(e.message);
-      toast.error(e.message || "Failed to update inbound webhook");
+      toast.error(e.message || 'Failed to update inbound webhook');
     } finally {
       setLoading(false);
     }
@@ -80,14 +80,14 @@ export function useInboundWebhookManagement() {
     setError(null);
     try {
       const res = await fetch(`/api/webhook/inbound/${id}`, {
-        method: "DELETE",
+        method: 'DELETE',
       });
-      if (!res.ok) throw new Error("Failed to delete inbound webhook");
-      toast.success("Inbound webhook deleted!");
+      if (!res.ok) throw new Error('Failed to delete inbound webhook');
+      toast.success('Inbound webhook deleted!');
       await fetchMappings();
     } catch (e: any) {
       setError(e.message);
-      toast.error(e.message || "Failed to delete inbound webhook");
+      toast.error(e.message || 'Failed to delete inbound webhook');
     } finally {
       setLoading(false);
     }

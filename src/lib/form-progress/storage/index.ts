@@ -2,12 +2,12 @@ import type {
   FormProgress,
   FormProgressConfig,
   ProgressStorageAdapter,
-} from "../types";
+} from '../types';
 import {
   LocalStorageAdapter,
   ServerStorageAdapter,
   SessionStorageAdapter,
-} from "./adapters";
+} from './adapters';
 
 /**
  * Form Progress Storage Manager
@@ -23,17 +23,17 @@ export class FormProgressStorage {
   }
 
   private createAdapter(
-    storageType: FormProgressConfig["storage"],
+    storageType: FormProgressConfig['storage']
   ): ProgressStorageAdapter {
     switch (storageType) {
-      case "localStorage":
+      case 'localStorage':
         return new LocalStorageAdapter();
-      case "sessionStorage":
+      case 'sessionStorage':
         return new SessionStorageAdapter();
-      case "server":
+      case 'server':
         return new ServerStorageAdapter();
-      case "indexedDB":
-        throw new Error("IndexedDB adapter not yet implemented");
+      case 'indexedDB':
+        throw new Error('IndexedDB adapter not yet implemented');
       default:
         return new LocalStorageAdapter();
     }
@@ -58,12 +58,12 @@ export class FormProgressStorage {
    */
   public calculateCompletionPercentage(
     formData: Record<string, any>,
-    totalFields: number,
+    totalFields: number
   ): number {
     if (totalFields === 0) return 0;
 
     const filledFields = Object.values(formData).filter((value) => {
-      if (value === null || value === undefined || value === "") return false;
+      if (value === null || value === undefined || value === '') return false;
       if (Array.isArray(value) && value.length === 0) return false;
       return true;
     }).length;
@@ -80,17 +80,17 @@ export class FormProgressStorage {
     formData: Record<string, any>,
     currentStep = 0,
     totalSteps = 1,
-    userId?: string,
+    userId?: string
   ): FormProgress {
     const now = new Date();
     const expiresAt = new Date(
-      now.getTime() + this.config.retentionDays * 24 * 60 * 60 * 1000,
+      now.getTime() + this.config.retentionDays * 24 * 60 * 60 * 1000
     );
 
     const totalFields = Object.keys(formData).length;
     const completionPercentage = this.calculateCompletionPercentage(
       formData,
-      totalFields,
+      totalFields
     );
 
     return {
@@ -117,7 +117,7 @@ export class FormProgressStorage {
       const key = this.generateKey(progress.formId, progress.sessionId);
       await this.adapter.save(key, progress);
     } catch (error) {
-      console.error("Failed to save form progress:", error);
+      console.error('Failed to save form progress:', error);
       throw error;
     }
   }
@@ -127,7 +127,7 @@ export class FormProgressStorage {
    */
   async loadProgress(
     formId: string,
-    sessionId: string,
+    sessionId: string
   ): Promise<FormProgress | null> {
     if (!this.config.enabled) return null;
 
@@ -135,7 +135,7 @@ export class FormProgressStorage {
       const key = this.generateKey(formId, sessionId);
       return await this.adapter.load(key);
     } catch (error) {
-      console.error("Failed to load form progress:", error);
+      console.error('Failed to load form progress:', error);
       return null;
     }
   }
@@ -148,7 +148,7 @@ export class FormProgressStorage {
       const key = this.generateKey(formId, sessionId);
       await this.adapter.delete(key);
     } catch (error) {
-      console.error("Failed to delete form progress:", error);
+      console.error('Failed to delete form progress:', error);
       throw error;
     }
   }
@@ -160,7 +160,7 @@ export class FormProgressStorage {
     try {
       await this.adapter.clear();
     } catch (error) {
-      console.error("Failed to clear all form progress:", error);
+      console.error('Failed to clear all form progress:', error);
       throw error;
     }
   }

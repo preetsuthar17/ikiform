@@ -1,1 +1,1 @@
-export { LogicBuilderPanel } from "./LogicBuilderPanel";
+export { LogicBuilderPanel } from './LogicBuilderPanel';

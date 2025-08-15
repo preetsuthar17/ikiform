@@ -1,8 +1,8 @@
-import type React from "react";
-import { useMemo, useState } from "react";
-import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import type React from 'react';
+import { useMemo, useState } from 'react';
+import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 
 interface TrendsChartProps {
   trends: Record<string, number>;
@@ -10,14 +10,14 @@ interface TrendsChartProps {
 
 const getFilteredTrends = (
   trends: Record<string, number>,
-  range: "7" | "30" | "all",
+  range: '7' | '30' | 'all'
 ) => {
   const dates = Object.keys(trends).sort(
-    (a, b) => new Date(a).getTime() - new Date(b).getTime(),
+    (a, b) => new Date(a).getTime() - new Date(b).getTime()
   );
   let filteredDates = dates;
-  if (range === "7") filteredDates = dates.slice(-7);
-  if (range === "30") filteredDates = dates.slice(-30);
+  if (range === '7') filteredDates = dates.slice(-7);
+  if (range === '30') filteredDates = dates.slice(-30);
   return filteredDates.map((date) => ({ date, value: trends[date] }));
 };
 
@@ -27,7 +27,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
       <div className="rounded-ele border border-border bg-card px-3 py-2 shadow-lg">
         <p className="mb-1 font-semibold text-foreground">{label}</p>
         <p className="m-0 text-muted-foreground">
-          Submissions:{" "}
+          Submissions:{' '}
           <span className="font-medium text-foreground">
             {payload[0].value}
           </span>
@@ -39,7 +39,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export const TrendsChart: React.FC<TrendsChartProps> = ({ trends }) => {
-  const [range, setRange] = useState<"7" | "30" | "all">("7");
+  const [range, setRange] = useState<'7' | '30' | 'all'>('7');
   const data = useMemo(() => getFilteredTrends(trends, range), [trends, range]);
 
   return (
@@ -50,23 +50,23 @@ export const TrendsChart: React.FC<TrendsChartProps> = ({ trends }) => {
         </h3>
         <div className="flex gap-2">
           <Button
-            onClick={() => setRange("7")}
+            onClick={() => setRange('7')}
             size="sm"
-            variant={range === "7" ? "default" : "outline"}
+            variant={range === '7' ? 'default' : 'outline'}
           >
             7d
           </Button>
           <Button
-            onClick={() => setRange("30")}
+            onClick={() => setRange('30')}
             size="sm"
-            variant={range === "30" ? "default" : "outline"}
+            variant={range === '30' ? 'default' : 'outline'}
           >
             30d
           </Button>
           <Button
-            onClick={() => setRange("all")}
+            onClick={() => setRange('all')}
             size="sm"
-            variant={range === "all" ? "default" : "outline"}
+            variant={range === 'all' ? 'default' : 'outline'}
           >
             All
           </Button>
@@ -95,7 +95,7 @@ export const TrendsChart: React.FC<TrendsChartProps> = ({ trends }) => {
             <XAxis
               axisLine={false}
               dataKey="date"
-              tick={{ fontSize: 12, fill: "hsl(var(--hu-muted-foreground))" }}
+              tick={{ fontSize: 12, fill: 'hsl(var(--hu-muted-foreground))' }}
               tickLine={false}
             />
             <Tooltip content={<CustomTooltip />} />

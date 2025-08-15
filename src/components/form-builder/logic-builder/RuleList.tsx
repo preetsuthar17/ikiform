@@ -1,9 +1,9 @@
-import { Pencil, Plus, Trash2 } from "lucide-react";
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import type { FormField } from "@/lib/database";
-import type { LogicActionCondition } from "./types";
+import { Pencil, Plus, Trash2 } from 'lucide-react';
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import type { FormField } from '@/lib/database';
+import type { LogicActionCondition } from './types';
 
 function RuleList({
   rules = [],

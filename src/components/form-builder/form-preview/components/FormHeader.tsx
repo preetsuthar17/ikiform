@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import type { FormHeaderProps } from "../types";
+import type { FormHeaderProps } from '../types';
 
-import { EditableField } from "./EditableField";
+import { EditableField } from './EditableField';
 
 export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
   const handleTitleUpdate = (title: string) => {
-    onFormSettingsUpdate?.({ title: title || "" });
+    onFormSettingsUpdate?.({ title: title || '' });
   };
 
   const handleDescriptionUpdate = (description: string) => {
@@ -24,7 +24,7 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
         value={schema.settings.title}
       >
         <h1 className="truncate font-bold text-3xl text-foreground">
-          {schema.settings.title || ""}
+          {schema.settings.title || ''}
         </h1>
       </EditableField>
 
@@ -36,10 +36,10 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
         onSave={handleDescriptionUpdate}
         placeholder="Click to add a description..."
         rows={Math.max(
-          (schema.settings.description || "").split("\n").length || 1,
-          1,
+          (schema.settings.description || '').split('\n').length || 1,
+          1
         )}
-        value={schema.settings.description || ""}
+        value={schema.settings.description || ''}
       >
         {schema.settings.description ? (
           <p className="whitespace-pre-wrap text-muted-foreground">

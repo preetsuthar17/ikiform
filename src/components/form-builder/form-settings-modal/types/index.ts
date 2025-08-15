@@ -1,4 +1,4 @@
-import type { FormSchema } from "@/lib/database";
+import type { FormSchema } from '@/lib/database';
 
 export interface FormSettingsModalProps {
   isOpen: boolean;
@@ -30,13 +30,13 @@ export interface LocalSettings {
   redirectUrl?: string;
 
   layout?: {
-    maxWidth?: "sm" | "md" | "lg" | "xl" | "full" | "custom";
+    maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'full' | 'custom';
     customWidth?: string;
-    padding?: "none" | "sm" | "md" | "lg";
-    margin?: "none" | "sm" | "md" | "lg";
-    borderRadius?: "none" | "sm" | "md" | "lg" | "xl";
-    spacing?: "compact" | "normal" | "relaxed";
-    alignment?: "left" | "center" | "right";
+    padding?: 'none' | 'sm' | 'md' | 'lg';
+    margin?: 'none' | 'sm' | 'md' | 'lg';
+    borderRadius?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
+    spacing?: 'compact' | 'normal' | 'relaxed';
+    alignment?: 'left' | 'center' | 'right';
   };
   colors?: {
     background?: string;
@@ -46,10 +46,10 @@ export interface LocalSettings {
   };
   typography?: {
     fontFamily?: string;
-    fontSize?: "xs" | "sm" | "base" | "lg" | "xl";
-    fontWeight?: "light" | "normal" | "medium" | "semibold" | "bold";
-    lineHeight?: "tight" | "normal" | "relaxed";
-    letterSpacing?: "tight" | "normal" | "wide";
+    fontSize?: 'xs' | 'sm' | 'base' | 'lg' | 'xl';
+    fontWeight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
+    lineHeight?: 'tight' | 'normal' | 'relaxed';
+    letterSpacing?: 'tight' | 'normal' | 'wide';
   };
   branding?: {
     socialMedia?: {
@@ -64,8 +64,8 @@ export interface LocalSettings {
         website?: string;
       };
       showIcons?: boolean;
-      iconSize?: "sm" | "md" | "lg";
-      position?: "footer" | "header" | "both";
+      iconSize?: 'sm' | 'md' | 'lg';
+      position?: 'footer' | 'header' | 'both';
     };
     showIkiformBranding?: boolean;
   };
@@ -119,14 +119,14 @@ export interface BasicInfoSectionProps {
 export interface RateLimitSectionProps {
   localSettings: LocalSettings;
   updateRateLimit: (
-    updates: Partial<NonNullable<LocalSettings["rateLimit"]>>,
+    updates: Partial<NonNullable<LocalSettings['rateLimit']>>
   ) => void;
 }
 
 export interface ProfanityFilterSectionProps {
   localSettings: LocalSettings;
   updateProfanityFilter: (
-    updates: Partial<NonNullable<LocalSettings["profanityFilter"]>>,
+    updates: Partial<NonNullable<LocalSettings['profanityFilter']>>
   ) => void;
 }
 
@@ -134,20 +134,20 @@ export interface SocialMediaSectionProps {
   localSettings: LocalSettings;
   updateSocialMedia: (
     updates: Partial<
-      NonNullable<NonNullable<LocalSettings["branding"]>["socialMedia"]>
-    >,
+      NonNullable<NonNullable<LocalSettings['branding']>['socialMedia']>
+    >
   ) => void;
 }
 
 export type FormSettingsSection =
-  | "basic"
-  | "limits"
-  | "security"
-  | "branding"
-  | "notifications"
-  | "design"
-  | "webhooks"
-  | "quiz";
+  | 'basic'
+  | 'limits'
+  | 'security'
+  | 'branding'
+  | 'notifications'
+  | 'design'
+  | 'webhooks'
+  | 'quiz';
 
 export interface FormSettingsSectionConfig {
   id: FormSettingsSection;

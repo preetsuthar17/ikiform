@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Modal,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalTitle,
-} from "@/components/ui/modal";
+} from '@/components/ui/modal';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import type { FieldSettingsProps } from "./types";
+} from '@/components/ui/select';
+import type { FieldSettingsProps } from './types';
 
 export function SchedulerFieldSettings({
   field,
@@ -37,7 +37,7 @@ export function SchedulerFieldSettings({
             onValueChange={(val) =>
               onUpdateSettings({ schedulerProvider: val as any })
             }
-            value={field.settings?.schedulerProvider || ""}
+            value={field.settings?.schedulerProvider || ''}
           >
             <SelectTrigger
               className="border-border bg-input"
@@ -57,14 +57,14 @@ export function SchedulerFieldSettings({
             <Label className="text-card-foreground" htmlFor="scheduler-link">
               {(() => {
                 switch (field.settings?.schedulerProvider) {
-                  case "calcom":
-                    return "Cal.com Link";
-                  case "calendly":
-                    return "Calendly Link";
-                  case "tidycal":
-                    return "TidyCal Link";
+                  case 'calcom':
+                    return 'Cal.com Link';
+                  case 'calendly':
+                    return 'Calendly Link';
+                  case 'tidycal':
+                    return 'TidyCal Link';
                   default:
-                    return "Scheduler Link";
+                    return 'Scheduler Link';
                 }
               })()}
             </Label>
@@ -87,8 +87,8 @@ export function SchedulerFieldSettings({
                 field.settings && field.settings.schedulerProvider
                   ? field.settings.schedulerLinks?.[
                       field.settings.schedulerProvider
-                    ] || ""
-                  : ""
+                    ] || ''
+                  : ''
               }
             />
           </div>
@@ -108,7 +108,7 @@ export function SchedulerFieldSettings({
             }
             placeholder="e.g. Book a Call"
             type="text"
-            value={field.settings?.schedulerButtonText || ""}
+            value={field.settings?.schedulerButtonText || ''}
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -126,7 +126,7 @@ export function SchedulerFieldSettings({
             onClick={() => setSchedulerModalOpen(true)}
             type="button"
           >
-            {field.settings?.schedulerButtonText || "Open Scheduler"}
+            {field.settings?.schedulerButtonText || 'Open Scheduler'}
           </Button>
           <Modal onOpenChange={setSchedulerModalOpen} open={schedulerModalOpen}>
             <ModalContent className="flex h-[95%] w-full max-w-[95%] flex-col gap-4">

@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import { AlignJustify, LogIn, MessageCircleIcon, User } from "lucide-react";
+import { AlignJustify, LogIn, MessageCircleIcon, User } from 'lucide-react';
 
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { useAuth } from "@/hooks/use-auth";
+import { useAuth } from '@/hooks/use-auth';
 
-import { Button } from "../ui/button";
+import { Button } from '../ui/button';
 import {
   Drawer,
   DrawerClose,
   DrawerContent,
   DrawerTrigger,
-} from "../ui/drawer";
+} from '../ui/drawer';
 
 export default function Header() {
   const { user } = useAuth();
 
   return (
     <nav className="mx-auto mt-10 flex w-full max-w-[95%] flex-wrap items-center justify-between gap-8 p-4 font-inter text-sm">
-      <div className="flex-1 justify-start flex flex-shrink-0 items-center gap-2">
+      <div className="flex flex-1 flex-shrink-0 items-center justify-start gap-2">
         <Link href="/">
           <span className="flex items-center justify-center gap-2 font-semibold text-3xl tracking-tight">
             <Image
@@ -34,7 +34,7 @@ export default function Header() {
           </span>
         </Link>
       </div>
-      <div className="flex-1 justify-center hidden items-center gap-8 md:flex">
+      <div className="hidden flex-1 items-center justify-center gap-8 md:flex">
         <nav className="flex items-center gap-4">
           <Button asChild variant="ghost">
             <Link href="/">Home</Link>
@@ -47,7 +47,7 @@ export default function Header() {
           </Button>
         </nav>
       </div>
-      <div className="flex-1 justify-end hidden gap-2 md:flex">
+      <div className="hidden flex-1 justify-end gap-2 md:flex">
         {user ? (
           <Button asChild className="font-medium" size="icon">
             <Link href="/dashboard">

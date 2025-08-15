@@ -1,4 +1,4 @@
-import type { User } from "@supabase/supabase-js";
+import type { User } from '@supabase/supabase-js';
 
 /**
  * Extract user's display name from various user metadata fields
@@ -8,8 +8,8 @@ export function extractUserName(user: User): string {
     user.user_metadata?.full_name ||
     user.user_metadata?.name ||
     user.user_metadata?.user_name ||
-    user.email?.split("@")[0] ||
-    "User"
+    user.email?.split('@')[0] ||
+    'User'
   );
 }
 

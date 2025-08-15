@@ -1,11 +1,11 @@
-import React from "react";
-import { Badge } from "@/components/ui/badge";
+import React from 'react';
+import { Badge } from '@/components/ui/badge';
 
-import { Card } from "@/components/ui/card";
+import { Card } from '@/components/ui/card';
 
-import type { StepHeaderProps } from "../types";
+import type { StepHeaderProps } from '../types';
 
-import { EditableField } from "./EditableField";
+import { EditableField } from './EditableField';
 
 export function StepHeader({
   currentStep,
@@ -48,7 +48,7 @@ export function StepHeader({
         onSave={handleDescriptionUpdate}
         placeholder="Click to add a step description..."
         rows={2}
-        value={currentStep.description || ""}
+        value={currentStep.description || ''}
       >
         {currentStep.description ? (
           <p className="whitespace-pre-wrap text-muted-foreground">

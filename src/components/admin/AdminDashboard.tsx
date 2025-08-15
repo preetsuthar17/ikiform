@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   BarChart3,
@@ -10,37 +10,36 @@ import {
   Trash2,
   TrendingUp,
   Users,
-} from "lucide-react";
-import { useState } from "react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
-import { AdminAnalytics } from "./components/AdminAnalytics";
-import { AdminDatabase } from "./components/AdminDatabase";
-import { AdminForms } from "./components/AdminForms";
-import { AdminUsers } from "./components/AdminUsers";
-import { GradientAreaChart } from "./components/charts";
-import { RedemptionCodeManager } from "./components/RedemptionCodeManager";
-import { useAdminData } from "./hooks/useAdminData";
+} from 'lucide-react';
+import { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Tabs, TabsContent } from '@/components/ui/tabs';
+import { AdminAnalytics } from './components/AdminAnalytics';
+import { AdminDatabase } from './components/AdminDatabase';
+import { AdminForms } from './components/AdminForms';
+import { AdminUsers } from './components/AdminUsers';
+import { GradientAreaChart } from './components/charts';
+import { RedemptionCodeManager } from './components/RedemptionCodeManager';
+import { useAdminData } from './hooks/useAdminData';
 
 export function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState("analytics");
+  const [activeTab, setActiveTab] = useState('analytics');
   const { refreshData, clearCache, loading, users, allForms, submissions } =
     useAdminData();
 
   const systemOverview = Array.from({ length: 7 }, (_, i) => {
     const date = new Date();
     date.setDate(date.getDate() - (6 - i));
-    const dateStr = date.toISOString().split("T")[0];
+    const dateStr = date.toISOString().split('T')[0];
 
     return {
-      date: date.toLocaleDateString("en-US", { weekday: "short" }),
+      date: date.toLocaleDateString('en-US', { weekday: 'short' }),
       activity:
         users.filter(
           (u) =>
-            u.created_at.startsWith(dateStr) ||
-            u.updated_at.startsWith(dateStr),
+            u.created_at.startsWith(dateStr) || u.updated_at.startsWith(dateStr)
         ).length +
         allForms.filter((f) => f.created_at.startsWith(dateStr)).length +
         submissions.filter((s) => s.submitted_at.startsWith(dateStr)).length,
@@ -67,8 +66,8 @@ export function AdminDashboard() {
             onClick={refreshData}
             variant="outline"
           >
-            <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
-            {loading ? "Refreshing..." : "Refresh Data"}
+            <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+            {loading ? 'Refreshing...' : 'Refresh Data'}
           </Button>
         </div>
       </div>
@@ -76,11 +75,11 @@ export function AdminDashboard() {
       <Tabs
         className="mb-6"
         items={[
-          { id: "analytics", icon: <BarChart3 /> },
-          { id: "users", icon: <Users /> },
-          { id: "forms", icon: <FileText /> },
-          { id: "redemption-codes", icon: <Gift /> },
-          { id: "database", icon: <Database /> },
+          { id: 'analytics', icon: <BarChart3 /> },
+          { id: 'users', icon: <Users /> },
+          { id: 'forms', icon: <FileText /> },
+          { id: 'redemption-codes', icon: <Gift /> },
+          { id: 'database', icon: <Database /> },
         ]}
         onValueChange={setActiveTab}
         value={activeTab}

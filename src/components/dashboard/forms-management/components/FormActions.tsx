@@ -1,15 +1,15 @@
-import { BarChart3, Code2, Edit, Eye, Share, Trash2 } from "lucide-react";
-import React from "react";
+import { BarChart3, Code2, Edit, Eye, Share, Trash2 } from 'lucide-react';
+import React from 'react';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 
-import type { FormActionsProps } from "../types";
+import type { FormActionsProps } from '../types';
 
 export function FormActions({
   form,
@@ -85,7 +85,7 @@ export function FormActions({
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
-              onClick={() => window.open(`/embed?formid=${form.id}`, "_blank")}
+              onClick={() => window.open(`/embed?formid=${form.id}`, '_blank')}
               size="icon"
               variant="secondary"
             >

@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { Eye, EyeOff } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { toast } from "@/hooks/use-toast";
-import { createClient } from "@/utils/supabase/client";
+import { Eye, EyeOff } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { toast } from '@/hooks/use-toast';
+import { createClient } from '@/utils/supabase/client';
 
 export default function ResetPasswordClient() {
   const searchParams = useSearchParams();
@@ -20,16 +20,16 @@ export default function ResetPasswordClient() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [sessionReady, setSessionReady] = useState(false);
   const [passwords, setPasswords] = useState({
-    password: "",
-    confirmPassword: "",
+    password: '',
+    confirmPassword: '',
   });
 
   useEffect(() => {
     const handleRecoverySession = async () => {
       const supabase = createClient();
 
-      const accessToken = searchParams.get("access_token");
-      const refreshToken = searchParams.get("refresh_token");
+      const accessToken = searchParams.get('access_token');
+      const refreshToken = searchParams.get('refresh_token');
 
       if (accessToken && refreshToken) {
         try {
@@ -39,26 +39,26 @@ export default function ResetPasswordClient() {
           });
 
           if (error) {
-            console.error("Session error:", error);
+            console.error('Session error:', error);
             toast.error(
-              "Invalid or expired reset link. Please request a new one.",
+              'Invalid or expired reset link. Please request a new one.'
             );
-            router.push("/login");
+            router.push('/login');
           } else if (data.session) {
             setSessionReady(true);
-            toast.success("Ready to reset your password!");
-            window.history.replaceState({}, "", "/reset-password");
+            toast.success('Ready to reset your password!');
+            window.history.replaceState({}, '', '/reset-password');
           }
         } catch (error) {
-          console.error("Recovery session error:", error);
-          toast.error("Something went wrong. Please try again.");
-          router.push("/login");
+          console.error('Recovery session error:', error);
+          toast.error('Something went wrong. Please try again.');
+          router.push('/login');
         }
       } else {
         toast.error(
-          "No reset token found. Please request a new password reset.",
+          'No reset token found. Please request a new password reset.'
         );
-        router.push("/login");
+        router.push('/login');
       }
     };
 
@@ -73,17 +73,17 @@ export default function ResetPasswordClient() {
     const { password, confirmPassword } = passwords;
 
     if (!(password && confirmPassword)) {
-      toast.error("Please fill in both password fields");
+      toast.error('Please fill in both password fields');
       return false;
     }
 
     if (password.length < 6) {
-      toast.error("Password must be at least 6 characters long");
+      toast.error('Password must be at least 6 characters long');
       return false;
     }
 
     if (password !== confirmPassword) {
-      toast.error("Passwords do not match");
+      toast.error('Passwords do not match');
       return false;
     }
 
@@ -106,12 +106,12 @@ export default function ResetPasswordClient() {
       if (error) {
         toast.error(error.message);
       } else {
-        toast.success("Password updated successfully!");
-        router.push("/dashboard");
+        toast.success('Password updated successfully!');
+        router.push('/dashboard');
       }
     } catch (error) {
-      console.error("Password reset error:", error);
-      toast.error("An unexpected error occurred. Please try again.");
+      console.error('Password reset error:', error);
+      toast.error('An unexpected error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -159,7 +159,7 @@ export default function ResetPasswordClient() {
           </div>
         </CardHeader>
 
-        <CardContent className="w-full flex flex-col gap-4">
+        <CardContent className="flex w-full flex-col gap-4">
           <form className="flex flex-col gap-4" onSubmit={handleResetPassword}>
             <div className="flex flex-col gap-2">
               <Label htmlFor="password">New Password</Label>
@@ -169,11 +169,11 @@ export default function ResetPasswordClient() {
                   disabled={loading || !sessionReady}
                   id="password"
                   onChange={(e) =>
-                    handlePasswordChange("password", e.target.value)
+                    handlePasswordChange('password', e.target.value)
                   }
                   placeholder="Enter your new password"
                   required
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword ? 'text' : 'password'}
                   value={passwords.password}
                 />
                 <Button
@@ -201,11 +201,11 @@ export default function ResetPasswordClient() {
                   disabled={loading || !sessionReady}
                   id="confirmPassword"
                   onChange={(e) =>
-                    handlePasswordChange("confirmPassword", e.target.value)
+                    handlePasswordChange('confirmPassword', e.target.value)
                   }
                   placeholder="Confirm your new password"
                   required
-                  type={showConfirmPassword ? "text" : "password"}
+                  type={showConfirmPassword ? 'text' : 'password'}
                   value={passwords.confirmPassword}
                 />
                 <Button
@@ -234,7 +234,7 @@ export default function ResetPasswordClient() {
               size="lg"
               type="submit"
             >
-              {loading ? "Updating..." : "Update Password"}
+              {loading ? 'Updating...' : 'Update Password'}
             </Button>
           </form>
 

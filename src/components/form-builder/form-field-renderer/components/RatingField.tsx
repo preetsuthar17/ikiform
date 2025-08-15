@@ -1,6 +1,6 @@
-import { Heart, Star } from "lucide-react";
-import type React from "react";
-import type { BaseFieldProps } from "../types";
+import { Heart, Star } from 'lucide-react';
+import type React from 'react';
+import type { BaseFieldProps } from '../types';
 
 const ICONS: Record<string, React.ElementType> = {
   star: Star,
@@ -15,8 +15,8 @@ export function RatingField({
   disabled,
 }: BaseFieldProps) {
   const starCount = field.settings?.starCount || 5;
-  const iconType = field.settings?.icon || "star";
-  const color = field.settings?.color || "#fbbf24";
+  const iconType = field.settings?.icon || 'star';
+  const color = field.settings?.color || '#fbbf24';
   const starSize = field.settings?.starSize || 28;
   const Icon = ICONS[iconType] || Star;
 
@@ -35,10 +35,10 @@ export function RatingField({
             <Icon
               className={
                 value && value > idx
-                  ? "transition-colors"
-                  : "opacity-60 transition-colors"
+                  ? 'transition-colors'
+                  : 'opacity-60 transition-colors'
               }
-              fill={value && value > idx ? color : "none"}
+              fill={value && value > idx ? color : 'none'}
               size={starSize}
               stroke={color}
             />

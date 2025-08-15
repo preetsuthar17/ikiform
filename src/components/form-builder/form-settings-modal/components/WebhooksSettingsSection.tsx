@@ -1,15 +1,15 @@
-import { Link2 } from "lucide-react";
-import React from "react";
-import { FaQuestion } from "react-icons/fa6";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+import { Link2 } from 'lucide-react';
+import React from 'react';
+import { FaQuestion } from 'react-icons/fa6';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { WebhookManagementPanel } from "@/components/webhooks/WebhookManagementPanel";
+} from '@/components/ui/tooltip';
+import { WebhookManagementPanel } from '@/components/webhooks/WebhookManagementPanel';
 
 export function WebhooksSettingsSection({ formId }: { formId: string }) {
   return (
@@ -21,8 +21,8 @@ export function WebhooksSettingsSection({ formId }: { formId: string }) {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
-                <Badge size={"sm"} variant={"secondary"}>
-                  Beta <FaQuestion size={"10"} />
+                <Badge size={'sm'} variant={'secondary'}>
+                  Beta <FaQuestion size={'10'} />
                 </Badge>
                 <TooltipContent>
                   this feature is still under testing you may face some bugs.

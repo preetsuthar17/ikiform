@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from '@/components/ui/checkbox';
 
-import type { BaseFieldProps } from "../types";
-import { sanitizeOptions } from "../utils/sanitizeOptions";
+import type { BaseFieldProps } from '../types';
+import { sanitizeOptions } from '../utils/sanitizeOptions';
 
 /**
  * Client-side CheckboxField component
@@ -51,13 +51,13 @@ export function CheckboxFieldClient({
           setLoading(false);
         })
         .catch((err) => {
-          setFetchError("Failed to fetch options");
+          setFetchError('Failed to fetch options');
           setLoading(false);
         });
     } else {
       setApiOptions(null);
     }
-  }, [field.optionsApi, field.valueKey ?? "", field.labelKey ?? ""]);
+  }, [field.optionsApi, field.valueKey ?? '', field.labelKey ?? '']);
 
   const options = apiOptions ?? field.options ?? [];
 
@@ -65,9 +65,9 @@ export function CheckboxFieldClient({
     <div className="flex flex-col gap-2">
       {fetchError && <div className="p-2 text-red-500">{fetchError}</div>}
       {options.map((option, index) => {
-        const optionValue = typeof option === "string" ? option : option.value;
+        const optionValue = typeof option === 'string' ? option : option.value;
         const optionLabel =
-          typeof option === "string" ? option : option.label || option.value;
+          typeof option === 'string' ? option : option.label || option.value;
         return (
           <Checkbox
             checked={(value || []).includes(optionValue)}
@@ -81,7 +81,7 @@ export function CheckboxFieldClient({
                 onChange([...currentValues, optionValue]);
               } else {
                 onChange(
-                  currentValues.filter((v: string) => v !== optionValue),
+                  currentValues.filter((v: string) => v !== optionValue)
                 );
               }
             }}

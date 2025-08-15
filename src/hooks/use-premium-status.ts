@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import type { User } from "@supabase/supabase-js";
-import { useEffect, useRef, useState } from "react";
-import { createClient } from "@/utils/supabase/client";
+import type { User } from '@supabase/supabase-js';
+import { useEffect, useRef, useState } from 'react';
+import { createClient } from '@/utils/supabase/client';
 
 interface PremiumStatus {
   hasPremium: boolean;
@@ -48,9 +48,9 @@ export function usePremiumStatus(user: User | null): PremiumStatus {
       try {
         const supabase = createClient();
         const { data, error } = await supabase
-          .from("users")
-          .select("has_premium, polar_customer_id")
-          .eq("email", user.email)
+          .from('users')
+          .select('has_premium, polar_customer_id')
+          .eq('email', user.email)
           .single();
 
         if (!error && data) {
@@ -67,7 +67,7 @@ export function usePremiumStatus(user: User | null): PremiumStatus {
         }
         lastCheckedEmail.current = user.email;
       } catch (error) {
-        console.error("Error checking premium status:", error);
+        console.error('Error checking premium status:', error);
         setHasPremium(false);
         setHasCustomerPortal(false);
       } finally {

@@ -1,16 +1,16 @@
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
-import { SignatureFieldSkeleton } from "./signature-field-skeleton";
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
+import { SignatureFieldSkeleton } from './signature-field-skeleton';
 
 const SignatureFieldClient = dynamic(
   () =>
-    import("./signature-field-client").then((mod) => ({
+    import('./signature-field-client').then((mod) => ({
       default: mod.SignatureFieldClient,
     })),
   {
     ssr: false,
     loading: () => <SignatureFieldSkeleton />,
-  },
+  }
 );
 
 interface SignatureFieldOptimizedProps {

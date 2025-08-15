@@ -1,9 +1,9 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import type { FieldSettingsProps } from "./types";
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import type { FieldSettingsProps } from './types';
 
 export function SocialFieldSettings({
   field,
@@ -14,13 +14,13 @@ export function SocialFieldSettings({
       <h3 className="font-medium text-card-foreground">Social Platforms</h3>
       <div className="mb-2 flex flex-wrap gap-3">
         {[
-          { key: "github", label: "GitHub" },
-          { key: "twitter", label: "Twitter" },
-          { key: "linkedin", label: "LinkedIn" },
-          { key: "facebook", label: "Facebook" },
-          { key: "instagram", label: "Instagram" },
-          { key: "youtube", label: "YouTube" },
-          { key: "website", label: "Website" },
+          { key: 'github', label: 'GitHub' },
+          { key: 'twitter', label: 'Twitter' },
+          { key: 'linkedin', label: 'LinkedIn' },
+          { key: 'facebook', label: 'Facebook' },
+          { key: 'instagram', label: 'Instagram' },
+          { key: 'youtube', label: 'YouTube' },
+          { key: 'website', label: 'Website' },
         ].map((platform) => (
           <label
             className="flex cursor-pointer items-center gap-2"
@@ -67,7 +67,7 @@ export function SocialFieldSettings({
               }}
               placeholder="Placeholder (optional)"
               type="text"
-              value={link.placeholder || ""}
+              value={link.placeholder || ''}
             />
             <Button
               className="shrink-0"
@@ -89,7 +89,7 @@ export function SocialFieldSettings({
           onClick={() => {
             const updated = [
               ...(field.settings?.customLinks || []),
-              { label: "", placeholder: "" },
+              { label: '', placeholder: '' },
             ];
             onUpdateSettings({ customLinks: updated });
           }}

@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -26,12 +26,12 @@ export async function uploadFile(
   file: File,
   formId: string,
   fieldId: string,
-  submissionId?: string,
+  submissionId?: string
 ): Promise<FileUploadResult> {
   try {
     const timestamp = Date.now();
     const randomId = Math.random().toString(36).substring(2, 15);
-    const fileExtension = file.name.split(".").pop();
+    const fileExtension = file.name.split('.').pop();
     const fileName = `${timestamp}_${randomId}.${fileExtension}`;
 
     const basePath = submissionId
@@ -41,9 +41,9 @@ export async function uploadFile(
     const filePath = `${basePath}/${fileName}`;
 
     const { data, error } = await supabase.storage
-      .from("form-files")
+      .from('form-files')
       .upload(filePath, file, {
-        cacheControl: "3600",
+        cacheControl: '3600',
         upsert: false,
       });
 
@@ -51,12 +51,12 @@ export async function uploadFile(
       throw new Error(`Upload failed: ${error.message}`);
     }
 
-    let signedUrl = "";
+    let signedUrl = '';
 
     if (supabaseAdmin) {
       const { data: adminUrlData, error: adminUrlError } =
         await supabaseAdmin.storage
-          .from("form-files")
+          .from('form-files')
           .createSignedUrl(filePath, 60 * 60 * 24 * 7);
 
       if (!adminUrlError && adminUrlData) {
@@ -67,7 +67,7 @@ export async function uploadFile(
     if (!signedUrl) {
       const { data: signedUrlData, error: fallbackError } =
         await supabase.storage
-          .from("form-files")
+          .from('form-files')
           .createSignedUrl(filePath, 60 * 60 * 24);
 
       if (!fallbackError && signedUrlData) {
@@ -82,7 +82,7 @@ export async function uploadFile(
     return {
       id: data.id,
       path: data.path,
-      signedUrl: signedUrl,
+      signedUrl,
       fullPath: data.fullPath,
     };
   } catch (error) {
@@ -93,14 +93,14 @@ export async function uploadFile(
 export async function deleteFile(filePath: string): Promise<void> {
   try {
     const { error } = await supabase.storage
-      .from("form-files")
+      .from('form-files')
       .remove([filePath]);
 
     if (error) {
       throw new Error(`Delete failed: ${error.message}`);
     }
   } catch (error) {
-    console.error("File delete error:", error);
+    console.error('File delete error:', error);
     throw error;
   }
 }
@@ -110,11 +110,11 @@ export async function deleteFile(filePath: string): Promise<void> {
  */
 export async function getSignedUrl(
   filePath: string,
-  expiresIn: number = 3600,
+  expiresIn = 3600
 ): Promise<string> {
   try {
     const { data, error } = await supabase.storage
-      .from("form-files")
+      .from('form-files')
       .createSignedUrl(filePath, expiresIn);
 
     if (error) {
@@ -123,7 +123,7 @@ export async function getSignedUrl(
 
     return data.signedUrl;
   } catch (error) {
-    console.error("Signed URL error:", error);
+    console.error('Signed URL error:', error);
     throw error;
   }
 }
@@ -133,7 +133,7 @@ export async function getSignedUrl(
  */
 export async function refreshSignedUrls(
   filePaths: string[],
-  expiresIn: number = 86400,
+  expiresIn = 86_400
 ): Promise<Record<string, string>> {
   try {
     const signedUrls: Record<string, string> = {};
@@ -146,7 +146,7 @@ export async function refreshSignedUrls(
     await Promise.all(promises);
     return signedUrls;
   } catch (error) {
-    console.error("Refresh signed URLs error:", error);
+    console.error('Refresh signed URLs error:', error);
     throw error;
   }
 }
@@ -157,7 +157,7 @@ export async function refreshSignedUrls(
 export async function listFiles(folderPath: string) {
   try {
     const { data, error } = await supabase.storage
-      .from("form-files")
+      .from('form-files')
       .list(folderPath);
 
     if (error) {
@@ -166,7 +166,7 @@ export async function listFiles(folderPath: string) {
 
     return data;
   } catch (error) {
-    console.error("List files error:", error);
+    console.error('List files error:', error);
     throw error;
   }
 }
@@ -176,7 +176,7 @@ export async function listFiles(folderPath: string) {
  */
 export async function getFileMetadata(filePath: string) {
   try {
-    const { data, error } = await supabase.storage.from("form-files").list("", {
+    const { data, error } = await supabase.storage.from('form-files').list('', {
       search: filePath,
     });
 
@@ -186,7 +186,7 @@ export async function getFileMetadata(filePath: string) {
 
     return data[0] || null;
   } catch (error) {
-    console.error("Get metadata error:", error);
+    console.error('Get metadata error:', error);
     throw error;
   }
 }

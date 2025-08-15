@@ -1,10 +1,10 @@
-import { Check, Copy, Download } from "lucide-react";
-import type React from "react";
-import { useCallback, useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { OptimizedImage } from "@/components/other/optimized-image";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Check, Copy, Download } from 'lucide-react';
+import type React from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import { OptimizedImage } from '@/components/other/optimized-image';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 import {
   Modal,
@@ -12,20 +12,20 @@ import {
   ModalContent,
   ModalHeader,
   ModalTitle,
-} from "@/components/ui/modal";
+} from '@/components/ui/modal';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import type { Form } from "@/lib/database";
+} from '@/components/ui/tooltip';
+import type { Form } from '@/lib/database';
 
-import type { SubmissionDetailsModalProps } from "../types";
+import type { SubmissionDetailsModalProps } from '../types';
 
 function getFieldType(
   form: Form | undefined,
-  fieldId: string,
+  fieldId: string
 ): string | undefined {
   if (!(form && form.schema)) return;
   const allFields = [
@@ -56,18 +56,18 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
         .map(
           ([key, value]) =>
             `${getFieldLabel(key)}: ${
-              typeof value === "object"
+              typeof value === 'object'
                 ? JSON.stringify(value, null, 2)
                 : String(value)
-            }`,
+            }`
         )
-        .join("\n\n");
+        .join('\n\n');
 
-      const { copyWithToast } = await import("@/lib/utils/clipboard");
+      const { copyWithToast } = await import('@/lib/utils/clipboard');
       const success = await copyWithToast(
         submissionText,
-        "Submission data copied to clipboard",
-        "Failed to copy submission data",
+        'Submission data copied to clipboard',
+        'Failed to copy submission data'
       );
 
       if (success) {
@@ -75,7 +75,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
         setTimeout(() => setCopied(false), 2000);
       }
     } catch (error) {
-      console.error("Failed to copy submission data:", error);
+      console.error('Failed to copy submission data:', error);
     }
   }, [submission?.submission_data, getFieldLabel]);
 
@@ -149,9 +149,9 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                   const fieldType = getFieldType(form, key);
 
                   if (
-                    fieldType === "signature" &&
-                    typeof value === "string" &&
-                    value.startsWith("data:image")
+                    fieldType === 'signature' &&
+                    typeof value === 'string' &&
+                    value.startsWith('data:image')
                   ) {
                     return (
                       <div
@@ -175,15 +175,15 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                   }
 
                   if (
-                    fieldType === "social" &&
-                    typeof value === "object" &&
+                    fieldType === 'social' &&
+                    typeof value === 'object' &&
                     value !== null &&
                     form
                   ) {
                     const allFields = [
                       ...(form.schema.fields || []),
                       ...(form.schema.blocks?.flatMap(
-                        (block) => block.fields || [],
+                        (block) => block.fields || []
                       ) || []),
                     ];
                     const field = allFields.find((f) => f.id === key);
@@ -199,10 +199,10 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                         <div className="ml-2 flex flex-col gap-1 border-l pl-3">
                           {Object.entries(value).map(([k, url]) => {
                             let label = k;
-                            if (k.startsWith("custom_")) {
+                            if (k.startsWith('custom_')) {
                               const idx = Number.parseInt(
-                                k.replace("custom_", ""),
-                                10,
+                                k.replace('custom_', ''),
+                                10
                               );
                               label =
                                 customLinks[idx]?.label ||
@@ -220,7 +220,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                                   rel="noopener noreferrer"
                                   target="_blank"
                                 >
-                                  {typeof url === "string" ? url : ""}
+                                  {typeof url === 'string' ? url : ''}
                                 </a>
                               </div>
                             );
@@ -230,7 +230,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                     );
                   }
 
-                  if (fieldType === "file" && value) {
+                  if (fieldType === 'file' && value) {
                     // Handle new UploadedFile structure or legacy string URLs
                     const files = Array.isArray(value) ? value : [value];
                     return (
@@ -246,65 +246,65 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                             // Handle new file object structure
                             if (
                               file &&
-                              typeof file === "object" &&
+                              typeof file === 'object' &&
                               file.signedUrl
                             ) {
                               const isImage =
-                                file.type?.startsWith("image/") ||
+                                file.type?.startsWith('image/') ||
                                 file.signedUrl.match(
-                                  /\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i,
+                                  /\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i
                                 );
 
                               return (
                                 <div
+                                  className="flex items-start gap-3 rounded-lg border bg-card p-2"
                                   key={file.id || idx}
-                                  className="flex items-start gap-3 p-2 rounded-lg border bg-card"
                                 >
                                   {isImage ? (
                                     <a
+                                      className="flex-shrink-0"
                                       href={file.signedUrl}
                                       rel="noopener noreferrer"
                                       target="_blank"
-                                      className="flex-shrink-0"
                                     >
                                       <img
-                                        alt={file.name || "Uploaded file"}
+                                        alt={file.name || 'Uploaded file'}
                                         className="h-16 w-16 rounded-md border object-cover"
                                         src={file.signedUrl}
                                       />
                                     </a>
                                   ) : (
                                     <div className="flex h-16 w-16 items-center justify-center rounded-md bg-accent">
-                                      <span className="text-xs font-medium">
+                                      <span className="font-medium text-xs">
                                         {file.name
-                                          ?.split(".")
+                                          ?.split('.')
                                           .pop()
-                                          ?.toUpperCase() || "FILE"}
+                                          ?.toUpperCase() || 'FILE'}
                                       </span>
                                     </div>
                                   )}
 
-                                  <div className="flex-1 min-w-0">
-                                    <p className="font-medium text-sm truncate">
-                                      {file.name || "Unknown file"}
+                                  <div className="min-w-0 flex-1">
+                                    <p className="truncate font-medium text-sm">
+                                      {file.name || 'Unknown file'}
                                     </p>
-                                    <div className="flex items-center gap-2 mt-1">
-                                      <Badge variant="secondary" size="sm">
+                                    <div className="mt-1 flex items-center gap-2">
+                                      <Badge size="sm" variant="secondary">
                                         {file.size
                                           ? `${(file.size / 1024 / 1024).toFixed(1)} MB`
-                                          : "Unknown size"}
+                                          : 'Unknown size'}
                                       </Badge>
                                       {file.type && (
-                                        <Badge variant="outline" size="sm">
+                                        <Badge size="sm" variant="outline">
                                           {file.type}
                                         </Badge>
                                       )}
                                     </div>
                                     <a
+                                      className="mt-1 inline-block text-primary text-xs hover:underline"
                                       href={file.signedUrl}
                                       rel="noopener noreferrer"
                                       target="_blank"
-                                      className="text-primary hover:underline text-xs mt-1 inline-block"
                                     >
                                       Download
                                     </a>
@@ -314,9 +314,9 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                             }
 
                             // Handle legacy string URLs
-                            if (file && typeof file === "string") {
+                            if (file && typeof file === 'string') {
                               const isImage = file.match(
-                                /\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i,
+                                /\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i
                               );
                               return isImage ? (
                                 <a
@@ -360,13 +360,13 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                         {getFieldLabel(key)}
                       </h3>
                       <p className="ml-2 whitespace-pre-wrap border-l pl-3 text-muted-foreground text-sm">
-                        {typeof value === "object"
+                        {typeof value === 'object'
                           ? JSON.stringify(value, null, 2)
                           : String(value)}
                       </p>
                     </div>
                   );
-                },
+                }
               )}
             </div>
           </div>

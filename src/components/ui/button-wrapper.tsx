@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Suspense } from "react";
-import { Button as BaseButton, type ButtonProps } from "./button-base";
-import { Skeleton } from "./skeleton";
+import { Suspense } from 'react';
+import { Button as BaseButton, type ButtonProps } from './button-base';
+import { Skeleton } from './skeleton';
 
 interface SuspenseButtonProps extends ButtonProps {
   loading?: boolean;

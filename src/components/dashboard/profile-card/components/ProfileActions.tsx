@@ -1,15 +1,15 @@
-import { MoreVertical, Settings } from "lucide-react";
-import React from "react";
+import { MoreVertical, Settings } from 'lucide-react';
+import React from 'react';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 
-import type { ProfileActionsProps } from "../types";
+import type { ProfileActionsProps } from '../types';
 
 export function ProfileActions({
   onSettingsClick,

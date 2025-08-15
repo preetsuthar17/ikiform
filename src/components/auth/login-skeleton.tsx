@@ -1,10 +1,10 @@
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from '@/components/ui/skeleton';
 
 export function LoginSkeleton() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted">
       <div className="w-full max-w-xs sm:max-w-sm md:max-w-md">
-        <div className="rounded-xl bg-white p-6 shadow-md border flex flex-col gap-6">
+        <div className="flex flex-col gap-6 rounded-xl border bg-white p-6 shadow-md">
           {/* Title and subtitle */}
           <div className="flex flex-col gap-2 text-center">
             <Skeleton className="mx-auto h-6 w-32" />
@@ -27,9 +27,9 @@ export function LoginSkeleton() {
 
           {/* Divider */}
           <div className="flex items-center gap-2">
-            <div className="flex-1 h-px bg-muted-foreground/20" />
+            <div className="h-px flex-1 bg-muted-foreground/20" />
             <Skeleton className="h-4 w-8" />
-            <div className="flex-1 h-px bg-muted-foreground/20" />
+            <div className="h-px flex-1 bg-muted-foreground/20" />
           </div>
 
           {/* Social login buttons */}

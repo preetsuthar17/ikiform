@@ -1,35 +1,36 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import { ArrowLeft, Eye, Palette, Type, Layout, Monitor } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
-import { toast } from "@/hooks/use-toast";
-import { formsDb } from "@/lib/database";
-import type { FormSchema } from "@/lib/database";
-import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
+import { ArrowLeft, Eye, Layout, Monitor, Palette, Type } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
+import type { LocalSettings } from '@/components/form-builder/form-settings-modal/types';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Separator } from '@/components/ui/separator';
+import { toast } from '@/hooks/use-toast';
+import type { FormSchema } from '@/lib/database';
+import { formsDb } from '@/lib/database';
 
-import { 
-  ColorCustomizationSection,
-  TypographyCustomizationSection,
-  LayoutCustomizationSection,
+import {
   ActualFormPreview,
-  PresetsSection
-} from "./components";
+  ColorCustomizationSection,
+  LayoutCustomizationSection,
+  PresetsSection,
+  TypographyCustomizationSection,
+} from './components';
 
 interface FormCustomizePageProps {
   formId: string;
   schema: FormSchema;
 }
 
-type CustomizeSection = "presets" | "layout" | "colors" | "typography";
+type CustomizeSection = 'presets' | 'layout' | 'colors' | 'typography';
 
 export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
   const router = useRouter();
-  const [activeSection, setActiveSection] = useState<CustomizeSection>("presets");
+  const [activeSection, setActiveSection] =
+    useState<CustomizeSection>('presets');
 
   const [previewMode, setPreviewMode] = useState(false);
 
@@ -46,15 +47,15 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
   const updateSettings = async (updates: Partial<LocalSettings>) => {
     const newSettings = { ...localSettings, ...updates };
     setLocalSettings(newSettings);
-    
+
     // Auto-save to database
     try {
       const newSchema = { ...schema, settings: newSettings };
       await formsDb.updateForm(formId, { schema: newSchema as any });
-      console.log("Auto-saved form customization");
+      console.log('Auto-saved form customization');
     } catch (error) {
-      console.error("Error auto-saving form customization:", error);
-      toast.error("Failed to save changes. Please try again.");
+      console.error('Error auto-saving form customization:', error);
+      toast.error('Failed to save changes. Please try again.');
     }
   };
 
@@ -67,15 +68,15 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
       branding: (schema.settings as any).branding || {},
     };
     setLocalSettings(originalSettings);
-    
+
     // Auto-save the reset directly to database
     try {
       const newSchema = { ...schema, settings: originalSettings };
       await formsDb.updateForm(formId, { schema: newSchema as any });
-      toast.success("Customization reset to defaults");
+      toast.success('Customization reset to defaults');
     } catch (error) {
-      console.error("Error resetting form customization:", error);
-      toast.error("Failed to reset customization. Please try again.");
+      console.error('Error resetting form customization:', error);
+      toast.error('Failed to reset customization. Please try again.');
     }
   };
 
@@ -84,7 +85,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
   };
 
   const handlePreview = () => {
-    const previewUrl = schema.settings.multiStep 
+    const previewUrl = schema.settings.multiStep
       ? `/f/${(schema as any).slug}`
       : `/f/${(schema as any).slug}`;
     window.open(previewUrl, '_blank');
@@ -92,42 +93,46 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 
   const sections = [
     {
-      id: "presets" as const,
-      label: "Presets",
+      id: 'presets' as const,
+      label: 'Presets',
       icon: Palette,
-      description: "Quick-start with beautiful pre-designed styles"
+      description: 'Quick-start with beautiful pre-designed styles',
     },
     {
-      id: "layout" as const,
-      label: "Layout",
+      id: 'layout' as const,
+      label: 'Layout',
       icon: Layout,
-      description: "Form width, spacing, and layout options"
+      description: 'Form width, spacing, and layout options',
     },
     {
-      id: "colors" as const,
-      label: "Colors",
+      id: 'colors' as const,
+      label: 'Colors',
       icon: Palette,
-      description: "Background, text, primary, and border colors"
+      description: 'Background, text, primary, and border colors',
     },
     {
-      id: "typography" as const,
-      label: "Typography",
+      id: 'typography' as const,
+      label: 'Typography',
       icon: Type,
-      description: "Font family, size, and text styling"
-    }
+      description: 'Font family, size, and text styling',
+    },
   ];
 
   if (previewMode) {
     return (
-      <div className="h-screen bg-background flex flex-col">
-        <div className="border-b bg-background p-4 flex-shrink-0">
+      <div className="flex h-screen flex-col bg-background">
+        <div className="flex-shrink-0 border-b bg-background p-4">
           <div className="flex items-center justify-between">
-            <Button onClick={() => setPreviewMode(false)} variant="outline" className="gap-2">
+            <Button
+              className="gap-2"
+              onClick={() => setPreviewMode(false)}
+              variant="outline"
+            >
               <ArrowLeft className="h-4 w-4" />
               Back to Customization
             </Button>
             <div className="flex items-center gap-2">
-              <span className="text-sm text-muted-foreground">
+              <span className="text-muted-foreground text-sm">
                 Changes auto-saved
               </span>
             </div>
@@ -135,10 +140,10 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
         </div>
         <ScrollArea className="flex-1">
           <div className="p-8">
-            <ActualFormPreview 
+            <ActualFormPreview
+              className="mx-auto max-w-4xl"
               localSettings={localSettings}
               schema={schema}
-              className="mx-auto max-w-4xl"
             />
           </div>
         </ScrollArea>
@@ -147,33 +152,44 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
   }
 
   return (
-    <div className="h-screen bg-background flex flex-col">
+    <div className="flex h-screen flex-col bg-background">
       {/* Header */}
-      <div className="border-b bg-background p-4 flex-shrink-0">
+      <div className="flex-shrink-0 border-b bg-background p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Button onClick={handleBack} variant="outline" size="sm" className="gap-2">
+            <Button
+              className="gap-2"
+              onClick={handleBack}
+              size="sm"
+              variant="outline"
+            >
               <ArrowLeft className="h-4 w-4" />
               Back
             </Button>
             <div>
               <h1 className="font-semibold text-xl">Customize Form</h1>
-              <p className="text-muted-foreground text-sm">{localSettings.title}</p>
+              <p className="text-muted-foreground text-sm">
+                {localSettings.title}
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button onClick={() => setPreviewMode(true)} variant="outline" className="gap-2">
+            <Button
+              className="gap-2"
+              onClick={() => setPreviewMode(true)}
+              variant="outline"
+            >
               <Eye className="h-4 w-4" />
               Preview
             </Button>
-            <Button onClick={handlePreview} variant="outline" className="gap-2">
+            <Button className="gap-2" onClick={handlePreview} variant="outline">
               <Monitor className="h-4 w-4" />
               Live Preview
             </Button>
             <Button onClick={resetSettings} variant="outline">
               Reset to Default
             </Button>
-            <span className="text-sm text-muted-foreground">
+            <span className="text-muted-foreground text-sm">
               Changes auto-saved
             </span>
           </div>
@@ -182,32 +198,34 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 
       <div className="flex flex-1 overflow-hidden">
         {/* Left Sidebar - Categories */}
-        <div className="w-64 border-r bg-muted/30 flex flex-col">
+        <div className="flex w-64 flex-col border-r bg-muted/30">
           <ScrollArea className="flex-1">
             <div className="p-4">
-              <div className="flex flex-col gap-2 mb-6">
+              <div className="mb-6 flex flex-col gap-2">
                 <h2 className="font-medium text-foreground">Customize</h2>
                 <p className="text-muted-foreground text-xs">
                   Select a category to customize
                 </p>
               </div>
-              
+
               <div className="flex flex-col gap-1">
                 {sections.map((section) => {
                   const Icon = section.icon;
                   return (
                     <button
-                      key={section.id}
-                      onClick={() => setActiveSection(section.id)}
                       className={`w-full rounded-lg p-3 text-left transition-colors ${
                         activeSection === section.id
-                          ? "bg-primary text-primary-foreground"
-                          : "hover:bg-accent hover:text-accent-foreground"
+                          ? 'bg-primary text-primary-foreground'
+                          : 'hover:bg-accent hover:text-accent-foreground'
                       }`}
+                      key={section.id}
+                      onClick={() => setActiveSection(section.id)}
                     >
                       <div className="flex items-center gap-3">
                         <Icon className="h-4 w-4" />
-                        <div className="font-medium text-sm">{section.label}</div>
+                        <div className="font-medium text-sm">
+                          {section.label}
+                        </div>
                       </div>
                     </button>
                   );
@@ -218,41 +236,41 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
         </div>
 
         {/* Center - Form Preview */}
-        <div className="flex-1 flex items-center justify-center p-8 bg-muted/10 overflow-hidden">
+        <div className="flex flex-1 items-center justify-center overflow-hidden bg-muted/10 p-8">
           <div className="w-full max-w-2xl">
             <div className="sticky top-8">
-              <ActualFormPreview 
+              <ActualFormPreview
+                className="mx-auto"
                 localSettings={localSettings}
                 schema={schema}
-                className="mx-auto"
               />
             </div>
           </div>
         </div>
 
         {/* Right Sidebar - Settings */}
-        <div className="w-96 border-l bg-background flex flex-col">
+        <div className="flex w-96 flex-col border-l bg-background">
           <ScrollArea className="flex-1">
             <div className="p-6">
-              {activeSection === "presets" && (
+              {activeSection === 'presets' && (
                 <PresetsSection
                   localSettings={localSettings}
                   updateSettings={updateSettings}
                 />
               )}
-              {activeSection === "layout" && (
+              {activeSection === 'layout' && (
                 <LayoutCustomizationSection
                   localSettings={localSettings}
                   updateSettings={updateSettings}
                 />
               )}
-              {activeSection === "colors" && (
+              {activeSection === 'colors' && (
                 <ColorCustomizationSection
                   localSettings={localSettings}
                   updateSettings={updateSettings}
                 />
               )}
-              {activeSection === "typography" && (
+              {activeSection === 'typography' && (
                 <TypographyCustomizationSection
                   localSettings={localSettings}
                   updateSettings={updateSettings}

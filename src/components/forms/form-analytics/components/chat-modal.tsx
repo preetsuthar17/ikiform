@@ -1,5 +1,5 @@
-import { Bot } from "lucide-react";
-import type React from "react";
+import { Bot } from 'lucide-react';
+import type React from 'react';
 import {
   Drawer,
   DrawerCloseButton,
@@ -7,7 +7,7 @@ import {
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-} from "@/components/ui/drawer";
+} from '@/components/ui/drawer';
 
 import {
   Modal,
@@ -15,11 +15,11 @@ import {
   ModalContent,
   ModalHeader,
   ModalTitle,
-} from "@/components/ui/modal";
+} from '@/components/ui/modal';
 
-import type { ChatModalProps } from "../types";
+import type { ChatModalProps } from '../types';
 
-import { ChatInterface } from "./chat-interface";
+import { ChatInterface } from './chat-interface';
 
 export const ChatModal: React.FC<ChatModalProps> = ({
   isOpen,

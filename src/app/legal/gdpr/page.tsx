@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function GDPR() {
   return (
@@ -218,7 +218,7 @@ export default function GDPR() {
         <div className="flex flex-col gap-1">
           <div>DPO Name: Preet Suthar</div>
           <div>
-            Email:{" "}
+            Email:{' '}
             <Link
               className="text-blue-500 underline"
               href="mailto:hi@ikiform.com"

@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { EmbedConfig } from "./EmbedCustomizer";
+import {
+  Check,
+  Code2,
+  Copy,
+  FileText,
+  Globe,
+  Shield,
+  X,
+  Zap,
+} from 'lucide-react';
+import { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button-base';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Modal,
   ModalContent,
-  ModalHeader,
-  ModalTitle,
   ModalDescription,
   ModalFooter,
-} from "@/components/ui/modal";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button-base";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
-import {
-  Check,
-  Copy,
-  Code2,
-  Globe,
-  FileText,
-  Shield,
-  Zap,
-  X,
-} from "lucide-react";
+  ModalHeader,
+  ModalTitle,
+} from '@/components/ui/modal';
+import { Tabs, TabsContent } from '@/components/ui/tabs';
+import type { EmbedConfig } from './EmbedCustomizer';
 
 interface EmbedCodeModalProps {
   isOpen: boolean;
@@ -33,7 +33,7 @@ interface EmbedCodeModalProps {
   formId: string;
 }
 
-type EmbedMode = "html" | "react" | "nextjs" | "vue" | "wordpress";
+type EmbedMode = 'html' | 'react' | 'nextjs' | 'vue' | 'wordpress';
 
 export default function EmbedCodeModal({
   isOpen,
@@ -42,14 +42,14 @@ export default function EmbedCodeModal({
   embedUrl,
   formId,
 }: EmbedCodeModalProps) {
-  const [embedMode, setEmbedMode] = useState<EmbedMode>("html");
+  const [embedMode, setEmbedMode] = useState<EmbedMode>('html');
   const [copied, setCopied] = useState(false);
 
   const generateIframeStyles = () => {
     const styles = [
-      `width: ${config.responsive ? "100%" : config.width}`,
+      `width: ${config.responsive ? '100%' : config.width}`,
       `height: ${config.height}`,
-      `border: ${config.showBorder ? `${config.borderWidth}px solid ${config.borderColor}` : "none"}`,
+      `border: ${config.showBorder ? `${config.borderWidth}px solid ${config.borderColor}` : 'none'}`,
       `border-radius: ${config.borderRadius}px`,
     ];
 
@@ -57,11 +57,11 @@ export default function EmbedCodeModal({
       styles.push(`background-color: ${config.backgroundColor}`);
     }
 
-    return styles.join("; ");
+    return styles.join('; ');
   };
 
   const generateContainerStyles = () => {
-    if (config.padding === 0) return "";
+    if (config.padding === 0) return '';
     return `padding: ${config.padding}px;`;
   };
 
@@ -69,7 +69,7 @@ export default function EmbedCodeModal({
     const containerStyle = generateContainerStyles();
     const iframeStyle = generateIframeStyles();
 
-    let code = "";
+    let code = '';
 
     if (containerStyle) {
       code += `<div style="${containerStyle}">\n  `;
@@ -87,10 +87,10 @@ export default function EmbedCodeModal({
       code += `\n  frameborder="0"`;
     }
 
-    code += `\n></iframe>`;
+    code += '\n></iframe>';
 
     if (containerStyle) {
-      code += `\n</div>`;
+      code += '\n</div>';
     }
 
     return code;
@@ -100,15 +100,15 @@ export default function EmbedCodeModal({
     const containerStyle = generateContainerStyles();
 
     let code = `import React from 'react';\n\n`;
-    code += `export default function EmbeddedForm() {\n`;
-    code += `  const iframeStyle = {\n`;
+    code += 'export default function EmbeddedForm() {\n';
+    code += '  const iframeStyle = {\n';
 
     const styleObject: Record<string, string> = {
-      width: config.responsive ? "100%" : config.width,
+      width: config.responsive ? '100%' : config.width,
       height: config.height,
       border: config.showBorder
         ? `${config.borderWidth}px solid ${config.borderColor}`
-        : "none",
+        : 'none',
       borderRadius: `${config.borderRadius}px`,
     };
 
@@ -120,20 +120,20 @@ export default function EmbedCodeModal({
       code += `    ${key}: '${value}',\n`;
     });
 
-    code += `  };\n\n`;
+    code += '  };\n\n';
 
     if (containerStyle) {
-      code += `  const containerStyle = {\n`;
+      code += '  const containerStyle = {\n';
       code += `    padding: '${config.padding}px',\n`;
-      code += `  };\n\n`;
+      code += '  };\n\n';
     }
 
-    code += `  return (\n`;
+    code += '  return (\n';
 
     if (containerStyle) {
-      code += `    <div style={containerStyle}>\n      `;
+      code += '    <div style={containerStyle}>\n      ';
     } else {
-      code += `    `;
+      code += '    ';
     }
 
     code += `<iframe
@@ -148,13 +148,13 @@ export default function EmbedCodeModal({
       code += `\n        frameBorder="0"`;
     }
 
-    code += `\n      />`;
+    code += '\n      />';
 
     if (containerStyle) {
-      code += `\n    </div>`;
+      code += '\n    </div>';
     }
 
-    code += `\n  );\n}`;
+    code += '\n  );\n}';
 
     return code;
   };
@@ -162,18 +162,19 @@ export default function EmbedCodeModal({
   const generateNextjsCode = () => {
     let code = `'use client';\n\n`;
     code += `import { CSSProperties } from 'react';\n\n`;
-    code += `interface EmbeddedFormProps {\n`;
-    code += `  className?: string;\n`;
-    code += `  style?: CSSProperties;\n`;
-    code += `}\n\n`;
-    code += `export default function EmbeddedForm({ className, style }: EmbeddedFormProps) {\n`;
+    code += 'interface EmbeddedFormProps {\n';
+    code += '  className?: string;\n';
+    code += '  style?: CSSProperties;\n';
+    code += '}\n\n';
+    code +=
+      'export default function EmbeddedForm({ className, style }: EmbeddedFormProps) {\n';
 
     const styleObject: Record<string, string> = {
-      width: config.responsive ? "100%" : config.width,
+      width: config.responsive ? '100%' : config.width,
       height: config.height,
       border: config.showBorder
         ? `${config.borderWidth}px solid ${config.borderColor}`
-        : "none",
+        : 'none',
       borderRadius: `${config.borderRadius}px`,
     };
 
@@ -181,25 +182,25 @@ export default function EmbedCodeModal({
       styleObject.backgroundColor = config.backgroundColor;
     }
 
-    code += `  const iframeStyle: CSSProperties = {\n`;
+    code += '  const iframeStyle: CSSProperties = {\n';
     Object.entries(styleObject).forEach(([key, value]) => {
       code += `    ${key}: '${value}',\n`;
     });
-    code += `    ...style,\n`;
-    code += `  };\n\n`;
+    code += '    ...style,\n';
+    code += '  };\n\n';
 
     if (config.padding > 0) {
-      code += `  const containerStyle: CSSProperties = {\n`;
+      code += '  const containerStyle: CSSProperties = {\n';
       code += `    padding: '${config.padding}px',\n`;
-      code += `  };\n\n`;
+      code += '  };\n\n';
     }
 
-    code += `  return (\n`;
+    code += '  return (\n';
 
     if (config.padding > 0) {
-      code += `    <div style={containerStyle} className={className}>\n      `;
+      code += '    <div style={containerStyle} className={className}>\n      ';
     } else {
-      code += `    `;
+      code += '    ';
     }
 
     code += `<iframe
@@ -214,24 +215,24 @@ export default function EmbedCodeModal({
       code += `\n        frameBorder="0"`;
     }
 
-    code += `\n      />`;
+    code += '\n      />';
 
     if (config.padding > 0) {
-      code += `\n    </div>`;
+      code += '\n    </div>';
     }
 
-    code += `\n  );\n}`;
+    code += '\n  );\n}';
 
     return code;
   };
 
   const generateVueCode = () => {
-    let code = `<template>\n`;
+    let code = '<template>\n';
 
     if (config.padding > 0) {
       code += `  <div :style="containerStyle">\n    `;
     } else {
-      code += `  `;
+      code += '  ';
     }
 
     code += `<iframe
@@ -246,22 +247,22 @@ export default function EmbedCodeModal({
       code += `\n      frameborder="0"`;
     }
 
-    code += `\n    />`;
+    code += '\n    />';
 
     if (config.padding > 0) {
-      code += `\n  </div>`;
+      code += '\n  </div>';
     }
 
-    code += `\n</template>\n\n`;
-    code += `<script setup>\n`;
+    code += '\n</template>\n\n';
+    code += '<script setup>\n';
     code += `const embedUrl = '${embedUrl}';\n\n`;
 
     const styleObject: Record<string, string> = {
-      width: config.responsive ? "100%" : config.width,
+      width: config.responsive ? '100%' : config.width,
       height: config.height,
       border: config.showBorder
         ? `${config.borderWidth}px solid ${config.borderColor}`
-        : "none",
+        : 'none',
       borderRadius: `${config.borderRadius}px`,
     };
 
@@ -269,19 +270,19 @@ export default function EmbedCodeModal({
       styleObject.backgroundColor = config.backgroundColor;
     }
 
-    code += `const iframeStyle = {\n`;
+    code += 'const iframeStyle = {\n';
     Object.entries(styleObject).forEach(([key, value]) => {
       code += `  '${key}': '${value}',\n`;
     });
-    code += `};\n`;
+    code += '};\n';
 
     if (config.padding > 0) {
-      code += `\nconst containerStyle = {\n`;
+      code += '\nconst containerStyle = {\n';
       code += `  padding: '${config.padding}px',\n`;
-      code += `};\n`;
+      code += '};\n';
     }
 
-    code += `</script>`;
+    code += '</script>';
 
     return code;
   };
@@ -289,9 +290,9 @@ export default function EmbedCodeModal({
   const generateWordPressCode = () => {
     const shortcode = `[ikiform_embed id="${formId}" width="${config.width}" height="${config.height}" theme="${config.theme}"]`;
 
-    let code = `<!-- WordPress Shortcode -->\n`;
+    let code = '<!-- WordPress Shortcode -->\n';
     code += `${shortcode}\n\n`;
-    code += `<!-- Or use HTML directly in a Custom HTML block -->\n`;
+    code += '<!-- Or use HTML directly in a Custom HTML block -->\n';
     code += generateHtmlCode();
 
     return code;
@@ -299,15 +300,15 @@ export default function EmbedCodeModal({
 
   const getCode = () => {
     switch (embedMode) {
-      case "html":
+      case 'html':
         return generateHtmlCode();
-      case "react":
+      case 'react':
         return generateReactCode();
-      case "nextjs":
+      case 'nextjs':
         return generateNextjsCode();
-      case "vue":
+      case 'vue':
         return generateVueCode();
-      case "wordpress":
+      case 'wordpress':
         return generateWordPressCode();
       default:
         return generateHtmlCode();
@@ -320,38 +321,38 @@ export default function EmbedCodeModal({
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error("Failed to copy code:", err);
+      console.error('Failed to copy code:', err);
     }
   };
 
   const embedModes = [
     {
-      id: "html",
-      name: "HTML",
+      id: 'html',
+      name: 'HTML',
       icon: Globe,
-      description: "Universal HTML iframe",
+      description: 'Universal HTML iframe',
     },
-    { id: "react", name: "React", icon: Code2, description: "React component" },
+    { id: 'react', name: 'React', icon: Code2, description: 'React component' },
     {
-      id: "nextjs",
-      name: "Next.js",
+      id: 'nextjs',
+      name: 'Next.js',
       icon: Code2,
-      description: "Next.js component",
+      description: 'Next.js component',
     },
-    { id: "vue", name: "Vue", icon: Code2, description: "Vue.js component" },
+    { id: 'vue', name: 'Vue', icon: Code2, description: 'Vue.js component' },
     {
-      id: "wordpress",
-      name: "WordPress",
+      id: 'wordpress',
+      name: 'WordPress',
       icon: FileText,
-      description: "WordPress shortcode",
+      description: 'WordPress shortcode',
     },
   ];
 
   const activeMode = embedModes.find((mode) => mode.id === embedMode);
 
   return (
-    <Modal open={isOpen} onOpenChange={onClose}>
-      <ModalContent className="max-w-3xl flex flex-col gap-6">
+    <Modal onOpenChange={onClose} open={isOpen}>
+      <ModalContent className="flex max-w-3xl flex-col gap-6">
         <ModalHeader>
           <ModalTitle>Embed Code</ModalTitle>
           <ModalDescription>
@@ -361,13 +362,13 @@ export default function EmbedCodeModal({
 
         <div className="flex flex-col gap-4">
           {/* Simple Framework Selection */}
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex flex-wrap gap-2">
             {embedModes.map((mode) => (
               <Button
                 key={mode.id}
-                variant={embedMode === mode.id ? "default" : "outline"}
-                size="sm"
                 onClick={() => setEmbedMode(mode.id as EmbedMode)}
+                size="sm"
+                variant={embedMode === mode.id ? 'default' : 'outline'}
               >
                 {mode.name}
               </Button>
@@ -377,14 +378,14 @@ export default function EmbedCodeModal({
           {/* Code Display */}
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">
+              <span className="font-medium text-sm">
                 {embedModes.find((m) => m.id === embedMode)?.name} Code
               </span>
               <Button
-                onClick={copyToClipboard}
-                variant={copied ? "outline" : "default"}
-                size="sm"
                 className="flex items-center gap-2"
+                onClick={copyToClipboard}
+                size="sm"
+                variant={copied ? 'outline' : 'default'}
               >
                 {copied ? (
                   <>
@@ -400,8 +401,8 @@ export default function EmbedCodeModal({
               </Button>
             </div>
 
-            <div className="bg-muted/30 p-4 rounded-lg overflow-x-auto max-h-96">
-              <pre className="text-sm font-mono">
+            <div className="max-h-96 overflow-x-auto rounded-lg bg-muted/30 p-4">
+              <pre className="font-mono text-sm">
                 <code>{getCode()}</code>
               </pre>
             </div>
@@ -409,7 +410,7 @@ export default function EmbedCodeModal({
         </div>
 
         <ModalFooter>
-          <Button variant="outline" onClick={onClose}>
+          <Button onClick={onClose} variant="outline">
             Close
           </Button>
         </ModalFooter>

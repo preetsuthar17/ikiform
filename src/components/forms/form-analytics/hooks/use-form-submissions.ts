@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { toast } from "@/hooks/use-toast";
-import type { Form, FormSubmission } from "@/lib/database";
-import { formsDb } from "@/lib/database";
+import { useEffect, useState } from 'react';
+import { toast } from '@/hooks/use-toast';
+import type { Form, FormSubmission } from '@/lib/database';
+import { formsDb } from '@/lib/database';
 
 export const useFormSubmissions = (formId: string) => {
   const [submissions, setSubmissions] = useState<FormSubmission[]>([]);
@@ -13,8 +13,8 @@ export const useFormSubmissions = (formId: string) => {
       const formSubmissions = await formsDb.getFormSubmissions(formId);
       setSubmissions(formSubmissions);
     } catch (error) {
-      console.error("Error loading submissions:", error);
-      toast.error("Failed to load form submissions");
+      console.error('Error loading submissions:', error);
+      toast.error('Failed to load form submissions');
     } finally {
       setLoading(false);
     }
@@ -24,7 +24,7 @@ export const useFormSubmissions = (formId: string) => {
     setRefreshing(true);
     await loadSubmissions();
     setRefreshing(false);
-    toast.success("Data refreshed!");
+    toast.success('Data refreshed!');
   };
 
   useEffect(() => {

@@ -1,17 +1,17 @@
-import type React from "react";
-import { useEffect, useState } from "react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import type React from 'react';
+import { useEffect, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
-import { Input } from "@/components/ui/input";
+import { Input } from '@/components/ui/input';
 import {
   autoCompleteEmail,
   validateEmail,
-} from "@/lib/validation/email-validation";
+} from '@/lib/validation/email-validation';
 
-import type { BaseFieldProps } from "../types";
+import type { BaseFieldProps } from '../types';
 
-import { getBaseClasses } from "../utils";
+import { getBaseClasses } from '../utils';
 
 export function EmailInputField({
   field,
@@ -21,14 +21,14 @@ export function EmailInputField({
   disabled,
 }: BaseFieldProps) {
   const baseClasses = getBaseClasses(field, error);
-  const [inputValue, setInputValue] = useState(value || "");
+  const [inputValue, setInputValue] = useState(value || '');
   const [showAutoComplete, setShowAutoComplete] = useState(false);
   const [isValidating, setIsValidating] = useState(false);
 
   const emailSettings = field.settings?.emailValidation;
 
   useEffect(() => {
-    setInputValue(value || "");
+    setInputValue(value || '');
   }, [value]);
 
   const validateEmailField = (email: string) => {
@@ -39,7 +39,7 @@ export function EmailInputField({
     const newValue = e.target.value;
     setInputValue(newValue);
 
-    if (emailSettings?.autoCompleteDomain && !newValue.includes("@")) {
+    if (emailSettings?.autoCompleteDomain && !newValue.includes('@')) {
       setShowAutoComplete(true);
     } else {
       setShowAutoComplete(false);
@@ -57,7 +57,7 @@ export function EmailInputField({
     if (
       emailSettings?.autoCompleteDomain &&
       inputValue &&
-      !inputValue.includes("@")
+      !inputValue.includes('@')
     ) {
       const completedEmail = `${inputValue}@${emailSettings.autoCompleteDomain}`;
       setInputValue(completedEmail);
@@ -73,7 +73,7 @@ export function EmailInputField({
     if (
       emailSettings?.autoCompleteDomain &&
       inputValue &&
-      !inputValue.includes("@")
+      !inputValue.includes('@')
     ) {
       handleAutoComplete();
     }
@@ -81,7 +81,7 @@ export function EmailInputField({
 
   const validation = validateEmailField(inputValue);
 
-  let errorMessage = "";
+  let errorMessage = '';
   if (error && validation.message && error === validation.message) {
     errorMessage = error;
   } else if (error) {
@@ -109,7 +109,7 @@ export function EmailInputField({
             field.placeholder ||
             (emailSettings?.autoCompleteDomain
               ? `username@${emailSettings.autoCompleteDomain}`
-              : "Enter email address")
+              : 'Enter email address')
           }
           type="email"
           value={inputValue}
@@ -119,7 +119,7 @@ export function EmailInputField({
           <div className="absolute top-full right-0 left-0 z-10 mt-1 rounded-ele border border-border bg-accent p-2">
             <div className="flex items-center justify-between">
               <span className="text-muted-foreground text-sm">
-                Press Tab or click to complete:{" "}
+                Press Tab or click to complete:{' '}
                 <strong>
                   {inputValue}@{emailSettings.autoCompleteDomain}
                 </strong>

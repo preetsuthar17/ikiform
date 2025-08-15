@@ -1,7 +1,11 @@
-import { useEffect, useCallback } from "react";
-import type { LocalSettings } from "../types";
-import { loadGoogleFont } from "@/lib/utils/google-fonts";
-import { generateFormStyles, injectFormStyles, removeFormStyles } from "@/lib/utils/form-styles";
+import { useCallback, useEffect } from 'react';
+import {
+  generateFormStyles,
+  injectFormStyles,
+  removeFormStyles,
+} from '@/lib/utils/form-styles';
+import { loadGoogleFont } from '@/lib/utils/google-fonts';
+import type { LocalSettings } from '../types';
 
 export function useFormDesignSettings(
   localSettings: LocalSettings,
@@ -10,17 +14,17 @@ export function useFormDesignSettings(
   // Load Google Font when font family changes
   useEffect(() => {
     const fontFamily = localSettings.typography?.fontFamily;
-    if (fontFamily && typeof window !== "undefined") {
+    if (fontFamily && typeof window !== 'undefined') {
       loadGoogleFont(fontFamily).catch(console.error);
     }
   }, [localSettings.typography?.fontFamily]);
 
   // Inject form styles when settings change
   useEffect(() => {
-    if (formId && typeof window !== "undefined") {
+    if (formId && typeof window !== 'undefined') {
       const styleConfig = generateFormStyles(localSettings);
       injectFormStyles(styleConfig, formId);
-      
+
       return () => {
         removeFormStyles(formId);
       };
@@ -32,7 +36,7 @@ export function useFormDesignSettings(
     return {
       backgroundColor: config.colors?.background || '#ffffff',
       color: config.colors?.text || '#000000',
-      fontFamily: config.typography?.fontFamily 
+      fontFamily: config.typography?.fontFamily
         ? `"${config.typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`
         : undefined,
       maxWidth: config.layout?.maxWidth || '600px',
@@ -60,11 +64,14 @@ export function useColorValidation() {
     return style.color !== '';
   }, []);
 
-  const normalizeColor = useCallback((color: string): string => {
-    if (isValidHexColor(color)) return color;
-    if (isValidCSSColor(color)) return color;
-    return '#000000'; // fallback
-  }, [isValidHexColor, isValidCSSColor]);
+  const normalizeColor = useCallback(
+    (color: string): string => {
+      if (isValidHexColor(color)) return color;
+      if (isValidCSSColor(color)) return color;
+      return '#000000'; // fallback
+    },
+    [isValidHexColor, isValidCSSColor]
+  );
 
   return {
     isValidHexColor,

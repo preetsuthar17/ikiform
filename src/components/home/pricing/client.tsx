@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   BarChart3,
@@ -14,19 +14,19 @@ import {
   Sparkles,
   Star,
   Zap,
-} from "lucide-react";
-import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
-import { OptimizedImage } from "@/components/other/optimized-image";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Switch } from "@/components/ui/switch";
-import { Tabs } from "@/components/ui/tabs";
-import { useAuth } from "@/hooks/use-auth";
-import { usePremiumStatus } from "@/hooks/use-premium-status";
-import FeatureComparisonTable from "./feature-comparison-table";
+} from 'lucide-react';
+import Link from 'next/link';
+import React, { useEffect, useRef, useState } from 'react';
+import { OptimizedImage } from '@/components/other/optimized-image';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { Switch } from '@/components/ui/switch';
+import { Tabs } from '@/components/ui/tabs';
+import { useAuth } from '@/hooks/use-auth';
+import { usePremiumStatus } from '@/hooks/use-premium-status';
+import FeatureComparisonTable from './feature-comparison-table';
 
 interface Product {
   id: string;
@@ -39,42 +39,42 @@ interface PricingClientProps {
 
 const features = [
   {
-    label: "Unlimited submissions",
+    label: 'Unlimited submissions',
     icon: <FileText className="h-4 w-4 flex-shrink-0 text-primary" />,
   },
   {
-    label: "Advanced analytics",
+    label: 'Advanced analytics',
     icon: <BarChart3 className="h-4 w-4 flex-shrink-0 text-primary" />,
   },
   {
-    label: "AI Form builder",
+    label: 'AI Form builder',
     icon: <Bot className="h-4 w-4 flex-shrink-0 text-primary" />,
   },
   {
-    label: "AI Analytics",
+    label: 'AI Analytics',
     icon: <Sparkles className="h-4 w-4 flex-shrink-0 text-primary" />,
   },
   {
-    label: "Exporting responses",
+    label: 'Exporting responses',
     icon: <Share2 className="h-4 w-4 flex-shrink-0 text-primary" />,
   },
   {
-    label: "Integrations",
+    label: 'Integrations',
     icon: <Network className="h-4 w-4 flex-shrink-0 text-primary" />,
   },
   {
-    label: "Webhook",
+    label: 'Webhook',
     icon: <Zap className="h-4 w-4 flex-shrink-0 text-primary" />,
   },
   {
-    label: "Priority support",
+    label: 'Priority support',
     icon: <Star className="h-4 w-4 flex-shrink-0 text-primary" />,
   },
 ];
 
-const MONTHLY_PRODUCT_ID = "05f52efa-2102-4dd0-9d1d-1538210d6712";
-const YEARLY_PRODUCT_ID = "4eff4c1d-56de-4111-96de-b5ec8124dd4b";
-const ONETIME_PRODUCT_ID = "2e9b8531-0d45-40df-be1c-65482eefeb85";
+const MONTHLY_PRODUCT_ID = '05f52efa-2102-4dd0-9d1d-1538210d6712';
+const YEARLY_PRODUCT_ID = '4eff4c1d-56de-4111-96de-b5ec8124dd4b';
+const ONETIME_PRODUCT_ID = '2e9b8531-0d45-40df-be1c-65482eefeb85';
 
 const PRICING: {
   monthly: {
@@ -102,32 +102,32 @@ const PRICING: {
   monthly: {
     price: 19,
     originalPrice: 29,
-    period: "month",
-    billedAs: "$19/month",
+    period: 'month',
+    billedAs: '$19/month',
     savings: null,
   },
   yearly: {
     price: 9,
     originalPrice: 19,
-    period: "month",
-    billedAs: "Billed yearly as $108",
+    period: 'month',
+    billedAs: 'Billed yearly as $108',
     savings: null,
   },
   onetime: {
     price: 119,
     originalPrice: 139,
-    period: "lifetime",
-    billedAs: "One-time payment",
+    period: 'lifetime',
+    billedAs: 'One-time payment',
     savings: null,
   },
 };
 
 PRICING.yearly.savings = Math.round(
-  (1 - (PRICING.yearly.price * 12) / (PRICING.monthly.price * 12)) * 100,
+  (1 - (PRICING.yearly.price * 12) / (PRICING.monthly.price * 12)) * 100
 );
 
 PRICING.onetime.savings = Math.round(
-  (1 - PRICING.onetime.price / (PRICING.monthly.price * 12)) * 100,
+  (1 - PRICING.onetime.price / (PRICING.monthly.price * 12)) * 100
 );
 
 export default function PricingClient({ products }: PricingClientProps) {
@@ -135,8 +135,8 @@ export default function PricingClient({ products }: PricingClientProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [purchaseLoading, setPurchaseLoading] = useState(false);
   const [billingPeriod, setBillingPeriod] = useState<
-    "monthly" | "yearly" | "onetime"
-  >("onetime");
+    'monthly' | 'yearly' | 'onetime'
+  >('onetime');
   const { user } = useAuth();
   const { hasPremium, checkingPremium } = usePremiumStatus(user);
 
@@ -145,8 +145,8 @@ export default function PricingClient({ products }: PricingClientProps) {
       setIsMobile(window.innerWidth < 1024);
     };
     checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   useEffect(() => {
@@ -160,18 +160,18 @@ export default function PricingClient({ products }: PricingClientProps) {
   };
 
   const handleBillingToggle = (checked: boolean) => {
-    setBillingPeriod(checked ? "yearly" : "monthly");
+    setBillingPeriod(checked ? 'yearly' : 'monthly');
   };
 
   const handlePricingTabChange = (value: string) => {
-    setBillingPeriod(value as "monthly" | "yearly" | "onetime");
+    setBillingPeriod(value as 'monthly' | 'yearly' | 'onetime');
   };
 
   const currentPricing = PRICING[billingPeriod];
   const productId =
-    billingPeriod === "monthly"
+    billingPeriod === 'monthly'
       ? MONTHLY_PRODUCT_ID
-      : billingPeriod === "yearly"
+      : billingPeriod === 'yearly'
         ? YEARLY_PRODUCT_ID
         : ONETIME_PRODUCT_ID;
 
@@ -197,9 +197,9 @@ export default function PricingClient({ products }: PricingClientProps) {
             <Tabs
               className="w-full"
               items={[
-                { id: "monthly", label: "Monthly" },
-                { id: "yearly", label: "Yearly" },
-                { id: "onetime", label: "Lifetime" },
+                { id: 'monthly', label: 'Monthly' },
+                { id: 'yearly', label: 'Yearly' },
+                { id: 'onetime', label: 'Lifetime' },
               ]}
               onValueChange={handlePricingTabChange}
               value={billingPeriod}
@@ -207,20 +207,20 @@ export default function PricingClient({ products }: PricingClientProps) {
           </div>
 
           {/* Savings Badge */}
-          {(billingPeriod === "yearly" || billingPeriod === "onetime") && (
+          {(billingPeriod === 'yearly' || billingPeriod === 'onetime') && (
             <Badge
               className="border-green-200 bg-green-100 text-green-700"
               variant="secondary"
             >
-              {billingPeriod === "yearly"
-                ? "Save 53%"
-                : "Best Value - Save 48%"}
+              {billingPeriod === 'yearly'
+                ? 'Save 53%'
+                : 'Best Value - Save 48%'}
             </Badge>
           )}
         </div>
 
-        <div className="relative mx-auto flex w-full max-w-7xl grow flex-col items-center rounded-card p-4 text-left md:p-12 shadow-[inset_0px_-24px_66px_-11px_hsl(var(--hu-home-card-bg),0.1)]">
-          <Card className="z-5 w-full overflow-hidden border p-0 shadow-md/3 bg-transparent border-transparent shadow-none">
+        <div className="relative mx-auto flex w-full max-w-7xl grow flex-col items-center rounded-card p-4 text-left shadow-[inset_0px_-24px_66px_-11px_hsl(var(--hu-home-card-bg),0.1)] md:p-12">
+          <Card className="z-5 w-full overflow-hidden border border-transparent bg-transparent p-0 shadow-md/3 shadow-none">
             <div className="flex w-full flex-col md:flex-row">
               <div className="flex w-full flex-col items-start justify-start gap-8 p-8 md:w-1/2">
                 <Badge className="mr-auto w-fit" variant="secondary">
@@ -237,8 +237,8 @@ export default function PricingClient({ products }: PricingClientProps) {
                       ${currentPricing.price}
                     </span>
                     <span className="text-muted-foreground">
-                      {billingPeriod === "onetime"
-                        ? ""
+                      {billingPeriod === 'onetime'
+                        ? ''
                         : `per ${currentPricing.period}`}
                     </span>
                   </div>
@@ -246,7 +246,7 @@ export default function PricingClient({ products }: PricingClientProps) {
 
                 {}
                 {user && hasPremium ? (
-                  <div className="w-full flex flex-col gap-3">
+                  <div className="flex w-full flex-col gap-3">
                     <Button className="w-full" size="lg">
                       <Link
                         className="block w-full"
@@ -272,7 +272,7 @@ export default function PricingClient({ products }: PricingClientProps) {
                     href={
                       user
                         ? `/checkout?products=${productId}&customerEmail=${user?.email}`
-                        : "#"
+                        : '#'
                     }
                     onClick={handlePurchaseClick}
                   >
@@ -292,9 +292,9 @@ export default function PricingClient({ products }: PricingClientProps) {
                           Checking...
                         </div>
                       ) : user ? (
-                        "Get started with Ikiform"
+                        'Get started with Ikiform'
                       ) : (
-                        "Sign In to Get Started"
+                        'Sign In to Get Started'
                       )}
                     </Button>
                   </Link>
@@ -303,11 +303,11 @@ export default function PricingClient({ products }: PricingClientProps) {
                 {/* Billing info */}
                 <div className="w-full text-center">
                   <p className="text-muted-foreground text-xs">
-                    {billingPeriod === "yearly"
-                      ? "Billed annually • Cancel anytime"
-                      : billingPeriod === "onetime"
-                        ? "One-time payment • Lifetime access"
-                        : "Billed monthly • Cancel anytime"}
+                    {billingPeriod === 'yearly'
+                      ? 'Billed annually • Cancel anytime'
+                      : billingPeriod === 'onetime'
+                        ? 'One-time payment • Lifetime access'
+                        : 'Billed monthly • Cancel anytime'}
                   </p>
                 </div>
               </div>

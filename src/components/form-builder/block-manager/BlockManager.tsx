@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { BlockManagerHeader, BlocksList } from "./components";
+import { BlockManagerHeader, BlocksList } from './components';
 
-import { useBlockEditing, useBlockExpansion } from "./hooks";
+import { useBlockEditing, useBlockExpansion } from './hooks';
 
-import type { BlockManagerProps } from "./types";
+import type { BlockManagerProps } from './types';
 
 export function BlockManager({
   blocks,

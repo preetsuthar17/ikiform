@@ -1,31 +1,31 @@
-import { Check, Edit3, Eye, FileText, Layers } from "lucide-react";
-import React from "react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Check, Edit3, Eye, FileText, Layers } from 'lucide-react';
+import React from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
-import { Card } from "@/components/ui/card";
+import { Card } from '@/components/ui/card';
 
-import { createDefaultFormSchema } from "@/lib/forms";
+import { createDefaultFormSchema } from '@/lib/forms';
 
-import { FormPreview } from "../../form-preview";
+import { FormPreview } from '../../form-preview';
 
-import type { FormConfiguration } from "../types";
+import type { FormConfiguration } from '../types';
 
 interface FormReviewStepProps {
   configuration: FormConfiguration;
-  onEditStep: (step: "type" | "configure") => void;
+  onEditStep: (step: 'type' | 'configure') => void;
 }
 
 export const FormReviewStep: React.FC<FormReviewStepProps> = ({
   configuration,
   onEditStep,
 }) => {
-  const isMultiStep = configuration.type === "multi";
+  const isMultiStep = configuration.type === 'multi';
   const [showPreview, setShowPreview] = React.useState(false);
 
   const previewSchema = createDefaultFormSchema({
-    title: configuration.title || "",
-    description: configuration.description || "",
+    title: configuration.title || '',
+    description: configuration.description || '',
     multiStep: isMultiStep,
   });
 
@@ -44,19 +44,19 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
               <div>
                 <p className="font-medium">Form Type</p>
                 <p className="text-muted-foreground text-sm">
-                  {isMultiStep ? "Multi-Step Form" : "Single Page Form"}
+                  {isMultiStep ? 'Multi-Step Form' : 'Single Page Form'}
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <Badge variant="outline">
-                {isMultiStep ? "Multi-Step" : "Single Page"}
+                {isMultiStep ? 'Multi-Step' : 'Single Page'}
               </Badge>
               <Button
-                onClick={() => onEditStep("type")}
-                size={"icon"}
+                onClick={() => onEditStep('type')}
+                size={'icon'}
                 title="Edit form type"
-                variant={"secondary"}
+                variant={'secondary'}
               >
                 <Edit3 className="h-4 w-4 text-muted-foreground hover:text-foreground" />
               </Button>
@@ -76,7 +76,7 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
                 <div>
                   <p className="font-medium text-sm">Title</p>
                   <p className="text-muted-foreground text-sm">
-                    {configuration.title || ""}
+                    {configuration.title || ''}
                   </p>
                 </div>
                 {configuration.description && (
@@ -90,10 +90,10 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
               </div>
             </div>
             <Button
-              onClick={() => onEditStep("configure")}
-              size={"icon"}
+              onClick={() => onEditStep('configure')}
+              size={'icon'}
               title="Edit form configuration"
-              variant={"secondary"}
+              variant={'secondary'}
             >
               <Edit3 className="h-4 w-4 text-muted-foreground hover:text-foreground" />
             </Button>
@@ -115,9 +115,9 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
             <Button
               onClick={() => setShowPreview(!showPreview)}
               size="sm"
-              variant={showPreview ? "secondary" : "outline"}
+              variant={showPreview ? 'secondary' : 'outline'}
             >
-              {showPreview ? "Hide Preview" : "Show Preview"}
+              {showPreview ? 'Hide Preview' : 'Show Preview'}
             </Button>
           </div>
         </Card>

@@ -1,9 +1,9 @@
-import type React from "react";
-import { useEffect, useState } from "react";
-import { Input } from "@/components/ui/input";
-import { validatePhoneNumber } from "@/lib/validation/phone-validation";
-import type { BaseFieldProps } from "../types";
-import { getBaseClasses } from "../utils";
+import type React from 'react';
+import { useEffect, useState } from 'react';
+import { Input } from '@/components/ui/input';
+import { validatePhoneNumber } from '@/lib/validation/phone-validation';
+import type { BaseFieldProps } from '../types';
+import { getBaseClasses } from '../utils';
 
 export function PhoneInputField({
   field,
@@ -13,11 +13,11 @@ export function PhoneInputField({
   disabled,
 }: BaseFieldProps) {
   const baseClasses = getBaseClasses(field, error);
-  const [inputValue, setInputValue] = useState(value || "");
+  const [inputValue, setInputValue] = useState(value || '');
   const [isValidating, setIsValidating] = useState(false);
 
   useEffect(() => {
-    setInputValue(value || "");
+    setInputValue(value || '');
   }, [value]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +31,7 @@ export function PhoneInputField({
 
   const validation = validatePhoneNumber(inputValue);
   const errorMessage =
-    error || (isValidating && !validation.isValid ? validation.message : "");
+    error || (isValidating && !validation.isValid ? validation.message : '');
 
   return (
     <div className="flex flex-col gap-2">
@@ -41,7 +41,7 @@ export function PhoneInputField({
         id={field.id}
         onBlur={handleBlur}
         onChange={handleInputChange}
-        placeholder={field.placeholder || "Enter phone number"}
+        placeholder={field.placeholder || 'Enter phone number'}
         type="tel"
         value={inputValue}
       />

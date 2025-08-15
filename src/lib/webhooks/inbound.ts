@@ -1,4 +1,4 @@
-import { createAdminClient } from "@/utils/supabase/admin";
+import { createAdminClient } from '@/utils/supabase/admin';
 
 export interface InboundWebhookMapping {
   id: string;
@@ -24,7 +24,7 @@ function mapInboundMappingRow(row: any): InboundWebhookMapping {
 }
 
 export async function createInboundMapping(
-  data: Partial<InboundWebhookMapping>,
+  data: Partial<InboundWebhookMapping>
 ): Promise<InboundWebhookMapping> {
   const supabase = createAdminClient();
   const now = new Date().toISOString();
@@ -38,12 +38,12 @@ export async function createInboundMapping(
   delete insertData.targetFormId;
   delete insertData.mappingRules;
   const { data: result, error } = await supabase
-    .from("inbound_webhook_mappings")
+    .from('inbound_webhook_mappings')
     .insert([insertData])
     .select()
     .single();
   if (error || !result)
-    throw new Error(error?.message || "Failed to create inbound mapping");
+    throw new Error(error?.message || 'Failed to create inbound mapping');
   return mapInboundMappingRow(result);
 }
 
@@ -53,9 +53,9 @@ export async function getInboundMappings({
   targetFormId?: string;
 } = {}): Promise<InboundWebhookMapping[]> {
   const supabase = createAdminClient();
-  let query = supabase.from("inbound_webhook_mappings").select("*");
-  if (targetFormId) query = query.eq("target_form_id", targetFormId);
-  query = query.order("created_at", { ascending: false });
+  let query = supabase.from('inbound_webhook_mappings').select('*');
+  if (targetFormId) query = query.eq('target_form_id', targetFormId);
+  query = query.order('created_at', { ascending: false });
   const { data, error } = await query;
   if (error) throw new Error(error.message);
   return Array.isArray(data) ? data.map(mapInboundMappingRow) : [];
@@ -63,7 +63,7 @@ export async function getInboundMappings({
 
 export async function updateInboundMapping(
   id: string,
-  data: Partial<InboundWebhookMapping>,
+  data: Partial<InboundWebhookMapping>
 ): Promise<InboundWebhookMapping> {
   const supabase = createAdminClient();
   const now = new Date().toISOString();
@@ -76,21 +76,21 @@ export async function updateInboundMapping(
   delete updateData.targetFormId;
   delete updateData.mappingRules;
   const { data: result, error } = await supabase
-    .from("inbound_webhook_mappings")
+    .from('inbound_webhook_mappings')
     .update(updateData)
-    .eq("id", id)
+    .eq('id', id)
     .select()
     .single();
   if (error || !result)
-    throw new Error(error?.message || "Failed to update inbound mapping");
+    throw new Error(error?.message || 'Failed to update inbound mapping');
   return mapInboundMappingRow(result);
 }
 
 export async function deleteInboundMapping(id: string): Promise<void> {
   const supabase = createAdminClient();
   const { error } = await supabase
-    .from("inbound_webhook_mappings")
+    .from('inbound_webhook_mappings')
     .delete()
-    .eq("id", id);
+    .eq('id', id);
   if (error) throw new Error(error.message);
 }

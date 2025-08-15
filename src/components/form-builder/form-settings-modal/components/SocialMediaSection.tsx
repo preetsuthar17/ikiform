@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { SocialMediaIcons } from "@/components/ui/social-media-icons";
-import { Switch } from "@/components/ui/switch";
+} from '@/components/ui/select';
+import { SocialMediaIcons } from '@/components/ui/social-media-icons';
+import { Switch } from '@/components/ui/switch';
 
-import type { SocialMediaSectionProps } from "../types";
+import type { SocialMediaSectionProps } from '../types';
 
 interface BrandingSectionProps extends SocialMediaSectionProps {
   updateSettings: (updates: any) => void;
@@ -84,7 +84,7 @@ export function BrandingSection({
             checked={socialMedia.enabled}
             id="social-media-enabled"
             onCheckedChange={(checked) =>
-              handleSettingChange("enabled", checked)
+              handleSettingChange('enabled', checked)
             }
             size="sm"
           />
@@ -97,39 +97,39 @@ export function BrandingSection({
                 {(
                   [
                     {
-                      id: "linkedin",
-                      label: "LinkedIn",
-                      placeholder: "https://linkedin.com/in/username",
+                      id: 'linkedin',
+                      label: 'LinkedIn',
+                      placeholder: 'https://linkedin.com/in/username',
                     },
                     {
-                      id: "twitter",
-                      label: "X (Twitter)",
-                      placeholder: "https://x.com/username",
+                      id: 'twitter',
+                      label: 'X (Twitter)',
+                      placeholder: 'https://x.com/username',
                     },
                     {
-                      id: "youtube",
-                      label: "YouTube",
-                      placeholder: "https://youtube.com/@channel",
+                      id: 'youtube',
+                      label: 'YouTube',
+                      placeholder: 'https://youtube.com/@channel',
                     },
                     {
-                      id: "instagram",
-                      label: "Instagram",
-                      placeholder: "https://instagram.com/username",
+                      id: 'instagram',
+                      label: 'Instagram',
+                      placeholder: 'https://instagram.com/username',
                     },
                     {
-                      id: "facebook",
-                      label: "Facebook",
-                      placeholder: "https://facebook.com/username",
+                      id: 'facebook',
+                      label: 'Facebook',
+                      placeholder: 'https://facebook.com/username',
                     },
                     {
-                      id: "github",
-                      label: "GitHub",
-                      placeholder: "https://github.com/username",
+                      id: 'github',
+                      label: 'GitHub',
+                      placeholder: 'https://github.com/username',
                     },
                     {
-                      id: "website",
-                      label: "Website",
-                      placeholder: "https://example.com",
+                      id: 'website',
+                      label: 'Website',
+                      placeholder: 'https://example.com',
                     },
                   ] as const
                 ).map(({ id, label, placeholder }) => (
@@ -142,7 +142,7 @@ export function BrandingSection({
                       onChange={(e) => handlePlatformChange(id, e.target.value)}
                       placeholder={placeholder}
                       type="url"
-                      value={platforms[id as keyof typeof platforms] || ""}
+                      value={platforms[id as keyof typeof platforms] || ''}
                     />
                   </div>
                 ))}
@@ -154,7 +154,7 @@ export function BrandingSection({
                   checked={socialMedia.showIcons !== false}
                   id="show-icons"
                   onCheckedChange={(checked) =>
-                    handleSettingChange("showIcons", checked)
+                    handleSettingChange('showIcons', checked)
                   }
                   size="sm"
                 />
@@ -169,9 +169,9 @@ export function BrandingSection({
                   </Label>
                   <Select
                     onValueChange={(value) =>
-                      handleSettingChange("iconSize", value)
+                      handleSettingChange('iconSize', value)
                     }
-                    value={socialMedia.iconSize || "md"}
+                    value={socialMedia.iconSize || 'md'}
                   >
                     <SelectTrigger>
                       <SelectValue />
@@ -189,9 +189,9 @@ export function BrandingSection({
                   </Label>
                   <Select
                     onValueChange={(value) =>
-                      handleSettingChange("position", value)
+                      handleSettingChange('position', value)
                     }
-                    value={socialMedia.position || "footer"}
+                    value={socialMedia.position || 'footer'}
                   >
                     <SelectTrigger>
                       <SelectValue />
@@ -212,7 +212,7 @@ export function BrandingSection({
                 </Label>
                 <SocialMediaIcons
                   className="justify-center"
-                  iconSize={socialMedia.iconSize || "md"}
+                  iconSize={socialMedia.iconSize || 'md'}
                   platforms={platforms}
                 />
               </div>

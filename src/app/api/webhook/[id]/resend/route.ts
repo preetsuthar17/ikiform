@@ -1,16 +1,16 @@
-import { type NextRequest, NextResponse } from "next/server";
-import { resendWebhookDelivery } from "@/lib/webhooks/outbound";
+import { type NextRequest, NextResponse } from 'next/server';
+import { resendWebhookDelivery } from '@/lib/webhooks/outbound';
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const body = await req.json();
     if (!body.logId) {
       return NextResponse.json(
-        { error: "Missing logId in request body" },
-        { status: 400 },
+        { error: 'Missing logId in request body' },
+        { status: 400 }
       );
     }
     const result = await resendWebhookDelivery((await params).id, body);
@@ -21,9 +21,9 @@ export async function POST(
         error:
           error instanceof Error
             ? error.message
-            : "Failed to resend webhook delivery",
+            : 'Failed to resend webhook delivery',
       },
-      { status: 400 },
+      { status: 400 }
     );
   }
 }

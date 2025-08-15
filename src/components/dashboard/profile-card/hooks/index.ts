@@ -1,1 +1,1 @@
-export { usePremiumStatus } from "./use-premium-status";
+export { usePremiumStatus } from './use-premium-status';

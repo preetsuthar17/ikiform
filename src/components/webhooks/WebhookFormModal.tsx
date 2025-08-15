@@ -1,33 +1,33 @@
-import { TooltipProvider } from "@radix-ui/react-tooltip";
-import { useEffect, useState } from "react";
-import { Alert } from "@/components/ui/alert";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { TooltipProvider } from '@radix-ui/react-tooltip';
+import { useEffect, useState } from 'react';
+import { Alert } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Modal,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalTitle,
-} from "@/components/ui/modal";
-import { ScrollArea } from "@/components/ui/scroll-area";
+} from '@/components/ui/modal';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { Toggle } from "@/components/ui/toggle";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { Toggle } from '@/components/ui/toggle';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 
 interface WebhookFormModalProps {
   open: boolean;
@@ -37,7 +37,7 @@ interface WebhookFormModalProps {
     id?: string;
     url: string;
     events: string[];
-    method: "POST" | "PUT";
+    method: 'POST' | 'PUT';
     headers: Record<string, string>;
     payloadTemplate: string;
     enabled: boolean;
@@ -45,10 +45,10 @@ interface WebhookFormModalProps {
   loading?: boolean;
 }
 
-const EVENT_OPTIONS = [{ value: "form_submitted", label: "Form Submitted" }];
+const EVENT_OPTIONS = [{ value: 'form_submitted', label: 'Form Submitted' }];
 
 const DISCORD_WEBHOOK_EXAMPLE =
-  "https://discord.com/api/webhooks/XXXXXXXXX/YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY";
+  'https://discord.com/api/webhooks/XXXXXXXXX/YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY';
 
 export function WebhookFormModal({
   open,
@@ -57,26 +57,26 @@ export function WebhookFormModal({
   initialWebhook,
   loading,
 }: WebhookFormModalProps) {
-  const [url, setUrl] = useState(initialWebhook?.url || "");
+  const [url, setUrl] = useState(initialWebhook?.url || '');
   const [events, setEvents] = useState<string[]>(initialWebhook?.events || []);
-  const [method, setMethod] = useState<"POST" | "PUT">(
-    initialWebhook?.method || "POST",
+  const [method, setMethod] = useState<'POST' | 'PUT'>(
+    initialWebhook?.method || 'POST'
   );
   const [headers, setHeaders] = useState<Record<string, string>>(
-    initialWebhook?.headers || {},
+    initialWebhook?.headers || {}
   );
   const [payloadTemplate, setPayloadTemplate] = useState(
-    initialWebhook?.payloadTemplate || "",
+    initialWebhook?.payloadTemplate || ''
   );
   const [enabled, setEnabled] = useState(initialWebhook?.enabled ?? true);
   const [showDiscordInfo, setShowDiscordInfo] = useState(false);
 
   useEffect(() => {
-    setUrl(initialWebhook?.url || "");
+    setUrl(initialWebhook?.url || '');
     setEvents(initialWebhook?.events || []);
-    setMethod(initialWebhook?.method || "POST");
+    setMethod(initialWebhook?.method || 'POST');
     setHeaders(initialWebhook?.headers || {});
-    setPayloadTemplate(initialWebhook?.payloadTemplate || "");
+    setPayloadTemplate(initialWebhook?.payloadTemplate || '');
     setEnabled(initialWebhook?.enabled ?? true);
     setShowDiscordInfo(false);
   }, [initialWebhook, open]);
@@ -88,7 +88,7 @@ export function WebhookFormModal({
 
     if (!(url && Array.isArray(events)) || events.length === 0 || !method) {
       alert(
-        "Please provide a webhook URL, select at least one event, and choose a method.",
+        'Please provide a webhook URL, select at least one event, and choose a method.'
       );
       return;
     }
@@ -97,18 +97,18 @@ export function WebhookFormModal({
 
   function handleClose() {
     onClose();
-    setUrl("");
+    setUrl('');
     setEvents([]);
-    setMethod("POST");
+    setMethod('POST');
     setHeaders({});
-    setPayloadTemplate("");
+    setPayloadTemplate('');
     setEnabled(true);
     setShowDiscordInfo(false);
   }
 
   function handleDiscordPreset() {
     setUrl(DISCORD_WEBHOOK_EXAMPLE);
-    setMethod("POST");
+    setMethod('POST');
     setShowDiscordInfo(true);
   }
 
@@ -117,7 +117,7 @@ export function WebhookFormModal({
       <ModalContent className="w-full max-w-7xl">
         <ModalHeader className="flex flex-row items-center justify-between pb-2">
           <ModalTitle>
-            {initialWebhook ? "Edit Webhook" : "Add Webhook"}
+            {initialWebhook ? 'Edit Webhook' : 'Add Webhook'}
           </ModalTitle>
         </ModalHeader>
         <div className="mb-4 flex flex-wrap gap-2">
@@ -187,7 +187,7 @@ export function WebhookFormModal({
                     setEvents((prev) =>
                       pressed
                         ? [...prev, opt.value]
-                        : prev.filter((e) => e !== opt.value),
+                        : prev.filter((e) => e !== opt.value)
                     );
                   }}
                   pressed={events.includes(opt.value)}
@@ -203,7 +203,7 @@ export function WebhookFormModal({
                 HTTP Method
               </Label>
               <Select
-                onValueChange={(val) => setMethod(val as "POST" | "PUT")}
+                onValueChange={(val) => setMethod(val as 'POST' | 'PUT')}
                 value={method}
               >
                 <SelectTrigger id="webhook-method" placeholder="Select method">
@@ -233,17 +233,17 @@ export function WebhookFormModal({
               id="webhook-headers"
               onChange={(e) => {
                 const entries = e.target.value
-                  .split(",")
-                  .map((pair) => pair.split(":").map((s) => s.trim()));
+                  .split(',')
+                  .map((pair) => pair.split(':').map((s) => s.trim()));
                 setHeaders(
-                  Object.fromEntries(entries.filter(([k, v]) => k && v)),
+                  Object.fromEntries(entries.filter(([k, v]) => k && v))
                 );
               }}
               placeholder="Authorization: Bearer token, X-Custom: value"
               type="text"
               value={Object.entries(headers)
                 .map(([k, v]) => `${k}:${v}`)
-                .join(", ")}
+                .join(', ')}
             />
           </div>
           <div>
@@ -297,27 +297,27 @@ export function WebhookFormModal({
                       </TooltipTrigger>
                       <TooltipContent>
                         {
-                          "The formatted object with formName, formId, fields (array of {id, label, type, value}), and rawData"
+                          'The formatted object with formName, formId, fields (array of {id, label, type, value}), and rawData'
                         }
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
                 </div>
                 <div className="mt-2 text-muted-foreground text-xs">
-                  Use{" "}
+                  Use{' '}
                   <code className="rounded bg-muted px-1">
                     &#123;&#123;variable&#125;&#125;
-                  </code>{" "}
-                  to insert a variable. For example:{" "}
+                  </code>{' '}
+                  to insert a variable. For example:{' '}
                   <code className="rounded bg-muted px-1">
                     &#123;&#123;formatted.formName&#125;&#125;
                   </code>
                 </div>
                 <Alert className="mt-2" variant="default">
-                  <b>Tip:</b> You can use{" "}
+                  <b>Tip:</b> You can use{' '}
                   <code className="rounded bg-muted px-1">
                     &#123;&#123;#each formatted.fields&#125;&#125;
-                  </code>{" "}
+                  </code>{' '}
                   in advanced templates to loop over fields. See docs for more.
                 </Alert>
               </div>
@@ -330,30 +330,30 @@ export function WebhookFormModal({
                         {(() => {
                           try {
                             const previewContext = {
-                              event: "form_submitted",
-                              formId: "form-123",
-                              submissionId: "sub-456",
-                              ipAddress: "1.2.3.4",
+                              event: 'form_submitted',
+                              formId: 'form-123',
+                              submissionId: 'sub-456',
+                              ipAddress: '1.2.3.4',
                               formatted: {
-                                formId: "form-123",
-                                formName: "Demo Form",
+                                formId: 'form-123',
+                                formName: 'Demo Form',
                                 fields: [
                                   {
-                                    id: "field_1",
-                                    label: "Name",
-                                    type: "text",
-                                    value: "John Doe",
+                                    id: 'field_1',
+                                    label: 'Name',
+                                    type: 'text',
+                                    value: 'John Doe',
                                   },
                                   {
-                                    id: "field_2",
-                                    label: "Email",
-                                    type: "email",
-                                    value: "john@example.com",
+                                    id: 'field_2',
+                                    label: 'Email',
+                                    type: 'email',
+                                    value: 'john@example.com',
                                   },
                                 ],
                                 rawData: {
-                                  field_1: "John Doe",
-                                  field_2: "john@example.com",
+                                  field_1: 'John Doe',
+                                  field_2: 'john@example.com',
                                 },
                               },
                             };
@@ -364,17 +364,17 @@ export function WebhookFormModal({
                             preview = preview.replace(
                               /{{\s*([\w.]+)\s*}}/g,
                               (_: string, key: string) => {
-                                const keys = key.split(".");
+                                const keys = key.split('.');
                                 let value: any = previewContext;
                                 for (const k of keys) value = value?.[k];
-                                if (typeof value === "object" && value !== null)
+                                if (typeof value === 'object' && value !== null)
                                   return JSON.stringify(value, null, 2);
-                                return value !== undefined ? String(value) : "";
-                              },
+                                return value !== undefined ? String(value) : '';
+                              }
                             );
                             return preview;
                           } catch {
-                            return "Invalid template";
+                            return 'Invalid template';
                           }
                         })()}
                       </pre>
@@ -393,7 +393,7 @@ export function WebhookFormModal({
               type="submit"
               variant="default"
             >
-              {loading ? "Saving..." : "Save"}
+              {loading ? 'Saving...' : 'Save'}
             </Button>
           </ModalFooter>
         </form>

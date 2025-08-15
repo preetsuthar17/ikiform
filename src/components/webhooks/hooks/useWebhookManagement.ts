@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { toast } from "sonner";
+import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 export interface WebhookConfig {
   id: string;
   url: string;
   events: string[];
-  method: "POST" | "PUT";
+  method: 'POST' | 'PUT';
   headers?: Record<string, string>;
   payloadTemplate?: string;
   enabled: boolean;
@@ -26,14 +26,14 @@ export function useWebhookManagement(options?: { formId?: string }) {
     try {
       const url = formId
         ? `/api/webhook?formId=${encodeURIComponent(formId)}`
-        : "/api/webhook";
+        : '/api/webhook';
       const res = await fetch(url);
-      if (!res.ok) throw new Error("Failed to fetch webhooks");
+      if (!res.ok) throw new Error('Failed to fetch webhooks');
       const data = await res.json();
       setWebhooks(data);
     } catch (e: any) {
       setError(e.message);
-      toast.error(e.message || "Failed to fetch webhooks");
+      toast.error(e.message || 'Failed to fetch webhooks');
     } finally {
       setLoading(false);
     }
@@ -43,17 +43,17 @@ export function useWebhookManagement(options?: { formId?: string }) {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/webhook", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/webhook', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...webhook, formId }),
       });
-      if (!res.ok) throw new Error("Failed to create webhook");
-      toast.success("Webhook created!");
+      if (!res.ok) throw new Error('Failed to create webhook');
+      toast.success('Webhook created!');
       await fetchWebhooks();
     } catch (e: any) {
       setError(e.message);
-      toast.error(e.message || "Failed to create webhook");
+      toast.error(e.message || 'Failed to create webhook');
     } finally {
       setLoading(false);
     }
@@ -64,16 +64,16 @@ export function useWebhookManagement(options?: { formId?: string }) {
     setError(null);
     try {
       const res = await fetch(`/api/webhook/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...webhook, formId }),
       });
-      if (!res.ok) throw new Error("Failed to update webhook");
-      toast.success("Webhook updated!");
+      if (!res.ok) throw new Error('Failed to update webhook');
+      toast.success('Webhook updated!');
       await fetchWebhooks();
     } catch (e: any) {
       setError(e.message);
-      toast.error(e.message || "Failed to update webhook");
+      toast.error(e.message || 'Failed to update webhook');
     } finally {
       setLoading(false);
     }
@@ -83,13 +83,13 @@ export function useWebhookManagement(options?: { formId?: string }) {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`/api/webhook/${id}`, { method: "DELETE" });
-      if (!res.ok) throw new Error("Failed to delete webhook");
-      toast.success("Webhook deleted!");
+      const res = await fetch(`/api/webhook/${id}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error('Failed to delete webhook');
+      toast.success('Webhook deleted!');
       await fetchWebhooks();
     } catch (e: any) {
       setError(e.message);
-      toast.error(e.message || "Failed to delete webhook");
+      toast.error(e.message || 'Failed to delete webhook');
     } finally {
       setLoading(false);
     }

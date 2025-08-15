@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from '@/components/ui/skeleton';
 
 /**
  * Optimized skeleton component for form previews
@@ -6,7 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
  */
 export function FormPreviewSkeleton() {
   return (
-    <div className="mx-auto w-full max-w-2xl flex flex-col gap-6 p-6">
+    <div className="mx-auto flex w-full max-w-2xl flex-col gap-6 p-6">
       {}
       <div className="flex flex-col gap-2">
         <Skeleton className="h-8 w-3/4" />
@@ -40,7 +40,7 @@ export function ChatMessageSkeleton() {
       {Array.from({ length: 3 }).map((_, i) => (
         <div className="flex gap-3" key={i}>
           <Skeleton className="h-8 w-8 rounded-full" />
-          <div className="flex-1 flex flex-col gap-2">
+          <div className="flex flex-1 flex-col gap-2">
             <Skeleton className="h-4 w-3/4" />
             <Skeleton className="h-4 w-1/2" />
           </div>
@@ -162,7 +162,7 @@ export function FormBuilderPanelSkeleton() {
   return (
     <div className="flex h-full">
       {}
-      <div className="w-1/4 flex flex-col gap-4 border-r p-4">
+      <div className="flex w-1/4 flex-col gap-4 border-r p-4">
         <Skeleton className="h-8 w-full" />
         <div className="flex flex-col gap-2">
           {Array.from({ length: 6 }).map((_, i) => (
@@ -172,7 +172,7 @@ export function FormBuilderPanelSkeleton() {
       </div>
 
       {}
-      <div className="flex-1 flex flex-col gap-4 p-4">
+      <div className="flex flex-1 flex-col gap-4 p-4">
         <div className="flex items-center justify-between">
           <Skeleton className="h-8 w-48" />
           <div className="flex gap-2">
@@ -184,7 +184,7 @@ export function FormBuilderPanelSkeleton() {
       </div>
 
       {}
-      <div className="w-1/4 flex flex-col gap-4 border-l p-4">
+      <div className="flex w-1/4 flex-col gap-4 border-l p-4">
         <Skeleton className="h-8 w-full" />
         <div className="flex flex-col gap-3">
           {Array.from({ length: 4 }).map((_, i) => (

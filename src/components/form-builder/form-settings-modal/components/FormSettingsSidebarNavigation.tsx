@@ -7,12 +7,12 @@ import {
   Shield,
   Trophy,
   User,
-} from "lucide-react";
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { FORM_SETTINGS_SECTIONS } from "../index";
-import type { FormSettingsSection } from "../types";
+} from 'lucide-react';
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { FORM_SETTINGS_SECTIONS } from '../index';
+import type { FormSettingsSection } from '../types';
 
 const iconMap = { Info, BarChart2, Shield, Trophy, User, Mail, Palette, Link2 };
 
@@ -35,14 +35,14 @@ export function FormSettingsSidebarNavigation({
           return (
             <Button
               className={
-                "w-full items-center justify-start gap-2 text-left transition-all" +
+                'w-full items-center justify-start gap-2 text-left transition-all' +
                 (isActive
-                  ? "bg-secondary text-secondary-foreground"
-                  : "hover:bg-accent hover:text-accent-foreground")
+                  ? 'bg-secondary text-secondary-foreground'
+                  : 'hover:bg-accent hover:text-accent-foreground')
               }
               key={section.id}
               onClick={() => onSectionChange(section.id)}
-              variant={isActive ? "secondary" : "ghost"}
+              variant={isActive ? 'secondary' : 'ghost'}
             >
               <IconComponent className="h-4 w-4" />
               <span className="font-medium text-sm">{section.label}</span>

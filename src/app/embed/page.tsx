@@ -1,19 +1,19 @@
-import { notFound } from "next/navigation";
-import { formsDbServer } from "@/lib/database";
-import EmbedCustomizer from "./components/EmbedCustomizer";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button-base";
-import Link from "next/link";
-import { ArrowLeft, Code2 } from "lucide-react";
+import { ArrowLeft, Code2 } from 'lucide-react';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { Button } from '@/components/ui/button-base';
+import { Card, CardContent } from '@/components/ui/card';
+import { formsDbServer } from '@/lib/database';
+import EmbedCustomizer from './components/EmbedCustomizer';
 
 interface EmbedPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export const metadata = {
-  title: "Embed Form - IkiForm",
+  title: 'Embed Form - IkiForm',
   description:
-    "Customize and embed your form with custom dimensions and styling.",
+    'Customize and embed your form with custom dimensions and styling.',
 };
 
 export default async function EmbedPage({ searchParams }: EmbedPageProps) {
@@ -22,21 +22,21 @@ export default async function EmbedPage({ searchParams }: EmbedPageProps) {
 
   if (!formId) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center p-4">
-        <Card className="max-w-md w-full text-center">
+      <div className="flex min-h-screen items-center justify-center bg-background p-4">
+        <Card className="w-full max-w-md text-center">
           <CardContent className="p-8">
-            <div className="gradient-bg flex h-16 w-16 items-center justify-center rounded-card mx-auto mb-4">
+            <div className="gradient-bg mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-card">
               <Code2 className="h-8 w-8 text-accent-foreground" />
             </div>
-            <h1 className="text-2xl font-semibold text-foreground mb-4">
+            <h1 className="mb-4 font-semibold text-2xl text-foreground">
               Missing Form ID
             </h1>
-            <p className="text-muted-foreground mb-6">
+            <p className="mb-6 text-muted-foreground">
               Please provide a form ID in the URL parameter. Example:
               /embed?formid=your-form-id
             </p>
             <Button asChild variant="default">
-              <Link href="/dashboard" className="gap-2">
+              <Link className="gap-2" href="/dashboard">
                 <ArrowLeft className="h-4 w-4" />
                 Go to Dashboard
               </Link>
@@ -56,14 +56,14 @@ export default async function EmbedPage({ searchParams }: EmbedPageProps) {
 
     return (
       <div className="min-h-screen bg-background">
-        <div className=" mx-auto px-4 py-8">
+        <div className="mx-auto px-4 py-8">
           <div className="mx-auto">
             <div className="mb-8">
               <div className="text-center">
-                <h1 className="text-3xl font-semibold text-foreground mb-2">
+                <h1 className="mb-2 font-semibold text-3xl text-foreground">
                   Embed Your Form
                 </h1>
-                <p className="text-muted-foreground max-w-2xl mx-auto">
+                <p className="mx-auto max-w-2xl text-muted-foreground">
                   Customize the appearance and dimensions of your form embed,
                   then copy the code to integrate it into your website.
                 </p>
@@ -76,7 +76,7 @@ export default async function EmbedPage({ searchParams }: EmbedPageProps) {
       </div>
     );
   } catch (error) {
-    console.error("Error loading form for embed:", error);
+    console.error('Error loading form for embed:', error);
     notFound();
   }
 }

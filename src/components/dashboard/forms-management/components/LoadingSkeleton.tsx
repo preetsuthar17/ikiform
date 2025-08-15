@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 
-import { Card } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Card } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
 
 import {
   SKELETON_BUTTONS_COUNT,
   SKELETON_FORM_COUNT,
   SKELETON_STATS_COUNT,
-} from "../constants";
+} from '../constants';
 
-import type { LoadingSkeletonProps } from "../types";
+import type { LoadingSkeletonProps } from '../types';
 
 export function LoadingSkeleton({ className }: LoadingSkeletonProps) {
   return (
-    <div className={`flex flex-col gap-8 ${className || ""}`}>
+    <div className={`flex flex-col gap-8 ${className || ''}`}>
       {}
       <div className="flex flex-col justify-between gap-4 rounded-card border border-border bg-card p-6 sm:flex-row sm:items-center">
         <div className="flex flex-col gap-2">

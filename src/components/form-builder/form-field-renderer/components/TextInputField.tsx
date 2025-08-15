@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import { Input } from "@/components/ui/input";
-import type { FormField } from "@/lib";
+import { Input } from '@/components/ui/input';
+import type { FormField } from '@/lib';
 
-import type { BaseFieldProps } from "../types";
+import type { BaseFieldProps } from '../types';
 
-import { getBaseClasses } from "../utils";
+import { getBaseClasses } from '../utils';
 
 export function getLivePatternError(field: FormField, value: string) {
   if (
@@ -19,9 +19,9 @@ export function getLivePatternError(field: FormField, value: string) {
       }
     })()
   ) {
-    return field.validation?.patternMessage || "Invalid format";
+    return field.validation?.patternMessage || 'Invalid format';
   }
-  return "";
+  return '';
 }
 
 export function TextInputField({
@@ -45,7 +45,7 @@ export function TextInputField({
         placeholder={field.placeholder}
         ref={fieldRef}
         type="text"
-        value={value || ""}
+        value={value || ''}
       />
       {livePatternError && (
         <div className="mt-1 text-destructive text-xs">{livePatternError}</div>

@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Loader } from "@/components/ui/loader";
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Loader } from '@/components/ui/loader';
 
 interface PremiumGuardProps {
   user: any;

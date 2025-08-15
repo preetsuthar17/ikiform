@@ -1,12 +1,12 @@
-import { Trophy } from "lucide-react";
-import React from "react";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
-import { Switch } from "@/components/ui/switch";
-import { Textarea } from "@/components/ui/textarea";
-import type { LocalSettings } from "../types";
+import { Trophy } from 'lucide-react';
+import React from 'react';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Slider } from '@/components/ui/slider';
+import { Switch } from '@/components/ui/switch';
+import { Textarea } from '@/components/ui/textarea';
+import type { LocalSettings } from '../types';
 
 interface QuizSectionProps {
   localSettings: LocalSettings;
@@ -20,7 +20,7 @@ export function QuizSection({
   const quizSettings = localSettings.quiz || {};
 
   const updateQuizSettings = (
-    updates: Partial<NonNullable<LocalSettings["quiz"]>>,
+    updates: Partial<NonNullable<LocalSettings['quiz']>>
   ) => {
     updateSettings({
       quiz: {
@@ -108,7 +108,7 @@ export function QuizSection({
               }}
               placeholder="Leave empty for no limit"
               type="number"
-              value={quizSettings.timeLimit || ""}
+              value={quizSettings.timeLimit || ''}
             />
 
             {/* Custom Result Messages */}
@@ -132,7 +132,7 @@ export function QuizSection({
                 placeholder="Congratulations! You passed with {percentage}% ({score}/{total} points)."
                 rows={3}
                 type="textarea"
-                value={quizSettings.resultMessage?.pass || ""}
+                value={quizSettings.resultMessage?.pass || ''}
               />
 
               <QuizField
@@ -150,7 +150,7 @@ export function QuizSection({
                 placeholder="You scored {percentage}% ({score}/{total} points). Keep practicing!"
                 rows={3}
                 type="textarea"
-                value={quizSettings.resultMessage?.fail || ""}
+                value={quizSettings.resultMessage?.fail || ''}
               />
             </div>
           </div>
@@ -167,7 +167,7 @@ function QuizField({
   description,
   value,
   onChange,
-  type = "text",
+  type = 'text',
   placeholder,
   rows,
   min,
@@ -179,7 +179,7 @@ function QuizField({
   description?: string;
   value: any;
   onChange: (value: any) => void;
-  type?: "text" | "number" | "textarea" | "slider";
+  type?: 'text' | 'number' | 'textarea' | 'slider';
   placeholder?: string;
   rows?: number;
   min?: number;
@@ -189,7 +189,7 @@ function QuizField({
   return (
     <div className="flex flex-col gap-2">
       <Label htmlFor={id}>{label}</Label>
-      {type === "slider" ? (
+      {type === 'slider' ? (
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
             <span className="text-muted-foreground text-sm">{description}</span>
@@ -205,7 +205,7 @@ function QuizField({
             value={[value]}
           />
         </div>
-      ) : type === "textarea" ? (
+      ) : type === 'textarea' ? (
         <>
           <Textarea
             id={id}

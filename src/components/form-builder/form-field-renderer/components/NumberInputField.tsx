@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import { Input } from "@/components/ui/input";
+import { Input } from '@/components/ui/input';
 
-import type { BaseFieldProps } from "../types";
+import type { BaseFieldProps } from '../types';
 
-import { getBaseClasses } from "../utils";
+import { getBaseClasses } from '../utils';
 
 export function NumberInputField({
   field,
@@ -25,7 +25,7 @@ export function NumberInputField({
       onChange={(e) => onChange(e.target.value)}
       placeholder={field.placeholder}
       type="number"
-      value={value || ""}
+      value={value || ''}
     />
   );
 }

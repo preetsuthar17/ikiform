@@ -1,11 +1,11 @@
-import { Crown } from "lucide-react";
-import React from "react";
+import { Crown } from 'lucide-react';
+import React from 'react';
 
-import { CardContent } from "@/components/ui/card";
+import { CardContent } from '@/components/ui/card';
 
-import type { ProfileInfoProps } from "../types";
+import type { ProfileInfoProps } from '../types';
 
-import { extractUserName } from "../utils";
+import { extractUserName } from '../utils';
 
 export function ProfileInfo({ user, hasPremium }: ProfileInfoProps) {
   const name = extractUserName(user);

@@ -1,10 +1,10 @@
-import { DragDropContext, Droppable } from "@hello-pangea/dnd";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { DragDropContext, Droppable } from '@hello-pangea/dnd';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
-import type { FormBlock } from "@/lib/database";
+import type { FormBlock } from '@/lib/database';
 
-import { canDeleteBlock, handleBlockReorder } from "../utils";
-import { BlockItem } from "./BlockItem";
+import { canDeleteBlock, handleBlockReorder } from '../utils';
+import { BlockItem } from './BlockItem';
 
 interface BlocksListProps {
   blocks: FormBlock[];

@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from '@/components/ui/textarea';
 
-import type { BaseFieldProps } from "../types";
+import type { BaseFieldProps } from '../types';
 
-import { getBaseClasses } from "../utils";
+import { getBaseClasses } from '../utils';
 
 export function TextareaField({
   field,
@@ -25,7 +25,7 @@ export function TextareaField({
       placeholder={field.placeholder}
       ref={fieldRef}
       rows={field.settings?.rows || 4}
-      value={value || ""}
+      value={value || ''}
     />
   );
 }

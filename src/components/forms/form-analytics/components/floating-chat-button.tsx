@@ -1,9 +1,9 @@
-import Image from "next/image";
-import type React from "react";
+import Image from 'next/image';
+import type React from 'react';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
-import type { FloatingChatButtonProps } from "../types";
+import type { FloatingChatButtonProps } from '../types';
 
 export const FloatingChatButton: React.FC<FloatingChatButtonProps> = ({
   onClick,
@@ -20,7 +20,7 @@ export const FloatingChatButton: React.FC<FloatingChatButtonProps> = ({
         <Image
           alt="Ikiform"
           className={`pointer-events-none cursor-pointer rounded-ele ${
-            mounted && theme === "light" ? "invert" : ""
+            mounted && theme === 'light' ? 'invert' : ''
           }`}
           height={100}
           src="/logo.svg"

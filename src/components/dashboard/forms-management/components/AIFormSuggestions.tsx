@@ -1,12 +1,12 @@
-import { Sparkles } from "lucide-react";
-import React from "react";
-import { Button } from "@/components/ui/button";
+import { Sparkles } from 'lucide-react';
+import React from 'react';
+import { Button } from '@/components/ui/button';
 
-import { Card } from "@/components/ui/card";
+import { Card } from '@/components/ui/card';
 
-import { AI_FORM_SUGGESTIONS } from "../constants";
+import { AI_FORM_SUGGESTIONS } from '../constants';
 
-import type { AIFormSuggestionsProps } from "../types";
+import type { AIFormSuggestionsProps } from '../types';
 
 export function AIFormSuggestions({ onCreateForm }: AIFormSuggestionsProps) {
   return (

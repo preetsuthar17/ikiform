@@ -1,12 +1,12 @@
-export { FormsManagement, FormsManagement as default } from "./FormsManagement";
+export { FormsManagement, FormsManagement as default } from './FormsManagement';
 
-export { useFormsManagement } from "./hooks";
+export { useFormsManagement } from './hooks';
 
 export type {
   AIFormSuggestionsProps,
   FormCardProps,
   FormStatsProps,
   FormsManagementProps,
-} from "./types";
+} from './types';
 
-export { formatDate, generateShareUrl, getTotalFields } from "./utils";
+export { formatDate, generateShareUrl, getTotalFields } from './utils';

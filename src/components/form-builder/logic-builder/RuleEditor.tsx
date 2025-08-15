@@ -1,18 +1,18 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Modal,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalTitle,
-} from "@/components/ui/modal";
-import { Switch } from "@/components/ui/switch";
-import type { FormField } from "@/lib/database";
-import { ActionListEditor } from "./ActionListEditor";
-import { ConditionGroupEditor } from "./ConditionGroupEditor";
-import type { LogicAction, LogicConditionGroup, LogicRule } from "./types";
+} from '@/components/ui/modal';
+import { Switch } from '@/components/ui/switch';
+import type { FormField } from '@/lib/database';
+import { ActionListEditor } from './ActionListEditor';
+import { ConditionGroupEditor } from './ConditionGroupEditor';
+import type { LogicAction, LogicConditionGroup, LogicRule } from './types';
 
 function RuleEditor({
   open,
@@ -27,28 +27,28 @@ function RuleEditor({
   onSave?: (rule: LogicRule) => void;
   fields: FormField[];
 }) {
-  const [name, setName] = React.useState(rule?.name || "");
+  const [name, setName] = React.useState(rule?.name || '');
   const [enabled, setEnabled] = React.useState(rule?.enabled ?? true);
   const [conditions, setConditions] = React.useState<LogicConditionGroup>(
     rule?.conditions || {
       id: `group-${Date.now()}`,
-      logic: "AND",
+      logic: 'AND',
       conditions: [],
-    },
+    }
   );
   const [actions, setActions] = React.useState<LogicAction[]>(
-    rule?.actions || [],
+    rule?.actions || []
   );
 
   React.useEffect(() => {
-    setName(rule?.name || "");
+    setName(rule?.name || '');
     setEnabled(rule?.enabled ?? true);
     setConditions(
       rule?.conditions || {
         id: `group-${Date.now()}`,
-        logic: "AND",
+        logic: 'AND',
         conditions: [],
-      },
+      }
     );
     setActions(rule?.actions || []);
   }, [rule]);
@@ -57,7 +57,7 @@ function RuleEditor({
     <Modal onOpenChange={onClose} open={open}>
       <ModalContent className="max-w-lg">
         <ModalHeader>
-          <ModalTitle>{rule ? "Edit Rule" : "Add Rule"}</ModalTitle>
+          <ModalTitle>{rule ? 'Edit Rule' : 'Add Rule'}</ModalTitle>
         </ModalHeader>
         <div className="flex flex-col gap-4">
           <div>

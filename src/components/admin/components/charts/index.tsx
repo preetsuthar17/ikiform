@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   Area,
@@ -15,8 +15,8 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-} from "recharts";
-import { useChartColors } from "@/lib/utils/chart-colors";
+} from 'recharts';
+import { useChartColors } from '@/lib/utils/chart-colors';
 
 interface GradientAreaChartProps {
   data: any[];
@@ -64,10 +64,10 @@ export function GradientAreaChart({
   dataKey,
   xAxisKey,
   height = 300,
-  color = "#8b5cf6",
-  gradientId = "colorGradient",
+  color = '#8b5cf6',
+  gradientId = 'colorGradient',
   title,
-  className = "",
+  className = '',
 }: GradientAreaChartProps) {
   const { tooltipStyle } = useChartColors();
   return (
@@ -168,7 +168,7 @@ export function GradientBarChart({
   dataKey,
   xAxisKey,
   height = 300,
-  color = "#10b981",
+  color = '#10b981',
   title,
 }: BarChartProps) {
   const { tooltipStyle } = useChartColors();
@@ -210,7 +210,7 @@ export function GradientPieChart({
   dataKey,
   nameKey,
   height = 300,
-  colors = ["#8b5cf6", "#10b981", "#f59e0b", "#ef4444", "#3b82f6", "#ec4899"],
+  colors = ['#8b5cf6', '#10b981', '#f59e0b', '#ef4444', '#3b82f6', '#ec4899'],
   title,
 }: PieChartProps) {
   const { tooltipStyle } = useChartColors();
@@ -247,7 +247,7 @@ export function GradientLineChart({
   dataKey,
   xAxisKey,
   height = 300,
-  color = "#3b82f6",
+  color = '#3b82f6',
   title,
 }: GradientAreaChartProps) {
   const { tooltipStyle } = useChartColors();

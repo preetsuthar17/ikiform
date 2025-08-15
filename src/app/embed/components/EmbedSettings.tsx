@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { EmbedConfig } from "./EmbedCustomizer";
-import { Input } from "@/components/ui/input-base";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button-base";
+import { Button } from '@/components/ui/button-base';
+import { Input } from '@/components/ui/input-base';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
+} from '@/components/ui/select';
+import { Switch } from '@/components/ui/switch';
+import type { EmbedConfig } from './EmbedCustomizer';
 
 interface EmbedSettingsProps {
   config: EmbedConfig;
@@ -26,29 +26,29 @@ export default function EmbedSettings({
     <div className="flex flex-col gap-6">
       {/* Dimensions */}
       <div className="flex flex-col gap-3">
-        <h3 className="text-sm font-medium">Dimensions</h3>
+        <h3 className="font-medium text-sm">Dimensions</h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div className="flex flex-col gap-2">
             <Label>Width</Label>
             <div className="flex gap-2">
               <Input
-                value={config.width}
+                className="flex-1"
                 onChange={(e) => updateConfig({ width: e.target.value })}
                 placeholder="e.g., 100%, 800px"
-                className="flex-1"
+                value={config.width}
               />
               <Button
-                variant="outline"
+                onClick={() => updateConfig({ width: '100%' })}
                 size="sm"
-                onClick={() => updateConfig({ width: "100%" })}
+                variant="outline"
               >
                 100%
               </Button>
               <Button
-                variant="outline"
+                onClick={() => updateConfig({ width: '800px' })}
                 size="sm"
-                onClick={() => updateConfig({ width: "800px" })}
+                variant="outline"
               >
                 800px
               </Button>
@@ -59,22 +59,22 @@ export default function EmbedSettings({
             <Label>Height</Label>
             <div className="flex gap-2">
               <Input
-                value={config.height}
+                className="flex-1"
                 onChange={(e) => updateConfig({ height: e.target.value })}
                 placeholder="e.g., 600px, 100vh"
-                className="flex-1"
+                value={config.height}
               />
               <Button
-                variant="outline"
+                onClick={() => updateConfig({ height: '600px' })}
                 size="sm"
-                onClick={() => updateConfig({ height: "600px" })}
+                variant="outline"
               >
                 600px
               </Button>
               <Button
-                variant="outline"
+                onClick={() => updateConfig({ height: '800px' })}
                 size="sm"
-                onClick={() => updateConfig({ height: "800px" })}
+                variant="outline"
               >
                 800px
               </Button>
@@ -93,16 +93,16 @@ export default function EmbedSettings({
 
       {/* Appearance */}
       <div className="flex flex-col gap-3">
-        <h3 className="text-sm font-medium">Appearance</h3>
+        <h3 className="font-medium text-sm">Appearance</h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div className="flex flex-col gap-2">
             <Label>Theme</Label>
             <Select
-              value={config.theme}
               onValueChange={(value) =>
-                updateConfig({ theme: value as "light" | "dark" | "auto" })
+                updateConfig({ theme: value as 'light' | 'dark' | 'auto' })
               }
+              value={config.theme}
             >
               <SelectTrigger>
                 <SelectValue placeholder="Select theme" />
@@ -119,20 +119,20 @@ export default function EmbedSettings({
             <Label>Background Color</Label>
             <div className="flex gap-2">
               <input
-                type="color"
-                value={config.backgroundColor}
+                className="h-10 w-12 cursor-pointer rounded-ele border border-border"
                 onChange={(e) =>
                   updateConfig({ backgroundColor: e.target.value })
                 }
-                className="w-12 h-10 border border-border rounded-ele cursor-pointer"
+                type="color"
+                value={config.backgroundColor}
               />
               <Input
-                value={config.backgroundColor}
+                className="flex-1"
                 onChange={(e) =>
                   updateConfig({ backgroundColor: e.target.value })
                 }
                 placeholder="#ffffff"
-                className="flex-1"
+                value={config.backgroundColor}
               />
             </div>
           </div>
@@ -153,7 +153,7 @@ export default function EmbedSettings({
 
       {/* Border & Styling */}
       <div className="flex flex-col gap-3">
-        <h3 className="text-sm font-medium">Border & Styling</h3>
+        <h3 className="font-medium text-sm">Border & Styling</h3>
 
         <div className="flex items-center gap-2">
           <Switch
@@ -164,25 +164,25 @@ export default function EmbedSettings({
         </div>
 
         {config.showBorder && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <div className="flex flex-col gap-2">
               <Label>Border Color</Label>
               <div className="flex gap-2">
                 <input
-                  type="color"
-                  value={config.borderColor}
+                  className="h-10 w-12 cursor-pointer rounded-ele border border-border"
                   onChange={(e) =>
                     updateConfig({ borderColor: e.target.value })
                   }
-                  className="w-12 h-10 border border-border rounded-ele cursor-pointer"
+                  type="color"
+                  value={config.borderColor}
                 />
                 <Input
-                  value={config.borderColor}
+                  className="flex-1"
                   onChange={(e) =>
                     updateConfig({ borderColor: e.target.value })
                   }
                   placeholder="#e5e7eb"
-                  className="flex-1"
+                  value={config.borderColor}
                 />
               </div>
             </div>
@@ -190,26 +190,30 @@ export default function EmbedSettings({
             <div className="flex flex-col gap-2">
               <Label>Border Width (px)</Label>
               <Input
-                type="number"
-                min="0"
                 max="10"
-                value={config.borderWidth.toString()}
+                min="0"
                 onChange={(e) =>
-                  updateConfig({ borderWidth: parseInt(e.target.value) || 0 })
+                  updateConfig({
+                    borderWidth: Number.parseInt(e.target.value) || 0,
+                  })
                 }
+                type="number"
+                value={config.borderWidth.toString()}
               />
             </div>
 
             <div className="flex flex-col gap-2">
               <Label>Border Radius (px)</Label>
               <Input
-                type="number"
-                min="0"
                 max="50"
-                value={config.borderRadius.toString()}
+                min="0"
                 onChange={(e) =>
-                  updateConfig({ borderRadius: parseInt(e.target.value) || 0 })
+                  updateConfig({
+                    borderRadius: Number.parseInt(e.target.value) || 0,
+                  })
                 }
+                type="number"
+                value={config.borderRadius.toString()}
               />
             </div>
           </div>
@@ -218,16 +222,16 @@ export default function EmbedSettings({
         <div className="flex flex-col gap-2">
           <Label>Padding (px)</Label>
           <Input
-            type="number"
-            min="0"
-            max="100"
-            value={config.padding.toString()}
-            onChange={(e) =>
-              updateConfig({ padding: parseInt(e.target.value) || 0 })
-            }
             className="w-full md:w-32"
+            max="100"
+            min="0"
+            onChange={(e) =>
+              updateConfig({ padding: Number.parseInt(e.target.value) || 0 })
+            }
+            type="number"
+            value={config.padding.toString()}
           />
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             Space around the iframe
           </p>
         </div>
@@ -235,14 +239,14 @@ export default function EmbedSettings({
 
       {/* Performance */}
       <div className="flex flex-col gap-3">
-        <h3 className="text-sm font-medium">Performance</h3>
+        <h3 className="font-medium text-sm">Performance</h3>
         <div className="flex flex-col gap-2">
           <Label>Loading Mode</Label>
           <Select
-            value={config.loadingMode}
             onValueChange={(value) =>
-              updateConfig({ loadingMode: value as "eager" | "lazy" })
+              updateConfig({ loadingMode: value as 'eager' | 'lazy' })
             }
+            value={config.loadingMode}
           >
             <SelectTrigger>
               <SelectValue placeholder="Select loading mode" />
@@ -252,7 +256,7 @@ export default function EmbedSettings({
               <SelectItem value="eager">Eager</SelectItem>
             </SelectContent>
           </Select>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             Lazy loading improves page performance by loading the iframe only
             when it comes into view
           </p>
