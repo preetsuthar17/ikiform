@@ -5,7 +5,7 @@ import { Button } from '../ui/button';
 
 export function FeatureOne() {
   return (
-    <section className="mx-auto w-full max-w-7xl bg-background lg:h-[55rem] px-4">
+    <section className="mx-auto w-full max-w-7xl bg-background lg:h-[55rem] px-4"  id="features">
       <div className="mx-auto flex h-full w-full flex-col">
         <div className="relative h-full overflow-hidden rounded-4xl bg-card p-6 py-10 md:p-12 md:py-16">
           <div className="flex flex-col items-center gap-8 text-center">

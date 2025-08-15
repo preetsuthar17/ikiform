@@ -695,7 +695,7 @@ const EmailNotificationsPreview = () => {
 
 export default function BentoFeatures() {
   return (
-    <div className="mx-auto w-full max-w-7xl bg-background" id="features">
+    <div className="mx-auto w-full max-w-7xl bg-background">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-18  px-4">
         {/* Bento Grid */}
         <div className="flex flex-col gap-6 lg:grid lg:grid-cols-4">
