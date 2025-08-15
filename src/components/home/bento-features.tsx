@@ -32,7 +32,7 @@ const FeatureCard = ({
 }: FeatureCardProps) => {
   return (
     <Card
-      className={`overflow-hidden border border-border bg-card p-4 transition-all duration-300 ease-out hover:shadow-lg/2 ${className}`}
+      className={`overflow-hidden border-0 bg-card p-4 shadow-none transition-all duration-300 ease-out ${className} rounded-4xl`}
     >
       <div className="flex h-full w-full flex-col p-6">
         {/* Preview */}
@@ -40,12 +40,12 @@ const FeatureCard = ({
           <div className="fade-bottom h-full">{preview}</div>
         </div>
         {/* Header */}
-        <div className="mt-4 flex flex-col items-start gap-4 text-left">
+        <div className="flex flex-col items-start gap-4 text-left">
           <div className="min-w-0 flex-1">
             <h3 className="mb-2 font-semibold text-foreground text-lg leading-tight">
               {title}
             </h3>
-            <p className="line-clamp-3 text-muted-foreground text-sm leading-relaxed">
+            <p className="line-clamp-3 text-muted-foreground text-sm leading-relaxed opacity-80">
               {description}
             </p>
           </div>
@@ -86,7 +86,7 @@ const AIFormBuilderPreview = () => {
   }, [currentStep, resetAndStart, steps.length]);
 
   return (
-    <div className="flex h-full flex-col justify-between overflow-hidden rounded-card bg-gradient-to-br from-accent/30 to-secondary/50 p-6">
+    <div className="flex h-full flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br from-accent/30 to-secondary/50 p-6">
       <div className="flex flex-col gap-4">
         <motion.div
           animate={{ opacity: isGenerating ? 1 : 0.7 }}
@@ -97,7 +97,7 @@ const AIFormBuilderPreview = () => {
               scale: isGenerating ? [1, 1.2, 1] : 1,
               opacity: isGenerating ? [0.5, 1, 0.5] : 1,
             }}
-            className="h-3 w-3 rounded-card bg-primary"
+            className="h-3 w-3 rounded-2xl bg-primary"
             transition={{
               duration: 1,
               repeat: isGenerating
@@ -136,7 +136,7 @@ const AIFormBuilderPreview = () => {
                       ? 'hsl(var(--hu-primary))'
                       : 'hsl(var(--hu-border))',
                 }}
-                className="h-2 rounded-card bg-border"
+                className="h-2 rounded-2xl bg-border"
                 initial={{ width: 0 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
               />
@@ -169,7 +169,7 @@ const AIFormBuilderPreview = () => {
             scale: currentStep >= steps.length ? 1 : 0.8,
             opacity: currentStep >= steps.length ? 1 : 0.5,
           }}
-          className="rounded-card bg-primary px-3 py-1 text-primary-foreground text-xs"
+          className="rounded-2xl bg-primary px-3 py-1 text-primary-foreground text-xs"
           transition={{
             type: 'spring',
             stiffness: 500,
@@ -185,7 +185,7 @@ const AIFormBuilderPreview = () => {
 
 const UnlimitedPreview = () => {
   return (
-    <div className="flex h-full flex-col items-center justify-center overflow-hidden rounded-card bg-gradient-to-t from-secondary to-accent/20 p-4">
+    <div className="flex h-full flex-col items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-t from-secondary to-accent/20 p-4">
       <div className="flex flex-col gap-3 text-center">
         <motion.div
           animate={{
@@ -264,7 +264,7 @@ const AnalyticsPreview = () => {
 
   return (
     <div
-      className="h-full overflow-hidden rounded-card bg-gradient-to-br from-accent/20 to-secondary/30 p-4"
+      className="h-full overflow-hidden rounded-2xl bg-gradient-to-br from-accent/20 to-secondary/30 p-4"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -321,7 +321,7 @@ const LogicBuilderPreview = () => {
   }, []);
 
   return (
-    <div className="h-full overflow-hidden rounded-card bg-gradient-to-r from-secondary/50 to-accent/30 p-4">
+    <div className="h-full overflow-hidden rounded-2xl bg-gradient-to-r from-secondary/50 to-accent/30 p-4">
       <div className="flex flex-col gap-4">
         <motion.div
           animate={{ opacity: 1, y: 0 }}
@@ -330,7 +330,7 @@ const LogicBuilderPreview = () => {
           transition={{ duration: 0.5 }}
         >
           <motion.div className="flex h-4 w-4 items-center justify-center rounded-ele bg-primary">
-            <div className="h-2 w-2 rounded-card bg-primary-foreground" />
+            <div className="h-2 w-2 rounded-2xl bg-primary-foreground" />
           </motion.div>
           <span className="font-medium text-foreground text-xs">
             User selects "Yes"
@@ -393,7 +393,7 @@ const APIIntegrationPreview = () => {
   }, []);
 
   return (
-    <div className="h-full overflow-hidden rounded-card bg-gradient-to-t from-accent/20 to-secondary/40 p-4">
+    <div className="h-full overflow-hidden rounded-2xl bg-gradient-to-t from-accent/20 to-secondary/40 p-4">
       <div className="flex flex-col gap-3">
         <motion.div
           animate={{ opacity: 1 }}
@@ -405,7 +405,7 @@ const APIIntegrationPreview = () => {
               scale: isLoading ? [1, 1.5, 1] : 1,
               opacity: isLoading ? [0.5, 1, 0.5] : 1,
             }}
-            className="h-2 w-2 rounded-card bg-primary"
+            className="h-2 w-2 rounded-2xl bg-primary"
             transition={{
               duration: 1,
               repeat: isLoading ? globalThis.Number.POSITIVE_INFINITY : 0,
@@ -435,7 +435,7 @@ const APIIntegrationPreview = () => {
           {showData && (
             <motion.div
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              className="flex flex-col gap-2 rounded-card border border-border bg-card p-3"
+              className="flex flex-col gap-2 rounded-2xl border border-border bg-card p-3"
               initial={{ opacity: 0, scale: 0.9, y: 10 }}
               transition={{
                 type: 'spring',
@@ -483,7 +483,7 @@ const DigitalSignaturesPreview = () => {
   }, []);
 
   return (
-    <div className="h-full overflow-hidden rounded-card bg-gradient-to-br from-accent/30 to-secondary/20 p-4">
+    <div className="h-full overflow-hidden rounded-2xl bg-gradient-to-br from-accent/30 to-secondary/20 p-4">
       <motion.div
         animate={{
           borderColor: isVerified
@@ -493,7 +493,7 @@ const DigitalSignaturesPreview = () => {
             ? 'hsl(var(--hu-primary) / 0.05)'
             : 'transparent',
         }}
-        className="flex h-full flex-col justify-center rounded-card border-2 border-border border-dashed p-3"
+        className="flex h-full flex-col justify-center rounded-2xl border-2 border-border border-dashed p-3"
         transition={{ duration: 0.3 }}
       >
         <div className="flex flex-col gap-2 text-center">
@@ -598,8 +598,8 @@ const EmailNotificationsPreview = () => {
   }, [addNotification]);
 
   return (
-    <div className="h-full overflow-hidden rounded-card bg-gradient-to-t from-secondary/40 to-accent/30 p-4">
-      <div className="flex flex-col gap-3">
+    <div className="h-full overflow-hidden rounded-2xl bg-gradient-to-t from-secondary/40 to-accent/30 p-4">
+      <div className="flex flex-col gap-4">
         <motion.div
           animate={{
             scale: notifications.length > 0 ? [1, 1.05, 1] : 1,
@@ -632,7 +632,7 @@ const EmailNotificationsPreview = () => {
                   zIndex: notifications.length - index,
                   rotateZ: index * 1.5,
                 }}
-                className="absolute flex w-full flex-col gap-1 rounded-card border border-border bg-card p-3 shadow-sm"
+                className="absolute flex w-full flex-col gap-1 rounded-2xl border border-border bg-card p-3"
                 exit={{
                   opacity: 0,
                   y: 150,
@@ -695,11 +695,8 @@ const EmailNotificationsPreview = () => {
 
 export default function BentoFeatures() {
   return (
-    <div
-      className="flex w-full flex-col items-center justify-center gap-12 px-4 py-12 text-center md:px-8 md:py-28"
-      id="features"
-    >
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-18">
+    <div className="mx-auto w-full max-w-7xl bg-background" id="features">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-18  px-4">
         {/* Bento Grid */}
         <div className="flex flex-col gap-6 lg:grid lg:grid-cols-4">
           {/* AI Form Builder - Large featured card */}

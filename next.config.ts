@@ -1,6 +1,15 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'av5on64jc4.ufs.sh',
+        pathname: '/f/**',
+      },
+    ],
+  },
   async redirects() {
     return [
       {
@@ -26,6 +35,16 @@ const nextConfig: NextConfig = {
       {
         source: '/discord',
         destination: 'https://discord.gg/jM5BgDMaGX',
+        permanent: false,
+      },
+      {
+        source: '/email',
+        destination: 'mailto:hi@ikiform.com',
+        permanent: false,
+      },
+      {
+        source: '/twitter',
+        destination: 'https://x.com/preetsuthar17',
         permanent: false,
       },
     ];

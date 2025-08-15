@@ -17,7 +17,7 @@ export default function Hero() {
 
   return (
     <section className="mx-auto mt-2 flex w-full max-w-7xl flex-col gap-12 p-4">
-      <div className="z-20 flex h-full grow flex-col items-center gap-12 py-6 text-center">
+      <div className="z-20 flex h-full grow flex-col items-center gap-12 text-center">
         <Chip className="rounded-full" variant={'secondary'}>
           <Link
             className="flex items-center justify-center gap-2"
@@ -48,12 +48,12 @@ export default function Hero() {
           <span className="hidden sm:inline">Beautiful & </span>
           <span className="relative">
             <span className="relative z-10 text-black">Affordable</span>
-            <span className="-translate-y-1/2 -rotate-1 -z-10 absolute inset-0 top-1/2 transform rounded-md bg-blue-200 py-8" />
+            <span className="-translate-y-1/2 -rotate-1 -z-10 absolute inset-0 top-1/2 transform rounded-md bg-blue-200 py-6 md:py-8" />
           </span>{' '}
           forms that won't{' '}
           <span className="relative">
             <span className="relative z-10 text-black">bore users</span>
-            <span className="-translate-y-1/2 -rotate-1 -z-10 absolute inset-0 top-1/2 transform rounded-md bg-yellow-200 py-8" />
+            <span className="-translate-y-1/2 -rotate-1 -z-10 absolute inset-0 top-1/2 transform rounded-md bg-yellow-200 py-6 md:py-8" />
           </span>
         </h1>
 
@@ -66,7 +66,7 @@ export default function Hero() {
           {user ? (
             <Button
               asChild
-              className="rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99"
+              className="rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit w-full"
               variant="default"
             >
               <Link
@@ -90,7 +90,7 @@ export default function Hero() {
           ) : (
             <Button
               asChild
-              className="rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99"
+              className="rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit w-full"
               variant="default"
             >
               <Link
@@ -103,7 +103,7 @@ export default function Hero() {
           )}
 
           <Button
-            className="rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99"
+            className="rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit w-full"
             onClick={() => setOpen(true)}
             variant="secondary"
           >
@@ -111,7 +111,7 @@ export default function Hero() {
           </Button>
         </div>
 
-        <div className="flex items-center gap-2 bg-transparent px-0 py-2 md:px-2">
+        <div className="flex items-center gap-2 bg-transparent px-0 py-2 md:px-2 flex-wrap justify-center">
           <AvatarGroup max={5} size="lg" spacing="tighter">
             <Avatar className="rounded-full border-5">
               <AvatarImage
@@ -174,7 +174,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <div className="relative my-12 h-full w-full grow">
+      <div className="relative h-full w-full grow">
         <div className="h-full w-full overflow-hidden rounded-4xl">
           <div className="relative h-full w-full">
             <video
@@ -204,18 +204,31 @@ export default function Hero() {
             <ModalHeader>
               <ModalTitle>Choose a Demo</ModalTitle>
             </ModalHeader>
-            <div className="flex w-full flex-col items-center gap-4">
-              <Button asChild className="w-full max-w-xs font-medium" size="lg">
-                <Link href="/demo-form-builder">Form Builder Demo</Link>
-              </Button>
-              <Button asChild className="w-full max-w-xs font-medium" size="lg">
-                <Link
-                  href="/f/24ec3d8d-40ef-4143-b289-4e43c112d80e"
-                  target="_blank"
-                >
-                  Form Demo
-                </Link>
-              </Button>
+            <div className="flex w-full flex-col items-center gap-2">
+                <Button
+              asChild
+              className="rounded-full border border-[0.5px] px-6 py-5 hover:brightness-99 w-full"
+              variant="secondary"
+            >
+              <Link
+                className="flex items-center gap-2 font-medium"
+                href="/demo-form-builder"
+              >
+                Interactive Form Builder Demo
+              </Link>
+            </Button>
+               <Button
+              asChild
+              className="rounded-full border border-[0.5px] px-6 py-5 hover:brightness-99 w-full"
+              variant="secondary"
+            >
+              <Link
+                className="flex items-center gap-2 font-medium"
+                href="/feedback"
+              >
+                Form Demo
+              </Link>
+            </Button>
             </div>
           </ModalContent>
         </Modal>

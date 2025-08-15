@@ -14,11 +14,13 @@ export default function Review({
 }) {
   return (
     <>
-      <div className="mx-auto flex flex-col items-center justify-center gap-8 p-4 max-w-7xl">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-8 p-4 md:p-8">
         <div className="flex items-center">
-          <span className='font-medum text-4xl'>"</span>
+          <span className="font-medum text-4xl">"</span>
         </div>
-        <p className="text-center text-xl leading-[46px] tracking-loose">{review}</p>
+        <p className="text-center tracking-loose md:text-xl md:leading-[46px]">
+          {review}
+        </p>
         <div className="flex items-center justify-center gap-3">
           <div className="overflow-ellipsis rounded-card">
             <OptimizedImage
