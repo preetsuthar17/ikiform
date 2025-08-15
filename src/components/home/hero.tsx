@@ -4,10 +4,10 @@ import { ChevronRight, Play, Star } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import { useAuth } from '@/hooks/use-auth';
+import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from '../ui';
 import { Button } from '../ui/button';
 import { Chip } from '../ui/chip';
 import { Modal, ModalContent, ModalHeader, ModalTitle } from '../ui/modal';
-import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from '../ui';
 
 export default function Hero() {
   const { user } = useAuth();
@@ -16,8 +16,8 @@ export default function Hero() {
   const [videoOpen, setVideoOpen] = React.useState(false);
 
   return (
-    <section className="mx-auto flex w-full max-w-7xl p-4 gap-12 flex-col mt-2">
-      <div className="z-20 flex h-full grow flex-col items-center  gap-12 py-6 text-center">
+    <section className="mx-auto mt-2 flex w-full max-w-7xl flex-col gap-12 p-4">
+      <div className="z-20 flex h-full grow flex-col items-center gap-12 py-6 text-center">
         <Chip className="rounded-full" variant={'secondary'}>
           <Link
             className="flex items-center justify-center gap-2"
@@ -44,29 +44,35 @@ export default function Hero() {
             </span>
           </Link>
         </Chip>
-        <h1 className="font-medium leading-tighter tracking-[-2px] text-4xl text-center md:text-6xl md:max-w-4xl font-dm-sans">
-          <span className='hidden sm:inline'>
-            Beautiful &{" "}
-          </span>
+        <h1 className="text-center font-dm-sans font-medium text-4xl leading-tighter tracking-[-2px] md:max-w-4xl md:text-6xl">
+          <span className="hidden sm:inline">Beautiful & </span>
           <span className="relative">
             <span className="relative z-10 text-black">Affordable</span>
-            <span className="absolute inset-0 bg-blue-200 rounded-md transform top-1/2 -translate-y-1/2  py-8 -rotate-1 -z-10"></span>
-          </span>{" "}
-          forms that won't{" "}
+            <span className="-translate-y-1/2 -rotate-1 -z-10 absolute inset-0 top-1/2 transform rounded-md bg-blue-200 py-8" />
+          </span>{' '}
+          forms that won't{' '}
           <span className="relative">
             <span className="relative z-10 text-black">bore users</span>
-            <span className="absolute inset-0 bg-yellow-200 rounded-md transform top-1/2 -translate-y-1/2 py-8  -rotate-1 -z-10"></span>
+            <span className="-translate-y-1/2 -rotate-1 -z-10 absolute inset-0 top-1/2 transform rounded-md bg-yellow-200 py-8" />
           </span>
         </h1>
 
         <p className="md:text-lg">
-          Enterprise-level forms with all the features you need at a price that makes sense
+          Enterprise-level forms with all the features you need at a price that
+          makes sense
         </p>
 
         <div className="flex w-fit flex-wrap items-center justify-center gap-3">
           {user ? (
-            <Button asChild variant="default" className="rounded-full border border-[0.5px] hover:brightness-99 px-7 py-6">
-              <Link className="flex items-center gap-2 font-medium" href="/dashboard">
+            <Button
+              asChild
+              className="rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99"
+              variant="default"
+            >
+              <Link
+                className="flex items-center gap-2 font-medium"
+                href="/dashboard"
+              >
                 Go to Dashboard{' '}
                 <svg
                   height="1em"
@@ -82,63 +88,94 @@ export default function Hero() {
               </Link>
             </Button>
           ) : (
-            <Button asChild variant="default" className="rounded-full border border-[0.5px] hover:brightness-99 px-7 py-6">
-              <Link className="flex items-center gap-2 font-medium" href="/login">
+            <Button
+              asChild
+              className="rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99"
+              variant="default"
+            >
+              <Link
+                className="flex items-center gap-2 font-medium"
+                href="/login"
+              >
                 Create Your First Form <ChevronRight />
               </Link>
             </Button>
           )}
 
-          <Button variant="secondary" className="rounded-full border border-[0.5px] hover:brightness-99 px-7 py-6" onClick={() => setOpen(true)}>
+          <Button
+            className="rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99"
+            onClick={() => setOpen(true)}
+            variant="secondary"
+          >
             Try Demo
           </Button>
-
         </div>
 
-        <div className="flex items-center gap-2 py-2 px-0 md:px-2 bg-transparent">
-          <AvatarGroup spacing="tighter" max={5} size="lg">
+        <div className="flex items-center gap-2 bg-transparent px-0 py-2 md:px-2">
+          <AvatarGroup max={5} size="lg" spacing="tighter">
             <Avatar className="rounded-full border-5">
-              <AvatarImage src="https://pbs.twimg.com/profile_images/1929279033180618752/0z6QXRbm_400x400.jpg" alt="user1" className="rounded-full" />
+              <AvatarImage
+                alt="user1"
+                className="rounded-full"
+                src="https://pbs.twimg.com/profile_images/1929279033180618752/0z6QXRbm_400x400.jpg"
+              />
               <AvatarFallback className="rounded-full bg-gray-100" />
             </Avatar>
             <Avatar className="rounded-full border-5">
-              <AvatarImage src="https://lh3.googleusercontent.com/a/ACg8ocLqFndqzPkUI_oMGZC8hSPgLWK3Lm3QKe7zMx6xkpisOApHiyZg7A=s96-c" alt="user2" className="rounded-full" />
+              <AvatarImage
+                alt="user2"
+                className="rounded-full"
+                src="https://lh3.googleusercontent.com/a/ACg8ocLqFndqzPkUI_oMGZC8hSPgLWK3Lm3QKe7zMx6xkpisOApHiyZg7A=s96-c"
+              />
               <AvatarFallback className="rounded-full bg-[#635BFF]" />
             </Avatar>
             <Avatar className="rounded-full border-5">
-              <AvatarImage src="https://avatars.githubusercontent.com/u/34282087?v=4" alt="user3" className="rounded-full" />
+              <AvatarImage
+                alt="user3"
+                className="rounded-full"
+                src="https://avatars.githubusercontent.com/u/34282087?v=4"
+              />
               <AvatarFallback className="rounded-full bg-white" />
             </Avatar>
             <Avatar className="rounded-full border-5">
-              <AvatarImage src="https://avatars.githubusercontent.com/u/6717865?v=4" alt="user4" className="rounded-full" />
+              <AvatarImage
+                alt="user4"
+                className="rounded-full"
+                src="https://avatars.githubusercontent.com/u/6717865?v=4"
+              />
               <AvatarFallback className="rounded-full" />
             </Avatar>
             <Avatar className="rounded-full border-5">
-              <AvatarImage src="https://avatars.githubusercontent.com/u/1053948?v=4" alt="user5" className="rounded-full" />
+              <AvatarImage
+                alt="user5"
+                className="rounded-full"
+                src="https://avatars.githubusercontent.com/u/1053948?v=4"
+              />
               <AvatarFallback className="rounded-full" />
             </Avatar>
           </AvatarGroup>
           <div className="flex flex-col items-center justify-center rounded-full px-5 py-2">
-            <span className="flex items-center gap-1 text-center justify-center">
+            <span className="flex items-center justify-center gap-1 text-center">
               <span className="text-sm">300+</span>
-              <span className="opacity-80 text-sm">active users sharing forms</span>
+              <span className="text-sm opacity-80">
+                active users sharing forms
+              </span>
             </span>
-            <div className="flex items-center justify-start gap-1 mt-2">
+            <div className="mt-2 flex items-center justify-start gap-1">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star
+                  aria-label="star"
+                  className="fill-[#FFD600] text-[#FFD600]"
                   key={i}
                   size={18}
-                  className="text-[#FFD600] fill-[#FFD600]"
-                  aria-label="star"
                 />
               ))}
             </div>
           </div>
         </div>
-
       </div>
       <div className="relative my-12 h-full w-full grow">
-        <div className="h-full w-full  rounded-4xl  overflow-hidden">
+        <div className="h-full w-full overflow-hidden rounded-4xl">
           <div className="relative h-full w-full">
             <video
               className="h-full w-full object-cover"
@@ -168,18 +205,10 @@ export default function Hero() {
               <ModalTitle>Choose a Demo</ModalTitle>
             </ModalHeader>
             <div className="flex w-full flex-col items-center gap-4">
-              <Button
-                asChild
-                className="w-full max-w-xs font-medium"
-                size="lg"
-              >
+              <Button asChild className="w-full max-w-xs font-medium" size="lg">
                 <Link href="/demo-form-builder">Form Builder Demo</Link>
               </Button>
-              <Button
-                asChild
-                className="w-full max-w-xs font-medium"
-                size="lg"
-              >
+              <Button asChild className="w-full max-w-xs font-medium" size="lg">
                 <Link
                   href="/f/24ec3d8d-40ef-4143-b289-4e43c112d80e"
                   target="_blank"
@@ -190,7 +219,7 @@ export default function Hero() {
             </div>
           </ModalContent>
         </Modal>
-        { }
+        {}
         <Modal onOpenChange={setVideoOpen} open={videoOpen}>
           <ModalContent className="z-50 flex aspect-video w-full max-w-[90%] flex-col gap-6">
             <ModalHeader className="sr-only">
