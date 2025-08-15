@@ -14,15 +14,11 @@ export default function Review({
 }) {
   return (
     <>
-      <div className="mx-auto flex max-w-xl flex-col items-center justify-center gap-8 px-4 py-12 md:px-8 md:py-28">
-        <div className="flex items-center gap-1">
-          <Star fill="#eab308" size={20} stroke="none" />
-          <Star fill="#eab308" size={20} stroke="none" />
-          <Star fill="#eab308" size={20} stroke="none" />
-          <Star fill="#eab308" size={20} stroke="none" />
-          <Star fill="#eab308" size={20} stroke="none" />
+      <div className="mx-auto flex flex-col items-center justify-center gap-8 p-4 max-w-7xl">
+        <div className="flex items-center">
+          <span className='font-medum text-4xl'>"</span>
         </div>
-        <p className="text-center">{review}</p>
+        <p className="text-center text-xl leading-[46px] tracking-loose">{review}</p>
         <div className="flex items-center justify-center gap-3">
           <div className="overflow-ellipsis rounded-card">
             <OptimizedImage
@@ -35,7 +31,7 @@ export default function Review({
           </div>
           <div className="flex flex-col items-start justify-center">
             <p>{name}</p>
-            <p className="text-muted-foreground text-sm">{role}</p>
+            <p className="text-muted-foreground text-sm opacity-70">{role}</p>
           </div>
         </div>
       </div>
