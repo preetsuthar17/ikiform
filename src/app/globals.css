@@ -6,7 +6,7 @@
   --font-inter: var(--font-inter) !important;
   --font-geist: var(--font-geist) !important;
   --font-geist-mono: var(--font-geist-mono) !important;
-  --font-poppins: var(--font-poppins) !important;
+  --font-dm-sans: var(--font-dm-sans) !important;
 
   --radius-ele: var(--radius);
   --radius-card: var(--card-radius);
@@ -77,13 +77,13 @@
 :root {
   --radius: 8px;
   --card-radius: 10px;
-  --hu-background: 0, 0%, 99%;
+  --hu-background: 210, 20%, 98%;
   --hu-foreground: 0, 0%, 10%;
   --hu-card: 0, 0%, 98%;
   --hu-card-foreground: 0, 0%, 10%;
   --hu-primary: 0, 0%, 20%;
   --hu-primary-foreground: 0, 0%, 98%;
-  --hu-secondary: 0, 0%, 94%;
+  --hu-secondary: 0, 0%, 100%;
   --hu-secondary-foreground: 0, 0%, 20%;
   --hu-muted: 0, 0%, 95%;
   --hu-muted-foreground: 0, 0%, 40%;
@@ -132,7 +132,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-inter;
+    @apply bg-background text-foreground font-geist;
   }
 }
 
@@ -310,7 +310,7 @@ pre {
 h1,
 h2,
 h3 {
-  @apply font-poppins;
+  @apply font-dm-sans tracking-[-3%];
 }
 
 .legal {
