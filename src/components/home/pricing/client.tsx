@@ -369,7 +369,7 @@ export default function PricingClient({ products }: PricingClientProps) {
                             </Button>
                             <Button
                               className="w-full rounded-full"
-                              size="sm"
+                              size="lg"
                               variant="outline"
                             >
                               <Link
