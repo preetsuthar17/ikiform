@@ -84,8 +84,6 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
     router.push(`/form-builder/${formId}`);
   };
 
-
-
   const sections = [
     {
       id: 'presets' as const,
