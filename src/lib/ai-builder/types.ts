@@ -27,7 +27,6 @@ export interface ChatPanelProps {
   streamingRef: React.RefObject<HTMLDivElement | null>;
   messagesEndRef: React.RefObject<HTMLDivElement | null>;
   mounted: boolean;
-  theme: string | undefined;
 }
 
 export interface PreviewPanelProps {

@@ -26,13 +26,11 @@ const SingleStepForm = dynamic(
 interface PublicFormContentProps {
   formId: string;
   schema: any;
-  theme?: string;
 }
 
 export default function PublicFormContent({
   formId,
   schema,
-  theme,
 }: PublicFormContentProps) {
   const isMultiStep = schema.settings?.multiStep || schema.blocks?.length > 1;
   const dir = schema.settings?.rtl ? 'rtl' : 'ltr';
@@ -40,24 +38,26 @@ export default function PublicFormContent({
 
   return (
     <CSSPropertiesProvider borderRadius={borderRadius}>
-      <div
-        className={`flex flex-col gap-4${theme ? `theme-${theme}` : ''}`}
-        dir={dir}
-      >
-        <Suspense
-          fallback={
-            <FormSkeleton
-              showProgress={isMultiStep}
-              variant={isMultiStep ? 'multi-step' : 'single-step'}
-            />
-          }
+      <div className="light">
+        <div
+          className="flex flex-col gap-4"
+          dir={dir}
         >
-          {isMultiStep ? (
-            <MultiStepForm dir={dir} formId={formId} schema={schema} />
-          ) : (
-            <SingleStepForm dir={dir} formId={formId} schema={schema} />
-          )}
-        </Suspense>
+          <Suspense
+            fallback={
+              <FormSkeleton
+                showProgress={isMultiStep}
+                variant={isMultiStep ? 'multi-step' : 'single-step'}
+              />
+            }
+          >
+            {isMultiStep ? (
+              <MultiStepForm dir={dir} formId={formId} schema={schema} />
+            ) : (
+              <SingleStepForm dir={dir} formId={formId} schema={schema} />
+            )}
+          </Suspense>
+        </div>
       </div>
     </CSSPropertiesProvider>
   );

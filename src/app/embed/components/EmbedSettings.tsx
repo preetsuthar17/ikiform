@@ -97,25 +97,6 @@ export default function EmbedSettings({
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div className="flex flex-col gap-2">
-            <Label>Theme</Label>
-            <Select
-              onValueChange={(value) =>
-                updateConfig({ theme: value as 'light' | 'dark' | 'auto' })
-              }
-              value={config.theme}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select theme" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="light">Light</SelectItem>
-                <SelectItem value="dark">Dark</SelectItem>
-                <SelectItem value="auto">Auto (matches system)</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="flex flex-col gap-2">
             <Label>Background Color</Label>
             <div className="flex gap-2">
               <input

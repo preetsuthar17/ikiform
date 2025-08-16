@@ -12,7 +12,7 @@ import {
 import { AnimatePresence, motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTheme } from 'next-themes';
+
 import { useAuth } from '@/hooks/use-auth';
 import { Button } from '../ui/button';
 import {
@@ -69,90 +69,7 @@ function DrawerNavLink({
   );
 }
 
-function ThemeToggleButton() {
-  const { theme, setTheme } = useTheme();
-  const isDark = theme === 'dark';
 
-  function handleToggle() {
-    setTheme(isDark ? 'light' : 'dark');
-  }
-
-  return (
-    <Button
-      asChild
-      className="relative overflow-hidden rounded-full border border-[0.5px] hover:brightness-99"
-      onClick={handleToggle}
-      size="icon"
-      variant="secondary"
-    >
-      <span className="relative flex items-center justify-center gap-2 px-5 py-5 font-medium">
-        <AnimatePresence mode="wait">
-          {isDark ? (
-            <motion.div
-              animate={{
-                x: 0,
-                y: 0,
-                rotate: 0,
-                opacity: 1,
-              }}
-              className="absolute"
-              exit={{
-                x: 40,
-                y: 20,
-                rotate: 180,
-                opacity: 0,
-              }}
-              initial={{
-                x: -40,
-                y: -20,
-                rotate: -180,
-                opacity: 0,
-              }}
-              key="sun"
-              transition={{
-                duration: 0.2,
-                ease: [0.6, 0, 0.4, 1],
-                opacity: { duration: 0.15 },
-              }}
-            >
-              <Sun className="h-5 w-5 text-yellow-400" />
-            </motion.div>
-          ) : (
-            <motion.div
-              animate={{
-                x: 0,
-                y: 0,
-                rotate: 0,
-                opacity: 1,
-              }}
-              className="absolute"
-              exit={{
-                x: -40,
-                y: -20,
-                rotate: -180,
-                opacity: 0,
-              }}
-              initial={{
-                x: 40,
-                y: 20,
-                rotate: 180,
-                opacity: 0,
-              }}
-              key="moon"
-              transition={{
-                duration: 0.2,
-                ease: [0.6, 0, 0.4, 1],
-                opacity: { duration: 0.15 },
-              }}
-            >
-              <Moon className="h-5 w-5 text-gray-700" />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </span>
-    </Button>
-  );
-}
 export default function Header() {
   const { user } = useAuth();
 
@@ -163,7 +80,7 @@ export default function Header() {
           <span className="flex items-center justify-center gap-2 font-semibold text-3xl tracking-tight">
             <Image
               alt="Ikiform Logo"
-              className="dark:invert"
+
               height={36}
               src="/favicon.ico"
               width={36}
@@ -201,7 +118,7 @@ export default function Header() {
         </Link>
       </div>
       <div className="hidden flex-1 justify-end gap-1 md:flex">
-        <ThemeToggleButton />
+        
         {user ? (
           <Button
             asChild

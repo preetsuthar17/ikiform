@@ -288,7 +288,7 @@ export default function EmbedCodeModal({
   };
 
   const generateWordPressCode = () => {
-    const shortcode = `[ikiform_embed id="${formId}" width="${config.width}" height="${config.height}" theme="${config.theme}"]`;
+    const shortcode = `[ikiform_embed id="${formId}" width="${config.width}" height="${config.height}"]`;
 
     let code = '<!-- WordPress Shortcode -->\n';
     code += `${shortcode}\n\n`;

@@ -46,7 +46,7 @@ export function EmbeddedForm({ className, style }: EmbeddedFormProps) {
     <div className={`flex justify-center w-full ${className || ''}`}>
       <iframe
         ref={iframeRef}
-        src="https://www.ikiform.com/forms/24ec3d8d-40ef-4143-b289-4e43c112d80e?theme=light"
+        src="https://www.ikiform.com/forms/24ec3d8d-40ef-4143-b289-4e43c112d80e"
         style={iframeStyle}
         title="Form"
         loading="lazy"

@@ -7,8 +7,6 @@ import type { FloatingChatButtonProps } from '../types';
 
 export const FloatingChatButton: React.FC<FloatingChatButtonProps> = ({
   onClick,
-  theme,
-  mounted,
 }) => {
   return (
     <div className="cursor-pointer">
@@ -19,9 +17,7 @@ export const FloatingChatButton: React.FC<FloatingChatButtonProps> = ({
       >
         <Image
           alt="Ikiform"
-          className={`pointer-events-none cursor-pointer rounded-ele ${
-            mounted && theme === 'light' ? 'invert' : ''
-          }`}
+          className={`pointer-events-none cursor-pointer rounded-ele`}
           height={100}
           src="/logo.svg"
           width={100}

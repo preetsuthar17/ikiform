@@ -13,10 +13,6 @@ import { ChatSuggestions } from './chat-suggestions';
 import { StreamingIndicator } from './streaming-indicator';
 import { WelcomeMessage } from './welcome-message';
 
-/**
- * Optimized Chat Panel component with memoization
- * Minimizes re-renders and improves performance
- */
 export const ChatPanel = memo(function ChatPanel({
   messages,
   isLoading,
@@ -34,7 +30,6 @@ export const ChatPanel = memo(function ChatPanel({
   streamingRef,
   messagesEndRef,
   mounted,
-  theme,
 }: ChatPanelProps) {
   const shouldShowSuggestions = showSuggestions && messages.length === 0;
 
@@ -52,7 +47,7 @@ export const ChatPanel = memo(function ChatPanel({
       <ScrollArea className="relative flex-1 p-4">
         <div className="flex flex-col gap-4">
           {messages.length === 0 && (
-            <WelcomeMessage mounted={mounted} theme={theme} />
+            <WelcomeMessage mounted={mounted} />
           )}
           <AnimatePresence>
             {messages.map((message, index) => (

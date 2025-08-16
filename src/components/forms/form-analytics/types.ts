@@ -123,8 +123,6 @@ export interface SubmissionsListProps {
 
 export interface FloatingChatButtonProps {
   onClick: () => void;
-  theme: string | undefined;
-  mounted: boolean;
 }
 
 export interface ChatModalProps {

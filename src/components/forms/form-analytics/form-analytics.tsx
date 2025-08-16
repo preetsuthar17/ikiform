@@ -12,7 +12,7 @@ import {
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useTheme } from 'next-themes';
+
 
 import React, { useEffect, useState } from 'react';
 import { ConfirmationModal } from '@/components/dashboard/form-delete-confirmation-modal';
@@ -62,7 +62,6 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const { theme } = useTheme();
 
   const { submissions, loading, refreshing, refreshData } = useFormSubmissions(
     form.id
@@ -315,9 +314,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
         }}
       />
       <FloatingChatButton
-        mounted={mounted}
         onClick={() => setChatOpen(true)}
-        theme={theme}
       />
       <ChatModal
         abortController={abortController}

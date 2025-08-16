@@ -9,7 +9,7 @@ import {
 } from 'next/font/google';
 import './globals.css';
 import { Databuddy } from '@databuddy/sdk';
-import { ThemeProvider } from 'next-themes';
+
 import CrispController from '@/components/other/CrispController';
 import { Toaster } from '@/components/ui/toast';
 import ConditionalLayout from './conditional-layout';
@@ -180,26 +180,24 @@ export default function RootLayout({
       </head>
       <CrispController />
       <body
-        className={` ${geist.className} ${inter.variable} ${jetBrainsMono.variable} ${geistMono.variable} ${dmSans.variable} antialiased`}
+        className={`light ${geist.className} ${inter.variable} ${jetBrainsMono.variable} ${geistMono.variable} ${dmSans.variable} antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <ConditionalLayout>{children}</ConditionalLayout>
-          <Databuddy
-            clientId="jDhbBGL7-4rwsNXj-GcgK"
-            enableBatching={true}
-            trackAttributes={true}
-            trackBounceRate={true}
-            trackEngagement={true}
-            trackErrors={true}
-            trackExitIntent={true}
-            trackHashChanges={true}
-            trackInteractions={true}
-            trackOutgoingLinks={true}
-            trackScrollDepth={true}
-            trackWebVitals={true}
-          />{' '}
-          <Toaster position="top-center" />
-        </ThemeProvider>
+        <ConditionalLayout>{children}</ConditionalLayout>
+        <Databuddy
+          clientId="jDhbBGL7-4rwsNXj-GcgK"
+          enableBatching={true}
+          trackAttributes={true}
+          trackBounceRate={true}
+          trackEngagement={true}
+          trackErrors={true}
+          trackExitIntent={true}
+          trackHashChanges={true}
+          trackInteractions={true}
+          trackOutgoingLinks={true}
+          trackScrollDepth={true}
+          trackWebVitals={true}
+        />{' '}
+        <Toaster position="top-center" />
       </body>
     </html>
   );

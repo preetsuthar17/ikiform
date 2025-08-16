@@ -12,7 +12,7 @@ import {
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useTheme } from 'next-themes';
+
 
 import React, { useEffect, useState } from 'react';
 import { ConfirmationModal } from '@/components/dashboard/form-delete-confirmation-modal';
@@ -89,7 +89,7 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
     setChatOpen,
   } = useAnalyticsChat(form, submissions, analyticsData);
 
-  const { theme } = useTheme();
+
 
   useEffect(() => {
     const checkMobile = () => {
@@ -246,9 +246,7 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
         {}
         {!isMobile && (
           <FloatingChatButton
-            mounted={true}
             onClick={() => setChatOpen(!chatOpen)}
-            theme={theme}
           />
         )}
 

@@ -5,13 +5,11 @@ import { FormSkeleton } from './FormSkeletons';
 interface PublicFormServerWrapperProps {
   formId: string;
   schema: any;
-  theme?: string;
 }
 
 export default function PublicFormServerWrapper({
   formId,
   schema,
-  theme,
 }: PublicFormServerWrapperProps) {
   const isMultiStep = schema.settings?.multiStep || schema.blocks?.length > 1;
 
@@ -24,7 +22,7 @@ export default function PublicFormServerWrapper({
         />
       }
     >
-      <PublicFormClient formId={formId} schema={schema} theme={theme} />
+      <PublicFormClient formId={formId} schema={schema} />
     </Suspense>
   );
 }

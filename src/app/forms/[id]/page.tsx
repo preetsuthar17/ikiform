@@ -4,7 +4,6 @@ import PublicFormServerWrapper from './components/PublicFormServerWrapper';
 
 interface PublicFormPageProps {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export async function generateMetadata({
@@ -44,14 +43,8 @@ export async function generateMetadata({
 
 export default async function PublicFormPage({
   params,
-  searchParams,
 }: PublicFormPageProps) {
   const { id } = await params;
-  const resolvedSearchParams = await searchParams;
-  const theme =
-    typeof resolvedSearchParams?.theme === 'string'
-      ? resolvedSearchParams.theme
-      : undefined;
 
   try {
     const form = await formsDbServer.getPublicForm(id);
@@ -61,7 +54,7 @@ export default async function PublicFormPage({
     }
 
     return (
-      <PublicFormServerWrapper formId={id} schema={form.schema} theme={theme} />
+      <PublicFormServerWrapper formId={id} schema={form.schema} />
     );
   } catch (error) {
     console.error('Error loading form:', error);

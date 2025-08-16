@@ -1,7 +1,7 @@
 'use client';
 
 import { Check, Copy } from 'lucide-react';
-import { useTheme } from 'next-themes';
+
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createHighlighter, type Highlighter } from 'shiki';
 
@@ -53,7 +53,7 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
   const [copied, setCopied] = useState(false);
   const [highlightedCode, setHighlightedCode] = useState<string>('');
   const [isHighlighting, setIsHighlighting] = useState(false);
-  const { theme } = useTheme();
+
   const abortControllerRef = useRef<AbortController | null>(null);
 
   const jsonString = useMemo(() => {
@@ -87,7 +87,7 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
 
         if (abortController.signal.aborted) return;
 
-        const selectedTheme = theme === 'dark' ? 'github-dark' : 'github-light';
+        const selectedTheme = 'github-light';
 
         const highlight = () => {
           if (abortController.signal.aborted) return;
@@ -132,7 +132,7 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
     return () => {
       abortController.abort();
     };
-  }, [jsonString, theme, isOpen]);
+  }, [jsonString, isOpen]);
 
   useEffect(() => {
     return () => {

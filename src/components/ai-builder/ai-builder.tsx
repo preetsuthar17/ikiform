@@ -1,7 +1,7 @@
 import { Sparkles } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-import { useTheme } from 'next-themes';
+
 import { useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -24,7 +24,7 @@ import { PreviewPanel } from './preview/preview-panel';
 
 export function AIBuilder() {
   const { user, loading: authLoading } = useAuth();
-  const { theme } = useTheme();
+
   const router = useRouter();
   const { hasPremium, checkingPremium: checking } = usePremiumStatus(user);
   const [chatDrawerOpen, setChatDrawerOpen] = useState(false);
@@ -78,7 +78,6 @@ export function AIBuilder() {
     streamingRef,
     messagesEndRef,
     mounted,
-    theme,
     showSuggestions,
     setShowSuggestions,
   };

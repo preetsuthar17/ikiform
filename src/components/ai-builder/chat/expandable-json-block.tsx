@@ -1,6 +1,6 @@
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { motion } from 'motion/react';
-import { useTheme } from 'next-themes';
+
 import { memo, useEffect, useMemo, useState } from 'react';
 import { createHighlighter } from 'shiki';
 import { Button } from '@/components/ui/button';
@@ -31,7 +31,7 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
 }: ExpandableJsonBlockProps) {
   const [expanded, setExpanded] = useState(false);
   const [highlightedCode, setHighlightedCode] = useState<string>('');
-  const { theme } = useTheme();
+
   const targetHeight = expanded ? 300 : 100;
 
   const jsonString = useMemo(() => JSON.stringify(schema, null, 2), [schema]);
@@ -44,7 +44,7 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
         const highlighter = await getHighlighter();
         if (!isMounted) return;
 
-        const selectedTheme = theme === 'dark' ? 'github-dark' : 'github-light';
+        const selectedTheme = 'github-light';
         const html = highlighter.codeToHtml(jsonString, {
           lang: 'json',
           theme: selectedTheme,
@@ -69,7 +69,7 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
       isMounted = false;
       clearTimeout(timeoutId);
     };
-  }, [jsonString, theme]);
+  }, [jsonString]);
 
   return (
     <div className="my-2 rounded-card border border-border bg-muted/50 p-3 font-mono text-xs">

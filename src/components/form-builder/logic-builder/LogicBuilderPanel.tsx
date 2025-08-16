@@ -1,6 +1,6 @@
 import { Check, Copy, Pencil, Trash } from 'lucide-react';
 import { motion } from 'motion/react';
-import { useTheme } from 'next-themes';
+
 import React from 'react';
 import { Alert } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
@@ -271,7 +271,7 @@ function LogicBuilderPanelContent({
   const [loadingHighlight, setLoadingHighlight] = React.useState(false);
   const [copied, setCopied] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState('rules');
-  const { theme } = useTheme();
+
 
   React.useEffect(() => {
     if (!showJson) return;
@@ -281,7 +281,7 @@ function LogicBuilderPanelContent({
       try {
         const highlighter = await getHighlighter();
         if (cancelled) return;
-        const selectedTheme = theme === 'dark' ? 'github-dark' : 'github-light';
+        const selectedTheme = 'github-light';
         const code = JSON.stringify(logic, null, 2);
         const html = highlighter.codeToHtml(code, {
           lang: 'json',
@@ -301,7 +301,7 @@ function LogicBuilderPanelContent({
     return () => {
       cancelled = true;
     };
-  }, [showJson, logic, theme]);
+  }, [showJson, logic]);
 
   const handleAddItem = () => {
     setEditingItem(undefined);

@@ -12,6 +12,8 @@ export function PublicForm({ formId, schema, theme }: PublicFormProps) {
   const dir = schema.settings.rtl ? 'rtl' : 'ltr';
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const settings = schema?.settings;
     const layout = settings?.layout;
     const colors = (settings as any)?.colors;
@@ -43,6 +45,8 @@ export function PublicForm({ formId, schema, theme }: PublicFormProps) {
         cardRadiusValue = '32px';
         break;
     }
+
+    
 
     // Set CSS custom properties
     const root = document.documentElement;

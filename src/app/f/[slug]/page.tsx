@@ -43,14 +43,8 @@ export async function generateMetadata({
 
 export default async function PublicFormPage({
   params,
-  searchParams,
 }: PublicFormPageProps) {
   const { slug } = await params;
-  const resolvedSearchParams = await searchParams;
-  const theme =
-    typeof resolvedSearchParams.theme === 'string'
-      ? resolvedSearchParams.theme
-      : 'light';
 
   try {
     const form = await formsDbServer.getPublicForm(slug);
@@ -63,7 +57,6 @@ export default async function PublicFormPage({
       <PublicFormServerWrapper
         formId={form.id}
         schema={form.schema}
-        theme={theme}
       />
     );
   } catch (error) {

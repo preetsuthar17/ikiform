@@ -5,10 +5,9 @@ import Link from 'next/link';
 
 interface WelcomeMessageProps {
   mounted: boolean;
-  theme: string | undefined;
 }
 
-export function WelcomeMessage({ mounted, theme }: WelcomeMessageProps) {
+export function WelcomeMessage({ mounted }: WelcomeMessageProps) {
   return (
     <motion.div
       animate={{ opacity: 1, y: 0 }}
@@ -19,9 +18,7 @@ export function WelcomeMessage({ mounted, theme }: WelcomeMessageProps) {
         <Link href="/">
           <Image
             alt="Ikiform"
-            className={`pointer-events-none ${
-              mounted && theme === 'light' ? 'invert' : ''
-            }`}
+            className={`pointer-events-none`}
             height={69}
             src="/logo.svg"
             width={69}

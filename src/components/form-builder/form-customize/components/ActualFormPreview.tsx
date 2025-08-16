@@ -59,10 +59,13 @@ export function ActualFormPreview({
       : undefined,
   };
 
-  // Set CSS custom properties for the preview
   React.useEffect(() => {
     if (typeof window === 'undefined') return;
-
+    
+    // Force light theme
+    document.documentElement.classList.remove('dark');
+    document.documentElement.classList.add('light');
+    
     const root = document.documentElement;
 
     // Set border radius
@@ -124,6 +127,9 @@ export function ActualFormPreview({
       root.style.removeProperty('--form-text-color');
       root.style.removeProperty('--form-background-color');
       root.style.removeProperty('--form-border-color');
+      
+      // Remove forced light theme classes
+      document.documentElement.classList.remove('light');
     };
   }, [layout, colors]);
 
@@ -139,18 +145,19 @@ export function ActualFormPreview({
   const progress = ((currentStep + 1) / totalSteps) * 100;
 
   return (
-    <Card className={`p-4 ${className}`}>
-      <div
-        className={
-          'flex items-center justify-center transition-all duration-200'
-        }
-        style={{
-          margin: formMargin,
-          fontFamily: typography.fontFamily
-            ? `"${typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`
-            : undefined,
-        }}
-      >
+    <div className="light">
+      <Card className={`p-4 ${className}`}>
+        <div
+          className={
+            'flex items-center justify-center transition-all duration-200'
+          }
+          style={{
+            margin: formMargin,
+            fontFamily: typography.fontFamily
+              ? `"${typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`
+              : undefined,
+          }}
+        >
         <div
           className={`ikiform-customized flex w-full flex-col gap-8 ${
             layout.maxWidth === 'custom' && layout.customWidth
@@ -320,5 +327,6 @@ export function ActualFormPreview({
         </div>
       </div>
     </Card>
+      </div>
   );
 }

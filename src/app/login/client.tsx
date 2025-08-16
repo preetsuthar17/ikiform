@@ -313,7 +313,7 @@ export default function LoginForm() {
                     htmlFor="email"
                     className={`absolute left-4 pointer-events-none select-none transition-all duration-300 linear ${
                       isFieldActive('email')
-                        ? '-top-3.5 text-sm bg-linear-to-t from-card to-background px-2 text-primary'
+                        ? '-top-3.5 text-sm bg-linear-to-t dark:from-input from-card to-background px-2 text-primary'
                         : 'top-3.5 text-sm opacity-30 left-6'
                     } ${focusedFields.email && !isFieldActive('email') ? 'text-primary' : ''}`}
                   >
@@ -350,7 +350,7 @@ export default function LoginForm() {
                     htmlFor="name"
                     className={`absolute left-4 pointer-events-none select-none transition-all duration-300 linear ${
                       isFieldActive('name')
-                        ? '-top-3.5 text-sm bg-linear-to-t from-card to-background px-2 text-primary'
+                        ? '-top-3.5 text-sm bg-linear-to-t dark:from-input from-card to-background px-2 text-primary'
                         : 'top-3.5 text-sm opacity-30 left-6'
                     } ${focusedFields.name && !isFieldActive('name') ? 'text-primary' : ''}`}
                   >
@@ -387,7 +387,7 @@ export default function LoginForm() {
                     htmlFor="password"
                     className={`absolute left-4 pointer-events-none select-none transition-all duration-300 linear ${
                       isFieldActive('password')
-                        ? '-top-3.5 text-sm bg-linear-to-t from-card to-background px-2 text-primary'
+                        ? '-top-3.5 text-sm bg-linear-to-t dark:from-input from-card to-background px-2 text-primary'
                         : 'top-3.5 text-sm opacity-30 left-6'
                     } ${focusedFields.password && !isFieldActive('password') ? 'text-primary' : ''}`}
                   >

@@ -1,4 +1,4 @@
-import { useTheme } from 'next-themes';
+
 import { useEffect, useState } from 'react';
 
 import { createHighlighter } from 'shiki';
@@ -25,7 +25,7 @@ interface JsonModalProps {
 
 export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
   const [highlightedCode, setHighlightedCode] = useState<string>('');
-  const { theme } = useTheme();
+
 
   useEffect(() => {
     if (!activeForm?.schema) return;
@@ -38,7 +38,7 @@ export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
         });
 
         const jsonString = JSON.stringify(activeForm.schema, null, 2);
-        const selectedTheme = theme === 'dark' ? 'github-dark' : 'github-light';
+        const selectedTheme = 'github-light';
         const html = highlighter.codeToHtml(jsonString, {
           lang: 'json',
           theme: selectedTheme,
@@ -55,7 +55,7 @@ export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
     };
 
     highlightCode();
-  }, [activeForm?.schema, theme]);
+  }, [activeForm?.schema]);
 
   if (!activeForm?.schema) return null;
 

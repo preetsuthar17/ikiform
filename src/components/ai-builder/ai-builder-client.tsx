@@ -2,7 +2,7 @@
 
 import { Sparkles } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useTheme } from 'next-themes';
+
 import { useEffect, useMemo, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -21,14 +21,9 @@ import { MobileChatDrawerWrapper } from './mobile-chat-drawer-wrapper';
 import { PremiumGuardOptimized } from './premium-guard-optimized';
 import { PreviewPanel } from './preview/preview-panel';
 
-/**
- * Client component for AI Builder
- * Contains all interactive logic that requires client-side rendering
- * Optimized to minimize useEffect usage and prioritize performance
- */
 export function AIBuilderClient() {
   const { user, loading: authLoading } = useAuth();
-  const { theme } = useTheme();
+
   const router = useRouter();
   const { hasPremium, checkingPremium: checking } = usePremiumStatus(user);
   const [chatDrawerOpen, setChatDrawerOpen] = useState(false);
@@ -96,7 +91,6 @@ export function AIBuilderClient() {
       streamingRef,
       messagesEndRef,
       mounted: true,
-      theme,
       showSuggestions,
       setShowSuggestions,
     }),
@@ -114,7 +108,6 @@ export function AIBuilderClient() {
       setStreamError,
       streamingRef,
       messagesEndRef,
-      theme,
       showSuggestions,
       setShowSuggestions,
     ]

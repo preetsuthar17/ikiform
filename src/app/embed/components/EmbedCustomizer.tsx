@@ -16,7 +16,6 @@ export interface EmbedConfig {
   borderRadius: number;
   padding: number;
   backgroundColor: string;
-  theme: 'light' | 'dark' | 'auto';
   showBorder: boolean;
   borderColor: string;
   borderWidth: number;
@@ -36,7 +35,6 @@ const defaultConfig: EmbedConfig = {
   borderRadius: 8,
   padding: 0,
   backgroundColor: '#ffffff',
-  theme: 'light',
   showBorder: true,
   borderColor: '#e5e7eb',
   borderWidth: 1,
@@ -57,7 +55,7 @@ export default function EmbedCustomizer({
     setConfig((prev) => ({ ...prev, ...updates }));
   };
 
-  const embedUrl = `${process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://www.ikiform.com'}/forms/${formId}?theme=${config.theme}`;
+  const embedUrl = `${process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://www.ikiform.com'}/forms/${formId}`;
 
   return (
     <div className="flex flex-col gap-6">

@@ -61,7 +61,7 @@
     "motion": "^12.23.12",
     "next": "15.4.6",
     "next-sitemap": "^4.2.3",
-    "next-themes": "^0.4.6",
+
     "postcss": "^8.5.6",
     "postgres": "^3.4.7",
     "prettier": "^3.6.2",
