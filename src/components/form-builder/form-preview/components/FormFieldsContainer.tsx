@@ -61,6 +61,9 @@ export function FormFieldsContainer({
       <DropdownMenuTrigger asChild>
         <Button
           className="h-42 w-full border-2 border-dashed transition-colors hover:border-primary/50 hover:bg-accent/10"
+          style={{
+            borderRadius: '1.2rem',
+          }}
           variant="outline"
         >
           <Plus className="h-4 w-4" />
