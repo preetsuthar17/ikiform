@@ -32,7 +32,7 @@ const FeatureCard = ({
 }: FeatureCardProps) => {
   return (
     <Card
-      className={`overflow-hidden border-0 bg-card p-4 shadow-none transition-all duration-300 ease-out rounded-4xl ${className}`}
+      className={`overflow-hidden rounded-4xl border-0 bg-card p-4 shadow-none transition-all duration-300 ease-out ${className}`}
     >
       <div className="flex h-full w-full flex-col p-6">
         {/* Preview */}
