@@ -163,5 +163,5 @@ export const getFormCustomStyles = async (
 };
 
 export const getDesignModeClass = () => {
-  return 'bg-transparent border-none shadow-none hover:bg-transparent';
+  return 'bg-transparent border-none  hover:bg-transparent';
 };

@@ -11,13 +11,13 @@ const chipVariants = cva(
     variants: {
       variant: {
         default:
-          'border-transparent bg-primary text-primary-foreground shadow-sm/2 hover:bg-primary/80 focus-visible:ring-ring',
+          'border-transparent bg-primary text-primary-foreground hover:bg-primary/80 focus-visible:ring-ring',
         secondary:
           'border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 focus-visible:ring-ring',
         destructive:
-          'border-transparent bg-destructive text-destructive-foreground shadow-sm/2 hover:bg-destructive/80 focus-visible:ring-destructive',
+          'border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80 focus-visible:ring-destructive',
         outline:
-          'border-border text-foreground shadow-sm/2 hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring',
+          'border-border text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring',
         ghost:
           'border-transparent text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring',
       },

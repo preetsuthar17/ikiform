@@ -18,7 +18,7 @@ export function AIBuilderSkeleton() {
       <div className="md:hidden">
         {}
         <div className="-translate-x-1/2 fixed bottom-4 left-1/2 z-50 w-full max-w-[90%]">
-          <Skeleton className="h-12 w-full rounded-card shadow-lg" />
+          <Skeleton className="h-12 w-full rounded-card" />
         </div>
 
         {}

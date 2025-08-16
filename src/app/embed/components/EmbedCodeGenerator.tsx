@@ -358,7 +358,7 @@ export default function EmbedCodeGenerator({
           const IconComponent = mode.icon;
           return (
             <Card
-              className={`cursor-pointer transition-all hover:shadow-md ${
+              className={`hover: cursor-pointer transition-all ${
                 embedMode === mode.id
                   ? 'border-primary bg-primary/5'
                   : 'hover:border-primary/50'

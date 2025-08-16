@@ -248,7 +248,7 @@ const featureCategories = [
 export default function FeatureComparisonTable() {
   return (
     <div className="mx-auto w-full overflow-x-auto px-4 pb-8 md:px-8">
-      <div className="w-full rounded-card border bg-background shadow-md/2">
+      <div className="w-full rounded-card border bg-background">
         <table className="w-full border-collapse overflow-hidden rounded-card text-left">
           <tbody>
             {featureCategories.map((category) => (

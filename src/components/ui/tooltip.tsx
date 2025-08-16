@@ -7,7 +7,7 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 const tooltipVariants = cva(
-  'z-50 overflow-hidden rounded-card border border-border bg-card px-3 py-1.5 text-card-foreground text-xs shadow-sm/2',
+  'z-50 overflow-hidden rounded-card border border-border bg-card px-3 py-1.5 text-card-foreground text-xs',
   {
     variants: {
       variant: {

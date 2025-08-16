@@ -102,7 +102,7 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
         maxSize={PANEL_SIZES.PREVIEW_PANEL.max}
         minSize={PANEL_SIZES.PREVIEW_PANEL.min}
       >
-        <ScrollArea className="h-full">
+        <ScrollArea className="h-full bg-background">
           <FormPreview
             onAddField={onFieldAdd}
             onBlockUpdate={onBlockUpdate}

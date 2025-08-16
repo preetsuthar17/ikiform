@@ -5,7 +5,7 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 const kbdVariants = cva(
-  'inline-flex cursor-pointer select-none items-center justify-center rounded-ele border border-border border-b-3 bg-muted font-mono text-muted-foreground text-xs shadow-sm/2 transition-all duration-75 hover:bg-muted/80 active:translate-y-[1px] active:border-b-[1px]',
+  'inline-flex cursor-pointer select-none items-center justify-center rounded-ele border border-border border-b-3 bg-muted font-mono text-muted-foreground text-xs transition-all duration-75 hover:bg-muted/80 active:translate-y-[1px] active:border-b-[1px]',
   {
     variants: {
       variant: {

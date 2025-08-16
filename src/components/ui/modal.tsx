@@ -36,7 +36,7 @@ const ModalContent = React.forwardRef<
       <motion.div
         animate={{ opacity: 1, scale: 1 }}
         className={cn(
-          'fixed top-[50%] left-[50%] z-50 w-[95%] max-w-lg translate-x-[-50%] translate-y-[-50%] rounded-4xl border border-border bg-background p-6 shadow-lg',
+          'fixed top-[50%] left-[50%] z-50 w-[95%] max-w-lg translate-x-[-50%] translate-y-[-50%] rounded-4xl border border-border bg-background p-6',
           className
         )}
         exit={{ opacity: 0, scale: 0.95 }}

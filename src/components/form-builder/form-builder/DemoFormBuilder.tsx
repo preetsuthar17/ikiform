@@ -243,7 +243,7 @@ export default function DemoFormBuilder() {
   const asyncNoop = async () => {};
 
   return (
-    <div className="mx-auto flex h-[900px] w-full flex-col overflow-hidden rounded-card border bg-background shadow-lg/2">
+    <div className="mx-auto flex h-[900px] w-full flex-col overflow-hidden rounded-card border bg-background">
       <FormBuilderHeader
         autoSaving={false}
         formId={undefined}

@@ -14,8 +14,8 @@ const datePickerVariants = cva(
   {
     variants: {
       variant: {
-        default: 'shadow-sm/2',
-        outline: 'border-2 shadow-sm/2',
+        default: '',
+        outline: 'border-2',
         ghost: 'border-transparent hover:border-border',
       },
       size: {
@@ -270,7 +270,7 @@ export function DatePicker({
       {isOpen && (
         <motion.div
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          className="z-[9999] mx-auto w-fit rounded-ele shadow-lg"
+          className="z-[9999] mx-auto w-fit rounded-ele"
           data-datepicker-calendar="true"
           exit={{
             opacity: 0,
@@ -536,7 +536,7 @@ export function DateRangePicker({
             {isOpen && (
               <motion.div
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                className="z-[9999] mx-auto w-fit rounded-ele shadow-lg"
+                className="z-[9999] mx-auto w-fit rounded-ele"
                 data-datepicker-calendar="true"
                 exit={{
                   opacity: 0,

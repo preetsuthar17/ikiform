@@ -12,7 +12,7 @@ export const FormTypeCard: React.FC<FormTypeCardProps> = ({
 
   return (
     <Card
-      className={`w-full cursor-pointer p-6 transition-all duration-200 hover:shadow-md ${
+      className={`hover: w-full cursor-pointer p-6 transition-all duration-200 ${
         isSelected ? 'bg-primary/5 ring-2 ring-primary' : 'hover:bg-muted/30'
       }`}
       onClick={() => onSelect(type.id)}

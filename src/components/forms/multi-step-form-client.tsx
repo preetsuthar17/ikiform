@@ -134,7 +134,7 @@ export function MultiStepFormClient({
     >
       <div className={`flex w-full flex-col gap-8 ${containerClass}`}>
         <Card
-          className="flex w-full grow flex-col gap-6 rounded-card border-none bg-transparent p-8 shadow-none hover:bg-transparent"
+          className="flex w-full grow flex-col gap-6 rounded-card border-none bg-transparent p-8 hover:bg-transparent"
           variant="ghost"
         >
           <FormProgress

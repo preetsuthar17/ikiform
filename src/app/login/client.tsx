@@ -280,7 +280,7 @@ export default function LoginForm() {
     <>
       <div className="mx-3 flex h-screen flex-col items-center justify-center gap-4 overflow-hidden">
         <Card
-          className="flex w-full max-w-sm flex-col items-center justify-center gap-8 border-none bg-transparent text-center shadow-none"
+          className="flex w-full max-w-sm flex-col items-center justify-center gap-8 border-none bg-transparent text-center"
           size={'lg'}
         >
           <CardHeader className="w-full">
@@ -476,7 +476,7 @@ export default function LoginForm() {
 
                 <div className="flex w-full flex-col items-start justify-center gap-2">
                   <Button
-                    className="flex w-full items-center gap-2 rounded-full bg-card font-medium text-sm shadow-none"
+                    className="flex w-full items-center gap-2 rounded-full bg-card font-medium text-sm"
                     disabled={loading}
                     onClick={() => handleOAuthLogin('google')}
                     size="xl"
@@ -487,7 +487,7 @@ export default function LoginForm() {
                     Continue with Google
                   </Button>
                   <Button
-                    className="flex w-full items-center gap-2 rounded-full bg-card font-medium text-sm shadow-none"
+                    className="flex w-full items-center gap-2 rounded-full bg-card font-medium text-sm"
                     disabled={loading}
                     onClick={() => handleOAuthLogin('github')}
                     size="xl"

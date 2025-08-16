@@ -39,7 +39,7 @@ function InboundWebhookDocsDrawer({
   }
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black bg-opacity-40 md:items-center">
-      <Card className="relative max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-t-lg bg-white p-6 shadow-lg md:rounded-lg">
+      <Card className="relative max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-t-lg bg-white p-6 md:rounded-lg">
         <Button
           aria-label="Close"
           className="absolute top-2 right-2"

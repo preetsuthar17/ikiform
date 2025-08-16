@@ -16,7 +16,7 @@ export default async function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background max-w-7xl px-4 mx-auto w-full">
+    <div className="mx-auto min-h-screen w-full max-w-7xl bg-background px-4">
       <AdminDashboard />
     </div>
   );

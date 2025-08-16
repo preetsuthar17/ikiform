@@ -172,7 +172,7 @@ export function FileUploadField({
 
       <FileUpload
         accept={accept}
-        className="bg-input shadow-sm/2"
+        className="bg-input"
         disabled={disabled || isUploading}
         maxFiles={maxFiles - uploadedFiles.length}
         maxSize={maxSize}

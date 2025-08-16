@@ -14,7 +14,7 @@ import {
 import { cn } from '@/lib/utils';
 
 const calendarVariants = cva(
-  'relative mx-auto inline-block flex w-full max-w-sm flex-col gap-4 rounded-card border border-border bg-background shadow-sm/2',
+  'relative mx-auto inline-block flex w-full max-w-sm flex-col gap-4 rounded-card border border-border bg-background',
   {
     variants: {
       size: {

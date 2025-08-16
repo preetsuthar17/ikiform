@@ -148,9 +148,7 @@ export function FormFieldsContainer({
                     >
                       <Card
                         className={`rounded-card border bg-card p-4 transition-all duration-200 ${
-                          snapshot.isDragging
-                            ? 'shadow-lg ring-2 ring-ring/20'
-                            : ''
+                          snapshot.isDragging ? 'ring-2 ring-ring/20' : ''
                         } ${
                           selectedFieldId === field.id
                             ? 'border-primary bg-accent/10 ring-2 ring-primary/20'

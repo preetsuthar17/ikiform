@@ -12,8 +12,8 @@ const selectTriggerVariants = cva(
   {
     variants: {
       variant: {
-        default: 'shadow-sm/2 hover:bg-accent hover:text-accent-foreground',
-        outline: 'border-2 shadow-sm/2 hover:border-ring',
+        default: 'hover:bg-accent hover:text-accent-foreground',
+        outline: 'border-2 hover:border-ring',
         ghost:
           'border-transparent hover:bg-accent hover:text-accent-foreground',
       },
@@ -31,7 +31,7 @@ const selectTriggerVariants = cva(
 );
 
 const selectContentVariants = cva(
-  'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-[300px] min-w-[8rem] overflow-hidden rounded-card border border-border bg-background text-foreground shadow-lg data-[state=closed]:animate-out data-[state=open]:animate-in',
+  'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-[300px] min-w-[8rem] overflow-hidden rounded-card border border-border bg-background text-foreground data-[state=closed]:animate-out data-[state=open]:animate-in',
   {
     variants: {
       position: {
@@ -172,42 +172,56 @@ const SelectItem = React.memo(
     SelectItemProps
   >(
     (
-      { className, children, icon: Icon, disableCheckAnimation, ...props },
+      {
+        className,
+        children,
+        icon: Icon,
+        disableCheckAnimation,
+        value,
+        ...props
+      },
       ref
-    ) => (
-      <SelectPrimitive.Item
-        className={cn(
-          'relative flex w-full cursor-default select-none items-center rounded-ele py-2 pr-8 pl-3 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:text-muted-foreground data-[disabled]:opacity-50',
-          className
-        )}
-        ref={ref}
-        {...props}
-      >
-        <motion.div
-          className="flex w-full items-center gap-2"
-          transition={{ duration: 0.1 }}
-          whileHover={{ x: 2 }}
+    ) => {
+      if (value === '') {
+        return null;
+      }
+
+      return (
+        <SelectPrimitive.Item
+          className={cn(
+            'relative flex w-full cursor-default select-none items-center rounded-ele py-2 pr-8 pl-3 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:text-muted-foreground data-[disabled]:opacity-50',
+            className
+          )}
+          ref={ref}
+          value={value}
+          {...props}
         >
-          {Icon && <Icon className="shrink-0" size={16} />}
-          <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-        </motion.div>
-        <span className="absolute right-3 flex h-3.5 w-3.5 items-center justify-center">
-          <SelectPrimitive.ItemIndicator>
-            {disableCheckAnimation ? (
-              <Check size={16} />
-            ) : (
-              <motion.div
-                animate={{ scale: 1 }}
-                initial={{ scale: 0 }}
-                transition={{ duration: 0.1 }}
-              >
+          <motion.div
+            className="flex w-full items-center gap-2"
+            transition={{ duration: 0.1 }}
+            whileHover={{ x: 2 }}
+          >
+            {Icon && <Icon className="shrink-0" size={16} />}
+            <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+          </motion.div>
+          <span className="absolute right-3 flex h-3.5 w-3.5 items-center justify-center">
+            <SelectPrimitive.ItemIndicator>
+              {disableCheckAnimation ? (
                 <Check size={16} />
-              </motion.div>
-            )}
-          </SelectPrimitive.ItemIndicator>
-        </span>
-      </SelectPrimitive.Item>
-    )
+              ) : (
+                <motion.div
+                  animate={{ scale: 1 }}
+                  initial={{ scale: 0 }}
+                  transition={{ duration: 0.1 }}
+                >
+                  <Check size={16} />
+                </motion.div>
+              )}
+            </SelectPrimitive.ItemIndicator>
+          </span>
+        </SelectPrimitive.Item>
+      );
+    }
   )
 );
 SelectItem.displayName = SelectPrimitive.Item.displayName;

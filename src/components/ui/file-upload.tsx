@@ -45,9 +45,9 @@ const fileUploadVariants = cva(
     'focus-visible:outline-none',
     'focus-visible:ring-2',
     'focus-visible:ring-primary',
-    'focus-visible:shadow-lg',
+    'focus-visible:',
     'focus-visible:border-primary',
-    'hover:shadow-md',
+    'hover:',
     'hover:border-primary/60',
     'active:shadow',
     'disabled:pointer-events-none',
@@ -57,11 +57,11 @@ const fileUploadVariants = cva(
     variants: {
       variant: {
         default:
-          'border-border bg-background hover:border-primary/40 focus-visible:shadow-lg focus-visible:ring-primary',
+          'focus-visible: border-border bg-background hover:border-primary/40 focus-visible:ring-primary',
         dashed:
-          'border-border border-dashed bg-background hover:border-primary/60 hover:bg-accent/60 focus-visible:shadow-lg focus-visible:ring-primary',
+          'focus-visible: border-border border-dashed bg-background hover:border-primary/60 hover:bg-accent/60 focus-visible:ring-primary',
         ghost:
-          'border-transparent bg-accent/40 hover:bg-accent/70 focus-visible:shadow-lg focus-visible:ring-primary',
+          'focus-visible: border-transparent bg-accent/40 hover:bg-accent/70 focus-visible:ring-primary',
       },
       size: {
         sm: 'min-h-[120px] p-4',
@@ -71,7 +71,7 @@ const fileUploadVariants = cva(
       state: {
         idle: '',
         dragging:
-          'scale-[1.03] border-primary bg-primary/10 shadow-xl ring-2 ring-primary',
+          'scale-[1.03] border-primary bg-primary/10 ring-2 ring-primary',
         disabled: 'pointer-events-none opacity-50',
       },
     },

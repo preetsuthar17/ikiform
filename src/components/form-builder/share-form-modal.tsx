@@ -185,7 +185,7 @@ export function ShareFormModal({
                   </div>
                   <div className="flex justify-center">
                     <div className="relative">
-                      <div className="flex items-center justify-center rounded-lg border bg-white p-2 shadow-sm sm:p-4">
+                      <div className="flex items-center justify-center rounded-lg border bg-white p-2 sm:p-4">
                         {qrCodeDataUrl && !generatingQR ? (
                           <img
                             alt="QR Code for form"
@@ -230,14 +230,14 @@ export function ShareFormModal({
                 <div className="flex w-full flex-col gap-2">
                   <div className="flex w-full flex-col flex-col gap-2 md:flex-row">
                     <Input
-                      className="w-full font-mono text-sm rounded-full"
+                      className="w-full rounded-full font-mono text-sm"
                       id="share-url"
                       readOnly
                       size="xl"
                       value={shareUrl}
                     />
                     <Button
-                      className="w-full min-w-fit shrink-0 gap-2 md:w-fit rounded-full"
+                      className="w-full min-w-fit shrink-0 gap-2 rounded-full md:w-fit"
                       disabled={copying}
                       onClick={handleCopyLink}
                       size="xl"

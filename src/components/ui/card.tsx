@@ -3,7 +3,7 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 const cardVariants = cva(
-  'relative overflow-hidden rounded-4xl bg-card text-card-foreground shadow-none transition-all duration-300 ease-out',
+  'relative overflow-hidden rounded-4xl bg-card text-card-foreground transition-all duration-300 ease-out',
   {
     variants: {
       variant: {

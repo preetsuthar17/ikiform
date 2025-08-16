@@ -120,7 +120,7 @@ export default function ResetPasswordClient() {
   if (!sessionReady) {
     return (
       <div className="flex h-screen flex-col items-center justify-center gap-4">
-        <Card className="flex w-full max-w-sm flex-col items-center justify-center gap-6 text-center shadow-md/2">
+        <Card className="flex w-full max-w-sm flex-col items-center justify-center gap-6 text-center">
           <CardContent className="py-8">
             <div className="flex flex-col items-center gap-4">
               <div className="h-8 w-8 animate-spin rounded-full border-primary border-b-2" />
@@ -136,7 +136,7 @@ export default function ResetPasswordClient() {
 
   return (
     <div className="flex h-screen flex-col items-center justify-center gap-4">
-      <Card className="flex w-full max-w-sm flex-col items-center justify-center gap-6 text-center shadow-md/2">
+      <Card className="flex w-full max-w-sm flex-col items-center justify-center gap-6 text-center">
         <CardHeader>
           <div className="flex-shrink-0">
             <Link href="/">

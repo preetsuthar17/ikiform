@@ -28,7 +28,7 @@ const inputOTPVariants = cva(
 );
 
 const inputOTPSlotVariants = cva(
-  'relative flex items-center justify-center border-border border-y border-r border-l bg-input text-xs shadow-sm/2 transition-all focus-within:z-10 focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm',
+  'relative flex items-center justify-center border-border border-y border-r border-l bg-input text-xs transition-all focus-within:z-10 focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm',
   {
     variants: {
       variant: {

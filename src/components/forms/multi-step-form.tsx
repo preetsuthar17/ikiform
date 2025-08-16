@@ -145,7 +145,7 @@ export function MultiStepForm({
         style={customStyles.containerStyle}
       >
         <Card
-          className="flex w-full grow flex-col gap-6 rounded-card border-none bg-transparent shadow-none hover:bg-transparent"
+          className="flex w-full grow flex-col gap-6 rounded-card border-none bg-transparent hover:bg-transparent"
           style={customStyles.cardStyle}
           variant="ghost"
         >

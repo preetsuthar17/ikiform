@@ -170,7 +170,7 @@ export function ActualFormPreview({
             }}
           >
             <Card
-              className="flex w-full grow flex-col gap-6 rounded-card border-none bg-transparent shadow-none hover:bg-transparent"
+              className="flex w-full grow flex-col gap-6 rounded-card border-none bg-transparent hover:bg-transparent"
               style={{
                 backgroundColor: colors.background || undefined,
                 borderRadius: formBorderRadius,

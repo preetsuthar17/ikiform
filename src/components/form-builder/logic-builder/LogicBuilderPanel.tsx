@@ -208,7 +208,7 @@ function CollapsibleBottomPanel({ children }: { children: React.ReactNode }) {
 
   return (
     <div
-      className={`flex w-full flex-col border-border border-t bg-background shadow-lg transition-all duration-200 ${collapsed ? 'h-8' : ''}`}
+      className={`flex w-full flex-col border-border border-t bg-background transition-all duration-200 ${collapsed ? 'h-8' : ''}`}
       ref={panelRef}
       style={{ height: collapsed ? MIN_HEIGHT : height }}
     >

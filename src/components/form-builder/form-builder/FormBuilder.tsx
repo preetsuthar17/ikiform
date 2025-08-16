@@ -418,7 +418,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
   if (isMobile) {
     return (
       <div className="flex h-screen flex-col overflow-hidden bg-background">
-        <div className="sticky top-0 z-30 bg-card shadow-sm">
+        <div className="sticky top-0 z-30 bg-card">
           <FormBuilderHeader
             autoSaving={state.autoSaving}
             formId={formId}

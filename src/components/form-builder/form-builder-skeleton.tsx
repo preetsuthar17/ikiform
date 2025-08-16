@@ -63,7 +63,7 @@ export function FormBuilderSkeleton() {
                 <Skeleton className="h-4 w-full" />
               </div>
 
-              <div className="rounded-xl border bg-background p-8 shadow-sm">
+              <div className="rounded-xl border bg-background p-8">
                 <div className="flex flex-col gap-6">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <div className="flex flex-col gap-3" key={i}>
@@ -132,7 +132,7 @@ export function FormBuilderSkeleton() {
       </div>
 
       <div className="absolute bottom-4 left-4">
-        <div className="flex items-center gap-2 rounded-lg bg-background/95 px-3 py-2 shadow-lg backdrop-blur-sm">
+        <div className="flex items-center gap-2 rounded-lg bg-background/95 px-3 py-2 backdrop-blur-sm">
           <Skeleton className="h-2 w-2 rounded-full" />
           <Skeleton className="h-3 w-16" />
         </div>

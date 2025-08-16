@@ -11,7 +11,7 @@ export const FloatingChatButton: React.FC<FloatingChatButtonProps> = ({
   return (
     <div className="cursor-pointer">
       <Button
-        className="fixed right-5 bottom-5 z-50 flex h-14 w-14 cursor-pointer items-center justify-center rounded-ele border border-border bg-transparent shadow-xl transition-all duration-200 hover:bg-transparent"
+        className="fixed right-5 bottom-5 z-50 flex h-14 w-14 cursor-pointer items-center justify-center rounded-ele border border-border bg-transparent transition-all duration-200 hover:bg-transparent"
         onClick={onClick}
         size="icon"
       >

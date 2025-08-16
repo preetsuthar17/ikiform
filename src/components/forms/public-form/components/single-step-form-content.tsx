@@ -50,7 +50,7 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
 
   return (
     <Card
-      className="flex grow flex-col gap-6 rounded-card border-none bg-transparent shadow-none hover:bg-transparent"
+      className="flex grow flex-col gap-6 rounded-card border-none bg-transparent hover:bg-transparent"
       style={customStyles.cardStyle}
       variant="ghost"
     >

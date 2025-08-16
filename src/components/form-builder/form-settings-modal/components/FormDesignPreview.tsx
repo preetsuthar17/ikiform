@@ -166,7 +166,7 @@ export function FormDesignPreview({
       <div style={containerStyle}>
         <div
           className={`form-preview-container ikiform-customized transition-all duration-200 ${
-            true ? 'bg-transparent shadow-none' : 'shadow-sm'
+            true ? 'bg-transparent' : ''
           }`}
           style={cardStyle}
         >

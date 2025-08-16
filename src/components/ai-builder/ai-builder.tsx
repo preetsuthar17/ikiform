@@ -92,7 +92,7 @@ export function AIBuilder() {
         {}
         <div className="-translate-x-1/2 fixed bottom-4 left-1/2 z-50 w-full max-w-[90%] md:hidden">
           <Button
-            className="w-full rounded-card shadow-lg"
+            className="w-full rounded-card"
             onClick={() => setChatDrawerOpen(true)}
             size="lg"
           >

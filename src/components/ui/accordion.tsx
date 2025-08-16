@@ -9,9 +9,9 @@ import { cn } from '@/lib/utils';
 const accordionVariants = cva('w-full', {
   variants: {
     variant: {
-      default: 'overflow-hidden rounded-card border border-border shadow-sm/2',
+      default: 'overflow-hidden rounded-card border border-border',
       ghost: '',
-      outline: 'rounded-card border border-border shadow-sm/2',
+      outline: 'rounded-card border border-border',
     },
     size: {
       sm: 'max-w-lg text-sm',

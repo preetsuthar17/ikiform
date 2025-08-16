@@ -4,7 +4,7 @@ export function LoginSkeleton() {
   return (
     <div className="mx-3 flex min-h-screen flex-col items-center justify-center gap-4 overflow-hidden bg-muted">
       <div className="w-full max-w-sm">
-        <div className="flex w-full flex-col items-center justify-center gap-8 rounded-xl border-none bg-transparent p-0 shadow-none">
+        <div className="flex w-full flex-col items-center justify-center gap-8 rounded-xl border-none bg-transparent p-0">
           <div className="flex w-full flex-col items-center gap-2">
             <Skeleton className="h-7 w-36 rounded-md" />
           </div>

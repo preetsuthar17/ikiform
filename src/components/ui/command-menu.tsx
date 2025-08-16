@@ -163,7 +163,7 @@ const CommandMenuContent = React.forwardRef<
             animate={{ opacity: 1, scale: 1, y: 0 }}
             className={cn(
               'fixed top-[30%] left-[50%] z-50 w-[95%] max-w-2xl translate-x-[-50%] translate-y-[-50%]',
-              'rounded-card border border-border bg-background shadow-lg',
+              'rounded-card border border-border bg-background',
               'overflow-hidden',
               className
             )}

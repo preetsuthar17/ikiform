@@ -7,7 +7,7 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 const alertVariants = cva(
-  'relative w-full rounded-card border p-4 text-sm shadow-sm/2 transition-colors',
+  'relative w-full rounded-card border p-4 text-sm transition-colors',
   {
     variants: {
       variant: {

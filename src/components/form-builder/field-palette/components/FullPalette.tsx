@@ -15,7 +15,7 @@ export function FullPalette({
   onSchemaUpdate,
 }: Pick<FieldPaletteProps, 'onAddField' | 'formSchema' | 'onSchemaUpdate'>) {
   return (
-    <div className="flex h-full flex-col border-border bg-card p-2 lg:border-r lg:p-4">
+    <div className="flex h-full flex-col border-border p-2 lg:border-r lg:p-4">
       <ScrollArea className="h-full">
         <div className="flex flex-col gap-4 rounded-card">
           <PaletteHeader

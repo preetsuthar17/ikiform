@@ -20,11 +20,11 @@ export function ChatInput({
   return (
     <div className="flex flex-col gap-3 p-4 backdrop-blur">
       <form
-        className="relative flex items-center gap-4 rounded-ele border border-border bg-card px-4 py-2 shadow-md/2"
+        className="relative flex items-center gap-4 rounded-ele border border-border bg-card px-4 py-2"
         onSubmit={onSubmit}
       >
         <Textarea
-          className="max-h-[120px] min-h-[40px] flex-1 resize-none border-none bg-transparent p-3 shadow-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
+          className="max-h-[120px] min-h-[40px] flex-1 resize-none border-none bg-transparent p-3 outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
           disabled={isLoading}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {

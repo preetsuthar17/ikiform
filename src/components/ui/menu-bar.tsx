@@ -8,13 +8,13 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 const menubarVariants = cva(
-  'scrollbar-hide flex w-full max-w-full items-center overflow-x-auto rounded-card border border-border bg-background shadow-sm/2 transition-all',
+  'scrollbar-hide flex w-full max-w-full items-center overflow-x-auto rounded-card border border-border bg-background transition-all',
   {
     variants: {
       variant: {
         default: 'border-border bg-background',
         outline: 'border-2 border-border bg-background',
-        ghost: 'border-transparent bg-transparent shadow-none',
+        ghost: 'border-transparent bg-transparent',
       },
       size: {
         sm: 'gap-1 p-1.5 sm:gap-1 sm:p-2',
@@ -54,7 +54,7 @@ const menubarTriggerVariants = cva(
 );
 
 const menubarContentVariants = cva(
-  'z-50 mt-2 min-w-[12rem] max-w-[95vw] overflow-hidden rounded-card border border-border bg-background p-1.5 text-foreground shadow-xl sm:max-w-[350px] sm:p-2',
+  'z-50 mt-2 min-w-[12rem] max-w-[95vw] overflow-hidden rounded-card border border-border bg-background p-1.5 text-foreground sm:max-w-[350px] sm:p-2',
   {
     variants: {
       variant: {
@@ -262,7 +262,7 @@ const MenuBarSubContent = React.forwardRef<
   <MenubarPrimitive.SubContent
     asChild
     className={cn(
-      'z-50 min-w-[10rem] max-w-[95vw] overflow-hidden rounded-ele border border-border bg-background p-1.5 text-foreground shadow-xl sm:max-w-[280px] sm:p-2',
+      'z-50 min-w-[10rem] max-w-[95vw] overflow-hidden rounded-ele border border-border bg-background p-1.5 text-foreground sm:max-w-[280px] sm:p-2',
       className
     )}
     ref={ref}

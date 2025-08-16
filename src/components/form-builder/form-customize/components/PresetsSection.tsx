@@ -68,8 +68,8 @@ export function PresetsSection({
 
     return (
       <Card
-        className={`cursor-pointer p-4 transition-all duration-200 hover:shadow-md/2 ${
-          isApplied ? 'scale-[1.02] shadow-lg ring-2 ring-primary' : ''
+        className={`hover: cursor-pointer p-4 transition-all duration-200 ${
+          isApplied ? 'scale-[1.02] ring-2 ring-primary' : ''
         }`}
         onClick={() => applyPreset(preset)}
       >

@@ -149,7 +149,7 @@ function PayloadViewer({ payload }: { payload: any }) {
           <div className="grid grid-cols-1 gap-2 text-sm">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Event:</span>
-              <span className="flex h-6 items-center justify-center gap-1.5 rounded-[calc(var(--radius)-4px)] border border-border px-2.5 font-medium text-foreground text-xs shadow-sm/2 transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+              <span className="flex h-6 items-center justify-center gap-1.5 rounded-[calc(var(--radius)-4px)] border border-border px-2.5 font-medium text-foreground text-xs transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
                 {eventName || 'Unknown'}
               </span>
             </div>
@@ -358,7 +358,7 @@ export function WebhookLogDrawer({
               <ul className="flex flex-col gap-4">
                 {logs.map((log) => (
                   <li key={log.id}>
-                    <Card className="border shadow-sm">
+                    <Card className="border">
                       <CardContent className="flex flex-col gap-2 px-4 py-4">
                         <div className="flex items-center gap-2">
                           <Badge

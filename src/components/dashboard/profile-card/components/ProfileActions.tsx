@@ -20,7 +20,7 @@ export function ProfileActions({ onSignOut }: ProfileActionsProps) {
             <MoreVertical className="h-6 w-6" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="font-medium shadow-md/2">
+        <DropdownMenuContent align="end" className="font-medium">
           <DropdownMenuItem onClick={onSignOut} variant="destructive">
             Sign Out
           </DropdownMenuItem>
