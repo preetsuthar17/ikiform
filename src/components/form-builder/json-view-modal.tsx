@@ -185,7 +185,7 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
               <Copy className="h-4 w-4" />
             )}
           </Button>
-          <ScrollArea className="h-[71vh] rounded-ele border bg-muted/30 text-foreground">
+          <ScrollArea className="h-[71vh] rounded-card border bg-muted/30 text-foreground">
             {isHighlighting ? (
               <div className="flex h-[71vh] items-center justify-center p-4">
                 <Loader />

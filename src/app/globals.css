@@ -75,8 +75,8 @@
 }
 
 :root {
-  --radius: 100rem;
-  --card-radius: 10px;
+  --radius: 0.8rem;
+  --card-radius: 1.2rem;
   --hu-background: 210, 20%, 98%;
   --hu-foreground: 0, 0%, 10%;
   --hu-card: 0, 0%, 100%;

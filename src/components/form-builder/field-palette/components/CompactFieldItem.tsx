@@ -9,7 +9,10 @@ export function CompactFieldItem({
 
   return (
     <button
-      className="flex items-center gap-2 rounded-ele border border-border bg-background p-3 text-left transition-colors hover:bg-muted"
+      className="flex items-center gap-2 rounded-card border border-border bg-background p-3 text-left transition-colors hover:bg-muted"
+      style={{
+        borderRadius: 'var(--card-radius)',
+      }}
       onClick={() => onAddField(fieldType.type)}
     >
       <Icon className="h-4 w-4 flex-shrink-0 text-muted-foreground" />

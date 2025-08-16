@@ -17,7 +17,7 @@ export function FullPalette({
   return (
     <div className="flex h-full flex-col border-border bg-card p-2 lg:border-r lg:p-4">
       <ScrollArea className="h-full">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 rounded-card">
           <PaletteHeader
             description={PALETTE_CONFIG.HEADER.DESCRIPTION}
             title={PALETTE_CONFIG.HEADER.TITLE}
@@ -31,7 +31,7 @@ export function FullPalette({
             >
               {(provided) => (
                 <div
-                  className="flex flex-col gap-2"
+                  className="flex flex-col gap-2 rounded-card"
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >

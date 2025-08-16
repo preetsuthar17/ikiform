@@ -61,13 +61,20 @@ export function FormFieldsContainer({
       <DropdownMenuTrigger asChild>
         <Button
           className="h-42 w-full border-2 border-dashed transition-colors hover:border-primary/50 hover:bg-accent/10"
+          style={{
+            borderRadius: 'var(--card-radius)',
+          }}
           variant="outline"
         >
-          <Plus className="mr-2 h-4 w-4" />
+          <Plus className="h-4 w-4" />
           Add Field
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="center" className="h-42 w-48">
+      <DropdownMenuContent align="center" className="h-42 w-48"
+        style={{
+          borderRadius: 'var(--card-radius)',
+        }}
+      >
         <ScrollArea type="always">
           {FIELD_TYPES.map((fieldType: { type: string; label: string }) => (
             <DropdownMenuItem
@@ -97,7 +104,7 @@ export function FormFieldsContainer({
     return (
       <div className="flex flex-col items-center justify-center gap-4 py-16 text-center">
         <div className="flex h-16 w-16 items-center justify-center rounded-card bg-accent">
-          <div className="h-8 w-8 rounded-ele bg-muted" />
+          <div className="h-8 w-8 rounded-card bg-muted" />
         </div>
         <p className="font-medium text-foreground text-lg">
           {isMultiStep ? 'No fields in this step' : 'No fields added yet'}

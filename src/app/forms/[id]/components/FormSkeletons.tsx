@@ -54,7 +54,7 @@ export function FormSkeleton({
           {Array.from({ length: 4 }).map((_, i) => (
             <div className="flex flex-col gap-2" key={i}>
               <SkeletonText className="h-4 w-32" />
-              <Skeleton className="h-10 w-full rounded-ele" />
+              <Skeleton className="h-10 w-full rounded-card" />
             </div>
           ))}
         </div>
@@ -72,7 +72,7 @@ export function FormFieldSkeleton() {
   return (
     <div className="flex flex-col gap-2">
       <SkeletonText className="h-4 w-32" />
-      <Skeleton className="h-10 w-full rounded-ele" />
+      <Skeleton className="h-10 w-full rounded-card" />
     </div>
   );
 }
