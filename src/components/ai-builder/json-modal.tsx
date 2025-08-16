@@ -63,7 +63,7 @@ export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
         <ModalHeader>
           <ModalTitle>Form JSON Schema</ModalTitle>
         </ModalHeader>
-        <ScrollArea className="h-[40rem] max-h-[60vh] min-h-[120px] w-full gap-4 rounded-ele border bg-muted p-4 text-xs">
+        <ScrollArea className="h-[40rem] max-h-[60vh] min-h-[120px] w-full gap-4 rounded-card border bg-muted p-4 text-xs">
           <div
             className="shiki-container text-xs [&_pre]:m-0 [&_pre]:whitespace-pre-wrap [&_pre]:break-words [&_pre]:bg-transparent [&_pre]:p-0"
             dangerouslySetInnerHTML={{ __html: highlightedCode }}
