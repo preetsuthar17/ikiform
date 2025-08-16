@@ -13,7 +13,6 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-
 import React, { useEffect, useState } from 'react';
 import { ConfirmationModal } from '@/components/dashboard/form-delete-confirmation-modal';
 import { ShareFormModal } from '@/components/form-builder/share-form-modal';
@@ -88,8 +87,6 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
     handleStopGeneration,
     setChatOpen,
   } = useAnalyticsChat(form, submissions, analyticsData);
-
-
 
   useEffect(() => {
     const checkMobile = () => {
@@ -245,9 +242,7 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
 
         {}
         {!isMobile && (
-          <FloatingChatButton
-            onClick={() => setChatOpen(!chatOpen)}
-          />
+          <FloatingChatButton onClick={() => setChatOpen(!chatOpen)} />
         )}
 
         {}

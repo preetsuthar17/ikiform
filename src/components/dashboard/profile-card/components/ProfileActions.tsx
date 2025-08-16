@@ -11,14 +11,12 @@ import {
 
 import type { ProfileActionsProps } from '../types';
 
-export function ProfileActions({
-  onSignOut,
-}: ProfileActionsProps) {
+export function ProfileActions({ onSignOut }: ProfileActionsProps) {
   return (
     <div className="absolute top-5 right-5 flex items-center gap-2">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button size="icon" variant="ghost" className='rounded-full'>
+          <Button className="rounded-full" size="icon" variant="ghost">
             <MoreVertical className="h-6 w-6" />
           </Button>
         </DropdownMenuTrigger>

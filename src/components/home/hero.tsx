@@ -2,13 +2,12 @@
 
 import { ChevronRight, Play, Star } from 'lucide-react';
 import Link from 'next/link';
-import React from 'react';
+import React, { type CSSProperties } from 'react';
 import { useAuth } from '@/hooks/use-auth';
 import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from '../ui';
 import { Button } from '../ui/button';
 import { Chip } from '../ui/chip';
 import { Modal, ModalContent, ModalHeader, ModalTitle } from '../ui/modal';
-import { CSSProperties } from 'react';
 
 interface EmbeddedFormProps {
   className?: string;
@@ -22,7 +21,7 @@ export function EmbeddedForm({ className, style }: EmbeddedFormProps) {
   React.useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       if (event.origin !== 'https://www.ikiform.com') return;
-      
+
       if (event.data?.type === 'resize' && event.data?.height) {
         setIframeHeight(event.data.height);
       }
@@ -43,16 +42,16 @@ export function EmbeddedForm({ className, style }: EmbeddedFormProps) {
   };
 
   return (
-    <div className={`flex justify-center w-full ${className || ''}`}>
+    <div className={`flex w-full justify-center ${className || ''}`}>
       <iframe
+        allow="clipboard-write; camera; microphone"
+        frameBorder="0"
+        loading="lazy"
         ref={iframeRef}
+        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
         src="https://www.ikiform.com/forms/24ec3d8d-40ef-4143-b289-4e43c112d80e"
         style={iframeStyle}
         title="Form"
-        loading="lazy"
-        allow="clipboard-write; camera; microphone"
-        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
-        frameBorder="0"
       />
     </div>
   );
@@ -115,7 +114,7 @@ export default function Hero() {
           {user ? (
             <Button
               asChild
-              className="rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit w-full"
+              className="w-full rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit"
               variant="default"
             >
               <Link
@@ -139,7 +138,7 @@ export default function Hero() {
           ) : (
             <Button
               asChild
-              className="rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit w-full"
+              className="w-full rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit"
               variant="default"
             >
               <Link
@@ -152,7 +151,7 @@ export default function Hero() {
           )}
 
           <Button
-            className="rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit w-full"
+            className="w-full rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit"
             onClick={() => setOpen(true)}
             variant="secondary"
           >
@@ -160,7 +159,7 @@ export default function Hero() {
           </Button>
         </div>
 
-        <div className="flex items-center gap-2 bg-transparent px-0 py-2 md:px-2 flex-wrap justify-center">
+        <div className="flex flex-wrap items-center justify-center gap-2 bg-transparent px-0 py-2 md:px-2">
           <AvatarGroup max={5} size="lg" spacing="tighter">
             <Avatar className="rounded-full border-5">
               <AvatarImage
@@ -254,30 +253,30 @@ export default function Hero() {
               <ModalTitle>Choose a Demo</ModalTitle>
             </ModalHeader>
             <div className="flex w-full flex-col items-center gap-2">
-                <Button
-              asChild
-              className="rounded-full border border-[0.5px] px-6 py-5 hover:brightness-99 w-full"
-              variant="secondary"
-            >
-              <Link
-                className="flex items-center gap-2 font-medium"
-                href="/demo-form-builder"
+              <Button
+                asChild
+                className="w-full rounded-full border border-[0.5px] px-6 py-5 hover:brightness-99"
+                variant="secondary"
               >
-                Interactive Form Builder Demo
-              </Link>
-            </Button>
-               <Button
-              asChild
-              className="rounded-full border border-[0.5px] px-6 py-5 hover:brightness-99 w-full"
-              variant="secondary"
-            >
-              <Link
-                className="flex items-center gap-2 font-medium"
-                href="/feedback"
+                <Link
+                  className="flex items-center gap-2 font-medium"
+                  href="/demo-form-builder"
+                >
+                  Interactive Form Builder Demo
+                </Link>
+              </Button>
+              <Button
+                asChild
+                className="w-full rounded-full border border-[0.5px] px-6 py-5 hover:brightness-99"
+                variant="secondary"
               >
-                Form Demo
-              </Link>
-            </Button>
+                <Link
+                  className="flex items-center gap-2 font-medium"
+                  href="/feedback"
+                >
+                  Form Demo
+                </Link>
+              </Button>
             </div>
           </ModalContent>
         </Modal>
@@ -306,8 +305,8 @@ export default function Hero() {
           </ModalContent>
         </Modal>
       </div>
-      <div className='w-full max-w-7xl bg-card rounded-4xl p-4'>
-      <EmbeddedForm className='bg-card' />
+      <div className="w-full max-w-7xl rounded-4xl bg-card p-4">
+        <EmbeddedForm className="bg-card" />
       </div>
     </section>
   );

@@ -18,7 +18,7 @@ export function WelcomeMessage({ mounted }: WelcomeMessageProps) {
         <Link href="/">
           <Image
             alt="Ikiform"
-            className={`pointer-events-none`}
+            className={'pointer-events-none'}
             height={69}
             src="/logo.svg"
             width={69}

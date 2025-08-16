@@ -38,7 +38,7 @@ export const FormNavigation: React.FC<FormNavigationProps> = ({
   );
 
   return (
-    <div className="flex justify-end gap-4 flex-wrap">
+    <div className="flex flex-wrap justify-end gap-4">
       <Button
         className="flex items-center gap-2 max-sm:grow"
         disabled={currentStep === 0}

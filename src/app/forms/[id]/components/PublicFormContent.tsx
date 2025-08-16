@@ -39,10 +39,7 @@ export default function PublicFormContent({
   return (
     <CSSPropertiesProvider borderRadius={borderRadius}>
       <div className="light">
-        <div
-          className="flex flex-col gap-4"
-          dir={dir}
-        >
+        <div className="flex flex-col gap-4" dir={dir}>
           <Suspense
             fallback={
               <FormSkeleton

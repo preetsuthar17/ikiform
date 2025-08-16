@@ -69,7 +69,6 @@ function DrawerNavLink({
   );
 }
 
-
 export default function Header() {
   const { user } = useAuth();
 
@@ -80,7 +79,6 @@ export default function Header() {
           <span className="flex items-center justify-center gap-2 font-semibold text-3xl tracking-tight">
             <Image
               alt="Ikiform Logo"
-
               height={36}
               src="/favicon.ico"
               width={36}
@@ -118,7 +116,6 @@ export default function Header() {
         </Link>
       </div>
       <div className="hidden flex-1 justify-end gap-1 md:flex">
-        
         {user ? (
           <Button
             asChild

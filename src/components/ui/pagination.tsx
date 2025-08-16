@@ -48,7 +48,7 @@ const paginationItemVariants = cva(
 );
 
 const paginationNavVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-ele px-3 text-foreground text-sm transition-all hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer max-sm:grow',
+  'inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-ele px-3 text-foreground text-sm transition-all hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 max-sm:grow',
   {
     variants: {
       size: {

@@ -142,7 +142,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="light" suppressHydrationWarning>
+    <html className="light" lang="en" suppressHydrationWarning>
       <head>
         {/* <script
           crossOrigin="anonymous"

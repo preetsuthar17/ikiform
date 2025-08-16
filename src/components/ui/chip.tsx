@@ -82,7 +82,7 @@ const Chip = React.forwardRef<HTMLDivElement, ChipProps>(
         {dismissible && (
           <button
             aria-label="Remove"
-            className="shrink-0 rounded-card p-0.5 transition-colors hover:bg-black/10 "
+            className="shrink-0 rounded-card p-0.5 transition-colors hover:bg-black/10"
             onClick={handleDismiss}
             type="button"
           >

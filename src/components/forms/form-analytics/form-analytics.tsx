@@ -13,7 +13,6 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-
 import React, { useEffect, useState } from 'react';
 import { ConfirmationModal } from '@/components/dashboard/form-delete-confirmation-modal';
 import { ShareFormModal } from '@/components/form-builder/share-form-modal';
@@ -313,9 +312,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
           toast.success('Form published!');
         }}
       />
-      <FloatingChatButton
-        onClick={() => setChatOpen(true)}
-      />
+      <FloatingChatButton onClick={() => setChatOpen(true)} />
       <ChatModal
         abortController={abortController}
         chatInput={chatInput}

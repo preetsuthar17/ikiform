@@ -272,7 +272,6 @@ function LogicBuilderPanelContent({
   const [copied, setCopied] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState('rules');
 
-
   React.useEffect(() => {
     if (!showJson) return;
     let cancelled = false;

@@ -1,14 +1,6 @@
 'use client';
 
-import {
-  Check,
-  Copy,
-  Download,
-  Globe,
-  QrCode,
-  Share,
-  X,
-} from 'lucide-react';
+import { Check, Copy, Download, Globe, QrCode, Share, X } from 'lucide-react';
 
 import QRCode from 'qrcode';
 import React, { useEffect, useState } from 'react';
@@ -77,7 +69,6 @@ export function ShareFormModal({
         margin: 4,
         errorCorrectionLevel: 'M',
         color: {
-  
           light: style.backgroundColor,
         },
       });
@@ -168,33 +159,33 @@ export function ShareFormModal({
   };
 
   return (
-    <Modal onOpenChange={onClose} open={isOpen} >
+    <Modal onOpenChange={onClose} open={isOpen}>
       <ModalContent className="flex max-w-lg flex-col gap-6 rounded-4xl">
         <ModalHeader className="text-left">
-          <ModalTitle className="flex items-center justify-start text-left gap-2">
+          <ModalTitle className="flex items-center justify-start gap-2 text-left">
             Share Public Form URL
           </ModalTitle>
         </ModalHeader>
 
-        <div className="flex flex-col gap-6 px-2 sm:px-4 w-full">
+        <div className="flex w-full flex-col gap-6 px-2 sm:px-4">
           {isPublished ? (
-            <div className="flex flex-col gap-6 w-full">
+            <div className="flex w-full flex-col gap-6">
               {showQR && (
-                <div className="flex flex-col gap-4 border border-border/50 rounded-lg p-3 sm:p-4 bg-muted/20 w-full">
+                <div className="flex w-full flex-col gap-4 rounded-lg border border-border/50 bg-muted/20 p-3 sm:p-4">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-sm font-medium">QR Code</h3>
+                    <h3 className="font-medium text-sm">QR Code</h3>
                     <Button
+                      className="h-6 w-6 p-0"
                       onClick={handleToggleQR}
                       size="sm"
                       variant="ghost"
-                      className="h-6 w-6 p-0"
                     >
                       <X className="h-4 w-4" />
                     </Button>
                   </div>
                   <div className="flex justify-center">
                     <div className="relative">
-                      <div className="border bg-white p-2 sm:p-4 shadow-sm rounded-lg flex items-center justify-center">
+                      <div className="flex items-center justify-center rounded-lg border bg-white p-2 shadow-sm sm:p-4">
                         {qrCodeDataUrl && !generatingQR ? (
                           <img
                             alt="QR Code for form"
@@ -202,11 +193,11 @@ export function ShareFormModal({
                             src={qrCodeDataUrl}
                           />
                         ) : (
-                          <div className="flex h-28 w-28 sm:h-32 sm:w-32 items-center justify-center">
+                          <div className="flex h-28 w-28 items-center justify-center sm:h-32 sm:w-32">
                             {generatingQR ? (
                               <div className="flex flex-col items-center gap-2">
                                 <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-                                <span className="text-xs text-muted-foreground">
+                                <span className="text-muted-foreground text-xs">
                                   Generating...
                                 </span>
                               </div>
@@ -219,15 +210,15 @@ export function ShareFormModal({
                     </div>
                   </div>
                   <div className="flex flex-col gap-2 text-center">
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-muted-foreground text-xs">
                       Scan for easy mobile access
                     </p>
                     <Button
-                      className="gap-2 mx-auto w-full sm:w-auto"
+                      className="mx-auto w-full gap-2 sm:w-auto"
                       disabled={!qrCodeDataUrl || downloading || generatingQR}
                       onClick={handleDownloadQR}
-                      variant="outline"
                       size="sm"
+                      variant="outline"
                     >
                       <Download className="h-3 w-3" />
                       {downloading ? 'Downloading...' : 'Download'}
@@ -235,18 +226,18 @@ export function ShareFormModal({
                   </div>
                 </div>
               )}
-              <div className="flex flex-col gap-4 w-full">
-                <div className="flex flex-col gap-2 w-full">
-                  <div className="flex flex-col flex-col md:flex-row gap-2 w-full">
+              <div className="flex w-full flex-col gap-4">
+                <div className="flex w-full flex-col gap-2">
+                  <div className="flex w-full flex-col flex-col gap-2 md:flex-row">
                     <Input
-                      className="font-mono text-sm w-full"
-                      size="xl"
+                      className="w-full font-mono text-sm"
                       id="share-url"
                       readOnly
+                      size="xl"
                       value={shareUrl}
                     />
                     <Button
-                      className="min-w-fit shrink-0 gap-2 w-full md:w-fit"
+                      className="w-full min-w-fit shrink-0 gap-2 md:w-fit"
                       disabled={copying}
                       onClick={handleCopyLink}
                       size="xl"
@@ -264,8 +255,8 @@ export function ShareFormModal({
                 </div>
                 <div className="flex justify-center">
                   <button
+                    className="text-muted-foreground text-xs underline underline-offset-2 transition-colors hover:text-foreground"
                     onClick={handleToggleQR}
-                    className="text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
                   >
                     {showQR ? 'Hide QR Code' : 'Show QR Code'}
                   </button>
@@ -273,11 +264,12 @@ export function ShareFormModal({
               </div>
             </div>
           ) : (
-            <div className="flex flex-col gap-4 text-center w-full">
+            <div className="flex w-full flex-col gap-4 text-center">
               <div className="flex flex-col items-center gap-2 rounded-lg bg-muted/50 p-3 sm:p-4">
                 <Globe className="h-8 w-8 text-muted-foreground" />
-                <p className="text-sm text-muted-foreground">
-                  Your form needs to be published before it can be shared publicly.
+                <p className="text-muted-foreground text-sm">
+                  Your form needs to be published before it can be shared
+                  publicly.
                 </p>
               </div>
               <Button

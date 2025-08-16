@@ -41,9 +41,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function PublicFormPage({
-  params,
-}: PublicFormPageProps) {
+export default async function PublicFormPage({ params }: PublicFormPageProps) {
   const { slug } = await params;
 
   try {
@@ -53,12 +51,7 @@ export default async function PublicFormPage({
       notFound();
     }
 
-    return (
-      <PublicFormServerWrapper
-        formId={form.id}
-        schema={form.schema}
-      />
-    );
+    return <PublicFormServerWrapper formId={form.id} schema={form.schema} />;
   } catch (error) {
     console.error('Error fetching form:', error);
     notFound();

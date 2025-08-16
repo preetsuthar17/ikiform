@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 
 import { createHighlighter } from 'shiki';
@@ -25,7 +24,6 @@ interface JsonModalProps {
 
 export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
   const [highlightedCode, setHighlightedCode] = useState<string>('');
-
 
   useEffect(() => {
     if (!activeForm?.schema) return;

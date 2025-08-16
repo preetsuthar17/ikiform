@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
-  
+
 const PublicFormContent = dynamic(
   () => import('./components/PublicFormContent'),
   {
@@ -22,7 +22,7 @@ export default function PublicFormClient({
 }: PublicFormClientProps) {
   return (
     <Suspense fallback={<></>}>
-        <PublicFormContent formId={formId} schema={schema} />
+      <PublicFormContent formId={formId} schema={schema} />
     </Suspense>
   );
 }

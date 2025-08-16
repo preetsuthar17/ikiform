@@ -46,8 +46,6 @@ export function PublicForm({ formId, schema, theme }: PublicFormProps) {
         break;
     }
 
-    
-
     // Set CSS custom properties
     const root = document.documentElement;
     root.style.setProperty('--radius', borderRadiusValue);

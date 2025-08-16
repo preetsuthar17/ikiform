@@ -61,11 +61,11 @@ export function ActualFormPreview({
 
   React.useEffect(() => {
     if (typeof window === 'undefined') return;
-    
+
     // Force light theme
     document.documentElement.classList.remove('dark');
     document.documentElement.classList.add('light');
-    
+
     const root = document.documentElement;
 
     // Set border radius
@@ -127,7 +127,7 @@ export function ActualFormPreview({
       root.style.removeProperty('--form-text-color');
       root.style.removeProperty('--form-background-color');
       root.style.removeProperty('--form-border-color');
-      
+
       // Remove forced light theme classes
       document.documentElement.classList.remove('light');
     };
@@ -158,115 +158,129 @@ export function ActualFormPreview({
               : undefined,
           }}
         >
-        <div
-          className={`ikiform-customized flex w-full flex-col gap-8 ${
-            layout.maxWidth === 'custom' && layout.customWidth
-              ? 'ikiform-custom-width'
-              : ''
-          }`}
-          style={{
-            maxWidth: formWidth,
-            margin: '0 auto',
-          }}
-        >
-          <Card
-            className="flex w-full grow flex-col gap-6 rounded-card border-none bg-transparent shadow-none hover:bg-transparent"
+          <div
+            className={`ikiform-customized flex w-full flex-col gap-8 ${
+              layout.maxWidth === 'custom' && layout.customWidth
+                ? 'ikiform-custom-width'
+                : ''
+            }`}
             style={{
-              backgroundColor: colors.background || undefined,
-              borderRadius: formBorderRadius,
-              padding: formPadding,
-              color: colors.text || undefined,
+              maxWidth: formWidth,
+              margin: '0 auto',
             }}
-            variant="ghost"
           >
-            {/* Progress Bar for Multi-step Forms */}
-            {isMultiStep && localSettings.showProgress && (
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">
-                    Step {currentStep + 1} of {totalSteps}
-                  </span>
-                  <span className="text-muted-foreground">
-                    {Math.round(progress)}%
-                  </span>
-                </div>
-                <Progress
-                  className="h-2"
-                  style={{
-                    backgroundColor: colors.border || undefined,
-                  }}
-                  value={progress}
-                />
-              </div>
-            )}
-
-            {/* Social Media Icons - Header */}
-            {localSettings.branding?.socialMedia?.enabled &&
-              localSettings.branding.socialMedia.platforms &&
-              (localSettings.branding.socialMedia.position === 'header' ||
-                localSettings.branding.socialMedia.position === 'both') && (
-                <div className="flex justify-center">
-                  <SocialMediaIcons
-                    className="justify-center"
-                    iconSize={
-                      localSettings.branding.socialMedia.iconSize || 'md'
-                    }
-                    platforms={localSettings.branding.socialMedia.platforms}
+            <Card
+              className="flex w-full grow flex-col gap-6 rounded-card border-none bg-transparent shadow-none hover:bg-transparent"
+              style={{
+                backgroundColor: colors.background || undefined,
+                borderRadius: formBorderRadius,
+                padding: formPadding,
+                color: colors.text || undefined,
+              }}
+              variant="ghost"
+            >
+              {/* Progress Bar for Multi-step Forms */}
+              {isMultiStep && localSettings.showProgress && (
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-muted-foreground">
+                      Step {currentStep + 1} of {totalSteps}
+                    </span>
+                    <span className="text-muted-foreground">
+                      {Math.round(progress)}%
+                    </span>
+                  </div>
+                  <Progress
+                    className="h-2"
+                    style={{
+                      backgroundColor: colors.border || undefined,
+                    }}
+                    value={progress}
                   />
                 </div>
               )}
 
-            {/* Form Header */}
-            <div className="flex flex-col gap-4 text-left">
-              <div className="flex flex-col gap-2">
-                <h1 className="font-bold text-2xl">
-                  {(schema as any).title || localSettings.title}
-                </h1>
-                {((schema as any).description || localSettings.description) && (
-                  <p className="text-muted-foreground">
-                    {(schema as any).description || localSettings.description}
-                  </p>
+              {/* Social Media Icons - Header */}
+              {localSettings.branding?.socialMedia?.enabled &&
+                localSettings.branding.socialMedia.platforms &&
+                (localSettings.branding.socialMedia.position === 'header' ||
+                  localSettings.branding.socialMedia.position === 'both') && (
+                  <div className="flex justify-center">
+                    <SocialMediaIcons
+                      className="justify-center"
+                      iconSize={
+                        localSettings.branding.socialMedia.iconSize || 'md'
+                      }
+                      platforms={localSettings.branding.socialMedia.platforms}
+                    />
+                  </div>
                 )}
-              </div>
-            </div>
 
-            <Separator />
-
-            {/* Form Content */}
-            <div className="flex flex-col gap-6">
-              {/* Current Block Fields */}
-              {schema.blocks && schema.blocks.length > 0 && (
-                <div className="flex flex-col gap-4">
-                  {schema.blocks[currentStep]?.fields.map((field) => (
-                    <div key={field.id}>
-                      <FormFieldRenderer
-                        error=""
-                        field={field}
-                        onChange={() => {}} // Preview mode - no changes
-                        value=""
-                      />
-                    </div>
-                  ))}
+              {/* Form Header */}
+              <div className="flex flex-col gap-4 text-left">
+                <div className="flex flex-col gap-2">
+                  <h1 className="font-bold text-2xl">
+                    {(schema as any).title || localSettings.title}
+                  </h1>
+                  {((schema as any).description ||
+                    localSettings.description) && (
+                    <p className="text-muted-foreground">
+                      {(schema as any).description || localSettings.description}
+                    </p>
+                  )}
                 </div>
-              )}
+              </div>
 
-              {/* Form Navigation/Submit */}
-              <div className="flex flex-col gap-4">
-                {isMultiStep ? (
-                  <div className="flex justify-between gap-4">
+              <Separator />
+
+              {/* Form Content */}
+              <div className="flex flex-col gap-6">
+                {/* Current Block Fields */}
+                {schema.blocks && schema.blocks.length > 0 && (
+                  <div className="flex flex-col gap-4">
+                    {schema.blocks[currentStep]?.fields.map((field) => (
+                      <div key={field.id}>
+                        <FormFieldRenderer
+                          error=""
+                          field={field}
+                          onChange={() => {}} // Preview mode - no changes
+                          value=""
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Form Navigation/Submit */}
+                <div className="flex flex-col gap-4">
+                  {isMultiStep ? (
+                    <div className="flex justify-between gap-4">
+                      <Button
+                        className="flex-1"
+                        disabled
+                        style={{
+                          borderColor: colors.border || undefined,
+                          color: colors.text || undefined,
+                        }}
+                        variant="outline"
+                      >
+                        Previous
+                      </Button>
+                      <Button
+                        className="flex-1"
+                        disabled
+                        style={{
+                          backgroundColor: colors.primary || '#2563eb',
+                          borderColor: colors.primary || '#2563eb',
+                          color: '#ffffff',
+                        }}
+                      >
+                        Next
+                      </Button>
+                    </div>
+                  ) : (
                     <Button
-                      className="flex-1"
-                      disabled
-                      style={{
-                        borderColor: colors.border || undefined,
-                        color: colors.text || undefined,
-                      }}
-                      variant="outline"
-                    >
-                      Previous
-                    </Button>
-                    <Button
-                      className="flex-1"
+                      className="ml-auto w-fit"
                       disabled
                       style={{
                         backgroundColor: colors.primary || '#2563eb',
@@ -274,59 +288,48 @@ export function ActualFormPreview({
                         color: '#ffffff',
                       }}
                     >
-                      Next
+                      {localSettings.submitText || 'Submit Form'}
                     </Button>
-                  </div>
-                ) : (
-                  <Button
-                    className="ml-auto w-fit"
-                    disabled
-                    style={{
-                      backgroundColor: colors.primary || '#2563eb',
-                      borderColor: colors.primary || '#2563eb',
-                      color: '#ffffff',
-                    }}
-                  >
-                    {localSettings.submitText || 'Submit Form'}
-                  </Button>
-                )}
+                  )}
+                </div>
               </div>
-            </div>
-          </Card>
+            </Card>
 
-          {/* Footer Content */}
-          <div
-            className="flex flex-col gap-4 text-center"
-            style={{ color: colors.text || undefined }}
-          >
-            {/* Social Media Icons - Footer */}
-            {localSettings.branding?.socialMedia?.enabled &&
-              localSettings.branding.socialMedia.platforms &&
-              (localSettings.branding.socialMedia.position === 'footer' ||
-                localSettings.branding.socialMedia.position === 'both') && (
-                <SocialMediaIcons
-                  className="justify-center"
-                  iconSize={localSettings.branding.socialMedia.iconSize || 'md'}
-                  platforms={localSettings.branding.socialMedia.platforms}
-                />
+            {/* Footer Content */}
+            <div
+              className="flex flex-col gap-4 text-center"
+              style={{ color: colors.text || undefined }}
+            >
+              {/* Social Media Icons - Footer */}
+              {localSettings.branding?.socialMedia?.enabled &&
+                localSettings.branding.socialMedia.platforms &&
+                (localSettings.branding.socialMedia.position === 'footer' ||
+                  localSettings.branding.socialMedia.position === 'both') && (
+                  <SocialMediaIcons
+                    className="justify-center"
+                    iconSize={
+                      localSettings.branding.socialMedia.iconSize || 'md'
+                    }
+                    platforms={localSettings.branding.socialMedia.platforms}
+                  />
+                )}
+
+              {/* Ikiform Branding */}
+              {Boolean(
+                localSettings.branding &&
+                  (localSettings.branding as any).showIkiformBranding !== false
+              ) && (
+                <p className="text-muted-foreground text-sm">
+                  Powered by{' '}
+                  <span className="font-medium text-foreground underline">
+                    <Link href="https://www.ikiform.com">Ikiform</Link>
+                  </span>
+                </p>
               )}
-
-            {/* Ikiform Branding */}
-            {Boolean(
-              localSettings.branding &&
-                (localSettings.branding as any).showIkiformBranding !== false
-            ) && (
-              <p className="text-muted-foreground text-sm">
-                Powered by{' '}
-                <span className="font-medium text-foreground underline">
-                  <Link href="https://www.ikiform.com">Ikiform</Link>
-                </span>
-              </p>
-            )}
+            </div>
           </div>
         </div>
-      </div>
-    </Card>
-      </div>
+      </Card>
+    </div>
   );
 }

@@ -18,14 +18,16 @@ export default function LoginForm() {
   const { user } = useAuth();
   const [isSignUp, setIsSignUp] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [currentStep, setCurrentStep] = useState<'email' | 'password' | 'name'>('email');
+  const [currentStep, setCurrentStep] = useState<'email' | 'password' | 'name'>(
+    'email'
+  );
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     name: '',
   });
   const [showForgotPassword, setShowForgotPassword] = useState(false);
-  
+
   const [focusedFields, setFocusedFields] = useState({
     name: false,
     email: false,
@@ -50,15 +52,18 @@ export default function LoginForm() {
   }
 
   function handleFocus(field: string) {
-    setFocusedFields(prev => ({ ...prev, [field]: true }));
+    setFocusedFields((prev) => ({ ...prev, [field]: true }));
   }
 
   function handleBlur(field: string) {
-    setFocusedFields(prev => ({ ...prev, [field]: false }));
+    setFocusedFields((prev) => ({ ...prev, [field]: false }));
   }
 
   function isFieldActive(field: string) {
-    return focusedFields[field as keyof typeof focusedFields] || formData[field as keyof typeof formData] !== '';
+    return (
+      focusedFields[field as keyof typeof focusedFields] ||
+      formData[field as keyof typeof formData] !== ''
+    );
   }
 
   function validateEmail() {
@@ -98,10 +103,10 @@ export default function LoginForm() {
 
   function handleNextStep(e: React.FormEvent) {
     e.preventDefault();
-    
+
     if (currentStep === 'email') {
       if (!validateEmail()) return;
-      
+
       if (isSignUp) {
         setCurrentStep('name');
       } else {
@@ -249,11 +254,11 @@ export default function LoginForm() {
   function getStepTitle() {
     if (currentStep === 'email') {
       return isSignUp ? 'Create account' : 'Welcome back';
-    } else if (currentStep === 'name') {
-      return 'What\'s your name?';
-    } else {
-      return 'Enter your password';
     }
+    if (currentStep === 'name') {
+      return "What's your name?";
+    }
+    return 'Enter your password';
   }
 
   function getButtonText() {
@@ -274,11 +279,13 @@ export default function LoginForm() {
   return (
     <>
       <div className="mx-3 flex h-screen flex-col items-center justify-center gap-4 overflow-hidden">
-        <Card className="flex w-full max-w-sm flex-col items-center justify-center gap-8 text-center bg-transparent border-none shadow-none" size={"lg"}>
-          <CardHeader className='w-full'>
-            <div className='flex items-center justify-center'>
-            
-                  <h2 className="font-semibold text-xl md:text-2xl ">
+        <Card
+          className="flex w-full max-w-sm flex-col items-center justify-center gap-8 border-none bg-transparent text-center shadow-none"
+          size={'lg'}
+        >
+          <CardHeader className="w-full">
+            <div className="flex items-center justify-center">
+              <h2 className="font-semibold text-xl md:text-2xl">
                 {getStepTitle()}
               </h2>
             </div>
@@ -290,36 +297,34 @@ export default function LoginForm() {
               {currentStep === 'email' && (
                 <div className="relative w-full">
                   <Input
+                    autoFocus
+                    className={`linear rounded-full px-4 py-3 text-sm transition-all duration-300 ${
+                      hasContent('email')
+                        ? 'ring-2 ring-ring ring-offset-2'
+                        : focusedFields.email
+                          ? ''
+                          : 'border-border'
+                    }`}
                     disabled={loading}
-                    className={`rounded-full px-4 py-3 text-sm transition-all duration-300 linear
-                      ${
-                        hasContent('email')
-                          ? 'ring-2 ring-offset-2 ring-ring'
-                          : focusedFields.email
-                            ? ''
-                            : 'border-border '
-                      }`}
                     id="email"
+                    onBlur={() => handleBlur('email')}
                     onChange={(e) => handleInputChange('email', e.target.value)}
                     onFocus={() => handleFocus('email')}
-                    onBlur={() => handleBlur('email')}
                     required
                     size="xl"
                     type="email"
                     value={formData.email}
-                    autoFocus
                   />
                   <label
-                    htmlFor="email"
-                    className={`absolute left-4 pointer-events-none select-none transition-all duration-300 linear ${
+                    className={`linear pointer-events-none absolute left-4 select-none transition-all duration-300 ${
                       isFieldActive('email')
-                        ? '-top-3.5 text-sm bg-linear-to-t from-card to-background px-2 text-primary'
-                        : 'top-3.5 text-sm opacity-30 left-6'
+                        ? '-top-3.5 bg-linear-to-t from-card to-background px-2 text-primary text-sm'
+                        : 'top-3.5 left-6 text-sm opacity-30'
                     } ${focusedFields.email && !isFieldActive('email') ? 'text-primary' : ''}`}
+                    htmlFor="email"
                   >
                     Enter your email
                   </label>
-                
                 </div>
               )}
 
@@ -327,36 +332,34 @@ export default function LoginForm() {
               {currentStep === 'name' && isSignUp && (
                 <div className="relative w-full">
                   <Input
+                    autoFocus
+                    className={`linear rounded-full px-4 py-3 text-sm transition-all duration-300 ${
+                      hasContent('name')
+                        ? 'ring-2 ring-ring ring-offset-2'
+                        : focusedFields.name
+                          ? 'border-border'
+                          : 'border-border'
+                    }`}
                     disabled={loading}
-                    className={`rounded-full px-4 py-3 text-sm transition-all duration-300 linear
-                      ${
-                        hasContent('name')
-                          ? 'ring-2 ring-offset-2 ring-ring'
-                          : focusedFields.name
-                            ? 'border-border'
-                            : 'border-border '
-                      }`}
                     id="name"
+                    onBlur={() => handleBlur('name')}
                     onChange={(e) => handleInputChange('name', e.target.value)}
                     onFocus={() => handleFocus('name')}
-                    onBlur={() => handleBlur('name')}
                     required={isSignUp}
                     size="xl"
                     type="text"
                     value={formData.name}
-                    autoFocus
                   />
                   <label
-                    htmlFor="name"
-                    className={`absolute left-4 pointer-events-none select-none transition-all duration-300 linear ${
+                    className={`linear pointer-events-none absolute left-4 select-none transition-all duration-300 ${
                       isFieldActive('name')
-                        ? '-top-3.5 text-sm bg-linear-to-t from-card to-background px-2 text-primary'
-                        : 'top-3.5 text-sm opacity-30 left-6'
+                        ? '-top-3.5 bg-linear-to-t from-card to-background px-2 text-primary text-sm'
+                        : 'top-3.5 left-6 text-sm opacity-30'
                     } ${focusedFields.name && !isFieldActive('name') ? 'text-primary' : ''}`}
+                    htmlFor="name"
                   >
                     Enter your name
                   </label>
-                
                 </div>
               )}
 
@@ -364,36 +367,36 @@ export default function LoginForm() {
               {currentStep === 'password' && (
                 <div className="relative w-full">
                   <Input
+                    autoFocus
+                    className={`linear rounded-full px-4 py-3 text-sm transition-all duration-300 ${
+                      hasContent('password')
+                        ? 'ring-2 ring-ring ring-offset-2'
+                        : focusedFields.password
+                          ? 'border-border'
+                          : 'border-border'
+                    }`}
                     disabled={loading}
-                    className={`rounded-full px-4 py-3 text-sm transition-all duration-300 linear
-                      ${
-                        hasContent('password')
-                          ? 'ring-2 ring-offset-2 ring-ring'
-                          : focusedFields.password
-                            ? 'border-border'
-                            : 'border-border '
-                      }`}
-                    type='password'
                     id="password"
-                    onChange={(e) => handleInputChange('password', e.target.value)}
-                    onFocus={() => handleFocus('password')}
                     onBlur={() => handleBlur('password')}
+                    onChange={(e) =>
+                      handleInputChange('password', e.target.value)
+                    }
+                    onFocus={() => handleFocus('password')}
                     required
                     size="xl"
+                    type="password"
                     value={formData.password}
-                    autoFocus
                   />
                   <label
-                    htmlFor="password"
-                    className={`absolute left-4 pointer-events-none select-none transition-all duration-300 linear ${
+                    className={`linear pointer-events-none absolute left-4 select-none transition-all duration-300 ${
                       isFieldActive('password')
-                        ? '-top-3.5 text-sm bg-linear-to-t from-card to-background px-2 text-primary'
-                        : 'top-3.5 text-sm opacity-30 left-6'
+                        ? '-top-3.5 bg-linear-to-t from-card to-background px-2 text-primary text-sm'
+                        : 'top-3.5 left-6 text-sm opacity-30'
                     } ${focusedFields.password && !isFieldActive('password') ? 'text-primary' : ''}`}
+                    htmlFor="password"
                   >
                     Enter your password
                   </label>
-                
                 </div>
               )}
 
@@ -410,7 +413,7 @@ export default function LoginForm() {
               {/* Add back button below the continue/sign in/create acc button */}
               {shouldShowBackButtonBelow() && (
                 <Button
-                  className="w-full rounded-full text-sm flex items-center justify-center gap-2"
+                  className="flex w-full items-center justify-center gap-2 rounded-full text-sm"
                   disabled={loading}
                   onClick={handleBackStep}
                   size="xl"
@@ -425,7 +428,7 @@ export default function LoginForm() {
               {currentStep === 'password' && !isSignUp && (
                 <div className="text-center">
                   <Button
-                    className="text-muted-foreground text-sm p-0 m-0 py-0 h-fit"
+                    className="m-0 h-fit p-0 py-0 text-muted-foreground text-sm"
                     disabled={loading}
                     onClick={handleForgotPassword}
                     type="button"
@@ -441,7 +444,7 @@ export default function LoginForm() {
             {currentStep === 'email' && (
               <div className="text-center">
                 <Button
-                  className="text-sm p-0 m-0 py-0 h-fit"
+                  className="m-0 h-fit p-0 py-0 text-sm"
                   disabled={loading}
                   onClick={() => {
                     setIsSignUp(!isSignUp);
@@ -473,7 +476,7 @@ export default function LoginForm() {
 
                 <div className="flex w-full flex-col items-start justify-center gap-2">
                   <Button
-                    className="flex bg-card shadow-none w-full items-center gap-2 font-medium rounded-full text-sm"
+                    className="flex w-full items-center gap-2 rounded-full bg-card font-medium text-sm shadow-none"
                     disabled={loading}
                     onClick={() => handleOAuthLogin('google')}
                     size="xl"
@@ -484,7 +487,7 @@ export default function LoginForm() {
                     Continue with Google
                   </Button>
                   <Button
-                    className="flex bg-card shadow-none w-full items-center gap-2 font-medium rounded-full text-sm"
+                    className="flex w-full items-center gap-2 rounded-full bg-card font-medium text-sm shadow-none"
                     disabled={loading}
                     onClick={() => handleOAuthLogin('github')}
                     size="xl"

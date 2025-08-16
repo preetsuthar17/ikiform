@@ -1,7 +1,6 @@
 import { Sparkles } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-
 import { useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/components/ui/button';

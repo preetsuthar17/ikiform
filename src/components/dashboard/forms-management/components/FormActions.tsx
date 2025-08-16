@@ -54,25 +54,25 @@ export function FormActions({
 
   return (
     <TooltipProvider>
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between w-full">
+      <div className="flex w-full flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         {/* Primary Actions Group */}
-        <div className="flex flex-row flex-wrap items-center gap-1 w-full sm:w-auto max-[330px]:justify-center">
+        <div className="flex w-full flex-row flex-wrap items-center gap-1 max-[330px]:justify-center sm:w-auto">
           {primaryActions.map(({ icon: Icon, label, onClick, variant }) => (
             <Tooltip key={label}>
               <TooltipTrigger asChild>
                 <Button
+                  className="h-9 w-9 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80"
                   onClick={onClick}
                   size="sm"
                   variant={variant}
-                  className="h-9 w-9 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80"
                 >
                   <Icon className="h-4 w-4" />
                   <span className="sr-only">{label}</span>
                 </Button>
               </TooltipTrigger>
               <TooltipContent
+                className="font-medium text-xs"
                 side="top"
-                className="text-xs font-medium"
                 sideOffset={8}
               >
                 {label}
@@ -82,25 +82,25 @@ export function FormActions({
         </div>
 
         {/* Separator */}
-        <div className="hidden sm:block mx-3 h-4 w-px bg-border/50" />
+        <div className="mx-3 hidden h-4 w-px bg-border/50 sm:block" />
 
         {/* Destructive Action */}
-        <div className="flex w-full sm:w-auto justify-end">
+        <div className="flex w-full justify-end sm:w-auto">
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
+                className="h-9 w-9 p-0 transition-all duration-200 hover:scale-105 hover:bg-destructive/10 hover:text-destructive"
                 onClick={() => onDelete(form.id, form.title)}
                 size="sm"
                 variant="ghost"
-                className="h-9 w-9 p-0 transition-all duration-200 hover:scale-105 hover:bg-destructive/10 hover:text-destructive"
               >
                 <Trash2 className="h-4 w-4" />
                 <span className="sr-only">Delete form</span>
               </Button>
             </TooltipTrigger>
             <TooltipContent
+              className="border-destructive/20 font-medium text-destructive text-xs"
               side="top"
-              className="text-xs font-medium text-destructive border-destructive/20"
               sideOffset={8}
             >
               Delete form

@@ -17,7 +17,7 @@ export const FloatingChatButton: React.FC<FloatingChatButtonProps> = ({
       >
         <Image
           alt="Ikiform"
-          className={`pointer-events-none cursor-pointer rounded-ele`}
+          className={'pointer-events-none cursor-pointer rounded-ele'}
           height={100}
           src="/logo.svg"
           width={100}

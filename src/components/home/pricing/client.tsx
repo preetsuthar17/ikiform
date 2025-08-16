@@ -167,30 +167,30 @@ export default function PricingClient({ products }: PricingClientProps) {
                     <div className="flex flex-col gap-4 sm:gap-6">
                       {/* Monthly Option */}
                       <div
-                        className={`cursor-pointer rounded-2xl sm:rounded-3xl p-4 sm:p-6 transition-all ${
+                        aria-pressed={billingPeriod === 'monthly'}
+                        className={`cursor-pointer rounded-2xl p-4 transition-all sm:rounded-3xl sm:p-6 ${
                           billingPeriod === 'monthly'
                             ? 'bg-card outline-2 outline-border'
                             : 'bg-background outline-2 outline-transparent'
                         }`}
                         onClick={() => setBillingPeriod('monthly')}
-                        tabIndex={0}
                         role="button"
-                        aria-pressed={billingPeriod === 'monthly'}
+                        tabIndex={0}
                       >
-                        <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-2">
+                        <div className="flex xs:flex-row flex-col xs:items-center xs:justify-between gap-2">
                           <div className="flex flex-col gap-1">
-                            <h3 className="font-medium text-foreground text-base sm:text-lg">
+                            <h3 className="font-medium text-base text-foreground sm:text-lg">
                               Monthly
                             </h3>
                             <p className="text-muted-foreground text-xs sm:text-sm">
                               Billed monthly • Cancel anytime
                             </p>
                           </div>
-                          <div className="flex items-baseline gap-1 sm:gap-2 mt-1 xs:mt-0">
-                            <span className="text-muted-foreground text-xs sm:text-sm line-through">
+                          <div className="mt-1 xs:mt-0 flex items-baseline gap-1 sm:gap-2">
+                            <span className="text-muted-foreground text-xs line-through sm:text-sm">
                               $29
                             </span>
-                            <span className="font-medium text-xl sm:text-2xl text-foreground">
+                            <span className="font-medium text-foreground text-xl sm:text-2xl">
                               $19
                             </span>
                             <span className="text-muted-foreground text-xs sm:text-sm">
@@ -202,30 +202,30 @@ export default function PricingClient({ products }: PricingClientProps) {
 
                       {/* Yearly Option */}
                       <div
-                        className={`cursor-pointer rounded-2xl sm:rounded-3xl p-4 sm:p-6 transition-all ${
+                        aria-pressed={billingPeriod === 'yearly'}
+                        className={`cursor-pointer rounded-2xl p-4 transition-all sm:rounded-3xl sm:p-6 ${
                           billingPeriod === 'yearly'
                             ? 'bg-card outline-2 outline-border'
                             : 'bg-background outline-2 outline-transparent'
                         }`}
                         onClick={() => setBillingPeriod('yearly')}
-                        tabIndex={0}
                         role="button"
-                        aria-pressed={billingPeriod === 'yearly'}
+                        tabIndex={0}
                       >
-                        <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-2">
+                        <div className="flex xs:flex-row flex-col xs:items-center xs:justify-between gap-2">
                           <div className="flex flex-col gap-1">
-                            <h3 className="font-medium text-foreground text-base sm:text-lg">
+                            <h3 className="font-medium text-base text-foreground sm:text-lg">
                               Yearly
                             </h3>
                             <p className="text-muted-foreground text-xs sm:text-sm">
                               Billed annually • Cancel anytime
                             </p>
                           </div>
-                          <div className="flex items-baseline gap-1 sm:gap-2 mt-1 xs:mt-0">
-                            <span className="text-muted-foreground text-xs sm:text-sm line-through">
+                          <div className="mt-1 xs:mt-0 flex items-baseline gap-1 sm:gap-2">
+                            <span className="text-muted-foreground text-xs line-through sm:text-sm">
                               $19
                             </span>
-                            <span className="font-medium text-xl sm:text-2xl text-foreground">
+                            <span className="font-medium text-foreground text-xl sm:text-2xl">
                               $9
                             </span>
                             <span className="text-muted-foreground text-xs sm:text-sm">
@@ -237,30 +237,30 @@ export default function PricingClient({ products }: PricingClientProps) {
 
                       {/* Lifetime Option */}
                       <div
-                        className={`cursor-pointer rounded-2xl sm:rounded-3xl p-4 sm:p-6 transition-all ${
+                        aria-pressed={billingPeriod === 'onetime'}
+                        className={`cursor-pointer rounded-2xl p-4 transition-all sm:rounded-3xl sm:p-6 ${
                           billingPeriod === 'onetime'
                             ? 'bg-card outline-2 outline-border'
                             : 'bg-background outline-2 outline-transparent'
                         }`}
                         onClick={() => setBillingPeriod('onetime')}
-                        tabIndex={0}
                         role="button"
-                        aria-pressed={billingPeriod === 'onetime'}
+                        tabIndex={0}
                       >
-                        <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-2">
+                        <div className="flex xs:flex-row flex-col xs:items-center xs:justify-between gap-2">
                           <div className="flex flex-col gap-1">
-                            <h3 className="font-medium text-foreground text-base sm:text-lg">
+                            <h3 className="font-medium text-base text-foreground sm:text-lg">
                               Lifetime
                             </h3>
                             <p className="text-muted-foreground text-xs sm:text-sm">
                               One-time payment • Lifetime access
                             </p>
                           </div>
-                          <div className="flex items-baseline gap-1 sm:gap-2 mt-1 xs:mt-0">
-                            <span className="text-muted-foreground text-xs sm:text-sm line-through">
+                          <div className="mt-1 xs:mt-0 flex items-baseline gap-1 sm:gap-2">
+                            <span className="text-muted-foreground text-xs line-through sm:text-sm">
                               $139
                             </span>
-                            <span className="font-medium text-xl sm:text-2xl text-foreground">
+                            <span className="font-medium text-foreground text-xl sm:text-2xl">
                               $119
                             </span>
                           </div>
@@ -271,12 +271,12 @@ export default function PricingClient({ products }: PricingClientProps) {
                     {/* Testimonial at bottom */}
                     <div className="mt-auto">
                       <div className="rounded-3xl bg-background p-4 sm:p-6">
-                        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
-                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary font-medium text-lg text-primary-foreground mx-auto sm:mx-0">
+                        <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-start sm:text-left">
+                          <div className="mx-auto flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary font-medium text-lg text-primary-foreground sm:mx-0">
                             T
                           </div>
-                          <div className="flex flex-col gap-2 w-full">
-                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 items-center">
+                          <div className="flex w-full flex-col gap-2">
+                            <div className="flex flex-col items-center gap-2 sm:flex-row sm:items-center sm:justify-between">
                               <h4 className="font-medium text-foreground">
                                 Trust F. Obe
                               </h4>
@@ -331,7 +331,7 @@ export default function PricingClient({ products }: PricingClientProps) {
                         </span>
                       </div>
                       {/* Features */}
-                      <div className="flex flex-col md:gap-2 gap-3">
+                      <div className="flex flex-col gap-3 md:gap-2">
                         {features.map((feature, index) => (
                           <div className="flex items-center gap-3" key={index}>
                             <span className="opacity-90">

@@ -14,7 +14,7 @@ export function CSSPropertiesProvider({
   useEffect(() => {
     document.documentElement.classList.remove('dark');
     document.documentElement.classList.add('light');
-    
+
     let borderRadiusValue = '8px';
     let cardRadiusValue = '16px';
 

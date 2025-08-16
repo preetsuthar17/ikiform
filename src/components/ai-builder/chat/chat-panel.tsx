@@ -46,9 +46,7 @@ export const ChatPanel = memo(function ChatPanel({
       <ChatHeader />
       <ScrollArea className="relative flex-1 p-4">
         <div className="flex flex-col gap-4">
-          {messages.length === 0 && (
-            <WelcomeMessage mounted={mounted} />
-          )}
+          {messages.length === 0 && <WelcomeMessage mounted={mounted} />}
           <AnimatePresence>
             {messages.map((message, index) => (
               <ChatMessageItem

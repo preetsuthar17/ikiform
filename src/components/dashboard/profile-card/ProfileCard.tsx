@@ -34,15 +34,13 @@ export function ProfileCard({ className }: ProfileCardProps) {
 
   return (
     <Card
-      className={`relative flex w-full grow flex-col items-center gap-6 bg-card py-24 rounded-4xl border-none shadow-none ${className || ''}`}
+      className={`relative flex w-full grow flex-col items-center gap-6 rounded-4xl border-none bg-card py-24 shadow-none ${className || ''}`}
     >
       <CardHeader className="flex items-center gap-2">
         <UserAvatar avatarUrl={avatarUrl} name={name} size="xl" />
       </CardHeader>
 
-      <ProfileActions
-        onSignOut={signOut}
-      />
+      <ProfileActions onSignOut={signOut} />
 
       <ProfileInfo hasPremium={hasPremium} user={user} />
     </Card>
