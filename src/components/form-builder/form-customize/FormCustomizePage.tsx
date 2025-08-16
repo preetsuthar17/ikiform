@@ -84,12 +84,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
     router.push(`/form-builder/${formId}`);
   };
 
-  const handlePreview = () => {
-    const previewUrl = schema.settings.multiStep
-      ? `/f/${(schema as any).slug}`
-      : `/f/${(schema as any).slug}`;
-    window.open(previewUrl, '_blank');
-  };
+
 
   const sections = [
     {
@@ -181,10 +176,6 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
             >
               <Eye className="h-4 w-4" />
               Preview
-            </Button>
-            <Button className="gap-2" onClick={handlePreview} variant="outline">
-              <Monitor className="h-4 w-4" />
-              Live Preview
             </Button>
             <Button onClick={resetSettings} variant="outline">
               Reset to Default
