@@ -24,7 +24,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/bug-report',
-        destination: 'http://localhost:3000/f/bug-report-form-82iwa5',
+        destination: 'https://www.ikiform.com/f/bug-report-form-82iwa5',
         permanent: false,
       },
       {
