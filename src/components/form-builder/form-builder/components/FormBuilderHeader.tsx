@@ -62,7 +62,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             <Button
               asChild
               className="font-medium text-xs md:text-sm"
-              variant="secondary"
+              variant="outline"
             >
               <Link className="z-1 flex items-center" href="/dashboard">
                 Go to Dashboard
@@ -83,10 +83,9 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
         <ScrollArea className="w-full md:hidden" orientation="horizontal">
           <div className="flex gap-2 pb-4">
             <Button
-              className="gap-1 text-xs"
+              className="gap-1"
               onClick={onModeToggle}
-              size="sm"
-              variant={formSchema.settings.multiStep ? 'default' : 'secondary'}
+              variant={formSchema.settings.multiStep ? 'default' : 'outline'}
             >
               {formSchema.settings.multiStep ? (
                 <Layers className="h-3 w-3" />
@@ -99,7 +98,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               className="h-8 w-8"
               onClick={onJsonView}
               size="icon"
-              variant="secondary"
+              variant="outline"
             >
               <Code className="h-3 w-3 shrink-0" />
             </Button>
@@ -108,7 +107,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               disabled={!formId}
               onClick={onAnalytics}
               size="icon"
-              variant="secondary"
+              variant="outline"
             >
               <BarChart3 className="h-3 w-3 shrink-0" />
             </Button>
@@ -117,7 +116,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               disabled={!formId}
               onClick={onShare}
               size="icon"
-              variant="secondary"
+              variant="outline"
             >
               <Share className="h-3 w-3 shrink-0" />
             </Button>
@@ -125,7 +124,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               className="h-8 w-8"
               onClick={onSettings}
               size="icon"
-              variant="secondary"
+              variant="outline"
             >
               <SettingsIcon className="h-3 w-3 shrink-0" />
             </Button>
@@ -142,7 +141,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               loading={publishing}
               onClick={onPublish}
               size="sm"
-              variant="secondary"
+              variant="outline"
             >
               {isPublished ? (
                 <>
@@ -175,7 +174,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             className="gap-2"
             onClick={onModeToggle}
             size="sm"
-            variant={formSchema.settings.multiStep ? 'default' : 'secondary'}
+            variant={formSchema.settings.multiStep ? 'default' : 'outline'}
           >
             {formSchema.settings.multiStep ? (
               <Layers className="h-4 w-4" />
@@ -187,7 +186,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button onClick={onJsonView} size="icon" variant="secondary">
+                <Button onClick={onJsonView} size="icon" variant="outline">
                   <Code className="h-4 w-4 shrink-0" />
                 </Button>
               </TooltipTrigger>
@@ -199,7 +198,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
                   disabled={!formId}
                   onClick={onAnalytics}
                   size="icon"
-                  variant="secondary"
+                  variant="outline"
                 >
                   <BarChart3 className="h-4 w-4 shrink-0" />
                 </Button>
@@ -212,7 +211,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
                   disabled={!formId}
                   onClick={onShare}
                   size="icon"
-                  variant="secondary"
+                  variant="outline"
                 >
                   <Share className="h-4 w-4 shrink-0" />
                 </Button>
@@ -221,7 +220,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button onClick={onSettings} size="icon" variant="secondary">
+                <Button onClick={onSettings} size="icon" variant="outline">
                   <SettingsIcon className="h-4 w-4 shrink-0" />
                 </Button>
               </TooltipTrigger>
@@ -244,7 +243,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             loading={publishing}
             onClick={onPublish}
             size="sm"
-            variant="secondary"
+            variant="outline"
           >
             {isPublished ? (
               <>
