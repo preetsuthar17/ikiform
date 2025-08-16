@@ -20,7 +20,7 @@ export function FieldItem({
           {...provided.dragHandleProps}
         >
           <Card
-            className="group cursor-pointer border-border bg-background p-1  rounded-card transition-all duration-200 hover:border-ring/20 hover:shadow-md/2"
+            className="group cursor-pointer border-border bg-background p-1 transition-all duration-200 hover:border-ring/20 hover:shadow-md/2"
             onClick={() => onAddField(fieldType.type)}
           >
             <div className="flex items-center gap-3 p-3">
