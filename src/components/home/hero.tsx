@@ -36,7 +36,7 @@ export function EmbeddedForm({ className, style }: EmbeddedFormProps) {
     width: '100%',
     height: `${iframeHeight}px`,
     border: '1px solid #ffffff',
-    borderRadius: '18px',
+    borderRadius: '22px',
     display: 'block',
     margin: '0 auto',
     ...style,
