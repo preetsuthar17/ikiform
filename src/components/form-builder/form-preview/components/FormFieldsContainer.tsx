@@ -67,10 +67,7 @@ export function FormFieldsContainer({
           Add Field
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent
-        align="center"
-        className="h-42 w-48"
-      >
+      <DropdownMenuContent align="center" className="h-42 w-48">
         <ScrollArea type="always">
           {FIELD_TYPES.map((fieldType: { type: string; label: string }) => (
             <DropdownMenuItem

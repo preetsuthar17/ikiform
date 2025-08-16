@@ -32,7 +32,7 @@ const FeatureCard = ({
 }: FeatureCardProps) => {
   return (
     <Card
-      className={`overflow-hidden border-0 bg-card p-4 shadow-none transition-all duration-300 ease-out ${className} rounded-4xl`}
+      className={`overflow-hidden border-0 bg-card p-4 shadow-none transition-all duration-300 ease-out rounded-4xl ${className}`}
     >
       <div className="flex h-full w-full flex-col p-6">
         {/* Preview */}
@@ -694,74 +694,84 @@ const EmailNotificationsPreview = () => {
 };
 
 export default function BentoFeatures() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <div className="mx-auto w-full max-w-7xl bg-background">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-18 px-4">
         {/* Bento Grid */}
         <div className="flex flex-col gap-6 lg:grid lg:grid-cols-4">
-          {/* AI Form Builder - Large featured card */}
-          <FeatureCard
-            className="col-span-2 row-span-2 w-full"
-            description="Generate complete forms instantly using natural language. Just describe what you need and watch AI create professional forms with smart field types and validation."
-            featured={true}
-            icon={<Bot className="h-6 w-6" />}
-            preview={<AIFormBuilderPreview />}
-            title="AI Form Builder"
-          />
+          {mounted && (
+            <>
+              {/* AI Form Builder - Large featured card */}
+              <FeatureCard
+                className="col-span-2 row-span-2 w-full"
+                description="Generate complete forms instantly using natural language. Just describe what you need and watch AI create professional forms with smart field types and validation."
+                featured={true}
+                icon={<Bot className="h-6 w-6" />}
+                preview={<AIFormBuilderPreview />}
+                title="AI Form Builder"
+              />
 
-          {/* Unlimited Submissions */}
-          <FeatureCard
-            className="col-span-1"
-            description="No limits on submissions, forms, or features. Scale without restrictions."
-            icon={<Infinity className="h-5 w-5" />}
-            preview={<UnlimitedPreview />}
-            title="Unlimited Everything"
-          />
+              {/* Unlimited Submissions */}
+              <FeatureCard
+                className="col-span-1"
+                description="No limits on submissions, forms, or features. Scale without restrictions."
+                icon={<Infinity className="h-5 w-5" />}
+                preview={<UnlimitedPreview />}
+                title="Unlimited Everything"
+              />
 
-          {/* Analytics */}
-          <FeatureCard
-            className="col-span-1"
-            description="Get intelligent insights about your form performance and user behavior."
-            icon={<TrendingUp className="h-5 w-5" />}
-            preview={<AnalyticsPreview />}
-            title="AI Analytics"
-          />
+              {/* Analytics */}
+              <FeatureCard
+                className="col-span-1"
+                description="Get intelligent insights about your form performance and user behavior."
+                icon={<TrendingUp className="h-5 w-5" />}
+                preview={<AnalyticsPreview />}
+                title="AI Analytics"
+              />
 
-          {/* Email Notifications */}
-          <FeatureCard
-            className="col-span-2"
-            description="Automated email notifications and custom triggers for form submissions."
-            icon={<Mail className="h-5 w-5" />}
-            preview={<EmailNotificationsPreview />}
-            title="Smart Notifications"
-          />
+              {/* Email Notifications */}
+              <FeatureCard
+                className="col-span-2"
+                description="Automated email notifications and custom triggers for form submissions."
+                icon={<Mail className="h-5 w-5" />}
+                preview={<EmailNotificationsPreview />}
+                title="Smart Notifications"
+              />
 
-          {/* API Integration */}
-          <FeatureCard
-            className="col-span-1"
-            description="Connect to any API to populate fields or send data automatically."
-            icon={<Zap className="h-5 w-5" />}
-            preview={<APIIntegrationPreview />}
-            title="API Integration"
-          />
+              {/* API Integration */}
+              <FeatureCard
+                className="col-span-1"
+                description="Connect to any API to populate fields or send data automatically."
+                icon={<Zap className="h-5 w-5" />}
+                preview={<APIIntegrationPreview />}
+                title="API Integration"
+              />
 
-          {/* Digital Signatures */}
-          <FeatureCard
-            className="col-span-1"
-            description="Collect legally binding digital signatures with built-in verification."
-            icon={<PenTool className="h-5 w-5" />}
-            preview={<DigitalSignaturesPreview />}
-            title="Digital Signatures"
-          />
+              {/* Digital Signatures */}
+              <FeatureCard
+                className="col-span-1"
+                description="Collect legally binding digital signatures with built-in verification."
+                icon={<PenTool className="h-5 w-5" />}
+                preview={<DigitalSignaturesPreview />}
+                title="Digital Signatures"
+              />
 
-          {/* Logic Builder */}
-          <FeatureCard
-            className="col-span-2"
-            description="Create complex conditional flows with an intuitive drag-and-drop interface. Build smart forms that adapt to user responses."
-            icon={<GitBranch className="h-5 w-5" />}
-            preview={<LogicBuilderPreview />}
-            title="Visual Logic Builder"
-          />
+              {/* Logic Builder */}
+              <FeatureCard
+                className="col-span-2"
+                description="Create complex conditional flows with an intuitive drag-and-drop interface. Build smart forms that adapt to user responses."
+                icon={<GitBranch className="h-5 w-5" />}
+                preview={<LogicBuilderPreview />}
+                title="Visual Logic Builder"
+              />
+            </>
+          )}
         </div>
       </div>
     </div>

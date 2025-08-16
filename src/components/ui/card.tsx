@@ -3,7 +3,7 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 const cardVariants = cva(
-  'relative overflow-hidden bg-card text-card-foreground shadow-sm/2 transition-all duration-300 ease-out rounded-4xl',
+  'relative overflow-hidden rounded-4xl bg-card text-card-foreground shadow-sm/2 transition-all duration-300 ease-out',
   {
     variants: {
       variant: {
@@ -32,7 +32,7 @@ export interface CardProps
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant, size, ...props }, ref) => (
     <div
-      className={cn(className,cardVariants({ variant, size }))}
+      className={cn(className, cardVariants({ variant, size }))}
       ref={ref}
       {...props}
     />
