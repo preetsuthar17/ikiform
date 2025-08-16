@@ -99,28 +99,6 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
             </Button>
           </div>
         </Card>
-
-        {}
-        <Card className="p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Eye className="h-5 w-5 text-primary" />
-              <div>
-                <p className="font-medium">Form Preview</p>
-                <p className="text-muted-foreground text-sm">
-                  See how your form will look
-                </p>
-              </div>
-            </div>
-            <Button
-              onClick={() => setShowPreview(!showPreview)}
-              size="sm"
-              variant={showPreview ? 'secondary' : 'outline'}
-            >
-              {showPreview ? 'Hide Preview' : 'Show Preview'}
-            </Button>
-          </div>
-        </Card>
       </div>
 
       {}
