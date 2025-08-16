@@ -1,4 +1,4 @@
-import { MoreVertical, Settings } from 'lucide-react';
+import { MoreVertical } from 'lucide-react';
 import React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -12,17 +12,13 @@ import {
 import type { ProfileActionsProps } from '../types';
 
 export function ProfileActions({
-  onSettingsClick,
   onSignOut,
 }: ProfileActionsProps) {
   return (
-    <div className="absolute top-3 right-3 flex items-center gap-2">
-      <Button onClick={onSettingsClick} size="icon" variant="secondary">
-        <Settings />
-      </Button>
+    <div className="absolute top-5 right-5 flex items-center gap-2">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button size="icon" variant="secondary">
+          <Button size="icon" variant="ghost" className='rounded-full'>
             <MoreVertical className="h-6 w-6" />
           </Button>
         </DropdownMenuTrigger>

@@ -2,12 +2,12 @@
 
 import {
   Check,
-  Code2,
   Copy,
   Download,
   Globe,
   QrCode,
   Share,
+  X,
 } from 'lucide-react';
 
 import QRCode from 'qrcode';
@@ -15,14 +15,12 @@ import React, { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import {
   Modal,
   ModalContent,
   ModalHeader,
   ModalTitle,
 } from '@/components/ui/modal';
-import { Tabs, TabsContent } from '@/components/ui/tabs';
 
 import { toast } from '@/hooks/use-toast';
 
@@ -54,30 +52,18 @@ export function ShareFormModal({
   const [publishing, setPublishing] = useState(false);
   const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string>('');
   const [downloading, setDownloading] = useState(false);
-  const [activeTab, setActiveTab] = useState('link');
+  const [showQR, setShowQR] = useState(false);
   const [generatingQR, setGeneratingQR] = useState(false);
 
   const shareUrl = formId
     ? `${typeof window !== 'undefined' ? window.location.origin : ''}/f/${formSlug || formId}`
     : '';
 
-  const tabItems = [
-    { id: 'link', label: 'Link' },
-    { id: 'qr', label: 'QR Code' },
-    { id: 'embed', label: 'Embed' },
-  ];
-
   useEffect(() => {
-    if (isOpen && isPublished && shareUrl) {
+    if (isOpen && isPublished && shareUrl && showQR && !qrCodeDataUrl) {
       generateQRCode();
     }
-  }, [isOpen, isPublished, shareUrl]);
-
-  useEffect(() => {
-    if (isOpen && isPublished && shareUrl) {
-      handleCopyLink();
-    }
-  }, [isOpen, isPublished, shareUrl]);
+  }, [isOpen, isPublished, shareUrl, showQR, qrCodeDataUrl]);
 
   const generateQRCode = async () => {
     if (!shareUrl) return;
@@ -177,178 +163,121 @@ export function ShareFormModal({
     }
   };
 
+  const handleToggleQR = () => {
+    setShowQR(!showQR);
+  };
+
   return (
-    <Modal onOpenChange={onClose} open={isOpen}>
-      <ModalContent className="flex max-w-lg flex-col gap-6">
-        <ModalHeader className="text-center">
-          <ModalTitle className="flex items-center justify-center gap-2">
-            <Share className="h-5 w-5" />
-            Share Form
+    <Modal onOpenChange={onClose} open={isOpen} >
+      <ModalContent className="flex max-w-lg flex-col gap-6 rounded-4xl">
+        <ModalHeader className="text-left">
+          <ModalTitle className="flex items-center justify-start text-left gap-2">
+            Share Public Form URL
           </ModalTitle>
         </ModalHeader>
 
-        <div className="flex flex-col gap-6 px-2">
+        <div className="flex flex-col gap-6 px-2 sm:px-4 w-full">
           {isPublished ? (
-            <div className="flex flex-col gap-4">
-              <Tabs
-                className="w-full"
-                defaultValue="link"
-                items={tabItems}
-                onValueChange={setActiveTab}
-                value={activeTab}
-              />
-
-              <TabsContent activeValue={activeTab} value="link">
-                <div className="flex flex-col gap-6">
-                  <div className="flex flex-col gap-2">
-                    <Label className="font-medium text-sm" htmlFor="share-url">
-                      Public Form URL
-                    </Label>
-                    <div className="flex gap-2">
-                      <Input
-                        className="font-mono text-sm"
-                        id="share-url"
-                        readOnly
-                        value={shareUrl}
-                      />
-                      <Button
-                        className="min-w-fit shrink-0 gap-2"
-                        disabled={copying}
-                        onClick={handleCopyLink}
-                        size="icon"
-                        variant="secondary"
-                      >
-                        {copying ? (
-                          <Check className="h-4 w-4" />
-                        ) : (
-                          <Copy className="h-4 w-4" />
-                        )}
-                      </Button>
-                    </div>
+            <div className="flex flex-col gap-6 w-full">
+              {showQR && (
+                <div className="flex flex-col gap-4 border border-border/50 rounded-lg p-3 sm:p-4 bg-muted/20 w-full">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm font-medium">QR Code</h3>
+                    <Button
+                      onClick={handleToggleQR}
+                      size="sm"
+                      variant="ghost"
+                      className="h-6 w-6 p-0"
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
                   </div>
-
-                  <div className="flex items-center gap-3 rounded-ele border border-accent/20 bg-accent/10 p-4">
-                    <Globe className="h-5 w-5 shrink-0 text-accent-foreground" />
-                    <div className="flex flex-col gap-1">
-                      <p className="font-medium text-sm">Form is live!</p>
-                      <p className="text-muted-foreground text-xs">
-                        Anyone with this link can access and submit your form.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </TabsContent>
-
-              <TabsContent activeValue={activeTab} value="qr">
-                <div className="flex flex-col gap-6">
                   <div className="flex justify-center">
                     <div className="relative">
-                      <div className="border bg-white p-2 shadow-sm">
+                      <div className="border bg-white p-2 sm:p-4 shadow-sm rounded-lg flex items-center justify-center">
                         {qrCodeDataUrl && !generatingQR ? (
                           <img
                             alt="QR Code for form"
-                            className="h-48 w-48"
+                            className="h-28 w-28 sm:h-32 sm:w-32"
                             src={qrCodeDataUrl}
                           />
                         ) : (
-                          <div className="flex h-48 w-48 items-center justify-center">
+                          <div className="flex h-28 w-28 sm:h-32 sm:w-32 items-center justify-center">
                             {generatingQR ? (
-                              <div className="flex flex-col items-center gap-3">
-                                <div className="h-8 w-8 animate-spin rounded-card border-2 border-primary border-t-transparent" />
-                                <span className="text-muted-foreground text-sm">
-                                  Generating QR code...
+                              <div className="flex flex-col items-center gap-2">
+                                <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                                <span className="text-xs text-muted-foreground">
+                                  Generating...
                                 </span>
                               </div>
                             ) : (
-                              <div className="flex flex-col items-center gap-3">
-                                <QrCode className="h-12 w-12 text-muted-foreground" />
-                                <span className="text-muted-foreground text-sm">
-                                  QR code will appear here
-                                </span>
-                              </div>
+                              <QrCode className="h-8 w-8 text-muted-foreground" />
                             )}
                           </div>
                         )}
                       </div>
                     </div>
                   </div>
-
                   <div className="flex flex-col gap-2 text-center">
-                    <p className="font-medium text-sm">Scan to access form</p>
-                    <p className="text-muted-foreground text-xs">
-                      Share this QR code for easy mobile access
+                    <p className="text-xs text-muted-foreground">
+                      Scan for easy mobile access
                     </p>
-                  </div>
-
-                  <div className="flex justify-center">
                     <Button
-                      className="gap-2"
+                      className="gap-2 mx-auto w-full sm:w-auto"
                       disabled={!qrCodeDataUrl || downloading || generatingQR}
                       onClick={handleDownloadQR}
                       variant="outline"
+                      size="sm"
                     >
-                      <Download className="h-4 w-4" />
-                      {downloading ? 'Downloading...' : 'Download QR Code'}
+                      <Download className="h-3 w-3" />
+                      {downloading ? 'Downloading...' : 'Download'}
                     </Button>
                   </div>
                 </div>
-              </TabsContent>
-
-              <TabsContent activeValue={activeTab} value="embed">
-                <div className="flex flex-col gap-6">
-                  <div className="flex items-center gap-3 rounded-ele border border-accent/20 bg-accent/10 p-4">
-                    <Code2 className="h-5 w-5 shrink-0 text-accent-foreground" />
-                    <div className="flex flex-col gap-1">
-                      <p className="font-medium text-sm">Embed your form</p>
-                      <p className="text-muted-foreground text-xs">
-                        Customize and integrate your form into any website.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="text-center">
-                    <p className="mb-4 text-muted-foreground text-sm">
-                      Get customizable embed codes for HTML, React, Next.js, and
-                      more
-                    </p>
+              )}
+              <div className="flex flex-col gap-4 w-full">
+                <div className="flex flex-col gap-2 w-full">
+                  <div className="flex flex-col flex-col md:flex-row gap-2 w-full">
+                    <Input
+                      className="font-mono text-sm w-full"
+                      size="xl"
+                      id="share-url"
+                      readOnly
+                      value={shareUrl}
+                    />
                     <Button
-                      className="gap-2"
-                      onClick={() =>
-                        window.open(`/embed?formid=${formId}`, '_blank')
-                      }
-                      variant="default"
+                      className="min-w-fit shrink-0 gap-2 w-full md:w-fit"
+                      disabled={copying}
+                      onClick={handleCopyLink}
+                      size="xl"
                     >
-                      <Code2 className="h-4 w-4" />
-                      Open Embed Customizer
+                      {copying ? (
+                        <Check className="h-4 w-4" />
+                      ) : (
+                        <>
+                          <Copy className="h-4 w-4" />
+                          <span className="text-sm">Copy Link</span>
+                        </>
+                      )}
                     </Button>
                   </div>
-
-                  <div className="rounded-lg border bg-muted/20 p-4">
-                    <h4 className="mb-2 font-medium text-sm">
-                      Quick HTML Embed:
-                    </h4>
-                    <div className="overflow-x-auto rounded bg-gray-900 p-3 font-mono text-green-400 text-xs">
-                      {`<iframe
-  src="${shareUrl}"
-  width="100%"
-  height="600px"
-  frameborder="0"
-></iframe>`}
-                    </div>
-                    <p className="mt-2 text-muted-foreground text-xs">
-                      For more customization options, use the embed customizer.
-                    </p>
-                  </div>
                 </div>
-              </TabsContent>
+                <div className="flex justify-center">
+                  <button
+                    onClick={handleToggleQR}
+                    className="text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
+                  >
+                    {showQR ? 'Hide QR Code' : 'Show QR Code'}
+                  </button>
+                </div>
+              </div>
             </div>
           ) : (
-            <div className="flex flex-col gap-4 text-center">
-              <div className="flex flex-col items-center gap-2 rounded-ele bg-muted/50 p-4">
+            <div className="flex flex-col gap-4 text-center w-full">
+              <div className="flex flex-col items-center gap-2 rounded-lg bg-muted/50 p-3 sm:p-4">
                 <Globe className="h-8 w-8 text-muted-foreground" />
-                <p className="text-muted-foreground text-sm">
-                  Your form needs to be published before it can be shared
-                  publicly.
+                <p className="text-sm text-muted-foreground">
+                  Your form needs to be published before it can be shared publicly.
                 </p>
               </div>
               <Button
@@ -361,22 +290,6 @@ export function ShareFormModal({
               </Button>
             </div>
           )}
-
-          <div className="flex justify-end gap-3 pt-2">
-            <Button onClick={onClose} variant="secondary">
-              Close
-            </Button>
-            {isPublished && (
-              <Button
-                className="gap-2"
-                disabled={copying}
-                onClick={handleCopyLink}
-              >
-                <Copy className="h-4 w-4" />
-                Copy Link
-              </Button>
-            )}
-          </div>
         </div>
       </ModalContent>
     </Modal>

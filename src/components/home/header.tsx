@@ -157,7 +157,7 @@ export default function Header() {
   const { user } = useAuth();
 
   return (
-    <nav className="mx-auto mt-10 flex w-full max-w-7xl flex-wrap items-center justify-between gap-8 p-4 font-inter text-sm">
+    <nav className="mx-auto mt-12 flex w-full max-w-7xl flex-wrap items-center justify-between gap-8 p-4 font-inter text-sm">
       <div className="flex flex-1 flex-shrink-0 items-center justify-start gap-2">
         <Link href="/">
           <span className="flex items-center justify-center gap-2 font-semibold text-3xl tracking-tight">

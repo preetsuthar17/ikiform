@@ -19,100 +19,95 @@ export function FormActions({
   onShare,
   onDelete,
 }: FormActionsProps) {
+  const primaryActions = [
+    {
+      icon: Edit,
+      label: 'Edit form',
+      onClick: () => onEdit(form.id),
+      variant: 'ghost' as const,
+    },
+    {
+      icon: Eye,
+      label: 'View form',
+      onClick: () => onViewForm(form),
+      variant: 'ghost' as const,
+    },
+    {
+      icon: BarChart3,
+      label: 'View analytics',
+      onClick: () => onViewAnalytics(form.id),
+      variant: 'ghost' as const,
+    },
+    {
+      icon: Share,
+      label: 'Share form',
+      onClick: () => onShare(form),
+      variant: 'ghost' as const,
+    },
+    {
+      icon: Code2,
+      label: 'Embed form',
+      onClick: () => window.open(`/embed?formid=${form.id}`, '_blank'),
+      variant: 'ghost' as const,
+    },
+  ];
+
   return (
-    <div className="flex items-center gap-1">
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              onClick={() => onEdit(form.id)}
-              size="icon"
-              variant="secondary"
-            >
-              <Edit className="h-4 w-4" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent size="sm">Edit form</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+    <TooltipProvider>
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between w-full">
+        {/* Primary Actions Group */}
+        <div className="flex flex-row flex-wrap items-center gap-1 w-full sm:w-auto max-[330px]:justify-center">
+          {primaryActions.map(({ icon: Icon, label, onClick, variant }) => (
+            <Tooltip key={label}>
+              <TooltipTrigger asChild>
+                <Button
+                  onClick={onClick}
+                  size="sm"
+                  variant={variant}
+                  className="h-9 w-9 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80"
+                >
+                  <Icon className="h-4 w-4" />
+                  <span className="sr-only">{label}</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent
+                side="top"
+                className="text-xs font-medium"
+                sideOffset={8}
+              >
+                {label}
+              </TooltipContent>
+            </Tooltip>
+          ))}
+        </div>
 
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              onClick={() => onViewForm(form)}
-              size="icon"
-              variant="secondary"
-            >
-              <Eye className="h-4 w-4" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent size="sm">View form</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+        {/* Separator */}
+        <div className="hidden sm:block mx-3 h-4 w-px bg-border/50" />
 
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              onClick={() => onViewAnalytics(form.id)}
-              size="icon"
-              variant="secondary"
+        {/* Destructive Action */}
+        <div className="flex w-full sm:w-auto justify-end">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                onClick={() => onDelete(form.id, form.title)}
+                size="sm"
+                variant="ghost"
+                className="h-9 w-9 p-0 transition-all duration-200 hover:scale-105 hover:bg-destructive/10 hover:text-destructive"
+              >
+                <Trash2 className="h-4 w-4" />
+                <span className="sr-only">Delete form</span>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent
+              side="top"
+              className="text-xs font-medium text-destructive border-destructive/20"
+              sideOffset={8}
             >
-              <BarChart3 className="h-4 w-4" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent size="sm">View analytics</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              onClick={() => onShare(form)}
-              size="icon"
-              variant="secondary"
-            >
-              <Share className="h-4 w-4" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent size="sm">Share form</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              onClick={() => window.open(`/embed?formid=${form.id}`, '_blank')}
-              size="icon"
-              variant="secondary"
-            >
-              <Code2 className="h-4 w-4" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent size="sm">Embed form</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-
-      <div className="flex-1" />
-
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              className="h-9 w-9 p-0"
-              onClick={() => onDelete(form.id, form.title)}
-              size="icon"
-              variant="destructive"
-            >
-              <Trash2 className="h-4 w-4" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent size="sm">Delete form</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-    </div>
+              Delete form
+            </TooltipContent>
+          </Tooltip>
+        </div>
+      </div>
+    </TooltipProvider>
   );
 }

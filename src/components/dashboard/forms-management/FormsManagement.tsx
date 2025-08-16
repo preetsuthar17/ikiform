@@ -6,7 +6,6 @@ import { Separator } from '@/components/ui/separator';
 import { ConfirmationModal } from '../form-delete-confirmation-modal';
 
 import {
-  AIFormSuggestions,
   EmptyState,
   FormStats,
   FormsGrid,
@@ -50,13 +49,10 @@ export function FormsManagement({ className }: FormsManagementProps) {
       />
 
       <Separator />
-
-      {}
       <FormStats forms={forms} />
 
       <Separator />
 
-      {}
       {forms.length === 0 ? (
         <EmptyState
           onCreateForm={createNewForm}
@@ -74,12 +70,6 @@ export function FormsManagement({ className }: FormsManagementProps) {
         />
       )}
 
-      <Separator />
-      {}
-      <AIFormSuggestions onCreateForm={handleCreateFromPrompt} />
-
-      <Separator />
-      {}
       <ConfirmationModal
         cancelText="Cancel"
         confirmText="Delete Form"

@@ -53,7 +53,7 @@ const FormsManagement = dynamic(
 
 export default function DashboardClient() {
   return (
-    <section className="mx-auto w-full max-w-[95%] px-6">
+    <section className="mx-auto w-full max-w-7xl px-4 md:px-6">
       <div className="flex flex-col gap-8">
         <Suspense
           fallback={

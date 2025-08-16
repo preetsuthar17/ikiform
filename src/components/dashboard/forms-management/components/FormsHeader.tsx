@@ -24,7 +24,7 @@ export function FormsHeader({
   onCreateManually,
 }: FormsHeaderProps) {
   return (
-    <div className="flex flex-col justify-between gap-4 rounded-card border border-border bg-card p-6 sm:flex-row sm:items-center">
+    <div className="flex flex-col justify-between gap-4 rounded-4xl border border-none bg-card p-6 md:p-8 sm:flex-row sm:items-center">
       <div className="flex flex-col gap-1">
         <h2 className="font-semibold text-2xl text-foreground tracking-tight">
           Your Forms
@@ -35,7 +35,7 @@ export function FormsHeader({
       </div>
       <Modal>
         <ModalTrigger asChild>
-          <Button onClick={onCreateForm}>
+          <Button onClick={onCreateForm} className='rounded-full py-6 px-7'>
             <Plus className="h-5 w-5" />
             Create New Form
           </Button>

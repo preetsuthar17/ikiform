@@ -65,7 +65,7 @@ function FooterBadges() {
 
 export default function Footer() {
   return (
-    <footer className="mx-auto mt-22 mb-12 w-full max-w-7xl bg-background">
+    <footer className="mx-auto my-12 w-full max-w-7xl bg-background">
       <div className="mx-auto flex w-full flex-col px-4 md:px-8">
         {/* Rounded container matching the image */}
         <div className="rounded-4xl bg-card p-8 md:p-12">

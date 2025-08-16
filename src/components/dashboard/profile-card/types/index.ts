@@ -19,7 +19,6 @@ export interface PremiumStatus {
 }
 
 export interface ProfileActionsProps {
-  onSettingsClick: () => void;
   onSignOut: () => void;
 }
 

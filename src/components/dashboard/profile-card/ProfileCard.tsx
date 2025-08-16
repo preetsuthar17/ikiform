@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { SettingsModal } from '@/components/settings/settings-modal';
 
 import { Card, CardHeader } from '@/components/ui/card';
 
@@ -23,7 +22,6 @@ import { extractAvatarUrl, extractUserName } from './utils';
 export function ProfileCard({ className }: ProfileCardProps) {
   const { user, signOut, loading } = useAuth();
   const { hasPremium } = usePremiumStatus(user);
-  const [showSettings, setShowSettings] = useState(false);
 
   if (loading) {
     return <ProfileCardLoading className={className} />;
@@ -36,20 +34,17 @@ export function ProfileCard({ className }: ProfileCardProps) {
 
   return (
     <Card
-      className={`relative flex w-full grow flex-col items-center gap-6 bg-card py-24 ${className || ''}`}
+      className={`relative flex w-full grow flex-col items-center gap-6 bg-card py-24 rounded-4xl border-none shadow-none ${className || ''}`}
     >
       <CardHeader className="flex items-center gap-2">
         <UserAvatar avatarUrl={avatarUrl} name={name} size="xl" />
       </CardHeader>
 
       <ProfileActions
-        onSettingsClick={() => setShowSettings(true)}
         onSignOut={signOut}
       />
 
       <ProfileInfo hasPremium={hasPremium} user={user} />
-
-      <SettingsModal onOpenChange={setShowSettings} open={showSettings} />
     </Card>
   );
 }

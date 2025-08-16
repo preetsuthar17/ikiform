@@ -1,1 +1,0 @@
-export { AppearanceSettings } from './appearance';
