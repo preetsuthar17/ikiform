@@ -12,7 +12,6 @@ const tooltipVariants = cva(
     variants: {
       variant: {
         default: 'bg-card text-card-foreground',
-        dark: 'border-foreground bg-foreground text-background',
         light: 'border-border bg-background text-foreground',
         destructive:
           'border-destructive bg-destructive text-primary-foreground',

@@ -26,8 +26,8 @@ export function QuizAnalyticsCard({ quizAnalytics }: QuizAnalyticsCardProps) {
       {/* Quiz Overview Stats */}
       <Card className="p-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900">
-            <Trophy className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100">
+                  <Trophy className="h-5 w-5 text-blue-600" />
           </div>
           <div>
             <p className="text-muted-foreground text-sm">Quiz Submissions</p>
@@ -40,8 +40,8 @@ export function QuizAnalyticsCard({ quizAnalytics }: QuizAnalyticsCardProps) {
 
       <Card className="p-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-100 dark:bg-green-900">
-            <Target className="h-5 w-5 text-green-600 dark:text-green-400" />
+                          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-100">
+                  <Target className="h-5 w-5 text-green-600" />
           </div>
           <div>
             <p className="text-muted-foreground text-sm">Average Score</p>
@@ -54,8 +54,8 @@ export function QuizAnalyticsCard({ quizAnalytics }: QuizAnalyticsCardProps) {
 
       <Card className="p-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-100 dark:bg-purple-900">
-            <CheckCircle className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+                          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-100">
+                  <CheckCircle className="h-5 w-5 text-purple-600" />
           </div>
           <div>
             <p className="text-muted-foreground text-sm">Pass Rate</p>

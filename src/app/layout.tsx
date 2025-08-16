@@ -5,12 +5,12 @@ import {
   Geist_Mono,
   Inter,
   JetBrains_Mono,
-  Poppins,
 } from 'next/font/google';
 import './globals.css';
 import { Databuddy } from '@databuddy/sdk';
 
 import CrispController from '@/components/other/CrispController';
+import { LightThemeEnforcer } from '@/components/other/light-theme-enforcer';
 import { Toaster } from '@/components/ui/toast';
 import ConditionalLayout from './conditional-layout';
 
@@ -142,7 +142,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="light" suppressHydrationWarning>
       <head>
         {/* <script
           crossOrigin="anonymous"
@@ -177,11 +177,21 @@ export default function RootLayout({
           }}
         /> */}
         <script defer src="https://assets.onedollarstats.com/stonks.js" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Force light theme
+              document.documentElement.classList.remove('dark');
+              document.documentElement.classList.add('light');
+            `,
+          }}
+        />
       </head>
       <CrispController />
       <body
         className={`light ${geist.className} ${inter.variable} ${jetBrainsMono.variable} ${geistMono.variable} ${dmSans.variable} antialiased`}
       >
+        <LightThemeEnforcer />
         <ConditionalLayout>{children}</ConditionalLayout>
         <Databuddy
           clientId="jDhbBGL7-4rwsNXj-GcgK"

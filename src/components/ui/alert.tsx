@@ -15,10 +15,10 @@ const alertVariants = cva(
         destructive:
           'border-destructive bg-destructive/10 text-destructive [&>svg]:text-destructive',
         warning:
-          'border-amber-200 bg-amber-50 text-amber-800 dark:border-amber-700 dark:bg-amber-950/30 dark:text-amber-200 [&>svg]:text-amber-600 dark:[&>svg]:text-amber-400',
+          'border-amber-200 bg-amber-50 text-amber-800 [&>svg]:text-amber-600',
         success:
-          'border-green-200 bg-green-50 text-green-800 dark:border-green-700 dark:bg-green-950/30 dark:text-green-200 [&>svg]:text-green-600 dark:[&>svg]:text-green-400',
-        info: 'border-blue-200 bg-blue-50 text-blue-800 dark:border-blue-700 dark:bg-blue-950/30 dark:text-blue-200 [&>svg]:text-blue-600 dark:[&>svg]:text-blue-400',
+          'border-green-200 bg-green-50 text-green-800 [&>svg]:text-green-600',
+        info: 'border-blue-200 bg-blue-50 text-blue-800 [&>svg]:text-blue-600',
       },
     },
     defaultVariants: {
@@ -101,7 +101,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
                 <div className="ml-3 flex-shrink-0">
                   <button
                     aria-label="Dismiss alert"
-                    className="inline-flex rounded-ele p-1.5 transition-colors hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 dark:hover:bg-white/5"
+                    className="inline-flex rounded-ele p-1.5 transition-colors hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
                     onClick={handleDismiss}
                     type="button"
                   >

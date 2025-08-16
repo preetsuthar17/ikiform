@@ -100,26 +100,26 @@
 }
 
 .dark {
-  --hu-background: 0, 0%, 7%;
-  --hu-foreground: 0, 0%, 100%;
-  --hu-card: 0, 0%, 10%;
-  --hu-card-foreground: 0, 0%, 92%;
-  --hu-primary: 0, 0%, 100%;
-  --hu-primary-foreground: 0, 0%, 0%;
-  --hu-secondary: 0, 0%, 14%;
-  --hu-secondary-foreground: 0, 0%, 92%;
-  --hu-muted: 0, 0%, 14%;
-  --hu-muted-foreground: 0, 0%, 60%;
-  --hu-accent: 0, 0%, 16%;
-  --hu-accent-foreground: 0, 0%, 92%;
+  --hu-background: 210, 20%, 98%;
+  --hu-foreground: 0, 0%, 10%;
+  --hu-card: 0, 0%, 100%;
+  --hu-card-foreground: 0, 0%, 10%;
+  --hu-primary: 0, 0%, 20%;
+  --hu-primary-foreground: 0, 0%, 98%;
+  --hu-secondary: 0, 0%, 100%;
+  --hu-secondary-foreground: 0, 0%, 20%;
+  --hu-muted: 0, 0%, 95%;
+  --hu-muted-foreground: 0, 0%, 40%;
+  --hu-accent: 0, 0%, 93%;
+  --hu-accent-foreground: 0, 0%, 20%;
   --hu-destructive: 0, 60%, 50%;
   --hu-destructive-foreground: 0, 0%, 98%;
-  --hu-border: 0, 0%, 15%;
-  --hu-input: 0, 0%, 14%;
-  --hu-ring: 0 0% 48%;
+  --hu-border: 0, 0%, 95%;
+  --hu-input: 0, 0%, 100%;
+  --hu-ring: 0, 0%, 50%;
   --hu-home-card-bg: 228, 79%, 52%;
-  --hu-popover: var(--hu-card, 0, 0%, 10%);
-  --hu-popover-foreground: var(--hu-card-foreground, 0, 0%, 92%);
+  --hu-popover: var(--hu-card, 0, 0%, 98%);
+  --hu-popover-foreground: var(--hu-card-foreground, 0, 0%, 10%);
 }
 
 ::selection {

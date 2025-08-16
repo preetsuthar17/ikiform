@@ -77,7 +77,7 @@ export function ShareFormModal({
         margin: 4,
         errorCorrectionLevel: 'M',
         color: {
-          dark: style.primaryColor,
+  
           light: style.backgroundColor,
         },
       });

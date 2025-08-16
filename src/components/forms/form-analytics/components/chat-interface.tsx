@@ -263,7 +263,7 @@ export const ChatInterface = memo(function ChatInterface({
               <div className="flex h-20 w-20 items-center justify-center rounded-card bg-primary/10">
                 <Image
                   alt="Ikiform"
-                  className="pointer-events-none rounded-ele dark:invert"
+                  className="pointer-events-none rounded-ele"
                   height={100}
                   src="/logo.svg"
                   width={100}
