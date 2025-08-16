@@ -38,9 +38,9 @@ export const FormNavigation: React.FC<FormNavigationProps> = ({
   );
 
   return (
-    <div className="flex justify-end gap-4">
+    <div className="flex justify-end gap-4 flex-wrap">
       <Button
-        className="flex items-center gap-2"
+        className="flex items-center gap-2 max-sm:grow"
         disabled={currentStep === 0}
         onClick={onPrevious}
         type="button"
@@ -51,7 +51,7 @@ export const FormNavigation: React.FC<FormNavigationProps> = ({
       </Button>
 
       <Button
-        className="flex items-center gap-2"
+        className="flex items-center gap-2 max-sm:grow"
         disabled={submitting || hasLivePatternError}
         loading={submitting}
         onClick={onNext}

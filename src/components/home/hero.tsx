@@ -8,6 +8,55 @@ import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from '../ui';
 import { Button } from '../ui/button';
 import { Chip } from '../ui/chip';
 import { Modal, ModalContent, ModalHeader, ModalTitle } from '../ui/modal';
+import { CSSProperties } from 'react';
+
+interface EmbeddedFormProps {
+  className?: string;
+  style?: CSSProperties;
+}
+
+export function EmbeddedForm({ className, style }: EmbeddedFormProps) {
+  const [iframeHeight, setIframeHeight] = React.useState(850);
+  const iframeRef = React.useRef<HTMLIFrameElement>(null);
+
+  React.useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.origin !== 'https://www.ikiform.com') return;
+      
+      if (event.data?.type === 'resize' && event.data?.height) {
+        setIframeHeight(event.data.height);
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
+
+  const iframeStyle: CSSProperties = {
+    width: '100%',
+    height: `${iframeHeight}px`,
+    border: '1px solid #ffffff',
+    borderRadius: '18px',
+    display: 'block',
+    margin: '0 auto',
+    ...style,
+  };
+
+  return (
+    <div className={`flex justify-center w-full ${className || ''}`}>
+      <iframe
+        ref={iframeRef}
+        src="https://www.ikiform.com/forms/24ec3d8d-40ef-4143-b289-4e43c112d80e?theme=light"
+        style={iframeStyle}
+        title="Form"
+        loading="lazy"
+        allow="clipboard-write; camera; microphone"
+        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
+        frameBorder="0"
+      />
+    </div>
+  );
+}
 
 export default function Hero() {
   const { user } = useAuth();
@@ -256,6 +305,9 @@ export default function Hero() {
             </div>
           </ModalContent>
         </Modal>
+      </div>
+      <div className='w-full max-w-7xl bg-card rounded-4xl p-4'>
+      <EmbeddedForm className='bg-card' />
       </div>
     </section>
   );
