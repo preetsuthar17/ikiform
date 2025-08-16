@@ -1,6 +1,6 @@
 'use client';
 
-import { Eye, EyeOff } from 'lucide-react';
+import { ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { useState } from 'react';
@@ -9,7 +9,6 @@ import { FcGoogle } from 'react-icons/fc';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { useAuth } from '@/hooks/use-auth';
 import { toast } from '@/hooks/use-toast';
@@ -18,14 +17,20 @@ import { createClient } from '@/utils/supabase/client';
 export default function LoginForm() {
   const { user } = useAuth();
   const [isSignUp, setIsSignUp] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [currentStep, setCurrentStep] = useState<'email' | 'password' | 'name'>('email');
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     name: '',
   });
   const [showForgotPassword, setShowForgotPassword] = useState(false);
+  
+  const [focusedFields, setFocusedFields] = useState({
+    name: false,
+    email: false,
+    password: false,
+  });
 
   if (user) {
     const redirectUrl =
@@ -44,25 +49,88 @@ export default function LoginForm() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   }
 
-  function validateForm() {
-    const { email, password, name } = formData;
-    if (!(email && password)) {
-      toast.error('Email and password are required');
+  function handleFocus(field: string) {
+    setFocusedFields(prev => ({ ...prev, [field]: true }));
+  }
+
+  function handleBlur(field: string) {
+    setFocusedFields(prev => ({ ...prev, [field]: false }));
+  }
+
+  function isFieldActive(field: string) {
+    return focusedFields[field as keyof typeof focusedFields] || formData[field as keyof typeof formData] !== '';
+  }
+
+  function validateEmail() {
+    const { email } = formData;
+    if (!email) {
+      toast.error('Email is required');
       return false;
     }
     if (!email.includes('@')) {
       toast.error('Please enter a valid email address');
       return false;
     }
+    return true;
+  }
+
+  function validatePassword() {
+    const { password } = formData;
+    if (!password) {
+      toast.error('Password is required');
+      return false;
+    }
     if (password.length < 6) {
       toast.error('Password must be at least 6 characters long');
       return false;
     }
-    if (isSignUp && !name.trim()) {
+    return true;
+  }
+
+  function validateName() {
+    const { name } = formData;
+    if (!name.trim()) {
       toast.error('Name is required for sign up');
       return false;
     }
     return true;
+  }
+
+  function handleNextStep(e: React.FormEvent) {
+    e.preventDefault();
+    
+    if (currentStep === 'email') {
+      if (!validateEmail()) return;
+      
+      if (isSignUp) {
+        setCurrentStep('name');
+      } else {
+        setCurrentStep('password');
+      }
+    } else if (currentStep === 'name') {
+      if (!validateName()) return;
+      setCurrentStep('password');
+    } else if (currentStep === 'password') {
+      if (!validatePassword()) return;
+      handleAuth();
+    }
+  }
+
+  function handleBackStep() {
+    if (currentStep === 'password') {
+      if (isSignUp) {
+        setCurrentStep('name');
+      } else {
+        setCurrentStep('email');
+      }
+    } else if (currentStep === 'name') {
+      setCurrentStep('email');
+    }
+  }
+
+  function resetSteps() {
+    setCurrentStep('email');
+    setFormData({ email: '', password: '', name: '' });
   }
 
   async function handleForgotPassword() {
@@ -96,9 +164,7 @@ export default function LoginForm() {
     }
   }
 
-  async function handleEmailAuth(e: React.FormEvent) {
-    e.preventDefault();
-    if (!validateForm()) return;
+  async function handleAuth() {
     setLoading(true);
     const supabase = createClient();
 
@@ -152,7 +218,6 @@ export default function LoginForm() {
             toast.error(error.message);
           }
         } else if (data.user) {
-          // Only create user record if it does not exist, to avoid overwriting columns like has_premium
           try {
             await fetch('/api/user', {
               method: 'POST',
@@ -181,169 +246,257 @@ export default function LoginForm() {
     });
   }
 
+  function getStepTitle() {
+    if (currentStep === 'email') {
+      return isSignUp ? 'Create account' : 'Welcome back';
+    } else if (currentStep === 'name') {
+      return 'What\'s your name?';
+    } else {
+      return 'Enter your password';
+    }
+  }
+
+  function getButtonText() {
+    if (currentStep === 'password') {
+      return isSignUp ? 'Create account' : 'Sign in';
+    }
+    return 'Continue';
+  }
+
+  function hasContent(field: string) {
+    return formData[field as keyof typeof formData] !== '';
+  }
+
+  function shouldShowBackButtonBelow() {
+    return currentStep !== 'email';
+  }
+
   return (
     <>
       <div className="mx-3 flex h-screen flex-col items-center justify-center gap-4 overflow-hidden">
-        <Card className="flex w-full max-w-sm flex-col items-center justify-center gap-6 text-center shadow-md/2">
-          <CardHeader>
-            <div>
-              <h2 className="font-semibold text-2xl">
-                {isSignUp ? 'Create account' : 'Welcome back'}
+        <Card className="flex w-full max-w-sm flex-col items-center justify-center gap-8 text-center bg-transparent border-none shadow-none" size={"lg"}>
+          <CardHeader className='w-full'>
+            <div className='flex items-center justify-center'>
+            
+                  <h2 className="font-semibold text-xl md:text-2xl ">
+                {getStepTitle()}
               </h2>
-              <p className="text-muted-foreground text-sm">
-                {isSignUp
-                  ? 'Sign up to get started with Ikiform'
-                  : 'Sign in to your account'}
-              </p>
             </div>
           </CardHeader>
 
-          <CardContent className="flex w-full flex-col gap-4">
-            <form className="flex flex-col gap-4" onSubmit={handleEmailAuth}>
-              {isSignUp && (
-                <div className="flex w-full flex-col items-start justify-center gap-2">
-                  <Label htmlFor="name">Name</Label>
-                  <Input
-                    disabled={loading}
-                    id="name"
-                    onChange={(e) => handleInputChange('name', e.target.value)}
-                    placeholder="Enter your name"
-                    required={isSignUp}
-                    size="lg"
-                    type="text"
-                    value={formData.name}
-                  />
-                </div>
-              )}
-
-              <div className="flex w-full flex-col items-start justify-center gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  disabled={loading}
-                  id="email"
-                  onChange={(e) => handleInputChange('email', e.target.value)}
-                  placeholder="Enter your email"
-                  required
-                  size="lg"
-                  type="email"
-                  value={formData.email}
-                />
-              </div>
-
-              <div className="flex w-full flex-col items-start justify-center gap-2">
-                <Label htmlFor="password">Password</Label>
+          <CardContent className="flex w-full flex-col gap-6">
+            <form className="flex flex-col gap-4" onSubmit={handleNextStep}>
+              {/* Email Step */}
+              {currentStep === 'email' && (
                 <div className="relative w-full">
                   <Input
                     disabled={loading}
-                    id="password"
-                    onChange={(e) =>
-                      handleInputChange('password', e.target.value)
-                    }
-                    placeholder="Enter your password"
+                    className={`rounded-full px-4 py-3 text-sm transition-all duration-300 linear
+                      ${
+                        hasContent('email')
+                          ? 'ring-2 ring-offset-2 ring-ring'
+                          : focusedFields.email
+                            ? ''
+                            : 'border-border '
+                      }`}
+                    id="email"
+                    onChange={(e) => handleInputChange('email', e.target.value)}
+                    onFocus={() => handleFocus('email')}
+                    onBlur={() => handleBlur('email')}
                     required
-                    size="lg"
-                    type={showPassword ? 'text' : 'password'}
-                    value={formData.password}
+                    size="xl"
+                    type="email"
+                    value={formData.email}
+                    autoFocus
                   />
-                  <Button
-                    className="absolute top-0 right-0 h-full px-3 py-2 hover:bg-transparent"
-                    disabled={loading}
-                    onClick={() => setShowPassword(!showPassword)}
-                    size="sm"
-                    type="button"
-                    variant="ghost"
+                  <label
+                    htmlFor="email"
+                    className={`absolute left-4 pointer-events-none select-none transition-all duration-300 linear ${
+                      isFieldActive('email')
+                        ? '-top-3.5 text-sm bg-linear-to-t from-card to-background px-2 text-primary'
+                        : 'top-3.5 text-sm opacity-30 left-6'
+                    } ${focusedFields.email && !isFieldActive('email') ? 'text-primary' : ''}`}
                   >
-                    {showPassword ? (
-                      <EyeOff className="h-4 w-4" />
-                    ) : (
-                      <Eye className="h-4 w-4" />
-                    )}
-                  </Button>
+                    Enter your email
+                  </label>
+                
                 </div>
-                {isSignUp && (
-                  <p className="text-muted-foreground text-xs">
-                    Password must be at least 6 characters long
-                  </p>
-                )}
-              </div>
+              )}
+
+              {/* Name Step (for sign up) */}
+              {currentStep === 'name' && isSignUp && (
+                <div className="relative w-full">
+                  <Input
+                    disabled={loading}
+                    className={`rounded-full px-4 py-3 text-sm transition-all duration-300 linear
+                      ${
+                        hasContent('name')
+                          ? 'ring-2 ring-offset-2 ring-ring'
+                          : focusedFields.name
+                            ? 'border-border'
+                            : 'border-border '
+                      }`}
+                    id="name"
+                    onChange={(e) => handleInputChange('name', e.target.value)}
+                    onFocus={() => handleFocus('name')}
+                    onBlur={() => handleBlur('name')}
+                    required={isSignUp}
+                    size="xl"
+                    type="text"
+                    value={formData.name}
+                    autoFocus
+                  />
+                  <label
+                    htmlFor="name"
+                    className={`absolute left-4 pointer-events-none select-none transition-all duration-300 linear ${
+                      isFieldActive('name')
+                        ? '-top-3.5 text-sm bg-linear-to-t from-card to-background px-2 text-primary'
+                        : 'top-3.5 text-sm opacity-30 left-6'
+                    } ${focusedFields.name && !isFieldActive('name') ? 'text-primary' : ''}`}
+                  >
+                    Enter your name
+                  </label>
+                
+                </div>
+              )}
+
+              {/* Password Step */}
+              {currentStep === 'password' && (
+                <div className="relative w-full">
+                  <Input
+                    disabled={loading}
+                    className={`rounded-full px-4 py-3 text-sm transition-all duration-300 linear
+                      ${
+                        hasContent('password')
+                          ? 'ring-2 ring-offset-2 ring-ring'
+                          : focusedFields.password
+                            ? 'border-border'
+                            : 'border-border '
+                      }`}
+                    type='password'
+                    id="password"
+                    onChange={(e) => handleInputChange('password', e.target.value)}
+                    onFocus={() => handleFocus('password')}
+                    onBlur={() => handleBlur('password')}
+                    required
+                    size="xl"
+                    value={formData.password}
+                    autoFocus
+                  />
+                  <label
+                    htmlFor="password"
+                    className={`absolute left-4 pointer-events-none select-none transition-all duration-300 linear ${
+                      isFieldActive('password')
+                        ? '-top-3.5 text-sm bg-linear-to-t from-card to-background px-2 text-primary'
+                        : 'top-3.5 text-sm opacity-30 left-6'
+                    } ${focusedFields.password && !isFieldActive('password') ? 'text-primary' : ''}`}
+                  >
+                    Enter your password
+                  </label>
+                
+                </div>
+              )}
 
               <Button
-                className="w-full"
+                className="w-full rounded-full text-sm"
                 disabled={loading}
                 loading={loading}
-                size="lg"
+                size="xl"
                 type="submit"
               >
-                {loading ? '' : isSignUp ? 'Create account' : 'Sign in'}
+                {loading ? '' : getButtonText()}
               </Button>
+
+              {/* Add back button below the continue/sign in/create acc button */}
+              {shouldShowBackButtonBelow() && (
+                <Button
+                  className="w-full rounded-full text-sm flex items-center justify-center gap-2"
+                  disabled={loading}
+                  onClick={handleBackStep}
+                  size="xl"
+                  type="button"
+                  variant="ghost"
+                >
+                  Back
+                </Button>
+              )}
+
+              {/* Forgot Password - only show on password step for sign in */}
+              {currentStep === 'password' && !isSignUp && (
+                <div className="text-center">
+                  <Button
+                    className="text-muted-foreground text-sm p-0 m-0 py-0 h-fit"
+                    disabled={loading}
+                    onClick={handleForgotPassword}
+                    type="button"
+                    variant="link"
+                  >
+                    Forgot your password?
+                  </Button>
+                </div>
+              )}
             </form>
 
-            {!isSignUp && (
+            {/* Toggle between Sign In / Sign Up - only show on email step */}
+            {currentStep === 'email' && (
               <div className="text-center">
                 <Button
-                  className="text-muted-foreground text-sm"
+                  className="text-sm p-0 m-0 py-0 h-fit"
                   disabled={loading}
-                  onClick={handleForgotPassword}
+                  onClick={() => {
+                    setIsSignUp(!isSignUp);
+                    resetSteps();
+                  }}
                   type="button"
                   variant="link"
                 >
-                  Forgot your password?
+                  {isSignUp
+                    ? 'Already have an account? Sign in'
+                    : "Don't have an account? Sign up"}
                 </Button>
               </div>
             )}
 
-            <div className="text-center">
-              <Button
-                className="text-sm"
-                disabled={loading}
-                onClick={() => {
-                  setIsSignUp(!isSignUp);
-                  setFormData({ email: '', password: '', name: '' });
-                }}
-                type="button"
-                variant="link"
-              >
-                {isSignUp
-                  ? 'Already have an account? Sign in'
-                  : "Don't have an account? Sign up"}
-              </Button>
-            </div>
+            {/* OAuth buttons - only show on email step */}
+            {currentStep === 'email' && (
+              <>
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <Separator className="w-full" />
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground">
+                      Or
+                    </span>
+                  </div>
+                </div>
 
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <Separator className="w-full" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">
-                  Or continue with
-                </span>
-              </div>
-            </div>
-
-            <div className="flex w-full flex-col items-start justify-center gap-2">
-              <Button
-                className="flex w-full items-center gap-2 font-medium"
-                disabled={loading}
-                onClick={() => handleOAuthLogin('google')}
-                size="lg"
-                type="button"
-                variant="secondary"
-              >
-                <FcGoogle size={22} />
-                Continue with Google
-              </Button>
-              <Button
-                className="flex w-full items-center gap-2 font-medium"
-                disabled={loading}
-                onClick={() => handleOAuthLogin('github')}
-                size="lg"
-                type="button"
-                variant="secondary"
-              >
-                <FaGithub size={22} />
-                Continue with GitHub
-              </Button>
-            </div>
+                <div className="flex w-full flex-col items-start justify-center gap-2">
+                  <Button
+                    className="flex bg-card shadow-none w-full items-center gap-2 font-medium rounded-full text-sm"
+                    disabled={loading}
+                    onClick={() => handleOAuthLogin('google')}
+                    size="xl"
+                    type="button"
+                    variant="outline"
+                  >
+                    <FcGoogle size={22} />
+                    Continue with Google
+                  </Button>
+                  <Button
+                    className="flex bg-card shadow-none w-full items-center gap-2 font-medium rounded-full text-sm"
+                    disabled={loading}
+                    onClick={() => handleOAuthLogin('github')}
+                    size="xl"
+                    type="button"
+                    variant="outline"
+                  >
+                    <FaGithub size={22} />
+                    Continue with GitHub
+                  </Button>
+                </div>
+              </>
+            )}
           </CardContent>
         </Card>
 
