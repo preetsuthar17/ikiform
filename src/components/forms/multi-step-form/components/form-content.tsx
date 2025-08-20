@@ -48,17 +48,21 @@ export const FormContent: React.FC<FormContentProps> = ({
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-2">
-          <h1 className="font-bold text-3xl text-foreground">
-            {currentBlock.title || getPublicFormTitle(schema)}
-          </h1>
-          {(currentBlock.description || description) && (
-            <p className="text-muted-foreground">
-              {currentBlock.description || description}
-            </p>
-          )}
-        </div>
-        <Separator />
+        {!schema.settings.hideHeader && (
+          <>
+            <div className="flex flex-col gap-2">
+              <h1 className="font-bold text-3xl text-foreground">
+                {currentBlock.title || getPublicFormTitle(schema)}
+              </h1>
+              {(currentBlock.description || description) && (
+                <p className="text-muted-foreground">
+                  {currentBlock.description || description}
+                </p>
+              )}
+            </div>
+            <Separator />
+          </>
+        )}
         {schema.settings.branding?.socialMedia?.enabled &&
           schema.settings.branding.socialMedia.platforms &&
           (schema.settings.branding.socialMedia.position === 'header' ||

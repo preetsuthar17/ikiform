@@ -388,6 +388,7 @@ export interface FormSchema {
     redirectUrl?: string;
     multiStep?: boolean;
     showProgress?: boolean;
+    hideHeader?: boolean;
 
     colors?: {
       background?: string;

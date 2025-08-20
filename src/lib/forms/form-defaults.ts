@@ -116,6 +116,7 @@ export function ensureDefaultFormSettings(schema: FormSchema): FormSchema {
       redirectUrl: schema.settings?.redirectUrl || '',
       multiStep: schema.settings?.multiStep,
       showProgress: schema.settings?.showProgress !== false,
+      hideHeader: schema.settings?.hideHeader,
       colors: {
         ...DEFAULT_COLOR_SETTINGS,
         ...schema.settings?.colors,
@@ -200,6 +201,7 @@ export function createDefaultFormSchema(options: {
       redirectUrl: '',
       multiStep: options.multiStep,
       showProgress: options.multiStep !== false,
+      hideHeader: false,
       colors: { ...DEFAULT_COLOR_SETTINGS },
       typography: { ...DEFAULT_TYPOGRAPHY_SETTINGS },
       branding: {

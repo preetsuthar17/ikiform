@@ -216,21 +216,26 @@ export function ActualFormPreview({
                 )}
 
               {/* Form Header */}
-              <div className="flex flex-col gap-4 text-left">
-                <div className="flex flex-col gap-2">
-                  <h1 className="font-bold text-2xl">
-                    {getPublicFormTitle(schema)}
-                  </h1>
-                  {((schema as any).description ||
-                    localSettings.description) && (
-                    <p className="text-muted-foreground">
-                      {(schema as any).description || localSettings.description}
-                    </p>
-                  )}
-                </div>
-              </div>
+              {!localSettings.hideHeader && (
+                <>
+                  <div className="flex flex-col gap-4 text-left">
+                    <div className="flex flex-col gap-2">
+                      <h1 className="font-bold text-2xl">
+                        {getPublicFormTitle(schema)}
+                      </h1>
+                      {((schema as any).description ||
+                        localSettings.description) && (
+                        <p className="text-muted-foreground">
+                          {(schema as any).description ||
+                            localSettings.description}
+                        </p>
+                      )}
+                    </div>
+                  </div>
 
-              <Separator />
+                  <Separator />
+                </>
+              )}
 
               {/* Form Content */}
               <div className="flex flex-col gap-6">

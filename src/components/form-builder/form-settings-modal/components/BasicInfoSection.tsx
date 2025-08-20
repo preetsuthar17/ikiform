@@ -36,6 +36,25 @@ export function BasicInfoSection({
           placeholder="Enter title to display to users..."
           value={localSettings.publicTitle || ''}
         />
+        <div className="flex items-center gap-3">
+          <input
+            checked={!!localSettings.hideHeader}
+            className="h-4 w-4 accent-primary"
+            id="hide-header-toggle"
+            onChange={(e) =>
+              updateSettings({
+                hideHeader: (e.target as HTMLInputElement).checked,
+              })
+            }
+            type="checkbox"
+          />
+          <Label
+            className="cursor-pointer select-none"
+            htmlFor="hide-header-toggle"
+          >
+            Hide header (hides public title and description in embeds)
+          </Label>
+        </div>
         <BasicInfoField
           id="form-description"
           isTextarea
