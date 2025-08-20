@@ -1,9 +1,13 @@
 'use client';
 
 import React from 'react';
-
+import { FormFieldRenderer } from '@/components/form-builder/form-field-renderer';
+import type { LocalSettings } from '@/components/form-builder/form-settings-modal/types';
+import { Progress } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { SocialMediaIcons } from '@/components/ui/social-media-icons';
 import type { FormSchema } from '@/lib/database';
 import {
   getBorderRadiusValue,
@@ -12,11 +16,6 @@ import {
   getPaddingValue,
 } from '@/lib/utils/form-styles';
 import { getPublicFormTitle } from '@/lib/utils/form-utils';
-import { Progress } from '@/components/ui';
-import { FormFieldRenderer } from '@/components/form-builder/form-field-renderer';
-import type { LocalSettings } from '@/components/form-builder/form-settings-modal/types';
-import { Button } from '@/components/ui/button';
-import { SocialMediaIcons } from '@/components/ui/social-media-icons';
 
 interface ActualFormPreviewProps {
   localSettings: LocalSettings;
