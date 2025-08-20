@@ -4,7 +4,7 @@ import { requirePremium } from '@/lib/utils/premium-check';
 import { sanitizeString } from '@/lib/utils/sanitize';
 import { createClient } from '@/utils/supabase/server';
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
     const supabase = await createClient();
     const {
@@ -18,7 +18,10 @@ export async function GET(req: NextRequest) {
 
     const premiumCheck = await requirePremium(user.id);
     if (!premiumCheck.hasPremium) {
-      return premiumCheck.error;
+      return (
+        premiumCheck.error ||
+        NextResponse.json({ error: 'Premium required' }, { status: 403 })
+      );
     }
 
     const { searchParams } = new URL(req.url);
@@ -52,7 +55,7 @@ export async function GET(req: NextRequest) {
   }
 }
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     const supabase = await createClient();
     const {
@@ -66,7 +69,10 @@ export async function POST(req: NextRequest) {
 
     const premiumCheck = await requirePremium(user.id);
     if (!premiumCheck.hasPremium) {
-      return premiumCheck.error;
+      return (
+        premiumCheck.error ||
+        NextResponse.json({ error: 'Premium required' }, { status: 403 })
+      );
     }
 
     const body = await req.json();

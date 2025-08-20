@@ -1,7 +1,9 @@
 import { createServerClient } from '@supabase/ssr';
 import { type NextRequest, NextResponse } from 'next/server';
 
-export async function updateSession(request: NextRequest) {
+export async function updateSession(
+  request: NextRequest
+): Promise<NextResponse> {
   const supabaseResponse = NextResponse.next({ request });
 
   const authHeader = request.headers.get('authorization');

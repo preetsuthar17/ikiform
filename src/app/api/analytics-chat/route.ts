@@ -230,7 +230,7 @@ function analyzeConversation(
   };
 }
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest): Promise<Response> {
   const ip = req.headers.get('x-forwarded-for') || 'global';
   const rate = await checkRateLimit(ip, chatRateLimitSettings);
 
@@ -263,7 +263,10 @@ export async function POST(req: NextRequest) {
 
     const premiumCheck = await requirePremium(user.id);
     if (!premiumCheck.hasPremium) {
-      return createErrorResponse('Premium subscription required', 403);
+      return (
+        premiumCheck.error ||
+        createErrorResponse('Premium subscription required', 403)
+      );
     }
 
     if (apiKeyValid === null) {
@@ -695,7 +698,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(): Promise<Response> {
   return new Response(
     JSON.stringify({
       status: 'healthy',

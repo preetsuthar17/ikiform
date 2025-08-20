@@ -53,7 +53,9 @@ const AIBuilderRateLimit: RateLimitSettings = {
   window: '5 m',
 };
 
-async function authenticateAndCheckPremium(req: NextRequest) {
+async function authenticateAndCheckPremium(
+  req: NextRequest
+): Promise<{ user: any } | { error: Response }> {
   const supabase = await createClient();
   const {
     data: { user },
@@ -69,7 +71,7 @@ async function authenticateAndCheckPremium(req: NextRequest) {
   return { user };
 }
 
-function validateApiKey() {
+function validateApiKey(): Response | null {
   if (apiKeyValid === null) {
     apiKeyValid = !!process.env.GROQ_API_KEY;
   }
@@ -79,7 +81,15 @@ function validateApiKey() {
   return null;
 }
 
-async function parseAndSanitizeRequest(req: NextRequest) {
+async function parseAndSanitizeRequest(
+  req: NextRequest
+): Promise<
+  | {
+      sanitizedMessages: { role: string; content: string }[];
+      sessionId?: string;
+    }
+  | { error: Response }
+> {
   type RequestData = {
     messages: { role: string; content: string }[];
     sessionId?: string;
@@ -217,7 +227,7 @@ async function streamAIResponse({
   });
 }
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest): Promise<Response> {
   const ip = req.headers.get('x-forwarded-for') || 'global';
   const rate = await checkRateLimit(ip, AIBuilderRateLimit);
   if (!rate.success) {
@@ -274,7 +284,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(): Promise<Response> {
   return new Response(
     JSON.stringify({
       status: 'healthy',
