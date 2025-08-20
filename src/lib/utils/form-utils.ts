@@ -6,7 +6,14 @@ import type { FormSchema } from '@/lib/database/database.types';
  * @param isPublic - Whether this is for public display (true) or internal use (false)
  * @returns The title to display
  */
-export function getFormTitle(schema: FormSchema, isPublic = false): string {
+export function getFormTitle(
+  schema: FormSchema | null | undefined,
+  isPublic = false
+): string {
+  if (!(schema && schema.settings)) {
+    return 'Untitled Form';
+  }
+
   if (isPublic && schema.settings.publicTitle) {
     return schema.settings.publicTitle;
   }
@@ -18,7 +25,9 @@ export function getFormTitle(schema: FormSchema, isPublic = false): string {
  * @param schema - The form schema
  * @returns The public title or falls back to internal title
  */
-export function getPublicFormTitle(schema: FormSchema): string {
+export function getPublicFormTitle(
+  schema: FormSchema | null | undefined
+): string {
   return getFormTitle(schema, true);
 }
 
@@ -27,6 +36,8 @@ export function getPublicFormTitle(schema: FormSchema): string {
  * @param schema - The form schema
  * @returns The internal title
  */
-export function getInternalFormTitle(schema: FormSchema): string {
+export function getInternalFormTitle(
+  schema: FormSchema | null | undefined
+): string {
   return getFormTitle(schema, false);
 }

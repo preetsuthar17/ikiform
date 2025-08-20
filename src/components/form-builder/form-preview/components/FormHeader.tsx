@@ -14,8 +14,8 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
 
   const internalTitle = getInternalFormTitle(schema);
   const hasPublicTitle =
-    schema.settings.publicTitle &&
-    schema.settings.publicTitle !== schema.settings.title;
+    schema.settings?.publicTitle &&
+    schema.settings.publicTitle !== schema.settings?.title;
 
   return (
     <div className="flex flex-col gap-2">
@@ -25,7 +25,7 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
         inputClassName="text-3xl font-bold bg-background w-full"
         onSave={handleTitleUpdate}
         placeholder="Click to add title..."
-        value={schema.settings.title}
+        value={schema.settings?.title || ''}
       >
         <div className="flex flex-col gap-1">
           <h1 className="truncate font-bold text-3xl text-foreground">
@@ -33,7 +33,7 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
           </h1>
           {hasPublicTitle && (
             <p className="text-muted-foreground text-sm">
-              Public title: "{schema.settings.publicTitle}"
+              Public title: "{schema.settings?.publicTitle}"
             </p>
           )}
         </div>
@@ -47,14 +47,14 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
         onSave={handleDescriptionUpdate}
         placeholder="Click to add a description..."
         rows={Math.max(
-          (schema.settings.description || '').split('\n').length || 1,
+          (schema.settings?.description || '').split('\n').length || 1,
           1
         )}
-        value={schema.settings.description || ''}
+        value={schema.settings?.description || ''}
       >
-        {schema.settings.description ? (
+        {schema.settings?.description ? (
           <p className="whitespace-pre-wrap text-muted-foreground">
-            {schema.settings.description}
+            {schema.settings?.description}
           </p>
         ) : onFormSettingsUpdate ? (
           <p className="text-muted-foreground italic">

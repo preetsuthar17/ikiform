@@ -69,7 +69,7 @@ export const formsDb = {
     const { data, error } = await supabase
       .from('forms')
       .select(
-        'id, title, description, is_published, created_at, updated_at, user_id'
+        'id, title, description, is_published, created_at, updated_at, user_id, schema'
       )
       .eq('user_id', userId)
       .order('updated_at', { ascending: false });
@@ -78,7 +78,7 @@ export const formsDb = {
 
     const forms = data.map((form) => ({
       ...form,
-      schema: {} as FormSchema,
+      schema: ensureDefaultFormSettings(form.schema || {}),
     }));
 
     setCache(cacheKey, forms);

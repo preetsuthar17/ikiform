@@ -24,10 +24,11 @@ export function FormCard({
     if (onShare) onShare(form);
   };
 
-  const internalTitle = getInternalFormTitle(form.schema);
+  const internalTitle =
+    form.schema?.settings?.title || form.title || 'Untitled Form';
   const hasPublicTitle =
-    form.schema.settings.publicTitle &&
-    form.schema.settings.publicTitle !== form.schema.settings.title;
+    form.schema?.settings?.publicTitle &&
+    form.schema.settings.publicTitle !== form.schema?.settings?.title;
 
   return (
     <Card className="group flex cursor-pointer flex-col gap-4 rounded-4xl border-none bg-card p-6 md:p-8">
@@ -38,7 +39,7 @@ export function FormCard({
           </h3>
           {hasPublicTitle && (
             <p className="mb-2 line-clamp-1 text-muted-foreground text-sm">
-              Public: "{form.schema.settings.publicTitle}"
+              Public: "{form.schema?.settings?.publicTitle}"
             </p>
           )}
           {form.description && (

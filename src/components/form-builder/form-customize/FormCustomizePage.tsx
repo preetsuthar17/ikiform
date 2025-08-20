@@ -87,8 +87,8 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 
   const internalTitle = getInternalFormTitle(schema);
   const hasPublicTitle =
-    schema.settings.publicTitle &&
-    schema.settings.publicTitle !== schema.settings.title;
+    schema.settings?.publicTitle &&
+    schema.settings.publicTitle !== schema.settings?.title;
 
   const sections = [
     {
@@ -174,7 +174,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
                 <p className="text-muted-foreground text-sm">{internalTitle}</p>
                 {hasPublicTitle && (
                   <p className="text-muted-foreground text-xs">
-                    Public title: "{schema.settings.publicTitle}"
+                    Public title: "{schema.settings?.publicTitle}"
                   </p>
                 )}
               </div>

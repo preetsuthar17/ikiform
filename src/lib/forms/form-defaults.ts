@@ -107,45 +107,53 @@ export function ensureDefaultFormSettings(schema: FormSchema): FormSchema {
   return {
     ...schema,
     settings: {
-      ...schema.settings,
+      title: schema.settings?.title || 'Untitled Form',
+      publicTitle: schema.settings?.publicTitle || '',
+      description: schema.settings?.description || '',
+      submitText: schema.settings?.submitText || 'Submit',
+      successMessage:
+        schema.settings?.successMessage || 'Thank you for your submission!',
+      redirectUrl: schema.settings?.redirectUrl || '',
+      multiStep: schema.settings?.multiStep,
+      showProgress: schema.settings?.showProgress !== false,
       colors: {
         ...DEFAULT_COLOR_SETTINGS,
-        ...schema.settings.colors,
+        ...schema.settings?.colors,
       },
       typography: {
         ...DEFAULT_TYPOGRAPHY_SETTINGS,
-        ...schema.settings.typography,
+        ...schema.settings?.typography,
       },
       branding: {
-        ...schema.settings.branding,
+        ...schema.settings?.branding,
         socialMedia: {
           ...DEFAULT_SOCIAL_MEDIA_SETTINGS,
-          ...schema.settings.branding?.socialMedia,
+          ...schema.settings?.branding?.socialMedia,
         },
       },
       layout: {
         ...DEFAULT_LAYOUT_SETTINGS,
-        ...schema.settings.layout,
+        ...schema.settings?.layout,
       },
       rateLimit: {
         ...DEFAULT_RATE_LIMIT_SETTINGS,
-        ...schema.settings.rateLimit,
+        ...schema.settings?.rateLimit,
       },
       profanityFilter: {
         ...DEFAULT_PROFANITY_FILTER_SETTINGS,
-        ...schema.settings.profanityFilter,
+        ...schema.settings?.profanityFilter,
       },
       responseLimit: {
         ...DEFAULT_RESPONSE_LIMIT_SETTINGS,
-        ...schema.settings.responseLimit,
+        ...schema.settings?.responseLimit,
       },
       passwordProtection: {
         ...DEFAULT_PASSWORD_PROTECTION_SETTINGS,
-        ...schema.settings.passwordProtection,
+        ...schema.settings?.passwordProtection,
       },
       notifications: {
         ...DEFAULT_NOTIFICATION_SETTINGS,
-        ...schema.settings.notifications,
+        ...schema.settings?.notifications,
       },
     },
   };
