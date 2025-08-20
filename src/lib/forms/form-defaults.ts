@@ -160,6 +160,7 @@ export function ensureDefaultRateLimitSettings(schema: FormSchema): FormSchema {
  */
 export function createDefaultFormSchema(options: {
   title?: string;
+  publicTitle?: string;
   description?: string;
   multiStep?: boolean;
 }): FormSchema {
@@ -184,6 +185,7 @@ export function createDefaultFormSchema(options: {
     fields: [],
     settings: {
       title: options.title || 'Untitled Form',
+      publicTitle: options.publicTitle || '',
       description: options.description || '',
       submitText: 'Submit',
       successMessage: 'Thank you for your submission!',

@@ -381,6 +381,7 @@ export interface FormSchema {
   fields: FormField[];
   settings: {
     title: string;
+    publicTitle?: string;
     description?: string;
     submitText?: string;
     successMessage?: string;

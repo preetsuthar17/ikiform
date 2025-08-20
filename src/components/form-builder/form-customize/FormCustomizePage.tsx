@@ -11,6 +11,7 @@ import { Separator } from '@/components/ui/separator';
 import { toast } from '@/hooks/use-toast';
 import type { FormSchema } from '@/lib/database';
 import { formsDb } from '@/lib/database';
+import { getInternalFormTitle } from '@/lib/utils/form-utils';
 
 import {
   ActualFormPreview,
@@ -84,6 +85,9 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
     router.push(`/form-builder/${formId}`);
   };
 
+  const internalTitle = getInternalFormTitle(schema);
+  const hasPublicTitle = schema.settings.publicTitle && schema.settings.publicTitle !== schema.settings.title;
+
   const sections = [
     {
       id: 'presets' as const,
@@ -114,32 +118,37 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
   if (previewMode) {
     return (
       <div className="flex h-screen flex-col bg-background">
+        {/* Header */}
         <div className="flex-shrink-0 border-b bg-background p-4">
           <div className="flex items-center justify-between">
-            <Button
-              className="gap-2"
-              onClick={() => setPreviewMode(false)}
-              variant="outline"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Back to Customization
-            </Button>
-            <div className="flex items-center gap-2">
-              <span className="text-muted-foreground text-sm">
-                Changes auto-saved
-              </span>
+            <div className="flex items-center gap-4">
+              <Button
+                className="gap-2"
+                onClick={() => setPreviewMode(false)}
+                size="sm"
+                variant="outline"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Back to Customize
+              </Button>
+              <div>
+                <h1 className="font-semibold text-xl">Preview Form</h1>
+                <p className="text-muted-foreground text-sm">
+                  {internalTitle}
+                </p>
+              </div>
             </div>
           </div>
         </div>
-        <ScrollArea className="flex-1">
-          <div className="p-8">
-            <ActualFormPreview
-              className="mx-auto max-w-4xl"
-              localSettings={localSettings}
-              schema={schema}
-            />
-          </div>
-        </ScrollArea>
+
+        {/* Preview Content */}
+        <div className="flex-1 overflow-auto">
+          <ActualFormPreview
+            className="min-h-full"
+            localSettings={localSettings}
+            schema={schema}
+          />
+        </div>
       </div>
     );
   }
@@ -161,9 +170,16 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
             </Button>
             <div>
               <h1 className="font-semibold text-xl">Customize Form</h1>
-              <p className="text-muted-foreground text-sm">
-                {localSettings.title}
-              </p>
+              <div className="flex flex-col gap-1">
+                <p className="text-muted-foreground text-sm">
+                  {internalTitle}
+                </p>
+                {hasPublicTitle && (
+                  <p className="text-xs text-muted-foreground">
+                    Public title: "{schema.settings.publicTitle}"
+                  </p>
+                )}
+              </div>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -186,87 +202,44 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
       </div>
 
       <div className="flex flex-1 overflow-hidden">
-        {/* Left Sidebar - Categories */}
-        <div className="flex w-64 flex-col border-r bg-muted/30">
-          <ScrollArea className="flex-1">
-            <div className="p-4">
-              <div className="mb-6 flex flex-col gap-2">
-                <h2 className="font-medium text-foreground">Customize</h2>
-                <p className="text-muted-foreground text-xs">
-                  Select a category to customize
-                </p>
-              </div>
-
-              <div className="flex flex-col gap-1">
-                {sections.map((section) => {
-                  const Icon = section.icon;
-                  return (
+        {/* Sidebar */}
+        <div className="w-80 flex-shrink-0 border-r bg-background">
+          <div className="flex h-full flex-col">
+            {/* Section Tabs */}
+            <div className="flex-shrink-0 border-b bg-background">
+              <div className="flex">
+                {(['presets', 'layout', 'colors', 'typography'] as const).map(
+                  (section) => (
                     <button
-                      className={`w-full rounded-lg p-3 text-left transition-colors ${
-                        activeSection === section.id
-                          ? 'bg-primary text-primary-foreground'
-                          : 'hover:bg-accent hover:text-accent-foreground'
+                      key={section}
+                      className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${
+                        activeSection === section
+                          ? 'border-b-2 border-primary bg-primary/5 text-primary'
+                          : 'text-muted-foreground hover:text-foreground'
                       }`}
-                      key={section.id}
-                      onClick={() => setActiveSection(section.id)}
+                      onClick={() => setActiveSection(section)}
                     >
-                      <div className="flex items-center gap-3">
-                        <Icon className="h-4 w-4" />
-                        <div className="font-medium text-sm">
-                          {section.label}
-                        </div>
-                      </div>
+                      {section.charAt(0).toUpperCase() + section.slice(1)}
                     </button>
-                  );
-                })}
+                  )
+                )}
               </div>
             </div>
-          </ScrollArea>
-        </div>
 
-        {/* Center - Form Preview */}
-        <div className="flex flex-1 items-center justify-center overflow-hidden bg-muted/10 p-8">
-          <div className="w-full max-w-2xl">
-            <div className="sticky top-8">
-              <ActualFormPreview
-                className="mx-auto"
-                localSettings={localSettings}
-                schema={schema}
-              />
+            {/* Section Content */}
+            <div className="flex-1 overflow-y-auto p-4">
+              {/* Section content would go here */}
             </div>
           </div>
         </div>
 
-        {/* Right Sidebar - Settings */}
-        <div className="flex w-96 flex-col border-l bg-background">
-          <ScrollArea className="flex-1">
-            <div className="p-6">
-              {activeSection === 'presets' && (
-                <PresetsSection
-                  localSettings={localSettings}
-                  updateSettings={updateSettings}
-                />
-              )}
-              {activeSection === 'layout' && (
-                <LayoutCustomizationSection
-                  localSettings={localSettings}
-                  updateSettings={updateSettings}
-                />
-              )}
-              {activeSection === 'colors' && (
-                <ColorCustomizationSection
-                  localSettings={localSettings}
-                  updateSettings={updateSettings}
-                />
-              )}
-              {activeSection === 'typography' && (
-                <TypographyCustomizationSection
-                  localSettings={localSettings}
-                  updateSettings={updateSettings}
-                />
-              )}
-            </div>
-          </ScrollArea>
+        {/* Main Content */}
+        <div className="flex-1 overflow-hidden">
+          <ActualFormPreview
+            className="h-full"
+            localSettings={localSettings}
+            schema={schema}
+          />
         </div>
       </div>
     </div>

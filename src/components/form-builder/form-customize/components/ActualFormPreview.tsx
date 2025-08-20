@@ -1,15 +1,14 @@
 'use client';
 
-import Link from 'next/link';
 import React from 'react';
-import { FormFieldRenderer } from '@/components/form-builder/form-field-renderer';
-import type { LocalSettings } from '@/components/form-builder/form-settings-modal/types';
-import { Badge } from '@/components/ui';
-import { Button } from '@/components/ui/button';
+
 import { Card } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
-import { SocialMediaIcons } from '@/components/ui/social-media-icons';
+
+import { SocialMediaIcons } from './SocialMediaIcons';
+import { getPublicFormTitle } from '@/lib/utils/form-utils';
+
+import type { LocalSettings } from '../../form-settings-modal/types';
 import type { FormSchema } from '@/lib/database';
 import {
   getBorderRadiusValue,
@@ -220,7 +219,7 @@ export function ActualFormPreview({
               <div className="flex flex-col gap-4 text-left">
                 <div className="flex flex-col gap-2">
                   <h1 className="font-bold text-2xl">
-                    {(schema as any).title || localSettings.title}
+                    {getPublicFormTitle(schema)}
                   </h1>
                   {((schema as any).description ||
                     localSettings.description) && (
@@ -322,7 +321,7 @@ export function ActualFormPreview({
                 <p className="text-muted-foreground text-sm">
                   Powered by{' '}
                   <span className="font-medium text-foreground underline">
-                    <Link href="https://www.ikiform.com">Ikiform</Link>
+                    Ikiform
                   </span>
                 </p>
               )}

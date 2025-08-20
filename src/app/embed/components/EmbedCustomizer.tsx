@@ -9,6 +9,8 @@ import type { Form } from '@/lib/database/database';
 import EmbedCodeModal from './EmbedCodeModal';
 import EmbedPreview from './EmbedPreview';
 import EmbedSettings from './EmbedSettings';
+import { getPublicFormTitle } from '@/lib/utils/form-utils';
+import { getInternalFormTitle } from '@/lib/utils/form-utils';
 
 export interface EmbedConfig {
   width: string;
@@ -63,7 +65,7 @@ export default function EmbedCustomizer({
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-1">
           <h1 className="font-semibold text-2xl">
-            {form.schema?.settings?.title || form.title || 'Untitled Form'}
+            {getInternalFormTitle(form.schema)}
           </h1>
           <p className="text-muted-foreground">
             Customize and generate embed code for your form
@@ -95,20 +97,30 @@ export default function EmbedCustomizer({
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle>Preview</CardTitle>
-              <div className="flex gap-1">
+              <div className="flex items-center gap-2">
                 <Button
+                  className={`h-8 px-3 text-xs ${
+                    activeView === 'desktop'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-secondary text-secondary-foreground'
+                  }`}
                   onClick={() => setActiveView('desktop')}
                   size="sm"
-                  variant={activeView === 'desktop' ? 'default' : 'ghost'}
+                  variant="ghost"
                 >
-                  <Monitor className="h-4 w-4" />
+                  Desktop
                 </Button>
                 <Button
+                  className={`h-8 px-3 text-xs ${
+                    activeView === 'mobile'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-secondary text-secondary-foreground'
+                  }`}
                   onClick={() => setActiveView('mobile')}
                   size="sm"
-                  variant={activeView === 'mobile' ? 'default' : 'ghost'}
+                  variant="ghost"
                 >
-                  <Smartphone className="h-4 w-4" />
+                  Mobile
                 </Button>
               </div>
             </div>
@@ -117,7 +129,7 @@ export default function EmbedCustomizer({
             <EmbedPreview
               config={config}
               embedUrl={embedUrl}
-              formTitle={form.schema?.settings?.title || form.title || 'Form'}
+              formTitle={getPublicFormTitle(form.schema)}
               viewMode={activeView}
             />
           </CardContent>

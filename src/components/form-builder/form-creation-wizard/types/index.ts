@@ -32,6 +32,7 @@ export interface FormTypePreviewProps {
 
 export interface FormConfiguration {
   title: string;
+  publicTitle?: string;
   description: string;
   type: FormType;
 }

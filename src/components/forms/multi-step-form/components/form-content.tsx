@@ -1,10 +1,10 @@
-import type React from 'react';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { FormFieldRenderer } from '@/components/form-builder/form-field-renderer';
 import { Separator } from '@/components/ui';
 import { SocialMediaIcons } from '@/components/ui/social-media-icons';
 import type { FormBlock, FormSchema } from '@/lib/database';
+import { getPublicFormTitle } from '@/lib/utils/form-utils';
 
 interface FormContentProps {
   formId: string;
@@ -49,7 +49,7 @@ export const FormContent: React.FC<FormContentProps> = ({
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           <h1 className="font-bold text-3xl text-foreground">
-            {currentBlock.title || title}
+            {currentBlock.title || getPublicFormTitle(schema)}
           </h1>
           {(currentBlock.description || description) && (
             <p className="text-muted-foreground">

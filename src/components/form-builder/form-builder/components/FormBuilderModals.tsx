@@ -49,15 +49,33 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-1">
-                <Label htmlFor="form-title">Form Title</Label>
+                <Label htmlFor="form-title">Internal Title</Label>
                 <Input
                   id="form-title"
                   onChange={(e) =>
                     onFormSettingsUpdate({ title: e.target.value })
                   }
-                  placeholder="Enter form title"
+                  placeholder="Enter internal title for your reference..."
                   value={formSchema.settings.title}
                 />
+                <p className="text-muted-foreground text-xs">
+                  This title is only visible to you in the dashboard and form builder
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <Label htmlFor="form-public-title">Public Title</Label>
+                <Input
+                  id="form-public-title"
+                  onChange={(e) =>
+                    onFormSettingsUpdate({ publicTitle: e.target.value })
+                  }
+                  placeholder="Enter title to display to users..."
+                  value={formSchema.settings.publicTitle || ''}
+                />
+                <p className="text-muted-foreground text-xs">
+                  This title will be displayed to users on the actual form. Leave empty to use the internal title.
+                </p>
               </div>
 
               <div className="flex flex-col gap-1">

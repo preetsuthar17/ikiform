@@ -74,11 +74,19 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
               </div>
               <div className="flex flex-col gap-2">
                 <div>
-                  <p className="font-medium text-sm">Title</p>
+                  <p className="font-medium text-sm">Internal Title</p>
                   <p className="text-muted-foreground text-sm">
                     {configuration.title || ''}
                   </p>
                 </div>
+                {configuration.publicTitle && (
+                  <div>
+                    <p className="font-medium text-sm">Public Title</p>
+                    <p className="text-muted-foreground text-sm">
+                      {configuration.publicTitle}
+                    </p>
+                  </div>
+                )}
                 {configuration.description && (
                   <div>
                     <p className="font-medium text-sm">Description</p>

@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FormFieldRenderer } from '@/components/form-builder/form-field-renderer';
 import { getLivePatternError } from '@/components/form-builder/form-field-renderer/components/TextInputField';
 import { Separator } from '@/components/ui';
@@ -8,6 +7,7 @@ import { Card } from '@/components/ui/card';
 import { SocialMediaIcons } from '@/components/ui/social-media-icons';
 import { useFormStyling } from '@/hooks/use-form-styling';
 import type { FormField, FormSchema } from '@/lib/database';
+import { getPublicFormTitle } from '@/lib/utils/form-utils';
 
 interface SingleStepFormContentProps {
   formId: string;
@@ -57,7 +57,7 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           <h1 className="font-bold text-3xl text-foreground">
-            {schema.settings.title}
+            {getPublicFormTitle(schema)}
           </h1>
           {schema.settings.description && (
             <p className="text-muted-foreground">

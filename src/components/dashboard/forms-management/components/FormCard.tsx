@@ -3,6 +3,7 @@ import { ShareFormModal } from '@/components/form-builder/share-form-modal';
 import { Separator } from '@/components/ui';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
+import { getInternalFormTitle } from '@/lib/utils/form-utils';
 import type { FormCardProps } from '../types';
 import { formatDate, getTotalFields } from '../utils';
 import { FormActions } from './FormActions';
@@ -23,13 +24,21 @@ export function FormCard({
     if (onShare) onShare(form);
   };
 
+  const internalTitle = getInternalFormTitle(form.schema);
+  const hasPublicTitle = form.schema.settings.publicTitle && form.schema.settings.publicTitle !== form.schema.settings.title;
+
   return (
     <Card className="group flex cursor-pointer flex-col gap-4 rounded-4xl border-none bg-card p-6 md:p-8">
       <div className="flex items-start justify-between">
         <div className="min-w-0 flex-1">
           <h3 className="mb-2 line-clamp-2 font-semibold text-foreground text-lg leading-tight">
-            {form.title}
+            {internalTitle}
           </h3>
+          {hasPublicTitle && (
+            <p className="mb-2 line-clamp-1 text-muted-foreground text-sm">
+              Public: "{form.schema.settings.publicTitle}"
+            </p>
+          )}
           {form.description && (
             <p className="line-clamp-2 text-muted-foreground text-sm leading-relaxed">
               {form.description}

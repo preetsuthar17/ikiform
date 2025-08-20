@@ -22,10 +22,19 @@ export function BasicInfoSection({
       <div className="flex flex-col gap-4 border-muted border-l-2 pl-6">
         <BasicInfoField
           id="form-title"
-          label="Form Title"
+          label="Internal Title"
           onChange={(value) => updateSettings({ title: value })}
-          placeholder="Enter form title"
+          placeholder="Enter internal title for your reference..."
           value={localSettings.title}
+          description="This title is only visible to you in the dashboard and form builder"
+        />
+        <BasicInfoField
+          id="form-public-title"
+          label="Public Title"
+          onChange={(value) => updateSettings({ publicTitle: value })}
+          placeholder="Enter title to display to users..."
+          value={localSettings.publicTitle || ''}
+          description="This title will be displayed to users on the actual form. Leave empty to use the internal title."
         />
         <BasicInfoField
           id="form-description"
@@ -54,10 +63,11 @@ export function BasicInfoSection({
         />
         <BasicInfoField
           id="redirect-url"
-          label="Redirect URL (optional)"
+          label="Redirect URL (Optional)"
           onChange={(value) => updateSettings({ redirectUrl: value })}
           placeholder="https://example.com/thank-you"
           value={localSettings.redirectUrl || ''}
+          description="URL to redirect users after successful submission"
         />
         <div className="flex items-center gap-3 pt-2">
           <input
@@ -78,23 +88,27 @@ export function BasicInfoSection({
   );
 }
 
+interface BasicInfoFieldProps {
+  id: string;
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  placeholder: string;
+  isTextarea?: boolean;
+  rows?: number;
+  description?: string;
+}
+
 function BasicInfoField({
   id,
   label,
   value,
-  placeholder,
   onChange,
+  placeholder,
   isTextarea = false,
-  rows,
-}: {
-  id: string;
-  label: string;
-  value: string;
-  placeholder: string;
-  onChange: (value: string) => void;
-  isTextarea?: boolean;
-  rows?: number;
-}) {
+  rows = 3,
+  description,
+}: BasicInfoFieldProps) {
   return (
     <div className="flex flex-col gap-2">
       <Label htmlFor={id}>{label}</Label>
@@ -113,6 +127,9 @@ function BasicInfoField({
           placeholder={placeholder}
           value={value}
         />
+      )}
+      {description && (
+        <p className="text-muted-foreground text-xs">{description}</p>
       )}
     </div>
   );

@@ -24,6 +24,7 @@ export interface NotificationSettings {
 
 export interface LocalSettings {
   title: string;
+  publicTitle?: string;
   description?: string;
   submitText?: string;
   successMessage?: string;

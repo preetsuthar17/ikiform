@@ -3,6 +3,7 @@ import React from 'react';
 import type { FormHeaderProps } from '../types';
 
 import { EditableField } from './EditableField';
+import { getInternalFormTitle } from '@/lib/utils/form-utils';
 
 export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
   const handleTitleUpdate = (title: string) => {
@@ -12,6 +13,9 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
   const handleDescriptionUpdate = (description: string) => {
     onFormSettingsUpdate?.({ description });
   };
+
+  const internalTitle = getInternalFormTitle(schema);
+  const hasPublicTitle = schema.settings.publicTitle && schema.settings.publicTitle !== schema.settings.title;
 
   return (
     <div className="flex flex-col gap-2">
@@ -23,9 +27,16 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
         placeholder="Click to add title..."
         value={schema.settings.title}
       >
-        <h1 className="truncate font-bold text-3xl text-foreground">
-          {schema.settings.title || ''}
-        </h1>
+        <div className="flex flex-col gap-1">
+          <h1 className="truncate font-bold text-3xl text-foreground">
+            {internalTitle}
+          </h1>
+          {hasPublicTitle && (
+            <p className="text-sm text-muted-foreground">
+              Public title: "{schema.settings.publicTitle}"
+            </p>
+          )}
+        </div>
       </EditableField>
 
       <EditableField

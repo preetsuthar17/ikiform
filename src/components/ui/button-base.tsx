@@ -72,7 +72,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const content = (
       <>
-        {loading && <Loader className="animate-spin" />}
+        {loading && <Loader className="animate-spin text-primary-foreground" />}
         {leftIcon && !loading && leftIcon}
         {children}
         {rightIcon && !loading && rightIcon}

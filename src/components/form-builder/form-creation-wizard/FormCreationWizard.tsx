@@ -76,6 +76,7 @@ export const FormCreationWizard: React.FC<FormCreationWizardProps> = ({
 
     const baseSchema = createDefaultFormSchema({
       title: configuration.title || '',
+      publicTitle: configuration.publicTitle || '',
       description: configuration.description || '',
       multiStep: configuration.type === 'multi',
     });

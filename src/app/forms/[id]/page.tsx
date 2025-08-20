@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { formsDbServer } from '@/lib/database';
+import { getPublicFormTitle } from '@/lib/utils/form-utils';
 import PublicFormServerWrapper from './components/PublicFormServerWrapper';
 
 interface PublicFormPageProps {
@@ -15,7 +16,7 @@ export async function generateMetadata({
   try {
     const form = await formsDbServer.getPublicForm(id);
     if (!form) return {};
-    const title = form.schema?.settings?.title || form.title || 'Form';
+    const title = getPublicFormTitle(form.schema);
     const description =
       form.schema?.settings?.description ||
       form.description ||
