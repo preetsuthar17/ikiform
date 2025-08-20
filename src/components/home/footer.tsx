@@ -293,7 +293,7 @@ export default function Footer() {
                 <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-sm">
                   <Link
                     className="flex items-center gap-2 transition-colors hover:text-foreground"
-                    href="https://www.ikiform.com/github"
+                    href="/github"
                     target="_blank"
                   >
                     <FaGithub className="h-4 w-4" />
@@ -301,7 +301,7 @@ export default function Footer() {
                   <span>//</span>
                   <Link
                     className="flex items-center gap-2 transition-colors hover:text-foreground"
-                    href="https://www.ikiform.com/twitter"
+                    href="/twitter"
                     target="_blank"
                   >
                     <FaXTwitter className="h-4 w-4" />
@@ -309,7 +309,7 @@ export default function Footer() {
                   <span>//</span>
                   <Link
                     className="flex items-center gap-2 transition-colors hover:text-foreground"
-                    href="https://www.ikiform.com/discord"
+                    href="/discord"
                     target="_blank"
                   >
                     <FaDiscord className="h-5 w-5" />
@@ -317,7 +317,7 @@ export default function Footer() {
                   <span>//</span>
                   <Link
                     className="flex items-center gap-2 transition-colors hover:text-foreground"
-                    href="https://www.ikiform.com/email"
+                    href="/email"
                     target="_blank"
                   >
                     hi@ikiform.com
