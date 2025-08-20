@@ -12,8 +12,11 @@ import {
   getPaddingValue,
 } from '@/lib/utils/form-styles';
 import { getPublicFormTitle } from '@/lib/utils/form-utils';
-import type { LocalSettings } from '../../form-settings-modal/types';
-import { SocialMediaIcons } from './SocialMediaIcons';
+import { Progress } from '@/components/ui';
+import { FormFieldRenderer } from '@/components/form-builder/form-field-renderer';
+import type { LocalSettings } from '@/components/form-builder/form-settings-modal/types';
+import { Button } from '@/components/ui/button';
+import { SocialMediaIcons } from '@/components/ui/social-media-icons';
 
 interface ActualFormPreviewProps {
   localSettings: LocalSettings;
