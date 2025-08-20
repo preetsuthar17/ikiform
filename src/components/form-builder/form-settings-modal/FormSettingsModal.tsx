@@ -87,11 +87,11 @@ export function FormSettingsModal({
               Cancel
             </Button>
             <Button
-              variant={"default"}
               className="gap-2"
               disabled={saving}
               loading={saving}
               onClick={handleSave}
+              variant={'default'}
             >
               {saving ? 'Saving' : 'Save Changes'}
             </Button>
