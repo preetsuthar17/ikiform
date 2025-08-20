@@ -81,9 +81,7 @@ function validateApiKey(): Response | null {
   return null;
 }
 
-async function parseAndSanitizeRequest(
-  req: NextRequest
-): Promise<
+async function parseAndSanitizeRequest(req: NextRequest): Promise<
   | {
       sanitizedMessages: { role: string; content: string }[];
       sessionId?: string;
