@@ -12,7 +12,8 @@ export default function CrispController() {
     pathname.startsWith('/forms') ||
     pathname.startsWith('/f') ||
     pathname.startsWith('/dashboard/forms') ||
-    (pathname.startsWith('/dashboard/forms/') && pathname.includes('analytics'));
+    (pathname.startsWith('/dashboard/forms/') &&
+      pathname.includes('analytics'));
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
