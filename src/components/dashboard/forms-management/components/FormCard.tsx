@@ -25,7 +25,9 @@ export function FormCard({
   };
 
   const internalTitle = getInternalFormTitle(form.schema);
-  const hasPublicTitle = form.schema.settings.publicTitle && form.schema.settings.publicTitle !== form.schema.settings.title;
+  const hasPublicTitle =
+    form.schema.settings.publicTitle &&
+    form.schema.settings.publicTitle !== form.schema.settings.title;
 
   return (
     <Card className="group flex cursor-pointer flex-col gap-4 rounded-4xl border-none bg-card p-6 md:p-8">

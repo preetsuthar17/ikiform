@@ -4,11 +4,6 @@ import React from 'react';
 
 import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-
-import { SocialMediaIcons } from './SocialMediaIcons';
-import { getPublicFormTitle } from '@/lib/utils/form-utils';
-
-import type { LocalSettings } from '../../form-settings-modal/types';
 import type { FormSchema } from '@/lib/database';
 import {
   getBorderRadiusValue,
@@ -16,6 +11,9 @@ import {
   getMaxWidthValue,
   getPaddingValue,
 } from '@/lib/utils/form-styles';
+import { getPublicFormTitle } from '@/lib/utils/form-utils';
+import type { LocalSettings } from '../../form-settings-modal/types';
+import { SocialMediaIcons } from './SocialMediaIcons';
 
 interface ActualFormPreviewProps {
   localSettings: LocalSettings;

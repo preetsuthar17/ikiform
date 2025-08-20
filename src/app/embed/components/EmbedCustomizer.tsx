@@ -6,11 +6,13 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button-base';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Form } from '@/lib/database/database';
+import {
+  getInternalFormTitle,
+  getPublicFormTitle,
+} from '@/lib/utils/form-utils';
 import EmbedCodeModal from './EmbedCodeModal';
 import EmbedPreview from './EmbedPreview';
 import EmbedSettings from './EmbedSettings';
-import { getPublicFormTitle } from '@/lib/utils/form-utils';
-import { getInternalFormTitle } from '@/lib/utils/form-utils';
 
 export interface EmbedConfig {
   width: string;

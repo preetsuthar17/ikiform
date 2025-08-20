@@ -1,9 +1,7 @@
 import React from 'react';
-
-import type { FormHeaderProps } from '../types';
-
-import { EditableField } from './EditableField';
 import { getInternalFormTitle } from '@/lib/utils/form-utils';
+import type { FormHeaderProps } from '../types';
+import { EditableField } from './EditableField';
 
 export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
   const handleTitleUpdate = (title: string) => {
@@ -15,7 +13,9 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
   };
 
   const internalTitle = getInternalFormTitle(schema);
-  const hasPublicTitle = schema.settings.publicTitle && schema.settings.publicTitle !== schema.settings.title;
+  const hasPublicTitle =
+    schema.settings.publicTitle &&
+    schema.settings.publicTitle !== schema.settings.title;
 
   return (
     <div className="flex flex-col gap-2">
@@ -32,7 +32,7 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
             {internalTitle}
           </h1>
           {hasPublicTitle && (
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               Public title: "{schema.settings.publicTitle}"
             </p>
           )}

@@ -18,11 +18,13 @@ export function FormSkeleton({
 }: FormSkeletonProps) {
   if (variant === 'multi-step') {
     return (
-      <div className="mx-auto flex max-w-xl w-full flex-col gap-6 p-4">
+      <div className="mx-auto flex w-full max-w-xl flex-col gap-6 p-4">
         {showProgress && (
           <div className="flex flex-col gap-2">
             <SkeletonText className={`h-4 w-24 ${transparentClass}`} />
-            <Skeleton className={`h-2 w-full rounded-full ${transparentClass}`} />
+            <Skeleton
+              className={`h-2 w-full rounded-full ${transparentClass}`}
+            />
           </div>
         )}
 
@@ -34,15 +36,15 @@ export function FormSkeleton({
         />
 
         <div className="flex justify-between">
-          <SkeletonButton size="default" className={transparentClass} />
-          <SkeletonButton size="default" className={transparentClass} />
+          <SkeletonButton className={transparentClass} size="default" />
+          <SkeletonButton className={transparentClass} size="default" />
         </div>
       </div>
     );
   }
 
   return (
-    <div className="mx-auto flex max-w-xl w-full flex-col gap-6 p-4">
+    <div className="mx-auto flex w-full max-w-xl flex-col gap-6 p-4">
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           <Skeleton className={`h-8 w-3/4 ${transparentClass}`} />
@@ -53,7 +55,9 @@ export function FormSkeleton({
           {Array.from({ length: 4 }).map((_, i) => (
             <div className="flex flex-col gap-2" key={i}>
               <SkeletonText className={`h-4 w-32 ${transparentClass}`} />
-              <Skeleton className={`h-10 w-full rounded-card ${transparentClass}`} />
+              <Skeleton
+                className={`h-10 w-full rounded-card ${transparentClass}`}
+              />
             </div>
           ))}
         </div>

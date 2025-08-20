@@ -26,7 +26,8 @@ export const FormConfigurationStep: React.FC<FormConfigurationStepProps> = ({
               value={configuration.title}
             />
             <p className="text-muted-foreground text-xs">
-              This title is only visible to you in the dashboard and form builder
+              This title is only visible to you in the dashboard and form
+              builder
             </p>
           </div>
 
@@ -35,12 +36,15 @@ export const FormConfigurationStep: React.FC<FormConfigurationStepProps> = ({
             <Input
               className="w-full"
               id="form-public-title"
-              onChange={(e) => onConfigurationChange({ publicTitle: e.target.value })}
+              onChange={(e) =>
+                onConfigurationChange({ publicTitle: e.target.value })
+              }
               placeholder="Enter title to display to users..."
               value={configuration.publicTitle || ''}
             />
             <p className="text-muted-foreground text-xs">
-              This title will be displayed to users on the actual form. Leave empty to use the internal title.
+              This title will be displayed to users on the actual form. Leave
+              empty to use the internal title.
             </p>
           </div>
 

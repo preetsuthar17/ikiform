@@ -21,20 +21,20 @@ export function BasicInfoSection({
       </div>
       <div className="flex flex-col gap-4 border-muted border-l-2 pl-6">
         <BasicInfoField
+          description="This title is only visible to you in the dashboard and form builder"
           id="form-title"
           label="Internal Title"
           onChange={(value) => updateSettings({ title: value })}
           placeholder="Enter internal title for your reference..."
           value={localSettings.title}
-          description="This title is only visible to you in the dashboard and form builder"
         />
         <BasicInfoField
+          description="This title will be displayed to users on the actual form. Leave empty to use the internal title."
           id="form-public-title"
           label="Public Title"
           onChange={(value) => updateSettings({ publicTitle: value })}
           placeholder="Enter title to display to users..."
           value={localSettings.publicTitle || ''}
-          description="This title will be displayed to users on the actual form. Leave empty to use the internal title."
         />
         <BasicInfoField
           id="form-description"
@@ -62,12 +62,12 @@ export function BasicInfoSection({
           value={localSettings.successMessage || ''}
         />
         <BasicInfoField
+          description="URL to redirect users after successful submission"
           id="redirect-url"
           label="Redirect URL (Optional)"
           onChange={(value) => updateSettings({ redirectUrl: value })}
           placeholder="https://example.com/thank-you"
           value={localSettings.redirectUrl || ''}
-          description="URL to redirect users after successful submission"
         />
         <div className="flex items-center gap-3 pt-2">
           <input

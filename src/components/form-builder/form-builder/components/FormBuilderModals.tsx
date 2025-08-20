@@ -59,7 +59,8 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
                   value={formSchema.settings.title}
                 />
                 <p className="text-muted-foreground text-xs">
-                  This title is only visible to you in the dashboard and form builder
+                  This title is only visible to you in the dashboard and form
+                  builder
                 </p>
               </div>
 
@@ -74,7 +75,8 @@ export const FormBuilderModals: React.FC<FormBuilderModalsProps> = ({
                   value={formSchema.settings.publicTitle || ''}
                 />
                 <p className="text-muted-foreground text-xs">
-                  This title will be displayed to users on the actual form. Leave empty to use the internal title.
+                  This title will be displayed to users on the actual form.
+                  Leave empty to use the internal title.
                 </p>
               </div>
 

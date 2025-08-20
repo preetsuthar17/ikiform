@@ -86,7 +86,9 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
   };
 
   const internalTitle = getInternalFormTitle(schema);
-  const hasPublicTitle = schema.settings.publicTitle && schema.settings.publicTitle !== schema.settings.title;
+  const hasPublicTitle =
+    schema.settings.publicTitle &&
+    schema.settings.publicTitle !== schema.settings.title;
 
   const sections = [
     {
@@ -133,9 +135,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
               </Button>
               <div>
                 <h1 className="font-semibold text-xl">Preview Form</h1>
-                <p className="text-muted-foreground text-sm">
-                  {internalTitle}
-                </p>
+                <p className="text-muted-foreground text-sm">{internalTitle}</p>
               </div>
             </div>
           </div>
@@ -171,11 +171,9 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
             <div>
               <h1 className="font-semibold text-xl">Customize Form</h1>
               <div className="flex flex-col gap-1">
-                <p className="text-muted-foreground text-sm">
-                  {internalTitle}
-                </p>
+                <p className="text-muted-foreground text-sm">{internalTitle}</p>
                 {hasPublicTitle && (
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-muted-foreground text-xs">
                     Public title: "{schema.settings.publicTitle}"
                   </p>
                 )}
@@ -211,12 +209,12 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
                 {(['presets', 'layout', 'colors', 'typography'] as const).map(
                   (section) => (
                     <button
-                      key={section}
-                      className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${
+                      className={`flex-1 px-4 py-3 font-medium text-sm transition-colors ${
                         activeSection === section
-                          ? 'border-b-2 border-primary bg-primary/5 text-primary'
+                          ? 'border-primary border-b-2 bg-primary/5 text-primary'
                           : 'text-muted-foreground hover:text-foreground'
                       }`}
+                      key={section}
                       onClick={() => setActiveSection(section)}
                     >
                       {section.charAt(0).toUpperCase() + section.slice(1)}

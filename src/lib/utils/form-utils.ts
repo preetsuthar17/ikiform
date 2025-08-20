@@ -6,7 +6,7 @@ import type { FormSchema } from '@/lib/database/database.types';
  * @param isPublic - Whether this is for public display (true) or internal use (false)
  * @returns The title to display
  */
-export function getFormTitle(schema: FormSchema, isPublic: boolean = false): string {
+export function getFormTitle(schema: FormSchema, isPublic = false): string {
   if (isPublic && schema.settings.publicTitle) {
     return schema.settings.publicTitle;
   }
