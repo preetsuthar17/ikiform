@@ -200,8 +200,8 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
       </div>
 
       <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar */}
-        <div className="w-80 flex-shrink-0 border-r bg-background">
+        {/* Left Sidebar - Customization Controls */}
+        <div className="w-96 flex-shrink-0 border-r bg-background">
           <div className="flex h-full flex-col">
             {/* Section Tabs */}
             <div className="flex-shrink-0 border-b bg-background">
@@ -225,19 +225,50 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
             </div>
 
             {/* Section Content */}
-            <div className="flex-1 overflow-y-auto p-4">
-              {/* Section content would go here */}
+            <div className="flex-1 overflow-hidden">
+              <ScrollArea className="h-full">
+                <div className="p-6">
+                  {activeSection === 'presets' && (
+                    <PresetsSection
+                      localSettings={localSettings}
+                      updateSettings={updateSettings}
+                    />
+                  )}
+                  {activeSection === 'layout' && (
+                    <LayoutCustomizationSection
+                      localSettings={localSettings}
+                      updateSettings={updateSettings}
+                    />
+                  )}
+                  {activeSection === 'colors' && (
+                    <ColorCustomizationSection
+                      localSettings={localSettings}
+                      updateSettings={updateSettings}
+                    />
+                  )}
+                  {activeSection === 'typography' && (
+                    <TypographyCustomizationSection
+                      localSettings={localSettings}
+                      updateSettings={updateSettings}
+                    />
+                  )}
+                </div>
+              </ScrollArea>
             </div>
           </div>
         </div>
 
-        {/* Main Content */}
+        {/* Right Panel - Form Preview */}
         <div className="flex-1 overflow-hidden">
-          <ActualFormPreview
-            className="h-full"
-            localSettings={localSettings}
-            schema={schema}
-          />
+          <div className="flex h-full items-center justify-center p-8">
+            <div className="w-fit">
+              <ActualFormPreview
+                className="h-full"
+                localSettings={localSettings}
+                schema={schema}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
