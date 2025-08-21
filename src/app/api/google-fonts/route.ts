@@ -1,0 +1,132 @@
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function GET(request: NextRequest) {
+  try {
+    const apiKey = process.env.GOOGLE_FONTS_API_KEY;
+    
+    if (!apiKey) {
+      return NextResponse.json({
+        kind: 'webfonts#webfontList',
+        items: [
+          { family: 'Inter', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v12', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Roboto', category: 'sans-serif', variants: ['300', '400', '500', '700'], subsets: ['latin'], version: 'v30', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Open Sans', category: 'sans-serif', variants: ['400', '600', '700'], subsets: ['latin'], version: 'v34', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Lato', category: 'sans-serif', variants: ['400', '700'], subsets: ['latin'], version: 'v23', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Montserrat', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v25', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Poppins', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v20', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Source Sans Pro', category: 'sans-serif', variants: ['400', '600', '700'], subsets: ['latin'], version: 'v21', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Oswald', category: 'sans-serif', variants: ['400', '500', '600'], subsets: ['latin'], version: 'v49', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Raleway', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v28', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'PT Sans', category: 'sans-serif', variants: ['400', '700'], subsets: ['latin'], version: 'v17', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Nunito', category: 'sans-serif', variants: ['400', '600', '700'], subsets: ['latin'], version: 'v25', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Ubuntu', category: 'sans-serif', variants: ['300', '400', '500', '700'], subsets: ['latin'], version: 'v15', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Work Sans', category: 'sans-serif', variants: ['400', '500', '600'], subsets: ['latin'], version: 'v18', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Noto Sans', category: 'sans-serif', variants: ['400', '700'], subsets: ['latin'], version: 'v28', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'IBM Plex Sans', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v14', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Rubik', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v28', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Barlow', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v12', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'DM Sans', category: 'sans-serif', variants: ['400', '500', '700'], subsets: ['latin'], version: 'v11', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Manrope', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v8', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Outfit', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v6', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Plus Jakarta Sans', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v3', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Lexend', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v17', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Geist', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v1', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Albert Sans', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v1', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Figtree', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v5', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Onest', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v1', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Sora', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v1', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          
+          // Serif
+          { family: 'Playfair Display', category: 'serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v30', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Merriweather', category: 'serif', variants: ['400', '700'], subsets: ['latin'], version: 'v30', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'PT Serif', category: 'serif', variants: ['400', '700'], subsets: ['latin'], version: 'v17', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Crimson Text', category: 'serif', variants: ['400', '600'], subsets: ['latin'], version: 'v19', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Libre Baskerville', category: 'serif', variants: ['400', '700'], subsets: ['latin'], version: 'v14', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Cormorant Garamond', category: 'serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v16', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Vollkorn', category: 'serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v13', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Cardo', category: 'serif', variants: ['400', '700'], subsets: ['latin'], version: 'v16', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Gentium Plus', category: 'serif', variants: ['400', '700'], subsets: ['latin'], version: 'v1', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'EB Garamond', category: 'serif', variants: ['400', '500', '600'], subsets: ['latin'], version: 'v26', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Noticia Text', category: 'serif', variants: ['400', '700'], subsets: ['latin'], version: 'v15', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Bitter', category: 'serif', variants: ['400', '700'], subsets: ['latin'], version: 'v32', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Arvo', category: 'serif', variants: ['400', '700'], subsets: ['latin'], version: 'v20', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Rokkitt', category: 'serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v32', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Spectral', category: 'serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v11', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'IBM Plex Serif', category: 'serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v19', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Source Serif Pro', category: 'serif', variants: ['400', '600', '700'], subsets: ['latin'], version: 'v15', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Noto Serif', category: 'serif', variants: ['400', '700'], subsets: ['latin'], version: 'v20', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Literata', category: 'serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v31', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Lora', category: 'serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v32', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          
+          // Display
+          { family: 'Bebas Neue', category: 'display', variants: ['400'], subsets: ['latin'], version: 'v9', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Fredoka One', category: 'display', variants: ['400'], subsets: ['latin'], version: 'v13', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Righteous', category: 'display', variants: ['400'], subsets: ['latin'], version: 'v13', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Lobster', category: 'display', variants: ['400'], subsets: ['latin'], version: 'v28', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Pacifico', category: 'display', variants: ['400'], subsets: ['latin'], version: 'v22', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Dancing Script', category: 'display', variants: ['400', '700'], subsets: ['latin'], version: 'v24', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Satisfy', category: 'display', variants: ['400'], subsets: ['latin'], version: 'v17', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Great Vibes', category: 'display', variants: ['400'], subsets: ['latin'], version: 'v18', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Amatic SC', category: 'display', variants: ['400', '700'], subsets: ['latin'], version: 'v24', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Caveat', category: 'display', variants: ['400', '700'], subsets: ['latin'], version: 'v17', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Bangers', category: 'display', variants: ['400'], subsets: ['latin'], version: 'v20', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Creepster', category: 'display', variants: ['400'], subsets: ['latin'], version: 'v13', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Orbitron', category: 'display', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v29', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Exo 2', category: 'display', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v21', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Russo One', category: 'display', variants: ['400'], subsets: ['latin'], version: 'v14', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Anton', category: 'display', variants: ['400'], subsets: ['latin'], version: 'v23', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Fjalla One', category: 'display', variants: ['400'], subsets: ['latin'], version: 'v13', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Alfa Slab One', category: 'display', variants: ['400'], subsets: ['latin'], version: 'v16', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Bungee', category: 'display', variants: ['400'], subsets: ['latin'], version: 'v12', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Permanent Marker', category: 'display', variants: ['400'], subsets: ['latin'], version: 'v16', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          
+          // Monospace
+          { family: 'Fira Code', category: 'monospace', variants: ['400', '500', '700'], subsets: ['latin'], version: 'v14', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'JetBrains Mono', category: 'monospace', variants: ['400', '500', '700'], subsets: ['latin'], version: 'v13', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Source Code Pro', category: 'monospace', variants: ['400', '500', '600'], subsets: ['latin'], version: 'v22', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'IBM Plex Mono', category: 'monospace', variants: ['400', '500', '600'], subsets: ['latin'], version: 'v19', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Roboto Mono', category: 'monospace', variants: ['400', '500'], subsets: ['latin'], version: 'v22', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Space Mono', category: 'monospace', variants: ['400', '700'], subsets: ['latin'], version: 'v12', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Inconsolata', category: 'monospace', variants: ['400', '700'], subsets: ['latin'], version: 'v31', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Courier Prime', category: 'monospace', variants: ['400', '700'], subsets: ['latin'], version: 'v7', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Ubuntu Mono', category: 'monospace', variants: ['400', '700'], subsets: ['latin'], version: 'v15', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'PT Mono', category: 'monospace', variants: ['400'], subsets: ['latin'], version: 'v13', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Noto Sans Mono', category: 'monospace', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v21', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Overpass Mono', category: 'monospace', variants: ['400', '600', '700'], subsets: ['latin'], version: 'v15', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Cutive Mono', category: 'monospace', variants: ['400'], subsets: ['latin'], version: 'v14', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Share Tech Mono', category: 'monospace', variants: ['400'], subsets: ['latin'], version: 'v14', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          
+          // Handwriting
+          { family: 'Indie Flower', category: 'handwriting', variants: ['400'], subsets: ['latin'], version: 'v17', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Shadows Into Light', category: 'handwriting', variants: ['400'], subsets: ['latin'], version: 'v15', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Architects Daughter', category: 'handwriting', variants: ['400'], subsets: ['latin'], version: 'v18', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Kalam', category: 'handwriting', variants: ['300', '400', '700'], subsets: ['latin'], version: 'v11', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Gloria Hallelujah', category: 'handwriting', variants: ['400'], subsets: ['latin'], version: 'v18', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Patrick Hand', category: 'handwriting', variants: ['400'], subsets: ['latin'], version: 'v19', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Rock Salt', category: 'handwriting', variants: ['400'], subsets: ['latin'], version: 'v17', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Homemade Apple', category: 'handwriting', variants: ['400'], subsets: ['latin'], version: 'v18', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Reenie Beanie', category: 'handwriting', variants: ['400'], subsets: ['latin'], version: 'v16', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+          { family: 'Crafty Girls', category: 'handwriting', variants: ['400'], subsets: ['latin'], version: 'v17', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+        ]
+      });
+    }
+
+    const url = `https://www.googleapis.com/webfonts/v1/webfonts?key=${apiKey}&sort=popularity`;
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      throw new Error(`Google Fonts API error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    return NextResponse.json(data);
+    
+  } catch (error) {
+    console.error('Error fetching Google Fonts:', error);
+    
+    return NextResponse.json(
+      { error: 'Failed to fetch fonts' },
+      { status: 500 }
+    );
+  }
+}

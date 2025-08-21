@@ -31,9 +31,13 @@ export function TypographyCustomizationSection({
   const fontWeight = localSettings.typography?.fontWeight || 'normal';
 
   const handleFontFamilyChange = (value: string) => {
+    console.log('Font family changed to:', value);
+    
     // Load the font before applying it
     if (typeof window !== 'undefined') {
-      loadGoogleFont(value).catch(console.error);
+      loadGoogleFont(value)
+        .then(() => console.log('Font loaded successfully:', value))
+        .catch((error) => console.error('Failed to load font:', value, error));
     }
 
     updateSettings({

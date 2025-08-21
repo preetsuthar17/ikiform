@@ -175,6 +175,9 @@ export function ActualFormPreview({
                 borderRadius: formBorderRadius,
                 padding: formPadding,
                 color: colors.text || undefined,
+                fontFamily: typography.fontFamily
+                  ? `"${typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`
+                  : undefined,
               }}
               variant="ghost"
             >
@@ -302,7 +305,12 @@ export function ActualFormPreview({
             {/* Footer Content */}
             <div
               className="flex flex-col gap-4 text-center"
-              style={{ color: colors.text || undefined }}
+              style={{ 
+                color: colors.text || undefined,
+                fontFamily: typography.fontFamily
+                  ? `"${typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`
+                  : undefined,
+              }}
             >
               {/* Social Media Icons - Footer */}
               {localSettings.branding?.socialMedia?.enabled &&
