@@ -12,8 +12,8 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import { loadGoogleFont } from '@/lib/utils/google-fonts';
-import { Loader } from './loader';
 import { Input } from './input';
+import { Loader } from './loader';
 
 // Google Fonts API types
 interface GoogleFont {
@@ -41,10 +41,10 @@ interface GoogleFontsResponse {
 // Category mapping
 const CATEGORY_MAP = {
   'sans-serif': 'Sans Serif',
-  'serif': 'Serif',
-  'monospace': 'Monospace',
-  'display': 'Display',
-  'handwriting': 'Handwriting',
+  serif: 'Serif',
+  monospace: 'Monospace',
+  display: 'Display',
+  handwriting: 'Handwriting',
 } as const;
 
 const FONT_CATEGORIES = [
@@ -73,7 +73,9 @@ export function GoogleFontPicker({
 }: GoogleFontPickerProps) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'Sans Serif' | 'Serif' | 'Display' | 'Monospace' | 'Handwriting'>('all');
+  const [selectedCategory, setSelectedCategory] = useState<
+    'all' | 'Sans Serif' | 'Serif' | 'Display' | 'Monospace' | 'Handwriting'
+  >('all');
   const [loadedFonts, setLoadedFonts] = useState<Set<string>>(new Set());
   const [fonts, setFonts] = useState<GoogleFont[]>([]);
   const [loading, setLoading] = useState(false);
@@ -84,14 +86,14 @@ export function GoogleFontPicker({
     const fetchFonts = async () => {
       setLoading(true);
       setError(null);
-      
+
       try {
         const response = await fetch('/api/google-fonts');
-        
+
         if (!response.ok) {
           throw new Error('Failed to fetch fonts');
         }
-        
+
         const data: GoogleFontsResponse = await response.json();
         setFonts(data.items || []);
       } catch (err) {
@@ -109,41 +111,143 @@ export function GoogleFontPicker({
 
   // Fallback fonts if API fails
   const getFallbackFonts = (): GoogleFont[] => [
-    { family: 'Inter', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v12', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
-    { family: 'Roboto', category: 'sans-serif', variants: ['300', '400', '500', '700'], subsets: ['latin'], version: 'v30', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
-    { family: 'Open Sans', category: 'sans-serif', variants: ['400', '600', '700'], subsets: ['latin'], version: 'v34', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
-    { family: 'Lato', category: 'sans-serif', variants: ['400', '700'], subsets: ['latin'], version: 'v23', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
-    { family: 'Montserrat', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v25', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
-    { family: 'Poppins', category: 'sans-serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v20', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
-    { family: 'Playfair Display', category: 'serif', variants: ['400', '500', '600', '700'], subsets: ['latin'], version: 'v30', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
-    { family: 'Merriweather', category: 'serif', variants: ['400', '700'], subsets: ['latin'], version: 'v30', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
-    { family: 'Fira Code', category: 'monospace', variants: ['400', '500', '700'], subsets: ['latin'], version: 'v14', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
-    { family: 'JetBrains Mono', category: 'monospace', variants: ['400', '500', '700'], subsets: ['latin'], version: 'v13', lastModified: '2022-09-22', files: {}, kind: 'webfonts#webfont', menu: '' },
+    {
+      family: 'Inter',
+      category: 'sans-serif',
+      variants: ['400', '500', '600', '700'],
+      subsets: ['latin'],
+      version: 'v12',
+      lastModified: '2022-09-22',
+      files: {},
+      kind: 'webfonts#webfont',
+      menu: '',
+    },
+    {
+      family: 'Roboto',
+      category: 'sans-serif',
+      variants: ['300', '400', '500', '700'],
+      subsets: ['latin'],
+      version: 'v30',
+      lastModified: '2022-09-22',
+      files: {},
+      kind: 'webfonts#webfont',
+      menu: '',
+    },
+    {
+      family: 'Open Sans',
+      category: 'sans-serif',
+      variants: ['400', '600', '700'],
+      subsets: ['latin'],
+      version: 'v34',
+      lastModified: '2022-09-22',
+      files: {},
+      kind: 'webfonts#webfont',
+      menu: '',
+    },
+    {
+      family: 'Lato',
+      category: 'sans-serif',
+      variants: ['400', '700'],
+      subsets: ['latin'],
+      version: 'v23',
+      lastModified: '2022-09-22',
+      files: {},
+      kind: 'webfonts#webfont',
+      menu: '',
+    },
+    {
+      family: 'Montserrat',
+      category: 'sans-serif',
+      variants: ['400', '500', '600', '700'],
+      subsets: ['latin'],
+      version: 'v25',
+      lastModified: '2022-09-22',
+      files: {},
+      kind: 'webfonts#webfont',
+      menu: '',
+    },
+    {
+      family: 'Poppins',
+      category: 'sans-serif',
+      variants: ['400', '500', '600', '700'],
+      subsets: ['latin'],
+      version: 'v20',
+      lastModified: '2022-09-22',
+      files: {},
+      kind: 'webfonts#webfont',
+      menu: '',
+    },
+    {
+      family: 'Playfair Display',
+      category: 'serif',
+      variants: ['400', '500', '600', '700'],
+      subsets: ['latin'],
+      version: 'v30',
+      lastModified: '2022-09-22',
+      files: {},
+      kind: 'webfonts#webfont',
+      menu: '',
+    },
+    {
+      family: 'Merriweather',
+      category: 'serif',
+      variants: ['400', '700'],
+      subsets: ['latin'],
+      version: 'v30',
+      lastModified: '2022-09-22',
+      files: {},
+      kind: 'webfonts#webfont',
+      menu: '',
+    },
+    {
+      family: 'Fira Code',
+      category: 'monospace',
+      variants: ['400', '500', '700'],
+      subsets: ['latin'],
+      version: 'v14',
+      lastModified: '2022-09-22',
+      files: {},
+      kind: 'webfonts#webfont',
+      menu: '',
+    },
+    {
+      family: 'JetBrains Mono',
+      category: 'monospace',
+      variants: ['400', '500', '700'],
+      subsets: ['latin'],
+      version: 'v13',
+      lastModified: '2022-09-22',
+      files: {},
+      kind: 'webfonts#webfont',
+      menu: '',
+    },
   ];
 
   // Filter fonts based on search and category
   const filteredFonts = React.useMemo(() => {
     let filtered = fonts;
-    
+
     // Filter by category
     if (selectedCategory !== 'all') {
-      const categoryKey = Object.entries(CATEGORY_MAP).find(([_, value]) => value === selectedCategory)?.[0];
+      const categoryKey = Object.entries(CATEGORY_MAP).find(
+        ([_, value]) => value === selectedCategory
+      )?.[0];
       if (categoryKey) {
-        filtered = filtered.filter(font => font.category === categoryKey);
+        filtered = filtered.filter((font) => font.category === categoryKey);
       }
     }
-    
+
     // Filter by search
     if (search) {
       const lowercaseSearch = search.toLowerCase();
-      filtered = filtered.filter(font => 
+      filtered = filtered.filter((font) =>
         font.family.toLowerCase().includes(lowercaseSearch)
       );
     }
-    
+
     // Sort by popularity (families with more variants are generally more popular)
     filtered.sort((a, b) => b.variants.length - a.variants.length);
-    
+
     return filtered.slice(0, 100); // Limit to 100 fonts for performance
   }, [fonts, search, selectedCategory]);
 
@@ -237,7 +341,9 @@ export function GoogleFontPicker({
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
                   size="sm"
-                  variant={selectedCategory === category.id ? 'default' : 'ghost'}
+                  variant={
+                    selectedCategory === category.id ? 'default' : 'ghost'
+                  }
                 >
                   {category.label}
                 </Button>
@@ -247,37 +353,44 @@ export function GoogleFontPicker({
             {/* Font List */}
             {loading && (
               <div className="py-8 text-center">
-                <Loader/>
-                <p className="text-muted-foreground text-sm mt-2">Loading fonts...</p>
+                <Loader />
+                <p className="mt-2 text-muted-foreground text-sm">
+                  Loading fonts...
+                </p>
               </div>
             )}
-            
+
             {error && (
               <div className="py-8 text-center">
                 <Type className="mx-auto mb-2 h-8 w-8 text-muted-foreground" />
                 <p className="text-muted-foreground">{error}</p>
-                <p className="text-muted-foreground text-xs">Using fallback fonts.</p>
+                <p className="text-muted-foreground text-xs">
+                  Using fallback fonts.
+                </p>
               </div>
             )}
-            
-            {!loading && !error && (
+
+            {!(loading || error) && (
               <ScrollArea className="h-[350px]">
                 {filteredFonts.length === 0 ? (
                   <div className="py-8 text-center">
                     <Type className="mx-auto mb-2 h-8 w-8 text-muted-foreground" />
                     <p className="text-muted-foreground">No fonts found.</p>
-                    <p className="text-muted-foreground text-xs">Try a different search term or category.</p>
+                    <p className="text-muted-foreground text-xs">
+                      Try a different search term or category.
+                    </p>
                   </div>
                 ) : (
                   <div className="flex flex-col gap-2">
                     {filteredFonts.map((font) => (
                       <div
-                        key={font.family}
                         className={cn(
-                          "flex items-center justify-between p-4 rounded-lg cursor-pointer transition-all duration-200",
-                          "hover:bg-accent/50",
-                          value === font.family && "bg-accent/30 border border-primary/20"
+                          'flex cursor-pointer items-center justify-between rounded-lg p-4 transition-all duration-200',
+                          'hover:bg-accent/50',
+                          value === font.family &&
+                            'border border-primary/20 bg-accent/30'
                         )}
+                        key={font.family}
                         onClick={() => handleFontSelect(font.family)}
                         onMouseEnter={() => preloadFont(font.family)}
                       >
@@ -313,7 +426,8 @@ export function GoogleFontPicker({
                                 The quick brown fox jumps over the lazy dog
                               </p>
                               <p className="text-muted-foreground text-xs">
-                                {font.variants.join(', ')} • {font.subsets.join(', ')}
+                                {font.variants.join(', ')} •{' '}
+                                {font.subsets.join(', ')}
                               </p>
                             </div>
                           )}

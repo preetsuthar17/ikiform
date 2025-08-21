@@ -32,7 +32,7 @@ export function TypographyCustomizationSection({
 
   const handleFontFamilyChange = (value: string) => {
     console.log('Font family changed to:', value);
-    
+
     // Load the font before applying it
     if (typeof window !== 'undefined') {
       loadGoogleFont(value)

@@ -305,7 +305,7 @@ export function ActualFormPreview({
             {/* Footer Content */}
             <div
               className="flex flex-col gap-4 text-center"
-              style={{ 
+              style={{
                 color: colors.text || undefined,
                 fontFamily: typography.fontFamily
                   ? `"${typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`
