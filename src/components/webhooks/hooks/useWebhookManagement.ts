@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
+export type WebhookMethod = 'DELETE' | 'GET' | 'HEAD' | 'PATCH' | 'POST' | 'PUT';
+
 export interface WebhookConfig {
   id: string;
   url: string;
   events: string[];
-  method: 'POST' | 'PUT';
+  method: WebhookMethod;
   headers?: Record<string, string>;
   payloadTemplate?: string;
   enabled: boolean;

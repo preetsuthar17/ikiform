@@ -31,7 +31,7 @@ const tooltipVariants = cva(
 
 const Tooltip: React.FC<
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Root>
-> = ({ delayDuration = 300, ...props }) => (
+> = ({ delayDuration = 10, ...props }) => (
   <TooltipPrimitive.Root delayDuration={delayDuration} {...props} />
 );
 
@@ -81,8 +81,8 @@ const TooltipContent = React.forwardRef<
         <motion.div
           animate={{ opacity: 1, scale: 1, y: 0 }}
           className={cn(tooltipVariants({ variant, size }), className)}
-          exit={{ opacity: 0, scale: 0.8, y: 5 }}
-          initial={{ opacity: 0, scale: 0.8, y: 5 }}
+          exit={{ opacity: 0, scale: 0.95, y: 5 }}
+          initial={{ opacity: 0, scale: 0.95, y: 5 }}
           transition={{
             type: 'spring',
             stiffness: 300,

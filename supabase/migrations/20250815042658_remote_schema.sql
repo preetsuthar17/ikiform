@@ -1,3 +1,7 @@
+-- Update webhooks table to support all HTTP methods
+ALTER TABLE "public"."webhooks" DROP CONSTRAINT IF EXISTS "webhooks_method_check";
+ALTER TABLE "public"."webhooks" ADD CONSTRAINT "webhooks_method_check" CHECK (("method" = ANY (ARRAY['DELETE'::"text", 'GET'::"text", 'HEAD'::"text", 'PATCH'::"text", 'POST'::"text", 'PUT'::"text"])));
+
 revoke delete on table "auth"."audit_log_entries" from "postgres";
 
 revoke insert on table "auth"."audit_log_entries" from "postgres";

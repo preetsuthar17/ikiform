@@ -1,5 +1,4 @@
 import { Card } from '@/components/ui/card';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { Loader } from '../ui/loader';
 import type { WebhookConfig } from './hooks/useWebhookManagement';
 import { WebhookListItem } from './WebhookListItem';
@@ -25,32 +24,34 @@ export function WebhookList({
 }: WebhookListProps) {
   if (loading)
     return (
-      <div className="py-8 text-center">
+      <div className="py-4 text-center">
         <Loader />
       </div>
     );
+    
   if (!webhooks.length)
     return (
-      <div className="py-8 text-center text-muted-foreground">
-        No webhooks found.
+      <div className="rounded-lg border border-dashed border-muted-foreground/25 p-6 text-center">
+        <p className="text-sm text-muted-foreground">
+          No webhooks configured yet. Add your first webhook to receive form submissions.
+        </p>
       </div>
     );
+    
   return (
-    <ScrollArea className="max-h-[60vh]">
-      <ul className="flex flex-col gap-4">
-        {webhooks.map((webhook) => (
-          <Card className="p-0" key={webhook.id}>
-            <WebhookListItem
-              onDelete={() => onDelete(webhook.id)}
-              onEdit={() => onEdit(webhook)}
-              onTest={() => onTest?.(webhook)}
-              onToggleEnabled={() => onToggleEnabled?.(webhook)}
-              onViewLogs={() => onViewLogs?.(webhook)}
-              webhook={webhook}
-            />
-          </Card>
-        ))}
-      </ul>
-    </ScrollArea>
+    <div className="flex flex-col gap-3">
+      {webhooks.map((webhook) => (
+        <div className="p-0" key={webhook.id}>
+          <WebhookListItem
+            onDelete={() => onDelete(webhook.id)}
+            onEdit={() => onEdit(webhook)}
+            onTest={() => onTest?.(webhook)}
+            onToggleEnabled={() => onToggleEnabled?.(webhook)}
+            onViewLogs={() => onViewLogs?.(webhook)}
+            webhook={webhook}
+          />
+        </div>
+      ))}
+    </div>
   );
 }

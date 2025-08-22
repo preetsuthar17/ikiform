@@ -424,7 +424,7 @@ CREATE TABLE IF NOT EXISTS "public"."webhooks" (
     "enabled" boolean DEFAULT true NOT NULL,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    CONSTRAINT "webhooks_method_check" CHECK (("method" = ANY (ARRAY['POST'::"text", 'PUT'::"text"])))
+    CONSTRAINT "webhooks_method_check" CHECK (("method" = ANY (ARRAY['DELETE'::"text", 'GET'::"text", 'HEAD'::"text", 'PATCH'::"text", 'POST'::"text", 'PUT'::"text"])))
 );
 
 

@@ -200,17 +200,16 @@ const DropdownMenuItem = React.forwardRef<
       {...props}
     >
       <motion.div
-        className="flex w-full items-center gap-2 text-sm"
+        className="flex w-full items-center gap-2 text-sm"  
         transition={{ duration: 0.1 }}
-        whileHover={{ x: 2 }}
       >
-        {Icon && <Icon className="shrink-0" size={16} />}
-        <span className="flex-1 text-sm">{children}</span>
-        {shortcut && (
+        
+        <span className="text-sm flex items-center">{Icon && <Icon className="shrink-0" size={16} />} {children} {shortcut && (
           <Kbd className="ml-auto text-xs tracking-widest opacity-60" size="xs">
             {shortcut}
           </Kbd>
-        )}
+        )}</span>
+       
       </motion.div>
     </DropdownMenuPrimitive.Item>
   )

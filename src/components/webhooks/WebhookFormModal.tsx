@@ -1,5 +1,5 @@
 import { TooltipProvider } from '@radix-ui/react-tooltip';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Alert } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -28,27 +28,25 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import type { WebhookConfig, WebhookMethod } from './hooks/useWebhookManagement';
 
-interface WebhookFormModalProps {
-  open: boolean;
-  onClose: () => void;
-  onSave: (webhook: any) => void;
-  initialWebhook?: {
-    id?: string;
-    url: string;
-    events: string[];
-    method: 'POST' | 'PUT';
-    headers: Record<string, string>;
-    payloadTemplate: string;
-    enabled: boolean;
-  };
-  loading?: boolean;
-}
+const EVENT_OPTIONS = [
+  { label: 'Form Submitted', value: 'form_submitted' },
+  { label: 'Form Viewed', value: 'form_viewed' },
+  { label: 'Form Started', value: 'form_started' },
+];
 
-const EVENT_OPTIONS = [{ value: 'form_submitted', label: 'Form Submitted' }];
+const HTTP_METHODS: { value: WebhookMethod; label: string; description: string }[] = [
+  { value: 'GET', label: 'GET', description: 'Retrieve data (no body)' },
+  { value: 'POST', label: 'POST', description: 'Create or submit data' },
+  { value: 'PUT', label: 'PUT', description: 'Update entire resource' },
+  { value: 'PATCH', label: 'PATCH', description: 'Update partial resource' },
+  { value: 'DELETE', label: 'DELETE', description: 'Remove resource' },
+  { value: 'HEAD', label: 'HEAD', description: 'Get headers only' },
+];
 
 const DISCORD_WEBHOOK_EXAMPLE =
-  'https://discord.com/api/webhooks/XXXXXXXXX/YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY';
+  '';
 
 export function WebhookFormModal({
   open,
@@ -56,10 +54,16 @@ export function WebhookFormModal({
   onSave,
   initialWebhook,
   loading,
-}: WebhookFormModalProps) {
+}: {
+  open: boolean;
+  onClose: () => void;
+  onSave: (webhook: Partial<WebhookConfig>) => void;
+  initialWebhook?: WebhookConfig;
+  loading?: boolean;
+}) {
   const [url, setUrl] = useState(initialWebhook?.url || '');
   const [events, setEvents] = useState<string[]>(initialWebhook?.events || []);
-  const [method, setMethod] = useState<'POST' | 'PUT'>(
+  const [method, setMethod] = useState<WebhookMethod>(
     initialWebhook?.method || 'POST'
   );
   const [headers, setHeaders] = useState<Record<string, string>>(
@@ -137,7 +141,7 @@ export function WebhookFormModal({
             embed for each form submission.
             <br />
             <span className="text-xs">
-              You can copy your Discord webhook URL from your Discord server’s
+              You can copy your Discord webhook URL from your Discord server's
               Integrations &rarr; Webhooks settings.
             </span>
             <div className="mt-2 text-blue-700 text-xs">
@@ -203,15 +207,22 @@ export function WebhookFormModal({
                 HTTP Method
               </Label>
               <Select
-                onValueChange={(val) => setMethod(val as 'POST' | 'PUT')}
+                onValueChange={(val) => setMethod(val as WebhookMethod)}
                 value={method}
               >
-                <SelectTrigger id="webhook-method" placeholder="Select method">
+                <SelectTrigger id="webhook-method" placeholder="Select method" className='text-left'>
                   <SelectValue placeholder="Select method" />
                 </SelectTrigger>
+                
                 <SelectContent>
-                  <SelectItem value="POST">POST</SelectItem>
-                  <SelectItem value="PUT">PUT</SelectItem>
+                  {HTTP_METHODS.map((httpMethod) => (
+                    <SelectItem key={httpMethod.value} value={httpMethod.value}>
+                      <div className="flex flex-col">
+                        <span className="font-medium">{httpMethod.label}</span>
+                        <span className="text-xs text-muted-foreground">{httpMethod.description}</span>
+                      </div>
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
@@ -257,145 +268,44 @@ export function WebhookFormModal({
                   id="webhook-payload"
                   onChange={(e) => setPayloadTemplate(e.target.value)}
                   placeholder='{"event": "{{event}}", "formId": "{{formId}}", "fields": {{formatted.fields}} }'
-                  rows={6}
                   value={payloadTemplate}
                 />
-                <div className="mt-2 flex flex-wrap gap-2 text-xs">
-                  <span className="font-semibold">Available variables:</span>
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Badge variant="outline">event</Badge>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        The event type (e.g. form_submitted)
-                      </TooltipContent>
-                    </Tooltip>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Badge variant="outline">formId</Badge>
-                      </TooltipTrigger>
-                      <TooltipContent>The form ID</TooltipContent>
-                    </Tooltip>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Badge variant="outline">submissionId</Badge>
-                      </TooltipTrigger>
-                      <TooltipContent>The submission ID</TooltipContent>
-                    </Tooltip>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Badge variant="outline">ipAddress</Badge>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        The IP address of the submitter
-                      </TooltipContent>
-                    </Tooltip>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Badge variant="outline">formatted</Badge>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        {
-                          'The formatted object with formName, formId, fields (array of {id, label, type, value}), and rawData'
-                        }
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </div>
-                <div className="mt-2 text-muted-foreground text-xs">
-                  Use{' '}
-                  <code className="rounded bg-muted px-1">
-                    &#123;&#123;variable&#125;&#125;
-                  </code>{' '}
-                  to insert a variable. For example:{' '}
-                  <code className="rounded bg-muted px-1">
-                    &#123;&#123;formatted.formName&#125;&#125;
-                  </code>
-                </div>
-                <Alert className="mt-2" variant="default">
-                  <b>Tip:</b> You can use{' '}
-                  <code className="rounded bg-muted px-1">
-                    &#123;&#123;#each formatted.fields&#125;&#125;
-                  </code>{' '}
-                  in advanced templates to loop over fields. See docs for more.
-                </Alert>
               </div>
               <div className="min-w-[250px] flex-1">
-                <Label className="mb-1">Live Preview</Label>
-                <div className="min-h-[120px] border bg-muted/50 p-2">
-                  <div className="p-0">
-                    <ScrollArea className="max-h-48">
-                      <pre className="whitespace-pre-wrap break-words font-mono text-foreground text-xs">
-                        {(() => {
-                          try {
-                            const previewContext = {
-                              event: 'form_submitted',
-                              formId: 'form-123',
-                              submissionId: 'sub-456',
-                              ipAddress: '1.2.3.4',
-                              formatted: {
-                                formId: 'form-123',
-                                formName: 'Demo Form',
-                                fields: [
-                                  {
-                                    id: 'field_1',
-                                    label: 'Name',
-                                    type: 'text',
-                                    value: 'John Doe',
-                                  },
-                                  {
-                                    id: 'field_2',
-                                    label: 'Email',
-                                    type: 'email',
-                                    value: 'john@example.com',
-                                  },
-                                ],
-                                rawData: {
-                                  field_1: 'John Doe',
-                                  field_2: 'john@example.com',
-                                },
-                              },
-                            };
-
-                            let preview =
-                              payloadTemplate ||
-                              '{"event": "{{event}}", "formId": "{{formId}}", "fields": {{formatted.fields}} }';
-                            preview = preview.replace(
-                              /{{\s*([\w.]+)\s*}}/g,
-                              (_: string, key: string) => {
-                                const keys = key.split('.');
-                                let value: any = previewContext;
-                                for (const k of keys) value = value?.[k];
-                                if (typeof value === 'object' && value !== null)
-                                  return JSON.stringify(value, null, 2);
-                                return value !== undefined ? String(value) : '';
-                              }
-                            );
-                            return preview;
-                          } catch {
-                            return 'Invalid template';
-                          }
-                        })()}
-                      </pre>
-                    </ScrollArea>
-                  </div>
+                <div className="rounded border p-3 text-sm">
+                  <b>Available Variables:</b>
+                  <ul className="flex flex-col gap-1 text-xs">
+                    <li>
+                      <code>{'{{event}}'}</code> - Event type (e.g., form_submitted)
+                    </li>
+                    <li>
+                      <code>{'{{formId}}'}</code> - Form ID
+                    </li>
+                    <li>
+                      <code>{'{{formData}}'}</code> - Raw form data
+                    </li>
+                    <li>
+                      <code>{'{{formatted}}'}</code> - Human-friendly formatted data
+                    </li>
+                    <li>
+                      <code>{'{{timestamp}}'}</code> - ISO timestamp
+                    </li>
+                    <li>
+                      <code>{'{{submissionId}}'}</code> - Submission ID
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
-          <ModalFooter className="mt-6 flex justify-end gap-2">
-            <Button onClick={handleClose} type="button" variant="ghost">
+          <div className="flex justify-end gap-2">
+            <Button onClick={handleClose} type="button" variant="outline">
               Cancel
             </Button>
-            <Button
-              disabled={!(url && events.length) || loading}
-              type="submit"
-              variant="default"
-            >
-              {loading ? 'Saving...' : 'Save'}
+            <Button disabled={loading} loading={loading} type="submit">
+              {initialWebhook ? 'Update' : 'Create'} Webhook
             </Button>
-          </ModalFooter>
+          </div>
         </form>
       </ModalContent>
     </Modal>
