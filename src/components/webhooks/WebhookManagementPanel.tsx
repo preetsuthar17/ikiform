@@ -5,10 +5,10 @@ import {
   useWebhookManagement,
   type WebhookConfig,
 } from './hooks/useWebhookManagement';
+import { TestWebhookDialog } from './TestWebhookDialog';
 import { WebhookFormModal } from './WebhookFormModal';
 import { WebhookList } from './WebhookList';
 import { WebhookLogDrawer } from './WebhookLogDrawer';
-import { TestWebhookDialog } from './TestWebhookDialog';
 
 export function WebhookManagementPanel({ formId }: { formId?: string }) {
   const { user } = useAuth();
@@ -19,7 +19,9 @@ export function WebhookManagementPanel({ formId }: { formId?: string }) {
   const [logDrawerOpen, setLogDrawerOpen] = useState(false);
   const [logWebhookId, setLogWebhookId] = useState<string | null>(null);
   const [testDialogOpen, setTestDialogOpen] = useState(false);
-  const [testingWebhook, setTestingWebhook] = useState<WebhookConfig | null>(null);
+  const [testingWebhook, setTestingWebhook] = useState<WebhookConfig | null>(
+    null
+  );
   const {
     webhooks,
     loading,
@@ -80,8 +82,8 @@ export function WebhookManagementPanel({ formId }: { formId?: string }) {
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-1">
-          <p className="text-sm font-medium">Webhook Endpoints</p>
-          <p className="text-xs text-muted-foreground">
+          <p className="font-medium text-sm">Webhook Endpoints</p>
+          <p className="text-muted-foreground text-xs">
             Configure webhooks to receive form submissions
           </p>
         </div>
@@ -95,7 +97,7 @@ export function WebhookManagementPanel({ formId }: { formId?: string }) {
           {loading ? 'Loading' : 'Add Webhook'}
         </Button>
       </div>
-      
+
       <WebhookList
         loading={loading}
         onDelete={deleteWebhook}
@@ -105,7 +107,7 @@ export function WebhookManagementPanel({ formId }: { formId?: string }) {
         onViewLogs={handleViewLogs}
         webhooks={webhooks}
       />
-      
+
       <WebhookFormModal
         initialWebhook={
           editingWebhook
@@ -124,20 +126,20 @@ export function WebhookManagementPanel({ formId }: { formId?: string }) {
         onSave={handleSave}
         open={modalOpen}
       />
-      
+
       <WebhookLogDrawer
         onClose={() => setLogDrawerOpen(false)}
         open={logDrawerOpen}
         webhookId={logWebhookId}
       />
-      
+
       <TestWebhookDialog
-        webhook={testingWebhook}
-        open={testDialogOpen}
         onClose={() => {
           setTestDialogOpen(false);
           setTestingWebhook(null);
         }}
+        open={testDialogOpen}
+        webhook={testingWebhook}
       />
     </div>
   );

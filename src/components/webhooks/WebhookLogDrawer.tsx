@@ -1,4 +1,15 @@
+import {
+  Activity,
+  AlertCircle,
+  CheckCircle,
+  Clock,
+  Copy,
+  Eye,
+  RefreshCw,
+  XCircle,
+} from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 import { Alert } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -13,17 +24,6 @@ import {
 import { Loader } from '@/components/ui/loader';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
-import { 
-  Clock, 
-  CheckCircle, 
-  XCircle, 
-  AlertCircle, 
-  RefreshCw, 
-  Eye, 
-  Copy,
-  Activity
-} from 'lucide-react';
-import { toast } from 'sonner';
 
 interface WebhookLog {
   id: string;
@@ -63,10 +63,10 @@ function CodeBlock({
   return (
     <div className="relative">
       <Button
+        className="absolute top-2 right-2 h-6 w-6 p-0"
+        onClick={handleCopy}
         size="sm"
         variant="ghost"
-        className="absolute right-2 top-2 h-6 w-6 p-0"
-        onClick={handleCopy}
       >
         <Copy className="h-3 w-3" />
       </Button>
@@ -93,16 +93,23 @@ function PayloadViewer({ payload }: { payload: any }) {
   }
 
   // Handle empty or null payloads
-  if (!parsedPayload || (typeof parsedPayload === 'object' && Object.keys(parsedPayload).length === 0)) {
+  if (
+    !parsedPayload ||
+    (typeof parsedPayload === 'object' &&
+      Object.keys(parsedPayload).length === 0)
+  ) {
     return (
       <div className="flex flex-col items-center justify-center py-12 text-center">
-        <Eye className="h-12 w-12 text-muted-foreground mb-4" />
-        <h3 className="text-lg font-semibold mb-2">No Payload Data</h3>
-        <p className="text-muted-foreground max-w-md">
-          This webhook delivery doesn't contain any payload data. This might be because:
+        <Eye className="mb-4 h-12 w-12 text-muted-foreground" />
+        <h3 className="mb-2 font-semibold text-lg">No Payload Data</h3>
+        <p className="max-w-md text-muted-foreground">
+          This webhook delivery doesn't contain any payload data. This might be
+          because:
         </p>
-        <ul className="text-sm text-muted-foreground mt-2 space-y-1">
-          <li>• The webhook method doesn't support request bodies (GET, HEAD)</li>
+        <ul className="mt-2 space-y-1 text-muted-foreground text-sm">
+          <li>
+            • The webhook method doesn't support request bodies (GET, HEAD)
+          </li>
           <li>• The payload was empty or null</li>
           <li>• There was an error during payload generation</li>
         </ul>
@@ -197,38 +204,38 @@ function PayloadViewer({ payload }: { payload: any }) {
             Event Information
           </h4>
           <div className="grid grid-cols-1 gap-3 text-sm">
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <span className="text-muted-foreground">Event:</span>
-              <Badge variant="secondary" className="font-mono">
+              <Badge className="font-mono" variant="secondary">
                 {eventName || 'Unknown'}
               </Badge>
             </div>
             {parsedPayload.formId && (
-              <div className="flex justify-between items-center">
+              <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">Form ID:</span>
-                <code className="rounded-md bg-muted px-2 py-1 text-xs font-mono">
+                <code className="rounded-md bg-muted px-2 py-1 font-mono text-xs">
                   {parsedPayload.formId}
                 </code>
               </div>
             )}
             {parsedPayload.formName && (
-              <div className="flex justify-between items-center">
+              <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">Form Name:</span>
                 <span className="font-medium">{parsedPayload.formName}</span>
               </div>
             )}
             {parsedPayload.submissionId && (
-              <div className="flex justify-between items-center">
+              <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">Submission ID:</span>
-                <code className="rounded-md bg-muted px-2 py-1 text-xs font-mono">
+                <code className="rounded-md bg-muted px-2 py-1 font-mono text-xs">
                   {parsedPayload.submissionId}
                 </code>
               </div>
             )}
             {parsedPayload.ipAddress && (
-              <div className="flex justify-between items-center">
+              <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">IP Address:</span>
-                <code className="rounded-md bg-muted px-2 py-1 text-xs font-mono">
+                <code className="rounded-md bg-muted px-2 py-1 font-mono text-xs">
                   {parsedPayload.ipAddress}
                 </code>
               </div>
@@ -319,26 +326,30 @@ function PayloadViewer({ payload }: { payload: any }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <Tabs 
-        value={viewMode} 
-        onValueChange={(value) => setViewMode(value as 'formatted' | 'raw')}
+      <Tabs
         items={[
           { id: 'formatted', label: 'Formatted' },
           { id: 'raw', label: 'Raw JSON' },
         ]}
+        onValueChange={(value) => setViewMode(value as 'formatted' | 'raw')}
+        value={viewMode}
       />
-      <TabsContent value="formatted" activeValue={viewMode} className="mt-4">
+      <TabsContent activeValue={viewMode} className="mt-4" value="formatted">
         <FormattedView />
       </TabsContent>
-      <TabsContent value="raw" activeValue={viewMode} className="mt-4">
+      <TabsContent activeValue={viewMode} className="mt-4" value="raw">
         <RawView />
       </TabsContent>
     </div>
   );
 }
 
-function LogItem({ log, onResend, onViewPayload }: { 
-  log: WebhookLog; 
+function LogItem({
+  log,
+  onResend,
+  onViewPayload,
+}: {
+  log: WebhookLog;
   onResend: (log: WebhookLog) => void;
   onViewPayload: (payload: any) => void;
 }) {
@@ -372,15 +383,15 @@ function LogItem({ log, onResend, onViewPayload }: {
     const date = new Date(timestamp);
     const now = new Date();
     const diffInHours = (now.getTime() - date.getTime()) / (1000 * 60 * 60);
-    
+
     if (diffInHours < 1) {
       const diffInMinutes = Math.floor(diffInHours * 60);
       return `${diffInMinutes} minutes ago`;
-    } else if (diffInHours < 24) {
-      return `${Math.floor(diffInHours)} hours ago`;
-    } else {
-      return date.toLocaleDateString();
     }
+    if (diffInHours < 24) {
+      return `${Math.floor(diffInHours)} hours ago`;
+    }
+    return date.toLocaleDateString();
   };
 
   return (
@@ -391,6 +402,7 @@ function LogItem({ log, onResend, onViewPayload }: {
             <div className="flex items-center gap-2">
               {getStatusIcon()}
               <Badge
+                className="font-medium"
                 size="sm"
                 variant={
                   log.status === 'success'
@@ -399,18 +411,17 @@ function LogItem({ log, onResend, onViewPayload }: {
                       ? 'destructive'
                       : 'secondary'
                 }
-                className="font-medium"
               >
                 {log.status.toUpperCase()}
               </Badge>
               {log.attempt > 0 && (
-                <Badge variant="outline" size="sm" className="text-xs">
+                <Badge className="text-xs" size="sm" variant="outline">
                   Retry {log.attempt + 1}
                 </Badge>
               )}
             </div>
           </div>
-          <div className="flex items-center gap-2 text-xs text-muted-foreground mt-2 sm:mt-0">
+          <div className="mt-2 flex items-center gap-2 text-muted-foreground text-xs sm:mt-0">
             <Clock className="h-3 w-3" />
             {formatTimestamp(log.timestamp)}
           </div>
@@ -419,20 +430,20 @@ function LogItem({ log, onResend, onViewPayload }: {
         <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-4">
           <div className="flex items-center gap-2 text-sm">
             <span className="font-medium">Event:</span>
-            <Badge variant="outline" size="sm" className="font-mono">
+            <Badge className="font-mono" size="sm" variant="outline">
               {log.event}
             </Badge>
           </div>
           {typeof log.response_status !== 'undefined' && (
-            <div className="flex items-center gap-2 text-sm mt-1 sm:mt-0">
+            <div className="mt-1 flex items-center gap-2 text-sm sm:mt-0">
               <span className="font-medium">Response:</span>
               <Badge
+                size="sm"
                 variant={
                   log.response_status >= 200 && log.response_status < 300
                     ? 'default'
                     : 'destructive'
                 }
-                size="sm"
               >
                 {log.response_status}
               </Badge>
@@ -449,32 +460,32 @@ function LogItem({ log, onResend, onViewPayload }: {
 
         {log.response_body && (
           <div className="mb-3 rounded-lg bg-muted p-3">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-sm font-medium">Response Body:</span>
+            <div className="mb-2 flex items-center gap-2">
+              <span className="font-medium text-sm">Response Body:</span>
             </div>
-            <div className="text-xs text-muted-foreground break-all">
+            <div className="break-all text-muted-foreground text-xs">
               {log.response_body}
             </div>
           </div>
         )}
 
-        <div className="flex flex-col gap-2 mt-2 sm:flex-row sm:gap-2">
+        <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:gap-2">
           {log.status === 'failed' && (
             <Button
+              className="flex items-center gap-2"
               onClick={() => onResend(log)}
               size="sm"
               variant="default"
-              className="flex items-center gap-2"
             >
               <RefreshCw className="h-3 w-3" />
               Resend
             </Button>
           )}
           <Button
+            className="flex items-center gap-2"
             onClick={() => onViewPayload(log.request_payload)}
             size="sm"
             variant="outline"
-            className="flex items-center gap-2"
           >
             <Eye className="h-3 w-3" />
             View Payload
@@ -536,9 +547,9 @@ export function WebhookLogDrawer({
     }
   }
 
-  const successCount = logs.filter(log => log.status === 'success').length;
-  const failedCount = logs.filter(log => log.status === 'failed').length;
-  const pendingCount = logs.filter(log => log.status === 'pending').length;
+  const successCount = logs.filter((log) => log.status === 'success').length;
+  const failedCount = logs.filter((log) => log.status === 'failed').length;
+  const pendingCount = logs.filter((log) => log.status === 'pending').length;
 
   return (
     <Drawer direction="bottom" onOpenChange={onClose} open={open}>
@@ -551,7 +562,7 @@ export function WebhookLogDrawer({
                 Webhook Delivery Logs
               </DrawerTitle>
               {logs.length > 0 && (
-                <div className="mt-2 flex items-center gap-4 text-sm text-muted-foreground">
+                <div className="mt-2 flex items-center gap-4 text-muted-foreground text-sm">
                   <div className="flex items-center gap-1">
                     <CheckCircle className="h-3 w-3 text-green-600" />
                     <span>{successCount} successful</span>
@@ -572,7 +583,7 @@ export function WebhookLogDrawer({
             <DrawerCloseButton onClick={onClose} />
           </div>
         </DrawerHeader>
-        
+
         <div className="flex h-[calc(100vh-80px)] flex-col gap-4 p-4">
           {loading ? (
             <div className="flex h-64 flex-col items-center justify-center">
@@ -600,15 +611,15 @@ export function WebhookLogDrawer({
             </ScrollArea>
           ) : (
             <div className="flex h-64 flex-col items-center justify-center text-center">
-              <Activity className="h-12 w-12 text-muted-foreground mb-4" />
-              <h3 className="text-lg font-semibold mb-2">No Logs Found</h3>
+              <Activity className="mb-4 h-12 w-12 text-muted-foreground" />
+              <h3 className="mb-2 font-semibold text-lg">No Logs Found</h3>
               <p className="text-muted-foreground">
                 No webhook delivery logs found for this webhook.
               </p>
             </div>
           )}
         </div>
-        
+
         {/* Payload Viewer Drawer */}
         {viewPayload && (
           <Drawer

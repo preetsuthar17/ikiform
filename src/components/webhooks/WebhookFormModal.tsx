@@ -1,5 +1,5 @@
 import { TooltipProvider } from '@radix-ui/react-tooltip';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Alert } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -28,7 +28,10 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import type { WebhookConfig, WebhookMethod } from './hooks/useWebhookManagement';
+import type {
+  WebhookConfig,
+  WebhookMethod,
+} from './hooks/useWebhookManagement';
 
 const EVENT_OPTIONS = [
   { label: 'Form Submitted', value: 'form_submitted' },
@@ -36,7 +39,11 @@ const EVENT_OPTIONS = [
   { label: 'Form Started', value: 'form_started' },
 ];
 
-const HTTP_METHODS: { value: WebhookMethod; label: string; description: string }[] = [
+const HTTP_METHODS: {
+  value: WebhookMethod;
+  label: string;
+  description: string;
+}[] = [
   { value: 'GET', label: 'GET', description: 'Retrieve data (no body)' },
   { value: 'POST', label: 'POST', description: 'Create or submit data' },
   { value: 'PUT', label: 'PUT', description: 'Update entire resource' },
@@ -45,8 +52,7 @@ const HTTP_METHODS: { value: WebhookMethod; label: string; description: string }
   { value: 'HEAD', label: 'HEAD', description: 'Get headers only' },
 ];
 
-const DISCORD_WEBHOOK_EXAMPLE =
-  '';
+const DISCORD_WEBHOOK_EXAMPLE = '';
 
 export function WebhookFormModal({
   open,
@@ -210,16 +216,22 @@ export function WebhookFormModal({
                 onValueChange={(val) => setMethod(val as WebhookMethod)}
                 value={method}
               >
-                <SelectTrigger id="webhook-method" placeholder="Select method" className='text-left'>
+                <SelectTrigger
+                  className="text-left"
+                  id="webhook-method"
+                  placeholder="Select method"
+                >
                   <SelectValue placeholder="Select method" />
                 </SelectTrigger>
-                
+
                 <SelectContent>
                   {HTTP_METHODS.map((httpMethod) => (
                     <SelectItem key={httpMethod.value} value={httpMethod.value}>
                       <div className="flex flex-col">
                         <span className="font-medium">{httpMethod.label}</span>
-                        <span className="text-xs text-muted-foreground">{httpMethod.description}</span>
+                        <span className="text-muted-foreground text-xs">
+                          {httpMethod.description}
+                        </span>
                       </div>
                     </SelectItem>
                   ))}
@@ -276,7 +288,8 @@ export function WebhookFormModal({
                   <b>Available Variables:</b>
                   <ul className="flex flex-col gap-1 text-xs">
                     <li>
-                      <code>{'{{event}}'}</code> - Event type (e.g., form_submitted)
+                      <code>{'{{event}}'}</code> - Event type (e.g.,
+                      form_submitted)
                     </li>
                     <li>
                       <code>{'{{formId}}'}</code> - Form ID
@@ -285,7 +298,8 @@ export function WebhookFormModal({
                       <code>{'{{formData}}'}</code> - Raw form data
                     </li>
                     <li>
-                      <code>{'{{formatted}}'}</code> - Human-friendly formatted data
+                      <code>{'{{formatted}}'}</code> - Human-friendly formatted
+                      data
                     </li>
                     <li>
                       <code>{'{{timestamp}}'}</code> - ISO timestamp

@@ -28,16 +28,17 @@ export function WebhookList({
         <Loader />
       </div>
     );
-    
+
   if (!webhooks.length)
     return (
-      <div className="rounded-lg border border-dashed border-muted-foreground/25 p-6 text-center">
-        <p className="text-sm text-muted-foreground">
-          No webhooks configured yet. Add your first webhook to receive form submissions.
+      <div className="rounded-lg border border-muted-foreground/25 border-dashed p-6 text-center">
+        <p className="text-muted-foreground text-sm">
+          No webhooks configured yet. Add your first webhook to receive form
+          submissions.
         </p>
       </div>
     );
-    
+
   return (
     <div className="flex flex-col gap-3">
       {webhooks.map((webhook) => (

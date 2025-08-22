@@ -570,9 +570,11 @@ export async function deliverWithRetry(
   const supabase = createAdminClient();
   const methodsWithBody = ['POST', 'PUT', 'PATCH'];
   const startTime = Date.now();
-  
-  console.log(`[WEBHOOK DELIVERY] Starting delivery for webhook ${webhook.id} (${webhook.method} ${webhook.url}) - Attempt ${attempt + 1}`);
-  
+
+  console.log(
+    `[WEBHOOK DELIVERY] Starting delivery for webhook ${webhook.id} (${webhook.method} ${webhook.url}) - Attempt ${attempt + 1}`
+  );
+
   try {
     let finalBody = body;
     let finalHeaders = { ...headers };
@@ -586,10 +588,14 @@ export async function deliverWithRetry(
             parsed.formId || ''
           )
         );
-        console.log(`[WEBHOOK DELIVERY] Discord webhook detected, transformed payload`);
+        console.log(
+          '[WEBHOOK DELIVERY] Discord webhook detected, transformed payload'
+        );
       } catch {
         finalBody = JSON.stringify(buildDiscordEmbedPayload({}, ''));
-        console.log(`[WEBHOOK DELIVERY] Discord webhook detected, using fallback payload`);
+        console.log(
+          '[WEBHOOK DELIVERY] Discord webhook detected, using fallback payload'
+        );
       }
       finalHeaders = { 'Content-Type': 'application/json' };
     } else if (isSlackWebhook(webhook.url)) {
@@ -598,10 +604,14 @@ export async function deliverWithRetry(
         finalBody = JSON.stringify(
           buildSlackMessagePayload(parsed.formData || parsed)
         );
-        console.log(`[WEBHOOK DELIVERY] Slack webhook detected, transformed payload`);
+        console.log(
+          '[WEBHOOK DELIVERY] Slack webhook detected, transformed payload'
+        );
       } catch {
         finalBody = JSON.stringify(buildSlackMessagePayload({}));
-        console.log(`[WEBHOOK DELIVERY] Slack webhook detected, using fallback payload`);
+        console.log(
+          '[WEBHOOK DELIVERY] Slack webhook detected, using fallback payload'
+        );
       }
       finalHeaders = { 'Content-Type': 'application/json' };
     }
@@ -617,17 +627,25 @@ export async function deliverWithRetry(
     // Only include body for methods that support it
     if (methodsWithBody.includes(webhook.method)) {
       fetchOptions.body = finalBody;
-      console.log(`[WEBHOOK DELIVERY] Including request body for ${webhook.method} method`);
+      console.log(
+        `[WEBHOOK DELIVERY] Including request body for ${webhook.method} method`
+      );
     } else {
-      console.log(`[WEBHOOK DELIVERY] Skipping request body for ${webhook.method} method`);
+      console.log(
+        `[WEBHOOK DELIVERY] Skipping request body for ${webhook.method} method`
+      );
     }
 
-    console.log(`[WEBHOOK DELIVERY] Sending ${webhook.method} request to ${webhook.url}`);
+    console.log(
+      `[WEBHOOK DELIVERY] Sending ${webhook.method} request to ${webhook.url}`
+    );
     const res = await fetch(webhook.url, fetchOptions);
     const responseBody = await res.text();
 
     const duration = Date.now() - startTime;
-    console.log(`[WEBHOOK DELIVERY] Response received: ${res.status} ${res.statusText} in ${duration}ms`);
+    console.log(
+      `[WEBHOOK DELIVERY] Response received: ${res.status} ${res.statusText} in ${duration}ms`
+    );
 
     // Log successful delivery
     await supabase.from('webhook_logs').insert([
@@ -635,19 +653,26 @@ export async function deliverWithRetry(
         webhook_id: webhook.id,
         event: 'triggered',
         status: 'success',
-        request_payload: methodsWithBody.includes(webhook.method) ? finalBody : null,
+        request_payload: methodsWithBody.includes(webhook.method)
+          ? finalBody
+          : null,
         response_status: res.status,
         response_body: responseBody,
         timestamp: new Date().toISOString(),
         attempt,
       },
     ]);
-    
-    console.log(`[WEBHOOK DELIVERY] Successfully delivered webhook ${webhook.id} in ${duration}ms`);
+
+    console.log(
+      `[WEBHOOK DELIVERY] Successfully delivered webhook ${webhook.id} in ${duration}ms`
+    );
   } catch (err: any) {
     const duration = Date.now() - startTime;
-    console.error(`[WEBHOOK DELIVERY] Failed to deliver webhook ${webhook.id} after ${duration}ms:`, err.message);
-    
+    console.error(
+      `[WEBHOOK DELIVERY] Failed to deliver webhook ${webhook.id} after ${duration}ms:`,
+      err.message
+    );
+
     // Log failed delivery
     await supabase.from('webhook_logs').insert([
       {
@@ -663,13 +688,17 @@ export async function deliverWithRetry(
 
     if (attempt < 3) {
       const retryDelay = 2 ** attempt * 1000;
-      console.log(`[WEBHOOK DELIVERY] Scheduling retry ${attempt + 2}/3 for webhook ${webhook.id} in ${retryDelay}ms`);
+      console.log(
+        `[WEBHOOK DELIVERY] Scheduling retry ${attempt + 2}/3 for webhook ${webhook.id} in ${retryDelay}ms`
+      );
       setTimeout(
         () => deliverWithRetry(webhook, body, headers, attempt + 1),
         retryDelay
       );
     } else {
-      console.error(`[WEBHOOK DELIVERY] Max retries reached for webhook ${webhook.id}`);
+      console.error(
+        `[WEBHOOK DELIVERY] Max retries reached for webhook ${webhook.id}`
+      );
     }
   }
 }

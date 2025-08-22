@@ -20,12 +20,15 @@ export function WebhooksSettingsSection({ formId }: { formId: string }) {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Badge size="sm" variant="secondary" className="cursor-help">
+              <Badge className="cursor-help" size="sm" variant="secondary">
                 Beta <FaQuestion size={10} />
               </Badge>
             </TooltipTrigger>
             <TooltipContent>
-              <p>This feature is still under testing. You may encounter some bugs.</p>
+              <p>
+                This feature is still under testing. You may encounter some
+                bugs.
+              </p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
