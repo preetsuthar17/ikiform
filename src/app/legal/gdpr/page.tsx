@@ -18,18 +18,26 @@ export default function GDPR() {
           identifies the operator of this website:
         </p>
         <div className="flex flex-col gap-1">
-          <div><strong>Operator</strong>: Preet Suthar</div>
-          <div><strong>Address</strong>: Juna Rabadiya, Ta: Lunawada, Dis: Mahisagar, 389220, Gujarat, India</div>
           <div>
-            <strong>Contact</strong>: 
-            <Link className="text-blue-500 underline" href="mailto:hi@preetsuthar.me">
+            <strong>Operator</strong>: Preet Suthar
+          </div>
+          <div>
+            <strong>Address</strong>: Juna Rabadiya, Ta: Lunawada, Dis:
+            Mahisagar, 389220, Gujarat, India
+          </div>
+          <div>
+            <strong>Contact</strong>:
+            <Link
+              className="text-blue-500 underline"
+              href="mailto:hi@preetsuthar.me"
+            >
               hi@preetsuthar.me
             </Link>
           </div>
         </div>
         <p>
-          For data protection inquiries, please contact our Data Protection Officer
-          listed below.
+          For data protection inquiries, please contact our Data Protection
+          Officer listed below.
         </p>
       </section>
       <section className="flex flex-col gap-4">
