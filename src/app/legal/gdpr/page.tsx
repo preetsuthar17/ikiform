@@ -12,6 +12,27 @@ export default function GDPR() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
+        <h2 className="font-semibold text-2xl">Imprint</h2>
+        <p>
+          Pursuant to § 5 TMG (German Telemedia Act), the following information
+          identifies the operator of this website:
+        </p>
+        <div className="flex flex-col gap-1">
+          <div><strong>Operator</strong>: Preet Suthar</div>
+          <div><strong>Address</strong>: Juna Rabadiya, Ta: Lunawada, Dis: Mahisagar, 389220, Gujarat, India</div>
+          <div>
+            <strong>Contact</strong>: 
+            <Link className="text-blue-500 underline" href="mailto:hi@preetsuthar.me">
+              hi@preetsuthar.me
+            </Link>
+          </div>
+        </div>
+        <p>
+          For data protection inquiries, please contact our Data Protection Officer
+          listed below.
+        </p>
+      </section>
+      <section className="flex flex-col gap-4">
         <h2 className="font-semibold text-2xl">Is Ikiform GDPR compliant?</h2>
         <p>
           Yes. Ikiform's data centers and servers are located in the EU, and we
@@ -221,9 +242,9 @@ export default function GDPR() {
             Email:{' '}
             <Link
               className="text-blue-500 underline"
-              href="mailto:hi@ikiform.com"
+              href="mailto:hi@preetsuthar.me"
             >
-              hi@ikiform.com
+              hi@preetsuthar.me
             </Link>
           </div>
           <div>
