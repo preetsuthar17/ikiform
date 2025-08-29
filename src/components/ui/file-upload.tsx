@@ -84,7 +84,7 @@ const fileUploadVariants = cva(
 );
 
 const fileItemVariants = cva(
-  'flex items-start gap-3 rounded-ele p-4 transition-all duration-200',
+  'flex items-center gap-3 rounded-ele p-4 transition-all duration-200',
   {
     variants: {
       variant: {
@@ -297,7 +297,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
           role="button"
           tabIndex={disabled ? -1 : 0}
         >
-          <div className="flex flex flex-col flex-col items-center justify-center gap-3 text-center">
+          <div className="flex flex-col items-center justify-center gap-3 text-center">
             <motion.div
               animate={{
                 y: isDragging ? [-2, 0, -2] : 0,
@@ -384,7 +384,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                     files.length > 3 ? 'h-64' : 'h-auto'
                   )}
                 >
-                  <div className="flex flex-col gap-2 pr-3">
+                  <div className="flex flex-col gap-2">
                     {files.map((file) => {
                       const IconComponent = getFileIcon(file.type);
                       return (
@@ -418,7 +418,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                           </div>
 
                           {}
-                          <div className="flex min-w-0 flex-1 flex-col gap-1">
+                          <div className="flex min-w-0 flex-1 flex-col gap-1 w-full">
                             <div className="flex items-center justify-between gap-2">
                               <p className="truncate font-medium text-foreground text-sm">
                                 {file.name}

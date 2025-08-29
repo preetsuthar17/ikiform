@@ -113,7 +113,13 @@ export const validateSingleStepForm = (
 export const submitSingleStepForm = async (
   formId: string,
   formData: Record<string, any>
-): Promise<{ success: boolean; message?: string }> => {
+): Promise<{ 
+  success: boolean; 
+  message?: string;
+  error?: string;
+  timeRemaining?: number;
+  attemptsRemaining?: number;
+}> => {
   try {
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
@@ -136,6 +142,9 @@ export const submitSingleStepForm = async (
       return {
         success: false,
         message: result.message || 'Failed to submit form',
+        error: result.error,
+        timeRemaining: result.timeRemaining,
+        attemptsRemaining: result.attemptsRemaining,
       };
     }
 

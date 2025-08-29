@@ -66,6 +66,11 @@ export const useSingleStepForm = (
   const [submitted, setSubmitted] = useState(false);
   const [quizResults, setQuizResults] = useState<QuizResult | null>(null);
   const [isLoadingProgress, setIsLoadingProgress] = useState(true);
+  const [duplicateError, setDuplicateError] = useState<{
+    message: string;
+    timeRemaining?: number;
+    attemptsRemaining?: number;
+  } | null>(null);
   const initializedFieldsRef = useRef<Set<string>>(new Set());
 
   const {
@@ -232,6 +237,7 @@ export const useSingleStepForm = (
     }
 
     setSubmitting(true);
+    setDuplicateError(null);
 
     try {
       const result = await submitSingleStepForm(formId, formData);
@@ -258,10 +264,28 @@ export const useSingleStepForm = (
           }, 2000);
         }
       } else {
-        toast.error(result.message || 'Failed to submit form');
+        // Check if it's a duplicate submission error
+        if (result.error === 'Duplicate submission detected') {
+          setDuplicateError({
+            message: result.message || 'You have already submitted this form.',
+            timeRemaining: result.timeRemaining,
+            attemptsRemaining: result.attemptsRemaining,
+          });
+        } else {
+          toast.error(result.message || 'Failed to submit form');
+        }
       }
-    } catch {
-      toast.error('Failed to submit form. Please try again.');
+    } catch (error: any) {
+      // Check if it's a duplicate submission error
+      if (error?.error === 'Duplicate submission detected') {
+        setDuplicateError({
+          message: error.message || 'You have already submitted this form.',
+          timeRemaining: error.timeRemaining,
+          attemptsRemaining: error.attemptsRemaining,
+        });
+      } else {
+        toast.error('Failed to submit form. Please try again.');
+      }
     } finally {
       setSubmitting(false);
     }
@@ -272,6 +296,7 @@ export const useSingleStepForm = (
     errors,
     submitting,
     submitted,
+    duplicateError,
     setFormData,
     setErrors,
     setSubmitting,

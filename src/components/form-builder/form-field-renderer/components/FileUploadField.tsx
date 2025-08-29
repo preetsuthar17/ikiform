@@ -234,14 +234,16 @@ export function FileUploadField({
                   </div>
 
                   {/* Remove button */}
-                  <button
-                    className="flex-shrink-0 rounded-md p-1 text-muted-foreground hover:bg-accent hover:text-destructive"
+                  <Button
+                    className="flex-shrink-0"
+                    variant={"ghost"}
                     disabled={disabled}
                     onClick={() => handleRemoveFile(file.id)}
                     type="button"
+                    size={"icon"}
                   >
                     ×
-                  </button>
+                  </Button>
                 </div>
               );
             })}

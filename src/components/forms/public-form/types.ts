@@ -14,6 +14,11 @@ export interface SingleStepFormState {
   submitting: boolean;
   submitted: boolean;
   quizResults: QuizResult | null;
+  duplicateError: {
+    message: string;
+    timeRemaining?: number;
+    attemptsRemaining?: number;
+  } | null;
 
   progress: FormProgress | null;
   progressLoading: boolean;

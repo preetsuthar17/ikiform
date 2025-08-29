@@ -1,5 +1,6 @@
 export { BasicInfoSection } from './BasicInfoSection';
 export { DesignSection } from './DesignSection';
+export { DuplicatePreventionSection } from './DuplicatePreventionSection';
 export { FormDesignPreview } from './FormDesignPreview';
 export { FormSettingsContent } from './FormSettingsContent';
 export { FormSettingsDesktopLayout } from './FormSettingsDesktopLayout';

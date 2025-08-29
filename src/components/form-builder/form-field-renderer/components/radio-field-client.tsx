@@ -103,7 +103,7 @@ export function RadioFieldClient({
         )}
         <div className="flex flex-col gap-3">
           {Array.from({ length: 3 }).map((_, index) => (
-            <div className="flex items-center space-x-3" key={index}>
+            <div className="flex items-center gap-3" key={index}>
               <div className="h-4 w-4 animate-pulse rounded-full bg-accent" />
               <div className="h-4 w-20 animate-pulse rounded bg-accent" />
             </div>
@@ -148,7 +148,7 @@ export function RadioFieldClient({
 
           return (
             <label
-              className={`flex cursor-pointer items-center space-x-3 ${
+              className={`flex cursor-pointer items-center gap-3 ${
                 disabled ? 'cursor-not-allowed opacity-50' : ''
               }`}
               key={index}

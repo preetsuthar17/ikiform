@@ -49,7 +49,7 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
 
   return (
     <div className="flex w-full items-center justify-between">
-      <div className="flex w-full items-center justify-between space-x-4">
+      <div className="flex w-full items-center justify-between gap-4">
         {steps.map((step, index) => {
           const Icon = step.icon;
           const isCompleted = isStepCompleted(step.id);

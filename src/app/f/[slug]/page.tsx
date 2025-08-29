@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { formsDbServer } from '@/lib/database';
 import { getPublicFormTitle } from '@/lib/utils/form-utils';
+import { ensureDefaultRateLimitSettings } from '@/lib/forms/form-defaults';
 import PublicFormServerWrapper from '../../forms/[id]/components/PublicFormServerWrapper';
 
 interface PublicFormPageProps {
@@ -52,7 +53,7 @@ export default async function PublicFormPage({ params }: PublicFormPageProps) {
       notFound();
     }
 
-    return <PublicFormServerWrapper formId={form.id} schema={form.schema} />;
+    return <PublicFormServerWrapper formId={form.id} schema={ensureDefaultRateLimitSettings(form.schema)} />;
   } catch (error) {
     console.error('Error fetching form:', error);
     notFound();

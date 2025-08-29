@@ -43,6 +43,19 @@ export const DEFAULT_PASSWORD_PROTECTION_SETTINGS = {
     'This form is password protected. Please enter the password to continue.',
 };
 
+/**
+ * Default duplicate prevention settings for all forms
+ */
+export const DEFAULT_DUPLICATE_PREVENTION_SETTINGS = {
+  enabled: false,
+  strategy: 'combined' as const,
+  mode: 'one-time' as const,
+  timeWindow: 1440,
+  message: 'You have already submitted this form. Each user can only submit once.',
+  allowOverride: false,
+  maxAttempts: 1,
+};
+
 export const DEFAULT_SOCIAL_MEDIA_SETTINGS = {
   enabled: true,
   platforms: {
@@ -156,6 +169,10 @@ export function ensureDefaultFormSettings(schema: FormSchema): FormSchema {
         ...DEFAULT_NOTIFICATION_SETTINGS,
         ...schema.settings?.notifications,
       },
+      duplicatePrevention: {
+        ...DEFAULT_DUPLICATE_PREVENTION_SETTINGS,
+        ...schema.settings?.duplicatePrevention,
+      },
     },
   };
 }
@@ -213,6 +230,7 @@ export function createDefaultFormSchema(options: {
       responseLimit: { ...DEFAULT_RESPONSE_LIMIT_SETTINGS },
       passwordProtection: { ...DEFAULT_PASSWORD_PROTECTION_SETTINGS },
       notifications: { ...DEFAULT_NOTIFICATION_SETTINGS },
+      duplicatePrevention: { ...DEFAULT_DUPLICATE_PREVENTION_SETTINGS },
     },
   };
 }

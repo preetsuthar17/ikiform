@@ -367,7 +367,7 @@ export default function EmbedCodeGenerator({
               onClick={() => setEmbedMode(mode.id as EmbedMode)}
             >
               <CardContent className="p-3">
-                <div className="mb-1 flex items-center space-x-2">
+                <div className="mb-1 flex items-center gap-2">
                   <IconComponent className="h-4 w-4" />
                   <span className="font-medium text-sm">{mode.name}</span>
                   {embedMode === mode.id && (

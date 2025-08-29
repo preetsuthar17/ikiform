@@ -3,6 +3,7 @@ import React from 'react';
 import type { FormSettingsSection } from '../types';
 import { BasicInfoSection } from './BasicInfoSection';
 import { DesignSection } from './DesignSection';
+import { DuplicatePreventionSection } from './DuplicatePreventionSection';
 import { FormDesignPreview } from './FormDesignPreview';
 import { NotificationsSection } from './NotificationsSection';
 import { PasswordProtectionSection } from './PasswordProtectionSection';
@@ -18,6 +19,7 @@ interface FormSettingsContentProps {
   localSettings: any;
   updateSettings: any;
   updateRateLimit: any;
+  updateDuplicatePrevention: any;
   updateProfanityFilter: any;
   updateResponseLimit: any;
   updatePasswordProtection: any;
@@ -30,6 +32,7 @@ export function FormSettingsContent({
   localSettings,
   updateSettings,
   updateRateLimit,
+  updateDuplicatePrevention,
   updateProfanityFilter,
   updateResponseLimit,
   updatePasswordProtection,
@@ -67,6 +70,10 @@ export function FormSettingsContent({
           <PasswordProtectionSection
             localSettings={localSettings}
             updatePasswordProtection={updatePasswordProtection}
+          />
+          <DuplicatePreventionSection
+            localSettings={localSettings}
+            updateDuplicatePrevention={updateDuplicatePrevention}
           />
           <ProfanityFilterSection
             localSettings={localSettings}

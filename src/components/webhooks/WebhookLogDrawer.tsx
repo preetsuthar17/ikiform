@@ -106,7 +106,7 @@ function PayloadViewer({ payload }: { payload: any }) {
           This webhook delivery doesn't contain any payload data. This might be
           because:
         </p>
-        <ul className="mt-2 space-y-1 text-muted-foreground text-sm">
+        <ul className="mt-2 flex flex-col gap-1 text-muted-foreground text-sm">
           <li>
             • The webhook method doesn't support request bodies (GET, HEAD)
           </li>

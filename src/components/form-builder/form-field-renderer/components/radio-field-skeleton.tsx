@@ -19,7 +19,7 @@ export function RadioFieldSkeleton({
       {}
       <div className="flex flex-col gap-3">
         {Array.from({ length: optionsCount }).map((_, index) => (
-          <div className="flex items-center space-x-3" key={index}>
+          <div className="flex items-center gap-3" key={index}>
             <Skeleton className="h-4 w-4" variant="circle" />
             <Skeleton className="h-4 w-20" />
           </div>

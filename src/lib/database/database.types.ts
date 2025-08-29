@@ -486,6 +486,15 @@ export interface FormSchema {
     };
 
     rtl?: boolean;
+    duplicatePrevention?: {
+      enabled?: boolean;
+      strategy?: 'ip' | 'email' | 'session' | 'combined';
+      mode?: 'one-time' | 'time-based';
+      timeWindow?: number;
+      message?: string;
+      allowOverride?: boolean;
+      maxAttempts?: number;
+    };
   };
   logic?: FormLogic;
 }

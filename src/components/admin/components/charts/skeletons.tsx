@@ -26,7 +26,7 @@ export function ChartSkeleton({
       >
         <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-muted/20 to-transparent" />
         <div className="absolute right-4 bottom-4 left-4">
-          <div className="flex items-end justify-between space-x-1">
+          <div className="flex items-end justify-between gap-1">
             {Array.from({ length: 7 }, (_, i) => (
               <div
                 className="rounded-t bg-muted/40"

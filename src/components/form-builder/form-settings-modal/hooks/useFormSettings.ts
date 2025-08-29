@@ -7,6 +7,7 @@ import {
   DEFAULT_PROFANITY_FILTER_SETTINGS,
   DEFAULT_RATE_LIMIT_SETTINGS,
   DEFAULT_RESPONSE_LIMIT_SETTINGS,
+  DEFAULT_DUPLICATE_PREVENTION_SETTINGS,
 } from '@/lib/forms';
 import { DEFAULT_FORM_DESIGN } from '../constants';
 import type { LocalSettings } from '../types';
@@ -30,6 +31,10 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
       ...DEFAULT_RATE_LIMIT_SETTINGS,
       ...schema.settings.rateLimit,
     },
+    duplicatePrevention: {
+      ...DEFAULT_DUPLICATE_PREVENTION_SETTINGS,
+      ...(schema.settings as any).duplicatePrevention,
+    },
     profanityFilter: {
       ...DEFAULT_PROFANITY_FILTER_SETTINGS,
       ...schema.settings.profanityFilter,
@@ -50,6 +55,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
   });
 
   useEffect(() => {
+    // Only update if the schema has actually changed
     setLocalSettings({
       ...schema.settings,
 
@@ -67,6 +73,10 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
       rateLimit: {
         ...DEFAULT_RATE_LIMIT_SETTINGS,
         ...schema.settings.rateLimit,
+      },
+      duplicatePrevention: {
+        ...DEFAULT_DUPLICATE_PREVENTION_SETTINGS,
+        ...schema.settings.duplicatePrevention,
       },
       profanityFilter: {
         ...DEFAULT_PROFANITY_FILTER_SETTINGS,
@@ -103,6 +113,10 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
         ...localSettings.rateLimit,
         ...updates.rateLimit,
       },
+      duplicatePrevention: {
+        ...localSettings.duplicatePrevention,
+        ...updates.duplicatePrevention,
+      },
       profanityFilter: {
         ...localSettings.profanityFilter,
         ...updates.profanityFilter,
@@ -126,6 +140,18 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
       rateLimit: {
         ...localSettings.rateLimit,
         ...rateLimitUpdates,
+      },
+    });
+  };
+
+  const updateDuplicatePrevention = (
+    duplicatePreventionUpdates: Partial<NonNullable<LocalSettings['duplicatePrevention']>>
+  ) => {
+    setLocalSettings({
+      ...localSettings,
+      duplicatePrevention: {
+        ...localSettings.duplicatePrevention,
+        ...duplicatePreventionUpdates,
       },
     });
   };
@@ -202,9 +228,24 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
   const resetSettings = () => {
     setLocalSettings({
       ...schema.settings,
+      layout: {
+        maxWidth:
+          schema.settings.layout?.maxWidth || DEFAULT_FORM_DESIGN.maxWidth,
+        padding: schema.settings.layout?.padding || DEFAULT_FORM_DESIGN.padding,
+        spacing: schema.settings.layout?.spacing || 'normal',
+        alignment: schema.settings.layout?.alignment || 'left',
+        margin: schema.settings.layout?.margin || DEFAULT_FORM_DESIGN.margin,
+        borderRadius:
+          schema.settings.layout?.borderRadius ||
+          DEFAULT_FORM_DESIGN.borderRadius,
+      },
       rateLimit: {
         ...DEFAULT_RATE_LIMIT_SETTINGS,
         ...schema.settings.rateLimit,
+      },
+      duplicatePrevention: {
+        ...DEFAULT_DUPLICATE_PREVENTION_SETTINGS,
+        ...(schema.settings as any).duplicatePrevention,
       },
       profanityFilter: {
         ...DEFAULT_PROFANITY_FILTER_SETTINGS,
@@ -218,6 +259,11 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
         ...DEFAULT_PASSWORD_PROTECTION_SETTINGS,
         ...schema.settings.passwordProtection,
       },
+      notifications: {
+        ...DEFAULT_NOTIFICATION_SETTINGS,
+        ...schema.settings.notifications,
+        email: schema.settings.notifications?.email || userEmail || '',
+      },
     });
   };
 
@@ -225,6 +271,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
     localSettings,
     updateSettings,
     updateRateLimit,
+    updateDuplicatePrevention,
     updateProfanityFilter,
     updateResponseLimit,
     updatePasswordProtection,

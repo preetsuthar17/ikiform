@@ -6,8 +6,14 @@ import {
   DEFAULT_PROFANITY_FILTER_SETTINGS,
   DEFAULT_RATE_LIMIT_SETTINGS,
 } from '@/lib/forms/server';
+import {
+  checkDuplicateSubmission,
+  recordSubmission,
+  generateIdentifier,
+  extractEmailFromSubmissionData,
+  formatTimeRemaining,
+} from '@/lib/forms/duplicate-prevention';
 import { sendFormNotification } from '@/lib/services';
-import { requirePremium } from '@/lib/utils/premium-check';
 import { sanitizeString } from '@/lib/utils/sanitize';
 import { createProfanityFilter } from '@/lib/validation';
 import {
@@ -34,7 +40,7 @@ export async function POST(
   try {
     const { id: formId } = await params;
     const body = await request.json();
-    const { submissionData } = body;
+    const { submissionData, sessionId } = body;
 
     const headersList = await headers();
     const ipAddress =
@@ -94,6 +100,40 @@ export async function POST(
       }
     }
 
+    // Check for duplicate submissions
+    const duplicatePrevention = form.schema.settings.duplicatePrevention;
+    if (duplicatePrevention?.enabled) {
+      const email = extractEmailFromSubmissionData(submissionData);
+      const identifier = generateIdentifier(
+        duplicatePrevention.strategy || 'ip',
+        ipAddress,
+        email,
+        sessionId
+      );
+
+      const duplicateCheck = await checkDuplicateSubmission(
+        formId,
+        identifier,
+        duplicatePrevention
+      );
+
+      if (duplicateCheck.isDuplicate) {
+        const message = duplicateCheck.timeRemaining
+          ? `${duplicatePrevention.message} Please wait ${formatTimeRemaining(duplicateCheck.timeRemaining)} before submitting again.`
+          : duplicatePrevention.message;
+
+        return NextResponse.json(
+          {
+            error: 'Duplicate submission detected',
+            message,
+            timeRemaining: duplicateCheck.timeRemaining,
+            attemptsRemaining: duplicateCheck.attemptsRemaining,
+          },
+          { status: 409 }
+        );
+      }
+    }
+
     const profanityFilterSettings = {
       ...DEFAULT_PROFANITY_FILTER_SETTINGS,
       ...form.schema.settings.profanityFilter,
@@ -128,6 +168,20 @@ export async function POST(
       filteredSubmissionData,
       ipAddress
     );
+
+    if (duplicatePrevention?.enabled) {
+      const email = extractEmailFromSubmissionData(submissionData);
+      const identifier = generateIdentifier(
+        duplicatePrevention.strategy || 'ip',
+        ipAddress,
+        email,
+        sessionId
+      );
+      
+      recordSubmission(formId, identifier, duplicatePrevention).catch((e) =>
+        console.error('[Duplicate Prevention] Record submission error:', e)
+      );
+    }
 
     const [formatted] = await Promise.all([
       formatHumanFriendlyPayload(formId, filteredSubmissionData),

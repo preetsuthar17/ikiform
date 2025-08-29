@@ -89,7 +89,7 @@ export default function Header() {
           </span>
         </Link>
       </div>
-      <div className="hidden items-center space-x-8 md:flex">
+      <div className="hidden items-center gap-8 md:flex">
         <Link
           className="text-sm opacity-70 transition-opacity hover:opacity-100"
           href="/"
