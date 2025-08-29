@@ -30,6 +30,16 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
       ...DEFAULT_RATE_LIMIT_SETTINGS,
       ...schema.settings.rateLimit,
     },
+    duplicatePrevention: {
+      enabled: false,
+      strategy: 'combined', // Best strategy: combines IP, email, and session
+      mode: 'one-time', // Best mode: one-time submission
+      timeWindow: 1440,
+      message: 'You have already submitted this form. Each user can only submit once.',
+      allowOverride: false,
+      maxAttempts: 1,
+      ...(schema.settings as any).duplicatePrevention,
+    },
     profanityFilter: {
       ...DEFAULT_PROFANITY_FILTER_SETTINGS,
       ...schema.settings.profanityFilter,
@@ -68,6 +78,16 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
         ...DEFAULT_RATE_LIMIT_SETTINGS,
         ...schema.settings.rateLimit,
       },
+      duplicatePrevention: {
+        enabled: false,
+        strategy: 'combined', // Best strategy: combines IP, email, and session
+        mode: 'one-time', // Best mode: one-time submission
+        timeWindow: 1440,
+        message: 'You have already submitted this form. Each user can only submit once.',
+        allowOverride: false,
+        maxAttempts: 1,
+        ...(schema.settings as any).duplicatePrevention,
+      },
       profanityFilter: {
         ...DEFAULT_PROFANITY_FILTER_SETTINGS,
         ...schema.settings.profanityFilter,
@@ -103,6 +123,10 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
         ...localSettings.rateLimit,
         ...updates.rateLimit,
       },
+      duplicatePrevention: {
+        ...localSettings.duplicatePrevention,
+        ...updates.duplicatePrevention,
+      },
       profanityFilter: {
         ...localSettings.profanityFilter,
         ...updates.profanityFilter,
@@ -126,6 +150,18 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
       rateLimit: {
         ...localSettings.rateLimit,
         ...rateLimitUpdates,
+      },
+    });
+  };
+
+  const updateDuplicatePrevention = (
+    duplicatePreventionUpdates: Partial<NonNullable<LocalSettings['duplicatePrevention']>>
+  ) => {
+    setLocalSettings({
+      ...localSettings,
+      duplicatePrevention: {
+        ...localSettings.duplicatePrevention,
+        ...duplicatePreventionUpdates,
       },
     });
   };
@@ -225,6 +261,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
     localSettings,
     updateSettings,
     updateRateLimit,
+    updateDuplicatePrevention,
     updateProfanityFilter,
     updateResponseLimit,
     updatePasswordProtection,

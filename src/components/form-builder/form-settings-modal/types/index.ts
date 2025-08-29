@@ -78,6 +78,15 @@ export interface LocalSettings {
     blockDuration?: number;
     message?: string;
   };
+  duplicatePrevention?: {
+    enabled?: boolean;
+    strategy?: 'ip' | 'email' | 'session' | 'combined';
+    mode?: 'time-based' | 'one-time';
+    timeWindow?: number;
+    message?: string;
+    allowOverride?: boolean;
+    maxAttempts?: number;
+  };
   profanityFilter?: {
     enabled?: boolean;
     strictMode?: boolean;
@@ -122,6 +131,13 @@ export interface RateLimitSectionProps {
   localSettings: LocalSettings;
   updateRateLimit: (
     updates: Partial<NonNullable<LocalSettings['rateLimit']>>
+  ) => void;
+}
+
+export interface DuplicatePreventionSectionProps {
+  localSettings: LocalSettings;
+  updateDuplicatePrevention: (
+    updates: Partial<NonNullable<LocalSettings['duplicatePrevention']>>
   ) => void;
 }
 

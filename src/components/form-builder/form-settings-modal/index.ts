@@ -15,6 +15,7 @@ export {
   BasicInfoSection,
   BrandingSection,
   DesignSection,
+  DuplicatePreventionSection,
   NotificationsSection,
   PasswordProtectionSection,
   ProfanityFilterSection,

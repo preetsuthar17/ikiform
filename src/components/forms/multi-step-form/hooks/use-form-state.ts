@@ -62,6 +62,11 @@ export const useFormState = (
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [isLoadingProgress, setIsLoadingProgress] = useState(true);
+  const [duplicateError, setDuplicateError] = useState<{
+    message: string;
+    timeRemaining?: number;
+    attemptsRemaining?: number;
+  } | null>(null);
   const initializedFieldsRef = useRef<Set<string>>(new Set());
 
   const totalSteps = blocks.length;
@@ -330,6 +335,7 @@ export const useFormState = (
     }
 
     setSubmitting(true);
+    setDuplicateError(null);
 
     try {
       const result = await submitForm(formId, formData);
@@ -345,10 +351,28 @@ export const useFormState = (
           }, 2000);
         }
       } else {
-        toast.error(result.message || 'Failed to submit form');
+        // Check if it's a duplicate submission error
+        if (result.error === 'Duplicate submission detected') {
+          setDuplicateError({
+            message: result.message || 'You have already submitted this form.',
+            timeRemaining: result.timeRemaining,
+            attemptsRemaining: result.attemptsRemaining,
+          });
+        } else {
+          toast.error(result.message || 'Failed to submit form');
+        }
       }
-    } catch {
-      toast.error('Failed to submit form. Please try again.');
+    } catch (error: any) {
+      // Check if it's a duplicate submission error
+      if (error?.error === 'Duplicate submission detected') {
+        setDuplicateError({
+          message: error.message || 'You have already submitted this form.',
+          timeRemaining: error.timeRemaining,
+          attemptsRemaining: error.attemptsRemaining,
+        });
+      } else {
+        toast.error('Failed to submit form. Please try again.');
+      }
     } finally {
       setSubmitting(false);
     }
@@ -360,6 +384,7 @@ export const useFormState = (
     errors,
     submitting,
     submitted,
+    duplicateError,
     progress,
     progressLoading,
     progressSaving,

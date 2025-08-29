@@ -6,6 +6,7 @@ import { Separator } from '@/components/ui';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SocialMediaIcons } from '@/components/ui/social-media-icons';
+import { DuplicateSubmissionError } from './duplicate-submission-error';
 import { useFormStyling } from '@/hooks/use-form-styling';
 import type { FormField, FormSchema } from '@/lib/database';
 import { getPublicFormTitle } from '@/lib/utils/form-utils';
@@ -21,6 +22,11 @@ interface SingleStepFormContentProps {
   onSubmit: (e: React.FormEvent) => Promise<void>;
   fieldVisibility?: Record<string, { visible: boolean; disabled: boolean }>;
   logicMessages?: string[];
+  duplicateError?: {
+    message: string;
+    timeRemaining?: number;
+    attemptsRemaining?: number;
+  } | null;
 }
 
 export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
@@ -34,6 +40,7 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
   onSubmit,
   fieldVisibility,
   logicMessages,
+  duplicateError,
 }) => {
   const firstFieldRef = useRef<any>(null);
   const { customStyles, getFieldStyles, getButtonStyles } =
@@ -92,6 +99,17 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
       </div>
 
       <form className="flex flex-col gap-6" onSubmit={onSubmit}>
+        {duplicateError && (
+          <DuplicateSubmissionError
+            message={duplicateError.message}
+            timeRemaining={duplicateError.timeRemaining}
+            attemptsRemaining={duplicateError.attemptsRemaining}
+            onRetry={() => {
+              // Clear the error and allow retry
+              window.location.reload();
+            }}
+          />
+        )}
         {visibleFields.map((field, idx) => (
           <div
             key={field.id}

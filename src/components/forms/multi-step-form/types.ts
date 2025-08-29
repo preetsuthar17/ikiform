@@ -12,6 +12,11 @@ export interface FormState {
   errors: Record<string, string>;
   submitting: boolean;
   submitted: boolean;
+  duplicateError: {
+    message: string;
+    timeRemaining?: number;
+    attemptsRemaining?: number;
+  } | null;
 
   progress: FormProgress | null;
   progressLoading: boolean;
