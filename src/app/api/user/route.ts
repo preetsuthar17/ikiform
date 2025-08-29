@@ -29,9 +29,11 @@ function setCachedUser(email: string, data: any) {
   }
 }
 
-export async function POST(_request: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
     const supabase = await createClient();
+    const body = await request.json().catch(() => ({}));
+    const { ensureOnly } = body;
 
     const {
       data: { user },
@@ -65,6 +67,13 @@ export async function POST(_request: NextRequest) {
       });
     }
 
+    // Check if user already exists in database
+    const { data: existingUser } = await supabase
+      .from('users')
+      .select('has_premium, polar_customer_id')
+      .eq('email', sanitizedEmail)
+      .single();
+
     const { data: upsertedUser, error: upsertError } = await supabase
       .from('users')
       .upsert(
@@ -72,8 +81,8 @@ export async function POST(_request: NextRequest) {
           uid,
           email: sanitizedEmail,
           name,
-          has_premium: false,
-          polar_customer_id: null,
+          has_premium: existingUser?.has_premium ?? false,
+          polar_customer_id: existingUser?.polar_customer_id ?? null,
         },
         {
           onConflict: 'email',

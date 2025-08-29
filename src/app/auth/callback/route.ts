@@ -53,6 +53,8 @@ export async function GET(request: NextRequest) {
               uid,
               name,
               email,
+              has_premium: existingUser.has_premium,
+              polar_customer_id: existingUser.polar_customer_id,
             };
           }
 

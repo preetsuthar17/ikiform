@@ -318,7 +318,7 @@ export default function LoginForm() {
                   <label
                     className={`linear pointer-events-none absolute left-4 select-none transition-all duration-300 ${
                       isFieldActive('email')
-                        ? '-top-3.5 bg-linear-to-t from-card to-background px-2 text-primary text-sm'
+                        ? '-top-3.5 bg-card px-2 text-primary text-sm'
                         : 'top-3.5 left-6 text-sm opacity-30'
                     } ${focusedFields.email && !isFieldActive('email') ? 'text-primary' : ''}`}
                     htmlFor="email"
@@ -353,7 +353,7 @@ export default function LoginForm() {
                   <label
                     className={`linear pointer-events-none absolute left-4 select-none transition-all duration-300 ${
                       isFieldActive('name')
-                        ? '-top-3.5 bg-linear-to-t from-card to-background px-2 text-primary text-sm'
+                        ? '-top-3.5 bg-card px-2 text-primary text-sm'
                         : 'top-3.5 left-6 text-sm opacity-30'
                     } ${focusedFields.name && !isFieldActive('name') ? 'text-primary' : ''}`}
                     htmlFor="name"
@@ -390,7 +390,7 @@ export default function LoginForm() {
                   <label
                     className={`linear pointer-events-none absolute left-4 select-none transition-all duration-300 ${
                       isFieldActive('password')
-                        ? '-top-3.5 bg-linear-to-t from-card to-background px-2 text-primary text-sm'
+                        ? '-top-3.5 bg-card px-2 text-primary text-sm'
                         : 'top-3.5 left-6 text-sm opacity-30'
                     } ${focusedFields.password && !isFieldActive('password') ? 'text-primary' : ''}`}
                     htmlFor="password"
