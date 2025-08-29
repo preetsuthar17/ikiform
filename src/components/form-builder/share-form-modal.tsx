@@ -119,7 +119,9 @@ export function ShareFormModal({
       const { toast } = await import('@/hooks/use-toast');
       toast.error('Failed to copy link. Please copy manually.');
     } finally {
-      setCopying(false);
+      setTimeout(() => {
+        setCopying(false);
+      }, 2000);
     }
   };
 
@@ -228,7 +230,7 @@ export function ShareFormModal({
               )}
               <div className="flex w-full flex-col gap-4">
                 <div className="flex w-full flex-col gap-2">
-                  <div className="flex w-full flex-col flex-col gap-2 md:flex-row">
+                  <div className="flex w-full flex-col gap-2 md:flex-row">
                     <Input
                       className="w-full rounded-full font-mono text-sm"
                       id="share-url"
@@ -239,11 +241,17 @@ export function ShareFormModal({
                     <Button
                       className="w-full min-w-fit shrink-0 gap-2 rounded-full md:w-fit"
                       disabled={copying}
-                      onClick={handleCopyLink}
+                      onClick={() => {
+                        handleCopyLink();
+
+                      }}
                       size="xl"
                     >
                       {copying ? (
-                        <Check className="h-4 w-4" />
+                        <>
+                          <Check className="h-4 w-4" />
+                          <span className="text-sm">Copied</span>
+                        </>
                       ) : (
                         <>
                           <Copy className="h-4 w-4" />

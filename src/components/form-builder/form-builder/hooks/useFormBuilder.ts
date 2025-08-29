@@ -208,7 +208,8 @@ export const useFormBuilder = (formId?: string) => {
         return;
       }
 
-      actions.setFormSchema(form.schema);
+      const normalizedSchema = ensureDefaultRateLimitSettings(form.schema);
+      actions.setFormSchema(normalizedSchema);
       actions.setIsPublished(form.is_published);
       actions.setFormSlug(form.slug || null);
       lastSavedSchemaRef.current = {

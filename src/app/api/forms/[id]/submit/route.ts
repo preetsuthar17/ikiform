@@ -40,7 +40,7 @@ export async function POST(
   try {
     const { id: formId } = await params;
     const body = await request.json();
-    const { submissionData } = body;
+    const { submissionData, sessionId } = body;
 
     const headersList = await headers();
     const ipAddress =
@@ -107,7 +107,8 @@ export async function POST(
       const identifier = generateIdentifier(
         duplicatePrevention.strategy || 'ip',
         ipAddress,
-        email
+        email,
+        sessionId
       );
 
       const duplicateCheck = await checkDuplicateSubmission(
@@ -168,13 +169,13 @@ export async function POST(
       ipAddress
     );
 
-    // Record submission for duplicate prevention
     if (duplicatePrevention?.enabled) {
       const email = extractEmailFromSubmissionData(submissionData);
       const identifier = generateIdentifier(
         duplicatePrevention.strategy || 'ip',
         ipAddress,
-        email
+        email,
+        sessionId
       );
       
       recordSubmission(formId, identifier, duplicatePrevention).catch((e) =>

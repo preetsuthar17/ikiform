@@ -17,42 +17,33 @@ export function DuplicateSubmissionError({
   onRetry,
 }: DuplicateSubmissionErrorProps) {
   return (
-    <Alert variant="destructive" className="mb-4">
-      <AlertCircle className="h-4 w-4" />
-      <p className="flex flex-col gap-3">
-        <p>Duplicate Submission Detected</p>
-        <p>{message}</p>
-        
-
-        {timeRemaining && timeRemaining > 0 && (
-          <div className="flex items-center gap-2 text-sm">
-            <Clock className="h-4 w-4" />
-            <span>
-              Time remaining: {formatTimeRemaining(timeRemaining)}
-            </span>
+    <Alert variant="destructive" className="flex items-start gap-4 bg-red-100/40">
+      <div className="flex flex-col gap-2 w-full">
+        <span className="font-semibold text-base flex items-center gap-2">  <AlertCircle className="h-5 w-5 text-destructive" aria-hidden /> You’ve already submitted this form</span>
+        <span className="text-sm text-destructive">{message}</span>
+        {(!!timeRemaining && timeRemaining > 0) && (
+          <div className="flex items-center gap-1 text-xs text-muted-foreground">
+            <Clock className="h-4 w-4" aria-hidden />
+            <span>Wait {formatTimeRemaining(timeRemaining)} to try again</span>
           </div>
         )}
-        
-        {attemptsRemaining !== undefined && attemptsRemaining > 0 && (
-          <div className="flex items-center gap-2 text-sm">
-            <RefreshCw className="h-4 w-4" />
-            <span>
-              Attempts remaining: {attemptsRemaining}
-            </span>
+        {(attemptsRemaining !== undefined && attemptsRemaining > 0) && (
+          <div className="flex items-center gap-1 text-xs text-muted-foreground">
+            <RefreshCw className="h-4 w-4" aria-hidden />
+            <span>{attemptsRemaining} more attempt{attemptsRemaining > 1 ? 's' : ''} allowed</span>
           </div>
         )}
-        
         {onRetry && (
           <Button
-            variant="outline"
+            variant="secondary"
             size="sm"
             onClick={onRetry}
-            className="mt-2"
+            className="w-fit"
           >
             Try Again
           </Button>
         )}
-      </p>
+      </div>
     </Alert>
   );
 }

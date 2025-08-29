@@ -1,6 +1,12 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { formsDbServer } from '@/lib/database';
 import { createAdminClient } from '@/utils/supabase/admin';
+import {
+  checkDuplicateSubmission,
+  recordSubmission,
+  generateIdentifier,
+  extractEmailFromSubmissionData,
+} from '@/lib/forms/duplicate-prevention';
 
 export async function POST(
   req: NextRequest,
@@ -79,10 +85,78 @@ export async function POST(
       JSON.stringify(mapped, null, 2)
     );
 
+    const form = await formsDbServer.getPublicForm(mapping.target_form_id);
+    if (!form) {
+      console.error(
+        `[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Form not found: ${mapping.target_form_id}`
+      );
+      return NextResponse.json(
+        { error: 'Target form not found' },
+        { status: 404 }
+      );
+    }
+
+    const duplicatePrevention = form.schema.settings.duplicatePrevention;
+    if (duplicatePrevention?.enabled) {
+      const ipAddress = req.headers.get('x-forwarded-for')?.split(',')[0] ||
+        req.headers.get('x-real-ip') ||
+        'webhook';
+      const email = extractEmailFromSubmissionData(mapped);
+      const sessionId = `webhook_${mappingId}_${Date.now()}`;
+      
+      const identifier = generateIdentifier(
+        duplicatePrevention.strategy || 'ip',
+        ipAddress,
+        email,
+        sessionId
+      );
+
+      const duplicateCheck = await checkDuplicateSubmission(
+        mapping.target_form_id,
+        identifier,
+        duplicatePrevention
+      );
+
+      if (duplicateCheck.isDuplicate) {
+        console.error(
+          `[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Duplicate submission detected`
+        );
+        return NextResponse.json(
+          {
+            error: 'Duplicate submission detected',
+            message: duplicatePrevention.message,
+            timeRemaining: duplicateCheck.timeRemaining,
+            attemptsRemaining: duplicateCheck.attemptsRemaining,
+          },
+          { status: 409 }
+        );
+      }
+    }
+
     const result = await formsDbServer.submitForm(
       mapping.target_form_id,
       mapped
     );
+
+    // Record submission for duplicate prevention
+    if (duplicatePrevention?.enabled) {
+      const ipAddress = req.headers.get('x-forwarded-for')?.split(',')[0] ||
+        req.headers.get('x-real-ip') ||
+        'webhook';
+      const email = extractEmailFromSubmissionData(mapped);
+      const sessionId = `webhook_${mappingId}_${Date.now()}`;
+      
+      const identifier = generateIdentifier(
+        duplicatePrevention.strategy || 'ip',
+        ipAddress,
+        email,
+        sessionId
+      );
+      
+      recordSubmission(mapping.target_form_id, identifier, duplicatePrevention).catch((e) =>
+        console.error('[Webhook Duplicate Prevention] Record submission error:', e)
+      );
+    }
 
     const duration = Date.now() - startTime;
     console.log(

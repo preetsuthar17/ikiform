@@ -59,12 +59,20 @@ export function FormSettingsModal({
     }
     setSaving(true);
     try {
-      const newSchema = { ...schema, settings: localSettings };
+      const newSchema = { 
+        ...schema, 
+        settings: {
+          ...schema.settings,
+          ...localSettings,
+          duplicatePrevention: localSettings.duplicatePrevention,
+        }
+      };
       await formsDb.updateForm(formId, { schema: newSchema as any });
       onSchemaUpdate({ settings: localSettings as any });
       toast.success('Settings saved!');
       onClose();
     } catch (e) {
+      console.error('Save error:', e);
       toast.error('Failed to save settings.');
     } finally {
       setSaving(false);

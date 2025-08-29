@@ -100,6 +100,6 @@
     "supabase": "^2.34.3",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "ultracite": "5.2.4"
+    "ultracite": "5.2.9"
   }
 }

@@ -7,6 +7,7 @@ import {
   DEFAULT_PROFANITY_FILTER_SETTINGS,
   DEFAULT_RATE_LIMIT_SETTINGS,
   DEFAULT_RESPONSE_LIMIT_SETTINGS,
+  DEFAULT_DUPLICATE_PREVENTION_SETTINGS,
 } from '@/lib/forms';
 import { DEFAULT_FORM_DESIGN } from '../constants';
 import type { LocalSettings } from '../types';
@@ -31,13 +32,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
       ...schema.settings.rateLimit,
     },
     duplicatePrevention: {
-      enabled: false,
-      strategy: 'combined', // Best strategy: combines IP, email, and session
-      mode: 'one-time', // Best mode: one-time submission
-      timeWindow: 1440,
-      message: 'You have already submitted this form. Each user can only submit once.',
-      allowOverride: false,
-      maxAttempts: 1,
+      ...DEFAULT_DUPLICATE_PREVENTION_SETTINGS,
       ...(schema.settings as any).duplicatePrevention,
     },
     profanityFilter: {
@@ -60,6 +55,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
   });
 
   useEffect(() => {
+    // Only update if the schema has actually changed
     setLocalSettings({
       ...schema.settings,
 
@@ -79,14 +75,8 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
         ...schema.settings.rateLimit,
       },
       duplicatePrevention: {
-        enabled: false,
-        strategy: 'combined', // Best strategy: combines IP, email, and session
-        mode: 'one-time', // Best mode: one-time submission
-        timeWindow: 1440,
-        message: 'You have already submitted this form. Each user can only submit once.',
-        allowOverride: false,
-        maxAttempts: 1,
-        ...(schema.settings as any).duplicatePrevention,
+        ...DEFAULT_DUPLICATE_PREVENTION_SETTINGS,
+        ...schema.settings.duplicatePrevention,
       },
       profanityFilter: {
         ...DEFAULT_PROFANITY_FILTER_SETTINGS,
@@ -238,9 +228,24 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
   const resetSettings = () => {
     setLocalSettings({
       ...schema.settings,
+      layout: {
+        maxWidth:
+          schema.settings.layout?.maxWidth || DEFAULT_FORM_DESIGN.maxWidth,
+        padding: schema.settings.layout?.padding || DEFAULT_FORM_DESIGN.padding,
+        spacing: schema.settings.layout?.spacing || 'normal',
+        alignment: schema.settings.layout?.alignment || 'left',
+        margin: schema.settings.layout?.margin || DEFAULT_FORM_DESIGN.margin,
+        borderRadius:
+          schema.settings.layout?.borderRadius ||
+          DEFAULT_FORM_DESIGN.borderRadius,
+      },
       rateLimit: {
         ...DEFAULT_RATE_LIMIT_SETTINGS,
         ...schema.settings.rateLimit,
+      },
+      duplicatePrevention: {
+        ...DEFAULT_DUPLICATE_PREVENTION_SETTINGS,
+        ...(schema.settings as any).duplicatePrevention,
       },
       profanityFilter: {
         ...DEFAULT_PROFANITY_FILTER_SETTINGS,
@@ -253,6 +258,11 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
       passwordProtection: {
         ...DEFAULT_PASSWORD_PROTECTION_SETTINGS,
         ...schema.settings.passwordProtection,
+      },
+      notifications: {
+        ...DEFAULT_NOTIFICATION_SETTINGS,
+        ...schema.settings.notifications,
+        email: schema.settings.notifications?.email || userEmail || '',
       },
     });
   };

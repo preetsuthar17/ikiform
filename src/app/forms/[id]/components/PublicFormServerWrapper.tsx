@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import { ensureDefaultRateLimitSettings } from '@/lib/forms/form-defaults';
 import PublicFormClient from '../PublicFormClient';
 import { FormSkeleton } from './FormSkeletons';
 
@@ -11,7 +12,8 @@ export default function PublicFormServerWrapper({
   formId,
   schema,
 }: PublicFormServerWrapperProps) {
-  const isMultiStep = schema.settings?.multiStep || schema.blocks?.length > 1;
+  const normalizedSchema = ensureDefaultRateLimitSettings(schema);
+  const isMultiStep = normalizedSchema.settings?.multiStep || normalizedSchema.blocks?.length > 1;
 
   return (
     <Suspense
@@ -22,7 +24,7 @@ export default function PublicFormServerWrapper({
         />
       }
     >
-      <PublicFormClient formId={formId} schema={schema} />
+      <PublicFormClient formId={formId} schema={normalizedSchema} />
     </Suspense>
   );
 }
