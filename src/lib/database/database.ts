@@ -810,10 +810,16 @@ export const formsDbServer = {
     uid: string,
     email: string,
     name: string,
-    has_premium = false,
-    polar_customer_id: string | null = null
+    has_premium?: boolean,
+    polar_customer_id?: string | null
   ) {
     const supabase = await createServerClient();
+
+    const { data: existingUser } = await supabase
+      .from('users')
+      .select('has_premium, polar_customer_id')
+      .eq('email', email)
+      .single();
 
     const { data, error } = await supabase
       .from('users')
@@ -822,8 +828,8 @@ export const formsDbServer = {
           uid,
           name,
           email,
-          has_premium,
-          polar_customer_id,
+          has_premium: has_premium ?? existingUser?.has_premium ?? false,
+          polar_customer_id: polar_customer_id ?? existingUser?.polar_customer_id ?? null,
         },
         {
           onConflict: 'email',

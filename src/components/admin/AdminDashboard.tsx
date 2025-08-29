@@ -54,7 +54,6 @@ export function AdminDashboard() {
             className="gap-2"
             disabled={loading}
             onClick={clearCache}
-            size="sm"
             variant="outline"
           >
             <Trash2 className="h-4 w-4" />
