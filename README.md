@@ -84,4 +84,4 @@ cp .env.example .env.local
 - Use clean and clear code for maintainability.
 - Follow the existing code style and structure.
 
-Feel free to open issues or pull requests for improvements or bug fixes.
+Feel free to open issues or pull requests for improvements or bug fixes. <3
