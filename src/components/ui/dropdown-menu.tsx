@@ -203,7 +203,7 @@ const DropdownMenuItem = React.forwardRef<
         className="flex w-full items-center gap-2 text-sm"
         transition={{ duration: 0.1 }}
       >
-        <span className="flex items-center text-sm gap-2 cursor-pointer">
+        <span className="flex cursor-pointer items-center gap-2 text-sm">
           {Icon && <Icon className="shrink-0" size={16} />} {children}{" "}
           {shortcut && (
             <Kbd

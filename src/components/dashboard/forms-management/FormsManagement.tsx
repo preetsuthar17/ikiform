@@ -64,8 +64,8 @@ export function FormsManagement({ className }: FormsManagementProps) {
         <FormsGrid
           forms={forms}
           onDelete={deleteForm}
-          onEdit={editForm}
           onDuplicate={duplicateForm}
+          onEdit={editForm}
           onShare={shareForm}
           onViewAnalytics={viewAnalytics}
           onViewForm={viewForm}

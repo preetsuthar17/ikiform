@@ -1,4 +1,13 @@
-import { BarChart3, Code2, Copy, Edit, Eye, MoreHorizontal, Share, Trash2 } from "lucide-react";
+import {
+  BarChart3,
+  Code2,
+  Copy,
+  Edit,
+  Eye,
+  MoreHorizontal,
+  Share,
+  Trash2,
+} from "lucide-react";
 import React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -44,7 +53,11 @@ export function FormActions({
                 <span className="sr-only">Edit form</span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent className="font-medium text-xs" side="top" sideOffset={8}>
+            <TooltipContent
+              className="font-medium text-xs"
+              side="top"
+              sideOffset={8}
+            >
               Edit form
             </TooltipContent>
           </Tooltip>
@@ -61,7 +74,11 @@ export function FormActions({
                 <span className="sr-only">Share form</span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent className="font-medium text-xs" side="top" sideOffset={8}>
+            <TooltipContent
+              className="font-medium text-xs"
+              side="top"
+              sideOffset={8}
+            >
               Share form
             </TooltipContent>
           </Tooltip>
@@ -80,22 +97,44 @@ export function FormActions({
                   </Button>
                 </DropdownMenuTrigger>
               </TooltipTrigger>
-              <TooltipContent className="font-medium text-xs" side="top" sideOffset={8}>
+              <TooltipContent
+                className="font-medium text-xs"
+                side="top"
+                sideOffset={8}
+              >
                 More actions
               </TooltipContent>
             </Tooltip>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem className="flex gap-1" icon={Copy} onClick={() => onDuplicate(form.id)}>
+              <DropdownMenuItem
+                className="flex gap-1"
+                icon={Copy}
+                onClick={() => onDuplicate(form.id)}
+              >
                 Duplicate
               </DropdownMenuItem>
-              <DropdownMenuItem className="flex gap-1" icon={Eye} onClick={() => onViewForm(form)}>
+              <DropdownMenuItem
+                className="flex gap-1"
+                icon={Eye}
+                onClick={() => onViewForm(form)}
+              >
                 View form
               </DropdownMenuItem>
-              <DropdownMenuItem className="flex gap-1" icon={BarChart3} onClick={() => onViewAnalytics(form.id)}>
+              <DropdownMenuItem
+                className="flex gap-1"
+                icon={BarChart3}
+                onClick={() => onViewAnalytics(form.id)}
+              >
                 View analytics
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="flex gap-1" icon={Code2} onClick={() => window.open(`/embed?formid=${form.id}`, "_blank")}>
+              <DropdownMenuItem
+                className="flex gap-1"
+                icon={Code2}
+                onClick={() =>
+                  window.open(`/embed?formid=${form.id}`, "_blank")
+                }
+              >
                 Embed
               </DropdownMenuItem>
             </DropdownMenuContent>

@@ -63,8 +63,8 @@ export function FormCard({
       <FormActions
         form={form}
         onDelete={onDelete}
-        onEdit={onEdit}
         onDuplicate={onDuplicate}
+        onEdit={onEdit}
         onShare={handleShare}
         onViewAnalytics={onViewAnalytics}
         onViewForm={onViewForm}

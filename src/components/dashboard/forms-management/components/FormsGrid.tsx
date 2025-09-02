@@ -30,8 +30,8 @@ export function FormsGrid({
           form={form}
           key={form.id}
           onDelete={onDelete}
-          onEdit={onEdit}
           onDuplicate={onDuplicate}
+          onEdit={onEdit}
           onShare={onShare}
           onViewAnalytics={onViewAnalytics}
           onViewForm={onViewForm}

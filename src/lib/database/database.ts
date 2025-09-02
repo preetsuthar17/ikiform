@@ -62,7 +62,11 @@ export const formsDb = {
   async duplicateForm(formId: string) {
     const original = await this.getForm(formId);
     const title = `${original.title || original.schema?.settings?.title || "Untitled Form"} (Copy)`;
-    const duplicated = await this.createForm(original.user_id, title, original.schema);
+    const duplicated = await this.createForm(
+      original.user_id,
+      title,
+      original.schema
+    );
     return duplicated;
   },
 
