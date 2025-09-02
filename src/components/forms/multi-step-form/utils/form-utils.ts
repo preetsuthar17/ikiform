@@ -25,14 +25,13 @@ export const calculateProgress = (
 export const submitForm = async (
   formId: string,
   formData: Record<string, any>
-): Promise<{ 
-  success: boolean; 
+): Promise<{
+  success: boolean;
   message?: string;
   error?: string;
   timeRemaining?: number;
   attemptsRemaining?: number;
 }> => {
-  
   let sessionId: string | undefined;
   try {
     if (typeof window !== 'undefined') {
@@ -44,7 +43,6 @@ export const submitForm = async (
         localStorage.setItem(sessionKey, sessionId);
       }
     }
-    
 
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
@@ -58,9 +56,9 @@ export const submitForm = async (
     const response = await fetch(`/api/forms/${formId}/submit`, {
       method: 'POST',
       headers,
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         submissionData: formData,
-        sessionId 
+        sessionId,
       }),
     });
 

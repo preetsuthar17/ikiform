@@ -829,7 +829,8 @@ export const formsDbServer = {
           name,
           email,
           has_premium: has_premium ?? existingUser?.has_premium ?? false,
-          polar_customer_id: polar_customer_id ?? existingUser?.polar_customer_id ?? null,
+          polar_customer_id:
+            polar_customer_id ?? existingUser?.polar_customer_id ?? null,
         },
         {
           onConflict: 'email',

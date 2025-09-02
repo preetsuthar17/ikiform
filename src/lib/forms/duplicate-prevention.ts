@@ -48,7 +48,8 @@ const DEFAULT_SETTINGS: DuplicatePreventionSettings = {
   strategy: 'combined', // Best strategy: combines IP, email, and session
   mode: 'one-time', // Best mode: one-time submission
   timeWindow: 1440,
-  message: 'You have already submitted this form. Each user can only submit once.',
+  message:
+    'You have already submitted this form. Each user can only submit once.',
   allowOverride: false,
   maxAttempts: 1,
 };
@@ -75,7 +76,7 @@ export async function checkDuplicateSubmission(
   try {
     // Check if submission exists
     const existingSubmission = await redis.get(key);
-    
+
     if (existingSubmission) {
       if (settings.mode === 'one-time') {
         // One-time mode: never allow resubmission
@@ -83,27 +84,33 @@ export async function checkDuplicateSubmission(
           isDuplicate: true,
           message: settings.message,
         };
-      } else {
-        // Time-based mode: check time window
-        const submissionData = existingSubmission as { timestamp: number; attempts: number };
-        const timeWindowSeconds = settings.timeWindow * 60;
-        const timeElapsed = Math.floor((Date.now() - submissionData.timestamp) / 1000);
-        const timeRemaining = timeWindowSeconds - timeElapsed;
-
-        if (timeRemaining > 0) {
-          const attemptsRemaining = Math.max(0, (settings.maxAttempts || 1) - submissionData.attempts);
-          
-          return {
-            isDuplicate: true,
-            message: settings.message,
-            timeRemaining,
-            attemptsRemaining,
-          };
-        } else {
-          // Time window expired, remove the key
-          await redis.del(key);
-        }
       }
+      // Time-based mode: check time window
+      const submissionData = existingSubmission as {
+        timestamp: number;
+        attempts: number;
+      };
+      const timeWindowSeconds = settings.timeWindow * 60;
+      const timeElapsed = Math.floor(
+        (Date.now() - submissionData.timestamp) / 1000
+      );
+      const timeRemaining = timeWindowSeconds - timeElapsed;
+
+      if (timeRemaining > 0) {
+        const attemptsRemaining = Math.max(
+          0,
+          (settings.maxAttempts || 1) - submissionData.attempts
+        );
+
+        return {
+          isDuplicate: true,
+          message: settings.message,
+          timeRemaining,
+          attemptsRemaining,
+        };
+      }
+      // Time window expired, remove the key
+      await redis.del(key);
     }
 
     return {
@@ -138,37 +145,37 @@ export async function recordSubmission(
 
   try {
     const existingSubmission = await redis.get(key);
-    
+
     if (existingSubmission) {
       if (settings.mode === 'one-time') {
         // One-time mode: keep the existing record forever
         return;
-      } else {
-        // Time-based mode: update attempts
-        const submissionData = existingSubmission as { timestamp: number; attempts: number };
-        const timeWindowSeconds = settings.timeWindow * 60;
-        const newAttempts = submissionData.attempts + 1;
-        
-        await redis.setex(key, timeWindowSeconds, {
-          timestamp: submissionData.timestamp,
-          attempts: newAttempts,
-        });
       }
+      // Time-based mode: update attempts
+      const submissionData = existingSubmission as {
+        timestamp: number;
+        attempts: number;
+      };
+      const timeWindowSeconds = settings.timeWindow * 60;
+      const newAttempts = submissionData.attempts + 1;
+
+      await redis.setex(key, timeWindowSeconds, {
+        timestamp: submissionData.timestamp,
+        attempts: newAttempts,
+      });
+    } else if (settings.mode === 'one-time') {
+      // One-time mode: store forever (no expiration)
+      await redis.set(key, {
+        timestamp: Date.now(),
+        attempts: 1,
+      });
     } else {
-      if (settings.mode === 'one-time') {
-        // One-time mode: store forever (no expiration)
-        await redis.set(key, {
-          timestamp: Date.now(),
-          attempts: 1,
-        });
-      } else {
-        // Time-based mode: store with expiration
-        const timeWindowSeconds = settings.timeWindow * 60;
-        await redis.setex(key, timeWindowSeconds, {
-          timestamp: Date.now(),
-          attempts: 1,
-        });
-      }
+      // Time-based mode: store with expiration
+      const timeWindowSeconds = settings.timeWindow * 60;
+      await redis.setex(key, timeWindowSeconds, {
+        timestamp: Date.now(),
+        attempts: 1,
+      });
     }
   } catch (error) {
     console.error('Error recording submission:', error);
@@ -188,20 +195,29 @@ export function generateIdentifier(
       return email ? `email:${email.toLowerCase()}` : `ip:${ipAddress}`;
     case 'session':
       return sessionId ? `session:${sessionId}` : `ip:${ipAddress}`;
-    case 'combined':
+    case 'combined': {
       const parts = [`ip:${ipAddress}`];
       if (email) parts.push(`email:${email.toLowerCase()}`);
       if (sessionId) parts.push(`session:${sessionId}`);
       return parts.join('|');
+    }
     default:
       return `ip:${ipAddress}`;
   }
 }
 
-export function extractEmailFromSubmissionData(submissionData: Record<string, any>): string | undefined {
+export function extractEmailFromSubmissionData(
+  submissionData: Record<string, any>
+): string | undefined {
   // Look for common email field names
-  const emailFields = ['email', 'e-mail', 'mail', 'user_email', 'contact_email'];
-  
+  const emailFields = [
+    'email',
+    'e-mail',
+    'mail',
+    'user_email',
+    'contact_email',
+  ];
+
   for (const field of emailFields) {
     if (submissionData[field] && typeof submissionData[field] === 'string') {
       const email = submissionData[field].trim().toLowerCase();
@@ -211,23 +227,24 @@ export function extractEmailFromSubmissionData(submissionData: Record<string, an
       }
     }
   }
-  
-  return undefined;
+
+  return;
 }
 
 export function formatTimeRemaining(seconds: number): string {
   if (seconds < 60) {
     return `${seconds} seconds`;
-  } else if (seconds < 3600) {
+  }
+  if (seconds < 3600) {
     const minutes = Math.ceil(seconds / 60);
     return `${minutes} minute${minutes > 1 ? 's' : ''}`;
-  } else if (seconds < 86400) {
+  }
+  if (seconds < 86_400) {
     const hours = Math.ceil(seconds / 3600);
     return `${hours} hour${hours > 1 ? 's' : ''}`;
-  } else {
-    const days = Math.ceil(seconds / 86400);
-    return `${days} day${days > 1 ? 's' : ''}`;
   }
+  const days = Math.ceil(seconds / 86_400);
+  return `${days} day${days > 1 ? 's' : ''}`;
 }
 
 export type { DuplicatePreventionSettings, DuplicateCheckResult };

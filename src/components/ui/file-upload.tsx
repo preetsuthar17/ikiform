@@ -418,7 +418,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                           </div>
 
                           {}
-                          <div className="flex min-w-0 flex-1 flex-col gap-1 w-full">
+                          <div className="flex w-full min-w-0 flex-1 flex-col gap-1">
                             <div className="flex items-center justify-between gap-2">
                               <p className="truncate font-medium text-foreground text-sm">
                                 {file.name}

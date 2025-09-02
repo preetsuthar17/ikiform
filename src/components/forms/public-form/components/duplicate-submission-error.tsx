@@ -17,28 +17,38 @@ export function DuplicateSubmissionError({
   onRetry,
 }: DuplicateSubmissionErrorProps) {
   return (
-    <Alert variant="destructive" className="flex items-start gap-4 bg-red-100/40">
-      <div className="flex flex-col gap-2 w-full">
-        <span className="font-semibold text-base flex items-center gap-2">  <AlertCircle className="h-5 w-5 text-destructive" aria-hidden /> You’ve already submitted this form</span>
-        <span className="text-sm text-destructive">{message}</span>
-        {(!!timeRemaining && timeRemaining > 0) && (
-          <div className="flex items-center gap-1 text-xs text-muted-foreground">
-            <Clock className="h-4 w-4" aria-hidden />
+    <Alert
+      className="flex items-start gap-4 bg-red-100/40"
+      variant="destructive"
+    >
+      <div className="flex w-full flex-col gap-2">
+        <span className="flex items-center gap-2 font-semibold text-base">
+          {' '}
+          <AlertCircle aria-hidden className="h-5 w-5 text-destructive" />{' '}
+          You’ve already submitted this form
+        </span>
+        <span className="text-destructive text-sm">{message}</span>
+        {!!timeRemaining && timeRemaining > 0 && (
+          <div className="flex items-center gap-1 text-muted-foreground text-xs">
+            <Clock aria-hidden className="h-4 w-4" />
             <span>Wait {formatTimeRemaining(timeRemaining)} to try again</span>
           </div>
         )}
-        {(attemptsRemaining !== undefined && attemptsRemaining > 0) && (
-          <div className="flex items-center gap-1 text-xs text-muted-foreground">
-            <RefreshCw className="h-4 w-4" aria-hidden />
-            <span>{attemptsRemaining} more attempt{attemptsRemaining > 1 ? 's' : ''} allowed</span>
+        {attemptsRemaining !== undefined && attemptsRemaining > 0 && (
+          <div className="flex items-center gap-1 text-muted-foreground text-xs">
+            <RefreshCw aria-hidden className="h-4 w-4" />
+            <span>
+              {attemptsRemaining} more attempt{attemptsRemaining > 1 ? 's' : ''}{' '}
+              allowed
+            </span>
           </div>
         )}
         {onRetry && (
           <Button
-            variant="secondary"
-            size="sm"
-            onClick={onRetry}
             className="w-fit"
+            onClick={onRetry}
+            size="sm"
+            variant="secondary"
           >
             Try Again
           </Button>

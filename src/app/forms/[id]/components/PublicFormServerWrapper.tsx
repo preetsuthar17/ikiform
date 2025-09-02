@@ -13,7 +13,8 @@ export default function PublicFormServerWrapper({
   schema,
 }: PublicFormServerWrapperProps) {
   const normalizedSchema = ensureDefaultRateLimitSettings(schema);
-  const isMultiStep = normalizedSchema.settings?.multiStep || normalizedSchema.blocks?.length > 1;
+  const isMultiStep =
+    normalizedSchema.settings?.multiStep || normalizedSchema.blocks?.length > 1;
 
   return (
     <Suspense

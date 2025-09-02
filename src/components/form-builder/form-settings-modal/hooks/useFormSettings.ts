@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 
 import type { FormSchema } from '@/lib/database';
 import {
+  DEFAULT_DUPLICATE_PREVENTION_SETTINGS,
   DEFAULT_NOTIFICATION_SETTINGS,
   DEFAULT_PASSWORD_PROTECTION_SETTINGS,
   DEFAULT_PROFANITY_FILTER_SETTINGS,
   DEFAULT_RATE_LIMIT_SETTINGS,
   DEFAULT_RESPONSE_LIMIT_SETTINGS,
-  DEFAULT_DUPLICATE_PREVENTION_SETTINGS,
 } from '@/lib/forms';
 import { DEFAULT_FORM_DESIGN } from '../constants';
 import type { LocalSettings } from '../types';
@@ -145,7 +145,9 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
   };
 
   const updateDuplicatePrevention = (
-    duplicatePreventionUpdates: Partial<NonNullable<LocalSettings['duplicatePrevention']>>
+    duplicatePreventionUpdates: Partial<
+      NonNullable<LocalSettings['duplicatePrevention']>
+    >
   ) => {
     setLocalSettings({
       ...localSettings,

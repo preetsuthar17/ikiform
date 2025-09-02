@@ -2,17 +2,17 @@ import { headers } from 'next/headers';
 import { type NextRequest, NextResponse } from 'next/server';
 import { formsDbServer } from '@/lib/database';
 import {
+  checkDuplicateSubmission,
+  extractEmailFromSubmissionData,
+  formatTimeRemaining,
+  generateIdentifier,
+  recordSubmission,
+} from '@/lib/forms/duplicate-prevention';
+import {
   checkFormRateLimit,
   DEFAULT_PROFANITY_FILTER_SETTINGS,
   DEFAULT_RATE_LIMIT_SETTINGS,
 } from '@/lib/forms/server';
-import {
-  checkDuplicateSubmission,
-  recordSubmission,
-  generateIdentifier,
-  extractEmailFromSubmissionData,
-  formatTimeRemaining,
-} from '@/lib/forms/duplicate-prevention';
 import { sendFormNotification } from '@/lib/services';
 import { sanitizeString } from '@/lib/utils/sanitize';
 import { createProfanityFilter } from '@/lib/validation';
@@ -177,7 +177,7 @@ export async function POST(
         email,
         sessionId
       );
-      
+
       recordSubmission(formId, identifier, duplicatePrevention).catch((e) =>
         console.error('[Duplicate Prevention] Record submission error:', e)
       );

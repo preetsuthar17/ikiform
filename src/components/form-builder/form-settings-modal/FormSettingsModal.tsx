@@ -59,13 +59,13 @@ export function FormSettingsModal({
     }
     setSaving(true);
     try {
-      const newSchema = { 
-        ...schema, 
+      const newSchema = {
+        ...schema,
         settings: {
           ...schema.settings,
           ...localSettings,
           duplicatePrevention: localSettings.duplicatePrevention,
-        }
+        },
       };
       await formsDb.updateForm(formId, { schema: newSchema as any });
       onSchemaUpdate({ settings: localSettings as any });

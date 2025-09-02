@@ -51,7 +51,8 @@ export const DEFAULT_DUPLICATE_PREVENTION_SETTINGS = {
   strategy: 'combined' as const,
   mode: 'one-time' as const,
   timeWindow: 1440,
-  message: 'You have already submitted this form. Each user can only submit once.',
+  message:
+    'You have already submitted this form. Each user can only submit once.',
   allowOverride: false,
   maxAttempts: 1,
 };

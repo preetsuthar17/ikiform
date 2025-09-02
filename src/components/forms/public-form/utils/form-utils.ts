@@ -113,8 +113,8 @@ export const validateSingleStepForm = (
 export const submitSingleStepForm = async (
   formId: string,
   formData: Record<string, any>
-): Promise<{ 
-  success: boolean; 
+): Promise<{
+  success: boolean;
   message?: string;
   error?: string;
   timeRemaining?: number;

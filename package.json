@@ -8,7 +8,7 @@
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "pnpx ultracite@latest lint || true",
-    "format": "pnpx ultracite@latest format || true",
+    "format": "pnpx ultracite@latest fix || true",
     "prettier": "prettier --write . --ignore-path .gitignore || true",
     "check": "tsc --noEmit && prettier --check . --ignore-path .gitignore || true",
     "polar:setup": "tsx scripts/create-polar-products.ts",

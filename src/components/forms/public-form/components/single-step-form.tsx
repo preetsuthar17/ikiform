@@ -121,6 +121,7 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
       >
         <div style={customStyles.formStyle}>
           <SingleStepFormContent
+            duplicateError={duplicateError}
             errors={errors}
             fields={fields}
             fieldVisibility={fieldVisibility}
@@ -131,7 +132,6 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
             onSubmit={handleSubmit}
             schema={schema}
             submitting={submitting}
-            duplicateError={duplicateError}
           />
         </div>
 

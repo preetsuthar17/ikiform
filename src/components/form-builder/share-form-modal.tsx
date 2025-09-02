@@ -243,7 +243,6 @@ export function ShareFormModal({
                       disabled={copying}
                       onClick={() => {
                         handleCopyLink();
-
                       }}
                       size="xl"
                     >
