@@ -10,6 +10,7 @@ import {
   Mail,
   MapPin,
   MessageSquare,
+  AlertTriangle,
   PenLine,
   Phone,
   Share2,
@@ -39,6 +40,13 @@ export const FIELD_TYPES: FieldTypeConfig[] = [
     label: "Statement",
     icon: MessageSquare,
     description: "Show a heading, intro, or description in your form.",
+  },
+  {
+    type: "banner",
+    label: "Banner",
+    icon: AlertTriangle,
+    description:
+      "Highlight disclaimers, warnings, or key benefits. Heads-up banners.",
   },
   {
     type: "textarea",

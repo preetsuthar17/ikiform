@@ -17,6 +17,7 @@ import {
   SliderField,
   SocialField,
   StatementField,
+  BannerField,
   TagsField,
   TextareaField,
   TextInputField,
@@ -85,6 +86,8 @@ export function createFieldComponent(
       return React.createElement(SchedulerField, props);
     case "statement":
       return React.createElement(StatementField, props);
+    case "banner":
+      return React.createElement(BannerField, props);
     case "phone":
       return React.createElement(PhoneInputField, props);
     case "address":

@@ -451,7 +451,8 @@ export interface FormField {
     | "statement"
     | "phone"
     | "address"
-    | "link";
+    | "link"
+    | "banner";
   label: string;
   description?: string;
   placeholder?: string;
@@ -531,6 +532,10 @@ export interface FormField {
     statementDescription?: string;
     statementAlign?: "left" | "center" | "right";
     statementSize?: "sm" | "md" | "lg";
+
+    bannerVariant?: "warning" | "error" | "info" | "success";
+    bannerTitle?: string;
+    bannerDescription?: string;
 
     pattern?: string;
     patternMessage?: string;

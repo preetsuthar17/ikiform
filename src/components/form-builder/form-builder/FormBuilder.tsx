@@ -74,7 +74,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     const newField: FormField = {
       id: generateFieldId(),
       type: fieldType,
-      label: `${fieldType.charAt(0).toUpperCase() + fieldType.slice(1)} Field`,
+      label: fieldType === "banner" ? "" : `${fieldType.charAt(0).toUpperCase() + fieldType.slice(1)} Field`,
       placeholder: "",
       required: false,
       options: ["select", "radio", "checkbox"].includes(fieldType)
@@ -88,7 +88,14 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
             ? { maxTags: 10, allowDuplicates: false }
             : fieldType === "poll"
               ? { pollOptions: ["Option 1", "Option 2"] }
-              : {},
+              : fieldType === "banner"
+                ? {
+                    bannerVariant: "info",
+                    bannerTitle: "",
+                    bannerDescription:
+                      "Highlight disclaimers, warnings, or key benefits.",
+                  }
+                : {},
     };
 
     const updatedSchema = addFieldToSchema(

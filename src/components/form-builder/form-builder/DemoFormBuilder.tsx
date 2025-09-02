@@ -42,7 +42,10 @@ export default function DemoFormBuilder() {
     const newField: FormField = {
       id: generateFieldId(),
       type: fieldType,
-      label: `${fieldType.charAt(0).toUpperCase() + fieldType.slice(1)} Field`,
+      label:
+        fieldType === "banner"
+          ? ""
+          : `${fieldType.charAt(0).toUpperCase() + fieldType.slice(1)} Field`,
       placeholder: "",
       required: false,
       options: ["select", "radio", "checkbox"].includes(fieldType)
@@ -54,7 +57,14 @@ export default function DemoFormBuilder() {
           ? { min: 0, max: 100, step: 1, defaultValue: 50 }
           : fieldType === "tags"
             ? { maxTags: 10, allowDuplicates: false }
-            : {},
+            : fieldType === "banner"
+              ? {
+                  bannerVariant: "info",
+                  bannerTitle: "",
+                  bannerDescription:
+                    "Highlight disclaimers, warnings, or key benefits.",
+                }
+              : {},
     };
     const updatedSchema = addFieldToSchema(
       formSchema,
