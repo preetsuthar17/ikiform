@@ -79,6 +79,15 @@ export function WebhookFormModal({
     initialWebhook?.payloadTemplate || ''
   );
   const [enabled, setEnabled] = useState(initialWebhook?.enabled ?? true);
+  const [notificationEmail, setNotificationEmail] = useState(
+    initialWebhook?.notificationEmail || ''
+  );
+  const [notifyOnSuccess, setNotifyOnSuccess] = useState(
+    initialWebhook?.notifyOnSuccess ?? false
+  );
+  const [notifyOnFailure, setNotifyOnFailure] = useState(
+    initialWebhook?.notifyOnFailure ?? true
+  );
   const [showDiscordInfo, setShowDiscordInfo] = useState(false);
 
   useEffect(() => {
@@ -88,6 +97,9 @@ export function WebhookFormModal({
     setHeaders(initialWebhook?.headers || {});
     setPayloadTemplate(initialWebhook?.payloadTemplate || '');
     setEnabled(initialWebhook?.enabled ?? true);
+    setNotificationEmail(initialWebhook?.notificationEmail || '');
+    setNotifyOnSuccess(initialWebhook?.notifyOnSuccess ?? false);
+    setNotifyOnFailure(initialWebhook?.notifyOnFailure ?? true);
     setShowDiscordInfo(false);
   }, [initialWebhook, open]);
 
@@ -102,7 +114,17 @@ export function WebhookFormModal({
       );
       return;
     }
-    onSave({ url, events, method, headers, payloadTemplate, enabled });
+    onSave({
+      url,
+      events,
+      method,
+      headers,
+      payloadTemplate,
+      enabled,
+      notificationEmail: notificationEmail || undefined,
+      notifyOnSuccess,
+      notifyOnFailure,
+    });
   }
 
   function handleClose() {
@@ -113,6 +135,9 @@ export function WebhookFormModal({
     setHeaders({});
     setPayloadTemplate('');
     setEnabled(true);
+    setNotificationEmail('');
+    setNotifyOnSuccess(false);
+    setNotifyOnFailure(true);
     setShowDiscordInfo(false);
   }
 
@@ -140,6 +165,36 @@ export function WebhookFormModal({
             Discord Preset
           </Button>
           {}
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          <div>
+            <Label className="mb-1" htmlFor="notification-email">
+              Notification Email (optional)
+            </Label>
+            <Input
+              id="notification-email"
+              onChange={(e) => setNotificationEmail(e.target.value)}
+              placeholder="you@example.com"
+              type="email"
+              value={notificationEmail}
+            />
+          </div>
+          <div className="flex items-end gap-4">
+            <Label className="flex cursor-pointer items-center gap-2">
+              <Checkbox
+                checked={notifyOnSuccess}
+                onCheckedChange={(checked) => setNotifyOnSuccess(!!checked)}
+              />
+              <span className="text-sm">Email on success</span>
+            </Label>
+            <Label className="flex cursor-pointer items-center gap-2">
+              <Checkbox
+                checked={notifyOnFailure}
+                onCheckedChange={(checked) => setNotifyOnFailure(!!checked)}
+              />
+              <span className="text-sm">Email on failure</span>
+            </Label>
+          </div>
         </div>
         {showDiscordInfo && (
           <div className="mb-4 rounded border border-blue-200 bg-blue-50 p-3 text-blue-900 text-sm">

@@ -17,6 +17,9 @@ export interface WebhookConfig {
   headers?: Record<string, string>;
   payloadTemplate?: string;
   enabled: boolean;
+  notificationEmail?: string | null;
+  notifyOnSuccess?: boolean;
+  notifyOnFailure?: boolean;
   createdAt: string;
   updatedAt: string;
   formId?: string;

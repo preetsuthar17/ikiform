@@ -6,6 +6,7 @@ import type {
   WebhookEventType,
   WebhookLog,
 } from '@/lib/database/database.types';
+import { sendFormNotification } from '@/lib/services/notifications';
 import { createAdminClient } from '@/utils/supabase/admin';
 
 type WebhookRow = Database['public']['Tables']['webhooks']['Row'];
@@ -16,12 +17,23 @@ type WebhookLogRow = Database['public']['Tables']['webhook_logs']['Row'];
 type WebhookLogInsert = Database['public']['Tables']['webhook_logs']['Insert'];
 
 function mapWebhookRow(row: Omit<WebhookRow, 'secret'>): WebhookConfig {
-  const { created_at, updated_at, ...rest } = row as any;
   return {
-    ...(rest as unknown as Omit<WebhookConfig, 'createdAt' | 'updatedAt'>),
-    createdAt: created_at,
-    updatedAt: updated_at,
-  } as WebhookConfig;
+    id: (row as any).id,
+    formId: (row as any).form_id ?? undefined,
+    accountId: (row as any).account_id ?? undefined,
+    url: (row as any).url,
+    events: (row as any).events as any,
+    secret: undefined,
+    method: (row as any).method as any,
+    headers: ((row as any).headers as any) ?? undefined,
+    payloadTemplate: (row as any).payload_template ?? undefined,
+    enabled: (row as any).enabled,
+    notificationEmail: (row as any).notification_email ?? null,
+    notifyOnSuccess: (row as any).notify_on_success ?? false,
+    notifyOnFailure: (row as any).notify_on_failure ?? true,
+    createdAt: (row as any).created_at,
+    updatedAt: (row as any).updated_at,
+  } satisfies WebhookConfig as WebhookConfig;
 }
 
 export async function getWebhooks({
@@ -65,6 +77,14 @@ export async function createWebhook(
     payload_template:
       (data as any).payload_template ?? data.payloadTemplate ?? null,
     secret: (data as any).secret ?? null,
+    notification_email:
+      (data as any).notification_email ??
+      (data as any).notificationEmail ??
+      null,
+    notify_on_success:
+      (data as any).notify_on_success ?? (data as any).notifyOnSuccess ?? false,
+    notify_on_failure:
+      (data as any).notify_on_failure ?? (data as any).notifyOnFailure ?? true,
     created_at: now,
     updated_at: now,
   };
@@ -108,6 +128,18 @@ export async function updateWebhook(
     payload_template:
       (data as any).payload_template ?? data.payloadTemplate ?? null,
     secret: (data as any).secret ?? null,
+    notification_email:
+      (data as any).notification_email ??
+      (data as any).notificationEmail ??
+      undefined,
+    notify_on_success:
+      (data as any).notify_on_success ??
+      (data as any).notifyOnSuccess ??
+      undefined,
+    notify_on_failure:
+      (data as any).notify_on_failure ??
+      (data as any).notifyOnFailure ??
+      undefined,
     updated_at: now,
   };
   const { data: result, error } = await (
@@ -288,6 +320,55 @@ export async function testWebhook(
     headers = { 'Content-Type': 'application/json' };
   }
 
+  if (
+    samplePayload &&
+    typeof samplePayload === 'object' &&
+    samplePayload.simulate
+  ) {
+    const simulate: 'success' | 'failure' = samplePayload.simulate;
+    const notifyEmail = (webhook as WebhookRow).notification_email;
+    const notifySuccess = (webhook as WebhookRow).notify_on_success ?? false;
+    const notifyFailure = (webhook as WebhookRow).notify_on_failure ?? true;
+
+    const logInsert: WebhookLogInsert = {
+      webhook_id: (webhook as WebhookRow).id,
+      event: 'test',
+      status: simulate === 'success' ? 'success' : 'failed',
+      request_payload: JSON.stringify({ simulate }),
+      response_status: simulate === 'success' ? 200 : 500,
+      response_body: simulate === 'success' ? 'SIMULATED_OK' : null,
+      error: simulate === 'failure' ? 'SIMULATED_FAILURE' : null,
+      timestamp: new Date().toISOString(),
+      attempt: 0,
+    };
+    await supabase.from('webhook_logs' as const).insert([logInsert] as any);
+
+    try {
+      if (simulate === 'success' && notifyEmail && notifySuccess) {
+        await sendFormNotification({
+          to: notifyEmail,
+          subject: 'Webhook test: simulated success',
+          message:
+            '# Webhook Test (Simulated Success)\n\nThis is a simulated success notification.',
+        });
+      }
+      if (simulate === 'failure' && notifyEmail && notifyFailure) {
+        await sendFormNotification({
+          to: notifyEmail,
+          subject: 'Webhook test: simulated failure',
+          message:
+            '# Webhook Test (Simulated Failure)\n\nThis is a simulated failure notification.',
+        });
+      }
+    } catch {}
+
+    return {
+      status: simulate === 'success' ? 200 : 500,
+      responseBody: simulate === 'success' ? 'SIMULATED_OK' : null,
+      ...(simulate === 'failure' ? { error: 'SIMULATED_FAILURE' } : {}),
+    };
+  }
+
   let status = 0;
   let responseBody = '';
   let errorMsg = '';
@@ -318,6 +399,22 @@ export async function testWebhook(
   };
 
   await supabase.from('webhook_logs' as const).insert([logInsert] as any);
+
+  const notifyEmail = (webhook as WebhookRow).notification_email;
+  const notifySuccess = (webhook as WebhookRow).notify_on_success ?? false;
+  const notifyFailure = (webhook as WebhookRow).notify_on_failure ?? true;
+  try {
+    if (!errorMsg && notifyEmail && notifySuccess) {
+      const subject = `Webhook test delivered successfully (${status})`;
+      const message = `# Webhook Test Success\n\n- URL: ${(webhook as WebhookRow).url}\n- Method: ${(webhook as WebhookRow).method}\n- Status: ${status}\n\n## Response Body\n\n${'```'}\n${responseBody?.slice(0, 4000) || ''}\n${'```'}`;
+      await sendFormNotification({ to: notifyEmail, subject, message });
+    }
+    if (errorMsg && notifyEmail && notifyFailure) {
+      const subject = 'Webhook test failed';
+      const message = `# Webhook Test Failure\n\n- URL: ${(webhook as WebhookRow).url}\n- Method: ${(webhook as WebhookRow).method}\n- Error: ${errorMsg}`;
+      await sendFormNotification({ to: notifyEmail, subject, message });
+    }
+  } catch {}
 
   if (errorMsg) {
     return { status, responseBody, error: errorMsg };
@@ -602,17 +699,11 @@ export async function triggerWebhooks(
       );
     }
 
-    deliverWithRetry(
-      {
-        ...(webhook as unknown as WebhookConfig),
-        payloadTemplate: (webhook as WebhookRow).payload_template as any,
-        createdAt: (webhook as WebhookRow).created_at,
-        updatedAt: (webhook as WebhookRow).updated_at,
-      },
-      body,
-      headers,
-      0
-    );
+    const { secret, ...rest } = webhook as WebhookRow & {
+      secret?: string | null;
+    };
+    const config = mapWebhookRow(rest as Omit<WebhookRow, 'secret'>);
+    deliverWithRetry(config, body, headers, 0);
   }
 }
 
@@ -692,7 +783,14 @@ export async function deliverWithRetry(
     console.log(
       `[WEBHOOK DELIVERY] Sending ${webhook.method} request to ${webhook.url}`
     );
-    const res = await fetch(webhook.url, fetchOptions);
+    const controller = new AbortController();
+    const timeoutMs = 12_000;
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+    const res = await fetch(webhook.url, {
+      ...fetchOptions,
+      signal: controller.signal,
+    });
+    clearTimeout(timeoutId);
     const responseBody = await res.text();
 
     const duration = Date.now() - startTime;
@@ -717,6 +815,17 @@ export async function deliverWithRetry(
     console.log(
       `[WEBHOOK DELIVERY] Successfully delivered webhook ${webhook.id} in ${duration}ms`
     );
+    if (webhook.notificationEmail && (webhook.notifyOnSuccess ?? false)) {
+      const subject = `Webhook delivered successfully (${res.status})`;
+      const message = `# Webhook Success\n\n- URL: ${webhook.url}\n- Method: ${webhook.method}\n- Status: ${res.status} ${res.statusText}\n\n## Response Body\n\n\n\n${'```'}\n${responseBody?.slice(0, 4000) || ''}\n${'```'}`;
+      try {
+        await sendFormNotification({
+          to: webhook.notificationEmail,
+          subject,
+          message,
+        });
+      } catch {}
+    }
   } catch (err: any) {
     const duration = Date.now() - startTime;
     console.error(
@@ -734,9 +843,28 @@ export async function deliverWithRetry(
       attempt,
     };
     await supabase.from('webhook_logs' as const).insert([failureLog] as any);
+    // send failure email only on final attempt to avoid noise
+    const isFinalAttempt = attempt + 1 >= 3;
+    if (
+      isFinalAttempt &&
+      webhook.notificationEmail &&
+      (webhook.notifyOnFailure ?? true)
+    ) {
+      const subject = 'Webhook delivery failed';
+      const message = `# Webhook Failure\n\n- URL: ${webhook.url}\n- Method: ${webhook.method}\n- Error: ${String(err)}\n\nRetries: ${attempt + 1}/3`;
+      try {
+        await sendFormNotification({
+          to: webhook.notificationEmail,
+          subject,
+          message,
+        });
+      } catch {}
+    }
 
-    if (attempt < 3) {
-      const retryDelay = 2 ** attempt * 1000;
+    if (attempt < 2) {
+      const base = 1000 * 2 ** attempt;
+      const jitter = Math.floor(Math.random() * 300);
+      const retryDelay = base + jitter;
       console.log(
         `[WEBHOOK DELIVERY] Scheduling retry ${attempt + 2}/3 for webhook ${webhook.id} in ${retryDelay}ms`
       );

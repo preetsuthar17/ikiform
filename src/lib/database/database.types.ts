@@ -327,6 +327,9 @@ export interface Database {
           headers: Json;
           id: string;
           method: string;
+          notification_email: string | null;
+          notify_on_failure: boolean;
+          notify_on_success: boolean;
           payload_template: string | null;
           secret: string | null;
           updated_at: string;
@@ -341,6 +344,9 @@ export interface Database {
           headers?: Json;
           id?: string;
           method: string;
+          notification_email?: string | null;
+          notify_on_failure?: boolean;
+          notify_on_success?: boolean;
           payload_template?: string | null;
           secret?: string | null;
           updated_at?: string;
@@ -355,6 +361,9 @@ export interface Database {
           headers?: Json;
           id?: string;
           method?: string;
+          notification_email?: string | null;
+          notify_on_failure?: boolean;
+          notify_on_success?: boolean;
           payload_template?: string | null;
           secret?: string | null;
           updated_at?: string;
@@ -720,6 +729,9 @@ export interface WebhookConfig {
   headers?: Record<string, string>;
   payloadTemplate?: string;
   enabled: boolean;
+  notificationEmail?: string | null;
+  notifyOnSuccess?: boolean;
+  notifyOnFailure?: boolean;
   createdAt: string;
   updatedAt: string;
 }
