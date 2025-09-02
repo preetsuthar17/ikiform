@@ -53,6 +53,7 @@ Thank you for your interest in contributing to Ikiform!
 2. **Install dependencies**
    - Using npm: `npm install`
    - Or using pnpm: `pnpm install`
+   - Or using bun: `bun install`
 3. **Copy and configure environment variables**
    - Copy `.env.example` to `.env.local` and fill in the required values.
 4. **Run the development server**

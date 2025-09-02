@@ -7,8 +7,8 @@
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
-    "lint": "pnpx ultracite@latest lint || true",
-    "format": "pnpx ultracite@latest fix || true",
+    "lint": "bunx ultracite@latest lint || true",
+    "format": "bunx ultracite@latest fix || true",
     "prettier": "prettier --write . --ignore-path .gitignore || true",
     "check": "tsc --noEmit && prettier --check . --ignore-path .gitignore || true",
     "polar:setup": "tsx scripts/create-polar-products.ts",
@@ -101,5 +101,8 @@
     "tailwindcss": "^4",
     "typescript": "^5",
     "ultracite": "5.2.9"
-  }
+  },
+  "trustedDependencies": [
+    "@tailwindcss/oxide"
+  ]
 }
