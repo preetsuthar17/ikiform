@@ -62,6 +62,23 @@ export default function Hero() {
 
   const [open, setOpen] = React.useState(false);
   const [videoOpen, setVideoOpen] = React.useState(false);
+  const [userCount, setUserCount] = React.useState<number | null>(null);
+
+  React.useEffect(() => {
+    let isMounted = true;
+    async function fetchCount() {
+      try {
+        const res = await fetch('/api/users/count', { cache: 'no-store' });
+        if (!res.ok) return;
+        const data = (await res.json()) as { count: number | null };
+        if (isMounted) setUserCount(typeof data.count === 'number' ? data.count : null);
+      } catch {}
+    }
+    fetchCount();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <section className="mx-auto mt-2 flex w-full max-w-7xl flex-col gap-12 p-4">
@@ -114,7 +131,7 @@ export default function Hero() {
           {user ? (
             <Button
               asChild
-              className="w-full rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit"
+              className="w-full rounded-full border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit"
               variant="default"
             >
               <Link
@@ -138,7 +155,7 @@ export default function Hero() {
           ) : (
             <Button
               asChild
-              className="w-full rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit"
+              className="w-full rounded-full border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit"
               variant="default"
             >
               <Link
@@ -151,7 +168,7 @@ export default function Hero() {
           )}
 
           <Button
-            className="w-full rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit"
+            className="w-full rounded-full border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit"
             onClick={() => setOpen(true)}
             variant="secondary"
           >
@@ -204,9 +221,12 @@ export default function Hero() {
           </AvatarGroup>
           <div className="flex flex-col items-center justify-center rounded-full px-5 py-2">
             <span className="flex items-center justify-center gap-1 text-center">
-              <span className="text-sm">300+</span>
               <span className="text-sm opacity-80">
-                active users sharing forms
+                Loved by
+              </span>
+              <span className="text-sm">{userCount ?? '300'}+</span>
+              <span className="text-sm opacity-80">
+                users
               </span>
             </span>
             <div className="mt-2 flex items-center justify-start gap-1">
@@ -255,7 +275,7 @@ export default function Hero() {
             <div className="flex w-full flex-col items-center gap-2">
               <Button
                 asChild
-                className="w-full rounded-full border border-[0.5px] px-6 py-5 hover:brightness-99"
+                className="w-full rounded-full border-[0.5px] px-6 py-5 hover:brightness-99"
                 variant="secondary"
               >
                 <Link
@@ -267,7 +287,7 @@ export default function Hero() {
               </Button>
               <Button
                 asChild
-                className="w-full rounded-full border border-[0.5px] px-6 py-5 hover:brightness-99"
+                className="w-full rounded-full border-[0.5px] px-6 py-5 hover:brightness-99"
                 variant="secondary"
               >
                 <Link
