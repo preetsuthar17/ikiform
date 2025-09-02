@@ -1,3 +1,4 @@
+export { BannerField } from "./BannerField";
 export { CheckboxField } from "./CheckboxField";
 export { DateInputField } from "./DateInputField";
 export { EmailInputField } from "./EmailInputField";
@@ -14,7 +15,6 @@ export { SignatureField } from "./SignatureField";
 export { SliderField } from "./SliderField";
 export { SocialField } from "./SocialField";
 export { StatementField } from "./StatementField";
-export { BannerField } from "./BannerField";
 export { TagsField } from "./TagsField";
 export { TextareaField } from "./TextareaField";
 

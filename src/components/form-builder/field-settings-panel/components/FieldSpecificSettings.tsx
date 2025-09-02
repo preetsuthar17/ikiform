@@ -3,6 +3,7 @@ import type { FormField } from "@/lib/database";
 import { EmailValidationSettings } from "./EmailValidationSettings";
 import {
   AddressFieldSettings,
+  BannerFieldSettings,
   CheckboxFieldSettings,
   FileFieldSettings,
   LinkFieldSettings,
@@ -10,7 +11,6 @@ import {
   PollFieldSettings,
   RadioFieldSettings,
   RatingFieldSettings,
-  BannerFieldSettings,
   SchedulerFieldSettings,
   SliderFieldSettings,
   SocialFieldSettings,

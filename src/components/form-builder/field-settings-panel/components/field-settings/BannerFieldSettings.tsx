@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -9,10 +9,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { FieldSettingsProps } from "./types";
 import { Textarea } from "@/components/ui/textarea";
+import type { FieldSettingsProps } from "./types";
 
-export function BannerFieldSettings({ field, onUpdateSettings }: FieldSettingsProps) {
+export function BannerFieldSettings({
+  field,
+  onUpdateSettings,
+}: FieldSettingsProps) {
   const variant = (field.settings?.bannerVariant as string) || "info";
   const title = field.settings?.bannerTitle || "";
   const description = field.settings?.bannerDescription || "";
@@ -27,11 +30,16 @@ export function BannerFieldSettings({ field, onUpdateSettings }: FieldSettingsPr
           </Label>
           <Select
             onValueChange={(v) =>
-              onUpdateSettings({ bannerVariant: v as "warning" | "error" | "info" | "success" })
+              onUpdateSettings({
+                bannerVariant: v as "warning" | "error" | "info" | "success",
+              })
             }
             value={variant}
           >
-            <SelectTrigger id="banner-variant" className="border-border bg-input">
+            <SelectTrigger
+              className="border-border bg-input"
+              id="banner-variant"
+            >
               <SelectValue placeholder="Select alert type" />
             </SelectTrigger>
             <SelectContent>
@@ -61,9 +69,11 @@ export function BannerFieldSettings({ field, onUpdateSettings }: FieldSettingsPr
             Description
           </Label>
           <Textarea
-            className="border-border bg-input min-h-24"
+            className="min-h-24 border-border bg-input"
             id="banner-description"
-            onChange={(e) => onUpdateSettings({ bannerDescription: e.target.value })}
+            onChange={(e) =>
+              onUpdateSettings({ bannerDescription: e.target.value })
+            }
             placeholder="Our accommodations are strictly smoke-free..."
             value={description}
           />
@@ -72,5 +82,3 @@ export function BannerFieldSettings({ field, onUpdateSettings }: FieldSettingsPr
     </Card>
   );
 }
-
-

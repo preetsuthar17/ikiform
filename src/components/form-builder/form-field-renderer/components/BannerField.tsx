@@ -1,9 +1,12 @@
-import React from "react";
 import { AlertTriangle, CheckCircle2, Info, XCircle } from "lucide-react";
+import type React from "react";
 import { cn } from "@/lib/utils";
 import type { BaseFieldProps } from "../types";
 
-const VARIANT_STYLES: Record<string, { bg: string; border: string; title: string; dot: string; text: string }> = {
+const VARIANT_STYLES: Record<
+  string,
+  { bg: string; border: string; title: string; dot: string; text: string }
+> = {
   warning: {
     bg: "bg-amber-50",
     border: "border-amber-200",
@@ -34,7 +37,10 @@ const VARIANT_STYLES: Record<string, { bg: string; border: string; title: string
   },
 };
 
-const VARIANT_ICON: Record<string, React.ComponentType<{ className?: string }>> = {
+const VARIANT_ICON: Record<
+  string,
+  React.ComponentType<{ className?: string }>
+> = {
   warning: AlertTriangle,
   error: XCircle,
   info: Info,
@@ -44,34 +50,39 @@ const VARIANT_ICON: Record<string, React.ComponentType<{ className?: string }>> 
 export function BannerField({ field }: BaseFieldProps) {
   const variant = (field.settings?.bannerVariant as string) || "info";
   const title = field.settings?.bannerTitle || "";
-  const description = field.settings?.bannerDescription || field.description || "";
+  const description =
+    field.settings?.bannerDescription || field.description || "";
   const styles = VARIANT_STYLES[variant] || VARIANT_STYLES.info;
   const text = styles.text;
   const Icon = VARIANT_ICON[variant] || VARIANT_ICON.info;
 
   return (
-    <div
-      className={cn(
-        "rounded-xl border p-4",
-        styles.bg,
-        styles.border
-      )}
-    >
-      <div className={`flex ${description ? "items-start" : "items-center"} gap-3`}>
-        <span className={cn("inline-flex p-1 items-center justify-center rounded-full", styles.dot)}>
+    <div className={cn("rounded-xl border p-4", styles.bg, styles.border)}>
+      <div
+        className={`flex ${description ? "items-start" : "items-center"} gap-3`}
+      >
+        <span
+          className={cn(
+            "inline-flex items-center justify-center rounded-full p-1",
+            styles.dot
+          )}
+        >
           <Icon className="h-3.5 w-3.5 text-white" />
         </span>
-        <div className="flex-1 flex flex-col gap-1">
-          {title && (
-            <div className={cn("font-medium", text)}>{title}</div>
-          )}
+        <div className="flex flex-1 flex-col gap-1">
+          {title && <div className={cn("font-medium", text)}>{title}</div>}
           {description && (
-            <div className={cn("text-muted-foreground text-sm whitespace-pre-line", text)}>{description}</div>
+            <div
+              className={cn(
+                "whitespace-pre-line text-muted-foreground text-sm",
+                text
+              )}
+            >
+              {description}
+            </div>
           )}
         </div>
       </div>
     </div>
   );
 }
-
-

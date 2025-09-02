@@ -1,4 +1,5 @@
 export { AddressFieldSettings } from "./AddressFieldSettings";
+export { BannerFieldSettings } from "./BannerFieldSettings";
 export { CheckboxFieldSettings } from "./CheckboxFieldSettings";
 export { FileFieldSettings } from "./FileFieldSettings";
 export { LinkFieldSettings } from "./LinkFieldSettings";
@@ -6,7 +7,6 @@ export { PhoneFieldSettings } from "./PhoneFieldSettings";
 export { PollFieldSettings } from "./PollFieldSettings";
 export { RadioFieldSettings } from "./RadioFieldSettings";
 export { RatingFieldSettings } from "./RatingFieldSettings";
-export { BannerFieldSettings } from "./BannerFieldSettings";
 export { SchedulerFieldSettings } from "./SchedulerFieldSettings";
 export { SliderFieldSettings } from "./SliderFieldSettings";
 export { SocialFieldSettings } from "./SocialFieldSettings";

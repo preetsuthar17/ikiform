@@ -1,4 +1,5 @@
 import {
+  AlertTriangle,
   BarChart3,
   Calendar,
   CheckSquare,
@@ -10,7 +11,6 @@ import {
   Mail,
   MapPin,
   MessageSquare,
-  AlertTriangle,
   PenLine,
   Phone,
   Share2,

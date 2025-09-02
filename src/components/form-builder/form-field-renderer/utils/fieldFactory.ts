@@ -3,6 +3,7 @@ import React from "react";
 import type { FormField } from "@/lib/database";
 
 import {
+  BannerField,
   CheckboxField,
   DateInputField,
   EmailInputField,
@@ -17,7 +18,6 @@ import {
   SliderField,
   SocialField,
   StatementField,
-  BannerField,
   TagsField,
   TextareaField,
   TextInputField,

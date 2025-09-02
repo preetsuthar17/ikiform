@@ -74,7 +74,10 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     const newField: FormField = {
       id: generateFieldId(),
       type: fieldType,
-      label: fieldType === "banner" ? "" : `${fieldType.charAt(0).toUpperCase() + fieldType.slice(1)} Field`,
+      label:
+        fieldType === "banner"
+          ? ""
+          : `${fieldType.charAt(0).toUpperCase() + fieldType.slice(1)} Field`,
       placeholder: "",
       required: false,
       options: ["select", "radio", "checkbox"].includes(fieldType)
