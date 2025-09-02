@@ -247,13 +247,16 @@ export async function resendWebhookDelivery(
   let responseBody = '';
   let errorMsg = '';
   try {
+    const controller = new AbortController();
+    const timeoutMs = 30_000;
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
     const res = await fetch((webhook as WebhookRow).url, {
       method: (webhook as WebhookRow).method,
       headers,
       body: payload ?? undefined,
-      // @ts-expect-error
-      timeout: 10_000,
+      signal: controller.signal,
     });
+    clearTimeout(timeoutId);
     status = res.status;
     responseBody = await res.text();
   } catch (err: any) {
@@ -664,6 +667,7 @@ export async function triggerWebhooks(
   if (!webhooks || webhooks.length === 0) {
     return;
   }
+  const deliveries: Array<Promise<void>> = [];
   for (const webhook of webhooks as WebhookRow[]) {
     let body: string;
 
@@ -703,8 +707,9 @@ export async function triggerWebhooks(
       secret?: string | null;
     };
     const config = mapWebhookRow(rest as Omit<WebhookRow, 'secret'>);
-    deliverWithRetry(config, body, headers, 0);
+    deliveries.push(deliverWithRetry(config, body, headers, 0));
   }
+  await Promise.allSettled(deliveries);
 }
 
 export async function deliverWithRetry(
@@ -784,7 +789,7 @@ export async function deliverWithRetry(
       `[WEBHOOK DELIVERY] Sending ${webhook.method} request to ${webhook.url}`
     );
     const controller = new AbortController();
-    const timeoutMs = 12_000;
+    const timeoutMs = 30_000;
     const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
     const res = await fetch(webhook.url, {
       ...fetchOptions,
