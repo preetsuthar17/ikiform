@@ -17,6 +17,7 @@ export interface FormStatsProps {
 export interface FormCardProps {
   form: Form;
   onEdit: (formId: string) => void;
+  onDuplicate: (formId: string) => void;
   onViewForm: (form: Form) => void;
   onViewAnalytics: (formId: string) => void;
   onShare: (form: Form) => void;
@@ -38,6 +39,7 @@ export interface AIFormSuggestionsProps {
 export interface FormActionsProps {
   form: Form;
   onEdit: (formId: string) => void;
+  onDuplicate: (formId: string) => void;
   onViewForm: (form: Form) => void;
   onViewAnalytics: (formId: string) => void;
   onShare: (form: Form) => void;

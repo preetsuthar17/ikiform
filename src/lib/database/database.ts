@@ -59,6 +59,13 @@ export const formsDb = {
     return data;
   },
 
+  async duplicateForm(formId: string) {
+    const original = await this.getForm(formId);
+    const title = `${original.title || original.schema?.settings?.title || "Untitled Form"} (Copy)`;
+    const duplicated = await this.createForm(original.user_id, title, original.schema);
+    return duplicated;
+  },
+
   async getUserForms(userId: string) {
     const cacheKey = getCacheKey("getUserForms", userId);
     const cached = getFromCache<Form[]>(cacheKey);

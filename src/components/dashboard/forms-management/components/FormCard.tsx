@@ -11,6 +11,7 @@ import { FormActions } from "./FormActions";
 export function FormCard({
   form,
   onEdit,
+  onDuplicate,
   onViewForm,
   onViewAnalytics,
   onShare,
@@ -63,6 +64,7 @@ export function FormCard({
         form={form}
         onDelete={onDelete}
         onEdit={onEdit}
+        onDuplicate={onDuplicate}
         onShare={handleShare}
         onViewAnalytics={onViewAnalytics}
         onViewForm={onViewForm}

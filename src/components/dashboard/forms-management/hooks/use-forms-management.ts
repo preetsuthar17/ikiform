@@ -69,6 +69,17 @@ export function useFormsManagement() {
     }
   };
 
+  const duplicateForm = async (formId: string) => {
+    try {
+      const duplicated = await formsDb.duplicateForm(formId);
+      toast.success("Form duplicated");
+      router.push(`/form-builder/${duplicated.id}`);
+    } catch (error) {
+      console.error("Error duplicating form:", error);
+      toast.error("Failed to duplicate form");
+    }
+  };
+
   const deleteForm = async (formId: string, formTitle: string) => {
     setDeleteModal({
       open: true,
@@ -119,6 +130,7 @@ export function useFormsManagement() {
     viewForm,
     viewAnalytics,
     shareForm,
+    duplicateForm,
     deleteForm,
     confirmDeleteForm,
     handleCreateWithAI,

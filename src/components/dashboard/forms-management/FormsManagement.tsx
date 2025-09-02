@@ -24,6 +24,7 @@ export function FormsManagement({ className }: FormsManagementProps) {
     deleteModal,
     createNewForm,
     editForm,
+    duplicateForm,
     viewForm,
     viewAnalytics,
     shareForm,
@@ -64,6 +65,7 @@ export function FormsManagement({ className }: FormsManagementProps) {
           forms={forms}
           onDelete={deleteForm}
           onEdit={editForm}
+          onDuplicate={duplicateForm}
           onShare={shareForm}
           onViewAnalytics={viewAnalytics}
           onViewForm={viewForm}
