@@ -1,6 +1,17 @@
 import type { FormLogic } from '@/components/form-builder/logic-builder/types';
 
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[];
+
 export interface Database {
+  __InternalSupabase: {
+    PostgrestVersion: '12.2.3 (519615d)';
+  };
   public: {
     Tables: {
       forms: {
@@ -157,12 +168,248 @@ export interface Database {
           updated_at?: string;
         };
       };
+      inbound_webhook_mappings: {
+        Row: {
+          created_at: string;
+          enabled: boolean;
+          endpoint: string;
+          id: string;
+          mapping_rules: Json;
+          secret: string | null;
+          target_form_id: string;
+          updated_at: string;
+        };
+        Insert: {
+          created_at?: string;
+          enabled?: boolean;
+          endpoint: string;
+          id?: string;
+          mapping_rules?: Json;
+          secret?: string | null;
+          target_form_id: string;
+          updated_at?: string;
+        };
+        Update: {
+          created_at?: string;
+          enabled?: boolean;
+          endpoint?: string;
+          id?: string;
+          mapping_rules?: Json;
+          secret?: string | null;
+          target_form_id?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'inbound_webhook_mappings_target_form_id_fkey';
+            columns: ['target_form_id'];
+            isOneToOne: false;
+            referencedRelation: 'forms';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      redemption_codes: {
+        Row: {
+          code: string;
+          created_at: string | null;
+          current_uses: number | null;
+          expires_at: string | null;
+          id: string;
+          is_active: boolean | null;
+          max_uses: number | null;
+          metadata: Json | null;
+          redeemed_at: string | null;
+          redeemer_email: string | null;
+          redeemer_user_id: string | null;
+          updated_at: string | null;
+        };
+        Insert: {
+          code: string;
+          created_at?: string | null;
+          current_uses?: number | null;
+          expires_at?: string | null;
+          id?: string;
+          is_active?: boolean | null;
+          max_uses?: number | null;
+          metadata?: Json | null;
+          redeemed_at?: string | null;
+          redeemer_email?: string | null;
+          redeemer_user_id?: string | null;
+          updated_at?: string | null;
+        };
+        Update: {
+          code?: string;
+          created_at?: string | null;
+          current_uses?: number | null;
+          expires_at?: string | null;
+          id?: string;
+          is_active?: boolean | null;
+          max_uses?: number | null;
+          metadata?: Json | null;
+          redeemed_at?: string | null;
+          redeemer_email?: string | null;
+          redeemer_user_id?: string | null;
+          updated_at?: string | null;
+        };
+      };
+      waitlist: {
+        Row: {
+          created_at: string;
+          email: string;
+          id: number;
+        };
+        Insert: {
+          created_at?: string;
+          email: string;
+          id?: number;
+        };
+        Update: {
+          created_at?: string;
+          email?: string;
+          id?: number;
+        };
+      };
+      webhook_logs: {
+        Row: {
+          attempt: number;
+          error: string | null;
+          event: string;
+          id: string;
+          request_payload: Json | null;
+          response_body: string | null;
+          response_status: number | null;
+          status: string;
+          timestamp: string;
+          webhook_id: string | null;
+        };
+        Insert: {
+          attempt?: number;
+          error?: string | null;
+          event: string;
+          id?: string;
+          request_payload?: Json | null;
+          response_body?: string | null;
+          response_status?: number | null;
+          status: string;
+          timestamp?: string;
+          webhook_id?: string | null;
+        };
+        Update: {
+          attempt?: number;
+          error?: string | null;
+          event?: string;
+          id?: string;
+          request_payload?: Json | null;
+          response_body?: string | null;
+          response_status?: number | null;
+          status?: string;
+          timestamp?: string;
+          webhook_id?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'webhook_logs_webhook_id_fkey';
+            columns: ['webhook_id'];
+            isOneToOne: false;
+            referencedRelation: 'webhooks';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      webhooks: {
+        Row: {
+          account_id: string | null;
+          created_at: string;
+          enabled: boolean;
+          events: string[];
+          form_id: string | null;
+          headers: Json;
+          id: string;
+          method: string;
+          payload_template: string | null;
+          secret: string | null;
+          updated_at: string;
+          url: string;
+        };
+        Insert: {
+          account_id?: string | null;
+          created_at?: string;
+          enabled?: boolean;
+          events: string[];
+          form_id?: string | null;
+          headers?: Json;
+          id?: string;
+          method: string;
+          payload_template?: string | null;
+          secret?: string | null;
+          updated_at?: string;
+          url: string;
+        };
+        Update: {
+          account_id?: string | null;
+          created_at?: string;
+          enabled?: boolean;
+          events?: string[];
+          form_id?: string | null;
+          headers?: Json;
+          id?: string;
+          method?: string;
+          payload_template?: string | null;
+          secret?: string | null;
+          updated_at?: string;
+          url?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'webhooks_account_id_fkey';
+            columns: ['account_id'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['uid'];
+          },
+          {
+            foreignKeyName: 'webhooks_form_id_fkey';
+            columns: ['form_id'];
+            isOneToOne: false;
+            referencedRelation: 'forms';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
     };
     Views: {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      cleanup_orphaned_files: {
+        Args: Record<PropertyKey, never>;
+        Returns: number;
+      };
+      get_form_file_stats: {
+        Args: { form_id_param: string };
+        Returns: {
+          file_types: string[];
+          total_files: number;
+          total_size_bytes: number;
+        }[];
+      };
+      get_form_file_url: {
+        Args: { file_path: string; form_id: string };
+        Returns: string;
+      };
+      is_admin_request: {
+        Args: Record<PropertyKey, never>;
+        Returns: boolean;
+      };
+      submit_form_bypass_rls: {
+        Args: {
+          p_form_id: string;
+          p_ip_address?: unknown;
+          p_submission_data: Json;
+        };
+        Returns: string;
+      };
     };
     Enums: {
       [_ in never]: never;
@@ -488,15 +735,4 @@ export interface WebhookLog {
   error?: string;
   timestamp: string;
   attempt: number;
-}
-
-export interface InboundWebhookMapping {
-  id: string;
-  endpoint: string;
-  targetFormId: string;
-  mappingRules: Record<string, string>;
-  secret?: string;
-  enabled: boolean;
-  createdAt: string;
-  updatedAt: string;
 }

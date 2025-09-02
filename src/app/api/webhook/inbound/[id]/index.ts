@@ -8,6 +8,17 @@ import {
 } from '@/lib/forms/duplicate-prevention';
 import { createAdminClient } from '@/utils/supabase/admin';
 
+interface InboundWebhookMapping {
+  id: string;
+  endpoint: string;
+  target_form_id: string;
+  mapping_rules: Record<string, string>;
+  secret?: string;
+  enabled: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -25,7 +36,7 @@ export async function POST(
       .from('inbound_webhook_mappings')
       .select('*')
       .eq('id', mappingId)
-      .single();
+      .single<InboundWebhookMapping>();
 
     if (error || !mapping) {
       console.error(
