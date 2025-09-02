@@ -3,7 +3,7 @@ import type {
   LogicActionCondition,
   LogicCondition,
   LogicConditionGroup,
-} from '@/components/form-builder/logic-builder/types';
+} from "@/components/form-builder/logic-builder/types";
 
 export type { LogicAction };
 
@@ -37,10 +37,10 @@ export function getLogicFieldDefaults(
     for (const item of logicItems) {
       const action = item && item.action;
       if (action && action.target === fieldId) {
-        if (action.type === 'show') visible = false;
-        if (action.type === 'hide') visible = true;
-        if (action.type === 'enable') disabled = true;
-        if (action.type === 'disable') disabled = false;
+        if (action.type === "show") visible = false;
+        if (action.type === "hide") visible = true;
+        if (action.type === "enable") disabled = true;
+        if (action.type === "disable") disabled = false;
       }
     }
     defaults[fieldId] = { visible, disabled };
@@ -55,11 +55,11 @@ function evaluateConditionGroup(
 ): boolean {
   if (!(group && Array.isArray(group.conditions))) return false;
   const results = group.conditions.map((cond) =>
-    'logic' in cond
+    "logic" in cond
       ? evaluateConditionGroup(cond, formState, userAttributes)
       : evaluateCondition(cond, formState, userAttributes)
   );
-  return group.logic === 'AND' ? results.every(Boolean) : results.some(Boolean);
+  return group.logic === "AND" ? results.every(Boolean) : results.some(Boolean);
 }
 
 function evaluateCondition(
@@ -69,16 +69,16 @@ function evaluateCondition(
 ): boolean {
   const value = formState[cond.field] ?? userAttributes?.[cond.field];
   switch (cond.operator) {
-    case 'equals':
+    case "equals":
       return value === cond.value;
-    case 'not_equals':
+    case "not_equals":
       return value !== cond.value;
-    case 'greater_than': {
+    case "greater_than": {
       if (
         value == null ||
-        value === '' ||
+        value === "" ||
         cond.value == null ||
-        cond.value === ''
+        cond.value === ""
       )
         return false;
       const numValue = Number(value);
@@ -86,12 +86,12 @@ function evaluateCondition(
       if (isNaN(numValue) || isNaN(numCond)) return false;
       return numValue > numCond;
     }
-    case 'less_than': {
+    case "less_than": {
       if (
         value == null ||
-        value === '' ||
+        value === "" ||
         cond.value == null ||
-        cond.value === ''
+        cond.value === ""
       )
         return false;
       const numValue = Number(value);
@@ -99,34 +99,34 @@ function evaluateCondition(
       if (isNaN(numValue) || isNaN(numCond)) return false;
       return numValue < numCond;
     }
-    case 'contains':
+    case "contains":
       return Array.isArray(value)
         ? value.includes(cond.value)
-        : typeof value === 'string'
+        : typeof value === "string"
           ? value.includes(cond.value)
           : false;
-    case 'not_contains':
+    case "not_contains":
       return Array.isArray(value)
         ? !value.includes(cond.value)
-        : typeof value === 'string'
+        : typeof value === "string"
           ? !value.includes(cond.value)
           : false;
-    case 'is_empty':
+    case "is_empty":
       return (
         value == null ||
-        value === '' ||
+        value === "" ||
         (Array.isArray(value) && value.length === 0)
       );
-    case 'is_not_empty':
+    case "is_not_empty":
       return (
         value != null &&
-        value !== '' &&
+        value !== "" &&
         (!Array.isArray(value) || value.length > 0)
       );
-    case 'includes':
+    case "includes":
       return Array.isArray(value)
         ? value.includes(cond.value)
-        : typeof value === 'string'
+        : typeof value === "string"
           ? value.includes(cond.value)
           : false;
     default:

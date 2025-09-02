@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
-import type { Form, FormSubmission } from '@/lib/database';
-import type { AnalyticsData } from '../types';
+import type { Form, FormSubmission } from "@/lib/database";
+import type { AnalyticsData } from "../types";
 
 import {
   calculateBounceRate,
@@ -11,7 +11,7 @@ import {
   calculateQuizAnalytics,
   calculateSubmissionTrends,
   getTotalFields,
-} from '../utils/analytics';
+} from "../utils/analytics";
 
 export const useAnalyticsData = (
   form: Form,
@@ -31,7 +31,7 @@ export const useAnalyticsData = (
     const fieldStats = submissions.reduce(
       (acc, sub) => {
         const filledFields = Object.values(sub.submission_data).filter(
-          (val) => val !== '' && val !== null && val !== undefined
+          (val) => val !== "" && val !== null && val !== undefined
         ).length;
         acc.totalFilledFields += filledFields;
         acc.fieldCompletionRates[filledFields] =

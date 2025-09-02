@@ -1,6 +1,6 @@
-import type { FormSchema } from '@/lib/database';
-import type { FormProgress } from '@/lib/form-progress/types';
-import type { QuizResult } from '@/lib/quiz/scoring';
+import type { FormSchema } from "@/lib/database";
+import type { FormProgress } from "@/lib/form-progress/types";
+import type { QuizResult } from "@/lib/quiz/scoring";
 
 export interface PublicFormProps {
   formId: string;

@@ -1,28 +1,28 @@
-'use client';
+"use client";
 
-import { cva, type VariantProps } from 'class-variance-authority';
-import { type LucideIcon, X } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
-import * as React from 'react';
-import { cn } from '@/lib/utils';
+import { cva, type VariantProps } from "class-variance-authority";
+import { type LucideIcon, X } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
 const alertVariants = cva(
-  'relative w-full rounded-card border p-4 text-sm transition-colors',
+  "relative w-full rounded-card border p-4 text-sm transition-colors",
   {
     variants: {
       variant: {
-        default: 'border-border bg-card text-card-foreground',
+        default: "border-border bg-card text-card-foreground",
         destructive:
-          'border-destructive bg-destructive/10 text-destructive [&>svg]:text-destructive',
+          "border-destructive bg-destructive/10 text-destructive [&>svg]:text-destructive",
         warning:
-          'border-amber-200 bg-amber-50 text-amber-800 [&>svg]:text-amber-600',
+          "border-amber-200 bg-amber-50 text-amber-800 [&>svg]:text-amber-600",
         success:
-          'border-green-200 bg-green-50 text-green-800 [&>svg]:text-green-600',
-        info: 'border-blue-200 bg-blue-50 text-blue-800 [&>svg]:text-blue-600',
+          "border-green-200 bg-green-50 text-green-800 [&>svg]:text-green-600",
+        info: "border-blue-200 bg-blue-50 text-blue-800 [&>svg]:text-blue-600",
       },
     },
     defaultVariants: {
-      variant: 'default',
+      variant: "default",
     },
   }
 );
@@ -80,7 +80,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
             initial={{ opacity: 0, y: -10, scale: 0.95 }}
             ref={ref}
             role="alert"
-            transition={{ duration: 0.15, ease: 'easeOut' }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
             {...motionProps}
           >
             <div className="flex">
@@ -89,10 +89,10 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
                   <Icon className="mt-0.5 h-4 w-4" />
                 </div>
               )}
-              <div className={cn('flex flex-1 items-center', Icon && 'ml-3')}>
+              <div className={cn("flex flex-1 items-center", Icon && "ml-3")}>
                 {title && <h3 className="font-medium text-sm">{title}</h3>}
                 <div
-                  className={cn('text-sm', title && 'text-muted-foreground')}
+                  className={cn("text-sm", title && "text-muted-foreground")}
                 >
                   {children}
                 </div>
@@ -117,6 +117,6 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   }
 );
 
-Alert.displayName = 'Alert';
+Alert.displayName = "Alert";
 
 export { Alert, alertVariants };

@@ -1,6 +1,6 @@
-import type { FormBlock } from '@/lib/database';
+import type { FormBlock } from "@/lib/database";
 
-import { validateEmail } from '@/lib/validation/email-validation';
+import { validateEmail } from "@/lib/validation/email-validation";
 
 export const validateStep = (
   stepIndex: number,
@@ -14,7 +14,7 @@ export const validateStep = (
   // Debug logging
 
   if (!(block && block.fields)) {
-    console.warn('⚠️ Block or fields not found for step:', stepIndex);
+    console.warn("⚠️ Block or fields not found for step:", stepIndex);
     return { errors, isValid: true };
   }
 
@@ -31,28 +31,28 @@ export const validateStep = (
 
       if (Array.isArray(value)) {
         isEmpty = value.length === 0;
-      } else if (field.type === 'radio' || field.settings?.isQuizField) {
-        isEmpty = !value || value === '';
-      } else if (field.type === 'rating' || field.type === 'slider') {
+      } else if (field.type === "radio" || field.settings?.isQuizField) {
+        isEmpty = !value || value === "";
+      } else if (field.type === "rating" || field.type === "slider") {
         isEmpty = value === null || value === undefined;
-      } else if (field.type === 'checkbox') {
+      } else if (field.type === "checkbox") {
         isEmpty = !Array.isArray(value) || value.length === 0;
-      } else if (field.type === 'select') {
-        isEmpty = !value || value === '';
-      } else if (typeof value === 'string') {
-        isEmpty = value.trim() === '';
+      } else if (field.type === "select") {
+        isEmpty = !value || value === "";
+      } else if (typeof value === "string") {
+        isEmpty = value.trim() === "";
       } else {
         isEmpty =
-          !value || value === '' || value === null || value === undefined;
+          !value || value === "" || value === null || value === undefined;
       }
 
       if (isEmpty) {
         errors[field.id] =
-          field.validation?.requiredMessage || 'This field is required';
+          field.validation?.requiredMessage || "This field is required";
       }
     }
 
-    if (value && field.type === 'email') {
+    if (value && field.type === "email") {
       const emailValidation = validateEmail(
         value,
         field.settings?.emailValidation
@@ -61,9 +61,9 @@ export const validateStep = (
         errors[field.id] =
           emailValidation.message ||
           field.validation?.emailMessage ||
-          'Please enter a valid email address';
+          "Please enter a valid email address";
       }
-    } else if (['text', 'textarea', 'email'].includes(field.type) && value) {
+    } else if (["text", "textarea", "email"].includes(field.type) && value) {
       if (
         field.validation?.minLength &&
         value.length < field.validation.minLength
@@ -80,11 +80,11 @@ export const validateStep = (
           field.validation?.maxLengthMessage ||
           `Must be no more than ${field.validation.maxLength} characters`;
       }
-    } else if (field.type === 'number' && value) {
+    } else if (field.type === "number" && value) {
       const numValue = Number.parseFloat(value);
       if (isNaN(numValue)) {
         errors[field.id] =
-          field.validation?.numberMessage || 'Please enter a valid number';
+          field.validation?.numberMessage || "Please enter a valid number";
       } else {
         if (
           field.validation?.min !== undefined &&
@@ -103,21 +103,21 @@ export const validateStep = (
             `Must be no more than ${field.validation.max}`;
         }
       }
-    } else if (field.type === 'phone' && value) {
+    } else if (field.type === "phone" && value) {
       const phoneValidation =
-        require('@/lib/validation/phone-validation').validatePhoneNumber(value);
+        require("@/lib/validation/phone-validation").validatePhoneNumber(value);
       if (!phoneValidation.isValid) {
         errors[field.id] =
-          phoneValidation.message || 'Please enter a valid phone number';
+          phoneValidation.message || "Please enter a valid phone number";
       }
-    } else if (field.type === 'link' && value) {
+    } else if (field.type === "link" && value) {
       const urlValidation =
-        require('@/lib/validation/url-validation').validateUrl(value);
+        require("@/lib/validation/url-validation").validateUrl(value);
       if (!urlValidation.isValid) {
-        errors[field.id] = urlValidation.message || 'Please enter a valid URL';
+        errors[field.id] = urlValidation.message || "Please enter a valid URL";
       }
-    } else if (field.type === 'address' && value) {
-      const requiredKeys = ['line1', 'city', 'state', 'zip', 'country'];
+    } else if (field.type === "address" && value) {
+      const requiredKeys = ["line1", "city", "state", "zip", "country"];
       for (const key of requiredKeys) {
         if (!value[key]) {
           errors[field.id] =
@@ -130,7 +130,7 @@ export const validateStep = (
       value &&
       !new RegExp(field.validation.pattern).test(value)
     ) {
-      errors[field.id] = field.validation?.patternMessage || 'Invalid format';
+      errors[field.id] = field.validation?.patternMessage || "Invalid format";
     }
   });
 

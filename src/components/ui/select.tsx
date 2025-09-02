@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { Suspense } from 'react';
+import { Suspense } from "react";
 import {
   Select as BaseSelect,
   SelectContent as BaseSelectContent,
   SelectItem as BaseSelectItem,
   SelectTrigger as BaseSelectTrigger,
   SelectValue as BaseSelectValue,
-} from './select-base';
-import { Skeleton } from './skeleton';
+} from "./select-base";
+import { Skeleton } from "./skeleton";
 
 interface SuspenseSelectProps extends React.ComponentProps<typeof BaseSelect> {
   loading?: boolean;

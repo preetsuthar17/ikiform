@@ -1,29 +1,29 @@
-import * as AvatarPrimitive from '@radix-ui/react-avatar';
-import { cva, type VariantProps } from 'class-variance-authority';
-import * as React from 'react';
+import * as AvatarPrimitive from "@radix-ui/react-avatar";
+import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 
 const avatarVariants = cva(
-  'relative flex shrink-0 overflow-hidden rounded-card bg-background',
+  "relative flex shrink-0 overflow-hidden rounded-card bg-background",
   {
     variants: {
       size: {
-        xs: 'h-6 w-6',
-        sm: 'h-8 w-8',
-        md: 'h-10 w-10',
-        lg: 'h-13 w-13',
-        xl: 'h-16 w-16',
-        '2xl': 'h-20 w-20',
+        xs: "h-6 w-6",
+        sm: "h-8 w-8",
+        md: "h-10 w-10",
+        lg: "h-13 w-13",
+        xl: "h-16 w-16",
+        "2xl": "h-20 w-20",
       },
     },
     defaultVariants: {
-      size: 'md',
+      size: "md",
     },
   }
 );
@@ -51,13 +51,13 @@ const Avatar = React.forwardRef<
   }
 
   const tooltipProps =
-    typeof tooltip === 'string' ? { children: tooltip } : tooltip;
+    typeof tooltip === "string" ? { children: tooltip } : tooltip;
 
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>{avatar}</TooltipTrigger>
-        <TooltipContent size={'sm'} {...tooltipProps} />
+        <TooltipContent size={"sm"} {...tooltipProps} />
       </Tooltip>
     </TooltipProvider>
   );
@@ -69,7 +69,7 @@ const AvatarImage = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
 >(({ className, ...props }, ref) => (
   <AvatarPrimitive.Image
-    className={cn('aspect-square h-full w-full object-cover', className)}
+    className={cn("aspect-square h-full w-full object-cover", className)}
     ref={ref}
     {...props}
   />
@@ -82,7 +82,7 @@ const AvatarFallback = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AvatarPrimitive.Fallback
     className={cn(
-      'flex h-full w-full items-center justify-center rounded-card bg-muted font-medium text-muted-foreground',
+      "flex h-full w-full items-center justify-center rounded-card bg-muted font-medium text-muted-foreground",
       className
     )}
     ref={ref}
@@ -93,21 +93,21 @@ AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 
 interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   max?: number;
-  spacing?: 'tight' | 'normal' | 'loose' | 'tighter';
-  size?: VariantProps<typeof avatarVariants>['size'];
+  spacing?: "tight" | "normal" | "loose" | "tighter";
+  size?: VariantProps<typeof avatarVariants>["size"];
   children: React.ReactElement[];
 }
 
 const avatarGroupSpacing = {
-  tight: '-space-x-2',
-  normal: '-space-x-1',
-  loose: 'space-x-1',
-  tighter: '-space-x-5',
+  tight: "-space-x-2",
+  normal: "-space-x-1",
+  loose: "space-x-1",
+  tighter: "-space-x-5",
 };
 
 const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
   (
-    { className, max = 3, spacing = 'normal', size = 'md', children, ...props },
+    { className, max = 3, spacing = "normal", size = "md", children, ...props },
     ref
   ) => {
     const avatarsToShow = children.slice(0, max);
@@ -116,7 +116,7 @@ const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
     return (
       <div
         className={cn(
-          'flex items-center',
+          "flex items-center",
           avatarGroupSpacing[spacing],
           className
         )}
@@ -129,7 +129,7 @@ const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
               key: index,
               size,
               className: cn(
-                'border-2 border-background',
+                "border-2 border-background",
                 (child.props as any)?.className
               ),
             } as any);
@@ -147,7 +147,7 @@ const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
     );
   }
 );
-AvatarGroup.displayName = 'AvatarGroup';
+AvatarGroup.displayName = "AvatarGroup";
 
 export { Avatar, AvatarImage, AvatarFallback, AvatarGroup, avatarVariants };
 export type { AvatarGroupProps };

@@ -1,4 +1,4 @@
-import type { FormSchema } from '@/lib/database';
+import type { FormSchema } from "@/lib/database";
 
 /**
  * Default rate limiting settings for all forms
@@ -8,7 +8,7 @@ export const DEFAULT_RATE_LIMIT_SETTINGS = {
   maxSubmissions: 5,
   timeWindow: 30,
   blockDuration: 60,
-  message: 'Please wait before submitting another request.',
+  message: "Please wait before submitting another request.",
 };
 
 /**
@@ -19,7 +19,7 @@ export const DEFAULT_PROFANITY_FILTER_SETTINGS = {
   strictMode: true,
   replaceWithAsterisks: false,
   customWords: [],
-  customMessage: 'Please keep your submission respectful.',
+  customMessage: "Please keep your submission respectful.",
   whitelistedWords: [],
 };
 
@@ -30,7 +30,7 @@ export const DEFAULT_PROFANITY_FILTER_SETTINGS = {
 export const DEFAULT_RESPONSE_LIMIT_SETTINGS = {
   enabled: false,
   maxResponses: 100,
-  message: 'This form is no longer accepting responses.',
+  message: "This form is no longer accepting responses.",
 };
 
 /**
@@ -38,9 +38,9 @@ export const DEFAULT_RESPONSE_LIMIT_SETTINGS = {
  */
 export const DEFAULT_PASSWORD_PROTECTION_SETTINGS = {
   enabled: false,
-  password: '',
+  password: "",
   message:
-    'This form is password protected. Please enter the password to continue.',
+    "This form is password protected. Please enter the password to continue.",
 };
 
 /**
@@ -48,11 +48,11 @@ export const DEFAULT_PASSWORD_PROTECTION_SETTINGS = {
  */
 export const DEFAULT_DUPLICATE_PREVENTION_SETTINGS = {
   enabled: false,
-  strategy: 'combined' as const,
-  mode: 'one-time' as const,
+  strategy: "combined" as const,
+  mode: "one-time" as const,
   timeWindow: 1440,
   message:
-    'You have already submitted this form. Each user can only submit once.',
+    "You have already submitted this form. Each user can only submit once.",
   allowOverride: false,
   maxAttempts: 1,
 };
@@ -60,57 +60,57 @@ export const DEFAULT_DUPLICATE_PREVENTION_SETTINGS = {
 export const DEFAULT_SOCIAL_MEDIA_SETTINGS = {
   enabled: true,
   platforms: {
-    github: 'https://github.com/preetsuthar17',
-    twitter: 'https://x.com/preetsuthar17',
+    github: "https://github.com/preetsuthar17",
+    twitter: "https://x.com/preetsuthar17",
   },
   showIcons: true,
-  iconSize: 'md' as const,
-  position: 'footer' as const,
+  iconSize: "md" as const,
+  position: "footer" as const,
 };
 
 export const DEFAULT_EMAIL_VALIDATION_SETTINGS = {
   allowedDomains: [],
   blockedDomains: [],
-  autoCompleteDomain: '',
+  autoCompleteDomain: "",
   requireBusinessEmail: false,
-  customValidationMessage: '',
+  customValidationMessage: "",
 };
 
 export const DEFAULT_NOTIFICATION_SETTINGS = {
   enabled: true,
-  email: '',
-  subject: 'You received a submission! 🥳',
-  message: 'Whoo-hoo!! You have received a new submission on your form.',
+  email: "",
+  subject: "You received a submission! 🥳",
+  message: "Whoo-hoo!! You have received a new submission on your form.",
 };
 
 export const DEFAULT_LAYOUT_SETTINGS = {
-  margin: 'md' as const,
-  padding: 'lg' as const,
-  maxWidth: 'md' as const,
-  borderRadius: 'md' as const,
-  spacing: 'normal' as const,
-  alignment: 'left' as const,
+  margin: "md" as const,
+  padding: "lg" as const,
+  maxWidth: "md" as const,
+  borderRadius: "md" as const,
+  spacing: "normal" as const,
+  alignment: "left" as const,
 };
 
 /**
  * Default color settings for all forms
  */
 export const DEFAULT_COLOR_SETTINGS = {
-  text: '#1f2937',
-  border: '#e5e7eb',
-  primary: '#3b82f6',
-  background: 'transparent',
+  text: "#1f2937",
+  border: "#e5e7eb",
+  primary: "#3b82f6",
+  background: "transparent",
 };
 
 /**
  * Default typography settings for all forms
  */
 export const DEFAULT_TYPOGRAPHY_SETTINGS = {
-  fontSize: 'base' as const,
-  fontFamily: 'Inter',
-  fontWeight: 'normal' as const,
-  lineHeight: 'normal' as const,
-  letterSpacing: 'normal' as const,
+  fontSize: "base" as const,
+  fontFamily: "Inter",
+  fontWeight: "normal" as const,
+  lineHeight: "normal" as const,
+  letterSpacing: "normal" as const,
 };
 
 /**
@@ -121,13 +121,13 @@ export function ensureDefaultFormSettings(schema: FormSchema): FormSchema {
   return {
     ...schema,
     settings: {
-      title: schema.settings?.title || 'Untitled Form',
-      publicTitle: schema.settings?.publicTitle || '',
-      description: schema.settings?.description || '',
-      submitText: schema.settings?.submitText || 'Submit',
+      title: schema.settings?.title || "Untitled Form",
+      publicTitle: schema.settings?.publicTitle || "",
+      description: schema.settings?.description || "",
+      submitText: schema.settings?.submitText || "Submit",
       successMessage:
-        schema.settings?.successMessage || 'Thank you for your submission!',
-      redirectUrl: schema.settings?.redirectUrl || '',
+        schema.settings?.successMessage || "Thank you for your submission!",
+      redirectUrl: schema.settings?.redirectUrl || "",
       multiStep: schema.settings?.multiStep,
       showProgress: schema.settings?.showProgress !== false,
       hideHeader: schema.settings?.hideHeader,
@@ -195,28 +195,28 @@ export function createDefaultFormSchema(options: {
     blocks: options.multiStep
       ? [
           {
-            id: 'step-1',
-            title: 'Step 1',
-            description: 'First step of your form',
+            id: "step-1",
+            title: "Step 1",
+            description: "First step of your form",
             fields: [],
           },
         ]
       : [
           {
-            id: 'default',
-            title: 'Form Fields',
-            description: '',
+            id: "default",
+            title: "Form Fields",
+            description: "",
             fields: [],
           },
         ],
     fields: [],
     settings: {
-      title: options.title || 'Untitled Form',
-      publicTitle: options.publicTitle || '',
-      description: options.description || '',
-      submitText: 'Submit',
-      successMessage: 'Thank you for your submission!',
-      redirectUrl: '',
+      title: options.title || "Untitled Form",
+      publicTitle: options.publicTitle || "",
+      description: options.description || "",
+      submitText: "Submit",
+      successMessage: "Thank you for your submission!",
+      redirectUrl: "",
       multiStep: options.multiStep,
       showProgress: options.multiStep !== false,
       hideHeader: false,

@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { Plus, X } from 'lucide-react';
-import React from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import type { FormField } from '@/lib/database';
+import { Plus, X } from "lucide-react";
+import React from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import type { FormField } from "@/lib/database";
 
 interface FileFieldSettingsProps {
   field: FormField;
-  onUpdateSettings: (updates: Partial<FormField['settings']>) => void;
+  onUpdateSettings: (updates: Partial<FormField["settings"]>) => void;
   onFieldUpdate: (field: FormField) => void;
 }
 
@@ -25,46 +25,46 @@ interface FileFieldSettings {
 
 const COMMON_FILE_TYPES = [
   {
-    label: 'Images',
-    value: 'image/*',
-    extensions: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+    label: "Images",
+    value: "image/*",
+    extensions: ["jpg", "jpeg", "png", "gif", "webp"],
   },
   {
-    label: 'Documents',
+    label: "Documents",
     value:
-      'application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    extensions: ['pdf', 'doc', 'docx'],
+      "application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    extensions: ["pdf", "doc", "docx"],
   },
   {
-    label: 'Spreadsheets',
+    label: "Spreadsheets",
     value:
-      'application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    extensions: ['xls', 'xlsx'],
+      "application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    extensions: ["xls", "xlsx"],
   },
   {
-    label: 'Videos',
-    value: 'video/*',
-    extensions: ['mp4', 'avi', 'mov', 'wmv'],
+    label: "Videos",
+    value: "video/*",
+    extensions: ["mp4", "avi", "mov", "wmv"],
   },
   {
-    label: 'Audio',
-    value: 'audio/*',
-    extensions: ['mp3', 'wav', 'flac', 'm4a'],
+    label: "Audio",
+    value: "audio/*",
+    extensions: ["mp3", "wav", "flac", "m4a"],
   },
   {
-    label: 'Archives',
+    label: "Archives",
     value:
-      'application/zip,application/x-rar-compressed,application/x-7z-compressed',
-    extensions: ['zip', 'rar', '7z'],
+      "application/zip,application/x-rar-compressed,application/x-7z-compressed",
+    extensions: ["zip", "rar", "7z"],
   },
 ];
 
 const SIZE_PRESETS = [
-  { label: '1 MB', value: 1024 * 1024 },
-  { label: '5 MB', value: 5 * 1024 * 1024 },
-  { label: '10 MB', value: 10 * 1024 * 1024 },
-  { label: '25 MB', value: 25 * 1024 * 1024 },
-  { label: '50 MB', value: 50 * 1024 * 1024 },
+  { label: "1 MB", value: 1024 * 1024 },
+  { label: "5 MB", value: 5 * 1024 * 1024 },
+  { label: "10 MB", value: 10 * 1024 * 1024 },
+  { label: "25 MB", value: 25 * 1024 * 1024 },
+  { label: "50 MB", value: 50 * 1024 * 1024 },
 ];
 
 export function FileFieldSettings({
@@ -73,11 +73,11 @@ export function FileFieldSettings({
 }: FileFieldSettingsProps) {
   const settings = (field.settings as FileFieldSettings) || {};
   const {
-    accept = 'image/*,application/pdf,video/*,audio/*,text/*,application/zip',
+    accept = "image/*,application/pdf,video/*,audio/*,text/*,application/zip",
     maxFiles = 10,
     maxSize = 50 * 1024 * 1024, // 50MB default
     allowedTypes = [],
-    helpText = '',
+    helpText = "",
   } = settings;
 
   const updateSetting = (key: keyof FileFieldSettings, value: any) => {
@@ -87,33 +87,33 @@ export function FileFieldSettings({
   };
 
   const formatFileSize = (bytes: number): string => {
-    if (!bytes) return '0 Bytes';
+    if (!bytes) return "0 Bytes";
     const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const sizes = ["Bytes", "KB", "MB", "GB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return `${(bytes / k ** i).toFixed(1)} ${sizes[i]}`;
   };
 
   const updateAcceptAttribute = (types: string[]) => {
     // Generate accept attribute from allowed types
-    const acceptTypes = types.map((type) => `.${type}`).join(',');
+    const acceptTypes = types.map((type) => `.${type}`).join(",");
     const fullAccept =
       acceptTypes ||
-      'image/*,application/pdf,video/*,audio/*,text/*,application/zip';
-    updateSetting('accept', fullAccept);
+      "image/*,application/pdf,video/*,audio/*,text/*,application/zip";
+    updateSetting("accept", fullAccept);
   };
 
   const addFileType = (type: string) => {
     if (!allowedTypes.includes(type)) {
       const newTypes = [...allowedTypes, type];
-      updateSetting('allowedTypes', newTypes);
+      updateSetting("allowedTypes", newTypes);
       updateAcceptAttribute(newTypes);
     }
   };
 
   const removeFileType = (type: string) => {
     const newTypes = allowedTypes.filter((t) => t !== type);
-    updateSetting('allowedTypes', newTypes);
+    updateSetting("allowedTypes", newTypes);
     updateAcceptAttribute(newTypes);
   };
 
@@ -133,7 +133,7 @@ export function FileFieldSettings({
       newTypes = [...new Set([...allowedTypes, ...typeConfig.extensions])];
     }
 
-    updateSetting('allowedTypes', newTypes);
+    updateSetting("allowedTypes", newTypes);
     updateAcceptAttribute(newTypes);
   };
 
@@ -148,7 +148,7 @@ export function FileFieldSettings({
             max="50"
             min="1"
             onChange={(e) =>
-              updateSetting('maxFiles', Number.parseInt(e.target.value) || 1)
+              updateSetting("maxFiles", Number.parseInt(e.target.value) || 1)
             }
             placeholder="10"
             type="number"
@@ -168,7 +168,7 @@ export function FileFieldSettings({
               min="1"
               onChange={(e) =>
                 updateSetting(
-                  'maxSize',
+                  "maxSize",
                   (Number.parseInt(e.target.value) || 1) * 1024 * 1024
                 )
               }
@@ -184,9 +184,9 @@ export function FileFieldSettings({
             {SIZE_PRESETS.map((preset) => (
               <Button
                 key={preset.label}
-                onClick={() => updateSetting('maxSize', preset.value)}
+                onClick={() => updateSetting("maxSize", preset.value)}
                 size="sm"
-                variant={maxSize === preset.value ? 'default' : 'outline'}
+                variant={maxSize === preset.value ? "default" : "outline"}
               >
                 {preset.label}
               </Button>
@@ -215,7 +215,7 @@ export function FileFieldSettings({
                   key={typeConfig.label}
                   onClick={() => toggleCommonType(typeConfig)}
                   size="sm"
-                  variant={hasAllExtensions ? 'default' : 'outline'}
+                  variant={hasAllExtensions ? "default" : "outline"}
                 >
                   {typeConfig.label}
                 </Button>
@@ -231,12 +231,12 @@ export function FileFieldSettings({
             <Input
               id="customType"
               onKeyPress={(e) => {
-                if (e.key === 'Enter') {
+                if (e.key === "Enter") {
                   e.preventDefault();
                   const value = e.currentTarget.value.trim();
                   if (value) {
                     addFileType(value);
-                    e.currentTarget.value = '';
+                    e.currentTarget.value = "";
                   }
                 }
               }}
@@ -245,12 +245,12 @@ export function FileFieldSettings({
             <Button
               onClick={() => {
                 const input = document.getElementById(
-                  'customType'
+                  "customType"
                 ) as HTMLInputElement;
                 const value = input.value.trim();
                 if (value) {
                   addFileType(value);
-                  input.value = '';
+                  input.value = "";
                 }
               }}
               size="sm"
@@ -303,7 +303,7 @@ export function FileFieldSettings({
         <Label htmlFor="helpText">Help Text</Label>
         <Textarea
           id="helpText"
-          onChange={(e) => updateSetting('helpText', e.target.value)}
+          onChange={(e) => updateSetting("helpText", e.target.value)}
           placeholder="Additional instructions for users..."
           rows={2}
           value={helpText}

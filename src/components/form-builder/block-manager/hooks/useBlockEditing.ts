@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import type { FormBlock } from '@/lib/database';
-import type { BlockEditingState } from '../types';
+import type { FormBlock } from "@/lib/database";
+import type { BlockEditingState } from "../types";
 
 export function useBlockEditing(
   onBlocksUpdate: (blocks: FormBlock[]) => void,
@@ -9,15 +9,15 @@ export function useBlockEditing(
 ) {
   const [editingState, setEditingState] = useState<BlockEditingState>({
     editingBlock: null,
-    editTitle: '',
-    editDescription: '',
+    editTitle: "",
+    editDescription: "",
   });
 
   const startEditingBlock = (block: FormBlock) => {
     setEditingState({
       editingBlock: block.id,
       editTitle: block.title,
-      editDescription: block.description || '',
+      editDescription: block.description || "",
     });
   };
 
@@ -37,16 +37,16 @@ export function useBlockEditing(
     onBlocksUpdate(updatedBlocks);
     setEditingState({
       editingBlock: null,
-      editTitle: '',
-      editDescription: '',
+      editTitle: "",
+      editDescription: "",
     });
   };
 
   const cancelBlockEdit = () => {
     setEditingState({
       editingBlock: null,
-      editTitle: '',
-      editDescription: '',
+      editTitle: "",
+      editDescription: "",
     });
   };
 

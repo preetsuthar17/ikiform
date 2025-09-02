@@ -1,18 +1,18 @@
-import { useParams } from 'next/navigation';
-import React from 'react';
-import type { FormSettingsSection } from '../types';
-import { BasicInfoSection } from './BasicInfoSection';
-import { DesignSection } from './DesignSection';
-import { DuplicatePreventionSection } from './DuplicatePreventionSection';
-import { FormDesignPreview } from './FormDesignPreview';
-import { NotificationsSection } from './NotificationsSection';
-import { PasswordProtectionSection } from './PasswordProtectionSection';
-import { ProfanityFilterSection } from './ProfanityFilterSection';
-import { QuizSection } from './QuizSection';
-import { RateLimitSection } from './RateLimitSection';
-import { ResponseLimitSection } from './ResponseLimitSection';
-import { BrandingSection } from './SocialMediaSection';
-import { WebhooksSettingsSection } from './WebhooksSettingsSection';
+import { useParams } from "next/navigation";
+import React from "react";
+import type { FormSettingsSection } from "../types";
+import { BasicInfoSection } from "./BasicInfoSection";
+import { DesignSection } from "./DesignSection";
+import { DuplicatePreventionSection } from "./DuplicatePreventionSection";
+import { FormDesignPreview } from "./FormDesignPreview";
+import { NotificationsSection } from "./NotificationsSection";
+import { PasswordProtectionSection } from "./PasswordProtectionSection";
+import { ProfanityFilterSection } from "./ProfanityFilterSection";
+import { QuizSection } from "./QuizSection";
+import { RateLimitSection } from "./RateLimitSection";
+import { ResponseLimitSection } from "./ResponseLimitSection";
+import { BrandingSection } from "./SocialMediaSection";
+import { WebhooksSettingsSection } from "./WebhooksSettingsSection";
 
 interface FormSettingsContentProps {
   section: FormSettingsSection;
@@ -42,7 +42,7 @@ export function FormSettingsContent({
   const params = useParams();
   const formId = params?.id as string | undefined;
   switch (section) {
-    case 'basic':
+    case "basic":
       return (
         <section className="flex flex-col gap-4">
           <BasicInfoSection
@@ -51,7 +51,7 @@ export function FormSettingsContent({
           />
         </section>
       );
-    case 'limits':
+    case "limits":
       return (
         <section className="flex flex-col gap-4">
           <RateLimitSection
@@ -64,7 +64,7 @@ export function FormSettingsContent({
           />
         </section>
       );
-    case 'security':
+    case "security":
       return (
         <section className="flex flex-col gap-4">
           <PasswordProtectionSection
@@ -81,7 +81,7 @@ export function FormSettingsContent({
           />
         </section>
       );
-    case 'branding':
+    case "branding":
       return (
         <section className="flex flex-col gap-4">
           <BrandingSection
@@ -91,7 +91,7 @@ export function FormSettingsContent({
           />
         </section>
       );
-    case 'notifications':
+    case "notifications":
       return (
         <section className="flex flex-col gap-4">
           <NotificationsSection
@@ -100,7 +100,7 @@ export function FormSettingsContent({
           />
         </section>
       );
-    case 'quiz':
+    case "quiz":
       return (
         <section className="flex flex-col gap-4">
           <QuizSection
@@ -109,7 +109,7 @@ export function FormSettingsContent({
           />
         </section>
       );
-    case 'design':
+    case "design":
       return (
         <section className="flex flex-col gap-4">
           <DesignSection
@@ -119,10 +119,10 @@ export function FormSettingsContent({
           />
         </section>
       );
-    case 'webhooks':
+    case "webhooks":
       return (
         <section className="flex flex-col gap-4">
-          <WebhooksSettingsSection formId={formId || ''} />
+          <WebhooksSettingsSection formId={formId || ""} />
         </section>
       );
     default:

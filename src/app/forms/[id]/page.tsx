@@ -1,8 +1,8 @@
-import { notFound } from 'next/navigation';
-import { formsDbServer } from '@/lib/database';
-import { ensureDefaultRateLimitSettings } from '@/lib/forms/form-defaults';
-import { getPublicFormTitle } from '@/lib/utils/form-utils';
-import PublicFormServerWrapper from './components/PublicFormServerWrapper';
+import { notFound } from "next/navigation";
+import { formsDbServer } from "@/lib/database";
+import { ensureDefaultRateLimitSettings } from "@/lib/forms/form-defaults";
+import { getPublicFormTitle } from "@/lib/utils/form-utils";
+import PublicFormServerWrapper from "./components/PublicFormServerWrapper";
 
 interface PublicFormPageProps {
   params: Promise<{ id: string }>;
@@ -21,7 +21,7 @@ export async function generateMetadata({
     const description =
       form.schema?.settings?.description ||
       form.description ||
-      'Fill out this form.';
+      "Fill out this form.";
     const identifier = form.slug || id;
     return {
       title,
@@ -30,10 +30,10 @@ export async function generateMetadata({
         title,
         description,
         url: `https://www.ikiform.com/f/${identifier}`,
-        type: 'website',
+        type: "website",
       },
       twitter: {
-        card: 'summary_large_image',
+        card: "summary_large_image",
         title,
         description,
       },
@@ -60,7 +60,7 @@ export default async function PublicFormPage({ params }: PublicFormPageProps) {
       />
     );
   } catch (error) {
-    console.error('Error loading form:', error);
+    console.error("Error loading form:", error);
     notFound();
   }
 }

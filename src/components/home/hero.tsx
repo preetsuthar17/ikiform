@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { ChevronRight, Play, Star } from 'lucide-react';
-import Link from 'next/link';
-import React, { type CSSProperties } from 'react';
-import { useAuth } from '@/hooks/use-auth';
-import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from '../ui';
-import { Button } from '../ui/button';
-import { Chip } from '../ui/chip';
-import { Modal, ModalContent, ModalHeader, ModalTitle } from '../ui/modal';
+import { ChevronRight, Play, Star } from "lucide-react";
+import Link from "next/link";
+import React, { type CSSProperties } from "react";
+import { useAuth } from "@/hooks/use-auth";
+import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from "../ui";
+import { Button } from "../ui/button";
+import { Chip } from "../ui/chip";
+import { Modal, ModalContent, ModalHeader, ModalTitle } from "../ui/modal";
 
 interface EmbeddedFormProps {
   className?: string;
@@ -20,29 +20,29 @@ export function EmbeddedForm({ className, style }: EmbeddedFormProps) {
 
   React.useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      if (event.origin !== 'https://www.ikiform.com') return;
+      if (event.origin !== "https://www.ikiform.com") return;
 
-      if (event.data?.type === 'resize' && event.data?.height) {
+      if (event.data?.type === "resize" && event.data?.height) {
         setIframeHeight(event.data.height);
       }
     };
 
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
   }, []);
 
   const iframeStyle: CSSProperties = {
-    width: '100%',
+    width: "100%",
     height: `${iframeHeight}px`,
-    border: '1px solid #ffffff',
-    borderRadius: '22px',
-    display: 'block',
-    margin: '0 auto',
+    border: "1px solid #ffffff",
+    borderRadius: "22px",
+    display: "block",
+    margin: "0 auto",
     ...style,
   };
 
   return (
-    <div className={`flex w-full justify-center ${className || ''}`}>
+    <div className={`flex w-full justify-center ${className || ""}`}>
       <iframe
         allow="clipboard-write; camera; microphone"
         frameBorder="0"
@@ -68,10 +68,11 @@ export default function Hero() {
     let isMounted = true;
     async function fetchCount() {
       try {
-        const res = await fetch('/api/users/count', { cache: 'no-store' });
+        const res = await fetch("/api/users/count", { cache: "no-store" });
         if (!res.ok) return;
         const data = (await res.json()) as { count: number | null };
-        if (isMounted) setUserCount(typeof data.count === 'number' ? data.count : null);
+        if (isMounted)
+          setUserCount(typeof data.count === "number" ? data.count : null);
       } catch {}
     }
     fetchCount();
@@ -83,7 +84,7 @@ export default function Hero() {
   return (
     <section className="mx-auto mt-2 flex w-full max-w-7xl flex-col gap-12 p-4">
       <div className="z-20 flex h-full grow flex-col items-center gap-12 text-center">
-        <Chip className="rounded-full" variant={'secondary'}>
+        <Chip className="rounded-full" variant={"secondary"}>
           <Link
             className="flex items-center justify-center gap-2"
             href="https://vercel.com/open-source-program?utm_source=ikiform"
@@ -109,22 +110,22 @@ export default function Hero() {
             </span>
           </Link>
         </Chip>
-        <h1 className="text-center font-dm-sans font-medium text-4xl leading-tighter tracking-[-2px] md:max-w-4xl md:text-6xl">
-          <span className="hidden sm:inline">Beautiful & </span>
+        <h1 className="text-center font-dm-sans font-medium text-4xl leading-tight tracking-[-2px] md:max-w-4xl md:text-6xl">
           <span className="relative">
-            <span className="relative z-10 text-black">Affordable</span>
+            <span className="relative z-10 text-black">Enterprise-level</span>
             <span className="-translate-y-1/2 -rotate-1 -z-10 absolute inset-0 top-1/2 transform rounded-md bg-blue-200 py-6 md:py-8" />
-          </span>{' '}
-          forms that won't{' '}
+          </span>{" "}
+          forms with{" "}
           <span className="relative">
-            <span className="relative z-10 text-black">bore users</span>
+            <span className="relative z-10 text-black">sensible</span>
             <span className="-translate-y-1/2 -rotate-1 -z-10 absolute inset-0 top-1/2 transform rounded-md bg-yellow-200 py-6 md:py-8" />
-          </span>
+          </span>{" "}
+          pricing
         </h1>
 
         <p className="md:text-lg">
-          Enterprise-level forms with all the features you need at a price that
-          makes sense
+          Create user-friendly forms with enterprise-level features at a price
+          that makes sense
         </p>
 
         <div className="flex w-fit flex-wrap items-center justify-center gap-3">
@@ -138,7 +139,7 @@ export default function Hero() {
                 className="flex items-center gap-2 font-medium"
                 href="/dashboard"
               >
-                Go to Dashboard{' '}
+                Go to Dashboard{" "}
                 <svg
                   height="1em"
                   viewBox="0 0 24 24"
@@ -221,13 +222,9 @@ export default function Hero() {
           </AvatarGroup>
           <div className="flex flex-col items-center justify-center rounded-full px-5 py-2">
             <span className="flex items-center justify-center gap-1 text-center">
-              <span className="text-sm opacity-80">
-                Loved by
-              </span>
-              <span className="text-sm">{userCount ?? '300'}+</span>
-              <span className="text-sm opacity-80">
-                users
-              </span>
+              <span className="text-sm opacity-80">Loved by</span>
+              <span className="text-sm">{userCount ?? "300"}+</span>
+              <span className="text-sm opacity-80">users</span>
             </span>
             <div className="mt-2 flex items-center justify-start gap-1">
               {Array.from({ length: 5 }).map((_, i) => (

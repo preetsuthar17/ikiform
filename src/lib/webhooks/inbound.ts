@@ -1,13 +1,13 @@
-import type { SupabaseClient } from '@supabase/supabase-js';
-import type { Database } from '@/lib/database/database.types';
-import { createAdminClient } from '@/utils/supabase/admin';
+import type { SupabaseClient } from "@supabase/supabase-js";
+import type { Database } from "@/lib/database/database.types";
+import { createAdminClient } from "@/utils/supabase/admin";
 
 type InboundWebhookMappingRow =
-  Database['public']['Tables']['inbound_webhook_mappings']['Row'];
+  Database["public"]["Tables"]["inbound_webhook_mappings"]["Row"];
 type InboundWebhookMappingInsert =
-  Database['public']['Tables']['inbound_webhook_mappings']['Insert'];
+  Database["public"]["Tables"]["inbound_webhook_mappings"]["Insert"];
 type InboundWebhookMappingUpdate =
-  Database['public']['Tables']['inbound_webhook_mappings']['Update'];
+  Database["public"]["Tables"]["inbound_webhook_mappings"]["Update"];
 
 export interface InboundWebhookMapping {
   id: string;
@@ -41,7 +41,7 @@ export async function createInboundMapping(
   const now = new Date().toISOString();
 
   if (!(data.endpoint && data.targetFormId)) {
-    throw new Error('endpoint and targetFormId are required');
+    throw new Error("endpoint and targetFormId are required");
   }
 
   const insertData: InboundWebhookMappingInsert = {
@@ -55,12 +55,12 @@ export async function createInboundMapping(
   };
 
   const { data: result, error } = await supabase
-    .from('inbound_webhook_mappings')
+    .from("inbound_webhook_mappings")
     .insert([insertData] as any)
     .select()
     .single();
   if (error || !result)
-    throw new Error(error?.message || 'Failed to create inbound mapping');
+    throw new Error(error?.message || "Failed to create inbound mapping");
   return mapInboundMappingRow(result);
 }
 
@@ -70,9 +70,9 @@ export async function getInboundMappings({
   targetFormId?: string;
 } = {}): Promise<InboundWebhookMapping[]> {
   const supabase = createAdminClient() as SupabaseClient<Database>;
-  let query = supabase.from('inbound_webhook_mappings').select('*');
-  if (targetFormId) query = query.eq('target_form_id', targetFormId);
-  query = query.order('created_at', { ascending: false });
+  let query = supabase.from("inbound_webhook_mappings").select("*");
+  if (targetFormId) query = query.eq("target_form_id", targetFormId);
+  query = query.order("created_at", { ascending: false });
   const { data, error } = await query;
   if (error) throw new Error(error.message);
   return Array.isArray(data) ? data.map(mapInboundMappingRow) : [];
@@ -95,22 +95,22 @@ export async function updateInboundMapping(
   };
 
   const { data: result, error } = await (
-    supabase.from('inbound_webhook_mappings') as any
+    supabase.from("inbound_webhook_mappings") as any
   )
     .update(updateData)
-    .eq('id', id)
+    .eq("id", id)
     .select()
     .single();
   if (error || !result)
-    throw new Error(error?.message || 'Failed to update inbound mapping');
+    throw new Error(error?.message || "Failed to update inbound mapping");
   return mapInboundMappingRow(result);
 }
 
 export async function deleteInboundMapping(id: string): Promise<void> {
   const supabase = createAdminClient() as SupabaseClient<Database>;
   const { error } = await supabase
-    .from('inbound_webhook_mappings')
+    .from("inbound_webhook_mappings")
     .delete()
-    .eq('id', id);
+    .eq("id", id);
   if (error) throw new Error(error.message);
 }

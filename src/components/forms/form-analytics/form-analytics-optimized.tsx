@@ -1,7 +1,7 @@
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
-import { Skeleton } from '@/components/ui/skeleton';
-import type { FormAnalyticsProps } from './types';
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import type { FormAnalyticsProps } from "./types";
 
 function FormAnalyticsSkeleton() {
   return (
@@ -57,7 +57,7 @@ function FormAnalyticsSkeleton() {
 
 const FormAnalyticsClient = dynamic(
   () =>
-    import('./form-analytics-client').then((mod) => ({
+    import("./form-analytics-client").then((mod) => ({
       default: mod.FormAnalyticsClient,
     })),
   {

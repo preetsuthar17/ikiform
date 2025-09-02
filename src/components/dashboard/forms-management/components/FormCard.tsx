@@ -1,12 +1,12 @@
-import React from 'react';
-import { ShareFormModal } from '@/components/form-builder/share-form-modal';
-import { Separator } from '@/components/ui';
-import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
-import { getInternalFormTitle } from '@/lib/utils/form-utils';
-import type { FormCardProps } from '../types';
-import { formatDate, getTotalFields } from '../utils';
-import { FormActions } from './FormActions';
+import React from "react";
+import { ShareFormModal } from "@/components/form-builder/share-form-modal";
+import { Separator } from "@/components/ui";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { getInternalFormTitle } from "@/lib/utils/form-utils";
+import type { FormCardProps } from "../types";
+import { formatDate, getTotalFields } from "../utils";
+import { FormActions } from "./FormActions";
 
 export function FormCard({
   form,
@@ -25,7 +25,7 @@ export function FormCard({
   };
 
   const internalTitle =
-    form.schema?.settings?.title || form.title || 'Untitled Form';
+    form.schema?.settings?.title || form.title || "Untitled Form";
   const hasPublicTitle =
     form.schema?.settings?.publicTitle &&
     form.schema.settings.publicTitle !== form.schema?.settings?.title;
@@ -50,9 +50,9 @@ export function FormCard({
         </div>
         <Badge
           className="flex-shrink-0 rounded-lg font-medium"
-          variant={form.is_published ? 'default' : 'secondary'}
+          variant={form.is_published ? "default" : "secondary"}
         >
-          {form.is_published ? 'Published' : 'Draft'}
+          {form.is_published ? "Published" : "Draft"}
         </Badge>
       </div>
       <Separator />

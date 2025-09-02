@@ -1,9 +1,9 @@
-import { lazy, Suspense } from 'react';
-import { Skeleton } from '@/components/ui/skeleton';
-import type { ChatPanelProps } from '@/lib/ai-builder/types';
+import { lazy, Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import type { ChatPanelProps } from "@/lib/ai-builder/types";
 
 const MobileChatDrawerLazy = lazy(() =>
-  import('./mobile-chat-drawer').then((module) => ({
+  import("./mobile-chat-drawer").then((module) => ({
     default: module.MobileChatDrawer,
   }))
 );

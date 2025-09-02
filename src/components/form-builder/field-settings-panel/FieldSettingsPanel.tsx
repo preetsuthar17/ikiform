@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { ScrollArea } from "@/components/ui/scroll-area";
 
-import type { FormField } from '@/lib/database';
+import type { FormField } from "@/lib/database";
 import {
   BasicSettings,
   EmptyState,
@@ -13,9 +13,9 @@ import {
   SettingsPanelHeader,
   ValidationSettings,
   VisualSettings,
-} from './components';
+} from "./components";
 
-import { useFieldUpdates } from './utils';
+import { useFieldUpdates } from "./utils";
 
 interface FieldSettingsPanelProps {
   field: FormField | null;
@@ -48,7 +48,7 @@ export function FieldSettingsPanel({
             onFieldUpdate={onFieldUpdate}
             onUpdateSettings={updateSettings}
           />
-          {['select', 'radio', 'checkbox', 'poll'].includes(field.type) && (
+          {["select", "radio", "checkbox", "poll"].includes(field.type) && (
             <OptionsSettings field={field} onFieldUpdate={onFieldUpdate} />
           )}
           <PrepopulationSettings field={field} onFieldUpdate={onFieldUpdate} />

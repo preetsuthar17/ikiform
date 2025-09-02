@@ -3,20 +3,20 @@ import {
   SkeletonButton,
   SkeletonCard,
   SkeletonText,
-} from '@/components/ui/skeleton';
+} from "@/components/ui/skeleton";
 
 interface FormSkeletonProps {
-  variant?: 'single-step' | 'multi-step';
+  variant?: "single-step" | "multi-step";
   showProgress?: boolean;
 }
 
-const transparentClass = 'bg-transparent/40';
+const transparentClass = "bg-transparent/40";
 
 export function FormSkeleton({
-  variant = 'single-step',
+  variant = "single-step",
   showProgress = false,
 }: FormSkeletonProps) {
-  if (variant === 'multi-step') {
+  if (variant === "multi-step") {
     return (
       <div className="mx-auto flex w-full max-w-xl flex-col gap-6 p-4">
         {showProgress && (

@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { Check, Eye, Palette } from 'lucide-react';
-import React from 'react';
-import type { LocalSettings } from '@/components/form-builder/form-settings-modal/types';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
-import { toast } from '@/hooks/use-toast';
+import { Check, Eye, Palette } from "lucide-react";
+import React from "react";
+import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { toast } from "@/hooks/use-toast";
 import {
   FORM_PRESETS,
   type FormPreset,
   getPresetsByCategory,
   PRESET_CATEGORIES,
-} from '@/lib/utils/form-presets';
+} from "@/lib/utils/form-presets";
 
 interface PresetsSectionProps {
   localSettings: LocalSettings;
@@ -27,12 +27,12 @@ export function PresetsSection({
   updateSettings,
 }: PresetsSectionProps) {
   const [selectedCategory, setSelectedCategory] = React.useState<
-    FormPreset['category'] | 'all'
-  >('all');
+    FormPreset["category"] | "all"
+  >("all");
   const [appliedPreset, setAppliedPreset] = React.useState<string | null>(null);
 
   const filteredPresets =
-    selectedCategory === 'all'
+    selectedCategory === "all"
       ? FORM_PRESETS
       : getPresetsByCategory(selectedCategory);
 
@@ -69,7 +69,7 @@ export function PresetsSection({
     return (
       <Card
         className={`hover: cursor-pointer p-4 transition-all duration-200 ${
-          isApplied ? 'scale-[1.02] ring-2 ring-primary' : ''
+          isApplied ? "scale-[1.02] ring-2 ring-primary" : ""
         }`}
         onClick={() => applyPreset(preset)}
       >
@@ -78,8 +78,8 @@ export function PresetsSection({
           <div
             className="flex h-full w-full items-center justify-center text-xs"
             style={{
-              backgroundColor: preset.settings.colors?.background || '#ffffff',
-              color: preset.settings.colors?.text || '#000000',
+              backgroundColor: preset.settings.colors?.background || "#ffffff",
+              color: preset.settings.colors?.text || "#000000",
               fontFamily: preset.settings.typography?.fontFamily
                 ? `"${preset.settings.typography.fontFamily}", system-ui, sans-serif`
                 : undefined,
@@ -89,7 +89,7 @@ export function PresetsSection({
               <div
                 className="font-medium text-[10px]"
                 style={{
-                  color: preset.settings.colors?.primary || '#3b82f6',
+                  color: preset.settings.colors?.primary || "#3b82f6",
                 }}
               >
                 Form Title
@@ -97,20 +97,20 @@ export function PresetsSection({
               <div
                 className="mx-auto h-1 w-16 rounded"
                 style={{
-                  backgroundColor: preset.settings.colors?.border || '#e5e7eb',
+                  backgroundColor: preset.settings.colors?.border || "#e5e7eb",
                 }}
               />
               <div
                 className="mx-auto h-1 w-12 rounded"
                 style={{
-                  backgroundColor: preset.settings.colors?.border || '#e5e7eb',
+                  backgroundColor: preset.settings.colors?.border || "#e5e7eb",
                 }}
               />
               <div
                 className="mx-auto mt-1 flex h-3 w-8 items-center justify-center rounded text-[8px]"
                 style={{
-                  backgroundColor: preset.settings.colors?.primary || '#3b82f6',
-                  color: '#ffffff',
+                  backgroundColor: preset.settings.colors?.primary || "#3b82f6",
+                  color: "#ffffff",
                 }}
               >
                 Submit
@@ -176,9 +176,9 @@ export function PresetsSection({
         <div className="flex flex-wrap gap-2">
           <Button
             className="text-xs"
-            onClick={() => setSelectedCategory('all')}
+            onClick={() => setSelectedCategory("all")}
             size="sm"
-            variant={selectedCategory === 'all' ? 'default' : 'outline'}
+            variant={selectedCategory === "all" ? "default" : "outline"}
           >
             All Presets
           </Button>
@@ -187,10 +187,10 @@ export function PresetsSection({
               className="text-xs"
               key={category.id}
               onClick={() =>
-                setSelectedCategory(category.id as FormPreset['category'])
+                setSelectedCategory(category.id as FormPreset["category"])
               }
               size="sm"
-              variant={selectedCategory === category.id ? 'default' : 'outline'}
+              variant={selectedCategory === category.id ? "default" : "outline"}
             >
               {category.label}
             </Button>
@@ -204,14 +204,14 @@ export function PresetsSection({
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <Label className="font-medium">
-            {selectedCategory === 'all'
-              ? 'All Presets'
+            {selectedCategory === "all"
+              ? "All Presets"
               : PRESET_CATEGORIES.find((c) => c.id === selectedCategory)
-                  ?.label || 'Presets'}
+                  ?.label || "Presets"}
           </Label>
           <span className="text-muted-foreground text-xs">
             {filteredPresets.length} preset
-            {filteredPresets.length !== 1 ? 's' : ''}
+            {filteredPresets.length !== 1 ? "s" : ""}
           </span>
         </div>
 

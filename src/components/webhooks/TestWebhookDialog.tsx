@@ -1,16 +1,16 @@
-import { CheckCircle, XCircle } from 'lucide-react';
-import { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { CheckCircle, XCircle } from "lucide-react";
+import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { Loader } from '@/components/ui/loader';
-import type { WebhookConfig } from './hooks/useWebhookManagement';
+} from "@/components/ui/dialog";
+import { Loader } from "@/components/ui/loader";
+import type { WebhookConfig } from "./hooks/useWebhookManagement";
 
 interface TestWebhookDialogProps {
   webhook: WebhookConfig | null;
@@ -37,25 +37,25 @@ export function TestWebhookDialog({
 
     try {
       const res = await fetch(`/api/webhook/${webhook.id}/test`, {
-        method: 'POST',
+        method: "POST",
       });
       const data = await res.json();
 
       if (res.ok) {
         setTestResult({
           success: true,
-          message: data.message || 'Test sent successfully!',
+          message: data.message || "Test sent successfully!",
         });
       } else {
         setTestResult({
           success: false,
-          message: data.error || 'Test failed',
+          message: data.error || "Test failed",
         });
       }
     } catch (error) {
       setTestResult({
         success: false,
-        message: 'Test failed - Network error',
+        message: "Test failed - Network error",
       });
     } finally {
       setIsTesting(false);
@@ -110,8 +110,8 @@ export function TestWebhookDialog({
             <div
               className={`rounded-2xl border p-4 ${
                 testResult.success
-                  ? 'border-green-200 bg-green-50'
-                  : 'border-red-200 bg-red-50'
+                  ? "border-green-200 bg-green-50"
+                  : "border-red-200 bg-red-50"
               }`}
             >
               <div className="flex items-center gap-2">
@@ -122,15 +122,15 @@ export function TestWebhookDialog({
                 )}
                 <span
                   className={`font-medium text-sm ${
-                    testResult.success ? 'text-green-800' : 'text-red-800'
+                    testResult.success ? "text-green-800" : "text-red-800"
                   }`}
                 >
-                  {testResult.success ? 'Success!' : 'Failed'}
+                  {testResult.success ? "Success!" : "Failed"}
                 </span>
               </div>
               <p
                 className={`mt-1 text-sm ${
-                  testResult.success ? 'text-green-700' : 'text-red-700'
+                  testResult.success ? "text-green-700" : "text-red-700"
                 }`}
               >
                 {testResult.message}
@@ -152,7 +152,7 @@ export function TestWebhookDialog({
               loading={isTesting}
               onClick={handleTest}
             >
-              {isTesting ? <>Testing...</> : 'Send Test'}
+              {isTesting ? <>Testing...</> : "Send Test"}
             </Button>
           </div>
         </div>

@@ -1,16 +1,16 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { FormProgressStorage } from '../../lib/form-progress/storage';
+import { useCallback, useEffect, useRef, useState } from "react";
+import { FormProgressStorage } from "../../lib/form-progress/storage";
 import type {
   FormProgress,
   FormProgressActions,
   FormProgressConfig,
   FormProgressState,
   SaveProgressOptions,
-} from '../../lib/form-progress/types';
+} from "../../lib/form-progress/types";
 
 const DEFAULT_CONFIG: FormProgressConfig = {
   enabled: true,
-  storage: 'localStorage',
+  storage: "localStorage",
   autoSaveInterval: 1000,
   retentionDays: 7,
   compressionEnabled: false,
@@ -118,7 +118,7 @@ export function useFormProgress(
           ...prev,
           saving: false,
           error:
-            error instanceof Error ? error.message : 'Failed to save progress',
+            error instanceof Error ? error.message : "Failed to save progress",
         }));
       }
     },
@@ -153,7 +153,7 @@ export function useFormProgress(
         ...prev,
         loading: false,
         error:
-          error instanceof Error ? error.message : 'Failed to load progress',
+          error instanceof Error ? error.message : "Failed to load progress",
       }));
     }
   }, [formId]);
@@ -177,7 +177,7 @@ export function useFormProgress(
       setState((prev: FormProgressState) => ({
         ...prev,
         error:
-          error instanceof Error ? error.message : 'Failed to clear progress',
+          error instanceof Error ? error.message : "Failed to clear progress",
       }));
     }
   }, [formId]);

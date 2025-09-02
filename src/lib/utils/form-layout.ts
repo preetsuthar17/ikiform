@@ -1,4 +1,4 @@
-import type { FormSchema } from '@/lib/database';
+import type { FormSchema } from "@/lib/database";
 import {
   generateFormStyles,
   getBorderRadiusValue,
@@ -7,8 +7,8 @@ import {
   getMarginValue,
   getMaxWidthValue,
   getPaddingValue,
-} from './form-styles';
-import { loadGoogleFont } from './google-fonts';
+} from "./form-styles";
+import { loadGoogleFont } from "./google-fonts";
 
 export interface LayoutClasses {
   maxWidthClass: string;
@@ -27,67 +27,67 @@ export interface FormCustomStyles {
 export const getFormLayoutClasses = (schema: FormSchema): LayoutClasses => {
   const layout = schema.settings?.layout || {};
 
-  let maxWidthClass = 'max-w-2xl';
-  let containerClass = 'max-w-2xl mx-auto';
+  let maxWidthClass = "max-w-2xl";
+  let containerClass = "max-w-2xl mx-auto";
 
   // Handle custom width
-  if ((layout as any)?.maxWidth === 'custom' && (layout as any)?.customWidth) {
-    maxWidthClass = '';
-    containerClass = 'mx-auto';
+  if ((layout as any)?.maxWidth === "custom" && (layout as any)?.customWidth) {
+    maxWidthClass = "";
+    containerClass = "mx-auto";
   } else {
     switch (layout?.maxWidth) {
-      case 'sm':
-        maxWidthClass = 'max-w-sm';
-        containerClass = 'max-w-sm mx-auto';
+      case "sm":
+        maxWidthClass = "max-w-sm";
+        containerClass = "max-w-sm mx-auto";
         break;
-      case 'md':
-        maxWidthClass = 'max-w-2xl';
-        containerClass = 'max-w-2xl mx-auto';
+      case "md":
+        maxWidthClass = "max-w-2xl";
+        containerClass = "max-w-2xl mx-auto";
         break;
-      case 'lg':
-        maxWidthClass = 'max-w-4xl';
-        containerClass = 'max-w-4xl mx-auto';
+      case "lg":
+        maxWidthClass = "max-w-4xl";
+        containerClass = "max-w-4xl mx-auto";
         break;
-      case 'xl':
-        maxWidthClass = 'max-w-6xl';
-        containerClass = 'max-w-6xl mx-auto';
+      case "xl":
+        maxWidthClass = "max-w-6xl";
+        containerClass = "max-w-6xl mx-auto";
         break;
-      case 'full':
-        maxWidthClass = 'max-w-full';
-        containerClass = 'w-full';
+      case "full":
+        maxWidthClass = "max-w-full";
+        containerClass = "w-full";
         break;
     }
   }
 
-  let paddingClass = 'md:p-6 p-2';
+  let paddingClass = "md:p-6 p-2";
   switch (layout?.padding) {
-    case 'none':
-      paddingClass = 'p-0';
+    case "none":
+      paddingClass = "p-0";
       break;
-    case 'sm':
-      paddingClass = 'md:p-4 p-2';
+    case "sm":
+      paddingClass = "md:p-4 p-2";
       break;
-    case 'md':
-      paddingClass = 'md:p-6 p-2';
+    case "md":
+      paddingClass = "md:p-6 p-2";
       break;
-    case 'lg':
-      paddingClass = 'md:p-8 p-4';
+    case "lg":
+      paddingClass = "md:p-8 p-4";
       break;
   }
 
-  let marginClass = '';
+  let marginClass = "";
   switch (layout?.margin) {
-    case 'sm':
-      marginClass = 'my-2';
+    case "sm":
+      marginClass = "my-2";
       break;
-    case 'md':
-      marginClass = 'my-4';
+    case "md":
+      marginClass = "my-4";
       break;
-    case 'lg':
-      marginClass = 'my-8';
+    case "lg":
+      marginClass = "my-8";
       break;
     default:
-      marginClass = '';
+      marginClass = "";
   }
 
   return { maxWidthClass, paddingClass, containerClass, marginClass };
@@ -102,11 +102,11 @@ export const getFormCustomStyles = async (
   const layout = settings.layout || {};
 
   // Load Google Font if specified
-  if (typography.fontFamily && typeof window !== 'undefined') {
+  if (typography.fontFamily && typeof window !== "undefined") {
     try {
       await loadGoogleFont(typography.fontFamily);
     } catch (error) {
-      console.warn('Failed to load Google Font:', typography.fontFamily, error);
+      console.warn("Failed to load Google Font:", typography.fontFamily, error);
     }
   }
 
@@ -123,16 +123,16 @@ export const getFormCustomStyles = async (
       ? getFontWeightValue(typography.fontWeight)
       : undefined,
     maxWidth:
-      (layout as any).maxWidth === 'custom' && (layout as any).customWidth
+      (layout as any).maxWidth === "custom" && (layout as any).customWidth
         ? (layout as any).customWidth
         : layout.maxWidth
           ? getMaxWidthValue(layout.maxWidth)
           : undefined,
     width:
-      (layout as any).maxWidth === 'custom' && (layout as any).customWidth
+      (layout as any).maxWidth === "custom" && (layout as any).customWidth
         ? (layout as any).customWidth
         : undefined,
-    margin: layout.margin ? `${getMarginValue(layout.margin)} auto` : '0 auto',
+    margin: layout.margin ? `${getMarginValue(layout.margin)} auto` : "0 auto",
   };
 
   const cardStyle: React.CSSProperties = {
@@ -163,5 +163,5 @@ export const getFormCustomStyles = async (
 };
 
 export const getDesignModeClass = () => {
-  return 'bg-transparent border-none  hover:bg-transparent';
+  return "bg-transparent border-none  hover:bg-transparent";
 };

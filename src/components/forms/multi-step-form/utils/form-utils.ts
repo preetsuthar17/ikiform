@@ -1,4 +1,4 @@
-import type { FormBlock, FormSchema } from '@/lib/database';
+import type { FormBlock, FormSchema } from "@/lib/database";
 
 export const processFormBlocks = (schema: FormSchema): FormBlock[] => {
   return schema.blocks?.length
@@ -6,9 +6,9 @@ export const processFormBlocks = (schema: FormSchema): FormBlock[] => {
     : schema.fields?.length
       ? [
           {
-            id: 'default',
-            title: 'Form',
-            description: '',
+            id: "default",
+            title: "Form",
+            description: "",
             fields: schema.fields,
           },
         ]
@@ -34,7 +34,7 @@ export const submitForm = async (
 }> => {
   let sessionId: string | undefined;
   try {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const sessionKey = `ikiform_session_${formId}`;
       const storedSessionId = localStorage.getItem(sessionKey);
       sessionId = storedSessionId ?? undefined;
@@ -45,16 +45,16 @@ export const submitForm = async (
     }
 
     const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     };
-    if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('token');
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
       if (token) {
-        headers['Authorization'] = `Bearer ${token}`;
+        headers["Authorization"] = `Bearer ${token}`;
       }
     }
     const response = await fetch(`/api/forms/${formId}/submit`, {
-      method: 'POST',
+      method: "POST",
       headers,
       body: JSON.stringify({
         submissionData: formData,
@@ -67,7 +67,7 @@ export const submitForm = async (
     if (!response.ok) {
       return {
         success: false,
-        message: result.message || 'Failed to submit form',
+        message: result.message || "Failed to submit form",
         error: result.error,
         timeRemaining: result.timeRemaining,
         attemptsRemaining: result.attemptsRemaining,
@@ -78,7 +78,7 @@ export const submitForm = async (
   } catch {
     return {
       success: false,
-      message: 'Failed to submit form. Please try again.',
+      message: "Failed to submit form. Please try again.",
     };
   }
 };

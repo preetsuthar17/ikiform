@@ -1,5 +1,5 @@
-import { type NextRequest, NextResponse } from 'next/server';
-import { testWebhook } from '@/lib/webhooks/outbound';
+import { type NextRequest, NextResponse } from "next/server";
+import { testWebhook } from "@/lib/webhooks/outbound";
 
 export async function POST(
   req: NextRequest,
@@ -36,7 +36,7 @@ export async function POST(
   } catch (error: unknown) {
     const duration = Date.now() - startTime;
     const errorMessage =
-      error instanceof Error ? error.message : 'Failed to test webhook';
+      error instanceof Error ? error.message : "Failed to test webhook";
     console.error(
       `[WEBHOOK API] POST /api/webhook/${webhookId}/test - Error after ${duration}ms:`,
       errorMessage

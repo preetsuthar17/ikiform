@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { ArrowLeft, Eye, Layout, Monitor, Palette, Type } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
-import type { LocalSettings } from '@/components/form-builder/form-settings-modal/types';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
-import { toast } from '@/hooks/use-toast';
-import type { FormSchema } from '@/lib/database';
-import { formsDb } from '@/lib/database';
-import { getInternalFormTitle } from '@/lib/utils/form-utils';
+import { ArrowLeft, Eye, Layout, Monitor, Palette, Type } from "lucide-react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { toast } from "@/hooks/use-toast";
+import type { FormSchema } from "@/lib/database";
+import { formsDb } from "@/lib/database";
+import { getInternalFormTitle } from "@/lib/utils/form-utils";
 
 import {
   ActualFormPreview,
@@ -19,19 +19,19 @@ import {
   LayoutCustomizationSection,
   PresetsSection,
   TypographyCustomizationSection,
-} from './components';
+} from "./components";
 
 interface FormCustomizePageProps {
   formId: string;
   schema: FormSchema;
 }
 
-type CustomizeSection = 'presets' | 'layout' | 'colors' | 'typography';
+type CustomizeSection = "presets" | "layout" | "colors" | "typography";
 
 export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
   const router = useRouter();
   const [activeSection, setActiveSection] =
-    useState<CustomizeSection>('presets');
+    useState<CustomizeSection>("presets");
 
   const [previewMode, setPreviewMode] = useState(false);
 
@@ -53,10 +53,10 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
     try {
       const newSchema = { ...schema, settings: newSettings };
       await formsDb.updateForm(formId, { schema: newSchema as any });
-      console.log('Auto-saved form customization');
+      console.log("Auto-saved form customization");
     } catch (error) {
-      console.error('Error auto-saving form customization:', error);
-      toast.error('Failed to save changes. Please try again.');
+      console.error("Error auto-saving form customization:", error);
+      toast.error("Failed to save changes. Please try again.");
     }
   };
 
@@ -74,10 +74,10 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
     try {
       const newSchema = { ...schema, settings: originalSettings };
       await formsDb.updateForm(formId, { schema: newSchema as any });
-      toast.success('Customization reset to defaults');
+      toast.success("Customization reset to defaults");
     } catch (error) {
-      console.error('Error resetting form customization:', error);
-      toast.error('Failed to reset customization. Please try again.');
+      console.error("Error resetting form customization:", error);
+      toast.error("Failed to reset customization. Please try again.");
     }
   };
 
@@ -92,28 +92,28 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 
   const sections = [
     {
-      id: 'presets' as const,
-      label: 'Presets',
+      id: "presets" as const,
+      label: "Presets",
       icon: Palette,
-      description: 'Quick-start with beautiful pre-designed styles',
+      description: "Quick-start with beautiful pre-designed styles",
     },
     {
-      id: 'layout' as const,
-      label: 'Layout',
+      id: "layout" as const,
+      label: "Layout",
       icon: Layout,
-      description: 'Form width, spacing, and layout options',
+      description: "Form width, spacing, and layout options",
     },
     {
-      id: 'colors' as const,
-      label: 'Colors',
+      id: "colors" as const,
+      label: "Colors",
       icon: Palette,
-      description: 'Background, text, primary, and border colors',
+      description: "Background, text, primary, and border colors",
     },
     {
-      id: 'typography' as const,
-      label: 'Typography',
+      id: "typography" as const,
+      label: "Typography",
       icon: Type,
-      description: 'Font family, size, and text styling',
+      description: "Font family, size, and text styling",
     },
   ];
 
@@ -206,13 +206,13 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
             {/* Section Tabs */}
             <div className="flex-shrink-0 border-b bg-background">
               <div className="flex">
-                {(['presets', 'layout', 'colors', 'typography'] as const).map(
+                {(["presets", "layout", "colors", "typography"] as const).map(
                   (section) => (
                     <button
                       className={`flex-1 px-4 py-3 font-medium text-sm transition-colors ${
                         activeSection === section
-                          ? 'border-primary border-b-2 bg-primary/5 text-primary'
-                          : 'text-muted-foreground hover:text-foreground'
+                          ? "border-primary border-b-2 bg-primary/5 text-primary"
+                          : "text-muted-foreground hover:text-foreground"
                       }`}
                       key={section}
                       onClick={() => setActiveSection(section)}
@@ -228,25 +228,25 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
             <div className="flex-1 overflow-hidden">
               <ScrollArea className="h-full">
                 <div className="p-6">
-                  {activeSection === 'presets' && (
+                  {activeSection === "presets" && (
                     <PresetsSection
                       localSettings={localSettings}
                       updateSettings={updateSettings}
                     />
                   )}
-                  {activeSection === 'layout' && (
+                  {activeSection === "layout" && (
                     <LayoutCustomizationSection
                       localSettings={localSettings}
                       updateSettings={updateSettings}
                     />
                   )}
-                  {activeSection === 'colors' && (
+                  {activeSection === "colors" && (
                     <ColorCustomizationSection
                       localSettings={localSettings}
                       updateSettings={updateSettings}
                     />
                   )}
-                  {activeSection === 'typography' && (
+                  {activeSection === "typography" && (
                     <TypographyCustomizationSection
                       localSettings={localSettings}
                       updateSettings={updateSettings}

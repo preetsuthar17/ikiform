@@ -1,11 +1,11 @@
-import { CheckCircle, HelpCircle, Info, XCircle } from 'lucide-react';
-import React from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
-import { RadioGroup, RadioItem } from '@/components/ui/radio';
-import type { BaseFieldProps } from '../types';
-import { getErrorRingClasses } from '../utils';
-import { sanitizeOptions } from '../utils/sanitizeOptions';
+import { CheckCircle, HelpCircle, Info, XCircle } from "lucide-react";
+import React from "react";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { RadioGroup, RadioItem } from "@/components/ui/radio";
+import type { BaseFieldProps } from "../types";
+import { getErrorRingClasses } from "../utils";
+import { sanitizeOptions } from "../utils/sanitizeOptions";
 
 interface QuizFieldProps extends BaseFieldProps {
   showFeedback?: boolean;
@@ -57,13 +57,13 @@ export function QuizField({
           setLoading(false);
         })
         .catch((err) => {
-          setFetchError('Failed to fetch options');
+          setFetchError("Failed to fetch options");
           setLoading(false);
         });
     } else {
       setApiOptions(null);
     }
-  }, [field.optionsApi, field.valueKey ?? '', field.labelKey ?? '']);
+  }, [field.optionsApi, field.valueKey ?? "", field.labelKey ?? ""]);
 
   const options = apiOptions ?? field.options ?? [];
   const correctAnswer = field.settings?.correctAnswer;
@@ -81,12 +81,12 @@ export function QuizField({
   };
 
   const getFeedbackStyling = () => {
-    if (!(showFeedback && isSubmitted && value)) return '';
+    if (!(showFeedback && isSubmitted && value)) return "";
 
     if (isCorrect) {
-      return 'border-green-200 bg-green-50';
+      return "border-green-200 bg-green-50";
     }
-    return 'border-red-200 bg-red-50';
+    return "border-red-200 bg-red-50";
   };
 
   return (
@@ -114,7 +114,7 @@ export function QuizField({
 
         {/* Points indicator */}
         <Badge className="text-xs transition-all" variant="secondary">
-          {points} {points === 1 ? 'point' : 'points'}
+          {points} {points === 1 ? "point" : "points"}
         </Badge>
       </div>
 
@@ -123,19 +123,19 @@ export function QuizField({
         className={`flex flex-col gap-2 ${errorRingClasses}`}
         disabled={disabled || loading}
         onValueChange={onChange}
-        value={value || ''}
+        value={value || ""}
       >
         {fetchError && <div className="p-2 text-red-500">{fetchError}</div>}
         {options.filter(Boolean).map((option, index) => {
-          let optionValue = '';
-          let optionLabel = '';
+          let optionValue = "";
+          let optionLabel = "";
 
-          if (typeof option === 'string') {
+          if (typeof option === "string") {
             optionValue = option;
             optionLabel = option;
-          } else if (option && typeof option === 'object') {
-            optionValue = option.value || '';
-            optionLabel = option.label || option.value || '';
+          } else if (option && typeof option === "object") {
+            optionValue = option.value || "";
+            optionLabel = option.label || option.value || "";
           }
 
           if (!optionValue) return null;
@@ -143,15 +143,15 @@ export function QuizField({
           const isThisOptionCorrect = correctAnswer === optionValue;
           const isSelected = value === optionValue;
 
-          let optionStyling = '';
+          let optionStyling = "";
           let optionIcon = null;
 
           if (showFeedback && isSubmitted) {
             if (isThisOptionCorrect) {
-              optionStyling = 'border-green-500 bg-green-50';
+              optionStyling = "border-green-500 bg-green-50";
               optionIcon = <CheckCircle className="h-4 w-4 text-green-600" />;
             } else if (isSelected && !isThisOptionCorrect) {
-              optionStyling = 'border-red-500 bg-red-50';
+              optionStyling = "border-red-500 bg-red-50";
               optionIcon = <XCircle className="h-4 w-4 text-red-600" />;
             }
           }
@@ -183,10 +183,10 @@ export function QuizField({
             <div className="flex-1">
               <div className="flex items-center gap-2">
                 <span className="font-medium text-sm">
-                  {isCorrect ? 'Correct!' : 'Incorrect'}
+                  {isCorrect ? "Correct!" : "Incorrect"}
                 </span>
                 <span className="text-muted-foreground text-sm">
-                  {isCorrect ? `+${points} points` : '0 points'}
+                  {isCorrect ? `+${points} points` : "0 points"}
                 </span>
               </div>
 
@@ -196,11 +196,11 @@ export function QuizField({
                   Correct answer: {(() => {
                     const correctOption = options.find(
                       (opt) =>
-                        (typeof opt === 'string' ? opt : opt.value) ===
+                        (typeof opt === "string" ? opt : opt.value) ===
                         correctAnswer
                     );
                     if (!correctOption) return correctAnswer;
-                    return typeof correctOption === 'string'
+                    return typeof correctOption === "string"
                       ? correctOption
                       : correctOption.label || correctOption.value;
                   })()}

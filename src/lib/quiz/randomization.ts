@@ -91,12 +91,12 @@ export function shuffleQuizFields(
  * This ensures the same user gets the same shuffle order during their session
  */
 function getSessionSeed(): string {
-  if (typeof window === 'undefined') return 'server';
+  if (typeof window === "undefined") return "server";
 
-  let sessionSeed = sessionStorage.getItem('quiz_shuffle_seed');
+  let sessionSeed = sessionStorage.getItem("quiz_shuffle_seed");
   if (!sessionSeed) {
     sessionSeed = Math.random().toString(36).substring(2, 15);
-    sessionStorage.setItem('quiz_shuffle_seed', sessionSeed);
+    sessionStorage.setItem("quiz_shuffle_seed", sessionSeed);
   }
   return sessionSeed;
 }

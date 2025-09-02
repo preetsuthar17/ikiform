@@ -2,14 +2,14 @@ import type {
   PrepopulationConfig,
   PrepopulationEngine,
   PrepopulationResult,
-} from '../types';
+} from "../types";
 
 export class UrlEngine implements PrepopulationEngine {
   private urlParams: URLSearchParams;
 
   constructor() {
     this.urlParams =
-      typeof window !== 'undefined'
+      typeof window !== "undefined"
         ? new URLSearchParams(window.location.search)
         : new URLSearchParams();
   }
@@ -19,17 +19,17 @@ export class UrlEngine implements PrepopulationEngine {
 
     try {
       if (!config.urlParam) {
-        throw new Error('URL parameter name is required');
+        throw new Error("URL parameter name is required");
       }
 
       const value = this.urlParams.get(config.urlParam);
 
-      if (value === null || value === '') {
+      if (value === null || value === "") {
         return {
           success: false,
           value: config.fallbackValue || null,
-          error: 'Parameter not found in URL',
-          source: 'url',
+          error: "Parameter not found in URL",
+          source: "url",
           executionTime: Date.now() - startTime,
         };
       }
@@ -39,15 +39,15 @@ export class UrlEngine implements PrepopulationEngine {
       return {
         success: true,
         value: sanitizedValue,
-        source: 'url',
+        source: "url",
         executionTime: Date.now() - startTime,
       };
     } catch (error) {
       return {
         success: false,
         value: config.fallbackValue || null,
-        error: error instanceof Error ? error.message : 'Unknown error',
-        source: 'url',
+        error: error instanceof Error ? error.message : "Unknown error",
+        source: "url",
         executionTime: Date.now() - startTime,
       };
     }
@@ -59,10 +59,10 @@ export class UrlEngine implements PrepopulationEngine {
 
   private sanitizeValue(value: string): string {
     return value
-      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-      .replace(/javascript:/gi, '')
-      .replace(/on\w+\s*=/gi, '')
-      .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
+      .replace(/javascript:/gi, "")
+      .replace(/on\w+\s*=/gi, "")
+      .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, "")
       .trim();
   }
 

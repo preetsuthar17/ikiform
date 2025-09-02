@@ -5,12 +5,12 @@ import {
   TrendingUp,
   Trophy,
   Users,
-} from 'lucide-react';
-import React from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import type { QuizAnalytics } from '../types';
+} from "lucide-react";
+import React from "react";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import type { QuizAnalytics } from "../types";
 
 interface QuizAnalyticsCardProps {
   quizAnalytics: QuizAnalytics;
@@ -80,7 +80,7 @@ export function QuizAnalyticsCard({ quizAnalytics }: QuizAnalyticsCardProps) {
                 key={performer.submissionId}
               >
                 <div className="flex items-center gap-3">
-                  <Badge variant={index === 0 ? 'default' : 'secondary'}>
+                  <Badge variant={index === 0 ? "default" : "secondary"}>
                     #{index + 1}
                   </Badge>
                   <span className="font-medium text-sm">

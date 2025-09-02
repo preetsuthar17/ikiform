@@ -1,8 +1,8 @@
-import { type NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from "next/server";
 import {
   createInboundMapping,
   getInboundMappings,
-} from '@/lib/webhooks/inbound';
+} from "@/lib/webhooks/inbound";
 
 export async function GET(req: NextRequest) {
   const startTime = Date.now();
@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const { searchParams } = new URL(req.url);
-    const targetFormId = searchParams.get('targetFormId') || undefined;
+    const targetFormId = searchParams.get("targetFormId") || undefined;
 
     console.log(
       `[WEBHOOK API] GET /api/webhook/inbound - Params: targetFormId=${targetFormId}`
@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
     const errorMessage =
       error instanceof Error
         ? error.message
-        : 'Failed to list inbound mappings';
+        : "Failed to list inbound mappings";
     console.error(
       `[WEBHOOK API] GET /api/webhook/inbound - Error after ${duration}ms:`,
       errorMessage
@@ -55,18 +55,18 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     console.log(
-      '[WEBHOOK API] POST /api/webhook/inbound - Request body:',
+      "[WEBHOOK API] POST /api/webhook/inbound - Request body:",
       JSON.stringify(body, null, 2)
     );
 
     if (!(body.endpoint && body.targetFormId && body.mappingRules)) {
       console.error(
-        '[WEBHOOK API] POST /api/webhook/inbound - Missing required fields: endpoint, targetFormId, mappingRules'
+        "[WEBHOOK API] POST /api/webhook/inbound - Missing required fields: endpoint, targetFormId, mappingRules"
       );
       return NextResponse.json(
         {
           error:
-            'Missing required fields: endpoint, targetFormId, mappingRules',
+            "Missing required fields: endpoint, targetFormId, mappingRules",
         },
         { status: 400 }
       );
@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
     const errorMessage =
       error instanceof Error
         ? error.message
-        : 'Failed to create inbound mapping';
+        : "Failed to create inbound mapping";
     console.error(
       `[WEBHOOK API] POST /api/webhook/inbound - Error after ${duration}ms:`,
       errorMessage

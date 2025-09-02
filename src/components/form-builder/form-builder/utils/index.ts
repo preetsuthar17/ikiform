@@ -1,6 +1,6 @@
-import type { FormField, FormSchema } from '@/lib/database';
+import type { FormField, FormSchema } from "@/lib/database";
 
-import { FORM_BUILDER_CONSTANTS } from '../constants';
+import { FORM_BUILDER_CONSTANTS } from "../constants";
 
 export const generateFieldId = (): string => {
   return `field_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -42,7 +42,7 @@ export const saveDraftToStorage = (
   draftKey: string,
   formSchema: FormSchema
 ): void => {
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     if (saveTimeoutId) {
       clearTimeout(saveTimeoutId);
     }
@@ -51,7 +51,7 @@ export const saveDraftToStorage = (
       try {
         localStorage.setItem(draftKey, JSON.stringify(formSchema));
       } catch (error) {
-        console.warn('Failed to save draft to localStorage:', error);
+        console.warn("Failed to save draft to localStorage:", error);
       }
       saveTimeoutId = null;
     }, 100);
@@ -59,7 +59,7 @@ export const saveDraftToStorage = (
 };
 
 export const loadDraftFromStorage = (draftKey: string): FormSchema | null => {
-  if (typeof window === 'undefined') return null;
+  if (typeof window === "undefined") return null;
 
   const draft = localStorage.getItem(draftKey);
   if (!draft) return null;
@@ -68,7 +68,7 @@ export const loadDraftFromStorage = (draftKey: string): FormSchema | null => {
     const parsed = JSON.parse(draft);
     if (
       parsed &&
-      typeof parsed === 'object' &&
+      typeof parsed === "object" &&
       parsed.fields &&
       parsed.settings
     ) {
@@ -80,7 +80,7 @@ export const loadDraftFromStorage = (draftKey: string): FormSchema | null => {
 };
 
 export const removeDraftFromStorage = (draftKey: string): void => {
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     localStorage.removeItem(draftKey);
   }
 };
@@ -156,7 +156,7 @@ export const addFieldToSchema = (
     if (block.id === targetBlockId) {
       const newFields = [...block.fields];
       if (
-        typeof index === 'number' &&
+        typeof index === "number" &&
         index >= 0 &&
         index <= newFields.length
       ) {
@@ -173,7 +173,7 @@ export const addFieldToSchema = (
   if (!formSchema.blocks || formSchema.blocks.length === 0) {
     const newFieldsArray = [...formSchema.fields];
     if (
-      typeof index === 'number' &&
+      typeof index === "number" &&
       index >= 0 &&
       index <= newFieldsArray.length
     ) {

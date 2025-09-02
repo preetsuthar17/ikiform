@@ -1,39 +1,39 @@
-import { Check, Copy, Pencil, Trash } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Check, Copy, Pencil, Trash } from "lucide-react";
+import { motion } from "motion/react";
 
-import React from 'react';
-import { Alert } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Loader } from '@/components/ui/loader';
+import React from "react";
+import { Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Loader } from "@/components/ui/loader";
 import {
   Modal,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalTitle,
-} from '@/components/ui/modal';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Tabs, TabsContent } from '@/components/ui/tabs';
-import type { FormField } from '@/lib/database';
-import { ActionListEditor } from './ActionListEditor';
-import { ConditionGroupEditor } from './ConditionGroupEditor';
+} from "@/components/ui/modal";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
+import type { FormField } from "@/lib/database";
+import { ActionListEditor } from "./ActionListEditor";
+import { ConditionGroupEditor } from "./ConditionGroupEditor";
 import type {
   LogicAction,
   LogicActionCondition,
   LogicConditionGroup,
-} from './types';
+} from "./types";
 
 let highlighterInstance: any = null;
 let highlighterPromise: Promise<any> | null = null;
 const getHighlighter = async () => {
   if (highlighterInstance) return highlighterInstance;
   if (highlighterPromise) return highlighterPromise;
-  highlighterPromise = import('shiki').then(async (shiki) => {
+  highlighterPromise = import("shiki").then(async (shiki) => {
     const highlighter = await shiki.createHighlighter({
-      langs: ['json'],
-      themes: ['github-dark', 'github-light'],
+      langs: ["json"],
+      themes: ["github-dark", "github-light"],
     });
     highlighterInstance = highlighter;
     highlighterPromise = null;
@@ -50,35 +50,35 @@ function summarizeConditionGroup(
     !(group && Array.isArray(group.conditions)) ||
     group.conditions.length === 0
   )
-    return '(always)';
+    return "(always)";
   return group.conditions
     .map((cond) => {
-      if ('logic' in cond) return `(${summarizeConditionGroup(cond, fields)})`;
+      if ("logic" in cond) return `(${summarizeConditionGroup(cond, fields)})`;
       const field =
         fields.find((f) => f.id === cond.field)?.label || cond.field;
       const op =
-        cond.operator === 'equals'
-          ? '='
-          : cond.operator === 'not_equals'
-            ? '≠'
-            : cond.operator === 'greater_than'
-              ? '>'
-              : cond.operator === 'less_than'
-                ? '<'
-                : cond.operator === 'contains'
-                  ? 'contains'
-                  : cond.operator === 'not_contains'
-                    ? 'not contains'
-                    : cond.operator === 'is_empty'
-                      ? 'is empty'
-                      : cond.operator === 'is_not_empty'
-                        ? 'is not empty'
-                        : cond.operator === 'includes'
-                          ? 'includes'
+        cond.operator === "equals"
+          ? "="
+          : cond.operator === "not_equals"
+            ? "≠"
+            : cond.operator === "greater_than"
+              ? ">"
+              : cond.operator === "less_than"
+                ? "<"
+                : cond.operator === "contains"
+                  ? "contains"
+                  : cond.operator === "not_contains"
+                    ? "not contains"
+                    : cond.operator === "is_empty"
+                      ? "is empty"
+                      : cond.operator === "is_not_empty"
+                        ? "is not empty"
+                        : cond.operator === "includes"
+                          ? "includes"
                           : cond.operator;
-      return `${field} ${op}${cond.value !== undefined && cond.value !== '' ? ` ${cond.value}` : ''}`;
+      return `${field} ${op}${cond.value !== undefined && cond.value !== "" ? ` ${cond.value}` : ""}`;
     })
-    .join(group.logic === 'AND' ? ' AND ' : ' OR ');
+    .join(group.logic === "AND" ? " AND " : " OR ");
 }
 
 function getFieldLogicMap(logic: LogicActionCondition[], fields: FormField[]) {
@@ -113,7 +113,7 @@ function LogicItemEditor({
       ? item.condition
       : {
           id: `group-${Date.now()}`,
-          logic: 'AND',
+          logic: "AND",
           conditions: [],
         };
   const [condition, setCondition] =
@@ -121,8 +121,8 @@ function LogicItemEditor({
   const [action, setAction] = React.useState<LogicAction>(
     item?.action || {
       id: `action-${Date.now()}`,
-      type: 'show',
-      target: fields[0]?.id || '',
+      type: "show",
+      target: fields[0]?.id || "",
     }
   );
 
@@ -135,7 +135,7 @@ function LogicItemEditor({
     <Modal onOpenChange={(v) => !v && onClose()} open={open}>
       <ModalContent>
         <ModalHeader>
-          <ModalTitle>{item ? 'Edit Logic' : 'Add Logic'}</ModalTitle>
+          <ModalTitle>{item ? "Edit Logic" : "Add Logic"}</ModalTitle>
         </ModalHeader>
         <div className="mb-4">
           <div className="mb-2 font-semibold">Condition</div>
@@ -191,8 +191,8 @@ function CollapsibleBottomPanel({ children }: { children: React.ReactNode }) {
     if (collapsed) return;
     startY.current = e.clientY;
     startHeight.current = height;
-    window.addEventListener('pointermove', handlePointerMove);
-    window.addEventListener('pointerup', handlePointerUp);
+    window.addEventListener("pointermove", handlePointerMove);
+    window.addEventListener("pointerup", handlePointerUp);
   };
   const handlePointerMove = (e: PointerEvent) => {
     const delta = startY.current - e.clientY;
@@ -201,26 +201,26 @@ function CollapsibleBottomPanel({ children }: { children: React.ReactNode }) {
     setHeight(newHeight);
   };
   const handlePointerUp = () => {
-    window.removeEventListener('pointermove', handlePointerMove);
-    window.removeEventListener('pointerup', handlePointerUp);
+    window.removeEventListener("pointermove", handlePointerMove);
+    window.removeEventListener("pointerup", handlePointerUp);
   };
   const handleToggle = () => setCollapsed((c) => !c);
 
   return (
     <div
-      className={`flex w-full flex-col border-border border-t bg-background transition-all duration-200 ${collapsed ? 'h-8' : ''}`}
+      className={`flex w-full flex-col border-border border-t bg-background transition-all duration-200 ${collapsed ? "h-8" : ""}`}
       ref={panelRef}
       style={{ height: collapsed ? MIN_HEIGHT : height }}
     >
       <div
-        aria-label={collapsed ? 'Expand logic panel' : 'Collapse logic panel'}
+        aria-label={collapsed ? "Expand logic panel" : "Collapse logic panel"}
         className="group flex h-6 w-full cursor-ns-resize select-none items-center justify-center border-border border-b bg-muted/30 transition hover:bg-muted/50"
         onClick={handleToggle}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onPointerDown={handlePointerDown}
         role="button"
-        style={{ touchAction: 'none' }}
+        style={{ touchAction: "none" }}
         tabIndex={0}
       >
         <svg
@@ -235,12 +235,12 @@ function CollapsibleBottomPanel({ children }: { children: React.ReactNode }) {
         >
           <motion.path
             animate={{
-              d: collapsed ? 'M4 16L16 8L28 16' : 'M4 8L16 16L28 8',
+              d: collapsed ? "M4 16L16 8L28 16" : "M4 8L16 16L28 8",
             }}
             initial={false}
             stroke="currentColor"
             transition={{
-              type: 'spring',
+              type: "spring",
               stiffness: 180,
               damping: 18,
               mass: 0.7,
@@ -248,7 +248,7 @@ function CollapsibleBottomPanel({ children }: { children: React.ReactNode }) {
           />
         </svg>
       </div>
-      <div className={'min-h-0 flex-1'}>{children}</div>
+      <div className={"min-h-0 flex-1"}>{children}</div>
     </div>
   );
 }
@@ -267,10 +267,10 @@ function LogicBuilderPanelContent({
     LogicActionCondition | undefined
   >(undefined);
   const [showJson, setShowJson] = React.useState(false);
-  const [highlightedJson, setHighlightedJson] = React.useState<string>('');
+  const [highlightedJson, setHighlightedJson] = React.useState<string>("");
   const [loadingHighlight, setLoadingHighlight] = React.useState(false);
   const [copied, setCopied] = React.useState(false);
-  const [activeTab, setActiveTab] = React.useState('rules');
+  const [activeTab, setActiveTab] = React.useState("rules");
 
   React.useEffect(() => {
     if (!showJson) return;
@@ -280,10 +280,10 @@ function LogicBuilderPanelContent({
       try {
         const highlighter = await getHighlighter();
         if (cancelled) return;
-        const selectedTheme = 'github-light';
+        const selectedTheme = "github-light";
         const code = JSON.stringify(logic, null, 2);
         const html = highlighter.codeToHtml(code, {
-          lang: 'json',
+          lang: "json",
           theme: selectedTheme,
         });
         if (!cancelled) setHighlightedJson(html);
@@ -332,11 +332,11 @@ function LogicBuilderPanelContent({
 
   const handleCopy = async () => {
     try {
-      const { copyWithToast } = await import('@/lib/utils/clipboard');
+      const { copyWithToast } = await import("@/lib/utils/clipboard");
       const success = await copyWithToast(
         JSON.stringify(logic, null, 2),
-        'Logic rules copied to clipboard!',
-        'Failed to copy logic rules'
+        "Logic rules copied to clipboard!",
+        "Failed to copy logic rules"
       );
 
       if (success) {
@@ -344,7 +344,7 @@ function LogicBuilderPanelContent({
         setTimeout(() => setCopied(false), 2000);
       }
     } catch (error) {
-      console.error('Failed to copy logic rules:', error);
+      console.error("Failed to copy logic rules:", error);
     }
   };
 
@@ -359,8 +359,8 @@ function LogicBuilderPanelContent({
         <Tabs
           className="mb-4"
           items={[
-            { id: 'rules', label: 'Logic Rules' },
-            { id: 'fields', label: 'Field Logic' },
+            { id: "rules", label: "Logic Rules" },
+            { id: "fields", label: "Field Logic" },
           ]}
           onValueChange={setActiveTab}
           value={activeTab}
@@ -403,15 +403,15 @@ function LogicBuilderPanelContent({
                   }
 
                   const actionColor =
-                    item.action.type === 'show'
-                      ? 'secondary'
-                      : item.action.type === 'hide'
-                        ? 'destructive'
-                        : item.action.type === 'enable'
-                          ? 'secondary'
-                          : item.action.type === 'disable'
-                            ? 'outline'
-                            : 'default';
+                    item.action.type === "show"
+                      ? "secondary"
+                      : item.action.type === "hide"
+                        ? "destructive"
+                        : item.action.type === "enable"
+                          ? "secondary"
+                          : item.action.type === "disable"
+                            ? "outline"
+                            : "default";
                   return (
                     <Card
                       className="flex items-center justify-between border bg-muted/10 p-3"
@@ -467,7 +467,7 @@ function LogicBuilderPanelContent({
                   <div className="mb-2 flex items-center gap-2">
                     <span className="font-semibold text-sm">{field.label}</span>
                     <Badge size="sm" variant="outline">
-                      {rules.length} rule{rules.length !== 1 ? 's' : ''}
+                      {rules.length} rule{rules.length !== 1 ? "s" : ""}
                     </Badge>
                   </div>
                   {rules.length === 0 ? (
@@ -478,15 +478,15 @@ function LogicBuilderPanelContent({
                     <div className="flex flex-col gap-1">
                       {rules.map(({ rule, actionType }) => {
                         const actionColor =
-                          actionType === 'show'
-                            ? 'secondary'
-                            : actionType === 'hide'
-                              ? 'destructive'
-                              : actionType === 'enable'
-                                ? 'secondary'
-                                : actionType === 'disable'
-                                  ? 'outline'
-                                  : 'default';
+                          actionType === "show"
+                            ? "secondary"
+                            : actionType === "hide"
+                              ? "destructive"
+                              : actionType === "enable"
+                                ? "secondary"
+                                : actionType === "disable"
+                                  ? "outline"
+                                  : "default";
                         return (
                           <div
                             className="flex items-center gap-2 text-xs"
@@ -496,7 +496,7 @@ function LogicBuilderPanelContent({
                               {actionType}
                             </Badge>
                             <span className="truncate">
-                              If{' '}
+                              If{" "}
                               {summarizeConditionGroup(rule.condition, fields)}
                             </span>
                             <Button

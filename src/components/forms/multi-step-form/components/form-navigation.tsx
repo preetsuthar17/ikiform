@@ -1,11 +1,11 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import type React from 'react';
-import { getLivePatternError } from '@/components/form-builder/form-field-renderer/components/TextInputField';
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import type React from "react";
+import { getLivePatternError } from "@/components/form-builder/form-field-renderer/components/TextInputField";
 
-import { Button } from '@/components/ui/button';
-import { useFormStyling } from '@/hooks/use-form-styling';
+import { Button } from "@/components/ui/button";
+import { useFormStyling } from "@/hooks/use-form-styling";
 
-import type { FormSchema } from '@/lib/database';
+import type { FormSchema } from "@/lib/database";
 
 interface FormNavigationProps {
   currentStep: number;
@@ -33,7 +33,7 @@ export const FormNavigation: React.FC<FormNavigationProps> = ({
 
   const hasLivePatternError = currentFields.some(
     (field) =>
-      ['text', 'email', 'textarea'].includes(field.type) &&
+      ["text", "email", "textarea"].includes(field.type) &&
       getLivePatternError(field, formData[field.id])
   );
 
@@ -60,9 +60,9 @@ export const FormNavigation: React.FC<FormNavigationProps> = ({
       >
         {isLastStep ? (
           submitting ? (
-            'Submitting'
+            "Submitting"
           ) : (
-            schema.settings.submitText || 'Submit'
+            schema.settings.submitText || "Submit"
           )
         ) : (
           <>

@@ -1,7 +1,7 @@
-import { Plus, Sparkles } from 'lucide-react';
-import React from 'react';
+import { Plus, Sparkles } from "lucide-react";
+import React from "react";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Modal,
   ModalContent,
@@ -9,9 +9,9 @@ import {
   ModalHeader,
   ModalTitle,
   ModalTrigger,
-} from '@/components/ui/modal';
+} from "@/components/ui/modal";
 
-import type { FormHeaderProps } from '../types';
+import type { FormHeaderProps } from "../types";
 
 interface FormsHeaderProps extends FormHeaderProps {
   onCreateWithAI: () => void;

@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   Skeleton,
   SkeletonAvatar,
   SkeletonText,
-} from '@/components/ui/skeleton';
+} from "@/components/ui/skeleton";
 
-import type { ProfileLoadingProps } from '../types';
+import type { ProfileLoadingProps } from "../types";
 
 export function ProfileCardLoading({ className }: ProfileLoadingProps) {
   return (
     <Card
-      className={`relative flex w-full grow flex-col items-center gap-6 ${className || ''}`}
+      className={`relative flex w-full grow flex-col items-center gap-6 ${className || ""}`}
     >
       <CardHeader className="flex items-center gap-2">
         <SkeletonAvatar size="xl" />

@@ -1,90 +1,90 @@
-'use client';
+"use client";
 
-import * as MenubarPrimitive from '@radix-ui/react-menubar';
-import { cva, type VariantProps } from 'class-variance-authority';
-import type { LucideIcon } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
-import * as React from 'react';
-import { cn } from '@/lib/utils';
+import * as MenubarPrimitive from "@radix-ui/react-menubar";
+import { cva, type VariantProps } from "class-variance-authority";
+import type { LucideIcon } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
 const menubarVariants = cva(
-  'scrollbar-hide flex w-full max-w-full items-center overflow-x-auto rounded-card border border-border bg-background transition-all',
+  "scrollbar-hide flex w-full max-w-full items-center overflow-x-auto rounded-card border border-border bg-background transition-all",
   {
     variants: {
       variant: {
-        default: 'border-border bg-background',
-        outline: 'border-2 border-border bg-background',
-        ghost: 'border-transparent bg-transparent',
+        default: "border-border bg-background",
+        outline: "border-2 border-border bg-background",
+        ghost: "border-transparent bg-transparent",
       },
       size: {
-        sm: 'gap-1 p-1.5 sm:gap-1 sm:p-2',
-        default: 'gap-1.5 p-1.5 sm:gap-2 sm:p-2',
-        lg: 'gap-2 p-2 sm:gap-3 sm:p-2',
+        sm: "gap-1 p-1.5 sm:gap-1 sm:p-2",
+        default: "gap-1.5 p-1.5 sm:gap-2 sm:p-2",
+        lg: "gap-2 p-2 sm:gap-3 sm:p-2",
       },
     },
     defaultVariants: {
-      variant: 'default',
-      size: 'default',
+      variant: "default",
+      size: "default",
     },
   }
 );
 
 const menubarTriggerVariants = cva(
-  'flex cursor-default touch-manipulation select-none items-center whitespace-nowrap rounded-[calc(var(--card-radius)-5px)] outline-none transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
+  "flex cursor-default touch-manipulation select-none items-center whitespace-nowrap rounded-[calc(var(--card-radius)-5px)] outline-none transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          'text-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground active:bg-accent active:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground',
+          "text-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground active:bg-accent active:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
         ghost:
-          'text-foreground hover:bg-accent/50 hover:text-accent-foreground focus:bg-accent/50 focus:text-accent-foreground data-[state=open]:bg-accent/50 data-[state=open]:text-accent-foreground',
+          "text-foreground hover:bg-accent/50 hover:text-accent-foreground focus:bg-accent/50 focus:text-accent-foreground data-[state=open]:bg-accent/50 data-[state=open]:text-accent-foreground",
       },
       size: {
-        sm: 'min-h-[2rem] gap-1 px-2.5 py-1.5 text-xs sm:gap-1.5 sm:px-3 sm:py-2 sm:text-sm [&_svg]:size-3 sm:[&_svg]:size-4',
+        sm: "min-h-[2rem] gap-1 px-2.5 py-1.5 text-xs sm:gap-1.5 sm:px-3 sm:py-2 sm:text-sm [&_svg]:size-3 sm:[&_svg]:size-4",
         default:
-          'min-h-[2.5rem] gap-1.5 px-3 py-2 text-sm sm:gap-2 sm:px-4 sm:py-2.5 [&_svg]:size-4',
-        lg: 'min-h-[3rem] gap-2 px-4 py-2.5 text-sm sm:gap-2.5 sm:px-5 sm:py-3 sm:text-base [&_svg]:size-4 sm:[&_svg]:size-5',
+          "min-h-[2.5rem] gap-1.5 px-3 py-2 text-sm sm:gap-2 sm:px-4 sm:py-2.5 [&_svg]:size-4",
+        lg: "min-h-[3rem] gap-2 px-4 py-2.5 text-sm sm:gap-2.5 sm:px-5 sm:py-3 sm:text-base [&_svg]:size-4 sm:[&_svg]:size-5",
       },
     },
     defaultVariants: {
-      variant: 'default',
-      size: 'default',
+      variant: "default",
+      size: "default",
     },
   }
 );
 
 const menubarContentVariants = cva(
-  'z-50 mt-2 min-w-[12rem] max-w-[95vw] overflow-hidden rounded-card border border-border bg-background p-1.5 text-foreground sm:max-w-[350px] sm:p-2',
+  "z-50 mt-2 min-w-[12rem] max-w-[95vw] overflow-hidden rounded-card border border-border bg-background p-1.5 text-foreground sm:max-w-[350px] sm:p-2",
   {
     variants: {
       variant: {
-        default: 'border-border bg-background',
-        accent: 'border-accent bg-accent text-accent-foreground',
+        default: "border-border bg-background",
+        accent: "border-accent bg-accent text-accent-foreground",
       },
     },
     defaultVariants: {
-      variant: 'default',
+      variant: "default",
     },
   }
 );
 
 const menubarItemVariants = cva(
-  'relative flex min-h-[44px] cursor-default touch-manipulation select-none items-center gap-2 rounded-[calc(var(--card-radius)-5px)] px-2.5 py-2 text-sm outline-none transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 sm:min-h-auto sm:px-3 sm:py-2.5 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+  "relative flex min-h-[44px] cursor-default touch-manipulation select-none items-center gap-2 rounded-[calc(var(--card-radius)-5px)] px-2.5 py-2 text-sm outline-none transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 sm:min-h-auto sm:px-3 sm:py-2.5 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          'text-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground active:bg-accent active:text-accent-foreground',
+          "text-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground active:bg-accent active:text-accent-foreground",
         destructive:
-          'text-destructive hover:bg-destructive hover:text-destructive-foreground focus:bg-destructive focus:text-destructive-foreground active:bg-destructive active:text-destructive-foreground',
+          "text-destructive hover:bg-destructive hover:text-destructive-foreground focus:bg-destructive focus:text-destructive-foreground active:bg-destructive active:text-destructive-foreground",
       },
       inset: {
-        true: 'pl-6 sm:pl-8',
-        false: '',
+        true: "pl-6 sm:pl-8",
+        false: "",
       },
     },
     defaultVariants: {
-      variant: 'default',
+      variant: "default",
       inset: false,
     },
   }
@@ -104,7 +104,7 @@ interface MenuBarTriggerProps
   extends React.ComponentPropsWithoutRef<typeof MenubarPrimitive.Trigger>,
     VariantProps<typeof menubarTriggerVariants> {
   icon?: LucideIcon;
-  iconPosition?: 'left' | 'right';
+  iconPosition?: "left" | "right";
 }
 
 interface MenuBarContentProps
@@ -122,11 +122,11 @@ const MenuBar = React.forwardRef<
   React.ElementRef<typeof MenubarPrimitive.Root>,
   MenuBarProps
 >(({ className, variant, size, responsive = false, ...props }, ref) => (
-  <div className={responsive ? 'scrollbar-hide w-full overflow-x-auto' : ''}>
+  <div className={responsive ? "scrollbar-hide w-full overflow-x-auto" : ""}>
     <MenubarPrimitive.Root
       className={cn(
         menubarVariants({ variant, size }),
-        responsive && 'min-w-max',
+        responsive && "min-w-max",
         className
       )}
       ref={ref}
@@ -134,7 +134,7 @@ const MenuBar = React.forwardRef<
     />
   </div>
 ));
-MenuBar.displayName = 'MenuBar';
+MenuBar.displayName = "MenuBar";
 
 const MenuBarMenu = MenubarPrimitive.Menu;
 
@@ -148,14 +148,14 @@ const MenuBarTrigger = React.forwardRef<
       variant,
       size,
       icon: Icon,
-      iconPosition = 'left',
+      iconPosition = "left",
       children,
       ...props
     },
     ref
   ) => {
-    const iconSize = size === 'sm' ? 14 : size === 'lg' ? 18 : 16;
-    const mobileIconSize = size === 'sm' ? 12 : size === 'lg' ? 16 : 14;
+    const iconSize = size === "sm" ? 14 : size === "lg" ? 18 : 16;
+    const mobileIconSize = size === "sm" ? 12 : size === "lg" ? 16 : 14;
 
     return (
       <MenubarPrimitive.Trigger
@@ -167,7 +167,7 @@ const MenuBarTrigger = React.forwardRef<
         <motion.button
           className="flex items-center gap-1.5 sm:gap-2"
           transition={{
-            type: 'spring',
+            type: "spring",
             stiffness: 300,
             damping: 20,
             duration: 0.1,
@@ -175,7 +175,7 @@ const MenuBarTrigger = React.forwardRef<
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          {Icon && iconPosition === 'left' && (
+          {Icon && iconPosition === "left" && (
             <motion.div
               transition={{ duration: 0.15 }}
               whileHover={{ rotate: 5 }}
@@ -188,7 +188,7 @@ const MenuBarTrigger = React.forwardRef<
             </motion.div>
           )}
           <span className="truncate">{children}</span>
-          {Icon && iconPosition === 'right' && (
+          {Icon && iconPosition === "right" && (
             <motion.div
               transition={{ duration: 0.15 }}
               whileHover={{ rotate: -5 }}
@@ -205,7 +205,7 @@ const MenuBarTrigger = React.forwardRef<
     );
   }
 );
-MenuBarTrigger.displayName = 'MenuBarTrigger';
+MenuBarTrigger.displayName = "MenuBarTrigger";
 
 const MenuBarSub = MenubarPrimitive.Sub;
 
@@ -218,8 +218,8 @@ const MenuBarSubTrigger = React.forwardRef<
 >(({ className, inset, icon: Icon, children, ...props }, ref) => (
   <MenubarPrimitive.SubTrigger
     className={cn(
-      'flex min-h-[44px] cursor-default touch-manipulation select-none items-center gap-2 rounded-ele px-2.5 py-2 text-sm outline-none transition-all hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:bg-accent active:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground sm:min-h-auto sm:px-3 sm:py-2.5 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
-      inset && 'pl-6 sm:pl-8',
+      "flex min-h-[44px] cursor-default touch-manipulation select-none items-center gap-2 rounded-ele px-2.5 py-2 text-sm outline-none transition-all hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:bg-accent active:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground sm:min-h-auto sm:px-3 sm:py-2.5 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+      inset && "pl-6 sm:pl-8",
       className
     )}
     ref={ref}
@@ -253,7 +253,7 @@ const MenuBarSubTrigger = React.forwardRef<
     </motion.div>
   </MenubarPrimitive.SubTrigger>
 ));
-MenuBarSubTrigger.displayName = 'MenuBarSubTrigger';
+MenuBarSubTrigger.displayName = "MenuBarSubTrigger";
 
 const MenuBarSubContent = React.forwardRef<
   React.ElementRef<typeof MenubarPrimitive.SubContent>,
@@ -262,7 +262,7 @@ const MenuBarSubContent = React.forwardRef<
   <MenubarPrimitive.SubContent
     asChild
     className={cn(
-      'z-50 min-w-[10rem] max-w-[95vw] overflow-hidden rounded-ele border border-border bg-background p-1.5 text-foreground sm:max-w-[280px] sm:p-2',
+      "z-50 min-w-[10rem] max-w-[95vw] overflow-hidden rounded-ele border border-border bg-background p-1.5 text-foreground sm:max-w-[280px] sm:p-2",
       className
     )}
     ref={ref}
@@ -285,7 +285,7 @@ const MenuBarSubContent = React.forwardRef<
         x: -8,
       }}
       transition={{
-        type: 'spring',
+        type: "spring",
         stiffness: 400,
         damping: 30,
         mass: 0.8,
@@ -296,7 +296,7 @@ const MenuBarSubContent = React.forwardRef<
     </motion.div>
   </MenubarPrimitive.SubContent>
 ));
-MenuBarSubContent.displayName = 'MenuBarSubContent';
+MenuBarSubContent.displayName = "MenuBarSubContent";
 
 const MenuBarContent = React.forwardRef<
   React.ElementRef<typeof MenubarPrimitive.Content>,
@@ -306,7 +306,7 @@ const MenuBarContent = React.forwardRef<
     {
       className,
       variant,
-      align = 'start',
+      align = "start",
       alignOffset = -4,
       sideOffset = 8,
       ...props
@@ -341,7 +341,7 @@ const MenuBarContent = React.forwardRef<
               y: -8,
             }}
             transition={{
-              type: 'spring',
+              type: "spring",
               stiffness: 400,
               damping: 30,
               mass: 0.8,
@@ -355,7 +355,7 @@ const MenuBarContent = React.forwardRef<
     </AnimatePresence>
   )
 );
-MenuBarContent.displayName = 'MenuBarContent';
+MenuBarContent.displayName = "MenuBarContent";
 
 const MenuBarItem = React.forwardRef<
   React.ElementRef<typeof MenubarPrimitive.Item>,
@@ -374,7 +374,7 @@ const MenuBarItem = React.forwardRef<
       <motion.div
         className="flex w-full items-center gap-1.5 sm:gap-2"
         transition={{
-          type: 'spring',
+          type: "spring",
           stiffness: 300,
           damping: 20,
           duration: 0.1,
@@ -408,19 +408,19 @@ const MenuBarItem = React.forwardRef<
     </MenubarPrimitive.Item>
   )
 );
-MenuBarItem.displayName = 'MenuBarItem';
+MenuBarItem.displayName = "MenuBarItem";
 
 const MenuBarSeparator = React.forwardRef<
   React.ElementRef<typeof MenubarPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof MenubarPrimitive.Separator>
 >(({ className, ...props }, ref) => (
   <MenubarPrimitive.Separator
-    className={cn('mx-1 my-2 h-px bg-border', className)}
+    className={cn("mx-1 my-2 h-px bg-border", className)}
     ref={ref}
     {...props}
   />
 ));
-MenuBarSeparator.displayName = 'MenuBarSeparator';
+MenuBarSeparator.displayName = "MenuBarSeparator";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -444,7 +444,7 @@ const itemVariants = {
     x: 0,
     scale: 1,
     transition: {
-      type: 'spring' as const,
+      type: "spring" as const,
       stiffness: 300,
       damping: 20,
     },
@@ -470,7 +470,7 @@ const AnimatedMenuContainer = React.forwardRef<
     ))}
   </motion.div>
 ));
-AnimatedMenuContainer.displayName = 'AnimatedMenuContainer';
+AnimatedMenuContainer.displayName = "AnimatedMenuContainer";
 
 export {
   MenuBar,

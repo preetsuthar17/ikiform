@@ -1,5 +1,5 @@
 export {
   useColorValidation,
   useFormDesignSettings,
-} from './useFormDesignSettings';
-export { useFormSettings } from './useFormSettings';
+} from "./useFormDesignSettings";
+export { useFormSettings } from "./useFormSettings";

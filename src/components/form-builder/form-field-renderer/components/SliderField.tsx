@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import { Slider } from '@/components/ui/slider';
+import { Slider } from "@/components/ui/slider";
 
-import type { BaseFieldProps } from '../types';
+import type { BaseFieldProps } from "../types";
 
-import { getErrorRingClasses } from '../utils';
+import { getErrorRingClasses } from "../utils";
 
 export function SliderField({
   field,

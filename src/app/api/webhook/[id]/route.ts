@@ -1,5 +1,5 @@
-import { type NextRequest, NextResponse } from 'next/server';
-import { deleteWebhook, updateWebhook } from '@/lib/webhooks/outbound';
+import { type NextRequest, NextResponse } from "next/server";
+import { deleteWebhook, updateWebhook } from "@/lib/webhooks/outbound";
 
 export async function PUT(
   req: NextRequest,
@@ -29,7 +29,7 @@ export async function PUT(
   } catch (error: unknown) {
     const duration = Date.now() - startTime;
     const errorMessage =
-      error instanceof Error ? error.message : 'Failed to update webhook';
+      error instanceof Error ? error.message : "Failed to update webhook";
     console.error(
       `[WEBHOOK API] PUT /api/webhook/${webhookId} - Error after ${duration}ms:`,
       errorMessage
@@ -66,7 +66,7 @@ export async function DELETE(
   } catch (error: unknown) {
     const duration = Date.now() - startTime;
     const errorMessage =
-      error instanceof Error ? error.message : 'Failed to delete webhook';
+      error instanceof Error ? error.message : "Failed to delete webhook";
     console.error(
       `[WEBHOOK API] DELETE /api/webhook/${webhookId} - Error after ${duration}ms:`,
       errorMessage

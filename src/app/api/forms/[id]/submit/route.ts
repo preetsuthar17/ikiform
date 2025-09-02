@@ -1,31 +1,31 @@
-import { headers } from 'next/headers';
-import { type NextRequest, NextResponse } from 'next/server';
-import { formsDbServer } from '@/lib/database';
+import { headers } from "next/headers";
+import { type NextRequest, NextResponse } from "next/server";
+import { formsDbServer } from "@/lib/database";
 import {
   checkDuplicateSubmission,
   extractEmailFromSubmissionData,
   formatTimeRemaining,
   generateIdentifier,
   recordSubmission,
-} from '@/lib/forms/duplicate-prevention';
+} from "@/lib/forms/duplicate-prevention";
 import {
   checkFormRateLimit,
   DEFAULT_PROFANITY_FILTER_SETTINGS,
   DEFAULT_RATE_LIMIT_SETTINGS,
-} from '@/lib/forms/server';
-import { sendFormNotification } from '@/lib/services';
-import { sanitizeString } from '@/lib/utils/sanitize';
-import { createProfanityFilter } from '@/lib/validation';
+} from "@/lib/forms/server";
+import { sendFormNotification } from "@/lib/services";
+import { sanitizeString } from "@/lib/utils/sanitize";
+import { createProfanityFilter } from "@/lib/validation";
 import {
   formatHumanFriendlyPayload,
   triggerWebhooks,
-} from '@/lib/webhooks/outbound';
-import { createClient } from '@/utils/supabase/server';
+} from "@/lib/webhooks/outbound";
+import { createClient } from "@/utils/supabase/server";
 
 function sanitizeObjectStrings(obj: any): any {
-  if (typeof obj === 'string') return sanitizeString(obj);
+  if (typeof obj === "string") return sanitizeString(obj);
   if (Array.isArray(obj)) return obj.map(sanitizeObjectStrings);
-  if (obj && typeof obj === 'object') {
+  if (obj && typeof obj === "object") {
     const result: any = {};
     for (const key in obj) result[key] = sanitizeObjectStrings(obj[key]);
     return result;
@@ -44,14 +44,14 @@ export async function POST(
 
     const headersList = await headers();
     const ipAddress =
-      headersList.get('x-forwarded-for')?.split(',')[0] ||
-      headersList.get('x-real-ip') ||
-      'unknown';
+      headersList.get("x-forwarded-for")?.split(",")[0] ||
+      headersList.get("x-real-ip") ||
+      "unknown";
 
     const form = await formsDbServer.getPublicForm(formId);
     if (!form) {
       return NextResponse.json(
-        { error: 'Form not found or not published' },
+        { error: "Form not found or not published" },
         { status: 404 }
       );
     }
@@ -73,7 +73,7 @@ export async function POST(
       if (!rateLimitResult.success) {
         return NextResponse.json(
           {
-            error: 'Rate limit exceeded',
+            error: "Rate limit exceeded",
             message: rateLimitResult.message,
             limit: rateLimitResult.limit,
             remaining: rateLimitResult.remaining,
@@ -90,10 +90,10 @@ export async function POST(
       if (count >= (responseLimit.maxResponses || 100)) {
         return NextResponse.json(
           {
-            error: 'Response limit reached',
+            error: "Response limit reached",
             message:
               responseLimit.message ||
-              'This form is no longer accepting responses.',
+              "This form is no longer accepting responses.",
           },
           { status: 403 }
         );
@@ -105,7 +105,7 @@ export async function POST(
     if (duplicatePrevention?.enabled) {
       const email = extractEmailFromSubmissionData(submissionData);
       const identifier = generateIdentifier(
-        duplicatePrevention.strategy || 'ip',
+        duplicatePrevention.strategy || "ip",
         ipAddress,
         email,
         sessionId
@@ -124,7 +124,7 @@ export async function POST(
 
         return NextResponse.json(
           {
-            error: 'Duplicate submission detected',
+            error: "Duplicate submission detected",
             message,
             timeRemaining: duplicateCheck.timeRemaining,
             attemptsRemaining: duplicateCheck.attemptsRemaining,
@@ -149,10 +149,10 @@ export async function POST(
       if (!result.isValid) {
         return NextResponse.json(
           {
-            error: 'Content validation failed',
+            error: "Content validation failed",
             message:
               result.message ||
-              'Your submission contains inappropriate content. Please review and resubmit.',
+              "Your submission contains inappropriate content. Please review and resubmit.",
             violations: result.violations.length,
           },
           { status: 400 }
@@ -172,24 +172,24 @@ export async function POST(
     if (duplicatePrevention?.enabled) {
       const email = extractEmailFromSubmissionData(submissionData);
       const identifier = generateIdentifier(
-        duplicatePrevention.strategy || 'ip',
+        duplicatePrevention.strategy || "ip",
         ipAddress,
         email,
         sessionId
       );
 
       recordSubmission(formId, identifier, duplicatePrevention).catch((e) =>
-        console.error('[Duplicate Prevention] Record submission error:', e)
+        console.error("[Duplicate Prevention] Record submission error:", e)
       );
     }
 
     const [formatted] = await Promise.all([
       formatHumanFriendlyPayload(formId, filteredSubmissionData),
-      triggerWebhooks('form_submitted', {
+      triggerWebhooks("form_submitted", {
         submissionId: submission.id,
         ipAddress,
         ...(await formatHumanFriendlyPayload(formId, filteredSubmissionData)),
-      }).catch((e) => console.error('[Webhook] Delivery error:', e)),
+      }).catch((e) => console.error("[Webhook] Delivery error:", e)),
     ]);
 
     const notifications = form.schema.settings.notifications;
@@ -202,21 +202,21 @@ export async function POST(
         message:
           notifications.message ||
           `You have received a new submission on your form: ${form.schema.settings.title}.`,
-        analyticsUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ikiform.com'}/dashboard/forms/${formId}/analytics`,
+        analyticsUrl: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.ikiform.com"}/dashboard/forms/${formId}/analytics`,
         customLinks: notifications.customLinks || [],
       }).catch((e) =>
-        console.error('[Notification] Notification send error:', e)
+        console.error("[Notification] Notification send error:", e)
       );
     }
 
     return NextResponse.json({
       success: true,
       submissionId: submission.id,
-      message: 'Form submitted successfully',
+      message: "Form submitted successfully",
     });
   } catch {
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }

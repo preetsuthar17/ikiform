@@ -1,17 +1,17 @@
-import { Webhooks } from '@polar-sh/nextjs';
-import { sanitizeString } from '@/lib/utils/sanitize';
-import { createAdminClient } from '@/utils/supabase/admin';
+import { Webhooks } from "@polar-sh/nextjs";
+import { sanitizeString } from "@/lib/utils/sanitize";
+import { createAdminClient } from "@/utils/supabase/admin";
 
 const webhookSecret = process.env.POLAR_WEBHOOK_SECRET;
 if (!webhookSecret) {
-  throw new Error('POLAR_WEBHOOK_SECRET environment variable is not set');
+  throw new Error("POLAR_WEBHOOK_SECRET environment variable is not set");
 }
 
 const findUserByEmail = async (supabase: any, email: string) => {
   const { data: userData, error: lookupError } = await supabase
-    .from('users')
-    .select('uid, email')
-    .eq('email', email)
+    .from("users")
+    .select("uid, email")
+    .eq("email", email)
     .single();
 
   if (lookupError || !userData) {
@@ -41,13 +41,13 @@ const updateUserPremiumStatus = async (
   }
 
   const { data, error } = await supabase
-    .from('users')
+    .from("users")
     .update(updateData)
-    .eq('uid', uid)
+    .eq("uid", uid)
     .select();
 
   if (error) {
-    console.error('❌ Error updating user premium status:', error);
+    console.error("❌ Error updating user premium status:", error);
     return null;
   }
 
@@ -61,14 +61,14 @@ const updateUserPremiumStatus = async (
 const sendThankYouEmail = async (email: string, customerName?: string) => {
   try {
     const { sendPremiumThankYouEmail } = await import(
-      '@/lib/services/notifications'
+      "@/lib/services/notifications"
     );
     await sendPremiumThankYouEmail({
       to: email,
       name: customerName || undefined,
     });
   } catch (emailError) {
-    console.error('❌ Error sending thank you email:', emailError);
+    console.error("❌ Error sending thank you email:", emailError);
   }
 };
 
@@ -76,17 +76,17 @@ export const POST = Webhooks({
   webhookSecret,
 
   onOrderPaid: async (payload) => {
-    if (payload.data.status !== 'paid' || payload.data.paid !== true) {
-      console.warn('❌ Payment not completed. Skipping premium update.');
+    if (payload.data.status !== "paid" || payload.data.paid !== true) {
+      console.warn("❌ Payment not completed. Skipping premium update.");
       return;
     }
 
     try {
       const supabase = createAdminClient();
-      const customerEmail = sanitizeString(payload.data.customer?.email || '');
+      const customerEmail = sanitizeString(payload.data.customer?.email || "");
 
       if (!customerEmail) {
-        console.error('❌ No customer email found in payload');
+        console.error("❌ No customer email found in payload");
         return;
       }
 
@@ -99,27 +99,27 @@ export const POST = Webhooks({
         customerEmail,
         true,
         payload.data.customer?.id,
-        sanitizeString(payload.data.customer?.name || '')
+        sanitizeString(payload.data.customer?.name || "")
       );
 
       if (updatedUser) {
         await sendThankYouEmail(
           customerEmail,
-          sanitizeString(payload.data.customer?.name || '')
+          sanitizeString(payload.data.customer?.name || "")
         );
       }
     } catch (error) {
-      console.error('❌ Error processing payment completion:', error);
+      console.error("❌ Error processing payment completion:", error);
     }
   },
 
   onSubscriptionCreated: async (payload) => {
     try {
       const supabase = createAdminClient();
-      const customerEmail = sanitizeString(payload.data.customer?.email || '');
+      const customerEmail = sanitizeString(payload.data.customer?.email || "");
 
       if (!customerEmail) {
-        console.error('❌ No customer email found in subscription payload');
+        console.error("❌ No customer email found in subscription payload");
         return;
       }
 
@@ -132,27 +132,27 @@ export const POST = Webhooks({
         customerEmail,
         true,
         payload.data.customer?.id,
-        sanitizeString(payload.data.customer?.name || '')
+        sanitizeString(payload.data.customer?.name || "")
       );
 
       if (updatedUser) {
         await sendThankYouEmail(
           customerEmail,
-          sanitizeString(payload.data.customer?.name || '')
+          sanitizeString(payload.data.customer?.name || "")
         );
       }
     } catch (error) {
-      console.error('❌ Error processing subscription creation:', error);
+      console.error("❌ Error processing subscription creation:", error);
     }
   },
 
   onSubscriptionActive: async (payload) => {
     try {
       const supabase = createAdminClient();
-      const customerEmail = sanitizeString(payload.data.customer?.email || '');
+      const customerEmail = sanitizeString(payload.data.customer?.email || "");
 
       if (!customerEmail) {
-        console.error('❌ No customer email found in subscription payload');
+        console.error("❌ No customer email found in subscription payload");
         return;
       }
 
@@ -165,30 +165,30 @@ export const POST = Webhooks({
         customerEmail,
         true,
         payload.data.customer?.id,
-        sanitizeString(payload.data.customer?.name || '')
+        sanitizeString(payload.data.customer?.name || "")
       );
 
       if (updatedUser) {
       }
     } catch (error) {
-      console.error('❌ Error processing subscription activation:', error);
+      console.error("❌ Error processing subscription activation:", error);
     }
   },
 
   onSubscriptionUpdated: async (payload) => {
     try {
       const supabase = createAdminClient();
-      const customerEmail = sanitizeString(payload.data.customer?.email || '');
+      const customerEmail = sanitizeString(payload.data.customer?.email || "");
 
       if (!customerEmail) {
-        console.error('❌ No customer email found in subscription payload');
+        console.error("❌ No customer email found in subscription payload");
         return;
       }
 
       const userData = await findUserByEmail(supabase, customerEmail);
       if (!userData) return;
 
-      const shouldHavePremium = ['active', 'trialing'].includes(
+      const shouldHavePremium = ["active", "trialing"].includes(
         payload.data.status
       );
 
@@ -198,23 +198,23 @@ export const POST = Webhooks({
         customerEmail,
         shouldHavePremium,
         payload.data.customer?.id,
-        sanitizeString(payload.data.customer?.name || '')
+        sanitizeString(payload.data.customer?.name || "")
       );
 
       if (updatedUser) {
       }
     } catch (error) {
-      console.error('❌ Error processing subscription update:', error);
+      console.error("❌ Error processing subscription update:", error);
     }
   },
 
   onSubscriptionRevoked: async (payload) => {
     try {
       const supabase = createAdminClient();
-      const customerEmail = sanitizeString(payload.data.customer?.email || '');
+      const customerEmail = sanitizeString(payload.data.customer?.email || "");
 
       if (!customerEmail) {
-        console.error('❌ No customer email found in subscription payload');
+        console.error("❌ No customer email found in subscription payload");
         return;
       }
 
@@ -231,24 +231,24 @@ export const POST = Webhooks({
       if (updatedUser) {
       }
     } catch (error) {
-      console.error('❌ Error processing subscription revocation:', error);
+      console.error("❌ Error processing subscription revocation:", error);
     }
   },
 
   onSubscriptionCanceled: async (payload) => {
     try {
       const supabase = createAdminClient();
-      const customerEmail = sanitizeString(payload.data.customer?.email || '');
+      const customerEmail = sanitizeString(payload.data.customer?.email || "");
 
       if (!customerEmail) {
-        console.error('❌ No customer email found in subscription payload');
+        console.error("❌ No customer email found in subscription payload");
         return;
       }
 
       const userData = await findUserByEmail(supabase, customerEmail);
       if (!userData) return;
 
-      const shouldHavePremium = ['active', 'trialing'].includes(
+      const shouldHavePremium = ["active", "trialing"].includes(
         payload.data.status
       );
 
@@ -258,13 +258,13 @@ export const POST = Webhooks({
         customerEmail,
         shouldHavePremium,
         payload.data.customer?.id,
-        sanitizeString(payload.data.customer?.name || '')
+        sanitizeString(payload.data.customer?.name || "")
       );
 
       if (updatedUser) {
       }
     } catch (error) {
-      console.error('❌ Error processing subscription cancellation:', error);
+      console.error("❌ Error processing subscription cancellation:", error);
     }
   },
 });

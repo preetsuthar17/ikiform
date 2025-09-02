@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { Palette, Pipette } from 'lucide-react';
-import React, { useRef, useState } from 'react';
-import { TRANSPARENT_PATTERN } from '@/components/form-builder/form-settings-modal/constants';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input-base';
-import { Label } from '@/components/ui/label';
+import { Palette, Pipette } from "lucide-react";
+import React, { useRef, useState } from "react";
+import { TRANSPARENT_PATTERN } from "@/components/form-builder/form-settings-modal/constants";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input-base";
+import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { Slider } from '@/components/ui/slider';
+} from "@/components/ui/popover";
+import { Slider } from "@/components/ui/slider";
 
 interface EnhancedColorPickerProps {
   value: string;
@@ -32,7 +32,7 @@ export function EnhancedColorPicker({
   const colorInputRef = useRef<HTMLInputElement>(null);
 
   // Convert color to hex if needed
-  const hexColor = value === 'transparent' ? '#ffffff' : value;
+  const hexColor = value === "transparent" ? "#ffffff" : value;
 
   // Handle color changes from native picker
   const handleColorChange = (newColor: string) => {
@@ -40,7 +40,7 @@ export function EnhancedColorPicker({
       // Apply opacity
       const alpha = Math.round((opacity / 100) * 255)
         .toString(16)
-        .padStart(2, '0');
+        .padStart(2, "0");
       onChange(newColor + alpha);
     } else if (brightness !== 100) {
       // Apply brightness
@@ -55,13 +55,13 @@ export function EnhancedColorPicker({
   const handleOpacityChange = ([newOpacity]: number[]) => {
     setOpacity(newOpacity);
     if (newOpacity === 0) {
-      onChange('transparent');
+      onChange("transparent");
     } else if (newOpacity === 100) {
       onChange(hexColor);
     } else {
       const alpha = Math.round((newOpacity / 100) * 255)
         .toString(16)
-        .padStart(2, '0');
+        .padStart(2, "0");
       onChange(hexColor + alpha);
     }
   };
@@ -83,12 +83,12 @@ export function EnhancedColorPicker({
     const newG = Math.round(Math.min(255, Math.max(0, g * factor)));
     const newB = Math.round(Math.min(255, Math.max(0, b * factor)));
 
-    return `#${newR.toString(16).padStart(2, '0')}${newG.toString(16).padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`;
+    return `#${newR.toString(16).padStart(2, "0")}${newG.toString(16).padStart(2, "0")}${newB.toString(16).padStart(2, "0")}`;
   };
 
   // Handle eyedropper
   const handleEyeDropper = async () => {
-    if ('EyeDropper' in window) {
+    if ("EyeDropper" in window) {
       try {
         const eyeDropper = new (window as any).EyeDropper();
         const result = await eyeDropper.open();
@@ -99,7 +99,7 @@ export function EnhancedColorPicker({
     }
   };
 
-  const displayValue = value === 'transparent' ? 'Transparent' : value;
+  const displayValue = value === "transparent" ? "Transparent" : value;
 
   return (
     <div className="flex flex-col gap-2">
@@ -112,9 +112,9 @@ export function EnhancedColorPicker({
             <Button
               className="h-10 w-12 border-2 p-0"
               style={{
-                backgroundColor: value === 'transparent' ? undefined : value,
+                backgroundColor: value === "transparent" ? undefined : value,
                 backgroundImage:
-                  value === 'transparent'
+                  value === "transparent"
                     ? `url("${TRANSPARENT_PATTERN}")`
                     : undefined,
               }}
@@ -141,7 +141,7 @@ export function EnhancedColorPicker({
                     placeholder="#000000"
                     value={hexColor}
                   />
-                  {'EyeDropper' in window && (
+                  {"EyeDropper" in window && (
                     <Button
                       className="px-3"
                       onClick={handleEyeDropper}
@@ -184,7 +184,7 @@ export function EnhancedColorPicker({
                 <div className="flex gap-2">
                   <Button
                     className="flex-1"
-                    onClick={() => onChange('transparent')}
+                    onClick={() => onChange("transparent")}
                     size="sm"
                     variant="outline"
                   >
@@ -195,7 +195,7 @@ export function EnhancedColorPicker({
                     onClick={() => {
                       setOpacity(100);
                       setBrightness(100);
-                      onChange('#ffffff');
+                      onChange("#ffffff");
                     }}
                     size="sm"
                     variant="outline"

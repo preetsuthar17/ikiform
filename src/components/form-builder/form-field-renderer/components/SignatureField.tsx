@@ -1,10 +1,10 @@
-import Image from 'next/image';
+import Image from "next/image";
 
-import type React from 'react';
-import { useEffect, useRef, useState } from 'react';
-import SignatureCanvas from 'react-signature-canvas';
-import { Button } from '@/components/ui/button';
-import type { BaseFieldProps } from '../types';
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
+import SignatureCanvas from "react-signature-canvas";
+import { Button } from "@/components/ui/button";
+import type { BaseFieldProps } from "../types";
 
 export function SignatureField({
   value,
@@ -27,8 +27,8 @@ export function SignatureField({
       }
     }
     updateWidth();
-    window.addEventListener('resize', updateWidth);
-    return () => window.removeEventListener('resize', updateWidth);
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
   }, []);
 
   useEffect(() => {
@@ -41,20 +41,20 @@ export function SignatureField({
 
   const handleEnd = () => {
     if (sigRef.current) {
-      const dataUrl = sigRef.current.getTrimmedCanvas().toDataURL('image/png');
+      const dataUrl = sigRef.current.getTrimmedCanvas().toDataURL("image/png");
       onChange(dataUrl);
     }
   };
 
   const handleClear = () => {
     sigRef.current?.clear();
-    onChange('');
+    onChange("");
   };
 
   return (
     <div
       className="flex w-full flex-col gap-2"
-      style={{ alignItems: 'flex-start' }}
+      style={{ alignItems: "flex-start" }}
     >
       <div className="w-full rounded-card" ref={containerRef}>
         <SignatureCanvas
@@ -63,10 +63,10 @@ export function SignatureField({
             width: canvasWidth,
             height: canvasHeight,
             style: {
-              display: 'block',
-              width: '100%',
+              display: "block",
+              width: "100%",
               height: canvasHeight,
-              borderRadius: 'var(--card-radius)',
+              borderRadius: "var(--card-radius)",
             },
           }}
           onEnd={disabled ? undefined : handleEnd}
@@ -97,7 +97,7 @@ export function SignatureField({
           className="mt-2 w-full rounded-card border"
           height={canvasHeight}
           src={value}
-          style={{ height: canvasHeight, objectFit: 'contain' }}
+          style={{ height: canvasHeight, objectFit: "contain" }}
           width={canvasWidth}
         />
       )}

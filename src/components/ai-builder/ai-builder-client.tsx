@@ -1,25 +1,25 @@
-'use client';
+"use client";
 
-import { Sparkles } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { Sparkles } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from "react";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from '@/components/ui/resizable';
-import { useAIBuilder } from '@/hooks/ai-builder/use-ai-builder';
-import { useAuth } from '@/hooks/use-auth';
-import { usePremiumStatus } from '@/hooks/use-premium-status';
-import { CHAT_SUGGESTIONS } from '@/lib/ai-builder/constants';
-import { ChatPanel } from './chat/chat-panel';
-import { JsonModalWrapper } from './json-modal-wrapper';
-import { MobileChatDrawerWrapper } from './mobile-chat-drawer-wrapper';
-import { PremiumGuardOptimized } from './premium-guard-optimized';
-import { PreviewPanel } from './preview/preview-panel';
+} from "@/components/ui/resizable";
+import { useAIBuilder } from "@/hooks/ai-builder/use-ai-builder";
+import { useAuth } from "@/hooks/use-auth";
+import { usePremiumStatus } from "@/hooks/use-premium-status";
+import { CHAT_SUGGESTIONS } from "@/lib/ai-builder/constants";
+import { ChatPanel } from "./chat/chat-panel";
+import { JsonModalWrapper } from "./json-modal-wrapper";
+import { MobileChatDrawerWrapper } from "./mobile-chat-drawer-wrapper";
+import { PremiumGuardOptimized } from "./premium-guard-optimized";
+import { PreviewPanel } from "./preview/preview-panel";
 
 export function AIBuilderClient() {
   const { user, loading: authLoading } = useAuth();

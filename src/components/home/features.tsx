@@ -1,7 +1,7 @@
-import { ChevronRight } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Button } from '../ui/button';
+import { ChevronRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "../ui/button";
 
 export function FeatureOne() {
   return (
@@ -58,39 +58,39 @@ export function FeatureTwo() {
           <div className="flex flex-col gap-8 text-left">
             <div className="flex flex-col gap-2">
               <h2 className="font-geist font-medium text-3xl text-foreground">
-                {' '}
-                Intuitive Form Builder{' '}
-              </h2>{' '}
+                {" "}
+                Intuitive Form Builder{" "}
+              </h2>{" "}
               <p className="max-w-sm text-left text-muted-foreground">
-                {' '}
+                {" "}
                 Drag and drop to create beautiful forms. Customize fields,
-                layout, and design with ease.{' '}
+                layout, and design with ease.{" "}
               </p>
             </div>
 
             {/* Feature list */}
             <div className="flex flex-col gap-4">
               {[
-                'Multi-step & single form modes',
-                'Collect signature',
-                'Field-specific settings',
-                'Form customization',
+                "Multi-step & single form modes",
+                "Collect signature",
+                "Field-specific settings",
+                "Form customization",
               ].map((text, i) => (
                 <p className="flex items-center gap-2" key={i}>
                   <span className="opacity-90">
-                    {' '}
+                    {" "}
                     <svg
                       height="22"
                       viewBox="0 0 20 20"
                       width="22"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      {' '}
+                      {" "}
                       <path
                         d="m8.46 1.897l.99.39a1.5 1.5 0 0 0 1.099 0l.99-.39a2.42 2.42 0 0 1 3.102 1.285l.424.975a1.5 1.5 0 0 0 .777.777l.975.424a2.42 2.42 0 0 1 1.285 3.103l-.39.99a1.5 1.5 0 0 0 0 1.098l.39.99a2.42 2.42 0 0 1-1.285 3.102l-.975.424a1.5 1.5 0 0 0-.777.777l-.424.975a2.42 2.42 0 0 1-3.103 1.285l-.99-.39a1.5 1.5 0 0 0-1.098 0l-.99.39a2.42 2.42 0 0 1-3.102-1.285l-.424-.975a1.5 1.5 0 0 0-.777-.777l-.975-.424a2.42 2.42 0 0 1-1.285-3.103l.39-.99a1.5 1.5 0 0 0 0-1.098l-.39-.99a2.42 2.42 0 0 1 1.285-3.102l.975-.424a1.5 1.5 0 0 0 .777-.777l.424-.975a2.42 2.42 0 0 1 3.103-1.285m4.166 5.77l-3.648 4.104l-1.625-1.625a.5.5 0 0 0-.707.707l2 2a.5.5 0 0 0 .727-.021l4-4.5a.5.5 0 0 0-.747-.665"
                         fill="currentColor"
-                      />{' '}
-                    </svg>{' '}
+                      />{" "}
+                    </svg>{" "}
                   </span>
                   {text}
                 </p>
@@ -137,7 +137,7 @@ export function FeatureThree() {
           <div className="flex flex-col gap-8 text-left md:ml-auto md:w-fit md:items-start md:justify-start">
             <div className="flex flex-col gap-2">
               <h2 className="font-geist font-medium text-3xl text-foreground">
-                AI-Powered Analytics{' '}
+                AI-Powered Analytics{" "}
               </h2>
               <p className="max-w-md text-left text-muted-foreground">
                 Get instant insights and analytics powered by AI. Visualize

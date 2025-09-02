@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
 const ProfileCard = dynamic(
-  () => import('@/components/dashboard/profile-card/ProfileCard'),
+  () => import("@/components/dashboard/profile-card/ProfileCard"),
   {
     loading: () => (
       <div className="rounded-card border bg-card p-6">
@@ -28,7 +28,7 @@ const ProfileCard = dynamic(
 
 const FormsManagement = dynamic(
   () =>
-    import('@/components/dashboard/forms-management').then((mod) => ({
+    import("@/components/dashboard/forms-management").then((mod) => ({
       default: mod.FormsManagement,
     })),
   {

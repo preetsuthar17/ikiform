@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { Eye, Save, Settings } from 'lucide-react';
+import { Eye, Save, Settings } from "lucide-react";
 
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
 
-import { Modal, ModalContent } from '@/components/ui/modal';
-import { toast } from '@/hooks/use-toast';
-import { formsDb } from '@/lib/database';
+import { Modal, ModalContent } from "@/components/ui/modal";
+import { toast } from "@/hooks/use-toast";
+import { formsDb } from "@/lib/database";
 import {
   FormSettingsDesktopLayout,
   FormSettingsMobileLayout,
-} from './components';
-import { useFormSettings } from './hooks';
-import type { FormSettingsModalProps, FormSettingsSection } from './types';
+} from "./components";
+import { useFormSettings } from "./hooks";
+import type { FormSettingsModalProps, FormSettingsSection } from "./types";
 
 export function FormSettingsModal({
   isOpen,
@@ -37,7 +37,7 @@ export function FormSettingsModal({
   } = useFormSettings(schema, userEmail);
 
   const [activeSection, setActiveSection] =
-    useState<FormSettingsSection>('basic');
+    useState<FormSettingsSection>("basic");
   const [saving, setSaving] = useState(false);
 
   const sectionProps = {
@@ -54,7 +54,7 @@ export function FormSettingsModal({
 
   const handleSave = async () => {
     if (!formId) {
-      toast.error('Missing form ID. Cannot save settings.');
+      toast.error("Missing form ID. Cannot save settings.");
       return;
     }
     setSaving(true);
@@ -69,11 +69,11 @@ export function FormSettingsModal({
       };
       await formsDb.updateForm(formId, { schema: newSchema as any });
       onSchemaUpdate({ settings: localSettings as any });
-      toast.success('Settings saved!');
+      toast.success("Settings saved!");
       onClose();
     } catch (e) {
-      console.error('Save error:', e);
-      toast.error('Failed to save settings.');
+      console.error("Save error:", e);
+      toast.error("Failed to save settings.");
     } finally {
       setSaving(false);
     }
@@ -101,9 +101,9 @@ export function FormSettingsModal({
               disabled={saving}
               loading={saving}
               onClick={handleSave}
-              variant={'default'}
+              variant={"default"}
             >
-              {saving ? 'Saving' : 'Save Changes'}
+              {saving ? "Saving" : "Save Changes"}
             </Button>
           </div>
         </div>

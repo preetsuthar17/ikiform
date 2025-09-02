@@ -1,42 +1,42 @@
-import { TooltipProvider } from '@radix-ui/react-tooltip';
-import { useEffect, useState } from 'react';
-import { Alert } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { TooltipProvider } from "@radix-ui/react-tooltip";
+import { useEffect, useState } from "react";
+import { Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Modal,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalTitle,
-} from '@/components/ui/modal';
-import { ScrollArea } from '@/components/ui/scroll-area';
+} from "@/components/ui/modal";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
-import { Toggle } from '@/components/ui/toggle';
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Toggle } from "@/components/ui/toggle";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
+} from "@/components/ui/tooltip";
 import type {
   WebhookConfig,
   WebhookMethod,
-} from './hooks/useWebhookManagement';
+} from "./hooks/useWebhookManagement";
 
 const EVENT_OPTIONS = [
-  { label: 'Form Submitted', value: 'form_submitted' },
-  { label: 'Form Viewed', value: 'form_viewed' },
-  { label: 'Form Started', value: 'form_started' },
+  { label: "Form Submitted", value: "form_submitted" },
+  { label: "Form Viewed", value: "form_viewed" },
+  { label: "Form Started", value: "form_started" },
 ];
 
 const HTTP_METHODS: {
@@ -44,15 +44,15 @@ const HTTP_METHODS: {
   label: string;
   description: string;
 }[] = [
-  { value: 'GET', label: 'GET', description: 'Retrieve data (no body)' },
-  { value: 'POST', label: 'POST', description: 'Create or submit data' },
-  { value: 'PUT', label: 'PUT', description: 'Update entire resource' },
-  { value: 'PATCH', label: 'PATCH', description: 'Update partial resource' },
-  { value: 'DELETE', label: 'DELETE', description: 'Remove resource' },
-  { value: 'HEAD', label: 'HEAD', description: 'Get headers only' },
+  { value: "GET", label: "GET", description: "Retrieve data (no body)" },
+  { value: "POST", label: "POST", description: "Create or submit data" },
+  { value: "PUT", label: "PUT", description: "Update entire resource" },
+  { value: "PATCH", label: "PATCH", description: "Update partial resource" },
+  { value: "DELETE", label: "DELETE", description: "Remove resource" },
+  { value: "HEAD", label: "HEAD", description: "Get headers only" },
 ];
 
-const DISCORD_WEBHOOK_EXAMPLE = '';
+const DISCORD_WEBHOOK_EXAMPLE = "";
 
 export function WebhookFormModal({
   open,
@@ -67,20 +67,20 @@ export function WebhookFormModal({
   initialWebhook?: WebhookConfig;
   loading?: boolean;
 }) {
-  const [url, setUrl] = useState(initialWebhook?.url || '');
+  const [url, setUrl] = useState(initialWebhook?.url || "");
   const [events, setEvents] = useState<string[]>(initialWebhook?.events || []);
   const [method, setMethod] = useState<WebhookMethod>(
-    initialWebhook?.method || 'POST'
+    initialWebhook?.method || "POST"
   );
   const [headers, setHeaders] = useState<Record<string, string>>(
     initialWebhook?.headers || {}
   );
   const [payloadTemplate, setPayloadTemplate] = useState(
-    initialWebhook?.payloadTemplate || ''
+    initialWebhook?.payloadTemplate || ""
   );
   const [enabled, setEnabled] = useState(initialWebhook?.enabled ?? true);
   const [notificationEmail, setNotificationEmail] = useState(
-    initialWebhook?.notificationEmail || ''
+    initialWebhook?.notificationEmail || ""
   );
   const [notifyOnSuccess, setNotifyOnSuccess] = useState(
     initialWebhook?.notifyOnSuccess ?? false
@@ -91,13 +91,13 @@ export function WebhookFormModal({
   const [showDiscordInfo, setShowDiscordInfo] = useState(false);
 
   useEffect(() => {
-    setUrl(initialWebhook?.url || '');
+    setUrl(initialWebhook?.url || "");
     setEvents(initialWebhook?.events || []);
-    setMethod(initialWebhook?.method || 'POST');
+    setMethod(initialWebhook?.method || "POST");
     setHeaders(initialWebhook?.headers || {});
-    setPayloadTemplate(initialWebhook?.payloadTemplate || '');
+    setPayloadTemplate(initialWebhook?.payloadTemplate || "");
     setEnabled(initialWebhook?.enabled ?? true);
-    setNotificationEmail(initialWebhook?.notificationEmail || '');
+    setNotificationEmail(initialWebhook?.notificationEmail || "");
     setNotifyOnSuccess(initialWebhook?.notifyOnSuccess ?? false);
     setNotifyOnFailure(initialWebhook?.notifyOnFailure ?? true);
     setShowDiscordInfo(false);
@@ -110,7 +110,7 @@ export function WebhookFormModal({
 
     if (!(url && Array.isArray(events)) || events.length === 0 || !method) {
       alert(
-        'Please provide a webhook URL, select at least one event, and choose a method.'
+        "Please provide a webhook URL, select at least one event, and choose a method."
       );
       return;
     }
@@ -129,13 +129,13 @@ export function WebhookFormModal({
 
   function handleClose() {
     onClose();
-    setUrl('');
+    setUrl("");
     setEvents([]);
-    setMethod('POST');
+    setMethod("POST");
     setHeaders({});
-    setPayloadTemplate('');
+    setPayloadTemplate("");
     setEnabled(true);
-    setNotificationEmail('');
+    setNotificationEmail("");
     setNotifyOnSuccess(false);
     setNotifyOnFailure(true);
     setShowDiscordInfo(false);
@@ -143,7 +143,7 @@ export function WebhookFormModal({
 
   function handleDiscordPreset() {
     setUrl(DISCORD_WEBHOOK_EXAMPLE);
-    setMethod('POST');
+    setMethod("POST");
     setShowDiscordInfo(true);
   }
 
@@ -152,7 +152,7 @@ export function WebhookFormModal({
       <ModalContent className="w-full max-w-7xl">
         <ModalHeader className="flex flex-row items-center justify-between pb-2">
           <ModalTitle>
-            {initialWebhook ? 'Edit Webhook' : 'Add Webhook'}
+            {initialWebhook ? "Edit Webhook" : "Add Webhook"}
           </ModalTitle>
         </ModalHeader>
         <div className="mb-4 flex flex-wrap gap-2">
@@ -311,8 +311,8 @@ export function WebhookFormModal({
               id="webhook-headers"
               onChange={(e) => {
                 const entries = e.target.value
-                  .split(',')
-                  .map((pair) => pair.split(':').map((s) => s.trim()));
+                  .split(",")
+                  .map((pair) => pair.split(":").map((s) => s.trim()));
                 setHeaders(
                   Object.fromEntries(entries.filter(([k, v]) => k && v))
                 );
@@ -321,7 +321,7 @@ export function WebhookFormModal({
               type="text"
               value={Object.entries(headers)
                 .map(([k, v]) => `${k}:${v}`)
-                .join(', ')}
+                .join(", ")}
             />
           </div>
           <div>
@@ -343,24 +343,24 @@ export function WebhookFormModal({
                   <b>Available Variables:</b>
                   <ul className="flex flex-col gap-1 text-xs">
                     <li>
-                      <code>{'{{event}}'}</code> - Event type (e.g.,
+                      <code>{"{{event}}"}</code> - Event type (e.g.,
                       form_submitted)
                     </li>
                     <li>
-                      <code>{'{{formId}}'}</code> - Form ID
+                      <code>{"{{formId}}"}</code> - Form ID
                     </li>
                     <li>
-                      <code>{'{{formData}}'}</code> - Raw form data
+                      <code>{"{{formData}}"}</code> - Raw form data
                     </li>
                     <li>
-                      <code>{'{{formatted}}'}</code> - Human-friendly formatted
+                      <code>{"{{formatted}}"}</code> - Human-friendly formatted
                       data
                     </li>
                     <li>
-                      <code>{'{{timestamp}}'}</code> - ISO timestamp
+                      <code>{"{{timestamp}}"}</code> - ISO timestamp
                     </li>
                     <li>
-                      <code>{'{{submissionId}}'}</code> - Submission ID
+                      <code>{"{{submissionId}}"}</code> - Submission ID
                     </li>
                   </ul>
                 </div>
@@ -372,7 +372,7 @@ export function WebhookFormModal({
               Cancel
             </Button>
             <Button disabled={loading} loading={loading} type="submit">
-              {initialWebhook ? 'Update' : 'Create'} Webhook
+              {initialWebhook ? "Update" : "Create"} Webhook
             </Button>
           </div>
         </form>

@@ -1,17 +1,17 @@
-import React from 'react';
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import React from "react";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Separator } from '@/components/ui/separator';
-import { Switch } from '@/components/ui/switch';
-import type { FieldSettingsProps } from './types';
+} from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import { Switch } from "@/components/ui/switch";
+import type { FieldSettingsProps } from "./types";
 
 export function RadioFieldSettings({
   field,
@@ -51,8 +51,8 @@ export function RadioFieldSettings({
               }
               value={
                 Array.isArray(field.settings?.correctAnswer)
-                  ? field.settings?.correctAnswer[0] || ''
-                  : field.settings?.correctAnswer || ''
+                  ? field.settings?.correctAnswer[0] || ""
+                  : field.settings?.correctAnswer || ""
               }
             >
               <SelectTrigger>
@@ -61,9 +61,9 @@ export function RadioFieldSettings({
               <SelectContent>
                 {(field.options || []).map((option, idx) => {
                   const value =
-                    typeof option === 'string' ? option : option.value;
+                    typeof option === "string" ? option : option.value;
                   const label =
-                    typeof option === 'string'
+                    typeof option === "string"
                       ? option
                       : option.label || option.value;
                   return (
@@ -124,7 +124,7 @@ export function RadioFieldSettings({
                 onUpdateSettings({ explanation: e.target.value })
               }
               placeholder="Explain why this is the correct answer..."
-              value={field.settings?.explanation || ''}
+              value={field.settings?.explanation || ""}
             />
           </div>
         </>

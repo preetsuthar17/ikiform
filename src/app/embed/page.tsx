@@ -1,19 +1,19 @@
-import { ArrowLeft, Code2 } from 'lucide-react';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { Button } from '@/components/ui/button-base';
-import { Card, CardContent } from '@/components/ui/card';
-import { formsDbServer } from '@/lib/database';
-import EmbedCustomizer from './components/EmbedCustomizer';
+import { ArrowLeft, Code2 } from "lucide-react";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Button } from "@/components/ui/button-base";
+import { Card, CardContent } from "@/components/ui/card";
+import { formsDbServer } from "@/lib/database";
+import EmbedCustomizer from "./components/EmbedCustomizer";
 
 interface EmbedPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export const metadata = {
-  title: 'Embed Form - IkiForm',
+  title: "Embed Form - IkiForm",
   description:
-    'Customize and embed your form with custom dimensions and styling.',
+    "Customize and embed your form with custom dimensions and styling.",
 };
 
 export default async function EmbedPage({ searchParams }: EmbedPageProps) {
@@ -76,7 +76,7 @@ export default async function EmbedPage({ searchParams }: EmbedPageProps) {
       </div>
     );
   } catch (error) {
-    console.error('Error loading form for embed:', error);
+    console.error("Error loading form for embed:", error);
     notFound();
   }
 }

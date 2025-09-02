@@ -1,10 +1,10 @@
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
-import type { MultiStepFormProps } from './multi-step-form/types';
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import type { MultiStepFormProps } from "./multi-step-form/types";
 
 const MultiStepFormClient = dynamic(
   () =>
-    import('./multi-step-form-client').then((mod) => mod.MultiStepFormClient),
+    import("./multi-step-form-client").then((mod) => mod.MultiStepFormClient),
   {
     ssr: false,
     loading: () => <></>,

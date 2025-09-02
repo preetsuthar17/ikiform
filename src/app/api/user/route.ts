@@ -1,10 +1,10 @@
-import { type NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from "next/server";
 import {
   sendNewLoginEmail,
   sendWelcomeEmail,
-} from '@/lib/services/notifications';
-import { sanitizeString } from '@/lib/utils/sanitize';
-import { createClient } from '@/utils/supabase/server';
+} from "@/lib/services/notifications";
+import { sanitizeString } from "@/lib/utils/sanitize";
+import { createClient } from "@/utils/supabase/server";
 
 const userCache = new Map<string, { data: any; timestamp: number }>();
 const CACHE_TTL = 30_000;
@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
     } = await supabase.auth.getUser();
 
     if (authError || !user?.email) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const { id: uid, email, user_metadata } = user;
@@ -52,8 +52,8 @@ export async function POST(request: NextRequest) {
         user_metadata?.full_name ||
           user_metadata?.name ||
           user_metadata?.user_name ||
-          email.split('@')[0]
-      ) || '';
+          email.split("@")[0]
+      ) || "";
 
     const cachedUser = getCachedUser(sanitizedEmail);
     if (cachedUser) {
@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
 
       return NextResponse.json({
         success: true,
-        message: 'User already exists',
+        message: "User already exists",
         user: cachedUser,
         isNewUser: false,
       });
@@ -69,13 +69,13 @@ export async function POST(request: NextRequest) {
 
     // Check if user already exists in database
     const { data: existingUser } = await supabase
-      .from('users')
-      .select('has_premium, polar_customer_id')
-      .eq('email', sanitizedEmail)
+      .from("users")
+      .select("has_premium, polar_customer_id")
+      .eq("email", sanitizedEmail)
       .single();
 
     const { data: upsertedUser, error: upsertError } = await supabase
-      .from('users')
+      .from("users")
       .upsert(
         {
           uid,
@@ -85,18 +85,18 @@ export async function POST(request: NextRequest) {
           polar_customer_id: existingUser?.polar_customer_id ?? null,
         },
         {
-          onConflict: 'email',
+          onConflict: "email",
           ignoreDuplicates: false,
         }
       )
       .select(
-        'uid, email, name, has_premium, polar_customer_id, created_at, updated_at'
+        "uid, email, name, has_premium, polar_customer_id, created_at, updated_at"
       )
       .single();
 
     if (upsertError) {
       return NextResponse.json(
-        { error: 'Failed to create/update user', details: upsertError.message },
+        { error: "Failed to create/update user", details: upsertError.message },
         { status: 500 }
       );
     }
@@ -114,14 +114,14 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: isNewUser ? 'User created successfully' : 'User already exists',
+      message: isNewUser ? "User created successfully" : "User already exists",
       user: upsertedUser,
       isNewUser,
     });
   } catch (error) {
-    console.error('[User API] POST error:', error);
+    console.error("[User API] POST error:", error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }
@@ -137,7 +137,7 @@ export async function GET(_request: NextRequest) {
     } = await supabase.auth.getUser();
 
     if (authError || !user?.email) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const cachedUser = getCachedUser(user.email);
@@ -154,16 +154,16 @@ export async function GET(_request: NextRequest) {
     }
 
     const { data, error } = await supabase
-      .from('users')
+      .from("users")
       .select(
-        'uid, email, name, has_premium, polar_customer_id, created_at, updated_at'
+        "uid, email, name, has_premium, polar_customer_id, created_at, updated_at"
       )
-      .eq('email', user.email)
+      .eq("email", user.email)
       .single();
 
     if (error) {
       return NextResponse.json(
-        { error: 'User not found in database', details: error.message },
+        { error: "User not found in database", details: error.message },
         { status: 404 }
       );
     }
@@ -180,9 +180,9 @@ export async function GET(_request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('[User API] GET error:', error);
+    console.error("[User API] GET error:", error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }

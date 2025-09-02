@@ -1,19 +1,19 @@
-import * as React from 'react';
-import { type ColorKey, useMotionColors } from './motion-colors';
+import * as React from "react";
+import { type ColorKey, useMotionColors } from "./motion-colors";
 
 export function sanitizeAnimationValue(value: any): any {
   if (value === undefined || value === null) {
     return 0;
   }
 
-  if (typeof value === 'string') {
+  if (typeof value === "string") {
     // Replace transparent with proper rgba
-    if (value === 'transparent') {
-      return 'rgba(0, 0, 0, 0)';
+    if (value === "transparent") {
+      return "rgba(0, 0, 0, 0)";
     }
 
     // Check for CSS variables and warn in development
-    if (value.includes('var(--') && process.env.NODE_ENV === 'development') {
+    if (value.includes("var(--") && process.env.NODE_ENV === "development") {
       console.warn(
         `CSS variable detected in animation: ${value}. Consider using motion-safe colors instead.`
       );
@@ -38,7 +38,7 @@ export function sanitizeVariants(
   const sanitizedVariants: MotionSafeVariants = {};
 
   for (const [key, variant] of Object.entries(variants)) {
-    if (variant && typeof variant === 'object') {
+    if (variant && typeof variant === "object") {
       sanitizedVariants[key as keyof MotionSafeVariants] = Object.fromEntries(
         Object.entries(variant).map(([prop, value]) => [
           prop,
@@ -57,10 +57,10 @@ export function useMotionSafeColors() {
   const createColorVariants = React.useCallback(
     (lightColor: ColorKey | string, darkColor?: ColorKey | string) => {
       const resolvedColor =
-        typeof lightColor === 'string' ? lightColor : getColor(lightColor);
+        typeof lightColor === "string" ? lightColor : getColor(lightColor);
 
       const resolvedDarkColor = darkColor
-        ? typeof darkColor === 'string'
+        ? typeof darkColor === "string"
           ? darkColor
           : getColor(darkColor)
         : resolvedColor;
@@ -75,35 +75,35 @@ export function useMotionSafeColors() {
   }, []);
 
   const safeBackgroundColor = React.useCallback(
-    (color: ColorKey | string, fallback = 'rgba(0, 0, 0, 0)') => {
-      if (typeof color === 'string' && color.includes('var(--')) {
+    (color: ColorKey | string, fallback = "rgba(0, 0, 0, 0)") => {
+      if (typeof color === "string" && color.includes("var(--")) {
         console.warn(
           `CSS variable in backgroundColor: ${color}, using fallback`
         );
         return fallback;
       }
 
-      if (color === 'transparent') {
-        return 'rgba(0, 0, 0, 0)';
+      if (color === "transparent") {
+        return "rgba(0, 0, 0, 0)";
       }
 
-      return typeof color === 'string' ? color : getColor(color);
+      return typeof color === "string" ? color : getColor(color);
     },
     [getColor]
   );
 
   const safeBorderColor = React.useCallback(
-    (color: ColorKey | string, fallback = 'rgba(0, 0, 0, 0.1)') => {
-      if (typeof color === 'string' && color.includes('var(--')) {
+    (color: ColorKey | string, fallback = "rgba(0, 0, 0, 0.1)") => {
+      if (typeof color === "string" && color.includes("var(--")) {
         console.warn(`CSS variable in borderColor: ${color}, using fallback`);
         return fallback;
       }
 
-      if (color === 'transparent') {
-        return 'rgba(0, 0, 0, 0)';
+      if (color === "transparent") {
+        return "rgba(0, 0, 0, 0)";
       }
 
-      return typeof color === 'string' ? color : getColor(color);
+      return typeof color === "string" ? color : getColor(color);
     },
     [getColor]
   );
@@ -144,15 +144,15 @@ export const motionSafePresets = {
   },
 
   // Button hover effects with safe colors
-  buttonHover: (baseColor = 'rgba(0, 0, 0, 0.05)') => ({
+  buttonHover: (baseColor = "rgba(0, 0, 0, 0.05)") => ({
     whileHover: {
       backgroundColor:
-        baseColor === 'transparent' ? 'rgba(0, 0, 0, 0.05)' : baseColor,
+        baseColor === "transparent" ? "rgba(0, 0, 0, 0.05)" : baseColor,
     },
     whileTap: {
       scale: 0.98,
       backgroundColor:
-        baseColor === 'transparent' ? 'rgba(0, 0, 0, 0.1)' : baseColor,
+        baseColor === "transparent" ? "rgba(0, 0, 0, 0.1)" : baseColor,
     },
   }),
 } as const;

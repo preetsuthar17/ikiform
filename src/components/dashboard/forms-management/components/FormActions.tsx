@@ -1,15 +1,15 @@
-import { BarChart3, Code2, Edit, Eye, Share, Trash2 } from 'lucide-react';
-import React from 'react';
+import { BarChart3, Code2, Edit, Eye, Share, Trash2 } from "lucide-react";
+import React from "react";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
+} from "@/components/ui/tooltip";
 
-import type { FormActionsProps } from '../types';
+import type { FormActionsProps } from "../types";
 
 export function FormActions({
   form,
@@ -22,33 +22,33 @@ export function FormActions({
   const primaryActions = [
     {
       icon: Edit,
-      label: 'Edit form',
+      label: "Edit form",
       onClick: () => onEdit(form.id),
-      variant: 'ghost' as const,
+      variant: "ghost" as const,
     },
     {
       icon: Eye,
-      label: 'View form',
+      label: "View form",
       onClick: () => onViewForm(form),
-      variant: 'ghost' as const,
+      variant: "ghost" as const,
     },
     {
       icon: BarChart3,
-      label: 'View analytics',
+      label: "View analytics",
       onClick: () => onViewAnalytics(form.id),
-      variant: 'ghost' as const,
+      variant: "ghost" as const,
     },
     {
       icon: Share,
-      label: 'Share form',
+      label: "Share form",
       onClick: () => onShare(form),
-      variant: 'ghost' as const,
+      variant: "ghost" as const,
     },
     {
       icon: Code2,
-      label: 'Embed form',
-      onClick: () => window.open(`/embed?formid=${form.id}`, '_blank'),
-      variant: 'ghost' as const,
+      label: "Embed form",
+      onClick: () => window.open(`/embed?formid=${form.id}`, "_blank"),
+      variant: "ghost" as const,
     },
   ];
 

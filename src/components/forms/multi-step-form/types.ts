@@ -1,5 +1,5 @@
-import type { FormBlock, FormSchema } from '@/lib/database';
-import type { FormProgress } from '@/lib/form-progress/types';
+import type { FormBlock, FormSchema } from "@/lib/database";
+import type { FormProgress } from "@/lib/form-progress/types";
 
 export interface MultiStepFormProps {
   formId: string;

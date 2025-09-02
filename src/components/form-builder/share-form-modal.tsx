@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { Check, Copy, Download, Globe, QrCode, Share, X } from 'lucide-react';
+import { Check, Copy, Download, Globe, QrCode, Share, X } from "lucide-react";
 
-import QRCode from 'qrcode';
-import React, { useEffect, useState } from 'react';
+import QRCode from "qrcode";
+import React, { useEffect, useState } from "react";
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Modal,
   ModalContent,
   ModalHeader,
   ModalTitle,
-} from '@/components/ui/modal';
+} from "@/components/ui/modal";
 
-import { toast } from '@/hooks/use-toast';
+import { toast } from "@/hooks/use-toast";
 
 interface ShareFormModalProps {
   isOpen: boolean;
@@ -26,8 +26,8 @@ interface ShareFormModalProps {
 }
 
 const QR_CODE_STYLE = {
-  primaryColor: '#6366f1',
-  backgroundColor: '#FFFFFF',
+  primaryColor: "#6366f1",
+  backgroundColor: "#FFFFFF",
   logoSize: 32,
   cornerRadius: 6,
 };
@@ -42,14 +42,14 @@ export function ShareFormModal({
 }: ShareFormModalProps) {
   const [copying, setCopying] = useState(false);
   const [publishing, setPublishing] = useState(false);
-  const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string>('');
+  const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string>("");
   const [downloading, setDownloading] = useState(false);
   const [showQR, setShowQR] = useState(false);
   const [generatingQR, setGeneratingQR] = useState(false);
 
   const shareUrl = formId
-    ? `${typeof window !== 'undefined' ? window.location.origin : ''}/f/${formSlug || formId}`
-    : '';
+    ? `${typeof window !== "undefined" ? window.location.origin : ""}/f/${formSlug || formId}`
+    : "";
 
   useEffect(() => {
     if (isOpen && isPublished && shareUrl && showQR && !qrCodeDataUrl) {
@@ -67,15 +67,15 @@ export function ShareFormModal({
       const qrDataUrl = await QRCode.toDataURL(shareUrl, {
         width: 256,
         margin: 4,
-        errorCorrectionLevel: 'M',
+        errorCorrectionLevel: "M",
         color: {
           light: style.backgroundColor,
         },
       });
 
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      if (!ctx) throw new Error('Could not get canvas context');
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      if (!ctx) throw new Error("Could not get canvas context");
 
       canvas.width = 256;
       canvas.height = 256;
@@ -94,10 +94,10 @@ export function ShareFormModal({
       ctx.lineWidth = 2;
       ctx.strokeRect(1, 1, 254, 254);
 
-      setQrCodeDataUrl(canvas.toDataURL('image/png'));
+      setQrCodeDataUrl(canvas.toDataURL("image/png"));
     } catch (error) {
-      console.error('Error generating QR code:', error);
-      toast.error('Failed to generate QR code');
+      console.error("Error generating QR code:", error);
+      toast.error("Failed to generate QR code");
     } finally {
       setGeneratingQR(false);
     }
@@ -108,16 +108,16 @@ export function ShareFormModal({
 
     setCopying(true);
     try {
-      const { copyWithToast } = await import('@/lib/utils/clipboard');
+      const { copyWithToast } = await import("@/lib/utils/clipboard");
       await copyWithToast(
         shareUrl,
-        'Link copied to clipboard!',
-        'Failed to copy link. Please copy manually.'
+        "Link copied to clipboard!",
+        "Failed to copy link. Please copy manually."
       );
     } catch (error) {
-      console.error('Failed to copy link:', error);
-      const { toast } = await import('@/hooks/use-toast');
-      toast.error('Failed to copy link. Please copy manually.');
+      console.error("Failed to copy link:", error);
+      const { toast } = await import("@/hooks/use-toast");
+      toast.error("Failed to copy link. Please copy manually.");
     } finally {
       setTimeout(() => {
         setCopying(false);
@@ -130,16 +130,16 @@ export function ShareFormModal({
 
     setDownloading(true);
     try {
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.download = `ikiform-qr-${formId}.png`;
       link.href = qrCodeDataUrl;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      toast.success('QR code downloaded successfully!');
+      toast.success("QR code downloaded successfully!");
     } catch (error) {
-      console.error('Failed to download QR code:', error);
-      toast.error('Failed to download QR code');
+      console.error("Failed to download QR code:", error);
+      toast.error("Failed to download QR code");
     } finally {
       setDownloading(false);
     }
@@ -150,7 +150,7 @@ export function ShareFormModal({
     try {
       await onPublish();
     } catch (error) {
-      console.error('Failed to publish form:', error);
+      console.error("Failed to publish form:", error);
     } finally {
       setPublishing(false);
     }
@@ -223,7 +223,7 @@ export function ShareFormModal({
                       variant="outline"
                     >
                       <Download className="h-3 w-3" />
-                      {downloading ? 'Downloading...' : 'Download'}
+                      {downloading ? "Downloading..." : "Download"}
                     </Button>
                   </div>
                 </div>
@@ -265,7 +265,7 @@ export function ShareFormModal({
                     className="text-muted-foreground text-xs underline underline-offset-2 transition-colors hover:text-foreground"
                     onClick={handleToggleQR}
                   >
-                    {showQR ? 'Hide QR Code' : 'Show QR Code'}
+                    {showQR ? "Hide QR Code" : "Show QR Code"}
                   </button>
                 </div>
               </div>
@@ -285,7 +285,7 @@ export function ShareFormModal({
                 loading={publishing}
                 onClick={handlePublish}
               >
-                {publishing ? 'Publishing' : 'Publish Form'}
+                {publishing ? "Publishing" : "Publish Form"}
               </Button>
             </div>
           )}

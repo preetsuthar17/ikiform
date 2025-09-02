@@ -1,4 +1,4 @@
-import type { Form } from '@/lib/database';
+import type { Form } from "@/lib/database";
 
 export interface FormsManagementProps {
   className?: string;

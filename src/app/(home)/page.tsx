@@ -1,14 +1,14 @@
-import BentoFeatures from '@/components/home/bento-features';
-import CTA from '@/components/home/cta';
-import FAQSection from '@/components/home/faq';
+import BentoFeatures from "@/components/home/bento-features";
+import CTA from "@/components/home/cta";
+import FAQSection from "@/components/home/faq";
 import {
   FeatureOne,
   FeatureThree,
   FeatureTwo,
-} from '@/components/home/features';
-import Hero from '@/components/home/hero';
-import Pricing from '@/components/home/pricing/pricing';
-import Review from '@/components/other/reivew';
+} from "@/components/home/features";
+import Hero from "@/components/home/hero";
+import Pricing from "@/components/home/pricing/pricing";
+import Review from "@/components/other/reivew";
 
 export default function Home() {
   return (

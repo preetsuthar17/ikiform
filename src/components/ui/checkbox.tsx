@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { AnimatePresence, motion } from 'motion/react';
-import * as React from 'react';
-import { cn } from '@/lib/utils';
+import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
+import { cva, type VariantProps } from "class-variance-authority";
+import { AnimatePresence, motion } from "motion/react";
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
 const checkboxVariants = cva(
-  'peer shrink-0 rounded-ele border border-border bg-accent text-foreground transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary data-[state=indeterminate]:border-primary data-[state=checked]:bg-primary data-[state=indeterminate]:bg-primary data-[state=checked]:text-primary-foreground data-[state=indeterminate]:text-primary-foreground',
+  "peer shrink-0 rounded-ele border border-border bg-accent text-foreground transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary data-[state=indeterminate]:border-primary data-[state=checked]:bg-primary data-[state=indeterminate]:bg-primary data-[state=checked]:text-primary-foreground data-[state=indeterminate]:text-primary-foreground",
   {
     variants: {
       size: {
-        sm: 'h-3 w-3',
-        default: 'h-4 w-4',
-        lg: 'h-5 w-5',
+        sm: "h-3 w-3",
+        default: "h-4 w-4",
+        lg: "h-5 w-5",
       },
     },
     defaultVariants: {
-      size: 'default',
+      size: "default",
     },
   }
 );
@@ -35,10 +35,10 @@ const CheckboxRoot = React.forwardRef<
   CheckboxProps
 >(({ className, size, label, description, error, id, ...props }, ref) => {
   const checkboxId = id || React.useId();
-  const iconSize = size === 'sm' ? 10 : size === 'lg' ? 14 : 12;
+  const iconSize = size === "sm" ? 10 : size === "lg" ? 14 : 12;
 
-  const checkPath = 'M3 6l3 3 6-6';
-  const minusPath = 'M3 6h8';
+  const checkPath = "M3 6l3 3 6-6";
+  const minusPath = "M3 6h8";
 
   return (
     <div className="flex flex-col gap-1">
@@ -52,7 +52,7 @@ const CheckboxRoot = React.forwardRef<
           <CheckboxPrimitive.Indicator asChild>
             <div className="flex items-center justify-center text-current">
               <AnimatePresence mode="wait">
-                {props.checked === 'indeterminate' ? (
+                {props.checked === "indeterminate" ? (
                   <motion.svg
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -71,7 +71,7 @@ const CheckboxRoot = React.forwardRef<
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeWidth={2}
-                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
                     />
                   </motion.svg>
                 ) : (
@@ -96,7 +96,7 @@ const CheckboxRoot = React.forwardRef<
                       strokeWidth={2}
                       transition={{
                         duration: 0.3,
-                        ease: 'easeInOut',
+                        ease: "easeInOut",
                         delay: 0.1,
                       }}
                     />
@@ -112,7 +112,7 @@ const CheckboxRoot = React.forwardRef<
             {label && (
               <label
                 className={cn(
-                  'cursor-pointer text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+                  "cursor-pointer text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 )}
                 htmlFor={checkboxId}
               >
@@ -133,13 +133,13 @@ const CheckboxRoot = React.forwardRef<
   );
 });
 
-CheckboxRoot.displayName = 'Checkbox';
+CheckboxRoot.displayName = "Checkbox";
 
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
   CheckboxProps
 >((props, ref) => <CheckboxRoot ref={ref} {...props} />);
 
-Checkbox.displayName = 'Checkbox';
+Checkbox.displayName = "Checkbox";
 
 export { Checkbox, checkboxVariants, type CheckboxProps };

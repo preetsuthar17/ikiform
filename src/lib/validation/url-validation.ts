@@ -8,6 +8,6 @@ export function validateUrl(url: string): UrlValidationResult {
     new URL(url);
     return { isValid: true };
   } catch {
-    return { isValid: false, message: 'Please enter a valid URL' };
+    return { isValid: false, message: "Please enter a valid URL" };
   }
 }

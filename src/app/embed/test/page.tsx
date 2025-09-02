@@ -6,27 +6,27 @@ import {
   Settings,
   Smartphone,
   Tablet,
-} from 'lucide-react';
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button-base';
+} from "lucide-react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button-base";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from "@/components/ui/card";
 
 export const metadata: Metadata = {
-  title: 'Embed Test - IkiForm',
-  description: 'Test page to demonstrate form embedding capabilities',
+  title: "Embed Test - IkiForm",
+  description: "Test page to demonstrate form embedding capabilities",
 };
 
 export default function EmbedTestPage() {
   // This would be replaced with actual form IDs from your forms
-  const sampleFormId = '182fa915-7656-4489-bf51-5145984d4094';
+  const sampleFormId = "182fa915-7656-4489-bf51-5145984d4094";
 
   return (
     <div className="min-h-screen bg-background py-12">
@@ -41,10 +41,10 @@ export default function EmbedTestPage() {
             </h1>
             <p className="mx-auto mb-6 max-w-3xl text-muted-foreground">
               This page demonstrates how forms can be embedded using different
-              configurations. Visit{' '}
+              configurations. Visit{" "}
               <code className="rounded-ele bg-muted px-2 py-1 text-foreground">
                 /embed?formid=YOUR_FORM_ID
-              </code>{' '}
+              </code>{" "}
               to customize your own embed.
             </p>
             <Button asChild className="gap-2" variant="default">
@@ -82,8 +82,8 @@ export default function EmbedTestPage() {
                     sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
                     src={`/forms/${sampleFormId}`}
                     style={{
-                      border: '1px solid hsl(var(--border))',
-                      borderRadius: '8px',
+                      border: "1px solid hsl(var(--border))",
+                      borderRadius: "8px",
                     }}
                     title="Standard Form Embed"
                     width="100%"
@@ -123,7 +123,7 @@ export default function EmbedTestPage() {
                     loading="lazy"
                     sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
                     src={`/forms/${sampleFormId}`}
-                    style={{ border: 'none', borderRadius: '12px' }}
+                    style={{ border: "none", borderRadius: "12px" }}
                     title="Compact Form Embed"
                     width="100%"
                   />
@@ -163,9 +163,9 @@ export default function EmbedTestPage() {
                     sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
                     src={`/forms/${sampleFormId}`}
                     style={{
-                      border: '2px solid hsl(var(--primary))',
-                      borderRadius: '16px',
-                      backgroundColor: 'hsl(var(--background))',
+                      border: "2px solid hsl(var(--primary))",
+                      borderRadius: "16px",
+                      backgroundColor: "hsl(var(--background))",
                     }}
                     title="Fixed Width Form Embed"
                     width="800px"
@@ -245,10 +245,10 @@ export default function EmbeddedForm() {
                       </h3>
                     </div>
                     <p className="text-muted-foreground">
-                      Go to{' '}
+                      Go to{" "}
                       <code className="rounded-ele bg-muted px-2 py-1 text-foreground">
                         /embed?formid=YOUR_FORM_ID
-                      </code>{' '}
+                      </code>{" "}
                       or click the embed button in your form dashboard.
                     </p>
                   </div>

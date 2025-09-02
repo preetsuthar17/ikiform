@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import { Label } from '@/components/ui/label';
+import { Label } from "@/components/ui/label";
 
-import type { FieldWrapperProps } from '../types';
+import type { FieldWrapperProps } from "../types";
 
-import { getWidthClass } from '../utils';
+import { getWidthClass } from "../utils";
 
 export function FieldWrapper({ field, error, children }: FieldWrapperProps) {
-  const isStatement = field.type === 'statement';
+  const isStatement = field.type === "statement";
   const isQuizField = field.settings?.isQuizField;
 
   return (
     <div
-      className={`flex flex-col gap-2 ${field.label ? '' : '-mt-2'} ${getWidthClass(field.settings?.width as any)}`}
+      className={`flex flex-col gap-2 ${field.label ? "" : "-mt-2"} ${getWidthClass(field.settings?.width as any)}`}
     >
       {!(isStatement || isQuizField) && (
         <>
@@ -20,7 +20,7 @@ export function FieldWrapper({ field, error, children }: FieldWrapperProps) {
             className="font-medium text-foreground text-sm"
             htmlFor={field.id}
           >
-            {field.label && field.label.replace('*', '')}
+            {field.label && field.label.replace("*", "")}
             {field.label && field.required && (
               <span className="ml-1 text-destructive">*</span>
             )}

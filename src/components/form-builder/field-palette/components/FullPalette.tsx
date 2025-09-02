@@ -1,19 +1,19 @@
-import { DragDropContext, Droppable } from '@hello-pangea/dnd';
-import React from 'react';
+import { DragDropContext, Droppable } from "@hello-pangea/dnd";
+import React from "react";
 
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { ScrollArea } from "@/components/ui/scroll-area";
 
-import { FIELD_TYPES, PALETTE_CONFIG } from '../constants';
+import { FIELD_TYPES, PALETTE_CONFIG } from "../constants";
 
-import type { FieldPaletteProps } from '../types';
-import { FieldItem, PALETTE_DRAG_TYPE } from './FieldItem';
-import { PaletteHeader } from './PaletteHeader';
+import type { FieldPaletteProps } from "../types";
+import { FieldItem, PALETTE_DRAG_TYPE } from "./FieldItem";
+import { PaletteHeader } from "./PaletteHeader";
 
 export function FullPalette({
   onAddField,
   formSchema,
   onSchemaUpdate,
-}: Pick<FieldPaletteProps, 'onAddField' | 'formSchema' | 'onSchemaUpdate'>) {
+}: Pick<FieldPaletteProps, "onAddField" | "formSchema" | "onSchemaUpdate">) {
   return (
     <div className="flex h-full flex-col border-border p-2 lg:border-r lg:p-4">
       <ScrollArea className="h-full">

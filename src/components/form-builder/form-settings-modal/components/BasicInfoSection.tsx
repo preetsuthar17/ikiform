@@ -1,13 +1,13 @@
-import { Info } from 'lucide-react';
-import React from 'react';
+import { Info } from "lucide-react";
+import React from "react";
 
-import { Card } from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
+import { Card } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
-import type { BasicInfoSectionProps } from '../types';
+import type { BasicInfoSectionProps } from "../types";
 
 export function BasicInfoSection({
   localSettings,
@@ -34,7 +34,7 @@ export function BasicInfoSection({
           label="Public Title"
           onChange={(value) => updateSettings({ publicTitle: value })}
           placeholder="Enter title to display to users..."
-          value={localSettings.publicTitle || ''}
+          value={localSettings.publicTitle || ""}
         />
         <div className="flex items-center gap-3">
           <input
@@ -62,14 +62,14 @@ export function BasicInfoSection({
           onChange={(value) => updateSettings({ description: value })}
           placeholder="Enter form description"
           rows={3}
-          value={localSettings.description || ''}
+          value={localSettings.description || ""}
         />
         <BasicInfoField
           id="submit-text"
           label="Submit Button Text"
           onChange={(value) => updateSettings({ submitText: value })}
           placeholder="Submit"
-          value={localSettings.submitText || 'Submit'}
+          value={localSettings.submitText || "Submit"}
         />
         <BasicInfoField
           id="success-message"
@@ -78,7 +78,7 @@ export function BasicInfoSection({
           onChange={(value) => updateSettings({ successMessage: value })}
           placeholder="Thank you for your submission!"
           rows={2}
-          value={localSettings.successMessage || ''}
+          value={localSettings.successMessage || ""}
         />
         <BasicInfoField
           description="URL to redirect users after successful submission"
@@ -86,7 +86,7 @@ export function BasicInfoSection({
           label="Redirect URL (Optional)"
           onChange={(value) => updateSettings({ redirectUrl: value })}
           placeholder="https://example.com/thank-you"
-          value={localSettings.redirectUrl || ''}
+          value={localSettings.redirectUrl || ""}
         />
         <div className="flex items-center gap-3 pt-2">
           <input

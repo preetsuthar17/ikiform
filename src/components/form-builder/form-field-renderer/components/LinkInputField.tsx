@@ -1,9 +1,9 @@
-import type React from 'react';
-import { useEffect, useState } from 'react';
-import { Input } from '@/components/ui/input';
-import { validateUrl } from '@/lib/validation/url-validation';
-import type { BaseFieldProps } from '../types';
-import { getBaseClasses } from '../utils';
+import type React from "react";
+import { useEffect, useState } from "react";
+import { Input } from "@/components/ui/input";
+import { validateUrl } from "@/lib/validation/url-validation";
+import type { BaseFieldProps } from "../types";
+import { getBaseClasses } from "../utils";
 
 export function LinkInputField({
   field,
@@ -13,11 +13,11 @@ export function LinkInputField({
   disabled,
 }: BaseFieldProps) {
   const baseClasses = getBaseClasses(field, error);
-  const [inputValue, setInputValue] = useState(value || '');
+  const [inputValue, setInputValue] = useState(value || "");
   const [isValidating, setIsValidating] = useState(false);
 
   useEffect(() => {
-    setInputValue(value || '');
+    setInputValue(value || "");
   }, [value]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +31,7 @@ export function LinkInputField({
 
   const validation = validateUrl(inputValue);
   const errorMessage =
-    error || (isValidating && !validation.isValid ? validation.message : '');
+    error || (isValidating && !validation.isValid ? validation.message : "");
 
   return (
     <div className="flex flex-col gap-2">
@@ -41,7 +41,7 @@ export function LinkInputField({
         id={field.id}
         onBlur={handleBlur}
         onChange={handleInputChange}
-        placeholder={field.placeholder || 'https://'}
+        placeholder={field.placeholder || "https://"}
         type="url"
         value={inputValue}
       />

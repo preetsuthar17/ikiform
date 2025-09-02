@@ -1,37 +1,37 @@
-import { useEffect, useRef, useState } from 'react';
-import { useFormProgress } from '@/hooks/form-progress';
-import { usePrepopulation } from '@/hooks/prepopulation/usePrepopulation';
-import { toast } from '@/hooks/use-toast';
+import { useEffect, useRef, useState } from "react";
+import { useFormProgress } from "@/hooks/form-progress";
+import { usePrepopulation } from "@/hooks/prepopulation/usePrepopulation";
+import { toast } from "@/hooks/use-toast";
 
-import type { FormBlock, FormField, FormSchema } from '@/lib/database';
-import type { LogicAction } from '@/lib/forms/logic';
-import { evaluateLogic } from '@/lib/forms/logic';
-import type { FormActions, FormState } from '../types';
-import { submitForm } from '../utils/form-utils';
+import type { FormBlock, FormField, FormSchema } from "@/lib/database";
+import type { LogicAction } from "@/lib/forms/logic";
+import { evaluateLogic } from "@/lib/forms/logic";
+import type { FormActions, FormState } from "../types";
+import { submitForm } from "../utils/form-utils";
 
-import { validateStep } from '../utils/validation';
+import { validateStep } from "../utils/validation";
 
 const getDefaultValueForField = (field: FormField): any => {
   switch (field.type) {
-    case 'tags':
+    case "tags":
       return [];
-    case 'checkbox':
+    case "checkbox":
       return [];
-    case 'radio':
-      return '';
-    case 'select':
-      return '';
-    case 'slider':
+    case "radio":
+      return "";
+    case "select":
+      return "";
+    case "slider":
       return field.settings?.defaultValue || 50;
-    case 'rating':
+    case "rating":
       return null;
-    case 'number':
-      return '';
-    case 'text':
-    case 'email':
-    case 'textarea':
+    case "number":
+      return "";
+    case "text":
+    case "email":
+    case "textarea":
     default:
-      return '';
+      return "";
   }
 };
 
@@ -83,7 +83,7 @@ export const useFormState = (
     clearProgress,
   } = useFormProgress(formId, allFields.length, {
     enabled: true,
-    storage: 'localStorage',
+    storage: "localStorage",
     autoSaveInterval: 3000,
     retentionDays: 7,
   });
@@ -139,7 +139,7 @@ export const useFormState = (
         Object.entries(prepopulatedData).forEach(([fieldId, value]) => {
           if (
             fieldId in updatedFormData &&
-            (updatedFormData[fieldId] === '' ||
+            (updatedFormData[fieldId] === "" ||
               updatedFormData[fieldId] ===
                 getDefaultValueForField(
                   allFields.find((f) => f.id === fieldId)!
@@ -158,7 +158,7 @@ export const useFormState = (
   useEffect(() => {
     Object.entries(prepopErrors).forEach(([fieldId, error]) => {
       const field = allFields.find((f) => f.id === fieldId);
-      const fieldLabel = field?.label || 'Field';
+      const fieldLabel = field?.label || "Field";
     });
   }, [prepopErrors, allFields]);
 
@@ -179,7 +179,7 @@ export const useFormState = (
 
               return (
                 value !== defaultValue &&
-                value !== '' &&
+                value !== "" &&
                 value !== null &&
                 value !== undefined
               );
@@ -205,7 +205,7 @@ export const useFormState = (
     if (Object.keys(formData).length > 0) {
       const filledFields = Object.values(formData).filter(
         (value) =>
-          value !== '' &&
+          value !== "" &&
           value !== null &&
           value !== undefined &&
           !(Array.isArray(value) && value.length === 0)
@@ -241,14 +241,14 @@ export const useFormState = (
 
   Object.entries(fieldVisibility).forEach(([fieldId, vis]) => {
     const actions = actionsByField[fieldId] || [];
-    if (actions.some((a) => a.type === 'hide')) {
+    if (actions.some((a) => a.type === "hide")) {
       vis.visible = false;
-    } else if (actions.some((a) => a.type === 'show')) {
+    } else if (actions.some((a) => a.type === "show")) {
       vis.visible = true;
     }
-    if (actions.some((a) => a.type === 'disable')) {
+    if (actions.some((a) => a.type === "disable")) {
       vis.disabled = true;
-    } else if (actions.some((a) => a.type === 'enable')) {
+    } else if (actions.some((a) => a.type === "enable")) {
       vis.disabled = false;
     }
   });
@@ -257,8 +257,8 @@ export const useFormState = (
     if (
       action.target &&
       fieldVisibility[action.target] &&
-      action.type === 'set_value' &&
-      typeof action.target === 'string' &&
+      action.type === "set_value" &&
+      typeof action.target === "string" &&
       Object.hasOwn(formData, action.target) &&
       formData[action.target] !== action.value
     )
@@ -266,7 +266,7 @@ export const useFormState = (
         ...prev,
         [action.target as string]: action.value,
       }));
-    if (action.type === 'show_message' && action.value) {
+    if (action.type === "show_message" && action.value) {
       logicMessages.push(String(action.value));
     }
   });
@@ -274,7 +274,7 @@ export const useFormState = (
   const handleFieldValueChange = (fieldId: string, value: any) => {
     setFormData((prev) => ({ ...prev, [fieldId]: value }));
     if (errors[fieldId]) {
-      setErrors((prev) => ({ ...prev, [fieldId]: '' }));
+      setErrors((prev) => ({ ...prev, [fieldId]: "" }));
     }
   };
 
@@ -289,7 +289,7 @@ export const useFormState = (
 
     if (!isValid) {
       setErrors(validationErrors);
-      toast.error('Please fix the errors before continuing');
+      toast.error("Please fix the errors before continuing");
       return;
     }
 
@@ -330,7 +330,7 @@ export const useFormState = (
 
     if (!allValid) {
       setErrors(allErrors);
-      toast.error('Please fix all errors before submitting');
+      toast.error("Please fix all errors before submitting");
       return;
     }
 
@@ -343,7 +343,7 @@ export const useFormState = (
       if (result.success) {
         setSubmitted(true);
         clearProgress();
-        toast.success('Form submitted successfully!');
+        toast.success("Form submitted successfully!");
 
         if (schema.settings.redirectUrl) {
           setTimeout(() => {
@@ -352,26 +352,26 @@ export const useFormState = (
         }
       } else {
         // Check if it's a duplicate submission error
-        if (result.error === 'Duplicate submission detected') {
+        if (result.error === "Duplicate submission detected") {
           setDuplicateError({
-            message: result.message || 'You have already submitted this form.',
+            message: result.message || "You have already submitted this form.",
             timeRemaining: result.timeRemaining,
             attemptsRemaining: result.attemptsRemaining,
           });
         } else {
-          toast.error(result.message || 'Failed to submit form');
+          toast.error(result.message || "Failed to submit form");
         }
       }
     } catch (error: any) {
       // Check if it's a duplicate submission error
-      if (error?.error === 'Duplicate submission detected') {
+      if (error?.error === "Duplicate submission detected") {
         setDuplicateError({
-          message: error.message || 'You have already submitted this form.',
+          message: error.message || "You have already submitted this form.",
           timeRemaining: error.timeRemaining,
           attemptsRemaining: error.attemptsRemaining,
         });
       } else {
-        toast.error('Failed to submit form. Please try again.');
+        toast.error("Failed to submit form. Please try again.");
       }
     } finally {
       setSubmitting(false);

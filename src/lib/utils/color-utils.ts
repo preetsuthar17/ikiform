@@ -1,20 +1,20 @@
-'use client';
+"use client";
 /**
  * Enhanced color format utilities for the ColorPicker component
  * Provides conversion between different color formats including OKLCH and LAB
  */
 
-import { type Color, parseColor } from 'react-aria-components';
+import { type Color, parseColor } from "react-aria-components";
 
-export type ColorFormat = 'hex' | 'rgb' | 'hsl' | 'hsv' | 'oklch' | 'lab';
+export type ColorFormat = "hex" | "rgb" | "hsl" | "hsv" | "oklch" | "lab";
 
 export const formatLabels: Record<ColorFormat, string> = {
-  hex: 'HEX',
-  rgb: 'RGB',
-  hsl: 'HSL',
-  hsv: 'HSV',
-  oklch: 'OKLCH',
-  lab: 'LAB',
+  hex: "HEX",
+  rgb: "RGB",
+  hsl: "HSL",
+  hsv: "HSV",
+  oklch: "OKLCH",
+  lab: "LAB",
 };
 
 /**
@@ -94,50 +94,50 @@ function xyzToOklch(x: number, y: number, z: number): [number, number, number] {
  */
 export function formatColorValue(color: Color, format: ColorFormat): string {
   switch (format) {
-    case 'hex':
-      return color.toString('hex');
-    case 'rgb': {
-      const rgb = color.toFormat('rgb');
-      const r = Math.round(rgb.getChannelValue('red'));
-      const g = Math.round(rgb.getChannelValue('green'));
-      const b = Math.round(rgb.getChannelValue('blue'));
-      const alpha = rgb.getChannelValue('alpha');
+    case "hex":
+      return color.toString("hex");
+    case "rgb": {
+      const rgb = color.toFormat("rgb");
+      const r = Math.round(rgb.getChannelValue("red"));
+      const g = Math.round(rgb.getChannelValue("green"));
+      const b = Math.round(rgb.getChannelValue("blue"));
+      const alpha = rgb.getChannelValue("alpha");
 
       if (alpha < 1) {
         return `rgba(${r}, ${g}, ${b}, ${alpha.toFixed(2)})`;
       }
       return `rgb(${r}, ${g}, ${b})`;
     }
-    case 'hsl': {
-      const hsl = color.toFormat('hsl');
-      const h = Math.round(hsl.getChannelValue('hue'));
-      const s = Math.round(hsl.getChannelValue('saturation'));
-      const l = Math.round(hsl.getChannelValue('lightness'));
-      const alpha = hsl.getChannelValue('alpha');
+    case "hsl": {
+      const hsl = color.toFormat("hsl");
+      const h = Math.round(hsl.getChannelValue("hue"));
+      const s = Math.round(hsl.getChannelValue("saturation"));
+      const l = Math.round(hsl.getChannelValue("lightness"));
+      const alpha = hsl.getChannelValue("alpha");
 
       if (alpha < 1) {
         return `hsla(${h}, ${s}%, ${l}%, ${alpha.toFixed(2)})`;
       }
       return `hsl(${h}, ${s}%, ${l}%)`;
     }
-    case 'hsv': {
-      const hsv = color.toFormat('hsb');
-      const h = Math.round(hsv.getChannelValue('hue'));
-      const s = Math.round(hsv.getChannelValue('saturation'));
-      const v = Math.round(hsv.getChannelValue('brightness'));
-      const alpha = hsv.getChannelValue('alpha');
+    case "hsv": {
+      const hsv = color.toFormat("hsb");
+      const h = Math.round(hsv.getChannelValue("hue"));
+      const s = Math.round(hsv.getChannelValue("saturation"));
+      const v = Math.round(hsv.getChannelValue("brightness"));
+      const alpha = hsv.getChannelValue("alpha");
 
       if (alpha < 1) {
         return `hsva(${h}, ${s}%, ${v}%, ${alpha.toFixed(2)})`;
       }
       return `hsv(${h}, ${s}%, ${v}%)`;
     }
-    case 'oklch': {
-      const rgb = color.toFormat('rgb');
-      const r = rgb.getChannelValue('red') / 255;
-      const g = rgb.getChannelValue('green') / 255;
-      const b = rgb.getChannelValue('blue') / 255;
-      const alpha = rgb.getChannelValue('alpha');
+    case "oklch": {
+      const rgb = color.toFormat("rgb");
+      const r = rgb.getChannelValue("red") / 255;
+      const g = rgb.getChannelValue("green") / 255;
+      const b = rgb.getChannelValue("blue") / 255;
+      const alpha = rgb.getChannelValue("alpha");
 
       const [x, y, z] = rgbToXyz(r, g, b);
       const [L, C, H] = xyzToOklch(x, y, z);
@@ -149,12 +149,12 @@ export function formatColorValue(color: Color, format: ColorFormat): string {
       }
       return `oklch(${(L * 100).toFixed(1)}% ${C.toFixed(3)} ${H.toFixed(1)})`;
     }
-    case 'lab': {
-      const rgb = color.toFormat('rgb');
-      const r = rgb.getChannelValue('red') / 255;
-      const g = rgb.getChannelValue('green') / 255;
-      const b = rgb.getChannelValue('blue') / 255;
-      const alpha = rgb.getChannelValue('alpha');
+    case "lab": {
+      const rgb = color.toFormat("rgb");
+      const r = rgb.getChannelValue("red") / 255;
+      const g = rgb.getChannelValue("green") / 255;
+      const b = rgb.getChannelValue("blue") / 255;
+      const alpha = rgb.getChannelValue("alpha");
 
       const [x, y, z] = rgbToXyz(r, g, b);
       const [L, a, b_lab] = xyzToLab(x, y, z);
@@ -167,7 +167,7 @@ export function formatColorValue(color: Color, format: ColorFormat): string {
       return `lab(${L.toFixed(1)}% ${a.toFixed(1)} ${b_lab.toFixed(1)})`;
     }
     default:
-      return color.toString('hex');
+      return color.toString("hex");
   }
 }
 
@@ -179,14 +179,14 @@ export function parseColorFromFormat(
   format: ColorFormat
 ): Color | null {
   try {
-    if (format === 'hex' || format === 'rgb' || format === 'hsl') {
+    if (format === "hex" || format === "rgb" || format === "hsl") {
       return parseColor(value);
     }
 
-    if (format === 'hsv') {
+    if (format === "hsv") {
       const hsvMatch = value.match(/hsva?\(([^)]+)\)/);
       if (hsvMatch) {
-        const parts = hsvMatch[1].split(',').map((p) => p.trim());
+        const parts = hsvMatch[1].split(",").map((p) => p.trim());
         const h = Number.parseFloat(parts[0]) || 0;
         const s = Number.parseFloat(parts[1]) || 0;
         const v = Number.parseFloat(parts[2]) || 0;
@@ -199,7 +199,7 @@ export function parseColorFromFormat(
       }
     }
 
-    if (format === 'oklch') {
+    if (format === "oklch") {
       const oklchMatch = value.match(/oklch\(([^)]+)\)/);
       if (oklchMatch) {
         const parts = oklchMatch[1].split(/[\s/]+/);
@@ -214,7 +214,7 @@ export function parseColorFromFormat(
       }
     }
 
-    if (format === 'lab') {
+    if (format === "lab") {
       const labMatch = value.match(/lab\(([^)]+)\)/);
       if (labMatch) {
         const parts = labMatch[1].split(/[\s/]+/);
@@ -257,19 +257,19 @@ export function isValidColorFormat(
  */
 export function getFormatPlaceholder(format: ColorFormat): string {
   switch (format) {
-    case 'hex':
-      return '#3b82f6';
-    case 'rgb':
-      return 'rgb(59, 130, 246)';
-    case 'hsl':
-      return 'hsl(220, 91%, 64%)';
-    case 'hsv':
-      return 'hsv(220, 76%, 96%)';
-    case 'oklch':
-      return 'oklch(65% 0.15 230)';
-    case 'lab':
-      return 'lab(55% -10 40)';
+    case "hex":
+      return "#3b82f6";
+    case "rgb":
+      return "rgb(59, 130, 246)";
+    case "hsl":
+      return "hsl(220, 91%, 64%)";
+    case "hsv":
+      return "hsv(220, 76%, 96%)";
+    case "oklch":
+      return "oklch(65% 0.15 230)";
+    case "lab":
+      return "lab(55% -10 40)";
     default:
-      return '';
+      return "";
   }
 }

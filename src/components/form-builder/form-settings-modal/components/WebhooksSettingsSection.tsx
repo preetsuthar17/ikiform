@@ -1,15 +1,15 @@
-import { Link2 } from 'lucide-react';
-import React from 'react';
-import { FaQuestion } from 'react-icons/fa6';
-import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
+import { Link2 } from "lucide-react";
+import React from "react";
+import { FaQuestion } from "react-icons/fa6";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { WebhookManagementPanel } from '@/components/webhooks/WebhookManagementPanel';
+} from "@/components/ui/tooltip";
+import { WebhookManagementPanel } from "@/components/webhooks/WebhookManagementPanel";
 
 export function WebhooksSettingsSection({ formId }: { formId: string }) {
   return (

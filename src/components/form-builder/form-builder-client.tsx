@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
-import Link from 'next/link';
-import { Suspense } from 'react';
-import { FormBuilderSkeleton } from '@/components/form-builder/form-builder-skeleton';
-import { Button } from '@/components/ui/button';
-import { Loader } from '@/components/ui/loader';
-import { useAuth } from '@/hooks/use-auth';
-import { usePremiumStatus } from '@/hooks/use-premium-status';
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { Suspense } from "react";
+import { FormBuilderSkeleton } from "@/components/form-builder/form-builder-skeleton";
+import { Button } from "@/components/ui/button";
+import { Loader } from "@/components/ui/loader";
+import { useAuth } from "@/hooks/use-auth";
+import { usePremiumStatus } from "@/hooks/use-premium-status";
 
 const FormBuilder = dynamic(
   () =>
-    import('@/components/form-builder/form-builder').then((mod) => ({
+    import("@/components/form-builder/form-builder").then((mod) => ({
       default: mod.FormBuilder,
     })),
   {

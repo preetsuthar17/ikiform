@@ -1,18 +1,18 @@
-import { ExternalLink, Settings2 } from 'lucide-react';
-import React from 'react';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
+import { ExternalLink, Settings2 } from "lucide-react";
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 
-import { Switch } from '@/components/ui/switch';
-import { DEFAULT_FORM_DESIGN } from '../constants';
-import type { LocalSettings } from '../types';
+import { Switch } from "@/components/ui/switch";
+import { DEFAULT_FORM_DESIGN } from "../constants";
+import type { LocalSettings } from "../types";
 
 const FORM_MARGIN_OPTIONS = [
-  { value: 'none', label: 'None', preview: '', description: 'No margin' },
-  { value: 'sm', label: 'Small', preview: '', description: '8px' },
-  { value: 'md', label: 'Medium', preview: '', description: '16px' },
-  { value: 'lg', label: 'Large', preview: '', description: '32px' },
+  { value: "none", label: "None", preview: "", description: "No margin" },
+  { value: "sm", label: "Small", preview: "", description: "8px" },
+  { value: "md", label: "Medium", preview: "", description: "16px" },
+  { value: "lg", label: "Large", preview: "", description: "32px" },
 ];
 
 interface DesignSectionProps {
@@ -68,7 +68,7 @@ export function DesignSection({
                 className="mt-3 gap-2"
                 onClick={() => {
                   if (formId) {
-                    window.open(`/form-builder/${formId}/customize`, '_blank');
+                    window.open(`/form-builder/${formId}/customize`, "_blank");
                   }
                 }}
                 size="sm"

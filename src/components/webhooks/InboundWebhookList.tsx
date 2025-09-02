@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   type InboundWebhookMapping,
   useInboundWebhookManagement,
-} from './hooks/useInboundWebhookManagement';
-import { InboundWebhookFormModal } from './InboundWebhookFormModal';
+} from "./hooks/useInboundWebhookManagement";
+import { InboundWebhookFormModal } from "./InboundWebhookFormModal";
 
 function InboundWebhookDocsDrawer({
   mapping,
@@ -29,7 +29,7 @@ function InboundWebhookDocsDrawer({
     {} as Record<string, string>
   );
   async function handleCopy(text: string, type: string) {
-    const { copyToClipboard } = await import('@/lib/utils/clipboard');
+    const { copyToClipboard } = await import("@/lib/utils/clipboard");
     const success = await copyToClipboard(text);
 
     if (success) {
@@ -62,11 +62,11 @@ function InboundWebhookDocsDrawer({
               value={mapping.endpoint}
             />
             <Button
-              onClick={() => handleCopy(mapping.endpoint, 'endpoint')}
+              onClick={() => handleCopy(mapping.endpoint, "endpoint")}
               size="sm"
               variant="outline"
             >
-              {copied === 'endpoint' ? 'Copied!' : 'Copy'}
+              {copied === "endpoint" ? "Copied!" : "Copy"}
             </Button>
           </div>
         </div>
@@ -78,12 +78,12 @@ function InboundWebhookDocsDrawer({
             </pre>
             <Button
               onClick={() =>
-                handleCopy(JSON.stringify(samplePayload, null, 2), 'payload')
+                handleCopy(JSON.stringify(samplePayload, null, 2), "payload")
               }
               size="sm"
               variant="outline"
             >
-              {copied === 'payload' ? 'Copied!' : 'Copy'}
+              {copied === "payload" ? "Copied!" : "Copy"}
             </Button>
           </div>
         </div>
@@ -152,7 +152,7 @@ export function InboundWebhookList() {
       <header className="mb-6 flex items-center justify-between">
         <h2 className="font-bold text-2xl">Inbound Webhooks</h2>
         <Button disabled={loading} onClick={handleAdd} variant="default">
-          {loading ? 'Loading...' : 'Add Inbound Webhook'}
+          {loading ? "Loading..." : "Add Inbound Webhook"}
         </Button>
       </header>
       {loading ? (
@@ -170,19 +170,19 @@ export function InboundWebhookList() {
                     {webhook.endpoint}
                   </div>
                   <div className="mt-1 text-gray-500 text-xs">
-                    Target Form:{' '}
+                    Target Form:{" "}
                     <span className="font-semibold">
                       {webhook.targetFormId}
                     </span>
                   </div>
                   <div className="mt-1 text-gray-500 text-xs">
-                    Mapping:{' '}
+                    Mapping:{" "}
                     {Object.entries(webhook.mappingRules)
                       .map(([ext, form]) => `${ext} → ${form}`)
-                      .join(', ')}
+                      .join(", ")}
                   </div>
                   <div className="mt-2 text-gray-500 text-xs">
-                    Status:{' '}
+                    Status:{" "}
                     {webhook.enabled ? (
                       <span className="font-semibold text-green-600">
                         Enabled

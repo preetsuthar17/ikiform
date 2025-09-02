@@ -1,12 +1,12 @@
-import { type NextRequest, NextResponse } from 'next/server';
-import { formsDbServer } from '@/lib/database';
+import { type NextRequest, NextResponse } from "next/server";
+import { formsDbServer } from "@/lib/database";
 import {
   checkDuplicateSubmission,
   extractEmailFromSubmissionData,
   generateIdentifier,
   recordSubmission,
-} from '@/lib/forms/duplicate-prevention';
-import { createAdminClient } from '@/utils/supabase/admin';
+} from "@/lib/forms/duplicate-prevention";
+import { createAdminClient } from "@/utils/supabase/admin";
 
 interface InboundWebhookMapping {
   id: string;
@@ -33,9 +33,9 @@ export async function POST(
     const supabase = createAdminClient();
 
     const { data: mapping, error } = await supabase
-      .from('inbound_webhook_mappings')
-      .select('*')
-      .eq('id', mappingId)
+      .from("inbound_webhook_mappings")
+      .select("*")
+      .eq("id", mappingId)
       .single<InboundWebhookMapping>();
 
     if (error || !mapping) {
@@ -44,7 +44,7 @@ export async function POST(
         error
       );
       return NextResponse.json(
-        { error: 'Inbound mapping not found' },
+        { error: "Inbound mapping not found" },
         { status: 404 }
       );
     }
@@ -58,19 +58,19 @@ export async function POST(
         `[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Mapping is disabled`
       );
       return NextResponse.json(
-        { error: 'Inbound mapping is disabled' },
+        { error: "Inbound mapping is disabled" },
         { status: 403 }
       );
     }
 
     if (mapping.secret) {
-      const headerSecret = req.headers.get('x-inbound-secret');
+      const headerSecret = req.headers.get("x-inbound-secret");
       if (!headerSecret || headerSecret !== mapping.secret) {
         console.error(
           `[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Invalid or missing secret`
         );
         return NextResponse.json(
-          { error: 'Invalid or missing secret' },
+          { error: "Invalid or missing secret" },
           { status: 401 }
         );
       }
@@ -102,7 +102,7 @@ export async function POST(
         `[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Form not found: ${mapping.target_form_id}`
       );
       return NextResponse.json(
-        { error: 'Target form not found' },
+        { error: "Target form not found" },
         { status: 404 }
       );
     }
@@ -110,14 +110,14 @@ export async function POST(
     const duplicatePrevention = form.schema.settings.duplicatePrevention;
     if (duplicatePrevention?.enabled) {
       const ipAddress =
-        req.headers.get('x-forwarded-for')?.split(',')[0] ||
-        req.headers.get('x-real-ip') ||
-        'webhook';
+        req.headers.get("x-forwarded-for")?.split(",")[0] ||
+        req.headers.get("x-real-ip") ||
+        "webhook";
       const email = extractEmailFromSubmissionData(mapped);
       const sessionId = `webhook_${mappingId}_${Date.now()}`;
 
       const identifier = generateIdentifier(
-        duplicatePrevention.strategy || 'ip',
+        duplicatePrevention.strategy || "ip",
         ipAddress,
         email,
         sessionId
@@ -135,7 +135,7 @@ export async function POST(
         );
         return NextResponse.json(
           {
-            error: 'Duplicate submission detected',
+            error: "Duplicate submission detected",
             message: duplicatePrevention.message,
             timeRemaining: duplicateCheck.timeRemaining,
             attemptsRemaining: duplicateCheck.attemptsRemaining,
@@ -153,14 +153,14 @@ export async function POST(
     // Record submission for duplicate prevention
     if (duplicatePrevention?.enabled) {
       const ipAddress =
-        req.headers.get('x-forwarded-for')?.split(',')[0] ||
-        req.headers.get('x-real-ip') ||
-        'webhook';
+        req.headers.get("x-forwarded-for")?.split(",")[0] ||
+        req.headers.get("x-real-ip") ||
+        "webhook";
       const email = extractEmailFromSubmissionData(mapped);
       const sessionId = `webhook_${mappingId}_${Date.now()}`;
 
       const identifier = generateIdentifier(
-        duplicatePrevention.strategy || 'ip',
+        duplicatePrevention.strategy || "ip",
         ipAddress,
         email,
         sessionId
@@ -172,7 +172,7 @@ export async function POST(
         duplicatePrevention
       ).catch((e) =>
         console.error(
-          '[Webhook Duplicate Prevention] Record submission error:',
+          "[Webhook Duplicate Prevention] Record submission error:",
           e
         )
       );
@@ -189,7 +189,7 @@ export async function POST(
     const errorMessage =
       error instanceof Error
         ? error.message
-        : 'Failed to process inbound webhook';
+        : "Failed to process inbound webhook";
     console.error(
       `[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Error after ${duration}ms:`,
       errorMessage

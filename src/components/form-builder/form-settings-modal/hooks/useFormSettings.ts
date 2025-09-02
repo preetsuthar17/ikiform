@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import type { FormSchema } from '@/lib/database';
+import type { FormSchema } from "@/lib/database";
 import {
   DEFAULT_DUPLICATE_PREVENTION_SETTINGS,
   DEFAULT_NOTIFICATION_SETTINGS,
@@ -8,9 +8,9 @@ import {
   DEFAULT_PROFANITY_FILTER_SETTINGS,
   DEFAULT_RATE_LIMIT_SETTINGS,
   DEFAULT_RESPONSE_LIMIT_SETTINGS,
-} from '@/lib/forms';
-import { DEFAULT_FORM_DESIGN } from '../constants';
-import type { LocalSettings } from '../types';
+} from "@/lib/forms";
+import { DEFAULT_FORM_DESIGN } from "../constants";
+import type { LocalSettings } from "../types";
 
 export function useFormSettings(schema: FormSchema, userEmail?: string) {
   const [localSettings, setLocalSettings] = useState<LocalSettings>({
@@ -20,8 +20,8 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
       maxWidth:
         schema.settings.layout?.maxWidth || DEFAULT_FORM_DESIGN.maxWidth,
       padding: schema.settings.layout?.padding || DEFAULT_FORM_DESIGN.padding,
-      spacing: schema.settings.layout?.spacing || 'normal',
-      alignment: schema.settings.layout?.alignment || 'left',
+      spacing: schema.settings.layout?.spacing || "normal",
+      alignment: schema.settings.layout?.alignment || "left",
       margin: schema.settings.layout?.margin || DEFAULT_FORM_DESIGN.margin,
       borderRadius:
         schema.settings.layout?.borderRadius ||
@@ -50,7 +50,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
     notifications: {
       ...DEFAULT_NOTIFICATION_SETTINGS,
       ...schema.settings.notifications,
-      email: schema.settings.notifications?.email || userEmail || '',
+      email: schema.settings.notifications?.email || userEmail || "",
     },
   });
 
@@ -63,8 +63,8 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
         maxWidth:
           schema.settings.layout?.maxWidth || DEFAULT_FORM_DESIGN.maxWidth,
         padding: schema.settings.layout?.padding || DEFAULT_FORM_DESIGN.padding,
-        spacing: schema.settings.layout?.spacing || 'normal',
-        alignment: schema.settings.layout?.alignment || 'left',
+        spacing: schema.settings.layout?.spacing || "normal",
+        alignment: schema.settings.layout?.alignment || "left",
         margin: schema.settings.layout?.margin || DEFAULT_FORM_DESIGN.margin,
         borderRadius:
           schema.settings.layout?.borderRadius ||
@@ -93,7 +93,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
       notifications: {
         ...DEFAULT_NOTIFICATION_SETTINGS,
         ...schema.settings.notifications,
-        email: schema.settings.notifications?.email || userEmail || '',
+        email: schema.settings.notifications?.email || userEmail || "",
       },
     });
   }, [schema.settings, userEmail]);
@@ -133,7 +133,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
   };
 
   const updateRateLimit = (
-    rateLimitUpdates: Partial<NonNullable<LocalSettings['rateLimit']>>
+    rateLimitUpdates: Partial<NonNullable<LocalSettings["rateLimit"]>>
   ) => {
     setLocalSettings({
       ...localSettings,
@@ -146,7 +146,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
 
   const updateDuplicatePrevention = (
     duplicatePreventionUpdates: Partial<
-      NonNullable<LocalSettings['duplicatePrevention']>
+      NonNullable<LocalSettings["duplicatePrevention"]>
     >
   ) => {
     setLocalSettings({
@@ -160,7 +160,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
 
   const updateProfanityFilter = (
     profanityFilterUpdates: Partial<
-      NonNullable<LocalSettings['profanityFilter']>
+      NonNullable<LocalSettings["profanityFilter"]>
     >
   ) => {
     setLocalSettings({
@@ -173,7 +173,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
   };
 
   const updateResponseLimit = (
-    responseLimitUpdates: Partial<NonNullable<LocalSettings['responseLimit']>>
+    responseLimitUpdates: Partial<NonNullable<LocalSettings["responseLimit"]>>
   ) => {
     setLocalSettings({
       ...localSettings,
@@ -186,7 +186,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
 
   const updatePasswordProtection = (
     passwordProtectionUpdates: Partial<
-      NonNullable<LocalSettings['passwordProtection']>
+      NonNullable<LocalSettings["passwordProtection"]>
     >
   ) => {
     setLocalSettings({
@@ -200,7 +200,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
 
   const updateSocialMedia = (
     socialMediaUpdates: Partial<
-      NonNullable<NonNullable<LocalSettings['branding']>['socialMedia']>
+      NonNullable<NonNullable<LocalSettings["branding"]>["socialMedia"]>
     >
   ) => {
     setLocalSettings({
@@ -216,7 +216,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
   };
 
   const updateNotifications = (
-    notificationUpdates: Partial<LocalSettings['notifications']>
+    notificationUpdates: Partial<LocalSettings["notifications"]>
   ) => {
     setLocalSettings({
       ...localSettings,
@@ -234,8 +234,8 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
         maxWidth:
           schema.settings.layout?.maxWidth || DEFAULT_FORM_DESIGN.maxWidth,
         padding: schema.settings.layout?.padding || DEFAULT_FORM_DESIGN.padding,
-        spacing: schema.settings.layout?.spacing || 'normal',
-        alignment: schema.settings.layout?.alignment || 'left',
+        spacing: schema.settings.layout?.spacing || "normal",
+        alignment: schema.settings.layout?.alignment || "left",
         margin: schema.settings.layout?.margin || DEFAULT_FORM_DESIGN.margin,
         borderRadius:
           schema.settings.layout?.borderRadius ||
@@ -264,7 +264,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
       notifications: {
         ...DEFAULT_NOTIFICATION_SETTINGS,
         ...schema.settings.notifications,
-        email: schema.settings.notifications?.email || userEmail || '',
+        email: schema.settings.notifications?.email || userEmail || "",
       },
     });
   };

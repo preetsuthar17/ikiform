@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { Paintbrush } from 'lucide-react';
-import React from 'react';
+import { Paintbrush } from "lucide-react";
+import React from "react";
 import {
   PREDEFINED_COLORS,
   TRANSPARENT_PATTERN,
-} from '@/components/form-builder/form-settings-modal/constants';
-import type { LocalSettings } from '@/components/form-builder/form-settings-modal/types';
-import { Card } from '@/components/ui/card';
-import { EnhancedColorPicker } from '@/components/ui/enhanced-color-picker';
-import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
+} from "@/components/form-builder/form-settings-modal/constants";
+import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
+import { Card } from "@/components/ui/card";
+import { EnhancedColorPicker } from "@/components/ui/enhanced-color-picker";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 
 interface ColorCustomizationSectionProps {
   localSettings: LocalSettings;
@@ -21,10 +21,10 @@ export function ColorCustomizationSection({
   localSettings,
   updateSettings,
 }: ColorCustomizationSectionProps) {
-  const backgroundColor = localSettings.colors?.background || '#ffffff';
-  const textColor = localSettings.colors?.text || '#000000';
-  const primaryColor = localSettings.colors?.primary || '#2563eb';
-  const borderColor = localSettings.colors?.border || '#e2e8f0';
+  const backgroundColor = localSettings.colors?.background || "#ffffff";
+  const textColor = localSettings.colors?.text || "#000000";
+  const primaryColor = localSettings.colors?.primary || "#2563eb";
+  const borderColor = localSettings.colors?.border || "#e2e8f0";
 
   const handleBackgroundColorChange = (color: string) => {
     updateSettings({
@@ -92,20 +92,20 @@ export function ColorCustomizationSection({
                 <button
                   className={`h-8 w-8 rounded-md border-2 transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
                     backgroundColor === color
-                      ? 'border-ring ring-2 ring-ring ring-offset-2'
-                      : 'border-border'
+                      ? "border-ring ring-2 ring-ring ring-offset-2"
+                      : "border-border"
                   }`}
                   key={color}
                   onClick={() => handleBackgroundColorChange(color)}
                   style={{
                     backgroundColor:
-                      color === 'transparent' ? undefined : color,
+                      color === "transparent" ? undefined : color,
                     backgroundImage:
-                      color === 'transparent'
+                      color === "transparent"
                         ? `url("${TRANSPARENT_PATTERN}")`
                         : undefined,
                   }}
-                  title={color === 'transparent' ? 'Transparent' : color}
+                  title={color === "transparent" ? "Transparent" : color}
                   type="button"
                 />
               ))}
@@ -135,20 +135,20 @@ export function ColorCustomizationSection({
                 <button
                   className={`h-8 w-8 rounded-md border-2 transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
                     textColor === color
-                      ? 'border-ring ring-2 ring-ring ring-offset-2'
-                      : 'border-border'
+                      ? "border-ring ring-2 ring-ring ring-offset-2"
+                      : "border-border"
                   }`}
                   key={color}
                   onClick={() => handleTextColorChange(color)}
                   style={{
                     backgroundColor:
-                      color === 'transparent' ? undefined : color,
+                      color === "transparent" ? undefined : color,
                     backgroundImage:
-                      color === 'transparent'
+                      color === "transparent"
                         ? `url("${TRANSPARENT_PATTERN}")`
                         : undefined,
                   }}
-                  title={color === 'transparent' ? 'Transparent' : color}
+                  title={color === "transparent" ? "Transparent" : color}
                   type="button"
                 />
               ))}
@@ -178,20 +178,20 @@ export function ColorCustomizationSection({
                 <button
                   className={`h-8 w-8 rounded-md border-2 transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
                     primaryColor === color
-                      ? 'border-ring ring-2 ring-ring ring-offset-2'
-                      : 'border-border'
+                      ? "border-ring ring-2 ring-ring ring-offset-2"
+                      : "border-border"
                   }`}
                   key={color}
                   onClick={() => handlePrimaryColorChange(color)}
                   style={{
                     backgroundColor:
-                      color === 'transparent' ? undefined : color,
+                      color === "transparent" ? undefined : color,
                     backgroundImage:
-                      color === 'transparent'
+                      color === "transparent"
                         ? `url("${TRANSPARENT_PATTERN}")`
                         : undefined,
                   }}
-                  title={color === 'transparent' ? 'Transparent' : color}
+                  title={color === "transparent" ? "Transparent" : color}
                   type="button"
                 />
               ))}
@@ -221,20 +221,20 @@ export function ColorCustomizationSection({
                 <button
                   className={`h-8 w-8 rounded-md border-2 transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
                     borderColor === color
-                      ? 'border-ring ring-2 ring-ring ring-offset-2'
-                      : 'border-border'
+                      ? "border-ring ring-2 ring-ring ring-offset-2"
+                      : "border-border"
                   }`}
                   key={color}
                   onClick={() => handleBorderColorChange(color)}
                   style={{
                     backgroundColor:
-                      color === 'transparent' ? undefined : color,
+                      color === "transparent" ? undefined : color,
                     backgroundImage:
-                      color === 'transparent'
+                      color === "transparent"
                         ? `url("${TRANSPARENT_PATTERN}")`
                         : undefined,
                   }}
-                  title={color === 'transparent' ? 'Transparent' : color}
+                  title={color === "transparent" ? "Transparent" : color}
                   type="button"
                 />
               ))}

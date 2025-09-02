@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { FormFieldRenderer } from '@/components/form-builder/form-field-renderer';
-import type { LocalSettings } from '@/components/form-builder/form-settings-modal/types';
-import { Progress } from '@/components/ui';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { SocialMediaIcons } from '@/components/ui/social-media-icons';
-import type { FormSchema } from '@/lib/database';
+import React from "react";
+import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
+import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
+import { Progress } from "@/components/ui";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { SocialMediaIcons } from "@/components/ui/social-media-icons";
+import type { FormSchema } from "@/lib/database";
 import {
   getBorderRadiusValue,
   getMarginValue,
   getMaxWidthValue,
   getPaddingValue,
-} from '@/lib/utils/form-styles';
-import { getPublicFormTitle } from '@/lib/utils/form-utils';
+} from "@/lib/utils/form-styles";
+import { getPublicFormTitle } from "@/lib/utils/form-utils";
 
 interface ActualFormPreviewProps {
   localSettings: LocalSettings;
@@ -34,7 +34,7 @@ export function ActualFormPreview({
 
   // Calculate actual styling values
   const formWidth =
-    layout.maxWidth === 'custom' && layout.customWidth
+    layout.maxWidth === "custom" && layout.customWidth
       ? layout.customWidth
       : getMaxWidthValue(layout.maxWidth);
 
@@ -59,76 +59,76 @@ export function ActualFormPreview({
   };
 
   React.useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     // Force light theme
-    document.documentElement.classList.remove('dark');
-    document.documentElement.classList.add('light');
+    document.documentElement.classList.remove("dark");
+    document.documentElement.classList.add("light");
 
     const root = document.documentElement;
 
     // Set border radius
-    const val = layout?.borderRadius || 'md';
-    let borderRadiusValue = '8px';
-    let cardRadiusValue = '16px';
+    const val = layout?.borderRadius || "md";
+    let borderRadiusValue = "8px";
+    let cardRadiusValue = "16px";
     switch (val) {
-      case 'none':
-        borderRadiusValue = '0px';
-        cardRadiusValue = '0px';
+      case "none":
+        borderRadiusValue = "0px";
+        cardRadiusValue = "0px";
         break;
-      case 'sm':
-        borderRadiusValue = '4px';
-        cardRadiusValue = '8px';
+      case "sm":
+        borderRadiusValue = "4px";
+        cardRadiusValue = "8px";
         break;
-      case 'md':
-        borderRadiusValue = '10px';
-        cardRadiusValue = '16px';
+      case "md":
+        borderRadiusValue = "10px";
+        cardRadiusValue = "16px";
         break;
-      case 'lg':
-        borderRadiusValue = '16px';
-        cardRadiusValue = '24px';
+      case "lg":
+        borderRadiusValue = "16px";
+        cardRadiusValue = "24px";
         break;
-      case 'xl':
-        borderRadiusValue = '24px';
-        cardRadiusValue = '32px';
+      case "xl":
+        borderRadiusValue = "24px";
+        cardRadiusValue = "32px";
         break;
     }
 
     // Set CSS custom properties
-    root.style.setProperty('--radius', borderRadiusValue);
-    root.style.setProperty('--card-radius', cardRadiusValue);
+    root.style.setProperty("--radius", borderRadiusValue);
+    root.style.setProperty("--card-radius", cardRadiusValue);
 
     // Set custom width if specified
-    if (layout?.maxWidth === 'custom' && layout?.customWidth) {
-      root.style.setProperty('--form-custom-width', layout.customWidth);
+    if (layout?.maxWidth === "custom" && layout?.customWidth) {
+      root.style.setProperty("--form-custom-width", layout.customWidth);
     }
 
     // Set color variables for CSS
     if (colors?.primary) {
-      root.style.setProperty('--form-primary-color', colors.primary);
+      root.style.setProperty("--form-primary-color", colors.primary);
     }
     if (colors?.text) {
-      root.style.setProperty('--form-text-color', colors.text);
+      root.style.setProperty("--form-text-color", colors.text);
     }
     if (colors?.background) {
-      root.style.setProperty('--form-background-color', colors.background);
+      root.style.setProperty("--form-background-color", colors.background);
     }
     if (colors?.border) {
-      root.style.setProperty('--form-border-color', colors.border);
+      root.style.setProperty("--form-border-color", colors.border);
     }
 
     return () => {
       // Cleanup - restore defaults
-      root.style.setProperty('--radius', '0.7rem');
-      root.style.setProperty('--card-radius', '1rem');
-      root.style.removeProperty('--form-custom-width');
-      root.style.removeProperty('--form-primary-color');
-      root.style.removeProperty('--form-text-color');
-      root.style.removeProperty('--form-background-color');
-      root.style.removeProperty('--form-border-color');
+      root.style.setProperty("--radius", "0.7rem");
+      root.style.setProperty("--card-radius", "1rem");
+      root.style.removeProperty("--form-custom-width");
+      root.style.removeProperty("--form-primary-color");
+      root.style.removeProperty("--form-text-color");
+      root.style.removeProperty("--form-background-color");
+      root.style.removeProperty("--form-border-color");
 
       // Remove forced light theme classes
-      document.documentElement.classList.remove('light');
+      document.documentElement.classList.remove("light");
     };
   }, [layout, colors]);
 
@@ -148,7 +148,7 @@ export function ActualFormPreview({
       <Card className={`p-4 ${className}`}>
         <div
           className={
-            'flex items-center justify-center transition-all duration-200'
+            "flex items-center justify-center transition-all duration-200"
           }
           style={{
             margin: formMargin,
@@ -159,13 +159,13 @@ export function ActualFormPreview({
         >
           <div
             className={`ikiform-customized flex w-full flex-col gap-8 ${
-              layout.maxWidth === 'custom' && layout.customWidth
-                ? 'ikiform-custom-width'
-                : ''
+              layout.maxWidth === "custom" && layout.customWidth
+                ? "ikiform-custom-width"
+                : ""
             }`}
             style={{
               maxWidth: formWidth,
-              margin: '0 auto',
+              margin: "0 auto",
             }}
           >
             <Card
@@ -205,13 +205,13 @@ export function ActualFormPreview({
               {/* Social Media Icons - Header */}
               {localSettings.branding?.socialMedia?.enabled &&
                 localSettings.branding.socialMedia.platforms &&
-                (localSettings.branding.socialMedia.position === 'header' ||
-                  localSettings.branding.socialMedia.position === 'both') && (
+                (localSettings.branding.socialMedia.position === "header" ||
+                  localSettings.branding.socialMedia.position === "both") && (
                   <div className="flex justify-center">
                     <SocialMediaIcons
                       className="justify-center"
                       iconSize={
-                        localSettings.branding.socialMedia.iconSize || 'md'
+                        localSettings.branding.socialMedia.iconSize || "md"
                       }
                       platforms={localSettings.branding.socialMedia.platforms}
                     />
@@ -277,9 +277,9 @@ export function ActualFormPreview({
                         className="flex-1"
                         disabled
                         style={{
-                          backgroundColor: colors.primary || '#2563eb',
-                          borderColor: colors.primary || '#2563eb',
-                          color: '#ffffff',
+                          backgroundColor: colors.primary || "#2563eb",
+                          borderColor: colors.primary || "#2563eb",
+                          color: "#ffffff",
                         }}
                       >
                         Next
@@ -290,12 +290,12 @@ export function ActualFormPreview({
                       className="ml-auto w-fit"
                       disabled
                       style={{
-                        backgroundColor: colors.primary || '#2563eb',
-                        borderColor: colors.primary || '#2563eb',
-                        color: '#ffffff',
+                        backgroundColor: colors.primary || "#2563eb",
+                        borderColor: colors.primary || "#2563eb",
+                        color: "#ffffff",
                       }}
                     >
-                      {localSettings.submitText || 'Submit Form'}
+                      {localSettings.submitText || "Submit Form"}
                     </Button>
                   )}
                 </div>
@@ -315,12 +315,12 @@ export function ActualFormPreview({
               {/* Social Media Icons - Footer */}
               {localSettings.branding?.socialMedia?.enabled &&
                 localSettings.branding.socialMedia.platforms &&
-                (localSettings.branding.socialMedia.position === 'footer' ||
-                  localSettings.branding.socialMedia.position === 'both') && (
+                (localSettings.branding.socialMedia.position === "footer" ||
+                  localSettings.branding.socialMedia.position === "both") && (
                   <SocialMediaIcons
                     className="justify-center"
                     iconSize={
-                      localSettings.branding.socialMedia.iconSize || 'md'
+                      localSettings.branding.socialMedia.iconSize || "md"
                     }
                     platforms={localSettings.branding.socialMedia.platforms}
                   />
@@ -332,7 +332,7 @@ export function ActualFormPreview({
                   (localSettings.branding as any).showIkiformBranding !== false
               ) && (
                 <p className="text-muted-foreground text-sm">
-                  Powered by{' '}
+                  Powered by{" "}
                   <span className="font-medium text-foreground underline">
                     Ikiform
                   </span>

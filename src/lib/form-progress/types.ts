@@ -44,7 +44,7 @@ export interface ProgressStorageAdapter {
 
 export interface FormProgressConfig {
   enabled: boolean;
-  storage: 'localStorage' | 'sessionStorage' | 'indexedDB' | 'server';
+  storage: "localStorage" | "sessionStorage" | "indexedDB" | "server";
   autoSaveInterval: number;
   retentionDays: number;
   compressionEnabled: boolean;

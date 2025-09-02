@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 export function useEditableField(
   initialValue: string,
@@ -35,8 +35,8 @@ export function useEditableField(
   };
 
   const handleKeyDown = (e: React.KeyboardEvent, isTextarea = false) => {
-    const isEnter = e.key === 'Enter';
-    const isEscape = e.key === 'Escape';
+    const isEnter = e.key === "Enter";
+    const isEscape = e.key === "Escape";
 
     if (isTextarea && isEnter && (e.ctrlKey || e.metaKey)) {
       e.preventDefault();

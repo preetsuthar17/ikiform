@@ -1,22 +1,22 @@
-import type { Form, FormSubmission } from '@/lib/database';
-import { calculateQuizScore } from '@/lib/quiz/scoring';
+import type { Form, FormSubmission } from "@/lib/database";
+import { calculateQuizScore } from "@/lib/quiz/scoring";
 import type {
   ConversionFunnelStep,
   FieldAnalytics,
   FilterState,
   QuizAnalytics,
-} from '../types';
+} from "../types";
 
 export const generateSessionId = () =>
   `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
 export const formatDate = (dateString: string) =>
-  new Date(dateString).toLocaleString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
+  new Date(dateString).toLocaleString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
   });
 
 export const getFieldLabel = (form: Form, fieldId: string) => {
@@ -46,7 +46,7 @@ export const getSubmissionCompletionRate = (
 ) => {
   if (totalFields === 0) return 0;
   const filledFields = Object.values(submission.submission_data).filter(
-    (val) => val !== '' && val !== null && val !== undefined
+    (val) => val !== "" && val !== null && val !== undefined
   ).length;
   return (filledFields / totalFields) * 100;
 };
@@ -67,38 +67,38 @@ export const filterSubmissions = (
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    if (filterState.timeRange !== 'all') {
+    if (filterState.timeRange !== "all") {
       const startDate = new Date();
       startDate.setHours(0, 0, 0, 0);
 
       switch (filterState.timeRange) {
-        case 'today':
+        case "today":
           if (submissionDate < today) return false;
           break;
-        case 'week':
+        case "week":
           startDate.setDate(startDate.getDate() - 7);
           if (submissionDate < startDate) return false;
           break;
-        case 'month':
+        case "month":
           startDate.setMonth(startDate.getMonth() - 1);
           if (submissionDate < startDate) return false;
           break;
       }
     }
 
-    if (filterState.completionRate !== 'all') {
+    if (filterState.completionRate !== "all") {
       const completionRate = getSubmissionCompletionRate(
         submission,
         totalFields
       );
       switch (filterState.completionRate) {
-        case 'complete':
+        case "complete":
           if (completionRate < 100) return false;
           break;
-        case 'partial':
+        case "partial":
           if (completionRate < 1 || completionRate === 100) return false;
           break;
-        case 'empty':
+        case "empty":
           if (completionRate > 0) return false;
           break;
       }
@@ -121,7 +121,7 @@ export const calculateFieldAnalytics = (
   allPossibleFields.forEach((field) => {
     const responses = submissions
       .map((sub) => sub.submission_data[field.id])
-      .filter((val) => val !== '' && val !== null && val !== undefined);
+      .filter((val) => val !== "" && val !== null && val !== undefined);
 
     const valueFrequency: Record<string, number> = {};
     let totalLength = 0;
@@ -130,25 +130,25 @@ export const calculateFieldAnalytics = (
       let stringValue: string;
 
       // Handle file uploads specially
-      if (field.type === 'file') {
+      if (field.type === "file") {
         if (Array.isArray(response)) {
           const fileCount = response.length;
           const fileTypes = response.map((file) => {
-            if (typeof file === 'object' && file.type) {
-              return file.type.split('/')[0]; // e.g., 'image', 'video', 'application'
+            if (typeof file === "object" && file.type) {
+              return file.type.split("/")[0]; // e.g., 'image', 'video', 'application'
             }
-            return 'unknown';
+            return "unknown";
           });
           const uniqueTypes = [...new Set(fileTypes)];
-          stringValue = `${fileCount} file${fileCount !== 1 ? 's' : ''} (${uniqueTypes.join(', ')})`;
-        } else if (typeof response === 'object' && response.type) {
-          stringValue = `1 file (${response.type.split('/')[0]})`;
+          stringValue = `${fileCount} file${fileCount !== 1 ? "s" : ""} (${uniqueTypes.join(", ")})`;
+        } else if (typeof response === "object" && response.type) {
+          stringValue = `1 file (${response.type.split("/")[0]})`;
         } else {
-          stringValue = '1 file';
+          stringValue = "1 file";
         }
       } else {
         stringValue = Array.isArray(response)
-          ? response.join(', ')
+          ? response.join(", ")
           : String(response);
       }
 
@@ -226,7 +226,7 @@ export const calculateBounceRate = (submissions: FormSubmission[]): number => {
 
   const bouncedSubmissions = submissions.filter((sub) => {
     const filledFields = Object.values(sub.submission_data).filter(
-      (val) => val !== '' && val !== null && val !== undefined
+      (val) => val !== "" && val !== null && val !== undefined
     ).length;
     return filledFields <= 1;
   });
@@ -245,7 +245,7 @@ export const calculateConversionFunnel = (
     const completedCount = submissions.filter((sub) => {
       return blockFieldIds.some((fieldId) => {
         const value = sub.submission_data[fieldId];
-        return value !== '' && value !== null && value !== undefined;
+        return value !== "" && value !== null && value !== undefined;
       });
     }).length;
 
@@ -257,7 +257,7 @@ export const calculateConversionFunnel = (
           ? Math.round((completedCount / submissions.length) * 100)
           : 0,
     };
-    (' 12q ');
+    (" 12q ");
   });
 
   return funnel;
@@ -273,20 +273,20 @@ export const getActiveFilters = (
     filters.push(`Search: "${searchTerm}"`);
   }
 
-  if (filterState.timeRange !== 'all') {
+  if (filterState.timeRange !== "all") {
     const ranges = {
-      today: 'Today',
-      week: 'Last 7 Days',
-      month: 'Last 30 Days',
+      today: "Today",
+      week: "Last 7 Days",
+      month: "Last 30 Days",
     };
     filters.push(`Time: ${ranges[filterState.timeRange]}`);
   }
 
-  if (filterState.completionRate !== 'all') {
+  if (filterState.completionRate !== "all") {
     const rates = {
-      complete: 'Complete',
-      partial: 'Partial',
-      empty: 'Empty',
+      complete: "Complete",
+      partial: "Partial",
+      empty: "Empty",
     };
     filters.push(`Completion: ${rates[filterState.completionRate]}`);
   }

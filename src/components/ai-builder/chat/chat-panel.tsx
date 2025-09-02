@@ -1,17 +1,17 @@
-import { AnimatePresence, motion } from 'motion/react';
-import { memo, useCallback } from 'react';
-import { Loader } from '@/components/ui/loader';
+import { AnimatePresence, motion } from "motion/react";
+import { memo, useCallback } from "react";
+import { Loader } from "@/components/ui/loader";
 
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
 
-import type { ChatPanelProps } from '@/lib/ai-builder/types';
-import { ChatHeader } from './chat-header';
-import { ChatInput } from './chat-input';
-import { ChatMessageItem } from './chat-message-item';
-import { ChatSuggestions } from './chat-suggestions';
-import { StreamingIndicator } from './streaming-indicator';
-import { WelcomeMessage } from './welcome-message';
+import type { ChatPanelProps } from "@/lib/ai-builder/types";
+import { ChatHeader } from "./chat-header";
+import { ChatInput } from "./chat-input";
+import { ChatMessageItem } from "./chat-message-item";
+import { ChatSuggestions } from "./chat-suggestions";
+import { StreamingIndicator } from "./streaming-indicator";
+import { WelcomeMessage } from "./welcome-message";
 
 export const ChatPanel = memo(function ChatPanel({
   messages,

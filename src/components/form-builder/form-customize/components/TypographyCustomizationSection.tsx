@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { Type } from 'lucide-react';
-import React from 'react';
+import { Type } from "lucide-react";
+import React from "react";
 import {
   FONT_SIZE_OPTIONS,
   FONT_WEIGHT_OPTIONS,
-} from '@/components/form-builder/form-settings-modal/constants';
-import type { LocalSettings } from '@/components/form-builder/form-settings-modal/types';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { GoogleFontPicker } from '@/components/ui/google-font-picker';
-import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
+} from "@/components/form-builder/form-settings-modal/constants";
+import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { GoogleFontPicker } from "@/components/ui/google-font-picker";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import {
   generateFontPreviewStyles,
   loadGoogleFont,
-} from '@/lib/utils/google-fonts';
+} from "@/lib/utils/google-fonts";
 
 interface TypographyCustomizationSectionProps {
   localSettings: LocalSettings;
@@ -26,18 +26,18 @@ export function TypographyCustomizationSection({
   localSettings,
   updateSettings,
 }: TypographyCustomizationSectionProps) {
-  const fontFamily = localSettings.typography?.fontFamily || 'Inter';
-  const fontSize = localSettings.typography?.fontSize || 'base';
-  const fontWeight = localSettings.typography?.fontWeight || 'normal';
+  const fontFamily = localSettings.typography?.fontFamily || "Inter";
+  const fontSize = localSettings.typography?.fontSize || "base";
+  const fontWeight = localSettings.typography?.fontWeight || "normal";
 
   const handleFontFamilyChange = (value: string) => {
-    console.log('Font family changed to:', value);
+    console.log("Font family changed to:", value);
 
     // Load the font before applying it
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       loadGoogleFont(value)
-        .then(() => console.log('Font loaded successfully:', value))
-        .catch((error) => console.error('Failed to load font:', value, error));
+        .then(() => console.log("Font loaded successfully:", value))
+        .catch((error) => console.error("Failed to load font:", value, error));
     }
 
     updateSettings({
@@ -52,7 +52,7 @@ export function TypographyCustomizationSection({
     updateSettings({
       typography: {
         ...localSettings.typography,
-        fontSize: value as 'xs' | 'sm' | 'base' | 'lg' | 'xl',
+        fontSize: value as "xs" | "sm" | "base" | "lg" | "xl",
       },
     });
   };
@@ -62,11 +62,11 @@ export function TypographyCustomizationSection({
       typography: {
         ...localSettings.typography,
         fontWeight: value as
-          | 'light'
-          | 'normal'
-          | 'medium'
-          | 'semibold'
-          | 'bold',
+          | "light"
+          | "normal"
+          | "medium"
+          | "semibold"
+          | "bold",
       },
     });
   };
@@ -126,8 +126,8 @@ export function TypographyCustomizationSection({
               <Button
                 className={`font-medium text-sm transition-all ${
                   fontSize === option.value
-                    ? 'bg-primary text-primary-foreground'
-                    : 'border bg-transparent text-foreground hover:bg-accent'
+                    ? "bg-primary text-primary-foreground"
+                    : "border bg-transparent text-foreground hover:bg-accent"
                 }`}
                 key={option.value}
                 onClick={() => handleFontSizeChange(option.value)}
@@ -164,8 +164,8 @@ export function TypographyCustomizationSection({
               <Button
                 className={`text-sm transition-all ${
                   fontWeight === option.value
-                    ? 'bg-primary text-primary-foreground'
-                    : 'border bg-transparent text-foreground hover:bg-accent'
+                    ? "bg-primary text-primary-foreground"
+                    : "border bg-transparent text-foreground hover:bg-accent"
                 }`}
                 key={option.value}
                 onClick={() => handleFontWeightChange(option.value)}
@@ -186,7 +186,7 @@ export function TypographyCustomizationSection({
                 ...generateFontPreviewStyles(fontFamily),
                 fontWeight:
                   FONT_WEIGHT_OPTIONS.find((opt) => opt.value === fontWeight)
-                    ?.description || '400',
+                    ?.description || "400",
               }}
             >
               This text shows the selected font weight

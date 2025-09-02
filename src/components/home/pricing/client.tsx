@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   BarChart3,
@@ -14,18 +14,18 @@ import {
   Sparkles,
   Star,
   Zap,
-} from 'lucide-react';
-import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
-import { OptimizedImage } from '@/components/other/optimized-image';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { Switch } from '@/components/ui/switch';
-import { Tabs } from '@/components/ui/tabs';
-import { useAuth } from '@/hooks/use-auth';
-import { usePremiumStatus } from '@/hooks/use-premium-status';
+} from "lucide-react";
+import Link from "next/link";
+import React, { useEffect, useRef, useState } from "react";
+import { OptimizedImage } from "@/components/other/optimized-image";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Switch } from "@/components/ui/switch";
+import { Tabs } from "@/components/ui/tabs";
+import { useAuth } from "@/hooks/use-auth";
+import { usePremiumStatus } from "@/hooks/use-premium-status";
 
 interface Product {
   id: string;
@@ -37,21 +37,21 @@ interface PricingClientProps {
 }
 
 const features = [
-  'Unlimited forms and submissions',
-  'AI Form builder and AI analytics',
-  'Scoring (quiz system)',
-  'Webhooks',
-  'Fetching form field data from API',
-  'Collect signature',
-  'File upload field',
-  'Form embedding',
-  'Design customization & custom branding',
-  'and much more!',
+  "Unlimited forms and submissions",
+  "AI Form builder and AI analytics",
+  "Scoring (quiz system)",
+  "Webhooks",
+  "Fetching form field data from API",
+  "Collect signature",
+  "File upload field",
+  "Form embedding",
+  "Design customization & custom branding",
+  "and much more!",
 ];
 
-const MONTHLY_PRODUCT_ID = '05f52efa-2102-4dd0-9d1d-1538210d6712';
-const YEARLY_PRODUCT_ID = '4eff4c1d-56de-4111-96de-b5ec8124dd4b';
-const ONETIME_PRODUCT_ID = '2e9b8531-0d45-40df-be1c-65482eefeb85';
+const MONTHLY_PRODUCT_ID = "05f52efa-2102-4dd0-9d1d-1538210d6712";
+const YEARLY_PRODUCT_ID = "4eff4c1d-56de-4111-96de-b5ec8124dd4b";
+const ONETIME_PRODUCT_ID = "2e9b8531-0d45-40df-be1c-65482eefeb85";
 
 const PRICING: {
   monthly: {
@@ -79,22 +79,22 @@ const PRICING: {
   monthly: {
     price: 19,
     originalPrice: 29,
-    period: '/Mo',
-    billedAs: 'Billed monthly • Cancel anytime',
+    period: "/Mo",
+    billedAs: "Billed monthly • Cancel anytime",
     savings: null,
   },
   yearly: {
     price: 9,
     originalPrice: 19,
-    period: '/Mo',
-    billedAs: 'Billed annually • Cancel anytime',
+    period: "/Mo",
+    billedAs: "Billed annually • Cancel anytime",
     savings: null,
   },
   onetime: {
     price: 119,
     originalPrice: 139,
-    period: '',
-    billedAs: 'One-time payment • Lifetime access',
+    period: "",
+    billedAs: "One-time payment • Lifetime access",
     savings: null,
   },
 };
@@ -104,8 +104,8 @@ export default function PricingClient({ products }: PricingClientProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [purchaseLoading, setPurchaseLoading] = useState(false);
   const [billingPeriod, setBillingPeriod] = useState<
-    'monthly' | 'yearly' | 'onetime'
-  >('monthly');
+    "monthly" | "yearly" | "onetime"
+  >("monthly");
   const { user } = useAuth();
   const { hasPremium, checkingPremium } = usePremiumStatus(user);
 
@@ -114,8 +114,8 @@ export default function PricingClient({ products }: PricingClientProps) {
       setIsMobile(window.innerWidth < 1024);
     };
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   useEffect(() => {
@@ -130,9 +130,9 @@ export default function PricingClient({ products }: PricingClientProps) {
 
   const currentPricing = PRICING[billingPeriod];
   const productId =
-    billingPeriod === 'monthly'
+    billingPeriod === "monthly"
       ? MONTHLY_PRODUCT_ID
-      : billingPeriod === 'yearly'
+      : billingPeriod === "yearly"
         ? YEARLY_PRODUCT_ID
         : ONETIME_PRODUCT_ID;
 
@@ -149,7 +149,7 @@ export default function PricingClient({ products }: PricingClientProps) {
         <div className="mx-auto flex w-full flex-col gap-18 px-4 md:px-8">
           <div className="flex flex-col gap-8 text-center">
             <p className="text-center text-base text-muted-foreground md:text-lg">
-              Pricing{' '}
+              Pricing{" "}
             </p>
             <h2 className="mx-auto max-w-2xl text-center font-dm-sans font-medium text-2xl text-foreground leading-normal tracking-tight md:text-3xl lg:text-4xl">
               Simple, transparent pricing. Everything you need to build
@@ -167,13 +167,13 @@ export default function PricingClient({ products }: PricingClientProps) {
                     <div className="flex flex-col gap-4 sm:gap-6">
                       {/* Monthly Option */}
                       <div
-                        aria-pressed={billingPeriod === 'monthly'}
+                        aria-pressed={billingPeriod === "monthly"}
                         className={`cursor-pointer rounded-2xl p-4 transition-all sm:rounded-3xl sm:p-6 ${
-                          billingPeriod === 'monthly'
-                            ? 'bg-card outline-2 outline-border'
-                            : 'bg-background outline-2 outline-transparent'
+                          billingPeriod === "monthly"
+                            ? "bg-card outline-2 outline-border"
+                            : "bg-background outline-2 outline-transparent"
                         }`}
-                        onClick={() => setBillingPeriod('monthly')}
+                        onClick={() => setBillingPeriod("monthly")}
                         role="button"
                         tabIndex={0}
                       >
@@ -202,13 +202,13 @@ export default function PricingClient({ products }: PricingClientProps) {
 
                       {/* Yearly Option */}
                       <div
-                        aria-pressed={billingPeriod === 'yearly'}
+                        aria-pressed={billingPeriod === "yearly"}
                         className={`cursor-pointer rounded-2xl p-4 transition-all sm:rounded-3xl sm:p-6 ${
-                          billingPeriod === 'yearly'
-                            ? 'bg-card outline-2 outline-border'
-                            : 'bg-background outline-2 outline-transparent'
+                          billingPeriod === "yearly"
+                            ? "bg-card outline-2 outline-border"
+                            : "bg-background outline-2 outline-transparent"
                         }`}
-                        onClick={() => setBillingPeriod('yearly')}
+                        onClick={() => setBillingPeriod("yearly")}
                         role="button"
                         tabIndex={0}
                       >
@@ -237,13 +237,13 @@ export default function PricingClient({ products }: PricingClientProps) {
 
                       {/* Lifetime Option */}
                       <div
-                        aria-pressed={billingPeriod === 'onetime'}
+                        aria-pressed={billingPeriod === "onetime"}
                         className={`cursor-pointer rounded-2xl p-4 transition-all sm:rounded-3xl sm:p-6 ${
-                          billingPeriod === 'onetime'
-                            ? 'bg-card outline-2 outline-border'
-                            : 'bg-background outline-2 outline-transparent'
+                          billingPeriod === "onetime"
+                            ? "bg-card outline-2 outline-border"
+                            : "bg-background outline-2 outline-transparent"
                         }`}
-                        onClick={() => setBillingPeriod('onetime')}
+                        onClick={() => setBillingPeriod("onetime")}
                         role="button"
                         tabIndex={0}
                       >
@@ -307,11 +307,11 @@ export default function PricingClient({ products }: PricingClientProps) {
                     {/* Header */}
                     <div className="flex flex-col gap-4">
                       <h3 className="font-medium text-2xl text-foreground">
-                        {billingPeriod === 'monthly'
-                          ? 'Monthly'
-                          : billingPeriod === 'yearly'
-                            ? 'Yearly'
-                            : 'Lifetime'}
+                        {billingPeriod === "monthly"
+                          ? "Monthly"
+                          : billingPeriod === "yearly"
+                            ? "Yearly"
+                            : "Lifetime"}
                       </h3>
                       <p className="text-muted-foreground text-sm">
                         {currentPricing.billedAs}
@@ -387,7 +387,7 @@ export default function PricingClient({ products }: PricingClientProps) {
                             href={
                               user
                                 ? `/checkout?products=${productId}&customerEmail=${user?.email}`
-                                : '/login'
+                                : "/login"
                             }
                             onClick={handlePurchaseClick}
                           >
@@ -407,9 +407,9 @@ export default function PricingClient({ products }: PricingClientProps) {
                                   Checking...
                                 </div>
                               ) : user ? (
-                                'Purchase Plan →'
+                                "Purchase Plan →"
                               ) : (
-                                'Sign In to Get Started'
+                                "Sign In to Get Started"
                               )}
                             </Button>
                           </Link>

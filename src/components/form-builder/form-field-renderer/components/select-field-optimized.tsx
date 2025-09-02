@@ -1,10 +1,10 @@
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
-import type { BaseFieldProps } from '../types';
-import { SelectFieldSkeleton } from './select-field-skeleton';
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import type { BaseFieldProps } from "../types";
+import { SelectFieldSkeleton } from "./select-field-skeleton";
 
 const SelectFieldClient = dynamic(
-  () => import('./select-field-client').then((mod) => mod.SelectFieldClient),
+  () => import("./select-field-client").then((mod) => mod.SelectFieldClient),
   {
     ssr: false,
     loading: () => <SelectFieldSkeleton />,

@@ -1,30 +1,30 @@
-'use client';
+"use client";
 
-import { ArrowLeft, Eye, EyeOff } from 'lucide-react';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import { useState } from 'react';
-import { FaGithub } from 'react-icons/fa6';
-import { FcGoogle } from 'react-icons/fc';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Separator } from '@/components/ui/separator';
-import { useAuth } from '@/hooks/use-auth';
-import { toast } from '@/hooks/use-toast';
-import { createClient } from '@/utils/supabase/client';
+import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { useState } from "react";
+import { FaGithub } from "react-icons/fa6";
+import { FcGoogle } from "react-icons/fc";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { useAuth } from "@/hooks/use-auth";
+import { toast } from "@/hooks/use-toast";
+import { createClient } from "@/utils/supabase/client";
 
 export default function LoginForm() {
   const { user } = useAuth();
   const [isSignUp, setIsSignUp] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [currentStep, setCurrentStep] = useState<'email' | 'password' | 'name'>(
-    'email'
+  const [currentStep, setCurrentStep] = useState<"email" | "password" | "name">(
+    "email"
   );
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    name: '',
+    email: "",
+    password: "",
+    name: "",
   });
   const [showForgotPassword, setShowForgotPassword] = useState(false);
 
@@ -36,14 +36,14 @@ export default function LoginForm() {
 
   if (user) {
     const redirectUrl =
-      typeof window !== 'undefined'
-        ? sessionStorage.getItem('redirectAfterLogin')
+      typeof window !== "undefined"
+        ? sessionStorage.getItem("redirectAfterLogin")
         : null;
     if (redirectUrl) {
-      sessionStorage.removeItem('redirectAfterLogin');
+      sessionStorage.removeItem("redirectAfterLogin");
       redirect(redirectUrl);
     } else {
-      redirect('/dashboard');
+      redirect("/dashboard");
     }
   }
 
@@ -62,18 +62,18 @@ export default function LoginForm() {
   function isFieldActive(field: string) {
     return (
       focusedFields[field as keyof typeof focusedFields] ||
-      formData[field as keyof typeof formData] !== ''
+      formData[field as keyof typeof formData] !== ""
     );
   }
 
   function validateEmail() {
     const { email } = formData;
     if (!email) {
-      toast.error('Email is required');
+      toast.error("Email is required");
       return false;
     }
-    if (!email.includes('@')) {
-      toast.error('Please enter a valid email address');
+    if (!email.includes("@")) {
+      toast.error("Please enter a valid email address");
       return false;
     }
     return true;
@@ -82,11 +82,11 @@ export default function LoginForm() {
   function validatePassword() {
     const { password } = formData;
     if (!password) {
-      toast.error('Password is required');
+      toast.error("Password is required");
       return false;
     }
     if (password.length < 6) {
-      toast.error('Password must be at least 6 characters long');
+      toast.error("Password must be at least 6 characters long");
       return false;
     }
     return true;
@@ -95,7 +95,7 @@ export default function LoginForm() {
   function validateName() {
     const { name } = formData;
     if (!name.trim()) {
-      toast.error('Name is required for sign up');
+      toast.error("Name is required for sign up");
       return false;
     }
     return true;
@@ -104,47 +104,47 @@ export default function LoginForm() {
   function handleNextStep(e: React.FormEvent) {
     e.preventDefault();
 
-    if (currentStep === 'email') {
+    if (currentStep === "email") {
       if (!validateEmail()) return;
 
       if (isSignUp) {
-        setCurrentStep('name');
+        setCurrentStep("name");
       } else {
-        setCurrentStep('password');
+        setCurrentStep("password");
       }
-    } else if (currentStep === 'name') {
+    } else if (currentStep === "name") {
       if (!validateName()) return;
-      setCurrentStep('password');
-    } else if (currentStep === 'password') {
+      setCurrentStep("password");
+    } else if (currentStep === "password") {
       if (!validatePassword()) return;
       handleAuth();
     }
   }
 
   function handleBackStep() {
-    if (currentStep === 'password') {
+    if (currentStep === "password") {
       if (isSignUp) {
-        setCurrentStep('name');
+        setCurrentStep("name");
       } else {
-        setCurrentStep('email');
+        setCurrentStep("email");
       }
-    } else if (currentStep === 'name') {
-      setCurrentStep('email');
+    } else if (currentStep === "name") {
+      setCurrentStep("email");
     }
   }
 
   function resetSteps() {
-    setCurrentStep('email');
-    setFormData({ email: '', password: '', name: '' });
+    setCurrentStep("email");
+    setFormData({ email: "", password: "", name: "" });
   }
 
   async function handleForgotPassword() {
     if (!formData.email) {
-      toast.error('Please enter your email address first');
+      toast.error("Please enter your email address first");
       return;
     }
-    if (!formData.email.includes('@')) {
-      toast.error('Please enter a valid email address');
+    if (!formData.email.includes("@")) {
+      toast.error("Please enter a valid email address");
       return;
     }
     setLoading(true);
@@ -159,11 +159,11 @@ export default function LoginForm() {
       if (error) {
         toast.error(error.message);
       } else {
-        toast.success('Password reset link sent to your email!');
+        toast.success("Password reset link sent to your email!");
         setShowForgotPassword(false);
       }
     } catch (error) {
-      toast.error('An unexpected error occurred. Please try again.');
+      toast.error("An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -187,22 +187,22 @@ export default function LoginForm() {
         });
 
         if (error) {
-          if (error.message.includes('already registered')) {
+          if (error.message.includes("already registered")) {
             toast.error(
-              'This email is already registered. Try signing in instead.'
+              "This email is already registered. Try signing in instead."
             );
           } else {
             toast.error(error.message);
           }
         } else if (data.user) {
           try {
-            await fetch('/api/user', { method: 'POST' });
+            await fetch("/api/user", { method: "POST" });
           } catch {}
           if (data.user.email_confirmed_at) {
-            toast.success('Account created and verified successfully!');
+            toast.success("Account created and verified successfully!");
           } else {
             toast.success(
-              'Account created successfully! Please check your email for verification.'
+              "Account created successfully! Please check your email for verification."
             );
           }
         }
@@ -213,35 +213,35 @@ export default function LoginForm() {
         });
 
         if (error) {
-          if (error.message.includes('Invalid login credentials')) {
-            toast.error('Invalid email or password. Please try again.');
-          } else if (error.message.includes('Email not confirmed')) {
+          if (error.message.includes("Invalid login credentials")) {
+            toast.error("Invalid email or password. Please try again.");
+          } else if (error.message.includes("Email not confirmed")) {
             toast.error(
-              'Please check your email and click the verification link before signing in.'
+              "Please check your email and click the verification link before signing in."
             );
           } else {
             toast.error(error.message);
           }
         } else if (data.user) {
           try {
-            await fetch('/api/user', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+            await fetch("/api/user", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ ensureOnly: true }),
             });
           } catch {}
-          toast.success('Signed in successfully!');
+          toast.success("Signed in successfully!");
         }
       }
     } catch (error) {
-      toast.error('An unexpected error occurred. Please try again.');
+      toast.error("An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
   }
 
-  async function handleOAuthLogin(provider: 'github' | 'google') {
-    toast(`Logging in with ${provider === 'google' ? 'Google' : 'GitHub'}`);
+  async function handleOAuthLogin(provider: "github" | "google") {
+    toast(`Logging in with ${provider === "google" ? "Google" : "GitHub"}`);
     const supabase = createClient();
     await supabase.auth.signInWithOAuth({
       provider,
@@ -252,28 +252,28 @@ export default function LoginForm() {
   }
 
   function getStepTitle() {
-    if (currentStep === 'email') {
-      return isSignUp ? 'Create account' : 'Welcome back';
+    if (currentStep === "email") {
+      return isSignUp ? "Create account" : "Welcome back";
     }
-    if (currentStep === 'name') {
+    if (currentStep === "name") {
       return "What's your name?";
     }
-    return 'Enter your password';
+    return "Enter your password";
   }
 
   function getButtonText() {
-    if (currentStep === 'password') {
-      return isSignUp ? 'Create account' : 'Sign in';
+    if (currentStep === "password") {
+      return isSignUp ? "Create account" : "Sign in";
     }
-    return 'Continue';
+    return "Continue";
   }
 
   function hasContent(field: string) {
-    return formData[field as keyof typeof formData] !== '';
+    return formData[field as keyof typeof formData] !== "";
   }
 
   function shouldShowBackButtonBelow() {
-    return currentStep !== 'email';
+    return currentStep !== "email";
   }
 
   return (
@@ -281,7 +281,7 @@ export default function LoginForm() {
       <div className="mx-3 flex h-screen flex-col items-center justify-center gap-4 overflow-hidden">
         <Card
           className="flex w-full max-w-sm flex-col items-center justify-center gap-8 border-none bg-transparent text-center"
-          size={'lg'}
+          size={"lg"}
         >
           <CardHeader className="w-full">
             <div className="flex items-center justify-center">
@@ -294,22 +294,22 @@ export default function LoginForm() {
           <CardContent className="flex w-full flex-col gap-6">
             <form className="flex flex-col gap-4" onSubmit={handleNextStep}>
               {/* Email Step */}
-              {currentStep === 'email' && (
+              {currentStep === "email" && (
                 <div className="relative w-full">
                   <Input
                     autoFocus
                     className={`linear rounded-full px-4 py-3 text-sm transition-all duration-300 ${
-                      hasContent('email')
-                        ? 'ring-2 ring-ring ring-offset-2'
+                      hasContent("email")
+                        ? "ring-2 ring-ring ring-offset-2"
                         : focusedFields.email
-                          ? ''
-                          : 'border-border'
+                          ? ""
+                          : "border-border"
                     }`}
                     disabled={loading}
                     id="email"
-                    onBlur={() => handleBlur('email')}
-                    onChange={(e) => handleInputChange('email', e.target.value)}
-                    onFocus={() => handleFocus('email')}
+                    onBlur={() => handleBlur("email")}
+                    onChange={(e) => handleInputChange("email", e.target.value)}
+                    onFocus={() => handleFocus("email")}
                     required
                     size="xl"
                     type="email"
@@ -317,10 +317,10 @@ export default function LoginForm() {
                   />
                   <label
                     className={`linear pointer-events-none absolute left-4 select-none transition-all duration-300 ${
-                      isFieldActive('email')
-                        ? '-top-3.5 bg-card px-2 text-primary text-sm'
-                        : 'top-3.5 left-6 text-sm opacity-30'
-                    } ${focusedFields.email && !isFieldActive('email') ? 'text-primary' : ''}`}
+                      isFieldActive("email")
+                        ? "-top-3.5 bg-card px-2 text-primary text-sm"
+                        : "top-3.5 left-6 text-sm opacity-30"
+                    } ${focusedFields.email && !isFieldActive("email") ? "text-primary" : ""}`}
                     htmlFor="email"
                   >
                     Enter your email
@@ -329,22 +329,22 @@ export default function LoginForm() {
               )}
 
               {/* Name Step (for sign up) */}
-              {currentStep === 'name' && isSignUp && (
+              {currentStep === "name" && isSignUp && (
                 <div className="relative w-full">
                   <Input
                     autoFocus
                     className={`linear rounded-full px-4 py-3 text-sm transition-all duration-300 ${
-                      hasContent('name')
-                        ? 'ring-2 ring-ring ring-offset-2'
+                      hasContent("name")
+                        ? "ring-2 ring-ring ring-offset-2"
                         : focusedFields.name
-                          ? 'border-border'
-                          : 'border-border'
+                          ? "border-border"
+                          : "border-border"
                     }`}
                     disabled={loading}
                     id="name"
-                    onBlur={() => handleBlur('name')}
-                    onChange={(e) => handleInputChange('name', e.target.value)}
-                    onFocus={() => handleFocus('name')}
+                    onBlur={() => handleBlur("name")}
+                    onChange={(e) => handleInputChange("name", e.target.value)}
+                    onFocus={() => handleFocus("name")}
                     required={isSignUp}
                     size="xl"
                     type="text"
@@ -352,10 +352,10 @@ export default function LoginForm() {
                   />
                   <label
                     className={`linear pointer-events-none absolute left-4 select-none transition-all duration-300 ${
-                      isFieldActive('name')
-                        ? '-top-3.5 bg-card px-2 text-primary text-sm'
-                        : 'top-3.5 left-6 text-sm opacity-30'
-                    } ${focusedFields.name && !isFieldActive('name') ? 'text-primary' : ''}`}
+                      isFieldActive("name")
+                        ? "-top-3.5 bg-card px-2 text-primary text-sm"
+                        : "top-3.5 left-6 text-sm opacity-30"
+                    } ${focusedFields.name && !isFieldActive("name") ? "text-primary" : ""}`}
                     htmlFor="name"
                   >
                     Enter your name
@@ -364,24 +364,24 @@ export default function LoginForm() {
               )}
 
               {/* Password Step */}
-              {currentStep === 'password' && (
+              {currentStep === "password" && (
                 <div className="relative w-full">
                   <Input
                     autoFocus
                     className={`linear rounded-full px-4 py-3 text-sm transition-all duration-300 ${
-                      hasContent('password')
-                        ? 'ring-2 ring-ring ring-offset-2'
+                      hasContent("password")
+                        ? "ring-2 ring-ring ring-offset-2"
                         : focusedFields.password
-                          ? 'border-border'
-                          : 'border-border'
+                          ? "border-border"
+                          : "border-border"
                     }`}
                     disabled={loading}
                     id="password"
-                    onBlur={() => handleBlur('password')}
+                    onBlur={() => handleBlur("password")}
                     onChange={(e) =>
-                      handleInputChange('password', e.target.value)
+                      handleInputChange("password", e.target.value)
                     }
-                    onFocus={() => handleFocus('password')}
+                    onFocus={() => handleFocus("password")}
                     required
                     size="xl"
                     type="password"
@@ -389,10 +389,10 @@ export default function LoginForm() {
                   />
                   <label
                     className={`linear pointer-events-none absolute left-4 select-none transition-all duration-300 ${
-                      isFieldActive('password')
-                        ? '-top-3.5 bg-card px-2 text-primary text-sm'
-                        : 'top-3.5 left-6 text-sm opacity-30'
-                    } ${focusedFields.password && !isFieldActive('password') ? 'text-primary' : ''}`}
+                      isFieldActive("password")
+                        ? "-top-3.5 bg-card px-2 text-primary text-sm"
+                        : "top-3.5 left-6 text-sm opacity-30"
+                    } ${focusedFields.password && !isFieldActive("password") ? "text-primary" : ""}`}
                     htmlFor="password"
                   >
                     Enter your password
@@ -407,7 +407,7 @@ export default function LoginForm() {
                 size="xl"
                 type="submit"
               >
-                {loading ? '' : getButtonText()}
+                {loading ? "" : getButtonText()}
               </Button>
 
               {/* Add back button below the continue/sign in/create acc button */}
@@ -425,7 +425,7 @@ export default function LoginForm() {
               )}
 
               {/* Forgot Password - only show on password step for sign in */}
-              {currentStep === 'password' && !isSignUp && (
+              {currentStep === "password" && !isSignUp && (
                 <div className="text-center">
                   <Button
                     className="m-0 h-fit p-0 py-0 text-muted-foreground text-sm"
@@ -441,7 +441,7 @@ export default function LoginForm() {
             </form>
 
             {/* Toggle between Sign In / Sign Up - only show on email step */}
-            {currentStep === 'email' && (
+            {currentStep === "email" && (
               <div className="text-center">
                 <Button
                   className="m-0 h-fit p-0 py-0 text-sm"
@@ -454,14 +454,14 @@ export default function LoginForm() {
                   variant="link"
                 >
                   {isSignUp
-                    ? 'Already have an account? Sign in'
+                    ? "Already have an account? Sign in"
                     : "Don't have an account? Sign up"}
                 </Button>
               </div>
             )}
 
             {/* OAuth buttons - only show on email step */}
-            {currentStep === 'email' && (
+            {currentStep === "email" && (
               <>
                 <div className="relative">
                   <div className="absolute inset-0 flex items-center">
@@ -478,7 +478,7 @@ export default function LoginForm() {
                   <Button
                     className="flex w-full items-center gap-2 rounded-full bg-card font-medium text-sm"
                     disabled={loading}
-                    onClick={() => handleOAuthLogin('google')}
+                    onClick={() => handleOAuthLogin("google")}
                     size="xl"
                     type="button"
                     variant="outline"
@@ -489,7 +489,7 @@ export default function LoginForm() {
                   <Button
                     className="flex w-full items-center gap-2 rounded-full bg-card font-medium text-sm"
                     disabled={loading}
-                    onClick={() => handleOAuthLogin('github')}
+                    onClick={() => handleOAuthLogin("github")}
                     size="xl"
                     type="button"
                     variant="outline"
@@ -505,7 +505,7 @@ export default function LoginForm() {
 
         <div className="text-center text-muted-foreground text-sm">
           <p>
-            By signing {isSignUp ? 'up' : 'in'}, you agree to our{' '}
+            By signing {isSignUp ? "up" : "in"}, you agree to our{" "}
             <Link
               className="text-muted-foreground underline"
               href="/legal/terms"

@@ -1,6 +1,6 @@
-import { ChevronRight } from 'lucide-react';
-import Link from 'next/link';
-import { Button } from '../ui/button';
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { Button } from "../ui/button";
 
 export default function CTA() {
   return (

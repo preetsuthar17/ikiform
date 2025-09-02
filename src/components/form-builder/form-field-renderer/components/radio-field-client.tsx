@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import type { BaseFieldProps } from '../types';
+import { useEffect, useState } from "react";
+import type { BaseFieldProps } from "../types";
 
 /**
  * Optimized client component for RadioField
@@ -38,10 +38,10 @@ export function RadioFieldClient({
 
         if (Array.isArray(data)) {
           processedOptions = data.map((item) => {
-            if (typeof item === 'string') return item;
-            if (typeof item === 'object' && item !== null) {
-              const valueKey = field.valueKey ?? 'value';
-              const labelKey = field.labelKey ?? 'label';
+            if (typeof item === "string") return item;
+            if (typeof item === "object" && item !== null) {
+              const valueKey = field.valueKey ?? "value";
+              const labelKey = field.labelKey ?? "label";
               return {
                 value: item[valueKey] ?? item.value ?? String(item),
                 label:
@@ -58,8 +58,8 @@ export function RadioFieldClient({
         setOptions(processedOptions);
       })
       .catch((err) => {
-        console.error('Failed to fetch options:', err);
-        setFetchError('Failed to load options');
+        console.error("Failed to fetch options:", err);
+        setFetchError("Failed to load options");
         setOptions([]);
       })
       .finally(() => {
@@ -76,21 +76,21 @@ export function RadioFieldClient({
   const getOptionValue = (
     option: string | { value: string; label?: string }
   ): string => {
-    if (typeof option === 'string') return option;
-    if (option && typeof option === 'object') return option.value || '';
-    return '';
+    if (typeof option === "string") return option;
+    if (option && typeof option === "object") return option.value || "";
+    return "";
   };
 
   const getOptionLabel = (
     option: string | { value: string; label?: string }
   ): string => {
-    if (typeof option === 'string') return option;
-    if (option && typeof option === 'object')
-      return option.label || option.value || '';
-    return '';
+    if (typeof option === "string") return option;
+    if (option && typeof option === "object")
+      return option.label || option.value || "";
+    return "";
   };
 
-  const errorClasses = error ? 'border-red-500 ring-red-500' : '';
+  const errorClasses = error ? "border-red-500 ring-red-500" : "";
 
   if (loading) {
     return (
@@ -149,7 +149,7 @@ export function RadioFieldClient({
           return (
             <label
               className={`flex cursor-pointer items-center gap-3 ${
-                disabled ? 'cursor-not-allowed opacity-50' : ''
+                disabled ? "cursor-not-allowed opacity-50" : ""
               }`}
               key={index}
             >

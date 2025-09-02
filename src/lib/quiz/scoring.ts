@@ -1,4 +1,4 @@
-import type { FormField, FormSchema, FormSubmission } from '@/lib/database';
+import type { FormField, FormSchema, FormSubmission } from "@/lib/database";
 
 export interface QuizResult {
   score: number;
@@ -57,7 +57,7 @@ export function calculateQuizScore(
     totalPossible += points;
 
     const isAnswered =
-      userAnswer !== undefined && userAnswer !== null && userAnswer !== '';
+      userAnswer !== undefined && userAnswer !== null && userAnswer !== "";
     if (isAnswered) {
       answeredQuestions++;
     }
@@ -74,8 +74,8 @@ export function calculateQuizScore(
     fieldResults.push({
       fieldId: field.id,
       fieldLabel: field.label,
-      userAnswer: userAnswer || '',
-      correctAnswer: correctAnswer || '',
+      userAnswer: userAnswer || "",
+      correctAnswer: correctAnswer || "",
       isCorrect,
       points: isCorrect ? points : 0,
       maxPoints: points,
@@ -106,7 +106,7 @@ function isAnswerCorrect(
   userAnswer: any,
   correctAnswer: string | string[]
 ): boolean {
-  if (typeof correctAnswer === 'string') {
+  if (typeof correctAnswer === "string") {
     return (
       String(userAnswer).toLowerCase().trim() ===
       correctAnswer.toLowerCase().trim()
@@ -164,16 +164,16 @@ export function generateQuizResultMessage(
 
   if (passed && quizSettings?.resultMessage?.pass) {
     return quizSettings.resultMessage.pass
-      .replace('{score}', String(score))
-      .replace('{percentage}', String(percentage))
-      .replace('{total}', String(totalPossible));
+      .replace("{score}", String(score))
+      .replace("{percentage}", String(percentage))
+      .replace("{total}", String(totalPossible));
   }
 
   if (!passed && quizSettings?.resultMessage?.fail) {
     return quizSettings.resultMessage.fail
-      .replace('{score}', String(score))
-      .replace('{percentage}', String(percentage))
-      .replace('{total}', String(totalPossible));
+      .replace("{score}", String(score))
+      .replace("{percentage}", String(percentage))
+      .replace("{total}", String(totalPossible));
   }
 
   if (passed) {

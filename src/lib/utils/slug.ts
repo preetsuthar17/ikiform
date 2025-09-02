@@ -2,9 +2,9 @@ export function generateSlug(title: string): string {
   return title
     .toLowerCase()
     .trim()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/[\s_-]+/g, '-')
-    .replace(/^-+|-+$/g, '')
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "")
     .substring(0, 60);
 }
 
@@ -33,5 +33,5 @@ export function isUUID(str: string): boolean {
 }
 
 export function sanitizeSlugInput(input: string): string {
-  return input.trim().substring(0, 100).replace(/[<>]/g, '');
+  return input.trim().substring(0, 100).replace(/[<>]/g, "");
 }

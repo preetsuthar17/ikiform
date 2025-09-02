@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button-base';
-import { Input } from '@/components/ui/input-base';
-import { Label } from '@/components/ui/label';
+import { Button } from "@/components/ui/button-base";
+import { Input } from "@/components/ui/input-base";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Switch } from '@/components/ui/switch';
-import type { EmbedConfig } from './EmbedCustomizer';
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import type { EmbedConfig } from "./EmbedCustomizer";
 
 interface EmbedSettingsProps {
   config: EmbedConfig;
@@ -39,14 +39,14 @@ export default function EmbedSettings({
                 value={config.width}
               />
               <Button
-                onClick={() => updateConfig({ width: '100%' })}
+                onClick={() => updateConfig({ width: "100%" })}
                 size="sm"
                 variant="outline"
               >
                 100%
               </Button>
               <Button
-                onClick={() => updateConfig({ width: '800px' })}
+                onClick={() => updateConfig({ width: "800px" })}
                 size="sm"
                 variant="outline"
               >
@@ -65,14 +65,14 @@ export default function EmbedSettings({
                 value={config.height}
               />
               <Button
-                onClick={() => updateConfig({ height: '600px' })}
+                onClick={() => updateConfig({ height: "600px" })}
                 size="sm"
                 variant="outline"
               >
                 600px
               </Button>
               <Button
-                onClick={() => updateConfig({ height: '800px' })}
+                onClick={() => updateConfig({ height: "800px" })}
                 size="sm"
                 variant="outline"
               >
@@ -225,7 +225,7 @@ export default function EmbedSettings({
           <Label>Loading Mode</Label>
           <Select
             onValueChange={(value) =>
-              updateConfig({ loadingMode: value as 'eager' | 'lazy' })
+              updateConfig({ loadingMode: value as "eager" | "lazy" })
             }
             value={config.loadingMode}
           >

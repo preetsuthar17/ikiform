@@ -1,26 +1,26 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Separator } from '@/components/ui';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input-base';
-import { Label } from '@/components/ui/label';
+import React from "react";
+import { Separator } from "@/components/ui";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input-base";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select-base';
-import { Textarea } from '@/components/ui/textarea-base';
+} from "@/components/ui/select-base";
+import { Textarea } from "@/components/ui/textarea-base";
 import {
   getBorderRadiusValue,
   getMarginValue,
   getMaxWidthValue,
   getPaddingValue,
-} from '@/lib/utils/form-styles';
-import type { LocalSettings } from '../types';
+} from "@/lib/utils/form-styles";
+import type { LocalSettings } from "../types";
 
 interface FormDesignPreviewProps {
   localSettings: LocalSettings;
@@ -37,7 +37,7 @@ export function FormDesignPreview({
 
   // Calculate actual styling values
   const formWidth =
-    layout.maxWidth === 'custom' && layout.customWidth
+    layout.maxWidth === "custom" && layout.customWidth
       ? layout.customWidth
       : getMaxWidthValue(layout.maxWidth);
 
@@ -63,38 +63,38 @@ export function FormDesignPreview({
 
   // Create dynamic styles for border radius and colors to ensure they apply
   React.useEffect(() => {
-    const styleId = 'form-preview-styles';
+    const styleId = "form-preview-styles";
     const existingStyle = document.getElementById(styleId);
 
     if (existingStyle) {
       existingStyle.remove();
     }
 
-    const borderColor = colors.border || '#e2e8f0';
+    const borderColor = colors.border || "#e2e8f0";
     const isMinimal = true;
 
     // Get font styling values
-    const fontSize = typography.fontSize || 'base';
-    const fontWeight = typography.fontWeight || 'normal';
+    const fontSize = typography.fontSize || "base";
+    const fontWeight = typography.fontWeight || "normal";
     const fontFamily = typography.fontFamily;
 
     const fontSizeMap = {
-      xs: '12px',
-      sm: '14px',
-      base: '16px',
-      lg: '18px',
-      xl: '20px',
+      xs: "12px",
+      sm: "14px",
+      base: "16px",
+      lg: "18px",
+      xl: "20px",
     };
 
     const fontWeightMap = {
-      light: '300',
-      normal: '400',
-      medium: '500',
-      semibold: '600',
-      bold: '700',
+      light: "300",
+      normal: "400",
+      medium: "500",
+      semibold: "600",
+      bold: "700",
     };
 
-    const style = document.createElement('style');
+    const style = document.createElement("style");
     style.id = styleId;
     style.textContent = `
       .form-preview-container {
@@ -104,13 +104,13 @@ export function FormDesignPreview({
         border-bottom-left-radius: ${formBorderRadius} !important;
         border-bottom-right-radius: ${formBorderRadius} !important;
         overflow: hidden;
-        ${isMinimal ? 'border: none !important;' : `border: 1px solid ${borderColor} !important;`}
-        ${fontFamily ? `font-family: "${fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;` : ''}
+        ${isMinimal ? "border: none !important;" : `border: 1px solid ${borderColor} !important;`}
+        ${fontFamily ? `font-family: "${fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;` : ""}
         font-size: ${fontSizeMap[fontSize]} !important;
         font-weight: ${fontWeightMap[fontWeight]} !important;
       }
       .form-preview-container * {
-        ${fontFamily ? 'font-family: inherit !important;' : ''}
+        ${fontFamily ? "font-family: inherit !important;" : ""}
         font-size: inherit !important;
         font-weight: inherit !important;
       }
@@ -121,17 +121,17 @@ export function FormDesignPreview({
       }
       .form-preview-container .form-field:focus {
         border-color: ${borderColor} !important;
-        box-shadow: 0 0 0 2px ${colors.primary || '#2563eb'}40 !important;
+        box-shadow: 0 0 0 2px ${colors.primary || "#2563eb"}40 !important;
       }
       .form-preview-container .form-button-primary {
-        background-color: ${colors.primary || '#2563eb'} !important;
-        border-color: ${colors.primary || '#2563eb'} !important;
+        background-color: ${colors.primary || "#2563eb"} !important;
+        border-color: ${colors.primary || "#2563eb"} !important;
         font-size: inherit !important;
         font-weight: inherit !important;
       }
       .form-preview-container h1, .form-preview-container h2, .form-preview-container h3, 
       .form-preview-container h4, .form-preview-container h5, .form-preview-container h6 {
-        font-weight: ${fontWeightMap[fontWeight === 'normal' ? 'semibold' : fontWeight]} !important;
+        font-weight: ${fontWeightMap[fontWeight === "normal" ? "semibold" : fontWeight]} !important;
       }
     `;
     document.head.appendChild(style);
@@ -166,7 +166,7 @@ export function FormDesignPreview({
       <div style={containerStyle}>
         <div
           className={`form-preview-container ikiform-customized transition-all duration-200 ${
-            true ? 'bg-transparent' : ''
+            true ? "bg-transparent" : ""
           }`}
           style={cardStyle}
         >
@@ -189,7 +189,7 @@ export function FormDesignPreview({
                   id="preview-name"
                   placeholder="Enter your name"
                   style={{
-                    fontFamily: 'inherit',
+                    fontFamily: "inherit",
                   }}
                 />
               </div>
@@ -201,7 +201,7 @@ export function FormDesignPreview({
                   id="preview-email"
                   placeholder="Enter your email"
                   style={{
-                    fontFamily: 'inherit',
+                    fontFamily: "inherit",
                   }}
                   type="email"
                 />
@@ -213,7 +213,7 @@ export function FormDesignPreview({
                   <SelectTrigger
                     className="form-field"
                     style={{
-                      fontFamily: 'inherit',
+                      fontFamily: "inherit",
                     }}
                   >
                     <SelectValue placeholder="Select a category" />
@@ -234,7 +234,7 @@ export function FormDesignPreview({
                   placeholder="Enter your message"
                   rows={3}
                   style={{
-                    fontFamily: 'inherit',
+                    fontFamily: "inherit",
                   }}
                 />
               </div>
@@ -242,10 +242,10 @@ export function FormDesignPreview({
               <Button
                 className="form-button-primary w-full"
                 style={{
-                  color: '#ffffff',
+                  color: "#ffffff",
                 }}
               >
-                {localSettings.submitText || 'Submit Form'}
+                {localSettings.submitText || "Submit Form"}
               </Button>
             </div>
           </div>

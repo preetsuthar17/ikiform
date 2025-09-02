@@ -1,11 +1,11 @@
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
-import { CSSPropertiesProvider } from './CSSPropertiesProvider';
-import { FormSkeleton } from './FormSkeletons';
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import { CSSPropertiesProvider } from "./CSSPropertiesProvider";
+import { FormSkeleton } from "./FormSkeletons";
 
 const MultiStepForm = dynamic(
   () =>
-    import('@/components/forms/multi-step-form').then((mod) => ({
+    import("@/components/forms/multi-step-form").then((mod) => ({
       default: mod.MultiStepForm,
     })),
   {
@@ -15,7 +15,7 @@ const MultiStepForm = dynamic(
 
 const SingleStepForm = dynamic(
   () =>
-    import('@/components/forms/public-form/components').then((mod) => ({
+    import("@/components/forms/public-form/components").then((mod) => ({
       default: mod.SingleStepForm,
     })),
   {
@@ -33,8 +33,8 @@ export default function PublicFormContent({
   schema,
 }: PublicFormContentProps) {
   const isMultiStep = schema.settings?.multiStep || schema.blocks?.length > 1;
-  const dir = schema.settings?.rtl ? 'rtl' : 'ltr';
-  const borderRadius = schema?.settings?.layout?.borderRadius || 'md';
+  const dir = schema.settings?.rtl ? "rtl" : "ltr";
+  const borderRadius = schema?.settings?.layout?.borderRadius || "md";
 
   return (
     <CSSPropertiesProvider borderRadius={borderRadius}>
@@ -44,7 +44,7 @@ export default function PublicFormContent({
             fallback={
               <FormSkeleton
                 showProgress={isMultiStep}
-                variant={isMultiStep ? 'multi-step' : 'single-step'}
+                variant={isMultiStep ? "multi-step" : "single-step"}
               />
             }
           >

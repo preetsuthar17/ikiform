@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Form Customization',
-  description: 'Customize the design and appearance of your form',
+  title: "Form Customization",
+  description: "Customize the design and appearance of your form",
 };
 
 export default function CustomizeLayout({

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { FormAnalytics } from '@/components/forms/form-analytics';
+import { FormAnalytics } from "@/components/forms/form-analytics";
 
 interface FormAnalyticsClientProps {
   form: any;

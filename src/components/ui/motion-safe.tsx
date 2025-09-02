@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { type MotionProps, motion } from 'motion/react';
-import * as React from 'react';
+import { type MotionProps, motion } from "motion/react";
+import * as React from "react";
 import {
   type MotionSafeVariants,
   sanitizeVariants,
   useMotionSafeColors,
-} from '@/lib/utils/motion-safe';
+} from "@/lib/utils/motion-safe";
 
 interface MotionSafeDivProps
   extends Omit<
     MotionProps,
-    'initial' | 'animate' | 'exit' | 'whileHover' | 'whileTap' | 'whileFocus'
+    "initial" | "animate" | "exit" | "whileHover" | "whileTap" | "whileFocus"
   > {
   children?: React.ReactNode;
   initial?: Record<string, any>;
@@ -45,13 +45,13 @@ export const MotionSafeDiv = React.forwardRef<
   }
 );
 
-MotionSafeDiv.displayName = 'MotionSafeDiv';
+MotionSafeDiv.displayName = "MotionSafeDiv";
 
 /**
  * Button component with motion-safe hover effects
  */
 interface MotionSafeButtonProps extends MotionSafeDivProps {
-  variant?: 'default' | 'ghost' | 'outline';
+  variant?: "default" | "ghost" | "outline";
   disabled?: boolean;
   onClick?: () => void;
   className?: string;
@@ -63,7 +63,7 @@ export const MotionSafeButton = React.forwardRef<
 >(
   (
     {
-      variant = 'default',
+      variant = "default",
       disabled,
       children,
       className,
@@ -76,18 +76,18 @@ export const MotionSafeButton = React.forwardRef<
 
     const getHoverColors = () => {
       switch (variant) {
-        case 'ghost':
+        case "ghost":
           return {
-            backgroundColor: safeBackgroundColor('accent'),
+            backgroundColor: safeBackgroundColor("accent"),
           };
-        case 'outline':
+        case "outline":
           return {
-            backgroundColor: safeBackgroundColor('accent'),
-            borderColor: safeBorderColor('border'),
+            backgroundColor: safeBackgroundColor("accent"),
+            borderColor: safeBorderColor("border"),
           };
         default:
           return {
-            backgroundColor: safeBackgroundColor('primary'),
+            backgroundColor: safeBackgroundColor("primary"),
           };
       }
     };
@@ -111,12 +111,12 @@ export const MotionSafeButton = React.forwardRef<
   }
 );
 
-MotionSafeButton.displayName = 'MotionSafeButton';
+MotionSafeButton.displayName = "MotionSafeButton";
 
 export const FadeIn = ({
   children,
   ...props
-}: Omit<MotionSafeDivProps, 'initial' | 'animate'>) => (
+}: Omit<MotionSafeDivProps, "initial" | "animate">) => (
   <MotionSafeDiv animate={{ opacity: 1 }} initial={{ opacity: 0 }} {...props}>
     {children}
   </MotionSafeDiv>
@@ -125,7 +125,7 @@ export const FadeIn = ({
 export const SlideUp = ({
   children,
   ...props
-}: Omit<MotionSafeDivProps, 'initial' | 'animate'>) => (
+}: Omit<MotionSafeDivProps, "initial" | "animate">) => (
   <MotionSafeDiv
     animate={{ opacity: 1, y: 0 }}
     initial={{ opacity: 0, y: 20 }}
@@ -138,7 +138,7 @@ export const SlideUp = ({
 export const Scale = ({
   children,
   ...props
-}: Omit<MotionSafeDivProps, 'initial' | 'animate'>) => (
+}: Omit<MotionSafeDivProps, "initial" | "animate">) => (
   <MotionSafeDiv
     animate={{ opacity: 1, scale: 1 }}
     initial={{ opacity: 0, scale: 0.9 }}

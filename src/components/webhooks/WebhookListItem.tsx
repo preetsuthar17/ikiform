@@ -5,16 +5,16 @@ import {
   MoreHorizontal,
   Play,
   Trash2,
-} from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Switch } from '@/components/ui/switch';
+} from "@/components/ui/dropdown-menu";
+import { Switch } from "@/components/ui/switch";
 
 interface WebhookListItemProps {
   webhook: {
@@ -61,9 +61,9 @@ export function WebhookListItem({
             />
             <Badge
               size="sm"
-              variant={webhook.enabled ? 'default' : 'secondary'}
+              variant={webhook.enabled ? "default" : "secondary"}
             >
-              {webhook.enabled ? 'Active' : 'Inactive'}
+              {webhook.enabled ? "Active" : "Inactive"}
             </Badge>
           </div>
         </div>

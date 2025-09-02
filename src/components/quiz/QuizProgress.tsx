@@ -1,8 +1,8 @@
-import { CheckCircle2, Clock, HelpCircle } from 'lucide-react';
-import React from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
+import { CheckCircle2, Clock, HelpCircle } from "lucide-react";
+import React from "react";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
 
 interface QuizProgressProps {
   currentQuestion: number;
@@ -19,7 +19,7 @@ export function QuizProgress({
   answeredQuestions,
   timeRemaining,
   isVisible = true,
-  className = '',
+  className = "",
 }: QuizProgressProps) {
   if (!isVisible || totalQuestions === 0) return null;
 
@@ -28,14 +28,14 @@ export function QuizProgress({
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+    return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
 
   const getTimeColor = () => {
-    if (!timeRemaining) return 'text-muted-foreground';
-    if (timeRemaining < 300) return 'text-red-500';
-    if (timeRemaining < 600) return 'text-yellow-500';
-    return 'text-green-500';
+    if (!timeRemaining) return "text-muted-foreground";
+    if (timeRemaining < 300) return "text-red-500";
+    if (timeRemaining < 600) return "text-yellow-500";
+    return "text-green-500";
   };
 
   return (
@@ -61,7 +61,7 @@ export function QuizProgress({
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between text-sm">
             <span className="text-muted-foreground">
-              Question {Math.min(currentQuestion, totalQuestions)} of{' '}
+              Question {Math.min(currentQuestion, totalQuestions)} of{" "}
               {totalQuestions}
             </span>
             <span className="text-muted-foreground">

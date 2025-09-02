@@ -1,6 +1,6 @@
-import type React from 'react';
+import type React from "react";
 
-import { Progress } from '@/components/ui/progress';
+import { Progress } from "@/components/ui/progress";
 
 interface FormProgressProps {
   progress: number;

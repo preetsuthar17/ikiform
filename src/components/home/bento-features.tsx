@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Bot,
@@ -8,11 +8,11 @@ import {
   PenTool,
   TrendingUp,
   Zap,
-} from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
-import type { ReactNode } from 'react';
-import { useCallback, useEffect, useState } from 'react';
-import { Card } from '@/components/ui/card';
+} from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import type { ReactNode } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { Card } from "@/components/ui/card";
 
 interface FeatureCardProps {
   title: string;
@@ -28,7 +28,7 @@ const FeatureCard = ({
   description,
   icon,
   preview,
-  className = '',
+  className = "",
 }: FeatureCardProps) => {
   return (
     <Card
@@ -60,9 +60,9 @@ const AIFormBuilderPreview = () => {
   const [isGenerating, setIsGenerating] = useState(true);
 
   const steps = [
-    { type: 'name', width: '50%', height: 'h-10' },
-    { type: 'email', width: '40%', height: 'h-10' },
-    { type: 'message', width: '60%', height: 'h-16' },
+    { type: "name", width: "50%", height: "h-10" },
+    { type: "email", width: "40%", height: "h-10" },
+    { type: "message", width: "60%", height: "h-16" },
   ];
 
   const resetAndStart = useCallback(() => {
@@ -103,13 +103,13 @@ const AIFormBuilderPreview = () => {
               repeat: isGenerating
                 ? globalThis.globalThis.Number.POSITIVE_INFINITY
                 : 0,
-              ease: 'easeInOut',
+              ease: "easeInOut",
             }}
           />
           <span className="font-medium text-foreground text-sm">
             {isGenerating
-              ? 'AI is generating your form...'
-              : 'Form generated successfully!'}
+              ? "AI is generating your form..."
+              : "Form generated successfully!"}
           </span>
         </motion.div>
 
@@ -125,16 +125,16 @@ const AIFormBuilderPreview = () => {
               key={index}
               transition={{
                 duration: 0.5,
-                ease: 'easeOut',
+                ease: "easeOut",
               }}
             >
               <motion.div
                 animate={{
-                  width: currentStep > index ? step.width : '0%',
+                  width: currentStep > index ? step.width : "0%",
                   backgroundColor:
                     currentStep > index
-                      ? 'hsl(var(--hu-primary))'
-                      : 'hsl(var(--hu-border))',
+                      ? "hsl(var(--hu-primary))"
+                      : "hsl(var(--hu-border))",
                 }}
                 className="h-2 rounded-2xl bg-border"
                 initial={{ width: 0 }}
@@ -146,8 +146,8 @@ const AIFormBuilderPreview = () => {
                   opacity: currentStep > index ? 1 : 0.5,
                   borderColor:
                     currentStep > index
-                      ? 'hsl(var(--hu-border))'
-                      : 'hsl(var(--hu-border))',
+                      ? "hsl(var(--hu-border))"
+                      : "hsl(var(--hu-border))",
                 }}
                 className={`rounded-ele border border-border bg-card ${step.height}`}
                 initial={{ scale: 0.95, opacity: 0.5 }}
@@ -171,7 +171,7 @@ const AIFormBuilderPreview = () => {
           }}
           className="rounded-2xl bg-primary px-3 py-1 text-primary-foreground text-xs"
           transition={{
-            type: 'spring',
+            type: "spring",
             stiffness: 500,
             damping: 25,
           }}
@@ -196,7 +196,7 @@ const UnlimitedPreview = () => {
           transition={{
             duration: 2,
             repeat: globalThis.Number.POSITIVE_INFINITY,
-            ease: 'easeInOut',
+            ease: "easeInOut",
           }}
         >
           ∞
@@ -225,7 +225,7 @@ const UnlimitedPreview = () => {
           initial={{ scale: 0 }}
           transition={{
             delay: 0.5,
-            type: 'spring',
+            type: "spring",
             stiffness: 300,
           }}
         >
@@ -288,7 +288,7 @@ const AnalyticsPreview = () => {
               initial={{ height: 0 }}
               key={i}
               transition={{
-                height: { duration: 0.5, ease: 'easeInOut' },
+                height: { duration: 0.5, ease: "easeInOut" },
                 backgroundColor: { duration: 0.3 },
               }}
             />
@@ -305,7 +305,7 @@ const AnalyticsPreview = () => {
             repeat: isHovered ? globalThis.Number.POSITIVE_INFINITY : 0,
           }}
         >
-          {isHovered ? 'Live data updating...' : '1.2k responses this week'}
+          {isHovered ? "Live data updating..." : "1.2k responses this week"}
         </motion.div>
       </div>
     </div>
@@ -340,16 +340,16 @@ const LogicBuilderPreview = () => {
         <AnimatePresence>
           {showBranches && (
             <motion.div
-              animate={{ opacity: 1, height: 'auto' }}
+              animate={{ opacity: 1, height: "auto" }}
               className="ml-6 flex flex-col gap-2"
               exit={{ opacity: 0, height: 0 }}
               initial={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.5, staggerChildren: 0.1 }}
             >
               {[
-                'Show email field',
-                'Send notification',
-                'Redirect to page',
+                "Show email field",
+                "Send notification",
+                "Redirect to page",
               ].map((text, index) => (
                 <motion.div
                   animate={{ opacity: 1, x: 0 }}
@@ -427,8 +427,8 @@ const APIIntegrationPreview = () => {
           }}
         >
           {isLoading
-            ? '↓ Fetching customer data...'
-            : '✓ Data loaded successfully'}
+            ? "↓ Fetching customer data..."
+            : "✓ Data loaded successfully"}
         </motion.div>
 
         <AnimatePresence>
@@ -438,19 +438,19 @@ const APIIntegrationPreview = () => {
               className="flex flex-col gap-2 rounded-2xl border border-border bg-card p-3"
               initial={{ opacity: 0, scale: 0.9, y: 10 }}
               transition={{
-                type: 'spring',
+                type: "spring",
                 stiffness: 300,
                 damping: 25,
               }}
             >
               {[
-                { label: 'John Doe', delay: 0 },
-                { label: 'john@acme.com', delay: 0.1 },
-                { label: 'Premium Plan', delay: 0.2 },
+                { label: "John Doe", delay: 0 },
+                { label: "john@acme.com", delay: 0.1 },
+                { label: "Premium Plan", delay: 0.2 },
               ].map((item, index) => (
                 <motion.div
                   animate={{ opacity: 1, x: 0 }}
-                  className={`text-xs ${index === 0 ? 'font-medium text-foreground' : 'text-muted-foreground'}`}
+                  className={`text-xs ${index === 0 ? "font-medium text-foreground" : "text-muted-foreground"}`}
                   initial={{ opacity: 0, x: -10 }}
                   key={item.label}
                   transition={{ delay: item.delay }}
@@ -487,11 +487,11 @@ const DigitalSignaturesPreview = () => {
       <motion.div
         animate={{
           borderColor: isVerified
-            ? 'hsl(var(--hu-primary))'
-            : 'hsl(var(--hu-border))',
+            ? "hsl(var(--hu-primary))"
+            : "hsl(var(--hu-border))",
           backgroundColor: isVerified
-            ? 'hsl(var(--hu-primary) / 0.05)'
-            : 'transparent',
+            ? "hsl(var(--hu-primary) / 0.05)"
+            : "transparent",
         }}
         className="flex h-full flex-col justify-center rounded-2xl border-2 border-border border-dashed p-3"
         transition={{ duration: 0.3 }}
@@ -499,10 +499,10 @@ const DigitalSignaturesPreview = () => {
         <div className="flex flex-col gap-2 text-center">
           <div className="font-medium text-foreground text-xs">
             {isSigning
-              ? 'Signing...'
+              ? "Signing..."
               : isVerified
-                ? 'Signature Complete'
-                : 'Sign Here'}
+                ? "Signature Complete"
+                : "Sign Here"}
           </div>
         </div>
 
@@ -523,7 +523,7 @@ const DigitalSignaturesPreview = () => {
             stroke="hsl(var(--hu-primary))"
             strokeWidth="2"
             transition={{
-              pathLength: { duration: 2, ease: 'easeInOut' },
+              pathLength: { duration: 2, ease: "easeInOut" },
               opacity: {
                 duration: 0.5,
                 repeat: isSigning ? globalThis.Number.POSITIVE_INFINITY : 0,
@@ -548,22 +548,22 @@ const EmailNotificationsPreview = () => {
   const maxNotifications = 3;
 
   const emailTemplates = [
-    { title: 'Contact Form', from: 'john@example.com', time: '2 minutes ago' },
+    { title: "Contact Form", from: "john@example.com", time: "2 minutes ago" },
     {
-      title: 'Newsletter Signup',
-      from: 'sarah@gmail.com',
-      time: '5 minutes ago',
+      title: "Newsletter Signup",
+      from: "sarah@gmail.com",
+      time: "5 minutes ago",
     },
     {
-      title: 'Support Request',
-      from: 'mike@company.com',
-      time: '8 minutes ago',
+      title: "Support Request",
+      from: "mike@company.com",
+      time: "8 minutes ago",
     },
-    { title: 'Feedback Form', from: 'lisa@startup.io', time: '12 minutes ago' },
+    { title: "Feedback Form", from: "lisa@startup.io", time: "12 minutes ago" },
     {
-      title: 'Job Application',
-      from: 'alex@portfolio.dev',
-      time: '15 minutes ago',
+      title: "Job Application",
+      from: "alex@portfolio.dev",
+      time: "15 minutes ago",
     },
   ];
 
@@ -573,7 +573,7 @@ const EmailNotificationsPreview = () => {
     const newNotification = {
       id: Date.now(),
       ...randomEmail,
-      time: 'Just now',
+      time: "Just now",
     };
 
     setNotifications((prev) => {
@@ -640,7 +640,7 @@ const EmailNotificationsPreview = () => {
                   rotateZ: 5,
                   transition: {
                     duration: 0.4,
-                    ease: 'easeInOut',
+                    ease: "easeInOut",
                   },
                 }}
                 initial={{
@@ -651,10 +651,10 @@ const EmailNotificationsPreview = () => {
                 }}
                 key={notification.id}
                 style={{
-                  transformOrigin: 'center top',
+                  transformOrigin: "center top",
                 }}
                 transition={{
-                  type: 'spring',
+                  type: "spring",
                   stiffness: 200,
                   damping: 25,
                   duration: 0.6,

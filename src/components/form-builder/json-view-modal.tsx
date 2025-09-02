@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import { Check, Copy } from 'lucide-react';
+import { Check, Copy } from "lucide-react";
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { createHighlighter, type Highlighter } from 'shiki';
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { createHighlighter, type Highlighter } from "shiki";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Modal,
   ModalContent,
   ModalHeader,
   ModalTitle,
-} from '@/components/ui/modal';
-import { ScrollArea } from '@/components/ui/scroll-area';
+} from "@/components/ui/modal";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
-import { toast } from '@/hooks/use-toast';
+import { toast } from "@/hooks/use-toast";
 
-import type { FormSchema } from '@/lib/database';
-import { Loader } from '../ui/loader';
+import type { FormSchema } from "@/lib/database";
+import { Loader } from "../ui/loader";
 
 interface JsonViewModalProps {
   schema: FormSchema;
@@ -38,8 +38,8 @@ const getHighlighter = async (): Promise<Highlighter> => {
   }
 
   highlighterPromise = createHighlighter({
-    langs: ['json'],
-    themes: ['github-dark', 'github-light'],
+    langs: ["json"],
+    themes: ["github-dark", "github-light"],
   }).then((highlighter) => {
     highlighterInstance = highlighter;
     highlighterPromise = null;
@@ -51,7 +51,7 @@ const getHighlighter = async (): Promise<Highlighter> => {
 
 export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
   const [copied, setCopied] = useState(false);
-  const [highlightedCode, setHighlightedCode] = useState<string>('');
+  const [highlightedCode, setHighlightedCode] = useState<string>("");
   const [isHighlighting, setIsHighlighting] = useState(false);
 
   const abortControllerRef = useRef<AbortController | null>(null);
@@ -60,8 +60,8 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
     try {
       return JSON.stringify(schema, null, 2);
     } catch (error) {
-      console.error('Failed to stringify schema:', error);
-      return '{}';
+      console.error("Failed to stringify schema:", error);
+      return "{}";
     }
   }, [schema]);
 
@@ -87,14 +87,14 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
 
         if (abortController.signal.aborted) return;
 
-        const selectedTheme = 'github-light';
+        const selectedTheme = "github-light";
 
         const highlight = () => {
           if (abortController.signal.aborted) return;
 
           try {
             const html = highlighter.codeToHtml(jsonString, {
-              lang: 'json',
+              lang: "json",
               theme: selectedTheme,
             });
 
@@ -102,7 +102,7 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
               setHighlightedCode(html);
             }
           } catch (error) {
-            console.error('Failed to highlight code:', error);
+            console.error("Failed to highlight code:", error);
             if (!abortController.signal.aborted) {
               setHighlightedCode(`<pre><code>${jsonString}</code></pre>`);
             }
@@ -113,14 +113,14 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
           }
         };
 
-        if ('requestIdleCallback' in window) {
+        if ("requestIdleCallback" in window) {
           requestIdleCallback(highlight);
         } else {
           setTimeout(highlight, 0);
         }
       } catch (error) {
         if (!abortController.signal.aborted) {
-          console.error('Failed to create highlighter:', error);
+          console.error("Failed to create highlighter:", error);
           setHighlightedCode(`<pre><code>${jsonString}</code></pre>`);
           setIsHighlighting(false);
         }
@@ -145,13 +145,13 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
   const copyToClipboard = async () => {
     try {
       const { copyToClipboard: robustCopy } = await import(
-        '@/lib/utils/clipboard'
+        "@/lib/utils/clipboard"
       );
       const success = await robustCopy(jsonString, {
         showSuccessToast: true,
-        successMessage: 'JSON copied to clipboard!',
+        successMessage: "JSON copied to clipboard!",
         showErrorToast: true,
-        errorMessage: 'Failed to copy JSON',
+        errorMessage: "Failed to copy JSON",
       });
 
       if (success) {
@@ -159,8 +159,8 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
         setTimeout(() => setCopied(false), 2000);
       }
     } catch (error) {
-      const { toast } = await import('@/hooks/use-toast');
-      toast.error('Failed to copy JSON');
+      const { toast } = await import("@/hooks/use-toast");
+      toast.error("Failed to copy JSON");
     }
   };
 

@@ -1,9 +1,9 @@
-import React from 'react';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Tabs, TabsContent } from '@/components/ui/tabs';
-import { FORM_SETTINGS_SECTIONS } from '../index';
-import type { FormSettingsSection } from '../types';
-import { FormSettingsContent } from './FormSettingsContent';
+import React from "react";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { FORM_SETTINGS_SECTIONS } from "../index";
+import type { FormSettingsSection } from "../types";
+import { FormSettingsContent } from "./FormSettingsContent";
 
 interface FormSettingsMobileLayoutProps {
   activeSection: FormSettingsSection;

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import {
   AlignJustify,
   ChevronRight,
@@ -8,20 +8,20 @@ import {
   Moon,
   Sun,
   User,
-} from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
-import Image from 'next/image';
-import Link from 'next/link';
+} from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
+import Link from "next/link";
 
-import { useAuth } from '@/hooks/use-auth';
-import { Button } from '../ui/button';
+import { useAuth } from "@/hooks/use-auth";
+import { Button } from "../ui/button";
 import {
   Drawer,
   DrawerContent,
   DrawerDescription,
   DrawerTitle,
   DrawerTrigger,
-} from '../ui/drawer';
+} from "../ui/drawer";
 
 function DrawerNavLink({
   href,
@@ -29,7 +29,7 @@ function DrawerNavLink({
   icon,
   onClick,
   isButton = false,
-  className = '',
+  className = "",
 }: {
   href: string;
   children: React.ReactNode;

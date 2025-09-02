@@ -4,11 +4,11 @@ import {
   Edit3,
   GripVertical,
   Trash2,
-} from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
-import type { BlockHeaderProps } from '../types';
+import type { BlockHeaderProps } from "../types";
 
 export function BlockHeader({
   block,

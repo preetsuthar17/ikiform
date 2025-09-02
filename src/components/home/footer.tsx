@@ -1,36 +1,36 @@
-'use client';
+"use client";
 
-import { Monitor, Moon, Sun } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
-import { FaDiscord, FaGithub, FaXTwitter } from 'react-icons/fa6';
-import { Separator } from '../ui';
+import { Monitor, Moon, Sun } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import { FaDiscord, FaGithub, FaXTwitter } from "react-icons/fa6";
+import { Separator } from "../ui";
 
 const BADGES = [
   {
-    href: 'https://www.producthunt.com/products/ikiform?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-ikiform-2',
+    href: "https://www.producthunt.com/products/ikiform?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-ikiform-2",
     img: {
-      src: 'https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1003917&theme=light&t=1754896632153',
-      alt: 'Ikiform - An open-source alternative to Google Forms and Typeform | Product Hunt',
+      src: "https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1003917&theme=light&t=1754896632153",
+      alt: "Ikiform - An open-source alternative to Google Forms and Typeform | Product Hunt",
       width: 120,
       height: 32,
     },
   },
   {
-    href: 'https://startupfa.me/s/ikiform.com?utm_source=www.ikiform.com',
+    href: "https://startupfa.me/s/ikiform.com?utm_source=www.ikiform.com",
     img: {
-      src: 'https://startupfa.me/badges/featured/default.webp',
-      alt: 'Featured on Startup Fame',
+      src: "https://startupfa.me/badges/featured/default.webp",
+      alt: "Featured on Startup Fame",
       width: 120,
       height: 32,
     },
   },
   {
-    href: 'https://twelve.tools',
+    href: "https://twelve.tools",
     img: {
-      src: 'https://twelve.tools/badge3-light.svg',
-      alt: 'Featured on Twelve Tools',
+      src: "https://twelve.tools/badge3-light.svg",
+      alt: "Featured on Twelve Tools",
       width: 120,
       height: 32,
     },
@@ -92,7 +92,7 @@ export default function Footer() {
                     </span>
                   </Link>
                   <p className="max-w-sm text-muted-foreground text-sm">
-                    © {new Date().getFullYear()} Made by —{' '}
+                    © {new Date().getFullYear()} Made by —{" "}
                     <Link
                       className="font-medium text-foreground transition-colors hover:underline"
                       href="https://x.com/preetsuthar17"

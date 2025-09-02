@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva, type VariantProps } from "class-variance-authority";
 import {
   Maximize,
   Minimize,
@@ -11,23 +11,23 @@ import {
   SkipForward,
   Volume2,
   VolumeX,
-} from 'lucide-react';
-import * as React from 'react';
-import { cn } from '@/lib/utils';
+} from "lucide-react";
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
 const videoPlayerVariants = cva(
-  'group relative w-full overflow-hidden rounded-card bg-black',
+  "group relative w-full overflow-hidden rounded-card bg-black",
   {
     variants: {
       size: {
-        sm: 'max-w-md',
-        default: 'max-w-2xl',
-        lg: 'max-w-4xl',
-        full: 'w-full',
+        sm: "max-w-md",
+        default: "max-w-2xl",
+        lg: "max-w-4xl",
+        full: "w-full",
       },
     },
     defaultVariants: {
-      size: 'default',
+      size: "default",
     },
   }
 );
@@ -75,11 +75,11 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
       const seconds = Math.floor(time % 60);
 
       if (hours > 0) {
-        return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds
+        return `${hours}:${minutes.toString().padStart(2, "0")}:${seconds
           .toString()
-          .padStart(2, '0')}`;
+          .padStart(2, "0")}`;
       }
-      return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+      return `${minutes}:${seconds.toString().padStart(2, "0")}`;
     };
 
     const togglePlay = () => {
@@ -182,18 +182,18 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
         setIsMuted(video.muted);
       };
 
-      video.addEventListener('loadedmetadata', handleLoadedMetadata);
-      video.addEventListener('timeupdate', handleTimeUpdate);
-      video.addEventListener('play', handlePlay);
-      video.addEventListener('pause', handlePause);
-      video.addEventListener('volumechange', handleVolumeChange);
+      video.addEventListener("loadedmetadata", handleLoadedMetadata);
+      video.addEventListener("timeupdate", handleTimeUpdate);
+      video.addEventListener("play", handlePlay);
+      video.addEventListener("pause", handlePause);
+      video.addEventListener("volumechange", handleVolumeChange);
 
       return () => {
-        video.removeEventListener('loadedmetadata', handleLoadedMetadata);
-        video.removeEventListener('timeupdate', handleTimeUpdate);
-        video.removeEventListener('play', handlePlay);
-        video.removeEventListener('pause', handlePause);
-        video.removeEventListener('volumechange', handleVolumeChange);
+        video.removeEventListener("loadedmetadata", handleLoadedMetadata);
+        video.removeEventListener("timeupdate", handleTimeUpdate);
+        video.removeEventListener("play", handlePlay);
+        video.removeEventListener("pause", handlePause);
+        video.removeEventListener("volumechange", handleVolumeChange);
         if (hideControlsTimeoutRef.current) {
           clearTimeout(hideControlsTimeoutRef.current);
         }
@@ -205,10 +205,10 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
         setIsFullscreen(!!document.fullscreenElement);
       };
 
-      document.addEventListener('fullscreenchange', handleFullscreenChange);
+      document.addEventListener("fullscreenchange", handleFullscreenChange);
       return () => {
         document.removeEventListener(
-          'fullscreenchange',
+          "fullscreenchange",
           handleFullscreenChange
         );
       };
@@ -219,40 +219,40 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
         if (!containerRef.current?.contains(document.activeElement)) return;
 
         switch (e.key) {
-          case ' ':
-          case 'k':
+          case " ":
+          case "k":
             e.preventDefault();
             togglePlay();
             break;
-          case 'm':
+          case "m":
             e.preventDefault();
             toggleMute();
             break;
-          case 'f':
+          case "f":
             e.preventDefault();
             toggleFullscreen();
             break;
-          case 'ArrowLeft':
+          case "ArrowLeft":
             e.preventDefault();
             skip(-10);
             break;
-          case 'ArrowRight':
+          case "ArrowRight":
             e.preventDefault();
             skip(10);
             break;
-          case 'ArrowUp':
+          case "ArrowUp":
             e.preventDefault();
             setVolume((prev) => Math.min(1, prev + 0.1));
             break;
-          case 'ArrowDown':
+          case "ArrowDown":
             e.preventDefault();
             setVolume((prev) => Math.max(0, prev - 0.1));
             break;
         }
       };
 
-      document.addEventListener('keydown', handleKeyDown);
-      return () => document.removeEventListener('keydown', handleKeyDown);
+      document.addEventListener("keydown", handleKeyDown);
+      return () => document.removeEventListener("keydown", handleKeyDown);
     }, [currentTime, duration]);
 
     return (
@@ -277,9 +277,9 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
         {showControls && (
           <div
             className={cn(
-              'absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent',
-              'flex flex-col justify-end transition-opacity duration-300',
-              showControlsState ? 'opacity-100' : 'opacity-0'
+              "absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent",
+              "flex flex-col justify-end transition-opacity duration-300",
+              showControlsState ? "opacity-100" : "opacity-0"
             )}
           >
             {}
@@ -407,6 +407,6 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
   }
 );
 
-VideoPlayer.displayName = 'VideoPlayer';
+VideoPlayer.displayName = "VideoPlayer";
 
 export { VideoPlayer, videoPlayerVariants };

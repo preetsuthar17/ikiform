@@ -1,27 +1,27 @@
-'use client';
+"use client";
 
-import { Monitor, Ruler } from 'lucide-react';
-import React from 'react';
+import { Monitor, Ruler } from "lucide-react";
+import React from "react";
 import {
   DEFAULT_FORM_DESIGN,
   FORM_BORDER_RADIUS_OPTIONS,
   FORM_PADDING_OPTIONS,
   FORM_WIDTH_OPTIONS,
-} from '@/components/form-builder/form-settings-modal/constants';
-import type { LocalSettings } from '@/components/form-builder/form-settings-modal/types';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input-base';
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioItem } from '@/components/ui/radio';
-import { Separator } from '@/components/ui/separator';
-import { Switch } from '@/components/ui/switch';
+} from "@/components/form-builder/form-settings-modal/constants";
+import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input-base";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioItem } from "@/components/ui/radio";
+import { Separator } from "@/components/ui/separator";
+import { Switch } from "@/components/ui/switch";
 
 const FORM_MARGIN_OPTIONS = [
-  { value: 'none', label: 'None', preview: '', description: 'No margin' },
-  { value: 'sm', label: 'Small', preview: '', description: '8px' },
-  { value: 'md', label: 'Medium', preview: '', description: '16px' },
-  { value: 'lg', label: 'Large', preview: '', description: '32px' },
+  { value: "none", label: "None", preview: "", description: "No margin" },
+  { value: "sm", label: "Small", preview: "", description: "8px" },
+  { value: "md", label: "Medium", preview: "", description: "16px" },
+  { value: "lg", label: "Large", preview: "", description: "32px" },
 ];
 
 interface LayoutCustomizationSectionProps {
@@ -37,17 +37,17 @@ export function LayoutCustomizationSection({
     localSettings.layout?.maxWidth || DEFAULT_FORM_DESIGN.maxWidth;
   const currentPadding =
     localSettings.layout?.padding || DEFAULT_FORM_DESIGN.padding;
-  const currentMargin = localSettings.layout?.margin || 'none';
+  const currentMargin = localSettings.layout?.margin || "none";
   const currentBorderRadius =
     localSettings.layout?.borderRadius || DEFAULT_FORM_DESIGN.borderRadius;
 
-  const customWidth = localSettings.layout?.customWidth || '600px';
+  const customWidth = localSettings.layout?.customWidth || "600px";
 
   const handleBorderRadiusChange = (value: string) => {
     updateSettings({
       layout: {
         ...localSettings.layout,
-        borderRadius: value as 'none' | 'sm' | 'md' | 'lg' | 'xl',
+        borderRadius: value as "none" | "sm" | "md" | "lg" | "xl",
       },
     });
   };
@@ -56,7 +56,7 @@ export function LayoutCustomizationSection({
     updateSettings({
       layout: {
         ...localSettings.layout,
-        maxWidth: value as 'sm' | 'md' | 'lg' | 'xl' | 'full' | 'custom',
+        maxWidth: value as "sm" | "md" | "lg" | "xl" | "full" | "custom",
       },
     });
   };
@@ -74,7 +74,7 @@ export function LayoutCustomizationSection({
     updateSettings({
       layout: {
         ...localSettings.layout,
-        padding: value as 'none' | 'sm' | 'md' | 'lg',
+        padding: value as "none" | "sm" | "md" | "lg",
       },
     });
   };
@@ -83,7 +83,7 @@ export function LayoutCustomizationSection({
     updateSettings({
       layout: {
         ...localSettings.layout,
-        margin: value as 'none' | 'sm' | 'md' | 'lg',
+        margin: value as "none" | "sm" | "md" | "lg",
       },
     });
   };
@@ -132,8 +132,8 @@ export function LayoutCustomizationSection({
               <Button
                 className={`font-medium text-sm transition-all ${
                   currentWidth === option.value
-                    ? 'bg-primary text-primary-foreground'
-                    : 'border bg-transparent text-foreground hover:bg-accent'
+                    ? "bg-primary text-primary-foreground"
+                    : "border bg-transparent text-foreground hover:bg-accent"
                 }`}
                 key={option.value}
                 onClick={() => handleWidthChange(option.value)}
@@ -144,7 +144,7 @@ export function LayoutCustomizationSection({
               </Button>
             ))}
           </div>
-          {currentWidth === 'custom' && (
+          {currentWidth === "custom" && (
             <div className="flex flex-col gap-2">
               <Label className="text-muted-foreground text-sm">
                 Custom Width (e.g., 600px, 80%, 50rem)
@@ -169,8 +169,8 @@ export function LayoutCustomizationSection({
               <Button
                 className={`font-medium text-sm transition-all ${
                   currentPadding === option.value
-                    ? 'bg-primary text-primary-foreground'
-                    : 'border bg-transparent text-foreground hover:bg-accent'
+                    ? "bg-primary text-primary-foreground"
+                    : "border bg-transparent text-foreground hover:bg-accent"
                 }`}
                 key={option.value}
                 onClick={() => handlePaddingChange(option.value)}
@@ -196,8 +196,8 @@ export function LayoutCustomizationSection({
               <Button
                 className={`font-medium text-sm transition-all ${
                   currentMargin === option.value
-                    ? 'bg-primary text-primary-foreground'
-                    : 'border bg-transparent text-foreground hover:bg-accent'
+                    ? "bg-primary text-primary-foreground"
+                    : "border bg-transparent text-foreground hover:bg-accent"
                 }`}
                 key={option.value}
                 onClick={() => handleMarginChange(option.value)}
@@ -223,8 +223,8 @@ export function LayoutCustomizationSection({
               <Button
                 className={`font-medium text-sm transition-all ${
                   currentBorderRadius === option.value
-                    ? 'bg-primary text-primary-foreground'
-                    : 'border bg-transparent text-foreground hover:bg-accent'
+                    ? "bg-primary text-primary-foreground"
+                    : "border bg-transparent text-foreground hover:bg-accent"
                 }`}
                 key={option.value}
                 onClick={() => handleBorderRadiusChange(option.value)}

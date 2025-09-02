@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { useAuth } from '@/hooks/use-auth';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/use-auth";
 import {
   useWebhookManagement,
   type WebhookConfig,
-} from './hooks/useWebhookManagement';
-import { TestWebhookDialog } from './TestWebhookDialog';
-import { WebhookFormModal } from './WebhookFormModal';
-import { WebhookList } from './WebhookList';
-import { WebhookLogDrawer } from './WebhookLogDrawer';
+} from "./hooks/useWebhookManagement";
+import { TestWebhookDialog } from "./TestWebhookDialog";
+import { WebhookFormModal } from "./WebhookFormModal";
+import { WebhookList } from "./WebhookList";
+import { WebhookLogDrawer } from "./WebhookLogDrawer";
 
 export function WebhookManagementPanel({ formId }: { formId?: string }) {
   const { user } = useAuth();
@@ -94,7 +94,7 @@ export function WebhookManagementPanel({ formId }: { formId?: string }) {
           size="sm"
           variant="default"
         >
-          {loading ? 'Loading' : 'Add Webhook'}
+          {loading ? "Loading" : "Add Webhook"}
         </Button>
       </div>
 
@@ -114,7 +114,7 @@ export function WebhookManagementPanel({ formId }: { formId?: string }) {
             ? {
                 ...editingWebhook,
                 headers: editingWebhook.headers ?? {},
-                payloadTemplate: editingWebhook.payloadTemplate ?? '',
+                payloadTemplate: editingWebhook.payloadTemplate ?? "",
               }
             : undefined
         }

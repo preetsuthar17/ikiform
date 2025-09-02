@@ -1,8 +1,8 @@
-import React from 'react';
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import type { FieldSettingsProps } from './types';
+import React from "react";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import type { FieldSettingsProps } from "./types";
 
 export function AddressFieldSettings({
   field,
@@ -32,7 +32,7 @@ export function AddressFieldSettings({
           }
           placeholder="e.g. 2 (Address Line 1 & City required)"
           type="number"
-          value={field.settings?.requiredLines ?? ''}
+          value={field.settings?.requiredLines ?? ""}
         />
       </div>
       <div className="flex flex-col gap-2">
@@ -46,7 +46,7 @@ export function AddressFieldSettings({
             onUpdateSettings({ requiredMessage: e.target.value })
           }
           placeholder="Please complete all required address fields"
-          value={field.settings?.requiredMessage ?? ''}
+          value={field.settings?.requiredMessage ?? ""}
         />
       </div>
     </Card>

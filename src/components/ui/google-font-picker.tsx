@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { Check, ChevronDown, Search, Type } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Check, ChevronDown, Search, Type } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { cn } from '@/lib/utils';
-import { loadGoogleFont } from '@/lib/utils/google-fonts';
-import { Input } from './input';
-import { Loader } from './loader';
+} from "@/components/ui/popover";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { cn } from "@/lib/utils";
+import { loadGoogleFont } from "@/lib/utils/google-fonts";
+import { Input } from "./input";
+import { Loader } from "./loader";
 
 // Google Fonts API types
 interface GoogleFont {
@@ -23,7 +23,7 @@ interface GoogleFont {
   version: string;
   lastModified: string;
   files: Record<string, string>;
-  category: 'serif' | 'sans-serif' | 'monospace' | 'display' | 'handwriting';
+  category: "serif" | "sans-serif" | "monospace" | "display" | "handwriting";
   kind: string;
   menu: string;
   axes?: Array<{
@@ -40,20 +40,20 @@ interface GoogleFontsResponse {
 
 // Category mapping
 const CATEGORY_MAP = {
-  'sans-serif': 'Sans Serif',
-  serif: 'Serif',
-  monospace: 'Monospace',
-  display: 'Display',
-  handwriting: 'Handwriting',
+  "sans-serif": "Sans Serif",
+  serif: "Serif",
+  monospace: "Monospace",
+  display: "Display",
+  handwriting: "Handwriting",
 } as const;
 
 const FONT_CATEGORIES = [
-  { id: 'all', label: 'All Fonts' },
-  { id: 'Sans Serif', label: 'Sans Serif' },
-  { id: 'Serif', label: 'Serif' },
-  { id: 'Display', label: 'Display' },
-  { id: 'Monospace', label: 'Monospace' },
-  { id: 'Handwriting', label: 'Handwriting' },
+  { id: "all", label: "All Fonts" },
+  { id: "Sans Serif", label: "Sans Serif" },
+  { id: "Serif", label: "Serif" },
+  { id: "Display", label: "Display" },
+  { id: "Monospace", label: "Monospace" },
+  { id: "Handwriting", label: "Handwriting" },
 ] as const;
 
 interface GoogleFontPickerProps {
@@ -67,15 +67,15 @@ interface GoogleFontPickerProps {
 export function GoogleFontPicker({
   value,
   onChange,
-  label = 'Font Family',
-  placeholder = 'Select a font...',
+  label = "Font Family",
+  placeholder = "Select a font...",
   showPreview = true,
 }: GoogleFontPickerProps) {
   const [open, setOpen] = useState(false);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<
-    'all' | 'Sans Serif' | 'Serif' | 'Display' | 'Monospace' | 'Handwriting'
-  >('all');
+    "all" | "Sans Serif" | "Serif" | "Display" | "Monospace" | "Handwriting"
+  >("all");
   const [loadedFonts, setLoadedFonts] = useState<Set<string>>(new Set());
   const [fonts, setFonts] = useState<GoogleFont[]>([]);
   const [loading, setLoading] = useState(false);
@@ -88,17 +88,17 @@ export function GoogleFontPicker({
       setError(null);
 
       try {
-        const response = await fetch('/api/google-fonts');
+        const response = await fetch("/api/google-fonts");
 
         if (!response.ok) {
-          throw new Error('Failed to fetch fonts');
+          throw new Error("Failed to fetch fonts");
         }
 
         const data: GoogleFontsResponse = await response.json();
         setFonts(data.items || []);
       } catch (err) {
-        console.error('Error fetching fonts:', err);
-        setError('Failed to load fonts. Please try again.');
+        console.error("Error fetching fonts:", err);
+        setError("Failed to load fonts. Please try again.");
         // Fallback to a curated list of popular fonts
         setFonts(getFallbackFonts());
       } finally {
@@ -112,114 +112,114 @@ export function GoogleFontPicker({
   // Fallback fonts if API fails
   const getFallbackFonts = (): GoogleFont[] => [
     {
-      family: 'Inter',
-      category: 'sans-serif',
-      variants: ['400', '500', '600', '700'],
-      subsets: ['latin'],
-      version: 'v12',
-      lastModified: '2022-09-22',
+      family: "Inter",
+      category: "sans-serif",
+      variants: ["400", "500", "600", "700"],
+      subsets: ["latin"],
+      version: "v12",
+      lastModified: "2022-09-22",
       files: {},
-      kind: 'webfonts#webfont',
-      menu: '',
+      kind: "webfonts#webfont",
+      menu: "",
     },
     {
-      family: 'Roboto',
-      category: 'sans-serif',
-      variants: ['300', '400', '500', '700'],
-      subsets: ['latin'],
-      version: 'v30',
-      lastModified: '2022-09-22',
+      family: "Roboto",
+      category: "sans-serif",
+      variants: ["300", "400", "500", "700"],
+      subsets: ["latin"],
+      version: "v30",
+      lastModified: "2022-09-22",
       files: {},
-      kind: 'webfonts#webfont',
-      menu: '',
+      kind: "webfonts#webfont",
+      menu: "",
     },
     {
-      family: 'Open Sans',
-      category: 'sans-serif',
-      variants: ['400', '600', '700'],
-      subsets: ['latin'],
-      version: 'v34',
-      lastModified: '2022-09-22',
+      family: "Open Sans",
+      category: "sans-serif",
+      variants: ["400", "600", "700"],
+      subsets: ["latin"],
+      version: "v34",
+      lastModified: "2022-09-22",
       files: {},
-      kind: 'webfonts#webfont',
-      menu: '',
+      kind: "webfonts#webfont",
+      menu: "",
     },
     {
-      family: 'Lato',
-      category: 'sans-serif',
-      variants: ['400', '700'],
-      subsets: ['latin'],
-      version: 'v23',
-      lastModified: '2022-09-22',
+      family: "Lato",
+      category: "sans-serif",
+      variants: ["400", "700"],
+      subsets: ["latin"],
+      version: "v23",
+      lastModified: "2022-09-22",
       files: {},
-      kind: 'webfonts#webfont',
-      menu: '',
+      kind: "webfonts#webfont",
+      menu: "",
     },
     {
-      family: 'Montserrat',
-      category: 'sans-serif',
-      variants: ['400', '500', '600', '700'],
-      subsets: ['latin'],
-      version: 'v25',
-      lastModified: '2022-09-22',
+      family: "Montserrat",
+      category: "sans-serif",
+      variants: ["400", "500", "600", "700"],
+      subsets: ["latin"],
+      version: "v25",
+      lastModified: "2022-09-22",
       files: {},
-      kind: 'webfonts#webfont',
-      menu: '',
+      kind: "webfonts#webfont",
+      menu: "",
     },
     {
-      family: 'Poppins',
-      category: 'sans-serif',
-      variants: ['400', '500', '600', '700'],
-      subsets: ['latin'],
-      version: 'v20',
-      lastModified: '2022-09-22',
+      family: "Poppins",
+      category: "sans-serif",
+      variants: ["400", "500", "600", "700"],
+      subsets: ["latin"],
+      version: "v20",
+      lastModified: "2022-09-22",
       files: {},
-      kind: 'webfonts#webfont',
-      menu: '',
+      kind: "webfonts#webfont",
+      menu: "",
     },
     {
-      family: 'Playfair Display',
-      category: 'serif',
-      variants: ['400', '500', '600', '700'],
-      subsets: ['latin'],
-      version: 'v30',
-      lastModified: '2022-09-22',
+      family: "Playfair Display",
+      category: "serif",
+      variants: ["400", "500", "600", "700"],
+      subsets: ["latin"],
+      version: "v30",
+      lastModified: "2022-09-22",
       files: {},
-      kind: 'webfonts#webfont',
-      menu: '',
+      kind: "webfonts#webfont",
+      menu: "",
     },
     {
-      family: 'Merriweather',
-      category: 'serif',
-      variants: ['400', '700'],
-      subsets: ['latin'],
-      version: 'v30',
-      lastModified: '2022-09-22',
+      family: "Merriweather",
+      category: "serif",
+      variants: ["400", "700"],
+      subsets: ["latin"],
+      version: "v30",
+      lastModified: "2022-09-22",
       files: {},
-      kind: 'webfonts#webfont',
-      menu: '',
+      kind: "webfonts#webfont",
+      menu: "",
     },
     {
-      family: 'Fira Code',
-      category: 'monospace',
-      variants: ['400', '500', '700'],
-      subsets: ['latin'],
-      version: 'v14',
-      lastModified: '2022-09-22',
+      family: "Fira Code",
+      category: "monospace",
+      variants: ["400", "500", "700"],
+      subsets: ["latin"],
+      version: "v14",
+      lastModified: "2022-09-22",
       files: {},
-      kind: 'webfonts#webfont',
-      menu: '',
+      kind: "webfonts#webfont",
+      menu: "",
     },
     {
-      family: 'JetBrains Mono',
-      category: 'monospace',
-      variants: ['400', '500', '700'],
-      subsets: ['latin'],
-      version: 'v13',
-      lastModified: '2022-09-22',
+      family: "JetBrains Mono",
+      category: "monospace",
+      variants: ["400", "500", "700"],
+      subsets: ["latin"],
+      version: "v13",
+      lastModified: "2022-09-22",
       files: {},
-      kind: 'webfonts#webfont',
-      menu: '',
+      kind: "webfonts#webfont",
+      menu: "",
     },
   ];
 
@@ -228,7 +228,7 @@ export function GoogleFontPicker({
     let filtered = fonts;
 
     // Filter by category
-    if (selectedCategory !== 'all') {
+    if (selectedCategory !== "all") {
       const categoryKey = Object.entries(CATEGORY_MAP).find(
         ([_, value]) => value === selectedCategory
       )?.[0];
@@ -258,7 +258,7 @@ export function GoogleFontPicker({
         await loadGoogleFont(fontFamily);
         setLoadedFonts((prev) => new Set([...prev, fontFamily]));
       } catch (error) {
-        console.warn('Failed to load font:', fontFamily, error);
+        console.warn("Failed to load font:", fontFamily, error);
       }
     }
   };
@@ -273,7 +273,7 @@ export function GoogleFontPicker({
   const selectedFont = fonts.find((font) => font.family === value);
 
   const handleFontSelect = (fontFamily: string) => {
-    console.log('Font selected:', fontFamily);
+    console.log("Font selected:", fontFamily);
     onChange(fontFamily);
     setOpen(false);
   };
@@ -342,7 +342,7 @@ export function GoogleFontPicker({
                   onClick={() => setSelectedCategory(category.id)}
                   size="sm"
                   variant={
-                    selectedCategory === category.id ? 'default' : 'ghost'
+                    selectedCategory === category.id ? "default" : "ghost"
                   }
                 >
                   {category.label}
@@ -385,10 +385,10 @@ export function GoogleFontPicker({
                     {filteredFonts.map((font) => (
                       <div
                         className={cn(
-                          'flex cursor-pointer items-center justify-between rounded-lg p-4 transition-all duration-200',
-                          'hover:bg-accent/50',
+                          "flex cursor-pointer items-center justify-between rounded-lg p-4 transition-all duration-200",
+                          "hover:bg-accent/50",
                           value === font.family &&
-                            'border border-primary/20 bg-accent/30'
+                            "border border-primary/20 bg-accent/30"
                         )}
                         key={font.family}
                         onClick={() => handleFontSelect(font.family)}
@@ -426,16 +426,16 @@ export function GoogleFontPicker({
                                 The quick brown fox jumps over the lazy dog
                               </p>
                               <p className="text-muted-foreground text-xs">
-                                {font.variants.join(', ')} •{' '}
-                                {font.subsets.join(', ')}
+                                {font.variants.join(", ")} •{" "}
+                                {font.subsets.join(", ")}
                               </p>
                             </div>
                           )}
                         </div>
                         <Check
                           className={cn(
-                            'h-4 w-4 shrink-0 transition-opacity',
-                            value === font.family ? 'opacity-100' : 'opacity-0'
+                            "h-4 w-4 shrink-0 transition-opacity",
+                            value === font.family ? "opacity-100" : "opacity-0"
                           )}
                         />
                       </div>

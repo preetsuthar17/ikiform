@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { Slot } from '@radix-ui/react-slot';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { ChevronRight, File, Folder, FolderOpen } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
-import * as React from 'react';
-import { cn } from '@/lib/utils';
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
+import { ChevronRight, File, Folder, FolderOpen } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
 interface TreeContextType {
   expandedIds: Set<string>;
@@ -27,50 +27,50 @@ const TreeContext = React.createContext<TreeContextType | null>(null);
 const useTree = () => {
   const context = React.useContext(TreeContext);
   if (!context) {
-    throw new Error('Tree components must be used within a TreeProvider');
+    throw new Error("Tree components must be used within a TreeProvider");
   }
   return context;
 };
 
 const treeVariants = cva(
-  'w-full rounded-ele border border-border bg-background',
+  "w-full rounded-ele border border-border bg-background",
   {
     variants: {
       variant: {
-        default: '',
-        outline: 'border-2',
-        ghost: 'border-transparent bg-transparent',
+        default: "",
+        outline: "border-2",
+        ghost: "border-transparent bg-transparent",
       },
       size: {
-        sm: 'text-sm',
-        default: '',
-        lg: 'text-lg',
+        sm: "text-sm",
+        default: "",
+        lg: "text-lg",
       },
     },
     defaultVariants: {
-      variant: 'default',
-      size: 'default',
+      variant: "default",
+      size: "default",
     },
   }
 );
 
 const treeItemVariants = cva(
-  'group relative flex cursor-pointer items-center rounded-[calc(var(--card-radius)-8px)] px-3 py-2 transition-all duration-200',
+  "group relative flex cursor-pointer items-center rounded-[calc(var(--card-radius)-8px)] px-3 py-2 transition-all duration-200",
   {
     variants: {
       variant: {
         default:
-          'hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-        ghost: 'hover:bg-accent/50',
-        subtle: 'hover:bg-muted/50',
+          "hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        ghost: "hover:bg-accent/50",
+        subtle: "hover:bg-muted/50",
       },
       selected: {
-        true: 'bg-accent text-accent-foreground',
-        false: '',
+        true: "bg-accent text-accent-foreground",
+        false: "",
       },
     },
     defaultVariants: {
-      variant: 'default',
+      variant: "default",
       selected: false,
     },
   }
@@ -184,7 +184,7 @@ const TreeProvider = React.forwardRef<HTMLDivElement, TreeProviderProps>(
           className={cn(treeVariants({ variant, size, className }))}
           initial={{ opacity: 0, y: 10 }}
           ref={ref}
-          transition={{ duration: 0.3, ease: 'easeOut' }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
         >
           <div className="p-2" {...props}>
             {children}
@@ -195,7 +195,7 @@ const TreeProvider = React.forwardRef<HTMLDivElement, TreeProviderProps>(
   }
 );
 
-TreeProvider.displayName = 'TreeProvider';
+TreeProvider.displayName = "TreeProvider";
 
 export interface TreeProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
@@ -203,11 +203,11 @@ export interface TreeProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Tree = React.forwardRef<HTMLDivElement, TreeProps>(
   ({ className, asChild = false, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'div';
+    const Comp = asChild ? Slot : "div";
 
     return (
       <Comp
-        className={cn('flex flex-col gap-1', className)}
+        className={cn("flex flex-col gap-1", className)}
         ref={ref}
         {...props}
       >
@@ -217,7 +217,7 @@ const Tree = React.forwardRef<HTMLDivElement, TreeProps>(
   }
 );
 
-Tree.displayName = 'Tree';
+Tree.displayName = "Tree";
 
 export interface TreeItemProps
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -287,7 +287,7 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
       onClick?.(e);
     };
 
-    const Comp = asChild ? Slot : 'div';
+    const Comp = asChild ? Slot : "div";
     return (
       <div className="select-none">
         <motion.div
@@ -309,8 +309,8 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
                     left: pathIndex * indent + 12,
                     display:
                       pathIndex === currentPath.length - 1 && isLastInPath
-                        ? 'none'
-                        : 'block',
+                        ? "none"
+                        : "block",
                   }}
                 />
               ))}
@@ -319,7 +319,7 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
                 style={{
                   left: (level - 1) * indent + 12,
                   width: indent - 4,
-                  transform: 'translateY(-1px)',
+                  transform: "translateY(-1px)",
                 }}
               />
               {isLast && (
@@ -327,7 +327,7 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
                   className="absolute top-0 border-border/40 border-l"
                   style={{
                     left: (level - 1) * indent + 12,
-                    height: '50%',
+                    height: "50%",
                   }}
                 />
               )}
@@ -338,7 +338,7 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
           <motion.div
             animate={{ rotate: hasChildren && isExpanded ? 90 : 0 }}
             className="mr-1 flex h-4 w-4 items-center justify-center"
-            transition={{ duration: 0.2, ease: 'easeInOut' }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
           >
             {hasChildren && (
               <ChevronRight className="h-3 w-3 text-muted-foreground" />
@@ -366,13 +366,13 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
         <AnimatePresence>
           {hasChildren && isExpanded && children && (
             <motion.div
-              animate={{ height: 'auto', opacity: 1 }}
+              animate={{ height: "auto", opacity: 1 }}
               className="overflow-hidden"
               exit={{ height: 0, opacity: 0 }}
               initial={{ height: 0, opacity: 0 }}
               transition={{
                 duration: animateExpand ? 0.3 : 0,
-                ease: 'easeInOut',
+                ease: "easeInOut",
               }}
             >
               <motion.div
@@ -394,6 +394,6 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
   }
 );
 
-TreeItem.displayName = 'TreeItem';
+TreeItem.displayName = "TreeItem";
 
 export { TreeProvider, Tree, TreeItem, treeVariants, treeItemVariants };

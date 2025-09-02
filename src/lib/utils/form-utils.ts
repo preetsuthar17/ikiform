@@ -1,4 +1,4 @@
-import type { FormSchema } from '@/lib/database/database.types';
+import type { FormSchema } from "@/lib/database/database.types";
 
 /**
  * Gets the appropriate title for display based on context
@@ -11,13 +11,13 @@ export function getFormTitle(
   isPublic = false
 ): string {
   if (!(schema && schema.settings)) {
-    return 'Untitled Form';
+    return "Untitled Form";
   }
 
   if (isPublic && schema.settings.publicTitle) {
     return schema.settings.publicTitle;
   }
-  return schema.settings.title || 'Untitled Form';
+  return schema.settings.title || "Untitled Form";
 }
 
 /**

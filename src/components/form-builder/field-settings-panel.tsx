@@ -1,1 +1,1 @@
-export { FieldSettingsPanel } from './field-settings-panel/FieldSettingsPanel';
+export { FieldSettingsPanel } from "./field-settings-panel/FieldSettingsPanel";

@@ -1,21 +1,21 @@
-import { Clock, Shield, UserCheck } from 'lucide-react';
-import React from 'react';
+import { Clock, Shield, UserCheck } from "lucide-react";
+import React from "react";
 
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioItem } from '@/components/ui/radio';
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioItem } from "@/components/ui/radio";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Switch } from '@/components/ui/switch';
-import { Textarea } from '@/components/ui/textarea';
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 
-import type { DuplicatePreventionSectionProps } from '../types';
+import type { DuplicatePreventionSectionProps } from "../types";
 
 export function DuplicatePreventionSection({
   localSettings,
@@ -45,14 +45,14 @@ export function DuplicatePreventionSection({
               updateSettings({
                 enabled: checked,
                 strategy: checked
-                  ? duplicatePrevention.strategy || 'combined'
+                  ? duplicatePrevention.strategy || "combined"
                   : undefined,
                 mode: checked
-                  ? duplicatePrevention.mode || 'one-time'
+                  ? duplicatePrevention.mode || "one-time"
                   : undefined,
                 message: checked
                   ? duplicatePrevention.message ||
-                    'You have already submitted this form. Each user can only submit once.'
+                    "You have already submitted this form. Each user can only submit once."
                   : undefined,
                 timeWindow: checked
                   ? duplicatePrevention.timeWindow || 1440
@@ -82,7 +82,7 @@ export function DuplicatePreventionSection({
               duplicatePrevention={duplicatePrevention}
               updateSettings={updateSettings}
             />
-            {duplicatePrevention.mode === 'time-based' && (
+            {duplicatePrevention.mode === "time-based" && (
               <TimeBasedSettingsSection
                 duplicatePrevention={duplicatePrevention}
                 updateSettings={updateSettings}
@@ -127,14 +127,14 @@ function PreventionModeSection({
       <RadioGroup
         onValueChange={(value) => {
           updateSettings({
-            mode: value as 'time-based' | 'one-time',
+            mode: value as "time-based" | "one-time",
             message:
-              value === 'one-time'
-                ? 'You have already submitted this form. Each user can only submit once.'
-                : 'You have already submitted this form. Please wait before submitting again.',
+              value === "one-time"
+                ? "You have already submitted this form. Each user can only submit once."
+                : "You have already submitted this form. Please wait before submitting again.",
           });
         }}
-        value={duplicatePrevention.mode || 'one-time'}
+        value={duplicatePrevention.mode || "one-time"}
       >
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
@@ -173,10 +173,10 @@ function PreventionStrategySection({
     <div className="flex flex-col gap-2">
       <Label className="mb-1 font-medium text-sm">Prevention Strategy</Label>
       <Select
-        onValueChange={(value: 'ip' | 'email' | 'session' | 'combined') =>
+        onValueChange={(value: "ip" | "email" | "session" | "combined") =>
           updateSettings({ strategy: value })
         }
-        value={duplicatePrevention.strategy || 'combined'}
+        value={duplicatePrevention.strategy || "combined"}
       >
         <SelectTrigger>
           <SelectValue placeholder="Select strategy" />
@@ -193,13 +193,13 @@ function PreventionStrategySection({
         </SelectContent>
       </Select>
       <p className="text-muted-foreground text-xs">
-        {duplicatePrevention.strategy === 'combined' &&
-          'Track by combination of IP, email, and session for maximum accuracy'}
-        {duplicatePrevention.strategy === 'email' &&
-          'Track by email address (requires email field in form)'}
-        {duplicatePrevention.strategy === 'ip' && 'Track by IP address only'}
-        {duplicatePrevention.strategy === 'session' &&
-          'Track by browser session'}
+        {duplicatePrevention.strategy === "combined" &&
+          "Track by combination of IP, email, and session for maximum accuracy"}
+        {duplicatePrevention.strategy === "email" &&
+          "Track by email address (requires email field in form)"}
+        {duplicatePrevention.strategy === "ip" && "Track by IP address only"}
+        {duplicatePrevention.strategy === "session" &&
+          "Track by browser session"}
       </p>
     </div>
   );
@@ -252,16 +252,16 @@ function ErrorMessageSection({
         id="duplicate-message"
         onChange={(e) => updateSettings({ message: e.target.value })}
         placeholder={
-          duplicatePrevention.mode === 'one-time'
-            ? 'You have already submitted this form. Each user can only submit once.'
-            : 'You have already submitted this form. Please wait before submitting again.'
+          duplicatePrevention.mode === "one-time"
+            ? "You have already submitted this form. Each user can only submit once."
+            : "You have already submitted this form. Please wait before submitting again."
         }
         rows={2}
         value={
           duplicatePrevention.message ||
-          (duplicatePrevention.mode === 'one-time'
-            ? 'You have already submitted this form. Each user can only submit once.'
-            : 'You have already submitted this form. Please wait before submitting again.')
+          (duplicatePrevention.mode === "one-time"
+            ? "You have already submitted this form. Each user can only submit once."
+            : "You have already submitted this form. Please wait before submitting again.")
         }
       />
       <p className="text-muted-foreground text-xs">
@@ -340,18 +340,18 @@ function DuplicatePreventionSummary({
   duplicatePrevention: any;
 }) {
   const modeText =
-    duplicatePrevention.mode === 'one-time'
-      ? 'one-time submission only'
+    duplicatePrevention.mode === "one-time"
+      ? "one-time submission only"
       : `${duplicatePrevention.maxAttempts || 1} submission(s) every ${duplicatePrevention.timeWindow || 1440} minutes`;
 
   const strategyText =
-    duplicatePrevention.strategy === 'combined'
-      ? 'IP + Email + Session'
-      : duplicatePrevention.strategy === 'email'
-        ? 'Email Address'
-        : duplicatePrevention.strategy === 'ip'
-          ? 'IP Address'
-          : 'Session ID';
+    duplicatePrevention.strategy === "combined"
+      ? "IP + Email + Session"
+      : duplicatePrevention.strategy === "email"
+        ? "Email Address"
+        : duplicatePrevention.strategy === "ip"
+          ? "IP Address"
+          : "Session ID";
 
   return (
     <div className="rounded-card bg-muted/50 p-4">
@@ -360,7 +360,7 @@ function DuplicatePreventionSummary({
         <span className="font-medium text-sm">Current Settings</span>
       </div>
       <p className="text-muted-foreground text-sm">
-        <span className="font-medium">{modeText}</span> using{' '}
+        <span className="font-medium">{modeText}</span> using{" "}
         <span className="font-medium">{strategyText}</span> tracking.
         {duplicatePrevention.allowOverride && (
           <span className="text-orange-600"> Override is enabled.</span>

@@ -12,24 +12,24 @@ import {
   Trash2,
   User,
   Zap,
-} from 'lucide-react';
-import React, { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+} from "lucide-react";
+import React, { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Modal,
   ModalContent,
   ModalHeader,
   ModalTitle,
   ModalTrigger,
-} from '@/components/ui/modal';
-import { Switch } from '@/components/ui/switch';
-import { Textarea } from '@/components/ui/textarea';
-import { toast } from '@/hooks/use-toast';
-import type { FormField, FormSchema } from '@/lib/database';
+} from "@/components/ui/modal";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/hooks/use-toast";
+import type { FormField, FormSchema } from "@/lib/database";
 
 interface PrepopulationManagerProps {
   schema: FormSchema;
@@ -41,14 +41,14 @@ interface GlobalPrepopulationTemplate {
   name: string;
   description: string;
   config: {
-    source: 'url' | 'api' | 'profile' | 'previous';
+    source: "url" | "api" | "profile" | "previous";
     mappings: Array<{
       fieldId: string;
       sourceKey: string;
       fallbackValue?: string;
     }>;
     apiEndpoint?: string;
-    apiMethod?: 'GET' | 'POST';
+    apiMethod?: "GET" | "POST";
     requireConsent?: boolean;
   };
 }
@@ -59,7 +59,7 @@ export function PrepopulationManager({
 }: PrepopulationManagerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [templates, setTemplates] = useState<GlobalPrepopulationTemplate[]>([]);
-  const [selectedTemplate, setSelectedTemplate] = useState<string>('');
+  const [selectedTemplate, setSelectedTemplate] = useState<string>("");
 
   const fieldsWithPrepopulation =
     schema.fields?.filter((field) => field.prepopulation?.enabled) || [];
@@ -69,13 +69,13 @@ export function PrepopulationManager({
 
   const getSourceIcon = (source: string) => {
     switch (source) {
-      case 'url':
+      case "url":
         return <Globe className="h-3 w-3" />;
-      case 'api':
+      case "api":
         return <Zap className="h-3 w-3" />;
-      case 'profile':
+      case "profile":
         return <User className="h-3 w-3" />;
-      case 'previous':
+      case "previous":
         return <History className="h-3 w-3" />;
       default:
         return <HelpCircle className="h-3 w-3" />;
@@ -83,12 +83,12 @@ export function PrepopulationManager({
   };
 
   const bulkEnablePrepopulation = (
-    source: 'url' | 'api' | 'profile' | 'previous'
+    source: "url" | "api" | "profile" | "previous"
   ) => {
     if (!schema.fields) return;
 
     const updatedFields = schema.fields.map((field) => {
-      const shouldEnable = ['text', 'email', 'phone', 'address'].includes(
+      const shouldEnable = ["text", "email", "phone", "address"].includes(
         field.type
       );
 
@@ -100,10 +100,10 @@ export function PrepopulationManager({
             source,
             config: {
               urlParam:
-                field.type === 'email'
-                  ? 'email'
-                  : field.label.toLowerCase().replace(/\s+/g, '_'),
-              fallbackValue: '',
+                field.type === "email"
+                  ? "email"
+                  : field.label.toLowerCase().replace(/\s+/g, "_"),
+              fallbackValue: "",
               overwriteExisting: false,
               requireConsent: false,
             },
@@ -136,23 +136,23 @@ export function PrepopulationManager({
       fields: updatedFields,
     });
 
-    toast.success('Disabled prepopulation for all fields');
+    toast.success("Disabled prepopulation for all fields");
   };
 
   const generatePreviewUrl = async () => {
     const baseUrl =
-      typeof window !== 'undefined'
+      typeof window !== "undefined"
         ? window.location.origin + window.location.pathname
-        : 'https://yoursite.com/form/123';
+        : "https://yoursite.com/form/123";
 
     const urlFields = fieldsWithPrepopulation.filter(
       (field) =>
-        field.prepopulation?.source === 'url' &&
+        field.prepopulation?.source === "url" &&
         field.prepopulation.config.urlParam
     );
 
     if (urlFields.length === 0) {
-      toast.error('No URL parameters configured');
+      toast.error("No URL parameters configured");
       return;
     }
 
@@ -168,11 +168,11 @@ export function PrepopulationManager({
 
     const previewUrl = `${baseUrl}?${params.toString()}`;
 
-    const { copyWithToast } = await import('@/lib/utils/clipboard');
+    const { copyWithToast } = await import("@/lib/utils/clipboard");
     await copyWithToast(
       previewUrl,
-      'Preview URL copied to clipboard!',
-      'Failed to copy preview URL'
+      "Preview URL copied to clipboard!",
+      "Failed to copy preview URL"
     );
   };
 
@@ -291,7 +291,7 @@ export function PrepopulationManager({
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <Button
                 className="flex h-auto items-center gap-2 p-4"
-                onClick={() => bulkEnablePrepopulation('url')}
+                onClick={() => bulkEnablePrepopulation("url")}
                 variant="outline"
               >
                 <Globe className="h-5 w-5 text-blue-600" />
@@ -305,7 +305,7 @@ export function PrepopulationManager({
 
               <Button
                 className="flex h-auto items-center gap-2 p-4"
-                onClick={() => bulkEnablePrepopulation('api')}
+                onClick={() => bulkEnablePrepopulation("api")}
                 variant="outline"
               >
                 <Zap className="h-5 w-5 text-purple-600" />
@@ -319,7 +319,7 @@ export function PrepopulationManager({
 
               <Button
                 className="flex h-auto items-center gap-2 p-4"
-                onClick={() => bulkEnablePrepopulation('profile')}
+                onClick={() => bulkEnablePrepopulation("profile")}
                 variant="outline"
               >
                 <User className="h-5 w-5 text-green-600" />
@@ -333,7 +333,7 @@ export function PrepopulationManager({
 
               <Button
                 className="flex h-auto items-center gap-2 p-4"
-                onClick={() => bulkEnablePrepopulation('previous')}
+                onClick={() => bulkEnablePrepopulation("previous")}
                 variant="outline"
               >
                 <History className="h-5 w-5 text-orange-600" />

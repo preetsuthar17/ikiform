@@ -1,1 +1,1 @@
-export { FormCustomizePage } from './FormCustomizePage';
+export { FormCustomizePage } from "./FormCustomizePage";

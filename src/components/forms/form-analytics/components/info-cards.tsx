@@ -1,10 +1,10 @@
-import { BarChart3, Calendar, TrendingUp } from 'lucide-react';
-import type React from 'react';
-import { Badge } from '@/components/ui/badge';
+import { BarChart3, Calendar, TrendingUp } from "lucide-react";
+import type React from "react";
+import { Badge } from "@/components/ui/badge";
 
-import { Card } from '@/components/ui/card';
+import { Card } from "@/components/ui/card";
 
-import type { InfoCardsProps } from '../types';
+import type { InfoCardsProps } from "../types";
 
 export const InfoCards: React.FC<InfoCardsProps> = ({
   form,
@@ -47,8 +47,8 @@ export const InfoCards: React.FC<InfoCardsProps> = ({
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
             <span className="text-muted-foreground text-sm">Published</span>
-            <Badge variant={form.is_published ? 'default' : 'secondary'}>
-              {form.is_published ? 'Yes' : 'No'}
+            <Badge variant={form.is_published ? "default" : "secondary"}>
+              {form.is_published ? "Yes" : "No"}
             </Badge>
           </div>
           <div className="flex items-center justify-between">
@@ -102,7 +102,7 @@ export const InfoCards: React.FC<InfoCardsProps> = ({
           <div className="flex items-center justify-between">
             <span className="text-muted-foreground text-sm">Form Type</span>
             <Badge variant="outline">
-              {form.schema.settings?.multiStep ? 'Multi-Step' : 'Single Page'}
+              {form.schema.settings?.multiStep ? "Multi-Step" : "Single Page"}
             </Badge>
           </div>
         </div>

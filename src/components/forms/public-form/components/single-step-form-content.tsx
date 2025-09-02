@@ -1,15 +1,15 @@
-import type React from 'react';
-import { useEffect, useRef } from 'react';
-import { FormFieldRenderer } from '@/components/form-builder/form-field-renderer';
-import { getLivePatternError } from '@/components/form-builder/form-field-renderer/components/TextInputField';
-import { Separator } from '@/components/ui';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { SocialMediaIcons } from '@/components/ui/social-media-icons';
-import { useFormStyling } from '@/hooks/use-form-styling';
-import type { FormField, FormSchema } from '@/lib/database';
-import { getPublicFormTitle } from '@/lib/utils/form-utils';
-import { DuplicateSubmissionError } from './duplicate-submission-error';
+import type React from "react";
+import { useEffect, useRef } from "react";
+import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
+import { getLivePatternError } from "@/components/form-builder/form-field-renderer/components/TextInputField";
+import { Separator } from "@/components/ui";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { SocialMediaIcons } from "@/components/ui/social-media-icons";
+import { useFormStyling } from "@/hooks/use-form-styling";
+import type { FormField, FormSchema } from "@/lib/database";
+import { getPublicFormTitle } from "@/lib/utils/form-utils";
+import { DuplicateSubmissionError } from "./duplicate-submission-error";
 
 interface SingleStepFormContentProps {
   formId: string;
@@ -81,11 +81,11 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
 
         {schema.settings.branding?.socialMedia?.enabled &&
           schema.settings.branding.socialMedia.platforms &&
-          (schema.settings.branding.socialMedia.position === 'header' ||
-            schema.settings.branding.socialMedia.position === 'both') && (
+          (schema.settings.branding.socialMedia.position === "header" ||
+            schema.settings.branding.socialMedia.position === "both") && (
             <SocialMediaIcons
               className="justify-start"
-              iconSize={schema.settings.branding.socialMedia.iconSize || 'md'}
+              iconSize={schema.settings.branding.socialMedia.iconSize || "md"}
               platforms={schema.settings.branding.socialMedia.platforms}
             />
           )}
@@ -132,7 +132,7 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
         {(() => {
           for (const field of visibleFields) {
             if (
-              ['text', 'email', 'textarea'].includes(field.type) &&
+              ["text", "email", "textarea"].includes(field.type) &&
               getLivePatternError(field, formData[field.id])
             ) {
               return (
@@ -145,14 +145,14 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
           return null;
         })()}
 
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <Button
             className="w-fit sm:w-auto"
             disabled={
               submitting ||
               visibleFields.some(
                 (field) =>
-                  ['text', 'email', 'textarea'].includes(field.type) &&
+                  ["text", "email", "textarea"].includes(field.type) &&
                   getLivePatternError(field, formData[field.id])
               )
             }
@@ -160,7 +160,7 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
             style={getButtonStyles(true)}
             type="submit"
           >
-            {submitting ? 'Submitting' : schema.settings.submitText || 'Submit'}
+            {submitting ? "Submitting" : schema.settings.submitText || "Submit"}
           </Button>
         </div>
       </form>

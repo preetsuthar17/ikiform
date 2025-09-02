@@ -1,2 +1,2 @@
-import { FormsManagement as FormsManagementComponent } from './forms-management/FormsManagement';
+import { FormsManagement as FormsManagementComponent } from "./forms-management/FormsManagement";
 export { FormsManagementComponent as FormsManagement };

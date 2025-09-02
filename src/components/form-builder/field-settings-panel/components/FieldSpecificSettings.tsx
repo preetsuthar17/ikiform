@@ -1,6 +1,6 @@
-import type React from 'react';
-import type { FormField } from '@/lib/database';
-import { EmailValidationSettings } from './EmailValidationSettings';
+import type React from "react";
+import type { FormField } from "@/lib/database";
+import { EmailValidationSettings } from "./EmailValidationSettings";
 import {
   AddressFieldSettings,
   CheckboxFieldSettings,
@@ -16,11 +16,11 @@ import {
   TagsFieldSettings,
   TextareaFieldSettings,
   TimeFieldSettings,
-} from './field-settings';
+} from "./field-settings";
 
 interface FieldSpecificSettingsProps {
   field: FormField;
-  onUpdateSettings: (updates: Partial<FormField['settings']>) => void;
+  onUpdateSettings: (updates: Partial<FormField["settings"]>) => void;
   onFieldUpdate: (field: FormField) => void;
 }
 

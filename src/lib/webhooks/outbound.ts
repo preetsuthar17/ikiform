@@ -1,22 +1,22 @@
-import crypto from 'crypto';
-import { formsDbServer } from '@/lib/database';
+import crypto from "crypto";
+import { formsDbServer } from "@/lib/database";
 import type {
   Database,
   WebhookConfig,
   WebhookEventType,
   WebhookLog,
-} from '@/lib/database/database.types';
-import { sendFormNotification } from '@/lib/services/notifications';
-import { createAdminClient } from '@/utils/supabase/admin';
+} from "@/lib/database/database.types";
+import { sendFormNotification } from "@/lib/services/notifications";
+import { createAdminClient } from "@/utils/supabase/admin";
 
-type WebhookRow = Database['public']['Tables']['webhooks']['Row'];
-type WebhookInsert = Database['public']['Tables']['webhooks']['Insert'];
-type WebhookUpdate = Database['public']['Tables']['webhooks']['Update'];
+type WebhookRow = Database["public"]["Tables"]["webhooks"]["Row"];
+type WebhookInsert = Database["public"]["Tables"]["webhooks"]["Insert"];
+type WebhookUpdate = Database["public"]["Tables"]["webhooks"]["Update"];
 
-type WebhookLogRow = Database['public']['Tables']['webhook_logs']['Row'];
-type WebhookLogInsert = Database['public']['Tables']['webhook_logs']['Insert'];
+type WebhookLogRow = Database["public"]["Tables"]["webhook_logs"]["Row"];
+type WebhookLogInsert = Database["public"]["Tables"]["webhook_logs"]["Insert"];
 
-function mapWebhookRow(row: Omit<WebhookRow, 'secret'>): WebhookConfig {
+function mapWebhookRow(row: Omit<WebhookRow, "secret">): WebhookConfig {
   return {
     id: (row as any).id,
     formId: (row as any).form_id ?? undefined,
@@ -44,15 +44,15 @@ export async function getWebhooks({
   accountId?: string;
 }): Promise<WebhookConfig[]> {
   const supabase = createAdminClient();
-  let query = supabase.from('webhooks' as const).select('*');
-  if (formId) query = query.eq('form_id', formId);
-  if (accountId) query = query.eq('account_id', accountId);
+  let query = supabase.from("webhooks" as const).select("*");
+  if (formId) query = query.eq("form_id", formId);
+  if (accountId) query = query.eq("account_id", accountId);
   const { data, error } = await query;
   if (error) throw new Error(error.message);
 
   return (data ?? []).map((row) => {
     const { secret, ...rest } = row as WebhookRow & { secret?: string | null };
-    return mapWebhookRow(rest as Omit<WebhookRow, 'secret'>);
+    return mapWebhookRow(rest as Omit<WebhookRow, "secret">);
   });
 }
 
@@ -60,7 +60,7 @@ export async function createWebhook(
   data: Partial<WebhookConfig>
 ): Promise<WebhookConfig> {
   if (!(data.url && data.events && data.method)) {
-    throw new Error('Missing required fields: url, events, or method');
+    throw new Error("Missing required fields: url, events, or method");
   }
 
   const supabase = createAdminClient();
@@ -90,25 +90,25 @@ export async function createWebhook(
   };
 
   const { data: result, error } = await supabase
-    .from('webhooks' as const)
+    .from("webhooks" as const)
     .insert([insertData] as any)
-    .select('*')
+    .select("*")
     .single();
 
   if (error || !result) {
     console.error(
-      'Supabase error creating webhook:',
+      "Supabase error creating webhook:",
       error,
-      'Data:',
+      "Data:",
       insertData
     );
-    throw new Error(error?.message || 'Failed to create webhook');
+    throw new Error(error?.message || "Failed to create webhook");
   }
 
   const { secret, ...safeResult } = result as WebhookRow & {
     secret?: string | null;
   };
-  return mapWebhookRow(safeResult as Omit<WebhookRow, 'secret'>);
+  return mapWebhookRow(safeResult as Omit<WebhookRow, "secret">);
 }
 
 export async function updateWebhook(
@@ -143,33 +143,33 @@ export async function updateWebhook(
     updated_at: now,
   };
   const { data: result, error } = await (
-    supabase.from('webhooks' as const) as any
+    supabase.from("webhooks" as const) as any
   )
     .update(updateData)
-    .eq('id', id)
-    .select('*')
+    .eq("id", id)
+    .select("*")
     .single();
   if (error || !result) {
     console.error(
-      'Supabase error updating webhook:',
+      "Supabase error updating webhook:",
       error,
-      'Data:',
+      "Data:",
       updateData
     );
-    throw new Error(error?.message || 'Failed to update webhook');
+    throw new Error(error?.message || "Failed to update webhook");
   }
   const { secret, ...safeResult } = result as WebhookRow & {
     secret?: string | null;
   };
-  return mapWebhookRow(safeResult as Omit<WebhookRow, 'secret'>);
+  return mapWebhookRow(safeResult as Omit<WebhookRow, "secret">);
 }
 
 export async function deleteWebhook(id: string): Promise<void> {
   const supabase = createAdminClient();
   const { error } = await supabase
-    .from('webhooks' as const)
+    .from("webhooks" as const)
     .delete()
-    .eq('id', id);
+    .eq("id", id);
   if (error) throw new Error(error.message);
 }
 
@@ -183,11 +183,11 @@ export async function getWebhookLogs({
   accountId?: string;
 }): Promise<WebhookLog[]> {
   const supabase = createAdminClient();
-  let query = supabase.from('webhook_logs' as const).select('*');
-  if (webhookId) query = query.eq('webhook_id', webhookId);
-  if (formId) query = query.eq('form_id', formId as any);
-  if (accountId) query = query.eq('account_id', accountId as any);
-  query = query.order('timestamp', { ascending: false });
+  let query = supabase.from("webhook_logs" as const).select("*");
+  if (webhookId) query = query.eq("webhook_id", webhookId);
+  if (formId) query = query.eq("form_id", formId as any);
+  if (accountId) query = query.eq("account_id", accountId as any);
+  query = query.order("timestamp", { ascending: false });
   const { data, error } = await query;
   if (error) throw new Error(error.message);
   return Array.isArray(data) ? (data as unknown as WebhookLog[]) : [];
@@ -200,30 +200,30 @@ export async function resendWebhookDelivery(
   const supabase = createAdminClient();
 
   const { data: log, error: logError } = await supabase
-    .from('webhook_logs' as const)
-    .select('*')
-    .eq('id', body.logId)
+    .from("webhook_logs" as const)
+    .select("*")
+    .eq("id", body.logId)
     .single();
-  if (logError || !log) throw new Error('Log not found');
+  if (logError || !log) throw new Error("Log not found");
 
   const webhookIdFromLog = (log as WebhookLogRow).webhook_id;
-  if (!webhookIdFromLog) throw new Error('Webhook id missing on log');
+  if (!webhookIdFromLog) throw new Error("Webhook id missing on log");
 
   const { data: webhook, error: webhookError } = await supabase
-    .from('webhooks' as const)
-    .select('*')
-    .eq('id', webhookIdFromLog)
+    .from("webhooks" as const)
+    .select("*")
+    .eq("id", webhookIdFromLog)
     .single();
-  if (webhookError || !webhook) throw new Error('Webhook not found');
+  if (webhookError || !webhook) throw new Error("Webhook not found");
 
   let payload = (log as WebhookLogRow).request_payload as string | null;
   let headers: Record<string, string> = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
     ...(((webhook as WebhookRow).headers as any) || {}),
   };
   if ((webhook as WebhookRow).secret) {
-    headers['X-Webhook-Signature'] = signPayload(
-      payload ?? '',
+    headers["X-Webhook-Signature"] = signPayload(
+      payload ?? "",
       (webhook as WebhookRow).secret as string
     );
   }
@@ -231,21 +231,21 @@ export async function resendWebhookDelivery(
   if (isDiscordWebhook((webhook as WebhookRow).url)) {
     payload = JSON.stringify(
       buildDiscordEmbedPayload(
-        JSON.parse(payload ?? '{}'),
-        (webhook as WebhookRow).form_id || ''
+        JSON.parse(payload ?? "{}"),
+        (webhook as WebhookRow).form_id || ""
       )
     );
-    headers = { 'Content-Type': 'application/json' };
+    headers = { "Content-Type": "application/json" };
   } else if (isSlackWebhook((webhook as WebhookRow).url)) {
     payload = JSON.stringify(
-      buildSlackMessagePayload(JSON.parse(payload ?? '{}'))
+      buildSlackMessagePayload(JSON.parse(payload ?? "{}"))
     );
-    headers = { 'Content-Type': 'application/json' };
+    headers = { "Content-Type": "application/json" };
   }
 
   let status = 0;
-  let responseBody = '';
-  let errorMsg = '';
+  let responseBody = "";
+  let errorMsg = "";
   try {
     const controller = new AbortController();
     const timeoutMs = 30_000;
@@ -265,8 +265,8 @@ export async function resendWebhookDelivery(
 
   const logInsert: WebhookLogInsert = {
     webhook_id: (webhook as WebhookRow).id,
-    event: 'resend',
-    status: errorMsg ? 'failed' : 'success',
+    event: "resend",
+    status: errorMsg ? "failed" : "success",
     request_payload: payload ?? null,
     response_status: status,
     response_body: responseBody,
@@ -275,7 +275,7 @@ export async function resendWebhookDelivery(
     attempt: ((log as WebhookLogRow).attempt || 0) + 1,
   };
 
-  await supabase.from('webhook_logs' as const).insert([logInsert] as any);
+  await supabase.from("webhook_logs" as const).insert([logInsert] as any);
   if (errorMsg) {
     return { status, responseBody, error: errorMsg };
   }
@@ -289,25 +289,25 @@ export async function testWebhook(
   const supabase = createAdminClient();
 
   const { data: webhook, error } = await supabase
-    .from('webhooks' as const)
-    .select('*')
-    .eq('id', id)
+    .from("webhooks" as const)
+    .select("*")
+    .eq("id", id)
     .single();
-  if (error || !webhook) throw new Error('Webhook not found');
+  if (error || !webhook) throw new Error("Webhook not found");
 
   const payload = samplePayload || {
     test: true,
-    message: 'This is a test webhook from Ikiform.',
+    message: "This is a test webhook from Ikiform.",
     timestamp: new Date().toISOString(),
     webhookId: id,
   };
   let body = JSON.stringify(payload);
   let headers: Record<string, string> = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
     ...(((webhook as WebhookRow).headers as any) || {}),
   };
   if ((webhook as WebhookRow).secret) {
-    headers['X-Webhook-Signature'] = signPayload(
+    headers["X-Webhook-Signature"] = signPayload(
       body,
       (webhook as WebhookRow).secret as string
     );
@@ -315,66 +315,66 @@ export async function testWebhook(
 
   if (isDiscordWebhook((webhook as WebhookRow).url)) {
     body = JSON.stringify(
-      buildDiscordEmbedPayload(payload, (webhook as WebhookRow).form_id || '')
+      buildDiscordEmbedPayload(payload, (webhook as WebhookRow).form_id || "")
     );
-    headers = { 'Content-Type': 'application/json' };
+    headers = { "Content-Type": "application/json" };
   } else if (isSlackWebhook((webhook as WebhookRow).url)) {
     body = JSON.stringify(buildSlackMessagePayload(payload));
-    headers = { 'Content-Type': 'application/json' };
+    headers = { "Content-Type": "application/json" };
   }
 
   if (
     samplePayload &&
-    typeof samplePayload === 'object' &&
+    typeof samplePayload === "object" &&
     samplePayload.simulate
   ) {
-    const simulate: 'success' | 'failure' = samplePayload.simulate;
+    const simulate: "success" | "failure" = samplePayload.simulate;
     const notifyEmail = (webhook as WebhookRow).notification_email;
     const notifySuccess = (webhook as WebhookRow).notify_on_success ?? false;
     const notifyFailure = (webhook as WebhookRow).notify_on_failure ?? true;
 
     const logInsert: WebhookLogInsert = {
       webhook_id: (webhook as WebhookRow).id,
-      event: 'test',
-      status: simulate === 'success' ? 'success' : 'failed',
+      event: "test",
+      status: simulate === "success" ? "success" : "failed",
       request_payload: JSON.stringify({ simulate }),
-      response_status: simulate === 'success' ? 200 : 500,
-      response_body: simulate === 'success' ? 'SIMULATED_OK' : null,
-      error: simulate === 'failure' ? 'SIMULATED_FAILURE' : null,
+      response_status: simulate === "success" ? 200 : 500,
+      response_body: simulate === "success" ? "SIMULATED_OK" : null,
+      error: simulate === "failure" ? "SIMULATED_FAILURE" : null,
       timestamp: new Date().toISOString(),
       attempt: 0,
     };
-    await supabase.from('webhook_logs' as const).insert([logInsert] as any);
+    await supabase.from("webhook_logs" as const).insert([logInsert] as any);
 
     try {
-      if (simulate === 'success' && notifyEmail && notifySuccess) {
+      if (simulate === "success" && notifyEmail && notifySuccess) {
         await sendFormNotification({
           to: notifyEmail,
-          subject: 'Webhook test: simulated success',
+          subject: "Webhook test: simulated success",
           message:
-            '# Webhook Test (Simulated Success)\n\nThis is a simulated success notification.',
+            "# Webhook Test (Simulated Success)\n\nThis is a simulated success notification.",
         });
       }
-      if (simulate === 'failure' && notifyEmail && notifyFailure) {
+      if (simulate === "failure" && notifyEmail && notifyFailure) {
         await sendFormNotification({
           to: notifyEmail,
-          subject: 'Webhook test: simulated failure',
+          subject: "Webhook test: simulated failure",
           message:
-            '# Webhook Test (Simulated Failure)\n\nThis is a simulated failure notification.',
+            "# Webhook Test (Simulated Failure)\n\nThis is a simulated failure notification.",
         });
       }
     } catch {}
 
     return {
-      status: simulate === 'success' ? 200 : 500,
-      responseBody: simulate === 'success' ? 'SIMULATED_OK' : null,
-      ...(simulate === 'failure' ? { error: 'SIMULATED_FAILURE' } : {}),
+      status: simulate === "success" ? 200 : 500,
+      responseBody: simulate === "success" ? "SIMULATED_OK" : null,
+      ...(simulate === "failure" ? { error: "SIMULATED_FAILURE" } : {}),
     };
   }
 
   let status = 0;
-  let responseBody = '';
-  let errorMsg = '';
+  let responseBody = "";
+  let errorMsg = "";
   try {
     const res = await fetch((webhook as WebhookRow).url, {
       method: (webhook as WebhookRow).method,
@@ -391,8 +391,8 @@ export async function testWebhook(
 
   const logInsert: WebhookLogInsert = {
     webhook_id: (webhook as WebhookRow).id,
-    event: 'test',
-    status: errorMsg ? 'failed' : 'success',
+    event: "test",
+    status: errorMsg ? "failed" : "success",
     request_payload: body,
     response_status: status,
     response_body: responseBody,
@@ -401,7 +401,7 @@ export async function testWebhook(
     attempt: 0,
   };
 
-  await supabase.from('webhook_logs' as const).insert([logInsert] as any);
+  await supabase.from("webhook_logs" as const).insert([logInsert] as any);
 
   const notifyEmail = (webhook as WebhookRow).notification_email;
   const notifySuccess = (webhook as WebhookRow).notify_on_success ?? false;
@@ -409,11 +409,11 @@ export async function testWebhook(
   try {
     if (!errorMsg && notifyEmail && notifySuccess) {
       const subject = `Webhook test delivered successfully (${status})`;
-      const message = `# Webhook Test Success\n\n- URL: ${(webhook as WebhookRow).url}\n- Method: ${(webhook as WebhookRow).method}\n- Status: ${status}\n\n## Response Body\n\n${'```'}\n${responseBody?.slice(0, 4000) || ''}\n${'```'}`;
+      const message = `# Webhook Test Success\n\n- URL: ${(webhook as WebhookRow).url}\n- Method: ${(webhook as WebhookRow).method}\n- Status: ${status}\n\n## Response Body\n\n${"```"}\n${responseBody?.slice(0, 4000) || ""}\n${"```"}`;
       await sendFormNotification({ to: notifyEmail, subject, message });
     }
     if (errorMsg && notifyEmail && notifyFailure) {
-      const subject = 'Webhook test failed';
+      const subject = "Webhook test failed";
       const message = `# Webhook Test Failure\n\n- URL: ${(webhook as WebhookRow).url}\n- Method: ${(webhook as WebhookRow).method}\n- Error: ${errorMsg}`;
       await sendFormNotification({ to: notifyEmail, subject, message });
     }
@@ -426,11 +426,11 @@ export async function testWebhook(
 }
 
 function signPayload(payload: string, secret: string): string {
-  return crypto.createHmac('sha256', secret).update(payload).digest('hex');
+  return crypto.createHmac("sha256", secret).update(payload).digest("hex");
 }
 
 function isDiscordWebhook(url: string) {
-  return url.startsWith('https://discord.com/api/webhooks/');
+  return url.startsWith("https://discord.com/api/webhooks/");
 }
 
 function buildDiscordEmbedPayload(
@@ -439,26 +439,26 @@ function buildDiscordEmbedPayload(
 ) {
   function formatValue(value: any): string {
     if (value === null || value === undefined) {
-      return 'N/A';
+      return "N/A";
     }
 
-    if (typeof value === 'string') {
+    if (typeof value === "string") {
       return value;
     }
 
-    if (typeof value === 'number' || typeof value === 'boolean') {
+    if (typeof value === "number" || typeof value === "boolean") {
       return String(value);
     }
 
     if (Array.isArray(value)) {
-      return value.map((item) => formatValue(item)).join(', ');
+      return value.map((item) => formatValue(item)).join(", ");
     }
 
-    if (typeof value === 'object') {
+    if (typeof value === "object") {
       try {
         return JSON.stringify(value, null, 2);
       } catch {
-        return '[Complex Object]';
+        return "[Complex Object]";
       }
     }
 
@@ -470,7 +470,7 @@ function buildDiscordEmbedPayload(
   if (formData.fields && Array.isArray(formData.fields)) {
     formData.fields.forEach((field: any) => {
       fields.push({
-        name: field.label || field.id || 'Unknown Field',
+        name: field.label || field.id || "Unknown Field",
         value: formatValue(field.value),
         inline: true,
       });
@@ -479,12 +479,12 @@ function buildDiscordEmbedPayload(
     Object.entries(formData).forEach(([key, value]) => {
       if (
         [
-          'event',
-          'formId',
-          'formName',
-          'submissionId',
-          'ipAddress',
-          'rawData',
+          "event",
+          "formId",
+          "formName",
+          "submissionId",
+          "ipAddress",
+          "rawData",
         ].includes(key)
       ) {
         return;
@@ -502,13 +502,13 @@ function buildDiscordEmbedPayload(
     content: `New submission for form: \`${formData.formName || formId}\``,
     embeds: [
       {
-        title: 'Form Submission',
+        title: "Form Submission",
         description: `Form ID: \`${formId}\``,
         fields,
         color: 5_814_783,
         timestamp: new Date().toISOString(),
         footer: {
-          text: `Submission ID: ${formData.submissionId || 'N/A'}`,
+          text: `Submission ID: ${formData.submissionId || "N/A"}`,
         },
       },
     ],
@@ -516,32 +516,32 @@ function buildDiscordEmbedPayload(
 }
 
 function isSlackWebhook(url: string) {
-  return url.startsWith('https://hooks.slack.com/services/');
+  return url.startsWith("https://hooks.slack.com/services/");
 }
 
 function buildSlackMessagePayload(formData: Record<string, any>) {
   function formatValue(value: any): string {
     if (value === null || value === undefined) {
-      return 'N/A';
+      return "N/A";
     }
 
-    if (typeof value === 'string') {
+    if (typeof value === "string") {
       return value;
     }
 
-    if (typeof value === 'number' || typeof value === 'boolean') {
+    if (typeof value === "number" || typeof value === "boolean") {
       return String(value);
     }
 
     if (Array.isArray(value)) {
-      return value.map((item) => formatValue(item)).join(', ');
+      return value.map((item) => formatValue(item)).join(", ");
     }
 
-    if (typeof value === 'object') {
+    if (typeof value === "object") {
       try {
         return JSON.stringify(value, null, 2);
       } catch {
-        return '[Complex Object]';
+        return "[Complex Object]";
       }
     }
 
@@ -553,7 +553,7 @@ function buildSlackMessagePayload(formData: Record<string, any>) {
   if (formData.fields && Array.isArray(formData.fields)) {
     formData.fields.forEach((field: any) => {
       fields.push({
-        title: field.label || field.id || 'Unknown Field',
+        title: field.label || field.id || "Unknown Field",
         value: formatValue(field.value),
         short: true,
       });
@@ -562,12 +562,12 @@ function buildSlackMessagePayload(formData: Record<string, any>) {
     Object.entries(formData).forEach(([key, value]) => {
       if (
         [
-          'event',
-          'formId',
-          'formName',
-          'submissionId',
-          'ipAddress',
-          'rawData',
+          "event",
+          "formId",
+          "formName",
+          "submissionId",
+          "ipAddress",
+          "rawData",
         ].includes(key)
       ) {
         return;
@@ -582,12 +582,12 @@ function buildSlackMessagePayload(formData: Record<string, any>) {
   }
 
   return {
-    text: `New form submission: \`${formData.formName || 'Unknown Form'}\``,
+    text: `New form submission: \`${formData.formName || "Unknown Form"}\``,
     attachments: [
       {
-        color: 'good',
+        color: "good",
         fields,
-        footer: `Submission ID: ${formData.submissionId || 'N/A'}`,
+        footer: `Submission ID: ${formData.submissionId || "N/A"}`,
         ts: Math.floor(Date.now() / 1000),
       },
     ],
@@ -599,17 +599,17 @@ function renderTemplate(
   context: Record<string, any>
 ): string {
   return template.replace(/{{\s*(json)?\s*([\w.]+)\s*}}/g, (_, isJson, key) => {
-    const keys = key.split('.');
+    const keys = key.split(".");
     let value = context;
     for (const k of keys) {
       value = value?.[k];
-      if (value === undefined || value === null) return '';
+      if (value === undefined || value === null) return "";
     }
     if (isJson) {
       try {
         return JSON.stringify(value);
       } catch {
-        return '';
+        return "";
       }
     }
     return String(value);
@@ -630,7 +630,7 @@ export async function formatHumanFriendlyPayload(
     return {
       id: fieldId,
       label: field?.label || fieldId,
-      type: field?.type || 'unknown',
+      type: field?.type || "unknown",
       value,
     };
   });
@@ -651,17 +651,17 @@ export async function triggerWebhooks(
   const { formId, accountId } = payload;
 
   const { data: webhooks, error } = await supabase
-    .from('webhooks' as const)
-    .select('*')
-    .contains('events', [event])
-    .eq('enabled', true)
+    .from("webhooks" as const)
+    .select("*")
+    .contains("events", [event])
+    .eq("enabled", true)
     .or(
       [
         formId ? `form_id.eq.${formId}` : undefined,
         accountId ? `account_id.eq.${accountId}` : undefined,
       ]
         .filter(Boolean)
-        .join(',')
+        .join(",")
     );
   if (error) throw new Error(error.message);
   if (!webhooks || webhooks.length === 0) {
@@ -671,7 +671,7 @@ export async function triggerWebhooks(
   for (const webhook of webhooks as WebhookRow[]) {
     let body: string;
 
-    if (event === 'form_submitted' && payload.formId && payload.formData) {
+    if (event === "form_submitted" && payload.formId && payload.formData) {
       const formatted = await formatHumanFriendlyPayload(
         payload.formId,
         payload.formData
@@ -693,11 +693,11 @@ export async function triggerWebhooks(
     }
 
     const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       ...(((webhook as WebhookRow).headers as any) || {}),
     };
     if ((webhook as WebhookRow).secret) {
-      headers['X-Webhook-Signature'] = signPayload(
+      headers["X-Webhook-Signature"] = signPayload(
         body,
         (webhook as WebhookRow).secret as string
       );
@@ -706,7 +706,7 @@ export async function triggerWebhooks(
     const { secret, ...rest } = webhook as WebhookRow & {
       secret?: string | null;
     };
-    const config = mapWebhookRow(rest as Omit<WebhookRow, 'secret'>);
+    const config = mapWebhookRow(rest as Omit<WebhookRow, "secret">);
     deliveries.push(deliverWithRetry(config, body, headers, 0));
   }
   await Promise.allSettled(deliveries);
@@ -719,7 +719,7 @@ export async function deliverWithRetry(
   attempt: number
 ): Promise<void> {
   const supabase = createAdminClient();
-  const methodsWithBody = ['POST', 'PUT', 'PATCH'];
+  const methodsWithBody = ["POST", "PUT", "PATCH"];
   const startTime = Date.now();
 
   console.log(
@@ -736,19 +736,19 @@ export async function deliverWithRetry(
         finalBody = JSON.stringify(
           buildDiscordEmbedPayload(
             parsed.formData || parsed,
-            parsed.formId || ''
+            parsed.formId || ""
           )
         );
         console.log(
-          '[WEBHOOK DELIVERY] Discord webhook detected, transformed payload'
+          "[WEBHOOK DELIVERY] Discord webhook detected, transformed payload"
         );
       } catch {
-        finalBody = JSON.stringify(buildDiscordEmbedPayload({}, ''));
+        finalBody = JSON.stringify(buildDiscordEmbedPayload({}, ""));
         console.log(
-          '[WEBHOOK DELIVERY] Discord webhook detected, using fallback payload'
+          "[WEBHOOK DELIVERY] Discord webhook detected, using fallback payload"
         );
       }
-      finalHeaders = { 'Content-Type': 'application/json' };
+      finalHeaders = { "Content-Type": "application/json" };
     } else if (isSlackWebhook(webhook.url)) {
       try {
         const parsed = JSON.parse(body);
@@ -756,15 +756,15 @@ export async function deliverWithRetry(
           buildSlackMessagePayload(parsed.formData || parsed)
         );
         console.log(
-          '[WEBHOOK DELIVERY] Slack webhook detected, transformed payload'
+          "[WEBHOOK DELIVERY] Slack webhook detected, transformed payload"
         );
       } catch {
         finalBody = JSON.stringify(buildSlackMessagePayload({}));
         console.log(
-          '[WEBHOOK DELIVERY] Slack webhook detected, using fallback payload'
+          "[WEBHOOK DELIVERY] Slack webhook detected, using fallback payload"
         );
       }
-      finalHeaders = { 'Content-Type': 'application/json' };
+      finalHeaders = { "Content-Type": "application/json" };
     }
 
     const fetchOptions: RequestInit = {
@@ -805,8 +805,8 @@ export async function deliverWithRetry(
 
     const successLog: WebhookLogInsert = {
       webhook_id: webhook.id,
-      event: 'triggered',
-      status: 'success',
+      event: "triggered",
+      status: "success",
       request_payload: methodsWithBody.includes(webhook.method)
         ? finalBody
         : null,
@@ -815,14 +815,14 @@ export async function deliverWithRetry(
       timestamp: new Date().toISOString(),
       attempt,
     };
-    await supabase.from('webhook_logs' as const).insert([successLog] as any);
+    await supabase.from("webhook_logs" as const).insert([successLog] as any);
 
     console.log(
       `[WEBHOOK DELIVERY] Successfully delivered webhook ${webhook.id} in ${duration}ms`
     );
     if (webhook.notificationEmail && (webhook.notifyOnSuccess ?? false)) {
       const subject = `Webhook delivered successfully (${res.status})`;
-      const message = `# Webhook Success\n\n- URL: ${webhook.url}\n- Method: ${webhook.method}\n- Status: ${res.status} ${res.statusText}\n\n## Response Body\n\n\n\n${'```'}\n${responseBody?.slice(0, 4000) || ''}\n${'```'}`;
+      const message = `# Webhook Success\n\n- URL: ${webhook.url}\n- Method: ${webhook.method}\n- Status: ${res.status} ${res.statusText}\n\n## Response Body\n\n\n\n${"```"}\n${responseBody?.slice(0, 4000) || ""}\n${"```"}`;
       try {
         await sendFormNotification({
           to: webhook.notificationEmail,
@@ -840,14 +840,14 @@ export async function deliverWithRetry(
 
     const failureLog: WebhookLogInsert = {
       webhook_id: webhook.id,
-      event: 'triggered',
-      status: 'failed',
+      event: "triggered",
+      status: "failed",
       request_payload: methodsWithBody.includes(webhook.method) ? body : null,
       error: String(err),
       timestamp: new Date().toISOString(),
       attempt,
     };
-    await supabase.from('webhook_logs' as const).insert([failureLog] as any);
+    await supabase.from("webhook_logs" as const).insert([failureLog] as any);
     // send failure email only on final attempt to avoid noise
     const isFinalAttempt = attempt + 1 >= 3;
     if (
@@ -855,7 +855,7 @@ export async function deliverWithRetry(
       webhook.notificationEmail &&
       (webhook.notifyOnFailure ?? true)
     ) {
-      const subject = 'Webhook delivery failed';
+      const subject = "Webhook delivery failed";
       const message = `# Webhook Failure\n\n- URL: ${webhook.url}\n- Method: ${webhook.method}\n- Error: ${String(err)}\n\nRetries: ${attempt + 1}/3`;
       try {
         await sendFormNotification({

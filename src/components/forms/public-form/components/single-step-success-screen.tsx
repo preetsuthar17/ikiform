@@ -1,10 +1,10 @@
-import Link from 'next/link';
-import type React from 'react';
-import { QuizResults } from '@/components/quiz/QuizResults';
-import { Card } from '@/components/ui/card';
+import Link from "next/link";
+import type React from "react";
+import { QuizResults } from "@/components/quiz/QuizResults";
+import { Card } from "@/components/ui/card";
 
-import type { FormSchema } from '@/lib/database';
-import type { QuizResult } from '@/lib/quiz/scoring';
+import type { FormSchema } from "@/lib/database";
+import type { QuizResult } from "@/lib/quiz/scoring";
 
 interface SingleStepSuccessScreenProps {
   schema: FormSchema;
@@ -34,7 +34,7 @@ export const SingleStepSuccessScreen: React.FC<
         ) : (
           <Card
             className="flex flex-col gap-4 rounded-card"
-            style={{ padding: '2rem' }}
+            style={{ padding: "2rem" }}
           >
             <div className="flex flex-col items-center gap-4">
               <div className="flex h-16 w-16 items-center justify-center rounded-card bg-accent">
@@ -55,7 +55,7 @@ export const SingleStepSuccessScreen: React.FC<
               <h2 className="font-bold text-2xl text-foreground">Thank You!</h2>
               <p className="text-center text-muted-foreground">
                 {schema.settings.successMessage ||
-                  'Your form has been submitted successfully.'}
+                  "Your form has been submitted successfully."}
               </p>
               {schema.settings.redirectUrl && (
                 <p className="text-muted-foreground text-sm">
@@ -72,7 +72,7 @@ export const SingleStepSuccessScreen: React.FC<
               (schema.settings.branding as any).showIkiformBranding !== false
           ) && (
             <p className="text-muted-foreground text-sm">
-              Powered by{' '}
+              Powered by{" "}
               <span className="font-medium text-foreground underline">
                 <Link href="https://www.ikiform.com">Ikiform</Link>
               </span>

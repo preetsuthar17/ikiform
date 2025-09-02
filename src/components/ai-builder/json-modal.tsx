@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { createHighlighter } from 'shiki';
-import { Button } from '@/components/ui/button';
+import { createHighlighter } from "shiki";
+import { Button } from "@/components/ui/button";
 import {
   Modal,
   ModalClose,
@@ -9,12 +9,12 @@ import {
   ModalFooter,
   ModalHeader,
   ModalTitle,
-} from '@/components/ui/modal';
+} from "@/components/ui/modal";
 
-import { ScrollArea } from '@/components/ui/scroll-area';
-import type { FormSchema } from '@/lib/ai-builder/types';
+import { ScrollArea } from "@/components/ui/scroll-area";
+import type { FormSchema } from "@/lib/ai-builder/types";
 
-import { CopyButton } from './copy-button';
+import { CopyButton } from "./copy-button";
 
 interface JsonModalProps {
   isOpen: boolean;
@@ -23,7 +23,7 @@ interface JsonModalProps {
 }
 
 export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
-  const [highlightedCode, setHighlightedCode] = useState<string>('');
+  const [highlightedCode, setHighlightedCode] = useState<string>("");
 
   useEffect(() => {
     if (!activeForm?.schema) return;
@@ -31,20 +31,20 @@ export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
     const highlightCode = async () => {
       try {
         const highlighter = await createHighlighter({
-          themes: ['github-dark', 'github-light'],
-          langs: ['json'],
+          themes: ["github-dark", "github-light"],
+          langs: ["json"],
         });
 
         const jsonString = JSON.stringify(activeForm.schema, null, 2);
-        const selectedTheme = 'github-light';
+        const selectedTheme = "github-light";
         const html = highlighter.codeToHtml(jsonString, {
-          lang: 'json',
+          lang: "json",
           theme: selectedTheme,
         });
 
         setHighlightedCode(html);
       } catch (error) {
-        console.error('Error highlighting code:', error);
+        console.error("Error highlighting code:", error);
 
         setHighlightedCode(
           `<pre class="whitespace-pre-wrap break-words">${JSON.stringify(activeForm.schema, null, 2)}</pre>`

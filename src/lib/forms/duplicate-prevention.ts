@@ -1,9 +1,9 @@
-import { Redis } from '@upstash/redis';
+import { Redis } from "@upstash/redis";
 
 interface DuplicatePreventionSettings {
   enabled: boolean;
-  strategy: 'ip' | 'email' | 'session' | 'combined';
-  mode: 'time-based' | 'one-time'; // New mode option
+  strategy: "ip" | "email" | "session" | "combined";
+  mode: "time-based" | "one-time"; // New mode option
   timeWindow: number; // in minutes (only used for time-based mode)
   message: string;
   allowOverride?: boolean;
@@ -20,8 +20,8 @@ interface DuplicateCheckResult {
 let redis: Redis | null = null;
 
 function getRedisClient(): Redis {
-  if (typeof window !== 'undefined') {
-    throw new Error('Redis client cannot be used on the client side');
+  if (typeof window !== "undefined") {
+    throw new Error("Redis client cannot be used on the client side");
   }
 
   if (!redis) {
@@ -30,7 +30,7 @@ function getRedisClient(): Redis {
 
     if (!(url && token)) {
       throw new Error(
-        'Missing required environment variables: UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN'
+        "Missing required environment variables: UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN"
       );
     }
 
@@ -45,11 +45,11 @@ function getRedisClient(): Redis {
 
 const DEFAULT_SETTINGS: DuplicatePreventionSettings = {
   enabled: false,
-  strategy: 'combined', // Best strategy: combines IP, email, and session
-  mode: 'one-time', // Best mode: one-time submission
+  strategy: "combined", // Best strategy: combines IP, email, and session
+  mode: "one-time", // Best mode: one-time submission
   timeWindow: 1440,
   message:
-    'You have already submitted this form. Each user can only submit once.',
+    "You have already submitted this form. Each user can only submit once.",
   allowOverride: false,
   maxAttempts: 1,
 };
@@ -59,14 +59,14 @@ export async function checkDuplicateSubmission(
   identifier: string,
   settings: DuplicatePreventionSettings = DEFAULT_SETTINGS
 ): Promise<DuplicateCheckResult> {
-  if (typeof window !== 'undefined') {
-    throw new Error('Duplicate prevention can only be used on the server side');
+  if (typeof window !== "undefined") {
+    throw new Error("Duplicate prevention can only be used on the server side");
   }
 
   if (!settings.enabled) {
     return {
       isDuplicate: false,
-      message: '',
+      message: "",
     };
   }
 
@@ -78,7 +78,7 @@ export async function checkDuplicateSubmission(
     const existingSubmission = await redis.get(key);
 
     if (existingSubmission) {
-      if (settings.mode === 'one-time') {
+      if (settings.mode === "one-time") {
         // One-time mode: never allow resubmission
         return {
           isDuplicate: true,
@@ -115,14 +115,14 @@ export async function checkDuplicateSubmission(
 
     return {
       isDuplicate: false,
-      message: '',
+      message: "",
     };
   } catch (error) {
-    console.error('Error checking duplicate submission:', error);
+    console.error("Error checking duplicate submission:", error);
     // If Redis fails, allow submission to prevent blocking users
     return {
       isDuplicate: false,
-      message: '',
+      message: "",
     };
   }
 }
@@ -132,8 +132,8 @@ export async function recordSubmission(
   identifier: string,
   settings: DuplicatePreventionSettings = DEFAULT_SETTINGS
 ): Promise<void> {
-  if (typeof window !== 'undefined') {
-    throw new Error('Duplicate prevention can only be used on the server side');
+  if (typeof window !== "undefined") {
+    throw new Error("Duplicate prevention can only be used on the server side");
   }
 
   if (!settings.enabled) {
@@ -147,7 +147,7 @@ export async function recordSubmission(
     const existingSubmission = await redis.get(key);
 
     if (existingSubmission) {
-      if (settings.mode === 'one-time') {
+      if (settings.mode === "one-time") {
         // One-time mode: keep the existing record forever
         return;
       }
@@ -163,7 +163,7 @@ export async function recordSubmission(
         timestamp: submissionData.timestamp,
         attempts: newAttempts,
       });
-    } else if (settings.mode === 'one-time') {
+    } else if (settings.mode === "one-time") {
       // One-time mode: store forever (no expiration)
       await redis.set(key, {
         timestamp: Date.now(),
@@ -178,28 +178,28 @@ export async function recordSubmission(
       });
     }
   } catch (error) {
-    console.error('Error recording submission:', error);
+    console.error("Error recording submission:", error);
   }
 }
 
 export function generateIdentifier(
-  strategy: DuplicatePreventionSettings['strategy'],
+  strategy: DuplicatePreventionSettings["strategy"],
   ipAddress: string,
   email?: string,
   sessionId?: string
 ): string {
   switch (strategy) {
-    case 'ip':
+    case "ip":
       return `ip:${ipAddress}`;
-    case 'email':
+    case "email":
       return email ? `email:${email.toLowerCase()}` : `ip:${ipAddress}`;
-    case 'session':
+    case "session":
       return sessionId ? `session:${sessionId}` : `ip:${ipAddress}`;
-    case 'combined': {
+    case "combined": {
       const parts = [`ip:${ipAddress}`];
       if (email) parts.push(`email:${email.toLowerCase()}`);
       if (sessionId) parts.push(`session:${sessionId}`);
-      return parts.join('|');
+      return parts.join("|");
     }
     default:
       return `ip:${ipAddress}`;
@@ -211,18 +211,18 @@ export function extractEmailFromSubmissionData(
 ): string | undefined {
   // Look for common email field names
   const emailFields = [
-    'email',
-    'e-mail',
-    'mail',
-    'user_email',
-    'contact_email',
+    "email",
+    "e-mail",
+    "mail",
+    "user_email",
+    "contact_email",
   ];
 
   for (const field of emailFields) {
-    if (submissionData[field] && typeof submissionData[field] === 'string') {
+    if (submissionData[field] && typeof submissionData[field] === "string") {
       const email = submissionData[field].trim().toLowerCase();
       // Basic email validation
-      if (email.includes('@') && email.includes('.')) {
+      if (email.includes("@") && email.includes(".")) {
         return email;
       }
     }
@@ -237,14 +237,14 @@ export function formatTimeRemaining(seconds: number): string {
   }
   if (seconds < 3600) {
     const minutes = Math.ceil(seconds / 60);
-    return `${minutes} minute${minutes > 1 ? 's' : ''}`;
+    return `${minutes} minute${minutes > 1 ? "s" : ""}`;
   }
   if (seconds < 86_400) {
     const hours = Math.ceil(seconds / 3600);
-    return `${hours} hour${hours > 1 ? 's' : ''}`;
+    return `${hours} hour${hours > 1 ? "s" : ""}`;
   }
   const days = Math.ceil(seconds / 86_400);
-  return `${days} day${days > 1 ? 's' : ''}`;
+  return `${days} day${days > 1 ? "s" : ""}`;
 }
 
 export type { DuplicatePreventionSettings, DuplicateCheckResult };

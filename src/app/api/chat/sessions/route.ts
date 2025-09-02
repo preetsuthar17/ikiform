@@ -1,7 +1,7 @@
-import { type NextRequest, NextResponse } from 'next/server';
-import { formsDbServer } from '@/lib/database';
-import { requirePremium } from '@/lib/utils/premium-check';
-import { createClient } from '@/utils/supabase/server';
+import { type NextRequest, NextResponse } from "next/server";
+import { formsDbServer } from "@/lib/database";
+import { requirePremium } from "@/lib/utils/premium-check";
+import { createClient } from "@/utils/supabase/server";
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
@@ -12,29 +12,29 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     } = await supabase.auth.getUser();
 
     if (authError || !user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const premiumCheck = await requirePremium(user.id);
     if (!premiumCheck.hasPremium) {
       return (
         premiumCheck.error ||
-        NextResponse.json({ error: 'Premium required' }, { status: 403 })
+        NextResponse.json({ error: "Premium required" }, { status: 403 })
       );
     }
 
     const { searchParams } = new URL(req.url);
-    const limit = Number.parseInt(searchParams.get('limit') || '10', 10);
-    const type = searchParams.get('type') || 'both';
+    const limit = Number.parseInt(searchParams.get("limit") || "10", 10);
+    const type = searchParams.get("type") || "both";
 
     type Session = {
       id: string;
       created_at: string;
       [key: string]: unknown;
-    } & ({ type: 'ai_builder' } | { type: 'ai_analytics' });
+    } & ({ type: "ai_builder" } | { type: "ai_analytics" });
     let sessions: Session[] = [];
 
-    if (type === 'builder' || type === 'both') {
+    if (type === "builder" || type === "both") {
       const builderSessions = await formsDbServer.getAIBuilderSessions(
         user.id,
         limit
@@ -46,16 +46,16 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
               ...session,
               id: String(session.id),
               created_at: String(session.created_at),
-              type: 'ai_builder',
+              type: "ai_builder",
             }) as Session
         )
       );
     }
 
-    if (type === 'analytics' || type === 'both') {
+    if (type === "analytics" || type === "both") {
       const analyticsSessions = await formsDbServer.getAIAnalyticsSessions(
         user.id,
-        '',
+        "",
         limit
       );
       sessions = sessions.concat(
@@ -65,7 +65,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
               ...session,
               id: String(session.id),
               created_at: String(session.created_at),
-              type: 'ai_analytics',
+              type: "ai_analytics",
             }) as Session
         )
       );
@@ -90,7 +90,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     });
   } catch (_error) {
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }

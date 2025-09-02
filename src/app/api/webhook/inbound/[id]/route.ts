@@ -1,8 +1,8 @@
-import { type NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from "next/server";
 import {
   deleteInboundMapping,
   updateInboundMapping,
-} from '@/lib/webhooks/inbound';
+} from "@/lib/webhooks/inbound";
 
 export async function PUT(
   req: NextRequest,
@@ -26,7 +26,7 @@ export async function PUT(
         `[WEBHOOK API] PUT /api/webhook/inbound/${mappingId} - Missing request body`
       );
       return NextResponse.json(
-        { error: 'Missing request body' },
+        { error: "Missing request body" },
         { status: 400 }
       );
     }
@@ -44,7 +44,7 @@ export async function PUT(
     const errorMessage =
       error instanceof Error
         ? error.message
-        : 'Failed to update inbound mapping';
+        : "Failed to update inbound mapping";
     console.error(
       `[WEBHOOK API] PUT /api/webhook/inbound/${mappingId} - Error after ${duration}ms:`,
       errorMessage
@@ -83,7 +83,7 @@ export async function DELETE(
     const errorMessage =
       error instanceof Error
         ? error.message
-        : 'Failed to delete inbound mapping';
+        : "Failed to delete inbound mapping";
     console.error(
       `[WEBHOOK API] DELETE /api/webhook/inbound/${mappingId} - Error after ${duration}ms:`,
       errorMessage

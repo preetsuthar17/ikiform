@@ -1,5 +1,5 @@
-import type { FormBlock } from '@/lib/database';
-import type { DragEndResult } from '../types';
+import type { FormBlock } from "@/lib/database";
+import type { DragEndResult } from "../types";
 
 export const handleBlockReorder = (
   blocks: FormBlock[],

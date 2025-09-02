@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { Suspense } from 'react';
-import { Input as BaseInput, type InputProps } from './input-base';
-import { Skeleton } from './skeleton';
+import React, { Suspense } from "react";
+import { Input as BaseInput, type InputProps } from "./input-base";
+import { Skeleton } from "./skeleton";
 
 interface SuspenseInputProps extends InputProps {
   loading?: boolean;
@@ -31,7 +31,7 @@ export const SuspenseInput = React.forwardRef<
   );
 });
 
-SuspenseInput.displayName = 'SuspenseInput';
+SuspenseInput.displayName = "SuspenseInput";
 
 export const Input = SuspenseInput;
 export type { InputProps, SuspenseInputProps };

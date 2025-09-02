@@ -1,20 +1,20 @@
-import { Copy, ExternalLink, Globe, History, User, Zap } from 'lucide-react';
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Copy, ExternalLink, Globe, History, User, Zap } from "lucide-react";
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Switch } from '@/components/ui/switch';
-import { Textarea } from '@/components/ui/textarea';
-import { toast } from '@/hooks/use-toast';
-import type { FormField } from '@/lib/database';
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/hooks/use-toast";
+import type { FormField } from "@/lib/database";
 
 interface PrepopulationSettingsProps {
   field: FormField;
@@ -25,11 +25,11 @@ export function PrepopulationSettings({
   field,
   onFieldUpdate,
 }: PrepopulationSettingsProps) {
-  const [previewUrl, setPreviewUrl] = useState('');
+  const [previewUrl, setPreviewUrl] = useState("");
 
   const prepopulation = field.prepopulation || {
     enabled: false,
-    source: 'url' as const,
+    source: "url" as const,
     config: {},
   };
 
@@ -50,14 +50,14 @@ export function PrepopulationSettings({
 
   const generatePreviewUrl = async () => {
     if (!prepopulation.config.urlParam) {
-      toast.error('Please enter a URL parameter name first');
+      toast.error("Please enter a URL parameter name first");
       return;
     }
 
     const baseUrl =
-      typeof window !== 'undefined'
-        ? window.location.origin + '/form/123'
-        : 'https://yoursite.com/form/123';
+      typeof window !== "undefined"
+        ? window.location.origin + "/form/123"
+        : "https://yoursite.com/form/123";
 
     const exampleValue = `Sample ${field.label}`;
     const params = new URLSearchParams();
@@ -66,31 +66,31 @@ export function PrepopulationSettings({
 
     setPreviewUrl(url);
 
-    const { copyWithToast } = await import('@/lib/utils/clipboard');
+    const { copyWithToast } = await import("@/lib/utils/clipboard");
     await copyWithToast(
       url,
-      'Preview URL copied to clipboard!',
-      'Failed to copy preview URL'
+      "Preview URL copied to clipboard!",
+      "Failed to copy preview URL"
     );
   };
 
   const testApiEndpoint = async () => {
     if (!prepopulation.config.apiEndpoint) {
-      toast.error('Please enter an API endpoint first');
+      toast.error("Please enter an API endpoint first");
       return;
     }
 
     try {
       const response = await fetch(prepopulation.config.apiEndpoint, {
-        method: prepopulation.config.apiMethod || 'GET',
+        method: prepopulation.config.apiMethod || "GET",
         headers:
-          typeof prepopulation.config.apiHeaders === 'string'
+          typeof prepopulation.config.apiHeaders === "string"
             ? JSON.parse(prepopulation.config.apiHeaders)
             : prepopulation.config.apiHeaders,
       });
 
       if (response.ok) {
-        toast.success('API endpoint is reachable!');
+        toast.success("API endpoint is reachable!");
       } else {
         toast.error(
           `API test failed: ${response.status} ${response.statusText}`
@@ -98,7 +98,7 @@ export function PrepopulationSettings({
       }
     } catch (error) {
       toast.error(
-        `API test failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+        `API test failed: ${error instanceof Error ? error.message : "Unknown error"}`
       );
     }
   };
@@ -169,7 +169,7 @@ export function PrepopulationSettings({
             </div>
 
             {/* URL Parameters Configuration */}
-            {prepopulation.source === 'url' && (
+            {prepopulation.source === "url" && (
               <div className="flex flex-col gap-3">
                 <div className="flex flex-col gap-2">
                   <Label className="text-card-foreground">
@@ -179,7 +179,7 @@ export function PrepopulationSettings({
                     className="border-border bg-input"
                     onChange={(e) => updateConfig({ urlParam: e.target.value })}
                     placeholder="e.g., name, email, phone"
-                    value={prepopulation.config.urlParam || ''}
+                    value={prepopulation.config.urlParam || ""}
                   />
                   <p className="text-muted-foreground text-xs">
                     The parameter name to extract from the URL query string
@@ -194,7 +194,7 @@ export function PrepopulationSettings({
                       updateConfig({ fallbackValue: e.target.value })
                     }
                     placeholder="Default value if parameter is missing"
-                    value={prepopulation.config.fallbackValue || ''}
+                    value={prepopulation.config.fallbackValue || ""}
                   />
                 </div>
 
@@ -235,7 +235,7 @@ export function PrepopulationSettings({
                     <strong>Preview URL:</strong>
                     <code className="break-all text-xs">{previewUrl}</code>
                     <p className="text-xs">
-                      This URL will pre-populate the field with "Sample{' '}
+                      This URL will pre-populate the field with "Sample{" "}
                       {field.label}"
                     </p>
                   </div>
@@ -244,7 +244,7 @@ export function PrepopulationSettings({
             )}
 
             {/* API Configuration */}
-            {prepopulation.source === 'api' && (
+            {prepopulation.source === "api" && (
               <div className="flex flex-col gap-3">
                 <div className="flex flex-col gap-2">
                   <Label className="text-card-foreground">API Endpoint</Label>
@@ -255,7 +255,7 @@ export function PrepopulationSettings({
                     }
                     placeholder="https://api.example.com/user-data"
                     type="url"
-                    value={prepopulation.config.apiEndpoint || ''}
+                    value={prepopulation.config.apiEndpoint || ""}
                   />
                 </div>
 
@@ -263,9 +263,9 @@ export function PrepopulationSettings({
                   <Label className="text-card-foreground">HTTP Method</Label>
                   <Select
                     onValueChange={(method) =>
-                      updateConfig({ apiMethod: method as 'GET' | 'POST' })
+                      updateConfig({ apiMethod: method as "GET" | "POST" })
                     }
-                    value={prepopulation.config.apiMethod || 'GET'}
+                    value={prepopulation.config.apiMethod || "GET"}
                   >
                     <SelectTrigger className="border-border bg-input">
                       <SelectValue />
@@ -291,7 +291,7 @@ export function PrepopulationSettings({
                     }
                     rows={3}
                     value={
-                      typeof prepopulation.config.apiHeaders === 'string'
+                      typeof prepopulation.config.apiHeaders === "string"
                         ? prepopulation.config.apiHeaders
                         : JSON.stringify(
                             prepopulation.config.apiHeaders || {},
@@ -317,14 +317,14 @@ export function PrepopulationSettings({
             )}
 
             {/* Coming Soon Messages */}
-            {prepopulation.source === 'profile' && (
+            {prepopulation.source === "profile" && (
               <div className="rounded border border-orange-200 bg-orange-50 p-3 text-orange-900 text-sm">
                 <strong>Coming Soon:</strong> User profile pre-population will
                 be available in a future update.
               </div>
             )}
 
-            {prepopulation.source === 'previous' && (
+            {prepopulation.source === "previous" && (
               <div className="rounded border border-orange-200 bg-orange-50 p-3 text-orange-900 text-sm">
                 <strong>Coming Soon:</strong> Previous submission pre-population
                 will be available in a future update.

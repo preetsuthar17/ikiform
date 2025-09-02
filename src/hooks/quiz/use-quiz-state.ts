@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useState } from 'react';
-import type { FormSchema, FormSubmission } from '@/lib/database';
+import { useCallback, useEffect, useState } from "react";
+import type { FormSchema, FormSubmission } from "@/lib/database";
 import {
   calculateQuizScore,
   generateQuizResultMessage,
   type QuizResult,
-} from '@/lib/quiz/scoring';
+} from "@/lib/quiz/scoring";
 
 export interface QuizState {
   isQuizMode: boolean;

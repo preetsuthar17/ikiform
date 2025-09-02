@@ -1,9 +1,9 @@
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
-import { FormBuilderSkeleton } from '@/components/form-builder/form-builder-skeleton';
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import { FormBuilderSkeleton } from "@/components/form-builder/form-builder-skeleton";
 
 const DemoFormBuilder = dynamic(
-  () => import('@/components/form-builder/form-builder/DemoFormBuilder'),
+  () => import("@/components/form-builder/form-builder/DemoFormBuilder"),
   {
     loading: () => <FormBuilderSkeleton />,
   }

@@ -1,4 +1,4 @@
-import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
+import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import {
   ChevronDown,
   EyeOff,
@@ -6,24 +6,24 @@ import {
   Lock,
   Plus,
   Trash2,
-} from 'lucide-react';
-import React from 'react';
+} from "lucide-react";
+import React from "react";
 
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { PALETTE_DRAG_TYPE } from '../../field-palette/components/FieldItem';
-import { FIELD_TYPES } from '../../field-palette/constants';
+} from "@/components/ui/dropdown-menu";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { PALETTE_DRAG_TYPE } from "../../field-palette/components/FieldItem";
+import { FIELD_TYPES } from "../../field-palette/constants";
 
-import { FormFieldRenderer } from '../../form-field-renderer';
+import { FormFieldRenderer } from "../../form-field-renderer";
 
-import type { FormFieldsContainerProps } from '../types';
+import type { FormFieldsContainerProps } from "../types";
 
 export function FormFieldsContainer({
   fields,
@@ -43,9 +43,9 @@ export function FormFieldsContainer({
 
     if (
       result.type === PALETTE_DRAG_TYPE ||
-      result.source.droppableId === 'palette-droppable'
+      result.source.droppableId === "palette-droppable"
     ) {
-      const type = result.draggableId.replace('palette-', '');
+      const type = result.draggableId.replace("palette-", "");
       if (onAddField) onAddField(type);
       return;
     }
@@ -62,7 +62,7 @@ export function FormFieldsContainer({
         <Button
           className="h-42 w-full border-2 border-dashed transition-colors hover:border-primary/50 hover:bg-accent/10"
           style={{
-            borderRadius: '1.2rem',
+            borderRadius: "1.2rem",
           }}
           variant="outline"
         >
@@ -78,7 +78,7 @@ export function FormFieldsContainer({
               key={fieldType.type}
               onClick={() =>
                 onAddField?.(
-                  fieldType.type as (typeof FIELD_TYPES)[number]['type']
+                  fieldType.type as (typeof FIELD_TYPES)[number]["type"]
                 )
               }
             >
@@ -103,12 +103,12 @@ export function FormFieldsContainer({
           <div className="h-8 w-8 rounded-card bg-muted" />
         </div>
         <p className="font-medium text-foreground text-lg">
-          {isMultiStep ? 'No fields in this step' : 'No fields added yet'}
+          {isMultiStep ? "No fields in this step" : "No fields added yet"}
         </p>
         <p className="text-muted-foreground text-sm">
           {isMultiStep
-            ? 'Add fields from the palette to this step'
-            : 'Add fields from the left panel to start building your form'}
+            ? "Add fields from the palette to this step"
+            : "Add fields from the left panel to start building your form"}
         </p>
         {onAddField && <AddFieldButton />}
       </div>
@@ -136,9 +136,9 @@ export function FormFieldsContainer({
                       className="group relative"
                       onKeyDown={(e) => {
                         if (
-                          (e.key === 'Enter' ||
-                            e.key === 'Backspace' ||
-                            e.key === 'Delete') &&
+                          (e.key === "Enter" ||
+                            e.key === "Backspace" ||
+                            e.key === "Delete") &&
                           (e.target instanceof HTMLInputElement ||
                             e.target instanceof HTMLTextAreaElement)
                         ) {
@@ -148,17 +148,17 @@ export function FormFieldsContainer({
                     >
                       <Card
                         className={`rounded-card border bg-card p-4 transition-all duration-200 ${
-                          snapshot.isDragging ? 'ring-2 ring-ring/20' : ''
+                          snapshot.isDragging ? "ring-2 ring-ring/20" : ""
                         } ${
                           selectedFieldId === field.id
-                            ? 'border-primary bg-accent/10 ring-2 ring-primary/20'
-                            : 'border-border hover:bg-accent/5'
+                            ? "border-primary bg-accent/10 ring-2 ring-primary/20"
+                            : "border-border hover:bg-accent/5"
                         } ${
                           showLogicCues && isHidden
-                            ? 'pointer-events-none relative border-2 border-muted border-dashed opacity-50'
+                            ? "pointer-events-none relative border-2 border-muted border-dashed opacity-50"
                             : showLogicCues && isDisabled
-                              ? 'relative opacity-60'
-                              : ''
+                              ? "relative opacity-60"
+                              : ""
                         }`}
                         onClick={() =>
                           onFieldSelect(
@@ -207,7 +207,7 @@ export function FormFieldsContainer({
                             onFieldValueChange(field.id, value)
                           }
                           value={
-                            typeof formData[field.id] === 'object'
+                            typeof formData[field.id] === "object"
                               ? (formData[field.id].text ??
                                 JSON.stringify(formData[field.id]))
                               : formData[field.id]

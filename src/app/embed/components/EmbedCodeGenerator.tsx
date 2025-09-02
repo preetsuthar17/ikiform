@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { Check, Code2, Copy, FileText, Globe, Shield, Zap } from 'lucide-react';
-import { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button-base';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import type { EmbedConfig } from './EmbedCustomizer';
+import { Check, Code2, Copy, FileText, Globe, Shield, Zap } from "lucide-react";
+import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button-base";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { EmbedConfig } from "./EmbedCustomizer";
 
 interface EmbedCodeGeneratorProps {
   config: EmbedConfig;
@@ -13,21 +13,21 @@ interface EmbedCodeGeneratorProps {
   formId: string;
 }
 
-type EmbedMode = 'html' | 'react' | 'nextjs' | 'vue' | 'wordpress';
+type EmbedMode = "html" | "react" | "nextjs" | "vue" | "wordpress";
 
 export default function EmbedCodeGenerator({
   config,
   embedUrl,
   formId,
 }: EmbedCodeGeneratorProps) {
-  const [embedMode, setEmbedMode] = useState<EmbedMode>('html');
+  const [embedMode, setEmbedMode] = useState<EmbedMode>("html");
   const [copied, setCopied] = useState(false);
 
   const generateIframeStyles = () => {
     const styles = [
-      `width: ${config.responsive ? '100%' : config.width}`,
+      `width: ${config.responsive ? "100%" : config.width}`,
       `height: ${config.height}`,
-      `border: ${config.showBorder ? `${config.borderWidth}px solid ${config.borderColor}` : 'none'}`,
+      `border: ${config.showBorder ? `${config.borderWidth}px solid ${config.borderColor}` : "none"}`,
       `border-radius: ${config.borderRadius}px`,
     ];
 
@@ -35,11 +35,11 @@ export default function EmbedCodeGenerator({
       styles.push(`background-color: ${config.backgroundColor}`);
     }
 
-    return styles.join('; ');
+    return styles.join("; ");
   };
 
   const generateContainerStyles = () => {
-    if (config.padding === 0) return '';
+    if (config.padding === 0) return "";
     return `padding: ${config.padding}px;`;
   };
 
@@ -47,7 +47,7 @@ export default function EmbedCodeGenerator({
     const containerStyle = generateContainerStyles();
     const iframeStyle = generateIframeStyles();
 
-    let code = '';
+    let code = "";
 
     if (containerStyle) {
       code += `<div style="${containerStyle}">\n  `;
@@ -65,10 +65,10 @@ export default function EmbedCodeGenerator({
       code += `\n  frameborder="0"`;
     }
 
-    code += '\n></iframe>';
+    code += "\n></iframe>";
 
     if (containerStyle) {
-      code += '\n</div>';
+      code += "\n</div>";
     }
 
     return code;
@@ -79,15 +79,15 @@ export default function EmbedCodeGenerator({
     const iframeStyle = generateIframeStyles();
 
     let code = `import React from 'react';\n\n`;
-    code += 'export default function EmbeddedForm() {\n';
-    code += '  const iframeStyle = {\n';
+    code += "export default function EmbeddedForm() {\n";
+    code += "  const iframeStyle = {\n";
 
     const styleObject: Record<string, string> = {
-      width: config.responsive ? '100%' : config.width,
+      width: config.responsive ? "100%" : config.width,
       height: config.height,
       border: config.showBorder
         ? `${config.borderWidth}px solid ${config.borderColor}`
-        : 'none',
+        : "none",
       borderRadius: `${config.borderRadius}px`,
     };
 
@@ -99,20 +99,20 @@ export default function EmbedCodeGenerator({
       code += `    ${key}: '${value}',\n`;
     });
 
-    code += '  };\n\n';
+    code += "  };\n\n";
 
     if (containerStyle) {
-      code += '  const containerStyle = {\n';
+      code += "  const containerStyle = {\n";
       code += `    padding: '${config.padding}px',\n`;
-      code += '  };\n\n';
+      code += "  };\n\n";
     }
 
-    code += '  return (\n';
+    code += "  return (\n";
 
     if (containerStyle) {
-      code += '    <div style={containerStyle}>\n      ';
+      code += "    <div style={containerStyle}>\n      ";
     } else {
-      code += '    ';
+      code += "    ";
     }
 
     code += `<iframe
@@ -127,13 +127,13 @@ export default function EmbedCodeGenerator({
       code += `\n        frameBorder="0"`;
     }
 
-    code += '\n      />';
+    code += "\n      />";
 
     if (containerStyle) {
-      code += '\n    </div>';
+      code += "\n    </div>";
     }
 
-    code += '\n  );\n}';
+    code += "\n  );\n}";
 
     return code;
   };
@@ -141,19 +141,19 @@ export default function EmbedCodeGenerator({
   const generateNextjsCode = () => {
     let code = `'use client';\n\n`;
     code += `import { CSSProperties } from 'react';\n\n`;
-    code += 'interface EmbeddedFormProps {\n';
-    code += '  className?: string;\n';
-    code += '  style?: CSSProperties;\n';
-    code += '}\n\n';
+    code += "interface EmbeddedFormProps {\n";
+    code += "  className?: string;\n";
+    code += "  style?: CSSProperties;\n";
+    code += "}\n\n";
     code +=
-      'export default function EmbeddedForm({ className, style }: EmbeddedFormProps) {\n';
+      "export default function EmbeddedForm({ className, style }: EmbeddedFormProps) {\n";
 
     const styleObject: Record<string, string> = {
-      width: config.responsive ? '100%' : config.width,
+      width: config.responsive ? "100%" : config.width,
       height: config.height,
       border: config.showBorder
         ? `${config.borderWidth}px solid ${config.borderColor}`
-        : 'none',
+        : "none",
       borderRadius: `${config.borderRadius}px`,
     };
 
@@ -161,25 +161,25 @@ export default function EmbedCodeGenerator({
       styleObject.backgroundColor = config.backgroundColor;
     }
 
-    code += '  const iframeStyle: CSSProperties = {\n';
+    code += "  const iframeStyle: CSSProperties = {\n";
     Object.entries(styleObject).forEach(([key, value]) => {
       code += `    ${key}: '${value}',\n`;
     });
-    code += '    ...style,\n';
-    code += '  };\n\n';
+    code += "    ...style,\n";
+    code += "  };\n\n";
 
     if (config.padding > 0) {
-      code += '  const containerStyle: CSSProperties = {\n';
+      code += "  const containerStyle: CSSProperties = {\n";
       code += `    padding: '${config.padding}px',\n`;
-      code += '  };\n\n';
+      code += "  };\n\n";
     }
 
-    code += '  return (\n';
+    code += "  return (\n";
 
     if (config.padding > 0) {
-      code += '    <div style={containerStyle} className={className}>\n      ';
+      code += "    <div style={containerStyle} className={className}>\n      ";
     } else {
-      code += '    ';
+      code += "    ";
     }
 
     code += `<iframe
@@ -194,24 +194,24 @@ export default function EmbedCodeGenerator({
       code += `\n        frameBorder="0"`;
     }
 
-    code += '\n      />';
+    code += "\n      />";
 
     if (config.padding > 0) {
-      code += '\n    </div>';
+      code += "\n    </div>";
     }
 
-    code += '\n  );\n}';
+    code += "\n  );\n}";
 
     return code;
   };
 
   const generateVueCode = () => {
-    let code = '<template>\n';
+    let code = "<template>\n";
 
     if (config.padding > 0) {
       code += `  <div :style="containerStyle">\n    `;
     } else {
-      code += '  ';
+      code += "  ";
     }
 
     code += `<iframe
@@ -226,22 +226,22 @@ export default function EmbedCodeGenerator({
       code += `\n      frameborder="0"`;
     }
 
-    code += '\n    />';
+    code += "\n    />";
 
     if (config.padding > 0) {
-      code += '\n  </div>';
+      code += "\n  </div>";
     }
 
-    code += '\n</template>\n\n';
-    code += '<script setup>\n';
+    code += "\n</template>\n\n";
+    code += "<script setup>\n";
     code += `const embedUrl = '${embedUrl}';\n\n`;
 
     const styleObject: Record<string, string> = {
-      width: config.responsive ? '100%' : config.width,
+      width: config.responsive ? "100%" : config.width,
       height: config.height,
       border: config.showBorder
         ? `${config.borderWidth}px solid ${config.borderColor}`
-        : 'none',
+        : "none",
       borderRadius: `${config.borderRadius}px`,
     };
 
@@ -249,19 +249,19 @@ export default function EmbedCodeGenerator({
       styleObject.backgroundColor = config.backgroundColor;
     }
 
-    code += 'const iframeStyle = {\n';
+    code += "const iframeStyle = {\n";
     Object.entries(styleObject).forEach(([key, value]) => {
       code += `  '${key}': '${value}',\n`;
     });
-    code += '};\n';
+    code += "};\n";
 
     if (config.padding > 0) {
-      code += '\nconst containerStyle = {\n';
+      code += "\nconst containerStyle = {\n";
       code += `  padding: '${config.padding}px',\n`;
-      code += '};\n';
+      code += "};\n";
     }
 
-    code += '</script>';
+    code += "</script>";
 
     return code;
   };
@@ -269,9 +269,9 @@ export default function EmbedCodeGenerator({
   const generateWordPressCode = () => {
     const shortcode = `[ikiform_embed id="${formId}" width="${config.width}" height="${config.height}"]`;
 
-    let code = '<!-- WordPress Shortcode -->\n';
+    let code = "<!-- WordPress Shortcode -->\n";
     code += `${shortcode}\n\n`;
-    code += '<!-- Or use HTML directly in a Custom HTML block -->\n';
+    code += "<!-- Or use HTML directly in a Custom HTML block -->\n";
     code += generateHtmlCode();
 
     return code;
@@ -279,15 +279,15 @@ export default function EmbedCodeGenerator({
 
   const getCode = () => {
     switch (embedMode) {
-      case 'html':
+      case "html":
         return generateHtmlCode();
-      case 'react':
+      case "react":
         return generateReactCode();
-      case 'nextjs':
+      case "nextjs":
         return generateNextjsCode();
-      case 'vue':
+      case "vue":
         return generateVueCode();
-      case 'wordpress':
+      case "wordpress":
         return generateWordPressCode();
       default:
         return generateHtmlCode();
@@ -300,30 +300,30 @@ export default function EmbedCodeGenerator({
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy code:', err);
+      console.error("Failed to copy code:", err);
     }
   };
 
   const embedModes = [
     {
-      id: 'html',
-      name: 'HTML',
+      id: "html",
+      name: "HTML",
       icon: Globe,
-      description: 'Universal HTML iframe',
+      description: "Universal HTML iframe",
     },
-    { id: 'react', name: 'React', icon: Code2, description: 'React component' },
+    { id: "react", name: "React", icon: Code2, description: "React component" },
     {
-      id: 'nextjs',
-      name: 'Next.js',
+      id: "nextjs",
+      name: "Next.js",
       icon: Code2,
-      description: 'Next.js component',
+      description: "Next.js component",
     },
-    { id: 'vue', name: 'Vue', icon: Code2, description: 'Vue.js component' },
+    { id: "vue", name: "Vue", icon: Code2, description: "Vue.js component" },
     {
-      id: 'wordpress',
-      name: 'WordPress',
+      id: "wordpress",
+      name: "WordPress",
       icon: FileText,
-      description: 'WordPress shortcode',
+      description: "WordPress shortcode",
     },
   ];
 
@@ -336,7 +336,7 @@ export default function EmbedCodeGenerator({
         <Button
           className="gap-2"
           onClick={copyToClipboard}
-          variant={copied ? 'outline' : 'default'}
+          variant={copied ? "outline" : "default"}
         >
           {copied ? (
             <>
@@ -360,8 +360,8 @@ export default function EmbedCodeGenerator({
             <Card
               className={`hover: cursor-pointer transition-all ${
                 embedMode === mode.id
-                  ? 'border-primary bg-primary/5'
-                  : 'hover:border-primary/50'
+                  ? "border-primary bg-primary/5"
+                  : "hover:border-primary/50"
               }`}
               key={mode.id}
               onClick={() => setEmbedMode(mode.id as EmbedMode)}
@@ -416,13 +416,13 @@ export default function EmbedCodeGenerator({
         </CardHeader>
         <CardContent>
           <div className="flex flex-col gap-2 text-muted-foreground text-sm">
-            {embedMode === 'html' && (
+            {embedMode === "html" && (
               <p>
                 Copy the HTML code and paste it directly into your website where
                 you want the form to appear.
               </p>
             )}
-            {embedMode === 'react' && (
+            {embedMode === "react" && (
               <div>
                 <p>1. Copy the React component code</p>
                 <p>
@@ -431,7 +431,7 @@ export default function EmbedCodeGenerator({
                 <p>3. Import and use it in your React application</p>
               </div>
             )}
-            {embedMode === 'nextjs' && (
+            {embedMode === "nextjs" && (
               <div>
                 <p>1. Copy the Next.js component code</p>
                 <p>2. Save it in your components directory</p>
@@ -442,14 +442,14 @@ export default function EmbedCodeGenerator({
                 </p>
               </div>
             )}
-            {embedMode === 'vue' && (
+            {embedMode === "vue" && (
               <div>
                 <p>1. Copy the Vue component code</p>
                 <p>2. Save it as a .vue file in your components directory</p>
                 <p>3. Import and use it in your Vue application</p>
               </div>
             )}
-            {embedMode === 'wordpress' && (
+            {embedMode === "wordpress" && (
               <div>
                 <p>1. Use the shortcode in any post, page, or widget</p>
                 <p>

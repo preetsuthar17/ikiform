@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
-import type { FormField } from '@/lib/database';
-import { ApiEngine } from '@/lib/prepopulation/engines/ApiEngine';
-import { UrlEngine } from '@/lib/prepopulation/engines/UrlEngine';
-import type { PrepopulationResult } from '@/lib/prepopulation/types';
+import { useEffect, useMemo, useState } from "react";
+import type { FormField } from "@/lib/database";
+import { ApiEngine } from "@/lib/prepopulation/engines/ApiEngine";
+import { UrlEngine } from "@/lib/prepopulation/engines/UrlEngine";
+import type { PrepopulationResult } from "@/lib/prepopulation/types";
 
 interface PrepopulationData {
   fieldId: string;
@@ -34,7 +34,7 @@ export function usePrepopulation(fields: FormField[]): UsePrepopulationResult {
         (field) =>
           `${field.id}-${field.prepopulation!.source}-${JSON.stringify(field.prepopulation!.config)}`
       )
-      .join('|');
+      .join("|");
   }, [fields]);
 
   useEffect(() => {
@@ -69,49 +69,49 @@ export function usePrepopulation(fields: FormField[]): UsePrepopulationResult {
 
           try {
             switch (prepopConfig.source) {
-              case 'url':
+              case "url":
                 result = await urlEngine.getValue(prepopConfig.config);
                 break;
-              case 'api':
+              case "api":
                 result = await apiEngine.getValue(prepopConfig.config);
                 break;
-              case 'profile':
+              case "profile":
                 result = {
                   success: false,
-                  error: 'Profile prepopulation not implemented yet',
-                  source: 'profile',
+                  error: "Profile prepopulation not implemented yet",
+                  source: "profile",
                   executionTime: 0,
                 };
                 break;
-              case 'previous':
+              case "previous":
                 result = {
                   success: false,
                   error:
-                    'Previous submission prepopulation not implemented yet',
-                  source: 'previous',
+                    "Previous submission prepopulation not implemented yet",
+                  source: "previous",
                   executionTime: 0,
                 };
                 break;
-              case 'template':
+              case "template":
                 result = {
                   success: false,
-                  error: 'Template prepopulation not implemented yet',
-                  source: 'template',
+                  error: "Template prepopulation not implemented yet",
+                  source: "template",
                   executionTime: 0,
                 };
                 break;
               default:
                 result = {
                   success: false,
-                  error: 'Unknown prepopulation source',
-                  source: 'unknown',
+                  error: "Unknown prepopulation source",
+                  source: "unknown",
                   executionTime: 0,
                 };
             }
           } catch (error) {
             result = {
               success: false,
-              error: error instanceof Error ? error.message : 'Unknown error',
+              error: error instanceof Error ? error.message : "Unknown error",
               source: prepopConfig.source,
               executionTime: 0,
             };
@@ -130,7 +130,7 @@ export function usePrepopulation(fields: FormField[]): UsePrepopulationResult {
       const results = await Promise.allSettled(prepopulationPromises);
 
       results.forEach((result: PromiseSettledResult<PrepopulationData>) => {
-        if (result.status === 'fulfilled') {
+        if (result.status === "fulfilled") {
           const prepopData = result.value;
 
           if (
@@ -144,7 +144,7 @@ export function usePrepopulation(fields: FormField[]): UsePrepopulationResult {
             errorMap[prepopData.fieldId] = prepopData.error;
           }
         } else {
-          console.error('Prepopulation promise rejected:', result.reason);
+          console.error("Prepopulation promise rejected:", result.reason);
         }
       });
 
@@ -168,7 +168,7 @@ export function usePrepopulation(fields: FormField[]): UsePrepopulationResult {
 export function useUrlPrepopulation(fields: FormField[]) {
   const urlFields = fields.filter(
     (field) =>
-      field.prepopulation?.enabled && field.prepopulation.source === 'url'
+      field.prepopulation?.enabled && field.prepopulation.source === "url"
   );
 
   const { prepopulatedData, loading, errors } = usePrepopulation(urlFields);
@@ -179,7 +179,7 @@ export function useUrlPrepopulation(fields: FormField[]) {
 export function useApiPrepopulation(fields: FormField[]) {
   const apiFields = fields.filter(
     (field) =>
-      field.prepopulation?.enabled && field.prepopulation.source === 'api'
+      field.prepopulation?.enabled && field.prepopulation.source === "api"
   );
 
   const { prepopulatedData, loading, errors } = usePrepopulation(apiFields);

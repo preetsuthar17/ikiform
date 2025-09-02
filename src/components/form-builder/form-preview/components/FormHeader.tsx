@@ -1,11 +1,11 @@
-import React from 'react';
-import { getInternalFormTitle } from '@/lib/utils/form-utils';
-import type { FormHeaderProps } from '../types';
-import { EditableField } from './EditableField';
+import React from "react";
+import { getInternalFormTitle } from "@/lib/utils/form-utils";
+import type { FormHeaderProps } from "../types";
+import { EditableField } from "./EditableField";
 
 export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
   const handleTitleUpdate = (title: string) => {
-    onFormSettingsUpdate?.({ title: title || '' });
+    onFormSettingsUpdate?.({ title: title || "" });
   };
 
   const handleDescriptionUpdate = (description: string) => {
@@ -25,7 +25,7 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
         inputClassName="text-3xl font-bold bg-background w-full"
         onSave={handleTitleUpdate}
         placeholder="Click to add title..."
-        value={schema.settings?.title || ''}
+        value={schema.settings?.title || ""}
       >
         <div className="flex flex-col gap-1">
           <h1 className="truncate font-bold text-3xl text-foreground">
@@ -47,10 +47,10 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
         onSave={handleDescriptionUpdate}
         placeholder="Click to add a description..."
         rows={Math.max(
-          (schema.settings?.description || '').split('\n').length || 1,
+          (schema.settings?.description || "").split("\n").length || 1,
           1
         )}
-        value={schema.settings?.description || ''}
+        value={schema.settings?.description || ""}
       >
         {schema.settings?.description ? (
           <p className="whitespace-pre-wrap text-muted-foreground">
