@@ -8,12 +8,11 @@ import {
 } from "next/font/google";
 import "./globals.css";
 
+import { Analytics } from "@vercel/analytics/next";
 import CrispController from "@/components/other/CrispController";
 import { LightThemeEnforcer } from "@/components/other/light-theme-enforcer";
 import { Toaster } from "@/components/ui/toast";
 import ConditionalLayout from "./conditional-layout";
-import { Analytics } from "@vercel/analytics/next"
-
 
 const inter = Inter({
   variable: "--font-inter",
