@@ -1,12 +1,15 @@
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 import React from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { FIELD_TYPE_CONFIGS, FIELD_CATEGORIES } from "@/lib/fields/field-config";
+import {
+  FIELD_CATEGORIES,
+  FIELD_TYPE_CONFIGS,
+} from "@/lib/fields/field-config";
 
-import {PALETTE_CONFIG } from "../constants";
+import { PALETTE_CONFIG } from "../constants";
 
 import type { FieldPaletteProps } from "../types";
-import { FieldItem,} from "./FieldItem";
+import { FieldItem } from "./FieldItem";
 import { PaletteHeader } from "./PaletteHeader";
 
 export function FullPalette({
@@ -21,7 +24,7 @@ export function FullPalette({
             title={PALETTE_CONFIG.HEADER.TITLE}
           />
           {Object.entries(FIELD_CATEGORIES).map(([key, title]) => {
-            const fields = FIELD_TYPE_CONFIGS.filter(f => f.category === key);
+            const fields = FIELD_TYPE_CONFIGS.filter((f) => f.category === key);
             const colCount = 2;
             const columns = Array.from({ length: colCount }, (_, colIdx) =>
               fields.filter((_, idx) => idx % colCount === colIdx)
@@ -45,7 +48,7 @@ export function FullPalette({
                       >
                         {columns.map((col, colIdx) => (
                           <div className="flex flex-col gap-2" key={colIdx}>
-                            {col.map(f => (
+                            {col.map((f) => (
                               <FieldItem
                                 fieldType={{
                                   type: f.type,
@@ -53,7 +56,9 @@ export function FullPalette({
                                   description: f.description,
                                   icon: f.icon,
                                 }}
-                                index={fields.findIndex(x => x.type === f.type)}
+                                index={fields.findIndex(
+                                  (x) => x.type === f.type
+                                )}
                                 key={f.type}
                                 onAddField={onAddField}
                               />

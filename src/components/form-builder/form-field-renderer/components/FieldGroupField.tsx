@@ -50,7 +50,6 @@ export function FieldGroupField({
     });
   };
 
-
   return (
     <div className={`${getLayoutClass()} ${getSpacingClass()}`}>
       {groupFields.map((groupField) => {
@@ -60,16 +59,20 @@ export function FieldGroupField({
           <div className="flex-1" key={groupField.id}>
             <div className="flex flex-col gap-2">
               {groupField.label && (
-                <label className="text-sm font-medium text-foreground">
+                <label className="font-medium text-foreground text-sm">
                   {groupField.label}
-                  {groupField.required && <span className="text-destructive ml-1">*</span>}
+                  {groupField.required && (
+                    <span className="ml-1 text-destructive">*</span>
+                  )}
                 </label>
               )}
               {createFieldComponent(
                 groupField,
                 fieldValue,
                 (fieldValue) => handleFieldChange(groupField.id, fieldValue),
-                typeof error === "object" && error !== null && groupField.id in error
+                typeof error === "object" &&
+                  error !== null &&
+                  groupField.id in error
                   ? (error as Record<string, string | undefined>)[groupField.id]
                   : undefined,
                 undefined,

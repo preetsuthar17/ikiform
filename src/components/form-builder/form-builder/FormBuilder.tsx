@@ -13,6 +13,7 @@ import { toast } from "@/hooks/use-toast";
 import type { FormBlock, FormField, FormSchema } from "@/lib/database";
 
 import { formsDb } from "@/lib/database";
+import { createFieldFromType } from "@/lib/fields/field-config";
 import { Loader } from "../../ui/loader";
 import { FieldPalette } from "../field-palette";
 import { FieldSettingsPanel } from "../field-settings-panel";
@@ -22,7 +23,6 @@ import { FormBuilderHeader } from "./components/FormBuilderHeader";
 import { FormBuilderModals } from "./components/FormBuilderModals";
 import { FormBuilderPanels } from "./components/FormBuilderPanels";
 import { UnsavedChangesIndicator } from "./components/UnsavedChangesIndicator";
-
 import { DRAFT_KEYS } from "./constants";
 import { useFormBuilder } from "./hooks/useFormBuilder";
 import type { FormBuilderProps } from "./types";
@@ -34,7 +34,6 @@ import {
   removeFieldFromSchema,
   updateFieldInSchema,
 } from "./utils";
-import { createFieldFromType } from "@/lib/fields/field-config";
 
 function useIsMobile() {
   const [isMobile, setIsMobile] = React.useState(false);

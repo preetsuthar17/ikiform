@@ -25,18 +25,19 @@ const collapsibleVariants = cva("w-full", {
 });
 
 const collapsibleTriggerVariants = cva(
-  "flex w-full items-center justify-between transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 mb-2",
+  "mb-2 flex w-full items-center justify-between transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default: "rounded hover:bg-accent hover:text-accent-foreground",
-        outline: "rounded hover:bg-accent hover:text-accent-foreground px-3 py-2",
-        ghost: "hover:bg-accent hover:text-accent-foreground rounded px-2 py-1",
+        outline:
+          "rounded px-3 py-2 hover:bg-accent hover:text-accent-foreground",
+        ghost: "rounded px-2 py-1 hover:bg-accent hover:text-accent-foreground",
       },
       size: {
-        sm: "text-sm px-2 py-1",
+        sm: "px-2 py-1 text-sm",
         default: "px-3 py-2",
-        lg: "text-lg px-4 py-3",
+        lg: "px-4 py-3 text-lg",
       },
     },
     defaultVariants: {
@@ -65,7 +66,8 @@ const collapsibleContentVariants = cva("overflow-hidden", {
   },
 });
 
-export interface CollapsibleProps extends VariantProps<typeof collapsibleVariants> {
+export interface CollapsibleProps
+  extends VariantProps<typeof collapsibleVariants> {
   className?: string;
   children?: React.ReactNode;
   open?: boolean;
@@ -105,9 +107,9 @@ const CollapsibleTrigger = React.forwardRef<
   CollapsibleTriggerProps
 >(({ className, variant, size, children, asChild = false, ...props }, ref) => (
   <CollapsiblePrimitive.Trigger
+    asChild={asChild}
     className={cn(collapsibleTriggerVariants({ variant, size }), className)}
     ref={ref}
-    asChild={asChild}
     {...props}
   >
     {children}
@@ -124,7 +126,9 @@ const CollapsibleContent = React.forwardRef<
     ref={ref}
     {...props}
   >
-    <div className={cn(collapsibleContentVariants({ variant, size }), className)}>
+    <div
+      className={cn(collapsibleContentVariants({ variant, size }), className)}
+    >
       {children}
     </div>
   </CollapsiblePrimitive.Content>

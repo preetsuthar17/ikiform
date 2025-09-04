@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import type { FormBlock, FormField, FormSchema } from "@/lib/database";
+import { createFieldFromType } from "@/lib/fields/field-config";
 import { createDefaultFormSchema } from "@/lib/forms/form-defaults";
 import { FormBuilderHeader } from "./components/FormBuilderHeader";
 import { FormBuilderModals } from "./components/FormBuilderModals";
@@ -15,7 +16,6 @@ import {
   removeFieldFromSchema,
   updateFieldInSchema,
 } from "./utils";
-import { createFieldFromType } from "@/lib/fields/field-config";
 
 export default function DemoFormBuilder() {
   const [formSchema, setFormSchema] = useState<FormSchema>(() =>

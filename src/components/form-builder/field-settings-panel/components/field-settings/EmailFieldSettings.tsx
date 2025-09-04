@@ -14,7 +14,10 @@ export function EmailFieldSettings({
       <h3 className="font-medium text-card-foreground">Email Field Settings</h3>
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <Label className="text-card-foreground" htmlFor="email-allowed-domains">
+          <Label
+            className="text-card-foreground"
+            htmlFor="email-allowed-domains"
+          >
             Allowed Domains (comma-separated)
           </Label>
           <Input
@@ -25,18 +28,23 @@ export function EmailFieldSettings({
                 emailValidation: {
                   ...field.settings?.emailValidation,
                   allowedDomains: e.target.value
-                    ? e.target.value.split(",").map(d => d.trim())
+                    ? e.target.value.split(",").map((d) => d.trim())
                     : undefined,
                 },
               })
             }
             placeholder="gmail.com, company.com"
             type="text"
-            value={field.settings?.emailValidation?.allowedDomains?.join(", ") || ""}
+            value={
+              field.settings?.emailValidation?.allowedDomains?.join(", ") || ""
+            }
           />
         </div>
         <div className="flex flex-col gap-2">
-          <Label className="text-card-foreground" htmlFor="email-blocked-domains">
+          <Label
+            className="text-card-foreground"
+            htmlFor="email-blocked-domains"
+          >
             Blocked Domains (comma-separated)
           </Label>
           <Input
@@ -47,14 +55,16 @@ export function EmailFieldSettings({
                 emailValidation: {
                   ...field.settings?.emailValidation,
                   blockedDomains: e.target.value
-                    ? e.target.value.split(",").map(d => d.trim())
+                    ? e.target.value.split(",").map((d) => d.trim())
                     : undefined,
                 },
               })
             }
             placeholder="tempmail.com, spam.com"
             type="text"
-            value={field.settings?.emailValidation?.blockedDomains?.join(", ") || ""}
+            value={
+              field.settings?.emailValidation?.blockedDomains?.join(", ") || ""
+            }
           />
         </div>
         <div className="flex items-center gap-2">
@@ -76,7 +86,10 @@ export function EmailFieldSettings({
           </Label>
         </div>
         <div className="flex flex-col gap-2">
-          <Label className="text-card-foreground" htmlFor="email-custom-message">
+          <Label
+            className="text-card-foreground"
+            htmlFor="email-custom-message"
+          >
             Custom Validation Message
           </Label>
           <Input
@@ -92,7 +105,9 @@ export function EmailFieldSettings({
             }
             placeholder="Please enter a valid email address"
             type="text"
-            value={field.settings?.emailValidation?.customValidationMessage || ""}
+            value={
+              field.settings?.emailValidation?.customValidationMessage || ""
+            }
           />
         </div>
       </div>

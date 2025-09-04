@@ -22,7 +22,9 @@ export function DateFieldSettings({
             id="date-min"
             onChange={(e) =>
               onUpdateSettings({
-                min: e.target.value ? new Date(e.target.value).getTime() : undefined,
+                min: e.target.value
+                  ? new Date(e.target.value).getTime()
+                  : undefined,
               })
             }
             type="date"
@@ -42,7 +44,9 @@ export function DateFieldSettings({
             id="date-max"
             onChange={(e) =>
               onUpdateSettings({
-                max: e.target.value ? new Date(e.target.value).getTime() : undefined,
+                max: e.target.value
+                  ? new Date(e.target.value).getTime()
+                  : undefined,
               })
             }
             type="date"
@@ -62,13 +66,17 @@ export function DateFieldSettings({
             id="date-default"
             onChange={(e) =>
               onUpdateSettings({
-                defaultValue: e.target.value ? new Date(e.target.value).toISOString() : undefined,
+                defaultValue: e.target.value
+                  ? new Date(e.target.value).toISOString()
+                  : undefined,
               })
             }
             type="date"
             value={
               field.settings?.defaultValue
-                ? new Date(field.settings.defaultValue).toISOString().slice(0, 10)
+                ? new Date(field.settings.defaultValue)
+                    .toISOString()
+                    .slice(0, 10)
                 : ""
             }
           />

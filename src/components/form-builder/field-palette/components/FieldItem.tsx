@@ -21,10 +21,10 @@ export function FieldItem({
         >
           <Card
             className="group cursor-pointer border-black transition-all duration-200 hover:bg-accent"
-            style={{
-              padding: '18px'
-            }}
             onClick={() => onAddField(fieldType.type)}
+            style={{
+              padding: "18px",
+            }}
           >
             <div className="flex items-center gap-3">
               <div className="flex flex-shrink-0 items-center justify-center rounded-card bg-accent p-2 transition-colors duration-200 group-hover:bg-primary/10">

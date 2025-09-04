@@ -10,7 +10,9 @@ export function NumberFieldSettings({
 }: FieldSettingsProps) {
   return (
     <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
-      <h3 className="font-medium text-card-foreground">Number Field Settings</h3>
+      <h3 className="font-medium text-card-foreground">
+        Number Field Settings
+      </h3>
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           <Label className="text-card-foreground" htmlFor="number-min">

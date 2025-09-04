@@ -1,8 +1,8 @@
 import React from "react";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import type { FieldSettingsProps } from "./types";
 import { OptionsSettings } from "../OptionsSettings";
+import type { FieldSettingsProps } from "./types";
 
 export function SelectFieldSettings({
   field,
@@ -19,5 +19,3 @@ export function SelectFieldSettings({
     </Card>
   );
 }
-
-

@@ -1,3 +1,4 @@
+import type { LucideIcon } from "lucide-react";
 import {
   AlertTriangle,
   BarChart3,
@@ -22,7 +23,6 @@ import {
   Upload,
 } from "lucide-react";
 import type { FormField } from "@/lib/database";
-import type { LucideIcon } from "lucide-react";
 
 export interface FieldTypeConfig {
   type: FormField["type"];
@@ -281,16 +281,20 @@ export const FIELD_TYPE_CONFIGS: FieldTypeConfig[] = [
 ];
 
 // Helper functions
-export function getFieldTypeConfig(type: FormField["type"]): FieldTypeConfig | undefined {
-  return FIELD_TYPE_CONFIGS.find(config => config.type === type);
+export function getFieldTypeConfig(
+  type: FormField["type"]
+): FieldTypeConfig | undefined {
+  return FIELD_TYPE_CONFIGS.find((config) => config.type === type);
 }
 
-export function getFieldTypesByCategory(category: FieldTypeConfig["category"]): FieldTypeConfig[] {
-  return FIELD_TYPE_CONFIGS.filter(config => config.category === category);
+export function getFieldTypesByCategory(
+  category: FieldTypeConfig["category"]
+): FieldTypeConfig[] {
+  return FIELD_TYPE_CONFIGS.filter((config) => config.category === category);
 }
 
 export function getGroupableFieldTypes(): FieldTypeConfig[] {
-  return FIELD_TYPE_CONFIGS.filter(config => config.canBeGrouped);
+  return FIELD_TYPE_CONFIGS.filter((config) => config.canBeGrouped);
 }
 
 export function createFieldFromType(type: FormField["type"]): FormField {
@@ -317,7 +321,7 @@ function generateFieldId(): string {
 }
 
 // Export field types for backward compatibility
-export const FIELD_TYPES = FIELD_TYPE_CONFIGS.map(config => ({
+export const FIELD_TYPES = FIELD_TYPE_CONFIGS.map((config) => ({
   type: config.type,
   label: config.label,
   description: config.description,
@@ -327,7 +331,7 @@ export const FIELD_TYPES = FIELD_TYPE_CONFIGS.map(config => ({
 // Export categories
 export const FIELD_CATEGORIES = {
   input: "Input Fields",
-  selection: "Selection Fields", 
+  selection: "Selection Fields",
   media: "Media Fields",
   layout: "Layout Fields",
   advanced: "Advanced Fields",

@@ -1,15 +1,33 @@
+import { ChevronDown, Settings, X } from "lucide-react";
 import React, { useState } from "react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ChevronDown, X, Settings } from "lucide-react";
-import {  FIELD_CATEGORIES, FIELD_TYPE_CONFIGS, createFieldFromType } from "@/lib/fields/field-config";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import {
+  createFieldFromType,
+  FIELD_CATEGORIES,
+  FIELD_TYPE_CONFIGS,
+} from "@/lib/fields/field-config";
 import { FieldSpecificSettings } from "../FieldSpecificSettings";
 import type { FieldSettingsProps } from "./types";
 
@@ -34,14 +52,14 @@ export function FieldGroupSettings({
   };
 
   const removeFieldFromGroup = (fieldId: string) => {
-    const updatedGroupFields = groupFields.filter(f => f.id !== fieldId);
+    const updatedGroupFields = groupFields.filter((f) => f.id !== fieldId);
     onUpdateSettings({
       groupFields: updatedGroupFields,
     });
   };
 
   const updateGroupField = (fieldId: string, updates: any) => {
-    const updatedGroupFields = groupFields.map(f =>
+    const updatedGroupFields = groupFields.map((f) =>
       f.id === fieldId ? { ...f, ...updates } : f
     );
     onUpdateSettings({
@@ -70,16 +88,20 @@ export function FieldGroupSettings({
               Layout Direction
             </Label>
             <Select
-              value={groupLayout}
               onValueChange={(value) =>
-                onUpdateSettings({ groupLayout: value as "horizontal" | "vertical" })
+                onUpdateSettings({
+                  groupLayout: value as "horizontal" | "vertical",
+                })
               }
+              value={groupLayout}
             >
               <SelectTrigger className="border-border bg-input">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="horizontal">Horizontal (Side by Side)</SelectItem>
+                <SelectItem value="horizontal">
+                  Horizontal (Side by Side)
+                </SelectItem>
                 <SelectItem value="vertical">Vertical (Stacked)</SelectItem>
               </SelectContent>
             </Select>
@@ -91,10 +113,12 @@ export function FieldGroupSettings({
                 Number of Columns
               </Label>
               <Select
-                value={groupColumns.toString()}
                 onValueChange={(value) =>
-                  onUpdateSettings({ groupColumns: parseInt(value) as 2 | 3 | 4 })
+                  onUpdateSettings({
+                    groupColumns: Number.parseInt(value) as 2 | 3 | 4,
+                  })
                 }
+                value={groupColumns.toString()}
               >
                 <SelectTrigger className="border-border bg-input">
                   <SelectValue />
@@ -113,10 +137,12 @@ export function FieldGroupSettings({
               Field Spacing
             </Label>
             <Select
-              value={groupSpacing}
               onValueChange={(value) =>
-                onUpdateSettings({ groupSpacing: value as "compact" | "normal" | "relaxed" })
+                onUpdateSettings({
+                  groupSpacing: value as "compact" | "normal" | "relaxed",
+                })
               }
+              value={groupSpacing}
             >
               <SelectTrigger className="border-border bg-input">
                 <SelectValue />
@@ -133,8 +159,10 @@ export function FieldGroupSettings({
 
       {/* Field Management */}
       <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
-        <h3 className="font-medium text-card-foreground">Group Fields ({groupFields.length})</h3>
-        
+        <h3 className="font-medium text-card-foreground">
+          Group Fields ({groupFields.length})
+        </h3>
+
         {/* Add Field Picker */}
         <div className="flex justify-start">
           <Dialog onOpenChange={setPickerOpen} open={pickerOpen}>
@@ -143,7 +171,7 @@ export function FieldGroupSettings({
                 + Add field
               </Button>
             </DialogTrigger>
-            <DialogContent className="p-0 rounded-3xl">
+            <DialogContent className="rounded-3xl p-0">
               <DialogHeader className="px-4 pt-4">
                 <DialogTitle>Add a field</DialogTitle>
               </DialogHeader>
@@ -155,7 +183,9 @@ export function FieldGroupSettings({
                         {title}
                       </div>
                       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                        {FIELD_TYPE_CONFIGS.filter((f) => f.category === (key as any)).map((f) => (
+                        {FIELD_TYPE_CONFIGS.filter(
+                          (f) => f.category === (key as any)
+                        ).map((f) => (
                           <button
                             className="flex items-start gap-3 rounded-card border border-border bg-background p-3 text-left transition-colors hover:bg-accent"
                             key={f.type}
@@ -167,8 +197,12 @@ export function FieldGroupSettings({
                           >
                             <f.icon className="mt-0.5 h-4 w-4 text-muted-foreground" />
                             <div className="flex flex-col">
-                              <span className="text-foreground text-sm font-medium">{f.label}</span>
-                              <span className="text-muted-foreground text-xs">{f.description}</span>
+                              <span className="font-medium text-foreground text-sm">
+                                {f.label}
+                              </span>
+                              <span className="text-muted-foreground text-xs">
+                                {f.description}
+                              </span>
                             </div>
                           </button>
                         ))}
@@ -183,14 +217,16 @@ export function FieldGroupSettings({
 
         {/* Field List */}
         {groupFields.length === 0 ? (
-          <div className="rounded-md border border-dashed border-border p-6 text-center text-muted-foreground">
+          <div className="rounded-md border border-border border-dashed p-6 text-center text-muted-foreground">
             <p className="text-sm">No fields in this group yet.</p>
-            <p className="text-xs">Add fields using the dropdown or quick add buttons above.</p>
+            <p className="text-xs">
+              Add fields using the dropdown or quick add buttons above.
+            </p>
           </div>
         ) : (
-          <div className="flex flex-col gap-3 p-2 bg-background rounded-3xl">
+          <div className="flex flex-col gap-3 rounded-3xl bg-background p-2">
             {groupFields.map((groupField) => (
-              <Card key={groupField.id} className="rounded-card p-3">
+              <Card className="rounded-card p-3" key={groupField.id}>
                 <div className="flex flex-col gap-3">
                   {/* Field Header */}
                   <div className="flex items-center justify-between">
@@ -204,20 +240,20 @@ export function FieldGroupSettings({
                     </div>
                     <div className="flex items-center gap-1">
                       <Button
+                        className="h-8 w-8 p-0"
                         onClick={() => toggleFieldExpansion(groupField.id)}
                         size="sm"
                         type="button"
                         variant="ghost"
-                        className="h-8 w-8 p-0"
                       >
                         <Settings className="h-4 w-4" />
                       </Button>
                       <Button
+                        className="h-8 w-8 p-0 text-destructive hover:bg-destructive hover:text-destructive-foreground"
                         onClick={() => removeFieldFromGroup(groupField.id)}
                         size="sm"
                         type="button"
                         variant="ghost"
-                        className="h-8 w-8 p-0 text-destructive hover:bg-destructive hover:text-destructive-foreground"
                       >
                         <X className="h-4 w-4" />
                       </Button>
@@ -227,31 +263,41 @@ export function FieldGroupSettings({
                   {/* Basic Field Settings */}
                   <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                     <div className="flex flex-col gap-2">
-                      <Label className="text-card-foreground text-xs" htmlFor={`${groupField.id}-label`}>
+                      <Label
+                        className="text-card-foreground text-xs"
+                        htmlFor={`${groupField.id}-label`}
+                      >
                         Field Label
                       </Label>
                       <Input
                         className="border-border bg-input"
                         id={`${groupField.id}-label`}
-                        value={groupField.label}
                         onChange={(e) =>
-                          updateGroupField(groupField.id, { label: e.target.value })
+                          updateGroupField(groupField.id, {
+                            label: e.target.value,
+                          })
                         }
                         placeholder="Enter field label"
+                        value={groupField.label}
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <Label className="text-card-foreground text-xs" htmlFor={`${groupField.id}-placeholder`}>
+                      <Label
+                        className="text-card-foreground text-xs"
+                        htmlFor={`${groupField.id}-placeholder`}
+                      >
                         Placeholder Text
                       </Label>
                       <Input
                         className="border-border bg-input"
                         id={`${groupField.id}-placeholder`}
-                        value={groupField.placeholder || ""}
                         onChange={(e) =>
-                          updateGroupField(groupField.id, { placeholder: e.target.value })
+                          updateGroupField(groupField.id, {
+                            placeholder: e.target.value,
+                          })
                         }
                         placeholder="Enter placeholder text"
+                        value={groupField.placeholder || ""}
                       />
                     </div>
                   </div>
@@ -265,29 +311,45 @@ export function FieldGroupSettings({
                       }
                       size="sm"
                     />
-                    <Label className="text-card-foreground text-xs" htmlFor={`${groupField.id}-required`}>
+                    <Label
+                      className="text-card-foreground text-xs"
+                      htmlFor={`${groupField.id}-required`}
+                    >
                       Required field
                     </Label>
                   </div>
 
                   {/* Field-Specific Settings */}
-                  <Collapsible open={expandedFields.has(groupField.id)} onOpenChange={() => toggleFieldExpansion(groupField.id)}>
+                  <Collapsible
+                    onOpenChange={() => toggleFieldExpansion(groupField.id)}
+                    open={expandedFields.has(groupField.id)}
+                  >
                     <CollapsibleTrigger asChild>
                       <Button
-                        variant="outline"
                         className="w-full justify-between"
                         type="button"
+                        variant="outline"
                       >
-                        <span className="text-card-foreground text-sm">Advance Settings</span>
-                        <ChevronDown className={`h-4 w-4 transition-transform ${expandedFields.has(groupField.id) ? 'rotate-180' : ''}`} />
+                        <span className="text-card-foreground text-sm">
+                          Advance Settings
+                        </span>
+                        <ChevronDown
+                          className={`h-4 w-4 transition-transform ${expandedFields.has(groupField.id) ? "rotate-180" : ""}`}
+                        />
                       </Button>
                     </CollapsibleTrigger>
-                    <CollapsibleContent className="flex flex-col gap-4 rounded-3xl  border border-border">
+                    <CollapsibleContent className="flex flex-col gap-4 rounded-3xl border border-border">
                       <div className="rounded-md bg-background p-3">
                         <FieldSpecificSettings
                           field={groupField}
-                          onFieldUpdate={(updatedField) => updateGroupField(groupField.id, updatedField)}
-                          onUpdateSettings={(settings) => updateGroupField(groupField.id, { settings: { ...groupField.settings, ...settings } })}
+                          onFieldUpdate={(updatedField) =>
+                            updateGroupField(groupField.id, updatedField)
+                          }
+                          onUpdateSettings={(settings) =>
+                            updateGroupField(groupField.id, {
+                              settings: { ...groupField.settings, ...settings },
+                            })
+                          }
                         />
                       </div>
                     </CollapsibleContent>
