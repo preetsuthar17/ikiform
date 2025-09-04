@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaGithub } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
+import { Badge } from "@/components/ui";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -13,7 +14,6 @@ import { Separator } from "@/components/ui/separator";
 import { useAuth } from "@/hooks/use-auth";
 import { toast } from "@/hooks/use-toast";
 import { createClient } from "@/utils/supabase/client";
-import { Badge } from "@/components/ui";
 
 export default function LoginForm() {
   const { user } = useAuth();
@@ -252,7 +252,7 @@ export default function LoginForm() {
     // Save login method to localStorage
     localStorage.setItem("lastLoginMethod", provider);
     setLastLoginMethod(provider);
-    
+
     toast(`Logging in with ${provider === "google" ? "Google" : "GitHub"}`);
     const supabase = createClient();
     await supabase.auth.signInWithOAuth({
@@ -499,7 +499,13 @@ export default function LoginForm() {
                       Continue with Google
                     </Button>
                     {lastLoginMethod === "google" && (
-                      <Badge className="absolute bg-background -top-1 -right-1 rounded-full" variant={"outline"} size="sm">Last used</Badge>
+                      <Badge
+                        className="-top-1 -right-1 absolute rounded-full bg-background"
+                        size="sm"
+                        variant={"outline"}
+                      >
+                        Last used
+                      </Badge>
                     )}
                   </div>
                   <div className="relative w-full">
@@ -515,7 +521,13 @@ export default function LoginForm() {
                       Continue with GitHub
                     </Button>
                     {lastLoginMethod === "github" && (
-                     <Badge className="absolute bg-background -bottom-1 -right-1 rounded-full" variant={"outline"} size="sm">Last used</Badge>
+                      <Badge
+                        className="-bottom-1 -right-1 absolute rounded-full bg-background"
+                        size="sm"
+                        variant={"outline"}
+                      >
+                        Last used
+                      </Badge>
                     )}
                   </div>
                 </div>
