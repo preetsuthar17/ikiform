@@ -1,5 +1,11 @@
+import { render } from "@react-email/render";
 import { marked } from "marked";
+import * as React from "react";
 import { Resend } from "resend";
+import BaseMarkdownEmail from "../../../emails/templates/base-markdown-email";
+import NewLoginEmail from "../../../emails/templates/new-login";
+import PremiumThanksEmail from "../../../emails/templates/premium-thanks";
+import WelcomeEmail from "../../../emails/templates/welcome";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -45,9 +51,20 @@ export async function sendFormNotification({
     throw new Error("Resend API key not configured");
   }
   try {
-    const htmlMessage = marked.parse(message || "");
-    const linksHtml = renderLinks(analyticsUrl, customLinks);
-    const html = `${htmlMessage}${linksHtml}`;
+    const htmlMessage = await marked.parse(message || "");
+    const primary = analyticsUrl
+      ? { label: "View Form Analytics", url: analyticsUrl }
+      : undefined;
+    const secondary =
+      customLinks && customLinks.length > 0 ? customLinks : undefined;
+    const email = React.createElement(BaseMarkdownEmail, {
+      heading: subject,
+      previewText: subject,
+      markdown: htmlMessage,
+      primaryCta: primary,
+      secondaryCtas: secondary,
+    });
+    const html = await render(email, { pretty: true });
     const result = await resend.emails.send({
       from: from || "Ikiform <no-reply@ikiform.com>",
       to,
@@ -63,47 +80,38 @@ export async function sendFormNotification({
 export async function sendWelcomeEmail({
   to,
   name,
-  customLinks,
 }: {
   to: string;
   name?: string;
   customLinks?: NotificationLink[];
 }) {
-  const subject = "Welcome to Ikiform! 🎉";
-  const message = `# Welcome${name ? ", " + name : ""} 👋\n\nWe're excited to have you on board.\n\n- Create beautiful forms\n- Collect responses\n- Analyze your data\n\nGet started by building your first form!`;
   const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.ikiform.com"}/dashboard`;
-  return sendFormNotification({
+  const email = React.createElement(WelcomeEmail, { name, dashboardUrl });
+  const html = await render(email, { pretty: true });
+  return resend.emails.send({
+    from: "Ikiform <no-reply@ikiform.com>",
     to,
-    subject,
-    message,
-    customLinks: [
-      { label: "Go to Dashboard", url: dashboardUrl },
-      ...(customLinks || []),
-    ],
+    subject: "Welcome to Ikiform! 🎉",
+    html,
   });
 }
 
 export async function sendNewLoginEmail({
   to,
   name,
-  customLinks,
 }: {
   to: string;
   name?: string;
   customLinks?: NotificationLink[];
 }) {
-  const subject = "New Login to Your Ikiform Account";
-  const message = `# New Login${name ? ", " + name : ""}\n\nWe noticed a new login to your account. If this was you, you can safely ignore this email.\n\nIf you did not perform this login, please [contact us](mailto:hi@ikiform.com).`;
   const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.ikiform.com"}/dashboard`;
-  return sendFormNotification({
+  const email = React.createElement(NewLoginEmail, { name, dashboardUrl });
+  const html = await render(email, { pretty: true });
+  return resend.emails.send({
+    from: "Ikiform <no-reply@ikiform.com>",
     to,
-    subject,
-    message,
-    customLinks: [
-      { label: "Go to Dashboard", url: dashboardUrl },
-      { label: "Send us a mail", url: "mailto:hi@ikiform.com" },
-      ...(customLinks || []),
-    ],
+    subject: "New Login to Your Ikiform Account",
+    html,
   });
 }
 
@@ -116,16 +124,13 @@ export async function sendPremiumThankYouEmail({
   name?: string;
   customLinks?: NotificationLink[];
 }) {
-  const subject = "Thank you for your purchase! 🎉";
-  const message = `# Thank you${name ? ", " + name : ""} for purchasing Ikiform Premium!\n\nYou now have access to all premium features.\n\n- Unlimited submissions\n- Advanced analytics\n- Export responses\n- Integrations\n- And more...`;
   const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.ikiform.com"}/dashboard`;
-  return sendFormNotification({
+  const email = React.createElement(PremiumThanksEmail, { name, dashboardUrl });
+  const html = await render(email, { pretty: true });
+  return resend.emails.send({
+    from: "Ikiform <no-reply@ikiform.com>",
     to,
-    subject,
-    message,
-    customLinks: [
-      { label: "Go to Dashboard", url: dashboardUrl },
-      ...(customLinks || []),
-    ],
+    subject: "Thank you for your purchase! 🎉",
+    html,
   });
 }
