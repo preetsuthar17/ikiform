@@ -34,6 +34,7 @@ import {
   removeFieldFromSchema,
   updateFieldInSchema,
 } from "./utils";
+import { createFieldFromType } from "@/lib/fields/field-config";
 
 function useIsMobile() {
   const [isMobile, setIsMobile] = React.useState(false);
@@ -71,35 +72,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
   );
 
   const addField = (fieldType: FormField["type"], index?: number) => {
-    const newField: FormField = {
-      id: generateFieldId(),
-      type: fieldType,
-      label:
-        fieldType === "banner"
-          ? ""
-          : `${fieldType.charAt(0).toUpperCase() + fieldType.slice(1)} Field`,
-      placeholder: "",
-      required: false,
-      options: ["select", "radio", "checkbox"].includes(fieldType)
-        ? ["Option 1", "Option 2"]
-        : undefined,
-      validation: {},
-      settings:
-        fieldType === "slider"
-          ? { min: 0, max: 100, step: 1, defaultValue: 50 }
-          : fieldType === "tags"
-            ? { maxTags: 10, allowDuplicates: false }
-            : fieldType === "poll"
-              ? { pollOptions: ["Option 1", "Option 2"] }
-              : fieldType === "banner"
-                ? {
-                    bannerVariant: "info",
-                    bannerTitle: "",
-                    bannerDescription:
-                      "Highlight disclaimers, warnings, or key benefits.",
-                  }
-                : {},
-    };
+    const newField = createFieldFromType(fieldType);
 
     const updatedSchema = addFieldToSchema(
       state.formSchema,

@@ -22,6 +22,7 @@ export * from "./calendar";
 export * from "./card";
 export * from "./checkbox";
 export * from "./chip";
+export * from "./collapsible";
 export * from "./color-picker";
 export * from "./command";
 export * from "./command-menu";

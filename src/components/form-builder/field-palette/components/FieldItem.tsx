@@ -21,6 +21,9 @@ export function FieldItem({
         >
           <Card
             className="group cursor-pointer border-black transition-all duration-200 hover:bg-accent"
+            style={{
+              padding: '18px'
+            }}
             onClick={() => onAddField(fieldType.type)}
           >
             <div className="flex items-center gap-3">

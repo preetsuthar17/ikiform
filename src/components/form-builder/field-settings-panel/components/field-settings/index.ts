@@ -1,6 +1,7 @@
 export { AddressFieldSettings } from "./AddressFieldSettings";
 export { BannerFieldSettings } from "./BannerFieldSettings";
 export { CheckboxFieldSettings } from "./CheckboxFieldSettings";
+export { FieldGroupSettings } from "./FieldGroupSettings";
 export { FileFieldSettings } from "./FileFieldSettings";
 export { LinkFieldSettings } from "./LinkFieldSettings";
 export { PhoneFieldSettings } from "./PhoneFieldSettings";
@@ -13,4 +14,9 @@ export { SocialFieldSettings } from "./SocialFieldSettings";
 export { TagsFieldSettings } from "./TagsFieldSettings";
 export { TextareaFieldSettings } from "./TextareaFieldSettings";
 export { TimeFieldSettings } from "./TimeFieldSettings";
+export { TextFieldSettings } from "./TextFieldSettings";
+export { NumberFieldSettings } from "./NumberFieldSettings";
+export { DateFieldSettings } from "./DateFieldSettings";
+export { EmailFieldSettings } from "./EmailFieldSettings";
+export { SelectFieldSettings } from "./SelectFieldSettings";
 export type { FieldSettingsProps } from "./types";

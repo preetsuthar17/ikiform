@@ -452,7 +452,8 @@ export interface FormField {
     | "phone"
     | "address"
     | "link"
-    | "banner";
+    | "banner"
+    | "field-group";
   label: string;
   description?: string;
   placeholder?: string;
@@ -548,6 +549,12 @@ export interface FormField {
     points?: number;
     showCorrectAnswer?: boolean;
     explanation?: string;
+
+    // Field grouping settings
+    groupFields?: FormField[];
+    groupLayout?: "horizontal" | "vertical";
+    groupSpacing?: "compact" | "normal" | "relaxed";
+    groupColumns?: 2 | 3 | 4;
   };
   prepopulation?: {
     enabled: boolean;

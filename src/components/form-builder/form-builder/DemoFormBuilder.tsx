@@ -15,6 +15,7 @@ import {
   removeFieldFromSchema,
   updateFieldInSchema,
 } from "./utils";
+import { createFieldFromType } from "@/lib/fields/field-config";
 
 export default function DemoFormBuilder() {
   const [formSchema, setFormSchema] = useState<FormSchema>(() =>
@@ -39,33 +40,7 @@ export default function DemoFormBuilder() {
   );
 
   const addField = (fieldType: FormField["type"]) => {
-    const newField: FormField = {
-      id: generateFieldId(),
-      type: fieldType,
-      label:
-        fieldType === "banner"
-          ? ""
-          : `${fieldType.charAt(0).toUpperCase() + fieldType.slice(1)} Field`,
-      placeholder: "",
-      required: false,
-      options: ["select", "radio", "checkbox"].includes(fieldType)
-        ? ["Option 1", "Option 2"]
-        : undefined,
-      validation: {},
-      settings:
-        fieldType === "slider"
-          ? { min: 0, max: 100, step: 1, defaultValue: 50 }
-          : fieldType === "tags"
-            ? { maxTags: 10, allowDuplicates: false }
-            : fieldType === "banner"
-              ? {
-                  bannerVariant: "info",
-                  bannerTitle: "",
-                  bannerDescription:
-                    "Highlight disclaimers, warnings, or key benefits.",
-                }
-              : {},
-    };
+    const newField = createFieldFromType(fieldType);
     const updatedSchema = addFieldToSchema(
       formSchema,
       newField,

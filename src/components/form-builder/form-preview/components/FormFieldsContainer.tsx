@@ -43,7 +43,9 @@ export function FormFieldsContainer({
 
     if (
       result.type === PALETTE_DRAG_TYPE ||
-      result.source.droppableId === "palette-droppable"
+      result.source.droppableId === "palette-droppable" ||
+      (typeof result.source.droppableId === "string" &&
+        result.source.droppableId.startsWith("palette-"))
     ) {
       const type = result.draggableId.replace("palette-", "");
       if (onAddField) onAddField(type);

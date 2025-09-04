@@ -7,6 +7,7 @@ import {
   CheckboxField,
   DateInputField,
   EmailInputField,
+  FieldGroupField,
   FileUploadField,
   NumberInputField,
   PollField,
@@ -96,6 +97,8 @@ export function createFieldComponent(
       return React.createElement(LinkInputField, props);
     case "file":
       return React.createElement(FileUploadField, props);
+    case "field-group":
+      return React.createElement(FieldGroupField, props);
     default:
       return React.createElement("div", {}, "Unsupported field type");
   }

@@ -2,6 +2,7 @@ export { BannerField } from "./BannerField";
 export { CheckboxField } from "./CheckboxField";
 export { DateInputField } from "./DateInputField";
 export { EmailInputField } from "./EmailInputField";
+export { FieldGroupField } from "./FieldGroupField";
 export { FieldWrapper } from "./FieldWrapper";
 export { FileUploadField } from "./FileUploadField";
 export { NumberInputField } from "./NumberInputField";

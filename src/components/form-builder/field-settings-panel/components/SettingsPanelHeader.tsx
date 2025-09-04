@@ -19,7 +19,7 @@ export function SettingsPanelHeader({ onClose }: SettingsPanelHeaderProps) {
           onClick={onClose}
           size="sm"
           variant="ghost"
-      >
+        >
           <X className="h-4 w-4" />
         </Button>
       </div>
