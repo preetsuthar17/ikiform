@@ -3,7 +3,7 @@
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaGithub } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,7 @@ import { Separator } from "@/components/ui/separator";
 import { useAuth } from "@/hooks/use-auth";
 import { toast } from "@/hooks/use-toast";
 import { createClient } from "@/utils/supabase/client";
+import { Badge } from "@/components/ui";
 
 export default function LoginForm() {
   const { user } = useAuth();
@@ -27,12 +28,19 @@ export default function LoginForm() {
     name: "",
   });
   const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [lastLoginMethod, setLastLoginMethod] = useState<string | null>(null);
 
   const [focusedFields, setFocusedFields] = useState({
     name: false,
     email: false,
     password: false,
   });
+
+  // Load last login method from localStorage
+  useEffect(() => {
+    const savedMethod = localStorage.getItem("lastLoginMethod");
+    setLastLoginMethod(savedMethod);
+  }, []);
 
   if (user) {
     const redirectUrl =
@@ -241,6 +249,10 @@ export default function LoginForm() {
   }
 
   async function handleOAuthLogin(provider: "github" | "google") {
+    // Save login method to localStorage
+    localStorage.setItem("lastLoginMethod", provider);
+    setLastLoginMethod(provider);
+    
     toast(`Logging in with ${provider === "google" ? "Google" : "GitHub"}`);
     const supabase = createClient();
     await supabase.auth.signInWithOAuth({
@@ -460,7 +472,6 @@ export default function LoginForm() {
               </div>
             )}
 
-            {/* OAuth buttons - only show on email step */}
             {currentStep === "email" && (
               <>
                 <div className="relative">
@@ -475,28 +486,38 @@ export default function LoginForm() {
                 </div>
 
                 <div className="flex w-full flex-col items-start justify-center gap-2">
-                  <Button
-                    className="flex w-full items-center gap-2 rounded-full bg-card font-medium text-sm"
-                    disabled={loading}
-                    onClick={() => handleOAuthLogin("google")}
-                    size="xl"
-                    type="button"
-                    variant="outline"
-                  >
-                    <FcGoogle size={22} />
-                    Continue with Google
-                  </Button>
-                  <Button
-                    className="flex w-full items-center gap-2 rounded-full bg-card font-medium text-sm"
-                    disabled={loading}
-                    onClick={() => handleOAuthLogin("github")}
-                    size="xl"
-                    type="button"
-                    variant="outline"
-                  >
-                    <FaGithub size={22} />
-                    Continue with GitHub
-                  </Button>
+                  <div className="relative w-full">
+                    <Button
+                      className="flex w-full items-center gap-2 rounded-full bg-card font-medium text-sm"
+                      disabled={loading}
+                      onClick={() => handleOAuthLogin("google")}
+                      size="xl"
+                      type="button"
+                      variant="outline"
+                    >
+                      <FcGoogle size={22} />
+                      Continue with Google
+                    </Button>
+                    {lastLoginMethod === "google" && (
+                      <Badge className="absolute bg-background -top-1 -right-1 rounded-full" variant={"outline"} size="sm">Last used</Badge>
+                    )}
+                  </div>
+                  <div className="relative w-full">
+                    <Button
+                      className="flex w-full items-center gap-2 rounded-full bg-card font-medium text-sm"
+                      disabled={loading}
+                      onClick={() => handleOAuthLogin("github")}
+                      size="xl"
+                      type="button"
+                      variant="outline"
+                    >
+                      <FaGithub size={22} />
+                      Continue with GitHub
+                    </Button>
+                    {lastLoginMethod === "github" && (
+                     <Badge className="absolute bg-background -bottom-1 -right-1 rounded-full" variant={"outline"} size="sm">Last used</Badge>
+                    )}
+                  </div>
                 </div>
               </>
             )}
