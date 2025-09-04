@@ -38,7 +38,7 @@ export function FieldSettingsPanel({
   }
 
   return (
-    <div className="flex h-[90%] min-h-0 flex-col border-border bg-card">
+    <div className="flex h-[90%] min-h-0 flex-col border-border bg-background">
       <ScrollArea className="h-[90%] flex-1">
         <SettingsPanelHeader onClose={onClose} />
         <div className="flex flex-col gap-4 p-4">
