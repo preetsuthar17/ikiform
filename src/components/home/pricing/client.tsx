@@ -77,21 +77,21 @@ const PRICING: {
   };
 } = {
   monthly: {
-    price: 19,
-    originalPrice: 29,
+    price: 29,
+    originalPrice: 39,
     period: "/Mo",
     billedAs: "Billed monthly • Cancel anytime",
     savings: null,
   },
   yearly: {
-    price: 9,
-    originalPrice: 19,
+    price: 19,
+    originalPrice: 29,
     period: "/Mo",
-    billedAs: "Billed annually • Cancel anytime",
+    billedAs: "Billed annually ($228/yr) • Cancel anytime",
     savings: null,
   },
   onetime: {
-    price: 119,
+    price: 139,
     originalPrice: 139,
     period: "",
     billedAs: "One-time payment • Lifetime access",
@@ -187,11 +187,8 @@ export default function PricingClient({ products }: PricingClientProps) {
                             </p>
                           </div>
                           <div className="mt-1 xs:mt-0 flex items-baseline gap-1 sm:gap-2">
-                            <span className="text-muted-foreground text-xs line-through sm:text-sm">
-                              $29
-                            </span>
                             <span className="font-medium text-foreground text-xl sm:text-2xl">
-                              $19
+                              $29
                             </span>
                             <span className="text-muted-foreground text-xs sm:text-sm">
                               /Mo
@@ -222,11 +219,8 @@ export default function PricingClient({ products }: PricingClientProps) {
                             </p>
                           </div>
                           <div className="mt-1 xs:mt-0 flex items-baseline gap-1 sm:gap-2">
-                            <span className="text-muted-foreground text-xs line-through sm:text-sm">
-                              $19
-                            </span>
                             <span className="font-medium text-foreground text-xl sm:text-2xl">
-                              $9
+                              $19
                             </span>
                             <span className="text-muted-foreground text-xs sm:text-sm">
                               /Mo
@@ -257,11 +251,8 @@ export default function PricingClient({ products }: PricingClientProps) {
                             </p>
                           </div>
                           <div className="mt-1 xs:mt-0 flex items-baseline gap-1 sm:gap-2">
-                            <span className="text-muted-foreground text-xs line-through sm:text-sm">
-                              $139
-                            </span>
                             <span className="font-medium text-foreground text-xl sm:text-2xl">
-                              $119
+                              $139
                             </span>
                           </div>
                         </div>
@@ -320,9 +311,6 @@ export default function PricingClient({ products }: PricingClientProps) {
 
                     <div className="flex flex-grow flex-col gap-8 rounded-3xl bg-card p-4 sm:p-6">
                       <div className="flex items-baseline gap-3">
-                        <span className="text-lg text-muted-foreground line-through">
-                          ${currentPricing.originalPrice}
-                        </span>
                         <span className="font-medium text-4xl text-foreground">
                           ${currentPricing.price}
                         </span>
