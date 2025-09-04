@@ -176,7 +176,7 @@ export function FieldGroupSettings({
                 <DialogTitle>Add a field</DialogTitle>
               </DialogHeader>
               <ScrollArea className="max-h-[70vh] p-4 pt-2">
-                <div className="grid grid-cols-1 gap-6 pr-2 md:grid-cols-2">
+                <div className="grid grid-cols-1 gap-6">
                   {Object.entries(FIELD_CATEGORIES).map(([key, title]) => (
                     <div className="flex flex-col gap-3" key={key}>
                       <div className="px-1 text-muted-foreground text-xs uppercase tracking-wide">
