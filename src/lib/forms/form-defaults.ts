@@ -174,6 +174,12 @@ export function ensureDefaultFormSettings(schema: FormSchema): FormSchema {
         ...DEFAULT_DUPLICATE_PREVENTION_SETTINGS,
         ...schema.settings?.duplicatePrevention,
       },
+      api: {
+        enabled: false,
+        apiKey: undefined,
+        allowExternalSubmissions: false,
+        ...schema.settings?.api,
+      },
     },
   };
 }

@@ -1,3 +1,4 @@
+export { ApiSection } from "../sections/api-section";
 export { BasicInfoSection } from "./BasicInfoSection";
 export { DesignSection } from "./DesignSection";
 export { DuplicatePreventionSection } from "./DuplicatePreventionSection";

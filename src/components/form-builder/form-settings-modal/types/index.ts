@@ -120,6 +120,11 @@ export interface LocalSettings {
       fail?: string;
     };
   };
+  api?: {
+    enabled?: boolean;
+    apiKey?: string;
+    allowExternalSubmissions?: boolean;
+  };
 }
 
 export interface BasicInfoSectionProps {
@@ -157,6 +162,13 @@ export interface SocialMediaSectionProps {
   ) => void;
 }
 
+export interface ApiSectionProps {
+  localSettings: LocalSettings;
+  updateApi: (updates: Partial<NonNullable<LocalSettings["api"]>>) => void;
+  formId?: string;
+  schema?: any;
+}
+
 export type FormSettingsSection =
   | "basic"
   | "limits"
@@ -165,7 +177,8 @@ export type FormSettingsSection =
   | "notifications"
   | "design"
   | "webhooks"
-  | "quiz";
+  | "quiz"
+  | "api";
 
 export interface FormSettingsSectionConfig {
   id: FormSettingsSection;

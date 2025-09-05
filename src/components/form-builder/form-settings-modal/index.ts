@@ -7,6 +7,7 @@ export const FORM_SETTINGS_SECTIONS: FormSettingsSectionConfig[] = [
   { id: "quiz", label: "Quiz & Scoring", iconName: "Trophy" },
   { id: "branding", label: "Branding", iconName: "User" },
   { id: "notifications", label: "Notifications", iconName: "Mail" },
+  { id: "api", label: "API Access", iconName: "Key" },
   { id: "webhooks", label: "Webhooks", iconName: "Link2" },
   { id: "design", label: "Design", iconName: "Palette" },
 ];

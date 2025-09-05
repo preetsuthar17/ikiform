@@ -1,5 +1,6 @@
 import { useParams } from "next/navigation";
 import React from "react";
+import { ApiSection } from "../sections/api-section";
 import type { FormSettingsSection } from "../types";
 import { BasicInfoSection } from "./BasicInfoSection";
 import { DesignSection } from "./DesignSection";
@@ -25,6 +26,9 @@ interface FormSettingsContentProps {
   updatePasswordProtection: any;
   updateSocialMedia: any;
   updateNotifications: any;
+  updateApi: any;
+  formId?: string;
+  schema?: any;
 }
 
 export function FormSettingsContent({
@@ -38,9 +42,12 @@ export function FormSettingsContent({
   updatePasswordProtection,
   updateSocialMedia,
   updateNotifications,
+  updateApi,
+  formId,
+  schema,
 }: FormSettingsContentProps) {
   const params = useParams();
-  const formId = params?.id as string | undefined;
+  const currentFormId = formId || (params?.id as string | undefined);
   switch (section) {
     case "basic":
       return (
@@ -113,16 +120,27 @@ export function FormSettingsContent({
       return (
         <section className="flex flex-col gap-4">
           <DesignSection
-            formId={formId}
+            formId={currentFormId}
             localSettings={localSettings}
             updateSettings={updateSettings}
+          />
+        </section>
+      );
+    case "api":
+      return (
+        <section className="flex flex-col gap-4">
+          <ApiSection
+            formId={currentFormId}
+            localSettings={localSettings}
+            schema={schema}
+            updateApi={updateApi}
           />
         </section>
       );
     case "webhooks":
       return (
         <section className="flex flex-col gap-4">
-          <WebhooksSettingsSection formId={formId || ""} />
+          <WebhooksSettingsSection formId={currentFormId || ""} />
         </section>
       );
     default:
