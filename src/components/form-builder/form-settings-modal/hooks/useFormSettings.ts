@@ -52,6 +52,12 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
       ...schema.settings.notifications,
       email: schema.settings.notifications?.email || userEmail || "",
     },
+    api: {
+      enabled: false,
+      apiKey: undefined,
+      allowExternalSubmissions: false,
+      ...schema.settings?.api,
+    },
   });
 
   useEffect(() => {
@@ -94,6 +100,12 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
         ...DEFAULT_NOTIFICATION_SETTINGS,
         ...schema.settings.notifications,
         email: schema.settings.notifications?.email || userEmail || "",
+      },
+      api: {
+        enabled: false,
+        apiKey: undefined,
+        allowExternalSubmissions: false,
+        ...schema.settings?.api,
       },
     });
   }, [schema.settings, userEmail]);
@@ -227,6 +239,18 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
     });
   };
 
+  const updateApi = (
+    apiUpdates: Partial<NonNullable<LocalSettings["api"]>>
+  ) => {
+    setLocalSettings({
+      ...localSettings,
+      api: {
+        ...localSettings.api,
+        ...apiUpdates,
+      },
+    });
+  };
+
   const resetSettings = () => {
     setLocalSettings({
       ...schema.settings,
@@ -279,6 +303,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
     updatePasswordProtection,
     updateSocialMedia,
     updateNotifications,
+    updateApi,
     resetSettings,
   };
 }

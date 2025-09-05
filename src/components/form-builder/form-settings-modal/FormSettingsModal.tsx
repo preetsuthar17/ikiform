@@ -33,6 +33,7 @@ export function FormSettingsModal({
     updatePasswordProtection,
     updateSocialMedia,
     updateNotifications,
+    updateApi,
     resetSettings,
   } = useFormSettings(schema, userEmail);
 
@@ -50,6 +51,9 @@ export function FormSettingsModal({
     updatePasswordProtection,
     updateSocialMedia,
     updateNotifications,
+    updateApi,
+    formId,
+    schema,
   };
 
   const handleSave = async () => {

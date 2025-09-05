@@ -25,6 +25,8 @@ export interface Database {
           is_published: boolean;
           created_at: string;
           updated_at: string;
+          api_key?: string | null;
+          api_enabled?: boolean;
         };
         Insert: {
           id?: string;
@@ -36,6 +38,8 @@ export interface Database {
           is_published?: boolean;
           created_at?: string;
           updated_at?: string;
+          api_key?: string | null;
+          api_enabled?: boolean;
         };
         Update: {
           id?: string;
@@ -47,6 +51,8 @@ export interface Database {
           is_published?: boolean;
           created_at?: string;
           updated_at?: string;
+          api_key?: string | null;
+          api_enabled?: boolean;
         };
       };
       form_submissions: {
@@ -718,6 +724,11 @@ export interface FormSchema {
       message?: string;
       allowOverride?: boolean;
       maxAttempts?: number;
+    };
+    api?: {
+      enabled?: boolean;
+      apiKey?: string;
+      allowExternalSubmissions?: boolean;
     };
   };
   logic?: FormLogic;
