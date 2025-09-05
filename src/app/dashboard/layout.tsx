@@ -87,6 +87,13 @@ export const viewport = {
   themeColor: [{ media: "(prefers-color-scheme: light)", color: "#ffffff" }],
 };
 
+import { ApiSupportIntroduction } from "@/components/feature-introductions/api-support-introduction";
+
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      {children}
+      <ApiSupportIntroduction />
+    </>
+  );
 }
