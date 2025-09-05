@@ -4,13 +4,13 @@ import {
   Code,
   Copy,
   Download,
-  ExternalLink,
   Eye,
   EyeOff,
   Key,
   RefreshCw,
 } from "lucide-react";
 import { useState } from "react";
+import { FaQuestion } from "react-icons/fa6";
 import { getAllFields } from "@/components/form-builder/form-builder/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -19,6 +19,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Switch } from "@/components/ui/switch";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { toast } from "@/hooks/use-toast";
 import {
   generateFormApiKey,
@@ -48,7 +54,7 @@ export function ApiSection({
     try {
       await toggleFormApiEnabled(formId, enabled);
       updateApi({ enabled });
-      toast.success(enabled ? "API access enabled" : "API access disabled");
+      toast.success(enabled ? "API support enabled" : "API support disabled");
     } catch (error) {
       toast.error("Failed to update API settings");
     }
@@ -239,7 +245,22 @@ print_r($result);
     <Card className="p-6">
       <div className="mb-4 flex items-center gap-3">
         <Key className="h-5 w-5 text-primary" />
-        <h3 className="font-medium text-lg">API Access</h3>
+        <h3 className="font-medium text-lg">API Support</h3>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Badge className="cursor-help" size="sm" variant="secondary">
+                Beta <FaQuestion size={10} />
+              </Badge>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>
+                This feature is still under testing. You may encounter some
+                bugs.
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
 
       <div className="flex flex-col gap-4">
@@ -252,7 +273,7 @@ print_r($result);
             size="sm"
           />
           <Label className="font-medium text-sm" htmlFor="api-enabled">
-            Enable API Access
+            Enable API support
           </Label>
         </div>
 
