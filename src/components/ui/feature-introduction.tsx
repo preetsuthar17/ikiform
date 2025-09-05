@@ -1,9 +1,15 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
 import { X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "./button";
-import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle } from "./dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "./dialog";
 
 interface FeatureIntroductionProps {
   id: string;
@@ -76,23 +82,28 @@ export function FeatureIntroduction({
     };
   }, []);
 
-  if (!isLoaded || !showDialog) return null;
+  if (!(isLoaded && showDialog)) return null;
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog onOpenChange={setIsOpen} open={isOpen}>
       <DialogContent
-        className={`max-w-md rounded-3xl flex flex-col gap-6 ${className} transition-transform duration-150 ease-in-out ${
+        className={`flex max-w-md flex-col gap-6 rounded-3xl ${className} transition-transform duration-150 ease-in-out ${
           isAnimating
-            ? "scale-85 opacity-0 pointer-events-none"
+            ? "pointer-events-none scale-85 opacity-0"
             : "scale-90 opacity-100"
         } will-change-transform`}
       >
         <DialogHeader className="relative">
-          <DialogTitle className="flex items-center gap-2 text-xl font-semibold">
+          <DialogTitle className="flex items-center gap-2 font-semibold text-xl">
             {title}
           </DialogTitle>
-          <DialogClose asChild className="absolute -top-2 -right-2">
-            <Button variant="ghost" onClick={handleClose} size="icon" type="button">
+          <DialogClose asChild className="-top-2 -right-2 absolute">
+            <Button
+              onClick={handleClose}
+              size="icon"
+              type="button"
+              variant="ghost"
+            >
               <X />
             </Button>
           </DialogClose>
@@ -101,9 +112,9 @@ export function FeatureIntroduction({
           {imageUrl && (
             <div className="flex justify-center">
               <img
-                src={imageUrl}
                 alt={title}
                 className="h-32 w-32 rounded-lg object-cover"
+                src={imageUrl}
               />
             </div>
           )}
@@ -119,14 +130,14 @@ export function FeatureIntroduction({
           {showAction && (
             <div className="flex gap-2 pt-2">
               <Button
-                variant="outline"
-                onClick={handleClose}
                 className="flex-1"
+                onClick={handleClose}
                 type="button"
+                variant="outline"
               >
                 Maybe Later
               </Button>
-              <Button onClick={handleAction} className="flex-1" type="button">
+              <Button className="flex-1" onClick={handleAction} type="button">
                 {actionText}
               </Button>
             </div>

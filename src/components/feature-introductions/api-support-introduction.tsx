@@ -1,19 +1,19 @@
 "use client";
 
-import { FeatureIntroduction } from "@/components/ui/feature-introduction";
 import { TweetEmbed } from "@/components/other/tweet-embed";
+import { FeatureIntroduction } from "@/components/ui/feature-introduction";
 
 export function ApiSupportIntroduction() {
   return (
     <FeatureIntroduction
-      id="api-support-feature"
+      className="w-full max-w-fit"
       delay={5000}
-      title="🚀 Introducing API Support!"
       description="Instead of building forms pages, you can create a form endpoint and hit that directly with your data."
-      className="max-w-fit w-full "
+      id="api-support-feature"
       showAction={false}
+      title="🚀 Introducing API Support!"
     >
-      <div className="w-full mx-auto">
+      <div className="mx-auto w-full">
         <TweetEmbed tweetId="1963893354896179683" />
       </div>
     </FeatureIntroduction>

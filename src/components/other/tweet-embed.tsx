@@ -13,5 +13,3 @@ interface TweetEmbedProps {
 export function TweetEmbed({ tweetId }: TweetEmbedProps) {
   return <Tweet id={tweetId} />;
 }
-
-

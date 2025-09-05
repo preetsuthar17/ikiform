@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface UseFeatureIntroductionOptions {
   id: string;
@@ -23,16 +23,16 @@ export function useFeatureIntroduction({
     }
 
     const hasBeenDismissed = localStorage.getItem(storageKey) === "true";
-    
-    if (!hasBeenDismissed) {
+
+    if (hasBeenDismissed) {
+      setIsLoaded(true);
+    } else {
       const timer = setTimeout(() => {
         setShouldShow(true);
         setIsLoaded(true);
       }, delay);
 
       return () => clearTimeout(timer);
-    } else {
-      setIsLoaded(true);
     }
   }, [delay, storageKey, enabled]);
 

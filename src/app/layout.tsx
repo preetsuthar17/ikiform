@@ -9,11 +9,11 @@ import {
 import "./globals.css";
 
 import { Analytics } from "@vercel/analytics/next";
+import { ApiSupportIntroduction } from "@/components/feature-introductions/api-support-introduction";
 import CrispController from "@/components/other/CrispController";
 import { LightThemeEnforcer } from "@/components/other/light-theme-enforcer";
 import { Toaster } from "@/components/ui/toast";
 import ConditionalLayout from "./conditional-layout";
-import { ApiSupportIntroduction } from "@/components/feature-introductions/api-support-introduction";
 
 const inter = Inter({
   variable: "--font-inter",
