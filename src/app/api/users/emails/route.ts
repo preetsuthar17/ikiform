@@ -11,7 +11,9 @@ export async function GET() {
         { status: 500 }
       );
     }
-    const emails = (data || []).map((r) => r.email).filter(Boolean);
+    const emails = (data || [])
+      .map((r: { email: string }) => r.email)
+      .filter(Boolean);
     return new NextResponse(JSON.stringify({ emails }), {
       headers: {
         "content-type": "application/json",

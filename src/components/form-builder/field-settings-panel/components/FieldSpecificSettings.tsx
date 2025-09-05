@@ -18,6 +18,7 @@ import {
   SelectFieldSettings,
   SliderFieldSettings,
   SocialFieldSettings,
+  StatementFieldSettings,
   TagsFieldSettings,
   TextareaFieldSettings,
   TextFieldSettings,
@@ -57,6 +58,7 @@ export function FieldSpecificSettings({
     time: TimeFieldSettings,
     file: FileFieldSettings,
     "field-group": FieldGroupSettings,
+    statement: StatementFieldSettings,
   };
 
   const FieldComponent = fieldSettingsMap[field.type];

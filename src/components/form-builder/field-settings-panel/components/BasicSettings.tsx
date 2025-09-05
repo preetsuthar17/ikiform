@@ -14,7 +14,10 @@ export const BasicSettings: React.FC<BasicSettingsProps> = ({
   field,
   onFieldUpdate,
 }) => {
-  const { updateField } = createFieldUpdater(field, onFieldUpdate);
+  const { updateField, updateSettings } = createFieldUpdater(
+    field,
+    onFieldUpdate
+  );
 
   return (
     <Card className="flex flex-col gap-4 rounded-card bg-background p-4">

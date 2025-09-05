@@ -15,6 +15,7 @@ export { SchedulerFieldSettings } from "./SchedulerFieldSettings";
 export { SelectFieldSettings } from "./SelectFieldSettings";
 export { SliderFieldSettings } from "./SliderFieldSettings";
 export { SocialFieldSettings } from "./SocialFieldSettings";
+export { StatementFieldSettings } from "./StatementFieldSettings";
 export { TagsFieldSettings } from "./TagsFieldSettings";
 export { TextareaFieldSettings } from "./TextareaFieldSettings";
 export { TextFieldSettings } from "./TextFieldSettings";

@@ -42,7 +42,7 @@ export function FieldSettingsPanel({
       <ScrollArea className="h-[90%] flex-1">
         <SettingsPanelHeader onClose={onClose} />
         <div className="flex flex-col gap-4 p-4">
-          {field.type !== "banner" && (
+          {field.type !== "banner" && field.type !== "statement" && (
             <BasicSettings field={field} onFieldUpdate={onFieldUpdate} />
           )}
           <FieldSpecificSettings
