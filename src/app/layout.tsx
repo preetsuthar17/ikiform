@@ -194,6 +194,7 @@ export default function RootLayout({
         <ConditionalLayout>{children}</ConditionalLayout>
         <Analytics />
         <Toaster position="top-center" />
+      </body>
     </html>
   );
 }
