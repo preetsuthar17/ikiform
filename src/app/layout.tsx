@@ -9,7 +9,6 @@ import {
 import "./globals.css";
 
 import { Analytics } from "@vercel/analytics/next";
-import { ApiSupportIntroduction } from "@/components/feature-introductions/api-support-introduction";
 import CrispController from "@/components/other/CrispController";
 import { LightThemeEnforcer } from "@/components/other/light-theme-enforcer";
 import { Toaster } from "@/components/ui/toast";
@@ -195,8 +194,6 @@ export default function RootLayout({
         <ConditionalLayout>{children}</ConditionalLayout>
         <Analytics />
         <Toaster position="top-center" />
-        <ApiSupportIntroduction />
-      </body>
     </html>
   );
 }
