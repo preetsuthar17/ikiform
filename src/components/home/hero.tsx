@@ -253,7 +253,7 @@ export default function Hero() {
         </div>
       </div>
       <div className="relative h-full w-full grow">
-        <div className="h-full w-full overflow-hidden rounded-4xl">
+        {/* <div className="h-full w-full overflow-hidden rounded-4xl">
           <div className="relative h-full w-full">
             <video
               className="h-full w-full object-cover"
@@ -276,7 +276,7 @@ export default function Hero() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <Modal onOpenChange={setOpen} open={open}>
           <ModalContent className="z-50 flex w-full max-w-xs flex-col items-center justify-center gap-6">
             <ModalHeader>
