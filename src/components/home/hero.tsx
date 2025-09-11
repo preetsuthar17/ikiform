@@ -191,7 +191,7 @@ export default function Hero() {
               <AvatarImage
                 alt="user2"
                 className="rounded-full"
-                src="https://lh3.googleusercontent.com/a/ACg8ocLqFndqzPkUI_oMGZC8hSPgLWK3Lm3QKe7zMx6xkpisOApHiyZg7A=s96-c"
+                src="https://pbs.twimg.com/profile_images/1791280071040241664/eldwa1Cf_400x400.jpg"
               />
               <AvatarFallback className="rounded-full bg-[#635BFF]" />
             </Avatar>
@@ -207,7 +207,7 @@ export default function Hero() {
               <AvatarImage
                 alt="user4"
                 className="rounded-full"
-                src="https://avatars.githubusercontent.com/u/6717865?v=4"
+                src="https://pbs.twimg.com/profile_images/1965318718042378240/_AZs_6Dk_400x400.jpg"
               />
               <AvatarFallback className="rounded-full" />
             </Avatar>
@@ -227,7 +227,7 @@ export default function Hero() {
               <span className="text-sm opacity-80">users</span>
             </span>
             <div className="mt-2 flex items-center justify-start gap-1">
-              {Array.from({ length: 5 }).map((_, i) => (
+              {[...Array(4)].map((_, i) => (
                 <Star
                   aria-label="star"
                   className="fill-[#FFD600] text-[#FFD600]"
@@ -235,6 +235,19 @@ export default function Hero() {
                   size={18}
                 />
               ))}
+              <span className="relative inline-block" aria-label="half star">
+                <Star
+                  className="fill-[#FFD600] text-[#FFD600]"
+                  size={18}
+                  style={{ clipPath: "inset(0 50% 0 0)" }}
+                />
+                <Star
+                  className="absolute left-0 top-0 fill-gray-300 text-gray-300"
+                  size={18}
+                  style={{ clipPath: "inset(0 0 0 50%)" }}
+                  aria-hidden="true"
+                />
+              </span>
             </div>
           </div>
         </div>
