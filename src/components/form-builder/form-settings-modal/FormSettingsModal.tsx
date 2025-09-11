@@ -96,34 +96,47 @@ export function FormSettingsModal({
             <Settings className="h-5 w-5 text-primary" />
             <h2 className="font-semibold text-xl">Form Settings</h2>
           </div>
-          <div className="flex items-center gap-2">
-            <Button onClick={handleCancel} variant="outline">
-              Cancel
-            </Button>
-            <Button
-              className="gap-2"
-              disabled={saving}
-              loading={saving}
-              onClick={handleSave}
-              variant={"default"}
-            >
-              {saving ? "Saving" : "Save Changes"}
-            </Button>
-          </div>
+          {formId && (
+            <div className="flex items-center gap-2">
+              <Button onClick={handleCancel} variant="outline">
+                Cancel
+              </Button>
+              <Button
+                className="gap-2"
+                disabled={saving}
+                loading={saving}
+                onClick={handleSave}
+                variant={"default"}
+              >
+                {saving ? "Saving" : "Save Changes"}
+              </Button>
+            </div>
+          )}
         </div>
         <div className="min-h-0 flex-1">
-          <FormSettingsDesktopLayout
-            activeSection={activeSection}
-            onClose={onClose}
-            onSectionChange={setActiveSection}
-            sectionProps={sectionProps}
-          />
-          <FormSettingsMobileLayout
-            activeSection={activeSection}
-            onClose={onClose}
-            onSectionChange={setActiveSection}
-            sectionProps={sectionProps}
-          />
+          {formId && (
+            <>
+              <FormSettingsDesktopLayout
+                activeSection={activeSection}
+                onClose={onClose}
+                onSectionChange={setActiveSection}
+                sectionProps={sectionProps}
+              />
+              <FormSettingsMobileLayout
+                activeSection={activeSection}
+                onClose={onClose}
+                onSectionChange={setActiveSection}
+                sectionProps={sectionProps}
+              />
+            </>
+          )}
+          {!formId && (
+            <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
+              <p className="text-muted-foreground">
+                Please save the form first to access the settings.
+              </p>
+            </div>
+          )}
         </div>
       </ModalContent>
     </Modal>
