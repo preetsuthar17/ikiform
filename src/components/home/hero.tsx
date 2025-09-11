@@ -235,17 +235,17 @@ export default function Hero() {
                   size={18}
                 />
               ))}
-              <span className="relative inline-block" aria-label="half star">
+              <span aria-label="half star" className="relative inline-block">
                 <Star
                   className="fill-[#FFD600] text-[#FFD600]"
                   size={18}
                   style={{ clipPath: "inset(0 50% 0 0)" }}
                 />
                 <Star
-                  className="absolute left-0 top-0 fill-gray-300 text-gray-300"
+                  aria-hidden="true"
+                  className="absolute top-0 left-0 fill-gray-300 text-gray-300"
                   size={18}
                   style={{ clipPath: "inset(0 0 0 50%)" }}
-                  aria-hidden="true"
                 />
               </span>
             </div>
