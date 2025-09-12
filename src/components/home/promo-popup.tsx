@@ -1,10 +1,10 @@
 "use client";
 
-import { motion, AnimatePresence } from "motion/react";
-import { useState, useEffect } from "react";
-import { X, Gift } from "lucide-react";
-import { Button } from "../ui";
+import { Gift, X } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Button } from "../ui";
 
 export default function PromoPopup() {
   const [isVisible, setIsVisible] = useState(false);
@@ -45,53 +45,55 @@ export default function PromoPopup() {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ 
-            opacity: 0, 
-            y: -100, 
+          animate={{
+            opacity: 1,
+            y: 0,
             x: 0,
           }}
-          animate={{ 
-            opacity: 1, 
-            y: 0, 
+          className="fixed top-4 right-4 z-50 max-w-sm"
+          exit={{
+            opacity: 0,
+            y: -100,
             x: 0,
           }}
-          exit={{ 
-            opacity: 0, 
-            y: -100, 
+          initial={{
+            opacity: 0,
+            y: -100,
             x: 0,
           }}
           transition={{
             type: "spring",
             stiffness: 300,
             damping: 30,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
-          className="fixed top-4 right-4 z-50 max-w-sm"
         >
-          <div className="rounded-2xl p-4 relative bg-card border border-border">
+          <div className="relative rounded-2xl border border-border bg-card p-4">
             <Button
-            variant={"ghost"}
-            size={"icon"}
-              onClick={handleClose}
-              className="absolute top-2 right-2"
               aria-label="Close promotional popup"
+              className="absolute top-2 right-2"
+              onClick={handleClose}
+              size={"icon"}
+              variant={"ghost"}
             >
               <X className="h-4 w-4" />
             </Button>
 
             {/* Content */}
             <div className="flex items-start gap-3 pr-3">
-              <div className="flex-1 min-w-0 flex flex-col gap-1 items-start justify-center">
-                <h3 className="text-sm font-semibold pb-2">
+              <div className="flex min-w-0 flex-1 flex-col items-start justify-center gap-1">
+                <h3 className="pb-2 font-semibold text-sm">
                   Special Offer! 🎉
                 </h3>
                 <p className="text-xs">
-                  Use code <span className="font-mono bg-accent px-1 rounded">FREE20</span> for 20% off your first month
+                  Use code{" "}
+                  <span className="rounded bg-accent px-1 font-mono">
+                    FREE20
+                  </span>{" "}
+                  for 20% off your first month
                 </p>
-                <Button asChild variant={"link"} size={"sm"} className="p-0">
-                    <Link href="/#pricing">
-                    Grab deal now!
-                    </Link>
+                <Button asChild className="p-0" size={"sm"} variant={"link"}>
+                  <Link href="/#pricing">Grab deal now!</Link>
                 </Button>
               </div>
             </div>
