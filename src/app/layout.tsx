@@ -185,6 +185,12 @@ export default function RootLayout({
             `,
           }}
         />
+        <script
+          defer
+          data-website-id="68cd41ffc45ae8919cf0f95a"
+          data-domain="www.ikiform.com"
+          src="https://datafa.st/js/script.js">
+        </script>
       </head>
       <CrispController />
       <body
