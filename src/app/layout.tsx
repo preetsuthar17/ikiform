@@ -190,7 +190,7 @@ export default function RootLayout({
           data-website-id="68cd41ffc45ae8919cf0f95a"
           defer
           src="https://datafa.st/js/script.js"
-        ></script>
+        />
       </head>
       <CrispController />
       <body
