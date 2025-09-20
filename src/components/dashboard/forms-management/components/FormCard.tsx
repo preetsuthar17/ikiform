@@ -25,6 +25,14 @@ export function FormCard({
     if (onShare) onShare(form);
   };
 
+  const handleCardClick = () => {
+    onViewAnalytics(form.id);
+  };
+
+  const handleButtonClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
   const internalTitle =
     form.schema?.settings?.title || form.title || "Untitled Form";
   const hasPublicTitle =
@@ -32,43 +40,50 @@ export function FormCard({
     form.schema.settings.publicTitle !== form.schema?.settings?.title;
 
   return (
-    <Card className="group flex cursor-pointer flex-col gap-4 rounded-4xl border-none bg-card p-6 md:p-8">
+    <Card
+      className="group flex cursor-pointer flex-col gap-4 rounded-4xl border-none bg-card p-6 md:p-8"
+      onClick={handleCardClick}
+    >
       <div className="flex items-start justify-between">
-        <div className="min-w-0 flex-1">
-          <h3 className="mb-2 line-clamp-2 font-semibold text-foreground text-lg leading-tight">
-            {internalTitle}
-          </h3>
-          {hasPublicTitle && (
-            <p className="mb-2 line-clamp-1 text-muted-foreground text-sm">
-              Public: "{form.schema?.settings?.publicTitle}"
-            </p>
-          )}
-          {form.description && (
-            <p className="line-clamp-2 text-muted-foreground text-sm leading-relaxed">
-              {form.description}
-            </p>
-          )}
+        <div className="flex w-full items-start justify-between gap-4">
+          <div className="flex min-w-0 flex-1 flex-col gap-2">
+            <h3 className="line-clamp-2 font-semibold text-foreground text-lg leading-tight">
+              {internalTitle}
+            </h3>
+            {hasPublicTitle && (
+              <p className="line-clamp-1 text-muted-foreground text-sm">
+                Public: "{form.schema?.settings?.publicTitle}"
+              </p>
+            )}
+            {form.description && (
+              <p className="line-clamp-2 text-muted-foreground text-sm leading-relaxed">
+                {form.description}
+              </p>
+            )}
+          </div>
+          <Badge
+            className="flex-shrink-0 rounded-lg font-medium"
+            variant={form.is_published ? "default" : "secondary"}
+          >
+            {form.is_published ? "Published" : "Draft"}
+          </Badge>
         </div>
-        <Badge
-          className="flex-shrink-0 rounded-lg font-medium"
-          variant={form.is_published ? "default" : "secondary"}
-        >
-          {form.is_published ? "Published" : "Draft"}
-        </Badge>
       </div>
       <Separator />
       <div className="flex items-center justify-between text-muted-foreground text-sm">
         <span>Updated {formattedDate}</span>
       </div>
-      <FormActions
-        form={form}
-        onDelete={onDelete}
-        onDuplicate={onDuplicate}
-        onEdit={onEdit}
-        onShare={handleShare}
-        onViewAnalytics={onViewAnalytics}
-        onViewForm={onViewForm}
-      />
+      <div onClick={handleButtonClick}>
+        <FormActions
+          form={form}
+          onDelete={onDelete}
+          onDuplicate={onDuplicate}
+          onEdit={onEdit}
+          onShare={handleShare}
+          onViewAnalytics={onViewAnalytics}
+          onViewForm={onViewForm}
+        />
+      </div>
       <ShareFormModal
         formId={form?.id || null}
         formSlug={form?.slug || null}
