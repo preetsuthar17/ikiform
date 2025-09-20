@@ -48,7 +48,7 @@ const features = [
   "Form embedding",
   "Design customization & custom branding",
   "Spam and bot protection",
-  "Password and profanity filters"
+  "Password and profanity filters",
 ];
 
 const MONTHLY_PRODUCT_ID = "05f52efa-2102-4dd0-9d1d-1538210d6712";
