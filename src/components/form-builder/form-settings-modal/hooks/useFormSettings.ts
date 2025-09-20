@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import type { FormSchema } from "@/lib/database";
 import {
+  DEFAULT_BOT_PROTECTION_SETTINGS,
   DEFAULT_DUPLICATE_PREVENTION_SETTINGS,
   DEFAULT_NOTIFICATION_SETTINGS,
   DEFAULT_PASSWORD_PROTECTION_SETTINGS,
@@ -38,6 +39,10 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
     profanityFilter: {
       ...DEFAULT_PROFANITY_FILTER_SETTINGS,
       ...schema.settings.profanityFilter,
+    },
+    botProtection: {
+      ...DEFAULT_BOT_PROTECTION_SETTINGS,
+      ...schema.settings.botProtection,
     },
     responseLimit: {
       ...DEFAULT_RESPONSE_LIMIT_SETTINGS,
@@ -87,6 +92,10 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
       profanityFilter: {
         ...DEFAULT_PROFANITY_FILTER_SETTINGS,
         ...schema.settings.profanityFilter,
+      },
+      botProtection: {
+        ...DEFAULT_BOT_PROTECTION_SETTINGS,
+        ...schema.settings.botProtection,
       },
       responseLimit: {
         ...DEFAULT_RESPONSE_LIMIT_SETTINGS,
@@ -180,6 +189,18 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
       profanityFilter: {
         ...localSettings.profanityFilter,
         ...profanityFilterUpdates,
+      },
+    });
+  };
+
+  const updateBotProtection = (
+    botProtectionUpdates: Partial<NonNullable<LocalSettings["botProtection"]>>
+  ) => {
+    setLocalSettings({
+      ...localSettings,
+      botProtection: {
+        ...localSettings.botProtection,
+        ...botProtectionUpdates,
       },
     });
   };
@@ -299,6 +320,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
     updateRateLimit,
     updateDuplicatePrevention,
     updateProfanityFilter,
+    updateBotProtection,
     updateResponseLimit,
     updatePasswordProtection,
     updateSocialMedia,

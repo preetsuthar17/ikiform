@@ -1,3 +1,4 @@
+import { checkBotId } from "botid/server";
 import { headers } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
 import { formsDbServer } from "@/lib/database";
@@ -54,6 +55,21 @@ export async function POST(
         { error: "Form not found or not published" },
         { status: 404 }
       );
+    }
+
+    // Check bot protection if enabled
+    const botProtection = form.schema.settings.botProtection;
+    if (botProtection?.enabled) {
+      const verification = await checkBotId();
+      if (verification.isBot) {
+        return NextResponse.json(
+          {
+            error: "Bot detected",
+            message: botProtection.message || "Bot detected. Access denied.",
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const supabase = await createClient();

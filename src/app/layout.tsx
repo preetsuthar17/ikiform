@@ -9,6 +9,7 @@ import {
 import "./globals.css";
 
 import { Analytics } from "@vercel/analytics/next";
+import { BotIdClientWrapper } from "@/components/other/BotIdClient";
 import { LightThemeEnforcer } from "@/components/other/light-theme-enforcer";
 import { TicketpingController } from "@/components/other/TicketPingController";
 import { Toaster } from "@/components/ui/toast";
@@ -144,6 +145,7 @@ export default function RootLayout({
   return (
     <html className="light" lang="en" suppressHydrationWarning>
       <head>
+        <BotIdClientWrapper />
         {/* <script
           crossOrigin="anonymous"
           src="//unpkg.com/react-scan/dist/auto.global.js"

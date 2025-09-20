@@ -40,6 +40,7 @@
         "@vercel/analytics": "^1.5.0",
         "ai": "^5.0.47",
         "bad-words": "^4.0.0",
+        "botid": "^1.5.6",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "cmdk": "^1.1.1",
@@ -1019,6 +1020,8 @@
     "bl": ["bl@4.1.0", "", { "dependencies": { "buffer": "^5.5.0", "inherits": "^2.0.4", "readable-stream": "^3.4.0" } }, "sha512-1W07cM9gS6DcLperZfFSj+bWLtaPGSOHWhPiGzXmvVJbRLdG82sH/Kn8EtW1VqWVA54AKf2h5k5BbnIbwF3h6w=="],
 
     "boolbase": ["boolbase@1.0.0", "", {}, "sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww=="],
+
+    "botid": ["botid@1.5.6", "", { "peerDependencies": { "next": "*", "react": "^18.0.0 || ^19.0.0" }, "optionalPeers": ["next", "react"] }, "sha512-KElecPjc1z6WJ6sCJMw6CvLo/CQclwlLJdobqmtOjVqvCXZZmaWvNafVDwBk0Kf5ordIaorDa3YkIx2OlGx7pg=="],
 
     "brace-expansion": ["brace-expansion@2.0.2", "", { "dependencies": { "balanced-match": "^1.0.0" } }, "sha512-Jt0vHyM+jmUBqojB7E1NIYadt0vI0Qxjxd2TErW94wDz+E2LAm5vKMXXwg6ZZBTHPuUlDgQHKXvjGBdfcF1ZDQ=="],
 

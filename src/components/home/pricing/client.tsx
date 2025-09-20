@@ -38,15 +38,17 @@ interface PricingClientProps {
 
 const features = [
   "Unlimited forms and submissions",
+  "Developer API support",
+  "Rate limiting and Response limiting",
   "AI Form builder and AI analytics",
   "Scoring (quiz system)",
   "Webhooks",
   "Fetching form field data from API",
   "Collect signature",
-  "File upload field",
   "Form embedding",
   "Design customization & custom branding",
-  "and much more!",
+  "Spam and bot protection",
+  "Password and profanity filters"
 ];
 
 const MONTHLY_PRODUCT_ID = "05f52efa-2102-4dd0-9d1d-1538210d6712";

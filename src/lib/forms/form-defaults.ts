@@ -57,6 +57,14 @@ export const DEFAULT_DUPLICATE_PREVENTION_SETTINGS = {
   maxAttempts: 1,
 };
 
+/**
+ * Default bot protection settings for all forms
+ */
+export const DEFAULT_BOT_PROTECTION_SETTINGS = {
+  enabled: false,
+  message: "Bot detected. Access denied.",
+};
+
 export const DEFAULT_SOCIAL_MEDIA_SETTINGS = {
   enabled: true,
   platforms: {
@@ -174,6 +182,10 @@ export function ensureDefaultFormSettings(schema: FormSchema): FormSchema {
         ...DEFAULT_DUPLICATE_PREVENTION_SETTINGS,
         ...schema.settings?.duplicatePrevention,
       },
+      botProtection: {
+        ...DEFAULT_BOT_PROTECTION_SETTINGS,
+        ...schema.settings?.botProtection,
+      },
       api: {
         enabled: false,
         apiKey: undefined,
@@ -238,6 +250,7 @@ export function createDefaultFormSchema(options: {
       passwordProtection: { ...DEFAULT_PASSWORD_PROTECTION_SETTINGS },
       notifications: { ...DEFAULT_NOTIFICATION_SETTINGS },
       duplicatePrevention: { ...DEFAULT_DUPLICATE_PREVENTION_SETTINGS },
+      botProtection: { ...DEFAULT_BOT_PROTECTION_SETTINGS },
     },
   };
 }

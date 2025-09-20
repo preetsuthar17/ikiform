@@ -3,6 +3,7 @@ import React from "react";
 import { ApiSection } from "../sections/api-section";
 import type { FormSettingsSection } from "../types";
 import { BasicInfoSection } from "./BasicInfoSection";
+import { BotProtectionSection } from "./BotProtectionSection";
 import { DesignSection } from "./DesignSection";
 import { DuplicatePreventionSection } from "./DuplicatePreventionSection";
 import { FormDesignPreview } from "./FormDesignPreview";
@@ -22,6 +23,7 @@ interface FormSettingsContentProps {
   updateRateLimit: any;
   updateDuplicatePrevention: any;
   updateProfanityFilter: any;
+  updateBotProtection: any;
   updateResponseLimit: any;
   updatePasswordProtection: any;
   updateSocialMedia: any;
@@ -38,6 +40,7 @@ export function FormSettingsContent({
   updateRateLimit,
   updateDuplicatePrevention,
   updateProfanityFilter,
+  updateBotProtection,
   updateResponseLimit,
   updatePasswordProtection,
   updateSocialMedia,
@@ -85,6 +88,10 @@ export function FormSettingsContent({
           <ProfanityFilterSection
             localSettings={localSettings}
             updateProfanityFilter={updateProfanityFilter}
+          />
+          <BotProtectionSection
+            localSettings={localSettings}
+            updateBotProtection={updateBotProtection}
           />
         </section>
       );

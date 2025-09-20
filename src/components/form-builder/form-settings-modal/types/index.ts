@@ -87,6 +87,10 @@ export interface LocalSettings {
     allowOverride?: boolean;
     maxAttempts?: number;
   };
+  botProtection?: {
+    enabled?: boolean;
+    message?: string;
+  };
   profanityFilter?: {
     enabled?: boolean;
     strictMode?: boolean;
@@ -150,6 +154,13 @@ export interface ProfanityFilterSectionProps {
   localSettings: LocalSettings;
   updateProfanityFilter: (
     updates: Partial<NonNullable<LocalSettings["profanityFilter"]>>
+  ) => void;
+}
+
+export interface BotProtectionSectionProps {
+  localSettings: LocalSettings;
+  updateBotProtection: (
+    updates: Partial<NonNullable<LocalSettings["botProtection"]>>
   ) => void;
 }
 

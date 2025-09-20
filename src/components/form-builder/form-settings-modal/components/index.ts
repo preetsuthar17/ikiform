@@ -1,5 +1,6 @@
 export { ApiSection } from "../sections/api-section";
 export { BasicInfoSection } from "./BasicInfoSection";
+export { BotProtectionSection } from "./BotProtectionSection";
 export { DesignSection } from "./DesignSection";
 export { DuplicatePreventionSection } from "./DuplicatePreventionSection";
 export { FormDesignPreview } from "./FormDesignPreview";

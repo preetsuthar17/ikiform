@@ -1,3 +1,4 @@
+import { checkBotId } from "botid/server";
 import { headers } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
 import {
@@ -69,6 +70,21 @@ export async function POST(
     }
 
     const form = validationResult.form;
+
+    // Check bot protection if enabled
+    const botProtection = form.schema.settings.botProtection;
+    if (botProtection?.enabled) {
+      const verification = await checkBotId();
+      if (verification.isBot) {
+        return NextResponse.json(
+          {
+            error: "Bot detected",
+            message: botProtection.message || "Bot detected. Access denied.",
+          },
+          { status: 403 }
+        );
+      }
+    }
 
     // Get IP address for rate limiting and duplicate prevention
     const headersList = await headers();

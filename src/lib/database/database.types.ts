@@ -725,6 +725,10 @@ export interface FormSchema {
       allowOverride?: boolean;
       maxAttempts?: number;
     };
+    botProtection?: {
+      enabled?: boolean;
+      message?: string;
+    };
     api?: {
       enabled?: boolean;
       apiKey?: string;
