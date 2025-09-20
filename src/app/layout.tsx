@@ -9,8 +9,8 @@ import {
 import "./globals.css";
 
 import { Analytics } from "@vercel/analytics/next";
-import CrispController from "@/components/other/CrispController";
 import { LightThemeEnforcer } from "@/components/other/light-theme-enforcer";
+import { TicketpingController } from "@/components/other/TicketPingController";
 import { Toaster } from "@/components/ui/toast";
 import ConditionalLayout from "./conditional-layout";
 
@@ -192,7 +192,7 @@ export default function RootLayout({
           src="https://datafa.st/js/script.js"
         />
       </head>
-      <CrispController />
+      <TicketpingController />
       <body
         className={`light ${geist.className} ${inter.variable} ${jetBrainsMono.variable} ${geistMono.variable} ${dmSans.variable} antialiased`}
       >
