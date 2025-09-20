@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 import { FormCustomizePage } from "@/components/form-builder/form-customize";
@@ -76,7 +77,9 @@ export default async function CustomizePage({ params }: PageProps) {
   }
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { id } = await params;
 
   try {

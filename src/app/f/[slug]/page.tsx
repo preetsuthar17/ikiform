@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { formsDbServer } from "@/lib/database";
 import { ensureDefaultRateLimitSettings } from "@/lib/forms/form-defaults";
@@ -13,7 +14,7 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
   const { slug } = await params;
   try {
     const form = await formsDbServer.getPublicForm(slug);
