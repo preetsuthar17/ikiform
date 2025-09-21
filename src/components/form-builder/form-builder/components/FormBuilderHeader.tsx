@@ -58,7 +58,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
           >
             Form Builder
           </h1>
-          <div className="flex items-center gap-2 md:gap-3">
+          <div className="flex items-center gap-2 md:gap-3 max-md:pt-2">
             <Button
               asChild
               className="font-medium text-xs md:text-sm"
@@ -80,94 +80,101 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
           </div>
         </div>
 
-        <ScrollArea className="w-full md:hidden" orientation="horizontal">
-          <div className="flex gap-2 pb-4">
-            <Button
-              className="gap-1"
-              onClick={onModeToggle}
-              variant={formSchema.settings.multiStep ? "default" : "outline"}
-            >
-              {formSchema.settings.multiStep ? (
-                <Layers className="h-3 w-3" />
-              ) : (
-                <FileText className="h-3 w-3" />
-              )}
-              {formSchema.settings.multiStep ? "Multi-Step" : "Single Page"}
-            </Button>
-            <Button
-              className="h-8 w-8"
-              onClick={onJsonView}
-              size="icon"
-              variant="outline"
-            >
-              <Code className="h-3 w-3 shrink-0" />
-            </Button>
-            <Button
-              className="h-8 w-8"
-              disabled={!formId}
-              onClick={onAnalytics}
-              size="icon"
-              variant="outline"
-            >
-              <BarChart3 className="h-3 w-3 shrink-0" />
-            </Button>
-            <Button
-              className="h-8 w-8"
-              disabled={!formId}
-              onClick={onShare}
-              size="icon"
-              variant="outline"
-            >
-              <Share className="h-3 w-3 shrink-0" />
-            </Button>
-            <Button
-              className="h-8 w-8"
-              onClick={onSettings}
-              size="icon"
-              variant="outline"
-            >
-              <SettingsIcon className="h-3 w-3 shrink-0" />
-            </Button>
-
-            <Button asChild className="text-xs" size="sm" variant="default">
-              <Link href="/ai-builder">
-                <Sparkles className="h-3 w-3 shrink-0" /> Use Kiko
-              </Link>
-            </Button>
-
-            <Button
-              className="text-xs"
-              disabled={!formId || publishing}
-              loading={publishing}
-              onClick={onPublish}
-              size="sm"
-              variant="outline"
-            >
-              {isPublished ? (
-                <>
-                  {!publishing && <Globe className="h-3 w-3 shrink-0" />}
-                  {publishing ? "Unpublishing" : "Published"}
-                </>
-              ) : (
-                <>
-                  {!publishing && <EyeOff className="h-3 w-3 shrink-0" />}
-                  {publishing ? "Publishing" : "Publish"}
-                </>
-              )}
-            </Button>
-
-            <Button
-              className="text-xs"
-              disabled={saving}
-              loading={saving}
-              onClick={onSave}
-              size="sm"
-            >
-              {!saving && <Save className="h-3 w-3" />}
-              {saving ? "Saving" : "Save"}
-            </Button>
-          </div>
-        </ScrollArea>
+        <div className="relative w-full md:hidden">
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute left-0 top-0 z-10 h-full w-6 bg-gradient-to-r from-card via-card/80 to-transparent"
+          />
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute right-0 top-0 z-10 h-full w-6 bg-gradient-to-l from-card via-card/80 to-transparent"
+          />
+          <ScrollArea className="w-full" orientation="horizontal" type="always">
+            <div className="flex gap-2 pb-2">
+              <Button
+                className="gap-1"
+                onClick={onModeToggle}
+                variant={formSchema.settings.multiStep ? "default" : "outline"}
+              >
+                {formSchema.settings.multiStep ? (
+                  <Layers className="h-3 w-3" />
+                ) : (
+                  <FileText className="h-3 w-3" />
+                )}
+                {formSchema.settings.multiStep ? "Multi-Step" : "Single Page"}
+              </Button>
+              <Button
+                className="h-8 w-8"
+                onClick={onJsonView}
+                size="icon"
+                variant="outline"
+              >
+                <Code className="h-3 w-3 shrink-0" />
+              </Button>
+              <Button
+                className="h-8 w-8"
+                disabled={!formId}
+                onClick={onAnalytics}
+                size="icon"
+                variant="outline"
+              >
+                <BarChart3 className="h-3 w-3 shrink-0" />
+              </Button>
+              <Button
+                className="h-8 w-8"
+                disabled={!formId}
+                onClick={onShare}
+                size="icon"
+                variant="outline"
+              >
+                <Share className="h-3 w-3 shrink-0" />
+              </Button>
+              <Button
+                className="h-8 w-8"
+                onClick={onSettings}
+                size="icon"
+                variant="outline"
+              >
+                <SettingsIcon className="h-3 w-3 shrink-0" />
+              </Button>
+              <Button asChild className="text-xs" size="sm" variant="default">
+                <Link href="/ai-builder">
+                  <Sparkles className="h-3 w-3 shrink-0" /> Use Kiko
+                </Link>
+              </Button>
+              <Button
+                className="text-xs"
+                disabled={!formId || publishing}
+                loading={publishing}
+                onClick={onPublish}
+                size="sm"
+                variant="outline"
+              >
+                {isPublished ? (
+                  <>
+                    {!publishing && <Globe className="h-3 w-3 shrink-0" />}
+                    {publishing ? "Unpublishing" : "Published"}
+                  </>
+                ) : (
+                  <>
+                    {!publishing && <EyeOff className="h-3 w-3 shrink-0" />}
+                    {publishing ? "Publishing" : "Publish"}
+                  </>
+                )}
+              </Button>
+              <Button
+                className="text-xs"
+                disabled={saving}
+                loading={saving}
+                onClick={onSave}
+                size="sm"
+              >
+                {!saving && <Save className="h-3 w-3" />}
+                {saving ? "Saving" : "Save"}
+              </Button>
+            </div>
+          </ScrollArea>
+        </div>
 
         <div className="hidden items-center gap-3 md:flex">
           <Button
