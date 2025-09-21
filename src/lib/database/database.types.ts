@@ -668,6 +668,7 @@ export interface FormSchema {
       confirmBeforeLeave?: boolean;
       showFieldNumbers?: boolean;
       animateTransitions?: boolean;
+      autoFocusFirstField?: boolean;
     };
     rateLimit?: {
       enabled?: boolean;
