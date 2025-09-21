@@ -53,7 +53,9 @@ export function CheckboxField(props: BaseFieldProps) {
   const options = apiOptions ?? field.options ?? [];
 
   return (
-    <div className={`flex flex-col gap-2 ${builderMode ? 'pointer-events-none' : ''}`}>
+    <div
+      className={`flex flex-col gap-2 ${builderMode ? "pointer-events-none" : ""}`}
+    >
       {fetchError && <div className="p-2 text-red-500">{fetchError}</div>}
       {options.map((option, index) => {
         const optionValue = typeof option === "string" ? option : option.value;

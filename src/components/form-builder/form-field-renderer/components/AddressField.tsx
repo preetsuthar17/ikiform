@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import type { BaseFieldProps } from "../types";
 import { applyBuilderMode, getBaseClasses, getBuilderMode } from "../utils";
@@ -29,18 +30,24 @@ export function AddressField(props: BaseFieldProps) {
   };
 
   return (
-    <div className={`flex flex-col gap-2 ${builderMode ? 'pointer-events-none' : ''}`}>
+    <div
+      className={`flex flex-col gap-2 ${builderMode ? "pointer-events-none" : ""}`}
+    >
       {addressFields.map((f) => {
-        const inputProps = applyBuilderMode({
-          className: `flex gap-2 ${baseClasses}`,
-          disabled,
-          id: `${field.id}-${f.key}`,
-          key: f.key,
-          onChange: (e: React.ChangeEvent<HTMLInputElement>) => handleChange(f.key, e.target.value),
-          placeholder: f.label,
-          required: f.required,
-          value: address[f.key] || "",
-        }, builderMode);
+        const inputProps = applyBuilderMode(
+          {
+            className: `flex gap-2 ${baseClasses}`,
+            disabled,
+            id: `${field.id}-${f.key}`,
+            key: f.key,
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+              handleChange(f.key, e.target.value),
+            placeholder: f.label,
+            required: f.required,
+            value: address[f.key] || "",
+          },
+          builderMode
+        );
 
         return <Input {...inputProps} />;
       })}

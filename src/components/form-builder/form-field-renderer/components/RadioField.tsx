@@ -78,55 +78,55 @@ export function RadioField(props: BaseFieldProps) {
   );
 
   return (
-    <div className={builderMode ? 'pointer-events-none' : ''}>
+    <div className={builderMode ? "pointer-events-none" : ""}>
       <RadioGroup {...radioGroupProps}>
-      {fetchError && <div className="p-2 text-red-500">{fetchError}</div>}
-      {options.filter(Boolean).map((option, index) => {
-        let optionValue = "";
-        let optionLabel = "";
+        {fetchError && <div className="p-2 text-red-500">{fetchError}</div>}
+        {options.filter(Boolean).map((option, index) => {
+          let optionValue = "";
+          let optionLabel = "";
 
-        if (typeof option === "string") {
-          optionValue = option;
-          optionLabel = option;
-        } else if (option && typeof option === "object") {
-          optionValue = option.value || "";
-          optionLabel = option.label || option.value || "";
-        }
+          if (typeof option === "string") {
+            optionValue = option;
+            optionLabel = option;
+          } else if (option && typeof option === "object") {
+            optionValue = option.value || "";
+            optionLabel = option.label || option.value || "";
+          }
 
-        if (!optionValue) return null;
+          if (!optionValue) return null;
 
-        const isCorrect = isQuizField && correctAnswer === optionValue;
+          const isCorrect = isQuizField && correctAnswer === optionValue;
 
-        if (typeof option === "string" || optionValue) {
-          return (
-            <div
-              className={`relative ${isFormBuilder && isCorrect ? "rounded-md bg-green-50 p-1 ring-1 ring-green-200" : ""}`}
-              key={index}
-            >
-              <RadioItem
-                {...applyBuilderMode(
-                  {
-                    disabled: disabled || loading,
-                    id: `${field.id}-${index}`,
-                    label: optionLabel,
-                    value: optionValue,
-                  },
-                  builderMode
+          if (typeof option === "string" || optionValue) {
+            return (
+              <div
+                className={`relative ${isFormBuilder && isCorrect ? "rounded-md bg-green-50 p-1 ring-1 ring-green-200" : ""}`}
+                key={index}
+              >
+                <RadioItem
+                  {...applyBuilderMode(
+                    {
+                      disabled: disabled || loading,
+                      id: `${field.id}-${index}`,
+                      label: optionLabel,
+                      value: optionValue,
+                    },
+                    builderMode
+                  )}
+                />
+                {isFormBuilder && isCorrect && (
+                  <div
+                    className="-translate-y-1/2 absolute top-1/2 right-2 transform"
+                    title="Correct Answer"
+                  >
+                    <CheckCircle className="h-4 w-4 text-green-600" />
+                  </div>
                 )}
-              />
-              {isFormBuilder && isCorrect && (
-                <div
-                  className="-translate-y-1/2 absolute top-1/2 right-2 transform"
-                  title="Correct Answer"
-                >
-                  <CheckCircle className="h-4 w-4 text-green-600" />
-                </div>
-              )}
-            </div>
-          );
-        }
-        return null;
-      })}
+              </div>
+            );
+          }
+          return null;
+        })}
       </RadioGroup>
     </div>
   );

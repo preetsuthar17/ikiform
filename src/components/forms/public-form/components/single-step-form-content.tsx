@@ -47,7 +47,10 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
     useFormStyling(schema);
 
   useEffect(() => {
-    if (firstFieldRef.current && schema.settings.behavior?.autoFocusFirstField) {
+    if (
+      firstFieldRef.current &&
+      schema.settings.behavior?.autoFocusFirstField
+    ) {
       firstFieldRef.current.focus();
     }
   }, [schema.settings.behavior?.autoFocusFirstField]);

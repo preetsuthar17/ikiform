@@ -108,16 +108,19 @@ export function BasicInfoSection({
             className="h-4 w-4 accent-primary"
             id="auto-focus-toggle"
             onChange={(e) =>
-              updateSettings({ 
-                behavior: { 
-                  ...localSettings.behavior, 
-                  autoFocusFirstField: (e.target as HTMLInputElement).checked 
-                } 
+              updateSettings({
+                behavior: {
+                  ...localSettings.behavior,
+                  autoFocusFirstField: (e.target as HTMLInputElement).checked,
+                },
               })
             }
             type="checkbox"
           />
-          <Label className="cursor-pointer select-none" htmlFor="auto-focus-toggle">
+          <Label
+            className="cursor-pointer select-none"
+            htmlFor="auto-focus-toggle"
+          >
             Automatically focus on the first field when form loads
           </Label>
         </div>

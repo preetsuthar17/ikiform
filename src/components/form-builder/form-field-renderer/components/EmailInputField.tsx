@@ -92,24 +92,29 @@ export function EmailInputField(props: BaseFieldProps) {
   }
   const showError = !!errorMessage;
 
-  const inputProps = applyBuilderMode({
-    className: `flex gap-2 ${baseClasses}`,
-    disabled,
-    id: field.id,
-    onBlur: handleBlur,
-    onChange: handleInputChange,
-    placeholder:
-      field.placeholder ||
-      (emailSettings?.autoCompleteDomain
-        ? `username@${emailSettings.autoCompleteDomain}`
-        : "Enter email address"),
-    type: "email",
-    value: inputValue,
-  }, builderMode);
+  const inputProps = applyBuilderMode(
+    {
+      className: `flex gap-2 ${baseClasses}`,
+      disabled,
+      id: field.id,
+      onBlur: handleBlur,
+      onChange: handleInputChange,
+      placeholder:
+        field.placeholder ||
+        (emailSettings?.autoCompleteDomain
+          ? `username@${emailSettings.autoCompleteDomain}`
+          : "Enter email address"),
+      type: "email",
+      value: inputValue,
+    },
+    builderMode
+  );
 
   return (
-    <div className={`flex flex-col gap-2 ${builderMode ? 'pointer-events-none' : ''}`}>
-      <div className={`relative ${builderMode ? 'pointer-events-none' : ''}`}>
+    <div
+      className={`flex flex-col gap-2 ${builderMode ? "pointer-events-none" : ""}`}
+    >
+      <div className={`relative ${builderMode ? "pointer-events-none" : ""}`}>
         <Input {...inputProps} />
 
         {showAutoComplete &&

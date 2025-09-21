@@ -58,19 +58,25 @@ export function SelectField(props: BaseFieldProps) {
 
   const options = apiOptions ?? field.options ?? [];
 
-  const selectProps = applyBuilderMode({
-    disabled: disabled || loading,
-    onValueChange: onChange,
-    value: value || "",
-  }, builderMode);
+  const selectProps = applyBuilderMode(
+    {
+      disabled: disabled || loading,
+      onValueChange: onChange,
+      value: value || "",
+    },
+    builderMode
+  );
 
-  const selectTriggerProps = applyBuilderMode({
-    className: `flex gap-2 ${errorClasses}`,
-    disabled: disabled || loading,
-  }, builderMode);
+  const selectTriggerProps = applyBuilderMode(
+    {
+      className: `flex gap-2 ${errorClasses}`,
+      disabled: disabled || loading,
+    },
+    builderMode
+  );
 
   return (
-    <div className={builderMode ? 'pointer-events-none' : ''}>
+    <div className={builderMode ? "pointer-events-none" : ""}>
       <Select {...selectProps}>
         <SelectTrigger {...selectTriggerProps}>
           <SelectValue
