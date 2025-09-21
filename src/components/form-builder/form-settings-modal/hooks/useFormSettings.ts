@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import type { FormSchema } from "@/lib/database";
 import {
+  DEFAULT_BEHAVIOR_SETTINGS,
   DEFAULT_BOT_PROTECTION_SETTINGS,
   DEFAULT_DUPLICATE_PREVENTION_SETTINGS,
   DEFAULT_NOTIFICATION_SETTINGS,
@@ -27,6 +28,10 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
       borderRadius:
         schema.settings.layout?.borderRadius ||
         DEFAULT_FORM_DESIGN.borderRadius,
+    },
+    behavior: {
+      ...DEFAULT_BEHAVIOR_SETTINGS,
+      ...schema.settings.behavior,
     },
     rateLimit: {
       ...DEFAULT_RATE_LIMIT_SETTINGS,
@@ -81,6 +86,10 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
           schema.settings.layout?.borderRadius ||
           DEFAULT_FORM_DESIGN.borderRadius,
       },
+      behavior: {
+        ...DEFAULT_BEHAVIOR_SETTINGS,
+        ...schema.settings.behavior,
+      },
       rateLimit: {
         ...DEFAULT_RATE_LIMIT_SETTINGS,
         ...schema.settings.rateLimit,
@@ -129,6 +138,10 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
         margin: updates.layout?.margin ?? localSettings.layout?.margin,
         borderRadius:
           updates.layout?.borderRadius ?? localSettings.layout?.borderRadius,
+      },
+      behavior: {
+        ...localSettings.behavior,
+        ...updates.behavior,
       },
       rateLimit: {
         ...localSettings.rateLimit,

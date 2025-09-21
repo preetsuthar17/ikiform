@@ -203,6 +203,7 @@ export function FormFieldsContainer({
                           </div>
                         </div>
                         <FormFieldRenderer
+                          builderMode={true}
                           disabled={fieldVisibility?.[field.id]?.disabled}
                           field={field}
                           onChange={(value) =>

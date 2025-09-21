@@ -3,15 +3,11 @@ import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { validateUrl } from "@/lib/validation/url-validation";
 import type { BaseFieldProps } from "../types";
-import { getBaseClasses } from "../utils";
+import { applyBuilderMode, getBaseClasses, getBuilderMode } from "../utils";
 
-export function LinkInputField({
-  field,
-  value,
-  onChange,
-  error,
-  disabled,
-}: BaseFieldProps) {
+export function LinkInputField(props: BaseFieldProps) {
+  const { field, value, onChange, error, disabled } = props;
+  const builderMode = getBuilderMode(props);
   const baseClasses = getBaseClasses(field, error);
   const [inputValue, setInputValue] = useState(value || "");
   const [isValidating, setIsValidating] = useState(false);
@@ -33,18 +29,20 @@ export function LinkInputField({
   const errorMessage =
     error || (isValidating && !validation.isValid ? validation.message : "");
 
+  const inputProps = applyBuilderMode({
+    className: `flex gap-2 ${baseClasses}`,
+    disabled,
+    id: field.id,
+    onBlur: handleBlur,
+    onChange: handleInputChange,
+    placeholder: field.placeholder || "https://",
+    type: "url",
+    value: inputValue,
+  }, builderMode);
+
   return (
-    <div className="flex flex-col gap-2">
-      <Input
-        className={`flex gap-2 ${baseClasses}`}
-        disabled={disabled}
-        id={field.id}
-        onBlur={handleBlur}
-        onChange={handleInputChange}
-        placeholder={field.placeholder || "https://"}
-        type="url"
-        value={inputValue}
-      />
+    <div className={`flex flex-col gap-2 ${builderMode ? 'pointer-events-none' : ''}`}>
+      <Input {...inputProps} />
       {errorMessage && (
         <span className="text-destructive text-xs">{errorMessage}</span>
       )}

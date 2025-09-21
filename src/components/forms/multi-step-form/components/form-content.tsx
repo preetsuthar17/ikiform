@@ -34,10 +34,10 @@ export const FormContent: React.FC<FormContentProps> = ({
 }) => {
   const firstFieldRef = useRef<any>(null);
   useEffect(() => {
-    if (firstFieldRef.current) {
+    if (firstFieldRef.current && schema.settings.behavior?.autoFocusFirstField) {
       firstFieldRef.current.focus();
     }
-  }, [currentBlock]);
+  }, [currentBlock, schema.settings.behavior?.autoFocusFirstField]);
 
   const visibleFields = fieldVisibility
     ? currentBlock.fields.filter(

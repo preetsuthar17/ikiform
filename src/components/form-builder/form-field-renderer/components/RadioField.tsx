@@ -5,16 +5,16 @@ import { RadioGroup, RadioItem } from "@/components/ui/radio";
 
 import type { BaseFieldProps } from "../types";
 
-import { getErrorRingClasses } from "../utils";
+import {
+  applyBuilderMode,
+  getBuilderMode,
+  getErrorRingClasses,
+} from "../utils";
 import { sanitizeOptions } from "../utils/sanitizeOptions";
 
-export function RadioField({
-  field,
-  value,
-  onChange,
-  error,
-  disabled,
-}: BaseFieldProps) {
+export function RadioField(props: BaseFieldProps) {
+  const { field, value, onChange, error, disabled } = props;
+  const builderMode = getBuilderMode(props);
   const errorRingClasses = getErrorRingClasses(error);
   const [apiOptions, setApiOptions] = React.useState<Array<
     string | { value: string; label?: string }
@@ -67,13 +67,19 @@ export function RadioField({
 
   const options = apiOptions ?? field.options ?? [];
 
+  const radioGroupProps = applyBuilderMode(
+    {
+      className: `flex flex-col gap-2 ${errorRingClasses}`,
+      disabled: disabled || loading,
+      onValueChange: onChange,
+      value: value || "",
+    },
+    builderMode
+  );
+
   return (
-    <RadioGroup
-      className={`flex flex-col gap-2 ${errorRingClasses}`}
-      disabled={disabled || loading}
-      onValueChange={onChange}
-      value={value || ""}
-    >
+    <div className={builderMode ? 'pointer-events-none' : ''}>
+      <RadioGroup {...radioGroupProps}>
       {fetchError && <div className="p-2 text-red-500">{fetchError}</div>}
       {options.filter(Boolean).map((option, index) => {
         let optionValue = "";
@@ -98,10 +104,15 @@ export function RadioField({
               key={index}
             >
               <RadioItem
-                disabled={disabled || loading}
-                id={`${field.id}-${index}`}
-                label={optionLabel}
-                value={optionValue}
+                {...applyBuilderMode(
+                  {
+                    disabled: disabled || loading,
+                    id: `${field.id}-${index}`,
+                    label: optionLabel,
+                    value: optionValue,
+                  },
+                  builderMode
+                )}
               />
               {isFormBuilder && isCorrect && (
                 <div
@@ -116,6 +127,7 @@ export function RadioField({
         }
         return null;
       })}
-    </RadioGroup>
+      </RadioGroup>
+    </div>
   );
 }

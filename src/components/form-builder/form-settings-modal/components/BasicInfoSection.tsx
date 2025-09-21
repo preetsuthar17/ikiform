@@ -102,6 +102,25 @@ export function BasicInfoSection({
             Display form in RTL (Right-to-Left) mode
           </Label>
         </div>
+        <div className="flex items-center gap-3 pt-2">
+          <input
+            checked={!!localSettings.behavior?.autoFocusFirstField}
+            className="h-4 w-4 accent-primary"
+            id="auto-focus-toggle"
+            onChange={(e) =>
+              updateSettings({ 
+                behavior: { 
+                  ...localSettings.behavior, 
+                  autoFocusFirstField: (e.target as HTMLInputElement).checked 
+                } 
+              })
+            }
+            type="checkbox"
+          />
+          <Label className="cursor-pointer select-none" htmlFor="auto-focus-toggle">
+            Automatically focus on the first field when form loads
+          </Label>
+        </div>
       </div>
     </Card>
   );

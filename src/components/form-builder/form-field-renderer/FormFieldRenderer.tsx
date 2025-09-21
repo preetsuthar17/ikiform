@@ -14,9 +14,10 @@ export function FormFieldRenderer({
   fieldRef,
   disabled,
   formId,
+  builderMode = false,
 }: FormFieldRendererProps) {
   return (
-    <FieldWrapper error={error} field={field}>
+    <FieldWrapper builderMode={builderMode} error={error} field={field}>
       {createFieldComponent(
         field,
         value,
@@ -24,7 +25,8 @@ export function FormFieldRenderer({
         error,
         fieldRef,
         disabled,
-        formId
+        formId,
+        builderMode
       )}
     </FieldWrapper>
   );

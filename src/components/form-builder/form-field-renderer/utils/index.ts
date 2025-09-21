@@ -58,4 +58,5 @@ export const getErrorRingClasses = (error?: string) => {
   return error ? "ring-2 ring-destructive/20" : "";
 };
 
+export { applyBuilderMode, getBuilderMode } from "./builderMode";
 export { createFieldComponent } from "./fieldFactory";

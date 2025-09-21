@@ -58,7 +58,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
           >
             Form Builder
           </h1>
-          <div className="flex items-center gap-2 md:gap-3 max-md:pt-2">
+          <div className="flex items-center gap-2 max-md:pt-2 md:gap-3">
             <Button
               asChild
               className="font-medium text-xs md:text-sm"
@@ -83,11 +83,11 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
         <div className="relative w-full md:hidden">
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute left-0 top-0 z-10 h-full w-6 bg-gradient-to-r from-card via-card/80 to-transparent"
+            className="pointer-events-none absolute top-0 left-0 z-10 h-full w-6 bg-gradient-to-r from-card via-card/80 to-transparent"
           />
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute right-0 top-0 z-10 h-full w-6 bg-gradient-to-l from-card via-card/80 to-transparent"
+            className="pointer-events-none absolute top-0 right-0 z-10 h-full w-6 bg-gradient-to-l from-card via-card/80 to-transparent"
           />
           <ScrollArea className="w-full" orientation="horizontal" type="always">
             <div className="flex gap-2 pb-2">

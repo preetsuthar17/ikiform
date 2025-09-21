@@ -31,14 +31,9 @@ interface UploadedFile {
   signedUrl: string;
 }
 
-export function FileUploadField({
-  field,
-  value,
-  onChange,
-  error,
-  disabled,
-  formId,
-}: BaseFieldProps) {
+export function FileUploadField(props: BaseFieldProps) {
+  const { field, value, onChange, error, disabled, formId } = props;
+  const builderMode = props.builderMode;
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
 
@@ -173,11 +168,11 @@ export function FileUploadField({
       <FileUpload
         accept={accept}
         className="bg-input"
-        disabled={disabled || isUploading}
+        disabled={disabled || isUploading || builderMode}
         maxFiles={maxFiles - uploadedFiles.length}
         maxSize={maxSize}
         multiple={maxFiles > 1}
-        onUpload={handleUpload}
+        onUpload={builderMode ? undefined : handleUpload}
         showPreview={false}
         variant="default"
       />
@@ -236,8 +231,10 @@ export function FileUploadField({
                   {/* Remove button */}
                   <Button
                     className="flex-shrink-0"
-                    disabled={disabled}
-                    onClick={() => handleRemoveFile(file.id)}
+                    disabled={disabled || builderMode}
+                    onClick={
+                      builderMode ? undefined : () => handleRemoveFile(file.id)
+                    }
                     size={"icon"}
                     type="button"
                     variant={"ghost"}

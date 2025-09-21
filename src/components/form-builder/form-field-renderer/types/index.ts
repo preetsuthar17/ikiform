@@ -9,12 +9,14 @@ export interface FormFieldRendererProps {
   fieldRef?: RefObject<any>;
   disabled?: boolean;
   formId?: string; // Optional form ID for file uploads
+  builderMode?: boolean; // When true, makes fields non-interactable for selection
 }
 
 export interface FieldWrapperProps {
   field: FormField;
   error?: string;
   children: React.ReactNode;
+  builderMode?: boolean;
 }
 
 export interface BaseFieldProps {
@@ -26,6 +28,7 @@ export interface BaseFieldProps {
   className?: string;
   disabled?: boolean;
   formId?: string; // Optional form ID for file uploads
+  builderMode?: boolean; // When true, makes fields non-interactable for selection
 }
 
 export type FieldSize = "sm" | "lg" | "default";

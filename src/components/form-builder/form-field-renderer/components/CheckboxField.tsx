@@ -3,14 +3,12 @@ import React from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import type { BaseFieldProps } from "../types";
+import { applyBuilderMode, getBuilderMode } from "../utils";
 import { sanitizeOptions } from "../utils/sanitizeOptions";
 
-export function CheckboxField({
-  field,
-  value,
-  onChange,
-  disabled,
-}: BaseFieldProps) {
+export function CheckboxField(props: BaseFieldProps) {
+  const { field, value, onChange, disabled } = props;
+  const builderMode = getBuilderMode(props);
   const [apiOptions, setApiOptions] = React.useState<Array<
     string | { value: string; label?: string }
   > | null>(null);
@@ -55,20 +53,20 @@ export function CheckboxField({
   const options = apiOptions ?? field.options ?? [];
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className={`flex flex-col gap-2 ${builderMode ? 'pointer-events-none' : ''}`}>
       {fetchError && <div className="p-2 text-red-500">{fetchError}</div>}
       {options.map((option, index) => {
         const optionValue = typeof option === "string" ? option : option.value;
         const optionLabel =
           typeof option === "string" ? option : option.label || option.value;
-        return (
-          <Checkbox
-            checked={(value || []).includes(optionValue)}
-            disabled={disabled || loading}
-            id={`${field.id}-${index}`}
-            key={index}
-            label={optionLabel}
-            onCheckedChange={(checked) => {
+        const checkboxProps = applyBuilderMode(
+          {
+            checked: (value || []).includes(optionValue),
+            disabled: disabled || loading,
+            id: `${field.id}-${index}`,
+            key: index,
+            label: optionLabel,
+            onCheckedChange: (checked: boolean) => {
               const currentValues = value || [];
               if (checked) {
                 onChange([...currentValues, optionValue]);
@@ -77,9 +75,12 @@ export function CheckboxField({
                   currentValues.filter((v: string) => v !== optionValue)
                 );
               }
-            }}
-          />
+            },
+          },
+          builderMode
         );
+
+        return <Checkbox {...checkboxProps} />;
       })}
     </div>
   );

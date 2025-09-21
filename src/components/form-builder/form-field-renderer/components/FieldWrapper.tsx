@@ -6,7 +6,12 @@ import type { FieldWrapperProps } from "../types";
 
 import { getWidthClass } from "../utils";
 
-export function FieldWrapper({ field, error, children }: FieldWrapperProps) {
+export function FieldWrapper({
+  field,
+  error,
+  children,
+  builderMode = false,
+}: FieldWrapperProps) {
   const isStatement = field.type === "statement";
   const isQuizField = field.settings?.isQuizField;
 

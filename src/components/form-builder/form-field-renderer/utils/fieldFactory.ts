@@ -37,7 +37,8 @@ export function createFieldComponent(
   error?: string,
   fieldRef?: React.RefObject<any>,
   disabled?: boolean,
-  formId?: string
+  formId?: string,
+  builderMode?: boolean
 ): React.ReactElement {
   const props: BaseFieldProps = {
     field,
@@ -47,6 +48,7 @@ export function createFieldComponent(
     fieldRef,
     disabled,
     formId,
+    builderMode,
   };
 
   switch (field.type) {

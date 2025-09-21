@@ -47,10 +47,10 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
     useFormStyling(schema);
 
   useEffect(() => {
-    if (firstFieldRef.current) {
+    if (firstFieldRef.current && schema.settings.behavior?.autoFocusFirstField) {
       firstFieldRef.current.focus();
     }
-  }, []);
+  }, [schema.settings.behavior?.autoFocusFirstField]);
 
   const visibleFields = fieldVisibility
     ? fields.filter((field) => fieldVisibility[field.id]?.visible !== false)

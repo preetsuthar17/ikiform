@@ -11,15 +11,11 @@ import {
 
 import type { BaseFieldProps } from "../types";
 
-import { getBaseClasses } from "../utils";
+import { applyBuilderMode, getBaseClasses, getBuilderMode } from "../utils";
 
-export function EmailInputField({
-  field,
-  value,
-  onChange,
-  error,
-  disabled,
-}: BaseFieldProps) {
+export function EmailInputField(props: BaseFieldProps) {
+  const { field, value, onChange, error, disabled } = props;
+  const builderMode = getBuilderMode(props);
   const baseClasses = getBaseClasses(field, error);
   const [inputValue, setInputValue] = useState(value || "");
   const [showAutoComplete, setShowAutoComplete] = useState(false);
@@ -96,45 +92,48 @@ export function EmailInputField({
   }
   const showError = !!errorMessage;
 
-  return (
-    <div className="flex flex-col gap-2">
-      <div className="relative">
-        <Input
-          className={`flex gap-2 ${baseClasses}`}
-          disabled={disabled}
-          id={field.id}
-          onBlur={handleBlur}
-          onChange={handleInputChange}
-          placeholder={
-            field.placeholder ||
-            (emailSettings?.autoCompleteDomain
-              ? `username@${emailSettings.autoCompleteDomain}`
-              : "Enter email address")
-          }
-          type="email"
-          value={inputValue}
-        />
+  const inputProps = applyBuilderMode({
+    className: `flex gap-2 ${baseClasses}`,
+    disabled,
+    id: field.id,
+    onBlur: handleBlur,
+    onChange: handleInputChange,
+    placeholder:
+      field.placeholder ||
+      (emailSettings?.autoCompleteDomain
+        ? `username@${emailSettings.autoCompleteDomain}`
+        : "Enter email address"),
+    type: "email",
+    value: inputValue,
+  }, builderMode);
 
-        {showAutoComplete && emailSettings?.autoCompleteDomain && (
-          <div className="absolute top-full right-0 left-0 z-10 mt-1 rounded-ele border border-border bg-accent p-2">
-            <div className="flex items-center justify-between">
-              <span className="text-muted-foreground text-sm">
-                Press Tab or click to complete:{" "}
-                <strong>
-                  {inputValue}@{emailSettings.autoCompleteDomain}
-                </strong>
-              </span>
-              <Button
-                className="h-6 px-2 text-xs"
-                onClick={handleAutoComplete}
-                size="sm"
-                variant="outline"
-              >
-                Complete
-              </Button>
+  return (
+    <div className={`flex flex-col gap-2 ${builderMode ? 'pointer-events-none' : ''}`}>
+      <div className={`relative ${builderMode ? 'pointer-events-none' : ''}`}>
+        <Input {...inputProps} />
+
+        {showAutoComplete &&
+          emailSettings?.autoCompleteDomain &&
+          !builderMode && (
+            <div className="absolute top-full right-0 left-0 z-10 mt-1 rounded-ele border border-border bg-accent p-2">
+              <div className="flex items-center justify-between">
+                <span className="text-muted-foreground text-sm">
+                  Press Tab or click to complete:{" "}
+                  <strong>
+                    {inputValue}@{emailSettings.autoCompleteDomain}
+                  </strong>
+                </span>
+                <Button
+                  className="h-6 px-2 text-xs"
+                  onClick={handleAutoComplete}
+                  size="sm"
+                  variant="outline"
+                >
+                  Complete
+                </Button>
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
 
       {emailSettings?.autoCompleteDomain && (

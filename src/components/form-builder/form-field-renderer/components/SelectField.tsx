@@ -10,16 +10,12 @@ import {
 
 import type { BaseFieldProps } from "../types";
 
-import { getErrorClasses } from "../utils";
+import { applyBuilderMode, getBuilderMode, getErrorClasses } from "../utils";
 import { sanitizeOptions } from "../utils/sanitizeOptions";
 
-export function SelectField({
-  field,
-  value,
-  onChange,
-  error,
-  disabled,
-}: BaseFieldProps) {
+export function SelectField(props: BaseFieldProps) {
+  const { field, value, onChange, error, disabled } = props;
+  const builderMode = getBuilderMode(props);
   const errorClasses = getErrorClasses(error);
   const [apiOptions, setApiOptions] = React.useState<string[] | null>(null);
   const [loading, setLoading] = React.useState(false);
@@ -62,17 +58,21 @@ export function SelectField({
 
   const options = apiOptions ?? field.options ?? [];
 
+  const selectProps = applyBuilderMode({
+    disabled: disabled || loading,
+    onValueChange: onChange,
+    value: value || "",
+  }, builderMode);
+
+  const selectTriggerProps = applyBuilderMode({
+    className: `flex gap-2 ${errorClasses}`,
+    disabled: disabled || loading,
+  }, builderMode);
+
   return (
-    <>
-      <Select
-        disabled={disabled || loading}
-        onValueChange={onChange}
-        value={value || ""}
-      >
-        <SelectTrigger
-          className={`flex gap-2 ${errorClasses}`}
-          disabled={disabled || loading}
-        >
+    <div className={builderMode ? 'pointer-events-none' : ''}>
+      <Select {...selectProps}>
+        <SelectTrigger {...selectTriggerProps}>
           <SelectValue
             placeholder={
               field.placeholder ||
@@ -101,6 +101,6 @@ export function SelectField({
           })}
         </SelectContent>
       </Select>
-    </>
+    </div>
   );
 }

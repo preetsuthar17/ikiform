@@ -40,6 +40,9 @@ export interface LocalSettings {
     spacing?: "compact" | "normal" | "relaxed";
     alignment?: "left" | "center" | "right";
   };
+  behavior?: {
+    autoFocusFirstField?: boolean;
+  };
   colors?: {
     background?: string;
     text?: string;

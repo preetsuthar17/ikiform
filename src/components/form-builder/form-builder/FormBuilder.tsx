@@ -447,7 +447,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
             open={showFieldSettings}
           >
             <DrawerContent className="mx-auto w-full rounded-t-2xl p-0">
-              <div className="max-h-[80vh]">
+              <div className="flex h-[80vh] flex-col">
                 <FieldSettingsPanel
                   field={selectedField}
                   onClose={() => {

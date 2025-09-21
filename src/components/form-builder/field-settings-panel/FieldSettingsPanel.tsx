@@ -38,8 +38,8 @@ export function FieldSettingsPanel({
   }
 
   return (
-    <div className="flex h-[90%] min-h-0 flex-col border-border bg-background">
-      <ScrollArea className="h-[90%] flex-1">
+    <div className="flex h-full min-h-0 flex-col border-border bg-background">
+      <ScrollArea className="flex-1">
         <SettingsPanelHeader onClose={onClose} />
         <div className="flex flex-col gap-4 p-4">
           {field.type !== "banner" && field.type !== "statement" && (

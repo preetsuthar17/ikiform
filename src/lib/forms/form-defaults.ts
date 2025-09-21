@@ -101,6 +101,13 @@ export const DEFAULT_LAYOUT_SETTINGS = {
 };
 
 /**
+ * Default behavior settings for all forms
+ */
+export const DEFAULT_BEHAVIOR_SETTINGS = {
+  autoFocusFirstField: false,
+};
+
+/**
  * Default color settings for all forms
  */
 export const DEFAULT_COLOR_SETTINGS = {
@@ -157,6 +164,10 @@ export function ensureDefaultFormSettings(schema: FormSchema): FormSchema {
       layout: {
         ...DEFAULT_LAYOUT_SETTINGS,
         ...schema.settings?.layout,
+      },
+      behavior: {
+        ...DEFAULT_BEHAVIOR_SETTINGS,
+        ...schema.settings?.behavior,
       },
       rateLimit: {
         ...DEFAULT_RATE_LIMIT_SETTINGS,
