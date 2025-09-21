@@ -32,5 +32,5 @@ export function applyBuilderMode<T extends Record<string, any>>(
  * Gets the builder mode value from BaseFieldProps
  */
 export function getBuilderMode(props: BaseFieldProps): boolean {
-  return props.builderMode;
+  return Boolean(props.builderMode);
 }
