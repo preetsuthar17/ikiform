@@ -397,9 +397,9 @@ export default function PricingClient({ products }: PricingClientProps) {
                                   Checking...
                                 </div>
                               ) : user ? (
-                                "Purchase Plan →"
+                                "Start 7-Day Free Trial"
                               ) : (
-                                "Sign In to Get Started"
+                                "Sign In to Start Free Trial"
                               )}
                             </Button>
                           </Link>
