@@ -6,6 +6,7 @@ export interface FormStyleConfig {
     text?: string;
     primary?: string;
     border?: string;
+    websiteBackground?: string;
   };
   typography?: {
     fontFamily?: string;

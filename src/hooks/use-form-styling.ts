@@ -6,6 +6,43 @@ import type { FormCustomStyles } from "@/lib/utils/form-layout";
 import { getFormCustomStyles } from "@/lib/utils/form-layout";
 import { loadGoogleFont } from "@/lib/utils/google-fonts";
 
+// Utility function to convert hex color to HSL values
+function hexToHsl(hex: string): string {
+  // Remove the hash if present
+  hex = hex.replace("#", "");
+
+  // Parse the hex values
+  const r = Number.parseInt(hex.substring(0, 2), 16) / 255;
+  const g = Number.parseInt(hex.substring(2, 4), 16) / 255;
+  const b = Number.parseInt(hex.substring(4, 6), 16) / 255;
+
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  let h = 0;
+  let s = 0;
+  const l = (max + min) / 2;
+
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0);
+        break;
+      case g:
+        h = (b - r) / d + 2;
+        break;
+      case b:
+        h = (r - g) / d + 4;
+        break;
+    }
+    h /= 6;
+  }
+
+  return `${Math.round(h * 360)}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%`;
+}
+
 export function useFormStyling(schema: FormSchema) {
   const [customStyles, setCustomStyles] = useState<FormCustomStyles>({
     containerStyle: {},
@@ -58,12 +95,21 @@ export function useFormStyling(schema: FormSchema) {
       if (colors.border) {
         root.style.setProperty("--form-border-color", colors.border);
       }
+      if (colors.websiteBackground) {
+        // Convert hex color to HSL values for CSS custom property
+        const hslValues = hexToHsl(colors.websiteBackground);
+        root.style.setProperty("--hu-background", hslValues);
+        // Also set the full background color
+        root.style.setProperty("--color-background", `hsl(${hslValues})`);
+      }
 
       return () => {
         root.style.removeProperty("--form-primary-color");
         root.style.removeProperty("--form-text-color");
         root.style.removeProperty("--form-background-color");
         root.style.removeProperty("--form-border-color");
+        root.style.removeProperty("--hu-background");
+        root.style.removeProperty("--color-background");
       };
     }
   }, [(schema.settings as any)?.colors]);

@@ -25,6 +25,8 @@ export function ColorCustomizationSection({
   const textColor = localSettings.colors?.text || "#000000";
   const primaryColor = localSettings.colors?.primary || "#2563eb";
   const borderColor = localSettings.colors?.border || "#e2e8f0";
+  const websiteBackgroundColor =
+    localSettings.colors?.websiteBackground || "#ffffff";
 
   const handleBackgroundColorChange = (color: string) => {
     updateSettings({
@@ -58,6 +60,15 @@ export function ColorCustomizationSection({
       colors: {
         ...localSettings.colors,
         border: color,
+      },
+    });
+  };
+
+  const handleWebsiteBackgroundColorChange = (color: string) => {
+    updateSettings({
+      colors: {
+        ...localSettings.colors,
+        websiteBackground: color,
       },
     });
   };
@@ -242,6 +253,49 @@ export function ColorCustomizationSection({
           </div>
           <p className="text-muted-foreground text-xs">
             Sets the color for input field borders and dividers
+          </p>
+        </div>
+
+        <Separator />
+
+        {/* Website Background Color */}
+        <div className="flex flex-col gap-4">
+          <EnhancedColorPicker
+            allowTransparent={false}
+            label="Website Background Color"
+            onChange={handleWebsiteBackgroundColorChange}
+            value={websiteBackgroundColor}
+          />
+          <div className="flex flex-col gap-2">
+            <Label className="text-muted-foreground text-xs">
+              Quick Colors
+            </Label>
+            <div className="flex flex-wrap gap-2">
+              {PREDEFINED_COLORS.map((color) => (
+                <button
+                  className={`h-8 w-8 rounded-md border-2 transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
+                    websiteBackgroundColor === color
+                      ? "border-ring ring-2 ring-ring ring-offset-2"
+                      : "border-border"
+                  }`}
+                  key={color}
+                  onClick={() => handleWebsiteBackgroundColorChange(color)}
+                  style={{
+                    backgroundColor:
+                      color === "transparent" ? undefined : color,
+                    backgroundImage:
+                      color === "transparent"
+                        ? `url("${TRANSPARENT_PATTERN}")`
+                        : undefined,
+                  }}
+                  title={color === "transparent" ? "Transparent" : color}
+                  type="button"
+                />
+              ))}
+            </div>
+          </div>
+          <p className="text-muted-foreground text-xs">
+            Sets the background color of the entire website/page
           </p>
         </div>
       </div>

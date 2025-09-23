@@ -1,7 +1,44 @@
 import dynamic from "next/dynamic";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { CSSPropertiesProvider } from "./CSSPropertiesProvider";
 import { FormSkeleton } from "./FormSkeletons";
+
+// Utility function to convert hex color to HSL values
+function hexToHsl(hex: string): string {
+  // Remove the hash if present
+  hex = hex.replace("#", "");
+
+  // Parse the hex values
+  const r = Number.parseInt(hex.substring(0, 2), 16) / 255;
+  const g = Number.parseInt(hex.substring(2, 4), 16) / 255;
+  const b = Number.parseInt(hex.substring(4, 6), 16) / 255;
+
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  let h = 0;
+  let s = 0;
+  const l = (max + min) / 2;
+
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0);
+        break;
+      case g:
+        h = (b - r) / d + 2;
+        break;
+      case b:
+        h = (r - g) / d + 4;
+        break;
+    }
+    h /= 6;
+  }
+
+  return `${Math.round(h * 360)}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%`;
+}
 
 const MultiStepForm = dynamic(
   () =>
@@ -35,6 +72,24 @@ export default function PublicFormContent({
   const isMultiStep = schema.settings?.multiStep || schema.blocks?.length > 1;
   const dir = schema.settings?.rtl ? "rtl" : "ltr";
   const borderRadius = schema?.settings?.layout?.borderRadius || "md";
+
+  // Apply website background color
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const colors = schema.settings?.colors;
+    if (colors?.websiteBackground) {
+      const root = document.documentElement;
+      const hslValues = hexToHsl(colors.websiteBackground);
+      root.style.setProperty("--hu-background", hslValues);
+      root.style.setProperty("--color-background", `hsl(${hslValues})`);
+
+      return () => {
+        root.style.removeProperty("--hu-background");
+        root.style.removeProperty("--color-background");
+      };
+    }
+  }, [schema.settings?.colors?.websiteBackground]);
 
   return (
     <CSSPropertiesProvider borderRadius={borderRadius}>
