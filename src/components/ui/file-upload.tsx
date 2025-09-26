@@ -320,13 +320,13 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
             </motion.div>
 
             <div className="flex flex-col gap-1">
-              <h3 className="font-medium text-foreground text-lg">
+              <p className="font-medium text-foreground text-lg">
                 {isDragging
                   ? "Drop files here"
                   : files.length
                     ? "Add more files"
                     : "Upload files"}
-              </h3>
+              </p>
               <p className="text-muted-foreground text-sm">
                 {isDragging ? (
                   <span className="font-medium text-primary">

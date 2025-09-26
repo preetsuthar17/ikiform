@@ -86,7 +86,7 @@ export function getFontSizeValue(size?: string): string {
     lg: "18px",
     xl: "20px",
   };
-  return sizeMap[size as keyof typeof sizeMap] || "16px";
+  return sizeMap[size as keyof typeof sizeMap] || "14px";
 }
 
 export function getFontWeightValue(weight?: string): string {
