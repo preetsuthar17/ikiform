@@ -352,3 +352,7 @@ h1 {
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
+
+.form-description {
+  font-weight: 400 !important;
+}

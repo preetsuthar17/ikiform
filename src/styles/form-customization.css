@@ -45,15 +45,17 @@
 .ikiform-customized input:focus,
 .ikiform-customized textarea:focus,
 .ikiform-customized select:focus {
-  border-color: var(--form-border-color, hsl(var(--border))) !important;
-  box-shadow: 0 0 0 2px var(--form-primary-color, hsl(var(--primary))) 40 !important;
+  border-color: var(--form-border-color, hsl(var(--hu-border))) !important;
   outline: none !important;
 }
 
 .ikiform-customized button[type="submit"],
 .ikiform-customized .primary-button {
-  background-color: var(--form-primary-color, hsl(var(--primary))) !important;
-  border-color: var(--form-primary-color, hsl(var(--primary))) !important;
+  background-color: var(
+    --form-primary-color,
+    hsl(var(--hu-primary))
+  ) !important;
+  border-color: var(--form-primary-color, hsl(var(--hu-primary))) !important;
   color: white !important;
 }
 
@@ -61,12 +63,12 @@
 .ikiform-customized .primary-button:hover {
   background-color: color-mix(
     in srgb,
-    var(--form-primary-color, hsl(var(--primary))) 90%,
+    var(--form-primary-color, hsl(var(--hu-primary))) 90%,
     black
   ) !important;
   border-color: color-mix(
     in srgb,
-    var(--form-primary-color, hsl(var(--primary))) 90%,
+    var(--form-primary-color, hsl(var(--hu-primary))) 90%,
     black
   ) !important;
 }
@@ -85,13 +87,19 @@
 /* Radio and checkbox custom styling */
 .ikiform-customized input[type="radio"]:checked,
 .ikiform-customized input[type="checkbox"]:checked {
-  background-color: var(--form-primary-color, hsl(var(--primary))) !important;
-  border-color: var(--form-primary-color, hsl(var(--primary))) !important;
+  background-color: var(
+    --form-primary-color,
+    hsl(var(--hu-primary))
+  ) !important;
+  border-color: var(--form-primary-color, hsl(var(--hu-primary))) !important;
 }
 
 /* Progress bar styling */
 .ikiform-customized .progress-bar {
-  background-color: var(--form-primary-color, hsl(var(--primary))) !important;
+  background-color: var(
+    --form-primary-color,
+    hsl(var(--hu-primary))
+  ) !important;
 }
 
 /* File upload styling */
@@ -101,7 +109,10 @@
 }
 
 .ikiform-customized .file-upload-button:hover {
-  background-color: var(--form-primary-color, hsl(var(--primary))) !important;
+  background-color: var(
+    --form-primary-color,
+    hsl(var(--hu-primary))
+  ) !important;
   color: white !important;
 }
 
@@ -112,7 +123,7 @@
 
 .ikiform-customized [data-radix-select-trigger]:focus {
   border-color: var(--form-border-color, hsl(var(--border))) !important;
-  box-shadow: 0 0 0 2px var(--form-primary-color, hsl(var(--primary))) 40 !important;
+  box-shadow: 0 0 0 2px var(--form-primary-color, hsl(var(--hu-primary))) 40 !important;
   outline: none !important;
 }
 
@@ -128,7 +139,7 @@
 
 .ikiform-customized .date-picker-input:focus {
   border-color: var(--form-border-color, hsl(var(--border))) !important;
-  box-shadow: 0 0 0 2px var(--form-primary-color, hsl(var(--primary))) 40 !important;
+  box-shadow: 0 0 0 2px var(--form-primary-color, hsl(var(--hu-primary))) 40 !important;
   outline: none !important;
 }
 

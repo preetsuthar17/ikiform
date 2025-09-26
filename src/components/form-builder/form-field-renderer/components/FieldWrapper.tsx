@@ -31,7 +31,9 @@ export function FieldWrapper({
             )}
           </Label>
           {field.description && (
-            <p className="text-muted-foreground text-sm">{field.description}</p>
+            <p className="form-description text-muted-foreground text-sm opacity-80">
+              {field.description}
+            </p>
           )}
         </>
       )}
