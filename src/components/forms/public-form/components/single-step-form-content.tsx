@@ -69,11 +69,14 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
         {!schema.settings.hideHeader && (
           <>
             <div className="flex flex-col gap-2">
-              <h1 className="font-bold text-3xl text-foreground">
+              <h1 className="text-foreground" style={customStyles.headingStyle}>
                 {getPublicFormTitle(schema)}
               </h1>
               {schema.settings.description && (
-                <p className="text-muted-foreground">
+                <p
+                  className="text-muted-foreground"
+                  style={customStyles.textStyle}
+                >
                   {schema.settings.description}
                 </p>
               )}

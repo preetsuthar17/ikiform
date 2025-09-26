@@ -22,6 +22,7 @@ export interface FormCustomStyles {
   cardStyle: React.CSSProperties;
   formStyle: React.CSSProperties;
   textStyle: React.CSSProperties;
+  headingStyle: React.CSSProperties;
 }
 
 export const getFormLayoutClasses = (schema: FormSchema): LayoutClasses => {
@@ -152,6 +153,22 @@ export const getFormCustomStyles = async (
 
   const textStyle: React.CSSProperties = {
     color: colors.text || undefined,
+    fontFamily: typography.fontFamily
+      ? `"${typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`
+      : undefined,
+    fontSize: typography.fontSize
+      ? getFontSizeValue(typography.fontSize)
+      : undefined,
+    fontWeight: typography.fontWeight
+      ? getFontWeightValue(typography.fontWeight)
+      : undefined,
+  };
+
+  const headingStyle: React.CSSProperties = {
+    color: colors.text || undefined,
+    fontFamily: typography.fontFamily
+      ? `"${typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`
+      : undefined,
   };
 
   return {
@@ -159,6 +176,7 @@ export const getFormCustomStyles = async (
     cardStyle,
     formStyle,
     textStyle,
+    headingStyle,
   };
 };
 

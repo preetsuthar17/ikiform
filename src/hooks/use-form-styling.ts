@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { FormSchema } from "@/lib/database";
 import type { FormCustomStyles } from "@/lib/utils/form-layout";
 import { getFormCustomStyles } from "@/lib/utils/form-layout";
+import { getFontSizeValue, getFontWeightValue } from "@/lib/utils/form-styles";
 import { loadGoogleFont } from "@/lib/utils/google-fonts";
 
 // Utility function to convert hex color to HSL values
@@ -49,6 +50,7 @@ export function useFormStyling(schema: FormSchema) {
     cardStyle: {},
     formStyle: {},
     textStyle: {},
+    headingStyle: {},
   });
   const [fontLoaded, setFontLoaded] = useState(false);
 
@@ -80,9 +82,10 @@ export function useFormStyling(schema: FormSchema) {
     if (typeof window === "undefined") return;
 
     const colors = (schema.settings as any)?.colors;
-    if (colors) {
-      const root = document.documentElement;
+    const typography = (schema.settings as any)?.typography;
+    const root = document.documentElement;
 
+    if (colors) {
       if (colors.primary) {
         root.style.setProperty("--form-primary-color", colors.primary);
       }
@@ -102,17 +105,41 @@ export function useFormStyling(schema: FormSchema) {
         // Also set the full background color
         root.style.setProperty("--color-background", `hsl(${hslValues})`);
       }
-
-      return () => {
-        root.style.removeProperty("--form-primary-color");
-        root.style.removeProperty("--form-text-color");
-        root.style.removeProperty("--form-background-color");
-        root.style.removeProperty("--form-border-color");
-        root.style.removeProperty("--hu-background");
-        root.style.removeProperty("--color-background");
-      };
     }
-  }, [(schema.settings as any)?.colors]);
+
+    if (typography) {
+      if (typography.fontFamily) {
+        root.style.setProperty(
+          "--form-font-family",
+          `"${typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`
+        );
+      }
+      if (typography.fontSize) {
+        root.style.setProperty(
+          "--form-font-size",
+          getFontSizeValue(typography.fontSize)
+        );
+      }
+      if (typography.fontWeight) {
+        root.style.setProperty(
+          "--form-font-weight",
+          getFontWeightValue(typography.fontWeight)
+        );
+      }
+    }
+
+    return () => {
+      root.style.removeProperty("--form-primary-color");
+      root.style.removeProperty("--form-text-color");
+      root.style.removeProperty("--form-background-color");
+      root.style.removeProperty("--form-border-color");
+      root.style.removeProperty("--hu-background");
+      root.style.removeProperty("--color-background");
+      root.style.removeProperty("--form-font-family");
+      root.style.removeProperty("--form-font-size");
+      root.style.removeProperty("--form-font-weight");
+    };
+  }, [(schema.settings as any)?.colors, (schema.settings as any)?.typography]);
 
   // Generate custom CSS class names based on settings
   const getFormClasses = () => {

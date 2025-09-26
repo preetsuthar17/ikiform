@@ -5,6 +5,7 @@ import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer
 import { Separator } from "@/components/ui";
 import { SocialMediaIcons } from "@/components/ui/social-media-icons";
 import type { FormBlock, FormSchema } from "@/lib/database";
+import type { FormCustomStyles } from "@/lib/utils/form-layout";
 import { getPublicFormTitle } from "@/lib/utils/form-utils";
 
 interface FormContentProps {
@@ -18,6 +19,7 @@ interface FormContentProps {
   schema: FormSchema;
   fieldVisibility?: Record<string, { visible: boolean; disabled: boolean }>;
   logicMessages?: string[];
+  customStyles?: FormCustomStyles;
 }
 
 export const FormContent: React.FC<FormContentProps> = ({
@@ -31,6 +33,7 @@ export const FormContent: React.FC<FormContentProps> = ({
   schema,
   fieldVisibility,
   logicMessages,
+  customStyles,
 }) => {
   const firstFieldRef = useRef<any>(null);
   useEffect(() => {
@@ -54,11 +57,17 @@ export const FormContent: React.FC<FormContentProps> = ({
         {!schema.settings.hideHeader && (
           <>
             <div className="flex flex-col gap-2">
-              <h1 className="font-bold text-3xl text-foreground">
+              <h1
+                className="text-foreground"
+                style={customStyles?.headingStyle}
+              >
                 {currentBlock.title || getPublicFormTitle(schema)}
               </h1>
               {(currentBlock.description || description) && (
-                <p className="text-muted-foreground">
+                <p
+                  className="text-muted-foreground"
+                  style={customStyles?.textStyle}
+                >
                   {currentBlock.description || description}
                 </p>
               )}

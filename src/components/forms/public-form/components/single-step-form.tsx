@@ -117,7 +117,6 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
     >
       <div
         className={`flex w-full flex-col gap-8 ${containerClass} ${isCustomWidth ? "ikiform-custom-width" : ""}`}
-        style={customStyles.containerStyle}
       >
         <div style={customStyles.formStyle}>
           <SingleStepFormContent

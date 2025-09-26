@@ -142,7 +142,6 @@ export function MultiStepForm({
     >
       <div
         className={`flex w-full flex-col gap-8 ${containerClass} ${isCustomWidth ? "ikiform-custom-width" : ""}`}
-        style={customStyles.containerStyle}
       >
         <Card
           className="flex w-full grow flex-col gap-6 rounded-card border-none bg-transparent hover:bg-transparent"
@@ -157,6 +156,7 @@ export function MultiStepForm({
           <div style={customStyles.formStyle}>
             <FormContent
               currentBlock={currentBlock}
+              customStyles={customStyles}
               description={schema.settings.description}
               errors={errors}
               fieldVisibility={fieldVisibility}

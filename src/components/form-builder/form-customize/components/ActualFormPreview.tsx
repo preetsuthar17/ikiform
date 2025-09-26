@@ -160,6 +160,28 @@ export function ActualFormPreview({
       root.style.setProperty("--color-background", `hsl(${hslValues})`);
     }
 
+    // Set typography variables for CSS
+    if (typography?.fontFamily) {
+      root.style.setProperty(
+        "--form-font-family",
+        `"${typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`
+      );
+    }
+    if (typography?.fontSize) {
+      const { getFontSizeValue } = require("@/lib/utils/form-styles");
+      root.style.setProperty(
+        "--form-font-size",
+        getFontSizeValue(typography.fontSize)
+      );
+    }
+    if (typography?.fontWeight) {
+      const { getFontWeightValue } = require("@/lib/utils/form-styles");
+      root.style.setProperty(
+        "--form-font-weight",
+        getFontWeightValue(typography.fontWeight)
+      );
+    }
+
     return () => {
       // Cleanup - restore defaults
       root.style.setProperty("--radius", "0.7rem");
@@ -171,11 +193,28 @@ export function ActualFormPreview({
       root.style.removeProperty("--form-border-color");
       root.style.removeProperty("--hu-background");
       root.style.removeProperty("--color-background");
+      root.style.removeProperty("--form-font-family");
+      root.style.removeProperty("--form-font-size");
+      root.style.removeProperty("--form-font-weight");
 
       // Remove forced light theme classes
       document.documentElement.classList.remove("light");
     };
-  }, [layout, colors]);
+  }, [
+    layout?.borderRadius,
+    layout?.maxWidth,
+    layout?.customWidth,
+    layout?.padding,
+    layout?.margin,
+    colors?.primary,
+    colors?.text,
+    colors?.background,
+    colors?.border,
+    colors?.websiteBackground,
+    typography?.fontFamily,
+    typography?.fontSize,
+    typography?.fontWeight,
+  ]);
 
   // Create a modified schema with current settings
   const previewSchema = {

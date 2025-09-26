@@ -4,6 +4,35 @@
 .ikiform-customized {
   background-color: var(--form-background-color, transparent);
   color: var(--form-text-color, inherit);
+  font-family: var(--form-font-family, inherit);
+}
+
+/* Typography for content elements only (not headings) */
+.ikiform-customized p,
+.ikiform-customized div,
+.ikiform-customized span,
+.ikiform-customized input,
+.ikiform-customized textarea,
+.ikiform-customized select,
+.ikiform-customized button,
+.ikiform-customized label {
+  font-family: var(--form-font-family, inherit);
+  font-size: var(--form-font-size, inherit);
+  font-weight: var(--form-font-weight, inherit);
+}
+
+/* Typography for headings - only font family and color, always 3xl size and semibold weight */
+.ikiform-customized h1,
+.ikiform-customized h2,
+.ikiform-customized h3,
+.ikiform-customized h4,
+.ikiform-customized h5,
+.ikiform-customized h6 {
+  font-family: var(--form-font-family, inherit) !important;
+  color: var(--form-text-color, inherit) !important;
+  font-size: 1.875rem !important; /* 3xl = 30px = 1.875rem */
+  line-height: 2.25rem !important; /* 3xl line height */
+  font-weight: 600 !important; /* semibold */
 }
 
 .ikiform-customized input,

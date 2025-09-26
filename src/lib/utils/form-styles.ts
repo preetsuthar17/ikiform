@@ -116,16 +116,36 @@ export function injectFormStyles(
       ${styleConfig.colors?.background ? `background-color: ${styleConfig.colors.background};` : ""}
       ${styleConfig.colors?.text ? `color: ${styleConfig.colors.text};` : ""}
       ${styleConfig.typography?.fontFamily ? `font-family: "${styleConfig.typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;` : ""}
-      ${styleConfig.typography?.fontSize ? `font-size: ${getFontSizeValue(styleConfig.typography.fontSize)};` : ""}
-      ${styleConfig.typography?.fontWeight ? `font-weight: ${getFontWeightValue(styleConfig.typography.fontWeight)};` : ""}
       ${styleConfig.layout?.maxWidth ? `max-width: ${styleConfig.layout.maxWidth};` : ""}
       ${styleConfig.layout?.padding ? `padding: ${getPaddingValue(styleConfig.layout.padding)};` : ""}
       ${styleConfig.layout?.margin ? `margin: ${getMarginValue(styleConfig.layout.margin)} auto;` : ""}
       ${styleConfig.layout?.borderRadius ? `border-radius: ${getBorderRadiusValue(styleConfig.layout.borderRadius)};` : ""}
     }
     
-    .form-container-${formId} .form-field {
+    .form-container-${formId} h1,
+    .form-container-${formId} h2,
+    .form-container-${formId} h3,
+    .form-container-${formId} h4,
+    .form-container-${formId} h5,
+    .form-container-${formId} h6 {
+      ${styleConfig.typography?.fontFamily ? `font-family: "${styleConfig.typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;` : ""}
+      font-size: 1.875rem; /* 3xl = 30px = 1.875rem */
+      line-height: 2.25rem; /* 3xl line height */
+      font-weight: 600; /* semibold */
+    }
+    
+    .form-container-${formId} p,
+    .form-container-${formId} div,
+    .form-container-${formId} span,
+    .form-container-${formId} input,
+    .form-container-${formId} textarea,
+    .form-container-${formId} select,
+    .form-container-${formId} button,
+    .form-container-${formId} label {
       ${styleConfig.colors?.border ? `border-color: ${styleConfig.colors.border};` : ""}
+      ${styleConfig.typography?.fontFamily ? `font-family: "${styleConfig.typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;` : ""}
+      ${styleConfig.typography?.fontSize ? `font-size: ${getFontSizeValue(styleConfig.typography.fontSize)};` : ""}
+      ${styleConfig.typography?.fontWeight ? `font-weight: ${getFontWeightValue(styleConfig.typography.fontWeight)};` : ""}
     }
     
     .form-container-${formId} .form-button-primary {
@@ -160,19 +180,36 @@ export function generateCSSSelectorStyles(settings: LocalSettings): string {
       ${config.colors?.background ? `background-color: ${config.colors.background} !important;` : ""}
       ${config.colors?.text ? `color: ${config.colors.text} !important;` : ""}
       ${config.typography?.fontFamily ? `font-family: "${config.typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;` : ""}
-      ${config.typography?.fontSize ? `font-size: ${getFontSizeValue(config.typography.fontSize)} !important;` : ""}
-      ${config.typography?.fontWeight ? `font-weight: ${getFontWeightValue(config.typography.fontWeight)} !important;` : ""}
       ${config.layout?.maxWidth ? `max-width: ${config.layout.maxWidth} !important;` : ""}
       ${config.layout?.padding ? `padding: ${getPaddingValue(config.layout.padding)} !important;` : ""}
       ${config.layout?.margin ? `margin: ${getMarginValue(config.layout.margin)} auto !important;` : ""}
       ${config.layout?.borderRadius ? `border-radius: ${getBorderRadiusValue(config.layout.borderRadius)} !important;` : ""}
     }
     
+    .ikiform-customized h1,
+    .ikiform-customized h2,
+    .ikiform-customized h3,
+    .ikiform-customized h4,
+    .ikiform-customized h5,
+    .ikiform-customized h6 {
+      ${config.typography?.fontFamily ? `font-family: "${config.typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;` : ""}
+      font-size: 1.875rem !important; /* 3xl = 30px = 1.875rem */
+      line-height: 2.25rem !important; /* 3xl line height */
+      font-weight: 600 !important; /* semibold */
+    }
+    
+    .ikiform-customized p,
+    .ikiform-customized div,
+    .ikiform-customized span,
     .ikiform-customized input,
     .ikiform-customized textarea,
-    .ikiform-customized select {
+    .ikiform-customized select,
+    .ikiform-customized button,
+    .ikiform-customized label {
       ${config.colors?.border ? `border-color: ${config.colors.border} !important;` : ""}
-      ${config.typography?.fontFamily ? "font-family: inherit !important;" : ""}
+      ${config.typography?.fontFamily ? `font-family: "${config.typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;` : ""}
+      ${config.typography?.fontSize ? `font-size: ${getFontSizeValue(config.typography.fontSize)} !important;` : ""}
+      ${config.typography?.fontWeight ? `font-weight: ${getFontWeightValue(config.typography.fontWeight)} !important;` : ""}
     }
     
     .ikiform-customized .primary-button,
