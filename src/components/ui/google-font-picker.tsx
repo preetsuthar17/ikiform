@@ -413,24 +413,6 @@ export function GoogleFontPicker({
                               {font.variants.length} styles
                             </Badge>
                           </div>
-                          {showPreview && (
-                            <div className="flex flex-col gap-1">
-                              <p
-                                className="text-muted-foreground text-sm"
-                                style={{
-                                  fontFamily: loadedFonts.has(font.family)
-                                    ? `"${font.family}", system-ui, sans-serif`
-                                    : undefined,
-                                }}
-                              >
-                                The quick brown fox jumps over the lazy dog
-                              </p>
-                              <p className="text-muted-foreground text-xs">
-                                {font.variants.join(", ")} •{" "}
-                                {font.subsets.join(", ")}
-                              </p>
-                            </div>
-                          )}
                         </div>
                         <Check
                           className={cn(
