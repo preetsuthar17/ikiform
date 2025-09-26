@@ -27,9 +27,8 @@ export function EmailInputField(props: BaseFieldProps) {
     setInputValue(value || "");
   }, [value]);
 
-  const validateEmailField = (email: string) => {
-    return validateEmail(email, emailSettings);
-  };
+  const validateEmailField = (email: string) =>
+    validateEmail(email, emailSettings);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;

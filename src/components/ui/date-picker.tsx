@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { CalendarIcon, ChevronDown } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import * as React from "react";
-import ReactDOM from "react-dom";
+import ReactDom from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
@@ -135,13 +135,12 @@ export function DatePicker({
     }
   }, []);
 
-  const defaultFormatDate = (date: Date) => {
-    return date.toLocaleDateString(locale, {
+  const defaultFormatDate = (date: Date) =>
+    date.toLocaleDateString(locale, {
       year: "numeric",
       month: "short",
       day: "numeric",
     });
-  };
 
   const formatDateFn = formatDate || defaultFormatDate;
 
@@ -335,7 +334,7 @@ export function DatePicker({
       </Button>
 
       {portalContainer &&
-        ReactDOM.createPortal(calendarComponent, portalContainer)}
+        ReactDom.createPortal(calendarComponent, portalContainer)}
     </div>
   );
 }
@@ -379,13 +378,12 @@ export function DateRangePicker({
       | "top-end",
   });
 
-  const defaultFormatDate = (date: Date) => {
-    return date.toLocaleDateString(locale, {
+  const defaultFormatDate = (date: Date) =>
+    date.toLocaleDateString(locale, {
       year: "numeric",
       month: "short",
       day: "numeric",
     });
-  };
 
   const formatDateFn = formatDate || defaultFormatDate;
 
@@ -531,7 +529,7 @@ export function DateRangePicker({
       </button>
 
       {typeof document !== "undefined" &&
-        ReactDOM.createPortal(
+        ReactDom.createPortal(
           <AnimatePresence>
             {isOpen && (
               <motion.div

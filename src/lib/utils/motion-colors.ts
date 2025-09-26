@@ -79,9 +79,8 @@ export function useMotionColors() {
     return () => observer.disconnect();
   }, []);
 
-  const getColor = (colorKey: ColorKey): string => {
-    return isDark ? darkColors[colorKey] : lightColors[colorKey];
-  };
+  const getColor = (colorKey: ColorKey): string =>
+    isDark ? darkColors[colorKey] : lightColors[colorKey];
 
   return { getColor, isDark };
 }

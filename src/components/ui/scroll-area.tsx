@@ -99,22 +99,20 @@ const ScrollBar = React.forwardRef<
   (
     { className, orientation = "vertical", scrollHideDelay, type, ...props },
     ref
-  ) => {
-    return (
-      <ScrollAreaPrimitive.ScrollAreaScrollbar
-        className={cn(
-          scrollBarVariants({ orientation }),
-          "hover:bg-accent",
-          className
-        )}
-        orientation={orientation}
-        ref={ref}
-        {...props}
-      >
-        <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-card bg-border transition-colors hover:bg-foreground/30" />
-      </ScrollAreaPrimitive.ScrollAreaScrollbar>
-    );
-  }
+  ) => (
+    <ScrollAreaPrimitive.ScrollAreaScrollbar
+      className={cn(
+        scrollBarVariants({ orientation }),
+        "hover:bg-accent",
+        className
+      )}
+      orientation={orientation}
+      ref={ref}
+      {...props}
+    >
+      <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-card bg-border transition-colors hover:bg-foreground/30" />
+    </ScrollAreaPrimitive.ScrollAreaScrollbar>
+  )
 );
 
 ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName;

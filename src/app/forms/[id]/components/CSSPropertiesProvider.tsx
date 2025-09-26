@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-interface CSSPropertiesProviderProps {
+interface CssPropertiesProviderProps {
   borderRadius?: string;
   children: React.ReactNode;
 }
@@ -10,7 +10,7 @@ interface CSSPropertiesProviderProps {
 export function CSSPropertiesProvider({
   borderRadius = "md",
   children,
-}: CSSPropertiesProviderProps) {
+}: CssPropertiesProviderProps) {
   useEffect(() => {
     document.documentElement.classList.remove("dark");
     document.documentElement.classList.add("light");

@@ -177,6 +177,5 @@ export const getFormCustomStyles = async (
   };
 };
 
-export const getDesignModeClass = () => {
-  return "bg-transparent border-none  hover:bg-transparent";
-};
+export const getDesignModeClass = () =>
+  "bg-transparent border-none  hover:bg-transparent";

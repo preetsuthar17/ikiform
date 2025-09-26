@@ -2,13 +2,10 @@ import type { FormField, FormSchema } from "@/lib/database";
 
 import { FORM_BUILDER_CONSTANTS } from "../constants";
 
-export const generateFieldId = (): string => {
-  return `field_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-};
+export const generateFieldId = (): string =>
+  `field_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
-export const generateBlockId = (): string => {
-  return `step-${Date.now()}`;
-};
+export const generateBlockId = (): string => `step-${Date.now()}`;
 
 export const hasFormChanges = (
   formSchema: FormSchema,
@@ -98,11 +95,10 @@ export const findSelectedField = (
   return allFields.find((field) => field.id === selectedFieldId) || null;
 };
 
-export const getAllFields = (formSchema: FormSchema): FormField[] => {
-  return formSchema.blocks?.length
+export const getAllFields = (formSchema: FormSchema): FormField[] =>
+  formSchema.blocks?.length
     ? formSchema.blocks.flatMap((block) => block.fields)
     : formSchema.fields || [];
-};
 
 export const updateFieldInSchema = (
   formSchema: FormSchema,

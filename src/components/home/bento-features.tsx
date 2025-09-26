@@ -55,7 +55,7 @@ const FeatureCard = ({
   );
 };
 
-const AIFormBuilderPreview = () => {
+const AiFormBuilderPreview = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isGenerating, setIsGenerating] = useState(true);
 
@@ -183,58 +183,56 @@ const AIFormBuilderPreview = () => {
   );
 };
 
-const UnlimitedPreview = () => {
-  return (
-    <div className="flex h-full flex-col items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-t from-secondary to-accent/20 p-4">
-      <div className="flex flex-col gap-3 text-center">
+const UnlimitedPreview = () => (
+  <div className="flex h-full flex-col items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-t from-secondary to-accent/20 p-4">
+    <div className="flex flex-col gap-3 text-center">
+      <motion.div
+        animate={{
+          rotate: [0, 5, -5, 0],
+          scale: [1, 1.1, 1],
+        }}
+        className="font-bold text-3xl text-primary"
+        transition={{
+          duration: 2,
+          repeat: globalThis.Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+        }}
+      >
+        ∞
+      </motion.div>
+      <motion.div
+        animate={{ opacity: 1, y: 0 }}
+        className="flex flex-col gap-1"
+        initial={{ opacity: 0, y: 10 }}
+        transition={{ delay: 0.2 }}
+      >
+        <div className="font-medium text-foreground text-sm">Submissions</div>
         <motion.div
-          animate={{
-            rotate: [0, 5, -5, 0],
-            scale: [1, 1.1, 1],
-          }}
-          className="font-bold text-3xl text-primary"
+          animate={{ opacity: [0.7, 1, 0.7] }}
+          className="text-muted-foreground text-xs"
           transition={{
             duration: 2,
             repeat: globalThis.Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
           }}
         >
-          ∞
+          Forms • Fields • Users
         </motion.div>
-        <motion.div
-          animate={{ opacity: 1, y: 0 }}
-          className="flex flex-col gap-1"
-          initial={{ opacity: 0, y: 10 }}
-          transition={{ delay: 0.2 }}
-        >
-          <div className="font-medium text-foreground text-sm">Submissions</div>
-          <motion.div
-            animate={{ opacity: [0.7, 1, 0.7] }}
-            className="text-muted-foreground text-xs"
-            transition={{
-              duration: 2,
-              repeat: globalThis.Number.POSITIVE_INFINITY,
-            }}
-          >
-            Forms • Fields • Users
-          </motion.div>
-        </motion.div>
-        <motion.div
-          animate={{ scale: 1 }}
-          className="font-medium text-primary text-xs"
-          initial={{ scale: 0 }}
-          transition={{
-            delay: 0.5,
-            type: "spring",
-            stiffness: 300,
-          }}
-        >
-          Forever Free
-        </motion.div>
-      </div>
+      </motion.div>
+      <motion.div
+        animate={{ scale: 1 }}
+        className="font-medium text-primary text-xs"
+        initial={{ scale: 0 }}
+        transition={{
+          delay: 0.5,
+          type: "spring",
+          stiffness: 300,
+        }}
+      >
+        Forever Free
+      </motion.div>
     </div>
-  );
-};
+  </div>
+);
 
 const AnalyticsPreview = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -379,7 +377,7 @@ const LogicBuilderPreview = () => {
   );
 };
 
-const APIIntegrationPreview = () => {
+const ApiIntegrationPreview = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showData, setShowData] = useState(false);
 
@@ -713,7 +711,7 @@ export default function BentoFeatures() {
                 description="Generate complete forms instantly using natural language. Just describe what you need and watch AI create professional forms with smart field types and validation."
                 featured={true}
                 icon={<Bot className="h-6 w-6" />}
-                preview={<AIFormBuilderPreview />}
+                preview={<AiFormBuilderPreview />}
                 title="AI Form Builder"
               />
 
@@ -749,7 +747,7 @@ export default function BentoFeatures() {
                 className="col-span-1"
                 description="Connect to any API to populate fields or send data automatically."
                 icon={<Zap className="h-5 w-5" />}
-                preview={<APIIntegrationPreview />}
+                preview={<ApiIntegrationPreview />}
                 title="API Integration"
               />
 

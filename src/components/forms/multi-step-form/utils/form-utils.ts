@@ -1,7 +1,7 @@
 import type { FormBlock, FormSchema } from "@/lib/database";
 
-export const processFormBlocks = (schema: FormSchema): FormBlock[] => {
-  return schema.blocks?.length
+export const processFormBlocks = (schema: FormSchema): FormBlock[] =>
+  schema.blocks?.length
     ? schema.blocks
     : schema.fields?.length
       ? [
@@ -13,14 +13,11 @@ export const processFormBlocks = (schema: FormSchema): FormBlock[] => {
           },
         ]
       : [];
-};
 
 export const calculateProgress = (
   currentStep: number,
   totalSteps: number
-): number => {
-  return totalSteps > 1 ? ((currentStep + 1) / totalSteps) * 100 : 100;
-};
+): number => (totalSteps > 1 ? ((currentStep + 1) / totalSteps) * 100 : 100);
 
 export const submitForm = async (
   formId: string,

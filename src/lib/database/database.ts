@@ -821,8 +821,8 @@ export const formsDbServer = {
     uid: string,
     email: string,
     name: string,
-    has_premium?: boolean,
-    polar_customer_id?: string | null
+    hasPremium?: boolean,
+    polarCustomerId?: string | null
   ) {
     const supabase = await createServerClient();
 
@@ -839,9 +839,9 @@ export const formsDbServer = {
           uid,
           name,
           email,
-          has_premium: has_premium ?? existingUser?.has_premium ?? false,
+          has_premium: hasPremium ?? existingUser?.has_premium ?? false,
           polar_customer_id:
-            polar_customer_id ?? existingUser?.polar_customer_id ?? null,
+            polarCustomerId ?? existingUser?.polar_customer_id ?? null,
         },
         {
           onConflict: "email",
@@ -854,12 +854,12 @@ export const formsDbServer = {
     return data;
   },
 
-  async updateUserPremiumStatus(email: string, has_premium: boolean) {
+  async updateUserPremiumStatus(email: string, hasPremium: boolean) {
     const supabase = await createServerClient();
 
     const { data, error } = await supabase
       .from("users")
-      .update({ has_premium })
+      .update({ has_premium: hasPremium })
       .eq("email", email)
       .select()
       .single();

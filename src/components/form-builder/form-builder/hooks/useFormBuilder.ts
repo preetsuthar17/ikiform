@@ -60,7 +60,7 @@ export const useFormBuilder = (formId?: string) => {
   const autoSaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const lastSavedSchemaRef = useRef<FormSchema | null>(null);
   const lastManuallySavedSchemaRef = useRef<FormSchema | null>(null);
-  const importedFromAI = useRef(false);
+  const importedFromAi = useRef(false);
 
   const actions: FormBuilderActions = {
     setLoading: (loading) => setState((prev) => ({ ...prev, loading })),
@@ -121,16 +121,17 @@ export const useFormBuilder = (formId?: string) => {
     isFormLoaded.current = false;
   }, [formId]);
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       if (autoSaveTimeoutRef.current) {
         clearTimeout(autoSaveTimeoutRef.current);
       }
-    };
-  }, []);
+    },
+    []
+  );
 
   useEffect(() => {
-    if (state.isNewForm && !authLoading && user && !importedFromAI.current) {
+    if (state.isNewForm && !authLoading && user && !importedFromAi.current) {
       actions.setShowCreationWizard(true);
     }
   }, [state.isNewForm, authLoading, user]);
@@ -190,7 +191,7 @@ export const useFormBuilder = (formId?: string) => {
 
         actions.setFormSchema(ensureDefaultRateLimitSettings(normalizedSchema));
         actions.setHasUnsavedChanges(true);
-        importedFromAI.current = true;
+        importedFromAi.current = true;
       } catch {}
       localStorage.removeItem(DRAFT_KEYS.IMPORTED_FORM_SCHEMA);
     }

@@ -70,9 +70,7 @@ export function useMotionSafeColors() {
     [getColor, isDark]
   );
 
-  const safeOpacity = React.useCallback((value?: number) => {
-    return value ?? 0;
-  }, []);
+  const safeOpacity = React.useCallback((value?: number) => value ?? 0, []);
 
   const safeBackgroundColor = React.useCallback(
     (color: ColorKey | string, fallback = "rgba(0, 0, 0, 0)") => {

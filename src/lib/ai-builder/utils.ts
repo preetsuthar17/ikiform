@@ -1,8 +1,5 @@
-export const generateSessionId = () => {
-  return (
-    "ai-builder-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9)
-  );
-};
+export const generateSessionId = () =>
+  "ai-builder-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9);
 
 export const extractJsonFromText = (text: string) => {
   try {
@@ -14,9 +11,8 @@ export const extractJsonFromText = (text: string) => {
   return null;
 };
 
-export const checkForDuplicateSchema = (forms: any[], schema: any) => {
-  return forms.find((f) => JSON.stringify(f.schema) === JSON.stringify(schema));
-};
+export const checkForDuplicateSchema = (forms: any[], schema: any) =>
+  forms.find((f) => JSON.stringify(f.schema) === JSON.stringify(schema));
 
 export const initializeScrollbarStyles = () => {
   if (typeof window !== "undefined") {

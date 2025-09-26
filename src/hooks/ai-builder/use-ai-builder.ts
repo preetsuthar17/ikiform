@@ -8,7 +8,7 @@ import {
   generateSessionId,
 } from "@/lib/ai-builder/utils";
 
-interface AIBuilderState {
+interface AiBuilderState {
   sessionId: string | null;
   messages: ChatMessage[];
   input: string;
@@ -21,7 +21,7 @@ interface AIBuilderState {
   showJsonModal: boolean;
 }
 
-type AIBuilderAction =
+type AiBuilderAction =
   | { type: "SET_SESSION_ID"; payload: string }
   | { type: "ADD_MESSAGE"; payload: ChatMessage }
   | { type: "SET_MESSAGES"; payload: ChatMessage[] }
@@ -35,7 +35,7 @@ type AIBuilderAction =
   | { type: "SET_SHOW_JSON_MODAL"; payload: boolean }
   | { type: "RESET_STREAM_STATE" };
 
-const initialState: AIBuilderState = {
+const initialState: AiBuilderState = {
   sessionId: null,
   messages: [],
   input: "",
@@ -49,9 +49,9 @@ const initialState: AIBuilderState = {
 };
 
 function aiBuilderReducer(
-  state: AIBuilderState,
-  action: AIBuilderAction
-): AIBuilderState {
+  state: AiBuilderState,
+  action: AiBuilderAction
+): AiBuilderState {
   switch (action.type) {
     case "SET_SESSION_ID":
       return { ...state, sessionId: action.payload };
@@ -129,7 +129,7 @@ export const useAIBuilder = (initialPrompt?: string) => {
     }
   }, [state.isStreaming]);
 
-  const processAIResponse = useCallback(
+  const processAiResponse = useCallback(
     async (promptText: string, currentMessages: ChatMessage[]) => {
       const currentSessionId = state.sessionId || generateSessionId();
       dispatch({ type: "SET_SESSION_ID", payload: currentSessionId });
@@ -195,9 +195,9 @@ export const useAIBuilder = (initialPrompt?: string) => {
 
       const newMessage: ChatMessage = { role: "user", content: promptText };
       dispatch({ type: "ADD_MESSAGE", payload: newMessage });
-      await processAIResponse(promptText, [...state.messages, newMessage]);
+      await processAiResponse(promptText, [...state.messages, newMessage]);
     },
-    [state.messages, processAIResponse]
+    [state.messages, processAiResponse]
   );
 
   const handleSend = useCallback(
@@ -210,9 +210,9 @@ export const useAIBuilder = (initialPrompt?: string) => {
 
       const newMessage: ChatMessage = { role: "user", content: currentInput };
       dispatch({ type: "ADD_MESSAGE", payload: newMessage });
-      await processAIResponse(currentInput, [...state.messages, newMessage]);
+      await processAiResponse(currentInput, [...state.messages, newMessage]);
     },
-    [state.input, state.messages, processAIResponse]
+    [state.input, state.messages, processAiResponse]
   );
 
   const handleUseForm = useCallback(() => {

@@ -1,6 +1,6 @@
 import BentoFeatures from "@/components/home/bento-features";
 import CTA from "@/components/home/cta";
-import FAQSection from "@/components/home/faq";
+import FaqSection from "@/components/home/faq";
 import {
   FeatureOne,
   FeatureThree,
@@ -28,7 +28,7 @@ I was immediately sold when I saw your article about Typeform being too expensiv
         <FeatureThree />
         <BentoFeatures />
         <Pricing />
-        <FAQSection />
+        <FaqSection />
         <Review
           image="https://pbs.twimg.com/profile_images/1929279033180618752/0z6QXRbm_400x400.jpg"
           name="Kais"

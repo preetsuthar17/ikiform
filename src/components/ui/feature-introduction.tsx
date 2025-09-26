@@ -76,11 +76,12 @@ export function FeatureIntroduction({
     handleClose();
   };
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       if (closeTimeout.current) clearTimeout(closeTimeout.current);
-    };
-  }, []);
+    },
+    []
+  );
 
   if (!(isLoaded && showDialog)) return null;
 

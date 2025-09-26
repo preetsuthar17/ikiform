@@ -21,9 +21,8 @@ export const formatLabels: Record<ColorFormat, string> = {
  * Converts RGB values (0-1) to XYZ color space
  */
 function rgbToXyz(r: number, g: number, b: number): [number, number, number] {
-  const toLinear = (c: number) => {
-    return c <= 0.040_45 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
-  };
+  const toLinear = (c: number) =>
+    c <= 0.040_45 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
 
   const rLinear = toLinear(r);
   const gLinear = toLinear(g);
@@ -49,9 +48,8 @@ function xyzToLab(x: number, y: number, z: number): [number, number, number] {
   const fy = y / yn;
   const fz = z / zn;
 
-  const transform = (t: number) => {
-    return t > 0.008_856 ? t ** (1 / 3) : 7.787 * t + 16 / 116;
-  };
+  const transform = (t: number) =>
+    t > 0.008_856 ? t ** (1 / 3) : 7.787 * t + 16 / 116;
 
   const fxT = transform(fx);
   const fyT = transform(fy);
@@ -82,11 +80,11 @@ function xyzToOklch(x: number, y: number, z: number): [number, number, number] {
   const okA = 1.977_998_495_1 * l - 2.428_592_205 * m + 0.450_593_709_9 * s;
   const okB = 0.025_904_037_1 * l + 0.782_771_766_2 * m - 0.808_675_766 * s;
 
-  const L_oklch = okL;
+  const LOklch = okL;
   const C = Math.sqrt(okA * okA + okB * okB);
   const H = (Math.atan2(okB, okA) * 180) / Math.PI;
 
-  return [L_oklch, C, H < 0 ? H + 360 : H];
+  return [LOklch, C, H < 0 ? H + 360 : H];
 }
 
 /**
@@ -157,14 +155,14 @@ export function formatColorValue(color: Color, format: ColorFormat): string {
       const alpha = rgb.getChannelValue("alpha");
 
       const [x, y, z] = rgbToXyz(r, g, b);
-      const [L, a, b_lab] = xyzToLab(x, y, z);
+      const [L, a, bLab] = xyzToLab(x, y, z);
 
       if (alpha < 1) {
-        return `lab(${L.toFixed(1)}% ${a.toFixed(1)} ${b_lab.toFixed(
+        return `lab(${L.toFixed(1)}% ${a.toFixed(1)} ${bLab.toFixed(
           1
         )} / ${alpha.toFixed(2)})`;
       }
-      return `lab(${L.toFixed(1)}% ${a.toFixed(1)} ${b_lab.toFixed(1)})`;
+      return `lab(${L.toFixed(1)}% ${a.toFixed(1)} ${bLab.toFixed(1)})`;
     }
     default:
       return color.toString("hex");

@@ -93,9 +93,8 @@ export const createOptionHandlers = (
   },
 });
 
-export const formatFieldType = (type: string): string => {
-  return type.charAt(0).toUpperCase() + type.slice(1);
-};
+export const formatFieldType = (type: string): string =>
+  type.charAt(0).toUpperCase() + type.slice(1);
 
 export const getPlaceholderText = (
   field: FormField,

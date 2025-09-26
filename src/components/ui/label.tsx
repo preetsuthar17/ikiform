@@ -35,27 +35,25 @@ const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
   (
     { className, variant, size, required, optional, children, ...props },
     ref
-  ) => {
-    return (
-      <label
-        className={cn(labelVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      >
-        {children}
-        {required && (
-          <span aria-label="required" className="ml-1 text-destructive">
-            *
-          </span>
-        )}
-        {optional && !required && (
-          <span className="ml-1 font-normal text-muted-foreground">
-            (optional)
-          </span>
-        )}
-      </label>
-    );
-  }
+  ) => (
+    <label
+      className={cn(labelVariants({ variant, size, className }))}
+      ref={ref}
+      {...props}
+    >
+      {children}
+      {required && (
+        <span aria-label="required" className="ml-1 text-destructive">
+          *
+        </span>
+      )}
+      {optional && !required && (
+        <span className="ml-1 font-normal text-muted-foreground">
+          (optional)
+        </span>
+      )}
+    </label>
+  )
 );
 
 Label.displayName = "Label";

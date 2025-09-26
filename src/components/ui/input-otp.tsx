@@ -136,12 +136,12 @@ const InputOTPSlot = React.forwardRef<
     { index, className, variant, otpSize, state, animated = true, ...props },
     ref
   ) => {
-    const inputOTPContext = React.useContext(OTPInputContext);
-    const { char, hasFakeCaret, isActive } = inputOTPContext.slots[index];
+    const inputOtpContext = React.useContext(OTPInputContext);
+    const { char, hasFakeCaret, isActive } = inputOtpContext.slots[index];
 
     const currentState = isActive ? "active" : char ? "filled" : "default";
 
-    const totalSlots = inputOTPContext.slots.length;
+    const totalSlots = inputOtpContext.slots.length;
     const position =
       totalSlots === 1
         ? "single"

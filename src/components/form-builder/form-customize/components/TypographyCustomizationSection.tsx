@@ -37,11 +37,10 @@ export function TypographyCustomizationSection({
     return index >= 0 ? index : 2; // Default to "base" (index 2)
   };
 
-  const getFontSizeFromSlider = (value: number) => {
-    return FONT_SIZE_OPTIONS[
+  const getFontSizeFromSlider = (value: number) =>
+    FONT_SIZE_OPTIONS[
       Math.max(0, Math.min(value, FONT_SIZE_OPTIONS.length - 1))
     ].value;
-  };
 
   const getFontWeightSliderValue = (weight: string) => {
     const index = FONT_WEIGHT_OPTIONS.findIndex(
@@ -50,11 +49,10 @@ export function TypographyCustomizationSection({
     return index >= 0 ? index : 1; // Default to "normal" (index 1)
   };
 
-  const getFontWeightFromSlider = (value: number) => {
-    return FONT_WEIGHT_OPTIONS[
+  const getFontWeightFromSlider = (value: number) =>
+    FONT_WEIGHT_OPTIONS[
       Math.max(0, Math.min(value, FONT_WEIGHT_OPTIONS.length - 1))
     ].value;
-  };
 
   const handleFontFamilyChange = (value: string) => {
     console.log("Font family changed to:", value);

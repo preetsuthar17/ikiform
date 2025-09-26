@@ -16,8 +16,8 @@ import {
 export const useAnalyticsData = (
   form: Form,
   submissions: FormSubmission[]
-): AnalyticsData => {
-  return useMemo(() => {
+): AnalyticsData =>
+  useMemo(() => {
     const totalSubmissions = submissions.length;
     const lastSubmission = submissions.length > 0 ? submissions[0] : null;
     const totalFields = getTotalFields(form);
@@ -114,4 +114,3 @@ export const useAnalyticsData = (
       quizAnalytics,
     };
   }, [form, submissions]);
-};

@@ -75,7 +75,7 @@ function analyzeConversation(
 
   const lastUserMessage =
     userMessages[userMessages.length - 1]?.content || null;
-  const lastAIResponse =
+  const lastAiResponse =
     assistantMessages[assistantMessages.length - 1]?.content || null;
 
   const followUpKeywords = [
@@ -213,7 +213,7 @@ function analyzeConversation(
   if (topicsDiscussed.length > 0) {
     contextualHints.push(`Previous topics: ${topicsDiscussed.join(", ")}`);
   }
-  if (needsContext && lastAIResponse) {
+  if (needsContext && lastAiResponse) {
     contextualHints.push("User may be referring to previous analysis");
   }
 
@@ -221,7 +221,7 @@ function analyzeConversation(
     hasFollowUpQuestions,
     referencesLastResponse,
     topicsDiscussed,
-    lastAIResponse,
+    lastAIResponse: lastAiResponse,
     lastUserMessage,
     conversationTurns: Math.floor(messages.length / 2),
     needsContext,

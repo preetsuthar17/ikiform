@@ -50,13 +50,11 @@ export const getBaseClasses = (field: FormField, error?: string) => {
   return `${sizeClasses} ${variantClasses} ${errorClasses}`.trim();
 };
 
-export const getErrorClasses = (error?: string) => {
-  return error ? "border-destructive focus:border-destructive" : "";
-};
+export const getErrorClasses = (error?: string) =>
+  error ? "border-destructive focus:border-destructive" : "";
 
-export const getErrorRingClasses = (error?: string) => {
-  return error ? "ring-2 ring-destructive/20" : "";
-};
+export const getErrorRingClasses = (error?: string) =>
+  error ? "ring-2 ring-destructive/20" : "";
 
 export { applyBuilderMode, getBuilderMode } from "./builderMode";
 export { createFieldComponent } from "./fieldFactory";

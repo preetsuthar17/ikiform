@@ -109,11 +109,11 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
     }
   };
 
-  const handleExportCSV = () => {
+  const handleExportCsv = () => {
     exportToCSV(form, submissions);
   };
 
-  const handleExportJSON = () => {
+  const handleExportJson = () => {
     exportToJSON(form, submissions);
   };
 
@@ -232,8 +232,8 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
           formatDate={formatDate}
           getFieldLabel={getFieldLabelForForm}
           loading={loading}
-          onExportCSV={handleExportCSV}
-          onExportJSON={handleExportJSON}
+          onExportCSV={handleExportCsv}
+          onExportJSON={handleExportJson}
           onRefresh={refreshData}
           onViewSubmission={handleSubmissionClick}
           refreshing={refreshing}

@@ -32,6 +32,5 @@ export const getBlockStats = (blocks: FormBlock[]) => {
   };
 };
 
-export const canDeleteBlock = (blocks: FormBlock[]): boolean => {
-  return blocks.length > 1;
-};
+export const canDeleteBlock = (blocks: FormBlock[]): boolean =>
+  blocks.length > 1;

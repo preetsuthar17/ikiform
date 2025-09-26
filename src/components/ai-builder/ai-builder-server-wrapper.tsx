@@ -6,7 +6,7 @@ import { SuspenseWrapper } from "@/components/ui/suspense-wrapper";
  * Server component for loading AI Builder initial data
  * Handles server-side data fetching and preparation
  */
-async function AIBuilderDataLoader() {
+async function AiBuilderDataLoader() {
   return null;
 }
 
@@ -32,7 +32,7 @@ export function AIBuilderServerWrapper() {
         </div>
       }
     >
-      <AIBuilderDataLoader />
+      <AiBuilderDataLoader />
     </SuspenseWrapper>
   );
 }

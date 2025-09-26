@@ -9,7 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-interface FAQ {
+interface Faq {
   question: string;
   answer: React.ReactNode;
 }
@@ -126,8 +126,8 @@ export default function FAQSection() {
           <div className="flex flex-col items-center gap-12">
             {/* FAQ Grid */}
             <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
-              <FAQList faqs={firstHalf} />
-              <FAQList faqs={secondHalf} />
+              <FaqList faqs={firstHalf} />
+              <FaqList faqs={secondHalf} />
             </div>
           </div>
         </div>
@@ -136,29 +136,27 @@ export default function FAQSection() {
   );
 }
 
-const FAQList = ({ faqs }: { faqs: FAQ[] }) => {
-  return (
-    <div className="flex flex-col gap-4">
-      {faqs.map((faq, i) => (
-        <Accordion
-          className="w-full rounded-3xl border-none"
-          collapsible
-          key={i}
-          type="single"
+const FaqList = ({ faqs }: { faqs: Faq[] }) => (
+  <div className="flex flex-col gap-4">
+    {faqs.map((faq, i) => (
+      <Accordion
+        className="w-full rounded-3xl border-none"
+        collapsible
+        key={i}
+        type="single"
+      >
+        <AccordionItem
+          className="w-full rounded-2xl border-none bg-background"
+          value={String(i)}
         >
-          <AccordionItem
-            className="w-full rounded-2xl border-none bg-background"
-            value={String(i)}
-          >
-            <AccordionTrigger className="px-6 py-6 text-left font-medium text-foreground hover:no-underline">
-              {faq.question}
-            </AccordionTrigger>
-            <AccordionContent className="px-6 pb-6 text-muted-foreground">
-              {faq.answer}
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      ))}
-    </div>
-  );
-};
+          <AccordionTrigger className="px-6 py-6 text-left font-medium text-foreground hover:no-underline">
+            {faq.question}
+          </AccordionTrigger>
+          <AccordionContent className="px-6 pb-6 text-muted-foreground">
+            {faq.answer}
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    ))}
+  </div>
+);

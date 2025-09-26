@@ -99,7 +99,7 @@ export function useFormsManagement() {
     }
   };
 
-  const handleCreateWithAI = () => {
+  const handleCreateWithAi = () => {
     setShowChoiceModal(false);
     router.push("/ai-builder");
   };
@@ -133,7 +133,7 @@ export function useFormsManagement() {
     duplicateForm,
     deleteForm,
     confirmDeleteForm,
-    handleCreateWithAI,
+    handleCreateWithAI: handleCreateWithAi,
     handleCreateManually,
     handleCreateFromPrompt,
     setDeleteModal,

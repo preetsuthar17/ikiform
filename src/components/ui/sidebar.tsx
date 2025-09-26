@@ -608,18 +608,16 @@ const SidebarContent: React.FC<SidebarContentProps> = ({
 const SidebarHeader: React.FC<{
   children: React.ReactNode;
   className?: string;
-}> = ({ children, className }) => {
-  return (
-    <div className={cn("flex items-center gap-2", className)}>{children}</div>
-  );
-};
+}> = ({ children, className }) => (
+  <div className={cn("flex items-center gap-2", className)}>{children}</div>
+);
 
 const SidebarFooter: React.FC<{
   children: React.ReactNode;
   className?: string;
-}> = ({ children, className }) => {
-  return <div className={cn("flex flex-col gap-1", className)}>{children}</div>;
-};
+}> = ({ children, className }) => (
+  <div className={cn("flex flex-col gap-1", className)}>{children}</div>
+);
 
 const SidebarSeparator: React.FC<{
   className?: string;

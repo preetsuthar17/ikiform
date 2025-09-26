@@ -35,14 +35,12 @@ export function SelectField(props: BaseFieldProps) {
           }
 
           if (field.valueKey || field.labelKey) {
-            options = options.map((item: any) => {
-              return {
-                value: field.valueKey ? item[field.valueKey] : item.value,
-                label: field.labelKey
-                  ? item[field.labelKey]
-                  : item.label || item.value,
-              };
-            });
+            options = options.map((item: any) => ({
+              value: field.valueKey ? item[field.valueKey] : item.value,
+              label: field.labelKey
+                ? item[field.labelKey]
+                : item.label || item.value,
+            }));
           }
           setApiOptions(sanitizeOptions(options));
           setLoading(false);

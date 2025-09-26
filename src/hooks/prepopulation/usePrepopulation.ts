@@ -27,15 +27,17 @@ export function usePrepopulation(fields: FormField[]): UsePrepopulationResult {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sources, setSources] = useState<Record<string, string>>({});
 
-  const prepopulationKey = useMemo(() => {
-    return fields
-      .filter((field) => field.prepopulation?.enabled)
-      .map(
-        (field) =>
-          `${field.id}-${field.prepopulation!.source}-${JSON.stringify(field.prepopulation!.config)}`
-      )
-      .join("|");
-  }, [fields]);
+  const prepopulationKey = useMemo(
+    () =>
+      fields
+        .filter((field) => field.prepopulation?.enabled)
+        .map(
+          (field) =>
+            `${field.id}-${field.prepopulation!.source}-${JSON.stringify(field.prepopulation!.config)}`
+        )
+        .join("|"),
+    [fields]
+  );
 
   useEffect(() => {
     async function loadPrepopulatedData() {

@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 
-const BotIdClientWithNoSSR = dynamic(
+const BotIdClientWithNoSsr = dynamic(
   async () => {
     const { BotIdClient } = await import("botid/client");
     return BotIdClient;
@@ -22,5 +22,5 @@ const protectedRoutes = [
 ];
 
 export function BotIdClientWrapper() {
-  return <BotIdClientWithNoSSR protect={protectedRoutes} />;
+  return <BotIdClientWithNoSsr protect={protectedRoutes} />;
 }

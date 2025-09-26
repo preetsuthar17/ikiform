@@ -34,15 +34,13 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 
   const [previewMode, setPreviewMode] = useState(false);
 
-  const [localSettings, setLocalSettings] = useState<LocalSettings>(() => {
-    return {
-      ...schema.settings,
-      layout: (schema.settings as any).layout || {},
-      colors: (schema.settings as any).colors || {},
-      typography: (schema.settings as any).typography || {},
-      branding: (schema.settings as any).branding || {},
-    };
-  });
+  const [localSettings, setLocalSettings] = useState<LocalSettings>(() => ({
+    ...schema.settings,
+    layout: (schema.settings as any).layout || {},
+    colors: (schema.settings as any).colors || {},
+    typography: (schema.settings as any).typography || {},
+    branding: (schema.settings as any).branding || {},
+  }));
 
   const updateSettings = async (updates: Partial<LocalSettings>) => {
     const newSettings = { ...localSettings, ...updates };

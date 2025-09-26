@@ -35,17 +35,13 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
   currentStep,
   completedSteps,
 }) => {
-  const getCurrentStepIndex = () => {
-    return steps.findIndex((step) => step.id === currentStep);
-  };
+  const getCurrentStepIndex = () =>
+    steps.findIndex((step) => step.id === currentStep);
 
-  const isStepCompleted = (stepId: WizardStep) => {
-    return completedSteps.includes(stepId);
-  };
+  const isStepCompleted = (stepId: WizardStep) =>
+    completedSteps.includes(stepId);
 
-  const isStepCurrent = (stepId: WizardStep) => {
-    return currentStep === stepId;
-  };
+  const isStepCurrent = (stepId: WizardStep) => currentStep === stepId;
 
   return (
     <div className="flex w-full items-center justify-between">

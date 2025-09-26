@@ -52,11 +52,10 @@ export function LayoutCustomizationSection({
     return index >= 0 ? index : 1; // Default to "md" (index 1)
   };
 
-  const getWidthFromSlider = (value: number) => {
-    return FORM_WIDTH_OPTIONS[
+  const getWidthFromSlider = (value: number) =>
+    FORM_WIDTH_OPTIONS[
       Math.max(0, Math.min(value, FORM_WIDTH_OPTIONS.length - 1))
     ].value;
-  };
 
   const getPaddingSliderValue = (padding: string) => {
     const index = FORM_PADDING_OPTIONS.findIndex(
@@ -65,11 +64,10 @@ export function LayoutCustomizationSection({
     return index >= 0 ? index : 2; // Default to "md" (index 2)
   };
 
-  const getPaddingFromSlider = (value: number) => {
-    return FORM_PADDING_OPTIONS[
+  const getPaddingFromSlider = (value: number) =>
+    FORM_PADDING_OPTIONS[
       Math.max(0, Math.min(value, FORM_PADDING_OPTIONS.length - 1))
     ].value;
-  };
 
   const getMarginSliderValue = (margin: string) => {
     const index = FORM_MARGIN_OPTIONS.findIndex(
@@ -78,11 +76,10 @@ export function LayoutCustomizationSection({
     return index >= 0 ? index : 0; // Default to "none" (index 0)
   };
 
-  const getMarginFromSlider = (value: number) => {
-    return FORM_MARGIN_OPTIONS[
+  const getMarginFromSlider = (value: number) =>
+    FORM_MARGIN_OPTIONS[
       Math.max(0, Math.min(value, FORM_MARGIN_OPTIONS.length - 1))
     ].value;
-  };
 
   const getBorderRadiusSliderValue = (radius: string) => {
     const index = FORM_BORDER_RADIUS_OPTIONS.findIndex(
@@ -91,11 +88,10 @@ export function LayoutCustomizationSection({
     return index >= 0 ? index : 2; // Default to "md" (index 2)
   };
 
-  const getBorderRadiusFromSlider = (value: number) => {
-    return FORM_BORDER_RADIUS_OPTIONS[
+  const getBorderRadiusFromSlider = (value: number) =>
+    FORM_BORDER_RADIUS_OPTIONS[
       Math.max(0, Math.min(value, FORM_BORDER_RADIUS_OPTIONS.length - 1))
     ].value;
-  };
 
   const handleBorderRadiusChange = (values: number[]) => {
     const newRadius = getBorderRadiusFromSlider(values[0]);

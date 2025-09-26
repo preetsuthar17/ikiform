@@ -56,8 +56,8 @@ export const filterSubmissions = (
   searchTerm: string,
   filterState: FilterState,
   totalFields: number
-) => {
-  return submissions.filter((submission) => {
+) =>
+  submissions.filter((submission) => {
     if (searchTerm) {
       const searchString = JSON.stringify(submission).toLowerCase();
       if (!searchString.includes(searchTerm.toLowerCase())) return false;
@@ -106,7 +106,6 @@ export const filterSubmissions = (
 
     return true;
   });
-};
 
 export const calculateFieldAnalytics = (
   form: Form,
@@ -242,12 +241,12 @@ export const calculateConversionFunnel = (
 
   const funnel = form.schema.blocks.map((block) => {
     const blockFieldIds = block.fields?.map((f) => f.id) || [];
-    const completedCount = submissions.filter((sub) => {
-      return blockFieldIds.some((fieldId) => {
+    const completedCount = submissions.filter((sub) =>
+      blockFieldIds.some((fieldId) => {
         const value = sub.submission_data[fieldId];
         return value !== "" && value !== null && value !== undefined;
-      });
-    }).length;
+      })
+    ).length;
 
     return {
       stepName: block.title,

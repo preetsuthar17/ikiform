@@ -144,34 +144,32 @@ export const FormCreationWizard: React.FC<FormCreationWizardProps> = ({
     }
   };
 
-  const renderActions = () => {
-    return (
-      <div className="flex items-center justify-between">
-        <Button
-          onClick={currentStep === "type" ? handleClose : handleBack}
-          variant="outline"
-        >
-          {currentStep === "type" ? "Cancel" : "Back"}
-        </Button>
+  const renderActions = () => (
+    <div className="flex items-center justify-between">
+      <Button
+        onClick={currentStep === "type" ? handleClose : handleBack}
+        variant="outline"
+      >
+        {currentStep === "type" ? "Cancel" : "Back"}
+      </Button>
 
-        <div className="flex items-center gap-2">
-          {currentStep === "review" ? (
-            <Button className="min-w-[100px]" onClick={handleFinish}>
-              Create Form
-            </Button>
-          ) : (
-            <Button
-              className="min-w-[100px]"
-              disabled={!canContinue()}
-              onClick={handleNext}
-            >
-              {currentStep === "configure" ? "Review" : "Next"}
-            </Button>
-          )}
-        </div>
+      <div className="flex items-center gap-2">
+        {currentStep === "review" ? (
+          <Button className="min-w-[100px]" onClick={handleFinish}>
+            Create Form
+          </Button>
+        ) : (
+          <Button
+            className="min-w-[100px]"
+            disabled={!canContinue()}
+            onClick={handleNext}
+          >
+            {currentStep === "configure" ? "Review" : "Next"}
+          </Button>
+        )}
       </div>
-    );
-  };
+    </div>
+  );
 
   return (
     <Modal onOpenChange={handleClose} open={isOpen}>

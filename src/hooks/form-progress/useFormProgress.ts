@@ -218,16 +218,17 @@ export function useFormProgress(
     }
   }, [finalConfig.autoSaveInterval, state.progress, saveProgress]);
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       if (saveTimeoutRef.current) {
         clearTimeout(saveTimeoutRef.current);
       }
       if (autoSaveIntervalRef.current) {
         clearInterval(autoSaveIntervalRef.current);
       }
-    };
-  }, []);
+    },
+    []
+  );
 
   return {
     ...state,

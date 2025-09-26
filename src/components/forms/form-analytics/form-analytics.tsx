@@ -85,8 +85,8 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 
   const getFieldLabelForForm = (fieldId: string) =>
     getFieldLabel(form, fieldId);
-  const handleExportCSV = () => exportToCSV(form, submissions);
-  const handleExportJSON = () => exportToJSON(form, submissions);
+  const handleExportCsv = () => exportToCSV(form, submissions);
+  const handleExportJson = () => exportToJSON(form, submissions);
   const handleExportSubmission = (submission: any) => {
     const submissionData = {
       id: submission.id,
@@ -274,8 +274,8 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
           formatDate={formatDate}
           getFieldLabel={getFieldLabelForForm}
           loading={loading}
-          onExportCSV={handleExportCSV}
-          onExportJSON={handleExportJSON}
+          onExportCSV={handleExportCsv}
+          onExportJSON={handleExportJson}
           onRefresh={refreshData}
           onViewSubmission={handleViewSubmission}
           refreshing={refreshing}

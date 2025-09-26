@@ -134,13 +134,14 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
     };
   }, [jsonString, isOpen]);
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       if (abortControllerRef.current) {
         abortControllerRef.current.abort();
       }
-    };
-  }, []);
+    },
+    []
+  );
 
   const copyToClipboard = async () => {
     try {

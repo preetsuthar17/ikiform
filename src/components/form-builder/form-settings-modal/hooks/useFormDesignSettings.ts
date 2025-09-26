@@ -58,7 +58,7 @@ export function useColorValidation() {
     return hexRegex.test(color);
   }, []);
 
-  const isValidCSSColor = useCallback((color: string): boolean => {
+  const isValidCssColor = useCallback((color: string): boolean => {
     const style = new Option().style;
     style.color = color;
     return style.color !== "";
@@ -67,15 +67,15 @@ export function useColorValidation() {
   const normalizeColor = useCallback(
     (color: string): string => {
       if (isValidHexColor(color)) return color;
-      if (isValidCSSColor(color)) return color;
+      if (isValidCssColor(color)) return color;
       return "#000000"; // fallback
     },
-    [isValidHexColor, isValidCSSColor]
+    [isValidHexColor, isValidCssColor]
   );
 
   return {
     isValidHexColor,
-    isValidCSSColor,
+    isValidCSSColor: isValidCssColor,
     normalizeColor,
   };
 }

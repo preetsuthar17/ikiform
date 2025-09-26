@@ -44,23 +44,23 @@ export function ShareFormModal({
   const [publishing, setPublishing] = useState(false);
   const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string>("");
   const [downloading, setDownloading] = useState(false);
-  const [showQR, setShowQR] = useState(false);
-  const [generatingQR, setGeneratingQR] = useState(false);
+  const [showQr, setShowQr] = useState(false);
+  const [generatingQr, setGeneratingQr] = useState(false);
 
   const shareUrl = formId
     ? `${typeof window !== "undefined" ? window.location.origin : ""}/f/${formSlug || formId}`
     : "";
 
   useEffect(() => {
-    if (isOpen && isPublished && shareUrl && showQR && !qrCodeDataUrl) {
-      generateQRCode();
+    if (isOpen && isPublished && shareUrl && showQr && !qrCodeDataUrl) {
+      generateQrCode();
     }
-  }, [isOpen, isPublished, shareUrl, showQR, qrCodeDataUrl]);
+  }, [isOpen, isPublished, shareUrl, showQr, qrCodeDataUrl]);
 
-  const generateQRCode = async () => {
+  const generateQrCode = async () => {
     if (!shareUrl) return;
 
-    setGeneratingQR(true);
+    setGeneratingQr(true);
     try {
       const style = QR_CODE_STYLE;
 
@@ -99,7 +99,7 @@ export function ShareFormModal({
       console.error("Error generating QR code:", error);
       toast.error("Failed to generate QR code");
     } finally {
-      setGeneratingQR(false);
+      setGeneratingQr(false);
     }
   };
 
@@ -125,7 +125,7 @@ export function ShareFormModal({
     }
   };
 
-  const handleDownloadQR = async () => {
+  const handleDownloadQr = async () => {
     if (!qrCodeDataUrl) return;
 
     setDownloading(true);
@@ -156,8 +156,8 @@ export function ShareFormModal({
     }
   };
 
-  const handleToggleQR = () => {
-    setShowQR(!showQR);
+  const handleToggleQr = () => {
+    setShowQr(!showQr);
   };
 
   return (
@@ -172,13 +172,13 @@ export function ShareFormModal({
         <div className="flex w-full flex-col gap-6 px-2 sm:px-4">
           {isPublished ? (
             <div className="flex w-full flex-col gap-6">
-              {showQR && (
+              {showQr && (
                 <div className="flex w-full flex-col gap-4 rounded-3xl border border-border/50 bg-muted/20 p-3 sm:p-4">
                   <div className="flex items-center justify-between">
                     <h3 className="font-medium text-sm">QR Code</h3>
                     <Button
                       className="h-6 w-6 p-0"
-                      onClick={handleToggleQR}
+                      onClick={handleToggleQr}
                       size="sm"
                       variant="ghost"
                     >
@@ -188,7 +188,7 @@ export function ShareFormModal({
                   <div className="flex justify-center">
                     <div className="relative">
                       <div className="flex items-center justify-center rounded-lg border bg-white p-2 sm:p-4">
-                        {qrCodeDataUrl && !generatingQR ? (
+                        {qrCodeDataUrl && !generatingQr ? (
                           <img
                             alt="QR Code for form"
                             className="h-28 w-28 sm:h-32 sm:w-32"
@@ -196,7 +196,7 @@ export function ShareFormModal({
                           />
                         ) : (
                           <div className="flex h-28 w-28 items-center justify-center sm:h-32 sm:w-32">
-                            {generatingQR ? (
+                            {generatingQr ? (
                               <div className="flex flex-col items-center gap-2">
                                 <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
                                 <span className="text-muted-foreground text-xs">
@@ -217,8 +217,8 @@ export function ShareFormModal({
                     </p>
                     <Button
                       className="mx-auto w-full gap-2 sm:w-auto"
-                      disabled={!qrCodeDataUrl || downloading || generatingQR}
-                      onClick={handleDownloadQR}
+                      disabled={!qrCodeDataUrl || downloading || generatingQr}
+                      onClick={handleDownloadQr}
                       size="sm"
                       variant="outline"
                     >
@@ -263,9 +263,9 @@ export function ShareFormModal({
                 <div className="flex justify-center">
                   <button
                     className="text-muted-foreground text-xs underline underline-offset-2 transition-colors hover:text-foreground"
-                    onClick={handleToggleQR}
+                    onClick={handleToggleQr}
                   >
-                    {showQR ? "Hide QR Code" : "Show QR Code"}
+                    {showQr ? "Hide QR Code" : "Show QR Code"}
                   </button>
                 </div>
               </div>

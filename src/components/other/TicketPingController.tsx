@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 
-const TicketpingWithNoSSR = dynamic(
+const TicketpingWithNoSsr = dynamic(
   async () => {
     const mod = await import("./ticket-ping");
     return mod.Ticketping;
@@ -24,7 +24,7 @@ export function TicketpingController() {
     return null;
   }
 
-  return <TicketpingWithNoSSR />;
+  return <TicketpingWithNoSsr />;
 }
 
 export default TicketpingController;

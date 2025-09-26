@@ -30,9 +30,9 @@ function createErrorResponse(message: string, status = 500) {
   });
 }
 
-type AIMessage = { role: string; content: string };
+type AiMessage = { role: string; content: string };
 
-function validateAndSanitizeMessages(messages: AIMessage[]): AIMessage[] {
+function validateAndSanitizeMessages(messages: AiMessage[]): AiMessage[] {
   if (!Array.isArray(messages) || messages.length === 0) {
     throw new Error("Invalid messages array");
   }
@@ -47,7 +47,7 @@ function validateAndSanitizeMessages(messages: AIMessage[]): AIMessage[] {
   });
 }
 
-const AIBuilderRateLimit: RateLimitSettings = {
+const AiBuilderRateLimit: RateLimitSettings = {
   enabled: true,
   maxSubmissions: 20,
   window: "5 m",
@@ -148,7 +148,7 @@ function getGroqModel() {
   }
 }
 
-async function streamAIResponse({
+async function streamAiResponse({
   sanitizedMessages,
   user,
   sessionId,
@@ -227,7 +227,7 @@ async function streamAIResponse({
 
 export async function POST(req: NextRequest): Promise<Response> {
   const ip = req.headers.get("x-forwarded-for") || "global";
-  const rate = await checkRateLimit(ip, AIBuilderRateLimit);
+  const rate = await checkRateLimit(ip, AiBuilderRateLimit);
   if (!rate.success) {
     const retryAfter = rate.reset
       ? Math.ceil((rate.reset - Date.now()) / 1000)
@@ -269,7 +269,7 @@ export async function POST(req: NextRequest): Promise<Response> {
       });
     }
 
-    return await streamAIResponse({
+    return await streamAiResponse({
       sanitizedMessages,
       user,
       sessionId: sid,
