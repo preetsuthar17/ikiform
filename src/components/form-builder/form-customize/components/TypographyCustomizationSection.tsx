@@ -31,21 +31,29 @@ export function TypographyCustomizationSection({
 
   // Helper functions to convert between slider values and font options
   const getFontSizeSliderValue = (size: string) => {
-    const index = FONT_SIZE_OPTIONS.findIndex(option => option.value === size);
+    const index = FONT_SIZE_OPTIONS.findIndex(
+      (option) => option.value === size
+    );
     return index >= 0 ? index : 2; // Default to "base" (index 2)
   };
 
   const getFontSizeFromSlider = (value: number) => {
-    return FONT_SIZE_OPTIONS[Math.max(0, Math.min(value, FONT_SIZE_OPTIONS.length - 1))].value;
+    return FONT_SIZE_OPTIONS[
+      Math.max(0, Math.min(value, FONT_SIZE_OPTIONS.length - 1))
+    ].value;
   };
 
   const getFontWeightSliderValue = (weight: string) => {
-    const index = FONT_WEIGHT_OPTIONS.findIndex(option => option.value === weight);
+    const index = FONT_WEIGHT_OPTIONS.findIndex(
+      (option) => option.value === weight
+    );
     return index >= 0 ? index : 1; // Default to "normal" (index 1)
   };
 
   const getFontWeightFromSlider = (value: number) => {
-    return FONT_WEIGHT_OPTIONS[Math.max(0, Math.min(value, FONT_WEIGHT_OPTIONS.length - 1))].value;
+    return FONT_WEIGHT_OPTIONS[
+      Math.max(0, Math.min(value, FONT_WEIGHT_OPTIONS.length - 1))
+    ].value;
   };
 
   const handleFontFamilyChange = (value: string) => {
@@ -143,6 +151,10 @@ export function TypographyCustomizationSection({
           <Label className="font-medium">Font Size</Label>
           <div className="px-2">
             <Slider
+              formatValue={(value) => {
+                const option = FONT_SIZE_OPTIONS[value];
+                return option ? `${option.label} (${option.description})` : "";
+              }}
               label="Font Size"
               max={FONT_SIZE_OPTIONS.length - 1}
               min={0}
@@ -150,10 +162,6 @@ export function TypographyCustomizationSection({
               showValue={true}
               step={1}
               value={[getFontSizeSliderValue(fontSize)]}
-              formatValue={(value) => {
-                const option = FONT_SIZE_OPTIONS[value];
-                return option ? `${option.label} (${option.description})` : "";
-              }}
             />
           </div>
           <div className="rounded-lg border border-border bg-muted/30 p-4">
@@ -179,6 +187,10 @@ export function TypographyCustomizationSection({
           <Label className="font-medium">Font Weight</Label>
           <div className="px-2">
             <Slider
+              formatValue={(value) => {
+                const option = FONT_WEIGHT_OPTIONS[value];
+                return option ? `${option.label} (${option.description})` : "";
+              }}
               label="Font Weight"
               max={FONT_WEIGHT_OPTIONS.length - 1}
               min={0}
@@ -186,10 +198,6 @@ export function TypographyCustomizationSection({
               showValue={true}
               step={1}
               value={[getFontWeightSliderValue(fontWeight)]}
-              formatValue={(value) => {
-                const option = FONT_WEIGHT_OPTIONS[value];
-                return option ? `${option.label} (${option.description})` : "";
-              }}
             />
           </div>
           <div className="rounded-lg border border-border bg-muted/30 p-4">
