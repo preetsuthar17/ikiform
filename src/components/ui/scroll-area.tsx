@@ -109,8 +109,6 @@ const ScrollBar = React.forwardRef<
         )}
         orientation={orientation}
         ref={ref}
-        {...(scrollHideDelay && { scrollHideDelay })}
-        {...(type && { type })}
         {...props}
       >
         <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-card bg-border transition-colors hover:bg-foreground/30" />

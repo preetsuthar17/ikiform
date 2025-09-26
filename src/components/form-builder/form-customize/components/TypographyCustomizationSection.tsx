@@ -7,11 +7,10 @@ import {
   FONT_WEIGHT_OPTIONS,
 } from "@/components/form-builder/form-settings-modal/constants";
 import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { GoogleFontPicker } from "@/components/ui/google-font-picker";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { Slider } from "@/components/ui/slider";
 import {
   generateFontPreviewStyles,
   loadGoogleFont,
@@ -29,6 +28,25 @@ export function TypographyCustomizationSection({
   const fontFamily = localSettings.typography?.fontFamily || "Inter";
   const fontSize = localSettings.typography?.fontSize || "base";
   const fontWeight = localSettings.typography?.fontWeight || "normal";
+
+  // Helper functions to convert between slider values and font options
+  const getFontSizeSliderValue = (size: string) => {
+    const index = FONT_SIZE_OPTIONS.findIndex(option => option.value === size);
+    return index >= 0 ? index : 2; // Default to "base" (index 2)
+  };
+
+  const getFontSizeFromSlider = (value: number) => {
+    return FONT_SIZE_OPTIONS[Math.max(0, Math.min(value, FONT_SIZE_OPTIONS.length - 1))].value;
+  };
+
+  const getFontWeightSliderValue = (weight: string) => {
+    const index = FONT_WEIGHT_OPTIONS.findIndex(option => option.value === weight);
+    return index >= 0 ? index : 1; // Default to "normal" (index 1)
+  };
+
+  const getFontWeightFromSlider = (value: number) => {
+    return FONT_WEIGHT_OPTIONS[Math.max(0, Math.min(value, FONT_WEIGHT_OPTIONS.length - 1))].value;
+  };
 
   const handleFontFamilyChange = (value: string) => {
     console.log("Font family changed to:", value);
@@ -48,20 +66,22 @@ export function TypographyCustomizationSection({
     });
   };
 
-  const handleFontSizeChange = (value: string) => {
+  const handleFontSizeChange = (values: number[]) => {
+    const newSize = getFontSizeFromSlider(values[0]);
     updateSettings({
       typography: {
         ...localSettings.typography,
-        fontSize: value as "xs" | "sm" | "base" | "lg" | "xl",
+        fontSize: newSize as "xs" | "sm" | "base" | "lg" | "xl",
       },
     });
   };
 
-  const handleFontWeightChange = (value: string) => {
+  const handleFontWeightChange = (values: number[]) => {
+    const newWeight = getFontWeightFromSlider(values[0]);
     updateSettings({
       typography: {
         ...localSettings.typography,
-        fontWeight: value as
+        fontWeight: newWeight as
           | "light"
           | "normal"
           | "medium"
@@ -121,22 +141,20 @@ export function TypographyCustomizationSection({
         {/* Font Size */}
         <div className="flex flex-col gap-4">
           <Label className="font-medium">Font Size</Label>
-          <div className="flex flex-wrap gap-2">
-            {FONT_SIZE_OPTIONS.map((option) => (
-              <Button
-                className={`font-medium text-sm transition-all ${
-                  fontSize === option.value
-                    ? "bg-primary text-primary-foreground"
-                    : "border bg-transparent text-foreground hover:bg-accent"
-                }`}
-                key={option.value}
-                onClick={() => handleFontSizeChange(option.value)}
-                size="sm"
-                type="button"
-              >
-                {option.label}
-              </Button>
-            ))}
+          <div className="px-2">
+            <Slider
+              label="Font Size"
+              max={FONT_SIZE_OPTIONS.length - 1}
+              min={0}
+              onValueChange={handleFontSizeChange}
+              showValue={true}
+              step={1}
+              value={[getFontSizeSliderValue(fontSize)]}
+              formatValue={(value) => {
+                const option = FONT_SIZE_OPTIONS[value];
+                return option ? `${option.label} (${option.description})` : "";
+              }}
+            />
           </div>
           <div className="rounded-lg border border-border bg-muted/30 p-4">
             <Label className="mb-2 block text-muted-foreground text-xs">
@@ -159,23 +177,20 @@ export function TypographyCustomizationSection({
         {/* Font Weight */}
         <div className="flex flex-col gap-4">
           <Label className="font-medium">Font Weight</Label>
-          <div className="flex flex-wrap gap-2">
-            {FONT_WEIGHT_OPTIONS.map((option) => (
-              <Button
-                className={`text-sm transition-all ${
-                  fontWeight === option.value
-                    ? "bg-primary text-primary-foreground"
-                    : "border bg-transparent text-foreground hover:bg-accent"
-                }`}
-                key={option.value}
-                onClick={() => handleFontWeightChange(option.value)}
-                size="sm"
-                style={{ fontWeight: option.description }}
-                type="button"
-              >
-                {option.label}
-              </Button>
-            ))}
+          <div className="px-2">
+            <Slider
+              label="Font Weight"
+              max={FONT_WEIGHT_OPTIONS.length - 1}
+              min={0}
+              onValueChange={handleFontWeightChange}
+              showValue={true}
+              step={1}
+              value={[getFontWeightSliderValue(fontWeight)]}
+              formatValue={(value) => {
+                const option = FONT_WEIGHT_OPTIONS[value];
+                return option ? `${option.label} (${option.description})` : "";
+              }}
+            />
           </div>
           <div className="rounded-lg border border-border bg-muted/30 p-4">
             <Label className="mb-2 block text-muted-foreground text-xs">
