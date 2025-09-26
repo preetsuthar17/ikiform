@@ -28,34 +28,34 @@ export interface FormCustomStyles {
 export const getFormLayoutClasses = (schema: FormSchema): LayoutClasses => {
   const layout = schema.settings?.layout || {};
 
-  let maxWidthClass = "max-w-2xl";
-  let containerClass = "max-w-2xl mx-auto";
+  let maxWidthClass = "max-w-2xl"; // Default to medium (2xl)
+  let containerClass = "w-full max-w-2xl mx-auto"; // Always w-full with max-width constraint
 
   // Handle custom width
   if ((layout as any)?.maxWidth === "custom" && (layout as any)?.customWidth) {
     maxWidthClass = "";
-    containerClass = "mx-auto";
+    containerClass = "w-full mx-auto"; // Keep w-full, max-width will be set via CSS
   } else {
     switch (layout?.maxWidth) {
       case "sm":
         maxWidthClass = "max-w-sm";
-        containerClass = "max-w-sm mx-auto";
+        containerClass = "w-full max-w-sm mx-auto";
         break;
       case "md":
         maxWidthClass = "max-w-2xl";
-        containerClass = "max-w-2xl mx-auto";
+        containerClass = "w-full max-w-2xl mx-auto";
         break;
       case "lg":
         maxWidthClass = "max-w-4xl";
-        containerClass = "max-w-4xl mx-auto";
+        containerClass = "w-full max-w-4xl mx-auto";
         break;
       case "xl":
         maxWidthClass = "max-w-6xl";
-        containerClass = "max-w-6xl mx-auto";
+        containerClass = "w-full max-w-6xl mx-auto";
         break;
       case "full":
         maxWidthClass = "max-w-full";
-        containerClass = "w-full";
+        containerClass = "w-full max-w-full mx-auto";
         break;
     }
   }
@@ -128,11 +128,8 @@ export const getFormCustomStyles = async (
         ? (layout as any).customWidth
         : layout.maxWidth
           ? getMaxWidthValue(layout.maxWidth)
-          : undefined,
-    width:
-      (layout as any).maxWidth === "custom" && (layout as any).customWidth
-        ? (layout as any).customWidth
-        : undefined,
+          : getMaxWidthValue("md"), // Default to medium if no width specified
+    width: "100%", // Always full width, constrained by max-width
     margin: layout.margin ? `${getMarginValue(layout.margin)} auto` : "0 auto",
   };
 

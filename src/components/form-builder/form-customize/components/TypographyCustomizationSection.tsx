@@ -164,20 +164,6 @@ export function TypographyCustomizationSection({
               value={[getFontSizeSliderValue(fontSize)]}
             />
           </div>
-          <div className="rounded-lg border border-border bg-muted/30 p-4">
-            <Label className="mb-2 block text-muted-foreground text-xs">
-              Size Preview
-            </Label>
-            <p
-              className={`text-${fontSize}`}
-              style={generateFontPreviewStyles(fontFamily)}
-            >
-              This is how your form text will appear at this size
-            </p>
-          </div>
-          <p className="text-muted-foreground text-xs">
-            Controls the base font size for all form text elements
-          </p>
         </div>
 
         <Separator />
@@ -200,24 +186,6 @@ export function TypographyCustomizationSection({
               value={[getFontWeightSliderValue(fontWeight)]}
             />
           </div>
-          <div className="rounded-lg border border-border bg-muted/30 p-4">
-            <Label className="mb-2 block text-muted-foreground text-xs">
-              Weight Preview
-            </Label>
-            <p
-              style={{
-                ...generateFontPreviewStyles(fontFamily),
-                fontWeight:
-                  FONT_WEIGHT_OPTIONS.find((opt) => opt.value === fontWeight)
-                    ?.description || "400",
-              }}
-            >
-              This text shows the selected font weight
-            </p>
-          </div>
-          <p className="text-muted-foreground text-xs">
-            Controls how bold or light the form text appears
-          </p>
         </div>
       </div>
     </div>

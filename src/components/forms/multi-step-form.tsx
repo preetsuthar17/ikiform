@@ -65,11 +65,6 @@ export function MultiStepForm({
   const { containerClass, marginClass } = getFormLayoutClasses(schema);
   const { customStyles, fontLoaded, getFormClasses } = useFormStyling(schema);
 
-  // Check if custom width is used
-  const isCustomWidth =
-    (schema.settings?.layout as any)?.maxWidth === "custom" &&
-    (schema.settings?.layout as any)?.customWidth;
-
   useEffect(() => {
     const passwordProtection = schema.settings.passwordProtection;
     if (passwordProtection?.enabled && passwordProtection?.password) {
@@ -140,9 +135,7 @@ export function MultiStepForm({
       dir={dir}
       style={customStyles.containerStyle}
     >
-      <div
-        className={`flex w-full flex-col gap-8 ${containerClass} ${isCustomWidth ? "ikiform-custom-width" : ""}`}
-      >
+      <div className={`flex w-full flex-col gap-8 ${containerClass}`}>
         <Card
           className="flex w-full grow flex-col gap-6 rounded-card border-none bg-transparent hover:bg-transparent"
           style={customStyles.cardStyle}

@@ -4,10 +4,9 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { motion } from "motion/react";
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { useMotionColors } from "@/lib/utils/motion-colors";
 
 const tabsVariants = cva(
-  "relative inline-flex w-full items-center justify-center rounded-card transition-all duration-300",
+  "relative inline-flex w-full items-center justify-center rounded-lg transition-all duration-300",
   {
     variants: {
       variant: {
@@ -29,7 +28,7 @@ const tabsVariants = cva(
 );
 
 const tabTriggerVariants = cva(
-  "relative inline-flex flex-1 cursor-pointer items-center justify-center whitespace-nowrap rounded-ele px-3 py-1.5 font-medium text-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "relative inline-flex flex-1 cursor-pointer items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 font-medium text-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -79,12 +78,11 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
       defaultValue,
       value,
       onValueChange,
-      indicatorColor,
+      indicatorColor = "hsl(var(--hu-accent))",
       ...props
     },
     ref
   ) => {
-    const { getColor } = useMotionColors();
     const [activeValue, setActiveValue] = React.useState(
       value || defaultValue || items[0]?.id
     );
@@ -132,7 +130,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
         {...props}
       >
         {" "}
-        {}
+        {/* Animated indicator */}
         <motion.div
           animate={{
             left: activeTabBounds.left,
@@ -142,14 +140,14 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
             "absolute z-10",
             variant === "underline"
               ? "bottom-0 h-0.5 rounded-none"
-              : "top-1 bottom-1 rounded-ele"
+              : "top-1 bottom-1 rounded-md"
           )}
           initial={false}
           style={{
             backgroundColor:
               variant === "underline"
-                ? getColor("foreground")
-                : indicatorColor || getColor("accent"),
+                ? "hsl(var(--hu-foreground))"
+                : indicatorColor,
           }}
           transition={{
             type: "spring",
@@ -157,15 +155,12 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
             damping: 30,
           }}
         />
-        {}
+        {/* Tab triggers */}
         {items.map((item: TabItem, index: number) => {
           const isActive = activeValue === item.id;
 
           return (
             <button
-              aria-label={
-                item.label || (item.icon ? `Tab ${index + 1}` : undefined)
-              }
               className={cn(
                 tabTriggerVariants({ variant, size }),
                 "relative z-20 gap-2 text-muted-foreground data-[state=active]:text-accent-foreground"
@@ -178,11 +173,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
               }}
               type="button"
             >
-              {item.icon && (
-                <span aria-hidden={!!item.label} className="[&_svg]:size-4">
-                  {item.icon}
-                </span>
-              )}
+              {item.icon && <span className="[&_svg]:size-4">{item.icon}</span>}
               {item.label}
             </button>
           );
@@ -194,6 +185,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
 
 Tabs.displayName = "Tabs";
 
+// Content component for tab panels
 export interface TabsContentProps extends React.HTMLAttributes<HTMLDivElement> {
   value: string;
   activeValue?: string;
@@ -219,7 +211,7 @@ const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
       <motion.div
         animate={{ opacity: 1, y: 0 }}
         className={cn(
-          "h-auto ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+          "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           className
         )}
         exit={{ opacity: 0, y: 4 }}

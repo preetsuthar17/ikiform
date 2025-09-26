@@ -1,13 +1,12 @@
 "use client";
 
-import { ArrowLeft, Eye, Layout, Monitor, Palette, Type } from "lucide-react";
+import { ArrowLeft, Eye, Layout, Palette, Type } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { toast } from "@/hooks/use-toast";
 import type { FormSchema } from "@/lib/database";
 import { formsDb } from "@/lib/database";
@@ -90,33 +89,6 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
     schema.settings?.publicTitle &&
     schema.settings.publicTitle !== schema.settings?.title;
 
-  const sections = [
-    {
-      id: "presets" as const,
-      label: "Presets",
-      icon: Palette,
-      description: "Quick-start with beautiful pre-designed styles",
-    },
-    {
-      id: "layout" as const,
-      label: "Layout",
-      icon: Layout,
-      description: "Form width, spacing, and layout options",
-    },
-    {
-      id: "colors" as const,
-      label: "Colors",
-      icon: Palette,
-      description: "Background, text, primary, and border colors",
-    },
-    {
-      id: "typography" as const,
-      label: "Typography",
-      icon: Type,
-      description: "Font family, size, and text styling",
-    },
-  ];
-
   if (previewMode) {
     return (
       <div className="flex h-screen flex-col bg-background">
@@ -158,16 +130,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
       {/* Header */}
       <div className="flex-shrink-0 border-b bg-background p-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Button
-              className="gap-2"
-              onClick={handleBack}
-              size="sm"
-              variant="outline"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Back
-            </Button>
+          <div className="flex flex-col items-start justify-center gap-4">
             <div>
               <h1 className="font-semibold text-xl">Customize Form</h1>
               <div className="flex flex-col gap-1">
@@ -181,77 +144,94 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <span className="text-muted-foreground text-sm">
+              Changes auto-saved
+            </span>
             <Button
               className="gap-2"
-              onClick={() => setPreviewMode(true)}
+              onClick={handleBack}
+              size="sm"
               variant="outline"
             >
-              <Eye className="h-4 w-4" />
-              Preview
+              <ArrowLeft className="h-4 w-4" />
+              Back
             </Button>
             <Button onClick={resetSettings} variant="outline">
               Reset to Default
             </Button>
-            <span className="text-muted-foreground text-sm">
-              Changes auto-saved
-            </span>
           </div>
         </div>
       </div>
 
       <div className="flex flex-1 overflow-hidden">
-        {/* Left Sidebar - Customization Controls */}
+        {/* Left Panel - Customization Controls */}
         <div className="w-96 flex-shrink-0 border-r bg-background">
           <div className="flex h-full flex-col">
-            {/* Section Tabs */}
-            <div className="flex-shrink-0 border-b bg-background">
-              <div className="flex">
-                {(["presets", "layout", "colors", "typography"] as const).map(
-                  (section) => (
-                    <button
-                      className={`flex-1 px-4 py-3 font-medium text-sm transition-colors ${
-                        activeSection === section
-                          ? "border-primary border-b-2 bg-primary/5 text-primary"
-                          : "text-muted-foreground hover:text-foreground"
-                      }`}
-                      key={section}
-                      onClick={() => setActiveSection(section)}
-                    >
-                      {section.charAt(0).toUpperCase() + section.slice(1)}
-                    </button>
-                  )
-                )}
-              </div>
+            {/* Tabs Navigation */}
+            <div className="flex-shrink-0 p-4">
+              <Tabs
+                items={[
+                  {
+                    id: "presets",
+                    label: "Presets",
+                    icon: <Palette className="h-4 w-4" />,
+                  },
+                  {
+                    id: "layout",
+                    label: "Layout",
+                    icon: <Layout className="h-4 w-4" />,
+                  },
+                  {
+                    id: "colors",
+                    label: "Colors",
+                    icon: <Palette className="h-4 w-4" />,
+                  },
+                  {
+                    id: "typography",
+                    label: "Typography",
+                    icon: <Type className="h-4 w-4" />,
+                  },
+                ]}
+                onValueChange={(value) =>
+                  setActiveSection(value as CustomizeSection)
+                }
+                size="sm"
+                value={activeSection}
+                variant="underline"
+              />
             </div>
 
             {/* Section Content */}
             <div className="flex-1 overflow-hidden">
               <ScrollArea className="h-full">
                 <div className="p-6">
-                  {activeSection === "presets" && (
+                  <TabsContent activeValue={activeSection} value="presets">
                     <PresetsSection
                       localSettings={localSettings}
                       updateSettings={updateSettings}
                     />
-                  )}
-                  {activeSection === "layout" && (
+                  </TabsContent>
+
+                  <TabsContent activeValue={activeSection} value="layout">
                     <LayoutCustomizationSection
                       localSettings={localSettings}
                       updateSettings={updateSettings}
                     />
-                  )}
-                  {activeSection === "colors" && (
+                  </TabsContent>
+
+                  <TabsContent activeValue={activeSection} value="colors">
                     <ColorCustomizationSection
                       localSettings={localSettings}
                       updateSettings={updateSettings}
                     />
-                  )}
-                  {activeSection === "typography" && (
+                  </TabsContent>
+
+                  <TabsContent activeValue={activeSection} value="typography">
                     <TypographyCustomizationSection
                       localSettings={localSettings}
                       updateSettings={updateSettings}
                     />
-                  )}
+                  </TabsContent>
                 </div>
               </ScrollArea>
             </div>

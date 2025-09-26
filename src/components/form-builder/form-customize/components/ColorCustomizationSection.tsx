@@ -2,14 +2,9 @@
 
 import { Paintbrush } from "lucide-react";
 import React from "react";
-import {
-  PREDEFINED_COLORS,
-  TRANSPARENT_PATTERN,
-} from "@/components/form-builder/form-settings-modal/constants";
+// Removed PREDEFINED_COLORS and TRANSPARENT_PATTERN imports as color palettes are removed
 import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
-import { Card } from "@/components/ui/card";
 import { EnhancedColorPicker } from "@/components/ui/enhanced-color-picker";
-import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 
 interface ColorCustomizationSectionProps {
@@ -94,34 +89,6 @@ export function ColorCustomizationSection({
             onChange={handleBackgroundColorChange}
             value={backgroundColor}
           />
-          <div className="flex flex-col gap-2">
-            <Label className="text-muted-foreground text-xs">
-              Quick Colors
-            </Label>
-            <div className="flex flex-wrap gap-2">
-              {PREDEFINED_COLORS.map((color) => (
-                <button
-                  className={`h-8 w-8 rounded-md border-2 transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
-                    backgroundColor === color
-                      ? "border-ring ring-2 ring-ring ring-offset-2"
-                      : "border-border"
-                  }`}
-                  key={color}
-                  onClick={() => handleBackgroundColorChange(color)}
-                  style={{
-                    backgroundColor:
-                      color === "transparent" ? undefined : color,
-                    backgroundImage:
-                      color === "transparent"
-                        ? `url("${TRANSPARENT_PATTERN}")`
-                        : undefined,
-                  }}
-                  title={color === "transparent" ? "Transparent" : color}
-                  type="button"
-                />
-              ))}
-            </div>
-          </div>
           <p className="text-muted-foreground text-xs">
             Sets the background color of the form container
           </p>
@@ -137,34 +104,6 @@ export function ColorCustomizationSection({
             onChange={handleTextColorChange}
             value={textColor}
           />
-          <div className="flex flex-col gap-2">
-            <Label className="text-muted-foreground text-xs">
-              Quick Colors
-            </Label>
-            <div className="flex flex-wrap gap-2">
-              {PREDEFINED_COLORS.map((color) => (
-                <button
-                  className={`h-8 w-8 rounded-md border-2 transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
-                    textColor === color
-                      ? "border-ring ring-2 ring-ring ring-offset-2"
-                      : "border-border"
-                  }`}
-                  key={color}
-                  onClick={() => handleTextColorChange(color)}
-                  style={{
-                    backgroundColor:
-                      color === "transparent" ? undefined : color,
-                    backgroundImage:
-                      color === "transparent"
-                        ? `url("${TRANSPARENT_PATTERN}")`
-                        : undefined,
-                  }}
-                  title={color === "transparent" ? "Transparent" : color}
-                  type="button"
-                />
-              ))}
-            </div>
-          </div>
           <p className="text-muted-foreground text-xs">
             Sets the color of all text elements in the form
           </p>
@@ -180,34 +119,6 @@ export function ColorCustomizationSection({
             onChange={handlePrimaryColorChange}
             value={primaryColor}
           />
-          <div className="flex flex-col gap-2">
-            <Label className="text-muted-foreground text-xs">
-              Quick Colors
-            </Label>
-            <div className="flex flex-wrap gap-2">
-              {PREDEFINED_COLORS.map((color) => (
-                <button
-                  className={`h-8 w-8 rounded-md border-2 transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
-                    primaryColor === color
-                      ? "border-ring ring-2 ring-ring ring-offset-2"
-                      : "border-border"
-                  }`}
-                  key={color}
-                  onClick={() => handlePrimaryColorChange(color)}
-                  style={{
-                    backgroundColor:
-                      color === "transparent" ? undefined : color,
-                    backgroundImage:
-                      color === "transparent"
-                        ? `url("${TRANSPARENT_PATTERN}")`
-                        : undefined,
-                  }}
-                  title={color === "transparent" ? "Transparent" : color}
-                  type="button"
-                />
-              ))}
-            </div>
-          </div>
           <p className="text-muted-foreground text-xs">
             Sets the color for buttons, focus states, and accent elements
           </p>
@@ -223,34 +134,6 @@ export function ColorCustomizationSection({
             onChange={handleBorderColorChange}
             value={borderColor}
           />
-          <div className="flex flex-col gap-2">
-            <Label className="text-muted-foreground text-xs">
-              Quick Colors
-            </Label>
-            <div className="flex flex-wrap gap-2">
-              {PREDEFINED_COLORS.map((color) => (
-                <button
-                  className={`h-8 w-8 rounded-md border-2 transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
-                    borderColor === color
-                      ? "border-ring ring-2 ring-ring ring-offset-2"
-                      : "border-border"
-                  }`}
-                  key={color}
-                  onClick={() => handleBorderColorChange(color)}
-                  style={{
-                    backgroundColor:
-                      color === "transparent" ? undefined : color,
-                    backgroundImage:
-                      color === "transparent"
-                        ? `url("${TRANSPARENT_PATTERN}")`
-                        : undefined,
-                  }}
-                  title={color === "transparent" ? "Transparent" : color}
-                  type="button"
-                />
-              ))}
-            </div>
-          </div>
           <p className="text-muted-foreground text-xs">
             Sets the color for input field borders and dividers
           </p>
@@ -266,34 +149,6 @@ export function ColorCustomizationSection({
             onChange={handleWebsiteBackgroundColorChange}
             value={websiteBackgroundColor}
           />
-          <div className="flex flex-col gap-2">
-            <Label className="text-muted-foreground text-xs">
-              Quick Colors
-            </Label>
-            <div className="flex flex-wrap gap-2">
-              {PREDEFINED_COLORS.map((color) => (
-                <button
-                  className={`h-8 w-8 rounded-md border-2 transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
-                    websiteBackgroundColor === color
-                      ? "border-ring ring-2 ring-ring ring-offset-2"
-                      : "border-border"
-                  }`}
-                  key={color}
-                  onClick={() => handleWebsiteBackgroundColorChange(color)}
-                  style={{
-                    backgroundColor:
-                      color === "transparent" ? undefined : color,
-                    backgroundImage:
-                      color === "transparent"
-                        ? `url("${TRANSPARENT_PATTERN}")`
-                        : undefined,
-                  }}
-                  title={color === "transparent" ? "Transparent" : color}
-                  type="button"
-                />
-              ))}
-            </div>
-          </div>
           <p className="text-muted-foreground text-xs">
             Sets the background color of the entire website/page
           </p>

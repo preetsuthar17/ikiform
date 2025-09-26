@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input-base";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioItem } from "@/components/ui/radio";
 import { Separator } from "@/components/ui/separator";
+import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 
 const FORM_MARGIN_OPTIONS = [
@@ -43,20 +44,75 @@ export function LayoutCustomizationSection({
 
   const customWidth = localSettings.layout?.customWidth || "600px";
 
-  const handleBorderRadiusChange = (value: string) => {
+  // Helper functions to convert between slider values and layout options
+  const getWidthSliderValue = (width: string) => {
+    const index = FORM_WIDTH_OPTIONS.findIndex(
+      (option) => option.value === width
+    );
+    return index >= 0 ? index : 1; // Default to "md" (index 1)
+  };
+
+  const getWidthFromSlider = (value: number) => {
+    return FORM_WIDTH_OPTIONS[
+      Math.max(0, Math.min(value, FORM_WIDTH_OPTIONS.length - 1))
+    ].value;
+  };
+
+  const getPaddingSliderValue = (padding: string) => {
+    const index = FORM_PADDING_OPTIONS.findIndex(
+      (option) => option.value === padding
+    );
+    return index >= 0 ? index : 2; // Default to "md" (index 2)
+  };
+
+  const getPaddingFromSlider = (value: number) => {
+    return FORM_PADDING_OPTIONS[
+      Math.max(0, Math.min(value, FORM_PADDING_OPTIONS.length - 1))
+    ].value;
+  };
+
+  const getMarginSliderValue = (margin: string) => {
+    const index = FORM_MARGIN_OPTIONS.findIndex(
+      (option) => option.value === margin
+    );
+    return index >= 0 ? index : 0; // Default to "none" (index 0)
+  };
+
+  const getMarginFromSlider = (value: number) => {
+    return FORM_MARGIN_OPTIONS[
+      Math.max(0, Math.min(value, FORM_MARGIN_OPTIONS.length - 1))
+    ].value;
+  };
+
+  const getBorderRadiusSliderValue = (radius: string) => {
+    const index = FORM_BORDER_RADIUS_OPTIONS.findIndex(
+      (option) => option.value === radius
+    );
+    return index >= 0 ? index : 2; // Default to "md" (index 2)
+  };
+
+  const getBorderRadiusFromSlider = (value: number) => {
+    return FORM_BORDER_RADIUS_OPTIONS[
+      Math.max(0, Math.min(value, FORM_BORDER_RADIUS_OPTIONS.length - 1))
+    ].value;
+  };
+
+  const handleBorderRadiusChange = (values: number[]) => {
+    const newRadius = getBorderRadiusFromSlider(values[0]);
     updateSettings({
       layout: {
         ...localSettings.layout,
-        borderRadius: value as "none" | "sm" | "md" | "lg" | "xl",
+        borderRadius: newRadius as "none" | "sm" | "md" | "lg" | "xl",
       },
     });
   };
 
-  const handleWidthChange = (value: string) => {
+  const handleWidthChange = (values: number[]) => {
+    const newWidth = getWidthFromSlider(values[0]);
     updateSettings({
       layout: {
         ...localSettings.layout,
-        maxWidth: value as "sm" | "md" | "lg" | "xl" | "full" | "custom",
+        maxWidth: newWidth as "sm" | "md" | "lg" | "xl" | "full" | "custom",
       },
     });
   };
@@ -70,20 +126,22 @@ export function LayoutCustomizationSection({
     });
   };
 
-  const handlePaddingChange = (value: string) => {
+  const handlePaddingChange = (values: number[]) => {
+    const newPadding = getPaddingFromSlider(values[0]);
     updateSettings({
       layout: {
         ...localSettings.layout,
-        padding: value as "none" | "sm" | "md" | "lg",
+        padding: newPadding as "none" | "sm" | "md" | "lg",
       },
     });
   };
 
-  const handleMarginChange = (value: string) => {
+  const handleMarginChange = (values: number[]) => {
+    const newMargin = getMarginFromSlider(values[0]);
     updateSettings({
       layout: {
         ...localSettings.layout,
-        margin: value as "none" | "sm" | "md" | "lg",
+        margin: newMargin as "none" | "sm" | "md" | "lg",
       },
     });
   };
@@ -127,22 +185,20 @@ export function LayoutCustomizationSection({
             <Ruler className="h-4 w-4" />
             Form Width
           </Label>
-          <div className="flex flex-wrap gap-2">
-            {FORM_WIDTH_OPTIONS.map((option) => (
-              <Button
-                className={`font-medium text-sm transition-all ${
-                  currentWidth === option.value
-                    ? "bg-primary text-primary-foreground"
-                    : "border bg-transparent text-foreground hover:bg-accent"
-                }`}
-                key={option.value}
-                onClick={() => handleWidthChange(option.value)}
-                size="sm"
-                type="button"
-              >
-                {option.label}
-              </Button>
-            ))}
+          <div className="px-2">
+            <Slider
+              formatValue={(value) => {
+                const option = FORM_WIDTH_OPTIONS[value];
+                return option ? `${option.label} (${option.description})` : "";
+              }}
+              label="Form Width"
+              max={FORM_WIDTH_OPTIONS.length - 1}
+              min={0}
+              onValueChange={handleWidthChange}
+              showValue={true}
+              step={1}
+              value={[getWidthSliderValue(currentWidth)]}
+            />
           </div>
           {currentWidth === "custom" && (
             <div className="flex flex-col gap-2">
@@ -157,6 +213,9 @@ export function LayoutCustomizationSection({
               />
             </div>
           )}
+          <p className="text-muted-foreground text-xs">
+            Controls the maximum width of the form container
+          </p>
         </div>
 
         <Separator />
@@ -164,22 +223,20 @@ export function LayoutCustomizationSection({
         {/* Form Padding */}
         <div className="flex flex-col gap-4">
           <Label className="font-medium">Internal Padding</Label>
-          <div className="flex flex-wrap gap-2">
-            {FORM_PADDING_OPTIONS.map((option) => (
-              <Button
-                className={`font-medium text-sm transition-all ${
-                  currentPadding === option.value
-                    ? "bg-primary text-primary-foreground"
-                    : "border bg-transparent text-foreground hover:bg-accent"
-                }`}
-                key={option.value}
-                onClick={() => handlePaddingChange(option.value)}
-                size="sm"
-                type="button"
-              >
-                {option.label}
-              </Button>
-            ))}
+          <div className="px-2">
+            <Slider
+              formatValue={(value) => {
+                const option = FORM_PADDING_OPTIONS[value];
+                return option ? `${option.label} (${option.description})` : "";
+              }}
+              label="Internal Padding"
+              max={FORM_PADDING_OPTIONS.length - 1}
+              min={0}
+              onValueChange={handlePaddingChange}
+              showValue={true}
+              step={1}
+              value={[getPaddingSliderValue(currentPadding)]}
+            />
           </div>
           <p className="text-muted-foreground text-xs">
             Controls the space inside the form container
@@ -191,22 +248,20 @@ export function LayoutCustomizationSection({
         {/* Form Margin */}
         <div className="flex flex-col gap-4">
           <Label className="font-medium">External Margin</Label>
-          <div className="flex flex-wrap gap-2">
-            {FORM_MARGIN_OPTIONS.map((option) => (
-              <Button
-                className={`font-medium text-sm transition-all ${
-                  currentMargin === option.value
-                    ? "bg-primary text-primary-foreground"
-                    : "border bg-transparent text-foreground hover:bg-accent"
-                }`}
-                key={option.value}
-                onClick={() => handleMarginChange(option.value)}
-                size="sm"
-                type="button"
-              >
-                {option.label}
-              </Button>
-            ))}
+          <div className="px-2">
+            <Slider
+              formatValue={(value) => {
+                const option = FORM_MARGIN_OPTIONS[value];
+                return option ? `${option.label} (${option.description})` : "";
+              }}
+              label="External Margin"
+              max={FORM_MARGIN_OPTIONS.length - 1}
+              min={0}
+              onValueChange={handleMarginChange}
+              showValue={true}
+              step={1}
+              value={[getMarginSliderValue(currentMargin)]}
+            />
           </div>
           <p className="text-muted-foreground text-xs">
             Controls the space around the form container
@@ -218,22 +273,20 @@ export function LayoutCustomizationSection({
         {/* Border Radius */}
         <div className="flex flex-col gap-4">
           <Label className="font-medium">Corner Radius</Label>
-          <div className="flex flex-wrap gap-2">
-            {FORM_BORDER_RADIUS_OPTIONS.map((option) => (
-              <Button
-                className={`font-medium text-sm transition-all ${
-                  currentBorderRadius === option.value
-                    ? "bg-primary text-primary-foreground"
-                    : "border bg-transparent text-foreground hover:bg-accent"
-                }`}
-                key={option.value}
-                onClick={() => handleBorderRadiusChange(option.value)}
-                size="sm"
-                type="button"
-              >
-                {option.label}
-              </Button>
-            ))}
+          <div className="px-2">
+            <Slider
+              formatValue={(value) => {
+                const option = FORM_BORDER_RADIUS_OPTIONS[value];
+                return option ? `${option.label} (${option.description})` : "";
+              }}
+              label="Corner Radius"
+              max={FORM_BORDER_RADIUS_OPTIONS.length - 1}
+              min={0}
+              onValueChange={handleBorderRadiusChange}
+              showValue={true}
+              step={1}
+              value={[getBorderRadiusSliderValue(currentBorderRadius)]}
+            />
           </div>
           <p className="text-muted-foreground text-xs">
             Controls how rounded the form corners appear

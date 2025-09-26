@@ -170,7 +170,7 @@ export const FORM_PADDING_OPTIONS = [
 ] as const;
 
 export const DEFAULT_FORM_DESIGN = {
-  maxWidth: "md",
+  maxWidth: "md", // Default to medium width
   padding: "md",
   margin: "lg",
   borderRadius: "md",
