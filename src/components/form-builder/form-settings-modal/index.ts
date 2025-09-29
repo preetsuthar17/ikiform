@@ -28,6 +28,8 @@ export {
   WebhooksSettingsSection,
 } from "./components";
 
+export { ApiSection } from "./sections/api-section";
+
 export { FormSettingsModal } from "./FormSettingsModal";
 
 export { useFormSettings } from "./hooks";
