@@ -133,6 +133,30 @@ export interface LocalSettings {
     apiKey?: string;
     allowExternalSubmissions?: boolean;
   };
+  metadata?: {
+    title?: string;
+    description?: string;
+    keywords?: string;
+    author?: string;
+    robots?: "index" | "noindex" | "nofollow" | "noindex,nofollow";
+    canonicalUrl?: string;
+    ogTitle?: string;
+    ogDescription?: string;
+    ogImage?: string;
+    ogType?: string;
+    twitterCard?: "summary" | "summary_large_image" | "app" | "player";
+    twitterTitle?: string;
+    twitterDescription?: string;
+    twitterImage?: string;
+    twitterSite?: string;
+    twitterCreator?: string;
+    noIndex?: boolean;
+    noFollow?: boolean;
+    noArchive?: boolean;
+    noSnippet?: boolean;
+    noImageIndex?: boolean;
+    noTranslate?: boolean;
+  };
 }
 
 export interface BasicInfoSectionProps {
@@ -184,6 +208,11 @@ export interface ApiSectionProps {
   schema?: any;
 }
 
+export interface MetadataSectionProps {
+  localSettings: LocalSettings;
+  updateSettings: (updates: Partial<LocalSettings>) => void;
+}
+
 export type FormSettingsSection =
   | "basic"
   | "limits"
@@ -193,7 +222,8 @@ export type FormSettingsSection =
   | "design"
   | "webhooks"
   | "quiz"
-  | "api";
+  | "api"
+  | "metadata";
 
 export interface FormSettingsSectionConfig {
   id: FormSettingsSection;

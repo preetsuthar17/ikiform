@@ -2,9 +2,9 @@ import { Info } from "lucide-react";
 import React from "react";
 
 import { Card } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 
 import type { BasicInfoSectionProps } from "../types";
@@ -36,25 +36,6 @@ export function BasicInfoSection({
           placeholder="Enter title to display to users..."
           value={localSettings.publicTitle || ""}
         />
-        <div className="flex items-center gap-3">
-          <input
-            checked={!!localSettings.hideHeader}
-            className="h-4 w-4 accent-primary"
-            id="hide-header-toggle"
-            onChange={(e) =>
-              updateSettings({
-                hideHeader: (e.target as HTMLInputElement).checked,
-              })
-            }
-            type="checkbox"
-          />
-          <Label
-            className="cursor-pointer select-none"
-            htmlFor="hide-header-toggle"
-          >
-            Hide header (hides public title and description in embeds)
-          </Label>
-        </div>
         <BasicInfoField
           id="form-description"
           isTextarea
@@ -88,41 +69,63 @@ export function BasicInfoSection({
           placeholder="https://example.com/thank-you"
           value={localSettings.redirectUrl || ""}
         />
-        <div className="flex items-center gap-3 pt-2">
-          <input
-            checked={!!localSettings.rtl}
-            className="h-4 w-4 accent-primary"
-            id="rtl-toggle"
-            onChange={(e) =>
-              updateSettings({ rtl: (e.target as HTMLInputElement).checked })
-            }
-            type="checkbox"
-          />
-          <Label className="cursor-pointer select-none" htmlFor="rtl-toggle">
-            Display form in RTL (Right-to-Left) mode
-          </Label>
-        </div>
-        <div className="flex items-center gap-3 pt-2">
-          <input
-            checked={!!localSettings.behavior?.autoFocusFirstField}
-            className="h-4 w-4 accent-primary"
-            id="auto-focus-toggle"
-            onChange={(e) =>
-              updateSettings({
-                behavior: {
-                  ...localSettings.behavior,
-                  autoFocusFirstField: (e.target as HTMLInputElement).checked,
-                },
-              })
-            }
-            type="checkbox"
-          />
-          <Label
-            className="cursor-pointer select-none"
-            htmlFor="auto-focus-toggle"
-          >
-            Automatically focus on the first field when form loads
-          </Label>
+
+        {/* Form Behavior Settings */}
+        <div className="space-y-4 rounded-lg border border-muted bg-muted/30 p-4">
+          <h4 className="font-medium text-foreground text-sm">Form Behavior</h4>
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <Switch
+                checked={!!localSettings.hideHeader}
+                id="hide-header-toggle"
+                onCheckedChange={(checked) =>
+                  updateSettings({ hideHeader: checked })
+                }
+                size="sm"
+              />
+              <Label
+                className="cursor-pointer select-none"
+                htmlFor="hide-header-toggle"
+              >
+                Hide header (hides public title and description in embeds)
+              </Label>
+            </div>
+            <div className="flex items-center gap-3">
+              <Switch
+                checked={!!localSettings.rtl}
+                id="rtl-toggle"
+                onCheckedChange={(checked) => updateSettings({ rtl: checked })}
+                size="sm"
+              />
+              <Label
+                className="cursor-pointer select-none"
+                htmlFor="rtl-toggle"
+              >
+                Display form in RTL (Right-to-Left) mode
+              </Label>
+            </div>
+            <div className="flex items-center gap-3">
+              <Switch
+                checked={!!localSettings.behavior?.autoFocusFirstField}
+                id="auto-focus-toggle"
+                onCheckedChange={(checked) =>
+                  updateSettings({
+                    behavior: {
+                      ...localSettings.behavior,
+                      autoFocusFirstField: checked,
+                    },
+                  })
+                }
+                size="sm"
+              />
+              <Label
+                className="cursor-pointer select-none"
+                htmlFor="auto-focus-toggle"
+              >
+                Automatically focus on the first field when form loads
+              </Label>
+            </div>
+          </div>
         </div>
       </div>
     </Card>

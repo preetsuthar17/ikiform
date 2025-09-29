@@ -10,6 +10,7 @@ export const FORM_SETTINGS_SECTIONS: FormSettingsSectionConfig[] = [
   { id: "api", label: "API Access", iconName: "Key" },
   { id: "webhooks", label: "Webhooks", iconName: "Link2" },
   { id: "design", label: "Design", iconName: "Palette" },
+  { id: "metadata", label: "Metadata", iconName: "Search" },
 ];
 
 export {
@@ -17,6 +18,7 @@ export {
   BrandingSection,
   DesignSection,
   DuplicatePreventionSection,
+  MetadataSection,
   NotificationsSection,
   PasswordProtectionSection,
   ProfanityFilterSection,

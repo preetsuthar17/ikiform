@@ -5,6 +5,7 @@ import {
   Link2,
   Mail,
   Palette,
+  Search,
   Shield,
   Trophy,
   User,
@@ -25,6 +26,7 @@ const iconMap = {
   Key,
   Palette,
   Link2,
+  Search,
 };
 
 interface FormSettingsSidebarNavigationProps {

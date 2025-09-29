@@ -34,6 +34,34 @@ export const DEFAULT_RESPONSE_LIMIT_SETTINGS = {
 };
 
 /**
+ * Default metadata settings for all forms
+ */
+export const DEFAULT_METADATA_SETTINGS = {
+  title: "",
+  description: "",
+  keywords: "",
+  author: "",
+  robots: "noindex" as const,
+  canonicalUrl: "",
+  ogTitle: "",
+  ogDescription: "",
+  ogImage: "",
+  ogType: "website",
+  twitterCard: "summary" as const,
+  twitterTitle: "",
+  twitterDescription: "",
+  twitterImage: "",
+  twitterSite: "",
+  twitterCreator: "",
+  noIndex: true,
+  noFollow: false,
+  noArchive: false,
+  noSnippet: false,
+  noImageIndex: false,
+  noTranslate: false,
+};
+
+/**
  * Default password protection settings for all forms
  */
 export const DEFAULT_PASSWORD_PROTECTION_SETTINGS = {
@@ -203,6 +231,10 @@ export function ensureDefaultFormSettings(schema: FormSchema): FormSchema {
         allowExternalSubmissions: false,
         ...schema.settings?.api,
       },
+      metadata: {
+        ...DEFAULT_METADATA_SETTINGS,
+        ...schema.settings?.metadata,
+      },
     },
   };
 }
@@ -262,6 +294,7 @@ export function createDefaultFormSchema(options: {
       notifications: { ...DEFAULT_NOTIFICATION_SETTINGS },
       duplicatePrevention: { ...DEFAULT_DUPLICATE_PREVENTION_SETTINGS },
       botProtection: { ...DEFAULT_BOT_PROTECTION_SETTINGS },
+      metadata: { ...DEFAULT_METADATA_SETTINGS },
     },
   };
 }

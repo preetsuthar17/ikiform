@@ -7,6 +7,7 @@ import { BotProtectionSection } from "./BotProtectionSection";
 import { DesignSection } from "./DesignSection";
 import { DuplicatePreventionSection } from "./DuplicatePreventionSection";
 import { FormDesignPreview } from "./FormDesignPreview";
+import { MetadataSection } from "./MetadataSection";
 import { NotificationsSection } from "./NotificationsSection";
 import { PasswordProtectionSection } from "./PasswordProtectionSection";
 import { ProfanityFilterSection } from "./ProfanityFilterSection";
@@ -148,6 +149,15 @@ export function FormSettingsContent({
       return (
         <section className="flex flex-col gap-4">
           <WebhooksSettingsSection formId={currentFormId || ""} />
+        </section>
+      );
+    case "metadata":
+      return (
+        <section className="flex flex-col gap-4">
+          <MetadataSection
+            localSettings={localSettings}
+            updateSettings={updateSettings}
+          />
         </section>
       );
     default:

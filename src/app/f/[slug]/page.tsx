@@ -19,26 +19,85 @@ export async function generateMetadata({
   try {
     const form = await formsDbServer.getPublicForm(slug);
     if (!form) return {};
-    const title = getPublicFormTitle(form.schema);
+
+    const metadata = form.schema?.settings?.metadata || {};
+    const baseUrl = "https://www.ikiform.com";
+    const formUrl = `${baseUrl}/f/${slug}`;
+
+    // Use custom metadata or fallback to defaults
+    const title = metadata.title || getPublicFormTitle(form.schema);
     const description =
+      metadata.description ||
       form.schema?.settings?.description ||
       form.description ||
       "Fill out this form.";
-    return {
+    const author = metadata.author;
+    const keywords = metadata.keywords;
+    const canonicalUrl = metadata.canonicalUrl || formUrl;
+
+    // Build robots directive
+    const robots = metadata.robots || "noindex";
+    const robotsConfig = {
+      index: !metadata.noIndex,
+      follow: !metadata.noFollow,
+      archive: !metadata.noArchive,
+      snippet: !metadata.noSnippet,
+      imageindex: !metadata.noImageIndex,
+      translate: !metadata.noTranslate,
+    };
+
+    // Open Graph settings
+    const ogTitle = metadata.ogTitle || title;
+    const ogDescription = metadata.ogDescription || description;
+    const ogImage = metadata.ogImage;
+    const ogType = metadata.ogType || "website";
+
+    // Twitter Card settings
+    const twitterCard = metadata.twitterCard || "summary_large_image";
+    const twitterTitle = metadata.twitterTitle || ogTitle;
+    const twitterDescription = metadata.twitterDescription || ogDescription;
+    const twitterImage = metadata.twitterImage || ogImage;
+    const twitterSite = metadata.twitterSite;
+    const twitterCreator = metadata.twitterCreator;
+
+    const metadataResult: Metadata = {
       title,
       description,
+      ...(author && { authors: [{ name: author }] }),
+      ...(keywords && {
+        keywords: keywords.split(",").map((k: string) => k.trim()),
+      }),
+      alternates: {
+        canonical: canonicalUrl,
+      },
+      robots: robotsConfig,
       openGraph: {
-        title,
-        description,
-        url: `https://www.ikiform.com/f/${slug}`,
-        type: "website",
+        title: ogTitle,
+        description: ogDescription,
+        url: formUrl,
+        type: ogType,
+        ...(ogImage && {
+          images: [
+            {
+              url: ogImage,
+              width: 1200,
+              height: 630,
+              alt: ogTitle,
+            },
+          ],
+        }),
       },
       twitter: {
-        card: "summary_large_image",
-        title,
-        description,
+        card: twitterCard,
+        title: twitterTitle,
+        description: twitterDescription,
+        ...(twitterImage && { images: [twitterImage] }),
+        ...(twitterSite && { site: twitterSite }),
+        ...(twitterCreator && { creator: twitterCreator }),
       },
     };
+
+    return metadataResult;
   } catch {
     return {};
   }

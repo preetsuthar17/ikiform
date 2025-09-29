@@ -49,7 +49,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: {
     default: "Enterprise-level forms with sensible pricing",
-    template: "%s — Ikiform",
+    template: "%s",
   },
   description:
     "Create beautiful forms with Ikiform - An open-source alternative to Google Forms. Build surveys, collect responses, and analyze data effortlessly.",

@@ -199,7 +199,7 @@ export function useFormProgress(
   }, [finalConfig.enabled, loadProgress]);
 
   useEffect(() => {
-    if (finalConfig.autoSaveInterval > 0 && state.progress) {
+    if (finalConfig.autoSaveInterval > 0) {
       autoSaveIntervalRef.current = setInterval(() => {
         if (state.progress) {
           saveProgress(
