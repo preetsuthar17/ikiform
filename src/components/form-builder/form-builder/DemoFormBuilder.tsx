@@ -2,9 +2,13 @@
 
 import React, { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import type { FormBlock, FormField, FormSchema } from "@/lib/database";
 import { createFieldFromType } from "@/lib/fields/field-config";
 import { createDefaultFormSchema } from "@/lib/forms/form-defaults";
+import { FieldPalette } from "../field-palette";
+import { FieldSettingsPanel } from "../field-settings-panel";
+import { FormPreview } from "../form-preview";
 import { FormBuilderHeader } from "./components/FormBuilderHeader";
 import { FormBuilderModals } from "./components/FormBuilderModals";
 import { FormBuilderPanels } from "./components/FormBuilderPanels";
@@ -17,7 +21,19 @@ import {
   updateFieldInSchema,
 } from "./utils";
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = React.useState(false);
+  React.useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return isMobile;
+}
+
 export default function DemoFormBuilder() {
+  const isMobile = useIsMobile();
   const [formSchema, setFormSchema] = useState<FormSchema>(() =>
     createDefaultFormSchema({
       title: "Demo Form",
@@ -33,11 +49,19 @@ export default function DemoFormBuilder() {
   const [showSettings, setShowSettings] = useState(false);
   const [showCreationWizard, setShowCreationWizard] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [showFieldPalette, setShowFieldPalette] = useState(false);
+  const [showFieldSettings, setShowFieldSettings] = useState(false);
 
   const selectedField = useMemo(
     () => findSelectedField(formSchema, selectedFieldId),
     [formSchema, selectedFieldId]
   );
+
+  const handleFieldSelect = (fieldId: string | null) => {
+    setSelectedFieldId(fieldId);
+    if (isMobile && fieldId) setShowFieldSettings(true);
+    if (isMobile && !fieldId) setShowFieldSettings(false);
+  };
 
   const addField = (fieldType: FormField["type"]) => {
     const newField = createFieldFromType(fieldType);
@@ -48,6 +72,11 @@ export default function DemoFormBuilder() {
     );
     setFormSchema(updatedSchema);
     setSelectedFieldId(newField.id);
+  };
+
+  const handleAddField = (fieldType: FormField["type"]) => {
+    addField(fieldType);
+    setShowFieldPalette(false);
   };
 
   const updateField = (updatedField: FormField) => {
@@ -226,6 +255,93 @@ export default function DemoFormBuilder() {
 
   const noop = () => {};
   const asyncNoop = async () => {};
+
+  if (isMobile) {
+    return (
+      <div className="flex h-screen flex-col overflow-hidden bg-background">
+        <div className="sticky top-0 z-30 bg-card">
+          <FormBuilderHeader
+            autoSaving={false}
+            formId={undefined}
+            formSchema={formSchema}
+            isPublished={false}
+            onAnalytics={noop}
+            onJsonView={() => setShowJsonView(true)}
+            onModeToggle={handleModeToggle}
+            onPublish={noop}
+            onSave={noop}
+            onSettings={() => setShowFormSettings(true)}
+            onShare={noop}
+            publishing={false}
+            saving={false}
+          />
+        </div>
+        <div className="relative flex-1 overflow-auto">
+          <div className="h-full w-full">
+            <FormPreview
+              onAddField={addField}
+              onBlockUpdate={updateBlock}
+              onFieldDelete={deleteField}
+              onFieldSelect={handleFieldSelect}
+              onFieldsReorder={reorderFields}
+              onFormSettingsUpdate={updateFormSettings}
+              onStepSelect={handleStepSelection}
+              schema={formSchema}
+              selectedBlockId={selectedBlockId}
+              selectedFieldId={selectedFieldId}
+            />
+          </div>
+          <Drawer onOpenChange={setShowFieldPalette} open={showFieldPalette}>
+            <DrawerContent className="mx-auto w-full rounded-t-2xl p-4">
+              <div className="h-[70vh] w-full">
+                <FieldPalette onAddField={handleAddField} />
+              </div>
+            </DrawerContent>
+          </Drawer>
+          <Drawer
+            onOpenChange={(open) => {
+              setShowFieldSettings(open);
+              if (!open) setSelectedFieldId(null);
+            }}
+            open={showFieldSettings}
+          >
+            <DrawerContent className="mx-auto w-full rounded-t-2xl p-0">
+              <div className="flex h-[80vh] flex-col">
+                <FieldSettingsPanel
+                  field={selectedField}
+                  onClose={() => {
+                    setShowFieldSettings(false);
+                    setSelectedFieldId(null);
+                  }}
+                  onFieldUpdate={updateField}
+                />
+              </div>
+            </DrawerContent>
+          </Drawer>
+        </div>
+        <FormBuilderModals
+          formId={undefined}
+          formSchema={formSchema}
+          isPublished={false}
+          onCloseCreationWizard={() => setShowCreationWizard(false)}
+          onCloseFormSettings={() => setShowFormSettings(false)}
+          onCloseJsonView={() => setShowJsonView(false)}
+          onCloseSettings={() => setShowSettings(false)}
+          onCloseShareModal={() => setShowShareModal(false)}
+          onFormSettingsUpdate={noop}
+          onFormTypeSelect={noop}
+          onPublish={asyncNoop}
+          onSchemaUpdate={noop}
+          showCreationWizard={showCreationWizard}
+          showFormSettings={showFormSettings}
+          showJsonView={showJsonView}
+          showSettings={showSettings}
+          showShareModal={showShareModal}
+          userEmail={undefined}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto flex h-[900px] w-full flex-col overflow-hidden rounded-card border bg-background">
