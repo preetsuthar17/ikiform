@@ -21,8 +21,7 @@ export default function CTA() {
             {/* CTA buttons */}
             <div className="flex flex-col items-center gap-4 sm:flex-row">
               <Button
-                asChild
-                className="w-full rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit"
+                className="w-full rounded-full border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit"
                 variant="default"
               >
                 <Link
@@ -33,7 +32,7 @@ export default function CTA() {
                 </Link>
               </Button>
               <Button
-                className="w-full rounded-full border border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit"
+                className="w-full rounded-full border-[0.5px] px-7 py-6 hover:brightness-99 md:w-fit"
                 variant="secondary"
               >
                 <Link
