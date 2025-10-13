@@ -56,7 +56,7 @@ export function FormSkeleton({
             <div className="flex flex-col gap-2" key={i}>
               <SkeletonText className={`h-4 w-32 ${transparentClass}`} />
               <Skeleton
-                className={`h-10 w-full rounded-card ${transparentClass}`}
+                className={`h-10 w-full rounded-2xl ${transparentClass}`}
               />
             </div>
           ))}
@@ -73,7 +73,7 @@ export function FormFieldSkeleton() {
   return (
     <div className="flex flex-col gap-2">
       <SkeletonText className="h-4 w-32 bg-transparent/40" />
-      <Skeleton className="h-10 w-full rounded-card bg-transparent/40" />
+      <Skeleton className="h-10 w-full rounded-2xl bg-transparent/40" />
     </div>
   );
 }

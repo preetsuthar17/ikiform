@@ -34,7 +34,7 @@ export function PreviewPanelHeader({
             </Link>
           </Button>
           <div className="inline-flex items-center gap-2">
-            <span className="h-2 w-2 rounded-card bg-muted-foreground" />
+            <span className="h-2 w-2 rounded-2xl bg-muted-foreground" />
             <span className="font-semibold text-lg">Kiko AI</span>
           </div>
         </div>
@@ -55,7 +55,7 @@ export function PreviewPanelHeader({
         {activeForm?.schema && (
           <div className="hidden px-3 pb-3 max-sm:flex">
             <Button
-              className="w-full rounded-card py-3 font-semibold text-base"
+              className="w-full rounded-2xl py-3 font-semibold text-base"
               onClick={onUseForm}
               size="lg"
             >

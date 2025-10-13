@@ -7,10 +7,10 @@ const ProfileCard = dynamic(
   () => import("@/components/dashboard/profile-card/ProfileCard"),
   {
     loading: () => (
-      <div className="rounded-card border bg-card p-6">
+      <div className="rounded-2xl border bg-card p-6">
         <div className="flex flex-col gap-6">
           <div className="flex items-center gap-4">
-            <div className="h-16 w-16 animate-pulse rounded-card bg-accent" />
+            <div className="h-16 w-16 animate-pulse rounded-2xl bg-accent" />
             <div className="flex flex-col gap-2">
               <div className="h-6 w-48 animate-pulse rounded bg-accent" />
               <div className="h-4 w-32 animate-pulse rounded bg-accent" />
@@ -41,7 +41,7 @@ const FormsManagement = dynamic(
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
             <div
-              className="h-48 animate-pulse rounded-card border bg-card"
+              className="h-48 animate-pulse rounded-2xl border bg-card"
               key={i}
             />
           ))}
@@ -57,10 +57,10 @@ export default function DashboardClient() {
       <div className="flex flex-col gap-8">
         <Suspense
           fallback={
-            <div className="rounded-card border bg-card p-6">
+            <div className="rounded-2xl border bg-card p-6">
               <div className="flex flex-col gap-6">
                 <div className="flex items-center gap-4">
-                  <div className="h-16 w-16 animate-pulse rounded-card bg-accent" />
+                  <div className="h-16 w-16 animate-pulse rounded-2xl bg-accent" />
                   <div className="flex flex-col gap-2">
                     <div className="h-6 w-48 animate-pulse rounded bg-accent" />
                     <div className="h-4 w-32 animate-pulse rounded bg-accent" />
@@ -87,7 +87,7 @@ export default function DashboardClient() {
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {Array.from({ length: 6 }).map((_, i) => (
                   <div
-                    className="h-48 animate-pulse rounded-card border bg-card"
+                    className="h-48 animate-pulse rounded-2xl border bg-card"
                     key={i}
                   />
                 ))}

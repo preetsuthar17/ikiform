@@ -1,12 +1,10 @@
 import { useParams } from "next/navigation";
-import React from "react";
 import { ApiSection } from "../sections/api-section";
 import type { FormSettingsSection } from "../types";
 import { BasicInfoSection } from "./BasicInfoSection";
 import { BotProtectionSection } from "./BotProtectionSection";
 import { DesignSection } from "./DesignSection";
 import { DuplicatePreventionSection } from "./DuplicatePreventionSection";
-import { FormDesignPreview } from "./FormDesignPreview";
 import { MetadataSection } from "./MetadataSection";
 import { NotificationsSection } from "./NotificationsSection";
 import { PasswordProtectionSection } from "./PasswordProtectionSection";

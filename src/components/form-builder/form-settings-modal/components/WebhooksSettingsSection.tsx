@@ -1,5 +1,4 @@
 import { Link2 } from "lucide-react";
-import React from "react";
 import { FaQuestion } from "react-icons/fa6";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";

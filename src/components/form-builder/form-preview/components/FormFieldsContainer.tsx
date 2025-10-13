@@ -1,13 +1,5 @@
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
-import {
-  ChevronDown,
-  EyeOff,
-  GripVertical,
-  Lock,
-  Plus,
-  Trash2,
-} from "lucide-react";
-import React from "react";
+import { EyeOff, GripVertical, Lock, Plus, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -101,8 +93,8 @@ export function FormFieldsContainer({
   if (renderFields.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 py-16 text-center">
-        <div className="flex h-16 w-16 items-center justify-center rounded-card bg-accent">
-          <div className="h-8 w-8 rounded-card bg-muted" />
+        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-accent">
+          <div className="h-8 w-8 rounded-2xl bg-muted" />
         </div>
         <p className="font-medium text-foreground text-lg">
           {isMultiStep ? "No fields in this step" : "No fields added yet"}
@@ -149,7 +141,7 @@ export function FormFieldsContainer({
                       }}
                     >
                       <Card
-                        className={`rounded-card border bg-card p-4 transition-all duration-200 ${
+                        className={`rounded-2xl border bg-card p-4 transition-all duration-200 ${
                           snapshot.isDragging ? "ring-2 ring-ring/20" : ""
                         } ${
                           selectedFieldId === field.id
@@ -172,12 +164,12 @@ export function FormFieldsContainer({
                         {showLogicCues && (isHidden || isDisabled) && (
                           <div className="absolute top-2 left-2 z-20 flex items-center gap-2">
                             {isHidden && (
-                              <span className="flex items-center gap-1 rounded-ele border border-muted/40 bg-muted px-2 py-0.5 text-muted-foreground text-xs">
+                              <span className="flex items-center gap-1 rounded-xl border border-muted/40 bg-muted px-2 py-0.5 text-muted-foreground text-xs">
                                 <EyeOff className="mr-1 h-4 w-4" /> Hidden
                               </span>
                             )}
                             {!isHidden && isDisabled && (
-                              <span className="flex items-center gap-1 rounded-ele border border-muted/40 bg-muted px-2 py-0.5 text-muted-foreground text-xs">
+                              <span className="flex items-center gap-1 rounded-xl border border-muted/40 bg-muted px-2 py-0.5 text-muted-foreground text-xs">
                                 <Lock className="mr-1 h-4 w-4" /> Disabled
                               </span>
                             )}
@@ -197,7 +189,7 @@ export function FormFieldsContainer({
                           </Button>
                           <div
                             {...provided.dragHandleProps}
-                            className="flex h-8 w-8 cursor-grab items-center justify-center rounded-ele transition-colors hover:bg-muted/20 active:cursor-grabbing"
+                            className="flex h-8 w-8 cursor-grab items-center justify-center rounded-xl transition-colors hover:bg-muted/20 active:cursor-grabbing"
                           >
                             <GripVertical className="h-4 w-4 text-muted-foreground" />
                           </div>

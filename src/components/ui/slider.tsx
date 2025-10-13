@@ -29,7 +29,7 @@ const sliderVariants = cva(
 );
 
 const sliderTrackVariants = cva(
-  "relative w-full grow overflow-hidden rounded-card",
+  "relative w-full grow overflow-hidden rounded-2xl",
   {
     variants: {
       variant: {
@@ -51,7 +51,7 @@ const sliderTrackVariants = cva(
   }
 );
 
-const sliderRangeVariants = cva("absolute h-full rounded-card", {
+const sliderRangeVariants = cva("absolute h-full rounded-2xl", {
   variants: {
     variant: {
       default: "bg-primary",
@@ -65,7 +65,7 @@ const sliderRangeVariants = cva("absolute h-full rounded-card", {
 });
 
 const sliderThumbVariants = cva(
-  "hover: block rounded-card border-2 bg-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "hover: block rounded-2xl border-2 bg-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {

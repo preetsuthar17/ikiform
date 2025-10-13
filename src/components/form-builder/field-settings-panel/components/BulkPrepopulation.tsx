@@ -8,7 +8,7 @@ import {
   User,
   Zap,
 } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -178,7 +178,7 @@ export function BulkPrepopulation({
   };
 
   return (
-    <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
+    <Card className="flex flex-col gap-4 rounded-2xl bg-background p-4">
       <h3 className="font-medium text-card-foreground">Bulk Prepopulation</h3>
 
       <div className="flex flex-col gap-4">

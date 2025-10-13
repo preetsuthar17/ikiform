@@ -1,5 +1,4 @@
-import { Clock, Shield, UserCheck } from "lucide-react";
-import React from "react";
+import { Shield, UserCheck } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -101,7 +100,7 @@ export function DuplicatePreventionSection({
             />
           </div>
         ) : (
-          <div className="rounded-card bg-muted/30 p-4">
+          <div className="rounded-2xl bg-muted/30 p-4">
             <p className="text-muted-foreground text-sm">
               Duplicate prevention helps maintain data quality by preventing
               users from submitting the same form multiple times. Choose between
@@ -354,7 +353,7 @@ function DuplicatePreventionSummary({
           : "Session ID";
 
   return (
-    <div className="rounded-card bg-muted/50 p-4">
+    <div className="rounded-2xl bg-muted/50 p-4">
       <div className="mb-2 flex items-center gap-2">
         <UserCheck className="h-4 w-4 text-muted-foreground" />
         <span className="font-medium text-sm">Current Settings</span>

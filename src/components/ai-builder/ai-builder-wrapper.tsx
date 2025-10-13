@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { SuspenseWrapper } from "@/components/ui/suspense-wrapper";
 import { AIBuilderClient } from "./ai-builder-client";
 import { AIBuilderSkeleton } from "./ai-builder-skeleton";

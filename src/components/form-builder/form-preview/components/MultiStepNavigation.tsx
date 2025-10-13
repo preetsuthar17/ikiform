@@ -1,5 +1,4 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import React from "react";
 
 import { Button } from "@/components/ui/button";
 
@@ -39,7 +38,7 @@ export function MultiStepNavigation({
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <div className="h-2 flex-1 overflow-hidden rounded-card bg-muted">
+        <div className="h-2 flex-1 overflow-hidden rounded-2xl bg-muted">
           <div
             className="h-full bg-primary transition-all duration-300"
             style={{
@@ -63,7 +62,7 @@ export function MultiStepNavigation({
         <div className="flex gap-2">
           {schema.blocks.map((_, index) => (
             <button
-              className={`h-8 w-8 rounded-card font-medium text-sm transition-colors ${
+              className={`h-8 w-8 rounded-2xl font-medium text-sm transition-colors ${
                 index === currentStepIndex
                   ? "bg-primary text-primary-foreground"
                   : index < currentStepIndex

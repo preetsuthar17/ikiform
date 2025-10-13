@@ -53,7 +53,7 @@ const sidebarHeaderVariants = cva(
 );
 
 const sidebarItemVariants = cva(
-  "group relative flex cursor-pointer items-center rounded-ele font-medium text-sm",
+  "group relative flex cursor-pointer items-center rounded-xl font-medium text-sm",
   {
     variants: {
       variant: {
@@ -460,7 +460,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       {}
       {collapsed && (
         <div
-          className="invisible absolute left-full z-50 ml-2 whitespace-nowrap rounded-ele border border-border bg-[hsl(var(--hu-popover))] px-2 py-1 text-[hsl(var(--hu-popover-foreground))] text-xs opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100"
+          className="invisible absolute left-full z-50 ml-2 whitespace-nowrap rounded-xl border border-border bg-[hsl(var(--hu-popover))] px-2 py-1 text-[hsl(var(--hu-popover-foreground))] text-xs opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100"
           id={`${itemId}-tooltip`}
           role="tooltip"
         >

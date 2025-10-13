@@ -27,12 +27,9 @@ import { Separator } from "@/components/ui/separator";
 import { DataTable, type DataTableColumn } from "@/components/ui/table";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 
-import type { Form, FormSubmission } from "@/lib/database";
+import type { FormSubmission } from "@/lib/database";
 import type { FilterState, SubmissionsListProps } from "../types";
-import {
-  filterSubmissions,
-  getSubmissionCompletionRate,
-} from "../utils/analytics";
+import { filterSubmissions } from "../utils/analytics";
 
 export const SubmissionsList: React.FC<SubmissionsListProps> = ({
   form,
@@ -100,7 +97,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 py-20">
-        <div className="rounded-card p-4">
+        <div className="rounded-2xl p-4">
           <FileText className="h-8 w-8 text-accent" />
         </div>
         <div className="text-center">
@@ -117,7 +114,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
     <Card className="flex flex-col gap-6 border-border bg-card p-6">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <div className="rounded-card bg-primary/10 p-2">
+          <div className="rounded-2xl bg-primary/10 p-2">
             <FileText className="h-5 w-5 text-primary" />
           </div>
           <div>
@@ -193,7 +190,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
       <div>
         {submissions.length === 0 ? (
           <div className="flex flex-col items-center gap-6 py-16">
-            <div className="gradient-bg flex h-24 w-24 items-center justify-center rounded-card">
+            <div className="gradient-bg flex h-24 w-24 items-center justify-center rounded-2xl">
               <Eye className="h-10 w-10 text-accent-foreground" />
             </div>
             <h4 className="font-semibold text-foreground text-xl">
@@ -277,7 +274,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                     <Card className="p-4">
                       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                         <div className="flex items-center gap-2">
-                          <div className="h-2 w-2 rounded-card bg-primary" />
+                          <div className="h-2 w-2 rounded-2xl bg-primary" />
                           <span className="font-medium text-foreground text-sm">
                             Submission {submission.id.slice(-8)}
                           </span>
@@ -319,7 +316,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                   <label className="font-medium text-muted-foreground text-xs uppercase tracking-wider">
                                     {getFieldLabel(fieldId)}
                                   </label>
-                                  <div className="flex items-center justify-center rounded-ele border border-border bg-input p-2">
+                                  <div className="flex items-center justify-center rounded-xl border border-border bg-input p-2">
                                     <img
                                       alt="Signature"
                                       className="max-h-24 max-w-full rounded border"
@@ -345,7 +342,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                   <label className="font-medium text-muted-foreground text-xs uppercase tracking-wider">
                                     {getFieldLabel(fieldId)}
                                   </label>
-                                  <div className="flex flex-col gap-1 rounded-ele border border-border bg-input p-2">
+                                  <div className="flex flex-col gap-1 rounded-xl border border-border bg-input p-2">
                                     {Object.entries(value).map(([key, url]) => {
                                       let label = key;
                                       if (key.startsWith("custom_")) {
@@ -406,7 +403,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                   <label className="font-medium text-muted-foreground text-xs uppercase tracking-wider">
                                     {getFieldLabel(fieldId)}
                                   </label>
-                                  <div className="rounded-ele border border-border bg-input p-2">
+                                  <div className="rounded-xl border border-border bg-input p-2">
                                     <div className="flex items-center gap-2">
                                       <div className="-space-x-1 flex">
                                         {files.slice(0, 3).map((file, idx) => {
@@ -474,7 +471,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                 <label className="font-medium text-muted-foreground text-xs uppercase tracking-wider">
                                   {getFieldLabel(fieldId)}
                                 </label>
-                                <div className="rounded-ele border border-border bg-input p-2">
+                                <div className="rounded-xl border border-border bg-input p-2">
                                   <p className="line-clamp-2 text-foreground text-sm">
                                     {Array.isArray(value)
                                       ? value.join(", ")

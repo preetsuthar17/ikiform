@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Modal,
@@ -36,7 +36,7 @@ export function SchedulerField({ field, error, disabled }: BaseFieldProps) {
             {provider && link ? (
               <iframe
                 allow="camera; microphone; fullscreen"
-                className="h-full w-full rounded-ele border-none"
+                className="h-full w-full rounded-xl border-none"
                 src={link}
                 title="Scheduler Embed"
               />

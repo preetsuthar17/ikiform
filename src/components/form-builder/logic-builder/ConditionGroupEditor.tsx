@@ -1,5 +1,4 @@
 import { Plus, Trash2 } from "lucide-react";
-import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";

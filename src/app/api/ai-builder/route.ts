@@ -1,5 +1,5 @@
 import { createGroq } from "@ai-sdk/groq";
-import { convertToModelMessages, streamText } from "ai";
+import { streamText } from "ai";
 import type { NextRequest } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import { formsDbServer } from "@/lib/database";

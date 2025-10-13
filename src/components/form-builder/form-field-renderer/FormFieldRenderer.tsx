@@ -1,5 +1,3 @@
-import React from "react";
-
 import { FieldWrapper } from "./components";
 
 import type { FormFieldRendererProps } from "./types";

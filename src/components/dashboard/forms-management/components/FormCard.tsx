@@ -3,9 +3,8 @@ import { ShareFormModal } from "@/components/form-builder/share-form-modal";
 import { Separator } from "@/components/ui";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { getInternalFormTitle } from "@/lib/utils/form-utils";
 import type { FormCardProps } from "../types";
-import { formatDate, getTotalFields } from "../utils";
+import { formatDate } from "../utils";
 import { FormActions } from "./FormActions";
 
 export function FormCard({

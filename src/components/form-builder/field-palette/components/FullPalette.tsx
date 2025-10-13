@@ -1,6 +1,6 @@
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 import { Search } from "lucide-react";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
@@ -66,7 +66,7 @@ export function FullPalette({
       </div>
 
       <ScrollArea className="flex-1">
-        <div className="flex flex-col gap-4 rounded-card pr-2">
+        <div className="flex flex-col gap-4 rounded-2xl pr-2">
           {Object.entries(groupedFields).length > 0 ? (
             Object.entries(groupedFields).map(([key, fields]) => {
               const colCount = 2;
@@ -87,7 +87,7 @@ export function FullPalette({
                     >
                       {(provided) => (
                         <div
-                          className="grid grid-cols-2 gap-2 rounded-card"
+                          className="grid grid-cols-2 gap-2 rounded-2xl"
                           ref={provided.innerRef}
                           {...provided.droppableProps}
                         >

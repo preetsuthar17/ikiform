@@ -1,12 +1,4 @@
-import {
-  Award,
-  CheckCircle,
-  Target,
-  TrendingUp,
-  Trophy,
-  Users,
-} from "lucide-react";
-import React from "react";
+import { Award, CheckCircle, Target, TrendingUp, Trophy } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";

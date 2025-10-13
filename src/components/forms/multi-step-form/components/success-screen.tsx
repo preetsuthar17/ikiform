@@ -12,9 +12,9 @@ interface SuccessScreenProps {
 export const SuccessScreen: React.FC<SuccessScreenProps> = ({ schema }) => (
   <div className="flex min-h-screen items-center justify-center bg-background">
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-4">
-      <Card className="flex flex-col gap-6 rounded-card p-8">
+      <Card className="flex flex-col gap-6 rounded-2xl p-8">
         <div className="flex flex-col items-center gap-6">
-          <div className="flex h-16 w-16 items-center justify-center rounded-card bg-accent">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-accent">
             <svg
               className="h-8 w-8 text-accent-foreground"
               fill="none"

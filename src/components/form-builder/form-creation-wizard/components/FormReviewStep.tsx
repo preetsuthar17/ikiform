@@ -1,4 +1,4 @@
-import { Check, Edit3, Eye, FileText, Layers } from "lucide-react";
+import { Edit3, FileText, Layers } from "lucide-react";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -112,7 +112,7 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
       {}
       {showPreview && (
         <Card className="p-4">
-          <div className="overflow-hidden rounded-card border">
+          <div className="overflow-hidden rounded-2xl border">
             <FormPreview
               onFieldDelete={() => {}}
               onFieldSelect={() => {}}

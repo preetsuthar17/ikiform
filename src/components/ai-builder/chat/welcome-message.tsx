@@ -14,7 +14,7 @@ export function WelcomeMessage({ mounted }: WelcomeMessageProps) {
       className="flex flex-col items-center gap-4 py-8 text-center"
       initial={{ opacity: 0, y: 20 }}
     >
-      <div className="flex h-12 w-12 items-center justify-center rounded-card bg-primary/10">
+      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10">
         <Link href="/">
           <Image
             alt="Ikiform"

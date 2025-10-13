@@ -1,5 +1,3 @@
-import React from "react";
-
 import type { Form } from "@/lib/database";
 
 import { FormCard } from "./FormCard";

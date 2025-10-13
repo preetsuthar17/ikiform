@@ -1,7 +1,6 @@
 import { Check, Copy, Download } from "lucide-react";
 import type React from "react";
 import { useCallback, useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import { OptimizedImage } from "@/components/other/optimized-image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -164,7 +163,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                         <div className="ml-2 max-w-xs border-l pl-3">
                           <OptimizedImage
                             alt="Signature"
-                            className="h-auto w-full max-w-full rounded-ele border"
+                            className="h-auto w-full max-w-full rounded-xl border"
                             height={50}
                             src={`${value}`}
                             width={500}
@@ -327,7 +326,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                                 >
                                   <img
                                     alt="Uploaded file"
-                                    className="h-24 max-w-xs rounded-ele border"
+                                    className="h-24 max-w-xs rounded-xl border"
                                     src={file}
                                   />
                                 </a>

@@ -1,10 +1,4 @@
-import {
-  ChevronDown,
-  ChevronRight,
-  Edit3,
-  GripVertical,
-  Trash2,
-} from "lucide-react";
+import { ChevronDown, ChevronRight, Edit3, Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 

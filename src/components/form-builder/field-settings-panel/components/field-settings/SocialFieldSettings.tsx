@@ -1,8 +1,6 @@
-import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import type { FieldSettingsProps } from "./types";
 
 export function SocialFieldSettings({
@@ -10,7 +8,7 @@ export function SocialFieldSettings({
   onUpdateSettings,
 }: FieldSettingsProps) {
   return (
-    <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
+    <Card className="flex flex-col gap-4 rounded-2xl bg-background p-4">
       <h3 className="font-medium text-card-foreground">Social Platforms</h3>
       <div className="mb-2 flex flex-wrap gap-3">
         {[

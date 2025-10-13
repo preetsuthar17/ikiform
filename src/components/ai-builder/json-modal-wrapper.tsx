@@ -30,7 +30,7 @@ export function JsonModalWrapper({
       fallback={
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
           <div className="max-h-[90vh] w-full max-w-4xl p-6">
-            <div className="flex flex-col gap-4 rounded-card bg-background p-6">
+            <div className="flex flex-col gap-4 rounded-2xl bg-background p-6">
               <Skeleton className="h-8 w-48" />
               <Skeleton className="h-64 w-full" />
               <div className="flex justify-end gap-2">

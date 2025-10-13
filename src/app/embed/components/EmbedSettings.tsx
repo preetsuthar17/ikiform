@@ -100,7 +100,7 @@ export default function EmbedSettings({
             <Label>Background Color</Label>
             <div className="flex gap-2">
               <input
-                className="h-10 w-12 cursor-pointer rounded-ele border border-border"
+                className="h-10 w-12 cursor-pointer rounded-xl border border-border"
                 onChange={(e) =>
                   updateConfig({ backgroundColor: e.target.value })
                 }
@@ -150,7 +150,7 @@ export default function EmbedSettings({
               <Label>Border Color</Label>
               <div className="flex gap-2">
                 <input
-                  className="h-10 w-12 cursor-pointer rounded-ele border border-border"
+                  className="h-10 w-12 cursor-pointer rounded-xl border border-border"
                   onChange={(e) =>
                     updateConfig({ borderColor: e.target.value })
                   }

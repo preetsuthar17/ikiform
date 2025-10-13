@@ -7,7 +7,6 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
 import type { FormSchema } from "@/lib/database";
 import { BlockManager } from "../../block-manager";
 import { FieldPalette } from "../../field-palette";

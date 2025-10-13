@@ -57,7 +57,7 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
               {}
               <div
                 className={cn(
-                  "flex h-10 w-10 items-center justify-center rounded-card border-2 transition-all",
+                  "flex h-10 w-10 items-center justify-center rounded-2xl border-2 transition-all",
                   isCompleted
                     ? "border-primary bg-primary text-primary-foreground"
                     : isCurrent

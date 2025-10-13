@@ -1,5 +1,5 @@
 import { ChevronDown, Settings, X } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Collapsible,
   CollapsibleContent,
@@ -80,7 +80,7 @@ export function FieldGroupSettings({
   return (
     <div className="flex flex-col gap-4">
       {/* Layout Settings */}
-      <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
+      <Card className="flex flex-col gap-4 rounded-2xl bg-background p-4">
         <h3 className="font-medium text-card-foreground">Layout Settings</h3>
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
@@ -158,7 +158,7 @@ export function FieldGroupSettings({
       </Card>
 
       {/* Field Management */}
-      <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
+      <Card className="flex flex-col gap-4 rounded-2xl bg-background p-4">
         <h3 className="font-medium text-card-foreground">
           Group Fields ({groupFields.length})
         </h3>
@@ -187,7 +187,7 @@ export function FieldGroupSettings({
                           (f) => f.category === (key as any)
                         ).map((f) => (
                           <button
-                            className="flex items-start gap-3 rounded-card border border-border bg-background p-3 text-left transition-colors hover:bg-accent"
+                            className="flex items-start gap-3 rounded-2xl border border-border bg-background p-3 text-left transition-colors hover:bg-accent"
                             key={f.type}
                             onClick={() => {
                               addFieldToGroup(f.type);
@@ -226,7 +226,7 @@ export function FieldGroupSettings({
         ) : (
           <div className="flex flex-col gap-3 rounded-3xl bg-background p-2">
             {groupFields.map((groupField) => (
-              <Card className="rounded-card p-3" key={groupField.id}>
+              <Card className="rounded-2xl p-3" key={groupField.id}>
                 <div className="flex flex-col gap-3">
                   {/* Field Header */}
                   <div className="flex items-center justify-between">

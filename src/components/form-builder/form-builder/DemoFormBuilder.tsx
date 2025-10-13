@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import type { FormBlock, FormField, FormSchema } from "@/lib/database";
 import { createFieldFromType } from "@/lib/fields/field-config";
@@ -16,7 +15,6 @@ import {
   addFieldToSchema,
   findSelectedField,
   generateBlockId,
-  generateFieldId,
   removeFieldFromSchema,
   updateFieldInSchema,
 } from "./utils";
@@ -344,7 +342,7 @@ export default function DemoFormBuilder() {
   }
 
   return (
-    <div className="mx-auto flex h-[900px] w-full flex-col overflow-hidden rounded-card border bg-background">
+    <div className="mx-auto flex h-[900px] w-full flex-col overflow-hidden rounded-2xl border bg-background">
       <FormBuilderHeader
         autoSaving={false}
         formId={undefined}

@@ -5,7 +5,7 @@ export function DashboardSkeleton() {
     <section className="mx-auto w-full max-w-[95%] px-6">
       <div className="flex flex-col gap-8">
         {}
-        <div className="rounded-card border bg-card p-6">
+        <div className="rounded-2xl border bg-card p-6">
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-4">
               <Skeleton className="h-16 w-16" variant="avatar" />

@@ -2,14 +2,14 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-const skeletonVariants = cva("animate-pulse rounded-ele bg-accent", {
+const skeletonVariants = cva("animate-pulse rounded-xl bg-accent", {
   variants: {
     variant: {
       default: "bg-accent",
       secondary: "bg-accent/20",
-      text: "rounded-ele bg-accent",
-      circle: "rounded-card",
-      avatar: "rounded-card bg-accent",
+      text: "rounded-xl bg-accent",
+      circle: "rounded-2xl",
+      avatar: "rounded-2xl bg-accent",
     },
     size: {
       sm: "h-4",
@@ -139,7 +139,7 @@ const SkeletonButton = React.forwardRef<
 
   return (
     <Skeleton
-      className={cn(selectedHeight, "w-20 rounded-ele", className)}
+      className={cn(selectedHeight, "w-20 rounded-xl", className)}
       ref={ref}
       {...props}
     />
@@ -166,10 +166,7 @@ const SkeletonCard = React.forwardRef<
     ref
   ) => (
     <div
-      className={cn(
-        "overflow-hidden rounded-ele border bg-card p-0",
-        className
-      )}
+      className={cn("overflow-hidden rounded-xl border bg-card p-0", className)}
       ref={ref}
       {...props}
     >

@@ -9,7 +9,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Loader } from "@/components/ui/loader";
 import type { WebhookConfig } from "./hooks/useWebhookManagement";
 
 interface TestWebhookDialogProps {

@@ -124,7 +124,7 @@ export function AIBuilderClient() {
         {}
         <div className="-translate-x-1/2 fixed bottom-4 left-1/2 z-50 w-full max-w-[90%] md:hidden">
           <Button
-            className="w-full rounded-card"
+            className="w-full rounded-2xl"
             onClick={() => setChatDrawerOpen(true)}
             size="lg"
           >

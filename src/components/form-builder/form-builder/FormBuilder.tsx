@@ -14,7 +14,6 @@ import type { FormBlock, FormField, FormSchema } from "@/lib/database";
 
 import { formsDb } from "@/lib/database";
 import { createFieldFromType } from "@/lib/fields/field-config";
-import { Loader } from "../../ui/loader";
 import { FieldPalette } from "../field-palette";
 import { FieldSettingsPanel } from "../field-settings-panel";
 import { FormBuilderSkeleton } from "../form-builder-skeleton";
@@ -29,7 +28,6 @@ import type { FormBuilderProps } from "./types";
 import {
   addFieldToSchema,
   generateBlockId,
-  generateFieldId,
   removeDraftFromStorage,
   removeFieldFromSchema,
   updateFieldInSchema,

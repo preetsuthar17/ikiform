@@ -8,11 +8,9 @@ import {
   Users,
   XCircle,
 } from "lucide-react";
-import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Separator } from "@/components/ui/separator";
 import type { FormSchema, FormSubmission } from "@/lib/database";
 import { getQuizStatistics } from "@/lib/quiz/scoring";
 

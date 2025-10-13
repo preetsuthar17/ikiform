@@ -41,7 +41,7 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
   if (!form.schema?.blocks || form.schema.blocks.length === 0) {
     return (
       <Card className="flex items-center gap-4 border-border bg-card p-6">
-        <div className="rounded-card bg-orange-500/10 p-3">
+        <div className="rounded-2xl bg-orange-500/10 p-3">
           <AlertTriangle className="h-6 w-6 text-orange-600" />
         </div>
         <div className="flex flex-col gap-1">
@@ -60,7 +60,7 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
   return (
     <Card className="flex flex-col gap-4 border-border bg-card p-6">
       <div className="mb-2 flex items-center gap-4">
-        <div className="rounded-card bg-orange-500/10 p-3">
+        <div className="rounded-2xl bg-orange-500/10 p-3">
           <AlertTriangle className="h-6 w-6 text-orange-600" />
         </div>
         <div className="flex flex-col gap-1">

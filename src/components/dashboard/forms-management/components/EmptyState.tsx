@@ -1,5 +1,4 @@
 import { Plus, Sparkles } from "lucide-react";
-import React from "react";
 import { Button } from "@/components/ui/button";
 
 import { Card } from "@/components/ui/card";
@@ -25,9 +24,9 @@ export function EmptyState({
   onCreateManually,
 }: EmptyStateExtendedProps) {
   return (
-    <Card className="rounded-card p-16 text-center">
+    <Card className="rounded-2xl p-16 text-center">
       <div className="mx-auto flex max-w-md flex-col gap-6">
-        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-card bg-accent">
+        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl bg-accent">
           <Plus className="h-10 w-10 text-accent-foreground" />
         </div>
         <div className="flex flex-col gap-2">

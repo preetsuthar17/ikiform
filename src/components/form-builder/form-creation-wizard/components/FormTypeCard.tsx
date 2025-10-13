@@ -20,7 +20,7 @@ export const FormTypeCard: React.FC<FormTypeCardProps> = ({
       <div className="flex w-full grow items-start justify-between gap-3">
         <div className="flex w-full items-center gap-3 max-sm:flex-col max-sm:justify-center max-sm:text-center">
           <div
-            className={`rounded-card p-2 ${
+            className={`rounded-2xl p-2 ${
               isSelected ? "bg-primary text-primary-foreground" : "bg-muted"
             }`}
           >
@@ -41,7 +41,7 @@ export const FormTypeCard: React.FC<FormTypeCardProps> = ({
               className="flex items-center gap-2 text-muted-foreground text-sm"
               key={index}
             >
-              <div className="h-1 w-1 rounded-card bg-primary" />
+              <div className="h-1 w-1 rounded-2xl bg-primary" />
               {feature}
             </li>
           ))}

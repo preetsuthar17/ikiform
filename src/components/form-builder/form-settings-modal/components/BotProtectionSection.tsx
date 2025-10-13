@@ -1,7 +1,5 @@
 import { Shield } from "lucide-react";
-import React from "react";
 
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
@@ -61,7 +59,7 @@ export function BotProtectionSection({
               </p>
             </div>
 
-            <div className="rounded-card bg-blue-50 p-4 dark:bg-blue-950/20">
+            <div className="rounded-2xl bg-blue-50 p-4 dark:bg-blue-950/20">
               <div className="flex items-start gap-3">
                 <Shield className="mt-0.5 h-4 w-4 text-blue-600 dark:text-blue-400" />
                 <div className="flex flex-col gap-1">
@@ -78,7 +76,7 @@ export function BotProtectionSection({
             </div>
           </div>
         ) : (
-          <div className="rounded-card bg-muted/30 p-4">
+          <div className="rounded-2xl bg-muted/30 p-4">
             <p className="text-muted-foreground text-sm">
               Bot protection uses Vercel's BotID to automatically detect and
               block automated submissions while allowing legitimate users

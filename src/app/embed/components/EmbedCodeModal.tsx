@@ -1,19 +1,8 @@
 "use client";
 
-import {
-  Check,
-  Code2,
-  Copy,
-  FileText,
-  Globe,
-  Shield,
-  X,
-  Zap,
-} from "lucide-react";
+import { Check, Code2, Copy, FileText, Globe } from "lucide-react";
 import { useState } from "react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button-base";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Modal,
   ModalContent,
@@ -22,7 +11,6 @@ import {
   ModalHeader,
   ModalTitle,
 } from "@/components/ui/modal";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
 import type { EmbedConfig } from "./EmbedCustomizer";
 
 interface EmbedCodeModalProps {

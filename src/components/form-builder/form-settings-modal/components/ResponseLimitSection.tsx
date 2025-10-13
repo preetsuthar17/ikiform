@@ -1,5 +1,4 @@
 import { Users } from "lucide-react";
-import React from "react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -80,7 +79,7 @@ export function ResponseLimitSection({
             </div>
           </div>
         ) : (
-          <div className="rounded-card bg-muted/30 p-4">
+          <div className="rounded-2xl bg-muted/30 p-4">
             <p className="text-muted-foreground text-sm">
               Limit the total number of responses this form can accept. Once the
               limit is reached, new submissions will be blocked.

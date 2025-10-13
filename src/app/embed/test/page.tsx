@@ -33,7 +33,7 @@ export default function EmbedTestPage() {
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 text-center">
-            <div className="gradient-bg mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-card">
+            <div className="gradient-bg mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl">
               <Code2 className="h-8 w-8 text-accent-foreground" />
             </div>
             <h1 className="mb-4 font-semibold text-3xl text-foreground">
@@ -42,7 +42,7 @@ export default function EmbedTestPage() {
             <p className="mx-auto mb-6 max-w-3xl text-muted-foreground">
               This page demonstrates how forms can be embedded using different
               configurations. Visit{" "}
-              <code className="rounded-ele bg-muted px-2 py-1 text-foreground">
+              <code className="rounded-xl bg-muted px-2 py-1 text-foreground">
                 /embed?formid=YOUR_FORM_ID
               </code>{" "}
               to customize your own embed.
@@ -74,7 +74,7 @@ export default function EmbedTestPage() {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="rounded-ele border-2 border-border/50 border-dashed bg-accent/5 p-4">
+                <div className="rounded-xl border-2 border-border/50 border-dashed bg-accent/5 p-4">
                   <iframe
                     allow="clipboard-write; camera; microphone"
                     height="600px"
@@ -116,7 +116,7 @@ export default function EmbedTestPage() {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="rounded-ele border-2 border-border/50 border-dashed bg-accent/5 p-4">
+                <div className="rounded-xl border-2 border-border/50 border-dashed bg-accent/5 p-4">
                   <iframe
                     allow="clipboard-write; camera; microphone"
                     height="400px"
@@ -155,7 +155,7 @@ export default function EmbedTestPage() {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="flex justify-center rounded-ele border-2 border-border/50 border-dashed bg-accent/5 p-4">
+                <div className="flex justify-center rounded-xl border-2 border-border/50 border-dashed bg-accent/5 p-4">
                   <iframe
                     allow="clipboard-write; camera; microphone"
                     height="500px"
@@ -246,7 +246,7 @@ export default function EmbeddedForm() {
                     </div>
                     <p className="text-muted-foreground">
                       Go to{" "}
-                      <code className="rounded-ele bg-muted px-2 py-1 text-foreground">
+                      <code className="rounded-xl bg-muted px-2 py-1 text-foreground">
                         /embed?formid=YOUR_FORM_ID
                       </code>{" "}
                       or click the embed button in your form dashboard.

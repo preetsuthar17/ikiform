@@ -543,7 +543,7 @@ function LogicBuilderPanelContent({
                   <Copy className="h-4 w-4" />
                 )}
               </Button>
-              <ScrollArea className="mt-2 mb-2 h-[60vh] rounded-ele border bg-muted/30 text-foreground">
+              <ScrollArea className="mt-2 mb-2 h-[60vh] rounded-xl border bg-muted/30 text-foreground">
                 {loadingHighlight ? (
                   <div className="flex h-[60vh] items-center justify-center p-4">
                     <Loader />

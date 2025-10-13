@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -26,7 +26,7 @@ export function SchedulerFieldSettings({
   const [schedulerModalOpen, setSchedulerModalOpen] = useState(false);
 
   return (
-    <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
+    <Card className="flex flex-col gap-4 rounded-2xl bg-background p-4">
       <h3 className="font-medium text-card-foreground">Scheduler Settings</h3>
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
@@ -140,7 +140,7 @@ export function SchedulerFieldSettings({
                   ] && (
                     <iframe
                       allow="camera; microphone; fullscreen"
-                      className="h-full w-full rounded-ele border-none"
+                      className="h-full w-full rounded-xl border-none"
                       src={
                         field.settings.schedulerLinks[
                           field.settings.schedulerProvider

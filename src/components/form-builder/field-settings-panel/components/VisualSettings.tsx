@@ -1,4 +1,3 @@
-import React from "react";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import {
@@ -23,7 +22,7 @@ export function VisualSettings({
   onUpdateSettings,
 }: VisualSettingsProps) {
   return (
-    <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
+    <Card className="flex flex-col gap-4 rounded-2xl bg-background p-4">
       <h3 className="mb-3 font-medium text-card-foreground">Visual Settings</h3>
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">

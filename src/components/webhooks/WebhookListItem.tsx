@@ -1,11 +1,4 @@
-import {
-  Edit,
-  ExternalLink,
-  FileText,
-  MoreHorizontal,
-  Play,
-  Trash2,
-} from "lucide-react";
+import { Edit, FileText, MoreHorizontal, Play, Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {

@@ -77,7 +77,7 @@ export function EditableField({
         )
       ) : (
         <div
-          className="flex w-full cursor-pointer items-center gap-2 rounded-ele p-2 transition-colors hover:bg-accent/10"
+          className="flex w-full cursor-pointer items-center gap-2 rounded-xl p-2 transition-colors hover:bg-accent/10"
           onClick={() => setIsEditing(true)}
         >
           {children || (

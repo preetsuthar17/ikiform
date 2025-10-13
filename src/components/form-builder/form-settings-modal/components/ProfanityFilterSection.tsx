@@ -1,9 +1,6 @@
-import { AlertTriangle, Plus, X } from "lucide-react";
-import React from "react";
+import { AlertTriangle } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioItem } from "@/components/ui/radio";
 import { Switch } from "@/components/ui/switch";
@@ -68,7 +65,7 @@ export function ProfanityFilterSection({
             />
           </div>
         ) : (
-          <div className="rounded-card bg-muted/30 p-4">
+          <div className="rounded-2xl bg-muted/30 p-4">
             <p className="text-muted-foreground text-sm">
               Profanity filter helps maintain a clean and professional
               environment by automatically detecting and filtering inappropriate

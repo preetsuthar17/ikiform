@@ -27,7 +27,7 @@ export function FieldItem({
             }}
           >
             <div className="flex items-center gap-3">
-              <div className="flex flex-shrink-0 items-center justify-center rounded-card bg-accent p-2 transition-colors duration-200 group-hover:bg-primary/10">
+              <div className="flex flex-shrink-0 items-center justify-center rounded-2xl bg-accent p-2 transition-colors duration-200 group-hover:bg-primary/10">
                 <IconComponent className="h-4 w-4 text-accent-foreground transition-colors duration-200 group-hover:text-primary" />
               </div>
               <div className="min-w-0 flex-1">

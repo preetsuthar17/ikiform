@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import { MultiStepForm } from "./multi-step-form";
 import { SingleStepForm } from "./public-form/components";

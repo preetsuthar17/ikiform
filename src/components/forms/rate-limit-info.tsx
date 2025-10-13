@@ -1,5 +1,4 @@
 import { AlertTriangle, Clock, Shield } from "lucide-react";
-import React from "react";
 import { Card } from "@/components/ui/card";
 
 interface RateLimitInfoProps {
@@ -23,7 +22,7 @@ export function RateLimitInfo({
   return (
     <Card className={`border-muted bg-muted/30 p-4 ${className}`}>
       <div className="flex items-start gap-3">
-        <div className="rounded-card bg-primary/10 p-2">
+        <div className="rounded-2xl bg-primary/10 p-2">
           <Shield className="h-4 w-4 text-primary" />
         </div>
         <div className="flex-1">
@@ -68,7 +67,7 @@ export function RateLimitExceeded({
   return (
     <Card className="border-destructive/20 bg-destructive/10 p-4">
       <div className="flex items-start gap-3">
-        <div className="rounded-card bg-destructive/10 p-2">
+        <div className="rounded-2xl bg-destructive/10 p-2">
           <AlertTriangle className="h-4 w-4 text-destructive" />
         </div>
         <div className="flex-1">

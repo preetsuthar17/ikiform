@@ -1,4 +1,3 @@
-import React from "react";
 import type { PaletteHeaderProps } from "../types";
 
 export function PaletteHeader({ title, description }: PaletteHeaderProps) {

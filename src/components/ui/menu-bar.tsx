@@ -8,7 +8,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const menubarVariants = cva(
-  "scrollbar-hide flex w-full max-w-full items-center overflow-x-auto rounded-card border border-border bg-background transition-all",
+  "scrollbar-hide flex w-full max-w-full items-center overflow-x-auto rounded-2xl border border-border bg-background transition-all",
   {
     variants: {
       variant: {
@@ -54,7 +54,7 @@ const menubarTriggerVariants = cva(
 );
 
 const menubarContentVariants = cva(
-  "z-50 mt-2 min-w-[12rem] max-w-[95vw] overflow-hidden rounded-card border border-border bg-background p-1.5 text-foreground sm:max-w-[350px] sm:p-2",
+  "z-50 mt-2 min-w-[12rem] max-w-[95vw] overflow-hidden rounded-2xl border border-border bg-background p-1.5 text-foreground sm:max-w-[350px] sm:p-2",
   {
     variants: {
       variant: {
@@ -218,7 +218,7 @@ const MenuBarSubTrigger = React.forwardRef<
 >(({ className, inset, icon: Icon, children, ...props }, ref) => (
   <MenubarPrimitive.SubTrigger
     className={cn(
-      "flex min-h-[44px] cursor-default touch-manipulation select-none items-center gap-2 rounded-ele px-2.5 py-2 text-sm outline-none transition-all hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:bg-accent active:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground sm:min-h-auto sm:px-3 sm:py-2.5 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+      "flex min-h-[44px] cursor-default touch-manipulation select-none items-center gap-2 rounded-xl px-2.5 py-2 text-sm outline-none transition-all hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:bg-accent active:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground sm:min-h-auto sm:px-3 sm:py-2.5 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
       inset && "pl-6 sm:pl-8",
       className
     )}
@@ -262,7 +262,7 @@ const MenuBarSubContent = React.forwardRef<
   <MenubarPrimitive.SubContent
     asChild
     className={cn(
-      "z-50 min-w-[10rem] max-w-[95vw] overflow-hidden rounded-ele border border-border bg-background p-1.5 text-foreground sm:max-w-[280px] sm:p-2",
+      "z-50 min-w-[10rem] max-w-[95vw] overflow-hidden rounded-xl border border-border bg-background p-1.5 text-foreground sm:max-w-[280px] sm:p-2",
       className
     )}
     ref={ref}

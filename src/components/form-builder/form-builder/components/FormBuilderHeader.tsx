@@ -1,8 +1,6 @@
 import {
   BarChart3,
   Code,
-  Container,
-  Eye,
   EyeOff,
   FileText,
   Globe,
@@ -73,7 +71,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             </div>
             {autoSaving && (
               <div className="flex items-center gap-1 text-muted-foreground text-xs">
-                <div className="h-1.5 w-1.5 animate-pulse rounded-card bg-primary" />
+                <div className="h-1.5 w-1.5 animate-pulse rounded-2xl bg-primary" />
                 <span>Saving</span>
               </div>
             )}

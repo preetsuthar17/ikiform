@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import type { FormSchema, FormSubmission } from "@/lib/database";
+import type { FormSchema } from "@/lib/database";
 import {
   calculateQuizScore,
   generateQuizResultMessage,

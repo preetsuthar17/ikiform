@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
 import { QuizProgress } from "@/components/quiz/QuizProgress";
 import { QuizResults } from "@/components/quiz/QuizResults";

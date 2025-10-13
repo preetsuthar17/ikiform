@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { getLivePatternError } from "@/components/form-builder/form-field-renderer/components/TextInputField";
 
@@ -134,7 +134,7 @@ export function MultiStepFormClient({
     >
       <div className={`flex w-full flex-col gap-8 ${containerClass}`}>
         <Card
-          className="flex w-full grow flex-col gap-6 rounded-card border-none bg-transparent p-8 hover:bg-transparent"
+          className="flex w-full grow flex-col gap-6 rounded-2xl border-none bg-transparent p-8 hover:bg-transparent"
           variant="ghost"
         >
           <FormProgress

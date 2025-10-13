@@ -13,7 +13,7 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ConfirmationModal } from "@/components/dashboard/form-delete-confirmation-modal";
 import { ShareFormModal } from "@/components/form-builder/share-form-modal";
 import { Badge } from "@/components/ui/badge";
@@ -150,7 +150,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
         <div className="mx-auto p-6">
           <div className="flex items-center justify-center py-20">
             <div className="flex flex-col gap-4 text-center">
-              <div className="mx-auto rounded-card p-4">
+              <div className="mx-auto rounded-2xl p-4">
                 <Loader />
               </div>
               <div className="flex flex-col gap-1">

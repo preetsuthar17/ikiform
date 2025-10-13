@@ -22,11 +22,11 @@ const paginationItemVariants = cva(
     variants: {
       variant: {
         default:
-          "h-9 w-9 rounded-ele text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring",
+          "h-9 w-9 rounded-xl text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring",
         outline:
-          "h-9 w-9 rounded-ele border border-border text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring",
+          "h-9 w-9 rounded-xl border border-border text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring",
         ghost:
-          "h-9 w-9 rounded-ele text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring",
+          "h-9 w-9 rounded-xl text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring",
       },
       size: {
         default: "h-9 w-9",
@@ -48,7 +48,7 @@ const paginationItemVariants = cva(
 );
 
 const paginationNavVariants = cva(
-  "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-ele px-3 text-foreground text-sm transition-all hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 max-sm:grow",
+  "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-xl px-3 text-foreground text-sm transition-all hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 max-sm:grow",
   {
     variants: {
       size: {

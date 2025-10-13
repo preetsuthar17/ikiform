@@ -31,7 +31,7 @@ const breadcrumbItemVariants = cva("inline-flex items-center gap-1.5", {
 });
 
 const breadcrumbLinkVariants = cva(
-  "flex items-center gap-1 rounded-ele transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+  "flex items-center gap-1 rounded-xl transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
   {
     variants: {},
     defaultVariants: {},

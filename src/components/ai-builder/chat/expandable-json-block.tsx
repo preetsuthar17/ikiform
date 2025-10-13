@@ -72,7 +72,7 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
   }, [jsonString]);
 
   return (
-    <div className="my-2 rounded-card border border-border bg-muted/50 p-3 font-mono text-xs">
+    <div className="my-2 rounded-2xl border border-border bg-muted/50 p-3 font-mono text-xs">
       <motion.div
         animate={{ height: targetHeight }}
         initial={{ height: 100 }}

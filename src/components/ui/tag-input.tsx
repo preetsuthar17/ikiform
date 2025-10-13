@@ -8,7 +8,7 @@ import { Chip } from "@/components/ui/chip";
 import { cn } from "@/lib/utils";
 
 const tagInputVariants = cva(
-  "min-h-9 w-full rounded-ele border border-border bg-input px-3 py-2 text-sm ring-offset-background transition-all focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+  "min-h-9 w-full rounded-xl border border-border bg-input px-3 py-2 text-sm ring-offset-background transition-all focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -212,7 +212,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
         {clearAllButton && safeTags.length > 0 && (
           <button
             aria-label="Clear all tags"
-            className="-translate-y-1/2 absolute top-1/2 right-2 rounded-card p-1 transition-colors hover:bg-accent disabled:pointer-events-none disabled:opacity-50"
+            className="-translate-y-1/2 absolute top-1/2 right-2 rounded-2xl p-1 transition-colors hover:bg-accent disabled:pointer-events-none disabled:opacity-50"
             disabled={disabled}
             onClick={handleClearAll}
             type="button"

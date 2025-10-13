@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Eye, Palette } from "lucide-react";
+import { Check, Palette } from "lucide-react";
 import React from "react";
 import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
 import { Badge } from "@/components/ui/badge";

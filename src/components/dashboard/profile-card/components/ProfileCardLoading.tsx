@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   Skeleton,
@@ -18,7 +16,7 @@ export function ProfileCardLoading({ className }: ProfileLoadingProps) {
         <SkeletonAvatar size="xl" />
       </CardHeader>
       <div className="absolute top-3 right-3">
-        <Skeleton className="h-8 w-8 rounded-card" />
+        <Skeleton className="h-8 w-8 rounded-2xl" />
       </div>
       <CardContent className="flex w-full flex-col items-center gap-1">
         <SkeletonText className="mb-2 h-7 w-32" />

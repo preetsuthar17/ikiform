@@ -1,19 +1,15 @@
 import {
-  AlertCircle,
   CheckCircle,
-  Copy,
   Eye,
   Globe,
   HelpCircle,
   History,
-  Plus,
-  Save,
   Settings,
   Trash2,
   User,
   Zap,
 } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -29,7 +25,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import type { FormField, FormSchema } from "@/lib/database";
+import type { FormSchema } from "@/lib/database";
 
 interface PrepopulationManagerProps {
   schema: FormSchema;

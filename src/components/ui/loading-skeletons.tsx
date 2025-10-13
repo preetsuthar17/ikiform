@@ -58,7 +58,7 @@ export function ChatWelcomeSkeleton() {
   return (
     <div className="flex flex-col items-center gap-4 py-8 text-center">
       {}
-      <Skeleton className="h-12 w-12 rounded-card" />
+      <Skeleton className="h-12 w-12 rounded-2xl" />
       {}
       <Skeleton className="h-8 w-64" />
       {}
@@ -76,7 +76,7 @@ export function ChatSuggestionsSkeleton() {
     <div className="flex flex-col gap-2 overflow-hidden max-sm:hidden">
       <div className="flex grow flex-wrap gap-2 overflow-x-auto">
         {Array.from({ length: 4 }).map((_, i) => (
-          <Skeleton className="h-8 min-w-[120px] flex-1 rounded-card" key={i} />
+          <Skeleton className="h-8 min-w-[120px] flex-1 rounded-2xl" key={i} />
         ))}
       </div>
     </div>
@@ -123,7 +123,7 @@ export function PreviewPanelHeaderSkeleton({
         {}
         <div className="hidden gap-2 overflow-x-auto p-3 max-sm:flex">
           {Array.from({ length: 2 }).map((_, i) => (
-            <Skeleton className="h-8 w-20 rounded-card" key={i} />
+            <Skeleton className="h-8 w-20 rounded-2xl" key={i} />
           ))}
         </div>
       </>
@@ -140,15 +140,15 @@ export function PreviewPanelHeaderSkeleton({
             <Skeleton className="h-6 w-16" /> {}
           </div>
           <div className="flex gap-2">
-            <Skeleton className="h-8 w-20 rounded-card" /> {}
-            <Skeleton className="h-8 w-16 rounded-card" /> {}
+            <Skeleton className="h-8 w-20 rounded-2xl" /> {}
+            <Skeleton className="h-8 w-16 rounded-2xl" /> {}
           </div>
         </div>
       </div>
       {}
       <div className="flex gap-2 overflow-x-auto border-b p-4">
-        <Skeleton className="h-8 w-20 rounded-card" />
-        <Skeleton className="h-8 w-24 rounded-card" />
+        <Skeleton className="h-8 w-20 rounded-2xl" />
+        <Skeleton className="h-8 w-24 rounded-2xl" />
       </div>
     </>
   );

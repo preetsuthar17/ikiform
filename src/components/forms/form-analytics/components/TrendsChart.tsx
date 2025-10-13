@@ -38,7 +38,7 @@ const formatDate = (dateString: string) => {
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
-      <div className="rounded-ele border border-border bg-card px-3 py-2">
+      <div className="rounded-xl border border-border bg-card px-3 py-2">
         <p className="mb-1 font-semibold text-foreground">
           {formatDate(label)}
         </p>

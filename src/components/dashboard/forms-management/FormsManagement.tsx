@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { Separator } from "@/components/ui/separator";
 
 import { ConfirmationModal } from "../form-delete-confirmation-modal";

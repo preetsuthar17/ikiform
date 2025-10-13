@@ -22,7 +22,7 @@ function FormAnalyticsSkeleton() {
       {}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {Array.from({ length: 4 }).map((_, i) => (
-          <div className="rounded-card border bg-card p-6" key={i}>
+          <div className="rounded-2xl border bg-card p-6" key={i}>
             <div className="flex items-center gap-4">
               <Skeleton className="h-12 w-12" variant="circle" />
               <div className="flex flex-col gap-2">
@@ -35,13 +35,13 @@ function FormAnalyticsSkeleton() {
       </div>
 
       {}
-      <div className="rounded-card border bg-card p-6">
+      <div className="rounded-2xl border bg-card p-6">
         <Skeleton className="mb-4 h-6 w-32" />
         <Skeleton className="h-64 w-full" />
       </div>
 
       {}
-      <div className="rounded-card border bg-card p-6">
+      <div className="rounded-2xl border bg-card p-6">
         <Skeleton className="mb-4 h-6 w-32" />
         <div className="flex flex-col gap-3">
           {Array.from({ length: 5 }).map((_, i) => (
