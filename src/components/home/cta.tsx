@@ -126,8 +126,8 @@ export default function CTA() {
       className="mx-auto w-full max-w-7xl bg-background"
     >
       <div className="mx-auto flex w-full flex-col">
-        <Card className="rounded-none border-t-0 bg-card p-8 py-12 shadow-none md:p-12 md:py-16 relative overflow-hidden">
-          <CardContent className="flex flex-col items-center gap-8 py-24 text-center ">
+        <Card className="relative overflow-hidden rounded-none border-t-0 bg-card p-8 py-12 shadow-none md:p-12 md:py-16">
+          <CardContent className="flex flex-col items-center gap-8 py-24 text-center">
             {/* Main heading */}
             <CtaHeading />
 
