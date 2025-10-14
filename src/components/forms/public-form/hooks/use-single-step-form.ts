@@ -4,7 +4,7 @@ import { usePrepopulation } from "@/hooks/prepopulation/usePrepopulation";
 import { toast } from "@/hooks/use-toast";
 
 import type { FormField, FormSchema } from "@/lib/database";
-import { evaluateLogic } from "@/lib/forms/logic";
+
 import { calculateQuizScore, type QuizResult } from "@/lib/quiz/scoring";
 import type { SingleStepFormActions, SingleStepFormState } from "../types";
 
@@ -179,9 +179,6 @@ export const useSingleStepForm = (
     }
   }, [formData, saveProgress]);
 
-  const logic = schema.logic || [];
-  const logicActions = evaluateLogic(logic, formData);
-
   const fieldVisibility: Record<
     string,
     { visible: boolean; disabled: boolean }
@@ -190,30 +187,6 @@ export const useSingleStepForm = (
     fieldVisibility[field.id] = { visible: true, disabled: false };
   });
   const logicMessages: string[] = [];
-  logicActions.forEach((action) => {
-    if (action.target && fieldVisibility[action.target]) {
-      if (action.type === "hide")
-        fieldVisibility[action.target].visible = false;
-      if (action.type === "show") fieldVisibility[action.target].visible = true;
-      if (action.type === "disable")
-        fieldVisibility[action.target].disabled = true;
-      if (action.type === "enable")
-        fieldVisibility[action.target].disabled = false;
-      if (
-        action.type === "set_value" &&
-        typeof action.target === "string" &&
-        formData[action.target] !== action.value
-      ) {
-        setFormData((prev) => ({
-          ...prev,
-          [action.target as string]: action.value,
-        }));
-      }
-    }
-    if (action.type === "show_message" && action.value) {
-      logicMessages.push(String(action.value));
-    }
-  });
 
   const handleFieldValueChange = (fieldId: string, value: any) => {
     setFormData((prev) => ({ ...prev, [fieldId]: value }));

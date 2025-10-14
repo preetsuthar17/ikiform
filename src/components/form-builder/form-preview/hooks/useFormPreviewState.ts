@@ -34,7 +34,7 @@ const initializeFormData = (fields: FormField[]): Record<string, any> => {
   return formData;
 };
 
-import { evaluateLogic, getLogicFieldDefaults } from "@/lib/forms/logic";
+
 
 export function useFormPreviewState(
   schema: FormSchema,
@@ -107,27 +107,9 @@ export function useFormPreviewState(
     }
   };
 
-  const logic = schema.logic || [];
-  const logicActions = evaluateLogic(logic, formData);
-
-  const fieldDefaults = getLogicFieldDefaults(
-    logic,
-    allFields.map((f) => f.id)
-  );
-  const fieldVisibility: Record<
-    string,
-    { visible: boolean; disabled: boolean }
-  > = { ...fieldDefaults };
-  logicActions.forEach((action) => {
-    if (action.target && fieldVisibility[action.target]) {
-      if (action.type === "hide")
-        fieldVisibility[action.target].visible = false;
-      if (action.type === "show") fieldVisibility[action.target].visible = true;
-      if (action.type === "disable")
-        fieldVisibility[action.target].disabled = true;
-      if (action.type === "enable")
-        fieldVisibility[action.target].disabled = false;
-    }
+  const fieldVisibility: Record<string, { visible: boolean; disabled: boolean }> = {};
+  allFields.forEach((f) => {
+    fieldVisibility[f.id] = { visible: true, disabled: false };
   });
 
   return {

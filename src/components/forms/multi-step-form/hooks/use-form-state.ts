@@ -4,8 +4,7 @@ import { usePrepopulation } from "@/hooks/prepopulation/usePrepopulation";
 import { toast } from "@/hooks/use-toast";
 
 import type { FormBlock, FormField, FormSchema } from "@/lib/database";
-import type { LogicAction } from "@/lib/forms/logic";
-import { evaluateLogic } from "@/lib/forms/logic";
+
 import type { FormActions, FormState } from "../types";
 import { submitForm } from "../utils/form-utils";
 
@@ -217,8 +216,7 @@ export const useFormState = (
     }
   }, [formData, currentStep, saveProgress]);
 
-  const logic = schema.logic || [];
-  const logicActions = evaluateLogic(logic, formData);
+  const logicActions: any[] = [];
 
   const fieldVisibility: Record<
     string,
@@ -231,7 +229,7 @@ export const useFormState = (
   });
   const logicMessages: string[] = [];
 
-  const actionsByField: Record<string, LogicAction[]> = {};
+  const actionsByField: Record<string, any[]> = {};
   logicActions.forEach((action) => {
     if (action.target) {
       if (!actionsByField[action.target]) actionsByField[action.target] = [];

@@ -1,6 +1,5 @@
-import { Settings, Zap } from "lucide-react";
+import { } from "lucide-react";
 import React from "react";
-import type { FormLogic } from "@/components/form-builder/logic-builder/types";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -12,7 +11,7 @@ import { BlockManager } from "../../block-manager";
 import { FieldPalette } from "../../field-palette";
 import { FieldSettingsPanel } from "../../field-settings-panel";
 import { FormPreview } from "../../form-preview";
-import { LogicBuilderPanel } from "../../logic-builder";
+// Logic builder removed
 
 import { PANEL_SIZES } from "../constants";
 
@@ -38,14 +37,7 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
   onStepSelect,
   onLogicChange,
 }) => {
-  const [activeTab, setActiveTab] = React.useState("field-settings");
-  const tabItems = [
-    { id: "field-settings", label: "Field Settings", icon: <Settings /> },
-    { id: "logic-builder", label: "Logic Builder", icon: <Zap /> },
-  ];
-  const handleLogicChange = (logic: FormLogic) => {
-    if (onLogicChange) onLogicChange(logic);
-  };
+  // Logic builder and tabs removed
   const allFields = getAllFields(formSchema);
 
   const handleSchemaUpdate = (updatedSchema: FormSchema) => {
@@ -126,24 +118,12 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
         minSize={PANEL_SIZES.RIGHT_PANEL.min}
       >
         <div className="flex h-full flex-col">
-          {formSchema.settings.multiStep ? (
-            <FieldSettingsPanel
-              field={selectedField}
-              onClose={() => onFieldSelect(null)}
-              onFieldUpdate={onFieldUpdate}
-            />
-          ) : (
-            <FieldSettingsPanel
-              field={selectedField}
-              onClose={() => onFieldSelect(null)}
-              onFieldUpdate={onFieldUpdate}
-            />
-          )}
-          <LogicBuilderPanel
-            fields={allFields}
-            logic={formSchema.logic || []}
-            onLogicChange={handleLogicChange}
+          <FieldSettingsPanel
+            field={selectedField}
+            onClose={() => onFieldSelect(null)}
+            onFieldUpdate={onFieldUpdate}
           />
+          {/* Logic builder removed */}
         </div>
       </ResizablePanel>
     </ResizablePanelGroup>
