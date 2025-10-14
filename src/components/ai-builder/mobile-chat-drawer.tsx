@@ -25,8 +25,8 @@ export function MobileChatDrawer({
   return (
     <Drawer onOpenChange={onOpenChange} open={isOpen}>
       <DrawerContent
-        id={drawerId}
         className="w-full max-w-full rounded-t-2xl border-t"
+        id={drawerId}
       >
         <DrawerHeader className="sticky top-0 z-10 border-b">
           <DrawerTitle className="font-semibold text-base">

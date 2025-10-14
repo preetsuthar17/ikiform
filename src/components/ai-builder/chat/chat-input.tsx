@@ -91,11 +91,9 @@ export function ChatInput({
         {/** Mobile: larger 44px target */}
         <Button
           aria-label="Send message"
-          className={
-            `absolute right-2 transition-all duration-200 ease-out md:hidden ${
-              isMultiline && hasText ? "bottom-2" : "top-1/2 -translate-y-1/2"
-            }`
-          }
+          className={`absolute right-2 transition-all duration-200 ease-out md:hidden ${
+            isMultiline && hasText ? "bottom-2" : "-translate-y-1/2 top-1/2"
+          }`}
           disabled={isLoading || !input.trim()}
           loading={isLoading}
           size="icon-lg"
@@ -107,11 +105,9 @@ export function ChatInput({
         {/** Desktop/tablet */}
         <Button
           aria-label="Send message"
-          className={
-            `absolute right-3 hidden transition-all duration-200 ease-out md:inline-flex ${
-              isMultiline && hasText ? "bottom-2" : "top-1/2 -translate-y-1/2"
-            }`
-          }
+          className={`absolute right-3 hidden transition-all duration-200 ease-out md:inline-flex ${
+            isMultiline && hasText ? "bottom-2" : "-translate-y-1/2 top-1/2"
+          }`}
           disabled={isLoading || !input.trim()}
           loading={isLoading}
           size="icon"

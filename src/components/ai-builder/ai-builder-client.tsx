@@ -130,21 +130,24 @@ export function AIBuilderClient() {
       user={user}
     >
       <div
+        className="flex h-screen w-full flex-col gap-4 bg-background motion-reduce:animate-none motion-reduce:transition-none md:flex-row"
         id="main-content"
         role="main"
+        style={{
+          touchAction: "manipulation",
+          WebkitTapHighlightColor: "transparent",
+        }}
         tabIndex={-1}
-        className="flex h-screen w-full flex-col gap-4 bg-background md:flex-row motion-reduce:transition-none motion-reduce:animate-none"
-        style={{ touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}
       >
         {}
         <div className="-translate-x-1/2 fixed bottom-4 left-1/2 z-50 w-full max-w-[90%] md:hidden">
           <Button
+            aria-controls="mobile-chat-drawer"
+            aria-expanded={chatDrawerOpen}
+            aria-haspopup="dialog"
             className="w-full rounded-2xl"
             onClick={() => setChatDrawerOpen(true)}
             size="lg"
-            aria-haspopup="dialog"
-            aria-expanded={chatDrawerOpen}
-            aria-controls="mobile-chat-drawer"
           >
             Create Form with Kiko
           </Button>
@@ -195,15 +198,15 @@ export function AIBuilderClient() {
         </div>
 
         <div
+          aria-atomic="true"
+          aria-live="assertive"
+          className="sr-only"
           ref={errorLiveRegionRef}
           tabIndex={-1}
-          aria-live="assertive"
-          aria-atomic="true"
-          className="sr-only"
         >
           {streamError ? `Error: ${streamError}` : ""}
         </div>
-        <div aria-live="polite" aria-atomic="true" className="sr-only">
+        <div aria-atomic="true" aria-live="polite" className="sr-only">
           {isStreaming ? "Generating response…" : isLoading ? "Loading…" : ""}
         </div>
 

@@ -175,7 +175,7 @@ const AiFormBuilderPreview = () => {
                     filter: shown ? "none" : "blur(2px)",
                   }}
                   aria-hidden={!shown}
-                  className={"flex flex-col gap-0.5 transition-all rounded-md"}
+                  className={"flex flex-col gap-0.5 rounded-md transition-all"}
                   initial={false}
                   key={idx}
                   transition={{

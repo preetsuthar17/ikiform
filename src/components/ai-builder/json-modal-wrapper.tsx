@@ -1,5 +1,4 @@
 import { lazy, Suspense } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
 import type { FormSchema } from "@/lib/ai-builder/types";
 
 const JsonModalLazy = lazy(() =>

@@ -49,9 +49,9 @@ export function MobileChatDrawerWrapper({
       }
     >
       <MobileChatDrawerLazy
+        drawerId={drawerId}
         isOpen={isOpen}
         onOpenChange={onOpenChange}
-        drawerId={drawerId}
         {...chatPanelProps}
       />
     </Suspense>
