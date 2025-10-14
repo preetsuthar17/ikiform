@@ -34,8 +34,6 @@ const initializeFormData = (fields: FormField[]): Record<string, any> => {
   return formData;
 };
 
-
-
 export function useFormPreviewState(
   schema: FormSchema,
   selectedBlockId?: string | null
@@ -107,7 +105,10 @@ export function useFormPreviewState(
     }
   };
 
-  const fieldVisibility: Record<string, { visible: boolean; disabled: boolean }> = {};
+  const fieldVisibility: Record<
+    string,
+    { visible: boolean; disabled: boolean }
+  > = {};
   allFields.forEach((f) => {
     fieldVisibility[f.id] = { visible: true, disabled: false };
   });
