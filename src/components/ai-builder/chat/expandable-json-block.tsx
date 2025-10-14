@@ -90,7 +90,7 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
           className="flex items-center gap-1"
           onClick={() => setExpanded((e) => !e)}
           size="sm"
-          variant="ghost"
+          variant="outline"
         >
           {expanded ? (
             <ChevronUp className="h-4 w-4" />

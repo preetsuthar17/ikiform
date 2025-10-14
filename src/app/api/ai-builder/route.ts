@@ -181,17 +181,46 @@ async function streamAiResponse({
 
   let aiResponse = "";
   const encoder = new TextEncoder();
+  const signal: AbortSignal | undefined = (req as any)?.signal;
 
   const responseStream = new ReadableStream({
     async start(controller) {
+      let isClosed = false;
+
+      const abort = () => {
+        if (!isClosed) {
+          try {
+            controller.close();
+          } catch {}
+          isClosed = true;
+        }
+      };
+
+      let abortListener: (() => void) | undefined;
+      if (signal) {
+        if (signal.aborted) {
+          abort();
+          return;
+        }
+        abortListener = abort;
+        signal.addEventListener("abort", abortListener, { once: true });
+      }
+
       try {
         for await (const chunk of stream.textStream) {
+          if (isClosed || (signal && signal.aborted)) break;
           aiResponse += chunk;
 
-          controller.enqueue(encoder.encode(chunk));
+          if (!isClosed) {
+            try {
+              controller.enqueue(encoder.encode(chunk));
+            } catch {
+              isClosed = true;
+            }
+          }
         }
 
-        if (aiResponse.trim()) {
+        if (!isClosed && aiResponse.trim()) {
           saveMessageAsync(user.id, sessionId, "assistant", aiResponse, {
             timestamp: new Date().toISOString(),
             model: modelName,
@@ -200,10 +229,22 @@ async function streamAiResponse({
           });
         }
 
-        controller.close();
+        if (!isClosed) {
+          controller.close();
+          isClosed = true;
+        }
       } catch (error) {
         console.error("Groq streaming error:", error);
-        controller.error(error);
+        if (!isClosed) {
+          controller.error(error as any);
+          isClosed = true;
+        }
+      } finally {
+        if (signal && abortListener) {
+          try {
+            signal.removeEventListener("abort", abortListener);
+          } catch {}
+        }
       }
     },
   });

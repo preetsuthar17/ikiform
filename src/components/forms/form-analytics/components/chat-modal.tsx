@@ -2,7 +2,6 @@ import { Bot } from "lucide-react";
 import type React from "react";
 import {
   Drawer,
-  DrawerCloseButton,
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
@@ -62,7 +61,6 @@ export const ChatModal: React.FC<ChatModalProps> = ({
               <Bot className="h-4 w-4 text-primary" />
               <DrawerTitle>Kiko</DrawerTitle>
             </div>
-            <DrawerCloseButton />
             <DrawerDescription className="sr-only">
               Chat with AI about your form analytics
             </DrawerDescription>

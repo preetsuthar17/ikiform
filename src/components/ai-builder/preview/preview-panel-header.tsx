@@ -24,6 +24,10 @@ export function PreviewPanelHeader({
   onUseForm,
   isMobile = false,
 }: PreviewPanelHeaderProps) {
+  if (!forms || forms.length === 0) {
+    return null;
+  }
+
   if (isMobile) {
     return (
       <>

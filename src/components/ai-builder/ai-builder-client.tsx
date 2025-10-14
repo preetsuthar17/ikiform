@@ -11,6 +11,8 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
 import { useAIBuilder } from "@/hooks/ai-builder/use-ai-builder";
 import { useAuth } from "@/hooks/use-auth";
 import { usePremiumStatus } from "@/hooks/use-premium-status";
@@ -135,24 +137,23 @@ export function AIBuilderClient() {
         {}
         <div className="hidden h-full w-full md:flex">
           <ResizablePanelGroup direction="horizontal">
-            <ResizablePanel
-              border="right"
-              defaultSize={20}
-              maxSize={30}
-              minSize={15}
-            >
-              <ChatPanel {...chatPanelProps} />
+            <ResizablePanel defaultSize={20} maxSize={30} minSize={15}>
+              <div className="h-full w-full">
+                <ChatPanel {...chatPanelProps} />
+              </div>
             </ResizablePanel>
             <ResizableHandle />
             <ResizablePanel defaultSize={80}>
-              <PreviewPanel
-                activeForm={activeForm}
-                activeFormId={activeFormId}
-                forms={forms}
-                router={router}
-                setActiveFormId={setActiveFormId}
-                setShowJsonModal={setShowJsonModal}
-              />
+              <ScrollArea className="h-full">
+                <PreviewPanel
+                  activeForm={activeForm}
+                  activeFormId={activeFormId}
+                  forms={forms}
+                  router={router}
+                  setActiveFormId={setActiveFormId}
+                  setShowJsonModal={setShowJsonModal}
+                />
+              </ScrollArea>
             </ResizablePanel>
           </ResizablePanelGroup>
         </div>
@@ -165,15 +166,18 @@ export function AIBuilderClient() {
         />
 
         {}
-        <div className="flex h-full flex-1 flex-col md:hidden">
-          <PreviewPanel
-            activeForm={activeForm}
-            activeFormId={activeFormId}
-            forms={forms}
-            router={router}
-            setActiveFormId={setActiveFormId}
-            setShowJsonModal={setShowJsonModal}
-          />
+        <div className="flex h-full min-h-0 flex-1 flex-col md:hidden">
+          <Separator />
+          <ScrollArea className="min-h-0 flex-1">
+            <PreviewPanel
+              activeForm={activeForm}
+              activeFormId={activeFormId}
+              forms={forms}
+              router={router}
+              setActiveFormId={setActiveFormId}
+              setShowJsonModal={setShowJsonModal}
+            />
+          </ScrollArea>
         </div>
 
         <JsonModalWrapper
