@@ -203,15 +203,18 @@ export function FormBuilderHeaderSkeleton() {
   return (
     <header
       aria-busy="true"
-      role="status"
       className="z-20 flex-shrink-0 border-border border-b bg-card px-4 py-3 md:py-4"
+      role="status"
     >
-      <span className="sr-only" aria-live="polite">
+      <span aria-live="polite" className="sr-only">
         Loading form builder header…
       </span>
       <div className="flex h-full flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-0">
         <div className="flex items-center gap-3 md:gap-4">
-          <h1 aria-hidden="true" className="absolute font-semibold text-xl opacity-0">
+          <h1
+            aria-hidden="true"
+            className="absolute font-semibold text-xl opacity-0"
+          >
             Form Builder
           </h1>
           <div className="flex items-center gap-2 md:gap-3">
@@ -225,7 +228,10 @@ export function FormBuilderHeaderSkeleton() {
         </div>
 
         {/* Mobile actions (match structure: dropdown + buttons in a scroll area) */}
-        <nav aria-label="Form builder actions" className="relative w-full md:hidden">
+        <nav
+          aria-label="Form builder actions"
+          className="relative w-full md:hidden"
+        >
           <div className="w-full">
             <div className="flex items-center gap-2 pb-2">
               <Skeleton className="h-8 w-8" />
@@ -236,7 +242,10 @@ export function FormBuilderHeaderSkeleton() {
         </nav>
 
         {/* Desktop actions */}
-        <nav aria-label="Form builder actions" className="hidden items-center gap-3 md:flex">
+        <nav
+          aria-label="Form builder actions"
+          className="hidden items-center gap-3 md:flex"
+        >
           <div className="flex items-center gap-2">
             <Skeleton className="h-9 w-28" />
             <Skeleton className="h-9 w-24" />

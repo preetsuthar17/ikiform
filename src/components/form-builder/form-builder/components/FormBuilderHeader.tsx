@@ -1,10 +1,9 @@
+import { AnimatePresence, motion } from "framer-motion";
 import {
   BarChart3,
   Code,
   EyeOff,
-  FileText,
   Globe,
-  Layers,
   MoreHorizontal,
   Save,
   Settings as SettingsIcon,
@@ -13,11 +12,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import type React from "react";
-import { AnimatePresence, motion } from "framer-motion";
-
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Switch } from "@/components/ui/switch";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,17 +20,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Switch } from "@/components/ui/switch";
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-
 import { FORM_BUILDER_CONSTANTS } from "../constants";
-
 import type { FormBuilderHeaderProps } from "../types";
-import { Loader } from "@/components/ui";
 
 export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
   formSchema,
@@ -67,7 +60,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
           >
             Form Builder
           </h1>
-          <div className="flex items-center gap-2 md:gap-3 px-2">
+          <div className="flex items-center gap-2 px-2 md:gap-3">
             <Button
               asChild
               className="font-medium text-xs md:text-sm"
@@ -81,7 +74,11 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               {fieldCount} field{fieldCount !== 1 ? "s" : ""}
             </div>
             {autoSaving && (
-              <div aria-live="polite" role="status" className="flex items-center gap-1 text-muted-foreground text-xs">
+              <div
+                aria-live="polite"
+                className="flex items-center gap-1 text-muted-foreground text-xs"
+                role="status"
+              >
                 <div className="h-1.5 w-1.5 animate-pulse rounded-2xl bg-primary" />
                 <span>Saving</span>
               </div>
@@ -89,13 +86,19 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
           </div>
         </div>
 
-        <nav aria-label="Form builder actions" className="relative w-full md:hidden px-2">
-        
+        <nav
+          aria-label="Form builder actions"
+          className="relative w-full px-2 md:hidden"
+        >
           <ScrollArea className="w-full">
             <div className="flex items-center justify-start gap-2">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button aria-label="More actions" size="icon" variant="outline">
+                  <Button
+                    aria-label="More actions"
+                    size="icon"
+                    variant="outline"
+                  >
                     <MoreHorizontal className="h-3 w-3" />
                   </Button>
                 </DropdownMenuTrigger>
@@ -110,7 +113,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
                       />
                     </div>
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator/>
+                  <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={onJsonView}>
                     <Code className="size-4" /> View JSON
                   </DropdownMenuItem>
@@ -129,10 +132,10 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               </DropdownMenu>
 
               <Button
-                onClick={onSettings}
-                variant="outline"
                 aria-label="Settings"
+                onClick={onSettings}
                 size="icon"
+                variant="outline"
               >
                 <SettingsIcon className="size-4" />
               </Button>
@@ -140,10 +143,6 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
-                    disabled={!formId || publishing}
-                    onClick={onPublish}
-                    className="flex items-center justify-center gap-2"
-                    variant={isPublished ? "secondary" : "warning"}
                     aria-label={
                       isPublished
                         ? publishing
@@ -153,28 +152,35 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
                           ? "Publishing..."
                           : "Publish"
                     }
+                    className="flex items-center justify-center gap-2"
+                    disabled={!formId || publishing}
+                    onClick={onPublish}
+                    variant={isPublished ? "secondary" : "warning"}
                   >
-                    <span className="relative inline-flex size-4 items-center justify-center" aria-hidden>
-                      <AnimatePresence mode="wait" initial={false}>
+                    <span
+                      aria-hidden
+                      className="relative inline-flex size-4 items-center justify-center"
+                    >
+                      <AnimatePresence initial={false} mode="wait">
                         {isPublished ? (
                           <motion.span
-                            key="published"
-                            initial={{ scale: 0.85, opacity: 0, rotate: -8 }}
                             animate={{ scale: 1, opacity: 1, rotate: 0 }}
-                            exit={{ scale: 0.85, opacity: 0, rotate: 8 }}
-                            transition={{ duration: 0.10, ease: "easeOut" }}
                             className="absolute inset-0 grid place-items-center"
+                            exit={{ scale: 0.85, opacity: 0, rotate: 8 }}
+                            initial={{ scale: 0.85, opacity: 0, rotate: -8 }}
+                            key="published"
+                            transition={{ duration: 0.1, ease: "easeOut" }}
                           >
                             <Globe className="size-4" />
                           </motion.span>
                         ) : (
                           <motion.span
-                            key="unpublished"
-                            initial={{ scale: 0.85, opacity: 0, rotate: 8 }}
                             animate={{ scale: 1, opacity: 1, rotate: 0 }}
-                            exit={{ scale: 0.85, opacity: 0, rotate: -8 }}
-                            transition={{ duration: 0.10, ease: "easeOut" }}
                             className="absolute inset-0 grid place-items-center"
+                            exit={{ scale: 0.85, opacity: 0, rotate: -8 }}
+                            initial={{ scale: 0.85, opacity: 0, rotate: 8 }}
+                            key="unpublished"
+                            transition={{ duration: 0.1, ease: "easeOut" }}
                           >
                             <EyeOff className="size-4" />
                           </motion.span>
@@ -192,7 +198,11 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
                     </span>
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent side="bottom" align="center" className="font-medium">
+                <TooltipContent
+                  align="center"
+                  className="font-medium"
+                  side="bottom"
+                >
                   {publishing
                     ? isPublished
                       ? "Unpublishing.."
@@ -202,12 +212,8 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
                       : "Publish form"}
                 </TooltipContent>
               </Tooltip>
-              
-              <Button
-                disabled={saving}
-                loading={saving}
-                onClick={onSave}
-              >
+
+              <Button disabled={saving} loading={saving} onClick={onSave}>
                 {!saving && <Save className="h-3 w-3" />}
                 {saving ? "Saving" : "Save Form"}
               </Button>
@@ -215,7 +221,10 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
           </ScrollArea>
         </nav>
 
-        <nav aria-label="Form builder actions" className="hidden items-center gap-2 md:flex">
+        <nav
+          aria-label="Form builder actions"
+          className="hidden items-center gap-2 md:flex"
+        >
           <div className="flex items-center gap-2">
             <Button disabled={!formId} onClick={onAnalytics} variant="outline">
               <BarChart3 className="size-4 shrink-0" />
@@ -229,46 +238,50 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               <SettingsIcon className="size-4 shrink-0" />
               <span className="text-sm">Settings</span>
             </Button>
-                <DropdownMenu>
-            <Tooltip>
-              <TooltipTrigger asChild>
+            <DropdownMenu>
+              <Tooltip>
+                <TooltipTrigger asChild>
                   <DropdownMenuTrigger asChild>
-                    <Button aria-label="More actions" size="icon" variant="outline">
+                    <Button
+                      aria-label="More actions"
+                      size="icon"
+                      variant="outline"
+                    >
                       <MoreHorizontal className="size-4" />
                     </Button>
                   </DropdownMenuTrigger>
-              </TooltipTrigger>
-              <TooltipContent side="bottom" align="center" className="font-medium">
-                More actions
-              </TooltipContent>
-            </Tooltip>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={onJsonView}>
-                      <Code className="size-4.5" />
-                      <span className="text-sm">View JSON</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator/>
-                    <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                      <div className="flex w-full items-center justify-between gap-4">
-                        <span className="font-medium">Multi-step form</span>
-                        <Switch
-                          aria-label="Toggle multi-step mode"
-                          checked={formSchema.settings.multiStep}
-                          onCheckedChange={() => onModeToggle()}
-                          />
-                      </div>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                          </DropdownMenu>
+                </TooltipTrigger>
+                <TooltipContent
+                  align="center"
+                  className="font-medium"
+                  side="bottom"
+                >
+                  More actions
+                </TooltipContent>
+              </Tooltip>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={onJsonView}>
+                  <Code className="size-4.5" />
+                  <span className="text-sm">View JSON</span>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                  <div className="flex w-full items-center justify-between gap-4">
+                    <span className="font-medium">Multi-step form</span>
+                    <Switch
+                      aria-label="Toggle multi-step mode"
+                      checked={formSchema.settings.multiStep}
+                      onCheckedChange={() => onModeToggle()}
+                    />
+                  </div>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
-                disabled={!formId || publishing}
-                onClick={onPublish}
-                size={"icon"}
-                variant={isPublished ? "secondary" : "warning"}
                 aria-label={
                   isPublished
                     ? publishing
@@ -278,28 +291,35 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
                       ? "Publishing..."
                       : "Publish"
                 }
+                disabled={!formId || publishing}
+                onClick={onPublish}
+                size={"icon"}
+                variant={isPublished ? "secondary" : "warning"}
               >
-                <span className="relative inline-flex size-4 items-center justify-center" aria-hidden>
-                  <AnimatePresence mode="wait" initial={false}>
+                <span
+                  aria-hidden
+                  className="relative inline-flex size-4 items-center justify-center"
+                >
+                  <AnimatePresence initial={false} mode="wait">
                     {isPublished ? (
                       <motion.span
-                        key="published"
-                        initial={{ scale: 0.85, opacity: 0, rotate: -8 }}
                         animate={{ scale: 1, opacity: 1, rotate: 0 }}
-                        exit={{ scale: 0.85, opacity: 0, rotate: 8 }}
-                        transition={{ duration: 0.10, ease: "easeOut" }}
                         className="absolute inset-0 grid place-items-center"
+                        exit={{ scale: 0.85, opacity: 0, rotate: 8 }}
+                        initial={{ scale: 0.85, opacity: 0, rotate: -8 }}
+                        key="published"
+                        transition={{ duration: 0.1, ease: "easeOut" }}
                       >
                         <Globe className="size-4" />
                       </motion.span>
                     ) : (
                       <motion.span
-                        key="unpublished"
-                        initial={{ scale: 0.85, opacity: 0, rotate: 8 }}
                         animate={{ scale: 1, opacity: 1, rotate: 0 }}
-                        exit={{ scale: 0.85, opacity: 0, rotate: -8 }}
-                        transition={{ duration: 0.10, ease: "easeOut" }}
                         className="absolute inset-0 grid place-items-center"
+                        exit={{ scale: 0.85, opacity: 0, rotate: -8 }}
+                        initial={{ scale: 0.85, opacity: 0, rotate: 8 }}
+                        key="unpublished"
+                        transition={{ duration: 0.1, ease: "easeOut" }}
                       >
                         <EyeOff className="size-4" />
                       </motion.span>
@@ -317,7 +337,11 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
                 </span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent side="bottom" align="center" className="font-medium">
+            <TooltipContent
+              align="center"
+              className="font-medium"
+              side="bottom"
+            >
               {publishing
                 ? isPublished
                   ? "Unpublishing..."
