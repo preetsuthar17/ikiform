@@ -171,10 +171,12 @@ export const FormCreationWizard: React.FC<FormCreationWizardProps> = ({
   );
 
   return (
-    <Dialog onOpenChange={handleClose} open={isOpen} >
-      <DialogContent className="flex max-w-6xl w-[95%] flex-col gap-6">
+    <Dialog onOpenChange={handleClose} open={isOpen}>
+      <DialogContent className="flex w-[95%] max-w-6xl flex-col gap-6">
         <DialogHeader>
-          <DialogTitle className="w-fit text-left">Create a New Form</DialogTitle>
+          <DialogTitle className="w-fit text-left">
+            Create a New Form
+          </DialogTitle>
         </DialogHeader>
 
         <div className="flex flex-col gap-6 p-3">

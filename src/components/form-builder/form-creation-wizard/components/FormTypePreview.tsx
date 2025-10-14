@@ -2,7 +2,7 @@ import type React from "react";
 
 import type { FormTypePreviewProps } from "../types";
 
-export const  FormTypePreview: React.FC<FormTypePreviewProps> = ({ type }) => {
+export const FormTypePreview: React.FC<FormTypePreviewProps> = ({ type }) => {
   if (type === "single") {
     return (
       <div className="flex flex-col gap-3 rounded-2xl bg-muted/20 p-4">
