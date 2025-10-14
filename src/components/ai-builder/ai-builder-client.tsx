@@ -3,7 +3,7 @@
 import { Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -30,6 +30,7 @@ export function AIBuilderClient() {
   const { hasPremium, checkingPremium: checking } = usePremiumStatus(user);
   const [chatDrawerOpen, setChatDrawerOpen] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
+  const errorLiveRegionRef = useRef<HTMLDivElement | null>(null);
 
   const {
     messages,
@@ -77,6 +78,12 @@ export function AIBuilderClient() {
     }
   }, [streamedContent, isStreaming, scrollStreamingToBottom]);
 
+  useEffect(() => {
+    if (streamError && errorLiveRegionRef.current) {
+      errorLiveRegionRef.current.focus({ preventScroll: true });
+    }
+  }, [streamError]);
+
   const chatPanelProps = useMemo(
     () => ({
       messages,
@@ -122,13 +129,22 @@ export function AIBuilderClient() {
       hasPremium={hasPremium}
       user={user}
     >
-      <div className="flex h-screen w-full flex-col gap-4 bg-background md:flex-row">
+      <div
+        id="main-content"
+        role="main"
+        tabIndex={-1}
+        className="flex h-screen w-full flex-col gap-4 bg-background md:flex-row motion-reduce:transition-none motion-reduce:animate-none"
+        style={{ touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}
+      >
         {}
         <div className="-translate-x-1/2 fixed bottom-4 left-1/2 z-50 w-full max-w-[90%] md:hidden">
           <Button
             className="w-full rounded-2xl"
             onClick={() => setChatDrawerOpen(true)}
             size="lg"
+            aria-haspopup="dialog"
+            aria-expanded={chatDrawerOpen}
+            aria-controls="mobile-chat-drawer"
           >
             Create Form with Kiko
           </Button>
@@ -164,11 +180,9 @@ export function AIBuilderClient() {
           onOpenChange={setChatDrawerOpen}
           {...chatPanelProps}
         />
-
-        {}
         <div className="flex h-full min-h-0 flex-1 flex-col md:hidden">
           <Separator />
-          <ScrollArea className="min-h-0 flex-1">
+          <ScrollArea className="min-h-0 flex-1 pb-20">
             <PreviewPanel
               activeForm={activeForm}
               activeFormId={activeFormId}
@@ -178,6 +192,19 @@ export function AIBuilderClient() {
               setShowJsonModal={setShowJsonModal}
             />
           </ScrollArea>
+        </div>
+
+        <div
+          ref={errorLiveRegionRef}
+          tabIndex={-1}
+          aria-live="assertive"
+          aria-atomic="true"
+          className="sr-only"
+        >
+          {streamError ? `Error: ${streamError}` : ""}
+        </div>
+        <div aria-live="polite" aria-atomic="true" className="sr-only">
+          {isStreaming ? "Generating response…" : isLoading ? "Loading…" : ""}
         </div>
 
         <JsonModalWrapper

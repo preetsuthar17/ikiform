@@ -1,7 +1,7 @@
 import { Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -29,6 +29,7 @@ export function AIBuilder() {
   const [chatDrawerOpen, setChatDrawerOpen] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
   const [mounted, setMounted] = useState(false);
+  const errorLiveRegionRef = useRef<HTMLDivElement | null>(null);
 
   const {
     messages,
@@ -62,6 +63,12 @@ export function AIBuilder() {
     setMounted(true);
   }, []);
 
+  useEffect(() => {
+    if (streamError && errorLiveRegionRef.current) {
+      errorLiveRegionRef.current.focus({ preventScroll: true });
+    }
+  }, [streamError]);
+
   const chatPanelProps = {
     messages,
     isLoading,
@@ -88,13 +95,22 @@ export function AIBuilder() {
       hasPremium={hasPremium}
       user={user}
     >
-      <div className="flex h-screen w-full flex-col gap-4 bg-background md:flex-row">
+      <div
+        id="main-content"
+        role="main"
+        tabIndex={-1}
+        className="flex h-screen w-full flex-col gap-4 bg-background md:flex-row motion-reduce:transition-none motion-reduce:animate-none"
+        style={{ touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}
+      >
         {}
         <div className="-translate-x-1/2 fixed bottom-4 left-1/2 z-50 w-full max-w-[90%] md:hidden">
           <Button
             className="w-full rounded-2xl"
             onClick={() => setChatDrawerOpen(true)}
             size="lg"
+            aria-haspopup="dialog"
+            aria-expanded={chatDrawerOpen}
+            aria-controls="mobile-chat-drawer"
           >
             Create Form with Kiko
           </Button>
@@ -124,6 +140,7 @@ export function AIBuilder() {
         <MobileChatDrawer
           isOpen={chatDrawerOpen}
           onOpenChange={setChatDrawerOpen}
+          drawerId="mobile-chat-drawer"
           {...chatPanelProps}
         />
 
@@ -137,6 +154,20 @@ export function AIBuilder() {
             setActiveFormId={setActiveFormId}
             setShowJsonModal={setShowJsonModal}
           />
+        </div>
+
+        {/** Live regions for A11y announcements */}
+        <div
+          ref={errorLiveRegionRef}
+          tabIndex={-1}
+          aria-live="assertive"
+          aria-atomic="true"
+          className="sr-only"
+        >
+          {streamError ? `Error: ${streamError}` : ""}
+        </div>
+        <div aria-live="polite" aria-atomic="true" className="sr-only">
+          {isStreaming ? "Generating response…" : isLoading ? "Loading…" : ""}
         </div>
 
         <JsonModal

@@ -71,12 +71,7 @@ export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
         <div className="flex flex-col gap-4">
           <ScrollArea className="h-[60vh] min-h-[240px] rounded-xl border bg-muted/50 p-4">
             {isLoading ? (
-              <div className="space-y-3">
-                <Skeleton className="h-4 w-40" />
-                <Skeleton className="h-4 w-11/12" />
-                <Skeleton className="h-4 w-10/12" />
-                <Skeleton className="h-4 w-9/12" />
-                <Skeleton className="h-4 w-5/12" />
+              <div className="text-xs">
                 <Skeleton className="h-64 w-full" />
               </div>
             ) : (

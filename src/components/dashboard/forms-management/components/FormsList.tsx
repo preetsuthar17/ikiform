@@ -71,7 +71,8 @@ export function FormsList({
 
           // Border logic defaults
           if (forms.length === 1) {
-            cardClass += " rounded-xl border-b-0";
+            // Single card: keep full border radius and all borders
+            cardClass += " rounded-xl";
           } else if (idx === 0) {
             cardClass += " rounded-t-xl rounded-b-none border-b-0";
           } else if (idx === forms.length - 1) {

@@ -13,16 +13,21 @@ import { ChatPanel } from "./chat/chat-panel";
 interface MobileChatDrawerProps extends ChatPanelProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
+  drawerId?: string;
 }
 
 export function MobileChatDrawer({
   isOpen,
   onOpenChange,
+  drawerId,
   ...chatPanelProps
 }: MobileChatDrawerProps) {
   return (
     <Drawer onOpenChange={onOpenChange} open={isOpen}>
-      <DrawerContent className="w-full max-w-full rounded-t-2xl border-t">
+      <DrawerContent
+        id={drawerId}
+        className="w-full max-w-full rounded-t-2xl border-t"
+      >
         <DrawerHeader className="sticky top-0 z-10 border-b">
           <DrawerTitle className="font-semibold text-base">
             Kiko AI Chat

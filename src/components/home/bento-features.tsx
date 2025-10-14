@@ -163,7 +163,7 @@ const AiFormBuilderPreview = () => {
             />
           </motion.div>
           {/* Animate fields sequentially */}
-          <motion.div className="relative mt-2 flex flex-col gap-2">
+          <motion.div className="relative mt-2 flex flex-col gap-2 rounded-m">
             {[1, 2, 3].map((i, idx) => {
               const step = AI_FORM_STEPS[i];
               const shown = currentStep > i - 1;
@@ -175,7 +175,7 @@ const AiFormBuilderPreview = () => {
                     filter: shown ? "none" : "blur(2px)",
                   }}
                   aria-hidden={!shown}
-                  className={"flex flex-col gap-0.5 transition-all"}
+                  className={"flex flex-col gap-0.5 transition-all rounded-md"}
                   initial={false}
                   key={idx}
                   transition={{
@@ -189,7 +189,7 @@ const AiFormBuilderPreview = () => {
                   </span>
                   <div
                     className={`
-                      ${step.height || "h-10"} ${step.width}rounded-md border border-border bg-card transition-all`}
+                      ${step.height || "h-10"} ${step.width} w-full rounded-md border border-border bg-card transition-all`}
                   />
                 </motion.div>
               );

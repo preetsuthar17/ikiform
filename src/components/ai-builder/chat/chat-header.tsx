@@ -12,7 +12,7 @@ export function ChatHeader() {
             aria-label="Back to form builder"
             asChild
             size="icon"
-            variant="ghost"
+            variant="outline"
           >
             <Link href="/form-builder">
               <ArrowLeft aria-hidden className="h-4 w-4" />
