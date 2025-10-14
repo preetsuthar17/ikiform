@@ -55,7 +55,6 @@ export * from "./slider";
 export * from "./social-media-icons";
 export * from "./suspense-wrapper";
 export * from "./switch";
-export * from "./table";
 export * from "./tabs";
 export * from "./tag-input";
 export * from "./textarea";

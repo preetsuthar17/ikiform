@@ -1,18 +1,19 @@
 "use client";
 
-import { Check, Copy, Download, Globe, QrCode, X } from "lucide-react";
+import { Check, Copy, Download, Globe, QrCode, Share } from "lucide-react";
 
 import QRCode from "qrcode";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalTitle,
-} from "@/components/ui/modal";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 
 import { toast } from "@/hooks/use-toast";
 
@@ -161,119 +162,128 @@ export function ShareFormModal({
   };
 
   return (
-    <Modal onOpenChange={onClose} open={isOpen}>
-      <ModalContent className="flex max-w-lg flex-col gap-6 rounded-4xl">
-        <ModalHeader className="text-left">
-          <ModalTitle className="flex items-center justify-start gap-2 text-left">
-            Share Public Form URL
-          </ModalTitle>
-        </ModalHeader>
+    <Dialog onOpenChange={onClose} open={isOpen}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader className="flex flex-col gap-5">
+          <DialogTitle className="flex items-center gap-2">
+            <Share aria-hidden="true" className="size-5" />
+            Share Form
+          </DialogTitle>
+          <DialogDescription>
+            {isPublished
+              ? "Share your form with others using the link or QR code below"
+              : "Publish your form to make it shareable with others"}
+          </DialogDescription>
+        </DialogHeader>
 
-        <div className="flex w-full flex-col gap-6 px-2 sm:px-4">
+        <div className="space-y-6">
           {isPublished ? (
-            <div className="flex w-full flex-col gap-6">
-              {showQr && (
-                <div className="flex w-full flex-col gap-4 rounded-3xl border border-border/50 bg-muted/20 p-3 sm:p-4">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-medium text-sm">QR Code</h3>
-                    <Button
-                      className="h-6 w-6 p-0"
-                      onClick={handleToggleQr}
-                      size="sm"
-                      variant="ghost"
-                    >
-                      <X className="h-4 w-4" />
-                    </Button>
-                  </div>
-                  <div className="flex justify-center">
-                    <div className="relative">
-                      <div className="flex items-center justify-center rounded-lg border bg-white p-2 sm:p-4">
+            <>
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <Globe
+                    aria-hidden="true"
+                    className="h-4 w-4 text-muted-foreground"
+                  />
+                  <span className="font-medium text-sm">Share Link</span>
+                </div>
+                <div className="flex gap-2">
+                  <Input
+                    className="flex-1 font-mono text-sm"
+                    id="share-url"
+                    readOnly
+                    value={shareUrl}
+                  />
+                  <Button
+                    className="shrink-0"
+                    disabled={copying}
+                    onClick={handleCopyLink}
+                  >
+                    {copying ? (
+                      <>
+                        <Check className="h-4 w-4" />
+                        <span className="sr-only">Copied</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="h-4 w-4" />
+                        <span className="sr-only">Copy link</span>
+                      </>
+                    )}
+                  </Button>
+                </div>
+              </div>
+
+              {/* QR Code Section */}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <Button onClick={handleToggleQr} size="sm" variant="outline">
+                    <div className="flex items-center gap-2">
+                      <QrCode
+                        aria-hidden="true"
+                        className="h-4 w-4 text-muted-foreground"
+                      />
+                      <span className="font-medium text-sm">
+                        {showQr ? "Hide" : "Show"} QR Code
+                      </span>
+                    </div>
+                  </Button>
+                </div>
+
+                {showQr && (
+                  <div className="rounded-lg border bg-muted/20 p-4">
+                    <div className="flex flex-col items-center gap-3">
+                      <div className="rounded-lg border bg-white p-3">
                         {qrCodeDataUrl && !generatingQr ? (
                           <img
                             alt="QR Code for form"
-                            className="h-28 w-28 sm:h-32 sm:w-32"
+                            className="h-24 w-24"
                             src={qrCodeDataUrl}
                           />
                         ) : (
-                          <div className="flex h-28 w-28 items-center justify-center sm:h-32 sm:w-32">
+                          <div className="flex h-24 w-24 items-center justify-center">
                             {generatingQr ? (
                               <div className="flex flex-col items-center gap-2">
-                                <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                                <div className="h-5 w-5 animate-spin rounded-full border-2 border-primary border-t-transparent" />
                                 <span className="text-muted-foreground text-xs">
                                   Generating...
                                 </span>
                               </div>
                             ) : (
-                              <QrCode className="h-8 w-8 text-muted-foreground" />
+                              <QrCode className="h-6 w-6 text-muted-foreground" />
                             )}
                           </div>
                         )}
                       </div>
+                      <div className="text-center">
+                        <p className="mb-2 text-muted-foreground text-xs">
+                          Scan for easy mobile access
+                        </p>
+                        <Button
+                          className="w-full"
+                          disabled={
+                            !qrCodeDataUrl || downloading || generatingQr
+                          }
+                          onClick={handleDownloadQr}
+                          size="sm"
+                          variant="outline"
+                        >
+                          <Download className="h-4 w-4" />
+                          {downloading ? "Downloading..." : "Download QR"}
+                        </Button>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-2 text-center">
-                    <p className="text-muted-foreground text-xs">
-                      Scan for easy mobile access
-                    </p>
-                    <Button
-                      className="mx-auto w-full gap-2 sm:w-auto"
-                      disabled={!qrCodeDataUrl || downloading || generatingQr}
-                      onClick={handleDownloadQr}
-                      size="sm"
-                      variant="outline"
-                    >
-                      <Download className="h-3 w-3" />
-                      {downloading ? "Downloading..." : "Download"}
-                    </Button>
-                  </div>
-                </div>
-              )}
-              <div className="flex w-full flex-col gap-4">
-                <div className="flex w-full flex-col gap-2">
-                  <div className="flex w-full flex-col gap-2 md:flex-row">
-                    <Input
-                      className="w-full rounded-full font-mono text-sm"
-                      id="share-url"
-                      readOnly
-                      size="xl"
-                      value={shareUrl}
-                    />
-                    <Button
-                      className="w-full min-w-fit shrink-0 gap-2 rounded-full md:w-fit"
-                      disabled={copying}
-                      onClick={() => {
-                        handleCopyLink();
-                      }}
-                      size="xl"
-                    >
-                      {copying ? (
-                        <>
-                          <Check className="h-4 w-4" />
-                          <span className="text-sm">Copied</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="h-4 w-4" />
-                          <span className="text-sm">Copy Link</span>
-                        </>
-                      )}
-                    </Button>
-                  </div>
-                </div>
-                <div className="flex justify-center">
-                  <button
-                    className="text-muted-foreground text-xs underline underline-offset-2 transition-colors hover:text-foreground"
-                    onClick={handleToggleQr}
-                  >
-                    {showQr ? "Hide QR Code" : "Show QR Code"}
-                  </button>
-                </div>
+                )}
               </div>
-            </div>
+            </>
           ) : (
-            <div className="flex w-full flex-col gap-4 text-center">
-              <div className="flex flex-col items-center gap-2 rounded-lg bg-muted/50 p-3 sm:p-4">
-                <Globe className="h-8 w-8 text-muted-foreground" />
+            <div className="space-y-4 text-center">
+              <div className="rounded-lg bg-muted/50 p-6">
+                <Globe
+                  aria-hidden="true"
+                  className="mx-auto mb-3 h-12 w-12 text-muted-foreground"
+                />
                 <p className="text-muted-foreground text-sm">
                   Your form needs to be published before it can be shared
                   publicly.
@@ -282,15 +292,14 @@ export function ShareFormModal({
               <Button
                 className="w-full"
                 disabled={!formId || publishing}
-                loading={publishing}
                 onClick={handlePublish}
               >
-                {publishing ? "Publishing" : "Publish Form"}
+                {publishing ? "Publishing..." : "Publish Form"}
               </Button>
             </div>
           )}
         </div>
-      </ModalContent>
-    </Modal>
+      </DialogContent>
+    </Dialog>
   );
 }

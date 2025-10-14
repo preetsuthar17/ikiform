@@ -4,10 +4,8 @@ import {
   Eye,
   FileText,
   Globe,
-  LayoutGrid,
   RefreshCw,
   Search,
-  Table,
 } from "lucide-react";
 import type React from "react";
 import { useState } from "react";
@@ -24,10 +22,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { DataTable, type DataTableColumn } from "@/components/ui/table";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
+// import { DataTable, type DataTableColumn } from "@/components/ui/table";
+import { TabsContent } from "@/components/ui/tabs";
 
-import type { FormSubmission } from "@/lib/database";
 import type { FilterState, SubmissionsListProps } from "../types";
 import { filterSubmissions } from "../utils/analytics";
 
@@ -65,34 +62,34 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
     totalFields
   );
 
-  const tableColumns: DataTableColumn<FormSubmission>[] = [
-    {
-      key: "submitted_at",
-      header: "Date",
-      render: (value) => formatDate(value.toString()),
-    },
-    {
-      key: "submission_data",
-      header: "Form Data",
-      render: (value, row) => (
-        <div className="flex items-center gap-4">
-          <Badge variant="outline">{Object.keys(value).length} fields</Badge>
-          <Button
-            className="ml-auto"
-            onClick={(e) => {
-              e.stopPropagation();
-              onViewSubmission(row);
-            }}
-            size="sm"
-            variant="ghost"
-          >
-            <Eye className="h-4 w-4" />
-            View Details
-          </Button>
-        </div>
-      ),
-    },
-  ];
+  // const tableColumns: DataTableColumn<FormSubmission>[] = [
+  //   {
+  //     key: "submitted_at",
+  //     header: "Date",
+  //     render: (value) => formatDate(value.toString()),
+  //   },
+  //   {
+  //     key: "submission_data",
+  //     header: "Form Data",
+  //     render: (value, row) => (
+  //       <div className="flex items-center gap-4">
+  //         <Badge variant="outline">{Object.keys(value).length} fields</Badge>
+  //         <Button
+  //           className="ml-auto"
+  //           onClick={(e) => {
+  //             e.stopPropagation();
+  //             onViewSubmission(row);
+  //           }}
+  //           size="sm"
+  //           variant="ghost"
+  //         >
+  //           <Eye className="h-4 w-4" />
+  //           View Details
+  //         </Button>
+  //       </div>
+  //     ),
+  //   },
+  // ];
 
   if (loading) {
     return (
@@ -161,7 +158,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                 Export JSON
               </Button>
             </div>
-            <Tabs
+            {/* <Tabs
               className="w-auto"
               items={[
                 {
@@ -179,7 +176,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
               size="sm"
               value={activeView}
               variant="default"
-            />
+            /> */}
             <Badge className="text-xs" variant="secondary">
               {submissions.length} total
             </Badge>
@@ -505,7 +502,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
               </div>
             </TabsContent>
 
-            <TabsContent activeValue={activeView} value="table">
+            {/* <TabsContent activeValue={activeView} value="table">
               <div className="-mx-6 p-4">
                 <DataTable
                   bordered
@@ -520,7 +517,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                   variant="bordered"
                 />
               </div>
-            </TabsContent>
+            </TabsContent> */}
           </div>
         )}
       </div>

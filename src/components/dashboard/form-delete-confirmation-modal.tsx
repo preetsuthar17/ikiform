@@ -4,11 +4,13 @@ import { AlertTriangle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalTitle,
-} from "@/components/ui/modal";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 interface ConfirmationModalProps {
   open: boolean;
@@ -36,30 +38,27 @@ export function ConfirmationModal({
     onOpenChange(false);
   };
 
-  const handleCancel = () => {
-    onOpenChange(false);
-  };
-
   return (
-    <Modal onOpenChange={onOpenChange} open={open}>
-      <ModalContent className="flex max-w-md flex-col gap-3">
-        <ModalHeader>
-          <ModalTitle className="flex items-center gap-3">
+    <Dialog onOpenChange={onOpenChange} open={open}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-3">
             {variant === "destructive" && (
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-destructive/10">
-                <AlertTriangle className="h-5 w-5 text-destructive" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-destructive/10">
+                <AlertTriangle
+                  aria-hidden="true"
+                  className="h-5 w-5 text-destructive"
+                />
               </div>
             )}
             <span>{title}</span>
-          </ModalTitle>
-        </ModalHeader>
-        <div>
-          <p className="text-muted-foreground text-sm leading-relaxed">
+          </DialogTitle>
+          <DialogDescription className="text-sm leading-relaxed">
             {description}
-          </p>
-        </div>
-        <div className="flex justify-end gap-3">
-          <Button onClick={handleCancel} variant="outline">
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter className="gap-3">
+          <Button onClick={() => onOpenChange(false)} variant="outline">
             {cancelText}
           </Button>
           <Button
@@ -68,8 +67,8 @@ export function ConfirmationModal({
           >
             {confirmText}
           </Button>
-        </div>
-      </ModalContent>
-    </Modal>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

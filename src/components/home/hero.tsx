@@ -3,7 +3,6 @@
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import React, { type CSSProperties } from "react";
-import { useAuth } from "@/hooks/use-auth";
 import { Badge, Card } from "../ui";
 import { Button } from "../ui/button";
 
@@ -156,41 +155,13 @@ function HeroAsciiOceanBackground() {
   );
 }
 
-function HeroCTAs({ user, loading }: { user: unknown; loading: boolean }) {
+function HeroCTAs() {
   return (
     <div
       aria-live="polite"
       className="flex w-fit flex-wrap items-center justify-center gap-3"
     >
-      {loading ? (
-        <>
-          <div
-            aria-hidden="true"
-            className="h-11 w-56 animate-pulse rounded-full bg-muted"
-          />
-        </>
-      ) : user ? (
-        <Button asChild className="rounded-full" variant="default">
-          <Link
-            className="flex h-11 w-full items-center gap-2 whitespace-nowrap font-medium md:w-56"
-            href="/dashboard"
-          >
-            Go to Dashboard{" "}
-            <svg
-              aria-hidden="true"
-              height="1em"
-              viewBox="0 0 24 24"
-              width="1em"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M9.29 6.71a.996.996 0 0 0 0 1.41L13.17 12l-3.88 3.88a.996.996 0 1 0 1.41 1.41l4.59-4.59a.996.996 0 0 0 0-1.41L10.7 6.7c-.38-.38-1.02-.38-1.41.01"
-                fill="currentColor"
-              />
-            </svg>
-          </Link>
-        </Button>
-      ) : (
+    
         <Button asChild className="rounded-full" variant="default">
           <Link
             className="flex h-11 w-full items-center gap-2 whitespace-nowrap font-medium md:w-62"
@@ -200,7 +171,6 @@ function HeroCTAs({ user, loading }: { user: unknown; loading: boolean }) {
             <ChevronRight aria-hidden="true" />
           </Link>
         </Button>
-      )}
       <Button asChild className="rounded-full" variant="outline">
         <Link
           className="flex h-11 w-full items-center gap-2 whitespace-nowrap font-medium md:w-40"
@@ -214,7 +184,6 @@ function HeroCTAs({ user, loading }: { user: unknown; loading: boolean }) {
 }
 
 export default function Hero() {
-  const { user, loading } = useAuth();
 
   return (
     <section
@@ -222,13 +191,12 @@ export default function Hero() {
       className="mx-auto flex w-full max-w-7xl flex-col"
     >
       <div
-        aria-busy={loading || undefined}
         className="relative z-20 flex h-full grow flex-col items-center gap-8 overflow-hidden border border-b-0 px-4 py-28 text-center md:px-6"
       >
         <SponsoredByBadge />
         <HeroHeading />
         <HeroSubheading />
-        <HeroCTAs loading={!!loading} user={user} />
+        <HeroCTAs/>
         <HeroAsciiOceanBackground />
       </div>
 

@@ -106,7 +106,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
         className="w-64 rounded-lg p-2 shadow-xs"
         sideOffset={8}
       >
-        <DropdownMenuLabel className="flex items-start gap-3 px-2 py-2">
+        <DropdownMenuLabel className="flex items-start gap-3 px-2 py-2 mb-2">
           <Avatar className="size-9">
             <AvatarImage
               alt={name}
@@ -123,7 +123,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          className="py-0 font-medium opacity-70 hover:opacity-100"
+          className="py-0 mt-2 font-medium opacity-70 hover:opacity-100"
           onSelect={(e) => e.preventDefault()}
         >
           <Link
@@ -134,7 +134,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem
-          className="py-0 font-medium opacity-70 hover:opacity-100"
+          className="py-0 mb-2 font-medium opacity-70 hover:opacity-100"
           onSelect={(e) => e.preventDefault()}
         >
           <Link
@@ -146,7 +146,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          className="h-10 font-medium text-destructive opacity-70 hover:opacity-100"
+          className="h-10 mt-2 font-medium text-destructive opacity-70 hover:opacity-100"
           onSelect={(e) => {
             e.preventDefault();
             void signOut();
@@ -208,7 +208,7 @@ const DrawerLinks = React.memo(function DrawerLinks({
   links: { href: string; label: string }[];
 }) {
   return (
-    <section className="flex w-full flex-col">
+    <section className="flex w-ful flex-col">
       {links.map(({ href, label }) => (
         <Link
           className="flex h-11 items-center justify-between rounded-lg opacity-70 transition-opacity hover:opacity-100"
@@ -252,7 +252,7 @@ const DrawerProfileSection = React.memo(function DrawerProfileSection({
           <div className="text-sm opacity-70">{email}</div>
         </div>
       </div>
-      <div className="mt-1 grid gap-1">
+      <div className="grid gap-1">
         <Link
           className="flex h-11 items-center rounded-lg opacity-70 transition-opacity hover:bg-accent hover:opacity-100"
           href="/dashboard"
