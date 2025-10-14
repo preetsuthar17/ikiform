@@ -1,37 +1,10 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import { FormBuilderHeaderSkeleton } from "@/components/ui/loading-skeletons";
 
 export function FormBuilderSkeleton() {
   return (
     <div className="flex h-screen w-full flex-col overflow-hidden">
-      <div className="z-20 flex-shrink-0 border-border border-b bg-card px-4 py-3 md:py-4">
-        <div className="flex h-full flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-0">
-          <div className="flex items-center gap-3 md:gap-4">
-            <div className="flex items-center gap-2 md:gap-3">
-              <Skeleton className="h-8 w-32" />
-              <Skeleton className="h-4 w-16" />
-            </div>
-          </div>
-
-          <div className="flex gap-2 md:hidden">
-            <Skeleton className="h-8 w-20" />
-            <Skeleton className="h-8 w-8" />
-            <Skeleton className="h-8 w-8" />
-            <Skeleton className="h-8 w-16" />
-            <Skeleton className="h-8 w-16" />
-            <Skeleton className="h-8 w-20" />
-          </div>
-
-          <div className="hidden items-center gap-2 md:flex">
-            <Skeleton className="h-9 w-24" />
-            <Skeleton className="h-9 w-9" />
-            <Skeleton className="h-9 w-9" />
-            <Skeleton className="h-9 w-9" />
-            <Skeleton className="h-9 w-16" />
-            <Skeleton className="h-9 w-16" />
-            <Skeleton className="h-9 w-20" />
-          </div>
-        </div>
-      </div>
+      <FormBuilderHeaderSkeleton />
 
       <div className="flex flex-1 overflow-hidden">
         <div className="w-80 flex-shrink-0 border-border border-r bg-card">

@@ -12,6 +12,8 @@ const buttonVariants = cva(
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:bg-destructive/60 dark:focus-visible:ring-destructive/40",
+        warning:
+          "bg-yellow-400/20 text-yellow-900 hover:bg-yellow-400/30 focus-visible:ring-yellow-400/20 dark:bg-yellow-300 dark:focus-visible:ring-yellow-300/40",
         outline:
           "border bg-background shadow-none hover:bg-accent hover:text-accent-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         secondary:
@@ -65,7 +67,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const content = (
       <>
-        {loading && <Loader className="text-primary-foreground" />}
+        {loading && <Loader className="text-primary-foreground" size="md" />}
         {leftIcon && !loading && leftIcon}
         {children}
         {rightIcon && !loading && rightIcon}
