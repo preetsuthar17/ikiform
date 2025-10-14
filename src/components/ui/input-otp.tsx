@@ -48,9 +48,9 @@ const inputOTPSlotVariants = cva(
       },
       position: {
         first: "rounded-l-ele border-l",
-        middle: "rounded-ele",
+        middle: "rounded-xl",
         last: "rounded-r-ele",
-        single: "rounded-ele border-l",
+        single: "rounded-xl border-l",
       },
     },
     defaultVariants: {

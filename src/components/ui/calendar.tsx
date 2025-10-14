@@ -14,7 +14,7 @@ import {
 import { cn } from "@/lib/utils";
 
 const calendarVariants = cva(
-  "relative mx-auto inline-block flex w-full max-w-sm flex-col gap-4 rounded-card border border-border bg-background",
+  "relative mx-auto inline-block flex w-full max-w-sm flex-col gap-4 rounded-2xl border border-border bg-background",
   {
     variants: {
       size: {
@@ -35,7 +35,7 @@ const calendarVariants = cva(
 );
 
 const dayVariants = cva(
-  "inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-ele text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 sm:h-9 sm:w-9",
+  "inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-xl text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 sm:h-9 sm:w-9",
   {
     variants: {
       variant: {
@@ -303,7 +303,7 @@ function Calendar({
       {}
       <div className="flex items-center justify-between">
         <button
-          className="inline-flex items-center justify-center rounded-ele p-1 transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-1.5"
+          className="inline-flex items-center justify-center rounded-xl p-1 transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-1.5"
           disabled={isAnimating}
           onClick={() => navigateMonth("prev")}
         >
@@ -370,7 +370,7 @@ function Calendar({
         </div>
 
         <button
-          className="inline-flex items-center justify-center rounded-ele p-1 transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-1.5"
+          className="inline-flex items-center justify-center rounded-xl p-1 transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-1.5"
           disabled={isAnimating}
           onClick={() => navigateMonth("next")}
         >

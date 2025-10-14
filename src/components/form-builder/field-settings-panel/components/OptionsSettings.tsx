@@ -25,7 +25,7 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
   } = require("@/components/form-builder/form-field-renderer/utils/sanitizeOptions");
 
   return (
-    <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
+    <Card className="flex flex-col gap-4 rounded-2xl bg-background p-4">
       <div className="flex items-center justify-between">
         <h3 className="font-medium text-card-foreground">Options</h3>
         <Button

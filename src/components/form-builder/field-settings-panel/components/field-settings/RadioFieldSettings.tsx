@@ -1,4 +1,3 @@
-import React from "react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,7 +17,7 @@ export function RadioFieldSettings({
   onUpdateSettings,
 }: FieldSettingsProps) {
   return (
-    <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
+    <Card className="flex flex-col gap-4 rounded-2xl bg-background p-4">
       <h3 className="font-medium text-card-foreground">Quiz Settings</h3>
 
       {/* Enable Quiz Mode */}

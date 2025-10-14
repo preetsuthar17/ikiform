@@ -4,10 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 import { Input } from "@/components/ui/input";
-import {
-  autoCompleteEmail,
-  validateEmail,
-} from "@/lib/validation/email-validation";
+import { validateEmail } from "@/lib/validation/email-validation";
 
 import type { BaseFieldProps } from "../types";
 
@@ -119,7 +116,7 @@ export function EmailInputField(props: BaseFieldProps) {
         {showAutoComplete &&
           emailSettings?.autoCompleteDomain &&
           !builderMode && (
-            <div className="absolute top-full right-0 left-0 z-10 mt-1 rounded-ele border border-border bg-accent p-2">
+            <div className="absolute top-full right-0 left-0 z-10 mt-1 rounded-xl border border-border bg-accent p-2">
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground text-sm">
                   Press Tab or click to complete:{" "}

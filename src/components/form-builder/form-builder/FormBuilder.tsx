@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 
 import React, { useCallback, useState } from "react";
-import type { FormLogic } from "@/components/form-builder/logic-builder/types";
 
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
@@ -14,7 +13,6 @@ import type { FormBlock, FormField, FormSchema } from "@/lib/database";
 
 import { formsDb } from "@/lib/database";
 import { createFieldFromType } from "@/lib/fields/field-config";
-import { Loader } from "../../ui/loader";
 import { FieldPalette } from "../field-palette";
 import { FieldSettingsPanel } from "../field-settings-panel";
 import { FormBuilderSkeleton } from "../form-builder-skeleton";
@@ -29,7 +27,6 @@ import type { FormBuilderProps } from "./types";
 import {
   addFieldToSchema,
   generateBlockId,
-  generateFieldId,
   removeDraftFromStorage,
   removeFieldFromSchema,
   updateFieldInSchema,
@@ -368,12 +365,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     }
   };
 
-  const handleLogicChange = (logic: FormLogic) => {
-    actions.setFormSchema((prev) => ({
-      ...prev,
-      logic,
-    }));
-  };
+  // Logic builder removed; no-op kept for compatibility where needed
 
   if (authLoading || state.loading) {
     return (
@@ -527,7 +519,6 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           onFieldsReorder={reorderFields}
           onFieldUpdate={updateField}
           onFormSettingsUpdate={updateFormSettings}
-          onLogicChange={handleLogicChange}
           onStepSelect={handleStepSelection}
           selectedBlockId={state.selectedBlockId}
           selectedField={selectedField}

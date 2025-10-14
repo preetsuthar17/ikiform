@@ -1,4 +1,3 @@
-import { Star } from "lucide-react";
 import { OptimizedImage } from "./optimized-image";
 
 export default function Review({
@@ -22,10 +21,10 @@ export default function Review({
           {review}
         </p>
         <div className="flex items-center justify-center gap-3">
-          <div className="overflow-ellipsis rounded-card">
+          <div className="overflow-ellipsis rounded-2xl">
             <OptimizedImage
               alt={name}
-              className="rounded-card"
+              className="rounded-2xl"
               height={45}
               src={image}
               width={45}

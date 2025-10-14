@@ -1,7 +1,7 @@
 import { Send, Square } from "lucide-react";
 
 import Image from "next/image";
-import React, { memo, useEffect, useMemo } from "react";
+import { memo, useEffect, useMemo } from "react";
 
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -90,7 +90,7 @@ const ChatMessage = memo(function ChatMessage({
       >
         {}
         <div
-          className={`group relative rounded-card px-4 py-3 ${
+          className={`group relative rounded-2xl px-4 py-3 ${
             message.role === "user"
               ? "rounded-br-md bg-primary text-primary-foreground"
               : "rounded-bl-md border bg-muted/50"
@@ -139,7 +139,7 @@ export const ChatInterface = memo(function ChatInterface({
         const match = /language-(\w+)/.exec(className || "");
         return !inline && match ? (
           <SyntaxHighlighter
-            className="my-2 rounded-card"
+            className="my-2 rounded-2xl"
             language={match[1]}
             PreTag="div"
             style={oneDark}
@@ -208,7 +208,7 @@ export const ChatInterface = memo(function ChatInterface({
       table: ({ children, ...props }: any) => (
         <div className="mb-2 overflow-x-auto">
           <table
-            className="min-w-full border-collapse rounded-card border border-border"
+            className="min-w-full border-collapse rounded-2xl border border-border"
             {...props}
           >
             {children}
@@ -260,10 +260,10 @@ export const ChatInterface = memo(function ChatInterface({
           {}
           {isEmpty && (
             <div className="flex flex-col items-center gap-3 py-12 text-center">
-              <div className="flex h-20 w-20 items-center justify-center rounded-card bg-primary/10">
+              <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-primary/10">
                 <Image
                   alt="Ikiform"
-                  className="pointer-events-none rounded-ele"
+                  className="pointer-events-none rounded-xl"
                   height={100}
                   src="/logo.svg"
                   width={100}
@@ -291,7 +291,7 @@ export const ChatInterface = memo(function ChatInterface({
           {chatStreaming && (
             <div className="flex justify-start gap-4">
               <div className="flex max-w-[85%] gap-3">
-                <div className="group relative rounded-card rounded-bl-md border bg-muted/50 px-4 py-3">
+                <div className="group relative rounded-2xl rounded-bl-md border bg-muted/50 px-4 py-3">
                   {streamedContent ? (
                     <div className="text-sm leading-relaxed">
                       <div className="markdown-content">
@@ -303,7 +303,7 @@ export const ChatInterface = memo(function ChatInterface({
                           {formatContent(streamedContent)}
                         </ReactMarkdown>
                       </div>
-                      <span className="ml-1 inline-block h-4 w-2 animate-pulse rounded-ele bg-primary" />
+                      <span className="ml-1 inline-block h-4 w-2 animate-pulse rounded-xl bg-primary" />
                     </div>
                   ) : (
                     <Loader />
@@ -343,7 +343,7 @@ export const ChatInterface = memo(function ChatInterface({
               onSubmit={handleChatSend}
             >
               <Textarea
-                className="min-h-[60px] flex-1 resize-none rounded-card pr-16"
+                className="min-h-[60px] flex-1 resize-none rounded-2xl pr-16"
                 disabled={chatLoading}
                 onChange={(e) => setChatInput(e.target.value)}
                 onKeyDown={(e) => {

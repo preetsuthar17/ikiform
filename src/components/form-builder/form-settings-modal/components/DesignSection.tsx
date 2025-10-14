@@ -1,11 +1,9 @@
 import { ExternalLink, Settings2 } from "lucide-react";
-import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 
 import { Switch } from "@/components/ui/switch";
-import { DEFAULT_FORM_DESIGN } from "../constants";
 import type { LocalSettings } from "../types";
 
 const FORM_MARGIN_OPTIONS = [

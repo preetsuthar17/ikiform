@@ -44,7 +44,7 @@ import {
 import { cn } from "@/lib/utils";
 
 const colorPickerVariants = cva(
-  "flex flex-col gap-2 rounded-card border border-border bg-background p-4",
+  "flex flex-col gap-2 rounded-2xl border border-border bg-background p-4",
   {
     variants: {
       size: {
@@ -97,7 +97,7 @@ function ColorInput({
     <Input
       className={composeRenderProps(className, (className) =>
         cn(
-          "flex h-9 w-full rounded-ele border border-border bg-background px-3 py-1 text-foreground text-sm transition-colors file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+          "flex h-9 w-full rounded-xl border border-border bg-background px-3 py-1 text-foreground text-sm transition-colors file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
           className
         )
       )}
@@ -126,7 +126,7 @@ function ColorArea({ className, ...props }: AriaColorAreaProps) {
     <AriaColorArea
       className={composeRenderProps(className, (className) =>
         cn(
-          "h-[200px] w-full rounded-card border border-border bg-gradient-to-br from-white to-black",
+          "h-[200px] w-full rounded-2xl border border-border bg-gradient-to-br from-white to-black",
           className
         )
       )}
@@ -153,7 +153,7 @@ function SliderTrack({ className, style, ...props }: AriaSliderTrackProps) {
   return (
     <AriaSliderTrack
       className={composeRenderProps(className, (className) =>
-        cn("relative h-3 w-full rounded-card border border-border", className)
+        cn("relative h-3 w-full rounded-2xl border border-border", className)
       )}
       style={({ defaultStyle }) => ({
         ...style,
@@ -173,7 +173,7 @@ function ColorThumb({ className, ...props }: AriaColorThumbProps) {
     <AriaColorThumb
       className={composeRenderProps(className, (className) =>
         cn(
-          "z-10 h-4 w-4 rounded-card border-2 border-white ring-1 ring-black/10 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 data-[focus-visible]:ring-2 data-[focus-visible]:ring-ring",
+          "z-10 h-4 w-4 rounded-2xl border-2 border-white ring-1 ring-black/10 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 data-[focus-visible]:ring-2 data-[focus-visible]:ring-ring",
           className
         )
       )}
@@ -204,7 +204,7 @@ function ColorSwatchPickerItem({
     <AriaColorSwatchPickerItem
       className={composeRenderProps(className, (className) =>
         cn(
-          "group/swatch-item cursor-pointer rounded-ele p-1 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+          "group/swatch-item cursor-pointer rounded-xl p-1 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
           className
         )
       )}
@@ -218,7 +218,7 @@ function ColorSwatch({ className, style, ...props }: AriaColorSwatchProps) {
     <AriaColorSwatch
       className={composeRenderProps(className, (className) =>
         cn(
-          "h-8 w-8 rounded-ele border border-border group-data-[selected]/swatch-item:ring-2 group-data-[selected]/swatch-item:ring-ring group-data-[selected]/swatch-item:ring-offset-2",
+          "h-8 w-8 rounded-xl border border-border group-data-[selected]/swatch-item:ring-2 group-data-[selected]/swatch-item:ring-ring group-data-[selected]/swatch-item:ring-offset-2",
           className
         )
       )}
@@ -263,7 +263,7 @@ const EyeDropperButton = React.forwardRef<
     <button
       aria-label="Pick color from screen"
       className={cn(
-        "inline-flex h-9 w-9 items-center justify-center rounded-ele border border-border bg-background text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+        "inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-background text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
         className
       )}
       onClick={handleEyeDropper}

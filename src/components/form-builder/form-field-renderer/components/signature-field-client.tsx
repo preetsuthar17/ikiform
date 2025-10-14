@@ -2,11 +2,9 @@
 
 import Image from "next/image";
 
-import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import SignatureCanvas from "react-signature-canvas";
 import { Button } from "@/components/ui/button";
-import type { BaseFieldProps } from "../types";
 
 /**
  * Client-side SignatureField component

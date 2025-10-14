@@ -1,4 +1,3 @@
-import React from "react";
 import type { BaseFieldProps } from "../types";
 import { createFieldComponent } from "../utils/fieldFactory";
 

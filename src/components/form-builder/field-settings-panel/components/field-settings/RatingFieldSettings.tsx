@@ -1,4 +1,3 @@
-import React from "react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,7 +16,7 @@ export function RatingFieldSettings({
   onUpdateSettings,
 }: FieldSettingsProps) {
   return (
-    <Card className="flex flex-col gap-3 rounded-card bg-background p-4">
+    <Card className="flex flex-col gap-3 rounded-2xl bg-background p-4">
       <h3 className="mb-2 font-medium text-card-foreground">Rating Settings</h3>
       <div className="grid grid-cols-2 items-center gap-2">
         <Label className="text-card-foreground" htmlFor="rating-star-count">

@@ -1,4 +1,3 @@
-import React from "react";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import {
@@ -33,7 +32,7 @@ export function StatementFieldSettings({
   };
 
   return (
-    <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
+    <Card className="flex flex-col gap-4 rounded-2xl bg-background p-4">
       <h3 className="font-medium text-card-foreground">
         Statement Field Settings
       </h3>

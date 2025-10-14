@@ -25,7 +25,7 @@ export default async function EmbedPage({ searchParams }: EmbedPageProps) {
       <div className="flex min-h-screen items-center justify-center bg-background p-4">
         <Card className="w-full max-w-md text-center">
           <CardContent className="p-8">
-            <div className="gradient-bg mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-card">
+            <div className="gradient-bg mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl">
               <Code2 className="h-8 w-8 text-accent-foreground" />
             </div>
             <h1 className="mb-4 font-semibold text-2xl text-foreground">

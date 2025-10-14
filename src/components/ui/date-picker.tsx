@@ -10,7 +10,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 
 const datePickerVariants = cva(
-  "inline-flex h-9 w-full items-center justify-between rounded-ele border border border-border border-border bg-background bg-input px-3 py-2 font-medium text-foreground text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+  "inline-flex h-9 w-full items-center justify-between rounded-xl border border border-border border-border bg-background bg-input px-3 py-2 font-medium text-foreground text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -269,7 +269,7 @@ export function DatePicker({
       {isOpen && (
         <motion.div
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          className="z-[9999] mx-auto w-fit rounded-ele"
+          className="z-[9999] mx-auto w-fit rounded-xl"
           data-datepicker-calendar="true"
           exit={{
             opacity: 0,
@@ -534,7 +534,7 @@ export function DateRangePicker({
             {isOpen && (
               <motion.div
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                className="z-[9999] mx-auto w-fit rounded-ele"
+                className="z-[9999] mx-auto w-fit rounded-xl"
                 data-datepicker-calendar="true"
                 exit={{
                   opacity: 0,

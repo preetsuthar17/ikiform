@@ -1,5 +1,4 @@
 import { cohere } from "@ai-sdk/cohere";
-import { groq } from "@ai-sdk/groq";
 import { streamText } from "ai";
 import type { NextRequest } from "next/server";
 import { v4 as uuidv4 } from "uuid";

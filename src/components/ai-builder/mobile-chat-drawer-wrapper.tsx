@@ -11,6 +11,7 @@ const MobileChatDrawerLazy = lazy(() =>
 interface MobileChatDrawerWrapperProps extends ChatPanelProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
+  drawerId?: string;
 }
 
 /**
@@ -20,6 +21,7 @@ interface MobileChatDrawerWrapperProps extends ChatPanelProps {
 export function MobileChatDrawerWrapper({
   isOpen,
   onOpenChange,
+  drawerId,
   ...chatPanelProps
 }: MobileChatDrawerWrapperProps) {
   if (!isOpen) {
@@ -47,6 +49,7 @@ export function MobileChatDrawerWrapper({
       }
     >
       <MobileChatDrawerLazy
+        drawerId={drawerId}
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         {...chatPanelProps}

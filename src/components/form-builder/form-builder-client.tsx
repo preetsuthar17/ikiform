@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { FormBuilderSkeleton } from "@/components/form-builder/form-builder-skeleton";
 import { Button } from "@/components/ui/button";
-import { Loader } from "@/components/ui/loader";
 import { useAuth } from "@/hooks/use-auth";
 import { usePremiumStatus } from "@/hooks/use-premium-status";
 

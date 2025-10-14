@@ -1,7 +1,6 @@
 "use client";
 
 import { Monitor, Ruler } from "lucide-react";
-import React from "react";
 import {
   DEFAULT_FORM_DESIGN,
   FORM_BORDER_RADIUS_OPTIONS,
@@ -9,11 +8,8 @@ import {
   FORM_WIDTH_OPTIONS,
 } from "@/components/form-builder/form-settings-modal/constants";
 import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input-base";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioItem } from "@/components/ui/radio";
 import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";

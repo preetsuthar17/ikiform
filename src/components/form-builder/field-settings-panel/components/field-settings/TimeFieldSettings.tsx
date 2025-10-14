@@ -1,4 +1,3 @@
-import React from "react";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
@@ -9,7 +8,7 @@ export function TimeFieldSettings({
   onUpdateSettings,
 }: FieldSettingsProps) {
   return (
-    <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
+    <Card className="flex flex-col gap-4 rounded-2xl bg-background p-4">
       <h3 className="font-medium text-card-foreground">Time Field Settings</h3>
       <div className="flex items-center gap-2">
         <Switch

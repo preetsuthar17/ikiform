@@ -1,5 +1,5 @@
 import { X } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -15,7 +15,7 @@ export function CheckboxFieldSettings({
   const [newOption, setNewOption] = useState("");
 
   return (
-    <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
+    <Card className="flex flex-col gap-4 rounded-2xl bg-background p-4">
       <h3 className="font-medium text-card-foreground">Checkbox Options</h3>
       <div className="flex flex-col gap-2">
         <Label className="text-card-foreground" htmlFor="checkbox-options">

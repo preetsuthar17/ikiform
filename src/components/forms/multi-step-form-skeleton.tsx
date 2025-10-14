@@ -9,7 +9,7 @@ export function MultiStepFormSkeleton() {
   return (
     <div className="flex items-center justify-center bg-background">
       <div className="flex w-full max-w-2xl flex-col gap-8">
-        <Card className="flex w-full grow flex-col gap-6 rounded-card p-8">
+        <Card className="flex w-full grow flex-col gap-6 rounded-2xl p-8">
           {}
           <div className="flex flex-col gap-2">
             <Skeleton className="h-2 w-full rounded-full" />

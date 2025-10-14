@@ -42,10 +42,15 @@ export const ChatPanel = memo(function ChatPanel({
   );
 
   return (
-    <div className="flex h-full flex-col gap-4">
+    <div className="flex h-full min-h-0 grow flex-col gap-4">
       <ChatHeader />
-      <ScrollArea className="relative flex-1 p-4">
-        <div className="flex flex-col gap-4">
+      <ScrollArea className="relative min-h-0 flex-1 p-4">
+        <div
+          aria-live="polite"
+          aria-relevant="additions"
+          className="flex flex-col gap-4"
+          role="log"
+        >
           {messages.length === 0 && <WelcomeMessage mounted={mounted} />}
           <AnimatePresence>
             {messages.map((message, index) => (
@@ -75,21 +80,23 @@ export const ChatPanel = memo(function ChatPanel({
           <div ref={messagesEndRef} />
         </div>
       </ScrollArea>
-      {shouldShowSuggestions && (
-        <div className="p-4">
-          <ChatSuggestions
-            onSuggestionClick={handleSuggestionClick}
-            suggestions={suggestions}
-          />
-        </div>
-      )}
-      <Separator />
-      <ChatInput
-        input={input}
-        isLoading={isLoading}
-        onSubmit={handleSend}
-        setInput={setInput}
-      />
+      <div className="mt-auto">
+        {shouldShowSuggestions && (
+          <div className="mx-auto w-full max-w-3xl p-4">
+            <ChatSuggestions
+              onSuggestionClick={handleSuggestionClick}
+              suggestions={suggestions}
+            />
+          </div>
+        )}
+        <Separator />
+        <ChatInput
+          input={input}
+          isLoading={isLoading}
+          onSubmit={handleSend}
+          setInput={setInput}
+        />
+      </div>
     </div>
   );
 });

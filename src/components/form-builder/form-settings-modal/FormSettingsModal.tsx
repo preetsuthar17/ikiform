@@ -1,8 +1,8 @@
 "use client";
 
-import { Eye, Save, Settings } from "lucide-react";
+import { Settings } from "lucide-react";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 import { Modal, ModalContent } from "@/components/ui/modal";

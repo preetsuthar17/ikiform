@@ -7,7 +7,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const progressVariants = cva(
-  "relative overflow-hidden rounded-card bg-secondary",
+  "relative overflow-hidden rounded-2xl bg-secondary",
   {
     variants: {
       variant: {
@@ -31,7 +31,7 @@ const progressVariants = cva(
 );
 
 const progressIndicatorVariants = cva(
-  "h-full w-full flex-1 rounded-card transition-all duration-500 ease-out",
+  "h-full w-full flex-1 rounded-2xl transition-all duration-500 ease-out",
   {
     variants: {
       variant: {

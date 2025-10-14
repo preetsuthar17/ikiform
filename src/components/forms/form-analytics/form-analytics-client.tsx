@@ -1,19 +1,11 @@
 "use client";
 
-import {
-  BarChart3,
-  Edit,
-  Eye,
-  Globe,
-  Share,
-  Sparkles,
-  Trash2,
-} from "lucide-react";
+import { Edit, Eye, Share, Trash2 } from "lucide-react";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ConfirmationModal } from "@/components/dashboard/form-delete-confirmation-modal";
 import { ShareFormModal } from "@/components/form-builder/share-form-modal";
 import { Badge } from "@/components/ui/badge";

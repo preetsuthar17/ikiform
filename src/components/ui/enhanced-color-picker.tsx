@@ -1,7 +1,7 @@
 "use client";
 
 import { Palette, Pipette } from "lucide-react";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { TRANSPARENT_PATTERN } from "@/components/form-builder/form-settings-modal/constants";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input-base";

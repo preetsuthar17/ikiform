@@ -14,7 +14,7 @@ export const InfoCards: React.FC<InfoCardsProps> = ({
   <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
     <Card className="flex flex-col gap-4 border-border bg-card p-6">
       <div className="flex items-center gap-3">
-        <div className="rounded-card bg-primary/10 p-2">
+        <div className="rounded-2xl bg-primary/10 p-2">
           <Calendar className="h-5 w-5 text-primary" />
         </div>
         <h3 className="font-semibold text-foreground text-lg">
@@ -38,7 +38,7 @@ export const InfoCards: React.FC<InfoCardsProps> = ({
 
     <Card className="flex flex-col gap-4 border-border bg-card p-6">
       <div className="flex items-center gap-3">
-        <div className="rounded-card bg-primary/10 p-2">
+        <div className="rounded-2xl bg-primary/10 p-2">
           <BarChart3 className="h-5 w-5 text-primary" />
         </div>
         <h3 className="font-semibold text-foreground text-lg">Form Status</h3>
@@ -67,7 +67,7 @@ export const InfoCards: React.FC<InfoCardsProps> = ({
 
     <Card className="flex flex-col gap-4 border-border bg-card p-6">
       <div className="flex items-center gap-3">
-        <div className="rounded-card bg-primary/10 p-2">
+        <div className="rounded-2xl bg-primary/10 p-2">
           <TrendingUp className="h-5 w-5 text-primary" />
         </div>
         <h3 className="font-semibold text-foreground text-lg">Quick Stats</h3>

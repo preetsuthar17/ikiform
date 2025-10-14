@@ -9,7 +9,7 @@ export default function AuthCodeError() {
         in again.
       </div>
       <a
-        className="rounded-ele bg-primary px-4 py-2 text-primary-foreground transition-colors hover:bg-primary/90"
+        className="rounded-xl bg-primary px-4 py-2 text-primary-foreground transition-colors hover:bg-primary/90"
         href="/"
       >
         Return Home

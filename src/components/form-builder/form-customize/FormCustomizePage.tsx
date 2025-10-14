@@ -1,8 +1,8 @@
 "use client";
 
-import { ArrowLeft, Eye, Layout, Palette, Type } from "lucide-react";
+import { ArrowLeft, Layout, Palette, Type } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";

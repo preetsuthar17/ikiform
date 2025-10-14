@@ -9,7 +9,6 @@ import {
   Image as ImageIcon,
   Loader,
   Music,
-  Trash2,
   UploadCloud,
   Video,
   X,
@@ -37,7 +36,7 @@ const fileUploadVariants = cva(
     "group",
     "relative",
     "w-full",
-    "rounded-ele",
+    "rounded-xl",
     "border",
     "transition-all",
     "duration-300",
@@ -84,7 +83,7 @@ const fileUploadVariants = cva(
 );
 
 const fileItemVariants = cva(
-  "flex items-center gap-3 rounded-ele p-4 transition-all duration-200",
+  "flex items-center gap-3 rounded-xl p-4 transition-all duration-200",
   {
     variants: {
       variant: {
@@ -380,7 +379,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
               <AnimatePresence>
                 <ScrollArea
                   className={cn(
-                    "w-full rounded-ele",
+                    "w-full rounded-xl",
                     files.length > 3 ? "h-64" : "h-auto"
                   )}
                 >
@@ -402,17 +401,17 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                             {showPreview && file.preview ? (
                               <img
                                 alt={file.name}
-                                className="h-10 w-10 rounded-ele border border-border object-cover"
+                                className="h-10 w-10 rounded-xl border border-border object-cover"
                                 src={file.preview}
                               />
                             ) : (
-                              <div className="flex h-10 w-10 items-center justify-center rounded-ele bg-accent">
+                              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent">
                                 <IconComponent className="h-5 w-5 text-muted-foreground" />
                               </div>
                             )}
                             {file.status === "completed" && (
                               <div className="-top-1 -right-1 absolute">
-                                <CheckCircle className="h-4 w-4 rounded-card bg-background text-primary" />
+                                <CheckCircle className="h-4 w-4 rounded-2xl bg-background text-primary" />
                               </div>
                             )}
                           </div>
@@ -425,7 +424,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                               </p>
                               <button
                                 aria-label={`Remove ${file.name}`}
-                                className="flex-shrink-0 rounded-ele p-1 transition-colors hover:bg-accent"
+                                className="flex-shrink-0 rounded-xl p-1 transition-colors hover:bg-accent"
                                 onClick={() => removeFile(file.id)}
                               >
                                 <X className="h-4 w-4 text-muted-foreground hover:text-destructive" />
@@ -460,10 +459,10 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
 
                             {}
                             {file.status === "uploading" && (
-                              <div className="h-1.5 w-full overflow-hidden rounded-card bg-accent">
+                              <div className="h-1.5 w-full overflow-hidden rounded-2xl bg-accent">
                                 <motion.div
                                   animate={{ width: `${file.progress}%` }}
-                                  className="h-full rounded-card bg-primary"
+                                  className="h-full rounded-2xl bg-primary"
                                   initial={{ width: 0 }}
                                   transition={{ duration: 0.3 }}
                                 />

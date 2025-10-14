@@ -1,7 +1,6 @@
 "use client";
 
 import { Paintbrush } from "lucide-react";
-import React from "react";
 // Removed PREDEFINED_COLORS and TRANSPARENT_PATTERN imports as color palettes are removed
 import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
 import { EnhancedColorPicker } from "@/components/ui/enhanced-color-picker";

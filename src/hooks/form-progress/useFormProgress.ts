@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FormProgressStorage } from "../../lib/form-progress/storage";
 import type {
-  FormProgress,
   FormProgressActions,
   FormProgressConfig,
   FormProgressState,

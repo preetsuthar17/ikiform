@@ -163,7 +163,7 @@ const CommandMenuContent = React.forwardRef<
             animate={{ opacity: 1, scale: 1, y: 0 }}
             className={cn(
               "fixed top-[30%] left-[50%] z-50 w-[95%] max-w-2xl translate-x-[-50%] translate-y-[-50%]",
-              "rounded-card border border-border bg-background",
+              "rounded-2xl border border-border bg-background",
               "overflow-hidden",
               className
             )}
@@ -186,7 +186,7 @@ const CommandMenuContent = React.forwardRef<
 
               {children}
 
-              <CommandMenuClose className="absolute top-3 right-3 rounded-card p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              <CommandMenuClose className="absolute top-3 right-3 rounded-2xl p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
                 <X size={14} />
                 <span className="sr-only">Close</span>
               </CommandMenuClose>
@@ -366,7 +366,7 @@ const CommandMenuItem = React.forwardRef<
     return (
       <div
         className={cn(
-          "relative flex cursor-default select-none items-center gap-2 rounded-ele px-2 py-2 text-sm outline-none transition-colors",
+          "relative flex cursor-default select-none items-center gap-2 rounded-xl px-2 py-2 text-sm outline-none transition-colors",
           "hover:bg-accent hover:text-accent-foreground",
           isSelected && "bg-accent text-accent-foreground",
           disabled && "pointer-events-none opacity-50",

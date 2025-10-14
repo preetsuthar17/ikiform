@@ -6,7 +6,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const chipVariants = cva(
-  "inline-flex items-center justify-center rounded-card border font-medium text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center rounded-2xl border font-medium text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -82,7 +82,7 @@ const Chip = React.forwardRef<HTMLDivElement, ChipProps>(
         {dismissible && (
           <button
             aria-label="Remove"
-            className="shrink-0 rounded-card p-0.5 transition-colors hover:bg-black/10"
+            className="shrink-0 rounded-2xl p-0.5 transition-colors hover:bg-black/10"
             onClick={handleDismiss}
             type="button"
           >

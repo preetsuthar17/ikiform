@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -206,7 +204,7 @@ export function BrandingSection({
               </div>
             </div>
             {socialMedia.showIcons !== false && (
-              <div className="rounded-card border p-4">
+              <div className="rounded-2xl border p-4">
                 <Label className="mb-2 block font-medium text-sm">
                   Preview
                 </Label>
@@ -219,7 +217,7 @@ export function BrandingSection({
             )}
           </>
         ) : (
-          <div className="rounded-card bg-muted/30 p-4">
+          <div className="rounded-2xl bg-muted/30 p-4">
             <p className="text-muted-foreground text-sm">
               Enable social media links to display your social profiles on your
               forms. This helps visitors connect with you across different

@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-import { FIELD_TYPES, PALETTE_CONFIG } from "../constants";
+import { FIELD_TYPES } from "../constants";
 
 import type { FieldPaletteProps } from "../types";
 import { CompactFieldItem } from "./CompactFieldItem";

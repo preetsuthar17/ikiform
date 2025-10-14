@@ -1,5 +1,4 @@
-import { Check, ChevronRight } from "lucide-react";
-import React from "react";
+import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface MultiStepQuizProgressProps {

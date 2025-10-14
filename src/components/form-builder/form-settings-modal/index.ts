@@ -1,4 +1,4 @@
-import type { FormSettingsSection, FormSettingsSectionConfig } from "./types";
+import type { FormSettingsSectionConfig } from "./types";
 
 export const FORM_SETTINGS_SECTIONS: FormSettingsSectionConfig[] = [
   { id: "basic", label: "Basic Info", iconName: "Info" },

@@ -1,4 +1,3 @@
-import { Card } from "@/components/ui/card";
 import { Loader } from "../ui/loader";
 import type { WebhookConfig } from "./hooks/useWebhookManagement";
 import { WebhookListItem } from "./WebhookListItem";

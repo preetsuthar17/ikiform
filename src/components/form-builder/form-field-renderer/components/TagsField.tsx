@@ -1,5 +1,3 @@
-import React from "react";
-
 import { TagInput } from "@/components/ui/tag-input";
 
 import type { BaseFieldProps } from "../types";

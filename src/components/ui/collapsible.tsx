@@ -9,7 +9,7 @@ const collapsibleVariants = cva("w-full", {
   variants: {
     variant: {
       default: "",
-      outline: "rounded-card border border-border",
+      outline: "rounded-2xl border border-border",
       ghost: "",
     },
     size: {

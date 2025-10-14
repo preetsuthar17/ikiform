@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { TimePicker } from "@/components/ui/time-picker";
 import { cn } from "@/lib/utils";
 import type { BaseFieldProps } from "../types";

@@ -1,5 +1,4 @@
 import { Info } from "lucide-react";
-import React from "react";
 
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";

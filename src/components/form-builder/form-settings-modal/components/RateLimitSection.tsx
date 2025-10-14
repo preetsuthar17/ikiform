@@ -1,5 +1,4 @@
 import { Clock, Shield } from "lucide-react";
-import React from "react";
 
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -102,7 +101,7 @@ export function RateLimitSection({
             <RateLimitSummary rateLimit={rateLimit} />
           </div>
         ) : (
-          <div className="rounded-card bg-muted/30 p-4">
+          <div className="rounded-2xl bg-muted/30 p-4">
             <p className="text-muted-foreground text-sm">
               Rate limiting helps protect your form from spam and abuse by
               limiting the number of submissions from the same IP address within
@@ -153,7 +152,7 @@ function RateLimitInput({
 
 function RateLimitSummary({ rateLimit }: { rateLimit: any }) {
   return (
-    <div className="rounded-card bg-muted/50 p-4">
+    <div className="rounded-2xl bg-muted/50 p-4">
       <div className="mb-2 flex items-center gap-2">
         <Clock className="h-4 w-4 text-muted-foreground" />
         <span className="font-medium text-sm">Current Settings</span>

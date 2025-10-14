@@ -58,7 +58,7 @@ export function ChatWelcomeSkeleton() {
   return (
     <div className="flex flex-col items-center gap-4 py-8 text-center">
       {}
-      <Skeleton className="h-12 w-12 rounded-card" />
+      <Skeleton className="h-12 w-12 rounded-2xl" />
       {}
       <Skeleton className="h-8 w-64" />
       {}
@@ -76,7 +76,7 @@ export function ChatSuggestionsSkeleton() {
     <div className="flex flex-col gap-2 overflow-hidden max-sm:hidden">
       <div className="flex grow flex-wrap gap-2 overflow-x-auto">
         {Array.from({ length: 4 }).map((_, i) => (
-          <Skeleton className="h-8 min-w-[120px] flex-1 rounded-card" key={i} />
+          <Skeleton className="h-8 min-w-[120px] flex-1 rounded-2xl" key={i} />
         ))}
       </div>
     </div>
@@ -123,7 +123,7 @@ export function PreviewPanelHeaderSkeleton({
         {}
         <div className="hidden gap-2 overflow-x-auto p-3 max-sm:flex">
           {Array.from({ length: 2 }).map((_, i) => (
-            <Skeleton className="h-8 w-20 rounded-card" key={i} />
+            <Skeleton className="h-8 w-20 rounded-2xl" key={i} />
           ))}
         </div>
       </>
@@ -140,15 +140,15 @@ export function PreviewPanelHeaderSkeleton({
             <Skeleton className="h-6 w-16" /> {}
           </div>
           <div className="flex gap-2">
-            <Skeleton className="h-8 w-20 rounded-card" /> {}
-            <Skeleton className="h-8 w-16 rounded-card" /> {}
+            <Skeleton className="h-8 w-20 rounded-2xl" /> {}
+            <Skeleton className="h-8 w-16 rounded-2xl" /> {}
           </div>
         </div>
       </div>
       {}
       <div className="flex gap-2 overflow-x-auto border-b p-4">
-        <Skeleton className="h-8 w-20 rounded-card" />
-        <Skeleton className="h-8 w-24 rounded-card" />
+        <Skeleton className="h-8 w-20 rounded-2xl" />
+        <Skeleton className="h-8 w-24 rounded-2xl" />
       </div>
     </>
   );
@@ -196,5 +196,65 @@ export function FormBuilderPanelSkeleton() {
         </div>
       </div>
     </div>
+  );
+}
+
+export function FormBuilderHeaderSkeleton() {
+  return (
+    <header
+      aria-busy="true"
+      className="z-20 flex-shrink-0 border-border border-b bg-card px-4 py-3 md:py-4"
+      role="status"
+    >
+      <span aria-live="polite" className="sr-only">
+        Loading form builder header…
+      </span>
+      <div className="flex h-full flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-0">
+        <div className="flex items-center gap-3 md:gap-4">
+          <h1
+            aria-hidden="true"
+            className="absolute font-semibold text-xl opacity-0"
+          >
+            Form Builder
+          </h1>
+          <div className="flex items-center gap-2 md:gap-3">
+            <Skeleton className="h-9 w-36" />
+            <Skeleton className="h-4 w-16" />
+            <div className="hidden items-center gap-1 md:flex">
+              <Skeleton className="h-1.5 w-1.5 rounded-full" />
+              <Skeleton className="h-3 w-12" />
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile actions (match structure: dropdown + buttons in a scroll area) */}
+        <nav
+          aria-label="Form builder actions"
+          className="relative w-full md:hidden"
+        >
+          <div className="w-full">
+            <div className="flex items-center gap-2 pb-2">
+              <Skeleton className="h-8 w-8" />
+              <Skeleton className="h-8 w-20" />
+              <Skeleton className="h-8 w-16" />
+            </div>
+          </div>
+        </nav>
+
+        {/* Desktop actions */}
+        <nav
+          aria-label="Form builder actions"
+          className="hidden items-center gap-3 md:flex"
+        >
+          <div className="flex items-center gap-2">
+            <Skeleton className="h-9 w-28" />
+            <Skeleton className="h-9 w-24" />
+            <Skeleton className="h-9 w-24" />
+            <Skeleton className="h-9 w-9" />
+          </div>
+          <Skeleton className="h-9 w-28" />
+        </nav>
+      </div>
+    </header>
   );
 }

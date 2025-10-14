@@ -2,7 +2,7 @@
 
 import { Check, Copy } from "lucide-react";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createHighlighter, type Highlighter } from "shiki";
 
 import { Button } from "@/components/ui/button";
@@ -13,8 +13,6 @@ import {
   ModalTitle,
 } from "@/components/ui/modal";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
-import { toast } from "@/hooks/use-toast";
 
 import type { FormSchema } from "@/lib/database";
 import { Loader } from "../ui/loader";
@@ -186,7 +184,7 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
               <Copy className="h-4 w-4" />
             )}
           </Button>
-          <ScrollArea className="h-[71vh] rounded-card border bg-muted/30 text-foreground">
+          <ScrollArea className="h-[71vh] rounded-2xl border bg-muted/30 text-foreground">
             {isHighlighting ? (
               <div className="flex h-[71vh] items-center justify-center p-4">
                 <Loader />

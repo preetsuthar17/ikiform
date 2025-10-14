@@ -19,7 +19,7 @@ const radioGroupVariants = cva("grid gap-2", {
 });
 
 const radioVariants = cva(
-  "aspect-square cursor-pointer rounded-card border border-foreground text-primary focus:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary",
+  "aspect-square cursor-pointer rounded-2xl border border-foreground text-primary focus:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary",
   {
     variants: {
       size: {
@@ -116,7 +116,7 @@ const RadioItem = React.forwardRef<
               <AnimatePresence>
                 <motion.div
                   animate={{ scale: 1, opacity: 1 }}
-                  className="rounded-card bg-primary"
+                  className="rounded-2xl bg-primary"
                   exit={{ scale: 0, opacity: 0 }}
                   initial={{ scale: 0, opacity: 0 }}
                   key="dot"

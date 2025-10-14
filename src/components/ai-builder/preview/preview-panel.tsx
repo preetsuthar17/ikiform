@@ -22,7 +22,7 @@ export function PreviewPanel({
   };
 
   return (
-    <div className="flex h-full flex-1 flex-col gap-4">
+    <div className="flex h-full min-h-0 flex-1 flex-col gap-4">
       <PreviewPanelHeader
         activeForm={activeForm}
         activeFormId={activeFormId}
@@ -41,7 +41,7 @@ export function PreviewPanel({
         setActiveFormId={setActiveFormId}
         setShowJsonModal={setShowJsonModal}
       />
-      <div className="my-12 flex-1 overflow-auto p-3 md:p-6">
+      <div className="my-12 min-h-0 flex-1 overflow-auto p-3 md:p-6">
         {activeForm?.schema ? (
           <FormPreview
             onFieldDelete={() => {}}

@@ -1,7 +1,6 @@
 "use client";
 
 import { Type } from "lucide-react";
-import React from "react";
 import {
   FONT_SIZE_OPTIONS,
   FONT_WEIGHT_OPTIONS,

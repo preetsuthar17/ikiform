@@ -2,9 +2,6 @@ import { withBotId } from "botid/next/config";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    turbopackPersistentCaching: true,
-  },
   images: {
     qualities: [25, 50, 75, 100],
     remotePatterns: [

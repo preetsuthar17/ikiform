@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type React from "react";
+import React from "react";
 import {
   Accordion,
   AccordionContent,
@@ -56,7 +56,12 @@ const faqs = [
       <>
         <p>
           You can suggest any features at{" "}
-          <Link className="underline" href="https://insigh.to/b/ikiform">
+          <Link
+            className="underline"
+            href="https://insigh.to/b/ikiform"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             Feature Board
           </Link>
         </p>
@@ -96,6 +101,8 @@ const faqs = [
           <Link
             className="underline"
             href="https://github.com/preetsuthar17/Ikiform"
+            rel="noopener noreferrer"
+            target="_blank"
           >
             GitHub
           </Link>
@@ -105,58 +112,59 @@ const faqs = [
   },
 ];
 
+function FaqSectionHeader() {
+  return (
+    <div className="flex flex-col gap-4 border-t border-r px-8 py-16 text-left md:px-12">
+      <h2
+        className="text-left font-medium text-3xl leading-tight tracking-[-2px] md:text-4xl"
+        id="faq-title"
+      >
+        Frequently Asked Questions
+      </h2>
+    </div>
+  );
+}
+
+const FaqList = React.memo(function FaqList({ faqs }: { faqs: Faq[] }) {
+  return (
+    <div className="flex flex-col gap-0">
+      <Accordion className="w-full" collapsible type="single">
+        {faqs.map((faq, i) => (
+          <AccordionItem
+            className="w-full border-t border-b-0 py-2"
+            key={i}
+            value={String(i)}
+          >
+            <AccordionTrigger className="px-4 text-left font-medium hover:no-underline md:px-6">
+              {faq.question}
+            </AccordionTrigger>
+            <AccordionContent className="px-4 text-muted-foreground md:px-6">
+              {faq.answer}
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </div>
+  );
+});
+
 export default function FAQSection() {
-  const firstHalf = faqs.slice(0, Math.ceil(faqs.length / 2));
-  const secondHalf = faqs.slice(Math.ceil(faqs.length / 2));
+  const [firstHalf, secondHalf] = React.useMemo(() => {
+    const midpoint = Math.ceil(faqs.length / 2);
+    return [faqs.slice(0, midpoint), faqs.slice(midpoint)];
+  }, []);
 
   return (
-    <section className="mx-auto w-full max-w-7xl bg-background">
-      <div className="mx-auto flex w-full flex-col gap-18 px-4 md:px-8">
-        {/* Header section */}
-        <div className="flex flex-col gap-8 text-center">
-          <p className="text-center text-base text-muted-foreground md:text-lg">
-            Frequently Asked Questions{" "}
-          </p>
-          <h2 className="mx-auto max-w-2xl text-center font-dm-sans font-medium text-2xl text-foreground leading-normal tracking-tight md:text-3xl lg:text-4xl">
-            Answers to common questions about Ikiform, features, and usage
-          </h2>
-        </div>
-        {/* Rounded container matching the footer/CTA styling */}
-        <div className="rounded-4xl bg-card p-8 md:p-12">
-          <div className="flex flex-col items-center gap-12">
-            {/* FAQ Grid */}
-            <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
-              <FaqList faqs={firstHalf} />
-              <FaqList faqs={secondHalf} />
-            </div>
+    <section aria-labelledby="faq-title" className="mx-auto w-full max-w-7xl">
+      <div className="mx-auto flex w-full flex-col">
+        <div className="mx-auto flex w-full border border-t-0 max-md:flex-col">
+          <FaqSectionHeader />
+          <div className="grid w-full grid-cols-1">
+            <FaqList faqs={firstHalf} />
+            <FaqList faqs={secondHalf} />
           </div>
         </div>
       </div>
     </section>
   );
 }
-
-const FaqList = ({ faqs }: { faqs: Faq[] }) => (
-  <div className="flex flex-col gap-4">
-    {faqs.map((faq, i) => (
-      <Accordion
-        className="w-full rounded-3xl border-none"
-        collapsible
-        key={i}
-        type="single"
-      >
-        <AccordionItem
-          className="w-full rounded-2xl border-none bg-background"
-          value={String(i)}
-        >
-          <AccordionTrigger className="px-6 py-6 text-left font-medium text-foreground hover:no-underline">
-            {faq.question}
-          </AccordionTrigger>
-          <AccordionContent className="px-6 pb-6 text-muted-foreground">
-            {faq.answer}
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
-    ))}
-  </div>
-);

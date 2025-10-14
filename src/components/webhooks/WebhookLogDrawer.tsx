@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Drawer,
-  DrawerCloseButton,
+  DrawerClose,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
@@ -580,7 +580,7 @@ export function WebhookLogDrawer({
                 </div>
               )}
             </div>
-            <DrawerCloseButton onClick={onClose} />
+            <DrawerClose onClick={onClose} />
           </div>
         </DrawerHeader>
 
@@ -634,7 +634,7 @@ export function WebhookLogDrawer({
                     <Eye className="h-5 w-5" />
                     Webhook Payload
                   </DrawerTitle>
-                  <DrawerCloseButton onClick={() => setViewPayload(null)} />
+                  <DrawerClose onClick={() => setViewPayload(null)} />
                 </div>
               </DrawerHeader>
               <div className="h-[calc(100vh-80px)] overflow-hidden p-4">

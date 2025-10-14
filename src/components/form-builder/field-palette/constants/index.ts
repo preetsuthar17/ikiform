@@ -1,5 +1,4 @@
 import { FIELD_TYPES } from "@/lib/fields/field-config";
-import type { FieldTypeConfig } from "../types";
 
 // Re-export the global field types for backward compatibility
 export { FIELD_TYPES };

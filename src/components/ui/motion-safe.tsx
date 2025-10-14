@@ -2,11 +2,7 @@
 
 import { type MotionProps, motion } from "motion/react";
 import * as React from "react";
-import {
-  type MotionSafeVariants,
-  sanitizeVariants,
-  useMotionSafeColors,
-} from "@/lib/utils/motion-safe";
+import { sanitizeVariants, useMotionSafeColors } from "@/lib/utils/motion-safe";
 
 interface MotionSafeDivProps
   extends Omit<

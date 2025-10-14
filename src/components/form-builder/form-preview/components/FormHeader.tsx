@@ -1,4 +1,3 @@
-import React from "react";
 import { getInternalFormTitle } from "@/lib/utils/form-utils";
 import type { FormHeaderProps } from "../types";
 import { EditableField } from "./EditableField";

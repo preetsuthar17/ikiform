@@ -4,7 +4,6 @@ import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import SignatureCanvas from "react-signature-canvas";
 import { Button } from "@/components/ui/button";
-import type { BaseFieldProps } from "../types";
 
 export function SignatureField({
   value,
@@ -56,7 +55,7 @@ export function SignatureField({
       className="flex w-full flex-col gap-2"
       style={{ alignItems: "flex-start" }}
     >
-      <div className="w-full rounded-card" ref={containerRef}>
+      <div className="w-full rounded-2xl" ref={containerRef}>
         <SignatureCanvas
           backgroundColor="#fff"
           canvasProps={{
@@ -94,7 +93,7 @@ export function SignatureField({
       {value && (
         <Image
           alt="Signature preview"
-          className="mt-2 w-full rounded-card border"
+          className="mt-2 w-full rounded-2xl border"
           height={canvasHeight}
           src={value}
           style={{ height: canvasHeight, objectFit: "contain" }}

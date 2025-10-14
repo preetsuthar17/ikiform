@@ -44,7 +44,7 @@ const ModalContent = React.forwardRef<
         transition={{ duration: 0.2 }}
       >
         {children}
-        <ModalClose className="absolute top-4 right-4 mx-2 rounded-ele p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+        <ModalClose className="absolute top-4 right-4 mx-2 rounded-xl p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
           <X size={16} />
           <span className="sr-only">Close</span>
         </ModalClose>

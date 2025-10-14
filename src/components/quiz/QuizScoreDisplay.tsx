@@ -1,4 +1,4 @@
-import { CheckCircle, Clock, Target, TrendingUp, Trophy } from "lucide-react";
+import { CheckCircle, Target, TrendingUp, Trophy } from "lucide-react";
 import type React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";

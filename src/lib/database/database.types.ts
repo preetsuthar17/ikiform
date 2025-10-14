@@ -1,5 +1,3 @@
-import type { FormLogic } from "@/components/form-builder/logic-builder/types";
-
 export type Json =
   | string
   | number
@@ -760,7 +758,7 @@ export interface FormSchema {
       allowExternalSubmissions?: boolean;
     };
   };
-  logic?: FormLogic;
+  // logic removed
 }
 
 export type WebhookEventType =

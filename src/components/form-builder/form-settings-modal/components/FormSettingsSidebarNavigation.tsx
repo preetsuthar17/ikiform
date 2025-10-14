@@ -10,7 +10,6 @@ import {
   Trophy,
   User,
 } from "lucide-react";
-import React from "react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { FORM_SETTINGS_SECTIONS } from "../index";

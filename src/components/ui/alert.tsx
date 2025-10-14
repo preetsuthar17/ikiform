@@ -7,7 +7,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const alertVariants = cva(
-  "relative w-full rounded-card border p-4 text-sm transition-colors",
+  "relative w-full rounded-2xl border p-4 text-sm transition-colors",
   {
     variants: {
       variant: {
@@ -101,7 +101,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
                 <div className="ml-3 flex-shrink-0">
                   <button
                     aria-label="Dismiss alert"
-                    className="inline-flex rounded-ele p-1.5 transition-colors hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                    className="inline-flex rounded-xl p-1.5 transition-colors hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
                     onClick={handleDismiss}
                     type="button"
                   >

@@ -1,18 +1,14 @@
-import React from "react";
-
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import type { FormField } from "@/lib/database";
 import {
   BasicSettings,
   EmptyState,
-  ErrorMessages,
   FieldSpecificSettings,
   OptionsSettings,
   PrepopulationSettings,
   SettingsPanelHeader,
   ValidationSettings,
-  VisualSettings,
 } from "./components";
 
 import { useFieldUpdates } from "./utils";

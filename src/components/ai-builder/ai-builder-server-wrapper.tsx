@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SuspenseWrapper } from "@/components/ui/suspense-wrapper";
 
