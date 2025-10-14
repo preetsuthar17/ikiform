@@ -184,7 +184,7 @@ export function FormsList({
                         className="w-48 shadow-xs"
                       >
                         <DropdownMenuItem
-                          className="h-9 cursor-pointer opacity-80 hover:opacity-100 font-medium"
+                          className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
                           onClick={(e) => {
                             e.stopPropagation();
                             onEdit(form.id);
@@ -194,7 +194,7 @@ export function FormsList({
                           Edit form
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                          className="h-9 cursor-pointer opacity-80 hover:opacity-100 font-medium"
+                          className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
                           onClick={(e) => {
                             e.stopPropagation();
                             setShareModalOpen((prev) => ({
@@ -208,7 +208,7 @@ export function FormsList({
                           Share form
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                          className="h-9 cursor-pointer opacity-80 hover:opacity-100 font-medium"
+                          className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
                           onClick={(e) => {
                             e.stopPropagation();
                             onDuplicate(form.id);
@@ -218,7 +218,7 @@ export function FormsList({
                           Duplicate
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                          className="h-9 cursor-pointer opacity-80 hover:opacity-100 font-medium"
+                          className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
                           onClick={(e) => {
                             e.stopPropagation();
                             onViewForm(form);
@@ -228,7 +228,7 @@ export function FormsList({
                           View form
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                          className="h-9 cursor-pointer opacity-80 hover:opacity-100 font-medium"
+                          className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
                           onClick={(e) => {
                             e.stopPropagation();
                             onViewAnalytics(form.id);
@@ -239,7 +239,7 @@ export function FormsList({
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
-                          className="h-9 cursor-pointer opacity-80 hover:opacity-100 font-medium"
+                          className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
                           onClick={(e) => {
                             e.stopPropagation();
                             window.open(`/embed?formid=${form.id}`, "_blank");
@@ -250,7 +250,7 @@ export function FormsList({
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
-                          className="h-9 cursor-pointer opacity-80 hover:opacity-100 font-medium"
+                          className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
                           onClick={(e) => {
                             e.stopPropagation();
                             onDelete(form.id, form.title);

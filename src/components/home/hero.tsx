@@ -161,16 +161,15 @@ function HeroCTAs() {
       aria-live="polite"
       className="flex w-fit flex-wrap items-center justify-center gap-3"
     >
-    
-        <Button asChild className="rounded-full" variant="default">
-          <Link
-            className="flex h-11 w-full items-center gap-2 whitespace-nowrap font-medium md:w-62"
-            href="/login"
-          >
-            <span>Start Collecting Responses</span>{" "}
-            <ChevronRight aria-hidden="true" />
-          </Link>
-        </Button>
+      <Button asChild className="rounded-full" variant="default">
+        <Link
+          className="flex h-11 w-full items-center gap-2 whitespace-nowrap font-medium md:w-62"
+          href="/login"
+        >
+          <span>Start Collecting Responses</span>{" "}
+          <ChevronRight aria-hidden="true" />
+        </Link>
+      </Button>
       <Button asChild className="rounded-full" variant="outline">
         <Link
           className="flex h-11 w-full items-center gap-2 whitespace-nowrap font-medium md:w-40"
@@ -184,19 +183,16 @@ function HeroCTAs() {
 }
 
 export default function Hero() {
-
   return (
     <section
       aria-labelledby="home-hero-title"
       className="mx-auto flex w-full max-w-7xl flex-col"
     >
-      <div
-        className="relative z-20 flex h-full grow flex-col items-center gap-8 overflow-hidden border border-b-0 px-4 py-28 text-center md:px-6"
-      >
+      <div className="relative z-20 flex h-full grow flex-col items-center gap-8 overflow-hidden border border-b-0 px-4 py-28 text-center md:px-6">
         <SponsoredByBadge />
         <HeroHeading />
         <HeroSubheading />
-        <HeroCTAs/>
+        <HeroCTAs />
         <HeroAsciiOceanBackground />
       </div>
 

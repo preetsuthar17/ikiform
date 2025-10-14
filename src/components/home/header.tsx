@@ -106,7 +106,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
         className="w-64 rounded-lg p-2 shadow-xs"
         sideOffset={8}
       >
-        <DropdownMenuLabel className="flex items-start gap-3 px-2 py-2 mb-2">
+        <DropdownMenuLabel className="mb-2 flex items-start gap-3 px-2 py-2">
           <Avatar className="size-9">
             <AvatarImage
               alt={name}
@@ -123,7 +123,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          className="py-0 mt-2 font-medium opacity-70 hover:opacity-100"
+          className="mt-2 py-0 font-medium opacity-70 hover:opacity-100"
           onSelect={(e) => e.preventDefault()}
         >
           <Link
@@ -134,7 +134,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem
-          className="py-0 mb-2 font-medium opacity-70 hover:opacity-100"
+          className="mb-2 py-0 font-medium opacity-70 hover:opacity-100"
           onSelect={(e) => e.preventDefault()}
         >
           <Link
@@ -146,7 +146,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          className="h-10 mt-2 font-medium text-destructive opacity-70 hover:opacity-100"
+          className="mt-2 h-10 font-medium text-destructive opacity-70 hover:opacity-100"
           onSelect={(e) => {
             e.preventDefault();
             void signOut();
