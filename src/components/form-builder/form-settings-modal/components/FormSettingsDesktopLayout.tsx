@@ -1,39 +1,60 @@
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { FORM_SETTINGS_SECTIONS } from "../index";
 import type { FormSettingsSection } from "../types";
 import { FormSettingsContent } from "./FormSettingsContent";
-import { FormSettingsSidebarNavigation } from "./FormSettingsSidebarNavigation";
+import { SettingsSearch } from "./SettingsSearch";
 
 interface FormSettingsDesktopLayoutProps {
   activeSection: FormSettingsSection;
   onSectionChange: (section: FormSettingsSection) => void;
-  onClose: () => void;
   sectionProps: any;
+  onClose: () => void;
 }
 
 export function FormSettingsDesktopLayout({
   activeSection,
   onSectionChange,
-  onClose,
   sectionProps,
+  onClose,
 }: FormSettingsDesktopLayoutProps) {
   return (
     <div className="hidden h-full gap-4 md:flex">
-      <div className="flex w-52 flex-col gap-2 border-border">
-        <FormSettingsSidebarNavigation
+      <div className="flex w-64 flex-col gap-3 border-border border-r pr-4">
+        <SettingsSearch
           activeSection={activeSection}
           onSectionChange={onSectionChange}
         />
+        <nav className="flex flex-col">
+          {FORM_SETTINGS_SECTIONS.map((section) => {
+            const isActive = activeSection === section.id;
+            return (
+              <button
+                className={`w-full rounded-md px-3 py-3 text-left text-sm opacity-60 transition-colors ${
+                  isActive
+                    ? "font-medium opacity-100"
+                    : "hover:bg-accent hover:text-accent-foreground"
+                }`}
+                key={section.id}
+                onClick={() => {
+                  if (section.id === "design" && sectionProps?.formId) {
+                    const url = `/form-builder/${sectionProps.formId}/customize`;
+                    window.open(url, "_blank", "noopener,noreferrer");
+                    return;
+                  }
+                  onSectionChange(section.id);
+                }}
+              >
+                {section.label}
+              </button>
+            );
+          })}
+        </nav>
       </div>
-      <div className="flex flex-1 flex-col gap-4">
-        <ScrollArea className="flex-1">
-          <div className="flex flex-col gap-4 p-8">
-            <FormSettingsContent
-              section={activeSection}
-              {...sectionProps}
-              updateNotifications={sectionProps.updateNotifications}
-            />
-          </div>
-        </ScrollArea>
+      <div className="flex h-full flex-1 flex-col">
+        <FormSettingsContent
+          section={activeSection}
+          {...sectionProps}
+          updateNotifications={sectionProps.updateNotifications}
+        />
       </div>
     </div>
   );

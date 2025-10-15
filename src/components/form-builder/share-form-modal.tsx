@@ -176,10 +176,10 @@ export function ShareFormModal({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-6">
+        <div className="flex flex-col gap-6">
           {isPublished ? (
             <>
-              <div className="space-y-3">
+              <div className="flex flex-col gap-3">
                 <div className="flex items-center gap-2">
                   <Globe
                     aria-hidden="true"
@@ -215,7 +215,7 @@ export function ShareFormModal({
               </div>
 
               {/* QR Code Section */}
-              <div className="space-y-3">
+              <div className="flex flex-col gap-3">
                 <div className="flex items-center justify-between">
                   <Button onClick={handleToggleQr} size="sm" variant="outline">
                     <div className="flex items-center gap-2">
@@ -278,7 +278,7 @@ export function ShareFormModal({
               </div>
             </>
           ) : (
-            <div className="space-y-4 text-center">
+            <div className="flex flex-col gap-4 text-center">
               <div className="rounded-lg bg-muted/50 p-6">
                 <Globe
                   aria-hidden="true"

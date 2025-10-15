@@ -6,7 +6,6 @@ export { FormDesignPreview } from "./FormDesignPreview";
 export { FormSettingsContent } from "./FormSettingsContent";
 export { FormSettingsDesktopLayout } from "./FormSettingsDesktopLayout";
 export { FormSettingsMobileLayout } from "./FormSettingsMobileLayout";
-export { FormSettingsSidebarNavigation } from "./FormSettingsSidebarNavigation";
 export { MetadataSection } from "./MetadataSection";
 export { NotificationsSection } from "./NotificationsSection";
 export { PasswordProtectionSection } from "./PasswordProtectionSection";

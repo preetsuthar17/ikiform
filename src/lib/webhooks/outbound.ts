@@ -21,6 +21,8 @@ function mapWebhookRow(row: Omit<WebhookRow, "secret">): WebhookConfig {
     id: (row as any).id,
     formId: (row as any).form_id ?? undefined,
     accountId: (row as any).account_id ?? undefined,
+    name: (row as any).name ?? null,
+    description: (row as any).description ?? null,
     url: (row as any).url,
     events: (row as any).events as any,
     secret: undefined,
@@ -67,6 +69,8 @@ export async function createWebhook(
   const now = new Date().toISOString();
 
   const insertData: WebhookInsert = {
+    name: (data as any).name ?? null,
+    description: (data as any).description ?? null,
     url: data.url,
     events: data.events as string[],
     method: data.method,
@@ -118,6 +122,8 @@ export async function updateWebhook(
   const supabase = createAdminClient();
   const now = new Date().toISOString();
   const updateData: WebhookUpdate = {
+    name: (data as any).name ?? undefined,
+    description: (data as any).description ?? undefined,
     url: data.url,
     events: data.events as any,
     method: data.method,

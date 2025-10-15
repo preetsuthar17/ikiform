@@ -1,5 +1,6 @@
 import React from "react";
-import { RadioGroup, RadioItem } from "@/components/ui/radio";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import type { BaseFieldProps } from "../types";
 import { sanitizeOptions } from "../utils/sanitizeOptions";
 
@@ -62,7 +63,6 @@ export function PollField({
   return (
     <RadioGroup
       disabled={disabled || loading}
-      error={error}
       onValueChange={onChange}
       value={value || ""}
     >
@@ -72,12 +72,14 @@ export function PollField({
         const optionLabel =
           typeof option === "string" ? option : option.label || option.value;
         return (
-          <RadioItem
-            disabled={disabled || loading}
-            key={idx}
-            label={optionLabel}
-            value={optionValue}
-          />
+          <>
+            <RadioGroupItem
+              disabled={disabled || loading}
+              key={idx}
+              value={optionValue}
+            />
+            <Label htmlFor={optionValue}>{optionLabel}</Label>
+          </>
         );
       })}
     </RadioGroup>

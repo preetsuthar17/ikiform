@@ -1,4 +1,5 @@
 import { useParams } from "next/navigation";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { ApiSection } from "../sections/api-section";
 import type { FormSettingsSection } from "../types";
 import { BasicInfoSection } from "./BasicInfoSection";
@@ -53,109 +54,167 @@ export function FormSettingsContent({
   switch (section) {
     case "basic":
       return (
-        <section className="flex flex-col gap-4">
+        <section className="h-full">
           <BasicInfoSection
+            formId={currentFormId}
             localSettings={localSettings}
+            schema={schema}
             updateSettings={updateSettings}
           />
         </section>
       );
     case "limits":
       return (
-        <section className="flex flex-col gap-4">
-          <RateLimitSection
-            localSettings={localSettings}
-            updateRateLimit={updateRateLimit}
-          />
-          <ResponseLimitSection
-            localSettings={localSettings}
-            updateResponseLimit={updateResponseLimit}
-          />
+        <section className="h-full">
+          <ScrollArea className="h-full w-full">
+            <div className="flex flex-col gap-4">
+              <RateLimitSection
+                formId={currentFormId}
+                localSettings={localSettings}
+                schema={schema}
+                updateRateLimit={updateRateLimit}
+              />
+              <ResponseLimitSection
+                formId={currentFormId}
+                localSettings={localSettings}
+                schema={schema}
+                updateResponseLimit={updateResponseLimit}
+              />
+            </div>
+          </ScrollArea>
         </section>
       );
     case "security":
       return (
-        <section className="flex flex-col gap-4">
-          <PasswordProtectionSection
-            localSettings={localSettings}
-            updatePasswordProtection={updatePasswordProtection}
-          />
-          <DuplicatePreventionSection
-            localSettings={localSettings}
-            updateDuplicatePrevention={updateDuplicatePrevention}
-          />
-          <ProfanityFilterSection
-            localSettings={localSettings}
-            updateProfanityFilter={updateProfanityFilter}
-          />
-          <BotProtectionSection
-            localSettings={localSettings}
-            updateBotProtection={updateBotProtection}
-          />
+        <section className="h-full">
+          <ScrollArea className="h-full w-full">
+            <div className="flex flex-col gap-4">
+              <PasswordProtectionSection
+                formId={currentFormId}
+                localSettings={localSettings}
+                schema={schema}
+                updatePasswordProtection={updatePasswordProtection}
+              />
+              <DuplicatePreventionSection
+                formId={currentFormId}
+                localSettings={localSettings}
+                schema={schema}
+                updateDuplicatePrevention={updateDuplicatePrevention}
+              />
+              <ProfanityFilterSection
+                formId={currentFormId}
+                localSettings={localSettings}
+                schema={schema}
+                updateProfanityFilter={updateProfanityFilter}
+              />
+              <BotProtectionSection
+                formId={currentFormId}
+                localSettings={localSettings}
+                schema={schema}
+                updateBotProtection={updateBotProtection}
+              />
+            </div>
+          </ScrollArea>
         </section>
       );
     case "branding":
       return (
-        <section className="flex flex-col gap-4">
-          <BrandingSection
-            localSettings={localSettings}
-            updateSettings={updateSettings}
-            updateSocialMedia={updateSocialMedia}
-          />
+        <section className="h-full">
+          <ScrollArea className="h-full w-full">
+            <div>
+              <BrandingSection
+                formId={currentFormId}
+                localSettings={localSettings}
+                schema={schema}
+                updateSettings={updateSettings}
+                updateSocialMedia={updateSocialMedia}
+              />
+            </div>
+          </ScrollArea>
         </section>
       );
     case "notifications":
       return (
-        <section className="flex flex-col gap-4">
-          <NotificationsSection
-            localSettings={localSettings}
-            updateNotifications={updateNotifications}
-          />
+        <section className="h-full">
+          <ScrollArea className="h-full w-full">
+            <div>
+              <NotificationsSection
+                formId={currentFormId}
+                localSettings={localSettings}
+                schema={schema}
+                updateNotifications={updateNotifications}
+              />
+            </div>
+          </ScrollArea>
         </section>
       );
     case "quiz":
       return (
-        <section className="flex flex-col gap-4">
-          <QuizSection
-            localSettings={localSettings}
-            updateSettings={updateSettings}
-          />
+        <section className="h-full">
+          <ScrollArea className="h-full w-full">
+            <div>
+              <QuizSection
+                formId={currentFormId}
+                localSettings={localSettings}
+                schema={schema}
+                updateSettings={updateSettings}
+              />
+            </div>
+          </ScrollArea>
         </section>
       );
     case "design":
       return (
-        <section className="flex flex-col gap-4">
-          <DesignSection
-            formId={currentFormId}
-            localSettings={localSettings}
-            updateSettings={updateSettings}
-          />
+        <section className="h-full">
+          <ScrollArea className="h-full w-full">
+            <div>
+              <DesignSection
+                formId={currentFormId}
+                localSettings={localSettings}
+                updateSettings={updateSettings}
+              />
+            </div>
+          </ScrollArea>
         </section>
       );
     case "api":
       return (
-        <section className="flex flex-col gap-4">
-          <ApiSection
-            formId={currentFormId}
-            localSettings={localSettings}
-            schema={schema}
-            updateApi={updateApi}
-          />
+        <section className="h-full">
+          <ScrollArea className="h-full w-full">
+            <div>
+              <ApiSection
+                formId={currentFormId}
+                localSettings={localSettings}
+                schema={schema}
+                updateApi={updateApi}
+              />
+            </div>
+          </ScrollArea>
         </section>
       );
     case "webhooks":
       return (
-        <section className="flex flex-col gap-4">
-          <WebhooksSettingsSection formId={currentFormId || ""} />
+        <section className="h-full">
+          <ScrollArea className="h-full w-full">
+            <div>
+              <WebhooksSettingsSection formId={currentFormId || ""} />
+            </div>
+          </ScrollArea>
         </section>
       );
     case "metadata":
       return (
-        <section className="flex flex-col gap-4">
-          <MetadataSection
-            localSettings={localSettings}
-            updateSettings={updateSettings}
-          />
+        <section className="h-full">
+          <ScrollArea className="h-full w-full">
+            <div>
+              <MetadataSection
+                formId={currentFormId}
+                localSettings={localSettings}
+                schema={schema}
+                updateSettings={updateSettings}
+              />
+            </div>
+          </ScrollArea>
         </section>
       );
     default:

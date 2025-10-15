@@ -1,120 +1,327 @@
-import { Eye, EyeOff, Lock } from "lucide-react";
-import React from "react";
+import { Eye, EyeOff } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/hooks/use-toast";
+import { formsDb } from "@/lib/database";
 
 interface PasswordProtectionSectionProps {
   localSettings: any;
   updatePasswordProtection: (updates: any) => void;
+  formId?: string;
+  schema?: any;
 }
 
 export function PasswordProtectionSection({
   localSettings,
   updatePasswordProtection,
+  formId,
+  schema,
 }: PasswordProtectionSectionProps) {
-  const [showPassword, setShowPassword] = React.useState(false);
-
-  const passwordProtection = localSettings.passwordProtection || {
-    enabled: false,
-    password: "",
+  const [showPassword, setShowPassword] = useState(false);
+  const [passwordProtectionSettings, setPasswordProtectionSettings] = useState({
+    enabled: localSettings.passwordProtection?.enabled,
+    password: localSettings.passwordProtection?.password || "",
     message:
+      localSettings.passwordProtection?.message ||
       "This form is password protected. Please enter the password to continue.",
+  });
+
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [hasChanges, setHasChanges] = useState(false);
+
+  const passwordProtectionRef = useRef<HTMLDivElement>(null);
+
+  const handlePasswordProtectionChange = (field: string, value: any) => {
+    setPasswordProtectionSettings((prev) => ({ ...prev, [field]: value }));
+    setSaved(false);
+    setHasChanges(true);
   };
 
-  const handleToggle = (enabled: boolean) => {
-    updatePasswordProtection({ enabled });
+  const resetSettings = () => {
+    setPasswordProtectionSettings({
+      enabled: localSettings.passwordProtection?.enabled,
+      password: localSettings.passwordProtection?.password || "",
+      message:
+        localSettings.passwordProtection?.message ||
+        "This form is password protected. Please enter the password to continue.",
+    });
+    setHasChanges(false);
   };
 
-  const handlePasswordChange = (password: string) => {
-    updatePasswordProtection({ password });
+  const savePasswordProtection = async () => {
+    if (!formId) {
+      toast.error("Form ID is required to save settings");
+      return;
+    }
+
+    setSaving(true);
+    try {
+      const newSchema = {
+        ...schema,
+        settings: {
+          ...schema.settings,
+          passwordProtection: passwordProtectionSettings,
+        },
+      };
+      await formsDb.updateForm(formId, { schema: newSchema as any });
+      updatePasswordProtection(passwordProtectionSettings);
+      setSaved(true);
+      setHasChanges(false);
+      toast.success("Password protection settings saved successfully");
+
+      setTimeout(() => setSaved(false), 2000);
+    } catch (error) {
+      console.error("Error saving password protection:", error);
+      toast.error("Failed to save password protection settings");
+    } finally {
+      setSaving(false);
+    }
   };
 
-  const handleMessageChange = (message: string) => {
-    updatePasswordProtection({ message });
-  };
+  useEffect(() => {
+    if (passwordProtectionRef.current) {
+      const firstInput = passwordProtectionRef.current.querySelector(
+        "input, textarea"
+      ) as HTMLElement;
+      firstInput?.focus();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (saved) {
+      const announcement = document.createElement("div");
+      announcement.setAttribute("aria-live", "polite");
+      announcement.setAttribute("aria-atomic", "true");
+      announcement.className = "sr-only";
+      announcement.textContent =
+        "Password protection settings saved successfully";
+      document.body.appendChild(announcement);
+
+      setTimeout(() => {
+        document.body.removeChild(announcement);
+      }, 1000);
+    }
+  }, [saved]);
 
   return (
-    <Card className="p-6">
-      <div className="mb-4 flex items-center gap-3">
-        <Lock className="h-5 w-5 text-primary" />
-        <h3 className="font-medium text-lg">Password Protection</h3>
-      </div>
-      <div className="flex flex-col gap-4">
-        <div className="flex items-center gap-2">
-          <Switch
-            checked={passwordProtection.enabled}
-            id="password-protection-enabled"
-            onCheckedChange={handleToggle}
-            size="sm"
-          />
-          <Label
-            className="font-medium text-sm"
-            htmlFor="password-protection-enabled"
-          >
-            Enable Password Protection
-          </Label>
-        </div>
+    <div
+      aria-label="Password protection settings"
+      className="flex flex-col gap-4"
+      role="main"
+    >
+      <Card
+        aria-labelledby="password-protection-title"
+        className="shadow-none"
+        ref={passwordProtectionRef}
+        role="region"
+      >
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle
+                className="flex items-center gap-2 text-lg tracking-tight"
+                id="password-protection-title"
+              >
+                Password Protection
+              </CardTitle>
+              <CardDescription id="password-protection-description">
+                Restrict access to your form with a password
+              </CardDescription>
+            </div>
+            {hasChanges && (
+              <Badge className="gap-2" variant="secondary">
+                <div className="size-2 rounded-full bg-orange-500" />
+                Unsaved changes
+              </Badge>
+            )}
+          </div>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-6">
+          <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-1">
+              <Label
+                className="font-medium text-sm"
+                htmlFor="password-protection-enabled"
+              >
+                Enable Password Protection
+              </Label>
+              <p
+                className="text-muted-foreground text-xs"
+                id="password-protection-enabled-description"
+              >
+                Require users to enter a password to access the form
+              </p>
+            </div>
+            <Switch
+              aria-describedby="password-protection-enabled-description"
+              checked={passwordProtectionSettings.enabled}
+              id="password-protection-enabled"
+              onCheckedChange={(checked) =>
+                handlePasswordProtectionChange("enabled", checked)
+              }
+            />
+          </div>
 
-        {passwordProtection.enabled ? (
-          <div className="flex flex-col gap-4 border-muted border-l-2 pl-6">
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="form-password">Password</Label>
-              <div className="relative">
-                <Input
-                  className="pr-10"
-                  id="form-password"
-                  onChange={(e) => handlePasswordChange(e.target.value)}
-                  placeholder="Enter form password"
-                  type={showPassword ? "text" : "password"}
-                  value={passwordProtection.password}
-                />
+          {passwordProtectionSettings.enabled && (
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-2">
+                  <Label
+                    className="font-medium text-sm"
+                    htmlFor="form-password"
+                  >
+                    Password
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      className="pr-10 shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
+                      id="form-password"
+                      onChange={(e) =>
+                        handlePasswordProtectionChange(
+                          "password",
+                          e.target.value
+                        )
+                      }
+                      onKeyDown={(e) => {
+                        if (e.key === "Escape") {
+                          (e.target as HTMLElement).blur();
+                        }
+                      }}
+                      placeholder="Enter form password"
+                      type={showPassword ? "text" : "password"}
+                      value={passwordProtectionSettings.password}
+                    />
+                    <Button
+                      aria-label={
+                        showPassword ? "Hide password" : "Show password"
+                      }
+                      className="absolute top-0 right-0 h-full px-3 py-2 hover:bg-transparent"
+                      onClick={() => setShowPassword(!showPassword)}
+                      size="sm"
+                      type="button"
+                      variant="ghost"
+                    >
+                      {showPassword ? (
+                        <EyeOff aria-hidden="true" className="h-4 w-4" />
+                      ) : (
+                        <Eye aria-hidden="true" className="h-4 w-4" />
+                      )}
+                    </Button>
+                  </div>
+                  <p className="text-muted-foreground text-xs">
+                    Users will need to enter this password to access the form
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <Label
+                    className="font-medium text-sm"
+                    htmlFor="password-message"
+                  >
+                    Custom Message
+                  </Label>
+                  <Textarea
+                    className="resize-none shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
+                    id="password-message"
+                    onChange={(e) =>
+                      handlePasswordProtectionChange("message", e.target.value)
+                    }
+                    onKeyDown={(e) => {
+                      if (e.key === "Escape") {
+                        (e.target as HTMLElement).blur();
+                      }
+                    }}
+                    placeholder="Enter custom message for password prompt"
+                    rows={2}
+                    value={passwordProtectionSettings.message}
+                  />
+                  <p className="text-muted-foreground text-xs">
+                    Message shown to users when they need to enter the password
+                  </p>
+                </div>
+              </div>
+
+              <div
+                aria-live="polite"
+                className="rounded-lg border border-muted bg-muted/50 p-4"
+                role="status"
+              >
+                <div className="flex flex-col gap-2">
+                  <h4 className="font-medium text-foreground text-sm">
+                    Current Configuration
+                  </h4>
+                  <p className="text-muted-foreground text-sm">
+                    Password protection is{" "}
+                    <span className="font-semibold text-foreground">
+                      enabled
+                    </span>
+                    . Users will need to enter the password to access the form.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {!passwordProtectionSettings.enabled && (
+            <div className="rounded-lg bg-muted/30 p-4">
+              <p className="text-muted-foreground text-sm">
+                Password protection restricts access to your form by requiring
+                users to enter a password before they can view and submit the
+                form.
+              </p>
+            </div>
+          )}
+
+          <div
+            aria-label="Password protection actions"
+            className="flex items-center justify-between"
+            role="group"
+          >
+            <div className="flex items-center gap-2">
+              {hasChanges && (
                 <Button
-                  className="absolute top-0 right-0 h-full px-3 py-2 hover:bg-transparent"
-                  onClick={() => setShowPassword(!showPassword)}
+                  className="gap-2 text-muted-foreground hover:text-foreground"
+                  onClick={resetSettings}
                   size="sm"
-                  type="button"
                   variant="ghost"
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
+                  Reset
                 </Button>
-              </div>
-              <p className="text-muted-foreground text-xs">
-                Users will need to enter this password to access the form
-              </p>
+              )}
             </div>
-
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="password-message">Custom Message</Label>
-              <Textarea
-                id="password-message"
-                onChange={(e) => handleMessageChange(e.target.value)}
-                placeholder="Enter custom message for password prompt"
-                rows={2}
-                value={passwordProtection.message}
-              />
-              <p className="text-muted-foreground text-xs">
-                Message shown to users when they need to enter the password
-              </p>
+            <div className="flex items-center gap-2">
+              <Button
+                aria-describedby="password-protection-description"
+                aria-label="Save password protection settings"
+                disabled={saving || !hasChanges}
+                loading={saving}
+                onClick={savePasswordProtection}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    savePasswordProtection();
+                  }
+                }}
+              >
+                Save
+              </Button>
             </div>
           </div>
-        ) : (
-          <div className="rounded-2xl bg-muted/30 p-4">
-            <p className="text-muted-foreground text-sm">
-              Password protection restricts access to your form by requiring
-              users to enter a password before they can view and submit the
-              form.
-            </p>
-          </div>
-        )}
-      </div>
-    </Card>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

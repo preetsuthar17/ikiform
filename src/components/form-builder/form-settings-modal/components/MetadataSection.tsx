@@ -1,7 +1,15 @@
 "use client";
 
-import { Search } from "lucide-react";
-import { Card } from "@/components/ui/card";
+import { useEffect, useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -13,21 +21,45 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/hooks/use-toast";
+import { formsDb } from "@/lib/database";
 import type { MetadataSectionProps } from "../types";
 
 export function MetadataSection({
   localSettings,
   updateSettings,
-}: MetadataSectionProps) {
+  formId,
+  schema,
+}: MetadataSectionProps & { formId?: string; schema?: any }) {
   const metadata = localSettings.metadata || {};
+  const [hasBasicChanges, setHasBasicChanges] = useState(false as boolean);
+  const [hasIndexingChanges, setHasIndexingChanges] = useState(
+    false as boolean
+  );
+  const [hasSocialChanges, setHasSocialChanges] = useState(false as boolean);
+  const [savingBasic, setSavingBasic] = useState(false as boolean);
+  const [savingIndexing, setSavingIndexing] = useState(false as boolean);
+  const [savingSocial, setSavingSocial] = useState(false as boolean);
+  const [savedBasic, setSavedBasic] = useState(false as boolean);
+  const [savedIndexing, setSavedIndexing] = useState(false as boolean);
+  const [savedSocial, setSavedSocial] = useState(false as boolean);
 
-  const updateMetadata = (updates: Partial<typeof metadata>) => {
-    updateSettings({
-      metadata: {
-        ...metadata,
-        ...updates,
-      },
-    });
+  const updateBasicMetadata = (updates: Partial<typeof metadata>) => {
+    updateSettings({ metadata: { ...metadata, ...updates } });
+    setHasBasicChanges(true);
+    setSavedBasic(false);
+  };
+
+  const updateIndexingMetadata = (updates: Partial<typeof metadata>) => {
+    updateSettings({ metadata: { ...metadata, ...updates } });
+    setHasIndexingChanges(true);
+    setSavedIndexing(false);
+  };
+
+  const updateSocialMetadata = (updates: Partial<typeof metadata>) => {
+    updateSettings({ metadata: { ...metadata, ...updates } });
+    setHasSocialChanges(true);
+    setSavedSocial(false);
   };
 
   const handleRobotsChange = (value: string) => {
@@ -41,7 +73,7 @@ export function MetadataSection({
 
     const robotsValue = robotsMap[value];
     if (robotsValue) {
-      updateMetadata({
+      updateIndexingMetadata({
         robots: value as any,
         ...robotsValue,
       });
@@ -55,21 +87,189 @@ export function MetadataSection({
     return "index";
   };
 
+  const resetBasic = () => {
+    const original = (schema?.settings as any)?.metadata || {};
+    updateSettings({
+      metadata: {
+        ...metadata,
+        title: original.title || "",
+        description: original.description || "",
+        keywords: original.keywords || "",
+        author: original.author || "",
+        canonicalUrl: original.canonicalUrl || "",
+      },
+    });
+    setHasBasicChanges(false);
+  };
+
+  const resetIndexing = () => {
+    const original = (schema?.settings as any)?.metadata || {};
+    updateSettings({
+      metadata: {
+        ...metadata,
+        robots: original.robots,
+        noIndex: original.noIndex,
+        noFollow: original.noFollow,
+        noArchive: original.noArchive,
+        noSnippet: original.noSnippet,
+        noImageIndex: original.noImageIndex,
+        noTranslate: original.noTranslate,
+      },
+    });
+    setHasIndexingChanges(false);
+  };
+
+  const resetSocial = () => {
+    const original = (schema?.settings as any)?.metadata || {};
+    updateSettings({
+      metadata: {
+        ...metadata,
+        ogTitle: original.ogTitle || "",
+        ogDescription: original.ogDescription || "",
+        ogImage: original.ogImage || "",
+        ogType: original.ogType || undefined,
+        twitterCard: original.twitterCard || "summary",
+        twitterTitle: original.twitterTitle || "",
+        twitterDescription: original.twitterDescription || "",
+        twitterImage: original.twitterImage || "",
+        twitterSite: original.twitterSite || "",
+        twitterCreator: original.twitterCreator || "",
+      },
+    });
+    setHasSocialChanges(false);
+  };
+
+  const saveBasic = async () => {
+    if (!formId) {
+      toast.error("Form ID is required to save settings");
+      return;
+    }
+    setSavingBasic(true);
+    try {
+      const newSchema = {
+        ...schema,
+        settings: {
+          ...schema.settings,
+          metadata: { ...localSettings.metadata },
+        },
+      };
+      await formsDb.updateForm(formId, { schema: newSchema as any });
+      setSavedBasic(true);
+      setHasBasicChanges(false);
+      toast.success("Basic SEO saved");
+      setTimeout(() => setSavedBasic(false), 2000);
+    } catch (e) {
+      console.error(e);
+      toast.error("Failed to save Basic SEO");
+    } finally {
+      setSavingBasic(false);
+    }
+  };
+
+  const saveIndexing = async () => {
+    if (!formId) {
+      toast.error("Form ID is required to save settings");
+      return;
+    }
+    setSavingIndexing(true);
+    try {
+      const newSchema = {
+        ...schema,
+        settings: {
+          ...schema.settings,
+          metadata: { ...localSettings.metadata },
+        },
+      };
+      await formsDb.updateForm(formId, { schema: newSchema as any });
+      setSavedIndexing(true);
+      setHasIndexingChanges(false);
+      toast.success("Indexing settings saved");
+      setTimeout(() => setSavedIndexing(false), 2000);
+    } catch (e) {
+      console.error(e);
+      toast.error("Failed to save indexing settings");
+    } finally {
+      setSavingIndexing(false);
+    }
+  };
+
+  const saveSocial = async () => {
+    if (!formId) {
+      toast.error("Form ID is required to save settings");
+      return;
+    }
+    setSavingSocial(true);
+    try {
+      const newSchema = {
+        ...schema,
+        settings: {
+          ...schema.settings,
+          metadata: { ...localSettings.metadata },
+        },
+      };
+      await formsDb.updateForm(formId, { schema: newSchema as any });
+      setSavedSocial(true);
+      setHasSocialChanges(false);
+      toast.success("Social metadata saved");
+      setTimeout(() => setSavedSocial(false), 2000);
+    } catch (e) {
+      console.error(e);
+      toast.error("Failed to save social metadata");
+    } finally {
+      setSavingSocial(false);
+    }
+  };
+
+  useEffect(() => {
+    if (savedBasic || savedIndexing || savedSocial) {
+      const announcement = document.createElement("div");
+      announcement.setAttribute("aria-live", "polite");
+      announcement.setAttribute("aria-atomic", "true");
+      announcement.className = "sr-only";
+      announcement.textContent = "Metadata updated";
+      document.body.appendChild(announcement);
+      setTimeout(() => {
+        document.body.removeChild(announcement);
+      }, 1000);
+    }
+  }, [savedBasic, savedIndexing, savedSocial]);
+
   return (
-    <Card className="p-6">
-      <div className="mb-4 flex items-center gap-3">
-        <Search className="h-5 w-5 text-primary" />
-        <h3 className="font-medium text-lg">Metadata & SEO</h3>
-      </div>
-      <div className="flex flex-col gap-4">
-        {/* Basic SEO Settings */}
-        <div className="flex flex-col gap-4 border-muted border-l-2 pl-6">
+    <div className="flex flex-col gap-4">
+      <Card
+        aria-labelledby="basic-seo-title"
+        className="shadow-none"
+        role="region"
+      >
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle
+                className="flex items-center gap-2 text-lg tracking-tight"
+                id="basic-seo-title"
+              >
+                Basic SEO
+              </CardTitle>
+              <CardDescription>
+                Titles, descriptions and canonical URL
+              </CardDescription>
+            </div>
+            {hasBasicChanges && (
+              <Badge className="gap-2" variant="secondary">
+                <div className="size-2 rounded-full bg-orange-500" />
+                Unsaved changes
+              </Badge>
+            )}
+          </div>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
             <Label htmlFor="meta-title">Page Title</Label>
             <Input
+              className="shadow-none"
               id="meta-title"
               maxLength={60}
-              onChange={(e) => updateMetadata({ title: e.target.value })}
+              onChange={(e) => updateBasicMetadata({ title: e.target.value })}
               placeholder="Enter page title (max 60 characters)"
               value={metadata.title || ""}
             />
@@ -77,13 +277,15 @@ export function MetadataSection({
               {metadata.title?.length || 0}/60 characters
             </p>
           </div>
-
           <div className="flex flex-col gap-2">
             <Label htmlFor="meta-description">Meta Description</Label>
             <Textarea
+              className="shadow-none"
               id="meta-description"
               maxLength={160}
-              onChange={(e) => updateMetadata({ description: e.target.value })}
+              onChange={(e) =>
+                updateBasicMetadata({ description: e.target.value })
+              }
               placeholder="Enter meta description (max 160 characters)"
               rows={3}
               value={metadata.description || ""}
@@ -92,34 +294,40 @@ export function MetadataSection({
               {metadata.description?.length || 0}/160 characters
             </p>
           </div>
-
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-2">
               <Label htmlFor="meta-keywords">Keywords</Label>
               <Input
+                className="shadow-none"
                 id="meta-keywords"
-                onChange={(e) => updateMetadata({ keywords: e.target.value })}
+                onChange={(e) =>
+                  updateBasicMetadata({ keywords: e.target.value })
+                }
                 placeholder="Enter keywords separated by commas"
                 value={metadata.keywords || ""}
               />
             </div>
-
             <div className="flex flex-col gap-2">
               <Label htmlFor="meta-author">Author</Label>
               <Input
+                className="shadow-none"
                 id="meta-author"
-                onChange={(e) => updateMetadata({ author: e.target.value })}
+                onChange={(e) =>
+                  updateBasicMetadata({ author: e.target.value })
+                }
                 placeholder="Enter author name"
                 value={metadata.author || ""}
               />
             </div>
           </div>
-
           <div className="flex flex-col gap-2">
             <Label htmlFor="canonical-url">Canonical URL</Label>
             <Input
+              className="shadow-none"
               id="canonical-url"
-              onChange={(e) => updateMetadata({ canonicalUrl: e.target.value })}
+              onChange={(e) =>
+                updateBasicMetadata({ canonicalUrl: e.target.value })
+              }
               placeholder="https://example.com/form"
               value={metadata.canonicalUrl || ""}
             />
@@ -127,10 +335,269 @@ export function MetadataSection({
               The preferred URL for this form page
             </p>
           </div>
-        </div>
+          <div
+            aria-label="Basic SEO actions"
+            className="flex items-center justify-between"
+            role="group"
+          >
+            <div className="flex items-center gap-2">
+              {hasBasicChanges && (
+                <Button
+                  className="gap-2 text-muted-foreground hover:text-foreground"
+                  onClick={resetBasic}
+                  size="sm"
+                  variant="ghost"
+                >
+                  Reset
+                </Button>
+              )}
+            </div>
+            <div className="flex items-center gap-2">
+              <Button
+                aria-label="Save basic SEO settings"
+                disabled={savingBasic || !hasBasicChanges}
+                loading={savingBasic}
+                onClick={saveBasic}
+              >
+                Save
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
-        {/* Search Engine Indexing */}
-        <div className="flex flex-col gap-4 border-muted border-l-2 pl-6">
+      <Card
+        aria-labelledby="social-meta-title"
+        className="shadow-none"
+        role="region"
+      >
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle
+                className="flex items-center gap-2 text-lg tracking-tight"
+                id="social-meta-title"
+              >
+                Social Metadata
+              </CardTitle>
+              <CardDescription>Open Graph and Twitter settings</CardDescription>
+            </div>
+            {hasSocialChanges && (
+              <Badge className="gap-2" variant="secondary">
+                <div className="size-2 rounded-full bg-orange-500" />
+                Unsaved changes
+              </Badge>
+            )}
+          </div>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-6">
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="og-title">Open Graph Title</Label>
+            <Input
+              className="shadow-none"
+              id="og-title"
+              onChange={(e) =>
+                updateSocialMetadata({ ogTitle: e.target.value })
+              }
+              placeholder="Enter Open Graph title"
+              value={metadata.ogTitle || ""}
+            />
+            <p className="text-muted-foreground text-xs">
+              Title shown when shared on Facebook, LinkedIn, etc.
+            </p>
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="og-description">Open Graph Description</Label>
+            <Textarea
+              className="shadow-none"
+              id="og-description"
+              onChange={(e) =>
+                updateSocialMetadata({ ogDescription: e.target.value })
+              }
+              placeholder="Enter Open Graph description"
+              rows={3}
+              value={metadata.ogDescription || ""}
+            />
+            <p className="text-muted-foreground text-xs">
+              Description shown when shared on social media
+            </p>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="og-image">Open Graph Image URL</Label>
+              <Input
+                className="shadow-none"
+                id="og-image"
+                onChange={(e) =>
+                  updateSocialMetadata({ ogImage: e.target.value })
+                }
+                placeholder="https://example.com/image.jpg"
+                value={metadata.ogImage || ""}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="og-type">Open Graph Type</Label>
+              <Select
+                onValueChange={(value) =>
+                  updateSocialMetadata({ ogType: value })
+                }
+                value={metadata.ogType || "website"}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select Open Graph type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="website">Website</SelectItem>
+                  <SelectItem value="article">Article</SelectItem>
+                  <SelectItem value="profile">Profile</SelectItem>
+                  <SelectItem value="video">Video</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="twitter-card">Twitter Card Type</Label>
+            <Select
+              onValueChange={(value) =>
+                updateSocialMetadata({ twitterCard: value as any })
+              }
+              value={metadata.twitterCard || "summary"}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select Twitter card type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="summary">Summary</SelectItem>
+                <SelectItem value="summary_large_image">
+                  Summary Large Image
+                </SelectItem>
+                <SelectItem value="app">App</SelectItem>
+                <SelectItem value="player">Player</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="twitter-title">Twitter Title</Label>
+              <Input
+                className="shadow-none"
+                id="twitter-title"
+                onChange={(e) =>
+                  updateSocialMetadata({ twitterTitle: e.target.value })
+                }
+                placeholder="Enter Twitter title"
+                value={metadata.twitterTitle || ""}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="twitter-image">Twitter Image URL</Label>
+              <Input
+                className="shadow-none"
+                id="twitter-image"
+                onChange={(e) =>
+                  updateSocialMetadata({ twitterImage: e.target.value })
+                }
+                placeholder="https://example.com/twitter-image.jpg"
+                value={metadata.twitterImage || ""}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="twitter-description">Twitter Description</Label>
+            <Textarea
+              className="shadow-none"
+              id="twitter-description"
+              onChange={(e) =>
+                updateSocialMetadata({ twitterDescription: e.target.value })
+              }
+              placeholder="Enter Twitter description"
+              rows={3}
+              value={metadata.twitterDescription || ""}
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="twitter-site">Twitter Site</Label>
+              <Input
+                className="shadow-none"
+                id="twitter-site"
+                onChange={(e) =>
+                  updateSocialMetadata({ twitterSite: e.target.value })
+                }
+                placeholder="@yourhandle"
+                value={metadata.twitterSite || ""}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="twitter-creator">Twitter Creator</Label>
+              <Input
+                className="shadow-none"
+                id="twitter-creator"
+                onChange={(e) =>
+                  updateSocialMetadata({ twitterCreator: e.target.value })
+                }
+                placeholder="@creatorhandle"
+                value={metadata.twitterCreator || ""}
+              />
+            </div>
+          </div>
+          <div
+            aria-label="Social metadata actions"
+            className="flex items-center justify-between"
+            role="group"
+          >
+            <div className="flex items-center gap-2">
+              {hasSocialChanges && (
+                <Button
+                  className="gap-2 text-muted-foreground hover:text-foreground"
+                  onClick={resetSocial}
+                  size="sm"
+                  variant="ghost"
+                >
+                  Reset
+                </Button>
+              )}
+            </div>
+            <div className="flex items-center gap-2">
+              <Button
+                aria-label="Save social metadata settings"
+                disabled={savingSocial || !hasSocialChanges}
+                loading={savingSocial}
+                onClick={saveSocial}
+              >
+                Save
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+      <Card
+        aria-labelledby="indexing-title"
+        className="shadow-none"
+        role="region"
+      >
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle
+                className="flex items-center gap-2 text-lg tracking-tight"
+                id="indexing-title"
+              >
+                Search Engine Indexing
+              </CardTitle>
+              <CardDescription>
+                Control how search engines crawl this form
+              </CardDescription>
+            </div>
+            {hasIndexingChanges && (
+              <Badge className="gap-2" variant="secondary">
+                <div className="size-2 rounded-full bg-orange-500" />
+                Unsaved changes
+              </Badge>
+            )}
+          </div>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
             <Label>Search Engine Indexing</Label>
             <Select onValueChange={handleRobotsChange} value={getRobotsValue()}>
@@ -153,215 +620,86 @@ export function MetadataSection({
               page
             </p>
           </div>
-
           <div className="grid grid-cols-2 gap-4">
             <div className="flex items-center gap-2">
               <Switch
                 checked={metadata.noArchive}
                 id="no-archive"
                 onCheckedChange={(checked) =>
-                  updateMetadata({ noArchive: checked })
+                  updateIndexingMetadata({ noArchive: checked })
                 }
-                size="sm"
               />
               <Label className="text-sm" htmlFor="no-archive">
                 No Archive
               </Label>
             </div>
-
             <div className="flex items-center gap-2">
               <Switch
                 checked={metadata.noSnippet}
                 id="no-snippet"
                 onCheckedChange={(checked) =>
-                  updateMetadata({ noSnippet: checked })
+                  updateIndexingMetadata({ noSnippet: checked })
                 }
-                size="sm"
               />
               <Label className="text-sm" htmlFor="no-snippet">
                 No Snippet
               </Label>
             </div>
-
             <div className="flex items-center gap-2">
               <Switch
                 checked={metadata.noImageIndex}
                 id="no-image-index"
                 onCheckedChange={(checked) =>
-                  updateMetadata({ noImageIndex: checked })
+                  updateIndexingMetadata({ noImageIndex: checked })
                 }
-                size="sm"
               />
               <Label className="text-sm" htmlFor="no-image-index">
                 No Image Index
               </Label>
             </div>
-
             <div className="flex items-center gap-2">
               <Switch
                 checked={metadata.noTranslate}
                 id="no-translate"
                 onCheckedChange={(checked) =>
-                  updateMetadata({ noTranslate: checked })
+                  updateIndexingMetadata({ noTranslate: checked })
                 }
-                size="sm"
               />
               <Label className="text-sm" htmlFor="no-translate">
                 No Translate
               </Label>
             </div>
           </div>
-        </div>
-
-        {/* Social Media Settings */}
-        <div className="flex flex-col gap-4 border-muted border-l-2 pl-6">
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="og-title">Open Graph Title</Label>
-            <Input
-              id="og-title"
-              onChange={(e) => updateMetadata({ ogTitle: e.target.value })}
-              placeholder="Enter Open Graph title"
-              value={metadata.ogTitle || ""}
-            />
-            <p className="text-muted-foreground text-xs">
-              Title shown when shared on Facebook, LinkedIn, etc.
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="og-description">Open Graph Description</Label>
-            <Textarea
-              id="og-description"
-              onChange={(e) =>
-                updateMetadata({ ogDescription: e.target.value })
-              }
-              placeholder="Enter Open Graph description"
-              rows={3}
-              value={metadata.ogDescription || ""}
-            />
-            <p className="text-muted-foreground text-xs">
-              Description shown when shared on social media
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="og-image">Open Graph Image URL</Label>
-              <Input
-                id="og-image"
-                onChange={(e) => updateMetadata({ ogImage: e.target.value })}
-                placeholder="https://example.com/image.jpg"
-                value={metadata.ogImage || ""}
-              />
+          <div
+            aria-label="Indexing actions"
+            className="flex items-center justify-between"
+            role="group"
+          >
+            <div className="flex items-center gap-2">
+              {hasIndexingChanges && (
+                <Button
+                  className="gap-2 text-muted-foreground hover:text-foreground"
+                  onClick={resetIndexing}
+                  size="sm"
+                  variant="ghost"
+                >
+                  Reset
+                </Button>
+              )}
             </div>
-
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="og-type">Open Graph Type</Label>
-              <Select
-                onValueChange={(value) => updateMetadata({ ogType: value })}
-                value={metadata.ogType || "website"}
+            <div className="flex items-center gap-2">
+              <Button
+                aria-label="Save indexing settings"
+                disabled={savingIndexing || !hasIndexingChanges}
+                loading={savingIndexing}
+                onClick={saveIndexing}
               >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select Open Graph type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="website">Website</SelectItem>
-                  <SelectItem value="article">Article</SelectItem>
-                  <SelectItem value="profile">Profile</SelectItem>
-                  <SelectItem value="video">Video</SelectItem>
-                </SelectContent>
-              </Select>
+                Save
+              </Button>
             </div>
           </div>
-
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="twitter-card">Twitter Card Type</Label>
-            <Select
-              onValueChange={(value) =>
-                updateMetadata({ twitterCard: value as any })
-              }
-              value={metadata.twitterCard || "summary"}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select Twitter card type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="summary">Summary</SelectItem>
-                <SelectItem value="summary_large_image">
-                  Summary Large Image
-                </SelectItem>
-                <SelectItem value="app">App</SelectItem>
-                <SelectItem value="player">Player</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="twitter-title">Twitter Title</Label>
-              <Input
-                id="twitter-title"
-                onChange={(e) =>
-                  updateMetadata({ twitterTitle: e.target.value })
-                }
-                placeholder="Enter Twitter title"
-                value={metadata.twitterTitle || ""}
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="twitter-image">Twitter Image URL</Label>
-              <Input
-                id="twitter-image"
-                onChange={(e) =>
-                  updateMetadata({ twitterImage: e.target.value })
-                }
-                placeholder="https://example.com/twitter-image.jpg"
-                value={metadata.twitterImage || ""}
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="twitter-description">Twitter Description</Label>
-            <Textarea
-              id="twitter-description"
-              onChange={(e) =>
-                updateMetadata({ twitterDescription: e.target.value })
-              }
-              placeholder="Enter Twitter description"
-              rows={3}
-              value={metadata.twitterDescription || ""}
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="twitter-site">Twitter Site</Label>
-              <Input
-                id="twitter-site"
-                onChange={(e) =>
-                  updateMetadata({ twitterSite: e.target.value })
-                }
-                placeholder="@yourhandle"
-                value={metadata.twitterSite || ""}
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="twitter-creator">Twitter Creator</Label>
-              <Input
-                id="twitter-creator"
-                onChange={(e) =>
-                  updateMetadata({ twitterCreator: e.target.value })
-                }
-                placeholder="@creatorhandle"
-                value={metadata.twitterCreator || ""}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </Card>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

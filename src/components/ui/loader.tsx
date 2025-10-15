@@ -12,7 +12,6 @@ export function Loader({ className, size = "md", ...props }: SpinnerProps) {
 
   const delays = [
     -1.667, -1.583, -1.5, -1.417, -1.333, -1.25, -1.167, -1.083, -1, -0.917,
-    -0.833, -0.75,
   ];
 
   return (
@@ -26,8 +25,8 @@ export function Loader({ className, size = "md", ...props }: SpinnerProps) {
       role="status"
       {...props}
     >
-      {Array.from({ length: 12 }).map((_, i) => {
-        const angle = i * 30;
+      {Array.from({ length: 10 }).map((_, i) => {
+        const angle = i * (360 / 10);
         const style: React.CSSProperties = {
           position: "absolute",
           height: "25%",

@@ -1,11 +1,5 @@
 import type { Metadata } from "next";
-import {
-  DM_Sans,
-  Geist,
-  Geist_Mono,
-  Inter,
-  JetBrains_Mono,
-} from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import { Analytics } from "@vercel/analytics/next";
@@ -15,33 +9,14 @@ import { TicketpingController } from "@/components/other/TicketPingController";
 import { Toaster } from "@/components/ui/toast";
 import ConditionalLayout from "./conditional-layout";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const jetBrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-});
-
 const geist = Geist({
-  variable: "--font-geist",
+  variable: "--font-sans",
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+  variable: "--font-mono",
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
@@ -196,7 +171,7 @@ export default function RootLayout({
       </head>
       <TicketpingController />
       <body
-        className={`light ${geist.className} ${inter.variable} ${jetBrainsMono.variable} ${geistMono.variable} ${dmSans.variable} antialiased`}
+        className={`light ${geist.className} ${geistMono.variable} antialiased`}
       >
         <LightThemeEnforcer />
         <ConditionalLayout>{children}</ConditionalLayout>

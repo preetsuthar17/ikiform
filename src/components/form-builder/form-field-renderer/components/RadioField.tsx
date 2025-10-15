@@ -1,10 +1,8 @@
 import { CheckCircle } from "lucide-react";
 import React from "react";
-
-import { RadioGroup, RadioItem } from "@/components/ui/radio";
-
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import type { BaseFieldProps } from "../types";
-
 import {
   applyBuilderMode,
   getBuilderMode,
@@ -101,17 +99,17 @@ export function RadioField(props: BaseFieldProps) {
                 className={`relative ${isFormBuilder && isCorrect ? "rounded-md bg-green-50 p-1 ring-1 ring-green-200" : ""}`}
                 key={index}
               >
-                <RadioItem
+                <RadioGroupItem
                   {...applyBuilderMode(
                     {
                       disabled: disabled || loading,
                       id: `${field.id}-${index}`,
-                      label: optionLabel,
                       value: optionValue,
                     },
                     builderMode
                   )}
                 />
+                <Label htmlFor={`${field.id}-${index}`}>{optionLabel}</Label>
                 {isFormBuilder && isCorrect && (
                   <div
                     className="-translate-y-1/2 absolute top-1/2 right-2 transform"

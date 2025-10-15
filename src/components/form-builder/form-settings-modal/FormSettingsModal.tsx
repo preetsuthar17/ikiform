@@ -3,11 +3,13 @@
 import { Settings } from "lucide-react";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 
-import { Modal, ModalContent } from "@/components/ui/modal";
-import { toast } from "@/hooks/use-toast";
-import { formsDb } from "@/lib/database";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   FormSettingsDesktopLayout,
   FormSettingsMobileLayout,
@@ -40,7 +42,6 @@ export function FormSettingsModal({
 
   const [activeSection, setActiveSection] =
     useState<FormSettingsSection>("basic");
-  const [saving, setSaving] = useState(false);
 
   const sectionProps = {
     localSettings,
@@ -58,64 +59,18 @@ export function FormSettingsModal({
     schema,
   };
 
-  const handleSave = async () => {
-    if (!formId) {
-      toast.error("Missing form ID. Cannot save settings.");
-      return;
-    }
-    setSaving(true);
-    try {
-      const newSchema = {
-        ...schema,
-        settings: {
-          ...schema.settings,
-          ...localSettings,
-          duplicatePrevention: localSettings.duplicatePrevention,
-        },
-      };
-      await formsDb.updateForm(formId, { schema: newSchema as any });
-      onSchemaUpdate({ settings: localSettings as any });
-      toast.success("Settings saved!");
-      onClose();
-    } catch (e) {
-      console.error("Save error:", e);
-      toast.error("Failed to save settings.");
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  const handleCancel = () => {
-    resetSettings();
-    onClose();
-  };
-
   return (
-    <Modal onOpenChange={onClose} open={isOpen}>
-      <ModalContent className="flex h-[90vh] max-w-6xl flex-col p-2 md:p-4">
-        <div className="mt-0 flex shrink-0 flex-wrap items-center justify-between gap-6 p-2 md:mt-4 md:p-4">
+    <Dialog onOpenChange={onClose} open={isOpen}>
+      <DialogContent className="flex h-[90vh] w-full grow flex-col p-0 sm:max-w-6xl">
+        <DialogHeader className="flex shrink-0 flex-row items-center gap-6 p-6 pb-4">
           <div className="flex items-center gap-3">
             <Settings className="h-5 w-5 text-primary" />
-            <h2 className="font-semibold text-xl">Form Settings</h2>
+            <DialogTitle className="font-semibold text-xl">
+              Form Settings
+            </DialogTitle>
           </div>
-          {formId && (
-            <div className="flex items-center gap-2">
-              <Button onClick={handleCancel} variant="outline">
-                Cancel
-              </Button>
-              <Button
-                className="gap-2"
-                disabled={saving}
-                loading={saving}
-                onClick={handleSave}
-                variant={"default"}
-              >
-                {saving ? "Saving" : "Save Changes"}
-              </Button>
-            </div>
-          )}
-        </div>
-        <div className="min-h-0 flex-1">
+        </DialogHeader>
+        <div className="min-h-0 flex-1 px-6 pb-6">
           {formId && (
             <>
               <FormSettingsDesktopLayout
@@ -140,7 +95,7 @@ export function FormSettingsModal({
             </div>
           )}
         </div>
-      </ModalContent>
-    </Modal>
+      </DialogContent>
+    </Dialog>
   );
 }

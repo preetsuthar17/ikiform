@@ -95,7 +95,7 @@ export function FormsSearch({
               {/* Sort Filter */}
               <div className="flex flex-col gap-2">
                 <label className="font-medium text-sm">Sort By</label>
-                <div className="space-y-1">
+                <div className="flex flex-col gap-2">
                   <Toggle
                     className="w-full justify-start"
                     onPressedChange={() => onSortByChange("updated")}

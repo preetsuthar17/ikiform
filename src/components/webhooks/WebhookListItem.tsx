@@ -9,14 +9,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Switch } from "@/components/ui/switch";
 
+import type { WebhookConfig } from "./hooks/useWebhookManagement";
+
 interface WebhookListItemProps {
-  webhook: {
-    id: string;
-    url: string;
-    events: string[];
-    method: string;
-    enabled: boolean;
-  };
+  webhook: WebhookConfig;
   onEdit: () => void;
   onDelete: () => void;
   onToggleEnabled: () => void;
@@ -33,29 +29,42 @@ export function WebhookListItem({
   onViewLogs,
 }: WebhookListItemProps) {
   return (
-    <div className="flex flex-col justify-between gap-3 p-4 sm:flex-row sm:items-center">
+    <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
       <div className="min-w-0 flex-1">
         <div className="mb-2 flex flex-col gap-3">
           <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-2">
-              <div className="break-all font-mono text-foreground text-sm">
-                {webhook.url}
-              </div>
+            <div className="flex flex-col gap-2">
+              {webhook.name ? (
+                <div className="truncate font-medium text-foreground">
+                  {webhook.name}
+                </div>
+              ) : null}
+              {webhook.description ? (
+                <div className="truncate text-muted-foreground text-xs">
+                  {webhook.description}
+                </div>
+              ) : null}
             </div>
           </div>
+
           <div className="flex items-center gap-2 sm:gap-3">
-            <Badge className="font-mono" size="sm" variant="outline">
+            <Badge className="font-mono" variant="outline">
               {webhook.method}
             </Badge>
-            <Switch
-              checked={webhook.enabled}
-              onCheckedChange={onToggleEnabled}
-              size="sm"
-            />
-            <Badge
-              size="sm"
-              variant={webhook.enabled ? "default" : "secondary"}
+            <div
+              onClick={(e) => e.stopPropagation()}
+              onKeyDown={(e) => e.stopPropagation()}
+              onPointerDown={(e) => e.stopPropagation()}
+              role="presentation"
             >
+              <Switch
+                checked={webhook.enabled}
+                onCheckedChange={() => {
+                  onToggleEnabled();
+                }}
+              />
+            </div>
+            <Badge variant={webhook.enabled ? "default" : "secondary"}>
               {webhook.enabled ? "Active" : "Inactive"}
             </Badge>
           </div>
@@ -66,7 +75,6 @@ export function WebhookListItem({
             <Badge
               className="border-blue-200 bg-blue-50 text-blue-700"
               key={event}
-              size="sm"
               variant="secondary"
             >
               {event}
@@ -78,36 +86,48 @@ export function WebhookListItem({
       <div className="flex items-center gap-2 sm:gap-0">
         <div className="flex items-center gap-1 sm:hidden">
           <Button
-            className="h-8 w-8 p-0"
-            onClick={onEdit}
-            size="sm"
+            className=""
+            onClick={(e) => {
+              e.stopPropagation();
+              onEdit();
+            }}
+            size="icon"
             variant="ghost"
           >
-            <Edit className="h-4 w-4" />
+            <Edit className="size-4" />
           </Button>
           <Button
-            className="h-8 w-8 p-0"
-            onClick={onTest}
-            size="sm"
+            className=""
+            onClick={(e) => {
+              e.stopPropagation();
+              onTest();
+            }}
+            size="icon"
             variant="ghost"
           >
-            <Play className="h-4 w-4" />
+            <Play className="size-4" />
           </Button>
           <Button
-            className="h-8 w-8 p-0"
-            onClick={onViewLogs}
-            size="sm"
+            className=""
+            onClick={(e) => {
+              e.stopPropagation();
+              onViewLogs();
+            }}
+            size="icon"
             variant="ghost"
           >
-            <FileText className="h-4 w-4" />
+            <FileText className="size-4" />
           </Button>
           <Button
-            className="h-8 w-8 p-0 text-destructive"
-            onClick={onDelete}
-            size="sm"
+            className="text-destructive"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete();
+            }}
+            size="icon"
             variant="ghost"
           >
-            <Trash2 className="h-4 w-4" />
+            <Trash2 className="size-4" />
           </Button>
         </div>
 
@@ -115,28 +135,50 @@ export function WebhookListItem({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
-              className="hidden h-8 w-8 p-0 sm:flex"
-              size="sm"
+              className="hidden sm:flex"
+              onClick={(e) => e.stopPropagation()}
+              size="icon"
               variant="ghost"
             >
-              <MoreHorizontal className="h-4 w-4" />
+              <MoreHorizontal className="size-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={onEdit}>
-              <Edit className="mr-2 h-4 w-4" />
+          <DropdownMenuContent align="end" className="shadow-xs">
+            <DropdownMenuItem
+              onClick={(e) => {
+                e.stopPropagation();
+                onEdit();
+              }}
+            >
+              <Edit className="size-4" />
               Edit
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={onTest}>
-              <Play className="mr-2 h-4 w-4" />
+            <DropdownMenuItem
+              onClick={(e) => {
+                e.stopPropagation();
+                onTest();
+              }}
+            >
+              <Play className="size-4" />
               Test
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={onViewLogs}>
-              <FileText className="mr-2 h-4 w-4" />
+            <DropdownMenuItem
+              onClick={(e) => {
+                e.stopPropagation();
+                onViewLogs();
+              }}
+            >
+              <FileText className="size-4" />
               View Logs
             </DropdownMenuItem>
-            <DropdownMenuItem className="text-destructive" onClick={onDelete}>
-              <Trash2 className="mr-2 h-4 w-4" />
+            <DropdownMenuItem
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete();
+              }}
+              variant="destructive"
+            >
+              <Trash2 className="size-4" />
               Delete
             </DropdownMenuItem>
           </DropdownMenuContent>

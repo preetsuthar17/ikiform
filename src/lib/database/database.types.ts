@@ -324,6 +324,8 @@ export interface Database {
       webhooks: {
         Row: {
           account_id: string | null;
+          name: string | null;
+          description: string | null;
           created_at: string;
           enabled: boolean;
           events: string[];
@@ -341,6 +343,8 @@ export interface Database {
         };
         Insert: {
           account_id?: string | null;
+          name?: string | null;
+          description?: string | null;
           created_at?: string;
           enabled?: boolean;
           events: string[];
@@ -358,6 +362,8 @@ export interface Database {
         };
         Update: {
           account_id?: string | null;
+          name?: string | null;
+          description?: string | null;
           created_at?: string;
           enabled?: boolean;
           events?: string[];
@@ -772,6 +778,8 @@ export interface WebhookConfig {
   id: string;
   formId?: string;
   accountId?: string;
+  name?: string | null;
+  description?: string | null;
   url: string;
   events: WebhookEventType[];
   secret?: string;

@@ -2,7 +2,8 @@ import { CheckCircle, HelpCircle, Info, XCircle } from "lucide-react";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { RadioGroup, RadioItem } from "@/components/ui/radio";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import type { BaseFieldProps } from "../types";
 import { getErrorRingClasses } from "../utils";
 import { sanitizeOptions } from "../utils/sanitizeOptions";
@@ -160,12 +161,12 @@ export function QuizField({
               key={index}
             >
               <div className="flex items-center justify-between">
-                <RadioItem
+                <RadioGroupItem
                   disabled={disabled || loading}
                   id={`${field.id}-${index}`}
-                  label={optionLabel}
                   value={optionValue}
                 />
+                <Label htmlFor={`${field.id}-${index}`}>{optionLabel}</Label>
                 {optionIcon}
               </div>
             </div>

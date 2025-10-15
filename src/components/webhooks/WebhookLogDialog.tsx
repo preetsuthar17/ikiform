@@ -1,29 +1,27 @@
+import clsx from "clsx";
 import {
   Activity,
   AlertCircle,
+  Check,
   CheckCircle,
-  Clock,
   Copy,
   Eye,
-  RefreshCw,
   XCircle,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Alert } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-} from "@/components/ui/drawer";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Loader } from "@/components/ui/loader";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface WebhookLog {
   id: string;
@@ -60,19 +58,49 @@ function CodeBlock({
     }
   };
 
+  const [showCheck, setShowCheck] = useState(false);
+
   return (
-    <div className="relative">
+    <div className="relative rounded-lg bg-muted font-mono">
       <Button
-        className="absolute top-2 right-2 h-6 w-6 p-0"
-        onClick={handleCopy}
-        size="sm"
-        variant="ghost"
+        aria-label="Copy code to clipboard"
+        className="absolute top-2 right-2 size-8"
+        onClick={async () => {
+          await handleCopy();
+          setShowCheck(true);
+          setTimeout(() => setShowCheck(false), 1000);
+        }}
+        size="icon"
+        tabIndex={0}
+        variant="outline"
       >
-        <Copy className="h-3 w-3" />
+        <span className="relative inline-flex size-4 items-center justify-center">
+          <span
+            aria-hidden={showCheck}
+            className={clsx(
+              "absolute transition-all duration-300",
+              showCheck
+                ? "scale-45 opacity-0 blur-sm"
+                : "scale-100 opacity-100 blur-0"
+            )}
+          >
+            <Copy className="size-4" />
+          </span>
+          <span
+            aria-hidden={!showCheck}
+            className={clsx(
+              "absolute transition-all duration-300",
+              showCheck
+                ? "scale-120 opacity-100 blur-0"
+                : "scale-100 opacity-0 blur-sm"
+            )}
+          >
+            <Check className="size-4" />
+          </span>
+        </span>
       </Button>
       <pre
         className={`overflow-x-auto whitespace-pre-wrap rounded-lg bg-muted p-4 font-mono text-xs ${className}`}
-        style={{ fontFamily: "var(--font-mono, monospace)" }}
       >
         {code}
       </pre>
@@ -304,7 +332,9 @@ function PayloadViewer({ payload }: { payload: any }) {
                     <span className="min-w-0 flex-shrink-0 font-medium text-muted-foreground text-sm">
                       {key}:
                     </span>
-                    <div className="min-w-0 flex-1">{displayValue}</div>
+                    <div className="min-w-0 flex-1 font-mono">
+                      {displayValue}
+                    </div>
                   </div>
                 );
               })}
@@ -318,7 +348,7 @@ function PayloadViewer({ payload }: { payload: any }) {
   function RawView() {
     return (
       <CodeBlock
-        className="overflow-x-auto whitespace-pre-wrap rounded-lg bg-muted p-4 text-xs"
+        className="overflow-x-auto whitespace-pre-wrap rounded-lg bg-red-500 p-4 text-xs"
         code={JSON.stringify(parsedPayload, null, 2)}
       />
     );
@@ -327,19 +357,20 @@ function PayloadViewer({ payload }: { payload: any }) {
   return (
     <div className="flex flex-col gap-4">
       <Tabs
-        items={[
-          { id: "formatted", label: "Formatted" },
-          { id: "raw", label: "Raw JSON" },
-        ]}
         onValueChange={(value) => setViewMode(value as "formatted" | "raw")}
         value={viewMode}
-      />
-      <TabsContent activeValue={viewMode} className="mt-4" value="formatted">
-        <FormattedView />
-      </TabsContent>
-      <TabsContent activeValue={viewMode} className="mt-4" value="raw">
-        <RawView />
-      </TabsContent>
+      >
+        <TabsList>
+          <TabsTrigger value="formatted">Formatted</TabsTrigger>
+          <TabsTrigger value="raw">Raw JSON</TabsTrigger>
+        </TabsList>
+        <TabsContent className="mt-4" value="formatted">
+          <FormattedView />
+        </TabsContent>
+        <TabsContent className="mt-4" value="raw">
+          <RawView />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
@@ -353,150 +384,134 @@ function LogItem({
   onResend: (log: WebhookLog) => void;
   onViewPayload: (payload: any) => void;
 }) {
-  const getStatusIcon = () => {
-    switch (log.status) {
-      case "success":
-        return <CheckCircle className="h-4 w-4 text-green-600" />;
-      case "failed":
-        return <XCircle className="h-4 w-4 text-red-600" />;
-      case "pending":
-        return <AlertCircle className="h-4 w-4 text-yellow-600" />;
-      default:
-        return <AlertCircle className="h-4 w-4 text-gray-600" />;
-    }
-  };
+  const [expanded, setExpanded] = useState(false);
+  const [contentHeight, setContentHeight] = useState<number | null>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
-  const getStatusColor = () => {
-    switch (log.status) {
-      case "success":
-        return "border-green-200 bg-green-50";
-      case "failed":
-        return "border-red-200 bg-red-50";
-      case "pending":
-        return "border-yellow-200 bg-yellow-50";
-      default:
-        return "border-gray-200 bg-gray-50";
-    }
-  };
+  function formatTime(ts: string) {
+    const d = new Date(ts);
+    return d.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+  }
 
-  const formatTimestamp = (timestamp: string) => {
-    const date = new Date(timestamp);
-    const now = new Date();
-    const diffInHours = (now.getTime() - date.getTime()) / (1000 * 60 * 60);
-
-    if (diffInHours < 1) {
-      const diffInMinutes = Math.floor(diffInHours * 60);
-      return `${diffInMinutes} minutes ago`;
+  // Measure height for expand/collapse animation
+  useEffect(() => {
+    if (expanded && contentRef.current) {
+      setContentHeight(contentRef.current.scrollHeight);
+    } else {
+      setContentHeight(0);
     }
-    if (diffInHours < 24) {
-      return `${Math.floor(diffInHours)} hours ago`;
-    }
-    return date.toLocaleDateString();
-  };
+  }, [expanded, log.id]);
 
   return (
-    <Card className={`border-2 ${getStatusColor()}`}>
-      <CardContent className="p-4">
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-            <div className="flex items-center gap-2">
-              {getStatusIcon()}
-              <Badge
-                className="font-medium"
-                size="sm"
-                variant={
-                  log.status === "success"
-                    ? "default"
-                    : log.status === "failed"
-                      ? "destructive"
-                      : "secondary"
-                }
-              >
-                {log.status.toUpperCase()}
-              </Badge>
-              {log.attempt > 0 && (
-                <Badge className="text-xs" size="sm" variant="outline">
-                  Retry {log.attempt + 1}
-                </Badge>
-              )}
-            </div>
+    <div
+      className={`group border bg-card ${expanded ? "rounded-lg shadow-xs" : "rounded-md"}`}
+      style={{ transition: "border-radius 200ms, box-shadow 200ms" }}
+    >
+      <button
+        className="flex w-full items-center gap-4 px-3 py-1.5 text-left hover:bg-accent/40"
+        onClick={() => setExpanded((v) => !v)}
+        type="button"
+      >
+        <div className="flex flex-1 items-center gap-4">
+          <div className="flex min-w-0 flex-1 items-center">
+            <span className="text-muted-foreground text-xs tabular-nums">
+              {formatTime(log.timestamp)}
+            </span>
           </div>
-          <div className="mt-2 flex items-center gap-2 text-muted-foreground text-xs sm:mt-0">
-            <Clock className="h-3 w-3" />
-            {formatTimestamp(log.timestamp)}
-          </div>
-        </div>
-
-        <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-4">
-          <div className="flex items-center gap-2 text-sm">
-            <span className="font-medium">Event:</span>
-            <Badge className="font-mono" size="sm" variant="outline">
-              {log.event}
+          <div className="flex min-w-0 flex-1 items-center">
+            <Badge
+              className="font-mono"
+              variant={
+                log.status === "success"
+                  ? "default"
+                  : log.status === "failed"
+                    ? "destructive"
+                    : "secondary"
+              }
+            >
+              {log.response_status ?? log.status}
             </Badge>
           </div>
-          {typeof log.response_status !== "undefined" && (
-            <div className="mt-1 flex items-center gap-2 text-sm sm:mt-0">
-              <span className="font-medium">Response:</span>
-              <Badge
-                size="sm"
-                variant={
-                  log.response_status >= 200 && log.response_status < 300
-                    ? "default"
-                    : "destructive"
-                }
-              >
-                {log.response_status}
-              </Badge>
-            </div>
-          )}
+          <div className="flex min-w-0 flex-1 items-center gap-2">
+            <span className="shrink-0 text-muted-foreground text-sm">
+              Event:
+            </span>
+            <span className="truncate font-mono text-sm">{log.event}</span>
+          </div>
+          <div className="flex min-w-0 flex-1 items-center truncate text-muted-foreground text-xs">
+            {log.error
+              ? log.error
+              : log.response_body
+                ? String(log.response_body).slice(0, 80)
+                : ""}
+          </div>
         </div>
+      </button>
 
-        {log.error && (
-          <Alert className="mb-3" variant="destructive">
-            <XCircle className="h-4 w-4" />
-            <span className="text-sm">{log.error}</span>
-          </Alert>
-        )}
-
-        {log.response_body && (
-          <div className="mb-3 rounded-lg bg-muted p-3">
-            <div className="mb-2 flex items-center gap-2">
-              <span className="font-medium text-sm">Response Body:</span>
+      <div
+        aria-hidden={!expanded}
+        className={`overflow-hidden ${expanded ? "border-t" : ""}`}
+        style={{
+          transition: "height 200ms cubic-bezier(0.4, 0, 0.2, 1)",
+          height: expanded ? (contentHeight ?? "auto") : 0,
+        }}
+      >
+        <div className="px-3 py-3" ref={contentRef}>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <div className="flex flex-1 flex-col gap-1">
+              <span className="text-muted-foreground text-xs">Status</span>
+              <span className="text-sm">{log.status}</span>
             </div>
-            <div className="break-all text-muted-foreground text-xs">
-              {log.response_body}
+            <div className="flex flex-1 flex-col gap-1">
+              <span className="text-muted-foreground text-xs">Response</span>
+              <span className="text-sm">
+                {typeof log.response_status === "number"
+                  ? log.response_status
+                  : "—"}
+              </span>
+            </div>
+            <div className="flex flex-1 flex-col gap-1">
+              <span className="text-muted-foreground text-xs">Attempt</span>
+              <span className="text-sm">{(log.attempt ?? 0) + 1}</span>
             </div>
           </div>
-        )}
-
-        <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:gap-2">
-          {log.status === "failed" && (
+          {log.error && (
+            <div className="mt-3 flex flex-col gap-2 rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-destructive">
+              <span className="font-medium text-sm">
+                {String(log.error).toUpperCase()}
+              </span>
+            </div>
+          )}
+          <div className="mt-3 flex items-center gap-2">
+            {log.status === "failed" && (
+              <Button
+                className="flex items-center gap-2"
+                onClick={() => onResend(log)}
+                size="sm"
+              >
+                Resend
+              </Button>
+            )}
             <Button
               className="flex items-center gap-2"
-              onClick={() => onResend(log)}
+              onClick={() => onViewPayload(log.request_payload)}
               size="sm"
-              variant="default"
+              variant="outline"
             >
-              <RefreshCw className="h-3 w-3" />
-              Resend
+              View payload
             </Button>
-          )}
-          <Button
-            className="flex items-center gap-2"
-            onClick={() => onViewPayload(log.request_payload)}
-            size="sm"
-            variant="outline"
-          >
-            <Eye className="h-3 w-3" />
-            View Payload
-          </Button>
+          </div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
 
-export function WebhookLogDrawer({
+export function WebhookLogDialog({
   webhookId,
   open,
   onClose,
@@ -552,15 +567,14 @@ export function WebhookLogDrawer({
   const pendingCount = logs.filter((log) => log.status === "pending").length;
 
   return (
-    <Drawer direction="bottom" onOpenChange={onClose} open={open}>
-      <DrawerContent className="w-full">
-        <DrawerHeader className="border-b">
+    <Dialog onOpenChange={onClose} open={open}>
+      <DialogContent className="flex w-full max-w-5xl flex-col gap-0 p-0">
+        <DialogHeader className="border-b px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <DrawerTitle className="flex items-center gap-2">
-                <Activity className="h-5 w-5" />
+              <DialogTitle className="flex items-center gap-2">
                 Webhook Delivery Logs
-              </DrawerTitle>
+              </DialogTitle>
               {logs.length > 0 && (
                 <div className="mt-2 flex items-center gap-4 text-muted-foreground text-sm">
                   <div className="flex items-center gap-1">
@@ -580,17 +594,13 @@ export function WebhookLogDrawer({
                 </div>
               )}
             </div>
-            <DrawerClose onClick={onClose} />
           </div>
-        </DrawerHeader>
+        </DialogHeader>
 
-        <div className="flex h-[calc(100vh-80px)] flex-col gap-4 p-4">
+        <div className="flex flex-1 flex-col gap-4 p-4">
           {loading ? (
             <div className="flex h-64 flex-col items-center justify-center">
               <Loader size="lg" />
-              <span className="mt-4 text-muted-foreground">
-                Loading logs...
-              </span>
             </div>
           ) : error ? (
             <Alert title="Error" variant="destructive">
@@ -598,7 +608,7 @@ export function WebhookLogDrawer({
             </Alert>
           ) : logs.length ? (
             <ScrollArea className="flex-1 pr-2">
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
                 {logs.map((log) => (
                   <LogItem
                     key={log.id}
@@ -620,32 +630,25 @@ export function WebhookLogDrawer({
           )}
         </div>
 
-        {/* Payload Viewer Drawer */}
+        {/* Payload Viewer Dialog */}
         {viewPayload && (
-          <Drawer
-            direction="right"
+          <Dialog
             onOpenChange={() => setViewPayload(null)}
             open={!!viewPayload}
           >
-            <DrawerContent className="w-full max-w-3xl">
-              <DrawerHeader className="border-b">
-                <div className="flex items-center justify-between">
-                  <DrawerTitle className="flex items-center gap-2">
-                    <Eye className="h-5 w-5" />
-                    Webhook Payload
-                  </DrawerTitle>
-                  <DrawerClose onClick={() => setViewPayload(null)} />
-                </div>
-              </DrawerHeader>
-              <div className="h-[calc(100vh-80px)] overflow-hidden p-4">
-                <ScrollArea className="h-full">
-                  <PayloadViewer payload={viewPayload} />
-                </ScrollArea>
-              </div>
-            </DrawerContent>
-          </Drawer>
+            <DialogContent className="max-h-[80vh] w-full max-w-3xl overflow-hidden">
+              <DialogHeader>
+                <DialogTitle className="flex items-center gap-2">
+                  Webhook Payload
+                </DialogTitle>
+              </DialogHeader>
+              <ScrollArea className="h-[60vh]">
+                <PayloadViewer payload={viewPayload} />
+              </ScrollArea>
+            </DialogContent>
+          </Dialog>
         )}
-      </DrawerContent>
-    </Drawer>
+      </DialogContent>
+    </Dialog>
   );
 }
