@@ -44,6 +44,21 @@ export function PasswordProtectionSection({
 
   const passwordProtectionRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasChanges) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () =>
+      window.removeEventListener(
+        "beforeunload",
+        onBeforeUnload as unknown as EventListener
+      );
+  }, [hasChanges]);
+
   const handlePasswordProtectionChange = (field: string, value: any) => {
     setPasswordProtectionSettings((prev) => ({ ...prev, [field]: value }));
     setSaved(false);
@@ -69,15 +84,20 @@ export function PasswordProtectionSection({
 
     setSaving(true);
     try {
+      const trimmed = {
+        ...passwordProtectionSettings,
+        password: passwordProtectionSettings.password.trim(),
+        message: passwordProtectionSettings.message.trim(),
+      };
       const newSchema = {
         ...schema,
         settings: {
           ...schema.settings,
-          passwordProtection: passwordProtectionSettings,
+          passwordProtection: trimmed,
         },
       };
       await formsDb.updateForm(formId, { schema: newSchema as any });
-      updatePasswordProtection(passwordProtectionSettings);
+      updatePasswordProtection(trimmed);
       setSaved(true);
       setHasChanges(false);
       toast.success("Password protection settings saved successfully");
@@ -120,7 +140,20 @@ export function PasswordProtectionSection({
     <div
       aria-label="Password protection settings"
       className="flex flex-col gap-4"
+      onKeyDown={(e) => {
+        const target = e.target as HTMLElement;
+        const isTextarea = target.tagName === "TEXTAREA";
+        if (isTextarea && e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+          e.preventDefault();
+          savePasswordProtection();
+        }
+      }}
       role="main"
+      style={{
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent",
+        overscrollBehavior: "contain",
+      }}
     >
       <Card
         aria-labelledby="password-protection-title"
@@ -187,8 +220,10 @@ export function PasswordProtectionSection({
                   </Label>
                   <div className="relative">
                     <Input
-                      className="pr-10 shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
+                      autoComplete="new-password"
+                      className="pr-10 text-base shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1 md:text-sm"
                       id="form-password"
+                      name="form-password"
                       onChange={(e) =>
                         handlePasswordProtectionChange(
                           "password",
@@ -234,8 +269,9 @@ export function PasswordProtectionSection({
                     Custom Message
                   </Label>
                   <Textarea
-                    className="resize-none shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
+                    className="resize-none text-base shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1 md:text-sm"
                     id="password-message"
+                    name="password-message"
                     onChange={(e) =>
                       handlePasswordProtectionChange("message", e.target.value)
                     }

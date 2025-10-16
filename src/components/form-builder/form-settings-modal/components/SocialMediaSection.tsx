@@ -46,6 +46,21 @@ export function BrandingSection({
   const [saving, setSaving] = useState(false as boolean);
   const [saved, setSaved] = useState(false as boolean);
 
+  useEffect(() => {
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasChanges) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () =>
+      window.removeEventListener(
+        "beforeunload",
+        onBeforeUnload as unknown as EventListener
+      );
+  }, [hasChanges]);
+
   // mark changes on any updateSocialMedia/updateSettings
   const wrappedUpdateSocial = (updates: any) => {
     updateSocialMedia(updates);
@@ -90,13 +105,22 @@ export function BrandingSection({
     }
     setSaving(true);
     try {
+      const trimmed = {
+        ...localSettings.branding,
+        socialMedia: {
+          ...localSettings.branding?.socialMedia,
+          platforms: Object.fromEntries(
+            Object.entries(
+              localSettings.branding?.socialMedia?.platforms || {}
+            ).map(([key, value]) => [key, ((value as string) || "").trim()])
+          ),
+        },
+      };
       const newSchema = {
         ...schema,
         settings: {
           ...schema.settings,
-          branding: {
-            ...localSettings.branding,
-          },
+          branding: trimmed,
         },
       };
       await formsDb.updateForm(formId, { schema: newSchema as any });
@@ -130,7 +154,20 @@ export function BrandingSection({
     <Card
       aria-labelledby="branding-title"
       className="shadow-none"
+      onKeyDown={(e) => {
+        const target = e.target as HTMLElement;
+        const isTextarea = target.tagName === "TEXTAREA";
+        if (isTextarea && e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+          e.preventDefault();
+          saveBranding();
+        }
+      }}
       role="region"
+      style={{
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent",
+        overscrollBehavior: "contain",
+      }}
     >
       <CardHeader>
         <div className="flex items-center justify-between">
@@ -245,9 +282,15 @@ export function BrandingSection({
                     {label}
                   </Label>
                   <Input
-                    className="shadow-none"
+                    className="text-base shadow-none md:text-sm"
                     id={id}
+                    name={`social-${id}`}
                     onChange={(e) => handlePlatformChange(id, e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Escape") {
+                        (e.target as HTMLElement).blur();
+                      }
+                    }}
                     placeholder={placeholder}
                     type="url"
                     value={platforms[id as keyof typeof platforms] || ""}
@@ -301,9 +344,7 @@ export function BrandingSection({
 
             {socialMedia.showIcons !== false && (
               <div className="rounded-lg border p-4">
-                <Label className="mb-2 block font-medium text-sm">
-                  Preview
-                </Label>
+                <Label className="font-medium text-sm">Preview</Label>
                 <SocialMediaIcons
                   className="justify-center"
                   iconSize={socialMedia.iconSize || "md"}
@@ -351,6 +392,12 @@ export function BrandingSection({
               disabled={saving || !hasChanges}
               loading={saving}
               onClick={saveBranding}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  saveBranding();
+                }
+              }}
             >
               Save
             </Button>

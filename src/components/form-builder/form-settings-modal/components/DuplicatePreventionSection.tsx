@@ -51,6 +51,21 @@ export function DuplicatePreventionSection({
 
   const duplicatePreventionRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasChanges) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () =>
+      window.removeEventListener(
+        "beforeunload",
+        onBeforeUnload as unknown as EventListener
+      );
+  }, [hasChanges]);
+
   const handleDuplicatePreventionChange = (field: string, value: any) => {
     setDuplicatePreventionSettings((prev) => ({ ...prev, [field]: value }));
     setSaved(false);
@@ -80,15 +95,19 @@ export function DuplicatePreventionSection({
 
     setSaving(true);
     try {
+      const trimmed = {
+        ...duplicatePreventionSettings,
+        message: (duplicatePreventionSettings.message || "").trim(),
+      };
       const newSchema = {
         ...schema,
         settings: {
           ...schema.settings,
-          duplicatePrevention: duplicatePreventionSettings,
+          duplicatePrevention: trimmed,
         },
       };
       await formsDb.updateForm(formId, { schema: newSchema as any });
-      updateDuplicatePrevention(duplicatePreventionSettings);
+      updateDuplicatePrevention(trimmed);
       setSaved(true);
       setHasChanges(false);
       toast.success("Duplicate prevention settings saved successfully");
@@ -131,7 +150,20 @@ export function DuplicatePreventionSection({
     <div
       aria-label="Duplicate prevention settings"
       className="flex flex-col gap-4"
+      onKeyDown={(e) => {
+        const target = e.target as HTMLElement;
+        const isTextarea = target.tagName === "TEXTAREA";
+        if (isTextarea && e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+          e.preventDefault();
+          saveDuplicatePrevention();
+        }
+      }}
       role="main"
+      style={{
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent",
+        overscrollBehavior: "contain",
+      }}
     >
       <Card
         aria-labelledby="duplicate-prevention-title"
@@ -290,7 +322,7 @@ function PreventionModeSection({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <Label className="mb-1 font-medium text-sm">Prevention Mode</Label>
+      <Label className="font-medium text-sm">Prevention Mode</Label>
       <RadioGroup
         onValueChange={(value) => {
           updateSettings("mode", value as "time-based" | "one-time");
@@ -310,9 +342,12 @@ function PreventionModeSection({
               One-time submission
             </Label>
           </div>
-          <p className="ml-6 text-muted-foreground text-xs">
-            Allow only one submission per user, ever
-          </p>
+          <div className="flex items-start gap-2">
+            <div className="size-4" />
+            <p className="text-muted-foreground text-xs">
+              Allow only one submission per user, ever
+            </p>
+          </div>
 
           <div className="flex items-center gap-2">
             <RadioGroupItem id="time-based" value="time-based" />
@@ -320,9 +355,12 @@ function PreventionModeSection({
               Time-based prevention
             </Label>
           </div>
-          <p className="ml-6 text-muted-foreground text-xs">
-            Prevent duplicate submissions within a specified time window
-          </p>
+          <div className="flex items-start gap-2">
+            <div className="size-4" />
+            <p className="text-muted-foreground text-xs">
+              Prevent duplicate submissions within a specified time window
+            </p>
+          </div>
         </div>
       </RadioGroup>
     </div>
@@ -338,7 +376,7 @@ function PreventionStrategySection({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <Label className="mb-1 font-medium text-sm">Prevention Strategy</Label>
+      <Label className="font-medium text-sm">Prevention Strategy</Label>
       <Select
         onValueChange={(value: "ip" | "email" | "session" | "combined") =>
           updateSettings("strategy", value)
@@ -416,8 +454,15 @@ function ErrorMessageSection({
     <div className="flex flex-col gap-2">
       <Label htmlFor="duplicate-message">Error Message</Label>
       <Textarea
+        autoComplete="off"
         id="duplicate-message"
+        name="duplicate-message"
         onChange={(e) => updateSettings("message", e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Escape") {
+            (e.target as HTMLElement).blur();
+          }
+        }}
         placeholder={
           duplicatePrevention.mode === "one-time"
             ? "You have already submitted this form. Each user can only submit once."
@@ -446,18 +491,23 @@ function OverrideSection({
   updateSettings: (field: string, value: any) => void;
 }) {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-start gap-2">
       <Switch
         checked={duplicatePrevention.allowOverride}
         id="duplicate-allow-override"
         onCheckedChange={(checked) => updateSettings("allowOverride", checked)}
       />
-      <Label className="font-medium text-sm" htmlFor="duplicate-allow-override">
-        Allow Override
-      </Label>
-      <p className="text-muted-foreground text-xs">
-        Allow users to bypass prevention (not recommended)
-      </p>
+      <div className="flex flex-col gap-1">
+        <Label
+          className="font-medium text-sm"
+          htmlFor="duplicate-allow-override"
+        >
+          Allow Override
+        </Label>
+        <p className="text-muted-foreground text-xs">
+          Allow users to bypass prevention (not recommended)
+        </p>
+      </div>
     </div>
   );
 }
@@ -488,7 +538,13 @@ function DuplicatePreventionInput({
         id={id}
         max={max}
         min={min}
+        name={id}
         onChange={(e) => onChange(Number.parseInt(e.target.value) || min)}
+        onKeyDown={(e) => {
+          if (e.key === "Escape") {
+            (e.target as HTMLElement).blur();
+          }
+        }}
         placeholder={placeholder}
         type="number"
         value={value}
@@ -519,7 +575,7 @@ function DuplicatePreventionSummary({
 
   return (
     <div className="rounded-2xl bg-muted/50 p-4">
-      <div className="mb-2 flex items-center gap-2">
+      <div className="flex items-center gap-2">
         <UserCheck className="h-4 w-4 text-muted-foreground" />
         <span className="font-medium text-sm">Current Settings</span>
       </div>

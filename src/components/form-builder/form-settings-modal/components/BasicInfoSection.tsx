@@ -48,6 +48,21 @@ export function BasicInfoSection({
   const basicInfoRef = useRef<HTMLDivElement>(null);
   const behaviorRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasBasicChanges || hasBehaviorChanges) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () =>
+      window.removeEventListener(
+        "beforeunload",
+        onBeforeUnload as unknown as EventListener
+      );
+  }, [hasBasicChanges, hasBehaviorChanges]);
+
   const handleBasicInfoChange = (field: string, value: string) => {
     setBasicInfo((prev) => ({ ...prev, [field]: value }));
     setSavedBasic(false);
@@ -86,18 +101,35 @@ export function BasicInfoSection({
       toast.error("Form ID is required to save settings");
       return;
     }
-
+    const titleMissing = !basicInfo.title?.trim();
+    if (titleMissing) {
+      setHasBasicChanges(true);
+      const target = document.getElementById(
+        "form-title-field"
+      ) as HTMLElement | null;
+      target?.focus();
+      toast.error("Please fill out required fields");
+      return;
+    }
+    const trimmed = {
+      title: basicInfo.title.trim(),
+      publicTitle: basicInfo.publicTitle.trim(),
+      description: basicInfo.description.trim(),
+      submitText: basicInfo.submitText.trim(),
+      successMessage: basicInfo.successMessage.trim(),
+      redirectUrl: basicInfo.redirectUrl.trim(),
+    };
     setSavingBasic(true);
     try {
       const newSchema = {
         ...schema,
         settings: {
           ...schema.settings,
-          ...basicInfo,
+          ...trimmed,
         },
       };
       await formsDb.updateForm(formId, { schema: newSchema as any });
-      updateSettings(basicInfo);
+      updateSettings(trimmed);
       setSavedBasic(true);
       setHasBasicChanges(false);
       toast.success("Basic information saved successfully");
@@ -193,10 +225,43 @@ export function BasicInfoSection({
   }, [savedBehavior]);
 
   return (
-    <ScrollArea className="h-full w-full">
+    <ScrollArea
+      className="h-full w-full"
+      style={{
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent",
+        overscrollBehavior: "contain",
+      }}
+    >
       <div
         aria-label="Basic form settings"
         className="flex flex-col gap-4"
+        onKeyDown={(e) => {
+          const target = e.target as HTMLElement;
+          const isTextInput =
+            target.tagName === "INPUT" &&
+            !(target as HTMLInputElement).readOnly &&
+            (target as HTMLInputElement).type !== "checkbox";
+          const isTextarea = target.tagName === "TEXTAREA";
+          if (
+            isTextInput &&
+            e.key === "Enter" &&
+            !e.metaKey &&
+            !e.ctrlKey &&
+            !e.altKey &&
+            !e.shiftKey
+          ) {
+            e.preventDefault();
+            saveBasicInfo();
+          } else if (
+            isTextarea &&
+            e.key === "Enter" &&
+            (e.metaKey || e.ctrlKey)
+          ) {
+            e.preventDefault();
+            saveBasicInfo();
+          }
+        }}
         role="main"
       >
         <Card
@@ -293,7 +358,7 @@ export function BasicInfoSection({
               <div className="flex items-center gap-2">
                 {hasBasicChanges && (
                   <Button
-                    className="gap-2 text-muted-foreground hover:text-foreground"
+                    className="min-h-10 gap-2 text-muted-foreground hover:text-foreground"
                     onClick={resetBasicInfo}
                     size="sm"
                     variant="ghost"
@@ -306,6 +371,7 @@ export function BasicInfoSection({
                 <Button
                   aria-describedby="basic-info-description"
                   aria-label="Save basic information"
+                  className="min-h-10"
                   disabled={savingBasic || !hasBasicChanges}
                   loading={savingBasic}
                   onClick={saveBasicInfo}
@@ -443,6 +509,7 @@ export function BasicInfoSection({
                 <Button
                   aria-describedby="behavior-description"
                   aria-label="Save form behavior settings"
+                  className="min-h-10"
                   disabled={savingBehavior || !hasBehaviorChanges}
                   loading={savingBehavior}
                   onClick={saveBehavior}
@@ -519,8 +586,10 @@ function BasicInfoField({
           aria-describedby={descriptionId}
           aria-invalid={required && !value}
           aria-required={required}
-          className="resize-none shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
+          autoComplete="off"
+          className="resize-none text-base shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1 md:text-sm"
           id={fieldId}
+          name={id}
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
@@ -533,8 +602,11 @@ function BasicInfoField({
           aria-describedby={descriptionId}
           aria-invalid={required && !value}
           aria-required={required}
-          className="shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
+          autoComplete={id.includes("url") ? "url" : "off"}
+          className="text-base shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1 md:text-sm"
           id={fieldId}
+          inputMode={id.includes("url") ? "url" : undefined}
+          name={id}
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}

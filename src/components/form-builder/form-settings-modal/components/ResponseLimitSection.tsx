@@ -40,6 +40,21 @@ export function ResponseLimitSection({
 
   const sectionRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasChanges) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () =>
+      window.removeEventListener(
+        "beforeunload",
+        onBeforeUnload as unknown as EventListener
+      );
+  }, [hasChanges]);
+
   const handleChange = (field: string, value: any) => {
     setSettings((prev) => ({ ...prev, [field]: value }));
     setSaved(false);
@@ -64,15 +79,19 @@ export function ResponseLimitSection({
     }
     setSaving(true);
     try {
+      const trimmed = {
+        ...settings,
+        message: (settings.message || "").trim(),
+      };
       const newSchema = {
         ...schema,
         settings: {
           ...schema.settings,
-          responseLimit: settings,
+          responseLimit: trimmed,
         },
       };
       await formsDb.updateForm(formId, { schema: newSchema as any });
-      updateResponseLimit(settings);
+      updateResponseLimit(trimmed);
       setSaved(true);
       setHasChanges(false);
       toast.success("Response limit saved successfully");
@@ -114,8 +133,21 @@ export function ResponseLimitSection({
     <Card
       aria-labelledby="response-limit-title"
       className="shadow-none"
+      onKeyDown={(e) => {
+        const target = e.target as HTMLElement;
+        const isTextarea = target.tagName === "TEXTAREA";
+        if (isTextarea && e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+          e.preventDefault();
+          save();
+        }
+      }}
       ref={sectionRef}
       role="region"
+      style={{
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent",
+        overscrollBehavior: "contain",
+      }}
     >
       <CardHeader>
         <div className="flex items-center justify-between">
@@ -185,8 +217,9 @@ export function ResponseLimitSection({
                 Limit Reached Message
               </Label>
               <Textarea
-                className="resize-none shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
+                className="resize-none text-base shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1 md:text-sm"
                 id="response-limit-message"
+                name="response-limit-message"
                 onChange={(e) => handleChange("message", e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Escape") {
@@ -304,10 +337,11 @@ function ResponseLimitField({
         aria-describedby={descriptionId}
         aria-invalid={required && (!value || value < min || value > max)}
         aria-required={required}
-        className="shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
+        className="text-base shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1 md:text-sm"
         id={fieldId}
         max={max}
         min={min}
+        name={id}
         onChange={(e) => onChange(Number.parseInt(e.target.value) || min)}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}

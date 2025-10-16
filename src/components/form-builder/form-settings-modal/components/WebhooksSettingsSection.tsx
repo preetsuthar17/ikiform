@@ -13,6 +13,11 @@ export function WebhooksSettingsSection({ formId }: { formId: string }) {
       aria-labelledby="webhooks-title"
       className="shadow-none"
       role="region"
+      style={{
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent",
+        overscrollBehavior: "contain",
+      }}
     >
       <CardHeader>
         <div className="flex items-center justify-between">

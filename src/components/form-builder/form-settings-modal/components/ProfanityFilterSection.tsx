@@ -40,6 +40,21 @@ export function ProfanityFilterSection({
 
   const profanityFilterRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasChanges) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () =>
+      window.removeEventListener(
+        "beforeunload",
+        onBeforeUnload as unknown as EventListener
+      );
+  }, [hasChanges]);
+
   const handleProfanityFilterChange = (field: string, value: any) => {
     setProfanityFilterSettings((prev) => ({ ...prev, [field]: value }));
     setSaved(false);
@@ -66,15 +81,25 @@ export function ProfanityFilterSection({
 
     setSaving(true);
     try {
+      const trimmed = {
+        ...profanityFilterSettings,
+        customMessage: (profanityFilterSettings.customMessage || "").trim(),
+        customWords: (profanityFilterSettings.customWords || [])
+          .map((word) => word.trim())
+          .filter((word) => word.length > 0),
+        whitelistedWords: (profanityFilterSettings.whitelistedWords || [])
+          .map((word) => word.trim())
+          .filter((word) => word.length > 0),
+      };
       const newSchema = {
         ...schema,
         settings: {
           ...schema.settings,
-          profanityFilter: profanityFilterSettings,
+          profanityFilter: trimmed,
         },
       };
       await formsDb.updateForm(formId, { schema: newSchema as any });
-      updateProfanityFilter(profanityFilterSettings);
+      updateProfanityFilter(trimmed);
       setSaved(true);
       setHasChanges(false);
       toast.success("Profanity filter settings saved successfully");
@@ -116,7 +141,20 @@ export function ProfanityFilterSection({
     <div
       aria-label="Profanity filter settings"
       className="flex flex-col gap-4"
+      onKeyDown={(e) => {
+        const target = e.target as HTMLElement;
+        const isTextarea = target.tagName === "TEXTAREA";
+        if (isTextarea && e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+          e.preventDefault();
+          saveProfanityFilter();
+        }
+      }}
       role="main"
+      style={{
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent",
+        overscrollBehavior: "contain",
+      }}
     >
       <Card
         aria-labelledby="profanity-filter-title"
@@ -299,7 +337,7 @@ function FilterModeSection({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <Label className="mb-1 font-medium text-sm">Filter Mode</Label>
+      <Label className="font-medium text-sm">Filter Mode</Label>
       <RadioGroup
         onValueChange={(value: "replace" | "strict") => {
           if (value === "replace") {
@@ -343,9 +381,15 @@ function CustomMessageSection({
         Custom Message
       </Label>
       <Textarea
-        className="text-sm shadow-none"
+        className="text-base shadow-none md:text-sm"
         id="custom-message"
+        name="custom-message"
         onChange={(e) => updateProfanityFilter("customMessage", e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Escape") {
+            (e.target as HTMLElement).blur();
+          }
+        }}
         placeholder="Enter a custom message to show when profanity is detected"
         rows={2}
         value={profanityFilter.customMessage || ""}
@@ -405,9 +449,16 @@ function WordManagementSection({
       <Label className="font-medium text-sm">{title}</Label>
       <div className="flex items-center gap-2">
         <Input
-          className="shadow-none"
+          className="text-base shadow-none md:text-sm"
+          name={`new-word-${isWhitelist ? "whitelist" : "filter"}`}
           onChange={(e) => setNewWord(e.target.value)}
-          onKeyDown={onKeyDown}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") {
+              (e.target as HTMLElement).blur();
+            } else {
+              onKeyDown(e);
+            }
+          }}
           placeholder={`Enter word(s) to ${isWhitelist ? "whitelist" : "filter"} (comma-separated for multiple)`}
           value={newWord}
         />
@@ -433,6 +484,12 @@ function WordManagementSection({
                 aria-label={`Remove ${word}`}
                 className="h-4 w-4 p-0"
                 onClick={() => removeWord(word)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    removeWord(word);
+                  }
+                }}
                 size="icon"
                 type="button"
                 variant="ghost"

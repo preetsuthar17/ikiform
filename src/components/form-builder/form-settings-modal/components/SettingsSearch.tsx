@@ -50,14 +50,23 @@ export function SettingsSearch({
     setActiveIndex(null);
   };
 
+  // The parent div MUST be relative for absolute dropdown
   return (
-    <div className="flex flex-col gap-2">
+    <div
+      className="relative flex flex-col gap-2"
+      style={{
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent",
+        overscrollBehavior: "contain",
+      }}
+    >
       <div className="relative">
         <Input
           aria-controls={open ? "settings-search-results" : undefined}
           aria-expanded={open}
           aria-label="Search settings"
-          className="pl-9"
+          className="pl-9 text-base md:text-sm"
+          name="settings-search"
           onChange={(e) => {
             const val = e.target.value;
             setQuery(val);
@@ -112,29 +121,49 @@ export function SettingsSearch({
           value={query}
         />
         <Search
-          aria-hidden
+          aria-hidden="true"
           className="-translate-y-1/2 pointer-events-none absolute top-1/2 left-2.5 size-4 text-muted-foreground"
         />
       </div>
+      {/* Make the dropdown absolutely positioned over the search bar for no layout shift */}
       {open && results.length > 0 && (
         <div
           aria-label="Search results"
-          className="rounded-md border bg-background shadow-sm"
+          className="absolute top-full left-0 z-50 mt-2 w-full overflow-hidden rounded-md border bg-background shadow-xs"
           id="settings-search-results"
           role="listbox"
+          style={{
+            touchAction: "manipulation",
+            WebkitTapHighlightColor: "transparent",
+            overscrollBehavior: "contain",
+          }}
         >
-          <ScrollArea className="max-h-64">
-            <ul className="p-1">
+          <ScrollArea
+            className="max-h-64"
+            style={{
+              touchAction: "manipulation",
+              WebkitTapHighlightColor: "transparent",
+              overscrollBehavior: "contain",
+            }}
+          >
+            <ul className="flex flex-col gap-1 p-1">
               {results.map((r, idx) => {
                 const isActive = activeIndex === idx;
                 return (
                   <li key={`${r.section}-${r.anchorId}-${idx}`}>
                     <button
                       aria-selected={isActive}
-                      className={`flex w-full items-center justify-between rounded-sm px-2 py-2 text-left text-sm focus:outline-none ${isActive ? "bg-accent text-accent-foreground" : "hover:bg-accent hover:text-accent-foreground"}`}
+                      className={`flex w-full items-center justify-between rounded-sm px-2 py-2 text-left text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1 ${isActive ? "bg-accent text-accent-foreground" : "hover:bg-accent hover:text-accent-foreground"}`}
                       onClick={() => handleNavigate(r)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          handleNavigate(r);
+                        }
+                      }}
                       onMouseEnter={() => setActiveIndex(idx)}
                       role="option"
+                      style={{ minHeight: "44px" }}
                     >
                       <span className="truncate">
                         <span className="text-muted-foreground">
@@ -151,7 +180,16 @@ export function SettingsSearch({
         </div>
       )}
       {open && results.length === 0 && (
-        <div className="rounded-md border bg-background p-2 text-center text-muted-foreground text-sm">
+        <div
+          aria-live="polite"
+          className="absolute top-full left-0 z-50 mt-2 w-full rounded-md border bg-background p-2 text-center text-muted-foreground text-sm"
+          role="status"
+          style={{
+            touchAction: "manipulation",
+            WebkitTapHighlightColor: "transparent",
+            overscrollBehavior: "contain",
+          }}
+        >
           No matches
         </div>
       )}

@@ -44,6 +44,21 @@ export function MetadataSection({
   const [savedIndexing, setSavedIndexing] = useState(false as boolean);
   const [savedSocial, setSavedSocial] = useState(false as boolean);
 
+  useEffect(() => {
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasBasicChanges || hasIndexingChanges || hasSocialChanges) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () =>
+      window.removeEventListener(
+        "beforeunload",
+        onBeforeUnload as unknown as EventListener
+      );
+  }, [hasBasicChanges, hasIndexingChanges, hasSocialChanges]);
+
   const updateBasicMetadata = (updates: Partial<typeof metadata>) => {
     updateSettings({ metadata: { ...metadata, ...updates } });
     setHasBasicChanges(true);
@@ -146,11 +161,19 @@ export function MetadataSection({
     }
     setSavingBasic(true);
     try {
+      const trimmed = {
+        ...localSettings.metadata,
+        title: (localSettings.metadata?.title || "").trim(),
+        description: (localSettings.metadata?.description || "").trim(),
+        keywords: (localSettings.metadata?.keywords || "").trim(),
+        author: (localSettings.metadata?.author || "").trim(),
+        canonicalUrl: (localSettings.metadata?.canonicalUrl || "").trim(),
+      };
       const newSchema = {
         ...schema,
         settings: {
           ...schema.settings,
-          metadata: { ...localSettings.metadata },
+          metadata: trimmed,
         },
       };
       await formsDb.updateForm(formId, { schema: newSchema as any });
@@ -200,11 +223,24 @@ export function MetadataSection({
     }
     setSavingSocial(true);
     try {
+      const trimmed = {
+        ...localSettings.metadata,
+        ogTitle: (localSettings.metadata?.ogTitle || "").trim(),
+        ogDescription: (localSettings.metadata?.ogDescription || "").trim(),
+        ogImage: (localSettings.metadata?.ogImage || "").trim(),
+        twitterTitle: (localSettings.metadata?.twitterTitle || "").trim(),
+        twitterDescription: (
+          localSettings.metadata?.twitterDescription || ""
+        ).trim(),
+        twitterImage: (localSettings.metadata?.twitterImage || "").trim(),
+        twitterSite: (localSettings.metadata?.twitterSite || "").trim(),
+        twitterCreator: (localSettings.metadata?.twitterCreator || "").trim(),
+      };
       const newSchema = {
         ...schema,
         settings: {
           ...schema.settings,
-          metadata: { ...localSettings.metadata },
+          metadata: trimmed,
         },
       };
       await formsDb.updateForm(formId, { schema: newSchema as any });
@@ -235,7 +271,23 @@ export function MetadataSection({
   }, [savedBasic, savedIndexing, savedSocial]);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div
+      className="flex flex-col gap-4"
+      onKeyDown={(e) => {
+        const target = e.target as HTMLElement;
+        const isTextarea = target.tagName === "TEXTAREA";
+        if (isTextarea && e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+          e.preventDefault();
+          if (hasBasicChanges) saveBasic();
+          else if (hasSocialChanges) saveSocial();
+        }
+      }}
+      style={{
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent",
+        overscrollBehavior: "contain",
+      }}
+    >
       <Card
         aria-labelledby="basic-seo-title"
         className="shadow-none"
@@ -266,10 +318,16 @@ export function MetadataSection({
           <div className="flex flex-col gap-2">
             <Label htmlFor="meta-title">Page Title</Label>
             <Input
-              className="shadow-none"
+              className="text-base shadow-none md:text-sm"
               id="meta-title"
               maxLength={60}
+              name="meta-title"
               onChange={(e) => updateBasicMetadata({ title: e.target.value })}
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  (e.target as HTMLElement).blur();
+                }
+              }}
               placeholder="Enter page title (max 60 characters)"
               value={metadata.title || ""}
             />
@@ -280,12 +338,18 @@ export function MetadataSection({
           <div className="flex flex-col gap-2">
             <Label htmlFor="meta-description">Meta Description</Label>
             <Textarea
-              className="shadow-none"
+              className="text-base shadow-none md:text-sm"
               id="meta-description"
               maxLength={160}
+              name="meta-description"
               onChange={(e) =>
                 updateBasicMetadata({ description: e.target.value })
               }
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  (e.target as HTMLElement).blur();
+                }
+              }}
               placeholder="Enter meta description (max 160 characters)"
               rows={3}
               value={metadata.description || ""}
@@ -298,11 +362,17 @@ export function MetadataSection({
             <div className="flex flex-col gap-2">
               <Label htmlFor="meta-keywords">Keywords</Label>
               <Input
-                className="shadow-none"
+                className="text-base shadow-none md:text-sm"
                 id="meta-keywords"
+                name="meta-keywords"
                 onChange={(e) =>
                   updateBasicMetadata({ keywords: e.target.value })
                 }
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") {
+                    (e.target as HTMLElement).blur();
+                  }
+                }}
                 placeholder="Enter keywords separated by commas"
                 value={metadata.keywords || ""}
               />
@@ -310,11 +380,17 @@ export function MetadataSection({
             <div className="flex flex-col gap-2">
               <Label htmlFor="meta-author">Author</Label>
               <Input
-                className="shadow-none"
+                className="text-base shadow-none md:text-sm"
                 id="meta-author"
+                name="meta-author"
                 onChange={(e) =>
                   updateBasicMetadata({ author: e.target.value })
                 }
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") {
+                    (e.target as HTMLElement).blur();
+                  }
+                }}
                 placeholder="Enter author name"
                 value={metadata.author || ""}
               />
@@ -323,12 +399,21 @@ export function MetadataSection({
           <div className="flex flex-col gap-2">
             <Label htmlFor="canonical-url">Canonical URL</Label>
             <Input
-              className="shadow-none"
+              autoComplete="url"
+              className="text-base shadow-none md:text-sm"
               id="canonical-url"
+              inputMode="url"
+              name="canonical-url"
               onChange={(e) =>
                 updateBasicMetadata({ canonicalUrl: e.target.value })
               }
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  (e.target as HTMLElement).blur();
+                }
+              }}
               placeholder="https://example.com/form"
+              type="url"
               value={metadata.canonicalUrl || ""}
             />
             <p className="text-muted-foreground text-xs">
@@ -394,11 +479,17 @@ export function MetadataSection({
           <div className="flex flex-col gap-2">
             <Label htmlFor="og-title">Open Graph Title</Label>
             <Input
-              className="shadow-none"
+              className="text-base shadow-none md:text-sm"
               id="og-title"
+              name="og-title"
               onChange={(e) =>
                 updateSocialMetadata({ ogTitle: e.target.value })
               }
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  (e.target as HTMLElement).blur();
+                }
+              }}
               placeholder="Enter Open Graph title"
               value={metadata.ogTitle || ""}
             />
@@ -409,11 +500,17 @@ export function MetadataSection({
           <div className="flex flex-col gap-2">
             <Label htmlFor="og-description">Open Graph Description</Label>
             <Textarea
-              className="shadow-none"
+              className="text-base shadow-none md:text-sm"
               id="og-description"
+              name="og-description"
               onChange={(e) =>
                 updateSocialMetadata({ ogDescription: e.target.value })
               }
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  (e.target as HTMLElement).blur();
+                }
+              }}
               placeholder="Enter Open Graph description"
               rows={3}
               value={metadata.ogDescription || ""}
@@ -426,12 +523,21 @@ export function MetadataSection({
             <div className="flex flex-col gap-2">
               <Label htmlFor="og-image">Open Graph Image URL</Label>
               <Input
-                className="shadow-none"
+                autoComplete="url"
+                className="text-base shadow-none md:text-sm"
                 id="og-image"
+                inputMode="url"
+                name="og-image"
                 onChange={(e) =>
                   updateSocialMetadata({ ogImage: e.target.value })
                 }
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") {
+                    (e.target as HTMLElement).blur();
+                  }
+                }}
                 placeholder="https://example.com/image.jpg"
+                type="url"
                 value={metadata.ogImage || ""}
               />
             </div>

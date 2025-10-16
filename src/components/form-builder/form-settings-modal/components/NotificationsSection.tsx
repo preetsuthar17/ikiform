@@ -36,6 +36,21 @@ export function NotificationsSection({
   const [saving, setSaving] = useState(false as boolean);
   const [saved, setSaved] = useState(false as boolean);
 
+  useEffect(() => {
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasChanges) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () =>
+      window.removeEventListener(
+        "beforeunload",
+        onBeforeUnload as unknown as EventListener
+      );
+  }, [hasChanges]);
+
   const wrappedUpdate = (updates: Partial<NotificationSettings>) => {
     updateNotifications(updates);
     setHasChanges(true);
@@ -67,13 +82,23 @@ export function NotificationsSection({
     }
     setSaving(true);
     try {
+      const trimmed = {
+        ...localSettings.notifications,
+        email: (localSettings.notifications?.email || "").trim(),
+        subject: (localSettings.notifications?.subject || "").trim(),
+        message: (localSettings.notifications?.message || "").trim(),
+        customLinks: (localSettings.notifications?.customLinks || []).map(
+          (link) => ({
+            label: link.label.trim(),
+            url: link.url.trim(),
+          })
+        ),
+      };
       const newSchema = {
         ...schema,
         settings: {
           ...schema.settings,
-          notifications: {
-            ...localSettings.notifications,
-          },
+          notifications: trimmed,
         },
       };
       await formsDb.updateForm(formId, { schema: newSchema as any });
@@ -107,7 +132,20 @@ export function NotificationsSection({
     <Card
       aria-labelledby="notifications-title"
       className="shadow-none"
+      onKeyDown={(e) => {
+        const target = e.target as HTMLElement;
+        const isTextarea = target.tagName === "TEXTAREA";
+        if (isTextarea && e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+          e.preventDefault();
+          saveNotifications();
+        }
+      }}
       role="region"
+      style={{
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent",
+        overscrollBehavior: "contain",
+      }}
     >
       <CardHeader>
         <div className="flex items-center justify-between">
@@ -153,9 +191,16 @@ export function NotificationsSection({
           <div className="flex flex-col gap-2">
             <Label htmlFor="notification-email">Notification Email</Label>
             <Input
+              autoComplete="email"
               disabled={!notifications.enabled}
               id="notification-email"
+              name="notification-email"
               onChange={(e) => wrappedUpdate({ email: e.target.value })}
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  (e.target as HTMLElement).blur();
+                }
+              }}
               placeholder="owner@email.com"
               type="email"
               value={notifications.email || ""}
@@ -168,7 +213,13 @@ export function NotificationsSection({
             <Input
               disabled={!notifications.enabled}
               id="notification-subject"
+              name="notification-subject"
               onChange={(e) => wrappedUpdate({ subject: e.target.value })}
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  (e.target as HTMLElement).blur();
+                }
+              }}
               placeholder="New Form Submission"
               value={notifications.subject || "New Form Submission"}
             />
@@ -180,7 +231,13 @@ export function NotificationsSection({
             <Textarea
               disabled={!notifications.enabled}
               id="notification-message"
+              name="notification-message"
               onChange={(e) => wrappedUpdate({ message: e.target.value })}
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  (e.target as HTMLElement).blur();
+                }
+              }}
               placeholder="You have received a new submission on your form."
               rows={3}
               value={
@@ -198,22 +255,37 @@ export function NotificationsSection({
                 <div className="flex items-center gap-2" key={idx}>
                   <Input
                     disabled={!notifications.enabled}
+                    name={`custom-link-label-${idx}`}
                     onChange={(e) => {
                       const updated = [...customLinks];
                       updated[idx] = { ...updated[idx], label: e.target.value };
                       wrappedUpdate({ customLinks: updated });
                     }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Escape") {
+                        (e.target as HTMLElement).blur();
+                      }
+                    }}
                     placeholder="Label"
                     value={link.label}
                   />
                   <Input
+                    autoComplete="url"
                     disabled={!notifications.enabled}
+                    inputMode="url"
+                    name={`custom-link-url-${idx}`}
                     onChange={(e) => {
                       const updated = [...customLinks];
                       updated[idx] = { ...updated[idx], url: e.target.value };
                       wrappedUpdate({ customLinks: updated });
                     }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Escape") {
+                        (e.target as HTMLElement).blur();
+                      }
+                    }}
                     placeholder="https://example.com"
+                    type="url"
                     value={link.url}
                   />
                   <Button
@@ -231,18 +303,33 @@ export function NotificationsSection({
             <div className="flex gap-2">
               <Input
                 disabled={!notifications.enabled}
+                name="new-link-label"
                 onChange={(e) =>
                   setNewLink((l) => ({ ...l, label: e.target.value }))
                 }
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") {
+                    (e.target as HTMLElement).blur();
+                  }
+                }}
                 placeholder="Label"
                 value={newLink.label}
               />
               <Input
+                autoComplete="url"
                 disabled={!notifications.enabled}
+                inputMode="url"
+                name="new-link-url"
                 onChange={(e) =>
                   setNewLink((l) => ({ ...l, url: e.target.value }))
                 }
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") {
+                    (e.target as HTMLElement).blur();
+                  }
+                }}
                 placeholder="https://example.com"
+                type="url"
                 value={newLink.url}
               />
               <Button

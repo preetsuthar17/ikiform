@@ -87,13 +87,7 @@ export const SETTINGS_SEARCH_INDEX: SettingsSearchItem[] = [
     label: "Notifications",
     section: "notifications",
     anchorId: "notifications-title",
-    keywords: ["email", "notify"],
-  },
-  {
-    label: "Email Notifications",
-    section: "notifications",
-    anchorId: "email-notifications-title",
-    keywords: ["email", "notify"],
+    keywords: ["notifications", "email", "notify"],
   },
 
   // API Section

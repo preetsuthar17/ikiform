@@ -48,6 +48,22 @@ export function QuizSection({
   const [saved, setSaved] = useState(false);
 
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasChanges) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () =>
+      window.removeEventListener(
+        "beforeunload",
+        onBeforeUnload as unknown as EventListener
+      );
+  }, [hasChanges]);
+
   useEffect(() => {
     if (sectionRef.current) {
       const firstInput = sectionRef.current.querySelector(
@@ -70,8 +86,12 @@ export function QuizSection({
     }
     setSaving(true);
     try {
-      const normalizedQuiz = {
+      const trimmed = {
         ...quizSettings,
+        resultMessage: {
+          pass: (quizSettings.resultMessage?.pass || "").trim(),
+          fail: (quizSettings.resultMessage?.fail || "").trim(),
+        },
         timeLimit:
           quizSettings.timeLimit === "" || quizSettings.timeLimit === undefined
             ? undefined
@@ -81,11 +101,11 @@ export function QuizSection({
         ...schema,
         settings: {
           ...schema.settings,
-          quiz: normalizedQuiz,
+          quiz: trimmed,
         },
       };
       await formsDb.updateForm(formId, { schema: newSchema as any });
-      updateSettings({ quiz: normalizedQuiz });
+      updateSettings({ quiz: trimmed });
       setHasChanges(false);
       setSaved(true);
       toast.success("Quiz settings saved");
@@ -129,7 +149,24 @@ export function QuizSection({
   }, [saved]);
 
   return (
-    <div aria-label="Quiz settings" className="flex flex-col gap-4" role="main">
+    <div
+      aria-label="Quiz settings"
+      className="flex flex-col gap-4"
+      onKeyDown={(e) => {
+        const target = e.target as HTMLElement;
+        const isTextarea = target.tagName === "TEXTAREA";
+        if (isTextarea && e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+          e.preventDefault();
+          saveQuiz();
+        }
+      }}
+      role="main"
+      style={{
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent",
+        overscrollBehavior: "contain",
+      }}
+    >
       <Card
         aria-labelledby="quiz-title"
         className="shadow-none"
@@ -300,6 +337,12 @@ export function QuizSection({
                 disabled={saving || !hasChanges}
                 loading={saving}
                 onClick={saveQuiz}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    saveQuiz();
+                  }
+                }}
               >
                 Save
               </Button>
@@ -359,9 +402,15 @@ function QuizField({
       ) : type === "textarea" ? (
         <>
           <Textarea
-            className="shadow-none"
+            className="text-base shadow-none md:text-sm"
             id={id}
+            name={id}
             onChange={(e) => onChange(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                (e.target as HTMLElement).blur();
+              }
+            }}
             placeholder={placeholder}
             rows={rows}
             value={value}
@@ -373,11 +422,17 @@ function QuizField({
       ) : (
         <>
           <Input
-            className="shadow-none"
+            className="text-base shadow-none md:text-sm"
             id={id}
             max={max}
             min={min}
+            name={id}
             onChange={(e) => onChange(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                (e.target as HTMLElement).blur();
+              }
+            }}
             placeholder={placeholder}
             type={type}
             value={value}
@@ -407,12 +462,7 @@ function QuizToggleField({
 }) {
   return (
     <div className="flex items-start gap-3">
-      <Switch
-        checked={checked}
-        className="mt-1"
-        id={id}
-        onCheckedChange={onChange}
-      />
+      <Switch checked={checked} id={id} onCheckedChange={onChange} />
       <div className="flex flex-1 flex-col gap-2">
         <Label className="cursor-pointer font-medium text-sm" htmlFor={id}>
           {label}

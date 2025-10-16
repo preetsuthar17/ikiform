@@ -39,6 +39,21 @@ export function RateLimitSection({
 
   const rateLimitRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasChanges) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () =>
+      window.removeEventListener(
+        "beforeunload",
+        onBeforeUnload as unknown as EventListener
+      );
+  }, [hasChanges]);
+
   const handleRateLimitChange = (field: string, value: any) => {
     setRateLimitSettings((prev) => ({ ...prev, [field]: value }));
     setSaved(false);
@@ -66,15 +81,19 @@ export function RateLimitSection({
 
     setSaving(true);
     try {
+      const trimmed = {
+        ...rateLimitSettings,
+        message: (rateLimitSettings.message || "").trim(),
+      };
       const newSchema = {
         ...schema,
         settings: {
           ...schema.settings,
-          rateLimit: rateLimitSettings,
+          rateLimit: trimmed,
         },
       };
       await formsDb.updateForm(formId, { schema: newSchema as any });
-      updateRateLimit(rateLimitSettings);
+      updateRateLimit(trimmed);
       setSaved(true);
       setHasChanges(false);
       toast.success("Rate limiting settings saved successfully");
@@ -113,10 +132,25 @@ export function RateLimitSection({
   }, [saved]);
 
   return (
-    <ScrollArea className="size-full h-full">
+    <ScrollArea
+      className="size-full h-full"
+      style={{
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent",
+        overscrollBehavior: "contain",
+      }}
+    >
       <div
         aria-label="Rate limiting settings"
         className="flex flex-col gap-4"
+        onKeyDown={(e) => {
+          const target = e.target as HTMLElement;
+          const isTextarea = target.tagName === "TEXTAREA";
+          if (isTextarea && e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+            e.preventDefault();
+            saveRateLimit();
+          }
+        }}
         role="main"
       >
         <Card
@@ -225,8 +259,9 @@ export function RateLimitSection({
                       Rate Limit Message
                     </Label>
                     <Textarea
-                      className="resize-none shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
+                      className="resize-none text-base shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1 md:text-sm"
                       id="rate-limit-message"
+                      name="rate-limit-message"
                       onChange={(e) =>
                         handleRateLimitChange("message", e.target.value)
                       }
@@ -386,10 +421,11 @@ function RateLimitField({
         aria-describedby={descriptionId}
         aria-invalid={required && (!value || value < min || value > max)}
         aria-required={required}
-        className="shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
+        className="text-base shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1 md:text-sm"
         id={fieldId}
         max={max}
         min={min}
+        name={id}
         onChange={(e) => onChange(Number.parseInt(e.target.value) || min)}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}

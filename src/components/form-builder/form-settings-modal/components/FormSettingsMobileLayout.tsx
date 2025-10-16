@@ -70,17 +70,31 @@ export function FormSettingsMobileLayout({
 
   if (showSectionList) {
     return (
-      <div className="flex h-full flex-col gap-4 md:hidden">
+      <div
+        className="flex h-full flex-col gap-4 md:hidden"
+        style={{
+          touchAction: "manipulation",
+          WebkitTapHighlightColor: "transparent",
+          overscrollBehavior: "contain",
+        }}
+      >
         <div className="p-2">
           <SettingsSearch
             activeSection={activeSection}
             onSectionChange={onSectionChange}
           />
         </div>
-        <ScrollArea className="flex-1">
+        <ScrollArea
+          className="flex-1"
+          style={{
+            touchAction: "manipulation",
+            WebkitTapHighlightColor: "transparent",
+            overscrollBehavior: "contain",
+          }}
+        >
           <nav
             aria-label="Settings sections"
-            className="flex flex-col overflow-auto p-2"
+            className="flex flex-col gap-1 overflow-auto p-2"
             ref={sectionListRef}
             role="navigation"
           >
@@ -114,6 +128,7 @@ export function FormSettingsMobileLayout({
                   }
                 }}
                 role="menuitem"
+                style={{ minHeight: "44px" }}
                 tabIndex={0}
               >
                 <span>{section.label}</span>
@@ -127,7 +142,14 @@ export function FormSettingsMobileLayout({
   }
 
   return (
-    <div className="flex h-full flex-col md:hidden">
+    <div
+      className="flex h-full flex-col md:hidden"
+      style={{
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent",
+        overscrollBehavior: "contain",
+      }}
+    >
       <header className="flex flex-shrink-0 items-center gap-4 border-border border-b p-4">
         <Button
           aria-label="Go back to settings list"
@@ -137,9 +159,14 @@ export function FormSettingsMobileLayout({
             if (e.key === "Escape") {
               handleBackClick();
             }
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handleBackClick();
+            }
           }}
           ref={backButtonRef}
           size="icon"
+          style={{ minHeight: "44px", minWidth: "44px" }}
           tabIndex={0}
           variant="ghost"
         >
@@ -151,6 +178,11 @@ export function FormSettingsMobileLayout({
         aria-labelledby="settings-section-title"
         className="h-full flex-1"
         role="main"
+        style={{
+          touchAction: "manipulation",
+          WebkitTapHighlightColor: "transparent",
+          overscrollBehavior: "contain",
+        }}
       >
         <FormSettingsContent
           section={activeSection}

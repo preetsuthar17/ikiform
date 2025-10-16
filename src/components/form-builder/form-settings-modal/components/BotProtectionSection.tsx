@@ -34,6 +34,21 @@ export function BotProtectionSection({
 
   const botProtectionRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasChanges) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () =>
+      window.removeEventListener(
+        "beforeunload",
+        onBeforeUnload as unknown as EventListener
+      );
+  }, [hasChanges]);
+
   const handleBotProtectionChange = (field: string, value: any) => {
     setBotProtectionSettings((prev) => ({ ...prev, [field]: value }));
     setSaved(false);
@@ -56,15 +71,19 @@ export function BotProtectionSection({
 
     setSaving(true);
     try {
+      const trimmed = {
+        enabled: botProtectionSettings.enabled,
+        message: (botProtectionSettings.message || "").trim(),
+      };
       const newSchema = {
         ...schema,
         settings: {
           ...schema.settings,
-          botProtection: botProtectionSettings,
+          botProtection: trimmed,
         },
       };
       await formsDb.updateForm(formId, { schema: newSchema as any });
-      updateBotProtection(botProtectionSettings);
+      updateBotProtection(trimmed);
       setSaved(true);
       setHasChanges(false);
       toast.success("Bot protection settings saved successfully");
@@ -106,7 +125,20 @@ export function BotProtectionSection({
     <div
       aria-label="Bot protection settings"
       className="flex flex-col gap-4"
+      onKeyDown={(e) => {
+        const target = e.target as HTMLElement;
+        const isTextarea = target.tagName === "TEXTAREA";
+        if (isTextarea && e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+          e.preventDefault();
+          saveBotProtection();
+        }
+      }}
       role="main"
+      style={{
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent",
+        overscrollBehavior: "contain",
+      }}
     >
       <Card
         aria-labelledby="bot-protection-title"
@@ -118,7 +150,7 @@ export function BotProtectionSection({
           <div className="flex items-center justify-between">
             <div>
               <CardTitle
-                className="flex items-center gap-2 text-lg tracking-tight tracking-tight"
+                className="flex items-center gap-2 text-lg tracking-tight"
                 id="bot-protection-title"
               >
                 Bot Protection
@@ -169,8 +201,10 @@ export function BotProtectionSection({
                     Bot Detection Message
                   </Label>
                   <Textarea
+                    autoComplete="off"
                     className="resize-none shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
                     id="bot-message"
+                    name="bot-message"
                     onChange={(e) =>
                       handleBotProtectionChange("message", e.target.value)
                     }
@@ -195,10 +229,10 @@ export function BotProtectionSection({
                 className="rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-950/20"
                 role="status"
               >
-                <div className="flex items-start gap-3">
+                <div className="flex items-center gap-3">
                   <Shield
                     aria-hidden="true"
-                    className="mt-0.5 h-4 w-4 text-blue-600 dark:text-blue-400"
+                    className="h-4 w-4 text-blue-600 dark:text-blue-400"
                   />
                   <div className="flex flex-col gap-2">
                     <h4 className="font-medium text-blue-900 text-sm dark:text-blue-100">
@@ -254,7 +288,7 @@ export function BotProtectionSection({
             <div className="flex items-center gap-2">
               {hasChanges && (
                 <Button
-                  className="gap-2 text-muted-foreground hover:text-foreground"
+                  className="min-h-10 gap-2 text-muted-foreground hover:text-foreground"
                   onClick={resetSettings}
                   size="sm"
                   variant="ghost"
@@ -267,6 +301,7 @@ export function BotProtectionSection({
               <Button
                 aria-describedby="bot-protection-description"
                 aria-label="Save bot protection settings"
+                className="min-h-10"
                 disabled={saving || !hasChanges}
                 loading={saving}
                 onClick={saveBotProtection}
