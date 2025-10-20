@@ -5,10 +5,9 @@ import React from "react";
 import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 import { toast } from "@/hooks/use-toast";
 import {
   FORM_PRESETS,
@@ -37,7 +36,6 @@ export function PresetsSection({
       : getPresetsByCategory(selectedCategory);
 
   const applyPreset = (preset: FormPreset) => {
-    // Deep merge the preset settings with current settings
     const newSettings = {
       ...localSettings,
       ...preset.settings,
@@ -67,93 +65,102 @@ export function PresetsSection({
     const isApplied = appliedPreset === preset.id;
 
     return (
-      <Card
-        className={`hover: cursor-pointer p-4 transition-all duration-200 ${
-          isApplied ? "scale-[1.02] ring-2 ring-primary" : ""
-        }`}
-        onClick={() => applyPreset(preset)}
-      >
-        {/* Preset Preview */}
-        <div className="relative mb-3 h-44 overflow-hidden rounded-md border">
-          <div
-            className="flex h-full w-full items-center justify-center text-xs"
-            style={{
-              backgroundColor: preset.settings.colors?.background || "#ffffff",
-              color: preset.settings.colors?.text || "#000000",
-              fontFamily: preset.settings.typography?.fontFamily
-                ? `"${preset.settings.typography.fontFamily}", system-ui, sans-serif`
-                : undefined,
-            }}
+      <Card aria-selected={isApplied} className="overflow-auto p-0 shadow-none">
+        <CardContent className="p-0">
+          <button
+            aria-label={`Apply ${preset.name} preset`}
+            aria-pressed={isApplied}
+            className={`w-full rounded-md p-4 text-left transition-transform focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1 ${
+              isApplied ? "ring-2 ring-primary" : ""
+            }`}
+            onClick={() => applyPreset(preset)}
+            role="option"
+            type="button"
           >
-            <div className="flex flex-col gap-1 text-center">
+            <div className="relative mb-3 h-44 overflow-hidden rounded-md border">
               <div
-                className="font-medium text-[10px]"
+                className="flex h-full w-full items-center justify-center text-xs"
                 style={{
-                  color: preset.settings.colors?.primary || "#3b82f6",
+                  backgroundColor:
+                    preset.settings.colors?.background || "#ffffff",
+                  color: preset.settings.colors?.text || "#000000",
+                  fontFamily: preset.settings.typography?.fontFamily
+                    ? `"${preset.settings.typography.fontFamily}", system-ui, sans-serif`
+                    : undefined,
                 }}
               >
-                Form Title
+                <div className="flex flex-col gap-1 text-center">
+                  <div
+                    className="font-medium text-[10px]"
+                    style={{
+                      color: preset.settings.colors?.primary || "#3b82f6",
+                    }}
+                  >
+                    Form Title
+                  </div>
+                  <div
+                    className="mx-auto size-16 rounded"
+                    style={{
+                      backgroundColor:
+                        preset.settings.colors?.border || "#e5e7eb",
+                    }}
+                  />
+                  <div
+                    className="mx-auto size-12 rounded"
+                    style={{
+                      backgroundColor:
+                        preset.settings.colors?.border || "#e5e7eb",
+                    }}
+                  />
+                  <div
+                    className="mx-auto mt-1 flex h-3 w-8 items-center justify-center rounded text-[8px]"
+                    style={{
+                      backgroundColor:
+                        preset.settings.colors?.primary || "#3b82f6",
+                      color: "#ffffff",
+                    }}
+                  >
+                    Submit
+                  </div>
+                </div>
               </div>
-              <div
-                className="mx-auto size-16 rounded"
-                style={{
-                  backgroundColor: preset.settings.colors?.border || "#e5e7eb",
-                }}
-              />
-              <div
-                className="mx-auto size-12 rounded"
-                style={{
-                  backgroundColor: preset.settings.colors?.border || "#e5e7eb",
-                }}
-              />
-              <div
-                className="mx-auto mt-1 flex h-3 w-8 items-center justify-center rounded text-[8px]"
-                style={{
-                  backgroundColor: preset.settings.colors?.primary || "#3b82f6",
-                  color: "#ffffff",
-                }}
-              >
-                Submit
-              </div>
-            </div>
-          </div>
 
-          {/* Applied Indicator */}
-          {isApplied && (
-            <div className="absolute inset-0 flex items-center justify-center bg-primary/10">
-              <div className="rounded-full bg-primary p-1 text-primary-foreground">
-                <Check className="size-3" />
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Preset Info */}
-        <div className="flex flex-col gap-2">
-          <div className="flex items-center justify-between">
-            <h4 className="font-medium text-sm">{preset.name}</h4>
-            <Badge className="text-xs" variant="outline">
-              {preset.category}
-            </Badge>
-          </div>
-          <p className="text-muted-foreground text-xs">{preset.description}</p>
-
-          {/* Color Palette Preview */}
-          <div className="flex gap-1 pt-1">
-            {preset.settings.colors &&
-              Object.values(preset.settings.colors).map(
-                (color, index) =>
-                  color && (
-                    <div
-                      className="size-3 rounded-full border border-border"
-                      key={index}
-                      style={{ backgroundColor: color }}
-                      title={color}
-                    />
-                  )
+              {isApplied && (
+                <div className="absolute inset-0 flex items-center justify-center bg-primary/10">
+                  <div className="rounded-full bg-primary p-1 text-primary-foreground">
+                    <Check className="size-3" />
+                  </div>
+                </div>
               )}
-          </div>
-        </div>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <h4 className="font-medium text-sm">{preset.name}</h4>
+                <Badge className="text-xs" variant="outline">
+                  {preset.category}
+                </Badge>
+              </div>
+              <p className="text-muted-foreground text-xs">
+                {preset.description}
+              </p>
+              <div className="flex gap-1 pt-1">
+                {preset.settings.colors &&
+                  Object.values(preset.settings.colors).map(
+                    (color, index) =>
+                      color && (
+                        <div
+                          className="size-3 rounded-full border border-border"
+                          key={index}
+                          style={{ backgroundColor: color }}
+                          title={color}
+                        />
+                      )
+                  )}
+              </div>
+            </div>
+          </button>
+        </CardContent>
       </Card>
     );
   };
@@ -198,8 +205,6 @@ export function PresetsSection({
         </div>
       </div>
 
-      <Separator />
-
       {/* Presets Grid */}
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
@@ -216,7 +221,11 @@ export function PresetsSection({
         </div>
 
         <ScrollArea className="h-[550px]">
-          <div className="grid grid-cols-1 gap-4 pr-4">
+          <div
+            aria-label="Preset list"
+            className="grid grid-cols-1 gap-4 pr-4"
+            role="listbox"
+          >
             {filteredPresets.map((preset) => (
               <PresetCard key={preset.id} preset={preset} />
             ))}

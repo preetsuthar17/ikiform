@@ -110,7 +110,9 @@ export function EnhancedColorPicker({
         <Popover onOpenChange={setIsOpen} open={isOpen}>
           <PopoverTrigger asChild>
             <Button
-              className="h-10 w-12 border-2 p-0"
+              aria-label={label ? `Pick ${label}` : "Pick color"}
+              className="border-2"
+              size="icon"
               style={{
                 backgroundColor: value === "transparent" ? undefined : value,
                 backgroundImage:
@@ -123,19 +125,21 @@ export function EnhancedColorPicker({
               <Palette className="size-4" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-80">
-            <div className="flex flex-col gap-4">
+          <PopoverContent align="start" className="w-80 p-0 shadow-xs">
+            <div className="flex flex-col gap-3 p-3">
               <div className="flex flex-col gap-2">
-                <Label>Color</Label>
-                <div className="flex gap-2">
+                <Label className="text-sm">Color</Label>
+                <div className="flex items-center gap-2">
                   <input
-                    className="h-10 w-12 cursor-pointer rounded border border-border"
+                    aria-label="Pick color"
+                    className="h-9 w-10 cursor-pointer rounded border border-border"
                     onChange={(e) => handleColorChange(e.target.value)}
                     ref={colorInputRef}
                     type="color"
                     value={hexColor}
                   />
                   <Input
+                    aria-label="Hex color value"
                     className="flex-1"
                     onChange={(e) => handleColorChange(e.target.value)}
                     placeholder="#000000"
@@ -143,9 +147,9 @@ export function EnhancedColorPicker({
                   />
                   {"EyeDropper" in window && (
                     <Button
-                      className="px-3"
+                      aria-label="Eyedropper"
                       onClick={handleEyeDropper}
-                      size="sm"
+                      size="icon"
                       variant="outline"
                     >
                       <Pipette className="size-4" />
@@ -156,7 +160,12 @@ export function EnhancedColorPicker({
 
               {allowTransparent && (
                 <div className="flex flex-col gap-2">
-                  <Label>Opacity: {opacity}%</Label>
+                  <div className="flex items-center justify-between">
+                    <Label className="text-sm">Opacity</Label>
+                    <span className="text-muted-foreground text-xs">
+                      {opacity}%
+                    </span>
+                  </div>
                   <Slider
                     className="w-full"
                     max={100}
@@ -169,7 +178,12 @@ export function EnhancedColorPicker({
               )}
 
               <div className="flex flex-col gap-2">
-                <Label>Brightness: {brightness}%</Label>
+                <div className="flex items-center justify-between">
+                  <Label className="text-sm">Brightness</Label>
+                  <span className="text-muted-foreground text-xs">
+                    {brightness}%
+                  </span>
+                </div>
                 <Slider
                   className="w-full"
                   max={200}
@@ -181,9 +195,8 @@ export function EnhancedColorPicker({
               </div>
 
               {allowTransparent && (
-                <div className="flex gap-2">
+                <div className="flex items-center justify-end gap-2">
                   <Button
-                    className="flex-1"
                     onClick={() => onChange("transparent")}
                     size="sm"
                     variant="outline"
@@ -191,7 +204,6 @@ export function EnhancedColorPicker({
                     Transparent
                   </Button>
                   <Button
-                    className="flex-1"
                     onClick={() => {
                       setOpacity(100);
                       setBrightness(100);

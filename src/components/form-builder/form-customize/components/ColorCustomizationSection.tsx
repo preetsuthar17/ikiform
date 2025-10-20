@@ -1,10 +1,9 @@
 "use client";
 
 import { Paintbrush } from "lucide-react";
-// Removed PREDEFINED_COLORS and TRANSPARENT_PATTERN imports as color palettes are removed
 import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
+import { Card, CardContent } from "@/components/ui/card";
 import { EnhancedColorPicker } from "@/components/ui/enhanced-color-picker";
-import { Separator } from "@/components/ui/separator";
 
 interface ColorCustomizationSectionProps {
   localSettings: LocalSettings;
@@ -68,7 +67,7 @@ export function ColorCustomizationSection({
   };
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-4">
       <div>
         <div className="mb-2 flex items-center gap-2">
           <Paintbrush className="size-4 text-primary" />
@@ -79,79 +78,76 @@ export function ColorCustomizationSection({
         </p>
       </div>
 
-      <div className="flex flex-col gap-6">
-        {/* Background Color */}
-        <div className="flex flex-col gap-4">
-          <EnhancedColorPicker
-            allowTransparent={true}
-            label="Background Color"
-            onChange={handleBackgroundColorChange}
-            value={backgroundColor}
-          />
-          <p className="text-muted-foreground text-xs">
-            Sets the background color of the form container
-          </p>
-        </div>
+      <div className="flex flex-col gap-4">
+        <Card className="p-4 shadow-none">
+          <CardContent className="flex flex-col gap-3 p-0">
+            <EnhancedColorPicker
+              allowTransparent={true}
+              label="Background Color"
+              onChange={handleBackgroundColorChange}
+              value={backgroundColor}
+            />
+            <p className="text-muted-foreground text-xs">
+              Sets the background color of the form container
+            </p>
+          </CardContent>
+        </Card>
 
-        <Separator />
+        <Card className="p-4 shadow-none">
+          <CardContent className="flex flex-col gap-3 p-0">
+            <EnhancedColorPicker
+              allowTransparent={false}
+              label="Text Color"
+              onChange={handleTextColorChange}
+              value={textColor}
+            />
+            <p className="text-muted-foreground text-xs">
+              Sets the color of all text elements in the form
+            </p>
+          </CardContent>
+        </Card>
 
-        {/* Text Color */}
-        <div className="flex flex-col gap-4">
-          <EnhancedColorPicker
-            allowTransparent={false}
-            label="Text Color"
-            onChange={handleTextColorChange}
-            value={textColor}
-          />
-          <p className="text-muted-foreground text-xs">
-            Sets the color of all text elements in the form
-          </p>
-        </div>
+        <Card className="p-4 shadow-none">
+          <CardContent className="flex flex-col gap-3 p-0">
+            <EnhancedColorPicker
+              allowTransparent={false}
+              label="Primary Color (Buttons & Accent)"
+              onChange={handlePrimaryColorChange}
+              value={primaryColor}
+            />
+            <p className="text-muted-foreground text-xs">
+              Sets the color for buttons, focus states, and accent elements
+            </p>
+          </CardContent>
+        </Card>
 
-        <Separator />
+        <Card className="p-4 shadow-none">
+          <CardContent className="flex flex-col gap-3 p-0">
+            <EnhancedColorPicker
+              allowTransparent={true}
+              label="Border Color"
+              onChange={handleBorderColorChange}
+              value={borderColor}
+            />
+            <p className="text-muted-foreground text-xs">
+              Sets the color for input field borders and dividers
+            </p>
+          </CardContent>
+        </Card>
 
-        {/* Primary Color */}
-        <div className="flex flex-col gap-4">
-          <EnhancedColorPicker
-            allowTransparent={false}
-            label="Primary Color (Buttons & Accent)"
-            onChange={handlePrimaryColorChange}
-            value={primaryColor}
-          />
-          <p className="text-muted-foreground text-xs">
-            Sets the color for buttons, focus states, and accent elements
-          </p>
-        </div>
-
-        <Separator />
-
-        {/* Border Color */}
-        <div className="flex flex-col gap-4">
-          <EnhancedColorPicker
-            allowTransparent={true}
-            label="Border Color"
-            onChange={handleBorderColorChange}
-            value={borderColor}
-          />
-          <p className="text-muted-foreground text-xs">
-            Sets the color for input field borders and dividers
-          </p>
-        </div>
-
-        <Separator />
-
-        {/* Website Background Color */}
-        <div className="flex flex-col gap-4">
-          <EnhancedColorPicker
-            allowTransparent={false}
-            label="Website Background Color"
-            onChange={handleWebsiteBackgroundColorChange}
-            value={websiteBackgroundColor}
-          />
-          <p className="text-muted-foreground text-xs">
-            Sets the background color of the entire website/page
-          </p>
-        </div>
+        <Card className="p-4 shadow-none">
+          <CardContent className="flex flex-col gap-3 p-0">
+            <EnhancedColorPicker
+              allowTransparent={false}
+              label="Website Background Color"
+              onChange={handleWebsiteBackgroundColorChange}
+              value={websiteBackgroundColor}
+            />
+            <p className="text-muted-foreground text-xs">
+              Sets the background color of the entire website/page
+            </p>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

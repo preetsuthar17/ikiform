@@ -6,7 +6,7 @@ import { useState } from "react";
 import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "@/hooks/use-toast";
 import type { FormSchema } from "@/lib/database";
 import { formsDb } from "@/lib/database";
@@ -33,6 +33,8 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
     useState<CustomizeSection>("presets");
 
   const [previewMode, setPreviewMode] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [settingsVersion, setSettingsVersion] = useState(0);
 
   const [localSettings, setLocalSettings] = useState<LocalSettings>(() => ({
     ...schema.settings,
@@ -42,39 +44,21 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
     branding: (schema.settings as any).branding || {},
   }));
 
-  const updateSettings = async (updates: Partial<LocalSettings>) => {
+  const updateSettings = (updates: Partial<LocalSettings>) => {
     const newSettings = { ...localSettings, ...updates };
     setLocalSettings(newSettings);
-
-    // Auto-save to database
-    try {
-      const newSchema = { ...schema, settings: newSettings };
-      await formsDb.updateForm(formId, { schema: newSchema as any });
-      console.log("Auto-saved form customization");
-    } catch (error) {
-      console.error("Error auto-saving form customization:", error);
-      toast.error("Failed to save changes. Please try again.");
-    }
   };
 
-  const resetSettings = async () => {
-    const originalSettings = {
-      ...schema.settings,
-      layout: (schema.settings as any).layout || {},
-      colors: (schema.settings as any).colors || {},
-      typography: (schema.settings as any).typography || {},
-      branding: (schema.settings as any).branding || {},
-    };
-    setLocalSettings(originalSettings);
-
-    // Auto-save the reset directly to database
+  const handleSave = async () => {
     try {
-      const newSchema = { ...schema, settings: originalSettings };
+      setSaving(true);
+      const newSchema = { ...schema, settings: localSettings };
       await formsDb.updateForm(formId, { schema: newSchema as any });
-      toast.success("Customization reset to defaults");
+      toast.success("Saved customization");
     } catch (error) {
-      console.error("Error resetting form customization:", error);
-      toast.error("Failed to reset customization. Please try again.");
+      toast.error("Failed to save changes. Please try again.");
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -126,127 +110,134 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
   return (
     <div className="flex h-screen flex-col bg-background">
       {/* Header */}
-      <div className="flex-shrink-0 border-b bg-background p-4">
-        <div className="flex items-center justify-between">
-          <div className="flex flex-col items-start justify-center gap-4">
-            <div>
-              <h1 className="font-semibold text-xl">Customize Form</h1>
-              <div className="flex flex-col gap-1">
-                <p className="text-muted-foreground text-sm">{internalTitle}</p>
-                {hasPublicTitle && (
-                  <p className="text-muted-foreground text-xs">
-                    Public title: "{schema.settings?.publicTitle}"
-                  </p>
-                )}
+      <header className="z-20 flex-shrink-0 border-border border-b bg-card px-4 py-3 md:py-4">
+        <div className="flex h-full flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-0">
+          <div className="flex items-center gap-3 md:gap-4">
+            <h1 aria-hidden="true" className="sr-only">
+              Customize Form
+            </h1>
+            <div className="flex flex-col gap-1">
+              <p className="font-semibold text-xl">{internalTitle}</p>
+              {hasPublicTitle && (
+                <p className="text-muted-foreground text-xs">
+                  Public title: "{schema.settings?.publicTitle}"
+                </p>
+              )}
+              <div className="text-muted-foreground text-sm">
+                Customize Form
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-muted-foreground text-sm">
-              Changes auto-saved
-            </span>
-            <Button
-              className="gap-2"
-              onClick={handleBack}
-              size="sm"
-              variant="outline"
-            >
-              <ArrowLeft className="size-4" />
-              Back
-            </Button>
-            <Button onClick={resetSettings} variant="outline">
-              Reset to Default
-            </Button>
-          </div>
+
+          <nav
+            aria-label="Customization actions"
+            className="flex items-center gap-2"
+          >
+            <div className="flex items-center gap-2">
+              <Button className="gap-2" onClick={handleBack} variant="outline">
+                <ArrowLeft className="size-4" />
+                Back
+              </Button>
+              <Button disabled={saving} loading={saving} onClick={handleSave}>
+                Save
+              </Button>
+            </div>
+          </nav>
         </div>
-      </div>
+      </header>
 
       <div className="flex flex-1 overflow-hidden">
         {/* Left Panel - Customization Controls */}
-        <div className="w-96 flex-shrink-0 border-r bg-background">
+        <div className="w-110 flex-shrink-0 border-r bg-background">
           <div className="flex h-full flex-col">
-            {/* Tabs Navigation */}
-            <div className="flex-shrink-0 p-4">
-              <Tabs
-                items={[
-                  {
-                    id: "presets",
-                    label: "Presets",
-                    icon: <Palette className="size-4" />,
-                  },
-                  {
-                    id: "layout",
-                    label: "Layout",
-                    icon: <Layout className="size-4" />,
-                  },
-                  {
-                    id: "colors",
-                    label: "Colors",
-                    icon: <Palette className="size-4" />,
-                  },
-                  {
-                    id: "typography",
-                    label: "Typography",
-                    icon: <Type className="size-4" />,
-                  },
-                ]}
-                onValueChange={(value) =>
-                  setActiveSection(value as CustomizeSection)
-                }
-                size="sm"
-                value={activeSection}
-                variant="underline"
-              />
-            </div>
+            <Tabs
+              className="flex h-full flex-col"
+              onValueChange={(value) =>
+                setActiveSection(value as CustomizeSection)
+              }
+              value={activeSection}
+            >
+              <div className="flex-shrink-0 p-4">
+                <TabsList className="grid w-full grid-cols-4">
+                  <TabsTrigger className="gap-2" value="presets">
+                    <Palette className="size-4" />
+                    Presets
+                  </TabsTrigger>
+                  <TabsTrigger className="gap-2" value="layout">
+                    <Layout className="size-4" />
+                    Layout
+                  </TabsTrigger>
+                  <TabsTrigger className="gap-2" value="colors">
+                    <Palette className="size-4" />
+                    Colors
+                  </TabsTrigger>
+                  <TabsTrigger className="gap-2" value="typography">
+                    <Type className="size-4" />
+                    Text
+                  </TabsTrigger>
+                </TabsList>
+              </div>
 
-            {/* Section Content */}
-            <div className="flex-1 overflow-hidden">
-              <ScrollArea className="h-full">
-                <div className="p-6">
-                  <TabsContent activeValue={activeSection} value="presets">
-                    <PresetsSection
-                      localSettings={localSettings}
-                      updateSettings={updateSettings}
-                    />
-                  </TabsContent>
+              <div className="flex-1 overflow-hidden">
+                <TabsContent className="h-full" value="presets">
+                  <ScrollArea className="h-full">
+                    <div className="p-6" key={`presets-${settingsVersion}`}>
+                      <PresetsSection
+                        localSettings={localSettings}
+                        updateSettings={updateSettings}
+                      />
+                    </div>
+                  </ScrollArea>
+                </TabsContent>
 
-                  <TabsContent activeValue={activeSection} value="layout">
-                    <LayoutCustomizationSection
-                      localSettings={localSettings}
-                      updateSettings={updateSettings}
-                    />
-                  </TabsContent>
+                <TabsContent className="h-full" value="layout">
+                  <ScrollArea className="h-full">
+                    <div className="p-6" key={`layout-${settingsVersion}`}>
+                      <LayoutCustomizationSection
+                        localSettings={localSettings}
+                        updateSettings={updateSettings}
+                      />
+                    </div>
+                  </ScrollArea>
+                </TabsContent>
 
-                  <TabsContent activeValue={activeSection} value="colors">
-                    <ColorCustomizationSection
-                      localSettings={localSettings}
-                      updateSettings={updateSettings}
-                    />
-                  </TabsContent>
+                <TabsContent className="h-full" value="colors">
+                  <ScrollArea className="h-full">
+                    <div className="p-6" key={`colors-${settingsVersion}`}>
+                      <ColorCustomizationSection
+                        localSettings={localSettings}
+                        updateSettings={updateSettings}
+                      />
+                    </div>
+                  </ScrollArea>
+                </TabsContent>
 
-                  <TabsContent activeValue={activeSection} value="typography">
-                    <TypographyCustomizationSection
-                      localSettings={localSettings}
-                      updateSettings={updateSettings}
-                    />
-                  </TabsContent>
-                </div>
-              </ScrollArea>
-            </div>
+                <TabsContent className="h-full" value="typography">
+                  <ScrollArea className="h-full">
+                    <div className="p-6" key={`typography-${settingsVersion}`}>
+                      <TypographyCustomizationSection
+                        localSettings={localSettings}
+                        updateSettings={updateSettings}
+                      />
+                    </div>
+                  </ScrollArea>
+                </TabsContent>
+              </div>
+            </Tabs>
           </div>
         </div>
 
         {/* Right Panel - Form Preview */}
-        <div className="flex-1 overflow-hidden">
-          <div className="flex h-full items-center justify-center p-8">
-            <div className="w-fit">
+        <div className="min-w-0 flex-1">
+          <ScrollArea className="fle h-full items-center justify-center p-8">
+            <div className="p-8">
               <ActualFormPreview
-                className="h-full"
+                className="min-h-full"
                 localSettings={localSettings}
                 schema={schema}
               />
             </div>
-          </div>
+          </ScrollArea>
         </div>
       </div>
     </div>
