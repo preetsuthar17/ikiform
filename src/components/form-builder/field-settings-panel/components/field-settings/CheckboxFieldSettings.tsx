@@ -31,7 +31,7 @@ export function CheckboxFieldSettings({
               className="flex-1"
               id="checkbox-option-input"
               name="checkbox-option-input"
-              onChange={(e) => setNewOption(e.target.value.trim())}
+              onChange={(e) => setNewOption(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" && newOption.trim()) {
                   e.preventDefault();

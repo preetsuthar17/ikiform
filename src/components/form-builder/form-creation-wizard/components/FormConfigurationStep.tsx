@@ -39,9 +39,7 @@ export const FormConfigurationStep: React.FC<FormConfigurationStepProps> = ({
               id="form-title"
               inputMode="text"
               name="internal-title"
-              onBlur={(e) =>
-                onConfigurationChange({ title: e.target.value.trim() })
-              }
+              onBlur={(e) => onConfigurationChange({ title: e.target.value })}
               onChange={(e) => onConfigurationChange({ title: e.target.value })}
               placeholder="Enter internal title for your reference…"
               required
@@ -63,7 +61,7 @@ export const FormConfigurationStep: React.FC<FormConfigurationStepProps> = ({
               inputMode="text"
               name="public-title"
               onBlur={(e) =>
-                onConfigurationChange({ publicTitle: e.target.value.trim() })
+                onConfigurationChange({ publicTitle: e.target.value })
               }
               onChange={(e) =>
                 onConfigurationChange({ publicTitle: e.target.value })
@@ -89,7 +87,7 @@ export const FormConfigurationStep: React.FC<FormConfigurationStepProps> = ({
               inputMode="text"
               name="form-description"
               onBlur={(e) =>
-                onConfigurationChange({ description: e.target.value.trim() })
+                onConfigurationChange({ description: e.target.value })
               }
               onChange={(e) =>
                 onConfigurationChange({ description: e.target.value })

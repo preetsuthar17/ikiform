@@ -185,9 +185,7 @@ export function PrepopulationSettings({
                     autoComplete="off"
                     id="url-param"
                     name="url-param"
-                    onChange={(e) =>
-                      updateConfig({ urlParam: e.target.value.trim() })
-                    }
+                    onChange={(e) => updateConfig({ urlParam: e.target.value })}
                     onKeyDown={(e) => {
                       if (e.key === "Escape") {
                         e.currentTarget.blur();
@@ -218,7 +216,7 @@ export function PrepopulationSettings({
                     id="fallback-value"
                     name="fallback-value"
                     onChange={(e) =>
-                      updateConfig({ fallbackValue: e.target.value.trim() })
+                      updateConfig({ fallbackValue: e.target.value })
                     }
                     onKeyDown={(e) => {
                       if (e.key === "Escape") {
@@ -306,7 +304,7 @@ export function PrepopulationSettings({
                     id="api-endpoint"
                     name="api-endpoint"
                     onChange={(e) =>
-                      updateConfig({ apiEndpoint: e.target.value.trim() })
+                      updateConfig({ apiEndpoint: e.target.value })
                     }
                     onKeyDown={(e) => {
                       if (e.key === "Escape") {

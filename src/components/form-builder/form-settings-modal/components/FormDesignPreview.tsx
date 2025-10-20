@@ -4,7 +4,7 @@ import React from "react";
 import { Separator } from "@/components/ui";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input-base";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -12,7 +12,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select-base";
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea-base";
 import {
   getBorderRadiusValue,

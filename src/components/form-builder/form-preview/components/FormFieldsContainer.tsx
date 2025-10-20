@@ -1,4 +1,5 @@
 import { EyeOff, Lock, Plus, Trash2 } from "lucide-react";
+import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -27,6 +28,9 @@ export function FormFieldsContainer({
   fieldVisibility,
   showLogicCues = false,
 }: FormFieldsContainerProps & { showLogicCues?: boolean }) {
+  const itemRefs = React.useRef<Record<string, HTMLDivElement | null>>({});
+  const addButtonRef = React.useRef<HTMLButtonElement | null>(null);
+
   const AddFieldButton = () => (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -38,6 +42,7 @@ export function FormFieldsContainer({
               e.preventDefault();
             }
           }}
+          ref={addButtonRef}
           variant="outline"
         >
           <Plus aria-hidden="true" className="size-4" />
@@ -92,11 +97,14 @@ export function FormFieldsContainer({
 
   if (renderFields.length === 0) {
     return (
-      <div
-        aria-live="polite"
+      <section
+        aria-labelledby="form-fields-empty-heading"
         className="flex flex-col items-center justify-center gap-4 py-16 text-center"
-        role="status"
+        role="region"
       >
+        <h2 className="sr-only" id="form-fields-empty-heading">
+          Form fields
+        </h2>
         <div className="flex size-16 items-center justify-center rounded-2xl bg-accent">
           <div aria-hidden="true" className="size-8 rounded-2xl bg-muted" />
         </div>
@@ -109,113 +117,172 @@ export function FormFieldsContainer({
             : "Add fields from the left panel to start building your form"}
         </p>
         {onAddField && <AddFieldButton />}
-      </div>
+      </section>
     );
   }
 
   return (
-    <div
+    <section
+      aria-labelledby="form-fields-heading"
       className="flex flex-col gap-4"
+      role="region"
       style={{
         overscrollBehavior: "contain",
       }}
     >
-      {renderFields.map((field) => {
-        const isHidden = fieldVisibility?.[field.id]?.visible === false;
-        const isDisabled = fieldVisibility?.[field.id]?.disabled;
-        return (
-          <div
-            className="group relative"
-            key={field.id}
-            onKeyDown={(e) => {
-              if (
-                (e.key === "Enter" ||
-                  e.key === "Backspace" ||
-                  e.key === "Delete") &&
-                (e.target instanceof HTMLInputElement ||
-                  e.target instanceof HTMLTextAreaElement)
-              ) {
-                e.stopPropagation();
-              }
-            }}
-          >
-            <Card
-              aria-label={`${field.type} field - ${selectedFieldId === field.id ? "selected" : "click to select"}`}
-              className={`rounded-2xl border bg-card p-4 transition-all duration-200 ${
-                selectedFieldId === field.id
-                  ? "border-primary bg-accent/10 ring-2 ring-primary/20"
-                  : "border-border hover:bg-accent/5"
-              } ${
-                showLogicCues && isHidden
-                  ? "pointer-events-none relative border-2 border-muted border-dashed opacity-50"
-                  : showLogicCues && isDisabled
-                    ? "relative opacity-60"
-                    : ""
-              }`}
-              onClick={() =>
-                onFieldSelect(selectedFieldId === field.id ? null : field.id)
-              }
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  onFieldSelect(selectedFieldId === field.id ? null : field.id);
-                }
-              }}
-              role="button"
-              tabIndex={0}
-            >
-              {showLogicCues && (isHidden || isDisabled) && (
-                <div className="absolute top-2 left-2 z-20 flex items-center gap-2">
-                  {isHidden && (
-                    <span className="flex items-center gap-1 rounded-xl border border-muted/40 bg-muted px-2 py-0.5 text-muted-foreground text-xs">
-                      <EyeOff className="mr-1 size-4" /> Hidden
-                    </span>
-                  )}
-                  {!isHidden && isDisabled && (
-                    <span className="flex items-center gap-1 rounded-xl border border-muted/40 bg-muted px-2 py-0.5 text-muted-foreground text-xs">
-                      <Lock className="mr-1 size-4" /> Disabled
-                    </span>
-                  )}
-                </div>
-              )}
-              <div className="absolute top-2 right-2 z-10 flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-                <Button
-                  aria-label={`Delete ${field.type} field`}
-                  className="size-8 p-0 text-destructive hover:bg-destructive hover:text-destructive-foreground"
-                  onClick={(e) => {
+      <h2 className="sr-only" id="form-fields-heading">
+        Form fields
+      </h2>
+      <div aria-live="polite" className="sr-only">
+        {renderFields.length} {renderFields.length === 1 ? "field" : "fields"}
+      </div>
+      <ul className="flex flex-col gap-4" role="list">
+        {renderFields.map((field, index) => {
+          const isHidden = fieldVisibility?.[field.id]?.visible === false;
+          const isDisabled = fieldVisibility?.[field.id]?.disabled;
+          return (
+            <li className="group relative" key={field.id} role="listitem">
+              <div
+                aria-selected={selectedFieldId === field.id}
+                className="group relative"
+                onKeyDown={(e) => {
+                  if (
+                    (e.key === "Enter" ||
+                      e.key === "Backspace" ||
+                      e.key === "Delete") &&
+                    (e.target instanceof HTMLInputElement ||
+                      e.target instanceof HTMLTextAreaElement)
+                  ) {
                     e.stopPropagation();
+                  }
+                  if (e.key === "Delete" || e.key === "Backspace") {
+                    e.preventDefault();
+                    const next =
+                      renderFields[index + 1]?.id ??
+                      renderFields[index - 1]?.id;
                     onFieldDelete(field.id);
-                  }}
+                    requestAnimationFrame(() => {
+                      if (next && itemRefs.current[next]) {
+                        itemRefs.current[next]?.focus();
+                      } else {
+                        addButtonRef.current?.focus();
+                      }
+                    });
+                  }
+                }}
+              >
+                <Card
+                  aria-describedby={
+                    showLogicCues && (isHidden || isDisabled)
+                      ? `${field.id}-state`
+                      : undefined
+                  }
+                  aria-label={`${field.type} field`}
+                  className={`p-4 shadow-none transition-all duration-200 ${
+                    selectedFieldId === field.id
+                      ? "border-primary bg-accent/10 ring-2 ring-primary/20"
+                      : "border-border hover:bg-accent/5"
+                  } ${
+                    showLogicCues && isHidden
+                      ? "pointer-events-none relative border-2 border-muted border-dashed opacity-50"
+                      : showLogicCues && isDisabled
+                        ? "relative opacity-60"
+                        : ""
+                  }`}
+                  onClick={() =>
+                    onFieldSelect(
+                      selectedFieldId === field.id ? null : field.id
+                    )
+                  }
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();
-                      e.stopPropagation();
-                      onFieldDelete(field.id);
+                      onFieldSelect(
+                        selectedFieldId === field.id ? null : field.id
+                      );
                     }
                   }}
-                  size="sm"
-                  variant="ghost"
+                  ref={(el) => (itemRefs.current[field.id] = el)}
+                  role="button"
+                  tabIndex={0}
                 >
-                  <Trash2 aria-hidden="true" className="size-4" />
-                </Button>
+                  {showLogicCues && (isHidden || isDisabled) && (
+                    <div
+                      className="absolute top-2 left-2 z-20 flex items-center gap-2"
+                      id={`${field.id}-state`}
+                    >
+                      {isHidden && (
+                        <span className="flex items-center gap-1 rounded-xl border border-muted/40 bg-muted px-2 py-0.5 text-muted-foreground text-xs">
+                          <EyeOff className="mr-1 size-4" /> Hidden
+                        </span>
+                      )}
+                      {!isHidden && isDisabled && (
+                        <span className="flex items-center gap-1 rounded-xl border border-muted/40 bg-muted px-2 py-0.5 text-muted-foreground text-xs">
+                          <Lock className="mr-1 size-4" /> Disabled
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  <div className="absolute top-2 right-2 z-10 flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+                    <Button
+                      aria-label={`Delete ${field.type} field`}
+                      className="size-8 p-0 text-destructive hover:bg-destructive hover:text-destructive-foreground"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const next =
+                          renderFields[index + 1]?.id ??
+                          renderFields[index - 1]?.id;
+                        onFieldDelete(field.id);
+                        requestAnimationFrame(() => {
+                          if (next && itemRefs.current[next]) {
+                            itemRefs.current[next]?.focus();
+                          } else {
+                            addButtonRef.current?.focus();
+                          }
+                        });
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          const next =
+                            renderFields[index + 1]?.id ??
+                            renderFields[index - 1]?.id;
+                          onFieldDelete(field.id);
+                          requestAnimationFrame(() => {
+                            if (next && itemRefs.current[next]) {
+                              itemRefs.current[next]?.focus();
+                            } else {
+                              addButtonRef.current?.focus();
+                            }
+                          });
+                        }
+                      }}
+                      size="sm"
+                      variant="ghost"
+                    >
+                      <Trash2 aria-hidden="true" className="size-4" />
+                    </Button>
+                  </div>
+                  <FormFieldRenderer
+                    builderMode={true}
+                    disabled={fieldVisibility?.[field.id]?.disabled}
+                    field={field}
+                    onChange={(value) => onFieldValueChange(field.id, value)}
+                    value={
+                      typeof formData[field.id] === "object"
+                        ? (formData[field.id].text ??
+                          JSON.stringify(formData[field.id]))
+                        : formData[field.id]
+                    }
+                  />
+                </Card>
               </div>
-              <FormFieldRenderer
-                builderMode={true}
-                disabled={fieldVisibility?.[field.id]?.disabled}
-                field={field}
-                onChange={(value) => onFieldValueChange(field.id, value)}
-                value={
-                  typeof formData[field.id] === "object"
-                    ? (formData[field.id].text ??
-                      JSON.stringify(formData[field.id]))
-                    : formData[field.id]
-                }
-              />
-            </Card>
-          </div>
-        );
-      })}
-      {onAddField && <AddFieldButton />}
-    </div>
+            </li>
+          );
+        })}
+        {onAddField && <AddFieldButton />}
+      </ul>
+    </section>
   );
 }

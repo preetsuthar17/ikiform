@@ -2,34 +2,49 @@ import { cn } from "@/lib/utils";
 import type { BaseFieldProps } from "../types";
 
 export function StatementField({ field }: BaseFieldProps) {
-  const heading = field.settings?.statementHeading || field.label;
-  const description = field.settings?.statementDescription || field.description;
-  const align = field.settings?.statementAlign || "left";
-  const size = field.settings?.statementSize || "md";
+  const getHeadingText = () => field.settings?.statementHeading || field.label;
+  const getDescriptionText = () =>
+    field.settings?.statementDescription || field.description;
+  const getAlignment = () => field.settings?.statementAlign || "left";
+  const getSizeVariant = () => field.settings?.statementSize || "md";
+
+  const getContainerClassName = () =>
+    cn(
+      "flex flex-col gap-2",
+      getAlignment() === "center" && "items-center",
+      getAlignment() === "right" && "items-end"
+    );
+
+  const getHeadingClassName = () =>
+    cn(
+      "font-semibold text-foreground",
+      getSizeVariant() === "lg"
+        ? "text-2xl"
+        : getSizeVariant() === "sm"
+          ? "text-base"
+          : "text-xl"
+    );
+
+  const getDescriptionClassName = () =>
+    "max-w-prose text-muted-foreground text-sm";
+
+  const headingId = `${field.id}-statement-heading`;
 
   return (
-    <div
-      className={cn(
-        "flex flex-col gap-1",
-        align === "center" && "items-center",
-        align === "right" && "items-end"
-      )}
+    <section
+      aria-label={getHeadingText() ? undefined : "Statement"}
+      aria-labelledby={getHeadingText() ? headingId : undefined}
+      className={getContainerClassName()}
+      role="group"
     >
-      {heading && (
-        <div
-          className={cn(
-            "font-semibold text-foreground",
-            size === "lg" ? "text-2xl" : size === "sm" ? "text-base" : "text-xl"
-          )}
-        >
-          {heading}
-        </div>
+      {getHeadingText() && (
+        <h3 className={getHeadingClassName()} id={headingId}>
+          {getHeadingText()}
+        </h3>
       )}
-      {description && (
-        <div className="mt-1 max-w-prose text-muted-foreground text-sm">
-          {description}
-        </div>
+      {getDescriptionText() && (
+        <p className={getDescriptionClassName()}>{getDescriptionText()}</p>
       )}
-    </div>
+    </section>
   );
 }

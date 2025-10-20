@@ -72,7 +72,7 @@ export function FullPalette({
           aria-label="Search fields"
           autoComplete="off"
           name="field-search"
-          onChange={(e) => setSearchTerm(e.target.value.trim())}
+          onChange={(e) => setSearchTerm(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === "Escape") {
               setSearchTerm("");

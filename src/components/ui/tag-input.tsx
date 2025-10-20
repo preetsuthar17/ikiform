@@ -1,40 +1,16 @@
 "use client";
 
-import { cva, type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
 import * as React from "react";
-import { Chip } from "@/components/ui/chip";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-const tagInputVariants = cva(
-  "min-h-9 w-full rounded-xl border border-border bg-input px-3 py-2 text-sm ring-offset-background transition-all focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-  {
-    variants: {
-      variant: {
-        default: "border-border",
-        destructive: "border-destructive focus-within:ring-destructive",
-      },
-      size: {
-        sm: "min-h-8 px-2 py-1 text-xs",
-        default: "min-h-9 px-3 py-2 text-sm",
-        lg: "min-h-10 px-4 py-2",
-        xl: "min-h-12 px-6 py-3 text-base",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-);
 
 export interface TagInputProps
   extends Omit<
-      React.InputHTMLAttributes<HTMLInputElement>,
-      "size" | "value" | "onChange"
-    >,
-    VariantProps<typeof tagInputVariants> {
+    React.InputHTMLAttributes<HTMLInputElement>,
+    "size" | "value" | "onChange"
+  > {
   tags: string[];
   onTagsChange: (tags: string[]) => void;
   maxTags?: number;
@@ -51,16 +27,22 @@ export interface TagInputProps
   error?: boolean;
 }
 
+const tagBadgeVariantMap = {
+  default: "default",
+  secondary: "secondary",
+  destructive: "destructive",
+  outline: "outline",
+  ghost: "ghost",
+};
+
 const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
   (
     {
       className,
-      variant,
-      size,
       tags,
       onTagsChange,
       maxTags,
-      placeholder = "Type and press Enter to add tags...",
+      placeholder = "Type and press Enter to add tags…",
       tagVariant = "secondary",
       tagSize = "sm",
       allowDuplicates = false,
@@ -84,7 +66,6 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
       (tag: string) => {
         const trimmedTag = tag.trim();
         if (!trimmedTag) return;
-
         if (!allowDuplicates && safeTags.includes(trimmedTag)) return;
         if (maxTags && safeTags.length >= maxTags) return;
 
@@ -148,61 +129,86 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
       inputRef.current?.focus();
     };
 
-    const chipSizeMapping = {
-      sm: "sm" as const,
-      default: "sm" as const,
-      lg: "default" as const,
-      xl: "default" as const,
-    };
-
+    // Style main container as the Input, including border, padding, background and focus ring
     return (
       <div className="relative">
         <div
+          aria-invalid={!!error}
           className={cn(
-            tagInputVariants({
-              variant: error ? "destructive" : variant,
-              size,
-            }),
-            "cursor-text",
-            className
+            "w-full min-w-0 rounded-md border border-input bg-transparent px-2 py-1 text-base shadow-xs outline-none transition-[color,box-shadow] selection:bg-primary selection:text-primary-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:font-medium file:text-foreground file:text-sm placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm dark:bg-input/30",
+            "focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50",
+            "aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
+            className,
+            error &&
+              "border-destructive ring-destructive focus-within:ring-destructive"
           )}
+          data-slot="input"
           onClick={handleContainerClick}
+          tabIndex={-1}
         >
-          <div className="flex flex-wrap gap-1.5">
-            <AnimatePresence>
-              {safeTags.map((tag, index) => (
-                <motion.div
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  key={`${tag}-${index}`}
-                  layout
-                  transition={{
-                    duration: 0.2,
-                    ease: "easeOut",
+          <div className="flex min-h-[32px] flex-1 flex-wrap items-center gap-1.5">
+            {safeTags.map((tag, idx) => (
+              <Badge
+                className={cn(
+                  "inline-flex select-none items-center gap-0.5 font-medium",
+                  disabled ? "pointer-events-none opacity-60" : ""
+                )}
+                data-testid="tag-badge"
+                key={`${tag}-${idx}`}
+                variant={
+                  (tagBadgeVariantMap[tagVariant] as
+                    | "default"
+                    | "destructive"
+                    | "secondary"
+                    | "outline"
+                    | "pending"
+                    | null
+                    | undefined) || "secondary"
+                }
+              >
+                <span className="max-w-[120px] truncate">{tag}</span>
+                <Button
+                  aria-label={`Remove tag ${tag}`}
+                  className={cn("ml-1 size-4 rounded-full p-0.5")}
+                  disabled={disabled}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeTag(tag);
                   }}
+                  size="icon-sm"
+                  tabIndex={-1}
+                  type="button"
+                  variant="ghost"
                 >
-                  <Chip
-                    className="pointer-events-auto"
-                    dismissible
-                    onDismiss={() => removeTag(tag)}
-                    size={chipSizeMapping[size || "default"]}
-                    variant={tagVariant}
-                  >
-                    {tag}
-                  </Chip>
-                </motion.div>
-              ))}
-            </AnimatePresence>
+                  <X className="size-4" />
+                  <span className="sr-only">{`Remove tag ${tag}`}</span>
+                </Button>
+              </Badge>
+            ))}
             <input
-              className="min-w-[120px] flex-1 bg-transparent outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed"
+              aria-label="Add tag"
+              autoComplete="off"
+              className={cn(
+                "min-w-[120px] flex-1 border-0 bg-transparent p-0 px-1 text-foreground shadow-none placeholder:text-muted-foreground focus:outline-none focus:ring-0 md:text-sm",
+                "disabled:pointer-events-none disabled:cursor-not-allowed"
+              )}
               disabled={
                 disabled || (maxTags ? safeTags.length >= maxTags : false)
               }
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}
               placeholder={safeTags.length === 0 ? placeholder : ""}
-              ref={inputRef}
+              ref={(node) => {
+                inputRef.current = node as HTMLInputElement | null;
+                if (typeof ref === "function") {
+                  ref(node);
+                } else if (ref && typeof ref === "object") {
+                  (
+                    ref as React.MutableRefObject<HTMLInputElement | null>
+                  ).current = node;
+                }
+              }}
+              spellCheck={false}
               type="text"
               value={inputValue}
               {...props}
@@ -210,15 +216,19 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
           </div>
         </div>
         {clearAllButton && safeTags.length > 0 && (
-          <button
+          <Button
             aria-label="Clear all tags"
-            className="-translate-y-1/2 absolute top-1/2 right-2 rounded-2xl p-1 transition-colors hover:bg-accent disabled:pointer-events-none disabled:opacity-50"
+            className="-translate-y-1/2 absolute top-1/2 right-2 size-7 rounded-full p-0"
             disabled={disabled}
             onClick={handleClearAll}
+            size="icon"
+            tabIndex={0}
             type="button"
+            variant="ghost"
           >
-            <X className="text-muted-foreground" size={14} />
-          </button>
+            <X className="size-4" />
+            <span className="sr-only">Clear all tags</span>
+          </Button>
         )}
       </div>
     );
@@ -227,4 +237,4 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
 
 TagInput.displayName = "TagInput";
 
-export { TagInput, tagInputVariants };
+export { TagInput };

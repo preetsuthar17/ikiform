@@ -38,15 +38,12 @@ const fileUploadVariants = cva(
     "w-full",
     "rounded-xl",
     "border",
-    "transition-all",
-    "duration-300",
-    "bg-background",
+    "transition-colors",
+    "duration-200",
     "focus-visible:outline-none",
     "focus-visible:ring-2",
     "focus-visible:ring-primary",
-    "focus-visible:",
     "focus-visible:border-primary",
-    "hover:",
     "hover:border-primary/60",
     "active:shadow",
     "disabled:pointer-events-none",
@@ -55,12 +52,10 @@ const fileUploadVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "focus-visible: border-border bg-background hover:border-primary/40 focus-visible:ring-primary",
+        default: "border-border bg-transparent hover:border-primary/40",
         dashed:
-          "focus-visible: border-border border-dashed bg-background hover:border-primary/60 hover:bg-accent/60 focus-visible:ring-primary",
-        ghost:
-          "focus-visible: border-transparent bg-accent/40 hover:bg-accent/70 focus-visible:ring-primary",
+          "border-border border-dashed bg-transparent hover:border-primary/60 hover:bg-accent/60",
+        ghost: "border-transparent bg-transparent hover:bg-accent/70",
       },
       size: {
         sm: "min-h-[120px] p-4",
@@ -70,7 +65,7 @@ const fileUploadVariants = cva(
       state: {
         idle: "",
         dragging:
-          "scale-[1.03] border-primary bg-primary/10 ring-2 ring-primary",
+          "scale-[1.03] border-primary bg-transparent ring-2 ring-primary",
         disabled: "pointer-events-none opacity-50",
       },
     },
@@ -271,7 +266,6 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
 
     return (
       <div className="flex w-full flex-col gap-4" ref={ref} {...props}>
-        {}
         <div
           aria-label="Upload files"
           className={cn(
@@ -358,7 +352,6 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
           />
         </div>
 
-        {}
         {files.length > 0 && (
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
@@ -375,7 +368,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
               )}{" "}
             </div>
 
-            <div className="flex flex-col gap-2">
+            <div aria-live="polite" className="flex flex-col gap-2">
               <AnimatePresence>
                 <ScrollArea
                   className={cn(
@@ -396,7 +389,6 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                           initial={{ opacity: 0, y: 20 }}
                           key={file.id}
                         >
-                          {}
                           <div className="relative flex-shrink-0">
                             {showPreview && file.preview ? (
                               <img
@@ -416,7 +408,6 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                             )}
                           </div>
 
-                          {}
                           <div className="flex w-full min-w-0 flex-1 flex-col gap-1">
                             <div className="flex items-center justify-between gap-2">
                               <p className="truncate font-medium text-foreground text-sm">
@@ -445,19 +436,14 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                                   </>
                                 )}
                                 {file.status === "completed" && (
-                                  <Badge size="sm" variant="secondary">
-                                    Uploaded
-                                  </Badge>
+                                  <Badge variant="secondary">Uploaded</Badge>
                                 )}
                                 {file.status === "error" && (
-                                  <Badge size="sm" variant="destructive">
-                                    Error
-                                  </Badge>
+                                  <Badge variant="destructive">Error</Badge>
                                 )}
                               </div>
                             </div>
 
-                            {}
                             {file.status === "uploading" && (
                               <div className="h-1.5 w-full overflow-hidden rounded-2xl bg-accent">
                                 <motion.div

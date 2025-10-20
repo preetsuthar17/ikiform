@@ -66,7 +66,7 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
                     autoComplete="off"
                     id={`option-${index}`}
                     name={`option-${index}`}
-                    onChange={(e) => updateOption(index, e.target.value.trim())}
+                    onChange={(e) => updateOption(index, e.target.value)}
                     onKeyDown={(e) => {
                       if (e.key === "Escape") {
                         e.currentTarget.blur();
@@ -123,9 +123,7 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
               autoComplete="off"
               id="optionsApi"
               name="optionsApi"
-              onChange={(e) =>
-                updateField({ optionsApi: e.target.value.trim() })
-              }
+              onChange={(e) => updateField({ optionsApi: e.target.value })}
               onKeyDown={(e) => {
                 if (e.key === "Escape") {
                   e.currentTarget.blur();
@@ -146,9 +144,7 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
                 autoComplete="off"
                 id="valueKey"
                 name="valueKey"
-                onChange={(e) =>
-                  updateField({ valueKey: e.target.value.trim() })
-                }
+                onChange={(e) => updateField({ valueKey: e.target.value })}
                 onKeyDown={(e) => {
                   if (e.key === "Escape") {
                     e.currentTarget.blur();
@@ -168,9 +164,7 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
                 autoComplete="off"
                 id="labelKey"
                 name="labelKey"
-                onChange={(e) =>
-                  updateField({ labelKey: e.target.value.trim() })
-                }
+                onChange={(e) => updateField({ labelKey: e.target.value })}
                 onKeyDown={(e) => {
                   if (e.key === "Escape") {
                     e.currentTarget.blur();

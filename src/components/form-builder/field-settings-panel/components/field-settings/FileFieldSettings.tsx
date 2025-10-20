@@ -380,7 +380,7 @@ export function FileFieldSettings({
             className="resize-none"
             id="helpText"
             name="helpText"
-            onChange={(e) => updateSetting("helpText", e.target.value.trim())}
+            onChange={(e) => updateSetting("helpText", e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Escape") {
                 e.currentTarget.blur();

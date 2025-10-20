@@ -4,7 +4,6 @@ import { EmailValidationSettings } from "./EmailValidationSettings";
 import {
   AddressFieldSettings,
   BannerFieldSettings,
-  CheckboxFieldSettings,
   DateFieldSettings,
   FieldGroupSettings,
   FileFieldSettings,
@@ -50,7 +49,6 @@ export function FieldSpecificSettings({
     poll: PollFieldSettings,
     rating: RatingFieldSettings,
     banner: BannerFieldSettings,
-    checkbox: CheckboxFieldSettings,
     radio: RadioFieldSettings,
     scheduler: SchedulerFieldSettings,
     time: TimeFieldSettings,

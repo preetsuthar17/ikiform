@@ -8,7 +8,7 @@ import {
   FORM_WIDTH_OPTIONS,
 } from "@/components/form-builder/form-settings-modal/constants";
 import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
-import { Input } from "@/components/ui/input-base";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";

@@ -93,7 +93,7 @@ export function ValidationSettings({
                 name="pattern"
                 onChange={(e) =>
                   onUpdateValidation({
-                    pattern: e.target.value.trim() || undefined,
+                    pattern: e.target.value || undefined,
                   })
                 }
                 onKeyDown={(e) => {

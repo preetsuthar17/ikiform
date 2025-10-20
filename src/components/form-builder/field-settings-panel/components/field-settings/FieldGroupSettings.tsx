@@ -325,7 +325,7 @@ export function FieldGroupSettings({
                           name={`${groupField.id}-label`}
                           onChange={(e) =>
                             updateGroupField(groupField.id, {
-                              label: e.target.value.trim(),
+                              label: e.target.value,
                             })
                           }
                           onKeyDown={(e) => {
@@ -358,7 +358,7 @@ export function FieldGroupSettings({
                           name={`${groupField.id}-placeholder`}
                           onChange={(e) =>
                             updateGroupField(groupField.id, {
-                              placeholder: e.target.value.trim(),
+                              placeholder: e.target.value,
                             })
                           }
                           onKeyDown={(e) => {

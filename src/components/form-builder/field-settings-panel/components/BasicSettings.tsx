@@ -30,7 +30,7 @@ export const BasicSettings: React.FC<BasicSettingsProps> = ({
             autoComplete="off"
             id="field-label"
             name="field-label"
-            onChange={(e) => updateField({ label: e.target.value.trim() })}
+            onChange={(e) => updateField({ label: e.target.value })}
             onKeyDown={(e) => {
               if (e.key === "Escape") {
                 e.currentTarget.blur();
@@ -54,9 +54,7 @@ export const BasicSettings: React.FC<BasicSettingsProps> = ({
             autoComplete="off"
             id="field-placeholder"
             name="field-placeholder"
-            onChange={(e) =>
-              updateField({ placeholder: e.target.value.trim() })
-            }
+            onChange={(e) => updateField({ placeholder: e.target.value })}
             onKeyDown={(e) => {
               if (e.key === "Escape") {
                 e.currentTarget.blur();
@@ -83,9 +81,7 @@ export const BasicSettings: React.FC<BasicSettingsProps> = ({
             className="resize-none"
             id="field-description"
             name="field-description"
-            onChange={(e) =>
-              updateField({ description: e.target.value.trim() })
-            }
+            onChange={(e) => updateField({ description: e.target.value })}
             onKeyDown={(e) => {
               if (e.key === "Escape") {
                 e.currentTarget.blur();

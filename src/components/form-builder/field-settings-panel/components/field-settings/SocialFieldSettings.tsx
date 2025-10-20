@@ -88,7 +88,7 @@ export function SocialFieldSettings({
                     const updated = [...(field.settings?.customLinks || [])];
                     updated[idx] = {
                       ...updated[idx],
-                      label: e.target.value.trim(),
+                      label: e.target.value,
                     };
                     onUpdateSettings({ customLinks: updated });
                   }}
@@ -111,7 +111,7 @@ export function SocialFieldSettings({
                     const updated = [...(field.settings?.customLinks || [])];
                     updated[idx] = {
                       ...updated[idx],
-                      placeholder: e.target.value.trim(),
+                      placeholder: e.target.value,
                     };
                     onUpdateSettings({ customLinks: updated });
                   }}

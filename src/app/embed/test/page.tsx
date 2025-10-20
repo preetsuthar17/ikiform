@@ -10,7 +10,7 @@ import {
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button-base";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,

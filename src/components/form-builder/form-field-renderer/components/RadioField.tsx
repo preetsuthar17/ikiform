@@ -1,13 +1,15 @@
+"use client";
+
 import { CheckCircle } from "lucide-react";
 import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Skeleton } from "@/components/ui/skeleton";
+
 import type { BaseFieldProps } from "../types";
-import {
-  applyBuilderMode,
-  getBuilderMode,
-  getErrorRingClasses,
-} from "../utils";
+
+import { getBuilderMode, getErrorRingClasses } from "../utils";
 import { sanitizeOptions } from "../utils/sanitizeOptions";
 
 export function RadioField(props: BaseFieldProps) {
@@ -17,7 +19,7 @@ export function RadioField(props: BaseFieldProps) {
   const [apiOptions, setApiOptions] = React.useState<Array<
     string | { value: string; label?: string }
   > | null>(null);
-  const [loading, setLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [fetchError, setFetchError] = React.useState<string | null>(null);
 
   const isFormBuilder =
@@ -28,102 +30,188 @@ export function RadioField(props: BaseFieldProps) {
   const isQuizField = field.settings?.isQuizField;
   const correctAnswer = field.settings?.correctAnswer;
 
-  React.useEffect(() => {
-    if (field.optionsApi) {
-      setLoading(true);
-      fetch(field.optionsApi)
-        .then((res) => res.json())
-        .then((data) => {
-          let options: Array<any> = [];
-          if (Array.isArray(data)) {
-            options = data;
-          } else if (Array.isArray(data.options)) {
-            options = data.options;
-          }
+  const labelId = `${field.id}-label`;
+  const descId = `${field.id}-description`;
+  const errorId = `${field.id}-error`;
 
-          if (field.valueKey || field.labelKey) {
-            options = options.map((item: any) => ({
-              value: field.valueKey ? item[field.valueKey] : item.value,
-              label: field.labelKey
-                ? item[field.labelKey]
-                : item.label || item.value,
-            }));
-          }
-          setApiOptions(sanitizeOptions(options));
-          setLoading(false);
-        })
-        .catch((err) => {
-          setFetchError("Failed to fetch options");
-          setLoading(false);
-        });
-    } else {
+  const fetchApiOptions = async () => {
+    if (!field.optionsApi) {
       setApiOptions(null);
+      return;
     }
+
+    setIsLoading(true);
+    setFetchError(null);
+
+    try {
+      const response = await fetch(field.optionsApi);
+      const data = await response.json();
+
+      let options: Array<any> = [];
+      if (Array.isArray(data)) {
+        options = data;
+      } else if (Array.isArray(data.options)) {
+        options = data.options;
+      }
+
+      if (field.valueKey || field.labelKey) {
+        options = options.map((item: any) => ({
+          value: field.valueKey ? item[field.valueKey] : item.value,
+          label: field.labelKey
+            ? item[field.labelKey]
+            : item.label || item.value,
+        }));
+      }
+
+      setApiOptions(sanitizeOptions(options));
+    } catch (error) {
+      setFetchError("Failed to fetch options");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchApiOptions();
   }, [field.optionsApi, field.valueKey ?? "", field.labelKey ?? ""]);
 
-  const options = apiOptions ?? field.options ?? [];
+  const getAvailableOptions = () => apiOptions ?? field.options ?? [];
 
-  const radioGroupProps = applyBuilderMode(
-    {
-      className: `flex flex-col gap-2 ${errorRingClasses}`,
-      disabled: disabled || loading,
-      onValueChange: onChange,
-      value: value || "",
-    },
-    builderMode
-  );
+  const getOptionValue = (
+    option: string | { value: string; label?: string }
+  ): string => {
+    if (typeof option === "string") return option;
+    if (option && typeof option === "object") return option.value || "";
+    return "";
+  };
+
+  const getOptionLabel = (
+    option: string | { value: string; label?: string }
+  ): string => {
+    if (typeof option === "string") return option;
+    if (option && typeof option === "object")
+      return option.label || option.value || "";
+    return "";
+  };
+
+  const handleValueChange = (newValue: string) => {
+    onChange(newValue);
+  };
+
+  const renderRadioOptions = () => {
+    const options = getAvailableOptions().filter(Boolean);
+
+    return (
+      <Card className="border-0 p-0 shadow-none">
+        <CardContent className="p-0">
+          <RadioGroup
+            aria-busy={isLoading ? true : undefined}
+            aria-describedby={
+              `${fetchError ? errorId : ""}${field.description ? (fetchError ? " " : "") + descId : ""}` ||
+              undefined
+            }
+            aria-labelledby={field.label ? labelId : undefined}
+            className={`flex flex-col gap-2 ${errorRingClasses}`}
+            disabled={disabled || isLoading}
+            onValueChange={handleValueChange}
+            value={value || ""}
+          >
+            {fetchError && (
+              <div
+                aria-live="polite"
+                className="rounded-md bg-destructive/10 p-3 text-destructive text-sm"
+                id={errorId}
+                role="alert"
+              >
+                {fetchError}
+              </div>
+            )}
+            {options.map((option, index) => {
+              const optionValue = getOptionValue(option);
+              const optionLabel = getOptionLabel(option);
+
+              if (!optionValue) return null;
+
+              const isCorrect = isQuizField && correctAnswer === optionValue;
+
+              return (
+                <div
+                  className={`relative flex items-center gap-2 rounded-md border border-border px-3 transition-colors hover:bg-accent/50 ${
+                    isFormBuilder && isCorrect
+                      ? "bg-green-50 ring-1 ring-green-200"
+                      : ""
+                  }`}
+                  key={index}
+                >
+                  <RadioGroupItem
+                    className="mt-0"
+                    disabled={disabled || isLoading}
+                    id={`${field.id}-${index}`}
+                    value={optionValue}
+                  />
+                  <Label
+                    className="flex h-12 flex-1 cursor-pointer items-center font-medium text-sm"
+                    htmlFor={`${field.id}-${index}`}
+                  >
+                    {optionLabel}
+                  </Label>
+                  {isFormBuilder && isCorrect && (
+                    <div
+                      className="-translate-y-1/2 absolute top-1/2 right-2"
+                      title="Correct Answer"
+                    >
+                      <CheckCircle className="size-4 text-green-600" />
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </RadioGroup>
+        </CardContent>
+      </Card>
+    );
+  };
+
+  if (isLoading && !apiOptions) {
+    return <RadioFieldSkeleton optionsCount={field.options?.length || 3} />;
+  }
 
   return (
-    <div className={builderMode ? "pointer-events-none" : ""}>
-      <RadioGroup {...radioGroupProps}>
-        {fetchError && <div className="p-2 text-red-500">{fetchError}</div>}
-        {options.filter(Boolean).map((option, index) => {
-          let optionValue = "";
-          let optionLabel = "";
+    <div className="flex flex-col gap-3">
+      <div className={builderMode ? "pointer-events-none" : ""}>
+        {renderRadioOptions()}
+      </div>
+      {error && (
+        <div
+          aria-live="polite"
+          className="rounded-md bg-destructive/10 p-3 text-destructive text-sm"
+          id={errorId}
+          role="alert"
+        >
+          {error}
+        </div>
+      )}
+    </div>
+  );
+}
 
-          if (typeof option === "string") {
-            optionValue = option;
-            optionLabel = option;
-          } else if (option && typeof option === "object") {
-            optionValue = option.value || "";
-            optionLabel = option.label || option.value || "";
-          }
+interface RadioFieldSkeletonProps {
+  optionsCount?: number;
+}
 
-          if (!optionValue) return null;
-
-          const isCorrect = isQuizField && correctAnswer === optionValue;
-
-          if (typeof option === "string" || optionValue) {
-            return (
-              <div
-                className={`relative ${isFormBuilder && isCorrect ? "rounded-md bg-green-50 p-1 ring-1 ring-green-200" : ""}`}
-                key={index}
-              >
-                <RadioGroupItem
-                  {...applyBuilderMode(
-                    {
-                      disabled: disabled || loading,
-                      id: `${field.id}-${index}`,
-                      value: optionValue,
-                    },
-                    builderMode
-                  )}
-                />
-                <Label htmlFor={`${field.id}-${index}`}>{optionLabel}</Label>
-                {isFormBuilder && isCorrect && (
-                  <div
-                    className="-translate-y-1/2 absolute top-1/2 right-2 transform"
-                    title="Correct Answer"
-                  >
-                    <CheckCircle className="size-4 text-green-600" />
-                  </div>
-                )}
-              </div>
-            );
-          }
-          return null;
-        })}
-      </RadioGroup>
+function RadioFieldSkeleton({ optionsCount = 3 }: RadioFieldSkeletonProps) {
+  return (
+    <div className="flex flex-col gap-2">
+      <Skeleton className="h-5 w-24" />
+      <div className="flex flex-col gap-3">
+        {Array.from({ length: optionsCount }).map((_, index) => (
+          <div className="flex items-center gap-3" key={index}>
+            <Skeleton className="size-4 rounded-full" />
+            <Skeleton className="h-4 w-20" />
+          </div>
+        ))}
+      </div>
+      <Skeleton className="h-4 w-32" />
     </div>
   );
 }

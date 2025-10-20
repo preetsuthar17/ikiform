@@ -58,7 +58,7 @@ export function AddressFieldSettings({
             id="address-message"
             name="address-message"
             onChange={(e) =>
-              onUpdateSettings({ requiredMessage: e.target.value.trim() })
+              onUpdateSettings({ requiredMessage: e.target.value })
             }
             onKeyDown={(e) => {
               if (e.key === "Escape") {

@@ -22,9 +22,7 @@ export function PhoneFieldSettings({
             autoComplete="off"
             id="phone-pattern"
             name="phone-pattern"
-            onChange={(e) =>
-              onUpdateSettings({ pattern: e.target.value.trim() })
-            }
+            onChange={(e) => onUpdateSettings({ pattern: e.target.value })}
             onKeyDown={(e) => {
               if (e.key === "Escape") {
                 e.currentTarget.blur();
@@ -48,7 +46,7 @@ export function PhoneFieldSettings({
             id="phone-message"
             name="phone-message"
             onChange={(e) =>
-              onUpdateSettings({ patternMessage: e.target.value.trim() })
+              onUpdateSettings({ patternMessage: e.target.value })
             }
             onKeyDown={(e) => {
               if (e.key === "Escape") {

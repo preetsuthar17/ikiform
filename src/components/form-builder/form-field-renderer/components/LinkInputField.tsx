@@ -1,5 +1,6 @@
 import type React from "react";
 import { useEffect, useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { validateUrl } from "@/lib/validation/url-validation";
 import type { BaseFieldProps } from "../types";
@@ -16,27 +17,46 @@ export function LinkInputField(props: BaseFieldProps) {
     setInputValue(value || "");
   }, [value]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-    onChange(e.target.value);
+  const getUrlValidation = () => validateUrl(inputValue);
+
+  const getErrorMessage = () => {
+    const validation = getUrlValidation();
+    return (
+      error || (isValidating && !validation.isValid ? validation.message : "")
+    );
   };
 
-  const handleBlur = () => {
+  const getLinkPlaceholder = () => field.placeholder || "https://";
+
+  const handleLinkInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    const trimmed = newValue.trim();
+    setInputValue(newValue);
+    onChange(trimmed);
+  };
+
+  const handleLinkInputBlur = () => {
     setIsValidating(true);
   };
 
-  const validation = validateUrl(inputValue);
-  const errorMessage =
-    error || (isValidating && !validation.isValid ? validation.message : "");
+  const handleLinkInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Escape") {
+      e.currentTarget.blur();
+    }
+  };
 
   const inputProps = applyBuilderMode(
     {
       className: `flex gap-2 ${baseClasses}`,
       disabled,
       id: field.id,
-      onBlur: handleBlur,
-      onChange: handleInputChange,
-      placeholder: field.placeholder || "https://",
+      name: field.id,
+      autoComplete: "url",
+      inputMode: "url" as const,
+      onBlur: handleLinkInputBlur,
+      onChange: handleLinkInputChange,
+      onKeyDown: handleLinkInputKeyDown,
+      placeholder: getLinkPlaceholder(),
       type: "url",
       value: inputValue,
     },
@@ -44,12 +64,25 @@ export function LinkInputField(props: BaseFieldProps) {
   );
 
   return (
-    <div
-      className={`flex flex-col gap-2 ${builderMode ? "pointer-events-none" : ""}`}
-    >
-      <Input {...inputProps} />
-      {errorMessage && (
-        <span className="text-destructive text-xs">{errorMessage}</span>
+    <div className="flex flex-col gap-3">
+      <div className={builderMode ? "pointer-events-none" : ""}>
+        <Card className="border-0 p-0 shadow-none">
+          <CardContent className="p-0">
+            <Input
+              {...inputProps}
+              aria-invalid={!!getErrorMessage() || undefined}
+            />
+          </CardContent>
+        </Card>
+      </div>
+      {getErrorMessage() && (
+        <div
+          aria-live="polite"
+          className="rounded-md bg-destructive/10 p-3 text-destructive text-sm"
+          role="alert"
+        >
+          {getErrorMessage()}
+        </div>
       )}
     </div>
   );

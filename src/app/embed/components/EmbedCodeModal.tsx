@@ -2,7 +2,7 @@
 
 import { Check, Code2, Copy, FileText, Globe } from "lucide-react";
 import { useState } from "react";
-import { Button } from "@/components/ui/button-base";
+import { Button } from "@/components/ui/button";
 import {
   Modal,
   ModalContent,

@@ -22,9 +22,7 @@ export function LinkFieldSettings({
             autoComplete="off"
             id="link-pattern"
             name="link-pattern"
-            onChange={(e) =>
-              onUpdateSettings({ pattern: e.target.value.trim() })
-            }
+            onChange={(e) => onUpdateSettings({ pattern: e.target.value })}
             onKeyDown={(e) => {
               if (e.key === "Escape") {
                 e.currentTarget.blur();
@@ -48,7 +46,7 @@ export function LinkFieldSettings({
             id="link-message"
             name="link-message"
             onChange={(e) =>
-              onUpdateSettings({ patternMessage: e.target.value.trim() })
+              onUpdateSettings({ patternMessage: e.target.value })
             }
             onKeyDown={(e) => {
               if (e.key === "Escape") {

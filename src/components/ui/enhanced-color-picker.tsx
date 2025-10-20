@@ -4,7 +4,7 @@ import { Palette, Pipette } from "lucide-react";
 import { useRef, useState } from "react";
 import { TRANSPARENT_PATTERN } from "@/components/form-builder/form-settings-modal/constants";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input-base";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
   Popover,

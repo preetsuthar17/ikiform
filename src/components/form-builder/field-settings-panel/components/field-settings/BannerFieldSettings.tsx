@@ -61,9 +61,7 @@ export function BannerFieldSettings({
             autoComplete="off"
             id="banner-title"
             name="banner-title"
-            onChange={(e) =>
-              onUpdateSettings({ bannerTitle: e.target.value.trim() })
-            }
+            onChange={(e) => onUpdateSettings({ bannerTitle: e.target.value })}
             onKeyDown={(e) => {
               if (e.key === "Escape") {
                 e.currentTarget.blur();
@@ -88,7 +86,7 @@ export function BannerFieldSettings({
             id="banner-description"
             name="banner-description"
             onChange={(e) =>
-              onUpdateSettings({ bannerDescription: e.target.value.trim() })
+              onUpdateSettings({ bannerDescription: e.target.value })
             }
             onKeyDown={(e) => {
               if (e.key === "Escape") {

@@ -84,7 +84,7 @@ export function SchedulerFieldSettings({
                 onUpdateSettings({
                   schedulerLinks: {
                     ...(field.settings.schedulerLinks || {}),
-                    [field.settings.schedulerProvider]: e.target.value.trim(),
+                    [field.settings.schedulerProvider]: e.target.value,
                   },
                 });
               }}
@@ -124,7 +124,7 @@ export function SchedulerFieldSettings({
             id="scheduler-button-text"
             name="scheduler-button-text"
             onChange={(e) =>
-              onUpdateSettings({ schedulerButtonText: e.target.value.trim() })
+              onUpdateSettings({ schedulerButtonText: e.target.value })
             }
             onKeyDown={(e) => {
               if (e.key === "Escape") {

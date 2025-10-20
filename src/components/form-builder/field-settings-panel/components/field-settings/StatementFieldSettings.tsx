@@ -46,7 +46,7 @@ export function StatementFieldSettings({
             className="resize-none"
             id="statement-heading"
             name="statement-heading"
-            onChange={(e) => updateStatementHeading(e.target.value.trim())}
+            onChange={(e) => updateStatementHeading(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Escape") {
                 e.currentTarget.blur();
@@ -79,7 +79,7 @@ export function StatementFieldSettings({
             className="resize-none"
             id="statement-description"
             name="statement-description"
-            onChange={(e) => updateStatementDescription(e.target.value.trim())}
+            onChange={(e) => updateStatementDescription(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Escape") {
                 e.currentTarget.blur();

@@ -1,58 +1,108 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
-  Modal,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from "@/components/ui/modal";
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+
 import type { BaseFieldProps } from "../types";
+
 import { getBaseClasses } from "../utils";
 
 export function SchedulerField({ field, error, disabled }: BaseFieldProps) {
-  const [modalOpen, setModalOpen] = useState(false);
-  const provider = field.settings?.schedulerProvider;
-  const link = provider ? field.settings?.schedulerLinks?.[provider] : "";
-  const buttonText = field.settings?.schedulerButtonText || "Open Scheduler";
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const baseClasses = getBaseClasses(field, error);
 
+  const getSchedulerProvider = () => field.settings?.schedulerProvider;
+
+  const getSchedulerLink = () => {
+    const provider = getSchedulerProvider();
+    return provider ? field.settings?.schedulerLinks?.[provider] : "";
+  };
+
+  const getButtonText = () =>
+    field.settings?.schedulerButtonText || "Open Scheduler";
+
+  const handleOpenScheduler = () => {
+    setIsDialogOpen(true);
+  };
+
+  const handleCloseScheduler = () => {
+    setIsDialogOpen(false);
+  };
+
+  const isSchedulerConfigured = () => {
+    const provider = getSchedulerProvider();
+    const link = getSchedulerLink();
+    return provider && link;
+  };
+
+  const renderSchedulerContent = () => {
+    if (isSchedulerConfigured()) {
+      return (
+        <iframe
+          allow="camera; microphone; fullscreen"
+          className="h-full w-full rounded-xl border-none"
+          src={getSchedulerLink()}
+          title="Scheduler Embed"
+        />
+      );
+    }
+
+    return (
+      <div className="flex h-full items-center justify-center text-muted-foreground text-sm">
+        No scheduler link configured.
+      </div>
+    );
+  };
+
+  const renderSchedulerButton = () => (
+    <Card className="border-0 p-0 shadow-none">
+      <CardContent className="p-0">
+        <Button
+          className={`${baseClasses} flex w-fit items-center justify-center font-medium`}
+          disabled={disabled || !getSchedulerProvider()}
+          onClick={handleOpenScheduler}
+          type="button"
+          variant={"secondary"}
+        >
+          {getButtonText()}
+        </Button>
+      </CardContent>
+    </Card>
+  );
+
   return (
-    <div className="flex flex-col gap-2">
-      <Button
-        className={`${baseClasses} flex h-9 w-fit items-center justify-center bg-foreground/80 px-4 text-background text-sm hover:bg-foreground`}
-        disabled={disabled || !provider}
-        onClick={() => setModalOpen(true)}
-        type="button"
-      >
-        {buttonText}
-      </Button>
-      <Modal onOpenChange={setModalOpen} open={modalOpen}>
-        <ModalContent className="flex h-[95%] w-full max-w-[95%] flex-col gap-4">
-          <ModalHeader>
-            <ModalTitle>Scheduler</ModalTitle>
-          </ModalHeader>
-          <div className="h-full">
-            {provider && link ? (
-              <iframe
-                allow="camera; microphone; fullscreen"
-                className="h-full w-full rounded-xl border-none"
-                src={link}
-                title="Scheduler Embed"
-              />
-            ) : (
-              <div className="flex h-full items-center justify-center text-muted-foreground text-sm">
-                No scheduler link configured.
-              </div>
-            )}
-          </div>
-          <ModalFooter>
-            <Button onClick={() => setModalOpen(false)} variant="outline">
+    <div className="flex flex-col gap-3">
+      {renderSchedulerButton()}
+
+      <Dialog onOpenChange={setIsDialogOpen} open={isDialogOpen}>
+        <DialogContent className="flex h-[95vh] w-full flex-col gap-4 sm:max-w-[95vw]">
+          <DialogHeader>
+            <DialogTitle>Scheduler</DialogTitle>
+          </DialogHeader>
+          <div className="h-full">{renderSchedulerContent()}</div>
+          <DialogFooter>
+            <Button onClick={handleCloseScheduler} variant="outline">
               Close
             </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {error && (
+        <div
+          aria-live="polite"
+          className="rounded-md bg-destructive/10 p-3 text-destructive text-sm"
+          role="alert"
+        >
+          {error}
+        </div>
+      )}
     </div>
   );
 }

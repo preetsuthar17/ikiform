@@ -138,7 +138,7 @@ export function EmailValidationSettings({
               autoComplete="off"
               id="auto-complete-domain"
               name="auto-complete-domain"
-              onChange={(e) => setNewAutoCompleteDomain(e.target.value.trim())}
+              onChange={(e) => setNewAutoCompleteDomain(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Escape") {
                   e.currentTarget.blur();
@@ -211,7 +211,7 @@ export function EmailValidationSettings({
               autoComplete="off"
               id="allowed-domains"
               name="allowed-domains"
-              onChange={(e) => setNewAllowedDomain(e.target.value.trim())}
+              onChange={(e) => setNewAllowedDomain(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Escape") {
                   e.currentTarget.blur();
@@ -272,7 +272,7 @@ export function EmailValidationSettings({
               autoComplete="off"
               id="blocked-domains"
               name="blocked-domains"
-              onChange={(e) => setNewBlockedDomain(e.target.value.trim())}
+              onChange={(e) => setNewBlockedDomain(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Escape") {
                   e.currentTarget.blur();
@@ -361,7 +361,7 @@ export function EmailValidationSettings({
             name="custom-validation-message"
             onChange={(e) =>
               updateEmailSettings({
-                customValidationMessage: e.target.value.trim() || undefined,
+                customValidationMessage: e.target.value || undefined,
               })
             }
             onKeyDown={(e) => {

@@ -31,7 +31,7 @@ export function PollFieldSettings({
               className="flex-1"
               id="poll-option-input"
               name="poll-option-input"
-              onChange={(e) => setNewOption(e.target.value.trim())}
+              onChange={(e) => setNewOption(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" && newOption.trim()) {
                   e.preventDefault();
@@ -99,7 +99,7 @@ export function PollFieldSettings({
                 name={`poll-option-${idx}`}
                 onChange={(e) => {
                   const updated = [...(field.settings?.pollOptions || [])];
-                  updated[idx] = e.target.value.trim();
+                  updated[idx] = e.target.value;
                   onUpdateSettings({ pollOptions: updated });
                 }}
                 onKeyDown={(e) => {
@@ -156,7 +156,7 @@ export function PollFieldSettings({
               id="poll-options-api"
               name="poll-options-api"
               onChange={(e) =>
-                onFieldUpdate({ ...field, optionsApi: e.target.value.trim() })
+                onFieldUpdate({ ...field, optionsApi: e.target.value })
               }
               onKeyDown={(e) => {
                 if (e.key === "Escape") {
@@ -179,7 +179,7 @@ export function PollFieldSettings({
                 id="poll-valueKey"
                 name="poll-valueKey"
                 onChange={(e) =>
-                  onFieldUpdate({ ...field, valueKey: e.target.value.trim() })
+                  onFieldUpdate({ ...field, valueKey: e.target.value })
                 }
                 onKeyDown={(e) => {
                   if (e.key === "Escape") {
@@ -204,7 +204,7 @@ export function PollFieldSettings({
                 id="poll-labelKey"
                 name="poll-labelKey"
                 onChange={(e) =>
-                  onFieldUpdate({ ...field, labelKey: e.target.value.trim() })
+                  onFieldUpdate({ ...field, labelKey: e.target.value })
                 }
                 onKeyDown={(e) => {
                   if (e.key === "Escape") {
