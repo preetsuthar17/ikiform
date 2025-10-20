@@ -250,9 +250,9 @@ export function PasswordProtectionSection({
                       variant="ghost"
                     >
                       {showPassword ? (
-                        <EyeOff aria-hidden="true" className="h-4 w-4" />
+                        <EyeOff aria-hidden="true" className="size-4" />
                       ) : (
-                        <Eye aria-hidden="true" className="h-4 w-4" />
+                        <Eye aria-hidden="true" className="size-4" />
                       )}
                     </Button>
                   </div>

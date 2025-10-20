@@ -11,7 +11,7 @@ export function CompactFieldItem({
       className="flex items-center gap-2 rounded-2xl border border-border bg-background p-3 text-left transition-colors hover:bg-muted"
       onClick={() => onAddField(fieldType.type)}
     >
-      <Icon className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
+      <Icon className="size-4 flex-shrink-0 text-muted-foreground" />
       <span className="truncate font-medium text-xs">{fieldType.label}</span>
     </button>
   );

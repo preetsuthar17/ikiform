@@ -37,9 +37,9 @@ export const SingleStepSuccessScreen: React.FC<
             style={{ padding: "2rem" }}
           >
             <div className="flex flex-col items-center gap-4">
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-accent">
+              <div className="flex size-16 items-center justify-center rounded-2xl bg-accent">
                 <svg
-                  className="h-8 w-8 text-accent-foreground"
+                  className="size-8 text-accent-foreground"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

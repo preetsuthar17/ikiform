@@ -18,7 +18,7 @@ export function FormStats({ forms, loading }: FormStatsProps) {
             role="article"
           >
             <div className="flex items-center gap-4">
-              <Skeleton className="h-12 w-12 rounded-md" />
+              <Skeleton className="size-12 rounded-md" />
               <div className="flex flex-col gap-1">
                 <Skeleton className="h-7 w-8" />
                 <Skeleton className="h-4 w-16" />
@@ -77,9 +77,9 @@ export function FormStats({ forms, loading }: FormStatsProps) {
           >
             <div className="flex items-center gap-4">
               <div
-                className={`flex h-12 w-12 items-center justify-center rounded-md ${stat.bgColor}`}
+                className={`flex size-12 items-center justify-center rounded-md ${stat.bgColor}`}
               >
-                <Icon aria-hidden="true" className={`h-6 w-6 ${stat.color}`} />
+                <Icon aria-hidden="true" className={`size-6 ${stat.color}`} />
               </div>
               <div className="flex flex-col gap-1">
                 <p className="font-semibold text-2xl text-foreground tabular-nums">

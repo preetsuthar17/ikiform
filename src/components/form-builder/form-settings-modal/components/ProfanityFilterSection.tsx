@@ -482,7 +482,7 @@ function WordManagementSection({
               <span>{word}</span>
               <Button
                 aria-label={`Remove ${word}`}
-                className="h-4 w-4 p-0"
+                className="size-4 p-0"
                 onClick={() => removeWord(word)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
@@ -494,7 +494,7 @@ function WordManagementSection({
                 type="button"
                 variant="ghost"
               >
-                <X aria-hidden="true" className="h-3 w-3" />
+                <X aria-hidden="true" className="size-3" />
               </Button>
             </Badge>
           ))}

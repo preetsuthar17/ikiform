@@ -41,7 +41,7 @@ export function LoginSkeleton() {
               </div>
             </div>
             <div className="text-center">
-              <Skeleton className="mx-auto h-4 w-48 rounded" />
+              <Skeleton className="mx-auto size-48 rounded" />
             </div>
           </div>
         </div>

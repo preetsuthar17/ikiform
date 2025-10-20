@@ -220,7 +220,7 @@ const CommandMenuInput = React.forwardRef<
 
     return (
       <div className="flex items-center border-border border-b px-3 py-0">
-        <Search className="mr-3 h-4 w-4 shrink-0 text-muted-foreground" />
+        <Search className="mr-3 size-4 shrink-0 text-muted-foreground" />
         <input
           className={cn(
             "flex h-12 w-full rounded-none border-0 bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
@@ -379,7 +379,7 @@ const CommandMenuItem = React.forwardRef<
         {...props}
       >
         {icon && (
-          <div className="flex h-4 w-4 items-center justify-center">{icon}</div>
+          <div className="flex size-4 items-center justify-center">{icon}</div>
         )}
 
         <div className="flex-1">{children}</div>

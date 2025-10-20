@@ -1,5 +1,5 @@
 import { Check, Copy } from "lucide-react";
-import { useState } from "react";
+import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -11,11 +11,11 @@ import {
 import { copyWithToast } from "@/lib/utils/clipboard";
 
 interface CopyButtonProps {
-  schema: any;
+  schema: unknown;
 }
 
 export function CopyButton({ schema }: CopyButtonProps) {
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = React.useState(false);
 
   const handleCopy = async () => {
     const success = await copyWithToast(
@@ -23,7 +23,6 @@ export function CopyButton({ schema }: CopyButtonProps) {
       "Schema copied to clipboard!",
       "Failed to copy schema"
     );
-
     if (success) {
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
@@ -35,20 +34,35 @@ export function CopyButton({ schema }: CopyButtonProps) {
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
-            className="flex items-center gap-2"
+            aria-label={copied ? "Copied!" : "Copy schema"}
+            className="size-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
             disabled={copied}
             onClick={handleCopy}
             size="icon"
+            style={{
+              touchAction: "manipulation",
+              WebkitTapHighlightColor: "transparent",
+            }}
+            type="button"
             variant="outline"
           >
+            <span className="sr-only">
+              {copied ? "Copied!" : "Copy JSON Schema"}
+            </span>
             {copied ? (
-              <Check className="h-4 w-4" />
+              <Check aria-hidden="true" className="size-" />
             ) : (
-              <Copy className="h-4 w-4 transition-all" />
+              <Copy aria-hidden="true" className="size-4 transition-all" />
             )}
           </Button>
         </TooltipTrigger>
-        <TooltipContent size="sm">{copied ? "Copied" : "Copy"}</TooltipContent>
+        <TooltipContent
+          align="center"
+          className="select-none px-3 py-1.5 font-medium text-xs"
+          side="top"
+        >
+          {copied ? "Copied" : "Copy"}
+        </TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

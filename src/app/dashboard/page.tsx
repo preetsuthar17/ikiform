@@ -11,7 +11,7 @@ const ProfileCard = dynamic(
       <div className="shadow-none">
         <div className="flex flex-col gap-6">
           <div className="flex items-center gap-4">
-            <div className="h-16 w-16 animate-pulse rounded-2xl bg-accent" />
+            <div className="size-16 animate-pulse rounded-2xl bg-accent" />
             <div className="flex flex-col gap-2">
               <div className="h-6 w-48 animate-pulse rounded bg-accent" />
               <div className="h-4 w-32 animate-pulse rounded bg-accent" />
@@ -86,7 +86,7 @@ export default function DashboardClient() {
               <div className="rounded-2xl border bg-card p-6 shadow-none">
                 <div className="flex flex-col gap-6">
                   <div className="flex items-center gap-4">
-                    <div className="h-16 w-16 animate-pulse rounded-2xl bg-accent" />
+                    <div className="size-16 animate-pulse rounded-2xl bg-accent" />
                     <div className="flex flex-col gap-2">
                       <div className="h-6 w-48 animate-pulse rounded bg-accent" />
                       <div className="h-4 w-32 animate-pulse rounded bg-accent" />

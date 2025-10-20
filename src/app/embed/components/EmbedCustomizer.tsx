@@ -76,7 +76,7 @@ export default function EmbedCustomizer({
           className="flex items-center gap-2"
           onClick={() => setIsCodeModalOpen(true)}
         >
-          <Code2 className="h-4 w-4" />
+          <Code2 className="size-4" />
           Show Code
         </Button>
       </div>

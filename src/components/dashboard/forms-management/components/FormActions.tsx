@@ -41,12 +41,12 @@ export function FormActions({
             <TooltipTrigger asChild>
               <Button
                 aria-label="Edit form"
-                className="h-10 w-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80 focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                className="size-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80 focus:ring-2 focus:ring-ring focus:ring-offset-2"
                 onClick={() => onEdit(form.id)}
                 size="sm"
                 variant="ghost"
               >
-                <Edit aria-hidden="true" className="h-4 w-4" />
+                <Edit aria-hidden="true" className="size-4" />
               </Button>
             </TooltipTrigger>
             <TooltipContent side="top" sideOffset={8}>
@@ -58,12 +58,12 @@ export function FormActions({
             <TooltipTrigger asChild>
               <Button
                 aria-label="Share form"
-                className="h-10 w-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80 focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                className="size-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80 focus:ring-2 focus:ring-ring focus:ring-offset-2"
                 onClick={() => onShare(form)}
                 size="sm"
                 variant="ghost"
               >
-                <Share aria-hidden="true" className="h-4 w-4" />
+                <Share aria-hidden="true" className="size-4" />
               </Button>
             </TooltipTrigger>
             <TooltipContent side="top" sideOffset={8}>
@@ -77,11 +77,11 @@ export function FormActions({
                 <DropdownMenuTrigger asChild>
                   <Button
                     aria-label="More actions"
-                    className="h-10 w-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80 focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                    className="size-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80 focus:ring-2 focus:ring-ring focus:ring-offset-2"
                     size="sm"
                     variant="ghost"
                   >
-                    <MoreHorizontal aria-hidden="true" className="h-4 w-4" />
+                    <MoreHorizontal aria-hidden="true" className="size-4" />
                   </Button>
                 </DropdownMenuTrigger>
               </TooltipTrigger>
@@ -94,21 +94,21 @@ export function FormActions({
                 className="cursor-pointer"
                 onClick={() => onDuplicate(form.id)}
               >
-                <Copy aria-hidden="true" className="mr-2 h-4 w-4" />
+                <Copy aria-hidden="true" className="mr-2 size-4" />
                 Duplicate
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="cursor-pointer"
                 onClick={() => onViewForm(form)}
               >
-                <Eye aria-hidden="true" className="mr-2 h-4 w-4" />
+                <Eye aria-hidden="true" className="mr-2 size-4" />
                 View form
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="cursor-pointer"
                 onClick={() => onViewAnalytics(form.id)}
               >
-                <BarChart3 aria-hidden="true" className="mr-2 h-4 w-4" />
+                <BarChart3 aria-hidden="true" className="mr-2 size-4" />
                 View analytics
               </DropdownMenuItem>
               <DropdownMenuSeparator />
@@ -118,7 +118,7 @@ export function FormActions({
                   window.open(`/embed?formid=${form.id}`, "_blank")
                 }
               >
-                <Code2 aria-hidden="true" className="mr-2 h-4 w-4" />
+                <Code2 aria-hidden="true" className="mr-2 size-4" />
                 Embed
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -132,12 +132,12 @@ export function FormActions({
             <TooltipTrigger asChild>
               <Button
                 aria-label="Delete form"
-                className="h-10 w-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-destructive/10 hover:text-destructive focus:ring-2 focus:ring-destructive focus:ring-offset-2"
+                className="size-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-destructive/10 hover:text-destructive focus:ring-2 focus:ring-destructive focus:ring-offset-2"
                 onClick={() => onDelete(form.id, form.title)}
                 size="sm"
                 variant="ghost"
               >
-                <Trash2 aria-hidden="true" className="h-4 w-4" />
+                <Trash2 aria-hidden="true" className="size-4" />
               </Button>
             </TooltipTrigger>
             <TooltipContent side="top" sideOffset={8}>

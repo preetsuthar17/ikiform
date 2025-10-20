@@ -56,7 +56,7 @@ export function FormsHeader({
               size="lg"
               variant="default"
             >
-              <Sparkles aria-hidden="true" className="mr-2 h-4 w-4" />
+              <Sparkles aria-hidden="true" className="mr-2 size-4" />
               Use Kiko AI
             </Button>
             <Button

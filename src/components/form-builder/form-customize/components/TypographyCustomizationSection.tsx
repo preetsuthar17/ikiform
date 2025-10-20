@@ -100,7 +100,7 @@ export function TypographyCustomizationSection({
     <div className="flex flex-col gap-6">
       <div>
         <div className="mb-2 flex items-center gap-2">
-          <Type className="h-4 w-4 text-primary" />
+          <Type className="size-4 text-primary" />
           <h2 className="font-semibold text-lg">Typography Settings</h2>
         </div>
         <p className="text-muted-foreground text-xs">

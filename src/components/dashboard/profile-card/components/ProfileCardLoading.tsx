@@ -10,16 +10,16 @@ export function ProfileCardLoading({ className }: ProfileLoadingProps) {
       role="region"
     >
       {/* Avatar Skeleton */}
-      <Skeleton className="h-16 w-16 rounded-full" />
+      <Skeleton className="size-16 rounded-full" />
 
       {/* Profile Info Skeleton */}
       <CardContent className="flex flex-col gap-4">
         <div className="flex flex-col gap-1 text-center">
           <div className="flex items-center justify-center gap-2">
             <Skeleton className="h-7 w-32" />
-            <Skeleton className="h-5 w-5 rounded" />
+            <Skeleton className="size-5 rounded" />
           </div>
-          <Skeleton className="mx-auto h-4 w-40" />
+          <Skeleton className="mx-auto size-40" />
         </div>
       </CardContent>
     </Skeleton>

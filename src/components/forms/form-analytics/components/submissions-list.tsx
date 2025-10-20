@@ -83,7 +83,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
   //           size="sm"
   //           variant="ghost"
   //         >
-  //           <Eye className="h-4 w-4" />
+  //           <Eye className="size-4" />
   //           View Details
   //         </Button>
   //       </div>
@@ -95,7 +95,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
     return (
       <div className="flex flex-col items-center justify-center gap-4 py-20">
         <div className="rounded-2xl p-4">
-          <FileText className="h-8 w-8 text-accent" />
+          <FileText className="size-8 text-accent" />
         </div>
         <div className="text-center">
           <p className="font-medium text-foreground">Loading submissions...</p>
@@ -112,7 +112,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <div className="rounded-2xl bg-primary/10 p-2">
-            <FileText className="h-5 w-5 text-primary" />
+            <FileText className="size-5 text-primary" />
           </div>
           <div>
             <h3 className="font-semibold text-foreground text-xl">
@@ -134,7 +134,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                 variant="outline"
               >
                 <RefreshCw
-                  className={`h-4 w-4 ${refreshing ? "animate-spin" : ""}`}
+                  className={`size-4 ${refreshing ? "animate-spin" : ""}`}
                 />
                 Refresh
               </Button>
@@ -145,7 +145,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                 size="sm"
                 variant="outline"
               >
-                <Download className="h-4 w-4" />
+                <Download className="size-4" />
                 Export CSV
               </Button>
               <Button
@@ -154,7 +154,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                 size="sm"
                 variant="outline"
               >
-                <Download className="h-4 w-4" />
+                <Download className="size-4" />
                 Export JSON
               </Button>
             </div>
@@ -163,11 +163,11 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
               items={[
                 {
                   id: "cards",
-                  icon: <LayoutGrid className="h-4 w-4" />,
+                  icon: <LayoutGrid className="size-4" />,
                 },
                 {
                   id: "table",
-                  icon: <Table className="h-4 w-4" />,
+                  icon: <Table className="size-4" />,
                 },
               ]}
               onValueChange={(value) =>
@@ -187,8 +187,8 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
       <div>
         {submissions.length === 0 ? (
           <div className="flex flex-col items-center gap-6 py-16">
-            <div className="gradient-bg flex h-24 w-24 items-center justify-center rounded-2xl">
-              <Eye className="h-10 w-10 text-accent-foreground" />
+            <div className="gradient-bg flex size-24 items-center justify-center rounded-2xl">
+              <Eye className="size-10 text-accent-foreground" />
             </div>
             <h4 className="font-semibold text-foreground text-xl">
               No submissions yet
@@ -200,7 +200,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
             {!form.is_published && (
               <div className="flex flex-col items-center gap-3">
                 <Button className="gap-2" size="sm" variant="outline">
-                  <Globe className="h-4 w-4" />
+                  <Globe className="size-4" />
                   Publish Form
                 </Button>
                 <p className="text-muted-foreground text-xs">
@@ -214,7 +214,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
             <div className="flex items-center gap-2">
               <div className="relative max-w-md flex-1">
                 <Input
-                  leftIcon={<Search className="h-4 w-4" />}
+                  leftIcon={<Search className="size-4" />}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search submissions..."
                   value={searchTerm}
@@ -271,14 +271,14 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                     <Card className="p-4">
                       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                         <div className="flex items-center gap-2">
-                          <div className="h-2 w-2 rounded-2xl bg-primary" />
+                          <div className="size-2 rounded-2xl bg-primary" />
                           <span className="font-medium text-foreground text-sm">
                             Submission {submission.id.slice(-8)}
                           </span>
                         </div>
                         <div className="flex items-center gap-4 text-muted-foreground text-xs">
                           <span className="flex items-center gap-1">
-                            <Clock className="h-3 w-3" />
+                            <Clock className="size-3" />
                             {formatDate(submission.submitted_at)}
                           </span>
                           {submission.ip_address && (
@@ -420,13 +420,13 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                           return isImage ? (
                                             <img
                                               alt="File preview"
-                                              className="h-8 w-8 rounded border border-white object-cover"
+                                              className="size-8 rounded border border-white object-cover"
                                               key={idx}
                                               src={url}
                                             />
                                           ) : (
                                             <div
-                                              className="flex h-8 w-8 items-center justify-center rounded border border-white bg-accent"
+                                              className="flex size-8 items-center justify-center rounded border border-white bg-accent"
                                               key={idx}
                                             >
                                               <span className="font-mono text-xs">
@@ -442,7 +442,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                                           );
                                         })}
                                         {fileCount > 3 && (
-                                          <div className="flex h-8 w-8 items-center justify-center rounded border border-white bg-muted">
+                                          <div className="flex size-8 items-center justify-center rounded border border-white bg-muted">
                                             <span className="text-xs">
                                               +{fileCount - 3}
                                             </span>
@@ -494,7 +494,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({
                       Showing 10 of {filteredSubmissions.length} submissions
                     </p>
                     <Button className="gap-2" size="sm" variant="outline">
-                      <Eye className="h-4 w-4" />
+                      <Eye className="size-4" />
                       View All Submissions
                     </Button>
                   </div>

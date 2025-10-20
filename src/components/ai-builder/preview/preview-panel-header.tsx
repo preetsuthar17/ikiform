@@ -34,11 +34,11 @@ export function PreviewPanelHeader({
         <div className="flex items-center gap-3 border-b bg-card/50 p-4 backdrop-blur md:hidden">
           <Button asChild size="icon" variant="ghost">
             <Link href="/form-builder">
-              <ArrowLeft className="h-4 w-4" />
+              <ArrowLeft className="size-4" />
             </Link>
           </Button>
           <div className="inline-flex items-center gap-2">
-            <span className="h-2 w-2 rounded-2xl bg-muted-foreground" />
+            <span className="size-2 rounded-2xl bg-muted-foreground" />
             <span className="font-semibold text-lg">Kiko AI</span>
           </div>
         </div>

@@ -340,12 +340,12 @@ export default function EmbedCodeGenerator({
         >
           {copied ? (
             <>
-              <Check className="h-4 w-4" />
+              <Check className="size-4" />
               Copied!
             </>
           ) : (
             <>
-              <Copy className="h-4 w-4" />
+              <Copy className="size-4" />
               Copy Code
             </>
           )}
@@ -368,7 +368,7 @@ export default function EmbedCodeGenerator({
             >
               <CardContent className="p-3">
                 <div className="mb-1 flex items-center gap-2">
-                  <IconComponent className="h-4 w-4" />
+                  <IconComponent className="size-4" />
                   <span className="font-medium text-sm">{mode.name}</span>
                   {embedMode === mode.id && (
                     <Badge className="ml-auto text-xs" variant="default">
@@ -410,7 +410,7 @@ export default function EmbedCodeGenerator({
       <Card className="bg-accent/5">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 font-semibold text-sm">
-            <FileText className="h-4 w-4" />
+            <FileText className="size-4" />
             Integration Instructions
           </CardTitle>
         </CardHeader>
@@ -470,26 +470,26 @@ export default function EmbedCodeGenerator({
       <Card className="border-warning/20 bg-warning/5">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 font-semibold text-sm">
-            <Shield className="h-4 w-4" />
+            <Shield className="size-4" />
             Security & Performance Notes
           </CardTitle>
         </CardHeader>
         <CardContent>
           <ul className="flex flex-col gap-1 text-muted-foreground text-sm">
             <li className="flex items-center gap-2">
-              <Shield className="h-3 w-3" />
+              <Shield className="size-3" />
               The iframe includes security sandbox attributes for safe embedding
             </li>
             <li className="flex items-center gap-2">
-              <Zap className="h-3 w-3" />
+              <Zap className="size-3" />
               Lazy loading is enabled to improve page performance
             </li>
             <li className="flex items-center gap-2">
-              <Shield className="h-3 w-3" />
+              <Shield className="size-3" />
               The form is served over HTTPS for secure data transmission
             </li>
             <li className="flex items-center gap-2">
-              <Globe className="h-3 w-3" />
+              <Globe className="size-3" />
               Consider testing the embed on different devices and browsers
             </li>
           </ul>

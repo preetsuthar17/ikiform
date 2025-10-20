@@ -43,7 +43,7 @@ export const ChatMessageItem = memo(function ChatMessageItem({
           {message.role === "assistant" && (
             <CardHeader className="px-0">
               <div className="flex items-center gap-1">
-                <div className="h-2 w-2 rounded-2xl bg-muted-foreground" />
+                <div className="size-2 rounded-2xl bg-muted-foreground" />
                 <p className="font-medium text-xs">Kiko</p>
               </div>
             </CardHeader>

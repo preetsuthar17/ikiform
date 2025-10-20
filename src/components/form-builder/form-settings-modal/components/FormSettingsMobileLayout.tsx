@@ -101,7 +101,7 @@ export function FormSettingsMobileLayout({
             {FORM_SETTINGS_SECTIONS.map((section, index) => (
               <button
                 aria-label={`Go to ${section.label} settings`}
-                className="flex w-full items-center justify-between rounded-md px-4 py-4 text-left font-medium text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
+                className="flex w-full items-center justify-between rounded-md px-4 py-4 text-left font-medium text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                 key={section.id}
                 onClick={() => handleSectionClick(section.id)}
                 onKeyDown={(e) => {
@@ -128,11 +128,10 @@ export function FormSettingsMobileLayout({
                   }
                 }}
                 role="menuitem"
-                style={{ minHeight: "44px" }}
                 tabIndex={0}
               >
                 <span>{section.label}</span>
-                <ArrowLeft aria-hidden="true" className="h-4 w-4 rotate-180" />
+                <ArrowLeft aria-hidden="true" className="size-4 rotate-180" />
               </button>
             ))}
           </nav>
@@ -166,11 +165,10 @@ export function FormSettingsMobileLayout({
           }}
           ref={backButtonRef}
           size="icon"
-          style={{ minHeight: "44px", minWidth: "44px" }}
           tabIndex={0}
           variant="ghost"
         >
-          <ArrowLeft aria-hidden="true" className="h-4 w-4" />
+          <ArrowLeft aria-hidden="true" className="size-4" />
         </Button>
         <h2 className="font-semibold text-lg">Settings</h2>
       </header>

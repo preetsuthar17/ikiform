@@ -173,7 +173,7 @@ function ColorThumb({ className, ...props }: AriaColorThumbProps) {
     <AriaColorThumb
       className={composeRenderProps(className, (className) =>
         cn(
-          "z-10 h-4 w-4 rounded-2xl border-2 border-white ring-1 ring-black/10 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 data-[focus-visible]:ring-2 data-[focus-visible]:ring-ring",
+          "z-10 size-4 rounded-2xl border-2 border-white ring-1 ring-black/10 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 data-[focus-visible]:ring-2 data-[focus-visible]:ring-ring",
           className
         )
       )}
@@ -218,7 +218,7 @@ function ColorSwatch({ className, style, ...props }: AriaColorSwatchProps) {
     <AriaColorSwatch
       className={composeRenderProps(className, (className) =>
         cn(
-          "h-8 w-8 rounded-xl border border-border group-data-[selected]/swatch-item:ring-2 group-data-[selected]/swatch-item:ring-ring group-data-[selected]/swatch-item:ring-offset-2",
+          "size-8 rounded-xl border border-border group-data-[selected]/swatch-item:ring-2 group-data-[selected]/swatch-item:ring-ring group-data-[selected]/swatch-item:ring-offset-2",
           className
         )
       )}
@@ -263,7 +263,7 @@ const EyeDropperButton = React.forwardRef<
     <button
       aria-label="Pick color from screen"
       className={cn(
-        "inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-background text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+        "inline-flex size-9 items-center justify-center rounded-xl border border-border bg-background text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
         className
       )}
       onClick={handleEyeDropper}
@@ -271,7 +271,7 @@ const EyeDropperButton = React.forwardRef<
       type="button"
       {...props}
     >
-      <Pipette className="h-4 w-4" />
+      <Pipette className="size-4" />
     </button>
   );
 });

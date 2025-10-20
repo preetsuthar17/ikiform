@@ -76,7 +76,7 @@ export default function PromoPopup() {
               size={"icon"}
               variant={"ghost"}
             >
-              <X className="h-4 w-4" />
+              <X className="size-4" />
             </Button>
 
             {/* Content */}

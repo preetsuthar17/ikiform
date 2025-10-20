@@ -86,7 +86,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
             <div className="flex">
               {Icon && (
                 <div className="flex-shrink-0">
-                  <Icon className="mt-0.5 h-4 w-4" />
+                  <Icon className="mt-0.5 size-4" />
                 </div>
               )}
               <div className={cn("flex flex-1 items-center", Icon && "ml-3")}>
@@ -105,7 +105,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
                     onClick={handleDismiss}
                     type="button"
                   >
-                    <X className="h-4 w-4" />
+                    <X className="size-4" />
                   </button>
                 </div>
               )}

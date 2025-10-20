@@ -12,7 +12,6 @@ export { PollFieldSettings } from "./PollFieldSettings";
 export { RadioFieldSettings } from "./RadioFieldSettings";
 export { RatingFieldSettings } from "./RatingFieldSettings";
 export { SchedulerFieldSettings } from "./SchedulerFieldSettings";
-export { SelectFieldSettings } from "./SelectFieldSettings";
 export { SliderFieldSettings } from "./SliderFieldSettings";
 export { SocialFieldSettings } from "./SocialFieldSettings";
 export { StatementFieldSettings } from "./StatementFieldSettings";

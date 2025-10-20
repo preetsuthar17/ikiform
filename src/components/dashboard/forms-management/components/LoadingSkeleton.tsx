@@ -20,7 +20,7 @@ export function LoadingSkeleton({ className }: LoadingSkeletonProps) {
       {/* Search Bar Skeleton */}
       <div className="flex items-center gap-3">
         <Skeleton className="h-10 flex-1" />
-        <Skeleton className="h-10 w-10" />
+        <Skeleton className="size-10" />
       </div>
 
       <div className="relative flex flex-col">
@@ -52,7 +52,7 @@ export function LoadingSkeleton({ className }: LoadingSkeletonProps) {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Skeleton className="h-8 w-8 rounded" />
+                  <Skeleton className="size-8 rounded" />
                 </div>
               </div>
             </Skeleton>

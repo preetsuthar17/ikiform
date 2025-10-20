@@ -284,13 +284,13 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
             {}
             <div className="absolute inset-0 flex items-center justify-center">
               <button
-                className="group flex h-16 w-16 items-center justify-center rounded-2xl border border-white/30 bg-white/20 text-white backdrop-blur-sm transition-all duration-200 hover:bg-white/30"
+                className="group flex size-16 items-center justify-center rounded-2xl border border-white/30 bg-white/20 text-white backdrop-blur-sm transition-all duration-200 hover:bg-white/30"
                 onClick={togglePlay}
               >
                 {isPlaying ? (
-                  <Pause className="ml-0.5 h-6 w-6" />
+                  <Pause className="ml-0.5 size-6" />
                 ) : (
-                  <Play className="ml-1 h-6 w-6" />
+                  <Play className="ml-1 size-6" />
                 )}
               </button>
             </div>
@@ -331,7 +331,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
                     className="rounded-xl p-2 text-white transition-colors hover:bg-white/20"
                     onClick={() => skip(-10)}
                   >
-                    <SkipBack className="h-4 w-4" />
+                    <SkipBack className="size-4" />
                   </button>
 
                   <button
@@ -339,9 +339,9 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
                     onClick={togglePlay}
                   >
                     {isPlaying ? (
-                      <Pause className="h-4 w-4" />
+                      <Pause className="size-4" />
                     ) : (
-                      <Play className="ml-0.5 h-4 w-4" />
+                      <Play className="ml-0.5 size-4" />
                     )}
                   </button>
 
@@ -349,7 +349,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
                     className="rounded-xl p-2 text-white transition-colors hover:bg-white/20"
                     onClick={() => skip(10)}
                   >
-                    <SkipForward className="h-4 w-4" />
+                    <SkipForward className="size-4" />
                   </button>
 
                   <div className="group/volume flex items-center gap-2">
@@ -358,9 +358,9 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
                       onClick={toggleMute}
                     >
                       {isMuted || volume === 0 ? (
-                        <VolumeX className="h-4 w-4" />
+                        <VolumeX className="size-4" />
                       ) : (
-                        <Volume2 className="h-4 w-4" />
+                        <Volume2 className="size-4" />
                       )}
                     </button>
 
@@ -391,9 +391,9 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
                     onClick={toggleFullscreen}
                   >
                     {isFullscreen ? (
-                      <Minimize className="h-4 w-4" />
+                      <Minimize className="size-4" />
                     ) : (
-                      <Maximize className="h-4 w-4" />
+                      <Maximize className="size-4" />
                     )}
                   </button>
                 </div>

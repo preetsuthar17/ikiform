@@ -89,7 +89,7 @@ export function EditableField({
               )}
             </div>
           )}
-          <Edit3 className="h-4 w-4 flex-shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+          <Edit3 className="size-4 flex-shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
         </div>
       )}
     </div>

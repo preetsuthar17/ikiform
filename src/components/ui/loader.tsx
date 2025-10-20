@@ -8,7 +8,7 @@ interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function Loader({ className, size = "md", ...props }: SpinnerProps) {
   const wrapperSize =
-    size === "sm" ? "h-3 w-3" : size === "lg" ? "h-6 w-6" : "h-4 w-4";
+    size === "sm" ? "size-3" : size === "lg" ? "size-6" : "size-4";
 
   const delays = [
     -1.667, -1.583, -1.5, -1.417, -1.333, -1.25, -1.167, -1.083, -1, -0.917,

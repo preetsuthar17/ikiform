@@ -6,7 +6,7 @@ export const FormTypePreview: React.FC<FormTypePreviewProps> = ({ type }) => {
   if (type === "single") {
     return (
       <div className="flex flex-col gap-3 rounded-2xl bg-muted/20 p-4">
-        <div className="h-3 w-3/4 rounded bg-muted" />
+        <div className="size-3/4 rounded bg-muted" />
         <div className="h-8 rounded bg-muted/60" />
         <div className="h-8 rounded bg-muted/60" />
         <div className="h-8 rounded bg-muted/60" />

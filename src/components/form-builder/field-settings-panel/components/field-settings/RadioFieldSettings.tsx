@@ -28,7 +28,6 @@ export function RadioFieldSettings({
           onCheckedChange={(checked) =>
             onUpdateSettings({ isQuizField: checked })
           }
-          size="sm"
         />
         <Label className="text-card-foreground" htmlFor="quiz-field-enabled">
           Enable as Quiz Question
@@ -102,7 +101,6 @@ export function RadioFieldSettings({
               onCheckedChange={(checked) =>
                 onUpdateSettings({ showCorrectAnswer: checked })
               }
-              size="sm"
             />
             <Label
               className="text-card-foreground"

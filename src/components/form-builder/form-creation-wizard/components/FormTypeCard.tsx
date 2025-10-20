@@ -30,7 +30,7 @@ export const FormTypeCard: React.FC<FormTypeCardProps> = ({
               isSelected ? "bg-primary text-primary-foreground" : "bg-muted"
             }`}
           >
-            <Icon aria-hidden="true" className="h-5 w-5" />
+            <Icon aria-hidden="true" className="size-5" />
           </span>
           <div className="flex flex-col gap-2">
             <CardTitle className="text-base">{type.title}</CardTitle>

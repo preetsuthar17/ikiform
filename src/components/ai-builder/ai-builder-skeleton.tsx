@@ -60,7 +60,7 @@ export function AIBuilderSkeleton() {
           <div className="p-4">
             <div className="relative">
               <Skeleton className="h-10 w-full rounded-2xl pr-12" />
-              <Skeleton className="-translate-y-1/2 absolute top-1/2 right-2 h-6 w-6" />
+              <Skeleton className="-translate-y-1/2 absolute top-1/2 right-2 size-6" />
             </div>
           </div>
         </div>

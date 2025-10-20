@@ -10,7 +10,7 @@ export function SignatureFieldSkeleton() {
       <div className="relative w-full overflow-hidden rounded-md border-2 border-muted border-dashed bg-background">
         <Skeleton className="h-[120px] w-full" />
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center text-muted-foreground">
-          <Skeleton className="h-4 w-40" />
+          <Skeleton className="size-40" />
         </div>
       </div>
       <div className="flex gap-2">

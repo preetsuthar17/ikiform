@@ -232,7 +232,7 @@ export function BotProtectionSection({
                 <div className="flex items-center gap-3">
                   <Shield
                     aria-hidden="true"
-                    className="h-4 w-4 text-blue-600 dark:text-blue-400"
+                    className="size-4 text-blue-600 dark:text-blue-400"
                   />
                   <div className="flex flex-col gap-2">
                     <h4 className="font-medium text-blue-900 text-sm dark:text-blue-100">

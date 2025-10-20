@@ -576,7 +576,7 @@ function DuplicatePreventionSummary({
   return (
     <div className="rounded-2xl bg-muted/50 p-4">
       <div className="flex items-center gap-2">
-        <UserCheck className="h-4 w-4 text-muted-foreground" />
+        <UserCheck className="size-4 text-muted-foreground" />
         <span className="font-medium text-sm">Current Settings</span>
       </div>
       <p className="text-muted-foreground text-sm">

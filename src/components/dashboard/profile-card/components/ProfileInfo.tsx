@@ -14,7 +14,7 @@ export function ProfileInfo({ user, hasPremium }: ProfileInfoProps) {
           {hasPremium && (
             <Crown
               aria-label="Premium user"
-              className="h-5 w-5 flex-shrink-0 text-yellow-500"
+              className="size-5 flex-shrink-0 text-yellow-500"
             />
           )}
         </div>

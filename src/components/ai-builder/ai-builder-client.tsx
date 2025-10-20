@@ -61,7 +61,7 @@ export function AIBuilderClient() {
     () =>
       CHAT_SUGGESTIONS.map((text) => ({
         text,
-        icon: <Sparkles className="h-4 w-4" />,
+        icon: <Sparkles className="size-4" />,
       })),
     []
   );

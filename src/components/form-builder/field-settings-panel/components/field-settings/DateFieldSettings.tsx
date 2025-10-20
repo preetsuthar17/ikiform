@@ -17,7 +17,6 @@ export function DateFieldSettings({
             Minimum Date
           </Label>
           <Input
-            className="border-border bg-input"
             id="date-min"
             onChange={(e) =>
               onUpdateSettings({
@@ -39,7 +38,6 @@ export function DateFieldSettings({
             Maximum Date
           </Label>
           <Input
-            className="border-border bg-input"
             id="date-max"
             onChange={(e) =>
               onUpdateSettings({
@@ -61,7 +59,6 @@ export function DateFieldSettings({
             Default Date
           </Label>
           <Input
-            className="border-border bg-input"
             id="date-default"
             onChange={(e) =>
               onUpdateSettings({

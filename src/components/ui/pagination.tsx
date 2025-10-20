@@ -22,16 +22,16 @@ const paginationItemVariants = cva(
     variants: {
       variant: {
         default:
-          "h-9 w-9 rounded-xl text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring",
+          "size-9 rounded-xl text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring",
         outline:
-          "h-9 w-9 rounded-xl border border-border text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring",
+          "size-9 rounded-xl border border-border text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring",
         ghost:
-          "h-9 w-9 rounded-xl text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring",
+          "size-9 rounded-xl text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring",
       },
       size: {
-        default: "h-9 w-9",
-        sm: "h-8 w-8 text-xs",
-        lg: "h-10 w-10",
+        default: "size-9",
+        sm: "size-8 text-xs",
+        lg: "size-10",
       },
       state: {
         default: "",
@@ -121,7 +121,7 @@ const PaginationPrevious = React.forwardRef<
     ref={ref}
     {...props}
   >
-    <ChevronLeft className="h-4 w-4" />
+    <ChevronLeft className="size-4" />
     {children || "Previous"}
   </Button>
 ));
@@ -135,7 +135,7 @@ const PaginationNext = React.forwardRef<HTMLButtonElement, PaginationNavProps>(
       {...props}
     >
       {children || "Next"}
-      <ChevronRight className="h-4 w-4" />
+      <ChevronRight className="size-4" />
     </Button>
   )
 );
@@ -147,13 +147,13 @@ const PaginationEllipsis = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <span
     className={cn(
-      "inline-flex h-9 w-9 items-center justify-center text-muted-foreground",
+      "inline-flex size-9 items-center justify-center text-muted-foreground",
       className
     )}
     ref={ref}
     {...props}
   >
-    <MoreHorizontal className="h-4 w-4" />
+    <MoreHorizontal className="size-4" />
     <span className="sr-only">More pages</span>
   </span>
 ));

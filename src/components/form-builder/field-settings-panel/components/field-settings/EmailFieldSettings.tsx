@@ -20,7 +20,6 @@ export function EmailFieldSettings({
             Allowed Domains (comma-separated)
           </Label>
           <Input
-            className="border-border bg-input"
             id="email-allowed-domains"
             onChange={(e) =>
               onUpdateSettings({
@@ -47,7 +46,6 @@ export function EmailFieldSettings({
             Blocked Domains (comma-separated)
           </Label>
           <Input
-            className="border-border bg-input"
             id="email-blocked-domains"
             onChange={(e) =>
               onUpdateSettings({
@@ -78,7 +76,6 @@ export function EmailFieldSettings({
                 },
               })
             }
-            size="sm"
           />
           <Label className="text-card-foreground" htmlFor="email-business-only">
             Require business email only
@@ -92,7 +89,6 @@ export function EmailFieldSettings({
             Custom Validation Message
           </Label>
           <Input
-            className="border-border bg-input"
             id="email-custom-message"
             onChange={(e) =>
               onUpdateSettings({

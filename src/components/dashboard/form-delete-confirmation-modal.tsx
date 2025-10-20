@@ -44,10 +44,10 @@ export function ConfirmationModal({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-3">
             {variant === "destructive" && (
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-destructive/10">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-destructive/10">
                 <AlertTriangle
                   aria-hidden="true"
-                  className="h-5 w-5 text-destructive"
+                  className="size-5 text-destructive"
                 />
               </div>
             )}

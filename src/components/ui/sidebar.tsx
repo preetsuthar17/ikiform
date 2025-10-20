@@ -62,7 +62,7 @@ const sidebarItemVariants = cva(
         ghost: "text-muted-foreground hover:bg-accent/50 hover:text-foreground",
       },
       collapsed: {
-        true: "h-10 w-10 justify-center px-0 py-0",
+        true: "size-10 justify-center px-0 py-0",
         false: "px-3 py-2.5",
       },
     },
@@ -260,7 +260,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
                     aria-controls={sidebarId}
                     aria-expanded={false}
                     aria-label="Expand sidebar"
-                    className="h-8 w-8 shrink-0"
+                    className="size-8 shrink-0"
                     onClick={handleToggleCollapse}
                     size="icon"
                     variant="ghost"
@@ -289,7 +289,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
                       aria-controls={sidebarId}
                       aria-expanded={true}
                       aria-label="Collapse sidebar"
-                      className="h-8 w-8 shrink-0"
+                      className="size-8 shrink-0"
                       onClick={handleToggleCollapse}
                       size="icon"
                       variant="ghost"
@@ -431,7 +431,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
         aria-hidden="true"
         className={cn(
           "flex shrink-0 items-center justify-center",
-          collapsed ? "h-10 w-10" : "ml-0 h-4 w-4"
+          collapsed ? "size-10" : "ml-0 size-4"
         )}
       >
         {Icon && <Icon size={16} />}

@@ -53,9 +53,9 @@ const circularProgressVariants = cva(
   {
     variants: {
       size: {
-        sm: "h-12 w-12",
-        default: "h-16 w-16",
-        lg: "h-20 w-20",
+        sm: "size-12",
+        default: "size-16",
+        lg: "size-20",
       },
     },
     defaultVariants: {

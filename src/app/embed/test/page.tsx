@@ -33,8 +33,8 @@ export default function EmbedTestPage() {
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 text-center">
-            <div className="gradient-bg mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl">
-              <Code2 className="h-8 w-8 text-accent-foreground" />
+            <div className="gradient-bg mx-auto mb-6 flex size-16 items-center justify-center rounded-2xl">
+              <Code2 className="size-8 text-accent-foreground" />
             </div>
             <h1 className="mb-4 font-semibold text-3xl text-foreground">
               Form Embedding Test Page
@@ -49,9 +49,9 @@ export default function EmbedTestPage() {
             </p>
             <Button asChild className="gap-2" variant="default">
               <Link href={`/embed?formid=${sampleFormId}`}>
-                <Settings className="h-4 w-4" />
+                <Settings className="size-4" />
                 Try Embed Customizer
-                <ExternalLink className="h-4 w-4" />
+                <ExternalLink className="size-4" />
               </Link>
             </Button>
           </div>
@@ -63,7 +63,7 @@ export default function EmbedTestPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle className="flex items-center gap-2">
-                      <Monitor className="h-5 w-5" />
+                      <Monitor className="size-5" />
                       Standard Embed
                     </CardTitle>
                     <CardDescription>
@@ -105,7 +105,7 @@ export default function EmbedTestPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle className="flex items-center gap-2">
-                      <Tablet className="h-5 w-5" />
+                      <Tablet className="size-5" />
                       Compact Embed
                     </CardTitle>
                     <CardDescription>
@@ -144,7 +144,7 @@ export default function EmbedTestPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle className="flex items-center gap-2">
-                      <Smartphone className="h-5 w-5" />
+                      <Smartphone className="size-5" />
                       Fixed Width Embed
                     </CardTitle>
                     <CardDescription>
@@ -185,7 +185,7 @@ export default function EmbedTestPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Code2 className="h-5 w-5" />
+                  <Code2 className="size-5" />
                   React Component Example
                 </CardTitle>
                 <CardDescription>
@@ -228,7 +228,7 @@ export default function EmbeddedForm() {
             <Card className="bg-accent/5">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Eye className="h-5 w-5" />
+                  <Eye className="size-5" />
                   How to Use the Embed Feature
                 </CardTitle>
                 <CardDescription>

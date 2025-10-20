@@ -1,4 +1,4 @@
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { FieldSettingsProps } from "./types";
@@ -9,18 +9,28 @@ export function TextFieldSettings({
   onFieldUpdate,
 }: FieldSettingsProps) {
   return (
-    <Card className="flex flex-col gap-4 rounded-2xl bg-background p-4">
-      <h3 className="font-medium text-card-foreground">Text Field Settings</h3>
-      <div className="flex flex-col gap-4">
+    <Card
+      className="gap-2 p-4 shadow-none"
+      style={{
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent",
+      }}
+    >
+      <CardHeader className="p-0">
+        <CardTitle className="text-lg">Text Field Settings</CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-4 p-0">
         <div className="flex flex-col gap-2">
-          <Label className="text-card-foreground" htmlFor="text-max-length">
+          <Label className="font-medium text-sm" htmlFor="text-max-length">
             Maximum Length
           </Label>
           <Input
-            className="border-border bg-input"
+            aria-describedby="text-max-length-help"
+            autoComplete="off"
             id="text-max-length"
             max="1000"
             min="1"
+            name="text-max-length"
             onChange={(e) =>
               onFieldUpdate({
                 ...field,
@@ -30,20 +40,33 @@ export function TextFieldSettings({
                 },
               })
             }
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                e.currentTarget.blur();
+              }
+            }}
             placeholder="No limit"
             type="number"
             value={field.validation?.maxLength || ""}
           />
+          <p
+            className="text-muted-foreground text-xs"
+            id="text-max-length-help"
+          >
+            Maximum number of characters allowed (1-1000)
+          </p>
         </div>
         <div className="flex flex-col gap-2">
-          <Label className="text-card-foreground" htmlFor="text-min-length">
+          <Label className="font-medium text-sm" htmlFor="text-min-length">
             Minimum Length
           </Label>
           <Input
-            className="border-border bg-input"
+            aria-describedby="text-min-length-help"
+            autoComplete="off"
             id="text-min-length"
             max="1000"
             min="0"
+            name="text-min-length"
             onChange={(e) =>
               onFieldUpdate({
                 ...field,
@@ -53,12 +76,23 @@ export function TextFieldSettings({
                 },
               })
             }
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                e.currentTarget.blur();
+              }
+            }}
             placeholder="No minimum"
             type="number"
             value={field.validation?.minLength || ""}
           />
+          <p
+            className="text-muted-foreground text-xs"
+            id="text-min-length-help"
+          >
+            Minimum number of characters required (0-1000)
+          </p>
         </div>
-      </div>
+      </CardContent>
     </Card>
   );
 }

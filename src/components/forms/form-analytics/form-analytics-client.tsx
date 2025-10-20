@@ -126,7 +126,7 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
   if (loading) {
     return (
       <div className="flex h-96 items-center justify-center">
-        <Loader className="h-8 w-8" />
+        <Loader className="size-8" />
       </div>
     );
   }
@@ -155,7 +155,7 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
               <TooltipTrigger asChild>
                 <Button asChild size="sm" variant="outline">
                   <Link href={getFormUrl()} target="_blank">
-                    <Eye className="mr-2 h-4 w-4" />
+                    <Eye className="mr-2 size-4" />
                     View
                   </Link>
                 </Button>
@@ -169,7 +169,7 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
               <TooltipTrigger asChild>
                 <Button asChild size="sm" variant="outline">
                   <Link href={`/form-builder/${form.id}`}>
-                    <Edit className="mr-2 h-4 w-4" />
+                    <Edit className="mr-2 size-4" />
                     Edit
                   </Link>
                 </Button>
@@ -186,7 +186,7 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
                   size="sm"
                   variant="outline"
                 >
-                  <Share className="mr-2 h-4 w-4" />
+                  <Share className="mr-2 size-4" />
                   Share
                 </Button>
               </TooltipTrigger>
@@ -202,7 +202,7 @@ export function FormAnalyticsClient({ form }: FormAnalyticsProps) {
                   size="sm"
                   variant="destructive"
                 >
-                  <Trash2 className="mr-2 h-4 w-4" />
+                  <Trash2 className="mr-2 size-4" />
                   Delete
                 </Button>
               </TooltipTrigger>

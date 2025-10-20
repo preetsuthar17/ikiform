@@ -52,7 +52,7 @@ const RoadmapComponent: React.FC<RoadmapComponentProps> = ({
           <div className="flex flex-col gap-2" key={index}>
             <div className="flex items-center gap-3">
               <div
-                className={`h-2 w-2 shrink-0 rounded-2xl ${getStatusColor(
+                className={`size-2 shrink-0 rounded-2xl ${getStatusColor(
                   item.status
                 )}`}
               />

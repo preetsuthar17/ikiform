@@ -58,7 +58,7 @@ export const ChatModal: React.FC<ChatModalProps> = ({
         <DrawerContent className="flex h-[85vh] flex-col focus:outline-none focus:ring-0">
           <DrawerHeader className="flex items-center justify-between gap-2 border-border border-b">
             <div className="sr-only flex items-center gap-2">
-              <Bot className="h-4 w-4 text-primary" />
+              <Bot className="size-4 text-primary" />
               <DrawerTitle>Kiko</DrawerTitle>
             </div>
             <DrawerDescription className="sr-only">

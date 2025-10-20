@@ -320,14 +320,14 @@ export function DatePicker({
         type="button"
       >
         <span className="flex items-center gap-2">
-          {showIcon && <CalendarIcon className="h-4 w-4 opacity-50" />}
+          {showIcon && <CalendarIcon className="size-4 opacity-50" />}
           <span className={cn(!value && "text-muted-foreground")}>
             {value ? formatDateFn(value) : placeholder}
           </span>
         </span>
         <ChevronDown
           className={cn(
-            "h-4 w-4 opacity-50 transition-transform duration-200",
+            "size-4 opacity-50 transition-transform duration-200",
             isOpen && "rotate-180"
           )}
         />
@@ -515,14 +515,14 @@ export function DateRangePicker({
         type="button"
       >
         <span className="flex items-center gap-2">
-          {showIcon && <CalendarIcon className="h-4 w-4 opacity-50" />}
+          {showIcon && <CalendarIcon className="size-4 opacity-50" />}
           <span className={cn(!value && "text-muted-foreground")}>
             {value ? formatRange(value) : placeholder}
           </span>
         </span>
         <ChevronDown
           className={cn(
-            "h-4 w-4 opacity-50 transition-transform duration-200",
+            "size-4 opacity-50 transition-transform duration-200",
             isOpen && "rotate-180"
           )}
         />

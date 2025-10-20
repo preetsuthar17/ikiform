@@ -43,9 +43,9 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
           <CardHeader className="[.border-b]:border-border">
             <div className="flex items-center gap-3">
               {isMultiStep ? (
-                <Layers className="h-5 w-5 text-primary" />
+                <Layers className="size-5 text-primary" />
               ) : (
-                <FileText className="h-5 w-5 text-primary" />
+                <FileText className="size-5 text-primary" />
               )}
               <div>
                 <CardTitle className="text-base">Form Type</CardTitle>
@@ -66,7 +66,7 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
                   title="Edit form type"
                   variant={"secondary"}
                 >
-                  <Edit3 className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                  <Edit3 className="size-4 text-muted-foreground hover:text-foreground" />
                 </Button>
               </div>
             </CardAction>
@@ -76,7 +76,7 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
         <Card className="shadow-none">
           <CardHeader className="[.border-b]:border-border">
             <div className="mb-0.5 flex items-center gap-2">
-              <FileText className="h-5 w-5 text-primary" />
+              <FileText className="size-5 text-primary" />
               <CardTitle className="text-base">Form Configuration</CardTitle>
             </div>
             <CardAction>
@@ -87,7 +87,7 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
                 title="Edit form configuration"
                 variant={"secondary"}
               >
-                <Edit3 className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                <Edit3 className="size-4 text-muted-foreground hover:text-foreground" />
               </Button>
             </CardAction>
           </CardHeader>

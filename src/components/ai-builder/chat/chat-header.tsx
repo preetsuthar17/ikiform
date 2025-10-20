@@ -15,7 +15,7 @@ export function ChatHeader() {
             variant="outline"
           >
             <Link href="/form-builder">
-              <ArrowLeft aria-hidden className="h-4 w-4" />
+              <ArrowLeft aria-hidden className="size-4" />
             </Link>
           </Button>
           <h1 className="font-semibold text-lg">Kiko AI</h1>

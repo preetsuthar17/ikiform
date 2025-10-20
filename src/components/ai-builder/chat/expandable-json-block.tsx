@@ -93,9 +93,9 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
           variant="outline"
         >
           {expanded ? (
-            <ChevronUp className="h-4 w-4" />
+            <ChevronUp className="size-4" />
           ) : (
-            <ChevronDown className="h-4 w-4" />
+            <ChevronDown className="size-4" />
           )}
           {expanded ? "Collapse" : "Expand"}
         </Button>

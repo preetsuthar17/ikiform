@@ -24,11 +24,8 @@ export function EmptyState({
   return (
     <Card className="p-16 text-center shadow-none">
       <div className="mx-auto flex max-w-md flex-col gap-6">
-        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl bg-accent">
-          <Plus
-            aria-hidden="true"
-            className="h-10 w-10 text-accent-foreground"
-          />
+        <div className="mx-auto flex size-20 items-center justify-center rounded-2xl bg-accent">
+          <Plus aria-hidden="true" className="size-10 text-accent-foreground" />
         </div>
         <div className="flex flex-col gap-2">
           <h3 className="font-semibold text-foreground text-xl">
@@ -45,7 +42,7 @@ export function EmptyState({
               className="w-full sm:w-auto"
               onClick={onCreateForm}
             >
-              <Plus aria-hidden="true" className="mr-2 h-5 w-5" />
+              <Plus aria-hidden="true" className="mr-2 size-5" />
               Create Your First Form
             </Button>
           </DialogTrigger>
@@ -64,7 +61,7 @@ export function EmptyState({
                 size="lg"
                 variant="default"
               >
-                <Sparkles aria-hidden="true" className="mr-2 h-4 w-4" />
+                <Sparkles aria-hidden="true" className="mr-2 size-4" />
                 Use Kiko AI
               </Button>
               <Button

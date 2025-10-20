@@ -36,7 +36,7 @@ export function MobileChatDrawerWrapper({
             <div className="flex flex-col gap-4 p-4">
               <div className="flex items-center justify-between">
                 <Skeleton className="h-6 w-32" />
-                <Skeleton className="h-8 w-8 rounded-full" />
+                <Skeleton className="size-8 rounded-full" />
               </div>
               <Skeleton className="h-40 w-full" />
               <div className="flex flex-col gap-2">

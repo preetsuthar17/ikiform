@@ -64,7 +64,7 @@ export function FormSettingsModal({
       <DialogContent className="flex h-[90vh] w-full grow flex-col p-0 sm:max-w-6xl">
         <DialogHeader className="flex shrink-0 flex-row items-center gap-6 p-6 pb-4">
           <div className="flex items-center gap-3">
-            <Settings className="h-5 w-5 text-primary" />
+            <Settings className="size-5 text-primary" />
             <DialogTitle className="font-semibold text-xl">
               Form Settings
             </DialogTitle>

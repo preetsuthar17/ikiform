@@ -39,7 +39,7 @@ export function ChatMessageSkeleton() {
     <div className="flex flex-col gap-4">
       {Array.from({ length: 3 }).map((_, i) => (
         <div className="flex gap-3" key={i}>
-          <Skeleton className="h-8 w-8 rounded-full" />
+          <Skeleton className="size-8 rounded-full" />
           <div className="flex flex-1 flex-col gap-2">
             <Skeleton className="h-4 w-3/4" />
             <Skeleton className="h-4 w-1/2" />
@@ -58,7 +58,7 @@ export function ChatWelcomeSkeleton() {
   return (
     <div className="flex flex-col items-center gap-4 py-8 text-center">
       {}
-      <Skeleton className="h-12 w-12 rounded-2xl" />
+      <Skeleton className="size-12 rounded-2xl" />
       {}
       <Skeleton className="h-8 w-64" />
       {}
@@ -92,7 +92,7 @@ export function ChatHeaderSkeleton() {
     <div className="border-b bg-card/50 backdrop-blur">
       <div className="flex items-center justify-between gap-4 p-4">
         <div className="flex items-center gap-3">
-          <Skeleton className="h-8 w-8" /> {}
+          <Skeleton className="size-8" /> {}
           <Skeleton className="h-6 w-16" /> {}
         </div>
       </div>
@@ -114,9 +114,9 @@ export function PreviewPanelHeaderSkeleton({
       <>
         {}
         <div className="flex items-center gap-3 border-b bg-card/50 p-4 backdrop-blur md:hidden">
-          <Skeleton className="h-8 w-8" /> {}
+          <Skeleton className="size-8" /> {}
           <div className="flex items-center gap-2">
-            <Skeleton className="h-2 w-2 rounded-full" /> {}
+            <Skeleton className="size-2 rounded-full" /> {}
             <Skeleton className="h-6 w-16" /> {}
           </div>
         </div>
@@ -136,7 +136,7 @@ export function PreviewPanelHeaderSkeleton({
       <div className="hidden border-b bg-card/50 p-4 backdrop-blur md:block">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Skeleton className="h-2 w-2 rounded-full" /> {}
+            <Skeleton className="size-2 rounded-full" /> {}
             <Skeleton className="h-6 w-16" /> {}
           </div>
           <div className="flex gap-2">
@@ -176,8 +176,8 @@ export function FormBuilderPanelSkeleton() {
         <div className="flex items-center justify-between">
           <Skeleton className="h-8 w-48" />
           <div className="flex gap-2">
-            <Skeleton className="h-8 w-8" />
-            <Skeleton className="h-8 w-8" />
+            <Skeleton className="size-8" />
+            <Skeleton className="size-8" />
           </div>
         </div>
         <Skeleton className="h-96 w-full" />
@@ -234,7 +234,7 @@ export function FormBuilderHeaderSkeleton() {
         >
           <div className="w-full">
             <div className="flex items-center gap-2 pb-2">
-              <Skeleton className="h-8 w-8" />
+              <Skeleton className="size-8" />
               <Skeleton className="h-8 w-20" />
               <Skeleton className="h-8 w-16" />
             </div>
@@ -250,7 +250,7 @@ export function FormBuilderHeaderSkeleton() {
             <Skeleton className="h-9 w-28" />
             <Skeleton className="h-9 w-24" />
             <Skeleton className="h-9 w-24" />
-            <Skeleton className="h-9 w-9" />
+            <Skeleton className="size-9" />
           </div>
           <Skeleton className="h-9 w-28" />
         </nav>

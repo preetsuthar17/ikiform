@@ -12,7 +12,7 @@ const ProfileCard = dynamic(
       <div className="shadow-none">
         <div className="flex flex-col gap-6">
           <div className="flex items-center gap-4">
-            <Skeleton className="h-16 w-16 rounded-2xl" />
+            <Skeleton className="size-16 rounded-2xl" />
             <div className="flex flex-col gap-2">
               <Skeleton className="h-6 w-48" />
               <Skeleton className="h-4 w-32" />
@@ -81,7 +81,7 @@ export default function DashboardClient() {
               <div className="rounded-2xl border p-6 shadow-none">
                 <div className="flex flex-col gap-6">
                   <div className="flex items-center gap-4">
-                    <Skeleton className="h-16 w-16 rounded-2xl" />
+                    <Skeleton className="size-16 rounded-2xl" />
                     <div className="flex flex-col gap-2">
                       <Skeleton className="h-6 w-48" />
                       <Skeleton className="h-4 w-32" />

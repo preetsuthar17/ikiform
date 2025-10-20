@@ -95,13 +95,13 @@ export function PresetsSection({
                 Form Title
               </div>
               <div
-                className="mx-auto h-1 w-16 rounded"
+                className="mx-auto size-16 rounded"
                 style={{
                   backgroundColor: preset.settings.colors?.border || "#e5e7eb",
                 }}
               />
               <div
-                className="mx-auto h-1 w-12 rounded"
+                className="mx-auto size-12 rounded"
                 style={{
                   backgroundColor: preset.settings.colors?.border || "#e5e7eb",
                 }}
@@ -122,7 +122,7 @@ export function PresetsSection({
           {isApplied && (
             <div className="absolute inset-0 flex items-center justify-center bg-primary/10">
               <div className="rounded-full bg-primary p-1 text-primary-foreground">
-                <Check className="h-3 w-3" />
+                <Check className="size-3" />
               </div>
             </div>
           )}
@@ -145,7 +145,7 @@ export function PresetsSection({
                 (color, index) =>
                   color && (
                     <div
-                      className="h-3 w-3 rounded-full border border-border"
+                      className="size-3 rounded-full border border-border"
                       key={index}
                       style={{ backgroundColor: color }}
                       title={color}
@@ -162,7 +162,7 @@ export function PresetsSection({
     <div className="flex h-full flex-col gap-6">
       <div>
         <div className="mb-2 flex items-center gap-2">
-          <Palette className="h-4 w-4 text-primary" />
+          <Palette className="size-4 text-primary" />
           <h2 className="font-semibold text-lg">Design Presets</h2>
         </div>
         <p className="text-muted-foreground text-xs">

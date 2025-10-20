@@ -74,9 +74,9 @@ export function QuizField({
     if (!(showFeedback && isSubmitted && value)) return null;
 
     if (isCorrect) {
-      return <CheckCircle className="h-4 w-4 text-green-600" />;
+      return <CheckCircle className="size-4 text-green-600" />;
     }
-    return <XCircle className="h-4 w-4 text-red-600" />;
+    return <XCircle className="size-4 text-red-600" />;
   };
 
   const getFeedbackStyling = () => {
@@ -95,7 +95,7 @@ export function QuizField({
         <div className="flex-1">
           {field.label && (
             <div className="flex items-center gap-2">
-              <HelpCircle className="h-4 w-4 text-primary" />
+              <HelpCircle className="size-4 text-primary" />
               <label className="font-medium text-foreground text-sm">
                 {field.label}
                 {field.required && (
@@ -148,10 +148,10 @@ export function QuizField({
           if (showFeedback && isSubmitted) {
             if (isThisOptionCorrect) {
               optionStyling = "border-green-500 bg-green-50";
-              optionIcon = <CheckCircle className="h-4 w-4 text-green-600" />;
+              optionIcon = <CheckCircle className="size-4 text-green-600" />;
             } else if (isSelected && !isThisOptionCorrect) {
               optionStyling = "border-red-500 bg-red-50";
-              optionIcon = <XCircle className="h-4 w-4 text-red-600" />;
+              optionIcon = <XCircle className="size-4 text-red-600" />;
             }
           }
 
@@ -209,7 +209,7 @@ export function QuizField({
               {/* Show explanation if available */}
               {explanation && (
                 <div className="mt-2 flex gap-2">
-                  <Info className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-600" />
+                  <Info className="mt-0.5 size-4 flex-shrink-0 text-blue-600" />
                   <p className="text-muted-foreground text-sm">{explanation}</p>
                 </div>
               )}

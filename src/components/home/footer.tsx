@@ -42,7 +42,7 @@ const FooterLogo = React.memo(function FooterLogo() {
       <span className="flex items-center gap-3 text-3xl tracking-tight">
         <Image
           alt="Ikiform Logo"
-          className="h-10 w-10 rounded-lg"
+          className="size-10 rounded-lg"
           height={40}
           loading="lazy"
           quality={75}
@@ -273,7 +273,7 @@ const SocialLinks = React.memo(function SocialLinks() {
         rel="noopener noreferrer"
         target="_blank"
       >
-        <FaGithub aria-hidden className="h-4 w-4" />
+        <FaGithub aria-hidden className="size-4" />
       </Link>
       <Link
         aria-label="Ikiform on Twitter (opens in a new tab)"
@@ -282,7 +282,7 @@ const SocialLinks = React.memo(function SocialLinks() {
         rel="noopener noreferrer"
         target="_blank"
       >
-        <FaXTwitter aria-hidden className="h-4 w-4" />
+        <FaXTwitter aria-hidden className="size-4" />
       </Link>
       <Link
         aria-label="Ikiform on Discord (opens in a new tab)"
@@ -291,7 +291,7 @@ const SocialLinks = React.memo(function SocialLinks() {
         rel="noopener noreferrer"
         target="_blank"
       >
-        <FaDiscord aria-hidden className="h-5 w-5" />
+        <FaDiscord aria-hidden className="size-5" />
       </Link>
       <Link
         aria-label="Email Ikiform (opens in a new tab)"

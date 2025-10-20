@@ -55,14 +55,14 @@ export function MultiStepNavigation({
           onClick={handlePrevStep}
           variant="outline"
         >
-          <ChevronLeft className="h-4 w-4" />
+          <ChevronLeft className="size-4" />
           Previous
         </Button>
 
         <div className="flex gap-2">
           {schema.blocks.map((_, index) => (
             <button
-              className={`h-8 w-8 rounded-2xl font-medium text-sm transition-colors ${
+              className={`size-8 rounded-2xl font-medium text-sm transition-colors ${
                 index === currentStepIndex
                   ? "bg-primary text-primary-foreground"
                   : index < currentStepIndex
@@ -84,7 +84,7 @@ export function MultiStepNavigation({
           variant="outline"
         >
           Next
-          <ChevronRight className="h-4 w-4" />
+          <ChevronRight className="size-4" />
         </Button>
       </div>
     </div>

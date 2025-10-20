@@ -1,10 +1,9 @@
-import { X } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import type { FieldSettingsProps } from "./types";
 
@@ -16,118 +15,234 @@ export function PollFieldSettings({
   const [newOption, setNewOption] = useState("");
 
   return (
-    <Card className="flex flex-col gap-4 rounded-2xl bg-background p-4">
-      <h3 className="font-medium text-card-foreground">Poll Settings</h3>
-      <div className="flex flex-col gap-2">
-        <Label className="text-card-foreground" htmlFor="poll-options">
-          Poll Options
-        </Label>
-        <div className="flex gap-2">
-          <Input
-            className="flex-1"
-            id="poll-option-input"
-            onChange={(e) => setNewOption(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && newOption.trim()) {
-                onUpdateSettings({
-                  pollOptions: [
-                    ...(field.settings?.pollOptions || []),
-                    newOption.trim(),
-                  ],
-                });
-                setNewOption("");
-              }
-            }}
-            placeholder="Add option"
-            type="text"
-            value={newOption || ""}
-          />
-          <Button
-            disabled={!(newOption && newOption.trim())}
-            onClick={() => {
-              if (newOption && newOption.trim()) {
-                onUpdateSettings({
-                  pollOptions: [
-                    ...(field.settings?.pollOptions || []),
-                    newOption.trim(),
-                  ],
-                });
-                setNewOption("");
-              }
-            }}
-            size="sm"
-            type="button"
-          >
-            Add
-          </Button>
+    <Card
+      className="gap-2 p-4 shadow-none"
+      style={{
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent",
+      }}
+    >
+      <CardHeader className="p-0">
+        <CardTitle className="text-lg">Poll Settings</CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-4 p-0">
+        <div className="flex flex-col gap-2">
+          <Label className="font-medium text-sm" htmlFor="poll-options">
+            Poll Options
+          </Label>
+          <div className="flex gap-2">
+            <Input
+              aria-describedby="poll-options-help"
+              autoComplete="off"
+              className="flex-1"
+              id="poll-option-input"
+              name="poll-option-input"
+              onChange={(e) => setNewOption(e.target.value.trim())}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && newOption.trim()) {
+                  e.preventDefault();
+                  onUpdateSettings({
+                    pollOptions: [
+                      ...(field.settings?.pollOptions || []),
+                      newOption.trim(),
+                    ],
+                  });
+                  setNewOption("");
+                } else if (e.key === "Escape") {
+                  e.currentTarget.blur();
+                }
+              }}
+              placeholder="Add option"
+              type="text"
+              value={newOption || ""}
+            />
+            <Button
+              aria-label="Add poll option"
+              className="focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
+              disabled={!(newOption && newOption.trim())}
+              onClick={() => {
+                if (newOption && newOption.trim()) {
+                  onUpdateSettings({
+                    pollOptions: [
+                      ...(field.settings?.pollOptions || []),
+                      newOption.trim(),
+                    ],
+                  });
+                  setNewOption("");
+                }
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  if (newOption && newOption.trim()) {
+                    onUpdateSettings({
+                      pollOptions: [
+                        ...(field.settings?.pollOptions || []),
+                        newOption.trim(),
+                      ],
+                    });
+                    setNewOption("");
+                  }
+                }
+              }}
+              size="icon"
+              style={{
+                touchAction: "manipulation",
+                WebkitTapHighlightColor: "transparent",
+              }}
+              type="button"
+            >
+              <Plus aria-hidden="true" className="size-4" />
+            </Button>
+          </div>
+          <p className="text-muted-foreground text-xs" id="poll-options-help">
+            Add poll options that users can vote on
+          </p>
         </div>
-        <div className="mt-2 flex flex-col gap-1">
+        <div className="flex flex-col gap-1">
           {(field.settings?.pollOptions || []).map((option, idx) => (
             <div className="flex items-center gap-2" key={idx}>
               <Input
+                aria-label={`Edit poll option ${idx + 1}`}
+                autoComplete="off"
                 className="flex-1"
+                name={`poll-option-${idx}`}
                 onChange={(e) => {
                   const updated = [...(field.settings?.pollOptions || [])];
-                  updated[idx] = e.target.value;
+                  updated[idx] = e.target.value.trim();
                   onUpdateSettings({ pollOptions: updated });
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") {
+                    e.currentTarget.blur();
+                  }
                 }}
                 type="text"
                 value={option}
               />
               <Button
+                aria-label={`Remove poll option ${idx + 1}`}
+                className="focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
                 onClick={() => {
                   const updated = [...(field.settings?.pollOptions || [])];
                   updated.splice(idx, 1);
                   onUpdateSettings({ pollOptions: updated });
                 }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    const updated = [...(field.settings?.pollOptions || [])];
+                    updated.splice(idx, 1);
+                    onUpdateSettings({ pollOptions: updated });
+                  }
+                }}
                 size="icon"
+                style={{
+                  touchAction: "manipulation",
+                  WebkitTapHighlightColor: "transparent",
+                }}
                 type="button"
                 variant="ghost"
               >
-                <X />
+                <X aria-hidden="true" className="size-4" />
               </Button>
             </div>
           ))}
         </div>
-        <Separator>OR</Separator>
-        <div className="flex flex-col gap-2">
-          <Label className="text-card-foreground" htmlFor="poll-options">
+        <div
+          aria-label="or separator"
+          className="relative my-4 flex items-center"
+        >
+          <div aria-hidden="true" className="h-px flex-1 bg-border" />
+          <span className="mx-4 select-none whitespace-nowrap font-medium text-muted-foreground text-xs">
+            OR
+          </span>
+          <div aria-hidden="true" className="h-px flex-1 bg-border" />
+        </div>
+        <div className="flex flex-col gap-4">
+          <h3 className="font-medium text-card-foreground">
             Fetch Options from API
-          </Label>
-          <Input
-            className="mb-2 border-border bg-input"
-            id="poll-options-api"
-            onChange={(e) =>
-              onFieldUpdate({ ...field, optionsApi: e.target.value })
-            }
-            placeholder="https://your-api.com/options"
-            type="url"
-            value={field.optionsApi || ""}
-          />
-          <div className="mb-2 flex gap-2">
+          </h3>
+          <div className="flex flex-col gap-2">
             <Input
-              className="border-border bg-input"
-              id="poll-valueKey"
+              aria-describedby="poll-api-help"
+              autoComplete="off"
+              id="poll-options-api"
+              name="poll-options-api"
               onChange={(e) =>
-                onFieldUpdate({ ...field, valueKey: e.target.value })
+                onFieldUpdate({ ...field, optionsApi: e.target.value.trim() })
               }
-              placeholder="Value key (e.g. id)"
-              type="text"
-              value={field.valueKey || ""}
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  e.currentTarget.blur();
+                }
+              }}
+              placeholder="https://your-api.com/options"
+              type="url"
+              value={field.optionsApi || ""}
             />
-            <Input
-              className="border-border bg-input"
-              id="poll-labelKey"
-              onChange={(e) =>
-                onFieldUpdate({ ...field, labelKey: e.target.value })
-              }
-              placeholder="Label key (e.g. name)"
-              type="text"
-              value={field.labelKey || ""}
-            />
+            <p className="text-muted-foreground text-xs" id="poll-api-help">
+              API endpoint to fetch poll options from
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <div className="flex flex-1 flex-col gap-2">
+              <Input
+                aria-describedby="poll-value-key-help"
+                autoComplete="off"
+                id="poll-valueKey"
+                name="poll-valueKey"
+                onChange={(e) =>
+                  onFieldUpdate({ ...field, valueKey: e.target.value.trim() })
+                }
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") {
+                    e.currentTarget.blur();
+                  }
+                }}
+                placeholder="Value key (e.g. id)"
+                type="text"
+                value={field.valueKey || ""}
+              />
+              <p
+                className="text-muted-foreground text-xs"
+                id="poll-value-key-help"
+              >
+                Key for option values
+              </p>
+            </div>
+            <div className="flex flex-1 flex-col gap-2">
+              <Input
+                aria-describedby="poll-label-key-help"
+                autoComplete="off"
+                id="poll-labelKey"
+                name="poll-labelKey"
+                onChange={(e) =>
+                  onFieldUpdate({ ...field, labelKey: e.target.value.trim() })
+                }
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") {
+                    e.currentTarget.blur();
+                  }
+                }}
+                placeholder="Label key (e.g. name)"
+                type="text"
+                value={field.labelKey || ""}
+              />
+              <p
+                className="text-muted-foreground text-xs"
+                id="poll-label-key-help"
+              >
+                Key for option labels
+              </p>
+            </div>
           </div>
           {field.optionsApi && (
-            <div className="mt-2 rounded border border-blue-200 bg-blue-50 p-2 text-blue-900 text-xs">
+            <div
+              aria-live="polite"
+              className="rounded border border-blue-200 bg-blue-50 p-2 text-blue-900 text-xs"
+              role="status"
+            >
               <strong>API Data Guidance:</strong> This field will fetch options
               from the API endpoint:
               <br />
@@ -167,20 +282,30 @@ export function PollFieldSettings({
             </div>
           )}
         </div>
-      </div>
-      <div className="flex items-center gap-2">
-        <Switch
-          checked={!!field.settings?.showResults}
-          id="poll-show-results"
-          onCheckedChange={(checked) =>
-            onUpdateSettings({ showResults: checked })
-          }
-          size={"sm"}
-        />
-        <Label className="text-card-foreground" htmlFor="poll-show-results">
-          Show results after voting
-        </Label>
-      </div>
+        <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-1">
+            <Label className="font-medium text-sm" htmlFor="poll-show-results">
+              Show results after voting
+            </Label>
+            <p className="text-muted-foreground text-xs">
+              Display poll results to users after they vote
+            </p>
+          </div>
+          <Switch
+            aria-describedby="poll-show-results-help"
+            checked={!!field.settings?.showResults}
+            id="poll-show-results"
+            name="poll-show-results"
+            onCheckedChange={(checked) =>
+              onUpdateSettings({ showResults: checked })
+            }
+            style={{
+              touchAction: "manipulation",
+              WebkitTapHighlightColor: "transparent",
+            }}
+          />
+        </div>
+      </CardContent>
     </Card>
   );
 }

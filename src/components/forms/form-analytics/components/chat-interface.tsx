@@ -260,7 +260,7 @@ export const ChatInterface = memo(function ChatInterface({
           {}
           {isEmpty && (
             <div className="flex flex-col items-center gap-3 py-12 text-center">
-              <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-primary/10">
+              <div className="flex size-20 items-center justify-center rounded-2xl bg-primary/10">
                 <Image
                   alt="Ikiform"
                   className="pointer-events-none rounded-xl"
@@ -364,7 +364,7 @@ export const ChatInterface = memo(function ChatInterface({
                     size="icon"
                     variant="destructive"
                   >
-                    <Square className="h-4 w-4" />
+                    <Square className="size-4" />
                   </Button>
                 )}
                 {}
@@ -373,7 +373,7 @@ export const ChatInterface = memo(function ChatInterface({
                   size="icon"
                   type="submit"
                 >
-                  <Send className="h-4 w-4" />
+                  <Send className="size-4" />
                 </Button>
               </div>
             </form>

@@ -43,7 +43,7 @@ export function MultiStepQuizProgress({
                   <div className="flex flex-col items-center">
                     <div
                       className={cn(
-                        "flex h-8 w-8 items-center justify-center rounded-full border-2 font-medium text-sm",
+                        "flex size-8 items-center justify-center rounded-full border-2 font-medium text-sm",
                         isCompleted || isPast
                           ? "border-green-500 bg-green-500 text-white"
                           : isCurrent
@@ -52,7 +52,7 @@ export function MultiStepQuizProgress({
                       )}
                     >
                       {isCompleted || isPast ? (
-                        <Check className="h-4 w-4" />
+                        <Check className="size-4" />
                       ) : (
                         index + 1
                       )}

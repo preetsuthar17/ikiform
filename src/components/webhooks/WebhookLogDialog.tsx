@@ -128,7 +128,7 @@ function PayloadViewer({ payload }: { payload: any }) {
   ) {
     return (
       <div className="flex flex-col items-center justify-center py-12 text-center">
-        <Eye className="mb-4 h-12 w-12 text-muted-foreground" />
+        <Eye className="mb-4 size-12 text-muted-foreground" />
         <h3 className="mb-2 font-semibold text-lg">No Payload Data</h3>
         <p className="max-w-md text-muted-foreground">
           This webhook delivery doesn't contain any payload data. This might be
@@ -228,7 +228,7 @@ function PayloadViewer({ payload }: { payload: any }) {
         {/* Event Information */}
         <div className="rounded-xl border bg-card p-4">
           <h4 className="mb-4 flex items-center gap-2 font-semibold text-sm">
-            <Activity className="h-4 w-4" />
+            <Activity className="size-4" />
             Event Information
           </h4>
           <div className="grid grid-cols-1 gap-3 text-sm">
@@ -578,16 +578,16 @@ export function WebhookLogDialog({
               {logs.length > 0 && (
                 <div className="mt-2 flex items-center gap-4 text-muted-foreground text-sm">
                   <div className="flex items-center gap-1">
-                    <CheckCircle className="h-3 w-3 text-green-600" />
+                    <CheckCircle className="size-3 text-green-600" />
                     <span>{successCount} successful</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <XCircle className="h-3 w-3 text-red-600" />
+                    <XCircle className="size-3 text-red-600" />
                     <span>{failedCount} failed</span>
                   </div>
                   {pendingCount > 0 && (
                     <div className="flex items-center gap-1">
-                      <AlertCircle className="h-3 w-3 text-yellow-600" />
+                      <AlertCircle className="size-3 text-yellow-600" />
                       <span>{pendingCount} pending</span>
                     </div>
                   )}
@@ -621,7 +621,7 @@ export function WebhookLogDialog({
             </ScrollArea>
           ) : (
             <div className="flex h-64 flex-col items-center justify-center text-center">
-              <Activity className="mb-4 h-12 w-12 text-muted-foreground" />
+              <Activity className="mb-4 size-12 text-muted-foreground" />
               <h3 className="mb-2 font-semibold text-lg">No Logs Found</h3>
               <p className="text-muted-foreground">
                 No webhook delivery logs found for this webhook.

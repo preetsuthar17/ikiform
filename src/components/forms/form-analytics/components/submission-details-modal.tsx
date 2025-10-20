@@ -113,9 +113,9 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                       variant="secondary"
                     >
                       {copied ? (
-                        <Check className="h-4 w-4" />
+                        <Check className="size-4" />
                       ) : (
-                        <Copy className="h-4 w-4" />
+                        <Copy className="size-4" />
                       )}
                     </Button>
                   </TooltipTrigger>
@@ -132,7 +132,7 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                         size="icon"
                         variant="secondary"
                       >
-                        <Download className="h-4 w-4" />
+                        <Download className="size-4" />
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent size="sm">Export submission</TooltipContent>
@@ -268,12 +268,12 @@ export const SubmissionDetailsModal: React.FC<SubmissionDetailsModalProps> = ({
                                     >
                                       <img
                                         alt={file.name || "Uploaded file"}
-                                        className="h-16 w-16 rounded-md border object-cover"
+                                        className="size-16 rounded-md border object-cover"
                                         src={file.signedUrl}
                                       />
                                     </a>
                                   ) : (
-                                    <div className="flex h-16 w-16 items-center justify-center rounded-md bg-accent">
+                                    <div className="flex size-16 items-center justify-center rounded-md bg-accent">
                                       <span className="font-medium text-xs">
                                         {file.name
                                           ?.split(".")

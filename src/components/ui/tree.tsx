@@ -272,12 +272,12 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
     const getDefaultIcon = () =>
       hasChildren ? (
         isExpanded ? (
-          <FolderOpen className="h-4 w-4" />
+          <FolderOpen className="size-4" />
         ) : (
-          <Folder className="h-4 w-4" />
+          <Folder className="size-4" />
         )
       ) : (
-        <File className="h-4 w-4" />
+        <File className="size-4" />
       );
 
     const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -337,18 +337,18 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
           {}
           <motion.div
             animate={{ rotate: hasChildren && isExpanded ? 90 : 0 }}
-            className="mr-1 flex h-4 w-4 items-center justify-center"
+            className="mr-1 flex size-4 items-center justify-center"
             transition={{ duration: 0.2, ease: "easeInOut" }}
           >
             {hasChildren && (
-              <ChevronRight className="h-3 w-3 text-muted-foreground" />
+              <ChevronRight className="size-3 text-muted-foreground" />
             )}
           </motion.div>
 
           {}
           {showIcons && (
             <motion.div
-              className="mr-2 flex h-4 w-4 items-center justify-center text-muted-foreground"
+              className="mr-2 flex size-4 items-center justify-center text-muted-foreground"
               transition={{ duration: 0.15 }}
               whileHover={{ scale: 1.1 }}
             >

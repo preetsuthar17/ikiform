@@ -104,7 +104,7 @@ export function RadioFieldClient({
         <div className="flex flex-col gap-3">
           {Array.from({ length: 3 }).map((_, index) => (
             <div className="flex items-center gap-3" key={index}>
-              <div className="h-4 w-4 animate-pulse rounded-full bg-accent" />
+              <div className="size-4 animate-pulse rounded-full bg-accent" />
               <div className="h-4 w-20 animate-pulse rounded bg-accent" />
             </div>
           ))}
@@ -155,7 +155,7 @@ export function RadioFieldClient({
             >
               <input
                 checked={isSelected}
-                className="h-4 w-4 border-border text-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                className="size-4 border-border text-primary focus:ring-2 focus:ring-primary focus:ring-offset-2"
                 disabled={disabled}
                 name={field.id}
                 onChange={() => handleChange(optionValue)}

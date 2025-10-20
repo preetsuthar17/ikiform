@@ -142,7 +142,7 @@ export function LayoutCustomizationSection({
     <div className="flex flex-col gap-6">
       <div>
         <div className="mb-2 flex items-center gap-2">
-          <Monitor className="h-4 w-4 text-primary" />
+          <Monitor className="size-4 text-primary" />
           <h2 className="font-semibold text-lg">Layout Settings</h2>
         </div>
         <p className="text-muted-foreground text-xs">
@@ -174,7 +174,7 @@ export function LayoutCustomizationSection({
         {/* Form Width */}
         <div className="flex flex-col gap-4">
           <Label className="flex items-center gap-2 font-medium">
-            <Ruler className="h-4 w-4" />
+            <Ruler className="size-4" />
             Form Width
           </Label>
           <div className="px-2">

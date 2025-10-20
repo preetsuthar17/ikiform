@@ -188,19 +188,19 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
               >
                 {form.is_published ? (
                   <>
-                    <Globe className="h-3 w-3" />
+                    <Globe className="size-3" />
                     Published
                   </>
                 ) : (
                   <>
-                    <Eye className="h-3 w-3" />
+                    <Eye className="size-3" />
                     Draft
                   </>
                 )}
               </Badge>
             </div>
             <p className="flex items-center gap-2 text-muted-foreground">
-              <BarChart3 className="h-4 w-4" />
+              <BarChart3 className="size-4" />
               Form Analytics & Submission Data
             </p>
           </div>
@@ -213,7 +213,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                     size="icon"
                     variant="secondary"
                   >
-                    <Edit className="h-4 w-4" />
+                    <Edit className="size-4" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent size="sm">Edit form</TooltipContent>
@@ -228,7 +228,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                     size="icon"
                     variant="secondary"
                   >
-                    <Share className="h-4 w-4" />
+                    <Share className="size-4" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent size="sm">Share form</TooltipContent>
@@ -239,12 +239,12 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
-                    className="h-9 w-9 p-0"
+                    className="size-9 p-0"
                     onClick={() => setIsDeleteModalOpen(true)}
                     size="icon"
                     variant="destructive"
                   >
-                    <Trash2 className="h-4 w-4" />
+                    <Trash2 className="size-4" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent size="sm">Delete form</TooltipContent>
@@ -258,7 +258,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
               onClick={() => setChatOpen(true)}
               variant="default"
             >
-              <Sparkles className="h-4 w-4" />
+              <Sparkles className="size-4" />
               Kiko AI
             </Button>
           </div>

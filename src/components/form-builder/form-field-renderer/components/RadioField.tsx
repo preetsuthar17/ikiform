@@ -115,7 +115,7 @@ export function RadioField(props: BaseFieldProps) {
                     className="-translate-y-1/2 absolute top-1/2 right-2 transform"
                     title="Correct Answer"
                   >
-                    <CheckCircle className="h-4 w-4 text-green-600" />
+                    <CheckCircle className="size-4 text-green-600" />
                   </div>
                 )}
               </div>

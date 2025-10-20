@@ -10,7 +10,6 @@ import { BlockManager } from "../../block-manager";
 import { FieldPalette } from "../../field-palette";
 import { FieldSettingsPanel } from "../../field-settings-panel";
 import { FormPreview } from "../../form-preview";
-// Logic builder removed
 
 import { PANEL_SIZES } from "../constants";
 
@@ -34,7 +33,6 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
   onBlockDelete,
   onFormSettingsUpdate,
   onStepSelect,
-  onLogicChange,
 }) => {
   // Logic builder and tabs removed
   const allFields = getAllFields(formSchema);
@@ -56,12 +54,25 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
     }
   };
   return (
-    <ResizablePanelGroup className="h-full" direction="horizontal">
+    <ResizablePanelGroup
+      className="h-full"
+      direction="horizontal"
+      style={{
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent",
+        overscrollBehavior: "contain",
+      }}
+    >
       {}
       <ResizablePanel
         defaultSize={PANEL_SIZES.LEFT_PANEL.default}
         maxSize={PANEL_SIZES.LEFT_PANEL.max}
         minSize={PANEL_SIZES.LEFT_PANEL.min}
+        style={{
+          touchAction: "manipulation",
+          WebkitTapHighlightColor: "transparent",
+          overscrollBehavior: "contain",
+        }}
       >
         {formSchema.settings.multiStep ? (
           <BlockManager
@@ -91,8 +102,20 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
         defaultSize={PANEL_SIZES.PREVIEW_PANEL.default}
         maxSize={PANEL_SIZES.PREVIEW_PANEL.max}
         minSize={PANEL_SIZES.PREVIEW_PANEL.min}
+        style={{
+          touchAction: "manipulation",
+          WebkitTapHighlightColor: "transparent",
+          overscrollBehavior: "contain",
+        }}
       >
-        <ScrollArea className="h-full bg-background">
+        <ScrollArea
+          className="h-full bg-background"
+          style={{
+            touchAction: "manipulation",
+            WebkitTapHighlightColor: "transparent",
+            overscrollBehavior: "contain",
+          }}
+        >
           <FormPreview
             onAddField={onFieldAdd}
             onBlockUpdate={onBlockUpdate}
@@ -115,8 +138,20 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
         defaultSize={PANEL_SIZES.RIGHT_PANEL.default}
         maxSize={PANEL_SIZES.RIGHT_PANEL.max}
         minSize={PANEL_SIZES.RIGHT_PANEL.min}
+        style={{
+          touchAction: "manipulation",
+          WebkitTapHighlightColor: "transparent",
+          overscrollBehavior: "contain",
+        }}
       >
-        <div className="flex h-full flex-col">
+        <div
+          className="flex h-full flex-col"
+          style={{
+            touchAction: "manipulation",
+            WebkitTapHighlightColor: "transparent",
+            overscrollBehavior: "contain",
+          }}
+        >
           <FieldSettingsPanel
             field={selectedField}
             onClose={() => onFieldSelect(null)}

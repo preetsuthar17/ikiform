@@ -24,7 +24,7 @@ export const WizardActions: React.FC<WizardActionsProps> = ({
       onClick={onContinue}
     >
       Continue
-      <ArrowRight className="h-4 w-4" />
+      <ArrowRight className="size-4" />
     </Button>
   </div>
 );

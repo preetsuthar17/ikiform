@@ -99,7 +99,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
                     size="icon"
                     variant="outline"
                   >
-                    <MoreHorizontal className="h-3 w-3" />
+                    <MoreHorizontal className="size-3" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="shadow-xs">
@@ -214,7 +214,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               </Tooltip>
 
               <Button disabled={saving} loading={saving} onClick={onSave}>
-                {!saving && <Save className="h-3 w-3" />}
+                {!saving && <Save className="size-3" />}
                 {saving ? "Saving" : "Save Form"}
               </Button>
             </div>
@@ -354,7 +354,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
 
           <Button disabled={saving} loading={saving} onClick={onSave}>
             {!saving && <Save className="size-4" />}
-            {saving ? "Saving.." : "Save Form"}
+            Save
           </Button>
         </nav>
       </div>

@@ -100,7 +100,7 @@ export function ChatInput({
           title="Send message"
           type="submit"
         >
-          {!isLoading && <Send className="h-5 w-5" />}
+          {!isLoading && <Send className="size-5" />}
         </Button>
         {/** Desktop/tablet */}
         <Button
@@ -114,7 +114,7 @@ export function ChatInput({
           title="Send message"
           type="submit"
         >
-          {!isLoading && <Send className="h-4 w-4" />}
+          {!isLoading && <Send className="size-4" />}
         </Button>
       </form>
       <div

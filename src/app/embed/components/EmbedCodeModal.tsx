@@ -377,12 +377,12 @@ export default function EmbedCodeModal({
               >
                 {copied ? (
                   <>
-                    <Check className="h-4 w-4" />
+                    <Check className="size-4" />
                     Copied!
                   </>
                 ) : (
                   <>
-                    <Copy className="h-4 w-4" />
+                    <Copy className="size-4" />
                     Copy
                   </>
                 )}

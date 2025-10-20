@@ -18,8 +18,8 @@ export function QuizAnalyticsCard({ quizAnalytics }: QuizAnalyticsCardProps) {
       {/* Quiz Overview Stats */}
       <Card className="p-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100">
-            <Trophy className="h-5 w-5 text-blue-600" />
+          <div className="flex size-10 items-center justify-center rounded-lg bg-blue-100">
+            <Trophy className="size-5 text-blue-600" />
           </div>
           <div>
             <p className="text-muted-foreground text-sm">Quiz Submissions</p>
@@ -32,8 +32,8 @@ export function QuizAnalyticsCard({ quizAnalytics }: QuizAnalyticsCardProps) {
 
       <Card className="p-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-100">
-            <Target className="h-5 w-5 text-green-600" />
+          <div className="flex size-10 items-center justify-center rounded-lg bg-green-100">
+            <Target className="size-5 text-green-600" />
           </div>
           <div>
             <p className="text-muted-foreground text-sm">Average Score</p>
@@ -46,8 +46,8 @@ export function QuizAnalyticsCard({ quizAnalytics }: QuizAnalyticsCardProps) {
 
       <Card className="p-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-100">
-            <CheckCircle className="h-5 w-5 text-purple-600" />
+          <div className="flex size-10 items-center justify-center rounded-lg bg-purple-100">
+            <CheckCircle className="size-5 text-purple-600" />
           </div>
           <div>
             <p className="text-muted-foreground text-sm">Pass Rate</p>
@@ -62,7 +62,7 @@ export function QuizAnalyticsCard({ quizAnalytics }: QuizAnalyticsCardProps) {
       {quizAnalytics.topPerformers.length > 0 && (
         <Card className="p-4 md:col-span-2 lg:col-span-3">
           <div className="mb-4 flex items-center gap-2">
-            <Award className="h-5 w-5 text-yellow-600" />
+            <Award className="size-5 text-yellow-600" />
             <h3 className="font-semibold">Top Performers</h3>
           </div>
           <div className="flex flex-col gap-3">
@@ -97,7 +97,7 @@ export function QuizAnalyticsCard({ quizAnalytics }: QuizAnalyticsCardProps) {
       {quizAnalytics.questionAnalytics.length > 0 && (
         <Card className="p-4 md:col-span-2 lg:col-span-3">
           <div className="mb-4 flex items-center gap-2">
-            <TrendingUp className="h-5 w-5 text-blue-600" />
+            <TrendingUp className="size-5 text-blue-600" />
             <h3 className="font-semibold">Question Performance</h3>
           </div>
           <div className="flex flex-col gap-4">

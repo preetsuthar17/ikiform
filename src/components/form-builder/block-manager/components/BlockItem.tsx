@@ -53,7 +53,7 @@ export function BlockItem({
               {...provided.dragHandleProps}
               className="cursor-grab text-muted-foreground hover:text-foreground"
             >
-              <GripVertical className="h-4 w-4" />
+              <GripVertical className="size-4" />
             </div>
 
             {isEditing ? (

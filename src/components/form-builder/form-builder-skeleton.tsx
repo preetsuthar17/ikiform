@@ -18,7 +18,7 @@ export function FormBuilderSkeleton() {
                     className="flex flex-col items-center gap-2 rounded-lg border bg-background p-3 transition-colors hover:bg-muted/50"
                     key={i}
                   >
-                    <Skeleton className="h-5 w-5" />
+                    <Skeleton className="size-5" />
                     <Skeleton className="h-3 w-12" />
                   </div>
                 ))}
@@ -42,7 +42,7 @@ export function FormBuilderSkeleton() {
                     <div className="flex flex-col gap-3" key={i}>
                       <div className="flex items-center gap-2">
                         <Skeleton className="h-4 w-24" />
-                        <Skeleton className="h-3 w-3 rounded-full" />
+                        <Skeleton className="size-3 rounded-full" />
                       </div>
                       {i % 3 === 0 ? (
                         <Skeleton className="h-10 w-full" />
@@ -90,7 +90,7 @@ export function FormBuilderSkeleton() {
                       <Skeleton className="h-20 w-full" />
                     ) : i % 4 === 2 ? (
                       <div className="flex items-center gap-2">
-                        <Skeleton className="h-4 w-4" />
+                        <Skeleton className="size-4" />
                         <Skeleton className="h-4 w-16" />
                       </div>
                     ) : (
@@ -106,7 +106,7 @@ export function FormBuilderSkeleton() {
 
       <div className="absolute bottom-4 left-4">
         <div className="flex items-center gap-2 rounded-lg bg-background/95 px-3 py-2 backdrop-blur-sm">
-          <Skeleton className="h-2 w-2 rounded-full" />
+          <Skeleton className="size-2 rounded-full" />
           <Skeleton className="h-3 w-16" />
         </div>
       </div>

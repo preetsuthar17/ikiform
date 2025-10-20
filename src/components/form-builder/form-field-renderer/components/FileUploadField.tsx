@@ -204,12 +204,12 @@ export function FileUploadField(props: BaseFieldProps) {
                     {isImage ? (
                       <img
                         alt={file.name}
-                        className="h-10 w-10 rounded-md border border-border object-cover"
+                        className="size-10 rounded-md border border-border object-cover"
                         src={file.signedUrl}
                       />
                     ) : (
-                      <div className="flex h-10 w-10 items-center justify-center rounded-md bg-accent">
-                        <IconComponent className="h-5 w-5 text-muted-foreground" />
+                      <div className="flex size-10 items-center justify-center rounded-md bg-accent">
+                        <IconComponent className="size-5 text-muted-foreground" />
                       </div>
                     )}
                   </div>

@@ -295,7 +295,7 @@ export function GoogleFontPicker({
             variant="outline"
           >
             <div className="flex items-center gap-2">
-              <Type className="h-4 w-4 text-muted-foreground" />
+              <Type className="size-4 text-muted-foreground" />
               {value ? (
                 <div className="flex items-center gap-2">
                   <span
@@ -317,7 +317,7 @@ export function GoogleFontPicker({
                 placeholder
               )}
             </div>
-            <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            <ChevronDown className="ml-2 size-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
 
@@ -326,7 +326,7 @@ export function GoogleFontPicker({
             {/* Search */}
             <div className="flex items-center">
               <Input
-                leftIcon={<Search className="h-4 w-4 shrink-0 opacity-50" />}
+                leftIcon={<Search className="size-4 shrink-0 opacity-50" />}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search fonts..."
                 value={search}
@@ -362,7 +362,7 @@ export function GoogleFontPicker({
 
             {error && (
               <div className="py-8 text-center">
-                <Type className="mx-auto mb-2 h-8 w-8 text-muted-foreground" />
+                <Type className="mx-auto mb-2 size-8 text-muted-foreground" />
                 <p className="text-muted-foreground">{error}</p>
                 <p className="text-muted-foreground text-xs">
                   Using fallback fonts.
@@ -374,7 +374,7 @@ export function GoogleFontPicker({
               <ScrollArea className="h-[350px]">
                 {filteredFonts.length === 0 ? (
                   <div className="py-8 text-center">
-                    <Type className="mx-auto mb-2 h-8 w-8 text-muted-foreground" />
+                    <Type className="mx-auto mb-2 size-8 text-muted-foreground" />
                     <p className="text-muted-foreground">No fonts found.</p>
                     <p className="text-muted-foreground text-xs">
                       Try a different search term or category.
@@ -416,7 +416,7 @@ export function GoogleFontPicker({
                         </div>
                         <Check
                           className={cn(
-                            "h-4 w-4 shrink-0 transition-opacity",
+                            "size-4 shrink-0 transition-opacity",
                             value === font.family ? "opacity-100" : "opacity-0"
                           )}
                         />

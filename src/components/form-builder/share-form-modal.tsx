@@ -183,7 +183,7 @@ export function ShareFormModal({
                 <div className="flex items-center gap-2">
                   <Globe
                     aria-hidden="true"
-                    className="h-4 w-4 text-muted-foreground"
+                    className="size-4 text-muted-foreground"
                   />
                   <span className="font-medium text-sm">Share Link</span>
                 </div>
@@ -201,12 +201,12 @@ export function ShareFormModal({
                   >
                     {copying ? (
                       <>
-                        <Check className="h-4 w-4" />
+                        <Check className="size-4" />
                         <span className="sr-only">Copied</span>
                       </>
                     ) : (
                       <>
-                        <Copy className="h-4 w-4" />
+                        <Copy className="size-4" />
                         <span className="sr-only">Copy link</span>
                       </>
                     )}
@@ -221,7 +221,7 @@ export function ShareFormModal({
                     <div className="flex items-center gap-2">
                       <QrCode
                         aria-hidden="true"
-                        className="h-4 w-4 text-muted-foreground"
+                        className="size-4 text-muted-foreground"
                       />
                       <span className="font-medium text-sm">
                         {showQr ? "Hide" : "Show"} QR Code
@@ -237,20 +237,20 @@ export function ShareFormModal({
                         {qrCodeDataUrl && !generatingQr ? (
                           <img
                             alt="QR Code for form"
-                            className="h-24 w-24"
+                            className="size-24"
                             src={qrCodeDataUrl}
                           />
                         ) : (
-                          <div className="flex h-24 w-24 items-center justify-center">
+                          <div className="flex size-24 items-center justify-center">
                             {generatingQr ? (
                               <div className="flex flex-col items-center gap-2">
-                                <div className="h-5 w-5 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                                <div className="size-5 animate-spin rounded-full border-2 border-primary border-t-transparent" />
                                 <span className="text-muted-foreground text-xs">
                                   Generating...
                                 </span>
                               </div>
                             ) : (
-                              <QrCode className="h-6 w-6 text-muted-foreground" />
+                              <QrCode className="size-6 text-muted-foreground" />
                             )}
                           </div>
                         )}
@@ -268,7 +268,7 @@ export function ShareFormModal({
                           size="sm"
                           variant="outline"
                         >
-                          <Download className="h-4 w-4" />
+                          <Download className="size-4" />
                           {downloading ? "Downloading..." : "Download QR"}
                         </Button>
                       </div>
@@ -282,7 +282,7 @@ export function ShareFormModal({
               <div className="rounded-lg bg-muted/50 p-6">
                 <Globe
                   aria-hidden="true"
-                  className="mx-auto mb-3 h-12 w-12 text-muted-foreground"
+                  className="mx-auto mb-3 size-12 text-muted-foreground"
                 />
                 <p className="text-muted-foreground text-sm">
                   Your form needs to be published before it can be shared

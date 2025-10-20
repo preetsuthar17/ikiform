@@ -24,7 +24,7 @@ function FormAnalyticsSkeleton() {
         {Array.from({ length: 4 }).map((_, i) => (
           <div className="rounded-2xl border bg-card p-6" key={i}>
             <div className="flex items-center gap-4">
-              <Skeleton className="h-12 w-12" variant="circle" />
+              <Skeleton className="size-12" variant="circle" />
               <div className="flex flex-col gap-2">
                 <Skeleton className="h-4 w-20" />
                 <Skeleton className="h-6 w-12" />

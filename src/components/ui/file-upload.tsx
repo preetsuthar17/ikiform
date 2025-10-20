@@ -310,7 +310,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
             >
               <UploadCloud
                 className={cn(
-                  "h-12 w-12 transition-colors",
+                  "size-12 transition-colors",
                   isDragging
                     ? "text-primary"
                     : "text-muted-foreground group-hover:text-foreground"
@@ -401,17 +401,17 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                             {showPreview && file.preview ? (
                               <img
                                 alt={file.name}
-                                className="h-10 w-10 rounded-xl border border-border object-cover"
+                                className="size-10 rounded-xl border border-border object-cover"
                                 src={file.preview}
                               />
                             ) : (
-                              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent">
-                                <IconComponent className="h-5 w-5 text-muted-foreground" />
+                              <div className="flex size-10 items-center justify-center rounded-xl bg-accent">
+                                <IconComponent className="size-5 text-muted-foreground" />
                               </div>
                             )}
                             {file.status === "completed" && (
                               <div className="-top-1 -right-1 absolute">
-                                <CheckCircle className="h-4 w-4 rounded-2xl bg-background text-primary" />
+                                <CheckCircle className="size-4 rounded-2xl bg-background text-primary" />
                               </div>
                             )}
                           </div>
@@ -427,7 +427,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                                 className="flex-shrink-0 rounded-xl p-1 transition-colors hover:bg-accent"
                                 onClick={() => removeFile(file.id)}
                               >
-                                <X className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                                <X className="size-4 text-muted-foreground hover:text-destructive" />
                               </button>
                             </div>
 
@@ -441,7 +441,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                                     <span className="text-muted-foreground text-xs">
                                       {Math.round(file.progress)}%
                                     </span>
-                                    <Loader className="h-3 w-3 animate-spin text-primary" />
+                                    <Loader className="size-3 animate-spin text-primary" />
                                   </>
                                 )}
                                 {file.status === "completed" && (

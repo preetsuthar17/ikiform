@@ -120,7 +120,7 @@ export function EnhancedColorPicker({
               }}
               variant="outline"
             >
-              <Palette className="h-4 w-4" />
+              <Palette className="size-4" />
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-80">
@@ -148,7 +148,7 @@ export function EnhancedColorPicker({
                       size="sm"
                       variant="outline"
                     >
-                      <Pipette className="h-4 w-4" />
+                      <Pipette className="size-4" />
                     </Button>
                   )}
                 </div>

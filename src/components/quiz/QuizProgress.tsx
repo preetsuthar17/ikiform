@@ -43,14 +43,14 @@ export function QuizProgress({
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <HelpCircle className="h-4 w-4 text-primary" />
+            <HelpCircle className="size-4 text-primary" />
             <span className="font-medium text-sm">Quiz Progress</span>
           </div>
           {timeRemaining !== undefined && (
             <div
               className={`flex items-center gap-1 text-sm ${getTimeColor()}`}
             >
-              <Clock className="h-3 w-3" />
+              <Clock className="size-3" />
               <span>{formatTime(timeRemaining)}</span>
             </div>
           )}
@@ -74,13 +74,13 @@ export function QuizProgress({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">
-              <CheckCircle2 className="h-4 w-4 text-green-500" />
+              <CheckCircle2 className="size-4 text-green-500" />
               <span className="text-muted-foreground text-sm">
                 {answeredQuestions} answered
               </span>
             </div>
             <div className="flex items-center gap-1">
-              <HelpCircle className="h-4 w-4 text-gray-400" />
+              <HelpCircle className="size-4 text-gray-400" />
               <span className="text-muted-foreground text-sm">
                 {totalQuestions - answeredQuestions} remaining
               </span>

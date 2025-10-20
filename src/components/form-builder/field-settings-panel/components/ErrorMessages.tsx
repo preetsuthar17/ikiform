@@ -33,7 +33,6 @@ export function ErrorMessages({
               Required Field Message
             </Label>
             <Input
-              className="border-border bg-input"
               id="required-message"
               onChange={(e) =>
                 onUpdateValidation({
@@ -57,7 +56,6 @@ export function ErrorMessages({
                   Min Length Error Message
                 </Label>
                 <Input
-                  className="border-border bg-input"
                   id="min-length-message"
                   onChange={(e) =>
                     onUpdateValidation({
@@ -79,7 +77,6 @@ export function ErrorMessages({
                   Max Length Error Message
                 </Label>
                 <Input
-                  className="border-border bg-input"
                   id="max-length-message"
                   onChange={(e) =>
                     onUpdateValidation({
@@ -101,7 +98,6 @@ export function ErrorMessages({
                   Pattern Error Message
                 </Label>
                 <Input
-                  className="border-border bg-input"
                   id="pattern-message"
                   onChange={(e) =>
                     onUpdateValidation({
@@ -120,7 +116,6 @@ export function ErrorMessages({
                   Email Error Message
                 </Label>
                 <Input
-                  className="border-border bg-input"
                   id="email-message"
                   onChange={(e) =>
                     onUpdateValidation({
@@ -146,7 +141,6 @@ export function ErrorMessages({
                   Min Value Error Message
                 </Label>
                 <Input
-                  className="border-border bg-input"
                   id="min-value-message"
                   onChange={(e) =>
                     onUpdateValidation({
@@ -168,7 +162,6 @@ export function ErrorMessages({
                   Max Value Error Message
                 </Label>
                 <Input
-                  className="border-border bg-input"
                   id="max-value-message"
                   onChange={(e) =>
                     onUpdateValidation({
@@ -186,7 +179,6 @@ export function ErrorMessages({
                 Invalid Number Message
               </Label>
               <Input
-                className="border-border bg-input"
                 id="number-message"
                 onChange={(e) =>
                   onUpdateValidation({

@@ -117,15 +117,12 @@ export function FormCard({
                     <DropdownMenuTrigger asChild>
                       <Button
                         aria-label="Form actions"
-                        className="h-8 w-8 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80 focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                        className="size-8 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80 focus:ring-2 focus:ring-ring focus:ring-offset-2"
                         onClick={handleButtonClick}
                         size="sm"
                         variant="outline"
                       >
-                        <MoreHorizontal
-                          aria-hidden="true"
-                          className="h-4 w-4"
-                        />
+                        <MoreHorizontal aria-hidden="true" className="size-4" />
                       </Button>
                     </DropdownMenuTrigger>
                   </TooltipTrigger>

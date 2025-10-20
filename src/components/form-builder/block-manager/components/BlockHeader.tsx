@@ -40,33 +40,33 @@ export function BlockHeader({
 
         <div className="flex items-center gap-1">
           <Button
-            className="h-8 w-8 p-0"
+            className="size-8 p-0"
             onClick={() => onStartEditing(block)}
             size="icon"
             variant="ghost"
           >
-            <Edit3 className="h-4 w-4" />
+            <Edit3 className="size-4" />
           </Button>
           {canDelete && (
             <Button
-              className="h-8 w-8 p-0 text-destructive hover:text-destructive"
+              className="size-8 p-0 text-destructive hover:text-destructive"
               onClick={() => onBlockDelete(block.id)}
               size="icon"
               variant="ghost"
             >
-              <Trash2 className="h-4 w-4" />
+              <Trash2 className="size-4" />
             </Button>
           )}
           <Button
-            className="h-8 w-8 p-0"
+            className="size-8 p-0"
             onClick={() => onToggleExpansion(block.id)}
             size="icon"
             variant="ghost"
           >
             {isExpanded ? (
-              <ChevronDown className="h-4 w-4" />
+              <ChevronDown className="size-4" />
             ) : (
-              <ChevronRight className="h-4 w-4" />
+              <ChevronRight className="size-4" />
             )}
           </Button>
         </div>

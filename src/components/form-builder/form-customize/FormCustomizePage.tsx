@@ -100,7 +100,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
                 size="sm"
                 variant="outline"
               >
-                <ArrowLeft className="h-4 w-4" />
+                <ArrowLeft className="size-4" />
                 Back to Customize
               </Button>
               <div>
@@ -151,7 +151,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
               size="sm"
               variant="outline"
             >
-              <ArrowLeft className="h-4 w-4" />
+              <ArrowLeft className="size-4" />
               Back
             </Button>
             <Button onClick={resetSettings} variant="outline">
@@ -172,22 +172,22 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
                   {
                     id: "presets",
                     label: "Presets",
-                    icon: <Palette className="h-4 w-4" />,
+                    icon: <Palette className="size-4" />,
                   },
                   {
                     id: "layout",
                     label: "Layout",
-                    icon: <Layout className="h-4 w-4" />,
+                    icon: <Layout className="size-4" />,
                   },
                   {
                     id: "colors",
                     label: "Colors",
-                    icon: <Palette className="h-4 w-4" />,
+                    icon: <Palette className="size-4" />,
                   },
                   {
                     id: "typography",
                     label: "Typography",
-                    icon: <Type className="h-4 w-4" />,
+                    icon: <Type className="size-4" />,
                   },
                 ]}
                 onValueChange={(value) =>

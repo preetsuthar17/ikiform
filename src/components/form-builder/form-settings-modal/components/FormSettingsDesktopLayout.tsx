@@ -41,7 +41,7 @@ export function FormSettingsDesktopLayout({
               <button
                 aria-current={isActive ? "page" : undefined}
                 aria-label={`Go to ${section.label} settings`}
-                className={`w-full rounded-md px-3 py-3 text-left text-sm opacity-60 transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1 ${
+                className={`w-full rounded-md px-3 py-3 text-left text-sm opacity-60 transition-colors ${
                   isActive
                     ? "font-medium opacity-100"
                     : "hover:bg-accent hover:text-accent-foreground"
@@ -67,7 +67,6 @@ export function FormSettingsDesktopLayout({
                   }
                 }}
                 role="menuitem"
-                style={{ minHeight: "44px" }}
                 tabIndex={0}
               >
                 {section.label}

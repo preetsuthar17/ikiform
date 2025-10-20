@@ -119,7 +119,7 @@ const AiFormBuilderPreview = () => {
                   : "brightness(0.95) grayscale(30%)",
             }}
             aria-hidden="true"
-            className="inline-block h-3 w-3 rounded-full bg-primary"
+            className="inline-block size-3 rounded-full bg-primary"
             transition={{
               duration: 1,
               ease: "easeOut",
@@ -403,7 +403,7 @@ const LogicBuilderPreview = () => {
           </span>
         ),
         icon: (
-          <div className="flex h-10 w-10 items-center justify-center rounded-full border-4 border-primary/20 bg-primary/90 shadow">
+          <div className="flex size-10 items-center justify-center rounded-full border-4 border-primary/20 bg-primary/90 shadow">
             <span className="font-bold text-white text-xs">IF</span>
           </div>
         ),
@@ -418,8 +418,8 @@ const LogicBuilderPreview = () => {
           </span>
         ),
         icon: (
-          <div className="flex h-10 w-10 items-center justify-center rounded-full border-4 border-blue-400/20 bg-blue-400/90 shadow">
-            <Mail aria-hidden="true" className="h-5 w-5 text-white" />
+          <div className="flex size-10 items-center justify-center rounded-full border-4 border-blue-400/20 bg-blue-400/90 shadow">
+            <Mail aria-hidden="true" className="size-5 text-white" />
           </div>
         ),
       },
@@ -433,8 +433,8 @@ const LogicBuilderPreview = () => {
           </span>
         ),
         icon: (
-          <div className="flex h-10 w-10 items-center justify-center rounded-full border-4 border-muted/30 bg-muted-foreground/80 shadow">
-            <Zap aria-hidden="true" className="h-5 w-5 text-white" />
+          <div className="flex size-10 items-center justify-center rounded-full border-4 border-muted/30 bg-muted-foreground/80 shadow">
+            <Zap aria-hidden="true" className="size-5 text-white" />
           </div>
         ),
       },
@@ -543,7 +543,7 @@ const ApiIntegrationPreview = () => {
         icon: (
           <span
             aria-hidden
-            className="mr-2 inline-flex h-4 w-4 items-center justify-center rounded bg-primary/15 text-primary"
+            className="mr-2 inline-flex size-4 items-center justify-center rounded bg-primary/15 text-primary"
           >
             <svg fill="none" height={13} viewBox="0 0 14 14" width={13}>
               <circle
@@ -570,7 +570,7 @@ const ApiIntegrationPreview = () => {
         icon: (
           <span
             aria-hidden
-            className="mr-2 inline-flex h-4 w-4 items-center justify-center rounded bg-primary/15 text-primary"
+            className="mr-2 inline-flex size-4 items-center justify-center rounded bg-primary/15 text-primary"
           >
             <Mail size={13} strokeWidth={1.5} />
           </span>
@@ -583,7 +583,7 @@ const ApiIntegrationPreview = () => {
         icon: (
           <span
             aria-hidden
-            className="mr-2 inline-flex h-4 w-4 items-center justify-center rounded bg-primary/15 text-primary"
+            className="mr-2 inline-flex size-4 items-center justify-center rounded bg-primary/15 text-primary"
           >
             <Zap size={13} strokeWidth={1.5} />
           </span>
@@ -661,7 +661,7 @@ const ApiIntegrationPreview = () => {
             id="api-integration-result-desc"
           >
             <div className="h-4 w-1/2 rounded bg-muted" />
-            <div className="h-4 w-4/5 rounded bg-muted" />
+            <div className="size-4/5 rounded bg-muted" />
             <div className="h-4 w-1/3 rounded bg-muted" />
           </div>
         ) : (
@@ -787,7 +787,7 @@ const DigitalSignaturesPreview = () => {
               scale: step === "done" ? 1 : 0.7,
             }}
             aria-hidden="true"
-            className="absolute top-0 right-4 h-6 w-6"
+            className="absolute top-0 right-4 size-6"
             initial={false}
             style={{
               pointerEvents: "none",
@@ -985,8 +985,8 @@ const EmailNotificationsPreview = () => {
               }}
             >
               <div>
-                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary/5 text-primary">
-                  <Mail aria-hidden="true" className="h-4 w-4" />
+                <span className="inline-flex size-7 items-center justify-center rounded-full bg-primary/5 text-primary">
+                  <Mail aria-hidden="true" className="size-4" />
                 </span>
               </div>
               <div className="min-w-0 flex-1">

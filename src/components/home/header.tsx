@@ -153,7 +153,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
           }}
         >
           <span className="text-destructive">Log out</span>
-          <LogOut className="ml-auto h-4 w-4 text-destructive" />
+          <LogOut className="ml-auto size-4 text-destructive" />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -216,7 +216,7 @@ const DrawerLinks = React.memo(function DrawerLinks({
           key={href}
         >
           <span>{label}</span>
-          <ChevronRight className="h-4 w-4 opacity-70" />
+          <ChevronRight className="size-4 opacity-70" />
         </Link>
       ))}
     </section>
@@ -292,7 +292,7 @@ const MobileDrawer = React.memo(function MobileDrawer({
         <DrawerTrigger asChild>
           <Button aria-label="Open menu" size="icon" variant="ghost">
             <span className="sr-only">Open menu</span>
-            <AlignJustify className="h-6 w-6" />
+            <AlignJustify className="size-6" />
           </Button>
         </DrawerTrigger>
         <DrawerContent className="flex flex-col gap-6 p-6 pt-10">

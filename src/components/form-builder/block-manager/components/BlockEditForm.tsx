@@ -30,10 +30,10 @@ export function BlockEditForm({
       />
       <div className="flex items-center gap-2">
         <Button onClick={onSave} size="icon">
-          <Check className="h-4 w-4" />
+          <Check className="size-4" />
         </Button>
         <Button onClick={onCancel} size="icon" variant="secondary">
-          <X className="h-4 w-4" />
+          <X className="size-4" />
         </Button>
       </div>
     </div>

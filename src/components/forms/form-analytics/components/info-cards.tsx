@@ -15,7 +15,7 @@ export const InfoCards: React.FC<InfoCardsProps> = ({
     <Card className="flex flex-col gap-4 border-border bg-card p-6">
       <div className="flex items-center gap-3">
         <div className="rounded-2xl bg-primary/10 p-2">
-          <Calendar className="h-5 w-5 text-primary" />
+          <Calendar className="size-5 text-primary" />
         </div>
         <h3 className="font-semibold text-foreground text-lg">
           Last Submission
@@ -39,7 +39,7 @@ export const InfoCards: React.FC<InfoCardsProps> = ({
     <Card className="flex flex-col gap-4 border-border bg-card p-6">
       <div className="flex items-center gap-3">
         <div className="rounded-2xl bg-primary/10 p-2">
-          <BarChart3 className="h-5 w-5 text-primary" />
+          <BarChart3 className="size-5 text-primary" />
         </div>
         <h3 className="font-semibold text-foreground text-lg">Form Status</h3>
       </div>
@@ -68,7 +68,7 @@ export const InfoCards: React.FC<InfoCardsProps> = ({
     <Card className="flex flex-col gap-4 border-border bg-card p-6">
       <div className="flex items-center gap-3">
         <div className="rounded-2xl bg-primary/10 p-2">
-          <TrendingUp className="h-5 w-5 text-primary" />
+          <TrendingUp className="size-5 text-primary" />
         </div>
         <h3 className="font-semibold text-foreground text-lg">Quick Stats</h3>
       </div>

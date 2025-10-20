@@ -1,4 +1,4 @@
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -32,51 +32,89 @@ export function StatementFieldSettings({
   };
 
   return (
-    <Card className="flex flex-col gap-4 rounded-2xl bg-background p-4">
-      <h3 className="font-medium text-card-foreground">
-        Statement Field Settings
-      </h3>
-      <div className="flex flex-col gap-4">
+    <Card
+      className="gap-2 p-4 shadow-none"
+      style={{
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent",
+      }}
+    >
+      <CardHeader className="p-0">
+        <CardTitle className="text-lg">Statement Field Settings</CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-4 p-0">
         <div className="flex flex-col gap-2">
-          <Label className="text-card-foreground" htmlFor="statement-heading">
+          <Label className="font-medium text-sm" htmlFor="statement-heading">
             Heading
           </Label>
           <Textarea
-            className="border-border bg-input"
+            aria-describedby="statement-heading-help"
+            className="resize-none"
             id="statement-heading"
-            onChange={(e) => updateStatementHeading(e.target.value)}
+            name="statement-heading"
+            onChange={(e) => updateStatementHeading(e.target.value.trim())}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                e.currentTarget.blur();
+              } else if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+                e.preventDefault();
+                e.currentTarget.blur();
+              }
+            }}
             placeholder="Enter statement heading"
             rows={2}
             value={field.settings?.statementHeading || ""}
           />
+          <p
+            className="text-muted-foreground text-xs"
+            id="statement-heading-help"
+          >
+            Main heading for the statement
+          </p>
         </div>
 
         <div className="flex flex-col gap-2">
           <Label
-            className="text-card-foreground"
+            className="font-medium text-sm"
             htmlFor="statement-description"
           >
             Description
           </Label>
           <Textarea
-            className="border-border bg-input"
+            aria-describedby="statement-description-help"
+            className="resize-none"
             id="statement-description"
-            onChange={(e) => updateStatementDescription(e.target.value)}
+            name="statement-description"
+            onChange={(e) => updateStatementDescription(e.target.value.trim())}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                e.currentTarget.blur();
+              } else if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+                e.preventDefault();
+                e.currentTarget.blur();
+              }
+            }}
             placeholder="Enter statement description"
             rows={3}
             value={field.settings?.statementDescription || ""}
           />
+          <p
+            className="text-muted-foreground text-xs"
+            id="statement-description-help"
+          >
+            Detailed description for the statement
+          </p>
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label className="text-card-foreground" htmlFor="statement-align">
+          <Label className="font-medium text-sm" htmlFor="statement-align">
             Alignment
           </Label>
           <Select
             onValueChange={updateStatementAlign}
             value={field.settings?.statementAlign || "left"}
           >
-            <SelectTrigger className="border-border bg-input">
+            <SelectTrigger className="w-full" id="statement-align">
               <SelectValue placeholder="Select alignment" />
             </SelectTrigger>
             <SelectContent>
@@ -85,17 +123,23 @@ export function StatementFieldSettings({
               <SelectItem value="right">Right</SelectItem>
             </SelectContent>
           </Select>
+          <p
+            className="text-muted-foreground text-xs"
+            id="statement-align-help"
+          >
+            Text alignment for the statement
+          </p>
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label className="text-card-foreground" htmlFor="statement-size">
+          <Label className="font-medium text-sm" htmlFor="statement-size">
             Size
           </Label>
           <Select
             onValueChange={updateStatementSize}
             value={field.settings?.statementSize || "md"}
           >
-            <SelectTrigger className="border-border bg-input">
+            <SelectTrigger className="w-full" id="statement-size">
               <SelectValue placeholder="Select size" />
             </SelectTrigger>
             <SelectContent>
@@ -104,8 +148,11 @@ export function StatementFieldSettings({
               <SelectItem value="lg">Large</SelectItem>
             </SelectContent>
           </Select>
+          <p className="text-muted-foreground text-xs" id="statement-size-help">
+            Font size for the statement
+          </p>
         </div>
-      </div>
+      </CardContent>
     </Card>
   );
 }

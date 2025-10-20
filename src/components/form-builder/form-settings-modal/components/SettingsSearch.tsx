@@ -153,7 +153,7 @@ export function SettingsSearch({
                   <li key={`${r.section}-${r.anchorId}-${idx}`}>
                     <button
                       aria-selected={isActive}
-                      className={`flex w-full items-center justify-between rounded-sm px-2 py-2 text-left text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1 ${isActive ? "bg-accent text-accent-foreground" : "hover:bg-accent hover:text-accent-foreground"}`}
+                      className={`flex w-full items-center justify-between rounded-sm px-2 py-2 text-left text-sm ${isActive ? "bg-accent text-accent-foreground" : "hover:bg-accent hover:text-accent-foreground"}`}
                       onClick={() => handleNavigate(r)}
                       onKeyDown={(e) => {
                         if (e.key === "Enter" || e.key === " ") {
@@ -163,7 +163,6 @@ export function SettingsSearch({
                       }}
                       onMouseEnter={() => setActiveIndex(idx)}
                       role="option"
-                      style={{ minHeight: "44px" }}
                     >
                       <span className="truncate">
                         <span className="text-muted-foreground">

@@ -164,14 +164,14 @@ export function FormsList({
                           <DropdownMenuTrigger asChild>
                             <Button
                               aria-label="Form actions"
-                              className="h-8 w-8 p-0"
+                              className="size-8 p-0"
                               onClick={(e) => e.stopPropagation()}
                               size="sm"
                               variant="outline"
                             >
                               <MoreHorizontal
                                 aria-hidden="true"
-                                className="h-4 w-4"
+                                className="size-4"
                               />
                             </Button>
                           </DropdownMenuTrigger>

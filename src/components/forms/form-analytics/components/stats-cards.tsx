@@ -18,7 +18,7 @@ export const OverviewStats: React.FC<OverviewStatsProps> = ({ data }) => (
   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
     <Card className="flex items-center gap-4 border-border bg-card p-6">
       <div className="rounded-2xl bg-blue-500/10 p-3">
-        <Users className="h-6 w-6 text-blue-600" />
+        <Users className="size-6 text-blue-600" />
       </div>
       <div className="flex flex-col gap-1">
         <p className="font-medium text-muted-foreground text-sm">
@@ -31,7 +31,7 @@ export const OverviewStats: React.FC<OverviewStatsProps> = ({ data }) => (
     </Card>
     <Card className="flex items-center gap-4 border-border bg-card p-6">
       <div className="rounded-2xl bg-emerald-500/10 p-3">
-        <FileText className="h-6 w-6 text-emerald-600" />
+        <FileText className="size-6 text-emerald-600" />
       </div>
       <div className="flex flex-col gap-1">
         <p className="font-medium text-muted-foreground text-sm">Form Fields</p>
@@ -40,7 +40,7 @@ export const OverviewStats: React.FC<OverviewStatsProps> = ({ data }) => (
     </Card>
     <Card className="flex items-center gap-4 border-border bg-card p-6">
       <div className="rounded-2xl bg-purple-500/10 p-3">
-        <TrendingUp className="h-6 w-6 text-purple-600" />
+        <TrendingUp className="size-6 text-purple-600" />
       </div>
       <div className="flex flex-col gap-1">
         <p className="font-medium text-muted-foreground text-sm">
@@ -53,7 +53,7 @@ export const OverviewStats: React.FC<OverviewStatsProps> = ({ data }) => (
     </Card>
     <Card className="flex items-center gap-4 border-border bg-card p-6">
       <div className="rounded-2xl bg-orange-500/10 p-3">
-        <Clock className="h-6 w-6 text-orange-600" />
+        <Clock className="size-6 text-orange-600" />
       </div>
       <div className="flex flex-col gap-1">
         <p className="font-medium text-muted-foreground text-sm">
@@ -71,7 +71,7 @@ export const AnalyticsCards: React.FC<AnalyticsCardsProps> = ({ data }) => (
   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
     <Card className="flex items-center gap-4 border-border bg-card p-6">
       <div className="rounded-2xl bg-green-500/10 p-3">
-        <Activity className="h-6 w-6 text-green-600" />
+        <Activity className="size-6 text-green-600" />
       </div>
       <div className="flex flex-col gap-1">
         <p className="font-medium text-muted-foreground text-sm">
@@ -84,7 +84,7 @@ export const AnalyticsCards: React.FC<AnalyticsCardsProps> = ({ data }) => (
     </Card>
     <Card className="flex items-center gap-4 border-border bg-card p-6">
       <div className="rounded-2xl bg-orange-500/10 p-3">
-        <Target className="h-6 w-6 text-orange-600" />
+        <Target className="size-6 text-orange-600" />
       </div>
       <div className="flex flex-col gap-1">
         <p className="font-medium text-muted-foreground text-sm">Bounce Rate</p>
@@ -93,7 +93,7 @@ export const AnalyticsCards: React.FC<AnalyticsCardsProps> = ({ data }) => (
     </Card>
     <Card className="flex items-center gap-4 border-border bg-card p-6">
       <div className="rounded-2xl bg-blue-500/10 p-3">
-        <Zap className="h-6 w-6 text-blue-600" />
+        <Zap className="size-6 text-blue-600" />
       </div>
       <div className="flex flex-col gap-1">
         <p className="font-medium text-muted-foreground text-sm">Peak Hour</p>
@@ -104,7 +104,7 @@ export const AnalyticsCards: React.FC<AnalyticsCardsProps> = ({ data }) => (
     </Card>
     <Card className="flex items-center gap-4 border-border bg-card p-6">
       <div className="rounded-2xl bg-purple-500/10 p-3">
-        <PieChart className="h-6 w-6 text-purple-600" />
+        <PieChart className="size-6 text-purple-600" />
       </div>
       <div className="flex flex-col gap-1">
         <p className="font-medium text-muted-foreground text-sm">

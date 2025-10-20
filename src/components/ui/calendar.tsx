@@ -35,7 +35,7 @@ const calendarVariants = cva(
 );
 
 const dayVariants = cva(
-  "inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-xl text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 sm:h-9 sm:w-9",
+  "inline-flex size-8 cursor-pointer items-center justify-center rounded-xl text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 sm:h-9 sm:w-9",
   {
     variants: {
       variant: {
@@ -56,9 +56,9 @@ const dayVariants = cva(
           "rounded-none bg-primary/20 text-foreground hover:bg-primary/30 focus-visible:ring-ring",
       },
       size: {
-        sm: "h-6 w-6 text-xs sm:h-7 sm:w-7",
-        default: "h-8 w-8 text-sm sm:h-9 sm:w-9",
-        lg: "h-9 w-9 text-base sm:h-10 sm:w-10",
+        sm: "size-6 text-xs sm:h-7 sm:w-7",
+        default: "size-8 text-sm sm:h-9 sm:w-9",
+        lg: "size-9 text-base sm:h-10 sm:w-10",
       },
     },
     defaultVariants: {
@@ -307,7 +307,7 @@ function Calendar({
           disabled={isAnimating}
           onClick={() => navigateMonth("prev")}
         >
-          <ChevronLeft className="h-4 w-4" />
+          <ChevronLeft className="size-4" />
         </button>
 
         <div className="flex min-w-0 flex-1 items-center justify-center gap-1 sm:gap-2">
@@ -374,7 +374,7 @@ function Calendar({
           disabled={isAnimating}
           onClick={() => navigateMonth("next")}
         >
-          <ChevronRight className="h-4 w-4" />
+          <ChevronRight className="size-4" />
         </button>
       </div>
       {}
