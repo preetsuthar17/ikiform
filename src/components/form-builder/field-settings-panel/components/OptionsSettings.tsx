@@ -23,13 +23,7 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
   } = require("@/components/form-builder/form-field-renderer/utils/sanitizeOptions");
 
   return (
-    <Card
-      className="gap-2 p-4 shadow-none"
-      style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
-      }}
-    >
+    <Card className="gap-2 p-4 shadow-none">
       <CardHeader className="p-0">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg">Options</CardTitle>
@@ -44,10 +38,6 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
               }
             }}
             size="sm"
-            style={{
-              touchAction: "manipulation",
-              WebkitTapHighlightColor: "transparent",
-            }}
             variant="outline"
           >
             <Plus aria-hidden="true" className="size-4" />
@@ -97,10 +87,6 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
                       }
                     }}
                     size="icon"
-                    style={{
-                      touchAction: "manipulation",
-                      WebkitTapHighlightColor: "transparent",
-                    }}
                     variant="destructive"
                   >
                     <X aria-hidden="true" className="size-4" />

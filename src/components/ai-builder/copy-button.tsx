@@ -39,10 +39,6 @@ export function CopyButton({ schema }: CopyButtonProps) {
             disabled={copied}
             onClick={handleCopy}
             size="icon"
-            style={{
-              touchAction: "manipulation",
-              WebkitTapHighlightColor: "transparent",
-            }}
             type="button"
             variant="outline"
           >

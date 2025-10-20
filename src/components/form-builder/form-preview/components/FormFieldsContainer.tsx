@@ -38,10 +38,6 @@ export function FormFieldsContainer({
               e.preventDefault();
             }
           }}
-          style={{
-            touchAction: "manipulation",
-            WebkitTapHighlightColor: "transparent",
-          }}
           variant="outline"
         >
           <Plus aria-hidden="true" className="size-4" />
@@ -52,15 +48,11 @@ export function FormFieldsContainer({
         align="center"
         className="h-42 w-48"
         style={{
-          touchAction: "manipulation",
-          WebkitTapHighlightColor: "transparent",
           overscrollBehavior: "contain",
         }}
       >
         <ScrollArea
           style={{
-            touchAction: "manipulation",
-            WebkitTapHighlightColor: "transparent",
             overscrollBehavior: "contain",
           }}
           type="always"
@@ -104,10 +96,6 @@ export function FormFieldsContainer({
         aria-live="polite"
         className="flex flex-col items-center justify-center gap-4 py-16 text-center"
         role="status"
-        style={{
-          touchAction: "manipulation",
-          WebkitTapHighlightColor: "transparent",
-        }}
       >
         <div className="flex size-16 items-center justify-center rounded-2xl bg-accent">
           <div aria-hidden="true" className="size-8 rounded-2xl bg-muted" />
@@ -129,8 +117,6 @@ export function FormFieldsContainer({
     <div
       className="flex flex-col gap-4"
       style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
         overscrollBehavior: "contain",
       }}
     >
@@ -176,10 +162,6 @@ export function FormFieldsContainer({
                 }
               }}
               role="button"
-              style={{
-                touchAction: "manipulation",
-                WebkitTapHighlightColor: "transparent",
-              }}
               tabIndex={0}
             >
               {showLogicCues && (isHidden || isDisabled) && (
@@ -212,10 +194,6 @@ export function FormFieldsContainer({
                     }
                   }}
                   size="sm"
-                  style={{
-                    touchAction: "manipulation",
-                    WebkitTapHighlightColor: "transparent",
-                  }}
                   variant="ghost"
                 >
                   <Trash2 aria-hidden="true" className="size-4" />

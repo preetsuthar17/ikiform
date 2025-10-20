@@ -135,8 +135,6 @@ export function RateLimitSection({
     <ScrollArea
       className="size-full h-full"
       style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
         overscrollBehavior: "contain",
       }}
     >

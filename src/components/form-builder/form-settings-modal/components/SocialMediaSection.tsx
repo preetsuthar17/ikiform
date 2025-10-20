@@ -164,8 +164,6 @@ export function BrandingSection({
       }}
       role="region"
       style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
         overscrollBehavior: "contain",
       }}
     >

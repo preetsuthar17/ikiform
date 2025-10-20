@@ -20,8 +20,6 @@ export function FormSettingsDesktopLayout({
     <div
       className="hidden h-full gap-4 md:flex"
       style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
         overscrollBehavior: "contain",
       }}
     >
@@ -78,8 +76,6 @@ export function FormSettingsDesktopLayout({
       <div
         className="flex h-full flex-1 flex-col"
         style={{
-          touchAction: "manipulation",
-          WebkitTapHighlightColor: "transparent",
           overscrollBehavior: "contain",
         }}
       >

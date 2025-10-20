@@ -142,8 +142,6 @@ export function NotificationsSection({
       }}
       role="region"
       style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
         overscrollBehavior: "contain",
       }}
     >

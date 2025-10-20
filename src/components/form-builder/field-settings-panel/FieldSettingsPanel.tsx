@@ -38,8 +38,6 @@ export function FieldSettingsPanel({
     <div
       className="flex h-full min-h-0 flex-col border-border bg-background"
       style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
         overscrollBehavior: "contain",
       }}
     >
@@ -47,8 +45,6 @@ export function FieldSettingsPanel({
       <ScrollArea
         className="h-0 min-h-0 flex-1"
         style={{
-          touchAction: "manipulation",
-          WebkitTapHighlightColor: "transparent",
           overscrollBehavior: "contain",
         }}
       >

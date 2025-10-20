@@ -9,13 +9,7 @@ export function TagsFieldSettings({
   onUpdateSettings,
 }: FieldSettingsProps) {
   return (
-    <Card
-      className="gap-2 p-4 shadow-none"
-      style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
-      }}
-    >
+    <Card className="gap-2 p-4 shadow-none">
       <CardHeader className="p-0">
         <CardTitle className="text-lg">Tags Settings</CardTitle>
       </CardHeader>
@@ -64,10 +58,6 @@ export function TagsFieldSettings({
             onCheckedChange={(checked) =>
               onUpdateSettings({ allowDuplicates: checked })
             }
-            style={{
-              touchAction: "manipulation",
-              WebkitTapHighlightColor: "transparent",
-            }}
           />
         </div>
       </CardContent>

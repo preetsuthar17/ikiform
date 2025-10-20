@@ -228,8 +228,6 @@ export function BasicInfoSection({
     <ScrollArea
       className="h-full w-full"
       style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
         overscrollBehavior: "contain",
       }}
     >

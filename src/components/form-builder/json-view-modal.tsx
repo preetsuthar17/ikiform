@@ -203,8 +203,6 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
         ref={contentRef}
         role="dialog"
         style={{
-          touchAction: "manipulation",
-          WebkitTapHighlightColor: "transparent",
           overscrollBehavior: "contain",
         }}
       >

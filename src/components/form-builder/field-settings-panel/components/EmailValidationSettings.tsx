@@ -113,10 +113,6 @@ export function EmailValidationSettings({
             }
           }}
           size="icon-sm"
-          style={{
-            touchAction: "manipulation",
-            WebkitTapHighlightColor: "transparent",
-          }}
           variant={variant === "outline" ? "secondary" : "destructive"}
         >
           <X aria-hidden="true" className="size-3" />
@@ -126,13 +122,7 @@ export function EmailValidationSettings({
   );
 
   return (
-    <Card
-      className="gap-2 p-4 shadow-none"
-      style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
-      }}
-    >
+    <Card className="gap-2 p-4 shadow-none">
       <CardHeader className="p-0">
         <CardTitle className="text-lg">Email Validation</CardTitle>
       </CardHeader>
@@ -172,10 +162,6 @@ export function EmailValidationSettings({
                   setAutoCompleteDomain();
                 }
               }}
-              style={{
-                touchAction: "manipulation",
-                WebkitTapHighlightColor: "transparent",
-              }}
             >
               Set
             </Button>
@@ -198,10 +184,6 @@ export function EmailValidationSettings({
                     }
                   }}
                   size="icon-sm"
-                  style={{
-                    touchAction: "manipulation",
-                    WebkitTapHighlightColor: "transparent",
-                  }}
                   variant="secondary"
                 >
                   <X aria-hidden="true" className="size-3" />
@@ -254,10 +236,6 @@ export function EmailValidationSettings({
                 }
               }}
               size="icon"
-              style={{
-                touchAction: "manipulation",
-                WebkitTapHighlightColor: "transparent",
-              }}
             >
               <Plus aria-hidden="true" className="size-4" />
             </Button>
@@ -319,10 +297,6 @@ export function EmailValidationSettings({
                 }
               }}
               size="icon"
-              style={{
-                touchAction: "manipulation",
-                WebkitTapHighlightColor: "transparent",
-              }}
             >
               <Plus aria-hidden="true" className="size-4" />
             </Button>
@@ -369,10 +343,6 @@ export function EmailValidationSettings({
             onCheckedChange={(checked) =>
               updateEmailSettings({ requireBusinessEmail: checked })
             }
-            style={{
-              touchAction: "manipulation",
-              WebkitTapHighlightColor: "transparent",
-            }}
           />
         </div>
 

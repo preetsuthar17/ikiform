@@ -15,13 +15,7 @@ export function PollFieldSettings({
   const [newOption, setNewOption] = useState("");
 
   return (
-    <Card
-      className="gap-2 p-4 shadow-none"
-      style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
-      }}
-    >
+    <Card className="gap-2 p-4 shadow-none">
       <CardHeader className="p-0">
         <CardTitle className="text-lg">Poll Settings</CardTitle>
       </CardHeader>
@@ -86,10 +80,6 @@ export function PollFieldSettings({
                 }
               }}
               size="icon"
-              style={{
-                touchAction: "manipulation",
-                WebkitTapHighlightColor: "transparent",
-              }}
               type="button"
             >
               <Plus aria-hidden="true" className="size-4" />
@@ -137,10 +127,6 @@ export function PollFieldSettings({
                   }
                 }}
                 size="icon"
-                style={{
-                  touchAction: "manipulation",
-                  WebkitTapHighlightColor: "transparent",
-                }}
                 type="button"
                 variant="ghost"
               >
@@ -299,10 +285,6 @@ export function PollFieldSettings({
             onCheckedChange={(checked) =>
               onUpdateSettings({ showResults: checked })
             }
-            style={{
-              touchAction: "manipulation",
-              WebkitTapHighlightColor: "transparent",
-            }}
           />
         </div>
       </CardContent>

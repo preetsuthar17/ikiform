@@ -9,13 +9,7 @@ interface SettingsPanelHeaderProps {
 
 export function SettingsPanelHeader({ onClose }: SettingsPanelHeaderProps) {
   return (
-    <header
-      className="flex flex-col border-border bg-background"
-      style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
-      }}
-    >
+    <header className="flex flex-col border-border bg-background">
       <div className="flex w-full items-center justify-between p-4">
         <h2
           className="font-semibold text-foreground text-lg"
@@ -34,10 +28,6 @@ export function SettingsPanelHeader({ onClose }: SettingsPanelHeaderProps) {
             }
           }}
           size="sm"
-          style={{
-            touchAction: "manipulation",
-            WebkitTapHighlightColor: "transparent",
-          }}
           variant="ghost"
         >
           <X aria-hidden="true" className="size-4" />

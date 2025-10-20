@@ -15,29 +15,13 @@ export function FieldItem({ fieldType, onAddField }: FieldItemProps) {
           onAddField(fieldType.type);
         }
       }}
-      style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
-      }}
       variant="outline"
     >
       <div className="flex w-full items-center gap-3">
-        <div
-          className="flex flex-shrink-0 items-center justify-center rounded-lg bg-primary/10 p-2 group-hover:bg-primary/20"
-          style={{
-            touchAction: "manipulation",
-            WebkitTapHighlightColor: "transparent",
-          }}
-        >
+        <div className="flex flex-shrink-0 items-center justify-center rounded-lg bg-primary/10 p-2 group-hover:bg-primary/20">
           <IconComponent aria-hidden="true" className="size-4 text-primary" />
         </div>
-        <div
-          className="flex min-w-0 flex-1 flex-col gap-1"
-          style={{
-            touchAction: "manipulation",
-            WebkitTapHighlightColor: "transparent",
-          }}
-        >
+        <div className="flex min-w-0 flex-1 flex-col gap-1">
           <div className="flex items-center gap-2">
             <h3 className="text-wrap font-medium text-foreground text-sm">
               {fieldType.label}

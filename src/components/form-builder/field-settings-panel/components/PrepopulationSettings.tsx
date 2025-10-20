@@ -104,13 +104,7 @@ export function PrepopulationSettings({
   };
 
   return (
-    <Card
-      className="gap-2 p-4 shadow-none"
-      style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
-      }}
-    >
+    <Card className="gap-2 p-4 shadow-none">
       <CardHeader className="p-0">
         <CardTitle className="text-lg">Pre-population</CardTitle>
       </CardHeader>
@@ -133,10 +127,6 @@ export function PrepopulationSettings({
             id="prepopulation-enabled"
             name="prepopulation-enabled"
             onCheckedChange={(enabled) => updatePrepopulation({ enabled })}
-            style={{
-              touchAction: "manipulation",
-              WebkitTapHighlightColor: "transparent",
-            }}
           />
         </div>
 
@@ -267,10 +257,6 @@ export function PrepopulationSettings({
                     onCheckedChange={(overwriteExisting) =>
                       updateConfig({ overwriteExisting })
                     }
-                    style={{
-                      touchAction: "manipulation",
-                      WebkitTapHighlightColor: "transparent",
-                    }}
                   />
                 </div>
 
@@ -287,10 +273,6 @@ export function PrepopulationSettings({
                         }
                       }}
                       size="sm"
-                      style={{
-                        touchAction: "manipulation",
-                        WebkitTapHighlightColor: "transparent",
-                      }}
                       variant="outline"
                     >
                       <Copy aria-hidden="true" className="size-4" />
@@ -420,10 +402,6 @@ export function PrepopulationSettings({
                       }
                     }}
                     size="sm"
-                    style={{
-                      touchAction: "manipulation",
-                      WebkitTapHighlightColor: "transparent",
-                    }}
                     variant="outline"
                   >
                     <ExternalLink aria-hidden="true" className="size-4" />

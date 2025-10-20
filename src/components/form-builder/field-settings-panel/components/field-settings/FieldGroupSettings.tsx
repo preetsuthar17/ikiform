@@ -90,13 +90,7 @@ export function FieldGroupSettings({
 
   return (
     <div className="flex flex-col gap-4">
-      <Card
-        className="gap-2 p-4 shadow-none"
-        style={{
-          touchAction: "manipulation",
-          WebkitTapHighlightColor: "transparent",
-        }}
-      >
+      <Card className="gap-2 p-4 shadow-none">
         <CardHeader className="p-0">
           <CardTitle className="text-lg">Layout Settings</CardTitle>
         </CardHeader>
@@ -190,13 +184,7 @@ export function FieldGroupSettings({
         </CardContent>
       </Card>
 
-      <Card
-        className="gap-2 p-4 shadow-none"
-        style={{
-          touchAction: "manipulation",
-          WebkitTapHighlightColor: "transparent",
-        }}
-      >
+      <Card className="gap-2 p-4 shadow-none">
         <CardHeader className="p-0">
           <CardTitle className="text-lg">
             Group Fields ({groupFields.length})
@@ -210,10 +198,6 @@ export function FieldGroupSettings({
                   aria-label="Add field to group"
                   className="focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
                   size="sm"
-                  style={{
-                    touchAction: "manipulation",
-                    WebkitTapHighlightColor: "transparent",
-                  }}
                   type="button"
                   variant="outline"
                 >
@@ -302,10 +286,6 @@ export function FieldGroupSettings({
                             }
                           }}
                           size="icon"
-                          style={{
-                            touchAction: "manipulation",
-                            WebkitTapHighlightColor: "transparent",
-                          }}
                           type="button"
                           variant="ghost"
                         >
@@ -322,10 +302,6 @@ export function FieldGroupSettings({
                             }
                           }}
                           size="icon"
-                          style={{
-                            touchAction: "manipulation",
-                            WebkitTapHighlightColor: "transparent",
-                          }}
                           type="button"
                           variant="destructive"
                         >
@@ -423,10 +399,6 @@ export function FieldGroupSettings({
                         onCheckedChange={(checked) =>
                           updateGroupField(groupField.id, { required: checked })
                         }
-                        style={{
-                          touchAction: "manipulation",
-                          WebkitTapHighlightColor: "transparent",
-                        }}
                       />
                     </div>
 
@@ -448,10 +420,6 @@ export function FieldGroupSettings({
                                 !expandedFields[groupField.id]
                               );
                             }
-                          }}
-                          style={{
-                            touchAction: "manipulation",
-                            WebkitTapHighlightColor: "transparent",
                           }}
                           type="button"
                           variant="outline"

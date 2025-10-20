@@ -135,8 +135,6 @@ export function BotProtectionSection({
       }}
       role="main"
       style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
         overscrollBehavior: "contain",
       }}
     >

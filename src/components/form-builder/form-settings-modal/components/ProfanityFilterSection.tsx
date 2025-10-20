@@ -151,8 +151,6 @@ export function ProfanityFilterSection({
       }}
       role="main"
       style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
         overscrollBehavior: "contain",
       }}
     >

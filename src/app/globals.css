@@ -164,7 +164,9 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border touch-manipulation;
+    webkit-tap-highlight-color: transparent !important;
+    -webkit-tap-highlight-color: transparent !important;
   }
   body {
     @apply bg-background text-foreground font-sans;

@@ -162,8 +162,6 @@ export function QuizSection({
       }}
       role="main"
       style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
         overscrollBehavior: "contain",
       }}
     >

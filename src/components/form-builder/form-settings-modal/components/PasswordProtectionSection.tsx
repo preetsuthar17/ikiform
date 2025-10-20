@@ -150,8 +150,6 @@ export function PasswordProtectionSection({
       }}
       role="main"
       style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
         overscrollBehavior: "contain",
       }}
     >

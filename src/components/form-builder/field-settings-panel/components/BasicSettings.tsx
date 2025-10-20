@@ -16,13 +16,7 @@ export const BasicSettings: React.FC<BasicSettingsProps> = ({
   const { updateField } = createFieldUpdater(field, onFieldUpdate);
 
   return (
-    <Card
-      className="gap-2 p-4 shadow-none"
-      style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
-      }}
-    >
+    <Card className="gap-2 p-4 shadow-none">
       <CardHeader className="p-0">
         <CardTitle className="text-lg">Basic Settings</CardTitle>
       </CardHeader>
@@ -127,10 +121,6 @@ export const BasicSettings: React.FC<BasicSettingsProps> = ({
             id="field-required"
             name="field-required"
             onCheckedChange={(required) => updateField({ required })}
-            style={{
-              touchAction: "manipulation",
-              WebkitTapHighlightColor: "transparent",
-            }}
           />
         </div>
       </CardContent>

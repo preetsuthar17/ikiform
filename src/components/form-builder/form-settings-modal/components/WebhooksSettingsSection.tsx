@@ -14,8 +14,6 @@ export function WebhooksSettingsSection({ formId }: { formId: string }) {
       className="shadow-none"
       role="region"
       style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
         overscrollBehavior: "contain",
       }}
     >

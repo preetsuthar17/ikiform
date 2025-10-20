@@ -144,8 +144,6 @@ export function ResponseLimitSection({
       ref={sectionRef}
       role="region"
       style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
         overscrollBehavior: "contain",
       }}
     >

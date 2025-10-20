@@ -58,8 +58,6 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
       className="h-full"
       direction="horizontal"
       style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
         overscrollBehavior: "contain",
       }}
     >
@@ -69,8 +67,6 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
         maxSize={PANEL_SIZES.LEFT_PANEL.max}
         minSize={PANEL_SIZES.LEFT_PANEL.min}
         style={{
-          touchAction: "manipulation",
-          WebkitTapHighlightColor: "transparent",
           overscrollBehavior: "contain",
         }}
       >
@@ -103,16 +99,12 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
         maxSize={PANEL_SIZES.PREVIEW_PANEL.max}
         minSize={PANEL_SIZES.PREVIEW_PANEL.min}
         style={{
-          touchAction: "manipulation",
-          WebkitTapHighlightColor: "transparent",
           overscrollBehavior: "contain",
         }}
       >
         <ScrollArea
           className="h-full bg-background"
           style={{
-            touchAction: "manipulation",
-            WebkitTapHighlightColor: "transparent",
             overscrollBehavior: "contain",
           }}
         >
@@ -139,16 +131,12 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
         maxSize={PANEL_SIZES.RIGHT_PANEL.max}
         minSize={PANEL_SIZES.RIGHT_PANEL.min}
         style={{
-          touchAction: "manipulation",
-          WebkitTapHighlightColor: "transparent",
           overscrollBehavior: "contain",
         }}
       >
         <div
           className="flex h-full flex-col"
           style={{
-            touchAction: "manipulation",
-            WebkitTapHighlightColor: "transparent",
             overscrollBehavior: "contain",
           }}
         >

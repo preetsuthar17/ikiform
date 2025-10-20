@@ -99,10 +99,6 @@ export function AIBuilder() {
         className="flex h-screen w-full flex-col gap-4 bg-background motion-reduce:animate-none motion-reduce:transition-none md:flex-row"
         id="main-content"
         role="main"
-        style={{
-          touchAction: "manipulation",
-          WebkitTapHighlightColor: "transparent",
-        }}
         tabIndex={-1}
       >
         {}

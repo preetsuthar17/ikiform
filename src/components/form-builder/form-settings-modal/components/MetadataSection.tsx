@@ -283,8 +283,6 @@ export function MetadataSection({
         }
       }}
       style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
         overscrollBehavior: "contain",
       }}
     >

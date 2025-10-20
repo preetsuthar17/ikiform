@@ -11,13 +11,7 @@ export function SocialFieldSettings({
   onUpdateSettings,
 }: FieldSettingsProps) {
   return (
-    <Card
-      className="gap-2 p-4 shadow-none"
-      style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
-      }}
-    >
+    <Card className="gap-2 p-4 shadow-none">
       <CardHeader className="p-0">
         <CardTitle className="text-lg">Social Platforms</CardTitle>
       </CardHeader>
@@ -59,10 +53,6 @@ export function SocialFieldSettings({
                         ? [...prev, platform.key]
                         : prev.filter((p) => p !== platform.key),
                     });
-                  }}
-                  style={{
-                    touchAction: "manipulation",
-                    WebkitTapHighlightColor: "transparent",
                   }}
                 />
                 <Label
@@ -151,10 +141,6 @@ export function SocialFieldSettings({
                     }
                   }}
                   size="icon"
-                  style={{
-                    touchAction: "manipulation",
-                    WebkitTapHighlightColor: "transparent",
-                  }}
                   type="button"
                   variant="destructive"
                 >
@@ -183,10 +169,6 @@ export function SocialFieldSettings({
                 }
               }}
               size="sm"
-              style={{
-                touchAction: "manipulation",
-                WebkitTapHighlightColor: "transparent",
-              }}
               type="button"
               variant="outline"
             >

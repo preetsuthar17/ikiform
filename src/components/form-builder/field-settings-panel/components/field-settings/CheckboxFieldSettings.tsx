@@ -15,13 +15,7 @@ export function CheckboxFieldSettings({
   const [newOption, setNewOption] = useState("");
 
   return (
-    <Card
-      className="gap-2 p-4 shadow-none"
-      style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
-      }}
-    >
+    <Card className="gap-2 p-4 shadow-none">
       <CardHeader className="p-0">
         <CardTitle className="text-lg">Checkbox Options</CardTitle>
       </CardHeader>
@@ -80,10 +74,6 @@ export function CheckboxFieldSettings({
                 }
               }}
               size="icon"
-              style={{
-                touchAction: "manipulation",
-                WebkitTapHighlightColor: "transparent",
-              }}
               type="button"
             >
               <Plus aria-hidden="true" className="size-4" />
@@ -121,10 +111,6 @@ export function CheckboxFieldSettings({
                   }
                 }}
                 size="icon"
-                style={{
-                  touchAction: "manipulation",
-                  WebkitTapHighlightColor: "transparent",
-                }}
                 type="button"
                 variant="ghost"
               >
@@ -154,10 +140,6 @@ export function CheckboxFieldSettings({
             onCheckedChange={(checked) =>
               onUpdateSettings({ allowMultiple: checked })
             }
-            style={{
-              touchAction: "manipulation",
-              WebkitTapHighlightColor: "transparent",
-            }}
           />
         </div>
       </CardContent>

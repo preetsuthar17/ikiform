@@ -55,8 +55,6 @@ export function SettingsSearch({
     <div
       className="relative flex flex-col gap-2"
       style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
         overscrollBehavior: "contain",
       }}
     >
@@ -133,16 +131,12 @@ export function SettingsSearch({
           id="settings-search-results"
           role="listbox"
           style={{
-            touchAction: "manipulation",
-            WebkitTapHighlightColor: "transparent",
             overscrollBehavior: "contain",
           }}
         >
           <ScrollArea
             className="max-h-64"
             style={{
-              touchAction: "manipulation",
-              WebkitTapHighlightColor: "transparent",
               overscrollBehavior: "contain",
             }}
           >
@@ -184,8 +178,6 @@ export function SettingsSearch({
           className="absolute top-full left-0 z-50 mt-2 w-full rounded-md border bg-background p-2 text-center text-muted-foreground text-sm"
           role="status"
           style={{
-            touchAction: "manipulation",
-            WebkitTapHighlightColor: "transparent",
             overscrollBehavior: "contain",
           }}
         >

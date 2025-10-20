@@ -1,22 +1,17 @@
 import { Settings } from "lucide-react";
 import type React from "react";
 
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 import type { EmptyStateProps } from "../types";
 
-export const EmptyState: React.FC<EmptyStateProps> = ({ onClose }) => (
+export const EmptyState: React.FC<EmptyStateProps> = () => (
   <div
     aria-live="polite"
     className="flex h-full flex-col items-center justify-center gap-4 border-border bg-background p-6"
     role="status"
-    style={{
-      touchAction: "manipulation",
-      WebkitTapHighlightColor: "transparent",
-    }}
   >
-    <Card className="w-full max-w-sm">
+    <Card className="w-full max-w-sm shadow-none">
       <CardContent className="flex flex-col items-center gap-4 p-6 text-center">
         <div className="flex size-16 items-center justify-center rounded-2xl bg-primary/10">
           <Settings aria-hidden="true" className="size-8 text-primary" />
@@ -29,24 +24,6 @@ export const EmptyState: React.FC<EmptyStateProps> = ({ onClose }) => (
             Click on a field in the preview to edit its settings
           </p>
         </div>
-        <Button
-          aria-label="Close settings panel"
-          className="w-full"
-          onClick={onClose}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              onClose();
-            }
-          }}
-          style={{
-            touchAction: "manipulation",
-            WebkitTapHighlightColor: "transparent",
-          }}
-          variant="outline"
-        >
-          Close Panel
-        </Button>
       </CardContent>
     </Card>
   </div>

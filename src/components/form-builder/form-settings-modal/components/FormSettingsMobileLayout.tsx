@@ -73,8 +73,6 @@ export function FormSettingsMobileLayout({
       <div
         className="flex h-full flex-col gap-4 md:hidden"
         style={{
-          touchAction: "manipulation",
-          WebkitTapHighlightColor: "transparent",
           overscrollBehavior: "contain",
         }}
       >
@@ -87,8 +85,6 @@ export function FormSettingsMobileLayout({
         <ScrollArea
           className="flex-1"
           style={{
-            touchAction: "manipulation",
-            WebkitTapHighlightColor: "transparent",
             overscrollBehavior: "contain",
           }}
         >
@@ -144,8 +140,6 @@ export function FormSettingsMobileLayout({
     <div
       className="flex h-full flex-col md:hidden"
       style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
         overscrollBehavior: "contain",
       }}
     >
@@ -177,8 +171,6 @@ export function FormSettingsMobileLayout({
         className="h-full flex-1"
         role="main"
         style={{
-          touchAction: "manipulation",
-          WebkitTapHighlightColor: "transparent",
           overscrollBehavior: "contain",
         }}
       >

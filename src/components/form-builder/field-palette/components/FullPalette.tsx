@@ -55,8 +55,6 @@ export function FullPalette({
       className="flex h-full flex-col gap-6 border-border p-2 lg:border-r lg:p-4"
       role="complementary"
       style={{
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
         overscrollBehavior: "contain",
       }}
     >
@@ -90,8 +88,6 @@ export function FullPalette({
       <ScrollArea
         className="h-0 min-h-0 flex-1"
         style={{
-          touchAction: "manipulation",
-          WebkitTapHighlightColor: "transparent",
           overscrollBehavior: "contain",
         }}
       >
@@ -116,10 +112,6 @@ export function FullPalette({
                     aria-label={`${FIELD_CATEGORIES[key as keyof typeof FIELD_CATEGORIES]} fields`}
                     className="grid grid-cols-2 gap-2 rounded-2xl"
                     role="list"
-                    style={{
-                      touchAction: "manipulation",
-                      WebkitTapHighlightColor: "transparent",
-                    }}
                   >
                     {columns.map((col, colIdx) => (
                       <div className="flex flex-col gap-2" key={colIdx}>
