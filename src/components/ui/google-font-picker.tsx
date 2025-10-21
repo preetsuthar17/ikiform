@@ -4,12 +4,14 @@ import { Check, ChevronDown, Search, Type } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { loadGoogleFont } from "@/lib/utils/google-fonts";
 import { Input } from "./input";
@@ -299,6 +301,7 @@ export function GoogleFontPicker({
               {value ? (
                 <div className="flex items-center gap-2">
                   <span
+                    className="font-medium"
                     style={{
                       fontFamily: loadedFonts.has(value)
                         ? `"${value}", system-ui, sans-serif`
@@ -314,119 +317,146 @@ export function GoogleFontPicker({
                   )}
                 </div>
               ) : (
-                placeholder
+                <span className="text-muted-foreground">{placeholder}</span>
               )}
             </div>
             <ChevronDown className="ml-2 size-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
 
-        <PopoverContent align="start" className="w-[450px] p-4">
-          <div className="flex flex-col gap-4">
-            {/* Search */}
-            <div className="flex items-center">
-              <Input
-                leftIcon={<Search className="size-4 shrink-0 opacity-50" />}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search fonts..."
-                value={search}
-              />
-            </div>
+        <PopoverContent align="start" className="w-[320px] md:w-[400px] p-0">
+          <Card className="shadow-none border-0">
+            <CardContent className="p-3 md:p-4">
+              <div className="flex flex-col gap-3 md:gap-4">
+                {/* Search */}
+                <div className="flex items-center">
+                  <Input
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search fonts..."
+                    value={search}
+                  />
+                </div>
 
-            {/* Category Filter */}
-            <div className="flex flex-wrap gap-2">
-              {FONT_CATEGORIES.map((category) => (
-                <Button
-                  className="h-6 px-2 text-xs"
-                  key={category.id}
-                  onClick={() => setSelectedCategory(category.id)}
-                  size="sm"
-                  variant={
-                    selectedCategory === category.id ? "default" : "ghost"
-                  }
-                >
-                  {category.label}
-                </Button>
-              ))}
-            </div>
+                <Separator />
 
-            {/* Font List */}
-            {loading && (
-              <div className="py-8 text-center">
-                <Loader />
-                <p className="mt-2 text-muted-foreground text-sm">
-                  Loading fonts...
-                </p>
-              </div>
-            )}
+                {/* Category Filter */}
+                <div className="flex flex-wrap gap-1.5 md:gap-2">
+                  {FONT_CATEGORIES.map((category) => (
+                    <Button
+                      className="h-7 px-2 md:h-8 md:px-3 text-xs"
+                      key={category.id}
+                      onClick={() => setSelectedCategory(category.id)}
+                      size="sm"
+                      variant={
+                        selectedCategory === category.id ? "default" : "ghost"
+                      }
+                    >
+                      {category.label}
+                    </Button>
+                  ))}
+                </div>
 
-            {error && (
-              <div className="py-8 text-center">
-                <Type className="mx-auto mb-2 size-8 text-muted-foreground" />
-                <p className="text-muted-foreground">{error}</p>
-                <p className="text-muted-foreground text-xs">
-                  Using fallback fonts.
-                </p>
-              </div>
-            )}
+                <Separator />
 
-            {!(loading || error) && (
-              <ScrollArea className="h-[350px]">
-                {filteredFonts.length === 0 ? (
-                  <div className="py-8 text-center">
-                    <Type className="mx-auto mb-2 size-8 text-muted-foreground" />
-                    <p className="text-muted-foreground">No fonts found.</p>
-                    <p className="text-muted-foreground text-xs">
-                      Try a different search term or category.
-                    </p>
-                  </div>
-                ) : (
-                  <div className="flex flex-col gap-2">
-                    {filteredFonts.map((font) => (
-                      <div
-                        className={cn(
-                          "flex cursor-pointer items-center justify-between rounded-lg p-4 transition-all duration-200",
-                          "hover:bg-accent/50",
-                          value === font.family &&
-                            "border border-primary/20 bg-accent/30"
-                        )}
-                        key={font.family}
-                        onClick={() => handleFontSelect(font.family)}
-                        onMouseEnter={() => preloadFont(font.family)}
-                      >
-                        <div className="flex flex-1 flex-col gap-2">
-                          <div className="flex items-center gap-3">
-                            <span
-                              className="font-medium text-base"
-                              style={{
-                                fontFamily: loadedFonts.has(font.family)
-                                  ? `"${font.family}", system-ui, sans-serif`
-                                  : undefined,
-                              }}
-                            >
-                              {font.family}
-                            </span>
-                            <Badge className="text-xs" variant="outline">
-                              {CATEGORY_MAP[font.category]}
-                            </Badge>
-                            <Badge className="text-xs" variant="secondary">
-                              {font.variants.length} styles
-                            </Badge>
-                          </div>
-                        </div>
-                        <Check
-                          className={cn(
-                            "size-4 shrink-0 transition-opacity",
-                            value === font.family ? "opacity-100" : "opacity-0"
-                          )}
-                        />
-                      </div>
-                    ))}
+                {/* Font List */}
+                {loading && (
+                  <div className="flex flex-col items-center gap-4 py-8">
+                    <Loader />
+                    <div className="flex flex-col items-center gap-2">
+                      <p className="font-medium text-foreground text-sm">
+                        Loading fonts...
+                      </p>
+                      <p className="text-muted-foreground text-xs">
+                        Fetching from Google Fonts
+                      </p>
+                    </div>
                   </div>
                 )}
-              </ScrollArea>
-            )}
-          </div>
+
+                {error && (
+                  <div className="flex flex-col items-center gap-4 py-8">
+                    <div className="flex size-12 items-center justify-center rounded-full bg-muted">
+                      <Type className="size-6 text-muted-foreground" />
+                    </div>
+                    <div className="flex flex-col items-center gap-2 text-center">
+                      <p className="font-medium text-foreground text-sm">
+                        Failed to load fonts
+                      </p>
+                      <p className="text-muted-foreground text-xs">
+                        Using fallback fonts
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {!(loading || error) && (
+                  <ScrollArea className="h-[180px] md:h-[350px]">
+                    {filteredFonts.length === 0 ? (
+                      <div className="flex flex-col items-center gap-3 py-6 md:py-8">
+                        <div className="flex size-10 items-center justify-center rounded-full bg-muted md:size-12">
+                          <Type className="size-5 text-muted-foreground md:size-6" />
+                        </div>
+                        <div className="flex flex-col items-center gap-1.5 text-center">
+                          <p className="font-medium text-foreground text-sm">
+                            No fonts found
+                          </p>
+                          <p className="text-muted-foreground text-xs">
+                            Try a different search term or category
+                          </p>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col gap-1">
+                        {filteredFonts.map((font) => (
+                          <Card
+                            className={cn(
+                              "cursor-pointer transition-all duration-200 hover:bg-accent/50 p-0 shadow-none",
+                              value === font.family &&
+                                "border-primary/20 bg-accent/30 ring-2 ring-primary/20"
+                            )}
+                            key={font.family}
+                            onClick={() => handleFontSelect(font.family)}
+                            onMouseEnter={() => preloadFont(font.family)}
+                          >
+                            <CardContent className="p-3 md:p-4">
+                              <div className="flex items-center justify-between">
+                                <div className="flex flex-1 items-center gap-2 md:gap-3 min-w-0">
+                                  <span
+                                    className="font-medium text-sm md:text-base truncate"
+                                    style={{
+                                      fontFamily: loadedFonts.has(font.family)
+                                        ? `"${font.family}", system-ui, sans-serif`
+                                        : undefined,
+                                    }}
+                                  >
+                                    {font.family}
+                                  </span>
+                                  <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
+                                    <Badge className="text-xs hidden md:inline-flex" variant="outline">
+                                      {CATEGORY_MAP[font.category]}
+                                    </Badge>
+                                    <Badge className="text-xs" variant="secondary">
+                                      {font.variants.length}
+                                    </Badge>
+                                  </div>
+                                </div>
+                                <Check
+                                  className={cn(
+                                    "size-4 shrink-0 transition-opacity",
+                                    value === font.family ? "opacity-100" : "opacity-0"
+                                  )}
+                                />
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      </div>
+                    )}
+                  </ScrollArea>
+                )}
+              </div>
+            </CardContent>
+          </Card>
         </PopoverContent>
       </Popover>
     </div>

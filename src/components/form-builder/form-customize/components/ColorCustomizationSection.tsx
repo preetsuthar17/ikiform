@@ -4,6 +4,7 @@ import { Paintbrush } from "lucide-react";
 import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { EnhancedColorPicker } from "@/components/ui/enhanced-color-picker";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface ColorCustomizationSectionProps {
   localSettings: LocalSettings;
@@ -78,7 +79,8 @@ export function ColorCustomizationSection({
         </p>
       </div>
 
-      <div className="flex flex-col gap-4">
+      <ScrollArea className="max-h-[calc(100vh-200px)]">
+        <div className="flex flex-col gap-4">
         <Card className="p-4 shadow-none">
           <CardContent className="flex flex-col gap-3 p-0">
             <EnhancedColorPicker
@@ -148,7 +150,8 @@ export function ColorCustomizationSection({
             </p>
           </CardContent>
         </Card>
-      </div>
+        </div>
+      </ScrollArea>
     </div>
   );
 }

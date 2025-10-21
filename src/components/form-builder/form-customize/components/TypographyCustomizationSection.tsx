@@ -9,6 +9,7 @@ import type { LocalSettings } from "@/components/form-builder/form-settings-moda
 import { Card, CardContent } from "@/components/ui/card";
 import { GoogleFontPicker } from "@/components/ui/google-font-picker";
 import { Label } from "@/components/ui/label";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Slider } from "@/components/ui/slider";
 import {
   generateFontPreviewStyles,
@@ -108,7 +109,8 @@ export function TypographyCustomizationSection({
         </p>
       </div>
 
-      <div className="flex flex-col gap-4">
+      <ScrollArea className="max-h-[calc(100vh-200px)]">
+        <div className="flex flex-col gap-4">
         <Card className="p-4 shadow-none">
           <CardContent className="flex flex-col gap-3 p-0">
             <GoogleFontPicker
@@ -191,7 +193,8 @@ export function TypographyCustomizationSection({
             </p>
           </CardContent>
         </Card>
-      </div>
+        </div>
+      </ScrollArea>
     </div>
   );
 }

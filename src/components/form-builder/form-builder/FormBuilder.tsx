@@ -309,13 +309,17 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
       ) {
         // Check if we have a stored multi-step structure in the form schema
         const hasStoredSteps = state.formSchema.settings.storedSteps;
-        
-        if (hasStoredSteps && Array.isArray(hasStoredSteps) && hasStoredSteps.length > 0) {
+
+        if (
+          hasStoredSteps &&
+          Array.isArray(hasStoredSteps) &&
+          hasStoredSteps.length > 0
+        ) {
           // Restore the original step structure
           const newSchema = {
             ...state.formSchema,
             blocks: hasStoredSteps,
-            fields: hasStoredSteps.flatMap(block => block.fields || []),
+            fields: hasStoredSteps.flatMap((block) => block.fields || []),
             settings: {
               ...state.formSchema.settings,
               multiStep: true,
@@ -327,7 +331,8 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           actions.setSelectedBlockId(hasStoredSteps[0].id);
         } else {
           // No stored steps, create a new single step with current fields
-          const currentFields = state.formSchema.blocks[0]?.fields || state.formSchema.fields || [];
+          const currentFields =
+            state.formSchema.blocks[0]?.fields || state.formSchema.fields || [];
           const newSchema = {
             ...state.formSchema,
             blocks: [
@@ -362,7 +367,9 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
       );
 
       // Store the original step structure before flattening
-      const originalSteps = state.formSchema.blocks.filter(block => block.id !== "default");
+      const originalSteps = state.formSchema.blocks.filter(
+        (block) => block.id !== "default"
+      );
 
       const newSchema = {
         ...state.formSchema,

@@ -11,6 +11,7 @@ import type { LocalSettings } from "@/components/form-builder/form-settings-moda
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 
@@ -150,7 +151,8 @@ export function LayoutCustomizationSection({
         </p>
       </div>
 
-      <div className="flex flex-col gap-4">
+      <ScrollArea className="max-h-[calc(100vh-200px)]">
+        <div className="flex flex-col gap-4">
         <Card className="p-4 shadow-none">
           <CardContent className="p-0">
             <div className="flex items-center gap-3">
@@ -290,7 +292,8 @@ export function LayoutCustomizationSection({
             </p>
           </CardContent>
         </Card>
-      </div>
+        </div>
+      </ScrollArea>
     </div>
   );
 }
