@@ -1,4 +1,4 @@
-import { EyeOff, Lock, Plus, Trash2 } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { FIELD_TYPES } from "../../field-palette/constants";
 
 import { FormFieldRenderer } from "../../form-field-renderer";
@@ -202,67 +207,59 @@ export function FormFieldsContainer({
                       );
                     }
                   }}
-                  ref={(el) => (itemRefs.current[field.id] = el)}
+                  ref={(el) => {
+                    itemRefs.current[field.id] = el as HTMLDivElement | null;
+                  }}
                   role="button"
                   tabIndex={0}
                 >
-                  {showLogicCues && (isHidden || isDisabled) && (
-                    <div
-                      className="absolute top-2 left-2 z-20 flex items-center gap-2"
-                      id={`${field.id}-state`}
-                    >
-                      {isHidden && (
-                        <span className="flex items-center gap-1 rounded-xl border border-muted/40 bg-muted px-2 py-0.5 text-muted-foreground text-xs">
-                          <EyeOff className="mr-1 size-4" /> Hidden
-                        </span>
-                      )}
-                      {!isHidden && isDisabled && (
-                        <span className="flex items-center gap-1 rounded-xl border border-muted/40 bg-muted px-2 py-0.5 text-muted-foreground text-xs">
-                          <Lock className="mr-1 size-4" /> Disabled
-                        </span>
-                      )}
-                    </div>
-                  )}
-                  <div className="absolute top-2 right-2 z-10 flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-                    <Button
-                      aria-label={`Delete ${field.type} field`}
-                      className="size-8 p-0 text-destructive hover:bg-destructive hover:text-destructive-foreground"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        const next =
-                          renderFields[index + 1]?.id ??
-                          renderFields[index - 1]?.id;
-                        onFieldDelete(field.id);
-                        requestAnimationFrame(() => {
-                          if (next && itemRefs.current[next]) {
-                            itemRefs.current[next]?.focus();
-                          } else {
-                            addButtonRef.current?.focus();
-                          }
-                        });
-                      }}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          const next =
-                            renderFields[index + 1]?.id ??
-                            renderFields[index - 1]?.id;
-                          onFieldDelete(field.id);
-                          requestAnimationFrame(() => {
-                            if (next && itemRefs.current[next]) {
-                              itemRefs.current[next]?.focus();
-                            } else {
-                              addButtonRef.current?.focus();
+                  <div className="absolute top-2 right-2 z-10 flex gap-1 opacity-100 transition-opacity group-hover:opacity-100 sm:opacity-0 sm:group-hover:opacity-100">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          aria-label={`Delete ${field.type} field`}
+                          className="text-destructive hover:bg-destructive/10 hover:text-destructive-foreground"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            const next =
+                              renderFields[index + 1]?.id ??
+                              renderFields[index - 1]?.id;
+                            onFieldDelete(field.id);
+                            requestAnimationFrame(() => {
+                              if (next && itemRefs.current[next]) {
+                                itemRefs.current[next]?.focus();
+                              } else {
+                                addButtonRef.current?.focus();
+                              }
+                            });
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              const next =
+                                renderFields[index + 1]?.id ??
+                                renderFields[index - 1]?.id;
+                              onFieldDelete(field.id);
+                              requestAnimationFrame(() => {
+                                if (next && itemRefs.current[next]) {
+                                  itemRefs.current[next]?.focus();
+                                } else {
+                                  addButtonRef.current?.focus();
+                                }
+                              });
                             }
-                          });
-                        }
-                      }}
-                      size="sm"
-                      variant="ghost"
-                    >
-                      <Trash2 aria-hidden="true" className="size-4" />
-                    </Button>
+                          }}
+                          size="icon-sm"
+                          variant="ghost"
+                        >
+                          <Trash2 aria-hidden="true" className="size-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent align="center" side="top">
+                        Delete field
+                      </TooltipContent>
+                    </Tooltip>
                   </div>
                   <FormFieldRenderer
                     builderMode={true}
