@@ -111,88 +111,88 @@ export function TypographyCustomizationSection({
 
       <ScrollArea className="max-h-[calc(100vh-200px)]">
         <div className="flex flex-col gap-4">
-        <Card className="p-4 shadow-none">
-          <CardContent className="flex flex-col gap-3 p-0">
-            <GoogleFontPicker
-              label="Font Family"
-              onChange={handleFontFamilyChange}
-              placeholder="Select a Google Font..."
-              showPreview={true}
-              value={fontFamily}
-            />
-            <div className="rounded-lg border border-border bg-muted/30 p-4">
-              <Label className="mb-2 block text-muted-foreground text-xs">
-                Font Preview
+          <Card className="p-4 shadow-none">
+            <CardContent className="flex flex-col gap-3 p-0">
+              <GoogleFontPicker
+                label="Font Family"
+                onChange={handleFontFamilyChange}
+                placeholder="Select a Google Font..."
+                showPreview={true}
+                value={fontFamily}
+              />
+              <div className="rounded-lg border border-border bg-muted/30 p-4">
+                <Label className="mb-2 block text-muted-foreground text-xs">
+                  Font Preview
+                </Label>
+                <p
+                  className="text-lg"
+                  style={generateFontPreviewStyles(fontFamily)}
+                >
+                  The quick brown fox jumps over the lazy dog
+                </p>
+                <p
+                  className="mt-2 text-muted-foreground text-sm"
+                  style={generateFontPreviewStyles(fontFamily)}
+                >
+                  Sample form text with numbers 1234567890
+                </p>
+              </div>
+              <p className="text-muted-foreground text-xs">
+                Choose from hundreds of Google Fonts. The font will be loaded
+                automatically.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="p-4 shadow-none">
+            <CardContent className="flex flex-col gap-3 p-0">
+              <Label className="font-medium" id="font-size-label">
+                Font Size
               </Label>
-              <p
-                className="text-lg"
-                style={generateFontPreviewStyles(fontFamily)}
-              >
-                The quick brown fox jumps over the lazy dog
+              <div className="px-2">
+                <Slider
+                  aria-labelledby="font-size-label"
+                  max={FONT_SIZE_OPTIONS.length - 1}
+                  min={0}
+                  onValueChange={handleFontSizeChange}
+                  step={1}
+                  value={[getFontSizeSliderValue(fontSize)]}
+                />
+              </div>
+              <p className="text-muted-foreground text-xs">
+                Selected: {(() => {
+                  const idx = getFontSizeSliderValue(fontSize);
+                  const opt = FONT_SIZE_OPTIONS[idx];
+                  return opt ? `${opt.label} (${opt.description})` : "";
+                })()}
               </p>
-              <p
-                className="mt-2 text-muted-foreground text-sm"
-                style={generateFontPreviewStyles(fontFamily)}
-              >
-                Sample form text with numbers 1234567890
+            </CardContent>
+          </Card>
+
+          <Card className="p-4 shadow-none">
+            <CardContent className="flex flex-col gap-3 p-0">
+              <Label className="font-medium" id="font-weight-label">
+                Font Weight
+              </Label>
+              <div className="px-2">
+                <Slider
+                  aria-labelledby="font-weight-label"
+                  max={FONT_WEIGHT_OPTIONS.length - 1}
+                  min={0}
+                  onValueChange={handleFontWeightChange}
+                  step={1}
+                  value={[getFontWeightSliderValue(fontWeight)]}
+                />
+              </div>
+              <p className="text-muted-foreground text-xs">
+                Selected: {(() => {
+                  const idx = getFontWeightSliderValue(fontWeight);
+                  const opt = FONT_WEIGHT_OPTIONS[idx];
+                  return opt ? `${opt.label} (${opt.description})` : "";
+                })()}
               </p>
-            </div>
-            <p className="text-muted-foreground text-xs">
-              Choose from hundreds of Google Fonts. The font will be loaded
-              automatically.
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="p-4 shadow-none">
-          <CardContent className="flex flex-col gap-3 p-0">
-            <Label className="font-medium" id="font-size-label">
-              Font Size
-            </Label>
-            <div className="px-2">
-              <Slider
-                aria-labelledby="font-size-label"
-                max={FONT_SIZE_OPTIONS.length - 1}
-                min={0}
-                onValueChange={handleFontSizeChange}
-                step={1}
-                value={[getFontSizeSliderValue(fontSize)]}
-              />
-            </div>
-            <p className="text-muted-foreground text-xs">
-              Selected: {(() => {
-                const idx = getFontSizeSliderValue(fontSize);
-                const opt = FONT_SIZE_OPTIONS[idx];
-                return opt ? `${opt.label} (${opt.description})` : "";
-              })()}
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="p-4 shadow-none">
-          <CardContent className="flex flex-col gap-3 p-0">
-            <Label className="font-medium" id="font-weight-label">
-              Font Weight
-            </Label>
-            <div className="px-2">
-              <Slider
-                aria-labelledby="font-weight-label"
-                max={FONT_WEIGHT_OPTIONS.length - 1}
-                min={0}
-                onValueChange={handleFontWeightChange}
-                step={1}
-                value={[getFontWeightSliderValue(fontWeight)]}
-              />
-            </div>
-            <p className="text-muted-foreground text-xs">
-              Selected: {(() => {
-                const idx = getFontWeightSliderValue(fontWeight);
-                const opt = FONT_WEIGHT_OPTIONS[idx];
-                return opt ? `${opt.label} (${opt.description})` : "";
-              })()}
-            </p>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
         </div>
       </ScrollArea>
     </div>

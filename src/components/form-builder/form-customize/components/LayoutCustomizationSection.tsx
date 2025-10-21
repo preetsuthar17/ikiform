@@ -153,145 +153,145 @@ export function LayoutCustomizationSection({
 
       <ScrollArea className="max-h-[calc(100vh-200px)]">
         <div className="flex flex-col gap-4">
-        <Card className="p-4 shadow-none">
-          <CardContent className="p-0">
-            <div className="flex items-center gap-3">
-              <Switch
-                checked={!!localSettings.showProgress}
-                id="show-progress-toggle"
-                onCheckedChange={(checked) =>
-                  updateSettings({ showProgress: checked })
-                }
-              />
-              <Label
-                className="cursor-pointer select-none"
-                htmlFor="show-progress-toggle"
-              >
-                Show Progress Bar
-              </Label>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="p-4 shadow-none">
-          <CardContent className="flex flex-col gap-3 p-0">
-            <Label className="flex items-center gap-2 font-medium">
-              <Ruler className="size-4" />
-              Form Width
-            </Label>
-            <p className="text-muted-foreground text-xs">
-              Controls the maximum width of the form container
-            </p>
-            <div>
-              <Slider
-                aria-labelledby="form-width-label"
-                max={FORM_WIDTH_OPTIONS.length - 1}
-                min={0}
-                onValueChange={handleWidthChange}
-                step={1}
-                value={[getWidthSliderValue(currentWidth)]}
-              />
-            </div>
-            {currentWidth === "custom" && (
-              <div className="flex flex-col gap-2">
-                <Label className="text-muted-foreground text-sm">
-                  Custom Width (e.g., 600px, 80%, 50rem)
+          <Card className="p-4 shadow-none">
+            <CardContent className="p-0">
+              <div className="flex items-center gap-3">
+                <Switch
+                  checked={!!localSettings.showProgress}
+                  id="show-progress-toggle"
+                  onCheckedChange={(checked) =>
+                    updateSettings({ showProgress: checked })
+                  }
+                />
+                <Label
+                  className="cursor-pointer select-none"
+                  htmlFor="show-progress-toggle"
+                >
+                  Show Progress Bar
                 </Label>
-                <Input
-                  className="max-w-xs"
-                  onChange={(e) => handleCustomWidthChange(e.target.value)}
-                  placeholder="Enter custom width"
-                  value={customWidth}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="p-4 shadow-none">
+            <CardContent className="flex flex-col gap-3 p-0">
+              <Label className="flex items-center gap-2 font-medium">
+                <Ruler className="size-4" />
+                Form Width
+              </Label>
+              <p className="text-muted-foreground text-xs">
+                Controls the maximum width of the form container
+              </p>
+              <div>
+                <Slider
+                  aria-labelledby="form-width-label"
+                  max={FORM_WIDTH_OPTIONS.length - 1}
+                  min={0}
+                  onValueChange={handleWidthChange}
+                  step={1}
+                  value={[getWidthSliderValue(currentWidth)]}
                 />
               </div>
-            )}
-            <p className="text-muted-foreground text-xs">
-              {(() => {
-                const idx = getWidthSliderValue(currentWidth);
-                const opt = FORM_WIDTH_OPTIONS[idx];
-                return opt ? `${opt.label} (${opt.description})` : "";
-              })()}
-            </p>
-          </CardContent>
-        </Card>
+              {currentWidth === "custom" && (
+                <div className="flex flex-col gap-2">
+                  <Label className="text-muted-foreground text-sm">
+                    Custom Width (e.g., 600px, 80%, 50rem)
+                  </Label>
+                  <Input
+                    className="max-w-xs"
+                    onChange={(e) => handleCustomWidthChange(e.target.value)}
+                    placeholder="Enter custom width"
+                    value={customWidth}
+                  />
+                </div>
+              )}
+              <p className="text-muted-foreground text-xs">
+                {(() => {
+                  const idx = getWidthSliderValue(currentWidth);
+                  const opt = FORM_WIDTH_OPTIONS[idx];
+                  return opt ? `${opt.label} (${opt.description})` : "";
+                })()}
+              </p>
+            </CardContent>
+          </Card>
 
-        <Card className="p-4 shadow-none">
-          <CardContent className="flex flex-col gap-3 p-0">
-            <Label className="font-medium">Internal Padding</Label>
-            <p className="text-muted-foreground text-xs">
-              Controls the space inside the form container
-            </p>
-            <div>
-              <Slider
-                aria-labelledby="internal-padding-label"
-                max={FORM_PADDING_OPTIONS.length - 1}
-                min={0}
-                onValueChange={handlePaddingChange}
-                step={1}
-                value={[getPaddingSliderValue(currentPadding)]}
-              />
-            </div>
-            <p className="text-muted-foreground text-xs">
-              {(() => {
-                const idx = getPaddingSliderValue(currentPadding);
-                const opt = FORM_PADDING_OPTIONS[idx];
-                return opt ? `${opt.label} (${opt.description})` : "";
-              })()}
-            </p>
-          </CardContent>
-        </Card>
+          <Card className="p-4 shadow-none">
+            <CardContent className="flex flex-col gap-3 p-0">
+              <Label className="font-medium">Internal Padding</Label>
+              <p className="text-muted-foreground text-xs">
+                Controls the space inside the form container
+              </p>
+              <div>
+                <Slider
+                  aria-labelledby="internal-padding-label"
+                  max={FORM_PADDING_OPTIONS.length - 1}
+                  min={0}
+                  onValueChange={handlePaddingChange}
+                  step={1}
+                  value={[getPaddingSliderValue(currentPadding)]}
+                />
+              </div>
+              <p className="text-muted-foreground text-xs">
+                {(() => {
+                  const idx = getPaddingSliderValue(currentPadding);
+                  const opt = FORM_PADDING_OPTIONS[idx];
+                  return opt ? `${opt.label} (${opt.description})` : "";
+                })()}
+              </p>
+            </CardContent>
+          </Card>
 
-        <Card className="p-4 shadow-none">
-          <CardContent className="flex flex-col gap-3 p-0">
-            <Label className="font-medium">External Margin</Label>
-            <p className="text-muted-foreground text-xs">
-              Controls the space around the form container
-            </p>
-            <div>
-              <Slider
-                aria-labelledby="external-margin-label"
-                max={FORM_MARGIN_OPTIONS.length - 1}
-                min={0}
-                onValueChange={handleMarginChange}
-                step={1}
-                value={[getMarginSliderValue(currentMargin)]}
-              />
-            </div>
-            <p className="text-muted-foreground text-xs">
-              {(() => {
-                const idx = getMarginSliderValue(currentMargin);
-                const opt = FORM_MARGIN_OPTIONS[idx];
-                return opt ? `${opt.label} (${opt.description})` : "";
-              })()}
-            </p>
-          </CardContent>
-        </Card>
+          <Card className="p-4 shadow-none">
+            <CardContent className="flex flex-col gap-3 p-0">
+              <Label className="font-medium">External Margin</Label>
+              <p className="text-muted-foreground text-xs">
+                Controls the space around the form container
+              </p>
+              <div>
+                <Slider
+                  aria-labelledby="external-margin-label"
+                  max={FORM_MARGIN_OPTIONS.length - 1}
+                  min={0}
+                  onValueChange={handleMarginChange}
+                  step={1}
+                  value={[getMarginSliderValue(currentMargin)]}
+                />
+              </div>
+              <p className="text-muted-foreground text-xs">
+                {(() => {
+                  const idx = getMarginSliderValue(currentMargin);
+                  const opt = FORM_MARGIN_OPTIONS[idx];
+                  return opt ? `${opt.label} (${opt.description})` : "";
+                })()}
+              </p>
+            </CardContent>
+          </Card>
 
-        <Card className="p-4 shadow-none">
-          <CardContent className="flex flex-col gap-3 p-0">
-            <Label className="font-medium">Corner Radius</Label>
-            <p className="text-muted-foreground text-xs">
-              Controls how rounded the form corners appear
-            </p>
-            <div>
-              <Slider
-                aria-labelledby="corner-radius-label"
-                max={FORM_BORDER_RADIUS_OPTIONS.length - 1}
-                min={0}
-                onValueChange={handleBorderRadiusChange}
-                step={1}
-                value={[getBorderRadiusSliderValue(currentBorderRadius)]}
-              />
-            </div>
-            <p className="text-muted-foreground text-xs">
-              {(() => {
-                const idx = getBorderRadiusSliderValue(currentBorderRadius);
-                const opt = FORM_BORDER_RADIUS_OPTIONS[idx];
-                return opt ? `${opt.label} (${opt.description})` : "";
-              })()}
-            </p>
-          </CardContent>
-        </Card>
+          <Card className="p-4 shadow-none">
+            <CardContent className="flex flex-col gap-3 p-0">
+              <Label className="font-medium">Corner Radius</Label>
+              <p className="text-muted-foreground text-xs">
+                Controls how rounded the form corners appear
+              </p>
+              <div>
+                <Slider
+                  aria-labelledby="corner-radius-label"
+                  max={FORM_BORDER_RADIUS_OPTIONS.length - 1}
+                  min={0}
+                  onValueChange={handleBorderRadiusChange}
+                  step={1}
+                  value={[getBorderRadiusSliderValue(currentBorderRadius)]}
+                />
+              </div>
+              <p className="text-muted-foreground text-xs">
+                {(() => {
+                  const idx = getBorderRadiusSliderValue(currentBorderRadius);
+                  const opt = FORM_BORDER_RADIUS_OPTIONS[idx];
+                  return opt ? `${opt.label} (${opt.description})` : "";
+                })()}
+              </p>
+            </CardContent>
+          </Card>
         </div>
       </ScrollArea>
     </div>

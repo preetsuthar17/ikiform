@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, ChevronDown, Search, Type } from "lucide-react";
+import { Check, ChevronDown, Type } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -324,8 +324,8 @@ export function GoogleFontPicker({
           </Button>
         </PopoverTrigger>
 
-        <PopoverContent align="start" className="w-[320px] md:w-[400px] p-0">
-          <Card className="shadow-none border-0">
+        <PopoverContent align="start" className="w-[320px] p-0 md:w-[400px]">
+          <Card className="border-0 shadow-none">
             <CardContent className="p-3 md:p-4">
               <div className="flex flex-col gap-3 md:gap-4">
                 {/* Search */}
@@ -343,7 +343,7 @@ export function GoogleFontPicker({
                 <div className="flex flex-wrap gap-1.5 md:gap-2">
                   {FONT_CATEGORIES.map((category) => (
                     <Button
-                      className="h-7 px-2 md:h-8 md:px-3 text-xs"
+                      className="h-7 px-2 text-xs md:h-8 md:px-3"
                       key={category.id}
                       onClick={() => setSelectedCategory(category.id)}
                       size="sm"
@@ -410,7 +410,7 @@ export function GoogleFontPicker({
                         {filteredFonts.map((font) => (
                           <Card
                             className={cn(
-                              "cursor-pointer transition-all duration-200 hover:bg-accent/50 p-0 shadow-none",
+                              "cursor-pointer p-0 shadow-none transition-all duration-200 hover:bg-accent/50",
                               value === font.family &&
                                 "border-primary/20 bg-accent/30 ring-2 ring-primary/20"
                             )}
@@ -420,9 +420,9 @@ export function GoogleFontPicker({
                           >
                             <CardContent className="p-3 md:p-4">
                               <div className="flex items-center justify-between">
-                                <div className="flex flex-1 items-center gap-2 md:gap-3 min-w-0">
+                                <div className="flex min-w-0 flex-1 items-center gap-2 md:gap-3">
                                   <span
-                                    className="font-medium text-sm md:text-base truncate"
+                                    className="truncate font-medium text-sm md:text-base"
                                     style={{
                                       fontFamily: loadedFonts.has(font.family)
                                         ? `"${font.family}", system-ui, sans-serif`
@@ -431,11 +431,17 @@ export function GoogleFontPicker({
                                   >
                                     {font.family}
                                   </span>
-                                  <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
-                                    <Badge className="text-xs hidden md:inline-flex" variant="outline">
+                                  <div className="flex flex-shrink-0 items-center gap-1.5 md:gap-2">
+                                    <Badge
+                                      className="hidden text-xs md:inline-flex"
+                                      variant="outline"
+                                    >
                                       {CATEGORY_MAP[font.category]}
                                     </Badge>
-                                    <Badge className="text-xs" variant="secondary">
+                                    <Badge
+                                      className="text-xs"
+                                      variant="secondary"
+                                    >
                                       {font.variants.length}
                                     </Badge>
                                   </div>
@@ -443,7 +449,9 @@ export function GoogleFontPicker({
                                 <Check
                                   className={cn(
                                     "size-4 shrink-0 transition-opacity",
-                                    value === font.family ? "opacity-100" : "opacity-0"
+                                    value === font.family
+                                      ? "opacity-100"
+                                      : "opacity-0"
                                   )}
                                 />
                               </div>
