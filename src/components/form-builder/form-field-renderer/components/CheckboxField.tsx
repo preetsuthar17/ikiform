@@ -139,15 +139,6 @@ export function CheckboxField(props: BaseFieldProps) {
       <div className={builderMode ? "pointer-events-none" : ""}>
         {renderCheckboxOptions()}
       </div>
-      {error && (
-        <div
-          aria-live="polite"
-          className="rounded-md bg-destructive/10 p-3 text-destructive text-sm"
-          role="alert"
-        >
-          {error}
-        </div>
-      )}
     </div>
   );
 }

@@ -160,15 +160,6 @@ export function BannerField({ field, error }: BaseFieldProps) {
         </p>
       )}
       {renderBannerContent()}
-      {error && (
-        <div
-          aria-live="polite"
-          className="rounded-md bg-destructive/10 p-3 text-destructive text-sm"
-          role="alert"
-        >
-          {error}
-        </div>
-      )}
     </div>
   );
 }

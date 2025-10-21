@@ -218,16 +218,6 @@ export function FileUploadField(props: BaseFieldProps) {
         </Alert>
       )}
 
-      {error && (
-        <div
-          aria-live="polite"
-          className="rounded-md bg-destructive/10 p-3 text-destructive text-sm"
-          role="alert"
-        >
-          {error}
-        </div>
-      )}
-
       {uploadedFiles.length > 0 && (
         <div className="flex flex-col gap-2">
           <h4 className="font-medium text-sm">

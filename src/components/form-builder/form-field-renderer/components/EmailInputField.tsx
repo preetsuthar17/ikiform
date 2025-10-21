@@ -164,7 +164,7 @@ export function EmailInputField(props: BaseFieldProps) {
     return (
       <div className="flex items-center gap-2">
         <Badge className="text-xs" variant="secondary">
-          Auto-complete: @{emailSettings.autoCompleteDomain}
+          Auto-complete: @{emailSettings?.autoCompleteDomain ?? ""}
         </Badge>
       </div>
     );
@@ -177,7 +177,7 @@ export function EmailInputField(props: BaseFieldProps) {
     return (
       <div className="flex flex-wrap gap-1">
         <span className="text-muted-foreground text-xs">Allowed domains:</span>
-        {emailSettings.allowedDomains.map((domain, index) => (
+        {(emailSettings?.allowedDomains ?? []).map((domain, index) => (
           <Badge className="text-xs" key={index} variant="outline">
             @{domain}
           </Badge>
@@ -219,12 +219,6 @@ export function EmailInputField(props: BaseFieldProps) {
 
       {renderAutoCompleteBadge()}
       {renderAllowedDomains()}
-
-      {errorMessage && (
-        <p aria-live="polite" className="text-destructive text-sm" role="alert">
-          {errorMessage}
-        </p>
-      )}
     </div>
   );
 }

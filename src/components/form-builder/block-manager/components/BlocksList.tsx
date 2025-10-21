@@ -52,8 +52,8 @@ export function BlocksList({
   };
 
   return (
-    <ScrollArea className="flex-1">
-      <div className="flex flex-col gap-4">
+    <ScrollArea className="h-0 min-h-0 flex-1">
+      <div className="flex flex-col gap-4 p-1">
         <DragDropContext onDragEnd={handleDragEnd}>
           <Droppable droppableId="blocks">
             {(provided) => (

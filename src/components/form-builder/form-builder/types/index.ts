@@ -58,6 +58,7 @@ export interface FormBuilderHeaderProps {
   onSettings: () => void;
   onPublish: () => void;
   onSave: () => void;
+  onBlockAdd?: () => void;
 }
 
 export interface UnsavedChangesIndicatorProps {

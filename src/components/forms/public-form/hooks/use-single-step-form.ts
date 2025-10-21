@@ -205,7 +205,6 @@ export const useSingleStepForm = (
 
     if (!isValid) {
       setErrors(validationErrors);
-      toast.error("Please fix the errors in the form");
       return;
     }
 

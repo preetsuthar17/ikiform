@@ -287,7 +287,6 @@ export const useFormState = (
 
     if (!isValid) {
       setErrors(validationErrors);
-      toast.error("Please fix the errors before continuing");
       return;
     }
 
@@ -328,7 +327,6 @@ export const useFormState = (
 
     if (!allValid) {
       setErrors(allErrors);
-      toast.error("Please fix all errors before submitting");
       return;
     }
 

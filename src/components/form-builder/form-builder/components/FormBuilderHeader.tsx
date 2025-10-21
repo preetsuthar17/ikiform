@@ -5,6 +5,7 @@ import {
   EyeOff,
   Globe,
   MoreHorizontal,
+  Plus,
   Save,
   Settings as SettingsIcon,
   Share,
@@ -44,6 +45,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
   onSettings,
   onPublish,
   onSave,
+  onBlockAdd,
 }) => {
   const fieldCount = formSchema.fields.length;
 
@@ -61,16 +63,12 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
             Form Builder
           </h1>
           <div className="flex items-center gap-2 px-2 md:gap-3">
-            <Button
-              asChild
-              className="font-medium text-xs md:text-sm"
-              variant="outline"
-            >
+            <Button asChild className="font-medium text-sm" variant="outline">
               <Link className="z-1 flex items-center" href="/dashboard">
                 Go to Dashboard
               </Link>
             </Button>
-            <div className="text-muted-foreground text-xs md:text-sm">
+            <div className="text-muted-foreground text-sm">
               {fieldCount} field{fieldCount !== 1 ? "s" : ""}
             </div>
             {autoSaving && (
@@ -92,6 +90,18 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
         >
           <ScrollArea className="w-full">
             <div className="flex items-center justify-start gap-2">
+              {formSchema.settings.multiStep && (
+                <Button
+                  aria-label="Add new step"
+                  className="gap-2"
+                  onClick={onBlockAdd}
+                  size="sm"
+                  variant="default"
+                >
+                  <Plus className="size-4" />
+                  Add Step
+                </Button>
+              )}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -214,7 +224,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
               </Tooltip>
 
               <Button disabled={saving} loading={saving} onClick={onSave}>
-                {!saving && <Save className="size-3" />}
+                {!saving && <Save className="size-4 shrink-0" />}
                 {saving ? "Saving" : "Save Form"}
               </Button>
             </div>

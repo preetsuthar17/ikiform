@@ -110,6 +110,8 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
         >
           <FormPreview
             onAddField={onFieldAdd}
+            onBlockAdd={onBlockAdd}
+            onBlockDelete={onBlockDelete}
             onBlockUpdate={onBlockUpdate}
             onFieldDelete={onFieldDelete}
             onFieldSelect={onFieldSelect}

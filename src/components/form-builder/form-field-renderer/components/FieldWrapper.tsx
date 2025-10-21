@@ -36,9 +36,12 @@ export function FieldWrapper({
     if (!(shouldShowLabel && field.label)) return null;
 
     return (
-      <Label className="font-medium text-foreground text-sm" htmlFor={field.id}>
+      <Label
+        className="gap-1 font-medium text-foreground text-sm"
+        htmlFor={field.id}
+      >
         {getFieldLabel()}
-        {field.required && <span className="ml-1 text-destructive">*</span>}
+        {field.required && <span className="text-destructive">*</span>}
       </Label>
     );
   };

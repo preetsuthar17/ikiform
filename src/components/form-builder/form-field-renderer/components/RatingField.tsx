@@ -126,18 +126,5 @@ export function RatingField({
     );
   };
 
-  return (
-    <div className="flex flex-col gap-3">
-      {renderRatingIcons()}
-      {error && (
-        <div
-          aria-live="polite"
-          className="rounded-md bg-destructive/10 p-3 text-destructive text-sm"
-          role="alert"
-        >
-          {error}
-        </div>
-      )}
-    </div>
-  );
+  return <div className="flex flex-col gap-3">{renderRatingIcons()}</div>;
 }

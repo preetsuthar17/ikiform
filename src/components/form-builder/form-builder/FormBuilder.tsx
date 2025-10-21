@@ -399,6 +399,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
             formSchema={state.formSchema}
             isPublished={state.isPublished}
             onAnalytics={viewAnalytics}
+            onBlockAdd={addBlock}
             onJsonView={() => actions.setShowJsonView(true)}
             onModeToggle={handleModeToggle}
             onPublish={togglePublish}
@@ -413,6 +414,8 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           <div className="h-full w-full">
             <FormPreview
               onAddField={addField}
+              onBlockAdd={addBlock}
+              onBlockDelete={deleteBlock}
               onBlockUpdate={updateBlock}
               onFieldDelete={deleteField}
               onFieldSelect={handleFieldSelect}
@@ -495,6 +498,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
         formSchema={state.formSchema}
         isPublished={state.isPublished}
         onAnalytics={viewAnalytics}
+        onBlockAdd={addBlock}
         onJsonView={() => actions.setShowJsonView(true)}
         onModeToggle={handleModeToggle}
         onPublish={togglePublish}
