@@ -95,12 +95,12 @@ export function FormSettingsMobileLayout({
 
   return (
     <div className="flex h-full flex-col gap-4 md:hidden">
-      <header className="flex flex-shrink-0 items-center gap-4">
+      <header className="flex flex-shrink-0 items-center gap-3">
         <Button
           aria-label="Go back to settings list"
           onClick={handleBackClick}
           size="icon"
-          variant="ghost"
+          variant="outline"
         >
           <ArrowLeft aria-hidden="true" className="size-4" />
         </Button>
