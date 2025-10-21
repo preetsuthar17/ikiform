@@ -763,6 +763,7 @@ export interface FormSchema {
       apiKey?: string;
       allowExternalSubmissions?: boolean;
     };
+    storedSteps?: FormBlock[];
   };
   // logic removed
 }

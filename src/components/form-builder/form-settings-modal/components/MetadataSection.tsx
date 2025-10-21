@@ -298,18 +298,18 @@ export function MetadataSection({
                 className="flex items-center gap-2 text-lg tracking-tight"
                 id="basic-seo-title"
               >
-                Basic SEO
+                Basic SEO{" "}
+                {hasBasicChanges && (
+                  <Badge className="gap-2" variant="secondary">
+                    <div className="size-2 rounded-full bg-orange-500" />
+                    Unsaved changes
+                  </Badge>
+                )}
               </CardTitle>
               <CardDescription>
                 Titles, descriptions and canonical URL
               </CardDescription>
             </div>
-            {hasBasicChanges && (
-              <Badge className="gap-2" variant="secondary">
-                <div className="size-2 rounded-full bg-orange-500" />
-                Unsaved changes
-              </Badge>
-            )}
           </div>
         </CardHeader>
         <CardContent className="flex flex-col gap-6">
@@ -461,16 +461,16 @@ export function MetadataSection({
                 className="flex items-center gap-2 text-lg tracking-tight"
                 id="social-meta-title"
               >
-                Social Metadata
+                Social Metadata{" "}
+                {hasSocialChanges && (
+                  <Badge className="gap-2" variant="secondary">
+                    <div className="size-2 rounded-full bg-orange-500" />
+                    Unsaved changes
+                  </Badge>
+                )}
               </CardTitle>
               <CardDescription>Open Graph and Twitter settings</CardDescription>
             </div>
-            {hasSocialChanges && (
-              <Badge className="gap-2" variant="secondary">
-                <div className="size-2 rounded-full bg-orange-500" />
-                Unsaved changes
-              </Badge>
-            )}
           </div>
         </CardHeader>
         <CardContent className="flex flex-col gap-6">
@@ -687,18 +687,18 @@ export function MetadataSection({
                 className="flex items-center gap-2 text-lg tracking-tight"
                 id="indexing-title"
               >
-                Search Engine Indexing
+                Search Engine Indexing{" "}
+                {hasIndexingChanges && (
+                  <Badge className="gap-2" variant="secondary">
+                    <div className="size-2 rounded-full bg-orange-500" />
+                    Unsaved changes
+                  </Badge>
+                )}
               </CardTitle>
               <CardDescription>
                 Control how search engines crawl this form
               </CardDescription>
             </div>
-            {hasIndexingChanges && (
-              <Badge className="gap-2" variant="secondary">
-                <div className="size-2 rounded-full bg-orange-500" />
-                Unsaved changes
-              </Badge>
-            )}
           </div>
         </CardHeader>
         <CardContent className="flex flex-col gap-6">

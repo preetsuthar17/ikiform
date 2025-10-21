@@ -166,18 +166,18 @@ export function PasswordProtectionSection({
                 className="flex items-center gap-2 text-lg tracking-tight"
                 id="password-protection-title"
               >
-                Password Protection
+                Password Protection{" "}
+                {hasChanges && (
+                  <Badge className="gap-2" variant="secondary">
+                    <div className="size-2 rounded-full bg-orange-500" />
+                    Unsaved changes
+                  </Badge>
+                )}
               </CardTitle>
               <CardDescription id="password-protection-description">
                 Restrict access to your form with a password
               </CardDescription>
             </div>
-            {hasChanges && (
-              <Badge className="gap-2" variant="secondary">
-                <div className="size-2 rounded-full bg-orange-500" />
-                Unsaved changes
-              </Badge>
-            )}
           </div>
         </CardHeader>
         <CardContent className="flex flex-col gap-6">

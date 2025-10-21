@@ -174,18 +174,18 @@ export function BrandingSection({
               className="flex items-center gap-2 text-lg tracking-tight"
               id="branding-title"
             >
-              Branding
+              Branding{" "}
+              {hasChanges && (
+                <Badge className="gap-2" variant="secondary">
+                  <div className="size-2 rounded-full bg-orange-500" />
+                  Unsaved changes
+                </Badge>
+              )}
             </CardTitle>
             <CardDescription id="branding-description">
               Manage Ikiform branding and social media links
             </CardDescription>
           </div>
-          {hasChanges && (
-            <Badge className="gap-2" variant="secondary">
-              <div className="size-2 rounded-full bg-orange-500" />
-              Unsaved changes
-            </Badge>
-          )}
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-6">

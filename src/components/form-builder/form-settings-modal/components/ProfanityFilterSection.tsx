@@ -167,18 +167,18 @@ export function ProfanityFilterSection({
                 className="flex items-center gap-2 text-lg tracking-tight"
                 id="profanity-filter-title"
               >
-                Profanity Filter
+                Profanity Filter{" "}
+                {hasChanges && (
+                  <Badge className="gap-2" variant="secondary">
+                    <div className="size-2 rounded-full bg-orange-500" />
+                    Unsaved changes
+                  </Badge>
+                )}
               </CardTitle>
               <CardDescription id="profanity-filter-description">
                 Automatically detect and filter inappropriate content
               </CardDescription>
             </div>
-            {hasChanges && (
-              <Badge className="gap-2" variant="secondary">
-                <div className="size-2 rounded-full bg-orange-500" />
-                Unsaved changes
-              </Badge>
-            )}
           </div>
         </CardHeader>
         <CardContent className="flex flex-col gap-6">

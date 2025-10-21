@@ -169,7 +169,7 @@ export function ShareFormModal({
             <Share aria-hidden="true" className="size-5" />
             Share Form
           </DialogTitle>
-          <DialogDescription>
+          <DialogDescription className="text-left">
             {isPublished
               ? "Share your form with others using the link or QR code below"
               : "Publish your form to make it shareable with others"}

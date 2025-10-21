@@ -5,7 +5,6 @@ import {
   EyeOff,
   Globe,
   MoreHorizontal,
-  Plus,
   Save,
   Settings as SettingsIcon,
   Share,
@@ -90,18 +89,6 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
         >
           <ScrollArea className="w-full">
             <div className="flex items-center justify-start gap-2">
-              {formSchema.settings.multiStep && (
-                <Button
-                  aria-label="Add new step"
-                  className="gap-2"
-                  onClick={onBlockAdd}
-                  size="sm"
-                  variant="default"
-                >
-                  <Plus className="size-4" />
-                  Add Step
-                </Button>
-              )}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -112,7 +99,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
                     <MoreHorizontal className="size-3" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="shadow-xs">
+                <DropdownMenuContent align="start" className="shadow-xs">
                   <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                     <div className="flex w-full items-center justify-between gap-4">
                       <span>Multi-step form</span>

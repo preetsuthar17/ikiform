@@ -275,18 +275,18 @@ export function BasicInfoSection({
                   className="flex items-center gap-2 text-lg tracking-tight"
                   id="basic-info-title"
                 >
-                  Basic Information
+                  Basic Information{" "}
+                  {hasBasicChanges && (
+                    <Badge className="gap-2" variant="secondary">
+                      <div className="size-2 rounded-full bg-orange-500" />
+                      Unsaved changes
+                    </Badge>
+                  )}
                 </CardTitle>
                 <CardDescription id="basic-info-description">
                   Configure the basic details of your form
                 </CardDescription>
               </div>
-              {hasBasicChanges && (
-                <Badge className="gap-2" variant="secondary">
-                  <div className="size-2 rounded-full bg-orange-500" />
-                  Unsaved changes
-                </Badge>
-              )}
             </div>
           </CardHeader>
           <CardContent className="flex flex-col gap-6">
@@ -400,18 +400,18 @@ export function BasicInfoSection({
                   className="flex items-center gap-2 text-lg tracking-tight"
                   id="behavior-title"
                 >
-                  Form Behavior
+                  Form Behavior{" "}
+                  {hasBehaviorChanges && (
+                    <Badge className="gap-2" variant="secondary">
+                      <div className="size-2 rounded-full bg-orange-500" />
+                      Unsaved changes
+                    </Badge>
+                  )}
                 </CardTitle>
                 <CardDescription id="behavior-description">
                   Configure how your form behaves and appears to users
                 </CardDescription>
               </div>
-              {hasBehaviorChanges && (
-                <Badge className="gap-2" variant="secondary">
-                  <div className="size-2 rounded-full bg-orange-500" />
-                  Unsaved changes
-                </Badge>
-              )}
             </div>
           </CardHeader>
           <CardContent className="flex flex-col gap-6">

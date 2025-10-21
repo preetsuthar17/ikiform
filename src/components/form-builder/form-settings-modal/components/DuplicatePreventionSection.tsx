@@ -176,18 +176,18 @@ export function DuplicatePreventionSection({
                 className="flex items-center gap-2 text-lg tracking-tight"
                 id="duplicate-prevention-title"
               >
-                Duplicate Prevention
+                Duplicate Prevention{" "}
+                {hasChanges && (
+                  <Badge className="gap-2" variant="secondary">
+                    <div className="size-2 rounded-full bg-orange-500" />
+                    Unsaved changes
+                  </Badge>
+                )}
               </CardTitle>
               <CardDescription id="duplicate-prevention-description">
                 Prevent users from submitting the same form multiple times
               </CardDescription>
             </div>
-            {hasChanges && (
-              <Badge className="gap-2" variant="secondary">
-                <div className="size-2 rounded-full bg-orange-500" />
-                Unsaved changes
-              </Badge>
-            )}
           </div>
         </CardHeader>
         <CardContent className="flex flex-col gap-6">

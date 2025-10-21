@@ -61,12 +61,7 @@ export function FormFieldsContainer({
           overscrollBehavior: "contain",
         }}
       >
-        <ScrollArea
-          style={{
-            overscrollBehavior: "contain",
-          }}
-          type="always"
-        >
+        <ScrollArea type="always">
           {FIELD_TYPES.map((fieldType: { type: string; label: string }) => (
             <DropdownMenuItem
               aria-label={`Add ${fieldType.label} field`}
@@ -131,9 +126,6 @@ export function FormFieldsContainer({
       aria-labelledby="form-fields-heading"
       className="flex flex-col gap-4"
       role="region"
-      style={{
-        overscrollBehavior: "contain",
-      }}
     >
       <h2 className="sr-only" id="form-fields-heading">
         Form fields

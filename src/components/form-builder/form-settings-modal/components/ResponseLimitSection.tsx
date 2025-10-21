@@ -151,18 +151,19 @@ export function ResponseLimitSection({
         <div className="flex items-center justify-between">
           <div>
             <CardTitle className="text-lg" id="response-limit-title">
+              Response Limit{" "}
+              {hasChanges && (
+                <Badge className="gap-2" variant="secondary">
+                  <div className="size-2 rounded-full bg-orange-500" />
+                  Unsaved changes
+                </Badge>
+              )}
               Response Limit
             </CardTitle>
             <CardDescription>
               Stop accepting submissions after a set total count
             </CardDescription>
           </div>
-          {hasChanges && (
-            <Badge className="gap-2" variant="secondary">
-              <div className="size-2 rounded-full bg-orange-500" />
-              Unsaved changes
-            </Badge>
-          )}
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-6">

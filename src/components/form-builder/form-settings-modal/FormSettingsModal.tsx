@@ -61,8 +61,8 @@ export function FormSettingsModal({
 
   return (
     <Dialog onOpenChange={onClose} open={isOpen}>
-      <DialogContent className="flex h-[90vh] w-full grow flex-col p-0 sm:max-w-6xl">
-        <DialogHeader className="flex shrink-0 flex-row items-center gap-6 p-6 pb-4">
+      <DialogContent className="b-5 flex h-[90vh] w-full grow flex-col gap-0 overflow-hidden p-0 sm:max-w-6xl">
+        <DialogHeader className="flex shrink-0 flex-row items-center gap-6 p-4">
           <div className="flex items-center gap-3">
             <Settings className="size-5 text-primary" />
             <DialogTitle className="font-semibold text-xl">
@@ -70,7 +70,7 @@ export function FormSettingsModal({
             </DialogTitle>
           </div>
         </DialogHeader>
-        <div className="min-h-0 flex-1 px-6 pb-6">
+        <div className="mb-12 min-h-0 p-4 md:mb-0">
           {formId && (
             <>
               <FormSettingsDesktopLayout

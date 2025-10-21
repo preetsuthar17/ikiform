@@ -161,18 +161,19 @@ export function RateLimitSection({
             <div className="flex items-center justify-between">
               <div>
                 <CardTitle className="text-lg" id="rate-limit-title">
+                  Rate Limiting{" "}
+                  {hasChanges && (
+                    <Badge className="gap-2" variant="secondary">
+                      <div className="size-2 rounded-full bg-orange-500" />
+                      Unsaved changes
+                    </Badge>
+                  )}
                   Rate Limiting
                 </CardTitle>
                 <CardDescription id="rate-limit-description">
                   Control submission frequency to prevent spam and abuse
                 </CardDescription>
               </div>
-              {hasChanges && (
-                <Badge className="gap-2" variant="secondary">
-                  <div className="size-2 rounded-full bg-orange-500" />
-                  Unsaved changes
-                </Badge>
-              )}
             </div>
           </CardHeader>
           <CardContent className="flex flex-col gap-6">

@@ -152,18 +152,18 @@ export function NotificationsSection({
               className="flex items-center gap-2 text-lg tracking-tight"
               id="notifications-title"
             >
-              Notifications
+              Notifications{" "}
+              {hasChanges && (
+                <Badge className="gap-2" variant="secondary">
+                  <div className="size-2 rounded-full bg-orange-500" />
+                  Unsaved changes
+                </Badge>
+              )}
             </CardTitle>
             <CardDescription id="notifications-description">
               Configure email alerts for new form submissions
             </CardDescription>
           </div>
-          {hasChanges && (
-            <Badge className="gap-2" variant="secondary">
-              <div className="size-2 rounded-full bg-orange-500" />
-              Unsaved changes
-            </Badge>
-          )}
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-6">

@@ -35,7 +35,7 @@ const FeatureCard = React.memo(function FeatureCard({
     <Card
       className={`overflow-hidden rounded-none border-0 bg-background p-4 shadow-none transition-all duration-300 ease-out md:p-6 ${className}`}
     >
-      <div className="flex h-full w-full flex-col gap-8 p-6">
+      <div className="flex h-fit w-full flex-col gap-8 p-6 md:h-full">
         {/* Header */}
         <div className="flex flex-col items-start gap-4 text-left">
           <div className="flex min-w-0 flex-1 flex-col gap-3">
@@ -48,7 +48,7 @@ const FeatureCard = React.memo(function FeatureCard({
           </div>
         </div>
         {/* Preview */}
-        <div className="relative flex-1 overflow-hidden">
+        <div className="relative overflow-hidden">
           <div className="fade-bottom h-fit md:h-full">{preview}</div>
         </div>
       </div>
@@ -331,7 +331,7 @@ const AnalyticsPreview = () => {
           </motion.span>
         </div>
 
-        <div className="flex h-16 items-end gap-1">
+        <div className="flex h-32 items-end gap-1 md:h-16">
           <motion.svg
             className="h-full w-full"
             height={HEIGHT}

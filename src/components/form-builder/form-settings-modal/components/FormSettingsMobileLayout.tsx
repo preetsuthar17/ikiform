@@ -1,5 +1,5 @@
 import { ArrowLeft } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { FORM_SETTINGS_SECTIONS } from "../index";
@@ -21,8 +21,6 @@ export function FormSettingsMobileLayout({
   sectionProps,
 }: FormSettingsMobileLayoutProps) {
   const [showSectionList, setShowSectionList] = useState(true);
-  const sectionListRef = useRef<HTMLDivElement>(null);
-  const backButtonRef = useRef<HTMLButtonElement>(null);
 
   const handleSectionClick = (sectionId: FormSettingsSection) => {
     if (sectionId === "design" && sectionProps?.formId) {
@@ -38,60 +36,19 @@ export function FormSettingsMobileLayout({
     setShowSectionList(true);
   };
 
-  // Focus management for accessibility
-  useEffect(() => {
-    if (showSectionList && sectionListRef.current) {
-      // Focus first section button when showing list
-      const firstButton = sectionListRef.current.querySelector("button");
-      firstButton?.focus();
-    } else if (!showSectionList && backButtonRef.current) {
-      // Focus back button when showing section content
-      backButtonRef.current.focus();
-    }
-  }, [showSectionList]);
-
-  useEffect(() => {
-    if (!showSectionList) {
-      const sectionName = FORM_SETTINGS_SECTIONS.find(
-        (s) => s.id === activeSection
-      )?.label;
-      const announcement = document.createElement("div");
-      announcement.setAttribute("aria-live", "polite");
-      announcement.setAttribute("aria-atomic", "true");
-      announcement.className = "sr-only";
-      announcement.textContent = `Now viewing ${sectionName} settings`;
-      document.body.appendChild(announcement);
-
-      setTimeout(() => {
-        document.body.removeChild(announcement);
-      }, 1000);
-    }
-  }, [activeSection, showSectionList]);
-
   if (showSectionList) {
     return (
-      <div
-        className="flex h-full flex-col gap-4 md:hidden"
-        style={{
-          overscrollBehavior: "contain",
-        }}
-      >
+      <div className="flex h-full flex-col gap-4 md:hidden">
         <div className="p-2">
           <SettingsSearch
             activeSection={activeSection}
             onSectionChange={onSectionChange}
           />
         </div>
-        <ScrollArea
-          className="flex-1"
-          style={{
-            overscrollBehavior: "contain",
-          }}
-        >
+        <ScrollArea className="h-fit">
           <nav
             aria-label="Settings sections"
             className="flex flex-col gap-1 overflow-auto p-2"
-            ref={sectionListRef}
             role="navigation"
           >
             {FORM_SETTINGS_SECTIONS.map((section, index) => (
@@ -137,29 +94,12 @@ export function FormSettingsMobileLayout({
   }
 
   return (
-    <div
-      className="flex h-full flex-col md:hidden"
-      style={{
-        overscrollBehavior: "contain",
-      }}
-    >
-      <header className="flex flex-shrink-0 items-center gap-4 border-border border-b p-4">
+    <div className="flex h-full flex-col gap-4 md:hidden">
+      <header className="flex flex-shrink-0 items-center gap-4">
         <Button
           aria-label="Go back to settings list"
-          className="p-2 focus:ring-2 focus:ring-ring focus:ring-offset-1"
           onClick={handleBackClick}
-          onKeyDown={(e) => {
-            if (e.key === "Escape") {
-              handleBackClick();
-            }
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              handleBackClick();
-            }
-          }}
-          ref={backButtonRef}
           size="icon"
-          tabIndex={0}
           variant="ghost"
         >
           <ArrowLeft aria-hidden="true" className="size-4" />
@@ -168,17 +108,19 @@ export function FormSettingsMobileLayout({
       </header>
       <main
         aria-labelledby="settings-section-title"
-        className="h-full flex-1"
+        className="h-full"
         role="main"
         style={{
           overscrollBehavior: "contain",
         }}
       >
-        <FormSettingsContent
-          section={activeSection}
-          {...sectionProps}
-          updateNotifications={sectionProps.updateNotifications}
-        />
+        <ScrollArea className="h-full w-full pb-4">
+          <FormSettingsContent
+            section={activeSection}
+            {...sectionProps}
+            updateNotifications={sectionProps.updateNotifications}
+          />
+        </ScrollArea>
       </main>
     </div>
   );

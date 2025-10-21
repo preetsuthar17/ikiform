@@ -332,19 +332,19 @@ print_r($result);
               className="flex items-center gap-2 text-lg tracking-tight"
               id="api-access-title"
             >
-              API Access
+              API Access{" "}
+              {hasChanges && (
+                <Badge className="gap-2" variant="secondary">
+                  <div className="size-2 rounded-full bg-orange-500" />
+                  Unsaved changes
+                </Badge>
+              )}
               <Badge variant="secondary">Beta</Badge>
             </CardTitle>
             <CardDescription>
               Enable external submissions via a secure API key.
             </CardDescription>
           </div>
-          {hasChanges && (
-            <Badge className="gap-2" variant="secondary">
-              <div className="size-2 rounded-full bg-orange-500" />
-              Unsaved changes
-            </Badge>
-          )}
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-6">

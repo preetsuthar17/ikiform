@@ -11,10 +11,10 @@ const CtaHeading = React.memo(function CtaHeading() {
   return (
     <div className="flex flex-col gap-6">
       <h2
-        className="text-center font-semibold text-5xl leading-tighter tracking-[-2px]"
+        className="text-center font-semibold text-4xl leading-tighter tracking-[-2px] md:text-5xl"
         id="cta-title"
       >
-        Start collecting responses in seconds.
+        Start collecting responses in no time.
       </h2>
       <p className="text-center text-base text-muted-foreground md:text-lg">
         Get started with Ikiform to build forms, surveys, collect responses, and
@@ -81,7 +81,7 @@ export default function CTA() {
     >
       <div className="mx-auto flex w-full flex-col">
         <Card className="relative overflow-hidden rounded-none border-t-0 bg-card p-8 py-12 shadow-none md:p-12 md:py-16">
-          <CardContent className="flex flex-col items-center gap-8 py-24 text-center">
+          <CardContent className="flex flex-col items-center gap-8 px-0 py-24 text-center">
             {/* Main heading */}
             <CtaHeading />
 

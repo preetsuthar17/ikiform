@@ -59,11 +59,7 @@ export const FormNavigation: React.FC<FormNavigationProps> = ({
         type="button"
       >
         {isLastStep ? (
-          submitting ? (
-            "Submitting"
-          ) : (
-            schema.settings.submitText || "Submit"
-          )
+          schema.settings.submitText || "Submit"
         ) : (
           <>
             Next
