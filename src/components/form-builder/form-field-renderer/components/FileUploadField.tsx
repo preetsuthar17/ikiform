@@ -196,28 +196,17 @@ export function FileUploadField(props: BaseFieldProps) {
 
   return (
     <div className="flex flex-col gap-3">
-      {!fallbackFormId && (
-        <div
-          aria-live="polite"
-          className="rounded bg-muted/50 px-2 py-1 text-muted-foreground text-xs"
-          role="status"
-        >
-          📋 Preview Mode - Files will be shown for demo purposes
-        </div>
-      )}
-
       <Card className="border-0 p-0 shadow-none">
         <CardContent className="p-0">
           <FileUpload
             accept={accept}
-            className="bg-input"
+            className="bg-transparent"
             disabled={disabled || isUploading || builderMode}
             maxFiles={maxFiles - uploadedFiles.length}
             maxSize={maxSize}
             multiple={maxFiles > 1}
             onUpload={builderMode ? undefined : handleFileUpload}
             showPreview={false}
-            variant="default"
           />
         </CardContent>
       </Card>

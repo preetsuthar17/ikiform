@@ -7,7 +7,7 @@ export function FieldItem({ fieldType, onAddField }: FieldItemProps) {
   return (
     <Button
       aria-label={`Add ${fieldType.label} field`}
-      className="group h-auto min-h-11 w-full justify-start bg-card p-4 text-left"
+      className="group h-auto min-h-11 w-full justify-start p-4 text-left"
       onClick={() => onAddField(fieldType.type)}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {

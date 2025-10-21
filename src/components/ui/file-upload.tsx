@@ -82,7 +82,7 @@ const fileItemVariants = cva(
   {
     variants: {
       variant: {
-        default: "border border-border bg-card",
+        default: "border border-border bg-transparent",
         ghost: "bg-accent hover:bg-accent/80",
       },
     },
