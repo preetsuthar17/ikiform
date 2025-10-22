@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Footer from "@/components/home/footer";
 import Header from "@/components/home/header";
+import { TrialBannerWrapper } from "@/components/trial-banner-wrapper";
 
 interface ConditionalLayoutProps {
   children: React.ReactNode;
@@ -29,6 +30,7 @@ export default function ConditionalLayout({
   return (
     <div className="z-10 flex min-h-screen flex-col justify-between gap-12 px-4 md:px-8">
       <Header />
+      <TrialBannerWrapper />
       {children}
       <Footer />
     </div>
