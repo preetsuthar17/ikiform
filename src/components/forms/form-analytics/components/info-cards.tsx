@@ -1,9 +1,7 @@
 import { BarChart3, Calendar, TrendingUp } from "lucide-react";
 import type React from "react";
 import { Badge } from "@/components/ui/badge";
-
-import { Card } from "@/components/ui/card";
-
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { InfoCardsProps } from "../types";
 
 export const InfoCards: React.FC<InfoCardsProps> = ({
@@ -11,98 +9,108 @@ export const InfoCards: React.FC<InfoCardsProps> = ({
   data,
   formatDate,
 }) => (
-  <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-    <Card className="flex flex-col gap-4 border-border bg-card p-6">
-      <div className="flex items-center gap-3">
-        <div className="rounded-2xl bg-primary/10 p-2">
-          <Calendar className="size-5 text-primary" />
+  <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+    <Card className="border-border bg-card gap-4 p-4 grow shadow-none">
+      <CardHeader className="flex flex-row items-center gap-4 p-0">
+        <div className="rounded-2xl bg-primary/10 p-3" aria-hidden="true">
+          <Calendar className="size-6 text-primary" />
         </div>
-        <h3 className="font-semibold text-foreground text-lg">
+        <CardTitle className="text-base font-medium text-muted-foreground">
           Last Submission
-        </h3>
-      </div>
-      {data.lastSubmission ? (
-        <div className="flex flex-col gap-2">
-          <p className="font-medium text-foreground">
-            {formatDate(data.lastSubmission.submitted_at)}
-          </p>
-          <p className="text-muted-foreground text-sm">
-            {data.lastSubmission.ip_address &&
-              `From ${data.lastSubmission.ip_address}`}
-          </p>
-        </div>
-      ) : (
-        <p className="text-muted-foreground">No submissions yet</p>
-      )}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="py-0 px-1">
+        {data.lastSubmission ? (
+          <div className="flex flex-col gap-2">
+            <p className="font-semibold text-foreground">
+              {formatDate(data.lastSubmission.submitted_at)}
+            </p>
+            <p className="text-muted-foreground text-sm">
+              {data.lastSubmission.ip_address &&
+                `From ${data.lastSubmission.ip_address}`}
+            </p>
+          </div>
+        ) : (
+          <p className="text-muted-foreground">No submissions yet</p>
+        )}
+      </CardContent>
     </Card>
 
-    <Card className="flex flex-col gap-4 border-border bg-card p-6">
-      <div className="flex items-center gap-3">
-        <div className="rounded-2xl bg-primary/10 p-2">
-          <BarChart3 className="size-5 text-primary" />
+    <Card className="border-border bg-card gap-4 p-4 grow shadow-none">
+      <CardHeader className="flex flex-row items-center gap-4 p-0">
+        <div className="rounded-2xl bg-primary/10 p-3" aria-hidden="true">
+          <BarChart3 className="size-6 text-primary" />
         </div>
-        <h3 className="font-semibold text-foreground text-lg">Form Status</h3>
-      </div>
-      <div className="flex flex-col gap-3">
-        <div className="flex items-center justify-between">
-          <span className="text-muted-foreground text-sm">Published</span>
-          <Badge variant={form.is_published ? "default" : "secondary"}>
-            {form.is_published ? "Yes" : "No"}
-          </Badge>
+        <CardTitle className="text-base font-medium text-muted-foreground">
+          Form Status
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="py-0 px-1">
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground text-sm">Published</span>
+            <Badge variant={form.is_published ? "default" : "secondary"}>
+              {form.is_published ? "Yes" : "No"}
+            </Badge>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground text-sm">Created</span>
+            <span className="text-foreground text-sm">
+              {formatDate(form.created_at)}
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground text-sm">Updated</span>
+            <span className="text-foreground text-sm">
+              {formatDate(form.updated_at)}
+            </span>
+          </div>
         </div>
-        <div className="flex items-center justify-between">
-          <span className="text-muted-foreground text-sm">Created</span>
-          <span className="text-foreground text-sm">
-            {formatDate(form.created_at)}
-          </span>
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="text-muted-foreground text-sm">Updated</span>
-          <span className="text-foreground text-sm">
-            {formatDate(form.updated_at)}
-          </span>
-        </div>
-      </div>
+      </CardContent>
     </Card>
 
-    <Card className="flex flex-col gap-4 border-border bg-card p-6">
-      <div className="flex items-center gap-3">
-        <div className="rounded-2xl bg-primary/10 p-2">
-          <TrendingUp className="size-5 text-primary" />
+    <Card className="border-border bg-card gap-4 p-4 grow shadow-none">
+      <CardHeader className="flex flex-row items-center gap-4 p-0">
+        <div className="rounded-2xl bg-primary/10 p-3" aria-hidden="true">
+          <TrendingUp className="size-6 text-primary" />
         </div>
-        <h3 className="font-semibold text-foreground text-lg">Quick Stats</h3>
-      </div>
-      <div className="flex flex-col gap-3">
-        <div className="flex items-center justify-between">
-          <span className="text-muted-foreground text-sm">
-            Avg. Fields Completed
-          </span>
-          <span className="font-medium text-foreground text-sm">
-            {data.completionRate}%
-          </span>
+        <CardTitle className="text-base font-medium text-muted-foreground">
+          Quick Stats
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="py-0 px-1">
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground text-sm">
+              Avg. Fields Completed
+            </span>
+            <span className="font-semibold text-foreground text-sm">
+              {data.completionRate}%
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground text-sm">Most Active Day</span>
+            {data.mostActiveDay ? (
+              <div className="flex items-center gap-2">
+                <span className="font-semibold text-foreground text-sm">
+                  {data.mostActiveDay[0]}
+                </span>
+                <Badge className="text-xs" variant="secondary">
+                  {data.mostActiveDay[1]} submissions
+                </Badge>
+              </div>
+            ) : (
+              <span className="text-muted-foreground text-sm">N/A</span>
+            )}
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground text-sm">Form Type</span>
+            <Badge variant="outline">
+              {form.schema.settings?.multiStep ? "Multi-Step" : "Single Page"}
+            </Badge>
+          </div>
         </div>
-        <div className="flex items-center justify-between">
-          <span className="text-muted-foreground text-sm">Most Active Day</span>
-          {data.mostActiveDay ? (
-            <div className="flex items-center gap-2">
-              <span className="font-medium text-foreground text-sm">
-                {data.mostActiveDay[0]}
-              </span>
-              <Badge className="text-xs" variant="secondary">
-                {data.mostActiveDay[1]} submissions
-              </Badge>
-            </div>
-          ) : (
-            <span className="text-muted-foreground text-sm">N/A</span>
-          )}
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="text-muted-foreground text-sm">Form Type</span>
-          <Badge variant="outline">
-            {form.schema.settings?.multiStep ? "Multi-Step" : "Single Page"}
-          </Badge>
-        </div>
-      </div>
+      </CardContent>
     </Card>
   </div>
 );

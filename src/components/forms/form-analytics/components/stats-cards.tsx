@@ -10,113 +10,146 @@ import {
 } from "lucide-react";
 import type React from "react";
 
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import type { AnalyticsCardsProps, OverviewStatsProps } from "../types";
 
 export const OverviewStats: React.FC<OverviewStatsProps> = ({ data }) => (
-  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-    <Card className="flex items-center gap-4 border-border bg-card p-6">
-      <div className="rounded-2xl bg-blue-500/10 p-3">
-        <Users className="size-6 text-blue-600" />
-      </div>
-      <div className="flex flex-col gap-1">
-        <p className="font-medium text-muted-foreground text-sm">
+  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <Card className="border-border bg-card gap-4 p-4 md:p-6 h-fit grow shadow-none">
+      <CardHeader className="flex flex-row items-center gap-4 p-0">
+        <div className="rounded-2xl bg-blue-500/10 p-3" aria-hidden="true">
+          <Users className="size-6 text-blue-600" />
+        </div>
+        <CardTitle className="text-base font-medium text-muted-foreground">
           Total Submissions
-        </p>
-        <p className="font-bold text-2xl text-foreground">
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="py-0 px-1">
+        <p className="tabular-nums font-bold text-2xl text-foreground">
           {data.totalSubmissions.toLocaleString()}
         </p>
-      </div>
+      </CardContent>
     </Card>
-    <Card className="flex items-center gap-4 border-border bg-card p-6">
-      <div className="rounded-2xl bg-emerald-500/10 p-3">
-        <FileText className="size-6 text-emerald-600" />
-      </div>
-      <div className="flex flex-col gap-1">
-        <p className="font-medium text-muted-foreground text-sm">Form Fields</p>
-        <p className="font-bold text-2xl text-foreground">{data.totalFields}</p>
-      </div>
-    </Card>
-    <Card className="flex items-center gap-4 border-border bg-card p-6">
-      <div className="rounded-2xl bg-purple-500/10 p-3">
-        <TrendingUp className="size-6 text-purple-600" />
-      </div>
-      <div className="flex flex-col gap-1">
-        <p className="font-medium text-muted-foreground text-sm">
-          Completion Rate
+
+    <Card className="border-border bg-card gap-4 p-4 md:p-6 h-fit grow shadow-none">
+      <CardHeader className="flex flex-row items-center gap-4 p-0">
+        <div className="rounded-2xl bg-emerald-500/10 p-3" aria-hidden="true">
+          <FileText className="size-6 text-emerald-600" />
+        </div>
+        <CardTitle className="text-base font-medium text-muted-foreground">
+          Form Fields
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="py-0 px-1">
+        <p className="tabular-nums font-bold text-2xl text-foreground">
+          {data.totalFields}
         </p>
-        <p className="font-bold text-2xl text-foreground">
+      </CardContent>
+    </Card>
+
+    <Card className="border-border bg-card gap-4 p-4 md:p-6 h-fit grow shadow-none">
+      <CardHeader className="flex flex-row items-center gap-4 p-0">
+        <div className="rounded-2xl bg-purple-500/10 p-3" aria-hidden="true">
+          <TrendingUp className="size-6 text-purple-600" />
+        </div>
+        <CardTitle className="text-base font-medium text-muted-foreground">
+          Completion Rate
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="py-0 px-1">
+        <p className="tabular-nums font-bold text-2xl text-foreground">
           {data.completionRate}%
         </p>
-      </div>
+      </CardContent>
     </Card>
-    <Card className="flex items-center gap-4 border-border bg-card p-6">
-      <div className="rounded-2xl bg-orange-500/10 p-3">
-        <Clock className="size-6 text-orange-600" />
-      </div>
-      <div className="flex flex-col gap-1">
-        <p className="font-medium text-muted-foreground text-sm">
+
+    <Card className="border-border bg-card gap-4 p-4 md:p-6 h-fit grow shadow-none">
+      <CardHeader className="flex flex-row items-center gap-4 p-0">
+        <div className="rounded-2xl bg-orange-500/10 p-3" aria-hidden="true">
+          <Clock className="size-6 text-orange-600" />
+        </div>
+        <CardTitle className="text-base font-medium text-muted-foreground">
           Last 30 Days
-        </p>
-        <p className="font-bold text-2xl text-foreground">
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="py-0 px-1">
+        <p className="tabular-nums font-bold text-2xl text-foreground">
           {data.recentSubmissions.length}
         </p>
-      </div>
+      </CardContent>
     </Card>
   </div>
 );
 
 export const AnalyticsCards: React.FC<AnalyticsCardsProps> = ({ data }) => (
-  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-    <Card className="flex items-center gap-4 border-border bg-card p-6">
-      <div className="rounded-2xl bg-green-500/10 p-3">
-        <Activity className="size-6 text-green-600" />
-      </div>
-      <div className="flex flex-col gap-1">
-        <p className="font-medium text-muted-foreground text-sm">
+  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <Card className="border-border bg-card gap-4 p-4 md:p-6 h-fit grow shadow-none">
+      <CardHeader className="flex flex-row items-center gap-4 p-0">
+        <div className="rounded-2xl bg-green-500/10 p-3" aria-hidden="true">
+          <Activity className="size-6 text-green-600" />
+        </div>
+        <CardTitle className="text-base font-medium text-muted-foreground">
           Avg. Daily Submissions
-        </p>
-        <p className="font-bold text-2xl text-foreground">
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="py-0 px-1">
+        <p className="tabular-nums font-bold text-2xl text-foreground">
           {data.avgSubmissionsPerDay}
         </p>
-      </div>
+      </CardContent>
     </Card>
-    <Card className="flex items-center gap-4 border-border bg-card p-6">
-      <div className="rounded-2xl bg-orange-500/10 p-3">
-        <Target className="size-6 text-orange-600" />
-      </div>
-      <div className="flex flex-col gap-1">
-        <p className="font-medium text-muted-foreground text-sm">Bounce Rate</p>
-        <p className="font-bold text-2xl text-foreground">{data.bounceRate}%</p>
-      </div>
+
+    <Card className="border-border bg-card gap-4 p-4 md:p-6 h-fit grow shadow-none">
+      <CardHeader className="flex flex-row items-center gap-4 p-0">
+        <div className="rounded-2xl bg-orange-500/10 p-3" aria-hidden="true">
+          <Target className="size-6 text-orange-600" />
+        </div>
+        <CardTitle className="text-base font-medium text-muted-foreground">
+          Bounce Rate
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="py-0 px-1">
+        <p className="tabular-nums font-bold text-2xl text-foreground">
+          {data.bounceRate}%
+        </p>
+      </CardContent>
     </Card>
-    <Card className="flex items-center gap-4 border-border bg-card p-6">
-      <div className="rounded-2xl bg-blue-500/10 p-3">
-        <Zap className="size-6 text-blue-600" />
-      </div>
-      <div className="flex flex-col gap-1">
-        <p className="font-medium text-muted-foreground text-sm">Peak Hour</p>
-        <p className="font-bold text-2xl text-foreground">
+
+    <Card className="border-border bg-card gap-4 p-4 md:p-6 h-fit grow shadow-none">
+      <CardHeader className="flex flex-row items-center gap-4 p-0">
+        <div className="rounded-2xl bg-blue-500/10 p-3" aria-hidden="true">
+          <Zap className="size-6 text-blue-600" />
+        </div>
+        <CardTitle className="text-base font-medium text-muted-foreground">
+          Peak Hour
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="py-0 px-1">
+        <p className="tabular-nums font-bold text-2xl text-foreground">
           {data.peakHour ? `${data.peakHour[0]}:00` : "N/A"}
         </p>
-      </div>
+      </CardContent>
     </Card>
-    <Card className="flex items-center gap-4 border-border bg-card p-6">
-      <div className="rounded-2xl bg-purple-500/10 p-3">
-        <PieChart className="size-6 text-purple-600" />
-      </div>
-      <div className="flex flex-col gap-1">
-        <p className="font-medium text-muted-foreground text-sm">
+
+    <Card className="border-border bg-card gap-4 p-4 md:p-6 h-fit grow shadow-none">
+      <CardHeader className="flex flex-row items-center gap-4 p-0">
+        <div className="rounded-2xl bg-purple-500/10 p-3" aria-hidden="true">
+          <PieChart className="size-6 text-purple-600" />
+        </div>
+        <CardTitle className="text-base font-medium text-muted-foreground">
           Unique Responses
-        </p>
-        <p className="font-bold text-2xl text-foreground">
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="py-0 px-1">
+        <p className="tabular-nums font-bold text-2xl text-foreground">
           {Object.values(data.fieldAnalytics).reduce(
             (total, field) => total + field.uniqueValues,
             0
           )}
         </p>
-      </div>
+      </CardContent>
     </Card>
   </div>
 );
+

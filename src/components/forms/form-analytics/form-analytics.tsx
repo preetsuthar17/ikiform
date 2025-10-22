@@ -8,6 +8,10 @@ import {
   Share,
   Sparkles,
   Trash2,
+  ArrowLeft,
+  MoreHorizontal,
+  Download,
+  RefreshCw,
 } from "lucide-react";
 
 import Link from "next/link";
@@ -17,15 +21,24 @@ import { useEffect, useState } from "react";
 import { ConfirmationModal } from "@/components/dashboard/form-delete-confirmation-modal";
 import { ShareFormModal } from "@/components/form-builder/share-form-modal";
 import { Badge } from "@/components/ui/badge";
-
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/ui/loader";
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { toast } from "@/hooks/use-toast";
 
 import { formsDb } from "@/lib/database";
@@ -37,8 +50,6 @@ import {
   InfoCards,
   OverviewStats,
   QuizAnalyticsCard,
-  SubmissionDetailsModal,
-  SubmissionsList,
   TrendsChart,
 } from "./components";
 import { DropoffAnalytics } from "./components/dropoff-analytics";
@@ -147,150 +158,169 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background">
-        <div className="mx-auto p-6">
-          <div className="flex items-center justify-center py-20">
-            <div className="flex flex-col gap-4 text-center">
-              <div className="mx-auto rounded-2xl p-4">
-                <Loader />
-              </div>
-              <div className="flex flex-col gap-1">
-                <p className="font-medium text-foreground">
-                  Loading analytics...
-                </p>
-                <p className="text-muted-foreground text-sm">
-                  Fetching your form data and submissions
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+       <Loader/>
       </div>
     );
   }
 
   return (
-    <div className="mx-auto min-h-screen w-full max-w-[95%] bg-background px-4 py-12">
-      <div className="mx-auto flex flex-col gap-8">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-col gap-4">
-            <Button asChild className="font-medium" variant="secondary">
-              <Link className="flex w-fit items-center" href="/dashboard">
-                Go to Dashboard
-              </Link>
-            </Button>
-            <div className="flex items-center gap-3">
-              <h1 className="font-bold text-3xl text-foreground">
-                {form.title}
-              </h1>
-              <Badge
-                className="gap-1.5"
-                variant={form.is_published ? "default" : "secondary"}
-              >
-                {form.is_published ? (
-                  <>
-                    <Globe className="size-3" />
-                    Published
-                  </>
-                ) : (
-                  <>
-                    <Eye className="size-3" />
-                    Draft
-                  </>
-                )}
-              </Badge>
+    <div className="min-h-screen bg-background py-12">
+      <div className="mx-auto max-w-7xl flex flex-col gap-4">
+        {/* Header Section */}
+        <Card className="shadow-none p-4 md:p-6" aria-labelledby="form-analytics-header">
+          <CardHeader className="p-0">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
+              <div className="flex flex-col gap-4 min-w-0">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-fit"
+                  aria-label="Back to Dashboard"
+                >
+                  <Link
+                    href="/dashboard"
+                    className="inline-flex items-center gap-2"
+                  >
+                    <ArrowLeft className="size-4 shrink-0" aria-hidden="true" />
+                    <span className="text-sm">Back to Dashboard</span>
+                  </Link>
+                </Button>
+                <div className="flex flex-col gap-4 min-w-0">
+                  <div className="flex items-center flex-wrap gap-3">
+                    <h1
+                      id="form-analytics-header"
+                      className="text-2xl font-bold truncate text-foreground sm:text-3xl"
+                    >
+                      {form.title}
+                    </h1>
+                    <Badge
+                      className="flex items-center gap-1.5"
+                      variant={form.is_published ? "default" : "secondary"}
+                    >
+                      {form.is_published ? (
+                        <>
+                          <Globe className="size-3" aria-hidden="true" />
+                          <span className="sr-only">Published</span>
+                          <span aria-live="polite">Published</span>
+                        </>
+                      ) : (
+                        <>
+                          <Eye className="size-3" aria-hidden="true" />
+                          <span className="sr-only">Draft</span>
+                          <span aria-live="polite">Draft</span>
+                        </>
+                      )}
+                    </Badge>
+                  </div>
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <BarChart3 className="size-4" aria-hidden="true" />
+                    <span className="text-sm font-medium">Form Analytics&nbsp;&amp;&nbsp;Submission Data</span>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Right: Actions */}
+              <div className="flex items-center flex-wrap gap-3 sm:gap-3" aria-label="Form Actions">
+                {/* Edit button with Tooltip */}
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        onClick={handleEditForm}
+                        size="icon"
+                        variant="outline"
+                        aria-label="Edit form"
+                        tabIndex={0}
+                        className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                      >
+                        <Edit className="size-4 shrink-0" aria-hidden="true" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>Edit form</TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+                {/* Share button with Tooltip */}
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        onClick={handleShareForm}
+                        size="icon"
+                        variant="outline"
+                        aria-label="Share form"
+                        tabIndex={0}
+                        className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                      >
+                        <Share className="size-4 shrink-0" aria-hidden="true" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>Share form</TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      size="icon"
+                      variant="outline"
+                      aria-label="More actions"
+                      tabIndex={0}
+                      className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    >
+                      <MoreHorizontal className="size-4 shrink-0" aria-hidden="true" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem onClick={handleExportCsv}>
+                      <Download className="size-4 shrink-0" aria-hidden="true" />
+                      <span>Export CSV</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleExportJson}>
+                      <Download className="size-4 shrink-0" aria-hidden="true" />
+                      <span>Export JSON</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={() => setIsDeleteModalOpen(true)}
+                      variant="destructive"
+                    >
+                      <Trash2 className="size-4 shrink-0" aria-hidden="true" />
+                      <span>Delete form</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          className="flex gap-2 items-center focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                          onClick={() => setChatOpen(true)}
+                          variant="default"
+                          aria-label="Open Kiko AI"
+                        >
+                          <Sparkles className="size-4 shrink-0" aria-hidden="true" />
+                          <span className="hidden sm:inline">Kiko&nbsp;AI</span>
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>AI Form analytics</TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+              </div>
             </div>
-            <p className="flex items-center gap-2 text-muted-foreground">
-              <BarChart3 className="size-4" />
-              Form Analytics & Submission Data
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    onClick={handleEditForm}
-                    size="icon"
-                    variant="secondary"
-                  >
-                    <Edit className="size-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent size="sm">Edit form</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+          </CardHeader>
+        </Card>
 
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    onClick={handleShareForm}
-                    size="icon"
-                    variant="secondary"
-                  >
-                    <Share className="size-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent size="sm">Share form</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    className="size-9 p-0"
-                    onClick={() => setIsDeleteModalOpen(true)}
-                    size="icon"
-                    variant="destructive"
-                  >
-                    <Trash2 className="size-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent size="sm">Delete form</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-
-            <div className="mx-2 h-6 w-px bg-border" />
-
-            <Button
-              className="gap-2 font-medium"
-              onClick={() => setChatOpen(true)}
-              variant="default"
-            >
-              <Sparkles className="size-4" />
-              Kiko AI
-            </Button>
-          </div>
+        {/* Analytics Content */}
+        <div className="flex flex-col gap-4">
+          <OverviewStats data={analyticsData} />
+          <QuizAnalyticsCard quizAnalytics={analyticsData.quizAnalytics} />
+          <AnalyticsCards data={analyticsData} />
+          <TrendsChart trends={analyticsData.submissionTrends} />
+          <DropoffAnalytics form={form} submissions={submissions} />
+          <InfoCards data={analyticsData} form={form} formatDate={formatDate} />
         </div>
-        <OverviewStats data={analyticsData} />
-        <QuizAnalyticsCard quizAnalytics={analyticsData.quizAnalytics} />
-        <AnalyticsCards data={analyticsData} />
-        <TrendsChart trends={analyticsData.submissionTrends} />
-        <DropoffAnalytics form={form} submissions={submissions} />
-        <InfoCards data={analyticsData} form={form} formatDate={formatDate} />
-        <SubmissionsList
-          form={form}
-          formatDate={formatDate}
-          getFieldLabel={getFieldLabelForForm}
-          loading={loading}
-          onExportCSV={handleExportCsv}
-          onExportJSON={handleExportJson}
-          onRefresh={refreshData}
-          onViewSubmission={handleViewSubmission}
-          refreshing={refreshing}
-          submissions={submissions}
-        />
       </div>
-      <SubmissionDetailsModal
-        form={form}
-        formatDate={formatDate}
-        getFieldLabel={getFieldLabelForForm}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onExport={handleExportSubmission}
-        submission={selectedSubmission}
-      />
       <ConfirmationModal
         cancelText="Cancel"
         confirmText="Delete Form"

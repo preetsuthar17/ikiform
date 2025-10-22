@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from "react";
 import { toast } from "@/hooks/use-toast";
 import type { FormSubmission } from "@/lib/database";
