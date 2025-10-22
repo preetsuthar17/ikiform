@@ -1058,7 +1058,7 @@ export default function BentoFeatures() {
 
               {/* Unlimited Submissions */}
               <FeatureCard
-                className="col-span-1"
+                className="col-span-1 bg-card"
                 description={
                   <>
                     Truly{" "}
@@ -1110,7 +1110,7 @@ export default function BentoFeatures() {
 
               {/* API Integration */}
               <FeatureCard
-                className="col-span-1"
+                className="col-span-1 bg-card"
                 description={
                   <>
                     <span className="font-medium opacity-100">

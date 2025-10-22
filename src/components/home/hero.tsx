@@ -142,7 +142,7 @@ export default function Hero() {
   return (
     <section
       aria-labelledby="home-hero-title"
-      className="mx-auto flex w-full max-w-7xl flex-col"
+      className="mx-auto flex w-full max-w-7xl flex-col bg-gradient-to-t  from-background from-10% to-85% to-card"
     >
       <div className="relative z-20 flex h-full grow flex-col items-center gap-8 overflow-hidden border border-b-0 px-4 py-28 text-center md:px-6">
         <SponsoredByBadge />
