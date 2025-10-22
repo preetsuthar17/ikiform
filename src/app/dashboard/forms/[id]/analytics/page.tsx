@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
-import { FormAnalyticsClient } from "@/components/forms/form-analytics-client";
+import { FormAnalytics } from "@/components/forms/form-analytics/form-analytics";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/ui/loader";
 import { createClient } from "@/utils/supabase/server";
@@ -85,7 +85,7 @@ export default async function FormAnalyticsPage({
         </div>
       }
     >
-      <FormAnalyticsClient form={form} />
+      <FormAnalytics form={form} />
     </Suspense>
   );
 }

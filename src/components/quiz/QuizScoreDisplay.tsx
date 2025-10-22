@@ -1,4 +1,4 @@
-import { CheckCircle, Clock, Target, TrendingUp, Trophy } from "lucide-react";
+import { CheckCircle, Target, TrendingUp, Trophy } from "lucide-react";
 import type React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -46,9 +46,9 @@ export function QuizScoreDisplay({
     <Card className={`p-6 ${className}`}>
       <div className="mb-4 flex items-center gap-3">
         {passed ? (
-          <Trophy className="h-6 w-6 text-yellow-500" />
+          <Trophy className="size-6 text-yellow-500" />
         ) : (
-          <Target className="h-6 w-6 text-blue-500" />
+          <Target className="size-6 text-blue-500" />
         )}
         <div>
           <h3 className="font-semibold text-lg">
@@ -95,7 +95,7 @@ export function QuizScoreDisplay({
           <div>
             <div className="font-semibold text-lg">
               {answeredQuestions === totalQuestions ? (
-                <CheckCircle className="mx-auto h-5 w-5 text-green-500" />
+                <CheckCircle className="mx-auto size-5 text-green-500" />
               ) : (
                 `${Math.round((answeredQuestions / totalQuestions) * 100)}%`
               )}
@@ -109,12 +109,12 @@ export function QuizScoreDisplay({
           <Badge className="text-sm" variant={passed ? "default" : "secondary"}>
             {passed ? (
               <>
-                <Trophy className="mr-2 h-3 w-3" />
+                <Trophy className="mr-2 size-3" />
                 Passed
               </>
             ) : (
               <>
-                <TrendingUp className="mr-2 h-3 w-3" />
+                <TrendingUp className="mr-2 size-3" />
                 Needs Improvement
               </>
             )}

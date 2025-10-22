@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 
 import React, { useCallback, useState } from "react";
-import type { FormLogic } from "@/components/form-builder/logic-builder/types";
 
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
@@ -14,7 +13,6 @@ import type { FormBlock, FormField, FormSchema } from "@/lib/database";
 
 import { formsDb } from "@/lib/database";
 import { createFieldFromType } from "@/lib/fields/field-config";
-import { Loader } from "../../ui/loader";
 import { FieldPalette } from "../field-palette";
 import { FieldSettingsPanel } from "../field-settings-panel";
 import { FormBuilderSkeleton } from "../form-builder-skeleton";
@@ -29,7 +27,6 @@ import type { FormBuilderProps } from "./types";
 import {
   addFieldToSchema,
   generateBlockId,
-  generateFieldId,
   removeDraftFromStorage,
   removeFieldFromSchema,
   updateFieldInSchema,
@@ -55,6 +52,8 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     user,
     authLoading,
     debouncedAutoSave,
+    lastSavedSchemaRef,
+    lastManuallySavedSchemaRef,
   } = useFormBuilder(formId);
 
   const isMobile = useIsMobile();
@@ -305,45 +304,73 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     const newMultiStep = !state.formSchema.settings.multiStep;
 
     if (newMultiStep) {
+      // Check if we're switching from single-step back to multi-step
       if (
-        state.formSchema.blocks.length === 0 ||
-        (state.formSchema.blocks.length === 1 &&
-          state.formSchema.blocks[0].id === "default")
+        state.formSchema.blocks.length === 1 &&
+        state.formSchema.blocks[0].id === "default"
       ) {
-        const defaultBlock = state.formSchema.blocks.find(
-          (b) => b.id === "default"
-        );
-        const currentFields =
-          defaultBlock?.fields || state.formSchema.fields || [];
+        // Check if we have a stored multi-step structure in the form schema
+        const hasStoredSteps = state.formSchema.settings.storedSteps;
 
-        const newSchema = {
-          ...state.formSchema,
-          blocks: [
-            {
-              id: "step-1",
-              title: "Step 1",
-              description: "First step of your form",
-              fields: currentFields,
+        if (
+          hasStoredSteps &&
+          Array.isArray(hasStoredSteps) &&
+          hasStoredSteps.length > 0
+        ) {
+          // Restore the original step structure
+          const newSchema = {
+            ...state.formSchema,
+            blocks: hasStoredSteps,
+            fields: hasStoredSteps.flatMap((block) => block.fields || []),
+            settings: {
+              ...state.formSchema.settings,
+              multiStep: true,
+              showProgress: true,
+              storedSteps: undefined, // Clear the stored steps
             },
-          ],
-          fields: currentFields,
-          settings: {
-            ...state.formSchema.settings,
-            multiStep: true,
-            showProgress: true,
-          },
-        };
-        actions.setFormSchema(newSchema);
-        actions.setSelectedBlockId("step-1");
+          };
+          actions.setFormSchema(newSchema);
+          actions.setSelectedBlockId(hasStoredSteps[0].id);
+        } else {
+          // No stored steps, create a new single step with current fields
+          const currentFields =
+            state.formSchema.blocks[0]?.fields || state.formSchema.fields || [];
+          const newSchema = {
+            ...state.formSchema,
+            blocks: [
+              {
+                id: "step-1",
+                title: "Step 1",
+                description: "First step of your form",
+                fields: currentFields,
+              },
+            ],
+            fields: currentFields,
+            settings: {
+              ...state.formSchema.settings,
+              multiStep: true,
+              showProgress: true,
+            },
+          };
+          actions.setFormSchema(newSchema);
+          actions.setSelectedBlockId("step-1");
+        }
       } else {
+        // Already in multi-step mode, just update settings
         updateFormSettings({
           multiStep: true,
           showProgress: true,
         });
       }
     } else {
+      // Switching from multi-step to single-step
       const allFields = state.formSchema.blocks.flatMap(
         (block) => block.fields || []
+      );
+
+      // Store the original step structure before flattening
+      const originalSteps = state.formSchema.blocks.filter(
+        (block) => block.id !== "default"
       );
 
       const newSchema = {
@@ -361,6 +388,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           ...state.formSchema.settings,
           multiStep: false,
           showProgress: false,
+          storedSteps: originalSteps, // Store the original step structure
         },
       };
       actions.setFormSchema(newSchema);
@@ -368,12 +396,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     }
   };
 
-  const handleLogicChange = (logic: FormLogic) => {
-    actions.setFormSchema((prev) => ({
-      ...prev,
-      logic,
-    }));
-  };
+  // Logic builder removed; no-op kept for compatibility where needed
 
   if (authLoading || state.loading) {
     return (
@@ -407,6 +430,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
             formSchema={state.formSchema}
             isPublished={state.isPublished}
             onAnalytics={viewAnalytics}
+            onBlockAdd={addBlock}
             onJsonView={() => actions.setShowJsonView(true)}
             onModeToggle={handleModeToggle}
             onPublish={togglePublish}
@@ -421,6 +445,8 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           <div className="h-full w-full">
             <FormPreview
               onAddField={addField}
+              onBlockAdd={addBlock}
+              onBlockDelete={deleteBlock}
               onBlockUpdate={updateBlock}
               onFieldDelete={deleteField}
               onFieldSelect={handleFieldSelect}
@@ -477,12 +503,27 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           onFormSettingsUpdate={updateFormSettings}
           onFormTypeSelect={handleFormTypeSelect}
           onPublish={handlePublishForm}
-          onSchemaUpdate={(updates) => {
-            actions.setFormSchema((prev) => ({
-              ...prev,
-              settings: { ...prev.settings, ...updates.settings },
-            }));
-            actions.setHasUnsavedChanges(true);
+          onSchemaUpdate={async (updates) => {
+            const updatedSchema = {
+              ...state.formSchema,
+              settings: { ...state.formSchema.settings, ...updates.settings },
+            };
+
+            actions.setFormSchema(updatedSchema);
+
+            if (formId && user) {
+              try {
+                await formsDb.updateForm(formId, { schema: updatedSchema });
+                lastSavedSchemaRef.current = updatedSchema;
+                lastManuallySavedSchemaRef.current = updatedSchema;
+              } catch (error) {
+                console.error("Error saving settings:", error);
+                toast.error("Failed to save settings. Please try again.");
+                actions.setHasUnsavedChanges(true);
+              }
+            } else {
+              actions.setHasUnsavedChanges(true);
+            }
           }}
           showCreationWizard={state.showCreationWizard}
           showFormSettings={state.showFormSettings}
@@ -503,6 +544,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
         formSchema={state.formSchema}
         isPublished={state.isPublished}
         onAnalytics={viewAnalytics}
+        onBlockAdd={addBlock}
         onJsonView={() => actions.setShowJsonView(true)}
         onModeToggle={handleModeToggle}
         onPublish={togglePublish}
@@ -527,7 +569,6 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           onFieldsReorder={reorderFields}
           onFieldUpdate={updateField}
           onFormSettingsUpdate={updateFormSettings}
-          onLogicChange={handleLogicChange}
           onStepSelect={handleStepSelection}
           selectedBlockId={state.selectedBlockId}
           selectedField={selectedField}
@@ -553,12 +594,32 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
         onFormSettingsUpdate={updateFormSettings}
         onFormTypeSelect={handleFormTypeSelect}
         onPublish={handlePublishForm}
-        onSchemaUpdate={(updates) => {
-          actions.setFormSchema((prev) => ({
-            ...prev,
-            settings: { ...prev.settings, ...updates.settings },
-          }));
-          actions.setHasUnsavedChanges(true);
+        onSchemaUpdate={async (updates) => {
+          const updatedSchema = {
+            ...state.formSchema,
+            settings: { ...state.formSchema.settings, ...updates.settings },
+          };
+
+          actions.setFormSchema(updatedSchema);
+
+          // Immediately save settings changes to database
+          if (formId && user) {
+            try {
+              await formsDb.updateForm(formId, { schema: updatedSchema });
+              // Update the last saved schema reference to prevent unsaved changes
+              lastSavedSchemaRef.current = updatedSchema;
+              lastManuallySavedSchemaRef.current = updatedSchema;
+              // Don't set hasUnsavedChanges since we just saved
+            } catch (error) {
+              console.error("Error saving settings:", error);
+              toast.error("Failed to save settings. Please try again.");
+              // Only set unsaved changes if save failed
+              actions.setHasUnsavedChanges(true);
+            }
+          } else {
+            // If no formId or user, set unsaved changes
+            actions.setHasUnsavedChanges(true);
+          }
         }}
         showCreationWizard={state.showCreationWizard}
         showFormSettings={state.showFormSettings}

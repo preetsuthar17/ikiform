@@ -8,11 +8,9 @@ import {
   Users,
   XCircle,
 } from "lucide-react";
-import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Separator } from "@/components/ui/separator";
 import type { FormSchema, FormSubmission } from "@/lib/database";
 import { getQuizStatistics } from "@/lib/quiz/scoring";
 
@@ -36,7 +34,7 @@ export function QuizAnalytics({
   return (
     <div className={`flex flex-col gap-6 ${className}`}>
       <div className="flex items-center gap-3">
-        <Trophy className="h-6 w-6 text-yellow-500" />
+        <Trophy className="size-6 text-yellow-500" />
         <h2 className="font-semibold text-xl">Quiz Analytics</h2>
       </div>
 
@@ -44,7 +42,7 @@ export function QuizAnalytics({
       <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
         <Card className="p-4">
           <div className="flex items-center gap-3">
-            <Users className="h-8 w-8 text-blue-500" />
+            <Users className="size-8 text-blue-500" />
             <div>
               <div className="font-semibold text-2xl">
                 {stats.totalAttempts}
@@ -58,7 +56,7 @@ export function QuizAnalytics({
 
         <Card className="p-4">
           <div className="flex items-center gap-3">
-            <TrendingUp className="h-8 w-8 text-green-500" />
+            <TrendingUp className="size-8 text-green-500" />
             <div>
               <div className="font-semibold text-2xl">
                 {stats.averageScore}%
@@ -70,7 +68,7 @@ export function QuizAnalytics({
 
         <Card className="p-4">
           <div className="flex items-center gap-3">
-            <Target className="h-8 w-8 text-purple-500" />
+            <Target className="size-8 text-purple-500" />
             <div>
               <div className="font-semibold text-2xl">{stats.passRate}%</div>
               <div className="text-muted-foreground text-sm">Pass Rate</div>
@@ -80,7 +78,7 @@ export function QuizAnalytics({
 
         <Card className="p-4">
           <div className="flex items-center gap-3">
-            <BarChart3 className="h-8 w-8 text-orange-500" />
+            <BarChart3 className="size-8 text-orange-500" />
             <div>
               <div className="font-semibold text-2xl">
                 {schema.settings?.quiz?.passingScore || 70}%
@@ -95,7 +93,7 @@ export function QuizAnalytics({
       {stats.questionStats.length > 0 && (
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
-            <CheckCircle className="h-5 w-5 text-green-500" />
+            <CheckCircle className="size-5 text-green-500" />
             <h3 className="font-semibold text-lg">Question Performance</h3>
           </div>
 
@@ -110,15 +108,15 @@ export function QuizAnalytics({
               </div>
               <div className="flex items-center gap-4 text-xs">
                 <div className="flex items-center gap-1">
-                  <div className="h-3 w-3 rounded-full bg-green-500" />
+                  <div className="size-3 rounded-full bg-green-500" />
                   <span>High accuracy (≥80%)</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <div className="h-3 w-3 rounded-full bg-yellow-500" />
+                  <div className="size-3 rounded-full bg-yellow-500" />
                   <span>Moderate (50-79%)</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <div className="h-3 w-3 rounded-full bg-red-500" />
+                  <div className="size-3 rounded-full bg-red-500" />
                   <span>Low (&lt;50%)</span>
                 </div>
               </div>
@@ -132,7 +130,7 @@ export function QuizAnalytics({
                   {/* Question Header */}
                   <div>
                     <div className="mb-2 flex items-start justify-between gap-2">
-                      <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 font-medium text-primary text-xs">
+                      <span className="inline-flex size-6 items-center justify-center rounded-full bg-primary/10 font-medium text-primary text-xs">
                         {index + 1}
                       </span>
                       <Badge
@@ -185,21 +183,21 @@ export function QuizAnalytics({
                   <div className="flex items-center gap-2 pt-1">
                     {questionStat.correctRate >= 80 ? (
                       <div className="flex items-center gap-1 text-green-600">
-                        <CheckCircle className="h-3 w-3" />
+                        <CheckCircle className="size-3" />
                         <span className="font-medium text-xs">
                           High accuracy
                         </span>
                       </div>
                     ) : questionStat.correctRate >= 50 ? (
                       <div className="flex items-center gap-1 text-yellow-600">
-                        <AlertCircle className="h-3 w-3" />
+                        <AlertCircle className="size-3" />
                         <span className="font-medium text-xs">
                           Moderate accuracy
                         </span>
                       </div>
                     ) : (
                       <div className="flex items-center gap-1 text-red-600">
-                        <XCircle className="h-3 w-3" />
+                        <XCircle className="size-3" />
                         <span className="font-medium text-xs">
                           Low accuracy
                         </span>
@@ -216,14 +214,14 @@ export function QuizAnalytics({
       {/* Performance Insights */}
       <Card className="p-6">
         <div className="mb-4 flex items-center gap-2">
-          <TrendingUp className="h-5 w-5 text-blue-500" />
+          <TrendingUp className="size-5 text-blue-500" />
           <h3 className="font-semibold text-lg">Performance Insights</h3>
         </div>
 
         <div className="flex flex-col gap-3">
           {stats.passRate >= 80 && (
             <div className="flex items-start gap-3 rounded-lg border border-green-200 bg-green-50 p-3">
-              <CheckCircle className="mt-0.5 h-5 w-5 text-green-600" />
+              <CheckCircle className="mt-0.5 size-5 text-green-600" />
               <div>
                 <p className="font-medium text-green-800 text-sm">
                   Excellent Performance
@@ -238,7 +236,7 @@ export function QuizAnalytics({
 
           {stats.passRate < 50 && (
             <div className="flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-3">
-              <XCircle className="mt-0.5 h-5 w-5 text-red-600" />
+              <XCircle className="mt-0.5 size-5 text-red-600" />
               <div>
                 <p className="font-medium text-red-800 text-sm">
                   Low Pass Rate
@@ -253,7 +251,7 @@ export function QuizAnalytics({
 
           {stats.averageScore < 60 && (
             <div className="flex items-start gap-3 rounded-lg border border-yellow-200 bg-yellow-50 p-3">
-              <Target className="mt-0.5 h-5 w-5 text-yellow-600" />
+              <Target className="mt-0.5 size-5 text-yellow-600" />
               <div>
                 <p className="font-medium text-sm text-yellow-800">
                   Low Average Score
@@ -267,7 +265,7 @@ export function QuizAnalytics({
 
           {stats.totalAttempts === 0 && (
             <div className="flex items-start gap-3 rounded-lg border border-blue-200 bg-blue-50 p-3">
-              <Users className="mt-0.5 h-5 w-5 text-blue-600" />
+              <Users className="mt-0.5 size-5 text-blue-600" />
               <div>
                 <p className="font-medium text-blue-800 text-sm">
                   No Attempts Yet

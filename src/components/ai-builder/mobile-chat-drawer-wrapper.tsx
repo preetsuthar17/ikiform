@@ -11,6 +11,7 @@ const MobileChatDrawerLazy = lazy(() =>
 interface MobileChatDrawerWrapperProps extends ChatPanelProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
+  drawerId?: string;
 }
 
 /**
@@ -20,6 +21,7 @@ interface MobileChatDrawerWrapperProps extends ChatPanelProps {
 export function MobileChatDrawerWrapper({
   isOpen,
   onOpenChange,
+  drawerId,
   ...chatPanelProps
 }: MobileChatDrawerWrapperProps) {
   if (!isOpen) {
@@ -34,7 +36,7 @@ export function MobileChatDrawerWrapper({
             <div className="flex flex-col gap-4 p-4">
               <div className="flex items-center justify-between">
                 <Skeleton className="h-6 w-32" />
-                <Skeleton className="h-8 w-8 rounded-full" />
+                <Skeleton className="size-8 rounded-full" />
               </div>
               <Skeleton className="h-40 w-full" />
               <div className="flex flex-col gap-2">
@@ -47,6 +49,7 @@ export function MobileChatDrawerWrapper({
       }
     >
       <MobileChatDrawerLazy
+        drawerId={drawerId}
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         {...chatPanelProps}

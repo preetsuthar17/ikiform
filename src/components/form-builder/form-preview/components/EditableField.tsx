@@ -3,6 +3,11 @@ import type React from "react";
 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 import { useEditableField } from "../hooks/useEditableField";
 
@@ -76,21 +81,37 @@ export function EditableField({
           />
         )
       ) : (
-        <div
-          className="flex w-full cursor-pointer items-center gap-2 rounded-ele p-2 transition-colors hover:bg-accent/10"
-          onClick={() => setIsEditing(true)}
-        >
-          {children || (
-            <div className="text-foreground">
-              {value || (
-                <span className="text-muted-foreground italic">
-                  {placeholder}
-                </span>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div
+              aria-label="Edit field"
+              className="flex w-full cursor-pointer items-center gap-2 rounded-xl p-2 transition-colors hover:bg-accent/10"
+              onClick={() => setIsEditing(true)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setIsEditing(true);
+                }
+              }}
+              role="button"
+              tabIndex={0}
+            >
+              {children || (
+                <div className="text-foreground">
+                  {value || (
+                    <span className="text-muted-foreground italic">
+                      {placeholder}
+                    </span>
+                  )}
+                </div>
               )}
+              <Edit3 className="size-4 flex-shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
             </div>
-          )}
-          <Edit3 className="h-4 w-4 flex-shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-        </div>
+          </TooltipTrigger>
+          <TooltipContent align="start" side="top">
+            Click to edit
+          </TooltipContent>
+        </Tooltip>
       )}
     </div>
   );

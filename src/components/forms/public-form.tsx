@@ -1,97 +1,102 @@
 "use client";
 
-import React, { useEffect } from "react";
-
+import { useEffect, useMemo } from "react";
+import type { FormSchema } from "@/lib/database";
+import { cn } from "@/lib/utils";
 import { MultiStepForm } from "./multi-step-form";
 import { SingleStepForm } from "./public-form/components";
 
-import type { PublicFormProps } from "./public-form/types";
+interface PublicFormProps {
+  formId: string;
+  schema: FormSchema;
+  theme?: string;
+}
 
-export function PublicForm({ formId, schema, theme }: PublicFormProps) {
-  const isMultiStep = schema.settings.multiStep || schema.blocks?.length > 1;
-  const dir = schema.settings.rtl ? "rtl" : "ltr";
+function useFormStyling(schema: FormSchema) {
+  const stylingConfig = useMemo(() => {
+    const settings = schema?.settings;
+    const layout = settings?.layout;
+    const colors = (settings as any)?.colors;
+
+    const borderRadiusMap = {
+      none: { radius: "0px", card: "0px" },
+      sm: { radius: "4px", card: "8px" },
+      md: { radius: "10px", card: "16px" },
+      lg: { radius: "16px", card: "24px" },
+      xl: { radius: "24px", card: "32px" },
+    };
+
+    const borderRadius = borderRadiusMap[layout?.borderRadius || "md"];
+
+    return {
+      borderRadius,
+      customWidth:
+        (layout as any)?.maxWidth === "custom"
+          ? (layout as any)?.customWidth
+          : null,
+      colors: {
+        primary: colors?.primary,
+        text: colors?.text,
+        background: colors?.background,
+        border: colors?.border,
+      },
+    };
+  }, [schema?.settings]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const settings = schema?.settings;
-    const layout = settings?.layout;
-    const colors = (settings as any)?.colors;
-    const typography = (settings as any)?.typography;
-
-    // Set border radius
-    const val = layout?.borderRadius || "md";
-    let borderRadiusValue = "8px";
-    let cardRadiusValue = "16px";
-    switch (val) {
-      case "none":
-        borderRadiusValue = "0px";
-        cardRadiusValue = "0px";
-        break;
-      case "sm":
-        borderRadiusValue = "4px";
-        cardRadiusValue = "8px";
-        break;
-      case "md":
-        borderRadiusValue = "10px";
-        cardRadiusValue = "16px";
-        break;
-      case "lg":
-        borderRadiusValue = "16px";
-        cardRadiusValue = "24px";
-        break;
-      case "xl":
-        borderRadiusValue = "24px";
-        cardRadiusValue = "32px";
-        break;
-    }
-
-    // Set CSS custom properties
     const root = document.documentElement;
-    root.style.setProperty("--radius", borderRadiusValue);
-    root.style.setProperty("--card-radius", cardRadiusValue);
+    const { borderRadius, customWidth, colors } = stylingConfig;
 
-    // Set custom width if specified
-    if (
-      (layout as any)?.maxWidth === "custom" &&
-      (layout as any)?.customWidth
-    ) {
-      root.style.setProperty(
-        "--form-custom-width",
-        (layout as any).customWidth
-      );
+    root.style.setProperty("--radius", borderRadius.radius);
+    root.style.setProperty("--card-radius", borderRadius.card);
+
+    if (customWidth) {
+      root.style.setProperty("--form-custom-width", customWidth);
     }
 
-    // Set color variables for CSS
-    if (colors?.primary) {
-      root.style.setProperty("--form-primary-color", colors.primary);
-    }
-    if (colors?.text) {
-      root.style.setProperty("--form-text-color", colors.text);
-    }
-    if (colors?.background) {
-      root.style.setProperty("--form-background-color", colors.background);
-    }
-    if (colors?.border) {
-      root.style.setProperty("--form-border-color", colors.border);
-    }
+    Object.entries(colors).forEach(([key, value]) => {
+      if (value) {
+        root.style.setProperty(`--form-${key}-color`, value);
+      }
+    });
 
     return () => {
-      // Cleanup
       root.style.setProperty("--radius", "0.7rem");
       root.style.setProperty("--card-radius", "1rem");
       root.style.removeProperty("--form-custom-width");
-      root.style.removeProperty("--form-primary-color");
-      root.style.removeProperty("--form-text-color");
-      root.style.removeProperty("--form-background-color");
-      root.style.removeProperty("--form-border-color");
+      Object.keys(colors).forEach((key) => {
+        root.style.removeProperty(`--form-${key}-color`);
+      });
     };
-  }, [schema?.settings]);
+  }, [stylingConfig]);
+}
+
+function useFormType(schema: FormSchema) {
+  return useMemo(() => {
+    const isMultiStep = schema.settings.multiStep || schema.blocks?.length > 1;
+    const dir = schema.settings.rtl ? "rtl" : "ltr";
+
+    return { isMultiStep, dir };
+  }, [schema.settings.multiStep, schema.blocks?.length, schema.settings.rtl]);
+}
+
+export function PublicForm({ formId, schema, theme }: PublicFormProps) {
+  const { isMultiStep, dir } = useFormType(schema);
+
+  useFormStyling(schema);
 
   return (
     <div
-      className={`flex w-full flex-col gap-4 ${theme ? `theme-${theme}` : ""}`}
+      aria-label="Form container"
+      className={cn(
+        "flex w-full flex-col gap-4",
+        theme && `theme-${theme}`,
+        dir === "rtl" && "rtl"
+      )}
       dir={dir}
+      role="main"
     >
       {isMultiStep ? (
         <MultiStepForm dir={dir} formId={formId} schema={schema} />

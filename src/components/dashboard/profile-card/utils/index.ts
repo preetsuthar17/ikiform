@@ -1,8 +1,5 @@
 import type { User } from "@supabase/supabase-js";
 
-/**
- * Extract user's display name from various user metadata fields
- */
 export function extractUserName(user: User): string {
   return (
     user.user_metadata?.full_name ||
@@ -13,16 +10,17 @@ export function extractUserName(user: User): string {
   );
 }
 
-/**
- * Extract user's avatar URL from metadata
- */
 export function extractAvatarUrl(user: User): string | undefined {
   return user.user_metadata?.avatar_url;
 }
 
-/**
- * Get user's initials for avatar fallback
- */
 export function getUserInitials(name: string): string {
-  return name.charAt(0).toUpperCase();
+  if (!name || name.length === 0) return "U";
+
+  const words = name.trim().split(/\s+/);
+  if (words.length === 1) {
+    return words[0].charAt(0).toUpperCase();
+  }
+
+  return (words[0].charAt(0) + words[words.length - 1].charAt(0)).toUpperCase();
 }

@@ -1,19 +1,15 @@
 import {
-  AlertCircle,
   CheckCircle,
-  Copy,
   Eye,
   Globe,
   HelpCircle,
   History,
-  Plus,
-  Save,
   Settings,
   Trash2,
   User,
   Zap,
 } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -29,7 +25,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import type { FormField, FormSchema } from "@/lib/database";
+import type { FormSchema } from "@/lib/database";
 
 interface PrepopulationManagerProps {
   schema: FormSchema;
@@ -70,15 +66,15 @@ export function PrepopulationManager({
   const getSourceIcon = (source: string) => {
     switch (source) {
       case "url":
-        return <Globe className="h-3 w-3" />;
+        return <Globe className="size-3" />;
       case "api":
-        return <Zap className="h-3 w-3" />;
+        return <Zap className="size-3" />;
       case "profile":
-        return <User className="h-3 w-3" />;
+        return <User className="size-3" />;
       case "previous":
-        return <History className="h-3 w-3" />;
+        return <History className="size-3" />;
       default:
-        return <HelpCircle className="h-3 w-3" />;
+        return <HelpCircle className="size-3" />;
     }
   };
 
@@ -180,7 +176,7 @@ export function PrepopulationManager({
     <Modal onOpenChange={setIsOpen} open={isOpen}>
       <ModalTrigger asChild>
         <Button className="flex items-center gap-2" variant="outline">
-          <Settings className="h-4 w-4" />
+          <Settings className="size-4" />
           Prepopulation Manager
           {fieldsWithPrepopulation.length > 0 && (
             <Badge variant="secondary">{fieldsWithPrepopulation.length}</Badge>
@@ -191,7 +187,7 @@ export function PrepopulationManager({
       <ModalContent className="max-h-[90vh] max-w-4xl overflow-y-auto">
         <ModalHeader>
           <ModalTitle className="flex items-center gap-2">
-            <Zap className="h-5 w-5 text-primary" />
+            <Zap className="size-5 text-primary" />
             Prepopulation Manager
           </ModalTitle>
         </ModalHeader>
@@ -203,7 +199,7 @@ export function PrepopulationManager({
 
             <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-3">
               <div className="flex items-center gap-2 rounded-md border border-blue-200 bg-blue-50 p-3">
-                <CheckCircle className="h-4 w-4 text-blue-600" />
+                <CheckCircle className="size-4 text-blue-600" />
                 <div>
                   <div className="font-medium text-blue-900">
                     {fieldsWithPrepopulation.length}
@@ -213,7 +209,7 @@ export function PrepopulationManager({
               </div>
 
               <div className="flex items-center gap-2 rounded-md border border-green-200 bg-green-50 p-3">
-                <Zap className="h-4 w-4 text-green-600" />
+                <Zap className="size-4 text-green-600" />
                 <div>
                   <div className="font-medium text-green-900">
                     {prepopulationSources.length}
@@ -223,7 +219,7 @@ export function PrepopulationManager({
               </div>
 
               <div className="flex items-center gap-2 rounded-md border border-purple-200 bg-purple-50 p-3">
-                <Settings className="h-4 w-4 text-purple-600" />
+                <Settings className="size-4 text-purple-600" />
                 <div>
                   <div className="font-medium text-purple-900">
                     {schema.fields?.length || 0}
@@ -294,7 +290,7 @@ export function PrepopulationManager({
                 onClick={() => bulkEnablePrepopulation("url")}
                 variant="outline"
               >
-                <Globe className="h-5 w-5 text-blue-600" />
+                <Globe className="size-5 text-blue-600" />
                 <div className="text-left">
                   <div className="font-medium">URL Parameters</div>
                   <div className="text-muted-foreground text-sm">
@@ -308,7 +304,7 @@ export function PrepopulationManager({
                 onClick={() => bulkEnablePrepopulation("api")}
                 variant="outline"
               >
-                <Zap className="h-5 w-5 text-purple-600" />
+                <Zap className="size-5 text-purple-600" />
                 <div className="text-left">
                   <div className="font-medium">External API</div>
                   <div className="text-muted-foreground text-sm">
@@ -322,7 +318,7 @@ export function PrepopulationManager({
                 onClick={() => bulkEnablePrepopulation("profile")}
                 variant="outline"
               >
-                <User className="h-5 w-5 text-green-600" />
+                <User className="size-5 text-green-600" />
                 <div className="text-left">
                   <div className="font-medium">User Profile</div>
                   <div className="text-muted-foreground text-sm">
@@ -336,7 +332,7 @@ export function PrepopulationManager({
                 onClick={() => bulkEnablePrepopulation("previous")}
                 variant="outline"
               >
-                <History className="h-5 w-5 text-orange-600" />
+                <History className="size-5 text-orange-600" />
                 <div className="text-left">
                   <div className="font-medium">Previous Submissions</div>
                   <div className="text-muted-foreground text-sm">
@@ -362,7 +358,7 @@ export function PrepopulationManager({
                       size="sm"
                       variant="outline"
                     >
-                      <Eye className="h-4 w-4" />
+                      <Eye className="size-4" />
                       Preview URL
                     </Button>
                   )}
@@ -373,7 +369,7 @@ export function PrepopulationManager({
                     size="sm"
                     variant="destructive"
                   >
-                    <Trash2 className="h-4 w-4" />
+                    <Trash2 className="size-4" />
                     Disable All
                   </Button>
                 </div>
@@ -393,7 +389,7 @@ export function PrepopulationManager({
                     Track prepopulation success rates and performance
                   </p>
                 </div>
-                <Switch size="sm" />
+                <Switch />
               </div>
 
               <div className="flex items-center justify-between">
@@ -403,7 +399,7 @@ export function PrepopulationManager({
                     Improve performance by caching API data for 5 minutes
                   </p>
                 </div>
-                <Switch defaultChecked size="sm" />
+                <Switch defaultChecked />
               </div>
 
               <div className="flex items-center justify-between">
@@ -413,7 +409,7 @@ export function PrepopulationManager({
                     Require user consent for all prepopulation by default
                   </p>
                 </div>
-                <Switch size="sm" />
+                <Switch />
               </div>
 
               <div className="flex flex-col gap-2">

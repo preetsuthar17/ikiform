@@ -14,7 +14,7 @@ export function WelcomeMessage({ mounted }: WelcomeMessageProps) {
       className="flex flex-col items-center gap-4 py-8 text-center"
       initial={{ opacity: 0, y: 20 }}
     >
-      <div className="flex h-12 w-12 items-center justify-center rounded-card bg-primary/10">
+      <div className="flex size-12 items-center justify-center rounded-2xl bg-primary/10">
         <Link href="/">
           <Image
             alt="Ikiform"
@@ -25,9 +25,16 @@ export function WelcomeMessage({ mounted }: WelcomeMessageProps) {
           />
         </Link>
       </div>
-      <h2 className="font-semibold text-2xl">How can Kiko help you?</h2>
-      <p className="max-w-md text-muted-foreground text-sm">
-        Hi, I'm Kiko your personalized AI form builder :3
+      <h2 className="font-semibold text-2xl" id="welcome-heading">
+        How can Kiko assist you today?
+      </h2>
+      <p
+        aria-describedby="welcome-heading"
+        className="max-w-md text-muted-foreground text-sm"
+      >
+        Hi, I’m Kiko—your AI-powered form assistant.
+        <br />
+        Ask me to create, edit, or analyze forms for you!
       </p>
     </motion.div>
   );

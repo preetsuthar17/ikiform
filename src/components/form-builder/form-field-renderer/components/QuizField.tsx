@@ -2,8 +2,11 @@ import { CheckCircle, HelpCircle, Info, XCircle } from "lucide-react";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { RadioGroup, RadioItem } from "@/components/ui/radio";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
 import type { BaseFieldProps } from "../types";
+
 import { getErrorRingClasses } from "../utils";
 import { sanitizeOptions } from "../utils/sanitizeOptions";
 
@@ -27,80 +30,146 @@ export function QuizField({
   const [apiOptions, setApiOptions] = React.useState<Array<
     string | { value: string; label?: string }
   > | null>(null);
-  const [loading, setLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [fetchError, setFetchError] = React.useState<string | null>(null);
 
-  React.useEffect(() => {
-    if (field.optionsApi) {
-      setLoading(true);
-      fetch(field.optionsApi)
-        .then((res) => res.json())
-        .then((data) => {
-          let options: Array<any> = [];
-          if (Array.isArray(data)) {
-            options = data;
-          } else if (Array.isArray(data.options)) {
-            options = data.options;
-          }
-
-          if (field.valueKey || field.labelKey) {
-            options = options.map((item: any) => ({
-              value: field.valueKey ? item[field.valueKey] : item.value,
-              label: field.labelKey
-                ? item[field.labelKey]
-                : item.label || item.value,
-            }));
-          }
-          setApiOptions(sanitizeOptions(options));
-          setLoading(false);
-        })
-        .catch((err) => {
-          setFetchError("Failed to fetch options");
-          setLoading(false);
-        });
-    } else {
+  const fetchQuizOptions = async () => {
+    if (!field.optionsApi) {
       setApiOptions(null);
+      return;
     }
+
+    setIsLoading(true);
+    setFetchError(null);
+
+    try {
+      const response = await fetch(field.optionsApi);
+      const data = await response.json();
+
+      let options: Array<any> = [];
+      if (Array.isArray(data)) {
+        options = data;
+      } else if (Array.isArray(data.options)) {
+        options = data.options;
+      }
+
+      if (field.valueKey || field.labelKey) {
+        options = options.map((item: any) => ({
+          value: field.valueKey ? item[field.valueKey] : item.value,
+          label: field.labelKey
+            ? item[field.labelKey]
+            : item.label || item.value,
+        }));
+      }
+
+      setApiOptions(sanitizeOptions(options));
+    } catch (error) {
+      setFetchError("Failed to fetch options");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchQuizOptions();
   }, [field.optionsApi, field.valueKey ?? "", field.labelKey ?? ""]);
 
-  const options = apiOptions ?? field.options ?? [];
-  const correctAnswer = field.settings?.correctAnswer;
-  const isCorrect = value && correctAnswer && value === correctAnswer;
-  const points = field.settings?.points || 1;
-  const explanation = field.settings?.explanation;
+  const getQuizOptions = () => apiOptions ?? field.options ?? [];
+
+  const getCorrectAnswer = () => field.settings?.correctAnswer;
+
+  const getQuizPoints = () => field.settings?.points || 1;
+
+  const getQuizExplanation = () => field.settings?.explanation;
+
+  const isAnswerCorrect = () => {
+    const correctAnswer = getCorrectAnswer();
+    return value && correctAnswer && value === correctAnswer;
+  };
 
   const getFeedbackIcon = () => {
     if (!(showFeedback && isSubmitted && value)) return null;
 
-    if (isCorrect) {
-      return <CheckCircle className="h-4 w-4 text-green-600" />;
+    if (isAnswerCorrect()) {
+      return <CheckCircle className="size-4 text-green-600" />;
     }
-    return <XCircle className="h-4 w-4 text-red-600" />;
+    return <XCircle className="size-4 text-red-600" />;
   };
 
-  const getFeedbackStyling = () => {
+  const getFeedbackCardStyling = () => {
     if (!(showFeedback && isSubmitted && value)) return "";
 
-    if (isCorrect) {
+    if (isAnswerCorrect()) {
       return "border-green-200 bg-green-50";
     }
     return "border-red-200 bg-red-50";
   };
 
-  return (
-    <div className="group flex flex-col gap-3">
-      {/* Question with points indicator - no default field label */}
+  const getOptionStyling = (optionValue: string) => {
+    if (!(showFeedback && isSubmitted)) return "";
+
+    const correctAnswer = getCorrectAnswer();
+    const isThisOptionCorrect = correctAnswer === optionValue;
+    const isSelected = value === optionValue;
+
+    if (isThisOptionCorrect) {
+      return "border-green-500 bg-green-50";
+    }
+    if (isSelected && !isThisOptionCorrect) {
+      return "border-red-500 bg-red-50";
+    }
+    return "";
+  };
+
+  const getOptionIcon = (optionValue: string) => {
+    if (!(showFeedback && isSubmitted)) return null;
+
+    const correctAnswer = getCorrectAnswer();
+    const isThisOptionCorrect = correctAnswer === optionValue;
+    const isSelected = value === optionValue;
+
+    if (isThisOptionCorrect) {
+      return <CheckCircle className="size-4 text-green-600" />;
+    }
+    if (isSelected && !isThisOptionCorrect) {
+      return <XCircle className="size-4 text-red-600" />;
+    }
+    return null;
+  };
+
+  const getCorrectAnswerText = () => {
+    const correctAnswer = getCorrectAnswer();
+    if (!correctAnswer) return "";
+
+    const correctOption = getQuizOptions().find(
+      (opt) => (typeof opt === "string" ? opt : opt.value) === correctAnswer
+    );
+
+    if (!correctOption) return correctAnswer;
+    return typeof correctOption === "string"
+      ? correctOption
+      : correctOption.label || correctOption.value;
+  };
+
+  const handleValueChange = (newValue: string) => {
+    onChange(newValue);
+  };
+
+  const renderQuizHeader = () => {
+    const points = getQuizPoints();
+
+    return (
       <div className="flex items-start justify-between gap-2">
         <div className="flex-1">
           {field.label && (
             <div className="flex items-center gap-2">
-              <HelpCircle className="h-4 w-4 text-primary" />
-              <label className="font-medium text-foreground text-sm">
+              <HelpCircle className="size-4 text-primary" />
+              <Label className="font-medium text-foreground text-sm">
                 {field.label}
                 {field.required && (
                   <span className="ml-1 text-destructive">*</span>
                 )}
-              </label>
+              </Label>
             </div>
           )}
           {field.description && (
@@ -109,21 +178,28 @@ export function QuizField({
             </p>
           )}
         </div>
-
-        {/* Points indicator */}
         <Badge className="text-xs transition-all" variant="secondary">
           {points} {points === 1 ? "point" : "points"}
         </Badge>
       </div>
+    );
+  };
 
-      {/* Radio options */}
+  const renderQuizOptions = () => {
+    const options = getQuizOptions();
+
+    return (
       <RadioGroup
         className={`flex flex-col gap-2 ${errorRingClasses}`}
-        disabled={disabled || loading}
-        onValueChange={onChange}
+        disabled={disabled || isLoading}
+        onValueChange={handleValueChange}
         value={value || ""}
       >
-        {fetchError && <div className="p-2 text-red-500">{fetchError}</div>}
+        {fetchError && (
+          <div className="p-2 text-destructive text-sm" role="alert">
+            {fetchError}
+          </div>
+        )}
         {options.filter(Boolean).map((option, index) => {
           let optionValue = "";
           let optionLabel = "";
@@ -138,86 +214,83 @@ export function QuizField({
 
           if (!optionValue) return null;
 
-          const isThisOptionCorrect = correctAnswer === optionValue;
-          const isSelected = value === optionValue;
-
-          let optionStyling = "";
-          let optionIcon = null;
-
-          if (showFeedback && isSubmitted) {
-            if (isThisOptionCorrect) {
-              optionStyling = "border-green-500 bg-green-50";
-              optionIcon = <CheckCircle className="h-4 w-4 text-green-600" />;
-            } else if (isSelected && !isThisOptionCorrect) {
-              optionStyling = "border-red-500 bg-red-50";
-              optionIcon = <XCircle className="h-4 w-4 text-red-600" />;
-            }
-          }
-
           return (
             <div
-              className={`rounded-lg border p-3 transition-colors ${optionStyling}`}
+              className={`rounded-lg border p-3 transition-colors ${getOptionStyling(optionValue)}`}
               key={index}
             >
-              <div className="flex items-center justify-between">
-                <RadioItem
-                  disabled={disabled || loading}
+              <div className="flex h-full items-center justify-start gap-2">
+                <RadioGroupItem
+                  disabled={disabled || isLoading}
                   id={`${field.id}-${index}`}
-                  label={optionLabel}
                   value={optionValue}
                 />
-                {optionIcon}
+                <Label
+                  className="flex h-full w-full flex-1 items-center"
+                  htmlFor={`${field.id}-${index}`}
+                  style={{ height: "100%", width: "100%" }}
+                >
+                  {optionLabel}
+                </Label>
+                {getOptionIcon(optionValue)}
               </div>
             </div>
           );
         })}
       </RadioGroup>
+    );
+  };
 
-      {/* Feedback section */}
-      {showFeedback && isSubmitted && value && (
-        <Card className={`p-4 ${getFeedbackStyling()}`}>
-          <div className="flex items-start gap-3">
-            {getFeedbackIcon()}
-            <div className="flex-1">
-              <div className="flex items-center gap-2">
-                <span className="font-medium text-sm">
-                  {isCorrect ? "Correct!" : "Incorrect"}
-                </span>
-                <span className="text-muted-foreground text-sm">
-                  {isCorrect ? `+${points} points` : "0 points"}
-                </span>
-              </div>
+  const renderFeedback = () => {
+    if (!(showFeedback && isSubmitted && value)) return null;
 
-              {/* Show correct answer if user was wrong */}
-              {!isCorrect && correctAnswer && (
-                <p className="mt-1 text-muted-foreground text-sm">
-                  Correct answer: {(() => {
-                    const correctOption = options.find(
-                      (opt) =>
-                        (typeof opt === "string" ? opt : opt.value) ===
-                        correctAnswer
-                    );
-                    if (!correctOption) return correctAnswer;
-                    return typeof correctOption === "string"
-                      ? correctOption
-                      : correctOption.label || correctOption.value;
-                  })()}
-                </p>
-              )}
+    const points = getQuizPoints();
+    const explanation = getQuizExplanation();
+    const isCorrect = isAnswerCorrect();
+    const correctAnswerText = getCorrectAnswerText();
 
-              {/* Show explanation if available */}
-              {explanation && (
-                <div className="mt-2 flex gap-2">
-                  <Info className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-600" />
-                  <p className="text-muted-foreground text-sm">{explanation}</p>
-                </div>
-              )}
+    return (
+      <Card className={`p-4 ${getFeedbackCardStyling()}`}>
+        <div className="flex items-start gap-3">
+          {getFeedbackIcon()}
+          <div className="flex-1">
+            <div className="flex items-center gap-2">
+              <span className="font-medium text-sm">
+                {isCorrect ? "Correct!" : "Incorrect"}
+              </span>
+              <span className="text-muted-foreground text-sm">
+                {isCorrect ? `+${points} points` : "0 points"}
+              </span>
             </div>
-          </div>
-        </Card>
-      )}
 
-      {error && <p className="text-destructive text-sm">{error}</p>}
+            {!isCorrect && correctAnswerText && (
+              <p className="mt-1 text-muted-foreground text-sm">
+                Correct answer: {correctAnswerText}
+              </p>
+            )}
+
+            {explanation && (
+              <div className="mt-2 flex gap-2">
+                <Info className="mt-0.5 size-4 flex-shrink-0 text-blue-600" />
+                <p className="text-muted-foreground text-sm">{explanation}</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </Card>
+    );
+  };
+
+  return (
+    <div className="group flex flex-col gap-3">
+      {renderQuizHeader()}
+      {renderQuizOptions()}
+      {renderFeedback()}
+      {error && (
+        <p aria-live="polite" className="text-destructive text-sm" role="alert">
+          {error}
+        </p>
+      )}
     </div>
   );
 }

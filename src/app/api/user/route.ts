@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
     // Check if user already exists in database
     const { data: existingUser } = await supabase
       .from("users")
-      .select("has_premium, polar_customer_id")
+      .select("has_premium, has_free_trial, polar_customer_id")
       .eq("email", sanitizedEmail)
       .single();
 
@@ -81,7 +81,8 @@ export async function POST(request: NextRequest) {
           uid,
           email: sanitizedEmail,
           name,
-          has_premium: existingUser?.has_premium ?? false,
+          has_premium: existingUser?.has_premium ?? true,
+          has_free_trial: existingUser?.has_free_trial ?? true,
           polar_customer_id: existingUser?.polar_customer_id ?? null,
         },
         {
@@ -90,7 +91,7 @@ export async function POST(request: NextRequest) {
         }
       )
       .select(
-        "uid, email, name, has_premium, polar_customer_id, created_at, updated_at"
+        "uid, email, name, has_premium, has_free_trial, polar_customer_id, created_at, updated_at"
       )
       .single();
 
@@ -156,7 +157,7 @@ export async function GET(_request: NextRequest) {
     const { data, error } = await supabase
       .from("users")
       .select(
-        "uid, email, name, has_premium, polar_customer_id, created_at, updated_at"
+        "uid, email, name, has_premium, has_free_trial, polar_customer_id, created_at, updated_at"
       )
       .eq("email", user.email)
       .single();

@@ -12,6 +12,12 @@ export interface DeleteModalState {
 
 export interface FormStatsProps {
   forms: Form[];
+  loading?: boolean;
+}
+
+export interface FormsSidebarProps {
+  forms: Form[];
+  loading?: boolean;
 }
 
 export interface FormCardProps {

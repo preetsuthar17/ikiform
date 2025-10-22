@@ -123,7 +123,7 @@ export default function ResetPasswordClient() {
         <Card className="flex w-full max-w-sm flex-col items-center justify-center gap-6 text-center">
           <CardContent className="py-8">
             <div className="flex flex-col items-center gap-4">
-              <div className="h-8 w-8 animate-spin rounded-full border-primary border-b-2" />
+              <div className="size-8 animate-spin rounded-full border-primary border-b-2" />
               <p className="text-muted-foreground text-sm">
                 Verifying reset token...
               </p>
@@ -185,9 +185,9 @@ export default function ResetPasswordClient() {
                   variant="ghost"
                 >
                   {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
+                    <EyeOff className="size-4" />
                   ) : (
-                    <Eye className="h-4 w-4" />
+                    <Eye className="size-4" />
                   )}
                 </Button>
               </div>
@@ -217,9 +217,9 @@ export default function ResetPasswordClient() {
                   variant="ghost"
                 >
                   {showConfirmPassword ? (
-                    <EyeOff className="h-4 w-4" />
+                    <EyeOff className="size-4" />
                   ) : (
-                    <Eye className="h-4 w-4" />
+                    <Eye className="size-4" />
                   )}
                 </Button>
               </div>

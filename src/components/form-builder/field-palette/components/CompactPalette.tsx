@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-import { FIELD_TYPES, PALETTE_CONFIG } from "../constants";
+import { FIELD_TYPES } from "../constants";
 
 import type { FieldPaletteProps } from "../types";
 import { CompactFieldItem } from "./CompactFieldItem";
@@ -32,7 +32,7 @@ export function CompactPalette({
     <div className="flex flex-col gap-3">
       {/* Search Bar */}
       <div className="relative px-2">
-        <Search className="-translate-y-1/2 absolute top-1/2 left-4 h-4 w-4 text-muted-foreground" />
+        <Search className="-translate-y-1/2 absolute top-1/2 left-4 size-4 text-muted-foreground" />
         <Input
           className="pl-10"
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -54,7 +54,7 @@ export function CompactPalette({
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center gap-2 py-8 text-center">
-            <Search className="h-6 w-6 text-muted-foreground" />
+            <Search className="size-6 text-muted-foreground" />
             <p className="text-muted-foreground text-sm">
               No fields found matching "{searchTerm}"
             </p>

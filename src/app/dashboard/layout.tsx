@@ -4,7 +4,7 @@ import "../globals.css";
 export const metadata: Metadata = {
   title: {
     default: "Dashboard",
-    template: "%s — Ikiform",
+    template: "Ikiform: %s",
   },
   description:
     "Access your Ikiform dashboard to manage forms, view responses, and analyze your data. Streamline your workflow with our open-source form builder.",
@@ -87,13 +87,6 @@ export const viewport = {
   themeColor: [{ media: "(prefers-color-scheme: light)", color: "#ffffff" }],
 };
 
-import { ApiSupportIntroduction } from "@/components/feature-introductions/api-support-introduction";
-
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      {children}
-      <ApiSupportIntroduction />
-    </>
-  );
+  return <>{children}</>;
 }

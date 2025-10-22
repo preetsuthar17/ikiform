@@ -1,9 +1,8 @@
 "use client";
 
-import { Code2, Eye, Monitor, Settings, Smartphone } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button-base";
+import { Code2 } from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { Form } from "@/lib/database/database";
 import {
@@ -77,7 +76,7 @@ export default function EmbedCustomizer({
           className="flex items-center gap-2"
           onClick={() => setIsCodeModalOpen(true)}
         >
-          <Code2 className="h-4 w-4" />
+          <Code2 className="size-4" />
           Show Code
         </Button>
       </div>

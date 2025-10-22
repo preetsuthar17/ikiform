@@ -1,6 +1,6 @@
 "use client";
 
-import { Gift, X } from "lucide-react";
+import { X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -76,7 +76,7 @@ export default function PromoPopup() {
               size={"icon"}
               variant={"ghost"}
             >
-              <X className="h-4 w-4" />
+              <X className="size-4" />
             </Button>
 
             {/* Content */}

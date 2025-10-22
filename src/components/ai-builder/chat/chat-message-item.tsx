@@ -33,21 +33,21 @@ export const ChatMessageItem = memo(function ChatMessageItem({
       key={index}
     >
       <Card
-        className={`max-w-[90%] p-2 ${
+        className={`max-w-[90%] gap-2 p-2 shadow-none ${
           message.role === "user"
             ? "bg-primary text-primary-foreground"
             : "bg-muted/50"
         }`}
       >
-        {message.role === "assistant" && (
-          <CardHeader className="p-2">
-            <div className="flex items-center gap-1">
-              <div className="h-2 w-2 rounded-card bg-muted-foreground" />
-              <p className="font-medium text-xs">Kiko</p>
-            </div>
-          </CardHeader>
-        )}
         <CardContent className="p-1">
+          {message.role === "assistant" && (
+            <CardHeader className="px-0">
+              <div className="flex items-center gap-1">
+                <div className="size-2 rounded-2xl bg-muted-foreground" />
+                <p className="font-medium text-xs">Kiko</p>
+              </div>
+            </CardHeader>
+          )}
           <div className="flex flex-col gap-2">
             <div className="prose prose-sm max-w-none">
               {message.role === "user" && contentLines && (

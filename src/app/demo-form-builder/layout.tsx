@@ -4,7 +4,7 @@ import "@/app/globals.css";
 export const metadata: Metadata = {
   title: {
     default: "Demo Form Builder",
-    template: "%s — Ikiform",
+    template: "Ikiform: %s",
   },
   description:
     "Try out the Ikiform Demo Form Builder. Experiment with building, editing, and managing forms in a live, interactive environment.",

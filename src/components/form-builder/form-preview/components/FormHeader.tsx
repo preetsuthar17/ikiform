@@ -1,4 +1,3 @@
-import React from "react";
 import { getInternalFormTitle } from "@/lib/utils/form-utils";
 import type { FormHeaderProps } from "../types";
 import { EditableField } from "./EditableField";
@@ -18,9 +17,9 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
     schema.settings.publicTitle !== schema.settings?.title;
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col">
       <EditableField
-        className="flex min-h-[44px] items-center gap-2"
+        className="flex items-center gap-2"
         disabled={!onFormSettingsUpdate}
         inputClassName="text-3xl font-bold bg-background w-full"
         onSave={handleTitleUpdate}
@@ -40,7 +39,7 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
       </EditableField>
 
       <EditableField
-        className="flex min-h-[28px] items-start gap-2"
+        className="flex items-start gap-2"
         component="textarea"
         disabled={!onFormSettingsUpdate}
         inputClassName="bg-background w-full"

@@ -27,6 +27,8 @@ export function FormPreview({
   onBlockUpdate,
   onStepSelect,
   onAddField,
+  onBlockAdd,
+  onBlockDelete,
 }: FormPreviewProps) {
   const {
     formData,
@@ -91,6 +93,8 @@ export function FormPreview({
         {isMultiStep && (
           <MultiStepNavigation
             currentStepIndex={currentStepIndex}
+            onBlockAdd={onBlockAdd}
+            onBlockDelete={onBlockDelete}
             onStepChange={handleStepChange}
             onStepSelect={onStepSelect}
             schema={schema}

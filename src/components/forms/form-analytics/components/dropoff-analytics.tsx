@@ -1,6 +1,14 @@
 import { AlertTriangle } from "lucide-react";
 import type React from "react";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import type { Form, FormSubmission } from "@/lib/database";
 
 function getDropoffCounts(form: Form, submissions: FormSubmission[]) {
@@ -40,71 +48,130 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
 }) => {
   if (!form.schema?.blocks || form.schema.blocks.length === 0) {
     return (
-      <Card className="flex items-center gap-4 border-border bg-card p-6">
-        <div className="rounded-card bg-orange-500/10 p-3">
-          <AlertTriangle className="h-6 w-6 text-orange-600" />
-        </div>
-        <div className="flex flex-col gap-1">
-          <span className="font-semibold text-foreground text-lg">
-            Drop-off analytics
-          </span>
-          <span className="text-muted-foreground text-sm">
-            Drop-off analytics are only available for multi-step forms.
-          </span>
-        </div>
+      <Card className="p-4 shadow-none md:p-6">
+        <CardHeader className="flex items-center gap-4 p-0">
+          <div aria-hidden="true" className="rounded-md bg-orange-500/10 p-3">
+            <AlertTriangle className="size-6 text-orange-600" />
+          </div>
+          <div className="flex flex-col gap-1">
+            <CardTitle className="font-semibold text-foreground text-lg">
+              Drop-off analytics
+            </CardTitle>
+            <p className="text-muted-foreground text-sm">
+              Drop-off analytics are only available for multi-step forms.
+            </p>
+          </div>
+        </CardHeader>
       </Card>
     );
   }
+
   const dropoffCounts = getDropoffCounts(form, submissions);
   const total = submissions.length;
+
   return (
-    <Card className="flex flex-col gap-4 border-border bg-card p-6">
-      <div className="mb-2 flex items-center gap-4">
-        <div className="rounded-card bg-orange-500/10 p-3">
-          <AlertTriangle className="h-6 w-6 text-orange-600" />
+    <Card className="p-4 shadow-none md:p-6">
+      <CardHeader className="flex items-center gap-4 p-0">
+        <div aria-hidden="true" className="rounded-md bg-orange-500/10 p-3">
+          <AlertTriangle className="size-6 text-orange-600" />
         </div>
         <div className="flex flex-col gap-1">
-          <span className="font-semibold text-foreground text-lg">
+          <CardTitle className="font-semibold text-foreground text-lg">
             Drop-off analytics
-          </span>
-          <span className="text-muted-foreground text-sm">
+          </CardTitle>
+          <p className="text-muted-foreground text-sm">
             Understand where users drop off in your forms.
-          </span>
+          </p>
         </div>
-      </div>
-      <div className="overflow-x-auto">
-        <table className="min-w-full border-collapse text-sm">
-          <thead>
-            <tr>
-              <th className="px-3 py-2 text-left font-semibold">Step</th>
-              <th className="px-3 py-2 text-left font-semibold">Reached</th>
-              <th className="px-3 py-2 text-left font-semibold">Drop-off %</th>
-            </tr>
-          </thead>
-          <tbody>
+      </CardHeader>
+      <CardContent className="p-0">
+        <Table>
+          <TableHeader>
+            <TableRow className="gap-4">
+              <TableHead>Step</TableHead>
+              <TableHead>Reached</TableHead>
+              <TableHead>Drop-off %</TableHead>
+              <TableHead>Completion %</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {form.schema.blocks.map((block: any, idx: number) => {
               const reached = dropoffCounts[block.id] || 0;
               const dropoff =
                 total > 0 ? 100 - Math.round((reached / total) * 100) : 0;
+              const completionRate =
+                total > 0 ? Math.round((reached / total) * 100) : 0;
+
               return (
-                <tr
-                  className="border-border border-b last:border-0"
-                  key={block.id}
-                >
-                  <td className="px-3 py-2 font-medium text-foreground">
-                    {block.label ? block.label : `Step ${idx + 1}`}
-                  </td>
-                  <td className="px-3 py-2">{reached}</td>
-                  <td className="px-3 py-2">{dropoff}%</td>
-                </tr>
+                <TableRow key={block.id}>
+                  <TableCell className="font-medium">
+                    <div className="flex items-center gap-2">
+                      <div className="flex size-6 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary text-xs">
+                        {idx + 1}
+                      </div>
+                      {block.label ? block.label : `Step ${idx + 1}`}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold tabular-nums">
+                        {reached}
+                      </span>
+                      <span className="text-muted-foreground text-sm">
+                        of {total}
+                      </span>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold tabular-nums">
+                        {dropoff}%
+                      </span>
+                      <div className="max-w-20 flex-1">
+                        <div className="h-2 overflow-hidden rounded-full bg-muted">
+                          {/* Prevents visual issue if dropoff is 0 or very small */}
+                          <div
+                            aria-label={`Drop-off bar for step ${idx + 1}`}
+                            className="h-full bg-destructive transition-all duration-300"
+                            style={{
+                              width: dropoff > 0 ? `${dropoff}%` : "2px",
+                              minWidth: dropoff === 0 ? "2px" : undefined,
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold tabular-nums">
+                        {completionRate}%
+                      </span>
+                      <div className="max-w-20 flex-1">
+                        <div className="h-2 overflow-hidden rounded-full bg-muted">
+                          {/* Prevents visual issue if completionRate is 0 or very small */}
+                          <div
+                            aria-label={`Completion bar for step ${idx + 1}`}
+                            className="h-full bg-primary transition-all duration-300"
+                            style={{
+                              width:
+                                completionRate > 0
+                                  ? `${completionRate}%`
+                                  : "2px",
+                              minWidth:
+                                completionRate === 0 ? "2px" : undefined,
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </TableCell>
+                </TableRow>
               );
             })}
-          </tbody>
-        </table>
-      </div>
-      <div className="text-muted-foreground text-xs">
-        Drop-off % shows the percentage of users who did not reach each step.
-      </div>
+          </TableBody>
+        </Table>
+      </CardContent>
     </Card>
   );
 };

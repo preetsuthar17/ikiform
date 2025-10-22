@@ -1,5 +1,3 @@
-import type { FormLogic } from "@/components/form-builder/logic-builder/types";
-
 export interface PrepopulationConfig {
   urlParam?: string;
 

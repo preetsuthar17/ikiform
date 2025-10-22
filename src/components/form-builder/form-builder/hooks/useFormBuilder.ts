@@ -15,16 +15,11 @@ import {
 import { DRAFT_KEYS, FORM_BUILDER_CONSTANTS } from "../constants";
 import type { FormBuilderActions, FormBuilderState } from "../types";
 import {
-  addFieldToSchema,
   findSelectedField,
-  generateBlockId,
-  generateFieldId,
   hasFormChanges,
   loadDraftFromStorage,
   removeDraftFromStorage,
-  removeFieldFromSchema,
   saveDraftToStorage,
-  updateFieldInSchema,
 } from "../utils";
 
 export const useFormBuilder = (formId?: string) => {
@@ -265,5 +260,7 @@ export const useFormBuilder = (formId?: string) => {
     authLoading,
     debouncedAutoSave,
     loadForm,
+    lastSavedSchemaRef,
+    lastManuallySavedSchemaRef,
   };
 };

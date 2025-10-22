@@ -1,19 +1,15 @@
-import { Settings, Zap } from "lucide-react";
-import React from "react";
-import type { FormLogic } from "@/components/form-builder/logic-builder/types";
+import type React from "react";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
 import type { FormSchema } from "@/lib/database";
 import { BlockManager } from "../../block-manager";
 import { FieldPalette } from "../../field-palette";
 import { FieldSettingsPanel } from "../../field-settings-panel";
 import { FormPreview } from "../../form-preview";
-import { LogicBuilderPanel } from "../../logic-builder";
 
 import { PANEL_SIZES } from "../constants";
 
@@ -37,16 +33,8 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
   onBlockDelete,
   onFormSettingsUpdate,
   onStepSelect,
-  onLogicChange,
 }) => {
-  const [activeTab, setActiveTab] = React.useState("field-settings");
-  const tabItems = [
-    { id: "field-settings", label: "Field Settings", icon: <Settings /> },
-    { id: "logic-builder", label: "Logic Builder", icon: <Zap /> },
-  ];
-  const handleLogicChange = (logic: FormLogic) => {
-    if (onLogicChange) onLogicChange(logic);
-  };
+  // Logic builder and tabs removed
   const allFields = getAllFields(formSchema);
 
   const handleSchemaUpdate = (updatedSchema: FormSchema) => {
@@ -66,12 +54,21 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
     }
   };
   return (
-    <ResizablePanelGroup className="h-full" direction="horizontal">
+    <ResizablePanelGroup
+      className="h-full"
+      direction="horizontal"
+      style={{
+        overscrollBehavior: "contain",
+      }}
+    >
       {}
       <ResizablePanel
         defaultSize={PANEL_SIZES.LEFT_PANEL.default}
         maxSize={PANEL_SIZES.LEFT_PANEL.max}
         minSize={PANEL_SIZES.LEFT_PANEL.min}
+        style={{
+          overscrollBehavior: "contain",
+        }}
       >
         {formSchema.settings.multiStep ? (
           <BlockManager
@@ -101,10 +98,20 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
         defaultSize={PANEL_SIZES.PREVIEW_PANEL.default}
         maxSize={PANEL_SIZES.PREVIEW_PANEL.max}
         minSize={PANEL_SIZES.PREVIEW_PANEL.min}
+        style={{
+          overscrollBehavior: "contain",
+        }}
       >
-        <ScrollArea className="h-full bg-background">
+        <ScrollArea
+          className="h-full bg-background"
+          style={{
+            overscrollBehavior: "contain",
+          }}
+        >
           <FormPreview
             onAddField={onFieldAdd}
+            onBlockAdd={onBlockAdd}
+            onBlockDelete={onBlockDelete}
             onBlockUpdate={onBlockUpdate}
             onFieldDelete={onFieldDelete}
             onFieldSelect={onFieldSelect}
@@ -125,26 +132,22 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
         defaultSize={PANEL_SIZES.RIGHT_PANEL.default}
         maxSize={PANEL_SIZES.RIGHT_PANEL.max}
         minSize={PANEL_SIZES.RIGHT_PANEL.min}
+        style={{
+          overscrollBehavior: "contain",
+        }}
       >
-        <div className="flex h-full flex-col">
-          {formSchema.settings.multiStep ? (
-            <FieldSettingsPanel
-              field={selectedField}
-              onClose={() => onFieldSelect(null)}
-              onFieldUpdate={onFieldUpdate}
-            />
-          ) : (
-            <FieldSettingsPanel
-              field={selectedField}
-              onClose={() => onFieldSelect(null)}
-              onFieldUpdate={onFieldUpdate}
-            />
-          )}
-          <LogicBuilderPanel
-            fields={allFields}
-            logic={formSchema.logic || []}
-            onLogicChange={handleLogicChange}
+        <div
+          className="flex h-full flex-col"
+          style={{
+            overscrollBehavior: "contain",
+          }}
+        >
+          <FieldSettingsPanel
+            field={selectedField}
+            onClose={() => onFieldSelect(null)}
+            onFieldUpdate={onFieldUpdate}
           />
+          {/* Logic builder removed */}
         </div>
       </ResizablePanel>
     </ResizablePanelGroup>

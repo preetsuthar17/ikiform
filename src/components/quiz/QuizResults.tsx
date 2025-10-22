@@ -8,7 +8,6 @@ import {
   Trophy,
   XCircle,
 } from "lucide-react";
-import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -60,11 +59,11 @@ export function QuizResults({
         <div className="mb-6 flex justify-center">
           {passed ? (
             <div className="rounded-full bg-green-100 p-4">
-              <Trophy className="h-12 w-12 text-green-600" />
+              <Trophy className="size-12 text-green-600" />
             </div>
           ) : (
             <div className="rounded-full bg-blue-100 p-4">
-              <Target className="h-12 w-12 text-blue-600" />
+              <Target className="size-12 text-blue-600" />
             </div>
           )}
         </div>
@@ -126,12 +125,12 @@ export function QuizResults({
         >
           {passed ? (
             <>
-              <Award className="h-4 w-4" />
+              <Award className="size-4" />
               Passed
             </>
           ) : (
             <>
-              <TrendingUp className="h-4 w-4" />
+              <TrendingUp className="size-4" />
               Needs Improvement
             </>
           )}
@@ -141,7 +140,7 @@ export function QuizResults({
         {allowRetake && onRetake && (
           <div className="mt-6">
             <Button className="gap-2" onClick={onRetake} variant="outline">
-              <RotateCcw className="h-4 w-4" />
+              <RotateCcw className="size-4" />
               Retake Quiz
             </Button>
           </div>
@@ -152,7 +151,7 @@ export function QuizResults({
       {showDetailedResults && fieldResults.length > 0 && (
         <Card className="p-6">
           <div className="mb-4 flex items-center gap-2">
-            <Info className="h-5 w-5 text-primary" />
+            <Info className="size-5 text-primary" />
             <h3 className="font-semibold text-foreground text-lg">
               Question by Question Results
             </h3>
@@ -168,9 +167,9 @@ export function QuizResults({
                         Question {index + 1}: {fieldResult.fieldLabel}
                       </span>
                       {fieldResult.isCorrect ? (
-                        <CheckCircle className="h-4 w-4 text-green-600" />
+                        <CheckCircle className="size-4 text-green-600" />
                       ) : (
-                        <XCircle className="h-4 w-4 text-red-600" />
+                        <XCircle className="size-4 text-red-600" />
                       )}
                     </div>
 
@@ -208,7 +207,7 @@ export function QuizResults({
                       {fieldResult.explanation && (
                         <div className="rounded-lg bg-blue-50 p-3">
                           <div className="flex gap-2">
-                            <Info className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-600" />
+                            <Info className="mt-0.5 size-4 flex-shrink-0 text-blue-600" />
                             <p className="text-blue-800 text-sm">
                               {fieldResult.explanation}
                             </p>

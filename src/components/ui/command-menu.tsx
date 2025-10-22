@@ -163,7 +163,7 @@ const CommandMenuContent = React.forwardRef<
             animate={{ opacity: 1, scale: 1, y: 0 }}
             className={cn(
               "fixed top-[30%] left-[50%] z-50 w-[95%] max-w-2xl translate-x-[-50%] translate-y-[-50%]",
-              "rounded-card border border-border bg-background",
+              "rounded-2xl border border-border bg-background",
               "overflow-hidden",
               className
             )}
@@ -186,15 +186,15 @@ const CommandMenuContent = React.forwardRef<
 
               {children}
 
-              <CommandMenuClose className="absolute top-3 right-3 rounded-card p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              <CommandMenuClose className="absolute top-3 right-3 rounded-2xl p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
                 <X size={14} />
                 <span className="sr-only">Close</span>
               </CommandMenuClose>
 
               {showShortcut && (
                 <div className="absolute top-3 right-12 flex h-6.5 items-center justify-center gap-1">
-                  <Kbd size="xs">{getModifierKey().symbol}</Kbd>
-                  <Kbd size="xs">K</Kbd>
+                  <Kbd>{getModifierKey().symbol}</Kbd>
+                  <Kbd>K</Kbd>
                 </div>
               )}
             </CommandMenuProvider>
@@ -220,7 +220,7 @@ const CommandMenuInput = React.forwardRef<
 
     return (
       <div className="flex items-center border-border border-b px-3 py-0">
-        <Search className="mr-3 h-4 w-4 shrink-0 text-muted-foreground" />
+        <Search className="mr-3 size-4 shrink-0 text-muted-foreground" />
         <input
           className={cn(
             "flex h-12 w-full rounded-none border-0 bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
@@ -366,7 +366,7 @@ const CommandMenuItem = React.forwardRef<
     return (
       <div
         className={cn(
-          "relative flex cursor-default select-none items-center gap-2 rounded-ele px-2 py-2 text-sm outline-none transition-colors",
+          "relative flex cursor-default select-none items-center gap-2 rounded-xl px-2 py-2 text-sm outline-none transition-colors",
           "hover:bg-accent hover:text-accent-foreground",
           isSelected && "bg-accent text-accent-foreground",
           disabled && "pointer-events-none opacity-50",
@@ -379,7 +379,7 @@ const CommandMenuItem = React.forwardRef<
         {...props}
       >
         {icon && (
-          <div className="flex h-4 w-4 items-center justify-center">{icon}</div>
+          <div className="flex size-4 items-center justify-center">{icon}</div>
         )}
 
         <div className="flex-1">{children}</div>
@@ -391,7 +391,7 @@ const CommandMenuItem = React.forwardRef<
                 {i > 0 && (
                   <span className="text-muted-foreground text-xs">+</span>
                 )}
-                <Kbd size="xs">
+                <Kbd>
                   {key === "cmd" || key === "⌘"
                     ? getModifierKey().symbol
                     : key === "shift"

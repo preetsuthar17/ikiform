@@ -72,7 +72,7 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
   }, [jsonString]);
 
   return (
-    <div className="my-2 rounded-card border border-border bg-muted/50 p-3 font-mono text-xs">
+    <div className="my-2 rounded-2xl border border-border bg-muted/50 p-3 font-mono text-xs">
       <motion.div
         animate={{ height: targetHeight }}
         initial={{ height: 100 }}
@@ -90,12 +90,12 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
           className="flex items-center gap-1"
           onClick={() => setExpanded((e) => !e)}
           size="sm"
-          variant="ghost"
+          variant="outline"
         >
           {expanded ? (
-            <ChevronUp className="h-4 w-4" />
+            <ChevronUp className="size-4" />
           ) : (
-            <ChevronDown className="h-4 w-4" />
+            <ChevronDown className="size-4" />
           )}
           {expanded ? "Collapse" : "Expand"}
         </Button>

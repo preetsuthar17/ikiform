@@ -11,21 +11,50 @@ export function NumberInputField(props: BaseFieldProps) {
   const baseClasses = getBaseClasses(field, error);
   const builderMode = getBuilderMode(props);
 
+  const getNumberPlaceholder = () => field.placeholder || "Enter number";
+
+  const getNumberMaxValue = () => field.validation?.max;
+
+  const getNumberMinValue = () => field.validation?.min;
+
+  const getNumberStepValue = () => field.settings?.step || 1;
+
+  const handleNumberInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    onChange(newValue);
+  };
+
+  const handleNumberInputKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (e.key === "Escape") {
+      e.currentTarget.blur();
+    }
+  };
+
   const inputProps = applyBuilderMode(
     {
       className: `flex gap-2 ${baseClasses}`,
       disabled,
       id: field.id,
-      max: field.validation?.max,
-      min: field.validation?.min,
-      onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-        onChange(e.target.value),
-      placeholder: field.placeholder,
+      name: field.id,
+      autoComplete: "off",
+      inputMode: "numeric" as const,
+      max: getNumberMaxValue(),
+      min: getNumberMinValue(),
+      step: getNumberStepValue(),
+      onChange: handleNumberInputChange,
+      onKeyDown: handleNumberInputKeyDown,
+      placeholder: getNumberPlaceholder(),
       type: "number",
       value: value || "",
     },
     builderMode
   );
 
-  return <Input {...inputProps} />;
+  return (
+    <div className="flex flex-col gap-2">
+      <Input {...inputProps} />
+    </div>
+  );
 }

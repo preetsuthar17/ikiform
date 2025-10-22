@@ -29,6 +29,7 @@ export function AIBuilder() {
   const [chatDrawerOpen, setChatDrawerOpen] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
   const [mounted, setMounted] = useState(false);
+  const errorLiveRegionRef = useRef<HTMLDivElement | null>(null);
 
   const {
     messages,
@@ -54,13 +55,19 @@ export function AIBuilder() {
 
   const suggestions = CHAT_SUGGESTIONS.map((text) => ({
     text,
-    icon: <Sparkles className="h-4 w-4" />,
+    icon: <Sparkles className="size-4" />,
   }));
 
   useEffect(() => {
     initializeScrollbarStyles();
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (streamError && errorLiveRegionRef.current) {
+      errorLiveRegionRef.current.focus({ preventScroll: true });
+    }
+  }, [streamError]);
 
   const chatPanelProps = {
     messages,
@@ -88,11 +95,19 @@ export function AIBuilder() {
       hasPremium={hasPremium}
       user={user}
     >
-      <div className="flex h-screen w-full flex-col gap-4 bg-background md:flex-row">
+      <div
+        className="flex h-screen w-full flex-col gap-4 bg-background motion-reduce:animate-none motion-reduce:transition-none md:flex-row"
+        id="main-content"
+        role="main"
+        tabIndex={-1}
+      >
         {}
         <div className="-translate-x-1/2 fixed bottom-4 left-1/2 z-50 w-full max-w-[90%] md:hidden">
           <Button
-            className="w-full rounded-card"
+            aria-controls="mobile-chat-drawer"
+            aria-expanded={chatDrawerOpen}
+            aria-haspopup="dialog"
+            className="w-full rounded-2xl"
             onClick={() => setChatDrawerOpen(true)}
             size="lg"
           >
@@ -103,12 +118,7 @@ export function AIBuilder() {
         {}
         <div className="hidden h-full w-full md:flex">
           <ResizablePanelGroup direction="horizontal">
-            <ResizablePanel
-              border="right"
-              defaultSize={20}
-              maxSize={30}
-              minSize={15}
-            >
+            <ResizablePanel defaultSize={25} maxSize={30} minSize={15}>
               <ChatPanel {...chatPanelProps} />
             </ResizablePanel>
             <ResizableHandle />
@@ -127,6 +137,7 @@ export function AIBuilder() {
 
         {}
         <MobileChatDrawer
+          drawerId="mobile-chat-drawer"
           isOpen={chatDrawerOpen}
           onOpenChange={setChatDrawerOpen}
           {...chatPanelProps}
@@ -142,6 +153,20 @@ export function AIBuilder() {
             setActiveFormId={setActiveFormId}
             setShowJsonModal={setShowJsonModal}
           />
+        </div>
+
+        {/** Live regions for A11y announcements */}
+        <div
+          aria-atomic="true"
+          aria-live="assertive"
+          className="sr-only"
+          ref={errorLiveRegionRef}
+          tabIndex={-1}
+        >
+          {streamError ? `Error: ${streamError}` : ""}
+        </div>
+        <div aria-atomic="true" aria-live="polite" className="sr-only">
+          {isStreaming ? "Generating response…" : isLoading ? "Loading…" : ""}
         </div>
 
         <JsonModal

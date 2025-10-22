@@ -1,5 +1,4 @@
-import React from "react";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -17,70 +16,111 @@ export function RatingFieldSettings({
   onUpdateSettings,
 }: FieldSettingsProps) {
   return (
-    <Card className="flex flex-col gap-3 rounded-card bg-background p-4">
-      <h3 className="mb-2 font-medium text-card-foreground">Rating Settings</h3>
-      <div className="grid grid-cols-2 items-center gap-2">
-        <Label className="text-card-foreground" htmlFor="rating-star-count">
-          Number of Stars
-        </Label>
-        <Input
-          className="w-20"
-          id="rating-star-count"
-          max={10}
-          min={1}
-          onChange={(e) =>
-            onUpdateSettings({
-              starCount: Math.max(
-                1,
-                Math.min(10, Number.parseInt(e.target.value) || 5)
-              ),
-            })
-          }
-          type="number"
-          value={field.settings?.starCount || 5}
-        />
-        <Label className="text-card-foreground" htmlFor="rating-star-size">
-          Star Size
-        </Label>
-        <div className="flex items-center gap-2">
-          <Slider
-            className="w-28"
-            max={64}
-            min={16}
-            onValueChange={([val]) => onUpdateSettings({ starSize: val })}
-            step={1}
-            value={[field.settings?.starSize || 28]}
+    <Card className="gap-2 p-4 shadow-none">
+      <CardHeader className="p-0">
+        <CardTitle className="flex items-center gap-2 text-lg">
+          Rating Settings
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-4 p-0">
+        <div className="flex flex-col gap-2">
+          <Label className="font-medium text-sm" htmlFor="rating-star-count">
+            Number of Stars
+          </Label>
+          <Input
+            aria-describedby="rating-star-count-help"
+            autoComplete="off"
+            className="w-20"
+            id="rating-star-count"
+            max={10}
+            min={1}
+            name="rating-star-count"
+            onChange={(e) =>
+              onUpdateSettings({
+                starCount: Math.max(
+                  1,
+                  Math.min(10, Number.parseInt(e.target.value) || 5)
+                ),
+              })
+            }
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                e.currentTarget.blur();
+              }
+            }}
+            type="number"
+            value={field.settings?.starCount || 5}
           />
-          <span className="w-8 text-right text-muted-foreground text-xs">
-            {field.settings?.starSize || 28}px
-          </span>
+          <p
+            className="text-muted-foreground text-xs"
+            id="rating-star-count-help"
+          >
+            Number of rating stars (1-10)
+          </p>
         </div>
-        <Label className="text-card-foreground" htmlFor="rating-icon">
-          Icon Type
-        </Label>
-        <Select
-          onValueChange={(val) => onUpdateSettings({ icon: val })}
-          value={field.settings?.icon || "star"}
-        >
-          <SelectTrigger className="w-24">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="star">Star</SelectItem>
-            <SelectItem value="heart">Heart</SelectItem>
-          </SelectContent>
-        </Select>
-        <Label className="text-card-foreground" htmlFor="rating-color">
-          Icon Color
-        </Label>
-        <Input
-          className="h-8 w-12 border-none bg-transparent p-0"
-          id="rating-color"
-          onChange={(e) => onUpdateSettings({ color: e.target.value })}
-          type="color"
-          value={field.settings?.color || "#fbbf24"}
-        />
-      </div>
+        <div className="flex flex-col gap-2">
+          <Label className="font-medium text-sm" htmlFor="rating-star-size">
+            Star Size
+          </Label>
+          <div className="flex items-center gap-2">
+            <Slider
+              aria-describedby="rating-star-size-help"
+              className="w-28"
+              max={64}
+              min={16}
+              onValueChange={([val]) => onUpdateSettings({ starSize: val })}
+              step={1}
+              value={[field.settings?.starSize || 28]}
+            />
+            <span className="w-8 text-right text-muted-foreground text-xs">
+              {field.settings?.starSize || 28}px
+            </span>
+          </div>
+          <p
+            className="text-muted-foreground text-xs"
+            id="rating-star-size-help"
+          >
+            Size of the rating stars (16-64px)
+          </p>
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label className="font-medium text-sm" htmlFor="rating-icon">
+            Icon Type
+          </Label>
+          <Select
+            onValueChange={(val) => onUpdateSettings({ icon: val })}
+            value={field.settings?.icon || "star"}
+          >
+            <SelectTrigger className="w-24" id="rating-icon">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="star">Star</SelectItem>
+              <SelectItem value="heart">Heart</SelectItem>
+            </SelectContent>
+          </Select>
+          <p className="text-muted-foreground text-xs" id="rating-icon-help">
+            Choose the icon type for ratings
+          </p>
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label className="font-medium text-sm" htmlFor="rating-color">
+            Icon Color
+          </Label>
+          <Input
+            aria-describedby="rating-color-help"
+            className="h-8 w-12 border-none bg-transparent p-0"
+            id="rating-color"
+            name="rating-color"
+            onChange={(e) => onUpdateSettings({ color: e.target.value })}
+            type="color"
+            value={field.settings?.color || "#fbbf24"}
+          />
+          <p className="text-muted-foreground text-xs" id="rating-color-help">
+            Color of the rating icons
+          </p>
+        </div>
+      </CardContent>
     </Card>
   );
 }

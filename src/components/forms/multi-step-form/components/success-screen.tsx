@@ -1,7 +1,5 @@
-import type React from "react";
-import { Link } from "react-aria-components";
-
-import { Card } from "@/components/ui/card";
+import type * as React from "react";
+import { Card, CardContent } from "@/components/ui/card";
 
 import type { FormSchema } from "@/lib/database";
 
@@ -10,14 +8,19 @@ interface SuccessScreenProps {
 }
 
 export const SuccessScreen: React.FC<SuccessScreenProps> = ({ schema }) => (
-  <div className="flex min-h-screen items-center justify-center bg-background">
-    <div className="mx-auto flex w-full max-w-2xl flex-col gap-4">
-      <Card className="flex flex-col gap-6 rounded-card p-8">
-        <div className="flex flex-col items-center gap-6">
-          <div className="flex h-16 w-16 items-center justify-center rounded-card bg-accent">
+  <main className="flex min-h-screen items-center justify-center bg-background py-8">
+    <div className="mx-auto flex w-full max-w-lg flex-col gap-6">
+      <Card className="p-6 shadow-none">
+        <CardContent className="flex flex-col items-center gap-6 p-0">
+          <div
+            aria-hidden="true"
+            className="flex size-16 items-center justify-center rounded-xl bg-accent"
+          >
             <svg
-              className="h-8 w-8 text-accent-foreground"
+              aria-hidden="true"
+              className="size-8 text-accent-foreground"
               fill="none"
+              focusable="false"
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
@@ -29,27 +32,29 @@ export const SuccessScreen: React.FC<SuccessScreenProps> = ({ schema }) => (
               />
             </svg>
           </div>
-          <h2 className="font-bold text-2xl text-foreground">Thank You!</h2>
-          <p className="text-center text-muted-foreground">
+          <h1 className="font-semibold text-3xl text-foreground tracking-tight">
+            Thank You!
+          </h1>
+          <p className="text-center text-base text-muted-foreground">
             {schema.settings.successMessage ||
               "Your form has been submitted successfully."}
           </p>
           {schema.settings.redirectUrl && (
-            <p className="text-muted-foreground/70 text-sm">
-              Redirecting you in a moment...
+            <p className="pt-1 text-muted-foreground/70 text-sm italic">
+              Redirecting you in a moment…
             </p>
           )}
-        </div>
+        </CardContent>
       </Card>
-
-      <div className="text-center">
-        <p className="text-muted-foreground text-sm">
+      {Boolean(
+        schema.settings.branding &&
+          (schema.settings.branding as any).showIkiformBranding !== false
+      ) && (
+        <p className="text-center text-muted-foreground text-sm">
           Powered by{" "}
-          <span className="font-medium text-foreground underline">
-            <Link href="https://www.ikiform.com">Ikiform</Link>
-          </span>
+          <span className="font-medium text-foreground underline">Ikiform</span>
         </p>
-      </div>
+      )}
     </div>
-  </div>
+  </main>
 );

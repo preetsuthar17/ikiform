@@ -1,5 +1,3 @@
-import type { FormLogic } from "@/components/form-builder/logic-builder/types";
-
 export type Json =
   | string
   | number
@@ -151,6 +149,7 @@ export interface Database {
           name: string;
           email: string;
           has_premium: boolean;
+          has_free_trial: boolean;
           polar_customer_id: string | null;
           created_at: string;
           updated_at: string;
@@ -160,6 +159,7 @@ export interface Database {
           name: string;
           email: string;
           has_premium?: boolean;
+          has_free_trial?: boolean;
           polar_customer_id?: string | null;
           created_at?: string;
           updated_at?: string;
@@ -169,6 +169,7 @@ export interface Database {
           name?: string;
           email?: string;
           has_premium?: boolean;
+          has_free_trial?: boolean;
           polar_customer_id?: string | null;
           created_at?: string;
           updated_at?: string;
@@ -326,6 +327,8 @@ export interface Database {
       webhooks: {
         Row: {
           account_id: string | null;
+          name: string | null;
+          description: string | null;
           created_at: string;
           enabled: boolean;
           events: string[];
@@ -343,6 +346,8 @@ export interface Database {
         };
         Insert: {
           account_id?: string | null;
+          name?: string | null;
+          description?: string | null;
           created_at?: string;
           enabled?: boolean;
           events: string[];
@@ -360,6 +365,8 @@ export interface Database {
         };
         Update: {
           account_id?: string | null;
+          name?: string | null;
+          description?: string | null;
           created_at?: string;
           enabled?: boolean;
           events?: string[];
@@ -759,8 +766,9 @@ export interface FormSchema {
       apiKey?: string;
       allowExternalSubmissions?: boolean;
     };
+    storedSteps?: FormBlock[];
   };
-  logic?: FormLogic;
+  // logic removed
 }
 
 export type WebhookEventType =
@@ -774,6 +782,8 @@ export interface WebhookConfig {
   id: string;
   formId?: string;
   accountId?: string;
+  name?: string | null;
+  description?: string | null;
   url: string;
   events: WebhookEventType[];
   secret?: string;

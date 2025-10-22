@@ -11,6 +11,8 @@ export interface FormPreviewProps {
   onBlockUpdate?: (blockId: string, updates: Partial<FormBlock>) => void;
   onStepSelect?: (stepIndex: number) => void;
   onAddField?: (fieldType: FormField["type"]) => void;
+  onBlockAdd?: () => void;
+  onBlockDelete?: (blockId: string) => void;
 }
 
 export interface FormHeaderProps {
@@ -23,6 +25,8 @@ export interface MultiStepNavigationProps {
   currentStepIndex: number;
   onStepSelect?: (stepIndex: number) => void;
   onStepChange: (index: number) => void;
+  onBlockAdd?: () => void;
+  onBlockDelete?: (blockId: string) => void;
 }
 
 export interface StepHeaderProps {

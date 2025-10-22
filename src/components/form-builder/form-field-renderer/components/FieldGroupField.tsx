@@ -1,5 +1,7 @@
-import React from "react";
+import { Label } from "@/components/ui/label";
+
 import type { BaseFieldProps } from "../types";
+
 import { createFieldComponent } from "../utils/fieldFactory";
 
 export function FieldGroupField({
@@ -10,13 +12,17 @@ export function FieldGroupField({
   disabled,
   formId,
 }: BaseFieldProps) {
-  const groupFields = field.settings?.groupFields || [];
-  const groupLayout = field.settings?.groupLayout || "horizontal";
-  const groupSpacing = field.settings?.groupSpacing || "normal";
-  const groupColumns = field.settings?.groupColumns || 2;
+  const getGroupFields = () => field.settings?.groupFields || [];
 
-  const getSpacingClass = () => {
-    switch (groupSpacing) {
+  const getGroupLayout = () => field.settings?.groupLayout || "horizontal";
+
+  const getGroupSpacing = () => field.settings?.groupSpacing || "normal";
+
+  const getGroupColumns = () => field.settings?.groupColumns || 2;
+
+  const getSpacingClassName = () => {
+    const spacing = getGroupSpacing();
+    switch (spacing) {
       case "compact":
         return "gap-2";
       case "relaxed":
@@ -26,13 +32,15 @@ export function FieldGroupField({
     }
   };
 
-  const getLayoutClass = () => {
-    if (groupLayout === "vertical") {
+  const getLayoutClassName = () => {
+    const layout = getGroupLayout();
+
+    if (layout === "vertical") {
       return "flex flex-col";
     }
 
-    // Horizontal layout with responsive columns
-    switch (groupColumns) {
+    const columns = getGroupColumns();
+    switch (columns) {
       case 3:
         return "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
       case 4:
@@ -42,7 +50,22 @@ export function FieldGroupField({
     }
   };
 
-  const handleFieldChange = (fieldId: string, fieldValue: any) => {
+  const getContainerClassName = () => {
+    const layoutClass = getLayoutClassName();
+    const spacingClass = getSpacingClassName();
+    return `${layoutClass} ${spacingClass}`;
+  };
+
+  const getFieldValue = (fieldId: string) => value?.[fieldId];
+
+  const getFieldError = (fieldId: string) => {
+    if (typeof error === "object" && error !== null && fieldId in error) {
+      return (error as Record<string, string | undefined>)[fieldId];
+    }
+    return;
+  };
+
+  const handleGroupFieldChange = (fieldId: string, fieldValue: any) => {
     const currentValues = value || {};
     onChange({
       ...currentValues,
@@ -50,39 +73,46 @@ export function FieldGroupField({
     });
   };
 
-  return (
-    <div className={`${getLayoutClass()} ${getSpacingClass()}`}>
-      {groupFields.map((groupField) => {
-        const fieldValue = value?.[groupField.id];
+  const renderGroupFieldLabel = (groupField: any) => {
+    if (!groupField.label) return null;
 
-        return (
-          <div className="flex-1" key={groupField.id}>
-            <div className="flex flex-col gap-2">
-              {groupField.label && (
-                <label className="font-medium text-foreground text-sm">
-                  {groupField.label}
-                  {groupField.required && (
-                    <span className="ml-1 text-destructive">*</span>
-                  )}
-                </label>
-              )}
-              {createFieldComponent(
-                groupField,
-                fieldValue,
-                (fieldValue) => handleFieldChange(groupField.id, fieldValue),
-                typeof error === "object" &&
-                  error !== null &&
-                  groupField.id in error
-                  ? (error as Record<string, string | undefined>)[groupField.id]
-                  : undefined,
-                undefined,
-                disabled,
-                formId
-              )}
-            </div>
-          </div>
-        );
-      })}
+    return (
+      <Label className="font-medium text-foreground text-sm">
+        {groupField.label}
+        {groupField.required && (
+          <span className="ml-1 text-destructive">*</span>
+        )}
+      </Label>
+    );
+  };
+
+  const renderGroupField = (groupField: any) => {
+    const fieldValue = getFieldValue(groupField.id);
+    const fieldError = getFieldError(groupField.id);
+
+    return (
+      <div className="flex-1" key={groupField.id}>
+        <div className="flex flex-col gap-2">
+          {renderGroupFieldLabel(groupField)}
+          {createFieldComponent(
+            groupField,
+            fieldValue,
+            (fieldValue) => handleGroupFieldChange(groupField.id, fieldValue),
+            fieldError,
+            undefined,
+            disabled,
+            formId
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  const groupFields = getGroupFields();
+
+  return (
+    <div className={getContainerClassName()}>
+      {groupFields.map(renderGroupField)}
     </div>
   );
 }

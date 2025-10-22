@@ -4,7 +4,7 @@ import "@/app/globals.css";
 export const metadata: Metadata = {
   title: {
     default: "Analytics",
-    template: "%s — Ikiform",
+    template: "Ikiform: %s",
   },
   description:
     "Analyze your form responses with Ikiform Analytics. Gain insights, visualize trends, and make data-driven decisions with our open-source analytics tools.",

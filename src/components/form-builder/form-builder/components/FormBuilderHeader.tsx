@@ -1,12 +1,10 @@
+import { AnimatePresence, motion } from "framer-motion";
 import {
   BarChart3,
   Code,
-  Container,
-  Eye,
   EyeOff,
-  FileText,
   Globe,
-  Layers,
+  MoreHorizontal,
   Save,
   Settings as SettingsIcon,
   Share,
@@ -14,18 +12,22 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import type React from "react";
-
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Switch } from "@/components/ui/switch";
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-
 import { FORM_BUILDER_CONSTANTS } from "../constants";
-
 import type { FormBuilderHeaderProps } from "../types";
 
 export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
@@ -42,11 +44,12 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
   onSettings,
   onPublish,
   onSave,
+  onBlockAdd,
 }) => {
   const fieldCount = formSchema.fields.length;
 
   return (
-    <div
+    <header
       className="z-20 flex-shrink-0 border-border border-b bg-card px-4 py-3 md:py-4"
       style={{ minHeight: FORM_BUILDER_CONSTANTS.HEADER_HEIGHT }}
     >
@@ -58,219 +61,300 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
           >
             Form Builder
           </h1>
-          <div className="flex items-center gap-2 max-md:pt-2 md:gap-3">
-            <Button
-              asChild
-              className="font-medium text-xs md:text-sm"
-              variant="outline"
-            >
+          <div className="flex items-center gap-2 px-2 md:gap-3">
+            <Button asChild className="font-medium text-sm" variant="outline">
               <Link className="z-1 flex items-center" href="/dashboard">
                 Go to Dashboard
               </Link>
             </Button>
-            <div className="text-muted-foreground text-xs md:text-sm">
+            <div className="text-muted-foreground text-sm">
               {fieldCount} field{fieldCount !== 1 ? "s" : ""}
             </div>
             {autoSaving && (
-              <div className="flex items-center gap-1 text-muted-foreground text-xs">
-                <div className="h-1.5 w-1.5 animate-pulse rounded-card bg-primary" />
+              <div
+                aria-live="polite"
+                className="flex items-center gap-1 text-muted-foreground text-xs"
+                role="status"
+              >
+                <div className="h-1.5 w-1.5 animate-pulse rounded-2xl bg-primary" />
                 <span>Saving</span>
               </div>
             )}
           </div>
         </div>
 
-        <div className="relative w-full md:hidden">
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute top-0 left-0 z-10 h-full w-6 bg-gradient-to-r from-card via-card/80 to-transparent"
-          />
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute top-0 right-0 z-10 h-full w-6 bg-gradient-to-l from-card via-card/80 to-transparent"
-          />
-          <ScrollArea className="w-full" orientation="horizontal" type="always">
-            <div className="flex gap-2 pb-2">
+        <nav
+          aria-label="Form builder actions"
+          className="relative w-full px-2 md:hidden"
+        >
+          <ScrollArea className="w-full">
+            <div className="flex items-center justify-start gap-2">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    aria-label="More actions"
+                    size="icon"
+                    variant="outline"
+                  >
+                    <MoreHorizontal className="size-3" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" className="shadow-xs">
+                  <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                    <div className="flex w-full items-center justify-between gap-4">
+                      <span>Multi-step form</span>
+                      <Switch
+                        aria-label="Toggle multi-step mode"
+                        checked={formSchema.settings.multiStep}
+                        onCheckedChange={() => onModeToggle()}
+                      />
+                    </div>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={onJsonView}>
+                    <Code className="size-4" /> View JSON
+                  </DropdownMenuItem>
+                  <DropdownMenuItem disabled={!formId} onClick={onAnalytics}>
+                    <BarChart3 className="size-4" /> Analytics
+                  </DropdownMenuItem>
+                  <DropdownMenuItem disabled={!formId} onClick={onShare}>
+                    <Share className="size-4" /> Share
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/ai-builder">
+                      <Sparkles className="size-4" /> Use Kiko
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
               <Button
-                className="gap-1"
-                onClick={onModeToggle}
-                variant={formSchema.settings.multiStep ? "default" : "outline"}
-              >
-                {formSchema.settings.multiStep ? (
-                  <Layers className="h-3 w-3" />
-                ) : (
-                  <FileText className="h-3 w-3" />
-                )}
-                {formSchema.settings.multiStep ? "Multi-Step" : "Single Page"}
-              </Button>
-              <Button
-                className="h-8 w-8"
-                onClick={onJsonView}
-                size="icon"
-                variant="outline"
-              >
-                <Code className="h-3 w-3 shrink-0" />
-              </Button>
-              <Button
-                className="h-8 w-8"
-                disabled={!formId}
-                onClick={onAnalytics}
-                size="icon"
-                variant="outline"
-              >
-                <BarChart3 className="h-3 w-3 shrink-0" />
-              </Button>
-              <Button
-                className="h-8 w-8"
-                disabled={!formId}
-                onClick={onShare}
-                size="icon"
-                variant="outline"
-              >
-                <Share className="h-3 w-3 shrink-0" />
-              </Button>
-              <Button
-                className="h-8 w-8"
+                aria-label="Settings"
                 onClick={onSettings}
                 size="icon"
                 variant="outline"
               >
-                <SettingsIcon className="h-3 w-3 shrink-0" />
+                <SettingsIcon className="size-4" />
               </Button>
-              <Button asChild className="text-xs" size="sm" variant="default">
-                <Link href="/ai-builder">
-                  <Sparkles className="h-3 w-3 shrink-0" /> Use Kiko
-                </Link>
-              </Button>
-              <Button
-                className="text-xs"
-                disabled={!formId || publishing}
-                loading={publishing}
-                onClick={onPublish}
-                size="sm"
-                variant="outline"
-              >
-                {isPublished ? (
-                  <>
-                    {!publishing && <Globe className="h-3 w-3 shrink-0" />}
-                    {publishing ? "Unpublishing" : "Published"}
-                  </>
-                ) : (
-                  <>
-                    {!publishing && <EyeOff className="h-3 w-3 shrink-0" />}
-                    {publishing ? "Publishing" : "Publish"}
-                  </>
-                )}
-              </Button>
-              <Button
-                className="text-xs"
-                disabled={saving}
-                loading={saving}
-                onClick={onSave}
-                size="sm"
-              >
-                {!saving && <Save className="h-3 w-3" />}
-                {saving ? "Saving" : "Save"}
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    aria-label={
+                      isPublished
+                        ? publishing
+                          ? "Unpublishing..."
+                          : "Published"
+                        : publishing
+                          ? "Publishing..."
+                          : "Publish"
+                    }
+                    className="flex items-center justify-center gap-2"
+                    disabled={!formId || publishing}
+                    onClick={onPublish}
+                    variant={isPublished ? "secondary" : "warning"}
+                  >
+                    <span
+                      aria-hidden
+                      className="relative inline-flex size-4 items-center justify-center"
+                    >
+                      <AnimatePresence initial={false} mode="wait">
+                        {isPublished ? (
+                          <motion.span
+                            animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                            className="absolute inset-0 grid place-items-center"
+                            exit={{ scale: 0.85, opacity: 0, rotate: 8 }}
+                            initial={{ scale: 0.85, opacity: 0, rotate: -8 }}
+                            key="published"
+                            transition={{ duration: 0.1, ease: "easeOut" }}
+                          >
+                            <Globe className="size-4" />
+                          </motion.span>
+                        ) : (
+                          <motion.span
+                            animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                            className="absolute inset-0 grid place-items-center"
+                            exit={{ scale: 0.85, opacity: 0, rotate: -8 }}
+                            initial={{ scale: 0.85, opacity: 0, rotate: 8 }}
+                            key="unpublished"
+                            transition={{ duration: 0.1, ease: "easeOut" }}
+                          >
+                            <EyeOff className="size-4" />
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
+                    </span>
+                    <span>
+                      {isPublished
+                        ? publishing
+                          ? "Unpublishing.."
+                          : "Published"
+                        : publishing
+                          ? "Publishing.."
+                          : "Publish"}
+                    </span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent
+                  align="center"
+                  className="font-medium"
+                  side="bottom"
+                >
+                  {publishing
+                    ? isPublished
+                      ? "Unpublishing.."
+                      : "Publishing.."
+                    : isPublished
+                      ? "Unpublish form"
+                      : "Publish form"}
+                </TooltipContent>
+              </Tooltip>
+
+              <Button disabled={saving} loading={saving} onClick={onSave}>
+                {!saving && <Save className="size-4 shrink-0" />}
+                {saving ? "Saving" : "Save Form"}
               </Button>
             </div>
           </ScrollArea>
-        </div>
+        </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
-          <Button
-            className="gap-2"
-            onClick={onModeToggle}
-            size="sm"
-            variant={formSchema.settings.multiStep ? "default" : "outline"}
-          >
-            {formSchema.settings.multiStep ? (
-              <Layers className="h-4 w-4" />
-            ) : (
-              <FileText className="h-4 w-4" />
-            )}
-            {formSchema.settings.multiStep ? "Multi-Step" : "Single Page"}
-          </Button>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button onClick={onJsonView} size="icon" variant="outline">
-                  <Code className="h-4 w-4 shrink-0" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent size="sm">View JSON</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  disabled={!formId}
-                  onClick={onAnalytics}
-                  size="icon"
-                  variant="outline"
+        <nav
+          aria-label="Form builder actions"
+          className="hidden items-center gap-2 md:flex"
+        >
+          <div className="flex items-center gap-2">
+            <Button disabled={!formId} onClick={onAnalytics} variant="outline">
+              <BarChart3 className="size-4 shrink-0" />
+              <span className="text-sm">Analytics</span>
+            </Button>
+            <Button disabled={!formId} onClick={onShare} variant="outline">
+              <Share className="size-4 shrink-0" />
+              <span className="text-sm">Share</span>
+            </Button>
+            <Button onClick={onSettings} variant="outline">
+              <SettingsIcon className="size-4 shrink-0" />
+              <span className="text-sm">Settings</span>
+            </Button>
+            <DropdownMenu>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      aria-label="More actions"
+                      size="icon"
+                      variant="outline"
+                    >
+                      <MoreHorizontal className="size-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                </TooltipTrigger>
+                <TooltipContent
+                  align="center"
+                  className="font-medium"
+                  side="bottom"
                 >
-                  <BarChart3 className="h-4 w-4 shrink-0" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent size="sm">Analytics</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  disabled={!formId}
-                  onClick={onShare}
-                  size="icon"
-                  variant="outline"
+                  More actions
+                </TooltipContent>
+              </Tooltip>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={onJsonView}>
+                  <Code className="size-4.5" />
+                  <span className="text-sm">View JSON</span>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                  <div className="flex w-full items-center justify-between gap-4">
+                    <span className="font-medium">Multi-step form</span>
+                    <Switch
+                      aria-label="Toggle multi-step mode"
+                      checked={formSchema.settings.multiStep}
+                      onCheckedChange={() => onModeToggle()}
+                    />
+                  </div>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                aria-label={
+                  isPublished
+                    ? publishing
+                      ? "Unpublishing..."
+                      : "Published"
+                    : publishing
+                      ? "Publishing..."
+                      : "Publish"
+                }
+                disabled={!formId || publishing}
+                onClick={onPublish}
+                size={"icon"}
+                variant={isPublished ? "secondary" : "warning"}
+              >
+                <span
+                  aria-hidden
+                  className="relative inline-flex size-4 items-center justify-center"
                 >
-                  <Share className="h-4 w-4 shrink-0" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent size="sm">Share</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button onClick={onSettings} size="icon" variant="outline">
-                  <SettingsIcon className="h-4 w-4 shrink-0" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent size="sm">Settings</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button asChild size="sm" variant="default">
-                  <Link href="/ai-builder">
-                    <Sparkles className="h-4 w-4 shrink-0" /> Use Kiko
-                  </Link>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent size="sm">AI Form builder</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+                  <AnimatePresence initial={false} mode="wait">
+                    {isPublished ? (
+                      <motion.span
+                        animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                        className="absolute inset-0 grid place-items-center"
+                        exit={{ scale: 0.85, opacity: 0, rotate: 8 }}
+                        initial={{ scale: 0.85, opacity: 0, rotate: -8 }}
+                        key="published"
+                        transition={{ duration: 0.1, ease: "easeOut" }}
+                      >
+                        <Globe className="size-4" />
+                      </motion.span>
+                    ) : (
+                      <motion.span
+                        animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                        className="absolute inset-0 grid place-items-center"
+                        exit={{ scale: 0.85, opacity: 0, rotate: -8 }}
+                        initial={{ scale: 0.85, opacity: 0, rotate: 8 }}
+                        key="unpublished"
+                        transition={{ duration: 0.1, ease: "easeOut" }}
+                      >
+                        <EyeOff className="size-4" />
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </span>
+                <span className="sr-only">
+                  {isPublished
+                    ? publishing
+                      ? "Unpublishing..."
+                      : "Published"
+                    : publishing
+                      ? "Publishing..."
+                      : "Publish"}
+                </span>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent
+              align="center"
+              className="font-medium"
+              side="bottom"
+            >
+              {publishing
+                ? isPublished
+                  ? "Unpublishing..."
+                  : "Publishing..."
+                : isPublished
+                  ? "Unpublish form"
+                  : "Publish form"}
+            </TooltipContent>
+          </Tooltip>
 
-          <Button
-            disabled={!formId || publishing}
-            loading={publishing}
-            onClick={onPublish}
-            size="sm"
-            variant="outline"
-          >
-            {isPublished ? (
-              <>
-                {!publishing && <Globe className="h-4 w-4 shrink-0" />}
-                {publishing ? "Unpublishing" : "Published"}
-              </>
-            ) : (
-              <>
-                {!publishing && <EyeOff className="h-4 w-4 shrink-0" />}
-                {publishing ? "Publishing" : "Publish"}
-              </>
-            )}
+          <Button disabled={saving} loading={saving} onClick={onSave}>
+            {!saving && <Save className="size-4" />}
+            Save
           </Button>
-
-          <Button disabled={saving} loading={saving} onClick={onSave} size="sm">
-            {!saving && <Save className="h-4 w-4" />}
-            {saving ? "Saving" : "Save"}
-          </Button>
-        </div>
+        </nav>
       </div>
-    </div>
+    </header>
   );
 };

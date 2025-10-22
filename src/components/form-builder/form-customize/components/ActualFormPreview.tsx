@@ -6,7 +6,6 @@ import type { LocalSettings } from "@/components/form-builder/form-settings-moda
 import { Progress } from "@/components/ui";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { SocialMediaIcons } from "@/components/ui/social-media-icons";
 import type { FormSchema } from "@/lib/database";
 import {
@@ -216,7 +215,6 @@ export function ActualFormPreview({
     typography?.fontWeight,
   ]);
 
-  // Create a modified schema with current settings
   const previewSchema = {
     ...schema,
     settings: localSettings,
@@ -229,11 +227,9 @@ export function ActualFormPreview({
 
   return (
     <div className="light">
-      <Card className={`p-4 ${className}`}>
+      <Card className={`border-0 p-0 shadow-none ${className || ""}`}>
         <div
-          className={
-            "flex items-center justify-center transition-all duration-200"
-          }
+          className="flex items-center justify-center transition-all duration-200"
           style={{
             margin: formMargin,
             fontFamily: typography.fontFamily
@@ -242,18 +238,15 @@ export function ActualFormPreview({
           }}
         >
           <div
-            className={`ikiform-customized flex w-full flex-col gap-8 ${
+            className={`ikiform-customized flex w-full flex-col gap-6 ${
               layout.maxWidth === "custom" && layout.customWidth
                 ? "ikiform-custom-width"
                 : ""
             }`}
-            style={{
-              maxWidth: formWidth,
-              margin: "0 auto",
-            }}
+            style={{ maxWidth: formWidth, margin: "0 auto" }}
           >
             <Card
-              className="flex w-full grow flex-col gap-6 rounded-card border-none bg-transparent hover:bg-transparent"
+              className="flex w-full grow flex-col gap-5 border-0 bg-transparent p-0"
               style={{
                 backgroundColor: colors.background || undefined,
                 borderRadius: formBorderRadius,
@@ -263,7 +256,6 @@ export function ActualFormPreview({
                   ? `"${typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`
                   : undefined,
               }}
-              variant="ghost"
             >
               {/* Progress Bar for Multi-step Forms */}
               {isMultiStep && localSettings.showProgress && (
@@ -304,24 +296,17 @@ export function ActualFormPreview({
 
               {/* Form Header */}
               {!localSettings.hideHeader && (
-                <>
-                  <div className="flex flex-col gap-4 text-left">
-                    <div className="flex flex-col gap-2">
-                      <h1 className="font-bold text-2xl">
-                        {getPublicFormTitle(schema)}
-                      </h1>
-                      {((schema as any).description ||
-                        localSettings.description) && (
-                        <p className="text-muted-foreground">
-                          {(schema as any).description ||
-                            localSettings.description}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <Separator />
-                </>
+                <div className="flex flex-col gap-3 text-left">
+                  <h1 className="font-semibold text-2xl">
+                    {getPublicFormTitle(schema)}
+                  </h1>
+                  {((schema as any).description ||
+                    localSettings.description) && (
+                    <p className="text-muted-foreground">
+                      {(schema as any).description || localSettings.description}
+                    </p>
+                  )}
+                </div>
               )}
 
               {/* Form Content */}
@@ -347,6 +332,7 @@ export function ActualFormPreview({
                   {isMultiStep ? (
                     <div className="flex justify-between gap-4">
                       <Button
+                        aria-label="Previous step"
                         className="flex-1"
                         disabled
                         style={{
@@ -358,6 +344,7 @@ export function ActualFormPreview({
                         Previous
                       </Button>
                       <Button
+                        aria-label="Next step"
                         className="flex-1"
                         disabled
                         style={{
@@ -370,17 +357,19 @@ export function ActualFormPreview({
                       </Button>
                     </div>
                   ) : (
-                    <Button
-                      className="ml-auto w-fit"
-                      disabled
-                      style={{
-                        backgroundColor: colors.primary || "#2563eb",
-                        borderColor: colors.primary || "#2563eb",
-                        color: "#ffffff",
-                      }}
-                    >
-                      {localSettings.submitText || "Submit Form"}
-                    </Button>
+                    <div className="flex justify-end">
+                      <Button
+                        aria-label="Submit form"
+                        disabled
+                        style={{
+                          backgroundColor: colors.primary || "#2563eb",
+                          borderColor: colors.primary || "#2563eb",
+                          color: "#ffffff",
+                        }}
+                      >
+                        {localSettings.submitText || "Submit Form"}
+                      </Button>
+                    </div>
                   )}
                 </div>
               </div>

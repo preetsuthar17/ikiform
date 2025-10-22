@@ -46,7 +46,7 @@ export const FormNavigation: React.FC<FormNavigationProps> = ({
         type="button"
         variant="outline"
       >
-        <ChevronLeft className="h-4 w-4" />
+        <ChevronLeft className="size-4" />
         Previous
       </Button>
 
@@ -59,15 +59,11 @@ export const FormNavigation: React.FC<FormNavigationProps> = ({
         type="button"
       >
         {isLastStep ? (
-          submitting ? (
-            "Submitting"
-          ) : (
-            schema.settings.submitText || "Submit"
-          )
+          schema.settings.submitText || "Submit"
         ) : (
           <>
             Next
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="size-4" />
           </>
         )}
       </Button>

@@ -1,4 +1,3 @@
-import React from "react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,7 +9,7 @@ export function EmailFieldSettings({
   onUpdateSettings,
 }: FieldSettingsProps) {
   return (
-    <Card className="flex flex-col gap-4 rounded-card bg-background p-4">
+    <Card className="flex flex-col gap-4 rounded-2xl bg-background p-4">
       <h3 className="font-medium text-card-foreground">Email Field Settings</h3>
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
@@ -21,7 +20,6 @@ export function EmailFieldSettings({
             Allowed Domains (comma-separated)
           </Label>
           <Input
-            className="border-border bg-input"
             id="email-allowed-domains"
             onChange={(e) =>
               onUpdateSettings({
@@ -48,7 +46,6 @@ export function EmailFieldSettings({
             Blocked Domains (comma-separated)
           </Label>
           <Input
-            className="border-border bg-input"
             id="email-blocked-domains"
             onChange={(e) =>
               onUpdateSettings({
@@ -79,7 +76,6 @@ export function EmailFieldSettings({
                 },
               })
             }
-            size="sm"
           />
           <Label className="text-card-foreground" htmlFor="email-business-only">
             Require business email only
@@ -93,7 +89,6 @@ export function EmailFieldSettings({
             Custom Validation Message
           </Label>
           <Input
-            className="border-border bg-input"
             id="email-custom-message"
             onChange={(e) =>
               onUpdateSettings({

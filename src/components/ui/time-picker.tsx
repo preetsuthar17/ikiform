@@ -7,7 +7,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "./button";
 
 export interface TimePickerProps {
   value?: string;
@@ -101,7 +100,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
       }
     >
       <div className="flex w-full items-center gap-2">
-        <div className="w-16">
+        <div>
           <Select
             disabled={disabled}
             onValueChange={React.useCallback(
@@ -125,7 +124,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
           </Select>
         </div>
         <span>:</span>
-        <div className="w-16">
+        <div>
           <Select
             disabled={disabled}
             onValueChange={React.useCallback(
@@ -141,14 +140,14 @@ export const TimePicker: React.FC<TimePickerProps> = ({
               {Array.from({ length: 60 }, (_, i) =>
                 String(i).padStart(2, "0")
               ).map((m) => (
-                <SelectItem disableCheckAnimation key={m} value={m}>
+                <SelectItem key={m} value={m}>
                   {m}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
         </div>
-        <div className="w-16">
+        <div>
           <Select
             disabled={disabled}
             onValueChange={React.useCallback(

@@ -1,4 +1,3 @@
-import React from "react";
 import { Badge } from "@/components/ui/badge";
 
 import { Card } from "@/components/ui/card";
@@ -21,9 +20,9 @@ export function StepHeader({
   };
 
   return (
-    <Card className="border-accent/20 bg-accent/5 p-6">
+    <Card className="gap-0 p-4 shadow-none">
       <EditableField
-        className="mb-3 flex min-h-[32px] items-center gap-2"
+        className="flex items-center gap-2 p-0"
         disabled={!onBlockUpdate}
         inputClassName="text-xl font-semibold bg-background w-full"
         onSave={handleTitleUpdate}
@@ -41,7 +40,7 @@ export function StepHeader({
       </EditableField>
 
       <EditableField
-        className="flex min-h-[24px] items-start gap-2"
+        className="flex items-start gap-2 p-0"
         component="textarea"
         disabled={!onBlockUpdate}
         inputClassName="bg-background min-h-[60px] w-full"

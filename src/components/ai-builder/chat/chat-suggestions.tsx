@@ -14,11 +14,10 @@ export function ChatSuggestions({
       <div className="flex grow flex-wrap gap-2 overflow-x-auto">
         {suggestions.map((s, i) => (
           <Button
-            className="grow rounded-card"
+            className="grow text-sm"
             key={i}
             onClick={() => onSuggestionClick(s.text)}
-            size={"sm"}
-            variant={"secondary"}
+            variant={"outline"}
           >
             {s.text}
           </Button>

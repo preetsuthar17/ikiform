@@ -1,5 +1,4 @@
-import { Link, Section, Text } from "@react-email/components";
-import * as React from "react";
+import { Section, Text } from "@react-email/components";
 import { CtaList } from "../components/cta-list";
 import EmailLayout from "../components/email-layout";
 

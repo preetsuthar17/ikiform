@@ -1,7 +1,9 @@
+"use client";
+
 import { Send, Square } from "lucide-react";
 
 import Image from "next/image";
-import React, { memo, useEffect, useMemo } from "react";
+import { memo, useEffect, useMemo } from "react";
 
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -14,7 +16,6 @@ import { Kbd } from "@/components/ui/kbd";
 import { Loader } from "@/components/ui/loader";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 
 import type { ChatInterfaceProps } from "../types";
@@ -75,29 +76,55 @@ const ChatMessage = memo(function ChatMessage({
   markdownComponents: any;
 }) {
   const formattedContent = formatContent(message.content);
+  const isUser = message.role === "user";
 
   return (
     <div
-      className={`flex gap-4 ${
-        message.role === "user" ? "justify-end" : "justify-start"
-      }`}
+      className={`flex gap-4 ${isUser ? "justify-end" : "justify-start"}`}
       key={index}
     >
       <div
         className={`flex max-w-[85%] gap-3 ${
-          message.role === "user" ? "flex-row-reverse" : "flex-row"
+          isUser ? "flex-row-reverse" : "flex-row"
         }`}
       >
-        {}
+        {/* Avatar */}
         <div
-          className={`group relative rounded-card px-4 py-3 ${
-            message.role === "user"
-              ? "rounded-br-md bg-primary text-primary-foreground"
-              : "rounded-bl-md border bg-muted/50"
+          className={`flex size-8 shrink-0 items-center justify-center rounded-full ${
+            isUser
+              ? "bg-primary text-primary-foreground"
+              : "bg-primary/10 text-primary"
+          }`}
+        >
+          {isUser ? (
+            <svg className="size-4" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                clipRule="evenodd"
+                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                fillRule="evenodd"
+              />
+            </svg>
+          ) : (
+            <svg className="size-4" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                clipRule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                fillRule="evenodd"
+              />
+            </svg>
+          )}
+        </div>
+
+        {/* Message Bubble */}
+        <div
+          className={`group relative rounded-2xl px-4 py-3 ${
+            isUser
+              ? "rounded-br-sm bg-primary text-primary-foreground"
+              : "rounded-bl-sm border bg-card"
           }`}
         >
           <div className="text-sm leading-relaxed">
-            {message.role === "user" ? (
+            {isUser ? (
               <div className="whitespace-pre-wrap">{formattedContent}</div>
             ) : (
               <div className="markdown-content">
@@ -139,7 +166,7 @@ export const ChatInterface = memo(function ChatInterface({
         const match = /language-(\w+)/.exec(className || "");
         return !inline && match ? (
           <SyntaxHighlighter
-            className="my-2 rounded-card"
+            className="my-2 rounded-2xl"
             language={match[1]}
             PreTag="div"
             style={oneDark}
@@ -208,7 +235,7 @@ export const ChatInterface = memo(function ChatInterface({
       table: ({ children, ...props }: any) => (
         <div className="mb-2 overflow-x-auto">
           <table
-            className="min-w-full border-collapse rounded-card border border-border"
+            className="min-w-full border-collapse rounded-2xl border border-border"
             {...props}
           >
             {children}
@@ -253,31 +280,33 @@ export const ChatInterface = memo(function ChatInterface({
   }, [chatInputRef]);
 
   return (
-    <div className="background relative flex h-[74vh] flex-col">
-      {}
-      <ScrollArea className="h-[90%] flex-1 overflow-hidden px-6 py-6">
-        <div className="mx-auto flex max-w-4xl flex-col gap-6">
-          {}
+    <div className="mx-4 flex h-[88%] flex-col bg-background md:mx-0 md:h-[84%]">
+      {/* Messages Area */}
+      <ScrollArea className="h-full flex-1">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-6">
+          {/* Empty State */}
           {isEmpty && (
-            <div className="flex flex-col items-center gap-3 py-12 text-center">
-              <div className="flex h-20 w-20 items-center justify-center rounded-card bg-primary/10">
+            <div className="flex flex-col items-center gap-6 py-12 text-center">
+              <div className="flex size-20 items-center justify-center rounded-2xl bg-primary/10">
                 <Image
                   alt="Ikiform"
-                  className="pointer-events-none rounded-ele"
+                  className="pointer-events-none rounded-xl"
                   height={100}
                   src="/logo.svg"
                   width={100}
                 />
               </div>
-              <h3 className="font-semibold text-xl">Ask Kiko Anything</h3>
-              <p className="max-w-md text-muted-foreground">
-                Get instant insights and analysis from your form data. Ask
-                questions in natural language.
-              </p>
+              <div className="flex flex-col gap-2">
+                <h3 className="font-semibold text-xl">Ask Kiko Anything</h3>
+                <p className="max-w-md text-muted-foreground">
+                  Get instant insights and analysis from your form data. Ask
+                  questions in natural language.
+                </p>
+              </div>
             </div>
           )}
 
-          {}
+          {/* Chat Messages */}
           {chatMessages.map((message, index) => (
             <ChatMessage
               index={index}
@@ -287,11 +316,24 @@ export const ChatInterface = memo(function ChatInterface({
             />
           ))}
 
-          {}
+          {/* Streaming Message */}
           {chatStreaming && (
-            <div className="flex justify-start gap-4">
+            <div className="flex justify-start gap-3">
               <div className="flex max-w-[85%] gap-3">
-                <div className="group relative rounded-card rounded-bl-md border bg-muted/50 px-4 py-3">
+                <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <svg
+                    className="size-4"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      clipRule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <div className="group relative rounded-2xl rounded-bl-md border bg-card px-4 py-3">
                   {streamedContent ? (
                     <div className="text-sm leading-relaxed">
                       <div className="markdown-content">
@@ -303,17 +345,22 @@ export const ChatInterface = memo(function ChatInterface({
                           {formatContent(streamedContent)}
                         </ReactMarkdown>
                       </div>
-                      <span className="ml-1 inline-block h-4 w-2 animate-pulse rounded-ele bg-primary" />
+                      <span className="ml-1 inline-block h-4 w-2 animate-pulse rounded-xl bg-primary" />
                     </div>
                   ) : (
-                    <Loader />
+                    <div className="flex items-center gap-2">
+                      <Loader />
+                      <span className="text-muted-foreground text-sm">
+                        Thinking...
+                      </span>
+                    </div>
                   )}
                 </div>
               </div>
             </div>
           )}
 
-          {}
+          {/* Suggestions */}
           {!isEmpty && chatSuggestions.length > 0 && (
             <div className="flex flex-wrap justify-center gap-2 pt-4">
               {chatSuggestions.slice(0, 3).map((suggestion, index) => (
@@ -333,17 +380,16 @@ export const ChatInterface = memo(function ChatInterface({
         </div>
       </ScrollArea>
 
-      <div className="flex flex-col gap-3">
-        <Separator />
-        <div className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="mx-auto max-w-4xl">
-            {}
-            <form
-              className="relative mx-auto flex max-w-[90%] items-center"
-              onSubmit={handleChatSend}
-            >
+      {/* Input Area */}
+      <div className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div>
+          <form
+            className="relative flex items-end gap-3"
+            onSubmit={handleChatSend}
+          >
+            <div className="flex-1">
               <Textarea
-                className="min-h-[60px] flex-1 resize-none rounded-card pr-16"
+                className="max-h-[120px] min-h-[40px] resize-none pr-12"
                 disabled={chatLoading}
                 onChange={(e) => setChatInput(e.target.value)}
                 onKeyDown={(e) => {
@@ -356,34 +402,33 @@ export const ChatInterface = memo(function ChatInterface({
                 ref={chatInputRef}
                 value={chatInput}
               />
-              <div className="absolute top-0 right-3 flex h-full items-center gap-2">
-                {}
-                {chatStreaming && abortController && (
-                  <Button
-                    onClick={handleStopGeneration}
-                    size="icon"
-                    variant="destructive"
-                  >
-                    <Square className="h-4 w-4" />
-                  </Button>
-                )}
-                {}
-                <Button
-                  disabled={!chatInput.trim() || chatLoading}
-                  size="icon"
-                  type="submit"
-                >
-                  <Send className="h-4 w-4" />
-                </Button>
-              </div>
-            </form>
-            {}
-            <div className="mt-3 flex items-center justify-center text-muted-foreground text-xs">
-              <span>
-                Press <Kbd size="sm">Enter</Kbd> to send,{" "}
-                <Kbd size="sm">Shift+Enter</Kbd> for new line
-              </span>
             </div>
+            <div className="flex items-center gap-2">
+              {chatStreaming && abortController && (
+                <Button
+                  className="size-10"
+                  onClick={handleStopGeneration}
+                  size="icon"
+                  variant="destructive"
+                >
+                  <Square className="size-4" />
+                </Button>
+              )}
+              <Button
+                className="size-10"
+                disabled={!chatInput.trim() || chatLoading}
+                size="icon"
+                type="submit"
+              >
+                <Send className="size-4" />
+              </Button>
+            </div>
+          </form>
+          <div className="mt-2 flex items-center justify-center text-muted-foreground text-xs">
+            <span>
+              Press <Kbd>Enter</Kbd> to send, <Kbd>Shift+Enter</Kbd> for new
+              line
+            </span>
           </div>
         </div>
       </div>

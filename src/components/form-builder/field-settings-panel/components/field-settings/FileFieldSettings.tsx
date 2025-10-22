@@ -1,9 +1,9 @@
 "use client";
 
 import { Plus, X } from "lucide-react";
-import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -138,40 +138,64 @@ export function FileFieldSettings({
   };
 
   return (
-    <div className="flex flex-col gap-6">
-      {/* Basic Settings */}
-      <div className="flex flex-col gap-4">
+    <Card className="gap-2 p-4 shadow-none">
+      <CardHeader className="p-0">
+        <CardTitle className="flex items-center gap-2 text-lg">
+          File Upload Settings
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-4 p-0">
         <div className="flex flex-col gap-2">
-          <Label htmlFor="maxFiles">Maximum Files</Label>
+          <Label className="font-medium text-sm" htmlFor="maxFiles">
+            Maximum Files
+          </Label>
           <Input
+            aria-describedby="maxFiles-help"
+            autoComplete="off"
             id="maxFiles"
             max="50"
             min="1"
+            name="maxFiles"
             onChange={(e) =>
               updateSetting("maxFiles", Number.parseInt(e.target.value) || 1)
             }
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                e.currentTarget.blur();
+              }
+            }}
             placeholder="10"
             type="number"
             value={maxFiles}
           />
-          <p className="text-muted-foreground text-xs">
+          <p className="text-muted-foreground text-xs" id="maxFiles-help">
             Maximum number of files users can upload (1-50)
           </p>
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label htmlFor="maxSize">Maximum File Size</Label>
+          <Label className="font-medium text-sm" htmlFor="maxSize">
+            Maximum File Size
+          </Label>
           <div className="flex gap-2">
             <Input
+              aria-describedby="maxSize-help"
+              autoComplete="off"
               className="flex-1"
               id="maxSize"
               min="1"
+              name="maxSize"
               onChange={(e) =>
                 updateSetting(
                   "maxSize",
                   (Number.parseInt(e.target.value) || 1) * 1024 * 1024
                 )
               }
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  e.currentTarget.blur();
+                }
+              }}
               placeholder="50"
               type="number"
               value={Math.round(maxSize / (1024 * 1024))}
@@ -183,8 +207,16 @@ export function FileFieldSettings({
           <div className="flex flex-wrap gap-1">
             {SIZE_PRESETS.map((preset) => (
               <Button
+                aria-label={`Set maximum file size to ${preset.label}`}
+                className="focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
                 key={preset.label}
                 onClick={() => updateSetting("maxSize", preset.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    updateSetting("maxSize", preset.value);
+                  }
+                }}
                 size="sm"
                 variant={maxSize === preset.value ? "default" : "outline"}
               >
@@ -192,126 +224,182 @@ export function FileFieldSettings({
               </Button>
             ))}
           </div>
-          <p className="text-muted-foreground text-xs">
+          <p className="text-muted-foreground text-xs" id="maxSize-help">
             Current: {formatFileSize(maxSize)}
           </p>
         </div>
-      </div>
+        <div className="flex flex-col gap-4">
+          <Label className="font-medium text-sm" htmlFor="allowed-file-types">
+            Allowed File Types
+          </Label>
 
-      {/* File Type Settings */}
-      <div className="flex flex-col gap-4">
-        <Label>Allowed File Types</Label>
-
-        {/* Common file type toggles */}
-        <div className="flex flex-col gap-2">
-          <p className="text-muted-foreground text-sm">Quick Select:</p>
-          <div className="flex flex-wrap gap-2">
-            {COMMON_FILE_TYPES.map((typeConfig) => {
-              const hasAllExtensions = typeConfig.extensions.every((ext) =>
-                allowedTypes.includes(ext)
-              );
-              return (
-                <Button
-                  key={typeConfig.label}
-                  onClick={() => toggleCommonType(typeConfig)}
-                  size="sm"
-                  variant={hasAllExtensions ? "default" : "outline"}
-                >
-                  {typeConfig.label}
-                </Button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Custom file types */}
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="customType">Custom File Extensions:</Label>
-          <div className="flex gap-2">
-            <Input
-              id="customType"
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  const value = e.currentTarget.value.trim();
-                  if (value) {
-                    addFileType(value);
-                    e.currentTarget.value = "";
-                  }
-                }
-              }}
-              placeholder="e.g., txt, csv, json"
-            />
-            <Button
-              onClick={() => {
-                const input = document.getElementById(
-                  "customType"
-                ) as HTMLInputElement;
-                const value = input.value.trim();
-                if (value) {
-                  addFileType(value);
-                  input.value = "";
-                }
-              }}
-              size="sm"
-              type="button"
-            >
-              <Plus className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-
-        {/* Display selected types */}
-        {allowedTypes.length > 0 && (
           <div className="flex flex-col gap-2">
-            <p className="text-muted-foreground text-sm">
-              Selected extensions:
-            </p>
-            <div className="flex flex-wrap gap-1">
-              {allowedTypes.map((type) => (
-                <Badge className="gap-1" key={type} variant="secondary">
-                  .{type}
-                  <button
-                    className="ml-1 hover:text-destructive"
-                    onClick={() => removeFileType(type)}
+            <p className="text-muted-foreground text-sm">Quick Select:</p>
+            <div className="flex flex-wrap gap-2">
+              {COMMON_FILE_TYPES.map((typeConfig) => {
+                const hasAllExtensions = typeConfig.extensions.every((ext) =>
+                  allowedTypes.includes(ext)
+                );
+                return (
+                  <Button
+                    aria-label={`Toggle ${typeConfig.label} file types`}
+                    className="focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
+                    key={typeConfig.label}
+                    onClick={() => toggleCommonType(typeConfig)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        toggleCommonType(typeConfig);
+                      }
+                    }}
+                    size="sm"
+                    variant={hasAllExtensions ? "default" : "outline"}
                   >
-                    <X className="h-3 w-3" />
-                  </button>
-                </Badge>
-              ))}
+                    {typeConfig.label}
+                  </Button>
+                );
+              })}
             </div>
           </div>
-        )}
 
-        {/* Accept attribute (readonly) */}
+          <div className="flex flex-col gap-2">
+            <Label className="font-medium text-sm" htmlFor="customType">
+              Custom File Extensions
+            </Label>
+            <div className="flex gap-2">
+              <Input
+                aria-describedby="customType-help"
+                autoComplete="off"
+                id="customType"
+                name="customType"
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") {
+                    e.currentTarget.blur();
+                  }
+                }}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    const value = e.currentTarget.value.trim();
+                    if (value) {
+                      addFileType(value);
+                      e.currentTarget.value = "";
+                    }
+                  }
+                }}
+                placeholder="e.g., txt, csv, json"
+                type="text"
+              />
+              <Button
+                aria-label="Add custom file extension"
+                className="focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
+                onClick={() => {
+                  const input = document.getElementById(
+                    "customType"
+                  ) as HTMLInputElement;
+                  const value = input.value.trim();
+                  if (value) {
+                    addFileType(value);
+                    input.value = "";
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    const input = document.getElementById(
+                      "customType"
+                    ) as HTMLInputElement;
+                    const value = input.value.trim();
+                    if (value) {
+                      addFileType(value);
+                      input.value = "";
+                    }
+                  }
+                }}
+                size="icon"
+                type="button"
+              >
+                <Plus aria-hidden="true" className="size-4" />
+              </Button>
+            </div>
+            <p className="text-muted-foreground text-xs" id="customType-help">
+              Add custom file extensions (without the dot)
+            </p>
+          </div>
+
+          {allowedTypes.length > 0 && (
+            <div className="flex flex-col gap-2">
+              <p className="text-muted-foreground text-sm">
+                Selected extensions:
+              </p>
+              <div className="flex flex-wrap gap-1">
+                {allowedTypes.map((type) => (
+                  <Badge className="gap-1" key={type} variant="secondary">
+                    .{type}
+                    <button
+                      aria-label={`Remove ${type} file extension`}
+                      className="ml-1 hover:text-destructive focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
+                      onClick={() => removeFileType(type)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          removeFileType(type);
+                        }
+                      }}
+                    >
+                      <X aria-hidden="true" className="size-3" />
+                    </button>
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="flex flex-col gap-2">
+            <Label className="font-medium text-sm" htmlFor="accept">
+              HTML Accept Attribute (readonly)
+            </Label>
+            <Input
+              aria-describedby="accept-help"
+              className="font-mono text-xs"
+              id="accept"
+              name="accept"
+              readOnly
+              value={accept}
+            />
+            <p className="text-muted-foreground text-xs" id="accept-help">
+              This is automatically generated based on your selections above
+            </p>
+          </div>
+        </div>
+
         <div className="flex flex-col gap-2">
-          <Label htmlFor="accept">HTML Accept Attribute (readonly)</Label>
-          <Input
-            className="font-mono text-xs"
-            id="accept"
-            readOnly
-            value={accept}
+          <Label className="font-medium text-sm" htmlFor="helpText">
+            Help Text
+          </Label>
+          <Textarea
+            aria-describedby="helpText-help"
+            className="resize-none"
+            id="helpText"
+            name="helpText"
+            onChange={(e) => updateSetting("helpText", e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                e.currentTarget.blur();
+              } else if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+                e.preventDefault();
+                e.currentTarget.blur();
+              }
+            }}
+            placeholder="Additional instructions for users..."
+            rows={2}
+            value={helpText}
           />
-          <p className="text-muted-foreground text-xs">
-            This is automatically generated based on your selections above
+          <p className="text-muted-foreground text-xs" id="helpText-help">
+            Optional instructions to help users understand what files to upload
           </p>
         </div>
-      </div>
-
-      {/* Help Text */}
-      <div className="flex flex-col gap-2">
-        <Label htmlFor="helpText">Help Text</Label>
-        <Textarea
-          id="helpText"
-          onChange={(e) => updateSetting("helpText", e.target.value)}
-          placeholder="Additional instructions for users..."
-          rows={2}
-          value={helpText}
-        />
-        <p className="text-muted-foreground text-xs">
-          Optional instructions to help users understand what files to upload
-        </p>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }

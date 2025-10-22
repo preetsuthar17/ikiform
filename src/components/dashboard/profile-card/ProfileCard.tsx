@@ -1,26 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
-
-import { Card, CardHeader } from "@/components/ui/card";
-
+import { Card } from "@/components/ui/card";
 import { useAuth } from "@/hooks/use-auth";
-
 import { usePremiumStatus } from "@/hooks/use-premium-status";
 
-import {
-  ProfileActions,
-  ProfileCardLoading,
-  ProfileInfo,
-  UserAvatar,
-} from "./components";
-
+import { ProfileCardLoading, ProfileInfo, UserAvatar } from "./components";
 import type { ProfileCardProps } from "./types";
-
 import { extractAvatarUrl, extractUserName } from "./utils";
 
-export function ProfileCard({ className }: ProfileCardProps) {
-  const { user, signOut, loading } = useAuth();
+function ProfileCard({ className }: ProfileCardProps) {
+  const { user, loading } = useAuth();
   const { hasPremium } = usePremiumStatus(user);
 
   if (loading) {
@@ -34,14 +23,11 @@ export function ProfileCard({ className }: ProfileCardProps) {
 
   return (
     <Card
-      className={`relative flex w-full grow flex-col items-center gap-6 rounded-4xl border-none bg-card py-24 ${className || ""}`}
+      aria-label="User profile"
+      className={`relative flex h-fit max-h-min w-full grow flex-col items-center gap-6 py-11 shadow-none ${className ?? ""}`}
+      role="region"
     >
-      <CardHeader className="flex items-center gap-2">
-        <UserAvatar avatarUrl={avatarUrl} name={name} size="xl" />
-      </CardHeader>
-
-      <ProfileActions onSignOut={signOut} />
-
+      <UserAvatar avatarUrl={avatarUrl} name={name} />
       <ProfileInfo hasPremium={hasPremium} user={user} />
     </Card>
   );

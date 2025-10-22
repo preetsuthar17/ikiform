@@ -20,33 +20,59 @@ export function PhoneInputField({
     setInputValue(value || "");
   }, [value]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-    onChange(e.target.value);
+  const getPhoneValidation = () => validatePhoneNumber(inputValue);
+
+  const getErrorMessage = () => {
+    const validation = getPhoneValidation();
+    return (
+      error || (isValidating && !validation.isValid ? validation.message : "")
+    );
   };
 
-  const handleBlur = () => {
+  const getPhonePlaceholder = () => field.placeholder || "Enter phone number";
+
+  const handlePhoneInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setInputValue(newValue);
+    onChange(newValue);
+  };
+
+  const handlePhoneInputBlur = () => {
     setIsValidating(true);
   };
 
-  const validation = validatePhoneNumber(inputValue);
-  const errorMessage =
-    error || (isValidating && !validation.isValid ? validation.message : "");
+  const handlePhoneInputKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (e.key === "Escape") {
+      e.currentTarget.blur();
+    }
+  };
 
   return (
     <div className="flex flex-col gap-2">
       <Input
+        autoComplete="tel"
         className={`flex gap-2 ${baseClasses}`}
         disabled={disabled}
         id={field.id}
-        onBlur={handleBlur}
-        onChange={handleInputChange}
-        placeholder={field.placeholder || "Enter phone number"}
+        inputMode="tel"
+        name={field.id}
+        onBlur={handlePhoneInputBlur}
+        onChange={handlePhoneInputChange}
+        onKeyDown={handlePhoneInputKeyDown}
+        placeholder={getPhonePlaceholder()}
         type="tel"
         value={inputValue}
       />
-      {errorMessage && (
-        <span className="text-destructive text-xs">{errorMessage}</span>
+      {getErrorMessage() && (
+        <span
+          aria-live="polite"
+          className="text-destructive text-xs"
+          role="alert"
+        >
+          {getErrorMessage()}
+        </span>
       )}
     </div>
   );

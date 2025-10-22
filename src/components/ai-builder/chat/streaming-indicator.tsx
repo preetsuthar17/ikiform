@@ -13,7 +13,7 @@ export const StreamingIndicator = memo(
         return (
           <motion.div
             animate={{ opacity: 1, y: 0 }}
-            className="my-2 rounded-card border border-destructive bg-destructive/10 p-3 text-sm"
+            className="my-2 rounded-2xl border border-destructive bg-destructive/10 p-3 text-sm"
             initial={{ opacity: 0, y: 20 }}
           >
             {streamError}
@@ -24,7 +24,7 @@ export const StreamingIndicator = memo(
       return (
         <motion.div
           animate={{ opacity: 1, y: 0 }}
-          className="my-2 rounded-card border border-border bg-muted/50 p-3 font-mono text-sm"
+          className="my-2 rounded-2xl border border-border bg-muted/50 p-3 font-mono text-sm"
           initial={{ opacity: 0, y: 20 }}
         >
           <div
@@ -34,7 +34,7 @@ export const StreamingIndicator = memo(
           >
             <motion.p
               animate={{ backgroundPosition: "-200% 0" }}
-              className="bg-[length:200%_100%] bg-[linear-gradient(110deg,#404040,35%,#fff,50%,#404040,75%,#404040)] bg-clip-text font-geist-mono text-sm text-transparent"
+              className="bg-[length:200%_100%] bg-[linear-gradient(110deg,#404040,35%,#fff,50%,#404040,75%,#404040)] bg-clip-text font-mono text-sm text-transparent"
               initial={{ backgroundPosition: "200% 0" }}
               transition={{
                 repeat: Number.POSITIVE_INFINITY,

@@ -1,14 +1,6 @@
-import {
-  Award,
-  CheckCircle,
-  Target,
-  TrendingUp,
-  Trophy,
-  Users,
-} from "lucide-react";
-import React from "react";
+import { Award, CheckCircle, Target, TrendingUp, Trophy } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import type { QuizAnalytics } from "../types";
 
@@ -22,109 +14,147 @@ export function QuizAnalyticsCard({ quizAnalytics }: QuizAnalyticsCardProps) {
   }
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {/* Quiz Overview Stats */}
-      <Card className="p-4">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100">
-            <Trophy className="h-5 w-5 text-blue-600" />
+      <Card className="h-fit grow gap-4 border-border bg-card p-4 shadow-none md:p-6">
+        <CardHeader className="flex flex-row items-center gap-4 p-0">
+          <div aria-hidden="true" className="rounded-md bg-blue-500/10 p-3">
+            <Trophy className="size-6 text-blue-600" />
           </div>
-          <div>
-            <p className="text-muted-foreground text-sm">Quiz Submissions</p>
-            <p className="font-semibold text-2xl">
-              {quizAnalytics.totalQuizSubmissions}
-            </p>
-          </div>
-        </div>
+          <CardTitle className="font-medium text-base text-muted-foreground">
+            Quiz Submissions
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="px-1 py-0">
+          <p className="font-bold text-2xl text-foreground tabular-nums">
+            {quizAnalytics.totalQuizSubmissions.toLocaleString()}
+          </p>
+        </CardContent>
       </Card>
 
-      <Card className="p-4">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-100">
-            <Target className="h-5 w-5 text-green-600" />
+      <Card className="h-fit grow gap-4 border-border bg-card p-4 shadow-none md:p-6">
+        <CardHeader className="flex flex-row items-center gap-4 p-0">
+          <div aria-hidden="true" className="rounded-md bg-green-500/10 p-3">
+            <Target className="size-6 text-green-600" />
           </div>
-          <div>
-            <p className="text-muted-foreground text-sm">Average Score</p>
-            <p className="font-semibold text-2xl">
-              {quizAnalytics.averagePercentage.toFixed(1)}%
-            </p>
-          </div>
-        </div>
+          <CardTitle className="font-medium text-base text-muted-foreground">
+            Average Score
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="px-1 py-0">
+          <p className="font-bold text-2xl text-foreground tabular-nums">
+            {quizAnalytics.averagePercentage.toFixed(1)}%
+          </p>
+        </CardContent>
       </Card>
 
-      <Card className="p-4">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-100">
-            <CheckCircle className="h-5 w-5 text-purple-600" />
+      <Card className="h-fit grow gap-4 border-border bg-card p-4 shadow-none md:p-6">
+        <CardHeader className="flex flex-row items-center gap-4 p-0">
+          <div aria-hidden="true" className="rounded-md bg-purple-500/10 p-3">
+            <CheckCircle className="size-6 text-purple-600" />
           </div>
-          <div>
-            <p className="text-muted-foreground text-sm">Pass Rate</p>
-            <p className="font-semibold text-2xl">
-              {quizAnalytics.passRate.toFixed(1)}%
-            </p>
+          <CardTitle className="font-medium text-base text-muted-foreground">
+            Pass Rate
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="px-1 py-0">
+          <p className="font-bold text-2xl text-foreground tabular-nums">
+            {quizAnalytics.passRate.toFixed(1)}%
+          </p>
+        </CardContent>
+      </Card>
+
+      <Card className="h-fit grow gap-4 border-border bg-card p-4 shadow-none md:p-6">
+        <CardHeader className="flex flex-row items-center gap-4 p-0">
+          <div aria-hidden="true" className="rounded-md bg-orange-500/10 p-3">
+            <Award className="size-6 text-orange-600" />
           </div>
-        </div>
+          <CardTitle className="font-medium text-base text-muted-foreground">
+            Top Score
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="px-1 py-0">
+          <p className="font-bold text-2xl text-foreground tabular-nums">
+            {quizAnalytics.topPerformers.length > 0
+              ? `${quizAnalytics.topPerformers[0].percentage.toFixed(1)}%`
+              : "N/A"}
+          </p>
+        </CardContent>
       </Card>
 
       {/* Top Performers */}
       {quizAnalytics.topPerformers.length > 0 && (
-        <Card className="p-4 md:col-span-2 lg:col-span-3">
-          <div className="mb-4 flex items-center gap-2">
-            <Award className="h-5 w-5 text-yellow-600" />
-            <h3 className="font-semibold">Top Performers</h3>
-          </div>
-          <div className="flex flex-col gap-3">
-            {quizAnalytics.topPerformers.map((performer, index) => (
-              <div
-                className="flex items-center justify-between rounded-lg bg-muted/30 p-3"
-                key={performer.submissionId}
-              >
-                <div className="flex items-center gap-3">
-                  <Badge variant={index === 0 ? "default" : "secondary"}>
-                    #{index + 1}
-                  </Badge>
-                  <span className="font-medium text-sm">
-                    Submission {performer.submissionId.slice(-8)}
-                  </span>
+        <Card className="grow gap-4 border-border bg-card p-4 shadow-none md:col-span-2 lg:col-span-4">
+          <CardHeader className="flex flex-row items-center gap-4 p-0">
+            <div aria-hidden="true" className="rounded-md bg-yellow-500/10 p-3">
+              <Award className="size-6 text-yellow-600" />
+            </div>
+            <CardTitle className="font-medium text-base text-muted-foreground">
+              Top Performers
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="px-1 py-0">
+            <div className="flex flex-col gap-3">
+              {quizAnalytics.topPerformers.map((performer, index) => (
+                <div
+                  className="flex items-center justify-between rounded-lg bg-muted/30 p-3"
+                  key={performer.submissionId}
+                >
+                  <div className="flex items-center gap-3">
+                    <Badge variant={index === 0 ? "default" : "secondary"}>
+                      #{index + 1}
+                    </Badge>
+                    <span className="font-medium text-sm">
+                      Submission {performer.submissionId.slice(-8)}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="font-semibold">
+                      {performer.percentage.toFixed(1)}%
+                    </span>
+                    <span className="text-muted-foreground text-sm">
+                      ({performer.score} points)
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="font-semibold">
-                    {performer.percentage.toFixed(1)}%
-                  </span>
-                  <span className="text-muted-foreground text-sm">
-                    ({performer.score} points)
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </CardContent>
         </Card>
       )}
 
       {/* Question Analytics */}
       {quizAnalytics.questionAnalytics.length > 0 && (
-        <Card className="p-4 md:col-span-2 lg:col-span-3">
-          <div className="mb-4 flex items-center gap-2">
-            <TrendingUp className="h-5 w-5 text-blue-600" />
-            <h3 className="font-semibold">Question Performance</h3>
-          </div>
-          <div className="flex flex-col gap-4">
-            {quizAnalytics.questionAnalytics.map((question) => (
-              <div className="flex flex-col gap-2" key={question.fieldId}>
-                <div className="flex items-center justify-between">
-                  <span className="font-medium text-sm">{question.label}</span>
-                  <span className="text-muted-foreground text-sm">
-                    {question.correctAnswers}/{question.totalAnswers} correct
-                  </span>
+        <Card className="grow gap-4 border-border bg-card p-4 shadow-none md:col-span-2 lg:col-span-4">
+          <CardHeader className="flex flex-row items-center gap-4 p-0">
+            <div aria-hidden="true" className="rounded-md bg-blue-500/10 p-3">
+              <TrendingUp className="size-6 text-blue-600" />
+            </div>
+            <CardTitle className="font-medium text-base text-muted-foreground">
+              Question Performance
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="px-1 py-0">
+            <div className="flex flex-col gap-4">
+              {quizAnalytics.questionAnalytics.map((question) => (
+                <div className="flex flex-col gap-2" key={question.fieldId}>
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium text-sm">
+                      {question.label}
+                    </span>
+                    <span className="text-muted-foreground text-sm">
+                      {question.correctAnswers}/{question.totalAnswers} correct
+                    </span>
+                  </div>
+                  <Progress className="h-2" value={question.accuracyRate} />
+                  <div className="flex justify-between text-muted-foreground text-xs">
+                    <span>{question.accuracyRate.toFixed(1)}% accuracy</span>
+                    <span>{question.totalAnswers} responses</span>
+                  </div>
                 </div>
-                <Progress className="h-2" value={question.accuracyRate} />
-                <div className="flex justify-between text-muted-foreground text-xs">
-                  <span>{question.accuracyRate.toFixed(1)}% accuracy</span>
-                  <span>{question.totalAnswers} responses</span>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </CardContent>
         </Card>
       )}
     </div>

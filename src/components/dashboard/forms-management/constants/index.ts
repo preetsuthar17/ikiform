@@ -98,6 +98,6 @@ export const DEFAULT_DELETE_MODAL_STATE = {
   formTitle: "",
 };
 
-export const SKELETON_FORM_COUNT = 6;
+export const SKELETON_FORM_COUNT = 4;
 export const SKELETON_STATS_COUNT = 3;
 export const SKELETON_BUTTONS_COUNT = 5;

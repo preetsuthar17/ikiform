@@ -11,6 +11,8 @@ export type WebhookMethod =
 
 export interface WebhookConfig {
   id: string;
+  name?: string | null;
+  description?: string | null;
   url: string;
   events: string[];
   method: WebhookMethod;

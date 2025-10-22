@@ -6,7 +6,6 @@ import {
   Minimize,
   Pause,
   Play,
-  Settings,
   SkipBack,
   SkipForward,
   Volume2,
@@ -16,7 +15,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const videoPlayerVariants = cva(
-  "group relative w-full overflow-hidden rounded-card bg-black",
+  "group relative w-full overflow-hidden rounded-2xl bg-black",
   {
     variants: {
       size: {
@@ -285,13 +284,13 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
             {}
             <div className="absolute inset-0 flex items-center justify-center">
               <button
-                className="group flex h-16 w-16 items-center justify-center rounded-card border border-white/30 bg-white/20 text-white backdrop-blur-sm transition-all duration-200 hover:bg-white/30"
+                className="group flex size-16 items-center justify-center rounded-2xl border border-white/30 bg-white/20 text-white backdrop-blur-sm transition-all duration-200 hover:bg-white/30"
                 onClick={togglePlay}
               >
                 {isPlaying ? (
-                  <Pause className="ml-0.5 h-6 w-6" />
+                  <Pause className="ml-0.5 size-6" />
                 ) : (
-                  <Play className="ml-1 h-6 w-6" />
+                  <Play className="ml-1 size-6" />
                 )}
               </button>
             </div>
@@ -305,7 +304,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
                 </span>
                 <div className="group/progress relative flex-1">
                   <input
-                    className="h-1 w-full cursor-pointer appearance-none rounded-card bg-white/30 [&::-webkit-slider-thumb]: [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-card [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:duration-200 group-hover/progress:[&::-webkit-slider-thumb]:scale-125"
+                    className="h-1 w-full cursor-pointer appearance-none rounded-2xl bg-white/30 [&::-webkit-slider-thumb]: [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-2xl [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:duration-200 group-hover/progress:[&::-webkit-slider-thumb]:scale-125"
                     max={duration || 0}
                     min={0}
                     onChange={handleSeek}
@@ -329,45 +328,45 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <button
-                    className="rounded-ele p-2 text-white transition-colors hover:bg-white/20"
+                    className="rounded-xl p-2 text-white transition-colors hover:bg-white/20"
                     onClick={() => skip(-10)}
                   >
-                    <SkipBack className="h-4 w-4" />
+                    <SkipBack className="size-4" />
                   </button>
 
                   <button
-                    className="rounded-ele p-2 text-white transition-colors hover:bg-white/20"
+                    className="rounded-xl p-2 text-white transition-colors hover:bg-white/20"
                     onClick={togglePlay}
                   >
                     {isPlaying ? (
-                      <Pause className="h-4 w-4" />
+                      <Pause className="size-4" />
                     ) : (
-                      <Play className="ml-0.5 h-4 w-4" />
+                      <Play className="ml-0.5 size-4" />
                     )}
                   </button>
 
                   <button
-                    className="rounded-ele p-2 text-white transition-colors hover:bg-white/20"
+                    className="rounded-xl p-2 text-white transition-colors hover:bg-white/20"
                     onClick={() => skip(10)}
                   >
-                    <SkipForward className="h-4 w-4" />
+                    <SkipForward className="size-4" />
                   </button>
 
                   <div className="group/volume flex items-center gap-2">
                     <button
-                      className="rounded-ele p-2 text-white transition-colors hover:bg-white/20"
+                      className="rounded-xl p-2 text-white transition-colors hover:bg-white/20"
                       onClick={toggleMute}
                     >
                       {isMuted || volume === 0 ? (
-                        <VolumeX className="h-4 w-4" />
+                        <VolumeX className="size-4" />
                       ) : (
-                        <Volume2 className="h-4 w-4" />
+                        <Volume2 className="size-4" />
                       )}
                     </button>
 
                     <div className="w-0 overflow-hidden transition-all duration-200 group-hover/volume:w-20">
                       <input
-                        className="h-1 w-full cursor-pointer appearance-none rounded-card bg-white/30 [&::-webkit-slider-thumb]:h-2 [&::-webkit-slider-thumb]:w-2 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-card [&::-webkit-slider-thumb]:bg-white"
+                        className="h-1 w-full cursor-pointer appearance-none rounded-2xl bg-white/30 [&::-webkit-slider-thumb]:h-2 [&::-webkit-slider-thumb]:w-2 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-2xl [&::-webkit-slider-thumb]:bg-white"
                         max={1}
                         min={0}
                         onChange={handleVolumeChange}
@@ -388,13 +387,13 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
 
                 <div className="flex items-center gap-2">
                   <button
-                    className="rounded-ele p-2 text-white transition-colors hover:bg-white/20"
+                    className="rounded-xl p-2 text-white transition-colors hover:bg-white/20"
                     onClick={toggleFullscreen}
                   >
                     {isFullscreen ? (
-                      <Minimize className="h-4 w-4" />
+                      <Minimize className="size-4" />
                     ) : (
-                      <Maximize className="h-4 w-4" />
+                      <Maximize className="size-4" />
                     )}
                   </button>
                 </div>

@@ -4,7 +4,7 @@ import { usePrepopulation } from "@/hooks/prepopulation/usePrepopulation";
 import { toast } from "@/hooks/use-toast";
 
 import type { FormField, FormSchema } from "@/lib/database";
-import { evaluateLogic } from "@/lib/forms/logic";
+
 import { calculateQuizScore, type QuizResult } from "@/lib/quiz/scoring";
 import type { SingleStepFormActions, SingleStepFormState } from "../types";
 
@@ -179,9 +179,6 @@ export const useSingleStepForm = (
     }
   }, [formData, saveProgress]);
 
-  const logic = schema.logic || [];
-  const logicActions = evaluateLogic(logic, formData);
-
   const fieldVisibility: Record<
     string,
     { visible: boolean; disabled: boolean }
@@ -190,30 +187,6 @@ export const useSingleStepForm = (
     fieldVisibility[field.id] = { visible: true, disabled: false };
   });
   const logicMessages: string[] = [];
-  logicActions.forEach((action) => {
-    if (action.target && fieldVisibility[action.target]) {
-      if (action.type === "hide")
-        fieldVisibility[action.target].visible = false;
-      if (action.type === "show") fieldVisibility[action.target].visible = true;
-      if (action.type === "disable")
-        fieldVisibility[action.target].disabled = true;
-      if (action.type === "enable")
-        fieldVisibility[action.target].disabled = false;
-      if (
-        action.type === "set_value" &&
-        typeof action.target === "string" &&
-        formData[action.target] !== action.value
-      ) {
-        setFormData((prev) => ({
-          ...prev,
-          [action.target as string]: action.value,
-        }));
-      }
-    }
-    if (action.type === "show_message" && action.value) {
-      logicMessages.push(String(action.value));
-    }
-  });
 
   const handleFieldValueChange = (fieldId: string, value: any) => {
     setFormData((prev) => ({ ...prev, [fieldId]: value }));
@@ -232,7 +205,6 @@ export const useSingleStepForm = (
 
     if (!isValid) {
       setErrors(validationErrors);
-      toast.error("Please fix the errors in the form");
       return;
     }
 
@@ -263,26 +235,50 @@ export const useSingleStepForm = (
             window.location.href = `${schema.settings.redirectUrl}?ref=ikiform`;
           }, 2000);
         }
+      } else if (result.error === "Bot detected") {
+        toast.error(result.message || "Bot detected. Access denied.");
+      } else if (result.error === "Duplicate submission detected") {
+        setDuplicateError({
+          message: result.message || "You have already submitted this form.",
+          timeRemaining: result.timeRemaining,
+          attemptsRemaining: result.attemptsRemaining,
+        });
+      } else if (result.error === "Rate limit exceeded") {
+        toast.error(
+          result.message || "Too many requests. Please try again later."
+        );
+      } else if (result.error === "Response limit reached") {
+        toast.error(
+          result.message || "This form is no longer accepting responses."
+        );
+      } else if (result.error === "Content validation failed") {
+        toast.error(
+          result.message || "Your submission contains inappropriate content."
+        );
       } else {
-        // Check if it's a duplicate submission error
-        if (result.error === "Duplicate submission detected") {
-          setDuplicateError({
-            message: result.message || "You have already submitted this form.",
-            timeRemaining: result.timeRemaining,
-            attemptsRemaining: result.attemptsRemaining,
-          });
-        } else {
-          toast.error(result.message || "Failed to submit form");
-        }
+        toast.error(result.message || "Failed to submit form");
       }
     } catch (error: any) {
-      // Check if it's a duplicate submission error
-      if (error?.error === "Duplicate submission detected") {
+      if (error?.error === "Bot detected") {
+        toast.error(error.message || "Bot detected. Access denied.");
+      } else if (error?.error === "Duplicate submission detected") {
         setDuplicateError({
           message: error.message || "You have already submitted this form.",
           timeRemaining: error.timeRemaining,
           attemptsRemaining: error.attemptsRemaining,
         });
+      } else if (error?.error === "Rate limit exceeded") {
+        toast.error(
+          error.message || "Too many requests. Please try again later."
+        );
+      } else if (error?.error === "Response limit reached") {
+        toast.error(
+          error.message || "This form is no longer accepting responses."
+        );
+      } else if (error?.error === "Content validation failed") {
+        toast.error(
+          error.message || "Your submission contains inappropriate content."
+        );
       } else {
         toast.error("Failed to submit form. Please try again.");
       }

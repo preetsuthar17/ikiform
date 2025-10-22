@@ -1,6 +1,8 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { toast } from "@/hooks/use-toast";
-import type { Form, FormSubmission } from "@/lib/database";
+import type { FormSubmission } from "@/lib/database";
 import { formsDb } from "@/lib/database";
 
 export const useFormSubmissions = (formId: string) => {

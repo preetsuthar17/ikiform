@@ -37,9 +37,9 @@ const inputOTPSlotVariants = cva(
           "border-destructive text-destructive-foreground focus-within:ring-ring",
       },
       size: {
-        sm: "h-6 w-6 text-xs sm:h-8 sm:w-8",
-        default: "h-8 w-8 text-xs sm:h-10 sm:w-10 sm:text-sm",
-        lg: "h-10 w-10 text-sm sm:h-12 sm:w-12 sm:text-base",
+        sm: "size-6 text-xs sm:h-8 sm:w-8",
+        default: "size-8 text-xs sm:h-10 sm:w-10 sm:text-sm",
+        lg: "size-10 text-sm sm:h-12 sm:w-12 sm:text-base",
       },
       state: {
         default: "",
@@ -48,9 +48,9 @@ const inputOTPSlotVariants = cva(
       },
       position: {
         first: "rounded-l-ele border-l",
-        middle: "rounded-ele",
+        middle: "rounded-xl",
         last: "rounded-r-ele",
-        single: "rounded-ele border-l",
+        single: "rounded-xl border-l",
       },
     },
     defaultVariants: {

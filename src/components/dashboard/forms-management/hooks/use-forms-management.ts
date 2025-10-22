@@ -51,7 +51,7 @@ export function useFormsManagement() {
   };
 
   const viewAnalytics = (formId: string) => {
-    router.push(`/dashboard/forms/${formId}/analytics`);
+    router.push(`/dashboard/forms/${formId}/submissions`);
   };
 
   const shareForm = async (form: Form) => {

@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Label } from "@/components/ui/label";
 
 import type { FieldWrapperProps } from "../types";
@@ -12,42 +10,96 @@ export function FieldWrapper({
   children,
   builderMode = false,
 }: FieldWrapperProps) {
-  const isStatement = field.type === "statement";
+  const isStatementField = field.type === "statement";
   const isQuizField = field.settings?.isQuizField;
+  const shouldShowLabel = !(isStatementField || isQuizField);
+  const shouldShowHelpText = !isStatementField && field.settings?.helpText;
+  const shouldShowError = !isStatementField && error;
+
+  const getFieldLabel = () => (field.label ? field.label.replace("*", "") : "");
+
+  const getFieldDescription = () => field.description;
+
+  const getFieldHelpText = () => field.settings?.helpText;
+
+  const getFieldWidthClass = () => getWidthClass(field.settings?.width as any);
+
+  const getContainerClassName = () => {
+    const baseClasses = "flex flex-col gap-2";
+    const widthClass = getFieldWidthClass();
+    const marginClass = field.label ? "" : "";
+
+    return `${baseClasses} ${widthClass} ${marginClass}`.trim();
+  };
+
+  const renderFieldLabel = () => {
+    if (!(shouldShowLabel && field.label)) return null;
+
+    return (
+      <Label
+        className="gap-1 font-medium text-foreground text-sm"
+        htmlFor={field.id}
+      >
+        {getFieldLabel()}
+        {field.required && <span className="text-destructive">*</span>}
+      </Label>
+    );
+  };
+
+  const renderFieldDescription = () => {
+    const description = getFieldDescription();
+    if (!(shouldShowLabel && description)) return null;
+
+    return (
+      <p className="form-description text-muted-foreground text-sm opacity-80">
+        {description}
+      </p>
+    );
+  };
+
+  const renderFieldHelpText = () => {
+    const helpText = getFieldHelpText();
+    if (!(shouldShowHelpText && helpText)) return null;
+
+    return <p className="text-muted-foreground text-xs">{helpText}</p>;
+  };
+
+  const renderFieldError = () => {
+    if (!(shouldShowError && error)) return null;
+
+    return (
+      <p
+        aria-live="polite"
+        className="flex items-start gap-1 text-destructive text-sm"
+        role="alert"
+      >
+        {error}
+      </p>
+    );
+  };
 
   return (
     <div
-      className={`flex flex-col gap-2 ${field.label ? "" : "-mt-2"} ${getWidthClass(field.settings?.width as any)}`}
+      className={getContainerClassName()}
+      data-builder-mode={builderMode ? "true" : undefined}
+      onClick={
+        builderMode
+          ? (e) => {
+              e.stopPropagation();
+              const card =
+                (e.currentTarget.closest('[role="button"]') as HTMLElement) ??
+                undefined;
+              card?.click();
+            }
+          : undefined
+      }
+      role={builderMode ? "group" : undefined}
     >
-      {!(isStatement || isQuizField) && (
-        <>
-          <Label
-            className="font-medium text-foreground text-sm"
-            htmlFor={field.id}
-          >
-            {field.label && field.label.replace("*", "")}
-            {field.label && field.required && (
-              <span className="ml-1 text-destructive">*</span>
-            )}
-          </Label>
-          {field.description && (
-            <p className="form-description text-muted-foreground text-sm opacity-80">
-              {field.description}
-            </p>
-          )}
-        </>
-      )}
+      {renderFieldLabel()}
+      {renderFieldDescription()}
       {children}
-      {!isStatement && field.settings?.helpText && (
-        <p className="text-muted-foreground text-xs">
-          {field.settings.helpText}
-        </p>
-      )}
-      {!isStatement && error && (
-        <p className="flex items-start gap-1 text-destructive text-sm">
-          {error}
-        </p>
-      )}
+      {renderFieldHelpText()}
+      {renderFieldError()}
     </div>
   );
 }

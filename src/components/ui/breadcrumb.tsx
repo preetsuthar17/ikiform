@@ -31,7 +31,7 @@ const breadcrumbItemVariants = cva("inline-flex items-center gap-1.5", {
 });
 
 const breadcrumbLinkVariants = cva(
-  "flex items-center gap-1 rounded-ele transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+  "flex items-center gap-1 rounded-xl transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
   {
     variants: {},
     defaultVariants: {},
@@ -165,11 +165,11 @@ const BreadcrumbEllipsis: React.FC<BreadcrumbEllipsisProps> = ({
 }) => (
   <span
     aria-hidden="true"
-    className={cn("flex h-9 w-9 items-center justify-center", className)}
+    className={cn("flex size-9 items-center justify-center", className)}
     role="presentation"
     {...props}
   >
-    <MoreHorizontal className="h-4 w-4" />
+    <MoreHorizontal className="size-4" />
     <span className="sr-only">More</span>
   </span>
 );

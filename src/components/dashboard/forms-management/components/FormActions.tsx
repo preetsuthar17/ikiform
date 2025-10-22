@@ -8,8 +8,6 @@ import {
   Share,
   Trash2,
 } from "lucide-react";
-import React from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -24,7 +22,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-
 import type { FormActionsProps } from "../types";
 
 export function FormActions({
@@ -37,49 +34,40 @@ export function FormActions({
   onDelete,
 }: FormActionsProps) {
   return (
-    <TooltipProvider>
-      <div className="flex w-full flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-        {/* Primary Actions Group */}
-        <div className="flex w-full flex-row flex-wrap items-center gap-1 max-[330px]:justify-center sm:w-auto">
+    <TooltipProvider delayDuration={200}>
+      <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex w-full flex-row flex-wrap items-center gap-2 max-[330px]:justify-center sm:w-auto">
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
-                className="h-9 w-9 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80"
+                aria-label="Edit form"
+                className="size-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80 focus:ring-2 focus:ring-ring focus:ring-offset-2"
                 onClick={() => onEdit(form.id)}
                 size="sm"
                 variant="ghost"
               >
-                <Edit className="h-4 w-4" />
-                <span className="sr-only">Edit form</span>
+                <Edit aria-hidden="true" className="size-4" />
               </Button>
             </TooltipTrigger>
-            <TooltipContent
-              className="font-medium text-xs"
-              side="top"
-              sideOffset={8}
-            >
-              Edit form
+            <TooltipContent side="top" sideOffset={8}>
+              <p>Edit form</p>
             </TooltipContent>
           </Tooltip>
 
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
-                className="h-9 w-9 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80"
+                aria-label="Share form"
+                className="size-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80 focus:ring-2 focus:ring-ring focus:ring-offset-2"
                 onClick={() => onShare(form)}
                 size="sm"
                 variant="ghost"
               >
-                <Share className="h-4 w-4" />
-                <span className="sr-only">Share form</span>
+                <Share aria-hidden="true" className="size-4" />
               </Button>
             </TooltipTrigger>
-            <TooltipContent
-              className="font-medium text-xs"
-              side="top"
-              sideOffset={8}
-            >
-              Share form
+            <TooltipContent side="top" sideOffset={8}>
+              <p>Share form</p>
             </TooltipContent>
           </Tooltip>
 
@@ -88,82 +76,72 @@ export function FormActions({
               <TooltipTrigger asChild>
                 <DropdownMenuTrigger asChild>
                   <Button
-                    className="h-9 w-9 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80"
+                    aria-label="More actions"
+                    className="size-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80 focus:ring-2 focus:ring-ring focus:ring-offset-2"
                     size="sm"
                     variant="ghost"
                   >
-                    <MoreHorizontal className="h-4 w-4" />
-                    <span className="sr-only">More actions</span>
+                    <MoreHorizontal aria-hidden="true" className="size-4" />
                   </Button>
                 </DropdownMenuTrigger>
               </TooltipTrigger>
-              <TooltipContent
-                className="font-medium text-xs"
-                side="top"
-                sideOffset={8}
-              >
-                More actions
+              <TooltipContent side="top" sideOffset={8}>
+                <p>More actions</p>
               </TooltipContent>
             </Tooltip>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align="end" className="w-48">
               <DropdownMenuItem
-                className="flex gap-1"
-                icon={Copy}
+                className="cursor-pointer"
                 onClick={() => onDuplicate(form.id)}
               >
+                <Copy aria-hidden="true" className="mr-2 size-4" />
                 Duplicate
               </DropdownMenuItem>
               <DropdownMenuItem
-                className="flex gap-1"
-                icon={Eye}
+                className="cursor-pointer"
                 onClick={() => onViewForm(form)}
               >
+                <Eye aria-hidden="true" className="mr-2 size-4" />
                 View form
               </DropdownMenuItem>
               <DropdownMenuItem
-                className="flex gap-1"
-                icon={BarChart3}
+                className="cursor-pointer"
                 onClick={() => onViewAnalytics(form.id)}
               >
+                <BarChart3 aria-hidden="true" className="mr-2 size-4" />
                 View analytics
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                className="flex gap-1"
-                icon={Code2}
+                className="cursor-pointer"
                 onClick={() =>
                   window.open(`/embed?formid=${form.id}`, "_blank")
                 }
               >
+                <Code2 aria-hidden="true" className="mr-2 size-4" />
                 Embed
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
 
-        {/* Separator */}
         <div className="mx-3 hidden h-4 w-px bg-border/50 sm:block" />
 
-        {/* Destructive Action */}
         <div className="flex w-full justify-end sm:w-auto">
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
-                className="h-9 w-9 p-0 transition-all duration-200 hover:scale-105 hover:bg-destructive/10 hover:text-destructive"
+                aria-label="Delete form"
+                className="size-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-destructive/10 hover:text-destructive focus:ring-2 focus:ring-destructive focus:ring-offset-2"
                 onClick={() => onDelete(form.id, form.title)}
                 size="sm"
                 variant="ghost"
               >
-                <Trash2 className="h-4 w-4" />
-                <span className="sr-only">Delete form</span>
+                <Trash2 aria-hidden="true" className="size-4" />
               </Button>
             </TooltipTrigger>
-            <TooltipContent
-              className="border-destructive/20 font-medium text-destructive text-xs"
-              side="top"
-              sideOffset={8}
-            >
-              Delete form
+            <TooltipContent side="top" sideOffset={8}>
+              <p>Delete form</p>
             </TooltipContent>
           </Tooltip>
         </div>

@@ -1,16 +1,14 @@
 import { Plus, Sparkles } from "lucide-react";
-import React from "react";
-
+import { Card } from "@/components/ui";
 import { Button } from "@/components/ui/button";
 import {
-  Modal,
-  ModalContent,
-  ModalDescription,
-  ModalHeader,
-  ModalTitle,
-  ModalTrigger,
-} from "@/components/ui/modal";
-
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import type { FormHeaderProps } from "../types";
 
 interface FormsHeaderProps extends FormHeaderProps {
@@ -19,12 +17,11 @@ interface FormsHeaderProps extends FormHeaderProps {
 }
 
 export function FormsHeader({
-  onCreateForm,
   onCreateWithAI,
   onCreateManually,
 }: FormsHeaderProps) {
   return (
-    <div className="flex flex-col justify-between gap-4 rounded-4xl border border-none bg-card p-6 sm:flex-row sm:items-center md:p-8">
+    <Card className="flex flex-col justify-between gap-4 p-6 shadow-none sm:flex-row sm:items-center md:p-8">
       <div className="flex flex-col gap-1">
         <h2 className="font-semibold text-2xl text-foreground tracking-tight">
           Your Forms
@@ -33,34 +30,37 @@ export function FormsHeader({
           Create, manage, and analyze your forms with ease
         </p>
       </div>
-      <Modal>
-        <ModalTrigger asChild>
-          <Button className="rounded-full px-7 py-6" onClick={onCreateForm}>
-            <Plus className="h-5 w-5" />
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button
+            aria-label="Create new form"
+            className="flex h-10 w-fit items-center gap-2 whitespace-nowrap font-medium"
+            variant="default"
+          >
+            <Plus aria-hidden="true" className="size-5" />
             Create New Form
           </Button>
-        </ModalTrigger>
-        <ModalContent className="flex flex-col items-start justify-start gap-4 text-left">
-          <ModalHeader className="flex flex-col gap-2 text-left">
-            <ModalTitle>How would you like to create your form?</ModalTitle>
-            <ModalDescription asChild>
-              <span>
-                Choose to build your form manually or let Kiko AI generate it
-                for you.
-              </span>
-            </ModalDescription>
-          </ModalHeader>
-          <div className="items-left justify-left flex w-full flex-wrap gap-2">
+        </DialogTrigger>
+        <DialogContent className="rounded-xl sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>How would you like to create your form?</DialogTitle>
+            <DialogDescription>
+              Choose to build your form manually or let Kiko AI generate it for
+              you.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex w-full flex-col gap-3 sm:flex-row">
             <Button
-              className="max-sm:grow"
+              className="flex-1"
               onClick={onCreateWithAI}
               size="lg"
               variant="default"
             >
-              <Sparkles /> Use Kiko AI
+              <Sparkles aria-hidden="true" className="mr-2 size-4" />
+              Use Kiko AI
             </Button>
             <Button
-              className="max-sm:grow"
+              className="flex-1"
               onClick={onCreateManually}
               size="lg"
               variant="secondary"
@@ -68,8 +68,8 @@ export function FormsHeader({
               Create Manually
             </Button>
           </div>
-        </ModalContent>
-      </Modal>
-    </div>
+        </DialogContent>
+      </Dialog>
+    </Card>
   );
 }

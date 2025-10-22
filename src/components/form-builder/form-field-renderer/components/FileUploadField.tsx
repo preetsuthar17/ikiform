@@ -8,17 +8,19 @@ import {
   Video,
   X,
 } from "lucide-react";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Alert } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { FileUpload } from "@/components/ui/file-upload";
+
 import type { BaseFieldProps } from "../types";
 
 interface FileUploadSettings {
   accept?: string;
   maxFiles?: number;
-  maxSize?: number; // in bytes
+  maxSize?: number;
   allowedTypes?: string[];
 }
 
@@ -37,7 +39,7 @@ export function FileUploadField(props: BaseFieldProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
 
-  const fallbackFormId = useMemo(() => {
+  const getFallbackFormId = () => {
     if (formId) return formId;
     if (typeof window !== "undefined") {
       const path = window.location.pathname;
@@ -45,28 +47,29 @@ export function FileUploadField(props: BaseFieldProps) {
       return match?.[1] || null;
     }
     return null;
-  }, [formId]);
+  };
 
-  const settings = useMemo(
-    () => field.settings as FileUploadSettings,
-    [field.settings]
-  );
-  const maxSize = settings?.maxSize || 50 * 1024 * 1024;
-  const maxFiles = settings?.maxFiles || 10;
-  const accept =
-    settings?.accept ||
-    "image/*,application/pdf,video/*,audio/*,text/*,application/zip";
+  const getFileUploadSettings = () => field.settings as FileUploadSettings;
 
-  const uploadedFiles: UploadedFile[] = useMemo(
-    () => (Array.isArray(value) ? value : []),
-    [value]
-  );
+  const getMaxFileSize = () => {
+    const settings = getFileUploadSettings();
+    return settings?.maxSize || 50 * 1024 * 1024;
+  };
 
-  useEffect(() => {
-    if (value === undefined || value === null || value === "") {
-      onChange([]);
-    }
-  }, []);
+  const getMaxFiles = () => {
+    const settings = getFileUploadSettings();
+    return settings?.maxFiles || 10;
+  };
+
+  const getAcceptedFileTypes = () => {
+    const settings = getFileUploadSettings();
+    return (
+      settings?.accept ||
+      "image/*,application/pdf,video/*,audio/*,text/*,application/zip"
+    );
+  };
+
+  const getUploadedFiles = () => (Array.isArray(value) ? value : []);
 
   const getFileIcon = useCallback((type: string) => {
     if (type.startsWith("image/")) return ImageIcon;
@@ -85,21 +88,22 @@ export function FileUploadField(props: BaseFieldProps) {
     return `${(bytes / k ** i).toFixed(1)} ${sizes[i]}`;
   }, []);
 
-  const handleUpload = useCallback(
+  const createMockFile = (file: File, index: number) => ({
+    id: `preview-${Date.now()}-${index}`,
+    name: file.name,
+    size: file.size,
+    type: file.type,
+    url: `preview/${file.name}`,
+    signedUrl: URL.createObjectURL(file),
+  });
+
+  const handleFileUpload = useCallback(
     async (files: File[]) => {
-      const actualFormId = fallbackFormId;
+      const actualFormId = getFallbackFormId();
 
       if (!actualFormId) {
-        const mockFiles = files.map((file, index) => ({
-          id: `preview-${Date.now()}-${index}`,
-          name: file.name,
-          size: file.size,
-          type: file.type,
-          url: `preview/${file.name}`,
-          signedUrl: URL.createObjectURL(file),
-        }));
-
-        const currentFiles = Array.isArray(value) ? value : [];
+        const mockFiles = files.map(createMockFile);
+        const currentFiles = getUploadedFiles();
         onChange([...currentFiles, ...mockFiles]);
         return;
       }
@@ -129,7 +133,7 @@ export function FileUploadField(props: BaseFieldProps) {
         });
 
         const newUploadedFiles = await Promise.all(uploadPromises);
-        const currentFiles = Array.isArray(value) ? value : [];
+        const currentFiles = getUploadedFiles();
         onChange([...currentFiles, ...newUploadedFiles]);
       } catch (error) {
         setUploadError(
@@ -140,12 +144,12 @@ export function FileUploadField(props: BaseFieldProps) {
         setIsUploading(false);
       }
     },
-    [fallbackFormId, field.id, value, onChange]
+    [field.id, value, onChange]
   );
 
-  const handleRemoveFile = useCallback(
+  const handleRemoveUploadedFile = useCallback(
     (fileId: string) => {
-      const currentFiles = Array.isArray(value) ? value : [];
+      const currentFiles = getUploadedFiles();
       const fileToRemove = currentFiles.find((file) => file.id === fileId);
 
       if (fileToRemove && fileToRemove.signedUrl.startsWith("blob:")) {
@@ -157,25 +161,55 @@ export function FileUploadField(props: BaseFieldProps) {
     [value, onChange]
   );
 
-  return (
-    <div className="flex flex-col gap-4">
-      {!fallbackFormId && (
-        <div className="rounded bg-muted/50 px-2 py-1 text-muted-foreground text-xs">
-          📋 Preview Mode - Files will be shown for demo purposes
-        </div>
-      )}
+  const handleRemoveButtonClick = (fileId: string) => {
+    if (!builderMode) {
+      handleRemoveUploadedFile(fileId);
+    }
+  };
 
-      <FileUpload
-        accept={accept}
-        className="bg-input"
-        disabled={disabled || isUploading || builderMode}
-        maxFiles={maxFiles - uploadedFiles.length}
-        maxSize={maxSize}
-        multiple={maxFiles > 1}
-        onUpload={builderMode ? undefined : handleUpload}
-        showPreview={false}
-        variant="default"
-      />
+  const isFileImage = (type: string) => type.startsWith("image/");
+
+  const getFileConstraintsText = () => {
+    const maxFiles = getMaxFiles();
+    const maxSize = getMaxFileSize();
+    const settings = getFileUploadSettings();
+
+    return {
+      maxFiles,
+      maxSize: formatFileSize(maxSize),
+      allowedTypes: settings?.allowedTypes,
+    };
+  };
+
+  useEffect(() => {
+    if (value === undefined || value === null || value === "") {
+      onChange([]);
+    }
+  }, []);
+
+  const uploadedFiles = getUploadedFiles();
+  const maxFiles = getMaxFiles();
+  const maxSize = getMaxFileSize();
+  const accept = getAcceptedFileTypes();
+  const fallbackFormId = getFallbackFormId();
+  const constraints = getFileConstraintsText();
+
+  return (
+    <div className="flex flex-col gap-3">
+      <Card className="border-0 p-0 shadow-none">
+        <CardContent className="p-0">
+          <FileUpload
+            accept={accept}
+            className="bg-transparent"
+            disabled={disabled || isUploading || builderMode}
+            maxFiles={maxFiles - uploadedFiles.length}
+            maxSize={maxSize}
+            multiple={maxFiles > 1}
+            onUpload={builderMode ? undefined : handleFileUpload}
+            showPreview={false}
+          />
+        </CardContent>
+      </Card>
 
       {uploadError && (
         <Alert variant="destructive">
@@ -184,7 +218,6 @@ export function FileUploadField(props: BaseFieldProps) {
         </Alert>
       )}
 
-      {/* Display uploaded files */}
       {uploadedFiles.length > 0 && (
         <div className="flex flex-col gap-2">
           <h4 className="font-medium text-sm">
@@ -193,53 +226,47 @@ export function FileUploadField(props: BaseFieldProps) {
           <div className="grid gap-2">
             {uploadedFiles.map((file) => {
               const IconComponent = getFileIcon(file.type);
-              const isImage = file.type.startsWith("image/");
+              const isImage = isFileImage(file.type);
 
               return (
                 <div
-                  className="flex items-center gap-3 rounded-lg border bg-card p-3"
+                  className="flex items-center gap-3 rounded-lg border p-3"
                   key={file.id}
                 >
-                  {/* File preview or icon */}
                   <div className="flex-shrink-0">
                     {isImage ? (
                       <img
                         alt={file.name}
-                        className="h-10 w-10 rounded-md border border-border object-cover"
+                        className="size-10 rounded-md border border-border object-cover"
                         src={file.signedUrl}
                       />
                     ) : (
-                      <div className="flex h-10 w-10 items-center justify-center rounded-md bg-accent">
-                        <IconComponent className="h-5 w-5 text-muted-foreground" />
+                      <div className="flex size-10 items-center justify-center rounded-md bg-accent">
+                        <IconComponent className="size-5 text-muted-foreground" />
                       </div>
                     )}
                   </div>
 
-                  {/* File info */}
                   <div className="min-w-0 flex-1">
                     <p className="truncate font-medium text-sm">{file.name}</p>
                     <div className="flex items-center gap-2">
                       <p className="text-muted-foreground text-xs">
                         {formatFileSize(file.size)}
                       </p>
-                      <Badge size="sm" variant="secondary">
-                        Uploaded
-                      </Badge>
+                      <Badge variant="secondary">Uploaded</Badge>
                     </div>
                   </div>
 
-                  {/* Remove button */}
                   <Button
+                    aria-label={`Remove ${file.name}`}
                     className="flex-shrink-0"
                     disabled={disabled || builderMode}
-                    onClick={
-                      builderMode ? undefined : () => handleRemoveFile(file.id)
-                    }
-                    size={"icon"}
+                    onClick={() => handleRemoveButtonClick(file.id)}
+                    size="icon"
                     type="button"
-                    variant={"ghost"}
+                    variant="ghost"
                   >
-                    ×
+                    <X className="size-4" />
                   </Button>
                 </div>
               );
@@ -248,13 +275,12 @@ export function FileUploadField(props: BaseFieldProps) {
         </div>
       )}
 
-      {/* File constraints info */}
       <div className="text-muted-foreground text-xs">
         <p>
-          Max {maxFiles} files, up to {formatFileSize(maxSize)} each
+          Max {constraints.maxFiles} files, up to {constraints.maxSize} each
         </p>
-        {settings?.allowedTypes && (
-          <p>Allowed types: {settings.allowedTypes.join(", ")}</p>
+        {constraints.allowedTypes && (
+          <p>Allowed types: {constraints.allowedTypes.join(", ")}</p>
         )}
       </div>
     </div>

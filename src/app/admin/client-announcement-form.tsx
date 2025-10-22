@@ -52,9 +52,7 @@ export function ClientAnnouncementForm() {
     >
       <Toaster />
       <div className="grid gap-2">
-        <Label htmlFor="to" required>
-          Recipient emails
-        </Label>
+        <Label htmlFor="to">Recipient emails</Label>
         <Textarea
           id="to"
           name="to"
@@ -81,9 +79,7 @@ export function ClientAnnouncementForm() {
       </div>
 
       <div className="grid gap-2">
-        <Label htmlFor="subject" required>
-          Subject
-        </Label>
+        <Label htmlFor="subject">Subject</Label>
         <Input
           id="subject"
           name="subject"
@@ -93,9 +89,7 @@ export function ClientAnnouncementForm() {
       </div>
 
       <div className="grid gap-2">
-        <Label htmlFor="content" required>
-          Content (Markdown supported)
-        </Label>
+        <Label htmlFor="content">Content (Markdown supported)</Label>
         <Textarea
           id="content"
           name="content"
@@ -106,8 +100,8 @@ export function ClientAnnouncementForm() {
       </div>
 
       <div className="flex justify-end">
-        <Button disabled={isSubmitting} type="submit">
-          {isSubmitting ? "Sending..." : "Send Announcement"}
+        <Button disabled={isSubmitting} loading={isSubmitting} type="submit">
+          Send Announcement
         </Button>
       </div>
     </form>

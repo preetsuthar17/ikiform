@@ -11,13 +11,29 @@ export function TextareaField(props: BaseFieldProps) {
   const baseClasses = getBaseClasses(field, error);
   const builderMode = getBuilderMode(props);
 
+  const handleValueChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    onChange(e.target.value);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Escape") {
+      e.currentTarget.blur();
+    }
+    if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      e.currentTarget.blur();
+    }
+  };
+
   const textareaProps = applyBuilderMode(
     {
-      className: `flex gap-2 ${baseClasses}`,
+      className: baseClasses,
       disabled,
       id: field.id,
-      onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) =>
-        onChange(e.target.value),
+      name: field.id,
+      autoComplete: "off",
+      onChange: handleValueChange,
+      onKeyDown: handleKeyDown,
       placeholder: field.placeholder,
       ref: fieldRef,
       rows: field.settings?.rows || 4,
@@ -26,5 +42,9 @@ export function TextareaField(props: BaseFieldProps) {
     builderMode
   );
 
-  return <Textarea {...textareaProps} />;
+  return (
+    <div className="flex flex-col gap-2">
+      <Textarea {...textareaProps} />
+    </div>
+  );
 }

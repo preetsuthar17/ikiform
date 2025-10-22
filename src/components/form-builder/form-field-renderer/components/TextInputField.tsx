@@ -32,11 +32,18 @@ export function TextInputField(props: BaseFieldProps) {
 
   const inputProps = applyBuilderMode(
     {
-      className: `flex gap-2 ${baseClasses}`,
+      className: baseClasses,
       disabled,
       id: field.id,
+      name: field.id,
+      autoComplete: "off",
       onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
         onChange(e.target.value),
+      onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Escape") {
+          e.currentTarget.blur();
+        }
+      },
       placeholder: field.placeholder,
       ref: fieldRef,
       type: "text",
@@ -46,11 +53,17 @@ export function TextInputField(props: BaseFieldProps) {
   );
 
   return (
-    <>
+    <div className="flex flex-col gap-2">
       <Input {...inputProps} />
       {livePatternError && (
-        <div className="mt-1 text-destructive text-xs">{livePatternError}</div>
+        <div
+          aria-live="polite"
+          className="text-destructive text-xs"
+          role="alert"
+        >
+          {livePatternError}
+        </div>
       )}
-    </>
+    </div>
   );
 }

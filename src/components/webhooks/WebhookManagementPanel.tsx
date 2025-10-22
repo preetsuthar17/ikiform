@@ -8,7 +8,7 @@ import {
 import { TestWebhookDialog } from "./TestWebhookDialog";
 import { WebhookFormModal } from "./WebhookFormModal";
 import { WebhookList } from "./WebhookList";
-import { WebhookLogDrawer } from "./WebhookLogDrawer";
+import { WebhookLogDialog } from "./WebhookLogDialog";
 
 export function WebhookManagementPanel({ formId }: { formId?: string }) {
   const { user } = useAuth();
@@ -79,8 +79,8 @@ export function WebhookManagementPanel({ formId }: { formId?: string }) {
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center justify-between">
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex flex-col gap-1">
           <p className="font-medium text-sm">Webhook Endpoints</p>
           <p className="text-muted-foreground text-xs">
@@ -94,7 +94,7 @@ export function WebhookManagementPanel({ formId }: { formId?: string }) {
           size="sm"
           variant="default"
         >
-          {loading ? "Loading" : "Add Webhook"}
+          Add Webhook
         </Button>
       </div>
 
@@ -127,7 +127,7 @@ export function WebhookManagementPanel({ formId }: { formId?: string }) {
         open={modalOpen}
       />
 
-      <WebhookLogDrawer
+      <WebhookLogDialog
         onClose={() => setLogDrawerOpen(false)}
         open={logDrawerOpen}
         webhookId={logWebhookId}

@@ -5,11 +5,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalTitle,
-} from "@/components/ui/modal";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 import { createDefaultFormSchema } from "@/lib/forms";
 import {
@@ -17,7 +17,6 @@ import {
   FormReviewStep,
   FormTypeCard,
   StepIndicator,
-  WizardActions,
 } from "./components";
 
 import { FORM_TYPES } from "./constants";
@@ -172,11 +171,13 @@ export const FormCreationWizard: React.FC<FormCreationWizardProps> = ({
   );
 
   return (
-    <Modal onOpenChange={handleClose} open={isOpen}>
-      <ModalContent className="flex max-w-4xl flex-col gap-6">
-        <ModalHeader>
-          <ModalTitle className="w-fit text-left">Create a New Form</ModalTitle>
-        </ModalHeader>
+    <Dialog onOpenChange={handleClose} open={isOpen}>
+      <DialogContent className="flex w-[95%] max-w-6xl flex-col gap-6">
+        <DialogHeader>
+          <DialogTitle className="w-fit text-left">
+            Create a New Form
+          </DialogTitle>
+        </DialogHeader>
 
         <div className="flex flex-col gap-6 p-3">
           <StepIndicator
@@ -188,7 +189,7 @@ export const FormCreationWizard: React.FC<FormCreationWizardProps> = ({
 
           {renderActions()}
         </div>
-      </ModalContent>
-    </Modal>
+      </DialogContent>
+    </Dialog>
   );
 };

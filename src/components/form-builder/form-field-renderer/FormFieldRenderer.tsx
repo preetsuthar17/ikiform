@@ -1,5 +1,3 @@
-import React from "react";
-
 import { FieldWrapper } from "./components";
 
 import type { FormFieldRendererProps } from "./types";
@@ -18,16 +16,23 @@ export function FormFieldRenderer({
 }: FormFieldRendererProps) {
   return (
     <FieldWrapper builderMode={builderMode} error={error} field={field}>
-      {createFieldComponent(
-        field,
-        value,
-        onChange,
-        error,
-        fieldRef,
-        disabled,
-        formId,
-        builderMode
-      )}
+      <div
+        aria-hidden={builderMode ? true : undefined}
+        className={builderMode ? "pointer-events-none select-none" : undefined}
+        data-builder-mode={builderMode ? "true" : undefined}
+        tabIndex={builderMode ? -1 : undefined}
+      >
+        {createFieldComponent(
+          field,
+          value,
+          onChange,
+          error,
+          fieldRef,
+          disabled,
+          formId,
+          builderMode
+        )}
+      </div>
     </FieldWrapper>
   );
 }

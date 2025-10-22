@@ -1,7 +1,7 @@
 import { X } from "lucide-react";
-import React from "react";
 
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 interface SettingsPanelHeaderProps {
   onClose: () => void;
@@ -9,20 +9,31 @@ interface SettingsPanelHeaderProps {
 
 export function SettingsPanelHeader({ onClose }: SettingsPanelHeaderProps) {
   return (
-    <div className="hidden p-4 lg:flex">
-      <div className="flex w-full items-center justify-between">
-        <h2 className="font-semibold text-foreground text-lg">
+    <header className="flex flex-col border-border bg-background">
+      <div className="flex w-full items-center justify-between p-4">
+        <h2
+          className="font-semibold text-foreground text-lg"
+          id="field-settings-title"
+        >
           Field Settings
         </h2>
         <Button
+          aria-label="Close field settings"
           className="flex gap-2"
           onClick={onClose}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              onClose();
+            }
+          }}
           size="sm"
           variant="ghost"
         >
-          <X className="h-4 w-4" />
+          <X aria-hidden="true" className="size-4" />
         </Button>
       </div>
-    </div>
+      <Separator />
+    </header>
   );
 }

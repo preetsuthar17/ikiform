@@ -30,11 +30,6 @@ export interface ErrorMessagesProps {
   onFieldUpdate: (field: FormField) => void;
 }
 
-export interface VisualSettingsProps {
-  field: FormField;
-  onFieldUpdate: (field: FormField) => void;
-}
-
 export interface FieldSpecificSettingsProps {
   field: FormField;
   onFieldUpdate: (field: FormField) => void;

@@ -1,10 +1,14 @@
 import type React from "react";
 import { useEffect, useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
 import type { BaseFieldProps } from "../types";
+
 import { applyBuilderMode, getBaseClasses, getBuilderMode } from "../utils";
 
-const addressFields = [
+const ADDRESS_FIELD_CONFIGS = [
   { key: "line1", label: "Address Line 1", required: true },
   { key: "line2", label: "Address Line 2", required: false },
   { key: "city", label: "City", required: true },
@@ -19,39 +23,99 @@ export function AddressField(props: BaseFieldProps) {
   const baseClasses = getBaseClasses(field, error);
   const [address, setAddress] = useState(value || {});
 
-  useEffect(() => {
-    setAddress(value || {});
-  }, [value]);
+  const getAddressFields = () => ADDRESS_FIELD_CONFIGS;
 
-  const handleChange = (key: string, val: string) => {
-    const updated = { ...address, [key]: val };
+  const getAddressValue = (key: string) => address[key] || "";
+
+  const getFieldId = (key: string) => `${field.id}-${key}`;
+
+  const getFieldPlaceholder = (label: string) => label;
+
+  const handleAddressFieldChange = (key: string, newValue: string) => {
+    const trimmedValue = newValue.trim();
+    const updated = { ...address, [key]: trimmedValue };
     setAddress(updated);
     onChange(updated);
   };
 
-  return (
-    <div
-      className={`flex flex-col gap-2 ${builderMode ? "pointer-events-none" : ""}`}
-    >
-      {addressFields.map((f) => {
-        const inputProps = applyBuilderMode(
-          {
-            className: `flex gap-2 ${baseClasses}`,
-            disabled,
-            id: `${field.id}-${f.key}`,
-            key: f.key,
-            onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-              handleChange(f.key, e.target.value),
-            placeholder: f.label,
-            required: f.required,
-            value: address[f.key] || "",
-          },
-          builderMode
-        );
+  const handleAddressInputChange =
+    (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      handleAddressFieldChange(key, e.target.value);
+    };
 
-        return <Input {...inputProps} />;
-      })}
-      {error && <span className="text-destructive text-xs">{error}</span>}
+  const handleAddressInputKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (e.key === "Escape") {
+      e.currentTarget.blur();
+    }
+  };
+
+  const renderAddressField = (fieldConfig: any) => {
+    const fieldId = getFieldId(fieldConfig.key);
+    const fieldValue = getAddressValue(fieldConfig.key);
+    const placeholder = getFieldPlaceholder(fieldConfig.label);
+
+    const inputProps = applyBuilderMode(
+      {
+        className: `${baseClasses}`,
+        disabled,
+        id: fieldId,
+        name: fieldId,
+        autoComplete: getAutoCompleteValue(fieldConfig.key),
+        onChange: handleAddressInputChange(fieldConfig.key),
+        onKeyDown: handleAddressInputKeyDown,
+        placeholder,
+        required: fieldConfig.required,
+        value: fieldValue,
+        "aria-invalid": !!error || undefined,
+      },
+      builderMode
+    );
+
+    return (
+      <div className="flex flex-col gap-1" key={fieldConfig.key}>
+        <Label
+          className="font-medium text-foreground text-sm"
+          htmlFor={fieldId}
+        >
+          {fieldConfig.label}
+          {fieldConfig.required && (
+            <span className="ml-1 text-destructive">*</span>
+          )}
+        </Label>
+        <Input {...inputProps} />
+      </div>
+    );
+  };
+
+  const getAutoCompleteValue = (key: string) => {
+    const autoCompleteMap: Record<string, string> = {
+      line1: "address-line1",
+      line2: "address-line2",
+      city: "address-level2",
+      state: "address-level1",
+      zip: "postal-code",
+      country: "country",
+    };
+    return autoCompleteMap[key] || "off";
+  };
+
+  useEffect(() => {
+    setAddress(value || {});
+  }, [value]);
+
+  const addressFields = getAddressFields();
+
+  return (
+    <div className={builderMode ? "pointer-events-none" : ""}>
+      <Card className="border-0 p-0 shadow-none">
+        <CardContent className="p-0">
+          <div className="flex flex-col gap-3">
+            {addressFields.map(renderAddressField)}
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import { ChevronRight } from "lucide-react";
-import React from "react";
 
 import { Button } from "@/components/ui/button";
 
@@ -26,7 +25,7 @@ export function FormActions({
       ) : (
         <Button className="flex items-center gap-2" onClick={onNextStep}>
           Continue to Next Step
-          <ChevronRight className="h-4 w-4" />
+          <ChevronRight className="size-4" />
         </Button>
       )}
     </div>

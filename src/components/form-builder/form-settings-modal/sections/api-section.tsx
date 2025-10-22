@@ -9,23 +9,23 @@ import {
   Key,
   RefreshCw,
 } from "lucide-react";
-import { useState } from "react";
-import { FaQuestion } from "react-icons/fa6";
+import { useEffect, useRef, useState } from "react";
 import { getAllFields } from "@/components/form-builder/form-builder/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Switch } from "@/components/ui/switch";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { toast } from "@/hooks/use-toast";
+import { formsDb } from "@/lib/database";
 import {
   generateFormApiKey,
   revokeFormApiKey,
@@ -43,20 +43,45 @@ export function ApiSection({
   const [isGenerating, setIsGenerating] = useState(false);
   const [isRevoking, setIsRevoking] = useState(false);
   const [showCodeGenerator, setShowCodeGenerator] = useState(false);
+  const [draftEnabled, setDraftEnabled] = useState<boolean>(
+    !!localSettings.api?.enabled
+  );
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [hasChanges, setHasChanges] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   const apiSettings = localSettings.api || {};
 
   const hasApiKey = !!apiSettings.apiKey;
 
-  const handleToggleApi = async (enabled: boolean) => {
-    if (!formId) return;
+  const onToggleEnabled = (enabled: boolean) => {
+    setDraftEnabled(enabled);
+    setSaved(false);
+    setHasChanges(true);
+  };
 
+  const resetChanges = () => {
+    setDraftEnabled(!!localSettings.api?.enabled);
+    setHasChanges(false);
+  };
+
+  const saveChanges = async () => {
+    if (!formId) {
+      toast.error("Form ID is required to save settings");
+      return;
+    }
+    setSaving(true);
     try {
-      await toggleFormApiEnabled(formId, enabled);
-      updateApi({ enabled });
-      toast.success(enabled ? "API support enabled" : "API support disabled");
+      await toggleFormApiEnabled(formId, draftEnabled);
+      updateApi({ enabled: draftEnabled });
+      setSaved(true);
+      setHasChanges(false);
+      toast.success("API settings saved successfully");
     } catch (error) {
-      toast.error("Failed to update API settings");
+      toast.error("Failed to save API settings");
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -67,7 +92,21 @@ export function ApiSection({
     try {
       const result = await generateFormApiKey(formId);
       if (result.success && result.apiKey) {
+        const newSchema = {
+          ...schema,
+          settings: {
+            ...schema?.settings,
+            api: {
+              ...(schema?.settings?.api || {}),
+              apiKey: result.apiKey,
+              enabled: true,
+            },
+          },
+        };
+        await formsDb.updateForm(formId, { schema: newSchema as any });
         updateApi({ apiKey: result.apiKey, enabled: true });
+        setDraftEnabled(true);
+        setSaved(true);
         toast.success("API key generated successfully");
       } else {
         toast.error(result.error || "Failed to generate API key");
@@ -86,7 +125,22 @@ export function ApiSection({
     try {
       const result = await revokeFormApiKey(formId);
       if (result.success) {
+        // Persist removal and disable in schema
+        const newSchema = {
+          ...schema,
+          settings: {
+            ...schema?.settings,
+            api: {
+              ...(schema?.settings?.api || {}),
+              apiKey: undefined,
+              enabled: false,
+            },
+          },
+        };
+        await formsDb.updateForm(formId, { schema: newSchema as any });
         updateApi({ apiKey: undefined, enabled: false });
+        setDraftEnabled(false);
+        setSaved(true);
         toast.success("API key revoked successfully");
       } else {
         toast.error(result.error || "Failed to revoke API key");
@@ -119,7 +173,6 @@ export function ApiSection({
     const endpoint = `${window.location.origin}/api/forms/${formId}/api-submit`;
     const apiKey = apiSettings.apiKey;
 
-    // Get actual form fields from the form schema
     const formFields = schema ? getAllFields(schema) : [];
     const sampleData: Record<string, any> = {};
 
@@ -241,44 +294,83 @@ print_r($result);
     toast.success(`${language} code example downloaded`);
   };
 
-  return (
-    <Card className="p-6">
-      <div className="mb-4 flex items-center gap-3">
-        <Key className="h-5 w-5 text-primary" />
-        <h3 className="font-medium text-lg">API Support</h3>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Badge className="cursor-help" size="sm" variant="secondary">
-                Beta <FaQuestion size={10} />
-              </Badge>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>
-                This feature is still under testing. You may encounter some
-                bugs.
-              </p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </div>
+  useEffect(() => {
+    if (saved) {
+      const announcement = document.createElement("div");
+      announcement.setAttribute("aria-live", "polite");
+      announcement.setAttribute("aria-atomic", "true");
+      announcement.className = "sr-only";
+      announcement.textContent = "API settings saved successfully";
+      document.body.appendChild(announcement);
 
-      <div className="flex flex-col gap-4">
-        <div className="flex items-center gap-2">
+      setTimeout(() => {
+        document.body.removeChild(announcement);
+      }, 1000);
+    }
+  }, [saved]);
+
+  useEffect(() => {
+    if (sectionRef.current) {
+      const firstInteractive = sectionRef.current.querySelector(
+        "input, textarea, select, button, [tabindex]:not([tabindex='-1'])"
+      ) as HTMLElement | null;
+      firstInteractive?.focus();
+    }
+  }, []);
+
+  return (
+    <Card
+      aria-labelledby="api-access-title"
+      className="shadow-none"
+      ref={sectionRef}
+      role="region"
+    >
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <div>
+            <CardTitle
+              className="flex items-center gap-2 text-lg tracking-tight"
+              id="api-access-title"
+            >
+              API Access{" "}
+              {hasChanges && (
+                <Badge className="gap-2" variant="secondary">
+                  <div className="size-2 rounded-full bg-orange-500" />
+                  Unsaved changes
+                </Badge>
+              )}
+              <Badge variant="secondary">Beta</Badge>
+            </CardTitle>
+            <CardDescription>
+              Enable external submissions via a secure API key.
+            </CardDescription>
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-6">
+        <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-1">
+            <Label className="font-medium text-sm" htmlFor="api-enabled">
+              Enable API support
+            </Label>
+            <p
+              className="text-muted-foreground text-xs"
+              id="api-enabled-description"
+            >
+              Toggle to allow submissions via the API endpoint
+            </p>
+          </div>
           <Switch
-            checked={apiSettings.enabled}
+            aria-describedby="api-enabled-description"
+            checked={draftEnabled}
             disabled={isGenerating || isRevoking}
             id="api-enabled"
-            onCheckedChange={handleToggleApi}
-            size="sm"
+            onCheckedChange={onToggleEnabled}
           />
-          <Label className="font-medium text-sm" htmlFor="api-enabled">
-            Enable API support
-          </Label>
         </div>
 
-        {apiSettings.enabled && (
-          <div className="flex flex-col gap-4 border-muted border-l-2 pl-6">
+        {draftEnabled && (
+          <div className="flex flex-col gap-6">
             {hasApiKey ? (
               <>
                 <div className="flex flex-col gap-2">
@@ -287,31 +379,40 @@ print_r($result);
                   </Label>
                   <div className="flex items-center gap-2">
                     <Input
-                      className="font-mono text-sm"
+                      aria-describedby="api-key-help"
+                      className="font-mono text-sm shadow-none"
                       id="api-key"
                       readOnly
                       type={showApiKey ? "text" : "password"}
                       value={apiSettings.apiKey || ""}
                     />
                     <Button
+                      aria-label={showApiKey ? "Hide API key" : "Show API key"}
                       onClick={() => setShowApiKey(!showApiKey)}
                       size="icon"
                       variant="outline"
                     >
                       {showApiKey ? (
-                        <EyeOff className="h-4 w-4" />
+                        <EyeOff className="size-4" />
                       ) : (
-                        <Eye className="h-4 w-4" />
+                        <Eye className="size-4" />
                       )}
                     </Button>
                     <Button
+                      aria-label="Copy API key"
                       onClick={handleCopyApiKey}
                       size="icon"
                       variant="outline"
                     >
-                      <Copy className="h-4 w-4" />
+                      <Copy className="size-4" />
                     </Button>
                   </div>
+                  <p
+                    className="text-muted-foreground text-xs"
+                    id="api-key-help"
+                  >
+                    Keep this key secret. Rotate it if you suspect exposure.
+                  </p>
                 </div>
 
                 <div className="flex flex-col gap-2">
@@ -320,58 +421,66 @@ print_r($result);
                   </Label>
                   <div className="flex items-center gap-2">
                     <Input
-                      className="font-mono text-sm"
+                      className="font-mono text-sm shadow-none"
                       id="api-endpoint"
                       readOnly
                       value={formId ? `/api/forms/${formId}/api-submit` : ""}
                     />
                     <Button
+                      aria-label="Copy API endpoint"
                       onClick={handleCopyEndpoint}
                       size="icon"
                       variant="outline"
                     >
-                      <Copy className="h-4 w-4" />
+                      <Copy className="size-4" />
                     </Button>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap gap-2">
                   <Button
-                    disabled={isRevoking}
-                    onClick={handleRevokeApiKey}
+                    aria-busy={isRevoking}
+                    disabled={isRevoking || isGenerating}
+                    onClick={async () => {
+                      if (!(isRevoking || isGenerating)) {
+                        await handleRevokeApiKey();
+                      }
+                    }}
                     size="sm"
                     variant="outline"
                   >
-                    {isRevoking ? (
-                      <RefreshCw className="mr-2 h-4 w-4 animate-spin" />
-                    ) : (
-                      <Key className="mr-2 h-4 w-4" />
-                    )}
-                    {isRevoking ? "Revoking..." : "Revoke Key"}
+                    <Key aria-hidden className="size-4" />
+                    <span>{isRevoking ? "Revoking..." : "Revoke key"}</span>
                   </Button>
                   <Button
-                    disabled={isGenerating}
-                    onClick={handleGenerateApiKey}
+                    aria-busy={isGenerating}
+                    disabled={isGenerating || isRevoking}
+                    onClick={async () => {
+                      if (!(isGenerating || isRevoking)) {
+                        await handleGenerateApiKey();
+                      }
+                    }}
                     size="sm"
                     variant="outline"
                   >
-                    {isGenerating ? (
-                      <RefreshCw className="mr-2 h-4 w-4 animate-spin" />
-                    ) : (
-                      <RefreshCw className="mr-2 h-4 w-4" />
-                    )}
-                    {isGenerating ? "Generating..." : "Regenerate Key"}
+                    <RefreshCw
+                      aria-hidden
+                      className={`size-4 transition-transform ${isGenerating ? "animate-spin" : ""}`}
+                    />
+                    <span>
+                      {isGenerating ? "Generating..." : "Regenerate key"}
+                    </span>
                   </Button>
-                </div>
-
-                <div className="flex items-center gap-2">
                   <Button
-                    onClick={() => setShowCodeGenerator(!showCodeGenerator)}
+                    aria-pressed={showCodeGenerator}
+                    onClick={() => setShowCodeGenerator((prev) => !prev)}
                     size="sm"
                     variant="outline"
                   >
-                    <Code className="mr-2 h-4 w-4" />
-                    {showCodeGenerator ? "Hide" : "Show"} Code Examples
+                    <Code aria-hidden className="size-4" />
+                    <span>
+                      {showCodeGenerator ? "Hide" : "Show"} code examples
+                    </span>
                   </Button>
                 </div>
 
@@ -388,6 +497,7 @@ print_r($result);
                             </Label>
                             <div className="flex items-center gap-2">
                               <Button
+                                aria-label={`Copy ${language} code`}
                                 onClick={() => {
                                   navigator.clipboard.writeText(code);
                                   toast.success(
@@ -397,23 +507,24 @@ print_r($result);
                                 size="sm"
                                 variant="outline"
                               >
-                                <Copy className="h-4 w-4" />
+                                <Copy className="size-4" />
                               </Button>
                               <Button
+                                aria-label={`Download ${language} code`}
                                 onClick={() =>
                                   handleDownloadCode(language, code)
                                 }
                                 size="sm"
                                 variant="outline"
                               >
-                                <Download className="h-4 w-4" />
+                                <Download className="size-4" />
                               </Button>
                             </div>
                           </div>
                           <div className="rounded-lg border bg-muted">
                             <ScrollArea className="h-48">
-                              <div className="p-4">
-                                <pre className="text-sm">
+                              <div className="p-4 font-mono">
+                                <pre className="font-mono text-sm">
                                   <code className="whitespace-pre-wrap break-words">
                                     {code}
                                   </code>
@@ -428,50 +539,87 @@ print_r($result);
                 )}
               </>
             ) : (
-              <div className="py-4 text-center">
+              <div className="rounded-lg border bg-muted/40 p-4 text-center">
                 <p className="mb-4 text-muted-foreground text-sm">
-                  Generate an API key to enable external form submissions
+                  Generate an API key to enable external form submissions.
                 </p>
-                <Button disabled={isGenerating} onClick={handleGenerateApiKey}>
-                  {isGenerating ? (
-                    <RefreshCw className="mr-2 h-4 w-4 animate-spin" />
-                  ) : (
-                    <Key className="mr-2 h-4 w-4" />
-                  )}
-                  {isGenerating ? "Generating..." : "Generate API Key"}
+                <Button
+                  disabled={isGenerating}
+                  loading={isGenerating}
+                  onClick={handleGenerateApiKey}
+                >
+                  {isGenerating ? <></> : <Key className="size-4" />}
+                  {isGenerating ? "Generating..." : "Generate API key"}
                 </Button>
               </div>
             )}
 
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
-                <Badge variant="secondary">Rate Limiting</Badge>
+                <Badge variant="secondary">Rate limiting</Badge>
                 <span className="text-muted-foreground text-sm">
-                  All form rate limiting settings apply to API submissions
+                  All form rate limiting settings apply to API submissions.
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <Badge variant="secondary">Profanity Filter</Badge>
+                <Badge variant="secondary">Profanity filter</Badge>
                 <span className="text-muted-foreground text-sm">
-                  Content filtering is applied to API submissions
+                  Content filtering is applied to API submissions.
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <Badge variant="secondary">Duplicate Prevention</Badge>
+                <Badge variant="secondary">Duplicate prevention</Badge>
                 <span className="text-muted-foreground text-sm">
-                  Duplicate submission detection works with API
+                  Duplicate submission detection works with API.
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <Badge variant="secondary">Response Limits</Badge>
+                <Badge variant="secondary">Response limits</Badge>
                 <span className="text-muted-foreground text-sm">
-                  Form response limits apply to API submissions
+                  Form response limits apply to API submissions.
                 </span>
               </div>
             </div>
           </div>
         )}
-      </div>
+
+        <div
+          aria-label="API settings actions"
+          className="flex items-center justify-between"
+          role="group"
+        >
+          <div className="flex items-center gap-2">
+            {hasChanges && (
+              <Button
+                aria-label="Reset API settings changes"
+                className="gap-2 text-muted-foreground hover:text-foreground"
+                onClick={resetChanges}
+                size="sm"
+                variant="ghost"
+              >
+                Reset
+              </Button>
+            )}
+          </div>
+          <div className="flex items-center gap-2">
+            <Button
+              aria-describedby="api-enabled-description"
+              aria-label="Save API settings"
+              disabled={saving || !hasChanges}
+              loading={saving}
+              onClick={saveChanges}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  saveChanges();
+                }
+              }}
+            >
+              Save
+            </Button>
+          </div>
+        </div>
+      </CardContent>
     </Card>
   );
 }

@@ -3,15 +3,15 @@ import { useEffect, useState } from "react";
 import { createHighlighter } from "shiki";
 import { Button } from "@/components/ui/button";
 import {
-  Modal,
-  ModalClose,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from "@/components/ui/modal";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import type { FormSchema } from "@/lib/ai-builder/types";
 
 import { CopyButton } from "./copy-button";
@@ -24,6 +24,7 @@ interface JsonModalProps {
 
 export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
   const [highlightedCode, setHighlightedCode] = useState<string>("");
+  const isLoading = !highlightedCode;
 
   useEffect(() => {
     if (!activeForm?.schema) return;
@@ -58,24 +59,37 @@ export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
   if (!activeForm?.schema) return null;
 
   return (
-    <Modal onOpenChange={onClose} open={isOpen}>
-      <ModalContent className="flex w-[95vw] max-w-lg flex-col gap-4">
-        <ModalHeader>
-          <ModalTitle>Form JSON Schema</ModalTitle>
-        </ModalHeader>
-        <ScrollArea className="h-[40rem] max-h-[60vh] min-h-[120px] w-full gap-4 rounded-card border bg-muted p-4 text-xs">
-          <div
-            className="shiki-container text-xs [&_pre]:m-0 [&_pre]:whitespace-pre-wrap [&_pre]:break-words [&_pre]:bg-transparent [&_pre]:p-0"
-            dangerouslySetInnerHTML={{ __html: highlightedCode }}
-          />
-        </ScrollArea>
-        <ModalFooter className="flex gap-2">
-          <CopyButton schema={activeForm.schema} />
-          <ModalClose asChild>
-            <Button variant="outline">Close</Button>
-          </ModalClose>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+    <Dialog onOpenChange={onClose} open={isOpen}>
+      <DialogContent className="sm:max-w-3xl">
+        <DialogHeader>
+          <DialogTitle>Form JSON Schema</DialogTitle>
+          <DialogDescription className="sr-only">
+            View or copy the generated JSON schema for your form
+          </DialogDescription>
+        </DialogHeader>
+
+        <div className="flex flex-col gap-4">
+          <ScrollArea className="h-[60vh] min-h-[240px] rounded-xl border bg-muted/50 p-4">
+            {isLoading ? (
+              <div className="text-xs">
+                <Skeleton className="h-64 w-full" />
+              </div>
+            ) : (
+              <div
+                className="text-xs [&_pre]:m-0 [&_pre]:whitespace-pre-wrap [&_pre]:break-words [&_pre]:bg-transparent [&_pre]:p-0"
+                dangerouslySetInnerHTML={{ __html: highlightedCode }}
+              />
+            )}
+          </ScrollArea>
+
+          <div className="flex justify-end gap-2">
+            <CopyButton schema={activeForm.schema} />
+            <Button onClick={onClose} variant="outline">
+              Close
+            </Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }

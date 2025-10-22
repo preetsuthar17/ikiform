@@ -1,13 +1,5 @@
-import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
-import {
-  ChevronDown,
-  EyeOff,
-  GripVertical,
-  Lock,
-  Plus,
-  Trash2,
-} from "lucide-react";
-import React from "react";
+import { Plus, Trash2 } from "lucide-react";
+import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -18,7 +10,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { PALETTE_DRAG_TYPE } from "../../field-palette/components/FieldItem";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { FIELD_TYPES } from "../../field-palette/constants";
 
 import { FormFieldRenderer } from "../../form-field-renderer";
@@ -30,7 +26,6 @@ export function FormFieldsContainer({
   selectedFieldId,
   formData,
   onFieldSelect,
-  onFieldsReorder,
   onFieldDelete,
   onFieldValueChange,
   isMultiStep,
@@ -38,44 +33,38 @@ export function FormFieldsContainer({
   fieldVisibility,
   showLogicCues = false,
 }: FormFieldsContainerProps & { showLogicCues?: boolean }) {
-  const handleDragEnd = (result: any) => {
-    if (!result.destination) return;
-
-    if (
-      result.type === PALETTE_DRAG_TYPE ||
-      result.source.droppableId === "palette-droppable" ||
-      (typeof result.source.droppableId === "string" &&
-        result.source.droppableId.startsWith("palette-"))
-    ) {
-      const type = result.draggableId.replace("palette-", "");
-      if (onAddField) onAddField(type);
-      return;
-    }
-
-    const items = [...fields];
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    onFieldsReorder(items);
-  };
+  const itemRefs = React.useRef<Record<string, HTMLDivElement | null>>({});
+  const addButtonRef = React.useRef<HTMLButtonElement | null>(null);
 
   const AddFieldButton = () => (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
+          aria-label="Add field to form"
           className="h-42 w-full border-2 border-dashed transition-colors hover:border-primary/50 hover:bg-accent/10"
-          style={{
-            borderRadius: "1.2rem",
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+            }
           }}
+          ref={addButtonRef}
           variant="outline"
         >
-          <Plus className="h-4 w-4" />
+          <Plus aria-hidden="true" className="size-4" />
           Add Field
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="center" className="h-42 w-48">
+      <DropdownMenuContent
+        align="center"
+        className="h-42 w-48"
+        style={{
+          overscrollBehavior: "contain",
+        }}
+      >
         <ScrollArea type="always">
           {FIELD_TYPES.map((fieldType: { type: string; label: string }) => (
             <DropdownMenuItem
+              aria-label={`Add ${fieldType.label} field`}
               className="cursor-pointer"
               key={fieldType.type}
               onClick={() =>
@@ -83,6 +72,14 @@ export function FormFieldsContainer({
                   fieldType.type as (typeof FIELD_TYPES)[number]["type"]
                 )
               }
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onAddField?.(
+                    fieldType.type as (typeof FIELD_TYPES)[number]["type"]
+                  );
+                }
+              }}
             >
               {fieldType.label}
             </DropdownMenuItem>
@@ -100,9 +97,16 @@ export function FormFieldsContainer({
 
   if (renderFields.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center gap-4 py-16 text-center">
-        <div className="flex h-16 w-16 items-center justify-center rounded-card bg-accent">
-          <div className="h-8 w-8 rounded-card bg-muted" />
+      <section
+        aria-labelledby="form-fields-empty-heading"
+        className="flex flex-col items-center justify-center gap-4 py-16 text-center"
+        role="region"
+      >
+        <h2 className="sr-only" id="form-fields-empty-heading">
+          Form fields
+        </h2>
+        <div className="flex size-16 items-center justify-center rounded-2xl bg-accent">
+          <div aria-hidden="true" className="size-8 rounded-2xl bg-muted" />
         </div>
         <p className="font-medium text-foreground text-lg">
           {isMultiStep ? "No fields in this step" : "No fields added yet"}
@@ -113,120 +117,161 @@ export function FormFieldsContainer({
             : "Add fields from the left panel to start building your form"}
         </p>
         {onAddField && <AddFieldButton />}
-      </div>
+      </section>
     );
   }
 
   return (
-    <DragDropContext onDragEnd={handleDragEnd}>
-      <Droppable droppableId="form-fields">
-        {(provided) => (
-          <div
-            {...provided.droppableProps}
-            className="flex flex-col gap-4"
-            ref={provided.innerRef}
-          >
-            {renderFields.map((field, index) => {
-              const isHidden = fieldVisibility?.[field.id]?.visible === false;
-              const isDisabled = fieldVisibility?.[field.id]?.disabled;
-              return (
-                <Draggable draggableId={field.id} index={index} key={field.id}>
-                  {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      className="group relative"
-                      onKeyDown={(e) => {
-                        if (
-                          (e.key === "Enter" ||
-                            e.key === "Backspace" ||
-                            e.key === "Delete") &&
-                          (e.target instanceof HTMLInputElement ||
-                            e.target instanceof HTMLTextAreaElement)
-                        ) {
-                          e.stopPropagation();
-                        }
-                      }}
-                    >
-                      <Card
-                        className={`rounded-card border bg-card p-4 transition-all duration-200 ${
-                          snapshot.isDragging ? "ring-2 ring-ring/20" : ""
-                        } ${
-                          selectedFieldId === field.id
-                            ? "border-primary bg-accent/10 ring-2 ring-primary/20"
-                            : "border-border hover:bg-accent/5"
-                        } ${
-                          showLogicCues && isHidden
-                            ? "pointer-events-none relative border-2 border-muted border-dashed opacity-50"
-                            : showLogicCues && isDisabled
-                              ? "relative opacity-60"
-                              : ""
-                        }`}
-                        onClick={() =>
-                          onFieldSelect(
-                            selectedFieldId === field.id ? null : field.id
-                          )
-                        }
-                      >
-                        {}
-                        {showLogicCues && (isHidden || isDisabled) && (
-                          <div className="absolute top-2 left-2 z-20 flex items-center gap-2">
-                            {isHidden && (
-                              <span className="flex items-center gap-1 rounded-ele border border-muted/40 bg-muted px-2 py-0.5 text-muted-foreground text-xs">
-                                <EyeOff className="mr-1 h-4 w-4" /> Hidden
-                              </span>
-                            )}
-                            {!isHidden && isDisabled && (
-                              <span className="flex items-center gap-1 rounded-ele border border-muted/40 bg-muted px-2 py-0.5 text-muted-foreground text-xs">
-                                <Lock className="mr-1 h-4 w-4" /> Disabled
-                              </span>
-                            )}
-                          </div>
-                        )}
-                        <div className="absolute top-2 right-2 z-10 flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-                          <Button
-                            className="h-8 w-8 p-0 text-destructive hover:bg-destructive hover:text-destructive-foreground"
-                            onClick={(e) => {
+    <section
+      aria-labelledby="form-fields-heading"
+      className="flex flex-col gap-4"
+      role="region"
+    >
+      <h2 className="sr-only" id="form-fields-heading">
+        Form fields
+      </h2>
+      <div aria-live="polite" className="sr-only">
+        {renderFields.length} {renderFields.length === 1 ? "field" : "fields"}
+      </div>
+      <ul className="flex flex-col gap-4" role="list">
+        {renderFields.map((field, index) => {
+          const isHidden = fieldVisibility?.[field.id]?.visible === false;
+          const isDisabled = fieldVisibility?.[field.id]?.disabled;
+          return (
+            <li className="group relative" key={field.id} role="listitem">
+              <div
+                aria-selected={selectedFieldId === field.id}
+                className="group relative"
+                onKeyDown={(e) => {
+                  if (
+                    (e.key === "Enter" ||
+                      e.key === "Backspace" ||
+                      e.key === "Delete") &&
+                    (e.target instanceof HTMLInputElement ||
+                      e.target instanceof HTMLTextAreaElement)
+                  ) {
+                    e.stopPropagation();
+                  }
+                  if (e.key === "Delete" || e.key === "Backspace") {
+                    e.preventDefault();
+                    const next =
+                      renderFields[index + 1]?.id ??
+                      renderFields[index - 1]?.id;
+                    onFieldDelete(field.id);
+                    requestAnimationFrame(() => {
+                      if (next && itemRefs.current[next]) {
+                        itemRefs.current[next]?.focus();
+                      } else {
+                        addButtonRef.current?.focus();
+                      }
+                    });
+                  }
+                }}
+              >
+                <Card
+                  aria-describedby={
+                    showLogicCues && (isHidden || isDisabled)
+                      ? `${field.id}-state`
+                      : undefined
+                  }
+                  aria-label={`${field.type} field`}
+                  className={`p-4 shadow-none transition-all duration-200 ${
+                    selectedFieldId === field.id
+                      ? "border-primary bg-accent/10 ring-2 ring-primary/20"
+                      : "border-border hover:bg-accent/5"
+                  } ${
+                    showLogicCues && isHidden
+                      ? "pointer-events-none relative border-2 border-muted border-dashed opacity-50"
+                      : showLogicCues && isDisabled
+                        ? "relative opacity-60"
+                        : ""
+                  }`}
+                  onClick={() =>
+                    onFieldSelect(
+                      selectedFieldId === field.id ? null : field.id
+                    )
+                  }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      onFieldSelect(
+                        selectedFieldId === field.id ? null : field.id
+                      );
+                    }
+                  }}
+                  ref={(el) => {
+                    itemRefs.current[field.id] = el as HTMLDivElement | null;
+                  }}
+                  role="button"
+                  tabIndex={0}
+                >
+                  <div className="absolute top-2 right-2 z-10 flex gap-1 opacity-100 transition-opacity group-hover:opacity-100 sm:opacity-0 sm:group-hover:opacity-100">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          aria-label={`Delete ${field.type} field`}
+                          className="text-destructive hover:bg-destructive/10 hover:text-destructive-foreground"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            const next =
+                              renderFields[index + 1]?.id ??
+                              renderFields[index - 1]?.id;
+                            onFieldDelete(field.id);
+                            requestAnimationFrame(() => {
+                              if (next && itemRefs.current[next]) {
+                                itemRefs.current[next]?.focus();
+                              } else {
+                                addButtonRef.current?.focus();
+                              }
+                            });
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
                               e.stopPropagation();
+                              const next =
+                                renderFields[index + 1]?.id ??
+                                renderFields[index - 1]?.id;
                               onFieldDelete(field.id);
-                            }}
-                            size="sm"
-                            variant="ghost"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                          <div
-                            {...provided.dragHandleProps}
-                            className="flex h-8 w-8 cursor-grab items-center justify-center rounded-ele transition-colors hover:bg-muted/20 active:cursor-grabbing"
-                          >
-                            <GripVertical className="h-4 w-4 text-muted-foreground" />
-                          </div>
-                        </div>
-                        <FormFieldRenderer
-                          builderMode={true}
-                          disabled={fieldVisibility?.[field.id]?.disabled}
-                          field={field}
-                          onChange={(value) =>
-                            onFieldValueChange(field.id, value)
-                          }
-                          value={
-                            typeof formData[field.id] === "object"
-                              ? (formData[field.id].text ??
-                                JSON.stringify(formData[field.id]))
-                              : formData[field.id]
-                          }
-                        />
-                      </Card>
-                    </div>
-                  )}
-                </Draggable>
-              );
-            })}
-            {provided.placeholder}
-            {onAddField && <AddFieldButton />}
-          </div>
-        )}
-      </Droppable>
-    </DragDropContext>
+                              requestAnimationFrame(() => {
+                                if (next && itemRefs.current[next]) {
+                                  itemRefs.current[next]?.focus();
+                                } else {
+                                  addButtonRef.current?.focus();
+                                }
+                              });
+                            }
+                          }}
+                          size="icon-sm"
+                          variant="ghost"
+                        >
+                          <Trash2 aria-hidden="true" className="size-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent align="center" side="top">
+                        Delete field
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                  <FormFieldRenderer
+                    builderMode={true}
+                    disabled={fieldVisibility?.[field.id]?.disabled}
+                    field={field}
+                    onChange={(value) => onFieldValueChange(field.id, value)}
+                    value={
+                      typeof formData[field.id] === "object"
+                        ? (formData[field.id].text ??
+                          JSON.stringify(formData[field.id]))
+                        : formData[field.id]
+                    }
+                  />
+                </Card>
+              </div>
+            </li>
+          );
+        })}
+        {onAddField && <AddFieldButton />}
+      </ul>
+    </section>
   );
 }

@@ -9,7 +9,6 @@ import {
   Image as ImageIcon,
   Loader,
   Music,
-  Trash2,
   UploadCloud,
   Video,
   X,
@@ -37,17 +36,14 @@ const fileUploadVariants = cva(
     "group",
     "relative",
     "w-full",
-    "rounded-ele",
+    "rounded-xl",
     "border",
-    "transition-all",
-    "duration-300",
-    "bg-background",
+    "transition-colors",
+    "duration-200",
     "focus-visible:outline-none",
     "focus-visible:ring-2",
     "focus-visible:ring-primary",
-    "focus-visible:",
     "focus-visible:border-primary",
-    "hover:",
     "hover:border-primary/60",
     "active:shadow",
     "disabled:pointer-events-none",
@@ -56,12 +52,10 @@ const fileUploadVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "focus-visible: border-border bg-background hover:border-primary/40 focus-visible:ring-primary",
+        default: "border-border bg-transparent hover:border-primary/40",
         dashed:
-          "focus-visible: border-border border-dashed bg-background hover:border-primary/60 hover:bg-accent/60 focus-visible:ring-primary",
-        ghost:
-          "focus-visible: border-transparent bg-accent/40 hover:bg-accent/70 focus-visible:ring-primary",
+          "border-border border-dashed bg-transparent hover:border-primary/60 hover:bg-accent/60",
+        ghost: "border-transparent bg-transparent hover:bg-accent/70",
       },
       size: {
         sm: "min-h-[120px] p-4",
@@ -71,7 +65,7 @@ const fileUploadVariants = cva(
       state: {
         idle: "",
         dragging:
-          "scale-[1.03] border-primary bg-primary/10 ring-2 ring-primary",
+          "scale-[1.03] border-primary bg-transparent ring-2 ring-primary",
         disabled: "pointer-events-none opacity-50",
       },
     },
@@ -84,11 +78,11 @@ const fileUploadVariants = cva(
 );
 
 const fileItemVariants = cva(
-  "flex items-center gap-3 rounded-ele p-4 transition-all duration-200",
+  "flex items-center gap-3 rounded-xl p-4 transition-all duration-200",
   {
     variants: {
       variant: {
-        default: "border border-border bg-card",
+        default: "border border-border bg-transparent",
         ghost: "bg-accent hover:bg-accent/80",
       },
     },
@@ -272,7 +266,6 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
 
     return (
       <div className="flex w-full flex-col gap-4" ref={ref} {...props}>
-        {}
         <div
           aria-label="Upload files"
           className={cn(
@@ -311,7 +304,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
             >
               <UploadCloud
                 className={cn(
-                  "h-12 w-12 transition-colors",
+                  "size-12 transition-colors",
                   isDragging
                     ? "text-primary"
                     : "text-muted-foreground group-hover:text-foreground"
@@ -359,7 +352,6 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
           />
         </div>
 
-        {}
         {files.length > 0 && (
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
@@ -376,11 +368,11 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
               )}{" "}
             </div>
 
-            <div className="flex flex-col gap-2">
+            <div aria-live="polite" className="flex flex-col gap-2">
               <AnimatePresence>
                 <ScrollArea
                   className={cn(
-                    "w-full rounded-ele",
+                    "w-full rounded-xl",
                     files.length > 3 ? "h-64" : "h-auto"
                   )}
                 >
@@ -397,27 +389,25 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                           initial={{ opacity: 0, y: 20 }}
                           key={file.id}
                         >
-                          {}
                           <div className="relative flex-shrink-0">
                             {showPreview && file.preview ? (
                               <img
                                 alt={file.name}
-                                className="h-10 w-10 rounded-ele border border-border object-cover"
+                                className="size-10 rounded-xl border border-border object-cover"
                                 src={file.preview}
                               />
                             ) : (
-                              <div className="flex h-10 w-10 items-center justify-center rounded-ele bg-accent">
-                                <IconComponent className="h-5 w-5 text-muted-foreground" />
+                              <div className="flex size-10 items-center justify-center rounded-xl bg-accent">
+                                <IconComponent className="size-5 text-muted-foreground" />
                               </div>
                             )}
                             {file.status === "completed" && (
                               <div className="-top-1 -right-1 absolute">
-                                <CheckCircle className="h-4 w-4 rounded-card bg-background text-primary" />
+                                <CheckCircle className="size-4 rounded-2xl bg-background text-primary" />
                               </div>
                             )}
                           </div>
 
-                          {}
                           <div className="flex w-full min-w-0 flex-1 flex-col gap-1">
                             <div className="flex items-center justify-between gap-2">
                               <p className="truncate font-medium text-foreground text-sm">
@@ -425,10 +415,10 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                               </p>
                               <button
                                 aria-label={`Remove ${file.name}`}
-                                className="flex-shrink-0 rounded-ele p-1 transition-colors hover:bg-accent"
+                                className="flex-shrink-0 rounded-xl p-1 transition-colors hover:bg-accent"
                                 onClick={() => removeFile(file.id)}
                               >
-                                <X className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                                <X className="size-4 text-muted-foreground hover:text-destructive" />
                               </button>
                             </div>
 
@@ -442,28 +432,23 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                                     <span className="text-muted-foreground text-xs">
                                       {Math.round(file.progress)}%
                                     </span>
-                                    <Loader className="h-3 w-3 animate-spin text-primary" />
+                                    <Loader className="size-3 animate-spin text-primary" />
                                   </>
                                 )}
                                 {file.status === "completed" && (
-                                  <Badge size="sm" variant="secondary">
-                                    Uploaded
-                                  </Badge>
+                                  <Badge variant="secondary">Uploaded</Badge>
                                 )}
                                 {file.status === "error" && (
-                                  <Badge size="sm" variant="destructive">
-                                    Error
-                                  </Badge>
+                                  <Badge variant="destructive">Error</Badge>
                                 )}
                               </div>
                             </div>
 
-                            {}
                             {file.status === "uploading" && (
-                              <div className="h-1.5 w-full overflow-hidden rounded-card bg-accent">
+                              <div className="h-1.5 w-full overflow-hidden rounded-2xl bg-accent">
                                 <motion.div
                                   animate={{ width: `${file.progress}%` }}
-                                  className="h-full rounded-card bg-primary"
+                                  className="h-full rounded-2xl bg-primary"
                                   initial={{ width: 0 }}
                                   transition={{ duration: 0.3 }}
                                 />
