@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     // Calculate the date 14 days ago
     const fourteenDaysAgo = new Date();
     fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14);
-    
+
     // Update users who were created 14+ days ago and still have free trial
     const { data, error } = await supabase
       .from("users")
