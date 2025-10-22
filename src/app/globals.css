@@ -118,7 +118,6 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-
 @keyframes shimmer {
   0% {
     transform: translateX(-100%);

@@ -365,8 +365,8 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
           <InfoCards data={analyticsData} form={form} formatDate={formatDate} />
 
           {/* Recent Submissions */}
-          <Card>
-            <CardHeader>
+          <Card className="p-4 shadow-none">
+            <CardHeader className="p-0">
               <div className="flex items-center justify-between">
                 <CardTitle className="flex items-center gap-2">
                   <FileText className="size-5" />
@@ -379,7 +379,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                 </Button>
               </div>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-0">
               {submissions.length === 0 ? (
                 <div className="flex flex-col items-center gap-4 py-8">
                   <div className="gradient-bg flex size-16 items-center justify-center rounded-2xl">
