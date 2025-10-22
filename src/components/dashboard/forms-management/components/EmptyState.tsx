@@ -39,7 +39,7 @@ export function EmptyState({
           <DialogTrigger asChild>
             <Button
               aria-label="Create your first form"
-            className="flex h-10 w-full items-center gap-2 whitespace-nowrap font-medium"
+              className="flex h-10 w-full items-center gap-2 whitespace-nowrap font-medium"
               onClick={onCreateForm}
             >
               <Plus aria-hidden="true" className="size-5" />
