@@ -15,7 +15,18 @@ export async function GET(request: NextRequest) {
     const fourteenDaysAgo = new Date();
     fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14);
 
-    // Update users who were created 14+ days ago and still have free trial
+    // First, let's check what users exist with the criteria
+    const { data: debugUsers } = await supabase
+      .from("users")
+      .select("uid, email, name, has_premium, has_free_trial, created_at")
+      .eq("has_premium", true)
+      .eq("has_free_trial", true);
+
+    console.log(`Found ${debugUsers?.length || 0} users with has_premium=true and has_free_trial=true`);
+    console.log("Debug users:", debugUsers);
+    console.log("14 days ago threshold:", fourteenDaysAgo.toISOString());
+
+    // Update users who were created 14+ days ago and have both has_premium=true and has_free_trial=true
     const { data, error } = await supabase
       .from("users")
       .update({
@@ -23,6 +34,7 @@ export async function GET(request: NextRequest) {
         has_free_trial: false,
         updated_at: new Date().toISOString(),
       })
+      .eq("has_premium", true)
       .eq("has_free_trial", true)
       .lte("created_at", fourteenDaysAgo.toISOString())
       .select("uid, email, name");
