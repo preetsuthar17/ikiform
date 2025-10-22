@@ -72,11 +72,11 @@ export function FormsList({
           // Border logic defaults
           if (forms.length === 1) {
             // Single card: keep full border radius and all borders
-            cardClass += " rounded-xl";
+            cardClass += " rounded-lg";
           } else if (idx === 0) {
-            cardClass += " rounded-t-xl rounded-b-none border-b-0";
+            cardClass += " rounded-t-lg rounded-b-none border-b-0";
           } else if (idx === forms.length - 1) {
-            cardClass += " rounded-b-xl rounded-t-none border-b";
+            cardClass += " rounded-b-lg rounded-t-none border-b";
           } else {
             cardClass += " rounded-none border-b-0";
           }

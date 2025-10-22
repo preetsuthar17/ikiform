@@ -49,7 +49,7 @@ export function FormsSearch({
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button className="h-10 shrink-0" variant="outline">
+            <Button className="h-10 shrink-0 bg-card" variant="outline">
               <Filter className="size-4" />
               {hasActiveFilters && (
                 <Badge className="h-5 px-1.5 text-xs" variant="secondary">
@@ -64,7 +64,7 @@ export function FormsSearch({
               )}
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-min p-4 shadow-xs">
+          <DropdownMenuContent align="end" className="w-min p-2 shadow-xs">
             <div className="flex flex-col gap-2">
               {/* Status Filter */}
               <div className="flex flex-col gap-2">
