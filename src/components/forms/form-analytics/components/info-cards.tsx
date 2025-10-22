@@ -12,7 +12,7 @@ export const InfoCards: React.FC<InfoCardsProps> = ({
   <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
     <Card className="grow gap-4 border-border bg-card p-4 shadow-none">
       <CardHeader className="flex flex-row items-center gap-4 p-0">
-        <div aria-hidden="true" className="rounded-2xl bg-primary/10 p-3">
+        <div aria-hidden="true" className="rounded-md bg-primary/10 p-3">
           <Calendar className="size-6 text-primary" />
         </div>
         <CardTitle className="font-medium text-base text-muted-foreground">
@@ -38,7 +38,7 @@ export const InfoCards: React.FC<InfoCardsProps> = ({
 
     <Card className="grow gap-4 border-border bg-card p-4 shadow-none">
       <CardHeader className="flex flex-row items-center gap-4 p-0">
-        <div aria-hidden="true" className="rounded-2xl bg-primary/10 p-3">
+        <div aria-hidden="true" className="rounded-md bg-primary/10 p-3">
           <BarChart3 className="size-6 text-primary" />
         </div>
         <CardTitle className="font-medium text-base text-muted-foreground">
@@ -71,7 +71,7 @@ export const InfoCards: React.FC<InfoCardsProps> = ({
 
     <Card className="grow gap-4 border-border bg-card p-4 shadow-none">
       <CardHeader className="flex flex-row items-center gap-4 p-0">
-        <div aria-hidden="true" className="rounded-2xl bg-primary/10 p-3">
+        <div aria-hidden="true" className="rounded-md bg-primary/10 p-3">
           <TrendingUp className="size-6 text-primary" />
         </div>
         <CardTitle className="font-medium text-base text-muted-foreground">
