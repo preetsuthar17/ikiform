@@ -3,11 +3,10 @@ import "../globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Enterprise-level forms with sensible pricing",
-    template: "%s — Ikiform",
+    default: "Build forms, collect responses & analyze data effortlessly.",
+    template: "Ikiform: %s",
   },
-  description:
-    "Create beautiful forms with Ikiform - An open-source alternative to Google Forms. Build surveys, collect responses, and analyze data effortlessly.",
+  description: "Build forms, collect responses & analyze data effortlessly.",
   applicationName: "Ikiform",
   authors: [{ name: "Preet Suthar", url: "https://preetsuthar.me" }],
   creator: "Ikiform",
@@ -27,8 +26,7 @@ export const metadata: Metadata = {
     url: "https://www.ikiform.com",
     siteName: "Ikiform",
     title: "Ikiform",
-    description:
-      "Create beautiful, interactive forms with Ikiform - An open-source alternative to Google Forms. Build surveys, collect responses, and analyze data effortlessly.",
+    description: "Build forms, collect responses & analyze data effortlessly.",
     images: [
       {
         url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
@@ -44,8 +42,7 @@ export const metadata: Metadata = {
     site: "@Ikiform",
     creator: "@Ikiform",
     title: "Ikiform",
-    description:
-      "Create beautiful, interactive forms with Ikiform - An open-source alternative to Google Forms.",
+    description: "Build forms, collect responses & analyze data effortlessly.",
     images: [
       "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
     ],

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: {
     default: "Terms of Service",
-    template: "%s — Ikiform",
+    template: "Ikiform: %s",
   },
   description:
     "Read the Terms of Service for Ikiform. Understand your rights and responsibilities when using our form builder platform.",
