@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     // Calculate the date 5 minutes ago (for testing)
     const fiveMinutesAgo = new Date();
     fiveMinutesAgo.setMinutes(fiveMinutesAgo.getMinutes() - 5);
-    
+
     // Update users who were created 5+ minutes ago and still have free trial
     const { data, error } = await supabase
       .from("users")
