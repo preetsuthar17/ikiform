@@ -206,11 +206,11 @@ export default function PricingClient({ products }: PricingClientProps) {
               </span>
             </Button>
           </Link>
-          {
-            plan.ctaLabel === "Start your 14-day free trial" && (
-              <span className="text-muted-foreground text-sm text-center flex items-center justify-center ">No credit card required</span>
-            )
-          }
+          {plan.ctaLabel === "Start your 14-day free trial" && (
+            <span className="flex items-center justify-center text-center text-muted-foreground text-sm">
+              No credit card required
+            </span>
+          )}
         </div>
       </article>
     );
