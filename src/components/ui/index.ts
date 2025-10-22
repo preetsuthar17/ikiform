@@ -26,7 +26,6 @@ export * from "./collapsible";
 export * from "./color-picker";
 export * from "./command";
 export * from "./command-menu";
-export * from "./date-picker";
 export * from "./dialog";
 export * from "./drawer";
 export * from "./dropdown-menu";

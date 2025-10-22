@@ -17,7 +17,7 @@ export function RadioFieldSettings({
   onUpdateSettings,
 }: FieldSettingsProps) {
   return (
-    <Card className="flex flex-col gap-4 rounded-2xl bg-background p-4">
+    <Card className="flex flex-col gap-4 p-4 shadow-none">
       <h3 className="font-medium text-card-foreground">Quiz Settings</h3>
 
       {/* Enable Quiz Mode */}
@@ -57,19 +57,25 @@ export function RadioFieldSettings({
                 <SelectValue placeholder="Select the correct answer" />
               </SelectTrigger>
               <SelectContent>
-                {(field.options || []).map((option, idx) => {
-                  const value =
-                    typeof option === "string" ? option : option.value;
-                  const label =
-                    typeof option === "string"
-                      ? option
-                      : option.label || option.value;
-                  return (
-                    <SelectItem key={idx} value={value}>
-                      {label}
-                    </SelectItem>
-                  );
-                })}
+                {(field.options || [])
+                  .filter((option) => {
+                    const value =
+                      typeof option === "string" ? option : option.value;
+                    return value && value.trim() !== "";
+                  })
+                  .map((option, idx) => {
+                    const value =
+                      typeof option === "string" ? option : option.value;
+                    const label =
+                      typeof option === "string"
+                        ? option
+                        : option.label || option.value;
+                    return (
+                      <SelectItem key={idx} value={value}>
+                        {label}
+                      </SelectItem>
+                    );
+                  })}
               </SelectContent>
             </Select>
           </div>

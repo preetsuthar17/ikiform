@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { createClient } from "@/utils/supabase/server";
 import { ClientAnnouncementForm } from "./client-announcement-form";
 
@@ -16,29 +15,16 @@ export default async function AdminPage() {
 
   return (
     <main className="mx-auto w-full max-w-4xl p-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>Admin</CardTitle>
-        </CardHeader>
-        <CardContent>
+      <Card className="p-4 shadow-none md:p-6">
+        <CardHeader className="p-0">
+          <CardTitle>Send Announcements</CardTitle>
           <p className="text-muted-foreground text-sm">
             Signed in as {user.email}
           </p>
-
-          <div className="mt-6">
-            <Tabs
-              items={[
-                { id: "announcements", label: "Announcements" },
-                { id: "updates", label: "Updates" },
-              ]}
-            />
-            <TabsContent
-              activeValue="announcements"
-              className="mt-4"
-              value="announcements"
-            >
-              <ClientAnnouncementForm />
-            </TabsContent>
+        </CardHeader>
+        <CardContent className="p-0">
+          <div>
+            <ClientAnnouncementForm />
           </div>
         </CardContent>
       </Card>

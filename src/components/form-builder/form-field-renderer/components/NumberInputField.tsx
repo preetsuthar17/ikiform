@@ -17,7 +17,7 @@ export function NumberInputField(props: BaseFieldProps) {
 
   const getNumberMinValue = () => field.validation?.min;
 
-  const getNumberStepValue = () => field.validation?.step || 1;
+  const getNumberStepValue = () => field.settings?.step || 1;
 
   const handleNumberInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;

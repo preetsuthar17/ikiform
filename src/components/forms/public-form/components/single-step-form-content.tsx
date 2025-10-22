@@ -159,7 +159,7 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
             style={getButtonStyles(true)}
             type="submit"
           >
-            {submitting ? "Submitting" : schema.settings.submitText || "Submit"}
+            {schema.settings.submitText || "Submit"}
           </Button>
         </div>
       </form>

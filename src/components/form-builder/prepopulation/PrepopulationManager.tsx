@@ -389,7 +389,7 @@ export function PrepopulationManager({
                     Track prepopulation success rates and performance
                   </p>
                 </div>
-                <Switch size="sm" />
+                <Switch />
               </div>
 
               <div className="flex items-center justify-between">
@@ -399,7 +399,7 @@ export function PrepopulationManager({
                     Improve performance by caching API data for 5 minutes
                   </p>
                 </div>
-                <Switch defaultChecked size="sm" />
+                <Switch defaultChecked />
               </div>
 
               <div className="flex items-center justify-between">
@@ -409,7 +409,7 @@ export function PrepopulationManager({
                     Require user consent for all prepopulation by default
                   </p>
                 </div>
-                <Switch size="sm" />
+                <Switch />
               </div>
 
               <div className="flex flex-col gap-2">

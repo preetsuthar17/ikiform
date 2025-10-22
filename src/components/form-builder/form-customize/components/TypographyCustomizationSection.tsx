@@ -34,7 +34,7 @@ export function TypographyCustomizationSection({
     const index = FONT_SIZE_OPTIONS.findIndex(
       (option) => option.value === size
     );
-    return index >= 0 ? index : 2; // Default to "base" (index 2)
+    return index >= 0 ? index : 1; // Default to "base" (index 2)
   };
 
   const getFontSizeFromSlider = (value: number) =>

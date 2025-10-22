@@ -219,13 +219,19 @@ export function QuizField({
               className={`rounded-lg border p-3 transition-colors ${getOptionStyling(optionValue)}`}
               key={index}
             >
-              <div className="flex items-center justify-between">
+              <div className="flex h-full items-center justify-start gap-2">
                 <RadioGroupItem
                   disabled={disabled || isLoading}
                   id={`${field.id}-${index}`}
                   value={optionValue}
                 />
-                <Label htmlFor={`${field.id}-${index}`}>{optionLabel}</Label>
+                <Label
+                  className="flex h-full w-full flex-1 items-center"
+                  htmlFor={`${field.id}-${index}`}
+                  style={{ height: "100%", width: "100%" }}
+                >
+                  {optionLabel}
+                </Label>
                 {getOptionIcon(optionValue)}
               </div>
             </div>

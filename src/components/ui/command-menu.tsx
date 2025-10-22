@@ -193,8 +193,8 @@ const CommandMenuContent = React.forwardRef<
 
               {showShortcut && (
                 <div className="absolute top-3 right-12 flex h-6.5 items-center justify-center gap-1">
-                  <Kbd size="xs">{getModifierKey().symbol}</Kbd>
-                  <Kbd size="xs">K</Kbd>
+                  <Kbd>{getModifierKey().symbol}</Kbd>
+                  <Kbd>K</Kbd>
                 </div>
               )}
             </CommandMenuProvider>
@@ -391,7 +391,7 @@ const CommandMenuItem = React.forwardRef<
                 {i > 0 && (
                   <span className="text-muted-foreground text-xs">+</span>
                 )}
-                <Kbd size="xs">
+                <Kbd>
                   {key === "cmd" || key === "⌘"
                     ? getModifierKey().symbol
                     : key === "shift"
