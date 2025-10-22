@@ -592,13 +592,21 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
         if (result.error === "Bot detected") {
           toast.error(result.message || "Bot detected. Access denied.");
         } else if (result.error === "Duplicate submission detected") {
-          toast.error(result.message || "You have already submitted this form.");
+          toast.error(
+            result.message || "You have already submitted this form."
+          );
         } else if (result.error === "Rate limit exceeded") {
-          toast.error(result.message || "Too many requests. Please try again later.");
+          toast.error(
+            result.message || "Too many requests. Please try again later."
+          );
         } else if (result.error === "Response limit reached") {
-          toast.error(result.message || "This form is no longer accepting responses.");
+          toast.error(
+            result.message || "This form is no longer accepting responses."
+          );
         } else if (result.error === "Content validation failed") {
-          toast.error(result.message || "Your submission contains inappropriate content.");
+          toast.error(
+            result.message || "Your submission contains inappropriate content."
+          );
         } else {
           toast.error(result.message || "Failed to submit form");
         }
