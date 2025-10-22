@@ -96,20 +96,22 @@ function HeroHeading() {
       className="text-center font-semibold text-4xl leading-tighter tracking-[-2px] md:text-5xl"
       id="home-hero-title"
     >
-      Forms users actually want to fill out.
+      Build forms, collect responses & analyze.
     </h1>
   );
 }
 
 function HeroSubheading() {
   return (
-    <h2 className="max-w-2xl font-normal text-base leading-loose opacity-70 md:text-lg">
-      Beautiful AI-powered forms—collect unlimited responses, with full control.
-    </h2>
+    <p
+      className="mx-auto max-w-2xl font-normal text-base leading-loose opacity-70 md:text-lg"
+      id="home-hero-desc"
+    >
+      The open-source forms platform for effortless data collection and
+      analysis.
+    </p>
   );
 }
-
-// Removed HeroAsciiOceanBackground
 
 function HeroCTAs() {
   return (
