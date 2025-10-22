@@ -236,25 +236,39 @@ export const useSingleStepForm = (
           }, 2000);
         }
       } else {
-        // Check if it's a duplicate submission error
-        if (result.error === "Duplicate submission detected") {
+        if (result.error === "Bot detected") {
+          toast.error(result.message || "Bot detected. Access denied.");
+        } else if (result.error === "Duplicate submission detected") {
           setDuplicateError({
             message: result.message || "You have already submitted this form.",
             timeRemaining: result.timeRemaining,
             attemptsRemaining: result.attemptsRemaining,
           });
+        } else if (result.error === "Rate limit exceeded") {
+          toast.error(result.message || "Too many requests. Please try again later.");
+        } else if (result.error === "Response limit reached") {
+          toast.error(result.message || "This form is no longer accepting responses.");
+        } else if (result.error === "Content validation failed") {
+          toast.error(result.message || "Your submission contains inappropriate content.");
         } else {
           toast.error(result.message || "Failed to submit form");
         }
       }
     } catch (error: any) {
-      // Check if it's a duplicate submission error
-      if (error?.error === "Duplicate submission detected") {
+      if (error?.error === "Bot detected") {
+        toast.error(error.message || "Bot detected. Access denied.");
+      } else if (error?.error === "Duplicate submission detected") {
         setDuplicateError({
           message: error.message || "You have already submitted this form.",
           timeRemaining: error.timeRemaining,
           attemptsRemaining: error.attemptsRemaining,
         });
+      } else if (error?.error === "Rate limit exceeded") {
+        toast.error(error.message || "Too many requests. Please try again later.");
+      } else if (error?.error === "Response limit reached") {
+        toast.error(error.message || "This form is no longer accepting responses.");
+      } else if (error?.error === "Content validation failed") {
+        toast.error(error.message || "Your submission contains inappropriate content.");
       } else {
         toast.error("Failed to submit form. Please try again.");
       }
