@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
             "";
           const { data: existingUser } = await supabase
             .from("users")
-            .select("email, has_premium, polar_customer_id")
+            .select("email, has_premium, has_free_trial, polar_customer_id")
             .eq("email", email)
             .single();
           const isNewUser = !existingUser;
@@ -45,7 +45,8 @@ export async function GET(request: NextRequest) {
               uid,
               name,
               email,
-              has_premium: false,
+              has_premium: true,
+              has_free_trial: true,
               polar_customer_id: null,
             };
           } else {
@@ -54,6 +55,7 @@ export async function GET(request: NextRequest) {
               name,
               email,
               has_premium: existingUser.has_premium,
+              has_free_trial: existingUser.has_free_trial,
               polar_customer_id: existingUser.polar_customer_id,
             };
           }
