@@ -164,12 +164,12 @@ export function QuizField({
           {field.label && (
             <div className="flex items-center gap-2">
               <HelpCircle className="size-4 text-primary" />
-              <label className="font-medium text-foreground text-sm">
+              <Label className="font-medium text-foreground text-sm">
                 {field.label}
                 {field.required && (
                   <span className="ml-1 text-destructive">*</span>
                 )}
-              </label>
+              </Label>
             </div>
           )}
           {field.description && (

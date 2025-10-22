@@ -14,6 +14,7 @@ import { AnimatePresence, motion } from "motion/react";
 import type { ReactNode } from "react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Card } from "@/components/ui/card";
+import { Label } from "../ui";
 
 interface FeatureCardProps {
   title: string;
@@ -143,12 +144,12 @@ const AiFormBuilderPreview = () => {
             initial={{ opacity: 0, translateY: 12 }}
             transition={{ delay: 0.1 }}
           >
-            <label
+            <Label
               className="mb-0.5 font-medium text-muted-foreground text-xs"
               htmlFor="aiform-demo-input"
             >
               What would you like to create?
-            </label>
+            </Label>
             <input
               aria-label="Demo form input"
               className="h-9 rounded-md border border-border bg-transparent px-3 text-foreground text-xs"

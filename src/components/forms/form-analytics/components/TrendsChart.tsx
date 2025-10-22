@@ -57,7 +57,7 @@ export const TrendsChart: React.FC<TrendsChartProps> = ({ trends }) => {
 
   return (
     <Card className="p-4 shadow-none md:p-6">
-      <CardHeader className="flex items-center justify-between space-y-0 p-0">
+      <CardHeader className="flex items-center justify-between p-0">
         <CardTitle className="font-semibold text-foreground text-lg">
           Submission Trends
         </CardTitle>

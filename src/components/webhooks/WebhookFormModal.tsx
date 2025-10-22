@@ -456,7 +456,7 @@ export function WebhookFormModal({
                     {EVENT_OPTIONS.map((opt) => {
                       const checked = events.includes(opt.value);
                       return (
-                        <label
+                        <Label
                           className="flex cursor-pointer items-center gap-3 rounded-md border p-3 hover:bg-accent/30"
                           key={opt.value}
                         >
@@ -477,7 +477,7 @@ export function WebhookFormModal({
                             }
                           />
                           <span className="text-sm">{opt.label}</span>
-                        </label>
+                        </Label>
                       );
                     })}
                   </fieldset>

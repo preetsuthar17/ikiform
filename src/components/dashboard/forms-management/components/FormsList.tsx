@@ -113,7 +113,6 @@ export function FormsList({
               key={form.id}
               onBlur={() => setHoveredIdx(null)}
               onClick={(e) => {
-                // Prevent card click if modal is open, just closed, or if click originated from modal
                 if (
                   shareModalOpen[form.id] ||
                   modalJustClosed[form.id] ||

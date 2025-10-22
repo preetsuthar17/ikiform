@@ -1,6 +1,7 @@
 "use client";
 
 import { Filter, Search, X } from "lucide-react";
+import { Label } from "@/components/ui";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -68,7 +69,7 @@ export function FormsSearch({
             <div className="flex flex-col gap-2">
               {/* Status Filter */}
               <div className="flex flex-col gap-2">
-                <label className="font-medium text-sm">Status</label>
+                <Label className="font-medium text-sm">Status</Label>
                 <div className="flex gap-2">
                   <Toggle
                     onPressedChange={() => onStatusFilterChange("all")}
@@ -94,7 +95,7 @@ export function FormsSearch({
 
               {/* Sort Filter */}
               <div className="flex flex-col gap-2">
-                <label className="font-medium text-sm">Sort By</label>
+                <Label className="font-medium text-sm">Sort By</Label>
                 <div className="flex flex-col gap-2">
                   <Toggle
                     className="w-full justify-start"

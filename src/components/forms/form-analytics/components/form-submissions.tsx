@@ -2,13 +2,13 @@
 
 import {
   ArrowLeft,
+  BarChart3,
   Calendar,
   Download,
   Eye,
   FileText,
   Globe,
   Search,
-  User,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -16,15 +16,7 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
 import {
   Table,
   TableBody,
@@ -35,6 +27,7 @@ import {
 } from "@/components/ui/table";
 import { toast } from "@/hooks/use-toast";
 import type { Form, FormSubmission } from "@/lib/database";
+import { SubmissionDetailsModal } from "./submission-details-modal";
 
 interface FormSubmissionsProps {
   form: Form;
@@ -128,6 +121,7 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSubmission, setSelectedSubmission] =
     useState<FormSubmission | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const filteredSubmissions = submissions.filter((submission) => {
     if (!searchTerm) return true;
@@ -148,64 +142,77 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-6 sm:px-6 lg:px-8">
         {/* Header Section */}
-        <Card className="mb-8">
-          <CardHeader className="pb-4">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-              <div className="flex flex-col gap-4">
-                <div className="flex items-center gap-3">
-                  <Button asChild size="sm" variant="ghost">
-                    <Link
-                      className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
-                      href={`/dashboard/forms/${form.id}/analytics`}
+        <Card
+          className="border-border p-4 shadow-none md:p-6"
+          id="form-submissions-header-card"
+        >
+          <CardHeader className="p-0">
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+              <div className="flex min-w-0 flex-col gap-4">
+                <Button
+                  aria-label="Back to Analytics"
+                  asChild
+                  className="w-fit"
+                  variant="outline"
+                >
+                  <Link
+                    className="inline-flex items-center gap-2"
+                    href={`/dashboard/forms/${form.id}/analytics`}
+                  >
+                    <ArrowLeft aria-hidden="true" className="size-4 shrink-0" />
+                    <span className="text-sm">Back to Analytics</span>
+                  </Link>
+                </Button>
+                <div className="flex min-w-0 flex-col gap-4">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <h1
+                      className="truncate font-bold text-2xl text-foreground sm:text-3xl"
+                      id="form-submissions-header"
                     >
-                      <ArrowLeft className="size-4" />
-                      Back to Analytics
-                    </Link>
-                  </Button>
-                </div>
-
-                <div className="flex flex-col gap-3">
-                  <div className="flex items-center gap-3">
-                    <h1 className="font-bold text-2xl text-foreground sm:text-3xl">
                       {form.title}
                     </h1>
                     <Badge
-                      className="gap-1.5"
+                      className="flex items-center gap-1.5"
                       variant={form.is_published ? "default" : "secondary"}
                     >
                       {form.is_published ? (
                         <>
-                          <Globe className="size-3" />
-                          Published
+                          <Globe aria-hidden="true" className="size-3" />
+                          <span className="sr-only">Published</span>
+                          <span aria-live="polite">Published</span>
                         </>
                       ) : (
                         <>
-                          <User className="size-3" />
-                          Draft
+                          <Eye aria-hidden="true" className="size-3" />
+                          <span className="sr-only">Draft</span>
+                          <span aria-live="polite">Draft</span>
                         </>
                       )}
                     </Badge>
                   </div>
-
                   <div className="flex items-center gap-2 text-muted-foreground">
-                    <FileText className="size-4" />
-                    <span className="text-sm">
-                      Form Submissions ({submissions.length})
+                    <FileText aria-hidden="true" className="size-4" />
+                    <span className="font-medium text-sm">
+                      Form Submissions&nbsp;({submissions.length})
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
+              {/* Right: Actions */}
+              <div
+                aria-label="Export Actions"
+                className="flex flex-wrap items-center gap-3 sm:gap-3"
+              >
                 <Button
                   disabled={submissions.length === 0}
                   onClick={() => exportToCSV(form, submissions)}
                   size="sm"
                   variant="outline"
                 >
-                  <Download className="mr-2 size-4" />
+                  <Download className="size-4" />
                   Export CSV
                 </Button>
                 <Button
@@ -214,8 +221,23 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
                   size="sm"
                   variant="outline"
                 >
-                  <Download className="mr-2 size-4" />
+                  <Download className="size-4" />
                   Export JSON
+                </Button>
+                <Button
+                  aria-label="View detailed analytics"
+                  asChild
+                  className="inline-flex items-center gap-2"
+                  size="sm"
+                  variant="default"
+                >
+                  <Link
+                    className="inline-flex items-center gap-2"
+                    href={`/dashboard/forms/${form.id}/analytics`}
+                  >
+                    <BarChart3 aria-hidden="true" className="size-4" />
+                    View Detailed Analytics
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -223,8 +245,8 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
         </Card>
 
         {/* Submissions Table */}
-        <Card>
-          <CardHeader>
+        <Card className="border-border p-4 shadow-none md:p-6">
+          <CardHeader className="p-0">
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2">
                 <FileText className="size-5" />
@@ -243,7 +265,7 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
               </div>
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-0">
             {filteredSubmissions.length === 0 ? (
               <div className="flex flex-col items-center gap-6 py-16">
                 <div className="gradient-bg flex size-24 items-center justify-center rounded-2xl">
@@ -294,98 +316,17 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
                           </Badge>
                         </TableCell>
                         <TableCell>
-                          <Dialog>
-                            <DialogTrigger asChild>
-                              <Button
-                                onClick={() =>
-                                  setSelectedSubmission(submission)
-                                }
-                                size="sm"
-                                variant="outline"
-                              >
-                                <Eye className="mr-2 size-4" />
-                                View
-                              </Button>
-                            </DialogTrigger>
-                            <DialogContent className="max-h-[80vh] max-w-4xl overflow-y-auto">
-                              <DialogHeader>
-                                <DialogTitle>
-                                  Submission Details - {submission.id.slice(-8)}
-                                </DialogTitle>
-                              </DialogHeader>
-                              <div className="space-y-6">
-                                <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                                  <div>
-                                    <label className="font-medium text-muted-foreground text-sm">
-                                      Submission ID
-                                    </label>
-                                    <p className="font-mono text-sm">
-                                      {submission.id}
-                                    </p>
-                                  </div>
-                                  <div>
-                                    <label className="font-medium text-muted-foreground text-sm">
-                                      Submitted At
-                                    </label>
-                                    <p className="text-sm">
-                                      {formatDate(submission.submitted_at)}
-                                    </p>
-                                  </div>
-                                  <div>
-                                    <label className="font-medium text-muted-foreground text-sm">
-                                      IP Address
-                                    </label>
-                                    <p className="font-mono text-sm">
-                                      {submission.ip_address || "N/A"}
-                                    </p>
-                                  </div>
-                                </div>
-
-                                <Separator />
-
-                                <div>
-                                  <h3 className="mb-4 font-semibold text-lg">
-                                    Form Data
-                                  </h3>
-                                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                    {Object.entries(
-                                      submission.submission_data
-                                    ).map(([fieldId, value]) => {
-                                      const fieldLabel = getFieldLabel(
-                                        form,
-                                        fieldId
-                                      );
-
-                                      return (
-                                        <div
-                                          className="space-y-2"
-                                          key={fieldId}
-                                        >
-                                          <label className="font-medium text-muted-foreground text-sm">
-                                            {fieldLabel}
-                                          </label>
-                                          <div className="rounded-lg border border-border bg-muted/50 p-3">
-                                            <p className="text-sm">
-                                              {Array.isArray(value)
-                                                ? value.join(", ")
-                                                : typeof value === "object" &&
-                                                    value !== null
-                                                  ? JSON.stringify(
-                                                      value,
-                                                      null,
-                                                      2
-                                                    )
-                                                  : String(value) || "—"}
-                                            </p>
-                                          </div>
-                                        </div>
-                                      );
-                                    })}
-                                  </div>
-                                </div>
-                              </div>
-                            </DialogContent>
-                          </Dialog>
+                          <Button
+                            onClick={() => {
+                              setSelectedSubmission(submission);
+                              setIsModalOpen(true);
+                            }}
+                            size="sm"
+                            variant="outline"
+                          >
+                            <Eye className="size-4" />
+                            View
+                          </Button>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -396,6 +337,13 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
           </CardContent>
         </Card>
       </div>
+
+      <SubmissionDetailsModal
+        form={form}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        submission={selectedSubmission}
+      />
     </div>
   );
 }

@@ -503,6 +503,28 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           onFormSettingsUpdate={updateFormSettings}
           onFormTypeSelect={handleFormTypeSelect}
           onPublish={handlePublishForm}
+          onSchemaUpdate={async (updates) => {
+            const updatedSchema = {
+              ...state.formSchema,
+              settings: { ...state.formSchema.settings, ...updates.settings },
+            };
+
+            actions.setFormSchema(updatedSchema);
+
+            if (formId && user) {
+              try {
+                await formsDb.updateForm(formId, { schema: updatedSchema });
+                lastSavedSchemaRef.current = updatedSchema;
+                lastManuallySavedSchemaRef.current = updatedSchema;
+              } catch (error) {
+                console.error("Error saving settings:", error);
+                toast.error("Failed to save settings. Please try again.");
+                actions.setHasUnsavedChanges(true);
+              }
+            } else {
+              actions.setHasUnsavedChanges(true);
+            }
+          }}
           showCreationWizard={state.showCreationWizard}
           showFormSettings={state.showFormSettings}
           showJsonView={state.showJsonView}

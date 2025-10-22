@@ -15,6 +15,7 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { loadGoogleFont } from "@/lib/utils/google-fonts";
 import { Input } from "./input";
+import { Label } from "./label";
 import { Loader } from "./loader";
 
 // Google Fonts API types
@@ -283,9 +284,9 @@ export function GoogleFontPicker({
   return (
     <div className="flex flex-col gap-2">
       {label && (
-        <label className="font-medium text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+        <Label className="font-medium text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
           {label}
-        </label>
+        </Label>
       )}
 
       <Popover onOpenChange={setOpen} open={open}>
