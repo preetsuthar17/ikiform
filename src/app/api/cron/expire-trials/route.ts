@@ -22,7 +22,9 @@ export async function GET(request: NextRequest) {
       .eq("has_premium", true)
       .eq("has_free_trial", true);
 
-    console.log(`Found ${debugUsers?.length || 0} users with has_premium=true and has_free_trial=true`);
+    console.log(
+      `Found ${debugUsers?.length || 0} users with has_premium=true and has_free_trial=true`
+    );
     console.log("Debug users:", debugUsers);
     console.log("14 days ago threshold:", fourteenDaysAgo.toISOString());
 
