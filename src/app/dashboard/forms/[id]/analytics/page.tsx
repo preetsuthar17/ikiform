@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
-import { FormAnalyticsClient } from "@/components/forms/form-analytics-client";
+import { FormAnalyticsClient } from "@/components/forms/form-analytics/form-analytics-client";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/ui/loader";
 import { createClient } from "@/utils/supabase/server";

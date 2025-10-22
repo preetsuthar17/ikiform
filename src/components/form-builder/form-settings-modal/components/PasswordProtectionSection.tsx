@@ -14,7 +14,6 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import { formsDb } from "@/lib/database";
 
 interface PasswordProtectionSectionProps {
   localSettings: any;
@@ -28,7 +27,10 @@ export function PasswordProtectionSection({
   updatePasswordProtection,
   formId,
   schema,
-}: PasswordProtectionSectionProps) {
+  onSchemaUpdate,
+}: PasswordProtectionSectionProps & {
+  onSchemaUpdate?: (updates: Partial<any>) => void;
+}) {
   const [showPassword, setShowPassword] = useState(false);
   const [passwordProtectionSettings, setPasswordProtectionSettings] = useState({
     enabled: localSettings.passwordProtection?.enabled,
@@ -89,14 +91,14 @@ export function PasswordProtectionSection({
         password: passwordProtectionSettings.password.trim(),
         message: passwordProtectionSettings.message.trim(),
       };
-      const newSchema = {
-        ...schema,
-        settings: {
-          ...schema.settings,
-          passwordProtection: trimmed,
-        },
-      };
-      await formsDb.updateForm(formId, { schema: newSchema as any });
+      if (onSchemaUpdate) {
+        await onSchemaUpdate({
+          settings: {
+            ...schema.settings,
+            passwordProtection: trimmed,
+          },
+        });
+      }
       updatePasswordProtection(trimmed);
       setSaved(true);
       setHasChanges(false);

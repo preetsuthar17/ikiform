@@ -13,7 +13,6 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import { formsDb } from "@/lib/database";
 
 import type { BotProtectionSectionProps } from "../types";
 
@@ -22,7 +21,10 @@ export function BotProtectionSection({
   updateBotProtection,
   formId,
   schema,
-}: BotProtectionSectionProps) {
+  onSchemaUpdate,
+}: BotProtectionSectionProps & {
+  onSchemaUpdate?: (updates: Partial<any>) => void;
+}) {
   const [botProtectionSettings, setBotProtectionSettings] = useState({
     enabled: localSettings.botProtection?.enabled,
     message: localSettings.botProtection?.message || "",
@@ -75,14 +77,14 @@ export function BotProtectionSection({
         enabled: botProtectionSettings.enabled,
         message: (botProtectionSettings.message || "").trim(),
       };
-      const newSchema = {
-        ...schema,
-        settings: {
-          ...schema.settings,
-          botProtection: trimmed,
-        },
-      };
-      await formsDb.updateForm(formId, { schema: newSchema as any });
+      if (onSchemaUpdate) {
+        await onSchemaUpdate({
+          settings: {
+            ...schema.settings,
+            botProtection: trimmed,
+          },
+        });
+      }
       updateBotProtection(trimmed);
       setSaved(true);
       setHasChanges(false);

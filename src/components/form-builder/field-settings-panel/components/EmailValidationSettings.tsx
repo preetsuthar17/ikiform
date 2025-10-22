@@ -124,7 +124,9 @@ export function EmailValidationSettings({
   return (
     <Card className="gap-2 p-4 shadow-none">
       <CardHeader className="p-0">
-        <CardTitle className="text-lg">Email Validation</CardTitle>
+        <CardTitle className="flex items-center gap-2 text-lg">
+          Email Validation
+        </CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-4 p-0">
         {}

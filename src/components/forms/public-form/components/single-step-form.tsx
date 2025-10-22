@@ -3,17 +3,16 @@ import type React from "react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
+import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { SocialMediaIcons } from "@/components/ui/social-media-icons";
 import { useFormStyling } from "@/hooks/use-form-styling";
+import { cn } from "@/lib/utils";
 import { getFormLayoutClasses } from "@/lib/utils/form-layout";
-
+import { PasswordProtectionModal } from "../../PasswordProtectionModal";
 import { useSingleStepForm } from "../hooks/use-single-step-form";
-
 import type { PublicFormProps } from "../types";
-
 import { getAllFields } from "../utils/form-utils";
-import { PasswordProtectionModal } from "./PasswordProtectionModal";
 import { SingleStepFormContent } from "./single-step-form-content";
 import { SingleStepSuccessScreen } from "./single-step-success-screen";
 
@@ -41,6 +40,7 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
 
   const { containerClass, marginClass } = getFormLayoutClasses(schema);
   const { customStyles, fontLoaded, getFormClasses } = useFormStyling(schema);
@@ -68,13 +68,26 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const progressTimer = setInterval(() => {
+      setLoadingProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(progressTimer);
+          return 100;
+        }
+        return prev + Math.random() * 15;
+      });
+    }, 100);
+
+    const loadingTimer = setTimeout(() => {
       setIsLoading(false);
       setShowForm(true);
     }, 1500);
 
-    return () => clearTimeout(timer);
-  });
+    return () => {
+      clearInterval(progressTimer);
+      clearTimeout(loadingTimer);
+    };
+  }, []);
 
   if (submitted) {
     return (
@@ -99,34 +112,45 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
   if (isLoading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-background">
-        <Progress className="w-[200px]" size="sm" value={100} />
+        <div className="w-full max-w-[200px] px-6 py-8">
+          <Progress className="h-2 w-full" value={loadingProgress} />
+        </div>
       </div>
     );
   }
 
   return (
     <div
-      className={`flex items-center justify-center transition-opacity duration-500 ${showForm ? "opacity-100" : "opacity-0"} ${marginClass} ${getFormClasses()}`}
+      className={cn(
+        "flex items-center justify-center transition-opacity duration-500",
+        showForm ? "opacity-100" : "opacity-0",
+        marginClass,
+        getFormClasses()
+      )}
       dir={dir}
       style={customStyles.containerStyle}
     >
-      <div className={`flex w-full flex-col gap-8 ${containerClass}`}>
-        <div style={customStyles.formStyle}>
-          <SingleStepFormContent
-            duplicateError={duplicateError}
-            errors={errors}
-            fields={fields}
-            fieldVisibility={fieldVisibility}
-            formData={formData}
-            formId={formId}
-            logicMessages={logicMessages}
-            onFieldValueChange={handleFieldValueChange}
-            onSubmit={handleSubmit}
-            schema={schema}
-            submitting={submitting}
-          />
-        </div>
-
+      <div className={cn("flex w-full flex-col gap-8", containerClass)}>
+        <Card
+          className="flex w-full grow flex-col gap-6 p-8 shadow-none"
+          style={customStyles.cardStyle}
+        >
+          <div style={customStyles.formStyle}>
+            <SingleStepFormContent
+              duplicateError={duplicateError}
+              errors={errors}
+              fields={fields}
+              fieldVisibility={fieldVisibility}
+              formData={formData}
+              formId={formId}
+              logicMessages={logicMessages}
+              onFieldValueChange={handleFieldValueChange}
+              onSubmit={handleSubmit}
+              schema={schema}
+              submitting={submitting}
+            />
+          </div>
+        </Card>
         <div
           className="flex flex-col gap-4 text-center"
           style={customStyles.textStyle}
@@ -145,7 +169,7 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
             schema.settings.branding &&
               (schema.settings.branding as any).showIkiformBranding !== false
           ) && (
-            <p className="text-sm">
+            <p className="text-muted-foreground text-sm">
               Powered by{" "}
               <span className="font-medium text-foreground underline">
                 <Link href="https://www.ikiform.com">Ikiform</Link>

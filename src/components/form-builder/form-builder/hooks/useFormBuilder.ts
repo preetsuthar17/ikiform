@@ -260,5 +260,7 @@ export const useFormBuilder = (formId?: string) => {
     authLoading,
     debouncedAutoSave,
     loadForm,
+    lastSavedSchemaRef,
+    lastManuallySavedSchemaRef,
   };
 };

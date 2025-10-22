@@ -14,7 +14,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import { formsDb } from "@/lib/database";
 import type { RateLimitSectionProps } from "../types";
 
 export function RateLimitSection({
@@ -22,7 +21,10 @@ export function RateLimitSection({
   updateRateLimit,
   formId,
   schema,
-}: RateLimitSectionProps) {
+  onSchemaUpdate,
+}: RateLimitSectionProps & {
+  onSchemaUpdate?: (updates: Partial<any>) => void;
+}) {
   const [rateLimitSettings, setRateLimitSettings] = useState({
     enabled: localSettings.rateLimit?.enabled,
     maxSubmissions: localSettings.rateLimit?.maxSubmissions || 5,
@@ -85,14 +87,14 @@ export function RateLimitSection({
         ...rateLimitSettings,
         message: (rateLimitSettings.message || "").trim(),
       };
-      const newSchema = {
-        ...schema,
-        settings: {
-          ...schema.settings,
-          rateLimit: trimmed,
-        },
-      };
-      await formsDb.updateForm(formId, { schema: newSchema as any });
+      if (onSchemaUpdate) {
+        await onSchemaUpdate({
+          settings: {
+            ...schema.settings,
+            rateLimit: trimmed,
+          },
+        });
+      }
       updateRateLimit(trimmed);
       setSaved(true);
       setHasChanges(false);
@@ -160,7 +162,10 @@ export function RateLimitSection({
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="text-lg" id="rate-limit-title">
+                <CardTitle
+                  className="flex items-center gap-2 text-lg"
+                  id="rate-limit-title"
+                >
                   Rate Limiting{" "}
                   {hasChanges && (
                     <Badge className="gap-2" variant="secondary">
@@ -168,7 +173,6 @@ export function RateLimitSection({
                       Unsaved changes
                     </Badge>
                   )}
-                  Rate Limiting
                 </CardTitle>
                 <CardDescription id="rate-limit-description">
                   Control submission frequency to prevent spam and abuse

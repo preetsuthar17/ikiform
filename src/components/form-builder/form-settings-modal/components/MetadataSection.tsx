@@ -30,7 +30,12 @@ export function MetadataSection({
   updateSettings,
   formId,
   schema,
-}: MetadataSectionProps & { formId?: string; schema?: any }) {
+  onSchemaUpdate,
+}: MetadataSectionProps & {
+  formId?: string;
+  schema?: any;
+  onSchemaUpdate?: (updates: Partial<any>) => void;
+}) {
   const metadata = localSettings.metadata || {};
   const [hasBasicChanges, setHasBasicChanges] = useState(false as boolean);
   const [hasIndexingChanges, setHasIndexingChanges] = useState(
@@ -169,14 +174,14 @@ export function MetadataSection({
         author: (localSettings.metadata?.author || "").trim(),
         canonicalUrl: (localSettings.metadata?.canonicalUrl || "").trim(),
       };
-      const newSchema = {
-        ...schema,
-        settings: {
-          ...schema.settings,
-          metadata: trimmed,
-        },
-      };
-      await formsDb.updateForm(formId, { schema: newSchema as any });
+      if (onSchemaUpdate) {
+        await onSchemaUpdate({
+          settings: {
+            ...schema.settings,
+            metadata: trimmed,
+          },
+        });
+      }
       setSavedBasic(true);
       setHasBasicChanges(false);
       toast.success("Basic SEO saved");
@@ -236,14 +241,14 @@ export function MetadataSection({
         twitterSite: (localSettings.metadata?.twitterSite || "").trim(),
         twitterCreator: (localSettings.metadata?.twitterCreator || "").trim(),
       };
-      const newSchema = {
-        ...schema,
-        settings: {
-          ...schema.settings,
-          metadata: trimmed,
-        },
-      };
-      await formsDb.updateForm(formId, { schema: newSchema as any });
+      if (onSchemaUpdate) {
+        await onSchemaUpdate({
+          settings: {
+            ...schema.settings,
+            metadata: trimmed,
+          },
+        });
+      }
       setSavedSocial(true);
       setHasSocialChanges(false);
       toast.success("Social metadata saved");

@@ -27,7 +27,7 @@ export function FieldWrapper({
   const getContainerClassName = () => {
     const baseClasses = "flex flex-col gap-2";
     const widthClass = getFieldWidthClass();
-    const marginClass = field.label ? "" : "-mt-2";
+    const marginClass = field.label ? "" : "";
 
     return `${baseClasses} ${widthClass} ${marginClass}`.trim();
   };

@@ -45,7 +45,7 @@ function getRedisClient(): Redis {
 
 const DEFAULT_SETTINGS: DuplicatePreventionSettings = {
   enabled: false,
-  strategy: "combined", // Best strategy: combines IP, email, and session
+  strategy: "ip", // Best strategy: combines IP, email, and session
   mode: "one-time", // Best mode: one-time submission
   timeWindow: 1440,
   message:

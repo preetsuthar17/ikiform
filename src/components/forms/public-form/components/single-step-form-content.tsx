@@ -4,7 +4,6 @@ import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer
 import { getLivePatternError } from "@/components/form-builder/form-field-renderer/components/TextInputField";
 import { Separator } from "@/components/ui";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { SocialMediaIcons } from "@/components/ui/social-media-icons";
 import { useFormStyling } from "@/hooks/use-form-styling";
 import type { FormField, FormSchema } from "@/lib/database";
@@ -60,49 +59,43 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
     : fields;
 
   return (
-    <Card
-      className="flex grow flex-col gap-6 rounded-2xl border-none bg-transparent hover:bg-transparent"
-      style={customStyles.cardStyle}
-      variant="ghost"
-    >
-      <div className="flex flex-col gap-4">
-        {!schema.settings.hideHeader && (
-          <>
-            <div className="flex flex-col gap-2">
-              <h1 className="text-foreground" style={customStyles.headingStyle}>
-                {getPublicFormTitle(schema)}
-              </h1>
-              {schema.settings.description && (
-                <p
-                  className="text-muted-foreground"
-                  style={customStyles.textStyle}
-                >
-                  {schema.settings.description}
-                </p>
-              )}
-            </div>
-            <Separator />
-          </>
-        )}
-
-        {schema.settings.branding?.socialMedia?.enabled &&
-          schema.settings.branding.socialMedia.platforms &&
-          (schema.settings.branding.socialMedia.position === "header" ||
-            schema.settings.branding.socialMedia.position === "both") && (
-            <SocialMediaIcons
-              className="justify-start"
-              iconSize={schema.settings.branding.socialMedia.iconSize || "md"}
-              platforms={schema.settings.branding.socialMedia.platforms}
-            />
-          )}
-        {logicMessages && logicMessages.length > 0 && (
-          <div className="mb-2 rounded-md border-yellow-400 border-l-4 bg-yellow-50 p-3 text-yellow-800">
-            {logicMessages.map((msg, i) => (
-              <div key={i}>{msg}</div>
-            ))}
+    <div className="flex flex-col gap-4">
+      {!schema.settings.hideHeader && (
+        <>
+          <div className="flex flex-col gap-2">
+            <h1 className="text-foreground" style={customStyles.headingStyle}>
+              {getPublicFormTitle(schema)}
+            </h1>
+            {schema.settings.description && (
+              <p
+                className="text-muted-foreground"
+                style={customStyles.textStyle}
+              >
+                {schema.settings.description}
+              </p>
+            )}
           </div>
+          <Separator />
+        </>
+      )}
+
+      {schema.settings.branding?.socialMedia?.enabled &&
+        schema.settings.branding.socialMedia.platforms &&
+        (schema.settings.branding.socialMedia.position === "header" ||
+          schema.settings.branding.socialMedia.position === "both") && (
+          <SocialMediaIcons
+            className="justify-start"
+            iconSize={schema.settings.branding.socialMedia.iconSize || "md"}
+            platforms={schema.settings.branding.socialMedia.platforms}
+          />
         )}
-      </div>
+      {logicMessages && logicMessages.length > 0 && (
+        <div className="mb-2 rounded-md border-yellow-400 border-l-4 bg-yellow-50 p-3 text-yellow-800">
+          {logicMessages.map((msg, i) => (
+            <div key={i}>{msg}</div>
+          ))}
+        </div>
+      )}
 
       <form className="flex flex-col gap-6" onSubmit={onSubmit}>
         {duplicateError && (
@@ -170,6 +163,6 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
           </Button>
         </div>
       </form>
-    </Card>
+    </div>
   );
 };

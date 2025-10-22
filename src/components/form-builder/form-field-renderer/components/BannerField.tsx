@@ -71,7 +71,7 @@ export function BannerField({ field, error }: BaseFieldProps) {
 
   const getBannerClassName = () => {
     const { border, bg } = getBannerStyles();
-    return clsx("flex items-start gap-4 rounded-xl border p-4", border, bg);
+    return clsx("flex items-center gap-4 rounded-xl border p-4", border, bg);
   };
 
   const getIconClassName = () => {
@@ -84,12 +84,12 @@ export function BannerField({ field, error }: BaseFieldProps) {
 
   const getTitleClassName = () => {
     const { titleFg } = getBannerStyles();
-    return clsx("font-semibold text-base", titleFg);
+    return clsx("font-semibold text-base", titleFg, "w-full text-left");
   };
 
   const getDescriptionClassName = () => {
     const { text } = getBannerStyles();
-    return clsx("whitespace-pre-line text-sm leading-relaxed", text);
+    return clsx("whitespace-pre-line text-sm", text, "w-full text-left");
   };
 
   const renderBannerIcon = () => {
@@ -122,7 +122,7 @@ export function BannerField({ field, error }: BaseFieldProps) {
   };
 
   const renderBannerContent = () => (
-    <Card className="border-0 p-0 shadow-none">
+    <Card className="border-0 bg-transparent p-0 shadow-none">
       <CardContent className="p-0">
         <Alert
           aria-live={getBannerVariant() === "error" ? "assertive" : "polite"}
@@ -155,7 +155,7 @@ export function BannerField({ field, error }: BaseFieldProps) {
         </div>
       )}
       {field.description && (
-        <p className="text-muted-foreground text-sm leading-relaxed">
+        <p className="w-full text-left text-muted-foreground text-sm leading-relaxed">
           {field.description}
         </p>
       )}

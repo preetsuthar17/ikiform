@@ -18,7 +18,9 @@ export const BasicSettings: React.FC<BasicSettingsProps> = ({
   return (
     <Card className="gap-2 p-4 shadow-none">
       <CardHeader className="p-0">
-        <CardTitle className="text-lg">Basic Settings</CardTitle>
+        <CardTitle className="flex items-center gap-2 text-lg">
+          Basic Settings
+        </CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-4 p-0">
         <div className="flex flex-col gap-2">

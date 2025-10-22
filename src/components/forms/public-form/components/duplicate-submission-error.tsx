@@ -1,5 +1,4 @@
 import { AlertCircle, Clock, RefreshCw } from "lucide-react";
-import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { formatTimeRemaining } from "@/lib/forms/duplicate-prevention";
 
@@ -16,44 +15,70 @@ export function DuplicateSubmissionError({
   attemptsRemaining,
   onRetry,
 }: DuplicateSubmissionErrorProps) {
+  const hasTimeRestriction = !!timeRemaining && timeRemaining > 0;
+  const hasAttemptRestriction =
+    attemptsRemaining !== undefined && attemptsRemaining > 0;
+  const canRetry = onRetry && (!hasTimeRestriction || timeRemaining === 0);
+
   return (
-    <Alert
-      className="flex items-start gap-4 bg-red-100/40"
-      variant="destructive"
-    >
-      <div className="flex w-full flex-col gap-2">
-        <span className="flex items-center gap-2 font-semibold text-base">
-          {" "}
-          <AlertCircle aria-hidden className="size-5 text-destructive" /> You’ve
-          already submitted this form
-        </span>
-        <span className="text-destructive text-sm">{message}</span>
-        {!!timeRemaining && timeRemaining > 0 && (
-          <div className="flex items-center gap-1 text-muted-foreground text-xs">
-            <Clock aria-hidden className="size-4" />
-            <span>Wait {formatTimeRemaining(timeRemaining)} to try again</span>
+    <div className="rounded-md border-l-2 border-l-destructive/10 bg-destructive/2 p-4">
+      <div className="flex items-start gap-3">
+        <AlertCircle
+          aria-hidden="true"
+          className="mt-0.5 size-5 text-destructive"
+        />
+
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <p className="font-semibold text-lg">
+              Duplicate Submission Detected
+            </p>
+            <p className="text-muted-foreground text-sm">{message}</p>
           </div>
-        )}
-        {attemptsRemaining !== undefined && attemptsRemaining > 0 && (
-          <div className="flex items-center gap-1 text-muted-foreground text-xs">
-            <RefreshCw aria-hidden className="size-4" />
-            <span>
-              {attemptsRemaining} more attempt{attemptsRemaining > 1 ? "s" : ""}{" "}
-              allowed
-            </span>
-          </div>
-        )}
-        {onRetry && (
-          <Button
-            className="w-fit"
-            onClick={onRetry}
-            size="sm"
-            variant="secondary"
-          >
-            Try Again
-          </Button>
-        )}
+
+          {(hasTimeRestriction || hasAttemptRestriction) && (
+            <div className="flex flex-wrap gap-2">
+              {hasTimeRestriction && (
+                <div className="flex items-center gap-1.5 rounded-md bg-destructive/10 px-2 py-1">
+                  <Clock
+                    aria-hidden="true"
+                    className="size-3 text-destructive"
+                  />
+                  <span className="font-medium text-destructive text-xs">
+                    Wait {formatTimeRemaining(timeRemaining)}
+                  </span>
+                </div>
+              )}
+
+              {hasAttemptRestriction && (
+                <div className="flex items-center gap-1.5 rounded-md bg-destructive/10 px-2 py-1">
+                  <RefreshCw
+                    aria-hidden="true"
+                    className="size-3 text-destructive"
+                  />
+                  <span className="font-medium text-destructive text-xs">
+                    {attemptsRemaining} attempt
+                    {attemptsRemaining > 1 ? "s" : ""} left
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
+
+          {canRetry && (
+            <Button className="w-fit" onClick={onRetry} variant="destructive">
+              <RefreshCw className="size-4 shrink-0" />
+              Try Again
+            </Button>
+          )}
+
+          {!canRetry && hasTimeRestriction && (
+            <div className="text-muted-foreground text-xs">
+              Please wait before attempting to submit again.
+            </div>
+          )}
+        </div>
       </div>
-    </Alert>
+    </div>
   );
 }

@@ -15,7 +15,6 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import { formsDb } from "@/lib/database";
 
 import type { ProfanityFilterSectionProps } from "../types";
 
@@ -24,7 +23,10 @@ export function ProfanityFilterSection({
   updateProfanityFilter,
   formId,
   schema,
-}: ProfanityFilterSectionProps) {
+  onSchemaUpdate,
+}: ProfanityFilterSectionProps & {
+  onSchemaUpdate?: (updates: Partial<any>) => void;
+}) {
   const [profanityFilterSettings, setProfanityFilterSettings] = useState({
     enabled: localSettings.profanityFilter?.enabled,
     strictMode: true,
@@ -91,14 +93,14 @@ export function ProfanityFilterSection({
           .map((word) => word.trim())
           .filter((word) => word.length > 0),
       };
-      const newSchema = {
-        ...schema,
-        settings: {
-          ...schema.settings,
-          profanityFilter: trimmed,
-        },
-      };
-      await formsDb.updateForm(formId, { schema: newSchema as any });
+      if (onSchemaUpdate) {
+        await onSchemaUpdate({
+          settings: {
+            ...schema.settings,
+            profanityFilter: trimmed,
+          },
+        });
+      }
       updateProfanityFilter(trimmed);
       setSaved(true);
       setHasChanges(false);

@@ -22,7 +22,7 @@ export const SingleStepSuccessScreen: React.FC<
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="mx-auto flex w-full max-w-2xl flex-col gap-6">
+      <div className="mx-auto flex w-full max-w-2xl flex-col gap-8">
         {shouldShowQuizResults ? (
           <QuizResults
             allowRetake={false}
@@ -33,8 +33,8 @@ export const SingleStepSuccessScreen: React.FC<
           />
         ) : (
           <Card
-            className="flex flex-col gap-4 rounded-2xl"
-            style={{ padding: "2rem" }}
+            className="flex w-full grow flex-col gap-6 border p-8 shadow-none"
+            style={{ border: "1px solid hsl(var(--border))" }}
           >
             <div className="flex flex-col items-center gap-4">
               <div className="flex size-16 items-center justify-center rounded-2xl bg-accent">

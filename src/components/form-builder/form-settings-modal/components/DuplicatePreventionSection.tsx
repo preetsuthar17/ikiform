@@ -22,7 +22,6 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import { formsDb } from "@/lib/database";
 
 import type { DuplicatePreventionSectionProps } from "../types";
 
@@ -31,7 +30,10 @@ export function DuplicatePreventionSection({
   updateDuplicatePrevention,
   formId,
   schema,
-}: DuplicatePreventionSectionProps) {
+  onSchemaUpdate,
+}: DuplicatePreventionSectionProps & {
+  onSchemaUpdate?: (updates: Partial<any>) => void;
+}) {
   const [duplicatePreventionSettings, setDuplicatePreventionSettings] =
     useState({
       enabled: localSettings.duplicatePrevention?.enabled,
@@ -99,14 +101,14 @@ export function DuplicatePreventionSection({
         ...duplicatePreventionSettings,
         message: (duplicatePreventionSettings.message || "").trim(),
       };
-      const newSchema = {
-        ...schema,
-        settings: {
-          ...schema.settings,
-          duplicatePrevention: trimmed,
-        },
-      };
-      await formsDb.updateForm(formId, { schema: newSchema as any });
+      if (onSchemaUpdate) {
+        await onSchemaUpdate({
+          settings: {
+            ...schema.settings,
+            duplicatePrevention: trimmed,
+          },
+        });
+      }
       updateDuplicatePrevention(trimmed);
       setSaved(true);
       setHasChanges(false);

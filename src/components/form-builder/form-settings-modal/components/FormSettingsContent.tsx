@@ -31,6 +31,7 @@ interface FormSettingsContentProps {
   updateApi: any;
   formId?: string;
   schema?: any;
+  onSchemaUpdate?: (updates: Partial<any>) => void;
 }
 
 export function FormSettingsContent({
@@ -48,6 +49,7 @@ export function FormSettingsContent({
   updateApi,
   formId,
   schema,
+  onSchemaUpdate,
 }: FormSettingsContentProps) {
   const params = useParams();
   const currentFormId = formId || (params?.id as string | undefined);
@@ -58,6 +60,7 @@ export function FormSettingsContent({
           <BasicInfoSection
             formId={currentFormId}
             localSettings={localSettings}
+            onSchemaUpdate={onSchemaUpdate}
             schema={schema}
             updateSettings={updateSettings}
           />
@@ -71,12 +74,14 @@ export function FormSettingsContent({
               <RateLimitSection
                 formId={currentFormId}
                 localSettings={localSettings}
+                onSchemaUpdate={onSchemaUpdate}
                 schema={schema}
                 updateRateLimit={updateRateLimit}
               />
               <ResponseLimitSection
                 formId={currentFormId}
                 localSettings={localSettings}
+                onSchemaUpdate={onSchemaUpdate}
                 schema={schema}
                 updateResponseLimit={updateResponseLimit}
               />
@@ -92,24 +97,28 @@ export function FormSettingsContent({
               <PasswordProtectionSection
                 formId={currentFormId}
                 localSettings={localSettings}
+                onSchemaUpdate={onSchemaUpdate}
                 schema={schema}
                 updatePasswordProtection={updatePasswordProtection}
               />
               <DuplicatePreventionSection
                 formId={currentFormId}
                 localSettings={localSettings}
+                onSchemaUpdate={onSchemaUpdate}
                 schema={schema}
                 updateDuplicatePrevention={updateDuplicatePrevention}
               />
               <ProfanityFilterSection
                 formId={currentFormId}
                 localSettings={localSettings}
+                onSchemaUpdate={onSchemaUpdate}
                 schema={schema}
                 updateProfanityFilter={updateProfanityFilter}
               />
               <BotProtectionSection
                 formId={currentFormId}
                 localSettings={localSettings}
+                onSchemaUpdate={onSchemaUpdate}
                 schema={schema}
                 updateBotProtection={updateBotProtection}
               />
@@ -141,6 +150,7 @@ export function FormSettingsContent({
               <NotificationsSection
                 formId={currentFormId}
                 localSettings={localSettings}
+                onSchemaUpdate={onSchemaUpdate}
                 schema={schema}
                 updateNotifications={updateNotifications}
               />
@@ -156,6 +166,7 @@ export function FormSettingsContent({
               <QuizSection
                 formId={currentFormId}
                 localSettings={localSettings}
+                onSchemaUpdate={onSchemaUpdate}
                 schema={schema}
                 updateSettings={updateSettings}
               />
@@ -168,11 +179,7 @@ export function FormSettingsContent({
         <section className="h-full">
           <ScrollArea className="h-full w-full">
             <div>
-              <DesignSection
-                formId={currentFormId}
-                localSettings={localSettings}
-                updateSettings={updateSettings}
-              />
+              <DesignSection formId={currentFormId} />
             </div>
           </ScrollArea>
         </section>
@@ -210,6 +217,7 @@ export function FormSettingsContent({
               <MetadataSection
                 formId={currentFormId}
                 localSettings={localSettings}
+                onSchemaUpdate={onSchemaUpdate}
                 schema={schema}
                 updateSettings={updateSettings}
               />

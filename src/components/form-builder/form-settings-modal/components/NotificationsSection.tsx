@@ -13,7 +13,6 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import { formsDb } from "@/lib/database";
 import type { LocalSettings, NotificationSettings } from "../types";
 
 interface NotificationsSectionProps {
@@ -28,7 +27,10 @@ export function NotificationsSection({
   updateNotifications,
   formId,
   schema,
-}: NotificationsSectionProps) {
+  onSchemaUpdate,
+}: NotificationsSectionProps & {
+  onSchemaUpdate?: (updates: Partial<any>) => void;
+}) {
   const notifications = localSettings.notifications || {};
   const customLinks = notifications.customLinks || [];
   const [newLink, setNewLink] = useState({ label: "", url: "" });
@@ -94,14 +96,14 @@ export function NotificationsSection({
           })
         ),
       };
-      const newSchema = {
-        ...schema,
-        settings: {
-          ...schema.settings,
-          notifications: trimmed,
-        },
-      };
-      await formsDb.updateForm(formId, { schema: newSchema as any });
+      if (onSchemaUpdate) {
+        await onSchemaUpdate({
+          settings: {
+            ...schema.settings,
+            notifications: trimmed,
+          },
+        });
+      }
       setSaved(true);
       setHasChanges(false);
       toast.success("Notification settings saved successfully");

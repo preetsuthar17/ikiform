@@ -57,6 +57,7 @@ export function FormSettingsModal({
     updateApi,
     formId,
     schema,
+    onSchemaUpdate,
   };
 
   return (

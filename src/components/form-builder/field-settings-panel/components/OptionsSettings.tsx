@@ -26,7 +26,9 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
     <Card className="gap-2 p-4 shadow-none">
       <CardHeader className="p-0">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-lg">Options</CardTitle>
+          <CardTitle className="flex items-center gap-2 text-lg">
+            Options
+          </CardTitle>
           <Button
             aria-label="Add new option"
             className="flex gap-2"

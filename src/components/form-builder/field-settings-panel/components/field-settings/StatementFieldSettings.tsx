@@ -34,7 +34,9 @@ export function StatementFieldSettings({
   return (
     <Card className="gap-2 p-4 shadow-none">
       <CardHeader className="p-0">
-        <CardTitle className="text-lg">Statement Field Settings</CardTitle>
+        <CardTitle className="flex items-center gap-2 text-lg">
+          Statement Field Settings
+        </CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-4 p-0">
         <div className="flex flex-col gap-2">

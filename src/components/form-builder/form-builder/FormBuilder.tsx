@@ -52,6 +52,8 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     user,
     authLoading,
     debouncedAutoSave,
+    lastSavedSchemaRef,
+    lastManuallySavedSchemaRef,
   } = useFormBuilder(formId);
 
   const isMobile = useIsMobile();
@@ -501,13 +503,6 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           onFormSettingsUpdate={updateFormSettings}
           onFormTypeSelect={handleFormTypeSelect}
           onPublish={handlePublishForm}
-          onSchemaUpdate={(updates) => {
-            actions.setFormSchema((prev) => ({
-              ...prev,
-              settings: { ...prev.settings, ...updates.settings },
-            }));
-            actions.setHasUnsavedChanges(true);
-          }}
           showCreationWizard={state.showCreationWizard}
           showFormSettings={state.showFormSettings}
           showJsonView={state.showJsonView}
@@ -577,12 +572,32 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
         onFormSettingsUpdate={updateFormSettings}
         onFormTypeSelect={handleFormTypeSelect}
         onPublish={handlePublishForm}
-        onSchemaUpdate={(updates) => {
-          actions.setFormSchema((prev) => ({
-            ...prev,
-            settings: { ...prev.settings, ...updates.settings },
-          }));
-          actions.setHasUnsavedChanges(true);
+        onSchemaUpdate={async (updates) => {
+          const updatedSchema = {
+            ...state.formSchema,
+            settings: { ...state.formSchema.settings, ...updates.settings },
+          };
+
+          actions.setFormSchema(updatedSchema);
+
+          // Immediately save settings changes to database
+          if (formId && user) {
+            try {
+              await formsDb.updateForm(formId, { schema: updatedSchema });
+              // Update the last saved schema reference to prevent unsaved changes
+              lastSavedSchemaRef.current = updatedSchema;
+              lastManuallySavedSchemaRef.current = updatedSchema;
+              // Don't set hasUnsavedChanges since we just saved
+            } catch (error) {
+              console.error("Error saving settings:", error);
+              toast.error("Failed to save settings. Please try again.");
+              // Only set unsaved changes if save failed
+              actions.setHasUnsavedChanges(true);
+            }
+          } else {
+            // If no formId or user, set unsaved changes
+            actions.setHasUnsavedChanges(true);
+          }
         }}
         showCreationWizard={state.showCreationWizard}
         showFormSettings={state.showFormSettings}

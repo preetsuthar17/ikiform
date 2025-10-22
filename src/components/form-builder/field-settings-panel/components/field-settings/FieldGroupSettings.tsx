@@ -92,7 +92,9 @@ export function FieldGroupSettings({
     <div className="flex flex-col gap-4">
       <Card className="gap-2 p-4 shadow-none">
         <CardHeader className="p-0">
-          <CardTitle className="text-lg">Layout Settings</CardTitle>
+          <CardTitle className="flex items-center gap-2 text-lg">
+            Layout Settings
+          </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-2 p-0">
           <div className="flex flex-col gap-2">
@@ -186,7 +188,7 @@ export function FieldGroupSettings({
 
       <Card className="gap-2 p-4 shadow-none">
         <CardHeader className="p-0">
-          <CardTitle className="text-lg">
+          <CardTitle className="flex items-center gap-2 text-lg">
             Group Fields ({groupFields.length})
           </CardTitle>
         </CardHeader>

@@ -114,7 +114,7 @@ const faqs = [
 
 function FaqSectionHeader() {
   return (
-    <div className="flex flex-col gap-4 border-t border-r px-8 py-16 text-left md:px-12 ">
+    <div className="flex flex-col gap-4 border-t border-r px-8 py-16 text-left md:px-12">
       <h2
         className="text-left font-medium text-3xl leading-tight tracking-[-2px] md:text-4xl"
         id="faq-title"

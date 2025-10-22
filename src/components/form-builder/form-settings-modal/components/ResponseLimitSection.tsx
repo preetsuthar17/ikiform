@@ -13,18 +13,19 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import { formsDb } from "@/lib/database";
 
 export function ResponseLimitSection({
   localSettings,
   updateResponseLimit,
   formId,
   schema,
+  onSchemaUpdate,
 }: {
   localSettings: any;
   updateResponseLimit: (updates: Partial<any>) => void;
   formId?: string;
   schema?: any;
+  onSchemaUpdate?: (updates: Partial<any>) => void;
 }) {
   const [settings, setSettings] = useState({
     enabled: !!localSettings.responseLimit?.enabled,
@@ -83,14 +84,14 @@ export function ResponseLimitSection({
         ...settings,
         message: (settings.message || "").trim(),
       };
-      const newSchema = {
-        ...schema,
-        settings: {
-          ...schema.settings,
-          responseLimit: trimmed,
-        },
-      };
-      await formsDb.updateForm(formId, { schema: newSchema as any });
+      if (onSchemaUpdate) {
+        await onSchemaUpdate({
+          settings: {
+            ...schema.settings,
+            responseLimit: trimmed,
+          },
+        });
+      }
       updateResponseLimit(trimmed);
       setSaved(true);
       setHasChanges(false);
@@ -150,7 +151,10 @@ export function ResponseLimitSection({
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="text-lg" id="response-limit-title">
+            <CardTitle
+              className="flex items-center gap-2 text-lg"
+              id="response-limit-title"
+            >
               Response Limit{" "}
               {hasChanges && (
                 <Badge className="gap-2" variant="secondary">
@@ -158,7 +162,6 @@ export function ResponseLimitSection({
                   Unsaved changes
                 </Badge>
               )}
-              Response Limit
             </CardTitle>
             <CardDescription>
               Stop accepting submissions after a set total count

@@ -14,7 +14,6 @@ import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import { formsDb } from "@/lib/database";
 import type { LocalSettings } from "../types";
 
 interface QuizSectionProps {
@@ -29,7 +28,8 @@ export function QuizSection({
   updateSettings,
   formId,
   schema,
-}: QuizSectionProps) {
+  onSchemaUpdate,
+}: QuizSectionProps & { onSchemaUpdate?: (updates: Partial<any>) => void }) {
   const initialQuiz = localSettings.quiz || {};
   const [quizSettings, setQuizSettings] = useState({
     enabled: initialQuiz.enabled,
@@ -97,14 +97,14 @@ export function QuizSection({
             ? undefined
             : Number(quizSettings.timeLimit),
       } as any;
-      const newSchema = {
-        ...schema,
-        settings: {
-          ...schema.settings,
-          quiz: trimmed,
-        },
-      };
-      await formsDb.updateForm(formId, { schema: newSchema as any });
+      if (onSchemaUpdate) {
+        await onSchemaUpdate({
+          settings: {
+            ...schema.settings,
+            quiz: trimmed,
+          },
+        });
+      }
       updateSettings({ quiz: trimmed });
       setHasChanges(false);
       setSaved(true);

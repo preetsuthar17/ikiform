@@ -14,7 +14,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import { formsDb } from "@/lib/database";
 import type { BasicInfoSectionProps } from "../types";
 
 export function BasicInfoSection({
@@ -22,7 +21,10 @@ export function BasicInfoSection({
   updateSettings,
   formId,
   schema,
-}: BasicInfoSectionProps) {
+  onSchemaUpdate,
+}: BasicInfoSectionProps & {
+  onSchemaUpdate?: (updates: Partial<any>) => void;
+}) {
   const [basicInfo, setBasicInfo] = useState({
     title: localSettings.title || "",
     publicTitle: localSettings.publicTitle || "",
@@ -121,14 +123,14 @@ export function BasicInfoSection({
     };
     setSavingBasic(true);
     try {
-      const newSchema = {
-        ...schema,
-        settings: {
-          ...schema.settings,
-          ...trimmed,
-        },
-      };
-      await formsDb.updateForm(formId, { schema: newSchema as any });
+      if (onSchemaUpdate) {
+        await onSchemaUpdate({
+          settings: {
+            ...schema.settings,
+            ...trimmed,
+          },
+        });
+      }
       updateSettings(trimmed);
       setSavedBasic(true);
       setHasBasicChanges(false);
@@ -151,19 +153,19 @@ export function BasicInfoSection({
 
     setSavingBehavior(true);
     try {
-      const newSchema = {
-        ...schema,
-        settings: {
-          ...schema.settings,
-          hideHeader: behaviorSettings.hideHeader,
-          rtl: behaviorSettings.rtl,
-          behavior: {
-            ...schema.settings.behavior,
-            autoFocusFirstField: behaviorSettings.autoFocusFirstField,
+      if (onSchemaUpdate) {
+        await onSchemaUpdate({
+          settings: {
+            ...schema.settings,
+            hideHeader: behaviorSettings.hideHeader,
+            rtl: behaviorSettings.rtl,
+            behavior: {
+              ...schema.settings.behavior,
+              autoFocusFirstField: behaviorSettings.autoFocusFirstField,
+            },
           },
-        },
-      };
-      await formsDb.updateForm(formId, { schema: newSchema as any });
+        });
+      }
       updateSettings({
         hideHeader: behaviorSettings.hideHeader,
         rtl: behaviorSettings.rtl,
