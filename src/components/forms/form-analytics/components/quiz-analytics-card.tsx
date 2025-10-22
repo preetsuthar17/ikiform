@@ -75,10 +75,9 @@ export function QuizAnalyticsCard({ quizAnalytics }: QuizAnalyticsCardProps) {
         </CardHeader>
         <CardContent className="px-1 py-0">
           <p className="font-bold text-2xl text-foreground tabular-nums">
-            {quizAnalytics.topPerformers.length > 0 
+            {quizAnalytics.topPerformers.length > 0
               ? `${quizAnalytics.topPerformers[0].percentage.toFixed(1)}%`
-              : "N/A"
-            }
+              : "N/A"}
           </p>
         </CardContent>
       </Card>
@@ -140,7 +139,9 @@ export function QuizAnalyticsCard({ quizAnalytics }: QuizAnalyticsCardProps) {
               {quizAnalytics.questionAnalytics.map((question) => (
                 <div className="flex flex-col gap-2" key={question.fieldId}>
                   <div className="flex items-center justify-between">
-                    <span className="font-medium text-sm">{question.label}</span>
+                    <span className="font-medium text-sm">
+                      {question.label}
+                    </span>
                     <span className="text-muted-foreground text-sm">
                       {question.correctAnswers}/{question.totalAnswers} correct
                     </span>
