@@ -183,7 +183,7 @@ export default function PricingClient({ products }: PricingClientProps) {
           ) : null}
         </div>
         <PlanFeatures features={plan.features} />
-        <div>
+        <div className="flex flex-col gap-2">
           <Link
             aria-label={`${plan.title} – Proceed to ${user ? "checkout" : "login"}`}
             className="block w-full"
@@ -206,6 +206,11 @@ export default function PricingClient({ products }: PricingClientProps) {
               </span>
             </Button>
           </Link>
+          {plan.ctaLabel === "Start your 14-day free trial" && (
+            <span className="flex items-center justify-center text-center text-muted-foreground text-sm">
+              No credit card required
+            </span>
+          )}
         </div>
       </article>
     );
@@ -221,7 +226,7 @@ export default function PricingClient({ products }: PricingClientProps) {
         period: PRICING.monthly.period,
         features: featureList,
         productId: planProductIdMap.monthly,
-        ctaLabel: "Subscribe Monthly ($29/mo)",
+        ctaLabel: "Start your 14-day free trial",
       },
       {
         key: "lifetime",
@@ -242,7 +247,7 @@ export default function PricingClient({ products }: PricingClientProps) {
         period: PRICING.yearly.period,
         features: featureList,
         productId: planProductIdMap.yearly,
-        ctaLabel: "Subscribe Annually ($19/mo)",
+        ctaLabel: "Start your 14-day free trial",
       },
     ],
     []
