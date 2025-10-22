@@ -149,6 +149,7 @@ export interface Database {
           name: string;
           email: string;
           has_premium: boolean;
+          has_free_trial: boolean;
           polar_customer_id: string | null;
           created_at: string;
           updated_at: string;
@@ -158,6 +159,7 @@ export interface Database {
           name: string;
           email: string;
           has_premium?: boolean;
+          has_free_trial?: boolean;
           polar_customer_id?: string | null;
           created_at?: string;
           updated_at?: string;
@@ -167,6 +169,7 @@ export interface Database {
           name?: string;
           email?: string;
           has_premium?: boolean;
+          has_free_trial?: boolean;
           polar_customer_id?: string | null;
           created_at?: string;
           updated_at?: string;
