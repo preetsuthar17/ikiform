@@ -11,11 +11,11 @@ export async function GET(request: NextRequest) {
 
     const supabase = await createClient();
 
-    // Calculate the date 5 minutes ago (for testing)
-    const fiveMinutesAgo = new Date();
-    fiveMinutesAgo.setMinutes(fiveMinutesAgo.getMinutes() - 5);
+    // Calculate the date 14 days ago
+    const fourteenDaysAgo = new Date();
+    fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14);
 
-    // Update users who were created 5+ minutes ago and still have free trial
+    // Update users who were created 14+ days ago and still have free trial
     const { data, error } = await supabase
       .from("users")
       .update({
@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
         updated_at: new Date().toISOString(),
       })
       .eq("has_free_trial", true)
-      .lte("created_at", fiveMinutesAgo.toISOString())
+      .lte("created_at", fourteenDaysAgo.toISOString())
       .select("uid, email, name");
 
     if (error) {
