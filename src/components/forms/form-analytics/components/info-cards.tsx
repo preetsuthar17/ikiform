@@ -10,16 +10,16 @@ export const InfoCards: React.FC<InfoCardsProps> = ({
   formatDate,
 }) => (
   <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-    <Card className="border-border bg-card gap-4 p-4 grow shadow-none">
+    <Card className="grow gap-4 border-border bg-card p-4 shadow-none">
       <CardHeader className="flex flex-row items-center gap-4 p-0">
-        <div className="rounded-2xl bg-primary/10 p-3" aria-hidden="true">
+        <div aria-hidden="true" className="rounded-2xl bg-primary/10 p-3">
           <Calendar className="size-6 text-primary" />
         </div>
-        <CardTitle className="text-base font-medium text-muted-foreground">
+        <CardTitle className="font-medium text-base text-muted-foreground">
           Last Submission
         </CardTitle>
       </CardHeader>
-      <CardContent className="py-0 px-1">
+      <CardContent className="px-1 py-0">
         {data.lastSubmission ? (
           <div className="flex flex-col gap-2">
             <p className="font-semibold text-foreground">
@@ -36,16 +36,16 @@ export const InfoCards: React.FC<InfoCardsProps> = ({
       </CardContent>
     </Card>
 
-    <Card className="border-border bg-card gap-4 p-4 grow shadow-none">
+    <Card className="grow gap-4 border-border bg-card p-4 shadow-none">
       <CardHeader className="flex flex-row items-center gap-4 p-0">
-        <div className="rounded-2xl bg-primary/10 p-3" aria-hidden="true">
+        <div aria-hidden="true" className="rounded-2xl bg-primary/10 p-3">
           <BarChart3 className="size-6 text-primary" />
         </div>
-        <CardTitle className="text-base font-medium text-muted-foreground">
+        <CardTitle className="font-medium text-base text-muted-foreground">
           Form Status
         </CardTitle>
       </CardHeader>
-      <CardContent className="py-0 px-1">
+      <CardContent className="px-1 py-0">
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
             <span className="text-muted-foreground text-sm">Published</span>
@@ -69,16 +69,16 @@ export const InfoCards: React.FC<InfoCardsProps> = ({
       </CardContent>
     </Card>
 
-    <Card className="border-border bg-card gap-4 p-4 grow shadow-none">
+    <Card className="grow gap-4 border-border bg-card p-4 shadow-none">
       <CardHeader className="flex flex-row items-center gap-4 p-0">
-        <div className="rounded-2xl bg-primary/10 p-3" aria-hidden="true">
+        <div aria-hidden="true" className="rounded-2xl bg-primary/10 p-3">
           <TrendingUp className="size-6 text-primary" />
         </div>
-        <CardTitle className="text-base font-medium text-muted-foreground">
+        <CardTitle className="font-medium text-base text-muted-foreground">
           Quick Stats
         </CardTitle>
       </CardHeader>
-      <CardContent className="py-0 px-1">
+      <CardContent className="px-1 py-0">
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
             <span className="text-muted-foreground text-sm">
@@ -89,7 +89,9 @@ export const InfoCards: React.FC<InfoCardsProps> = ({
             </span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-muted-foreground text-sm">Most Active Day</span>
+            <span className="text-muted-foreground text-sm">
+              Most Active Day
+            </span>
             {data.mostActiveDay ? (
               <div className="flex items-center gap-2">
                 <span className="font-semibold text-foreground text-sm">

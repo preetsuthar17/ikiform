@@ -7,7 +7,6 @@ import {
   Eye,
   FileText,
   Globe,
-  RefreshCw,
   Search,
   User,
 } from "lucide-react";
@@ -17,7 +16,15 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import {
   Table,
   TableBody,
@@ -26,14 +33,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
 import { toast } from "@/hooks/use-toast";
 import type { Form, FormSubmission } from "@/lib/database";
 
@@ -42,15 +41,14 @@ interface FormSubmissionsProps {
   submissions: FormSubmission[];
 }
 
-const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString("en-US", {
+const formatDate = (dateString: string) =>
+  new Date(dateString).toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
     day: "numeric",
     hour: "2-digit",
     minute: "2-digit",
   });
-};
 
 const getFieldLabel = (form: Form, fieldId: string) => {
   const allFields = [
@@ -72,21 +70,28 @@ const exportToCSV = (form: Form, submissions: FormSubmission[]) => {
     ...(form.schema.blocks?.flatMap((block) => block.fields || []) || []),
   ];
 
-  const headers = ["Submission ID", "Submitted At", "IP Address", ...allFields.map((f) => f.label || f.id)];
-  
+  const headers = [
+    "Submission ID",
+    "Submitted At",
+    "IP Address",
+    ...allFields.map((f) => f.label || f.id),
+  ];
+
   const csvContent = [
     headers.join(","),
-    ...submissions.map((submission) => [
-      submission.id,
-      submission.submitted_at,
-      submission.ip_address || "",
-      ...allFields.map((field) => {
-        const value = submission.submission_data[field.id];
-        if (value === null || value === undefined) return "";
-        if (typeof value === "object") return JSON.stringify(value);
-        return String(value).replace(/,/g, ";");
-      }),
-    ].join(",")),
+    ...submissions.map((submission) =>
+      [
+        submission.id,
+        submission.submitted_at,
+        submission.ip_address || "",
+        ...allFields.map((field) => {
+          const value = submission.submission_data[field.id];
+          if (value === null || value === undefined) return "";
+          if (typeof value === "object") return JSON.stringify(value);
+          return String(value).replace(/,/g, ";");
+        }),
+      ].join(",")
+    ),
   ].join("\n");
 
   const blob = new Blob([csvContent], { type: "text/csv" });
@@ -96,7 +101,7 @@ const exportToCSV = (form: Form, submissions: FormSubmission[]) => {
   link.download = `${form.title}_submissions.csv`;
   link.click();
   URL.revokeObjectURL(url);
-  
+
   toast.success("CSV exported successfully");
 };
 
@@ -114,14 +119,15 @@ const exportToJSON = (form: Form, submissions: FormSubmission[]) => {
   link.download = `${form.title}_submissions.json`;
   link.click();
   URL.revokeObjectURL(url);
-  
+
   toast.success("JSON exported successfully");
 };
 
 export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedSubmission, setSelectedSubmission] = useState<FormSubmission | null>(null);
+  const [selectedSubmission, setSelectedSubmission] =
+    useState<FormSubmission | null>(null);
 
   const filteredSubmissions = submissions.filter((submission) => {
     if (!searchTerm) return true;
@@ -149,20 +155,20 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-3">
-                  <Button asChild variant="ghost" size="sm">
-                    <Link 
-                      href={`/dashboard/forms/${form.id}/analytics`}
+                  <Button asChild size="sm" variant="ghost">
+                    <Link
                       className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
+                      href={`/dashboard/forms/${form.id}/analytics`}
                     >
                       <ArrowLeft className="size-4" />
                       Back to Analytics
                     </Link>
                   </Button>
                 </div>
-                
+
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-3">
-                    <h1 className="text-2xl font-bold text-foreground sm:text-3xl">
+                    <h1 className="font-bold text-2xl text-foreground sm:text-3xl">
                       {form.title}
                     </h1>
                     <Badge
@@ -182,29 +188,31 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
                       )}
                     </Badge>
                   </div>
-                  
+
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <FileText className="size-4" />
-                    <span className="text-sm">Form Submissions ({submissions.length})</span>
+                    <span className="text-sm">
+                      Form Submissions ({submissions.length})
+                    </span>
                   </div>
                 </div>
               </div>
 
               <div className="flex items-center gap-2">
                 <Button
-                  onClick={() => exportToCSV(form, submissions)}
                   disabled={submissions.length === 0}
-                  variant="outline"
+                  onClick={() => exportToCSV(form, submissions)}
                   size="sm"
+                  variant="outline"
                 >
                   <Download className="mr-2 size-4" />
                   Export CSV
                 </Button>
                 <Button
-                  onClick={() => exportToJSON(form, submissions)}
                   disabled={submissions.length === 0}
-                  variant="outline"
+                  onClick={() => exportToJSON(form, submissions)}
                   size="sm"
+                  variant="outline"
                 >
                   <Download className="mr-2 size-4" />
                   Export JSON
@@ -224,12 +232,12 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
               </CardTitle>
               <div className="flex items-center gap-2">
                 <div className="relative max-w-md">
-                  <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                  <Search className="-translate-y-1/2 absolute top-1/2 left-3 size-4 text-muted-foreground" />
                   <Input
+                    className="pl-10"
+                    onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="Search submissions..."
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10"
                   />
                 </div>
               </div>
@@ -242,13 +250,14 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
                   <FileText className="size-10 text-accent-foreground" />
                 </div>
                 <h4 className="font-semibold text-foreground text-xl">
-                  {searchTerm ? "No matching submissions" : "No submissions yet"}
+                  {searchTerm
+                    ? "No matching submissions"
+                    : "No submissions yet"}
                 </h4>
                 <p className="max-w-md text-center text-muted-foreground">
-                  {searchTerm 
+                  {searchTerm
                     ? "Try adjusting your search terms to find submissions."
-                    : "Once people start filling out your form, their responses will appear here."
-                  }
+                    : "Once people start filling out your form, their responses will appear here."}
                 </p>
               </div>
             ) : (
@@ -280,22 +289,25 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
                         </TableCell>
                         <TableCell>
                           <Badge variant="outline">
-                            {Object.keys(submission.submission_data).length} fields
+                            {Object.keys(submission.submission_data).length}{" "}
+                            fields
                           </Badge>
                         </TableCell>
                         <TableCell>
                           <Dialog>
                             <DialogTrigger asChild>
                               <Button
-                                variant="outline"
+                                onClick={() =>
+                                  setSelectedSubmission(submission)
+                                }
                                 size="sm"
-                                onClick={() => setSelectedSubmission(submission)}
+                                variant="outline"
                               >
                                 <Eye className="mr-2 size-4" />
                                 View
                               </Button>
                             </DialogTrigger>
-                            <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                            <DialogContent className="max-h-[80vh] max-w-4xl overflow-y-auto">
                               <DialogHeader>
                                 <DialogTitle>
                                   Submission Details - {submission.id.slice(-8)}
@@ -304,45 +316,66 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
                               <div className="space-y-6">
                                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                                   <div>
-                                    <label className="text-sm font-medium text-muted-foreground">
+                                    <label className="font-medium text-muted-foreground text-sm">
                                       Submission ID
                                     </label>
-                                    <p className="font-mono text-sm">{submission.id}</p>
+                                    <p className="font-mono text-sm">
+                                      {submission.id}
+                                    </p>
                                   </div>
                                   <div>
-                                    <label className="text-sm font-medium text-muted-foreground">
+                                    <label className="font-medium text-muted-foreground text-sm">
                                       Submitted At
                                     </label>
-                                    <p className="text-sm">{formatDate(submission.submitted_at)}</p>
+                                    <p className="text-sm">
+                                      {formatDate(submission.submitted_at)}
+                                    </p>
                                   </div>
                                   <div>
-                                    <label className="text-sm font-medium text-muted-foreground">
+                                    <label className="font-medium text-muted-foreground text-sm">
                                       IP Address
                                     </label>
-                                    <p className="font-mono text-sm">{submission.ip_address || "N/A"}</p>
+                                    <p className="font-mono text-sm">
+                                      {submission.ip_address || "N/A"}
+                                    </p>
                                   </div>
                                 </div>
-                                
+
                                 <Separator />
-                                
+
                                 <div>
-                                  <h3 className="font-semibold text-lg mb-4">Form Data</h3>
+                                  <h3 className="mb-4 font-semibold text-lg">
+                                    Form Data
+                                  </h3>
                                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                    {Object.entries(submission.submission_data).map(([fieldId, value]) => {
-                                      const fieldLabel = getFieldLabel(form, fieldId);
-                                      
+                                    {Object.entries(
+                                      submission.submission_data
+                                    ).map(([fieldId, value]) => {
+                                      const fieldLabel = getFieldLabel(
+                                        form,
+                                        fieldId
+                                      );
+
                                       return (
-                                        <div key={fieldId} className="space-y-2">
-                                          <label className="text-sm font-medium text-muted-foreground">
+                                        <div
+                                          className="space-y-2"
+                                          key={fieldId}
+                                        >
+                                          <label className="font-medium text-muted-foreground text-sm">
                                             {fieldLabel}
                                           </label>
                                           <div className="rounded-lg border border-border bg-muted/50 p-3">
                                             <p className="text-sm">
                                               {Array.isArray(value)
                                                 ? value.join(", ")
-                                                : typeof value === "object" && value !== null
-                                                ? JSON.stringify(value, null, 2)
-                                                : String(value) || "—"}
+                                                : typeof value === "object" &&
+                                                    value !== null
+                                                  ? JSON.stringify(
+                                                      value,
+                                                      null,
+                                                      2
+                                                    )
+                                                  : String(value) || "—"}
                                             </p>
                                           </div>
                                         </div>

@@ -1,17 +1,16 @@
 "use client";
 
 import {
+  ArrowLeft,
   BarChart3,
+  Download,
   Edit,
   Eye,
   Globe,
+  MoreHorizontal,
   Share,
   Sparkles,
   Trash2,
-  ArrowLeft,
-  MoreHorizontal,
-  Download,
-  RefreshCw,
 } from "lucide-react";
 
 import Link from "next/link";
@@ -21,17 +20,8 @@ import { useEffect, useState } from "react";
 import { ConfirmationModal } from "@/components/dashboard/form-delete-confirmation-modal";
 import { ShareFormModal } from "@/components/form-builder/share-form-modal";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Loader } from "@/components/ui/loader";
-import { Progress } from "@/components/ui/progress";
-import { Separator } from "@/components/ui/separator";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Card, CardHeader } from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,6 +29,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Loader } from "@/components/ui/loader";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { toast } from "@/hooks/use-toast";
 
 import { formsDb } from "@/lib/database";
@@ -158,38 +155,41 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background">
-       <Loader/>
+        <Loader />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-background py-12">
-      <div className="mx-auto max-w-7xl flex flex-col gap-4">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4">
         {/* Header Section */}
-        <Card className="shadow-none p-4 md:p-6" aria-labelledby="form-analytics-header">
+        <Card
+          aria-labelledby="form-analytics-header"
+          className="p-4 shadow-none md:p-6"
+        >
           <CardHeader className="p-0">
-            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
-              <div className="flex flex-col gap-4 min-w-0">
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+              <div className="flex min-w-0 flex-col gap-4">
                 <Button
-                  asChild
-                  variant="outline"
-                  className="w-fit"
                   aria-label="Back to Dashboard"
+                  asChild
+                  className="w-fit"
+                  variant="outline"
                 >
                   <Link
-                    href="/dashboard"
                     className="inline-flex items-center gap-2"
+                    href="/dashboard"
                   >
-                    <ArrowLeft className="size-4 shrink-0" aria-hidden="true" />
+                    <ArrowLeft aria-hidden="true" className="size-4 shrink-0" />
                     <span className="text-sm">Back to Dashboard</span>
                   </Link>
                 </Button>
-                <div className="flex flex-col gap-4 min-w-0">
-                  <div className="flex items-center flex-wrap gap-3">
+                <div className="flex min-w-0 flex-col gap-4">
+                  <div className="flex flex-wrap items-center gap-3">
                     <h1
+                      className="truncate font-bold text-2xl text-foreground sm:text-3xl"
                       id="form-analytics-header"
-                      className="text-2xl font-bold truncate text-foreground sm:text-3xl"
                     >
                       {form.title}
                     </h1>
@@ -199,13 +199,13 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                     >
                       {form.is_published ? (
                         <>
-                          <Globe className="size-3" aria-hidden="true" />
+                          <Globe aria-hidden="true" className="size-3" />
                           <span className="sr-only">Published</span>
                           <span aria-live="polite">Published</span>
                         </>
                       ) : (
                         <>
-                          <Eye className="size-3" aria-hidden="true" />
+                          <Eye aria-hidden="true" className="size-3" />
                           <span className="sr-only">Draft</span>
                           <span aria-live="polite">Draft</span>
                         </>
@@ -213,27 +213,32 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                     </Badge>
                   </div>
                   <div className="flex items-center gap-2 text-muted-foreground">
-                    <BarChart3 className="size-4" aria-hidden="true" />
-                    <span className="text-sm font-medium">Form Analytics&nbsp;&amp;&nbsp;Submission Data</span>
+                    <BarChart3 aria-hidden="true" className="size-4" />
+                    <span className="font-medium text-sm">
+                      Form Analytics&nbsp;&amp;&nbsp;Submission Data
+                    </span>
                   </div>
                 </div>
               </div>
-              
+
               {/* Right: Actions */}
-              <div className="flex items-center flex-wrap gap-3 sm:gap-3" aria-label="Form Actions">
+              <div
+                aria-label="Form Actions"
+                className="flex flex-wrap items-center gap-3 sm:gap-3"
+              >
                 {/* Edit button with Tooltip */}
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Button
+                        aria-label="Edit form"
+                        className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                         onClick={handleEditForm}
                         size="icon"
-                        variant="outline"
-                        aria-label="Edit form"
                         tabIndex={0}
-                        className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                        variant="outline"
                       >
-                        <Edit className="size-4 shrink-0" aria-hidden="true" />
+                        <Edit aria-hidden="true" className="size-4 shrink-0" />
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>Edit form</TooltipContent>
@@ -244,14 +249,14 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Button
+                        aria-label="Share form"
+                        className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                         onClick={handleShareForm}
                         size="icon"
-                        variant="outline"
-                        aria-label="Share form"
                         tabIndex={0}
-                        className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                        variant="outline"
                       >
-                        <Share className="size-4 shrink-0" aria-hidden="true" />
+                        <Share aria-hidden="true" className="size-4 shrink-0" />
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>Share form</TooltipContent>
@@ -261,22 +266,31 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
-                      size="icon"
-                      variant="outline"
                       aria-label="More actions"
-                      tabIndex={0}
                       className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                      size="icon"
+                      tabIndex={0}
+                      variant="outline"
                     >
-                      <MoreHorizontal className="size-4 shrink-0" aria-hidden="true" />
+                      <MoreHorizontal
+                        aria-hidden="true"
+                        className="size-4 shrink-0"
+                      />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <DropdownMenuItem onClick={handleExportCsv}>
-                      <Download className="size-4 shrink-0" aria-hidden="true" />
+                      <Download
+                        aria-hidden="true"
+                        className="size-4 shrink-0"
+                      />
                       <span>Export CSV</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={handleExportJson}>
-                      <Download className="size-4 shrink-0" aria-hidden="true" />
+                      <Download
+                        aria-hidden="true"
+                        className="size-4 shrink-0"
+                      />
                       <span>Export JSON</span>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
@@ -284,28 +298,31 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                       onClick={() => setIsDeleteModalOpen(true)}
                       variant="destructive"
                     >
-                      <Trash2 className="size-4 shrink-0" aria-hidden="true" />
+                      <Trash2 aria-hidden="true" className="size-4 shrink-0" />
                       <span>Delete form</span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-                
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Button
-                          className="flex gap-2 items-center focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                          onClick={() => setChatOpen(true)}
-                          variant="default"
-                          aria-label="Open Kiko AI"
-                        >
-                          <Sparkles className="size-4 shrink-0" aria-hidden="true" />
-                          <span className="hidden sm:inline">Kiko&nbsp;AI</span>
-                        </Button>
-                      </TooltipTrigger>
-                      <TooltipContent>AI Form analytics</TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
+
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        aria-label="Open Kiko AI"
+                        className="flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                        onClick={() => setChatOpen(true)}
+                        variant="default"
+                      >
+                        <Sparkles
+                          aria-hidden="true"
+                          className="size-4 shrink-0"
+                        />
+                        <span className="hidden sm:inline">Kiko&nbsp;AI</span>
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>AI Form analytics</TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
             </div>
           </CardHeader>

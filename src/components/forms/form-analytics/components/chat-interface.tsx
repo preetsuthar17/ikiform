@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { Send, Square } from "lucide-react";
 
@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Kbd } from "@/components/ui/kbd";
 import { Loader } from "@/components/ui/loader";
 
-import { ScrollArea } from "@/components/ui/scroll-area"; 
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -382,8 +382,8 @@ export const ChatInterface = memo(function ChatInterface({
             {}
             <div className="mt-3 flex items-center justify-center text-muted-foreground text-xs">
               <span>
-                Press <Kbd>Enter</Kbd> to send,{" "}
-                <Kbd>Shift+Enter</Kbd> for new line
+                Press <Kbd>Enter</Kbd> to send, <Kbd>Shift+Enter</Kbd> for new
+                line
               </span>
             </div>
           </div>

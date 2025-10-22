@@ -48,13 +48,13 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
 }) => {
   if (!form.schema?.blocks || form.schema.blocks.length === 0) {
     return (
-      <Card className="shadow-none p-4 md:p-6">
+      <Card className="p-4 shadow-none md:p-6">
         <CardHeader className="flex items-center gap-4 space-y-0 p-0">
-          <div className="rounded-2xl bg-orange-500/10 p-3" aria-hidden="true">
+          <div aria-hidden="true" className="rounded-2xl bg-orange-500/10 p-3">
             <AlertTriangle className="size-6 text-orange-600" />
           </div>
           <div className="flex flex-col gap-1">
-            <CardTitle className="text-lg font-semibold text-foreground">
+            <CardTitle className="font-semibold text-foreground text-lg">
               Drop-off analytics
             </CardTitle>
             <p className="text-muted-foreground text-sm">
@@ -70,13 +70,13 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
   const total = submissions.length;
 
   return (
-    <Card className="shadow-none p-4 md:p-6">
+    <Card className="p-4 shadow-none md:p-6">
       <CardHeader className="flex items-center gap-4 space-y-0 p-0">
-        <div className="rounded-2xl bg-orange-500/10 p-3" aria-hidden="true">
+        <div aria-hidden="true" className="rounded-2xl bg-orange-500/10 p-3">
           <AlertTriangle className="size-6 text-orange-600" />
         </div>
         <div className="flex flex-col gap-1">
-          <CardTitle className="text-lg font-semibold text-foreground">
+          <CardTitle className="font-semibold text-foreground text-lg">
             Drop-off analytics
           </CardTitle>
           <p className="text-muted-foreground text-sm">
@@ -97,14 +97,16 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
           <TableBody>
             {form.schema.blocks.map((block: any, idx: number) => {
               const reached = dropoffCounts[block.id] || 0;
-              const dropoff = total > 0 ? 100 - Math.round((reached / total) * 100) : 0;
-              const completionRate = total > 0 ? Math.round((reached / total) * 100) : 0;
+              const dropoff =
+                total > 0 ? 100 - Math.round((reached / total) * 100) : 0;
+              const completionRate =
+                total > 0 ? Math.round((reached / total) * 100) : 0;
 
               return (
                 <TableRow key={block.id}>
                   <TableCell className="font-medium">
                     <div className="flex items-center gap-2">
-                      <div className="flex size-6 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">
+                      <div className="flex size-6 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary text-xs">
                         {idx + 1}
                       </div>
                       {block.label ? block.label : `Step ${idx + 1}`}
@@ -112,7 +114,9 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <span className="tabular-nums font-semibold">{reached}</span>
+                      <span className="font-semibold tabular-nums">
+                        {reached}
+                      </span>
                       <span className="text-muted-foreground text-sm">
                         of {total}
                       </span>
@@ -120,17 +124,19 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <span className="tabular-nums font-semibold">{dropoff}%</span>
-                      <div className="flex-1 max-w-20">
-                        <div className="h-2 bg-muted rounded-full overflow-hidden">
+                      <span className="font-semibold tabular-nums">
+                        {dropoff}%
+                      </span>
+                      <div className="max-w-20 flex-1">
+                        <div className="h-2 overflow-hidden rounded-full bg-muted">
                           {/* Prevents visual issue if dropoff is 0 or very small */}
-                          <div 
+                          <div
+                            aria-label={`Drop-off bar for step ${idx + 1}`}
                             className="h-full bg-destructive transition-all duration-300"
                             style={{
                               width: dropoff > 0 ? `${dropoff}%` : "2px",
                               minWidth: dropoff === 0 ? "2px" : undefined,
                             }}
-                            aria-label={`Drop-off bar for step ${idx + 1}`}
                           />
                         </div>
                       </div>
@@ -138,17 +144,23 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <span className="tabular-nums font-semibold">{completionRate}%</span>
-                      <div className="flex-1 max-w-20">
-                        <div className="h-2 bg-muted rounded-full overflow-hidden">
+                      <span className="font-semibold tabular-nums">
+                        {completionRate}%
+                      </span>
+                      <div className="max-w-20 flex-1">
+                        <div className="h-2 overflow-hidden rounded-full bg-muted">
                           {/* Prevents visual issue if completionRate is 0 or very small */}
                           <div
+                            aria-label={`Completion bar for step ${idx + 1}`}
                             className="h-full bg-primary transition-all duration-300"
                             style={{
-                              width: completionRate > 0 ? `${completionRate}%` : "2px",
-                              minWidth: completionRate === 0 ? "2px" : undefined,
+                              width:
+                                completionRate > 0
+                                  ? `${completionRate}%`
+                                  : "2px",
+                              minWidth:
+                                completionRate === 0 ? "2px" : undefined,
                             }}
-                            aria-label={`Completion bar for step ${idx + 1}`}
                           />
                         </div>
                       </div>

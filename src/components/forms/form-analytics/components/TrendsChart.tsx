@@ -37,9 +37,14 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
       <div className="rounded-xl border border-border bg-card px-3 py-2">
-        <p className="mb-1 font-semibold text-foreground">{formatDate(label)}</p>
+        <p className="mb-1 font-semibold text-foreground">
+          {formatDate(label)}
+        </p>
         <p className="m-0 text-muted-foreground">
-          Submissions: <span className="font-medium text-foreground">{payload[0].value}</span>
+          Submissions:{" "}
+          <span className="font-medium text-foreground">
+            {payload[0].value}
+          </span>
         </p>
       </div>
     );
@@ -51,9 +56,9 @@ export const TrendsChart: React.FC<TrendsChartProps> = ({ trends }) => {
   const data = useMemo(() => getAllTrends(trends), [trends]);
 
   return (
-    <Card className="shadow-none p-4 md:p-6">
+    <Card className="p-4 shadow-none md:p-6">
       <CardHeader className="flex items-center justify-between space-y-0 p-0">
-        <CardTitle className="text-lg font-semibold text-foreground">
+        <CardTitle className="font-semibold text-foreground text-lg">
           Submission Trends
         </CardTitle>
       </CardHeader>
@@ -65,11 +70,22 @@ export const TrendsChart: React.FC<TrendsChartProps> = ({ trends }) => {
             </div>
           ) : (
             <ResponsiveContainer height="100%" width="100%">
-              <AreaChart data={data} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
+              <AreaChart
+                data={data}
+                margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
+              >
                 <defs>
                   <linearGradient id="colorValue" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="5%" stopColor="var(--primary)" stopOpacity={0.5} />
-                    <stop offset="95%" stopColor="var(--primary)" stopOpacity={0} />
+                    <stop
+                      offset="5%"
+                      stopColor="var(--primary)"
+                      stopOpacity={0.5}
+                    />
+                    <stop
+                      offset="95%"
+                      stopColor="var(--primary)"
+                      stopOpacity={0}
+                    />
                   </linearGradient>
                 </defs>
                 <XAxis
@@ -94,4 +110,4 @@ export const TrendsChart: React.FC<TrendsChartProps> = ({ trends }) => {
       </CardContent>
     </Card>
   );
-}
+};
