@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
 
     const fiveMinutesAgo = new Date();
     fiveMinutesAgo.setMinutes(fiveMinutesAgo.getMinutes() - 5);
-    
+
     // Update users who were created 5+ minutes ago and still have free trial
     const { data, error } = await supabase
       .from("users")
