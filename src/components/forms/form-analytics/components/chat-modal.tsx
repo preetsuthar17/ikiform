@@ -1,23 +1,19 @@
 import { Bot } from "lucide-react";
 import type React from "react";
 import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
   Drawer,
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-
-import {
-  Modal,
-  ModalClose,
-  ModalContent,
-  ModalHeader,
-  ModalTitle,
-} from "@/components/ui/modal";
-
 import type { ChatModalProps } from "../types";
-
 import { ChatInterface } from "./chat-interface";
 
 export const ChatModal: React.FC<ChatModalProps> = ({
@@ -65,7 +61,7 @@ export const ChatModal: React.FC<ChatModalProps> = ({
               Chat with AI about your form analytics
             </DrawerDescription>
           </DrawerHeader>
-          <div className="flex-1">
+          <div className="flex-1 overflow-hidden">
             <ChatInterface {...chatInterfaceProps} />
           </div>
         </DrawerContent>
@@ -74,18 +70,15 @@ export const ChatModal: React.FC<ChatModalProps> = ({
   }
 
   return (
-    <Modal onOpenChange={onClose} open={isOpen}>
-      <ModalContent className="flex h-[800px] max-w-3xl flex-col focus:outline-none focus:ring-0">
-        <ModalHeader className="flex items-center justify-between gap-2 px-4 py-3">
+    <Dialog onOpenChange={onClose} open={isOpen}>
+      <DialogContent className="flex h-[800px] flex-col p-6 focus:outline-none focus:ring-0">
+        <DialogHeader className="flex items-center justify-between gap-2 px-4 py-3">
           <div className="flex items-center gap-2">
-            <ModalTitle>Kiko</ModalTitle>
+            <DialogTitle>Kiko</DialogTitle>
           </div>
-          <ModalClose onClick={onClose} />
-        </ModalHeader>
-        <div className="flex-1">
-          <ChatInterface {...chatInterfaceProps} />
-        </div>
-      </ModalContent>
-    </Modal>
+        </DialogHeader>
+        <ChatInterface {...chatInterfaceProps} />
+      </DialogContent>
+    </Dialog>
   );
 };
