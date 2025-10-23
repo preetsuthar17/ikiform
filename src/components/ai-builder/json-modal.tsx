@@ -76,7 +76,7 @@ export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
               </div>
             ) : (
               <div
-                className="text-xs [&_pre]:m-0 [&_pre]:whitespace-pre-wrap font-mono [&_pre]:break-words [&_pre]:bg-transparent [&_pre]:p-0"
+                className="font-mono text-xs [&_pre]:m-0 [&_pre]:whitespace-pre-wrap [&_pre]:break-words [&_pre]:bg-transparent [&_pre]:p-0"
                 dangerouslySetInnerHTML={{ __html: highlightedCode }}
               />
             )}
