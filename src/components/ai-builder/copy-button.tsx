@@ -35,7 +35,7 @@ export function CopyButton({ schema }: CopyButtonProps) {
         <TooltipTrigger asChild>
           <Button
             aria-label={copied ? "Copied!" : "Copy schema"}
-            className="size-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
+            className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
             disabled={copied}
             onClick={handleCopy}
             size="icon"
