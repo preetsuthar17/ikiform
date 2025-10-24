@@ -1,12 +1,20 @@
+import { memo } from "react";
 import type { FormsSidebarProps } from "../types";
 import { FormStats } from "./FormStats";
 
-export function FormsSidebar({ forms, loading }: FormsSidebarProps) {
+export const FormsSidebar = memo(function FormsSidebar({
+  forms,
+  loading,
+}: FormsSidebarProps) {
   return (
-    <div className="flex w-full flex-col">
+    <aside
+      aria-label="Forms statistics sidebar"
+      className="flex w-full flex-col"
+      role="complementary"
+    >
       <FormStats forms={forms} loading={loading} />
-    </div>
+    </aside>
   );
-}
+});
 
 export default FormsSidebar;

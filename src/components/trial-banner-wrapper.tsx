@@ -1,7 +1,8 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface User {
   has_premium: boolean;
@@ -9,75 +10,114 @@ interface User {
   created_at: string;
 }
 
-function formatTrialTimeLeft(endsAt: Date, now: Date): string {
-  let diff = Math.max(endsAt.getTime() - now.getTime(), 0);
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  diff -= days * (1000 * 60 * 60 * 24);
-  const hours = Math.floor(diff / (1000 * 60 * 60));
-  diff -= hours * (1000 * 60 * 60);
-  const mins = Math.floor(diff / (1000 * 60));
-  diff -= mins * (1000 * 60);
-  const secs = Math.floor(diff / 1000);
-
-  return `${days} day${days !== 1 ? "s" : ""} ${hours} hour${hours !== 1 ? "s" : ""} ${mins} min ${secs} second${secs !== 1 ? "s" : ""}`;
+interface TrialBannerWrapperProps {
+  className?: string;
 }
 
-export function TrialBannerWrapper() {
+function formatTrialTimeLeft(endsAt: Date, now: Date): string {
+  const diff = Math.max(endsAt.getTime() - now.getTime(), 0);
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  if (days > 0) {
+    return `${days}d ${hours}h ${minutes}m`;
+  }
+  if (hours > 0) {
+    return `${hours}h ${minutes}m ${seconds}s`;
+  }
+  return `${minutes}m ${seconds}s`;
+}
+
+export function TrialBannerWrapper({ className }: TrialBannerWrapperProps) {
   const [user, setUser] = useState<User | null>(null);
   const [isDismissed, setIsDismissed] = useState(false);
   const [timeLeft, setTimeLeft] = useState<string>("");
   const [isExpired, setIsExpired] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const bannerRef = useRef<HTMLDivElement>(null);
 
   const pathname = usePathname();
 
-  const shouldHideBanner =
-    pathname.startsWith("/f/") || pathname.startsWith("/forms/");
+  const shouldHideBanner = useMemo(
+    () => pathname.startsWith("/f/") || pathname.startsWith("/forms/"),
+    [pathname]
+  );
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await fetch("/api/user");
-        if (response.ok) {
-          const data = await response.json();
-          if (data.user) {
-            setUser(data.user);
-          }
-        }
-      } catch (error) {
-        console.error("Failed to fetch user data:", error);
-      }
-    };
-    fetchUser();
-  }, []);
-
-  // Calculate and update the time left (days hours min seconds)
-  useEffect(() => {
-    if (!user?.created_at) return;
-
-    const trialEnd = new Date(
+  const trialEndDate = useMemo(() => {
+    if (!user?.created_at) return null;
+    return new Date(
       new Date(user.created_at).getTime() + 14 * 24 * 60 * 60 * 1000
     );
+  }, [user?.created_at]);
 
-    function updateTime() {
+  const fetchUser = useCallback(async () => {
+    try {
+      const response = await fetch("/api/user", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.user) {
+          setUser(data.user);
+        }
+      }
+    } catch (error) {
+      console.error("Failed to fetch user data:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
+
+  useEffect(() => {
+    if (!trialEndDate) return;
+
+    const updateTime = () => {
       const now = new Date();
-      if (trialEnd.getTime() - now.getTime() <= 0) {
-        setTimeLeft("0 days 0 hours 0 min 0 seconds");
+      const timeDiff = trialEndDate.getTime() - now.getTime();
+
+      if (timeDiff <= 0) {
+        setTimeLeft("Trial expired");
         setIsExpired(true);
-        if (intervalRef.current) clearInterval(intervalRef.current);
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+        }
         return;
       }
-      setTimeLeft(formatTrialTimeLeft(trialEnd, now));
-    }
+
+      setTimeLeft(formatTrialTimeLeft(trialEndDate, now));
+    };
 
     updateTime();
     intervalRef.current = setInterval(updateTime, 1000);
 
     return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
     };
-  }, [user?.created_at]);
+  }, [trialEndDate]);
 
+  const handleDismiss = useCallback(() => {
+    setIsDismissed(true);
+    localStorage.setItem("trial-banner-dismissed", "true");
+  }, []);
+
+  useEffect(() => {
+    const wasDismissed = localStorage.getItem("trial-banner-dismissed");
+    if (wasDismissed === "true") {
+      setIsDismissed(true);
+    }
+  }, []);
   if (
     shouldHideBanner ||
     isDismissed ||
@@ -91,21 +131,26 @@ export function TrialBannerWrapper() {
 
   return (
     <div
+      aria-label="Trial status notification"
       aria-live="polite"
-      className="fixed top-0 left-0 z-50 w-full bg-foreground"
-      role="status"
+      className={cn(
+        "fixed top-0 left-0 z-50 w-full bg-foreground py-1",
+        "border-blue-500/20 border-b",
+        className
+      )}
+      ref={bannerRef}
+      role="banner"
     >
-      <div
-        className="mx-auto flex max-w-screen-xl items-center justify-center py-1"
-        tabIndex={-1}
-      >
-        <span className="flex items-center gap-1 font-medium text-sm text-white">
-          <span className="text- hidden sm:inline">
-            Your free trial ends in
+      <div className="mx-auto flex max-w-screen-xl items-center justify-center">
+        <div className="flex items-center gap-2 text-white">
+          <span className="font-medium text-sm">
+            <span className="hidden sm:inline">Your free trial ends in </span>
+            <span className="font-mono font-semibold text-sm tabular-nums">
+              {timeLeft}
+            </span>
+            <span className="sm:hidden"> remaining</span>
           </span>
-          <span className="text-sm tabular-nums">{timeLeft}</span>
-          <span className="inline sm:hidden">d h m s</span>
-        </span>
+        </div>
       </div>
     </div>
   );

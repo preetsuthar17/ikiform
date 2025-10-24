@@ -8,7 +8,7 @@ import {
   Share,
   Trash2,
 } from "lucide-react";
-import React from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import { ShareFormModal } from "@/components/form-builder/share-form-modal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -39,7 +39,7 @@ interface FormsListProps {
   onDelete: (formId: string, formTitle: string) => void;
 }
 
-export function FormsList({
+export const FormsList = memo(function FormsList({
   forms,
   onEdit,
   onDuplicate,
@@ -48,249 +48,319 @@ export function FormsList({
   onShare,
   onDelete,
 }: FormsListProps) {
-  const [hoveredIdx, setHoveredIdx] = React.useState<number | null>(null);
-  const [shareModalOpen, setShareModalOpen] = React.useState<{
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const [shareModalOpen, setShareModalOpen] = useState<{
     [key: string]: boolean;
   }>({});
-  const [modalJustClosed, setModalJustClosed] = React.useState<{
+  const [modalJustClosed, setModalJustClosed] = useState<{
     [key: string]: boolean;
   }>({});
 
-  return (
-    <>
-      <div className="relative flex flex-col">
-        {forms.map((form, idx) => {
-          const internalTitle =
-            form.schema?.settings?.title || form.title || "Untitled Form";
-          const hasPublicTitle =
-            form.schema?.settings?.publicTitle &&
-            form.schema.settings.publicTitle !== form.schema?.settings?.title;
+  const handleCardClick = useCallback(
+    (e: React.MouseEvent, formId: string) => {
+      if (
+        shareModalOpen[formId] ||
+        modalJustClosed[formId] ||
+        (e.target as HTMLElement).closest('[role="dialog"]')
+      ) {
+        return;
+      }
+      onViewAnalytics(formId);
+    },
+    [shareModalOpen, modalJustClosed, onViewAnalytics]
+  );
 
-          let cardClass =
-            "group flex cursor-pointer flex-col gap-4 shadow-none p-6 hover:bg-accent/50 relative";
+  const handleEdit = useCallback(
+    (e: React.MouseEvent, formId: string) => {
+      e.stopPropagation();
+      onEdit(formId);
+    },
+    [onEdit]
+  );
 
-          // Border logic defaults
-          if (forms.length === 1) {
-            // Single card: keep full border radius and all borders
-            cardClass += " rounded-lg";
-          } else if (idx === 0) {
-            cardClass += " rounded-t-lg rounded-b-none border-b-0";
-          } else if (idx === forms.length - 1) {
-            cardClass += " rounded-b-lg rounded-t-none border-b";
-          } else {
-            cardClass += " rounded-none border-b-0";
-          }
+  const handleShare = useCallback(
+    (e: React.MouseEvent, form: Form) => {
+      e.stopPropagation();
+      setShareModalOpen((prev) => ({
+        ...prev,
+        [form.id]: true,
+      }));
+      if (onShare) onShare(form);
+    },
+    [onShare]
+  );
 
-          let dynamicClasses = "";
+  const handleDuplicate = useCallback(
+    (e: React.MouseEvent, formId: string) => {
+      e.stopPropagation();
+      onDuplicate(formId);
+    },
+    [onDuplicate]
+  );
 
-          const nextCardShouldRemoveBorderT =
-            hoveredIdx !== null && idx > 0 && hoveredIdx === idx - 1;
+  const handleViewForm = useCallback(
+    (e: React.MouseEvent, form: Form) => {
+      e.stopPropagation();
+      onViewForm(form);
+    },
+    [onViewForm]
+  );
 
-          const isHovered = hoveredIdx === idx;
+  const handleViewAnalytics = useCallback(
+    (e: React.MouseEvent, formId: string) => {
+      e.stopPropagation();
+      onViewAnalytics(formId);
+    },
+    [onViewAnalytics]
+  );
 
-          if (forms.length > 1 && idx === forms.length - 1 && isHovered) {
-            dynamicClasses +=
-              " border border-primary/30 z-10 rounded-b-xl rounded-t-none";
-          } else if (isHovered && idx !== forms.length - 1) {
-            dynamicClasses += " border-b border-primary/30 z-10";
-          }
+  const handleEmbed = useCallback((e: React.MouseEvent, formId: string) => {
+    e.stopPropagation();
+    window.open(`/embed?formid=${formId}`, "_blank");
+  }, []);
 
-          if (
-            hoveredIdx !== null &&
-            idx === forms.length - 2 &&
-            hoveredIdx === forms.length - 1
-          ) {
-            dynamicClasses += " !border-b-0";
-          }
+  const handleDelete = useCallback(
+    (e: React.MouseEvent, formId: string, formTitle: string) => {
+      e.stopPropagation();
+      onDelete(formId, formTitle);
+    },
+    [onDelete]
+  );
 
-          if (nextCardShouldRemoveBorderT) {
-            dynamicClasses += " !border-t-0";
-          }
+  const handleModalClose = useCallback((formId: string) => {
+    setShareModalOpen((prev) => ({ ...prev, [formId]: false }));
+    setModalJustClosed((prev) => ({ ...prev, [formId]: true }));
+    setTimeout(
+      () => setModalJustClosed((prev) => ({ ...prev, [formId]: false })),
+      100
+    );
+  }, []);
 
-          return (
-            <Card
-              className={`${cardClass}${dynamicClasses ? " " + dynamicClasses : ""}`}
-              key={form.id}
-              onBlur={() => setHoveredIdx(null)}
-              onClick={(e) => {
-                if (
-                  shareModalOpen[form.id] ||
-                  modalJustClosed[form.id] ||
-                  (e.target as HTMLElement).closest('[role="dialog"]')
-                ) {
-                  return;
-                }
-                onViewAnalytics(form.id);
-              }}
-              onFocus={() => setHoveredIdx(idx)}
-              onMouseEnter={() => setHoveredIdx(idx)}
-              onMouseLeave={() => setHoveredIdx(null)}
-              tabIndex={0}
-            >
-              <div className="flex items-center justify-between gap-4">
-                <div className="flex min-w-0 flex-1 items-center gap-4">
-                  <div className="flex min-w-0 flex-1 flex-col gap-2">
-                    <div className="flex items-center gap-2">
-                      <h3 className="truncate font-semibold text-foreground">
-                        {internalTitle}
-                      </h3>
-                      <Badge
-                        variant={form.is_published ? "outline" : "pending"}
-                      >
-                        {form.is_published ? "Published" : "Draft"}
-                      </Badge>
-                    </div>
-                    {hasPublicTitle && (
-                      <p className="truncate text-muted-foreground text-sm">
-                        Public: "{form.schema?.settings?.publicTitle}"
-                      </p>
-                    )}
-                    {form.description && (
-                      <p className="truncate text-muted-foreground text-sm">
-                        {form.description}
-                      </p>
-                    )}
-                    <p className="mt-1 text-muted-foreground text-xs">
-                      Updated {formatDate(form.updated_at)}
-                    </p>
+  const handleModalPublish = useCallback(
+    async (form: Form) => {
+      if (onShare) onShare(form);
+    },
+    [onShare]
+  );
+
+  const formCards = useMemo(
+    () =>
+      forms.map((form, idx) => {
+        const internalTitle =
+          form.schema?.settings?.title || form.title || "Untitled Form";
+        const hasPublicTitle =
+          form.schema?.settings?.publicTitle &&
+          form.schema.settings.publicTitle !== form.schema?.settings?.title;
+
+        let cardClass =
+          "group flex cursor-pointer flex-col gap-4 shadow-none p-6 hover:bg-accent/50 relative";
+
+        if (forms.length === 1) {
+          cardClass += " rounded-lg";
+        } else if (idx === 0) {
+          cardClass += " rounded-t-lg rounded-b-none border-b-0";
+        } else if (idx === forms.length - 1) {
+          cardClass += " rounded-b-lg rounded-t-none border-b";
+        } else {
+          cardClass += " rounded-none border-b-0";
+        }
+
+        let dynamicClasses = "";
+
+        const nextCardShouldRemoveBorderT =
+          hoveredIdx !== null && idx > 0 && hoveredIdx === idx - 1;
+
+        const isHovered = hoveredIdx === idx;
+
+        if (forms.length > 1 && idx === forms.length - 1 && isHovered) {
+          dynamicClasses +=
+            " border border-primary/30 z-10 rounded-b-xl rounded-t-none";
+        } else if (isHovered && idx !== forms.length - 1) {
+          dynamicClasses += " border-b border-primary/30 z-10";
+        }
+
+        if (
+          hoveredIdx !== null &&
+          idx === forms.length - 2 &&
+          hoveredIdx === forms.length - 1
+        ) {
+          dynamicClasses += " !border-b-0";
+        }
+
+        if (nextCardShouldRemoveBorderT) {
+          dynamicClasses += " !border-t-0";
+        }
+
+        return (
+          <Card
+            aria-label={`View analytics for ${internalTitle}`}
+            className={`${cardClass}${dynamicClasses ? " " + dynamicClasses : ""}`}
+            key={form.id}
+            onBlur={() => setHoveredIdx(null)}
+            onClick={(e) => handleCardClick(e, form.id)}
+            onFocus={() => setHoveredIdx(idx)}
+            onMouseEnter={() => setHoveredIdx(idx)}
+            onMouseLeave={() => setHoveredIdx(null)}
+            role="button"
+            tabIndex={0}
+          >
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex min-w-0 flex-1 items-center gap-4">
+                <div className="flex min-w-0 flex-1 flex-col gap-2">
+                  <div className="flex items-center gap-2">
+                    <h3 className="truncate font-semibold text-foreground">
+                      {internalTitle}
+                    </h3>
+                    <Badge
+                      aria-label={`Form status: ${form.is_published ? "Published" : "Draft"}`}
+                      variant={form.is_published ? "outline" : "pending"}
+                    >
+                      {form.is_published ? "Published" : "Draft"}
+                    </Badge>
                   </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <TooltipProvider delayDuration={200}>
-                    <DropdownMenu>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              aria-label="Form actions"
-                              className="size-8 p-0"
-                              onClick={(e) => e.stopPropagation()}
-                              size="sm"
-                              variant="outline"
-                            >
-                              <MoreHorizontal
-                                aria-hidden="true"
-                                className="size-4"
-                              />
-                            </Button>
-                          </DropdownMenuTrigger>
-                        </TooltipTrigger>
-                        <TooltipContent side="top" sideOffset={8}>
-                          <p>Form actions</p>
-                        </TooltipContent>
-                      </Tooltip>
-                      <DropdownMenuContent
-                        align="end"
-                        className="w-48 shadow-xs"
-                      >
-                        <DropdownMenuItem
-                          className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onEdit(form.id);
-                          }}
-                        >
-                          <Edit aria-hidden="true" className="size-4" />
-                          Edit form
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setShareModalOpen((prev) => ({
-                              ...prev,
-                              [form.id]: true,
-                            }));
-                            if (onShare) onShare(form);
-                          }}
-                        >
-                          <Share aria-hidden="true" className="size-4" />
-                          Share form
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onDuplicate(form.id);
-                          }}
-                        >
-                          <Copy aria-hidden="true" className="size-4" />
-                          Duplicate
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onViewForm(form);
-                          }}
-                        >
-                          <Eye aria-hidden="true" className="size-4" />
-                          View form
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onViewAnalytics(form.id);
-                          }}
-                        >
-                          <BarChart3 aria-hidden="true" className="size-4" />
-                          View analytics
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem
-                          className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            window.open(`/embed?formid=${form.id}`, "_blank");
-                          }}
-                        >
-                          <Code2 aria-hidden="true" className="size-4" />
-                          Embed
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem
-                          className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onDelete(form.id, form.title);
-                          }}
-                          variant="destructive"
-                        >
-                          <Trash2 aria-hidden="true" className="size-4" />
-                          Delete form
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TooltipProvider>
+                  {hasPublicTitle && (
+                    <p className="truncate text-muted-foreground text-sm">
+                      Public: "{form.schema?.settings?.publicTitle}"
+                    </p>
+                  )}
+                  {form.description && (
+                    <p className="truncate text-muted-foreground text-sm">
+                      {form.description}
+                    </p>
+                  )}
+                  <p className="mt-1 text-muted-foreground text-xs">
+                    Updated {formatDate(form.updated_at)}
+                  </p>
                 </div>
               </div>
-            </Card>
-          );
-        })}
-      </div>
+              <div className="flex items-center gap-2">
+                <TooltipProvider delayDuration={200}>
+                  <DropdownMenu>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            aria-label={`Actions for ${internalTitle}`}
+                            className="size-8 p-0"
+                            onClick={(e) => e.stopPropagation()}
+                            size="sm"
+                            variant="outline"
+                          >
+                            <MoreHorizontal
+                              aria-hidden="true"
+                              className="size-4"
+                            />
+                          </Button>
+                        </DropdownMenuTrigger>
+                      </TooltipTrigger>
+                      <TooltipContent side="top" sideOffset={8}>
+                        <p>Form actions</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    <DropdownMenuContent align="end" className="w-48 shadow-xs">
+                      <DropdownMenuItem
+                        className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
+                        onClick={(e) => handleEdit(e, form.id)}
+                      >
+                        <Edit aria-hidden="true" className="size-4" />
+                        Edit form
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
+                        onClick={(e) => handleShare(e, form)}
+                      >
+                        <Share aria-hidden="true" className="size-4" />
+                        Share form
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
+                        onClick={(e) => handleDuplicate(e, form.id)}
+                      >
+                        <Copy aria-hidden="true" className="size-4" />
+                        Duplicate
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
+                        onClick={(e) => handleViewForm(e, form)}
+                      >
+                        <Eye aria-hidden="true" className="size-4" />
+                        View form
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
+                        onClick={(e) => handleViewAnalytics(e, form.id)}
+                      >
+                        <BarChart3 aria-hidden="true" className="size-4" />
+                        View analytics
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
+                        onClick={(e) => handleEmbed(e, form.id)}
+                      >
+                        <Code2 aria-hidden="true" className="size-4" />
+                        Embed
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
+                        onClick={(e) => handleDelete(e, form.id, form.title)}
+                        variant="destructive"
+                      >
+                        <Trash2 aria-hidden="true" className="size-4" />
+                        Delete form
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </TooltipProvider>
+              </div>
+            </div>
+          </Card>
+        );
+      }),
+    [
+      forms,
+      hoveredIdx,
+      shareModalOpen,
+      modalJustClosed,
+      handleCardClick,
+      handleEdit,
+      handleShare,
+      handleDuplicate,
+      handleViewForm,
+      handleViewAnalytics,
+      handleEmbed,
+      handleDelete,
+    ]
+  );
 
-      {forms.map((form) => (
+  const shareModals = useMemo(
+    () =>
+      forms.map((form) => (
         <ShareFormModal
           formId={form.id}
           formSlug={form.slug}
           isOpen={shareModalOpen[form.id]}
           isPublished={!!form.is_published}
           key={`share-${form.id}`}
-          onClose={() => {
-            setShareModalOpen((prev) => ({ ...prev, [form.id]: false }));
-            setModalJustClosed((prev) => ({ ...prev, [form.id]: true }));
-            setTimeout(
-              () =>
-                setModalJustClosed((prev) => ({ ...prev, [form.id]: false })),
-              100
-            );
-          }}
-          onPublish={async () => {
-            if (onShare) onShare(form);
-          }}
+          onClose={() => handleModalClose(form.id)}
+          onPublish={() => handleModalPublish(form)}
         />
-      ))}
+      )),
+    [forms, shareModalOpen, handleModalClose, handleModalPublish]
+  );
+
+  return (
+    <>
+      <div
+        aria-label="Forms list"
+        className="relative flex flex-col"
+        role="list"
+      >
+        {formCards}
+      </div>
+
+      {shareModals}
     </>
   );
-}
+});

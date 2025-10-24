@@ -1,15 +1,18 @@
 import dynamic from "next/dynamic";
-import { Suspense } from "react";
-import { LoginSkeleton } from "@/components/auth/login-skeleton";
+import { memo, Suspense } from "react";
+import { Loader } from "@/components/ui";
 
 const LoginClient = dynamic(() => import("./client"), {
-  loading: () => <LoginSkeleton />,
+  loading: () => <Loader />,
+  ssr: true,
 });
 
-export default function Login() {
+function Login() {
   return (
-    <Suspense fallback={<LoginSkeleton />}>
+    <Suspense fallback={<Loader />}>
       <LoginClient />
     </Suspense>
   );
 }
+
+export default memo(Login);

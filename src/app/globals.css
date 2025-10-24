@@ -283,7 +283,7 @@
 kbd,
 code,
 pre {
-  font-family: var(--font-jetbrains-mono) !important;
+  font-family: var(--font-mono) !important;
 }
 
 .fade-y {

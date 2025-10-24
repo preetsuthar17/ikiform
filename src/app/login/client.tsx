@@ -3,7 +3,7 @@
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { FaGithub } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { Badge, Label } from "@/components/ui";
@@ -79,12 +79,12 @@ export default function LoginForm() {
     }
   }, [user]);
 
-  const handleInput = (field: string, value: string) => {
+  const handleInput = useCallback((field: string, value: string) => {
     setForm((f) => ({ ...f, [field]: value }));
     setErrors((e) => ({ ...e, [field]: undefined }));
-  };
+  }, []);
 
-  const validateEmail = () => {
+  const validateEmail = useCallback(() => {
     if (!form.email) {
       setErrors((e) => ({ ...e, email: "Email is required" }));
       return false;
@@ -94,9 +94,9 @@ export default function LoginForm() {
       return false;
     }
     return true;
-  };
+  }, [form.email]);
 
-  const validatePassword = () => {
+  const validatePassword = useCallback(() => {
     if (!form.password) {
       setErrors((e) => ({ ...e, password: "Password is required" }));
       return false;
@@ -109,44 +109,47 @@ export default function LoginForm() {
       return false;
     }
     return true;
-  };
+  }, [form.password]);
 
-  const validateName = () => {
+  const validateName = useCallback(() => {
     if (!form.name.trim()) {
       setErrors((e) => ({ ...e, name: "Name is required for sign up" }));
       return false;
     }
     return true;
-  };
+  }, [form.name]);
 
-  const next = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (step === "email") {
-      if (!validateEmail()) return emailRef.current?.focus();
-      setStep(isSignUp ? "name" : "password");
-    } else if (step === "name") {
-      if (!validateName()) return nameRef.current?.focus();
-      setStep("password");
-    } else if (step === "password") {
-      if (!validatePassword()) return passwordRef.current?.focus();
-      await handleAuth();
-    }
-  };
+  const next = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      if (step === "email") {
+        if (!validateEmail()) return emailRef.current?.focus();
+        setStep(isSignUp ? "name" : "password");
+      } else if (step === "name") {
+        if (!validateName()) return nameRef.current?.focus();
+        setStep("password");
+      } else if (step === "password") {
+        if (!validatePassword()) return passwordRef.current?.focus();
+        await handleAuth();
+      }
+    },
+    [step, isSignUp, validateEmail, validateName, validatePassword]
+  );
 
-  const back = () => {
+  const back = useCallback(() => {
     if (step === "password") setStep(isSignUp ? "name" : "email");
     else if (step === "name") setStep("email");
-  };
+  }, [step, isSignUp]);
 
-  const reset = () => {
+  const reset = useCallback(() => {
     setStep("email");
     setForm({ email: "", password: "", name: "" });
     setErrors({});
     setShowPassword(false);
     setFocused({});
-  };
+  }, []);
 
-  const handleForgot = async () => {
+  const handleForgot = useCallback(async () => {
     if (!form.email)
       return toast.error("Please enter your email address first");
     if (!form.email.includes("@"))
@@ -164,9 +167,9 @@ export default function LoginForm() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [form.email]);
 
-  const handleAuth = async () => {
+  const handleAuth = useCallback(async () => {
     setLoading(true);
     const supabase = createClient();
     try {
@@ -223,9 +226,9 @@ export default function LoginForm() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [isSignUp, form.email, form.password, form.name]);
 
-  const handleOAuth = async (provider: "github" | "google") => {
+  const handleOAuth = useCallback(async (provider: "github" | "google") => {
     localStorage.setItem("lastLoginMethod", provider);
     setLastLoginMethod(provider);
     toast(`Logging in with ${provider === "google" ? "Google" : "GitHub"}`);
@@ -234,65 +237,73 @@ export default function LoginForm() {
       provider,
       options: { redirectTo: `${window.location.origin}/auth/callback` },
     });
-  };
+  }, []);
 
-  const renderInput = (
-    ref: React.RefObject<HTMLInputElement | null>,
-    field: "email" | "name" | "password",
-    label: string,
-    type: string,
-    extraProps: Record<string, any> = {}
-  ) => (
-    <div className="relative w-full">
-      <Input
-        aria-describedby={errors[field] ? `${field}-error` : undefined}
-        aria-invalid={!!errors[field] || undefined}
-        className={`${baseInputClass} ${form[field] ? "ring-2 ring-ring ring-offset-2" : ""}`}
-        disabled={loading}
-        id={field}
-        name={field}
-        onBlur={() => setFocused((f) => ({ ...f, [field]: false }))}
-        onChange={(e) => handleInput(field, e.target.value)}
-        onFocus={() => setFocused((f) => ({ ...f, [field]: true }))}
-        ref={ref}
-        required
-        type={type}
-        value={form[field]}
-        {...extraProps}
-      />
-      <Label
-        className={`linear pointer-events-none absolute left-4 select-none transition-all duration-300 ${
-          form[field] || focused[field]
-            ? "-top-3.5 bg-card px-2 text-primary text-sm"
-            : "top-3.5 text-sm opacity-30"
-        }`}
-        htmlFor={field}
-      >
-        {label}
-      </Label>
-      {field === "password" && (
-        <button
-          aria-label={showPassword ? "Hide password" : "Show password"}
-          aria-pressed={showPassword}
-          className="-translate-y-1/2 absolute top-1/2 right-2 rounded-md p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          onClick={() => setShowPassword((v) => !v)}
-          tabIndex={-1}
-          type="button"
+  const renderInput = useCallback(
+    (
+      ref: React.RefObject<HTMLInputElement | null>,
+      field: "email" | "name" | "password",
+      label: string,
+      type: string,
+      extraProps: Record<string, any> = {}
+    ) => (
+      <div className="relative w-full">
+        <Input
+          aria-describedby={errors[field] ? `${field}-error` : undefined}
+          aria-invalid={!!errors[field] || undefined}
+          className={`${baseInputClass} ${form[field] ? "ring-2 ring-ring ring-offset-2" : ""}`}
+          disabled={loading}
+          id={field}
+          name={field}
+          onBlur={() => setFocused((f) => ({ ...f, [field]: false }))}
+          onChange={(e) => handleInput(field, e.target.value)}
+          onFocus={() => setFocused((f) => ({ ...f, [field]: true }))}
+          ref={ref}
+          required
+          type={type}
+          value={form[field]}
+          {...extraProps}
+        />
+        <Label
+          className={`linear pointer-events-none absolute left-4 select-none transition-all duration-300 ${
+            form[field] || focused[field]
+              ? "-top-3.5 bg-card px-2 text-primary text-sm"
+              : "top-3.5 text-sm opacity-30"
+          }`}
+          htmlFor={field}
         >
-          {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-        </button>
-      )}
-      {errors[field] && (
-        <div
-          aria-live="polite"
-          className="mt-1 text-left text-destructive text-xs"
-          id={`${field}-error`}
-          role="status"
-        >
-          {errors[field]}
-        </div>
-      )}
-    </div>
+          {label}
+        </Label>
+        {field === "password" && (
+          <button
+            aria-label={showPassword ? "Hide password" : "Show password"}
+            aria-pressed={showPassword}
+            className="-translate-y-1/2 absolute top-1/2 right-2 rounded-md p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            onClick={() => setShowPassword((v) => !v)}
+            tabIndex={-1}
+            type="button"
+          >
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </button>
+        )}
+        {errors[field] && (
+          <div
+            aria-live="polite"
+            className="mt-1 text-left text-destructive text-xs"
+            id={`${field}-error`}
+            role="status"
+          >
+            {errors[field]}
+          </div>
+        )}
+      </div>
+    ),
+    [form, errors, focused, loading, showPassword, handleInput]
+  );
+
+  const currentTitle = useMemo(
+    () => (isSignUp ? stepTitlesSignUp : stepTitles)[step],
+    [isSignUp, step]
   );
 
   return (
@@ -302,7 +313,7 @@ export default function LoginForm() {
           <CardHeader className="w-full pt-2">
             <div className="flex items-center justify-center">
               <h2 className="font-semibold text-xl md:text-2xl">
-                {(isSignUp ? stepTitlesSignUp : stepTitles)[step]}
+                {currentTitle}
               </h2>
             </div>
           </CardHeader>
@@ -344,6 +355,15 @@ export default function LoginForm() {
                 )}
 
               <Button
+                aria-label={
+                  loading
+                    ? "Processing..."
+                    : step === "password"
+                      ? isSignUp
+                        ? "Create account"
+                        : "Sign in"
+                      : "Continue"
+                }
                 className="h-12 w-full rounded-md text-sm"
                 disabled={loading}
                 loading={loading}
@@ -361,6 +381,7 @@ export default function LoginForm() {
               {/* Back button */}
               {step !== "email" && (
                 <Button
+                  aria-label="Go back to previous step"
                   className="flex h-12 w-full items-center justify-center gap-2 rounded-md text-sm"
                   disabled={loading}
                   onClick={back}
@@ -392,6 +413,9 @@ export default function LoginForm() {
             {step === "email" && (
               <div className="text-center">
                 <Button
+                  aria-label={
+                    isSignUp ? "Switch to sign in" : "Switch to sign up"
+                  }
                   className="h-auto p-0 text-sm"
                   disabled={loading}
                   onClick={() => {
@@ -413,10 +437,13 @@ export default function LoginForm() {
               <>
                 <div className="relative">
                   <div className="absolute inset-0 flex items-center">
-                    <Separator className="w-full" />
+                    <Separator aria-hidden="true" className="w-full" />
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-background px-2 text-muted-foreground">
+                    <span
+                      aria-hidden="true"
+                      className="bg-background px-2 text-muted-foreground"
+                    >
                       Or
                     </span>
                   </div>
@@ -436,6 +463,7 @@ export default function LoginForm() {
                     </Button>
                     {lastLoginMethod === "google" && (
                       <Badge
+                        aria-label="Last used login method"
                         className="-right-1 -top-1 absolute rounded-full bg-background"
                         variant="outline"
                       >
@@ -457,6 +485,7 @@ export default function LoginForm() {
                     </Button>
                     {lastLoginMethod === "github" && (
                       <Badge
+                        aria-label="Last used login method"
                         className="-right-1 -bottom-1 absolute rounded-full bg-background"
                         variant="outline"
                       >

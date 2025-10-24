@@ -109,12 +109,12 @@ export function QuizScoreDisplay({
           <Badge className="text-sm" variant={passed ? "default" : "secondary"}>
             {passed ? (
               <>
-                <Trophy className="mr-2 size-3" />
+                <Trophy className="size-3" />
                 Passed
               </>
             ) : (
               <>
-                <TrendingUp className="mr-2 size-3" />
+                <TrendingUp className="size-3" />
                 Needs Improvement
               </>
             )}

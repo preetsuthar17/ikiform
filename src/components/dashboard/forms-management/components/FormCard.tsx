@@ -8,7 +8,7 @@ import {
   Share,
   Trash2,
 } from "lucide-react";
-import React from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import { ShareFormModal } from "@/components/form-builder/share-form-modal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -29,7 +29,7 @@ import {
 import type { FormCardProps } from "../types";
 import { formatDate } from "../utils";
 
-export function FormCard({
+export const FormCard = memo(function FormCard({
   form,
   onEdit,
   onDuplicate,
@@ -38,44 +38,120 @@ export function FormCard({
   onShare,
   onDelete,
 }: FormCardProps) {
-  const formattedDate = formatDate(form.updated_at);
-  const [isShareModalOpen, setIsShareModalOpen] = React.useState(false);
-  const [modalJustClosed, setModalJustClosed] = React.useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const [modalJustClosed, setModalJustClosed] = useState(false);
 
-  const handleShare = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsShareModalOpen(true);
-    if (onShare) onShare(form);
-  };
+  const formattedDate = useMemo(
+    () => formatDate(form.updated_at),
+    [form.updated_at]
+  );
 
-  const handleCardClick = (e: React.MouseEvent) => {
-    // Prevent card click if modal is open, just closed, or if click originated from modal
-    if (
-      isShareModalOpen ||
-      modalJustClosed ||
-      (e.target as HTMLElement).closest('[role="dialog"]')
-    ) {
-      return;
-    }
-    onViewAnalytics(form.id);
-  };
+  const internalTitle = useMemo(
+    () => form.schema?.settings?.title || form.title || "Untitled Form",
+    [form.schema?.settings?.title, form.title]
+  );
 
-  const handleButtonClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-  };
+  const hasPublicTitle = useMemo(
+    () =>
+      form.schema?.settings?.publicTitle &&
+      form.schema.settings.publicTitle !== form.schema?.settings?.title,
+    [form.schema?.settings?.publicTitle, form.schema?.settings?.title]
+  );
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
+  const handleShare = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      setIsShareModalOpen(true);
+      if (onShare) onShare(form);
+    },
+    [onShare, form]
+  );
+
+  const handleCardClick = useCallback(
+    (e: React.MouseEvent) => {
+      if (
+        isShareModalOpen ||
+        modalJustClosed ||
+        (e.target as HTMLElement).closest('[role="dialog"]')
+      ) {
+        return;
+      }
       onViewAnalytics(form.id);
-    }
-  };
+    },
+    [isShareModalOpen, modalJustClosed, onViewAnalytics, form.id]
+  );
 
-  const internalTitle =
-    form.schema?.settings?.title || form.title || "Untitled Form";
-  const hasPublicTitle =
-    form.schema?.settings?.publicTitle &&
-    form.schema.settings.publicTitle !== form.schema?.settings?.title;
+  const handleButtonClick = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+  }, []);
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        onViewAnalytics(form.id);
+      }
+    },
+    [onViewAnalytics, form.id]
+  );
+
+  const handleEdit = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      onEdit(form.id);
+    },
+    [onEdit, form.id]
+  );
+
+  const handleDuplicate = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      onDuplicate(form.id);
+    },
+    [onDuplicate, form.id]
+  );
+
+  const handleViewForm = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      onViewForm(form);
+    },
+    [onViewForm, form]
+  );
+
+  const handleViewAnalytics = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      onViewAnalytics(form.id);
+    },
+    [onViewAnalytics, form.id]
+  );
+
+  const handleEmbed = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      window.open(`/embed?formid=${form.id}`, "_blank");
+    },
+    [form.id]
+  );
+
+  const handleDelete = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      onDelete(form.id, form.title);
+    },
+    [onDelete, form.id, form.title]
+  );
+
+  const handleModalClose = useCallback(() => {
+    setIsShareModalOpen(false);
+    setModalJustClosed(true);
+    setTimeout(() => setModalJustClosed(false), 100);
+  }, []);
+
+  const handleModalPublish = useCallback(async () => {
+    if (onShare) onShare(form);
+  }, [onShare, form]);
 
   return (
     <>
@@ -105,6 +181,7 @@ export function FormCard({
           </div>
           <div className="flex items-center gap-2">
             <Badge
+              aria-label={`Form status: ${form.is_published ? "Published" : "Draft"}`}
               className="flex-shrink-0 rounded-lg font-medium"
               variant={form.is_published ? "default" : "secondary"}
             >
@@ -116,7 +193,7 @@ export function FormCard({
                   <TooltipTrigger asChild>
                     <DropdownMenuTrigger asChild>
                       <Button
-                        aria-label="Form actions"
+                        aria-label={`Actions for ${internalTitle}`}
                         className="size-8 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80 focus:ring-2 focus:ring-ring focus:ring-offset-2"
                         onClick={handleButtonClick}
                         size="sm"
@@ -133,10 +210,7 @@ export function FormCard({
                 <DropdownMenuContent align="end" className="w-48 shadow-xs">
                   <DropdownMenuItem
                     className="h-9 cursor-pointer opacity-80 hover:opacity-100"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onEdit(form.id);
-                    }}
+                    onClick={handleEdit}
                   >
                     <Edit aria-hidden="true" className="size-4" />
                     Edit form
@@ -150,30 +224,21 @@ export function FormCard({
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     className="h-9 cursor-pointer opacity-80 hover:opacity-100"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onDuplicate(form.id);
-                    }}
+                    onClick={handleDuplicate}
                   >
                     <Copy aria-hidden="true" className="size-4" />
                     Duplicate
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     className="h-9 cursor-pointer opacity-80 hover:opacity-100"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onViewForm(form);
-                    }}
+                    onClick={handleViewForm}
                   >
                     <Eye aria-hidden="true" className="size-4" />
                     View form
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     className="h-9 cursor-pointer opacity-80 hover:opacity-100"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onViewAnalytics(form.id);
-                    }}
+                    onClick={handleViewAnalytics}
                   >
                     <BarChart3 aria-hidden="true" className="size-4" />
                     View analytics
@@ -181,10 +246,7 @@ export function FormCard({
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     className="h-9 cursor-pointer opacity-80 hover:opacity-100"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      window.open(`/embed?formid=${form.id}`, "_blank");
-                    }}
+                    onClick={handleEmbed}
                   >
                     <Code2 aria-hidden="true" className="size-4" />
                     Embed
@@ -192,10 +254,7 @@ export function FormCard({
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     className="h-9 cursor-pointer text-destructive opacity-80 hover:opacity-100 focus:text-destructive"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onDelete(form.id, form.title);
-                    }}
+                    onClick={handleDelete}
                     variant="destructive"
                   >
                     <Trash2
@@ -215,22 +274,14 @@ export function FormCard({
         </div>
       </Card>
 
-      {/* Share Form Modal - Outside of Card to prevent event bubbling */}
       <ShareFormModal
         formId={form?.id || null}
         formSlug={form?.slug || null}
         isOpen={isShareModalOpen}
         isPublished={!!form?.is_published}
-        onClose={() => {
-          setIsShareModalOpen(false);
-          setModalJustClosed(true);
-          // Reset the flag after a short delay to prevent immediate card clicks
-          setTimeout(() => setModalJustClosed(false), 100);
-        }}
-        onPublish={async () => {
-          if (onShare) onShare(form);
-        }}
+        onClose={handleModalClose}
+        onPublish={handleModalPublish}
       />
     </>
   );
-}
+});

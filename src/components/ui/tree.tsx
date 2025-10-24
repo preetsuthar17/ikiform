@@ -348,7 +348,7 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
           {}
           {showIcons && (
             <motion.div
-              className="mr-2 flex size-4 items-center justify-center text-muted-foreground"
+              className="flex size-4 items-center justify-center text-muted-foreground"
               transition={{ duration: 0.15 }}
               whileHover={{ scale: 1.1 }}
             >

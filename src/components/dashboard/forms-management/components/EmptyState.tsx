@@ -1,4 +1,5 @@
 import { Plus, Sparkles } from "lucide-react";
+import { memo, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -16,15 +17,30 @@ interface EmptyStateExtendedProps extends EmptyStateProps {
   onCreateManually: () => void;
 }
 
-export function EmptyState({
+export const EmptyState = memo(function EmptyState({
   onCreateForm,
   onCreateWithAI,
   onCreateManually,
 }: EmptyStateExtendedProps) {
+  const handleCreateWithAI = useCallback(() => {
+    onCreateWithAI();
+  }, [onCreateWithAI]);
+
+  const handleCreateManually = useCallback(() => {
+    onCreateManually();
+  }, [onCreateManually]);
+
   return (
-    <Card className="p-16 text-center shadow-none">
+    <Card
+      aria-label="Empty state - no forms created yet"
+      className="p-16 text-center shadow-none"
+      role="region"
+    >
       <div className="mx-auto flex max-w-md flex-col gap-6">
-        <div className="mx-auto flex size-20 items-center justify-center rounded-2xl bg-accent">
+        <div
+          aria-hidden="true"
+          className="mx-auto flex size-20 items-center justify-center rounded-2xl bg-accent"
+        >
           <Plus aria-hidden="true" className="size-10 text-accent-foreground" />
         </div>
         <div className="flex flex-col gap-2">
@@ -56,17 +72,19 @@ export function EmptyState({
             </DialogHeader>
             <div className="flex w-full flex-col gap-3 sm:flex-row">
               <Button
+                aria-label="Create form using Kiko AI"
                 className="flex-1"
-                onClick={onCreateWithAI}
+                onClick={handleCreateWithAI}
                 size="lg"
                 variant="default"
               >
-                <Sparkles aria-hidden="true" className="mr-2 size-4" />
+                <Sparkles aria-hidden="true" className="size-4" />
                 Use Kiko AI
               </Button>
               <Button
+                aria-label="Create form manually"
                 className="flex-1"
-                onClick={onCreateManually}
+                onClick={handleCreateManually}
                 size="lg"
                 variant="secondary"
               >
@@ -78,4 +96,4 @@ export function EmptyState({
       </div>
     </Card>
   );
-}
+});

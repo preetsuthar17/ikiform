@@ -1,4 +1,5 @@
 import { Plus, Sparkles } from "lucide-react";
+import { memo, useCallback } from "react";
 import { Card } from "@/components/ui";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,10 +17,18 @@ interface FormsHeaderProps extends FormHeaderProps {
   onCreateManually: () => void;
 }
 
-export function FormsHeader({
+export const FormsHeader = memo(function FormsHeader({
   onCreateWithAI,
   onCreateManually,
 }: FormsHeaderProps) {
+  const handleCreateWithAI = useCallback(() => {
+    onCreateWithAI();
+  }, [onCreateWithAI]);
+
+  const handleCreateManually = useCallback(() => {
+    onCreateManually();
+  }, [onCreateManually]);
+
   return (
     <Card className="flex flex-col justify-between gap-4 p-6 shadow-none sm:flex-row sm:items-center md:p-8">
       <div className="flex flex-col gap-1">
@@ -51,17 +60,19 @@ export function FormsHeader({
           </DialogHeader>
           <div className="flex w-full flex-col gap-3 sm:flex-row">
             <Button
+              aria-label="Create form using Kiko AI"
               className="flex-1"
-              onClick={onCreateWithAI}
+              onClick={handleCreateWithAI}
               size="lg"
               variant="default"
             >
-              <Sparkles aria-hidden="true" className="mr-2 size-4" />
+              <Sparkles aria-hidden="true" className="size-4" />
               Use Kiko AI
             </Button>
             <Button
+              aria-label="Create form manually"
               className="flex-1"
-              onClick={onCreateManually}
+              onClick={handleCreateManually}
               size="lg"
               variant="secondary"
             >
@@ -72,4 +83,4 @@ export function FormsHeader({
       </Dialog>
     </Card>
   );
-}
+});

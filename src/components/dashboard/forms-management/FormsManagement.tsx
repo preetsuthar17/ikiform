@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { ConfirmationModal } from "../form-delete-confirmation-modal";
 
 import {
@@ -34,16 +34,13 @@ export function FormsManagement({ className }: FormsManagementProps) {
     setDeleteModal,
   } = useFormsManagement();
 
-  // Search and filter state
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [sortBy, setSortBy] = useState("updated");
 
-  // Filter and sort forms
   const filteredForms = useMemo(() => {
     let filtered = forms;
 
-    // Search filter
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter((form) => {
@@ -62,7 +59,6 @@ export function FormsManagement({ className }: FormsManagementProps) {
       });
     }
 
-    // Status filter
     if (statusFilter !== "all") {
       filtered = filtered.filter((form) => {
         if (statusFilter === "published") return form.is_published;
@@ -71,7 +67,6 @@ export function FormsManagement({ className }: FormsManagementProps) {
       });
     }
 
-    // Sort
     filtered.sort((a, b) => {
       switch (sortBy) {
         case "title": {
@@ -90,21 +85,19 @@ export function FormsManagement({ className }: FormsManagementProps) {
         case "created": {
           const aCreated = new Date(a.created_at).getTime();
           const bCreated = new Date(b.created_at).getTime();
-          // Handle invalid dates
           if (isNaN(aCreated) && isNaN(bCreated)) return 0;
           if (isNaN(aCreated)) return 1;
           if (isNaN(bCreated)) return -1;
-          return bCreated - aCreated; // Newest first
+          return bCreated - aCreated;
         }
         case "updated":
         default: {
           const aUpdated = new Date(a.updated_at).getTime();
           const bUpdated = new Date(b.updated_at).getTime();
-          // Handle invalid dates
           if (isNaN(aUpdated) && isNaN(bUpdated)) return 0;
           if (isNaN(aUpdated)) return 1;
           if (isNaN(bUpdated)) return -1;
-          return bUpdated - aUpdated; // Newest first
+          return bUpdated - aUpdated;
         }
       }
     });
@@ -112,18 +105,34 @@ export function FormsManagement({ className }: FormsManagementProps) {
     return filtered;
   }, [forms, searchQuery, statusFilter, sortBy]);
 
-  const handleClearFilters = () => {
+  const handleClearFilters = useCallback(() => {
     setSearchQuery("");
     setStatusFilter("all");
     setSortBy("updated");
-  };
+  }, []);
+
+  const handleDeleteModalChange = useCallback(
+    (open: boolean) => {
+      setDeleteModal((prev) => ({ ...prev, open }));
+    },
+    [setDeleteModal]
+  );
+
+  const containerClassName = useMemo(
+    () => `flex flex-col gap-8 ${className || ""}`,
+    [className]
+  );
 
   if (loading) {
     return <LoadingSkeleton className={className} />;
   }
 
   return (
-    <div className={`flex flex-col gap-8 ${className || ""}`}>
+    <div
+      aria-label="Forms management"
+      className={containerClassName}
+      role="main"
+    >
       <FormsHeader
         onCreateForm={createNewForm}
         onCreateManually={handleCreateManually}
@@ -149,11 +158,12 @@ export function FormsManagement({ className }: FormsManagementProps) {
           />
 
           {filteredForms.length === 0 ? (
-            <div className="py-12 text-center">
+            <div aria-live="polite" className="py-12 text-center" role="status">
               <p className="text-muted-foreground">
                 No forms match your search criteria.
               </p>
               <button
+                aria-label="Clear all search filters"
                 className="mt-2 text-primary hover:underline"
                 onClick={handleClearFilters}
               >
@@ -179,7 +189,7 @@ export function FormsManagement({ className }: FormsManagementProps) {
         confirmText="Delete Form"
         description={`Are you sure you want to delete "${deleteModal.formTitle}"? This action cannot be undone and all form data will be permanently lost.`}
         onConfirm={confirmDeleteForm}
-        onOpenChange={(open) => setDeleteModal((prev) => ({ ...prev, open }))}
+        onOpenChange={handleDeleteModalChange}
         open={deleteModal.open}
         title="Delete Form"
         variant="destructive"

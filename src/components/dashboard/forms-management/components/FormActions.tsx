@@ -8,6 +8,7 @@ import {
   Share,
   Trash2,
 } from "lucide-react";
+import { memo, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -24,7 +25,7 @@ import {
 } from "@/components/ui/tooltip";
 import type { FormActionsProps } from "../types";
 
-export function FormActions({
+export const FormActions = memo(function FormActions({
   form,
   onEdit,
   onDuplicate,
@@ -33,6 +34,34 @@ export function FormActions({
   onShare,
   onDelete,
 }: FormActionsProps) {
+  const handleEdit = useCallback(() => {
+    onEdit(form.id);
+  }, [onEdit, form.id]);
+
+  const handleShare = useCallback(() => {
+    onShare(form);
+  }, [onShare, form]);
+
+  const handleDuplicate = useCallback(() => {
+    onDuplicate(form.id);
+  }, [onDuplicate, form.id]);
+
+  const handleViewForm = useCallback(() => {
+    onViewForm(form);
+  }, [onViewForm, form]);
+
+  const handleViewAnalytics = useCallback(() => {
+    onViewAnalytics(form.id);
+  }, [onViewAnalytics, form.id]);
+
+  const handleEmbed = useCallback(() => {
+    window.open(`/embed?formid=${form.id}`, "_blank");
+  }, [form.id]);
+
+  const handleDelete = useCallback(() => {
+    onDelete(form.id, form.title);
+  }, [onDelete, form.id, form.title]);
+
   return (
     <TooltipProvider delayDuration={200}>
       <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -42,7 +71,7 @@ export function FormActions({
               <Button
                 aria-label="Edit form"
                 className="size-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80 focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                onClick={() => onEdit(form.id)}
+                onClick={handleEdit}
                 size="sm"
                 variant="ghost"
               >
@@ -59,7 +88,7 @@ export function FormActions({
               <Button
                 aria-label="Share form"
                 className="size-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80 focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                onClick={() => onShare(form)}
+                onClick={handleShare}
                 size="sm"
                 variant="ghost"
               >
@@ -92,40 +121,41 @@ export function FormActions({
             <DropdownMenuContent align="end" className="w-48">
               <DropdownMenuItem
                 className="cursor-pointer"
-                onClick={() => onDuplicate(form.id)}
+                onClick={handleDuplicate}
               >
-                <Copy aria-hidden="true" className="mr-2 size-4" />
+                <Copy aria-hidden="true" className="size-4" />
                 Duplicate
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="cursor-pointer"
-                onClick={() => onViewForm(form)}
+                onClick={handleViewForm}
               >
-                <Eye aria-hidden="true" className="mr-2 size-4" />
+                <Eye aria-hidden="true" className="size-4" />
                 View form
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="cursor-pointer"
-                onClick={() => onViewAnalytics(form.id)}
+                onClick={handleViewAnalytics}
               >
-                <BarChart3 aria-hidden="true" className="mr-2 size-4" />
+                <BarChart3 aria-hidden="true" className="size-4" />
                 View analytics
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 className="cursor-pointer"
-                onClick={() =>
-                  window.open(`/embed?formid=${form.id}`, "_blank")
-                }
+                onClick={handleEmbed}
               >
-                <Code2 aria-hidden="true" className="mr-2 size-4" />
+                <Code2 aria-hidden="true" className="size-4" />
                 Embed
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
 
-        <div className="mx-3 hidden h-4 w-px bg-border/50 sm:block" />
+        <div
+          aria-hidden="true"
+          className="mx-3 hidden h-4 w-px bg-border/50 sm:block"
+        />
 
         <div className="flex w-full justify-end sm:w-auto">
           <Tooltip>
@@ -133,7 +163,7 @@ export function FormActions({
               <Button
                 aria-label="Delete form"
                 className="size-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-destructive/10 hover:text-destructive focus:ring-2 focus:ring-destructive focus:ring-offset-2"
-                onClick={() => onDelete(form.id, form.title)}
+                onClick={handleDelete}
                 size="sm"
                 variant="ghost"
               >
@@ -148,4 +178,4 @@ export function FormActions({
       </div>
     </TooltipProvider>
   );
-}
+});

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { Form } from "@/lib/database";
 import { FormsList } from "./FormsList";
 
@@ -11,7 +12,7 @@ interface FormsViewProps {
   onDelete: (formId: string, formTitle: string) => void;
 }
 
-export function FormsView({
+export const FormsView = memo(function FormsView({
   forms,
   onEdit,
   onDuplicate,
@@ -21,14 +22,16 @@ export function FormsView({
   onDelete,
 }: FormsViewProps) {
   return (
-    <FormsList
-      forms={forms}
-      onDelete={onDelete}
-      onDuplicate={onDuplicate}
-      onEdit={onEdit}
-      onShare={onShare}
-      onViewAnalytics={onViewAnalytics}
-      onViewForm={onViewForm}
-    />
+    <div aria-label="Forms list" role="region">
+      <FormsList
+        forms={forms}
+        onDelete={onDelete}
+        onDuplicate={onDuplicate}
+        onEdit={onEdit}
+        onShare={onShare}
+        onViewAnalytics={onViewAnalytics}
+        onViewForm={onViewForm}
+      />
+    </div>
   );
-}
+});

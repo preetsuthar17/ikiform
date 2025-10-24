@@ -544,7 +544,7 @@ const ApiIntegrationPreview = () => {
         icon: (
           <span
             aria-hidden
-            className="mr-2 inline-flex size-4 items-center justify-center rounded bg-primary/15 text-primary"
+            className="inline-flex size-4 items-center justify-center rounded bg-primary/15 text-primary"
           >
             <svg fill="none" height={13} viewBox="0 0 14 14" width={13}>
               <circle
@@ -571,7 +571,7 @@ const ApiIntegrationPreview = () => {
         icon: (
           <span
             aria-hidden
-            className="mr-2 inline-flex size-4 items-center justify-center rounded bg-primary/15 text-primary"
+            className="inline-flex size-4 items-center justify-center rounded bg-primary/15 text-primary"
           >
             <Mail size={13} strokeWidth={1.5} />
           </span>
@@ -584,7 +584,7 @@ const ApiIntegrationPreview = () => {
         icon: (
           <span
             aria-hidden
-            className="mr-2 inline-flex size-4 items-center justify-center rounded bg-primary/15 text-primary"
+            className="inline-flex size-4 items-center justify-center rounded bg-primary/15 text-primary"
           >
             <Zap size={13} strokeWidth={1.5} />
           </span>
