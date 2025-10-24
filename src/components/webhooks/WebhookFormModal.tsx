@@ -44,8 +44,6 @@ const HTTP_METHODS: {
   { value: "HEAD", label: "HEAD", description: "Get headers only" },
 ];
 
-// Removed Discord preset support
-
 export function WebhookFormModal({
   open,
   onClose,
@@ -78,8 +76,13 @@ export function WebhookFormModal({
   const [method, setMethod] = useState<WebhookMethod>(
     initialWebhook?.method || "POST"
   );
-  const [headers, setHeaders] = useState<Record<string, string>>(
-    initialWebhook?.headers || {}
+  const [headers, setHeaders] = useState<{ name: string; value: string }[]>(
+    initialWebhook?.headers
+      ? Object.entries(initialWebhook.headers).map(([name, value]) => ({
+          name,
+          value,
+        }))
+      : []
   );
   const [payloadTemplate, setPayloadTemplate] = useState(
     initialWebhook?.payloadTemplate || ""
@@ -109,7 +112,14 @@ export function WebhookFormModal({
     setUrl(initialWebhook?.url || "");
     setEvents(initialWebhook?.events || []);
     setMethod(initialWebhook?.method || "POST");
-    setHeaders(initialWebhook?.headers || {});
+    setHeaders(
+      initialWebhook?.headers
+        ? Object.entries(initialWebhook.headers).map(([name, value]) => ({
+            name,
+            value,
+          }))
+        : []
+    );
     setPayloadTemplate(initialWebhook?.payloadTemplate || "");
     setNotificationEmail(initialWebhook?.notificationEmail || "");
     setNotifyOnSuccess(initialWebhook?.notifyOnSuccess ?? false);
@@ -135,7 +145,11 @@ export function WebhookFormModal({
       url,
       events,
       method,
-      headers,
+      headers: Object.fromEntries(
+        headers
+          .filter((h) => h.name.trim() && h.value.trim())
+          .map((h) => [h.name, h.value])
+      ),
       payloadTemplate,
       notificationEmail: notificationEmail || undefined,
       notifyOnSuccess,
@@ -150,7 +164,7 @@ export function WebhookFormModal({
     setUrl("");
     setEvents([]);
     setMethod("POST");
-    setHeaders({});
+    setHeaders([]);
     setPayloadTemplate("");
     setNotificationEmail("");
     setNotifyOnSuccess(false);
@@ -159,33 +173,32 @@ export function WebhookFormModal({
   }
 
   const headerEntries = useMemo(() => {
-    const entries = Object.entries(headers);
+    const entries = headers.map((h) => [h.name, h.value] as [string, string]);
     return entries.length > 0 ? entries : ([["", ""]] as [string, string][]);
   }, [headers]);
 
-  const hasHeaders = useMemo(() => Object.keys(headers).length > 0, [headers]);
+  const hasHeaders = useMemo(() => headers.length > 0, [headers]);
 
   function updateHeaderAt(index: number, key: string, value: string) {
-    const entries = [...headerEntries];
-    entries[index] = [key, value];
-    const cleaned = Object.fromEntries(
-      entries.filter(([k, v]) => k.trim() !== "" || v.trim() !== "")
+    const newHeaders = [...headers];
+    if (index < newHeaders.length) {
+      newHeaders[index] = { name: key, value };
+    } else {
+      newHeaders.push({ name: key, value });
+    }
+    const cleaned = newHeaders.filter(
+      (h) => h.name.trim() !== "" || h.value.trim() !== ""
     );
     setHeaders(cleaned);
   }
 
   function addHeaderRow() {
-    const entries = [...headerEntries, ["", ""] as [string, string]];
-    // Don't filter when adding new rows - let the user type first
-    setHeaders(Object.fromEntries(entries));
+    setHeaders([...headers, { name: "", value: "" }]);
   }
 
   function removeHeaderAt(index: number) {
-    const entries = headerEntries.filter((_, i) => i !== index);
-    const cleaned = Object.fromEntries(
-      entries.filter(([k, v]) => k.trim() !== "" || v.trim() !== "")
-    );
-    setHeaders(cleaned);
+    const newHeaders = headers.filter((_, i) => i !== index);
+    setHeaders(newHeaders);
   }
 
   function toggleAllEvents(selectAll: boolean) {
@@ -257,7 +270,7 @@ export function WebhookFormModal({
 
   return (
     <Dialog onOpenChange={handleClose} open={open}>
-      <DialogContent className="flex w-full max-w-3xl grow flex-col gap-0 p-0 sm:max-w-fit">
+      <DialogContent className="flex w-full max-w-4xl grow flex-col gap-0 p-0">
         <div className="px-6 pt-5 pb-3">
           <DialogHeader className="flex flex-row items-center justify-between p-0">
             <DialogTitle>
@@ -274,19 +287,16 @@ export function WebhookFormModal({
           ) : null}
         </div>
         <Separator />
-
-        {/* Form */}
         <form
           className="flex min-h-0 flex-1 flex-col justify-between"
           onKeyDown={(e) => {
-            // Advance steps with Enter; only submit on final step
             if (e.key === "Enter" && !e.shiftKey && !e.ctrlKey && !e.metaKey) {
               const target = e.target as HTMLElement | null;
               const tag = target?.tagName?.toLowerCase();
               const isTextarea = tag === "textarea";
               const isButton = tag === "button";
-              if (isButton) return; // let button semantics run
-              if (isTextarea) return; // allow newline in textarea; use Cmd/Ctrl+Enter to submit
+              if (isButton) return;
+              if (isTextarea) return;
               if (currentStep < steps.length - 1) {
                 e.preventDefault();
                 goNext();
@@ -295,7 +305,6 @@ export function WebhookFormModal({
           }}
           onSubmit={handleSubmit}
         >
-          {/* Stepper header */}
           <div className="flex items-center gap-3 px-6 py-3">
             <ol aria-label="Steps" className="flex items-center gap-2 text-sm">
               {steps.map((step, idx) => {
@@ -332,9 +341,7 @@ export function WebhookFormModal({
               })}
             </ol>
           </div>
-
           <Separator />
-
           <ScrollArea className="flex-1">
             <div className="flex flex-col gap-6 px-6 py-5">
               {steps[currentStep]?.id === "details" ? (
@@ -671,7 +678,11 @@ export function WebhookFormModal({
                 >
                   {steps[currentStep]?.required
                     ? "Next"
-                    : steps[currentStep]?.id === "headers" && hasHeaders
+                    : (steps[currentStep]?.id === "details" &&
+                          (name.trim() || description.trim())) ||
+                        (steps[currentStep]?.id === "headers" && hasHeaders) ||
+                        (steps[currentStep]?.id === "payload" &&
+                          payloadTemplate.trim())
                       ? "Next"
                       : "Skip"}
                 </Button>
