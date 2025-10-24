@@ -96,7 +96,7 @@ function HeroHeading() {
       className="text-center font-semibold text-4xl leading-tighter tracking-[-2px] md:text-5xl"
       id="home-hero-title"
     >
-      Build forms, collect responses & analyze.
+      Build Forms, Collect Responses & Analyze.
     </h1>
   );
 }
