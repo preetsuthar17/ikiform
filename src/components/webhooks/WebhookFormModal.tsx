@@ -163,9 +163,7 @@ export function WebhookFormModal({
     return entries.length > 0 ? entries : ([["", ""]] as [string, string][]);
   }, [headers]);
 
-  const hasHeaders = useMemo(() => {
-    return Object.keys(headers).length > 0;
-  }, [headers]);
+  const hasHeaders = useMemo(() => Object.keys(headers).length > 0, [headers]);
 
   function updateHeaderAt(index: number, key: string, value: string) {
     const entries = [...headerEntries];
@@ -259,7 +257,7 @@ export function WebhookFormModal({
 
   return (
     <Dialog onOpenChange={handleClose} open={open}>
-      <DialogContent className="flex w-full  max-w-3xl grow flex-col gap-0 p-0 sm:max-w-fit">
+      <DialogContent className="flex w-full max-w-3xl grow flex-col gap-0 p-0 sm:max-w-fit">
         <div className="px-6 pt-5 pb-3">
           <DialogHeader className="flex flex-row items-center justify-between p-0">
             <DialogTitle>
@@ -671,7 +669,11 @@ export function WebhookFormModal({
                   }}
                   type="button"
                 >
-                  {steps[currentStep]?.required ? "Next" : (steps[currentStep]?.id === "headers" && hasHeaders ? "Next" : "Skip")}
+                  {steps[currentStep]?.required
+                    ? "Next"
+                    : steps[currentStep]?.id === "headers" && hasHeaders
+                      ? "Next"
+                      : "Skip"}
                 </Button>
               ) : (
                 <Button disabled={loading} loading={loading} type="submit">
