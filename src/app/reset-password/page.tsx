@@ -1,6 +1,6 @@
-import { Loader } from "@/components/ui";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import { Loader } from "@/components/ui";
 
 const ResetPasswordClient = dynamic(() => import("./reset-password-client"), {
   loading: () => <Loader />,
