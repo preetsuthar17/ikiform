@@ -163,27 +163,29 @@ export function WebhookFormModal({
     return entries.length > 0 ? entries : ([["", ""]] as [string, string][]);
   }, [headers]);
 
+  const hasHeaders = useMemo(() => {
+    return Object.keys(headers).length > 0;
+  }, [headers]);
+
   function updateHeaderAt(index: number, key: string, value: string) {
     const entries = [...headerEntries];
     entries[index] = [key, value];
     const cleaned = Object.fromEntries(
-      entries.filter(([k, v]) => k.trim() !== "" && v.trim() !== "")
+      entries.filter(([k, v]) => k.trim() !== "" || v.trim() !== "")
     );
     setHeaders(cleaned);
   }
 
   function addHeaderRow() {
     const entries = [...headerEntries, ["", ""] as [string, string]];
-    const cleaned = Object.fromEntries(
-      entries.filter(([k, v]) => k.trim() !== "" && v.trim() !== "")
-    );
-    setHeaders(cleaned);
+    // Don't filter when adding new rows - let the user type first
+    setHeaders(Object.fromEntries(entries));
   }
 
   function removeHeaderAt(index: number) {
     const entries = headerEntries.filter((_, i) => i !== index);
     const cleaned = Object.fromEntries(
-      entries.filter(([k, v]) => k.trim() !== "" && v.trim() !== "")
+      entries.filter(([k, v]) => k.trim() !== "" || v.trim() !== "")
     );
     setHeaders(cleaned);
   }
@@ -257,7 +259,7 @@ export function WebhookFormModal({
 
   return (
     <Dialog onOpenChange={handleClose} open={open}>
-      <DialogContent className="flex w-full grow flex-col gap-0 p-0 sm:max-w-fit">
+      <DialogContent className="flex w-full  max-w-3xl grow flex-col gap-0 p-0 sm:max-w-fit">
         <div className="px-6 pt-5 pb-3">
           <DialogHeader className="flex flex-row items-center justify-between p-0">
             <DialogTitle>
@@ -669,7 +671,7 @@ export function WebhookFormModal({
                   }}
                   type="button"
                 >
-                  {steps[currentStep]?.required ? "Next" : "Skip"}
+                  {steps[currentStep]?.required ? "Next" : (steps[currentStep]?.id === "headers" && hasHeaders ? "Next" : "Skip")}
                 </Button>
               ) : (
                 <Button disabled={loading} loading={loading} type="submit">
