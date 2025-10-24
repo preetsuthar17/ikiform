@@ -14,7 +14,7 @@ const CtaHeading = React.memo(function CtaHeading() {
         className="text-center font-semibold text-4xl leading-tighter tracking-[-2px] md:text-5xl"
         id="cta-title"
       >
-        Start collecting responses in no time.
+        Start Collecting Responses in No Time.
       </h2>
       <p className="text-center text-base text-muted-foreground md:text-lg">
         Get started with Ikiform to build forms, surveys, collect responses, and
