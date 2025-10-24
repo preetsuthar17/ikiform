@@ -114,7 +114,7 @@ export default function PricingClient({ products }: PricingClientProps) {
           className="text-center font-medium text-3xl leading-tight tracking-[-2px] md:text-4xl"
           id="pricing-title"
         >
-          Simple, transparent pricing for everything you need.
+          Simple, Transparent Pricing for Everything You Need.
         </h2>
         <p className="text-center text-base text-muted-foreground md:text-lg">
           Choose the plan that best fits your needs and start collecting
