@@ -79,7 +79,7 @@ const PRICING = {
     price: 16,
     originalPrice: 19,
     period: "/Mo",
-    billedAs: "Billed annually ($228/yr) • Cancel anytime",
+    billedAs: "Billed annually ($192/yr) • Cancel anytime",
   },
   onetime: {
     price: 99,
