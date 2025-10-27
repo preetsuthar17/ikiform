@@ -70,19 +70,19 @@ const planProductIdMap = {
 
 const PRICING = {
   monthly: {
-    price: 29,
-    originalPrice: 39,
+    price: 19,
+    originalPrice: 29,
     period: "/Mo",
     billedAs: "Billed monthly • Cancel anytime",
   },
   yearly: {
-    price: 19,
-    originalPrice: 29,
+    price: 16,
+    originalPrice: 19,
     period: "/Mo",
     billedAs: "Billed annually ($228/yr) • Cancel anytime",
   },
   onetime: {
-    price: 139,
+    price: 99,
     originalPrice: 139,
     period: "",
     billedAs: "One-time payment • Lifetime access",
