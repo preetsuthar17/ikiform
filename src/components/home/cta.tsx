@@ -6,6 +6,7 @@ import React from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { Card, CardContent } from "../ui";
 import { Button } from "../ui/button";
+import { PixelGrid } from "../other/pixel-background";
 
 const CtaHeading = React.memo(function CtaHeading() {
   return (
@@ -81,6 +82,20 @@ export default function CTA() {
     >
       <div className="mx-auto flex w-full flex-col">
         <Card className="relative overflow-hidden rounded-none border-t-0 bg-card p-8 py-12 shadow-none md:p-12 md:py-16">
+            <div className=" pointer-events-none opacity-15">
+          <div
+            aria-hidden="true"
+            className="absolute inset-0"
+            style={{
+              WebkitMaskImage:
+                "linear-gradient(to top, black 1%, transparent 95%)",
+              maskImage:
+                "linear-gradient(to top, black 1%, transparent 95%)",
+            }}
+          >
+            <PixelGrid pixelSize={5} pixelSpacing={5} />
+          </div>
+        </div>
           <CardContent className="flex flex-col items-center gap-8 px-0 py-24 text-center">
             {/* Main heading */}
             <CtaHeading />
