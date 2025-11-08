@@ -5,7 +5,6 @@ import Link from "next/link";
 import React, { type CSSProperties } from "react";
 import { Badge, Card } from "../ui";
 import { Button } from "../ui/button";
-import { PixelGrid } from "../other/pixel-background";
 
 interface EmbeddedFormProps {
   className?: string;
@@ -148,20 +147,6 @@ export default function Hero() {
       className="mx-auto flex w-full max-w-7xl flex-col bg-linear-to-t from-10% from-background to-85% to-card"
     >
       <div className="relative z-20 flex h-full grow flex-col items-center gap-8 overflow-hidden border border-b-0 px-4 py-28 text-center md:px-6">
-        <div className="pointer-events-none opacity-15">
-          <div
-            aria-hidden="true"
-            className="absolute inset-0"
-            style={{
-              WebkitMaskImage:
-                "linear-gradient(to top, black 1%, transparent 95%)",
-              maskImage:
-                "linear-gradient(to top, black 1%, transparent 95%)",
-            }}
-          >
-            <PixelGrid pixelSize={5} pixelSpacing={5} />
-          </div>
-        </div>
         <SponsoredByBadge />
         <HeroHeading />
         <HeroSubheading />
