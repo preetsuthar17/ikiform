@@ -1,10 +1,18 @@
 "use client";
 
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import React, { type CSSProperties } from "react";
+import React, { type CSSProperties, useState } from "react";
+import DemoFormBuilder from "@/components/form-builder/form-builder/DemoFormBuilder";
 import { Badge, Card } from "../ui";
 import { Button } from "../ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "../ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 
 interface EmbeddedFormProps {
   className?: string;
@@ -141,21 +149,68 @@ function HeroCTAs() {
 }
 
 export default function Hero() {
-  return (
-    <section
-      aria-labelledby="home-hero-title"
-      className="mx-auto flex w-full max-w-7xl flex-col bg-linear-to-t from-10% from-background to-85% to-card"
-    >
-      <div className="relative z-20 flex h-full grow flex-col items-center gap-8 overflow-hidden border border-b-0 px-4 py-28 text-center md:px-6">
-        <SponsoredByBadge />
-        <HeroHeading />
-        <HeroSubheading />
-        <HeroCTAs />
-      </div>
+  const [isFormBuilderFullscreen, setIsFormBuilderFullscreen] = useState(false);
 
-      <Card className="w-full max-w-7xl rounded-none border-b-0 bg-card shadow-none">
-        <EmbeddedForm className="bg-card" />
-      </Card>
-    </section>
+  return (
+    <>
+      <section
+        aria-labelledby="home-hero-title"
+        className="mx-auto flex w-full max-w-7xl flex-col bg-linear-to-t from-10% from-background to-85% to-card"
+      >
+        <div className="relative z-20 flex h-full grow flex-col items-center gap-8 overflow-hidden border border-b-0 px-4 py-28 text-center md:px-6">
+          <SponsoredByBadge />
+          <HeroHeading />
+          <HeroSubheading />
+          <HeroCTAs />
+        </div>
+
+        <Card className="w-full max-w-7xl rounded-none border-b-0 bg-card shadow-none">
+          <Tabs className="w-full" defaultValue="form-demo">
+            <div className="flex items-center justify-start border-b border-border px-4 py-4 md:px-6">
+              <TabsList>
+                <TabsTrigger value="form-demo">Form Demo</TabsTrigger>
+                <TabsTrigger value="form-builder-demo">Form Builder Demo</TabsTrigger>
+              </TabsList>
+            </div>
+            <TabsContent className="mt-0" value="form-demo">
+              <EmbeddedForm className="bg-card" />
+            </TabsContent>
+            <TabsContent className="mt-0" value="form-builder-demo">
+              <div
+                className="group relative flex w-full cursor-pointer justify-center bg-card p-4 transition-all hover:bg-muted/30 md:p-6"
+                onClick={() => setIsFormBuilderFullscreen(true)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setIsFormBuilderFullscreen(true);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+              >
+                <div className="pointer-events-none w-full h-[900px] overflow-hidden">
+                  <DemoFormBuilder />
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </Card>
+      </section>
+
+      <Dialog
+        onOpenChange={setIsFormBuilderFullscreen}
+        open={isFormBuilderFullscreen}
+      >
+        <DialogContent
+          className="h-[95%] sm:max-w-[95%] max-w-[95%] p-0 rounded-2xl"
+          showCloseButton={true}
+        >
+          <VisuallyHidden>
+            <DialogTitle>Form Builder Demo</DialogTitle>
+          </VisuallyHidden>
+          <DemoFormBuilder />
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }

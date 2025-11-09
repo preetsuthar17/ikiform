@@ -72,7 +72,7 @@ export function FormSettingsModal({
           </div>
         </DialogHeader>
         <div className="mb-12 min-h-0 p-4 md:mb-0">
-          {formId && (
+          {formId || (onSchemaUpdate && onSchemaUpdate !== undefined) ? (
             <>
               <FormSettingsDesktopLayout
                 activeSection={activeSection}
@@ -87,8 +87,7 @@ export function FormSettingsModal({
                 sectionProps={sectionProps}
               />
             </>
-          )}
-          {!formId && (
+          ) : (
             <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
               <p className="text-muted-foreground">
                 Please save the form first to access the settings.

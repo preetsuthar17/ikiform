@@ -86,7 +86,7 @@ export function FullPalette({
       </InputGroup>
 
       <ScrollArea
-        className="h-0 min-h-0 flex-1"
+        className="h-0 min-h-0 flex-1 "
         style={{
           overscrollBehavior: "contain",
         }}
@@ -110,7 +110,7 @@ export function FullPalette({
                   </div>
                   <div
                     aria-label={`${FIELD_CATEGORIES[key as keyof typeof FIELD_CATEGORIES]} fields`}
-                    className="grid grid-cols-2 gap-2 rounded-2xl"
+                    className="grid sm:grid-cols-2 grid-cols-1 gap-2 rounded-2xl"
                     role="list"
                   >
                     {columns.map((col, colIdx) => (

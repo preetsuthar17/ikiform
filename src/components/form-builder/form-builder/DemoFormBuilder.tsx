@@ -173,6 +173,17 @@ export default function DemoFormBuilder() {
     }));
   };
 
+  const handleSchemaUpdate = (updates: Partial<FormSchema>) => {
+    setFormSchema((prev) => ({
+      ...prev,
+      ...updates,
+      settings: {
+        ...prev.settings,
+        ...(updates.settings || {}),
+      },
+    }));
+  };
+
   const handleStepSelection = (stepIndex: number) => {
     if (formSchema.blocks && formSchema.blocks[stepIndex]) {
       setSelectedBlockId(formSchema.blocks[stepIndex].id);
@@ -326,10 +337,10 @@ export default function DemoFormBuilder() {
           onCloseJsonView={() => setShowJsonView(false)}
           onCloseSettings={() => setShowSettings(false)}
           onCloseShareModal={() => setShowShareModal(false)}
-          onFormSettingsUpdate={noop}
+          onFormSettingsUpdate={updateFormSettings}
           onFormTypeSelect={noop}
           onPublish={asyncNoop}
-          onSchemaUpdate={noop}
+          onSchemaUpdate={handleSchemaUpdate}
           showCreationWizard={showCreationWizard}
           showFormSettings={showFormSettings}
           showJsonView={showJsonView}
@@ -342,7 +353,7 @@ export default function DemoFormBuilder() {
   }
 
   return (
-    <div className="mx-auto flex h-[900px] w-full flex-col overflow-hidden rounded-2xl border bg-background">
+    <div className="mx-auto flex w-full flex-col overflow-hidden rounded-2xl border bg-background">
       <FormBuilderHeader
         autoSaving={false}
         formId={undefined}
@@ -387,10 +398,10 @@ export default function DemoFormBuilder() {
         onCloseJsonView={() => setShowJsonView(false)}
         onCloseSettings={() => setShowSettings(false)}
         onCloseShareModal={() => setShowShareModal(false)}
-        onFormSettingsUpdate={noop}
+        onFormSettingsUpdate={updateFormSettings}
         onFormTypeSelect={noop}
         onPublish={asyncNoop}
-        onSchemaUpdate={noop}
+        onSchemaUpdate={handleSchemaUpdate}
         showCreationWizard={showCreationWizard}
         showFormSettings={showFormSettings}
         showJsonView={showJsonView}
