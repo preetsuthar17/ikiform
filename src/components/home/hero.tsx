@@ -59,7 +59,7 @@ export const EmbeddedForm = React.memo(function EmbeddedForm({
 
 function SponsoredByBadge() {
   return (
-    <Badge className="rounded-full px-3 py-1 text-sm" variant="secondary">
+    <Badge className="rounded-full px-3 py-0.5 text-sm" variant="secondary">
       <Link
         aria-label="Sponsored by Vercel (opens in a new tab)"
         className="flex items-center justify-center gap-2"

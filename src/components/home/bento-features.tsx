@@ -12,9 +12,32 @@ import {
 
 import { AnimatePresence, motion } from "motion/react";
 import type { ReactNode } from "react";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Label } from "../ui";
+
+// Hook to detect if component is in viewport
+function useInView(options?: IntersectionObserverInit) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.1, ...options }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, isInView };
+}
 
 interface FeatureCardProps {
   title: string;
@@ -78,11 +101,14 @@ const AI_FORM_STEPS: AiFormStep[] = [
   { label: "Message", type: "field", height: "h-20", width: "w-full" },
 ] as const;
 
-const AiFormBuilderPreview = () => {
+const AiFormBuilderPreview = React.memo(() => {
+  const { ref, isInView } = useInView();
   const [currentStep, setCurrentStep] = useState(0);
   const [status, setStatus] = useState<"generating" | "success">("generating");
 
   useEffect(() => {
+    if (!isInView) return;
+
     if (status === "success") {
       const t = setTimeout(() => {
         setCurrentStep(0);
@@ -97,10 +123,11 @@ const AiFormBuilderPreview = () => {
     if (currentStep === AI_FORM_STEPS.length) {
       setTimeout(() => setStatus("success"), 400);
     }
-  }, [currentStep, status]);
+  }, [currentStep, status, isInView]);
 
   return (
     <div
+      ref={ref}
       aria-label="AI Form Builder Demo"
       className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br from-primary/1 to-accent/20 p-0 shadow-inner"
       tabIndex={0}
@@ -112,15 +139,12 @@ const AiFormBuilderPreview = () => {
         >
           <motion.span
             animate={{
-              scale: status === "generating" ? [1, 1.2, 1] : 1,
-              opacity: status === "generating" ? [0.3, 1, 0.3] : 1,
-              filter:
-                status === "generating"
-                  ? "brightness(1)"
-                  : "brightness(0.95) grayscale(30%)",
+              scale: status === "generating" && isInView ? [1, 1.2, 1] : 1,
+              opacity: status === "generating" && isInView ? [0.3, 1, 0.3] : status === "generating" ? 0.7 : 1,
             }}
             aria-hidden="true"
             className="inline-block size-3 rounded-full bg-primary"
+            style={{ willChange: isInView ? "transform, opacity" : "auto" }}
             transition={{
               duration: 1,
               ease: "easeOut",
@@ -138,10 +162,13 @@ const AiFormBuilderPreview = () => {
             animate={{
               opacity: 1,
               translateY: 0,
-              filter: currentStep > 0 ? "brightness(1)" : "brightness(0.93)",
             }}
             className="flex flex-col gap-1"
             initial={{ opacity: 0, translateY: 12 }}
+            style={{ 
+              opacity: currentStep > 0 ? 1 : 0.93,
+              willChange: isInView ? "transform, opacity" : "auto"
+            }}
             transition={{ delay: 0.1 }}
           >
             <Label
@@ -170,15 +197,15 @@ const AiFormBuilderPreview = () => {
               const shown = currentStep > i - 1;
               return (
                 <motion.div
-                  animate={{
+                  animate={isInView ? {
                     opacity: shown ? 1 : 0,
                     y: shown ? 0 : 18,
-                    filter: shown ? "none" : "blur(2px)",
-                  }}
+                  } : { opacity: shown ? 1 : 0, y: 0 }}
                   aria-hidden={!shown}
                   className={"flex flex-col gap-0.5 rounded-md transition-all"}
                   initial={false}
                   key={idx}
+                  style={{ willChange: isInView && shown ? "transform, opacity" : "auto" }}
                   transition={{
                     duration: 0.36 + idx * 0.07,
                     delay: shown ? 0.02 : 0,
@@ -201,10 +228,10 @@ const AiFormBuilderPreview = () => {
       <motion.div
         animate={{
           opacity: status === "success" ? 1 : 0.6,
-          filter: status === "success" ? "none" : "grayscale(60%)",
         }}
         className="mt-auto flex items-center justify-between border-border/50 border-t px-6 py-3"
         initial={false}
+        style={{ willChange: isInView ? "opacity" : "auto" }}
       >
         <span className="text-muted-foreground text-xs">
           Generated in&nbsp;2.3s
@@ -223,30 +250,37 @@ const AiFormBuilderPreview = () => {
       </motion.div>
     </div>
   );
-};
+});
 
-const UnlimitedPreview = () => (
-  <div
-    aria-label="Unlimited submissions preview"
-    className="relative flex h-full flex-col items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/1 to-accent/20 p-4 shadow-inner"
-  >
-    <motion.div
-      animate={{
-        rotate: [0, 7, -7, 0],
-        scale: [1, 1.08, 1],
-        opacity: [0.85, 1, 0.92],
-      }}
-      aria-hidden="true"
-      className="pointer-events-none absolute top-4 left-4 select-none text-accent opacity-10"
-      initial={{ rotate: -8, scale: 0.85, opacity: 0.5 }}
-      transition={{
-        duration: 3,
-        repeat: 100_000,
-        ease: "easeInOut",
-      }}
+AiFormBuilderPreview.displayName = "AiFormBuilderPreview";
+
+const UnlimitedPreview = React.memo(() => {
+  const { ref, isInView } = useInView();
+  
+  return (
+    <div
+      ref={ref}
+      aria-label="Unlimited submissions preview"
+      className="relative flex h-full flex-col items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/1 to-accent/20 p-4 shadow-inner"
     >
-      <InfinityIcon size={96} />
-    </motion.div>
+      <motion.div
+        animate={isInView ? {
+          rotate: [0, 7, -7, 0],
+          scale: [1, 1.08, 1],
+          opacity: [0.85, 1, 0.92],
+        } : { rotate: 0, scale: 1, opacity: 0.85 }}
+        aria-hidden="true"
+        className="pointer-events-none absolute top-4 left-4 select-none text-accent opacity-10"
+        initial={{ rotate: -8, scale: 0.85, opacity: 0.5 }}
+        style={{ willChange: isInView ? "transform, opacity" : "auto" }}
+        transition={{
+          duration: 3,
+          repeat: isInView ? Infinity : 0,
+          ease: "easeInOut",
+        }}
+      >
+        <InfinityIcon size={96} />
+      </motion.div>
 
     {/* Core content */}
     <div className="relative z-10 flex flex-col items-center gap-4 px-2 py-4">
@@ -274,9 +308,13 @@ const UnlimitedPreview = () => (
       </motion.div>
     </div>
   </div>
-);
+  );
+});
 
-const AnalyticsPreview = () => {
+UnlimitedPreview.displayName = "UnlimitedPreview";
+
+const AnalyticsPreview = React.memo(() => {
+  const { ref, isInView } = useInView();
   const [isHovered, setIsHovered] = useState(false);
   const basePoints = useMemo(
     () => Array.from({ length: 10 }, () => Math.floor(Math.random() * 50) + 40),
@@ -285,7 +323,7 @@ const AnalyticsPreview = () => {
   const [animatedPoints, setAnimatedPoints] = useState(basePoints);
 
   useEffect(() => {
-    if (!isHovered) return;
+    if (!isHovered || !isInView) return;
 
     const interval = setInterval(() => {
       setAnimatedPoints(() =>
@@ -294,13 +332,13 @@ const AnalyticsPreview = () => {
     }, 500);
 
     return () => clearInterval(interval);
-  }, [isHovered, basePoints.length]);
+  }, [isHovered, basePoints.length, isInView]);
 
   useEffect(() => {
     if (!isHovered) {
       setAnimatedPoints(basePoints);
     }
-  }, [isHovered]);
+  }, [isHovered, basePoints]);
 
   const WIDTH = 160;
   const HEIGHT = 64;
@@ -318,6 +356,7 @@ const AnalyticsPreview = () => {
 
   return (
     <div
+      ref={ref}
       className="h-full overflow-hidden rounded-2xl bg-gradient-to-br from-primary/1 to-accent/20 p-5 shadow-inner"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -372,12 +411,13 @@ const AnalyticsPreview = () => {
 
         <motion.div
           animate={{
-            opacity: isHovered ? [0.7, 1, 0.7] : 1,
+            opacity: isHovered && isInView ? [0.7, 1, 0.7] : 1,
           }}
           className="text-muted-foreground text-xs"
+          style={{ willChange: isHovered && isInView ? "opacity" : "auto" }}
           transition={{
             duration: 1,
-            repeat: isHovered ? globalThis.Number.POSITIVE_INFINITY : 0,
+            repeat: isHovered && isInView ? Infinity : 0,
           }}
         >
           {isHovered ? "Live data updating..." : "1.2k responses this week"}
@@ -385,9 +425,11 @@ const AnalyticsPreview = () => {
       </div>
     </div>
   );
-};
+});
 
-const LogicBuilderPreview = () => {
+AnalyticsPreview.displayName = "AnalyticsPreview";
+
+const LogicBuilderPreview = React.memo(() => {
   const steps = React.useMemo(
     () => [
       {
@@ -444,17 +486,20 @@ const LogicBuilderPreview = () => {
   );
 
   // Reveal/animation per step
+  const { ref, isInView } = useInView();
   const [visibleIdx, setVisibleIdx] = React.useState(-1);
   React.useEffect(() => {
+    if (!isInView) return;
     setVisibleIdx(0);
     const interval = setInterval(() => {
       setVisibleIdx((idx) => (idx < steps.length - 1 ? idx + 1 : idx));
     }, 700);
     return () => clearInterval(interval);
-  }, []);
+  }, [isInView]);
 
   return (
     <div
+      ref={ref}
       aria-label="Logic flow example"
       className="flex h-full flex-col justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/1 to-accent/20 p-5 shadow-inner"
       style={{ minHeight: 210 }}
@@ -468,9 +513,9 @@ const LogicBuilderPreview = () => {
           {steps.map((step, idx) => (
             <motion.li
               animate={
-                idx <= visibleIdx
+                idx <= visibleIdx && isInView
                   ? { opacity: 1, translateX: 0 }
-                  : { opacity: 0, translateX: -24 }
+                  : { opacity: idx <= visibleIdx ? 1 : 0, translateX: 0 }
               }
               aria-label={
                 typeof step.label === "string" ? step.label : undefined
@@ -478,6 +523,7 @@ const LogicBuilderPreview = () => {
               className={"relative flex w-full flex-row items-center px-0 py-2"}
               initial={{ opacity: 0, translateX: -24 }}
               key={idx}
+              style={{ willChange: isInView && idx <= visibleIdx ? "transform, opacity" : "auto" }}
               transition={{ delay: idx * 0.15, duration: 0.44 }}
             >
               {/* Prefix label */}
@@ -500,19 +546,23 @@ const LogicBuilderPreview = () => {
       </div>
       {/* Accessible description */}
       <span className="sr-only">
-        Preview of a simple conditional logic: if user responds&nbsp;“Yes”, then
+        Preview of a simple conditional logic: if user responds&nbsp;"Yes", then
         show the email field; otherwise, skip it.
       </span>
     </div>
   );
-};
+});
 
-const ApiIntegrationPreview = () => {
+LogicBuilderPreview.displayName = "LogicBuilderPreview";
+
+const ApiIntegrationPreview = React.memo(() => {
+  const { ref, isInView } = useInView();
   const [status, setStatus] = useState<"idle" | "fetching" | "success">("idle");
   const [step, setStep] = useState(0);
 
   // Simulate API call: status changes
   useEffect(() => {
+    if (!isInView) return;
     if (status === "idle") {
       const t = setTimeout(() => setStatus("fetching"), 400);
       return () => clearTimeout(t);
@@ -521,11 +571,11 @@ const ApiIntegrationPreview = () => {
       const t = setTimeout(() => setStatus("success"), 1800);
       return () => clearTimeout(t);
     }
-  }, [status]);
+  }, [status, isInView]);
 
   // Animation for step-through result rows when API is "successful"
   useEffect(() => {
-    if (status !== "success") {
+    if (!isInView || status !== "success") {
       setStep(0);
       return;
     }
@@ -533,7 +583,7 @@ const ApiIntegrationPreview = () => {
       const t = setTimeout(() => setStep((s) => s + 1), 210);
       return () => clearTimeout(t);
     }
-  }, [status, step]);
+  }, [status, step, isInView]);
 
   // Data sample
   const apiData = useMemo(
@@ -597,6 +647,7 @@ const ApiIntegrationPreview = () => {
 
   return (
     <div
+      ref={ref}
       aria-busy={status === "fetching"}
       aria-live="polite"
       className="relative flex h-fit flex-col justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/2 to-accent/20 p-6 shadow-inner"
@@ -618,16 +669,17 @@ const ApiIntegrationPreview = () => {
             opacity: [0.8, 1, 0.85, 1],
             transition: {
               duration: 1.3,
-              repeat: status === "fetching" ? 100_000 : 0,
+              repeat: status === "fetching" && isInView ? Infinity : 0,
             },
           }}
-          className={`ml-2 text-xs ${
+          className={`  text-xs ${
             status === "success"
               ? "text-green-600 dark:text-green-400"
               : status === "fetching"
                 ? "text-blue-500 dark:text-blue-300"
                 : "text-muted-foreground"
           }`}
+          style={{ willChange: status === "fetching" && isInView ? "opacity" : "auto" }}
         >
           {status === "idle"
             ? "Ready"
@@ -643,7 +695,6 @@ const ApiIntegrationPreview = () => {
           scale: status === "success" ? 1 : 0.98,
           opacity: status !== "idle" ? 1 : 0.5,
           y: 0,
-          filter: status === "success" ? "none" : "grayscale(40%) blur(0.2px)",
         }}
         aria-describedby={
           status === "success" ? "api-integration-result-desc" : undefined
@@ -652,7 +703,10 @@ const ApiIntegrationPreview = () => {
           "flex h-fit flex-col gap-0.5 rounded-2xl border border-border bg-card/80 p-3 transition-all"
         }
         initial={{ scale: 0.97, opacity: 0, y: 12 }}
-        style={{ pointerEvents: status === "success" ? "auto" : "none" }}
+        style={{ 
+          pointerEvents: status === "success" ? "auto" : "none",
+          willChange: isInView ? "transform, opacity" : "auto"
+        }}
         transition={{ type: "spring", stiffness: 220, damping: 26 }}
       >
         {/* Skeleton/Loader */}
@@ -696,12 +750,16 @@ const ApiIntegrationPreview = () => {
       </span>
     </div>
   );
-};
+});
 
-const DigitalSignaturesPreview = () => {
+ApiIntegrationPreview.displayName = "ApiIntegrationPreview";
+
+const DigitalSignaturesPreview = React.memo(() => {
+  const { ref, isInView } = useInView();
   const [step, setStep] = React.useState<"idle" | "signing" | "done">("idle");
 
   React.useEffect(() => {
+    if (!isInView) return;
     if (step === "idle") {
       const start = setTimeout(() => setStep("signing"), 800);
       return () => clearTimeout(start);
@@ -710,7 +768,7 @@ const DigitalSignaturesPreview = () => {
       const finish = setTimeout(() => setStep("done"), 1900);
       return () => clearTimeout(finish);
     }
-  }, [step]);
+  }, [step, isInView]);
 
   const statusLabel =
     step === "idle"
@@ -720,7 +778,7 @@ const DigitalSignaturesPreview = () => {
         : "Signed securely";
 
   return (
-    <div className="relative flex h-fit flex-col items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/1 to-accent/20 p-4 shadow-inner">
+    <div ref={ref} className="relative flex h-fit flex-col items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/1 to-accent/20 p-4 shadow-inner">
       {/* Paper */}
       <div
         aria-label={statusLabel}
@@ -840,7 +898,9 @@ const DigitalSignaturesPreview = () => {
       </span>
     </div>
   );
-};
+});
+
+DigitalSignaturesPreview.displayName = "DigitalSignaturesPreview";
 
 const EMAIL_TEMPLATES = [
   { title: "Contact Form", from: "john@example.com", time: "2 minutes ago" },
@@ -858,7 +918,8 @@ const EMAIL_TEMPLATES = [
   },
 ] as const;
 
-const EmailNotificationsPreview = () => {
+const EmailNotificationsPreview = React.memo(() => {
+  const { ref, isInView } = useInView();
   interface Notification {
     id: number;
     title: string;
@@ -884,16 +945,17 @@ const EmailNotificationsPreview = () => {
   }, []);
 
   useEffect(() => {
+    if (!isInView) return;
     const initialTimer = setTimeout(() => addNotification(), 1000);
     const interval = setInterval(() => addNotification(), 3000);
     return () => {
       clearTimeout(initialTimer);
       clearInterval(interval);
     };
-  }, [addNotification]);
+  }, [addNotification, isInView]);
 
   return (
-    <div className="relative h-full overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-primary/2 to-accent/20 p-0 shadow-inner">
+    <div ref={ref} className="relative h-full overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-primary/2 to-accent/20 p-0 shadow-inner">
       {/* Header */}
       <div
         className="sticky top-0 z-[999] flex items-center gap-3 rounded-t-2xl border-border border-b bg-card px-5 pt-5 pb-3"
@@ -937,19 +999,16 @@ const EmailNotificationsPreview = () => {
           )}
           {notifications.map((notification, index) => (
             <motion.div
-              animate={{
+              animate={isInView ? {
                 opacity: 1,
                 y: index * 6,
                 scale: 1 - index * 0.035,
-                zIndex: notifications.length - index + 6,
-
-                transition: {
-                  type: "tween",
-                  duration: 0.32,
-                  ease: "easeOut",
-                },
+              } : {
+                opacity: index < maxNotifications ? 1 : 0,
+                y: index * 6,
+                scale: 1 - index * 0.035,
               }}
-              aria-label={`Email titled “${notification.title}” from ${notification.from}, received ${notification.time}`}
+              aria-label={`Email titled "${notification.title}" from ${notification.from}, received ${notification.time}`}
               className="ease relative mb-1.5 flex items-center gap-3 rounded-xl border border-border bg-background p-3 shadow-none outline-none transition-all last:mb-0 focus-within:ring-2 focus-within:ring-primary"
               exit={{
                 opacity: 0,
@@ -965,24 +1024,19 @@ const EmailNotificationsPreview = () => {
                 opacity: 0,
                 y: -15,
                 scale: 0.96,
-                zIndex: notifications.length - index + 6,
-                transition: {
-                  type: "tween",
-                  duration: 0.32,
-                  ease: "easeOut",
-                },
               }}
               key={notification.id}
               style={{
                 opacity: index < maxNotifications ? 1 : 0,
                 zIndex: notifications.length - index + 10,
                 transform: `translateY(${index * 6}px) scale(${1 - index * 0.035})`,
+                willChange: isInView ? "transform, opacity" : "auto",
               }}
               tabIndex={0}
               transition={{
                 type: "tween",
                 duration: 0.48,
-                ease: "easeOut", // standard "ease-in-out" for smoothness
+                ease: "easeOut",
               }}
             >
               <div>
@@ -1022,7 +1076,9 @@ const EmailNotificationsPreview = () => {
       </span>
     </div>
   );
-};
+});
+
+EmailNotificationsPreview.displayName = "EmailNotificationsPreview";
 
 export default function BentoFeatures() {
   const [mounted, setMounted] = useState(false);
