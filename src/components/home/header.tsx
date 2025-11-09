@@ -139,7 +139,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
         >
           <Link
             className="flex h-10 w-full items-center gap-2"
-            href="/#feedback"
+            href="/feedback"
           >
             <span>Feedback</span>
           </Link>

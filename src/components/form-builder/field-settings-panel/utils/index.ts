@@ -82,7 +82,8 @@ export const createOptionHandlers = (
 
   updateOption: (index: number, value: string) => {
     const newOptions = [...(field.options || [])];
-    newOptions[index] = value;
+    const trimmedValue = value.trim();
+    newOptions[index] = trimmedValue || `Option ${index + 1}`;
     updateField({ options: newOptions });
   },
 

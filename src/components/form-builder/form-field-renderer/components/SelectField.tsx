@@ -114,23 +114,33 @@ export function SelectField(props: BaseFieldProps) {
                   {fetchError}
                 </div>
               )}
-              {getOptions().map((option, index) => {
-                if (typeof option === "string") {
-                  return (
-                    <SelectItem key={index} value={option}>
-                      {option}
-                    </SelectItem>
-                  );
-                }
-                if (option && typeof option === "object" && option.value) {
-                  return (
-                    <SelectItem key={index} value={option.value}>
-                      {option.label || option.value}
-                    </SelectItem>
-                  );
-                }
-                return null;
-              })}
+              {getOptions()
+                .filter((option) => {
+                  if (typeof option === "string") {
+                    return option.trim() !== "";
+                  }
+                  if (option && typeof option === "object") {
+                    return option.value && String(option.value).trim() !== "";
+                  }
+                  return false;
+                })
+                .map((option, index) => {
+                  if (typeof option === "string") {
+                    return (
+                      <SelectItem key={index} value={option}>
+                        {option}
+                      </SelectItem>
+                    );
+                  }
+                  if (option && typeof option === "object" && option.value) {
+                    return (
+                      <SelectItem key={index} value={option.value}>
+                        {option.label || option.value}
+                      </SelectItem>
+                    );
+                  }
+                  return null;
+                })}
             </SelectContent>
           </Select>
         </CardContent>
