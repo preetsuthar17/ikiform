@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import BlackFridayBanner from "@/components/home/black-friday-banner";
 import Footer from "@/components/home/footer";
 import Header from "@/components/home/header";
 import { TrialBannerWrapper } from "@/components/trial-banner-wrapper";
@@ -25,19 +26,23 @@ export default function ConditionalLayout({
 
   // If we are on /dashboard, do not render the Footer
   const isDashboard = pathname === "/dashboard";
+  const isHomePage = pathname === "/";
 
   if (hideHeaderFooter) {
     return <>{children}</>;
   }
 
   return (
-    <div
-      className={`z-10 flex min-h-screen flex-col gap-12 px-4 md:px-8 ${isDashboard ? "justify-start" : "justify-between"} ${isDashboard ? "pb-12" : ""}`}
-    >
-      <Header />
-      <TrialBannerWrapper />
-      {children}
-      {!isDashboard && <Footer />}
-    </div>
+    <>
+      {isHomePage && <BlackFridayBanner />}
+      <div
+        className={`z-10 flex min-h-screen flex-col gap-12 px-4 md:px-8 ${isDashboard ? "justify-start" : "justify-between"} ${isDashboard ? "pb-12" : ""}`}
+      >
+        <Header />
+        <TrialBannerWrapper />
+        {children}
+        {!isDashboard && <Footer />}
+      </div>
+    </>
   );
 }
