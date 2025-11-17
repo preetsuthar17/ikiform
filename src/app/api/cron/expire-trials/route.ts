@@ -1,34 +1,34 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/utils/supabase/server";
+import { createAdminClient } from "@/utils/supabase/admin";
+
+export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   try {
-    // Verify the request is from Vercel Cron
     const authHeader = request.headers.get("authorization");
-    if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    const vercelCronHeader = request.headers.get("x-vercel-cron");
+    
+    const hasValidAuth = authHeader === `Bearer ${process.env.CRON_SECRET}`;
+    const isVercelCron = vercelCronHeader !== null;
+    
+    if (!hasValidAuth && !isVercelCron) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const supabase = await createClient();
+    const supabase = createAdminClient();
+    const now = new Date();
+    const fourteenDaysAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
+    const thresholdISO = fourteenDaysAgo.toISOString();
 
-    // Calculate the date 14 days ago
-    const fourteenDaysAgo = new Date();
-    fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14);
-
-    // First, let's check what users exist with the criteria
     const { data: debugUsers } = await supabase
       .from("users")
       .select("uid, email, name, has_premium, has_free_trial, created_at")
       .eq("has_premium", true)
       .eq("has_free_trial", true);
 
-    console.log(
-      `Found ${debugUsers?.length || 0} users with has_premium=true and has_free_trial=true`
-    );
-    console.log("Debug users:", debugUsers);
-    console.log("14 days ago threshold:", fourteenDaysAgo.toISOString());
+    console.log(`Found ${debugUsers?.length || 0} users with has_premium=true and has_free_trial=true`);
+    console.log("14 days ago threshold:", thresholdISO);
 
-    // Update users who were created 14+ days ago and have both has_premium=true and has_free_trial=true
     const { data, error } = await supabase
       .from("users")
       .update({
@@ -38,7 +38,7 @@ export async function GET(request: NextRequest) {
       })
       .eq("has_premium", true)
       .eq("has_free_trial", true)
-      .lte("created_at", fourteenDaysAgo.toISOString())
+      .lt("created_at", thresholdISO)
       .select("uid, email, name");
 
     if (error) {

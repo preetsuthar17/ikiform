@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createAdminClient } from "@/utils/supabase/admin";
 import { createClient } from "@/utils/supabase/server";
 import { ClientAnnouncementForm } from "./client-announcement-form";
+import { ExpireTrialsControl } from "./expire-trials-control";
 import { UsersTable } from "./users-table";
 
 export const dynamic = "force-dynamic";
@@ -76,6 +77,25 @@ const AdminPage = async function AdminPage() {
           <CardContent className="p-0">
             <div>
               <ClientAnnouncementForm />
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Expire Trials Section */}
+        <Card
+          aria-label="Expire trials management"
+          className="p-4 shadow-none md:p-6"
+          role="region"
+        >
+          <CardHeader className="p-0">
+            <CardTitle>Expire Trials</CardTitle>
+            <p className="text-muted-foreground text-sm">
+              Manually run the cron job to expire free trials
+            </p>
+          </CardHeader>
+          <CardContent className="p-0">
+            <div className="mt-4">
+              <ExpireTrialsControl />
             </div>
           </CardContent>
         </Card>
