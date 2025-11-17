@@ -8,8 +8,8 @@ export interface FormFieldRendererProps {
   error?: string;
   fieldRef?: RefObject<any>;
   disabled?: boolean;
-  formId?: string; // Optional form ID for file uploads
-  builderMode?: boolean; // When true, makes fields non-interactable for selection
+  formId?: string;
+  builderMode?: boolean;
 }
 
 export interface FieldWrapperProps {
@@ -27,8 +27,8 @@ export interface BaseFieldProps {
   fieldRef?: RefObject<any>;
   className?: string;
   disabled?: boolean;
-  formId?: string; // Optional form ID for file uploads
-  builderMode?: boolean; // When true, makes fields non-interactable for selection
+  formId?: string;
+  builderMode?: boolean;
 }
 
 export type FieldSize = "sm" | "lg" | "default";

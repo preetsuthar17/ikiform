@@ -563,7 +563,6 @@ export interface FormField {
     showCorrectAnswer?: boolean;
     explanation?: string;
 
-    // Field grouping settings
     groupFields?: FormField[];
     groupLayout?: "horizontal" | "vertical";
     groupSpacing?: "compact" | "normal" | "relaxed";
@@ -768,7 +767,6 @@ export interface FormSchema {
     };
     storedSteps?: FormBlock[];
   };
-  // logic removed
 }
 
 export type WebhookEventType =

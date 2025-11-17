@@ -14,10 +14,6 @@ interface MobileChatDrawerWrapperProps extends ChatPanelProps {
   drawerId?: string;
 }
 
-/**
- * Optimized MobileChatDrawer wrapper with lazy loading
- * Only loads on mobile devices when needed
- */
 export function MobileChatDrawerWrapper({
   isOpen,
   onOpenChange,

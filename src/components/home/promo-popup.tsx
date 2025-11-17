@@ -10,13 +10,11 @@ export default function PromoPopup() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Check if user has previously dismissed the popup
     const hasDismissed = localStorage.getItem("promo-popup-dismissed");
     if (hasDismissed) {
       return;
     }
 
-    // Show popup after 3 seconds
     const showTimer = setTimeout(() => {
       setIsVisible(true);
     }, 3000);
@@ -27,7 +25,6 @@ export default function PromoPopup() {
   useEffect(() => {
     if (!isVisible) return;
 
-    // Auto-hide after 7 seconds
     const hideTimer = setTimeout(() => {
       setIsVisible(false);
     }, 7000);
@@ -37,7 +34,7 @@ export default function PromoPopup() {
 
   const handleClose = () => {
     setIsVisible(false);
-    // Remember that user dismissed the popup
+
     localStorage.setItem("promo-popup-dismissed", "true");
   };
 
@@ -79,7 +76,7 @@ export default function PromoPopup() {
               <X className="size-4" />
             </Button>
 
-            {/* Content */}
+            {}
             <div className="flex items-start gap-3 pr-3">
               <div className="flex min-w-0 flex-1 flex-col items-start justify-center gap-1">
                 <h3 className="pb-2 font-semibold text-sm">

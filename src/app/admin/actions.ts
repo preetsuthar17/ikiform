@@ -35,7 +35,6 @@ export async function sendAnnouncementAction(
   try {
     let sent = 0;
     for (const email of recipients) {
-      // eslint-disable-next-line no-await-in-loop
       await sendFormNotification({ to: email, subject, message: content });
       sent += 1;
     }
@@ -65,8 +64,12 @@ export async function expireTrialsAction(): Promise<ExpireTrialsResult> {
     const fourteenDaysAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
     const thresholdISO = fourteenDaysAgo.toISOString();
 
-    logs.push(`[${new Date().toISOString()}] Current time: ${now.toISOString()}`);
-    logs.push(`[${new Date().toISOString()}] 14 days ago threshold: ${thresholdISO}`);
+    logs.push(
+      `[${new Date().toISOString()}] Current time: ${now.toISOString()}`
+    );
+    logs.push(
+      `[${new Date().toISOString()}] 14 days ago threshold: ${thresholdISO}`
+    );
 
     const { data: debugUsers, error: debugError } = await supabase
       .from("users")
@@ -75,19 +78,26 @@ export async function expireTrialsAction(): Promise<ExpireTrialsResult> {
       .eq("has_free_trial", true);
 
     if (debugError) {
-      logs.push(`[${new Date().toISOString()}] Error fetching debug users: ${debugError.message}`);
+      logs.push(
+        `[${new Date().toISOString()}] Error fetching debug users: ${debugError.message}`
+      );
     }
 
-    logs.push(`[${new Date().toISOString()}] Found ${debugUsers?.length || 0} users with has_premium=true and has_free_trial=true`);
+    logs.push(
+      `[${new Date().toISOString()}] Found ${debugUsers?.length || 0} users with has_premium=true and has_free_trial=true`
+    );
 
     if (debugUsers && debugUsers.length > 0) {
       const usersToExpire = debugUsers.filter((user) => {
         const userCreatedAt = new Date(user.created_at);
-        const daysDiff = (now.getTime() - userCreatedAt.getTime()) / (1000 * 60 * 60 * 24);
+        const daysDiff =
+          (now.getTime() - userCreatedAt.getTime()) / (1000 * 60 * 60 * 24);
         return daysDiff >= 14;
       });
 
-      logs.push(`[${new Date().toISOString()}] Users that should be expired (>= 14 days old): ${usersToExpire.length}`);
+      logs.push(
+        `[${new Date().toISOString()}] Users that should be expired (>= 14 days old): ${usersToExpire.length}`
+      );
 
       if (usersToExpire.length > 0) {
         logs.push(
@@ -95,7 +105,10 @@ export async function expireTrialsAction(): Promise<ExpireTrialsResult> {
             usersToExpire.map((u) => ({
               email: u.email,
               created_at: u.created_at,
-              days_old: Math.floor((now.getTime() - new Date(u.created_at).getTime()) / (1000 * 60 * 60 * 24)),
+              days_old: Math.floor(
+                (now.getTime() - new Date(u.created_at).getTime()) /
+                  (1000 * 60 * 60 * 24)
+              ),
             })),
             null,
             2
@@ -117,7 +130,9 @@ export async function expireTrialsAction(): Promise<ExpireTrialsResult> {
       .select("uid, email, name, created_at");
 
     if (error) {
-      logs.push(`[${new Date().toISOString()}] Error updating trial users: ${error.message}`);
+      logs.push(
+        `[${new Date().toISOString()}] Error updating trial users: ${error.message}`
+      );
       return {
         ok: false,
         error: error.message,
@@ -125,13 +140,24 @@ export async function expireTrialsAction(): Promise<ExpireTrialsResult> {
       };
     }
 
-    logs.push(`[${new Date().toISOString()}] Updated ${data?.length || 0} users from trial to free`);
+    logs.push(
+      `[${new Date().toISOString()}] Updated ${data?.length || 0} users from trial to free`
+    );
 
     if (data && data.length > 0) {
-      logs.push(`[${new Date().toISOString()}] Updated users: ${JSON.stringify(data, null, 2)}`);
+      logs.push(
+        `[${new Date().toISOString()}] Updated users: ${JSON.stringify(data, null, 2)}`
+      );
     } else if (debugUsers && debugUsers.length > 0) {
-      logs.push(`[${new Date().toISOString()}] WARNING: Found ${debugUsers.length} users with trial flags but none were updated.`);
-      logs.push(`[${new Date().toISOString()}] Sample user created_at values: ${debugUsers.slice(0, 5).map((u) => u.created_at).join(", ")}`);
+      logs.push(
+        `[${new Date().toISOString()}] WARNING: Found ${debugUsers.length} users with trial flags but none were updated.`
+      );
+      logs.push(
+        `[${new Date().toISOString()}] Sample user created_at values: ${debugUsers
+          .slice(0, 5)
+          .map((u) => u.created_at)
+          .join(", ")}`
+      );
     }
 
     logs.push(`[${new Date().toISOString()}] Job completed successfully`);

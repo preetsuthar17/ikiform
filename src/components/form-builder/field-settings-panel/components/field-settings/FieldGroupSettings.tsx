@@ -43,7 +43,7 @@ export function FieldGroupSettings({
   const groupSpacing = field.settings?.groupSpacing || "normal";
   const groupColumns = field.settings?.groupColumns || 2;
   const [pickerOpen, setPickerOpen] = useState(false);
-  // Changed to an object for proper multiple-collapsible state
+
   const [expandedFields, setExpandedFields] = useState<{
     [id: string]: boolean;
   }>({});

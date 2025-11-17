@@ -7,12 +7,9 @@ import { getFormCustomStyles } from "@/lib/utils/form-layout";
 import { getFontSizeValue, getFontWeightValue } from "@/lib/utils/form-styles";
 import { loadGoogleFont } from "@/lib/utils/google-fonts";
 
-// Utility function to convert hex color to HSL values
 function hexToHsl(hex: string): string {
-  // Remove the hash if present
   hex = hex.replace("#", "");
 
-  // Parse the hex values
   const r = Number.parseInt(hex.substring(0, 2), 16) / 255;
   const g = Number.parseInt(hex.substring(2, 4), 16) / 255;
   const b = Number.parseInt(hex.substring(4, 6), 16) / 255;
@@ -60,7 +57,6 @@ export function useFormStyling(schema: FormSchema) {
         const styles = await getFormCustomStyles(schema);
         setCustomStyles(styles);
 
-        // Load Google Font if specified
         const fontFamily = (schema.settings as any)?.typography?.fontFamily;
         if (fontFamily && typeof window !== "undefined") {
           await loadGoogleFont(fontFamily);
@@ -77,7 +73,6 @@ export function useFormStyling(schema: FormSchema) {
     loadStyles();
   }, [schema.settings]);
 
-  // Create CSS variables for dynamic styling
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -99,10 +94,9 @@ export function useFormStyling(schema: FormSchema) {
         root.style.setProperty("--form-border-color", colors.border);
       }
       if (colors.websiteBackground) {
-        // Convert hex color to HSL values for CSS custom property
         const hslValues = hexToHsl(colors.websiteBackground);
         root.style.setProperty("--hu-background", hslValues);
-        // Also set the full background color
+
         root.style.setProperty("--color-background", `hsl(${hslValues})`);
       }
     }
@@ -141,7 +135,6 @@ export function useFormStyling(schema: FormSchema) {
     };
   }, [(schema.settings as any)?.colors, (schema.settings as any)?.typography]);
 
-  // Generate custom CSS class names based on settings
   const getFormClasses = () => {
     const classes = ["ikiform-customized", "w-full", "ikiform-minimal"];
     return classes.join(" ");

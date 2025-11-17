@@ -7,10 +7,6 @@ interface SuspenseWrapperProps {
   className?: string;
 }
 
-/**
- * Enhanced Suspense wrapper with optimized skeleton fallback
- * Provides granular loading states while minimizing layout shift
- */
 export function SuspenseWrapper({
   children,
   fallback,

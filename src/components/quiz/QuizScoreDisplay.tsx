@@ -61,7 +61,7 @@ export function QuizScoreDisplay({
       </div>
 
       <div className="flex flex-col gap-4">
-        {/* Score Section */}
+        {}
         <div className="flex flex-col gap-2 text-center">
           <div className={`font-bold text-3xl ${getScoreColor()}`}>
             {percentage}%
@@ -82,7 +82,7 @@ export function QuizScoreDisplay({
 
         <Separator />
 
-        {/* Quick Stats */}
+        {}
         <div className="grid grid-cols-3 gap-4 text-center">
           <div>
             <div className="font-semibold text-lg">{answeredQuestions}</div>
@@ -104,7 +104,7 @@ export function QuizScoreDisplay({
           </div>
         </div>
 
-        {/* Status Badge */}
+        {}
         <div className="flex justify-center">
           <Badge className="text-sm" variant={passed ? "default" : "secondary"}>
             {passed ? (

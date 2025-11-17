@@ -13,10 +13,6 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-/**
- * Layout for AI Builder pages
- * Provides metadata optimization and structure
- */
 export default function AIBuilderLayout({ children }: LayoutProps) {
   return (
     <div className="h-screen overflow-hidden">

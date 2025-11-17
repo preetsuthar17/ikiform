@@ -29,12 +29,11 @@ export function TypographyCustomizationSection({
   const fontSize = localSettings.typography?.fontSize || "base";
   const fontWeight = localSettings.typography?.fontWeight || "normal";
 
-  // Helper functions to convert between slider values and font options
   const getFontSizeSliderValue = (size: string) => {
     const index = FONT_SIZE_OPTIONS.findIndex(
       (option) => option.value === size
     );
-    return index >= 0 ? index : 1; // Default to "base" (index 2)
+    return index >= 0 ? index : 1;
   };
 
   const getFontSizeFromSlider = (value: number) =>
@@ -46,7 +45,7 @@ export function TypographyCustomizationSection({
     const index = FONT_WEIGHT_OPTIONS.findIndex(
       (option) => option.value === weight
     );
-    return index >= 0 ? index : 1; // Default to "normal" (index 1)
+    return index >= 0 ? index : 1;
   };
 
   const getFontWeightFromSlider = (value: number) =>
@@ -57,7 +56,6 @@ export function TypographyCustomizationSection({
   const handleFontFamilyChange = (value: string) => {
     console.log("Font family changed to:", value);
 
-    // Load the font before applying it
     if (typeof window !== "undefined") {
       loadGoogleFont(value)
         .then(() => console.log("Font loaded successfully:", value))
@@ -160,7 +158,8 @@ export function TypographyCustomizationSection({
                 />
               </div>
               <p className="text-muted-foreground text-xs">
-                Selected: {(() => {
+                Selected:{" "}
+                {(() => {
                   const idx = getFontSizeSliderValue(fontSize);
                   const opt = FONT_SIZE_OPTIONS[idx];
                   return opt ? `${opt.label} (${opt.description})` : "";
@@ -185,7 +184,8 @@ export function TypographyCustomizationSection({
                 />
               </div>
               <p className="text-muted-foreground text-xs">
-                Selected: {(() => {
+                Selected:{" "}
+                {(() => {
                   const idx = getFontWeightSliderValue(fontWeight);
                   const opt = FONT_WEIGHT_OPTIONS[idx];
                   return opt ? `${opt.label} (${opt.description})` : "";

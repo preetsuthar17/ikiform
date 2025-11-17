@@ -1,7 +1,6 @@
 import * as React from "react";
 
 export function getChartTooltipStyle(isDark?: boolean) {
-  // Auto-detect theme if not provided
   const isCurrentlyDark =
     isDark ??
     (typeof window !== "undefined" &&
@@ -41,7 +40,6 @@ export function useChartColors() {
   };
 }
 
-// For server-side rendering, provide a function that can be called with theme
 export function getServerSafeTooltipStyle(isDark = false) {
   return getChartTooltipStyle(isDark);
 }

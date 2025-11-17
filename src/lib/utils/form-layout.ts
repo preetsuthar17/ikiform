@@ -27,13 +27,12 @@ export interface FormCustomStyles {
 export const getFormLayoutClasses = (schema: FormSchema): LayoutClasses => {
   const layout = schema.settings?.layout || {};
 
-  let maxWidthClass = "max-w-2xl"; // Default to medium (2xl)
-  let containerClass = "w-full max-w-2xl mx-auto"; // Always w-full with max-width constraint
+  let maxWidthClass = "max-w-2xl";
+  let containerClass = "w-full max-w-2xl mx-auto";
 
-  // Handle custom width
   if ((layout as any)?.maxWidth === "custom" && (layout as any)?.customWidth) {
     maxWidthClass = "";
-    containerClass = "w-full mx-auto"; // Keep w-full, max-width will be set via CSS
+    containerClass = "w-full mx-auto";
   } else {
     switch (layout?.maxWidth) {
       case "sm":
@@ -101,7 +100,6 @@ export const getFormCustomStyles = async (
   const typography = (settings as any).typography || {};
   const layout = settings.layout || {};
 
-  // Load Google Font if specified
   if (typography.fontFamily && typeof window !== "undefined") {
     try {
       await loadGoogleFont(typography.fontFamily);
@@ -127,8 +125,8 @@ export const getFormCustomStyles = async (
         ? (layout as any).customWidth
         : layout.maxWidth
           ? getMaxWidthValue(layout.maxWidth)
-          : getMaxWidthValue("md"), // Default to medium if no width specified
-    width: "100%", // Always full width, constrained by max-width
+          : getMaxWidthValue("md"),
+    width: "100%",
     margin: layout.margin ? `${getMarginValue(layout.margin)} auto` : "0 auto",
   };
 

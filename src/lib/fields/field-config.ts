@@ -38,7 +38,6 @@ export interface FieldTypeConfig {
 }
 
 export const FIELD_TYPE_CONFIGS: FieldTypeConfig[] = [
-  // Input Fields
   {
     type: "text",
     label: "Text Input",
@@ -126,7 +125,6 @@ export const FIELD_TYPE_CONFIGS: FieldTypeConfig[] = [
     canBeGrouped: true,
   },
 
-  // Selection Fields
   {
     type: "select",
     label: "Select Dropdown",
@@ -186,7 +184,6 @@ export const FIELD_TYPE_CONFIGS: FieldTypeConfig[] = [
     defaultSettings: { pollOptions: ["Option 1", "Option 2"] },
   },
 
-  // Media Fields
   {
     type: "file",
     label: "File Upload",
@@ -204,7 +201,6 @@ export const FIELD_TYPE_CONFIGS: FieldTypeConfig[] = [
     defaultLabel: "Signature Field",
   },
 
-  // Layout Fields
   {
     type: "statement",
     label: "Statement",
@@ -247,7 +243,6 @@ export const FIELD_TYPE_CONFIGS: FieldTypeConfig[] = [
     },
   },
 
-  // Advanced Fields
   {
     type: "tags",
     label: "Tag Input",
@@ -280,7 +275,6 @@ export const FIELD_TYPE_CONFIGS: FieldTypeConfig[] = [
   },
 ];
 
-// Helper functions
 export function getFieldTypeConfig(
   type: FormField["type"]
 ): FieldTypeConfig | undefined {
@@ -315,12 +309,10 @@ export function createFieldFromType(type: FormField["type"]): FormField {
   };
 }
 
-// Generate a unique field ID
 function generateFieldId(): string {
   return `field_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 }
 
-// Export field types for backward compatibility
 export const FIELD_TYPES = FIELD_TYPE_CONFIGS.map((config) => ({
   type: config.type,
   label: config.label,
@@ -328,7 +320,6 @@ export const FIELD_TYPES = FIELD_TYPE_CONFIGS.map((config) => ({
   icon: config.icon,
 }));
 
-// Export categories
 export const FIELD_CATEGORIES = {
   input: "Input Fields",
   selection: "Selection Fields",

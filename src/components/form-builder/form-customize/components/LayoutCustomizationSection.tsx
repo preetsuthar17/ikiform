@@ -41,12 +41,11 @@ export function LayoutCustomizationSection({
 
   const customWidth = localSettings.layout?.customWidth || "600px";
 
-  // Helper functions to convert between slider values and layout options
   const getWidthSliderValue = (width: string) => {
     const index = FORM_WIDTH_OPTIONS.findIndex(
       (option) => option.value === width
     );
-    return index >= 0 ? index : 1; // Default to "md" (index 1)
+    return index >= 0 ? index : 1;
   };
 
   const getWidthFromSlider = (value: number) =>
@@ -58,7 +57,7 @@ export function LayoutCustomizationSection({
     const index = FORM_PADDING_OPTIONS.findIndex(
       (option) => option.value === padding
     );
-    return index >= 0 ? index : 2; // Default to "md" (index 2)
+    return index >= 0 ? index : 2;
   };
 
   const getPaddingFromSlider = (value: number) =>
@@ -70,7 +69,7 @@ export function LayoutCustomizationSection({
     const index = FORM_MARGIN_OPTIONS.findIndex(
       (option) => option.value === margin
     );
-    return index >= 0 ? index : 0; // Default to "none" (index 0)
+    return index >= 0 ? index : 0;
   };
 
   const getMarginFromSlider = (value: number) =>
@@ -82,7 +81,7 @@ export function LayoutCustomizationSection({
     const index = FORM_BORDER_RADIUS_OPTIONS.findIndex(
       (option) => option.value === radius
     );
-    return index >= 0 ? index : 2; // Default to "md" (index 2)
+    return index >= 0 ? index : 2;
   };
 
   const getBorderRadiusFromSlider = (value: number) =>

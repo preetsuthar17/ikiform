@@ -45,9 +45,15 @@ export function Loader({ className, size = "md", ...props }: SpinnerProps) {
       <span className="sr-only">Loading</span>
       <style jsx>{`
         @keyframes bladeFade {
-          0% { opacity: 0.85; }
-          50% { opacity: 0.25; }
-          100% { opacity: 0.25; }
+          0% {
+            opacity: 0.85;
+          }
+          50% {
+            opacity: 0.25;
+          }
+          100% {
+            opacity: 0.25;
+          }
         }
       `}</style>
     </div>

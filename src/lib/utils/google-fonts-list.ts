@@ -1,4 +1,3 @@
-// Popular Google Fonts categorized by style
 export const GOOGLE_FONTS_CATEGORIES = {
   "Sans Serif": [
     "Inter",
@@ -100,9 +99,7 @@ export interface GoogleFont {
   subsets: string[];
 }
 
-// Enhanced Google Fonts data with metadata
 export const GOOGLE_FONTS_DATA: GoogleFont[] = [
-  // Sans Serif
   {
     family: "Inter",
     category: "Sans Serif",
@@ -164,7 +161,6 @@ export const GOOGLE_FONTS_DATA: GoogleFont[] = [
     subsets: ["latin"],
   },
 
-  // Serif
   {
     family: "Playfair Display",
     category: "Serif",
@@ -214,7 +210,6 @@ export const GOOGLE_FONTS_DATA: GoogleFont[] = [
     subsets: ["latin"],
   },
 
-  // Display
   {
     family: "Bebas Neue",
     category: "Display",
@@ -258,7 +253,6 @@ export const GOOGLE_FONTS_DATA: GoogleFont[] = [
     subsets: ["latin"],
   },
 
-  // Monospace
   {
     family: "Fira Code",
     category: "Monospace",

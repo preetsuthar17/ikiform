@@ -125,7 +125,6 @@ export function ApiSection({
     try {
       const result = await revokeFormApiKey(formId);
       if (result.success) {
-        // Persist removal and disable in schema
         const newSchema = {
           ...schema,
           settings: {
@@ -176,7 +175,6 @@ export function ApiSection({
     const formFields = schema ? getAllFields(schema) : [];
     const sampleData: Record<string, any> = {};
 
-    // Generate sample data based on actual form fields
     formFields.forEach((field: any) => {
       switch (field.type) {
         case "text":

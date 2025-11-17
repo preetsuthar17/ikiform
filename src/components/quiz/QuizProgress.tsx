@@ -40,7 +40,7 @@ export function QuizProgress({
   return (
     <Card className={`p-4 ${className}`}>
       <div className="flex flex-col gap-3">
-        {/* Header */}
+        {}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <HelpCircle className="size-4 text-primary" />
@@ -56,7 +56,7 @@ export function QuizProgress({
           )}
         </div>
 
-        {/* Progress Bar */}
+        {}
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between text-sm">
             <span className="text-muted-foreground">
@@ -70,7 +70,7 @@ export function QuizProgress({
           <Progress className="h-2" value={progressPercentage} />
         </div>
 
-        {/* Stats */}
+        {}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">

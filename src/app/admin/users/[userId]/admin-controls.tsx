@@ -57,7 +57,7 @@ export function AdminControls({
       </CardHeader>
       <CardContent className="p-0">
         <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {/* Trial Controls */}
+          {}
           <div className="space-y-2">
             <label className="font-medium text-muted-foreground text-sm">
               Free Trial
@@ -91,7 +91,7 @@ export function AdminControls({
             </div>
           </div>
 
-          {/* Premium Controls */}
+          {}
           <div className="space-y-2">
             <label className="font-medium text-muted-foreground text-sm">
               Premium Status
@@ -125,7 +125,7 @@ export function AdminControls({
             </div>
           </div>
 
-          {/* Delete User */}
+          {}
           <div className="space-y-2">
             <label className="font-medium text-muted-foreground text-sm">
               Danger Zone

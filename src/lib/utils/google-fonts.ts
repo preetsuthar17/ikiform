@@ -1,9 +1,7 @@
-// Google Fonts utilities for dynamic font loading
 export function loadGoogleFont(
   fontFamily: string,
   weights: string[] = ["400", "500", "600", "700"]
 ) {
-  // Check if font is already loaded
   const existingLink = document.querySelector(
     `link[href*="family=${fontFamily.replace(/\s+/g, "+")}"]`
   );

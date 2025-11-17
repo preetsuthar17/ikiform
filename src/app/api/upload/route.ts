@@ -54,7 +54,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Security: Validate file type
     if (!ALLOWED_MIME_TYPES.includes(file.type)) {
       return NextResponse.json(
         { error: `File type '${file.type}' is not allowed` },
@@ -62,7 +61,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Security: Validate file size
     if (file.size > MAX_FILE_SIZE) {
       return NextResponse.json(
         {
@@ -72,7 +70,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Security: Validate filename (prevent path traversal)
     if (
       file.name.includes("..") ||
       file.name.includes("/") ||
@@ -118,10 +115,6 @@ export async function DELETE(request: NextRequest) {
         { status: 400 }
       );
     }
-
-    // TODO: Add authentication check here
-    // For now, we'll allow deletion - in production you should verify
-    // that the user owns the form/submission
 
     const { deleteFile } = await import("@/lib/storage/supabase-storage");
     await deleteFile(filePath);

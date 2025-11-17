@@ -17,7 +17,7 @@ export default function Terms() {
             className="text-blue-500 underline"
             href="https://www.ikiform.com"
           >
-            https://www.ikiform.com
+            https:
           </Link>
           , you agree to be bound by these terms of service, all applicable laws
           and regulations, and agree that you are responsible for compliance

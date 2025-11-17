@@ -231,7 +231,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
   if (previewMode) {
     return (
       <div className="flex h-screen flex-col bg-background">
-        {/* Header */}
+        {}
         <div className="flex-shrink-0 border-b bg-background p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -252,7 +252,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
           </div>
         </div>
 
-        {/* Preview Content */}
+        {}
         <div className="flex-1 overflow-auto">
           <ActualFormPreview
             className="min-h-full"
@@ -266,7 +266,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 
   return (
     <div className="flex h-screen flex-col bg-background">
-      {/* Header */}
+      {}
       <header className="z-20 flex-shrink-0 border-border border-b bg-card px-4 py-3 md:py-4">
         <div className="flex h-full flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3 md:gap-4">
@@ -304,12 +304,12 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
       </header>
 
       <div className="flex flex-1 overflow-hidden">
-        {/* Desktop Left Panel - Customization Controls */}
+        {}
         <div className="hidden w-110 flex-shrink-0 border-r bg-background lg:block">
           <CustomizationPanel />
         </div>
 
-        {/* Mobile Customization Button */}
+        {}
         <div className="absolute right-6 bottom-6 z-10 lg:hidden">
           <Drawer onOpenChange={setMobileDrawerOpen} open={mobileDrawerOpen}>
             <DrawerTrigger asChild>
@@ -324,7 +324,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
           </Drawer>
         </div>
 
-        {/* Right Panel - Form Preview */}
+        {}
         <div className="min-w-0 flex-1">
           <ScrollArea className="h-full items-center justify-center p-4 lg:p-8">
             <ActualFormPreview

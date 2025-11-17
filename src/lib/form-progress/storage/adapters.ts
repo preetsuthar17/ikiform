@@ -104,10 +104,6 @@ export class SessionStorageAdapter implements ProgressStorageAdapter {
   }
 }
 
-/**
- * Server Storage adapter for form progress
- * Stores data on the server via API endpoints
- */
 export class ServerStorageAdapter implements ProgressStorageAdapter {
   private baseUrl = "/api/form-progress";
 

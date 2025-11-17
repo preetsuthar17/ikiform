@@ -103,7 +103,6 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
             attemptsRemaining={duplicateError.attemptsRemaining}
             message={duplicateError.message}
             onRetry={() => {
-              // Clear the error and allow retry
               window.location.reload();
             }}
             timeRemaining={duplicateError.timeRemaining}

@@ -7,17 +7,13 @@ import type { BaseFieldProps } from "../types";
 
 import { applyBuilderMode, getBaseClasses, getBuilderMode } from "../utils";
 
+import { safeRegexTest } from "@/lib/utils/safe-regex";
+
 export function getLivePatternError(field: FormField, value: string) {
   if (
     field?.validation?.pattern &&
     value &&
-    !(() => {
-      try {
-        return new RegExp(field.validation.pattern).test(value);
-      } catch {
-        return false;
-      }
-    })()
+    !safeRegexTest(field.validation.pattern, value)
   ) {
     return field.validation?.patternMessage || "Invalid format";
   }

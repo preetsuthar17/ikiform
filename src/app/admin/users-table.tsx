@@ -70,7 +70,6 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(25);
 
-  // Initialize state from URL parameters
   useEffect(() => {
     const sortParam = searchParams.get("sort");
     if (sortParam) {
@@ -197,7 +196,7 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Search and Filters */}
+      {}
       <div className="flex flex-col gap-4 md:flex-row md:items-center">
         <div className="relative flex-1">
           <Search
@@ -257,7 +256,7 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
         </div>
       </div>
 
-      {/* Results Summary and Pagination Controls */}
+      {}
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-4 text-muted-foreground text-sm">
           <span>
@@ -298,7 +297,7 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
         </div>
       </div>
 
-      {/* Table */}
+      {}
       <div className="rounded-md border">
         <Table aria-label="Users table" role="table">
           <TableHeader>
@@ -469,7 +468,7 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
         </div>
       )}
 
-      {/* Pagination */}
+      {}
       {totalPages > 1 && (
         <div className="flex items-center justify-between">
           <div className="text-muted-foreground text-sm">

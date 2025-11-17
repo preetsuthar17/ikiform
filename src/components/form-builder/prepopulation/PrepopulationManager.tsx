@@ -193,7 +193,7 @@ export function PrepopulationManager({
         </ModalHeader>
 
         <div className="flex flex-col gap-6 p-6">
-          {/* Overview Section */}
+          {}
           <Card className="p-4">
             <h3 className="mb-3 font-medium">Current Prepopulation Status</h3>
 
@@ -276,7 +276,7 @@ export function PrepopulationManager({
             )}
           </Card>
 
-          {/* Bulk Actions Section */}
+          {}
           <Card className="p-4">
             <h3 className="mb-3 font-medium">Bulk Enable Prepopulation</h3>
             <p className="mb-4 text-muted-foreground text-sm">
@@ -377,7 +377,7 @@ export function PrepopulationManager({
             </div>
           </Card>
 
-          {/* Settings Section */}
+          {}
           <Card className="p-4">
             <h3 className="mb-3 font-medium">Global Prepopulation Settings</h3>
 

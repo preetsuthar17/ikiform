@@ -35,7 +35,6 @@ export function FormDesignPreview({
   const colors = localSettings.colors || {};
   const typography = localSettings.typography || {};
 
-  // Calculate actual styling values
   const formWidth =
     layout.maxWidth === "custom" && layout.customWidth
       ? layout.customWidth
@@ -61,7 +60,6 @@ export function FormDesignPreview({
       : undefined,
   };
 
-  // Create dynamic styles for border radius and colors to ensure they apply
   React.useEffect(() => {
     const styleId = "form-preview-styles";
     const existingStyle = document.getElementById(styleId);
@@ -73,7 +71,6 @@ export function FormDesignPreview({
     const borderColor = colors.border || "#e2e8f0";
     const isMinimal = true;
 
-    // Get font styling values
     const fontSize = typography.fontSize || "base";
     const fontWeight = typography.fontWeight || "normal";
     const fontFamily = typography.fontFamily;
@@ -162,7 +159,7 @@ export function FormDesignPreview({
         </p>
       </div>
 
-      {/* Preview Container with proper margin */}
+      {}
       <div style={containerStyle}>
         <div
           className={`form-preview-container ikiform-customized transition-all duration-200 ${
@@ -171,7 +168,7 @@ export function FormDesignPreview({
           style={cardStyle}
         >
           <div className="flex flex-col gap-6">
-            {/* Form Header */}
+            {}
             <div className="flex flex-col gap-2">
               <h3 className="font-semibold text-lg">Sample Form</h3>
               <p className="text-sm opacity-80">
@@ -180,7 +177,7 @@ export function FormDesignPreview({
               </p>
             </div>
             <Separator />
-            {/* Sample Fields */}
+            {}
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
                 <Label htmlFor="preview-name">Name *</Label>

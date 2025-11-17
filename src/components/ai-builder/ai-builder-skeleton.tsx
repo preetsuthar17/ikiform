@@ -7,10 +7,6 @@ import {
 } from "@/components/ui/loading-skeletons";
 import { Skeleton } from "@/components/ui/skeleton";
 
-/**
- * Precise skeleton loader for AI Builder that matches the exact layout
- * Uses component-specific skeletons for pixel-perfect loading states
- */
 export function AIBuilderSkeleton() {
   return (
     <div className="flex h-screen w-full flex-col gap-4 bg-background md:flex-row">

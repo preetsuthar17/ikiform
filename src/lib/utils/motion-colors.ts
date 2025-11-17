@@ -1,6 +1,5 @@
 import * as React from "react";
 
-// Light theme colors
 const lightColors = {
   background: "hsl(0, 0%, 99%)",
   foreground: "hsl(0, 0%, 10%)",
@@ -22,7 +21,6 @@ const lightColors = {
   homeCardBg: "hsl(228, 79%, 52%)",
 } as const;
 
-// Dark theme colors
 const darkColors = {
   background: "hsl(0, 0%, 7%)",
   foreground: "hsl(0, 0%, 100%)",
@@ -47,12 +45,10 @@ const darkColors = {
 type ColorKey = keyof typeof lightColors;
 
 export function getMotionColor(colorKey: ColorKey): string {
-  // Check if we're in a browser environment
   if (typeof window === "undefined") {
     return lightColors[colorKey];
   }
 
-  // Check for dark theme
   const isDark = document.documentElement.classList.contains("dark");
 
   return isDark ? darkColors[colorKey] : lightColors[colorKey];
@@ -66,10 +62,8 @@ export function useMotionColors() {
       setIsDark(document.documentElement.classList.contains("dark"));
     };
 
-    // Initial check
     checkTheme();
 
-    // Listen for theme changes
     const observer = new MutationObserver(checkTheme);
     observer.observe(document.documentElement, {
       attributes: true,
@@ -85,6 +79,5 @@ export function useMotionColors() {
   return { getColor, isDark };
 }
 
-// Export color constants for direct usage
 export { lightColors, darkColors };
 export type { ColorKey };

@@ -54,7 +54,7 @@ export function QuizResults({
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Main Score Card */}
+      {}
       <Card className="p-8 text-center">
         <div className="mb-6 flex justify-center">
           {passed ? (
@@ -82,7 +82,7 @@ export function QuizResults({
           </p>
         )}
 
-        {/* Score Display */}
+        {}
         <div className="mb-6 flex flex-col gap-4">
           <div className="flex items-center justify-center gap-4">
             <div className="text-center">
@@ -102,7 +102,7 @@ export function QuizResults({
           <Progress className="h-3" value={percentage} />
         </div>
 
-        {/* Quick Stats */}
+        {}
         <div className="mb-6 flex justify-center gap-6">
           <div className="text-center">
             <div className="font-semibold text-foreground">
@@ -118,7 +118,7 @@ export function QuizResults({
           </div>
         </div>
 
-        {/* Pass/Fail Badge */}
+        {}
         <Badge
           className="mx-auto w-fit text-sm"
           variant={getScoreBadgeVariant()}
@@ -136,7 +136,7 @@ export function QuizResults({
           )}
         </Badge>
 
-        {/* Retake Button */}
+        {}
         {allowRetake && onRetake && (
           <div className="mt-6">
             <Button className="gap-2" onClick={onRetake} variant="outline">
@@ -147,7 +147,7 @@ export function QuizResults({
         )}
       </Card>
 
-      {/* Detailed Results */}
+      {}
       {showDetailedResults && fieldResults.length > 0 && (
         <Card className="p-6">
           <div className="mb-4 flex items-center gap-2">

@@ -1,6 +1,3 @@
-/**
- * Shuffles an array using the Fisher-Yates algorithm with optional seed
- */
 export function shuffleArray<T>(array: T[], seed?: string): T[] {
   const shuffled = [...array];
 
@@ -13,9 +10,6 @@ export function shuffleArray<T>(array: T[], seed?: string): T[] {
   return shuffled;
 }
 
-/**
- * Create a seeded random number generator for consistent shuffling
- */
 function createSeededRandom(seed: string) {
   let hash = 0;
   for (let i = 0; i < seed.length; i++) {
@@ -30,10 +24,6 @@ function createSeededRandom(seed: string) {
   };
 }
 
-/**
- * Shuffles options for a form field if shuffling is enabled
- * Uses field ID as seed to ensure consistent shuffling per user session
- */
 export function shuffleFieldOptions(
   options: Array<string | { value: string; label?: string }>,
   shuffleEnabled?: boolean,
@@ -47,10 +37,6 @@ export function shuffleFieldOptions(
   return shuffleArray(options, seed);
 }
 
-/**
- * Shuffles form fields if question randomization is enabled
- * Uses form ID as seed to ensure consistent shuffling per user session
- */
 export function shuffleQuizFields(
   fields: any[],
   randomizeEnabled?: boolean,
@@ -86,10 +72,6 @@ export function shuffleQuizFields(
   return shuffleArray(fields, seed);
 }
 
-/**
- * Get or create a session-based seed for consistent randomization
- * This ensures the same user gets the same shuffle order during their session
- */
 function getSessionSeed(): string {
   if (typeof window === "undefined") return "server";
 

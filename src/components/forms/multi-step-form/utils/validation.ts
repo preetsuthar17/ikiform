@@ -1,5 +1,6 @@
 import type { FormBlock } from "@/lib/database";
 
+import { safeRegexTest } from "@/lib/utils/safe-regex";
 import { validateEmail } from "@/lib/validation/email-validation";
 
 export const validateStep = (
@@ -11,15 +12,12 @@ export const validateStep = (
   const block = blocks[stepIndex];
   const errors: Record<string, string> = {};
 
-  // Debug logging
-
   if (!(block && block.fields)) {
     console.warn("⚠️ Block or fields not found for step:", stepIndex);
     return { errors, isValid: true };
   }
 
   block.fields.forEach((field) => {
-    // Skip validation for hidden fields
     if (fieldVisibility?.[field.id]?.visible === false) {
       return;
     }
@@ -128,7 +126,7 @@ export const validateStep = (
     } else if (
       field.validation?.pattern &&
       value &&
-      !new RegExp(field.validation.pattern).test(value)
+      !safeRegexTest(field.validation.pattern, value)
     ) {
       errors[field.id] = field.validation?.patternMessage || "Invalid format";
     }

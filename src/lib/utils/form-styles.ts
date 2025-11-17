@@ -104,13 +104,11 @@ export function injectFormStyles(
   styleConfig: FormStyleConfig,
   formId: string
 ): void {
-  // Remove existing styles for this form
   const existingStyle = document.getElementById(`form-styles-${formId}`);
   if (existingStyle) {
     existingStyle.remove();
   }
 
-  // Generate CSS
   const css = `
     .form-container-${formId} {
       ${styleConfig.colors?.background ? `background-color: ${styleConfig.colors.background};` : ""}
@@ -129,9 +127,9 @@ export function injectFormStyles(
     .form-container-${formId} h5,
     .form-container-${formId} h6 {
       ${styleConfig.typography?.fontFamily ? `font-family: "${styleConfig.typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;` : ""}
-      font-size: 1.875rem; /* 3xl = 30px = 1.875rem */
-      line-height: 2.25rem; /* 3xl line height */
-      font-weight: 600; /* semibold */
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+      font-weight: 600;
     }
     
     .form-container-${formId} p,
@@ -158,7 +156,6 @@ export function injectFormStyles(
     }
   `;
 
-  // Inject styles
   const style = document.createElement("style");
   style.id = `form-styles-${formId}`;
   style.textContent = css;
@@ -193,9 +190,9 @@ export function generateCSSSelectorStyles(settings: LocalSettings): string {
     .ikiform-customized h5,
     .ikiform-customized h6 {
       ${config.typography?.fontFamily ? `font-family: "${config.typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;` : ""}
-      font-size: 1.875rem !important; /* 3xl = 30px = 1.875rem */
-      line-height: 2.25rem !important; /* 3xl line height */
-      font-weight: 600 !important; /* semibold */
+      font-size: 1.875rem !important;
+      line-height: 2.25rem !important;
+      font-weight: 600 !important;
     }
     
     .ikiform-customized p,

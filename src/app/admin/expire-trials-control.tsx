@@ -26,8 +26,7 @@ export function ExpireTrialsControl() {
         toast.error(`Failed: ${res.error}`);
       }
     } catch (error) {
-      const message =
-        error instanceof Error ? error.message : "Unknown error";
+      const message = error instanceof Error ? error.message : "Unknown error";
       toast.error(`Error: ${message}`);
       setResult({
         ok: false,
@@ -87,4 +86,3 @@ export function ExpireTrialsControl() {
     </div>
   );
 }
-

@@ -18,7 +18,6 @@ import { Input } from "./input";
 import { Label } from "./label";
 import { Loader } from "./loader";
 
-// Google Fonts API types
 interface GoogleFont {
   family: string;
   variants: string[];
@@ -41,7 +40,6 @@ interface GoogleFontsResponse {
   items: GoogleFont[];
 }
 
-// Category mapping
 const CATEGORY_MAP = {
   "sans-serif": "Sans Serif",
   serif: "Serif",
@@ -84,7 +82,6 @@ export function GoogleFontPicker({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Fetch fonts from Google Fonts API
   useEffect(() => {
     const fetchFonts = async () => {
       setLoading(true);
@@ -102,7 +99,7 @@ export function GoogleFontPicker({
       } catch (err) {
         console.error("Error fetching fonts:", err);
         setError("Failed to load fonts. Please try again.");
-        // Fallback to a curated list of popular fonts
+
         setFonts(getFallbackFonts());
       } finally {
         setLoading(false);
@@ -112,7 +109,6 @@ export function GoogleFontPicker({
     fetchFonts();
   }, []);
 
-  // Fallback fonts if API fails
   const getFallbackFonts = (): GoogleFont[] => [
     {
       family: "Inter",
@@ -226,11 +222,9 @@ export function GoogleFontPicker({
     },
   ];
 
-  // Filter fonts based on search and category
   const filteredFonts = React.useMemo(() => {
     let filtered = fonts;
 
-    // Filter by category
     if (selectedCategory !== "all") {
       const categoryKey = Object.entries(CATEGORY_MAP).find(
         ([_, value]) => value === selectedCategory
@@ -240,7 +234,6 @@ export function GoogleFontPicker({
       }
     }
 
-    // Filter by search
     if (search) {
       const lowercaseSearch = search.toLowerCase();
       filtered = filtered.filter((font) =>
@@ -248,13 +241,11 @@ export function GoogleFontPicker({
       );
     }
 
-    // Sort by popularity (families with more variants are generally more popular)
     filtered.sort((a, b) => b.variants.length - a.variants.length);
 
-    return filtered.slice(0, 100); // Limit to 100 fonts for performance
+    return filtered.slice(0, 100);
   }, [fonts, search, selectedCategory]);
 
-  // Load font preview when hovering
   const preloadFont = async (fontFamily: string) => {
     if (!loadedFonts.has(fontFamily)) {
       try {
@@ -266,7 +257,6 @@ export function GoogleFontPicker({
     }
   };
 
-  // Load the selected font
   useEffect(() => {
     if (value && !loadedFonts.has(value)) {
       preloadFont(value);
@@ -329,7 +319,7 @@ export function GoogleFontPicker({
           <Card className="border-0 shadow-none">
             <CardContent className="p-3 md:p-4">
               <div className="flex flex-col gap-3 md:gap-4">
-                {/* Search */}
+                {}
                 <div className="flex items-center">
                   <Input
                     onChange={(e) => setSearch(e.target.value)}
@@ -340,7 +330,7 @@ export function GoogleFontPicker({
 
                 <Separator />
 
-                {/* Category Filter */}
+                {}
                 <div className="flex flex-wrap gap-1.5 md:gap-2">
                   {FONT_CATEGORIES.map((category) => (
                     <Button
@@ -359,7 +349,7 @@ export function GoogleFontPicker({
 
                 <Separator />
 
-                {/* Font List */}
+                {}
                 {loading && (
                   <div className="flex flex-col items-center gap-4 py-8">
                     <Loader />

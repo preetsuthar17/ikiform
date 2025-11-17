@@ -3,8 +3,8 @@ import { Redis } from "@upstash/redis";
 interface DuplicatePreventionSettings {
   enabled: boolean;
   strategy: "ip" | "email" | "session" | "combined";
-  mode: "time-based" | "one-time"; // New mode option
-  timeWindow: number; // in minutes (only used for time-based mode)
+  mode: "time-based" | "one-time";
+  timeWindow: number;
   message: string;
   allowOverride?: boolean;
   maxAttempts?: number;
@@ -45,8 +45,8 @@ function getRedisClient(): Redis {
 
 const DEFAULT_SETTINGS: DuplicatePreventionSettings = {
   enabled: false,
-  strategy: "ip", // Best strategy: combines IP, email, and session
-  mode: "one-time", // Best mode: one-time submission
+  strategy: "ip",
+  mode: "one-time",
   timeWindow: 1440,
   message:
     "You have already submitted this form. Each user can only submit once.",
@@ -74,18 +74,16 @@ export async function checkDuplicateSubmission(
   const key = `duplicate_prevention:${formId}:${identifier}`;
 
   try {
-    // Check if submission exists
     const existingSubmission = await redis.get(key);
 
     if (existingSubmission) {
       if (settings.mode === "one-time") {
-        // One-time mode: never allow resubmission
         return {
           isDuplicate: true,
           message: settings.message,
         };
       }
-      // Time-based mode: check time window
+
       const submissionData = existingSubmission as {
         timestamp: number;
         attempts: number;
@@ -109,7 +107,7 @@ export async function checkDuplicateSubmission(
           attemptsRemaining,
         };
       }
-      // Time window expired, remove the key
+
       await redis.del(key);
     }
 
@@ -119,7 +117,7 @@ export async function checkDuplicateSubmission(
     };
   } catch (error) {
     console.error("Error checking duplicate submission:", error);
-    // If Redis fails, allow submission to prevent blocking users
+
     return {
       isDuplicate: false,
       message: "",
@@ -148,10 +146,9 @@ export async function recordSubmission(
 
     if (existingSubmission) {
       if (settings.mode === "one-time") {
-        // One-time mode: keep the existing record forever
         return;
       }
-      // Time-based mode: update attempts
+
       const submissionData = existingSubmission as {
         timestamp: number;
         attempts: number;
@@ -164,13 +161,11 @@ export async function recordSubmission(
         attempts: newAttempts,
       });
     } else if (settings.mode === "one-time") {
-      // One-time mode: store forever (no expiration)
       await redis.set(key, {
         timestamp: Date.now(),
         attempts: 1,
       });
     } else {
-      // Time-based mode: store with expiration
       const timeWindowSeconds = settings.timeWindow * 60;
       await redis.setex(key, timeWindowSeconds, {
         timestamp: Date.now(),
@@ -209,7 +204,6 @@ export function generateIdentifier(
 export function extractEmailFromSubmissionData(
   submissionData: Record<string, any>
 ): string | undefined {
-  // Look for common email field names
   const emailFields = [
     "email",
     "e-mail",
@@ -221,7 +215,7 @@ export function extractEmailFromSubmissionData(
   for (const field of emailFields) {
     if (submissionData[field] && typeof submissionData[field] === "string") {
       const email = submissionData[field].trim().toLowerCase();
-      // Basic email validation
+
       if (email.includes("@") && email.includes(".")) {
         return email;
       }

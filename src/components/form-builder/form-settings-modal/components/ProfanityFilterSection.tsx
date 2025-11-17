@@ -436,7 +436,6 @@ function WordManagementSection({
       return;
     }
     if (e.key === ",") {
-      // Instantly add current token on comma
       e.preventDefault();
       addWord();
     }

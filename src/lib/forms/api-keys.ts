@@ -1,9 +1,6 @@
 import { createClient } from "@/utils/supabase/client";
 import { createClient as createServerClient } from "@/utils/supabase/server";
 
-/**
- * Generates a secure API key for form submissions
- */
 export function generateApiKey(): string {
   const timestamp = Date.now().toString(36);
   const randomPart = Math.random().toString(36).substring(2, 15);
@@ -11,16 +8,10 @@ export function generateApiKey(): string {
   return `ikiform_${timestamp}_${randomPart}${randomPart2}`;
 }
 
-/**
- * Validates API key format
- */
 export function isValidApiKeyFormat(apiKey: string): boolean {
   return /^ikiform_[a-z0-9]+_[a-z0-9]+$/.test(apiKey);
 }
 
-/**
- * Client-side function to generate and save API key for a form
- */
 export async function generateFormApiKey(formId: string): Promise<{
   success: boolean;
   apiKey?: string;
@@ -60,9 +51,6 @@ export async function generateFormApiKey(formId: string): Promise<{
   }
 }
 
-/**
- * Client-side function to revoke API key for a form
- */
 export async function revokeFormApiKey(formId: string): Promise<{
   success: boolean;
   error?: string;
@@ -99,9 +87,6 @@ export async function revokeFormApiKey(formId: string): Promise<{
   }
 }
 
-/**
- * Client-side function to toggle API enabled status
- */
 export async function toggleFormApiEnabled(
   formId: string,
   enabled: boolean
@@ -140,9 +125,6 @@ export async function toggleFormApiEnabled(
   }
 }
 
-/**
- * Server-side function to get form by API key
- */
 export async function getFormByApiKey(apiKey: string): Promise<{
   success: boolean;
   form?: any;
@@ -173,9 +155,6 @@ export async function getFormByApiKey(apiKey: string): Promise<{
   }
 }
 
-/**
- * Server-side function to validate API key and form access
- */
 export async function validateFormApiAccess(
   apiKey: string,
   formId: string

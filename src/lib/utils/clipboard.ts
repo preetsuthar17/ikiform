@@ -1,7 +1,3 @@
-/**
- * Robust clipboard utility that handles document focus issues and provides fallbacks
- */
-
 interface ClipboardOptions {
   showSuccessToast?: boolean;
   showErrorToast?: boolean;
@@ -9,9 +5,6 @@ interface ClipboardOptions {
   errorMessage?: string;
 }
 
-/**
- * Copy text to clipboard with proper fallbacks for when document is not focused
- */
 export async function copyToClipboard(
   text: string,
   options: ClipboardOptions = {}
@@ -60,9 +53,6 @@ export async function copyToClipboard(
   return fallbackCopyToClipboard(text, options);
 }
 
-/**
- * Fallback method using execCommand and temporary textarea
- */
 function fallbackCopyToClipboard(
   text: string,
   options: ClipboardOptions = {}
@@ -114,9 +104,6 @@ function fallbackCopyToClipboard(
   }
 }
 
-/**
- * Check if clipboard functionality is available
- */
 export function isClipboardSupported(): boolean {
   return !!(
     (navigator.clipboard && window.isSecureContext) ||
@@ -124,9 +111,6 @@ export function isClipboardSupported(): boolean {
   );
 }
 
-/**
- * Copy text with automatic toast notifications
- */
 export async function copyWithToast(
   text: string,
   successMessage?: string,

@@ -38,7 +38,7 @@ export function QuizAnalytics({
         <h2 className="font-semibold text-xl">Quiz Analytics</h2>
       </div>
 
-      {/* Overview Stats */}
+      {}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
         <Card className="p-4">
           <div className="flex items-center gap-3">
@@ -89,7 +89,7 @@ export function QuizAnalytics({
         </Card>
       </div>
 
-      {/* Question Performance */}
+      {}
       {stats.questionStats.length > 0 && (
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
@@ -97,7 +97,7 @@ export function QuizAnalytics({
             <h3 className="font-semibold text-lg">Question Performance</h3>
           </div>
 
-          {/* Quick Summary */}
+          {}
           <Card className="bg-muted/30 p-4">
             <div className="flex items-center justify-between">
               <div className="text-muted-foreground text-sm">
@@ -127,7 +127,7 @@ export function QuizAnalytics({
             {stats.questionStats.map((questionStat, index) => (
               <Card className="p-4" key={questionStat.fieldId}>
                 <div className="flex flex-col gap-3">
-                  {/* Question Header */}
+                  {}
                   <div>
                     <div className="mb-2 flex items-start justify-between gap-2">
                       <span className="inline-flex size-6 items-center justify-center rounded-full bg-primary/10 font-medium text-primary text-xs">
@@ -153,7 +153,7 @@ export function QuizAnalytics({
                     </p>
                   </div>
 
-                  {/* Progress Bar */}
+                  {}
                   <div className="flex flex-col gap-2">
                     <Progress
                       className="h-2"
@@ -179,7 +179,7 @@ export function QuizAnalytics({
                     </div>
                   </div>
 
-                  {/* Accuracy Indicator */}
+                  {}
                   <div className="flex items-center gap-2 pt-1">
                     {questionStat.correctRate >= 80 ? (
                       <div className="flex items-center gap-1 text-green-600">
@@ -211,7 +211,7 @@ export function QuizAnalytics({
         </div>
       )}
 
-      {/* Performance Insights */}
+      {}
       <Card className="p-6">
         <div className="mb-4 flex items-center gap-2">
           <TrendingUp className="size-5 text-blue-500" />

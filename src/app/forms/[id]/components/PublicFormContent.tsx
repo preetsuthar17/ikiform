@@ -3,12 +3,9 @@ import { Suspense, useEffect } from "react";
 import { CSSPropertiesProvider } from "./CSSPropertiesProvider";
 import { FormSkeleton } from "./FormSkeletons";
 
-// Utility function to convert hex color to HSL values
 function hexToHsl(hex: string): string {
-  // Remove the hash if present
   hex = hex.replace("#", "");
 
-  // Parse the hex values
   const r = Number.parseInt(hex.substring(0, 2), 16) / 255;
   const g = Number.parseInt(hex.substring(2, 4), 16) / 255;
   const b = Number.parseInt(hex.substring(4, 6), 16) / 255;
@@ -73,7 +70,6 @@ export default function PublicFormContent({
   const dir = schema.settings?.rtl ? "rtl" : "ltr";
   const borderRadius = schema?.settings?.layout?.borderRadius || "md";
 
-  // Apply website background color
   useEffect(() => {
     if (typeof window === "undefined") return;
 

@@ -304,12 +304,10 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
     const newMultiStep = !state.formSchema.settings.multiStep;
 
     if (newMultiStep) {
-      // Check if we're switching from single-step back to multi-step
       if (
         state.formSchema.blocks.length === 1 &&
         state.formSchema.blocks[0].id === "default"
       ) {
-        // Check if we have a stored multi-step structure in the form schema
         const hasStoredSteps = state.formSchema.settings.storedSteps;
 
         if (
@@ -317,7 +315,6 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           Array.isArray(hasStoredSteps) &&
           hasStoredSteps.length > 0
         ) {
-          // Restore the original step structure
           const newSchema = {
             ...state.formSchema,
             blocks: hasStoredSteps,
@@ -326,13 +323,12 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
               ...state.formSchema.settings,
               multiStep: true,
               showProgress: true,
-              storedSteps: undefined, // Clear the stored steps
+              storedSteps: undefined,
             },
           };
           actions.setFormSchema(newSchema);
           actions.setSelectedBlockId(hasStoredSteps[0].id);
         } else {
-          // No stored steps, create a new single step with current fields
           const currentFields =
             state.formSchema.blocks[0]?.fields || state.formSchema.fields || [];
           const newSchema = {
@@ -356,19 +352,16 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           actions.setSelectedBlockId("step-1");
         }
       } else {
-        // Already in multi-step mode, just update settings
         updateFormSettings({
           multiStep: true,
           showProgress: true,
         });
       }
     } else {
-      // Switching from multi-step to single-step
       const allFields = state.formSchema.blocks.flatMap(
         (block) => block.fields || []
       );
 
-      // Store the original step structure before flattening
       const originalSteps = state.formSchema.blocks.filter(
         (block) => block.id !== "default"
       );
@@ -388,15 +381,13 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
           ...state.formSchema.settings,
           multiStep: false,
           showProgress: false,
-          storedSteps: originalSteps, // Store the original step structure
+          storedSteps: originalSteps,
         },
       };
       actions.setFormSchema(newSchema);
       actions.setSelectedBlockId("default");
     }
   };
-
-  // Logic builder removed; no-op kept for compatibility where needed
 
   if (authLoading || state.loading) {
     return (
@@ -602,22 +593,19 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 
           actions.setFormSchema(updatedSchema);
 
-          // Immediately save settings changes to database
           if (formId && user) {
             try {
               await formsDb.updateForm(formId, { schema: updatedSchema });
-              // Update the last saved schema reference to prevent unsaved changes
+
               lastSavedSchemaRef.current = updatedSchema;
               lastManuallySavedSchemaRef.current = updatedSchema;
-              // Don't set hasUnsavedChanges since we just saved
             } catch (error) {
               console.error("Error saving settings:", error);
               toast.error("Failed to save settings. Please try again.");
-              // Only set unsaved changes if save failed
+
               actions.setHasUnsavedChanges(true);
             }
           } else {
-            // If no formId or user, set unsaved changes
             actions.setHasUnsavedChanges(true);
           }
         }}

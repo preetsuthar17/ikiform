@@ -48,7 +48,6 @@ export function WebhookList({
         let cardClass =
           "group flex cursor-pointer flex-col gap-4 shadow-none p-6 hover:bg-accent/50 relative";
 
-        // Border logic defaults (match FormsList)
         if (webhooks.length === 1) {
           cardClass += " rounded-xl";
         } else if (idx === 0) {

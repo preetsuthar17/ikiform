@@ -105,9 +105,6 @@ export async function deleteFile(filePath: string): Promise<void> {
   }
 }
 
-/**
- * Get signed URL for private file access
- */
 export async function getSignedUrl(
   filePath: string,
   expiresIn = 3600
@@ -128,9 +125,6 @@ export async function getSignedUrl(
   }
 }
 
-/**
- * Refresh signed URLs for uploaded files
- */
 export async function refreshSignedUrls(
   filePaths: string[],
   expiresIn = 86_400
@@ -151,9 +145,6 @@ export async function refreshSignedUrls(
   }
 }
 
-/**
- * List files in a directory
- */
 export async function listFiles(folderPath: string) {
   try {
     const { data, error } = await supabase.storage
@@ -171,9 +162,6 @@ export async function listFiles(folderPath: string) {
   }
 }
 
-/**
- * Get file metadata
- */
 export async function getFileMetadata(filePath: string) {
   try {
     const { data, error } = await supabase.storage.from("form-files").list("", {

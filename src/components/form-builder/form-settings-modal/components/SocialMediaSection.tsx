@@ -61,7 +61,6 @@ export function BrandingSection({
       );
   }, [hasChanges]);
 
-  // mark changes on any updateSocialMedia/updateSettings
   const wrappedUpdateSocial = (updates: any) => {
     updateSocialMedia(updates);
     setHasChanges(true);
@@ -92,7 +91,6 @@ export function BrandingSection({
   };
 
   const resetBranding = () => {
-    // reset to current schema values
     const original = (schema?.settings as any)?.branding || {};
     wrappedUpdateSettings({ branding: original });
     setHasChanges(false);

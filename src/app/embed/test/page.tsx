@@ -25,7 +25,6 @@ export const metadata: Metadata = {
 };
 
 export default function EmbedTestPage() {
-  // This would be replaced with actual form IDs from your forms
   const sampleFormId = "182fa915-7656-4489-bf51-5145984d4094";
 
   return (
@@ -57,7 +56,7 @@ export default function EmbedTestPage() {
           </div>
 
           <div className="flex flex-col gap-8">
-            {/* Standard Embed */}
+            {}
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
@@ -99,7 +98,7 @@ export default function EmbedTestPage() {
               </CardContent>
             </Card>
 
-            {/* Compact Embed */}
+            {}
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
@@ -138,7 +137,7 @@ export default function EmbedTestPage() {
               </CardContent>
             </Card>
 
-            {/* Fixed Width Embed */}
+            {}
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
@@ -181,7 +180,7 @@ export default function EmbedTestPage() {
               </CardContent>
             </Card>
 
-            {/* React Component Example */}
+            {}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -224,7 +223,7 @@ export default function EmbeddedForm() {
               </CardContent>
             </Card>
 
-            {/* Integration Instructions */}
+            {}
             <Card className="bg-accent/5">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">

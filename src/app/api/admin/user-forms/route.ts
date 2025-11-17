@@ -14,7 +14,6 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Check if user is authenticated and is the admin
     const supabase = await createClient();
     const {
       data: { user },
@@ -25,10 +24,8 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Use admin client to fetch user's forms
     const adminSupabase = createAdminClient();
 
-    // Fetch user's forms
     const { data: forms, error: formsError } = await adminSupabase
       .from("forms")
       .select("*")
@@ -43,7 +40,6 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Fetch form submission counts for each form
     const formIds = forms?.map((form) => form.id) || [];
     let submissionCounts: Record<string, number> = {};
 
@@ -64,7 +60,6 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    // Add submission counts to forms
     const formsWithCounts =
       forms?.map((form) => ({
         ...form,

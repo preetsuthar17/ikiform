@@ -1,16 +1,3 @@
-/**
- * Optimized UI Components Index
- *
- * This file exports components that have been optimized for React Server Components (RSC)
- * and includes proper Suspense boundaries for client components.
- *
- * Server Components (no 'use client'):
- * - Skeleton, Card, Separator, Badge, Alert, Breadcrumb, Avatar, Progress, Loader, SocialMediaIcons
- *
- * Client Components with Suspense wrappers:
- * - Button, Input, Select, Textarea, and other interactive components
- */
-
 export * from "./accordion";
 export * from "./alert";
 export * from "./avatar";

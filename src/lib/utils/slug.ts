@@ -22,8 +22,19 @@ export function generateUniqueSlug(title: string, length = 6): string {
 }
 
 export function isValidSlug(slug: string): boolean {
-  const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-  return slugPattern.test(slug) && slug.length >= 3 && slug.length <= 60;
+  if (!slug || slug.length < 3 || slug.length > 60) {
+    return false;
+  }
+
+  if (!/^[a-z0-9]/.test(slug)) {
+    return false;
+  }
+
+  if (!/[a-z0-9]$/.test(slug)) {
+    return false;
+  }
+
+  return /^[a-z0-9-]+$/.test(slug) && !/--/.test(slug);
 }
 
 export function isUUID(str: string): boolean {

@@ -3,7 +3,7 @@ import { refreshSignedUrls } from "@/lib/storage/supabase-storage";
 
 export async function POST(request: NextRequest) {
   try {
-    const { filePaths, expiresIn = 86_400 } = await request.json(); // 24 hours default
+    const { filePaths, expiresIn = 86_400 } = await request.json();
 
     if (!(filePaths && Array.isArray(filePaths))) {
       return NextResponse.json(
@@ -11,10 +11,6 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
-    // TODO: Add authentication check here
-    // For now, we'll allow URL refresh - in production you should verify
-    // that the user has access to these files
 
     const signedUrls = await refreshSignedUrls(filePaths, expiresIn);
 

@@ -228,7 +228,7 @@ export default function GDPR() {
                     href="http://crisp.chat/"
                     target="_blank"
                   >
-                    http://crisp.chat/
+                    http:
                   </Link>
                 </td>
               </tr>

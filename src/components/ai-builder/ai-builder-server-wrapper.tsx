@@ -1,18 +1,10 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { SuspenseWrapper } from "@/components/ui/suspense-wrapper";
 
-/**
- * Server component for loading AI Builder initial data
- * Handles server-side data fetching and preparation
- */
 async function AiBuilderDataLoader() {
   return null;
 }
 
-/**
- * Server wrapper component with data loading
- * Separates data fetching concerns from UI rendering
- */
 export function AIBuilderServerWrapper() {
   return (
     <SuspenseWrapper

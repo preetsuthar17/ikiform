@@ -1,9 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-/**
- * Optimized skeleton component for form previews
- * Maintains consistent layout during loading states
- */
 export function FormPreviewSkeleton() {
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-6 p-6">
@@ -30,10 +26,6 @@ export function FormPreviewSkeleton() {
   );
 }
 
-/**
- * Optimized skeleton component for chat messages
- * Mimics actual chat message structure
- */
 export function ChatMessageSkeleton() {
   return (
     <div className="flex flex-col gap-4">
@@ -50,10 +42,6 @@ export function ChatMessageSkeleton() {
   );
 }
 
-/**
- * AI Chat Welcome Message Skeleton
- * Matches the exact structure of WelcomeMessage component
- */
 export function ChatWelcomeSkeleton() {
   return (
     <div className="flex flex-col items-center gap-4 py-8 text-center">
@@ -67,10 +55,6 @@ export function ChatWelcomeSkeleton() {
   );
 }
 
-/**
- * Chat Suggestions Skeleton
- * Matches the ChatSuggestions component layout
- */
 export function ChatSuggestionsSkeleton() {
   return (
     <div className="flex flex-col gap-2 overflow-hidden max-sm:hidden">
@@ -83,10 +67,6 @@ export function ChatSuggestionsSkeleton() {
   );
 }
 
-/**
- * Chat Header Skeleton
- * Matches the ChatHeader component exactly
- */
 export function ChatHeaderSkeleton() {
   return (
     <div className="border-b bg-card/50 backdrop-blur">
@@ -100,10 +80,6 @@ export function ChatHeaderSkeleton() {
   );
 }
 
-/**
- * Preview Panel Header Skeleton
- * Matches both mobile and desktop header layouts
- */
 export function PreviewPanelHeaderSkeleton({
   isMobile = false,
 }: {
@@ -154,10 +130,6 @@ export function PreviewPanelHeaderSkeleton({
   );
 }
 
-/**
- * Optimized skeleton component for form builder panels
- * Maintains panel structure during loading
- */
 export function FormBuilderPanelSkeleton() {
   return (
     <div className="flex h-full">
@@ -227,7 +199,7 @@ export function FormBuilderHeaderSkeleton() {
           </div>
         </div>
 
-        {/* Mobile actions (match structure: dropdown + buttons in a scroll area) */}
+        {}
         <nav
           aria-label="Form builder actions"
           className="relative w-full md:hidden"
@@ -241,7 +213,7 @@ export function FormBuilderHeaderSkeleton() {
           </div>
         </nav>
 
-        {/* Desktop actions */}
+        {}
         <nav
           aria-label="Form builder actions"
           className="hidden items-center gap-3 md:flex"

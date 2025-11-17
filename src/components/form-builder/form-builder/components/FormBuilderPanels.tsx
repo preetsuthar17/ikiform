@@ -34,7 +34,6 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
   onFormSettingsUpdate,
   onStepSelect,
 }) => {
-  // Logic builder and tabs removed
   const allFields = getAllFields(formSchema);
 
   const handleSchemaUpdate = (updatedSchema: FormSchema) => {
@@ -147,7 +146,7 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
             onClose={() => onFieldSelect(null)}
             onFieldUpdate={onFieldUpdate}
           />
-          {/* Logic builder removed */}
+          {}
         </div>
       </ResizablePanel>
     </ResizablePanelGroup>

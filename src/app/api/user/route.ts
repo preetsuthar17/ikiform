@@ -67,7 +67,6 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Check if user already exists in database
     const { data: existingUser } = await supabase
       .from("users")
       .select("has_premium, has_free_trial, polar_customer_id")

@@ -16,12 +16,9 @@ import {
 } from "@/lib/utils/form-styles";
 import { getPublicFormTitle } from "@/lib/utils/form-utils";
 
-// Utility function to convert hex color to HSL values
 function hexToHsl(hex: string): string {
-  // Remove the hash if present
   hex = hex.replace("#", "");
 
-  // Parse the hex values
   const r = Number.parseInt(hex.substring(0, 2), 16) / 255;
   const g = Number.parseInt(hex.substring(2, 4), 16) / 255;
   const b = Number.parseInt(hex.substring(4, 6), 16) / 255;
@@ -68,7 +65,6 @@ export function ActualFormPreview({
   const colors = localSettings.colors || {};
   const typography = localSettings.typography || {};
 
-  // Calculate actual styling values
   const formWidth =
     layout.maxWidth === "custom" && layout.customWidth
       ? layout.customWidth
@@ -97,13 +93,11 @@ export function ActualFormPreview({
   React.useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Force light theme
     document.documentElement.classList.remove("dark");
     document.documentElement.classList.add("light");
 
     const root = document.documentElement;
 
-    // Set border radius
     const val = layout?.borderRadius || "md";
     let borderRadiusValue = "8px";
     let cardRadiusValue = "16px";
@@ -130,16 +124,13 @@ export function ActualFormPreview({
         break;
     }
 
-    // Set CSS custom properties
     root.style.setProperty("--radius", borderRadiusValue);
     root.style.setProperty("--card-radius", cardRadiusValue);
 
-    // Set custom width if specified
     if (layout?.maxWidth === "custom" && layout?.customWidth) {
       root.style.setProperty("--form-custom-width", layout.customWidth);
     }
 
-    // Set color variables for CSS
     if (colors?.primary) {
       root.style.setProperty("--form-primary-color", colors.primary);
     }
@@ -153,13 +144,11 @@ export function ActualFormPreview({
       root.style.setProperty("--form-border-color", colors.border);
     }
     if (colors?.websiteBackground) {
-      // Convert hex color to HSL values for CSS custom property
       const hslValues = hexToHsl(colors.websiteBackground);
       root.style.setProperty("--hu-background", hslValues);
       root.style.setProperty("--color-background", `hsl(${hslValues})`);
     }
 
-    // Set typography variables for CSS
     if (typography?.fontFamily) {
       root.style.setProperty(
         "--form-font-family",
@@ -182,7 +171,6 @@ export function ActualFormPreview({
     }
 
     return () => {
-      // Cleanup - restore defaults
       root.style.setProperty("--radius", "0.7rem");
       root.style.setProperty("--card-radius", "1rem");
       root.style.removeProperty("--form-custom-width");
@@ -196,7 +184,6 @@ export function ActualFormPreview({
       root.style.removeProperty("--form-font-size");
       root.style.removeProperty("--form-font-weight");
 
-      // Remove forced light theme classes
       document.documentElement.classList.remove("light");
     };
   }, [
@@ -257,7 +244,7 @@ export function ActualFormPreview({
                   : undefined,
               }}
             >
-              {/* Progress Bar for Multi-step Forms */}
+              {}
               {isMultiStep && localSettings.showProgress && (
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between text-sm">
@@ -278,7 +265,7 @@ export function ActualFormPreview({
                 </div>
               )}
 
-              {/* Social Media Icons - Header */}
+              {}
               {localSettings.branding?.socialMedia?.enabled &&
                 localSettings.branding.socialMedia.platforms &&
                 (localSettings.branding.socialMedia.position === "header" ||
@@ -294,7 +281,7 @@ export function ActualFormPreview({
                   </div>
                 )}
 
-              {/* Form Header */}
+              {}
               {!localSettings.hideHeader && (
                 <div className="flex flex-col gap-3 text-left">
                   <h1 className="font-semibold text-2xl">
@@ -309,9 +296,9 @@ export function ActualFormPreview({
                 </div>
               )}
 
-              {/* Form Content */}
+              {}
               <div className="flex flex-col gap-6">
-                {/* Current Block Fields */}
+                {}
                 {schema.blocks && schema.blocks.length > 0 && (
                   <div className="flex flex-col gap-4">
                     {schema.blocks[currentStep]?.fields.map((field) => (
@@ -319,7 +306,7 @@ export function ActualFormPreview({
                         <FormFieldRenderer
                           error=""
                           field={field}
-                          onChange={() => {}} // Preview mode - no changes
+                          onChange={() => {}}
                           value=""
                         />
                       </div>
@@ -327,7 +314,7 @@ export function ActualFormPreview({
                   </div>
                 )}
 
-                {/* Form Navigation/Submit */}
+                {}
                 <div className="flex flex-col gap-4">
                   {isMultiStep ? (
                     <div className="flex justify-between gap-4">
@@ -375,7 +362,7 @@ export function ActualFormPreview({
               </div>
             </Card>
 
-            {/* Footer Content */}
+            {}
             <div
               className="flex flex-col gap-4 text-center"
               style={{
@@ -385,7 +372,7 @@ export function ActualFormPreview({
                   : undefined,
               }}
             >
-              {/* Social Media Icons - Footer */}
+              {}
               {localSettings.branding?.socialMedia?.enabled &&
                 localSettings.branding.socialMedia.platforms &&
                 (localSettings.branding.socialMedia.position === "footer" ||
@@ -399,7 +386,7 @@ export function ActualFormPreview({
                   />
                 )}
 
-              {/* Ikiform Branding */}
+              {}
               {Boolean(
                 localSettings.branding &&
                   (localSettings.branding as any).showIkiformBranding !== false

@@ -50,7 +50,6 @@ export function SettingsSearch({
     setActiveIndex(null);
   };
 
-  // The parent div MUST be relative for absolute dropdown
   return (
     <div
       className="relative flex flex-col gap-2"
@@ -123,7 +122,7 @@ export function SettingsSearch({
           className="-translate-y-1/2 pointer-events-none absolute top-1/2 left-2.5 size-4 text-muted-foreground"
         />
       </div>
-      {/* Make the dropdown absolutely positioned over the search bar for no layout shift */}
+      {}
       {open && results.length > 0 && (
         <div
           aria-label="Search results"

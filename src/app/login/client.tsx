@@ -325,7 +325,7 @@ export default function LoginForm() {
               noValidate
               onSubmit={next}
             >
-              {/* Email input */}
+              {}
               {step === "email" &&
                 renderInput(emailRef, "email", "Enter your email", "email", {
                   autoComplete: "email",
@@ -333,14 +333,14 @@ export default function LoginForm() {
                   inputMode: "email",
                 })}
 
-              {/* Name input for sign up */}
+              {}
               {step === "name" &&
                 isSignUp &&
                 renderInput(nameRef, "name", "Enter your name", "text", {
                   autoComplete: "name",
                 })}
 
-              {/* Password input */}
+              {}
               {step === "password" &&
                 renderInput(
                   passwordRef,
@@ -378,7 +378,7 @@ export default function LoginForm() {
                     : "Continue"}
               </Button>
 
-              {/* Back button */}
+              {}
               {step !== "email" && (
                 <Button
                   aria-label="Go back to previous step"
@@ -392,7 +392,7 @@ export default function LoginForm() {
                 </Button>
               )}
 
-              {/* Forgot password */}
+              {}
               {step === "password" && !isSignUp && (
                 <div className="text-center">
                   <Button
@@ -409,7 +409,7 @@ export default function LoginForm() {
               )}
             </form>
 
-            {/* Switch between sign up/sign in */}
+            {}
             {step === "email" && (
               <div className="text-center">
                 <Button
@@ -432,7 +432,7 @@ export default function LoginForm() {
               </div>
             )}
 
-            {/* OAuth */}
+            {}
             {step === "email" && (
               <>
                 <div className="relative">

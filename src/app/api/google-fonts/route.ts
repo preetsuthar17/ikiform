@@ -306,7 +306,6 @@ export async function GET(request: NextRequest) {
             menu: "",
           },
 
-          // Serif
           {
             family: "Playfair Display",
             category: "serif",
@@ -528,7 +527,6 @@ export async function GET(request: NextRequest) {
             menu: "",
           },
 
-          // Display
           {
             family: "Bebas Neue",
             category: "display",
@@ -750,7 +748,6 @@ export async function GET(request: NextRequest) {
             menu: "",
           },
 
-          // Monospace
           {
             family: "Fira Code",
             category: "monospace",
@@ -906,7 +903,6 @@ export async function GET(request: NextRequest) {
             menu: "",
           },
 
-          // Handwriting
           {
             family: "Indie Flower",
             category: "handwriting",

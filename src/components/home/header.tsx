@@ -305,7 +305,7 @@ const MobileDrawer = React.memo(function MobileDrawer({
             </DrawerDescription>
           </VisuallyHidden>
           <div className="flex w-full flex-col gap-6">
-            {/* Top CTAs */}
+            {}
             <div className="grid gap-3">
               {user ? (
                 <Button asChild className="h-11 w-full rounded-lg text-base">
@@ -318,7 +318,7 @@ const MobileDrawer = React.memo(function MobileDrawer({
               )}
             </div>
 
-            {/* Profile section + actions */}
+            {}
             <DrawerProfileSection signOut={signOut} user={user} />
 
             <hr className="-mx-6 border-border" />
@@ -330,8 +330,6 @@ const MobileDrawer = React.memo(function MobileDrawer({
     </div>
   );
 });
-
-// --- Main Header component ---
 
 export default function Header() {
   const { user, loading, signOut } = useAuth();

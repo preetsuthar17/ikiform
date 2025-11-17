@@ -1,8 +1,5 @@
 import type { FormSchema } from "@/lib/database";
 
-/**
- * Default rate limiting settings for all forms
- */
 export const DEFAULT_RATE_LIMIT_SETTINGS = {
   enabled: true,
   maxSubmissions: 5,
@@ -11,9 +8,6 @@ export const DEFAULT_RATE_LIMIT_SETTINGS = {
   message: "Please wait before submitting another request.",
 };
 
-/**
- * Default profanity filter settings for all forms
- */
 export const DEFAULT_PROFANITY_FILTER_SETTINGS = {
   enabled: true,
   strictMode: true,
@@ -23,19 +17,12 @@ export const DEFAULT_PROFANITY_FILTER_SETTINGS = {
   whitelistedWords: [],
 };
 
-/**
- * Default response limit for all forms
- */
-
 export const DEFAULT_RESPONSE_LIMIT_SETTINGS = {
   enabled: false,
   maxResponses: 100,
   message: "This form is no longer accepting responses.",
 };
 
-/**
- * Default metadata settings for all forms
- */
 export const DEFAULT_METADATA_SETTINGS = {
   title: "",
   description: "",
@@ -61,9 +48,6 @@ export const DEFAULT_METADATA_SETTINGS = {
   noTranslate: false,
 };
 
-/**
- * Default password protection settings for all forms
- */
 export const DEFAULT_PASSWORD_PROTECTION_SETTINGS = {
   enabled: false,
   password: "",
@@ -71,9 +55,6 @@ export const DEFAULT_PASSWORD_PROTECTION_SETTINGS = {
     "This form is password protected. Please enter the password to continue.",
 };
 
-/**
- * Default duplicate prevention settings for all forms
- */
 export const DEFAULT_DUPLICATE_PREVENTION_SETTINGS = {
   enabled: false,
   strategy: "combined" as const,
@@ -85,9 +66,6 @@ export const DEFAULT_DUPLICATE_PREVENTION_SETTINGS = {
   maxAttempts: 1,
 };
 
-/**
- * Default bot protection settings for all forms
- */
 export const DEFAULT_BOT_PROTECTION_SETTINGS = {
   enabled: false,
   message: "Bot detected. Access denied.",
@@ -128,16 +106,10 @@ export const DEFAULT_LAYOUT_SETTINGS = {
   alignment: "left" as const,
 };
 
-/**
- * Default behavior settings for all forms
- */
 export const DEFAULT_BEHAVIOR_SETTINGS = {
   autoFocusFirstField: false,
 };
 
-/**
- * Default color settings for all forms
- */
 export const DEFAULT_COLOR_SETTINGS = {
   text: "#1f2937",
   border: "#e5e7eb",
@@ -145,9 +117,6 @@ export const DEFAULT_COLOR_SETTINGS = {
   background: "transparent",
 };
 
-/**
- * Default typography settings for all forms
- */
 export const DEFAULT_TYPOGRAPHY_SETTINGS = {
   fontSize: "base" as const,
   fontFamily: "Inter",
@@ -156,10 +125,6 @@ export const DEFAULT_TYPOGRAPHY_SETTINGS = {
   letterSpacing: "normal" as const,
 };
 
-/**
- * Ensures a form schema has the default rate limiting and profanity filter settings
- * This is used to handle legacy forms and ensure all forms have these settings
- */
 export function ensureDefaultFormSettings(schema: FormSchema): FormSchema {
   return {
     ...schema,
@@ -243,9 +208,6 @@ export function ensureDefaultRateLimitSettings(schema: FormSchema): FormSchema {
   return ensureDefaultFormSettings(schema);
 }
 
-/**
- * Creates a default form schema with rate limiting enabled
- */
 export function createDefaultFormSchema(options: {
   title?: string;
   publicTitle?: string;

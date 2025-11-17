@@ -131,7 +131,7 @@ export function WebhookListItem({
           </Button>
         </div>
 
-        {/* Desktop: Show dropdown menu */}
+        {}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button

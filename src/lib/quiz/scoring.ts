@@ -21,9 +21,6 @@ export interface QuizFieldResult {
   explanation?: string;
 }
 
-/**
- * Calculate the quiz score for a form submission
- */
 export function calculateQuizScore(
   schema: FormSchema,
   submissionData: Record<string, any>
@@ -99,9 +96,6 @@ export function calculateQuizScore(
   };
 }
 
-/**
- * Check if a user's answer matches the correct answer
- */
 function isAnswerCorrect(
   userAnswer: any,
   correctAnswer: string | string[]
@@ -137,9 +131,6 @@ function isAnswerCorrect(
   return false;
 }
 
-/**
- * Get all fields from a form schema (from both fields array and blocks)
- */
 function getAllFields(schema: FormSchema): FormField[] {
   const fieldsFromBlocks =
     schema.blocks?.flatMap((block) => block.fields || []) || [];
@@ -152,9 +143,6 @@ function getAllFields(schema: FormSchema): FormField[] {
   return fieldsFromArray;
 }
 
-/**
- * Generate a quiz report message based on the results
- */
 export function generateQuizResultMessage(
   result: QuizResult,
   schema: FormSchema
@@ -183,16 +171,10 @@ export function generateQuizResultMessage(
   return `You scored ${percentage}% (${score}/${totalPossible} points). You need ${passingScore}% to pass.`;
 }
 
-/**
- * Check if a form is configured as a quiz
- */
 export function isQuizForm(schema: FormSchema): boolean {
   return Boolean(schema.settings.quiz?.enabled);
 }
 
-/**
- * Get quiz statistics for analytics
- */
 export function getQuizStatistics(
   schema: FormSchema,
   submissions: FormSubmission[]

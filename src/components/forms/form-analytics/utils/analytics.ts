@@ -128,13 +128,12 @@ export const calculateFieldAnalytics = (
     responses.forEach((response) => {
       let stringValue: string;
 
-      // Handle file uploads specially
       if (field.type === "file") {
         if (Array.isArray(response)) {
           const fileCount = response.length;
           const fileTypes = response.map((file) => {
             if (typeof file === "object" && file.type) {
-              return file.type.split("/")[0]; // e.g., 'image', 'video', 'application'
+              return file.type.split("/")[0];
             }
             return "unknown";
           });

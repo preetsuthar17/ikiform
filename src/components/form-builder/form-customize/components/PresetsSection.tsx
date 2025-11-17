@@ -57,7 +57,6 @@ export function PresetsSection({
     setAppliedPreset(preset.id);
     toast.success(`Applied "${preset.name}" preset`);
 
-    // Reset applied preset indicator after animation
     setTimeout(() => setAppliedPreset(null), 2000);
   };
 
@@ -177,7 +176,7 @@ export function PresetsSection({
         </p>
       </div>
 
-      {/* Category Filter */}
+      {}
       <div className="flex flex-col gap-3">
         <Label className="font-medium">Category</Label>
         <div className="flex flex-wrap gap-2">
@@ -205,7 +204,7 @@ export function PresetsSection({
         </div>
       </div>
 
-      {/* Presets Grid */}
+      {}
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <Label className="font-medium">

@@ -1,6 +1,5 @@
 import { FIELD_TYPES } from "@/lib/fields/field-config";
 
-// Re-export the global field types for backward compatibility
 export { FIELD_TYPES };
 
 export const PALETTE_CONFIG = {

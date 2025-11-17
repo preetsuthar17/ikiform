@@ -58,11 +58,10 @@ export class UrlEngine implements PrepopulationEngine {
   }
 
   private sanitizeValue(value: string): string {
-    return value
-      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
+    const { sanitizeString } = require("@/lib/utils/sanitize");
+    return sanitizeString(value)
       .replace(/javascript:/gi, "")
       .replace(/on\w+\s*=/gi, "")
-      .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, "")
       .trim();
   }
 

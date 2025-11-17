@@ -11,7 +11,6 @@ export function useFormDesignSettings(
   localSettings: LocalSettings,
   formId?: string
 ) {
-  // Load Google Font when font family changes
   useEffect(() => {
     const fontFamily = localSettings.typography?.fontFamily;
     if (fontFamily && typeof window !== "undefined") {
@@ -19,7 +18,6 @@ export function useFormDesignSettings(
     }
   }, [localSettings.typography?.fontFamily]);
 
-  // Inject form styles when settings change
   useEffect(() => {
     if (formId && typeof window !== "undefined") {
       const styleConfig = generateFormStyles(localSettings);
@@ -68,7 +66,7 @@ export function useColorValidation() {
     (color: string): string => {
       if (isValidHexColor(color)) return color;
       if (isValidCssColor(color)) return color;
-      return "#000000"; // fallback
+      return "#000000";
     },
     [isValidHexColor, isValidCssColor]
   );

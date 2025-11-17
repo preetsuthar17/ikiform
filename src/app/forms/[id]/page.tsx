@@ -24,7 +24,6 @@ export async function generateMetadata({
     const identifier = form.slug || id;
     const formUrl = `${baseUrl}/f/${identifier}`;
 
-    // Use custom metadata or fallback to defaults
     const title = metadata.title || getPublicFormTitle(form.schema);
     const description =
       metadata.description ||
@@ -35,7 +34,6 @@ export async function generateMetadata({
     const keywords = metadata.keywords;
     const canonicalUrl = metadata.canonicalUrl || formUrl;
 
-    // Build robots directive
     const robots = metadata.robots || "noindex";
     const robotsConfig = {
       index: !metadata.noIndex,
@@ -46,13 +44,11 @@ export async function generateMetadata({
       translate: !metadata.noTranslate,
     };
 
-    // Open Graph settings
     const ogTitle = metadata.ogTitle || title;
     const ogDescription = metadata.ogDescription || description;
     const ogImage = metadata.ogImage;
     const ogType = metadata.ogType || "website";
 
-    // Twitter Card settings
     const twitterCard = metadata.twitterCard || "summary_large_image";
     const twitterTitle = metadata.twitterTitle || ogTitle;
     const twitterDescription = metadata.twitterDescription || ogDescription;

@@ -7,12 +7,10 @@ export function sanitizeAnimationValue(value: any): any {
   }
 
   if (typeof value === "string") {
-    // Replace transparent with proper rgba
     if (value === "transparent") {
       return "rgba(0, 0, 0, 0)";
     }
 
-    // Check for CSS variables and warn in development
     if (value.includes("var(--") && process.env.NODE_ENV === "development") {
       console.warn(
         `CSS variable detected in animation: ${value}. Consider using motion-safe colors instead.`
@@ -141,7 +139,6 @@ export const motionSafePresets = {
     exit: { opacity: 0, scale: 0.9 },
   },
 
-  // Button hover effects with safe colors
   buttonHover: (baseColor = "rgba(0, 0, 0, 0.05)") => ({
     whileHover: {
       backgroundColor:

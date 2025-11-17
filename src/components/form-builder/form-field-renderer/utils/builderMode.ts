@@ -1,9 +1,5 @@
 import type { BaseFieldProps } from "../types";
 
-/**
- * Applies builder mode behavior to form field props
- * When builderMode is true, fields become non-interactable for selection
- */
 export function applyBuilderMode<T extends Record<string, any>>(
   props: T,
   builderMode: boolean
@@ -18,7 +14,7 @@ export function applyBuilderMode<T extends Record<string, any>>(
     style: builderMode
       ? { ...props.style, pointerEvents: "none" }
       : props.style,
-    // Remove event handlers in builder mode
+
     onChange: builderMode ? undefined : props.onChange,
     onBlur: builderMode ? undefined : props.onBlur,
     onFocus: builderMode ? undefined : props.onFocus,
@@ -28,9 +24,6 @@ export function applyBuilderMode<T extends Record<string, any>>(
   };
 }
 
-/**
- * Gets the builder mode value from BaseFieldProps
- */
 export function getBuilderMode(props: BaseFieldProps): boolean {
   return Boolean(props.builderMode);
 }

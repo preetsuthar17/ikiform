@@ -854,7 +854,7 @@ export async function deliverWithRetry(
       attempt,
     };
     await supabase.from("webhook_logs" as const).insert([failureLog] as any);
-    // send failure email only on final attempt to avoid noise
+
     const isFinalAttempt = attempt + 1 >= 3;
     if (
       isFinalAttempt &&

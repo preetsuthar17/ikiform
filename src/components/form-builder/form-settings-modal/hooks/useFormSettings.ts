@@ -71,7 +71,6 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
   });
 
   useEffect(() => {
-    // Only update if the schema has actually changed
     setLocalSettings({
       ...schema.settings,
 

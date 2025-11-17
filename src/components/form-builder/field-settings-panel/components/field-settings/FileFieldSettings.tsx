@@ -18,7 +18,7 @@ interface FileFieldSettingsProps {
 interface FileFieldSettings {
   accept?: string;
   maxFiles?: number;
-  maxSize?: number; // in bytes
+  maxSize?: number;
   allowedTypes?: string[];
   helpText?: string;
 }
@@ -75,7 +75,7 @@ export function FileFieldSettings({
   const {
     accept = "image/*,application/pdf,video/*,audio/*,text/*,application/zip",
     maxFiles = 10,
-    maxSize = 50 * 1024 * 1024, // 50MB default
+    maxSize = 50 * 1024 * 1024,
     allowedTypes = [],
     helpText = "",
   } = settings;
@@ -95,7 +95,6 @@ export function FileFieldSettings({
   };
 
   const updateAcceptAttribute = (types: string[]) => {
-    // Generate accept attribute from allowed types
     const acceptTypes = types.map((type) => `.${type}`).join(",");
     const fullAccept =
       acceptTypes ||
@@ -124,12 +123,10 @@ export function FileFieldSettings({
 
     let newTypes: string[];
     if (hasAllExtensions) {
-      // Remove all extensions of this type
       newTypes = allowedTypes.filter(
         (type) => !typeConfig.extensions.includes(type)
       );
     } else {
-      // Add all extensions of this type
       newTypes = [...new Set([...allowedTypes, ...typeConfig.extensions])];
     }
 

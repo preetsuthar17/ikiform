@@ -17,9 +17,6 @@ export interface ProfanityCheckResult {
   message?: string;
 }
 
-/**
- * Profanity filter utility for form submissions
- */
 export class ProfanityFilterService {
   private filter: Filter;
   private options: ProfanityFilterOptions;
@@ -50,25 +47,16 @@ export class ProfanityFilterService {
     }
   }
 
-  /**
-   * Check if text contains profanity
-   */
   isProfane(text: string): boolean {
     if (!(this.options.enabled && text)) return false;
     return this.filter.isProfane(text);
   }
 
-  /**
-   * Clean profanity from text
-   */
   clean(text: string): string {
     if (!(this.options.enabled && text)) return text;
     return this.filter.clean(text);
   }
 
-  /**
-   * Check and filter submission data
-   */
   filterSubmissionData(submissionData: Record<string, any>): {
     isValid: boolean;
     filteredData: Record<string, any>;
@@ -121,9 +109,6 @@ export class ProfanityFilterService {
     };
   }
 
-  /**
-   * Check a single value for profanity
-   */
   private checkValue(value: any): ProfanityCheckResult {
     if (typeof value === "string") {
       return this.checkText(value);
@@ -146,9 +131,6 @@ export class ProfanityFilterService {
     };
   }
 
-  /**
-   * Check text for profanity and return detailed result
-   */
   private checkText(text: string): ProfanityCheckResult {
     if (!text || typeof text !== "string") {
       return {
@@ -180,9 +162,6 @@ export class ProfanityFilterService {
     };
   }
 
-  /**
-   * Extract which words were filtered by comparing original and cleaned text
-   */
   private extractFilteredWords(original: string, cleaned: string): string[] {
     const originalWords = original.toLowerCase().split(/\s+/);
     const cleanedWords = cleaned.toLowerCase().split(/\s+/);
@@ -197,9 +176,6 @@ export class ProfanityFilterService {
     return filtered;
   }
 
-  /**
-   * Update filter options
-   */
   updateOptions(newOptions: Partial<ProfanityFilterOptions>) {
     this.options = { ...this.options, ...newOptions };
 
@@ -218,9 +194,6 @@ export class ProfanityFilterService {
   }
 }
 
-/**
- * Create a profanity filter instance from form settings
- */
 export function createProfanityFilter(
   settings: ProfanityFilterOptions
 ): ProfanityFilterService {

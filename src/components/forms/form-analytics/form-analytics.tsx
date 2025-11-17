@@ -167,7 +167,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
   return (
     <div className="min-h-screen bg-background py-12">
       <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-6 sm:px-6 lg:px-8">
-        {/* Header Section */}
+        {}
         <Card
           aria-labelledby="form-analytics-header"
           className="p-4 shadow-none md:p-6"
@@ -225,12 +225,12 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                 </div>
               </div>
 
-              {/* Right: Actions */}
+              {}
               <div
                 aria-label="Form Actions"
                 className="flex flex-wrap items-center gap-3 sm:gap-3"
               >
-                {/* Edit button with Tooltip */}
+                {}
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
@@ -248,7 +248,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                     <TooltipContent>Edit form</TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
-                {/* Share button with Tooltip */}
+                {}
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
@@ -266,7 +266,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                     <TooltipContent>Share form</TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
-                {/* Submissions button with Tooltip */}
+                {}
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
@@ -355,7 +355,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
           </CardHeader>
         </Card>
 
-        {/* Analytics Content */}
+        {}
         <div className="flex flex-col gap-4">
           <OverviewStats data={analyticsData} />
           <QuizAnalyticsCard quizAnalytics={analyticsData.quizAnalytics} />
@@ -364,7 +364,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
           <DropoffAnalytics form={form} submissions={submissions} />
           <InfoCards data={analyticsData} form={form} formatDate={formatDate} />
 
-          {/* Recent Submissions */}
+          {}
           <Card className="p-4 shadow-none">
             <CardHeader className="p-0">
               <div className="flex items-center justify-between">
@@ -406,7 +406,6 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
                     let cardClass =
                       "group flex cursor-pointer flex-col gap-4 shadow-none p-6 hover:bg-accent/50 relative";
 
-                    // Border logic
                     if (submissions.length === 1) {
                       cardClass += " rounded-lg";
                     } else if (idx === 0) {

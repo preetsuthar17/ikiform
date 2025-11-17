@@ -20,7 +20,7 @@ export function RadioFieldSettings({
     <Card className="flex flex-col gap-4 p-4 shadow-none">
       <h3 className="font-medium text-card-foreground">Quiz Settings</h3>
 
-      {/* Enable Quiz Mode */}
+      {}
       <div className="flex items-center gap-2">
         <Switch
           checked={!!field.settings?.isQuizField}
@@ -38,7 +38,7 @@ export function RadioFieldSettings({
         <>
           <Separator />
 
-          {/* Correct Answer */}
+          {}
           <div className="flex flex-col gap-2">
             <Label className="text-card-foreground" htmlFor="correct-answer">
               Correct Answer
@@ -80,7 +80,7 @@ export function RadioFieldSettings({
             </Select>
           </div>
 
-          {/* Points */}
+          {}
           <div className="flex flex-col gap-2">
             <Label className="text-card-foreground" htmlFor="quiz-points">
               Points for Correct Answer
@@ -99,7 +99,7 @@ export function RadioFieldSettings({
             />
           </div>
 
-          {/* Show Correct Answer */}
+          {}
           <div className="flex items-center gap-2">
             <Switch
               checked={field.settings?.showCorrectAnswer !== false}
@@ -116,7 +116,7 @@ export function RadioFieldSettings({
             </Label>
           </div>
 
-          {/* Explanation */}
+          {}
           <div className="flex flex-col gap-2">
             <Label className="text-card-foreground" htmlFor="quiz-explanation">
               Explanation (Optional)

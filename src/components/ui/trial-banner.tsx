@@ -18,7 +18,7 @@ export function TrialBanner({ userCreatedAt, onDismiss }: TrialBannerProps) {
     const calculateTimeLeft = () => {
       const createdAt = new Date(userCreatedAt);
       const now = new Date();
-      const trialEnd = new Date(createdAt.getTime() + 14 * 24 * 60 * 60 * 1000); // 14 days
+      const trialEnd = new Date(createdAt.getTime() + 14 * 24 * 60 * 60 * 1000);
       const timeDiff = trialEnd.getTime() - now.getTime();
 
       if (timeDiff <= 0) {
@@ -50,7 +50,7 @@ export function TrialBanner({ userCreatedAt, onDismiss }: TrialBannerProps) {
   }, [userCreatedAt]);
 
   if (isExpired) {
-    return null; // Don't show banner if trial is expired
+    return null;
   }
 
   return (

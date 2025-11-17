@@ -47,14 +47,13 @@ export function useFormProgress(
   useEffect(() => {
     if (!storageRef.current) {
       storageRef.current = new FormProgressStorage(finalConfig);
-      // Try to get existing session ID from localStorage first
+
       const existingSessionKey = `ikiform_session_${formId}`;
       const existingSessionId = localStorage.getItem(existingSessionKey);
 
       if (existingSessionId) {
         sessionIdRef.current = existingSessionId;
       } else {
-        // Generate new session ID only if none exists
         sessionIdRef.current = storageRef.current.generateSessionId();
         localStorage.setItem(existingSessionKey, sessionIdRef.current);
       }
@@ -163,7 +162,6 @@ export function useFormProgress(
     try {
       await storageRef.current.deleteProgress(formId, sessionIdRef.current);
 
-      // Also clear the session ID from localStorage
       const existingSessionKey = `ikiform_session_${formId}`;
       localStorage.removeItem(existingSessionKey);
 

@@ -7,11 +7,7 @@ import React, { type CSSProperties, useState } from "react";
 import DemoFormBuilder from "@/components/form-builder/form-builder/DemoFormBuilder";
 import { Badge, Card } from "../ui";
 import { Button } from "../ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "../ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 
 interface EmbeddedFormProps {
@@ -169,7 +165,9 @@ export default function Hero() {
             <div className="flex items-center justify-start border-b border-border px-4 py-4 md:px-6">
               <TabsList>
                 <TabsTrigger value="form-demo">Form Demo</TabsTrigger>
-                <TabsTrigger value="form-builder-demo">Form Builder Demo</TabsTrigger>
+                <TabsTrigger value="form-builder-demo">
+                  Form Builder Demo
+                </TabsTrigger>
               </TabsList>
             </div>
             <TabsContent className="mt-0" value="form-demo">

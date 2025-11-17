@@ -310,12 +310,12 @@ export default function Footer() {
   return (
     <footer className="mx-auto my-12 w-full max-w-7xl bg-background">
       <div className="mx-auto flex w-full flex-col">
-        {/* Rounded container matching the image */}
+        {}
         <div>
           <div className="flex flex-col gap-8">
-            {/* Top section with logo and navigation */}
+            {}
             <div className="flex flex-col gap-8 lg:flex-row lg:justify-between">
-              {/* Header section with logo */}
+              {}
               <div className="flex flex-shrink-0 flex-col gap-8">
                 <div className="flex flex-shrink-0 flex-col gap-4">
                   <FooterLogo />
@@ -332,7 +332,7 @@ export default function Footer() {
                   </p>
                 </div>
 
-                {/* Badges section */}
+                {}
                 <div className="flex flex-col gap-4">
                   <a
                     href="https://vercel.com/open-source-program?utm_source=ikiform"
@@ -348,7 +348,7 @@ export default function Footer() {
                 </div>
               </div>
               <Separator className="flex lg:hidden" />
-              {/* Navigation sections */}
+              {}
               <div className="flex flex-wrap gap-8 md:grid md:grid-cols-4 md:gap-10">
                 <NavigationLinks />
                 <LegalLinks />
@@ -358,7 +358,7 @@ export default function Footer() {
             </div>
 
             <Separator />
-            {/* Bottom section with social links */}
+            {}
             <div className="flex w-full flex-col items-end justify-center gap-6">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <SocialLinks />

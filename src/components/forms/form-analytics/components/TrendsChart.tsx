@@ -15,7 +15,7 @@ const safeParseTime = (value: string) => {
 const formatDate = (value: string) => {
   const ts = safeParseTime(value);
   if (ts === null) {
-    return value; // fallback to original label
+    return value;
   }
   const date = new Date(ts);
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });

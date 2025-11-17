@@ -11,10 +11,6 @@ interface JsonModalWrapperProps {
   activeForm: FormSchema | undefined;
 }
 
-/**
- * Optimized JsonModal wrapper with lazy loading
- * Only loads the modal when it's actually needed
- */
 export function JsonModalWrapper({
   isOpen,
   onClose,

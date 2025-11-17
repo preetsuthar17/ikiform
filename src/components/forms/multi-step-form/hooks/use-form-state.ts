@@ -277,7 +277,6 @@ export const useFormState = (
   };
 
   const handleNext = () => {
-    // Validate current step before proceeding
     const { errors: validationErrors, isValid } = validateStep(
       currentStep,
       blocks,
@@ -290,7 +289,6 @@ export const useFormState = (
       return;
     }
 
-    // Clear any existing errors for this step
     setErrors({});
 
     if (currentStep < totalSteps - 1) {
@@ -307,7 +305,6 @@ export const useFormState = (
   };
 
   const handleSubmit = async () => {
-    // Validate all steps before final submission
     let allValid = true;
     const allErrors: Record<string, string> = {};
 
@@ -347,7 +344,6 @@ export const useFormState = (
           }, 2000);
         }
       } else {
-        // Check if it's a duplicate submission error
         if (result.error === "Duplicate submission detected") {
           setDuplicateError({
             message: result.message || "You have already submitted this form.",
@@ -359,7 +355,6 @@ export const useFormState = (
         }
       }
     } catch (error: any) {
-      // Check if it's a duplicate submission error
       if (error?.error === "Duplicate submission detected") {
         setDuplicateError({
           message: error.message || "You have already submitted this form.",

@@ -352,7 +352,6 @@ export function QuizSection({
   );
 }
 
-// Helper component for quiz fields
 function QuizField({
   id,
   label,
@@ -444,7 +443,6 @@ function QuizField({
   );
 }
 
-// Helper component for toggle fields
 function QuizToggleField({
   id,
   label,

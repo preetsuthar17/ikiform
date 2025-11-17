@@ -24,7 +24,7 @@ export default function EmbedSettings({
 }: EmbedSettingsProps) {
   return (
     <div className="flex flex-col gap-6">
-      {/* Dimensions */}
+      {}
       <div className="flex flex-col gap-3">
         <h3 className="font-medium text-sm">Dimensions</h3>
 
@@ -91,7 +91,7 @@ export default function EmbedSettings({
         </div>
       </div>
 
-      {/* Appearance */}
+      {}
       <div className="flex flex-col gap-3">
         <h3 className="font-medium text-sm">Appearance</h3>
 
@@ -132,7 +132,7 @@ export default function EmbedSettings({
         </div>
       </div>
 
-      {/* Border & Styling */}
+      {}
       <div className="flex flex-col gap-3">
         <h3 className="font-medium text-sm">Border & Styling</h3>
 
@@ -218,7 +218,7 @@ export default function EmbedSettings({
         </div>
       </div>
 
-      {/* Performance */}
+      {}
       <div className="flex flex-col gap-3">
         <h3 className="font-medium text-sm">Performance</h3>
         <div className="flex flex-col gap-2">

@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { createClient } from "@/utils/supabase/client";
+import { constantTimeCompare } from "@/lib/utils/constant-time-compare";
 
 export default function ResetPasswordClient() {
   const searchParams = useSearchParams();
@@ -82,7 +83,7 @@ export default function ResetPasswordClient() {
       return false;
     }
 
-    if (password !== confirmPassword) {
+    if (!constantTimeCompare(password, confirmPassword)) {
       toast.error("Passwords do not match");
       return false;
     }

@@ -1,5 +1,6 @@
 import type { FormField, FormSchema } from "@/lib/database";
 
+import { safeRegexTest } from "@/lib/utils/safe-regex";
 import { validateEmail } from "@/lib/validation/email-validation";
 
 export const getAllFields = (schema: FormSchema): FormField[] =>
@@ -98,7 +99,7 @@ export const validateSingleStepForm = (
     } else if (
       field.validation?.pattern &&
       value &&
-      !new RegExp(field.validation.pattern).test(value)
+      !safeRegexTest(field.validation.pattern, value)
     ) {
       errors[field.id] = field.validation?.patternMessage || "Invalid format";
     }

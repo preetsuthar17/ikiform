@@ -88,7 +88,7 @@ const ChatMessage = memo(function ChatMessage({
           isUser ? "flex-row-reverse" : "flex-row"
         }`}
       >
-        {/* Avatar */}
+        {}
         <div
           className={`flex size-8 shrink-0 items-center justify-center rounded-full ${
             isUser
@@ -115,7 +115,7 @@ const ChatMessage = memo(function ChatMessage({
           )}
         </div>
 
-        {/* Message Bubble */}
+        {}
         <div
           className={`group relative rounded-2xl px-4 py-3 ${
             isUser
@@ -281,10 +281,10 @@ export const ChatInterface = memo(function ChatInterface({
 
   return (
     <div className="mx-4 flex h-[88%] flex-col bg-background md:mx-0 md:h-[84%]">
-      {/* Messages Area */}
+      {}
       <ScrollArea className="h-full flex-1">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-6">
-          {/* Empty State */}
+          {}
           {isEmpty && (
             <div className="flex flex-col items-center gap-6 py-12 text-center">
               <div className="flex size-20 items-center justify-center rounded-2xl bg-primary/10">
@@ -306,7 +306,7 @@ export const ChatInterface = memo(function ChatInterface({
             </div>
           )}
 
-          {/* Chat Messages */}
+          {}
           {chatMessages.map((message, index) => (
             <ChatMessage
               index={index}
@@ -316,7 +316,7 @@ export const ChatInterface = memo(function ChatInterface({
             />
           ))}
 
-          {/* Streaming Message */}
+          {}
           {chatStreaming && (
             <div className="flex justify-start gap-3">
               <div className="flex max-w-[85%] gap-3">
@@ -360,7 +360,7 @@ export const ChatInterface = memo(function ChatInterface({
             </div>
           )}
 
-          {/* Suggestions */}
+          {}
           {!isEmpty && chatSuggestions.length > 0 && (
             <div className="flex flex-wrap justify-center gap-2 pt-4">
               {chatSuggestions.slice(0, 3).map((suggestion, index) => (
@@ -380,7 +380,7 @@ export const ChatInterface = memo(function ChatInterface({
         </div>
       </ScrollArea>
 
-      {/* Input Area */}
+      {}
       <div className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div>
           <form

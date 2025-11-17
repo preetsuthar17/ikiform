@@ -7,6 +7,8 @@ import { BotIdClientWrapper } from "@/components/other/BotIdClient";
 import { LightThemeEnforcer } from "@/components/other/light-theme-enforcer";
 import { TicketpingController } from "@/components/other/TicketPingController";
 import { Toaster } from "@/components/ui/toast";
+import { GoogleAnalytics } from "@next/third-parties/google";
+
 import ConditionalLayout from "./conditional-layout";
 
 const geist = Geist({
@@ -119,38 +121,6 @@ export default function RootLayout({
     <html className="light" lang="en" suppressHydrationWarning>
       <head>
         <BotIdClientWrapper />
-        {/* <script
-          crossOrigin="anonymous"
-          src="//unpkg.com/react-scan/dist/auto.global.js"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if (typeof window !== 'undefined' && 'PerformanceObserver' in window) {
-                const observer = new PerformanceObserver((list) => {
-                  const entries = list.getEntries();
-                  entries.forEach((entry) => {
-                    if (entry.duration > 50) {
-                      console.warn('Long task detected:', {
-                        name: entry.name,
-                        duration: entry.duration,
-                        startTime: entry.startTime,
-                        type: entry.entryType
-                      });
-                    }
-                  });
-                });
-                
-                try {
-                  observer.observe({ entryTypes: ['longtask', 'measure', 'navigation'] });
-                } catch (e) {
-                  
-                  observer.observe({ entryTypes: ['measure', 'navigation'] });
-                }
-              }
-            `,
-          }}
-        /> */}
         <script defer src="https://assets.onedollarstats.com/stonks.js" />
         <script
           dangerouslySetInnerHTML={{
@@ -175,6 +145,7 @@ export default function RootLayout({
         <ConditionalLayout>{children}</ConditionalLayout>
         <Analytics />
         <Toaster position="top-center" />
+        <GoogleAnalytics gaId="G-X4CH42084K" />
       </body>
     </html>
   );

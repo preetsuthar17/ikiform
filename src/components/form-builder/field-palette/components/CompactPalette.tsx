@@ -13,7 +13,6 @@ export function CompactPalette({
 }: Pick<FieldPaletteProps, "onAddField">) {
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Filter fields based on search term
   const filteredFields = useMemo(() => {
     if (!searchTerm.trim()) {
       return FIELD_TYPES;
@@ -30,7 +29,7 @@ export function CompactPalette({
 
   return (
     <div className="flex flex-col gap-3">
-      {/* Search Bar */}
+      {}
       <div className="relative px-2">
         <Search className="-translate-y-1/2 absolute top-1/2 left-4 size-4 text-muted-foreground" />
         <Input

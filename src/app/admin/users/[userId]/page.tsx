@@ -60,7 +60,6 @@ async function getUser(userId: string): Promise<User | null> {
 
   console.log("Looking for user with ID:", userId);
 
-  // First try to find by UID
   const { data: user, error } = await supabase
     .from("users")
     .select("*")
@@ -70,7 +69,6 @@ async function getUser(userId: string): Promise<User | null> {
   if (error) {
     console.error("Error fetching user by UID:", error);
 
-    // If UID lookup fails, try by email (in case the userId is actually an email)
     if (userId && typeof userId === "string" && userId.includes("@")) {
       console.log("Trying to find user by email:", userId);
       const { data: userByEmail, error: emailError } = await supabase
@@ -104,7 +102,6 @@ async function getUser(userId: string): Promise<User | null> {
 async function getUserForms(userId: string): Promise<Form[]> {
   const supabase = createAdminClient();
 
-  // Fetch user's forms
   const { data: forms, error: formsError } = await supabase
     .from("forms")
     .select("*")
@@ -116,7 +113,6 @@ async function getUserForms(userId: string): Promise<Form[]> {
     return [];
   }
 
-  // Fetch form submission counts for each form
   const formIds = forms?.map((form) => form.id) || [];
   let submissionCounts: Record<string, number> = {};
 
@@ -137,7 +133,6 @@ async function getUserForms(userId: string): Promise<Form[]> {
     }
   }
 
-  // Add submission counts to forms
   const formsWithCounts =
     forms?.map((form) => ({
       ...form,
@@ -155,7 +150,7 @@ function calculateTrialDaysLeft(createdAt: string): {
   const createdDate = new Date(createdAt);
   const trialEndDate = new Date(
     createdDate.getTime() + 14 * 24 * 60 * 60 * 1000
-  ); // 14 days from creation
+  );
   const now = new Date();
 
   const diffTime = trialEndDate.getTime() - now.getTime();
@@ -184,7 +179,6 @@ async function updateUserStatus(userId: string, updates: Partial<User>) {
 async function deleteUser(userId: string) {
   const supabase = createAdminClient();
 
-  // First delete all user's forms and submissions
   const { error: formsError } = await supabase
     .from("forms")
     .delete()
@@ -195,7 +189,6 @@ async function deleteUser(userId: string) {
     throw new Error("Failed to delete user forms");
   }
 
-  // Then delete the user
   const { error: userError } = await supabase
     .from("users")
     .delete()
@@ -207,7 +200,6 @@ async function deleteUser(userId: string) {
   }
 }
 
-// Server Actions
 async function assignTrial(userId: string) {
   "use server";
   try {
@@ -263,7 +255,6 @@ export default async function UserProfilePage({
 }: {
   params: Promise<{ userId: string }>;
 }) {
-  // Await the params Promise
   const { userId } = await params;
 
   console.log("UserProfilePage userId:", userId);
@@ -276,7 +267,6 @@ export default async function UserProfilePage({
     redirect("/");
   }
 
-  // Validate userId parameter
   if (!userId) {
     console.error("No userId provided");
     return (
@@ -333,7 +323,7 @@ export default async function UserProfilePage({
 
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-col gap-6 p-6">
-      {/* Header */}
+      {}
       <div className="flex items-center justify-between">
         <div className="flex flex-col items-start gap-4">
           <Link href="/admin">
@@ -349,7 +339,7 @@ export default async function UserProfilePage({
         </div>
       </div>
 
-      {/* User Info Card */}
+      {}
       <Card className="p-4 shadow-none md:p-6">
         <CardHeader className="p-0">
           <CardTitle className="flex items-center gap-2">
@@ -417,7 +407,7 @@ export default async function UserProfilePage({
         </CardContent>
       </Card>
 
-      {/* Trial Expiration Card - Only show for users with premium and free trial */}
+      {}
       {userData.has_premium &&
         userData.has_free_trial &&
         (() => {
@@ -505,7 +495,7 @@ export default async function UserProfilePage({
           );
         })()}
 
-      {/* Admin Controls */}
+      {}
       <AdminControls
         assignPremium={assignPremium}
         assignTrial={assignTrial}
@@ -518,7 +508,7 @@ export default async function UserProfilePage({
         userName={userData.name}
       />
 
-      {/* Forms Card */}
+      {}
       <Card className="p-4 shadow-none md:p-6">
         <CardHeader className="p-0">
           <CardTitle className="flex items-center gap-2">

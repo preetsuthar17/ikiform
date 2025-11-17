@@ -14,17 +14,11 @@ import {
 } from "@/lib/forms/duplicate-prevention";
 import { checkFormRateLimit } from "@/lib/forms/rate-limit";
 import { createProfanityFilter } from "@/lib/validation/profanity-filter";
+import { sanitizeString } from "@/lib/utils/sanitize";
 
-/**
- * Sanitizes object strings to prevent XSS attacks
- */
 function sanitizeObjectStrings(obj: any): any {
-  if (typeof obj === "string")
-    return obj.replace(
-      /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
-      ""
-    );
-
+  if (typeof obj === "string") return sanitizeString(obj);
+  if (Array.isArray(obj)) return obj.map(sanitizeObjectStrings);
   if (obj && typeof obj === "object") {
     const result: any = {};
     for (const key in obj) result[key] = sanitizeObjectStrings(obj[key]);
@@ -33,10 +27,6 @@ function sanitizeObjectStrings(obj: any): any {
   return obj;
 }
 
-/**
- * API endpoint for external form submissions using API key authentication
- * POST /api/forms/[id]/api-submit
- */
 export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -46,7 +36,6 @@ export async function POST(
     const body = await request.json();
     const { data: submissionData } = body;
 
-    // Get API key from Authorization header
     const authHeader = request.headers.get("authorization");
     if (!(authHeader && authHeader.startsWith("Bearer "))) {
       return NextResponse.json(
@@ -58,9 +47,8 @@ export async function POST(
       );
     }
 
-    const apiKey = authHeader.substring(7); // Remove "Bearer " prefix
+    const apiKey = authHeader.substring(7);
 
-    // Validate API key and get form
     const validationResult = await validateFormApiAccess(apiKey, formId);
     if (!validationResult.success) {
       return NextResponse.json(
@@ -71,7 +59,6 @@ export async function POST(
 
     const form = validationResult.form;
 
-    // Check bot protection if enabled
     const botProtection = form.schema.settings.botProtection;
     if (botProtection?.enabled) {
       const verification = await checkBotId();
@@ -86,14 +73,12 @@ export async function POST(
       }
     }
 
-    // Get IP address for rate limiting and duplicate prevention
     const headersList = await headers();
     const ipAddress =
       headersList.get("x-forwarded-for")?.split(",")[0] ||
       headersList.get("x-real-ip") ||
       "unknown";
 
-    // Apply rate limiting
     const rateLimit = {
       ...DEFAULT_RATE_LIMIT_SETTINGS,
       ...form.schema.settings.rateLimit,
@@ -119,7 +104,6 @@ export async function POST(
       }
     }
 
-    // Check response limit
     const responseLimit = form.schema.settings.responseLimit;
     if (responseLimit?.enabled) {
       const count = await formsDbServer.countFormSubmissions(formId);
@@ -136,7 +120,6 @@ export async function POST(
       }
     }
 
-    // Apply profanity filter
     const profanityFilter = {
       ...DEFAULT_PROFANITY_FILTER_SETTINGS,
       ...form.schema.settings.profanityFilter,
@@ -159,7 +142,6 @@ export async function POST(
       }
     }
 
-    // Check for duplicate submissions
     const duplicatePrevention = form.schema.settings.duplicatePrevention;
     if (duplicatePrevention?.enabled) {
       const email = extractEmailFromSubmissionData(submissionData);
@@ -188,10 +170,8 @@ export async function POST(
       }
     }
 
-    // Sanitize submission data
     const sanitizedData = sanitizeObjectStrings(submissionData);
 
-    // Submit the form
     try {
       const submissionResult = await formsDbServer.submitForm(
         formId,
@@ -199,7 +179,6 @@ export async function POST(
         ipAddress
       );
 
-      // Return success response
       return NextResponse.json(
         {
           success: true,
@@ -227,10 +206,6 @@ export async function POST(
   }
 }
 
-/**
- * GET endpoint to retrieve form schema for API integration
- * GET /api/forms/[id]/api-submit
- */
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -238,7 +213,6 @@ export async function GET(
   try {
     const { id: formId } = await params;
 
-    // Get API key from Authorization header
     const authHeader = request.headers.get("authorization");
     if (!(authHeader && authHeader.startsWith("Bearer "))) {
       return NextResponse.json(
@@ -250,9 +224,8 @@ export async function GET(
       );
     }
 
-    const apiKey = authHeader.substring(7); // Remove "Bearer " prefix
+    const apiKey = authHeader.substring(7);
 
-    // Validate API key and get form
     const validationResult = await validateFormApiAccess(apiKey, formId);
     if (!validationResult.success) {
       return NextResponse.json(
@@ -263,18 +236,16 @@ export async function GET(
 
     const form = validationResult.form;
 
-    // Extract form fields for API documentation
     const fields = form.schema.fields.map((field: any) => ({
       id: field.id,
       type: field.type,
       label: field.label,
       required: field.required,
       placeholder: field.placeholder,
-      options: field.options, // For select, radio, checkbox fields
+      options: field.options,
       validation: field.validation,
     }));
 
-    // Return form schema information
     return NextResponse.json(
       {
         formId: form.id,

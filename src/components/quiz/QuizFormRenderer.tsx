@@ -81,7 +81,7 @@ export function QuizFormRenderer({
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Quiz Progress (only show in quiz mode) */}
+      {}
       {quizState.isQuizMode && (
         <QuizProgress
           answeredQuestions={quizState.answeredQuestions}
@@ -91,7 +91,7 @@ export function QuizFormRenderer({
         />
       )}
 
-      {/* Current Score Display (only show in quiz mode and if enabled) */}
+      {}
       {quizState.isQuizMode &&
         schema.settings?.quiz?.showScore &&
         !quizState.isSubmitted &&
@@ -115,7 +115,7 @@ export function QuizFormRenderer({
           />
         )}
 
-      {/* Form Fields */}
+      {}
       <div className="flex flex-col gap-4">
         {fields.map((field) => (
           <FormFieldRenderer
@@ -129,7 +129,7 @@ export function QuizFormRenderer({
         ))}
       </div>
 
-      {/* Quiz Timer Warning */}
+      {}
       {quizState.isQuizMode &&
         quizState.timeRemaining !== undefined &&
         quizState.timeRemaining < 300 &&

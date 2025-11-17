@@ -7,10 +7,10 @@ export async function GET(request: NextRequest) {
   try {
     const authHeader = request.headers.get("authorization");
     const vercelCronHeader = request.headers.get("x-vercel-cron");
-    
+
     const hasValidAuth = authHeader === `Bearer ${process.env.CRON_SECRET}`;
     const isVercelCron = vercelCronHeader !== null;
-    
+
     if (!hasValidAuth && !isVercelCron) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
@@ -26,7 +26,9 @@ export async function GET(request: NextRequest) {
       .eq("has_premium", true)
       .eq("has_free_trial", true);
 
-    console.log(`Found ${debugUsers?.length || 0} users with has_premium=true and has_free_trial=true`);
+    console.log(
+      `Found ${debugUsers?.length || 0} users with has_premium=true and has_free_trial=true`
+    );
     console.log("14 days ago threshold:", thresholdISO);
 
     const { data, error } = await supabase

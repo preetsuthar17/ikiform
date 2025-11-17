@@ -30,7 +30,7 @@ export function FormBuilderSkeleton() {
         <div className="flex-1 bg-muted/20">
           <div className="h-full overflow-auto p-6">
             <div className="mx-auto max-w-2xl">
-              {/* Form header */}
+              {}
               <div className="mb-8 flex flex-col gap-2">
                 <Skeleton className="h-8 w-64" />
                 <Skeleton className="h-4 w-full" />
@@ -69,7 +69,7 @@ export function FormBuilderSkeleton() {
 
         <div className="w-80 flex-shrink-0 border-border border-l bg-card">
           <div className="h-full">
-            {/* Panel tabs */}
+            {}
             <div className="border-border border-b p-4">
               <div className="flex gap-1">
                 <Skeleton className="h-8 w-24" />

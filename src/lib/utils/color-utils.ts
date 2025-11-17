@@ -1,8 +1,4 @@
 "use client";
-/**
- * Enhanced color format utilities for the ColorPicker component
- * Provides conversion between different color formats including OKLCH and LAB
- */
 
 import { type Color, parseColor } from "react-aria-components";
 
@@ -17,9 +13,6 @@ export const formatLabels: Record<ColorFormat, string> = {
   lab: "LAB",
 };
 
-/**
- * Converts RGB values (0-1) to XYZ color space
- */
 function rgbToXyz(r: number, g: number, b: number): [number, number, number] {
   const toLinear = (c: number) =>
     c <= 0.040_45 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
@@ -36,9 +29,6 @@ function rgbToXyz(r: number, g: number, b: number): [number, number, number] {
   return [x, y, z];
 }
 
-/**
- * Converts XYZ to LAB color space
- */
 function xyzToLab(x: number, y: number, z: number): [number, number, number] {
   const xn = 0.950_47;
   const yn = 1.0;
@@ -62,9 +52,6 @@ function xyzToLab(x: number, y: number, z: number): [number, number, number] {
   return [L, a, b];
 }
 
-/**
- * Converts XYZ to OKLCH color space (simplified conversion)
- */
 function xyzToOklch(x: number, y: number, z: number): [number, number, number] {
   const l = Math.cbrt(
     0.818_933_010_1 * x + 0.361_866_742_4 * y - 0.128_859_713_7 * z
@@ -87,9 +74,6 @@ function xyzToOklch(x: number, y: number, z: number): [number, number, number] {
   return [LOklch, C, H < 0 ? H + 360 : H];
 }
 
-/**
- * Formats a color value according to the specified format
- */
 export function formatColorValue(color: Color, format: ColorFormat): string {
   switch (format) {
     case "hex":
@@ -169,9 +153,6 @@ export function formatColorValue(color: Color, format: ColorFormat): string {
   }
 }
 
-/**
- * Parses a color string in the specified format
- */
 export function parseColorFromFormat(
   value: string,
   format: ColorFormat
@@ -239,9 +220,6 @@ export function parseColorFromFormat(
   }
 }
 
-/**
- * Validates if a color string is valid for the given format
- */
 export function isValidColorFormat(
   value: string,
   format: ColorFormat
@@ -250,9 +228,6 @@ export function isValidColorFormat(
   return parsed !== null;
 }
 
-/**
- * Gets format-specific input placeholder text
- */
 export function getFormatPlaceholder(format: ColorFormat): string {
   switch (format) {
     case "hex":

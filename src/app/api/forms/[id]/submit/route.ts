@@ -57,7 +57,6 @@ export async function POST(
       );
     }
 
-    // Check bot protection if enabled
     const botProtection = form.schema.settings.botProtection;
     if (botProtection?.enabled) {
       const verification = await checkBotId();
@@ -116,7 +115,6 @@ export async function POST(
       }
     }
 
-    // Check for duplicate submissions
     const duplicatePrevention = form.schema.settings.duplicatePrevention;
     if (duplicatePrevention?.enabled) {
       const email = extractEmailFromSubmissionData(submissionData);

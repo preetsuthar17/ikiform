@@ -62,7 +62,7 @@ export function DateFieldSettings({
       </CardHeader>
       <CardContent className="flex flex-col gap-4 p-0">
         <div className="flex flex-col gap-4">
-          {/* Minimum Date */}
+          {}
           <div className="flex flex-col gap-2">
             <Label className="text-card-foreground">Minimum Date</Label>
             <Popover>
@@ -92,7 +92,7 @@ export function DateFieldSettings({
             </Popover>
           </div>
 
-          {/* Maximum Date */}
+          {}
           <div className="flex flex-col gap-2">
             <Label className="text-card-foreground">Maximum Date</Label>
             <Popover>
@@ -122,7 +122,7 @@ export function DateFieldSettings({
             </Popover>
           </div>
 
-          {/* Default Date */}
+          {}
           <div className="flex flex-col gap-2">
             <Label className="text-card-foreground">Default Date</Label>
             <Popover>

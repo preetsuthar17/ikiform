@@ -150,7 +150,6 @@ export async function POST(
       mapped
     );
 
-    // Record submission for duplicate prevention
     if (duplicatePrevention?.enabled) {
       const ipAddress =
         req.headers.get("x-forwarded-for")?.split(",")[0] ||

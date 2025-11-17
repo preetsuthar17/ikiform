@@ -59,7 +59,7 @@ const AdminPage = async function AdminPage() {
         className="mx-auto flex w-full max-w-7xl flex-col gap-6"
         role="main"
       >
-        {/* Announcements Section */}
+        {}
         <Card
           aria-label="Announcements management"
           className="p-4 shadow-none md:p-6"
@@ -81,7 +81,7 @@ const AdminPage = async function AdminPage() {
           </CardContent>
         </Card>
 
-        {/* Expire Trials Section */}
+        {}
         <Card
           aria-label="Expire trials management"
           className="p-4 shadow-none md:p-6"
@@ -100,7 +100,7 @@ const AdminPage = async function AdminPage() {
           </CardContent>
         </Card>
 
-        {/* Users Table Section */}
+        {}
         <Card
           aria-label="Users management"
           className="p-4 shadow-none md:p-6"

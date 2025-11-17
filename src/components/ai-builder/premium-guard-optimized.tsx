@@ -10,10 +10,6 @@ interface PremiumGuardProps {
   children: React.ReactNode;
 }
 
-/**
- * Optimized Premium Guard component
- * Uses skeleton loader for better loading experience
- */
 export function PremiumGuardOptimized({
   user,
   hasPremium,

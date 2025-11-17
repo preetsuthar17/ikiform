@@ -15,7 +15,7 @@ export function QuizAnalyticsCard({ quizAnalytics }: QuizAnalyticsCardProps) {
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {/* Quiz Overview Stats */}
+      {}
       <Card className="h-fit grow gap-4 border-border bg-card p-4 shadow-none md:p-6">
         <CardHeader className="flex flex-row items-center gap-4 p-0">
           <div aria-hidden="true" className="rounded-md bg-blue-500/10 p-3">
@@ -82,7 +82,7 @@ export function QuizAnalyticsCard({ quizAnalytics }: QuizAnalyticsCardProps) {
         </CardContent>
       </Card>
 
-      {/* Top Performers */}
+      {}
       {quizAnalytics.topPerformers.length > 0 && (
         <Card className="grow gap-4 border-border bg-card p-4 shadow-none md:col-span-2 lg:col-span-4">
           <CardHeader className="flex flex-row items-center gap-4 p-0">
@@ -123,7 +123,7 @@ export function QuizAnalyticsCard({ quizAnalytics }: QuizAnalyticsCardProps) {
         </Card>
       )}
 
-      {/* Question Analytics */}
+      {}
       {quizAnalytics.questionAnalytics.length > 0 && (
         <Card className="grow gap-4 border-border bg-card p-4 shadow-none md:col-span-2 lg:col-span-4">
           <CardHeader className="flex flex-row items-center gap-4 p-0">

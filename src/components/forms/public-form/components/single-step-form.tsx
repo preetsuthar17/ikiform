@@ -9,6 +9,7 @@ import { SocialMediaIcons } from "@/components/ui/social-media-icons";
 import { useFormStyling } from "@/hooks/use-form-styling";
 import { cn } from "@/lib/utils";
 import { getFormLayoutClasses } from "@/lib/utils/form-layout";
+import { constantTimeCompare } from "@/lib/utils/constant-time-compare";
 import { PasswordProtectionModal } from "../../PasswordProtectionModal";
 import { useSingleStepForm } from "../hooks/use-single-step-form";
 import type { PublicFormProps } from "../types";
@@ -55,7 +56,7 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
 
   const handlePasswordSubmit = (password: string) => {
     const expectedPassword = schema.settings.passwordProtection?.password;
-    if (password === expectedPassword) {
+    if (expectedPassword && constantTimeCompare(password, expectedPassword)) {
       setPasswordVerified(true);
       setShowPasswordModal(false);
     } else {

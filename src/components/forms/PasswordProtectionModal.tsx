@@ -29,10 +29,8 @@ export function PasswordProtectionModal({
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // Focus management and accessibility
   useEffect(() => {
     if (isOpen && passwordInputRef.current) {
-      // Small delay to ensure modal is rendered
       const timer = setTimeout(() => {
         passwordInputRef.current?.focus();
       }, 100);
@@ -40,7 +38,6 @@ export function PasswordProtectionModal({
     }
   }, [isOpen]);
 
-  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isOpen) return;
@@ -49,12 +46,11 @@ export function PasswordProtectionModal({
         e.preventDefault();
         onCancel();
       }
-      // Let the form handle Enter key naturally
     };
 
     if (isOpen) {
       document.addEventListener("keydown", handleKeyDown);
-      // Trap focus within modal
+
       const focusableElements = modalRef.current?.querySelectorAll(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       );

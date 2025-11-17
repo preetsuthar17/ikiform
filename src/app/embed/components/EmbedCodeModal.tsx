@@ -349,7 +349,7 @@ export default function EmbedCodeModal({
         </ModalHeader>
 
         <div className="flex flex-col gap-4">
-          {/* Simple Framework Selection */}
+          {}
           <div className="flex flex-wrap gap-2">
             {embedModes.map((mode) => (
               <Button
@@ -363,7 +363,7 @@ export default function EmbedCodeModal({
             ))}
           </div>
 
-          {/* Code Display */}
+          {}
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
               <span className="font-medium text-sm">

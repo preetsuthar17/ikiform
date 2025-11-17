@@ -88,7 +88,7 @@ export function ChatInput({
           rows={1}
           value={input}
         />
-        {/** Mobile: larger 44px target */}
+        {}
         <Button
           aria-label="Send message"
           className={`absolute right-2 transition-all duration-200 ease-out md:hidden ${
@@ -102,7 +102,7 @@ export function ChatInput({
         >
           {!isLoading && <Send className="size-5" />}
         </Button>
-        {/** Desktop/tablet */}
+        {}
         <Button
           aria-label="Send message"
           className={`absolute right-3 hidden transition-all duration-200 ease-out md:inline-flex ${

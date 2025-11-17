@@ -129,7 +129,6 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
       inputRef.current?.focus();
     };
 
-    // Style main container as the Input, including border, padding, background and focus ring
     return (
       <div className="relative">
         <div

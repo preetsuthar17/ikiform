@@ -10,7 +10,6 @@ export interface FormPreset {
 }
 
 export const FORM_PRESETS: FormPreset[] = [
-  // Minimal Presets
   {
     id: "minimal-clean",
     name: "Clean Minimal",
@@ -128,7 +127,6 @@ export const FORM_PRESETS: FormPreset[] = [
     },
   },
 
-  // Professional Presets
   {
     id: "professional-corporate",
     name: "Corporate Blue",
@@ -246,7 +244,6 @@ export const FORM_PRESETS: FormPreset[] = [
     },
   },
 
-  // Creative Presets
   {
     id: "creative-gradient",
     name: "Gradient Magic",
@@ -393,7 +390,6 @@ export const FORM_PRESETS: FormPreset[] = [
     },
   },
 
-  // Elegant Presets
   {
     id: "elegant-serif",
     name: "Elegant Serif",
@@ -540,7 +536,6 @@ export const FORM_PRESETS: FormPreset[] = [
     },
   },
 
-  // Modern Presets
   {
     id: "modern-tech",
     name: "Tech Modern",

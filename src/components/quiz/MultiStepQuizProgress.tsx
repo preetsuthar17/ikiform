@@ -39,7 +39,7 @@ export function MultiStepQuizProgress({
                 key={step.id}
               >
                 <div className="flex items-center">
-                  {/* Step indicator */}
+                  {}
                   <div className="flex flex-col items-center">
                     <div
                       className={cn(
@@ -58,7 +58,7 @@ export function MultiStepQuizProgress({
                       )}
                     </div>
 
-                    {/* Step title */}
+                    {}
                     <div className="mt-2 text-center">
                       <div
                         className={cn(
@@ -73,7 +73,7 @@ export function MultiStepQuizProgress({
                         {step.title}
                       </div>
 
-                      {/* Quiz score for completed steps */}
+                      {}
                       {step.hasQuizQuestions &&
                         (isCompleted || isPast) &&
                         step.score !== undefined && (
@@ -85,7 +85,7 @@ export function MultiStepQuizProgress({
                   </div>
                 </div>
 
-                {/* Connector line */}
+                {}
                 {index !== steps.length - 1 && (
                   <div className="mx-4 flex-1">
                     <div

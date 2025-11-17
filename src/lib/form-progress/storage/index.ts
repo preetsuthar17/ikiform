@@ -9,10 +9,6 @@ import {
   SessionStorageAdapter,
 } from "./adapters";
 
-/**
- * Form Progress Storage Manager
- * Provides a unified interface for different storage backends
- */
 export class FormProgressStorage {
   private adapter: ProgressStorageAdapter;
   private config: FormProgressConfig;
@@ -39,23 +35,14 @@ export class FormProgressStorage {
     }
   }
 
-  /**
-   * Generate a unique storage key for form progress
-   */
   private generateKey(formId: string, sessionId: string): string {
     return `${formId}_${sessionId}`;
   }
 
-  /**
-   * Generate a unique session ID for the current browser session
-   */
   public generateSessionId(): string {
     return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
 
-  /**
-   * Calculate completion percentage based on filled fields
-   */
   public calculateCompletionPercentage(
     formData: Record<string, any>,
     totalFields: number
@@ -71,9 +58,6 @@ export class FormProgressStorage {
     return Math.round((filledFields / totalFields) * 100);
   }
 
-  /**
-   * Create form progress data structure
-   */
   public createProgress(
     formId: string,
     sessionId: string,
@@ -107,9 +91,6 @@ export class FormProgressStorage {
     };
   }
 
-  /**
-   * Save form progress
-   */
   async saveProgress(progress: FormProgress): Promise<void> {
     if (!this.config.enabled) return;
 
@@ -122,9 +103,6 @@ export class FormProgressStorage {
     }
   }
 
-  /**
-   * Load form progress
-   */
   async loadProgress(
     formId: string,
     sessionId: string
@@ -140,9 +118,6 @@ export class FormProgressStorage {
     }
   }
 
-  /**
-   * Delete form progress
-   */
   async deleteProgress(formId: string, sessionId: string): Promise<void> {
     try {
       const key = this.generateKey(formId, sessionId);
@@ -153,9 +128,6 @@ export class FormProgressStorage {
     }
   }
 
-  /**
-   * Clear all form progress data
-   */
   async clearAllProgress(): Promise<void> {
     try {
       await this.adapter.clear();
@@ -165,9 +137,6 @@ export class FormProgressStorage {
     }
   }
 
-  /**
-   * Update storage configuration
-   */
   updateConfig(newConfig: Partial<FormProgressConfig>): void {
     this.config = { ...this.config, ...newConfig };
     if (newConfig.storage) {

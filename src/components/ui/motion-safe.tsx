@@ -43,9 +43,6 @@ export const MotionSafeDiv = React.forwardRef<
 
 MotionSafeDiv.displayName = "MotionSafeDiv";
 
-/**
- * Button component with motion-safe hover effects
- */
 interface MotionSafeButtonProps extends MotionSafeDivProps {
   variant?: "default" | "ghost" | "outline";
   disabled?: boolean;

@@ -129,7 +129,7 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
                       </span>
                       <div className="max-w-20 flex-1">
                         <div className="h-2 overflow-hidden rounded-full bg-muted">
-                          {/* Prevents visual issue if dropoff is 0 or very small */}
+                          {}
                           <div
                             aria-label={`Drop-off bar for step ${idx + 1}`}
                             className="h-full bg-destructive transition-all duration-300"
@@ -149,7 +149,7 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
                       </span>
                       <div className="max-w-20 flex-1">
                         <div className="h-2 overflow-hidden rounded-full bg-muted">
-                          {/* Prevents visual issue if completionRate is 0 or very small */}
+                          {}
                           <div
                             aria-label={`Completion bar for step ${idx + 1}`}
                             className="h-full bg-primary transition-all duration-300"

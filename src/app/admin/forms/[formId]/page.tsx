@@ -100,7 +100,6 @@ const FormDetailPage = async function FormDetailPage({
 }: {
   params: Promise<{ formId: string }>;
 }) {
-  // Await the params Promise
   const { formId } = await params;
 
   console.log("FormDetailPage formId:", formId);
@@ -113,7 +112,6 @@ const FormDetailPage = async function FormDetailPage({
     redirect("/");
   }
 
-  // Validate formId parameter
   if (!formId) {
     console.error("No formId provided");
     return (
@@ -183,7 +181,7 @@ const FormDetailPage = async function FormDetailPage({
       className="mx-auto flex w-full max-w-7xl flex-col gap-6 p-6"
       role="main"
     >
-      {/* Header */}
+      {}
       <div className="flex items-center justify-between">
         <div className="flex flex-col items-start gap-4">
           <Link href="/admin">
@@ -223,7 +221,7 @@ const FormDetailPage = async function FormDetailPage({
         </div>
       </div>
 
-      {/* Form Info Cards */}
+      {}
       <div
         aria-label="Form statistics"
         className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4"
@@ -310,7 +308,7 @@ const FormDetailPage = async function FormDetailPage({
         </Card>
       </div>
 
-      {/* Form Details */}
+      {}
       <Card className="p-4 shadow-none md:p-6">
         <CardHeader className="p-0">
           <CardTitle className="flex items-center gap-2">
@@ -388,7 +386,7 @@ const FormDetailPage = async function FormDetailPage({
         </CardContent>
       </Card>
 
-      {/* Form Schema */}
+      {}
       <Card className="p-4 shadow-none md:p-6">
         <CardHeader className="p-0">
           <CardTitle className="flex items-center gap-2">
@@ -406,7 +404,7 @@ const FormDetailPage = async function FormDetailPage({
         </CardContent>
       </Card>
 
-      {/* Form Submissions */}
+      {}
       <Card className="p-4 shadow-none md:p-6">
         <CardHeader className="p-0">
           <CardTitle className="flex items-center gap-2">

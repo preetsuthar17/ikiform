@@ -120,7 +120,6 @@ function PayloadViewer({ payload }: { payload: any }) {
     }
   }
 
-  // Handle empty or null payloads
   if (
     !parsedPayload ||
     (typeof parsedPayload === "object" &&
@@ -225,7 +224,7 @@ function PayloadViewer({ payload }: { payload: any }) {
 
     return (
       <div className="flex flex-col gap-6">
-        {/* Event Information */}
+        {}
         <div className="rounded-xl border bg-card p-4">
           <h4 className="mb-4 flex items-center gap-2 font-semibold text-sm">
             <Activity className="size-4" />
@@ -271,7 +270,7 @@ function PayloadViewer({ payload }: { payload: any }) {
           </div>
         </div>
 
-        {/* Form Fields */}
+        {}
         {parsedPayload.fields && (
           <div className="rounded-xl border bg-card p-4">
             <h4 className="mb-4 font-semibold text-sm">Form Fields</h4>
@@ -279,7 +278,7 @@ function PayloadViewer({ payload }: { payload: any }) {
           </div>
         )}
 
-        {/* Raw Form Data */}
+        {}
         {parsedPayload.rawData && (
           <div className="rounded-xl border bg-card p-4">
             <h4 className="mb-4 font-semibold text-sm">Raw Form Data</h4>
@@ -301,7 +300,7 @@ function PayloadViewer({ payload }: { payload: any }) {
           </div>
         )}
 
-        {/* Additional Data */}
+        {}
         {getAdditionalDataKeys(parsedPayload).length > 0 && (
           <div className="rounded-xl border bg-card p-4">
             <h4 className="mb-4 font-semibold text-sm">Additional Data</h4>
@@ -397,7 +396,6 @@ function LogItem({
     });
   }
 
-  // Measure height for expand/collapse animation
   useEffect(() => {
     if (expanded && contentRef.current) {
       setContentHeight(contentRef.current.scrollHeight);
@@ -630,7 +628,7 @@ export function WebhookLogDialog({
           )}
         </div>
 
-        {/* Payload Viewer Dialog */}
+        {}
         {viewPayload && (
           <Dialog
             onOpenChange={() => setViewPayload(null)}

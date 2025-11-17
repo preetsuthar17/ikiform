@@ -15,10 +15,10 @@ import type { FormBlock, FormSchema } from "@/lib/database";
 import { cn } from "@/lib/utils";
 import { getFormLayoutClasses } from "@/lib/utils/form-layout";
 import { getPublicFormTitle } from "@/lib/utils/form-utils";
+import { constantTimeCompare } from "@/lib/utils/constant-time-compare";
 import { validateEmail } from "@/lib/validation/email-validation";
 import { PasswordProtectionModal } from "./PasswordProtectionModal";
 
-// Types
 interface MultiStepFormProps {
   formId: string;
   schema: FormSchema;
@@ -38,7 +38,6 @@ interface FormState {
   } | null;
 }
 
-// Success Screen
 function SuccessScreen({ schema }: { schema: FormSchema }) {
   return (
     <main className="flex min-h-screen items-center justify-center bg-background py-8">
@@ -90,7 +89,6 @@ function SuccessScreen({ schema }: { schema: FormSchema }) {
   );
 }
 
-// Form Progress with enhanced design
 function FormProgress({
   progress,
   totalSteps,
@@ -116,7 +114,6 @@ function FormProgress({
   );
 }
 
-// Form Content with enhanced accessibility
 function FormContent({
   formId,
   currentBlock,
@@ -161,7 +158,7 @@ function FormContent({
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Header Section */}
+      {}
       <div className="flex flex-col gap-4">
         {!schema.settings.hideHeader && (
           <>
@@ -185,7 +182,7 @@ function FormContent({
           </>
         )}
 
-        {/* Social Media Icons */}
+        {}
         {schema.settings.branding?.socialMedia?.enabled &&
           schema.settings.branding.socialMedia.platforms &&
           (schema.settings.branding.socialMedia.position === "header" ||
@@ -198,7 +195,7 @@ function FormContent({
           )}
       </div>
 
-      {/* Form Fields */}
+      {}
       <div className="flex flex-col gap-6">
         {visibleFields.map((field, idx) => (
           <div
@@ -224,7 +221,6 @@ function FormContent({
   );
 }
 
-// Enhanced Form Navigation
 function FormNavigation({
   currentStep,
   totalSteps,
@@ -261,7 +257,7 @@ function FormNavigation({
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Navigation Buttons */}
+      {}
       <div className="flex flex-wrap justify-between gap-4">
         <Button
           className="flex items-center gap-2"
@@ -320,7 +316,6 @@ function FormNavigation({
   );
 }
 
-// Form Footer
 function FormFooter({ schema }: { schema: FormSchema }) {
   return (
     <div className="flex flex-col gap-4 text-center">
@@ -371,7 +366,6 @@ function MultiStepFormLoading() {
   );
 }
 
-// Main MultiStepForm Component with optimizations
 export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<Record<string, any>>({});
@@ -384,7 +378,6 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
 
-  // Memoized form blocks processing
   const blocks = useMemo(
     () =>
       schema.blocks?.length
@@ -410,7 +403,6 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
   const { containerClass, marginClass } = getFormLayoutClasses(schema);
   const { customStyles, getFormClasses } = useFormStyling(schema);
 
-  // Password protection setup
   useEffect(() => {
     const passwordProtection = schema.settings.passwordProtection;
     if (passwordProtection?.enabled && passwordProtection?.password) {
@@ -426,7 +418,6 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
     return () => clearTimeout(timer);
   }, [schema.settings.passwordProtection]);
 
-  // Keyboard navigation support
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (submitting) return;
@@ -447,7 +438,6 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [currentStep, totalSteps, submitting, formData]);
 
-  // Memoized validation function
   const validateCurrentStep = useCallback(() => {
     const currentBlock = blocks[currentStep];
     const stepErrors: Record<string, string> = {};
@@ -455,7 +445,6 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
     currentBlock.fields.forEach((field) => {
       const value = formData[field.id];
 
-      // Check required fields
       if (field.required) {
         let isEmpty = false;
 
@@ -482,7 +471,6 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
         }
       }
 
-      // Email validation
       if (value && field.type === "email") {
         const emailValidation = validateEmail(
           value,
@@ -494,7 +482,6 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
         }
       }
 
-      // Text length validation
       if (["text", "textarea", "email"].includes(field.type) && value) {
         if (
           field.validation?.minLength &&
@@ -521,10 +508,9 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
     };
   }, [blocks, currentStep, formData]);
 
-  // Event handlers
   const handlePasswordSubmit = (password: string) => {
     const expectedPassword = schema.settings.passwordProtection?.password;
-    if (password === expectedPassword) {
+    if (expectedPassword && constantTimeCompare(password, expectedPassword)) {
       setPasswordVerified(true);
       setShowPasswordModal(false);
     } else {
@@ -544,7 +530,6 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
   };
 
   const handleNext = () => {
-    // Validate current step before proceeding
     const { errors: validationErrors, isValid } = validateCurrentStep();
 
     if (!isValid) {
@@ -552,7 +537,6 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
       return;
     }
 
-    // Clear any existing errors for this step
     setErrors({});
 
     if (currentStep < totalSteps - 1) {
@@ -588,7 +572,6 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
           }, 2000);
         }
       } else {
-        // Handle different types of errors
         if (result.error === "Bot detected") {
           toast.error(result.message || "Bot detected. Access denied.");
         } else if (result.error === "Duplicate submission detected") {
@@ -618,7 +601,6 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
     }
   };
 
-  // Render states
   if (submitted) {
     return <SuccessScreen schema={schema} />;
   }

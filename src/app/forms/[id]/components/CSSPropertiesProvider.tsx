@@ -50,7 +50,7 @@ export function CSSPropertiesProvider({
     return () => {
       document.documentElement.style.setProperty("--radius", "0.7rem");
       document.documentElement.style.setProperty("--card-radius", "1rem");
-      // Remove forced light theme classes
+
       document.documentElement.classList.remove("light");
     };
   }, [borderRadius]);

@@ -6,7 +6,6 @@ export type SettingsSearchItem = {
 };
 
 export const SETTINGS_SEARCH_INDEX: SettingsSearchItem[] = [
-  // Basic Section
   {
     label: "Basic Information",
     section: "basic",
@@ -20,7 +19,6 @@ export const SETTINGS_SEARCH_INDEX: SettingsSearchItem[] = [
     keywords: ["rtl", "auto focus", "hide header"],
   },
 
-  // Limits Section
   {
     label: "Rate Limiting",
     section: "limits",
@@ -34,7 +32,6 @@ export const SETTINGS_SEARCH_INDEX: SettingsSearchItem[] = [
     keywords: ["max responses", "cap", "limit"],
   },
 
-  // Security Section
   {
     label: "Password Protection",
     section: "security",
@@ -60,7 +57,6 @@ export const SETTINGS_SEARCH_INDEX: SettingsSearchItem[] = [
     keywords: ["bot", "captcha", "spam"],
   },
 
-  // Branding Section
   {
     label: "Branding",
     section: "branding",
@@ -74,7 +70,6 @@ export const SETTINGS_SEARCH_INDEX: SettingsSearchItem[] = [
     keywords: ["social", "media", "links"],
   },
 
-  // Quiz Section
   {
     label: "Quiz & Scoring",
     section: "quiz",
@@ -82,7 +77,6 @@ export const SETTINGS_SEARCH_INDEX: SettingsSearchItem[] = [
     keywords: ["quiz", "score", "answers"],
   },
 
-  // Notifications Section
   {
     label: "Notifications",
     section: "notifications",
@@ -90,7 +84,6 @@ export const SETTINGS_SEARCH_INDEX: SettingsSearchItem[] = [
     keywords: ["notifications", "email", "notify"],
   },
 
-  // API Section
   {
     label: "API Access",
     section: "api",
@@ -98,7 +91,6 @@ export const SETTINGS_SEARCH_INDEX: SettingsSearchItem[] = [
     keywords: ["api", "key", "endpoint"],
   },
 
-  // Webhooks Section
   {
     label: "Webhooks",
     section: "webhooks",
@@ -106,7 +98,6 @@ export const SETTINGS_SEARCH_INDEX: SettingsSearchItem[] = [
     keywords: ["webhook", "events"],
   },
 
-  // Design Section
   {
     label: "Design",
     section: "design",
@@ -114,7 +105,6 @@ export const SETTINGS_SEARCH_INDEX: SettingsSearchItem[] = [
     keywords: ["theme", "styles", "colors"],
   },
 
-  // Metadata Section
   {
     label: "SEO",
     section: "metadata",

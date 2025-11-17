@@ -155,7 +155,7 @@ export function AIBuilder() {
           />
         </div>
 
-        {/** Live regions for A11y announcements */}
+        {}
         <div
           aria-atomic="true"
           aria-live="assertive"

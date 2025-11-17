@@ -214,7 +214,7 @@ export function ShareFormModal({
                 </div>
               </div>
 
-              {/* QR Code Section */}
+              {}
               <div className="flex flex-col gap-3">
                 <div className="flex items-center justify-between">
                   <Button onClick={handleToggleQr} size="sm" variant="outline">

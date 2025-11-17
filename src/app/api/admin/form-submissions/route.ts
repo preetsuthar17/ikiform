@@ -14,7 +14,6 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Check if user is authenticated and is the admin
     const supabase = await createClient();
     const {
       data: { user },
@@ -25,10 +24,8 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Use admin client to fetch form submissions
     const adminSupabase = createAdminClient();
 
-    // Fetch form details
     const { data: form, error: formError } = await adminSupabase
       .from("forms")
       .select("*")
@@ -43,7 +40,6 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Fetch form submissions
     const { data: submissions, error: submissionsError } = await adminSupabase
       .from("form_submissions")
       .select("*")

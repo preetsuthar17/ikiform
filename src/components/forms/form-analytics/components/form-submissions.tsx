@@ -143,7 +143,7 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
   return (
     <div className="min-h-screen bg-background">
       <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-6 sm:px-6 lg:px-8">
-        {/* Header Section */}
+        {}
         <Card
           className="border-border p-4 shadow-none md:p-6"
           id="form-submissions-header-card"
@@ -201,7 +201,7 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
                 </div>
               </div>
 
-              {/* Right: Actions */}
+              {}
               <div
                 aria-label="Export Actions"
                 className="flex flex-wrap items-center gap-3 sm:gap-3"
@@ -244,7 +244,7 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
           </CardHeader>
         </Card>
 
-        {/* Submissions Table */}
+        {}
         <Card className="border-border p-4 shadow-none md:p-6">
           <CardHeader className="p-0">
             <div className="flex items-center justify-between">

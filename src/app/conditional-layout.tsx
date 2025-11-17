@@ -24,7 +24,6 @@ export default function ConditionalLayout({
     pathname.includes("/f") ||
     pathname.includes("/demo-form-builder");
 
-  // If we are on /dashboard, do not render the Footer
   const isDashboard = pathname === "/dashboard";
   const isHomePage = pathname === "/";
 

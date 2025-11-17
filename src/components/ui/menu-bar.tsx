@@ -93,10 +93,6 @@ const menubarItemVariants = cva(
 interface MenuBarProps
   extends React.ComponentPropsWithoutRef<typeof MenubarPrimitive.Root>,
     VariantProps<typeof menubarVariants> {
-  /**
-   * Enable mobile-responsive mode
-   * @default false
-   */
   responsive?: boolean;
 }
 

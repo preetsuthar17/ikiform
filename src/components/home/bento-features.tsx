@@ -12,11 +12,16 @@ import {
 
 import { AnimatePresence, motion } from "motion/react";
 import type { ReactNode } from "react";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Card } from "@/components/ui/card";
 import { Label } from "../ui";
 
-// Hook to detect if component is in viewport
 function useInView(options?: IntersectionObserverInit) {
   const ref = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
@@ -60,7 +65,7 @@ const FeatureCard = React.memo(function FeatureCard({
       className={`overflow-hidden rounded-none border-0 bg-background p-4 shadow-none transition-all duration-300 ease-out md:p-6 ${className}`}
     >
       <div className="flex h-fit w-full flex-col gap-8 p-6 md:h-full">
-        {/* Header */}
+        {}
         <div className="flex flex-col items-start gap-4 text-left">
           <div className="flex min-w-0 flex-1 flex-col gap-3">
             <h3 className="flex items-center gap-2 font-medium text-sm opacity-60">
@@ -71,7 +76,7 @@ const FeatureCard = React.memo(function FeatureCard({
             </p>
           </div>
         </div>
-        {/* Preview */}
+        {}
         <div className="relative overflow-hidden">
           <div className="fade-bottom h-fit md:h-full">{preview}</div>
         </div>
@@ -80,7 +85,6 @@ const FeatureCard = React.memo(function FeatureCard({
   );
 });
 
-// Hoisted static data/constants
 type AiFormStep = {
   label: string;
   type: "input" | "field";
@@ -140,7 +144,12 @@ const AiFormBuilderPreview = React.memo(() => {
           <motion.span
             animate={{
               scale: status === "generating" && isInView ? [1, 1.2, 1] : 1,
-              opacity: status === "generating" && isInView ? [0.3, 1, 0.3] : status === "generating" ? 0.7 : 1,
+              opacity:
+                status === "generating" && isInView
+                  ? [0.3, 1, 0.3]
+                  : status === "generating"
+                    ? 0.7
+                    : 1,
             }}
             aria-hidden="true"
             className="inline-block size-3 rounded-full bg-primary"
@@ -157,7 +166,7 @@ const AiFormBuilderPreview = React.memo(() => {
           </span>
         </motion.div>
         <div className="flex flex-col gap-3 rounded-xl border border-border bg-background/80 p-3">
-          {/* User enters prompt */}
+          {}
           <motion.div
             animate={{
               opacity: 1,
@@ -165,9 +174,9 @@ const AiFormBuilderPreview = React.memo(() => {
             }}
             className="flex flex-col gap-1"
             initial={{ opacity: 0, translateY: 12 }}
-            style={{ 
+            style={{
               opacity: currentStep > 0 ? 1 : 0.93,
-              willChange: isInView ? "transform, opacity" : "auto"
+              willChange: isInView ? "transform, opacity" : "auto",
             }}
             transition={{ delay: 0.1 }}
           >
@@ -190,22 +199,29 @@ const AiFormBuilderPreview = React.memo(() => {
               value="could you create a simple contact form?"
             />
           </motion.div>
-          {/* Animate fields sequentially */}
+          {}
           <motion.div className="relative mt-2 flex flex-col gap-2 rounded-m">
             {[1, 2, 3].map((i, idx) => {
               const step = AI_FORM_STEPS[i];
               const shown = currentStep > i - 1;
               return (
                 <motion.div
-                  animate={isInView ? {
-                    opacity: shown ? 1 : 0,
-                    y: shown ? 0 : 18,
-                  } : { opacity: shown ? 1 : 0, y: 0 }}
+                  animate={
+                    isInView
+                      ? {
+                          opacity: shown ? 1 : 0,
+                          y: shown ? 0 : 18,
+                        }
+                      : { opacity: shown ? 1 : 0, y: 0 }
+                  }
                   aria-hidden={!shown}
                   className={"flex flex-col gap-0.5 rounded-md transition-all"}
                   initial={false}
                   key={idx}
-                  style={{ willChange: isInView && shown ? "transform, opacity" : "auto" }}
+                  style={{
+                    willChange:
+                      isInView && shown ? "transform, opacity" : "auto",
+                  }}
                   transition={{
                     duration: 0.36 + idx * 0.07,
                     delay: shown ? 0.02 : 0,
@@ -256,7 +272,7 @@ AiFormBuilderPreview.displayName = "AiFormBuilderPreview";
 
 const UnlimitedPreview = React.memo(() => {
   const { ref, isInView } = useInView();
-  
+
   return (
     <div
       ref={ref}
@@ -264,11 +280,15 @@ const UnlimitedPreview = React.memo(() => {
       className="relative flex h-full flex-col items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/1 to-accent/20 p-4 shadow-inner"
     >
       <motion.div
-        animate={isInView ? {
-          rotate: [0, 7, -7, 0],
-          scale: [1, 1.08, 1],
-          opacity: [0.85, 1, 0.92],
-        } : { rotate: 0, scale: 1, opacity: 0.85 }}
+        animate={
+          isInView
+            ? {
+                rotate: [0, 7, -7, 0],
+                scale: [1, 1.08, 1],
+                opacity: [0.85, 1, 0.92],
+              }
+            : { rotate: 0, scale: 1, opacity: 0.85 }
+        }
         aria-hidden="true"
         className="pointer-events-none absolute top-4 left-4 select-none text-accent opacity-10"
         initial={{ rotate: -8, scale: 0.85, opacity: 0.5 }}
@@ -282,32 +302,32 @@ const UnlimitedPreview = React.memo(() => {
         <InfinityIcon size={96} />
       </motion.div>
 
-    {/* Core content */}
-    <div className="relative z-10 flex flex-col items-center gap-4 px-2 py-4">
-      <motion.div
-        aria-hidden="true"
-        className="mb-1 flex items-center justify-center"
-      >
-        <span
-          className="font-bold text-5xl text-primary"
-          style={{ fontVariantNumeric: "tabular-nums" }}
+      {}
+      <div className="relative z-10 flex flex-col items-center gap-4 px-2 py-4">
+        <motion.div
+          aria-hidden="true"
+          className="mb-1 flex items-center justify-center"
         >
-          ∞
-        </span>
-      </motion.div>
+          <span
+            className="font-bold text-5xl text-primary"
+            style={{ fontVariantNumeric: "tabular-nums" }}
+          >
+            ∞
+          </span>
+        </motion.div>
 
-      <motion.div
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        className="flex flex-col items-center gap-2"
-        initial={{ opacity: 0, y: 10, scale: 0.95 }}
-        transition={{ delay: 0.1, type: "spring", stiffness: 220 }}
-      >
-        <div className="flex items-center gap-2 text-center font-medium text-foreground text-sm">
-          Unlimited Forms, Fields, Users and Responses.
-        </div>
-      </motion.div>
+        <motion.div
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          className="flex flex-col items-center gap-2"
+          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+          transition={{ delay: 0.1, type: "spring", stiffness: 220 }}
+        >
+          <div className="flex items-center gap-2 text-center font-medium text-foreground text-sm">
+            Unlimited Forms, Fields, Users and Responses.
+          </div>
+        </motion.div>
+      </div>
     </div>
-  </div>
   );
 });
 
@@ -485,7 +505,6 @@ const LogicBuilderPreview = React.memo(() => {
     []
   );
 
-  // Reveal/animation per step
   const { ref, isInView } = useInView();
   const [visibleIdx, setVisibleIdx] = React.useState(-1);
   React.useEffect(() => {
@@ -523,10 +542,13 @@ const LogicBuilderPreview = React.memo(() => {
               className={"relative flex w-full flex-row items-center px-0 py-2"}
               initial={{ opacity: 0, translateX: -24 }}
               key={idx}
-              style={{ willChange: isInView && idx <= visibleIdx ? "transform, opacity" : "auto" }}
+              style={{
+                willChange:
+                  isInView && idx <= visibleIdx ? "transform, opacity" : "auto",
+              }}
               transition={{ delay: idx * 0.15, duration: 0.44 }}
             >
-              {/* Prefix label */}
+              {}
               <span className="mr-3 min-w-[2.5rem] select-none text-xs">
                 {step.prefix}
               </span>
@@ -544,7 +566,7 @@ const LogicBuilderPreview = React.memo(() => {
           ))}
         </ol>
       </div>
-      {/* Accessible description */}
+      {}
       <span className="sr-only">
         Preview of a simple conditional logic: if user responds&nbsp;"Yes", then
         show the email field; otherwise, skip it.
@@ -560,7 +582,6 @@ const ApiIntegrationPreview = React.memo(() => {
   const [status, setStatus] = useState<"idle" | "fetching" | "success">("idle");
   const [step, setStep] = useState(0);
 
-  // Simulate API call: status changes
   useEffect(() => {
     if (!isInView) return;
     if (status === "idle") {
@@ -573,7 +594,6 @@ const ApiIntegrationPreview = React.memo(() => {
     }
   }, [status, isInView]);
 
-  // Animation for step-through result rows when API is "successful"
   useEffect(() => {
     if (!isInView || status !== "success") {
       setStep(0);
@@ -585,7 +605,6 @@ const ApiIntegrationPreview = React.memo(() => {
     }
   }, [status, step, isInView]);
 
-  // Data sample
   const apiData = useMemo(
     () => [
       {
@@ -679,7 +698,9 @@ const ApiIntegrationPreview = React.memo(() => {
                 ? "text-blue-500 dark:text-blue-300"
                 : "text-muted-foreground"
           }`}
-          style={{ willChange: status === "fetching" && isInView ? "opacity" : "auto" }}
+          style={{
+            willChange: status === "fetching" && isInView ? "opacity" : "auto",
+          }}
         >
           {status === "idle"
             ? "Ready"
@@ -689,7 +710,7 @@ const ApiIntegrationPreview = React.memo(() => {
         </motion.span>
       </div>
 
-      {/* Main Content Card */}
+      {}
       <motion.div
         animate={{
           scale: status === "success" ? 1 : 0.98,
@@ -703,13 +724,13 @@ const ApiIntegrationPreview = React.memo(() => {
           "flex h-fit flex-col gap-0.5 rounded-2xl border border-border bg-card/80 p-3 transition-all"
         }
         initial={{ scale: 0.97, opacity: 0, y: 12 }}
-        style={{ 
+        style={{
           pointerEvents: status === "success" ? "auto" : "none",
-          willChange: isInView ? "transform, opacity" : "auto"
+          willChange: isInView ? "transform, opacity" : "auto",
         }}
         transition={{ type: "spring", stiffness: 220, damping: 26 }}
       >
-        {/* Skeleton/Loader */}
+        {}
         {status !== "success" ? (
           <div
             className="flex animate-pulse flex-col gap-3"
@@ -742,7 +763,7 @@ const ApiIntegrationPreview = React.memo(() => {
         )}
       </motion.div>
 
-      {/* Accessible status for screen readers */}
+      {}
       <span className="sr-only">
         {status === "idle" && "Ready for API integration demo."}
         {status === "fetching" && "Contacting Stripe API, loading data..."}
@@ -778,8 +799,11 @@ const DigitalSignaturesPreview = React.memo(() => {
         : "Signed securely";
 
   return (
-    <div ref={ref} className="relative flex h-fit flex-col items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/1 to-accent/20 p-4 shadow-inner">
-      {/* Paper */}
+    <div
+      ref={ref}
+      className="relative flex h-fit flex-col items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/1 to-accent/20 p-4 shadow-inner"
+    >
+      {}
       <div
         aria-label={statusLabel}
         className="relative mx-auto flex min-h-[88px] w-full max-w-[290px] flex-col items-center rounded-lg border border-border bg-background/95 p-3 shadow"
@@ -801,7 +825,7 @@ const DigitalSignaturesPreview = React.memo(() => {
             {step === "done" ? "✓ Signed" : step === "signing" ? "—" : "⤶"}
           </span>
         </div>
-        {/* Simulated signature pad */}
+        {}
         <div className="relative flex h-10 min-h-9 w-full items-center justify-center">
           <motion.svg
             animate={{
@@ -839,7 +863,7 @@ const DigitalSignaturesPreview = React.memo(() => {
               strokeWidth={step === "done" ? 2.5 : 2}
             />
           </motion.svg>
-          {/* Stylized checkmark over signature for success */}
+          {}
           <motion.svg
             animate={{
               opacity: step === "done" ? 1 : 0,
@@ -872,7 +896,7 @@ const DigitalSignaturesPreview = React.memo(() => {
           {statusLabel}
         </div>
       </div>
-      {/* Badge or floating icon */}
+      {}
       <motion.span
         animate={{
           scale: step === "done" ? 1 : 0.75,
@@ -890,7 +914,7 @@ const DigitalSignaturesPreview = React.memo(() => {
       >
         Verified
       </motion.span>
-      {/* Accessibility: aria-live for changes */}
+      {}
       <span aria-live="polite" className="sr-only">
         {step === "idle" && "Awaiting e-signature. Please sign to continue."}
         {step === "signing" && "Signature is being written."}
@@ -955,8 +979,11 @@ const EmailNotificationsPreview = React.memo(() => {
   }, [addNotification, isInView]);
 
   return (
-    <div ref={ref} className="relative h-full overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-primary/2 to-accent/20 p-0 shadow-inner">
-      {/* Header */}
+    <div
+      ref={ref}
+      className="relative h-full overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-primary/2 to-accent/20 p-0 shadow-inner"
+    >
+      {}
       <div
         className="sticky top-0 z-[999] flex items-center gap-3 rounded-t-2xl border-border border-b bg-card px-5 pt-5 pb-3"
         style={{ zIndex: 999 }}
@@ -977,7 +1004,7 @@ const EmailNotificationsPreview = React.memo(() => {
           </div>
         </div>
       </div>
-      {/* Notifications List */}
+      {}
       <div className="relative flex h-40 flex-col px-3 pt-2 pb-3">
         <AnimatePresence mode="popLayout">
           {notifications.length === 0 && (
@@ -999,15 +1026,19 @@ const EmailNotificationsPreview = React.memo(() => {
           )}
           {notifications.map((notification, index) => (
             <motion.div
-              animate={isInView ? {
-                opacity: 1,
-                y: index * 6,
-                scale: 1 - index * 0.035,
-              } : {
-                opacity: index < maxNotifications ? 1 : 0,
-                y: index * 6,
-                scale: 1 - index * 0.035,
-              }}
+              animate={
+                isInView
+                  ? {
+                      opacity: 1,
+                      y: index * 6,
+                      scale: 1 - index * 0.035,
+                    }
+                  : {
+                      opacity: index < maxNotifications ? 1 : 0,
+                      y: index * 6,
+                      scale: 1 - index * 0.035,
+                    }
+              }
               aria-label={`Email titled "${notification.title}" from ${notification.from}, received ${notification.time}`}
               className="ease relative mb-1.5 flex items-center gap-3 rounded-xl border border-border bg-background p-3 shadow-none outline-none transition-all last:mb-0 focus-within:ring-2 focus-within:ring-primary"
               exit={{
@@ -1068,7 +1099,7 @@ const EmailNotificationsPreview = React.memo(() => {
           ))}
         </AnimatePresence>
       </div>
-      {/* Accessibility sr-only live region for announcement */}
+      {}
       <span aria-live="polite" className="sr-only">
         {notifications.length === 0 && "No new email notifications yet."}
         {notifications.length > 0 &&
@@ -1090,11 +1121,11 @@ export default function BentoFeatures() {
   return (
     <div className="mx-auto w-full max-w-7xl bg-background">
       <div className="mx-auto flex w-full max-w-7xl flex-col">
-        {/* Bento Grid */}
+        {}
         <div className="grid grid-cols-1 gap-px bg-border p-px lg:grid-cols-4">
           {mounted && (
             <>
-              {/* AI Form Builder - Large featured card */}
+              {}
               <FeatureCard
                 className="col-span-2 row-span-2 w-full"
                 description={
@@ -1113,7 +1144,7 @@ export default function BentoFeatures() {
                 title="AI Form Builder"
               />
 
-              {/* Unlimited Submissions */}
+              {}
               <FeatureCard
                 className="col-span-1 bg-card"
                 description={
@@ -1130,7 +1161,7 @@ export default function BentoFeatures() {
                 title="Unlimited Everything"
               />
 
-              {/* Analytics */}
+              {}
               <FeatureCard
                 className="col-span-1"
                 description={
@@ -1149,7 +1180,7 @@ export default function BentoFeatures() {
                 title="AI Analytics"
               />
 
-              {/* Email Notifications */}
+              {}
               <FeatureCard
                 className="col-span-2"
                 description={
@@ -1165,7 +1196,7 @@ export default function BentoFeatures() {
                 title="Smart Notifications"
               />
 
-              {/* API Integration */}
+              {}
               <FeatureCard
                 className="col-span-1 bg-card"
                 description={
@@ -1183,7 +1214,7 @@ export default function BentoFeatures() {
                 title="API & Webhooks"
               />
 
-              {/* Signature Fields */}
+              {}
               <FeatureCard
                 className="col-span-1"
                 description={
@@ -1200,7 +1231,7 @@ export default function BentoFeatures() {
                 title="Form Signatures"
               />
 
-              {/* Logic Builder */}
+              {}
               <FeatureCard
                 className="col-span-2"
                 description={

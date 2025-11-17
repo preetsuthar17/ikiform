@@ -62,7 +62,7 @@ export default function EmbedCustomizer({
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Simple Header */}
+      {}
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-1">
           <h1 className="font-semibold text-2xl">
@@ -81,9 +81,9 @@ export default function EmbedCustomizer({
         </Button>
       </div>
 
-      {/* Simple Split Layout */}
+      {}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        {/* Settings */}
+        {}
         <Card>
           <CardHeader>
             <CardTitle>Settings</CardTitle>
@@ -93,7 +93,7 @@ export default function EmbedCustomizer({
           </CardContent>
         </Card>
 
-        {/* Preview */}
+        {}
         <Card className="flex flex-col gap-6">
           <CardHeader>
             <div className="flex items-center justify-between">
@@ -137,7 +137,7 @@ export default function EmbedCustomizer({
         </Card>
       </div>
 
-      {/* Code Modal */}
+      {}
       <EmbedCodeModal
         config={config}
         embedUrl={embedUrl}
