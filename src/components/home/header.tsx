@@ -305,7 +305,6 @@ const MobileDrawer = React.memo(function MobileDrawer({
             </DrawerDescription>
           </VisuallyHidden>
           <div className="flex w-full flex-col gap-6">
-            {}
             <div className="grid gap-3">
               {user ? (
                 <Button asChild className="h-11 w-full rounded-lg text-base">
@@ -318,7 +317,6 @@ const MobileDrawer = React.memo(function MobileDrawer({
               )}
             </div>
 
-            {}
             <DrawerProfileSection signOut={signOut} user={user} />
 
             <hr className="-mx-6 border-border" />

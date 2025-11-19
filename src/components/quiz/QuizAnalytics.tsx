@@ -38,7 +38,6 @@ export function QuizAnalytics({
         <h2 className="font-semibold text-xl">Quiz Analytics</h2>
       </div>
 
-      {}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
         <Card className="p-4">
           <div className="flex items-center gap-3">

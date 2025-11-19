@@ -193,7 +193,6 @@ export function PrepopulationManager({
         </ModalHeader>
 
         <div className="flex flex-col gap-6 p-6">
-          {}
           <Card className="p-4">
             <h3 className="mb-3 font-medium">Current Prepopulation Status</h3>
 
