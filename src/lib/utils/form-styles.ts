@@ -1,115 +1,115 @@
 import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
 
 export interface FormStyleConfig {
-  colors?: {
-    background?: string;
-    text?: string;
-    primary?: string;
-    border?: string;
-    websiteBackground?: string;
-  };
-  typography?: {
-    fontFamily?: string;
-    fontSize?: string;
-    fontWeight?: string;
-  };
-  layout?: {
-    maxWidth?: string;
-    customWidth?: string;
-    padding?: string;
-    margin?: string;
-    borderRadius?: string;
-  };
+	colors?: {
+		background?: string;
+		text?: string;
+		primary?: string;
+		border?: string;
+		websiteBackground?: string;
+	};
+	typography?: {
+		fontFamily?: string;
+		fontSize?: string;
+		fontWeight?: string;
+	};
+	layout?: {
+		maxWidth?: string;
+		customWidth?: string;
+		padding?: string;
+		margin?: string;
+		borderRadius?: string;
+	};
 }
 
 export function generateFormStyles(settings: LocalSettings): FormStyleConfig {
-  return {
-    colors: settings.colors,
-    typography: settings.typography,
-    layout: {
-      ...settings.layout,
-      maxWidth:
-        settings.layout?.maxWidth === "custom"
-          ? settings.layout.customWidth || "600px"
-          : getMaxWidthValue(settings.layout?.maxWidth),
-    },
-  };
+	return {
+		colors: settings.colors,
+		typography: settings.typography,
+		layout: {
+			...settings.layout,
+			maxWidth:
+				settings.layout?.maxWidth === "custom"
+					? settings.layout.customWidth || "600px"
+					: getMaxWidthValue(settings.layout?.maxWidth),
+		},
+	};
 }
 
 export function getMaxWidthValue(size?: string): string {
-  const widthMap = {
-    sm: "400px",
-    md: "600px",
-    lg: "800px",
-    xl: "1000px",
-    full: "100%",
-  };
-  return widthMap[size as keyof typeof widthMap] || "600px";
+	const widthMap = {
+		sm: "400px",
+		md: "600px",
+		lg: "800px",
+		xl: "1000px",
+		full: "100%",
+	};
+	return widthMap[size as keyof typeof widthMap] || "600px";
 }
 
 export function getPaddingValue(size?: string): string {
-  const paddingMap = {
-    none: "0",
-    sm: "16px",
-    md: "24px",
-    lg: "32px",
-  };
-  return paddingMap[size as keyof typeof paddingMap] || "24px";
+	const paddingMap = {
+		none: "0",
+		sm: "16px",
+		md: "24px",
+		lg: "32px",
+	};
+	return paddingMap[size as keyof typeof paddingMap] || "24px";
 }
 
 export function getMarginValue(size?: string): string {
-  const marginMap = {
-    none: "0",
-    sm: "8px",
-    md: "16px",
-    lg: "32px",
-  };
-  return marginMap[size as keyof typeof marginMap] || "16px";
+	const marginMap = {
+		none: "0",
+		sm: "8px",
+		md: "16px",
+		lg: "32px",
+	};
+	return marginMap[size as keyof typeof marginMap] || "16px";
 }
 
 export function getBorderRadiusValue(size?: string): string {
-  const radiusMap = {
-    none: "0",
-    sm: "4px",
-    md: "8px",
-    lg: "16px",
-    xl: "24px",
-  };
-  return radiusMap[size as keyof typeof radiusMap] || "8px";
+	const radiusMap = {
+		none: "0",
+		sm: "4px",
+		md: "8px",
+		lg: "16px",
+		xl: "24px",
+	};
+	return radiusMap[size as keyof typeof radiusMap] || "8px";
 }
 
 export function getFontSizeValue(size?: string): string {
-  const sizeMap = {
-    xs: "12px",
-    sm: "14px",
-    base: "16px",
-    lg: "18px",
-    xl: "20px",
-  };
-  return sizeMap[size as keyof typeof sizeMap] || "14px";
+	const sizeMap = {
+		xs: "12px",
+		sm: "14px",
+		base: "16px",
+		lg: "18px",
+		xl: "20px",
+	};
+	return sizeMap[size as keyof typeof sizeMap] || "14px";
 }
 
 export function getFontWeightValue(weight?: string): string {
-  const weightMap = {
-    light: "300",
-    normal: "400",
-    medium: "500",
-    semibold: "600",
-    bold: "700",
-  };
-  return weightMap[weight as keyof typeof weightMap] || "400";
+	const weightMap = {
+		light: "300",
+		normal: "400",
+		medium: "500",
+		semibold: "600",
+		bold: "700",
+	};
+	return weightMap[weight as keyof typeof weightMap] || "400";
 }
 
 export function injectFormStyles(
-  styleConfig: FormStyleConfig,
-  formId: string
+	styleConfig: FormStyleConfig,
+	formId: string,
 ): void {
-  const existingStyle = document.getElementById(`form-styles-${formId}`);
-  if (existingStyle) {
-    existingStyle.remove();
-  }
+	const existingStyle = document.getElementById(`form-styles-${formId}`);
+	if (existingStyle) {
+		existingStyle.remove();
+	}
 
-  const css = `
+	const css = `
     .form-container-${formId} {
       ${styleConfig.colors?.background ? `background-color: ${styleConfig.colors.background};` : ""}
       ${styleConfig.colors?.text ? `color: ${styleConfig.colors.text};` : ""}
@@ -156,23 +156,23 @@ export function injectFormStyles(
     }
   `;
 
-  const style = document.createElement("style");
-  style.id = `form-styles-${formId}`;
-  style.textContent = css;
-  document.head.appendChild(style);
+	const style = document.createElement("style");
+	style.id = `form-styles-${formId}`;
+	style.textContent = css;
+	document.head.appendChild(style);
 }
 
 export function removeFormStyles(formId: string): void {
-  const existingStyle = document.getElementById(`form-styles-${formId}`);
-  if (existingStyle) {
-    existingStyle.remove();
-  }
+	const existingStyle = document.getElementById(`form-styles-${formId}`);
+	if (existingStyle) {
+		existingStyle.remove();
+	}
 }
 
 export function generateCSSSelectorStyles(settings: LocalSettings): string {
-  const config = generateFormStyles(settings);
+	const config = generateFormStyles(settings);
 
-  return `
+	return `
     .ikiform-customized {
       ${config.colors?.background ? `background-color: ${config.colors.background} !important;` : ""}
       ${config.colors?.text ? `color: ${config.colors.text} !important;` : ""}

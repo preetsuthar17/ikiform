@@ -3,13 +3,13 @@
 import dynamic from "next/dynamic";
 
 const Tweet = dynamic(async () => (await import("react-tweet")).Tweet, {
-  ssr: false,
+	ssr: false,
 });
 
 interface TweetEmbedProps {
-  tweetId: string;
+	tweetId: string;
 }
 
 export function TweetEmbed({ tweetId }: TweetEmbedProps) {
-  return <Tweet id={tweetId} />;
+	return <Tweet id={tweetId} />;
 }

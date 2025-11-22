@@ -4,7 +4,7 @@ export { FieldPalette } from "./FieldPalette";
 export type { FieldPaletteProps, FieldTypeConfig } from "./types";
 
 export {
-  getAllFieldTypes,
-  getFieldTypeConfig,
-  getFieldTypesByCategory,
+	getAllFieldTypes,
+	getFieldTypeConfig,
+	getFieldTypesByCategory,
 } from "./utils";

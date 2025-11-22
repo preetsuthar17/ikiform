@@ -1,10 +1,10 @@
 export {
-  EditableField,
-  FormActions,
-  FormFieldsContainer,
-  FormHeader,
-  MultiStepNavigation,
-  StepHeader,
+	EditableField,
+	FormActions,
+	FormFieldsContainer,
+	FormHeader,
+	MultiStepNavigation,
+	StepHeader,
 } from "./components";
 export { FormPreview } from "./FormPreview";
 

@@ -1,8 +1,8 @@
 import type React from "react";
 import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
+	ResizableHandle,
+	ResizablePanel,
+	ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import type { FormSchema } from "@/lib/database";
@@ -17,138 +17,138 @@ import type { FormBuilderPanelsProps } from "../types";
 import { getAllFields } from "../utils";
 
 export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
-  formSchema,
-  selectedFieldId,
-  selectedBlockId,
-  selectedField,
-  onFieldAdd,
-  onFieldSelect,
-  onFieldUpdate,
-  onFieldDelete,
-  onFieldsReorder,
-  onBlockSelect,
-  onBlocksUpdate,
-  onBlockAdd,
-  onBlockUpdate,
-  onBlockDelete,
-  onFormSettingsUpdate,
-  onStepSelect,
+	formSchema,
+	selectedFieldId,
+	selectedBlockId,
+	selectedField,
+	onFieldAdd,
+	onFieldSelect,
+	onFieldUpdate,
+	onFieldDelete,
+	onFieldsReorder,
+	onBlockSelect,
+	onBlocksUpdate,
+	onBlockAdd,
+	onBlockUpdate,
+	onBlockDelete,
+	onFormSettingsUpdate,
+	onStepSelect,
 }) => {
-  const allFields = getAllFields(formSchema);
+	const allFields = getAllFields(formSchema);
 
-  const handleSchemaUpdate = (updatedSchema: FormSchema) => {
-    if (updatedSchema.fields && updatedSchema.fields !== formSchema.fields) {
-      onFieldsReorder(updatedSchema.fields);
-    }
+	const handleSchemaUpdate = (updatedSchema: FormSchema) => {
+		if (updatedSchema.fields && updatedSchema.fields !== formSchema.fields) {
+			onFieldsReorder(updatedSchema.fields);
+		}
 
-    if (updatedSchema.blocks && updatedSchema.blocks !== formSchema.blocks) {
-      onBlocksUpdate(updatedSchema.blocks);
-    }
+		if (updatedSchema.blocks && updatedSchema.blocks !== formSchema.blocks) {
+			onBlocksUpdate(updatedSchema.blocks);
+		}
 
-    if (
-      updatedSchema.settings &&
-      updatedSchema.settings !== formSchema.settings
-    ) {
-      onFormSettingsUpdate(updatedSchema.settings);
-    }
-  };
-  return (
-    <ResizablePanelGroup
-      className="h-full"
-      direction="horizontal"
-      style={{
-        overscrollBehavior: "contain",
-      }}
-    >
-      {}
-      <ResizablePanel
-        defaultSize={PANEL_SIZES.LEFT_PANEL.default}
-        maxSize={PANEL_SIZES.LEFT_PANEL.max}
-        minSize={PANEL_SIZES.LEFT_PANEL.min}
-        style={{
-          overscrollBehavior: "contain",
-        }}
-      >
-        {formSchema.settings.multiStep ? (
-          <BlockManager
-            blocks={formSchema.blocks}
-            onBlockAdd={onBlockAdd}
-            onBlockDelete={onBlockDelete}
-            onBlockSelect={onBlockSelect}
-            onBlocksUpdate={onBlocksUpdate}
-            onFieldDelete={onFieldDelete}
-            onFieldSelect={onFieldSelect}
-            selectedBlockId={selectedBlockId}
-            selectedFieldId={selectedFieldId}
-          />
-        ) : (
-          <FieldPalette
-            formSchema={formSchema}
-            onAddField={onFieldAdd}
-            onSchemaUpdate={handleSchemaUpdate}
-          />
-        )}
-      </ResizablePanel>
+		if (
+			updatedSchema.settings &&
+			updatedSchema.settings !== formSchema.settings
+		) {
+			onFormSettingsUpdate(updatedSchema.settings);
+		}
+	};
+	return (
+		<ResizablePanelGroup
+			className="h-full"
+			direction="horizontal"
+			style={{
+				overscrollBehavior: "contain",
+			}}
+		>
+			{}
+			<ResizablePanel
+				defaultSize={PANEL_SIZES.LEFT_PANEL.default}
+				maxSize={PANEL_SIZES.LEFT_PANEL.max}
+				minSize={PANEL_SIZES.LEFT_PANEL.min}
+				style={{
+					overscrollBehavior: "contain",
+				}}
+			>
+				{formSchema.settings.multiStep ? (
+					<BlockManager
+						blocks={formSchema.blocks}
+						onBlockAdd={onBlockAdd}
+						onBlockDelete={onBlockDelete}
+						onBlockSelect={onBlockSelect}
+						onBlocksUpdate={onBlocksUpdate}
+						onFieldDelete={onFieldDelete}
+						onFieldSelect={onFieldSelect}
+						selectedBlockId={selectedBlockId}
+						selectedFieldId={selectedFieldId}
+					/>
+				) : (
+					<FieldPalette
+						formSchema={formSchema}
+						onAddField={onFieldAdd}
+						onSchemaUpdate={handleSchemaUpdate}
+					/>
+				)}
+			</ResizablePanel>
 
-      <ResizableHandle />
+			<ResizableHandle />
 
-      {}
-      <ResizablePanel
-        defaultSize={PANEL_SIZES.PREVIEW_PANEL.default}
-        maxSize={PANEL_SIZES.PREVIEW_PANEL.max}
-        minSize={PANEL_SIZES.PREVIEW_PANEL.min}
-        style={{
-          overscrollBehavior: "contain",
-        }}
-      >
-        <ScrollArea
-          className="h-full bg-background"
-          style={{
-            overscrollBehavior: "contain",
-          }}
-        >
-          <FormPreview
-            onAddField={onFieldAdd}
-            onBlockAdd={onBlockAdd}
-            onBlockDelete={onBlockDelete}
-            onBlockUpdate={onBlockUpdate}
-            onFieldDelete={onFieldDelete}
-            onFieldSelect={onFieldSelect}
-            onFieldsReorder={onFieldsReorder}
-            onFormSettingsUpdate={onFormSettingsUpdate}
-            onStepSelect={onStepSelect}
-            schema={formSchema}
-            selectedBlockId={selectedBlockId}
-            selectedFieldId={selectedFieldId}
-          />
-        </ScrollArea>
-      </ResizablePanel>
+			{}
+			<ResizablePanel
+				defaultSize={PANEL_SIZES.PREVIEW_PANEL.default}
+				maxSize={PANEL_SIZES.PREVIEW_PANEL.max}
+				minSize={PANEL_SIZES.PREVIEW_PANEL.min}
+				style={{
+					overscrollBehavior: "contain",
+				}}
+			>
+				<ScrollArea
+					className="h-full bg-background"
+					style={{
+						overscrollBehavior: "contain",
+					}}
+				>
+					<FormPreview
+						onAddField={onFieldAdd}
+						onBlockAdd={onBlockAdd}
+						onBlockDelete={onBlockDelete}
+						onBlockUpdate={onBlockUpdate}
+						onFieldDelete={onFieldDelete}
+						onFieldSelect={onFieldSelect}
+						onFieldsReorder={onFieldsReorder}
+						onFormSettingsUpdate={onFormSettingsUpdate}
+						onStepSelect={onStepSelect}
+						schema={formSchema}
+						selectedBlockId={selectedBlockId}
+						selectedFieldId={selectedFieldId}
+					/>
+				</ScrollArea>
+			</ResizablePanel>
 
-      <ResizableHandle />
+			<ResizableHandle />
 
-      {}
-      <ResizablePanel
-        defaultSize={PANEL_SIZES.RIGHT_PANEL.default}
-        maxSize={PANEL_SIZES.RIGHT_PANEL.max}
-        minSize={PANEL_SIZES.RIGHT_PANEL.min}
-        style={{
-          overscrollBehavior: "contain",
-        }}
-      >
-        <div
-          className="flex h-full flex-col"
-          style={{
-            overscrollBehavior: "contain",
-          }}
-        >
-          <FieldSettingsPanel
-            field={selectedField}
-            onClose={() => onFieldSelect(null)}
-            onFieldUpdate={onFieldUpdate}
-          />
-          {}
-        </div>
-      </ResizablePanel>
-    </ResizablePanelGroup>
-  );
+			{}
+			<ResizablePanel
+				defaultSize={PANEL_SIZES.RIGHT_PANEL.default}
+				maxSize={PANEL_SIZES.RIGHT_PANEL.max}
+				minSize={PANEL_SIZES.RIGHT_PANEL.min}
+				style={{
+					overscrollBehavior: "contain",
+				}}
+			>
+				<div
+					className="flex h-full flex-col"
+					style={{
+						overscrollBehavior: "contain",
+					}}
+				>
+					<FieldSettingsPanel
+						field={selectedField}
+						onClose={() => onFieldSelect(null)}
+						onFieldUpdate={onFieldUpdate}
+					/>
+					{}
+				</div>
+			</ResizablePanel>
+		</ResizablePanelGroup>
+	);
 };

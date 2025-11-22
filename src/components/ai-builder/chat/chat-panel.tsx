@@ -14,89 +14,89 @@ import { StreamingIndicator } from "./streaming-indicator";
 import { WelcomeMessage } from "./welcome-message";
 
 export const ChatPanel = memo(function ChatPanel({
-  messages,
-  isLoading,
-  isStreaming,
-  streamedContent,
-  streamError,
-  showSuggestions,
-  suggestions,
-  setInput,
-  input,
-  handleSend,
-  setShowSuggestions,
-  setStreamedContent,
-  setStreamError,
-  streamingRef,
-  messagesEndRef,
-  mounted,
+	messages,
+	isLoading,
+	isStreaming,
+	streamedContent,
+	streamError,
+	showSuggestions,
+	suggestions,
+	setInput,
+	input,
+	handleSend,
+	setShowSuggestions,
+	setStreamedContent,
+	setStreamError,
+	streamingRef,
+	messagesEndRef,
+	mounted,
 }: ChatPanelProps) {
-  const shouldShowSuggestions = showSuggestions && messages.length === 0;
+	const shouldShowSuggestions = showSuggestions && messages.length === 0;
 
-  const handleSuggestionClick = useCallback(
-    (text: string) => {
-      setInput(text);
-      setShowSuggestions(false);
-    },
-    [setInput, setShowSuggestions]
-  );
+	const handleSuggestionClick = useCallback(
+		(text: string) => {
+			setInput(text);
+			setShowSuggestions(false);
+		},
+		[setInput, setShowSuggestions],
+	);
 
-  return (
-    <div className="flex h-full min-h-0 grow flex-col gap-4">
-      <ChatHeader />
-      <ScrollArea className="relative min-h-0 flex-1 p-4">
-        <div
-          aria-live="polite"
-          aria-relevant="additions"
-          className="flex flex-col gap-4"
-          role="log"
-        >
-          {messages.length === 0 && <WelcomeMessage mounted={mounted} />}
-          <AnimatePresence>
-            {messages.map((message, index) => (
-              <ChatMessageItem
-                index={index}
-                key={`${message.role}-${index}-${message.content.slice(0, 50)}`}
-                message={message}
-              />
-            ))}
-          </AnimatePresence>
-          {isLoading && (
-            <motion.div
-              animate={{ opacity: 1, y: 0 }}
-              className="flex gap-3"
-              initial={{ opacity: 0, y: 20 }}
-            >
-              <Loader />
-            </motion.div>
-          )}
-          {isStreaming && (
-            <StreamingIndicator
-              ref={streamingRef}
-              streamError={streamError}
-              streamedContent={streamedContent}
-            />
-          )}
-          <div ref={messagesEndRef} />
-        </div>
-      </ScrollArea>
-      <div className="mt-auto">
-        {shouldShowSuggestions && (
-          <div className="mx-auto w-full max-w-3xl p-4">
-            <ChatSuggestions
-              onSuggestionClick={handleSuggestionClick}
-              suggestions={suggestions}
-            />
-          </div>
-        )}
-        <Separator />
-        <ChatInput
-          input={input}
-          isLoading={isLoading}
-          onSubmit={handleSend}
-          setInput={setInput}
-        />
-      </div>
-    </div>
-  );
+	return (
+		<div className="flex h-full min-h-0 grow flex-col gap-4">
+			<ChatHeader />
+			<ScrollArea className="relative min-h-0 flex-1 p-4">
+				<div
+					aria-live="polite"
+					aria-relevant="additions"
+					className="flex flex-col gap-4"
+					role="log"
+				>
+					{messages.length === 0 && <WelcomeMessage mounted={mounted} />}
+					<AnimatePresence>
+						{messages.map((message, index) => (
+							<ChatMessageItem
+								index={index}
+								key={`${message.role}-${index}-${message.content.slice(0, 50)}`}
+								message={message}
+							/>
+						))}
+					</AnimatePresence>
+					{isLoading && (
+						<motion.div
+							animate={{ opacity: 1, y: 0 }}
+							className="flex gap-3"
+							initial={{ opacity: 0, y: 20 }}
+						>
+							<Loader />
+						</motion.div>
+					)}
+					{isStreaming && (
+						<StreamingIndicator
+							ref={streamingRef}
+							streamError={streamError}
+							streamedContent={streamedContent}
+						/>
+					)}
+					<div ref={messagesEndRef} />
+				</div>
+			</ScrollArea>
+			<div className="mt-auto">
+				{shouldShowSuggestions && (
+					<div className="mx-auto w-full max-w-3xl p-4">
+						<ChatSuggestions
+							onSuggestionClick={handleSuggestionClick}
+							suggestions={suggestions}
+						/>
+					</div>
+				)}
+				<Separator />
+				<ChatInput
+					input={input}
+					isLoading={isLoading}
+					onSubmit={handleSend}
+					setInput={setInput}
+				/>
+			</div>
+		</div>
+	);
 });

@@ -6,16 +6,16 @@ import Pricing from "@/components/home/pricing/pricing";
 import PromoPopup from "@/components/home/promo-popup";
 
 export default function Home() {
-  return (
-    <>
-      <main className="flex flex-col items-center">
-        <Hero />
-        <BentoFeatures />
-        <Pricing />
-        <FaqSection />
-        <CTA />
-      </main>
-      <PromoPopup />
-    </>
-  );
+	return (
+		<>
+			<main className="flex flex-col items-center">
+				<Hero />
+				<BentoFeatures />
+				<Pricing />
+				<FaqSection />
+				<CTA />
+			</main>
+			<PromoPopup />
+		</>
+	);
 }

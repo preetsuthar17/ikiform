@@ -2,9 +2,9 @@
 
 /* Base form styling that uses CSS custom properties */
 .ikiform-customized {
-  background-color: var(--form-background-color, transparent);
-  color: var(--form-text-color, inherit);
-  font-family: var(--form-font-family, inherit);
+	background-color: var(--form-background-color, transparent);
+	color: var(--form-text-color, inherit);
+	font-family: var(--form-font-family, inherit);
 }
 
 /* Typography for content elements only (not headings) */
@@ -16,9 +16,9 @@
 .ikiform-customized select,
 .ikiform-customized button,
 .ikiform-customized label {
-  font-family: var(--form-font-family, inherit);
-  font-size: var(--form-font-size, inherit);
-  font-weight: var(--form-font-weight, inherit);
+	font-family: var(--form-font-family, inherit);
+	font-size: var(--form-font-size, inherit);
+	font-weight: var(--form-font-weight, inherit);
 }
 
 /* Typography for headings - only font family and color, always 3xl size and semibold weight */
@@ -28,138 +28,138 @@
 .ikiform-customized h4,
 .ikiform-customized h5,
 .ikiform-customized h6 {
-  font-family: var(--form-font-family, inherit) !important;
-  color: var(--form-text-color, inherit) !important;
-  font-size: 1.875rem !important; /* 3xl = 30px = 1.875rem */
-  line-height: 2.25rem !important; /* 3xl line height */
-  font-weight: 600 !important; /* semibold */
+	font-family: var(--form-font-family, inherit) !important;
+	color: var(--form-text-color, inherit) !important;
+	font-size: 1.875rem !important; /* 3xl = 30px = 1.875rem */
+	line-height: 2.25rem !important; /* 3xl line height */
+	font-weight: 600 !important; /* semibold */
 }
 
 .ikiform-customized input,
 .ikiform-customized textarea,
 .ikiform-customized select {
-  border-color: var(--form-border-color, hsl(var(--border))) !important;
-  font-family: inherit;
+	border-color: var(--form-border-color, hsl(var(--border))) !important;
+	font-family: inherit;
 }
 
 .ikiform-customized input:focus,
 .ikiform-customized textarea:focus,
 .ikiform-customized select:focus {
-  border-color: var(--form-border-color, hsl(var(--hu-border))) !important;
-  outline: none !important;
+	border-color: var(--form-border-color, hsl(var(--hu-border))) !important;
+	outline: none !important;
 }
 
 .ikiform-customized button[type="submit"],
 .ikiform-customized .primary-button {
-  background-color: var(
-    --form-primary-color,
-    hsl(var(--hu-primary))
-  ) !important;
-  border-color: var(--form-primary-color, hsl(var(--hu-primary))) !important;
-  color: white !important;
+	background-color: var(
+		--form-primary-color,
+		hsl(var(--hu-primary))
+	) !important;
+	border-color: var(--form-primary-color, hsl(var(--hu-primary))) !important;
+	color: white !important;
 }
 
 .ikiform-customized button[type="submit"]:hover,
 .ikiform-customized .primary-button:hover {
-  background-color: color-mix(
-    in srgb,
-    var(--form-primary-color, hsl(var(--hu-primary))) 90%,
-    black
-  ) !important;
-  border-color: color-mix(
-    in srgb,
-    var(--form-primary-color, hsl(var(--hu-primary))) 90%,
-    black
-  ) !important;
+	background-color: color-mix(
+		in srgb,
+		var(--form-primary-color, hsl(var(--hu-primary))) 90%,
+		black
+	) !important;
+	border-color: color-mix(
+		in srgb,
+		var(--form-primary-color, hsl(var(--hu-primary))) 90%,
+		black
+	) !important;
 }
 
 /* Minimal design mode */
 .ikiform-minimal {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+	background: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
 }
 
 .ikiform-minimal:hover {
-  background: transparent !important;
+	background: transparent !important;
 }
 
 /* Radio and checkbox custom styling */
 .ikiform-customized input[type="radio"]:checked,
 .ikiform-customized input[type="checkbox"]:checked {
-  background-color: var(
-    --form-primary-color,
-    hsl(var(--hu-primary))
-  ) !important;
-  border-color: var(--form-primary-color, hsl(var(--hu-primary))) !important;
+	background-color: var(
+		--form-primary-color,
+		hsl(var(--hu-primary))
+	) !important;
+	border-color: var(--form-primary-color, hsl(var(--hu-primary))) !important;
 }
 
 /* Progress bar styling */
 .ikiform-customized .progress-bar {
-  background-color: var(
-    --form-primary-color,
-    hsl(var(--hu-primary))
-  ) !important;
+	background-color: var(
+		--form-primary-color,
+		hsl(var(--hu-primary))
+	) !important;
 }
 
 /* File upload styling */
 .ikiform-customized .file-upload-button {
-  border-color: var(--form-border-color, hsl(var(--border))) !important;
-  color: var(--form-text-color, inherit) !important;
+	border-color: var(--form-border-color, hsl(var(--border))) !important;
+	color: var(--form-text-color, inherit) !important;
 }
 
 .ikiform-customized .file-upload-button:hover {
-  background-color: var(
-    --form-primary-color,
-    hsl(var(--hu-primary))
-  ) !important;
-  color: white !important;
+	background-color: var(
+		--form-primary-color,
+		hsl(var(--hu-primary))
+	) !important;
+	color: white !important;
 }
 
 /* Dropdown and select styling */
 .ikiform-customized [data-radix-select-trigger] {
-  border-color: var(--form-border-color, hsl(var(--border))) !important;
+	border-color: var(--form-border-color, hsl(var(--border))) !important;
 }
 
 .ikiform-customized [data-radix-select-trigger]:focus {
-  border-color: var(--form-border-color, hsl(var(--border))) !important;
-  box-shadow: 0 0 0 2px var(--form-primary-color, hsl(var(--hu-primary))) 40 !important;
-  outline: none !important;
+	border-color: var(--form-border-color, hsl(var(--border))) !important;
+	box-shadow: 0 0 0 2px var(--form-primary-color, hsl(var(--hu-primary))) 40 !important;
+	outline: none !important;
 }
 
 /* Signature pad styling */
 .ikiform-customized .signature-pad {
-  border-color: var(--form-border-color, hsl(var(--border))) !important;
+	border-color: var(--form-border-color, hsl(var(--border))) !important;
 }
 
 /* Date picker styling */
 .ikiform-customized .date-picker-input {
-  border-color: var(--form-border-color, hsl(var(--border))) !important;
+	border-color: var(--form-border-color, hsl(var(--border))) !important;
 }
 
 .ikiform-customized .date-picker-input:focus {
-  border-color: var(--form-border-color, hsl(var(--border))) !important;
-  box-shadow: 0 0 0 2px var(--form-primary-color, hsl(var(--hu-primary))) 40 !important;
-  outline: none !important;
+	border-color: var(--form-border-color, hsl(var(--border))) !important;
+	box-shadow: 0 0 0 2px var(--form-primary-color, hsl(var(--hu-primary))) 40 !important;
+	outline: none !important;
 }
 
 /* Label styling */
 .ikiform-customized label {
-  color: var(--form-text-color, inherit) !important;
+	color: var(--form-text-color, inherit) !important;
 }
 
 /* Error message styling */
 .ikiform-customized .error-message {
-  color: hsl(var(--destructive)) !important;
+	color: hsl(var(--destructive)) !important;
 }
 
 /* Success message styling */
 .ikiform-customized .success-message {
-  color: hsl(var(--success, 142 76% 36%)) !important;
+	color: hsl(var(--success, 142 76% 36%)) !important;
 }
 
 /* Custom width for forms */
 .ikiform-custom-width {
-  width: var(--form-custom-width, auto);
-  max-width: var(--form-custom-width, auto);
+	width: var(--form-custom-width, auto);
+	max-width: var(--form-custom-width, auto);
 }

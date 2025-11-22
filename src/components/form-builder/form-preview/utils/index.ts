@@ -1,6 +1,6 @@
 export const handleFormSubmit = (
-  e: React.FormEvent,
-  formData: Record<string, any>
+	e: React.FormEvent,
+	formData: Record<string, any>,
 ): void => {
-  e.preventDefault();
+	e.preventDefault();
 };

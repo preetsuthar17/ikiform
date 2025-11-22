@@ -6,11 +6,11 @@ export { FormFieldRenderer } from "./FormFieldRenderer";
 export type * from "./types";
 
 export {
-  createFieldComponent,
-  getBaseClasses,
-  getErrorClasses,
-  getErrorRingClasses,
-  getSizeClasses,
-  getVariantClasses,
-  getWidthClass,
+	createFieldComponent,
+	getBaseClasses,
+	getErrorClasses,
+	getErrorRingClasses,
+	getSizeClasses,
+	getVariantClasses,
+	getWidthClass,
 } from "./utils";
