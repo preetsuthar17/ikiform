@@ -135,7 +135,7 @@ function HeroCTAs() {
 			<Button asChild className="rounded-full" variant="outline">
 				<Link
 					className="flex h-11 w-full items-center gap-2 whitespace-nowrap font-medium md:w-40"
-					href="/login"
+					href="/#form-builder-demo"
 				>
 					<span>Try a Demo</span>
 				</Link>
@@ -160,7 +160,7 @@ export default function Hero() {
 					<HeroCTAs />
 				</div>
 
-				<Card className="w-full max-w-7xl rounded-none border-b-0 bg-card shadow-none">
+				<Card className="w-full max-w-7xl rounded-none border-b-0 bg-card shadow-none" >
 					<Tabs className="w-full" defaultValue="form-demo">
 						<div className="flex items-center justify-start border-b border-border px-4 py-4 md:px-6">
 							<TabsList>
@@ -170,10 +170,10 @@ export default function Hero() {
 								</TabsTrigger>
 							</TabsList>
 						</div>
-						<TabsContent className="mt-0" value="form-demo">
+						<TabsContent className="mt-0" value="form-demo" id="form-builder-demo">
 							<EmbeddedForm className="bg-card" />
 						</TabsContent>
-						<TabsContent className="mt-0" value="form-builder-demo">
+						<TabsContent className="mt-0" value="form-builder-demo" >
 							<div
 								className="group relative flex w-full cursor-pointer justify-center bg-card p-4 transition-all hover:bg-muted/30 md:p-6"
 								onClick={() => setIsFormBuilderFullscreen(true)}

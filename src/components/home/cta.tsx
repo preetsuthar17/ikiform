@@ -62,7 +62,7 @@ function PrimaryActions({ user }: { user: unknown }) {
 			<Button asChild className="rounded-full" variant="outline">
 				<Link
 					className="flex h-11 w-full items-center gap-2 font-medium md:w-32"
-					href="/login"
+					href="/#form-builder-demo"
 				>
 					<span>Try a Demo</span>
 				</Link>
