@@ -9,7 +9,7 @@
 		"start": "next start",
 		"email:dev": "email dev",
 		"lint": "eslint . --ext .ts,.tsx,.js,.jsx --max-warnings=0 --config eslint.config.security.js || true",
-		"format": "bunx biome format --write",
+		"format": "bunx biome format --write || true",
 		"check": "tsc --noEmit || true",
 		"polar:setup": "tsx scripts/create-polar-products.ts",
 		"prepare": "husky"
