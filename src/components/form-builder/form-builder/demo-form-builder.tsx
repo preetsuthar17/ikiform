@@ -8,9 +8,9 @@ import { createDefaultFormSchema } from "@/lib/forms/form-defaults";
 import { FieldPalette } from "../field-palette";
 import { FieldSettingsPanel } from "../field-settings-panel";
 import { FormPreview } from "../form-preview";
-import { FormBuilderHeader } from "./components/FormBuilderHeader";
-import { FormBuilderModals } from "./components/FormBuilderModals";
-import { FormBuilderPanels } from "./components/FormBuilderPanels";
+import { FormBuilderHeader } from "./components/form-builder-header";
+import { FormBuilderModals } from "./components/form-builder-modals";
+import { FormBuilderPanels } from "./components/form-builder-panels";
 import {
 	addFieldToSchema,
 	findSelectedField,

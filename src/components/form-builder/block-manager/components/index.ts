@@ -1,7 +1,7 @@
-export { BlockEditForm } from "./BlockEditForm";
-export { BlockFieldsList } from "./BlockFieldsList";
-export { BlockHeader } from "./BlockHeader";
-export { BlockItem } from "./BlockItem";
-export { BlockManagerHeader } from "./BlockManagerHeader";
-export { BlocksList } from "./BlocksList";
-export { FieldItem } from "./FieldItem";
+export { BlockEditForm } from "./block-edit-form";
+export { BlockFieldsList } from "./block-fields-list";
+export { BlockHeader } from "./block-header";
+export { BlockItem } from "./block-item";
+export { BlockManagerHeader } from "./block-manager-header";
+export { BlocksList } from "./blocks-list";
+export { FieldItem } from "./field-item";

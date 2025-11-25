@@ -1,6 +1,6 @@
 import { getInternalFormTitle } from "@/lib/utils/form-utils";
 import type { FormHeaderProps } from "../types";
-import { EditableField } from "./EditableField";
+import { EditableField } from "./editable-field";
 
 export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
 	const handleTitleUpdate = (title: string) => {

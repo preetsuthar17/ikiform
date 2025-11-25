@@ -1,7 +1,7 @@
 export * from "./components";
 
 export * from "./constants";
-export { FormBuilder } from "./FormBuilder";
+export { FormBuilder } from "./form-builder";
 
 export * from "./hooks";
 

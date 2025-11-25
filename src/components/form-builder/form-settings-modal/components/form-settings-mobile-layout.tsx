@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { FORM_SETTINGS_SECTIONS } from "../index";
 import type { FormSettingsSection } from "../types";
-import { FormSettingsContent } from "./FormSettingsContent";
-import { SettingsSearch } from "./SettingsSearch";
+import { FormSettingsContent } from "./form-settings-content";
+import { SettingsSearch } from "./settings-search";
 
 interface FormSettingsMobileLayoutProps {
 	activeSection: FormSettingsSection;

@@ -10,7 +10,7 @@ import { useFormStyling } from "@/hooks/use-form-styling";
 import { cn } from "@/lib/utils";
 import { constantTimeCompare } from "@/lib/utils/constant-time-compare";
 import { getFormLayoutClasses } from "@/lib/utils/form-layout";
-import { PasswordProtectionModal } from "../../PasswordProtectionModal";
+import { PasswordProtectionModal } from "../../password-protection-modal";
 import { useSingleStepForm } from "../hooks/use-single-step-form";
 import type { PublicFormProps } from "../types";
 import { getAllFields } from "../utils/form-utils";

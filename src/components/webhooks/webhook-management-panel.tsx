@@ -5,10 +5,10 @@ import {
 	useWebhookManagement,
 	type WebhookConfig,
 } from "./hooks/useWebhookManagement";
-import { TestWebhookDialog } from "./TestWebhookDialog";
-import { WebhookFormModal } from "./WebhookFormModal";
-import { WebhookList } from "./WebhookList";
-import { WebhookLogDialog } from "./WebhookLogDialog";
+import { TestWebhookDialog } from "./test-webhook-dialog";
+import { WebhookFormModal } from "./webhook-form-modal";
+import { WebhookList } from "./webhook-list";
+import { WebhookLogDialog } from "./webhook-log-dialog";
 
 export function WebhookManagementPanel({ formId }: { formId?: string }) {
 	const { user } = useAuth();

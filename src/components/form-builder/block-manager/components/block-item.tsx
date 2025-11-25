@@ -8,9 +8,9 @@ import {
 } from "@/components/ui/tooltip";
 
 import type { BlockItemProps } from "../types";
-import { BlockEditForm } from "./BlockEditForm";
-import { BlockFieldsList } from "./BlockFieldsList";
-import { BlockHeader } from "./BlockHeader";
+import { BlockEditForm } from "./block-edit-form";
+import { BlockFieldsList } from "./block-fields-list";
+import { BlockHeader } from "./block-header";
 
 interface DraggableBlockItemProps extends BlockItemProps {
 	editTitle: string;

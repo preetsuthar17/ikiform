@@ -6,7 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { FIELD_TYPES } from "../constants";
 
 import type { FieldPaletteProps } from "../types";
-import { CompactFieldItem } from "./CompactFieldItem";
+import { CompactFieldItem } from "./compact-field-item";
 
 export function CompactPalette({
 	onAddField,

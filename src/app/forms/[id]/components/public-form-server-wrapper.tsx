@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { ensureDefaultRateLimitSettings } from "@/lib/forms/form-defaults";
-import PublicFormClient from "../PublicFormClient";
-import { FormSkeleton } from "./FormSkeletons";
+import PublicFormClient from "../public-form-client";
+import { FormSkeleton } from "./form-skeletons";
 
 interface PublicFormServerWrapperProps {
 	formId: string;

@@ -5,7 +5,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { WebhookManagementPanel } from "@/components/webhooks/WebhookManagementPanel";
+import { WebhookManagementPanel } from "@/components/webhooks/webhook-management-panel";
 
 export function WebhooksSettingsSection({ formId }: { formId: string }) {
 	return (

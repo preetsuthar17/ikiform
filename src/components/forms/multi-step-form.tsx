@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
-import { getLivePatternError } from "@/components/form-builder/form-field-renderer/components/TextInputField";
+import { getLivePatternError } from "@/components/form-builder/form-field-renderer/components/text-input-field";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -17,7 +17,7 @@ import { constantTimeCompare } from "@/lib/utils/constant-time-compare";
 import { getFormLayoutClasses } from "@/lib/utils/form-layout";
 import { getPublicFormTitle } from "@/lib/utils/form-utils";
 import { validateEmail } from "@/lib/validation/email-validation";
-import { PasswordProtectionModal } from "./PasswordProtectionModal";
+import { PasswordProtectionModal } from "./password-protection-modal";
 
 interface MultiStepFormProps {
 	formId: string;

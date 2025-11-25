@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import { Suspense, useEffect } from "react";
-import { CSSPropertiesProvider } from "./CSSPropertiesProvider";
-import { FormSkeleton } from "./FormSkeletons";
+import { CSSPropertiesProvider } from "./css-properties-provider";
+import { FormSkeleton } from "./form-skeletons";
 
 function hexToHsl(hex: string): string {
 	hex = hex.replace("#", "");

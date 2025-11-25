@@ -1,6 +1,6 @@
 import type React from "react";
 import type { FormField } from "@/lib/database";
-import { EmailValidationSettings } from "./EmailValidationSettings";
+import { EmailValidationSettings } from "./email-validation-settings";
 import {
 	AddressFieldSettings,
 	BannerFieldSettings,

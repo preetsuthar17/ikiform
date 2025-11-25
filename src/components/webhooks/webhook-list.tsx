@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import { Loader } from "../ui/loader";
 import type { WebhookConfig } from "./hooks/useWebhookManagement";
-import { WebhookListItem } from "./WebhookListItem";
+import { WebhookListItem } from "./webhook-list-item";
 
 interface WebhookListProps {
 	webhooks: WebhookConfig[];

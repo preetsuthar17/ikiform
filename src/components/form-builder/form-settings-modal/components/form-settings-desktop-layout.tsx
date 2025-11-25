@@ -1,7 +1,7 @@
 import { FORM_SETTINGS_SECTIONS } from "../index";
 import type { FormSettingsSection } from "../types";
-import { FormSettingsContent } from "./FormSettingsContent";
-import { SettingsSearch } from "./SettingsSearch";
+import { FormSettingsContent } from "./form-settings-content";
+import { SettingsSearch } from "./settings-search";
 
 interface FormSettingsDesktopLayoutProps {
 	activeSection: FormSettingsSection;

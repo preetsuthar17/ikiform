@@ -1,6 +1,6 @@
 "use client";
 
-import type { EmbedConfig } from "./EmbedCustomizer";
+import type { EmbedConfig } from "./embed-customizer";
 
 interface EmbedPreviewProps {
 	config: EmbedConfig;

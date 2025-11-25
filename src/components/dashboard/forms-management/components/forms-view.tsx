@@ -1,6 +1,6 @@
 import { memo } from "react";
 import type { Form } from "@/lib/database";
-import { FormsList } from "./FormsList";
+import { FormsList } from "./forms-list";
 
 interface FormsViewProps {
 	forms: Form[];

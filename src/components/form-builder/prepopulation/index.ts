@@ -1,1 +1,1 @@
-export { PrepopulationManager } from "./PrepopulationManager";
+export { PrepopulationManager } from "./prepopulation-manager";

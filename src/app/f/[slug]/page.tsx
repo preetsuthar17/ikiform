@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { formsDbServer } from "@/lib/database";
 import { ensureDefaultRateLimitSettings } from "@/lib/forms/form-defaults";
 import { getPublicFormTitle } from "@/lib/utils/form-utils";
-import PublicFormServerWrapper from "../../forms/[id]/components/PublicFormServerWrapper";
+import PublicFormServerWrapper from "../../forms/[id]/components/public-form-server-wrapper";
 
 interface PublicFormPageProps {
 	params: Promise<{ slug: string }>;

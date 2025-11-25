@@ -1,7 +1,7 @@
-export { AddressField } from "./components/AddressField";
-export { LinkInputField } from "./components/LinkInputField";
-export { PhoneInputField } from "./components/PhoneInputField";
-export { FormFieldRenderer } from "./FormFieldRenderer";
+export { AddressField } from "./components/address-field";
+export { LinkInputField } from "./components/link-input-field";
+export { PhoneInputField } from "./components/phone-input-field";
+export { FormFieldRenderer } from "./form-field-renderer";
 
 export type * from "./types";
 

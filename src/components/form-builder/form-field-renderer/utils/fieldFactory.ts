@@ -24,10 +24,10 @@ import {
 	TextInputField,
 	TimeInputField,
 } from "../components";
-import { AddressField } from "../components/AddressField";
-import { LinkInputField } from "../components/LinkInputField";
-import { PhoneInputField } from "../components/PhoneInputField";
-import { QuizField } from "../components/QuizField";
+import { AddressField } from "../components/address-field";
+import { LinkInputField } from "../components/link-input-field";
+import { PhoneInputField } from "../components/phone-input-field";
+import { QuizField } from "../components/quiz-field";
 import type { BaseFieldProps } from "../types";
 
 export function createFieldComponent(

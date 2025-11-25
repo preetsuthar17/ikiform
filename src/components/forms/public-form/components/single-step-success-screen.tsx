@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type React from "react";
-import { QuizResults } from "@/components/quiz/QuizResults";
+import { QuizResults } from "@/components/quiz/quiz-results";
 import { Card } from "@/components/ui/card";
 
 import type { FormSchema } from "@/lib/database";

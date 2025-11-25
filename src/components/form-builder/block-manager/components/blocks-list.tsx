@@ -4,7 +4,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import type { FormBlock } from "@/lib/database";
 
 import { canDeleteBlock, handleBlockReorder } from "../utils";
-import { BlockItem } from "./BlockItem";
+import { BlockItem } from "./block-item";
 
 interface BlocksListProps {
 	blocks: FormBlock[];

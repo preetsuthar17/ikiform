@@ -11,7 +11,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
-import type { EmbedConfig } from "./EmbedCustomizer";
+import type { EmbedConfig } from "./embed-customizer";
 
 interface EmbedSettingsProps {
 	config: EmbedConfig;

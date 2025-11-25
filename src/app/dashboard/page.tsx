@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import { useFormsManagement } from "@/components/dashboard/forms-management/hooks";
 
 const ProfileCard = dynamic(
-	() => import("@/components/dashboard/profile-card/ProfileCard"),
+	() => import("@/components/dashboard/profile-card/profile-card"),
 	{
 		loading: () => (
 			<div className="shadow-none">
@@ -30,7 +30,7 @@ const ProfileCard = dynamic(
 const FormsSidebar = dynamic(
 	() =>
 		import(
-			"@/components/dashboard/forms-management/components/FormsSidebar"
+			"@/components/dashboard/forms-management/components/forms-sidebar"
 		).then((mod) => ({
 			default: mod.FormsSidebar,
 		})),

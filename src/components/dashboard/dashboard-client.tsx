@@ -6,7 +6,7 @@ import { useFormsManagement } from "@/components/dashboard/forms-management/hook
 import { Skeleton } from "@/components/ui/skeleton";
 
 const ProfileCard = dynamic(
-	() => import("@/components/dashboard/profile-card/ProfileCard"),
+	() => import("@/components/dashboard/profile-card/profile-card"),
 	{
 		loading: () => (
 			<div aria-label="Loading profile" className="shadow-none" role="status">
@@ -31,7 +31,7 @@ const ProfileCard = dynamic(
 const FormsSidebar = dynamic(
 	() =>
 		import(
-			"@/components/dashboard/forms-management/components/FormsSidebar"
+			"@/components/dashboard/forms-management/components/forms-sidebar"
 		).then((mod) => ({
 			default: mod.FormsSidebar,
 		})),

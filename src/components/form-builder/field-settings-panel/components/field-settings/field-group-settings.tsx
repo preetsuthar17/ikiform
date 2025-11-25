@@ -30,7 +30,7 @@ import {
 	FIELD_CATEGORIES,
 	FIELD_TYPE_CONFIGS,
 } from "@/lib/fields/field-config";
-import { FieldSpecificSettings } from "../FieldSpecificSettings";
+import { FieldSpecificSettings } from "../field-specific-settings";
 import type { FieldSettingsProps } from "./types";
 
 export function FieldGroupSettings({

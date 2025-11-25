@@ -11,8 +11,7 @@
 		"lint": "eslint . --ext .ts,.tsx,.js,.jsx --max-warnings=0 --config eslint.config.security.js || true",
 		"format": "bunx biome format --write || true",
 		"check": "tsc --noEmit || true",
-		"polar:setup": "tsx scripts/create-polar-products.ts",
-		"prepare": "husky"
+		"polar:setup": "tsx scripts/create-polar-products.ts"
 	},
 	"dependencies": {
 		"@ai-sdk/cohere": "^2.0.19",
@@ -104,7 +103,6 @@
 		"@types/sanitize-html": "^2.16.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-prettier": "^5.5.4",
-		"husky": "^9.1.7",
 		"prettier": "^3.6.2",
 		"react-email": "5.0.5",
 		"shiki": "^3.15.0",

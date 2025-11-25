@@ -1,5 +1,8 @@
 export { FormsSidebar } from "./components";
-export { FormsManagement, FormsManagement as default } from "./FormsManagement";
+export {
+	FormsManagement,
+	FormsManagement as default,
+} from "./forms-management";
 
 export { useFormsManagement } from "./hooks";
 

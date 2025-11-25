@@ -1,3 +1,3 @@
-export { ProfileCardLoading } from "./ProfileCardLoading";
-export { ProfileInfo } from "./ProfileInfo";
-export { UserAvatar } from "./UserAvatar";
+export { ProfileCardLoading } from "./profile-card-loading";
+export { ProfileInfo } from "./profile-info";
+export { UserAvatar } from "./user-avatar";

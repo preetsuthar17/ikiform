@@ -4,9 +4,9 @@ import "./globals.css";
 
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
-import { BotIdClientWrapper } from "@/components/other/BotIdClient";
+import { BotIdClientWrapper } from "@/components/other/bot-id-client";
 import { LightThemeEnforcer } from "@/components/other/light-theme-enforcer";
-import { TicketpingController } from "@/components/other/TicketPingController";
+import { TicketpingController } from "@/components/other/ticket-ping-controller";
 import { Toaster } from "@/components/ui/toast";
 
 import ConditionalLayout from "./conditional-layout";

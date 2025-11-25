@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { formsDbServer } from "@/lib/database";
-import EmbedCustomizer from "./components/EmbedCustomizer";
+import EmbedCustomizer from "./components/embed-customizer";
 
 interface EmbedPageProps {
 	searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

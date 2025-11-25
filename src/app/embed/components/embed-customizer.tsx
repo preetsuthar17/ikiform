@@ -9,9 +9,9 @@ import {
 	getInternalFormTitle,
 	getPublicFormTitle,
 } from "@/lib/utils/form-utils";
-import EmbedCodeModal from "./EmbedCodeModal";
-import EmbedPreview from "./EmbedPreview";
-import EmbedSettings from "./EmbedSettings";
+import EmbedCodeModal from "./embed-code-modal";
+import EmbedPreview from "./embed-preview";
+import EmbedSettings from "./embed-settings";
 
 export interface EmbedConfig {
 	width: string;

@@ -1,5 +1,5 @@
 import type { BlockFieldsListProps } from "../types";
-import { FieldItem } from "./FieldItem";
+import { FieldItem } from "./field-item";
 
 export function BlockFieldsList({
 	fields,

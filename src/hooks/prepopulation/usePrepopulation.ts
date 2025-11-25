@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { FormField } from "@/lib/database";
-import { ApiEngine } from "@/lib/prepopulation/engines/ApiEngine";
-import { UrlEngine } from "@/lib/prepopulation/engines/UrlEngine";
+import { ApiEngine } from "@/lib/prepopulation/engines/api-engine";
+import { UrlEngine } from "@/lib/prepopulation/engines/url-engine";
 import type { PrepopulationResult } from "@/lib/prepopulation/types";
 
 interface PrepopulationData {

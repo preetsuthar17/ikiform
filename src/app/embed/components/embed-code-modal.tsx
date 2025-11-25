@@ -11,7 +11,7 @@ import {
 	ModalHeader,
 	ModalTitle,
 } from "@/components/ui/modal";
-import type { EmbedConfig } from "./EmbedCustomizer";
+import type { EmbedConfig } from "./embed-customizer";
 
 interface EmbedCodeModalProps {
 	isOpen: boolean;

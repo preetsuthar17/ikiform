@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from "react";
 import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
-import { QuizProgress } from "@/components/quiz/QuizProgress";
-import { QuizResults } from "@/components/quiz/QuizResults";
-import { QuizScoreDisplay } from "@/components/quiz/QuizScoreDisplay";
+import { QuizProgress } from "@/components/quiz/quiz-progress";
+import { QuizResults } from "@/components/quiz/quiz-results";
+import { QuizScoreDisplay } from "@/components/quiz/quiz-score-display";
 import { useQuizState } from "@/hooks/quiz/use-quiz-state";
 import type { FormField, FormSchema } from "@/lib/database";
 

@@ -1,4 +1,4 @@
-export { BlockManager } from "./BlockManager";
+export { BlockManager } from "./block-manager";
 
 export type { BlockManagerProps } from "./types";
 

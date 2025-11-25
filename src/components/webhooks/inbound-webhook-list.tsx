@@ -7,7 +7,7 @@ import {
 	type InboundWebhookMapping,
 	useInboundWebhookManagement,
 } from "./hooks/useInboundWebhookManagement";
-import { InboundWebhookFormModal } from "./InboundWebhookFormModal";
+import { InboundWebhookFormModal } from "./inbound-webhook-form-modal";
 
 function InboundWebhookDocsDrawer({
 	mapping,

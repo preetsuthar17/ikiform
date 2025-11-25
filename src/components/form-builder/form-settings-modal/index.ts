@@ -27,7 +27,7 @@ export {
 	ResponseLimitSection,
 	WebhooksSettingsSection,
 } from "./components";
-export { FormSettingsModal } from "./FormSettingsModal";
+export { FormSettingsModal } from "./form-settings-modal";
 export { useFormSettings } from "./hooks";
 export { ApiSection } from "./sections/api-section";
 

@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
 const PublicFormContent = dynamic(
-	() => import("./components/PublicFormContent"),
+	() => import("./components/public-form-content"),
 	{
 		ssr: false,
 		loading: () => <></>,

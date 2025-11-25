@@ -1,6 +1,6 @@
-export { EditableField } from "./EditableField";
-export { FormActions } from "./FormActions";
-export { FormFieldsContainer } from "./FormFieldsContainer";
-export { FormHeader } from "./FormHeader";
-export { MultiStepNavigation } from "./MultiStepNavigation";
-export { StepHeader } from "./StepHeader";
+export { EditableField } from "./editable-field";
+export { FormActions } from "./form-actions";
+export { FormFieldsContainer } from "./form-fields-container";
+export { FormHeader } from "./form-header";
+export { MultiStepNavigation } from "./multi-step-navigation";
+export { StepHeader } from "./step-header";

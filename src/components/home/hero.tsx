@@ -4,7 +4,7 @@ import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import React, { type CSSProperties, useState } from "react";
-import DemoFormBuilder from "@/components/form-builder/form-builder/DemoFormBuilder";
+import DemoFormBuilder from "@/components/form-builder/form-builder/demo-form-builder";
 import { Badge, Card } from "../ui";
 import { Button } from "../ui/button";
 import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";

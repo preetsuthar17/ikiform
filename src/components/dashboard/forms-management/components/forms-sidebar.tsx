@@ -1,6 +1,6 @@
 import { memo } from "react";
 import type { FormsSidebarProps } from "../types";
-import { FormStats } from "./FormStats";
+import { FormStats } from "./form-stats";
 
 export const FormsSidebar = memo(function FormsSidebar({
 	forms,

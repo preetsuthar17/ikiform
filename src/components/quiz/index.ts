@@ -1,6 +1,6 @@
-export { MultiStepQuizProgress } from "./MultiStepQuizProgress";
-export { QuizAnalytics } from "./QuizAnalytics";
-export { QuizFormRenderer } from "./QuizFormRenderer";
-export { QuizProgress } from "./QuizProgress";
-export { QuizResults } from "./QuizResults";
-export { QuizScoreDisplay } from "./QuizScoreDisplay";
+export { MultiStepQuizProgress } from "./multi-step-quiz-progress";
+export { QuizAnalytics } from "./quiz-analytics";
+export { QuizFormRenderer } from "./quiz-form-renderer";
+export { QuizProgress } from "./quiz-progress";
+export { QuizResults } from "./quiz-results";
+export { QuizScoreDisplay } from "./quiz-score-display";

@@ -6,7 +6,7 @@ export {
 	MultiStepNavigation,
 	StepHeader,
 } from "./components";
-export { FormPreview } from "./FormPreview";
+export { FormPreview } from "./form-preview";
 
 export { useEditableField, useFormPreviewState } from "./hooks";
 

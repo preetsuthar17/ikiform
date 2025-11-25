@@ -14,8 +14,8 @@ import {
 import { PALETTE_CONFIG } from "../constants";
 
 import type { FieldPaletteProps } from "../types";
-import { FieldItem } from "./FieldItem";
-import { PaletteHeader } from "./PaletteHeader";
+import { FieldItem } from "./field-item";
+import { PaletteHeader } from "./palette-header";
 
 export function FullPalette({
 	onAddField,

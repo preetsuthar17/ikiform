@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type React from "react";
-import { getLivePatternError } from "@/components/form-builder/form-field-renderer/components/TextInputField";
+import { getLivePatternError } from "@/components/form-builder/form-field-renderer/components/text-input-field";
 
 import { Button } from "@/components/ui/button";
 import { useFormStyling } from "@/hooks/use-form-styling";

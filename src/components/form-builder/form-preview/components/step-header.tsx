@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 
 import type { StepHeaderProps } from "../types";
 
-import { EditableField } from "./EditableField";
+import { EditableField } from "./editable-field";
 
 export function StepHeader({
 	currentStep,
