@@ -190,8 +190,7 @@ export default function PricingClient({ products }: PricingClientProps) {
 								<span
 									className="font-semibold text-4xl tracking-tighter"
 									style={{
-										background:
-											"linear-gradient(90deg, red, #ff3cac)",
+										background: "linear-gradient(90deg, red, #ff3cac)",
 										backgroundClip: "text",
 										WebkitBackgroundClip: "text",
 										color: "transparent",
@@ -225,7 +224,7 @@ export default function PricingClient({ products }: PricingClientProps) {
 										</button>
 									</TooltipTrigger>
 									<TooltipContent side="top">
-										<p>Use code BLACKFRIDAY49 to get 49% off</p>
+										<p>Use code BLACKFRIDAY to get 49% off</p>
 									</TooltipContent>
 								</Tooltip>
 							</>

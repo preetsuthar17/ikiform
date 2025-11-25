@@ -5,7 +5,7 @@ export default function BlackFridayBanner() {
 		<div className="w-full bg-orange-600 py-2.5 text-center text-sm font-semibold text-white">
 			<p className="mx-auto">
 				🎉 BLACK FRIDAY DEAL - 49% OFF! Use code{" "}
-				<span className="font-bold">BLACKFRIDAY49</span>
+				<span className="font-bold">BLACKFRIDAY</span>
 			</p>
 		</div>
 	);

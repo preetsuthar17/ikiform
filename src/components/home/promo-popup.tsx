@@ -85,7 +85,7 @@ export default function PromoPopup() {
 								<p className="text-xs">
 									Use code{" "}
 									<span className="rounded bg-accent px-1 font-mono">
-										BLACKFRIDAY49
+										BLACKFRIDAY
 									</span>{" "}
 									for 49% off on lifetime access
 								</p>
