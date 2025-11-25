@@ -14,6 +14,7 @@ export const PRIMARY_LINKS: NavLink[] = [
 	{ href: "/#features", label: "Features" },
 	{ href: "/feedback", label: "Feedback" },
 	{ href: "/#pricing", label: "Pricing" },
+	{ href: "/changelog", label: "Changelog" },
 ];
 
 const AppLogo = React.memo(function AppLogo() {

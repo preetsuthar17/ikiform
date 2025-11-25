@@ -2,9 +2,9 @@ import { format } from "date-fns";
 import ReactMarkdown from "react-markdown";
 import rehypeSanitize from "rehype-sanitize";
 import remarkGfm from "remark-gfm";
+import { Badge } from "@/components/ui";
 import { Separator } from "@/components/ui/separator";
 import { getChangelogEntries } from "@/lib/utils/changelog";
-import { Badge } from "@/components/ui";
 
 function formatChangelogDate(dateString: string): string {
 	try {

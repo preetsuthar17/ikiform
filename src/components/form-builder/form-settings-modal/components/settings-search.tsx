@@ -10,6 +10,45 @@ import {
 	type SettingsSearchItem,
 } from "./settings-search-index";
 
+function highlightText(text: string, query: string) {
+	if (!query.trim()) return text;
+
+	const queryLower = query.toLowerCase();
+	const textLower = text.toLowerCase();
+	const parts: Array<{ text: string; highlight: boolean }> = [];
+	let lastIndex = 0;
+	let index = textLower.indexOf(queryLower, lastIndex);
+
+	while (index !== -1) {
+		if (index > lastIndex) {
+			parts.push({ text: text.slice(lastIndex, index), highlight: false });
+		}
+		parts.push({
+			text: text.slice(index, index + query.length),
+			highlight: true,
+		});
+		lastIndex = index + query.length;
+		index = textLower.indexOf(queryLower, lastIndex);
+	}
+
+	if (lastIndex < text.length) {
+		parts.push({ text: text.slice(lastIndex), highlight: false });
+	}
+
+	return parts.map((part, idx) =>
+		part.highlight ? (
+			<mark
+				key={idx}
+				className="bg-yellow-200 dark:bg-yellow-900/50 font-medium"
+			>
+				{part.text}
+			</mark>
+		) : (
+			part.text
+		),
+	);
+}
+
 export function SettingsSearch({
 	activeSection,
 	onSectionChange,
@@ -161,7 +200,7 @@ export function SettingsSearch({
 												<span className="text-muted-foreground">
 													{sectionLabel(r.section)} /{" "}
 												</span>
-												{r.label}
+												{highlightText(r.label, query)}
 											</span>
 										</button>
 									</li>
