@@ -21,6 +21,11 @@ const faqs = [
 			"Ikiform is an open-source alternative to Google Forms. It helps you create beautiful, interactive forms easily.",
 	},
 	{
+		question: "Is there a free trial?",
+		answer:
+			"Yes, there is a 14-day free trial without any credit card required. You can cancel anytime.",
+	},
+	{
 		question: "Why use Ikiform instead of google form or typeform?",
 		answer:
 			"Ikiform is open source and gives you full control over your data and branding. There are no hidden costs, and you can self-host for extra privacy and flexibility.",
