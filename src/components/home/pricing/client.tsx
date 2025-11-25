@@ -204,7 +204,9 @@ export default function PricingClient({ products }: PricingClientProps) {
 										</button>
 									</TooltipTrigger>
 									<TooltipContent side="top">
-										<p>Use code <b>BLACKFRIDAY</b> to get 49% off</p>
+										<p>
+											Use code <b>BLACKFRIDAY</b> to get 49% off
+										</p>
 									</TooltipContent>
 								</Tooltip>
 							</>
