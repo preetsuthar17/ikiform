@@ -251,7 +251,7 @@ const ProductsLinks = React.memo(function ProductsLinks() {
 				<li>
 					<Link
 						className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-						href="https://pro.hextaui.com?ref=ikiform"
+						href="https://hextaui.com/blocks?ref=ikiform"
 						rel="noopener noreferrer"
 						target="_blank"
 					>
