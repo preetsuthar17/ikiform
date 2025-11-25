@@ -7,7 +7,18 @@ import NewLoginEmail from "../../../emails/templates/new-login";
 import PremiumThanksEmail from "../../../emails/templates/premium-thanks";
 import WelcomeEmail from "../../../emails/templates/welcome";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+let resendInstance: Resend | null = null;
+
+function getResend() {
+	if (!resendInstance) {
+		const apiKey = process.env.RESEND_API_KEY;
+		if (!apiKey) {
+			throw new Error("Resend API key not configured");
+		}
+		resendInstance = new Resend(apiKey);
+	}
+	return resendInstance;
+}
 
 export interface NotificationLink {
 	label: string;
@@ -65,7 +76,7 @@ export async function sendFormNotification({
 			secondaryCtas: secondary,
 		});
 		const html = await render(email, { pretty: true });
-		const result = await resend.emails.send({
+		const result = await getResend().emails.send({
 			from: from || "Ikiform <no-reply@ikiform.com>",
 			to,
 			subject,
@@ -88,7 +99,7 @@ export async function sendWelcomeEmail({
 	const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.ikiform.com"}/dashboard`;
 	const email = React.createElement(WelcomeEmail, { name, dashboardUrl });
 	const html = await render(email, { pretty: true });
-	return resend.emails.send({
+	return getResend().emails.send({
 		from: "Ikiform <no-reply@ikiform.com>",
 		to,
 		subject: "Welcome to Ikiform! 🎉",
@@ -107,7 +118,7 @@ export async function sendNewLoginEmail({
 	const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.ikiform.com"}/dashboard`;
 	const email = React.createElement(NewLoginEmail, { name, dashboardUrl });
 	const html = await render(email, { pretty: true });
-	return resend.emails.send({
+	return getResend().emails.send({
 		from: "Ikiform <no-reply@ikiform.com>",
 		to,
 		subject: "New Login to Your Ikiform Account",
@@ -127,7 +138,7 @@ export async function sendPremiumThankYouEmail({
 	const dashboardUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.ikiform.com"}/dashboard`;
 	const email = React.createElement(PremiumThanksEmail, { name, dashboardUrl });
 	const html = await render(email, { pretty: true });
-	return resend.emails.send({
+	return getResend().emails.send({
 		from: "Ikiform <no-reply@ikiform.com>",
 		to,
 		subject: "Thank you for your purchase! 🎉",

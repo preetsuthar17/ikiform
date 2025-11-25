@@ -4,11 +4,11 @@ import "./globals.css";
 
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 import { BotIdClientWrapper } from "@/components/other/integrations/bot-id-client";
 import { TicketpingController } from "@/components/other/integrations/ticket-ping-controller";
 import { LightThemeEnforcer } from "@/components/other/utils/light-theme-enforcer";
 import { Toaster } from "@/components/ui/toast";
-
 import ConditionalLayout from "./conditional-layout";
 
 const geist = Geist({
@@ -16,7 +16,6 @@ const geist = Geist({
 	weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 	subsets: ["latin"],
 });
-
 const geistMono = Geist_Mono({
 	variable: "--font-mono",
 	weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -130,6 +129,21 @@ export default function RootLayout({
             `,
 					}}
 				/>
+				{process.env.NODE_ENV === "development" && (
+					<script
+						crossOrigin="anonymous"
+						defer
+						src="//unpkg.com/react-scan/dist/auto.global.js"
+					/>
+				)}
+				{process.env.NODE_ENV === "development" && (
+					<Script
+						src="//unpkg.com/react-grab/dist/index.global.js"
+						crossOrigin="anonymous"
+						strategy="beforeInteractive"
+						data-enabled="true"
+					/>
+				)}
 			</head>
 			<TicketpingController />
 			<body
