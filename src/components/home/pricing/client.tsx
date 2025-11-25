@@ -229,7 +229,7 @@ export default function PricingClient({ products }: PricingClientProps) {
 								</Tooltip>
 							</>
 						) : (
-							<span className="font-semibold text-xl text-foreground tracking-tighter">
+							<span className="font-semibold text-3xl text-foreground tracking-tighter">
 								{plan.price}
 							</span>
 						)}
