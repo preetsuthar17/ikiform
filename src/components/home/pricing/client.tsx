@@ -6,6 +6,7 @@ import {
 	Code2,
 	Database,
 	Gauge,
+	HelpCircle,
 	Infinity,
 	ListChecks,
 	ShieldBan,
@@ -15,6 +16,11 @@ import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui";
 import { Button } from "@/components/ui/button";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useAuth } from "@/hooks/use-auth";
 import { usePremiumStatus } from "@/hooks/use-premium-status";
 
@@ -135,7 +141,7 @@ export default function PricingClient({ products }: PricingClientProps) {
 					<li className="flex items-center gap-3" key={label}>
 						<Icon
 							aria-hidden="true"
-							className="size-4 flex-shrink-0 text-primary opacity-80"
+							className="size-4 shrink-0 text-primary opacity-80"
 							focusable="false"
 						/>
 						<span className="text-foreground text-sm opacity-80">{label}</span>
@@ -156,7 +162,7 @@ export default function PricingClient({ products }: PricingClientProps) {
 	}) {
 		return (
 			<article
-				className={`${plan.popular ? "bg-card" : "bg-transparent"} border p-6 md:p-8 ${isEdgeLeft ? "border-l-0" : ""} ${isEdgeRight ? "border-r-1" : "border-r-0"}`}
+				className={`${plan.popular ? "bg-card" : "bg-transparent"} border p-6 md:p-8 ${isEdgeLeft ? "border-l-0" : ""} ${isEdgeRight ? "border-r" : "border-r-0"}`}
 				key={plan.key}
 			>
 				<header className="mb-6 flex items-center justify-between">
@@ -174,13 +180,64 @@ export default function PricingClient({ products }: PricingClientProps) {
 						</Badge>
 					) : null}
 				</header>
-				<div className="mb-6 flex items-baseline gap-2">
-					<span className="font-semibold text-3xl text-foreground tracking-tighter">
-						{plan.price}
-					</span>
-					{plan.period ? (
-						<span className="text-muted-foreground">{plan.period}</span>
-					) : null}
+				<div className="mb-6 flex flex-col gap-2">
+					<div className="flex items-baseline gap-2">
+						{plan.key === "lifetime" ? (
+							<>
+								<span className="font-semibold text-xl text-foreground tracking-tighter line-through opacity-50">
+									{plan.price}
+								</span>
+								<span
+									className="font-semibold text-4xl tracking-tighter"
+									style={{
+										background:
+											"linear-gradient(90deg, red, #ff3cac)",
+										backgroundClip: "text",
+										WebkitBackgroundClip: "text",
+										color: "transparent",
+										WebkitTextFillColor: "transparent",
+										animation: "blue-purple-morph 5s linear infinite",
+									}}
+								>
+									$50
+								</span>
+								<style jsx>{`
+									@keyframes blue-purple-morph {
+										0% {
+											filter: hue-rotate(0deg);
+										}
+										100% {
+											filter: hue-rotate(360deg);
+										}
+									}
+								`}</style>
+								<Tooltip>
+									<TooltipTrigger asChild>
+										<button
+											aria-label="Discount code information"
+											className="flex items-center cursor-help"
+											type="button"
+										>
+											<HelpCircle
+												aria-hidden="true"
+												className="size-4 text-muted-foreground transition-colors hover:text-foreground"
+											/>
+										</button>
+									</TooltipTrigger>
+									<TooltipContent side="top">
+										<p>Use code BLACKFRIDAY49 to get 49% off</p>
+									</TooltipContent>
+								</Tooltip>
+							</>
+						) : (
+							<span className="font-semibold text-xl text-foreground tracking-tighter">
+								{plan.price}
+							</span>
+						)}
+						{plan.period ? (
+							<span className="text-muted-foreground">{plan.period}</span>
+						) : null}
+					</div>
 				</div>
 				<PlanFeatures features={plan.features} />
 				<div className="flex flex-col gap-2">
