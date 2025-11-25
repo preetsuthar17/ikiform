@@ -130,12 +130,6 @@ export default function RootLayout({
             `,
 					}}
 				/>
-				<script
-					data-domain="www.ikiform.com"
-					data-website-id="68cd41ffc45ae8919cf0f95a"
-					defer
-					src="https://datafa.st/js/script.js"
-				/>
 			</head>
 			<TicketpingController />
 			<body
