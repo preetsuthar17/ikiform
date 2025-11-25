@@ -6,6 +6,7 @@ import {
 	Code2,
 	Database,
 	Gauge,
+	HelpCircle,
 	Infinity,
 	ListChecks,
 	ShieldBan,
@@ -15,6 +16,11 @@ import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui";
 import { Button } from "@/components/ui/button";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useAuth } from "@/hooks/use-auth";
 import { usePremiumStatus } from "@/hooks/use-premium-status";
 
@@ -176,9 +182,37 @@ export default function PricingClient({ products }: PricingClientProps) {
 				</header>
 				<div className="mb-6 flex flex-col gap-2">
 					<div className="flex items-baseline gap-2">
-						<span className="font-semibold text-3xl text-foreground tracking-tighter">
-							{plan.price}
-						</span>
+						{plan.key === "lifetime" ? (
+							<>
+								<span className="font-semibold text-xl text-foreground tracking-tighter line-through opacity-50">
+									{plan.price}
+								</span>
+								<span className="font-semibold text-4xl tracking-tighter">
+									$50
+								</span>
+								<Tooltip>
+									<TooltipTrigger asChild>
+										<button
+											aria-label="Discount code information"
+											className="flex items-center cursor-help"
+											type="button"
+										>
+											<HelpCircle
+												aria-hidden="true"
+												className="size-4 text-muted-foreground transition-colors hover:text-foreground"
+											/>
+										</button>
+									</TooltipTrigger>
+									<TooltipContent side="top">
+										<p>Use code BLACKFRIDAY to get 49% off</p>
+									</TooltipContent>
+								</Tooltip>
+							</>
+						) : (
+							<span className="font-semibold text-3xl text-foreground tracking-tighter">
+								{plan.price}
+							</span>
+						)}
 						{plan.period ? (
 							<span className="text-muted-foreground">{plan.period}</span>
 						) : null}
