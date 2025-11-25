@@ -141,7 +141,7 @@ export function TrialBannerWrapper({ className }: TrialBannerWrapperProps) {
 			ref={bannerRef}
 			role="banner"
 		>
-			<div className="mx-auto flex max-w-screen-xl items-center justify-center">
+			<div className="mx-auto flex max-w-7xl items-center justify-center">
 				<div className="flex items-center gap-2 text-white">
 					<span className="font-medium text-sm">
 						<span className="hidden sm:inline">Your free trial ends in </span>

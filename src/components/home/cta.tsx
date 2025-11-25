@@ -14,7 +14,7 @@ const CtaHeading = React.memo(function CtaHeading() {
 				className="text-center font-semibold text-4xl leading-tighter tracking-[-2px] md:text-5xl"
 				id="cta-title"
 			>
-				Start Collecting Responses in No Time.
+				Create Your First Form in No Time.
 			</h2>
 			<p className="text-center text-base text-muted-foreground md:text-lg">
 				Get started with Ikiform to build forms, surveys, collect responses, and
@@ -54,7 +54,7 @@ function PrimaryActions({ user }: { user: unknown }) {
 						className="flex h-11 w-full items-center gap-2 font-medium md:w-62"
 						href="/login"
 					>
-						<span>Start Collecting Responses</span>{" "}
+						<span>Create Your First Form</span>{" "}
 						<ChevronRight aria-hidden="true" />
 					</Link>
 				</Button>

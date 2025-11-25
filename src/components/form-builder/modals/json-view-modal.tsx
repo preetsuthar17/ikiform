@@ -337,7 +337,7 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
 							</div>
 						) : (
 							<div
-								className="[&_pre]:!bg-transparent [&_pre]:!p-0 h-full p-4 font-mono text-sm"
+								className="[&_pre]:bg-transparent! [&_pre]:p-0! h-full p-4 font-mono text-sm"
 								dangerouslySetInnerHTML={{ __html: highlightedCode }}
 							/>
 						)}

@@ -54,7 +54,7 @@ export const EmptyState = memo(function EmptyState({
 				<Dialog>
 					<DialogTrigger asChild>
 						<Button
-							aria-label="Create your first form"
+							aria-label="Create Your First Form"
 							className="flex h-10 w-full items-center gap-2 whitespace-nowrap font-medium"
 							onClick={onCreateForm}
 						>
