@@ -170,6 +170,32 @@
 	body {
 		@apply bg-background text-foreground font-sans;
 	}
+
+	.prose {
+		@apply flex flex-col gap-6;
+
+		h1 {
+			@apply text-3xl md:text-4xl;
+		}
+
+		h2 {
+			@apply text-xl md:text-2xl;
+		}
+
+		p {
+			@apply leading-relaxed;
+		}
+
+		ul {
+			@apply flex flex-col gap-2 list-disc;
+			list-style-type: disc;
+		}
+
+		ol {
+			@apply flex flex-col gap-2 list-decimal;
+			list-style-type: decimal;
+		}
+	}
 }
 
 .toast {
@@ -183,20 +209,6 @@
 		font-weight: 500;
 		text-align: center;
 	}
-}
-
-.line-clamp-2 {
-	display: -webkit-box;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-}
-
-.line-clamp-3 {
-	display: -webkit-box;
-	-webkit-line-clamp: 3;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
 }
 
 .custom-scrollbar {
@@ -244,34 +256,6 @@
 		hsl(var(--accent)) 0%,
 		hsl(var(--muted)) 100%
 	);
-}
-
-.button-loading {
-	position: relative;
-	pointer-events: none;
-}
-
-.button-loading::after {
-	content: "";
-	position: absolute;
-	inset: 0;
-	background: inherit;
-	border-radius: inherit;
-	opacity: 0.7;
-}
-
-.button-loading::before {
-	content: "";
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 16px;
-	height: 16px;
-	margin: -8px 0 0 -8px;
-	border: 2px solid transparent;
-	border-top-color: currentColor;
-	border-radius: 50%;
-	animation: spin 1s linear infinite;
 }
 
 @keyframes spin {

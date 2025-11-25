@@ -191,11 +191,11 @@ function AvatarGroup() {
 	if (isLoading) {
 		return (
 			<div className="flex items-center justify-center gap-3">
-				<div className="flex -space-x-2">
+				<div className="flex gap-2">
 					{Array.from({ length: 4 }).map((_, i) => (
 						<div
 							key={i}
-							className="size-9 animate-pulse rounded-full bg-muted border-2 border-background"
+							className={`size-9 animate-pulse rounded-full bg-muted border-2 border-background ${i > 0 ? "-ml-2" : ""}`}
 							aria-hidden="true"
 						/>
 					))}
@@ -244,7 +244,7 @@ function AvatarGroup() {
 
 	return (
 		<div className="flex items-center justify-center flex-wrap gap-3">
-			<div className="flex -space-x-2" role="group" aria-label="User avatars">
+			<div className="flex gap-2" role="group" aria-label="User avatars">
 				{Array.from({ length: avatarCount }).map((_, index) => {
 					const avatarUrl = getAvatarUrl(index);
 					const user = hasUsers ? displayUsers[index] : null;
@@ -253,7 +253,7 @@ function AvatarGroup() {
 					return (
 						<Avatar
 							key={user ? `${user.email}-${index}` : `avatar-${index}`}
-							className="size-9 border-2 border-background"
+							className={`size-9 border-2 border-background ${index > 0 ? "-ml-2" : ""}`}
 							aria-label={user ? `${displayName}'s avatar` : undefined}
 							aria-hidden={!user}
 						>
