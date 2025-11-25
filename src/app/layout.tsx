@@ -25,7 +25,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
 	title: {
 		default: "Build forms, collect responses & analyze data effortlessly.",
-		template: "Ikiform: %s",
+		template: "%s — Ikiform",
 	},
 	description:
 		"Create beautiful forms with Ikiform - Build forms, collect responses & analyze data effortlessly.",

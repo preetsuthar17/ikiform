@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
 	title: {
 		default: "GDPR Policy",
-		template: "Ikiform: %s",
+		template: "%s — Ikiform",
 	},
 	description:
 		"Read the GDPR compliance policy for Ikiform. Learn how we protect your data, comply with EU regulations, and support your privacy rights.",

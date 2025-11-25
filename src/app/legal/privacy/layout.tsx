@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
 	title: {
 		default: "Privacy Policy",
-		template: "Ikiform: %s",
+		template: "%s — Ikiform",
 	},
 	description:
 		"Read the Privacy Policy for Ikiform. Learn how we collect, use, and protect your personal data when you use our form builder services.",
