@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 		description: "Details about the changes and updates to Ikiform.",
 		images: [
 			{
-				url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+				url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignOErY1N73hGHszJIFRNPxawkKCWq8UEn5be0f",
 				width: 1200,
 				height: 630,
 				alt: "Ikiform",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
 		title: "Ikiform",
 		description: "Details about the changes and updates to Ikiform.",
 		images: [
-			"https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+			"https://av5on64jc4.ufs.sh/f/jYAIyA6pXignOErY1N73hGHszJIFRNPxawkKCWq8UEn5be0f",
 		],
 	},
 	robots: {

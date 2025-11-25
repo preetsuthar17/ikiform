@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 			"Read the Data Processing Agreement (DPA) for Ikiform. Understand how we process and protect your data as part of our form builder services.",
 		images: [
 			{
-				url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+				url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignvHTImO0riILXEhq6B0JvATokfZO52GH7F1C4",
 				width: 1200,
 				height: 630,
 				alt: "Ikiform DPA",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 		description:
 			"Read the Data Processing Agreement (DPA) for Ikiform. Understand how we process and protect your data as part of our form builder services.",
 		images: [
-			"https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+			"https://av5on64jc4.ufs.sh/f/jYAIyA6pXignvHTImO0riILXEhq6B0JvATokfZO52GH7F1C4",
 		],
 	},
 	robots: {

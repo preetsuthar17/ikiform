@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 			"Manage your forms and responses in the Ikiform dashboard. Analyze data and streamline your workflow with our open-source form builder.",
 		images: [
 			{
-				url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+				url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignXLo3C0Y9Qowsp7KUqeRL5mnCNlb0zEZuj1F8",
 				width: 1200,
 				height: 630,
 				alt: "Ikiform Dashboard",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 		description:
 			"Access your Ikiform dashboard to manage forms, view responses, and analyze your data.",
 		images: [
-			"https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+			"https://av5on64jc4.ufs.sh/f/jYAIyA6pXignXLo3C0Y9Qowsp7KUqeRL5mnCNlb0zEZuj1F8",
 		],
 	},
 	robots: {

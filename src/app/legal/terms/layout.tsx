@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 			"Read the Terms of Service for Ikiform. Understand your rights and responsibilities when using our form builder platform.",
 		images: [
 			{
-				url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+				url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXign8rwg0dJ6jYoGBhnl8JANmxMVgaFScK4p9XOZ",
 				width: 1200,
 				height: 630,
 				alt: "Ikiform Terms of Service",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 		description:
 			"Read the Terms of Service for Ikiform. Understand your rights and responsibilities when using our form builder platform.",
 		images: [
-			"https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+			"https://av5on64jc4.ufs.sh/f/jYAIyA6pXign8rwg0dJ6jYoGBhnl8JANmxMVgaFScK4p9XOZ",
 		],
 	},
 	robots: {

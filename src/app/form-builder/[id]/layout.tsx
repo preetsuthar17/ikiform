@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 			"Design and edit your forms with Ikiform's powerful Form Editor. Drag-and-drop fields, customize layouts, and streamline your form creation process.",
 		images: [
 			{
-				url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+				url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignXLo3C0Y9Qowsp7KUqeRL5mnCNlb0zEZuj1F8",
 				width: 1200,
 				height: 630,
 				alt: "Ikiform Form Editor",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 		description:
 			"Build and edit forms effortlessly with Ikiform's open-source Form Editor. Customize fields, layouts, and more.",
 		images: [
-			"https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+			"https://av5on64jc4.ufs.sh/f/jYAIyA6pXignXLo3C0Y9Qowsp7KUqeRL5mnCNlb0zEZuj1F8",
 		],
 	},
 	robots: {

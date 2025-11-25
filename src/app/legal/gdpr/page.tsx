@@ -220,12 +220,12 @@ export default function GDPR() {
 								</td>
 							</tr>
 							<tr className="border-t">
-								<td className="px-4 py-2">Crisp</td>
+								<td className="px-4 py-2">Ticket Ping</td>
 								<td className="px-4 py-2">Customer Support</td>
 								<td className="px-4 py-2">
 									<Link
 										className="text-blue-500 underline"
-										href="http://crisp.chat/"
+										href="https://ticketping.com/"
 										target="_blank"
 									>
 										http:

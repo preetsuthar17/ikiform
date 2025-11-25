@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 			"Test and explore Ikiform's Demo Form Builder. Drag-and-drop fields, customize layouts, and see your changes in real time.",
 		images: [
 			{
-				url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+				url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignXLo3C0Y9Qowsp7KUqeRL5mnCNlb0zEZuj1F8",
 				width: 1200,
 				height: 630,
 				alt: "Ikiform Demo Form Builder",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 		description:
 			"Experiment with Ikiform's Demo Form Builder. Build and customize forms instantly in a live demo.",
 		images: [
-			"https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+			"https://av5on64jc4.ufs.sh/f/jYAIyA6pXignXLo3C0Y9Qowsp7KUqeRL5mnCNlb0zEZuj1F8",
 		],
 	},
 	robots: {

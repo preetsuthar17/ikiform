@@ -51,7 +51,7 @@ export const metadata: Metadata = {
 		description: "Build forms, collect responses & analyze data effortlessly.",
 		images: [
 			{
-				url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+				url: "https://av5on64jc4.ufs.sh/f/jYAIyA6pXignXLo3C0Y9Qowsp7KUqeRL5mnCNlb0zEZuj1F8",
 				width: 1200,
 				height: 630,
 				alt: "Ikiform",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
 		title: "Ikiform",
 		description: "Build forms, collect responses & analyze data effortlessly.",
 		images: [
-			"https://av5on64jc4.ufs.sh/f/jYAIyA6pXigns6CclqBuCRZ4q0fNIjAHEtS8p6bOXBvLzrKa",
+			"https://av5on64jc4.ufs.sh/f/jYAIyA6pXignXLo3C0Y9Qowsp7KUqeRL5mnCNlb0zEZuj1F8",
 		],
 	},
 	robots: {
