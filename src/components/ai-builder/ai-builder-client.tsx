@@ -18,9 +18,9 @@ import { useAuth } from "@/hooks/use-auth";
 import { usePremiumStatus } from "@/hooks/use-premium-status";
 import { CHAT_SUGGESTIONS } from "@/lib/ai-builder/constants";
 import { ChatPanel } from "./chat/chat-panel";
-import { JsonModalWrapper } from "./json-modal-wrapper";
-import { MobileChatDrawerWrapper } from "./mobile-chat-drawer-wrapper";
-import { PremiumGuardOptimized } from "./premium-guard-optimized";
+import { MobileChatDrawerWrapper } from "./drawer/mobile-chat-drawer-wrapper";
+import { PremiumGuard } from "./guards/premium-guard";
+import { JsonModalWrapper } from "./modals/json-modal-wrapper";
 import { PreviewPanel } from "./preview/preview-panel";
 
 export function AIBuilderClient() {
@@ -123,7 +123,8 @@ export function AIBuilderClient() {
 	);
 
 	return (
-		<PremiumGuardOptimized
+		<PremiumGuard
+			useSkeleton
 			authLoading={authLoading}
 			checking={checking}
 			hasPremium={hasPremium}
@@ -212,6 +213,6 @@ export function AIBuilderClient() {
 					onClose={() => setShowJsonModal(false)}
 				/>
 			</div>
-		</PremiumGuardOptimized>
+		</PremiumGuard>
 	);
 }

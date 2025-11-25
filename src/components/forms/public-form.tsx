@@ -3,8 +3,8 @@
 import { useEffect, useMemo } from "react";
 import type { FormSchema } from "@/lib/database";
 import { cn } from "@/lib/utils";
-import { MultiStepForm } from "./multi-step-form";
-import { SingleStepForm } from "./public-form/components";
+import { MultiStepForm } from "./form-renderer/multi-step/multi-step-form";
+import { SingleStepForm } from "./form-renderer/single-step/components";
 
 interface PublicFormProps {
 	formId: string;

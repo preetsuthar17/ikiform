@@ -12,8 +12,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { FormCreationWizard } from "../../form-creation-wizard";
 import { FormSettingsModal } from "../../form-settings-modal";
-import { JsonViewModal } from "../../json-view-modal";
-import { ShareFormModal } from "../../share-form-modal";
+import { JsonViewModal } from "../../modals/json-view-modal";
+import { ShareFormModal } from "../../modals/share-form-modal";
 
 import type { FormBuilderModalsProps } from "../types";
 

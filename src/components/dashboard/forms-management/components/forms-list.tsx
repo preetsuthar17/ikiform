@@ -9,7 +9,7 @@ import {
 	Trash2,
 } from "lucide-react";
 import { memo, useCallback, useMemo, useState } from "react";
-import { ShareFormModal } from "@/components/form-builder/share-form-modal";
+import { ShareFormModal } from "@/components/form-builder/modals/share-form-modal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

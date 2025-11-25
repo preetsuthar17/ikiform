@@ -39,9 +39,11 @@ function hexToHsl(hex: string): string {
 
 const MultiStepForm = dynamic(
 	() =>
-		import("@/components/forms/multi-step-form").then((mod) => ({
-			default: mod.MultiStepForm,
-		})),
+		import("@/components/forms/form-renderer/multi-step/multi-step-form").then(
+			(mod) => ({
+				default: mod.MultiStepForm,
+			}),
+		),
 	{
 		loading: () => <FormSkeleton showProgress={true} variant="multi-step" />,
 	},
@@ -49,9 +51,11 @@ const MultiStepForm = dynamic(
 
 const SingleStepForm = dynamic(
 	() =>
-		import("@/components/forms/public-form/components").then((mod) => ({
-			default: mod.SingleStepForm,
-		})),
+		import("@/components/forms/form-renderer/single-step/components").then(
+			(mod) => ({
+				default: mod.SingleStepForm,
+			}),
+		),
 	{
 		loading: () => <FormSkeleton variant="single-step" />,
 	},

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useMemo, useState } from "react";
-import { ConfirmationModal } from "../form-delete-confirmation-modal";
+import { ConfirmationModal } from "../modals/form-delete-confirmation-modal";
 
 import {
 	EmptyState,

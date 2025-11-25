@@ -4,22 +4,22 @@ import "./globals.css";
 
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
-import { BotIdClientWrapper } from "@/components/other/bot-id-client";
-import { LightThemeEnforcer } from "@/components/other/light-theme-enforcer";
-import { TicketpingController } from "@/components/other/ticket-ping-controller";
+import { BotIdClientWrapper } from "@/components/other/integrations/bot-id-client";
+import { TicketpingController } from "@/components/other/integrations/ticket-ping-controller";
+import { LightThemeEnforcer } from "@/components/other/utils/light-theme-enforcer";
 import { Toaster } from "@/components/ui/toast";
 
 import ConditionalLayout from "./conditional-layout";
 
 const geist = Geist({
 	variable: "--font-sans",
-	weight: ["400", "500", "600", "700"],
+	weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 	subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
 	variable: "--font-mono",
-	weight: ["400", "500", "600", "700"],
+	weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 	subsets: ["latin"],
 });
 

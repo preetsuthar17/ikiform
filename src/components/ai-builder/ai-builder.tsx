@@ -16,9 +16,9 @@ import { usePremiumStatus } from "@/hooks/use-premium-status";
 import { CHAT_SUGGESTIONS } from "@/lib/ai-builder/constants";
 import { initializeScrollbarStyles } from "@/lib/ai-builder/utils";
 import { ChatPanel } from "./chat/chat-panel";
-import { JsonModal } from "./json-modal";
-import { MobileChatDrawer } from "./mobile-chat-drawer";
-import { PremiumGuard } from "./premium-guard";
+import { MobileChatDrawer } from "./drawer/mobile-chat-drawer";
+import { PremiumGuard } from "./guards/premium-guard";
+import { JsonModal } from "./modals/json-modal";
 import { PreviewPanel } from "./preview/preview-panel";
 
 export function AIBuilder() {

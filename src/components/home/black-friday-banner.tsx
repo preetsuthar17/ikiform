@@ -2,10 +2,10 @@
 
 export default function BlackFridayBanner() {
 	return (
-		<div className="w-full bg-orange-600 py-2.5 text-center text-sm font-medium text-white">
+		<div className="w-full bg-orange-600 py-2.5 text-center text-sm font-semibold text-white">
 			<p className="mx-auto">
-				BLACK FRIDAY DEAL - 49% OFF! Use code{" "}
-				<span className="font-semibold">BLACKFRIDAY49</span>
+				🎉 BLACK FRIDAY DEAL - 49% OFF! Use code{" "}
+				<span className="font-bold">BLACKFRIDAY49</span>
 			</p>
 		</div>
 	);

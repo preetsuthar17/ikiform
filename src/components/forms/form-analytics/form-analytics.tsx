@@ -20,8 +20,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
-import { ConfirmationModal } from "@/components/dashboard/form-delete-confirmation-modal";
-import { ShareFormModal } from "@/components/form-builder/share-form-modal";
+import { ConfirmationModal } from "@/components/dashboard/modals/form-delete-confirmation-modal";
+import { ShareFormModal } from "@/components/form-builder/modals/share-form-modal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
