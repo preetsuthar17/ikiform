@@ -80,14 +80,14 @@ export default function PromoPopup() {
 						<div className="flex items-start gap-3 pr-3">
 							<div className="flex min-w-0 flex-1 flex-col items-start justify-center gap-1">
 								<h3 className="pb-2 font-semibold text-sm">
-									Special Offer! 🎉
+									Black Friday Deal! 🎉
 								</h3>
 								<p className="text-xs">
 									Use code{" "}
 									<span className="rounded bg-accent px-1 font-mono">
-										FREE20
+										BLACKFRIDAY49
 									</span>{" "}
-									for 20% off your first month
+									for 49% off on lifetime access
 								</p>
 								<Button asChild className="p-0" size={"sm"} variant={"link"}>
 									<Link href="/#pricing">Grab deal now!</Link>

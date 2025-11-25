@@ -4,6 +4,7 @@ export function safeRegexTest(
 	timeoutMs = 100,
 ): boolean {
 	try {
+		// eslint-disable-next-line security/detect-non-literal-regexp
 		const regex = new RegExp(pattern);
 		const startTime = Date.now();
 
