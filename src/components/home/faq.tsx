@@ -38,12 +38,12 @@ const faqs = [
 	{
 		question: "What fields are supported?",
 		answer:
-			"Supported fields include text, email, textarea, radio, checkbox, number, select, slider, tags, and social fields.",
+			"Supported fields include Text, Email, Number, Phone Number, Textarea, Date, Time, Address, Link, Select Dropdown, Radio Buttons, Checkboxes, Slider, Tags, Social Fields, File Upload, Signature, Statement, Banner, Field Group, Tag Input, Social Media, Scheduler, Poll, Rating, Quiz, and more.",
 	},
 	{
 		question: "How is my data protected?",
 		answer:
-			"Forms can have password protection, rate limiting, profanity filters, and are GDPR compliant.",
+			"Forms can have password protection, rate limiting, profanity filters, spam protection, bot protection, and are GDPR compliant.",
 	},
 	{
 		question: "Is the data I submit shared with anyone?",
