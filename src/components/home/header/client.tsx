@@ -6,6 +6,7 @@ import { AlignJustify, ChevronRight, LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
+import { Separator } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/client";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
@@ -27,7 +28,6 @@ import {
 } from "../../ui/dropdown-menu";
 import { Skeleton } from "../../ui/skeleton";
 import { PRIMARY_LINKS } from "./header";
-import { Separator } from "@/components/ui";
 
 interface NavLink {
 	href: string;
@@ -399,7 +399,7 @@ const PrimaryNavLinks = React.memo(function PrimaryNavLinks() {
 	return (
 		<nav
 			aria-label="Primary navigation"
-			className="flex items-center gap-1"
+			className="flex items-center"
 			role="list"
 		>
 			{PRIMARY_LINKS.map(({ href, label }) => {
