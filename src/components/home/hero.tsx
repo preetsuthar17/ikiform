@@ -191,7 +191,7 @@ function AvatarGroup() {
 	if (isLoading) {
 		return (
 			<div className="flex items-center justify-center gap-3">
-				<div className="flex gap-2">
+				<div className="flex -space-x-2">
 					{Array.from({ length: 4 }).map((_, i) => (
 						<div
 							key={i}
@@ -244,7 +244,7 @@ function AvatarGroup() {
 
 	return (
 		<div className="flex items-center justify-center flex-wrap gap-3">
-			<div className="flex gap-2" role="group" aria-label="User avatars">
+			<div className="flex -space-x-2" role="group" aria-label="User avatars">
 				{Array.from({ length: avatarCount }).map((_, index) => {
 					const avatarUrl = getAvatarUrl(index);
 					const user = hasUsers ? displayUsers[index] : null;
