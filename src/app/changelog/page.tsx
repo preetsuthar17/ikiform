@@ -109,7 +109,6 @@ export default async function Changelog() {
 			<div className="flex flex-col gap-16">
 				{entries.map((entry, index) => (
 					<article key={index} className="relative flex gap-8 lg:gap-12">
-						{/* Sticky date on desktop - hidden on mobile */}
 						<div className="hidden lg:block sticky top-8 h-fit shrink-0 self-start">
 							{entry.release_date && entry.release_date.trim() !== "" ? (
 								<Badge variant="outline">
@@ -129,7 +128,6 @@ export default async function Changelog() {
 								</h1>
 							)}
 							<div className="flex flex-col gap-4">
-								{/* Date on mobile - above title, hidden on desktop */}
 								<div className="lg:hidden">
 									{entry.release_date && entry.release_date.trim() !== "" ? (
 										<Badge variant="outline">

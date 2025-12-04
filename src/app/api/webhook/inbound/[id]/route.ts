@@ -3,6 +3,37 @@ import {
 	deleteInboundMapping,
 	updateInboundMapping,
 } from "@/lib/webhooks/inbound";
+import { createAdminClient } from "@/utils/supabase/admin";
+import { createClient } from "@/utils/supabase/server";
+
+async function verifyInboundMappingOwnership(
+	mappingId: string,
+	userId: string,
+): Promise<boolean> {
+	const supabase = createAdminClient();
+	const { data: mapping, error } = await supabase
+		.from("inbound_webhook_mappings")
+		.select("id, target_form_id")
+		.eq("id", mappingId)
+		.single();
+
+	if (error || !mapping) {
+		return false;
+	}
+
+	if (mapping.target_form_id) {
+		const { data: form } = await supabase
+			.from("forms")
+			.select("id, user_id")
+			.eq("id", mapping.target_form_id)
+			.eq("user_id", userId)
+			.single();
+
+		return !!form;
+	}
+
+	return false;
+}
 
 export async function PUT(
 	req: NextRequest,
@@ -15,6 +46,24 @@ export async function PUT(
 	);
 
 	try {
+		const supabase = await createClient();
+		const {
+			data: { user },
+			error: authError,
+		} = await supabase.auth.getUser();
+
+		if (authError || !user) {
+			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+		}
+
+		const hasAccess = await verifyInboundMappingOwnership(mappingId, user.id);
+		if (!hasAccess) {
+			return NextResponse.json(
+				{ error: "Mapping not found or access denied" },
+				{ status: 403 },
+			);
+		}
+
 		const body = await req.json();
 		console.log(
 			`[WEBHOOK API] PUT /api/webhook/inbound/${mappingId} - Request body:`,
@@ -29,6 +78,22 @@ export async function PUT(
 				{ error: "Missing request body" },
 				{ status: 400 },
 			);
+		}
+
+		if (body.targetFormId) {
+			const { data: form, error: formError } = await supabase
+				.from("forms")
+				.select("id, user_id")
+				.eq("id", body.targetFormId)
+				.eq("user_id", user.id)
+				.single();
+
+			if (formError || !form) {
+				return NextResponse.json(
+					{ error: "Form not found or access denied" },
+					{ status: 403 },
+				);
+			}
 		}
 
 		const mapping = await updateInboundMapping(mappingId, body);
@@ -70,6 +135,24 @@ export async function DELETE(
 	);
 
 	try {
+		const supabase = await createClient();
+		const {
+			data: { user },
+			error: authError,
+		} = await supabase.auth.getUser();
+
+		if (authError || !user) {
+			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+		}
+
+		const hasAccess = await verifyInboundMappingOwnership(mappingId, user.id);
+		if (!hasAccess) {
+			return NextResponse.json(
+				{ error: "Mapping not found or access denied" },
+				{ status: 403 },
+			);
+		}
+
 		await deleteInboundMapping(mappingId);
 
 		const duration = Date.now() - startTime;

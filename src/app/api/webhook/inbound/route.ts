@@ -3,6 +3,7 @@ import {
 	createInboundMapping,
 	getInboundMappings,
 } from "@/lib/webhooks/inbound";
+import { createClient } from "@/utils/supabase/server";
 
 export async function GET(req: NextRequest) {
 	const startTime = Date.now();
@@ -11,8 +12,34 @@ export async function GET(req: NextRequest) {
 	);
 
 	try {
+		const supabase = await createClient();
+		const {
+			data: { user },
+			error: authError,
+		} = await supabase.auth.getUser();
+
+		if (authError || !user) {
+			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+		}
+
 		const { searchParams } = new URL(req.url);
 		const targetFormId = searchParams.get("targetFormId") || undefined;
+
+		if (targetFormId) {
+			const { data: form, error: formError } = await supabase
+				.from("forms")
+				.select("id, user_id")
+				.eq("id", targetFormId)
+				.eq("user_id", user.id)
+				.single();
+
+			if (formError || !form) {
+				return NextResponse.json(
+					{ error: "Form not found or access denied" },
+					{ status: 403 },
+				);
+			}
+		}
 
 		console.log(
 			`[WEBHOOK API] GET /api/webhook/inbound - Params: targetFormId=${targetFormId}`,
@@ -53,6 +80,16 @@ export async function POST(req: NextRequest) {
 	);
 
 	try {
+		const supabase = await createClient();
+		const {
+			data: { user },
+			error: authError,
+		} = await supabase.auth.getUser();
+
+		if (authError || !user) {
+			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+		}
+
 		const body = await req.json();
 		console.log(
 			"[WEBHOOK API] POST /api/webhook/inbound - Request body:",
@@ -69,6 +106,20 @@ export async function POST(req: NextRequest) {
 						"Missing required fields: endpoint, targetFormId, mappingRules",
 				},
 				{ status: 400 },
+			);
+		}
+
+		const { data: form, error: formError } = await supabase
+			.from("forms")
+			.select("id, user_id")
+			.eq("id", body.targetFormId)
+			.eq("user_id", user.id)
+			.single();
+
+		if (formError || !form) {
+			return NextResponse.json(
+				{ error: "Form not found or access denied" },
+				{ status: 403 },
 			);
 		}
 

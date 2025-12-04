@@ -24,6 +24,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Switch } from "@/components/ui/switch";
+import { useAuth } from "@/hooks/use-auth";
 import { toast } from "@/hooks/use-toast";
 import { formsDb } from "@/lib/database";
 import {
@@ -32,7 +33,6 @@ import {
 	toggleFormApiEnabled,
 } from "@/lib/forms/api-keys";
 import type { ApiSectionProps } from "../types";
-import { useAuth } from "@/hooks/use-auth";
 
 export function ApiSection({
 	localSettings,

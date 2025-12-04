@@ -30,7 +30,6 @@ async function getFormData(id: string, userId: string) {
 async function getFormSubmissions(formId: string, userId: string) {
 	const supabase = await createClient();
 
-	// Verify form ownership first
 	const { data: form, error: formError } = await supabase
 		.from("forms")
 		.select("id")

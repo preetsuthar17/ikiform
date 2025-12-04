@@ -41,16 +41,56 @@ function mapWebhookRow(row: Omit<WebhookRow, "secret">): WebhookConfig {
 export async function getWebhooks({
 	formId,
 	accountId,
+	userId,
 }: {
 	formId?: string;
 	accountId?: string;
+	userId?: string;
 }): Promise<WebhookConfig[]> {
 	const supabase = createAdminClient();
 	let query = supabase.from("webhooks" as const).select("*");
-	if (formId) query = query.eq("form_id", formId);
-	if (accountId) query = query.eq("account_id", accountId);
+
+	const effectiveAccountId = userId || accountId;
+	if (effectiveAccountId) {
+		query = query.eq("account_id", effectiveAccountId);
+	}
+
+	if (formId) {
+		query = query.eq("form_id", formId);
+	}
+
 	const { data, error } = await query;
 	if (error) throw new Error(error.message);
+
+	if (userId && data) {
+		const filteredData = await Promise.all(
+			data.map(async (row) => {
+				const webhookRow = row as WebhookRow;
+
+				if (webhookRow.form_id) {
+					const { data: form } = await supabase
+						.from("forms")
+						.select("id, user_id")
+						.eq("id", webhookRow.form_id)
+						.eq("user_id", userId)
+						.single();
+
+					if (!form) {
+						return null;
+					}
+				}
+				return row;
+			}),
+		);
+
+		const validData = filteredData.filter((row) => row !== null);
+		return validData.map((row) => {
+			const { secret, ...rest } = row as WebhookRow & {
+				secret?: string | null;
+			};
+			return mapWebhookRow(rest as Omit<WebhookRow, "secret">);
+		});
+	}
 
 	return (data ?? []).map((row) => {
 		const { secret, ...rest } = row as WebhookRow & { secret?: string | null };
@@ -60,12 +100,33 @@ export async function getWebhooks({
 
 export async function createWebhook(
 	data: Partial<WebhookConfig>,
+	userId?: string,
 ): Promise<WebhookConfig> {
 	if (!(data.url && data.events && data.method)) {
 		throw new Error("Missing required fields: url, events, or method");
 	}
 
 	const supabase = createAdminClient();
+
+	if ((data.formId || (data as any).form_id) && userId) {
+		const formId = data.formId || (data as any).form_id;
+		const { data: form, error: formError } = await supabase
+			.from("forms")
+			.select("id, user_id")
+			.eq("id", formId)
+			.eq("user_id", userId)
+			.single();
+
+		if (formError || !form) {
+			throw new Error("Form not found or access denied");
+		}
+	}
+
+	const accountId = userId || data.accountId || (data as any).account_id;
+	if (!accountId) {
+		throw new Error("Account ID is required");
+	}
+
 	const now = new Date().toISOString();
 
 	const insertData: WebhookInsert = {
@@ -76,7 +137,7 @@ export async function createWebhook(
 		method: data.method,
 		headers: (data.headers as any) ?? {},
 		form_id: (data as any).form_id ?? data.formId ?? null,
-		account_id: (data as any).account_id ?? data.accountId ?? null,
+		account_id: accountId,
 		enabled: data.enabled ?? true,
 		payload_template:
 			(data as any).payload_template ?? data.payloadTemplate ?? null,
@@ -118,8 +179,24 @@ export async function createWebhook(
 export async function updateWebhook(
 	id: string,
 	data: Partial<WebhookConfig>,
+	userId?: string,
 ): Promise<WebhookConfig> {
 	const supabase = createAdminClient();
+
+	if ((data.formId || (data as any).form_id) && userId) {
+		const formId = data.formId || (data as any).form_id;
+		const { data: form, error: formError } = await supabase
+			.from("forms")
+			.select("id, user_id")
+			.eq("id", formId)
+			.eq("user_id", userId)
+			.single();
+
+		if (formError || !form) {
+			throw new Error("Form not found or access denied");
+		}
+	}
+
 	const now = new Date().toISOString();
 	const updateData: WebhookUpdate = {
 		name: (data as any).name ?? undefined,
@@ -129,7 +206,10 @@ export async function updateWebhook(
 		method: data.method,
 		headers: data.headers as any,
 		form_id: (data as any).form_id ?? data.formId ?? null,
-		account_id: (data as any).account_id ?? data.accountId ?? null,
+
+		account_id: userId
+			? userId
+			: ((data as any).account_id ?? data.accountId ?? undefined),
 		enabled: data.enabled,
 		payload_template:
 			(data as any).payload_template ?? data.payloadTemplate ?? null,
@@ -170,8 +250,41 @@ export async function updateWebhook(
 	return mapWebhookRow(safeResult as Omit<WebhookRow, "secret">);
 }
 
-export async function deleteWebhook(id: string): Promise<void> {
+export async function deleteWebhook(
+	id: string,
+	userId?: string,
+): Promise<void> {
 	const supabase = createAdminClient();
+
+	if (userId) {
+		const { data: webhook, error: fetchError } = await supabase
+			.from("webhooks")
+			.select("id, account_id, form_id")
+			.eq("id", id)
+			.single();
+
+		if (fetchError || !webhook) {
+			throw new Error("Webhook not found");
+		}
+
+		if (webhook.account_id !== userId) {
+			if (webhook.form_id) {
+				const { data: form } = await supabase
+					.from("forms")
+					.select("id, user_id")
+					.eq("id", webhook.form_id)
+					.eq("user_id", userId)
+					.single();
+
+				if (!form) {
+					throw new Error("Webhook not found or access denied");
+				}
+			} else {
+				throw new Error("Webhook not found or access denied");
+			}
+		}
+	}
+
 	const { error } = await supabase
 		.from("webhooks" as const)
 		.delete()
@@ -183,20 +296,115 @@ export async function getWebhookLogs({
 	webhookId,
 	formId,
 	accountId,
+	userId,
 }: {
 	webhookId?: string;
 	formId?: string;
 	accountId?: string;
+	userId?: string;
 }): Promise<WebhookLog[]> {
 	const supabase = createAdminClient();
+	const effectiveAccountId = userId || accountId;
+	if (!effectiveAccountId) {
+		throw new Error("Account ID or User ID is required");
+	}
+
+	if (webhookId && userId) {
+		const { data: webhook, error: webhookError } = await supabase
+			.from("webhooks")
+			.select("id, account_id, form_id")
+			.eq("id", webhookId)
+			.single();
+
+		if (webhookError || !webhook) {
+			return [];
+		}
+
+		if (webhook.account_id !== userId) {
+			if (webhook.form_id) {
+				const { data: form } = await supabase
+					.from("forms")
+					.select("id, user_id")
+					.eq("id", webhook.form_id)
+					.eq("user_id", userId)
+					.single();
+
+				if (!form) {
+					return [];
+				}
+			} else {
+				return [];
+			}
+		}
+	}
+
+	if (formId && userId) {
+		const { data: form, error: formError } = await supabase
+			.from("forms")
+			.select("id, user_id")
+			.eq("id", formId)
+			.eq("user_id", userId)
+			.single();
+
+		if (formError || !form) {
+			return [];
+		}
+	}
+
 	let query = supabase.from("webhook_logs" as const).select("*");
 	if (webhookId) query = query.eq("webhook_id", webhookId);
 	if (formId) query = query.eq("form_id", formId as any);
-	if (accountId) query = query.eq("account_id", accountId as any);
+	query = query.eq("account_id", effectiveAccountId as any);
 	query = query.order("timestamp", { ascending: false });
 	const { data, error } = await query;
 	if (error) throw new Error(error.message);
-	return Array.isArray(data) ? (data as unknown as WebhookLog[]) : [];
+
+	if (!data || !Array.isArray(data)) {
+		return [];
+	}
+
+	if (userId) {
+		const filteredLogs = await Promise.all(
+			data.map(async (log) => {
+				const logRow = log as WebhookLogRow;
+				if (logRow.webhook_id) {
+					const { data: webhook } = await supabase
+						.from("webhooks")
+						.select("id, account_id, form_id")
+						.eq("id", logRow.webhook_id)
+						.single();
+
+					if (!webhook) {
+						return null;
+					}
+
+					if (webhook.account_id === userId) {
+						return log;
+					}
+
+					if (webhook.form_id) {
+						const { data: form } = await supabase
+							.from("forms")
+							.select("id, user_id")
+							.eq("id", webhook.form_id)
+							.eq("user_id", userId)
+							.single();
+
+						if (form) {
+							return log;
+						}
+					}
+
+					return null;
+				}
+				return log;
+			}),
+		);
+
+		return filteredLogs.filter((log) => log !== null) as WebhookLog[];
+	}
+
+	return data as unknown as WebhookLog[];
 }
 
 export async function resendWebhookDelivery(
