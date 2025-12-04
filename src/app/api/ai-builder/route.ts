@@ -5,6 +5,11 @@ import { v4 as uuidv4 } from "uuid";
 import { formsDbServer } from "@/lib/database";
 import { checkRateLimit, type RateLimitSettings } from "@/lib/forms/server";
 import { requirePremium } from "@/lib/utils/premium-check";
+import {
+	detectPromptInjection,
+	filterSystemMessages,
+	sanitizeForPromptInjection,
+} from "@/lib/utils/prompt-injection";
 import { sanitizeString } from "@/lib/utils/sanitize";
 import { createClient } from "@/utils/supabase/server";
 
@@ -36,13 +41,25 @@ function validateAndSanitizeMessages(messages: AiMessage[]): AiMessage[] {
 	if (!Array.isArray(messages) || messages.length === 0) {
 		throw new Error("Invalid messages array");
 	}
-	return messages.map((msg) => {
+
+	const filtered = filterSystemMessages(messages);
+
+	return filtered.map((msg) => {
 		if (!msg.role || typeof msg.content !== "string") {
 			throw new Error("Invalid message format");
 		}
+
+		const sanitized = sanitizeString(msg.content);
+
+		if (detectPromptInjection(sanitized)) {
+			throw new Error(
+				"Invalid input detected. Please rephrase your request without using system instructions or prompt manipulation.",
+			);
+		}
+
 		return {
 			role: msg.role,
-			content: sanitizeString(msg.content),
+			content: sanitized,
 		};
 	});
 }
@@ -167,10 +184,12 @@ async function streamAiResponse({
 		model: groq(modelName),
 		messages: [
 			{ role: "system", content: systemPrompt },
-			...sanitizedMessages.map((msg) => ({
-				...msg,
-				role: msg.role as "system" | "user" | "assistant",
-			})),
+			...sanitizedMessages
+				.filter((msg) => msg.role !== "system")
+				.map((msg) => ({
+					...msg,
+					role: msg.role as "user" | "assistant",
+				})),
 		],
 		temperature: 0.1,
 

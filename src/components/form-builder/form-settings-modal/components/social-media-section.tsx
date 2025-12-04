@@ -103,6 +103,10 @@ export function BrandingSection({
 			toast.error("Form ID is required to save settings");
 			return;
 		}
+		if (!user) {
+			toast.error("User authentication required");
+			return;
+		}
 		setSaving(true);
 		try {
 			const trimmed = {
@@ -123,7 +127,6 @@ export function BrandingSection({
 					branding: trimmed,
 				},
 			};
-			if (!user) return;
 			await formsDb.updateForm(formId, user.id, { schema: newSchema as any });
 			setSaved(true);
 			setHasChanges(false);

@@ -1,6 +1,10 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { formsDbServer } from "@/lib/database";
 import { requirePremium } from "@/lib/utils/premium-check";
+import {
+	detectPromptInjection,
+	validateMessageRole,
+} from "@/lib/utils/prompt-injection";
 import { sanitizeString } from "@/lib/utils/sanitize";
 import { createClient } from "@/utils/supabase/server";
 
@@ -85,14 +89,24 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 			);
 		}
 
-		if (!["user", "assistant", "system"].includes(role)) {
+		if (!validateMessageRole(role)) {
 			return NextResponse.json(
-				{ error: "Invalid role. Must be 'user', 'assistant', or 'system'" },
+				{ error: "Invalid role. Must be 'user' or 'assistant'" },
 				{ status: 400 },
 			);
 		}
 
 		const sanitizedContent = sanitizeString(content);
+
+		if (detectPromptInjection(sanitizedContent)) {
+			return NextResponse.json(
+				{
+					error:
+						"Invalid input detected. Please rephrase your request without using system instructions or prompt manipulation.",
+				},
+				{ status: 400 },
+			);
+		}
 
 		const savedMessage = await formsDbServer.saveAIBuilderMessage(
 			user.id,
