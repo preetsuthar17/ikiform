@@ -184,13 +184,13 @@ export default function PricingClient({ products }: PricingClientProps) {
 					<div className="flex items-baseline gap-2">
 						{plan.key === "lifetime" ? (
 							<>
-								<span className="font-semibold text-xl text-foreground tracking-tighter line-through opacity-50">
+								{/* <span className="font-semibold text-xl text-foreground tracking-tighter line-through opacity-50">
+									{plan.originalPrice}
+								</span> */}
+								<span className="font-semibold text-4xl tracking-tighter">
 									{plan.price}
 								</span>
-								<span className="font-semibold text-4xl tracking-tighter">
-									$50
-								</span>
-								<Tooltip>
+								{/* <Tooltip>
 									<TooltipTrigger asChild>
 										<button
 											aria-label="Discount code information"
@@ -208,7 +208,7 @@ export default function PricingClient({ products }: PricingClientProps) {
 											Use code <b>BLACKFRIDAY</b> to get 49% off
 										</p>
 									</TooltipContent>
-								</Tooltip>
+								</Tooltip> */}
 							</>
 						) : (
 							<span className="font-semibold text-3xl text-foreground tracking-tighter">
