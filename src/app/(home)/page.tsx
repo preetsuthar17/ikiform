@@ -15,7 +15,7 @@ export default function Home() {
 				<FaqSection />
 				<CTA />
 			</main>
-			<PromoPopup />
+			{/* <PromoPopup /> */}
 		</>
 	);
 }

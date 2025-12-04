@@ -11,7 +11,8 @@
 		"lint": "eslint . --ext .ts,.tsx,.js,.jsx --max-warnings=0 --config eslint.config.security.js || true",
 		"format": "bunx biome format --write || true",
 		"check": "tsc --noEmit || true",
-		"polar:setup": "tsx scripts/create-polar-products.ts"
+		"polar:setup": "tsx scripts/create-polar-products.ts",
+		"security:audit": "tsx scripts/security-audit.ts"
 	},
 	"dependencies": {
 		"@ai-sdk/cohere": "^2.0.20",

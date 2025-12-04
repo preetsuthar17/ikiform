@@ -32,7 +32,7 @@ export const getVariantClasses = (variant?: FieldVariant) => {
 		case "ghost":
 			return "bg-transparent border-transparent ";
 		case "underline":
-			return "rounded-none border-0 border-b-2 border-input bg-transparent gap-0 py-2  focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-b-2 focus-visible:border-input text-inherit placeholder:text-muted-foreground";
+			return "rounded-none border-0 border-b-2 border-border bg-transparent gap-0 py-2  focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-b-2 focus-visible:border-border text-inherit placeholder:text-muted-foreground";
 		default:
 			return "";
 	}

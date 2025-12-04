@@ -1,93 +1,71 @@
-const PROMPT_INJECTION_PATTERNS = [
-	/ignore\s+(all\s+)?(previous|prior|earlier)\s+(instructions?|prompts?|directives?|rules?)/i,
-	/forget\s+(all\s+)?(previous|prior|earlier)\s+(instructions?|prompts?|directives?|rules?)/i,
-	/you\s+are\s+now/i,
-	/you\s+were\s+previously/i,
-	/act\s+as\s+(if\s+)?(you\s+are\s+)?/i,
-	/pretend\s+(to\s+be|that\s+you\s+are)/i,
-	/simulate\s+(that\s+)?(you\s+are\s+)?/i,
-	/override\s+(system|previous|prior)\s+(instructions?|prompts?|directives?|rules?)/i,
-	/system\s*:?\s*(prompt|instruction|directive|rule)/i,
+// Patterns simplified for safer regexes: remove nested groups, excessive alternations, backtracking-heavy quantifiers
+const PROMPT_INJECTION_PATTERNS: RegExp[] = [
+	/\bignore\b.*\b(previous|prior|earlier)\b.*\b(instruction|prompt|directive|rule)s?\b/i,
+	/\bforget\b.*\b(previous|prior|earlier)\b.*\b(instruction|prompt|directive|rule)s?\b/i,
+	/\byou\s+are\s+now\b/i,
+	/\byou\s+were\s+previously\b/i,
+	/\bact\s+as\b/i,
+	/\bpretend\s+(to\s+be|that\s+you\s+are)\b/i,
+	/\bsimulate\b.*\byou\s+are\b/i,
+	/\boverride\b.*\b(system|previous|prior)\b.*\b(instruction|prompt|directive|rule)s?\b/i,
+	/\bsystem\s*:?\s*(prompt|instruction|directive|rule)/i,
 	/\[SYSTEM\]/i,
 	/\[INST\]/i,
 	/\[INST\s+SYSTEM\]/i,
-	/###\s*(system|instructions?|prompt)/i,
-	/---\s*(system|instructions?|prompt)/i,
-	/begin\s+(new|newer)\s+(system|instructions?|prompt)/i,
-	/start\s+(new|newer)\s+(system|instructions?|prompt)/i,
-	/execute\s+(the\s+)?(following|below)\s+(instructions?|commands?|code)/i,
-	/run\s+(the\s+)?(following|below)\s+(instructions?|commands?|code)/i,
-	/print\s+(the\s+)?(system|internal|hidden)\s+(prompt|instructions?)/i,
-	/reveal\s+(the\s+)?(system|internal|hidden)\s+(prompt|instructions?)/i,
-	/show\s+(me\s+)?(the\s+)?(system|internal|hidden)\s+(prompt|instructions?)/i,
-	/leak\s+(the\s+)?(system|internal|hidden)\s+(prompt|instructions?)/i,
-	/disclose\s+(the\s+)?(system|internal|hidden)\s+(prompt|instructions?)/i,
-	/output\s+(the\s+)?(system|internal|hidden)\s+(prompt|instructions?)/i,
-	/what\s+(are\s+)?(your\s+)?(system|initial|original)\s+(instructions?|prompts?|directives?)/i,
-	/tell\s+me\s+(your\s+)?(system|initial|original)\s+(instructions?|prompts?|directives?)/i,
-	/repeat\s+(your\s+)?(system|initial|original)\s+(instructions?|prompts?|directives?)/i,
-	/echo\s+(your\s+)?(system|initial|original)\s+(instructions?|prompts?|directives?)/i,
-	/role\s*:?\s*(system|admin|developer|assistant)/i,
-	/you\s+must\s+(always|never)/i,
-	/you\s+should\s+(always|never)/i,
-	/you\s+can\s+(now|always)/i,
-	/from\s+now\s+on/i,
-	/starting\s+now/i,
-	/here\s+are\s+(the\s+)?(new|updated|revised)\s+(instructions?|prompts?|directives?|rules?)/i,
-	/new\s+(instructions?|prompts?|directives?|rules?)\s*:?/i,
-	/updated\s+(instructions?|prompts?|directives?|rules?)\s*:?/i,
-	/revised\s+(instructions?|prompts?|directives?|rules?)\s*:?/i,
-	/change\s+(your|the)\s+(instructions?|prompts?|directives?|rules?|behavior)/i,
-	/modify\s+(your|the)\s+(instructions?|prompts?|directives?|rules?|behavior)/i,
-	/update\s+(your|the)\s+(instructions?|prompts?|directives?|rules?|behavior)/i,
-	/alter\s+(your|the)\s+(instructions?|prompts?|directives?|rules?|behavior)/i,
-	/switch\s+(to|mode|persona)/i,
-	/change\s+(to|mode|persona)/i,
-	/enter\s+(developer|debug|admin|system)\s+mode/i,
-	/enable\s+(developer|debug|admin|system)\s+mode/i,
-	/disable\s+(safety|security|filtering|restrictions)/i,
-	/bypass\s+(safety|security|filtering|restrictions)/i,
-	/remove\s+(safety|security|filtering|restrictions)/i,
-	/jailbreak/i,
-	/dan\s+mode/i,
-	/developer\s+mode/i,
-	/debug\s+mode/i,
-	/admin\s+mode/i,
-	/system\s+mode/i,
+	/###\s*(system|instruction|prompt)/i,
+	/---\s*(system|instruction|prompt)/i,
+	/\bbegin\b.*\b(new|newer)\b.*\b(system|instruction|prompt)s?\b/i,
+	/\bstart\b.*\b(new|newer)\b.*\b(system|instruction|prompt)s?\b/i,
+	/\bexecute\b.*\b(following|below)\b.*\b(instruction|command|code)s?\b/i,
+	/\brun\b.*\b(following|below)\b.*\b(instruction|command|code)s?\b/i,
+	/\bprint\b.*\b(system|internal|hidden)\b.*\b(prompt|instruction)s?\b/i,
+	/\breveal\b.*\b(system|internal|hidden)\b.*\b(prompt|instruction)s?\b/i,
+	/\b(show|leak|disclose|output)\b.*\b(system|internal|hidden)\b.*\b(prompt|instruction)s?\b/i,
+	/\b(what|tell|repeat|echo)\b.*\b(system|initial|original)\b.*\b(instruction|prompt|directive)s?\b/i,
+	/\brole\s*:?\s*(system|admin|developer|assistant)\b/i,
+	/\byou\s+must\s+(always|never)\b/i,
+	/\byou\s+should\s+(always|never)\b/i,
+	/\byou\s+can\s+(now|always)\b/i,
+	/\bfrom\s+now\s+on\b/i,
+	/\bstarting\s+now\b/i,
+	/\bhere\s+are\b.*\b(new|updated|revised)\b.*\b(instruction|prompt|directive|rule)s?\b/i,
+	/\b(new|updated|revised)\s+(instruction|prompt|directive|rule)s?\s*:?\b/i,
+	/\b(change|modify|update|alter)\b.*\b(your|the)\b.*\b(instruction|prompt|directive|rule|behavior)s?\b/i,
+	/\b(switch|change)\b.*\b(to|mode|persona)\b/i,
+	/\benter\b.*\b(developer|debug|admin|system)\s+mode\b/i,
+	/\benable\b.*\b(developer|debug|admin|system)\s+mode\b/i,
+	/\b(disable|bypass|remove)\b.*\b(safety|security|filtering|restriction)s?\b/i,
+	/\bjailbreak\b/i,
+	/\bdan\s+mode\b/i,
+	/\b(developer|debug|admin|system)\s+mode\b/i,
 ];
 
+// Avoid untrusted input in regex directly and avoid heavy backtracking
 export function detectPromptInjection(input: string): boolean {
-	if (!input || typeof input !== "string") {
+	if (typeof input !== "string" || !input.trim()) {
 		return false;
 	}
-
 	const normalizedInput = input.trim().toLowerCase();
-
 	for (const pattern of PROMPT_INJECTION_PATTERNS) {
-		if (pattern.test(input)) {
+		if (pattern.test(normalizedInput)) {
 			return true;
 		}
 	}
-
 	return false;
 }
 
-export function sanitizeForPromptInjection(input: string): {
-	sanitized: string;
-	detected: boolean;
-} {
+export function sanitizeForPromptInjection(
+	input: string
+): { sanitized: string; detected: boolean } {
 	const detected = detectPromptInjection(input);
-
+	// Replace most dangerous known patterns only (use simple non-nested expressions)
+	const DANGEROUS = /\b(ignore|forget)\b.*\b(previous|prior|earlier)\b.*\b(instruction|prompt|directive|rule)s?\b/gi;
 	if (detected) {
 		return {
-			sanitized: input.replace(
-				/ignore\s+(all\s+)?(previous|prior|earlier)\s+(instructions?|prompts?|directives?|rules?)/gi,
-				"[filtered]",
-			),
+			sanitized: input.replace(DANGEROUS, "[filtered]"),
 			detected: true,
 		};
 	}
-
 	return { sanitized: input, detected: false };
 }
 
@@ -99,12 +77,11 @@ export function filterSystemMessages(
 	messages: { role: string; content: string }[],
 ): { role: string; content: string }[] {
 	return messages
-		.filter((msg) => {
-			if (msg.role === "system") {
-				return false;
-			}
-			return validateMessageRole(msg.role);
-		})
+		.filter(
+			(msg) =>
+				msg.role !== "system" &&
+				validateMessageRole(msg.role)
+		)
 		.map((msg) => ({
 			role: msg.role === "assistant" ? "assistant" : "user",
 			content: msg.content,

@@ -45,3 +45,4 @@ next-env.d.ts
 .env*.local
 
 prompt.xml
+/scripts/security-audit.ts
