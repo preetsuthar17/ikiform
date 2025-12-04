@@ -1,10 +1,21 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/utils/supabase/admin";
+import { createClient } from "@/utils/supabase/server";
 
 export async function GET() {
 	try {
-		const supabase = createAdminClient();
-		const { data, error } = await supabase.from("users").select("email");
+		const supabase = await createClient();
+		const {
+			data: { user },
+			error: authError,
+		} = await supabase.auth.getUser();
+
+		if (authError || !user?.email || user.email !== "preetsutharxd@gmail.com") {
+			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+		}
+
+		const adminSupabase = createAdminClient();
+		const { data, error } = await adminSupabase.from("users").select("email");
 		if (error) {
 			return NextResponse.json(
 				{ emails: [], error: error.message },

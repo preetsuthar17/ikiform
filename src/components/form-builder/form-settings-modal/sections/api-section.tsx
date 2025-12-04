@@ -527,7 +527,7 @@ print_r($result);
 														<ScrollArea className="h-48">
 															<div className="p-4 font-mono">
 																<pre className="font-mono text-sm">
-																	<code className="whitespace-pre-wrap break-words">
+																	<code className="whitespace-pre-wrap wrap-break-word">
 																		{code}
 																	</code>
 																</pre>

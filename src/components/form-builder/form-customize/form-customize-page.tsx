@@ -88,7 +88,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 						}
 						value={activeSection}
 					>
-						<div className="flex-shrink-0 p-4">
+						<div className="shrink-0 p-4">
 							<TabsList className="grid w-full grid-cols-4">
 								<TabsTrigger className="gap-2" value="presets">
 									<Palette className="size-4" />
@@ -155,7 +155,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 					onValueChange={(value) => setActiveSection(value as CustomizeSection)}
 					value={activeSection}
 				>
-					<div className="flex-shrink-0 p-4">
+					<div className="shrink-0 p-4">
 						<TabsList className="grid w-full grid-cols-4">
 							<TabsTrigger className="gap-2" value="presets">
 								<Palette className="size-4" />
@@ -235,7 +235,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 		return (
 			<div className="flex h-screen flex-col bg-background">
 				{}
-				<div className="flex-shrink-0 border-b bg-background p-4">
+				<div className="shrink-0 border-b bg-background p-4">
 					<div className="flex items-center justify-between">
 						<div className="flex items-center gap-4">
 							<Button
@@ -270,7 +270,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 	return (
 		<div className="flex h-screen flex-col bg-background">
 			{}
-			<header className="z-20 flex-shrink-0 border-border border-b bg-card px-4 py-3 md:py-4">
+			<header className="z-20 shrink-0 border-border border-b bg-card px-4 py-3 md:py-4">
 				<div className="flex h-full flex-wrap items-center justify-between gap-3">
 					<div className="flex items-center gap-3 md:gap-4">
 						<h1 aria-hidden="true" className="sr-only">
@@ -308,7 +308,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 
 			<div className="flex flex-1 overflow-hidden">
 				{}
-				<div className="hidden w-110 flex-shrink-0 border-r bg-background lg:block">
+				<div className="hidden w-110 shrink-0 border-r bg-background lg:block">
 					<CustomizationPanel />
 				</div>
 

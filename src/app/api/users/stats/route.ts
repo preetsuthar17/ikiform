@@ -9,7 +9,7 @@ export async function GET() {
 			supabase.from("users").select("*", { count: "exact", head: true }),
 			supabase
 				.from("users")
-				.select("name, email")
+				.select("name")
 				.order("created_at", { ascending: false })
 				.limit(5),
 		]);
@@ -24,7 +24,9 @@ export async function GET() {
 		return NextResponse.json(
 			{
 				count: countResult.count ?? 0,
-				users: usersResult.data ?? [],
+				users: (usersResult.data ?? []).map((user) => ({
+					name: user.name || null,
+				})),
 			},
 			{
 				headers: {

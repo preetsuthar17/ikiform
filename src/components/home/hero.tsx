@@ -158,7 +158,7 @@ function HeroSubheading() {
 
 interface UserStats {
 	count: number | null;
-	users: Array<{ name: string; email: string }>;
+	users: Array<{ name: string | null }>;
 }
 
 const GRAVATAR_URLS = [
@@ -223,7 +223,7 @@ function AvatarGroup() {
 		return count.toString();
 	};
 
-	const getInitials = (name: string, email: string) => {
+	const getInitials = (name: string | null) => {
 		if (name) {
 			const parts = name.trim().split(/\s+/);
 			if (parts.length >= 2) {
@@ -231,7 +231,7 @@ function AvatarGroup() {
 			}
 			return name.slice(0, 2).toUpperCase();
 		}
-		return email.slice(0, 2).toUpperCase();
+		return "U";
 	};
 
 	const getAvatarUrl = (index: number) => {
@@ -248,18 +248,18 @@ function AvatarGroup() {
 				{Array.from({ length: avatarCount }).map((_, index) => {
 					const avatarUrl = getAvatarUrl(index);
 					const user = hasUsers ? displayUsers[index] : null;
-					const displayName = user ? user.name || user.email : "User";
+					const displayName = user?.name || "User";
 
 					return (
 						<Avatar
-							key={user ? `${user.email}-${index}` : `avatar-${index}`}
+							key={user ? `${user.name}-${index}` : `avatar-${index}`}
 							className={`size-9 border-2 border-background ${index > 0 ? "-ml-2" : ""}`}
 							aria-label={user ? `${displayName}'s avatar` : undefined}
 							aria-hidden={!user}
 						>
 							<AvatarImage alt={displayName} src={avatarUrl} />
 							<AvatarFallback className="text-xs font-medium">
-								{user ? getInitials(user.name, user.email) : "U"}
+								{user ? getInitials(user.name) : "U"}
 							</AvatarFallback>
 						</Avatar>
 					);
