@@ -274,10 +274,13 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 			toast.error("Please save your form before publishing.");
 			return;
 		}
+		if (!user) {
+			toast.error("User authentication required");
+			return;
+		}
 
 		actions.setPublishing(true);
 		try {
-			if (!user) return;
 			const newPublishState = !state.isPublished;
 			await formsDb.togglePublishForm(formId, user.id, newPublishState);
 			actions.setIsPublished(newPublishState);

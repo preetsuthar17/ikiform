@@ -89,6 +89,10 @@ export function ApiSection({
 
 	const handleGenerateApiKey = async () => {
 		if (!formId) return;
+		if (!user) {
+			toast.error("User authentication required");
+			return;
+		}
 
 		setIsGenerating(true);
 		try {
@@ -105,7 +109,6 @@ export function ApiSection({
 						},
 					},
 				};
-				if (!user) return;
 				await formsDb.updateForm(formId, user.id, { schema: newSchema as any });
 				updateApi({ apiKey: result.apiKey, enabled: true });
 				setDraftEnabled(true);
@@ -123,6 +126,10 @@ export function ApiSection({
 
 	const handleRevokeApiKey = async () => {
 		if (!formId) return;
+		if (!user) {
+			toast.error("User authentication required");
+			return;
+		}
 
 		setIsRevoking(true);
 		try {
@@ -139,7 +146,6 @@ export function ApiSection({
 						},
 					},
 				};
-				if (!user) return;
 				await formsDb.updateForm(formId, user.id, { schema: newSchema as any });
 				updateApi({ apiKey: undefined, enabled: false });
 				setDraftEnabled(false);
