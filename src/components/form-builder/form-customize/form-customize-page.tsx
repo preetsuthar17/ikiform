@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useAuth } from "@/hooks/use-auth";
 import { toast } from "@/hooks/use-toast";
 import type { FormSchema } from "@/lib/database";
 import { formsDb } from "@/lib/database";
@@ -30,6 +31,7 @@ type CustomizeSection = "presets" | "layout" | "colors" | "typography";
 
 export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 	const router = useRouter();
+	const { user } = useAuth();
 	const [activeSection, setActiveSection] =
 		useState<CustomizeSection>("presets");
 
@@ -52,10 +54,11 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 	};
 
 	const handleSave = async () => {
+		if (!user) return;
 		try {
 			setSaving(true);
 			const newSchema = { ...schema, settings: localSettings };
-			await formsDb.updateForm(formId, { schema: newSchema as any });
+			await formsDb.updateForm(formId, user.id, { schema: newSchema as any });
 			toast.success("Saved customization");
 		} catch (error) {
 			toast.error("Failed to save changes. Please try again.");

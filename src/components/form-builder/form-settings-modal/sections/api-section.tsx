@@ -32,6 +32,7 @@ import {
 	toggleFormApiEnabled,
 } from "@/lib/forms/api-keys";
 import type { ApiSectionProps } from "../types";
+import { useAuth } from "@/hooks/use-auth";
 
 export function ApiSection({
 	localSettings,
@@ -39,6 +40,7 @@ export function ApiSection({
 	formId,
 	schema,
 }: ApiSectionProps) {
+	const { user } = useAuth();
 	const [showApiKey, setShowApiKey] = useState(false);
 	const [isGenerating, setIsGenerating] = useState(false);
 	const [isRevoking, setIsRevoking] = useState(false);
@@ -103,7 +105,8 @@ export function ApiSection({
 						},
 					},
 				};
-				await formsDb.updateForm(formId, { schema: newSchema as any });
+				if (!user) return;
+				await formsDb.updateForm(formId, user.id, { schema: newSchema as any });
 				updateApi({ apiKey: result.apiKey, enabled: true });
 				setDraftEnabled(true);
 				setSaved(true);
@@ -136,7 +139,8 @@ export function ApiSection({
 						},
 					},
 				};
-				await formsDb.updateForm(formId, { schema: newSchema as any });
+				if (!user) return;
+				await formsDb.updateForm(formId, user.id, { schema: newSchema as any });
 				updateApi({ apiKey: undefined, enabled: false });
 				setDraftEnabled(false);
 				setSaved(true);

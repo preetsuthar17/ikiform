@@ -197,12 +197,7 @@ export const useFormBuilder = (formId?: string) => {
 
 		actions.setLoading(true);
 		try {
-			const form = await formsDb.getForm(formId);
-			if (form.user_id !== user.id) {
-				toast.error("You do not have permission to edit this form.");
-				router.push("/dashboard");
-				return;
-			}
+			const form = await formsDb.getForm(formId, user.id);
 
 			const normalizedSchema = ensureDefaultRateLimitSettings(form.schema);
 			actions.setFormSchema(normalizedSchema);
@@ -235,9 +230,10 @@ export const useFormBuilder = (formId?: string) => {
 		}
 
 		autoSaveTimeoutRef.current = setTimeout(async () => {
+			if (!user) return;
 			actions.setAutoSaving(true);
 			try {
-				await formsDb.updateForm(formId, { schema });
+				await formsDb.updateForm(formId, user.id, { schema });
 				lastSavedSchemaRef.current = schema;
 			} catch (error) {
 				console.error("Auto-save failed:", error);

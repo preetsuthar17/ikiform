@@ -20,6 +20,7 @@ import {
 import { SocialMediaIcons } from "@/components/ui/social-media-icons";
 import { Switch } from "@/components/ui/switch";
 
+import { useAuth } from "@/hooks/use-auth";
 import { toast } from "@/hooks/use-toast";
 import { formsDb } from "@/lib/database";
 import type { SocialMediaSectionProps } from "../types";
@@ -37,6 +38,7 @@ export function BrandingSection({
 	formId,
 	schema,
 }: BrandingSectionProps) {
+	const { user } = useAuth();
 	const socialMedia = localSettings.branding?.socialMedia || {};
 	const showIkiformBranding =
 		localSettings.branding?.showIkiformBranding !== false;
@@ -121,7 +123,8 @@ export function BrandingSection({
 					branding: trimmed,
 				},
 			};
-			await formsDb.updateForm(formId, { schema: newSchema as any });
+			if (!user) return;
+			await formsDb.updateForm(formId, user.id, { schema: newSchema as any });
 			setSaved(true);
 			setHasChanges(false);
 			toast.success("Branding settings saved successfully");

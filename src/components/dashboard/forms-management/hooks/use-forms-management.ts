@@ -55,9 +55,10 @@ export function useFormsManagement() {
 	};
 
 	const shareForm = async (form: Form) => {
+		if (!user) return;
 		try {
 			if (!form.is_published) {
-				await formsDb.togglePublishForm(form.id, true);
+				await formsDb.togglePublishForm(form.id, user.id, true);
 				await loadForms();
 			}
 
@@ -70,8 +71,9 @@ export function useFormsManagement() {
 	};
 
 	const duplicateForm = async (formId: string) => {
+		if (!user) return;
 		try {
-			const duplicated = await formsDb.duplicateForm(formId);
+			const duplicated = await formsDb.duplicateForm(formId, user.id);
 			toast.success("Form duplicated");
 			router.push(`/form-builder/${duplicated.id}`);
 		} catch (error) {
@@ -89,8 +91,9 @@ export function useFormsManagement() {
 	};
 
 	const confirmDeleteForm = async () => {
+		if (!user) return;
 		try {
-			await formsDb.deleteForm(deleteModal.formId);
+			await formsDb.deleteForm(deleteModal.formId, user.id);
 			await loadForms();
 			toast.success("Form deleted successfully");
 		} catch (error) {

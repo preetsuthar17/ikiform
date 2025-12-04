@@ -132,8 +132,9 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 	};
 
 	const handleDeleteForm = async () => {
+		if (!form.user_id) return;
 		try {
-			await formsDb.deleteForm(form.id);
+			await formsDb.deleteForm(form.id, form.user_id);
 			toast.success("Form deleted successfully");
 			router.push("/dashboard");
 		} catch (error) {
@@ -532,7 +533,8 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 				isPublished={!!form?.is_published}
 				onClose={() => setIsShareModalOpen(false)}
 				onPublish={async () => {
-					await formsDb.togglePublishForm(form.id, true);
+					if (!form?.user_id) return;
+					await formsDb.togglePublishForm(form.id, form.user_id, true);
 					toast.success("Form published!");
 				}}
 			/>

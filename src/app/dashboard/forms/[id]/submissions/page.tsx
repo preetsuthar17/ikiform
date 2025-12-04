@@ -27,8 +27,20 @@ async function getFormData(id: string, userId: string) {
 	return data;
 }
 
-async function getFormSubmissions(formId: string) {
+async function getFormSubmissions(formId: string, userId: string) {
 	const supabase = await createClient();
+
+	// Verify form ownership first
+	const { data: form, error: formError } = await supabase
+		.from("forms")
+		.select("id")
+		.eq("id", formId)
+		.eq("user_id", userId)
+		.single();
+
+	if (formError || !form) {
+		return [];
+	}
 
 	const { data, error } = await supabase
 		.from("form_submissions")
@@ -93,7 +105,7 @@ export default async function FormSubmissionsPage({
 	}
 
 	const form = await getFormData(id, user.id);
-	const submissions = await getFormSubmissions(id);
+	const submissions = await getFormSubmissions(id, user.id);
 
 	return (
 		<Suspense

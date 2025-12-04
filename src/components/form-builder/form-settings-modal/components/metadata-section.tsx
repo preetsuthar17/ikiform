@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import { useAuth } from "@/hooks/use-auth";
 import { toast } from "@/hooks/use-toast";
 import { formsDb } from "@/lib/database";
 import type { MetadataSectionProps } from "../types";
@@ -36,6 +37,7 @@ export function MetadataSection({
 	schema?: any;
 	onSchemaUpdate?: (updates: Partial<any>) => void;
 }) {
+	const { user } = useAuth();
 	const metadata = localSettings.metadata || {};
 	const [hasBasicChanges, setHasBasicChanges] = useState(false as boolean);
 	const [hasIndexingChanges, setHasIndexingChanges] = useState(
@@ -208,7 +210,8 @@ export function MetadataSection({
 					metadata: { ...localSettings.metadata },
 				},
 			};
-			await formsDb.updateForm(formId, { schema: newSchema as any });
+			if (!user) return;
+			await formsDb.updateForm(formId, user.id, { schema: newSchema as any });
 			setSavedIndexing(true);
 			setHasIndexingChanges(false);
 			toast.success("Indexing settings saved");

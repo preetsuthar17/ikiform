@@ -217,8 +217,8 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 
 		actions.setSaving(true);
 		try {
-			if (formId) {
-				await formsDb.updateForm(formId, { schema: state.formSchema });
+			if (formId && user) {
+				await formsDb.updateForm(formId, user.id, { schema: state.formSchema });
 				toast.success("Form saved successfully!");
 			} else {
 				const newForm = await formsDb.createForm(
@@ -247,10 +247,10 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 	};
 
 	const handlePublishForm = async () => {
-		if (!formId) return;
+		if (!formId || !user) return;
 
 		try {
-			await formsDb.togglePublishForm(formId, true);
+			await formsDb.togglePublishForm(formId, user.id, true);
 			actions.setIsPublished(true);
 			toast.success("Form published successfully!");
 		} catch (error) {
@@ -277,8 +277,9 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 
 		actions.setPublishing(true);
 		try {
+			if (!user) return;
 			const newPublishState = !state.isPublished;
-			await formsDb.togglePublishForm(formId, newPublishState);
+			await formsDb.togglePublishForm(formId, user.id, newPublishState);
 			actions.setIsPublished(newPublishState);
 
 			if (newPublishState) {
@@ -504,7 +505,9 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 
 						if (formId && user) {
 							try {
-								await formsDb.updateForm(formId, { schema: updatedSchema });
+								await formsDb.updateForm(formId, user.id, {
+									schema: updatedSchema,
+								});
 								lastSavedSchemaRef.current = updatedSchema;
 								lastManuallySavedSchemaRef.current = updatedSchema;
 							} catch (error) {
@@ -595,7 +598,9 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 
 					if (formId && user) {
 						try {
-							await formsDb.updateForm(formId, { schema: updatedSchema });
+							await formsDb.updateForm(formId, user.id, {
+								schema: updatedSchema,
+							});
 
 							lastSavedSchemaRef.current = updatedSchema;
 							lastManuallySavedSchemaRef.current = updatedSchema;

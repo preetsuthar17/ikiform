@@ -59,8 +59,8 @@ export const formsDb = {
 		return data;
 	},
 
-	async duplicateForm(formId: string) {
-		const original = await this.getForm(formId);
+	async duplicateForm(formId: string, userId: string) {
+		const original = await this.getForm(formId, userId);
 		const title = `${original.title || original.schema?.settings?.title || "Untitled Form"} (Copy)`;
 		const duplicated = await this.createForm(
 			original.user_id,
@@ -120,8 +120,8 @@ export const formsDb = {
 		return forms;
 	},
 
-	async getForm(formId: string) {
-		const cacheKey = getCacheKey("getForm", formId);
+	async getForm(formId: string, userId: string) {
+		const cacheKey = getCacheKey("getForm", formId, userId);
 		const cached = getFromCache<Form>(cacheKey);
 		if (cached) return cached;
 
@@ -131,6 +131,7 @@ export const formsDb = {
 			.from("forms")
 			.select("*")
 			.eq("id", formId)
+			.eq("user_id", userId)
 			.single();
 
 		if (error) throw error;
@@ -144,8 +145,8 @@ export const formsDb = {
 		return form;
 	},
 
-	async getFormBasic(formId: string): Promise<Partial<Form>> {
-		const cacheKey = getCacheKey("getFormBasic", formId);
+	async getFormBasic(formId: string, userId: string): Promise<Partial<Form>> {
+		const cacheKey = getCacheKey("getFormBasic", formId, userId);
 		const cached = getFromCache<Partial<Form>>(cacheKey);
 		if (cached) return cached;
 
@@ -157,6 +158,7 @@ export const formsDb = {
 				"id, title, description, is_published, user_id, created_at, updated_at",
 			)
 			.eq("id", formId)
+			.eq("user_id", userId)
 			.single();
 
 		if (error) throw error;
@@ -165,14 +167,14 @@ export const formsDb = {
 		return data;
 	},
 
-	async getMultipleForms(formIds: string[]) {
+	async getMultipleForms(formIds: string[], userId: string) {
 		if (formIds.length === 0) return [];
 
 		const cachedForms: Form[] = [];
 		const uncachedIds: string[] = [];
 
 		formIds.forEach((id) => {
-			const cacheKey = getCacheKey("getForm", id);
+			const cacheKey = getCacheKey("getForm", id, userId);
 			const cached = getFromCache<Form>(cacheKey);
 			if (cached) {
 				cachedForms.push(cached);
@@ -190,7 +192,8 @@ export const formsDb = {
 		const { data, error } = await supabase
 			.from("forms")
 			.select("*")
-			.in("id", uncachedIds);
+			.in("id", uncachedIds)
+			.eq("user_id", userId);
 
 		if (error) throw error;
 
@@ -200,7 +203,7 @@ export const formsDb = {
 				schema: ensureDefaultFormSettings(form.schema),
 			};
 
-			const cacheKey = getCacheKey("getForm", form.id);
+			const cacheKey = getCacheKey("getForm", form.id, userId);
 			setCache(cacheKey, processedForm);
 
 			return processedForm;
@@ -209,8 +212,20 @@ export const formsDb = {
 		return [...cachedForms, ...fetchedForms];
 	},
 
-	async updateForm(formId: string, updates: Partial<Form>) {
+	async updateForm(formId: string, userId: string, updates: Partial<Form>) {
 		const supabase = createClient();
+
+		// Verify ownership before updating
+		const { data: formCheck, error: checkError } = await supabase
+			.from("forms")
+			.select("id")
+			.eq("id", formId)
+			.eq("user_id", userId)
+			.single();
+
+		if (checkError || !formCheck) {
+			throw new Error("Form not found or access denied");
+		}
 
 		if (updates.title && !updates.slug) {
 			const { generateUniqueSlug } = await import("@/lib/utils/slug");
@@ -224,13 +239,14 @@ export const formsDb = {
 				updated_at: new Date().toISOString(),
 			})
 			.eq("id", formId)
+			.eq("user_id", userId)
 			.select()
 			.single();
 
 		if (error) throw error;
 
-		const formCacheKey = getCacheKey("getForm", formId);
-		const basicCacheKey = getCacheKey("getFormBasic", formId);
+		const formCacheKey = getCacheKey("getForm", formId, userId);
+		const basicCacheKey = getCacheKey("getFormBasic", formId, userId);
 		cache.delete(formCacheKey);
 		cache.delete(basicCacheKey);
 
@@ -247,17 +263,21 @@ export const formsDb = {
 		return data;
 	},
 
-	async deleteForm(formId: string) {
+	async deleteForm(formId: string, userId: string) {
 		const supabase = createClient();
 
-		const form = await this.getFormBasic(formId);
+		const form = await this.getFormBasic(formId, userId);
 
-		const { error } = await supabase.from("forms").delete().eq("id", formId);
+		const { error } = await supabase
+			.from("forms")
+			.delete()
+			.eq("id", formId)
+			.eq("user_id", userId);
 
 		if (error) throw error;
 
-		const formCacheKey = getCacheKey("getForm", formId);
-		const basicCacheKey = getCacheKey("getFormBasic", formId);
+		const formCacheKey = getCacheKey("getForm", formId, userId);
+		const basicCacheKey = getCacheKey("getFormBasic", formId, userId);
 		cache.delete(formCacheKey);
 		cache.delete(basicCacheKey);
 
@@ -272,7 +292,11 @@ export const formsDb = {
 		}
 	},
 
-	async togglePublishForm(formId: string, isPublished: boolean) {
+	async togglePublishForm(
+		formId: string,
+		userId: string,
+		isPublished: boolean,
+	) {
 		const supabase = createClient();
 
 		const { data, error } = await supabase
@@ -282,13 +306,14 @@ export const formsDb = {
 				updated_at: new Date().toISOString(),
 			})
 			.eq("id", formId)
+			.eq("user_id", userId)
 			.select()
 			.single();
 
 		if (error) throw error;
 
-		const formCacheKey = getCacheKey("getForm", formId);
-		const basicCacheKey = getCacheKey("getFormBasic", formId);
+		const formCacheKey = getCacheKey("getForm", formId, userId);
+		const basicCacheKey = getCacheKey("getFormBasic", formId, userId);
 		cache.delete(formCacheKey);
 		cache.delete(basicCacheKey);
 
@@ -330,12 +355,23 @@ export const formsDb = {
 		return data;
 	},
 
-	async getFormSubmissions(formId: string, limit?: number) {
-		const cacheKey = getCacheKey("getFormSubmissions", formId, limit);
+	async getFormSubmissions(formId: string, userId: string, limit?: number) {
+		// Verify form ownership first
+		const supabase = createClient();
+		const { data: form, error: formError } = await supabase
+			.from("forms")
+			.select("id")
+			.eq("id", formId)
+			.eq("user_id", userId)
+			.single();
+
+		if (formError || !form) {
+			throw new Error("Form not found or access denied");
+		}
+
+		const cacheKey = getCacheKey("getFormSubmissions", formId, userId, limit);
 		const cached = getFromCache<FormSubmission[]>(cacheKey);
 		if (cached) return cached;
-
-		const supabase = createClient();
 
 		let query = supabase
 			.from("form_submissions")
@@ -355,18 +391,35 @@ export const formsDb = {
 		return data;
 	},
 
-	async getFormSubmissionsPaginated(formId: string, page = 1, pageSize = 50) {
+	async getFormSubmissionsPaginated(
+		formId: string,
+		userId: string,
+		page = 1,
+		pageSize = 50,
+	) {
+		// Verify form ownership first
+		const supabase = createClient();
+		const { data: form, error: formError } = await supabase
+			.from("forms")
+			.select("id")
+			.eq("id", formId)
+			.eq("user_id", userId)
+			.single();
+
+		if (formError || !form) {
+			throw new Error("Form not found or access denied");
+		}
+
 		const offset = (page - 1) * pageSize;
 		const cacheKey = getCacheKey(
 			"getFormSubmissionsPaginated",
 			formId,
+			userId,
 			page,
 			pageSize,
 		);
 		const cached = getFromCache<FormSubmission[]>(cacheKey);
 		if (cached) return cached;
-
-		const supabase = createClient();
 
 		const { data, error } = await supabase
 			.from("form_submissions")
