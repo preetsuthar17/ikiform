@@ -55,7 +55,7 @@ export const FormBuilderPanels: React.FC<FormBuilderPanelsProps> = ({
 	return (
 		<ResizablePanelGroup
 			className="h-full"
-			direction="horizontal"
+			orientation="horizontal"
 			style={{
 				overscrollBehavior: "contain",
 			}}

@@ -150,9 +150,8 @@ export function AIBuilderClient() {
 					</Button>
 				</div>
 
-				{}
 				<div className="hidden h-full w-full md:flex">
-					<ResizablePanelGroup direction="horizontal">
+					<ResizablePanelGroup className="flex flex-1" orientation="horizontal">
 						<ResizablePanel defaultSize={20} maxSize={30} minSize={15}>
 							<div className="h-full w-full">
 								<ChatPanel {...chatPanelProps} />

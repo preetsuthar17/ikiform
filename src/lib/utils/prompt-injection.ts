@@ -54,12 +54,14 @@ export function detectPromptInjection(input: string): boolean {
 	return false;
 }
 
-export function sanitizeForPromptInjection(
-	input: string
-): { sanitized: string; detected: boolean } {
+export function sanitizeForPromptInjection(input: string): {
+	sanitized: string;
+	detected: boolean;
+} {
 	const detected = detectPromptInjection(input);
 	// Replace most dangerous known patterns only (use simple non-nested expressions)
-	const DANGEROUS = /\b(ignore|forget)\b.*\b(previous|prior|earlier)\b.*\b(instruction|prompt|directive|rule)s?\b/gi;
+	const DANGEROUS =
+		/\b(ignore|forget)\b.*\b(previous|prior|earlier)\b.*\b(instruction|prompt|directive|rule)s?\b/gi;
 	if (detected) {
 		return {
 			sanitized: input.replace(DANGEROUS, "[filtered]"),
@@ -77,11 +79,7 @@ export function filterSystemMessages(
 	messages: { role: string; content: string }[],
 ): { role: string; content: string }[] {
 	return messages
-		.filter(
-			(msg) =>
-				msg.role !== "system" &&
-				validateMessageRole(msg.role)
-		)
+		.filter((msg) => msg.role !== "system" && validateMessageRole(msg.role))
 		.map((msg) => ({
 			role: msg.role === "assistant" ? "assistant" : "user",
 			content: msg.content,

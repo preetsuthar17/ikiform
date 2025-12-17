@@ -75,15 +75,6 @@ export function LinkInputField(props: BaseFieldProps) {
 					</CardContent>
 				</Card>
 			</div>
-			{getErrorMessage() && (
-				<div
-					aria-live="polite"
-					className="rounded-md bg-destructive/10 p-3 text-destructive text-sm"
-					role="alert"
-				>
-					{getErrorMessage()}
-				</div>
-			)}
 		</div>
 	);
 }
