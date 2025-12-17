@@ -94,12 +94,17 @@ function FormProgress({
 	totalSteps,
 	showProgress,
 	currentStep,
+	schema,
 }: {
 	progress: number;
 	totalSteps: number;
 	showProgress: boolean;
 	currentStep: number;
+	schema: FormSchema;
 }) {
+	const { getButtonStyles } = useFormStyling(schema);
+	const buttonStyles = getButtonStyles(true);
+
 	if (totalSteps <= 1 || !showProgress) return null;
 
 	return (
@@ -109,7 +114,15 @@ function FormProgress({
 					{Math.round(progress)}%
 				</Badge>
 			</div>
-			<Progress className="h-2 w-full" value={progress} />
+			<Progress
+				className="h-2 w-full"
+				value={progress}
+				indicatorStyle={
+					buttonStyles.backgroundColor
+						? { backgroundColor: buttonStyles.backgroundColor }
+						: undefined
+				}
+			/>
 		</div>
 	);
 }
@@ -642,6 +655,7 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
 					<FormProgress
 						currentStep={currentStep}
 						progress={progress}
+						schema={schema}
 						showProgress={schema.settings.showProgress !== false}
 						totalSteps={totalSteps}
 					/>
