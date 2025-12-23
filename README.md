@@ -1,88 +1,36 @@
-# Ikiform
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-<br />
-<br />
-<a href="https://vercel.com/oss">
-  <img alt="Vercel OSS Program" src="https://vercel.com/oss/program-badge.svg" />
-</a>
-<br />
-<br />
-<br />
+## Getting Started
 
-Ikiform is a modern, AI-powered form builder and analytics platform. It allows users to create, manage, and analyze forms with advanced features such as AI-assisted form creation, analytics, and integrations. Built with Next.js, React, Supabase, and Tailwind CSS, Ikiform is designed for scalability and developer productivity.
-
-- AI-powered form builder
-- Real-time analytics and reporting
-- User authentication and dashboard
-- Customizable appearance and themes
-
-## Project Structure
-
-```plaintext
-Ikiform/
-├── public/           # Static assets (images, videos, icons, etc.)
-├── src/
-│   ├── app/          # Next.js app directory (routes, pages, layouts)
-│   ├── components/   # Reusable React components
-│   ├── hooks/        # Custom React hooks
-│   ├── lib/          # Library code (API, database, services, utils)
-│   └── utils/        # Utility functions
-├── .gitignore        # Git ignore rules
-├── next.config.ts    # Next.js configuration
-├── package.json      # Project metadata and scripts
-├── postcss.config.mjs# PostCSS configuration
-├── tsconfig.json     # TypeScript configuration
-└── README.md         # Project documentation
-```
-
-- Most of the application logic and UI lives in the `src/` directory.
-- The `public/` directory contains static files served directly by Next.js.
-- Configuration and setup files are in the project root.
-
-## Roadmap
-
-You can view the project roadmap at [https://www.ikiform.com/roadmap](https://www.ikiform.com/roadmap)
-
-## Contributing
-
-Thank you for your interest in contributing to Ikiform!
-
-### Getting Started
-
-1. **Clone the repository**
-2. **Install dependencies**
-   - Using npm: `npm install`
-   - Or using pnpm: `pnpm install`
-   - Or using bun: `bun install`
-3. **Copy and configure environment variables**
-   - Copy `.env.example` to `.env.local` and fill in the required values.
-4. **Run the development server**
-   - `npm run dev` or `pnpm dev`
-
-The app will be available at `http://localhost:3000` by default.
-
-### Environment Variables
-
-Create a `.env.local` file in the project root and configure the required environment variables:
+First, run the development server:
 
 ```bash
-cp .env.example .env.local
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-### Code Quality
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- Run `npm run lint` to check for linting issues.
-- Run `npm run format` to auto-format code.
-- Run `npm run check` to check types and formatting.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-### Building
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-- Run `npm run build` to build the project for production.
+## Learn More
 
-### Notes
+To learn more about Next.js, take a look at the following resources:
 
-- Do not commit files or folders listed in `.gitignore` (e.g., `node_modules`, `.next`, `.env*`, etc.).
-- Use clean and clear code for maintainability.
-- Follow the existing code style and structure.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-Feel free to open issues or pull requests for improvements or bug fixes. <3
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

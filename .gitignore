@@ -39,10 +39,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-/database
-/.cursor
-.env*.local
-
-prompt.xml
-/scripts/security-audit.ts
