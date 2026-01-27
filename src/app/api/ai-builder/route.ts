@@ -34,7 +34,10 @@ function createErrorResponse(message: string, status = 500) {
 	});
 }
 
-type AiMessage = { role: string; content: string };
+interface AiMessage {
+	role: string;
+	content: string;
+}
 
 function validateAndSanitizeMessages(messages: AiMessage[]): AiMessage[] {
 	if (!Array.isArray(messages) || messages.length === 0) {
@@ -69,9 +72,13 @@ const AiBuilderRateLimit: RateLimitSettings = {
 	window: "5 m",
 };
 
+interface AuthenticatedUser {
+	id: string;
+}
+
 async function authenticateAndCheckPremium(
-	req: NextRequest
-): Promise<{ user: any } | { error: Response }> {
+	_req: NextRequest
+): Promise<{ user: AuthenticatedUser } | { error: Response }> {
 	const supabase = await createClient();
 	const {
 		data: { user },
@@ -84,7 +91,7 @@ async function authenticateAndCheckPremium(
 	if (!premiumCheck.hasPremium) {
 		return { error: createErrorResponse("Premium subscription required", 403) };
 	}
-	return { user };
+	return { user: { id: user.id } };
 }
 
 function validateApiKey(): Response | null {
@@ -104,10 +111,11 @@ async function parseAndSanitizeRequest(req: NextRequest): Promise<
 	  }
 	| { error: Response }
 > {
-	type RequestData = {
+	interface RequestData {
 		messages: { role: string; content: string }[];
 		sessionId?: string;
-	};
+	}
+
 	let requestData: RequestData;
 	try {
 		requestData = await req.json();
@@ -133,7 +141,7 @@ async function saveMessageAsync(
 	sessionId: string,
 	role: "user" | "assistant" | "system",
 	content: string,
-	metadata: any
+	metadata: Record<string, unknown>
 ) {
 	try {
 		await formsDbServer.saveAIBuilderMessage(
@@ -158,7 +166,6 @@ function getGroqModel() {
 			return "llama-3.1-70b-versatile";
 		case "quality":
 			return "llama-3.2-90b-text-preview";
-		case "fast":
 		default:
 			return "llama-3.1-8b-instant";
 	}
@@ -199,7 +206,8 @@ async function streamAiResponse({
 
 	let aiResponse = "";
 	const encoder = new TextEncoder();
-	const signal: AbortSignal | undefined = (req as any)?.signal;
+	const reqWithSignal = req as NextRequest & { signal?: AbortSignal };
+	const signal: AbortSignal | undefined = reqWithSignal.signal;
 
 	const responseStream = new ReadableStream({
 		async start(controller) {
@@ -209,7 +217,9 @@ async function streamAiResponse({
 				if (!isClosed) {
 					try {
 						controller.close();
-					} catch {}
+					} catch {
+						// Ignore errors when closing the controller
+					}
 					isClosed = true;
 				}
 			};
@@ -226,7 +236,9 @@ async function streamAiResponse({
 
 			try {
 				for await (const chunk of stream.textStream) {
-					if (isClosed || (signal && signal.aborted)) break;
+					if (isClosed || signal?.aborted) {
+						break;
+					}
 					aiResponse += chunk;
 
 					if (!isClosed) {
@@ -254,14 +266,18 @@ async function streamAiResponse({
 			} catch (error) {
 				console.error("Groq streaming error:", error);
 				if (!isClosed) {
-					controller.error(error as any);
+					controller.error(
+						error instanceof Error ? error : new Error(String(error))
+					);
 					isClosed = true;
 				}
 			} finally {
 				if (signal && abortListener) {
 					try {
 						signal.removeEventListener("abort", abortListener);
-					} catch {}
+					} catch {
+						// Ignore errors when removing abort listener
+					}
 				}
 			}
 		},

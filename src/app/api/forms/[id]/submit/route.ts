@@ -23,12 +23,35 @@ import {
 } from "@/lib/webhooks/outbound";
 import { createClient } from "@/utils/supabase/server";
 
-function sanitizeObjectStrings(obj: any): any {
-	if (typeof obj === "string") return sanitizeString(obj);
-	if (Array.isArray(obj)) return obj.map(sanitizeObjectStrings);
+type JsonValue =
+	| string
+	| number
+	| boolean
+	| null
+	| JsonValue[]
+	| { [key: string]: JsonValue };
+
+type JsonRecord = { [key: string]: JsonValue };
+
+function isJsonRecord(value: JsonValue): value is JsonRecord {
+	return !!value && typeof value === "object" && !Array.isArray(value);
+}
+
+function sanitizeObjectStrings(obj: JsonValue): JsonValue {
+	if (typeof obj === "string") {
+		return sanitizeString(obj);
+	}
+	if (Array.isArray(obj)) {
+		return obj.map(sanitizeObjectStrings);
+	}
 	if (obj && typeof obj === "object") {
-		const result: any = {};
-		for (const key in obj) result[key] = sanitizeObjectStrings(obj[key]);
+		const result: { [key: string]: JsonValue } = {};
+		for (const key in obj) {
+			// eslint-disable-next-line no-prototype-builtins
+			if (Object.hasOwn(obj, key)) {
+				result[key] = sanitizeObjectStrings(obj[key] as JsonValue);
+			}
+		}
 		return result;
 	}
 	return obj;
@@ -73,7 +96,7 @@ export async function POST(
 
 		const supabase = await createClient();
 		const { data } = await supabase.auth.getUser();
-		const user = data.user;
+		const _user = data.user;
 
 		const rateLimit = {
 			...DEFAULT_RATE_LIMIT_SETTINGS,
@@ -156,10 +179,19 @@ export async function POST(
 		let filteredSubmissionData = sanitizeObjectStrings(submissionData);
 
 		if (profanityFilterSettings.enabled) {
+			if (!isJsonRecord(filteredSubmissionData)) {
+				return NextResponse.json(
+					{
+						error: "Invalid submission data",
+						message: "Submission data must be an object.",
+					},
+					{ status: 400 }
+				);
+			}
+
 			const profanityFilter = createProfanityFilter(profanityFilterSettings);
-			const result = profanityFilter.filterSubmissionData(
-				filteredSubmissionData
-			);
+			const result = profanityFilter.filterSubmissionData(filteredSubmissionData);
+
 			if (!result.isValid) {
 				return NextResponse.json(
 					{
@@ -172,16 +204,25 @@ export async function POST(
 					{ status: 400 }
 				);
 			}
+
 			if (profanityFilterSettings.replaceWithAsterisks) {
 				filteredSubmissionData = result.filteredData;
 			}
 		}
 
-		const submission = await formsDbServer.submitForm(
-			formId,
-			filteredSubmissionData,
-			ipAddress
-		);
+		if (!isJsonRecord(filteredSubmissionData)) {
+			return NextResponse.json(
+				{
+					error: "Invalid submission data",
+					message: "Submission data must be an object.",
+				},
+				{ status: 400 }
+			);
+		}
+
+		const submissionPayload: JsonRecord = filteredSubmissionData;
+
+		const submission = await formsDbServer.submitForm(formId, submissionPayload, ipAddress);
 
 		if (duplicatePrevention?.enabled) {
 			const email = extractEmailFromSubmissionData(submissionData);
@@ -197,12 +238,12 @@ export async function POST(
 			);
 		}
 
-		const [formatted] = await Promise.all([
-			formatHumanFriendlyPayload(formId, filteredSubmissionData),
+		const [_formatted] = await Promise.all([
+			formatHumanFriendlyPayload(formId, submissionPayload),
 			triggerWebhooks("form_submitted", {
 				submissionId: submission.id,
 				ipAddress,
-				...(await formatHumanFriendlyPayload(formId, filteredSubmissionData)),
+				...(await formatHumanFriendlyPayload(formId, submissionPayload)),
 			}).catch((e) => console.error("[Webhook] Delivery error:", e)),
 		]);
 
