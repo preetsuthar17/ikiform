@@ -101,7 +101,7 @@ export function FieldGroupField({
 						fieldError,
 						undefined,
 						disabled,
-						formId,
+						formId
 					)}
 				</div>
 			</div>

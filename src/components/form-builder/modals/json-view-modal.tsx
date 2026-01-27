@@ -147,7 +147,7 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
 				abortControllerRef.current.abort();
 			}
 		},
-		[],
+		[]
 	);
 
 	useEffect(() => {
@@ -337,7 +337,7 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
 							</div>
 						) : (
 							<div
-								className="[&_pre]:bg-transparent! [&_pre]:p-0! h-full p-4 font-mono text-sm"
+								className="h-full p-4 font-mono text-sm [&_pre]:bg-transparent! [&_pre]:p-0!"
 								dangerouslySetInnerHTML={{ __html: highlightedCode }}
 							/>
 						)}

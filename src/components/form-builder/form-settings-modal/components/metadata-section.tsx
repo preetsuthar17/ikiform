@@ -41,7 +41,7 @@ export function MetadataSection({
 	const metadata = localSettings.metadata || {};
 	const [hasBasicChanges, setHasBasicChanges] = useState(false as boolean);
 	const [hasIndexingChanges, setHasIndexingChanges] = useState(
-		false as boolean,
+		false as boolean
 	);
 	const [hasSocialChanges, setHasSocialChanges] = useState(false as boolean);
 	const [savingBasic, setSavingBasic] = useState(false as boolean);
@@ -62,7 +62,7 @@ export function MetadataSection({
 		return () =>
 			window.removeEventListener(
 				"beforeunload",
-				onBeforeUnload as unknown as EventListener,
+				onBeforeUnload as unknown as EventListener
 			);
 	}, [hasBasicChanges, hasIndexingChanges, hasSocialChanges]);
 

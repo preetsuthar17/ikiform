@@ -66,7 +66,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 			if (isMobile && fieldId) setShowFieldSettings(true);
 			if (isMobile && !fieldId) setShowFieldSettings(false);
 		},
-		[actions, isMobile],
+		[actions, isMobile]
 	);
 
 	const addField = (fieldType: FormField["type"], index?: number) => {
@@ -76,7 +76,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 			state.formSchema,
 			newField,
 			state.selectedBlockId,
-			index,
+			index
 		);
 		actions.setFormSchema(updatedSchema);
 		actions.setSelectedFieldId(newField.id);
@@ -87,7 +87,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 			addField(fieldType, index);
 			setShowFieldPalette(false);
 		},
-		[addField],
+		[addField]
 	);
 
 	const updateField = (updatedField: FormField) => {
@@ -158,7 +158,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 	const updateBlock = (blockId: string, updates: Partial<FormBlock>) => {
 		actions.setFormSchema((prev) => {
 			const updatedBlocks = prev.blocks.map((block) =>
-				block.id === blockId ? { ...block, ...updates } : block,
+				block.id === blockId ? { ...block, ...updates } : block
 			);
 
 			return {
@@ -224,7 +224,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 				const newForm = await formsDb.createForm(
 					user.id,
 					state.formSchema.settings.title,
-					state.formSchema,
+					state.formSchema
 				);
 				router.push(`/form-builder/${newForm.id}`);
 				toast.success("Form created successfully!");
@@ -247,7 +247,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 	};
 
 	const handlePublishForm = async () => {
-		if (!formId || !user) return;
+		if (!(formId && user)) return;
 
 		try {
 			await formsDb.togglePublishForm(formId, user.id, true);
@@ -363,11 +363,11 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 			}
 		} else {
 			const allFields = state.formSchema.blocks.flatMap(
-				(block) => block.fields || [],
+				(block) => block.fields || []
 			);
 
 			const originalSteps = state.formSchema.blocks.filter(
-				(block) => block.id !== "default",
+				(block) => block.id !== "default"
 			);
 
 			const newSchema = {

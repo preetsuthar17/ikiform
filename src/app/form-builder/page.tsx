@@ -7,7 +7,7 @@ const FormBuilderClient = dynamic(
 	{
 		ssr: true,
 		loading: () => <FormBuilderSkeleton />,
-	},
+	}
 );
 
 export default function NewFormBuilderPage() {

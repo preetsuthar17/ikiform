@@ -113,7 +113,7 @@ export function ShareFormModal({
 			await copyWithToast(
 				shareUrl,
 				"Link copied to clipboard!",
-				"Failed to copy link. Please copy manually.",
+				"Failed to copy link. Please copy manually."
 			);
 		} catch (error) {
 			console.error("Failed to copy link:", error);

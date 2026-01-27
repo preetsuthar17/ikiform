@@ -23,7 +23,7 @@ export function CompactPalette({
 			(field) =>
 				field.label.toLowerCase().includes(term) ||
 				field.description.toLowerCase().includes(term) ||
-				field.type.toLowerCase().includes(term),
+				field.type.toLowerCase().includes(term)
 		);
 	}, [searchTerm]);
 
@@ -31,7 +31,7 @@ export function CompactPalette({
 		<div className="flex flex-col gap-3">
 			{}
 			<div className="relative px-2">
-				<Search className="-translate-y-1/2 absolute top-1/2 left-4 size-4 text-muted-foreground" />
+				<Search className="absolute top-1/2 left-4 size-4 -translate-y-1/2 text-muted-foreground" />
 				<Input
 					className="pl-10"
 					onChange={(e) => setSearchTerm(e.target.value)}

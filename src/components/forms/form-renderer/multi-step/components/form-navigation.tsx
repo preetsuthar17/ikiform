@@ -34,7 +34,7 @@ export const FormNavigation: React.FC<FormNavigationProps> = ({
 	const hasLivePatternError = currentFields.some(
 		(field) =>
 			["text", "email", "textarea"].includes(field.type) &&
-			getLivePatternError(field, formData[field.id]),
+			getLivePatternError(field, formData[field.id])
 	);
 
 	return (

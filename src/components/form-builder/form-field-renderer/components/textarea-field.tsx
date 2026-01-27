@@ -39,7 +39,7 @@ export function TextareaField(props: BaseFieldProps) {
 			rows: field.settings?.rows || 4,
 			value: value || "",
 		},
-		builderMode,
+		builderMode
 	);
 
 	return (

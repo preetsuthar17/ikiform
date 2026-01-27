@@ -89,7 +89,7 @@ export async function revokeFormApiKey(formId: string): Promise<{
 
 export async function toggleFormApiEnabled(
 	formId: string,
-	enabled: boolean,
+	enabled: boolean
 ): Promise<{
 	success: boolean;
 	error?: string;
@@ -157,7 +157,7 @@ export async function getFormByApiKey(apiKey: string): Promise<{
 
 export async function validateFormApiAccess(
 	apiKey: string,
-	formId: string,
+	formId: string
 ): Promise<{
 	success: boolean;
 	form?: any;

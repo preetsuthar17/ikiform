@@ -22,7 +22,7 @@ const breadcrumbListVariants = cva(
 		defaultVariants: {
 			size: "default",
 		},
-	},
+	}
 );
 
 const breadcrumbItemVariants = cva("inline-flex items-center gap-1.5", {
@@ -35,7 +35,7 @@ const breadcrumbLinkVariants = cva(
 	{
 		variants: {},
 		defaultVariants: {},
-	},
+	}
 );
 
 const breadcrumbPageVariants = cva("font-normal text-foreground", {
@@ -85,7 +85,7 @@ const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
 			ref={ref}
 			{...props}
 		/>
-	),
+	)
 );
 Breadcrumb.displayName = "Breadcrumb";
 
@@ -96,7 +96,7 @@ const BreadcrumbList = React.forwardRef<HTMLOListElement, BreadcrumbListProps>(
 			ref={ref}
 			{...props}
 		/>
-	),
+	)
 );
 BreadcrumbList.displayName = "BreadcrumbList";
 
@@ -107,7 +107,7 @@ const BreadcrumbItem = React.forwardRef<HTMLLIElement, BreadcrumbItemProps>(
 			ref={ref}
 			{...props}
 		/>
-	),
+	)
 );
 BreadcrumbItem.displayName = "BreadcrumbItem";
 
@@ -122,7 +122,7 @@ const BreadcrumbLink = React.forwardRef<HTMLAnchorElement, BreadcrumbLinkProps>(
 				{...props}
 			/>
 		);
-	},
+	}
 );
 BreadcrumbLink.displayName = "BreadcrumbLink";
 
@@ -136,7 +136,7 @@ const BreadcrumbPage = React.forwardRef<HTMLSpanElement, BreadcrumbPageProps>(
 			role="link"
 			{...props}
 		/>
-	),
+	)
 );
 BreadcrumbPage.displayName = "BreadcrumbPage";
 
@@ -149,7 +149,7 @@ const BreadcrumbSeparator: React.FC<BreadcrumbSeparatorProps> = ({
 		aria-hidden="true"
 		className={cn(
 			"flex items-center [&>svg]:size-3.5 [&>svg]:shrink-0",
-			className,
+			className
 		)}
 		role="presentation"
 		{...props}

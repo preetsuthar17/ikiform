@@ -105,7 +105,7 @@ export class ApiEngine implements PrepopulationEngine {
 
 			if (!response.ok) {
 				throw new Error(
-					`API request failed: ${response.status} ${response.statusText}`,
+					`API request failed: ${response.status} ${response.statusText}`
 				);
 			}
 
@@ -176,7 +176,7 @@ export class ApiEngine implements PrepopulationEngine {
 				method: config.apiMethod,
 				headers: config.apiHeaders,
 				body: config.apiBodyTemplate,
-			}),
+			})
 		);
 	}
 

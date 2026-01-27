@@ -28,7 +28,7 @@ const videoPlayerVariants = cva(
 		defaultVariants: {
 			size: "default",
 		},
-	},
+	}
 );
 
 export interface VideoPlayerProps
@@ -52,7 +52,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
 			autoHide = true,
 			...props
 		},
-		ref,
+		ref
 	) => {
 		const [isPlaying, setIsPlaying] = React.useState(false);
 		const [currentTime, setCurrentTime] = React.useState(0);
@@ -129,7 +129,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
 			if (videoRef.current) {
 				videoRef.current.currentTime = Math.max(
 					0,
-					Math.min(duration, currentTime + seconds),
+					Math.min(duration, currentTime + seconds)
 				);
 			}
 		};
@@ -208,7 +208,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
 			return () => {
 				document.removeEventListener(
 					"fullscreenchange",
-					handleFullscreenChange,
+					handleFullscreenChange
 				);
 			};
 		}, []);
@@ -278,7 +278,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
 						className={cn(
 							"absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent",
 							"flex flex-col justify-end transition-opacity duration-300",
-							showControlsState ? "opacity-100" : "opacity-0",
+							showControlsState ? "opacity-100" : "opacity-0"
 						)}
 					>
 						{}
@@ -403,7 +403,7 @@ const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
 				)}
 			</div>
 		);
-	},
+	}
 );
 
 VideoPlayer.displayName = "VideoPlayer";

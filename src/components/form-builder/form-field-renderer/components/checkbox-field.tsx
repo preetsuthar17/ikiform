@@ -64,11 +64,11 @@ export function CheckboxField(props: BaseFieldProps) {
 	const getAvailableOptions = () => apiOptions ?? field.options ?? [];
 
 	const getOptionValue = (
-		option: string | { value: string; label?: string },
+		option: string | { value: string; label?: string }
 	): string => (typeof option === "string" ? option : option.value);
 
 	const getOptionLabel = (
-		option: string | { value: string; label?: string },
+		option: string | { value: string; label?: string }
 	): string =>
 		typeof option === "string" ? option : option.label || option.value;
 

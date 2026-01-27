@@ -38,22 +38,22 @@ const markdownComponents = {
 		);
 	},
 	p: ({ children, ...props }: any) => (
-		<p className="mb-4 last:mb-0 leading-relaxed" {...props}>
+		<p className="mb-4 leading-relaxed last:mb-0" {...props}>
 			{children}
 		</p>
 	),
 	h1: ({ children, ...props }: any) => (
-		<h1 className="my-4 text-3xl font-bold first:mt-0" {...props}>
+		<h1 className="my-4 font-bold text-3xl first:mt-0" {...props}>
 			{children}
 		</h1>
 	),
 	h2: ({ children, ...props }: any) => (
-		<h2 className="my-3 text-2xl font-semibold" {...props}>
+		<h2 className="my-3 font-semibold text-2xl" {...props}>
 			{children}
 		</h2>
 	),
 	h3: ({ children, ...props }: any) => (
-		<h3 className="my-0 text-lg font-medium" {...props}>
+		<h3 className="my-0 font-medium text-lg" {...props}>
 			{children}
 		</h3>
 	),
@@ -77,7 +77,7 @@ const markdownComponents = {
 	),
 	blockquote: ({ children, ...props }: any) => (
 		<blockquote
-			className="mb-4 border-l-4 border-primary pl-4 italic"
+			className="mb-4 border-primary border-l-4 pl-4 italic"
 			{...props}
 		>
 			{children}
@@ -103,13 +103,13 @@ export default async function Changelog() {
 	const entries = await getChangelogEntries();
 
 	return (
-		<main className="mx-auto flex max-w-4xl w-full flex-col px-4 py-12 sm:px-6 lg:px-8">
-			<div className="flex flex-col gap-2"></div>
+		<main className="mx-auto flex w-full max-w-4xl flex-col px-4 py-12 sm:px-6 lg:px-8">
+			<div className="flex flex-col gap-2" />
 
 			<div className="flex flex-col gap-16">
 				{entries.map((entry, index) => (
-					<article key={index} className="relative flex gap-8 lg:gap-12">
-						<div className="hidden lg:block sticky top-8 h-fit shrink-0 self-start">
+					<article className="relative flex gap-8 lg:gap-12" key={index}>
+						<div className="sticky top-8 hidden h-fit shrink-0 self-start lg:block">
 							{entry.release_date && entry.release_date.trim() !== "" ? (
 								<Badge variant="outline">
 									<time dateTime={entry.release_date}>
@@ -121,9 +121,9 @@ export default async function Changelog() {
 							)}
 						</div>
 
-						<div className="min-w-0 flex-1 flex flex-col gap-6">
+						<div className="flex min-w-0 flex-1 flex-col gap-6">
 							{index === 0 && (
-								<h1 className="text-sm tracking-tight text-muted-foreground font-semibold">
+								<h1 className="font-semibold text-muted-foreground text-sm tracking-tight">
 									CHANGELOG
 								</h1>
 							)}
@@ -139,7 +139,7 @@ export default async function Changelog() {
 										<Badge variant="outline">Unreleased</Badge>
 									)}
 								</div>
-								<h2 className="text-2xl font-semibold tracking-tight">
+								<h2 className="font-semibold text-2xl tracking-tight">
 									{entry.title}
 								</h2>
 								{entry.description && (
@@ -149,7 +149,7 @@ export default async function Changelog() {
 								)}
 							</div>
 
-							<div className="prose prose-sm max-w-none dark:prose-invert text-sm flex flex-col gap-0">
+							<div className="prose prose-sm dark:prose-invert flex max-w-none flex-col gap-0 text-sm">
 								<ReactMarkdown
 									components={markdownComponents}
 									rehypePlugins={[rehypeSanitize]}
@@ -161,7 +161,7 @@ export default async function Changelog() {
 						</div>
 
 						{index < entries.length - 1 && (
-							<Separator className="absolute -bottom-8 left-0 right-0" />
+							<Separator className="absolute right-0 -bottom-8 left-0" />
 						)}
 					</article>
 				))}

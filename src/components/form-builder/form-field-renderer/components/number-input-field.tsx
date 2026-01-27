@@ -25,7 +25,7 @@ export function NumberInputField(props: BaseFieldProps) {
 	};
 
 	const handleNumberInputKeyDown = (
-		e: React.KeyboardEvent<HTMLInputElement>,
+		e: React.KeyboardEvent<HTMLInputElement>
 	) => {
 		if (e.key === "Escape") {
 			e.currentTarget.blur();
@@ -49,7 +49,7 @@ export function NumberInputField(props: BaseFieldProps) {
 			type: "number",
 			value: value || "",
 		},
-		builderMode,
+		builderMode
 	);
 
 	return (

@@ -105,19 +105,19 @@ export function useFormStyling(schema: FormSchema) {
 			if (typography.fontFamily) {
 				root.style.setProperty(
 					"--form-font-family",
-					`"${typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`,
+					`"${typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`
 				);
 			}
 			if (typography.fontSize) {
 				root.style.setProperty(
 					"--form-font-size",
-					getFontSizeValue(typography.fontSize),
+					getFontSizeValue(typography.fontSize)
 				);
 			}
 			if (typography.fontWeight) {
 				root.style.setProperty(
 					"--form-font-weight",
-					getFontWeightValue(typography.fontWeight),
+					getFontWeightValue(typography.fontWeight)
 				);
 			}
 		}

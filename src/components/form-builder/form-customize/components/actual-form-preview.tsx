@@ -152,21 +152,21 @@ export function ActualFormPreview({
 		if (typography?.fontFamily) {
 			root.style.setProperty(
 				"--form-font-family",
-				`"${typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`,
+				`"${typography.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`
 			);
 		}
 		if (typography?.fontSize) {
 			const { getFontSizeValue } = require("@/lib/utils/form-styles");
 			root.style.setProperty(
 				"--form-font-size",
-				getFontSizeValue(typography.fontSize),
+				getFontSizeValue(typography.fontSize)
 			);
 		}
 		if (typography?.fontWeight) {
 			const { getFontWeightValue } = require("@/lib/utils/form-styles");
 			root.style.setProperty(
 				"--form-font-weight",
-				getFontWeightValue(typography.fontWeight),
+				getFontWeightValue(typography.fontWeight)
 			);
 		}
 
@@ -389,7 +389,7 @@ export function ActualFormPreview({
 							{}
 							{Boolean(
 								localSettings.branding &&
-									(localSettings.branding as any).showIkiformBranding !== false,
+									(localSettings.branding as any).showIkiformBranding !== false
 							) && (
 								<p className="text-muted-foreground text-sm">
 									Powered by{" "}

@@ -6,7 +6,6 @@ import {
 	Code2,
 	Database,
 	Gauge,
-	HelpCircle,
 	Infinity,
 	ListChecks,
 	ShieldBan,
@@ -16,11 +15,6 @@ import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui";
 import { Button } from "@/components/ui/button";
-import {
-	Tooltip,
-	TooltipContent,
-	TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { useAuth } from "@/hooks/use-auth";
 import { usePremiumStatus } from "@/hooks/use-premium-status";
 
@@ -266,7 +260,7 @@ export default function PricingClient({ products }: PricingClientProps) {
 				ctaLabel: "Start your 14-day free trial",
 			},
 		],
-		[],
+		[]
 	);
 
 	return (

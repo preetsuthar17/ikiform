@@ -57,7 +57,7 @@ export function PasswordProtectionSection({
 		return () =>
 			window.removeEventListener(
 				"beforeunload",
-				onBeforeUnload as unknown as EventListener,
+				onBeforeUnload as unknown as EventListener
 			);
 	}, [hasChanges]);
 
@@ -116,7 +116,7 @@ export function PasswordProtectionSection({
 	useEffect(() => {
 		if (passwordProtectionRef.current) {
 			const firstInput = passwordProtectionRef.current.querySelector(
-				"input, textarea",
+				"input, textarea"
 			) as HTMLElement;
 			firstInput?.focus();
 		}
@@ -227,7 +227,7 @@ export function PasswordProtectionSection({
 											onChange={(e) =>
 												handlePasswordProtectionChange(
 													"password",
-													e.target.value,
+													e.target.value
 												)
 											}
 											onKeyDown={(e) => {

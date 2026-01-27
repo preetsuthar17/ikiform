@@ -169,7 +169,7 @@ export interface BasicInfoSectionProps {
 export interface RateLimitSectionProps {
 	localSettings: LocalSettings;
 	updateRateLimit: (
-		updates: Partial<NonNullable<LocalSettings["rateLimit"]>>,
+		updates: Partial<NonNullable<LocalSettings["rateLimit"]>>
 	) => void;
 	formId?: string;
 	schema?: any;
@@ -178,7 +178,7 @@ export interface RateLimitSectionProps {
 export interface DuplicatePreventionSectionProps {
 	localSettings: LocalSettings;
 	updateDuplicatePrevention: (
-		updates: Partial<NonNullable<LocalSettings["duplicatePrevention"]>>,
+		updates: Partial<NonNullable<LocalSettings["duplicatePrevention"]>>
 	) => void;
 	formId?: string;
 	schema?: any;
@@ -187,7 +187,7 @@ export interface DuplicatePreventionSectionProps {
 export interface ProfanityFilterSectionProps {
 	localSettings: LocalSettings;
 	updateProfanityFilter: (
-		updates: Partial<NonNullable<LocalSettings["profanityFilter"]>>,
+		updates: Partial<NonNullable<LocalSettings["profanityFilter"]>>
 	) => void;
 	formId?: string;
 	schema?: any;
@@ -196,7 +196,7 @@ export interface ProfanityFilterSectionProps {
 export interface BotProtectionSectionProps {
 	localSettings: LocalSettings;
 	updateBotProtection: (
-		updates: Partial<NonNullable<LocalSettings["botProtection"]>>,
+		updates: Partial<NonNullable<LocalSettings["botProtection"]>>
 	) => void;
 	formId?: string;
 	schema?: any;
@@ -207,7 +207,7 @@ export interface SocialMediaSectionProps {
 	updateSocialMedia: (
 		updates: Partial<
 			NonNullable<NonNullable<LocalSettings["branding"]>["socialMedia"]>
-		>,
+		>
 	) => void;
 }
 

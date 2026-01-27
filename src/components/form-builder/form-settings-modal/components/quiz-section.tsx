@@ -60,14 +60,14 @@ export function QuizSection({
 		return () =>
 			window.removeEventListener(
 				"beforeunload",
-				onBeforeUnload as unknown as EventListener,
+				onBeforeUnload as unknown as EventListener
 			);
 	}, [hasChanges]);
 
 	useEffect(() => {
 		if (sectionRef.current) {
 			const firstInput = sectionRef.current.querySelector(
-				"input, textarea",
+				"input, textarea"
 			) as HTMLElement;
 			firstInput?.focus();
 		}

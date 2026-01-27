@@ -75,7 +75,7 @@ function SuccessScreen({ schema }: { schema: FormSchema }) {
 				</Card>
 				{Boolean(
 					schema.settings.branding &&
-						(schema.settings.branding as any).showIkiformBranding !== false,
+						(schema.settings.branding as any).showIkiformBranding !== false
 				) && (
 					<p className="text-center text-muted-foreground text-sm">
 						Powered by{" "}
@@ -116,12 +116,12 @@ function FormProgress({
 			</div>
 			<Progress
 				className="h-2 w-full"
-				value={progress}
 				indicatorStyle={
 					buttonStyles.backgroundColor
 						? { backgroundColor: buttonStyles.backgroundColor }
 						: undefined
 				}
+				value={progress}
 			/>
 		</div>
 	);
@@ -165,7 +165,7 @@ function FormContent({
 
 	const visibleFields = fieldVisibility
 		? currentBlock.fields.filter(
-				(field) => fieldVisibility[field.id]?.visible !== false,
+				(field) => fieldVisibility[field.id]?.visible !== false
 			)
 		: currentBlock.fields;
 
@@ -214,7 +214,7 @@ function FormContent({
 					<div
 						className={cn(
 							"transition-opacity duration-200",
-							fieldVisibility?.[field.id]?.disabled && "opacity-50",
+							fieldVisibility?.[field.id]?.disabled && "opacity-50"
 						)}
 						key={field.id}
 					>
@@ -261,7 +261,7 @@ function FormNavigation({
 	const hasLivePatternError = currentFields.some(
 		(field) =>
 			["text", "email", "textarea"].includes(field.type) &&
-			getLivePatternError(field, formData[field.id]),
+			getLivePatternError(field, formData[field.id])
 	);
 
 	const hasValidationErrors = Object.keys(errors).length > 0;
@@ -344,7 +344,7 @@ function FormFooter({ schema }: { schema: FormSchema }) {
 				)}
 			{Boolean(
 				schema.settings.branding &&
-					(schema.settings.branding as any).showIkiformBranding !== false,
+					(schema.settings.branding as any).showIkiformBranding !== false
 			) && (
 				<p className="text-muted-foreground text-sm">
 					Powered by{" "}
@@ -405,7 +405,7 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
 							},
 						]
 					: [],
-		[schema.blocks, schema.fields],
+		[schema.blocks, schema.fields]
 	);
 
 	const totalSteps = blocks.length;
@@ -487,7 +487,7 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
 			if (value && field.type === "email") {
 				const emailValidation = validateEmail(
 					value,
-					field.settings?.emailValidation,
+					field.settings?.emailValidation
 				);
 				if (!emailValidation.isValid) {
 					stepErrors[field.id] =
@@ -584,28 +584,24 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
 						window.location.href = schema.settings.redirectUrl!;
 					}, 2000);
 				}
+			} else if (result.error === "Bot detected") {
+				toast.error(result.message || "Bot detected. Access denied.");
+			} else if (result.error === "Duplicate submission detected") {
+				toast.error(result.message || "You have already submitted this form.");
+			} else if (result.error === "Rate limit exceeded") {
+				toast.error(
+					result.message || "Too many requests. Please try again later."
+				);
+			} else if (result.error === "Response limit reached") {
+				toast.error(
+					result.message || "This form is no longer accepting responses."
+				);
+			} else if (result.error === "Content validation failed") {
+				toast.error(
+					result.message || "Your submission contains inappropriate content."
+				);
 			} else {
-				if (result.error === "Bot detected") {
-					toast.error(result.message || "Bot detected. Access denied.");
-				} else if (result.error === "Duplicate submission detected") {
-					toast.error(
-						result.message || "You have already submitted this form.",
-					);
-				} else if (result.error === "Rate limit exceeded") {
-					toast.error(
-						result.message || "Too many requests. Please try again later.",
-					);
-				} else if (result.error === "Response limit reached") {
-					toast.error(
-						result.message || "This form is no longer accepting responses.",
-					);
-				} else if (result.error === "Content validation failed") {
-					toast.error(
-						result.message || "Your submission contains inappropriate content.",
-					);
-				} else {
-					toast.error(result.message || "Failed to submit form");
-				}
+				toast.error(result.message || "Failed to submit form");
 			}
 		} catch (error) {
 			toast.error("Failed to submit form. Please try again.");
@@ -642,7 +638,7 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
 				"flex items-center justify-center transition-opacity duration-500",
 				showForm ? "opacity-100" : "opacity-0",
 				marginClass,
-				getFormClasses(),
+				getFormClasses()
 			)}
 			dir={dir}
 			style={customStyles.containerStyle}

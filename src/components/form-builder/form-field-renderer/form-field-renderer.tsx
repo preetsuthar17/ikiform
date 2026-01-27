@@ -30,7 +30,7 @@ export function FormFieldRenderer({
 					fieldRef,
 					disabled,
 					formId,
-					builderMode,
+					builderMode
 				)}
 			</div>
 		</FieldWrapper>

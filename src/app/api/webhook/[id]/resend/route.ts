@@ -5,7 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 
 async function verifyWebhookOwnership(
 	webhookId: string,
-	userId: string,
+	userId: string
 ): Promise<boolean> {
 	const supabase = createAdminClient();
 	const { data: webhook, error } = await supabase
@@ -40,12 +40,12 @@ async function verifyWebhookOwnership(
 
 export async function POST(
 	req: NextRequest,
-	{ params }: { params: Promise<{ id: string }> },
+	{ params }: { params: Promise<{ id: string }> }
 ) {
 	const startTime = Date.now();
 	const webhookId = (await params).id;
 	console.log(
-		`[WEBHOOK API] POST /api/webhook/${webhookId}/resend - Started at ${new Date().toISOString()}`,
+		`[WEBHOOK API] POST /api/webhook/${webhookId}/resend - Started at ${new Date().toISOString()}`
 	);
 
 	try {
@@ -63,23 +63,23 @@ export async function POST(
 		if (!hasAccess) {
 			return NextResponse.json(
 				{ error: "Webhook not found or access denied" },
-				{ status: 403 },
+				{ status: 403 }
 			);
 		}
 
 		const body = await req.json();
 		console.log(
 			`[WEBHOOK API] POST /api/webhook/${webhookId}/resend - Request body:`,
-			JSON.stringify(body, null, 2),
+			JSON.stringify(body, null, 2)
 		);
 
 		if (!body.logId) {
 			console.error(
-				`[WEBHOOK API] POST /api/webhook/${webhookId}/resend - Missing logId in request body`,
+				`[WEBHOOK API] POST /api/webhook/${webhookId}/resend - Missing logId in request body`
 			);
 			return NextResponse.json(
 				{ error: "Missing logId in request body" },
-				{ status: 400 },
+				{ status: 400 }
 			);
 		}
 
@@ -87,7 +87,7 @@ export async function POST(
 
 		const duration = Date.now() - startTime;
 		console.log(
-			`[WEBHOOK API] POST /api/webhook/${webhookId}/resend - Success: Resend completed in ${duration}ms`,
+			`[WEBHOOK API] POST /api/webhook/${webhookId}/resend - Success: Resend completed in ${duration}ms`
 		);
 
 		return NextResponse.json(result);
@@ -99,14 +99,14 @@ export async function POST(
 				: "Failed to resend webhook delivery";
 		console.error(
 			`[WEBHOOK API] POST /api/webhook/${webhookId}/resend - Error after ${duration}ms:`,
-			errorMessage,
+			errorMessage
 		);
 
 		return NextResponse.json(
 			{
 				error: errorMessage,
 			},
-			{ status: 400 },
+			{ status: 400 }
 		);
 	}
 }

@@ -13,7 +13,7 @@ export function sanitizeAnimationValue(value: any): any {
 
 		if (value.includes("var(--") && process.env.NODE_ENV === "development") {
 			console.warn(
-				`CSS variable detected in animation: ${value}. Consider using motion-safe colors instead.`,
+				`CSS variable detected in animation: ${value}. Consider using motion-safe colors instead.`
 			);
 		}
 	}
@@ -31,7 +31,7 @@ export interface MotionSafeVariants {
 }
 
 export function sanitizeVariants(
-	variants: MotionSafeVariants,
+	variants: MotionSafeVariants
 ): MotionSafeVariants {
 	const sanitizedVariants: MotionSafeVariants = {};
 
@@ -41,7 +41,7 @@ export function sanitizeVariants(
 				Object.entries(variant).map(([prop, value]) => [
 					prop,
 					sanitizeAnimationValue(value),
-				]),
+				])
 			);
 		}
 	}
@@ -65,7 +65,7 @@ export function useMotionSafeColors() {
 
 			return isDark ? resolvedDarkColor : resolvedColor;
 		},
-		[getColor, isDark],
+		[getColor, isDark]
 	);
 
 	const safeOpacity = React.useCallback((value?: number) => value ?? 0, []);
@@ -74,7 +74,7 @@ export function useMotionSafeColors() {
 		(color: ColorKey | string, fallback = "rgba(0, 0, 0, 0)") => {
 			if (typeof color === "string" && color.includes("var(--")) {
 				console.warn(
-					`CSS variable in backgroundColor: ${color}, using fallback`,
+					`CSS variable in backgroundColor: ${color}, using fallback`
 				);
 				return fallback;
 			}
@@ -85,7 +85,7 @@ export function useMotionSafeColors() {
 
 			return typeof color === "string" ? color : getColor(color);
 		},
-		[getColor],
+		[getColor]
 	);
 
 	const safeBorderColor = React.useCallback(
@@ -101,7 +101,7 @@ export function useMotionSafeColors() {
 
 			return typeof color === "string" ? color : getColor(color);
 		},
-		[getColor],
+		[getColor]
 	);
 
 	return {

@@ -6,7 +6,7 @@ const DemoFormBuilder = dynamic(
 	() => import("@/components/form-builder/form-builder/demo-form-builder"),
 	{
 		loading: () => <FormBuilderSkeleton />,
-	},
+	}
 );
 
 export default function DemoFormBuilderPage() {

@@ -7,7 +7,7 @@ export const validateStep = (
 	stepIndex: number,
 	blocks: FormBlock[],
 	formData: Record<string, any>,
-	fieldVisibility?: Record<string, { visible: boolean; disabled: boolean }>,
+	fieldVisibility?: Record<string, { visible: boolean; disabled: boolean }>
 ): { errors: Record<string, string>; isValid: boolean } => {
 	const block = blocks[stepIndex];
 	const errors: Record<string, string> = {};
@@ -53,7 +53,7 @@ export const validateStep = (
 		if (value && field.type === "email") {
 			const emailValidation = validateEmail(
 				value,
-				field.settings?.emailValidation,
+				field.settings?.emailValidation
 			);
 			if (!emailValidation.isValid) {
 				errors[field.id] =

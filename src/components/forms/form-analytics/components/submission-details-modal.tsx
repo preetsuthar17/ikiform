@@ -86,7 +86,7 @@ export function SubmissionDetailsModal({
 											</div>
 										</div>
 									);
-								},
+								}
 							)}
 						</div>
 					</div>

@@ -49,7 +49,7 @@ export function DateInputField({
 	};
 
 	const handleDateInputKeyDown = (
-		e: React.KeyboardEvent<HTMLButtonElement>,
+		e: React.KeyboardEvent<HTMLButtonElement>
 	) => {
 		if (e.key === "Escape") {
 			e.currentTarget.blur();

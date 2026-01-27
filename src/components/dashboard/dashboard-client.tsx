@@ -25,7 +25,7 @@ const ProfileCard = dynamic(
 				</div>
 			</div>
 		),
-	},
+	}
 );
 
 const FormsSidebar = dynamic(
@@ -47,7 +47,7 @@ const FormsSidebar = dynamic(
 				))}
 			</div>
 		),
-	},
+	}
 );
 
 const FormsManagement = dynamic(
@@ -73,7 +73,7 @@ const FormsManagement = dynamic(
 				</div>
 			</div>
 		),
-	},
+	}
 );
 
 const ProfileCardSkeleton = () => (

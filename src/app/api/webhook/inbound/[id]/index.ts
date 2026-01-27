@@ -21,12 +21,12 @@ interface InboundWebhookMapping {
 
 export async function POST(
 	req: NextRequest,
-	{ params }: { params: Promise<{ id: string }> },
+	{ params }: { params: Promise<{ id: string }> }
 ) {
 	const startTime = Date.now();
 	const mappingId = (await params).id;
 	console.log(
-		`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Started at ${new Date().toISOString()}`,
+		`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Started at ${new Date().toISOString()}`
 	);
 
 	try {
@@ -41,25 +41,25 @@ export async function POST(
 		if (error || !mapping) {
 			console.error(
 				`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Mapping not found:`,
-				error,
+				error
 			);
 			return NextResponse.json(
 				{ error: "Inbound mapping not found" },
-				{ status: 404 },
+				{ status: 404 }
 			);
 		}
 
 		console.log(
-			`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Found mapping for form: ${mapping.target_form_id}`,
+			`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Found mapping for form: ${mapping.target_form_id}`
 		);
 
 		if (!mapping.enabled) {
 			console.error(
-				`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Mapping is disabled`,
+				`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Mapping is disabled`
 			);
 			return NextResponse.json(
 				{ error: "Inbound mapping is disabled" },
-				{ status: 403 },
+				{ status: 403 }
 			);
 		}
 
@@ -67,22 +67,22 @@ export async function POST(
 			const headerSecret = req.headers.get("x-inbound-secret");
 			if (!headerSecret || headerSecret !== mapping.secret) {
 				console.error(
-					`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Invalid or missing secret`,
+					`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Invalid or missing secret`
 				);
 				return NextResponse.json(
 					{ error: "Invalid or missing secret" },
-					{ status: 401 },
+					{ status: 401 }
 				);
 			}
 			console.log(
-				`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Secret validation passed`,
+				`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Secret validation passed`
 			);
 		}
 
 		const incoming = await req.json();
 		console.log(
 			`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Incoming payload:`,
-			JSON.stringify(incoming, null, 2),
+			JSON.stringify(incoming, null, 2)
 		);
 
 		const mappingRules = mapping.mapping_rules || {};
@@ -93,17 +93,17 @@ export async function POST(
 
 		console.log(
 			`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Mapped data:`,
-			JSON.stringify(mapped, null, 2),
+			JSON.stringify(mapped, null, 2)
 		);
 
 		const form = await formsDbServer.getPublicForm(mapping.target_form_id);
 		if (!form) {
 			console.error(
-				`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Form not found: ${mapping.target_form_id}`,
+				`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Form not found: ${mapping.target_form_id}`
 			);
 			return NextResponse.json(
 				{ error: "Target form not found" },
-				{ status: 404 },
+				{ status: 404 }
 			);
 		}
 
@@ -120,18 +120,18 @@ export async function POST(
 				duplicatePrevention.strategy || "ip",
 				ipAddress,
 				email,
-				sessionId,
+				sessionId
 			);
 
 			const duplicateCheck = await checkDuplicateSubmission(
 				mapping.target_form_id,
 				identifier,
-				duplicatePrevention,
+				duplicatePrevention
 			);
 
 			if (duplicateCheck.isDuplicate) {
 				console.error(
-					`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Duplicate submission detected`,
+					`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Duplicate submission detected`
 				);
 				return NextResponse.json(
 					{
@@ -140,14 +140,14 @@ export async function POST(
 						timeRemaining: duplicateCheck.timeRemaining,
 						attemptsRemaining: duplicateCheck.attemptsRemaining,
 					},
-					{ status: 409 },
+					{ status: 409 }
 				);
 			}
 		}
 
 		const result = await formsDbServer.submitForm(
 			mapping.target_form_id,
-			mapped,
+			mapped
 		);
 
 		if (duplicatePrevention?.enabled) {
@@ -162,24 +162,24 @@ export async function POST(
 				duplicatePrevention.strategy || "ip",
 				ipAddress,
 				email,
-				sessionId,
+				sessionId
 			);
 
 			recordSubmission(
 				mapping.target_form_id,
 				identifier,
-				duplicatePrevention,
+				duplicatePrevention
 			).catch((e) =>
 				console.error(
 					"[Webhook Duplicate Prevention] Record submission error:",
-					e,
-				),
+					e
+				)
 			);
 		}
 
 		const duration = Date.now() - startTime;
 		console.log(
-			`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Success: Form submitted in ${duration}ms`,
+			`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Success: Form submitted in ${duration}ms`
 		);
 
 		return NextResponse.json({ success: true, submission: result });
@@ -191,14 +191,14 @@ export async function POST(
 				: "Failed to process inbound webhook";
 		console.error(
 			`[WEBHOOK API] POST /api/webhook/inbound/${mappingId} - Error after ${duration}ms:`,
-			errorMessage,
+			errorMessage
 		);
 
 		return NextResponse.json(
 			{
 				error: errorMessage,
 			},
-			{ status: 400 },
+			{ status: 400 }
 		);
 	}
 }

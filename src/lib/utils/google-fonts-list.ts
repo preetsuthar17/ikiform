@@ -286,7 +286,7 @@ export const GOOGLE_FONTS_DATA: GoogleFont[] = [
 ];
 
 export function getFontsByCategory(
-	category: keyof typeof GOOGLE_FONTS_CATEGORIES,
+	category: keyof typeof GOOGLE_FONTS_CATEGORIES
 ) {
 	return GOOGLE_FONTS_DATA.filter((font) => font.category === category);
 }
@@ -294,7 +294,7 @@ export function getFontsByCategory(
 export function searchFonts(query: string) {
 	const lowercaseQuery = query.toLowerCase();
 	return GOOGLE_FONTS_DATA.filter((font) =>
-		font.family.toLowerCase().includes(lowercaseQuery),
+		font.family.toLowerCase().includes(lowercaseQuery)
 	);
 }
 

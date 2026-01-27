@@ -41,7 +41,7 @@ export function PrepopulationSettings({
 	};
 
 	const updateConfig = (
-		configUpdates: Partial<typeof prepopulation.config>,
+		configUpdates: Partial<typeof prepopulation.config>
 	) => {
 		updatePrepopulation({
 			config: { ...prepopulation.config, ...configUpdates },
@@ -70,7 +70,7 @@ export function PrepopulationSettings({
 		await copyWithToast(
 			url,
 			"Preview URL copied to clipboard!",
-			"Failed to copy preview URL",
+			"Failed to copy preview URL"
 		);
 	};
 
@@ -93,12 +93,12 @@ export function PrepopulationSettings({
 				toast.success("API endpoint is reachable!");
 			} else {
 				toast.error(
-					`API test failed: ${response.status} ${response.statusText}`,
+					`API test failed: ${response.status} ${response.statusText}`
 				);
 			}
 		} catch (error) {
 			toast.error(
-				`API test failed: ${error instanceof Error ? error.message : "Unknown error"}`,
+				`API test failed: ${error instanceof Error ? error.message : "Unknown error"}`
 			);
 		}
 	};
@@ -378,7 +378,7 @@ export function PrepopulationSettings({
 												: JSON.stringify(
 														prepopulation.config.apiHeaders || {},
 														null,
-														2,
+														2
 													)
 										}
 									/>

@@ -227,7 +227,7 @@ export function GoogleFontPicker({
 
 		if (selectedCategory !== "all") {
 			const categoryKey = Object.entries(CATEGORY_MAP).find(
-				([_, value]) => value === selectedCategory,
+				([_, value]) => value === selectedCategory
 			)?.[0];
 			if (categoryKey) {
 				filtered = filtered.filter((font) => font.category === categoryKey);
@@ -237,7 +237,7 @@ export function GoogleFontPicker({
 		if (search) {
 			const lowercaseSearch = search.toLowerCase();
 			filtered = filtered.filter((font) =>
-				font.family.toLowerCase().includes(lowercaseSearch),
+				font.family.toLowerCase().includes(lowercaseSearch)
 			);
 		}
 
@@ -403,7 +403,7 @@ export function GoogleFontPicker({
 														className={cn(
 															"cursor-pointer p-0 shadow-none transition-all duration-200 hover:bg-accent/50",
 															value === font.family &&
-																"border-primary/20 bg-accent/30 ring-2 ring-primary/20",
+																"border-primary/20 bg-accent/30 ring-2 ring-primary/20"
 														)}
 														key={font.family}
 														onClick={() => handleFontSelect(font.family)}
@@ -442,7 +442,7 @@ export function GoogleFontPicker({
 																		"size-4 shrink-0 transition-opacity",
 																		value === font.family
 																			? "opacity-100"
-																			: "opacity-0",
+																			: "opacity-0"
 																	)}
 																/>
 															</div>

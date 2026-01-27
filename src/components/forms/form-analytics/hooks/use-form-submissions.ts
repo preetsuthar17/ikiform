@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { toast } from "@/hooks/use-toast";
 import type { FormSubmission } from "@/lib/database";
@@ -12,7 +12,7 @@ export const useFormSubmissions = (formId: string) => {
 	const [loading, setLoading] = useState(true);
 	const [refreshing, setRefreshing] = useState(false);
 
-	const loadSubmissions = async () => {
+	const loadSubmissions = useCallback(async () => {
 		if (!user) return;
 		try {
 			const formSubmissions = await formsDb.getFormSubmissions(formId, user.id);
@@ -23,18 +23,18 @@ export const useFormSubmissions = (formId: string) => {
 		} finally {
 			setLoading(false);
 		}
-	};
+	}, [formId, user]);
 
-	const refreshData = async () => {
+	const refreshData = useCallback(async () => {
 		setRefreshing(true);
 		await loadSubmissions();
 		setRefreshing(false);
 		toast.success("Data refreshed!");
-	};
+	}, [loadSubmissions]);
 
 	useEffect(() => {
 		loadSubmissions();
-	}, [formId, user]);
+	}, [loadSubmissions]);
 
 	return {
 		submissions,

@@ -37,7 +37,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 		if (type === "builder" || type === "both") {
 			const builderSessions = await formsDbServer.getAIBuilderSessions(
 				user.id,
-				limit,
+				limit
 			);
 			sessions = sessions.concat(
 				builderSessions.map(
@@ -47,8 +47,8 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 							id: String(session.id),
 							created_at: String(session.created_at),
 							type: "ai_builder",
-						}) as Session,
-				),
+						}) as Session
+				)
 			);
 		}
 
@@ -56,7 +56,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 			const analyticsSessions = await formsDbServer.getAIAnalyticsSessions(
 				user.id,
 				"",
-				limit,
+				limit
 			);
 			sessions = sessions.concat(
 				analyticsSessions.map(
@@ -66,15 +66,15 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 							id: String(session.id),
 							created_at: String(session.created_at),
 							type: "ai_analytics",
-						}) as Session,
-				),
+						}) as Session
+				)
 			);
 		}
 
 		sessions.sort(
 			(a, b) =>
 				new Date(String(b.created_at)).getTime() -
-				new Date(String(a.created_at)).getTime(),
+				new Date(String(a.created_at)).getTime()
 		);
 
 		if (sessions.length > limit) {
@@ -91,7 +91,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 	} catch (_error) {
 		return NextResponse.json(
 			{ error: "Internal server error" },
-			{ status: 500 },
+			{ status: 500 }
 		);
 	}
 }

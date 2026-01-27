@@ -34,7 +34,7 @@ export function MultiStepQuizProgress({
 							<li
 								className={cn(
 									"flex items-center",
-									index !== steps.length - 1 && "flex-1",
+									index !== steps.length - 1 && "flex-1"
 								)}
 								key={step.id}
 							>
@@ -48,7 +48,7 @@ export function MultiStepQuizProgress({
 													? "border-green-500 bg-green-500 text-white"
 													: isCurrent
 														? "border-blue-500 bg-blue-500 text-white"
-														: "border-gray-300 bg-white text-gray-500",
+														: "border-gray-300 bg-white text-gray-500"
 											)}
 										>
 											{isCompleted || isPast ? (
@@ -67,7 +67,7 @@ export function MultiStepQuizProgress({
 														? "text-blue-600"
 														: isCompleted || isPast
 															? "text-green-600"
-															: "text-gray-500",
+															: "text-gray-500"
 												)}
 											>
 												{step.title}
@@ -91,7 +91,7 @@ export function MultiStepQuizProgress({
 										<div
 											className={cn(
 												"h-0.5 w-full",
-												isCompleted || isPast ? "bg-green-500" : "bg-gray-300",
+												isCompleted || isPast ? "bg-green-500" : "bg-gray-300"
 											)}
 										/>
 									</div>

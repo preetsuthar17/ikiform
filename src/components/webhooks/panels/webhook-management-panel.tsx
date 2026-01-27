@@ -14,13 +14,13 @@ export function WebhookManagementPanel({ formId }: { formId?: string }) {
 	const { user } = useAuth();
 	const [modalOpen, setModalOpen] = useState(false);
 	const [editingWebhook, setEditingWebhook] = useState<WebhookConfig | null>(
-		null,
+		null
 	);
 	const [logDrawerOpen, setLogDrawerOpen] = useState(false);
 	const [logWebhookId, setLogWebhookId] = useState<string | null>(null);
 	const [testDialogOpen, setTestDialogOpen] = useState(false);
 	const [testingWebhook, setTestingWebhook] = useState<WebhookConfig | null>(
-		null,
+		null
 	);
 	const {
 		webhooks,

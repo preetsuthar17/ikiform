@@ -65,7 +65,7 @@ export const formsDb = {
 		const duplicated = await this.createForm(
 			original.user_id,
 			title,
-			original.schema,
+			original.schema
 		);
 		return duplicated;
 	},
@@ -80,7 +80,7 @@ export const formsDb = {
 		const { data, error } = await supabase
 			.from("forms")
 			.select(
-				"id, title, description, is_published, created_at, updated_at, user_id, schema",
+				"id, title, description, is_published, created_at, updated_at, user_id, schema"
 			)
 			.eq("user_id", userId)
 			.order("updated_at", { ascending: false });
@@ -155,7 +155,7 @@ export const formsDb = {
 		const { data, error } = await supabase
 			.from("forms")
 			.select(
-				"id, title, description, is_published, user_id, created_at, updated_at",
+				"id, title, description, is_published, user_id, created_at, updated_at"
 			)
 			.eq("id", formId)
 			.eq("user_id", userId)
@@ -253,7 +253,7 @@ export const formsDb = {
 			const userFormsKey = getCacheKey("getUserForms", data.user_id);
 			const userFormsDetailKey = getCacheKey(
 				"getUserFormsWithDetails",
-				data.user_id,
+				data.user_id
 			);
 			cache.delete(userFormsKey);
 			cache.delete(userFormsDetailKey);
@@ -284,7 +284,7 @@ export const formsDb = {
 			const userFormsKey = getCacheKey("getUserForms", form.user_id);
 			const userFormsDetailKey = getCacheKey(
 				"getUserFormsWithDetails",
-				form.user_id,
+				form.user_id
 			);
 			cache.delete(userFormsKey);
 			cache.delete(userFormsDetailKey);
@@ -294,7 +294,7 @@ export const formsDb = {
 	async togglePublishForm(
 		formId: string,
 		userId: string,
-		isPublished: boolean,
+		isPublished: boolean
 	) {
 		const supabase = createClient();
 
@@ -320,7 +320,7 @@ export const formsDb = {
 			const userFormsKey = getCacheKey("getUserForms", data.user_id);
 			const userFormsDetailKey = getCacheKey(
 				"getUserFormsWithDetails",
-				data.user_id,
+				data.user_id
 			);
 			cache.delete(userFormsKey);
 			cache.delete(userFormsDetailKey);
@@ -332,7 +332,7 @@ export const formsDb = {
 	async submitForm(
 		formId: string,
 		submissionData: Record<string, any>,
-		ipAddress?: string,
+		ipAddress?: string
 	) {
 		const supabase = createClient();
 
@@ -362,7 +362,7 @@ export const formsDb = {
 					"getFormSubmissions",
 					formId,
 					userId,
-					limit,
+					limit
 				);
 				cache.delete(submissionsCacheKey);
 			}
@@ -437,7 +437,7 @@ export const formsDb = {
 		formId: string,
 		userId: string,
 		page = 1,
-		pageSize = 50,
+		pageSize = 50
 	) {
 		const supabase = createClient();
 		const { data: form, error: formError } = await supabase
@@ -457,7 +457,7 @@ export const formsDb = {
 			formId,
 			userId,
 			page,
-			pageSize,
+			pageSize
 		);
 		const cached = getFromCache<FormSubmission[]>(cacheKey);
 		if (cached) return cached;
@@ -480,7 +480,7 @@ export const formsDb = {
 		sessionId: string,
 		role: "user" | "assistant" | "system",
 		content: string,
-		metadata: Record<string, any> = {},
+		metadata: Record<string, any> = {}
 	) {
 		const supabase = createClient();
 
@@ -501,7 +501,7 @@ export const formsDb = {
 		const historyCacheKey = getCacheKey(
 			"getAIBuilderChatHistory",
 			userId,
-			sessionId,
+			sessionId
 		);
 		cache.delete(historyCacheKey);
 
@@ -552,7 +552,7 @@ export const formsDb = {
 				}
 				return acc;
 			},
-			{} as Record<string, string>,
+			{} as Record<string, string>
 		);
 
 		const result = Object.entries(sessions).map(([sessionId, createdAt]) => ({
@@ -570,7 +570,7 @@ export const formsDb = {
 		sessionId: string,
 		role: "user" | "assistant" | "system",
 		content: string,
-		metadata: Record<string, any> = {},
+		metadata: Record<string, any> = {}
 	) {
 		const supabase = createClient();
 
@@ -593,7 +593,7 @@ export const formsDb = {
 			"getAIAnalyticsChatHistory",
 			userId,
 			formId,
-			sessionId,
+			sessionId
 		);
 		cache.delete(historyCacheKey);
 
@@ -603,13 +603,13 @@ export const formsDb = {
 	async getAIAnalyticsChatHistory(
 		userId: string,
 		formId: string,
-		sessionId: string,
+		sessionId: string
 	) {
 		const cacheKey = getCacheKey(
 			"getAIAnalyticsChatHistory",
 			userId,
 			formId,
-			sessionId,
+			sessionId
 		);
 		const cached = getFromCache<any[]>(cacheKey);
 		if (cached) return cached;
@@ -635,7 +635,7 @@ export const formsDb = {
 			"getAIAnalyticsSessions",
 			userId,
 			formId,
-			limit,
+			limit
 		);
 		const cached = getFromCache<any[]>(cacheKey);
 		if (cached) return cached;
@@ -663,7 +663,7 @@ export const formsDb = {
 				}
 				return acc;
 			},
-			{} as Record<string, any>,
+			{} as Record<string, any>
 		);
 
 		const result = Object.values(sessions);
@@ -736,7 +736,7 @@ export const formsDbServer = {
 	async submitForm(
 		formId: string,
 		submissionData: Record<string, any>,
-		ipAddress?: string,
+		ipAddress?: string
 	) {
 		const supabase = await createServerClient();
 
@@ -759,7 +759,7 @@ export const formsDbServer = {
 		sessionId: string,
 		role: "user" | "assistant" | "system",
 		content: string,
-		metadata: Record<string, any> = {},
+		metadata: Record<string, any> = {}
 	) {
 		const supabase = await createServerClient();
 
@@ -813,7 +813,7 @@ export const formsDbServer = {
 				}
 				return acc;
 			},
-			{} as Record<string, string>,
+			{} as Record<string, string>
 		);
 
 		return Object.entries(sessions).map(([sessionId, createdAt]) => ({
@@ -828,7 +828,7 @@ export const formsDbServer = {
 		sessionId: string,
 		role: "user" | "assistant" | "system",
 		content: string,
-		metadata: Record<string, any> = {},
+		metadata: Record<string, any> = {}
 	) {
 		const supabase = await createServerClient();
 
@@ -852,7 +852,7 @@ export const formsDbServer = {
 	async getAIAnalyticsChatHistory(
 		userId: string,
 		formId: string,
-		sessionId: string,
+		sessionId: string
 	) {
 		const supabase = await createServerClient();
 
@@ -892,7 +892,7 @@ export const formsDbServer = {
 				}
 				return acc;
 			},
-			{} as Record<string, any>,
+			{} as Record<string, any>
 		);
 
 		return Object.values(sessions);
@@ -916,7 +916,7 @@ export const formsDbServer = {
 		email: string,
 		name: string,
 		hasPremium?: boolean,
-		polarCustomerId?: string | null,
+		polarCustomerId?: string | null
 	) {
 		const supabase = await createServerClient();
 
@@ -939,7 +939,7 @@ export const formsDbServer = {
 				},
 				{
 					onConflict: "email",
-				},
+				}
 			)
 			.select()
 			.single();

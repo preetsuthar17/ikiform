@@ -34,7 +34,7 @@ const sidebarVariants = cva(
 			size: "default",
 			position: "fixed",
 		},
-	},
+	}
 );
 
 const sidebarHeaderVariants = cva(
@@ -49,7 +49,7 @@ const sidebarHeaderVariants = cva(
 		defaultVariants: {
 			collapsed: false,
 		},
-	},
+	}
 );
 
 const sidebarItemVariants = cva(
@@ -70,7 +70,7 @@ const sidebarItemVariants = cva(
 			variant: "default",
 			collapsed: false,
 		},
-	},
+	}
 );
 
 export interface SidebarProps
@@ -118,7 +118,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
 			children,
 			...props
 		},
-		ref,
+		ref
 	) => {
 		const [internalCollapsed, setInternalCollapsed] = React.useState(false);
 		const [activeItem, setActiveItem] = React.useState<string>();
@@ -178,7 +178,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
 			const updateFocusableElements = () => {
 				if (sidebarRef.current) {
 					const elements = sidebarRef.current.querySelectorAll(
-						'button, a, [tabindex]:not([tabindex="-1"])',
+						'button, a, [tabindex]:not([tabindex="-1"])'
 					) as NodeListOf<HTMLElement>;
 					focusableElementsRef.current = Array.from(elements);
 				}
@@ -191,13 +191,13 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
 		}, [collapsed]);
 
 		const headerChild = React.Children.toArray(children).find(
-			(child) => React.isValidElement(child) && child.type === SidebarHeader,
+			(child) => React.isValidElement(child) && child.type === SidebarHeader
 		);
 		const bodyChild = React.Children.toArray(children).find(
-			(child) => React.isValidElement(child) && child.type === SidebarBody,
+			(child) => React.isValidElement(child) && child.type === SidebarBody
 		);
 		const footerChild = React.Children.toArray(children).find(
-			(child) => React.isValidElement(child) && child.type === SidebarFooter,
+			(child) => React.isValidElement(child) && child.type === SidebarFooter
 		);
 
 		const sidebarContent = (
@@ -231,7 +231,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
 							size: collapsed ? "sm" : size,
 							position,
 						}),
-						className,
+						className
 					)}
 					id={props.id || sidebarId}
 					initial={false}
@@ -310,7 +310,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
 						<div
 							className={cn(
 								"border-border border-t",
-								collapsed ? "p-2" : "p-3",
+								collapsed ? "p-2" : "p-3"
 							)}
 						>
 							{footerChild}
@@ -343,7 +343,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
 		}
 
 		return sidebarContent;
-	},
+	}
 );
 
 Sidebar.displayName = "Sidebar";
@@ -431,7 +431,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
 				aria-hidden="true"
 				className={cn(
 					"flex shrink-0 items-center justify-center",
-					collapsed ? "size-10" : "ml-0 size-4",
+					collapsed ? "size-10" : "ml-0 size-4"
 				)}
 			>
 				{Icon && <Icon size={16} />}
@@ -449,7 +449,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
 							aria-hidden="true"
 							className={cn(
 								"shrink-0 transition-transform duration-200",
-								expanded && "rotate-90",
+								expanded && "rotate-90"
 							)}
 							size={14}
 						/>
@@ -483,9 +483,9 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
 						}),
 						level > 0 &&
 							!collapsed &&
-							"before:-translate-y-1/2 relative ml-0 border-border pl-3 before:absolute before:top-1/2 before:left-[-2px] before:h-[1px] before:w-3 before:bg-border",
+							"relative ml-0 border-border pl-3 before:absolute before:top-1/2 before:left-[-2px] before:h-[1px] before:w-3 before:-translate-y-1/2 before:bg-border",
 						"group relative no-underline",
-						className,
+						className
 					)}
 					href={href}
 					onClick={onClick}
@@ -506,10 +506,10 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
 						}),
 						level > 0 &&
 							!collapsed &&
-							"before:-translate-y-1/2 relative ml-0 border-border pl-3 before:absolute before:top-1/2 before:left-[-2px] before:h-[1px] before:w-3 before:bg-border",
+							"relative ml-0 border-border pl-3 before:absolute before:top-1/2 before:left-[-2px] before:h-[1px] before:w-3 before:-translate-y-1/2 before:bg-border",
 						"group relative w-full border-none text-left",
 						!isActive && "bg-transparent",
-						className,
+						className
 					)}
 					onClick={handleClick}
 					onKeyDown={handleKeyDown}
@@ -545,7 +545,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
 										{
 											level: level + 1,
 											...(child.props as SidebarItemProps),
-										},
+										}
 									);
 								}
 								return child;

@@ -25,7 +25,7 @@ function InboundWebhookDocsDrawer({
 			acc[ext] = `example_${ext}`;
 			return acc;
 		},
-		{} as Record<string, string>,
+		{} as Record<string, string>
 	);
 	async function handleCopy(text: string, type: string) {
 		const { copyToClipboard } = await import("@/lib/utils/clipboard");
@@ -104,7 +104,7 @@ export function InboundWebhookList() {
 		useState<InboundWebhookMapping | null>(null);
 	const [docsOpen, setDocsOpen] = useState(false);
 	const [docsMapping, setDocsMapping] = useState<InboundWebhookMapping | null>(
-		null,
+		null
 	);
 	const {
 		mappings,

@@ -61,7 +61,7 @@ export function BasicInfoSection({
 		return () =>
 			window.removeEventListener(
 				"beforeunload",
-				onBeforeUnload as unknown as EventListener,
+				onBeforeUnload as unknown as EventListener
 			);
 	}, [hasBasicChanges, hasBehaviorChanges]);
 
@@ -107,7 +107,7 @@ export function BasicInfoSection({
 		if (titleMissing) {
 			setHasBasicChanges(true);
 			const target = document.getElementById(
-				"form-title-field",
+				"form-title-field"
 			) as HTMLElement | null;
 			target?.focus();
 			toast.error("Please fill out required fields");
@@ -190,7 +190,7 @@ export function BasicInfoSection({
 	useEffect(() => {
 		if (basicInfoRef.current) {
 			const firstInput = basicInfoRef.current.querySelector(
-				"input, textarea",
+				"input, textarea"
 			) as HTMLElement;
 			firstInput?.focus();
 		}

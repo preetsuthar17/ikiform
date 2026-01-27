@@ -7,7 +7,7 @@ export function ProfileCardLoading({ className }: ProfileLoadingProps) {
 	const containerClassName = useMemo(
 		() =>
 			`relative flex h-fit max-h-min w-full grow flex-col items-center gap-6 rounded-xl py-11.5 shadow-none ${className ?? ""}`,
-		[className],
+		[className]
 	);
 
 	return (

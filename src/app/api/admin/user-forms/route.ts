@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
 		if (!userId) {
 			return NextResponse.json(
 				{ error: "User ID is required" },
-				{ status: 400 },
+				{ status: 400 }
 			);
 		}
 
@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
 			console.error("Error fetching user forms:", formsError);
 			return NextResponse.json(
 				{ error: "Failed to fetch user forms" },
-				{ status: 500 },
+				{ status: 500 }
 			);
 		}
 
@@ -55,7 +55,7 @@ export async function GET(request: NextRequest) {
 						acc[submission.form_id] = (acc[submission.form_id] || 0) + 1;
 						return acc;
 					},
-					{} as Record<string, number>,
+					{} as Record<string, number>
 				);
 			}
 		}
@@ -71,7 +71,7 @@ export async function GET(request: NextRequest) {
 		console.error("Admin user forms API error:", error);
 		return NextResponse.json(
 			{ error: "Internal server error" },
-			{ status: 500 },
+			{ status: 500 }
 		);
 	}
 }

@@ -21,7 +21,7 @@ interface UsePrepopulationResult {
 
 export function usePrepopulation(fields: FormField[]): UsePrepopulationResult {
 	const [prepopulatedData, setPrepopulatedData] = useState<Record<string, any>>(
-		{},
+		{}
 	);
 	const [loading, setLoading] = useState(true);
 	const [errors, setErrors] = useState<Record<string, string>>({});
@@ -33,16 +33,16 @@ export function usePrepopulation(fields: FormField[]): UsePrepopulationResult {
 				.filter((field) => field.prepopulation?.enabled)
 				.map(
 					(field) =>
-						`${field.id}-${field.prepopulation!.source}-${JSON.stringify(field.prepopulation!.config)}`,
+						`${field.id}-${field.prepopulation!.source}-${JSON.stringify(field.prepopulation!.config)}`
 				)
 				.join("|"),
-		[fields],
+		[fields]
 	);
 
 	useEffect(() => {
 		async function loadPrepopulatedData() {
 			const fieldsWithPrepopulation = fields.filter(
-				(field) => field.prepopulation?.enabled,
+				(field) => field.prepopulation?.enabled
 			);
 
 			if (fieldsWithPrepopulation.length === 0) {
@@ -126,7 +126,7 @@ export function usePrepopulation(fields: FormField[]): UsePrepopulationResult {
 						success: result.success,
 						error: result.error,
 					};
-				},
+				}
 			);
 
 			const results = await Promise.allSettled(prepopulationPromises);
@@ -170,7 +170,7 @@ export function usePrepopulation(fields: FormField[]): UsePrepopulationResult {
 export function useUrlPrepopulation(fields: FormField[]) {
 	const urlFields = fields.filter(
 		(field) =>
-			field.prepopulation?.enabled && field.prepopulation.source === "url",
+			field.prepopulation?.enabled && field.prepopulation.source === "url"
 	);
 
 	const { prepopulatedData, loading, errors } = usePrepopulation(urlFields);
@@ -181,7 +181,7 @@ export function useUrlPrepopulation(fields: FormField[]) {
 export function useApiPrepopulation(fields: FormField[]) {
 	const apiFields = fields.filter(
 		(field) =>
-			field.prepopulation?.enabled && field.prepopulation.source === "api",
+			field.prepopulation?.enabled && field.prepopulation.source === "api"
 	);
 
 	const { prepopulatedData, loading, errors } = usePrepopulation(apiFields);

@@ -102,7 +102,7 @@ export function AIBuilder() {
 				tabIndex={-1}
 			>
 				{}
-				<div className="-translate-x-1/2 fixed bottom-4 left-1/2 z-50 w-full max-w-[90%] md:hidden">
+				<div className="fixed bottom-4 left-1/2 z-50 w-full max-w-[90%] -translate-x-1/2 md:hidden">
 					<Button
 						aria-controls="mobile-chat-drawer"
 						aria-expanded={chatDrawerOpen}
@@ -118,7 +118,7 @@ export function AIBuilder() {
 				{}
 				<div className="hidden h-full w-full md:flex">
 					<ResizablePanelGroup orientation="horizontal">
-						<ResizablePanel defaultSize={25} maxSize={30} minSize={15}>
+						<ResizablePanel defaultSize={25} maxSize={300} minSize={15}>
 							<ChatPanel {...chatPanelProps} />
 						</ResizablePanel>
 						<ResizableHandle />

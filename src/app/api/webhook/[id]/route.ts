@@ -5,7 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 
 async function verifyWebhookOwnership(
 	webhookId: string,
-	userId: string,
+	userId: string
 ): Promise<boolean> {
 	const supabase = createAdminClient();
 	const { data: webhook, error } = await supabase
@@ -40,12 +40,12 @@ async function verifyWebhookOwnership(
 
 export async function PUT(
 	req: NextRequest,
-	{ params }: { params: Promise<{ id: string }> },
+	{ params }: { params: Promise<{ id: string }> }
 ) {
 	const startTime = Date.now();
 	const webhookId = (await params).id;
 	console.log(
-		`[WEBHOOK API] PUT /api/webhook/${webhookId} - Started at ${new Date().toISOString()}`,
+		`[WEBHOOK API] PUT /api/webhook/${webhookId} - Started at ${new Date().toISOString()}`
 	);
 
 	try {
@@ -63,14 +63,14 @@ export async function PUT(
 		if (!hasAccess) {
 			return NextResponse.json(
 				{ error: "Webhook not found or access denied" },
-				{ status: 403 },
+				{ status: 403 }
 			);
 		}
 
 		const body = await req.json();
 		console.log(
 			`[WEBHOOK API] PUT /api/webhook/${webhookId} - Request body:`,
-			JSON.stringify(body, null, 2),
+			JSON.stringify(body, null, 2)
 		);
 
 		if (body.formId || body.form_id) {
@@ -85,7 +85,7 @@ export async function PUT(
 			if (formError || !form) {
 				return NextResponse.json(
 					{ error: "Form not found or access denied" },
-					{ status: 403 },
+					{ status: 403 }
 				);
 			}
 		}
@@ -100,7 +100,7 @@ export async function PUT(
 
 		const duration = Date.now() - startTime;
 		console.log(
-			`[WEBHOOK API] PUT /api/webhook/${webhookId} - Success: Updated webhook in ${duration}ms`,
+			`[WEBHOOK API] PUT /api/webhook/${webhookId} - Success: Updated webhook in ${duration}ms`
 		);
 
 		return NextResponse.json(webhook);
@@ -110,26 +110,26 @@ export async function PUT(
 			error instanceof Error ? error.message : "Failed to update webhook";
 		console.error(
 			`[WEBHOOK API] PUT /api/webhook/${webhookId} - Error after ${duration}ms:`,
-			errorMessage,
+			errorMessage
 		);
 
 		return NextResponse.json(
 			{
 				error: errorMessage,
 			},
-			{ status: 400 },
+			{ status: 400 }
 		);
 	}
 }
 
 export async function DELETE(
 	_req: NextRequest,
-	{ params }: { params: Promise<{ id: string }> },
+	{ params }: { params: Promise<{ id: string }> }
 ) {
 	const startTime = Date.now();
 	const webhookId = (await params).id;
 	console.log(
-		`[WEBHOOK API] DELETE /api/webhook/${webhookId} - Started at ${new Date().toISOString()}`,
+		`[WEBHOOK API] DELETE /api/webhook/${webhookId} - Started at ${new Date().toISOString()}`
 	);
 
 	try {
@@ -147,7 +147,7 @@ export async function DELETE(
 		if (!hasAccess) {
 			return NextResponse.json(
 				{ error: "Webhook not found or access denied" },
-				{ status: 403 },
+				{ status: 403 }
 			);
 		}
 
@@ -155,7 +155,7 @@ export async function DELETE(
 
 		const duration = Date.now() - startTime;
 		console.log(
-			`[WEBHOOK API] DELETE /api/webhook/${webhookId} - Success: Deleted webhook in ${duration}ms`,
+			`[WEBHOOK API] DELETE /api/webhook/${webhookId} - Success: Deleted webhook in ${duration}ms`
 		);
 
 		return NextResponse.json({ success: true });
@@ -165,14 +165,14 @@ export async function DELETE(
 			error instanceof Error ? error.message : "Failed to delete webhook";
 		console.error(
 			`[WEBHOOK API] DELETE /api/webhook/${webhookId} - Error after ${duration}ms:`,
-			errorMessage,
+			errorMessage
 		);
 
 		return NextResponse.json(
 			{
 				error: errorMessage,
 			},
-			{ status: 400 },
+			{ status: 400 }
 		);
 	}
 }

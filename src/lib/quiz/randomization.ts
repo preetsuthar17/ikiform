@@ -27,7 +27,7 @@ function createSeededRandom(seed: string) {
 export function shuffleFieldOptions(
 	options: Array<string | { value: string; label?: string }>,
 	shuffleEnabled?: boolean,
-	fieldId?: string,
+	fieldId?: string
 ): Array<string | { value: string; label?: string }> {
 	if (!(shuffleEnabled && options) || options.length <= 1) {
 		return options;
@@ -41,7 +41,7 @@ export function shuffleQuizFields(
 	fields: any[],
 	randomizeEnabled?: boolean,
 	shuffleQuizOnly = true,
-	formId?: string,
+	formId?: string
 ): any[] {
 	if (!(randomizeEnabled && fields) || fields.length <= 1) {
 		return fields;
@@ -52,7 +52,7 @@ export function shuffleQuizFields(
 	if (shuffleQuizOnly) {
 		const quizFields = fields.filter((field) => field.settings?.isQuizField);
 		const nonQuizFields = fields.filter(
-			(field) => !field.settings?.isQuizField,
+			(field) => !field.settings?.isQuizField
 		);
 
 		const shuffledQuizFields = shuffleArray(quizFields, seed);

@@ -154,7 +154,7 @@ export function PresetsSection({
 													style={{ backgroundColor: color }}
 													title={color}
 												/>
-											),
+											)
 									)}
 							</div>
 						</div>

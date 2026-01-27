@@ -42,7 +42,7 @@ export function TextInputField(props: BaseFieldProps) {
 			type: "text",
 			value: value || "",
 		},
-		builderMode,
+		builderMode
 	);
 
 	return (

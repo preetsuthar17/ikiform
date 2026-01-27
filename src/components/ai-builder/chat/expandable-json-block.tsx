@@ -57,7 +57,7 @@ export const ExpandableJsonBlock = memo(function ExpandableJsonBlock({
 				console.error("Error highlighting code:", error);
 				if (isMounted) {
 					setHighlightedCode(
-						`<pre class="whitespace-pre-wrap break-words">${jsonString}</pre>`,
+						`<pre class="whitespace-pre-wrap break-words">${jsonString}</pre>`
 					);
 				}
 			}

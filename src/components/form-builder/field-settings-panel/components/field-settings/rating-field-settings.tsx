@@ -39,7 +39,7 @@ export function RatingFieldSettings({
 							onUpdateSettings({
 								starCount: Math.max(
 									1,
-									Math.min(10, Number.parseInt(e.target.value) || 5),
+									Math.min(10, Number.parseInt(e.target.value) || 5)
 								),
 							})
 						}

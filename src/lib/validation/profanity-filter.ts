@@ -195,7 +195,7 @@ export class ProfanityFilterService {
 }
 
 export function createProfanityFilter(
-	settings: ProfanityFilterOptions,
+	settings: ProfanityFilterOptions
 ): ProfanityFilterService {
 	return new ProfanityFilterService(settings);
 }

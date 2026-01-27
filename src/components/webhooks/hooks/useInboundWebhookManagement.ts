@@ -54,7 +54,7 @@ export function useInboundWebhookManagement() {
 
 	async function updateMapping(
 		id: string,
-		mapping: Partial<InboundWebhookMapping>,
+		mapping: Partial<InboundWebhookMapping>
 	) {
 		setLoading(true);
 		setError(null);

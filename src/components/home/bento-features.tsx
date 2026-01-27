@@ -34,7 +34,7 @@ function useInView(options?: IntersectionObserverInit) {
 			([entry]) => {
 				setIsInView(entry.isIntersecting);
 			},
-			{ threshold: 0.1, ...options },
+			{ threshold: 0.1, ...options }
 		);
 
 		observer.observe(element);
@@ -131,9 +131,9 @@ const AiFormBuilderPreview = React.memo(() => {
 
 	return (
 		<div
-			ref={ref}
 			aria-label="AI Form Builder Demo"
 			className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br from-primary/1 to-accent/20 p-0 shadow-inner"
+			ref={ref}
 			tabIndex={0}
 		>
 			<div className="flex flex-col gap-3 px-6 py-5">
@@ -275,9 +275,9 @@ const UnlimitedPreview = React.memo(() => {
 
 	return (
 		<div
-			ref={ref}
 			aria-label="Unlimited submissions preview"
 			className="relative flex h-full flex-col items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/1 to-accent/20 p-4 shadow-inner"
+			ref={ref}
 		>
 			<motion.div
 				animate={
@@ -295,7 +295,7 @@ const UnlimitedPreview = React.memo(() => {
 				style={{ willChange: isInView ? "transform, opacity" : "auto" }}
 				transition={{
 					duration: 3,
-					repeat: isInView ? Infinity : 0,
+					repeat: isInView ? Number.POSITIVE_INFINITY : 0,
 					ease: "easeInOut",
 				}}
 			>
@@ -338,19 +338,16 @@ const AnalyticsPreview = React.memo(() => {
 	const [isHovered, setIsHovered] = useState(false);
 	const basePoints = useMemo(
 		() => Array.from({ length: 10 }, () => Math.floor(Math.random() * 50) + 40),
-		[],
+		[]
 	);
 	const [animatedPoints, setAnimatedPoints] = useState(basePoints);
 
 	useEffect(() => {
-		if (!isHovered || !isInView) return;
+		if (!(isHovered && isInView)) return;
 
 		const interval = setInterval(() => {
 			setAnimatedPoints(() =>
-				Array.from(
-					{ length: basePoints.length },
-					() => Math.random() * 75 + 20,
-				),
+				Array.from({ length: basePoints.length }, () => Math.random() * 75 + 20)
 			);
 		}, 500);
 
@@ -379,10 +376,10 @@ const AnalyticsPreview = React.memo(() => {
 
 	return (
 		<div
-			ref={ref}
 			className="h-full overflow-hidden rounded-2xl bg-gradient-to-br from-primary/1 to-accent/20 p-5 shadow-inner"
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
+			ref={ref}
 		>
 			<div className="flex flex-col gap-3">
 				<div className="flex items-center justify-between">
@@ -440,7 +437,7 @@ const AnalyticsPreview = React.memo(() => {
 					style={{ willChange: isHovered && isInView ? "opacity" : "auto" }}
 					transition={{
 						duration: 1,
-						repeat: isHovered && isInView ? Infinity : 0,
+						repeat: isHovered && isInView ? Number.POSITIVE_INFINITY : 0,
 					}}
 				>
 					{isHovered ? "Live data updating..." : "1.2k responses this week"}
@@ -505,7 +502,7 @@ const LogicBuilderPreview = React.memo(() => {
 				),
 			},
 		],
-		[],
+		[]
 	);
 
 	const { ref, isInView } = useInView();
@@ -521,9 +518,9 @@ const LogicBuilderPreview = React.memo(() => {
 
 	return (
 		<div
-			ref={ref}
 			aria-label="Logic flow example"
 			className="flex h-full flex-col justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/1 to-accent/20 p-5 shadow-inner"
+			ref={ref}
 			style={{ minHeight: 210 }}
 			tabIndex={0}
 		>
@@ -664,15 +661,15 @@ const ApiIntegrationPreview = React.memo(() => {
 				delay: 0.14,
 			},
 		],
-		[],
+		[]
 	);
 
 	return (
 		<div
-			ref={ref}
 			aria-busy={status === "fetching"}
 			aria-live="polite"
 			className="relative flex h-fit flex-col justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/2 to-accent/20 p-6 shadow-inner"
+			ref={ref}
 			style={{ minHeight: 210 }}
 			tabIndex={0}
 		>
@@ -691,10 +688,13 @@ const ApiIntegrationPreview = React.memo(() => {
 						opacity: [0.8, 1, 0.85, 1],
 						transition: {
 							duration: 1.3,
-							repeat: status === "fetching" && isInView ? Infinity : 0,
+							repeat:
+								status === "fetching" && isInView
+									? Number.POSITIVE_INFINITY
+									: 0,
 						},
 					}}
-					className={`  text-xs ${
+					className={`text-xs ${
 						status === "success"
 							? "text-green-600 dark:text-green-400"
 							: status === "fetching"
@@ -803,8 +803,8 @@ const DigitalSignaturesPreview = React.memo(() => {
 
 	return (
 		<div
-			ref={ref}
 			className="relative flex h-fit flex-col items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/1 to-accent/20 p-4 shadow-inner"
+			ref={ref}
 		>
 			{}
 			<div
@@ -983,8 +983,8 @@ const EmailNotificationsPreview = React.memo(() => {
 
 	return (
 		<div
-			ref={ref}
 			className="relative h-full overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-primary/2 to-accent/20 p-0 shadow-inner"
+			ref={ref}
 		>
 			{}
 			<div

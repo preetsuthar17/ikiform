@@ -16,7 +16,7 @@ const FormBuilder = dynamic(
 	{
 		ssr: false,
 		loading: () => <FormBuilderSkeleton />,
-	},
+	}
 );
 
 function PremiumRequired() {

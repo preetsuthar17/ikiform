@@ -28,7 +28,7 @@ const updateUserPremiumStatus = async (
 	email: string,
 	hasPremium: boolean,
 	polarCustomerId?: string,
-	customerName?: string,
+	customerName?: string
 ) => {
 	const updateData: any = { has_premium: hasPremium };
 
@@ -99,13 +99,13 @@ export const POST = Webhooks({
 				customerEmail,
 				true,
 				payload.data.customer?.id,
-				sanitizeString(payload.data.customer?.name || ""),
+				sanitizeString(payload.data.customer?.name || "")
 			);
 
 			if (updatedUser) {
 				await sendThankYouEmail(
 					customerEmail,
-					sanitizeString(payload.data.customer?.name || ""),
+					sanitizeString(payload.data.customer?.name || "")
 				);
 			}
 		} catch (error) {
@@ -132,13 +132,13 @@ export const POST = Webhooks({
 				customerEmail,
 				true,
 				payload.data.customer?.id,
-				sanitizeString(payload.data.customer?.name || ""),
+				sanitizeString(payload.data.customer?.name || "")
 			);
 
 			if (updatedUser) {
 				await sendThankYouEmail(
 					customerEmail,
-					sanitizeString(payload.data.customer?.name || ""),
+					sanitizeString(payload.data.customer?.name || "")
 				);
 			}
 		} catch (error) {
@@ -165,7 +165,7 @@ export const POST = Webhooks({
 				customerEmail,
 				true,
 				payload.data.customer?.id,
-				sanitizeString(payload.data.customer?.name || ""),
+				sanitizeString(payload.data.customer?.name || "")
 			);
 
 			if (updatedUser) {
@@ -189,7 +189,7 @@ export const POST = Webhooks({
 			if (!userData) return;
 
 			const shouldHavePremium = ["active", "trialing"].includes(
-				payload.data.status,
+				payload.data.status
 			);
 
 			const updatedUser = await updateUserPremiumStatus(
@@ -198,7 +198,7 @@ export const POST = Webhooks({
 				customerEmail,
 				shouldHavePremium,
 				payload.data.customer?.id,
-				sanitizeString(payload.data.customer?.name || ""),
+				sanitizeString(payload.data.customer?.name || "")
 			);
 
 			if (updatedUser) {
@@ -225,7 +225,7 @@ export const POST = Webhooks({
 				supabase,
 				userData.uid,
 				customerEmail,
-				false,
+				false
 			);
 
 			if (updatedUser) {
@@ -249,7 +249,7 @@ export const POST = Webhooks({
 			if (!userData) return;
 
 			const shouldHavePremium = ["active", "trialing"].includes(
-				payload.data.status,
+				payload.data.status
 			);
 
 			const updatedUser = await updateUserPremiumStatus(
@@ -258,7 +258,7 @@ export const POST = Webhooks({
 				customerEmail,
 				shouldHavePremium,
 				payload.data.customer?.id,
-				sanitizeString(payload.data.customer?.name || ""),
+				sanitizeString(payload.data.customer?.name || "")
 			);
 
 			if (updatedUser) {

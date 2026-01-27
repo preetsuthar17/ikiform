@@ -93,7 +93,7 @@ export const getFormLayoutClasses = (schema: FormSchema): LayoutClasses => {
 };
 
 export const getFormCustomStyles = async (
-	schema: FormSchema,
+	schema: FormSchema
 ): Promise<FormCustomStyles> => {
 	const settings = schema.settings || {};
 	const colors = (settings as any).colors || {};

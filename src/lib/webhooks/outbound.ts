@@ -80,7 +80,7 @@ export async function getWebhooks({
 					}
 				}
 				return row;
-			}),
+			})
 		);
 
 		const validData = filteredData.filter((row) => row !== null);
@@ -100,7 +100,7 @@ export async function getWebhooks({
 
 export async function createWebhook(
 	data: Partial<WebhookConfig>,
-	userId?: string,
+	userId?: string
 ): Promise<WebhookConfig> {
 	if (!(data.url && data.events && data.method)) {
 		throw new Error("Missing required fields: url, events, or method");
@@ -165,7 +165,7 @@ export async function createWebhook(
 			"Supabase error creating webhook:",
 			error,
 			"Data:",
-			insertData,
+			insertData
 		);
 		throw new Error(error?.message || "Failed to create webhook");
 	}
@@ -179,7 +179,7 @@ export async function createWebhook(
 export async function updateWebhook(
 	id: string,
 	data: Partial<WebhookConfig>,
-	userId?: string,
+	userId?: string
 ): Promise<WebhookConfig> {
 	const supabase = createAdminClient();
 
@@ -240,7 +240,7 @@ export async function updateWebhook(
 			"Supabase error updating webhook:",
 			error,
 			"Data:",
-			updateData,
+			updateData
 		);
 		throw new Error(error?.message || "Failed to update webhook");
 	}
@@ -252,7 +252,7 @@ export async function updateWebhook(
 
 export async function deleteWebhook(
 	id: string,
-	userId?: string,
+	userId?: string
 ): Promise<void> {
 	const supabase = createAdminClient();
 
@@ -359,7 +359,7 @@ export async function getWebhookLogs({
 	const { data, error } = await query;
 	if (error) throw new Error(error.message);
 
-	if (!data || !Array.isArray(data)) {
+	if (!(data && Array.isArray(data))) {
 		return [];
 	}
 
@@ -398,7 +398,7 @@ export async function getWebhookLogs({
 					return null;
 				}
 				return log;
-			}),
+			})
 		);
 
 		return filteredLogs.filter((log) => log !== null) as WebhookLog[];
@@ -409,7 +409,7 @@ export async function getWebhookLogs({
 
 export async function resendWebhookDelivery(
 	id: string,
-	body: { logId: string },
+	body: { logId: string }
 ): Promise<any> {
 	const supabase = createAdminClient();
 
@@ -438,7 +438,7 @@ export async function resendWebhookDelivery(
 	if ((webhook as WebhookRow).secret) {
 		headers["X-Webhook-Signature"] = signPayload(
 			payload ?? "",
-			(webhook as WebhookRow).secret as string,
+			(webhook as WebhookRow).secret as string
 		);
 	}
 
@@ -446,13 +446,13 @@ export async function resendWebhookDelivery(
 		payload = JSON.stringify(
 			buildDiscordEmbedPayload(
 				JSON.parse(payload ?? "{}"),
-				(webhook as WebhookRow).form_id || "",
-			),
+				(webhook as WebhookRow).form_id || ""
+			)
 		);
 		headers = { "Content-Type": "application/json" };
 	} else if (isSlackWebhook((webhook as WebhookRow).url)) {
 		payload = JSON.stringify(
-			buildSlackMessagePayload(JSON.parse(payload ?? "{}")),
+			buildSlackMessagePayload(JSON.parse(payload ?? "{}"))
 		);
 		headers = { "Content-Type": "application/json" };
 	}
@@ -498,7 +498,7 @@ export async function resendWebhookDelivery(
 
 export async function testWebhook(
 	id: string,
-	samplePayload?: any,
+	samplePayload?: any
 ): Promise<any> {
 	const supabase = createAdminClient();
 
@@ -523,13 +523,13 @@ export async function testWebhook(
 	if ((webhook as WebhookRow).secret) {
 		headers["X-Webhook-Signature"] = signPayload(
 			body,
-			(webhook as WebhookRow).secret as string,
+			(webhook as WebhookRow).secret as string
 		);
 	}
 
 	if (isDiscordWebhook((webhook as WebhookRow).url)) {
 		body = JSON.stringify(
-			buildDiscordEmbedPayload(payload, (webhook as WebhookRow).form_id || ""),
+			buildDiscordEmbedPayload(payload, (webhook as WebhookRow).form_id || "")
 		);
 		headers = { "Content-Type": "application/json" };
 	} else if (isSlackWebhook((webhook as WebhookRow).url)) {
@@ -649,7 +649,7 @@ function isDiscordWebhook(url: string) {
 
 function buildDiscordEmbedPayload(
 	formData: Record<string, any>,
-	formId: string,
+	formId: string
 ) {
 	function formatValue(value: any): string {
 		if (value === null || value === undefined) {
@@ -810,7 +810,7 @@ function buildSlackMessagePayload(formData: Record<string, any>) {
 
 function renderTemplate(
 	template: string,
-	context: Record<string, any>,
+	context: Record<string, any>
 ): string {
 	return template.replace(/{{\s*(json)?\s*([\w.]+)\s*}}/g, (_, isJson, key) => {
 		const keys = key.split(".");
@@ -832,7 +832,7 @@ function renderTemplate(
 
 export async function formatHumanFriendlyPayload(
 	formId: string,
-	formData: Record<string, any>,
+	formData: Record<string, any>
 ) {
 	const form = await formsDbServer.getPublicForm(formId);
 	const schema = form.schema;
@@ -858,7 +858,7 @@ export async function formatHumanFriendlyPayload(
 
 export async function triggerWebhooks(
 	event: WebhookEventType,
-	payload: any,
+	payload: any
 ): Promise<void> {
 	const supabase = createAdminClient();
 
@@ -875,7 +875,7 @@ export async function triggerWebhooks(
 				accountId ? `account_id.eq.${accountId}` : undefined,
 			]
 				.filter(Boolean)
-				.join(","),
+				.join(",")
 		);
 	if (error) throw new Error(error.message);
 	if (!webhooks || webhooks.length === 0) {
@@ -888,7 +888,7 @@ export async function triggerWebhooks(
 		if (event === "form_submitted" && payload.formId && payload.formData) {
 			const formatted = await formatHumanFriendlyPayload(
 				payload.formId,
-				payload.formData,
+				payload.formData
 			);
 			body = (webhook as WebhookRow).payload_template
 				? renderTemplate((webhook as WebhookRow).payload_template as any, {
@@ -913,7 +913,7 @@ export async function triggerWebhooks(
 		if ((webhook as WebhookRow).secret) {
 			headers["X-Webhook-Signature"] = signPayload(
 				body,
-				(webhook as WebhookRow).secret as string,
+				(webhook as WebhookRow).secret as string
 			);
 		}
 
@@ -930,14 +930,14 @@ export async function deliverWithRetry(
 	webhook: WebhookConfig,
 	body: string,
 	headers: Record<string, string>,
-	attempt: number,
+	attempt: number
 ): Promise<void> {
 	const supabase = createAdminClient();
 	const methodsWithBody = ["POST", "PUT", "PATCH"];
 	const startTime = Date.now();
 
 	console.log(
-		`[WEBHOOK DELIVERY] Starting delivery for webhook ${webhook.id} (${webhook.method} ${webhook.url}) - Attempt ${attempt + 1}`,
+		`[WEBHOOK DELIVERY] Starting delivery for webhook ${webhook.id} (${webhook.method} ${webhook.url}) - Attempt ${attempt + 1}`
 	);
 
 	try {
@@ -950,16 +950,16 @@ export async function deliverWithRetry(
 				finalBody = JSON.stringify(
 					buildDiscordEmbedPayload(
 						parsed.formData || parsed,
-						parsed.formId || "",
-					),
+						parsed.formId || ""
+					)
 				);
 				console.log(
-					"[WEBHOOK DELIVERY] Discord webhook detected, transformed payload",
+					"[WEBHOOK DELIVERY] Discord webhook detected, transformed payload"
 				);
 			} catch {
 				finalBody = JSON.stringify(buildDiscordEmbedPayload({}, ""));
 				console.log(
-					"[WEBHOOK DELIVERY] Discord webhook detected, using fallback payload",
+					"[WEBHOOK DELIVERY] Discord webhook detected, using fallback payload"
 				);
 			}
 			finalHeaders = { "Content-Type": "application/json" };
@@ -967,15 +967,15 @@ export async function deliverWithRetry(
 			try {
 				const parsed = JSON.parse(body);
 				finalBody = JSON.stringify(
-					buildSlackMessagePayload(parsed.formData || parsed),
+					buildSlackMessagePayload(parsed.formData || parsed)
 				);
 				console.log(
-					"[WEBHOOK DELIVERY] Slack webhook detected, transformed payload",
+					"[WEBHOOK DELIVERY] Slack webhook detected, transformed payload"
 				);
 			} catch {
 				finalBody = JSON.stringify(buildSlackMessagePayload({}));
 				console.log(
-					"[WEBHOOK DELIVERY] Slack webhook detected, using fallback payload",
+					"[WEBHOOK DELIVERY] Slack webhook detected, using fallback payload"
 				);
 			}
 			finalHeaders = { "Content-Type": "application/json" };
@@ -991,16 +991,16 @@ export async function deliverWithRetry(
 		if (methodsWithBody.includes(webhook.method)) {
 			fetchOptions.body = finalBody;
 			console.log(
-				`[WEBHOOK DELIVERY] Including request body for ${webhook.method} method`,
+				`[WEBHOOK DELIVERY] Including request body for ${webhook.method} method`
 			);
 		} else {
 			console.log(
-				`[WEBHOOK DELIVERY] Skipping request body for ${webhook.method} method`,
+				`[WEBHOOK DELIVERY] Skipping request body for ${webhook.method} method`
 			);
 		}
 
 		console.log(
-			`[WEBHOOK DELIVERY] Sending ${webhook.method} request to ${webhook.url}`,
+			`[WEBHOOK DELIVERY] Sending ${webhook.method} request to ${webhook.url}`
 		);
 		const controller = new AbortController();
 		const timeoutMs = 30_000;
@@ -1014,7 +1014,7 @@ export async function deliverWithRetry(
 
 		const duration = Date.now() - startTime;
 		console.log(
-			`[WEBHOOK DELIVERY] Response received: ${res.status} ${res.statusText} in ${duration}ms`,
+			`[WEBHOOK DELIVERY] Response received: ${res.status} ${res.statusText} in ${duration}ms`
 		);
 
 		const successLog: WebhookLogInsert = {
@@ -1032,7 +1032,7 @@ export async function deliverWithRetry(
 		await supabase.from("webhook_logs" as const).insert([successLog] as any);
 
 		console.log(
-			`[WEBHOOK DELIVERY] Successfully delivered webhook ${webhook.id} in ${duration}ms`,
+			`[WEBHOOK DELIVERY] Successfully delivered webhook ${webhook.id} in ${duration}ms`
 		);
 		if (webhook.notificationEmail && (webhook.notifyOnSuccess ?? false)) {
 			const subject = `Webhook delivered successfully (${res.status})`;
@@ -1049,7 +1049,7 @@ export async function deliverWithRetry(
 		const duration = Date.now() - startTime;
 		console.error(
 			`[WEBHOOK DELIVERY] Failed to deliver webhook ${webhook.id} after ${duration}ms:`,
-			err.message,
+			err.message
 		);
 
 		const failureLog: WebhookLogInsert = {
@@ -1085,15 +1085,15 @@ export async function deliverWithRetry(
 			const jitter = Math.floor(Math.random() * 300);
 			const retryDelay = base + jitter;
 			console.log(
-				`[WEBHOOK DELIVERY] Scheduling retry ${attempt + 2}/3 for webhook ${webhook.id} in ${retryDelay}ms`,
+				`[WEBHOOK DELIVERY] Scheduling retry ${attempt + 2}/3 for webhook ${webhook.id} in ${retryDelay}ms`
 			);
 			setTimeout(
 				() => deliverWithRetry(webhook, body, headers, attempt + 1),
-				retryDelay,
+				retryDelay
 			);
 		} else {
 			console.error(
-				`[WEBHOOK DELIVERY] Max retries reached for webhook ${webhook.id}`,
+				`[WEBHOOK DELIVERY] Max retries reached for webhook ${webhook.id}`
 			);
 		}
 	}

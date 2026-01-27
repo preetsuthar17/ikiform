@@ -11,27 +11,7 @@ interface PageProps {
 	}>;
 }
 
-async function getFormData(id: string, userId: string) {
-	const supabase = await createClient();
-
-	const { data, error } = await supabase
-		.from("forms")
-		.select("*")
-		.eq("id", id)
-		.eq("user_id", userId)
-		.single();
-
-	if (error || !data) {
-		notFound();
-	}
-
-	return {
-		...data,
-		schema: ensureDefaultFormSettings(data.schema),
-	};
-}
-
-async function getUserAndPremiumStatus() {
+async function getAuthenticatedUser() {
 	const supabase = await createClient();
 
 	const {
@@ -43,28 +23,39 @@ async function getUserAndPremiumStatus() {
 		redirect("/login");
 	}
 
-	const { data: subscription } = await supabase
-		.from("users")
-		.select("has_premium")
-		.eq("uid", user.id)
-		.single();
-
-	const hasPremium = subscription?.has_premium;
-
-	return { user, hasPremium };
+	return { user, supabase };
 }
 
 export default async function CustomizePage({ params }: PageProps) {
 	const { id } = await params;
 
 	try {
-		const { user, hasPremium } = await getUserAndPremiumStatus();
+		const { user, supabase } = await getAuthenticatedUser();
+
+		const [subscriptionResult, formResult] = await Promise.all([
+			supabase.from("users").select("has_premium").eq("uid", user.id).single(),
+			supabase
+				.from("forms")
+				.select("*")
+				.eq("id", id)
+				.eq("user_id", user.id)
+				.single(),
+		]);
+
+		const hasPremium = subscriptionResult.data?.has_premium;
 
 		if (!hasPremium) {
 			redirect("/dashboard");
 		}
 
-		const form = await getFormData(id, user.id);
+		if (formResult.error || !formResult.data) {
+			notFound();
+		}
+
+		const form = {
+			...formResult.data,
+			schema: ensureDefaultFormSettings(formResult.data.schema),
+		};
 
 		return (
 			<Suspense fallback={<div>Loading customization...</div>}>
@@ -83,11 +74,26 @@ export async function generateMetadata({
 	const { id } = await params;
 
 	try {
-		const { user } = await getUserAndPremiumStatus();
-		const form = await getFormData(id, user.id);
+		const { user, supabase } = await getAuthenticatedUser();
+
+		const { data: formData, error } = await supabase
+			.from("forms")
+			.select("schema")
+			.eq("id", id)
+			.eq("user_id", user.id)
+			.single();
+
+		if (error || !formData) {
+			return {
+				title: "Customize Form",
+				description: "Customize the design and appearance of your form",
+			};
+		}
+
+		const schema = ensureDefaultFormSettings(formData.schema);
 
 		return {
-			title: `Customize ${form.schema.settings.title}`,
+			title: `Customize ${schema.settings.title}`,
 			description: "Customize the design and appearance of your form",
 		};
 	} catch {

@@ -63,7 +63,7 @@ export function ConfirmationModal({
 				handleConfirm();
 			}
 		},
-		[open, handleCancel, handleConfirm],
+		[open, handleCancel, handleConfirm]
 	);
 
 	useEffect(() => {

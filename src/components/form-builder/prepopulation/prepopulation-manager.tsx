@@ -60,9 +60,7 @@ export function PrepopulationManager({
 	const fieldsWithPrepopulation =
 		schema.fields?.filter((field) => field.prepopulation?.enabled) || [];
 	const prepopulationSources = Array.from(
-		new Set(
-			fieldsWithPrepopulation.map((field) => field.prepopulation?.source),
-		),
+		new Set(fieldsWithPrepopulation.map((field) => field.prepopulation?.source))
 	).filter(Boolean);
 
 	const getSourceIcon = (source: string) => {
@@ -81,13 +79,13 @@ export function PrepopulationManager({
 	};
 
 	const bulkEnablePrepopulation = (
-		source: "url" | "api" | "profile" | "previous",
+		source: "url" | "api" | "profile" | "previous"
 	) => {
 		if (!schema.fields) return;
 
 		const updatedFields = schema.fields.map((field) => {
 			const shouldEnable = ["text", "email", "phone", "address"].includes(
-				field.type,
+				field.type
 			);
 
 			if (shouldEnable) {
@@ -146,7 +144,7 @@ export function PrepopulationManager({
 		const urlFields = fieldsWithPrepopulation.filter(
 			(field) =>
 				field.prepopulation?.source === "url" &&
-				field.prepopulation.config.urlParam,
+				field.prepopulation.config.urlParam
 		);
 
 		if (urlFields.length === 0) {
@@ -159,7 +157,7 @@ export function PrepopulationManager({
 			if (field.prepopulation?.config.urlParam) {
 				params.set(
 					field.prepopulation.config.urlParam,
-					`Sample ${field.label}`,
+					`Sample ${field.label}`
 				);
 			}
 		});
@@ -170,7 +168,7 @@ export function PrepopulationManager({
 		await copyWithToast(
 			previewUrl,
 			"Preview URL copied to clipboard!",
-			"Failed to copy preview URL",
+			"Failed to copy preview URL"
 		);
 	};
 

@@ -8,6 +8,8 @@ import {
 	UserCheck,
 	UserX,
 } from "lucide-react";
+import { useState } from "react";
+import { ConfirmationModal } from "@/components/dashboard/modals/form-delete-confirmation-modal";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -34,14 +36,15 @@ export function AdminControls({
 	removePremium,
 	deleteUser,
 }: AdminControlsProps) {
+	const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+
 	const handleDeleteClick = () => {
-		if (
-			confirm(
-				`Are you sure you want to delete user "${userName}"? This action cannot be undone and will delete all their forms and data.`,
-			)
-		) {
-			deleteUser(userId);
-		}
+		setShowDeleteConfirm(true);
+	};
+
+	const handleConfirmDelete = () => {
+		deleteUser(userId);
+		setShowDeleteConfirm(false);
 	};
 
 	return (
@@ -58,9 +61,9 @@ export function AdminControls({
 			<CardContent className="p-0">
 				<div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 					<div className="flex flex-col gap-2">
-						<label className="font-medium text-muted-foreground text-sm">
+						<div className="font-medium text-muted-foreground text-sm">
 							Free Trial
-						</label>
+						</div>
 						<div className="flex gap-2">
 							{hasFreeTrial ? (
 								<form action={removeTrial.bind(null, userId)}>
@@ -92,9 +95,9 @@ export function AdminControls({
 
 					{}
 					<div className="flex flex-col gap-2">
-						<label className="font-medium text-muted-foreground text-sm">
+						<div className="font-medium text-muted-foreground text-sm">
 							Premium Status
-						</label>
+						</div>
 						<div className="flex gap-2">
 							{hasPremium ? (
 								<form action={removePremium.bind(null, userId)}>
@@ -126,22 +129,20 @@ export function AdminControls({
 
 					{}
 					<div className="flex flex-col gap-2">
-						<label className="font-medium text-muted-foreground text-sm">
+						<div className="font-medium text-muted-foreground text-sm">
 							Danger Zone
-						</label>
+						</div>
 						<div className="flex gap-2">
-							<form action={deleteUser.bind(null, userId)}>
-								<Button
-									className="bg-red-600 hover:bg-red-700"
-									onClick={handleDeleteClick}
-									size="sm"
-									type="submit"
-									variant="destructive"
-								>
-									<Trash2 className="size-4" />
-									Delete User
-								</Button>
-							</form>
+							<Button
+								className="bg-red-600 hover:bg-red-700"
+								onClick={handleDeleteClick}
+								size="sm"
+								type="button"
+								variant="destructive"
+							>
+								<Trash2 className="size-4" />
+								Delete User
+							</Button>
 						</div>
 					</div>
 				</div>
@@ -154,6 +155,17 @@ export function AdminControls({
 					</p>
 				</div>
 			</CardContent>
+
+			<ConfirmationModal
+				cancelText="Cancel"
+				confirmText="Delete User"
+				description={`Are you sure you want to delete user "${userName}"? This action cannot be undone and will delete all their forms and data.`}
+				onConfirm={handleConfirmDelete}
+				onOpenChange={setShowDeleteConfirm}
+				open={showDeleteConfirm}
+				title="Delete User"
+				variant="destructive"
+			/>
 		</Card>
 	);
 }

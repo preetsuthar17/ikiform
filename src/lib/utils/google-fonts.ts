@@ -1,9 +1,9 @@
 export function loadGoogleFont(
 	fontFamily: string,
-	weights: string[] = ["400", "500", "600", "700"],
+	weights: string[] = ["400", "500", "600", "700"]
 ) {
 	const existingLink = document.querySelector(
-		`link[href*="family=${fontFamily.replace(/\s+/g, "+")}"]`,
+		`link[href*="family=${fontFamily.replace(/\s+/g, "+")}"]`
 	);
 	if (existingLink) {
 		return Promise.resolve();

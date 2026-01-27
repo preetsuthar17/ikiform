@@ -128,7 +128,7 @@ async function getUserForms(userId: string): Promise<Form[]> {
 					acc[submission.form_id] = (acc[submission.form_id] || 0) + 1;
 					return acc;
 				},
-				{} as Record<string, number>,
+				{} as Record<string, number>
 			);
 		}
 	}
@@ -149,7 +149,7 @@ function calculateTrialDaysLeft(createdAt: string): {
 } {
 	const createdDate = new Date(createdAt);
 	const trialEndDate = new Date(
-		createdDate.getTime() + 14 * 24 * 60 * 60 * 1000,
+		createdDate.getTime() + 14 * 24 * 60 * 60 * 1000
 	);
 	const now = new Date();
 

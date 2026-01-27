@@ -29,7 +29,7 @@ function sanitizeObjectStrings(obj: any): any {
 
 export async function POST(
 	request: NextRequest,
-	{ params }: { params: Promise<{ id: string }> },
+	{ params }: { params: Promise<{ id: string }> }
 ) {
 	try {
 		const { id: formId } = await params;
@@ -43,7 +43,7 @@ export async function POST(
 					error:
 						"Missing or invalid authorization header. Use 'Bearer <api_key>'",
 				},
-				{ status: 401 },
+				{ status: 401 }
 			);
 		}
 
@@ -53,7 +53,7 @@ export async function POST(
 		if (!validationResult.success) {
 			return NextResponse.json(
 				{ error: validationResult.error },
-				{ status: 401 },
+				{ status: 401 }
 			);
 		}
 
@@ -68,7 +68,7 @@ export async function POST(
 						error: "Bot detected",
 						message: botProtection.message || "Bot detected. Access denied.",
 					},
-					{ status: 403 },
+					{ status: 403 }
 				);
 			}
 		}
@@ -88,7 +88,7 @@ export async function POST(
 			const rateLimitResult = await checkFormRateLimit(
 				ipAddress,
 				formId,
-				rateLimit,
+				rateLimit
 			);
 			if (!rateLimitResult.success) {
 				return NextResponse.json(
@@ -99,7 +99,7 @@ export async function POST(
 						remaining: rateLimitResult.remaining,
 						reset: rateLimitResult.reset,
 					},
-					{ status: 429 },
+					{ status: 429 }
 				);
 			}
 		}
@@ -115,7 +115,7 @@ export async function POST(
 							responseLimit.message ||
 							"This form is no longer accepting responses.",
 					},
-					{ status: 403 },
+					{ status: 403 }
 				);
 			}
 		}
@@ -137,7 +137,7 @@ export async function POST(
 							result.message || "Submission contains inappropriate content",
 						violations: result.violations.length,
 					},
-					{ status: 400 },
+					{ status: 400 }
 				);
 			}
 		}
@@ -148,13 +148,13 @@ export async function POST(
 			const identifier = generateIdentifier(
 				duplicatePrevention.strategy,
 				ipAddress,
-				email,
+				email
 			);
 
 			const isDuplicate = await checkDuplicateSubmission(
 				formId,
 				identifier,
-				duplicatePrevention,
+				duplicatePrevention
 			);
 
 			if (isDuplicate) {
@@ -165,7 +165,7 @@ export async function POST(
 							duplicatePrevention.message ||
 							"This submission has already been received",
 					},
-					{ status: 409 },
+					{ status: 409 }
 				);
 			}
 		}
@@ -176,7 +176,7 @@ export async function POST(
 			const submissionResult = await formsDbServer.submitForm(
 				formId,
 				sanitizedData,
-				ipAddress,
+				ipAddress
 			);
 
 			return NextResponse.json(
@@ -188,27 +188,27 @@ export async function POST(
 					submissionId: submissionResult.id,
 					timestamp: new Date().toISOString(),
 				},
-				{ status: 200 },
+				{ status: 200 }
 			);
 		} catch (error) {
 			const err = error instanceof Error ? error : new Error(String(error));
 			return NextResponse.json(
 				{ error: "Failed to submit form", details: err.message },
-				{ status: 500 },
+				{ status: 500 }
 			);
 		}
 	} catch (error) {
 		console.error("API form submission error:", error);
 		return NextResponse.json(
 			{ error: "Internal server error" },
-			{ status: 500 },
+			{ status: 500 }
 		);
 	}
 }
 
 export async function GET(
 	request: NextRequest,
-	{ params }: { params: Promise<{ id: string }> },
+	{ params }: { params: Promise<{ id: string }> }
 ) {
 	try {
 		const { id: formId } = await params;
@@ -220,7 +220,7 @@ export async function GET(
 					error:
 						"Missing or invalid authorization header. Use 'Bearer <api_key>'",
 				},
-				{ status: 401 },
+				{ status: 401 }
 			);
 		}
 
@@ -230,7 +230,7 @@ export async function GET(
 		if (!validationResult.success) {
 			return NextResponse.json(
 				{ error: validationResult.error },
-				{ status: 401 },
+				{ status: 401 }
 			);
 		}
 
@@ -270,13 +270,13 @@ export async function GET(
 					},
 				},
 			},
-			{ status: 200 },
+			{ status: 200 }
 		);
 	} catch (error) {
 		console.error("API form schema error:", error);
 		return NextResponse.json(
 			{ error: "Internal server error" },
-			{ status: 500 },
+			{ status: 500 }
 		);
 	}
 }

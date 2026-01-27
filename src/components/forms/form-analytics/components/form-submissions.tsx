@@ -4,6 +4,8 @@ import {
 	ArrowLeft,
 	BarChart3,
 	Calendar,
+	ChevronLeft,
+	ChevronRight,
 	Download,
 	Eye,
 	FileText,
@@ -83,7 +85,7 @@ const exportToCSV = (form: Form, submissions: FormSubmission[]) => {
 					if (typeof value === "object") return JSON.stringify(value);
 					return String(value).replace(/,/g, ";");
 				}),
-			].join(","),
+			].join(",")
 		),
 	].join("\n");
 
@@ -116,12 +118,15 @@ const exportToJSON = (form: Form, submissions: FormSubmission[]) => {
 	toast.success("JSON exported successfully");
 };
 
+const ITEMS_PER_PAGE = 50;
+
 export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 	const router = useRouter();
 	const [searchTerm, setSearchTerm] = useState("");
 	const [selectedSubmission, setSelectedSubmission] =
 		useState<FormSubmission | null>(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [currentPage, setCurrentPage] = useState(1);
 
 	const filteredSubmissions = submissions.filter((submission) => {
 		if (!searchTerm) return true;
@@ -130,7 +135,7 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 			submission.id.toLowerCase().includes(searchLower) ||
 			submission.ip_address?.toLowerCase().includes(searchLower) ||
 			Object.values(submission.submission_data).some((value) =>
-				String(value).toLowerCase().includes(searchLower),
+				String(value).toLowerCase().includes(searchLower)
 			)
 		);
 	});
@@ -139,6 +144,16 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 		...(form.schema.fields || []),
 		...(form.schema.blocks?.flatMap((block) => block.fields || []) || []),
 	];
+
+	const totalPages = Math.ceil(filteredSubmissions.length / ITEMS_PER_PAGE);
+	const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+	const endIndex = startIndex + ITEMS_PER_PAGE;
+	const paginatedSubmissions = filteredSubmissions.slice(startIndex, endIndex);
+
+	const handleSearchChange = (value: string) => {
+		setSearchTerm(value);
+		setCurrentPage(1);
+	};
 
 	return (
 		<div className="min-h-screen bg-background">
@@ -254,10 +269,10 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 							</CardTitle>
 							<div className="flex items-center gap-2">
 								<div className="relative max-w-md">
-									<Search className="-translate-y-1/2 absolute top-1/2 left-3 size-4 text-muted-foreground" />
+									<Search className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
 									<Input
 										className="pl-10"
-										onChange={(e) => setSearchTerm(e.target.value)}
+										onChange={(e) => handleSearchChange(e.target.value)}
 										placeholder="Search submissions..."
 										value={searchTerm}
 									/>
@@ -266,7 +281,7 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 						</div>
 					</CardHeader>
 					<CardContent className="p-0">
-						{filteredSubmissions.length === 0 ? (
+						{paginatedSubmissions.length === 0 ? (
 							<div className="flex flex-col items-center gap-6 py-16">
 								<div className="gradient-bg flex size-24 items-center justify-center rounded-2xl">
 									<FileText className="size-10 text-accent-foreground" />
@@ -295,7 +310,7 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 										</TableRow>
 									</TableHeader>
 									<TableBody>
-										{filteredSubmissions.map((submission) => (
+										{paginatedSubmissions.map((submission) => (
 											<TableRow key={submission.id}>
 												<TableCell className="font-mono text-sm">
 													{submission.id.slice(-8)}
@@ -332,6 +347,38 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 										))}
 									</TableBody>
 								</Table>
+								{totalPages > 1 && (
+									<div className="flex items-center justify-between border-t px-4 py-3">
+										<div className="text-muted-foreground text-sm">
+											Showing {startIndex + 1}-
+											{Math.min(endIndex, filteredSubmissions.length)} of{" "}
+											{filteredSubmissions.length} submissions
+										</div>
+										<div className="flex items-center gap-2">
+											<Button
+												disabled={currentPage === 1}
+												onClick={() => setCurrentPage((p) => p - 1)}
+												size="sm"
+												variant="outline"
+											>
+												<ChevronLeft className="size-4" />
+												Previous
+											</Button>
+											<span className="px-2 text-sm">
+												Page {currentPage} of {totalPages}
+											</span>
+											<Button
+												disabled={currentPage === totalPages}
+												onClick={() => setCurrentPage((p) => p + 1)}
+												size="sm"
+												variant="outline"
+											>
+												Next
+												<ChevronRight className="size-4" />
+											</Button>
+										</div>
+									</div>
+								)}
 							</div>
 						)}
 					</CardContent>

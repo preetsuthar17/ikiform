@@ -64,7 +64,7 @@ export function DuplicatePreventionSection({
 		return () =>
 			window.removeEventListener(
 				"beforeunload",
-				onBeforeUnload as unknown as EventListener,
+				onBeforeUnload as unknown as EventListener
 			);
 	}, [hasChanges]);
 
@@ -126,7 +126,7 @@ export function DuplicatePreventionSection({
 	useEffect(() => {
 		if (duplicatePreventionRef.current) {
 			const firstInput = duplicatePreventionRef.current.querySelector(
-				"input, textarea, select",
+				"input, textarea, select"
 			) as HTMLElement;
 			firstInput?.focus();
 		}
@@ -330,7 +330,7 @@ function PreventionModeSection({
 						"message",
 						value === "one-time"
 							? "You have already submitted this form. Each user can only submit once."
-							: "You have already submitted this form. Please wait before submitting again.",
+							: "You have already submitted this form. Please wait before submitting again."
 					);
 				}}
 				value={duplicatePrevention.mode || "one-time"}

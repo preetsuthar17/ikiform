@@ -1,7 +1,7 @@
 export function safeRegexTest(
 	pattern: string,
 	value: string,
-	timeoutMs = 100,
+	timeoutMs = 100
 ): boolean {
 	try {
 		// eslint-disable-next-line security/detect-non-literal-regexp
@@ -13,7 +13,7 @@ export function safeRegexTest(
 		const executionTime = Date.now() - startTime;
 		if (executionTime > timeoutMs) {
 			console.warn(
-				`Regex pattern took ${executionTime}ms to execute, exceeding timeout of ${timeoutMs}ms`,
+				`Regex pattern took ${executionTime}ms to execute, exceeding timeout of ${timeoutMs}ms`
 			);
 			return false;
 		}

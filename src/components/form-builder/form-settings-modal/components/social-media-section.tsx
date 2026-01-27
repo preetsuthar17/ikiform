@@ -59,7 +59,7 @@ export function BrandingSection({
 		return () =>
 			window.removeEventListener(
 				"beforeunload",
-				onBeforeUnload as unknown as EventListener,
+				onBeforeUnload as unknown as EventListener
 			);
 	}, [hasChanges]);
 
@@ -115,8 +115,8 @@ export function BrandingSection({
 					...localSettings.branding?.socialMedia,
 					platforms: Object.fromEntries(
 						Object.entries(
-							localSettings.branding?.socialMedia?.platforms || {},
-						).map(([key, value]) => [key, ((value as string) || "").trim()]),
+							localSettings.branding?.socialMedia?.platforms || {}
+						).map(([key, value]) => [key, ((value as string) || "").trim()])
 					),
 				},
 			};

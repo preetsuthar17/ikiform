@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
 		if (!(filePaths && Array.isArray(filePaths))) {
 			return NextResponse.json(
 				{ error: "filePaths array is required" },
-				{ status: 400 },
+				{ status: 400 }
 			);
 		}
 
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
 		console.error("Refresh URLs error:", error);
 		return NextResponse.json(
 			{ error: "Failed to refresh URLs" },
-			{ status: 500 },
+			{ status: 500 }
 		);
 	}
 }

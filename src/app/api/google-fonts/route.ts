@@ -1031,7 +1031,7 @@ export async function GET(request: NextRequest) {
 
 		return NextResponse.json(
 			{ error: "Failed to fetch fonts" },
-			{ status: 500 },
+			{ status: 500 }
 		);
 	}
 }

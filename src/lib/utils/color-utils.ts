@@ -54,13 +54,13 @@ function xyzToLab(x: number, y: number, z: number): [number, number, number] {
 
 function xyzToOklch(x: number, y: number, z: number): [number, number, number] {
 	const l = Math.cbrt(
-		0.818_933_010_1 * x + 0.361_866_742_4 * y - 0.128_859_713_7 * z,
+		0.818_933_010_1 * x + 0.361_866_742_4 * y - 0.128_859_713_7 * z
 	);
 	const m = Math.cbrt(
-		0.032_984_543_6 * x + 0.929_311_871_5 * y + 0.036_145_638_7 * z,
+		0.032_984_543_6 * x + 0.929_311_871_5 * y + 0.036_145_638_7 * z
 	);
 	const s = Math.cbrt(
-		0.048_200_301_8 * x + 0.264_366_269_1 * y + 0.633_851_707 * z,
+		0.048_200_301_8 * x + 0.264_366_269_1 * y + 0.633_851_707 * z
 	);
 
 	const okL = 0.210_454_255_3 * l + 0.793_617_785 * m - 0.004_072_046_8 * s;
@@ -126,7 +126,7 @@ export function formatColorValue(color: Color, format: ColorFormat): string {
 
 			if (alpha < 1) {
 				return `oklch(${(L * 100).toFixed(1)}% ${C.toFixed(3)} ${H.toFixed(
-					1,
+					1
 				)} / ${alpha.toFixed(2)})`;
 			}
 			return `oklch(${(L * 100).toFixed(1)}% ${C.toFixed(3)} ${H.toFixed(1)})`;
@@ -143,7 +143,7 @@ export function formatColorValue(color: Color, format: ColorFormat): string {
 
 			if (alpha < 1) {
 				return `lab(${L.toFixed(1)}% ${a.toFixed(1)} ${bLab.toFixed(
-					1,
+					1
 				)} / ${alpha.toFixed(2)})`;
 			}
 			return `lab(${L.toFixed(1)}% ${a.toFixed(1)} ${bLab.toFixed(1)})`;
@@ -155,7 +155,7 @@ export function formatColorValue(color: Color, format: ColorFormat): string {
 
 export function parseColorFromFormat(
 	value: string,
-	format: ColorFormat,
+	format: ColorFormat
 ): Color | null {
 	try {
 		if (format === "hex" || format === "rgb" || format === "hsl") {
@@ -188,7 +188,7 @@ export function parseColorFromFormat(
 				const alpha = parts[3] ? Number.parseFloat(parts[3]) : 1;
 
 				return parseColor(
-					`hsla(${H}, ${Math.min(C * 100, 100)}%, ${L}%, ${alpha})`,
+					`hsla(${H}, ${Math.min(C * 100, 100)}%, ${L}%, ${alpha})`
 				);
 			}
 		}
@@ -208,8 +208,8 @@ export function parseColorFromFormat(
 				return parseColor(
 					`hsla(${hue < 0 ? hue + 360 : hue}, ${Math.min(
 						chroma,
-						100,
-					)}%, ${L}%, ${alpha})`,
+						100
+					)}%, ${L}%, ${alpha})`
 				);
 			}
 		}
@@ -222,7 +222,7 @@ export function parseColorFromFormat(
 
 export function isValidColorFormat(
 	value: string,
-	format: ColorFormat,
+	format: ColorFormat
 ): boolean {
 	const parsed = parseColorFromFormat(value, format);
 	return parsed !== null;

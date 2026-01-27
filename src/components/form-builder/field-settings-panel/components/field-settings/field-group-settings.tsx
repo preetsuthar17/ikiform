@@ -70,7 +70,7 @@ export function FieldGroupSettings({
 
 	const updateGroupField = (fieldId: string, updates: any) => {
 		const updatedGroupFields = groupFields.map((f) =>
-			f.id === fieldId ? { ...f, ...updates } : f,
+			f.id === fieldId ? { ...f, ...updates } : f
 		);
 		onUpdateSettings({
 			groupFields: updatedGroupFields,
@@ -220,7 +220,7 @@ export function FieldGroupSettings({
 												</div>
 												<div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
 													{FIELD_TYPE_CONFIGS.filter(
-														(f) => f.category === (key as any),
+														(f) => f.category === (key as any)
 													).map((f) => (
 														<Button
 															className="h-19 w-full items-center justify-start text-left"
@@ -419,7 +419,7 @@ export function FieldGroupSettings({
 															e.preventDefault();
 															setFieldExpansion(
 																groupField.id,
-																!expandedFields[groupField.id],
+																!expandedFields[groupField.id]
 															);
 														}
 													}}

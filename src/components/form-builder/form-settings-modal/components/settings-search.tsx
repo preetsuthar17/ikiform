@@ -38,14 +38,14 @@ function highlightText(text: string, query: string) {
 	return parts.map((part, idx) =>
 		part.highlight ? (
 			<mark
+				className="bg-yellow-200 font-medium dark:bg-yellow-900/50"
 				key={idx}
-				className="bg-yellow-200 dark:bg-yellow-900/50 font-medium"
 			>
 				{part.text}
 			</mark>
 		) : (
 			part.text
-		),
+		)
 	);
 }
 
@@ -158,7 +158,7 @@ export function SettingsSearch({
 				/>
 				<Search
 					aria-hidden="true"
-					className="-translate-y-1/2 pointer-events-none absolute top-1/2 left-2.5 size-4 text-muted-foreground"
+					className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground"
 				/>
 			</div>
 			{}

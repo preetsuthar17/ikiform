@@ -47,7 +47,7 @@ export function EmailValidationSettings({
 
 	const removeAllowedDomain = (domain: string) => {
 		const domains = (emailSettings.allowedDomains || []).filter(
-			(d) => d !== domain,
+			(d) => d !== domain
 		);
 		updateEmailSettings({ allowedDomains: domains });
 	};
@@ -65,7 +65,7 @@ export function EmailValidationSettings({
 
 	const removeBlockedDomain = (domain: string) => {
 		const domains = (emailSettings.blockedDomains || []).filter(
-			(d) => d !== domain,
+			(d) => d !== domain
 		);
 		updateEmailSettings({ blockedDomains: domains });
 	};
@@ -251,7 +251,7 @@ export function EmailValidationSettings({
 										key: index,
 										variant: "outline",
 										onRemove: () => removeAllowedDomain(domain),
-									}),
+									})
 								)}
 							</div>
 						)}
@@ -311,7 +311,7 @@ export function EmailValidationSettings({
 									key: index,
 									variant: "destructive",
 									onRemove: () => removeBlockedDomain(domain),
-								}),
+								})
 							)}
 						</div>
 					)}

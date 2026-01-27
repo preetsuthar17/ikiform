@@ -102,7 +102,7 @@ export function getFontWeightValue(weight?: string): string {
 
 export function injectFormStyles(
 	styleConfig: FormStyleConfig,
-	formId: string,
+	formId: string
 ): void {
 	const existingStyle = document.getElementById(`form-styles-${formId}`);
 	if (existingStyle) {

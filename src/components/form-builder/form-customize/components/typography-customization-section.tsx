@@ -31,7 +31,7 @@ export function TypographyCustomizationSection({
 
 	const getFontSizeSliderValue = (size: string) => {
 		const index = FONT_SIZE_OPTIONS.findIndex(
-			(option) => option.value === size,
+			(option) => option.value === size
 		);
 		return index >= 0 ? index : 1;
 	};
@@ -43,7 +43,7 @@ export function TypographyCustomizationSection({
 
 	const getFontWeightSliderValue = (weight: string) => {
 		const index = FONT_WEIGHT_OPTIONS.findIndex(
-			(option) => option.value === weight,
+			(option) => option.value === weight
 		);
 		return index >= 0 ? index : 1;
 	};

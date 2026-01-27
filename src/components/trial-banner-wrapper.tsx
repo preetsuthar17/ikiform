@@ -42,13 +42,13 @@ export function TrialBannerWrapper({ className }: TrialBannerWrapperProps) {
 
 	const shouldHideBanner = useMemo(
 		() => pathname.startsWith("/f/") || pathname.startsWith("/forms/"),
-		[pathname],
+		[pathname]
 	);
 
 	const trialEndDate = useMemo(() => {
 		if (!user?.created_at) return null;
 		return new Date(
-			new Date(user.created_at).getTime() + 14 * 24 * 60 * 60 * 1000,
+			new Date(user.created_at).getTime() + 14 * 24 * 60 * 60 * 1000
 		);
 	}, [user?.created_at]);
 
@@ -136,7 +136,7 @@ export function TrialBannerWrapper({ className }: TrialBannerWrapperProps) {
 			className={cn(
 				"fixed top-0 left-0 z-50 w-full bg-foreground py-1",
 				"border-blue-500/20 border-b",
-				className,
+				className
 			)}
 			ref={bannerRef}
 			role="banner"

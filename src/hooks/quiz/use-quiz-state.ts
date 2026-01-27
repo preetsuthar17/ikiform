@@ -20,7 +20,7 @@ export interface QuizState {
 
 export function useQuizState(
 	schema: FormSchema,
-	submissionData: Record<string, any> = {},
+	submissionData: Record<string, any> = {}
 ) {
 	const [quizState, setQuizState] = useState<QuizState>(() => {
 		const isQuizMode = Boolean(schema.settings?.quiz?.enabled);
@@ -35,7 +35,7 @@ export function useQuizState(
 			currentScore: 0,
 			totalPossible: quizFields.reduce(
 				(sum, field) => sum + (field.settings?.points || 1),
-				0,
+				0
 			),
 			answeredQuestions: 0,
 			totalQuestions: quizFields.length,

@@ -76,7 +76,7 @@ export function validateMessageRole(role: string): boolean {
 }
 
 export function filterSystemMessages(
-	messages: { role: string; content: string }[],
+	messages: { role: string; content: string }[]
 ): { role: string; content: string }[] {
 	return messages
 		.filter((msg) => msg.role !== "system" && validateMessageRole(msg.role))

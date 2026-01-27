@@ -49,7 +49,7 @@ export function NotificationsSection({
 		return () =>
 			window.removeEventListener(
 				"beforeunload",
-				onBeforeUnload as unknown as EventListener,
+				onBeforeUnload as unknown as EventListener
 			);
 	}, [hasChanges]);
 
@@ -93,7 +93,7 @@ export function NotificationsSection({
 					(link) => ({
 						label: link.label.trim(),
 						url: link.url.trim(),
-					}),
+					})
 				),
 			};
 			if (onSchemaUpdate) {

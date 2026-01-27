@@ -10,7 +10,7 @@ export const getAllFields = (schema: FormSchema): FormField[] =>
 
 export const validateSingleStepForm = (
 	fields: FormField[],
-	formData: Record<string, any>,
+	formData: Record<string, any>
 ): { errors: Record<string, string>; isValid: boolean } => {
 	const errors: Record<string, string> = {};
 
@@ -26,7 +26,7 @@ export const validateSingleStepForm = (
 		} else if (field.type === "email" && value) {
 			const emailValidation = validateEmail(
 				value,
-				field.settings?.emailValidation,
+				field.settings?.emailValidation
 			);
 			if (!emailValidation.isValid) {
 				errors[field.id] =
@@ -113,7 +113,7 @@ export const validateSingleStepForm = (
 
 export const submitSingleStepForm = async (
 	formId: string,
-	formData: Record<string, any>,
+	formData: Record<string, any>
 ): Promise<{
 	success: boolean;
 	message?: string;

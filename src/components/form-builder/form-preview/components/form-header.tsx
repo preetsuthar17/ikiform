@@ -47,7 +47,7 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
 				placeholder="Click to add a description..."
 				rows={Math.max(
 					(schema.settings?.description || "").split("\n").length || 1,
-					1,
+					1
 				)}
 				value={schema.settings?.description || ""}
 			>

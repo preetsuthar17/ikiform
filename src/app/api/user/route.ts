@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
 				user_metadata?.full_name ||
 					user_metadata?.name ||
 					user_metadata?.user_name ||
-					email.split("@")[0],
+					email.split("@")[0]
 			) || "";
 
 		const cachedUser = getCachedUser(sanitizedEmail);
@@ -87,17 +87,17 @@ export async function POST(request: NextRequest) {
 				{
 					onConflict: "email",
 					ignoreDuplicates: false,
-				},
+				}
 			)
 			.select(
-				"uid, email, name, has_premium, has_free_trial, polar_customer_id, created_at, updated_at",
+				"uid, email, name, has_premium, has_free_trial, polar_customer_id, created_at, updated_at"
 			)
 			.single();
 
 		if (upsertError) {
 			return NextResponse.json(
 				{ error: "Failed to create/update user", details: upsertError.message },
-				{ status: 500 },
+				{ status: 500 }
 			);
 		}
 
@@ -122,7 +122,7 @@ export async function POST(request: NextRequest) {
 		console.error("[User API] POST error:", error);
 		return NextResponse.json(
 			{ error: "Internal server error" },
-			{ status: 500 },
+			{ status: 500 }
 		);
 	}
 }
@@ -156,7 +156,7 @@ export async function GET(_request: NextRequest) {
 		const { data, error } = await supabase
 			.from("users")
 			.select(
-				"uid, email, name, has_premium, has_free_trial, polar_customer_id, created_at, updated_at",
+				"uid, email, name, has_premium, has_free_trial, polar_customer_id, created_at, updated_at"
 			)
 			.eq("email", user.email)
 			.single();
@@ -164,7 +164,7 @@ export async function GET(_request: NextRequest) {
 		if (error) {
 			return NextResponse.json(
 				{ error: "User not found in database", details: error.message },
-				{ status: 404 },
+				{ status: 404 }
 			);
 		}
 
@@ -183,7 +183,7 @@ export async function GET(_request: NextRequest) {
 		console.error("[User API] GET error:", error);
 		return NextResponse.json(
 			{ error: "Internal server error" },
-			{ status: 500 },
+			{ status: 500 }
 		);
 	}
 }

@@ -33,17 +33,17 @@ export function InboundWebhookFormModal({
 	loading,
 }: InboundWebhookFormModalProps) {
 	const [targetFormId, setTargetFormId] = useState(
-		initialMapping?.targetFormId || "",
+		initialMapping?.targetFormId || ""
 	);
 	const [mappingRules, setMappingRules] = useState<Record<string, string>>(
-		initialMapping?.mappingRules || { externalField: "formField" },
+		initialMapping?.mappingRules || { externalField: "formField" }
 	);
 	const [enabled, setEnabled] = useState(initialMapping?.enabled ?? true);
 
 	useEffect(() => {
 		setTargetFormId(initialMapping?.targetFormId || "");
 		setMappingRules(
-			initialMapping?.mappingRules || { externalField: "formField" },
+			initialMapping?.mappingRules || { externalField: "formField" }
 		);
 		setEnabled(initialMapping?.enabled ?? true);
 	}, [initialMapping, open]);

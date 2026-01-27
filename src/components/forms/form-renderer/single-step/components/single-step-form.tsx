@@ -126,7 +126,7 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
 				"flex items-center justify-center transition-opacity duration-500",
 				showForm ? "opacity-100" : "opacity-0",
 				marginClass,
-				getFormClasses(),
+				getFormClasses()
 			)}
 			dir={dir}
 			style={customStyles.containerStyle}
@@ -168,7 +168,7 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
 						)}
 					{Boolean(
 						schema.settings.branding &&
-							(schema.settings.branding as any).showIkiformBranding !== false,
+							(schema.settings.branding as any).showIkiformBranding !== false
 					) && (
 						<p className="text-muted-foreground text-sm">
 							Powered by{" "}

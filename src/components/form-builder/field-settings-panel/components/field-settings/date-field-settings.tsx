@@ -34,7 +34,7 @@ export function DateFieldSettings({
 
 	const handleDateSelect = (
 		selectedDate: Date | undefined,
-		setting: "min" | "max" | "defaultValue",
+		setting: "min" | "max" | "defaultValue"
 	) => {
 		if (selectedDate) {
 			if (setting === "defaultValue") {

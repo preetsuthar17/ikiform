@@ -21,7 +21,7 @@ export const FormFooter: React.FC<FormFooterProps> = ({ schema }) => (
 			)}
 		{Boolean(
 			schema.settings.branding &&
-				(schema.settings.branding as any).showIkiformBranding !== false,
+				(schema.settings.branding as any).showIkiformBranding !== false
 		) && (
 			<p className="text-muted-foreground text-sm">
 				Powered by{" "}

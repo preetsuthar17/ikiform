@@ -4,7 +4,7 @@ import type { DragEndResult } from "../types";
 export const handleBlockReorder = (
 	blocks: FormBlock[],
 	result: DragEndResult,
-	onBlocksUpdate: (blocks: FormBlock[]) => void,
+	onBlocksUpdate: (blocks: FormBlock[]) => void
 ) => {
 	if (!result.destination) return;
 
@@ -18,10 +18,10 @@ export const handleBlockReorder = (
 export const getBlockStats = (blocks: FormBlock[]) => {
 	const totalFields = blocks.reduce(
 		(acc, block) => acc + block.fields.length,
-		0,
+		0
 	);
 	const completedBlocks = blocks.filter(
-		(block) => block.fields.length > 0,
+		(block) => block.fields.length > 0
 	).length;
 
 	return {

@@ -21,7 +21,7 @@ export function TimeInputField(props: BaseFieldProps) {
 			showCurrentTimeButton,
 			value,
 		},
-		builderMode,
+		builderMode
 	);
 
 	return (

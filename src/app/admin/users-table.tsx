@@ -139,7 +139,7 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
 			params.set("sort", `${newSortField}_${newSortDirection}`);
 			router.push(`?${params.toString()}`, { scroll: false });
 		},
-		[router, searchParams],
+		[router, searchParams]
 	);
 
 	const handleSort = useCallback(
@@ -156,7 +156,7 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
 			setSortDirection(newDirection);
 			updateURL(field, newDirection);
 		},
-		[sortField, sortDirection, updateURL],
+		[sortField, sortDirection, updateURL]
 	);
 
 	const getSortIcon = useCallback(
@@ -170,7 +170,7 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
 				<ArrowDown aria-hidden="true" className="size-3" />
 			);
 		},
-		[sortField, sortDirection],
+		[sortField, sortDirection]
 	);
 
 	const clearFilters = useCallback(() => {
@@ -191,7 +191,7 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
 
 	const hasActiveFilters = useMemo(
 		() => searchTerm || premiumFilter !== "all" || trialFilter !== "all",
-		[searchTerm, premiumFilter, trialFilter],
+		[searchTerm, premiumFilter, trialFilter]
 	);
 
 	return (
@@ -201,7 +201,7 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
 				<div className="relative flex-1">
 					<Search
 						aria-hidden="true"
-						className="-translate-y-1/2 absolute top-1/2 left-3 size-4 transform text-muted-foreground"
+						className="absolute top-1/2 left-3 size-4 -translate-y-1/2 transform text-muted-foreground"
 					/>
 					<Input
 						aria-label="Search users"
@@ -263,7 +263,7 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
 						Showing {(currentPage - 1) * itemsPerPage + 1}-
 						{Math.min(
 							currentPage * itemsPerPage,
-							filteredAndSortedUsers.length,
+							filteredAndSortedUsers.length
 						)}{" "}
 						of {filteredAndSortedUsers.length} users
 					</span>

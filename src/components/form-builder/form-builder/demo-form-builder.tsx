@@ -36,11 +36,11 @@ export default function DemoFormBuilder() {
 		createDefaultFormSchema({
 			title: "Demo Form",
 			description: "Try building a form!",
-		}),
+		})
 	);
 	const [selectedFieldId, setSelectedFieldId] = useState<string | null>(null);
 	const [selectedBlockId, setSelectedBlockId] = useState<string | null>(
-		formSchema.blocks[0]?.id || null,
+		formSchema.blocks[0]?.id || null
 	);
 	const [showFormSettings, setShowFormSettings] = useState(false);
 	const [showJsonView, setShowJsonView] = useState(false);
@@ -52,7 +52,7 @@ export default function DemoFormBuilder() {
 
 	const selectedField = useMemo(
 		() => findSelectedField(formSchema, selectedFieldId),
-		[formSchema, selectedFieldId],
+		[formSchema, selectedFieldId]
 	);
 
 	const handleFieldSelect = (fieldId: string | null) => {
@@ -66,7 +66,7 @@ export default function DemoFormBuilder() {
 		const updatedSchema = addFieldToSchema(
 			formSchema,
 			newField,
-			selectedBlockId,
+			selectedBlockId
 		);
 		setFormSchema(updatedSchema);
 		setSelectedFieldId(newField.id);
@@ -140,7 +140,7 @@ export default function DemoFormBuilder() {
 	const updateBlock = (blockId: string, updates: Partial<FormBlock>) => {
 		setFormSchema((prev) => {
 			const updatedBlocks = prev.blocks.map((block) =>
-				block.id === blockId ? { ...block, ...updates } : block,
+				block.id === blockId ? { ...block, ...updates } : block
 			);
 			return {
 				...prev,
@@ -227,7 +227,7 @@ export default function DemoFormBuilder() {
 			}
 		} else {
 			const allFields = formSchema.blocks.flatMap(
-				(block) => block.fields || [],
+				(block) => block.fields || []
 			);
 			const newSchema = {
 				...formSchema,
@@ -256,7 +256,7 @@ export default function DemoFormBuilder() {
 			createDefaultFormSchema({
 				title: "Demo Form",
 				description: "Try building a form!",
-			}),
+			})
 		);
 		setSelectedFieldId(null);
 		setSelectedBlockId("default");

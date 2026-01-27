@@ -11,6 +11,7 @@ import { redirect } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { FormSchema } from "@/lib/database/database.types";
 import { createAdminClient } from "@/utils/supabase/admin";
 import { createClient } from "@/utils/supabase/server";
 
@@ -22,7 +23,7 @@ interface Form {
 	title: string;
 	description: string | null;
 	slug: string | null;
-	schema: any;
+	schema: FormSchema;
 	is_published: boolean;
 	created_at: string;
 	updated_at: string;
@@ -33,7 +34,7 @@ interface Form {
 interface FormSubmission {
 	id: string;
 	form_id: string;
-	submission_data: Record<string, any>;
+	submission_data: Record<string, unknown>;
 	submitted_at: string;
 	ip_address: string | null;
 }
@@ -118,7 +119,6 @@ const FormDetailPage = async function FormDetailPage({
 			<main
 				aria-label="Invalid form ID error"
 				className="mx-auto w-full max-w-7xl p-6"
-				role="main"
 			>
 				<Card className="p-4 shadow-none md:p-6">
 					<CardContent className="p-0">
@@ -153,7 +153,6 @@ const FormDetailPage = async function FormDetailPage({
 			<main
 				aria-label="Form not found error"
 				className="mx-auto w-full max-w-7xl p-6"
-				role="main"
 			>
 				<Card className="p-4 shadow-none md:p-6">
 					<CardContent className="p-0">
@@ -179,7 +178,6 @@ const FormDetailPage = async function FormDetailPage({
 		<main
 			aria-label="Form details page"
 			className="mx-auto flex w-full max-w-7xl flex-col gap-6 p-6"
-			role="main"
 		>
 			{}
 			<div className="flex items-center justify-between">
@@ -222,10 +220,9 @@ const FormDetailPage = async function FormDetailPage({
 			</div>
 
 			{}
-			<div
+			<section
 				aria-label="Form statistics"
 				className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4"
-				role="region"
 			>
 				<Card className="p-4 shadow-none md:p-6">
 					<CardContent className="p-0">
@@ -306,7 +303,7 @@ const FormDetailPage = async function FormDetailPage({
 						</div>
 					</CardContent>
 				</Card>
-			</div>
+			</section>
 
 			{}
 			<Card className="p-4 shadow-none md:p-6">
@@ -484,7 +481,7 @@ const FormDetailPage = async function FormDetailPage({
 															: String(value)}
 													</div>
 												</div>
-											),
+											)
 										)}
 									</div>
 								</Card>

@@ -47,7 +47,7 @@ export function BotProtectionSection({
 		return () =>
 			window.removeEventListener(
 				"beforeunload",
-				onBeforeUnload as unknown as EventListener,
+				onBeforeUnload as unknown as EventListener
 			);
 	}, [hasChanges]);
 
@@ -102,7 +102,7 @@ export function BotProtectionSection({
 	useEffect(() => {
 		if (botProtectionRef.current) {
 			const firstInput = botProtectionRef.current.querySelector(
-				"input, textarea",
+				"input, textarea"
 			) as HTMLElement;
 			firstInput?.focus();
 		}

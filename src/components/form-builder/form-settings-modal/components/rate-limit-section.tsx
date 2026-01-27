@@ -52,7 +52,7 @@ export function RateLimitSection({
 		return () =>
 			window.removeEventListener(
 				"beforeunload",
-				onBeforeUnload as unknown as EventListener,
+				onBeforeUnload as unknown as EventListener
 			);
 	}, [hasChanges]);
 
@@ -112,7 +112,7 @@ export function RateLimitSection({
 	useEffect(() => {
 		if (rateLimitRef.current) {
 			const firstInput = rateLimitRef.current.querySelector(
-				"input, textarea",
+				"input, textarea"
 			) as HTMLElement;
 			firstInput?.focus();
 		}

@@ -10,24 +10,7 @@ interface FormAnalyticsPageProps {
 	params: Promise<{ id: string }>;
 }
 
-async function getFormData(id: string, userId: string) {
-	const supabase = await createClient();
-
-	const { data, error } = await supabase
-		.from("forms")
-		.select("*")
-		.eq("id", id)
-		.eq("user_id", userId)
-		.single();
-
-	if (error || !data) {
-		notFound();
-	}
-
-	return data;
-}
-
-async function getUserAndPremiumStatus() {
+async function getAuthenticatedUser() {
 	const supabase = await createClient();
 
 	const {
@@ -39,15 +22,7 @@ async function getUserAndPremiumStatus() {
 		redirect("/auth/signin");
 	}
 
-	const { data: subscription } = await supabase
-		.from("users")
-		.select("has_premium")
-		.eq("uid", user.id)
-		.single();
-
-	const hasPremium = subscription?.has_premium;
-
-	return { user, hasPremium };
+	return { user, supabase };
 }
 
 function PremiumRequired() {
@@ -69,13 +44,27 @@ export default async function FormAnalyticsPage({
 	params,
 }: FormAnalyticsPageProps) {
 	const { id } = await params;
-	const { user, hasPremium } = await getUserAndPremiumStatus();
+	const { user, supabase } = await getAuthenticatedUser();
+
+	const [subscriptionResult, formResult] = await Promise.all([
+		supabase.from("users").select("has_premium").eq("uid", user.id).single(),
+		supabase
+			.from("forms")
+			.select("*")
+			.eq("id", id)
+			.eq("user_id", user.id)
+			.single(),
+	]);
+
+	const hasPremium = subscriptionResult.data?.has_premium;
 
 	if (!hasPremium) {
 		return <PremiumRequired />;
 	}
 
-	const form = await getFormData(id, user.id);
+	if (formResult.error || !formResult.data) {
+		notFound();
+	}
 
 	return (
 		<Suspense
@@ -85,7 +74,7 @@ export default async function FormAnalyticsPage({
 				</div>
 			}
 		>
-			<FormAnalytics form={form} />
+			<FormAnalytics form={formResult.data} />
 		</Suspense>
 	);
 }

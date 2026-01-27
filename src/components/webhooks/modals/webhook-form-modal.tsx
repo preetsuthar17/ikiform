@@ -69,12 +69,12 @@ export function WebhookFormModal({
 	const [currentStep, setCurrentStep] = useState(0);
 	const [name, setName] = useState(initialWebhook?.name || "");
 	const [description, setDescription] = useState(
-		initialWebhook?.description || "",
+		initialWebhook?.description || ""
 	);
 	const [url, setUrl] = useState(initialWebhook?.url || "");
 	const [events, setEvents] = useState<string[]>(initialWebhook?.events || []);
 	const [method, setMethod] = useState<WebhookMethod>(
-		initialWebhook?.method || "POST",
+		initialWebhook?.method || "POST"
 	);
 	const [headers, setHeaders] = useState<{ name: string; value: string }[]>(
 		initialWebhook?.headers
@@ -82,20 +82,20 @@ export function WebhookFormModal({
 					name,
 					value,
 				}))
-			: [],
+			: []
 	);
 	const [payloadTemplate, setPayloadTemplate] = useState(
-		initialWebhook?.payloadTemplate || "",
+		initialWebhook?.payloadTemplate || ""
 	);
 
 	const [notificationEmail, setNotificationEmail] = useState(
-		initialWebhook?.notificationEmail || "",
+		initialWebhook?.notificationEmail || ""
 	);
 	const [notifyOnSuccess, setNotifyOnSuccess] = useState(
-		initialWebhook?.notifyOnSuccess ?? false,
+		initialWebhook?.notifyOnSuccess ?? false
 	);
 	const [notifyOnFailure, setNotifyOnFailure] = useState(
-		initialWebhook?.notifyOnFailure ?? true,
+		initialWebhook?.notifyOnFailure ?? true
 	);
 
 	const [formError, setFormError] = useState<string | null>(null);
@@ -118,7 +118,7 @@ export function WebhookFormModal({
 						name,
 						value,
 					}))
-				: [],
+				: []
 		);
 		setPayloadTemplate(initialWebhook?.payloadTemplate || "");
 		setNotificationEmail(initialWebhook?.notificationEmail || "");
@@ -132,7 +132,7 @@ export function WebhookFormModal({
 
 		if (!(url && Array.isArray(events)) || events.length === 0 || !method) {
 			setFormError(
-				"Please provide a Webhook URL, select at least one event, and choose a method.",
+				"Please provide a Webhook URL, select at least one event, and choose a method."
 			);
 			requestAnimationFrame(() => {
 				urlInputRef.current?.focus();
@@ -148,7 +148,7 @@ export function WebhookFormModal({
 			headers: Object.fromEntries(
 				headers
 					.filter((h) => h.name.trim() && h.value.trim())
-					.map((h) => [h.name, h.value]),
+					.map((h) => [h.name, h.value])
 			),
 			payloadTemplate,
 			notificationEmail: notificationEmail || undefined,
@@ -187,7 +187,7 @@ export function WebhookFormModal({
 			newHeaders.push({ name: key, value });
 		}
 		const cleaned = newHeaders.filter(
-			(h) => h.name.trim() !== "" || h.value.trim() !== "",
+			(h) => h.name.trim() !== "" || h.value.trim() !== ""
 		);
 		setHeaders(cleaned);
 	}
@@ -207,7 +207,7 @@ export function WebhookFormModal({
 
 	useEffect(() => {
 		const content = document.querySelector(
-			'[data-slot="scroll-area-viewport"]',
+			'[data-slot="scroll-area-viewport"]'
 		) as HTMLElement | null;
 		content?.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -474,7 +474,7 @@ export function WebhookFormModal({
 															setEvents((prev) =>
 																v
 																	? Array.from(new Set([...prev, opt.value]))
-																	: prev.filter((e) => e !== opt.value),
+																	: prev.filter((e) => e !== opt.value)
 															)
 														}
 														ref={

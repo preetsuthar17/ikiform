@@ -5,7 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 export async function GET(req: NextRequest): Promise<NextResponse> {
 	const startTime = Date.now();
 	console.log(
-		`[WEBHOOK API] GET /api/webhook - Started at ${new Date().toISOString()}`,
+		`[WEBHOOK API] GET /api/webhook - Started at ${new Date().toISOString()}`
 	);
 
 	try {
@@ -26,7 +26,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 		if (accountId && accountId !== user.id) {
 			return NextResponse.json(
 				{ error: "Cannot access other users' webhooks" },
-				{ status: 403 },
+				{ status: 403 }
 			);
 		}
 
@@ -41,13 +41,13 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 			if (formError || !form) {
 				return NextResponse.json(
 					{ error: "Form not found or access denied" },
-					{ status: 403 },
+					{ status: 403 }
 				);
 			}
 		}
 
 		console.log(
-			`[WEBHOOK API] GET /api/webhook - Params: formId=${formId}, accountId=${accountId || user.id}`,
+			`[WEBHOOK API] GET /api/webhook - Params: formId=${formId}, accountId=${accountId || user.id}`
 		);
 
 		const webhooks = await getWebhooks({
@@ -58,7 +58,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
 		const duration = Date.now() - startTime;
 		console.log(
-			`[WEBHOOK API] GET /api/webhook - Success: Found ${webhooks.length} webhooks in ${duration}ms`,
+			`[WEBHOOK API] GET /api/webhook - Success: Found ${webhooks.length} webhooks in ${duration}ms`
 		);
 
 		return NextResponse.json(webhooks);
@@ -68,14 +68,14 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 			error instanceof Error ? error.message : "Failed to list webhooks";
 		console.error(
 			`[WEBHOOK API] GET /api/webhook - Error after ${duration}ms:`,
-			errorMessage,
+			errorMessage
 		);
 
 		return NextResponse.json(
 			{
 				error: errorMessage,
 			},
-			{ status: 400 },
+			{ status: 400 }
 		);
 	}
 }
@@ -83,7 +83,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 export async function POST(req: NextRequest): Promise<NextResponse> {
 	const startTime = Date.now();
 	console.log(
-		`[WEBHOOK API] POST /api/webhook - Started at ${new Date().toISOString()}`,
+		`[WEBHOOK API] POST /api/webhook - Started at ${new Date().toISOString()}`
 	);
 
 	try {
@@ -100,7 +100,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 		const body = await req.json();
 		console.log(
 			"[WEBHOOK API] POST /api/webhook - Request body:",
-			JSON.stringify(body, null, 2),
+			JSON.stringify(body, null, 2)
 		);
 
 		if (body.formId || body.form_id) {
@@ -115,7 +115,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 			if (formError || !form) {
 				return NextResponse.json(
 					{ error: "Form not found or access denied" },
-					{ status: 403 },
+					{ status: 403 }
 				);
 			}
 		}
@@ -130,7 +130,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
 		const duration = Date.now() - startTime;
 		console.log(
-			`[WEBHOOK API] POST /api/webhook - Success: Created webhook ${webhook.id} in ${duration}ms`,
+			`[WEBHOOK API] POST /api/webhook - Success: Created webhook ${webhook.id} in ${duration}ms`
 		);
 
 		return NextResponse.json(webhook, { status: 201 });
@@ -140,14 +140,14 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 			error instanceof Error ? error.message : "Failed to create webhook";
 		console.error(
 			`[WEBHOOK API] POST /api/webhook - Error after ${duration}ms:`,
-			errorMessage,
+			errorMessage
 		);
 
 		return NextResponse.json(
 			{
 				error: errorMessage,
 			},
-			{ status: 400 },
+			{ status: 400 }
 		);
 	}
 }

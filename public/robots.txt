@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /admin
+
+# Host
+Host: https://www.ikiform.com
+
+# Sitemaps
+Sitemap: https://www.ikiform.com/sitemap.xml

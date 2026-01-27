@@ -14,16 +14,18 @@ interface CtaListProps {
 export function CtaList(props: CtaListProps) {
 	const hasPrimary = Boolean(props.primary);
 	const hasSecondary = props.secondary && props.secondary.length > 0;
-	if (!(hasPrimary || hasSecondary)) return null;
+	if (!(hasPrimary || hasSecondary)) {
+		return null;
+	}
 	return (
 		<Section style={sectionStyle}>
 			{hasPrimary ? (
-				<Button href={props.primary!.url} style={primaryButtonStyle}>
-					{props.primary!.label}
+				<Button href={props.primary?.url} style={primaryButtonStyle}>
+					{props.primary?.label}
 				</Button>
 			) : null}
 			{hasSecondary
-				? props.secondary!.map((item) => (
+				? props.secondary?.map((item) => (
 						<Text key={item.url} style={secondaryStyle}>
 							<Link href={item.url} style={secondaryLinkStyle}>
 								{item.label}

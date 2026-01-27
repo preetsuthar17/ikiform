@@ -78,7 +78,7 @@ export function BannerField({ field, error }: BaseFieldProps) {
 		const { iconBg } = getBannerStyles();
 		return clsx(
 			"flex size-6 shrink-0 items-center justify-center rounded-full",
-			iconBg,
+			iconBg
 		);
 	};
 

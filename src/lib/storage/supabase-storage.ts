@@ -26,7 +26,7 @@ export async function uploadFile(
 	file: File,
 	formId: string,
 	fieldId: string,
-	submissionId?: string,
+	submissionId?: string
 ): Promise<FileUploadResult> {
 	try {
 		const timestamp = Date.now();
@@ -107,7 +107,7 @@ export async function deleteFile(filePath: string): Promise<void> {
 
 export async function getSignedUrl(
 	filePath: string,
-	expiresIn = 3600,
+	expiresIn = 3600
 ): Promise<string> {
 	try {
 		const { data, error } = await supabase.storage
@@ -127,7 +127,7 @@ export async function getSignedUrl(
 
 export async function refreshSignedUrls(
 	filePaths: string[],
-	expiresIn = 86_400,
+	expiresIn = 86_400
 ): Promise<Record<string, string>> {
 	try {
 		const signedUrls: Record<string, string> = {};

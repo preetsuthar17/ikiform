@@ -42,7 +42,7 @@ export default function ResetPasswordClient() {
 					if (error) {
 						console.error("Session error:", error);
 						toast.error(
-							"Invalid or expired reset link. Please request a new one.",
+							"Invalid or expired reset link. Please request a new one."
 						);
 						router.push("/login");
 					} else if (data.session) {
@@ -57,7 +57,7 @@ export default function ResetPasswordClient() {
 				}
 			} else {
 				toast.error(
-					"No reset token found. Please request a new password reset.",
+					"No reset token found. Please request a new password reset."
 				);
 				router.push("/login");
 			}

@@ -8,7 +8,7 @@ import { createClient } from "@/utils/supabase/server";
 export async function GET(req: NextRequest) {
 	const startTime = Date.now();
 	console.log(
-		`[WEBHOOK API] GET /api/webhook/inbound - Started at ${new Date().toISOString()}`,
+		`[WEBHOOK API] GET /api/webhook/inbound - Started at ${new Date().toISOString()}`
 	);
 
 	try {
@@ -36,20 +36,20 @@ export async function GET(req: NextRequest) {
 			if (formError || !form) {
 				return NextResponse.json(
 					{ error: "Form not found or access denied" },
-					{ status: 403 },
+					{ status: 403 }
 				);
 			}
 		}
 
 		console.log(
-			`[WEBHOOK API] GET /api/webhook/inbound - Params: targetFormId=${targetFormId}`,
+			`[WEBHOOK API] GET /api/webhook/inbound - Params: targetFormId=${targetFormId}`
 		);
 
 		const mappings = await getInboundMappings({ targetFormId });
 
 		const duration = Date.now() - startTime;
 		console.log(
-			`[WEBHOOK API] GET /api/webhook/inbound - Success: Found ${mappings.length} mappings in ${duration}ms`,
+			`[WEBHOOK API] GET /api/webhook/inbound - Success: Found ${mappings.length} mappings in ${duration}ms`
 		);
 
 		return NextResponse.json(mappings);
@@ -61,14 +61,14 @@ export async function GET(req: NextRequest) {
 				: "Failed to list inbound mappings";
 		console.error(
 			`[WEBHOOK API] GET /api/webhook/inbound - Error after ${duration}ms:`,
-			errorMessage,
+			errorMessage
 		);
 
 		return NextResponse.json(
 			{
 				error: errorMessage,
 			},
-			{ status: 400 },
+			{ status: 400 }
 		);
 	}
 }
@@ -76,7 +76,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
 	const startTime = Date.now();
 	console.log(
-		`[WEBHOOK API] POST /api/webhook/inbound - Started at ${new Date().toISOString()}`,
+		`[WEBHOOK API] POST /api/webhook/inbound - Started at ${new Date().toISOString()}`
 	);
 
 	try {
@@ -93,19 +93,19 @@ export async function POST(req: NextRequest) {
 		const body = await req.json();
 		console.log(
 			"[WEBHOOK API] POST /api/webhook/inbound - Request body:",
-			JSON.stringify(body, null, 2),
+			JSON.stringify(body, null, 2)
 		);
 
 		if (!(body.endpoint && body.targetFormId && body.mappingRules)) {
 			console.error(
-				"[WEBHOOK API] POST /api/webhook/inbound - Missing required fields: endpoint, targetFormId, mappingRules",
+				"[WEBHOOK API] POST /api/webhook/inbound - Missing required fields: endpoint, targetFormId, mappingRules"
 			);
 			return NextResponse.json(
 				{
 					error:
 						"Missing required fields: endpoint, targetFormId, mappingRules",
 				},
-				{ status: 400 },
+				{ status: 400 }
 			);
 		}
 
@@ -119,7 +119,7 @@ export async function POST(req: NextRequest) {
 		if (formError || !form) {
 			return NextResponse.json(
 				{ error: "Form not found or access denied" },
-				{ status: 403 },
+				{ status: 403 }
 			);
 		}
 
@@ -127,7 +127,7 @@ export async function POST(req: NextRequest) {
 
 		const duration = Date.now() - startTime;
 		console.log(
-			`[WEBHOOK API] POST /api/webhook/inbound - Success: Created mapping ${mapping.id} in ${duration}ms`,
+			`[WEBHOOK API] POST /api/webhook/inbound - Success: Created mapping ${mapping.id} in ${duration}ms`
 		);
 
 		return NextResponse.json(mapping, { status: 201 });
@@ -139,14 +139,14 @@ export async function POST(req: NextRequest) {
 				: "Failed to create inbound mapping";
 		console.error(
 			`[WEBHOOK API] POST /api/webhook/inbound - Error after ${duration}ms:`,
-			errorMessage,
+			errorMessage
 		);
 
 		return NextResponse.json(
 			{
 				error: errorMessage,
 			},
-			{ status: 400 },
+			{ status: 400 }
 		);
 	}
 }

@@ -60,7 +60,7 @@ export function LinkInputField(props: BaseFieldProps) {
 			type: "url",
 			value: inputValue,
 		},
-		builderMode,
+		builderMode
 	);
 
 	return (

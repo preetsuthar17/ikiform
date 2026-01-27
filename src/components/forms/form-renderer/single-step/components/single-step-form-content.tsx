@@ -151,7 +151,7 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
 							visibleFields.some(
 								(field) =>
 									["text", "email", "textarea"].includes(field.type) &&
-									getLivePatternError(field, formData[field.id]),
+									getLivePatternError(field, formData[field.id])
 							)
 						}
 						loading={submitting}

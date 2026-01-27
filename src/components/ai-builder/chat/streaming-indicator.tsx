@@ -59,8 +59,8 @@ export const StreamingIndicator = memo(
 					</div>
 				</motion.div>
 			);
-		},
-	),
+		}
+	)
 );
 
 StreamingIndicator.displayName = "StreamingIndicator";

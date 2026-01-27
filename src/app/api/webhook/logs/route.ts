@@ -5,7 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 export async function GET(req: NextRequest) {
 	const startTime = Date.now();
 	console.log(
-		`[WEBHOOK API] GET /api/webhook/logs - Started at ${new Date().toISOString()}`,
+		`[WEBHOOK API] GET /api/webhook/logs - Started at ${new Date().toISOString()}`
 	);
 
 	try {
@@ -27,7 +27,7 @@ export async function GET(req: NextRequest) {
 		if (accountId && accountId !== user.id) {
 			return NextResponse.json(
 				{ error: "Cannot access other users' webhook logs" },
-				{ status: 403 },
+				{ status: 403 }
 			);
 		}
 
@@ -42,13 +42,13 @@ export async function GET(req: NextRequest) {
 			if (formError || !form) {
 				return NextResponse.json(
 					{ error: "Form not found or access denied" },
-					{ status: 403 },
+					{ status: 403 }
 				);
 			}
 		}
 
 		console.log(
-			`[WEBHOOK API] GET /api/webhook/logs - Params: webhookId=${webhookId}, formId=${formId}, accountId=${accountId || user.id}`,
+			`[WEBHOOK API] GET /api/webhook/logs - Params: webhookId=${webhookId}, formId=${formId}, accountId=${accountId || user.id}`
 		);
 
 		const logs = await getWebhookLogs({
@@ -60,7 +60,7 @@ export async function GET(req: NextRequest) {
 
 		const duration = Date.now() - startTime;
 		console.log(
-			`[WEBHOOK API] GET /api/webhook/logs - Success: Found ${logs.length} logs in ${duration}ms`,
+			`[WEBHOOK API] GET /api/webhook/logs - Success: Found ${logs.length} logs in ${duration}ms`
 		);
 
 		return NextResponse.json(logs);
@@ -70,14 +70,14 @@ export async function GET(req: NextRequest) {
 			error instanceof Error ? error.message : "Failed to fetch webhook logs";
 		console.error(
 			`[WEBHOOK API] GET /api/webhook/logs - Error after ${duration}ms:`,
-			errorMessage,
+			errorMessage
 		);
 
 		return NextResponse.json(
 			{
 				error: errorMessage,
 			},
-			{ status: 400 },
+			{ status: 400 }
 		);
 	}
 }

@@ -57,7 +57,6 @@ const AdminPage = async function AdminPage() {
 			<main
 				aria-label="Admin dashboard"
 				className="mx-auto flex w-full max-w-7xl flex-col gap-6"
-				role="main"
 			>
 				{}
 				<Card
@@ -67,10 +66,7 @@ const AdminPage = async function AdminPage() {
 				>
 					<CardHeader className="p-0">
 						<CardTitle>Send Announcements</CardTitle>
-						<p
-							aria-label={`Signed in as ${user.email}`}
-							className="text-muted-foreground text-sm"
-						>
+						<p className="text-muted-foreground text-sm">
 							Signed in as {user.email}
 						</p>
 					</CardHeader>

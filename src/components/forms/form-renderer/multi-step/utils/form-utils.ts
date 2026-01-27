@@ -16,12 +16,12 @@ export const processFormBlocks = (schema: FormSchema): FormBlock[] =>
 
 export const calculateProgress = (
 	currentStep: number,
-	totalSteps: number,
+	totalSteps: number
 ): number => (totalSteps > 1 ? ((currentStep + 1) / totalSteps) * 100 : 100);
 
 export const submitForm = async (
 	formId: string,
-	formData: Record<string, any>,
+	formData: Record<string, any>
 ): Promise<{
 	success: boolean;
 	message?: string;

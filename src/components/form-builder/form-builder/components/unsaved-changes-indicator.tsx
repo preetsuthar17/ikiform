@@ -11,7 +11,7 @@ export const UnsavedChangesIndicator: React.FC<
 		{hasUnsavedChanges && !autoSaving && (
 			<motion.div
 				animate={{ opacity: 1, y: 0, scale: 1 }}
-				className="-translate-x-1/2 fixed bottom-4 left-1/2 z-50 flex transform items-center justify-center"
+				className="fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 transform items-center justify-center"
 				exit={{ opacity: 0, y: 20, scale: 0.95 }}
 				initial={{ opacity: 0, y: 20, scale: 0.95 }}
 				transition={{

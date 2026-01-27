@@ -11,7 +11,7 @@ import { generateSessionId } from "../utils/analytics";
 export const useAnalyticsChat = (
 	form: Form,
 	submissions: FormSubmission[],
-	analyticsData: AnalyticsData,
+	analyticsData: AnalyticsData
 ) => {
 	const [chatOpen, setChatOpen] = useState(false);
 	const [chatSessionId, setChatSessionId] = useState<string | null>(null);

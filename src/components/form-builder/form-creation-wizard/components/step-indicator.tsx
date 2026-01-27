@@ -46,7 +46,7 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
 										? "bg-primary"
 										: current
 											? "bg-primary/50"
-											: "bg-muted-foreground/30",
+											: "bg-muted-foreground/30"
 								)}
 								role="progressbar"
 								style={{

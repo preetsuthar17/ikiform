@@ -5,7 +5,7 @@ import type { ChatPanelProps } from "@/lib/ai-builder/types";
 const MobileChatDrawerLazy = lazy(() =>
 	import("./mobile-chat-drawer").then((module) => ({
 		default: module.MobileChatDrawer,
-	})),
+	}))
 );
 
 interface MobileChatDrawerWrapperProps extends ChatPanelProps {

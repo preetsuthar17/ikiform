@@ -103,7 +103,7 @@ export function EmailInputField(props: BaseFieldProps) {
 	};
 
 	const handleEmailInputKeyDown = (
-		e: React.KeyboardEvent<HTMLInputElement>,
+		e: React.KeyboardEvent<HTMLInputElement>
 	) => {
 		if (e.key === "Escape") {
 			e.currentTarget.blur();
@@ -205,7 +205,7 @@ export function EmailInputField(props: BaseFieldProps) {
 			type: "email",
 			value: inputValue,
 		},
-		builderMode,
+		builderMode
 	);
 
 	const errorMessage = getErrorMessage();

@@ -69,7 +69,7 @@ export interface EmailValidationSettings {
 
 export function validateEmail(
 	email: string,
-	settings?: EmailValidationSettings,
+	settings?: EmailValidationSettings
 ): EmailValidationResult {
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 	if (!emailRegex.test(email)) {

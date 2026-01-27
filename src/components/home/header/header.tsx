@@ -20,9 +20,9 @@ export const PRIMARY_LINKS: NavLink[] = [
 const AppLogo = React.memo(function AppLogo() {
 	return (
 		<Link
-			href="/"
-			className="flex items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
 			aria-label="Ikiform home"
+			className="flex items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+			href="/"
 		>
 			<Image
 				alt=""

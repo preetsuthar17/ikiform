@@ -90,7 +90,7 @@ export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
 			AVAILABLE_SOCIAL_PLATFORMS.map((p) => p.platform);
 
 		return AVAILABLE_SOCIAL_PLATFORMS.filter((platform) =>
-			enabledPlatforms.includes(platform.platform),
+			enabledPlatforms.includes(platform.platform)
 		);
 	};
 

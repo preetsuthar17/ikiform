@@ -15,7 +15,7 @@ export function PreviewPanel({
 		if (activeForm?.schema) {
 			localStorage.setItem(
 				"importedFormSchema",
-				JSON.stringify(activeForm.schema),
+				JSON.stringify(activeForm.schema)
 			);
 			router.push("/form-builder");
 		}

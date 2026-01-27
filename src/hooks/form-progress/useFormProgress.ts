@@ -27,7 +27,7 @@ export function useFormProgress(
 	formId: string,
 	totalFields: number,
 	config: Partial<FormProgressConfig> = {},
-	options: Partial<SaveProgressOptions> = {},
+	options: Partial<SaveProgressOptions> = {}
 ): FormProgressState & FormProgressActions {
 	const [state, setState] = useState<FormProgressState>({
 		progress: null,
@@ -75,7 +75,7 @@ export function useFormProgress(
 				}, finalOptions.debounceMs);
 			});
 		},
-		[finalOptions.debounceMs, finalOptions.enableAutoSave],
+		[finalOptions.debounceMs, finalOptions.enableAutoSave]
 	);
 
 	const saveProgress = useCallback(
@@ -100,7 +100,7 @@ export function useFormProgress(
 					sessionIdRef.current,
 					filteredFormData,
 					currentStep,
-					totalSteps,
+					totalSteps
 				);
 
 				await storageRef.current.saveProgress(progress);
@@ -120,7 +120,7 @@ export function useFormProgress(
 				}));
 			}
 		},
-		[formId],
+		[formId]
 	);
 
 	const loadProgress = useCallback(async () => {
@@ -137,7 +137,7 @@ export function useFormProgress(
 
 			const progress = await storageRef.current.loadProgress(
 				formId,
-				sessionIdRef.current,
+				sessionIdRef.current
 			);
 
 			setState((prev: FormProgressState) => ({
@@ -202,7 +202,7 @@ export function useFormProgress(
 					saveProgress(
 						state.progress.formData,
 						state.progress.currentStep,
-						state.progress.totalSteps,
+						state.progress.totalSteps
 					);
 				}
 			}, finalConfig.autoSaveInterval);
@@ -224,7 +224,7 @@ export function useFormProgress(
 				clearInterval(autoSaveIntervalRef.current);
 			}
 		},
-		[],
+		[]
 	);
 
 	return {

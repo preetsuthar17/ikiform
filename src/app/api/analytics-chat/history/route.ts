@@ -31,14 +31,14 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 		if (!(formId && sessionId)) {
 			return NextResponse.json(
 				{ error: "Form ID and Session ID are required" },
-				{ status: 400 },
+				{ status: 400 }
 			);
 		}
 
 		const chatHistory = await formsDbServer.getAIAnalyticsChatHistory(
 			user.id,
 			formId,
-			sessionId,
+			sessionId
 		);
 
 		return NextResponse.json({
@@ -53,7 +53,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 	} catch (_error) {
 		return NextResponse.json(
 			{ error: "Internal server error" },
-			{ status: 500 },
+			{ status: 500 }
 		);
 	}
 }
@@ -84,14 +84,14 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 		if (!(formId && sessionId && role && content)) {
 			return NextResponse.json(
 				{ error: "Form ID, session ID, role, and content are required" },
-				{ status: 400 },
+				{ status: 400 }
 			);
 		}
 
 		if (!["user", "assistant", "system"].includes(role)) {
 			return NextResponse.json(
 				{ error: "Invalid role. Must be 'user', 'assistant', or 'system'" },
-				{ status: 400 },
+				{ status: 400 }
 			);
 		}
 
@@ -103,7 +103,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 			sessionId,
 			role,
 			sanitizedContent,
-			metadata,
+			metadata
 		);
 
 		return NextResponse.json({
@@ -113,7 +113,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 	} catch (_error) {
 		return NextResponse.json(
 			{ error: "Internal server error" },
-			{ status: 500 },
+			{ status: 500 }
 		);
 	}
 }

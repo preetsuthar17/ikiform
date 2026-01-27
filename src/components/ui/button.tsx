@@ -36,7 +36,7 @@ const buttonVariants = cva(
 			variant: "default",
 			size: "default",
 		},
-	},
+	}
 );
 
 export interface ButtonProps
@@ -62,7 +62,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			disabled,
 			...props
 		},
-		ref,
+		ref
 	) => {
 		const Comp = asChild ? Slot : "button";
 
@@ -86,7 +86,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 				{asChild ? children : content}
 			</Comp>
 		);
-	},
+	}
 );
 Button.displayName = "Button";
 

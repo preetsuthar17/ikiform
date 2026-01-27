@@ -42,7 +42,7 @@ export class LocalStorageAdapter implements ProgressStorageAdapter {
 	async clear(): Promise<void> {
 		try {
 			const keys = Object.keys(localStorage).filter((key) =>
-				key.startsWith(this.prefix),
+				key.startsWith(this.prefix)
 			);
 
 			keys.forEach((key) => localStorage.removeItem(key));
@@ -94,7 +94,7 @@ export class SessionStorageAdapter implements ProgressStorageAdapter {
 	async clear(): Promise<void> {
 		try {
 			const keys = Object.keys(sessionStorage).filter((key) =>
-				key.startsWith(this.prefix),
+				key.startsWith(this.prefix)
 			);
 
 			keys.forEach((key) => sessionStorage.removeItem(key));

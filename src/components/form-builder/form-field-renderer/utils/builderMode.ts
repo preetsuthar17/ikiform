@@ -2,7 +2,7 @@ import type { BaseFieldProps } from "../types";
 
 export function applyBuilderMode<T extends Record<string, any>>(
 	props: T,
-	builderMode: boolean,
+	builderMode: boolean
 ): T {
 	if (!builderMode) return props;
 

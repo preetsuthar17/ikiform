@@ -42,7 +42,7 @@ export function PhoneInputField({
 	};
 
 	const handlePhoneInputKeyDown = (
-		e: React.KeyboardEvent<HTMLInputElement>,
+		e: React.KeyboardEvent<HTMLInputElement>
 	) => {
 		if (e.key === "Escape") {
 			e.currentTarget.blur();

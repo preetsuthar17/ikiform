@@ -37,7 +37,7 @@ const ModalContent = React.forwardRef<
 				animate={{ opacity: 1, scale: 1 }}
 				className={cn(
 					"fixed top-[50%] left-[50%] z-50 w-[95%] max-w-lg translate-x-[-50%] translate-y-[-50%] rounded-4xl border border-border bg-background p-6",
-					className,
+					className
 				)}
 				exit={{ opacity: 0, scale: 0.95 }}
 				initial={{ opacity: 0, scale: 0.95 }}
@@ -72,7 +72,7 @@ const ModalFooter = ({
 	<div
 		className={cn(
 			"flex flex-col-reverse gap-2 sm:flex-row sm:justify-end sm:gap-2",
-			className,
+			className
 		)}
 		{...props}
 	/>
@@ -86,7 +86,7 @@ const ModalTitle = React.forwardRef<
 	<DialogPrimitive.Title
 		className={cn(
 			"font-semibold text-foreground text-lg leading-none tracking-tight",
-			className,
+			className
 		)}
 		ref={ref}
 		{...props}

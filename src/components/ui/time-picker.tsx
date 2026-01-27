@@ -88,7 +88,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
 				}
 			}
 		},
-		[onChange, value],
+		[onChange, value]
 	);
 
 	return (
@@ -105,7 +105,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
 						disabled={disabled}
 						onValueChange={React.useCallback(
 							(val: string) => handleChange(val, minute, amPm),
-							[minute, amPm, handleChange],
+							[minute, amPm, handleChange]
 						)}
 						value={hour}
 					>
@@ -114,7 +114,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
 						</SelectTrigger>
 						<SelectContent>
 							{Array.from({ length: 12 }, (_, i) =>
-								String(i + 1).padStart(2, "0"),
+								String(i + 1).padStart(2, "0")
 							).map((h) => (
 								<SelectItem key={h} value={h}>
 									{h}
@@ -129,7 +129,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
 						disabled={disabled}
 						onValueChange={React.useCallback(
 							(val: string) => handleChange(hour, val, amPm),
-							[hour, amPm, handleChange],
+							[hour, amPm, handleChange]
 						)}
 						value={minute}
 					>
@@ -138,7 +138,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
 						</SelectTrigger>
 						<SelectContent>
 							{Array.from({ length: 60 }, (_, i) =>
-								String(i).padStart(2, "0"),
+								String(i).padStart(2, "0")
 							).map((m) => (
 								<SelectItem key={m} value={m}>
 									{m}
@@ -152,7 +152,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
 						disabled={disabled}
 						onValueChange={React.useCallback(
 							(val: string) => handleChange(hour, minute, val),
-							[hour, minute, handleChange],
+							[hour, minute, handleChange]
 						)}
 						value={amPm}
 					>

@@ -52,7 +52,7 @@ export function ResponseLimitSection({
 		return () =>
 			window.removeEventListener(
 				"beforeunload",
-				onBeforeUnload as unknown as EventListener,
+				onBeforeUnload as unknown as EventListener
 			);
 	}, [hasChanges]);
 
@@ -109,7 +109,7 @@ export function ResponseLimitSection({
 	useEffect(() => {
 		if (sectionRef.current) {
 			const firstInput = sectionRef.current.querySelector(
-				"input, textarea",
+				"input, textarea"
 			) as HTMLElement;
 			firstInput?.focus();
 		}

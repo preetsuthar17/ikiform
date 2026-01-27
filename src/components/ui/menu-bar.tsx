@@ -26,7 +26,7 @@ const menubarVariants = cva(
 			variant: "default",
 			size: "default",
 		},
-	},
+	}
 );
 
 const menubarTriggerVariants = cva(
@@ -50,7 +50,7 @@ const menubarTriggerVariants = cva(
 			variant: "default",
 			size: "default",
 		},
-	},
+	}
 );
 
 const menubarContentVariants = cva(
@@ -65,7 +65,7 @@ const menubarContentVariants = cva(
 		defaultVariants: {
 			variant: "default",
 		},
-	},
+	}
 );
 
 const menubarItemVariants = cva(
@@ -87,7 +87,7 @@ const menubarItemVariants = cva(
 			variant: "default",
 			inset: false,
 		},
-	},
+	}
 );
 
 interface MenuBarProps
@@ -123,7 +123,7 @@ const MenuBar = React.forwardRef<
 			className={cn(
 				menubarVariants({ variant, size }),
 				responsive && "min-w-max",
-				className,
+				className
 			)}
 			ref={ref}
 			{...props}
@@ -148,7 +148,7 @@ const MenuBarTrigger = React.forwardRef<
 			children,
 			...props
 		},
-		ref,
+		ref
 	) => {
 		const iconSize = size === "sm" ? 14 : size === "lg" ? 18 : 16;
 		const mobileIconSize = size === "sm" ? 12 : size === "lg" ? 16 : 14;
@@ -199,7 +199,7 @@ const MenuBarTrigger = React.forwardRef<
 				</motion.button>
 			</MenubarPrimitive.Trigger>
 		);
-	},
+	}
 );
 MenuBarTrigger.displayName = "MenuBarTrigger";
 
@@ -216,7 +216,7 @@ const MenuBarSubTrigger = React.forwardRef<
 		className={cn(
 			"flex min-h-[44px] cursor-default touch-manipulation select-none items-center gap-2 rounded-xl px-2.5 py-2 text-sm outline-none transition-all hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:bg-accent active:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground sm:min-h-auto sm:px-3 sm:py-2.5 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
 			inset && "pl-6 sm:pl-8",
-			className,
+			className
 		)}
 		ref={ref}
 		{...props}
@@ -259,7 +259,7 @@ const MenuBarSubContent = React.forwardRef<
 		asChild
 		className={cn(
 			"z-50 min-w-[10rem] max-w-[95vw] overflow-hidden rounded-xl border border-border bg-background p-1.5 text-foreground sm:max-w-[280px] sm:p-2",
-			className,
+			className
 		)}
 		ref={ref}
 		{...props}
@@ -307,7 +307,7 @@ const MenuBarContent = React.forwardRef<
 			sideOffset = 8,
 			...props
 		},
-		ref,
+		ref
 	) => (
 		<AnimatePresence>
 			<MenubarPrimitive.Portal>
@@ -349,7 +349,7 @@ const MenuBarContent = React.forwardRef<
 				</MenubarPrimitive.Content>
 			</MenubarPrimitive.Portal>
 		</AnimatePresence>
-	),
+	)
 );
 MenuBarContent.displayName = "MenuBarContent";
 
@@ -359,7 +359,7 @@ const MenuBarItem = React.forwardRef<
 >(
 	(
 		{ className, variant, inset, icon: Icon, shortcut, children, ...props },
-		ref,
+		ref
 	) => (
 		<MenubarPrimitive.Item
 			asChild
@@ -402,7 +402,7 @@ const MenuBarItem = React.forwardRef<
 				)}
 			</motion.div>
 		</MenubarPrimitive.Item>
-	),
+	)
 );
 MenuBarItem.displayName = "MenuBarItem";
 

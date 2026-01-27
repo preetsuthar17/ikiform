@@ -83,7 +83,7 @@ export function SelectField(props: BaseFieldProps) {
 				onValueChange: handleValueChange,
 				value: value || "",
 			},
-			builderMode,
+			builderMode
 		);
 
 		const selectTriggerProps = applyBuilderMode(
@@ -91,7 +91,7 @@ export function SelectField(props: BaseFieldProps) {
 				className: errorClasses,
 				disabled: disabled || isLoading,
 			},
-			builderMode,
+			builderMode
 		);
 
 		return (

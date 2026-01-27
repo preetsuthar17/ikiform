@@ -43,19 +43,19 @@ export const FormCard = memo(function FormCard({
 
 	const formattedDate = useMemo(
 		() => formatDate(form.updated_at),
-		[form.updated_at],
+		[form.updated_at]
 	);
 
 	const internalTitle = useMemo(
 		() => form.schema?.settings?.title || form.title || "Untitled Form",
-		[form.schema?.settings?.title, form.title],
+		[form.schema?.settings?.title, form.title]
 	);
 
 	const hasPublicTitle = useMemo(
 		() =>
 			form.schema?.settings?.publicTitle &&
 			form.schema.settings.publicTitle !== form.schema?.settings?.title,
-		[form.schema?.settings?.publicTitle, form.schema?.settings?.title],
+		[form.schema?.settings?.publicTitle, form.schema?.settings?.title]
 	);
 
 	const handleShare = useCallback(
@@ -64,7 +64,7 @@ export const FormCard = memo(function FormCard({
 			setIsShareModalOpen(true);
 			if (onShare) onShare(form);
 		},
-		[onShare, form],
+		[onShare, form]
 	);
 
 	const handleCardClick = useCallback(
@@ -78,7 +78,7 @@ export const FormCard = memo(function FormCard({
 			}
 			onViewAnalytics(form.id);
 		},
-		[isShareModalOpen, modalJustClosed, onViewAnalytics, form.id],
+		[isShareModalOpen, modalJustClosed, onViewAnalytics, form.id]
 	);
 
 	const handleButtonClick = useCallback((e: React.MouseEvent) => {
@@ -92,7 +92,7 @@ export const FormCard = memo(function FormCard({
 				onViewAnalytics(form.id);
 			}
 		},
-		[onViewAnalytics, form.id],
+		[onViewAnalytics, form.id]
 	);
 
 	const handleEdit = useCallback(
@@ -100,7 +100,7 @@ export const FormCard = memo(function FormCard({
 			e.stopPropagation();
 			onEdit(form.id);
 		},
-		[onEdit, form.id],
+		[onEdit, form.id]
 	);
 
 	const handleDuplicate = useCallback(
@@ -108,7 +108,7 @@ export const FormCard = memo(function FormCard({
 			e.stopPropagation();
 			onDuplicate(form.id);
 		},
-		[onDuplicate, form.id],
+		[onDuplicate, form.id]
 	);
 
 	const handleViewForm = useCallback(
@@ -116,7 +116,7 @@ export const FormCard = memo(function FormCard({
 			e.stopPropagation();
 			onViewForm(form);
 		},
-		[onViewForm, form],
+		[onViewForm, form]
 	);
 
 	const handleViewAnalytics = useCallback(
@@ -124,7 +124,7 @@ export const FormCard = memo(function FormCard({
 			e.stopPropagation();
 			onViewAnalytics(form.id);
 		},
-		[onViewAnalytics, form.id],
+		[onViewAnalytics, form.id]
 	);
 
 	const handleEmbed = useCallback(
@@ -132,7 +132,7 @@ export const FormCard = memo(function FormCard({
 			e.stopPropagation();
 			window.open(`/embed?formid=${form.id}`, "_blank");
 		},
-		[form.id],
+		[form.id]
 	);
 
 	const handleDelete = useCallback(
@@ -140,7 +140,7 @@ export const FormCard = memo(function FormCard({
 			e.stopPropagation();
 			onDelete(form.id, form.title);
 		},
-		[onDelete, form.id, form.title],
+		[onDelete, form.id, form.title]
 	);
 
 	const handleModalClose = useCallback(() => {

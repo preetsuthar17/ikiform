@@ -36,7 +36,7 @@ function sanitizeObjectStrings(obj: any): any {
 
 export async function POST(
 	request: NextRequest,
-	{ params }: { params: Promise<{ id: string }> },
+	{ params }: { params: Promise<{ id: string }> }
 ) {
 	try {
 		const { id: formId } = await params;
@@ -53,7 +53,7 @@ export async function POST(
 		if (!form) {
 			return NextResponse.json(
 				{ error: "Form not found or not published" },
-				{ status: 404 },
+				{ status: 404 }
 			);
 		}
 
@@ -66,7 +66,7 @@ export async function POST(
 						error: "Bot detected",
 						message: botProtection.message || "Bot detected. Access denied.",
 					},
-					{ status: 403 },
+					{ status: 403 }
 				);
 			}
 		}
@@ -83,7 +83,7 @@ export async function POST(
 			const rateLimitResult = await checkFormRateLimit(
 				ipAddress,
 				formId,
-				rateLimit,
+				rateLimit
 			);
 			if (!rateLimitResult.success) {
 				return NextResponse.json(
@@ -94,7 +94,7 @@ export async function POST(
 						remaining: rateLimitResult.remaining,
 						reset: rateLimitResult.reset,
 					},
-					{ status: 429 },
+					{ status: 429 }
 				);
 			}
 		}
@@ -110,7 +110,7 @@ export async function POST(
 							responseLimit.message ||
 							"This form is no longer accepting responses.",
 					},
-					{ status: 403 },
+					{ status: 403 }
 				);
 			}
 		}
@@ -122,13 +122,13 @@ export async function POST(
 				duplicatePrevention.strategy || "ip",
 				ipAddress,
 				email,
-				sessionId,
+				sessionId
 			);
 
 			const duplicateCheck = await checkDuplicateSubmission(
 				formId,
 				identifier,
-				duplicatePrevention,
+				duplicatePrevention
 			);
 
 			if (duplicateCheck.isDuplicate) {
@@ -143,7 +143,7 @@ export async function POST(
 						timeRemaining: duplicateCheck.timeRemaining,
 						attemptsRemaining: duplicateCheck.attemptsRemaining,
 					},
-					{ status: 409 },
+					{ status: 409 }
 				);
 			}
 		}
@@ -158,7 +158,7 @@ export async function POST(
 		if (profanityFilterSettings.enabled) {
 			const profanityFilter = createProfanityFilter(profanityFilterSettings);
 			const result = profanityFilter.filterSubmissionData(
-				filteredSubmissionData,
+				filteredSubmissionData
 			);
 			if (!result.isValid) {
 				return NextResponse.json(
@@ -169,7 +169,7 @@ export async function POST(
 							"Your submission contains inappropriate content. Please review and resubmit.",
 						violations: result.violations.length,
 					},
-					{ status: 400 },
+					{ status: 400 }
 				);
 			}
 			if (profanityFilterSettings.replaceWithAsterisks) {
@@ -180,7 +180,7 @@ export async function POST(
 		const submission = await formsDbServer.submitForm(
 			formId,
 			filteredSubmissionData,
-			ipAddress,
+			ipAddress
 		);
 
 		if (duplicatePrevention?.enabled) {
@@ -189,11 +189,11 @@ export async function POST(
 				duplicatePrevention.strategy || "ip",
 				ipAddress,
 				email,
-				sessionId,
+				sessionId
 			);
 
 			recordSubmission(formId, identifier, duplicatePrevention).catch((e) =>
-				console.error("[Duplicate Prevention] Record submission error:", e),
+				console.error("[Duplicate Prevention] Record submission error:", e)
 			);
 		}
 
@@ -219,7 +219,7 @@ export async function POST(
 				analyticsUrl: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.ikiform.com"}/dashboard/forms/${formId}/analytics`,
 				customLinks: notifications.customLinks || [],
 			}).catch((e) =>
-				console.error("[Notification] Notification send error:", e),
+				console.error("[Notification] Notification send error:", e)
 			);
 		}
 
@@ -231,7 +231,7 @@ export async function POST(
 	} catch {
 		return NextResponse.json(
 			{ error: "Internal server error" },
-			{ status: 500 },
+			{ status: 500 }
 		);
 	}
 }

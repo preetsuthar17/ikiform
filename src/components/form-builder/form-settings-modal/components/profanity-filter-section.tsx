@@ -53,7 +53,7 @@ export function ProfanityFilterSection({
 		return () =>
 			window.removeEventListener(
 				"beforeunload",
-				onBeforeUnload as unknown as EventListener,
+				onBeforeUnload as unknown as EventListener
 			);
 	}, [hasChanges]);
 
@@ -118,7 +118,7 @@ export function ProfanityFilterSection({
 	useEffect(() => {
 		if (profanityFilterRef.current) {
 			const firstInput = profanityFilterRef.current.querySelector(
-				"input, textarea",
+				"input, textarea"
 			) as HTMLElement;
 			firstInput?.focus();
 		}

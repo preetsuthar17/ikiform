@@ -15,10 +15,8 @@ export function validatePhoneNumber(phone: string): PhoneValidationResult {
 		if (!/^\d{1,3}\d{10,15}$/.test(withoutPlus)) {
 			return { isValid: false, message: "Please enter a valid phone number" };
 		}
-	} else {
-		if (!/^\d{10,15}$/.test(cleaned)) {
-			return { isValid: false, message: "Please enter a valid phone number" };
-		}
+	} else if (!/^\d{10,15}$/.test(cleaned)) {
+		return { isValid: false, message: "Please enter a valid phone number" };
 	}
 
 	return { isValid: true };

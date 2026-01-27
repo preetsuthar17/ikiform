@@ -55,7 +55,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
 			error,
 			...props
 		},
-		ref,
+		ref
 	) => {
 		const [inputValue, setInputValue] = React.useState("");
 		const inputRef = React.useRef<HTMLInputElement>(null);
@@ -74,7 +74,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
 				onTagAdd?.(trimmedTag);
 				setInputValue("");
 			},
-			[safeTags, onTagsChange, onTagAdd, allowDuplicates, maxTags],
+			[safeTags, onTagsChange, onTagAdd, allowDuplicates, maxTags]
 		);
 
 		const removeTag = React.useCallback(
@@ -83,7 +83,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
 				onTagsChange(newTags);
 				onTagRemove?.(tagToRemove);
 			},
-			[safeTags, onTagsChange, onTagRemove],
+			[safeTags, onTagsChange, onTagRemove]
 		);
 
 		const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -139,7 +139,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
 						"aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
 						className,
 						error &&
-							"border-destructive ring-destructive focus-within:ring-destructive",
+							"border-destructive ring-destructive focus-within:ring-destructive"
 					)}
 					data-slot="input"
 					onClick={handleContainerClick}
@@ -150,7 +150,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
 							<Badge
 								className={cn(
 									"inline-flex select-none items-center gap-0.5 font-medium",
-									disabled ? "pointer-events-none opacity-60" : "",
+									disabled ? "pointer-events-none opacity-60" : ""
 								)}
 								data-testid="tag-badge"
 								key={`${tag}-${idx}`}
@@ -189,7 +189,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
 							autoComplete="off"
 							className={cn(
 								"min-w-[120px] flex-1 border-0 bg-transparent p-0 px-1 text-foreground shadow-none placeholder:text-muted-foreground focus:outline-none focus:ring-0 md:text-sm",
-								"disabled:pointer-events-none disabled:cursor-not-allowed",
+								"disabled:pointer-events-none disabled:cursor-not-allowed"
 							)}
 							disabled={
 								disabled || (maxTags ? safeTags.length >= maxTags : false)
@@ -217,7 +217,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
 				{clearAllButton && safeTags.length > 0 && (
 					<Button
 						aria-label="Clear all tags"
-						className="-translate-y-1/2 absolute top-1/2 right-2 size-7 rounded-full p-0"
+						className="absolute top-1/2 right-2 size-7 -translate-y-1/2 rounded-full p-0"
 						disabled={disabled}
 						onClick={handleClearAll}
 						size="icon"
@@ -231,7 +231,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
 				)}
 			</div>
 		);
-	},
+	}
 );
 
 TagInput.displayName = "TagInput";

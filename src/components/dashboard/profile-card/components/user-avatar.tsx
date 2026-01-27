@@ -11,7 +11,7 @@ export function UserAvatar({ name, avatarUrl, size = "xl" }: UserAvatarProps) {
 			lg: "size-12",
 			xl: "size-16",
 		}),
-		[],
+		[]
 	);
 
 	const initials = useMemo(() => getUserInitials(name), [name]);

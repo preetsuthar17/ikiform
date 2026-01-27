@@ -19,7 +19,7 @@ export class FormProgressStorage {
 	}
 
 	private createAdapter(
-		storageType: FormProgressConfig["storage"],
+		storageType: FormProgressConfig["storage"]
 	): ProgressStorageAdapter {
 		switch (storageType) {
 			case "localStorage":
@@ -45,7 +45,7 @@ export class FormProgressStorage {
 
 	public calculateCompletionPercentage(
 		formData: Record<string, any>,
-		totalFields: number,
+		totalFields: number
 	): number {
 		if (totalFields === 0) return 0;
 
@@ -64,17 +64,17 @@ export class FormProgressStorage {
 		formData: Record<string, any>,
 		currentStep = 0,
 		totalSteps = 1,
-		userId?: string,
+		userId?: string
 	): FormProgress {
 		const now = new Date();
 		const expiresAt = new Date(
-			now.getTime() + this.config.retentionDays * 24 * 60 * 60 * 1000,
+			now.getTime() + this.config.retentionDays * 24 * 60 * 60 * 1000
 		);
 
 		const totalFields = Object.keys(formData).length;
 		const completionPercentage = this.calculateCompletionPercentage(
 			formData,
-			totalFields,
+			totalFields
 		);
 
 		return {
@@ -105,7 +105,7 @@ export class FormProgressStorage {
 
 	async loadProgress(
 		formId: string,
-		sessionId: string,
+		sessionId: string
 	): Promise<FormProgress | null> {
 		if (!this.config.enabled) return null;
 

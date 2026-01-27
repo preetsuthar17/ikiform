@@ -7,7 +7,7 @@ const TicketpingWithNoSsr = dynamic(
 		const mod = await import("./ticket-ping");
 		return mod.Ticketping;
 	},
-	{ ssr: false },
+	{ ssr: false }
 );
 
 export function TicketpingController() {

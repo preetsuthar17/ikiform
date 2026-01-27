@@ -2,7 +2,7 @@ import type { FormSchema } from "@/lib/database/database.types";
 
 export function getFormTitle(
 	schema: FormSchema | null | undefined,
-	isPublic = false,
+	isPublic = false
 ): string {
 	if (!(schema && schema.settings)) {
 		return "Untitled Form";
@@ -15,13 +15,13 @@ export function getFormTitle(
 }
 
 export function getPublicFormTitle(
-	schema: FormSchema | null | undefined,
+	schema: FormSchema | null | undefined
 ): string {
 	return getFormTitle(schema, true);
 }
 
 export function getInternalFormTitle(
-	schema: FormSchema | null | undefined,
+	schema: FormSchema | null | undefined
 ): string {
 	return getFormTitle(schema, false);
 }

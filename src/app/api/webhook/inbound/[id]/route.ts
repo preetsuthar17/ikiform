@@ -8,7 +8,7 @@ import { createClient } from "@/utils/supabase/server";
 
 async function verifyInboundMappingOwnership(
 	mappingId: string,
-	userId: string,
+	userId: string
 ): Promise<boolean> {
 	const supabase = createAdminClient();
 	const { data: mapping, error } = await supabase
@@ -37,12 +37,12 @@ async function verifyInboundMappingOwnership(
 
 export async function PUT(
 	req: NextRequest,
-	{ params }: { params: Promise<{ id: string }> },
+	{ params }: { params: Promise<{ id: string }> }
 ) {
 	const startTime = Date.now();
 	const mappingId = (await params).id;
 	console.log(
-		`[WEBHOOK API] PUT /api/webhook/inbound/${mappingId} - Started at ${new Date().toISOString()}`,
+		`[WEBHOOK API] PUT /api/webhook/inbound/${mappingId} - Started at ${new Date().toISOString()}`
 	);
 
 	try {
@@ -60,23 +60,23 @@ export async function PUT(
 		if (!hasAccess) {
 			return NextResponse.json(
 				{ error: "Mapping not found or access denied" },
-				{ status: 403 },
+				{ status: 403 }
 			);
 		}
 
 		const body = await req.json();
 		console.log(
 			`[WEBHOOK API] PUT /api/webhook/inbound/${mappingId} - Request body:`,
-			JSON.stringify(body, null, 2),
+			JSON.stringify(body, null, 2)
 		);
 
 		if (!body) {
 			console.error(
-				`[WEBHOOK API] PUT /api/webhook/inbound/${mappingId} - Missing request body`,
+				`[WEBHOOK API] PUT /api/webhook/inbound/${mappingId} - Missing request body`
 			);
 			return NextResponse.json(
 				{ error: "Missing request body" },
-				{ status: 400 },
+				{ status: 400 }
 			);
 		}
 
@@ -91,7 +91,7 @@ export async function PUT(
 			if (formError || !form) {
 				return NextResponse.json(
 					{ error: "Form not found or access denied" },
-					{ status: 403 },
+					{ status: 403 }
 				);
 			}
 		}
@@ -100,7 +100,7 @@ export async function PUT(
 
 		const duration = Date.now() - startTime;
 		console.log(
-			`[WEBHOOK API] PUT /api/webhook/inbound/${mappingId} - Success: Updated mapping in ${duration}ms`,
+			`[WEBHOOK API] PUT /api/webhook/inbound/${mappingId} - Success: Updated mapping in ${duration}ms`
 		);
 
 		return NextResponse.json(mapping);
@@ -112,26 +112,26 @@ export async function PUT(
 				: "Failed to update inbound mapping";
 		console.error(
 			`[WEBHOOK API] PUT /api/webhook/inbound/${mappingId} - Error after ${duration}ms:`,
-			errorMessage,
+			errorMessage
 		);
 
 		return NextResponse.json(
 			{
 				error: errorMessage,
 			},
-			{ status: 400 },
+			{ status: 400 }
 		);
 	}
 }
 
 export async function DELETE(
 	_req: NextRequest,
-	{ params }: { params: Promise<{ id: string }> },
+	{ params }: { params: Promise<{ id: string }> }
 ) {
 	const startTime = Date.now();
 	const mappingId = (await params).id;
 	console.log(
-		`[WEBHOOK API] DELETE /api/webhook/inbound/${mappingId} - Started at ${new Date().toISOString()}`,
+		`[WEBHOOK API] DELETE /api/webhook/inbound/${mappingId} - Started at ${new Date().toISOString()}`
 	);
 
 	try {
@@ -149,7 +149,7 @@ export async function DELETE(
 		if (!hasAccess) {
 			return NextResponse.json(
 				{ error: "Mapping not found or access denied" },
-				{ status: 403 },
+				{ status: 403 }
 			);
 		}
 
@@ -157,7 +157,7 @@ export async function DELETE(
 
 		const duration = Date.now() - startTime;
 		console.log(
-			`[WEBHOOK API] DELETE /api/webhook/inbound/${mappingId} - Success: Deleted mapping in ${duration}ms`,
+			`[WEBHOOK API] DELETE /api/webhook/inbound/${mappingId} - Success: Deleted mapping in ${duration}ms`
 		);
 
 		return NextResponse.json({ success: true });
@@ -169,14 +169,14 @@ export async function DELETE(
 				: "Failed to delete inbound mapping";
 		console.error(
 			`[WEBHOOK API] DELETE /api/webhook/inbound/${mappingId} - Error after ${duration}ms:`,
-			errorMessage,
+			errorMessage
 		);
 
 		return NextResponse.json(
 			{
 				error: errorMessage,
 			},
-			{ status: 400 },
+			{ status: 400 }
 		);
 	}
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import BlackFridayBanner from "@/components/home/black-friday-banner";
 import Footer from "@/components/home/footer";
 import Header from "@/components/home/header/header";
 import { TrialBannerWrapper } from "@/components/trial-banner-wrapper";

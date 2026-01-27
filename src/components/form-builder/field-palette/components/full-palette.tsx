@@ -32,7 +32,7 @@ export function FullPalette({
 			(field) =>
 				field.label.toLowerCase().includes(term) ||
 				field.description.toLowerCase().includes(term) ||
-				field.type.toLowerCase().includes(term),
+				field.type.toLowerCase().includes(term)
 		);
 	}, [searchTerm]);
 
@@ -86,7 +86,7 @@ export function FullPalette({
 			</InputGroup>
 
 			<ScrollArea
-				className="h-0 min-h-0 flex-1 "
+				className="h-0 min-h-0 flex-1"
 				style={{
 					overscrollBehavior: "contain",
 				}}
@@ -96,7 +96,7 @@ export function FullPalette({
 						Object.entries(groupedFields).map(([key, fields]) => {
 							const colCount = 2;
 							const columns = Array.from({ length: colCount }, (_, colIdx) =>
-								fields.filter((_, idx) => idx % colCount === colIdx),
+								fields.filter((_, idx) => idx % colCount === colIdx)
 							);
 
 							return (
@@ -110,7 +110,7 @@ export function FullPalette({
 									</div>
 									<div
 										aria-label={`${FIELD_CATEGORIES[key as keyof typeof FIELD_CATEGORIES]} fields`}
-										className="grid sm:grid-cols-2 grid-cols-1 gap-2 rounded-2xl"
+										className="grid grid-cols-1 gap-2 rounded-2xl sm:grid-cols-2"
 										role="list"
 									>
 										{columns.map((col, colIdx) => (

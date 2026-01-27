@@ -5,7 +5,7 @@ export function getTotalFields(form: Form): number {
 	const fieldsFromBlocks =
 		form.schema?.blocks?.reduce(
 			(total, block) => total + (block.fields?.length || 0),
-			0,
+			0
 		) || 0;
 	return Math.max(fieldsFromDirectArray, fieldsFromBlocks);
 }

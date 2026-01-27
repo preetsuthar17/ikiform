@@ -21,7 +21,7 @@ export function CopyButton({ schema }: CopyButtonProps) {
 		const success = await copyWithToast(
 			JSON.stringify(schema, null, 2),
 			"Schema copied to clipboard!",
-			"Failed to copy schema",
+			"Failed to copy schema"
 		);
 		if (success) {
 			setCopied(true);

@@ -137,14 +137,14 @@ export function FileUploadField(props: BaseFieldProps) {
 				onChange([...currentFiles, ...newUploadedFiles]);
 			} catch (error) {
 				setUploadError(
-					error instanceof Error ? error.message : "Upload failed",
+					error instanceof Error ? error.message : "Upload failed"
 				);
 				throw error;
 			} finally {
 				setIsUploading(false);
 			}
 		},
-		[field.id, value, onChange],
+		[field.id, value, onChange]
 	);
 
 	const handleRemoveUploadedFile = useCallback(
@@ -158,7 +158,7 @@ export function FileUploadField(props: BaseFieldProps) {
 
 			onChange(currentFiles.filter((file) => file.id !== fileId));
 		},
-		[value, onChange],
+		[value, onChange]
 	);
 
 	const handleRemoveButtonClick = (fileId: string) => {

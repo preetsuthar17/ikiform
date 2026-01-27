@@ -52,7 +52,7 @@ export function PasswordProtectionModal({
 			document.addEventListener("keydown", handleKeyDown);
 
 			const focusableElements = modalRef.current?.querySelectorAll(
-				'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+				'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
 			);
 			const firstElement = focusableElements?.[0] as HTMLElement;
 			const lastElement = focusableElements?.[

@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
 		const hasValidAuth = authHeader === `Bearer ${process.env.CRON_SECRET}`;
 		const isVercelCron = vercelCronHeader !== null;
 
-		if (!hasValidAuth && !isVercelCron) {
+		if (!(hasValidAuth || isVercelCron)) {
 			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 		}
 
@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
 			.eq("has_free_trial", true);
 
 		console.log(
-			`Found ${debugUsers?.length || 0} users with has_premium=true and has_free_trial=true`,
+			`Found ${debugUsers?.length || 0} users with has_premium=true and has_free_trial=true`
 		);
 		console.log("14 days ago threshold:", thresholdISO);
 
@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
 			console.error("Error updating trial users:", error);
 			return NextResponse.json(
 				{ error: "Failed to update users", details: error.message },
-				{ status: 500 },
+				{ status: 500 }
 			);
 		}
 
@@ -62,7 +62,7 @@ export async function GET(request: NextRequest) {
 		console.error("[Cron] Expire trials error:", error);
 		return NextResponse.json(
 			{ error: "Internal server error" },
-			{ status: 500 },
+			{ status: 500 }
 		);
 	}
 }

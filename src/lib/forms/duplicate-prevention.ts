@@ -30,7 +30,7 @@ function getRedisClient(): Redis {
 
 		if (!(url && token)) {
 			throw new Error(
-				"Missing required environment variables: UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN",
+				"Missing required environment variables: UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN"
 			);
 		}
 
@@ -57,7 +57,7 @@ const DEFAULT_SETTINGS: DuplicatePreventionSettings = {
 export async function checkDuplicateSubmission(
 	formId: string,
 	identifier: string,
-	settings: DuplicatePreventionSettings = DEFAULT_SETTINGS,
+	settings: DuplicatePreventionSettings = DEFAULT_SETTINGS
 ): Promise<DuplicateCheckResult> {
 	if (typeof window !== "undefined") {
 		throw new Error("Duplicate prevention can only be used on the server side");
@@ -90,14 +90,14 @@ export async function checkDuplicateSubmission(
 			};
 			const timeWindowSeconds = settings.timeWindow * 60;
 			const timeElapsed = Math.floor(
-				(Date.now() - submissionData.timestamp) / 1000,
+				(Date.now() - submissionData.timestamp) / 1000
 			);
 			const timeRemaining = timeWindowSeconds - timeElapsed;
 
 			if (timeRemaining > 0) {
 				const attemptsRemaining = Math.max(
 					0,
-					(settings.maxAttempts || 1) - submissionData.attempts,
+					(settings.maxAttempts || 1) - submissionData.attempts
 				);
 
 				return {
@@ -128,7 +128,7 @@ export async function checkDuplicateSubmission(
 export async function recordSubmission(
 	formId: string,
 	identifier: string,
-	settings: DuplicatePreventionSettings = DEFAULT_SETTINGS,
+	settings: DuplicatePreventionSettings = DEFAULT_SETTINGS
 ): Promise<void> {
 	if (typeof window !== "undefined") {
 		throw new Error("Duplicate prevention can only be used on the server side");
@@ -181,7 +181,7 @@ export function generateIdentifier(
 	strategy: DuplicatePreventionSettings["strategy"],
 	ipAddress: string,
 	email?: string,
-	sessionId?: string,
+	sessionId?: string
 ): string {
 	switch (strategy) {
 		case "ip":
@@ -202,7 +202,7 @@ export function generateIdentifier(
 }
 
 export function extractEmailFromSubmissionData(
-	submissionData: Record<string, any>,
+	submissionData: Record<string, any>
 ): string | undefined {
 	const emailFields = [
 		"email",

@@ -77,7 +77,7 @@ async function createProducts() {
 					const product = await polar.products.create({
 						name: productConfig.name,
 						description: productConfig.description,
-						recurringInterval: productConfig.interval as any,
+						recurringInterval: productConfig.interval as "month" | "year",
 						prices: [
 							{
 								amountType: "fixed",
@@ -87,13 +87,13 @@ async function createProducts() {
 					});
 
 					console.log(
-						`✅ Created subscription product: ${product.name} (ID: ${product.id})`,
+						`✅ Created subscription product: ${product.name} (ID: ${product.id})`
 					);
 					console.log(
-						`   Price: $${(productConfig.price / 100).toFixed(2)} ${productConfig.currency}`,
+						`   Price: $${(productConfig.price / 100).toFixed(2)} ${productConfig.currency}`
 					);
 					console.log(
-						`   Billing: ${productConfig.interval_count} ${productConfig.interval}(s)`,
+						`   Billing: ${productConfig.interval_count} ${productConfig.interval}(s)`
 					);
 				} else {
 					// For one-time products
@@ -110,20 +110,22 @@ async function createProducts() {
 					});
 
 					console.log(
-						`✅ Created one-time product: ${product.name} (ID: ${product.id})`,
+						`✅ Created one-time product: ${product.name} (ID: ${product.id})`
 					);
 					console.log(
-						`   Price: $${(productConfig.price / 100).toFixed(2)} ${productConfig.currency}`,
+						`   Price: $${(productConfig.price / 100).toFixed(2)} ${productConfig.currency}`
 					);
 				}
 				console.log("");
-			} catch (error: any) {
-				if (error.message?.includes("already exists")) {
+			} catch (error: unknown) {
+				const errorMessage =
+					error instanceof Error ? error.message : String(error);
+				if (errorMessage.includes("already exists")) {
 					console.log(`⚠️ Product already exists: ${productConfig.name}`);
 				} else {
 					console.error(
 						`❌ Error creating product ${productConfig.name}:`,
-						error.message,
+						errorMessage
 					);
 					console.error("   Full error:", error);
 				}
@@ -132,19 +134,20 @@ async function createProducts() {
 
 		console.log("🎉 Product creation completed!");
 		console.log("\n📋 Summary of products:");
-		PRODUCTS.forEach((product) => {
+		for (const product of PRODUCTS) {
 			console.log(`   • ${product.name} (${product.id})`);
-		});
+		}
 
 		console.log("\n🔗 Next steps:");
 		console.log("1. Verify the products in your Polar dashboard");
 		console.log(
-			"2. Update the product IDs in src/components/home/pricing/client.tsx if needed",
+			"2. Update the product IDs in src/components/home/pricing/client.tsx if needed"
 		);
 		console.log("3. Test the checkout flow");
 		console.log("4. Configure webhooks to point to /api/webhook/polar");
-	} catch (error: any) {
-		console.error("❌ Error:", error.message);
+	} catch (error: unknown) {
+		const errorMessage = error instanceof Error ? error.message : String(error);
+		console.error("❌ Error:", errorMessage);
 		console.error("Full error:", error);
 		process.exit(1);
 	}

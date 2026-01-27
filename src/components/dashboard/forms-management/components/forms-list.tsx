@@ -67,7 +67,7 @@ export const FormsList = memo(function FormsList({
 			}
 			onViewAnalytics(formId);
 		},
-		[shareModalOpen, modalJustClosed, onViewAnalytics],
+		[shareModalOpen, modalJustClosed, onViewAnalytics]
 	);
 
 	const handleEdit = useCallback(
@@ -75,7 +75,7 @@ export const FormsList = memo(function FormsList({
 			e.stopPropagation();
 			onEdit(formId);
 		},
-		[onEdit],
+		[onEdit]
 	);
 
 	const handleShare = useCallback(
@@ -87,7 +87,7 @@ export const FormsList = memo(function FormsList({
 			}));
 			if (onShare) onShare(form);
 		},
-		[onShare],
+		[onShare]
 	);
 
 	const handleDuplicate = useCallback(
@@ -95,7 +95,7 @@ export const FormsList = memo(function FormsList({
 			e.stopPropagation();
 			onDuplicate(formId);
 		},
-		[onDuplicate],
+		[onDuplicate]
 	);
 
 	const handleViewForm = useCallback(
@@ -103,7 +103,7 @@ export const FormsList = memo(function FormsList({
 			e.stopPropagation();
 			onViewForm(form);
 		},
-		[onViewForm],
+		[onViewForm]
 	);
 
 	const handleViewAnalytics = useCallback(
@@ -111,7 +111,7 @@ export const FormsList = memo(function FormsList({
 			e.stopPropagation();
 			onViewAnalytics(formId);
 		},
-		[onViewAnalytics],
+		[onViewAnalytics]
 	);
 
 	const handleEmbed = useCallback((e: React.MouseEvent, formId: string) => {
@@ -124,7 +124,7 @@ export const FormsList = memo(function FormsList({
 			e.stopPropagation();
 			onDelete(formId, formTitle);
 		},
-		[onDelete],
+		[onDelete]
 	);
 
 	const handleModalClose = useCallback((formId: string) => {
@@ -132,7 +132,7 @@ export const FormsList = memo(function FormsList({
 		setModalJustClosed((prev) => ({ ...prev, [formId]: true }));
 		setTimeout(
 			() => setModalJustClosed((prev) => ({ ...prev, [formId]: false })),
-			100,
+			100
 		);
 	}, []);
 
@@ -140,7 +140,7 @@ export const FormsList = memo(function FormsList({
 		async (form: Form) => {
 			if (onShare) onShare(form);
 		},
-		[onShare],
+		[onShare]
 	);
 
 	const formCards = useMemo(
@@ -331,7 +331,7 @@ export const FormsList = memo(function FormsList({
 			handleViewAnalytics,
 			handleEmbed,
 			handleDelete,
-		],
+		]
 	);
 
 	const shareModals = useMemo(
@@ -347,7 +347,7 @@ export const FormsList = memo(function FormsList({
 					onPublish={() => handleModalPublish(form)}
 				/>
 			)),
-		[forms, shareModalOpen, handleModalClose, handleModalPublish],
+		[forms, shareModalOpen, handleModalClose, handleModalPublish]
 	);
 
 	return (

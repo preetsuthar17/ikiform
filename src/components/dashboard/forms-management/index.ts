@@ -3,6 +3,7 @@ export {
 	FormsManagement,
 	FormsManagement as default,
 } from "./forms-management";
+export { FormsManagementClient } from "./forms-management-client";
 
 export { useFormsManagement } from "./hooks";
 

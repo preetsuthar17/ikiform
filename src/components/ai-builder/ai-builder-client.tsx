@@ -63,7 +63,7 @@ export function AIBuilderClient() {
 				text,
 				icon: <Sparkles className="size-4" />,
 			})),
-		[],
+		[]
 	);
 
 	useEffect(() => {
@@ -119,16 +119,16 @@ export function AIBuilderClient() {
 			messagesEndRef,
 			showSuggestions,
 			setShowSuggestions,
-		],
+		]
 	);
 
 	return (
 		<PremiumGuard
-			useSkeleton
 			authLoading={authLoading}
 			checking={checking}
 			hasPremium={hasPremium}
 			user={user}
+			useSkeleton
 		>
 			<div
 				className="flex h-screen w-full flex-col gap-4 bg-background motion-reduce:animate-none motion-reduce:transition-none md:flex-row"
@@ -137,7 +137,7 @@ export function AIBuilderClient() {
 				tabIndex={-1}
 			>
 				{}
-				<div className="-translate-x-1/2 fixed bottom-4 left-1/2 z-50 w-full max-w-[90%] md:hidden">
+				<div className="fixed bottom-4 left-1/2 z-50 w-full max-w-[90%] -translate-x-1/2 md:hidden">
 					<Button
 						aria-controls="mobile-chat-drawer"
 						aria-expanded={chatDrawerOpen}
@@ -152,7 +152,7 @@ export function AIBuilderClient() {
 
 				<div className="hidden h-full w-full md:flex">
 					<ResizablePanelGroup className="flex flex-1" orientation="horizontal">
-						<ResizablePanel defaultSize={20} maxSize={30} minSize={15}>
+						<ResizablePanel defaultSize={20} minSize={20}>
 							<div className="h-full w-full">
 								<ChatPanel {...chatPanelProps} />
 							</div>

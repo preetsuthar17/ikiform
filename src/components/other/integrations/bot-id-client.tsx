@@ -7,7 +7,7 @@ const BotIdClientWithNoSsr = dynamic(
 		const { BotIdClient } = await import("botid/client");
 		return BotIdClient;
 	},
-	{ ssr: false },
+	{ ssr: false }
 );
 
 const protectedRoutes = [

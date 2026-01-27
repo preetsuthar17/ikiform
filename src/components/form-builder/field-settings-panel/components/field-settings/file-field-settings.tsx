@@ -118,13 +118,13 @@ export function FileFieldSettings({
 
 	const toggleCommonType = (typeConfig: (typeof COMMON_FILE_TYPES)[0]) => {
 		const hasAllExtensions = typeConfig.extensions.every((ext) =>
-			allowedTypes.includes(ext),
+			allowedTypes.includes(ext)
 		);
 
 		let newTypes: string[];
 		if (hasAllExtensions) {
 			newTypes = allowedTypes.filter(
-				(type) => !typeConfig.extensions.includes(type),
+				(type) => !typeConfig.extensions.includes(type)
 			);
 		} else {
 			newTypes = [...new Set([...allowedTypes, ...typeConfig.extensions])];
@@ -185,7 +185,7 @@ export function FileFieldSettings({
 							onChange={(e) =>
 								updateSetting(
 									"maxSize",
-									(Number.parseInt(e.target.value) || 1) * 1024 * 1024,
+									(Number.parseInt(e.target.value) || 1) * 1024 * 1024
 								)
 							}
 							onKeyDown={(e) => {
@@ -235,7 +235,7 @@ export function FileFieldSettings({
 						<div className="flex flex-wrap gap-2">
 							{COMMON_FILE_TYPES.map((typeConfig) => {
 								const hasAllExtensions = typeConfig.extensions.every((ext) =>
-									allowedTypes.includes(ext),
+									allowedTypes.includes(ext)
 								);
 								return (
 									<Button
@@ -292,7 +292,7 @@ export function FileFieldSettings({
 								className="focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
 								onClick={() => {
 									const input = document.getElementById(
-										"customType",
+										"customType"
 									) as HTMLInputElement;
 									const value = input.value.trim();
 									if (value) {
@@ -304,7 +304,7 @@ export function FileFieldSettings({
 									if (e.key === "Enter" || e.key === " ") {
 										e.preventDefault();
 										const input = document.getElementById(
-											"customType",
+											"customType"
 										) as HTMLInputElement;
 										const value = input.value.trim();
 										if (value) {

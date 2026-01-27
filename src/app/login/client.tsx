@@ -133,7 +133,7 @@ export default function LoginForm() {
 				await handleAuth();
 			}
 		},
-		[step, isSignUp, validateEmail, validateName, validatePassword],
+		[step, isSignUp, validateEmail, validateName, validatePassword]
 	);
 
 	const back = useCallback(() => {
@@ -182,7 +182,7 @@ export default function LoginForm() {
 				if (error) {
 					if (error.message.includes("already registered"))
 						toast.error(
-							"This email is already registered. Try signing in instead.",
+							"This email is already registered. Try signing in instead."
 						);
 					else toast.error(error.message);
 				} else {
@@ -193,7 +193,7 @@ export default function LoginForm() {
 						toast.success("Account created and verified!");
 					else
 						toast.success(
-							"Account created! Please check your email for verification.",
+							"Account created! Please check your email for verification."
 						);
 				}
 			} else {
@@ -207,7 +207,7 @@ export default function LoginForm() {
 						passwordRef.current?.focus();
 					} else if (error.message.includes("Email not confirmed")) {
 						toast.error(
-							"Please check your email and click the verification link before signing in.",
+							"Please check your email and click the verification link before signing in."
 						);
 					} else toast.error(error.message);
 				} else {
@@ -245,7 +245,7 @@ export default function LoginForm() {
 			field: "email" | "name" | "password",
 			label: string,
 			type: string,
-			extraProps: Record<string, any> = {},
+			extraProps: Record<string, any> = {}
 		) => (
 			<div className="relative w-full">
 				<Input
@@ -278,7 +278,7 @@ export default function LoginForm() {
 					<button
 						aria-label={showPassword ? "Hide password" : "Show password"}
 						aria-pressed={showPassword}
-						className="-translate-y-1/2 absolute top-1/2 right-2 rounded-md p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+						className="absolute top-1/2 right-2 -translate-y-1/2 rounded-md p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
 						onClick={() => setShowPassword((v) => !v)}
 						tabIndex={-1}
 						type="button"
@@ -298,12 +298,12 @@ export default function LoginForm() {
 				)}
 			</div>
 		),
-		[form, errors, focused, loading, showPassword, handleInput],
+		[form, errors, focused, loading, showPassword, handleInput]
 	);
 
 	const currentTitle = useMemo(
 		() => (isSignUp ? stepTitlesSignUp : stepTitles)[step],
-		[isSignUp, step],
+		[isSignUp, step]
 	);
 
 	return (
@@ -351,7 +351,7 @@ export default function LoginForm() {
 										autoComplete: isSignUp
 											? "new-password"
 											: "current-password",
-									},
+									}
 								)}
 
 							<Button
@@ -464,7 +464,7 @@ export default function LoginForm() {
 										{lastLoginMethod === "google" && (
 											<Badge
 												aria-label="Last used login method"
-												className="-right-1 -top-1 absolute rounded-full bg-background"
+												className="absolute -top-1 -right-1 rounded-full bg-background"
 												variant="outline"
 											>
 												Last used
@@ -486,7 +486,7 @@ export default function LoginForm() {
 										{lastLoginMethod === "github" && (
 											<Badge
 												aria-label="Last used login method"
-												className="-right-1 -bottom-1 absolute rounded-full bg-background"
+												className="absolute -right-1 -bottom-1 rounded-full bg-background"
 												variant="outline"
 											>
 												Last used

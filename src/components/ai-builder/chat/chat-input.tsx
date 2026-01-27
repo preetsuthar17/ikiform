@@ -1,5 +1,5 @@
 import { Send } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Kbd } from "@/components/ui/kbd";
@@ -33,10 +33,6 @@ export function ChatInput({
 		const currentHeight = Number.parseFloat(el.style.height || "0");
 		setIsMultiline(currentHeight > minHeight + 1);
 	};
-
-	useEffect(() => {
-		autoResize();
-	}, [input]);
 
 	const handleLocalSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		if (isLoading || isSubmittingRef.current) {
@@ -92,7 +88,7 @@ export function ChatInput({
 				<Button
 					aria-label="Send message"
 					className={`absolute right-2 transition-all duration-200 ease-out md:hidden ${
-						isMultiline && hasText ? "bottom-2" : "-translate-y-1/2 top-1/2"
+						isMultiline && hasText ? "bottom-2" : "top-1/2 -translate-y-1/2"
 					}`}
 					disabled={isLoading || !input.trim()}
 					loading={isLoading}
@@ -106,7 +102,7 @@ export function ChatInput({
 				<Button
 					aria-label="Send message"
 					className={`absolute right-3 hidden transition-all duration-200 ease-out md:inline-flex ${
-						isMultiline && hasText ? "bottom-2" : "-translate-y-1/2 top-1/2"
+						isMultiline && hasText ? "bottom-2" : "top-1/2 -translate-y-1/2"
 					}`}
 					disabled={isLoading || !input.trim()}
 					loading={isLoading}

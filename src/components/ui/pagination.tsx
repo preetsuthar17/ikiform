@@ -55,7 +55,7 @@ function PaginationLink({
 					variant: isActive ? "outline" : "ghost",
 					size,
 				}),
-				className,
+				className
 			)}
 			data-active={isActive}
 			data-slot="pagination-link"

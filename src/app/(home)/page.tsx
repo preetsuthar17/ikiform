@@ -3,7 +3,6 @@ import CTA from "@/components/home/cta";
 import FaqSection from "@/components/home/faq";
 import Hero from "@/components/home/hero";
 import Pricing from "@/components/home/pricing/pricing";
-import PromoPopup from "@/components/home/promo-popup";
 
 export default function Home() {
 	return (

@@ -54,7 +54,7 @@ const initializeFormData = (fields: FormField[]): Record<string, any> => {
 export const useSingleStepForm = (
 	formId: string,
 	schema: FormSchema,
-	fields: FormField[],
+	fields: FormField[]
 ): SingleStepFormState &
 	SingleStepFormActions & {
 		fieldVisibility: Record<string, { visible: boolean; disabled: boolean }>;
@@ -97,7 +97,7 @@ export const useSingleStepForm = (
 	useEffect(() => {
 		const currentFieldIds = new Set(fields.map((field) => field.id));
 		const newFieldIds = [...currentFieldIds].filter(
-			(id) => !initializedFieldsRef.current.has(id),
+			(id) => !initializedFieldsRef.current.has(id)
 		);
 
 		if (newFieldIds.length > 0) {
@@ -170,7 +170,7 @@ export const useSingleStepForm = (
 					value !== "" &&
 					value !== null &&
 					value !== undefined &&
-					!(Array.isArray(value) && value.length === 0),
+					!(Array.isArray(value) && value.length === 0)
 			).length;
 
 			if (filledFields > 0) {
@@ -200,7 +200,7 @@ export const useSingleStepForm = (
 
 		const { errors: validationErrors, isValid } = validateSingleStepForm(
 			fields,
-			formData,
+			formData
 		);
 
 		if (!isValid) {
@@ -245,15 +245,15 @@ export const useSingleStepForm = (
 				});
 			} else if (result.error === "Rate limit exceeded") {
 				toast.error(
-					result.message || "Too many requests. Please try again later.",
+					result.message || "Too many requests. Please try again later."
 				);
 			} else if (result.error === "Response limit reached") {
 				toast.error(
-					result.message || "This form is no longer accepting responses.",
+					result.message || "This form is no longer accepting responses."
 				);
 			} else if (result.error === "Content validation failed") {
 				toast.error(
-					result.message || "Your submission contains inappropriate content.",
+					result.message || "Your submission contains inappropriate content."
 				);
 			} else {
 				toast.error(result.message || "Failed to submit form");
@@ -269,15 +269,15 @@ export const useSingleStepForm = (
 				});
 			} else if (error?.error === "Rate limit exceeded") {
 				toast.error(
-					error.message || "Too many requests. Please try again later.",
+					error.message || "Too many requests. Please try again later."
 				);
 			} else if (error?.error === "Response limit reached") {
 				toast.error(
-					error.message || "This form is no longer accepting responses.",
+					error.message || "This form is no longer accepting responses."
 				);
 			} else if (error?.error === "Content validation failed") {
 				toast.error(
-					error.message || "Your submission contains inappropriate content.",
+					error.message || "Your submission contains inappropriate content."
 				);
 			} else {
 				toast.error("Failed to submit form. Please try again.");

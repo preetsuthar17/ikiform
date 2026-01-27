@@ -24,7 +24,7 @@ export const MotionSafeDiv = React.forwardRef<
 >(
 	(
 		{ initial, animate, exit, whileHover, whileTap, whileFocus, ...props },
-		ref,
+		ref
 	) => {
 		const variants = React.useMemo(() => {
 			const safeVariants: any = {};
@@ -38,7 +38,7 @@ export const MotionSafeDiv = React.forwardRef<
 		}, [initial, animate, exit, whileHover, whileTap, whileFocus]);
 
 		return <motion.div ref={ref} {...variants} {...props} />;
-	},
+	}
 );
 
 MotionSafeDiv.displayName = "MotionSafeDiv";
@@ -63,7 +63,7 @@ export const MotionSafeButton = React.forwardRef<
 			onClick,
 			...motionProps
 		},
-		ref,
+		ref
 	) => {
 		const { safeBackgroundColor, safeBorderColor } = useMotionSafeColors();
 
@@ -101,7 +101,7 @@ export const MotionSafeButton = React.forwardRef<
 				{children}
 			</motion.button>
 		);
-	},
+	}
 );
 
 MotionSafeButton.displayName = "MotionSafeButton";

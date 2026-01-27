@@ -75,7 +75,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 	const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
 	const { submissions, loading, refreshing, refreshData } = useFormSubmissions(
-		form.id,
+		form.id
 	);
 	const analyticsData = useAnalyticsData(form, submissions);
 	const {

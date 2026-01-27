@@ -93,7 +93,7 @@ export function PublicForm({ formId, schema, theme }: PublicFormProps) {
 			className={cn(
 				"flex w-full flex-col gap-4",
 				theme && `theme-${theme}`,
-				dir === "rtl" && "rtl",
+				dir === "rtl" && "rtl"
 			)}
 			dir={dir}
 			role="main"

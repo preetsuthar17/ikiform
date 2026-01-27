@@ -44,7 +44,7 @@ export function SocialFieldSettings({
 								<Checkbox
 									aria-describedby="social-platforms-help"
 									checked={field.settings?.socialPlatforms?.includes(
-										platform.key,
+										platform.key
 									)}
 									id={`social-platform-${platform.key}`}
 									name={`social-platform-${platform.key}`}

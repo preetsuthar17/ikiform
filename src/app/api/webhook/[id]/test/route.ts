@@ -5,7 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 
 async function verifyWebhookOwnership(
 	webhookId: string,
-	userId: string,
+	userId: string
 ): Promise<boolean> {
 	const supabase = createAdminClient();
 	const { data: webhook, error } = await supabase
@@ -40,12 +40,12 @@ async function verifyWebhookOwnership(
 
 export async function POST(
 	req: NextRequest,
-	{ params }: { params: Promise<{ id: string }> },
+	{ params }: { params: Promise<{ id: string }> }
 ) {
 	const startTime = Date.now();
 	const webhookId = (await params).id;
 	console.log(
-		`[WEBHOOK API] POST /api/webhook/${webhookId}/test - Started at ${new Date().toISOString()}`,
+		`[WEBHOOK API] POST /api/webhook/${webhookId}/test - Started at ${new Date().toISOString()}`
 	);
 
 	try {
@@ -63,7 +63,7 @@ export async function POST(
 		if (!hasAccess) {
 			return NextResponse.json(
 				{ error: "Webhook not found or access denied" },
-				{ status: 403 },
+				{ status: 403 }
 			);
 		}
 
@@ -72,11 +72,11 @@ export async function POST(
 			samplePayload = await req.json();
 			console.log(
 				`[WEBHOOK API] POST /api/webhook/${webhookId}/test - Sample payload:`,
-				JSON.stringify(samplePayload, null, 2),
+				JSON.stringify(samplePayload, null, 2)
 			);
 		} catch {
 			console.log(
-				`[WEBHOOK API] POST /api/webhook/${webhookId}/test - No sample payload provided`,
+				`[WEBHOOK API] POST /api/webhook/${webhookId}/test - No sample payload provided`
 			);
 		}
 
@@ -84,7 +84,7 @@ export async function POST(
 
 		const duration = Date.now() - startTime;
 		console.log(
-			`[WEBHOOK API] POST /api/webhook/${webhookId}/test - Success: Test completed in ${duration}ms`,
+			`[WEBHOOK API] POST /api/webhook/${webhookId}/test - Success: Test completed in ${duration}ms`
 		);
 
 		return NextResponse.json(result);
@@ -94,14 +94,14 @@ export async function POST(
 			error instanceof Error ? error.message : "Failed to test webhook";
 		console.error(
 			`[WEBHOOK API] POST /api/webhook/${webhookId}/test - Error after ${duration}ms:`,
-			errorMessage,
+			errorMessage
 		);
 
 		return NextResponse.json(
 			{
 				error: errorMessage,
 			},
-			{ status: 400 },
+			{ status: 400 }
 		);
 	}
 }

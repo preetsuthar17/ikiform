@@ -23,7 +23,7 @@ export interface QuizFieldResult {
 
 export function calculateQuizScore(
 	schema: FormSchema,
-	submissionData: Record<string, any>,
+	submissionData: Record<string, any>
 ): QuizResult {
 	const allFields = getAllFields(schema);
 	const quizFields = allFields.filter((field) => field.settings?.isQuizField);
@@ -98,7 +98,7 @@ export function calculateQuizScore(
 
 function isAnswerCorrect(
 	userAnswer: any,
-	correctAnswer: string | string[],
+	correctAnswer: string | string[]
 ): boolean {
 	if (typeof correctAnswer === "string") {
 		return (
@@ -124,7 +124,7 @@ function isAnswerCorrect(
 			.sort();
 
 		return normalizedUser.every(
-			(ans, index) => ans === normalizedCorrect[index],
+			(ans, index) => ans === normalizedCorrect[index]
 		);
 	}
 
@@ -145,7 +145,7 @@ function getAllFields(schema: FormSchema): FormField[] {
 
 export function generateQuizResultMessage(
 	result: QuizResult,
-	schema: FormSchema,
+	schema: FormSchema
 ): string {
 	const { passed, percentage, score, totalPossible } = result;
 	const quizSettings = schema.settings.quiz;
@@ -177,7 +177,7 @@ export function isQuizForm(schema: FormSchema): boolean {
 
 export function getQuizStatistics(
 	schema: FormSchema,
-	submissions: FormSubmission[],
+	submissions: FormSubmission[]
 ): {
 	averageScore: number;
 	passRate: number;
@@ -248,7 +248,7 @@ export function getQuizStatistics(
 			correctRate:
 				stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0,
 			totalAnswers: stats.total,
-		}),
+		})
 	);
 
 	return {

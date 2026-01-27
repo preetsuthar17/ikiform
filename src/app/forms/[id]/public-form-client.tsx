@@ -8,7 +8,7 @@ const PublicFormContent = dynamic(
 	{
 		ssr: false,
 		loading: () => <></>,
-	},
+	}
 );
 
 interface PublicFormClientProps {

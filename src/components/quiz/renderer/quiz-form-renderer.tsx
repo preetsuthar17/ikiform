@@ -51,7 +51,7 @@ export function QuizFormRenderer({
 
 		const quizFields = fields.filter((field) => field.settings?.isQuizField);
 		const currentFieldIndex = quizFields.findIndex(
-			(field) => field.id in errors || !values[field.id],
+			(field) => field.id in errors || !values[field.id]
 		);
 
 		return currentFieldIndex >= 0 ? currentFieldIndex + 1 : quizFields.length;
@@ -104,7 +104,7 @@ export function QuizFormRenderer({
 							percentage:
 								quizState.totalPossible > 0
 									? Math.round(
-											(quizState.currentScore / quizState.totalPossible) * 100,
+											(quizState.currentScore / quizState.totalPossible) * 100
 										)
 									: 0,
 							passed: false,

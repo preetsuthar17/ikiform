@@ -81,7 +81,7 @@ function CodeBlock({
 							"absolute transition-all duration-300",
 							showCheck
 								? "scale-45 opacity-0 blur-sm"
-								: "scale-100 opacity-100 blur-0",
+								: "scale-100 opacity-100 blur-0"
 						)}
 					>
 						<Copy className="size-4" />
@@ -92,7 +92,7 @@ function CodeBlock({
 							"absolute transition-all duration-300",
 							showCheck
 								? "scale-120 opacity-100 blur-0"
-								: "scale-100 opacity-0 blur-sm",
+								: "scale-100 opacity-0 blur-sm"
 						)}
 					>
 						<Check className="size-4" />

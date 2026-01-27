@@ -67,7 +67,7 @@ export class UrlEngine implements PrepopulationEngine {
 
 	static generatePreviewUrl(
 		baseUrl: string,
-		fieldMappings: Record<string, string>,
+		fieldMappings: Record<string, string>
 	): string {
 		const url = new URL(baseUrl);
 		Object.entries(fieldMappings).forEach(([param, value]) => {

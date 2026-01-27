@@ -50,14 +50,14 @@ export async function POST(request: NextRequest) {
 		if (!(formId && fieldId)) {
 			return NextResponse.json(
 				{ error: "Form ID and Field ID are required" },
-				{ status: 400 },
+				{ status: 400 }
 			);
 		}
 
 		if (!ALLOWED_MIME_TYPES.includes(file.type)) {
 			return NextResponse.json(
 				{ error: `File type '${file.type}' is not allowed` },
-				{ status: 400 },
+				{ status: 400 }
 			);
 		}
 
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
 				{
 					error: `File size (${(file.size / 1024 / 1024).toFixed(1)}MB) exceeds limit (50MB)`,
 				},
-				{ status: 400 },
+				{ status: 400 }
 			);
 		}
 
@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
 			file,
 			formId,
 			fieldId,
-			submissionId || undefined,
+			submissionId || undefined
 		);
 
 		return NextResponse.json({
@@ -99,7 +99,7 @@ export async function POST(request: NextRequest) {
 	} catch (error) {
 		return NextResponse.json(
 			{ error: error instanceof Error ? error.message : "Upload failed" },
-			{ status: 500 },
+			{ status: 500 }
 		);
 	}
 }
@@ -112,7 +112,7 @@ export async function DELETE(request: NextRequest) {
 		if (!filePath) {
 			return NextResponse.json(
 				{ error: "File path is required" },
-				{ status: 400 },
+				{ status: 400 }
 			);
 		}
 

@@ -26,7 +26,6 @@ export const FormProgress: React.FC<FormProgressProps> = ({
 		<div className="flex flex-col gap-2">
 			<Progress
 				className="h-2 w-full"
-				value={progress}
 				indicatorStyle={
 					buttonStyles.backgroundColor
 						? {
@@ -34,6 +33,7 @@ export const FormProgress: React.FC<FormProgressProps> = ({
 							}
 						: undefined
 				}
+				value={progress}
 			/>
 		</div>
 	);

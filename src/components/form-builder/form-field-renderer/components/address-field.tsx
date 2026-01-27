@@ -44,7 +44,7 @@ export function AddressField(props: BaseFieldProps) {
 		};
 
 	const handleAddressInputKeyDown = (
-		e: React.KeyboardEvent<HTMLInputElement>,
+		e: React.KeyboardEvent<HTMLInputElement>
 	) => {
 		if (e.key === "Escape") {
 			e.currentTarget.blur();
@@ -70,7 +70,7 @@ export function AddressField(props: BaseFieldProps) {
 				value: fieldValue,
 				"aria-invalid": !!error || undefined,
 			},
-			builderMode,
+			builderMode
 		);
 
 		return (

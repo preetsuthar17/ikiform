@@ -35,22 +35,22 @@ export const FormsSearch = memo(function FormsSearch({
 }: FormsSearchProps) {
 	const hasActiveFilters = useMemo(
 		() => searchQuery || statusFilter !== "all" || sortBy !== "updated",
-		[searchQuery, statusFilter, sortBy],
+		[searchQuery, statusFilter, sortBy]
 	);
 
 	const activeFilterCount = useMemo(
 		() =>
 			[searchQuery, statusFilter !== "all", sortBy !== "updated"].filter(
-				Boolean,
+				Boolean
 			).length,
-		[searchQuery, statusFilter, sortBy],
+		[searchQuery, statusFilter, sortBy]
 	);
 
 	const handleSearchChange = useCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) => {
 			onSearchChange(e.target.value);
 		},
-		[onSearchChange],
+		[onSearchChange]
 	);
 
 	const handleClearSearch = useCallback(() => {
@@ -91,7 +91,7 @@ export const FormsSearch = memo(function FormsSearch({
 				<div className="relative flex-1">
 					<Search
 						aria-hidden="true"
-						className="-translate-y-1/2 absolute top-1/2 left-3 size-4 text-muted-foreground"
+						className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground"
 					/>
 					<Input
 						aria-label="Search forms"

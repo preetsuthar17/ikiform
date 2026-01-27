@@ -47,7 +47,7 @@ export const FormContent: React.FC<FormContentProps> = ({
 
 	const visibleFields = fieldVisibility
 		? currentBlock.fields.filter(
-				(field) => fieldVisibility[field.id]?.visible !== false,
+				(field) => fieldVisibility[field.id]?.visible !== false
 			)
 		: currentBlock.fields;
 

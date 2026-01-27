@@ -49,7 +49,7 @@ const initializeFormData = (blocks: FormBlock[]): Record<string, any> => {
 export const useFormState = (
 	formId: string,
 	schema: FormSchema,
-	blocks: FormBlock[],
+	blocks: FormBlock[]
 ): FormState &
 	FormActions & {
 		fieldVisibility: Record<string, { visible: boolean; disabled: boolean }>;
@@ -108,7 +108,7 @@ export const useFormState = (
 		});
 
 		const newFieldIds = [...allFieldIds].filter(
-			(id) => !initializedFieldsRef.current.has(id),
+			(id) => !initializedFieldsRef.current.has(id)
 		);
 
 		if (newFieldIds.length > 0) {
@@ -141,7 +141,7 @@ export const useFormState = (
 						(updatedFormData[fieldId] === "" ||
 							updatedFormData[fieldId] ===
 								getDefaultValueForField(
-									allFields.find((f) => f.id === fieldId)!,
+									allFields.find((f) => f.id === fieldId)!
 								))
 					) {
 						updatedFormData[fieldId] = value;
@@ -182,7 +182,7 @@ export const useFormState = (
 								value !== null &&
 								value !== undefined
 							);
-						},
+						}
 					);
 
 					if (!hasUserInput) {
@@ -207,7 +207,7 @@ export const useFormState = (
 					value !== "" &&
 					value !== null &&
 					value !== undefined &&
-					!(Array.isArray(value) && value.length === 0),
+					!(Array.isArray(value) && value.length === 0)
 			).length;
 
 			if (filledFields > 0) {
@@ -281,7 +281,7 @@ export const useFormState = (
 			currentStep,
 			blocks,
 			formData,
-			fieldVisibility,
+			fieldVisibility
 		);
 
 		if (!isValid) {
@@ -313,7 +313,7 @@ export const useFormState = (
 				stepIndex,
 				blocks,
 				formData,
-				fieldVisibility,
+				fieldVisibility
 			);
 
 			if (!isValid) {
@@ -343,16 +343,14 @@ export const useFormState = (
 						window.location.href = schema.settings.redirectUrl!;
 					}, 2000);
 				}
+			} else if (result.error === "Duplicate submission detected") {
+				setDuplicateError({
+					message: result.message || "You have already submitted this form.",
+					timeRemaining: result.timeRemaining,
+					attemptsRemaining: result.attemptsRemaining,
+				});
 			} else {
-				if (result.error === "Duplicate submission detected") {
-					setDuplicateError({
-						message: result.message || "You have already submitted this form.",
-						timeRemaining: result.timeRemaining,
-						attemptsRemaining: result.attemptsRemaining,
-					});
-				} else {
-					toast.error(result.message || "Failed to submit form");
-				}
+				toast.error(result.message || "Failed to submit form");
 			}
 		} catch (error: any) {
 			if (error?.error === "Duplicate submission detected") {

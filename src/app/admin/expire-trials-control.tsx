@@ -1,14 +1,14 @@
 "use client";
 
-import * as React from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { type ExpireTrialsResult, expireTrialsAction } from "./actions";
 
 export function ExpireTrialsControl() {
-	const [isRunning, setIsRunning] = React.useState(false);
-	const [result, setResult] = React.useState<ExpireTrialsResult | null>(null);
+	const [isRunning, setIsRunning] = useState(false);
+	const [result, setResult] = useState<ExpireTrialsResult | null>(null);
 
 	const handleRun = async () => {
 		setIsRunning(true);
@@ -20,7 +20,7 @@ export function ExpireTrialsControl() {
 
 			if (res.ok) {
 				toast.success(
-					`Successfully updated ${res.updatedCount} user(s) from trial to free`,
+					`Successfully updated ${res.updatedCount} user(s) from trial to free`
 				);
 			} else {
 				toast.error(`Failed: ${res.error}`);
@@ -65,7 +65,7 @@ export function ExpireTrialsControl() {
 					<CardContent>
 						<div className="flex flex-col gap-2">
 							<div className="rounded-md bg-muted p-4">
-								<pre className="text-muted-foreground overflow-auto text-xs">
+								<pre className="overflow-auto text-muted-foreground text-xs">
 									{result.logs.join("\n")}
 								</pre>
 							</div>
@@ -73,7 +73,7 @@ export function ExpireTrialsControl() {
 								<div className="mt-4">
 									<p className="mb-2 font-medium">Updated Users:</p>
 									<div className="rounded-md bg-muted p-4">
-										<pre className="text-muted-foreground overflow-auto text-xs">
+										<pre className="overflow-auto text-muted-foreground text-xs">
 											{JSON.stringify(result.updatedUsers, null, 2)}
 										</pre>
 									</div>

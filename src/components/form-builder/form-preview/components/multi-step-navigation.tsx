@@ -138,7 +138,7 @@ export function MultiStepNavigation({
 												<TooltipTrigger asChild>
 													<Button
 														aria-label="Delete step"
-														className="-top-1.5 -right-1.5 absolute flex size-4 items-center justify-center rounded-full bg-destructive/80 text-white opacity-100 transition-opacity hover:bg-destructive/100 md:opacity-0 md:group-hover:opacity-100"
+														className="absolute -top-1.5 -right-1.5 flex size-4 items-center justify-center rounded-full bg-destructive/80 text-white opacity-100 transition-opacity hover:bg-destructive/100 md:opacity-0 md:group-hover:opacity-100"
 														onClick={(e) => handleDeleteStep(index, e)}
 														size="icon"
 														tabIndex={0}

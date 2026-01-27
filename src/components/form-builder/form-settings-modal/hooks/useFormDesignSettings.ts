@@ -9,7 +9,7 @@ import type { LocalSettings } from "../types";
 
 export function useFormDesignSettings(
 	localSettings: LocalSettings,
-	formId?: string,
+	formId?: string
 ) {
 	useEffect(() => {
 		const fontFamily = localSettings.typography?.fontFamily;
@@ -68,7 +68,7 @@ export function useColorValidation() {
 			if (isValidCssColor(color)) return color;
 			return "#000000";
 		},
-		[isValidHexColor, isValidCssColor],
+		[isValidHexColor, isValidCssColor]
 	);
 
 	return {

@@ -276,13 +276,13 @@ export const FIELD_TYPE_CONFIGS: FieldTypeConfig[] = [
 ];
 
 export function getFieldTypeConfig(
-	type: FormField["type"],
+	type: FormField["type"]
 ): FieldTypeConfig | undefined {
 	return FIELD_TYPE_CONFIGS.find((config) => config.type === type);
 }
 
 export function getFieldTypesByCategory(
-	category: FieldTypeConfig["category"],
+	category: FieldTypeConfig["category"]
 ): FieldTypeConfig[] {
 	return FIELD_TYPE_CONFIGS.filter((config) => config.category === category);
 }

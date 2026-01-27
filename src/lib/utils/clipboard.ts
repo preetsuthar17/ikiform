@@ -7,7 +7,7 @@ interface ClipboardOptions {
 
 export async function copyToClipboard(
 	text: string,
-	options: ClipboardOptions = {},
+	options: ClipboardOptions = {}
 ): Promise<boolean> {
 	const {
 		showSuccessToast = false,
@@ -44,7 +44,7 @@ export async function copyToClipboard(
 		} catch (error) {
 			console.warn(
 				"Clipboard API failed, falling back to manual method:",
-				error,
+				error
 			);
 			return fallbackCopyToClipboard(text, options);
 		}
@@ -55,7 +55,7 @@ export async function copyToClipboard(
 
 function fallbackCopyToClipboard(
 	text: string,
-	options: ClipboardOptions = {},
+	options: ClipboardOptions = {}
 ): boolean {
 	const {
 		showSuccessToast = false,
@@ -114,7 +114,7 @@ export function isClipboardSupported(): boolean {
 export async function copyWithToast(
 	text: string,
 	successMessage?: string,
-	errorMessage?: string,
+	errorMessage?: string
 ): Promise<boolean> {
 	return copyToClipboard(text, {
 		showSuccessToast: true,

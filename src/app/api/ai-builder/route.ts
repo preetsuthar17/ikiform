@@ -8,7 +8,6 @@ import { requirePremium } from "@/lib/utils/premium-check";
 import {
 	detectPromptInjection,
 	filterSystemMessages,
-	sanitizeForPromptInjection,
 } from "@/lib/utils/prompt-injection";
 import { sanitizeString } from "@/lib/utils/sanitize";
 import { createClient } from "@/utils/supabase/server";
@@ -53,7 +52,7 @@ function validateAndSanitizeMessages(messages: AiMessage[]): AiMessage[] {
 
 		if (detectPromptInjection(sanitized)) {
 			throw new Error(
-				"Invalid input detected. Please rephrase your request without using system instructions or prompt manipulation.",
+				"Invalid input detected. Please rephrase your request without using system instructions or prompt manipulation."
 			);
 		}
 
@@ -71,7 +70,7 @@ const AiBuilderRateLimit: RateLimitSettings = {
 };
 
 async function authenticateAndCheckPremium(
-	req: NextRequest,
+	req: NextRequest
 ): Promise<{ user: any } | { error: Response }> {
 	const supabase = await createClient();
 	const {
@@ -122,7 +121,7 @@ async function parseAndSanitizeRequest(req: NextRequest): Promise<
 		return {
 			error: createErrorResponse(
 				error instanceof Error ? error.message : "Invalid request format",
-				400,
+				400
 			),
 		};
 	}
@@ -134,7 +133,7 @@ async function saveMessageAsync(
 	sessionId: string,
 	role: "user" | "assistant" | "system",
 	content: string,
-	metadata: any,
+	metadata: any
 ) {
 	try {
 		await formsDbServer.saveAIBuilderMessage(
@@ -142,7 +141,7 @@ async function saveMessageAsync(
 			sessionId,
 			role,
 			content,
-			metadata,
+			metadata
 		);
 	} catch (error) {
 		console.error(`Error saving ${role} message:`, error);
@@ -300,7 +299,7 @@ export async function POST(req: NextRequest): Promise<Response> {
 			{
 				status: 429,
 				headers: { "Retry-After": retryAfter.toString() },
-			},
+			}
 		);
 	}
 
@@ -359,6 +358,6 @@ export async function GET(): Promise<Response> {
 		{
 			status: 200,
 			headers: { "Content-Type": "application/json" },
-		},
+		}
 	);
 }

@@ -8,7 +8,7 @@ import type { LoadingSkeletonProps } from "../types";
 export function LoadingSkeleton({ className }: LoadingSkeletonProps) {
 	const containerClassName = useMemo(
 		() => `flex flex-col gap-8 ${className || ""}`,
-		[className],
+		[className]
 	);
 
 	const skeletonCards = useMemo(
@@ -50,7 +50,7 @@ export function LoadingSkeleton({ className }: LoadingSkeletonProps) {
 					</Skeleton>
 				);
 			}),
-		[],
+		[]
 	);
 
 	return (

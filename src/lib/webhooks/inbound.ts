@@ -21,7 +21,7 @@ export interface InboundWebhookMapping {
 }
 
 function mapInboundMappingRow(
-	row: InboundWebhookMappingRow,
+	row: InboundWebhookMappingRow
 ): InboundWebhookMapping {
 	const { created_at, updated_at, target_form_id, mapping_rules, ...rest } =
 		row;
@@ -35,7 +35,7 @@ function mapInboundMappingRow(
 }
 
 export async function createInboundMapping(
-	data: Partial<InboundWebhookMapping>,
+	data: Partial<InboundWebhookMapping>
 ): Promise<InboundWebhookMapping> {
 	const supabase = createAdminClient() as SupabaseClient<Database>;
 	const now = new Date().toISOString();
@@ -80,7 +80,7 @@ export async function getInboundMappings({
 
 export async function updateInboundMapping(
 	id: string,
-	data: Partial<InboundWebhookMapping>,
+	data: Partial<InboundWebhookMapping>
 ): Promise<InboundWebhookMapping> {
 	const supabase = createAdminClient() as SupabaseClient<Database>;
 	const now = new Date().toISOString();

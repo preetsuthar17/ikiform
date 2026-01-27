@@ -40,7 +40,9 @@ export default function EmailHeader() {
 								</Link>
 								<Link href="https://ikiform.com/discord" style={iconLinkStyle}>
 									<svg
+										aria-label="Discord"
 										height="20"
+										role="img"
 										viewBox="0 0 24 24"
 										width="20"
 										xmlns="http://www.w3.org/2000/svg"

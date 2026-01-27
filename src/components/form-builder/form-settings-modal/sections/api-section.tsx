@@ -46,7 +46,7 @@ export function ApiSection({
 	const [isRevoking, setIsRevoking] = useState(false);
 	const [showCodeGenerator, setShowCodeGenerator] = useState(false);
 	const [draftEnabled, setDraftEnabled] = useState<boolean>(
-		!!localSettings.api?.enabled,
+		!!localSettings.api?.enabled
 	);
 	const [saving, setSaving] = useState(false);
 	const [saved, setSaved] = useState(false);
@@ -320,7 +320,7 @@ print_r($result);
 	useEffect(() => {
 		if (sectionRef.current) {
 			const firstInteractive = sectionRef.current.querySelector(
-				"input, textarea, select, button, [tabindex]:not([tabindex='-1'])",
+				"input, textarea, select, button, [tabindex]:not([tabindex='-1'])"
 			) as HTMLElement | null;
 			firstInteractive?.focus();
 		}
@@ -509,7 +509,7 @@ print_r($result);
 																onClick={() => {
 																	navigator.clipboard.writeText(code);
 																	toast.success(
-																		`${language} code copied to clipboard`,
+																		`${language} code copied to clipboard`
 																	);
 																}}
 																size="sm"
@@ -533,7 +533,7 @@ print_r($result);
 														<ScrollArea className="h-48">
 															<div className="p-4 font-mono">
 																<pre className="font-mono text-sm">
-																	<code className="whitespace-pre-wrap wrap-break-word">
+																	<code className="wrap-break-word whitespace-pre-wrap">
 																		{code}
 																	</code>
 																</pre>
@@ -541,7 +541,7 @@ print_r($result);
 														</ScrollArea>
 													</div>
 												</div>
-											),
+											)
 										)}
 									</div>
 								)}

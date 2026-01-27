@@ -79,15 +79,15 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
 				console.error("Failed to sign out:", error);
 			}
 		},
-		[signOut],
+		[signOut]
 	);
 
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button
-					aria-label="Open user menu"
 					aria-expanded={false}
+					aria-label="Open user menu"
 					className="inline-flex items-center gap-2 rounded-full focus-visible:ring-[3px] focus-visible:ring-ring/50"
 					size="icon"
 					variant="outline"
@@ -163,7 +163,7 @@ interface DesktopActionsProps {
 
 const DesktopActionsSkeleton = React.memo(function DesktopActionsSkeleton() {
 	return (
-		<div className="hidden items-center gap-2 md:flex" aria-label="Loading">
+		<div aria-label="Loading" className="hidden items-center gap-2 md:flex">
 			<Skeleton className="h-9 w-26" />
 			<Skeleton className="size-9 rounded-full" />
 		</div>
@@ -219,12 +219,12 @@ const DrawerLinks = React.memo(function DrawerLinks({
 		<nav aria-label="Navigation links" className="flex w-full flex-col">
 			{links.map(({ href, label }) => (
 				<Link
-					key={href}
-					href={href}
 					className="flex min-h-[44px] items-center justify-between rounded-lg px-3 opacity-70 transition-all duration-200 hover:bg-accent hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:scale-[0.98]"
+					href={href}
+					key={href}
 				>
 					<span>{label}</span>
-					<ChevronRight className="size-4 opacity-70" aria-hidden="true" />
+					<ChevronRight aria-hidden="true" className="size-4 opacity-70" />
 				</Link>
 			))}
 		</nav>
@@ -257,7 +257,7 @@ const DrawerProfileSection = React.memo(function DrawerProfileSection({
 	const email = user.email ?? "";
 
 	return (
-		<section className="flex flex-col gap-3" aria-label="User profile">
+		<section aria-label="User profile" className="flex flex-col gap-3">
 			<div className="flex items-center justify-start gap-3">
 				<Avatar className="size-9">
 					<AvatarImage
@@ -275,14 +275,14 @@ const DrawerProfileSection = React.memo(function DrawerProfileSection({
 			</div>
 			<div className="grid gap-1">
 				<Link
-					href="/dashboard"
 					className="flex min-h-[44px] items-center rounded-lg px-3 opacity-70 transition-all duration-200 hover:bg-accent hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:scale-[0.98]"
+					href="/dashboard"
 				>
 					<span>Dashboard</span>
 				</Link>
 				<Link
-					href="/feedback"
 					className="flex min-h-[44px] items-center rounded-lg px-3 opacity-70 transition-all duration-200 hover:bg-accent hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:scale-[0.98]"
+					href="/feedback"
 				>
 					<span>Feedback</span>
 				</Link>
@@ -308,7 +308,7 @@ const MobileDrawerButtonSkeleton = React.memo(
 				className="h-11 w-full animate-pulse rounded-lg bg-muted"
 			/>
 		);
-	},
+	}
 );
 
 MobileDrawerButtonSkeleton.displayName = "MobileDrawerButtonSkeleton";
@@ -324,17 +324,17 @@ const MobileDrawer = React.memo(function MobileDrawer({
 			<Drawer>
 				<DrawerTrigger asChild>
 					<Button
-						aria-label="Open navigation menu"
 						aria-expanded={false}
+						aria-label="Open navigation menu"
 						className="min-h-[44px] min-w-[44px] touch-manipulation"
 						size="icon"
 						variant="ghost"
 					>
 						<VisuallyHidden>Open menu</VisuallyHidden>
-						<AlignJustify className="size-6" aria-hidden="true" />
+						<AlignJustify aria-hidden="true" className="size-6" />
 					</Button>
 				</DrawerTrigger>
-				<DrawerContent className="flex flex-col gap-6 p-6 pb-10 pt-0 overscroll-contain">
+				<DrawerContent className="flex flex-col gap-6 overscroll-contain p-6 pt-0 pb-10">
 					<VisuallyHidden>
 						<DrawerTitle>Navigation Menu</DrawerTitle>
 					</VisuallyHidden>
@@ -351,14 +351,14 @@ const MobileDrawer = React.memo(function MobileDrawer({
 							) : user ? (
 								<Button
 									asChild
-									className="min-h-[44px] w-full rounded-lg text-base font-medium touch-manipulation"
+									className="min-h-[44px] w-full touch-manipulation rounded-lg font-medium text-base"
 								>
 									<Link href="/dashboard">Dashboard</Link>
 								</Button>
 							) : (
 								<Button
 									asChild
-									className="min-h-[44px] w-full rounded-lg text-base font-medium touch-manipulation"
+									className="min-h-[44px] w-full touch-manipulation rounded-lg font-medium text-base"
 								>
 									<Link href="/login">Login</Link>
 								</Button>
@@ -371,16 +371,16 @@ const MobileDrawer = React.memo(function MobileDrawer({
 						<Separator />
 
 						<Button
-							type="button"
-							variant={"secondary"}
-							onClick={signOut}
+							aria-label="Sign out"
 							className={cn(
-								"flex items-center min-h-[44px] px-3 text-left transition-all",
+								"flex min-h-[44px] items-center px-3 text-left transition-all",
 								"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-2",
 								"bg-destructive/10 text-destructive hover:bg-destructive hover:text-white",
-								"active:scale-[0.98]",
+								"active:scale-[0.98]"
 							)}
-							aria-label="Sign out"
+							onClick={signOut}
+							type="button"
+							variant={"secondary"}
 						>
 							<span className="font-medium">Log Out</span>
 						</Button>
@@ -409,10 +409,10 @@ const PrimaryNavLinks = React.memo(function PrimaryNavLinks() {
 						: pathname?.startsWith(href.replace(/#.*/, ""));
 				return (
 					<Link
-						key={href}
-						href={href}
 						aria-current={isCurrent ? "page" : undefined}
 						className="min-h-[32px] min-w-[32px] rounded-full px-4 py-1.5 text-sm opacity-70 transition-all duration-200 hover:bg-accent hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:scale-[0.98]"
+						href={href}
+						key={href}
 					>
 						{label}
 					</Link>

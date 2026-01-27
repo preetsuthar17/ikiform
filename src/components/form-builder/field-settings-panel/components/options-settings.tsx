@@ -15,7 +15,7 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
 	const { updateField } = createFieldUpdater(field, onFieldUpdate);
 	const { addOption, updateOption, removeOption } = createOptionHandlers(
 		field,
-		updateField,
+		updateField
 	);
 
 	const {
@@ -95,7 +95,7 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
 									</Button>
 								</div>
 							);
-						},
+						}
 					)}
 					{(field.options || []).length === 0 && (
 						<p

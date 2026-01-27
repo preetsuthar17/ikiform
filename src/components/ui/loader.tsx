@@ -20,7 +20,7 @@ export function Loader({ className, size = "md", ...props }: SpinnerProps) {
 			className={cn(
 				"relative inline-block text-foreground",
 				wrapperSize,
-				className,
+				className
 			)}
 			role="status"
 			{...props}

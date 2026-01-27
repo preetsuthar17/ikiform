@@ -40,7 +40,7 @@ export interface FormBuilderActions {
 	setIsNewForm: (isNew: boolean) => void;
 	setFormSlug: (slug: string | null) => void;
 	setFormSchema: (
-		schema: FormSchema | ((prev: FormSchema) => FormSchema),
+		schema: FormSchema | ((prev: FormSchema) => FormSchema)
 	) => void;
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,11 +10,13 @@ import { Toaster } from "@/components/ui/toast";
 import { sendAnnouncementAction } from "./actions";
 
 export function ClientAnnouncementForm() {
-	const [isSubmitting, setIsSubmitting] = React.useState(false);
-	const toRef = React.useRef<HTMLTextAreaElement | null>(null);
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const toRef = useRef<HTMLTextAreaElement | null>(null);
 
 	const handlePrefill = async () => {
-		if (!toRef.current) return;
+		if (!toRef.current) {
+			return;
+		}
 		setIsSubmitting(true);
 		const res = await fetch("/api/users/emails", { cache: "no-store" });
 		setIsSubmitting(false);

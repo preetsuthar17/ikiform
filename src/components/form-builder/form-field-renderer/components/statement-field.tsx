@@ -12,7 +12,7 @@ export function StatementField({ field }: BaseFieldProps) {
 		cn(
 			"flex flex-col gap-2",
 			getAlignment() === "center" && "items-center",
-			getAlignment() === "right" && "items-end",
+			getAlignment() === "right" && "items-end"
 		);
 
 	const getHeadingClassName = () =>
@@ -22,7 +22,7 @@ export function StatementField({ field }: BaseFieldProps) {
 				? "text-2xl"
 				: getSizeVariant() === "sm"
 					? "text-base"
-					: "text-xl",
+					: "text-xl"
 		);
 
 	const getDescriptionClassName = () =>

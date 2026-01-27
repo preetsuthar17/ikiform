@@ -50,7 +50,7 @@ const initialState: AiBuilderState = {
 
 function aiBuilderReducer(
 	state: AiBuilderState,
-	action: AiBuilderAction,
+	action: AiBuilderAction
 ): AiBuilderState {
 	switch (action.type) {
 		case "SET_SESSION_ID":
@@ -144,7 +144,7 @@ export const useAIBuilder = (initialPrompt?: string) => {
 				(content: string) =>
 					dispatch({ type: "SET_STREAMED_CONTENT", payload: content }),
 				(error: string) =>
-					dispatch({ type: "SET_STREAM_ERROR", payload: error }),
+					dispatch({ type: "SET_STREAM_ERROR", payload: error })
 			);
 
 			dispatch({ type: "SET_STREAMING", payload: false });
@@ -186,7 +186,7 @@ export const useAIBuilder = (initialPrompt?: string) => {
 				});
 			}
 		},
-		[state.sessionId, state.forms],
+		[state.sessionId, state.forms]
 	);
 
 	const autoSendPrompt = useCallback(
@@ -197,7 +197,7 @@ export const useAIBuilder = (initialPrompt?: string) => {
 			dispatch({ type: "ADD_MESSAGE", payload: newMessage });
 			await processAiResponse(promptText, [...state.messages, newMessage]);
 		},
-		[state.messages, processAiResponse],
+		[state.messages, processAiResponse]
 	);
 
 	const handleSend = useCallback(
@@ -212,7 +212,7 @@ export const useAIBuilder = (initialPrompt?: string) => {
 			dispatch({ type: "ADD_MESSAGE", payload: newMessage });
 			await processAiResponse(currentInput, [...state.messages, newMessage]);
 		},
-		[state.input, state.messages, processAiResponse],
+		[state.input, state.messages, processAiResponse]
 	);
 
 	const handleUseForm = useCallback(() => {
@@ -220,7 +220,7 @@ export const useAIBuilder = (initialPrompt?: string) => {
 		if (activeForm?.schema) {
 			localStorage.setItem(
 				"importedFormSchema",
-				JSON.stringify(activeForm.schema),
+				JSON.stringify(activeForm.schema)
 			);
 			router.push("/form-builder");
 		}
@@ -228,7 +228,7 @@ export const useAIBuilder = (initialPrompt?: string) => {
 
 	const activeForm = useMemo(
 		() => state.forms.find((f) => f.id === state.activeFormId),
-		[state.forms, state.activeFormId],
+		[state.forms, state.activeFormId]
 	);
 
 	const actions = useMemo(
@@ -244,7 +244,7 @@ export const useAIBuilder = (initialPrompt?: string) => {
 			setShowJsonModal: (show: boolean) =>
 				dispatch({ type: "SET_SHOW_JSON_MODAL", payload: show }),
 		}),
-		[],
+		[]
 	);
 
 	return {

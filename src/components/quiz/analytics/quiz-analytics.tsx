@@ -163,7 +163,7 @@ export function QuizAnalytics({
 											<span className="font-medium text-green-600">
 												{Math.round(
 													(questionStat.correctRate / 100) *
-														questionStat.totalAnswers,
+														questionStat.totalAnswers
 												)}{" "}
 												correct
 											</span>
@@ -171,7 +171,7 @@ export function QuizAnalytics({
 												{questionStat.totalAnswers -
 													Math.round(
 														(questionStat.correctRate / 100) *
-															questionStat.totalAnswers,
+															questionStat.totalAnswers
 													)}{" "}
 												incorrect
 											</span>

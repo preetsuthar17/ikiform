@@ -11,7 +11,7 @@ export async function GET() {
 		if (error) {
 			return NextResponse.json(
 				{ count: null, error: error.message },
-				{ status: 500 },
+				{ status: 500 }
 			);
 		}
 

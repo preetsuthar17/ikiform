@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
 		if (!formId) {
 			return NextResponse.json(
 				{ error: "Form ID is required" },
-				{ status: 400 },
+				{ status: 400 }
 			);
 		}
 
@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
 			console.error("Error fetching form:", formError);
 			return NextResponse.json(
 				{ error: "Failed to fetch form" },
-				{ status: 500 },
+				{ status: 500 }
 			);
 		}
 
@@ -50,7 +50,7 @@ export async function GET(request: NextRequest) {
 			console.error("Error fetching form submissions:", submissionsError);
 			return NextResponse.json(
 				{ error: "Failed to fetch form submissions" },
-				{ status: 500 },
+				{ status: 500 }
 			);
 		}
 
@@ -62,7 +62,7 @@ export async function GET(request: NextRequest) {
 		console.error("Admin form submissions API error:", error);
 		return NextResponse.json(
 			{ error: "Internal server error" },
-			{ status: 500 },
+			{ status: 500 }
 		);
 	}
 }

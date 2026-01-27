@@ -14,7 +14,7 @@ export function Spinner({ className, size = "md", ...props }: SpinnerProps) {
 				size === "sm" && "size-3",
 				size === "md" && "size-4",
 				size === "lg" && "size-6",
-				className,
+				className
 			)}
 			{...props}
 		>

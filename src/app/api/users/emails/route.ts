@@ -19,7 +19,7 @@ export async function GET() {
 		if (error) {
 			return NextResponse.json(
 				{ emails: [], error: error.message },
-				{ status: 500 },
+				{ status: 500 }
 			);
 		}
 		const emails = (data || [])
@@ -31,7 +31,7 @@ export async function GET() {
 				"cache-control": "no-store",
 			},
 		});
-	} catch (e) {
+	} catch (_e) {
 		return NextResponse.json({ emails: [] }, { status: 500 });
 	}
 }

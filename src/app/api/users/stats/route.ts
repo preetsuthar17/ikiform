@@ -15,9 +15,22 @@ export async function GET() {
 		]);
 
 		if (countResult.error) {
+			console.error("[USERS_STATS] Count error:", countResult.error);
 			return NextResponse.json(
 				{ count: null, users: [], error: countResult.error.message },
-				{ status: 500 },
+				{ status: 500 }
+			);
+		}
+
+		if (usersResult.error) {
+			console.error("[USERS_STATS] Users error:", usersResult.error);
+			return NextResponse.json(
+				{
+					count: countResult.count ?? 0,
+					users: [],
+					error: usersResult.error.message,
+				},
+				{ status: 500 }
 			);
 		}
 
@@ -33,9 +46,10 @@ export async function GET() {
 					"content-type": "application/json",
 					"cache-control": "s-maxage=300, stale-while-revalidate=600",
 				},
-			},
+			}
 		);
-	} catch {
+	} catch (error) {
+		console.error("[USERS_STATS]", error);
 		return NextResponse.json({ count: null, users: [] }, { status: 500 });
 	}
 }

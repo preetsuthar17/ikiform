@@ -48,7 +48,7 @@ export const SuccessScreen: React.FC<SuccessScreenProps> = ({ schema }) => (
 			</Card>
 			{Boolean(
 				schema.settings.branding &&
-					(schema.settings.branding as any).showIkiformBranding !== false,
+					(schema.settings.branding as any).showIkiformBranding !== false
 			) && (
 				<p className="text-center text-muted-foreground text-sm">
 					Powered by{" "}

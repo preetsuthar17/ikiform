@@ -115,12 +115,12 @@ export function FormsManagement({ className }: FormsManagementProps) {
 		(open: boolean) => {
 			setDeleteModal((prev) => ({ ...prev, open }));
 		},
-		[setDeleteModal],
+		[setDeleteModal]
 	);
 
 	const containerClassName = useMemo(
 		() => `flex flex-col gap-8 ${className || ""}`,
-		[className],
+		[className]
 	);
 
 	if (loading) {

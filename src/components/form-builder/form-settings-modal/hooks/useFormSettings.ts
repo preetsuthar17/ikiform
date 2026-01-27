@@ -166,7 +166,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
 	};
 
 	const updateRateLimit = (
-		rateLimitUpdates: Partial<NonNullable<LocalSettings["rateLimit"]>>,
+		rateLimitUpdates: Partial<NonNullable<LocalSettings["rateLimit"]>>
 	) => {
 		setLocalSettings({
 			...localSettings,
@@ -180,7 +180,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
 	const updateDuplicatePrevention = (
 		duplicatePreventionUpdates: Partial<
 			NonNullable<LocalSettings["duplicatePrevention"]>
-		>,
+		>
 	) => {
 		setLocalSettings({
 			...localSettings,
@@ -194,7 +194,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
 	const updateProfanityFilter = (
 		profanityFilterUpdates: Partial<
 			NonNullable<LocalSettings["profanityFilter"]>
-		>,
+		>
 	) => {
 		setLocalSettings({
 			...localSettings,
@@ -206,7 +206,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
 	};
 
 	const updateBotProtection = (
-		botProtectionUpdates: Partial<NonNullable<LocalSettings["botProtection"]>>,
+		botProtectionUpdates: Partial<NonNullable<LocalSettings["botProtection"]>>
 	) => {
 		setLocalSettings({
 			...localSettings,
@@ -218,7 +218,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
 	};
 
 	const updateResponseLimit = (
-		responseLimitUpdates: Partial<NonNullable<LocalSettings["responseLimit"]>>,
+		responseLimitUpdates: Partial<NonNullable<LocalSettings["responseLimit"]>>
 	) => {
 		setLocalSettings({
 			...localSettings,
@@ -232,7 +232,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
 	const updatePasswordProtection = (
 		passwordProtectionUpdates: Partial<
 			NonNullable<LocalSettings["passwordProtection"]>
-		>,
+		>
 	) => {
 		setLocalSettings({
 			...localSettings,
@@ -246,7 +246,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
 	const updateSocialMedia = (
 		socialMediaUpdates: Partial<
 			NonNullable<NonNullable<LocalSettings["branding"]>["socialMedia"]>
-		>,
+		>
 	) => {
 		setLocalSettings({
 			...localSettings,
@@ -261,7 +261,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
 	};
 
 	const updateNotifications = (
-		notificationUpdates: Partial<LocalSettings["notifications"]>,
+		notificationUpdates: Partial<LocalSettings["notifications"]>
 	) => {
 		setLocalSettings({
 			...localSettings,
@@ -273,7 +273,7 @@ export function useFormSettings(schema: FormSchema, userEmail?: string) {
 	};
 
 	const updateApi = (
-		apiUpdates: Partial<NonNullable<LocalSettings["api"]>>,
+		apiUpdates: Partial<NonNullable<LocalSettings["api"]>>
 	) => {
 		setLocalSettings({
 			...localSettings,

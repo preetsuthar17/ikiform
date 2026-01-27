@@ -142,7 +142,7 @@ export function QuizField({
 		if (!correctAnswer) return "";
 
 		const correctOption = getQuizOptions().find(
-			(opt) => (typeof opt === "string" ? opt : opt.value) === correctAnswer,
+			(opt) => (typeof opt === "string" ? opt : opt.value) === correctAnswer
 		);
 
 		if (!correctOption) return correctAnswer;

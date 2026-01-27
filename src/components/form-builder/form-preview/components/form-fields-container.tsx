@@ -90,14 +90,14 @@ export function FormFieldsContainer({
 							key={fieldType.type}
 							onClick={() =>
 								onAddField?.(
-									fieldType.type as (typeof FIELD_TYPES)[number]["type"],
+									fieldType.type as (typeof FIELD_TYPES)[number]["type"]
 								)
 							}
 							onKeyDown={(e) => {
 								if (e.key === "Enter" || e.key === " ") {
 									e.preventDefault();
 									onAddField?.(
-										fieldType.type as (typeof FIELD_TYPES)[number]["type"],
+										fieldType.type as (typeof FIELD_TYPES)[number]["type"]
 									);
 								}
 							}}
@@ -233,16 +233,14 @@ export function FormFieldsContainer({
 														}`}
 														onClick={() =>
 															onFieldSelect(
-																selectedFieldId === field.id ? null : field.id,
+																selectedFieldId === field.id ? null : field.id
 															)
 														}
 														onKeyDown={(e) => {
 															if (e.key === "Enter" || e.key === " ") {
 																e.preventDefault();
 																onFieldSelect(
-																	selectedFieldId === field.id
-																		? null
-																		: field.id,
+																	selectedFieldId === field.id ? null : field.id
 																);
 															}
 														}}

@@ -38,7 +38,7 @@ export const ChatPanel = memo(function ChatPanel({
 			setInput(text);
 			setShowSuggestions(false);
 		},
-		[setInput, setShowSuggestions],
+		[setInput, setShowSuggestions]
 	);
 
 	return (

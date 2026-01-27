@@ -78,7 +78,7 @@ export function RadioField(props: BaseFieldProps) {
 	const getAvailableOptions = () => apiOptions ?? field.options ?? [];
 
 	const getOptionValue = (
-		option: string | { value: string; label?: string },
+		option: string | { value: string; label?: string }
 	): string => {
 		if (typeof option === "string") return option;
 		if (option && typeof option === "object") return option.value || "";
@@ -86,7 +86,7 @@ export function RadioField(props: BaseFieldProps) {
 	};
 
 	const getOptionLabel = (
-		option: string | { value: string; label?: string },
+		option: string | { value: string; label?: string }
 	): string => {
 		if (typeof option === "string") return option;
 		if (option && typeof option === "object")
@@ -157,7 +157,7 @@ export function RadioField(props: BaseFieldProps) {
 									</Label>
 									{isFormBuilder && isCorrect && (
 										<div
-											className="-translate-y-1/2 absolute top-1/2 right-2"
+											className="absolute top-1/2 right-2 -translate-y-1/2"
 											title="Correct Answer"
 										>
 											<CheckCircle className="size-4 text-green-600" />

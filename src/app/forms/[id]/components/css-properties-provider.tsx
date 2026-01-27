@@ -44,7 +44,7 @@ export function CSSPropertiesProvider({
 		document.documentElement.style.setProperty("--radius", borderRadiusValue);
 		document.documentElement.style.setProperty(
 			"--card-radius",
-			cardRadiusValue,
+			cardRadiusValue
 		);
 
 		return () => {

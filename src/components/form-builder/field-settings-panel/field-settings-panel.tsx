@@ -27,7 +27,7 @@ export function FieldSettingsPanel({
 }: FieldSettingsPanelProps) {
 	const { updateField, updateValidation, updateSettings } = useFieldUpdates(
 		field,
-		onFieldUpdate,
+		onFieldUpdate
 	);
 
 	if (!field) {

@@ -35,7 +35,7 @@ export const Marquee = React.forwardRef<HTMLDivElement, MarqueeProps>(
 			"aria-label": ariaLabel,
 			...props
 		},
-		ref,
+		ref
 	) => {
 		const containerRef = React.useRef<HTMLDivElement>(null);
 		const [isClient, setIsClient] = React.useState(false);
@@ -137,7 +137,7 @@ export const Marquee = React.forwardRef<HTMLDivElement, MarqueeProps>(
 				className={cn(
 					"flex shrink-0",
 					vertical ? "flex-col" : "flex-row",
-					"[gap:var(--gap)]",
+					"[gap:var(--gap)]"
 				)}
 				key={i}
 				style={animationStyles}
@@ -155,7 +155,7 @@ export const Marquee = React.forwardRef<HTMLDivElement, MarqueeProps>(
 					vertical ? "flex-col" : "flex-row",
 					pauseOnHover && "hover:[&>*]:pause-animation",
 					"motion-reduce:hover:[&>*]:pause-animation",
-					className,
+					className
 				)}
 				ref={ref}
 				role="marquee"
@@ -169,7 +169,7 @@ export const Marquee = React.forwardRef<HTMLDivElement, MarqueeProps>(
 					className={cn(
 						"flex",
 						vertical ? "flex-col" : "flex-row",
-						"[gap:var(--gap)]",
+						"[gap:var(--gap)]"
 					)}
 					ref={containerRef}
 				>
@@ -177,7 +177,7 @@ export const Marquee = React.forwardRef<HTMLDivElement, MarqueeProps>(
 				</div>
 			</div>
 		);
-	},
+	}
 );
 
 Marquee.displayName = "Marquee";

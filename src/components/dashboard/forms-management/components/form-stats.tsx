@@ -26,7 +26,7 @@ export const FormStats = memo(function FormStats({
 					</div>
 				</Skeleton>
 			)),
-		[],
+		[]
 	);
 
 	const stats = useMemo(() => {

@@ -2,14 +2,15 @@
 
 import { sendFormNotification } from "@/lib/services/notifications";
 import { createAdminClient } from "@/utils/supabase/admin";
-import { createClient } from "@/utils/supabase/server";
+
+const EMAIL_SEPARATOR_REGEX = /[\n,]/;
 
 export type AnnouncementResult =
 	| { ok: true; sent: number }
 	| { ok: false; error: string };
 
 export async function sendAnnouncementAction(
-	formData: FormData,
+	formData: FormData
 ): Promise<AnnouncementResult> {
 	let toRaw = String(formData.get("to") || "").trim();
 	const subject = String(formData.get("subject") || "").trim();
@@ -29,7 +30,7 @@ export async function sendAnnouncementAction(
 		return { ok: false, error: "All fields are required" };
 	}
 	const recipients = toRaw
-		.split(/[\n,]/)
+		.split(EMAIL_SEPARATOR_REGEX)
 		.map((s) => s.trim())
 		.filter(Boolean);
 	try {
@@ -65,10 +66,10 @@ export async function expireTrialsAction(): Promise<ExpireTrialsResult> {
 		const thresholdISO = fourteenDaysAgo.toISOString();
 
 		logs.push(
-			`[${new Date().toISOString()}] Current time: ${now.toISOString()}`,
+			`[${new Date().toISOString()}] Current time: ${now.toISOString()}`
 		);
 		logs.push(
-			`[${new Date().toISOString()}] 14 days ago threshold: ${thresholdISO}`,
+			`[${new Date().toISOString()}] 14 days ago threshold: ${thresholdISO}`
 		);
 
 		const { data: debugUsers, error: debugError } = await supabase
@@ -79,12 +80,12 @@ export async function expireTrialsAction(): Promise<ExpireTrialsResult> {
 
 		if (debugError) {
 			logs.push(
-				`[${new Date().toISOString()}] Error fetching debug users: ${debugError.message}`,
+				`[${new Date().toISOString()}] Error fetching debug users: ${debugError.message}`
 			);
 		}
 
 		logs.push(
-			`[${new Date().toISOString()}] Found ${debugUsers?.length || 0} users with has_premium=true and has_free_trial=true`,
+			`[${new Date().toISOString()}] Found ${debugUsers?.length || 0} users with has_premium=true and has_free_trial=true`
 		);
 
 		if (debugUsers && debugUsers.length > 0) {
@@ -96,7 +97,7 @@ export async function expireTrialsAction(): Promise<ExpireTrialsResult> {
 			});
 
 			logs.push(
-				`[${new Date().toISOString()}] Users that should be expired (>= 14 days old): ${usersToExpire.length}`,
+				`[${new Date().toISOString()}] Users that should be expired (>= 14 days old): ${usersToExpire.length}`
 			);
 
 			if (usersToExpire.length > 0) {
@@ -107,12 +108,12 @@ export async function expireTrialsAction(): Promise<ExpireTrialsResult> {
 							created_at: u.created_at,
 							days_old: Math.floor(
 								(now.getTime() - new Date(u.created_at).getTime()) /
-									(1000 * 60 * 60 * 24),
+									(1000 * 60 * 60 * 24)
 							),
 						})),
 						null,
-						2,
-					)}`,
+						2
+					)}`
 				);
 			}
 		}
@@ -131,7 +132,7 @@ export async function expireTrialsAction(): Promise<ExpireTrialsResult> {
 
 		if (error) {
 			logs.push(
-				`[${new Date().toISOString()}] Error updating trial users: ${error.message}`,
+				`[${new Date().toISOString()}] Error updating trial users: ${error.message}`
 			);
 			return {
 				ok: false,
@@ -141,22 +142,22 @@ export async function expireTrialsAction(): Promise<ExpireTrialsResult> {
 		}
 
 		logs.push(
-			`[${new Date().toISOString()}] Updated ${data?.length || 0} users from trial to free`,
+			`[${new Date().toISOString()}] Updated ${data?.length || 0} users from trial to free`
 		);
 
 		if (data && data.length > 0) {
 			logs.push(
-				`[${new Date().toISOString()}] Updated users: ${JSON.stringify(data, null, 2)}`,
+				`[${new Date().toISOString()}] Updated users: ${JSON.stringify(data, null, 2)}`
 			);
 		} else if (debugUsers && debugUsers.length > 0) {
 			logs.push(
-				`[${new Date().toISOString()}] WARNING: Found ${debugUsers.length} users with trial flags but none were updated.`,
+				`[${new Date().toISOString()}] WARNING: Found ${debugUsers.length} users with trial flags but none were updated.`
 			);
 			logs.push(
 				`[${new Date().toISOString()}] Sample user created_at values: ${debugUsers
 					.slice(0, 5)
 					.map((u) => u.created_at)
-					.join(", ")}`,
+					.join(", ")}`
 			);
 		}
 

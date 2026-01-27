@@ -104,7 +104,7 @@ export type PrepopulationSource =
 export interface PrepopulationEngine {
 	getValue(
 		config: PrepopulationConfig,
-		context?: any,
+		context?: any
 	): Promise<PrepopulationResult>;
 	validateConfig(config: PrepopulationConfig): boolean;
 }

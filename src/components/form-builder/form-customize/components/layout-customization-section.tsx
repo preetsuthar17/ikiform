@@ -43,7 +43,7 @@ export function LayoutCustomizationSection({
 
 	const getWidthSliderValue = (width: string) => {
 		const index = FORM_WIDTH_OPTIONS.findIndex(
-			(option) => option.value === width,
+			(option) => option.value === width
 		);
 		return index >= 0 ? index : 1;
 	};
@@ -55,7 +55,7 @@ export function LayoutCustomizationSection({
 
 	const getPaddingSliderValue = (padding: string) => {
 		const index = FORM_PADDING_OPTIONS.findIndex(
-			(option) => option.value === padding,
+			(option) => option.value === padding
 		);
 		return index >= 0 ? index : 2;
 	};
@@ -67,7 +67,7 @@ export function LayoutCustomizationSection({
 
 	const getMarginSliderValue = (margin: string) => {
 		const index = FORM_MARGIN_OPTIONS.findIndex(
-			(option) => option.value === margin,
+			(option) => option.value === margin
 		);
 		return index >= 0 ? index : 0;
 	};
@@ -79,7 +79,7 @@ export function LayoutCustomizationSection({
 
 	const getBorderRadiusSliderValue = (radius: string) => {
 		const index = FORM_BORDER_RADIUS_OPTIONS.findIndex(
-			(option) => option.value === radius,
+			(option) => option.value === radius
 		);
 		return index >= 0 ? index : 2;
 	};

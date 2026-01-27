@@ -18,7 +18,7 @@ export function useDebounce<T>(value: T, delay: number): T {
 
 export function useThrottledStreamContent(
 	content: string,
-	delay = 100,
+	delay = 100
 ): string {
 	const [throttledContent, setThrottledContent] = useState(content);
 	const lastUpdateTime = useRef(Date.now());
