@@ -110,7 +110,7 @@ export function FullPalette({
 									</div>
 									<div
 										aria-label={`${FIELD_CATEGORIES[key as keyof typeof FIELD_CATEGORIES]} fields`}
-										className="grid grid-cols-1 gap-2 rounded-2xl sm:grid-cols-2"
+										className="grid grid-cols-1 gap-2 rounded-2xl"
 										role="list"
 									>
 										{columns.map((col, colIdx) => (

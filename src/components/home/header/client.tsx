@@ -1,6 +1,5 @@
 "use client";
 
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import type { User } from "@supabase/supabase-js";
 import { AlignJustify, ChevronRight, LogOut } from "lucide-react";
 import Link from "next/link";
@@ -71,7 +70,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
 	const email = user.email ?? "";
 
 	const handleSignOut = useCallback(
-		async (e: Event) => {
+		async (e: { preventDefault: () => void }) => {
 			e.preventDefault();
 			try {
 				await signOut();
@@ -330,19 +329,15 @@ const MobileDrawer = React.memo(function MobileDrawer({
 						size="icon"
 						variant="ghost"
 					>
-						<VisuallyHidden>Open menu</VisuallyHidden>
+						<span className="sr-only">Open menu</span>
 						<AlignJustify aria-hidden="true" className="size-6" />
 					</Button>
 				</DrawerTrigger>
 				<DrawerContent className="flex flex-col gap-6 overscroll-contain p-6 pt-0 pb-10">
-					<VisuallyHidden>
-						<DrawerTitle>Navigation Menu</DrawerTitle>
-					</VisuallyHidden>
-					<VisuallyHidden>
-						<DrawerDescription>
-							Main navigation links and user actions for Ikiform.
-						</DrawerDescription>
-					</VisuallyHidden>
+					<DrawerTitle className="sr-only">Navigation Menu</DrawerTitle>
+					<DrawerDescription className="sr-only">
+						Main navigation links and user actions for Ikiform.
+					</DrawerDescription>
 					<div className="flex w-full flex-col gap-6">
 						<DrawerProfileSection signOut={signOut} user={user} />
 						<div className="grid gap-3">

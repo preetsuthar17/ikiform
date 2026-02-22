@@ -668,7 +668,7 @@ const ApiIntegrationPreview = React.memo(() => {
 		<div
 			aria-busy={status === "fetching"}
 			aria-live="polite"
-			className="relative flex h-fit flex-col justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/2 to-accent/20 p-6 shadow-inner"
+			className="relative flex h-full flex-col justify-start overflow-hidden rounded-2xl bg-gradient-to-br from-primary/2 to-accent/20 p-4 shadow-inner"
 			ref={ref}
 			style={{ minHeight: 210 }}
 			tabIndex={0}
@@ -724,7 +724,7 @@ const ApiIntegrationPreview = React.memo(() => {
 					status === "success" ? "api-integration-result-desc" : undefined
 				}
 				className={
-					"flex h-fit flex-col gap-0.5 rounded-2xl border border-border bg-card/80 p-3 transition-all"
+					"flex h-fit flex-col gap-2 rounded-2xl border border-border bg-card/80 p-3 transition-all overflow-hidden"
 				}
 				initial={{ scale: 0.97, opacity: 0, y: 12 }}
 				style={{
@@ -748,7 +748,7 @@ const ApiIntegrationPreview = React.memo(() => {
 						{apiData.slice(0, step).map((item, i) => (
 							<motion.li
 								animate={{ opacity: 1, x: 0 }}
-								className="flex items-center text-xs"
+								className="flex items-center text-xs gap-2"
 								initial={{ opacity: 0, x: -16 }}
 								key={item.label}
 								transition={{ delay: item.delay }}
@@ -757,9 +757,7 @@ const ApiIntegrationPreview = React.memo(() => {
 								<span className="font-medium text-foreground">
 									{item.value}
 								</span>
-								<span className="!font-normal ml-2 text-muted-foreground">
-									{item.label}
-								</span>
+							
 							</motion.li>
 						))}
 					</ol>

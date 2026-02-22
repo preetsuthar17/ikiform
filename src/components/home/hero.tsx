@@ -1,6 +1,5 @@
 "use client";
 
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { ChevronRight, Maximize2, Star } from "lucide-react";
 import Link from "next/link";
 import React, {
@@ -386,8 +385,8 @@ export default function Hero() {
 					<AvatarGroup />
 				</div>
 
-				<Card className="w-full max-w-7xl rounded-none border-b-0 bg-card shadow-none">
-					<Tabs className="w-full" defaultValue="form-demo">
+				<Card className="w-full max-w-7xl rounded-none border-b-0 bg-card shadow-none flex flex-col py-0">
+					<Tabs className="w-full flex flex-col" defaultValue="form-demo">
 						<div className="flex items-center justify-start border-border border-b px-4 py-4 md:px-6">
 							<TabsList>
 								<TabsTrigger value="form-demo">Form Demo</TabsTrigger>
@@ -418,9 +417,7 @@ export default function Hero() {
 					className="h-[95%] max-w-[95%] rounded-2xl p-0 sm:max-w-[95%]"
 					showCloseButton={true}
 				>
-					<VisuallyHidden>
-						<DialogTitle>Form Builder Demo</DialogTitle>
-					</VisuallyHidden>
+					<DialogTitle className="sr-only">Form Builder Demo</DialogTitle>
 					<DemoFormBuilder />
 				</DialogContent>
 			</Dialog>

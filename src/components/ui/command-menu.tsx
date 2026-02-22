@@ -1,12 +1,17 @@
 "use client";
 
-import * as DialogPrimitive from "@radix-ui/react-dialog";
-import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import { Search, X } from "lucide-react";
-import { motion } from "motion/react";
 import * as React from "react";
 import { Kbd } from "@/components/ui/kbd";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+	Dialog as CommandMenu,
+	DialogClose as CommandMenuClose,
+	DialogContent,
+	DialogDescription as CommandMenuDescription,
+	DialogTitle as CommandMenuTitle,
+	DialogTrigger as CommandMenuTrigger,
+} from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 
 const getModifierKey = () => {
@@ -24,13 +29,11 @@ interface CommandMenuContextType {
 	setValue: (value: string) => void;
 	selectedIndex: number;
 	setSelectedIndex: (index: number) => void;
-	scrollType?: "auto" | "always" | "scroll" | "hover";
-	scrollHideDelay?: number;
 }
 
-const CommandMenuContext = React.createContext<
-	CommandMenuContextType | undefined
->(undefined);
+const CommandMenuContext = React.createContext<CommandMenuContextType | undefined>(
+	undefined
+);
 
 const CommandMenuProvider: React.FC<{
 	children: React.ReactNode;
@@ -38,16 +41,12 @@ const CommandMenuProvider: React.FC<{
 	setValue: (value: string) => void;
 	selectedIndex: number;
 	setSelectedIndex: (index: number) => void;
-	scrollType?: "auto" | "always" | "scroll" | "hover";
-	scrollHideDelay?: number;
 }> = ({
 	children,
 	value,
 	setValue,
 	selectedIndex,
 	setSelectedIndex,
-	scrollType,
-	scrollHideDelay,
 }) => (
 	<CommandMenuContext.Provider
 		value={{
@@ -55,8 +54,6 @@ const CommandMenuProvider: React.FC<{
 			setValue,
 			selectedIndex,
 			setSelectedIndex,
-			scrollType,
-			scrollHideDelay,
 		}}
 	>
 		{children}
@@ -71,140 +68,54 @@ const useCommandMenu = () => {
 	return context;
 };
 
-const CommandMenu = DialogPrimitive.Root;
-const CommandMenuTrigger = DialogPrimitive.Trigger;
-const CommandMenuPortal = DialogPrimitive.Portal;
-const CommandMenuClose = DialogPrimitive.Close;
+function CommandMenuContent({
+	className,
+	children,
+	showShortcut = true,
+	...props
+}: React.ComponentProps<typeof DialogContent> & {
+	showShortcut?: boolean;
+}) {
+	const [value, setValue] = React.useState("");
+	const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-const CommandMenuTitle = React.forwardRef<
-	React.ElementRef<typeof DialogPrimitive.Title>,
-	React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
->(({ className, ...props }, ref) => (
-	<DialogPrimitive.Title
-		className={cn(
-			"font-semibold text-foreground text-lg leading-none tracking-tight",
-			className
-		)}
-		ref={ref}
-		{...props}
-	/>
-));
-CommandMenuTitle.displayName = "CommandMenuTitle";
+	return (
+		<DialogContent
+			className={cn(
+				"top-[30%] w-[95%] max-w-2xl rounded-2xl border border-border p-0",
+				className
+			)}
+			showCloseButton={false}
+			{...props}
+		>
+			<CommandMenuProvider
+				selectedIndex={selectedIndex}
+				setSelectedIndex={setSelectedIndex}
+				setValue={setValue}
+				value={value}
+			>
+				<CommandMenuTitle className="sr-only">Command Menu</CommandMenuTitle>
+				<CommandMenuDescription className="sr-only">
+					Search and run commands
+				</CommandMenuDescription>
 
-const CommandMenuDescription = React.forwardRef<
-	React.ElementRef<typeof DialogPrimitive.Description>,
-	React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
->(({ className, ...props }, ref) => (
-	<DialogPrimitive.Description
-		className={cn("text-muted-foreground text-sm", className)}
-		ref={ref}
-		{...props}
-	/>
-));
-CommandMenuDescription.displayName = "CommandMenuDescription";
+				{children}
 
-const CommandMenuOverlay = React.forwardRef<
-	React.ElementRef<typeof DialogPrimitive.Overlay>,
-	React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
->(({ className, ...props }, ref) => (
-	<DialogPrimitive.Overlay
-		className={cn(
-			"data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50 backdrop-blur-sm data-[state=closed]:animate-out data-[state=open]:animate-in",
-			className
-		)}
-		ref={ref}
-		{...props}
-	/>
-));
-CommandMenuOverlay.displayName = "CommandMenuOverlay";
+				<CommandMenuClose className="absolute top-3 right-3 rounded-2xl p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+					<X size={14} />
+					<span className="sr-only">Close</span>
+				</CommandMenuClose>
 
-const CommandMenuContent = React.forwardRef<
-	React.ElementRef<typeof DialogPrimitive.Content>,
-	React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
-		showShortcut?: boolean;
-		scrollType?: "auto" | "always" | "scroll" | "hover";
-		scrollHideDelay?: number;
-	}
->(
-	(
-		{
-			className,
-			children,
-			showShortcut = true,
-			scrollType = "hover",
-			scrollHideDelay = 600,
-			...props
-		},
-		ref
-	) => {
-		const [value, setValue] = React.useState("");
-		const [selectedIndex, setSelectedIndex] = React.useState(0);
-
-		React.useEffect(() => {
-			const handleKeyDown = (e: KeyboardEvent) => {
-				if (e.key === "ArrowDown") {
-					e.preventDefault();
-				} else if (e.key === "ArrowUp") {
-					e.preventDefault();
-				} else if (e.key === "Enter") {
-					e.preventDefault();
-				}
-			};
-
-			document.addEventListener("keydown", handleKeyDown);
-			return () => document.removeEventListener("keydown", handleKeyDown);
-		}, []);
-
-		return (
-			<CommandMenuPortal>
-				<CommandMenuOverlay />
-				<DialogPrimitive.Content asChild ref={ref} {...props}>
-					<motion.div
-						animate={{ opacity: 1, scale: 1, y: 0 }}
-						className={cn(
-							"fixed top-[30%] left-[50%] z-50 w-[95%] max-w-2xl translate-x-[-50%] translate-y-[-50%]",
-							"rounded-2xl border border-border bg-background",
-							"overflow-hidden",
-							className
-						)}
-						exit={{ opacity: 0, scale: 0.95, y: -20 }}
-						initial={{ opacity: 0, scale: 0.95, y: -20 }}
-						transition={{ duration: 0.2, ease: "easeOut" }}
-					>
-						{" "}
-						<CommandMenuProvider
-							scrollHideDelay={scrollHideDelay}
-							scrollType={scrollType}
-							selectedIndex={selectedIndex}
-							setSelectedIndex={setSelectedIndex}
-							setValue={setValue}
-							value={value}
-						>
-							<VisuallyHidden.Root>
-								<CommandMenuTitle>Command Menu</CommandMenuTitle>
-							</VisuallyHidden.Root>
-
-							{children}
-
-							<CommandMenuClose className="absolute top-3 right-3 rounded-2xl p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-								<X size={14} />
-								<span className="sr-only">Close</span>
-							</CommandMenuClose>
-
-							{showShortcut && (
-								<div className="absolute top-3 right-12 flex h-6.5 items-center justify-center gap-1">
-									<Kbd>{getModifierKey().symbol}</Kbd>
-									<Kbd>K</Kbd>
-								</div>
-							)}
-						</CommandMenuProvider>
-					</motion.div>
-				</DialogPrimitive.Content>
-			</CommandMenuPortal>
-		);
-	}
-);
-CommandMenuContent.displayName = "CommandMenuContent";
+				{showShortcut && (
+					<div className="absolute top-3 right-12 flex h-6.5 items-center justify-center gap-1">
+						<Kbd>{getModifierKey().symbol}</Kbd>
+						<Kbd>K</Kbd>
+					</div>
+				)}
+			</CommandMenuProvider>
+		</DialogContent>
+	);
+}
 
 const CommandMenuInput = React.forwardRef<
 	HTMLInputElement,
@@ -219,7 +130,7 @@ const CommandMenuInput = React.forwardRef<
 		const { value, setValue } = useCommandMenu();
 
 		return (
-			<div className="flex items-center border-border border-b px-3 py-0">
+			<div className="flex items-center border-b border-border px-3 py-0">
 				<Search className="mr-3 size-4 shrink-0 text-muted-foreground" />
 				<input
 					className={cn(
@@ -244,12 +155,7 @@ const CommandMenuList = React.forwardRef<
 		maxHeight?: string;
 	}
 >(({ className, children, maxHeight = "300px", ...props }, ref) => {
-	const {
-		selectedIndex,
-		setSelectedIndex,
-		scrollType = "hover",
-		scrollHideDelay = 600,
-	} = useCommandMenu();
+	const { selectedIndex, setSelectedIndex } = useCommandMenu();
 
 	React.useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
@@ -260,26 +166,16 @@ const CommandMenuList = React.forwardRef<
 				e.preventDefault();
 				const newIndex = Math.min(selectedIndex + 1, maxIndex);
 				setSelectedIndex(newIndex);
-
 				const selectedItem = items[newIndex] as HTMLElement;
-				if (selectedItem) {
-					selectedItem.scrollIntoView({
-						block: "nearest",
-						behavior: "smooth",
-					});
-				}
-			} else if (e.key === "ArrowUp") {
+				selectedItem?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+			}
+
+			if (e.key === "ArrowUp") {
 				e.preventDefault();
 				const newIndex = Math.max(selectedIndex - 1, 0);
 				setSelectedIndex(newIndex);
-
 				const selectedItem = items[newIndex] as HTMLElement;
-				if (selectedItem) {
-					selectedItem.scrollIntoView({
-						block: "nearest",
-						behavior: "smooth",
-					});
-				}
+				selectedItem?.scrollIntoView({ block: "nearest", behavior: "smooth" });
 			}
 		};
 
@@ -289,12 +185,7 @@ const CommandMenuList = React.forwardRef<
 
 	return (
 		<div className="p-1" ref={ref} {...props}>
-			<ScrollArea
-				className={cn("w-full", className)}
-				scrollHideDelay={scrollHideDelay}
-				style={{ height: maxHeight }}
-				type={scrollType}
-			>
+			<ScrollArea className={cn("w-full", className)} style={{ height: maxHeight }}>
 				<div className="flex flex-col gap-1 p-1">{children}</div>
 			</ScrollArea>
 		</div>
@@ -320,8 +211,8 @@ const CommandMenuGroup = React.forwardRef<
 CommandMenuGroup.displayName = "CommandMenuGroup";
 
 const CommandMenuItem = React.forwardRef<
-	HTMLDivElement,
-	React.HTMLAttributes<HTMLDivElement> & {
+	HTMLButtonElement,
+	React.ButtonHTMLAttributes<HTMLButtonElement> & {
 		onSelect?: () => void;
 		disabled?: boolean;
 		shortcut?: string;
@@ -364,7 +255,8 @@ const CommandMenuItem = React.forwardRef<
 		}, [isSelected, handleSelect]);
 
 		return (
-			<div
+			<button
+				type="button"
 				className={cn(
 					"relative flex cursor-default select-none items-center gap-2 rounded-xl px-2 py-2 text-sm outline-none transition-colors",
 					"hover:bg-accent hover:text-accent-foreground",
@@ -373,6 +265,7 @@ const CommandMenuItem = React.forwardRef<
 					className
 				)}
 				data-command-item
+				disabled={disabled}
 				onClick={handleSelect}
 				onMouseEnter={() => setSelectedIndex(index)}
 				ref={ref}
@@ -408,7 +301,7 @@ const CommandMenuItem = React.forwardRef<
 						))}
 					</div>
 				)}
-			</div>
+			</button>
 		);
 	}
 );

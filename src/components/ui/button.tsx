@@ -1,11 +1,11 @@
-import { Slot } from "@radix-ui/react-slot";
+import { Slot } from "@/components/ui/slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Loader } from "./loader";
 
 const buttonVariants = cva(
-	"inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium text-sm outline-none transition-all focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0" +
+	"inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium text-sm outline-none transition-all focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 " +
 		"transition-transform will-change-transform active:scale-97",
 	{
 		variants: {
@@ -65,8 +65,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 		ref
 	) => {
 		const Comp = asChild ? Slot : "button";
+		const isDisabled = disabled || loading;
+		const slottedElement =
+			asChild && React.isValidElement(children)
+				? (children as React.ReactElement<{ children?: React.ReactNode }>)
+				: null;
 
-		const content = (
+		const innerContent = (
 			<>
 				{loading && <Loader className="text-primary-foreground" size="md" />}
 				{leftIcon && !loading && leftIcon}
@@ -75,15 +80,26 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			</>
 		);
 
+		const slottedContent = (
+			<>
+				{loading && <Loader className="text-primary-foreground" size="md" />}
+				{leftIcon && !loading && leftIcon}
+				{slottedElement?.props.children}
+				{rightIcon && !loading && rightIcon}
+			</>
+		);
+
 		return (
 			<Comp
 				className={cn(buttonVariants({ variant, size, className }))}
 				data-slot="button"
-				disabled={disabled || loading}
+				disabled={isDisabled}
 				ref={ref}
 				{...props}
 			>
-				{asChild ? children : content}
+				{asChild && slottedElement
+					? React.cloneElement(slottedElement, { children: slottedContent })
+					: innerContent}
 			</Comp>
 		);
 	}
