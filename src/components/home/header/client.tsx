@@ -1,11 +1,10 @@
 "use client";
 
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import type { User } from "@supabase/supabase-js";
 import { AlignJustify, ChevronRight, LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useReducer } from "react";
 import { Separator } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/client";
@@ -36,6 +35,33 @@ interface NavLink {
 
 interface HeaderClientProps {
 	primaryLinks: NavLink[];
+}
+
+interface AuthState {
+	user: User | null;
+	loading: boolean;
+}
+
+type AuthAction = {
+	type: "set-auth";
+	user: User | null;
+};
+
+const INITIAL_AUTH_STATE: AuthState = {
+	user: null,
+	loading: true,
+};
+
+function authStateReducer(state: AuthState, action: AuthAction): AuthState {
+	switch (action.type) {
+		case "set-auth":
+			return {
+				user: action.user,
+				loading: false,
+			};
+		default:
+			return state;
+	}
 }
 
 interface UserAvatarProps {
@@ -71,7 +97,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
 	const email = user.email ?? "";
 
 	const handleSignOut = useCallback(
-		async (e: Event) => {
+		async (e: { preventDefault: () => void }) => {
 			e.preventDefault();
 			try {
 				await signOut();
@@ -330,19 +356,15 @@ const MobileDrawer = React.memo(function MobileDrawer({
 						size="icon"
 						variant="ghost"
 					>
-						<VisuallyHidden>Open menu</VisuallyHidden>
+						<span className="sr-only">Open menu</span>
 						<AlignJustify aria-hidden="true" className="size-6" />
 					</Button>
 				</DrawerTrigger>
 				<DrawerContent className="flex flex-col gap-6 overscroll-contain p-6 pt-0 pb-10">
-					<VisuallyHidden>
-						<DrawerTitle>Navigation Menu</DrawerTitle>
-					</VisuallyHidden>
-					<VisuallyHidden>
-						<DrawerDescription>
-							Main navigation links and user actions for Ikiform.
-						</DrawerDescription>
-					</VisuallyHidden>
+					<DrawerTitle className="sr-only">Navigation Menu</DrawerTitle>
+					<DrawerDescription className="sr-only">
+						Main navigation links and user actions for Ikiform.
+					</DrawerDescription>
 					<div className="flex w-full flex-col gap-6">
 						<DrawerProfileSection signOut={signOut} user={user} />
 						<div className="grid gap-3">
@@ -426,16 +448,21 @@ PrimaryNavLinks.displayName = "PrimaryNavLinks";
 
 export function HeaderClient({ primaryLinks }: HeaderClientProps) {
 	const router = useRouter();
-	const [user, setUser] = useState<User | null>(null);
-	const [loading, setLoading] = useState(true);
+	const [authState, dispatchAuth] = useReducer(
+		authStateReducer,
+		INITIAL_AUTH_STATE
+	);
+	const { user, loading } = authState;
 
 	useEffect(() => {
 		const supabase = createClient();
 
 		const fetchUser = async () => {
 			const { data } = await supabase.auth.getUser();
-			setUser(data.user ?? null);
-			setLoading(false);
+			dispatchAuth({
+				type: "set-auth",
+				user: data.user ?? null,
+			});
 		};
 
 		fetchUser();
@@ -443,8 +470,10 @@ export function HeaderClient({ primaryLinks }: HeaderClientProps) {
 		const {
 			data: { subscription },
 		} = supabase.auth.onAuthStateChange((_, session) => {
-			setUser(session?.user ?? null);
-			setLoading(false);
+			dispatchAuth({
+				type: "set-auth",
+				user: session?.user ?? null,
+			});
 		});
 
 		return () => subscription.unsubscribe();

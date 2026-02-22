@@ -10,12 +10,13 @@ import {
 	Zap,
 } from "lucide-react";
 
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, LazyMotion, domAnimation, m } from "motion/react";
 import type { ReactNode } from "react";
 import React, {
 	useCallback,
 	useEffect,
 	useMemo,
+	useReducer,
 	useRef,
 	useState,
 } from "react";
@@ -53,7 +54,7 @@ interface FeatureCardProps {
 	featured?: boolean;
 }
 
-const FeatureCard = React.memo(function FeatureCard({
+function FeatureCard({
 	title,
 	description,
 	icon,
@@ -81,9 +82,9 @@ const FeatureCard = React.memo(function FeatureCard({
 					<div className="fade-bottom h-fit md:h-full">{preview}</div>
 				</div>
 			</div>
-		</Card>
+			</Card>
 	);
-});
+}
 
 type AiFormStep = {
 	label: string;
@@ -105,28 +106,57 @@ const AI_FORM_STEPS: AiFormStep[] = [
 	{ label: "Message", type: "field", height: "h-20", width: "w-full" },
 ] as const;
 
+const ANALYTICS_BASE_POINTS = [72, 68, 79, 61, 74, 70, 77, 59, 73, 66] as const;
+
 const AiFormBuilderPreview = React.memo(() => {
 	const { ref, isInView } = useInView();
-	const [currentStep, setCurrentStep] = useState(0);
-	const [status, setStatus] = useState<"generating" | "success">("generating");
+	type AiFormAnimationState = {
+		currentStep: number;
+		status: "generating" | "success";
+	};
+	const [animationState, dispatchAnimation] = useReducer(
+		(
+			state: AiFormAnimationState,
+			action: { type: "advance" }
+		): AiFormAnimationState => {
+			if (action.type !== "advance") {
+				return state;
+			}
+			if (state.status === "success") {
+				return { currentStep: 0, status: "generating" };
+			}
+			if (state.currentStep < AI_FORM_STEPS.length) {
+				return { ...state, currentStep: state.currentStep + 1 };
+			}
+			if (state.currentStep === AI_FORM_STEPS.length) {
+				return { ...state, status: "success" };
+			}
+			return state;
+		},
+		{ currentStep: 0, status: "generating" }
+	);
+	const { currentStep, status } = animationState;
 
 	useEffect(() => {
 		if (!isInView) return;
+		const delay =
+			status === "success"
+				? 2500
+				: currentStep < AI_FORM_STEPS.length
+					? 850
+					: currentStep === AI_FORM_STEPS.length
+						? 400
+						: null;
 
-		if (status === "success") {
-			const t = setTimeout(() => {
-				setCurrentStep(0);
-				setStatus("generating");
-			}, 2500);
-			return () => clearTimeout(t);
+		if (delay === null) {
+			return;
 		}
-		if (currentStep < AI_FORM_STEPS.length) {
-			const t = setTimeout(() => setCurrentStep((s) => s + 1), 850);
-			return () => clearTimeout(t);
-		}
-		if (currentStep === AI_FORM_STEPS.length) {
-			setTimeout(() => setStatus("success"), 400);
-		}
+
+		const timer = setTimeout(() => {
+			dispatchAnimation({ type: "advance" });
+		}, delay);
+
+		return () => clearTimeout(timer);
 	}, [currentStep, status, isInView]);
 
 	return (
@@ -137,11 +167,11 @@ const AiFormBuilderPreview = React.memo(() => {
 			tabIndex={0}
 		>
 			<div className="flex flex-col gap-3 px-6 py-5">
-				<motion.div
+				<m.div
 					animate={{ opacity: status === "generating" ? 1 : 0.6 }}
 					className="flex items-center gap-2"
 				>
-					<motion.span
+						<m.span
 						animate={{
 							scale: status === "generating" && isInView ? [1, 1.2, 1] : 1,
 							opacity:
@@ -151,12 +181,11 @@ const AiFormBuilderPreview = React.memo(() => {
 										? 0.7
 										: 1,
 						}}
-						aria-hidden="true"
-						className="inline-block size-3 rounded-full bg-primary"
-						style={{ willChange: isInView ? "transform, opacity" : "auto" }}
-						transition={{
-							duration: 1,
-							ease: "easeOut",
+							aria-hidden="true"
+							className="inline-block size-3 rounded-full bg-primary"
+							transition={{
+								duration: 1,
+								ease: "easeOut",
 						}}
 					/>
 					<span className="font-medium text-foreground text-sm">
@@ -164,22 +193,21 @@ const AiFormBuilderPreview = React.memo(() => {
 							? "AI is building your form…"
 							: "Form generated"}
 					</span>
-				</motion.div>
+				</m.div>
 				<div className="flex flex-col gap-3 rounded-xl border border-border bg-background/80 p-3">
 					{}
-					<motion.div
+					<m.div
 						animate={{
 							opacity: 1,
 							translateY: 0,
 						}}
 						className="flex flex-col gap-1"
-						initial={{ opacity: 0, translateY: 12 }}
-						style={{
-							opacity: currentStep > 0 ? 1 : 0.93,
-							willChange: isInView ? "transform, opacity" : "auto",
-						}}
-						transition={{ delay: 0.1 }}
-					>
+							initial={{ opacity: 0, translateY: 12 }}
+							style={{
+								opacity: currentStep > 0 ? 1 : 0.93,
+							}}
+							transition={{ delay: 0.1 }}
+						>
 						<Label
 							className="mb-0.5 font-medium text-muted-foreground text-xs"
 							htmlFor="aiform-demo-input"
@@ -198,14 +226,14 @@ const AiFormBuilderPreview = React.memo(() => {
 							}}
 							value="could you create a simple contact form?"
 						/>
-					</motion.div>
+					</m.div>
 					{}
-					<motion.div className="relative mt-2 flex flex-col gap-2 rounded-m">
-						{[1, 2, 3].map((i, idx) => {
-							const step = AI_FORM_STEPS[i];
-							const shown = currentStep > i - 1;
+					<m.div className="relative mt-2 flex flex-col gap-2 rounded-m">
+							{[1, 2, 3].map((i, idx) => {
+								const step = AI_FORM_STEPS[i];
+								const shown = currentStep > i - 1;
 							return (
-								<motion.div
+								<m.div
 									animate={
 										isInView
 											? {
@@ -214,17 +242,13 @@ const AiFormBuilderPreview = React.memo(() => {
 												}
 											: { opacity: shown ? 1 : 0, y: 0 }
 									}
-									aria-hidden={!shown}
-									className={"flex flex-col gap-0.5 rounded-md transition-all"}
-									initial={false}
-									key={idx}
-									style={{
-										willChange:
-											isInView && shown ? "transform, opacity" : "auto",
-									}}
-									transition={{
-										duration: 0.36 + idx * 0.07,
-										delay: shown ? 0.02 : 0,
+										aria-hidden={!shown}
+										className={"flex flex-col gap-0.5 rounded-md transition-all"}
+										initial={false}
+										key={step.label}
+										transition={{
+											duration: 0.36 + idx * 0.07,
+											delay: shown ? 0.02 : 0,
 										ease: "easeOut",
 									}}
 								>
@@ -235,20 +259,19 @@ const AiFormBuilderPreview = React.memo(() => {
 										className={`
                       ${step.height || "h-10"} ${step.width} w-full rounded-md border border-border bg-card transition-all`}
 									/>
-								</motion.div>
+								</m.div>
 							);
 						})}
-					</motion.div>
+					</m.div>
 				</div>
 			</div>
-			<motion.div
+			<m.div
 				animate={{
 					opacity: status === "success" ? 1 : 0.6,
 				}}
-				className="mt-auto flex items-center justify-between border-border/50 border-t px-6 py-3"
-				initial={false}
-				style={{ willChange: isInView ? "opacity" : "auto" }}
-			>
+					className="mt-auto flex items-center justify-between border-border/50 border-t px-6 py-3"
+					initial={false}
+				>
 				<span className="text-muted-foreground text-xs">
 					Generated in&nbsp;2.3s
 				</span>
@@ -263,7 +286,7 @@ const AiFormBuilderPreview = React.memo(() => {
 				>
 					Use this form
 				</button>
-			</motion.div>
+			</m.div>
 		</div>
 	);
 });
@@ -279,7 +302,7 @@ const UnlimitedPreview = React.memo(() => {
 			className="relative flex h-full flex-col items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/1 to-accent/20 p-4 shadow-inner"
 			ref={ref}
 		>
-			<motion.div
+			<m.div
 				animate={
 					isInView
 						? {
@@ -289,22 +312,21 @@ const UnlimitedPreview = React.memo(() => {
 							}
 						: { rotate: 0, scale: 1, opacity: 0.85 }
 				}
-				aria-hidden="true"
-				className="pointer-events-none absolute top-4 left-4 select-none text-accent opacity-10"
-				initial={{ rotate: -8, scale: 0.85, opacity: 0.5 }}
-				style={{ willChange: isInView ? "transform, opacity" : "auto" }}
-				transition={{
-					duration: 3,
-					repeat: isInView ? Number.POSITIVE_INFINITY : 0,
+					aria-hidden="true"
+					className="pointer-events-none absolute top-4 left-4 select-none text-accent opacity-10"
+					initial={{ rotate: -8, scale: 0.85, opacity: 0.5 }}
+					transition={{
+						duration: 3,
+						repeat: isInView ? Number.POSITIVE_INFINITY : 0,
 					ease: "easeInOut",
 				}}
 			>
 				<InfinityIcon size={96} />
-			</motion.div>
+			</m.div>
 
 			{}
 			<div className="relative z-10 flex flex-col items-center gap-4 px-2 py-4">
-				<motion.div
+				<m.div
 					aria-hidden="true"
 					className="mb-1 flex items-center justify-center"
 				>
@@ -314,9 +336,9 @@ const UnlimitedPreview = React.memo(() => {
 					>
 						∞
 					</span>
-				</motion.div>
+				</m.div>
 
-				<motion.div
+				<m.div
 					animate={{ opacity: 1, y: 0, scale: 1 }}
 					className="flex flex-col items-center gap-2"
 					initial={{ opacity: 0, y: 10, scale: 0.95 }}
@@ -325,7 +347,7 @@ const UnlimitedPreview = React.memo(() => {
 					<div className="flex items-center gap-2 text-center font-medium text-foreground text-sm">
 						Unlimited Forms, Fields, Users and Responses.
 					</div>
-				</motion.div>
+				</m.div>
 			</div>
 		</div>
 	);
@@ -336,11 +358,10 @@ UnlimitedPreview.displayName = "UnlimitedPreview";
 const AnalyticsPreview = React.memo(() => {
 	const { ref, isInView } = useInView();
 	const [isHovered, setIsHovered] = useState(false);
-	const basePoints = useMemo(
-		() => Array.from({ length: 10 }, () => Math.floor(Math.random() * 50) + 40),
-		[]
-	);
-	const [animatedPoints, setAnimatedPoints] = useState(basePoints);
+	const basePoints = ANALYTICS_BASE_POINTS;
+	const [animatedPoints, setAnimatedPoints] = useState<number[]>(() => [
+		...basePoints,
+	]);
 
 	useEffect(() => {
 		if (!(isHovered && isInView)) return;
@@ -356,7 +377,7 @@ const AnalyticsPreview = React.memo(() => {
 
 	useEffect(() => {
 		if (!isHovered) {
-			setAnimatedPoints(basePoints);
+			setAnimatedPoints([...basePoints]);
 		}
 	}, [isHovered, basePoints]);
 
@@ -386,20 +407,20 @@ const AnalyticsPreview = React.memo(() => {
 					<span className="font-medium text-foreground text-xs">
 						Weekly Responses
 					</span>
-					<motion.span className="font-semibold text-green-500 text-xs">
+					<m.span className="font-semibold text-green-500 text-xs">
 						↗ +34%
-					</motion.span>
+					</m.span>
 				</div>
 
 				<div className="flex h-32 items-end gap-1 md:h-16">
-					<motion.svg
+					<m.svg
 						className="h-full w-full"
 						height={HEIGHT}
 						style={{ minWidth: WIDTH, minHeight: HEIGHT, display: "block" }}
 						viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
 						width={WIDTH}
 					>
-						<motion.polyline
+						<m.polyline
 							animate={{
 								pathLength: 1,
 								transition: { duration: 0.4, ease: "easeInOut" },
@@ -412,36 +433,35 @@ const AnalyticsPreview = React.memo(() => {
 							strokeLinejoin="round"
 							strokeWidth="2.5"
 						/>
-						{svgPoints.map((pt, i) => (
-							<motion.circle
+							{svgPoints.map((pt, i) => (
+								<m.circle
 								animate={{
 									scale: 1,
 									transition: { delay: 0.05 * i },
 								}}
-								cx={pt.x}
-								cy={pt.y}
-								fill="#4287f5"
-								initial={{ scale: 0 }}
-								key={i}
-								r={3}
-							/>
-						))}
-					</motion.svg>
+									cx={pt.x}
+									cy={pt.y}
+									fill="#4287f5"
+									initial={{ scale: 0.95, opacity: 0 }}
+									key={`${pt.x}-${pt.y}`}
+									r={3}
+								/>
+							))}
+					</m.svg>
 				</div>
 
-				<motion.div
-					animate={{
-						opacity: isHovered && isInView ? [0.7, 1, 0.7] : 1,
-					}}
-					className="text-muted-foreground text-xs"
-					style={{ willChange: isHovered && isInView ? "opacity" : "auto" }}
-					transition={{
-						duration: 1,
-						repeat: isHovered && isInView ? Number.POSITIVE_INFINITY : 0,
+					<m.div
+						animate={{
+							opacity: isHovered && isInView ? [0.7, 1, 0.7] : 1,
+						}}
+						className="text-muted-foreground text-xs"
+						transition={{
+							duration: 1,
+							repeat: isHovered && isInView ? Number.POSITIVE_INFINITY : 0,
 					}}
 				>
 					{isHovered ? "Live data updating..." : "1.2k responses this week"}
-				</motion.div>
+				</m.div>
 			</div>
 		</div>
 	);
@@ -451,9 +471,10 @@ AnalyticsPreview.displayName = "AnalyticsPreview";
 
 const LogicBuilderPreview = React.memo(() => {
 	const steps = React.useMemo(
-		() => [
-			{
-				label: (
+			() => [
+				{
+					id: "if-yes",
+					label: (
 					<>
 						<span className="font-semibold text-primary">User responds</span>
 						&nbsp;
@@ -471,8 +492,9 @@ const LogicBuilderPreview = React.memo(() => {
 					</div>
 				),
 			},
-			{
-				label: (
+				{
+					id: "then-email",
+					label: (
 					<span className="font-semibold text-primary">Show email field</span>
 				),
 				prefix: (
@@ -486,8 +508,9 @@ const LogicBuilderPreview = React.memo(() => {
 					</div>
 				),
 			},
-			{
-				label: (
+				{
+					id: "else-skip",
+					label: (
 					<span className="font-semibold text-muted-foreground">Skip</span>
 				),
 				prefix: (
@@ -529,8 +552,8 @@ const LogicBuilderPreview = React.memo(() => {
 					className="flex w-full flex-col items-start gap-0 md:gap-2"
 					role="list"
 				>
-					{steps.map((step, idx) => (
-						<motion.li
+						{steps.map((step, idx) => (
+							<m.li
 							animate={
 								idx <= visibleIdx && isInView
 									? { opacity: 1, translateX: 0 }
@@ -538,16 +561,12 @@ const LogicBuilderPreview = React.memo(() => {
 							}
 							aria-label={
 								typeof step.label === "string" ? step.label : undefined
-							}
-							className={"relative flex w-full flex-row items-center px-0 py-2"}
-							initial={{ opacity: 0, translateX: -24 }}
-							key={idx}
-							style={{
-								willChange:
-									isInView && idx <= visibleIdx ? "transform, opacity" : "auto",
-							}}
-							transition={{ delay: idx * 0.15, duration: 0.44 }}
-						>
+								}
+								className={"relative flex w-full flex-row items-center px-0 py-2"}
+								initial={{ opacity: 0, translateX: -24 }}
+								key={step.id}
+								transition={{ delay: idx * 0.15, duration: 0.44 }}
+							>
 							{}
 							<span className="mr-3 min-w-[2.5rem] select-none text-xs">
 								{step.prefix}
@@ -562,7 +581,7 @@ const LogicBuilderPreview = React.memo(() => {
 									{step.label}
 								</span>
 							</div>
-						</motion.li>
+						</m.li>
 					))}
 				</ol>
 			</div>
@@ -579,30 +598,46 @@ LogicBuilderPreview.displayName = "LogicBuilderPreview";
 
 const ApiIntegrationPreview = React.memo(() => {
 	const { ref, isInView } = useInView();
-	const [status, setStatus] = useState<"idle" | "fetching" | "success">("idle");
-	const [step, setStep] = useState(0);
+	const [apiState, dispatchApiState] = useReducer(
+		(
+			state: { status: "idle" | "fetching" | "success"; step: number },
+			action: { type: "advance" }
+		): { status: "idle" | "fetching" | "success"; step: number } => {
+			if (action.type !== "advance") {
+				return state;
+			}
+			if (state.status === "idle") {
+				return { status: "fetching", step: 0 };
+			}
+			if (state.status === "fetching") {
+				return { status: "success", step: 0 };
+			}
+			if (state.step < 3) {
+				return { ...state, step: state.step + 1 };
+			}
+			return state;
+		},
+		{ status: "idle", step: 0 }
+	);
+	const { status, step } = apiState;
 
 	useEffect(() => {
 		if (!isInView) return;
-		if (status === "idle") {
-			const t = setTimeout(() => setStatus("fetching"), 400);
-			return () => clearTimeout(t);
-		}
-		if (status === "fetching") {
-			const t = setTimeout(() => setStatus("success"), 1800);
-			return () => clearTimeout(t);
-		}
-	}, [status, isInView]);
-
-	useEffect(() => {
-		if (!isInView || status !== "success") {
-			setStep(0);
+		const delay =
+			status === "idle"
+				? 400
+				: status === "fetching"
+					? 1800
+					: step < 3
+						? 210
+						: null;
+		if (delay === null) {
 			return;
 		}
-		if (step < 3) {
-			const t = setTimeout(() => setStep((s) => s + 1), 210);
-			return () => clearTimeout(t);
-		}
+		const timer = setTimeout(() => {
+			dispatchApiState({ type: "advance" });
+		}, delay);
+		return () => clearTimeout(timer);
 	}, [status, step, isInView]);
 
 	const apiData = useMemo(
@@ -668,13 +703,13 @@ const ApiIntegrationPreview = React.memo(() => {
 		<div
 			aria-busy={status === "fetching"}
 			aria-live="polite"
-			className="relative flex h-fit flex-col justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/2 to-accent/20 p-6 shadow-inner"
+			className="relative flex h-full flex-col justify-start overflow-hidden rounded-2xl bg-gradient-to-br from-primary/2 to-accent/20 p-4 shadow-inner"
 			ref={ref}
 			style={{ minHeight: 210 }}
 			tabIndex={0}
 		>
 			<div className="mb-3 flex items-center gap-3">
-				<motion.div
+				<m.div
 					animate={{ opacity: 1, y: 0 }}
 					className="flex items-center gap-1 rounded-full border border-border bg-card/80 px-2 py-1.5 shadow"
 					initial={{ opacity: 0, y: 10 }}
@@ -682,8 +717,8 @@ const ApiIntegrationPreview = React.memo(() => {
 					<span className="font-medium text-muted-foreground text-xs tracking-tight">
 						acme.com/data
 					</span>
-				</motion.div>
-				<motion.span
+				</m.div>
+				<m.span
 					animate={{
 						opacity: [0.8, 1, 0.85, 1],
 						transition: {
@@ -700,21 +735,18 @@ const ApiIntegrationPreview = React.memo(() => {
 							: status === "fetching"
 								? "text-blue-500 dark:text-blue-300"
 								: "text-muted-foreground"
-					}`}
-					style={{
-						willChange: status === "fetching" && isInView ? "opacity" : "auto",
-					}}
-				>
+						}`}
+					>
 					{status === "idle"
 						? "Ready"
 						: status === "fetching"
 							? "Fetching..."
 							: "Fetched!"}
-				</motion.span>
+				</m.span>
 			</div>
 
 			{}
-			<motion.div
+			<m.div
 				animate={{
 					scale: status === "success" ? 1 : 0.98,
 					opacity: status !== "idle" ? 1 : 0.5,
@@ -724,15 +756,14 @@ const ApiIntegrationPreview = React.memo(() => {
 					status === "success" ? "api-integration-result-desc" : undefined
 				}
 				className={
-					"flex h-fit flex-col gap-0.5 rounded-2xl border border-border bg-card/80 p-3 transition-all"
+					"flex h-fit flex-col gap-2 rounded-2xl border border-border bg-card/80 p-3 transition-all overflow-hidden"
 				}
-				initial={{ scale: 0.97, opacity: 0, y: 12 }}
-				style={{
-					pointerEvents: status === "success" ? "auto" : "none",
-					willChange: isInView ? "transform, opacity" : "auto",
-				}}
-				transition={{ type: "spring", stiffness: 220, damping: 26 }}
-			>
+					initial={{ scale: 0.97, opacity: 0, y: 12 }}
+					style={{
+						pointerEvents: status === "success" ? "auto" : "none",
+					}}
+					transition={{ type: "spring", stiffness: 220, damping: 26 }}
+				>
 				{}
 				{status !== "success" ? (
 					<div
@@ -745,10 +776,10 @@ const ApiIntegrationPreview = React.memo(() => {
 					</div>
 				) : (
 					<ol className="flex flex-col gap-2">
-						{apiData.slice(0, step).map((item, i) => (
-							<motion.li
+							{apiData.slice(0, step).map((item) => (
+								<m.li
 								animate={{ opacity: 1, x: 0 }}
-								className="flex items-center text-xs"
+								className="flex items-center text-xs gap-2"
 								initial={{ opacity: 0, x: -16 }}
 								key={item.label}
 								transition={{ delay: item.delay }}
@@ -757,14 +788,14 @@ const ApiIntegrationPreview = React.memo(() => {
 								<span className="font-medium text-foreground">
 									{item.value}
 								</span>
-								<span className="!font-normal ml-2 text-muted-foreground">
+								<span className="!font-normal text-muted-foreground">
 									{item.label}
 								</span>
-							</motion.li>
+							</m.li>
 						))}
 					</ol>
 				)}
-			</motion.div>
+			</m.div>
 
 			{}
 			<span className="sr-only">
@@ -830,7 +861,7 @@ const DigitalSignaturesPreview = React.memo(() => {
 				</div>
 				{}
 				<div className="relative flex h-10 min-h-9 w-full items-center justify-center">
-					<motion.svg
+					<m.svg
 						animate={{
 							opacity: step === "idle" ? 0.25 : 1,
 						}}
@@ -838,7 +869,7 @@ const DigitalSignaturesPreview = React.memo(() => {
 						initial={false}
 						viewBox="0 0 120 24"
 					>
-						<motion.path
+						<m.path
 							animate={{
 								pathLength:
 									step === "idle"
@@ -865,9 +896,9 @@ const DigitalSignaturesPreview = React.memo(() => {
 							}
 							strokeWidth={step === "done" ? 2.5 : 2}
 						/>
-					</motion.svg>
+					</m.svg>
 					{}
-					<motion.svg
+					<m.svg
 						animate={{
 							opacity: step === "done" ? 1 : 0,
 							scale: step === "done" ? 1 : 0.7,
@@ -890,7 +921,7 @@ const DigitalSignaturesPreview = React.memo(() => {
 							strokeLinejoin="round"
 							strokeWidth="2.2"
 						/>
-					</motion.svg>
+					</m.svg>
 				</div>
 				<div
 					aria-live="polite"
@@ -900,7 +931,7 @@ const DigitalSignaturesPreview = React.memo(() => {
 				</div>
 			</div>
 			{}
-			<motion.span
+			<m.span
 				animate={{
 					scale: step === "done" ? 1 : 0.75,
 					opacity: step === "done" ? 1 : 0,
@@ -916,7 +947,7 @@ const DigitalSignaturesPreview = React.memo(() => {
 				}}
 			>
 				Verified
-			</motion.span>
+			</m.span>
 			{}
 			<span aria-live="polite" className="sr-only">
 				{step === "idle" && "Awaiting e-signature. Please sign to continue."}
@@ -1011,7 +1042,7 @@ const EmailNotificationsPreview = React.memo(() => {
 			<div className="relative flex h-40 flex-col px-3 pt-2 pb-3">
 				<AnimatePresence mode="popLayout">
 					{notifications.length === 0 && (
-						<motion.div
+						<m.div
 							animate={{ opacity: 1, y: 0 }}
 							aria-live="polite"
 							className="absolute inset-0 flex items-center justify-center text-muted-foreground text-xs"
@@ -1025,10 +1056,10 @@ const EmailNotificationsPreview = React.memo(() => {
 							}}
 						>
 							No new notifications yet.
-						</motion.div>
+						</m.div>
 					)}
 					{notifications.map((notification, index) => (
-						<motion.div
+						<m.div
 							animate={
 								isInView
 									? {
@@ -1060,12 +1091,11 @@ const EmailNotificationsPreview = React.memo(() => {
 								scale: 0.96,
 							}}
 							key={notification.id}
-							style={{
-								opacity: index < maxNotifications ? 1 : 0,
-								zIndex: notifications.length - index + 10,
-								transform: `translateY(${index * 6}px) scale(${1 - index * 0.035})`,
-								willChange: isInView ? "transform, opacity" : "auto",
-							}}
+								style={{
+									opacity: index < maxNotifications ? 1 : 0,
+									zIndex: notifications.length - index + 10,
+									transform: `translateY(${index * 6}px) scale(${1 - index * 0.035})`,
+								}}
 							tabIndex={0}
 							transition={{
 								type: "tween",
@@ -1098,7 +1128,7 @@ const EmailNotificationsPreview = React.memo(() => {
 							>
 								{notification.time}
 							</div>
-						</motion.div>
+						</m.div>
 					))}
 				</AnimatePresence>
 			</div>
@@ -1115,18 +1145,12 @@ const EmailNotificationsPreview = React.memo(() => {
 EmailNotificationsPreview.displayName = "EmailNotificationsPreview";
 
 export default function BentoFeatures() {
-	const [mounted, setMounted] = useState(false);
-
-	useEffect(() => {
-		setMounted(true);
-	}, []);
-
 	return (
-		<div className="mx-auto w-full max-w-7xl bg-background">
-			<div className="mx-auto flex w-full max-w-7xl flex-col">
-				{}
-				<div className="grid grid-cols-1 gap-px bg-border p-px lg:grid-cols-4">
-					{mounted && (
+		<LazyMotion features={domAnimation}>
+			<div className="mx-auto w-full max-w-7xl bg-background">
+				<div className="mx-auto flex w-full max-w-7xl flex-col">
+					{}
+					<div className="grid grid-cols-1 gap-px bg-border p-px lg:grid-cols-4">
 						<>
 							{}
 							<FeatureCard
@@ -1252,9 +1276,9 @@ export default function BentoFeatures() {
 								title="Visual Logic Builder"
 							/>
 						</>
-					)}
+					</div>
 				</div>
 			</div>
-		</div>
+		</LazyMotion>
 	);
 }
