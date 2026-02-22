@@ -26,7 +26,6 @@
         "clsx": "^2.1.1",
         "cmdk": "^1.1.1",
         "date-fns": "^4.1.0",
-        "framer-motion": "^12.34.3",
         "input-otp": "^1.4.2",
         "lucide-react": "^0.575.0",
         "marked": "^17.0.3",
