@@ -8,6 +8,7 @@ import React, {
 	useEffect,
 	useState,
 } from "react";
+import useSWR from "swr";
 import DemoFormBuilder from "@/components/form-builder/form-builder/demo-form-builder";
 import { Badge, Card } from "../ui";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
@@ -160,6 +161,15 @@ interface UserStats {
 	users: Array<{ name: string | null }>;
 }
 
+const USER_STATS_FALLBACK: UserStats = { count: null, users: [] };
+const userStatsFetcher = async (url: string): Promise<UserStats> => {
+	const response = await fetch(url);
+	if (!response.ok) {
+		throw new Error("Failed to fetch user stats");
+	}
+	return response.json();
+};
+
 const GRAVATAR_URLS = [
 	"https://www.gravatar.com/avatar/820117d4b7a01756fc47e0075f0cb6c01a82691ad3ec3ce9a1f49235d0c672ed?d=404",
 	"https://www.gravatar.com/avatar/cb0434f4899c68c4bd364f67403cfba7336d1fd1b8a83e15b529b69c91296248?d=404",
@@ -168,24 +178,14 @@ const GRAVATAR_URLS = [
 ];
 
 function AvatarGroup() {
-	const [stats, setStats] = useState<UserStats>({ count: null, users: [] });
-	const [isLoading, setIsLoading] = useState(true);
-
-	useEffect(() => {
-		const fetchStats = async () => {
-			try {
-				const response = await fetch("/api/users/stats");
-				const data = await response.json();
-				setStats(data);
-			} catch {
-				setStats({ count: null, users: [] });
-			} finally {
-				setIsLoading(false);
-			}
-		};
-
-		fetchStats();
-	}, []);
+	const { data: stats = USER_STATS_FALLBACK, isLoading } = useSWR<UserStats>(
+		"/api/users/stats",
+		userStatsFetcher,
+		{
+			revalidateOnFocus: false,
+			revalidateOnReconnect: false,
+		}
+	);
 
 	if (isLoading) {
 		return (

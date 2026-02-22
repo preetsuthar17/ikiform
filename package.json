@@ -22,6 +22,7 @@
   "dependencies": {
     "@ai-sdk/cohere": "^3.0.21",
     "@ai-sdk/groq": "^3.0.24",
+    "@base-ui/react": "^1.0.0",
     "@hello-pangea/dnd": "^18.0.1",
     "@next/third-parties": "^16.1.6",
     "@polar-sh/nextjs": "^0.9.3",
@@ -34,7 +35,6 @@
     "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.36.2",
     "@vercel/analytics": "^1.6.1",
-    "@base-ui/react": "^1.0.0",
     "ai": "^6.0.97",
     "bad-words": "^4.0.0",
     "botid": "^1.5.10",
@@ -66,6 +66,7 @@
     "resend": "^6.9.2",
     "sanitize-html": "^2.17.1",
     "sonner": "^2.0.7",
+    "swr": "^2.4.0",
     "tailwind-merge": "^3.5.0",
     "uuid": "^13.0.0",
     "vaul": "^1.1.2",

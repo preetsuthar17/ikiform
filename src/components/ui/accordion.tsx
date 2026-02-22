@@ -1,25 +1,95 @@
 "use client"
 
 import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion"
+import * as React from "react"
 
 import { cn } from "@/lib/utils"
 import { ChevronDownIcon } from "lucide-react"
 
-type AccordionProps = AccordionPrimitive.Root.Props & {
-	collapsible?: boolean;
-	type?: "single" | "multiple";
-};
+type AccordionValue = string | string[]
 
-function Accordion({ className, ...props }: AccordionProps) {
-  const { collapsible, type, ...restProps } = props
-  void collapsible
-  void type
+type AccordionProps = Omit<
+  AccordionPrimitive.Root.Props,
+  "defaultValue" | "multiple" | "onValueChange" | "value"
+> & {
+  collapsible?: boolean
+  type?: "single" | "multiple"
+  value?: AccordionValue
+  defaultValue?: AccordionValue
+  onValueChange?: (value: AccordionValue) => void
+}
+
+function normalizeAccordionValue(
+  value: AccordionValue | undefined,
+  isMultiple: boolean
+): string[] {
+  if (value === undefined) {
+    return []
+  }
+
+  if (Array.isArray(value)) {
+    return isMultiple ? value : value.slice(0, 1)
+  }
+
+  return [value]
+}
+
+function Accordion({
+  className,
+  type = "single",
+  collapsible = true,
+  value,
+  defaultValue,
+  onValueChange,
+  ...props
+}: AccordionProps) {
+  const isMultiple = type === "multiple"
+  const isControlled = value !== undefined
+  const [uncontrolledValue, setUncontrolledValue] = React.useState<string[]>(
+    () => normalizeAccordionValue(defaultValue, isMultiple)
+  )
+  const currentValue = isControlled
+    ? normalizeAccordionValue(value, isMultiple)
+    : uncontrolledValue
+
+  const handleValueChange = React.useCallback(
+    (nextValue: unknown[]) => {
+      const normalizedNextValue = (nextValue ?? []).map(String)
+      const shouldKeepCurrentValue =
+        !isMultiple &&
+        !collapsible &&
+        normalizedNextValue.length === 0 &&
+        currentValue.length > 0
+      const resolvedValue = shouldKeepCurrentValue
+        ? currentValue
+        : normalizedNextValue
+
+      if (!isControlled) {
+        setUncontrolledValue(resolvedValue)
+      }
+
+      if (!onValueChange) {
+        return
+      }
+
+      if (isMultiple) {
+        onValueChange(resolvedValue)
+        return
+      }
+
+      onValueChange(resolvedValue[0] ?? "")
+    },
+    [collapsible, currentValue, isControlled, isMultiple, onValueChange]
+  )
 
   return (
     <AccordionPrimitive.Root
       data-slot="accordion"
       className={cn("flex w-full flex-col", className)}
-      {...(restProps as AccordionPrimitive.Root.Props)}
+      multiple={isMultiple}
+      onValueChange={handleValueChange}
+      value={currentValue}
+      {...props}
     />
   )
 }

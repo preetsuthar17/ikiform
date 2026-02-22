@@ -3,7 +3,7 @@
 import { Slot } from "@/components/ui/slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ChevronRight, File, Folder, FolderOpen } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, LazyMotion, domAnimation, m } from "motion/react";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
@@ -163,8 +163,8 @@ const TreeProvider = React.forwardRef<HTMLDivElement, TreeProviderProps>(
 			]
 		);
 
-		const contextValue: TreeContextType = {
-			expandedIds,
+			const contextValue: TreeContextType = {
+				expandedIds,
 			selectedIds: currentSelectedIds,
 			toggleExpanded,
 			handleSelection,
@@ -176,24 +176,26 @@ const TreeProvider = React.forwardRef<HTMLDivElement, TreeProviderProps>(
 			indent,
 			onNodeClick,
 			onNodeExpand,
-		};
-		return (
-			<TreeContext.Provider value={contextValue}>
-				<motion.div
-					animate={{ opacity: 1, y: 0 }}
-					className={cn(treeVariants({ variant, size, className }))}
-					initial={{ opacity: 0, y: 10 }}
-					ref={ref}
-					transition={{ duration: 0.3, ease: "easeOut" }}
-				>
-					<div className="p-2" {...props}>
-						{children}
-					</div>
-				</motion.div>
-			</TreeContext.Provider>
-		);
-	}
-);
+			};
+			return (
+				<LazyMotion features={domAnimation}>
+					<TreeContext.Provider value={contextValue}>
+						<m.div
+							animate={{ opacity: 1, y: 0 }}
+							className={cn(treeVariants({ variant, size, className }))}
+							initial={{ opacity: 0, y: 10 }}
+							ref={ref}
+							transition={{ duration: 0.3, ease: "easeOut" }}
+						>
+							<div className="p-2" {...props}>
+								{children}
+							</div>
+						</m.div>
+					</TreeContext.Provider>
+				</LazyMotion>
+			);
+		}
+	);
 
 TreeProvider.displayName = "TreeProvider";
 
@@ -290,7 +292,7 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
 		const Comp = asChild ? Slot : "div";
 		return (
 			<div className="select-none">
-				<motion.div
+				<m.div
 					className={cn(
 						treeItemVariants({ variant, selected: isSelected, className })
 					)}
@@ -335,7 +337,7 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
 					)}
 
 					{}
-					<motion.div
+					<m.div
 						animate={{ rotate: hasChildren && isExpanded ? 90 : 0 }}
 						className="mr-1 flex size-4 items-center justify-center"
 						transition={{ duration: 0.2, ease: "easeInOut" }}
@@ -343,29 +345,29 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
 						{hasChildren && (
 							<ChevronRight className="size-3 text-muted-foreground" />
 						)}
-					</motion.div>
+					</m.div>
 
 					{}
 					{showIcons && (
-						<motion.div
+						<m.div
 							className="flex size-4 items-center justify-center text-muted-foreground"
 							transition={{ duration: 0.15 }}
 							whileHover={{ scale: 1.1 }}
 						>
 							{icon || getDefaultIcon()}
-						</motion.div>
+						</m.div>
 					)}
 
 					{}
 					<span className="flex-1 truncate text-foreground text-sm">
 						{label}
 					</span>
-				</motion.div>
+				</m.div>
 
 				{}
 				<AnimatePresence>
 					{hasChildren && isExpanded && children && (
-						<motion.div
+						<m.div
 							animate={{ height: "auto", opacity: 1 }}
 							className="overflow-hidden"
 							exit={{ height: 0, opacity: 0 }}
@@ -375,7 +377,7 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
 								ease: "easeInOut",
 							}}
 						>
-							<motion.div
+							<m.div
 								animate={{ y: 0 }}
 								exit={{ y: -10 }}
 								initial={{ y: -10 }}
@@ -385,8 +387,8 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
 								}}
 							>
 								{children}
-							</motion.div>
-						</motion.div>
+							</m.div>
+						</m.div>
 					)}
 				</AnimatePresence>
 			</div>

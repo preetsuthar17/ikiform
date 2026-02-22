@@ -6,6 +6,45 @@ import { Menu as MenuPrimitive } from "@base-ui/react/menu"
 import { cn } from "@/lib/utils"
 import { ChevronRightIcon, CheckIcon } from "lucide-react"
 
+type DropdownMenuSelectEvent = {
+  defaultPrevented: boolean
+  preventDefault: () => void
+}
+
+interface DropdownMenuItemProps
+  extends Omit<MenuPrimitive.Item.Props, "onClick"> {
+  inset?: boolean
+  variant?: "default" | "destructive"
+  asChild?: boolean
+  onClick?: React.MouseEventHandler<HTMLElement>
+  onSelect?: (event: DropdownMenuSelectEvent) => void
+}
+
+function createDropdownMenuItemClickHandler(
+  onClick?: React.MouseEventHandler<HTMLElement>,
+  onSelect?: (event: DropdownMenuSelectEvent) => void
+): React.MouseEventHandler<HTMLElement> | undefined {
+  if (!onClick && !onSelect) {
+    return undefined
+  }
+
+  return (event) => {
+    const selectEvent: DropdownMenuSelectEvent = {
+      defaultPrevented: false,
+      preventDefault: () => {
+        selectEvent.defaultPrevented = true
+      },
+    }
+
+    onSelect?.(selectEvent)
+    if (selectEvent.defaultPrevented) {
+      event.preventDefault()
+    }
+
+    onClick?.(event)
+  }
+}
+
 function DropdownMenu({ ...props }: MenuPrimitive.Root.Props) {
   return <MenuPrimitive.Root data-slot="dropdown-menu" {...props} />
 }
@@ -94,13 +133,13 @@ function DropdownMenuItem({
   inset,
   variant = "default",
   asChild = false,
+  onClick,
+  onSelect,
   children,
-  ...props
-}: MenuPrimitive.Item.Props & {
-  inset?: boolean
-  variant?: "default" | "destructive"
-  asChild?: boolean
-}) {
+  ...itemProps
+}: DropdownMenuItemProps) {
+  const handleClick = createDropdownMenuItemClickHandler(onClick, onSelect)
+
   if (asChild && React.isValidElement(children)) {
     const child = children as React.ReactElement
     return (
@@ -112,8 +151,9 @@ function DropdownMenuItem({
           "focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:text-destructive not-data-[variant=destructive]:focus:**:text-accent-foreground gap-2 rounded-sm px-2 py-1.5 text-sm data-inset:pl-8 [&_svg:not([class*='size-'])]:size-4 group/dropdown-menu-item relative flex cursor-default items-center outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
           className
         )}
+        onClick={handleClick}
         render={child}
-        {...props}
+        {...itemProps}
       />
     )
   }
@@ -127,7 +167,8 @@ function DropdownMenuItem({
         "focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:text-destructive not-data-[variant=destructive]:focus:**:text-accent-foreground gap-2 rounded-sm px-2 py-1.5 text-sm data-inset:pl-8 [&_svg:not([class*='size-'])]:size-4 group/dropdown-menu-item relative flex cursor-default items-center outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         className
       )}
-      {...props}
+      onClick={handleClick}
+      {...itemProps}
     >
       {children}
     </MenuPrimitive.Item>

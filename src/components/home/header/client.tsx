@@ -4,7 +4,7 @@ import type { User } from "@supabase/supabase-js";
 import { AlignJustify, ChevronRight, LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useReducer } from "react";
 import { Separator } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/client";
@@ -35,6 +35,33 @@ interface NavLink {
 
 interface HeaderClientProps {
 	primaryLinks: NavLink[];
+}
+
+interface AuthState {
+	user: User | null;
+	loading: boolean;
+}
+
+type AuthAction = {
+	type: "set-auth";
+	user: User | null;
+};
+
+const INITIAL_AUTH_STATE: AuthState = {
+	user: null,
+	loading: true,
+};
+
+function authStateReducer(state: AuthState, action: AuthAction): AuthState {
+	switch (action.type) {
+		case "set-auth":
+			return {
+				user: action.user,
+				loading: false,
+			};
+		default:
+			return state;
+	}
 }
 
 interface UserAvatarProps {
@@ -421,16 +448,21 @@ PrimaryNavLinks.displayName = "PrimaryNavLinks";
 
 export function HeaderClient({ primaryLinks }: HeaderClientProps) {
 	const router = useRouter();
-	const [user, setUser] = useState<User | null>(null);
-	const [loading, setLoading] = useState(true);
+	const [authState, dispatchAuth] = useReducer(
+		authStateReducer,
+		INITIAL_AUTH_STATE
+	);
+	const { user, loading } = authState;
 
 	useEffect(() => {
 		const supabase = createClient();
 
 		const fetchUser = async () => {
 			const { data } = await supabase.auth.getUser();
-			setUser(data.user ?? null);
-			setLoading(false);
+			dispatchAuth({
+				type: "set-auth",
+				user: data.user ?? null,
+			});
 		};
 
 		fetchUser();
@@ -438,8 +470,10 @@ export function HeaderClient({ primaryLinks }: HeaderClientProps) {
 		const {
 			data: { subscription },
 		} = supabase.auth.onAuthStateChange((_, session) => {
-			setUser(session?.user ?? null);
-			setLoading(false);
+			dispatchAuth({
+				type: "set-auth",
+				user: session?.user ?? null,
+			});
 		});
 
 		return () => subscription.unsubscribe();

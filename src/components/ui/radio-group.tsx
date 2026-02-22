@@ -23,15 +23,21 @@ interface RadioGroupProps<TValue extends string = string>
 function RadioGroup<TValue extends string = string>({
 	className,
 	onValueChange,
-	orientation,
+	orientation = "vertical",
 	...props
 }: RadioGroupProps<TValue>) {
-  void orientation
-
   return (
     <RadioGroupPrimitive
       data-slot="radio-group"
-      className={cn("grid gap-3 w-full", className)}
+      data-orientation={orientation}
+      aria-orientation={orientation}
+      className={cn(
+        "w-full",
+        orientation === "horizontal"
+          ? "flex flex-row items-center gap-3"
+          : "grid gap-3",
+        className
+      )}
       onValueChange={
         onValueChange
           ? (value) => {
