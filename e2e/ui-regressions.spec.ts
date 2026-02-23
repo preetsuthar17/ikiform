@@ -1,4 +1,7 @@
-import { expect, test, type Page } from "@playwright/test";
+import fs from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
+import { expect, type Page, test } from "@playwright/test";
 
 const TEST_EMAIL = process.env.E2E_TEST_EMAIL;
 const TEST_PASSWORD = process.env.E2E_TEST_PASSWORD;
@@ -12,10 +15,10 @@ const IGNORE_ERROR_PATTERNS = [
 	/net::err_/i,
 ] as const;
 
-type CapturedError = {
+interface CapturedError {
 	type: "console" | "pageerror";
 	message: string;
-};
+}
 
 function isIgnorableError(message: string): boolean {
 	return IGNORE_ERROR_PATTERNS.some((pattern) => pattern.test(message));
@@ -65,7 +68,7 @@ function assertSvgRendered(locator: ReturnType<Page["locator"]>) {
 
 async function loginToDashboard(page: Page) {
 	test.skip(
-		!TEST_EMAIL || !TEST_PASSWORD,
+		!(TEST_EMAIL && TEST_PASSWORD),
 		"Set E2E_TEST_EMAIL and E2E_TEST_PASSWORD to run authenticated dashboard icon checks."
 	);
 
@@ -165,8 +168,12 @@ test("dashboard icon buttons render SVG icons (create/filter/actions)", async ({
 	const createButton = page
 		.getByRole("button", { name: /create new form/i })
 		.first();
-	const filterButton = page.getByRole("button", { name: /open filter menu/i }).first();
-	const actionsButton = page.locator("button[aria-label^='Actions for']").first();
+	const filterButton = page
+		.getByRole("button", { name: /open filter menu/i })
+		.first();
+	const actionsButton = page
+		.locator("button[aria-label^='Actions for']")
+		.first();
 
 	for (const button of [createButton, filterButton, actionsButton]) {
 		await expect(button).toBeVisible();
@@ -184,7 +191,9 @@ test("dashboard icon buttons render SVG icons (create/filter/actions)", async ({
 
 	const userMenuTrigger = page.getByRole("button", { name: /open user menu/i });
 	await expect(userMenuTrigger).toBeVisible();
-	const avatarFallback = userMenuTrigger.locator("[data-slot='avatar-fallback']");
+	const avatarFallback = userMenuTrigger.locator(
+		"[data-slot='avatar-fallback']"
+	);
 	await expect(avatarFallback).toBeVisible();
 	await expect(avatarFallback).not.toHaveText(/^\s*$/);
 
@@ -196,7 +205,95 @@ test("dashboard icon buttons render SVG icons (create/filter/actions)", async ({
 	).toEqual([]);
 });
 
-test("faq accordion uses a single rotating chevron trigger", async ({ page }) => {
+test("secure export/import flow handles tampered files and wrong passphrases", async ({
+	page,
+}) => {
+	const errors = captureBrowserErrors(page);
+	const exportPassphrase = "correct horse battery staple";
+	const wrongPassphrase = "totally-wrong-passphrase";
+
+	await loginToDashboard(page);
+
+	const createButton = page
+		.getByRole("button", { name: /create new form/i })
+		.first();
+	await expect(createButton).toBeVisible();
+
+	const actionsButton = page
+		.locator("button[aria-label^='Actions for']")
+		.first();
+	const actionsCount = await actionsButton.count();
+	if (actionsCount === 0) {
+		return;
+	}
+
+	await actionsButton.click();
+	const exportSecureItem = page
+		.getByRole("menuitem", { name: /export \(secure\)/i })
+		.first();
+	await expect(exportSecureItem).toBeVisible();
+	await exportSecureItem.click();
+
+	await expect(
+		page.getByRole("heading", { name: /export form \(secure\)/i })
+	).toBeVisible();
+	await page.getByLabel("Passphrase").fill(exportPassphrase);
+	await page.getByLabel("Confirm passphrase").fill(exportPassphrase);
+
+	const downloadPromise = page.waitForEvent("download");
+	await page.getByRole("button", { name: /export encrypted file/i }).click();
+	const download = await downloadPromise;
+	const downloadPath = await download.path();
+	expect(downloadPath, "Expected downloaded .ikiform file path").toBeTruthy();
+
+	const encryptedFilePath = downloadPath as string;
+	const encryptedRaw = await fs.readFile(encryptedFilePath, "utf8");
+	const encryptedJson = JSON.parse(encryptedRaw) as Record<string, unknown>;
+	const ciphertext = String(encryptedJson.ciphertext || "");
+	encryptedJson.ciphertext =
+		ciphertext.length > 1
+			? `${ciphertext.slice(0, -1)}${ciphertext.at(-1) === "A" ? "B" : "A"}`
+			: `${ciphertext}A`;
+
+	const tamperedPath = path.join(
+		os.tmpdir(),
+		`ikiform-tampered-${Date.now()}.ikiform`
+	);
+	await fs.writeFile(tamperedPath, JSON.stringify(encryptedJson), "utf8");
+
+	await createButton.click();
+	await page.getByRole("button", { name: /import from file/i }).click();
+	await expect(
+		page.getByRole("heading", { name: /import form from encrypted file/i })
+	).toBeVisible();
+
+	const fileInput = page.locator("#secure-import-file");
+	await fileInput.setInputFiles(tamperedPath);
+	await page.getByLabel("Passphrase").fill(exportPassphrase);
+	await page.getByRole("button", { name: /decrypt file/i }).click();
+	await expect(page.getByText(/imported form/i)).toHaveCount(0);
+
+	await fileInput.setInputFiles(encryptedFilePath);
+	await page.getByLabel("Passphrase").fill(wrongPassphrase);
+	await page.getByRole("button", { name: /decrypt file/i }).click();
+	await expect(page.getByText(/imported form/i)).toHaveCount(0);
+
+	await page.getByLabel("Passphrase").fill(exportPassphrase);
+	await page.getByRole("button", { name: /decrypt file/i }).click();
+	await expect(page.getByText("Imported form")).toBeVisible();
+	await page.getByRole("button", { name: /^cancel$/i }).click();
+
+	expect(
+		errors,
+		`secure export/import emitted browser errors:\n${errors
+			.map((error) => `- [${error.type}] ${error.message}`)
+			.join("\n")}`
+	).toEqual([]);
+});
+
+test("faq accordion uses a single rotating chevron trigger", async ({
+	page,
+}) => {
 	const errors = captureBrowserErrors(page);
 
 	await page.goto("/", { waitUntil: "domcontentloaded" });
@@ -210,7 +307,9 @@ test("faq accordion uses a single rotating chevron trigger", async ({ page }) =>
 
 	const chevron = chevrons.first();
 	await expect(chevron).toBeVisible();
-	await expect(chevron).toHaveClass(/group-data-\[panel-open\]\/accordion-trigger:rotate-180/);
+	await expect(chevron).toHaveClass(
+		/group-data-\[panel-open\]\/accordion-trigger:rotate-180/
+	);
 
 	await firstTrigger.click();
 	await expect(firstTrigger).toHaveAttribute("aria-expanded", "true");

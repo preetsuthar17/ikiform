@@ -5,9 +5,9 @@ export interface FormsManagementProps {
 }
 
 export interface DeleteModalState {
-	open: boolean;
 	formId: string;
 	formTitle: string;
+	open: boolean;
 }
 
 export interface FormStatsProps {
@@ -22,16 +22,18 @@ export interface FormsSidebarProps {
 
 export interface FormCardProps {
 	form: Form;
-	onEdit: (formId: string) => void;
-	onDuplicate: (formId: string) => void;
-	onViewForm: (form: Form) => void;
-	onViewAnalytics: (formId: string) => void;
-	onShare: (form: Form) => void;
 	onDelete: (formId: string, formTitle: string) => void;
+	onDuplicate: (formId: string) => void;
+	onEdit: (formId: string) => void;
+	onExportSecure: (form: Form) => void;
+	onShare: (form: Form) => void;
+	onViewAnalytics: (formId: string) => void;
+	onViewForm: (form: Form) => void;
 }
 
 export interface FormHeaderProps {
 	onCreateForm: () => void;
+	onImportSecure?: () => void;
 }
 
 export interface EmptyStateProps {
@@ -44,19 +46,20 @@ export interface AIFormSuggestionsProps {
 
 export interface FormActionsProps {
 	form: Form;
-	onEdit: (formId: string) => void;
-	onDuplicate: (formId: string) => void;
-	onViewForm: (form: Form) => void;
-	onViewAnalytics: (formId: string) => void;
-	onShare: (form: Form) => void;
 	onDelete: (formId: string, formTitle: string) => void;
+	onDuplicate: (formId: string) => void;
+	onEdit: (formId: string) => void;
+	onExportSecure: (form: Form) => void;
+	onShare: (form: Form) => void;
+	onViewAnalytics: (formId: string) => void;
+	onViewForm: (form: Form) => void;
 }
 
 export interface CreateFormModalProps {
 	isOpen: boolean;
+	onAICreate: () => void;
 	onClose: () => void;
 	onManualCreate: () => void;
-	onAICreate: () => void;
 }
 
 export interface LoadingSkeletonProps {
@@ -64,7 +67,7 @@ export interface LoadingSkeletonProps {
 }
 
 export interface AISuggestion {
-	title: string;
-	summary: string;
 	prompt: string;
+	summary: string;
+	title: string;
 }

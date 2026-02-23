@@ -1,8 +1,9 @@
 "use client";
 
-import { Settings } from "lucide-react";
-
-import { useState } from "react";
+import { Download, Settings } from "lucide-react";
+import { useCallback, useState } from "react";
+import { SecureExportModal } from "@/components/dashboard/forms-management/modals/secure-export-modal";
+import { Button } from "@/components/ui/button";
 
 import {
 	Dialog,
@@ -10,6 +11,9 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "@/components/ui/dialog";
+import { useAuth } from "@/hooks/use-auth";
+import { toast } from "@/hooks/use-toast";
+import { formsDb, type Form } from "@/lib/database";
 import {
 	FormSettingsDesktopLayout,
 	FormSettingsMobileLayout,
@@ -42,6 +46,29 @@ export function FormSettingsModal({
 
 	const [activeSection, setActiveSection] =
 		useState<FormSettingsSection>("basic");
+	const [showSecureExportModal, setShowSecureExportModal] = useState(false);
+	const [secureExportForm, setSecureExportForm] = useState<Form | null>(null);
+	const [loadingExportForm, setLoadingExportForm] = useState(false);
+	const { user } = useAuth();
+
+	const handleOpenSecureExport = useCallback(async () => {
+		if (!(formId && user)) {
+			toast.error("Save the form first to export it securely.");
+			return;
+		}
+
+		setLoadingExportForm(true);
+		try {
+			const form = await formsDb.getForm(formId, user.id);
+			setSecureExportForm(form);
+			setShowSecureExportModal(true);
+		} catch (error) {
+			console.error("Failed to prepare secure export:", error);
+			toast.error("Failed to prepare secure export.");
+		} finally {
+			setLoadingExportForm(false);
+		}
+	}, [formId, user]);
 
 	const sectionProps = {
 		localSettings,
@@ -61,41 +88,61 @@ export function FormSettingsModal({
 	};
 
 	return (
-		<Dialog onOpenChange={onClose} open={isOpen}>
-			<DialogContent className="b-5 flex h-[90vh] w-full grow flex-col gap-0 overflow-hidden p-0 sm:max-w-6xl">
-				<DialogHeader className="flex shrink-0 flex-row items-center gap-6 p-4">
-					<div className="flex items-center gap-3">
-						<Settings className="size-5 text-primary" />
-						<DialogTitle className="font-semibold text-xl">
-							Form Settings
-						</DialogTitle>
-					</div>
-				</DialogHeader>
-				<div className="mb-12 min-h-0 p-4 md:mb-0">
-					{formId || (onSchemaUpdate && onSchemaUpdate !== undefined) ? (
-						<>
-							<FormSettingsDesktopLayout
-								activeSection={activeSection}
-								onClose={onClose}
-								onSectionChange={setActiveSection}
-								sectionProps={sectionProps}
-							/>
-							<FormSettingsMobileLayout
-								activeSection={activeSection}
-								onClose={onClose}
-								onSectionChange={setActiveSection}
-								sectionProps={sectionProps}
-							/>
-						</>
-					) : (
-						<div className="flex h-full flex-col items-center justify-center gap-4 text-center">
-							<p className="text-muted-foreground">
-								Please save the form first to access the settings.
-							</p>
+		<>
+			<Dialog onOpenChange={onClose} open={isOpen}>
+				<DialogContent className="b-5 flex h-[90vh] w-full grow flex-col gap-0 overflow-hidden p-0 sm:max-w-6xl">
+					<DialogHeader className="flex shrink-0 flex-row items-center justify-between gap-6 p-4">
+						<div className="flex items-center gap-3">
+							<Settings className="size-5 text-primary" />
+							<DialogTitle className="font-semibold text-xl">
+								Form Settings
+							</DialogTitle>
 						</div>
-					)}
-				</div>
-			</DialogContent>
-		</Dialog>
+						<Button
+							disabled={!formId || loadingExportForm}
+							onClick={handleOpenSecureExport}
+							size="sm"
+							variant="outline"
+						>
+							<Download className="size-4" />
+							{loadingExportForm ? "Preparing..." : "Export (Secure)"}
+						</Button>
+					</DialogHeader>
+					<div className="mb-12 min-h-0 p-4 md:mb-0">
+						{formId || (onSchemaUpdate && onSchemaUpdate !== undefined) ? (
+							<>
+								<FormSettingsDesktopLayout
+									activeSection={activeSection}
+									onClose={onClose}
+									onSectionChange={setActiveSection}
+									sectionProps={sectionProps}
+								/>
+								<FormSettingsMobileLayout
+									activeSection={activeSection}
+									onClose={onClose}
+									onSectionChange={setActiveSection}
+									sectionProps={sectionProps}
+								/>
+							</>
+						) : (
+							<div className="flex h-full flex-col items-center justify-center gap-4 text-center">
+								<p className="text-muted-foreground">
+									Please save the form first to access the settings.
+								</p>
+							</div>
+						)}
+					</div>
+				</DialogContent>
+			</Dialog>
+
+			<SecureExportModal
+				form={secureExportForm}
+				isOpen={showSecureExportModal}
+				onClose={() => {
+					setShowSecureExportModal(false);
+					setSecureExportForm(null);
+				}}
+			/>
+		</>
 	);
 }

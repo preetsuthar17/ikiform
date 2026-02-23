@@ -4,12 +4,13 @@ import { FormsList } from "./forms-list";
 
 interface FormsViewProps {
 	forms: Form[];
-	onEdit: (formId: string) => void;
-	onDuplicate: (formId: string) => void;
-	onViewForm: (form: Form) => void;
-	onViewAnalytics: (formId: string) => void;
-	onShare: (form: Form) => void;
 	onDelete: (formId: string, formTitle: string) => void;
+	onDuplicate: (formId: string) => void;
+	onEdit: (formId: string) => void;
+	onExportSecure: (form: Form) => void;
+	onShare: (form: Form) => void;
+	onViewAnalytics: (formId: string) => void;
+	onViewForm: (form: Form) => void;
 }
 
 export const FormsView = memo(function FormsView({
@@ -19,19 +20,21 @@ export const FormsView = memo(function FormsView({
 	onViewForm,
 	onViewAnalytics,
 	onShare,
+	onExportSecure,
 	onDelete,
 }: FormsViewProps) {
 	return (
-		<div aria-label="Forms list" role="region">
+		<section aria-label="Forms list">
 			<FormsList
 				forms={forms}
 				onDelete={onDelete}
 				onDuplicate={onDuplicate}
 				onEdit={onEdit}
+				onExportSecure={onExportSecure}
 				onShare={onShare}
 				onViewAnalytics={onViewAnalytics}
 				onViewForm={onViewForm}
 			/>
-		</div>
+		</section>
 	);
 });
