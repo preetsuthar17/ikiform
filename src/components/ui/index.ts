@@ -24,7 +24,6 @@ export * from "./label";
 export * from "./loader";
 export * from "./loading-skeletons";
 export * from "./marquee";
-export * from "./menu-bar";
 export * from "./modal";
 export * from "./pagination";
 export * from "./popover";

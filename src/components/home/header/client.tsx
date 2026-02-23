@@ -168,7 +168,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
 				</div>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem
-					className="min-h-[40px] font-medium text-destructive opacity-70 transition-opacity hover:opacity-100"
+					className="min-h-[40px] font-medium text-destructive opacity-70 transition-opacity hover:opacity-100 mt-2 cursor-pointer"
 					onSelect={handleSignOut}
 				>
 					<span className="text-destructive">Log out</span>

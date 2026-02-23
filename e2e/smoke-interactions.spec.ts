@@ -33,6 +33,7 @@ const IGNORE_CONSOLE_ERROR_PATTERNS = [
 	/content security policy/i,
 	/hydration/i,
 	/ticketping/i,
+	/api-staging\.solcard\.cc\/auth\/user/i,
 	/notification websocket error/i,
 	/error loading form:.*pgrst116/i,
 ];

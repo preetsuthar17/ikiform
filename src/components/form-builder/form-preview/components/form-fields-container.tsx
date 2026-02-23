@@ -251,11 +251,13 @@ export function FormFieldsContainer({
 														role="button"
 														tabIndex={0}
 													>
-														<div className="absolute top-2 left-2 z-10 flex items-center gap-1 opacity-100 transition-opacity group-hover:opacity-100 sm:opacity-0 sm:group-hover:opacity-100">
-															<div className="cursor-grab text-muted-foreground hover:text-foreground active:cursor-grabbing">
-																<GripVertical className="size-4" />
-															</div>
-														</div>
+													<div className="absolute top-2 left-2 z-10 flex items-center gap-1 opacity-100 transition-opacity group-hover:opacity-100 sm:opacity-0 sm:group-hover:opacity-100">
+                            <div
+                              className="cursor-grab text-muted-foreground hover:text-foreground active:cursor-grabbing bg-card  p-3"
+                            >
+                              <GripVertical className="size-4" />
+                            </div>
+                          </div>
 														<div className="absolute top-2 right-2 z-10 flex gap-1 opacity-100 transition-opacity group-hover:opacity-100 sm:opacity-0 sm:group-hover:opacity-100">
 															<Tooltip>
 																<TooltipTrigger asChild>
