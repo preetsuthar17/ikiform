@@ -139,7 +139,7 @@ export default function ResetPasswordClient() {
 		<div className="flex h-screen flex-col items-center justify-center gap-4">
 			<Card className="flex w-full max-w-sm flex-col items-center justify-center gap-6 text-center">
 				<CardHeader>
-					<div className="flex-shrink-0">
+					<div className="shrink-0">
 						<Link href="/">
 							<span className="flex items-center justify-center gap-2 font-semibold text-3xl tracking-tight">
 								<Image

@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 import { Suspense } from "react";
 import { FormBuilderSkeleton } from "@/components/form-builder/form-builder-skeleton";
 import { Button } from "@/components/ui/button";
@@ -20,15 +21,17 @@ const FormBuilder = dynamic(
 );
 
 function PremiumRequired() {
+	const locale = useLocale();
+	const t = useTranslations("product.common.premium");
+
 	return (
 		<div className="flex min-h-screen flex-col items-center justify-center gap-6">
-			<div className="font-semibold text-2xl">Requires Premium</div>
+			<div className="font-semibold text-2xl">{t("title")}</div>
 			<div className="max-w-md text-center text-muted-foreground">
-				You need a premium subscription to use the form builder. Upgrade to
-				unlock all features.
+				{t("formBuilderDescription")}
 			</div>
-			<Link href="/#pricing">
-				<Button size="lg">View Pricing</Button>
+			<Link href={`/${locale}#pricing`}>
+				<Button size="lg">{t("viewPricing")}</Button>
 			</Link>
 		</div>
 	);

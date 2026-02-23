@@ -1,6 +1,7 @@
 "use client";
 
 import { Upload } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 import { FormPreview } from "@/components/form-builder/form-preview";
 import { Button } from "@/components/ui/button";
@@ -55,6 +56,7 @@ export function SecureImportModal({
 	onClose,
 	onImport,
 }: SecureImportModalProps) {
+	const t = useTranslations("dashboard.formsManagement.secureImport");
 	const [selectedFile, setSelectedFile] = useState<File | null>(null);
 	const [passphrase, setPassphrase] = useState("");
 	const [fileError, setFileError] = useState("");
@@ -106,7 +108,7 @@ export function SecureImportModal({
 		let hasError = false;
 
 		if (!selectedFile) {
-			setFileError("Please choose an encrypted .ikiform file.");
+			setFileError(t("errors.chooseFile"));
 			hasError = true;
 		} else {
 			setFileError("");
@@ -114,7 +116,7 @@ export function SecureImportModal({
 
 		if (passphrase.trim().length < MIN_PASSPHRASE_LENGTH) {
 			setPassphraseError(
-				`Passphrase must be at least ${MIN_PASSPHRASE_LENGTH} characters.`
+				t("errors.passphraseMinChars", { count: MIN_PASSPHRASE_LENGTH })
 			);
 			hasError = true;
 		} else {
@@ -122,7 +124,7 @@ export function SecureImportModal({
 		}
 
 		if (hasError) {
-			toast.error("Please fix the highlighted fields.");
+			toast.error(t("toasts.fixHighlightedFields"));
 			return;
 		}
 
@@ -139,14 +141,14 @@ export function SecureImportModal({
 			);
 			const normalized = normalizeImportedFormPayload(decryptedPayload);
 			setImportData(normalized);
-			toast.success("File decrypted. Review import options.");
+			toast.success(t("toasts.fileDecrypted"));
 		} catch (error) {
 			const message =
 				error instanceof Error
 					? error.message
-					: "Failed to decrypt import file.";
+					: t("errors.failedDecrypt");
 			toast.error(message);
-			setPassphraseError("Wrong passphrase or the file may be tampered.");
+			setPassphraseError(t("errors.wrongPassphrase"));
 			setImportData(null);
 		} finally {
 			setDecrypting(false);
@@ -155,7 +157,7 @@ export function SecureImportModal({
 
 	const handleImport = async () => {
 		if (!importData) {
-			toast.error("Decrypt a file before importing.");
+			toast.error(t("errors.decryptBeforeImport"));
 			return;
 		}
 
@@ -174,7 +176,7 @@ export function SecureImportModal({
 			onClose();
 		} catch (error) {
 			const message =
-				error instanceof Error ? error.message : "Failed to import form.";
+				error instanceof Error ? error.message : t("errors.failedImport");
 			toast.error(message);
 		} finally {
 			setImporting(false);
@@ -185,9 +187,9 @@ export function SecureImportModal({
 		<Dialog onOpenChange={onClose} open={isOpen}>
 			<DialogContent className="max-h-[92vh] gap-0 overflow-hidden p-0 sm:max-w-6xl">
 				<DialogHeader className="shrink-0 border-b px-5 py-4 sm:px-6">
-					<DialogTitle>Import Form from Encrypted File</DialogTitle>
+					<DialogTitle>{t("title")}</DialogTitle>
 					<DialogDescription>
-						Decrypt a <code>.ikiform</code> file and create a new draft form.
+						{t("description")}
 					</DialogDescription>
 				</DialogHeader>
 
@@ -197,7 +199,7 @@ export function SecureImportModal({
 							<ScrollArea className={`h-full flex-1 ${MODAL_SCROLL_AREA_CLASS}`}>
 								<div className="space-y-4 pr-3">
 									<div className="flex flex-col gap-2">
-										<Label htmlFor="secure-import-file">Encrypted file</Label>
+										<Label htmlFor="secure-import-file">{t("encryptedFileLabel")}</Label>
 										<Input
 											accept=".ikiform,application/json"
 											aria-invalid={!!fileError}
@@ -220,12 +222,12 @@ export function SecureImportModal({
 										>
 											{fileError ||
 												selectedFileSummary ||
-												"Upload a .ikiform encrypted export file."}
+												t("encryptedFileHelp")}
 										</p>
 									</div>
 
 									<div className="flex flex-col gap-2">
-										<Label htmlFor="secure-import-passphrase">Passphrase</Label>
+										<Label htmlFor="secure-import-passphrase">{t("passphraseLabel")}</Label>
 										<Input
 											aria-invalid={!!passphraseError}
 											id="secure-import-passphrase"
@@ -234,7 +236,7 @@ export function SecureImportModal({
 												setPassphraseError("");
 												setImportData(null);
 											}}
-											placeholder="Enter passphrase used during export"
+											placeholder={t("passphrasePlaceholder")}
 											type="password"
 											value={passphrase}
 										/>
@@ -247,7 +249,7 @@ export function SecureImportModal({
 											}`}
 										>
 											{passphraseError ||
-												`At least ${MIN_PASSPHRASE_LENGTH} characters required.`}
+												t("passphraseHelp", { count: MIN_PASSPHRASE_LENGTH })}
 										</p>
 									</div>
 
@@ -258,13 +260,13 @@ export function SecureImportModal({
 											onClick={handleDecrypt}
 											variant="outline"
 										>
-											{decrypting ? "Decrypting..." : "Decrypt File"}
+											{decrypting ? t("decrypting") : t("decryptFile")}
 										</Button>
 									</div>
 
 									<div className="flex flex-col gap-4 rounded-lg border bg-muted/20 p-4">
 										<div className="min-h-[52px]">
-											<div className="font-medium">Imported form</div>
+											<div className="font-medium">{t("importedForm")}</div>
 											{importData ? (
 												<>
 													<div className="text-muted-foreground text-sm">
@@ -278,7 +280,7 @@ export function SecureImportModal({
 												</>
 											) : (
 												<div className="text-muted-foreground text-sm">
-													Decrypt a file to load import settings.
+													{t("decryptToLoadSettings")}
 												</div>
 											)}
 										</div>
@@ -286,7 +288,7 @@ export function SecureImportModal({
 										<div className="flex flex-col gap-3">
 											<div className="flex items-center justify-between gap-3">
 												<Label className="text-sm" htmlFor="preserve-api">
-													Preserve API settings (api key and enabled state)
+													{t("preserveApiSettings")}
 												</Label>
 												<Switch
 													checked={sensitiveOptions.preserveApiSettings}
@@ -302,7 +304,7 @@ export function SecureImportModal({
 											</div>
 											<div className="flex items-center justify-between gap-3">
 												<Label className="text-sm" htmlFor="preserve-password">
-													Preserve password-protection password
+													{t("preservePassword")}
 												</Label>
 												<Switch
 													checked={sensitiveOptions.preservePasswordProtection}
@@ -318,7 +320,7 @@ export function SecureImportModal({
 											</div>
 											<div className="flex items-center justify-between gap-3">
 												<Label className="text-sm" htmlFor="preserve-notifications">
-													Preserve notification recipient email
+													{t("preserveNotificationEmail")}
 												</Label>
 												<Switch
 													checked={sensitiveOptions.preserveNotificationEmail}
@@ -339,7 +341,7 @@ export function SecureImportModal({
 
 							<div className="mt-4 flex shrink-0 flex-col gap-2 border-t pt-4 sm:flex-row sm:justify-end">
 								<Button onClick={onClose} variant="outline">
-									Cancel
+									{t("cancel")}
 								</Button>
 								<Button
 									className="sm:min-w-44"
@@ -347,7 +349,7 @@ export function SecureImportModal({
 									onClick={handleImport}
 								>
 									<Upload className="size-4" />
-									{importing ? "Importing..." : "Import as New Form"}
+									{importing ? t("importing") : t("importAsNewForm")}
 								</Button>
 							</div>
 						</div>
@@ -369,7 +371,7 @@ export function SecureImportModal({
 								</ScrollArea>
 							) : (
 								<div className="flex h-full items-center justify-center p-6 text-center text-muted-foreground text-sm">
-									Decrypt a file to preview the imported form.
+									{t("decryptToPreview")}
 								</div>
 							)}
 						</div>

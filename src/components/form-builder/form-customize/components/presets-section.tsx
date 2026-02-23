@@ -1,6 +1,7 @@
 "use client";
 
 import { Check, Palette } from "lucide-react";
+import { useTranslations } from "next-intl";
 import React from "react";
 import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
 import { Badge } from "@/components/ui/badge";
@@ -25,6 +26,7 @@ export function PresetsSection({
 	localSettings,
 	updateSettings,
 }: PresetsSectionProps) {
+	const t = useTranslations("product.formBuilder.customize.presets");
 	const [selectedCategory, setSelectedCategory] = React.useState<
 		FormPreset["category"] | "all"
 	>("all");
@@ -55,7 +57,7 @@ export function PresetsSection({
 
 		updateSettings(newSettings);
 		setAppliedPreset(preset.id);
-		toast.success(`Applied "${preset.name}" preset`);
+		toast.success(t("appliedPreset", { name: preset.name }));
 
 		setTimeout(() => setAppliedPreset(null), 2000);
 	};
@@ -67,7 +69,7 @@ export function PresetsSection({
 			<Card aria-selected={isApplied} className="overflow-auto p-0 shadow-none">
 				<CardContent className="p-0">
 					<button
-						aria-label={`Apply ${preset.name} preset`}
+						aria-label={t("applyPresetAria", { name: preset.name })}
 						aria-pressed={isApplied}
 						className={`w-full rounded-md p-4 text-left transition-transform focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1 ${
 							isApplied ? "ring-2 ring-primary" : ""
@@ -95,7 +97,7 @@ export function PresetsSection({
 											color: preset.settings.colors?.primary || "#3b82f6",
 										}}
 									>
-										Form Title
+										{t("formTitle")}
 									</div>
 									<div
 										className="mx-auto size-16 rounded"
@@ -119,7 +121,7 @@ export function PresetsSection({
 											color: "#ffffff",
 										}}
 									>
-										Submit
+										{t("submit")}
 									</div>
 								</div>
 							</div>
@@ -169,16 +171,16 @@ export function PresetsSection({
 			<div>
 				<div className="mb-2 flex items-center gap-2">
 					<Palette className="size-4 text-primary" />
-					<h2 className="font-semibold text-lg">Design Presets</h2>
+					<h2 className="font-semibold text-lg">{t("title")}</h2>
 				</div>
 				<p className="text-muted-foreground text-xs">
-					Quick-start with beautiful pre-designed form styles
+					{t("description")}
 				</p>
 			</div>
 
 			{}
 			<div className="flex flex-col gap-3">
-				<Label className="font-medium">Category</Label>
+				<Label className="font-medium">{t("category")}</Label>
 				<div className="flex flex-wrap gap-2">
 					<Button
 						className="text-xs"
@@ -186,7 +188,7 @@ export function PresetsSection({
 						size="sm"
 						variant={selectedCategory === "all" ? "default" : "outline"}
 					>
-						All Presets
+						{t("allPresets")}
 					</Button>
 					{PRESET_CATEGORIES.map((category) => (
 						<Button
@@ -209,19 +211,18 @@ export function PresetsSection({
 				<div className="flex items-center justify-between">
 					<Label className="font-medium">
 						{selectedCategory === "all"
-							? "All Presets"
+							? t("allPresets")
 							: PRESET_CATEGORIES.find((c) => c.id === selectedCategory)
-									?.label || "Presets"}
+									?.label || t("presets")}
 					</Label>
 					<span className="text-muted-foreground text-xs">
-						{filteredPresets.length} preset
-						{filteredPresets.length !== 1 ? "s" : ""}
+						{t("presetCount", { count: filteredPresets.length })}
 					</span>
 				</div>
 
 				<ScrollArea className="h-[550px]">
 					<div
-						aria-label="Preset list"
+						aria-label={t("presetList")}
 						className="grid grid-cols-1 gap-4 pr-4"
 						role="listbox"
 					>

@@ -1,6 +1,7 @@
 "use client";
 
 import { Send, Square } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import Image from "next/image";
 import { memo, useEffect, useMemo } from "react";
@@ -158,6 +159,7 @@ export const ChatInterface = memo(function ChatInterface({
 	abortController,
 	handleStopGeneration,
 }: ChatInterfaceProps) {
+	const t = useTranslations("product.analytics.chat");
 	const isEmpty = chatMessages.length === 0;
 
 	const markdownComponents = useMemo(
@@ -297,10 +299,9 @@ export const ChatInterface = memo(function ChatInterface({
 								/>
 							</div>
 							<div className="flex flex-col gap-2">
-								<h3 className="font-semibold text-xl">Ask Kiko Anything</h3>
+								<h3 className="font-semibold text-xl">{t("emptyTitle")}</h3>
 								<p className="max-w-md text-muted-foreground">
-									Get instant insights and analysis from your form data. Ask
-									questions in natural language.
+									{t("emptyDescription")}
 								</p>
 							</div>
 						</div>
@@ -351,7 +352,7 @@ export const ChatInterface = memo(function ChatInterface({
 										<div className="flex items-center gap-2">
 											<Loader />
 											<span className="text-muted-foreground text-sm">
-												Thinking...
+												{t("thinking")}
 											</span>
 										</div>
 									)}
@@ -398,7 +399,7 @@ export const ChatInterface = memo(function ChatInterface({
 										handleChatSend(e);
 									}
 								}}
-								placeholder="Ask about your form analytics..."
+								placeholder={t("inputPlaceholder")}
 								ref={chatInputRef}
 								value={chatInput}
 							/>
@@ -426,8 +427,10 @@ export const ChatInterface = memo(function ChatInterface({
 					</form>
 					<div className="mt-2 flex items-center justify-center text-muted-foreground text-xs">
 						<span>
-							Press <Kbd>Enter</Kbd> to send, <Kbd>Shift+Enter</Kbd> for new
-							line
+							{t.rich("inputHelp", {
+								enter: () => <Kbd>Enter</Kbd>,
+								shiftEnter: () => <Kbd>Shift+Enter</Kbd>,
+							})}
 						</span>
 					</div>
 				</div>

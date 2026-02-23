@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import { AnimatePresence, LazyMotion, domAnimation, m } from "motion/react";
+import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 import React, {
 	useCallback,
@@ -94,22 +95,25 @@ type AiFormStep = {
 	placeholder?: string;
 };
 
-const AI_FORM_STEPS: AiFormStep[] = [
-	{
-		label: "What would you like to create?",
-		placeholder: "Eg. Contact Form",
-		type: "input",
-		width: "w-full",
-	},
-	{ label: "Collect name", type: "field", width: "w-2/3" },
-	{ label: "Collect email", type: "field", width: "w-2/3" },
-	{ label: "Message", type: "field", height: "h-20", width: "w-full" },
-] as const;
-
 const ANALYTICS_BASE_POINTS = [72, 68, 79, 61, 74, 70, 77, 59, 73, 66] as const;
 
 const AiFormBuilderPreview = React.memo(() => {
+	const t = useTranslations("home.bento.preview.aiForm");
 	const { ref, isInView } = useInView();
+	const aiFormSteps = useMemo<AiFormStep[]>(
+		() => [
+			{
+				label: t("step0Label"),
+				placeholder: t("step0Placeholder"),
+				type: "input",
+				width: "w-full",
+			},
+			{ label: t("step1Label"), type: "field", width: "w-2/3" },
+			{ label: t("step2Label"), type: "field", width: "w-2/3" },
+			{ label: t("step3Label"), type: "field", height: "h-20", width: "w-full" },
+		],
+		[t]
+	);
 	type AiFormAnimationState = {
 		currentStep: number;
 		status: "generating" | "success";
@@ -122,15 +126,15 @@ const AiFormBuilderPreview = React.memo(() => {
 			if (action.type !== "advance") {
 				return state;
 			}
-			if (state.status === "success") {
-				return { currentStep: 0, status: "generating" };
-			}
-			if (state.currentStep < AI_FORM_STEPS.length) {
-				return { ...state, currentStep: state.currentStep + 1 };
-			}
-			if (state.currentStep === AI_FORM_STEPS.length) {
-				return { ...state, status: "success" };
-			}
+				if (state.status === "success") {
+					return { currentStep: 0, status: "generating" };
+				}
+				if (state.currentStep < aiFormSteps.length) {
+					return { ...state, currentStep: state.currentStep + 1 };
+				}
+				if (state.currentStep === aiFormSteps.length) {
+					return { ...state, status: "success" };
+				}
 			return state;
 		},
 		{ currentStep: 0, status: "generating" }
@@ -140,13 +144,13 @@ const AiFormBuilderPreview = React.memo(() => {
 	useEffect(() => {
 		if (!isInView) return;
 		const delay =
-			status === "success"
-				? 2500
-				: currentStep < AI_FORM_STEPS.length
-					? 850
-					: currentStep === AI_FORM_STEPS.length
-						? 400
-						: null;
+				status === "success"
+					? 2500
+					: currentStep < aiFormSteps.length
+						? 850
+						: currentStep === aiFormSteps.length
+							? 400
+							: null;
 
 		if (delay === null) {
 			return;
@@ -160,8 +164,8 @@ const AiFormBuilderPreview = React.memo(() => {
 	}, [currentStep, status, isInView]);
 
 	return (
-		<div
-			aria-label="AI Form Builder Demo"
+			<div
+				aria-label={t("demoAria")}
 			className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br from-primary/1 to-accent/20 p-0 shadow-inner"
 			ref={ref}
 			tabIndex={0}
@@ -188,11 +192,11 @@ const AiFormBuilderPreview = React.memo(() => {
 								ease: "easeOut",
 						}}
 					/>
-					<span className="font-medium text-foreground text-sm">
-						{status === "generating"
-							? "AI is building your form…"
-							: "Form generated"}
-					</span>
+						<span className="font-medium text-foreground text-sm">
+							{status === "generating"
+								? t("statusGenerating")
+								: t("statusGenerated")}
+						</span>
 				</m.div>
 				<div className="flex flex-col gap-3 rounded-xl border border-border bg-background/80 p-3">
 					{}
@@ -208,29 +212,29 @@ const AiFormBuilderPreview = React.memo(() => {
 							}}
 							transition={{ delay: 0.1 }}
 						>
-						<Label
+							<Label
 							className="mb-0.5 font-medium text-muted-foreground text-xs"
 							htmlFor="aiform-demo-input"
 						>
-							What would you like to create?
-						</Label>
+								{t("step0Label")}
+							</Label>
 						<input
 							aria-label="Demo form input"
 							className="h-9 rounded-md border border-border bg-transparent px-3 text-foreground text-xs"
 							disabled
 							id="aiform-demo-input"
-							placeholder="Eg. Contact Form…"
+								placeholder={t("step0Placeholder")}
 							style={{
 								opacity: currentStep > 0 ? 1 : 0.6,
 								transition: "opacity 0.2s",
 							}}
-							value="could you create a simple contact form?"
-						/>
+								value={t("examplePrompt")}
+							/>
 					</m.div>
 					{}
 					<m.div className="relative mt-2 flex flex-col gap-2 rounded-m">
-							{[1, 2, 3].map((i, idx) => {
-								const step = AI_FORM_STEPS[i];
+								{[1, 2, 3].map((i, idx) => {
+									const step = aiFormSteps[i];
 								const shown = currentStep > i - 1;
 							return (
 								<m.div
@@ -272,9 +276,9 @@ const AiFormBuilderPreview = React.memo(() => {
 					className="mt-auto flex items-center justify-between border-border/50 border-t px-6 py-3"
 					initial={false}
 				>
-				<span className="text-muted-foreground text-xs">
-					Generated in&nbsp;2.3s
-				</span>
+					<span className="text-muted-foreground text-xs">
+						{t("generatedIn")}
+					</span>
 				<button
 					aria-disabled={status !== "success"}
 					className="rounded-full bg-primary px-3 py-1 font-semibold text-primary-foreground text-xs shadow transition focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/80 disabled:opacity-60"
@@ -284,8 +288,8 @@ const AiFormBuilderPreview = React.memo(() => {
 					tabIndex={status === "success" ? 0 : -1}
 					type="button"
 				>
-					Use this form
-				</button>
+						{t("useThisForm")}
+					</button>
 			</m.div>
 		</div>
 	);
@@ -294,11 +298,12 @@ const AiFormBuilderPreview = React.memo(() => {
 AiFormBuilderPreview.displayName = "AiFormBuilderPreview";
 
 const UnlimitedPreview = React.memo(() => {
+	const t = useTranslations("home.bento.preview.unlimited");
 	const { ref, isInView } = useInView();
 
 	return (
 		<div
-			aria-label="Unlimited submissions preview"
+			aria-label={t("aria")}
 			className="relative flex h-full flex-col items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/1 to-accent/20 p-4 shadow-inner"
 			ref={ref}
 		>
@@ -345,7 +350,7 @@ const UnlimitedPreview = React.memo(() => {
 					transition={{ delay: 0.1, type: "spring", stiffness: 220 }}
 				>
 					<div className="flex items-center gap-2 text-center font-medium text-foreground text-sm">
-						Unlimited Forms, Fields, Users and Responses.
+						{t("copy")}
 					</div>
 				</m.div>
 			</div>
@@ -356,6 +361,7 @@ const UnlimitedPreview = React.memo(() => {
 UnlimitedPreview.displayName = "UnlimitedPreview";
 
 const AnalyticsPreview = React.memo(() => {
+	const t = useTranslations("home.bento.preview.analytics");
 	const { ref, isInView } = useInView();
 	const [isHovered, setIsHovered] = useState(false);
 	const basePoints = ANALYTICS_BASE_POINTS;
@@ -403,10 +409,10 @@ const AnalyticsPreview = React.memo(() => {
 			ref={ref}
 		>
 			<div className="flex flex-col gap-3">
-				<div className="flex items-center justify-between">
-					<span className="font-medium text-foreground text-xs">
-						Weekly Responses
-					</span>
+					<div className="flex items-center justify-between">
+						<span className="font-medium text-foreground text-xs">
+							{t("weeklyResponses")}
+						</span>
 					<m.span className="font-semibold text-green-500 text-xs">
 						↗ +34%
 					</m.span>
@@ -459,65 +465,66 @@ const AnalyticsPreview = React.memo(() => {
 							duration: 1,
 							repeat: isHovered && isInView ? Number.POSITIVE_INFINITY : 0,
 					}}
-				>
-					{isHovered ? "Live data updating..." : "1.2k responses this week"}
-				</m.div>
+					>
+						{isHovered ? t("liveUpdating") : t("responsesThisWeek")}
+					</m.div>
+				</div>
 			</div>
-		</div>
 	);
 });
 
 AnalyticsPreview.displayName = "AnalyticsPreview";
 
 const LogicBuilderPreview = React.memo(() => {
+	const t = useTranslations("home.bento.preview.logic");
 	const steps = React.useMemo(
 			() => [
-				{
-					id: "if-yes",
-					label: (
-					<>
-						<span className="font-semibold text-primary">User responds</span>
-						&nbsp;
-						<span className="italic">“Yes”</span>
-					</>
-				),
-				prefix: (
-					<span className="rounded bg-primary/80 px-1 py-0.5 font-bold text-white text-xs">
-						IF
-					</span>
-				),
-				icon: (
-					<div className="flex size-10 items-center justify-center rounded-full border-4 border-primary/20 bg-primary/90 shadow">
-						<span className="font-bold text-white text-xs">IF</span>
-					</div>
-				),
-			},
-				{
-					id: "then-email",
-					label: (
-					<span className="font-semibold text-primary">Show email field</span>
-				),
-				prefix: (
-					<span className="rounded bg-blue-400/80 px-1 py-0.5 font-bold text-white text-xs">
-						THEN
-					</span>
-				),
+					{
+						id: "if-yes",
+						label: (
+						<>
+							<span className="font-semibold text-primary">{t("userResponds")}</span>
+							&nbsp;
+							<span className="italic">{t("yesValue")}</span>
+						</>
+					),
+					prefix: (
+						<span className="rounded bg-primary/80 px-1 py-0.5 font-bold text-white text-xs">
+							{t("ifPrefix")}
+						</span>
+					),
+					icon: (
+						<div className="flex size-10 items-center justify-center rounded-full border-4 border-primary/20 bg-primary/90 shadow">
+							<span className="font-bold text-white text-xs">{t("ifPrefix")}</span>
+						</div>
+					),
+				},
+					{
+						id: "then-email",
+						label: (
+						<span className="font-semibold text-primary">{t("showEmailField")}</span>
+					),
+					prefix: (
+						<span className="rounded bg-blue-400/80 px-1 py-0.5 font-bold text-white text-xs">
+							{t("thenPrefix")}
+						</span>
+					),
 				icon: (
 					<div className="flex size-10 items-center justify-center rounded-full border-4 border-blue-400/20 bg-blue-400/90 shadow">
 						<Mail aria-hidden="true" className="size-5 text-white" />
 					</div>
 				),
 			},
-				{
-					id: "else-skip",
-					label: (
-					<span className="font-semibold text-muted-foreground">Skip</span>
-				),
-				prefix: (
-					<span className="rounded bg-muted-foreground/80 px-1 py-0.5 font-bold text-white text-xs">
-						ELSE
-					</span>
-				),
+					{
+						id: "else-skip",
+						label: (
+						<span className="font-semibold text-muted-foreground">{t("skip")}</span>
+					),
+					prefix: (
+						<span className="rounded bg-muted-foreground/80 px-1 py-0.5 font-bold text-white text-xs">
+							{t("elsePrefix")}
+						</span>
+					),
 				icon: (
 					<div className="flex size-10 items-center justify-center rounded-full border-4 border-muted/30 bg-muted-foreground/80 shadow">
 						<Zap aria-hidden="true" className="size-5 text-white" />
@@ -525,8 +532,8 @@ const LogicBuilderPreview = React.memo(() => {
 				),
 			},
 		],
-		[]
-	);
+			[t]
+		);
 
 	const { ref, isInView } = useInView();
 	const [visibleIdx, setVisibleIdx] = React.useState(-1);
@@ -586,17 +593,17 @@ const LogicBuilderPreview = React.memo(() => {
 				</ol>
 			</div>
 			{}
-			<span className="sr-only">
-				Preview of a simple conditional logic: if user responds&nbsp;"Yes", then
-				show the email field; otherwise, skip it.
-			</span>
-		</div>
-	);
+				<span className="sr-only">
+					{t("srDescription")}
+				</span>
+			</div>
+		);
 });
 
 LogicBuilderPreview.displayName = "LogicBuilderPreview";
 
 const ApiIntegrationPreview = React.memo(() => {
+	const t = useTranslations("home.bento.preview.api");
 	const { ref, isInView } = useInView();
 	const [apiState, dispatchApiState] = useReducer(
 		(
@@ -642,9 +649,9 @@ const ApiIntegrationPreview = React.memo(() => {
 
 	const apiData = useMemo(
 		() => [
-			{
-				label: "Name",
-				value: "John Doe",
+				{
+					label: t("nameLabel"),
+					value: "John Doe",
 				icon: (
 					<span
 						aria-hidden
@@ -669,9 +676,9 @@ const ApiIntegrationPreview = React.memo(() => {
 				),
 				delay: 0,
 			},
-			{
-				label: "Email",
-				value: "john@acme.com",
+				{
+					label: t("emailLabel"),
+					value: "john@acme.com",
 				icon: (
 					<span
 						aria-hidden
@@ -682,9 +689,9 @@ const ApiIntegrationPreview = React.memo(() => {
 				),
 				delay: 0.07,
 			},
-			{
-				label: "Plan",
-				value: "Premium Plan",
+				{
+					label: t("planLabel"),
+					value: t("premiumPlan"),
 				icon: (
 					<span
 						aria-hidden
@@ -696,8 +703,8 @@ const ApiIntegrationPreview = React.memo(() => {
 				delay: 0.14,
 			},
 		],
-		[]
-	);
+			[t]
+		);
 
 	return (
 		<div
@@ -737,11 +744,11 @@ const ApiIntegrationPreview = React.memo(() => {
 								: "text-muted-foreground"
 						}`}
 					>
-					{status === "idle"
-						? "Ready"
-						: status === "fetching"
-							? "Fetching..."
-							: "Fetched!"}
+						{status === "idle"
+							? t("statusReady")
+							: status === "fetching"
+								? t("statusFetching")
+								: t("statusFetched")}
 				</m.span>
 			</div>
 
@@ -798,18 +805,19 @@ const ApiIntegrationPreview = React.memo(() => {
 			</m.div>
 
 			{}
-			<span className="sr-only">
-				{status === "idle" && "Ready for API integration demo."}
-				{status === "fetching" && "Contacting Stripe API, loading data..."}
-				{status === "success" && "Stripe API data received and displayed."}
-			</span>
-		</div>
-	);
+				<span className="sr-only">
+					{status === "idle" && t("srReady")}
+					{status === "fetching" && t("srFetching")}
+					{status === "success" && t("srSuccess")}
+				</span>
+			</div>
+		);
 });
 
 ApiIntegrationPreview.displayName = "ApiIntegrationPreview";
 
 const DigitalSignaturesPreview = React.memo(() => {
+	const t = useTranslations("home.bento.preview.signatures");
 	const { ref, isInView } = useInView();
 	const [step, setStep] = React.useState<"idle" | "signing" | "done">("idle");
 
@@ -827,10 +835,10 @@ const DigitalSignaturesPreview = React.memo(() => {
 
 	const statusLabel =
 		step === "idle"
-			? "Awaiting signature…"
+			? t("statusIdle")
 			: step === "signing"
-				? "Signing in progress"
-				: "Signed securely";
+				? t("statusSigning")
+				: t("statusDone");
 
 	return (
 		<div
@@ -844,8 +852,8 @@ const DigitalSignaturesPreview = React.memo(() => {
 				style={{ outline: "none" }}
 				tabIndex={0}
 			>
-				<div className="mb-0.5 flex w-full items-center justify-between text-muted-foreground text-xs">
-					<span>Sign Agreement</span>
+					<div className="mb-0.5 flex w-full items-center justify-between text-muted-foreground text-xs">
+						<span>{t("signAgreement")}</span>
 					<span
 						aria-live="polite"
 						className={
@@ -856,7 +864,11 @@ const DigitalSignaturesPreview = React.memo(() => {
 									: undefined
 						}
 					>
-						{step === "done" ? "✓ Signed" : step === "signing" ? "—" : "⤶"}
+							{step === "done"
+								? t("signed")
+								: step === "signing"
+									? "—"
+									: "⤶"}
 					</span>
 				</div>
 				{}
@@ -931,12 +943,12 @@ const DigitalSignaturesPreview = React.memo(() => {
 				</div>
 			</div>
 			{}
-			<m.span
-				animate={{
-					scale: step === "done" ? 1 : 0.75,
-					opacity: step === "done" ? 1 : 0,
-				}}
-				aria-label={step === "done" ? "Signature Verified" : undefined}
+				<m.span
+					animate={{
+						scale: step === "done" ? 1 : 0.75,
+						opacity: step === "done" ? 1 : 0,
+					}}
+					aria-label={step === "done" ? t("signatureVerified") : undefined}
 				className="absolute right-2 bottom-2 rounded-full border-[1.8px] border-background bg-primary/90 px-2 py-0.5 font-medium text-[10px] text-white shadow-sm"
 				initial={{ scale: 0.75, opacity: 0 }}
 				transition={{
@@ -946,37 +958,22 @@ const DigitalSignaturesPreview = React.memo(() => {
 					delay: step === "done" ? 0.2 : 0,
 				}}
 			>
-				Verified
-			</m.span>
-			{}
-			<span aria-live="polite" className="sr-only">
-				{step === "idle" && "Awaiting e-signature. Please sign to continue."}
-				{step === "signing" && "Signature is being written."}
-				{step === "done" && "Signature complete and verified."}
-			</span>
-		</div>
-	);
+					{t("verified")}
+				</m.span>
+				{}
+				<span aria-live="polite" className="sr-only">
+					{step === "idle" && t("srIdle")}
+					{step === "signing" && t("srSigning")}
+					{step === "done" && t("srDone")}
+				</span>
+			</div>
+		);
 });
 
 DigitalSignaturesPreview.displayName = "DigitalSignaturesPreview";
 
-const EMAIL_TEMPLATES = [
-	{ title: "Contact Form", from: "john@example.com", time: "2 minutes ago" },
-	{
-		title: "Newsletter Signup",
-		from: "sarah@gmail.com",
-		time: "5 minutes ago",
-	},
-	{ title: "Support Request", from: "mike@company.com", time: "8 minutes ago" },
-	{ title: "Feedback Form", from: "lisa@startup.io", time: "12 minutes ago" },
-	{
-		title: "Job Application",
-		from: "alex@portfolio.dev",
-		time: "15 minutes ago",
-	},
-] as const;
-
 const EmailNotificationsPreview = React.memo(() => {
+	const t = useTranslations("home.bento.preview.notifications");
 	const { ref, isInView } = useInView();
 	interface Notification {
 		id: number;
@@ -987,20 +984,50 @@ const EmailNotificationsPreview = React.memo(() => {
 
 	const [notifications, setNotifications] = useState<Notification[]>([]);
 	const maxNotifications = 3;
+	const emailTemplates = useMemo(
+		() => [
+			{
+				title: t("templates.contactForm"),
+				from: "john@example.com",
+				time: t("templates.twoMinutesAgo"),
+			},
+			{
+				title: t("templates.newsletterSignup"),
+				from: "sarah@gmail.com",
+				time: t("templates.fiveMinutesAgo"),
+			},
+			{
+				title: t("templates.supportRequest"),
+				from: "mike@company.com",
+				time: t("templates.eightMinutesAgo"),
+			},
+			{
+				title: t("templates.feedbackForm"),
+				from: "lisa@startup.io",
+				time: t("templates.twelveMinutesAgo"),
+			},
+			{
+				title: t("templates.jobApplication"),
+				from: "alex@portfolio.dev",
+				time: t("templates.fifteenMinutesAgo"),
+			},
+		],
+		[t]
+	);
 
 	const addNotification = useCallback(() => {
 		const randomEmail =
-			EMAIL_TEMPLATES[Math.floor(Math.random() * EMAIL_TEMPLATES.length)];
+			emailTemplates[Math.floor(Math.random() * emailTemplates.length)];
 		const newNotification = {
 			id: Date.now(),
 			...randomEmail,
-			time: "Just now",
+			time: t("justNow"),
 		};
 		setNotifications((prev) => {
 			const updated = [newNotification, ...prev];
 			return updated.slice(0, maxNotifications);
 		});
-	}, []);
+	}, [emailTemplates, t]);
 
 	useEffect(() => {
 		if (!isInView) return;
@@ -1029,15 +1056,19 @@ const EmailNotificationsPreview = React.memo(() => {
 					<Mail className="size-5" />
 				</div>
 				<div>
-					<div className="font-medium text-foreground text-sm leading-tight">
-						Email Notification
-					</div>
-					<div className="text-muted-foreground text-xs">
-						You have {notifications.length > 0 ? notifications.length : "no"}{" "}
-						new notification{notifications.length === 1 ? "" : "s"}
+						<div className="font-medium text-foreground text-sm leading-tight">
+							{t("title")}
+						</div>
+						<div className="text-muted-foreground text-xs">
+							{t("newNotifications", {
+								count:
+									notifications.length > 0
+										? notifications.length.toString()
+										: t("none"),
+							})}
+						</div>
 					</div>
 				</div>
-			</div>
 			{}
 			<div className="relative flex h-40 flex-col px-3 pt-2 pb-3">
 				<AnimatePresence mode="popLayout">
@@ -1054,10 +1085,10 @@ const EmailNotificationsPreview = React.memo(() => {
 								duration: 0.38,
 								ease: [0.42, 0, 0.58, 1],
 							}}
-						>
-							No new notifications yet.
-						</m.div>
-					)}
+							>
+								{t("noNewNotifications")}
+							</m.div>
+						)}
 					{notifications.map((notification, index) => (
 						<m.div
 							animate={
@@ -1133,18 +1164,24 @@ const EmailNotificationsPreview = React.memo(() => {
 				</AnimatePresence>
 			</div>
 			{}
-			<span aria-live="polite" className="sr-only">
-				{notifications.length === 0 && "No new email notifications yet."}
-				{notifications.length > 0 &&
-					`New email notification: ${notifications[0].title} from ${notifications[0].from}, ${notifications[0].time}`}
-			</span>
-		</div>
-	);
+				<span aria-live="polite" className="sr-only">
+					{notifications.length === 0 && t("noNewEmailNotifications")}
+					{notifications.length > 0 &&
+						t("newEmailNotification", {
+							title: notifications[0].title,
+							from: notifications[0].from,
+							time: notifications[0].time,
+						})}
+				</span>
+			</div>
+		);
 });
 
 EmailNotificationsPreview.displayName = "EmailNotificationsPreview";
 
 export default function BentoFeatures() {
+	const t = useTranslations("home.bento");
+
 	return (
 		<LazyMotion features={domAnimation}>
 			<div className="mx-auto w-full max-w-7xl bg-background">
@@ -1153,128 +1190,128 @@ export default function BentoFeatures() {
 					<div className="grid grid-cols-1 gap-px bg-border p-px lg:grid-cols-4">
 						<>
 							{}
-							<FeatureCard
-								className="col-span-2 row-span-2 w-full"
-								description={
-									<>
-										<span className="font-medium opacity-100">
-											Instant form creation
-										</span>
-										<span className="opacity-50">
-											—just describe it and launch. Convert visitors in seconds.
-										</span>
-									</>
-								}
-								featured={true}
-								icon={<Bot className="size-5" />}
-								preview={<AiFormBuilderPreview />}
-								title="AI Form Builder"
-							/>
+								<FeatureCard
+									className="col-span-2 row-span-2 w-full"
+									description={
+										<>
+											<span className="font-medium opacity-100">
+												{t("cards.aiFormBuilder.highlight")}
+											</span>
+											<span className="opacity-50">
+												{t("cards.aiFormBuilder.description")}
+											</span>
+										</>
+									}
+									featured={true}
+									icon={<Bot className="size-5" />}
+									preview={<AiFormBuilderPreview />}
+									title={t("cards.aiFormBuilder.title")}
+								/>
 
 							{}
-							<FeatureCard
-								className="col-span-1 bg-card"
-								description={
-									<>
-										Truly{" "}
-										<span className="font-medium opacity-100">
-											unlimited forms and responses
-										</span>
-										.<span className="opacity-50"> Grow without limits.</span>
-									</>
-								}
-								icon={<InfinityIcon className="size-5" />}
-								preview={<UnlimitedPreview />}
-								title="Unlimited Everything"
-							/>
+								<FeatureCard
+									className="col-span-1 bg-card"
+									description={
+										<>
+											Truly{" "}
+											<span className="font-medium opacity-100">
+												{t("cards.unlimitedEverything.highlight")}
+											</span>
+											.<span className="opacity-50">{t("cards.unlimitedEverything.description")}</span>
+										</>
+									}
+									icon={<InfinityIcon className="size-5" />}
+									preview={<UnlimitedPreview />}
+									title={t("cards.unlimitedEverything.title")}
+								/>
 
 							{}
-							<FeatureCard
-								className="col-span-1"
-								description={
-									<>
-										<span className="opacity-50">
-											See who converts and why—
-										</span>
-										<span className="font-medium opacity-100">
-											get clear, actionable insights
-										</span>
-										<span className="opacity-50">.</span>
-									</>
-								}
-								icon={<TrendingUp className="size-5" />}
-								preview={<AnalyticsPreview />}
-								title="AI Analytics"
-							/>
+								<FeatureCard
+									className="col-span-1"
+									description={
+										<>
+											<span className="opacity-50">
+												{t("cards.aiAnalytics.prefix")}
+											</span>
+											<span className="font-medium opacity-100">
+												{t("cards.aiAnalytics.highlight")}
+											</span>
+											<span className="opacity-50">.</span>
+										</>
+									}
+									icon={<TrendingUp className="size-5" />}
+									preview={<AnalyticsPreview />}
+									title={t("cards.aiAnalytics.title")}
+								/>
 
 							{}
-							<FeatureCard
-								className="col-span-2"
-								description={
-									<>
-										<span className="opacity-50">Never miss a lead—</span>
-										<span className="font-medium opacity-100">
-											get instant alerts and automate follow-ups.
-										</span>
-									</>
-								}
-								icon={<Mail className="size-5" />}
-								preview={<EmailNotificationsPreview />}
-								title="Smart Notifications"
-							/>
+								<FeatureCard
+									className="col-span-2"
+									description={
+										<>
+											<span className="opacity-50">{t("cards.smartNotifications.prefix")}</span>
+											<span className="font-medium opacity-100">
+												{t("cards.smartNotifications.highlight")}
+											</span>
+										</>
+									}
+									icon={<Mail className="size-5" />}
+									preview={<EmailNotificationsPreview />}
+									title={t("cards.smartNotifications.title")}
+								/>
 
 							{}
-							<FeatureCard
-								className="col-span-1 bg-card"
-								description={
-									<>
-										<span className="font-medium opacity-100">
-											Sync leads anywhere
-										</span>
-										<span className="opacity-50">
-											—connect with any service or workflow.
-										</span>
-									</>
-								}
-								icon={<Zap className="size-5" />}
-								preview={<ApiIntegrationPreview />}
-								title="API & Webhooks"
-							/>
+								<FeatureCard
+									className="col-span-1 bg-card"
+									description={
+										<>
+											<span className="font-medium opacity-100">
+												{t("cards.apiWebhooks.highlight")}
+											</span>
+											<span className="opacity-50">
+												{t("cards.apiWebhooks.description")}
+											</span>
+										</>
+									}
+									icon={<Zap className="size-5" />}
+									preview={<ApiIntegrationPreview />}
+									title={t("cards.apiWebhooks.title")}
+								/>
 
 							{}
-							<FeatureCard
-								className="col-span-1"
-								description={
-									<>
-										<span className="opacity-50">Add signature fields to </span>
-										<span className="font-medium opacity-100">
-											collect e-signatures
-										</span>
-										<span className="opacity-50"> in any form.</span>
-									</>
-								}
-								icon={<PenTool className="size-5" />}
-								preview={<DigitalSignaturesPreview />}
-								title="Form Signatures"
-							/>
+								<FeatureCard
+									className="col-span-1"
+									description={
+										<>
+											<span className="opacity-50">{t("cards.formSignatures.prefix")}</span>
+											<span className="font-medium opacity-100">
+												{t("cards.formSignatures.highlight")}
+											</span>
+											<span className="opacity-50">{t("cards.formSignatures.suffix")}</span>
+										</>
+									}
+									icon={<PenTool className="size-5" />}
+									preview={<DigitalSignaturesPreview />}
+									title={t("cards.formSignatures.title")}
+								/>
 
 							{}
-							<FeatureCard
-								className="col-span-2"
-								description={
-									<>
-										<span className="font-medium opacity-100">
-											Personalize every journey
-										</span>
-										<span className="opacity-50">
-											—show or hide questions based on answers.
-										</span>
-									</>
-								}
-								icon={<GitBranch className="size-5" />}
-								preview={<LogicBuilderPreview />}
-								title="Visual Logic Builder"
-							/>
+								<FeatureCard
+									className="col-span-2"
+									description={
+										<>
+											<span className="font-medium opacity-100">
+												{t("cards.visualLogicBuilder.highlight")}
+											</span>
+											<span className="opacity-50">
+												{t("cards.visualLogicBuilder.description")}
+											</span>
+										</>
+									}
+									icon={<GitBranch className="size-5" />}
+									preview={<LogicBuilderPreview />}
+									title={t("cards.visualLogicBuilder.title")}
+								/>
 						</>
 					</div>
 				</div>

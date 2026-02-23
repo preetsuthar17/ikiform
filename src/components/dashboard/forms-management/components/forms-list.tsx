@@ -9,6 +9,7 @@ import {
   Share,
   Trash2,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { memo, useCallback, useMemo, useState } from "react";
 import { ShareFormModal } from "@/components/form-builder/modals/share-form-modal";
 import { Badge } from "@/components/ui/badge";
@@ -51,6 +52,7 @@ export const FormsList = memo(function FormsList({
   onExportSecure,
   onDelete,
 }: FormsListProps) {
+  const t = useTranslations("dashboard.formsManagement.list");
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [shareModalOpen, setShareModalOpen] = useState<{
     [key: string]: boolean;
@@ -163,7 +165,7 @@ export const FormsList = memo(function FormsList({
     () =>
       forms.map((form, idx) => {
         const internalTitle =
-          form.schema?.settings?.title || form.title || "Untitled Form";
+          form.schema?.settings?.title || form.title || t("untitledForm");
         const hasPublicTitle =
           form.schema?.settings?.publicTitle &&
           form.schema.settings.publicTitle !== form.schema?.settings?.title;
@@ -209,7 +211,7 @@ export const FormsList = memo(function FormsList({
 
         return (
           <Card
-            aria-label={`View analytics for ${internalTitle}`}
+            aria-label={t("viewAnalyticsFor", { title: internalTitle })}
             className={`${cardClass}${dynamicClasses ? " " + dynamicClasses : ""}`}
             key={form.id}
             onBlur={() => setHoveredIdx(null)}
@@ -228,15 +230,19 @@ export const FormsList = memo(function FormsList({
                       {internalTitle}
                     </h3>
                     <Badge
-                      aria-label={`Form status: ${form.is_published ? "Published" : "Draft"}`}
+                      aria-label={t("formStatusAria", {
+                        status: form.is_published ? t("published") : t("draft"),
+                      })}
                       variant={form.is_published ? "outline" : "pending"}
                     >
-                      {form.is_published ? "Published" : "Draft"}
+                      {form.is_published ? t("published") : t("draft")}
                     </Badge>
                   </div>
                   {hasPublicTitle && (
                     <p className="truncate text-muted-foreground text-sm">
-                      Public: "{form.schema?.settings?.publicTitle}"
+                      {t("publicTitle", {
+                        title: form.schema?.settings?.publicTitle ?? "",
+                      })}
                     </p>
                   )}
                   {form.description && (
@@ -245,7 +251,7 @@ export const FormsList = memo(function FormsList({
                     </p>
                   )}
                   <p className="mt-1 text-muted-foreground text-xs">
-                    Updated {formatDate(form.updated_at)}
+                    {t("updated", { date: formatDate(form.updated_at) })}
                   </p>
                 </div>
               </div>
@@ -256,7 +262,7 @@ export const FormsList = memo(function FormsList({
                       <TooltipTrigger asChild>
                         <DropdownMenuTrigger asChild>
                           <Button
-                            aria-label={`Actions for ${internalTitle}`}
+                            aria-label={t("actionsFor", { title: internalTitle })}
                             className="size-8 p-0"
                             onClick={(e) => e.stopPropagation()}
                             size="sm"
@@ -270,7 +276,7 @@ export const FormsList = memo(function FormsList({
                         </DropdownMenuTrigger>
                       </TooltipTrigger>
                       <TooltipContent side="top" sideOffset={8}>
-                        <p>Form actions</p>
+                        <p>{t("formActions")}</p>
                       </TooltipContent>
                     </Tooltip>
                     <DropdownMenuContent align="end" className="w-48 shadow-xs">
@@ -279,35 +285,35 @@ export const FormsList = memo(function FormsList({
                         onClick={(e) => handleEdit(e, form.id)}
                       >
                         <Edit aria-hidden="true" className="size-4" />
-                        Edit form
+                        {t("editForm")}
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
                         onClick={(e) => handleShare(e, form)}
                       >
                         <Share aria-hidden="true" className="size-4" />
-                        Share form
+                        {t("shareForm")}
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
                         onClick={(e) => handleDuplicate(e, form.id)}
                       >
                         <Copy aria-hidden="true" className="size-4" />
-                        Duplicate
+                        {t("duplicate")}
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
                         onClick={(e) => handleViewForm(e, form)}
                       >
                         <Eye aria-hidden="true" className="size-4" />
-                        View form
+                        {t("viewForm")}
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
                         onClick={(e) => handleViewAnalytics(e, form.id)}
                       >
                         <BarChart3 aria-hidden="true" className="size-4" />
-                        View analytics
+                        {t("viewAnalytics")}
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem
@@ -315,14 +321,14 @@ export const FormsList = memo(function FormsList({
                         onClick={(e) => handleEmbed(e, form.id)}
                       >
                         <Code2 aria-hidden="true" className="size-4" />
-                        Embed
+                        {t("embed")}
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         className="h-9 cursor-pointer font-medium opacity-80 hover:opacity-100"
                         onClick={(e) => handleExportSecure(e, form)}
                       >
                         <Download aria-hidden="true" className="size-4" />
-                        Export
+                        {t("export")}
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem
@@ -331,7 +337,7 @@ export const FormsList = memo(function FormsList({
                         variant="destructive"
                       >
                         <Trash2 aria-hidden="true" className="size-4" />
-                        Delete form
+                        {t("deleteForm")}
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -355,6 +361,7 @@ export const FormsList = memo(function FormsList({
       handleEmbed,
       handleExportSecure,
       handleDelete,
+      t,
     ],
   );
 
@@ -377,7 +384,7 @@ export const FormsList = memo(function FormsList({
   return (
     <>
       <div
-        aria-label="Forms list"
+        aria-label={t("formsListAria")}
         className="relative flex flex-col"
         role="list"
       >

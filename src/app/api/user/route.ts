@@ -9,6 +9,21 @@ import { createClient } from "@/utils/supabase/server";
 const userCache = new Map<string, { data: any; timestamp: number }>();
 const CACHE_TTL = 30_000;
 
+function isMalformedJsonError(error: unknown): boolean {
+	return (
+		error instanceof SyntaxError &&
+		error.message.includes("Unexpected non-whitespace character after JSON")
+	);
+}
+
+function clearInvalidAuthCookies(request: NextRequest, response: NextResponse) {
+	for (const { name } of request.cookies.getAll()) {
+		if (name.startsWith("sb-") && name.includes("auth-token")) {
+			response.cookies.delete(name);
+		}
+	}
+}
+
 function getCachedUser(email: string) {
 	const cached = userCache.get(email);
 	if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
@@ -120,6 +135,14 @@ export async function POST(request: NextRequest) {
 		});
 	} catch (error) {
 		console.error("[User API] POST error:", error);
+		if (isMalformedJsonError(error)) {
+			const response = NextResponse.json(
+				{ error: "Invalid session. Please sign in again." },
+				{ status: 401 }
+			);
+			clearInvalidAuthCookies(request, response);
+			return response;
+		}
 		return NextResponse.json(
 			{ error: "Internal server error" },
 			{ status: 500 }
@@ -181,6 +204,14 @@ export async function GET(_request: NextRequest) {
 		});
 	} catch (error) {
 		console.error("[User API] GET error:", error);
+		if (isMalformedJsonError(error)) {
+			const response = NextResponse.json(
+				{ error: "Invalid session. Please sign in again." },
+				{ status: 401 }
+			);
+			clearInvalidAuthCookies(_request, response);
+			return response;
+		}
 		return NextResponse.json(
 			{ error: "Internal server error" },
 			{ status: 500 }

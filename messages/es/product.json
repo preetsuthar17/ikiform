@@ -1,0 +1,470 @@
+{
+  "common": {
+    "na": "N/D",
+    "premium": {
+      "title": "Requiere Premium",
+      "viewPricing": "Ver precios",
+      "aiBuilderDescription": "Necesitas una suscripción premium para usar el constructor de formularios con IA. Actualiza para desbloquear todas las funciones.",
+      "formBuilderDescription": "Necesitas una suscripción premium para usar el constructor de formularios. Actualiza para desbloquear todas las funciones."
+    }
+  },
+  "formBuilder": {
+    "header": {
+      "title": "Constructor de formularios",
+      "goToDashboard": "Ir al panel",
+      "fieldCount": "{count} campo",
+      "fieldCount_plural": "{count} campos",
+      "saving": "Guardando",
+      "moreActions": "Más acciones",
+      "multiStepForm": "Formulario de varios pasos",
+      "toggleMultiStepMode": "Alternar modo de varios pasos",
+      "viewJson": "Ver JSON",
+      "analytics": "Analíticas",
+      "share": "Compartir",
+      "useKiko": "Usar Kiko",
+      "settings": "Configuración",
+      "publish": "Publicar",
+      "published": "Publicado",
+      "publishing": "Publicando...",
+      "unpublishing": "Despublicando...",
+      "publishForm": "Publicar formulario",
+      "unpublishForm": "Despublicar formulario",
+      "save": "Guardar",
+      "saveForm": "Guardar formulario"
+    },
+    "modals": {
+      "formSettings": "Configuración del formulario",
+      "internalTitle": "Título interno",
+      "internalTitlePlaceholder": "Introduce un título interno para tu referencia...",
+      "internalTitleDescription": "Este título solo es visible para ti en el panel y el constructor",
+      "publicTitle": "Título público",
+      "publicTitlePlaceholder": "Introduce el título que verán los usuarios...",
+      "publicTitleDescription": "Este título se mostrará a los usuarios en el formulario real. Déjalo vacío para usar el título interno.",
+      "description": "Descripción",
+      "descriptionPlaceholder": "Introduce la descripción del formulario",
+      "submitButtonText": "Texto del botón de envío",
+      "submitButtonTextPlaceholder": "Texto del botón de envío",
+      "submit": "Enviar",
+      "successMessage": "Mensaje de éxito",
+      "successMessagePlaceholder": "Mensaje mostrado tras un envío exitoso",
+      "redirectUrlOptional": "URL de redirección (opcional)",
+      "redirectUrlPlaceholder": "https://example.com/thank-you",
+      "cancel": "Cancelar",
+      "saveSettings": "Guardar configuración"
+    },
+    "page": {
+      "formFields": "Campos del formulario",
+      "authRequired": "Autenticación requerida",
+      "authRequiredDescription": "Inicia sesión para usar el constructor de formularios.",
+      "goToLogin": "Ir a iniciar sesión"
+    },
+    "blockManager": {
+      "header": {
+        "title": "Estructura del formulario",
+        "stepsCount": "{count, plural, one {# paso} other {# pasos}}",
+        "description": "Organiza tu formulario en secciones lógicas",
+        "addStepAria": "Añadir nuevo paso al formulario",
+        "addStep": "Añadir paso"
+      },
+      "item": {
+        "dragHandleAria": "Arrastrar para reordenar el paso {title}",
+        "dragToReorder": "Arrastrar para reordenar"
+      },
+      "headerActions": {
+        "stepBadge": "Paso {index}",
+        "editStepAria": "Editar paso {title}",
+        "deleteStepAria": "Eliminar paso {title}",
+        "editStep": "Editar paso",
+        "deleteStep": "Eliminar paso",
+        "collapseStep": "Contraer paso",
+        "expandStep": "Expandir paso"
+      },
+      "editForm": {
+        "stepTitlePlaceholder": "Título del paso",
+        "stepDescriptionPlaceholder": "Descripción del paso (opcional)",
+        "save": "Guardar",
+        "cancel": "Cancelar"
+      },
+      "fieldsList": {
+        "empty": "Aún no hay campos. Añade campos desde la paleta de la derecha."
+      }
+    },
+    "multiStepNavigation": {
+      "deleteStep": "Eliminar paso",
+      "addStep": "Añadir paso",
+      "deleteDialogTitle": "Eliminar paso",
+      "deleteDialogDescription": "¿Seguro que quieres eliminar este paso? Esta acción no se puede deshacer.",
+      "cancel": "Cancelar"
+    },
+    "formFields": {
+      "addFieldToFormAria": "Añadir campo al formulario",
+      "addField": "Añadir campo",
+      "addSpecificFieldAria": "Añadir campo {label}",
+      "formFields": "Campos del formulario",
+      "noFieldsInStep": "No hay campos en este paso",
+      "noFieldsYet": "Aún no se han añadido campos",
+      "addFieldsToStep": "Añade campos desde la paleta a este paso",
+      "addFieldsFromLeftPanel": "Añade campos desde el panel izquierdo para empezar a construir tu formulario",
+      "fieldsCount": "{count, plural, one {# campo} other {# campos}}",
+      "fieldAria": "Campo {type}",
+      "deleteFieldAria": "Eliminar campo {type}",
+      "deleteField": "Eliminar campo"
+    },
+    "jsonViewModal": {
+      "title": "JSON del esquema del formulario",
+      "description": "Vista de solo lectura del esquema actual del formulario. Usa el botón de copiar para copiar el JSON.",
+      "copySuccess": "¡JSON copiado al portapapeles!",
+      "copyError": "No se pudo copiar el JSON",
+      "copied": "Copiado",
+      "copyJson": "Copiar JSON"
+    },
+    "settingsMobile": {
+      "sectionsAria": "Secciones de configuración",
+      "goToSectionAria": "Ir a la configuración de {section}",
+      "backToListAria": "Volver a la lista de configuración",
+      "settings": "Configuración"
+    },
+    "creation": {
+      "title": "Crear un nuevo formulario",
+      "cancel": "Cancelar",
+      "back": "Atrás",
+      "createForm": "Crear formulario",
+      "reviewAction": "Revisar",
+      "next": "Siguiente",
+      "types": {
+        "single": {
+          "title": "Formulario de una sola página",
+          "description": "Formulario tradicional con todos los campos en una sola página"
+        },
+        "multi": {
+          "title": "Formulario de varios pasos",
+          "description": "Experiencia guiada del formulario en varios pasos"
+        }
+      },
+      "typePreview": {
+        "stepOf": "Paso {step} de {total}"
+      },
+      "configuration": {
+        "title": "Detalles del formulario",
+        "description": "Define la información interna y pública de tu formulario.",
+        "internalTitle": "Título interno",
+        "internalTitlePlaceholder": "Introduce un título interno para tu referencia…",
+        "internalTitleHelp": "Solo visible en el panel y el constructor.",
+        "publicTitle": "Título público",
+        "publicTitlePlaceholder": "Introduce el título que verán los usuarios…",
+        "publicTitleHelp": "Se muestra a los usuarios en el formulario. Déjalo vacío para reutilizar el título interno.",
+        "formDescription": "Descripción del formulario",
+        "formDescriptionPlaceholder": "Introduce una breve descripción para guiar a los usuarios…",
+        "formDescriptionHelp": "Opcional. Ayuda a los usuarios a entender el propósito del formulario."
+      },
+      "review": {
+        "formType": "Tipo de formulario",
+        "multiStepForm": "Formulario de varios pasos",
+        "singlePageForm": "Formulario de una sola página",
+        "multiStep": "Varios pasos",
+        "singlePage": "Una sola página",
+        "editFormType": "Editar tipo de formulario",
+        "formConfiguration": "Configuración del formulario",
+        "editFormConfiguration": "Editar configuración del formulario",
+        "internalTitle": "Título interno",
+        "publicTitle": "Título público",
+        "description": "Descripción",
+        "preview": "Vista previa",
+        "previewDescription": "Resumen de tu formulario."
+      },
+      "stepIndicator": {
+        "progress": "Progreso",
+        "stepCompleted": "Paso {index} completado",
+        "stepCurrent": "Paso {index} actual",
+        "step": "Paso {index}"
+      }
+    },
+    "customize": {
+      "page": {
+        "savedCustomization": "Personalización guardada",
+        "saveFailed": "No se pudieron guardar los cambios. Inténtalo de nuevo.",
+        "tabs": {
+          "presets": "Preajustes",
+          "layout": "Diseño",
+          "colors": "Colores",
+          "text": "Texto"
+        },
+        "backToCustomize": "Volver a personalizar",
+        "previewForm": "Vista previa del formulario",
+        "customizeForm": "Personalizar formulario",
+        "publicTitle": "Título público: \"{title}\"",
+        "customizationActions": "Acciones de personalización",
+        "back": "Atrás",
+        "save": "Guardar",
+        "customize": "Personalizar"
+      },
+      "colors": {
+        "title": "Configuración de colores",
+        "description": "Personaliza colores y tema",
+        "backgroundColorLabel": "Color de fondo",
+        "backgroundColorHelp": "Define el color de fondo del contenedor del formulario",
+        "textColorLabel": "Color del texto",
+        "textColorHelp": "Define el color de todos los elementos de texto del formulario",
+        "primaryColorLabel": "Color principal (botones y acentos)",
+        "primaryColorHelp": "Define el color para botones, estados de foco y elementos de acento",
+        "borderColorLabel": "Color del borde",
+        "borderColorHelp": "Define el color de bordes de campos y separadores",
+        "websiteBackgroundColorLabel": "Color de fondo del sitio",
+        "websiteBackgroundColorHelp": "Define el color de fondo de toda la página/sitio"
+      },
+      "typography": {
+        "title": "Configuración tipográfica",
+        "description": "Personaliza fuentes y estilos de texto",
+        "fontFamily": "Familia tipográfica",
+        "fontFamilyPlaceholder": "Selecciona una fuente de Google...",
+        "fontPreview": "Vista previa de fuente",
+        "previewLine1": "El veloz murciélago hindú comía feliz cardillo y kiwi",
+        "previewLine2": "Texto de ejemplo del formulario con números 1234567890",
+        "fontHelp": "Elige entre cientos de fuentes de Google. La fuente se cargará automáticamente.",
+        "fontSize": "Tamaño de fuente",
+        "fontWeight": "Grosor de fuente",
+        "selected": "Seleccionado:",
+        "fontSizeOptions": {
+          "xs": { "label": "Extra pequeño", "description": "12px" },
+          "sm": { "label": "Pequeño", "description": "14px" },
+          "base": { "label": "Base", "description": "16px" },
+          "lg": { "label": "Grande", "description": "18px" },
+          "xl": { "label": "Extra grande", "description": "20px" }
+        },
+        "fontWeightOptions": {
+          "light": { "label": "Ligero", "description": "300" },
+          "normal": { "label": "Normal", "description": "400" },
+          "medium": { "label": "Medio", "description": "500" },
+          "semibold": { "label": "Seminegrita", "description": "600" },
+          "bold": { "label": "Negrita", "description": "700" }
+        }
+      },
+      "layout": {
+        "title": "Configuración de diseño",
+        "description": "Configura espaciado y estructura",
+        "showProgressBar": "Mostrar barra de progreso",
+        "formWidth": "Ancho del formulario",
+        "formWidthHelp": "Controla el ancho máximo del contenedor del formulario",
+        "customWidth": "Ancho personalizado (p. ej., 600px, 80%, 50rem)",
+        "customWidthPlaceholder": "Introduce un ancho personalizado",
+        "internalPadding": "Relleno interno",
+        "internalPaddingHelp": "Controla el espacio dentro del contenedor del formulario",
+        "externalMargin": "Margen externo",
+        "externalMarginHelp": "Controla el espacio alrededor del contenedor del formulario",
+        "cornerRadius": "Radio de esquinas",
+        "cornerRadiusHelp": "Controla cuán redondeadas se ven las esquinas del formulario",
+        "widthOptions": {
+          "sm": { "label": "Pequeño", "description": "ancho máx. 400px" },
+          "md": { "label": "Mediano", "description": "ancho máx. 600px" },
+          "lg": { "label": "Grande", "description": "ancho máx. 800px" },
+          "xl": { "label": "Extra grande", "description": "ancho máx. 1000px" },
+          "full": { "label": "Ancho completo", "description": "100% de ancho" },
+          "custom": { "label": "Personalizado", "description": "valor de ancho personalizado" }
+        },
+        "paddingOptions": {
+          "none": { "label": "Ninguno", "description": "0px de relleno" },
+          "sm": { "label": "Pequeño", "description": "16px de relleno" },
+          "md": { "label": "Mediano", "description": "24px de relleno" },
+          "lg": { "label": "Grande", "description": "32px de relleno" }
+        },
+        "marginOptions": {
+          "none": { "label": "Ninguno", "description": "Sin margen" },
+          "sm": { "label": "Pequeño", "description": "8px" },
+          "md": { "label": "Mediano", "description": "16px" },
+          "lg": { "label": "Grande", "description": "32px" }
+        },
+        "radiusOptions": {
+          "none": { "label": "Ninguno", "description": "0px (esquinas rectas)" },
+          "sm": { "label": "Pequeño", "description": "radio de borde 4px" },
+          "md": { "label": "Mediano", "description": "radio de borde 8px" },
+          "lg": { "label": "Grande", "description": "radio de borde 16px" },
+          "xl": { "label": "Extra grande", "description": "radio de borde 24px" }
+        }
+      },
+      "presets": {
+        "title": "Preajustes de diseño",
+        "description": "Empieza rápido con estilos de formulario prediseñados",
+        "category": "Categoría",
+        "allPresets": "Todos los preajustes",
+        "presets": "Preajustes",
+        "presetCount": "{count, plural, one {# preajuste} other {# preajustes}}",
+        "presetList": "Lista de preajustes",
+        "applyPresetAria": "Aplicar preajuste {name}",
+        "appliedPreset": "Preajuste \"{name}\" aplicado",
+        "formTitle": "Título del formulario",
+        "submit": "Enviar"
+      }
+    }
+  },
+  "aiBuilder": {
+    "client": {
+      "createFormWithKiko": "Crear formulario con Kiko",
+      "streamError": "Error: {error}",
+      "generatingResponse": "Generando respuesta…",
+      "loading": "Cargando…"
+    },
+    "chatHeader": {
+      "backToFormBuilder": "Volver al constructor",
+      "title": "Kiko AI"
+    },
+    "chatInput": {
+      "messageToKiko": "Mensaje para Kiko AI",
+      "placeholder": "Describe el formulario que quieres crear…",
+      "sendMessage": "Enviar mensaje",
+      "sendHelp": "Pulsa Enter para enviar, Shift+Enter para nueva línea, o ⌘/Ctrl+Enter para enviar"
+    },
+    "welcome": {
+      "heading": "¿Cómo puede ayudarte Kiko hoy?",
+      "description": "Hola, soy Kiko, tu asistente de formularios con IA.\n¡Pídeme crear, editar o analizar formularios por ti!"
+    },
+    "preview": {
+      "title": "Kiko AI",
+      "formFallback": "Formulario {index}",
+      "viewJson": "Ver JSON",
+      "useThisForm": "Usar este formulario",
+      "noFormSelected": "Ningún formulario seleccionado."
+    },
+    "jsonModal": {
+      "title": "Esquema JSON del formulario",
+      "description": "Ver o copiar el esquema JSON generado para tu formulario",
+      "close": "Cerrar"
+    }
+  },
+  "analytics": {
+    "formAnalytics": {
+      "submissionExported": "Envío exportado correctamente",
+      "formDeleted": "Formulario eliminado correctamente",
+      "failedDeleteForm": "No se pudo eliminar el formulario",
+      "backToDashboard": "Volver al panel",
+      "published": "Publicado",
+      "draft": "Borrador",
+      "analyticsSubtitle": "Analíticas del formulario y datos de envíos",
+      "formActions": "Acciones del formulario",
+      "editForm": "Editar formulario",
+      "shareForm": "Compartir formulario",
+      "viewSubmissions": "Ver envíos",
+      "moreActions": "Más acciones",
+      "exportCsv": "Exportar CSV",
+      "exportJson": "Exportar JSON",
+      "deleteForm": "Eliminar formulario",
+      "openKiko": "Abrir Kiko AI",
+      "kiko": "Kiko AI",
+      "kikoTooltip": "Analíticas con IA",
+      "recentSubmissions": "Envíos recientes",
+      "viewAll": "Ver todo",
+      "noSubmissionsTitle": "Aún no hay envíos",
+      "noSubmissionsDescription": "Cuando las personas empiecen a completar tu formulario, sus respuestas aparecerán aquí.",
+      "submission": "Envío {id}",
+      "fieldsCount": "{count} campos",
+      "view": "Ver",
+      "viewSubmissionDetails": "Ver detalles del envío",
+      "viewMoreSubmissions": "Ver {count} envíos más",
+      "noDataToExport": "No hay datos para exportar",
+      "csvExportSuccess": "¡Datos exportados a CSV correctamente!",
+      "jsonExportSuccess": "¡Datos exportados correctamente!",
+      "deleteModalTitle": "Eliminar formulario",
+      "deleteModalConfirm": "Eliminar formulario",
+      "deleteModalCancel": "Cancelar",
+      "deleteModalDescription": "¿Seguro que quieres eliminar \"{title}\"? Esta acción no se puede deshacer y eliminará permanentemente el formulario y todos sus envíos.",
+      "formPublished": "¡Formulario publicado!"
+    },
+    "statsCards": {
+      "totalSubmissions": "Envíos totales",
+      "formFields": "Campos del formulario",
+      "completionRate": "Tasa de finalización",
+      "last30Days": "Últimos 30 días",
+      "avgDailySubmissions": "Promedio diario de envíos",
+      "bounceRate": "Tasa de abandono",
+      "peakHour": "Hora pico",
+      "uniqueResponses": "Respuestas únicas"
+    },
+    "infoCards": {
+      "lastSubmission": "Último envío",
+      "fromIp": "Desde {ip}",
+      "noSubmissionsYet": "Aún no hay envíos",
+      "formStatus": "Estado del formulario",
+      "published": "Publicado",
+      "created": "Creado",
+      "updated": "Actualizado",
+      "yes": "Sí",
+      "no": "No",
+      "quickStats": "Estadísticas rápidas",
+      "avgFieldsCompleted": "Prom. de campos completados",
+      "mostActiveDay": "Día más activo",
+      "submissions": "{count} envíos",
+      "formType": "Tipo de formulario",
+      "multiStep": "Varios pasos",
+      "singlePage": "Una sola página"
+    },
+    "trendsChart": {
+      "title": "Tendencias de envíos",
+      "noData": "No hay datos disponibles",
+      "submissions": "Envíos"
+    },
+    "dropoff": {
+      "title": "Analíticas de abandono",
+      "onlyMultiStep": "Las analíticas de abandono solo están disponibles para formularios de varios pasos.",
+      "subtitle": "Comprende dónde abandonan los usuarios tus formularios.",
+      "step": "Paso",
+      "reached": "Alcanzado",
+      "dropoffPercent": "% de abandono",
+      "completionPercent": "% de finalización",
+      "ofTotal": "de {total}",
+      "stepFallback": "Paso {index}",
+      "dropoffBarAria": "Barra de abandono para el paso {index}",
+      "completionBarAria": "Barra de finalización para el paso {index}"
+    },
+    "chatModal": {
+      "title": "Kiko",
+      "description": "Chatea con IA sobre las analíticas de tu formulario"
+    },
+    "chat": {
+      "emptyTitle": "Pregúntale a Kiko lo que quieras",
+      "emptyDescription": "Obtén análisis e información instantánea de los datos de tu formulario. Haz preguntas en lenguaje natural.",
+      "thinking": "Pensando...",
+      "inputPlaceholder": "Pregunta sobre las analíticas de tu formulario...",
+      "inputHelp": "Pulsa <enter></enter> para enviar, <shiftEnter></shiftEnter> para nueva línea"
+    },
+    "submissionDetails": {
+      "title": "Detalles del envío - {id}",
+      "submissionId": "ID del envío",
+      "submittedAt": "Enviado el",
+      "ipAddress": "Dirección IP",
+      "formData": "Datos del formulario",
+      "emptyValue": "—"
+    },
+    "submissions": {
+      "backToAnalytics": "Volver a analíticas",
+      "published": "Publicado",
+      "draft": "Borrador",
+      "formSubmissions": "Envíos del formulario ({count})",
+      "exportActions": "Acciones de exportación",
+      "exportCsv": "Exportar CSV",
+      "exportJson": "Exportar JSON",
+      "viewDetailedAnalytics": "Ver analíticas detalladas",
+      "submissions": "Envíos",
+      "searchSubmissions": "Buscar envíos...",
+      "noMatchingSubmissions": "No hay envíos que coincidan",
+      "noSubmissionsYet": "Aún no hay envíos",
+      "noSubmissionsDescription": "Cuando la gente comience a completar tu formulario, sus respuestas aparecerán aquí.",
+      "adjustSearchTerms": "Prueba a ajustar tu búsqueda para encontrar envíos.",
+      "id": "ID",
+      "submitted": "Enviado",
+      "ipAddress": "Dirección IP",
+      "fields": "Campos",
+      "actions": "Acciones",
+      "fieldsCount": "{count} campo",
+      "fieldsCount_plural": "{count} campos",
+      "view": "Ver",
+      "showingRange": "Mostrando {start}-{end} de {total} envíos",
+      "previous": "Anterior",
+      "next": "Siguiente",
+      "pageOf": "Página {page} de {total}",
+      "noSubmissionsToExport": "No hay envíos para exportar",
+      "submissionId": "ID del envío",
+      "submittedAt": "Enviado el",
+      "csvExportedSuccess": "CSV exportado correctamente",
+      "jsonExportedSuccess": "JSON exportado correctamente"
+    }
+  }
+}

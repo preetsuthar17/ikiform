@@ -1,0 +1,226 @@
+{
+  "common": {
+    "dashboard": "Dashboard",
+    "feedback": "Feedback",
+    "logOut": "Log out",
+    "loading": "Loading"
+  },
+  "profile": {
+    "userProfileInformation": "User profile information",
+    "userNameAria": "User name: {name}",
+    "premiumUserBadge": "Premium user badge",
+    "userEmailAria": "User email: {email}"
+  },
+  "formsManagement": {
+    "aria": {
+      "management": "Forms management"
+    },
+    "header": {
+      "title": "Your Forms",
+      "subtitle": "Create, manage, and analyze your forms with ease",
+      "createNewForm": "Create New Form",
+      "createDialogTitle": "Create a New Form",
+      "createDialogDescription": "Choose how you want to start. You can generate with AI, build manually, or import an encrypted file."
+    },
+    "createOptions": {
+      "aiBadge": "Most Recommended",
+      "aiCta": "Start with AI",
+      "aiTitle": "Use Kiko AI",
+      "aiDescription": "Describe your form and let Kiko AI generate a complete first draft with fields, logic, and structure.",
+      "manualCta": "Build manually",
+      "manualTitle": "Create Manually",
+      "manualDescription": "Start from a blank form and configure fields manually.",
+      "importCta": "Import file",
+      "importTitle": "Import from File",
+      "importDescription": "Import a passphrase-protected .ikiform file into a new draft form."
+    },
+    "emptyState": {
+      "aria": "Empty state - no forms created yet",
+      "title": "No forms yet",
+      "description": "Get started by creating your first form. It's quick and easy!",
+      "createFirstForm": "Create Your First Form",
+      "dialog": {
+        "title": "How would you like to create your form?",
+        "description": "Choose to build your form manually or let Kiko AI generate it for you.",
+        "createWithAI": "Use Kiko AI",
+        "createManually": "Create Manually"
+      }
+    },
+    "search": {
+      "aria": "Forms search and filters",
+      "searchAria": "Search forms",
+      "placeholder": "Search forms by title, description, or ID...",
+      "openFilterMenu": "Open filter menu",
+      "activeFiltersAria": "{count} active filters",
+      "statusLabel": "Status",
+      "filterByAll": "Filter by all statuses",
+      "all": "All",
+      "filterByPublished": "Filter by published forms",
+      "published": "Published",
+      "filterByDraft": "Filter by draft forms",
+      "draft": "Draft",
+      "sortByLabel": "Sort By",
+      "sortByLastUpdated": "Sort by last updated",
+      "lastUpdated": "Last Updated",
+      "sortByDateCreated": "Sort by date created",
+      "dateCreated": "Date Created",
+      "sortByTitle": "Sort by title alphabetically",
+      "titleAz": "Title (A-Z)",
+      "clearAllFilters": "Clear all filters",
+      "activeFiltersGroup": "Active filters",
+      "badgeSearch": "Search: \"{query}\"",
+      "clearSearch": "Clear search query",
+      "badgeStatus": "Status: {status}",
+      "clearStatus": "Clear status filter",
+      "badgeSort": "Sort: {sort}",
+      "sortTitleShort": "Title",
+      "sortCreatedShort": "Created",
+      "resetSort": "Reset sort to last updated"
+    },
+    "list": {
+      "untitledForm": "Untitled Form",
+      "viewAnalyticsFor": "View analytics for {title}",
+      "formStatusAria": "Form status: {status}",
+      "published": "Published",
+      "draft": "Draft",
+      "publicTitle": "Public: \"{title}\"",
+      "updated": "Updated {date}",
+      "actionsFor": "Actions for {title}",
+      "formActions": "Form actions",
+      "editForm": "Edit form",
+      "shareForm": "Share form",
+      "duplicate": "Duplicate",
+      "viewForm": "View form",
+      "viewAnalytics": "View analytics",
+      "embed": "Embed",
+      "export": "Export",
+      "deleteForm": "Delete form",
+      "formsListAria": "Forms list"
+    },
+    "stats": {
+      "totalForms": "Total Forms",
+      "published": "Published",
+      "drafts": "Drafts",
+      "loadingAria": "Loading form statistics",
+      "aria": "Form statistics",
+      "sidebarAria": "Forms statistics sidebar"
+    },
+    "emptySearch": {
+      "noMatch": "No forms match your search criteria.",
+      "clearFilters": "Clear filters",
+      "clearAria": "Clear all search filters"
+    },
+    "deleteModal": {
+      "cancel": "Cancel",
+      "confirm": "Delete Form",
+      "title": "Delete Form",
+      "description": "Are you sure you want to delete \"{formTitle}\"? This action cannot be undone and all form data will be permanently lost."
+    },
+    "toasts": {
+      "failedLoadForms": "Failed to load forms",
+      "failedShareForm": "Failed to share form",
+      "formDuplicated": "Form duplicated",
+      "failedDuplicateForm": "Failed to duplicate form",
+      "formImportedSuccess": "Form imported successfully.",
+      "failedImportForm": "Failed to import form.",
+      "formDeletedSuccess": "Form deleted successfully",
+      "failedDeleteForm": "Failed to delete form"
+    },
+    "shareModal": {
+      "title": "Share Form",
+      "publishedDescription": "Share your form with others using the link or QR code below",
+      "unpublishedDescription": "Publish your form to make it shareable with others",
+      "shareLink": "Share Link",
+      "copied": "Copied",
+      "copyLink": "Copy link",
+      "hide": "Hide",
+      "show": "Show",
+      "qrCode": "QR Code",
+      "qrCodeForForm": "QR Code for form",
+      "generating": "Generating...",
+      "scanForMobile": "Scan for easy mobile access",
+      "downloading": "Downloading...",
+      "downloadQr": "Download QR",
+      "needsPublish": "Your form needs to be published before it can be shared publicly.",
+      "publishing": "Publishing...",
+      "publishForm": "Publish Form",
+      "toasts": {
+        "failedGenerateQr": "Failed to generate QR code",
+        "linkCopied": "Link copied to clipboard!",
+        "failedCopyLink": "Failed to copy link. Please copy manually.",
+        "qrDownloaded": "QR code downloaded successfully!",
+        "failedDownloadQr": "Failed to download QR code"
+      }
+    },
+    "secureImport": {
+      "title": "Import Form from Encrypted File",
+      "description": "Decrypt a .ikiform file and create a new draft form.",
+      "encryptedFileLabel": "Encrypted file",
+      "encryptedFileHelp": "Upload a .ikiform encrypted export file.",
+      "passphraseLabel": "Passphrase",
+      "passphrasePlaceholder": "Enter passphrase used during export",
+      "passphraseHelp": "At least {count} characters required.",
+      "decrypting": "Decrypting...",
+      "decryptFile": "Decrypt File",
+      "importedForm": "Imported form",
+      "decryptToLoadSettings": "Decrypt a file to load import settings.",
+      "preserveApiSettings": "Preserve API settings (api key and enabled state)",
+      "preservePassword": "Preserve password-protection password",
+      "preserveNotificationEmail": "Preserve notification recipient email",
+      "cancel": "Cancel",
+      "importing": "Importing...",
+      "importAsNewForm": "Import as New Form",
+      "decryptToPreview": "Decrypt a file to preview the imported form.",
+      "errors": {
+        "chooseFile": "Please choose an encrypted .ikiform file.",
+        "passphraseMinChars": "Passphrase must be at least {count} characters.",
+        "failedDecrypt": "Failed to decrypt import file.",
+        "wrongPassphrase": "Wrong passphrase or the file may be tampered.",
+        "decryptBeforeImport": "Decrypt a file before importing.",
+        "failedImport": "Failed to import form."
+      },
+      "toasts": {
+        "fixHighlightedFields": "Please fix the highlighted fields.",
+        "fileDecrypted": "File decrypted. Review import options."
+      }
+    },
+    "secureExport": {
+      "title": "Export Form (Secure)",
+      "description": "Create an encrypted .ikiform file for this form. You will need the same passphrase to import it.",
+      "untitledForm": "Untitled Form",
+      "formLabel": "Form",
+      "unknownForm": "Unknown form",
+      "passphraseSetup": "Passphrase setup",
+      "passphraseLabel": "Passphrase",
+      "passphrasePlaceholder": "At least {count} characters",
+      "passphraseHelper": "Use at least 12 characters for stronger encryption.",
+      "confirmPassphraseLabel": "Confirm passphrase",
+      "confirmPassphrasePlaceholder": "Re-enter passphrase",
+      "confirmPassphraseHelper": "Re-enter the exact same passphrase.",
+      "hidePassphrase": "Hide passphrase",
+      "viewPassphrase": "View passphrase",
+      "hideConfirmPassphrase": "Hide confirmation passphrase",
+      "viewConfirmPassphrase": "View confirmation passphrase",
+      "cancel": "Cancel",
+      "exporting": "Exporting...",
+      "exportEncryptedFile": "Export Encrypted File",
+      "strength": {
+        "notSet": "Not set",
+        "weak": "Weak",
+        "good": "Good",
+        "strong": "Strong"
+      },
+      "errors": {
+        "passphraseMinChars": "Passphrase must be at least {count} characters.",
+        "confirmPassphraseMinChars": "Confirmation passphrase must be at least {count} characters.",
+        "passphrasesDoNotMatch": "Passphrases do not match.",
+        "noFormSelected": "No form selected for export.",
+        "enterValidPassphrase": "Please enter and confirm a valid passphrase.",
+        "failedExport": "Failed to export form."
+      },
+      "toasts": {
+        "exportCreated": "Encrypted form export created."
+      }
+    }
+  }
+}

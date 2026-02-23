@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { memo } from "react";
 import type { Form } from "@/lib/database";
 import { FormsList } from "./forms-list";
@@ -23,8 +24,10 @@ export const FormsView = memo(function FormsView({
 	onExportSecure,
 	onDelete,
 }: FormsViewProps) {
+	const t = useTranslations("dashboard.formsManagement.list");
+
 	return (
-		<section aria-label="Forms list">
+		<section aria-label={t("formsListAria")}>
 			<FormsList
 				forms={forms}
 				onDelete={onDelete}

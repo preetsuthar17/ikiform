@@ -1,5 +1,6 @@
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { GripVertical, Plus, Trash2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -35,6 +36,7 @@ export function FormFieldsContainer({
 	fieldVisibility,
 	showLogicCues = false,
 }: FormFieldsContainerProps & { showLogicCues?: boolean }) {
+	const t = useTranslations("product.formBuilder.formFields");
 	const itemRefs = React.useRef<Record<string, HTMLDivElement | null>>({});
 	const addButtonRef = React.useRef<HTMLButtonElement | null>(null);
 
@@ -61,7 +63,7 @@ export function FormFieldsContainer({
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button
-					aria-label="Add field to form"
+					aria-label={t("addFieldToFormAria")}
 					className="h-42 w-full border-2 border-dashed transition-colors hover:border-primary/50 hover:bg-accent/10"
 					onKeyDown={(e) => {
 						if (e.key === "Enter" || e.key === " ") {
@@ -72,7 +74,7 @@ export function FormFieldsContainer({
 					variant="outline"
 				>
 					<Plus aria-hidden="true" className="size-4" />
-					Add Field
+					{t("addField")}
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent
@@ -85,7 +87,7 @@ export function FormFieldsContainer({
 				<ScrollArea type="always">
 					{FIELD_TYPES.map((fieldType: { type: string; label: string }) => (
 						<DropdownMenuItem
-							aria-label={`Add ${fieldType.label} field`}
+							aria-label={t("addSpecificFieldAria", { label: fieldType.label })}
 							className="cursor-pointer"
 							key={fieldType.type}
 							onClick={() =>
@@ -124,18 +126,18 @@ export function FormFieldsContainer({
 				role="region"
 			>
 				<h2 className="sr-only" id="form-fields-empty-heading">
-					Form fields
+					{t("formFields")}
 				</h2>
 				<div className="flex size-16 items-center justify-center rounded-2xl bg-accent">
 					<div aria-hidden="true" className="size-8 rounded-2xl bg-muted" />
 				</div>
 				<p className="font-medium text-foreground text-lg">
-					{isMultiStep ? "No fields in this step" : "No fields added yet"}
+					{isMultiStep ? t("noFieldsInStep") : t("noFieldsYet")}
 				</p>
 				<p className="text-muted-foreground text-sm">
 					{isMultiStep
-						? "Add fields from the palette to this step"
-						: "Add fields from the left panel to start building your form"}
+						? t("addFieldsToStep")
+						: t("addFieldsFromLeftPanel")}
 				</p>
 				{onAddField && <AddFieldButton />}
 			</section>
@@ -149,10 +151,10 @@ export function FormFieldsContainer({
 			role="region"
 		>
 			<h2 className="sr-only" id="form-fields-heading">
-				Form fields
+				{t("formFields")}
 			</h2>
 			<div aria-live="polite" className="sr-only">
-				{renderFields.length} {renderFields.length === 1 ? "field" : "fields"}
+				{t("fieldsCount", { count: renderFields.length })}
 			</div>
 			<DragDropContext onDragEnd={handleDragEnd}>
 				<Droppable droppableId="fields">
@@ -209,13 +211,13 @@ export function FormFieldsContainer({
 														}
 													}}
 												>
-													<Card
+														<Card
 														aria-describedby={
 															showLogicCues && (isHidden || isDisabled)
 																? `${field.id}-state`
 																: undefined
 														}
-														aria-label={`${field.type} field`}
+														aria-label={t("fieldAria", { type: field.type })}
 														className={`p-4 shadow-none transition-all duration-200 ${
 															selectedFieldId === field.id
 																? "border-primary bg-accent/10 ring-2 ring-primary/20"
@@ -262,7 +264,9 @@ export function FormFieldsContainer({
 															<Tooltip>
 																<TooltipTrigger asChild>
 																	<Button
-																		aria-label={`Delete ${field.type} field`}
+																		aria-label={t("deleteFieldAria", {
+																			type: field.type,
+																		})}
 																		className="text-destructive hover:bg-destructive/10 hover:text-destructive-foreground"
 																		onClick={(e) => {
 																			e.stopPropagation();
@@ -305,7 +309,7 @@ export function FormFieldsContainer({
 																	</Button>
 																</TooltipTrigger>
 																<TooltipContent align="center" side="top">
-																	Delete field
+																	{t("deleteField")}
 																</TooltipContent>
 															</Tooltip>
 														</div>

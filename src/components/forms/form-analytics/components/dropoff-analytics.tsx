@@ -1,4 +1,7 @@
+"use client";
+
 import { AlertTriangle } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -46,6 +49,7 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
 	form,
 	submissions,
 }) => {
+	const t = useTranslations("product.analytics.dropoff");
 	if (!form.schema?.blocks || form.schema.blocks.length === 0) {
 		return (
 			<Card className="p-4 shadow-none md:p-6">
@@ -55,10 +59,10 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
 					</div>
 					<div className="flex flex-col gap-1">
 						<CardTitle className="font-semibold text-foreground text-lg">
-							Drop-off analytics
+							{t("title")}
 						</CardTitle>
 						<p className="text-muted-foreground text-sm">
-							Drop-off analytics are only available for multi-step forms.
+							{t("onlyMultiStep")}
 						</p>
 					</div>
 				</CardHeader>
@@ -77,10 +81,10 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
 				</div>
 				<div className="flex flex-col gap-1">
 					<CardTitle className="font-semibold text-foreground text-lg">
-						Drop-off analytics
+						{t("title")}
 					</CardTitle>
 					<p className="text-muted-foreground text-sm">
-						Understand where users drop off in your forms.
+						{t("subtitle")}
 					</p>
 				</div>
 			</CardHeader>
@@ -88,10 +92,10 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
 				<Table>
 					<TableHeader>
 						<TableRow className="gap-4">
-							<TableHead>Step</TableHead>
-							<TableHead>Reached</TableHead>
-							<TableHead>Drop-off %</TableHead>
-							<TableHead>Completion %</TableHead>
+							<TableHead>{t("step")}</TableHead>
+							<TableHead>{t("reached")}</TableHead>
+							<TableHead>{t("dropoffPercent")}</TableHead>
+							<TableHead>{t("completionPercent")}</TableHead>
 						</TableRow>
 					</TableHeader>
 					<TableBody>
@@ -105,20 +109,22 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
 							return (
 								<TableRow key={block.id}>
 									<TableCell className="font-medium">
-										<div className="flex items-center gap-2">
-											<div className="flex size-6 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary text-xs">
-												{idx + 1}
-											</div>
-											{block.label ? block.label : `Step ${idx + 1}`}
+									<div className="flex items-center gap-2">
+										<div className="flex size-6 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary text-xs">
+											{idx + 1}
 										</div>
-									</TableCell>
+										{block.label
+											? block.label
+											: t("stepFallback", { index: idx + 1 })}
+									</div>
+								</TableCell>
 									<TableCell>
 										<div className="flex items-center gap-2">
 											<span className="font-semibold tabular-nums">
 												{reached}
 											</span>
 											<span className="text-muted-foreground text-sm">
-												of {total}
+												{t("ofTotal", { total })}
 											</span>
 										</div>
 									</TableCell>
@@ -131,7 +137,9 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
 												<div className="h-2 overflow-hidden rounded-full bg-muted">
 													{}
 													<div
-														aria-label={`Drop-off bar for step ${idx + 1}`}
+														aria-label={t("dropoffBarAria", {
+															index: idx + 1,
+														})}
 														className="h-full bg-destructive transition-all duration-300"
 														style={{
 															width: dropoff > 0 ? `${dropoff}%` : "2px",
@@ -151,7 +159,9 @@ export const DropoffAnalytics: React.FC<DropoffAnalyticsProps> = ({
 												<div className="h-2 overflow-hidden rounded-full bg-muted">
 													{}
 													<div
-														aria-label={`Completion bar for step ${idx + 1}`}
+														aria-label={t("completionBarAria", {
+															index: idx + 1,
+														})}
 														className="h-full bg-primary transition-all duration-300"
 														style={{
 															width:

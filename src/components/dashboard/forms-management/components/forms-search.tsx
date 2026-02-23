@@ -1,6 +1,7 @@
 "use client";
 
 import { Filter, Search, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { memo, useCallback, useMemo } from "react";
 import { Label } from "@/components/ui";
 import { Badge } from "@/components/ui/badge";
@@ -33,6 +34,8 @@ export const FormsSearch = memo(function FormsSearch({
 	onSortByChange,
 	onClearFilters,
 }: FormsSearchProps) {
+	const t = useTranslations("dashboard.formsManagement.search");
+
 	const hasActiveFilters = useMemo(
 		() => searchQuery || statusFilter !== "all" || sortBy !== "updated",
 		[searchQuery, statusFilter, sortBy]
@@ -83,7 +86,7 @@ export const FormsSearch = memo(function FormsSearch({
 
 	return (
 		<div
-			aria-label="Forms search and filters"
+			aria-label={t("aria")}
 			className="flex flex-col gap-4"
 			role="search"
 		>
@@ -94,10 +97,10 @@ export const FormsSearch = memo(function FormsSearch({
 						className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground"
 					/>
 					<Input
-						aria-label="Search forms"
+						aria-label={t("searchAria")}
 						className="h-10 bg-card pl-8 shadow-none"
 						onChange={handleSearchChange}
-						placeholder="Search forms by title, description, or ID..."
+						placeholder={t("placeholder")}
 						type="search"
 						value={searchQuery}
 					/>
@@ -105,14 +108,16 @@ export const FormsSearch = memo(function FormsSearch({
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<Button
-							aria-label="Open filter menu"
+							aria-label={t("openFilterMenu")}
 							className="h-10 shrink-0 bg-card"
 							variant="outline"
 						>
 							<Filter aria-hidden="true" className="size-4" />
 							{hasActiveFilters && (
 								<Badge
-									aria-label={`${activeFilterCount} active filters`}
+									aria-label={t("activeFiltersAria", {
+										count: activeFilterCount,
+									})}
 									className="h-5 px-1.5 text-xs"
 									variant="secondary"
 								>
@@ -124,59 +129,59 @@ export const FormsSearch = memo(function FormsSearch({
 					<DropdownMenuContent align="end" className="w-min p-2 shadow-xs">
 						<div className="flex flex-col gap-2">
 							<div className="flex flex-col gap-2">
-								<Label className="font-medium text-sm">Status</Label>
+								<Label className="font-medium text-sm">{t("statusLabel")}</Label>
 								<div className="flex gap-2">
 									<Toggle
-										aria-label="Filter by all statuses"
+										aria-label={t("filterByAll")}
 										onPressedChange={handleStatusFilterAll}
 										pressed={statusFilter === "all"}
 									>
-										All
+										{t("all")}
 									</Toggle>
 									<Toggle
-										aria-label="Filter by published forms"
+										aria-label={t("filterByPublished")}
 										onPressedChange={handleStatusFilterPublished}
 										pressed={statusFilter === "published"}
 									>
-										Published
+										{t("published")}
 									</Toggle>
 									<Toggle
-										aria-label="Filter by draft forms"
+										aria-label={t("filterByDraft")}
 										onPressedChange={handleStatusFilterDraft}
 										pressed={statusFilter === "draft"}
 									>
-										Draft
+										{t("draft")}
 									</Toggle>
 								</div>
 							</div>
 							<DropdownMenuSeparator />
 
 							<div className="flex flex-col gap-2">
-								<Label className="font-medium text-sm">Sort By</Label>
+								<Label className="font-medium text-sm">{t("sortByLabel")}</Label>
 								<div className="flex flex-col gap-2">
 									<Toggle
-										aria-label="Sort by last updated"
+										aria-label={t("sortByLastUpdated")}
 										className="w-full justify-start"
 										onPressedChange={handleSortUpdated}
 										pressed={sortBy === "updated"}
 									>
-										Last Updated
+										{t("lastUpdated")}
 									</Toggle>
 									<Toggle
-										aria-label="Sort by date created"
+										aria-label={t("sortByDateCreated")}
 										className="w-full justify-start"
 										onPressedChange={handleSortCreated}
 										pressed={sortBy === "created"}
 									>
-										Date Created
+										{t("dateCreated")}
 									</Toggle>
 									<Toggle
-										aria-label="Sort by title alphabetically"
+										aria-label={t("sortByTitle")}
 										className="w-full justify-start"
 										onPressedChange={handleSortTitle}
 										pressed={sortBy === "title"}
 									>
-										Title (A-Z)
+										{t("titleAz")}
 									</Toggle>
 								</div>
 							</div>
@@ -184,13 +189,13 @@ export const FormsSearch = memo(function FormsSearch({
 							{hasActiveFilters && (
 								<div>
 									<Button
-										aria-label="Clear all filters"
+										aria-label={t("clearAllFilters")}
 										className="w-full"
 										onClick={onClearFilters}
 										variant="ghost"
 									>
 										<X aria-hidden="true" className="size-4" />
-										Clear all filters
+										{t("clearAllFilters")}
 									</Button>
 								</div>
 							)}
@@ -201,15 +206,15 @@ export const FormsSearch = memo(function FormsSearch({
 
 			{hasActiveFilters && (
 				<div
-					aria-label="Active filters"
+					aria-label={t("activeFiltersGroup")}
 					className="flex flex-wrap gap-2"
 					role="group"
 				>
 					{searchQuery && (
 						<Badge className="flex w-fit gap-1" variant="secondary">
-							Search: "{searchQuery}"
+							{t("badgeSearch", { query: searchQuery })}
 							<button
-								aria-label="Clear search query"
+								aria-label={t("clearSearch")}
 								className="h-auto rounded-sm p-0 hover:bg-muted"
 								onClick={handleClearSearch}
 							>
@@ -219,9 +224,14 @@ export const FormsSearch = memo(function FormsSearch({
 					)}
 					{statusFilter !== "all" && (
 						<Badge className="flex w-fit gap-1" variant="secondary">
-							Status: {statusFilter === "published" ? "Published" : "Draft"}
+							{t("badgeStatus", {
+								status:
+									statusFilter === "published"
+										? t("published")
+										: t("draft"),
+							})}
 							<button
-								aria-label="Clear status filter"
+								aria-label={t("clearStatus")}
 								className="h-auto rounded-sm p-0 hover:bg-muted"
 								onClick={handleStatusFilterAll}
 							>
@@ -231,9 +241,11 @@ export const FormsSearch = memo(function FormsSearch({
 					)}
 					{sortBy !== "updated" && (
 						<Badge className="flex w-fit gap-1" variant="secondary">
-							Sort: {sortBy === "title" ? "Title" : "Created"}
+							{t("badgeSort", {
+								sort: sortBy === "title" ? t("sortTitleShort") : t("sortCreatedShort"),
+							})}
 							<button
-								aria-label="Reset sort to last updated"
+								aria-label={t("resetSort")}
 								className="h-auto rounded-sm p-0 hover:bg-muted"
 								onClick={handleSortUpdated}
 							>

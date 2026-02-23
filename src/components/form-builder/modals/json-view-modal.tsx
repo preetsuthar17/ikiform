@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Check, Copy } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createHighlighter, type Highlighter } from "shiki";
 
@@ -53,6 +54,7 @@ const getHighlighter = async (): Promise<Highlighter> => {
 };
 
 export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
+	const t = useTranslations("product.formBuilder.jsonViewModal");
 	const [copied, setCopied] = useState(false);
 	const [highlightedCode, setHighlightedCode] = useState<string>("");
 	const [isHighlighting, setIsHighlighting] = useState(false);
@@ -181,9 +183,9 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
 			);
 			const success = await robustCopy(jsonString, {
 				showSuccessToast: true,
-				successMessage: "JSON copied to clipboard!",
+				successMessage: t("copySuccess"),
 				showErrorToast: true,
-				errorMessage: "Failed to copy JSON",
+				errorMessage: t("copyError"),
 			});
 
 			if (success) {
@@ -192,7 +194,7 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
 			}
 		} catch (error) {
 			const { toast } = await import("@/hooks/use-toast");
-			toast.error("Failed to copy JSON");
+			toast.error(t("copyError"));
 		}
 	};
 
@@ -210,10 +212,9 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
 				}}
 			>
 				<DialogHeader>
-					<DialogTitle className="tracking-tight">Form Schema JSON</DialogTitle>
+					<DialogTitle className="tracking-tight">{t("title")}</DialogTitle>
 					<DialogDescription id="json-view-description">
-						Read-only view of the current form schema. Use the copy button to
-						copy JSON.
+						{t("description")}
 					</DialogDescription>
 				</DialogHeader>
 
@@ -221,7 +222,7 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
 					<Tooltip delayDuration={prefersReducedMotion ? 0 : 200}>
 						<TooltipTrigger asChild>
 							<Button
-								aria-label={copied ? "Copied" : "Copy JSON"}
+								aria-label={copied ? t("copied") : t("copyJson")}
 								className="absolute top-3 right-3 z-10 ml-auto size-10 rounded-md p-0 transition-transform focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
 								disabled={isHighlighting}
 								onBlur={(e) => {
@@ -313,7 +314,7 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
 									</AnimatePresence>
 								</span>
 								<span className="sr-only">
-									{copied ? "Copied" : "Copy JSON"}
+									{copied ? t("copied") : t("copyJson")}
 								</span>
 							</Button>
 						</TooltipTrigger>
@@ -323,7 +324,7 @@ export function JsonViewModal({ schema, isOpen, onClose }: JsonViewModalProps) {
 							side="left"
 							sideOffset={10}
 						>
-							{copied ? "Copied" : "Copy JSON"}
+							{copied ? t("copied") : t("copyJson")}
 						</TooltipContent>
 					</Tooltip>
 					<ScrollArea className="h-[71vh] rounded-2xl border bg-muted/30 text-foreground">

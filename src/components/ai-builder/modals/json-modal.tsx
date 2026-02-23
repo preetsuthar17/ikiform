@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 import { createHighlighter } from "shiki";
 import { Button } from "@/components/ui/button";
@@ -23,6 +24,7 @@ interface JsonModalProps {
 }
 
 export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
+	const t = useTranslations("product.aiBuilder.jsonModal");
 	const [highlightedCode, setHighlightedCode] = useState<string>("");
 	const isLoading = !highlightedCode;
 
@@ -62,9 +64,9 @@ export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
 		<Dialog onOpenChange={onClose} open={isOpen}>
 			<DialogContent className="sm:max-w-3xl">
 				<DialogHeader>
-					<DialogTitle>Form JSON Schema</DialogTitle>
+					<DialogTitle>{t("title")}</DialogTitle>
 					<DialogDescription className="sr-only">
-						View or copy the generated JSON schema for your form
+						{t("description")}
 					</DialogDescription>
 				</DialogHeader>
 
@@ -85,7 +87,7 @@ export function JsonModal({ isOpen, onClose, activeForm }: JsonModalProps) {
 					<div className="flex justify-end gap-2">
 						<CopyButton schema={activeForm.schema} />
 						<Button onClick={onClose} variant="outline">
-							Close
+							{t("close")}
 						</Button>
 					</div>
 				</div>

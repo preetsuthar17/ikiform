@@ -1,5 +1,6 @@
 import { Draggable } from "@hello-pangea/dnd";
 import { GripVertical } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Card, CardContent } from "@/components/ui/card";
 import {
 	Tooltip,
@@ -42,6 +43,8 @@ export function BlockItem({
 	onSaveEdit,
 	onCancelEdit,
 }: DraggableBlockItemProps) {
+	const t = useTranslations("product.formBuilder.blockManager.item");
+
 	return (
 		<Draggable draggableId={block.id} index={index} key={block.id}>
 			{(provided, snapshot) => (
@@ -60,13 +63,13 @@ export function BlockItem({
 								<TooltipTrigger asChild>
 									<div
 										{...provided.dragHandleProps}
-										aria-label={`Drag to reorder ${block.title} step`}
+										aria-label={t("dragHandleAria", { title: block.title })}
 										className="flex size-8 cursor-grab items-center justify-center rounded-md border border-muted-foreground/30 border-dashed bg-muted/30 text-muted-foreground transition-colors hover:border-muted-foreground/50 hover:bg-muted/50 hover:text-foreground active:cursor-grabbing"
 									>
 										<GripVertical className="size-4" />
 									</div>
 								</TooltipTrigger>
-								<TooltipContent side="left">Drag to reorder</TooltipContent>
+								<TooltipContent side="left">{t("dragToReorder")}</TooltipContent>
 							</Tooltip>
 
 							<div className="min-w-0 flex-1">

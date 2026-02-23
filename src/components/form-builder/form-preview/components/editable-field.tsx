@@ -105,7 +105,7 @@ export function EditableField({
 									)}
 								</div>
 							)}
-							<Edit3 className="size-4 flex-shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+							<Edit3 className="size-4 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
 						</div>
 					</TooltipTrigger>
 					<TooltipContent align="start" side="top">

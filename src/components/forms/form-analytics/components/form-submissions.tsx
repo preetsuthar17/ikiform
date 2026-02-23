@@ -13,8 +13,8 @@ import {
 	Search,
 } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -36,27 +36,19 @@ interface FormSubmissionsProps {
 	submissions: FormSubmission[];
 }
 
-const formatDate = (dateString: string) =>
-	new Date(dateString).toLocaleDateString("en-US", {
-		year: "numeric",
-		month: "short",
-		day: "numeric",
-		hour: "2-digit",
-		minute: "2-digit",
-	});
-
-const getFieldLabel = (form: Form, fieldId: string) => {
-	const allFields = [
-		...(form.schema.fields || []),
-		...(form.schema.blocks?.flatMap((block) => block.fields || []) || []),
-	];
-	const field = allFields.find((f) => f.id === fieldId);
-	return field?.label || fieldId;
-};
-
-const exportToCSV = (form: Form, submissions: FormSubmission[]) => {
+const exportToCSV = (
+	form: Form,
+	submissions: FormSubmission[],
+	messages: {
+		noSubmissionsToExport: string;
+		submissionId: string;
+		submittedAt: string;
+		ipAddress: string;
+		csvExportedSuccess: string;
+	}
+) => {
 	if (submissions.length === 0) {
-		toast.error("No submissions to export");
+		toast.error(messages.noSubmissionsToExport);
 		return;
 	}
 
@@ -66,9 +58,9 @@ const exportToCSV = (form: Form, submissions: FormSubmission[]) => {
 	];
 
 	const headers = [
-		"Submission ID",
-		"Submitted At",
-		"IP Address",
+		messages.submissionId,
+		messages.submittedAt,
+		messages.ipAddress,
 		...allFields.map((f) => f.label || f.id),
 	];
 
@@ -97,12 +89,19 @@ const exportToCSV = (form: Form, submissions: FormSubmission[]) => {
 	link.click();
 	URL.revokeObjectURL(url);
 
-	toast.success("CSV exported successfully");
+	toast.success(messages.csvExportedSuccess);
 };
 
-const exportToJSON = (form: Form, submissions: FormSubmission[]) => {
+const exportToJSON = (
+	form: Form,
+	submissions: FormSubmission[],
+	messages: {
+		noSubmissionsToExport: string;
+		jsonExportedSuccess: string;
+	}
+) => {
 	if (submissions.length === 0) {
-		toast.error("No submissions to export");
+		toast.error(messages.noSubmissionsToExport);
 		return;
 	}
 
@@ -115,18 +114,33 @@ const exportToJSON = (form: Form, submissions: FormSubmission[]) => {
 	link.click();
 	URL.revokeObjectURL(url);
 
-	toast.success("JSON exported successfully");
+	toast.success(messages.jsonExportedSuccess);
 };
 
 const ITEMS_PER_PAGE = 50;
 
 export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
-	const router = useRouter();
+	const t = useTranslations("product.analytics.submissions");
+	const commonT = useTranslations("product.common");
+	const locale = useLocale();
 	const [searchTerm, setSearchTerm] = useState("");
 	const [selectedSubmission, setSelectedSubmission] =
 		useState<FormSubmission | null>(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
+	const dateFormatter = useMemo(
+		() =>
+			new Intl.DateTimeFormat(locale, {
+				year: "numeric",
+				month: "short",
+				day: "numeric",
+				hour: "2-digit",
+				minute: "2-digit",
+			}),
+		[locale]
+	);
+	const formatDate = (dateString: string) =>
+		dateFormatter.format(new Date(dateString));
 
 	const filteredSubmissions = submissions.filter((submission) => {
 		if (!searchTerm) return true;
@@ -139,11 +153,6 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 			)
 		);
 	});
-
-	const allFields = [
-		...(form.schema.fields || []),
-		...(form.schema.blocks?.flatMap((block) => block.fields || []) || []),
-	];
 
 	const totalPages = Math.ceil(filteredSubmissions.length / ITEMS_PER_PAGE);
 	const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -167,7 +176,7 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 						<div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
 							<div className="flex min-w-0 flex-col gap-4">
 								<Button
-									aria-label="Back to Analytics"
+									aria-label={t("backToAnalytics")}
 									asChild
 									className="w-fit"
 									variant="outline"
@@ -177,7 +186,7 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 										href={`/dashboard/forms/${form.id}/analytics`}
 									>
 										<ArrowLeft aria-hidden="true" className="size-4 shrink-0" />
-										<span className="text-sm">Back to Analytics</span>
+										<span className="text-sm">{t("backToAnalytics")}</span>
 									</Link>
 								</Button>
 								<div className="flex min-w-0 flex-col gap-4">
@@ -195,14 +204,14 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 											{form.is_published ? (
 												<>
 													<Globe aria-hidden="true" className="size-3" />
-													<span className="sr-only">Published</span>
-													<span aria-live="polite">Published</span>
+													<span className="sr-only">{t("published")}</span>
+													<span aria-live="polite">{t("published")}</span>
 												</>
 											) : (
 												<>
 													<Eye aria-hidden="true" className="size-3" />
-													<span className="sr-only">Draft</span>
-													<span aria-live="polite">Draft</span>
+													<span className="sr-only">{t("draft")}</span>
+													<span aria-live="polite">{t("draft")}</span>
 												</>
 											)}
 										</Badge>
@@ -210,7 +219,7 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 									<div className="flex items-center gap-2 text-muted-foreground">
 										<FileText aria-hidden="true" className="size-4" />
 										<span className="font-medium text-sm">
-											Form Submissions&nbsp;({submissions.length})
+											{t("formSubmissions", { count: submissions.length })}
 										</span>
 									</div>
 								</div>
@@ -218,29 +227,42 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 
 							{}
 							<div
-								aria-label="Export Actions"
+								aria-label={t("exportActions")}
 								className="flex flex-wrap items-center gap-3 sm:gap-3"
 							>
 								<Button
 									disabled={submissions.length === 0}
-									onClick={() => exportToCSV(form, submissions)}
+									onClick={() =>
+										exportToCSV(form, submissions, {
+											noSubmissionsToExport: t("noSubmissionsToExport"),
+											submissionId: t("submissionId"),
+											submittedAt: t("submittedAt"),
+											ipAddress: t("ipAddress"),
+											csvExportedSuccess: t("csvExportedSuccess"),
+										})
+									}
 									size="sm"
 									variant="outline"
 								>
 									<Download className="size-4" />
-									Export CSV
+									{t("exportCsv")}
 								</Button>
 								<Button
 									disabled={submissions.length === 0}
-									onClick={() => exportToJSON(form, submissions)}
+									onClick={() =>
+										exportToJSON(form, submissions, {
+											noSubmissionsToExport: t("noSubmissionsToExport"),
+											jsonExportedSuccess: t("jsonExportedSuccess"),
+										})
+									}
 									size="sm"
 									variant="outline"
 								>
 									<Download className="size-4" />
-									Export JSON
+									{t("exportJson")}
 								</Button>
 								<Button
-									aria-label="View detailed analytics"
+									aria-label={t("viewDetailedAnalytics")}
 									asChild
 									className="inline-flex items-center gap-2"
 									size="sm"
@@ -251,7 +273,7 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 										href={`/dashboard/forms/${form.id}/analytics`}
 									>
 										<BarChart3 aria-hidden="true" className="size-4" />
-										View Detailed Analytics
+										{t("viewDetailedAnalytics")}
 									</Link>
 								</Button>
 							</div>
@@ -265,7 +287,7 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 						<div className="flex items-center justify-between">
 							<CardTitle className="flex items-center gap-2">
 								<FileText className="size-5" />
-								Submissions
+								{t("submissions")}
 							</CardTitle>
 							<div className="flex items-center gap-2">
 								<div className="relative max-w-md">
@@ -273,7 +295,7 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 									<Input
 										className="pl-10"
 										onChange={(e) => handleSearchChange(e.target.value)}
-										placeholder="Search submissions..."
+										placeholder={t("searchSubmissions")}
 										value={searchTerm}
 									/>
 								</div>
@@ -288,13 +310,13 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 								</div>
 								<h4 className="font-semibold text-foreground text-xl">
 									{searchTerm
-										? "No matching submissions"
-										: "No submissions yet"}
+										? t("noMatchingSubmissions")
+										: t("noSubmissionsYet")}
 								</h4>
 								<p className="max-w-md text-center text-muted-foreground">
 									{searchTerm
-										? "Try adjusting your search terms to find submissions."
-										: "Once people start filling out your form, their responses will appear here."}
+										? t("adjustSearchTerms")
+										: t("noSubmissionsDescription")}
 								</p>
 							</div>
 						) : (
@@ -302,11 +324,11 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 								<Table>
 									<TableHeader>
 										<TableRow>
-											<TableHead>ID</TableHead>
-											<TableHead>Submitted</TableHead>
-											<TableHead>IP Address</TableHead>
-											<TableHead>Fields</TableHead>
-											<TableHead>Actions</TableHead>
+											<TableHead>{t("id")}</TableHead>
+											<TableHead>{t("submitted")}</TableHead>
+											<TableHead>{t("ipAddress")}</TableHead>
+											<TableHead>{t("fields")}</TableHead>
+											<TableHead>{t("actions")}</TableHead>
 										</TableRow>
 									</TableHeader>
 									<TableBody>
@@ -322,12 +344,13 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 													</div>
 												</TableCell>
 												<TableCell className="font-mono text-sm">
-													{submission.ip_address || "N/A"}
+													{submission.ip_address || commonT("na")}
 												</TableCell>
 												<TableCell>
 													<Badge variant="outline">
-														{Object.keys(submission.submission_data).length}{" "}
-														fields
+														{t("fieldsCount", {
+															count: Object.keys(submission.submission_data).length,
+														})}
 													</Badge>
 												</TableCell>
 												<TableCell>
@@ -340,7 +363,7 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 														variant="outline"
 													>
 														<Eye className="size-4" />
-														View
+														{t("view")}
 													</Button>
 												</TableCell>
 											</TableRow>
@@ -350,9 +373,11 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 								{totalPages > 1 && (
 									<div className="flex items-center justify-between border-t px-4 py-3">
 										<div className="text-muted-foreground text-sm">
-											Showing {startIndex + 1}-
-											{Math.min(endIndex, filteredSubmissions.length)} of{" "}
-											{filteredSubmissions.length} submissions
+											{t("showingRange", {
+												start: startIndex + 1,
+												end: Math.min(endIndex, filteredSubmissions.length),
+												total: filteredSubmissions.length,
+											})}
 										</div>
 										<div className="flex items-center gap-2">
 											<Button
@@ -362,10 +387,10 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 												variant="outline"
 											>
 												<ChevronLeft className="size-4" />
-												Previous
+												{t("previous")}
 											</Button>
 											<span className="px-2 text-sm">
-												Page {currentPage} of {totalPages}
+												{t("pageOf", { page: currentPage, total: totalPages })}
 											</span>
 											<Button
 												disabled={currentPage === totalPages}
@@ -373,7 +398,7 @@ export function FormSubmissions({ form, submissions }: FormSubmissionsProps) {
 												size="sm"
 												variant="outline"
 											>
-												Next
+												{t("next")}
 												<ChevronRight className="size-4" />
 											</Button>
 										</div>

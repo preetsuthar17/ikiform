@@ -1,0 +1,470 @@
+{
+  "common": {
+    "na": "N/A",
+    "premium": {
+      "title": "Requires Premium",
+      "viewPricing": "View Pricing",
+      "aiBuilderDescription": "You need a premium subscription to use the AI form builder. Upgrade to unlock all features.",
+      "formBuilderDescription": "You need a premium subscription to use the form builder. Upgrade to unlock all features."
+    }
+  },
+  "formBuilder": {
+    "header": {
+      "title": "Form Builder",
+      "goToDashboard": "Go to Dashboard",
+      "fieldCount": "{count} field",
+      "fieldCount_plural": "{count} fields",
+      "saving": "Saving",
+      "moreActions": "More actions",
+      "multiStepForm": "Multi-step form",
+      "toggleMultiStepMode": "Toggle multi-step mode",
+      "viewJson": "View JSON",
+      "analytics": "Analytics",
+      "share": "Share",
+      "useKiko": "Use Kiko",
+      "settings": "Settings",
+      "publish": "Publish",
+      "published": "Published",
+      "publishing": "Publishing...",
+      "unpublishing": "Unpublishing...",
+      "publishForm": "Publish form",
+      "unpublishForm": "Unpublish form",
+      "save": "Save",
+      "saveForm": "Save Form"
+    },
+    "modals": {
+      "formSettings": "Form Settings",
+      "internalTitle": "Internal Title",
+      "internalTitlePlaceholder": "Enter internal title for your reference...",
+      "internalTitleDescription": "This title is only visible to you in the dashboard and form builder",
+      "publicTitle": "Public Title",
+      "publicTitlePlaceholder": "Enter title to display to users...",
+      "publicTitleDescription": "This title will be displayed to users on the actual form. Leave empty to use the internal title.",
+      "description": "Description",
+      "descriptionPlaceholder": "Enter form description",
+      "submitButtonText": "Submit Button Text",
+      "submitButtonTextPlaceholder": "Submit button text",
+      "submit": "Submit",
+      "successMessage": "Success Message",
+      "successMessagePlaceholder": "Message shown after successful submission",
+      "redirectUrlOptional": "Redirect URL (optional)",
+      "redirectUrlPlaceholder": "https://example.com/thank-you",
+      "cancel": "Cancel",
+      "saveSettings": "Save Settings"
+    },
+    "page": {
+      "formFields": "Form Fields",
+      "authRequired": "Authentication Required",
+      "authRequiredDescription": "Please log in to use the form builder.",
+      "goToLogin": "Go to Login"
+    },
+    "blockManager": {
+      "header": {
+        "title": "Form Structure",
+        "stepsCount": "{count, plural, one {# step} other {# steps}}",
+        "description": "Organize your form into logical sections",
+        "addStepAria": "Add new step to form",
+        "addStep": "Add Step"
+      },
+      "item": {
+        "dragHandleAria": "Drag to reorder {title} step",
+        "dragToReorder": "Drag to reorder"
+      },
+      "headerActions": {
+        "stepBadge": "Step {index}",
+        "editStepAria": "Edit {title} step",
+        "deleteStepAria": "Delete {title} step",
+        "editStep": "Edit step",
+        "deleteStep": "Delete step",
+        "collapseStep": "Collapse step",
+        "expandStep": "Expand step"
+      },
+      "editForm": {
+        "stepTitlePlaceholder": "Step title",
+        "stepDescriptionPlaceholder": "Step description (optional)",
+        "save": "Save",
+        "cancel": "Cancel"
+      },
+      "fieldsList": {
+        "empty": "No fields yet. Add fields from the palette on the right."
+      }
+    },
+    "multiStepNavigation": {
+      "deleteStep": "Delete step",
+      "addStep": "Add step",
+      "deleteDialogTitle": "Delete Step",
+      "deleteDialogDescription": "Are you sure you want to delete this step? This action cannot be undone.",
+      "cancel": "Cancel"
+    },
+    "formFields": {
+      "addFieldToFormAria": "Add field to form",
+      "addField": "Add Field",
+      "addSpecificFieldAria": "Add {label} field",
+      "formFields": "Form fields",
+      "noFieldsInStep": "No fields in this step",
+      "noFieldsYet": "No fields added yet",
+      "addFieldsToStep": "Add fields from the palette to this step",
+      "addFieldsFromLeftPanel": "Add fields from the left panel to start building your form",
+      "fieldsCount": "{count, plural, one {# field} other {# fields}}",
+      "fieldAria": "{type} field",
+      "deleteFieldAria": "Delete {type} field",
+      "deleteField": "Delete field"
+    },
+    "jsonViewModal": {
+      "title": "Form Schema JSON",
+      "description": "Read-only view of the current form schema. Use the copy button to copy JSON.",
+      "copySuccess": "JSON copied to clipboard!",
+      "copyError": "Failed to copy JSON",
+      "copied": "Copied",
+      "copyJson": "Copy JSON"
+    },
+    "settingsMobile": {
+      "sectionsAria": "Settings sections",
+      "goToSectionAria": "Go to {section} settings",
+      "backToListAria": "Go back to settings list",
+      "settings": "Settings"
+    },
+    "creation": {
+      "title": "Create a New Form",
+      "cancel": "Cancel",
+      "back": "Back",
+      "createForm": "Create Form",
+      "reviewAction": "Review",
+      "next": "Next",
+      "types": {
+        "single": {
+          "title": "Single Page Form",
+          "description": "Traditional form with all fields on one page"
+        },
+        "multi": {
+          "title": "Multi-Step Form",
+          "description": "Guided form experience with multiple steps"
+        }
+      },
+      "typePreview": {
+        "stepOf": "Step {step} of {total}"
+      },
+      "configuration": {
+        "title": "Form details",
+        "description": "Set the internal and public information for your form.",
+        "internalTitle": "Internal Title",
+        "internalTitlePlaceholder": "Enter internal title for your reference…",
+        "internalTitleHelp": "Only visible in the dashboard and builder.",
+        "publicTitle": "Public Title",
+        "publicTitlePlaceholder": "Enter title to display to users…",
+        "publicTitleHelp": "Shown to users on the form. Leave empty to reuse the internal title.",
+        "formDescription": "Form Description",
+        "formDescriptionPlaceholder": "Enter a short description to guide users…",
+        "formDescriptionHelp": "Optional. Helps users understand the form’s purpose."
+      },
+      "review": {
+        "formType": "Form Type",
+        "multiStepForm": "Multi-Step Form",
+        "singlePageForm": "Single Page Form",
+        "multiStep": "Multi-Step",
+        "singlePage": "Single Page",
+        "editFormType": "Edit form type",
+        "formConfiguration": "Form Configuration",
+        "editFormConfiguration": "Edit form configuration",
+        "internalTitle": "Internal Title",
+        "publicTitle": "Public Title",
+        "description": "Description",
+        "preview": "Preview",
+        "previewDescription": "Snapshot of your form."
+      },
+      "stepIndicator": {
+        "progress": "Progress",
+        "stepCompleted": "Step {index} completed",
+        "stepCurrent": "Step {index} current",
+        "step": "Step {index}"
+      }
+    },
+    "customize": {
+      "page": {
+        "savedCustomization": "Saved customization",
+        "saveFailed": "Failed to save changes. Please try again.",
+        "tabs": {
+          "presets": "Presets",
+          "layout": "Layout",
+          "colors": "Colors",
+          "text": "Text"
+        },
+        "backToCustomize": "Back to Customize",
+        "previewForm": "Preview Form",
+        "customizeForm": "Customize Form",
+        "publicTitle": "Public title: \"{title}\"",
+        "customizationActions": "Customization actions",
+        "back": "Back",
+        "save": "Save",
+        "customize": "Customize"
+      },
+      "colors": {
+        "title": "Color Settings",
+        "description": "Customize colors and theme",
+        "backgroundColorLabel": "Background Color",
+        "backgroundColorHelp": "Sets the background color of the form container",
+        "textColorLabel": "Text Color",
+        "textColorHelp": "Sets the color of all text elements in the form",
+        "primaryColorLabel": "Primary Color (Buttons & Accent)",
+        "primaryColorHelp": "Sets the color for buttons, focus states, and accent elements",
+        "borderColorLabel": "Border Color",
+        "borderColorHelp": "Sets the color for input field borders and dividers",
+        "websiteBackgroundColorLabel": "Website Background Color",
+        "websiteBackgroundColorHelp": "Sets the background color of the entire website/page"
+      },
+      "typography": {
+        "title": "Typography Settings",
+        "description": "Customize fonts and text styling",
+        "fontFamily": "Font Family",
+        "fontFamilyPlaceholder": "Select a Google Font...",
+        "fontPreview": "Font Preview",
+        "previewLine1": "The quick brown fox jumps over the lazy dog",
+        "previewLine2": "Sample form text with numbers 1234567890",
+        "fontHelp": "Choose from hundreds of Google Fonts. The font will be loaded automatically.",
+        "fontSize": "Font Size",
+        "fontWeight": "Font Weight",
+        "selected": "Selected:",
+        "fontSizeOptions": {
+          "xs": { "label": "Extra Small", "description": "12px" },
+          "sm": { "label": "Small", "description": "14px" },
+          "base": { "label": "Base", "description": "16px" },
+          "lg": { "label": "Large", "description": "18px" },
+          "xl": { "label": "Extra Large", "description": "20px" }
+        },
+        "fontWeightOptions": {
+          "light": { "label": "Light", "description": "300" },
+          "normal": { "label": "Normal", "description": "400" },
+          "medium": { "label": "Medium", "description": "500" },
+          "semibold": { "label": "Semibold", "description": "600" },
+          "bold": { "label": "Bold", "description": "700" }
+        }
+      },
+      "layout": {
+        "title": "Layout Settings",
+        "description": "Configure spacing and structure",
+        "showProgressBar": "Show Progress Bar",
+        "formWidth": "Form Width",
+        "formWidthHelp": "Controls the maximum width of the form container",
+        "customWidth": "Custom Width (e.g., 600px, 80%, 50rem)",
+        "customWidthPlaceholder": "Enter custom width",
+        "internalPadding": "Internal Padding",
+        "internalPaddingHelp": "Controls the space inside the form container",
+        "externalMargin": "External Margin",
+        "externalMarginHelp": "Controls the space around the form container",
+        "cornerRadius": "Corner Radius",
+        "cornerRadiusHelp": "Controls how rounded the form corners appear",
+        "widthOptions": {
+          "sm": { "label": "Small", "description": "400px max width" },
+          "md": { "label": "Medium", "description": "600px max width" },
+          "lg": { "label": "Large", "description": "800px max width" },
+          "xl": { "label": "Extra Large", "description": "1000px max width" },
+          "full": { "label": "Full Width", "description": "100% width" },
+          "custom": { "label": "Custom", "description": "Custom width value" }
+        },
+        "paddingOptions": {
+          "none": { "label": "None", "description": "0px padding" },
+          "sm": { "label": "Small", "description": "16px padding" },
+          "md": { "label": "Medium", "description": "24px padding" },
+          "lg": { "label": "Large", "description": "32px padding" }
+        },
+        "marginOptions": {
+          "none": { "label": "None", "description": "No margin" },
+          "sm": { "label": "Small", "description": "8px" },
+          "md": { "label": "Medium", "description": "16px" },
+          "lg": { "label": "Large", "description": "32px" }
+        },
+        "radiusOptions": {
+          "none": { "label": "None", "description": "0px (sharp corners)" },
+          "sm": { "label": "Small", "description": "4px border radius" },
+          "md": { "label": "Medium", "description": "8px border radius" },
+          "lg": { "label": "Large", "description": "16px border radius" },
+          "xl": { "label": "Extra Large", "description": "24px border radius" }
+        }
+      },
+      "presets": {
+        "title": "Design Presets",
+        "description": "Quick-start with beautiful pre-designed form styles",
+        "category": "Category",
+        "allPresets": "All Presets",
+        "presets": "Presets",
+        "presetCount": "{count, plural, one {# preset} other {# presets}}",
+        "presetList": "Preset list",
+        "applyPresetAria": "Apply {name} preset",
+        "appliedPreset": "Applied \"{name}\" preset",
+        "formTitle": "Form Title",
+        "submit": "Submit"
+      }
+    }
+  },
+  "aiBuilder": {
+    "client": {
+      "createFormWithKiko": "Create Form with Kiko",
+      "streamError": "Error: {error}",
+      "generatingResponse": "Generating response…",
+      "loading": "Loading…"
+    },
+    "chatHeader": {
+      "backToFormBuilder": "Back to form builder",
+      "title": "Kiko AI"
+    },
+    "chatInput": {
+      "messageToKiko": "Message to Kiko AI",
+      "placeholder": "Describe the form you want to create…",
+      "sendMessage": "Send message",
+      "sendHelp": "Press Enter to send, Shift+Enter for new line, or ⌘/Ctrl+Enter to send"
+    },
+    "welcome": {
+      "heading": "How can Kiko assist you today?",
+      "description": "Hi, I’m Kiko—your AI-powered form assistant.\nAsk me to create, edit, or analyze forms for you!"
+    },
+    "preview": {
+      "title": "Kiko AI",
+      "formFallback": "Form {index}",
+      "viewJson": "View JSON",
+      "useThisForm": "Use this form",
+      "noFormSelected": "No form selected."
+    },
+    "jsonModal": {
+      "title": "Form JSON Schema",
+      "description": "View or copy the generated JSON schema for your form",
+      "close": "Close"
+    }
+  },
+  "analytics": {
+    "formAnalytics": {
+      "submissionExported": "Submission exported successfully",
+      "formDeleted": "Form deleted successfully",
+      "failedDeleteForm": "Failed to delete form",
+      "backToDashboard": "Back to Dashboard",
+      "published": "Published",
+      "draft": "Draft",
+      "analyticsSubtitle": "Form Analytics & Submission Data",
+      "formActions": "Form Actions",
+      "editForm": "Edit form",
+      "shareForm": "Share form",
+      "viewSubmissions": "View submissions",
+      "moreActions": "More actions",
+      "exportCsv": "Export CSV",
+      "exportJson": "Export JSON",
+      "deleteForm": "Delete form",
+      "openKiko": "Open Kiko AI",
+      "kiko": "Kiko AI",
+      "kikoTooltip": "AI Form analytics",
+      "recentSubmissions": "Recent Submissions",
+      "viewAll": "View All",
+      "noSubmissionsTitle": "No submissions yet",
+      "noSubmissionsDescription": "Once people start filling out your form, their responses will appear here.",
+      "submission": "Submission {id}",
+      "fieldsCount": "{count} fields",
+      "view": "View",
+      "viewSubmissionDetails": "View submission details",
+      "viewMoreSubmissions": "View {count} more submissions",
+      "noDataToExport": "No data to export",
+      "csvExportSuccess": "Data exported to CSV successfully!",
+      "jsonExportSuccess": "Data exported successfully!",
+      "deleteModalTitle": "Delete Form",
+      "deleteModalConfirm": "Delete Form",
+      "deleteModalCancel": "Cancel",
+      "deleteModalDescription": "Are you sure you want to delete \"{title}\"? This action cannot be undone and will permanently remove the form and all its submissions.",
+      "formPublished": "Form published!"
+    },
+    "statsCards": {
+      "totalSubmissions": "Total Submissions",
+      "formFields": "Form Fields",
+      "completionRate": "Completion Rate",
+      "last30Days": "Last 30 Days",
+      "avgDailySubmissions": "Avg. Daily Submissions",
+      "bounceRate": "Bounce Rate",
+      "peakHour": "Peak Hour",
+      "uniqueResponses": "Unique Responses"
+    },
+    "infoCards": {
+      "lastSubmission": "Last Submission",
+      "fromIp": "From {ip}",
+      "noSubmissionsYet": "No submissions yet",
+      "formStatus": "Form Status",
+      "published": "Published",
+      "created": "Created",
+      "updated": "Updated",
+      "yes": "Yes",
+      "no": "No",
+      "quickStats": "Quick Stats",
+      "avgFieldsCompleted": "Avg. Fields Completed",
+      "mostActiveDay": "Most Active Day",
+      "submissions": "{count} submissions",
+      "formType": "Form Type",
+      "multiStep": "Multi-Step",
+      "singlePage": "Single Page"
+    },
+    "trendsChart": {
+      "title": "Submission Trends",
+      "noData": "No data available",
+      "submissions": "Submissions"
+    },
+    "dropoff": {
+      "title": "Drop-off analytics",
+      "onlyMultiStep": "Drop-off analytics are only available for multi-step forms.",
+      "subtitle": "Understand where users drop off in your forms.",
+      "step": "Step",
+      "reached": "Reached",
+      "dropoffPercent": "Drop-off %",
+      "completionPercent": "Completion %",
+      "ofTotal": "of {total}",
+      "stepFallback": "Step {index}",
+      "dropoffBarAria": "Drop-off bar for step {index}",
+      "completionBarAria": "Completion bar for step {index}"
+    },
+    "chatModal": {
+      "title": "Kiko",
+      "description": "Chat with AI about your form analytics"
+    },
+    "chat": {
+      "emptyTitle": "Ask Kiko Anything",
+      "emptyDescription": "Get instant insights and analysis from your form data. Ask questions in natural language.",
+      "thinking": "Thinking...",
+      "inputPlaceholder": "Ask about your form analytics...",
+      "inputHelp": "Press <enter></enter> to send, <shiftEnter></shiftEnter> for new line"
+    },
+    "submissionDetails": {
+      "title": "Submission Details - {id}",
+      "submissionId": "Submission ID",
+      "submittedAt": "Submitted At",
+      "ipAddress": "IP Address",
+      "formData": "Form Data",
+      "emptyValue": "—"
+    },
+    "submissions": {
+      "backToAnalytics": "Back to Analytics",
+      "published": "Published",
+      "draft": "Draft",
+      "formSubmissions": "Form Submissions ({count})",
+      "exportActions": "Export Actions",
+      "exportCsv": "Export CSV",
+      "exportJson": "Export JSON",
+      "viewDetailedAnalytics": "View Detailed Analytics",
+      "submissions": "Submissions",
+      "searchSubmissions": "Search submissions...",
+      "noMatchingSubmissions": "No matching submissions",
+      "noSubmissionsYet": "No submissions yet",
+      "noSubmissionsDescription": "Once people start filling out your form, their responses will appear here.",
+      "adjustSearchTerms": "Try adjusting your search terms to find submissions.",
+      "id": "ID",
+      "submitted": "Submitted",
+      "ipAddress": "IP Address",
+      "fields": "Fields",
+      "actions": "Actions",
+      "fieldsCount": "{count} field",
+      "fieldsCount_plural": "{count} fields",
+      "view": "View",
+      "showingRange": "Showing {start}-{end} of {total} submissions",
+      "previous": "Previous",
+      "next": "Next",
+      "pageOf": "Page {page} of {total}",
+      "noSubmissionsToExport": "No submissions to export",
+      "submissionId": "Submission ID",
+      "submittedAt": "Submitted At",
+      "csvExportedSuccess": "CSV exported successfully",
+      "jsonExportedSuccess": "JSON exported successfully"
+    }
+  }
+}

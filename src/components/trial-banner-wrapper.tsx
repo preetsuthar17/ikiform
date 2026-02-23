@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { stripLocalePrefix } from "@/lib/i18n/pathname";
 import { cn } from "@/lib/utils";
 
 interface User {
@@ -39,10 +40,13 @@ export function TrialBannerWrapper({ className }: TrialBannerWrapperProps) {
 	const bannerRef = useRef<HTMLDivElement>(null);
 
 	const pathname = usePathname();
+	const normalizedPathname = stripLocalePrefix(pathname);
 
 	const shouldHideBanner = useMemo(
-		() => pathname.startsWith("/f/") || pathname.startsWith("/forms/"),
-		[pathname]
+		() =>
+			normalizedPathname.startsWith("/f/") ||
+			normalizedPathname.startsWith("/forms/"),
+		[normalizedPathname]
 	);
 
 	const trialEndDate = useMemo(() => {

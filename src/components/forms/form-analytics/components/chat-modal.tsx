@@ -1,4 +1,5 @@
 import { Bot } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type React from "react";
 import {
 	Dialog,
@@ -33,6 +34,8 @@ export const ChatModal: React.FC<ChatModalProps> = ({
 	abortController,
 	handleStopGeneration,
 }) => {
+	const t = useTranslations("product.analytics.chatModal");
+
 	const chatInterfaceProps = {
 		chatMessages,
 		chatStreaming,
@@ -55,10 +58,10 @@ export const ChatModal: React.FC<ChatModalProps> = ({
 					<DrawerHeader className="flex items-center justify-between gap-2 border-border border-b">
 						<div className="sr-only flex items-center gap-2">
 							<Bot className="size-4 text-primary" />
-							<DrawerTitle>Kiko</DrawerTitle>
+							<DrawerTitle>{t("title")}</DrawerTitle>
 						</div>
 						<DrawerDescription className="sr-only">
-							Chat with AI about your form analytics
+							{t("description")}
 						</DrawerDescription>
 					</DrawerHeader>
 					<div className="flex-1 overflow-hidden">
@@ -74,7 +77,7 @@ export const ChatModal: React.FC<ChatModalProps> = ({
 			<DialogContent className="flex h-[800px] flex-col p-6 focus:outline-none focus:ring-0">
 				<DialogHeader className="flex items-center justify-between gap-2 px-4 py-3">
 					<div className="flex items-center gap-2">
-						<DialogTitle>Kiko</DialogTitle>
+						<DialogTitle>{t("title")}</DialogTitle>
 					</div>
 				</DialogHeader>
 				<ChatInterface {...chatInterfaceProps} />

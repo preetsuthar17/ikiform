@@ -1,4 +1,5 @@
 import type React from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import type { WizardStep } from "../types";
 
@@ -17,10 +18,11 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
 	currentStep,
 	completedSteps,
 }) => {
+	const t = useTranslations("product.formBuilder.creation.stepIndicator");
 	const currentStepIdx = steps.findIndex((s) => s.id === currentStep);
 
 	return (
-		<nav aria-label="Progress" className="w-full">
+		<nav aria-label={t("progress")} className="w-full">
 			<ol className="flex w-full items-center gap-2 sm:gap-4">
 				{steps.map((step, idx) => {
 					const completed =
@@ -35,10 +37,10 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
 								aria-current={current ? "step" : undefined}
 								aria-label={
 									completed
-										? `Step ${idx + 1} completed`
+										? t("stepCompleted", { index: idx + 1 })
 										: current
-											? `Step ${idx + 1} current`
-											: `Step ${idx + 1}`
+											? t("stepCurrent", { index: idx + 1 })
+											: t("step", { index: idx + 1 })
 								}
 								className={cn(
 									"h-2 w-full min-w-[48px] rounded transition-colors sm:min-w-[80px]",

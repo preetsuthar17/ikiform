@@ -207,7 +207,7 @@ export function QuizResults({
 											{fieldResult.explanation && (
 												<div className="rounded-lg bg-blue-50 p-3">
 													<div className="flex gap-2">
-														<Info className="mt-0.5 size-4 flex-shrink-0 text-blue-600" />
+														<Info className="mt-0.5 size-4 shrink-0 text-blue-600" />
 														<p className="text-blue-800 text-sm">
 															{fieldResult.explanation}
 														</p>

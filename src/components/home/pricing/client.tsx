@@ -12,10 +12,13 @@ import {
 	ShieldCheck,
 } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import React, { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
+import { getLocaleFromPathname, withLocaleHref } from "@/lib/i18n/pathname";
 import { usePremiumStatus } from "@/hooks/use-premium-status";
 
 interface Product {
@@ -26,41 +29,6 @@ interface Product {
 interface PricingClientProps {
 	products: Product[];
 }
-
-const featureList = [
-	{
-		label: "Unlimited forms & responses",
-		icon: Infinity,
-	},
-	{
-		label: "API & webhooks for automation",
-		icon: Code2,
-	},
-	{
-		label: "Control response limits & rate",
-		icon: Gauge,
-	},
-	{
-		label: "Build quizzes with scoring",
-		icon: ListChecks,
-	},
-	{
-		label: "Access form data via API",
-		icon: Database,
-	},
-	{
-		label: "Custom branding & embed anywhere",
-		icon: Brush,
-	},
-	{
-		label: "Block spam & bots automatically",
-		icon: ShieldCheck,
-	},
-	{
-		label: "Filter profanity & require passwords",
-		icon: ShieldBan,
-	},
-];
 
 const planProductIdMap = {
 	monthly: "05f52efa-2102-4dd0-9d1d-1538210d6712",
@@ -90,10 +58,51 @@ const PRICING = {
 };
 
 export default function PricingClient({ products }: PricingClientProps) {
+	const t = useTranslations("home.pricing");
 	const sectionRef = useRef<HTMLElement>(null);
 	const [purchaseLoading, setPurchaseLoading] = useState(false);
+	const pathname = usePathname();
+	const locale = getLocaleFromPathname(pathname);
 	const { user } = useAuth();
 	usePremiumStatus(user);
+
+	const toLocaleHref = (href: string) =>
+		locale ? withLocaleHref(href, locale) : href;
+
+	const featureList = [
+		{
+			label: t("features.unlimitedForms"),
+			icon: Infinity,
+		},
+		{
+			label: t("features.apiWebhooks"),
+			icon: Code2,
+		},
+		{
+			label: t("features.responseLimits"),
+			icon: Gauge,
+		},
+		{
+			label: t("features.quizScoring"),
+			icon: ListChecks,
+		},
+		{
+			label: t("features.formDataApi"),
+			icon: Database,
+		},
+		{
+			label: t("features.customBranding"),
+			icon: Brush,
+		},
+		{
+			label: t("features.spamProtection"),
+			icon: ShieldCheck,
+		},
+		{
+			label: t("features.passwordProfanity"),
+			icon: ShieldBan,
+		},
+	];
 
 	useEffect(() => {
 		setPurchaseLoading(false);
@@ -114,11 +123,10 @@ export default function PricingClient({ products }: PricingClientProps) {
 					className="text-center font-medium text-3xl leading-tight tracking-[-2px] md:text-4xl"
 					id="pricing-title"
 				>
-					Simple, Transparent Pricing for Everything You Need.
+					{t("title")}
 				</h2>
 				<p className="text-center text-base text-muted-foreground md:text-lg">
-					Choose the plan that best fits your needs and start collecting
-					responses.
+					{t("description")}
 				</p>
 			</div>
 		);
@@ -170,7 +178,7 @@ export default function PricingClient({ products }: PricingClientProps) {
 					</div>
 					{plan.popular ? (
 						<Badge className="rounded-full border px-3 py-1 text-xs">
-							Popular
+							{t("popular")}
 						</Badge>
 					) : null}
 				</header>
@@ -200,7 +208,7 @@ export default function PricingClient({ products }: PricingClientProps) {
 						href={
 							user
 								? `/checkout?products=${plan.productId}&customerEmail=${user?.email}`
-								: "/login"
+								: toLocaleHref("/login")
 						}
 						onClick={handlePurchaseClick}
 					>
@@ -216,9 +224,9 @@ export default function PricingClient({ products }: PricingClientProps) {
 							</span>
 						</Button>
 					</Link>
-					{plan.ctaLabel === "Start your 14-day free trial" && (
+					{plan.ctaLabel === t("cta.startTrial") && (
 						<span className="flex items-center justify-center text-center text-muted-foreground text-sm">
-							No credit card required
+							{t("noCard")}
 						</span>
 					)}
 				</div>
@@ -230,37 +238,37 @@ export default function PricingClient({ products }: PricingClientProps) {
 		() => [
 			{
 				key: "monthly",
-				title: "Monthly Plan",
-				byline: PRICING.monthly.billedAs,
+				title: t("plans.monthly.title"),
+				byline: t("plans.monthly.byline"),
 				price: `$${PRICING.monthly.price}`,
 				period: PRICING.monthly.period,
 				features: featureList,
 				productId: planProductIdMap.monthly,
-				ctaLabel: "Start your 14-day free trial",
+				ctaLabel: t("cta.startTrial"),
 			},
 			{
 				key: "lifetime",
 				popular: true,
-				title: "Lifetime Access",
-				byline: PRICING.onetime.billedAs,
+				title: t("plans.lifetime.title"),
+				byline: t("plans.lifetime.byline"),
 				price: `$${PRICING.onetime.price}`,
 				period: PRICING.onetime.period,
 				features: featureList,
 				productId: planProductIdMap.onetime,
-				ctaLabel: "Get Lifetime Access",
+				ctaLabel: t("cta.getLifetime"),
 			},
 			{
 				key: "yearly",
-				title: "Annual Plan",
-				byline: PRICING.yearly.billedAs,
+				title: t("plans.yearly.title"),
+				byline: t("plans.yearly.byline"),
 				price: `$${PRICING.yearly.price}`,
 				period: PRICING.yearly.period,
 				features: featureList,
 				productId: planProductIdMap.yearly,
-				ctaLabel: "Start your 14-day free trial",
+				ctaLabel: t("cta.startTrial"),
 			},
 		],
-		[]
+		[t]
 	);
 
 	return (

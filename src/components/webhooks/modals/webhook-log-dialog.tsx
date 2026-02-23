@@ -288,7 +288,7 @@ function PayloadViewer({ payload }: { payload: any }) {
 									className="flex items-start justify-between gap-3 rounded-lg border bg-muted/50 p-3"
 									key={key}
 								>
-									<span className="min-w-0 flex-shrink-0 font-medium text-muted-foreground text-sm">
+									<span className="min-w-0 shrink-0 font-medium text-muted-foreground text-sm">
 										{key}:
 									</span>
 									<span className="break-words text-right text-sm">
@@ -328,7 +328,7 @@ function PayloadViewer({ payload }: { payload: any }) {
 										className="flex flex-col items-start justify-center gap-2 rounded-lg border bg-muted/50 p-3"
 										key={key}
 									>
-										<span className="min-w-0 flex-shrink-0 font-medium text-muted-foreground text-sm">
+										<span className="min-w-0 shrink-0 font-medium text-muted-foreground text-sm">
 											{key}:
 										</span>
 										<div className="min-w-0 flex-1 font-mono">

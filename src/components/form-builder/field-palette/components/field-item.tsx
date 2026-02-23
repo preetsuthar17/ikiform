@@ -18,7 +18,7 @@ export function FieldItem({ fieldType, onAddField }: FieldItemProps) {
 			variant="outline"
 		>
 			<div className="flex w-full items-center gap-3">
-				<div className="flex flex-shrink-0 items-center justify-center rounded-lg bg-primary/10 p-2 group-hover:bg-primary/20">
+				<div className="flex shrink-0 items-center justify-center rounded-lg bg-primary/10 p-2 group-hover:bg-primary/20">
 					<IconComponent aria-hidden="true" className="size-4 text-primary" />
 				</div>
 				<div className="flex min-w-0 flex-1 flex-col gap-1">

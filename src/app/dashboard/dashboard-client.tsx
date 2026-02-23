@@ -148,7 +148,7 @@ export default function DashboardClient({
 	return (
 		<main className="mx-auto w-full max-w-7xl">
 			<div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
-				<aside className="flex w-full flex-col gap-8 lg:w-80 lg:flex-shrink-0">
+				<aside className="flex w-full flex-col gap-8 lg:w-80 lg:shrink-0">
 					<Suspense fallback={<ProfileCardSkeleton />}>
 						<ProfileCard
 							hasCustomerPortal={initialHasCustomerPortal}

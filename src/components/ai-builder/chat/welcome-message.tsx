@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -8,6 +9,8 @@ interface WelcomeMessageProps {
 }
 
 export function WelcomeMessage({ mounted }: WelcomeMessageProps) {
+	const t = useTranslations("product.aiBuilder.welcome");
+
 	return (
 		<motion.div
 			animate={{ opacity: 1, y: 0 }}
@@ -26,15 +29,13 @@ export function WelcomeMessage({ mounted }: WelcomeMessageProps) {
 				</Link>
 			</div>
 			<h2 className="font-semibold text-2xl" id="welcome-heading">
-				How can Kiko assist you today?
+				{t("heading")}
 			</h2>
 			<p
 				aria-describedby="welcome-heading"
 				className="max-w-md text-muted-foreground text-sm"
 			>
-				Hi, I’m Kiko—your AI-powered form assistant.
-				<br />
-				Ask me to create, edit, or analyze forms for you!
+				{t("description")}
 			</p>
 		</motion.div>
 	);

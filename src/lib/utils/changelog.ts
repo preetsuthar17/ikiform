@@ -1,5 +1,6 @@
 import { readdir, readFile } from "fs/promises";
 import { join } from "path";
+import type { AppLocale } from "@/i18n/routing";
 
 export interface ChangelogEntry {
 	title: string;
@@ -8,8 +9,32 @@ export interface ChangelogEntry {
 	content: string;
 }
 
-export async function getChangelogEntries(): Promise<ChangelogEntry[]> {
-	const changelogDir = join(process.cwd(), "content", "changelog");
+async function getExistingChangelogDir(locale: AppLocale): Promise<string> {
+	const localizedDir = join(process.cwd(), "content", "changelog", locale);
+	try {
+		// eslint-disable-next-line security/detect-non-literal-fs-filename
+		await readdir(localizedDir);
+		return localizedDir;
+	} catch {
+		if (locale === "en") {
+			return join(process.cwd(), "content", "changelog");
+		}
+
+		const fallbackDir = join(process.cwd(), "content", "changelog", "en");
+		try {
+			// eslint-disable-next-line security/detect-non-literal-fs-filename
+			await readdir(fallbackDir);
+			return fallbackDir;
+		} catch {
+			return join(process.cwd(), "content", "changelog");
+		}
+	}
+}
+
+export async function getChangelogEntries(
+	locale: AppLocale = "en"
+): Promise<ChangelogEntry[]> {
+	const changelogDir = await getExistingChangelogDir(locale);
 
 	let files: string[] = [];
 	try {

@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
 import React, { useCallback, useState } from "react";
@@ -45,6 +46,8 @@ function useIsMobile() {
 
 export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 	const router = useRouter();
+	const locale = useLocale();
+	const t = useTranslations("product.formBuilder.page");
 	const {
 		state,
 		actions,
@@ -375,7 +378,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 				blocks: [
 					{
 						id: "default",
-						title: "Form Fields",
+						title: t("formFields"),
 						description: "",
 						fields: allFields,
 					},
@@ -405,11 +408,13 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 		return (
 			<div className="flex h-screen items-center justify-center">
 				<div className="text-center">
-					<h2 className="mb-4 font-bold text-2xl">Authentication Required</h2>
+					<h2 className="mb-4 font-bold text-2xl">{t("authRequired")}</h2>
 					<p className="mb-6 text-muted-foreground">
-						Please log in to use the form builder.
+						{t("authRequiredDescription")}
 					</p>
-					<Button onClick={() => router.push("/")}>Go to Login</Button>
+					<Button onClick={() => router.push(`/${locale}`)}>
+						{t("goToLogin")}
+					</Button>
 				</div>
 			</div>
 		);

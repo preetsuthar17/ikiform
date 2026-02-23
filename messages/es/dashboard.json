@@ -1,0 +1,226 @@
+{
+  "common": {
+    "dashboard": "Panel",
+    "feedback": "Comentarios",
+    "logOut": "Cerrar sesión",
+    "loading": "Cargando"
+  },
+  "profile": {
+    "userProfileInformation": "Información del perfil de usuario",
+    "userNameAria": "Nombre de usuario: {name}",
+    "premiumUserBadge": "Insignia de usuario premium",
+    "userEmailAria": "Correo del usuario: {email}"
+  },
+  "formsManagement": {
+    "aria": {
+      "management": "Gestión de formularios"
+    },
+    "header": {
+      "title": "Tus formularios",
+      "subtitle": "Crea, gestiona y analiza tus formularios fácilmente",
+      "createNewForm": "Crear nuevo formulario",
+      "createDialogTitle": "Crear un nuevo formulario",
+      "createDialogDescription": "Elige cómo quieres empezar. Puedes generarlo con IA, construirlo manualmente o importar un archivo cifrado."
+    },
+    "createOptions": {
+      "aiBadge": "Más recomendado",
+      "aiCta": "Empezar con IA",
+      "aiTitle": "Usar Kiko AI",
+      "aiDescription": "Describe tu formulario y deja que Kiko AI genere un primer borrador completo con campos, lógica y estructura.",
+      "manualCta": "Construir manualmente",
+      "manualTitle": "Crear manualmente",
+      "manualDescription": "Empieza desde un formulario en blanco y configura los campos manualmente.",
+      "importCta": "Importar archivo",
+      "importTitle": "Importar desde archivo",
+      "importDescription": "Importa un archivo .ikiform protegido con frase de contraseña en un nuevo borrador."
+    },
+    "emptyState": {
+      "aria": "Estado vacío - aún no hay formularios",
+      "title": "Aún no hay formularios",
+      "description": "Comienza creando tu primer formulario. Es rápido y fácil.",
+      "createFirstForm": "Crea tu primer formulario",
+      "dialog": {
+        "title": "¿Cómo te gustaría crear tu formulario?",
+        "description": "Elige entre construir tu formulario manualmente o dejar que Kiko AI lo genere por ti.",
+        "createWithAI": "Usar Kiko AI",
+        "createManually": "Crear manualmente"
+      }
+    },
+    "search": {
+      "aria": "Búsqueda y filtros de formularios",
+      "searchAria": "Buscar formularios",
+      "placeholder": "Busca formularios por título, descripción o ID...",
+      "openFilterMenu": "Abrir menú de filtros",
+      "activeFiltersAria": "{count} filtros activos",
+      "statusLabel": "Estado",
+      "filterByAll": "Filtrar por todos los estados",
+      "all": "Todos",
+      "filterByPublished": "Filtrar por formularios publicados",
+      "published": "Publicado",
+      "filterByDraft": "Filtrar por formularios en borrador",
+      "draft": "Borrador",
+      "sortByLabel": "Ordenar por",
+      "sortByLastUpdated": "Ordenar por última actualización",
+      "lastUpdated": "Última actualización",
+      "sortByDateCreated": "Ordenar por fecha de creación",
+      "dateCreated": "Fecha de creación",
+      "sortByTitle": "Ordenar por título alfabéticamente",
+      "titleAz": "Título (A-Z)",
+      "clearAllFilters": "Limpiar todos los filtros",
+      "activeFiltersGroup": "Filtros activos",
+      "badgeSearch": "Búsqueda: \"{query}\"",
+      "clearSearch": "Limpiar búsqueda",
+      "badgeStatus": "Estado: {status}",
+      "clearStatus": "Quitar filtro de estado",
+      "badgeSort": "Orden: {sort}",
+      "sortTitleShort": "Título",
+      "sortCreatedShort": "Creado",
+      "resetSort": "Restablecer orden a última actualización"
+    },
+    "list": {
+      "untitledForm": "Formulario sin título",
+      "viewAnalyticsFor": "Ver analíticas de {title}",
+      "formStatusAria": "Estado del formulario: {status}",
+      "published": "Publicado",
+      "draft": "Borrador",
+      "publicTitle": "Público: \"{title}\"",
+      "updated": "Actualizado {date}",
+      "actionsFor": "Acciones para {title}",
+      "formActions": "Acciones del formulario",
+      "editForm": "Editar formulario",
+      "shareForm": "Compartir formulario",
+      "duplicate": "Duplicar",
+      "viewForm": "Ver formulario",
+      "viewAnalytics": "Ver analíticas",
+      "embed": "Incrustar",
+      "export": "Exportar",
+      "deleteForm": "Eliminar formulario",
+      "formsListAria": "Lista de formularios"
+    },
+    "stats": {
+      "totalForms": "Formularios totales",
+      "published": "Publicados",
+      "drafts": "Borradores",
+      "loadingAria": "Cargando estadísticas de formularios",
+      "aria": "Estadísticas de formularios",
+      "sidebarAria": "Barra lateral de estadísticas de formularios"
+    },
+    "emptySearch": {
+      "noMatch": "Ningún formulario coincide con tus criterios de búsqueda.",
+      "clearFilters": "Limpiar filtros",
+      "clearAria": "Limpiar todos los filtros de búsqueda"
+    },
+    "deleteModal": {
+      "cancel": "Cancelar",
+      "confirm": "Eliminar formulario",
+      "title": "Eliminar formulario",
+      "description": "¿Seguro que quieres eliminar \"{formTitle}\"? Esta acción no se puede deshacer y todos los datos del formulario se perderán permanentemente."
+    },
+    "toasts": {
+      "failedLoadForms": "No se pudieron cargar los formularios",
+      "failedShareForm": "No se pudo compartir el formulario",
+      "formDuplicated": "Formulario duplicado",
+      "failedDuplicateForm": "No se pudo duplicar el formulario",
+      "formImportedSuccess": "Formulario importado correctamente.",
+      "failedImportForm": "No se pudo importar el formulario.",
+      "formDeletedSuccess": "Formulario eliminado correctamente",
+      "failedDeleteForm": "No se pudo eliminar el formulario"
+    },
+    "shareModal": {
+      "title": "Compartir formulario",
+      "publishedDescription": "Comparte tu formulario con otras personas usando el enlace o el código QR de abajo",
+      "unpublishedDescription": "Publica tu formulario para poder compartirlo con otras personas",
+      "shareLink": "Enlace para compartir",
+      "copied": "Copiado",
+      "copyLink": "Copiar enlace",
+      "hide": "Ocultar",
+      "show": "Mostrar",
+      "qrCode": "Código QR",
+      "qrCodeForForm": "Código QR del formulario",
+      "generating": "Generando...",
+      "scanForMobile": "Escanea para acceder fácilmente desde móvil",
+      "downloading": "Descargando...",
+      "downloadQr": "Descargar QR",
+      "needsPublish": "Tu formulario debe estar publicado antes de poder compartirse públicamente.",
+      "publishing": "Publicando...",
+      "publishForm": "Publicar formulario",
+      "toasts": {
+        "failedGenerateQr": "No se pudo generar el código QR",
+        "linkCopied": "¡Enlace copiado al portapapeles!",
+        "failedCopyLink": "No se pudo copiar el enlace. Cópialo manualmente.",
+        "qrDownloaded": "¡Código QR descargado correctamente!",
+        "failedDownloadQr": "No se pudo descargar el código QR"
+      }
+    },
+    "secureImport": {
+      "title": "Importar formulario desde archivo cifrado",
+      "description": "Descifra un archivo .ikiform y crea un nuevo formulario en borrador.",
+      "encryptedFileLabel": "Archivo cifrado",
+      "encryptedFileHelp": "Sube un archivo de exportación cifrado .ikiform.",
+      "passphraseLabel": "Frase de contraseña",
+      "passphrasePlaceholder": "Ingresa la frase usada durante la exportación",
+      "passphraseHelp": "Se requieren al menos {count} caracteres.",
+      "decrypting": "Descifrando...",
+      "decryptFile": "Descifrar archivo",
+      "importedForm": "Formulario importado",
+      "decryptToLoadSettings": "Descifra un archivo para cargar la configuración de importación.",
+      "preserveApiSettings": "Conservar configuración de API (clave API y estado habilitado)",
+      "preservePassword": "Conservar contraseña de protección por contraseña",
+      "preserveNotificationEmail": "Conservar correo del destinatario de notificaciones",
+      "cancel": "Cancelar",
+      "importing": "Importando...",
+      "importAsNewForm": "Importar como nuevo formulario",
+      "decryptToPreview": "Descifra un archivo para previsualizar el formulario importado.",
+      "errors": {
+        "chooseFile": "Elige un archivo .ikiform cifrado.",
+        "passphraseMinChars": "La frase debe tener al menos {count} caracteres.",
+        "failedDecrypt": "No se pudo descifrar el archivo de importación.",
+        "wrongPassphrase": "Frase incorrecta o el archivo puede haber sido alterado.",
+        "decryptBeforeImport": "Descifra un archivo antes de importar.",
+        "failedImport": "No se pudo importar el formulario."
+      },
+      "toasts": {
+        "fixHighlightedFields": "Corrige los campos resaltados.",
+        "fileDecrypted": "Archivo descifrado. Revisa las opciones de importación."
+      }
+    },
+    "secureExport": {
+      "title": "Exportar formulario (seguro)",
+      "description": "Crea un archivo .ikiform cifrado para este formulario. Necesitarás la misma frase para importarlo.",
+      "untitledForm": "Formulario sin título",
+      "formLabel": "Formulario",
+      "unknownForm": "Formulario desconocido",
+      "passphraseSetup": "Configuración de frase de contraseña",
+      "passphraseLabel": "Frase de contraseña",
+      "passphrasePlaceholder": "Al menos {count} caracteres",
+      "passphraseHelper": "Usa al menos 12 caracteres para un cifrado más fuerte.",
+      "confirmPassphraseLabel": "Confirmar frase",
+      "confirmPassphrasePlaceholder": "Vuelve a ingresar la frase",
+      "confirmPassphraseHelper": "Vuelve a ingresar exactamente la misma frase.",
+      "hidePassphrase": "Ocultar frase",
+      "viewPassphrase": "Ver frase",
+      "hideConfirmPassphrase": "Ocultar frase de confirmación",
+      "viewConfirmPassphrase": "Ver frase de confirmación",
+      "cancel": "Cancelar",
+      "exporting": "Exportando...",
+      "exportEncryptedFile": "Exportar archivo cifrado",
+      "strength": {
+        "notSet": "Sin definir",
+        "weak": "Débil",
+        "good": "Buena",
+        "strong": "Fuerte"
+      },
+      "errors": {
+        "passphraseMinChars": "La frase debe tener al menos {count} caracteres.",
+        "confirmPassphraseMinChars": "La frase de confirmación debe tener al menos {count} caracteres.",
+        "passphrasesDoNotMatch": "Las frases no coinciden.",
+        "noFormSelected": "No hay formulario seleccionado para exportar.",
+        "enterValidPassphrase": "Ingresa y confirma una frase válida.",
+        "failedExport": "No se pudo exportar el formulario."
+      },
+      "toasts": {
+        "exportCreated": "Exportación cifrada del formulario creada."
+      }
+    }
+  }
+}

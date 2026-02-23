@@ -233,7 +233,7 @@ export function FileUploadField(props: BaseFieldProps) {
 									className="flex items-center gap-3 rounded-lg border p-3"
 									key={file.id}
 								>
-									<div className="flex-shrink-0">
+									<div className="shrink-0">
 										{isImage ? (
 											<img
 												alt={file.name}
@@ -259,7 +259,7 @@ export function FileUploadField(props: BaseFieldProps) {
 
 									<Button
 										aria-label={`Remove ${file.name}`}
-										className="flex-shrink-0"
+										className="shrink-0"
 										disabled={disabled || builderMode}
 										onClick={() => handleRemoveButtonClick(file.id)}
 										size="icon"

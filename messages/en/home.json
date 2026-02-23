@@ -1,0 +1,252 @@
+{
+  "name": "Ikiform",
+  "tagline": "Build forms, collect responses & analyze data effortlessly.",
+  "footer": {
+    "madeBy": "Made by"
+  },
+  "cta": {
+    "heading": "Create Your First Form in No Time.",
+    "subheading": "Get started with Ikiform to build forms, surveys, collect responses, and more in seconds!",
+    "goToDashboard": "Go to Dashboard",
+    "createFirstForm": "Create Your First Form",
+    "tryDemo": "Try a Demo"
+  },
+  "hero": {
+    "unableToLoadFormDemo": "Unable to load form demo. Please try refreshing the page.",
+    "reload": "Reload",
+    "iframeTitle": "Ikiform demo form",
+    "sponsoredByAria": "Sponsored by Vercel (opens in a new tab)",
+    "sponsoredBy": "Sponsored by",
+    "heading": "Build Forms, Collect Responses & Analyze.",
+    "subheading": "The open-source forms platform for effortless data collection and analysis.",
+    "fiveStarRating": "5 out of 5 stars rating",
+    "totalUsersSrOnly": "Total users:",
+    "lovedByUsers": "Loved by {count} users",
+    "createFirstForm": "Create Your First Form",
+    "tryDemo": "Try a Demo",
+    "openFullscreenAria": "Open form builder demo in fullscreen (press Enter or Space)",
+    "clickToViewFullscreen": "Click to view fullscreen",
+    "tabs": {
+      "formDemo": "Form Demo",
+      "formBuilderDemo": "Form Builder Demo"
+    }
+  },
+  "pricing": {
+    "title": "Simple, Transparent Pricing for Everything You Need.",
+    "description": "Choose the plan that best fits your needs and start collecting responses.",
+    "popular": "Popular",
+    "noCard": "No credit card required",
+    "features": {
+      "unlimitedForms": "Unlimited forms & responses",
+      "apiWebhooks": "API & webhooks for automation",
+      "responseLimits": "Control response limits & rate",
+      "quizScoring": "Build quizzes with scoring",
+      "formDataApi": "Access form data via API",
+      "customBranding": "Custom branding & embed anywhere",
+      "spamProtection": "Block spam & bots automatically",
+      "passwordProfanity": "Filter profanity & require passwords"
+    },
+    "plans": {
+      "monthly": {
+        "title": "Monthly Plan",
+        "byline": "Billed monthly • Cancel anytime"
+      },
+      "lifetime": {
+        "title": "Lifetime Access",
+        "byline": "One-time payment • Lifetime access"
+      },
+      "yearly": {
+        "title": "Annual Plan",
+        "byline": "Billed annually ($192/yr) • Cancel anytime"
+      }
+    },
+    "cta": {
+      "startTrial": "Start your 14-day free trial",
+      "getLifetime": "Get Lifetime Access"
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "featureBoardLabel": "Feature Board",
+    "githubLabel": "GitHub",
+    "q1": {
+      "question": "What is Ikiform?",
+      "answer": "Ikiform is an open-source alternative to Google Forms. It helps you create beautiful, interactive forms easily."
+    },
+    "q2": {
+      "question": "Is there a free trial?",
+      "answer": "Yes, there is a 14-day free trial without any credit card required. You can cancel anytime."
+    },
+    "q3": {
+      "question": "Why use Ikiform instead of google form or typeform?",
+      "answer": "Ikiform is open source and gives you full control over your data and branding. There are no hidden costs, and you can self-host for extra privacy and flexibility."
+    },
+    "q4": {
+      "question": "What types of forms can I create?",
+      "answer": "You can create single-page forms and multi-step forms with progress tracking."
+    },
+    "q5": {
+      "question": "What fields are supported?",
+      "answer": "Supported fields include Text, Email, Number, Phone Number, Textarea, Date, Time, Address, Link, Select Dropdown, Radio Buttons, Checkboxes, Slider, Tags, Social Fields, File Upload, Signature, Statement, Banner, Field Group, Tag Input, Social Media, Scheduler, Poll, Rating, Quiz, and more."
+    },
+    "q6": {
+      "question": "How is my data protected?",
+      "answer": "Forms can have password protection, rate limiting, profanity filters, spam protection, bot protection, and are GDPR compliant."
+    },
+    "q7": {
+      "question": "Is the data I submit shared with anyone?",
+      "answer": "No, your data is not sold or shared with third parties except trusted providers needed to run Ikiform."
+    },
+    "q8": {
+      "question": "Can I customize my forms?",
+      "answer": "You can change colors, fonts, layout, add your logo, and control the look of each field."
+    },
+    "q9": {
+      "question": "Where can I suggest new features?",
+      "answerPrefix": "You can suggest any features at"
+    },
+    "q10": {
+      "question": "Where is my data stored?",
+      "answer": "Your data is encrypted and securely stored in the EU using Supabase."
+    },
+    "q11": {
+      "question": "How is my data kept safe?",
+      "answer": "We use strong security measures and only authorized staff can access your data."
+    },
+    "q12": {
+      "question": "Will my data be deleted if I cancel my account?",
+      "answer": "Yes. You can delete your data anytime. Deleted data is removed from backups within 30 days."
+    },
+    "q13": {
+      "question": "Can I delete my data?",
+      "answer": "Yes. You can request access or deletion of your data at any time by emailing hi@ikiform.com."
+    },
+    "q14": {
+      "question": "Who owns my form submission data?",
+      "answer": "You own all data you collect. Ikiform just stores it for you."
+    },
+    "q15": {
+      "question": "Is Ikiform open-source?",
+      "answerPrefix": "Ikiform is completely open-source and available on"
+    }
+  },
+  "bento": {
+    "preview": {
+      "aiForm": {
+        "demoAria": "AI Form Builder Demo",
+        "step0Label": "What would you like to create?",
+        "step0Placeholder": "Eg. Contact Form",
+        "step1Label": "Collect name",
+        "step2Label": "Collect email",
+        "step3Label": "Message",
+        "statusGenerating": "AI is building your form…",
+        "statusGenerated": "Form generated",
+        "examplePrompt": "could you create a simple contact form?",
+        "generatedIn": "Generated in 2.3s",
+        "useThisForm": "Use this form"
+      },
+      "unlimited": {
+        "aria": "Unlimited submissions preview",
+        "copy": "Unlimited Forms, Fields, Users and Responses."
+      },
+      "analytics": {
+        "weeklyResponses": "Weekly Responses",
+        "liveUpdating": "Live data updating...",
+        "responsesThisWeek": "1.2k responses this week"
+      },
+      "logic": {
+        "ifPrefix": "IF",
+        "thenPrefix": "THEN",
+        "elsePrefix": "ELSE",
+        "userResponds": "User responds",
+        "yesValue": "“Yes”",
+        "showEmailField": "Show email field",
+        "skip": "Skip",
+        "srDescription": "Preview of a simple conditional logic: if user responds \"Yes\", then show the email field; otherwise, skip it."
+      },
+      "api": {
+        "nameLabel": "Name",
+        "emailLabel": "Email",
+        "planLabel": "Plan",
+        "premiumPlan": "Premium Plan",
+        "statusReady": "Ready",
+        "statusFetching": "Fetching...",
+        "statusFetched": "Fetched!",
+        "srReady": "Ready for API integration demo.",
+        "srFetching": "Contacting Stripe API, loading data...",
+        "srSuccess": "Stripe API data received and displayed."
+      },
+      "signatures": {
+        "statusIdle": "Awaiting signature…",
+        "statusSigning": "Signing in progress",
+        "statusDone": "Signed securely",
+        "signAgreement": "Sign Agreement",
+        "signed": "✓ Signed",
+        "verified": "Verified",
+        "signatureVerified": "Signature Verified",
+        "srIdle": "Awaiting e-signature. Please sign to continue.",
+        "srSigning": "Signature is being written.",
+        "srDone": "Signature complete and verified."
+      },
+      "notifications": {
+        "title": "Email Notification",
+        "none": "no",
+        "newNotifications": "You have {count} new notifications",
+        "justNow": "Just now",
+        "noNewNotifications": "No new notifications yet.",
+        "noNewEmailNotifications": "No new email notifications yet.",
+        "newEmailNotification": "New email notification: {title} from {from}, {time}",
+        "templates": {
+          "contactForm": "Contact Form",
+          "newsletterSignup": "Newsletter Signup",
+          "supportRequest": "Support Request",
+          "feedbackForm": "Feedback Form",
+          "jobApplication": "Job Application",
+          "twoMinutesAgo": "2 minutes ago",
+          "fiveMinutesAgo": "5 minutes ago",
+          "eightMinutesAgo": "8 minutes ago",
+          "twelveMinutesAgo": "12 minutes ago",
+          "fifteenMinutesAgo": "15 minutes ago"
+        }
+      }
+    },
+    "cards": {
+      "aiFormBuilder": {
+        "title": "AI Form Builder",
+        "highlight": "Instant form creation",
+        "description": "—just describe it and launch. Convert visitors in seconds."
+      },
+      "unlimitedEverything": {
+        "title": "Unlimited Everything",
+        "highlight": "unlimited forms and responses",
+        "description": " Grow without limits."
+      },
+      "aiAnalytics": {
+        "title": "AI Analytics",
+        "prefix": "See who converts and why—",
+        "highlight": "get clear, actionable insights"
+      },
+      "smartNotifications": {
+        "title": "Smart Notifications",
+        "prefix": "Never miss a lead—",
+        "highlight": "get instant alerts and automate follow-ups."
+      },
+      "apiWebhooks": {
+        "title": "API & Webhooks",
+        "highlight": "Sync leads anywhere",
+        "description": "—connect with any service or workflow."
+      },
+      "formSignatures": {
+        "title": "Form Signatures",
+        "prefix": "Add signature fields to ",
+        "highlight": "collect e-signatures",
+        "suffix": " in any form."
+      },
+      "visualLogicBuilder": {
+        "title": "Visual Logic Builder",
+        "highlight": "Personalize every journey",
+        "description": "—show or hide questions based on answers."
+      }
+    }
+  }
+}

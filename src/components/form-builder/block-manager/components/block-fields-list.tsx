@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import type { BlockFieldsListProps } from "../types";
 import { FieldItem } from "./field-item";
 
@@ -7,10 +8,12 @@ export function BlockFieldsList({
 	onFieldSelect,
 	onFieldDelete,
 }: BlockFieldsListProps) {
+	const t = useTranslations("product.formBuilder.blockManager.fieldsList");
+
 	if (fields.length === 0) {
 		return (
 			<p className="flex py-3 text-muted-foreground text-sm italic">
-				No fields yet. Add fields from the palette on the right.
+				{t("empty")}
 			</p>
 		);
 	}

@@ -2,6 +2,7 @@
 
 import { Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 
@@ -24,6 +25,7 @@ import { JsonModalWrapper } from "./modals/json-modal-wrapper";
 import { PreviewPanel } from "./preview/preview-panel";
 
 export function AIBuilderClient() {
+	const t = useTranslations("product.aiBuilder.client");
 	const { user, loading: authLoading } = useAuth();
 
 	const router = useRouter();
@@ -146,7 +148,7 @@ export function AIBuilderClient() {
 						onClick={() => setChatDrawerOpen(true)}
 						size="lg"
 					>
-						Create Form with Kiko
+						{t("createFormWithKiko")}
 					</Button>
 				</div>
 
@@ -200,10 +202,14 @@ export function AIBuilderClient() {
 					ref={errorLiveRegionRef}
 					tabIndex={-1}
 				>
-					{streamError ? `Error: ${streamError}` : ""}
+					{streamError ? t("streamError", { error: streamError }) : ""}
 				</div>
 				<div aria-atomic="true" aria-live="polite" className="sr-only">
-					{isStreaming ? "Generating response…" : isLoading ? "Loading…" : ""}
+					{isStreaming
+						? t("generatingResponse")
+						: isLoading
+							? t("loading")
+							: ""}
 				</div>
 
 				<JsonModalWrapper

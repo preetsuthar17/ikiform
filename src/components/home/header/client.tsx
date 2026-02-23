@@ -4,8 +4,14 @@ import type { User } from "@supabase/supabase-js";
 import { AlignJustify, ChevronRight, LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import React, { useCallback, useEffect, useReducer } from "react";
 import { Separator } from "@/components/ui";
+import {
+	getLocaleFromPathname,
+	stripLocalePrefix,
+	withLocaleHref,
+} from "@/lib/i18n/pathname";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/client";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
@@ -30,7 +36,7 @@ import { PRIMARY_LINKS } from "./header";
 
 interface NavLink {
 	href: string;
-	label: string;
+	labelKey: string;
 }
 
 interface HeaderClientProps {
@@ -185,6 +191,9 @@ interface DesktopActionsProps {
 	user: User | null;
 	loading: boolean;
 	signOut: () => Promise<void>;
+	loginHref: string;
+	loginLabel: string;
+	dashboardLabel: string;
 }
 
 const DesktopActionsSkeleton = React.memo(function DesktopActionsSkeleton() {
@@ -202,6 +211,9 @@ const DesktopActions = React.memo(function DesktopActions({
 	user,
 	loading,
 	signOut,
+	loginHref,
+	loginLabel,
+	dashboardLabel,
 }: DesktopActionsProps) {
 	if (loading) {
 		return <DesktopActionsSkeleton />;
@@ -216,15 +228,15 @@ const DesktopActions = React.memo(function DesktopActions({
 							className="flex min-h-[36px] items-center gap-1"
 							href="/dashboard"
 						>
-							Dashboard
+							{dashboardLabel}
 						</Link>
 					</Button>
 					<UserDropdownMenu signOut={signOut} user={user} />
 				</div>
 			) : (
 				<Button asChild className="rounded-md" variant="outline">
-					<Link className="flex min-h-[36px] items-center gap-1" href="/login">
-						Login
+					<Link className="flex min-h-[36px] items-center gap-1" href={loginHref}>
+						{loginLabel}
 					</Link>
 				</Button>
 			)}
@@ -236,20 +248,22 @@ DesktopActions.displayName = "DesktopActions";
 
 interface DrawerLinksProps {
 	links: NavLink[];
+	getLabel: (key: string) => string;
 }
 
 const DrawerLinks = React.memo(function DrawerLinks({
 	links,
+	getLabel,
 }: DrawerLinksProps) {
 	return (
 		<nav aria-label="Navigation links" className="flex w-full flex-col">
-			{links.map(({ href, label }) => (
+			{links.map(({ href, labelKey }) => (
 				<Link
 					className="flex min-h-[44px] items-center justify-between rounded-lg px-3 opacity-70 transition-all duration-200 hover:bg-accent hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:scale-[0.98]"
 					href={href}
 					key={href}
 				>
-					<span>{label}</span>
+					<span>{getLabel(labelKey)}</span>
 					<ChevronRight aria-hidden="true" className="size-4 opacity-70" />
 				</Link>
 			))}
@@ -324,6 +338,10 @@ interface MobileDrawerProps {
 	loading: boolean;
 	signOut: () => Promise<void>;
 	primaryLinks: NavLink[];
+	loginHref: string;
+	loginLabel: string;
+	dashboardLabel: string;
+	getLabel: (key: string) => string;
 }
 
 const MobileDrawerButtonSkeleton = React.memo(
@@ -344,6 +362,10 @@ const MobileDrawer = React.memo(function MobileDrawer({
 	loading,
 	signOut,
 	primaryLinks,
+	loginHref,
+	loginLabel,
+	dashboardLabel,
+	getLabel,
 }: MobileDrawerProps) {
 	return (
 		<div className="flex items-center md:hidden">
@@ -375,20 +397,20 @@ const MobileDrawer = React.memo(function MobileDrawer({
 									asChild
 									className="min-h-[44px] w-full touch-manipulation rounded-lg font-medium text-base"
 								>
-									<Link href="/dashboard">Dashboard</Link>
+									<Link href="/dashboard">{dashboardLabel}</Link>
 								</Button>
 							) : (
 								<Button
 									asChild
 									className="min-h-[44px] w-full touch-manipulation rounded-lg font-medium text-base"
 								>
-									<Link href="/login">Login</Link>
+									<Link href={loginHref}>{loginLabel}</Link>
 								</Button>
 							)}
 						</div>
 						<Separator />
 
-						<DrawerLinks links={primaryLinks} />
+						<DrawerLinks getLabel={getLabel} links={primaryLinks} />
 
 						<Separator />
 
@@ -417,6 +439,9 @@ MobileDrawer.displayName = "MobileDrawer";
 
 const PrimaryNavLinks = React.memo(function PrimaryNavLinks() {
 	const pathname = usePathname();
+	const normalizedPathname = stripLocalePrefix(pathname);
+	const currentLocale = getLocaleFromPathname(pathname);
+	const tNav = useTranslations("nav");
 
 	return (
 		<nav
@@ -424,19 +449,23 @@ const PrimaryNavLinks = React.memo(function PrimaryNavLinks() {
 			className="flex items-center"
 			role="list"
 		>
-			{PRIMARY_LINKS.map(({ href, label }) => {
+			{PRIMARY_LINKS.map(({ href, labelKey }) => {
 				const isCurrent =
 					href === "/"
-						? pathname === "/"
-						: pathname?.startsWith(href.replace(/#.*/, ""));
+						? normalizedPathname === "/"
+						: normalizedPathname?.startsWith(href.replace(/#.*/, ""));
+				const resolvedHref =
+					currentLocale && href.startsWith("/")
+						? withLocaleHref(href, currentLocale)
+						: href;
 				return (
 					<Link
 						aria-current={isCurrent ? "page" : undefined}
 						className="min-h-[32px] min-w-[32px] rounded-full px-4 py-1.5 text-sm opacity-70 transition-all duration-200 hover:bg-accent hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:scale-[0.98]"
-						href={href}
+						href={resolvedHref}
 						key={href}
 					>
-						{label}
+						{tNav(labelKey)}
 					</Link>
 				);
 			})}
@@ -448,6 +477,20 @@ PrimaryNavLinks.displayName = "PrimaryNavLinks";
 
 export function HeaderClient({ primaryLinks }: HeaderClientProps) {
 	const router = useRouter();
+	const pathname = usePathname();
+	const tNav = useTranslations("nav");
+	const currentLocale = getLocaleFromPathname(pathname);
+	const loginHref = currentLocale ? withLocaleHref("/login", currentLocale) : "/login";
+	const localizedPrimaryLinks = currentLocale
+		? primaryLinks.map((link) => ({
+				...link,
+				href: withLocaleHref(link.href, currentLocale),
+			}))
+		: primaryLinks;
+	const getLabel = useCallback(
+		(key: string) => tNav(key as any),
+		[tNav]
+	);
 	const [authState, dispatchAuth] = useReducer(
 		authStateReducer,
 		INITIAL_AUTH_STATE
@@ -483,12 +526,12 @@ export function HeaderClient({ primaryLinks }: HeaderClientProps) {
 		try {
 			const supabase = createClient();
 			await supabase.auth.signOut();
-			router.push("/");
+			router.push(currentLocale ? `/${currentLocale}` : "/");
 			router.refresh();
 		} catch (error) {
 			console.error("Sign out error:", error);
 		}
-	}, [router]);
+	}, [currentLocale, router]);
 
 	useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
@@ -509,10 +552,21 @@ export function HeaderClient({ primaryLinks }: HeaderClientProps) {
 
 	return (
 		<>
-			<DesktopActions loading={loading} signOut={signOut} user={user} />
-			<MobileDrawer
+			<DesktopActions
+				dashboardLabel={tNav("dashboard")}
 				loading={loading}
-				primaryLinks={primaryLinks}
+				loginHref={loginHref}
+				loginLabel={tNav("login")}
+				signOut={signOut}
+				user={user}
+			/>
+			<MobileDrawer
+				dashboardLabel={tNav("dashboard")}
+				getLabel={getLabel}
+				loading={loading}
+				loginHref={loginHref}
+				loginLabel={tNav("login")}
+				primaryLinks={localizedPrimaryLinks}
 				signOut={signOut}
 				user={user}
 			/>

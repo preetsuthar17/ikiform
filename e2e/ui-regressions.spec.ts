@@ -72,7 +72,7 @@ async function loginToDashboard(page: Page) {
 		"Set E2E_TEST_EMAIL and E2E_TEST_PASSWORD to run authenticated dashboard icon checks."
 	);
 
-	await page.goto("/login", { waitUntil: "domcontentloaded" });
+	await page.goto("/en/login", { waitUntil: "domcontentloaded" });
 	await page.waitForLoadState("networkidle").catch(() => undefined);
 
 	await page
@@ -90,7 +90,7 @@ async function loginToDashboard(page: Page) {
 test("provider auth buttons render visible icons", async ({ page }) => {
 	const errors = captureBrowserErrors(page);
 
-	await page.goto("/login", { waitUntil: "domcontentloaded" });
+	await page.goto("/en/login", { waitUntil: "domcontentloaded" });
 	await page.waitForLoadState("networkidle").catch(() => undefined);
 
 	const googleButton = page.getByRole("button", {
@@ -296,7 +296,7 @@ test("faq accordion uses a single rotating chevron trigger", async ({
 }) => {
 	const errors = captureBrowserErrors(page);
 
-	await page.goto("/", { waitUntil: "domcontentloaded" });
+	await page.goto("/en", { waitUntil: "domcontentloaded" });
 	await page.waitForLoadState("networkidle").catch(() => undefined);
 
 	const firstTrigger = page.locator("[data-slot='accordion-trigger']").first();

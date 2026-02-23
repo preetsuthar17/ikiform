@@ -1,4 +1,5 @@
 import { Layers, Plus } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,6 +10,8 @@ export function BlockManagerHeader({
 	blocksCount,
 	onBlockAdd,
 }: BlockManagerHeaderProps) {
+	const t = useTranslations("product.formBuilder.blockManager.header");
+
 	const handleAddBlock = () => {
 		onBlockAdd();
 	};
@@ -30,24 +33,24 @@ export function BlockManagerHeader({
 						</div>
 						<div className="flex min-w-0 flex-wrap gap-1">
 							<h3 className="flex flex-wrap items-center gap-1 truncate font-semibold text-base text-foreground sm:text-lg">
-								Form Structure
+								{t("title")}
 								<Badge
 									className="mb-0.5 xs:mb-0 w-fit text-xs"
 									variant="secondary"
 								>
-									{blocksCount} {blocksCount === 1 ? "step" : "steps"}
+									{t("stepsCount", { count: blocksCount })}
 								</Badge>
 							</h3>
 							<div className="flex xs:flex-row flex-col xs:items-center gap-0.5 xs:gap-2">
 								<p className="max-w-xs truncate text-muted-foreground text-sm sm:max-w-full">
-									Organize your form into logical sections
+									{t("description")}
 								</p>
 							</div>
 						</div>
 					</div>
 
 					<Button
-						aria-label="Add new step to form"
+						aria-label={t("addStepAria")}
 						className="w-full gap-2 sm:w-auto"
 						onClick={handleAddBlock}
 						onKeyDown={handleAddBlockKeyDown}
@@ -55,7 +58,7 @@ export function BlockManagerHeader({
 						variant="default"
 					>
 						<Plus className="size-4" />
-						Add Step
+						{t("addStep")}
 					</Button>
 				</div>
 			</CardContent>

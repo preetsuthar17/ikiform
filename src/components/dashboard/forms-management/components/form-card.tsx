@@ -8,6 +8,7 @@ import {
 	Share,
 	Trash2,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { memo, useCallback, useMemo, useState } from "react";
 import { ShareFormModal } from "@/components/form-builder/modals/share-form-modal";
 import { Badge } from "@/components/ui/badge";
@@ -38,6 +39,7 @@ export const FormCard = memo(function FormCard({
 	onShare,
 	onDelete,
 }: FormCardProps) {
+	const t = useTranslations("dashboard.formsManagement.list");
 	const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 	const [modalJustClosed, setModalJustClosed] = useState(false);
 
@@ -47,8 +49,8 @@ export const FormCard = memo(function FormCard({
 	);
 
 	const internalTitle = useMemo(
-		() => form.schema?.settings?.title || form.title || "Untitled Form",
-		[form.schema?.settings?.title, form.title]
+		() => form.schema?.settings?.title || form.title || t("untitledForm"),
+		[form.schema?.settings?.title, form.title, t]
 	);
 
 	const hasPublicTitle = useMemo(
@@ -156,7 +158,7 @@ export const FormCard = memo(function FormCard({
 	return (
 		<>
 			<Card
-				aria-label={`Form: ${internalTitle}`}
+				aria-label={t("actionsFor", { title: internalTitle })}
 				className="group flex cursor-pointer flex-col gap-4 p-6 shadow-none transition-all duration-200 hover:border-primary/30"
 				onClick={handleCardClick}
 				onKeyDown={handleKeyDown}
@@ -170,7 +172,9 @@ export const FormCard = memo(function FormCard({
 						</h3>
 						{hasPublicTitle && (
 							<p className="line-clamp-1 text-muted-foreground text-sm">
-								Public: "{form.schema?.settings?.publicTitle}"
+								{t("publicTitle", {
+									title: form.schema?.settings?.publicTitle ?? "",
+								})}
 							</p>
 						)}
 						{form.description && (
@@ -181,11 +185,13 @@ export const FormCard = memo(function FormCard({
 					</div>
 					<div className="flex items-center gap-2">
 						<Badge
-							aria-label={`Form status: ${form.is_published ? "Published" : "Draft"}`}
-							className="flex-shrink-0 rounded-lg font-medium"
+							aria-label={t("formStatusAria", {
+								status: form.is_published ? t("published") : t("draft"),
+							})}
+							className="shrink-0 rounded-lg font-medium"
 							variant={form.is_published ? "default" : "secondary"}
 						>
-							{form.is_published ? "Published" : "Draft"}
+							{form.is_published ? t("published") : t("draft")}
 						</Badge>
 						<TooltipProvider delayDuration={200}>
 							<DropdownMenu>
@@ -193,7 +199,7 @@ export const FormCard = memo(function FormCard({
 									<TooltipTrigger asChild>
 										<DropdownMenuTrigger asChild>
 											<Button
-												aria-label={`Actions for ${internalTitle}`}
+												aria-label={t("actionsFor", { title: internalTitle })}
 												className="size-8 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80 focus:ring-2 focus:ring-ring focus:ring-offset-2"
 												onClick={handleButtonClick}
 												size="sm"
@@ -204,7 +210,7 @@ export const FormCard = memo(function FormCard({
 										</DropdownMenuTrigger>
 									</TooltipTrigger>
 									<TooltipContent side="top" sideOffset={8}>
-										<p>Form actions</p>
+										<p>{t("formActions")}</p>
 									</TooltipContent>
 								</Tooltip>
 								<DropdownMenuContent align="end" className="w-48 shadow-xs">
@@ -213,35 +219,35 @@ export const FormCard = memo(function FormCard({
 										onClick={handleEdit}
 									>
 										<Edit aria-hidden="true" className="size-4" />
-										Edit form
+										{t("editForm")}
 									</DropdownMenuItem>
 									<DropdownMenuItem
 										className="h-9 cursor-pointer opacity-80 hover:opacity-100"
 										onClick={handleShare}
 									>
 										<Share aria-hidden="true" className="size-4" />
-										Share form
+										{t("shareForm")}
 									</DropdownMenuItem>
 									<DropdownMenuItem
 										className="h-9 cursor-pointer opacity-80 hover:opacity-100"
 										onClick={handleDuplicate}
 									>
 										<Copy aria-hidden="true" className="size-4" />
-										Duplicate
+										{t("duplicate")}
 									</DropdownMenuItem>
 									<DropdownMenuItem
 										className="h-9 cursor-pointer opacity-80 hover:opacity-100"
 										onClick={handleViewForm}
 									>
 										<Eye aria-hidden="true" className="size-4" />
-										View form
+										{t("viewForm")}
 									</DropdownMenuItem>
 									<DropdownMenuItem
 										className="h-9 cursor-pointer opacity-80 hover:opacity-100"
 										onClick={handleViewAnalytics}
 									>
 										<BarChart3 aria-hidden="true" className="size-4" />
-										View analytics
+										{t("viewAnalytics")}
 									</DropdownMenuItem>
 									<DropdownMenuSeparator />
 									<DropdownMenuItem
@@ -249,7 +255,7 @@ export const FormCard = memo(function FormCard({
 										onClick={handleEmbed}
 									>
 										<Code2 aria-hidden="true" className="size-4" />
-										Embed
+										{t("embed")}
 									</DropdownMenuItem>
 									<DropdownMenuSeparator />
 									<DropdownMenuItem
@@ -261,7 +267,7 @@ export const FormCard = memo(function FormCard({
 											aria-hidden="true"
 											className="size-4 text-destructive focus:text-destructive"
 										/>
-										Delete form
+										{t("deleteForm")}
 									</DropdownMenuItem>
 								</DropdownMenuContent>
 							</DropdownMenu>
@@ -270,7 +276,7 @@ export const FormCard = memo(function FormCard({
 				</div>
 
 				<div className="flex items-center justify-start text-muted-foreground text-sm">
-					<span>Updated {formattedDate}</span>
+					<span>{t("updated", { date: formattedDate })}</span>
 				</div>
 			</Card>
 

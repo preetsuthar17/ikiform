@@ -9,7 +9,7 @@ function DashboardSkeleton() {
 	return (
 		<section className="mx-auto w-full max-w-7xl">
 			<div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
-				<div className="flex w-full flex-col gap-8 lg:w-80 lg:flex-shrink-0">
+				<div className="flex w-full flex-col gap-8 lg:w-80 lg:shrink-0">
 					<div className="rounded-2xl border bg-card p-6 shadow-none">
 						<div className="flex flex-col items-center gap-6 py-5">
 							<div className="size-16 animate-pulse rounded-2xl bg-accent" />

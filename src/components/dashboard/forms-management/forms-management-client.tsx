@@ -1,6 +1,7 @@
 "use client";
 
 import type { User } from "@supabase/supabase-js";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 import { toast } from "@/hooks/use-toast";
@@ -103,6 +104,7 @@ function filterAndSortForms(
 
 function useFormsManagementController(initialForms: Form[], user: User) {
 	const router = useRouter();
+	const t = useTranslations("dashboard.formsManagement");
 	const [formsOverride, setFormsOverride] = useState<Form[] | null>(null);
 	const [deleteModal, setDeleteModal] = useState<DeleteModalState>(
 		DEFAULT_DELETE_MODAL_STATE
@@ -121,9 +123,9 @@ function useFormsManagementController(initialForms: Form[], user: User) {
 			setFormsOverride(userForms);
 		} catch (error) {
 			console.error("Error loading forms:", error);
-			toast.error("Failed to load forms");
+			toast.error(t("toasts.failedLoadForms"));
 		}
-	}, [user.id]);
+	}, [user.id, t]);
 
 	const createNewForm = useCallback(() => {
 		router.push("/ai-builder");
@@ -160,24 +162,24 @@ function useFormsManagementController(initialForms: Form[], user: User) {
 				await copyToClipboard(shareUrl);
 			} catch (error) {
 				console.error("Error sharing form:", error);
-				toast.error("Failed to share form");
+				toast.error(t("toasts.failedShareForm"));
 			}
 		},
-		[user.id, loadForms]
+		[user.id, loadForms, t]
 	);
 
 	const duplicateForm = useCallback(
 		async (formId: string) => {
 			try {
 				const duplicated = await formsDb.duplicateForm(formId, user.id);
-				toast.success("Form duplicated");
+				toast.success(t("toasts.formDuplicated"));
 				router.push(`/form-builder/${duplicated.id}`);
 			} catch (error) {
 				console.error("Error duplicating form:", error);
-				toast.error("Failed to duplicate form");
+				toast.error(t("toasts.failedDuplicateForm"));
 			}
 		},
-		[user.id, router]
+		[user.id, router, t]
 	);
 
 	const openSecureImportModal = useCallback(() => {
@@ -213,15 +215,15 @@ function useFormsManagementController(initialForms: Form[], user: User) {
 					});
 				}
 
-				toast.success("Form imported successfully.");
+				toast.success(t("toasts.formImportedSuccess"));
 				router.push(`/form-builder/${createdForm.id}`);
 			} catch (error) {
 				console.error("Error importing form:", error);
-				toast.error("Failed to import form.");
+				toast.error(t("toasts.failedImportForm"));
 				throw error;
 			}
 		},
-		[user.id, router]
+		[user.id, router, t]
 	);
 
 	const deleteForm = useCallback((formId: string, formTitle: string) => {
@@ -239,13 +241,13 @@ function useFormsManagementController(initialForms: Form[], user: User) {
 				const source = prev ?? initialForms;
 				return source.filter((f) => f.id !== deleteModal.formId);
 			});
-			toast.success("Form deleted successfully");
+			toast.success(t("toasts.formDeletedSuccess"));
 		} catch (error) {
 			console.error("Error deleting form:", error);
-			toast.error("Failed to delete form");
+			toast.error(t("toasts.failedDeleteForm"));
 			await loadForms();
 		}
-	}, [deleteModal.formId, initialForms, user.id, loadForms]);
+	}, [deleteModal.formId, initialForms, user.id, loadForms, t]);
 
 	const handleCreateWithAI = useCallback(() => {
 		router.push("/ai-builder");
@@ -339,12 +341,13 @@ export function FormsManagementClient({
 		closeSecureExportModal,
 		closeSecureImportModal,
 	} = useFormsManagementController(initialForms, user);
+	const t = useTranslations("dashboard.formsManagement");
 
 	const containerClassName = `flex flex-col gap-8 ${className || ""}`;
 
 	return (
 		<div
-			aria-label="Forms management"
+			aria-label={t("aria.management")}
 			className={containerClassName}
 			role="main"
 		>
@@ -375,15 +378,13 @@ export function FormsManagementClient({
 
 					{filteredForms.length === 0 ? (
 						<div aria-live="polite" className="py-12 text-center" role="status">
-							<p className="text-muted-foreground">
-								No forms match your search criteria.
-							</p>
+							<p className="text-muted-foreground">{t("emptySearch.noMatch")}</p>
 							<button
-								aria-label="Clear all search filters"
+								aria-label={t("emptySearch.clearAria")}
 								className="mt-2 text-primary hover:underline"
 								onClick={handleClearFilters}
 							>
-								Clear filters
+								{t("emptySearch.clearFilters")}
 							</button>
 						</div>
 					) : (
@@ -402,13 +403,15 @@ export function FormsManagementClient({
 			)}
 
 			<ConfirmationModal
-				cancelText="Cancel"
-				confirmText="Delete Form"
-				description={`Are you sure you want to delete "${deleteModal.formTitle}"? This action cannot be undone and all form data will be permanently lost.`}
+				cancelText={t("deleteModal.cancel")}
+				confirmText={t("deleteModal.confirm")}
+				description={t("deleteModal.description", {
+					formTitle: deleteModal.formTitle,
+				})}
 				onConfirm={confirmDeleteForm}
 				onOpenChange={handleDeleteModalChange}
 				open={deleteModal.open}
-				title="Delete Form"
+				title={t("deleteModal.title")}
 				variant="destructive"
 			/>
 

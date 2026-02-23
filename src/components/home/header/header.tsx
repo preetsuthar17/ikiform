@@ -6,15 +6,15 @@ import { HeaderClient } from "./client";
 
 interface NavLink {
 	href: string;
-	label: string;
+	labelKey: string;
 }
 
 export const PRIMARY_LINKS: NavLink[] = [
-	{ href: "/", label: "Home" },
-	{ href: "/#features", label: "Features" },
-	{ href: "/feedback", label: "Feedback" },
-	{ href: "/#pricing", label: "Pricing" },
-	{ href: "/changelog", label: "Changelog" },
+	{ href: "/", labelKey: "home" },
+	{ href: "/#features", labelKey: "features" },
+	{ href: "/feedback", labelKey: "feedback" },
+	{ href: "/#pricing", labelKey: "pricing" },
+	{ href: "/changelog", labelKey: "changelog" },
 ];
 
 const AppLogo = React.memo(function AppLogo() {

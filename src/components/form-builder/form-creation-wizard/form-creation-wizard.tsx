@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import type React from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -34,6 +35,7 @@ export const FormCreationWizard: React.FC<FormCreationWizardProps> = ({
 	onClose,
 	onFormTypeSelect,
 }) => {
+	const t = useTranslations("product.formBuilder.creation");
 	const { selectedType, selectType, resetSelection } = useFormCreationWizard();
 	const [currentStep, setCurrentStep] = useState<WizardStep>("type");
 	const [completedSteps, setCompletedSteps] = useState<WizardStep[]>([]);
@@ -149,13 +151,13 @@ export const FormCreationWizard: React.FC<FormCreationWizardProps> = ({
 				onClick={currentStep === "type" ? handleClose : handleBack}
 				variant="outline"
 			>
-				{currentStep === "type" ? "Cancel" : "Back"}
+				{currentStep === "type" ? t("cancel") : t("back")}
 			</Button>
 
 			<div className="flex items-center gap-2">
 				{currentStep === "review" ? (
 					<Button className="min-w-[100px]" onClick={handleFinish}>
-						Create Form
+						{t("createForm")}
 					</Button>
 				) : (
 					<Button
@@ -163,7 +165,7 @@ export const FormCreationWizard: React.FC<FormCreationWizardProps> = ({
 						disabled={!canContinue()}
 						onClick={handleNext}
 					>
-						{currentStep === "configure" ? "Review" : "Next"}
+						{currentStep === "configure" ? t("reviewAction") : t("next")}
 					</Button>
 				)}
 			</div>
@@ -175,7 +177,7 @@ export const FormCreationWizard: React.FC<FormCreationWizardProps> = ({
 			<DialogContent className="flex w-[95%] max-w-6xl flex-col gap-6">
 				<DialogHeader>
 					<DialogTitle className="w-fit text-left">
-						Create a New Form
+						{t("title")}
 					</DialogTitle>
 				</DialogHeader>
 

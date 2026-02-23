@@ -2,7 +2,17 @@ import { toast } from "@/hooks/use-toast";
 
 import type { Form, FormSubmission } from "@/lib/database";
 
-export const exportToJSON = (form: Form, submissions: FormSubmission[]) => {
+interface ExportToastMessages {
+	csvSuccess?: string;
+	jsonSuccess?: string;
+	noData?: string;
+}
+
+export const exportToJSON = (
+	form: Form,
+	submissions: FormSubmission[],
+	messages?: ExportToastMessages
+) => {
 	const exportData = {
 		form: {
 			id: form.id,
@@ -35,12 +45,16 @@ export const exportToJSON = (form: Form, submissions: FormSubmission[]) => {
 	document.body.removeChild(a);
 	URL.revokeObjectURL(url);
 
-	toast.success("Data exported successfully!");
+	toast.success(messages?.jsonSuccess ?? "Data exported successfully!");
 };
 
-export const exportToCSV = (form: Form, submissions: FormSubmission[]) => {
+export const exportToCSV = (
+	form: Form,
+	submissions: FormSubmission[],
+	messages?: ExportToastMessages
+) => {
 	if (!submissions.length) {
-		toast.error("No data to export");
+		toast.error(messages?.noData ?? "No data to export");
 		return;
 	}
 
@@ -94,5 +108,5 @@ export const exportToCSV = (form: Form, submissions: FormSubmission[]) => {
 	document.body.removeChild(a);
 	URL.revokeObjectURL(url);
 
-	toast.success("Data exported to CSV successfully!");
+	toast.success(messages?.csvSuccess ?? "Data exported to CSV successfully!");
 };

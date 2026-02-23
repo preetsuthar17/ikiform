@@ -8,6 +8,7 @@ import {
 	Share,
 	Trash2,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { memo, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -34,6 +35,8 @@ export const FormActions = memo(function FormActions({
 	onShare,
 	onDelete,
 }: FormActionsProps) {
+	const t = useTranslations("dashboard.formsManagement.list");
+
 	const handleEdit = useCallback(() => {
 		onEdit(form.id);
 	}, [onEdit, form.id]);
@@ -69,7 +72,7 @@ export const FormActions = memo(function FormActions({
 					<Tooltip>
 						<TooltipTrigger asChild>
 							<Button
-								aria-label="Edit form"
+								aria-label={t("editForm")}
 								className="size-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80 focus:ring-2 focus:ring-ring focus:ring-offset-2"
 								onClick={handleEdit}
 								size="sm"
@@ -79,14 +82,14 @@ export const FormActions = memo(function FormActions({
 							</Button>
 						</TooltipTrigger>
 						<TooltipContent side="top" sideOffset={8}>
-							<p>Edit form</p>
+							<p>{t("editForm")}</p>
 						</TooltipContent>
 					</Tooltip>
 
 					<Tooltip>
 						<TooltipTrigger asChild>
 							<Button
-								aria-label="Share form"
+								aria-label={t("shareForm")}
 								className="size-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80 focus:ring-2 focus:ring-ring focus:ring-offset-2"
 								onClick={handleShare}
 								size="sm"
@@ -96,7 +99,7 @@ export const FormActions = memo(function FormActions({
 							</Button>
 						</TooltipTrigger>
 						<TooltipContent side="top" sideOffset={8}>
-							<p>Share form</p>
+							<p>{t("shareForm")}</p>
 						</TooltipContent>
 					</Tooltip>
 
@@ -105,7 +108,7 @@ export const FormActions = memo(function FormActions({
 							<TooltipTrigger asChild>
 								<DropdownMenuTrigger asChild>
 									<Button
-										aria-label="More actions"
+										aria-label={t("formActions")}
 										className="size-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-muted/80 focus:ring-2 focus:ring-ring focus:ring-offset-2"
 										size="sm"
 										variant="ghost"
@@ -115,7 +118,7 @@ export const FormActions = memo(function FormActions({
 								</DropdownMenuTrigger>
 							</TooltipTrigger>
 							<TooltipContent side="top" sideOffset={8}>
-								<p>More actions</p>
+								<p>{t("formActions")}</p>
 							</TooltipContent>
 						</Tooltip>
 						<DropdownMenuContent align="end" className="w-48">
@@ -124,21 +127,21 @@ export const FormActions = memo(function FormActions({
 								onClick={handleDuplicate}
 							>
 								<Copy aria-hidden="true" className="size-4" />
-								Duplicate
+								{t("duplicate")}
 							</DropdownMenuItem>
 							<DropdownMenuItem
 								className="cursor-pointer"
 								onClick={handleViewForm}
 							>
 								<Eye aria-hidden="true" className="size-4" />
-								View form
+								{t("viewForm")}
 							</DropdownMenuItem>
 							<DropdownMenuItem
 								className="cursor-pointer"
 								onClick={handleViewAnalytics}
 							>
 								<BarChart3 aria-hidden="true" className="size-4" />
-								View analytics
+								{t("viewAnalytics")}
 							</DropdownMenuItem>
 							<DropdownMenuSeparator />
 							<DropdownMenuItem
@@ -146,7 +149,7 @@ export const FormActions = memo(function FormActions({
 								onClick={handleEmbed}
 							>
 								<Code2 aria-hidden="true" className="size-4" />
-								Embed
+								{t("embed")}
 							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
@@ -161,7 +164,7 @@ export const FormActions = memo(function FormActions({
 					<Tooltip>
 						<TooltipTrigger asChild>
 							<Button
-								aria-label="Delete form"
+								aria-label={t("deleteForm")}
 								className="size-10 p-0 transition-all duration-200 hover:scale-105 hover:bg-destructive/10 hover:text-destructive focus:ring-2 focus:ring-destructive focus:ring-offset-2"
 								onClick={handleDelete}
 								size="sm"
@@ -171,7 +174,7 @@ export const FormActions = memo(function FormActions({
 							</Button>
 						</TooltipTrigger>
 						<TooltipContent side="top" sideOffset={8}>
-							<p>Delete form</p>
+							<p>{t("deleteForm")}</p>
 						</TooltipContent>
 					</Tooltip>
 				</div>

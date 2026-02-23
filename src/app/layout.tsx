@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -7,6 +8,8 @@ import { BotIdClientWrapper } from "@/components/other/integrations/bot-id-clien
 import { TicketpingController } from "@/components/other/integrations/ticket-ping-controller";
 import { LightThemeEnforcer } from "@/components/other/utils/light-theme-enforcer";
 import { Toaster } from "@/components/ui/toast";
+import { loadMessagesForLocale } from "@/i18n/request";
+import { routing } from "@/i18n/routing";
 import ConditionalLayout from "./conditional-layout";
 
 const geist = Geist({
@@ -109,13 +112,16 @@ export const viewport = {
 	themeColor: [{ media: "(prefers-color-scheme: light)", color: "#ffffff" }],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
+	const locale = routing.defaultLocale;
+	const messages = await loadMessagesForLocale(locale);
+
 	return (
-		<html className="light" lang="en" suppressHydrationWarning>
+		<html className="light" lang={locale} suppressHydrationWarning>
 			<head>
 				<BotIdClientWrapper />
 				<script defer src="https://assets.onedollarstats.com/stonks.js" />
@@ -132,10 +138,12 @@ export default function RootLayout({
 			<body
 				className={`light ${geist.className} ${geistMono.variable} antialiased`}
 			>
-				<LightThemeEnforcer />
-				<ConditionalLayout>{children}</ConditionalLayout>
-				<Toaster position="top-center" />
-				<AnalyticsWrapper gaId="G-X4CH42084K" />
+				<NextIntlClientProvider locale={locale} messages={messages}>
+					<LightThemeEnforcer />
+					<ConditionalLayout>{children}</ConditionalLayout>
+					<Toaster position="top-center" />
+					<AnalyticsWrapper gaId="G-X4CH42084K" />
+				</NextIntlClientProvider>
 			</body>
 		</html>
 	);

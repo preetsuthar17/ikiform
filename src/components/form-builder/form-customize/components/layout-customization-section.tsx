@@ -1,6 +1,7 @@
 "use client";
 
 import { Monitor, Ruler } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import {
 	DEFAULT_FORM_DESIGN,
@@ -32,6 +33,7 @@ export function LayoutCustomizationSection({
 	localSettings,
 	updateSettings,
 }: LayoutCustomizationSectionProps) {
+	const t = useTranslations("product.formBuilder.customize.layout");
 	const currentWidth =
 		localSettings.layout?.maxWidth || DEFAULT_FORM_DESIGN.maxWidth;
 	const currentPadding =
@@ -205,10 +207,10 @@ export function LayoutCustomizationSection({
 			<div>
 				<div className="mb-2 flex items-center gap-2">
 					<Monitor className="size-4 text-primary" />
-					<h2 className="font-semibold text-lg">Layout Settings</h2>
+					<h2 className="font-semibold text-lg">{t("title")}</h2>
 				</div>
 				<p className="text-muted-foreground text-xs">
-					Configure spacing and structure
+					{t("description")}
 				</p>
 			</div>
 
@@ -228,7 +230,7 @@ export function LayoutCustomizationSection({
 									className="cursor-pointer select-none"
 									htmlFor="show-progress-toggle"
 								>
-									Show Progress Bar
+									{t("showProgressBar")}
 								</Label>
 							</div>
 						</CardContent>
@@ -238,10 +240,10 @@ export function LayoutCustomizationSection({
 						<CardContent className="flex flex-col gap-3 p-0">
 							<Label className="flex items-center gap-2 font-medium">
 								<Ruler className="size-4" />
-								Form Width
+								{t("formWidth")}
 							</Label>
 							<p className="text-muted-foreground text-xs">
-								Controls the maximum width of the form container
+								{t("formWidthHelp")}
 							</p>
 							<div>
 								<Slider
@@ -257,12 +259,12 @@ export function LayoutCustomizationSection({
 							{currentWidth === "custom" && (
 								<div className="flex flex-col gap-2">
 									<Label className="text-muted-foreground text-sm">
-										Custom Width (e.g., 600px, 80%, 50rem)
+										{t("customWidth")}
 									</Label>
 									<Input
 										className="max-w-xs"
 										onChange={(e) => handleCustomWidthChange(e.target.value)}
-										placeholder="Enter custom width"
+										placeholder={t("customWidthPlaceholder")}
 										value={customWidth}
 									/>
 								</div>
@@ -271,7 +273,10 @@ export function LayoutCustomizationSection({
 								{(() => {
 									const idx = widthSliderValue;
 									const opt = FORM_WIDTH_OPTIONS[idx];
-									return opt ? `${opt.label} (${opt.description})` : "";
+									if (!opt) return "";
+									return `${t(`widthOptions.${opt.value}.label`)} (${t(
+										`widthOptions.${opt.value}.description`
+									)})`;
 								})()}
 							</p>
 						</CardContent>
@@ -279,9 +284,9 @@ export function LayoutCustomizationSection({
 
 					<Card className="p-4 shadow-none">
 						<CardContent className="flex flex-col gap-3 p-0">
-							<Label className="font-medium">Internal Padding</Label>
+							<Label className="font-medium">{t("internalPadding")}</Label>
 							<p className="text-muted-foreground text-xs">
-								Controls the space inside the form container
+								{t("internalPaddingHelp")}
 							</p>
 							<div>
 								<Slider
@@ -298,7 +303,10 @@ export function LayoutCustomizationSection({
 								{(() => {
 									const idx = paddingSliderValue;
 									const opt = FORM_PADDING_OPTIONS[idx];
-									return opt ? `${opt.label} (${opt.description})` : "";
+									if (!opt) return "";
+									return `${t(`paddingOptions.${opt.value}.label`)} (${t(
+										`paddingOptions.${opt.value}.description`
+									)})`;
 								})()}
 							</p>
 						</CardContent>
@@ -306,9 +314,9 @@ export function LayoutCustomizationSection({
 
 					<Card className="p-4 shadow-none">
 						<CardContent className="flex flex-col gap-3 p-0">
-							<Label className="font-medium">External Margin</Label>
+							<Label className="font-medium">{t("externalMargin")}</Label>
 							<p className="text-muted-foreground text-xs">
-								Controls the space around the form container
+								{t("externalMarginHelp")}
 							</p>
 							<div>
 								<Slider
@@ -325,7 +333,10 @@ export function LayoutCustomizationSection({
 								{(() => {
 									const idx = marginSliderValue;
 									const opt = FORM_MARGIN_OPTIONS[idx];
-									return opt ? `${opt.label} (${opt.description})` : "";
+									if (!opt) return "";
+									return `${t(`marginOptions.${opt.value}.label`)} (${t(
+										`marginOptions.${opt.value}.description`
+									)})`;
 								})()}
 							</p>
 						</CardContent>
@@ -333,9 +344,9 @@ export function LayoutCustomizationSection({
 
 					<Card className="p-4 shadow-none">
 						<CardContent className="flex flex-col gap-3 p-0">
-							<Label className="font-medium">Corner Radius</Label>
+							<Label className="font-medium">{t("cornerRadius")}</Label>
 							<p className="text-muted-foreground text-xs">
-								Controls how rounded the form corners appear
+								{t("cornerRadiusHelp")}
 							</p>
 							<div>
 								<Slider
@@ -352,7 +363,10 @@ export function LayoutCustomizationSection({
 								{(() => {
 									const idx = borderRadiusSliderValue;
 									const opt = FORM_BORDER_RADIUS_OPTIONS[idx];
-									return opt ? `${opt.label} (${opt.description})` : "";
+									if (!opt) return "";
+									return `${t(`radiusOptions.${opt.value}.label`)} (${t(
+										`radiusOptions.${opt.value}.description`
+									)})`;
 								})()}
 							</p>
 						</CardContent>
