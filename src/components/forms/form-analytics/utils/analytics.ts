@@ -144,6 +144,16 @@ export const calculateFieldAnalytics = (
 				} else {
 					stringValue = "1 file";
 				}
+			} else if (
+				field.type === "slider" &&
+				response &&
+				typeof response === "object" &&
+				!Array.isArray(response) &&
+				typeof (response as { min?: unknown }).min === "number" &&
+				typeof (response as { max?: unknown }).max === "number"
+			) {
+				const sliderResponse = response as { min: number; max: number };
+				stringValue = `${sliderResponse.min} - ${sliderResponse.max}`;
 			} else {
 				stringValue = Array.isArray(response)
 					? response.join(", ")

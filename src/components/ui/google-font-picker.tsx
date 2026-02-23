@@ -40,6 +40,11 @@ interface GoogleFontsResponse {
 	items: GoogleFont[];
 }
 
+interface GoogleFontFetchResult {
+	fonts: GoogleFont[];
+	hasError: boolean;
+}
+
 const CATEGORY_MAP = {
 	"sans-serif": "Sans Serif",
 	serif: "Serif",
@@ -56,6 +61,155 @@ const FONT_CATEGORIES = [
 	{ id: "Monospace", label: "Monospace" },
 	{ id: "Handwriting", label: "Handwriting" },
 ] as const;
+
+const getFallbackFonts = (): GoogleFont[] => [
+	{
+		family: "Inter",
+		category: "sans-serif",
+		variants: ["400", "500", "600", "700"],
+		subsets: ["latin"],
+		version: "v12",
+		lastModified: "2022-09-22",
+		files: {},
+		kind: "webfonts#webfont",
+		menu: "",
+	},
+	{
+		family: "Roboto",
+		category: "sans-serif",
+		variants: ["300", "400", "500", "700"],
+		subsets: ["latin"],
+		version: "v30",
+		lastModified: "2022-09-22",
+		files: {},
+		kind: "webfonts#webfont",
+		menu: "",
+	},
+	{
+		family: "Open Sans",
+		category: "sans-serif",
+		variants: ["400", "600", "700"],
+		subsets: ["latin"],
+		version: "v34",
+		lastModified: "2022-09-22",
+		files: {},
+		kind: "webfonts#webfont",
+		menu: "",
+	},
+	{
+		family: "Lato",
+		category: "sans-serif",
+		variants: ["400", "700"],
+		subsets: ["latin"],
+		version: "v23",
+		lastModified: "2022-09-22",
+		files: {},
+		kind: "webfonts#webfont",
+		menu: "",
+	},
+	{
+		family: "Montserrat",
+		category: "sans-serif",
+		variants: ["400", "500", "600", "700"],
+		subsets: ["latin"],
+		version: "v25",
+		lastModified: "2022-09-22",
+		files: {},
+		kind: "webfonts#webfont",
+		menu: "",
+	},
+	{
+		family: "Poppins",
+		category: "sans-serif",
+		variants: ["400", "500", "600", "700"],
+		subsets: ["latin"],
+		version: "v20",
+		lastModified: "2022-09-22",
+		files: {},
+		kind: "webfonts#webfont",
+		menu: "",
+	},
+	{
+		family: "Playfair Display",
+		category: "serif",
+		variants: ["400", "500", "600", "700"],
+		subsets: ["latin"],
+		version: "v30",
+		lastModified: "2022-09-22",
+		files: {},
+		kind: "webfonts#webfont",
+		menu: "",
+	},
+	{
+		family: "Merriweather",
+		category: "serif",
+		variants: ["400", "700"],
+		subsets: ["latin"],
+		version: "v30",
+		lastModified: "2022-09-22",
+		files: {},
+		kind: "webfonts#webfont",
+		menu: "",
+	},
+	{
+		family: "Fira Code",
+		category: "monospace",
+		variants: ["400", "500", "700"],
+		subsets: ["latin"],
+		version: "v14",
+		lastModified: "2022-09-22",
+		files: {},
+		kind: "webfonts#webfont",
+		menu: "",
+	},
+	{
+		family: "JetBrains Mono",
+		category: "monospace",
+		variants: ["400", "500", "700"],
+		subsets: ["latin"],
+		version: "v13",
+		lastModified: "2022-09-22",
+		files: {},
+		kind: "webfonts#webfont",
+		menu: "",
+	},
+];
+
+let googleFontFetchCache: GoogleFontFetchResult | null = null;
+let googleFontFetchPromise: Promise<GoogleFontFetchResult> | null = null;
+
+const fetchGoogleFonts = async (): Promise<GoogleFontFetchResult> => {
+	if (googleFontFetchCache) {
+		return googleFontFetchCache;
+	}
+
+	if (!googleFontFetchPromise) {
+		googleFontFetchPromise = (async () => {
+			try {
+				const response = await fetch("/api/google-fonts");
+
+				if (!response.ok) {
+					throw new Error("Failed to fetch fonts");
+				}
+
+				const data: GoogleFontsResponse = await response.json();
+				return { fonts: data.items || [], hasError: false };
+			} catch (err) {
+				console.error("Error fetching fonts:", err);
+				return { fonts: getFallbackFonts(), hasError: true };
+			}
+		})()
+			.then((result) => {
+				googleFontFetchCache = result;
+				return result;
+			})
+			.finally(() => {
+				googleFontFetchPromise = null;
+			});
+	}
+
+	return googleFontFetchPromise;
+};
 
 interface GoogleFontPickerProps {
 	value?: string;
@@ -85,142 +239,14 @@ export function GoogleFontPicker({
 	useEffect(() => {
 		const fetchFonts = async () => {
 			setLoading(true);
-			setError(null);
-
-			try {
-				const response = await fetch("/api/google-fonts");
-
-				if (!response.ok) {
-					throw new Error("Failed to fetch fonts");
-				}
-
-				const data: GoogleFontsResponse = await response.json();
-				setFonts(data.items || []);
-			} catch (err) {
-				console.error("Error fetching fonts:", err);
-				setError("Failed to load fonts. Please try again.");
-
-				setFonts(getFallbackFonts());
-			} finally {
-				setLoading(false);
-			}
+			const result = await fetchGoogleFonts();
+			setFonts(result.fonts);
+			setError(result.hasError ? "Failed to load fonts. Please try again." : null);
+			setLoading(false);
 		};
 
 		fetchFonts();
 	}, []);
-
-	const getFallbackFonts = (): GoogleFont[] => [
-		{
-			family: "Inter",
-			category: "sans-serif",
-			variants: ["400", "500", "600", "700"],
-			subsets: ["latin"],
-			version: "v12",
-			lastModified: "2022-09-22",
-			files: {},
-			kind: "webfonts#webfont",
-			menu: "",
-		},
-		{
-			family: "Roboto",
-			category: "sans-serif",
-			variants: ["300", "400", "500", "700"],
-			subsets: ["latin"],
-			version: "v30",
-			lastModified: "2022-09-22",
-			files: {},
-			kind: "webfonts#webfont",
-			menu: "",
-		},
-		{
-			family: "Open Sans",
-			category: "sans-serif",
-			variants: ["400", "600", "700"],
-			subsets: ["latin"],
-			version: "v34",
-			lastModified: "2022-09-22",
-			files: {},
-			kind: "webfonts#webfont",
-			menu: "",
-		},
-		{
-			family: "Lato",
-			category: "sans-serif",
-			variants: ["400", "700"],
-			subsets: ["latin"],
-			version: "v23",
-			lastModified: "2022-09-22",
-			files: {},
-			kind: "webfonts#webfont",
-			menu: "",
-		},
-		{
-			family: "Montserrat",
-			category: "sans-serif",
-			variants: ["400", "500", "600", "700"],
-			subsets: ["latin"],
-			version: "v25",
-			lastModified: "2022-09-22",
-			files: {},
-			kind: "webfonts#webfont",
-			menu: "",
-		},
-		{
-			family: "Poppins",
-			category: "sans-serif",
-			variants: ["400", "500", "600", "700"],
-			subsets: ["latin"],
-			version: "v20",
-			lastModified: "2022-09-22",
-			files: {},
-			kind: "webfonts#webfont",
-			menu: "",
-		},
-		{
-			family: "Playfair Display",
-			category: "serif",
-			variants: ["400", "500", "600", "700"],
-			subsets: ["latin"],
-			version: "v30",
-			lastModified: "2022-09-22",
-			files: {},
-			kind: "webfonts#webfont",
-			menu: "",
-		},
-		{
-			family: "Merriweather",
-			category: "serif",
-			variants: ["400", "700"],
-			subsets: ["latin"],
-			version: "v30",
-			lastModified: "2022-09-22",
-			files: {},
-			kind: "webfonts#webfont",
-			menu: "",
-		},
-		{
-			family: "Fira Code",
-			category: "monospace",
-			variants: ["400", "500", "700"],
-			subsets: ["latin"],
-			version: "v14",
-			lastModified: "2022-09-22",
-			files: {},
-			kind: "webfonts#webfont",
-			menu: "",
-		},
-		{
-			family: "JetBrains Mono",
-			category: "monospace",
-			variants: ["400", "500", "700"],
-			subsets: ["latin"],
-			version: "v13",
-			lastModified: "2022-09-22",
-			files: {},
-			kind: "webfonts#webfont",
-			menu: "",
-		},
-	];
 
 	const filteredFonts = React.useMemo(() => {
 		let filtered = fonts;
@@ -266,7 +292,6 @@ export function GoogleFontPicker({
 	const selectedFont = fonts.find((font) => font.family === value);
 
 	const handleFontSelect = (fontFamily: string) => {
-		console.log("Font selected:", fontFamily);
 		onChange(fontFamily);
 		setOpen(false);
 	};
