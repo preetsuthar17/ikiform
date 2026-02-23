@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
 import type { FormField, FormSchema } from "@/lib/database";
+import {
+	isRangeSliderMode,
+	normalizeRangeSliderValue,
+	normalizeSingleSliderValue,
+} from "@/lib/fields/slider-utils";
 
 const getDefaultValueForField = (field: FormField): any => {
 	switch (field.type) {
@@ -13,7 +18,10 @@ const getDefaultValueForField = (field: FormField): any => {
 		case "select":
 			return "";
 		case "slider":
-			return field.settings?.defaultValue || 50;
+			if (isRangeSliderMode(field.settings)) {
+				return normalizeRangeSliderValue(field.settings);
+			}
+			return normalizeSingleSliderValue(field.settings);
 		case "number":
 			return "";
 		case "text":

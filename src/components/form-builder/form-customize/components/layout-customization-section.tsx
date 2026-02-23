@@ -1,6 +1,7 @@
 "use client";
 
 import { Monitor, Ruler } from "lucide-react";
+import { useEffect, useState } from "react";
 import {
 	DEFAULT_FORM_DESIGN,
 	FORM_BORDER_RADIUS_OPTIONS,
@@ -89,8 +90,45 @@ export function LayoutCustomizationSection({
 			Math.max(0, Math.min(value, FORM_BORDER_RADIUS_OPTIONS.length - 1))
 		].value;
 
+	const [widthSliderValue, setWidthSliderValue] = useState<number>(() =>
+		getWidthSliderValue(currentWidth)
+	);
+	const [paddingSliderValue, setPaddingSliderValue] = useState<number>(() =>
+		getPaddingSliderValue(currentPadding)
+	);
+	const [marginSliderValue, setMarginSliderValue] = useState<number>(() =>
+		getMarginSliderValue(currentMargin)
+	);
+	const [borderRadiusSliderValue, setBorderRadiusSliderValue] = useState<number>(
+		() => getBorderRadiusSliderValue(currentBorderRadius)
+	);
+
+	useEffect(() => {
+		setWidthSliderValue(getWidthSliderValue(currentWidth));
+	}, [currentWidth]);
+
+	useEffect(() => {
+		setPaddingSliderValue(getPaddingSliderValue(currentPadding));
+	}, [currentPadding]);
+
+	useEffect(() => {
+		setMarginSliderValue(getMarginSliderValue(currentMargin));
+	}, [currentMargin]);
+
+	useEffect(() => {
+		setBorderRadiusSliderValue(getBorderRadiusSliderValue(currentBorderRadius));
+	}, [currentBorderRadius]);
+
 	const handleBorderRadiusChange = (values: number[]) => {
-		const newRadius = getBorderRadiusFromSlider(values[0]);
+		setBorderRadiusSliderValue(values[0] ?? 0);
+	};
+
+	const handleBorderRadiusCommit = (values: number[]) => {
+		const nextSliderValue = values[0] ?? borderRadiusSliderValue;
+		const newRadius = getBorderRadiusFromSlider(nextSliderValue);
+		if (newRadius === currentBorderRadius) {
+			return;
+		}
 		updateSettings({
 			layout: {
 				...localSettings.layout,
@@ -100,7 +138,15 @@ export function LayoutCustomizationSection({
 	};
 
 	const handleWidthChange = (values: number[]) => {
-		const newWidth = getWidthFromSlider(values[0]);
+		setWidthSliderValue(values[0] ?? 0);
+	};
+
+	const handleWidthCommit = (values: number[]) => {
+		const nextSliderValue = values[0] ?? widthSliderValue;
+		const newWidth = getWidthFromSlider(nextSliderValue);
+		if (newWidth === currentWidth) {
+			return;
+		}
 		updateSettings({
 			layout: {
 				...localSettings.layout,
@@ -119,7 +165,15 @@ export function LayoutCustomizationSection({
 	};
 
 	const handlePaddingChange = (values: number[]) => {
-		const newPadding = getPaddingFromSlider(values[0]);
+		setPaddingSliderValue(values[0] ?? 0);
+	};
+
+	const handlePaddingCommit = (values: number[]) => {
+		const nextSliderValue = values[0] ?? paddingSliderValue;
+		const newPadding = getPaddingFromSlider(nextSliderValue);
+		if (newPadding === currentPadding) {
+			return;
+		}
 		updateSettings({
 			layout: {
 				...localSettings.layout,
@@ -129,7 +183,15 @@ export function LayoutCustomizationSection({
 	};
 
 	const handleMarginChange = (values: number[]) => {
-		const newMargin = getMarginFromSlider(values[0]);
+		setMarginSliderValue(values[0] ?? 0);
+	};
+
+	const handleMarginCommit = (values: number[]) => {
+		const nextSliderValue = values[0] ?? marginSliderValue;
+		const newMargin = getMarginFromSlider(nextSliderValue);
+		if (newMargin === currentMargin) {
+			return;
+		}
 		updateSettings({
 			layout: {
 				...localSettings.layout,
@@ -187,8 +249,9 @@ export function LayoutCustomizationSection({
 									max={FORM_WIDTH_OPTIONS.length - 1}
 									min={0}
 									onValueChange={handleWidthChange}
+									onValueCommitted={handleWidthCommit}
 									step={1}
-									value={[getWidthSliderValue(currentWidth)]}
+									value={[widthSliderValue]}
 								/>
 							</div>
 							{currentWidth === "custom" && (
@@ -206,7 +269,7 @@ export function LayoutCustomizationSection({
 							)}
 							<p className="text-muted-foreground text-xs">
 								{(() => {
-									const idx = getWidthSliderValue(currentWidth);
+									const idx = widthSliderValue;
 									const opt = FORM_WIDTH_OPTIONS[idx];
 									return opt ? `${opt.label} (${opt.description})` : "";
 								})()}
@@ -226,13 +289,14 @@ export function LayoutCustomizationSection({
 									max={FORM_PADDING_OPTIONS.length - 1}
 									min={0}
 									onValueChange={handlePaddingChange}
+									onValueCommitted={handlePaddingCommit}
 									step={1}
-									value={[getPaddingSliderValue(currentPadding)]}
+									value={[paddingSliderValue]}
 								/>
 							</div>
 							<p className="text-muted-foreground text-xs">
 								{(() => {
-									const idx = getPaddingSliderValue(currentPadding);
+									const idx = paddingSliderValue;
 									const opt = FORM_PADDING_OPTIONS[idx];
 									return opt ? `${opt.label} (${opt.description})` : "";
 								})()}
@@ -252,13 +316,14 @@ export function LayoutCustomizationSection({
 									max={FORM_MARGIN_OPTIONS.length - 1}
 									min={0}
 									onValueChange={handleMarginChange}
+									onValueCommitted={handleMarginCommit}
 									step={1}
-									value={[getMarginSliderValue(currentMargin)]}
+									value={[marginSliderValue]}
 								/>
 							</div>
 							<p className="text-muted-foreground text-xs">
 								{(() => {
-									const idx = getMarginSliderValue(currentMargin);
+									const idx = marginSliderValue;
 									const opt = FORM_MARGIN_OPTIONS[idx];
 									return opt ? `${opt.label} (${opt.description})` : "";
 								})()}
@@ -278,13 +343,14 @@ export function LayoutCustomizationSection({
 									max={FORM_BORDER_RADIUS_OPTIONS.length - 1}
 									min={0}
 									onValueChange={handleBorderRadiusChange}
+									onValueCommitted={handleBorderRadiusCommit}
 									step={1}
-									value={[getBorderRadiusSliderValue(currentBorderRadius)]}
+									value={[borderRadiusSliderValue]}
 								/>
 							</div>
 							<p className="text-muted-foreground text-xs">
 								{(() => {
-									const idx = getBorderRadiusSliderValue(currentBorderRadius);
+									const idx = borderRadiusSliderValue;
 									const opt = FORM_BORDER_RADIUS_OPTIONS[idx];
 									return opt ? `${opt.label} (${opt.description})` : "";
 								})()}

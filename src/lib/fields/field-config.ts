@@ -25,16 +25,16 @@ import {
 import type { FormField } from "@/lib/database";
 
 export interface FieldTypeConfig {
-	type: FormField["type"];
-	label: string;
-	description: string;
-	icon: LucideIcon;
+	canBeGrouped?: boolean;
 	category: "input" | "selection" | "media" | "layout" | "advanced";
 	defaultLabel: string;
-	defaultPlaceholder?: string;
 	defaultOptions?: string[];
+	defaultPlaceholder?: string;
 	defaultSettings?: Partial<FormField["settings"]>;
-	canBeGrouped?: boolean;
+	description: string;
+	icon: LucideIcon;
+	label: string;
+	type: FormField["type"];
 }
 
 export const FIELD_TYPE_CONFIGS: FieldTypeConfig[] = [
@@ -162,7 +162,13 @@ export const FIELD_TYPE_CONFIGS: FieldTypeConfig[] = [
 		icon: Sliders,
 		category: "selection",
 		defaultLabel: "Slider Field",
-		defaultSettings: { min: 0, max: 100, step: 1, defaultValue: 50 },
+		defaultSettings: {
+			min: 0,
+			max: 100,
+			step: 1,
+			sliderMode: "single",
+			defaultValue: 50,
+		},
 	},
 	{
 		type: "rating",

@@ -28,6 +28,11 @@ import { useAuth } from "@/hooks/use-auth";
 import { toast } from "@/hooks/use-toast";
 import { formsDb } from "@/lib/database";
 import {
+	isRangeSliderMode,
+	normalizeRangeSliderValue,
+	normalizeSingleSliderValue,
+} from "@/lib/fields/slider-utils";
+import {
 	generateFormApiKey,
 	revokeFormApiKey,
 	toggleFormApiEnabled,
@@ -215,7 +220,15 @@ export function ApiSection({
 					sampleData[field.id] = 5;
 					break;
 				case "slider":
-					sampleData[field.id] = 50;
+					if (isRangeSliderMode(field.settings)) {
+						const rangeSample = normalizeRangeSliderValue(field.settings);
+						sampleData[field.id] = {
+							min: rangeSample.min,
+							max: rangeSample.max,
+						};
+					} else {
+						sampleData[field.id] = normalizeSingleSliderValue(field.settings);
+					}
 					break;
 				default:
 					sampleData[field.id] = "Sample value";

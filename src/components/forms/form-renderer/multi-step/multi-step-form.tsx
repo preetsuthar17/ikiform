@@ -12,6 +12,10 @@ import { Separator } from "@/components/ui/separator";
 import { SocialMediaIcons } from "@/components/ui/social-media-icons";
 import { useFormStyling } from "@/hooks/use-form-styling";
 import type { FormBlock, FormSchema } from "@/lib/database";
+import {
+	isRangeSliderMode,
+	isSliderRangeValue,
+} from "@/lib/fields/slider-utils";
 import { cn } from "@/lib/utils";
 import { constantTimeCompare } from "@/lib/utils/constant-time-compare";
 import { getFormLayoutClasses } from "@/lib/utils/form-layout";
@@ -465,8 +469,14 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
 					isEmpty = value.length === 0;
 				} else if (field.type === "radio" || field.settings?.isQuizField) {
 					isEmpty = !value || value === "";
-				} else if (field.type === "rating" || field.type === "slider") {
+				} else if (field.type === "rating") {
 					isEmpty = value === null || value === undefined;
+				} else if (field.type === "slider") {
+					if (isRangeSliderMode(field.settings)) {
+						isEmpty = !isSliderRangeValue(value);
+					} else {
+						isEmpty = value === null || value === undefined;
+					}
 				} else if (field.type === "checkbox") {
 					isEmpty = !Array.isArray(value) || value.length === 0;
 				} else if (field.type === "select") {

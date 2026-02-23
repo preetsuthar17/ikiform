@@ -309,7 +309,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 			<div className="flex flex-1 overflow-hidden">
 				{}
 				<div className="hidden w-110 shrink-0 border-r bg-background lg:block">
-					<CustomizationPanel />
+					{CustomizationPanel({})}
 				</div>
 
 				{}
@@ -322,7 +322,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 							</Button>
 						</DrawerTrigger>
 						<DrawerContent className="max-h-[80vh]">
-							<CustomizationPanel isMobile={true} />
+							{CustomizationPanel({ isMobile: true })}
 						</DrawerContent>
 					</Drawer>
 				</div>

@@ -1,5 +1,9 @@
 import type { FormField, FormSchema } from "@/lib/database";
 
+import {
+	isRangeSliderMode,
+	isSliderRangeValue,
+} from "@/lib/fields/slider-utils";
 import { safeRegexTest } from "@/lib/utils/safe-regex";
 import { validateEmail } from "@/lib/validation/email-validation";
 
@@ -16,11 +20,17 @@ export const validateSingleStepForm = (
 
 	fields.forEach((field) => {
 		const value = formData[field.id];
+		const isSliderMissingValue =
+			field.type === "slider" &&
+			(isRangeSliderMode(field.settings)
+				? !isSliderRangeValue(value)
+				: value === null || value === undefined);
+		const isMissingRequiredValue =
+			field.type === "slider"
+				? isSliderMissingValue
+				: !value || (Array.isArray(value) && value.length === 0);
 
-		if (
-			field.required &&
-			(!value || (Array.isArray(value) && value.length === 0))
-		) {
+		if (field.required && isMissingRequiredValue) {
 			errors[field.id] =
 				field.validation?.requiredMessage || "This field is required";
 		} else if (field.type === "email" && value) {

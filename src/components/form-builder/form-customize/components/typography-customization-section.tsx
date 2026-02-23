@@ -1,6 +1,7 @@
 "use client";
 
 import { Type } from "lucide-react";
+import { useEffect, useState } from "react";
 import {
 	FONT_SIZE_OPTIONS,
 	FONT_WEIGHT_OPTIONS,
@@ -53,13 +54,26 @@ export function TypographyCustomizationSection({
 			Math.max(0, Math.min(value, FONT_WEIGHT_OPTIONS.length - 1))
 		].value;
 
-	const handleFontFamilyChange = (value: string) => {
-		console.log("Font family changed to:", value);
+	const [fontSizeSliderValue, setFontSizeSliderValue] = useState<number>(() =>
+		getFontSizeSliderValue(fontSize)
+	);
+	const [fontWeightSliderValue, setFontWeightSliderValue] = useState<number>(
+		() => getFontWeightSliderValue(fontWeight)
+	);
 
+	useEffect(() => {
+		setFontSizeSliderValue(getFontSizeSliderValue(fontSize));
+	}, [fontSize]);
+
+	useEffect(() => {
+		setFontWeightSliderValue(getFontWeightSliderValue(fontWeight));
+	}, [fontWeight]);
+
+	const handleFontFamilyChange = (value: string) => {
 		if (typeof window !== "undefined") {
-			loadGoogleFont(value)
-				.then(() => console.log("Font loaded successfully:", value))
-				.catch((error) => console.error("Failed to load font:", value, error));
+			loadGoogleFont(value).catch((error) =>
+				console.error("Failed to load font:", value, error)
+			);
 		}
 
 		updateSettings({
@@ -71,7 +85,15 @@ export function TypographyCustomizationSection({
 	};
 
 	const handleFontSizeChange = (values: number[]) => {
-		const newSize = getFontSizeFromSlider(values[0]);
+		setFontSizeSliderValue(values[0] ?? 0);
+	};
+
+	const handleFontSizeCommit = (values: number[]) => {
+		const nextSliderValue = values[0] ?? fontSizeSliderValue;
+		const newSize = getFontSizeFromSlider(nextSliderValue);
+		if (newSize === fontSize) {
+			return;
+		}
 		updateSettings({
 			typography: {
 				...localSettings.typography,
@@ -81,7 +103,15 @@ export function TypographyCustomizationSection({
 	};
 
 	const handleFontWeightChange = (values: number[]) => {
-		const newWeight = getFontWeightFromSlider(values[0]);
+		setFontWeightSliderValue(values[0] ?? 0);
+	};
+
+	const handleFontWeightCommit = (values: number[]) => {
+		const nextSliderValue = values[0] ?? fontWeightSliderValue;
+		const newWeight = getFontWeightFromSlider(nextSliderValue);
+		if (newWeight === fontWeight) {
+			return;
+		}
 		updateSettings({
 			typography: {
 				...localSettings.typography,
@@ -153,13 +183,14 @@ export function TypographyCustomizationSection({
 									max={FONT_SIZE_OPTIONS.length - 1}
 									min={0}
 									onValueChange={handleFontSizeChange}
+									onValueCommitted={handleFontSizeCommit}
 									step={1}
-									value={[getFontSizeSliderValue(fontSize)]}
+									value={[fontSizeSliderValue]}
 								/>
 							</div>
 							<p className="text-muted-foreground text-xs">
 								Selected: {(() => {
-									const idx = getFontSizeSliderValue(fontSize);
+									const idx = fontSizeSliderValue;
 									const opt = FONT_SIZE_OPTIONS[idx];
 									return opt ? `${opt.label} (${opt.description})` : "";
 								})()}
@@ -178,13 +209,14 @@ export function TypographyCustomizationSection({
 									max={FONT_WEIGHT_OPTIONS.length - 1}
 									min={0}
 									onValueChange={handleFontWeightChange}
+									onValueCommitted={handleFontWeightCommit}
 									step={1}
-									value={[getFontWeightSliderValue(fontWeight)]}
+									value={[fontWeightSliderValue]}
 								/>
 							</div>
 							<p className="text-muted-foreground text-xs">
 								Selected: {(() => {
-									const idx = getFontWeightSliderValue(fontWeight);
+									const idx = fontWeightSliderValue;
 									const opt = FONT_WEIGHT_OPTIONS[idx];
 									return opt ? `${opt.label} (${opt.description})` : "";
 								})()}

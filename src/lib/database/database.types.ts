@@ -500,7 +500,10 @@ export interface FormField {
 		min?: number;
 		max?: number;
 		step?: number;
+		sliderMode?: "single" | "range";
 		defaultValue?: any;
+		defaultRangeMin?: number;
+		defaultRangeMax?: number;
 		placeholder?: string;
 		maxTags?: number;
 		allowDuplicates?: boolean;
