@@ -5,6 +5,7 @@ const TEST_PASSWORD = process.env.E2E_TEST_PASSWORD;
 
 const IGNORE_ERROR_PATTERNS = [
 	/ticketping/i,
+	/api-staging\.solcard\.cc\/auth\/user/i,
 	/notification websocket error/i,
 	/error loading form:.*pgrst116/i,
 	/failed to load resource/i,

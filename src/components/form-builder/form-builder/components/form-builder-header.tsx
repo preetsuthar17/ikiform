@@ -102,7 +102,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
 								<DropdownMenuContent align="start" className="shadow-xs">
 									<DropdownMenuItem onSelect={(e) => e.preventDefault()}>
 										<div className="flex w-full items-center justify-between gap-4">
-											<span>Multi-step form</span>
+											<span className="w-full">Multi-step form</span>
 											<Switch
 												aria-label="Toggle multi-step mode"
 												checked={formSchema.settings.multiStep}
@@ -256,7 +256,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
 									More actions
 								</TooltipContent>
 							</Tooltip>
-							<DropdownMenuContent align="end">
+							<DropdownMenuContent align="end" className={"w-full"}>
 								<DropdownMenuItem onClick={onJsonView}>
 									<Code className="size-4.5" />
 									<span className="text-sm">View JSON</span>
@@ -264,7 +264,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
 								<DropdownMenuSeparator />
 								<DropdownMenuItem onSelect={(e) => e.preventDefault()}>
 									<div className="flex w-full items-center justify-between gap-4">
-										<span className="font-medium">Multi-step form</span>
+										Multi-step form
 										<Switch
 											aria-label="Toggle multi-step mode"
 											checked={formSchema.settings.multiStep}

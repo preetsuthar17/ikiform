@@ -22,7 +22,8 @@ export default defineConfig({
 	webServer: hasExternalServer
 		? undefined
 		: {
-				command: "bun run dev -- --hostname 127.0.0.1 --port 3000",
+				command:
+					"NEXT_PUBLIC_DISABLE_TICKETPING=1 bun run dev -- --hostname 127.0.0.1 --port 3000",
 				url: baseURL,
 				reuseExistingServer: true,
 				timeout: 180_000,
