@@ -6,6 +6,7 @@ const messageLoaders = {
 	en: {
 		auth: () => import("../../messages/en/auth.json"),
 		dashboard: () => import("../../messages/en/dashboard.json"),
+		footer: () => import("../../messages/en/footer.json"),
 		home: () => import("../../messages/en/home.json"),
 		legal: () => import("../../messages/en/legal.json"),
 		nav: () => import("../../messages/en/nav.json"),
@@ -15,6 +16,7 @@ const messageLoaders = {
 	es: {
 		auth: () => import("../../messages/es/auth.json"),
 		dashboard: () => import("../../messages/es/dashboard.json"),
+		footer: () => import("../../messages/es/footer.json"),
 		home: () => import("../../messages/es/home.json"),
 		legal: () => import("../../messages/es/legal.json"),
 		nav: () => import("../../messages/es/nav.json"),
@@ -27,19 +29,22 @@ export async function loadMessagesForLocale(
 	locale: keyof typeof messageLoaders
 ) {
 	const localeLoaders = messageLoaders[locale];
-	const [auth, dashboard, home, legal, nav, product, seo] = await Promise.all([
-		localeLoaders.auth(),
-		localeLoaders.dashboard(),
-		localeLoaders.home(),
-		localeLoaders.legal(),
-		localeLoaders.nav(),
-		localeLoaders.product(),
-		localeLoaders.seo(),
-	]);
+	const [auth, dashboard, footer, home, legal, nav, product, seo] =
+		await Promise.all([
+			localeLoaders.auth(),
+			localeLoaders.dashboard(),
+			localeLoaders.footer(),
+			localeLoaders.home(),
+			localeLoaders.legal(),
+			localeLoaders.nav(),
+			localeLoaders.product(),
+			localeLoaders.seo(),
+		]);
 
 	return {
 		auth: auth.default,
 		dashboard: dashboard.default,
+		footer: footer.default,
 		home: home.default,
 		legal: legal.default,
 		nav: nav.default,

@@ -28,8 +28,16 @@ const LOCALIZED_PUBLIC_PATHS = new Set([
 	"/success",
 ]);
 
+const LOCALIZED_APP_PATH_PREFIXES = ["/dashboard", "/form-builder"] as const;
+
 function isLocalizedPublicPath(pathname: string) {
 	return LOCALIZED_PUBLIC_PATHS.has(pathname);
+}
+
+function isLocalizedAppPath(pathname: string) {
+	return LOCALIZED_APP_PATH_PREFIXES.some(
+		(prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
+	);
 }
 
 function isNoindexPath(pathname: string) {
@@ -86,6 +94,15 @@ export async function proxy(request: NextRequest) {
 
 		const url = request.nextUrl.clone();
 		url.pathname = destinationPath;
+		return NextResponse.redirect(url);
+	}
+
+	if (isLocalizedAppPath(normalizedPathname) && !localeFromPath) {
+		const preferredLocale = getPreferredLocaleFromCookie(
+			request.cookies.get("NEXT_LOCALE")?.value
+		);
+		const url = request.nextUrl.clone();
+		url.pathname = withLocalePath(normalizedPathname, preferredLocale);
 		return NextResponse.redirect(url);
 	}
 

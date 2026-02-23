@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 import ReactMarkdown from "react-markdown";
 import rehypeSanitize from "rehype-sanitize";
 import remarkGfm from "remark-gfm";
@@ -7,11 +6,21 @@ import { Badge } from "@/components/ui";
 import { Separator } from "@/components/ui/separator";
 import { getChangelogEntries } from "@/lib/utils/changelog";
 
-function formatChangelogDate(dateString: string): string {
+const CHANGELOG_DATE_LOCALE: Record<AppLocale, string> = {
+	en: "en-US",
+	es: "es-ES",
+};
+
+function formatChangelogDate(dateString: string, locale: AppLocale): string {
 	try {
-		const date = new Date(dateString);
+		const date = new Date(`${dateString}T00:00:00Z`);
 		if (!isNaN(date.getTime())) {
-			return format(date, "MMMM d, yyyy");
+			return new Intl.DateTimeFormat(CHANGELOG_DATE_LOCALE[locale], {
+				year: "numeric",
+				month: "long",
+				day: "numeric",
+				timeZone: "UTC",
+			}).format(date);
 		}
 		return dateString;
 	} catch {
@@ -124,7 +133,7 @@ export async function ChangelogPage({ locale }: { locale: AppLocale }) {
 							{entry.release_date && entry.release_date.trim() !== "" ? (
 								<Badge variant="outline">
 									<time dateTime={entry.release_date}>
-										{formatChangelogDate(entry.release_date)}
+										{formatChangelogDate(entry.release_date, locale)}
 									</time>
 								</Badge>
 							) : (
@@ -143,7 +152,7 @@ export async function ChangelogPage({ locale }: { locale: AppLocale }) {
 									{entry.release_date && entry.release_date.trim() !== "" ? (
 										<Badge variant="outline">
 											<time dateTime={entry.release_date}>
-												{formatChangelogDate(entry.release_date)}
+												{formatChangelogDate(entry.release_date, locale)}
 											</time>
 										</Badge>
 									) : (

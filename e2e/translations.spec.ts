@@ -6,11 +6,14 @@ const EN_CHANGELOG_LABEL = "CHANGELOG";
 const ES_CHANGELOG_LABEL = "NOVEDADES";
 const EN_CHANGELOG_ENTRY_SNIPPET = "Base UI Hardening";
 const ES_CHANGELOG_ENTRY_SNIPPET = "Endurecimiento de la interfaz";
+const ES_CHANGELOG_DATE_REGEX = /\d{1,2} de [a-záéíóúñ]+ de \d{4}/i;
 const ES_HOME_TITLE_SNIPPET =
 	"Crea formularios, recopila respuestas y analiza datos sin esfuerzo.";
 const EN_FOOTER_NAV = "Navigation";
 const ES_FOOTER_NAV = "Navegación";
 const ES_FOOTER_RESOURCES = "Recursos";
+const EN_HEADER_HOME = "Home";
+const ES_HEADER_HOME = "Inicio";
 const ES_PATH_REGEX = /\/es$/;
 const ES_LOGIN_PATH_REGEX = /\/es\/login(?:\?.*)?$/;
 const ES_PREMIUM_REQUIRED = "Requiere Premium";
@@ -48,6 +51,9 @@ test("changelog and home metadata are localized for es", async ({ page }) => {
 	await expect(page.locator("article").first()).toContainText(
 		ES_CHANGELOG_ENTRY_SNIPPET
 	);
+	await expect(page.locator("article").first().locator("time").first()).toHaveText(
+		ES_CHANGELOG_DATE_REGEX
+	);
 
 	await page.goto("/es", { waitUntil: "domcontentloaded" });
 	expect(await page.title()).toContain(ES_HOME_TITLE_SNIPPET);
@@ -57,12 +63,24 @@ test("footer language switcher changes locale and translated labels", async ({
 	page,
 }) => {
 	await page.goto("/en", { waitUntil: "domcontentloaded" });
+	await expect(
+		page.getByRole("navigation", { name: "Primary navigation" }).getByRole(
+			"link",
+			{ name: EN_HEADER_HOME, exact: true }
+		)
+	).toBeVisible();
 	await expect(page.getByRole("heading", { name: EN_FOOTER_NAV })).toBeVisible();
 
 	await page.getByLabel("Language").click();
 	await page.getByRole("option", { name: "Spanish" }).click();
 
 	await expect(page).toHaveURL(ES_PATH_REGEX);
+	await expect(
+		page.getByRole("navigation", { name: "Primary navigation" }).getByRole(
+			"link",
+			{ name: ES_HEADER_HOME, exact: true }
+		)
+	).toBeVisible();
 	await expect(page.getByRole("heading", { name: ES_FOOTER_NAV })).toBeVisible();
 	await expect(
 		page.getByRole("heading", { name: ES_FOOTER_RESOURCES })

@@ -92,11 +92,13 @@ UserAvatar.displayName = "UserAvatar";
 interface UserDropdownMenuProps {
 	user: User;
 	signOut: () => Promise<void>;
+	dashboardHref: string;
 }
 
 const UserDropdownMenu = React.memo(function UserDropdownMenu({
 	user,
 	signOut,
+	dashboardHref,
 }: UserDropdownMenuProps) {
 	const name =
 		user.user_metadata?.name ?? user.user_metadata?.full_name ?? "Account";
@@ -155,7 +157,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
 					>
 						<Link
 							className="flex min-h-[40px] w-full items-center gap-2"
-							href="/dashboard"
+							href={dashboardHref}
 						>
 							<span>Dashboard</span>
 						</Link>
@@ -192,6 +194,7 @@ interface DesktopActionsProps {
 	loading: boolean;
 	signOut: () => Promise<void>;
 	loginHref: string;
+	dashboardHref: string;
 	loginLabel: string;
 	dashboardLabel: string;
 }
@@ -212,6 +215,7 @@ const DesktopActions = React.memo(function DesktopActions({
 	loading,
 	signOut,
 	loginHref,
+	dashboardHref,
 	loginLabel,
 	dashboardLabel,
 }: DesktopActionsProps) {
@@ -226,12 +230,16 @@ const DesktopActions = React.memo(function DesktopActions({
 					<Button asChild className="rounded-md" variant="outline">
 						<Link
 							className="flex min-h-[36px] items-center gap-1"
-							href="/dashboard"
+							href={dashboardHref}
 						>
 							{dashboardLabel}
 						</Link>
 					</Button>
-					<UserDropdownMenu signOut={signOut} user={user} />
+					<UserDropdownMenu
+						dashboardHref={dashboardHref}
+						signOut={signOut}
+						user={user}
+					/>
 				</div>
 			) : (
 				<Button asChild className="rounded-md" variant="outline">
@@ -276,11 +284,13 @@ DrawerLinks.displayName = "DrawerLinks";
 interface DrawerProfileSectionProps {
 	user: User | null;
 	signOut: () => Promise<void>;
+	dashboardHref: string;
 }
 
 const DrawerProfileSection = React.memo(function DrawerProfileSection({
 	user,
 	signOut,
+	dashboardHref,
 }: DrawerProfileSectionProps) {
 	const handleSignOut = useCallback(async () => {
 		try {
@@ -316,7 +326,7 @@ const DrawerProfileSection = React.memo(function DrawerProfileSection({
 			<div className="grid gap-1">
 				<Link
 					className="flex min-h-[44px] items-center rounded-lg px-3 opacity-70 transition-all duration-200 hover:bg-accent hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:scale-[0.98]"
-					href="/dashboard"
+					href={dashboardHref}
 				>
 					<span>Dashboard</span>
 				</Link>
@@ -339,6 +349,7 @@ interface MobileDrawerProps {
 	signOut: () => Promise<void>;
 	primaryLinks: NavLink[];
 	loginHref: string;
+	dashboardHref: string;
 	loginLabel: string;
 	dashboardLabel: string;
 	getLabel: (key: string) => string;
@@ -363,6 +374,7 @@ const MobileDrawer = React.memo(function MobileDrawer({
 	signOut,
 	primaryLinks,
 	loginHref,
+	dashboardHref,
 	loginLabel,
 	dashboardLabel,
 	getLabel,
@@ -388,7 +400,11 @@ const MobileDrawer = React.memo(function MobileDrawer({
 						Main navigation links and user actions for Ikiform.
 					</DrawerDescription>
 					<div className="flex w-full flex-col gap-6">
-						<DrawerProfileSection signOut={signOut} user={user} />
+						<DrawerProfileSection
+							dashboardHref={dashboardHref}
+							signOut={signOut}
+							user={user}
+						/>
 						<div className="grid gap-3">
 							{loading ? (
 								<MobileDrawerButtonSkeleton />
@@ -397,7 +413,7 @@ const MobileDrawer = React.memo(function MobileDrawer({
 									asChild
 									className="min-h-[44px] w-full touch-manipulation rounded-lg font-medium text-base"
 								>
-									<Link href="/dashboard">{dashboardLabel}</Link>
+									<Link href={dashboardHref}>{dashboardLabel}</Link>
 								</Button>
 							) : (
 								<Button
@@ -481,6 +497,9 @@ export function HeaderClient({ primaryLinks }: HeaderClientProps) {
 	const tNav = useTranslations("nav");
 	const currentLocale = getLocaleFromPathname(pathname);
 	const loginHref = currentLocale ? withLocaleHref("/login", currentLocale) : "/login";
+	const dashboardHref = currentLocale
+		? withLocaleHref("/dashboard", currentLocale)
+		: "/dashboard";
 	const localizedPrimaryLinks = currentLocale
 		? primaryLinks.map((link) => ({
 				...link,
@@ -554,6 +573,7 @@ export function HeaderClient({ primaryLinks }: HeaderClientProps) {
 		<>
 			<DesktopActions
 				dashboardLabel={tNav("dashboard")}
+				dashboardHref={dashboardHref}
 				loading={loading}
 				loginHref={loginHref}
 				loginLabel={tNav("login")}
@@ -562,6 +582,7 @@ export function HeaderClient({ primaryLinks }: HeaderClientProps) {
 			/>
 			<MobileDrawer
 				dashboardLabel={tNav("dashboard")}
+				dashboardHref={dashboardHref}
 				getLabel={getLabel}
 				loading={loading}
 				loginHref={loginHref}

@@ -157,7 +157,7 @@ const NavigationLinks = React.memo(function NavigationLinks() {
 				<li>
 					<Link
 						className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-						href="/dashboard"
+						href={toLocaleHref("/dashboard")}
 					>
 						{tNav("dashboard")}
 					</Link>
@@ -389,7 +389,7 @@ const SocialLinks = React.memo(function SocialLinks() {
 });
 
 export default function Footer() {
-	const tHome = useTranslations("home.footer");
+	const tFooter = useTranslations("footer");
 
 	return (
 		<footer className="mx-auto my-12 w-full max-w-7xl bg-background">
@@ -404,7 +404,7 @@ export default function Footer() {
 								<div className="flex shrink-0 flex-col gap-4">
 									<FooterLogo />
 									<p className="max-w-sm text-muted-foreground text-sm">
-										© {new Date().getFullYear()} {tHome("madeBy")} —{" "}
+										© {new Date().getFullYear()} {tFooter("madeBy")} —{" "}
 										<Link
 											className="font-medium text-foreground transition-colors hover:underline"
 											href="https://x.com/preetsuthar17"
