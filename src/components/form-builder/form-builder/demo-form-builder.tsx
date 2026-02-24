@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import React, { useMemo, useState } from "react";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import type { FormBlock, FormField, FormSchema } from "@/lib/database";
@@ -31,6 +32,7 @@ function useIsMobile() {
 }
 
 export default function DemoFormBuilder() {
+	const tPage = useTranslations("product.formBuilder.page");
 	const isMobile = useIsMobile();
 	const [formSchema, setFormSchema] = useState<FormSchema>(() =>
 		createDefaultFormSchema({
@@ -114,7 +116,7 @@ export default function DemoFormBuilder() {
 	const addBlock = () => {
 		const newBlock: FormBlock = {
 			id: generateBlockId(),
-			title: `Step ${formSchema.blocks.length + 1}`,
+			title: tPage("stepDefaultTitle", { index: formSchema.blocks.length + 1 }),
 			description: "",
 			fields: [],
 		};
@@ -205,8 +207,8 @@ export default function DemoFormBuilder() {
 					blocks: [
 						{
 							id: "step-1",
-							title: "Step 1",
-							description: "First step of your form",
+							title: tPage("stepDefaultTitle", { index: 1 }),
+							description: tPage("stepDefaultDescription"),
 							fields: currentFields,
 						},
 					],
@@ -234,7 +236,7 @@ export default function DemoFormBuilder() {
 				blocks: [
 					{
 						id: "default",
-						title: "Form Fields",
+						title: tPage("formFields"),
 						description: "",
 						fields: allFields,
 					},
@@ -353,7 +355,9 @@ export default function DemoFormBuilder() {
 	}
 
 	return (
-		<div className="mx-auto flex w-full flex-col overflow-hidden rounded-2xl border bg-background">
+		<div
+			className="mx-auto flex w-full flex-col overflow-hidden rounded-2xl border bg-background"
+		>
 			<FormBuilderHeader
 				autoSaving={false}
 				formId={undefined}

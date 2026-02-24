@@ -9,6 +9,7 @@ import {
 	XCircle,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { Alert } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
@@ -49,12 +50,13 @@ function CodeBlock({
 	code: string;
 	className?: string;
 }) {
+	const t = useTranslations("product.formBuilder.formSettings.webhooks.logDialog");
 	const handleCopy = async () => {
 		try {
 			await navigator.clipboard.writeText(code);
-			toast.success("Copied to clipboard");
+			toast.success(t("copied"));
 		} catch (error) {
-			toast.error("Failed to copy");
+			toast.error(t("copyFailed"));
 		}
 	};
 
@@ -63,7 +65,7 @@ function CodeBlock({
 	return (
 		<div className="relative rounded-lg bg-muted font-mono">
 			<Button
-				aria-label="Copy code to clipboard"
+				aria-label={t("copyCodeAria")}
 				className="absolute top-2 right-2 size-8"
 				onClick={async () => {
 					await handleCopy();
@@ -109,6 +111,7 @@ function CodeBlock({
 }
 
 function PayloadViewer({ payload }: { payload: any }) {
+	const t = useTranslations("product.formBuilder.formSettings.webhooks.logDialog");
 	const [viewMode, setViewMode] = useState<"formatted" | "raw">("formatted");
 
 	let parsedPayload = payload;
@@ -128,17 +131,16 @@ function PayloadViewer({ payload }: { payload: any }) {
 		return (
 			<div className="flex flex-col items-center justify-center py-12 text-center">
 				<Eye className="mb-4 size-12 text-muted-foreground" />
-				<h3 className="mb-2 font-semibold text-lg">No Payload Data</h3>
+				<h3 className="mb-2 font-semibold text-lg">{t("noPayloadDataTitle")}</h3>
 				<p className="max-w-md text-muted-foreground">
-					This webhook delivery doesn't contain any payload data. This might be
-					because:
+					{t("noPayloadDataDescription")}
 				</p>
 				<ul className="mt-2 flex flex-col gap-1 text-muted-foreground text-sm">
 					<li>
-						• The webhook method doesn't support request bodies (GET, HEAD)
+						{t("noPayloadReasonMethod")}
 					</li>
-					<li>• The payload was empty or null</li>
-					<li>• There was an error during payload generation</li>
+					<li>{t("noPayloadReasonEmpty")}</li>
+					<li>{t("noPayloadReasonError")}</li>
 				</ul>
 			</div>
 		);
@@ -182,7 +184,7 @@ function PayloadViewer({ payload }: { payload: any }) {
 	}
 
 	function formatValue(value: any): string {
-		if (value === null || value === undefined) return "N/A";
+		if (value === null || value === undefined) return t("notAvailable");
 		if (typeof value === "string") return value;
 		if (typeof value === "number" || typeof value === "boolean")
 			return String(value);
@@ -191,7 +193,7 @@ function PayloadViewer({ payload }: { payload: any }) {
 				try {
 					return JSON.stringify(value, null, 2);
 				} catch {
-					return "[Complex Array]";
+					return t("complexArray");
 				}
 			}
 			return value.join(", ");
@@ -200,7 +202,7 @@ function PayloadViewer({ payload }: { payload: any }) {
 			try {
 				return JSON.stringify(value, null, 2);
 			} catch {
-				return "[Complex Object]";
+				return t("complexObject");
 			}
 		}
 		return String(value);
@@ -228,18 +230,18 @@ function PayloadViewer({ payload }: { payload: any }) {
 				<div className="rounded-xl border bg-card p-4">
 					<h4 className="mb-4 flex items-center gap-2 font-semibold text-sm">
 						<Activity className="size-4" />
-						Event Information
+						{t("eventInformation")}
 					</h4>
 					<div className="grid grid-cols-1 gap-3 text-sm">
 						<div className="flex items-center justify-between">
-							<span className="text-muted-foreground">Event:</span>
+							<span className="text-muted-foreground">{t("eventLabel")}</span>
 							<Badge className="font-mono" variant="secondary">
-								{eventName || "Unknown"}
+								{eventName || t("unknown")}
 							</Badge>
 						</div>
 						{parsedPayload.formId && (
 							<div className="flex items-center justify-between">
-								<span className="text-muted-foreground">Form ID:</span>
+								<span className="text-muted-foreground">{t("formIdLabel")}</span>
 								<code className="rounded-md bg-muted px-2 py-1 font-mono text-xs">
 									{parsedPayload.formId}
 								</code>
@@ -247,13 +249,15 @@ function PayloadViewer({ payload }: { payload: any }) {
 						)}
 						{parsedPayload.formName && (
 							<div className="flex items-center justify-between">
-								<span className="text-muted-foreground">Form Name:</span>
+								<span className="text-muted-foreground">{t("formNameLabel")}</span>
 								<span className="font-medium">{parsedPayload.formName}</span>
 							</div>
 						)}
 						{parsedPayload.submissionId && (
 							<div className="flex items-center justify-between">
-								<span className="text-muted-foreground">Submission ID:</span>
+								<span className="text-muted-foreground">
+									{t("submissionIdLabel")}
+								</span>
 								<code className="rounded-md bg-muted px-2 py-1 font-mono text-xs">
 									{parsedPayload.submissionId}
 								</code>
@@ -261,7 +265,7 @@ function PayloadViewer({ payload }: { payload: any }) {
 						)}
 						{parsedPayload.ipAddress && (
 							<div className="flex items-center justify-between">
-								<span className="text-muted-foreground">IP Address:</span>
+								<span className="text-muted-foreground">{t("ipAddressLabel")}</span>
 								<code className="rounded-md bg-muted px-2 py-1 font-mono text-xs">
 									{parsedPayload.ipAddress}
 								</code>
@@ -273,7 +277,7 @@ function PayloadViewer({ payload }: { payload: any }) {
 				{}
 				{parsedPayload.fields && (
 					<div className="rounded-xl border bg-card p-4">
-						<h4 className="mb-4 font-semibold text-sm">Form Fields</h4>
+						<h4 className="mb-4 font-semibold text-sm">{t("formFields")}</h4>
 						{formatFormFields(parsedPayload.fields)}
 					</div>
 				)}
@@ -281,14 +285,14 @@ function PayloadViewer({ payload }: { payload: any }) {
 				{}
 				{parsedPayload.rawData && (
 					<div className="rounded-xl border bg-card p-4">
-						<h4 className="mb-4 font-semibold text-sm">Raw Form Data</h4>
+						<h4 className="mb-4 font-semibold text-sm">{t("rawFormData")}</h4>
 						<div className="flex flex-col gap-3">
 							{Object.entries(parsedPayload.rawData).map(([key, value]) => (
 								<div
 									className="flex items-start justify-between gap-3 rounded-lg border bg-muted/50 p-3"
 									key={key}
 								>
-									<span className="min-w-0 flex-shrink-0 font-medium text-muted-foreground text-sm">
+									<span className="min-w-0 shrink-0 font-medium text-muted-foreground text-sm">
 										{key}:
 									</span>
 									<span className="break-words text-right text-sm">
@@ -303,7 +307,7 @@ function PayloadViewer({ payload }: { payload: any }) {
 				{}
 				{getAdditionalDataKeys(parsedPayload).length > 0 && (
 					<div className="rounded-xl border bg-card p-4">
-						<h4 className="mb-4 font-semibold text-sm">Additional Data</h4>
+						<h4 className="mb-4 font-semibold text-sm">{t("additionalData")}</h4>
 						<div className="flex flex-col gap-3">
 							{getAdditionalDataKeys(parsedPayload).map((key) => {
 								const value = parsedPayload[key];
@@ -328,7 +332,7 @@ function PayloadViewer({ payload }: { payload: any }) {
 										className="flex flex-col items-start justify-center gap-2 rounded-lg border bg-muted/50 p-3"
 										key={key}
 									>
-										<span className="min-w-0 flex-shrink-0 font-medium text-muted-foreground text-sm">
+										<span className="min-w-0 shrink-0 font-medium text-muted-foreground text-sm">
 											{key}:
 										</span>
 										<div className="min-w-0 flex-1 font-mono">
@@ -360,8 +364,8 @@ function PayloadViewer({ payload }: { payload: any }) {
 				value={viewMode}
 			>
 				<TabsList>
-					<TabsTrigger value="formatted">Formatted</TabsTrigger>
-					<TabsTrigger value="raw">Raw JSON</TabsTrigger>
+					<TabsTrigger value="formatted">{t("formatted")}</TabsTrigger>
+					<TabsTrigger value="raw">{t("rawJson")}</TabsTrigger>
 				</TabsList>
 				<TabsContent className="mt-4" value="formatted">
 					<FormattedView />
@@ -383,6 +387,7 @@ function LogItem({
 	onResend: (log: WebhookLog) => void;
 	onViewPayload: (payload: any) => void;
 }) {
+	const t = useTranslations("product.formBuilder.formSettings.webhooks.logDialog");
 	const [expanded, setExpanded] = useState(false);
 	const [contentHeight, setContentHeight] = useState<number | null>(null);
 	const contentRef = useRef<HTMLDivElement>(null);
@@ -436,7 +441,7 @@ function LogItem({
 					</div>
 					<div className="flex min-w-0 flex-1 items-center gap-2">
 						<span className="shrink-0 text-muted-foreground text-sm">
-							Event:
+							{t("eventLabel")}
 						</span>
 						<span className="truncate font-mono text-sm">{log.event}</span>
 					</div>
@@ -461,11 +466,11 @@ function LogItem({
 				<div className="px-3 py-3" ref={contentRef}>
 					<div className="flex flex-col gap-3 sm:flex-row">
 						<div className="flex flex-1 flex-col gap-1">
-							<span className="text-muted-foreground text-xs">Status</span>
+							<span className="text-muted-foreground text-xs">{t("status")}</span>
 							<span className="text-sm">{log.status}</span>
 						</div>
 						<div className="flex flex-1 flex-col gap-1">
-							<span className="text-muted-foreground text-xs">Response</span>
+							<span className="text-muted-foreground text-xs">{t("response")}</span>
 							<span className="text-sm">
 								{typeof log.response_status === "number"
 									? log.response_status
@@ -473,7 +478,7 @@ function LogItem({
 							</span>
 						</div>
 						<div className="flex flex-1 flex-col gap-1">
-							<span className="text-muted-foreground text-xs">Attempt</span>
+							<span className="text-muted-foreground text-xs">{t("attempt")}</span>
 							<span className="text-sm">{(log.attempt ?? 0) + 1}</span>
 						</div>
 					</div>
@@ -491,7 +496,7 @@ function LogItem({
 								onClick={() => onResend(log)}
 								size="sm"
 							>
-								Resend
+								{t("resend")}
 							</Button>
 						)}
 						<Button
@@ -500,7 +505,7 @@ function LogItem({
 							size="sm"
 							variant="outline"
 						>
-							View payload
+							{t("viewPayload")}
 						</Button>
 					</div>
 				</div>
@@ -514,6 +519,7 @@ export function WebhookLogDialog({
 	open,
 	onClose,
 }: WebhookLogDrawerProps) {
+	const t = useTranslations("product.formBuilder.formSettings.webhooks.logDialog");
 	const [logs, setLogs] = useState<WebhookLog[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
@@ -525,11 +531,11 @@ export function WebhookLogDialog({
 		setError(null);
 		try {
 			const res = await fetch(`/api/webhook/logs?webhookId=${webhookId}`);
-			if (!res.ok) throw new Error("Failed to fetch logs");
+			if (!res.ok) throw new Error(t("fetchFailed"));
 			const data = await res.json();
 			setLogs(Array.isArray(data) ? data : []);
 		} catch (e: any) {
-			setError(e.message || "Failed to fetch logs");
+			setError(e.message || t("fetchFailed"));
 		} finally {
 			setLoading(false);
 		}
@@ -550,13 +556,13 @@ export function WebhookLogDialog({
 			});
 			const data = await res.json();
 			if (res.ok) {
-				toast.success("Webhook resent successfully");
+				toast.success(t("resendSuccess"));
 			} else {
-				toast.error(data.error || "Failed to resend webhook");
+				toast.error(data.error || t("resendFailed"));
 			}
 			fetchLogs();
 		} catch (e) {
-			toast.error("Failed to resend webhook");
+			toast.error(t("resendFailed"));
 		}
 	}
 
@@ -571,22 +577,22 @@ export function WebhookLogDialog({
 					<div className="flex items-center justify-between">
 						<div>
 							<DialogTitle className="flex items-center gap-2">
-								Webhook Delivery Logs
+								{t("title")}
 							</DialogTitle>
 							{logs.length > 0 && (
 								<div className="mt-2 flex items-center gap-4 text-muted-foreground text-sm">
 									<div className="flex items-center gap-1">
 										<CheckCircle className="size-3 text-green-600" />
-										<span>{successCount} successful</span>
+										<span>{t("successfulCount", { count: successCount })}</span>
 									</div>
 									<div className="flex items-center gap-1">
 										<XCircle className="size-3 text-red-600" />
-										<span>{failedCount} failed</span>
+										<span>{t("failedCount", { count: failedCount })}</span>
 									</div>
 									{pendingCount > 0 && (
 										<div className="flex items-center gap-1">
 											<AlertCircle className="size-3 text-yellow-600" />
-											<span>{pendingCount} pending</span>
+											<span>{t("pendingCount", { count: pendingCount })}</span>
 										</div>
 									)}
 								</div>
@@ -601,7 +607,7 @@ export function WebhookLogDialog({
 							<Loader size="lg" />
 						</div>
 					) : error ? (
-						<Alert title="Error" variant="destructive">
+						<Alert title={t("errorTitle")} variant="destructive">
 							{error}
 						</Alert>
 					) : logs.length ? (
@@ -620,9 +626,9 @@ export function WebhookLogDialog({
 					) : (
 						<div className="flex h-64 flex-col items-center justify-center text-center">
 							<Activity className="mb-4 size-12 text-muted-foreground" />
-							<h3 className="mb-2 font-semibold text-lg">No Logs Found</h3>
+							<h3 className="mb-2 font-semibold text-lg">{t("noLogsTitle")}</h3>
 							<p className="text-muted-foreground">
-								No webhook delivery logs found for this webhook.
+								{t("noLogsDescription")}
 							</p>
 						</div>
 					)}
@@ -637,7 +643,7 @@ export function WebhookLogDialog({
 						<DialogContent className="max-h-[80vh] w-full max-w-3xl overflow-hidden">
 							<DialogHeader>
 								<DialogTitle className="flex items-center gap-2">
-									Webhook Payload
+									{t("payloadTitle")}
 								</DialogTitle>
 							</DialogHeader>
 							<ScrollArea className="h-[60vh]">

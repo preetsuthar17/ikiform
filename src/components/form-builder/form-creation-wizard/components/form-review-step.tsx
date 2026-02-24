@@ -1,4 +1,5 @@
 import { Edit3, FileText, Layers } from "lucide-react";
+import { useTranslations } from "next-intl";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -27,6 +28,7 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
 	configuration,
 	onEditStep,
 }) => {
+	const t = useTranslations("product.formBuilder.creation.review");
 	const isMultiStep = configuration.type === "multi";
 	const [showPreview, setShowPreview] = React.useState(false);
 
@@ -48,22 +50,22 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
 								<FileText className="size-5 text-primary" />
 							)}
 							<div>
-								<CardTitle className="text-base">Form Type</CardTitle>
+								<CardTitle className="text-base">{t("formType")}</CardTitle>
 								<CardDescription>
-									{isMultiStep ? "Multi-Step Form" : "Single Page Form"}
+									{isMultiStep ? t("multiStepForm") : t("singlePageForm")}
 								</CardDescription>
 							</div>
 						</div>
 						<CardAction>
 							<div className="flex items-center gap-2">
 								<Badge variant="outline">
-									{isMultiStep ? "Multi-Step" : "Single Page"}
+									{isMultiStep ? t("multiStep") : t("singlePage")}
 								</Badge>
 								<Button
-									aria-label="Edit form type"
+									aria-label={t("editFormType")}
 									onClick={() => onEditStep("type")}
 									size={"icon"}
-									title="Edit form type"
+									title={t("editFormType")}
 									variant={"secondary"}
 								>
 									<Edit3 className="size-4 text-muted-foreground hover:text-foreground" />
@@ -77,14 +79,14 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
 					<CardHeader className="[.border-b]:border-border">
 						<div className="mb-0.5 flex items-center gap-2">
 							<FileText className="size-5 text-primary" />
-							<CardTitle className="text-base">Form Configuration</CardTitle>
+							<CardTitle className="text-base">{t("formConfiguration")}</CardTitle>
 						</div>
 						<CardAction>
 							<Button
-								aria-label="Edit form configuration"
+								aria-label={t("editFormConfiguration")}
 								onClick={() => onEditStep("configure")}
 								size={"icon"}
-								title="Edit form configuration"
+								title={t("editFormConfiguration")}
 								variant={"secondary"}
 							>
 								<Edit3 className="size-4 text-muted-foreground hover:text-foreground" />
@@ -94,14 +96,14 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
 					<CardContent>
 						<div className="flex flex-col gap-3">
 							<div>
-								<p className="font-medium text-sm">Internal Title</p>
+								<p className="font-medium text-sm">{t("internalTitle")}</p>
 								<p className="text-muted-foreground text-sm">
 									{configuration.title || ""}
 								</p>
 							</div>
 							{configuration.publicTitle && (
 								<div>
-									<p className="font-medium text-sm">Public Title</p>
+									<p className="font-medium text-sm">{t("publicTitle")}</p>
 									<p className="text-muted-foreground text-sm">
 										{configuration.publicTitle}
 									</p>
@@ -109,7 +111,7 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
 							)}
 							{configuration.description && (
 								<div>
-									<p className="font-medium text-sm">Description</p>
+									<p className="font-medium text-sm">{t("description")}</p>
 									<p className="text-muted-foreground text-sm">
 										{configuration.description}
 									</p>
@@ -123,8 +125,8 @@ export const FormReviewStep: React.FC<FormReviewStepProps> = ({
 			{showPreview && (
 				<Card className="shadow-none">
 					<CardHeader className="[.border-b]:border-border">
-						<CardTitle className="text-base">Preview</CardTitle>
-						<CardDescription>Snapshot of your form.</CardDescription>
+						<CardTitle className="text-base">{t("preview")}</CardTitle>
+						<CardDescription>{t("previewDescription")}</CardDescription>
 					</CardHeader>
 					<CardContent>
 						<div className="overflow-hidden rounded-2xl border">

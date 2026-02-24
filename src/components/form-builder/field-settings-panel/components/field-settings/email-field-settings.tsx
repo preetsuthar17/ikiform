@@ -2,22 +2,25 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { useTranslations } from "next-intl";
 import type { FieldSettingsProps } from "./types";
 
 export function EmailFieldSettings({
 	field,
 	onUpdateSettings,
 }: FieldSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.email");
+
 	return (
 		<Card className="flex flex-col gap-4 rounded-2xl bg-background p-4">
-			<h3 className="font-medium text-card-foreground">Email Field Settings</h3>
+			<h3 className="font-medium text-card-foreground">{t("title")}</h3>
 			<div className="flex flex-col gap-4">
 				<div className="flex flex-col gap-2">
 					<Label
 						className="text-card-foreground"
 						htmlFor="email-allowed-domains"
 					>
-						Allowed Domains (comma-separated)
+						{t("allowedDomains")}
 					</Label>
 					<Input
 						id="email-allowed-domains"
@@ -31,7 +34,7 @@ export function EmailFieldSettings({
 								},
 							})
 						}
-						placeholder="gmail.com, company.com"
+						placeholder={t("allowedDomainsPlaceholder")}
 						type="text"
 						value={
 							field.settings?.emailValidation?.allowedDomains?.join(", ") || ""
@@ -43,7 +46,7 @@ export function EmailFieldSettings({
 						className="text-card-foreground"
 						htmlFor="email-blocked-domains"
 					>
-						Blocked Domains (comma-separated)
+						{t("blockedDomains")}
 					</Label>
 					<Input
 						id="email-blocked-domains"
@@ -57,7 +60,7 @@ export function EmailFieldSettings({
 								},
 							})
 						}
-						placeholder="tempmail.com, spam.com"
+						placeholder={t("blockedDomainsPlaceholder")}
 						type="text"
 						value={
 							field.settings?.emailValidation?.blockedDomains?.join(", ") || ""
@@ -78,7 +81,7 @@ export function EmailFieldSettings({
 						}
 					/>
 					<Label className="text-card-foreground" htmlFor="email-business-only">
-						Require business email only
+						{t("requireBusinessEmail")}
 					</Label>
 				</div>
 				<div className="flex flex-col gap-2">
@@ -86,7 +89,7 @@ export function EmailFieldSettings({
 						className="text-card-foreground"
 						htmlFor="email-custom-message"
 					>
-						Custom Validation Message
+						{t("customValidationMessage")}
 					</Label>
 					<Input
 						id="email-custom-message"
@@ -98,7 +101,7 @@ export function EmailFieldSettings({
 								},
 							})
 						}
-						placeholder="Please enter a valid email address"
+						placeholder={t("customValidationPlaceholder")}
 						type="text"
 						value={
 							field.settings?.emailValidation?.customValidationMessage || ""

@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -101,6 +102,9 @@ const FormDetailPage = async function FormDetailPage({
 }: {
 	params: Promise<{ formId: string }>;
 }) {
+	const t = await getTranslations("dashboard.admin.formDetails");
+	const locale = await getLocale();
+	const dateLocale = locale === "es" ? "es-ES" : "en-US";
 	const { formId } = await params;
 
 	console.log("FormDetailPage formId:", formId);
@@ -117,20 +121,20 @@ const FormDetailPage = async function FormDetailPage({
 		console.error("No formId provided");
 		return (
 			<main
-				aria-label="Invalid form ID error"
+				aria-label={t("invalidFormId.aria")}
 				className="mx-auto w-full max-w-7xl p-6"
 			>
 				<Card className="p-4 shadow-none md:p-6">
 					<CardContent className="p-0">
 						<div className="text-center">
-							<h1 className="font-bold text-2xl">Invalid Form ID</h1>
+							<h1 className="font-bold text-2xl">{t("invalidFormId.title")}</h1>
 							<p className="mt-2 text-muted-foreground">
-								No form ID provided in the URL.
+								{t("invalidFormId.description")}
 							</p>
 							<Link href="/admin">
-								<Button aria-label="Return to admin dashboard" className="mt-4">
+								<Button aria-label={t("backToAdminAria")} className="mt-4">
 									<ArrowLeft aria-hidden="true" className="size-4" />
-									Back to Admin
+									{t("backToAdmin")}
 								</Button>
 							</Link>
 						</div>
@@ -151,20 +155,20 @@ const FormDetailPage = async function FormDetailPage({
 	if (!form) {
 		return (
 			<main
-				aria-label="Form not found error"
+				aria-label={t("notFound.aria")}
 				className="mx-auto w-full max-w-7xl p-6"
 			>
 				<Card className="p-4 shadow-none md:p-6">
 					<CardContent className="p-0">
 						<div className="text-center">
-							<h1 className="font-bold text-2xl">Form Not Found</h1>
+							<h1 className="font-bold text-2xl">{t("notFound.title")}</h1>
 							<p className="mt-2 text-muted-foreground">
-								The form you're looking for doesn't exist.
+								{t("notFound.description")}
 							</p>
 							<Link href="/admin">
-								<Button aria-label="Return to admin dashboard" className="mt-4">
+								<Button aria-label={t("backToAdminAria")} className="mt-4">
 									<ArrowLeft aria-hidden="true" className="size-4" />
-									Back to Admin
+									{t("backToAdmin")}
 								</Button>
 							</Link>
 						</div>
@@ -176,7 +180,7 @@ const FormDetailPage = async function FormDetailPage({
 
 	return (
 		<main
-			aria-label="Form details page"
+			aria-label={t("pageAria")}
 			className="mx-auto flex w-full max-w-7xl flex-col gap-6 p-6"
 		>
 			{}
@@ -184,18 +188,18 @@ const FormDetailPage = async function FormDetailPage({
 				<div className="flex flex-col items-start gap-4">
 					<Link href="/admin">
 						<Button
-							aria-label="Return to admin dashboard"
+							aria-label={t("backToAdminAria")}
 							size="sm"
 							variant="outline"
 						>
 							<ArrowLeft aria-hidden="true" className="size-4" />
-							Back to Admin
+							{t("backToAdmin")}
 						</Button>
 					</Link>
 					<div>
 						<h1 className="font-bold text-3xl">{form.title}</h1>
 						<p className="text-muted-foreground">
-							{form.description || "No description provided"}
+							{form.description || t("noDescription")}
 						</p>
 					</div>
 				</div>
@@ -207,12 +211,12 @@ const FormDetailPage = async function FormDetailPage({
 							target="_blank"
 						>
 							<Button
-								aria-label="View form in new tab"
+								aria-label={t("viewFormAria")}
 								size="sm"
 								variant="outline"
 							>
 								<ExternalLink aria-hidden="true" className="size-4" />
-								View Form
+								{t("viewForm")}
 							</Button>
 						</Link>
 					)}
@@ -221,7 +225,7 @@ const FormDetailPage = async function FormDetailPage({
 
 			{}
 			<section
-				aria-label="Form statistics"
+				aria-label={t("statistics.aria")}
 				className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4"
 			>
 				<Card className="p-4 shadow-none md:p-6">
@@ -232,12 +236,18 @@ const FormDetailPage = async function FormDetailPage({
 								className="size-5 text-muted-foreground"
 							/>
 							<div>
-								<p className="font-medium text-sm">Status</p>
+								<p className="font-medium text-sm">{t("statistics.status")}</p>
 								<Badge
-									aria-label={`Form status: ${form.is_published ? "Published" : "Draft"}`}
+									aria-label={t("statistics.formStatusAria", {
+										status: form.is_published
+											? t("badges.published")
+											: t("badges.draft"),
+									})}
 									variant={form.is_published ? "default" : "secondary"}
 								>
-									{form.is_published ? "Published" : "Draft"}
+									{form.is_published
+										? t("badges.published")
+										: t("badges.draft")}
 								</Badge>
 							</div>
 						</div>
@@ -252,9 +262,13 @@ const FormDetailPage = async function FormDetailPage({
 								className="size-5 text-muted-foreground"
 							/>
 							<div>
-								<p className="font-medium text-sm">Submissions</p>
+								<p className="font-medium text-sm">
+									{t("statistics.submissions")}
+								</p>
 								<p
-									aria-label={`${submissions.length} submissions`}
+									aria-label={t("statistics.submissionsCountAria", {
+										count: submissions.length,
+									})}
 									className="font-bold text-2xl"
 								>
 									{submissions.length}
@@ -272,12 +286,14 @@ const FormDetailPage = async function FormDetailPage({
 								className="size-5 text-muted-foreground"
 							/>
 							<div>
-								<p className="font-medium text-sm">Created</p>
+								<p className="font-medium text-sm">{t("statistics.created")}</p>
 								<p
-									aria-label={`Created on ${new Date(form.created_at).toLocaleDateString()}`}
+									aria-label={t("statistics.createdOnAria", {
+										date: new Date(form.created_at).toLocaleDateString(dateLocale),
+									})}
 									className="text-sm"
 								>
-									{new Date(form.created_at).toLocaleDateString()}
+									{new Date(form.created_at).toLocaleDateString(dateLocale)}
 								</p>
 							</div>
 						</div>
@@ -292,12 +308,20 @@ const FormDetailPage = async function FormDetailPage({
 								className="size-5 text-muted-foreground"
 							/>
 							<div>
-								<p className="font-medium text-sm">API Status</p>
+								<p className="font-medium text-sm">
+									{t("statistics.apiStatus")}
+								</p>
 								<Badge
-									aria-label={`API status: ${form.api_enabled ? "Enabled" : "Disabled"}`}
+									aria-label={t("statistics.apiStatusAria", {
+										status: form.api_enabled
+											? t("badges.enabled")
+											: t("badges.disabled"),
+									})}
 									variant={form.api_enabled ? "default" : "secondary"}
 								>
-									{form.api_enabled ? "Enabled" : "Disabled"}
+									{form.api_enabled
+										? t("badges.enabled")
+										: t("badges.disabled")}
 								</Badge>
 							</div>
 						</div>
@@ -310,17 +334,17 @@ const FormDetailPage = async function FormDetailPage({
 				<CardHeader className="p-0">
 					<CardTitle className="flex items-center gap-2">
 						<FileText aria-hidden="true" className="size-5" />
-						Form Details
+						{t("details.title")}
 					</CardTitle>
 				</CardHeader>
 				<CardContent className="p-0">
 					<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
 						<div>
 							<label className="font-medium text-muted-foreground text-sm">
-								Form ID
+								{t("details.formId")}
 							</label>
 							<p
-								aria-label={`Form ID: ${form.id}`}
+								aria-label={t("details.formIdAria", { id: form.id })}
 								className="font-mono text-sm"
 							>
 								{form.id}
@@ -328,28 +352,32 @@ const FormDetailPage = async function FormDetailPage({
 						</div>
 						<div>
 							<label className="font-medium text-muted-foreground text-sm">
-								Owner
+								{t("details.owner")}
 							</label>
 							<p className="text-sm">
 								{formOwner ? (
 									<Link
-										aria-label={`View owner details for ${formOwner.name}`}
+										aria-label={t("details.viewOwnerAria", {
+											name: formOwner.name,
+										})}
 										className="text-primary hover:underline"
 										href={`/admin/users/${formOwner.uid}`}
 									>
 										{formOwner.name} ({formOwner.email})
 									</Link>
 								) : (
-									"Unknown"
+									t("details.unknown")
 								)}
 							</p>
 						</div>
 						<div>
 							<label className="font-medium text-muted-foreground text-sm">
-								Slug
+								{t("details.slug")}
 							</label>
 							<p
-								aria-label={`Form slug: ${form.slug || "Not set"}`}
+								aria-label={t("details.slugAria", {
+									slug: form.slug || t("details.notSet"),
+								})}
 								className="text-sm"
 							>
 								{form.slug || "-"}
@@ -357,22 +385,24 @@ const FormDetailPage = async function FormDetailPage({
 						</div>
 						<div>
 							<label className="font-medium text-muted-foreground text-sm">
-								Last Updated
+								{t("details.lastUpdated")}
 							</label>
 							<p
-								aria-label={`Last updated: ${new Date(form.updated_at).toLocaleDateString()}`}
+								aria-label={t("details.lastUpdatedAria", {
+									date: new Date(form.updated_at).toLocaleDateString(dateLocale),
+								})}
 								className="text-sm"
 							>
-								{new Date(form.updated_at).toLocaleDateString()}
+								{new Date(form.updated_at).toLocaleDateString(dateLocale)}
 							</p>
 						</div>
 						{form.api_key && (
 							<div className="md:col-span-2">
 								<label className="font-medium text-muted-foreground text-sm">
-									API Key
+									{t("details.apiKey")}
 								</label>
 								<p
-									aria-label={`API Key: ${form.api_key}`}
+									aria-label={t("details.apiKeyAria", { key: form.api_key })}
 									className="mt-1 rounded bg-muted px-2 py-1 font-mono text-xs"
 								>
 									{form.api_key}
@@ -388,12 +418,12 @@ const FormDetailPage = async function FormDetailPage({
 				<CardHeader className="p-0">
 					<CardTitle className="flex items-center gap-2">
 						<BarChart3 aria-hidden="true" className="size-5" />
-						Form Schema
+						{t("schema.title")}
 					</CardTitle>
 				</CardHeader>
 				<CardContent className="p-0">
 					<pre
-						aria-label="Form schema JSON"
+						aria-label={t("schema.aria")}
 						className="overflow-x-auto rounded-md bg-muted p-4 font-mono text-xs"
 					>
 						{JSON.stringify(form.schema, null, 2)}
@@ -406,16 +436,16 @@ const FormDetailPage = async function FormDetailPage({
 				<CardHeader className="p-0">
 					<CardTitle className="flex items-center gap-2">
 						<Users aria-hidden="true" className="size-5" />
-						Form Submissions ({submissions.length})
+						{t("submissions.title", { count: submissions.length })}
 					</CardTitle>
 					<p className="text-muted-foreground text-sm">
-						All responses submitted to this form
+						{t("submissions.description")}
 					</p>
 				</CardHeader>
 				<CardContent className="p-0">
 					{submissions.length === 0 ? (
 						<div
-							aria-label="No form submissions"
+							aria-label={t("submissions.emptyAria")}
 							className="py-8 text-center text-muted-foreground"
 							role="status"
 						>
@@ -423,17 +453,19 @@ const FormDetailPage = async function FormDetailPage({
 								aria-hidden="true"
 								className="mx-auto mb-4 size-12 opacity-50"
 							/>
-							<p>No submissions yet.</p>
+							<p>{t("submissions.empty")}</p>
 						</div>
 					) : (
 						<div
-							aria-label="Form submissions list"
+							aria-label={t("submissions.listAria")}
 							className="flex flex-col gap-4"
 							role="region"
 						>
 							{submissions.map((submission, index) => (
 								<Card
-									aria-label={`Submission ${submissions.length - index}`}
+									aria-label={t("submissions.itemAria", {
+										number: submissions.length - index,
+									})}
 									className="p-4 shadow-none md:p-6"
 									key={submission.id}
 									role="article"
@@ -441,21 +473,31 @@ const FormDetailPage = async function FormDetailPage({
 									<div className="mb-3 flex items-center justify-between">
 										<div className="flex items-center gap-2">
 											<span className="font-medium text-sm">
-												Submission #{submissions.length - index}
+												{t("submissions.itemLabel", {
+													number: submissions.length - index,
+												})}
 											</span>
 											<Badge
-												aria-label={`Submitted on ${new Date(submission.submitted_at).toLocaleString()}`}
+												aria-label={t("submissions.submittedOnAria", {
+													date: new Date(
+														submission.submitted_at
+													).toLocaleString(dateLocale),
+												})}
 												variant="outline"
 											>
-												{new Date(submission.submitted_at).toLocaleString()}
+												{new Date(submission.submitted_at).toLocaleString(
+													dateLocale
+												)}
 											</Badge>
 										</div>
 										{submission.ip_address && (
 											<span
-												aria-label={`IP address: ${submission.ip_address}`}
+												aria-label={t("submissions.ipAria", {
+													ip: submission.ip_address,
+												})}
 												className="text-muted-foreground text-xs"
 											>
-												IP: {submission.ip_address}
+												{t("submissions.ipLabel", { ip: submission.ip_address })}
 											</span>
 										)}
 									</div>
@@ -467,13 +509,19 @@ const FormDetailPage = async function FormDetailPage({
 													key={key}
 												>
 													<div
-														aria-label={`Field: ${key}`}
+														aria-label={t("submissions.fieldAria", { key })}
 														className="font-medium text-sm"
 													>
 														{key}:
 													</div>
 													<div
-														aria-label={`Value for ${key}: ${typeof value === "object" ? JSON.stringify(value) : String(value)}`}
+														aria-label={t("submissions.valueAria", {
+															key,
+															value:
+																typeof value === "object"
+																	? JSON.stringify(value)
+																	: String(value),
+														})}
 														className="text-sm md:col-span-2"
 													>
 														{typeof value === "object"

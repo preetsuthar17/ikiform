@@ -1,4 +1,5 @@
 import { Edit, Eye, Plus } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { memo, useMemo } from "react";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -8,6 +9,8 @@ export const FormStats = memo(function FormStats({
 	forms,
 	loading,
 }: FormStatsProps) {
+	const t = useTranslations("dashboard.formsManagement.stats");
+
 	const skeletonCards = useMemo(
 		() =>
 			Array.from({ length: 3 }).map((_, i) => (
@@ -38,33 +41,33 @@ export const FormStats = memo(function FormStats({
 
 		return [
 			{
-				label: "Total Forms",
+				label: t("totalForms"),
 				value: totalForms,
 				icon: Plus,
 				color: "text-primary",
 				bgColor: "bg-primary/10",
 			},
 			{
-				label: "Published",
+				label: t("published"),
 				value: publishedForms,
 				icon: Eye,
 				color: "text-green-600",
 				bgColor: "bg-green-600/10",
 			},
 			{
-				label: "Drafts",
+				label: t("drafts"),
 				value: draftForms,
 				icon: Edit,
 				color: "text-yellow-600",
 				bgColor: "bg-yellow-600/10",
 			},
 		];
-	}, [forms]);
+	}, [forms, t]);
 
 	if (loading) {
 		return (
 			<div
-				aria-label="Loading form statistics"
+				aria-label={t("loadingAria")}
 				className="grid grid-cols-1 gap-4"
 				role="status"
 			>
@@ -77,7 +80,7 @@ export const FormStats = memo(function FormStats({
 
 	return (
 		<div
-			aria-label="Form statistics"
+			aria-label={t("aria")}
 			className="grid grid-cols-1 gap-4"
 			role="region"
 		>

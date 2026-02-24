@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,12 +20,16 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 
-export const metadata: Metadata = {
-	title: "Embed Test - IkiForm",
-	description: "Test page to demonstrate form embedding capabilities",
-};
+export async function generateMetadata(): Promise<Metadata> {
+	const t = await getTranslations("product.embed.testPage.metadata");
+	return {
+		title: t("title"),
+		description: t("description"),
+	};
+}
 
-export default function EmbedTestPage() {
+export default async function EmbedTestPage() {
+	const t = await getTranslations("product.embed.testPage");
 	const sampleFormId = "182fa915-7656-4489-bf51-5145984d4094";
 
 	return (
@@ -36,20 +41,19 @@ export default function EmbedTestPage() {
 							<Code2 className="size-8 text-accent-foreground" />
 						</div>
 						<h1 className="mb-4 font-semibold text-3xl text-foreground">
-							Form Embedding Test Page
+							{t("title")}
 						</h1>
 						<p className="mx-auto mb-6 max-w-3xl text-muted-foreground">
-							This page demonstrates how forms can be embedded using different
-							configurations. Visit{" "}
+							{t("descriptionPrefix")}{" "}
 							<code className="rounded-xl bg-muted px-2 py-1 text-foreground">
 								/embed?formid=YOUR_FORM_ID
 							</code>{" "}
-							to customize your own embed.
+							{t("descriptionSuffix")}
 						</p>
 						<Button asChild className="gap-2" variant="default">
 							<Link href={`/embed?formid=${sampleFormId}`}>
 								<Settings className="size-4" />
-								Try Embed Customizer
+								{t("tryCustomizer")}
 								<ExternalLink className="size-4" />
 							</Link>
 						</Button>
@@ -63,13 +67,13 @@ export default function EmbedTestPage() {
 									<div>
 										<CardTitle className="flex items-center gap-2">
 											<Monitor className="size-5" />
-											Standard Embed
+											{t("cards.standard.title")}
 										</CardTitle>
 										<CardDescription>
-											600px height - perfect for desktop viewing
+											{t("cards.standard.description")}
 										</CardDescription>
 									</div>
-									<Badge variant="outline">Responsive</Badge>
+									<Badge variant="outline">{t("cards.standard.badge")}</Badge>
 								</div>
 							</CardHeader>
 							<CardContent>
@@ -84,7 +88,7 @@ export default function EmbedTestPage() {
 											border: "1px solid hsl(var(--border))",
 											borderRadius: "8px",
 										}}
-										title="Standard Form Embed"
+										title={t("cards.standard.iframeTitle")}
 										width="100%"
 									/>
 								</div>
@@ -105,13 +109,13 @@ export default function EmbedTestPage() {
 									<div>
 										<CardTitle className="flex items-center gap-2">
 											<Tablet className="size-5" />
-											Compact Embed
+											{t("cards.compact.title")}
 										</CardTitle>
 										<CardDescription>
-											400px height - ideal for sidebars and smaller spaces
+											{t("cards.compact.description")}
 										</CardDescription>
 									</div>
-									<Badge variant="secondary">Minimal</Badge>
+									<Badge variant="secondary">{t("cards.compact.badge")}</Badge>
 								</div>
 							</CardHeader>
 							<CardContent>
@@ -123,7 +127,7 @@ export default function EmbedTestPage() {
 										sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
 										src={`/forms/${sampleFormId}`}
 										style={{ border: "none", borderRadius: "12px" }}
-										title="Compact Form Embed"
+										title={t("cards.compact.iframeTitle")}
 										width="100%"
 									/>
 								</div>
@@ -144,13 +148,13 @@ export default function EmbedTestPage() {
 									<div>
 										<CardTitle className="flex items-center gap-2">
 											<Smartphone className="size-5" />
-											Fixed Width Embed
+											{t("cards.fixed.title")}
 										</CardTitle>
 										<CardDescription>
-											800px width, centered - perfect for specific layouts
+											{t("cards.fixed.description")}
 										</CardDescription>
 									</div>
-									<Badge variant="outline">Custom Style</Badge>
+									<Badge variant="outline">{t("cards.fixed.badge")}</Badge>
 								</div>
 							</CardHeader>
 							<CardContent>
@@ -166,7 +170,7 @@ export default function EmbedTestPage() {
 											borderRadius: "16px",
 											backgroundColor: "hsl(var(--background))",
 										}}
-										title="Fixed Width Form Embed"
+										title={t("cards.fixed.iframeTitle")}
 										width="800px"
 									/>
 								</div>
@@ -185,10 +189,10 @@ export default function EmbedTestPage() {
 							<CardHeader>
 								<CardTitle className="flex items-center gap-2">
 									<Code2 className="size-5" />
-									React Component Example
+									{t("cards.react.title")}
 								</CardTitle>
 								<CardDescription>
-									TypeScript React component with proper typing
+									{t("cards.react.description")}
 								</CardDescription>
 							</CardHeader>
 							<CardContent>
@@ -209,7 +213,7 @@ export default function EmbeddedForm() {
     <iframe
       src="/forms/${sampleFormId}"
       style={iframeStyle}
-      title="Form"
+      title="${t("cards.react.codeIframeTitle")}"
       loading="lazy"
       allow="clipboard-write; camera; microphone"
       sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
@@ -228,10 +232,10 @@ export default function EmbeddedForm() {
 							<CardHeader>
 								<CardTitle className="flex items-center gap-2">
 									<Eye className="size-5" />
-									How to Use the Embed Feature
+									{t("guide.title")}
 								</CardTitle>
 								<CardDescription>
-									Step-by-step guide to embedding your forms
+									{t("guide.description")}
 								</CardDescription>
 							</CardHeader>
 							<CardContent>
@@ -240,47 +244,51 @@ export default function EmbeddedForm() {
 										<div className="mb-2 flex items-center gap-2">
 											<Badge variant="outline">1</Badge>
 											<h3 className="font-semibold">
-												Access the Embed Customizer
+												{t("guide.steps.step1.title")}
 											</h3>
 										</div>
 										<p className="text-muted-foreground">
-											Go to{" "}
+											{t("guide.steps.step1.prefix")}{" "}
 											<code className="rounded-xl bg-muted px-2 py-1 text-foreground">
 												/embed?formid=YOUR_FORM_ID
 											</code>{" "}
-											or click the embed button in your form dashboard.
+											{t("guide.steps.step1.suffix")}
 										</p>
 									</div>
 									<div>
 										<div className="mb-2 flex items-center gap-2">
 											<Badge variant="outline">2</Badge>
-											<h3 className="font-semibold">Customize Your Embed</h3>
+											<h3 className="font-semibold">
+												{t("guide.steps.step2.title")}
+											</h3>
 										</div>
 										<ul className="flex flex-col gap-1 text-muted-foreground">
-											<li>• Adjust width and height dimensions</li>
-											<li>• Choose theme (light, dark, auto)</li>
-											<li>• Configure borders and styling</li>
-											<li>• Set loading behavior</li>
+											<li>• {t("guide.steps.step2.item1")}</li>
+											<li>• {t("guide.steps.step2.item2")}</li>
+											<li>• {t("guide.steps.step2.item3")}</li>
+											<li>• {t("guide.steps.step2.item4")}</li>
 										</ul>
 									</div>
 									<div>
 										<div className="mb-2 flex items-center gap-2">
 											<Badge variant="outline">3</Badge>
-											<h3 className="font-semibold">Get Your Code</h3>
+											<h3 className="font-semibold">
+												{t("guide.steps.step3.title")}
+											</h3>
 										</div>
 										<p className="text-muted-foreground">
-											Copy the generated code for HTML, React, Next.js, Vue, or
-											WordPress and paste it into your website.
+											{t("guide.steps.step3.description")}
 										</p>
 									</div>
 									<div>
 										<div className="mb-2 flex items-center gap-2">
 											<Badge variant="outline">4</Badge>
-											<h3 className="font-semibold">Dashboard Integration</h3>
+											<h3 className="font-semibold">
+												{t("guide.steps.step4.title")}
+											</h3>
 										</div>
 										<p className="text-muted-foreground">
-											Access embed options directly from your form dashboard
-											using the embed button in the form actions.
+											{t("guide.steps.step4.description")}
 										</p>
 									</div>
 								</div>

@@ -1,4 +1,5 @@
 import { ArrowRight, Plus, Sparkles, Upload, type LucideIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { memo, useCallback, useState } from "react";
 import { Card, Separator } from "@/components/ui";
 import {
@@ -110,6 +111,7 @@ export const FormsHeader = memo(function FormsHeader({
 	onCreateManually,
 	onImportSecure,
 }: FormsHeaderProps) {
+	const t = useTranslations("dashboard.formsManagement");
 	const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
 
 	const handleCreateWithAI = useCallback(() => {
@@ -131,60 +133,61 @@ export const FormsHeader = memo(function FormsHeader({
 		<Card className="flex flex-col justify-between gap-4 p-6 shadow-none sm:flex-row sm:items-center md:p-8">
 			<div className="flex flex-col gap-1">
 				<h2 className="font-semibold text-2xl text-foreground tracking-tight">
-					Your Forms
+					{t("header.title")}
 				</h2>
 				<p className="text-muted-foreground">
-					Create, manage, and analyze your forms with ease
+					{t("header.subtitle")}
 				</p>
 			</div>
 
 			<Dialog onOpenChange={setIsCreateDialogOpen} open={isCreateDialogOpen}>
 				<DialogTrigger asChild>
 					<Button
-						aria-label="Create new form"
+						aria-label={t("header.createNewForm")}
 						className="flex h-10 w-fit items-center gap-2 whitespace-nowrap font-medium"
 						variant="default"
 					>
 						<Plus aria-hidden="true" className="size-5" />
-						Create New Form
+						{t("header.createNewForm")}
 					</Button>
 				</DialogTrigger>
 
 				<DialogContent className="max-h-[90vh] overflow-hidden sm:p-6 p-4 sm:gap-6 gap-4 sm:max-w-2xl">
 					<DialogHeader className="shrink-0">
-						<DialogTitle className={"text-xl font-mediumt tracking-tight"}>Create a New Form</DialogTitle>
+						<DialogTitle className={"text-xl font-mediumt tracking-tight"}>
+							{t("header.createDialogTitle")}
+						</DialogTitle>
 						<DialogDescription>
-							Choose how you want to start. You can generate with AI, build
-							manually, or import an encrypted file.
+							{t("header.createDialogDescription")}
 						</DialogDescription>
           </DialogHeader>
 
 					<div className="flex flex-col gap-3">
 						<CreateOptionCard
-							badge="Most Recommended"
-							ctaLabel="Start with AI"
-							description="Describe your form and let Kiko AI generate a complete first draft with fields, logic, and structure."
+							badge={t("createOptions.aiBadge")}
+							ctaLabel={t("createOptions.aiCta")}
+							description={t("createOptions.aiDescription")}
 							featured
 							icon={Sparkles}
 							onClick={handleCreateWithAI}
-							title="Use Kiko AI"
+							title={t("createOptions.aiTitle")}
 						/>
 
 						<div className="grid gap-3 sm:grid-cols-2">
 							<CreateOptionCard
-								ctaLabel="Build manually"
-								description="Start from a blank form and configure fields manually."
+								ctaLabel={t("createOptions.manualCta")}
+								description={t("createOptions.manualDescription")}
 								icon={Plus}
 								onClick={handleCreateManually}
-								title="Create Manually"
+								title={t("createOptions.manualTitle")}
 							/>
 							{onImportSecure && (
 								<CreateOptionCard
-									ctaLabel="Import file"
-									description="Import a passphrase-protected .ikiform file into a new draft form."
+									ctaLabel={t("createOptions.importCta")}
+									description={t("createOptions.importDescription")}
 									icon={Upload}
 									onClick={handleImportFromFile}
-									title="Import from File"
+									title={t("createOptions.importTitle")}
 								/>
 							)}
 						</div>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -38,6 +39,8 @@ export function BrandingSection({
 	formId,
 	schema,
 }: BrandingSectionProps) {
+	const t = useTranslations("product.formBuilder.formSettings.brandingSection");
+	const tCommon = useTranslations("product.formBuilder.formSettings.common");
 	const { user } = useAuth();
 	const socialMedia = localSettings.branding?.socialMedia || {};
 	const showIkiformBranding =
@@ -100,11 +103,11 @@ export function BrandingSection({
 
 	const saveBranding = async () => {
 		if (!formId) {
-			toast.error("Form ID is required to save settings");
+			toast.error(tCommon("formIdRequiredToSaveSettings"));
 			return;
 		}
 		if (!user) {
-			toast.error("User authentication required");
+			toast.error(t("authRequired"));
 			return;
 		}
 		setSaving(true);
@@ -130,11 +133,11 @@ export function BrandingSection({
 			await formsDb.updateForm(formId, user.id, { schema: newSchema as any });
 			setSaved(true);
 			setHasChanges(false);
-			toast.success("Branding settings saved successfully");
+			toast.success(t("saved"));
 			setTimeout(() => setSaved(false), 2000);
 		} catch (e) {
 			console.error(e);
-			toast.error("Failed to save branding settings");
+			toast.error(t("saveFailed"));
 		} finally {
 			setSaving(false);
 		}
@@ -146,13 +149,13 @@ export function BrandingSection({
 			announcement.setAttribute("aria-live", "polite");
 			announcement.setAttribute("aria-atomic", "true");
 			announcement.className = "sr-only";
-			announcement.textContent = "Branding settings saved successfully";
+			announcement.textContent = t("saved");
 			document.body.appendChild(announcement);
 			setTimeout(() => {
 				document.body.removeChild(announcement);
 			}, 1000);
 		}
-	}, [saved]);
+	}, [saved, t]);
 
 	return (
 		<Card
@@ -178,16 +181,16 @@ export function BrandingSection({
 							className="flex items-center gap-2 text-lg tracking-tight"
 							id="branding-title"
 						>
-							Branding{" "}
+							{t("title")}{" "}
 							{hasChanges && (
 								<Badge className="gap-2" variant="secondary">
 									<div className="size-2 rounded-full bg-orange-500" />
-									Unsaved changes
+									{tCommon("unsavedChanges")}
 								</Badge>
 							)}
 						</CardTitle>
 						<CardDescription id="branding-description">
-							Manage Ikiform branding and social media links
+							{t("description")}
 						</CardDescription>
 					</div>
 				</div>
@@ -199,13 +202,13 @@ export function BrandingSection({
 							className="font-medium text-sm"
 							htmlFor="ikiform-branding-toggle"
 						>
-							Show "Powered by Ikiform"
+							{t("showPoweredByLabel")}
 						</Label>
 						<p
 							className="text-muted-foreground text-xs"
 							id="ikiform-branding-description"
 						>
-							Display a small attribution in the footer
+							{t("showPoweredByDescription")}
 						</p>
 					</div>
 					<Switch
@@ -222,10 +225,10 @@ export function BrandingSection({
 							className="font-medium text-sm"
 							htmlFor="social-media-enabled"
 						>
-							Social Media Links
+							{t("socialMediaLabel")}
 						</Label>
 						<p className="text-muted-foreground text-xs">
-							Enable links to your social profiles on the form
+							{t("socialMediaDescription")}
 						</p>
 					</div>
 					<Switch
@@ -244,38 +247,38 @@ export function BrandingSection({
 								[
 									{
 										id: "linkedin",
-										label: "LinkedIn",
-										placeholder: "https://linkedin.com/in/username",
+										label: t("platforms.linkedin.label"),
+										placeholder: t("platforms.linkedin.placeholder"),
 									},
 									{
 										id: "twitter",
-										label: "X (Twitter)",
-										placeholder: "https://x.com/username",
+										label: t("platforms.twitter.label"),
+										placeholder: t("platforms.twitter.placeholder"),
 									},
 									{
 										id: "youtube",
-										label: "YouTube",
-										placeholder: "https://youtube.com/@channel",
+										label: t("platforms.youtube.label"),
+										placeholder: t("platforms.youtube.placeholder"),
 									},
 									{
 										id: "instagram",
-										label: "Instagram",
-										placeholder: "https://instagram.com/username",
+										label: t("platforms.instagram.label"),
+										placeholder: t("platforms.instagram.placeholder"),
 									},
 									{
 										id: "facebook",
-										label: "Facebook",
-										placeholder: "https://facebook.com/username",
+										label: t("platforms.facebook.label"),
+										placeholder: t("platforms.facebook.placeholder"),
 									},
 									{
 										id: "github",
-										label: "GitHub",
-										placeholder: "https://github.com/username",
+										label: t("platforms.github.label"),
+										placeholder: t("platforms.github.placeholder"),
 									},
 									{
 										id: "website",
-										label: "Website",
-										placeholder: "https://example.com",
+										label: t("platforms.website.label"),
+										placeholder: t("platforms.website.placeholder"),
 									},
 								] as const
 							).map(({ id, label, placeholder }) => (
@@ -304,7 +307,7 @@ export function BrandingSection({
 						<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
 							<div className="flex flex-col gap-2">
 								<Label className="font-medium text-sm" htmlFor="icon-size">
-									Icon Size
+									{t("iconSizeLabel")}
 								</Label>
 								<Select
 									onValueChange={(value) =>
@@ -316,15 +319,15 @@ export function BrandingSection({
 										<SelectValue />
 									</SelectTrigger>
 									<SelectContent className="shadow-xs">
-										<SelectItem value="sm">Small</SelectItem>
-										<SelectItem value="md">Medium</SelectItem>
-										<SelectItem value="lg">Large</SelectItem>
+										<SelectItem value="sm">{t("iconSizes.small")}</SelectItem>
+										<SelectItem value="md">{t("iconSizes.medium")}</SelectItem>
+										<SelectItem value="lg">{t("iconSizes.large")}</SelectItem>
 									</SelectContent>
 								</Select>
 							</div>
 							<div className="flex flex-col gap-2">
 								<Label className="font-medium text-sm" htmlFor="position">
-									Position
+									{t("positionLabel")}
 								</Label>
 								<Select
 									onValueChange={(value) =>
@@ -336,9 +339,9 @@ export function BrandingSection({
 										<SelectValue />
 									</SelectTrigger>
 									<SelectContent className="shadow-xs">
-										<SelectItem value="footer">Footer</SelectItem>
-										<SelectItem value="header">Header</SelectItem>
-										<SelectItem value="both">Both</SelectItem>
+										<SelectItem value="footer">{t("positions.footer")}</SelectItem>
+										<SelectItem value="header">{t("positions.header")}</SelectItem>
+										<SelectItem value="both">{t("positions.both")}</SelectItem>
 									</SelectContent>
 								</Select>
 							</div>
@@ -346,7 +349,7 @@ export function BrandingSection({
 
 						{socialMedia.showIcons !== false && (
 							<div className="rounded-lg border p-4">
-								<Label className="font-medium text-sm">Preview</Label>
+								<Label className="font-medium text-sm">{t("previewLabel")}</Label>
 								<SocialMediaIcons
 									className="justify-center"
 									iconSize={socialMedia.iconSize || "md"}
@@ -357,15 +360,14 @@ export function BrandingSection({
 					</>
 				) : (
 					<div className="rounded-lg bg-muted/30 p-4">
-						<p className="text-muted-foreground text-sm">
-							Enable social media links to display your social profiles on your
-							forms.
-						</p>
-					</div>
+							<p className="text-muted-foreground text-sm">
+								{t("disabledDescription")}
+							</p>
+						</div>
 				)}
 
 				<div
-					aria-label="Branding settings actions"
+					aria-label={t("actionsAria")}
 					className="flex items-center justify-between"
 					role="group"
 				>
@@ -377,7 +379,7 @@ export function BrandingSection({
 								size="sm"
 								variant="ghost"
 							>
-								Reset
+								{tCommon("reset")}
 							</Button>
 						)}
 					</div>
@@ -385,12 +387,12 @@ export function BrandingSection({
 						{saved && (
 							<div className="flex items-center gap-2 text-green-600 text-sm">
 								<div className="size-2 rounded-full bg-green-500" />
-								Saved
+								{tCommon("saved")}
 							</div>
 						)}
 						<Button
 							aria-describedby="branding-description"
-							aria-label="Save branding settings"
+							aria-label={t("saveAria")}
 							disabled={saving || !hasChanges}
 							loading={saving}
 							onClick={saveBranding}
@@ -398,10 +400,10 @@ export function BrandingSection({
 								if (e.key === "Enter" || e.key === " ") {
 									e.preventDefault();
 									saveBranding();
-								}
-							}}
+							}
+						}}
 						>
-							Save
+							{tCommon("save")}
 						</Button>
 					</div>
 				</div>

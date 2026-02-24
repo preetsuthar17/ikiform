@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,9 +17,11 @@ export function RadioFieldSettings({
 	field,
 	onUpdateSettings,
 }: FieldSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.radio");
+
 	return (
 		<Card className="flex flex-col gap-4 p-4 shadow-none">
-			<h3 className="font-medium text-card-foreground">Quiz Settings</h3>
+			<h3 className="font-medium text-card-foreground">{t("title")}</h3>
 
 			{}
 			<div className="flex items-center gap-2">
@@ -30,7 +33,7 @@ export function RadioFieldSettings({
 					}
 				/>
 				<Label className="text-card-foreground" htmlFor="quiz-field-enabled">
-					Enable as Quiz Question
+					{t("enableQuizQuestion")}
 				</Label>
 			</div>
 
@@ -41,7 +44,7 @@ export function RadioFieldSettings({
 					{}
 					<div className="flex flex-col gap-2">
 						<Label className="text-card-foreground" htmlFor="correct-answer">
-							Correct Answer
+							{t("correctAnswer")}
 						</Label>
 						<Select
 							onValueChange={(value) =>
@@ -54,7 +57,7 @@ export function RadioFieldSettings({
 							}
 						>
 							<SelectTrigger>
-								<SelectValue placeholder="Select the correct answer" />
+								<SelectValue placeholder={t("correctAnswerPlaceholder")} />
 							</SelectTrigger>
 							<SelectContent>
 								{(field.options || [])
@@ -83,7 +86,7 @@ export function RadioFieldSettings({
 					{}
 					<div className="flex flex-col gap-2">
 						<Label className="text-card-foreground" htmlFor="quiz-points">
-							Points for Correct Answer
+							{t("points")}
 						</Label>
 						<Input
 							id="quiz-points"
@@ -112,21 +115,21 @@ export function RadioFieldSettings({
 							className="text-card-foreground"
 							htmlFor="show-correct-answer"
 						>
-							Show correct answer after submission
+							{t("showCorrectAnswer")}
 						</Label>
 					</div>
 
 					{}
 					<div className="flex flex-col gap-2">
 						<Label className="text-card-foreground" htmlFor="quiz-explanation">
-							Explanation (Optional)
+							{t("explanation")}
 						</Label>
 						<Input
 							id="quiz-explanation"
 							onChange={(e) =>
 								onUpdateSettings({ explanation: e.target.value })
 							}
-							placeholder="Explain why this is the correct answer..."
+							placeholder={t("explanationPlaceholder")}
 							value={field.settings?.explanation || ""}
 						/>
 					</div>

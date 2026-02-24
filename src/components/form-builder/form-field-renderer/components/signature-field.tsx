@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import SignatureCanvas from "react-signature-canvas";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,7 @@ export function SignatureField({
 	onChange,
 	disabled,
 }: SignatureFieldProps) {
+	const t = useTranslations("product.formBuilder.fieldRenderer.signature");
 	const signatureRef = useRef<SignatureCanvas>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [canvasWidth, setCanvasWidth] = useState(400);
@@ -88,7 +90,7 @@ export function SignatureField({
 				/>
 				{!value && (
 					<div className="pointer-events-none absolute inset-0 flex items-center justify-center text-muted-foreground">
-						Draw your signature here
+						{t("drawHere")}
 					</div>
 				)}
 			</div>
@@ -100,15 +102,17 @@ export function SignatureField({
 					type="button"
 					variant="outline"
 				>
-					Clear
+					{t("clear")}
 				</Button>
 			</div>
 			{value && (
 				<div className="flex flex-col gap-2">
-					<span className="font-medium text-foreground text-sm">Preview</span>
+					<span className="font-medium text-foreground text-sm">
+						{t("preview")}
+					</span>
 					<div className="relative w-full overflow-hidden rounded-md border bg-background">
 						<Image
-							alt="Signature preview"
+							alt={t("previewAlt")}
 							className="max-h-full max-w-full object-contain"
 							height={CANVAS_HEIGHT}
 							src={value}

@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useTranslations } from "next-intl";
 import type { FieldSettingsProps } from "./types";
 
 export function TextFieldSettings({
@@ -8,17 +9,19 @@ export function TextFieldSettings({
 	onUpdateSettings,
 	onFieldUpdate,
 }: FieldSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.text");
+
 	return (
 		<Card className="gap-2 p-4 shadow-none">
 			<CardHeader className="p-0">
 				<CardTitle className="flex items-center gap-2 text-lg">
-					Text Field Settings
+					{t("title")}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 p-0">
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="text-max-length">
-						Maximum Length
+						{t("maxLength")}
 					</Label>
 					<Input
 						aria-describedby="text-max-length-help"
@@ -41,7 +44,7 @@ export function TextFieldSettings({
 								e.currentTarget.blur();
 							}
 						}}
-						placeholder="No limit"
+						placeholder={t("maxLengthPlaceholder")}
 						type="number"
 						value={field.validation?.maxLength || ""}
 					/>
@@ -49,12 +52,12 @@ export function TextFieldSettings({
 						className="text-muted-foreground text-xs"
 						id="text-max-length-help"
 					>
-						Maximum number of characters allowed (1-1000)
+						{t("maxLengthHelp")}
 					</p>
 				</div>
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="text-min-length">
-						Minimum Length
+						{t("minLength")}
 					</Label>
 					<Input
 						aria-describedby="text-min-length-help"
@@ -77,7 +80,7 @@ export function TextFieldSettings({
 								e.currentTarget.blur();
 							}
 						}}
-						placeholder="No minimum"
+						placeholder={t("minLengthPlaceholder")}
 						type="number"
 						value={field.validation?.minLength || ""}
 					/>
@@ -85,7 +88,7 @@ export function TextFieldSettings({
 						className="text-muted-foreground text-xs"
 						id="text-min-length-help"
 					>
-						Minimum number of characters required (0-1000)
+						{t("minLengthHelp")}
 					</p>
 				</div>
 			</CardContent>

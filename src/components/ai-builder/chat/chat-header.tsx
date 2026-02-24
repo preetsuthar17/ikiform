@@ -1,15 +1,18 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 export function ChatHeader() {
+	const t = useTranslations("product.aiBuilder.chatHeader");
+
 	return (
 		<div className="bg-card/50 backdrop-blur">
 			<div className="flex items-center justify-between gap-4 p-4">
 				<div className="flex items-center gap-3">
 					<Button
-						aria-label="Back to form builder"
+						aria-label={t("backToFormBuilder")}
 						asChild
 						size="icon"
 						variant="outline"
@@ -18,7 +21,7 @@ export function ChatHeader() {
 							<ArrowLeft aria-hidden className="size-4" />
 						</Link>
 					</Button>
-					<h1 className="font-semibold text-lg">Kiko AI</h1>
+					<h1 className="font-semibold text-lg">{t("title")}</h1>
 				</div>
 			</div>
 			<Separator />

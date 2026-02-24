@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,11 +26,28 @@ export function BasicInfoSection({
 }: BasicInfoSectionProps & {
 	onSchemaUpdate?: (updates: Partial<any>) => void;
 }) {
+	const t = useTranslations("product.formBuilder.formSettings.basicInfoSection");
+	const tCommon = useTranslations("product.formBuilder.formSettings.common");
+	const tDefaults = useTranslations("product.formBuilder.formSettings.defaults");
+	const localizeLegacyDefault = (
+		value: string | undefined,
+		legacyDefault: string,
+		localizedDefault: string
+	) => {
+		if (!value || value === legacyDefault) return localizedDefault;
+		return value;
+	};
+	const localizedSubmitDefault = tDefaults("submitText");
+
 	const [basicInfo, setBasicInfo] = useState({
 		title: localSettings.title || "",
 		publicTitle: localSettings.publicTitle || "",
 		description: localSettings.description || "",
-		submitText: localSettings.submitText || "Submit",
+		submitText: localizeLegacyDefault(
+			localSettings.submitText,
+			"Submit",
+			localizedSubmitDefault
+		),
 		successMessage: localSettings.successMessage || "",
 		redirectUrl: localSettings.redirectUrl || "",
 	});
@@ -82,7 +100,11 @@ export function BasicInfoSection({
 			title: localSettings.title || "",
 			publicTitle: localSettings.publicTitle || "",
 			description: localSettings.description || "",
-			submitText: localSettings.submitText || "Submit",
+			submitText: localizeLegacyDefault(
+				localSettings.submitText,
+				"Submit",
+				localizedSubmitDefault
+			),
 			successMessage: localSettings.successMessage || "",
 			redirectUrl: localSettings.redirectUrl || "",
 		});
@@ -100,7 +122,7 @@ export function BasicInfoSection({
 
 	const saveBasicInfo = async () => {
 		if (!formId) {
-			toast.error("Form ID is required to save settings");
+			toast.error(tCommon("formIdRequiredToSaveSettings"));
 			return;
 		}
 		const titleMissing = !basicInfo.title?.trim();
@@ -110,7 +132,7 @@ export function BasicInfoSection({
 				"form-title-field"
 			) as HTMLElement | null;
 			target?.focus();
-			toast.error("Please fill out required fields");
+			toast.error(tCommon("fillRequiredFields"));
 			return;
 		}
 		const trimmed = {
@@ -134,12 +156,12 @@ export function BasicInfoSection({
 			updateSettings(trimmed);
 			setSavedBasic(true);
 			setHasBasicChanges(false);
-			toast.success("Basic information saved successfully");
+			toast.success(t("saveBasicSuccess"));
 
 			setTimeout(() => setSavedBasic(false), 2000);
 		} catch (error) {
 			console.error("Error saving basic info:", error);
-			toast.error("Failed to save basic information");
+			toast.error(t("saveBasicFailed"));
 		} finally {
 			setSavingBasic(false);
 		}
@@ -147,7 +169,7 @@ export function BasicInfoSection({
 
 	const saveBehavior = async () => {
 		if (!formId) {
-			toast.error("Form ID is required to save settings");
+			toast.error(tCommon("formIdRequiredToSaveSettings"));
 			return;
 		}
 
@@ -176,12 +198,12 @@ export function BasicInfoSection({
 			});
 			setSavedBehavior(true);
 			setHasBehaviorChanges(false);
-			toast.success("Form behavior saved successfully");
+			toast.success(t("saveBehaviorSuccess"));
 
 			setTimeout(() => setSavedBehavior(false), 2000);
 		} catch (error) {
 			console.error("Error saving behavior:", error);
-			toast.error("Failed to save form behavior");
+			toast.error(t("saveBehaviorFailed"));
 		} finally {
 			setSavingBehavior(false);
 		}
@@ -202,14 +224,14 @@ export function BasicInfoSection({
 			announcement.setAttribute("aria-live", "polite");
 			announcement.setAttribute("aria-atomic", "true");
 			announcement.className = "sr-only";
-			announcement.textContent = "Basic information saved successfully";
+			announcement.textContent = t("saveBasicSuccess");
 			document.body.appendChild(announcement);
 
 			setTimeout(() => {
 				document.body.removeChild(announcement);
 			}, 1000);
 		}
-	}, [savedBasic]);
+	}, [savedBasic, t]);
 
 	useEffect(() => {
 		if (savedBehavior) {
@@ -217,14 +239,14 @@ export function BasicInfoSection({
 			announcement.setAttribute("aria-live", "polite");
 			announcement.setAttribute("aria-atomic", "true");
 			announcement.className = "sr-only";
-			announcement.textContent = "Form behavior saved successfully";
+			announcement.textContent = t("saveBehaviorSuccess");
 			document.body.appendChild(announcement);
 
 			setTimeout(() => {
 				document.body.removeChild(announcement);
 			}, 1000);
 		}
-	}, [savedBehavior]);
+	}, [savedBehavior, t]);
 
 	return (
 		<ScrollArea
@@ -234,7 +256,7 @@ export function BasicInfoSection({
 			}}
 		>
 			<div
-				aria-label="Basic form settings"
+				aria-label={t("ariaSettings")}
 				className="flex flex-col gap-4"
 				onKeyDown={(e) => {
 					const target = e.target as HTMLElement;
@@ -277,81 +299,81 @@ export function BasicInfoSection({
 									className="flex items-center gap-2 text-lg tracking-tight"
 									id="basic-info-title"
 								>
-									Basic Information{" "}
+									{t("basicTitle")}{" "}
 									{hasBasicChanges && (
 										<Badge className="gap-2" variant="secondary">
 											<div className="size-2 rounded-full bg-orange-500" />
-											Unsaved changes
+											{tCommon("unsavedChanges")}
 										</Badge>
 									)}
 								</CardTitle>
 								<CardDescription id="basic-info-description">
-									Configure the basic details of your form
+									{t("basicDescription")}
 								</CardDescription>
 							</div>
 						</div>
 					</CardHeader>
 					<CardContent className="flex flex-col gap-6">
 						<BasicInfoField
-							description="This title is only visible to you in the dashboard and form builder"
+							description={t("internalTitleDescription")}
 							id="form-title"
-							label="Internal Title"
+							label={t("internalTitleLabel")}
 							onChange={(value) => handleBasicInfoChange("title", value)}
-							placeholder="Enter internal title for your reference..."
+							placeholder={t("internalTitlePlaceholder")}
 							required
 							value={basicInfo.title}
 						/>
 
 						<BasicInfoField
-							description="This title will be displayed to users on the actual form. Leave empty to use the internal title."
+							description={t("publicTitleDescription")}
 							id="form-public-title"
-							label="Public Title"
+							label={t("publicTitleLabel")}
 							onChange={(value) => handleBasicInfoChange("publicTitle", value)}
-							placeholder="Enter title to display to users..."
+							placeholder={t("publicTitlePlaceholder")}
 							value={basicInfo.publicTitle}
 						/>
 
 						<BasicInfoField
 							id="form-description"
 							isTextarea
-							label="Form Description"
+							label={t("formDescriptionLabel")}
 							onChange={(value) => handleBasicInfoChange("description", value)}
-							placeholder="Enter form description"
+							placeholder={t("formDescriptionPlaceholder")}
 							rows={3}
 							value={basicInfo.description}
 						/>
 
 						<BasicInfoField
 							id="submit-text"
-							label="Submit Button Text"
+							label={t("submitButtonTextLabel")}
 							onChange={(value) => handleBasicInfoChange("submitText", value)}
-							placeholder="Submit"
+							placeholder={t("submitButtonTextPlaceholder")}
 							value={basicInfo.submitText}
 						/>
 
 						<BasicInfoField
 							id="success-message"
 							isTextarea
-							label="Success Message"
+							label={t("successMessageLabel")}
 							onChange={(value) =>
 								handleBasicInfoChange("successMessage", value)
 							}
-							placeholder="Thank you for your submission!"
+							placeholder={t("successMessagePlaceholder")}
 							rows={2}
 							value={basicInfo.successMessage}
 						/>
 
 						<BasicInfoField
-							description="URL to redirect users after successful submission"
+							description={t("redirectUrlDescription")}
 							id="redirect-url"
-							label="Redirect URL (Optional)"
+							label={t("redirectUrlLabel")}
 							onChange={(value) => handleBasicInfoChange("redirectUrl", value)}
-							placeholder="https://example.com/thank-you"
+							placeholder={t("redirectUrlPlaceholder")}
 							value={basicInfo.redirectUrl}
 						/>
 
 						<div
-							aria-label="Basic information actions"
+							aria-label={t("basicActionsAria")}
 							className="flex items-center justify-between"
 							role="group"
 						>
@@ -363,14 +385,14 @@ export function BasicInfoSection({
 										size="sm"
 										variant="ghost"
 									>
-										Reset
+										{tCommon("reset")}
 									</Button>
 								)}
 							</div>
 							<div className="flex items-center gap-2">
 								<Button
 									aria-describedby="basic-info-description"
-									aria-label="Save basic information"
+									aria-label={t("saveBasicAria")}
 									className="min-h-10"
 									disabled={savingBasic || !hasBasicChanges}
 									loading={savingBasic}
@@ -382,7 +404,7 @@ export function BasicInfoSection({
 										}
 									}}
 								>
-									Save
+									{tCommon("save")}
 								</Button>
 							</div>
 						</div>
@@ -402,16 +424,16 @@ export function BasicInfoSection({
 									className="flex items-center gap-2 text-lg tracking-tight"
 									id="behavior-title"
 								>
-									Form Behavior{" "}
+									{t("behaviorTitle")}{" "}
 									{hasBehaviorChanges && (
 										<Badge className="gap-2" variant="secondary">
 											<div className="size-2 rounded-full bg-orange-500" />
-											Unsaved changes
+											{tCommon("unsavedChanges")}
 										</Badge>
 									)}
 								</CardTitle>
 								<CardDescription id="behavior-description">
-									Configure how your form behaves and appears to users
+									{t("behaviorDescription")}
 								</CardDescription>
 							</div>
 						</div>
@@ -424,10 +446,10 @@ export function BasicInfoSection({
 										className="font-medium text-sm"
 										htmlFor="hide-header-toggle"
 									>
-										Hide Header
+										{t("hideHeaderLabel")}
 									</Label>
 									<p className="text-muted-foreground text-xs">
-										Hides public title and description in embeds
+										{t("hideHeaderDescription")}
 									</p>
 								</div>
 								<Switch
@@ -443,10 +465,10 @@ export function BasicInfoSection({
 							<div className="flex items-center justify-between">
 								<div className="flex flex-col gap-1">
 									<Label className="font-medium text-sm" htmlFor="rtl-toggle">
-										Right-to-Left Mode
+										{t("rtlLabel")}
 									</Label>
 									<p className="text-muted-foreground text-xs">
-										Display form in RTL (Right-to-Left) mode
+										{t("rtlDescription")}
 									</p>
 								</div>
 								<Switch
@@ -465,10 +487,10 @@ export function BasicInfoSection({
 										className="font-medium text-sm"
 										htmlFor="auto-focus-toggle"
 									>
-										Auto Focus First Field
+										{t("autoFocusLabel")}
 									</Label>
 									<p className="text-muted-foreground text-xs">
-										Automatically focus on the first field when form loads
+										{t("autoFocusDescription")}
 									</p>
 								</div>
 								<Switch
@@ -483,7 +505,7 @@ export function BasicInfoSection({
 						</div>
 
 						<div
-							aria-label="Form behavior actions"
+							aria-label={t("behaviorActionsAria")}
 							className="flex items-center justify-between"
 							role="group"
 						>
@@ -495,7 +517,7 @@ export function BasicInfoSection({
 										size="sm"
 										variant="ghost"
 									>
-										Reset
+										{tCommon("reset")}
 									</Button>
 								)}
 							</div>
@@ -503,12 +525,12 @@ export function BasicInfoSection({
 								{savedBehavior && (
 									<div className="flex items-center gap-2 text-green-600 text-sm">
 										<div className="size-2 rounded-full bg-green-500" />
-										Saved
+										{tCommon("saved")}
 									</div>
 								)}
 								<Button
 									aria-describedby="behavior-description"
-									aria-label="Save form behavior settings"
+									aria-label={t("saveBehaviorAria")}
 									className="min-h-10"
 									disabled={savingBehavior || !hasBehaviorChanges}
 									loading={savingBehavior}
@@ -520,7 +542,7 @@ export function BasicInfoSection({
 										}
 									}}
 								>
-									Save
+									{tCommon("save")}
 								</Button>
 							</div>
 						</div>
@@ -554,6 +576,7 @@ function BasicInfoField({
 	description,
 	required = false,
 }: BasicInfoFieldProps) {
+	const tCommon = useTranslations("product.formBuilder.formSettings.common");
 	const fieldId = `${id}-field`;
 	const descriptionId = description ? `${id}-description` : undefined;
 
@@ -576,7 +599,7 @@ function BasicInfoField({
 			>
 				{label}
 				{required && (
-					<span aria-label="required" className="ml-1 text-destructive">
+					<span aria-label={tCommon("requiredAria")} className="ml-1 text-destructive">
 						*
 					</span>
 				)}
@@ -622,7 +645,7 @@ function BasicInfoField({
 			)}
 			{required && !value && (
 				<p className="text-destructive text-xs" role="alert">
-					This field is required
+					{tCommon("fieldRequired")}
 				</p>
 			)}
 		</div>

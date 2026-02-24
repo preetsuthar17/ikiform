@@ -1,0 +1,70 @@
+{
+  "siteName": "Ikiform",
+  "routes": {
+    "home": {
+      "title": "Crea formularios, recopila respuestas y analiza datos sin esfuerzo.",
+      "description": "Crea formularios con Ikiform y analiza respuestas de forma sencilla.",
+      "keywords": ["creador de formularios", "formularios en línea", "encuestas", "alternativa a Typeform", "alternativa a Google Forms"]
+    },
+    "changelog": {
+      "title": "Novedades",
+      "description": "Sigue lanzamientos y mejoras de producto en Ikiform.",
+      "keywords": ["novedades", "actualizaciones", "notas de lanzamiento", "ikiform"]
+    },
+    "legalPrivacy": {
+      "title": "Política de privacidad",
+      "description": "Conoce cómo Ikiform recopila, usa y protege tus datos personales.",
+      "keywords": ["privacidad", "protección de datos", "ikiform"]
+    },
+    "legalTerms": {
+      "title": "Términos del servicio",
+      "description": "Lee los términos que regulan el uso de Ikiform.",
+      "keywords": ["términos del servicio", "términos", "legal"]
+    },
+    "legalGdpr": {
+      "title": "Cumplimiento RGPD",
+      "description": "Comprende el enfoque de Ikiform para el cumplimiento del RGPD.",
+      "keywords": ["rgpd", "privacidad", "cumplimiento"]
+    },
+    "legalDpa": {
+      "title": "Acuerdo de tratamiento de datos",
+      "description": "Consulta el acuerdo de tratamiento de datos de Ikiform.",
+      "keywords": ["acuerdo de datos", "dpa", "cumplimiento"]
+    },
+    "aiBuilder": {
+      "title": "Creador de formularios con IA",
+      "description": "Crea y personaliza formularios con ayuda de IA en Ikiform.",
+      "keywords": ["formularios con ia", "generador de formularios", "ikiform"]
+    },
+    "demoFormBuilder": {
+      "title": "Demo del creador de formularios",
+      "description": "Prueba el creador de formularios de Ikiform en vivo.",
+      "keywords": ["demo de formularios", "ikiform demo", "creador interactivo"]
+    },
+    "login": {
+      "title": "Iniciar sesión",
+      "description": "Accede a tu cuenta de Ikiform.",
+      "keywords": ["inicio de sesión", "ikiform"]
+    },
+    "resetPassword": {
+      "title": "Restablecer contraseña",
+      "description": "Restablece la contraseña de tu cuenta de Ikiform.",
+      "keywords": ["restablecer contraseña", "recuperar cuenta"]
+    },
+    "success": {
+      "title": "Éxito",
+      "description": "Acción completada correctamente.",
+      "keywords": ["éxito"]
+    },
+    "embed": {
+      "title": "Insertar",
+      "description": "Inserta formularios de Ikiform en tu sitio web.",
+      "keywords": ["insertar formulario", "widget formulario", "ikiform"]
+    },
+    "embedTest": {
+      "title": "Prueba de inserción",
+      "description": "Prueba formularios incrustados de Ikiform.",
+      "keywords": ["prueba de inserción", "vista previa"]
+    }
+  }
+}

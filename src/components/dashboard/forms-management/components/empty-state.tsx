@@ -1,4 +1,5 @@
 import { Plus, Sparkles } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { memo, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -22,6 +23,8 @@ export const EmptyState = memo(function EmptyState({
 	onCreateWithAI,
 	onCreateManually,
 }: EmptyStateExtendedProps) {
+	const t = useTranslations("dashboard.formsManagement.emptyState");
+
 	const handleCreateWithAI = useCallback(() => {
 		onCreateWithAI();
 	}, [onCreateWithAI]);
@@ -32,7 +35,7 @@ export const EmptyState = memo(function EmptyState({
 
 	return (
 		<Card
-			aria-label="Empty state - no forms created yet"
+			aria-label={t("aria")}
 			className="p-16 text-center shadow-none"
 			role="region"
 		>
@@ -45,50 +48,49 @@ export const EmptyState = memo(function EmptyState({
 				</div>
 				<div className="flex flex-col gap-2">
 					<h3 className="font-semibold text-foreground text-xl">
-						No forms yet
+						{t("title")}
 					</h3>
 					<p className="text-muted-foreground leading-relaxed">
-						Get started by creating your first form. It's quick and easy!
+						{t("description")}
 					</p>
 				</div>
 				<Dialog>
 					<DialogTrigger asChild>
 						<Button
-							aria-label="Create Your First Form"
+							aria-label={t("createFirstForm")}
 							className="flex h-10 w-full items-center gap-2 whitespace-nowrap font-medium"
 							onClick={onCreateForm}
 						>
 							<Plus aria-hidden="true" className="size-5" />
-							Create Your First Form
+							{t("createFirstForm")}
 						</Button>
 					</DialogTrigger>
 					<DialogContent className="sm:max-w-md">
 						<DialogHeader>
-							<DialogTitle>How would you like to create your form?</DialogTitle>
+							<DialogTitle>{t("dialog.title")}</DialogTitle>
 							<DialogDescription>
-								Choose to build your form manually or let Kiko AI generate it
-								for you.
+								{t("dialog.description")}
 							</DialogDescription>
 						</DialogHeader>
 						<div className="flex w-full flex-col gap-3 sm:flex-row">
 							<Button
-								aria-label="Create form using Kiko AI"
+								aria-label={t("dialog.createWithAI")}
 								className="flex-1"
 								onClick={handleCreateWithAI}
 								size="lg"
 								variant="default"
 							>
 								<Sparkles aria-hidden="true" className="size-4" />
-								Use Kiko AI
+								{t("dialog.createWithAI")}
 							</Button>
 							<Button
-								aria-label="Create form manually"
+								aria-label={t("dialog.createManually")}
 								className="flex-1"
 								onClick={handleCreateManually}
 								size="lg"
 								variant="secondary"
 							>
-								Create Manually
+								{t("dialog.createManually")}
 							</Button>
 						</div>
 					</DialogContent>

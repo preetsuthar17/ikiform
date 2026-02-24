@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 import { Card } from "@/components/ui/card";
 import { Loader } from "@/components/ui/loader";
 import type { WebhookConfig } from "../hooks/useWebhookManagement";
@@ -23,6 +24,7 @@ export function WebhookList({
 	onTest,
 	onViewLogs,
 }: WebhookListProps) {
+	const t = useTranslations("product.formBuilder.formSettings.webhooks.list");
 	const [hoveredIdx, setHoveredIdx] = React.useState<number | null>(null);
 
 	if (loading)
@@ -36,8 +38,7 @@ export function WebhookList({
 		return (
 			<div className="rounded-lg border border-muted-foreground/25 border-dashed p-6 text-center">
 				<p className="text-muted-foreground text-sm">
-					No webhooks configured yet. Add your first webhook to receive form
-					submissions.
+					{t("emptyState")}
 				</p>
 			</div>
 		);

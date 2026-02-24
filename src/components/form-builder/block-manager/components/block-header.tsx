@@ -1,4 +1,5 @@
 import { ChevronDown, ChevronRight, Edit3, Trash2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +22,8 @@ export function BlockHeader({
 	isExpanded,
 	canDelete,
 }: BlockHeaderProps) {
+	const t = useTranslations("product.formBuilder.blockManager.headerActions");
+
 	if (isEditing) {
 		return null;
 	}
@@ -72,7 +75,7 @@ export function BlockHeader({
 					<div className="flex items-center gap-2">
 						<h4 className="font-medium text-foreground">{block.title}</h4>
 						<Badge className="text-xs" variant="outline">
-							Step {index + 1}
+							{t("stepBadge", { index: index + 1 })}
 						</Badge>
 					</div>
 					{block.description && (
@@ -85,7 +88,7 @@ export function BlockHeader({
 				<Tooltip>
 					<TooltipTrigger asChild>
 						<Button
-							aria-label={`Edit ${block.title} step`}
+							aria-label={t("editStepAria", { title: block.title })}
 							className="size-8"
 							onClick={handleEditClick}
 							size="icon-sm"
@@ -94,14 +97,14 @@ export function BlockHeader({
 							<Edit3 className="size-4" />
 						</Button>
 					</TooltipTrigger>
-					<TooltipContent side="top">Edit step</TooltipContent>
+					<TooltipContent side="top">{t("editStep")}</TooltipContent>
 				</Tooltip>
 
 				{canDelete && (
 					<Tooltip>
 						<TooltipTrigger asChild>
 							<Button
-								aria-label={`Delete ${block.title} step`}
+								aria-label={t("deleteStepAria", { title: block.title })}
 								className="size-8 text-destructive hover:bg-destructive/10 hover:text-destructive-foreground"
 								onClick={handleDeleteClick}
 								size="icon-sm"
@@ -110,14 +113,14 @@ export function BlockHeader({
 								<Trash2 className="size-4" />
 							</Button>
 						</TooltipTrigger>
-						<TooltipContent side="top">Delete step</TooltipContent>
+						<TooltipContent side="top">{t("deleteStep")}</TooltipContent>
 					</Tooltip>
 				)}
 
 				<Tooltip>
 					<TooltipTrigger asChild>
 						<Button
-							aria-label={isExpanded ? "Collapse step" : "Expand step"}
+							aria-label={isExpanded ? t("collapseStep") : t("expandStep")}
 							className="size-8"
 							onClick={handleToggleExpansion}
 							onKeyDown={handleToggleExpansionKeyDown}
@@ -132,7 +135,7 @@ export function BlockHeader({
 						</Button>
 					</TooltipTrigger>
 					<TooltipContent side="top">
-						{isExpanded ? "Collapse step" : "Expand step"}
+						{isExpanded ? t("collapseStep") : t("expandStep")}
 					</TooltipContent>
 				</Tooltip>
 			</div>

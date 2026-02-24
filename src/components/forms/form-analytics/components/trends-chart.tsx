@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import type React from "react";
 import { useMemo } from "react";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
@@ -33,7 +36,12 @@ const getAllTrends = (trends: Record<string, number>) => {
 	return dates.map((date) => ({ date, value: trends[date] }));
 };
 
-const CustomTooltip = ({ active, payload, label }: any) => {
+const CustomTooltip = ({
+	active,
+	payload,
+	label,
+	submissionsLabel,
+}: any) => {
 	if (active && payload && payload.length) {
 		return (
 			<div className="rounded-xl border border-border bg-card px-3 py-2">
@@ -41,7 +49,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 					{formatDate(label)}
 				</p>
 				<p className="m-0 text-muted-foreground">
-					Submissions:{" "}
+					{submissionsLabel}:{" "}
 					<span className="font-medium text-foreground">
 						{payload[0].value}
 					</span>
@@ -53,20 +61,21 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export const TrendsChart: React.FC<TrendsChartProps> = ({ trends }) => {
+	const t = useTranslations("product.analytics.trendsChart");
 	const data = useMemo(() => getAllTrends(trends), [trends]);
 
 	return (
 		<Card className="p-4 shadow-none md:p-6">
 			<CardHeader className="flex items-center justify-between p-0">
 				<CardTitle className="font-semibold text-foreground text-lg">
-					Submission Trends
+					{t("title")}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="p-0">
 				<div className="h-72 w-full">
 					{data.length === 0 ? (
 						<div className="flex h-full items-center justify-center text-muted-foreground">
-							No data available
+							{t("noData")}
 						</div>
 					) : (
 						<ResponsiveContainer height="100%" width="100%">
@@ -95,7 +104,11 @@ export const TrendsChart: React.FC<TrendsChartProps> = ({ trends }) => {
 									tickFormatter={formatDate}
 									tickLine={false}
 								/>
-								<Tooltip content={<CustomTooltip />} />
+								<Tooltip
+									content={
+										<CustomTooltip submissionsLabel={t("submissions")} />
+									}
+								/>
 								<Area
 									dataKey="value"
 									fill="url(#colorValue)"

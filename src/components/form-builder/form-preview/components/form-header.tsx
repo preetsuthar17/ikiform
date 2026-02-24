@@ -1,8 +1,10 @@
+import { useTranslations } from "next-intl";
 import { getInternalFormTitle } from "@/lib/utils/form-utils";
 import type { FormHeaderProps } from "../types";
 import { EditableField } from "./editable-field";
 
 export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
+	const t = useTranslations("product.formBuilder.formPreview");
 	const handleTitleUpdate = (title: string) => {
 		onFormSettingsUpdate?.({ title: title || "" });
 	};
@@ -23,7 +25,7 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
 				disabled={!onFormSettingsUpdate}
 				inputClassName="text-3xl font-bold bg-background w-full"
 				onSave={handleTitleUpdate}
-				placeholder="Click to add title..."
+				placeholder={t("titlePlaceholder")}
 				value={schema.settings?.title || ""}
 			>
 				<div className="flex flex-col gap-1">
@@ -32,7 +34,9 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
 					</h1>
 					{hasPublicTitle && (
 						<p className="text-muted-foreground text-sm">
-							Public title: "{schema.settings?.publicTitle}"
+							{t("publicTitle", {
+								title: schema.settings?.publicTitle ?? "",
+							})}
 						</p>
 					)}
 				</div>
@@ -44,7 +48,7 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
 				disabled={!onFormSettingsUpdate}
 				inputClassName="bg-background w-full"
 				onSave={handleDescriptionUpdate}
-				placeholder="Click to add a description..."
+				placeholder={t("descriptionPlaceholder")}
 				rows={Math.max(
 					(schema.settings?.description || "").split("\n").length || 1,
 					1
@@ -57,7 +61,7 @@ export function FormHeader({ schema, onFormSettingsUpdate }: FormHeaderProps) {
 					</p>
 				) : onFormSettingsUpdate ? (
 					<p className="text-muted-foreground italic">
-						Click to add a description...
+						{t("descriptionPlaceholder")}
 					</p>
 				) : null}
 			</EditableField>

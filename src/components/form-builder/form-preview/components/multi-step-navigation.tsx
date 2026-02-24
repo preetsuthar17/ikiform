@@ -1,4 +1,5 @@
 import { Plus, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -33,6 +34,7 @@ export function MultiStepNavigation({
 	onBlockAdd,
 	onBlockDelete,
 }: MultiStepNavigationProps) {
+	const t = useTranslations("product.formBuilder.multiStepNavigation");
 	const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 	const [stepToDelete, setStepToDelete] = useState<number | null>(null);
 
@@ -137,7 +139,7 @@ export function MultiStepNavigation({
 											<Tooltip>
 												<TooltipTrigger asChild>
 													<Button
-														aria-label="Delete step"
+														aria-label={t("deleteStep")}
 														className="absolute -top-1.5 -right-1.5 flex size-4 items-center justify-center rounded-full bg-destructive/80 text-white opacity-100 transition-opacity hover:bg-destructive/100 md:opacity-0 md:group-hover:opacity-100"
 														onClick={(e) => handleDeleteStep(index, e)}
 														size="icon"
@@ -148,7 +150,7 @@ export function MultiStepNavigation({
 														</span>
 													</Button>
 												</TooltipTrigger>
-												<TooltipContent side="top">Delete step</TooltipContent>
+												<TooltipContent side="top">{t("deleteStep")}</TooltipContent>
 											</Tooltip>
 										)}
 									</PaginationItem>
@@ -168,7 +170,7 @@ export function MultiStepNavigation({
 												<Plus className="size-4" />
 											</Button>
 										</TooltipTrigger>
-										<TooltipContent side="top">Add step</TooltipContent>
+										<TooltipContent side="top">{t("addStep")}</TooltipContent>
 									</Tooltip>
 								</PaginationItem>
 							)}
@@ -192,18 +194,17 @@ export function MultiStepNavigation({
 			<Dialog onOpenChange={setDeleteDialogOpen} open={deleteDialogOpen}>
 				<DialogContent>
 					<DialogHeader>
-						<DialogTitle>Delete Step</DialogTitle>
+						<DialogTitle>{t("deleteDialogTitle")}</DialogTitle>
 						<DialogDescription>
-							Are you sure you want to delete this step? This action cannot be
-							undone.
+							{t("deleteDialogDescription")}
 						</DialogDescription>
 					</DialogHeader>
 					<DialogFooter>
 						<Button onClick={cancelDelete} variant="outline">
-							Cancel
+							{t("cancel")}
 						</Button>
 						<Button onClick={confirmDelete} variant="destructive">
-							Delete Step
+							{t("deleteStep")}
 						</Button>
 					</DialogFooter>
 				</DialogContent>

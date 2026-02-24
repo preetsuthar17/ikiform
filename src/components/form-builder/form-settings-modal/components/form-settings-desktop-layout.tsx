@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { FORM_SETTINGS_SECTIONS } from "../index";
 import type { FormSettingsSection } from "../types";
 import { FormSettingsContent } from "./form-settings-content";
@@ -16,6 +17,7 @@ export function FormSettingsDesktopLayout({
 	sectionProps,
 	onClose,
 }: FormSettingsDesktopLayoutProps) {
+	const t = useTranslations("product.formBuilder.formSettings");
 	return (
 		<div
 			className="hidden h-full gap-4 md:flex"
@@ -29,16 +31,19 @@ export function FormSettingsDesktopLayout({
 					onSectionChange={onSectionChange}
 				/>
 				<nav
-					aria-label="Settings sections"
+					aria-label={t("settingsSectionsAria")}
 					className="flex flex-col gap-1"
 					role="navigation"
 				>
 					{FORM_SETTINGS_SECTIONS.map((section) => {
 						const isActive = activeSection === section.id;
+						const sectionLabel = t(`sections.${section.id}`);
 						return (
 							<button
 								aria-current={isActive ? "page" : undefined}
-								aria-label={`Go to ${section.label} settings`}
+								aria-label={t("goToSectionSettingsAria", {
+									section: sectionLabel,
+								})}
 								className={`w-full rounded-md px-3 py-3 text-left text-sm opacity-60 transition-colors ${
 									isActive
 										? "font-medium opacity-100"
@@ -67,7 +72,7 @@ export function FormSettingsDesktopLayout({
 								role="menuitem"
 								tabIndex={0}
 							>
-								{section.label}
+								{sectionLabel}
 							</button>
 						);
 					})}

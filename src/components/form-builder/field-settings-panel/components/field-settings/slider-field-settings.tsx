@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useTranslations } from "next-intl";
 import {
 	Select,
 	SelectContent,
@@ -18,6 +19,7 @@ export function SliderFieldSettings({
 	field,
 	onUpdateSettings,
 }: FieldSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.slider");
 	const sliderSettings = normalizeSliderSettings(field.settings);
 
 	const updateSliderSettings = (updates: Partial<typeof sliderSettings>) => {
@@ -33,13 +35,13 @@ export function SliderFieldSettings({
 		<Card className="gap-2 p-4 shadow-none">
 			<CardHeader className="p-0">
 				<CardTitle className="flex items-center gap-2 text-lg">
-					Slider Settings
+					{t("title")}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 p-0">
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="slider-mode">
-						Slider Mode
+						{t("mode")}
 					</Label>
 					<Select
 						onValueChange={(value) =>
@@ -48,20 +50,20 @@ export function SliderFieldSettings({
 						value={sliderSettings.sliderMode}
 					>
 						<SelectTrigger aria-describedby="slider-mode-help" id="slider-mode">
-							<SelectValue placeholder="Select slider mode" />
+							<SelectValue placeholder={t("modePlaceholder")} />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem value="single">Single value</SelectItem>
-							<SelectItem value="range">Range (min + max)</SelectItem>
+							<SelectItem value="single">{t("modeSingle")}</SelectItem>
+							<SelectItem value="range">{t("modeRange")}</SelectItem>
 						</SelectContent>
 					</Select>
 					<p className="text-muted-foreground text-xs" id="slider-mode-help">
-						Choose one value or let users pick a minimum and maximum
+						{t("modeHelp")}
 					</p>
 				</div>
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="slider-min">
-						Minimum Value
+						{t("min")}
 					</Label>
 					<Input
 						aria-describedby="slider-min-help"
@@ -82,12 +84,12 @@ export function SliderFieldSettings({
 						value={sliderSettings.min}
 					/>
 					<p className="text-muted-foreground text-xs" id="slider-min-help">
-						Minimum value for the slider
+						{t("minHelp")}
 					</p>
 				</div>
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="slider-max">
-						Maximum Value
+						{t("max")}
 					</Label>
 					<Input
 						aria-describedby="slider-max-help"
@@ -108,12 +110,12 @@ export function SliderFieldSettings({
 						value={sliderSettings.max}
 					/>
 					<p className="text-muted-foreground text-xs" id="slider-max-help">
-						Maximum value for the slider
+						{t("maxHelp")}
 					</p>
 				</div>
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="slider-step">
-						Step Size
+						{t("step")}
 					</Label>
 					<Input
 						aria-describedby="slider-step-help"
@@ -135,14 +137,14 @@ export function SliderFieldSettings({
 						value={sliderSettings.step}
 					/>
 					<p className="text-muted-foreground text-xs" id="slider-step-help">
-						Increment/decrement step size for the slider
+						{t("stepHelp")}
 					</p>
 				</div>
 				{sliderSettings.sliderMode === "range" ? (
 					<>
 						<div className="flex flex-col gap-2">
 							<Label className="font-medium text-sm" htmlFor="slider-default-min">
-								Default Minimum
+								{t("defaultMin")}
 							</Label>
 							<Input
 								aria-describedby="slider-default-min-help"
@@ -166,12 +168,12 @@ export function SliderFieldSettings({
 								className="text-muted-foreground text-xs"
 								id="slider-default-min-help"
 							>
-								Pre-filled minimum value when the form loads
+								{t("defaultMinHelp")}
 							</p>
 						</div>
 						<div className="flex flex-col gap-2">
 							<Label className="font-medium text-sm" htmlFor="slider-default-max">
-								Default Maximum
+								{t("defaultMax")}
 							</Label>
 							<Input
 								aria-describedby="slider-default-max-help"
@@ -195,14 +197,14 @@ export function SliderFieldSettings({
 								className="text-muted-foreground text-xs"
 								id="slider-default-max-help"
 							>
-								Pre-filled maximum value when the form loads
+								{t("defaultMaxHelp")}
 							</p>
 						</div>
 					</>
 				) : (
 					<div className="flex flex-col gap-2">
 						<Label className="font-medium text-sm" htmlFor="slider-default">
-							Default Value
+							{t("defaultValue")}
 						</Label>
 						<Input
 							aria-describedby="slider-default-help"
@@ -223,7 +225,7 @@ export function SliderFieldSettings({
 							value={sliderSettings.defaultValue}
 						/>
 						<p className="text-muted-foreground text-xs" id="slider-default-help">
-							Pre-filled value when the form loads
+							{t("defaultValueHelp")}
 						</p>
 					</div>
 				)}

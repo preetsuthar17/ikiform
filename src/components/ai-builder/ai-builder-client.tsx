@@ -2,6 +2,7 @@
 
 import { Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 
@@ -16,7 +17,7 @@ import { Separator } from "@/components/ui/separator";
 import { useAIBuilder } from "@/hooks/ai-builder/use-ai-builder";
 import { useAuth } from "@/hooks/use-auth";
 import { usePremiumStatus } from "@/hooks/use-premium-status";
-import { CHAT_SUGGESTIONS } from "@/lib/ai-builder/constants";
+import { CHAT_SUGGESTION_KEYS } from "@/lib/ai-builder/constants";
 import { ChatPanel } from "./chat/chat-panel";
 import { MobileChatDrawerWrapper } from "./drawer/mobile-chat-drawer-wrapper";
 import { PremiumGuard } from "./guards/premium-guard";
@@ -24,6 +25,7 @@ import { JsonModalWrapper } from "./modals/json-modal-wrapper";
 import { PreviewPanel } from "./preview/preview-panel";
 
 export function AIBuilderClient() {
+	const t = useTranslations("product.aiBuilder.client");
 	const { user, loading: authLoading } = useAuth();
 
 	const router = useRouter();
@@ -59,11 +61,11 @@ export function AIBuilderClient() {
 
 	const suggestions = useMemo(
 		() =>
-			CHAT_SUGGESTIONS.map((text) => ({
-				text,
+			CHAT_SUGGESTION_KEYS.map((key) => ({
+				text: t(key),
 				icon: <Sparkles className="size-4" />,
 			})),
-		[]
+		[t]
 	);
 
 	useEffect(() => {
@@ -146,7 +148,7 @@ export function AIBuilderClient() {
 						onClick={() => setChatDrawerOpen(true)}
 						size="lg"
 					>
-						Create Form with Kiko
+						{t("createFormWithKiko")}
 					</Button>
 				</div>
 
@@ -200,10 +202,14 @@ export function AIBuilderClient() {
 					ref={errorLiveRegionRef}
 					tabIndex={-1}
 				>
-					{streamError ? `Error: ${streamError}` : ""}
+					{streamError ? t("streamError", { error: streamError }) : ""}
 				</div>
 				<div aria-atomic="true" aria-live="polite" className="sr-only">
-					{isStreaming ? "Generating response…" : isLoading ? "Loading…" : ""}
+					{isStreaming
+						? t("generatingResponse")
+						: isLoading
+							? t("loading")
+							: ""}
 				</div>
 
 				<JsonModalWrapper

@@ -1,4 +1,5 @@
 import { Copy, ExternalLink, Globe, History, User, Zap } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -25,6 +26,7 @@ export function PrepopulationSettings({
 	field,
 	onFieldUpdate,
 }: PrepopulationSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.prepopulation");
 	const [previewUrl, setPreviewUrl] = useState("");
 
 	const prepopulation = field.prepopulation || {
@@ -50,7 +52,7 @@ export function PrepopulationSettings({
 
 	const generatePreviewUrl = async () => {
 		if (!prepopulation.config.urlParam) {
-			toast.error("Please enter a URL parameter name first");
+			toast.error(t("toasts.missingUrlParam"));
 			return;
 		}
 
@@ -69,14 +71,14 @@ export function PrepopulationSettings({
 		const { copyWithToast } = await import("@/lib/utils/clipboard");
 		await copyWithToast(
 			url,
-			"Preview URL copied to clipboard!",
-			"Failed to copy preview URL"
+			t("toasts.previewUrlCopied"),
+			t("toasts.previewUrlCopyFailed")
 		);
 	};
 
 	const testApiEndpoint = async () => {
 		if (!prepopulation.config.apiEndpoint) {
-			toast.error("Please enter an API endpoint first");
+			toast.error(t("toasts.missingApiEndpoint"));
 			return;
 		}
 
@@ -90,15 +92,20 @@ export function PrepopulationSettings({
 			});
 
 			if (response.ok) {
-				toast.success("API endpoint is reachable!");
+				toast.success(t("toasts.apiReachable"));
 			} else {
 				toast.error(
-					`API test failed: ${response.status} ${response.statusText}`
+					t("toasts.apiTestFailedStatus", {
+						status: response.status,
+						statusText: response.statusText,
+					})
 				);
 			}
 		} catch (error) {
 			toast.error(
-				`API test failed: ${error instanceof Error ? error.message : "Unknown error"}`
+				t("toasts.apiTestFailedError", {
+					error: error instanceof Error ? error.message : t("unknownError"),
+				})
 			);
 		}
 	};
@@ -107,7 +114,7 @@ export function PrepopulationSettings({
 		<Card className="gap-2 p-4 shadow-none">
 			<CardHeader className="p-0">
 				<CardTitle className="flex items-center gap-2 text-lg">
-					Pre-population
+					{t("title")}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 p-0">
@@ -117,10 +124,10 @@ export function PrepopulationSettings({
 							className="font-medium text-sm"
 							htmlFor="prepopulation-enabled"
 						>
-							Enable Pre-population
+							{t("enabled")}
 						</Label>
 						<p className="text-muted-foreground text-xs">
-							Automatically fill this field with existing data
+							{t("enabledHelp")}
 						</p>
 					</div>
 					<Switch
@@ -136,7 +143,7 @@ export function PrepopulationSettings({
 					<>
 						<div className="flex flex-col gap-2">
 							<Label className="font-medium text-sm" htmlFor="data-source">
-								Data Source
+								{t("dataSource")}
 							</Label>
 							<Select
 								onValueChange={(source) =>
@@ -151,25 +158,25 @@ export function PrepopulationSettings({
 									<SelectItem value="url">
 										<div className="flex items-center gap-2">
 											<Globe className="size-4" />
-											URL Parameters
+											{t("sources.url")}
 										</div>
 									</SelectItem>
 									<SelectItem value="api">
 										<div className="flex items-center gap-2">
 											<Zap className="size-4" />
-											External API
+											{t("sources.api")}
 										</div>
 									</SelectItem>
 									<SelectItem value="profile">
 										<div className="flex items-center gap-2">
 											<User className="size-4" />
-											User Profile
+											{t("sources.profile")}
 										</div>
 									</SelectItem>
 									<SelectItem value="previous">
 										<div className="flex items-center gap-2">
 											<History className="size-4" />
-											Previous Submission
+											{t("sources.previous")}
 										</div>
 									</SelectItem>
 								</SelectContent>
@@ -180,7 +187,7 @@ export function PrepopulationSettings({
 							<div className="flex flex-col gap-4">
 								<div className="flex flex-col gap-2">
 									<Label className="font-medium text-sm" htmlFor="url-param">
-										URL Parameter Name
+										{t("urlParamName")}
 									</Label>
 									<Input
 										aria-describedby="url-param-help"
@@ -193,7 +200,7 @@ export function PrepopulationSettings({
 												e.currentTarget.blur();
 											}
 										}}
-										placeholder="e.g., name, email, phone"
+										placeholder={t("urlParamPlaceholder")}
 										type="text"
 										value={prepopulation.config.urlParam || ""}
 									/>
@@ -201,7 +208,7 @@ export function PrepopulationSettings({
 										className="text-muted-foreground text-xs"
 										id="url-param-help"
 									>
-										The parameter name to extract from the URL query string
+										{t("urlParamHelp")}
 									</p>
 								</div>
 
@@ -210,7 +217,7 @@ export function PrepopulationSettings({
 										className="font-medium text-sm"
 										htmlFor="fallback-value"
 									>
-										Fallback Value
+										{t("fallbackValue")}
 									</Label>
 									<Input
 										aria-describedby="fallback-value-help"
@@ -225,7 +232,7 @@ export function PrepopulationSettings({
 												e.currentTarget.blur();
 											}
 										}}
-										placeholder="Default value if parameter is missing"
+										placeholder={t("fallbackValuePlaceholder")}
 										type="text"
 										value={prepopulation.config.fallbackValue || ""}
 									/>
@@ -233,7 +240,7 @@ export function PrepopulationSettings({
 										className="text-muted-foreground text-xs"
 										id="fallback-value-help"
 									>
-										Default value to use if the URL parameter is missing
+										{t("fallbackValueHelp")}
 									</p>
 								</div>
 
@@ -243,10 +250,10 @@ export function PrepopulationSettings({
 											className="font-medium text-sm"
 											htmlFor="overwrite-existing"
 										>
-											Overwrite Existing
+											{t("overwriteExisting")}
 										</Label>
 										<p className="text-muted-foreground text-xs">
-											Replace user input with pre-populated value
+											{t("overwriteExistingHelp")}
 										</p>
 									</div>
 									<Switch
@@ -263,7 +270,7 @@ export function PrepopulationSettings({
 								{prepopulation.config.urlParam && (
 									<div className="flex gap-2">
 										<Button
-											aria-label="Generate preview URL"
+											aria-label={t("generatePreviewAria")}
 											className="flex items-center gap-2"
 											onClick={generatePreviewUrl}
 											onKeyDown={(e) => {
@@ -276,18 +283,19 @@ export function PrepopulationSettings({
 											variant="outline"
 										>
 											<Copy aria-hidden="true" className="size-4" />
-											Generate Preview URL
+											{t("generatePreview")}
 										</Button>
 									</div>
 								)}
 
 								{previewUrl && (
 									<div className="flex flex-col gap-2 rounded border border-blue-200 bg-blue-50 p-3 text-blue-900 text-sm">
-										<strong>Preview URL:</strong>
+										<strong>{t("previewUrlLabel")}</strong>
 										<code className="break-all text-xs">{previewUrl}</code>
 										<p className="text-xs">
-											This URL will pre-populate the field with "Sample{" "}
-											{field.label}"
+											{t("previewUrlHelp", {
+												label: field.label,
+											})}
 										</p>
 									</div>
 								)}
@@ -298,7 +306,7 @@ export function PrepopulationSettings({
 							<div className="flex flex-col gap-4">
 								<div className="flex flex-col gap-2">
 									<Label className="font-medium text-sm" htmlFor="api-endpoint">
-										API Endpoint
+										{t("apiEndpoint")}
 									</Label>
 									<Input
 										aria-describedby="api-endpoint-help"
@@ -313,7 +321,7 @@ export function PrepopulationSettings({
 												e.currentTarget.blur();
 											}
 										}}
-										placeholder="https://api.example.com/user-data"
+										placeholder={t("apiEndpointPlaceholder")}
 										type="url"
 										value={prepopulation.config.apiEndpoint || ""}
 									/>
@@ -321,13 +329,13 @@ export function PrepopulationSettings({
 										className="text-muted-foreground text-xs"
 										id="api-endpoint-help"
 									>
-										The API endpoint to fetch data from
+										{t("apiEndpointHelp")}
 									</p>
 								</div>
 
 								<div className="flex flex-col gap-2">
 									<Label className="font-medium text-sm" htmlFor="http-method">
-										HTTP Method
+										{t("httpMethod")}
 									</Label>
 									<Select
 										onValueChange={(method) =>
@@ -347,7 +355,7 @@ export function PrepopulationSettings({
 
 								<div className="flex flex-col gap-2">
 									<Label className="font-medium text-sm" htmlFor="api-headers">
-										Request Headers (JSON)
+										{t("requestHeaders")}
 									</Label>
 									<Textarea
 										aria-describedby="api-headers-help"
@@ -386,13 +394,13 @@ export function PrepopulationSettings({
 										className="text-muted-foreground text-xs"
 										id="api-headers-help"
 									>
-										JSON object containing HTTP headers for the API request
+										{t("requestHeadersHelp")}
 									</p>
 								</div>
 
 								{prepopulation.config.apiEndpoint && (
 									<Button
-										aria-label="Test API endpoint"
+										aria-label={t("testApiAria")}
 										className="flex items-center gap-2"
 										onClick={testApiEndpoint}
 										onKeyDown={(e) => {
@@ -405,7 +413,7 @@ export function PrepopulationSettings({
 										variant="outline"
 									>
 										<ExternalLink aria-hidden="true" className="size-4" />
-										Test API Endpoint
+										{t("testApi")}
 									</Button>
 								)}
 							</div>
@@ -417,8 +425,8 @@ export function PrepopulationSettings({
 								className="rounded border border-orange-200 bg-orange-50 p-3 text-orange-900 text-sm"
 								role="status"
 							>
-								<strong>Coming Soon:</strong> User profile pre-population will
-								be available in a future update.
+								<strong>{t("comingSoonLabel")}</strong>{" "}
+								{t("profileComingSoon")}
 							</div>
 						)}
 
@@ -428,8 +436,8 @@ export function PrepopulationSettings({
 								className="rounded border border-orange-200 bg-orange-50 p-3 text-orange-900 text-sm"
 								role="status"
 							>
-								<strong>Coming Soon:</strong> Previous submission pre-population
-								will be available in a future update.
+								<strong>{t("comingSoonLabel")}</strong>{" "}
+								{t("previousComingSoon")}
 							</div>
 						)}
 					</>

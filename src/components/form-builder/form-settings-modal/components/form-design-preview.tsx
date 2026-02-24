@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { Separator } from "@/components/ui";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -31,6 +32,7 @@ export function FormDesignPreview({
 	localSettings,
 	className,
 }: FormDesignPreviewProps) {
+	const t = useTranslations("product.formBuilder.customize.preview");
 	const layout = localSettings.layout || {};
 	const colors = localSettings.colors || {};
 	const typography = localSettings.typography || {};
@@ -152,10 +154,10 @@ export function FormDesignPreview({
 		<Card className={`p-4 ${className}`}>
 			<div className="mb-4">
 				<h4 className="mb-2 font-medium text-muted-foreground text-sm">
-					Live Preview
+					{t("title")}
 				</h4>
 				<p className="text-muted-foreground text-xs">
-					See how your form will look with the applied customizations
+					{t("description")}
 				</p>
 			</div>
 
@@ -170,21 +172,20 @@ export function FormDesignPreview({
 					<div className="flex flex-col gap-6">
 						{}
 						<div className="flex flex-col gap-2">
-							<h3 className="font-semibold text-lg">Sample Form</h3>
+							<h3 className="font-semibold text-lg">{t("sampleTitle")}</h3>
 							<p className="text-sm opacity-80">
-								This is how your form will appear with the current design
-								settings.
+								{t("sampleDescription")}
 							</p>
 						</div>
 						<Separator />
 						{}
 						<div className="flex flex-col gap-4">
 							<div className="flex flex-col gap-2">
-								<Label htmlFor="preview-name">Name *</Label>
+								<Label htmlFor="preview-name">{t("nameLabel")}</Label>
 								<Input
 									className="form-field"
 									id="preview-name"
-									placeholder="Enter your name"
+									placeholder={t("namePlaceholder")}
 									style={{
 										fontFamily: "inherit",
 									}}
@@ -192,11 +193,11 @@ export function FormDesignPreview({
 							</div>
 
 							<div className="flex flex-col gap-2">
-								<Label htmlFor="preview-email">Email *</Label>
+								<Label htmlFor="preview-email">{t("emailLabel")}</Label>
 								<Input
 									className="form-field"
 									id="preview-email"
-									placeholder="Enter your email"
+									placeholder={t("emailPlaceholder")}
 									style={{
 										fontFamily: "inherit",
 									}}
@@ -205,7 +206,7 @@ export function FormDesignPreview({
 							</div>
 
 							<div className="flex flex-col gap-2">
-								<Label htmlFor="preview-category">Category</Label>
+								<Label htmlFor="preview-category">{t("categoryLabel")}</Label>
 								<Select>
 									<SelectTrigger
 										className="form-field"
@@ -213,22 +214,22 @@ export function FormDesignPreview({
 											fontFamily: "inherit",
 										}}
 									>
-										<SelectValue placeholder="Select a category" />
+										<SelectValue placeholder={t("categoryPlaceholder")} />
 									</SelectTrigger>
 									<SelectContent>
-										<SelectItem value="general">General Inquiry</SelectItem>
-										<SelectItem value="support">Support</SelectItem>
-										<SelectItem value="sales">Sales</SelectItem>
+										<SelectItem value="general">{t("categoryGeneral")}</SelectItem>
+										<SelectItem value="support">{t("categorySupport")}</SelectItem>
+										<SelectItem value="sales">{t("categorySales")}</SelectItem>
 									</SelectContent>
 								</Select>
 							</div>
 
 							<div className="flex flex-col gap-2">
-								<Label htmlFor="preview-message">Message</Label>
+								<Label htmlFor="preview-message">{t("messageLabel")}</Label>
 								<Textarea
 									className="form-field"
 									id="preview-message"
-									placeholder="Enter your message"
+									placeholder={t("messagePlaceholder")}
 									rows={3}
 									style={{
 										fontFamily: "inherit",
@@ -242,7 +243,7 @@ export function FormDesignPreview({
 									color: "#ffffff",
 								}}
 							>
-								{localSettings.submitText || "Submit Form"}
+								{localSettings.submitText || t("submitButton")}
 							</Button>
 						</div>
 					</div>

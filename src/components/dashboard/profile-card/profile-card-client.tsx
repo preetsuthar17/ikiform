@@ -1,6 +1,7 @@
 "use client";
 
 import type { User } from "@supabase/supabase-js";
+import { useTranslations } from "next-intl";
 import { useMemo } from "react";
 import { Card } from "@/components/ui/card";
 import { ProfileInfo, UserAvatar } from "./components";
@@ -19,6 +20,7 @@ function ProfileCardClient({
 	hasPremium,
 	hasCustomerPortal,
 }: ProfileCardClientProps) {
+	const t = useTranslations("dashboard.profile");
 	const userData = useMemo(() => {
 		return {
 			name: extractUserName(user),
@@ -28,7 +30,7 @@ function ProfileCardClient({
 
 	return (
 		<Card
-			aria-label="User profile information"
+			aria-label={t("userProfileInformation")}
 			className={`relative flex h-fit max-h-min w-full grow flex-col items-center gap-6 py-11 shadow-none ${className ?? ""}`}
 			role="region"
 		>

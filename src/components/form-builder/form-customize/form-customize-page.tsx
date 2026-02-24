@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowLeft, Layout, Palette, Pencil, Type } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
@@ -30,6 +31,7 @@ interface FormCustomizePageProps {
 type CustomizeSection = "presets" | "layout" | "colors" | "typography";
 
 export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
+	const t = useTranslations("product.formBuilder.customize.page");
 	const router = useRouter();
 	const { user } = useAuth();
 	const [activeSection, setActiveSection] =
@@ -59,9 +61,9 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 			setSaving(true);
 			const newSchema = { ...schema, settings: localSettings };
 			await formsDb.updateForm(formId, user.id, { schema: newSchema as any });
-			toast.success("Saved customization");
+			toast.success(t("savedCustomization"));
 		} catch (error) {
-			toast.error("Failed to save changes. Please try again.");
+			toast.error(t("saveFailed"));
 		} finally {
 			setSaving(false);
 		}
@@ -92,19 +94,19 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 							<TabsList className="grid w-full grid-cols-4">
 								<TabsTrigger className="gap-2" value="presets">
 									<Palette className="size-4" />
-									Presets
+									{t("tabs.presets")}
 								</TabsTrigger>
 								<TabsTrigger className="gap-2" value="layout">
 									<Layout className="size-4" />
-									Layout
+									{t("tabs.layout")}
 								</TabsTrigger>
 								<TabsTrigger className="gap-2" value="colors">
 									<Palette className="size-4" />
-									Colors
+									{t("tabs.colors")}
 								</TabsTrigger>
 								<TabsTrigger className="gap-2" value="typography">
 									<Type className="size-4" />
-									Text
+									{t("tabs.text")}
 								</TabsTrigger>
 							</TabsList>
 						</div>
@@ -159,19 +161,19 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 						<TabsList className="grid w-full grid-cols-4">
 							<TabsTrigger className="gap-2" value="presets">
 								<Palette className="size-4" />
-								Presets
+								{t("tabs.presets")}
 							</TabsTrigger>
 							<TabsTrigger className="gap-2" value="layout">
 								<Layout className="size-4" />
-								Layout
+								{t("tabs.layout")}
 							</TabsTrigger>
 							<TabsTrigger className="gap-2" value="colors">
 								<Palette className="size-4" />
-								Colors
+								{t("tabs.colors")}
 							</TabsTrigger>
 							<TabsTrigger className="gap-2" value="typography">
 								<Type className="size-4" />
-								Text
+								{t("tabs.text")}
 							</TabsTrigger>
 						</TabsList>
 					</div>
@@ -245,10 +247,10 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 								variant="outline"
 							>
 								<ArrowLeft className="size-4" />
-								Back to Customize
+								{t("backToCustomize")}
 							</Button>
 							<div>
-								<h1 className="font-semibold text-xl">Preview Form</h1>
+								<h1 className="font-semibold text-xl">{t("previewForm")}</h1>
 								<p className="text-muted-foreground text-sm">{internalTitle}</p>
 							</div>
 						</div>
@@ -274,32 +276,32 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 				<div className="flex h-full flex-wrap items-center justify-between gap-3">
 					<div className="flex items-center gap-3 md:gap-4">
 						<h1 aria-hidden="true" className="sr-only">
-							Customize Form
+							{t("customizeForm")}
 						</h1>
 						<div className="flex flex-col gap-1">
 							<p className="font-semibold text-xl">{internalTitle}</p>
 							{hasPublicTitle && (
 								<p className="text-muted-foreground text-xs">
-									Public title: "{schema.settings?.publicTitle}"
+									{t("publicTitle", { title: schema.settings?.publicTitle ?? "" })}
 								</p>
 							)}
 							<div className="text-muted-foreground text-sm">
-								Customize Form
+								{t("customizeForm")}
 							</div>
 						</div>
 					</div>
 
 					<nav
-						aria-label="Customization actions"
+						aria-label={t("customizationActions")}
 						className="flex items-center gap-2"
 					>
 						<div className="flex items-center gap-2">
 							<Button className="gap-2" onClick={handleBack} variant="outline">
 								<ArrowLeft className="size-4" />
-								Back
+								{t("back")}
 							</Button>
 							<Button disabled={saving} loading={saving} onClick={handleSave}>
-								Save
+								{t("save")}
 							</Button>
 						</div>
 					</nav>
@@ -318,7 +320,7 @@ export function FormCustomizePage({ formId, schema }: FormCustomizePageProps) {
 						<DrawerTrigger asChild>
 							<Button className="gap-2 shadow-lg" variant="default">
 								<Pencil className="size-4" />
-								Customize
+								{t("customize")}
 							</Button>
 						</DrawerTrigger>
 						<DrawerContent className="max-h-[80vh]">

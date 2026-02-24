@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useTranslations } from "next-intl";
 import {
 	Select,
 	SelectContent,
@@ -15,6 +16,7 @@ export function BannerFieldSettings({
 	field,
 	onUpdateSettings,
 }: FieldSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.banner");
 	const variant = (field.settings?.bannerVariant as string) || "info";
 	const title = field.settings?.bannerTitle || "";
 	const description = field.settings?.bannerDescription || "";
@@ -23,13 +25,13 @@ export function BannerFieldSettings({
 		<Card className="gap-2 p-4 shadow-none">
 			<CardHeader className="p-0">
 				<CardTitle className="flex items-center gap-2 text-lg">
-					Banner Settings
+					{t("title")}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 p-0">
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="banner-variant">
-						Alert Type
+						{t("alertType")}
 					</Label>
 					<Select
 						onValueChange={(v) =>
@@ -40,23 +42,23 @@ export function BannerFieldSettings({
 						value={variant}
 					>
 						<SelectTrigger className="w-full" id="banner-variant">
-							<SelectValue placeholder="Select alert type" />
+							<SelectValue placeholder={t("alertTypePlaceholder")} />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem value="warning">Warning</SelectItem>
-							<SelectItem value="error">Error</SelectItem>
-							<SelectItem value="info">Info</SelectItem>
-							<SelectItem value="success">Success</SelectItem>
+							<SelectItem value="warning">{t("warning")}</SelectItem>
+							<SelectItem value="error">{t("error")}</SelectItem>
+							<SelectItem value="info">{t("info")}</SelectItem>
+							<SelectItem value="success">{t("success")}</SelectItem>
 						</SelectContent>
 					</Select>
 					<p className="text-muted-foreground text-xs" id="banner-variant-help">
-						Choose the visual style and color scheme for the banner
+						{t("alertTypeHelp")}
 					</p>
 				</div>
 
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="banner-title">
-						Title
+						{t("bannerTitle")}
 					</Label>
 					<Input
 						aria-describedby="banner-title-help"
@@ -69,18 +71,18 @@ export function BannerFieldSettings({
 								e.currentTarget.blur();
 							}
 						}}
-						placeholder="Smoke-free"
+						placeholder={t("bannerTitlePlaceholder")}
 						type="text"
 						value={title}
 					/>
 					<p className="text-muted-foreground text-xs" id="banner-title-help">
-						Main title text for the banner
+						{t("bannerTitleHelp")}
 					</p>
 				</div>
 
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="banner-description">
-						Description
+						{t("description")}
 					</Label>
 					<Textarea
 						aria-describedby="banner-description-help"
@@ -98,14 +100,14 @@ export function BannerFieldSettings({
 								e.currentTarget.blur();
 							}
 						}}
-						placeholder="Our accommodations are strictly smoke-free..."
+						placeholder={t("descriptionPlaceholder")}
 						value={description}
 					/>
 					<p
 						className="text-muted-foreground text-xs"
 						id="banner-description-help"
 					>
-						Detailed description text for the banner
+						{t("descriptionHelp")}
 					</p>
 				</div>
 			</CardContent>

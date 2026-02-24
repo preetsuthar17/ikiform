@@ -1,5 +1,8 @@
 import Link from "next/link";
 import Script from "next/script";
+import { getLocale, getTranslations } from "next-intl/server";
+import { requireLocale } from "@/lib/i18n/locale";
+import { withLocaleHref } from "@/lib/i18n/pathname";
 
 export default async function Success({
 	searchParams,
@@ -8,11 +11,13 @@ export default async function Success({
 		[key: string]: string | string[] | undefined;
 	}>;
 }) {
+	const t = await getTranslations("auth.success");
+	const locale = requireLocale(await getLocale());
 	const params = await searchParams;
 	const checkoutId = params.checkoutId as string | undefined;
 
 	if (!checkoutId) {
-		return <div>Checkout ID not found</div>;
+		return <div>{t("checkoutIdNotFound")}</div>;
 	}
 
 	return (
@@ -28,9 +33,12 @@ export default async function Success({
         `}
 			</Script>
 			<div className="flex flex-col gap-3 text-center text-muted-foreground">
-				<p>Checkout successful! ID: {checkoutId}</p>
-				<Link className="text-foreground underline" href="/dashboard">
-					Go to dashboard
+				<p>{t("checkoutSuccessful", { checkoutId })}</p>
+				<Link
+					className="text-foreground underline"
+					href={withLocaleHref("/dashboard", locale)}
+				>
+					{t("goToDashboard")}
 				</Link>
 			</div>
 		</>

@@ -1,6 +1,7 @@
 "use client";
 
 import { Plus, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -25,34 +26,34 @@ interface FileFieldSettings {
 
 const COMMON_FILE_TYPES = [
 	{
-		label: "Images",
+		key: "images",
 		value: "image/*",
 		extensions: ["jpg", "jpeg", "png", "gif", "webp"],
 	},
 	{
-		label: "Documents",
+		key: "documents",
 		value:
 			"application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 		extensions: ["pdf", "doc", "docx"],
 	},
 	{
-		label: "Spreadsheets",
+		key: "spreadsheets",
 		value:
 			"application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
 		extensions: ["xls", "xlsx"],
 	},
 	{
-		label: "Videos",
+		key: "videos",
 		value: "video/*",
 		extensions: ["mp4", "avi", "mov", "wmv"],
 	},
 	{
-		label: "Audio",
+		key: "audio",
 		value: "audio/*",
 		extensions: ["mp3", "wav", "flac", "m4a"],
 	},
 	{
-		label: "Archives",
+		key: "archives",
 		value:
 			"application/zip,application/x-rar-compressed,application/x-7z-compressed",
 		extensions: ["zip", "rar", "7z"],
@@ -71,6 +72,7 @@ export function FileFieldSettings({
 	field,
 	onUpdateSettings,
 }: FileFieldSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.file");
 	const settings = (field.settings as FileFieldSettings) || {};
 	const {
 		accept = "image/*,application/pdf,video/*,audio/*,text/*,application/zip",
@@ -87,9 +89,9 @@ export function FileFieldSettings({
 	};
 
 	const formatFileSize = (bytes: number): string => {
-		if (!bytes) return "0 Bytes";
+		if (!bytes) return `0 ${t("bytesUnit")}`;
 		const k = 1024;
-		const sizes = ["Bytes", "KB", "MB", "GB"];
+		const sizes = [t("bytesUnit"), "KB", "MB", "GB"];
 		const i = Math.floor(Math.log(bytes) / Math.log(k));
 		return `${(bytes / k ** i).toFixed(1)} ${sizes[i]}`;
 	};
@@ -138,13 +140,13 @@ export function FileFieldSettings({
 		<Card className="gap-2 p-4 shadow-none">
 			<CardHeader className="p-0">
 				<CardTitle className="flex items-center gap-2 text-lg">
-					File Upload Settings
+					{t("title")}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 p-0">
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="maxFiles">
-						Maximum Files
+						{t("maxFiles")}
 					</Label>
 					<Input
 						aria-describedby="maxFiles-help"
@@ -161,18 +163,18 @@ export function FileFieldSettings({
 								e.currentTarget.blur();
 							}
 						}}
-						placeholder="10"
+						placeholder={t("maxFilesPlaceholder")}
 						type="number"
 						value={maxFiles}
 					/>
 					<p className="text-muted-foreground text-xs" id="maxFiles-help">
-						Maximum number of files users can upload (1-50)
+						{t("maxFilesHelp")}
 					</p>
 				</div>
 
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="maxSize">
-						Maximum File Size
+						{t("maxFileSize")}
 					</Label>
 					<div className="flex gap-2">
 						<Input
@@ -193,20 +195,20 @@ export function FileFieldSettings({
 									e.currentTarget.blur();
 								}
 							}}
-							placeholder="50"
+							placeholder={t("maxFileSizePlaceholder")}
 							type="number"
 							value={Math.round(maxSize / (1024 * 1024))}
 						/>
 						<span className="flex items-center px-3 text-muted-foreground text-sm">
-							MB
+							{t("mbUnit")}
 						</span>
 					</div>
 					<div className="flex flex-wrap gap-1">
 						{SIZE_PRESETS.map((preset) => (
 							<Button
-								aria-label={`Set maximum file size to ${preset.label}`}
+								aria-label={t("setMaxSizePresetAria", { size: preset.label })}
 								className="focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
-								key={preset.label}
+								key={preset.value}
 								onClick={() => updateSetting("maxSize", preset.value)}
 								onKeyDown={(e) => {
 									if (e.key === "Enter" || e.key === " ") {
@@ -222,26 +224,27 @@ export function FileFieldSettings({
 						))}
 					</div>
 					<p className="text-muted-foreground text-xs" id="maxSize-help">
-						Current: {formatFileSize(maxSize)}
+						{t("currentSize", { size: formatFileSize(maxSize) })}
 					</p>
 				</div>
 				<div className="flex flex-col gap-4">
 					<Label className="font-medium text-sm" htmlFor="allowed-file-types">
-						Allowed File Types
+						{t("allowedFileTypes")}
 					</Label>
 
 					<div className="flex flex-col gap-2">
-						<p className="text-muted-foreground text-sm">Quick Select:</p>
+						<p className="text-muted-foreground text-sm">{t("quickSelect")}</p>
 						<div className="flex flex-wrap gap-2">
 							{COMMON_FILE_TYPES.map((typeConfig) => {
 								const hasAllExtensions = typeConfig.extensions.every((ext) =>
 									allowedTypes.includes(ext)
 								);
+								const typeLabel = t(`commonTypes.${typeConfig.key}`);
 								return (
 									<Button
-										aria-label={`Toggle ${typeConfig.label} file types`}
+										aria-label={t("toggleFileTypeAria", { type: typeLabel })}
 										className="focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
-										key={typeConfig.label}
+										key={typeConfig.key}
 										onClick={() => toggleCommonType(typeConfig)}
 										onKeyDown={(e) => {
 											if (e.key === "Enter" || e.key === " ") {
@@ -252,7 +255,7 @@ export function FileFieldSettings({
 										size="sm"
 										variant={hasAllExtensions ? "default" : "outline"}
 									>
-										{typeConfig.label}
+										{typeLabel}
 									</Button>
 								);
 							})}
@@ -261,7 +264,7 @@ export function FileFieldSettings({
 
 					<div className="flex flex-col gap-2">
 						<Label className="font-medium text-sm" htmlFor="customType">
-							Custom File Extensions
+							{t("customExtensions")}
 						</Label>
 						<div className="flex gap-2">
 							<Input
@@ -284,11 +287,11 @@ export function FileFieldSettings({
 										}
 									}
 								}}
-								placeholder="e.g., txt, csv, json"
+								placeholder={t("customExtensionsPlaceholder")}
 								type="text"
 							/>
 							<Button
-								aria-label="Add custom file extension"
+								aria-label={t("addCustomExtensionAria")}
 								className="focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
 								onClick={() => {
 									const input = document.getElementById(
@@ -320,21 +323,21 @@ export function FileFieldSettings({
 							</Button>
 						</div>
 						<p className="text-muted-foreground text-xs" id="customType-help">
-							Add custom file extensions (without the dot)
+							{t("customExtensionsHelp")}
 						</p>
 					</div>
 
 					{allowedTypes.length > 0 && (
 						<div className="flex flex-col gap-2">
 							<p className="text-muted-foreground text-sm">
-								Selected extensions:
+								{t("selectedExtensions")}
 							</p>
 							<div className="flex flex-wrap gap-1">
 								{allowedTypes.map((type) => (
 									<Badge className="gap-1" key={type} variant="secondary">
 										.{type}
 										<button
-											aria-label={`Remove ${type} file extension`}
+											aria-label={t("removeExtensionAria", { extension: type })}
 											className="ml-1 hover:text-destructive focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
 											onClick={() => removeFileType(type)}
 											onKeyDown={(e) => {
@@ -354,7 +357,7 @@ export function FileFieldSettings({
 
 					<div className="flex flex-col gap-2">
 						<Label className="font-medium text-sm" htmlFor="accept">
-							HTML Accept Attribute (readonly)
+							{t("htmlAccept")}
 						</Label>
 						<Input
 							aria-describedby="accept-help"
@@ -365,14 +368,14 @@ export function FileFieldSettings({
 							value={accept}
 						/>
 						<p className="text-muted-foreground text-xs" id="accept-help">
-							This is automatically generated based on your selections above
+							{t("htmlAcceptHelp")}
 						</p>
 					</div>
 				</div>
 
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="helpText">
-						Help Text
+						{t("helpText")}
 					</Label>
 					<Textarea
 						aria-describedby="helpText-help"
@@ -388,12 +391,12 @@ export function FileFieldSettings({
 								e.currentTarget.blur();
 							}
 						}}
-						placeholder="Additional instructions for users..."
+						placeholder={t("helpTextPlaceholder")}
 						rows={2}
 						value={helpText}
 					/>
 					<p className="text-muted-foreground text-xs" id="helpText-help">
-						Optional instructions to help users understand what files to upload
+						{t("helpTextHelp")}
 					</p>
 				</div>
 			</CardContent>

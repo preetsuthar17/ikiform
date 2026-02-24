@@ -1,0 +1,70 @@
+{
+  "siteName": "Ikiform",
+  "routes": {
+    "home": {
+      "title": "Build forms, collect responses & analyze data effortlessly.",
+      "description": "Create beautiful forms with Ikiform and analyze responses effortlessly.",
+      "keywords": ["form builder", "online forms", "survey builder", "typeform alternative", "google forms alternative"]
+    },
+    "changelog": {
+      "title": "Changelog",
+      "description": "Track product updates, releases and improvements in Ikiform.",
+      "keywords": ["changelog", "product updates", "release notes", "ikiform updates"]
+    },
+    "legalPrivacy": {
+      "title": "Privacy Policy",
+      "description": "Learn how Ikiform collects, uses and protects your personal data.",
+      "keywords": ["privacy policy", "data protection", "ikiform privacy"]
+    },
+    "legalTerms": {
+      "title": "Terms of Service",
+      "description": "Read Ikiform terms governing access and use of the service.",
+      "keywords": ["terms of service", "terms", "ikiform legal"]
+    },
+    "legalGdpr": {
+      "title": "GDPR Compliance",
+      "description": "Understand Ikiform GDPR controls and data processing posture.",
+      "keywords": ["gdpr", "privacy", "compliance"]
+    },
+    "legalDpa": {
+      "title": "Data Processing Agreement",
+      "description": "Read Ikiform's Data Processing Agreement for business customers.",
+      "keywords": ["dpa", "data processing agreement", "compliance"]
+    },
+    "aiBuilder": {
+      "title": "AI Form Builder",
+      "description": "Create and customize forms with AI-powered assistance in Ikiform.",
+      "keywords": ["ai form builder", "form generator", "ikiform ai"]
+    },
+    "demoFormBuilder": {
+      "title": "Demo Form Builder",
+      "description": "Try Ikiform's live demo form builder and explore features instantly.",
+      "keywords": ["form builder demo", "ikiform demo", "interactive form builder"]
+    },
+    "login": {
+      "title": "Login",
+      "description": "Sign in to your Ikiform account.",
+      "keywords": ["ikiform login", "sign in"]
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "description": "Reset your Ikiform account password.",
+      "keywords": ["reset password", "account recovery"]
+    },
+    "success": {
+      "title": "Success",
+      "description": "Action completed successfully.",
+      "keywords": ["success"]
+    },
+    "embed": {
+      "title": "Embed",
+      "description": "Embed Ikiform forms into your website.",
+      "keywords": ["embed form", "form embed", "ikiform embed"]
+    },
+    "embedTest": {
+      "title": "Embed Test",
+      "description": "Preview and test embedded Ikiform forms.",
+      "keywords": ["embed test", "form preview"]
+    }
+  }
+}

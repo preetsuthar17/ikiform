@@ -2,8 +2,22 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import React from "react";
 import { FaDiscord, FaGithub, FaXTwitter } from "react-icons/fa6";
+import {
+	getLocaleFromPathname,
+	stripLocalePrefix,
+	withLocaleHref,
+} from "@/lib/i18n/pathname";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "../ui/select";
 import { Separator } from "../ui";
 
 const BADGES = [
@@ -37,11 +51,16 @@ const BADGES = [
 ] as const;
 
 const FooterLogo = React.memo(function FooterLogo() {
+	const tNav = useTranslations("nav");
+	const pathname = usePathname();
+	const locale = getLocaleFromPathname(pathname);
+	const homeHref = locale ? withLocaleHref("/", locale) : "/";
+
 	return (
-		<Link className="inline-flex" href="/">
+		<Link className="inline-flex" href={homeHref}>
 			<span className="flex items-center gap-3 text-3xl tracking-tight">
 				<Image
-					alt="Ikiform Logo"
+					alt={tNav("ikiformLogo")}
 					className="size-10 rounded-lg"
 					height={40}
 					loading="lazy"
@@ -84,56 +103,64 @@ const FooterBadges = React.memo(function Footer() {
 });
 
 const NavigationLinks = React.memo(function NavigationLinks() {
+	const tNav = useTranslations("nav");
+	const pathname = usePathname();
+	const locale = getLocaleFromPathname(pathname);
+	const toLocaleHref = (href: string) =>
+		locale ? withLocaleHref(href, locale) : href;
+
 	return (
 		<div className="flex flex-col gap-4">
-			<h3 className="font-dm-sans font-medium text-foreground">Navigation</h3>
+			<h3 className="font-dm-sans font-medium text-foreground">
+				{tNav("navigation")}
+			</h3>
 			<ul className="flex flex-col gap-2">
 				<li>
 					<Link
 						className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-						href="/"
+						href={toLocaleHref("/")}
 					>
-						Home
+						{tNav("home")}
 					</Link>
 				</li>
 				<li>
 					<Link
 						className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-						href="/#features"
+						href={toLocaleHref("/#features")}
 					>
-						Features
+						{tNav("features")}
 					</Link>
 				</li>
 				<li>
 					<Link
 						className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-						href="/#pricing"
+						href={toLocaleHref("/#pricing")}
 					>
-						Pricing
+						{tNav("pricing")}
 					</Link>
 				</li>
 				<li>
 					<Link
 						className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-						href="/login"
+						href={toLocaleHref("/login")}
 					>
-						Login
+						{tNav("login")}
 					</Link>
 				</li>
 				<li>
 					<Link
 						className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-						href="/ai-builder"
+						href={toLocaleHref("/ai-builder")}
 					>
-						AI Builder
+						{tNav("aiBuilder")}
 					</Link>
 				</li>
 				<li>
 					<Link
 						className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-						href="/dashboard"
+						href={toLocaleHref("/dashboard")}
 					>
-						Dashboard
+						{tNav("dashboard")}
 					</Link>
 				</li>
 			</ul>
@@ -142,40 +169,48 @@ const NavigationLinks = React.memo(function NavigationLinks() {
 });
 
 const LegalLinks = React.memo(function LegalLinks() {
+	const tNav = useTranslations("nav");
+	const pathname = usePathname();
+	const locale = getLocaleFromPathname(pathname);
+	const toLocaleHref = (href: string) =>
+		locale ? withLocaleHref(href, locale) : href;
+
 	return (
 		<div className="flex flex-col gap-4">
-			<h3 className="font-dm-sans font-medium text-foreground">Legal</h3>
+			<h3 className="font-dm-sans font-medium text-foreground">
+				{tNav("legal")}
+			</h3>
 			<ul className="flex flex-col gap-2">
 				<li>
 					<Link
 						className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-						href="/legal/privacy"
+						href={toLocaleHref("/legal/privacy")}
 					>
-						Privacy Policy
+						{tNav("privacy")}
 					</Link>
 				</li>
 				<li>
 					<Link
 						className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-						href="/legal/terms"
+						href={toLocaleHref("/legal/terms")}
 					>
-						Terms & Condition
+						{tNav("terms")}
 					</Link>
 				</li>
 				<li>
 					<Link
 						className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-						href="/legal/gdpr"
+						href={toLocaleHref("/legal/gdpr")}
 					>
-						GDPR
+						{tNav("gdpr")}
 					</Link>
 				</li>
 				<li>
 					<Link
 						className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-						href="/legal/dpa"
+						href={toLocaleHref("/legal/dpa")}
 					>
-						DPA
+						{tNav("dpa")}
 					</Link>
 				</li>
 			</ul>
@@ -184,9 +219,13 @@ const LegalLinks = React.memo(function LegalLinks() {
 });
 
 const ResourcesLinks = React.memo(function ResourcesLinks() {
+	const tNav = useTranslations("nav");
+
 	return (
 		<div className="flex flex-col gap-4">
-			<h3 className="font-dm-sans font-medium text-foreground">Resources</h3>
+			<h3 className="font-dm-sans font-medium text-foreground">
+				{tNav("resources")}
+			</h3>
 			<ul className="flex flex-col gap-2">
 				<li>
 					<Link
@@ -195,7 +234,7 @@ const ResourcesLinks = React.memo(function ResourcesLinks() {
 						rel="noopener noreferrer"
 						target="_blank"
 					>
-						Feature Request
+						{tNav("featureRequest")}
 					</Link>
 				</li>
 				<li>
@@ -205,7 +244,7 @@ const ResourcesLinks = React.memo(function ResourcesLinks() {
 						rel="noopener noreferrer"
 						target="_blank"
 					>
-						Feedback
+						{tNav("feedback")}
 					</Link>
 				</li>
 				<li>
@@ -215,7 +254,7 @@ const ResourcesLinks = React.memo(function ResourcesLinks() {
 						rel="noopener noreferrer"
 						target="_blank"
 					>
-						Bug Report
+						{tNav("bugReport")}
 					</Link>
 				</li>
 				<li>
@@ -225,7 +264,7 @@ const ResourcesLinks = React.memo(function ResourcesLinks() {
 						rel="noopener noreferrer"
 						target="_blank"
 					>
-						GitHub Repository
+						{tNav("githubRepository")}
 					</Link>
 				</li>
 			</ul>
@@ -234,9 +273,13 @@ const ResourcesLinks = React.memo(function ResourcesLinks() {
 });
 
 const ProductsLinks = React.memo(function ProductsLinks() {
+	const tNav = useTranslations("nav");
+
 	return (
 		<div className="flex flex-col gap-4">
-			<h3 className="font-dm-sans font-medium text-foreground">Products</h3>
+			<h3 className="font-dm-sans font-medium text-foreground">
+				{tNav("products")}
+			</h3>
 			<ul className="flex flex-col gap-2">
 				<li>
 					<Link
@@ -263,11 +306,52 @@ const ProductsLinks = React.memo(function ProductsLinks() {
 	);
 });
 
+const LanguageSwitcher = React.memo(function LanguageSwitcher() {
+	const tNav = useTranslations("nav");
+	const pathname = usePathname();
+	const router = useRouter();
+	const searchParams = useSearchParams();
+	const locale = getLocaleFromPathname(pathname) ?? "en";
+	const normalizedPathname = stripLocalePrefix(pathname);
+
+	return (
+		<div className="flex items-center gap-2">
+			<span className="text-muted-foreground text-sm">{tNav("language")}</span>
+			<Select
+				onValueChange={(value) => {
+					if (value !== "en" && value !== "es") return;
+					if (value === locale) return;
+
+					const localizedPath = withLocaleHref(normalizedPathname, value);
+					const query = searchParams.toString();
+					const nextHref = query ? `${localizedPath}?${query}` : localizedPath;
+					router.push(nextHref);
+					router.refresh();
+				}}
+				value={locale}
+			>
+				<SelectTrigger
+					aria-label={tNav("language")}
+					className="h-8 min-w-[130px]"
+					size="sm"
+				>
+					<SelectValue />
+				</SelectTrigger>
+				<SelectContent>
+					<SelectItem value="en">{tNav("english")}</SelectItem>
+					<SelectItem value="es">{tNav("spanish")}</SelectItem>
+				</SelectContent>
+			</Select>
+		</div>
+	);
+});
+
 const SocialLinks = React.memo(function SocialLinks() {
+	const tNav = useTranslations("nav");
 	return (
 		<div className="flex flex-wrap items-center gap-4 text-muted-foreground text-sm">
 			<Link
-				aria-label="Ikiform on GitHub (opens in a new tab)"
+				aria-label={tNav("socialGithubAria")}
 				className="flex items-center gap-2 transition-colors hover:text-foreground"
 				href="/github"
 				rel="noopener noreferrer"
@@ -276,7 +360,7 @@ const SocialLinks = React.memo(function SocialLinks() {
 				<FaGithub aria-hidden className="size-4" />
 			</Link>
 			<Link
-				aria-label="Ikiform on Twitter (opens in a new tab)"
+				aria-label={tNav("socialTwitterAria")}
 				className="flex items-center gap-2 transition-colors hover:text-foreground"
 				href="/twitter"
 				rel="noopener noreferrer"
@@ -285,7 +369,7 @@ const SocialLinks = React.memo(function SocialLinks() {
 				<FaXTwitter aria-hidden className="size-4" />
 			</Link>
 			<Link
-				aria-label="Ikiform on Discord (opens in a new tab)"
+				aria-label={tNav("socialDiscordAria")}
 				className="flex items-center gap-2 transition-colors hover:text-foreground"
 				href="/discord"
 				rel="noopener noreferrer"
@@ -294,7 +378,7 @@ const SocialLinks = React.memo(function SocialLinks() {
 				<FaDiscord aria-hidden className="size-5" />
 			</Link>
 			<Link
-				aria-label="Email Ikiform (opens in a new tab)"
+				aria-label={tNav("socialEmailAria")}
 				className="flex items-center gap-2 transition-colors hover:text-foreground"
 				href="/email"
 				rel="noopener noreferrer"
@@ -307,6 +391,8 @@ const SocialLinks = React.memo(function SocialLinks() {
 });
 
 export default function Footer() {
+	const tFooter = useTranslations("footer");
+
 	return (
 		<footer className="mx-auto my-12 w-full max-w-7xl bg-background">
 			<div className="mx-auto flex w-full flex-col">
@@ -316,11 +402,11 @@ export default function Footer() {
 						{}
 						<div className="flex flex-col gap-8 lg:flex-row lg:justify-between">
 							{}
-							<div className="flex flex-shrink-0 flex-col gap-8">
-								<div className="flex flex-shrink-0 flex-col gap-4">
+							<div className="flex shrink-0 flex-col gap-8">
+								<div className="flex shrink-0 flex-col gap-4">
 									<FooterLogo />
 									<p className="max-w-sm text-muted-foreground text-sm">
-										© {new Date().getFullYear()} Made by —{" "}
+										© {new Date().getFullYear()} {tFooter("madeBy")} —{" "}
 										<Link
 											className="font-medium text-foreground transition-colors hover:underline"
 											href="https://x.com/preetsuthar17"
@@ -362,6 +448,7 @@ export default function Footer() {
 						<div className="flex w-full flex-col items-end justify-center gap-6">
 							<div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 								<SocialLinks />
+								<LanguageSwitcher />
 							</div>
 						</div>
 					</div>

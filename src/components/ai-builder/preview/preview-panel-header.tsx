@@ -1,5 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 
@@ -24,6 +25,8 @@ export function PreviewPanelHeader({
 	onUseForm,
 	isMobile = false,
 }: PreviewPanelHeaderProps) {
+	const t = useTranslations("product.aiBuilder.preview");
+
 	if (!forms || forms.length === 0) {
 		return null;
 	}
@@ -39,7 +42,7 @@ export function PreviewPanelHeader({
 					</Button>
 					<div className="inline-flex items-center gap-2">
 						<span className="size-2 rounded-2xl bg-muted-foreground" />
-						<span className="font-semibold text-lg">Kiko AI</span>
+						<span className="font-semibold text-lg">{t("title")}</span>
 					</div>
 				</div>
 				<div className="hidden gap-2 overflow-x-auto p-3 max-sm:flex">
@@ -52,7 +55,7 @@ export function PreviewPanelHeader({
 						>
 							{form.prompt
 								? `${form.prompt.slice(0, 12)}...`
-								: `Form ${idx + 1}`}
+								: t("formFallback", { index: idx + 1 })}
 						</Button>
 					))}
 				</div>
@@ -63,7 +66,7 @@ export function PreviewPanelHeader({
 							onClick={onUseForm}
 							size="lg"
 						>
-							Use this form
+							{t("useThisForm")}
 						</Button>
 					</div>
 				)}
@@ -80,7 +83,9 @@ export function PreviewPanelHeader({
 						onClick={() => setActiveFormId(form.id)}
 						variant={form.id === activeFormId ? "secondary" : "outline"}
 					>
-						{form.prompt ? `${form.prompt.slice(0, 20)}...` : `Form ${idx + 1}`}
+						{form.prompt
+							? `${form.prompt.slice(0, 20)}...`
+							: t("formFallback", { index: idx + 1 })}
 					</Button>
 				))}
 			</div>
@@ -91,10 +96,10 @@ export function PreviewPanelHeader({
 						size="sm"
 						variant="outline"
 					>
-						View JSON
+						{t("viewJson")}
 					</Button>
 					<Button onClick={onUseForm} size="sm">
-						Use this form
+						{t("useThisForm")}
 					</Button>
 				</div>
 			)}

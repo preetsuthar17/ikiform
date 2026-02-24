@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
@@ -7,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { type ExpireTrialsResult, expireTrialsAction } from "./actions";
 
 export function ExpireTrialsControl() {
+	const t = useTranslations("dashboard.admin.expireTrialsControl");
 	const [isRunning, setIsRunning] = useState(false);
 	const [result, setResult] = useState<ExpireTrialsResult | null>(null);
 
@@ -20,14 +22,14 @@ export function ExpireTrialsControl() {
 
 			if (res.ok) {
 				toast.success(
-					`Successfully updated ${res.updatedCount} user(s) from trial to free`
+					t("toasts.updatedSuccess", { count: res.updatedCount })
 				);
 			} else {
-				toast.error(`Failed: ${res.error}`);
+				toast.error(t("toasts.failedWithError", { error: res.error }));
 			}
 		} catch (error) {
-			const message = error instanceof Error ? error.message : "Unknown error";
-			toast.error(`Error: ${message}`);
+			const message = error instanceof Error ? error.message : t("unknownError");
+			toast.error(t("toasts.errorWithMessage", { message }));
 			setResult({
 				ok: false,
 				error: message,
@@ -42,13 +44,13 @@ export function ExpireTrialsControl() {
 		<div className="flex flex-col gap-4">
 			<div className="flex items-center justify-between">
 				<div>
-					<h3 className="font-semibold">Expire Trials</h3>
+					<h3 className="font-semibold">{t("title")}</h3>
 					<p className="text-muted-foreground text-sm">
-						Manually run the cron job to expire free trials older than 14 days
+						{t("description")}
 					</p>
 				</div>
 				<Button disabled={isRunning} onClick={handleRun}>
-					{isRunning ? "Running..." : "Run Expire Trials"}
+					{isRunning ? t("actions.running") : t("actions.run")}
 				</Button>
 			</div>
 
@@ -56,9 +58,9 @@ export function ExpireTrialsControl() {
 				<Card>
 					<CardHeader>
 						<CardTitle>
-							{result.ok ? "Success" : "Error"} -{" "}
+							{result.ok ? t("result.success") : t("result.error")} -{" "}
 							{result.ok
-								? `${result.updatedCount} user(s) updated`
+								? t("result.updatedUsersCount", { count: result.updatedCount })
 								: result.error}
 						</CardTitle>
 					</CardHeader>
@@ -71,7 +73,7 @@ export function ExpireTrialsControl() {
 							</div>
 							{result.ok && result.updatedUsers.length > 0 && (
 								<div className="mt-4">
-									<p className="mb-2 font-medium">Updated Users:</p>
+									<p className="mb-2 font-medium">{t("result.updatedUsers")}</p>
 									<div className="rounded-md bg-muted p-4">
 										<pre className="overflow-auto text-muted-foreground text-xs">
 											{JSON.stringify(result.updatedUsers, null, 2)}

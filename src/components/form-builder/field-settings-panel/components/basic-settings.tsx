@@ -1,4 +1,5 @@
 import type React from "react";
+import { useTranslations } from "next-intl";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,19 +14,20 @@ export const BasicSettings: React.FC<BasicSettingsProps> = ({
 	field,
 	onFieldUpdate,
 }) => {
+	const t = useTranslations("product.formBuilder.fieldSettings.basic");
 	const { updateField } = createFieldUpdater(field, onFieldUpdate);
 
 	return (
 		<Card className="gap-2 p-4 shadow-none">
 			<CardHeader className="p-0">
 				<CardTitle className="flex items-center gap-2 text-lg">
-					Basic Settings
+					{t("title")}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 p-0">
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="field-label">
-						Field Label
+						{t("fieldLabel")}
 					</Label>
 					<Input
 						aria-describedby="field-label-help"
@@ -38,18 +40,18 @@ export const BasicSettings: React.FC<BasicSettingsProps> = ({
 								e.currentTarget.blur();
 							}
 						}}
-						placeholder="Enter field label"
+						placeholder={t("fieldLabelPlaceholder")}
 						type="text"
 						value={field.label}
 					/>
 					<p className="text-muted-foreground text-xs" id="field-label-help">
-						The label that appears above the field
+						{t("fieldLabelHelp")}
 					</p>
 				</div>
 
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="field-placeholder">
-						Placeholder
+						{t("placeholder")}
 					</Label>
 					<Input
 						aria-describedby="field-placeholder-help"
@@ -62,7 +64,7 @@ export const BasicSettings: React.FC<BasicSettingsProps> = ({
 								e.currentTarget.blur();
 							}
 						}}
-						placeholder="Enter placeholder text"
+						placeholder={t("placeholderPlaceholder")}
 						type="text"
 						value={field.placeholder || ""}
 					/>
@@ -70,13 +72,13 @@ export const BasicSettings: React.FC<BasicSettingsProps> = ({
 						className="text-muted-foreground text-xs"
 						id="field-placeholder-help"
 					>
-						Hint text that appears inside the field
+						{t("placeholderHelp")}
 					</p>
 				</div>
 
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="field-description">
-						Description
+						{t("description")}
 					</Label>
 					<Textarea
 						aria-describedby="field-description-help"
@@ -92,7 +94,7 @@ export const BasicSettings: React.FC<BasicSettingsProps> = ({
 								e.currentTarget.blur();
 							}
 						}}
-						placeholder="Enter field description (shown below the field)"
+						placeholder={t("descriptionPlaceholder")}
 						rows={2}
 						value={field.description || ""}
 					/>
@@ -100,17 +102,17 @@ export const BasicSettings: React.FC<BasicSettingsProps> = ({
 						className="text-muted-foreground text-xs"
 						id="field-description-help"
 					>
-						Additional help text shown below the field
+						{t("descriptionHelp")}
 					</p>
 				</div>
 
 				<div className="flex items-center justify-between">
 					<div className="flex flex-col gap-1">
 						<Label className="font-medium text-sm" htmlFor="field-required">
-							Required field
+							{t("required")}
 						</Label>
 						<p className="text-muted-foreground text-xs">
-							Users must fill this field to submit the form
+							{t("requiredHelp")}
 						</p>
 					</div>
 					<Switch

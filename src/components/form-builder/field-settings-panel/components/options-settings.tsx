@@ -1,4 +1,5 @@
 import { Plus, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,6 +13,7 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
 	field,
 	onFieldUpdate,
 }) => {
+	const t = useTranslations("product.formBuilder.fieldSettings.options");
 	const { updateField } = createFieldUpdater(field, onFieldUpdate);
 	const { addOption, updateOption, removeOption } = createOptionHandlers(
 		field,
@@ -27,10 +29,10 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
 			<CardHeader className="p-0">
 				<div className="flex items-center justify-between">
 					<CardTitle className="flex items-center gap-2 text-lg">
-						Options
+						{t("title")}
 					</CardTitle>
 					<Button
-						aria-label="Add new option"
+						aria-label={t("addOptionAria")}
 						className="flex gap-2"
 						onClick={addOption}
 						onKeyDown={(e) => {
@@ -43,7 +45,7 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
 						variant="outline"
 					>
 						<Plus aria-hidden="true" className="size-4" />
-						Add Option
+						{t("addOption")}
 					</Button>
 				</div>
 			</CardHeader>
@@ -74,12 +76,16 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
 												e.currentTarget.blur();
 											}
 										}}
-										placeholder={`Option ${index + 1}`}
+										placeholder={t("optionPlaceholder", {
+											index: index + 1,
+										})}
 										type="text"
 										value={value}
 									/>
 									<Button
-										aria-label={`Remove option ${index + 1}`}
+										aria-label={t("removeOptionAria", {
+											index: index + 1,
+										})}
 										className="flex gap-2"
 										onClick={() => removeOption(index)}
 										onKeyDown={(e) => {
@@ -103,22 +109,22 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
 							className="text-muted-foreground text-sm"
 							role="status"
 						>
-							No options added yet
+							{t("none")}
 						</p>
 					)}
 				</div>
 				<div className="flex items-center gap-2 py-2">
 					<div aria-hidden="true" className="h-px flex-1 bg-muted" />
 					<span
-						aria-label="or"
+						aria-label={t("orAria")}
 						className="select-none px-2 font-semibold text-muted-foreground text-xs"
 					>
-						OR
+						{t("or")}
 					</span>
 					<div aria-hidden="true" className="h-px flex-1 bg-muted" />
 				</div>
 				<div className="flex flex-col gap-4">
-					<h3 className="font-medium text-card-foreground">Fetch from API</h3>
+					<h3 className="font-medium text-card-foreground">{t("fetchFromApi")}</h3>
 					<div className="flex flex-col gap-2">
 						<Input
 							aria-describedby="options-api-help"
@@ -131,12 +137,12 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
 									e.currentTarget.blur();
 								}
 							}}
-							placeholder="https://your-api.com/options"
+							placeholder={t("apiEndpointPlaceholder")}
 							type="url"
 							value={field.optionsApi || ""}
 						/>
 						<p className="text-muted-foreground text-xs" id="options-api-help">
-							API endpoint to fetch options from
+							{t("apiEndpointHelp")}
 						</p>
 					</div>
 					<div className="flex gap-2">
@@ -152,12 +158,12 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
 										e.currentTarget.blur();
 									}
 								}}
-								placeholder="Value key (e.g. id)"
+								placeholder={t("valueKeyPlaceholder")}
 								type="text"
 								value={field.valueKey || ""}
 							/>
 							<p className="text-muted-foreground text-xs" id="value-key-help">
-								Key for option values
+								{t("valueKeyHelp")}
 							</p>
 						</div>
 						<div className="flex flex-1 flex-col gap-2">
@@ -172,12 +178,12 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
 										e.currentTarget.blur();
 									}
 								}}
-								placeholder="Label key (e.g. name)"
+								placeholder={t("labelKeyPlaceholder")}
 								type="text"
 								value={field.labelKey || ""}
 							/>
 							<p className="text-muted-foreground text-xs" id="label-key-help">
-								Key for option labels
+								{t("labelKeyHelp")}
 							</p>
 						</div>
 					</div>
@@ -187,38 +193,38 @@ export const OptionsSettings: React.FC<OptionsSettingsProps> = ({
 							className="flex flex-col gap-2 rounded border border-blue-200 bg-blue-50 p-2 text-blue-900 text-xs"
 							role="status"
 						>
-							<strong>API Data Guidance:</strong> This field will fetch options
-							from the API endpoint:
+							<strong>{t("apiGuidanceTitle")}</strong> {t("apiGuidanceIntro")}
 							<span className="font-mono text-xs">{field.optionsApi}</span>
 							<span>
-								The API should return either:
+								{t("apiShouldReturn")}
 								<ul className="ml-6 list-disc">
 									<li>
 										<code>["Option 1", "Option 2", ...]</code>{" "}
-										<em>(array of strings)</em>
+										<em>{t("apiType1Hint")}</em>
 									</li>
 									<li>
 										<code>
 											[&#123; value: "opt1", label: "Option 1" &#125;, ...]
 										</code>{" "}
-										<em>(array of objects)</em>
+										<em>{t("apiType2Hint")}</em>
 									</li>
 									<li>
 										<code>&#123; options: [...] &#125;</code>{" "}
-										<em>(object with options array)</em>
+										<em>{t("apiType3Hint")}</em>
 									</li>
 									<li>
 										<code>
 											[&#123; id: "opt1", name: "Option 1" &#125;, ...]
 										</code>{" "}
-										<em>(custom keys)</em>
+										<em>{t("apiType4Hint")}</em>
 									</li>
 								</ul>
 								<span>
-									You can specify custom keys above to map your API data.
+									{t("apiCustomKeysHelp")}
 									<br />
-									Each option must have a <code>value</code> property (or your
-									custom key). <code>label</code> is optional.
+									{t("apiValueLabelHelp")} <code>value</code>{" "}
+									{t("apiValueLabelHelpOr")} <code>label</code>{" "}
+									{t("apiValueLabelHelpSuffix")}
 								</span>
 							</span>
 						</div>

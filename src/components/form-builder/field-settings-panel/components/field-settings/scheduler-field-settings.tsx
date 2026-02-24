@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -23,19 +24,20 @@ export function SchedulerFieldSettings({
 	field,
 	onUpdateSettings,
 }: FieldSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.scheduler");
 	const [schedulerModalOpen, setSchedulerModalOpen] = useState(false);
 
 	return (
 		<Card className="gap-2 p-4 shadow-none">
 			<CardHeader className="p-0">
 				<CardTitle className="flex items-center gap-2 text-lg">
-					Scheduler Settings
+					{t("title")}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 p-0">
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="scheduler-provider">
-						Scheduler Provider
+						{t("provider")}
 					</Label>
 					<Select
 						onValueChange={(val) =>
@@ -44,19 +46,19 @@ export function SchedulerFieldSettings({
 						value={field.settings?.schedulerProvider || ""}
 					>
 						<SelectTrigger className="w-full" id="scheduler-provider">
-							<SelectValue placeholder="Select provider" />
+							<SelectValue placeholder={t("providerPlaceholder")} />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem value="calcom">Cal.com</SelectItem>
-							<SelectItem value="calendly">Calendly</SelectItem>
-							<SelectItem value="tidycal">TidyCal</SelectItem>
+							<SelectItem value="calcom">{t("providerCalcom")}</SelectItem>
+							<SelectItem value="calendly">{t("providerCalendly")}</SelectItem>
+							<SelectItem value="tidycal">{t("providerTidycal")}</SelectItem>
 						</SelectContent>
 					</Select>
 					<p
 						className="text-muted-foreground text-xs"
 						id="scheduler-provider-help"
 					>
-						Choose your preferred scheduling platform
+						{t("providerHelp")}
 					</p>
 				</div>
 				{field.settings?.schedulerProvider && (
@@ -65,13 +67,13 @@ export function SchedulerFieldSettings({
 							{(() => {
 								switch (field.settings?.schedulerProvider) {
 									case "calcom":
-										return "Cal.com Link";
+										return t("calcomLink");
 									case "calendly":
-										return "Calendly Link";
+										return t("calendlyLink");
 									case "tidycal":
-										return "TidyCal Link";
+										return t("tidycalLink");
 									default:
-										return "Scheduler Link";
+										return t("schedulerLink");
 								}
 							})()}
 						</Label>
@@ -95,7 +97,7 @@ export function SchedulerFieldSettings({
 									e.currentTarget.blur();
 								}
 							}}
-							placeholder="https://..."
+							placeholder={t("linkPlaceholder")}
 							type="url"
 							value={
 								field.settings && field.settings.schedulerProvider
@@ -109,7 +111,9 @@ export function SchedulerFieldSettings({
 							className="text-muted-foreground text-xs"
 							id="scheduler-link-help"
 						>
-							Embed URL for your {field.settings?.schedulerProvider} scheduler
+							{t("linkHelp", {
+								provider: field.settings?.schedulerProvider,
+							})}
 						</p>
 					</div>
 				)}
@@ -118,7 +122,7 @@ export function SchedulerFieldSettings({
 						className="font-medium text-sm"
 						htmlFor="scheduler-button-text"
 					>
-						Calendar Opener Button Text
+						{t("buttonText")}
 					</Label>
 					<Input
 						aria-describedby="scheduler-button-text-help"
@@ -133,7 +137,7 @@ export function SchedulerFieldSettings({
 								e.currentTarget.blur();
 							}
 						}}
-						placeholder="e.g. Book a Call"
+						placeholder={t("buttonTextPlaceholder")}
 						type="text"
 						value={field.settings?.schedulerButtonText || ""}
 					/>
@@ -141,12 +145,12 @@ export function SchedulerFieldSettings({
 						className="text-muted-foreground text-xs"
 						id="scheduler-button-text-help"
 					>
-						Text displayed on the scheduler button
+						{t("buttonTextHelp")}
 					</p>
 				</div>
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="scheduler-preview">
-						Preview
+						{t("preview")}
 					</Label>
 					<Button
 						aria-describedby="scheduler-preview-help"
@@ -169,18 +173,18 @@ export function SchedulerFieldSettings({
 						}}
 						type="button"
 					>
-						{field.settings?.schedulerButtonText || "Open Scheduler"}
+						{field.settings?.schedulerButtonText || t("openScheduler")}
 					</Button>
 					<p
 						className="text-muted-foreground text-xs"
 						id="scheduler-preview-help"
 					>
-						Click to preview how the scheduler will appear
+						{t("previewHelp")}
 					</p>
 					<Modal onOpenChange={setSchedulerModalOpen} open={schedulerModalOpen}>
 						<ModalContent className="flex h-[95%] w-full max-w-[95%] flex-col gap-4">
 							<ModalHeader>
-								<ModalTitle>Scheduler Preview</ModalTitle>
+								<ModalTitle>{t("previewModalTitle")}</ModalTitle>
 							</ModalHeader>
 							<div className="h-full">
 								{field.settings?.schedulerProvider &&
@@ -195,13 +199,13 @@ export function SchedulerFieldSettings({
 													field.settings.schedulerProvider
 												]
 											}
-											title="Scheduler Embed"
+											title={t("iframeTitle")}
 										/>
 									)}
 							</div>
 							<ModalFooter>
 								<Button
-									aria-label="Close scheduler preview"
+									aria-label={t("closePreviewAria")}
 									className="focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
 									onClick={() => setSchedulerModalOpen(false)}
 									onKeyDown={(e) => {
@@ -212,7 +216,7 @@ export function SchedulerFieldSettings({
 									}}
 									variant="outline"
 								>
-									Close
+									{t("close")}
 								</Button>
 							</ModalFooter>
 						</ModalContent>

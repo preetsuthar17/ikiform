@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -37,6 +38,8 @@ export function MetadataSection({
 	schema?: any;
 	onSchemaUpdate?: (updates: Partial<any>) => void;
 }) {
+	const t = useTranslations("product.formBuilder.formSettings.metadataSection");
+	const tCommon = useTranslations("product.formBuilder.formSettings.common");
 	const { user } = useAuth();
 	const metadata = localSettings.metadata || {};
 	const [hasBasicChanges, setHasBasicChanges] = useState(false as boolean);
@@ -163,7 +166,7 @@ export function MetadataSection({
 
 	const saveBasic = async () => {
 		if (!formId) {
-			toast.error("Form ID is required to save settings");
+			toast.error(tCommon("formIdRequiredToSaveSettings"));
 			return;
 		}
 		setSavingBasic(true);
@@ -186,11 +189,11 @@ export function MetadataSection({
 			}
 			setSavedBasic(true);
 			setHasBasicChanges(false);
-			toast.success("Basic SEO saved");
+			toast.success(t("basicSaved"));
 			setTimeout(() => setSavedBasic(false), 2000);
 		} catch (e) {
 			console.error(e);
-			toast.error("Failed to save Basic SEO");
+			toast.error(t("basicSaveFailed"));
 		} finally {
 			setSavingBasic(false);
 		}
@@ -198,11 +201,11 @@ export function MetadataSection({
 
 	const saveIndexing = async () => {
 		if (!formId) {
-			toast.error("Form ID is required to save settings");
+			toast.error(tCommon("formIdRequiredToSaveSettings"));
 			return;
 		}
 		if (!user) {
-			toast.error("User authentication required");
+			toast.error(t("authRequired"));
 			return;
 		}
 		setSavingIndexing(true);
@@ -217,11 +220,11 @@ export function MetadataSection({
 			await formsDb.updateForm(formId, user.id, { schema: newSchema as any });
 			setSavedIndexing(true);
 			setHasIndexingChanges(false);
-			toast.success("Indexing settings saved");
+			toast.success(t("indexingSaved"));
 			setTimeout(() => setSavedIndexing(false), 2000);
 		} catch (e) {
 			console.error(e);
-			toast.error("Failed to save indexing settings");
+			toast.error(t("indexingSaveFailed"));
 		} finally {
 			setSavingIndexing(false);
 		}
@@ -229,7 +232,7 @@ export function MetadataSection({
 
 	const saveSocial = async () => {
 		if (!formId) {
-			toast.error("Form ID is required to save settings");
+			toast.error(tCommon("formIdRequiredToSaveSettings"));
 			return;
 		}
 		setSavingSocial(true);
@@ -257,11 +260,11 @@ export function MetadataSection({
 			}
 			setSavedSocial(true);
 			setHasSocialChanges(false);
-			toast.success("Social metadata saved");
+			toast.success(t("socialSaved"));
 			setTimeout(() => setSavedSocial(false), 2000);
 		} catch (e) {
 			console.error(e);
-			toast.error("Failed to save social metadata");
+			toast.error(t("socialSaveFailed"));
 		} finally {
 			setSavingSocial(false);
 		}
@@ -273,13 +276,13 @@ export function MetadataSection({
 			announcement.setAttribute("aria-live", "polite");
 			announcement.setAttribute("aria-atomic", "true");
 			announcement.className = "sr-only";
-			announcement.textContent = "Metadata updated";
+			announcement.textContent = t("updatedAnnouncement");
 			document.body.appendChild(announcement);
 			setTimeout(() => {
 				document.body.removeChild(announcement);
 			}, 1000);
 		}
-	}, [savedBasic, savedIndexing, savedSocial]);
+	}, [savedBasic, savedIndexing, savedSocial, t]);
 
 	return (
 		<div
@@ -309,23 +312,23 @@ export function MetadataSection({
 								className="flex items-center gap-2 text-lg tracking-tight"
 								id="basic-seo-title"
 							>
-								Basic SEO{" "}
+								{t("basicTitle")}{" "}
 								{hasBasicChanges && (
 									<Badge className="gap-2" variant="secondary">
 										<div className="size-2 rounded-full bg-orange-500" />
-										Unsaved changes
+										{tCommon("unsavedChanges")}
 									</Badge>
 								)}
 							</CardTitle>
 							<CardDescription>
-								Titles, descriptions and canonical URL
+								{t("basicDescription")}
 							</CardDescription>
 						</div>
 					</div>
 				</CardHeader>
 				<CardContent className="flex flex-col gap-6">
 					<div className="flex flex-col gap-2">
-						<Label htmlFor="meta-title">Page Title</Label>
+						<Label htmlFor="meta-title">{t("pageTitleLabel")}</Label>
 						<Input
 							className="text-base shadow-none md:text-sm"
 							id="meta-title"
@@ -337,15 +340,18 @@ export function MetadataSection({
 									(e.target as HTMLElement).blur();
 								}
 							}}
-							placeholder="Enter page title (max 60 characters)"
+							placeholder={t("pageTitlePlaceholder")}
 							value={metadata.title || ""}
 						/>
 						<p className="text-muted-foreground text-xs">
-							{metadata.title?.length || 0}/60 characters
+							{t("characterCount", {
+								count: metadata.title?.length || 0,
+								max: 60,
+							})}
 						</p>
 					</div>
 					<div className="flex flex-col gap-2">
-						<Label htmlFor="meta-description">Meta Description</Label>
+						<Label htmlFor="meta-description">{t("metaDescriptionLabel")}</Label>
 						<Textarea
 							className="text-base shadow-none md:text-sm"
 							id="meta-description"
@@ -359,17 +365,20 @@ export function MetadataSection({
 									(e.target as HTMLElement).blur();
 								}
 							}}
-							placeholder="Enter meta description (max 160 characters)"
+							placeholder={t("metaDescriptionPlaceholder")}
 							rows={3}
 							value={metadata.description || ""}
 						/>
 						<p className="text-muted-foreground text-xs">
-							{metadata.description?.length || 0}/160 characters
+							{t("characterCount", {
+								count: metadata.description?.length || 0,
+								max: 160,
+							})}
 						</p>
 					</div>
 					<div className="grid grid-cols-2 gap-4">
 						<div className="flex flex-col gap-2">
-							<Label htmlFor="meta-keywords">Keywords</Label>
+							<Label htmlFor="meta-keywords">{t("keywordsLabel")}</Label>
 							<Input
 								className="text-base shadow-none md:text-sm"
 								id="meta-keywords"
@@ -382,12 +391,12 @@ export function MetadataSection({
 										(e.target as HTMLElement).blur();
 									}
 								}}
-								placeholder="Enter keywords separated by commas"
+								placeholder={t("keywordsPlaceholder")}
 								value={metadata.keywords || ""}
 							/>
 						</div>
 						<div className="flex flex-col gap-2">
-							<Label htmlFor="meta-author">Author</Label>
+							<Label htmlFor="meta-author">{t("authorLabel")}</Label>
 							<Input
 								className="text-base shadow-none md:text-sm"
 								id="meta-author"
@@ -400,13 +409,13 @@ export function MetadataSection({
 										(e.target as HTMLElement).blur();
 									}
 								}}
-								placeholder="Enter author name"
+								placeholder={t("authorPlaceholder")}
 								value={metadata.author || ""}
 							/>
 						</div>
 					</div>
 					<div className="flex flex-col gap-2">
-						<Label htmlFor="canonical-url">Canonical URL</Label>
+						<Label htmlFor="canonical-url">{t("canonicalUrlLabel")}</Label>
 						<Input
 							autoComplete="url"
 							className="text-base shadow-none md:text-sm"
@@ -421,16 +430,16 @@ export function MetadataSection({
 									(e.target as HTMLElement).blur();
 								}
 							}}
-							placeholder="https://example.com/form"
+							placeholder={t("canonicalUrlPlaceholder")}
 							type="url"
 							value={metadata.canonicalUrl || ""}
 						/>
 						<p className="text-muted-foreground text-xs">
-							The preferred URL for this form page
+							{t("canonicalUrlDescription")}
 						</p>
 					</div>
 					<div
-						aria-label="Basic SEO actions"
+						aria-label={t("basicActionsAria")}
 						className="flex items-center justify-between"
 						role="group"
 					>
@@ -442,18 +451,18 @@ export function MetadataSection({
 									size="sm"
 									variant="ghost"
 								>
-									Reset
+									{tCommon("reset")}
 								</Button>
 							)}
 						</div>
 						<div className="flex items-center gap-2">
 							<Button
-								aria-label="Save basic SEO settings"
+								aria-label={t("saveBasicAria")}
 								disabled={savingBasic || !hasBasicChanges}
 								loading={savingBasic}
 								onClick={saveBasic}
 							>
-								Save
+								{tCommon("save")}
 							</Button>
 						</div>
 					</div>
@@ -472,21 +481,21 @@ export function MetadataSection({
 								className="flex items-center gap-2 text-lg tracking-tight"
 								id="social-meta-title"
 							>
-								Social Metadata{" "}
+								{t("socialTitle")}{" "}
 								{hasSocialChanges && (
 									<Badge className="gap-2" variant="secondary">
 										<div className="size-2 rounded-full bg-orange-500" />
-										Unsaved changes
+										{tCommon("unsavedChanges")}
 									</Badge>
 								)}
 							</CardTitle>
-							<CardDescription>Open Graph and Twitter settings</CardDescription>
+							<CardDescription>{t("socialDescription")}</CardDescription>
 						</div>
 					</div>
 				</CardHeader>
 				<CardContent className="flex flex-col gap-6">
 					<div className="flex flex-col gap-2">
-						<Label htmlFor="og-title">Open Graph Title</Label>
+						<Label htmlFor="og-title">{t("ogTitleLabel")}</Label>
 						<Input
 							className="text-base shadow-none md:text-sm"
 							id="og-title"
@@ -499,15 +508,15 @@ export function MetadataSection({
 									(e.target as HTMLElement).blur();
 								}
 							}}
-							placeholder="Enter Open Graph title"
+							placeholder={t("ogTitlePlaceholder")}
 							value={metadata.ogTitle || ""}
 						/>
 						<p className="text-muted-foreground text-xs">
-							Title shown when shared on Facebook, LinkedIn, etc.
+							{t("ogTitleDescription")}
 						</p>
 					</div>
 					<div className="flex flex-col gap-2">
-						<Label htmlFor="og-description">Open Graph Description</Label>
+						<Label htmlFor="og-description">{t("ogDescriptionLabel")}</Label>
 						<Textarea
 							className="text-base shadow-none md:text-sm"
 							id="og-description"
@@ -520,17 +529,17 @@ export function MetadataSection({
 									(e.target as HTMLElement).blur();
 								}
 							}}
-							placeholder="Enter Open Graph description"
+							placeholder={t("ogDescriptionPlaceholder")}
 							rows={3}
 							value={metadata.ogDescription || ""}
 						/>
 						<p className="text-muted-foreground text-xs">
-							Description shown when shared on social media
+							{t("ogDescriptionDescription")}
 						</p>
 					</div>
 					<div className="grid grid-cols-2 gap-4">
 						<div className="flex flex-col gap-2">
-							<Label htmlFor="og-image">Open Graph Image URL</Label>
+							<Label htmlFor="og-image">{t("ogImageLabel")}</Label>
 							<Input
 								autoComplete="url"
 								className="text-base shadow-none md:text-sm"
@@ -545,13 +554,13 @@ export function MetadataSection({
 										(e.target as HTMLElement).blur();
 									}
 								}}
-								placeholder="https://example.com/image.jpg"
+								placeholder={t("ogImagePlaceholder")}
 								type="url"
 								value={metadata.ogImage || ""}
 							/>
 						</div>
 						<div className="flex flex-col gap-2">
-							<Label htmlFor="og-type">Open Graph Type</Label>
+							<Label htmlFor="og-type">{t("ogTypeLabel")}</Label>
 							<Select
 								onValueChange={(value) =>
 									updateSocialMetadata({ ogType: value })
@@ -559,19 +568,19 @@ export function MetadataSection({
 								value={metadata.ogType || "website"}
 							>
 								<SelectTrigger>
-									<SelectValue placeholder="Select Open Graph type" />
+									<SelectValue placeholder={t("ogTypePlaceholder")} />
 								</SelectTrigger>
 								<SelectContent>
-									<SelectItem value="website">Website</SelectItem>
-									<SelectItem value="article">Article</SelectItem>
-									<SelectItem value="profile">Profile</SelectItem>
-									<SelectItem value="video">Video</SelectItem>
+									<SelectItem value="website">{t("ogTypes.website")}</SelectItem>
+									<SelectItem value="article">{t("ogTypes.article")}</SelectItem>
+									<SelectItem value="profile">{t("ogTypes.profile")}</SelectItem>
+									<SelectItem value="video">{t("ogTypes.video")}</SelectItem>
 								</SelectContent>
 							</Select>
 						</div>
 					</div>
 					<div className="flex flex-col gap-2">
-						<Label htmlFor="twitter-card">Twitter Card Type</Label>
+						<Label htmlFor="twitter-card">{t("twitterCardLabel")}</Label>
 						<Select
 							onValueChange={(value) =>
 								updateSocialMetadata({ twitterCard: value as any })
@@ -579,85 +588,87 @@ export function MetadataSection({
 							value={metadata.twitterCard || "summary"}
 						>
 							<SelectTrigger>
-								<SelectValue placeholder="Select Twitter card type" />
+								<SelectValue placeholder={t("twitterCardPlaceholder")} />
 							</SelectTrigger>
 							<SelectContent>
-								<SelectItem value="summary">Summary</SelectItem>
+								<SelectItem value="summary">{t("twitterCards.summary")}</SelectItem>
 								<SelectItem value="summary_large_image">
-									Summary Large Image
+									{t("twitterCards.summaryLargeImage")}
 								</SelectItem>
-								<SelectItem value="app">App</SelectItem>
-								<SelectItem value="player">Player</SelectItem>
+								<SelectItem value="app">{t("twitterCards.app")}</SelectItem>
+								<SelectItem value="player">{t("twitterCards.player")}</SelectItem>
 							</SelectContent>
 						</Select>
 					</div>
 					<div className="grid grid-cols-2 gap-4">
 						<div className="flex flex-col gap-2">
-							<Label htmlFor="twitter-title">Twitter Title</Label>
+							<Label htmlFor="twitter-title">{t("twitterTitleLabel")}</Label>
 							<Input
 								className="shadow-none"
 								id="twitter-title"
 								onChange={(e) =>
 									updateSocialMetadata({ twitterTitle: e.target.value })
 								}
-								placeholder="Enter Twitter title"
+								placeholder={t("twitterTitlePlaceholder")}
 								value={metadata.twitterTitle || ""}
 							/>
 						</div>
 						<div className="flex flex-col gap-2">
-							<Label htmlFor="twitter-image">Twitter Image URL</Label>
+							<Label htmlFor="twitter-image">{t("twitterImageLabel")}</Label>
 							<Input
 								className="shadow-none"
 								id="twitter-image"
 								onChange={(e) =>
 									updateSocialMetadata({ twitterImage: e.target.value })
 								}
-								placeholder="https://example.com/twitter-image.jpg"
+								placeholder={t("twitterImagePlaceholder")}
 								value={metadata.twitterImage || ""}
 							/>
 						</div>
 					</div>
 					<div className="flex flex-col gap-2">
-						<Label htmlFor="twitter-description">Twitter Description</Label>
+						<Label htmlFor="twitter-description">
+							{t("twitterDescriptionLabel")}
+						</Label>
 						<Textarea
 							className="shadow-none"
 							id="twitter-description"
 							onChange={(e) =>
 								updateSocialMetadata({ twitterDescription: e.target.value })
 							}
-							placeholder="Enter Twitter description"
+							placeholder={t("twitterDescriptionPlaceholder")}
 							rows={3}
 							value={metadata.twitterDescription || ""}
 						/>
 					</div>
 					<div className="grid grid-cols-2 gap-4">
 						<div className="flex flex-col gap-2">
-							<Label htmlFor="twitter-site">Twitter Site</Label>
+							<Label htmlFor="twitter-site">{t("twitterSiteLabel")}</Label>
 							<Input
 								className="shadow-none"
 								id="twitter-site"
 								onChange={(e) =>
 									updateSocialMetadata({ twitterSite: e.target.value })
 								}
-								placeholder="@yourhandle"
+								placeholder={t("twitterSitePlaceholder")}
 								value={metadata.twitterSite || ""}
 							/>
 						</div>
 						<div className="flex flex-col gap-2">
-							<Label htmlFor="twitter-creator">Twitter Creator</Label>
+							<Label htmlFor="twitter-creator">{t("twitterCreatorLabel")}</Label>
 							<Input
 								className="shadow-none"
 								id="twitter-creator"
 								onChange={(e) =>
 									updateSocialMetadata({ twitterCreator: e.target.value })
 								}
-								placeholder="@creatorhandle"
+								placeholder={t("twitterCreatorPlaceholder")}
 								value={metadata.twitterCreator || ""}
 							/>
 						</div>
 					</div>
 					<div
-						aria-label="Social metadata actions"
+						aria-label={t("socialActionsAria")}
 						className="flex items-center justify-between"
 						role="group"
 					>
@@ -669,18 +680,18 @@ export function MetadataSection({
 									size="sm"
 									variant="ghost"
 								>
-									Reset
+									{tCommon("reset")}
 								</Button>
 							)}
 						</div>
 						<div className="flex items-center gap-2">
 							<Button
-								aria-label="Save social metadata settings"
+								aria-label={t("saveSocialAria")}
 								disabled={savingSocial || !hasSocialChanges}
 								loading={savingSocial}
 								onClick={saveSocial}
 							>
-								Save
+								{tCommon("save")}
 							</Button>
 						</div>
 					</div>
@@ -698,41 +709,40 @@ export function MetadataSection({
 								className="flex items-center gap-2 text-lg tracking-tight"
 								id="indexing-title"
 							>
-								Search Engine Indexing{" "}
+								{t("indexingTitle")}{" "}
 								{hasIndexingChanges && (
 									<Badge className="gap-2" variant="secondary">
 										<div className="size-2 rounded-full bg-orange-500" />
-										Unsaved changes
+										{tCommon("unsavedChanges")}
 									</Badge>
 								)}
 							</CardTitle>
 							<CardDescription>
-								Control how search engines crawl this form
+								{t("indexingDescription")}
 							</CardDescription>
 						</div>
 					</div>
 				</CardHeader>
 				<CardContent className="flex flex-col gap-6">
 					<div className="flex flex-col gap-2">
-						<Label>Search Engine Indexing</Label>
+						<Label>{t("indexingBehaviorLabel")}</Label>
 						<Select onValueChange={handleRobotsChange} value={getRobotsValue()}>
 							<SelectTrigger>
-								<SelectValue placeholder="Select indexing behavior" />
+								<SelectValue placeholder={t("indexingBehaviorPlaceholder")} />
 							</SelectTrigger>
 							<SelectContent>
 								<SelectItem value="index">
-									Index and Follow (Default)
+									{t("indexingOptions.index")}
 								</SelectItem>
-								<SelectItem value="noindex">No Index</SelectItem>
-								<SelectItem value="nofollow">No Follow</SelectItem>
+								<SelectItem value="noindex">{t("indexingOptions.noindex")}</SelectItem>
+								<SelectItem value="nofollow">{t("indexingOptions.nofollow")}</SelectItem>
 								<SelectItem value="noindex,nofollow">
-									No Index, No Follow
+									{t("indexingOptions.noindexNofollow")}
 								</SelectItem>
 							</SelectContent>
 						</Select>
 						<p className="text-muted-foreground text-xs">
-							Controls whether search engines can index and follow links on this
-							page
+							{t("indexingBehaviorDescription")}
 						</p>
 					</div>
 					<div className="grid grid-cols-2 gap-4">
@@ -745,7 +755,7 @@ export function MetadataSection({
 								}
 							/>
 							<Label className="text-sm" htmlFor="no-archive">
-								No Archive
+								{t("switches.noArchive")}
 							</Label>
 						</div>
 						<div className="flex items-center gap-2">
@@ -757,7 +767,7 @@ export function MetadataSection({
 								}
 							/>
 							<Label className="text-sm" htmlFor="no-snippet">
-								No Snippet
+								{t("switches.noSnippet")}
 							</Label>
 						</div>
 						<div className="flex items-center gap-2">
@@ -769,7 +779,7 @@ export function MetadataSection({
 								}
 							/>
 							<Label className="text-sm" htmlFor="no-image-index">
-								No Image Index
+								{t("switches.noImageIndex")}
 							</Label>
 						</div>
 						<div className="flex items-center gap-2">
@@ -781,12 +791,12 @@ export function MetadataSection({
 								}
 							/>
 							<Label className="text-sm" htmlFor="no-translate">
-								No Translate
+								{t("switches.noTranslate")}
 							</Label>
 						</div>
 					</div>
 					<div
-						aria-label="Indexing actions"
+						aria-label={t("indexingActionsAria")}
 						className="flex items-center justify-between"
 						role="group"
 					>
@@ -798,18 +808,18 @@ export function MetadataSection({
 									size="sm"
 									variant="ghost"
 								>
-									Reset
+									{tCommon("reset")}
 								</Button>
 							)}
 						</div>
 						<div className="flex items-center gap-2">
 							<Button
-								aria-label="Save indexing settings"
+								aria-label={t("saveIndexingAria")}
 								disabled={savingIndexing || !hasIndexingChanges}
 								loading={savingIndexing}
 								onClick={saveIndexing}
 							>
-								Save
+								{tCommon("save")}
 							</Button>
 						</div>
 					</div>

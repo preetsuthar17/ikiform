@@ -18,6 +18,7 @@ import {
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { useEffect, useState } from "react";
 import { ConfirmationModal } from "@/components/dashboard/modals/form-delete-confirmation-modal";
@@ -65,6 +66,7 @@ import type { FormAnalyticsProps } from "./types";
 import { exportToCSV, exportToJSON, formatDate, getFieldLabel } from "./utils";
 
 export function FormAnalytics({ form }: FormAnalyticsProps) {
+	const t = useTranslations("product.analytics.formAnalytics");
 	const router = useRouter();
 	const [selectedSubmission, setSelectedSubmission] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -97,8 +99,15 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 
 	const getFieldLabelForForm = (fieldId: string) =>
 		getFieldLabel(form, fieldId);
-	const handleExportCsv = () => exportToCSV(form, submissions);
-	const handleExportJson = () => exportToJSON(form, submissions);
+	const handleExportCsv = () =>
+		exportToCSV(form, submissions, {
+			csvSuccess: t("csvExportSuccess"),
+			noData: t("noDataToExport"),
+		});
+	const handleExportJson = () =>
+		exportToJSON(form, submissions, {
+			jsonSuccess: t("jsonExportSuccess"),
+		});
 	const handleExportSubmission = (submission: any) => {
 		const submissionData = {
 			id: submission.id,
@@ -115,7 +124,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 		link.download = `submission_${submission.id.slice(-8)}.json`;
 		link.click();
 		URL.revokeObjectURL(url);
-		toast.success("Submission exported successfully");
+		toast.success(t("submissionExported"));
 	};
 
 	const handleViewSubmission = (submission: any) => {
@@ -135,11 +144,11 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 		if (!form.user_id) return;
 		try {
 			await formsDb.deleteForm(form.id, form.user_id);
-			toast.success("Form deleted successfully");
+			toast.success(t("formDeleted"));
 			router.push("/dashboard");
 		} catch (error) {
 			console.error("Error deleting form:", error);
-			toast.error("Failed to delete form");
+			toast.error(t("failedDeleteForm"));
 		}
 	};
 
@@ -177,7 +186,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 						<div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
 							<div className="flex min-w-0 flex-col gap-4">
 								<Button
-									aria-label="Back to Dashboard"
+									aria-label={t("backToDashboard")}
 									asChild
 									className="w-fit"
 									variant="outline"
@@ -187,7 +196,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 										href="/dashboard"
 									>
 										<ArrowLeft aria-hidden="true" className="size-4 shrink-0" />
-										<span className="text-sm">Back to Dashboard</span>
+										<span className="text-sm">{t("backToDashboard")}</span>
 									</Link>
 								</Button>
 								<div className="flex min-w-0 flex-col gap-4">
@@ -205,14 +214,14 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 											{form.is_published ? (
 												<>
 													<Globe aria-hidden="true" className="size-3" />
-													<span className="sr-only">Published</span>
-													<span aria-live="polite">Published</span>
+													<span className="sr-only">{t("published")}</span>
+													<span aria-live="polite">{t("published")}</span>
 												</>
 											) : (
 												<>
 													<Eye aria-hidden="true" className="size-3" />
-													<span className="sr-only">Draft</span>
-													<span aria-live="polite">Draft</span>
+													<span className="sr-only">{t("draft")}</span>
+													<span aria-live="polite">{t("draft")}</span>
 												</>
 											)}
 										</Badge>
@@ -220,7 +229,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 									<div className="flex items-center gap-2 text-muted-foreground">
 										<BarChart3 aria-hidden="true" className="size-4" />
 										<span className="font-medium text-sm">
-											Form Analytics&nbsp;&amp;&nbsp;Submission Data
+											{t("analyticsSubtitle")}
 										</span>
 									</div>
 								</div>
@@ -228,7 +237,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 
 							{}
 							<div
-								aria-label="Form Actions"
+								aria-label={t("formActions")}
 								className="flex flex-wrap items-center gap-3 sm:gap-3"
 							>
 								{}
@@ -236,7 +245,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 									<Tooltip>
 										<TooltipTrigger asChild>
 											<Button
-												aria-label="Edit form"
+												aria-label={t("editForm")}
 												className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
 												onClick={handleEditForm}
 												size="icon"
@@ -246,7 +255,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 												<Edit aria-hidden="true" className="size-4 shrink-0" />
 											</Button>
 										</TooltipTrigger>
-										<TooltipContent>Edit form</TooltipContent>
+										<TooltipContent>{t("editForm")}</TooltipContent>
 									</Tooltip>
 								</TooltipProvider>
 								{}
@@ -254,7 +263,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 									<Tooltip>
 										<TooltipTrigger asChild>
 											<Button
-												aria-label="Share form"
+												aria-label={t("shareForm")}
 												className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
 												onClick={handleShareForm}
 												size="icon"
@@ -264,7 +273,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 												<Share aria-hidden="true" className="size-4 shrink-0" />
 											</Button>
 										</TooltipTrigger>
-										<TooltipContent>Share form</TooltipContent>
+										<TooltipContent>{t("shareForm")}</TooltipContent>
 									</Tooltip>
 								</TooltipProvider>
 								{}
@@ -272,7 +281,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 									<Tooltip>
 										<TooltipTrigger asChild>
 											<Button
-												aria-label="View submissions"
+												aria-label={t("viewSubmissions")}
 												asChild
 												className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
 												size="icon"
@@ -287,14 +296,14 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 												</Link>
 											</Button>
 										</TooltipTrigger>
-										<TooltipContent>View submissions</TooltipContent>
+										<TooltipContent>{t("viewSubmissions")}</TooltipContent>
 									</Tooltip>
 								</TooltipProvider>
 
 								<DropdownMenu>
 									<DropdownMenuTrigger asChild>
 										<Button
-											aria-label="More actions"
+											aria-label={t("moreActions")}
 											className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
 											size="icon"
 											tabIndex={0}
@@ -306,20 +315,20 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 											/>
 										</Button>
 									</DropdownMenuTrigger>
-									<DropdownMenuContent align="end">
+									<DropdownMenuContent align="end" className="w-full">
 										<DropdownMenuItem onClick={handleExportCsv}>
 											<Download
 												aria-hidden="true"
 												className="size-4 shrink-0"
 											/>
-											<span>Export CSV</span>
+											<span>{t("exportCsv")}</span>
 										</DropdownMenuItem>
 										<DropdownMenuItem onClick={handleExportJson}>
 											<Download
 												aria-hidden="true"
 												className="size-4 shrink-0"
 											/>
-											<span>Export JSON</span>
+											<span>{t("exportJson")}</span>
 										</DropdownMenuItem>
 										<DropdownMenuSeparator />
 										<DropdownMenuItem
@@ -327,7 +336,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 											variant="destructive"
 										>
 											<Trash2 aria-hidden="true" className="size-4 shrink-0" />
-											<span>Delete form</span>
+											<span>{t("deleteForm")}</span>
 										</DropdownMenuItem>
 									</DropdownMenuContent>
 								</DropdownMenu>
@@ -336,7 +345,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 									<Tooltip>
 										<TooltipTrigger asChild>
 											<Button
-												aria-label="Open Kiko AI"
+												aria-label={t("openKiko")}
 												className="flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
 												onClick={() => setChatOpen(true)}
 												variant="default"
@@ -345,10 +354,10 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 													aria-hidden="true"
 													className="size-4 shrink-0"
 												/>
-												<span className="hidden sm:inline">Kiko&nbsp;AI</span>
+												<span className="hidden sm:inline">{t("kiko")}</span>
 											</Button>
 										</TooltipTrigger>
-										<TooltipContent>AI Form analytics</TooltipContent>
+										<TooltipContent>{t("kikoTooltip")}</TooltipContent>
 									</Tooltip>
 								</TooltipProvider>
 							</div>
@@ -371,11 +380,11 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 							<div className="flex items-center justify-between">
 								<CardTitle className="flex items-center gap-2">
 									<FileText className="size-5" />
-									Recent Submissions
+									{t("recentSubmissions")}
 								</CardTitle>
 								<Button asChild size="sm" variant="outline">
 									<Link href={`/dashboard/forms/${form.id}/submissions`}>
-										View All
+										{t("viewAll")}
 									</Link>
 								</Button>
 							</div>
@@ -388,11 +397,10 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 									</div>
 									<div className="text-center">
 										<h4 className="font-semibold text-foreground text-lg">
-											No submissions yet
+											{t("noSubmissionsTitle")}
 										</h4>
 										<p className="text-muted-foreground">
-											Once people start filling out your form, their responses
-											will appear here.
+											{t("noSubmissionsDescription")}
 										</p>
 									</div>
 								</div>
@@ -446,14 +454,16 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 														<div className="flex min-w-0 flex-1 flex-col gap-2">
 															<div className="flex items-center gap-2">
 																<h3 className="truncate font-semibold text-foreground">
-																	Submission {submission.id.slice(-8)}
+																	{t("submission", {
+																		id: submission.id.slice(-8),
+																	})}
 																</h3>
 																<Badge variant="outline">
-																	{
-																		Object.keys(submission.submission_data)
-																			.length
-																	}{" "}
-																	fields
+																	{t("fieldsCount", {
+																		count: Object.keys(
+																			submission.submission_data
+																		).length,
+																	})}
 																</Badge>
 															</div>
 															<div className="flex items-center gap-4 text-muted-foreground text-sm">
@@ -479,7 +489,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 															<Tooltip>
 																<TooltipTrigger asChild>
 																	<Button
-																		aria-label="View submission details"
+																		aria-label={t("viewSubmissionDetails")}
 																		onClick={(e) => {
 																			e.stopPropagation();
 																			handleViewSubmission(submission);
@@ -488,11 +498,11 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 																		variant="outline"
 																	>
 																		<Eye className="size-4" />
-																		View
+																		{t("view")}
 																	</Button>
 																</TooltipTrigger>
 																<TooltipContent side="top" sideOffset={8}>
-																	<p>View submission details</p>
+																	<p>{t("viewSubmissionDetails")}</p>
 																</TooltipContent>
 															</Tooltip>
 														</TooltipProvider>
@@ -505,7 +515,9 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 										<div className="p-4 text-center">
 											<Button asChild variant="ghost">
 												<Link href={`/dashboard/forms/${form.id}/submissions`}>
-													View {submissions.length - 5} more submissions
+													{t("viewMoreSubmissions", {
+														count: submissions.length - 5,
+													})}
 												</Link>
 											</Button>
 										</div>
@@ -517,13 +529,15 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 				</div>
 			</div>
 			<ConfirmationModal
-				cancelText="Cancel"
-				confirmText="Delete Form"
-				description={`Are you sure you want to delete "${form.title}"? This action cannot be undone and will permanently remove the form and all its submissions.`}
+				cancelText={t("deleteModalCancel")}
+				confirmText={t("deleteModalConfirm")}
+				description={t("deleteModalDescription", {
+					title: form.title,
+				})}
 				onConfirm={handleDeleteForm}
 				onOpenChange={setIsDeleteModalOpen}
 				open={isDeleteModalOpen}
-				title="Delete Form"
+				title={t("deleteModalTitle")}
 				variant="destructive"
 			/>
 			<ShareFormModal
@@ -535,7 +549,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 				onPublish={async () => {
 					if (!form?.user_id) return;
 					await formsDb.togglePublishForm(form.id, form.user_id, true);
-					toast.success("Form published!");
+					toast.success(t("formPublished"));
 				}}
 			/>
 			<FloatingChatButton onClick={() => setChatOpen(true)} />

@@ -10,6 +10,7 @@ import {
 	RefreshCw,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { getAllFields } from "@/components/form-builder/form-builder/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -45,6 +46,8 @@ export function ApiSection({
 	formId,
 	schema,
 }: ApiSectionProps) {
+	const t = useTranslations("product.formBuilder.formSettings.apiSection");
+	const tCommon = useTranslations("product.formBuilder.formSettings.common");
 	const { user } = useAuth();
 	const [showApiKey, setShowApiKey] = useState(false);
 	const [isGenerating, setIsGenerating] = useState(false);
@@ -75,7 +78,7 @@ export function ApiSection({
 
 	const saveChanges = async () => {
 		if (!formId) {
-			toast.error("Form ID is required to save settings");
+			toast.error(tCommon("formIdRequiredToSaveSettings"));
 			return;
 		}
 		setSaving(true);
@@ -84,9 +87,9 @@ export function ApiSection({
 			updateApi({ enabled: draftEnabled });
 			setSaved(true);
 			setHasChanges(false);
-			toast.success("API settings saved successfully");
+			toast.success(t("settingsSaved"));
 		} catch (error) {
-			toast.error("Failed to save API settings");
+			toast.error(t("settingsSaveFailed"));
 		} finally {
 			setSaving(false);
 		}
@@ -95,7 +98,7 @@ export function ApiSection({
 	const handleGenerateApiKey = async () => {
 		if (!formId) return;
 		if (!user) {
-			toast.error("User authentication required");
+			toast.error(t("authRequired"));
 			return;
 		}
 
@@ -118,12 +121,12 @@ export function ApiSection({
 				updateApi({ apiKey: result.apiKey, enabled: true });
 				setDraftEnabled(true);
 				setSaved(true);
-				toast.success("API key generated successfully");
+				toast.success(t("keyGenerated"));
 			} else {
-				toast.error(result.error || "Failed to generate API key");
+				toast.error(result.error || t("keyGenerateFailed"));
 			}
 		} catch (error) {
-			toast.error("Failed to generate API key");
+			toast.error(t("keyGenerateFailed"));
 		} finally {
 			setIsGenerating(false);
 		}
@@ -132,7 +135,7 @@ export function ApiSection({
 	const handleRevokeApiKey = async () => {
 		if (!formId) return;
 		if (!user) {
-			toast.error("User authentication required");
+			toast.error(t("authRequired"));
 			return;
 		}
 
@@ -155,12 +158,12 @@ export function ApiSection({
 				updateApi({ apiKey: undefined, enabled: false });
 				setDraftEnabled(false);
 				setSaved(true);
-				toast.success("API key revoked successfully");
+				toast.success(t("keyRevoked"));
 			} else {
-				toast.error(result.error || "Failed to revoke API key");
+				toast.error(result.error || t("keyRevokeFailed"));
 			}
 		} catch (error) {
-			toast.error("Failed to revoke API key");
+			toast.error(t("keyRevokeFailed"));
 		} finally {
 			setIsRevoking(false);
 		}
@@ -169,7 +172,7 @@ export function ApiSection({
 	const handleCopyApiKey = () => {
 		if (apiSettings.apiKey) {
 			navigator.clipboard.writeText(apiSettings.apiKey);
-			toast.success("API key copied to clipboard");
+			toast.success(t("keyCopied"));
 		}
 	};
 
@@ -177,7 +180,7 @@ export function ApiSection({
 		if (formId) {
 			const endpoint = `${window.location.origin}/api/forms/${formId}/api-submit`;
 			navigator.clipboard.writeText(endpoint);
-			toast.success("API endpoint copied to clipboard");
+			toast.success(t("endpointCopied"));
 		}
 	};
 
@@ -195,10 +198,10 @@ export function ApiSection({
 				case "text":
 				case "email":
 					sampleData[field.id] =
-						field.type === "email" ? "john@example.com" : "John Doe";
+						field.type === "email" ? t("sampleEmail") : t("sampleName");
 					break;
 				case "textarea":
-					sampleData[field.id] = "This is a sample message";
+					sampleData[field.id] = t("sampleMessage");
 					break;
 				case "number":
 					sampleData[field.id] = 42;
@@ -231,7 +234,7 @@ export function ApiSection({
 					}
 					break;
 				default:
-					sampleData[field.id] = "Sample value";
+					sampleData[field.id] = t("sampleValue");
 			}
 		});
 
@@ -312,7 +315,7 @@ print_r($result);
 		document.body.removeChild(a);
 		URL.revokeObjectURL(url);
 
-		toast.success(`${language} code example downloaded`);
+		toast.success(t("codeDownloaded", { language }));
 	};
 
 	useEffect(() => {
@@ -321,14 +324,14 @@ print_r($result);
 			announcement.setAttribute("aria-live", "polite");
 			announcement.setAttribute("aria-atomic", "true");
 			announcement.className = "sr-only";
-			announcement.textContent = "API settings saved successfully";
+			announcement.textContent = t("settingsSaved");
 			document.body.appendChild(announcement);
 
 			setTimeout(() => {
 				document.body.removeChild(announcement);
 			}, 1000);
 		}
-	}, [saved]);
+	}, [saved, t]);
 
 	useEffect(() => {
 		if (sectionRef.current) {
@@ -353,17 +356,17 @@ print_r($result);
 							className="flex items-center gap-2 text-lg tracking-tight"
 							id="api-access-title"
 						>
-							API Access{" "}
+							{t("title")}{" "}
 							{hasChanges && (
 								<Badge className="gap-2" variant="secondary">
 									<div className="size-2 rounded-full bg-orange-500" />
-									Unsaved changes
+									{tCommon("unsavedChanges")}
 								</Badge>
 							)}
-							<Badge variant="secondary">Beta</Badge>
+							<Badge variant="secondary">{t("betaBadge")}</Badge>
 						</CardTitle>
 						<CardDescription>
-							Enable external submissions via a secure API key.
+							{t("description")}
 						</CardDescription>
 					</div>
 				</div>
@@ -372,13 +375,13 @@ print_r($result);
 				<div className="flex items-center justify-between">
 					<div className="flex flex-col gap-1">
 						<Label className="font-medium text-sm" htmlFor="api-enabled">
-							Enable API support
+							{t("enableSupportLabel")}
 						</Label>
 						<p
 							className="text-muted-foreground text-xs"
 							id="api-enabled-description"
 						>
-							Toggle to allow submissions via the API endpoint
+							{t("enableSupportDescription")}
 						</p>
 					</div>
 					<Switch
@@ -396,7 +399,7 @@ print_r($result);
 							<>
 								<div className="flex flex-col gap-2">
 									<Label className="font-medium text-sm" htmlFor="api-key">
-										API Key
+										{t("apiKeyLabel")}
 									</Label>
 									<div className="flex items-center gap-2">
 										<Input
@@ -408,7 +411,9 @@ print_r($result);
 											value={apiSettings.apiKey || ""}
 										/>
 										<Button
-											aria-label={showApiKey ? "Hide API key" : "Show API key"}
+											aria-label={
+												showApiKey ? t("hideApiKeyAria") : t("showApiKeyAria")
+											}
 											onClick={() => setShowApiKey(!showApiKey)}
 											size="icon"
 											variant="outline"
@@ -420,7 +425,7 @@ print_r($result);
 											)}
 										</Button>
 										<Button
-											aria-label="Copy API key"
+											aria-label={t("copyApiKeyAria")}
 											onClick={handleCopyApiKey}
 											size="icon"
 											variant="outline"
@@ -432,13 +437,13 @@ print_r($result);
 										className="text-muted-foreground text-xs"
 										id="api-key-help"
 									>
-										Keep this key secret. Rotate it if you suspect exposure.
+										{t("apiKeySecretHint")}
 									</p>
 								</div>
 
 								<div className="flex flex-col gap-2">
 									<Label className="font-medium text-sm" htmlFor="api-endpoint">
-										API Endpoint
+										{t("apiEndpointLabel")}
 									</Label>
 									<div className="flex items-center gap-2">
 										<Input
@@ -448,7 +453,7 @@ print_r($result);
 											value={formId ? `/api/forms/${formId}/api-submit` : ""}
 										/>
 										<Button
-											aria-label="Copy API endpoint"
+											aria-label={t("copyEndpointAria")}
 											onClick={handleCopyEndpoint}
 											size="icon"
 											variant="outline"
@@ -471,7 +476,7 @@ print_r($result);
 										variant="outline"
 									>
 										<Key aria-hidden className="size-4" />
-										<span>{isRevoking ? "Revoking..." : "Revoke key"}</span>
+										<span>{isRevoking ? t("revoking") : t("revokeKey")}</span>
 									</Button>
 									<Button
 										aria-busy={isGenerating}
@@ -489,7 +494,7 @@ print_r($result);
 											className={`size-4 transition-transform ${isGenerating ? "animate-spin" : ""}`}
 										/>
 										<span>
-											{isGenerating ? "Generating..." : "Regenerate key"}
+											{isGenerating ? t("generating") : t("regenerateKey")}
 										</span>
 									</Button>
 									<Button
@@ -500,7 +505,9 @@ print_r($result);
 									>
 										<Code aria-hidden className="size-4" />
 										<span>
-											{showCodeGenerator ? "Hide" : "Show"} code examples
+											{showCodeGenerator
+												? t("hideCodeExamples")
+												: t("showCodeExamples")}
 										</span>
 									</Button>
 								</div>
@@ -513,16 +520,16 @@ print_r($result);
 													<div className="flex items-center justify-between">
 														<Label className="font-medium text-sm capitalize">
 															{language === "javascript"
-																? "JavaScript/Node.js"
+																? t("javascriptNodeLabel")
 																: language}
 														</Label>
 														<div className="flex items-center gap-2">
 															<Button
-																aria-label={`Copy ${language} code`}
+																aria-label={t("copyCodeAria", { language })}
 																onClick={() => {
 																	navigator.clipboard.writeText(code);
 																	toast.success(
-																		`${language} code copied to clipboard`
+																		t("codeCopied", { language })
 																	);
 																}}
 																size="sm"
@@ -531,7 +538,7 @@ print_r($result);
 																<Copy className="size-4" />
 															</Button>
 															<Button
-																aria-label={`Download ${language} code`}
+																aria-label={t("downloadCodeAria", { language })}
 																onClick={() =>
 																	handleDownloadCode(language, code)
 																}
@@ -562,7 +569,7 @@ print_r($result);
 						) : (
 							<div className="rounded-lg border bg-muted/40 p-4 text-center">
 								<p className="mb-4 text-muted-foreground text-sm">
-									Generate an API key to enable external form submissions.
+									{t("emptyStateDescription")}
 								</p>
 								<Button
 									disabled={isGenerating}
@@ -570,34 +577,36 @@ print_r($result);
 									onClick={handleGenerateApiKey}
 								>
 									{isGenerating ? <></> : <Key className="size-4" />}
-									{isGenerating ? "Generating..." : "Generate API key"}
+									{isGenerating ? t("generating") : t("generateApiKey")}
 								</Button>
 							</div>
 						)}
 
 						<div className="flex flex-col gap-2">
 							<div className="flex items-center gap-2">
-								<Badge variant="secondary">Rate limiting</Badge>
+								<Badge variant="secondary">{t("integrationRateLimiting")}</Badge>
 								<span className="text-muted-foreground text-sm">
-									All form rate limiting settings apply to API submissions.
+									{t("integrationRateLimitingDescription")}
 								</span>
 							</div>
 							<div className="flex items-center gap-2">
-								<Badge variant="secondary">Profanity filter</Badge>
+								<Badge variant="secondary">{t("integrationProfanityFilter")}</Badge>
 								<span className="text-muted-foreground text-sm">
-									Content filtering is applied to API submissions.
+									{t("integrationProfanityFilterDescription")}
 								</span>
 							</div>
 							<div className="flex items-center gap-2">
-								<Badge variant="secondary">Duplicate prevention</Badge>
+								<Badge variant="secondary">
+									{t("integrationDuplicatePrevention")}
+								</Badge>
 								<span className="text-muted-foreground text-sm">
-									Duplicate submission detection works with API.
+									{t("integrationDuplicatePreventionDescription")}
 								</span>
 							</div>
 							<div className="flex items-center gap-2">
-								<Badge variant="secondary">Response limits</Badge>
+								<Badge variant="secondary">{t("integrationResponseLimits")}</Badge>
 								<span className="text-muted-foreground text-sm">
-									Form response limits apply to API submissions.
+									{t("integrationResponseLimitsDescription")}
 								</span>
 							</div>
 						</div>
@@ -605,27 +614,27 @@ print_r($result);
 				)}
 
 				<div
-					aria-label="API settings actions"
+					aria-label={t("actionsAria")}
 					className="flex items-center justify-between"
 					role="group"
 				>
 					<div className="flex items-center gap-2">
 						{hasChanges && (
 							<Button
-								aria-label="Reset API settings changes"
+								aria-label={t("resetAria")}
 								className="gap-2 text-muted-foreground hover:text-foreground"
 								onClick={resetChanges}
 								size="sm"
 								variant="ghost"
 							>
-								Reset
+								{tCommon("reset")}
 							</Button>
 						)}
 					</div>
 					<div className="flex items-center gap-2">
 						<Button
 							aria-describedby="api-enabled-description"
-							aria-label="Save API settings"
+							aria-label={t("saveAria")}
 							disabled={saving || !hasChanges}
 							loading={saving}
 							onClick={saveChanges}
@@ -636,7 +645,7 @@ print_r($result);
 								}
 							}}
 						>
-							Save
+							{tCommon("save")}
 						</Button>
 					</div>
 				</div>

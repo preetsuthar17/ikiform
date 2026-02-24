@@ -1,4 +1,5 @@
 import { Plus, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,19 +13,20 @@ export function CheckboxFieldSettings({
 	onUpdateSettings,
 	onFieldUpdate,
 }: FieldSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.checkbox");
 	const [newOption, setNewOption] = useState("");
 
 	return (
 		<Card className="gap-2 p-4 shadow-none">
 			<CardHeader className="p-0">
 				<CardTitle className="flex items-center gap-2 text-lg">
-					Checkbox Options
+					{t("title")}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 p-0">
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="checkbox-options">
-						Options
+						{t("options")}
 					</Label>
 					<div className="flex gap-2">
 						<Input
@@ -46,12 +48,12 @@ export function CheckboxFieldSettings({
 									e.currentTarget.blur();
 								}
 							}}
-							placeholder="Add option"
+							placeholder={t("addOptionPlaceholder")}
 							type="text"
 							value={newOption || ""}
 						/>
 						<Button
-							aria-label="Add checkbox option"
+							aria-label={t("addOptionAria")}
 							className="focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
 							disabled={!(newOption && newOption.trim())}
 							onClick={() => {
@@ -85,7 +87,7 @@ export function CheckboxFieldSettings({
 						className="text-muted-foreground text-xs"
 						id="checkbox-options-help"
 					>
-						Add checkbox options that users can select from
+						{t("optionsHelp")}
 					</p>
 				</div>
 				<div className="flex flex-col gap-1">
@@ -97,7 +99,7 @@ export function CheckboxFieldSettings({
 									: (option.label ?? option.value)}
 							</span>
 							<Button
-								aria-label={`Remove option ${idx + 1}`}
+								aria-label={t("removeOptionAria", { index: idx + 1 })}
 								className="focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
 								onClick={() => {
 									const updated = [...(field.options || [])];
@@ -127,11 +129,10 @@ export function CheckboxFieldSettings({
 							className="font-medium text-sm"
 							htmlFor="checkbox-allow-multiple"
 						>
-							Allow multiple selection
+							{t("allowMultiple")}
 						</Label>
 						<p className="text-muted-foreground text-xs">
-							If enabled, users can select more than one option. If disabled,
-							only one option can be selected.
+							{t("allowMultipleHelp")}
 						</p>
 					</div>
 					<Switch

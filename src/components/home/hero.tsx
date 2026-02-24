@@ -2,6 +2,8 @@
 
 import { ChevronRight, Maximize2, Star } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import React, {
 	type CSSProperties,
 	useCallback,
@@ -10,6 +12,7 @@ import React, {
 } from "react";
 import useSWR from "swr";
 import DemoFormBuilder from "@/components/form-builder/form-builder/demo-form-builder";
+import { getLocaleFromPathname, withLocaleHref } from "@/lib/i18n/pathname";
 import { Badge, Card } from "../ui";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
@@ -28,6 +31,7 @@ export const EmbeddedForm = React.memo(function EmbeddedForm({
 	className,
 	style,
 }: EmbeddedFormProps) {
+	const t = useTranslations("home.hero");
 	const [iframeHeight, setIframeHeight] = useState(DEFAULT_IFRAME_HEIGHT);
 	const [hasError, setHasError] = useState(false);
 
@@ -67,7 +71,7 @@ export const EmbeddedForm = React.memo(function EmbeddedForm({
 				role="alert"
 			>
 				<p className="font-medium text-destructive">
-					Unable to load form demo. Please try refreshing the page.
+					{t("unableToLoadFormDemo")}
 				</p>
 				<Button
 					onClick={() => {
@@ -77,7 +81,7 @@ export const EmbeddedForm = React.memo(function EmbeddedForm({
 					size="sm"
 					variant="outline"
 				>
-					Reload
+					{t("reload")}
 				</Button>
 			</div>
 		);
@@ -92,27 +96,29 @@ export const EmbeddedForm = React.memo(function EmbeddedForm({
 				onError={() => setHasError(true)}
 				referrerPolicy="no-referrer"
 				sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
-				src="https://www.ikiform.com/forms/24ec3d8d-40ef-4143-b289-4e43c112d80e"
-				style={iframeStyle}
-				title="Ikiform demo form"
-			/>
-		</div>
-	);
+					src="https://www.ikiform.com/forms/24ec3d8d-40ef-4143-b289-4e43c112d80e"
+					style={iframeStyle}
+					title={t("iframeTitle")}
+				/>
+			</div>
+		);
 });
 
 EmbeddedForm.displayName = "EmbeddedForm";
 
 function SponsoredByBadge() {
+	const t = useTranslations("home.hero");
+
 	return (
 		<Badge className="rounded-full px-3 py-0.5 text-sm" variant="secondary">
 			<Link
-				aria-label="Sponsored by Vercel (opens in a new tab)"
+				aria-label={t("sponsoredByAria")}
 				className="flex items-center justify-center gap-1"
 				href="https://vercel.com/open-source-program?utm_source=ikiform"
 				rel="noopener noreferrer"
 				target="_blank"
 			>
-				Sponsored by
+				{t("sponsoredBy")}
 				<span aria-hidden="true" className="flex items-center justify-center">
 					<svg
 						aria-label="Vercel logotype"
@@ -134,24 +140,27 @@ function SponsoredByBadge() {
 }
 
 function HeroHeading() {
+	const t = useTranslations("home.hero");
+
 	return (
 		<h1
 			className="text-center font-semibold text-4xl leading-tighter tracking-[-2px] md:text-5xl"
 			id="home-hero-title"
 		>
-			Build Forms, Collect Responses & Analyze.
+			{t("heading")}
 		</h1>
 	);
 }
 
 function HeroSubheading() {
+	const t = useTranslations("home.hero");
+
 	return (
 		<p
 			className="mx-auto max-w-2xl font-normal text-base leading-loose opacity-70 md:text-lg"
 			id="home-hero-desc"
 		>
-			The open-source forms platform for effortless data collection and
-			analysis.
+			{t("subheading")}
 		</p>
 	);
 }
@@ -178,6 +187,7 @@ const GRAVATAR_URLS = [
 ];
 
 function AvatarGroup() {
+	const t = useTranslations("home.hero");
 	const { data: stats = USER_STATS_FALLBACK, isLoading } = useSWR<UserStats>(
 		"/api/users/stats",
 		userStatsFetcher,
@@ -266,7 +276,7 @@ function AvatarGroup() {
 			</div>
 			<div className="flex flex-col items-center gap-1 sm:items-start">
 				<div
-					aria-label="5 out of 5 stars rating"
+					aria-label={t("fiveStarRating")}
 					className="flex items-center gap-0.5"
 				>
 					{Array.from({ length: 5 }).map((_, i) => (
@@ -277,49 +287,55 @@ function AvatarGroup() {
 						/>
 					))}
 				</div>
-				{userCount > 0 && (
-					<span className="font-medium text-muted-foreground text-sm tabular-nums">
-						<span className="sr-only">Total users: </span> Loved by{" "}
-						{formatUserCount(userCount)}+ users
-					</span>
-				)}
-			</div>
+					{userCount > 0 && (
+						<span className="font-medium text-muted-foreground text-sm tabular-nums">
+							<span className="sr-only">{t("totalUsersSrOnly")} </span>
+							{t("lovedByUsers", { count: `${formatUserCount(userCount)}+` })}
+						</span>
+					)}
+				</div>
 		</div>
 	);
 }
 
 function HeroCTAs() {
+	const t = useTranslations("home.hero");
+	const pathname = usePathname();
+	const locale = getLocaleFromPathname(pathname);
+	const toLocaleHref = (href: string) =>
+		locale ? withLocaleHref(href, locale) : href;
+
 	return (
 		<div
 			aria-live="polite"
 			className="flex w-fit flex-wrap items-center justify-center gap-3"
 		>
-			<Button
+				<Button
 				asChild
 				className="min-h-[44px] rounded-full md:min-h-[44px]"
 				variant="default"
 			>
-				<Link
-					className="flex h-11 w-full items-center justify-center gap-2 whitespace-nowrap font-medium md:w-auto md:min-w-[240px]"
-					href="/login"
-				>
-					<span>Create Your First Form</span>
-					<ChevronRight aria-hidden="true" className="size-4" />
-				</Link>
-			</Button>
+					<Link
+						className="flex h-11 w-full items-center justify-center gap-2 whitespace-nowrap font-medium md:w-auto md:min-w-[240px]"
+						href={toLocaleHref("/login")}
+					>
+						<span>{t("createFirstForm")}</span>
+						<ChevronRight aria-hidden="true" className="size-4" />
+					</Link>
+				</Button>
 			<Button
 				asChild
 				className="min-h-[44px] rounded-full md:min-h-[44px]"
 				variant="outline"
 			>
-				<Link
-					className="flex h-11 w-full items-center justify-center gap-2 whitespace-nowrap font-medium md:w-auto md:min-w-[160px]"
-					href="/#form-builder-demo"
-				>
-					<span>Try a Demo</span>
-				</Link>
-			</Button>
-		</div>
+					<Link
+						className="flex h-11 w-full items-center justify-center gap-2 whitespace-nowrap font-medium md:w-auto md:min-w-[160px]"
+						href={toLocaleHref("/#form-builder-demo")}
+					>
+						<span>{t("tryDemo")}</span>
+					</Link>
+				</Button>
+			</div>
 	);
 }
 
@@ -328,6 +344,8 @@ interface FormBuilderPreviewProps {
 }
 
 function FormBuilderPreview({ onOpenFullscreen }: FormBuilderPreviewProps) {
+	const t = useTranslations("home.hero");
+
 	const handleKeyDown = useCallback(
 		(e: React.KeyboardEvent<HTMLDivElement>) => {
 			if (e.key === "Enter" || e.key === " ") {
@@ -340,19 +358,19 @@ function FormBuilderPreview({ onOpenFullscreen }: FormBuilderPreviewProps) {
 
 	return (
 		<div
-			aria-label="Open form builder demo in fullscreen (press Enter or Space)"
+			aria-label={t("openFullscreenAria")}
 			className="group relative flex min-h-[44px] w-full cursor-pointer items-center justify-center gap-3 bg-card p-4 transition-all hover:bg-muted/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:bg-muted/40 md:p-6"
 			onClick={onOpenFullscreen}
 			onKeyDown={handleKeyDown}
 			role="button"
 			tabIndex={0}
 		>
-			<div className="pointer-events-none absolute inset-0 flex items-center justify-center gap-2 rounded-lg bg-background/80 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
-				<Maximize2 aria-hidden="true" className="size-5 text-foreground" />
-				<span className="font-medium text-foreground">
-					Click to view fullscreen
-				</span>
-			</div>
+				<div className="pointer-events-none absolute inset-0 flex items-center justify-center gap-2 rounded-lg bg-background/80 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+					<Maximize2 aria-hidden="true" className="size-5 text-foreground" />
+					<span className="font-medium text-foreground">
+						{t("clickToViewFullscreen")}
+					</span>
+				</div>
 			<div className="pointer-events-none h-[900px] w-full overflow-hidden">
 				<DemoFormBuilder />
 			</div>
@@ -361,6 +379,7 @@ function FormBuilderPreview({ onOpenFullscreen }: FormBuilderPreviewProps) {
 }
 
 export default function Hero() {
+	const t = useTranslations("home.hero");
 	const [isFormBuilderFullscreen, setIsFormBuilderFullscreen] = useState(false);
 
 	const handleOpenFullscreen = useCallback(() => {
@@ -388,12 +407,14 @@ export default function Hero() {
 				<Card className="w-full max-w-7xl rounded-none border-b-0 bg-card shadow-none flex flex-col py-0">
 					<Tabs className="w-full flex flex-col" defaultValue="form-demo">
 						<div className="flex items-center justify-start border-border border-b px-4 py-4 md:px-6">
-							<TabsList>
-								<TabsTrigger value="form-demo">Form Demo</TabsTrigger>
-								<TabsTrigger value="form-builder-demo">
-									Form Builder Demo
-								</TabsTrigger>
-							</TabsList>
+								<TabsList>
+									<TabsTrigger value="form-demo">
+										{t("tabs.formDemo")}
+									</TabsTrigger>
+									<TabsTrigger value="form-builder-demo">
+										{t("tabs.formBuilderDemo")}
+									</TabsTrigger>
+								</TabsList>
 						</div>
 						<TabsContent
 							className="mt-0"
@@ -413,13 +434,15 @@ export default function Hero() {
 				onOpenChange={handleCloseFullscreen}
 				open={isFormBuilderFullscreen}
 			>
-				<DialogContent
-					className="h-[95%] max-w-[95%] rounded-2xl p-0 sm:max-w-[95%]"
-					showCloseButton={true}
-				>
-					<DialogTitle className="sr-only">Form Builder Demo</DialogTitle>
-					<DemoFormBuilder />
-				</DialogContent>
+					<DialogContent
+						className="h-[95%] max-w-[95%] rounded-2xl p-0 sm:max-w-[95%]"
+						showCloseButton={true}
+					>
+						<DialogTitle className="sr-only">
+							{t("tabs.formBuilderDemo")}
+						</DialogTitle>
+						<DemoFormBuilder />
+					</DialogContent>
 			</Dialog>
 		</>
 	);

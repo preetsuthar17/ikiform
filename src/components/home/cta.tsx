@@ -2,29 +2,39 @@
 
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import React from "react";
 import { useAuth } from "@/hooks/use-auth";
+import { getLocaleFromPathname, withLocaleHref } from "@/lib/i18n/pathname";
 import { Card, CardContent } from "../ui";
 import { Button } from "../ui/button";
 
 const CtaHeading = React.memo(function CtaHeading() {
+	const t = useTranslations("home.cta");
+
 	return (
 		<div className="flex flex-col gap-6">
 			<h2
 				className="text-center font-semibold text-4xl leading-tighter tracking-[-2px] md:text-5xl"
 				id="cta-title"
 			>
-				Create Your First Form in No Time.
+				{t("heading")}
 			</h2>
 			<p className="text-center text-base text-muted-foreground md:text-lg">
-				Get started with Ikiform to build forms, surveys, collect responses, and
-				more in seconds!
+				{t("subheading")}
 			</p>
 		</div>
 	);
 });
 
 function PrimaryActions({ user }: { user: unknown }) {
+	const t = useTranslations("home.cta");
+	const pathname = usePathname();
+	const locale = getLocaleFromPathname(pathname);
+	const toLocaleHref = (href: string) =>
+		locale ? withLocaleHref(href, locale) : href;
+
 	return (
 		<div className="flex w-fit flex-wrap items-center justify-center gap-3">
 			{user ? (
@@ -33,7 +43,7 @@ function PrimaryActions({ user }: { user: unknown }) {
 						className="flex h-11 w-full items-center gap-2 font-medium md:w-44"
 						href="/dashboard"
 					>
-						Go to Dashboard{" "}
+						{t("goToDashboard")}{" "}
 						<svg
 							aria-hidden="true"
 							height="1em"
@@ -52,9 +62,9 @@ function PrimaryActions({ user }: { user: unknown }) {
 				<Button asChild className="rounded-full" variant="default">
 					<Link
 						className="flex h-11 w-full items-center gap-2 font-medium md:w-62"
-						href="/login"
+						href={toLocaleHref("/login")}
 					>
-						<span>Create Your First Form</span>{" "}
+						<span>{t("createFirstForm")}</span>{" "}
 						<ChevronRight aria-hidden="true" />
 					</Link>
 				</Button>
@@ -62,9 +72,9 @@ function PrimaryActions({ user }: { user: unknown }) {
 			<Button asChild className="rounded-full" variant="outline">
 				<Link
 					className="flex h-11 w-full items-center gap-2 font-medium md:w-32"
-					href="/#form-builder-demo"
+					href={toLocaleHref("/#form-builder-demo")}
 				>
-					<span>Try a Demo</span>
+					<span>{t("tryDemo")}</span>
 				</Link>
 			</Button>
 		</div>

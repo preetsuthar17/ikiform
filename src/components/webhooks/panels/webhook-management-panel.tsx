@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
 import { WebhookList } from "../components/webhook-list";
@@ -11,6 +12,7 @@ import { WebhookFormModal } from "../modals/webhook-form-modal";
 import { WebhookLogDialog } from "../modals/webhook-log-dialog";
 
 export function WebhookManagementPanel({ formId }: { formId?: string }) {
+	const t = useTranslations("product.formBuilder.formSettings.webhooks.panel");
 	const { user } = useAuth();
 	const [modalOpen, setModalOpen] = useState(false);
 	const [editingWebhook, setEditingWebhook] = useState<WebhookConfig | null>(
@@ -82,9 +84,9 @@ export function WebhookManagementPanel({ formId }: { formId?: string }) {
 		<div className="flex flex-col gap-6">
 			<div className="flex flex-wrap items-center justify-between gap-2">
 				<div className="flex flex-col gap-1">
-					<p className="font-medium text-sm">Webhook Endpoints</p>
+					<p className="font-medium text-sm">{t("endpointsTitle")}</p>
 					<p className="text-muted-foreground text-xs">
-						Configure webhooks to receive form submissions
+						{t("endpointsDescription")}
 					</p>
 				</div>
 				<Button
@@ -94,7 +96,7 @@ export function WebhookManagementPanel({ formId }: { formId?: string }) {
 					size="sm"
 					variant="default"
 				>
-					Add Webhook
+					{t("addWebhook")}
 				</Button>
 			</div>
 

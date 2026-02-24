@@ -389,7 +389,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
 													initial={{ opacity: 0, y: 20 }}
 													key={file.id}
 												>
-													<div className="relative flex-shrink-0">
+													<div className="relative shrink-0">
 														{showPreview && file.preview ? (
 															<img
 																alt={file.name}
@@ -415,7 +415,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
 															</p>
 															<button
 																aria-label={`Remove ${file.name}`}
-																className="flex-shrink-0 rounded-xl p-1 transition-colors hover:bg-accent"
+																className="shrink-0 rounded-xl p-1 transition-colors hover:bg-accent"
 																onClick={() => removeFile(file.id)}
 															>
 																<X className="size-4 text-muted-foreground hover:text-destructive" />

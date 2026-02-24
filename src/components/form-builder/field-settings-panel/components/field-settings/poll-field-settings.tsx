@@ -1,4 +1,5 @@
 import { Plus, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,19 +13,20 @@ export function PollFieldSettings({
 	onUpdateSettings,
 	onFieldUpdate,
 }: FieldSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.poll");
 	const [newOption, setNewOption] = useState("");
 
 	return (
 		<Card className="gap-2 p-4 shadow-none">
 			<CardHeader className="p-0">
 				<CardTitle className="flex items-center gap-2 text-lg">
-					Poll Settings
+					{t("title")}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 p-0">
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="poll-options">
-						Poll Options
+						{t("pollOptions")}
 					</Label>
 					<div className="flex gap-2">
 						<Input
@@ -48,12 +50,12 @@ export function PollFieldSettings({
 									e.currentTarget.blur();
 								}
 							}}
-							placeholder="Add option"
+							placeholder={t("addOptionPlaceholder")}
 							type="text"
 							value={newOption || ""}
 						/>
 						<Button
-							aria-label="Add poll option"
+							aria-label={t("addOptionAria")}
 							className="focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
 							disabled={!(newOption && newOption.trim())}
 							onClick={() => {
@@ -88,14 +90,14 @@ export function PollFieldSettings({
 						</Button>
 					</div>
 					<p className="text-muted-foreground text-xs" id="poll-options-help">
-						Add poll options that users can vote on
+						{t("optionsHelp")}
 					</p>
 				</div>
 				<div className="flex flex-col gap-1">
 					{(field.settings?.pollOptions || []).map((option, idx) => (
 						<div className="flex items-center gap-2" key={idx}>
 							<Input
-								aria-label={`Edit poll option ${idx + 1}`}
+								aria-label={t("editOptionAria", { index: idx + 1 })}
 								autoComplete="off"
 								className="flex-1"
 								name={`poll-option-${idx}`}
@@ -113,7 +115,7 @@ export function PollFieldSettings({
 								value={option}
 							/>
 							<Button
-								aria-label={`Remove poll option ${idx + 1}`}
+								aria-label={t("removeOptionAria", { index: idx + 1 })}
 								className="focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
 								onClick={() => {
 									const updated = [...(field.settings?.pollOptions || [])];
@@ -138,18 +140,18 @@ export function PollFieldSettings({
 					))}
 				</div>
 				<div
-					aria-label="or separator"
+					aria-label={t("orAria")}
 					className="relative my-4 flex items-center"
 				>
 					<div aria-hidden="true" className="h-px flex-1 bg-border" />
 					<span className="mx-4 select-none whitespace-nowrap font-medium text-muted-foreground text-xs">
-						OR
+						{t("or")}
 					</span>
 					<div aria-hidden="true" className="h-px flex-1 bg-border" />
 				</div>
 				<div className="flex flex-col gap-4">
 					<h3 className="font-medium text-card-foreground">
-						Fetch Options from API
+						{t("fetchFromApi")}
 					</h3>
 					<div className="flex flex-col gap-2">
 						<Input
@@ -165,12 +167,12 @@ export function PollFieldSettings({
 									e.currentTarget.blur();
 								}
 							}}
-							placeholder="https://your-api.com/options"
+							placeholder={t("apiEndpointPlaceholder")}
 							type="url"
 							value={field.optionsApi || ""}
 						/>
 						<p className="text-muted-foreground text-xs" id="poll-api-help">
-							API endpoint to fetch poll options from
+							{t("apiEndpointHelp")}
 						</p>
 					</div>
 					<div className="flex gap-2">
@@ -188,7 +190,7 @@ export function PollFieldSettings({
 										e.currentTarget.blur();
 									}
 								}}
-								placeholder="Value key (e.g. id)"
+								placeholder={t("valueKeyPlaceholder")}
 								type="text"
 								value={field.valueKey || ""}
 							/>
@@ -196,7 +198,7 @@ export function PollFieldSettings({
 								className="text-muted-foreground text-xs"
 								id="poll-value-key-help"
 							>
-								Key for option values
+								{t("valueKeyHelp")}
 							</p>
 						</div>
 						<div className="flex flex-1 flex-col gap-2">
@@ -213,7 +215,7 @@ export function PollFieldSettings({
 										e.currentTarget.blur();
 									}
 								}}
-								placeholder="Label key (e.g. name)"
+								placeholder={t("labelKeyPlaceholder")}
 								type="text"
 								value={field.labelKey || ""}
 							/>
@@ -221,7 +223,7 @@ export function PollFieldSettings({
 								className="text-muted-foreground text-xs"
 								id="poll-label-key-help"
 							>
-								Key for option labels
+								{t("labelKeyHelp")}
 							</p>
 						</div>
 					</div>
@@ -231,40 +233,33 @@ export function PollFieldSettings({
 							className="rounded border border-blue-200 bg-blue-50 p-2 text-blue-900 text-xs"
 							role="status"
 						>
-							<strong>API Data Guidance:</strong> This field will fetch options
-							from the API endpoint:
+							<strong>{t("apiGuidanceTitle")}</strong> {t("apiGuidanceIntro")}
 							<br />
 							<span className="font-mono text-xs">{field.optionsApi}</span>
 							<br />
 							<span>
-								The API should return either:
+								{t("apiShouldReturn")}
 								<ul className="mt-1 ml-6 list-disc">
 									<li>
-										<code>["Option 1", "Option 2", ...]</code>{" "}
-										<em>(array of strings)</em>
+										<code>["Option 1", "Option 2", ...]</code> <em>{t("apiType1Hint")}</em>
 									</li>
 									<li>
-										<code>
-											[&#123; value: "opt1", label: "Option 1" &#125;, ...]
-										</code>{" "}
-										<em>(array of objects)</em>
+										<code>[&#123; value: "opt1", label: "Option 1" &#125;, ...]</code>{" "}
+										<em>{t("apiType2Hint")}</em>
 									</li>
 									<li>
-										<code>&#123; options: [...] &#125;</code>{" "}
-										<em>(object with options array)</em>
+										<code>&#123; options: [...] &#125;</code> <em>{t("apiType3Hint")}</em>
 									</li>
 									<li>
-										<code>
-											[&#123; id: "opt1", name: "Option 1" &#125;, ...]
-										</code>{" "}
-										<em>(custom keys)</em>
+										<code>[&#123; id: "opt1", name: "Option 1" &#125;, ...]</code>{" "}
+										<em>{t("apiType4Hint")}</em>
 									</li>
 								</ul>
 								<span className="mt-1 block">
-									You can specify custom keys above to map your API data.
+									{t("apiCustomKeysHelp")}
 									<br />
-									Each option must have a <code>value</code> property (or your
-									custom key). <code>label</code> is optional.
+									{t("apiValueLabelHelp")} <code>value</code> {t("apiValueLabelHelpOr")}{" "}
+									<code>label</code> {t("apiValueLabelHelpSuffix")}
 								</span>
 							</span>
 						</div>
@@ -273,10 +268,10 @@ export function PollFieldSettings({
 				<div className="flex items-center justify-between">
 					<div className="flex flex-col gap-1">
 						<Label className="font-medium text-sm" htmlFor="poll-show-results">
-							Show results after voting
+							{t("showResults")}
 						</Label>
 						<p className="text-muted-foreground text-xs">
-							Display poll results to users after they vote
+							{t("showResultsHelp")}
 						</p>
 					</div>
 					<Switch

@@ -1,4 +1,5 @@
 import { X } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -8,6 +9,8 @@ interface SettingsPanelHeaderProps {
 }
 
 export function SettingsPanelHeader({ onClose }: SettingsPanelHeaderProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.header");
+
 	return (
 		<header className="flex flex-col border-border bg-background">
 			<div className="flex w-full items-center justify-between p-4">
@@ -15,10 +18,10 @@ export function SettingsPanelHeader({ onClose }: SettingsPanelHeaderProps) {
 					className="font-semibold text-foreground text-lg"
 					id="field-settings-title"
 				>
-					Field Settings
+					{t("title")}
 				</h2>
 				<Button
-					aria-label="Close field settings"
+					aria-label={t("closeAria")}
 					className="flex gap-2"
 					onClick={onClose}
 					onKeyDown={(e) => {

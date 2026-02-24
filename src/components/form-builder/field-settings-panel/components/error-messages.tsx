@@ -1,4 +1,5 @@
 import { Card } from "@/components/ui/card";
+import { useTranslations } from "next-intl";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,6 +15,7 @@ export function ErrorMessages({
 	field,
 	onUpdateValidation,
 }: ErrorMessagesProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.errorMessages");
 	const isTextType = ["text", "email", "textarea"].includes(field.type);
 	const isNumberType = field.type === "number";
 
@@ -24,13 +26,13 @@ export function ErrorMessages({
 	return (
 		<Card className="flex flex-col gap-4 rounded-2xl bg-background p-4">
 			<h3 className="font-medium text-card-foreground">
-				Custom Error Messages
+				{t("title")}
 			</h3>
 			<div className="flex flex-col gap-4">
 				{field.required && (
 					<div className="flex flex-col gap-2">
 						<Label className="text-card-foreground" htmlFor="required-message">
-							Required Field Message
+							{t("requiredFieldMessage")}
 						</Label>
 						<Input
 							id="required-message"
@@ -39,7 +41,7 @@ export function ErrorMessages({
 									requiredMessage: e.target.value || undefined,
 								})
 							}
-							placeholder="This field is required"
+							placeholder={t("requiredFieldPlaceholder")}
 							value={field.validation?.requiredMessage || ""}
 						/>
 					</div>
@@ -53,7 +55,7 @@ export function ErrorMessages({
 									className="text-card-foreground"
 									htmlFor="min-length-message"
 								>
-									Min Length Error Message
+									{t("minLengthMessage")}
 								</Label>
 								<Input
 									id="min-length-message"
@@ -62,7 +64,9 @@ export function ErrorMessages({
 											minLengthMessage: e.target.value || undefined,
 										})
 									}
-									placeholder={`Must be at least ${field.validation.minLength} characters`}
+									placeholder={t("minLengthPlaceholder", {
+										count: field.validation.minLength,
+									})}
 									value={field.validation?.minLengthMessage || ""}
 								/>
 							</div>
@@ -74,7 +78,7 @@ export function ErrorMessages({
 									className="text-card-foreground"
 									htmlFor="max-length-message"
 								>
-									Max Length Error Message
+									{t("maxLengthMessage")}
 								</Label>
 								<Input
 									id="max-length-message"
@@ -83,7 +87,9 @@ export function ErrorMessages({
 											maxLengthMessage: e.target.value || undefined,
 										})
 									}
-									placeholder={`Must be no more than ${field.validation.maxLength} characters`}
+									placeholder={t("maxLengthPlaceholder", {
+										count: field.validation.maxLength,
+									})}
 									value={field.validation?.maxLengthMessage || ""}
 								/>
 							</div>
@@ -95,7 +101,7 @@ export function ErrorMessages({
 									className="text-card-foreground"
 									htmlFor="pattern-message"
 								>
-									Pattern Error Message
+									{t("patternMessage")}
 								</Label>
 								<Input
 									id="pattern-message"
@@ -104,7 +110,7 @@ export function ErrorMessages({
 											patternMessage: e.target.value || undefined,
 										})
 									}
-									placeholder="Please enter a valid format"
+									placeholder={t("patternPlaceholder")}
 									value={field.validation?.patternMessage || ""}
 								/>
 							</div>
@@ -113,7 +119,7 @@ export function ErrorMessages({
 						{field.type === "email" && (
 							<div className="flex flex-col gap-2">
 								<Label className="text-card-foreground" htmlFor="email-message">
-									Email Error Message
+									{t("emailMessage")}
 								</Label>
 								<Input
 									id="email-message"
@@ -122,7 +128,7 @@ export function ErrorMessages({
 											emailMessage: e.target.value || undefined,
 										})
 									}
-									placeholder="Please enter a valid email address"
+									placeholder={t("emailPlaceholder")}
 									value={field.validation?.emailMessage || ""}
 								/>
 							</div>
@@ -138,7 +144,7 @@ export function ErrorMessages({
 									className="text-card-foreground"
 									htmlFor="min-value-message"
 								>
-									Min Value Error Message
+									{t("minValueMessage")}
 								</Label>
 								<Input
 									id="min-value-message"
@@ -147,7 +153,9 @@ export function ErrorMessages({
 											minMessage: e.target.value || undefined,
 										})
 									}
-									placeholder={`Must be at least ${field.validation.min}`}
+									placeholder={t("minValuePlaceholder", {
+										value: field.validation.min,
+									})}
 									value={field.validation?.minMessage || ""}
 								/>
 							</div>
@@ -159,7 +167,7 @@ export function ErrorMessages({
 									className="text-card-foreground"
 									htmlFor="max-value-message"
 								>
-									Max Value Error Message
+									{t("maxValueMessage")}
 								</Label>
 								<Input
 									id="max-value-message"
@@ -168,7 +176,9 @@ export function ErrorMessages({
 											maxMessage: e.target.value || undefined,
 										})
 									}
-									placeholder={`Must be no more than ${field.validation.max}`}
+									placeholder={t("maxValuePlaceholder", {
+										value: field.validation.max,
+									})}
 									value={field.validation?.maxMessage || ""}
 								/>
 							</div>
@@ -176,7 +186,7 @@ export function ErrorMessages({
 
 						<div className="flex flex-col gap-2">
 							<Label className="text-card-foreground" htmlFor="number-message">
-								Invalid Number Message
+								{t("invalidNumberMessage")}
 							</Label>
 							<Input
 								id="number-message"
@@ -185,7 +195,7 @@ export function ErrorMessages({
 										numberMessage: e.target.value || undefined,
 									})
 								}
-								placeholder="Please enter a valid number"
+								placeholder={t("invalidNumberPlaceholder")}
 								value={field.validation?.numberMessage || ""}
 							/>
 						</div>

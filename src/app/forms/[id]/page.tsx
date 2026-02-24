@@ -9,6 +9,22 @@ interface PublicFormPageProps {
 	params: Promise<{ id: string }>;
 }
 
+function parseRobotsPreference(
+	robots: string | undefined
+): { index: boolean; follow: boolean } {
+	switch (robots) {
+		case "index":
+			return { index: true, follow: true };
+		case "nofollow":
+			return { index: true, follow: false };
+		case "noindex,nofollow":
+			return { index: false, follow: false };
+		case "noindex":
+		default:
+			return { index: false, follow: true };
+	}
+}
+
 export async function generateMetadata({
 	params,
 }: {
@@ -32,12 +48,12 @@ export async function generateMetadata({
 			"Fill out this form.";
 		const author = metadata.author;
 		const keywords = metadata.keywords;
-		const canonicalUrl = metadata.canonicalUrl || formUrl;
+		const canonicalUrl = formUrl;
 
-		const robots = metadata.robots || "noindex";
+		const robotPreference = parseRobotsPreference(metadata.robots);
 		const robotsConfig = {
-			index: !metadata.noIndex,
-			follow: !metadata.noFollow,
+			index: robotPreference.index && !metadata.noIndex,
+			follow: robotPreference.follow && !metadata.noFollow,
 			archive: !metadata.noArchive,
 			snippet: !metadata.noSnippet,
 			imageindex: !metadata.noImageIndex,

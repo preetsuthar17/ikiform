@@ -1,4 +1,5 @@
 import { X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -27,6 +28,10 @@ export function ProfanityFilterSection({
 }: ProfanityFilterSectionProps & {
 	onSchemaUpdate?: (updates: Partial<any>) => void;
 }) {
+	const t = useTranslations(
+		"product.formBuilder.formSettings.profanityFilterSection"
+	);
+	const tCommon = useTranslations("product.formBuilder.formSettings.common");
 	const [profanityFilterSettings, setProfanityFilterSettings] = useState({
 		enabled: localSettings.profanityFilter?.enabled,
 		strictMode: true,
@@ -77,7 +82,7 @@ export function ProfanityFilterSection({
 
 	const saveProfanityFilter = async () => {
 		if (!formId) {
-			toast.error("Form ID is required to save settings");
+			toast.error(tCommon("formIdRequiredToSaveSettings"));
 			return;
 		}
 
@@ -104,12 +109,12 @@ export function ProfanityFilterSection({
 			updateProfanityFilter(trimmed);
 			setSaved(true);
 			setHasChanges(false);
-			toast.success("Profanity filter settings saved successfully");
+			toast.success(t("saved"));
 
 			setTimeout(() => setSaved(false), 2000);
 		} catch (error) {
 			console.error("Error saving profanity filter:", error);
-			toast.error("Failed to save profanity filter settings");
+			toast.error(t("saveFailed"));
 		} finally {
 			setSaving(false);
 		}
@@ -130,18 +135,18 @@ export function ProfanityFilterSection({
 			announcement.setAttribute("aria-live", "polite");
 			announcement.setAttribute("aria-atomic", "true");
 			announcement.className = "sr-only";
-			announcement.textContent = "Profanity filter settings saved successfully";
+			announcement.textContent = t("saved");
 			document.body.appendChild(announcement);
 
 			setTimeout(() => {
 				document.body.removeChild(announcement);
 			}, 1000);
 		}
-	}, [saved]);
+	}, [saved, t]);
 
 	return (
 		<div
-			aria-label="Profanity filter settings"
+			aria-label={t("ariaSettings")}
 			className="flex flex-col gap-4"
 			onKeyDown={(e) => {
 				const target = e.target as HTMLElement;
@@ -169,16 +174,16 @@ export function ProfanityFilterSection({
 								className="flex items-center gap-2 text-lg tracking-tight"
 								id="profanity-filter-title"
 							>
-								Profanity Filter{" "}
+								{t("title")}{" "}
 								{hasChanges && (
 									<Badge className="gap-2" variant="secondary">
 										<div className="size-2 rounded-full bg-orange-500" />
-										Unsaved changes
+										{tCommon("unsavedChanges")}
 									</Badge>
 								)}
 							</CardTitle>
 							<CardDescription id="profanity-filter-description">
-								Automatically detect and filter inappropriate content
+								{t("description")}
 							</CardDescription>
 						</div>
 					</div>
@@ -190,13 +195,13 @@ export function ProfanityFilterSection({
 								className="font-medium text-sm"
 								htmlFor="profanity-filter-enabled"
 							>
-								Enable Profanity Filter
+								{t("enableLabel")}
 							</Label>
 							<p
 								className="text-muted-foreground text-xs"
 								id="profanity-filter-enabled-description"
 							>
-								Automatically detect and filter inappropriate content
+								{t("enableDescription")}
 							</p>
 						</div>
 						<Switch
@@ -214,21 +219,25 @@ export function ProfanityFilterSection({
 							<div className="flex flex-col gap-4">
 								<FilterModeSection
 									profanityFilter={profanityFilterSettings}
+									t={t}
 									updateProfanityFilter={handleProfanityFilterChange}
 								/>
 								<CustomMessageSection
 									profanityFilter={profanityFilterSettings}
+									t={t}
 									updateProfanityFilter={handleProfanityFilterChange}
 								/>
 								<WordManagementSection
-									title="Custom Words to Filter"
+									type="custom"
+									t={t}
 									updateWords={(words) =>
 										handleProfanityFilterChange("customWords", words)
 									}
 									words={profanityFilterSettings.customWords}
 								/>
 								<WordManagementSection
-									title="Whitelisted Words"
+									type="whitelist"
+									t={t}
 									updateWords={(words) =>
 										handleProfanityFilterChange("whitelistedWords", words)
 									}
@@ -243,32 +252,35 @@ export function ProfanityFilterSection({
 							>
 								<div className="flex flex-col gap-2">
 									<h4 className="font-medium text-foreground text-sm">
-										Current Configuration
+										{t("currentConfiguration")}
 									</h4>
 									<p className="text-muted-foreground text-sm">
-										Profanity filter is{" "}
+										{t("summaryPrefix")}{" "}
 										<span className="font-semibold text-foreground">
-											enabled
+											{t("enabled")}
 										</span>{" "}
-										in{" "}
+										{t("summaryIn")}{" "}
 										<span className="font-semibold text-foreground">
 											{profanityFilterSettings.strictMode
-												? "strict mode"
-												: "replace mode"}
+												? t("strictMode")
+												: t("replaceMode")}
 										</span>
-										.
+										{t("summaryPeriod")}
 										{profanityFilterSettings.customWords.length > 0 && (
 											<span>
 												{" "}
-												{profanityFilterSettings.customWords.length} custom
-												words configured.
+												{t("customWordsConfigured", {
+													count: profanityFilterSettings.customWords.length,
+												})}
 											</span>
 										)}
 										{profanityFilterSettings.whitelistedWords.length > 0 && (
 											<span>
 												{" "}
-												{profanityFilterSettings.whitelistedWords.length}{" "}
-												whitelisted words.
+												{t("whitelistedWordsConfigured", {
+													count:
+														profanityFilterSettings.whitelistedWords.length,
+												})}
 											</span>
 										)}
 									</p>
@@ -280,15 +292,13 @@ export function ProfanityFilterSection({
 					{!profanityFilterSettings.enabled && (
 						<div className="rounded-lg bg-muted/30 p-4">
 							<p className="text-muted-foreground text-sm">
-								Profanity filter helps maintain a clean and professional
-								environment by automatically detecting and filtering
-								inappropriate content in form submissions.
+								{t("disabledDescription")}
 							</p>
 						</div>
 					)}
 
 					<div
-						aria-label="Profanity filter actions"
+						aria-label={t("actionsAria")}
 						className="flex items-center justify-between"
 						role="group"
 					>
@@ -300,14 +310,14 @@ export function ProfanityFilterSection({
 									size="sm"
 									variant="ghost"
 								>
-									Reset
+									{tCommon("reset")}
 								</Button>
 							)}
 						</div>
 						<div className="flex items-center gap-2">
 							<Button
 								aria-describedby="profanity-filter-description"
-								aria-label="Save profanity filter settings"
+								aria-label={t("saveAria")}
 								disabled={saving || !hasChanges}
 								loading={saving}
 								onClick={saveProfanityFilter}
@@ -318,7 +328,7 @@ export function ProfanityFilterSection({
 									}
 								}}
 							>
-								Save
+								{tCommon("save")}
 							</Button>
 						</div>
 					</div>
@@ -330,14 +340,16 @@ export function ProfanityFilterSection({
 
 function FilterModeSection({
 	profanityFilter,
+	t,
 	updateProfanityFilter,
 }: {
 	profanityFilter: any;
+	t: ReturnType<typeof useTranslations>;
 	updateProfanityFilter: (field: string, value: any) => void;
 }) {
 	return (
 		<div className="flex flex-col gap-2">
-			<Label className="font-medium text-sm">Filter Mode</Label>
+			<Label className="font-medium text-sm">{t("filterModeLabel")}</Label>
 			<RadioGroup
 				onValueChange={(value: "replace" | "strict") => {
 					if (value === "replace") {
@@ -353,15 +365,11 @@ function FilterModeSection({
 			>
 				<div className="flex items-center gap-2">
 					<RadioGroupItem id="strict-mode" value="strict" />
-					<Label htmlFor="strict-mode">
-						Strict Mode - Reject submissions with profanity
-					</Label>
+					<Label htmlFor="strict-mode">{t("strictModeOption")}</Label>
 				</div>
 				<div className="flex items-center gap-2">
 					<RadioGroupItem id="replace-mode" value="replace" />
-					<Label htmlFor="replace-mode">
-						Replace Mode - Replace profanity with asterisks
-					</Label>
+					<Label htmlFor="replace-mode">{t("replaceModeOption")}</Label>
 				</div>
 			</RadioGroup>
 		</div>
@@ -370,15 +378,17 @@ function FilterModeSection({
 
 function CustomMessageSection({
 	profanityFilter,
+	t,
 	updateProfanityFilter,
 }: {
 	profanityFilter: any;
+	t: ReturnType<typeof useTranslations>;
 	updateProfanityFilter: (field: string, value: any) => void;
 }) {
 	return (
 		<div className="flex flex-col gap-2">
 			<Label className="font-medium text-sm" htmlFor="custom-message">
-				Custom Message
+				{t("customMessageLabel")}
 			</Label>
 			<Textarea
 				className="text-base shadow-none md:text-sm"
@@ -390,7 +400,7 @@ function CustomMessageSection({
 						(e.target as HTMLElement).blur();
 					}
 				}}
-				placeholder="Enter a custom message to show when profanity is detected"
+				placeholder={t("customMessagePlaceholder")}
 				rows={2}
 				value={profanityFilter.customMessage || ""}
 			/>
@@ -399,11 +409,13 @@ function CustomMessageSection({
 }
 
 function WordManagementSection({
-	title,
+	type,
+	t,
 	words,
 	updateWords,
 }: {
-	title: string;
+	type: "custom" | "whitelist";
+	t: ReturnType<typeof useTranslations>;
 	words: string[];
 	updateWords: (words: string[]) => void;
 }) {
@@ -441,11 +453,13 @@ function WordManagementSection({
 		}
 	};
 
-	const isWhitelist = title.toLowerCase().includes("whitelist");
+	const isWhitelist = type === "whitelist";
 
 	return (
 		<div className="flex flex-col gap-2">
-			<Label className="font-medium text-sm">{title}</Label>
+			<Label className="font-medium text-sm">
+				{isWhitelist ? t("whitelistedWordsTitle") : t("customWordsTitle")}
+			</Label>
 			<div className="flex items-center gap-2">
 				<Input
 					className="text-base shadow-none md:text-sm"
@@ -458,16 +472,22 @@ function WordManagementSection({
 							onKeyDown(e);
 						}
 					}}
-					placeholder={`Enter word(s) to ${isWhitelist ? "whitelist" : "filter"} (comma-separated for multiple)`}
+					placeholder={
+						isWhitelist
+							? t("whitelistPlaceholder")
+							: t("customWordsPlaceholder")
+					}
 					value={newWord}
 				/>
 				<Button
-					aria-label={`Add ${isWhitelist ? "whitelisted" : "filtered"} word`}
+					aria-label={
+						isWhitelist ? t("addWhitelistedWordAria") : t("addFilteredWordAria")
+					}
 					onClick={addWord}
 					size="sm"
 					type="button"
 				>
-					Add
+					{t("addWord")}
 				</Button>
 			</div>
 			{words.length > 0 && (
@@ -480,7 +500,7 @@ function WordManagementSection({
 						>
 							<span>{word}</span>
 							<Button
-								aria-label={`Remove ${word}`}
+								aria-label={t("removeWordAria", { word })}
 								className="size-4 p-0"
 								onClick={() => removeWord(word)}
 								onKeyDown={(e) => {

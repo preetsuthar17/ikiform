@@ -1,4 +1,5 @@
 import type React from "react";
+import { useTranslations } from "next-intl";
 import {
 	Card,
 	CardDescription,
@@ -12,6 +13,7 @@ export const FormTypeCard: React.FC<FormTypeCardProps> = ({
 	isSelected,
 	onSelect,
 }) => {
+	const t = useTranslations("product.formBuilder.creation.types");
 	const Icon = type.icon;
 
 	return (
@@ -33,9 +35,9 @@ export const FormTypeCard: React.FC<FormTypeCardProps> = ({
 						<Icon aria-hidden="true" className="size-5" />
 					</span>
 					<div className="flex flex-col gap-2">
-						<CardTitle className="text-base">{type.title}</CardTitle>
+						<CardTitle className="text-base">{t(`${type.id}.title`)}</CardTitle>
 						<CardDescription className="text-xs">
-							{type.description}
+							{t(`${type.id}.description`)}
 						</CardDescription>
 					</div>
 				</div>

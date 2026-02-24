@@ -7,7 +7,7 @@ export function FormBuilderSkeleton() {
 			<FormBuilderHeaderSkeleton />
 
 			<div className="flex flex-1 overflow-hidden">
-				<div className="w-80 flex-shrink-0 border-border border-r bg-card">
+				<div className="w-80 shrink-0 border-border border-r bg-card">
 					<div className="h-full p-4">
 						<div className="flex flex-col gap-4">
 							<Skeleton className="h-6 w-32" />
@@ -67,7 +67,7 @@ export function FormBuilderSkeleton() {
 					</div>
 				</div>
 
-				<div className="w-80 flex-shrink-0 border-border border-l bg-card">
+				<div className="w-80 shrink-0 border-border border-l bg-card">
 					<div className="h-full">
 						{}
 						<div className="border-border border-b p-4">

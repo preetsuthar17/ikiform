@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 
 import { Card } from "@/components/ui/card";
@@ -11,6 +12,8 @@ export function StepHeader({
 	currentStepIndex,
 	onBlockUpdate,
 }: StepHeaderProps) {
+	const t = useTranslations("product.formBuilder.formPreview");
+
 	const handleTitleUpdate = (title: string) => {
 		onBlockUpdate?.(currentStep.id, { title });
 	};
@@ -26,7 +29,7 @@ export function StepHeader({
 				disabled={!onBlockUpdate}
 				inputClassName="text-xl font-semibold bg-background w-full"
 				onSave={handleTitleUpdate}
-				placeholder="Click to add step title..."
+				placeholder={t("stepTitlePlaceholder")}
 				value={currentStep.title}
 			>
 				<div className="flex items-center gap-2">
@@ -34,7 +37,7 @@ export function StepHeader({
 						{currentStep.title}
 					</h2>
 					<Badge className="text-xs" variant="secondary">
-						Step {currentStepIndex + 1}
+						{t("stepBadge", { index: currentStepIndex + 1 })}
 					</Badge>
 				</div>
 			</EditableField>
@@ -45,7 +48,7 @@ export function StepHeader({
 				disabled={!onBlockUpdate}
 				inputClassName="bg-background min-h-[60px] w-full"
 				onSave={handleDescriptionUpdate}
-				placeholder="Click to add a step description..."
+				placeholder={t("stepDescriptionPlaceholder")}
 				rows={2}
 				value={currentStep.description || ""}
 			>
@@ -55,7 +58,7 @@ export function StepHeader({
 					</p>
 				) : onBlockUpdate ? (
 					<p className="text-muted-foreground italic">
-						Click to add a step description...
+						{t("stepDescriptionPlaceholder")}
 					</p>
 				) : null}
 			</EditableField>

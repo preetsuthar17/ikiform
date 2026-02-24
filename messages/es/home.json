@@ -1,0 +1,252 @@
+{
+  "name": "Ikiform",
+  "tagline": "Crea formularios, recopila respuestas y analiza datos sin esfuerzo.",
+  "footer": {
+    "madeBy": "Hecho por"
+  },
+  "cta": {
+    "heading": "Crea tu primer formulario en minutos.",
+    "subheading": "Comienza con Ikiform para crear formularios, encuestas, recopilar respuestas y más en segundos.",
+    "goToDashboard": "Ir al panel",
+    "createFirstForm": "Crea tu primer formulario",
+    "tryDemo": "Probar demo"
+  },
+  "hero": {
+    "unableToLoadFormDemo": "No se pudo cargar la demo del formulario. Intenta recargar la página.",
+    "reload": "Recargar",
+    "iframeTitle": "Demo de formulario de Ikiform",
+    "sponsoredByAria": "Patrocinado por Vercel (se abre en una nueva pestaña)",
+    "sponsoredBy": "Patrocinado por",
+    "heading": "Crea formularios, recopila respuestas y analiza.",
+    "subheading": "La plataforma de formularios open source para recopilar y analizar datos sin esfuerzo.",
+    "fiveStarRating": "Calificación de 5 de 5 estrellas",
+    "totalUsersSrOnly": "Usuarios totales:",
+    "lovedByUsers": "Amado por {count} usuarios",
+    "createFirstForm": "Crea tu primer formulario",
+    "tryDemo": "Probar demo",
+    "openFullscreenAria": "Abrir demo del constructor en pantalla completa (pulsa Enter o Espacio)",
+    "clickToViewFullscreen": "Haz clic para ver en pantalla completa",
+    "tabs": {
+      "formDemo": "Demo del formulario",
+      "formBuilderDemo": "Demo del constructor"
+    }
+  },
+  "pricing": {
+    "title": "Precios simples y transparentes para todo lo que necesitas.",
+    "description": "Elige el plan que mejor se adapte a tus necesidades y comienza a recopilar respuestas.",
+    "popular": "Popular",
+    "noCard": "No se requiere tarjeta de crédito",
+    "features": {
+      "unlimitedForms": "Formularios y respuestas ilimitados",
+      "apiWebhooks": "API y webhooks para automatización",
+      "responseLimits": "Controla límites y ritmo de respuestas",
+      "quizScoring": "Crea cuestionarios con puntuación",
+      "formDataApi": "Accede a datos del formulario por API",
+      "customBranding": "Marca personalizada e incrusta en cualquier lugar",
+      "spamProtection": "Bloquea spam y bots automáticamente",
+      "passwordProfanity": "Filtra palabras ofensivas y exige contraseña"
+    },
+    "plans": {
+      "monthly": {
+        "title": "Plan mensual",
+        "byline": "Facturación mensual • Cancela cuando quieras"
+      },
+      "lifetime": {
+        "title": "Acceso de por vida",
+        "byline": "Pago único • Acceso de por vida"
+      },
+      "yearly": {
+        "title": "Plan anual",
+        "byline": "Facturación anual ($192/año) • Cancela cuando quieras"
+      }
+    },
+    "cta": {
+      "startTrial": "Comienza tu prueba gratis de 14 días",
+      "getLifetime": "Obtener acceso de por vida"
+    }
+  },
+  "faq": {
+    "title": "Preguntas frecuentes",
+    "featureBoardLabel": "Tablero de funcionalidades",
+    "githubLabel": "GitHub",
+    "q1": {
+      "question": "¿Qué es Ikiform?",
+      "answer": "Ikiform es una alternativa open source a Google Forms. Te ayuda a crear formularios bonitos e interactivos fácilmente."
+    },
+    "q2": {
+      "question": "¿Hay prueba gratuita?",
+      "answer": "Sí, hay una prueba gratuita de 14 días sin necesidad de tarjeta de crédito. Puedes cancelar cuando quieras."
+    },
+    "q3": {
+      "question": "¿Por qué usar Ikiform en lugar de Google Forms o Typeform?",
+      "answer": "Ikiform es open source y te da control total sobre tus datos y tu marca. No hay costos ocultos y puedes autoalojarlo para mayor privacidad y flexibilidad."
+    },
+    "q4": {
+      "question": "¿Qué tipos de formularios puedo crear?",
+      "answer": "Puedes crear formularios de una sola página y formularios multietapa con seguimiento de progreso."
+    },
+    "q5": {
+      "question": "¿Qué campos son compatibles?",
+      "answer": "Campos compatibles: Texto, Email, Número, Teléfono, Textarea, Fecha, Hora, Dirección, Enlace, Select, Radio Buttons, Checkboxes, Slider, Tags, Campos sociales, Subida de archivos, Firma, Statement, Banner, Grupo de campos, Tag Input, Redes sociales, Scheduler, Encuesta, Rating, Quiz y más."
+    },
+    "q6": {
+      "question": "¿Cómo se protegen mis datos?",
+      "answer": "Los formularios pueden tener protección por contraseña, limitación de tasa, filtros de lenguaje ofensivo, protección antispam, protección contra bots y cumplimiento RGPD."
+    },
+    "q7": {
+      "question": "¿Los datos que envío se comparten con alguien?",
+      "answer": "No, tus datos no se venden ni se comparten con terceros, excepto proveedores confiables necesarios para operar Ikiform."
+    },
+    "q8": {
+      "question": "¿Puedo personalizar mis formularios?",
+      "answer": "Puedes cambiar colores, tipografías, diseño, añadir tu logo y controlar el aspecto de cada campo."
+    },
+    "q9": {
+      "question": "¿Dónde puedo sugerir nuevas funcionalidades?",
+      "answerPrefix": "Puedes sugerir funcionalidades en"
+    },
+    "q10": {
+      "question": "¿Dónde se almacenan mis datos?",
+      "answer": "Tus datos se cifran y se almacenan de forma segura en la UE usando Supabase."
+    },
+    "q11": {
+      "question": "¿Cómo se mantienen seguros mis datos?",
+      "answer": "Usamos medidas de seguridad sólidas y solo el personal autorizado puede acceder a tus datos."
+    },
+    "q12": {
+      "question": "¿Se eliminarán mis datos si cancelo mi cuenta?",
+      "answer": "Sí. Puedes eliminar tus datos en cualquier momento. Los datos eliminados se borran de las copias de seguridad en un plazo de 30 días."
+    },
+    "q13": {
+      "question": "¿Puedo eliminar mis datos?",
+      "answer": "Sí. Puedes solicitar acceso o eliminación de tus datos en cualquier momento escribiendo a hi@ikiform.com."
+    },
+    "q14": {
+      "question": "¿Quién es dueño de los datos de envío de formularios?",
+      "answer": "Tú eres dueño de todos los datos que recopilas. Ikiform solo los almacena por ti."
+    },
+    "q15": {
+      "question": "¿Ikiform es open source?",
+      "answerPrefix": "Ikiform es completamente open source y está disponible en"
+    }
+  },
+  "bento": {
+    "preview": {
+      "aiForm": {
+        "demoAria": "Demo del constructor con IA",
+        "step0Label": "¿Qué te gustaría crear?",
+        "step0Placeholder": "Ej. Formulario de contacto",
+        "step1Label": "Recoger nombre",
+        "step2Label": "Recoger email",
+        "step3Label": "Mensaje",
+        "statusGenerating": "La IA está creando tu formulario…",
+        "statusGenerated": "Formulario generado",
+        "examplePrompt": "¿puedes crear un formulario de contacto simple?",
+        "generatedIn": "Generado en 2.3 s",
+        "useThisForm": "Usar este formulario"
+      },
+      "unlimited": {
+        "aria": "Vista previa de envíos ilimitados",
+        "copy": "Formularios, campos, usuarios y respuestas ilimitados."
+      },
+      "analytics": {
+        "weeklyResponses": "Respuestas semanales",
+        "liveUpdating": "Actualizando datos en vivo...",
+        "responsesThisWeek": "1.2k respuestas esta semana"
+      },
+      "logic": {
+        "ifPrefix": "SI",
+        "thenPrefix": "ENTONCES",
+        "elsePrefix": "SI NO",
+        "userResponds": "El usuario responde",
+        "yesValue": "“Sí”",
+        "showEmailField": "Mostrar campo de email",
+        "skip": "Omitir",
+        "srDescription": "Vista previa de lógica condicional simple: si el usuario responde \"Sí\", muestra el campo de email; de lo contrario, omítelo."
+      },
+      "api": {
+        "nameLabel": "Nombre",
+        "emailLabel": "Email",
+        "planLabel": "Plan",
+        "premiumPlan": "Plan premium",
+        "statusReady": "Listo",
+        "statusFetching": "Cargando...",
+        "statusFetched": "¡Cargado!",
+        "srReady": "Lista para la demo de integración API.",
+        "srFetching": "Conectando con la API de Stripe, cargando datos...",
+        "srSuccess": "Datos de la API de Stripe recibidos y mostrados."
+      },
+      "signatures": {
+        "statusIdle": "Esperando firma…",
+        "statusSigning": "Firma en progreso",
+        "statusDone": "Firmado de forma segura",
+        "signAgreement": "Firmar acuerdo",
+        "signed": "✓ Firmado",
+        "verified": "Verificado",
+        "signatureVerified": "Firma verificada",
+        "srIdle": "Esperando firma electrónica. Firma para continuar.",
+        "srSigning": "Se está escribiendo la firma.",
+        "srDone": "Firma completada y verificada."
+      },
+      "notifications": {
+        "title": "Notificación por email",
+        "none": "ninguna",
+        "newNotifications": "Tienes {count} notificaciones nuevas",
+        "justNow": "Ahora mismo",
+        "noNewNotifications": "Aún no hay notificaciones nuevas.",
+        "noNewEmailNotifications": "Aún no hay notificaciones nuevas por email.",
+        "newEmailNotification": "Nueva notificación por email: {title} de {from}, {time}",
+        "templates": {
+          "contactForm": "Formulario de contacto",
+          "newsletterSignup": "Suscripción al boletín",
+          "supportRequest": "Solicitud de soporte",
+          "feedbackForm": "Formulario de comentarios",
+          "jobApplication": "Solicitud de empleo",
+          "twoMinutesAgo": "hace 2 minutos",
+          "fiveMinutesAgo": "hace 5 minutos",
+          "eightMinutesAgo": "hace 8 minutos",
+          "twelveMinutesAgo": "hace 12 minutos",
+          "fifteenMinutesAgo": "hace 15 minutos"
+        }
+      }
+    },
+    "cards": {
+      "aiFormBuilder": {
+        "title": "Constructor con IA",
+        "highlight": "Creación instantánea de formularios",
+        "description": "—descríbelo y publícalo. Convierte visitantes en segundos."
+      },
+      "unlimitedEverything": {
+        "title": "Todo ilimitado",
+        "highlight": "formularios y respuestas ilimitados",
+        "description": " Crece sin límites."
+      },
+      "aiAnalytics": {
+        "title": "Analítica con IA",
+        "prefix": "Descubre quién convierte y por qué—",
+        "highlight": "obtén insights claros y accionables"
+      },
+      "smartNotifications": {
+        "title": "Notificaciones inteligentes",
+        "prefix": "No pierdas ningún lead—",
+        "highlight": "recibe alertas instantáneas y automatiza seguimientos."
+      },
+      "apiWebhooks": {
+        "title": "API y Webhooks",
+        "highlight": "Sincroniza leads en cualquier lugar",
+        "description": "—conéctalo con cualquier servicio o flujo de trabajo."
+      },
+      "formSignatures": {
+        "title": "Firmas en formularios",
+        "prefix": "Añade campos de firma para ",
+        "highlight": "recoger firmas electrónicas",
+        "suffix": " en cualquier formulario."
+      },
+      "visualLogicBuilder": {
+        "title": "Constructor visual de lógica",
+        "highlight": "Personaliza cada recorrido",
+        "description": "—muestra u oculta preguntas según las respuestas."
+      }
+    }
+  }
+}

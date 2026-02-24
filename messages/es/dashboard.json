@@ -1,0 +1,517 @@
+{
+  "common": {
+    "dashboard": "Panel",
+    "feedback": "Comentarios",
+    "logOut": "Cerrar sesión",
+    "loading": "Cargando",
+    "loadingProfile": "Cargando perfil",
+    "loadingFormsSidebar": "Cargando barra lateral de formularios",
+    "loadingFormsManagement": "Cargando gestión de formularios"
+  },
+  "profile": {
+    "userProfileInformation": "Información del perfil de usuario",
+    "userNameAria": "Nombre de usuario: {name}",
+    "premiumUserBadge": "Insignia de usuario premium",
+    "userEmailAria": "Correo del usuario: {email}"
+  },
+  "formsManagement": {
+    "aria": {
+      "management": "Gestión de formularios"
+    },
+    "header": {
+      "title": "Tus formularios",
+      "subtitle": "Crea, gestiona y analiza tus formularios fácilmente",
+      "createNewForm": "Crear nuevo formulario",
+      "createDialogTitle": "Crear un nuevo formulario",
+      "createDialogDescription": "Elige cómo quieres empezar. Puedes generarlo con IA, construirlo manualmente o importar un archivo cifrado."
+    },
+    "createOptions": {
+      "aiBadge": "Más recomendado",
+      "aiCta": "Empezar con IA",
+      "aiTitle": "Usar Kiko AI",
+      "aiDescription": "Describe tu formulario y deja que Kiko AI genere un primer borrador completo con campos, lógica y estructura.",
+      "manualCta": "Construir manualmente",
+      "manualTitle": "Crear manualmente",
+      "manualDescription": "Empieza desde un formulario en blanco y configura los campos manualmente.",
+      "importCta": "Importar archivo",
+      "importTitle": "Importar desde archivo",
+      "importDescription": "Importa un archivo .ikiform protegido con frase de contraseña en un nuevo borrador."
+    },
+    "emptyState": {
+      "aria": "Estado vacío - aún no hay formularios",
+      "title": "Aún no hay formularios",
+      "description": "Comienza creando tu primer formulario. Es rápido y fácil.",
+      "createFirstForm": "Crea tu primer formulario",
+      "dialog": {
+        "title": "¿Cómo te gustaría crear tu formulario?",
+        "description": "Elige entre construir tu formulario manualmente o dejar que Kiko AI lo genere por ti.",
+        "createWithAI": "Usar Kiko AI",
+        "createManually": "Crear manualmente"
+      }
+    },
+    "search": {
+      "aria": "Búsqueda y filtros de formularios",
+      "searchAria": "Buscar formularios",
+      "placeholder": "Busca formularios por título, descripción o ID...",
+      "openFilterMenu": "Abrir menú de filtros",
+      "activeFiltersAria": "{count} filtros activos",
+      "statusLabel": "Estado",
+      "filterByAll": "Filtrar por todos los estados",
+      "all": "Todos",
+      "filterByPublished": "Filtrar por formularios publicados",
+      "published": "Publicado",
+      "filterByDraft": "Filtrar por formularios en borrador",
+      "draft": "Borrador",
+      "sortByLabel": "Ordenar por",
+      "sortByLastUpdated": "Ordenar por última actualización",
+      "lastUpdated": "Última actualización",
+      "sortByDateCreated": "Ordenar por fecha de creación",
+      "dateCreated": "Fecha de creación",
+      "sortByTitle": "Ordenar por título alfabéticamente",
+      "titleAz": "Título (A-Z)",
+      "clearAllFilters": "Limpiar todos los filtros",
+      "activeFiltersGroup": "Filtros activos",
+      "badgeSearch": "Búsqueda: \"{query}\"",
+      "clearSearch": "Limpiar búsqueda",
+      "badgeStatus": "Estado: {status}",
+      "clearStatus": "Quitar filtro de estado",
+      "badgeSort": "Orden: {sort}",
+      "sortTitleShort": "Título",
+      "sortCreatedShort": "Creado",
+      "resetSort": "Restablecer orden a última actualización"
+    },
+    "list": {
+      "untitledForm": "Formulario sin título",
+      "viewAnalyticsFor": "Ver analíticas de {title}",
+      "formStatusAria": "Estado del formulario: {status}",
+      "published": "Publicado",
+      "draft": "Borrador",
+      "publicTitle": "Público: \"{title}\"",
+      "updated": "Actualizado {date}",
+      "actionsFor": "Acciones para {title}",
+      "formActions": "Acciones del formulario",
+      "editForm": "Editar formulario",
+      "shareForm": "Compartir formulario",
+      "duplicate": "Duplicar",
+      "viewForm": "Ver formulario",
+      "viewAnalytics": "Ver analíticas",
+      "embed": "Incrustar",
+      "export": "Exportar",
+      "deleteForm": "Eliminar formulario",
+      "formsListAria": "Lista de formularios"
+    },
+    "stats": {
+      "totalForms": "Formularios totales",
+      "published": "Publicados",
+      "drafts": "Borradores",
+      "loadingAria": "Cargando estadísticas de formularios",
+      "aria": "Estadísticas de formularios",
+      "sidebarAria": "Barra lateral de estadísticas de formularios"
+    },
+    "emptySearch": {
+      "noMatch": "Ningún formulario coincide con tus criterios de búsqueda.",
+      "clearFilters": "Limpiar filtros",
+      "clearAria": "Limpiar todos los filtros de búsqueda"
+    },
+    "deleteModal": {
+      "cancel": "Cancelar",
+      "confirm": "Eliminar formulario",
+      "title": "Eliminar formulario",
+      "description": "¿Seguro que quieres eliminar \"{formTitle}\"? Esta acción no se puede deshacer y todos los datos del formulario se perderán permanentemente."
+    },
+    "toasts": {
+      "failedLoadForms": "No se pudieron cargar los formularios",
+      "failedShareForm": "No se pudo compartir el formulario",
+      "formDuplicated": "Formulario duplicado",
+      "failedDuplicateForm": "No se pudo duplicar el formulario",
+      "formImportedSuccess": "Formulario importado correctamente.",
+      "failedImportForm": "No se pudo importar el formulario.",
+      "formDeletedSuccess": "Formulario eliminado correctamente",
+      "failedDeleteForm": "No se pudo eliminar el formulario"
+    },
+    "shareModal": {
+      "title": "Compartir formulario",
+      "publishedDescription": "Comparte tu formulario con otras personas usando el enlace o el código QR de abajo",
+      "unpublishedDescription": "Publica tu formulario para poder compartirlo con otras personas",
+      "shareLink": "Enlace para compartir",
+      "copied": "Copiado",
+      "copyLink": "Copiar enlace",
+      "hide": "Ocultar",
+      "show": "Mostrar",
+      "qrCode": "Código QR",
+      "qrCodeForForm": "Código QR del formulario",
+      "generating": "Generando...",
+      "scanForMobile": "Escanea para acceder fácilmente desde móvil",
+      "downloading": "Descargando...",
+      "downloadQr": "Descargar QR",
+      "needsPublish": "Tu formulario debe estar publicado antes de poder compartirse públicamente.",
+      "publishing": "Publicando...",
+      "publishForm": "Publicar formulario",
+      "toasts": {
+        "failedGenerateQr": "No se pudo generar el código QR",
+        "linkCopied": "¡Enlace copiado al portapapeles!",
+        "failedCopyLink": "No se pudo copiar el enlace. Cópialo manualmente.",
+        "qrDownloaded": "¡Código QR descargado correctamente!",
+        "failedDownloadQr": "No se pudo descargar el código QR"
+      }
+    },
+    "secureImport": {
+      "title": "Importar formulario desde archivo cifrado",
+      "description": "Descifra un archivo .ikiform y crea un nuevo formulario en borrador.",
+      "encryptedFileLabel": "Archivo cifrado",
+      "encryptedFileHelp": "Sube un archivo de exportación cifrado .ikiform.",
+      "passphraseLabel": "Frase de contraseña",
+      "passphrasePlaceholder": "Ingresa la frase usada durante la exportación",
+      "passphraseHelp": "Se requieren al menos {count} caracteres.",
+      "decrypting": "Descifrando...",
+      "decryptFile": "Descifrar archivo",
+      "importedForm": "Formulario importado",
+      "decryptToLoadSettings": "Descifra un archivo para cargar la configuración de importación.",
+      "preserveApiSettings": "Conservar configuración de API (clave API y estado habilitado)",
+      "preservePassword": "Conservar contraseña de protección por contraseña",
+      "preserveNotificationEmail": "Conservar correo del destinatario de notificaciones",
+      "cancel": "Cancelar",
+      "importing": "Importando...",
+      "importAsNewForm": "Importar como nuevo formulario",
+      "decryptToPreview": "Descifra un archivo para previsualizar el formulario importado.",
+      "errors": {
+        "chooseFile": "Elige un archivo .ikiform cifrado.",
+        "passphraseMinChars": "La frase debe tener al menos {count} caracteres.",
+        "failedDecrypt": "No se pudo descifrar el archivo de importación.",
+        "wrongPassphrase": "Frase incorrecta o el archivo puede haber sido alterado.",
+        "decryptBeforeImport": "Descifra un archivo antes de importar.",
+        "failedImport": "No se pudo importar el formulario."
+      },
+      "toasts": {
+        "fixHighlightedFields": "Corrige los campos resaltados.",
+        "fileDecrypted": "Archivo descifrado. Revisa las opciones de importación."
+      }
+    },
+    "secureExport": {
+      "title": "Exportar formulario (seguro)",
+      "description": "Crea un archivo .ikiform cifrado para este formulario. Necesitarás la misma frase para importarlo.",
+      "untitledForm": "Formulario sin título",
+      "formLabel": "Formulario",
+      "unknownForm": "Formulario desconocido",
+      "passphraseSetup": "Configuración de frase de contraseña",
+      "passphraseLabel": "Frase de contraseña",
+      "passphrasePlaceholder": "Al menos {count} caracteres",
+      "passphraseHelper": "Usa al menos 12 caracteres para un cifrado más fuerte.",
+      "confirmPassphraseLabel": "Confirmar frase",
+      "confirmPassphrasePlaceholder": "Vuelve a ingresar la frase",
+      "confirmPassphraseHelper": "Vuelve a ingresar exactamente la misma frase.",
+      "hidePassphrase": "Ocultar frase",
+      "viewPassphrase": "Ver frase",
+      "hideConfirmPassphrase": "Ocultar frase de confirmación",
+      "viewConfirmPassphrase": "Ver frase de confirmación",
+      "cancel": "Cancelar",
+      "exporting": "Exportando...",
+      "exportEncryptedFile": "Exportar archivo cifrado",
+      "strength": {
+        "notSet": "Sin definir",
+        "weak": "Débil",
+        "good": "Buena",
+        "strong": "Fuerte"
+      },
+      "errors": {
+        "passphraseMinChars": "La frase debe tener al menos {count} caracteres.",
+        "confirmPassphraseMinChars": "La frase de confirmación debe tener al menos {count} caracteres.",
+        "passphrasesDoNotMatch": "Las frases no coinciden.",
+        "noFormSelected": "No hay formulario seleccionado para exportar.",
+        "enterValidPassphrase": "Ingresa y confirma una frase válida.",
+        "failedExport": "No se pudo exportar el formulario."
+      },
+      "toasts": {
+        "exportCreated": "Exportación cifrada del formulario creada."
+      }
+    }
+  },
+  "admin": {
+    "page": {
+      "aria": {
+        "dashboard": "Panel de administración",
+        "announcements": "Gestión de anuncios",
+        "expireTrials": "Gestión de expiración de pruebas",
+        "users": "Gestión de usuarios"
+      },
+      "announcements": {
+        "title": "Enviar anuncios",
+        "signedInAs": "Sesión iniciada como {email}"
+      },
+      "expireTrials": {
+        "title": "Expirar pruebas",
+        "description": "Ejecuta manualmente el cron para expirar pruebas gratuitas"
+      },
+      "users": {
+        "title": "Todos los usuarios ({count})",
+        "description": "Gestiona y revisa todos los usuarios registrados"
+      }
+    },
+    "announcementForm": {
+      "labels": {
+        "recipientEmails": "Correos destinatarios",
+        "subject": "Asunto",
+        "content": "Contenido (compatible con Markdown)"
+      },
+      "placeholders": {
+        "recipientEmails": "uno@ejemplo.com, dos@ejemplo.com\\no\\ntres@ejemplo.com",
+        "subject": "Asunto del anuncio",
+        "content": "# Título\\n\\nDetalles aquí..."
+      },
+      "help": {
+        "recipientFormat": "Separado por comas o por líneas."
+      },
+      "actions": {
+        "loading": "Cargando...",
+        "prefillFromUsers": "Rellenar desde usuarios",
+        "sendAnnouncement": "Enviar anuncio"
+      },
+      "toasts": {
+        "fetchEmailsFailed": "No se pudieron obtener los correos",
+        "loadedEmails": "Se cargaron {count} correos",
+        "sending": "Enviando anuncios...",
+        "sentCount": "Se enviaron {count} correo(s)",
+        "failedWithError": "Error: {error}",
+        "failedToSendFallback": "No se pudo enviar"
+      }
+    },
+    "expireTrialsControl": {
+      "title": "Expirar pruebas",
+      "description": "Ejecuta manualmente el cron para expirar pruebas gratuitas con más de 14 días",
+      "unknownError": "Error desconocido",
+      "actions": {
+        "running": "Ejecutando...",
+        "run": "Ejecutar expiración de pruebas"
+      },
+      "result": {
+        "success": "Éxito",
+        "error": "Error",
+        "updatedUsersCount": "{count} usuario(s) actualizados",
+        "updatedUsers": "Usuarios actualizados:"
+      },
+      "toasts": {
+        "updatedSuccess": "Se actualizaron correctamente {count} usuario(s) de prueba a gratis",
+        "failedWithError": "Error: {error}",
+        "errorWithMessage": "Error: {message}"
+      }
+    },
+    "usersTable": {
+      "search": {
+        "aria": "Buscar usuarios",
+        "placeholder": "Buscar usuarios por nombre, correo, nombre de cliente o ID de Polar..."
+      },
+      "filters": {
+        "premiumAria": "Filtrar por estado premium",
+        "trialAria": "Filtrar por estado de prueba",
+        "allPremium": "Todos (premium)",
+        "premiumOnly": "Solo premium",
+        "freeOnly": "Solo gratis",
+        "allTrial": "Todas las pruebas",
+        "trialOnly": "Solo en prueba",
+        "noTrial": "Sin prueba",
+        "clearAria": "Limpiar todos los filtros",
+        "clear": "Limpiar",
+        "filteredBy": "Filtrado por:"
+      },
+      "columns": {
+        "uid": "UID",
+        "name": "Nombre",
+        "email": "Correo",
+        "premium": "Premium",
+        "trial": "Prueba",
+        "customerName": "Nombre del cliente",
+        "polarId": "ID de Polar",
+        "created": "Creado",
+        "updated": "Actualizado"
+      },
+      "sort": {
+        "uidAria": "Ordenar por UID",
+        "nameAria": "Ordenar por nombre",
+        "emailAria": "Ordenar por correo",
+        "premiumAria": "Ordenar por estado premium",
+        "trialAria": "Ordenar por estado de prueba",
+        "createdAria": "Ordenar por fecha de creación",
+        "updatedAria": "Ordenar por fecha de actualización"
+      },
+      "table": {
+        "aria": "Tabla de usuarios"
+      },
+      "badges": {
+        "premium": "Premium",
+        "free": "Gratis",
+        "freeTrial": "Prueba gratis",
+        "noFreeTrial": "Sin prueba gratis"
+      },
+      "row": {
+        "viewDetailsFor": "Ver detalles de {name}",
+        "premiumStatusAria": "Estado premium: {status}",
+        "trialStatusAria": "Estado de prueba: {status}"
+      },
+      "showingRange": "Mostrando {start}-{end} de {total} usuarios",
+      "showLabel": "Mostrar:",
+      "itemsPerPageAria": "Elementos por página",
+      "empty": {
+        "filtered": "Ningún usuario coincide con tus filtros",
+        "default": "No se encontraron usuarios"
+      },
+      "pagination": {
+        "pageOf": "Página {current} de {total}",
+        "previousAria": "Ir a la página anterior",
+        "previous": "Anterior",
+        "goToPageAria": "Ir a la página {page}",
+        "nextAria": "Ir a la página siguiente",
+        "next": "Siguiente"
+      }
+    },
+    "userControls": {
+      "title": "Controles de administración",
+      "description": "Gestiona el estado y permisos del usuario",
+      "sections": {
+        "freeTrial": "Prueba gratis",
+        "premiumStatus": "Estado premium",
+        "dangerZone": "Zona de peligro"
+      },
+      "actions": {
+        "removeTrial": "Quitar prueba",
+        "assignTrial": "Asignar prueba",
+        "removePremium": "Quitar premium",
+        "assignPremium": "Asignar premium",
+        "deleteUser": "Eliminar usuario"
+      },
+      "warning": {
+        "label": "Advertencia:",
+        "message": "Eliminar un usuario eliminará permanentemente todos sus formularios, envíos y datos. Esta acción no se puede deshacer."
+      },
+      "confirm": {
+        "title": "Eliminar usuario",
+        "confirm": "Eliminar usuario",
+        "cancel": "Cancelar",
+        "description": "¿Seguro que quieres eliminar al usuario {userName}? Esta acción no se puede deshacer y eliminará todos sus formularios y datos."
+      }
+    },
+    "userProfile": {
+      "backToAdmin": "Volver a admin",
+      "invalidUserId": {
+        "title": "ID de usuario inválido",
+        "description": "No se proporcionó un ID de usuario en la URL."
+      },
+      "notFound": {
+        "title": "Usuario no encontrado",
+        "description": "El usuario que buscas no existe."
+      },
+      "userInformation": "Información del usuario",
+      "labels": {
+        "uid": "UID",
+        "premiumStatus": "Estado premium",
+        "trialStatus": "Estado de prueba",
+        "customerName": "Nombre del cliente",
+        "polarCustomerId": "ID de cliente de Polar",
+        "memberSince": "Miembro desde"
+      },
+      "badges": {
+        "premium": "Premium",
+        "free": "Gratis",
+        "freeTrial": "Prueba gratis",
+        "noTrial": "Sin prueba"
+      },
+      "trialStatus": {
+        "title": "Estado de prueba gratis",
+        "expiredBadge": "Prueba vencida",
+        "endedDaysAgo": "La prueba gratis terminó hace {days} días",
+        "expiringSoonBadge": "Vence pronto",
+        "activeBadge": "Prueba activa",
+        "daysLeft": "{days, plural, one {# día restante de prueba gratis} other {# días restantes de prueba gratis}}",
+        "startedOn": "Prueba iniciada:"
+      },
+      "forms": {
+        "title": "Formularios ({count})",
+        "description": "Todos los formularios creados por este usuario",
+        "empty": "Este usuario aún no ha creado formularios.",
+        "table": {
+          "formTitle": "Título del formulario",
+          "description": "Descripción",
+          "status": "Estado",
+          "submissions": "Envíos",
+          "created": "Creado",
+          "actions": "Acciones"
+        },
+        "status": {
+          "published": "Publicado",
+          "draft": "Borrador"
+        },
+        "actions": {
+          "view": "Ver",
+          "details": "Detalles"
+        }
+      }
+    },
+    "formDetails": {
+      "pageAria": "Página de detalles del formulario",
+      "backToAdmin": "Volver a admin",
+      "backToAdminAria": "Volver al panel de administración",
+      "noDescription": "No se proporcionó descripción",
+      "viewForm": "Ver formulario",
+      "viewFormAria": "Ver formulario en una nueva pestaña",
+      "invalidFormId": {
+        "aria": "Error de ID de formulario inválido",
+        "title": "ID de formulario inválido",
+        "description": "No se proporcionó un ID de formulario en la URL."
+      },
+      "notFound": {
+        "aria": "Error de formulario no encontrado",
+        "title": "Formulario no encontrado",
+        "description": "El formulario que buscas no existe."
+      },
+      "badges": {
+        "published": "Publicado",
+        "draft": "Borrador",
+        "enabled": "Habilitado",
+        "disabled": "Deshabilitado"
+      },
+      "statistics": {
+        "aria": "Estadísticas del formulario",
+        "status": "Estado",
+        "formStatusAria": "Estado del formulario: {status}",
+        "submissions": "Envíos",
+        "submissionsCountAria": "{count} envíos",
+        "created": "Creado",
+        "createdOnAria": "Creado el {date}",
+        "apiStatus": "Estado de API",
+        "apiStatusAria": "Estado de API: {status}"
+      },
+      "details": {
+        "title": "Detalles del formulario",
+        "formId": "ID del formulario",
+        "formIdAria": "ID del formulario: {id}",
+        "owner": "Propietario",
+        "viewOwnerAria": "Ver detalles del propietario {name}",
+        "unknown": "Desconocido",
+        "slug": "Slug",
+        "slugAria": "Slug del formulario: {slug}",
+        "notSet": "Sin establecer",
+        "lastUpdated": "Última actualización",
+        "lastUpdatedAria": "Última actualización: {date}",
+        "apiKey": "Clave API",
+        "apiKeyAria": "Clave API: {key}"
+      },
+      "schema": {
+        "title": "Esquema del formulario",
+        "aria": "JSON del esquema del formulario"
+      },
+      "submissions": {
+        "title": "Envíos del formulario ({count})",
+        "description": "Todas las respuestas enviadas a este formulario",
+        "emptyAria": "Sin envíos de formulario",
+        "empty": "Aún no hay envíos.",
+        "listAria": "Lista de envíos del formulario",
+        "itemAria": "Envío {number}",
+        "itemLabel": "Envío #{number}",
+        "submittedOnAria": "Enviado el {date}",
+        "ipAria": "Dirección IP: {ip}",
+        "ipLabel": "IP: {ip}",
+        "fieldAria": "Campo: {key}",
+        "valueAria": "Valor de {key}: {value}"
+      }
+    }
+  }
+}

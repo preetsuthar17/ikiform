@@ -1,6 +1,7 @@
 "use client";
 
 import { Type } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import {
 	FONT_SIZE_OPTIONS,
@@ -26,6 +27,7 @@ export function TypographyCustomizationSection({
 	localSettings,
 	updateSettings,
 }: TypographyCustomizationSectionProps) {
+	const t = useTranslations("product.formBuilder.customize.typography");
 	const fontFamily = localSettings.typography?.fontFamily || "Inter";
 	const fontSize = localSettings.typography?.fontSize || "base";
 	const fontWeight = localSettings.typography?.fontWeight || "normal";
@@ -130,10 +132,10 @@ export function TypographyCustomizationSection({
 			<div>
 				<div className="mb-2 flex items-center gap-2">
 					<Type className="size-4 text-primary" />
-					<h2 className="font-semibold text-lg">Typography Settings</h2>
+					<h2 className="font-semibold text-lg">{t("title")}</h2>
 				</div>
 				<p className="text-muted-foreground text-xs">
-					Customize fonts and text styling
+					{t("description")}
 				</p>
 			</div>
 
@@ -142,32 +144,31 @@ export function TypographyCustomizationSection({
 					<Card className="p-4 shadow-none">
 						<CardContent className="flex flex-col gap-3 p-0">
 							<GoogleFontPicker
-								label="Font Family"
+								label={t("fontFamily")}
 								onChange={handleFontFamilyChange}
-								placeholder="Select a Google Font..."
+								placeholder={t("fontFamilyPlaceholder")}
 								showPreview={true}
 								value={fontFamily}
 							/>
 							<div className="rounded-lg border border-border bg-muted/30 p-4">
 								<Label className="mb-2 block text-muted-foreground text-xs">
-									Font Preview
+									{t("fontPreview")}
 								</Label>
 								<p
 									className="text-lg"
 									style={generateFontPreviewStyles(fontFamily)}
 								>
-									The quick brown fox jumps over the lazy dog
+									{t("previewLine1")}
 								</p>
 								<p
 									className="mt-2 text-muted-foreground text-sm"
 									style={generateFontPreviewStyles(fontFamily)}
 								>
-									Sample form text with numbers 1234567890
+									{t("previewLine2")}
 								</p>
 							</div>
 							<p className="text-muted-foreground text-xs">
-								Choose from hundreds of Google Fonts. The font will be loaded
-								automatically.
+								{t("fontHelp")}
 							</p>
 						</CardContent>
 					</Card>
@@ -175,7 +176,7 @@ export function TypographyCustomizationSection({
 					<Card className="p-4 shadow-none">
 						<CardContent className="flex flex-col gap-3 p-0">
 							<Label className="font-medium" id="font-size-label">
-								Font Size
+								{t("fontSize")}
 							</Label>
 							<div className="px-2">
 								<Slider
@@ -189,10 +190,13 @@ export function TypographyCustomizationSection({
 								/>
 							</div>
 							<p className="text-muted-foreground text-xs">
-								Selected: {(() => {
+								{t("selected")} {(() => {
 									const idx = fontSizeSliderValue;
 									const opt = FONT_SIZE_OPTIONS[idx];
-									return opt ? `${opt.label} (${opt.description})` : "";
+									if (!opt) return "";
+									return `${t(`fontSizeOptions.${opt.value}.label`)} (${t(
+										`fontSizeOptions.${opt.value}.description`
+									)})`;
 								})()}
 							</p>
 						</CardContent>
@@ -201,7 +205,7 @@ export function TypographyCustomizationSection({
 					<Card className="p-4 shadow-none">
 						<CardContent className="flex flex-col gap-3 p-0">
 							<Label className="font-medium" id="font-weight-label">
-								Font Weight
+								{t("fontWeight")}
 							</Label>
 							<div className="px-2">
 								<Slider
@@ -215,10 +219,13 @@ export function TypographyCustomizationSection({
 								/>
 							</div>
 							<p className="text-muted-foreground text-xs">
-								Selected: {(() => {
+								{t("selected")} {(() => {
 									const idx = fontWeightSliderValue;
 									const opt = FONT_WEIGHT_OPTIONS[idx];
-									return opt ? `${opt.label} (${opt.description})` : "";
+									if (!opt) return "";
+									return `${t(`fontWeightOptions.${opt.value}.label`)} (${t(
+										`fontWeightOptions.${opt.value}.description`
+									)})`;
 								})()}
 							</p>
 						</CardContent>

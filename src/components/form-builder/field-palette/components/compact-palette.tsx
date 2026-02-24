@@ -1,9 +1,9 @@
 import { Search } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
-import { FIELD_TYPES } from "../constants";
+import { FIELD_TYPE_CONFIGS } from "@/lib/fields/field-config";
 
 import type { FieldPaletteProps } from "../types";
 import { CompactFieldItem } from "./compact-field-item";
@@ -11,21 +11,32 @@ import { CompactFieldItem } from "./compact-field-item";
 export function CompactPalette({
 	onAddField,
 }: Pick<FieldPaletteProps, "onAddField">) {
+	const t = useTranslations("product.formBuilder.fieldPalette");
 	const [searchTerm, setSearchTerm] = useState("");
+	const localizedFields = useMemo(
+		() =>
+			FIELD_TYPE_CONFIGS.map((field) => ({
+				type: field.type,
+				icon: field.icon,
+				label: t(`fields.${field.type}.label`),
+				description: t(`fields.${field.type}.description`),
+			})),
+		[t]
+	);
 
 	const filteredFields = useMemo(() => {
 		if (!searchTerm.trim()) {
-			return FIELD_TYPES;
+			return localizedFields;
 		}
 
 		const term = searchTerm.toLowerCase();
-		return FIELD_TYPES.filter(
+		return localizedFields.filter(
 			(field) =>
 				field.label.toLowerCase().includes(term) ||
 				field.description.toLowerCase().includes(term) ||
 				field.type.toLowerCase().includes(term)
 		);
-	}, [searchTerm]);
+	}, [searchTerm, localizedFields]);
 
 	return (
 		<div className="flex flex-col gap-3">
@@ -35,7 +46,7 @@ export function CompactPalette({
 				<Input
 					className="pl-10"
 					onChange={(e) => setSearchTerm(e.target.value)}
-					placeholder="Search fields..."
+					placeholder={t("searchPlaceholder")}
 					value={searchTerm}
 				/>
 			</div>
@@ -55,10 +66,10 @@ export function CompactPalette({
 					<div className="flex flex-col items-center justify-center gap-2 py-8 text-center">
 						<Search className="size-6 text-muted-foreground" />
 						<p className="text-muted-foreground text-sm">
-							No fields found matching "{searchTerm}"
+							{t("noFieldsFound", { searchTerm })}
 						</p>
 						<p className="text-muted-foreground text-xs">
-							Try searching by field name, description, or type
+							{t("searchHint")}
 						</p>
 					</div>
 				)}

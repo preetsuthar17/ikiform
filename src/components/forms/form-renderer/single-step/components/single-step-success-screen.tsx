@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import type React from "react";
 import { QuizResults } from "@/components/quiz/results/quiz-results";
 import { Card } from "@/components/ui/card";
@@ -14,6 +15,7 @@ interface SingleStepSuccessScreenProps {
 export const SingleStepSuccessScreen: React.FC<
 	SingleStepSuccessScreenProps
 > = ({ schema, quizResults }) => {
+	const t = useTranslations("product.formBuilder.formRenderer.successScreen");
 	const shouldShowQuizResults =
 		schema.settings.quiz?.enabled &&
 		(schema.settings.quiz?.showScore !== false ||
@@ -52,14 +54,16 @@ export const SingleStepSuccessScreen: React.FC<
 									/>
 								</svg>
 							</div>
-							<h2 className="font-bold text-2xl text-foreground">Thank You!</h2>
+							<h2 className="font-bold text-2xl text-foreground">
+								{t("title")}
+							</h2>
 							<p className="text-center text-muted-foreground">
 								{schema.settings.successMessage ||
-									"Your form has been submitted successfully."}
+									t("defaultMessage")}
 							</p>
 							{schema.settings.redirectUrl && (
 								<p className="text-muted-foreground text-sm">
-									Redirecting you in a moment...
+									{t("redirecting")}
 								</p>
 							)}
 						</div>
@@ -72,7 +76,7 @@ export const SingleStepSuccessScreen: React.FC<
 							(schema.settings.branding as any).showIkiformBranding !== false
 					) && (
 						<p className="text-muted-foreground text-sm">
-							Powered by{" "}
+							{t("poweredBy")}{" "}
 							<span className="font-medium text-foreground underline">
 								<Link href="https://www.ikiform.com">Ikiform</Link>
 							</span>

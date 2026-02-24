@@ -1,6 +1,7 @@
 "use client";
 
 import { Download, Eye, EyeOff } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -121,6 +122,7 @@ export function SecureExportModal({
 	isOpen,
 	onClose,
 }: SecureExportModalProps) {
+	const t = useTranslations("dashboard.formsManagement.secureExport");
 	const [passphrase, setPassphrase] = useState("");
 	const [confirmPassphrase, setConfirmPassphrase] = useState("");
 	const [showPassphrase, setShowPassphrase] = useState(false);
@@ -141,8 +143,8 @@ export function SecureExportModal({
 		if (!form) {
 			return "";
 		}
-		return form.schema?.settings?.title || form.title || "Untitled Form";
-	}, [form]);
+		return form.schema?.settings?.title || form.title || t("untitledForm");
+	}, [form, t]);
 
 	const canExport =
 		passphrase.trim().length >= MIN_PASSPHRASE_LENGTH &&
@@ -152,56 +154,56 @@ export function SecureExportModal({
 
 	const passphraseError =
 		passphrase.length > 0 && passphrase.trim().length < MIN_PASSPHRASE_LENGTH
-			? `Passphrase must be at least ${MIN_PASSPHRASE_LENGTH} characters.`
+			? t("errors.passphraseMinChars", { count: MIN_PASSPHRASE_LENGTH })
 			: "";
 
 	const confirmPassphraseError =
 		confirmPassphrase.length > 0 &&
 		confirmPassphrase.trim().length < MIN_PASSPHRASE_LENGTH
-			? `Confirmation passphrase must be at least ${MIN_PASSPHRASE_LENGTH} characters.`
+			? t("errors.confirmPassphraseMinChars", { count: MIN_PASSPHRASE_LENGTH })
 			: "";
 
 	const mismatchError =
 		passphrase.length > 0 &&
 		confirmPassphrase.length > 0 &&
 		passphrase !== confirmPassphrase
-			? "Passphrases do not match."
+			? t("errors.passphrasesDoNotMatch")
 			: "";
 
 	const passphraseStrength = useMemo(() => {
 		const length = passphrase.trim().length;
 		if (length === 0) {
 			return {
-				label: "Not set",
+				label: t("strength.notSet"),
 				colorClass: "bg-muted text-muted-foreground",
 			};
 		}
 		if (length < MIN_PASSPHRASE_LENGTH) {
 			return {
-				label: "Weak",
+				label: t("strength.weak"),
 				colorClass: "bg-destructive/10 text-destructive",
 			};
 		}
 		if (length < 12) {
 			return {
-				label: "Good",
+				label: t("strength.good"),
 				colorClass: "bg-amber-500/10 text-amber-700 dark:text-amber-300",
 			};
 		}
 		return {
-			label: "Strong",
+			label: t("strength.strong"),
 			colorClass: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300",
 		};
-	}, [passphrase]);
+	}, [passphrase, t]);
 
 	const handleExport = async () => {
 		if (!form) {
-			toast.error("No form selected for export.");
+			toast.error(t("errors.noFormSelected"));
 			return;
 		}
 
 		if (!canExport) {
-			toast.error("Please enter and confirm a valid passphrase.");
+			toast.error(t("errors.enterValidPassphrase"));
 			return;
 		}
 
@@ -221,11 +223,11 @@ export function SecureExportModal({
 			document.body.removeChild(anchor);
 			URL.revokeObjectURL(url);
 
-			toast.success("Encrypted form export created.");
+			toast.success(t("toasts.exportCreated"));
 			onClose();
 		} catch (error) {
 			const message =
-				error instanceof Error ? error.message : "Failed to export form.";
+				error instanceof Error ? error.message : t("errors.failedExport");
 			toast.error(message);
 		} finally {
 			setExporting(false);
@@ -236,10 +238,9 @@ export function SecureExportModal({
 		<Dialog onOpenChange={onClose} open={isOpen}>
 			<DialogContent className="max-h-[90vh] sm:max-w-xl">
 				<DialogHeader className="shrink-0">
-					<DialogTitle>Export Form (Secure)</DialogTitle>
+					<DialogTitle>{t("title")}</DialogTitle>
 					<DialogDescription>
-						Create an encrypted <code>.ikiform</code> file for this form. You
-						will need the same passphrase to import it.
+						{t("description")}
 					</DialogDescription>
 				</DialogHeader>
 
@@ -247,15 +248,15 @@ export function SecureExportModal({
 					<ScrollArea className={`flex-1 ${MODAL_SCROLL_AREA_CLASS}`}>
 						<div className="space-y-4 pr-3">
 							<div className="rounded-lg border bg-muted/30 p-3 text-sm">
-								<div className="font-medium">Form</div>
+								<div className="font-medium">{t("formLabel")}</div>
 								<div className="text-muted-foreground">
-									{exportTitle || "Unknown form"}
+									{exportTitle || t("unknownForm")}
 								</div>
 							</div>
 
 							<div className="rounded-lg border p-3">
 								<div className="mb-3 flex items-center justify-between gap-2">
-									<p className="font-medium text-sm">Passphrase setup</p>
+									<p className="font-medium text-sm">{t("passphraseSetup")}</p>
 									<span
 										className={`rounded-full px-2 py-0.5 font-medium text-xs ${passphraseStrength.colorClass}`}
 									>
@@ -266,37 +267,41 @@ export function SecureExportModal({
 								<div className="flex flex-col gap-2">
 									<PassphraseInputField
 										error={passphraseError || mismatchError}
-										helperText="Use at least 12 characters for stronger encryption."
+										helperText={t("passphraseHelper")}
 										id="export-passphrase"
 										isVisible={showPassphrase}
-										label="Passphrase"
+										label={t("passphraseLabel")}
 										onChange={setPassphrase}
 										onToggleVisibility={() =>
 											setShowPassphrase((prev) => !prev)
 										}
-										placeholder={`At least ${MIN_PASSPHRASE_LENGTH} characters`}
+										placeholder={t("passphrasePlaceholder", {
+											count: MIN_PASSPHRASE_LENGTH,
+										})}
 										value={passphrase}
 										visibilityAriaLabel={
-											showPassphrase ? "Hide passphrase" : "View passphrase"
+											showPassphrase
+												? t("hidePassphrase")
+												: t("viewPassphrase")
 										}
 									/>
 
 									<PassphraseInputField
 										error={confirmPassphraseError || mismatchError}
-										helperText="Re-enter the exact same passphrase."
+										helperText={t("confirmPassphraseHelper")}
 										id="export-confirm-passphrase"
 										isVisible={showConfirmPassphrase}
-										label="Confirm passphrase"
+										label={t("confirmPassphraseLabel")}
 										onChange={setConfirmPassphrase}
 										onToggleVisibility={() =>
 											setShowConfirmPassphrase((prev) => !prev)
 										}
-										placeholder="Re-enter passphrase"
+										placeholder={t("confirmPassphrasePlaceholder")}
 										value={confirmPassphrase}
 										visibilityAriaLabel={
 											showConfirmPassphrase
-												? "Hide confirmation passphrase"
-												: "View confirmation passphrase"
+												? t("hideConfirmPassphrase")
+												: t("viewConfirmPassphrase")
 										}
 									/>
 								</div>
@@ -306,7 +311,7 @@ export function SecureExportModal({
 
 					<div className="mt-4 flex shrink-0 flex-col gap-2 border-t pt-4 sm:flex-row sm:justify-end">
 						<Button onClick={onClose} variant="outline">
-							Cancel
+							{t("cancel")}
 						</Button>
 						<Button
 							className="min-w-44"
@@ -314,7 +319,7 @@ export function SecureExportModal({
 							onClick={handleExport}
 						>
 							<Download className="size-4" />
-							{exporting ? "Exporting..." : "Export Encrypted File"}
+							{exporting ? t("exporting") : t("exportEncryptedFile")}
 						</Button>
 					</div>
 				</div>

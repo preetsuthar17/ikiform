@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -16,6 +17,7 @@ export function DateFieldSettings({
 	field,
 	onUpdateSettings,
 }: FieldSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.date");
 	const [timeZone, setTimeZone] = React.useState<string | undefined>(undefined);
 
 	React.useEffect(() => {
@@ -57,14 +59,14 @@ export function DateFieldSettings({
 		<Card className="gap-2 p-4 shadow-none">
 			<CardHeader className="p-0">
 				<CardTitle className="flex items-center gap-2 text-lg">
-					Date Field Settings
+					{t("title")}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 p-0">
 				<div className="flex flex-col gap-4">
 					{}
 					<div className="flex flex-col gap-2">
-						<Label className="text-card-foreground">Minimum Date</Label>
+						<Label className="text-card-foreground">{t("minDate")}</Label>
 						<Popover>
 							<PopoverTrigger asChild>
 								<Button
@@ -76,7 +78,7 @@ export function DateFieldSettings({
 									{minDate ? (
 										getFormattedDate(minDate)
 									) : (
-										<span>Select minimum date</span>
+										<span>{t("selectMinDate")}</span>
 									)}
 								</Button>
 							</PopoverTrigger>
@@ -94,7 +96,7 @@ export function DateFieldSettings({
 
 					{}
 					<div className="flex flex-col gap-2">
-						<Label className="text-card-foreground">Maximum Date</Label>
+						<Label className="text-card-foreground">{t("maxDate")}</Label>
 						<Popover>
 							<PopoverTrigger asChild>
 								<Button
@@ -106,7 +108,7 @@ export function DateFieldSettings({
 									{maxDate ? (
 										getFormattedDate(maxDate)
 									) : (
-										<span>Select maximum date</span>
+										<span>{t("selectMaxDate")}</span>
 									)}
 								</Button>
 							</PopoverTrigger>
@@ -124,7 +126,7 @@ export function DateFieldSettings({
 
 					{}
 					<div className="flex flex-col gap-2">
-						<Label className="text-card-foreground">Default Date</Label>
+						<Label className="text-card-foreground">{t("defaultDate")}</Label>
 						<Popover>
 							<PopoverTrigger asChild>
 								<Button
@@ -136,7 +138,7 @@ export function DateFieldSettings({
 									{defaultDate ? (
 										getFormattedDate(defaultDate)
 									) : (
-										<span>Select default date</span>
+										<span>{t("selectDefaultDate")}</span>
 									)}
 								</Button>
 							</PopoverTrigger>

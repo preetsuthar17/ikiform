@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -30,6 +31,8 @@ export function QuizSection({
 	schema,
 	onSchemaUpdate,
 }: QuizSectionProps & { onSchemaUpdate?: (updates: Partial<any>) => void }) {
+	const t = useTranslations("product.formBuilder.formSettings.quizSection");
+	const tCommon = useTranslations("product.formBuilder.formSettings.common");
 	const initialQuiz = localSettings.quiz || {};
 	const [quizSettings, setQuizSettings] = useState({
 		enabled: initialQuiz.enabled,
@@ -81,7 +84,7 @@ export function QuizSection({
 
 	const saveQuiz = async () => {
 		if (!formId) {
-			toast.error("Form ID is required to save settings");
+			toast.error(tCommon("formIdRequiredToSaveSettings"));
 			return;
 		}
 		setSaving(true);
@@ -108,11 +111,11 @@ export function QuizSection({
 			updateSettings({ quiz: trimmed });
 			setHasChanges(false);
 			setSaved(true);
-			toast.success("Quiz settings saved");
+			toast.success(t("savedToast"));
 			setTimeout(() => setSaved(false), 2000);
 		} catch (e) {
 			console.error(e);
-			toast.error("Failed to save quiz settings");
+			toast.error(t("saveFailed"));
 		} finally {
 			setSaving(false);
 		}
@@ -140,17 +143,17 @@ export function QuizSection({
 			announcement.setAttribute("aria-live", "polite");
 			announcement.setAttribute("aria-atomic", "true");
 			announcement.className = "sr-only";
-			announcement.textContent = "Quiz settings saved successfully";
+			announcement.textContent = t("saved");
 			document.body.appendChild(announcement);
 			setTimeout(() => {
 				document.body.removeChild(announcement);
 			}, 1000);
 		}
-	}, [saved]);
+	}, [saved, t]);
 
 	return (
 		<div
-			aria-label="Quiz settings"
+			aria-label={t("ariaSettings")}
 			className="flex flex-col gap-4"
 			onKeyDown={(e) => {
 				const target = e.target as HTMLElement;
@@ -178,16 +181,16 @@ export function QuizSection({
 								className="flex items-center gap-2 text-lg tracking-tight"
 								id="quiz-title"
 							>
-								Quiz & Scoring{" "}
+								{t("title")}{" "}
 								{hasChanges && (
 									<Badge className="gap-2" variant="secondary">
 										<div className="size-2 rounded-full bg-orange-500" />
-										Unsaved changes
+										{tCommon("unsavedChanges")}
 									</Badge>
 								)}
 							</CardTitle>
 							<CardDescription id="quiz-description">
-								Configure quiz behavior and scoring rules
+								{t("description")}
 							</CardDescription>
 						</div>
 					</div>
@@ -196,13 +199,13 @@ export function QuizSection({
 					<div className="flex items-center justify-between">
 						<div className="flex flex-col gap-1">
 							<Label className="font-medium text-sm" htmlFor="quiz-enabled">
-								Enable Quiz Mode
+								{t("enableLabel")}
 							</Label>
 							<p
 								className="text-muted-foreground text-xs"
 								id="quiz-enabled-description"
 							>
-								Turn on quiz features like scoring and result messages
+								{t("enableDescription")}
 							</p>
 						</div>
 						<Switch
@@ -216,9 +219,9 @@ export function QuizSection({
 					{quizSettings.enabled && (
 						<div className="flex flex-col gap-6">
 							<QuizField
-								description="Minimum percentage needed to pass the quiz"
+								description={t("passingScoreDescription")}
 								id="passing-score"
-								label="Passing Score (%)"
+								label={t("passingScoreLabel")}
 								max={100}
 								min={0}
 								onChange={(value) => updateQuizLocal({ passingScore: value })}
@@ -229,17 +232,17 @@ export function QuizSection({
 
 							<QuizToggleField
 								checked={quizSettings.showScore}
-								description="Display the user's score after form submission"
+								description={t("showScoreDescription")}
 								id="show-score"
-								label="Show Score to User"
+								label={t("showScoreLabel")}
 								onChange={(showScore) => updateQuizLocal({ showScore })}
 							/>
 
 							<QuizToggleField
 								checked={quizSettings.showCorrectAnswers}
-								description="Show correct answers and explanations after submission"
+								description={t("showCorrectAnswersDescription")}
 								id="show-correct"
-								label="Show Correct Answers"
+								label={t("showCorrectAnswersLabel")}
 								onChange={(showCorrectAnswers) =>
 									updateQuizLocal({ showCorrectAnswers })
 								}
@@ -247,35 +250,35 @@ export function QuizSection({
 
 							<QuizToggleField
 								checked={quizSettings.allowRetake}
-								description="Let users retake the quiz to improve their score"
+								description={t("allowRetakeDescription")}
 								id="allow-retake"
-								label="Allow Retake"
+								label={t("allowRetakeLabel")}
 								onChange={(allowRetake) => updateQuizLocal({ allowRetake })}
 							/>
 
 							<QuizField
-								description="Optional time limit for quiz completion"
+								description={t("timeLimitDescription")}
 								id="time-limit"
-								label="Time Limit (minutes)"
+								label={t("timeLimitLabel")}
 								max={180}
 								min={1}
 								onChange={(timeLimit) => {
 									updateQuizLocal({ timeLimit });
 								}}
-								placeholder="Leave empty for no limit"
+								placeholder={t("timeLimitPlaceholder")}
 								type="number"
 								value={quizSettings.timeLimit}
 							/>
 
 							<div className="flex flex-col gap-4">
 								<Label className="font-medium text-sm">
-									Custom Result Messages
+									{t("customMessagesLabel")}
 								</Label>
 
 								<QuizField
-									description="Use {score}, {percentage}, {total} as placeholders"
+									description={t("messagePlaceholderHelp")}
 									id="pass-message"
-									label="Success Message"
+									label={t("successMessageLabel")}
 									onChange={(pass) =>
 										updateQuizLocal({
 											resultMessage: {
@@ -284,16 +287,16 @@ export function QuizSection({
 											},
 										})
 									}
-									placeholder="Congratulations! You passed with {percentage}% ({score}/{total} points)."
+									placeholder={t("successMessagePlaceholder")}
 									rows={3}
 									type="textarea"
 									value={quizSettings.resultMessage?.pass || ""}
 								/>
 
 								<QuizField
-									description="Use {score}, {percentage}, {total} as placeholders"
+									description={t("messagePlaceholderHelp")}
 									id="fail-message"
-									label="Improvement Message"
+									label={t("improvementMessageLabel")}
 									onChange={(fail) =>
 										updateQuizLocal({
 											resultMessage: {
@@ -302,7 +305,7 @@ export function QuizSection({
 											},
 										})
 									}
-									placeholder="You scored {percentage}% ({score}/{total} points). Keep practicing!"
+									placeholder={t("improvementMessagePlaceholder")}
 									rows={3}
 									type="textarea"
 									value={quizSettings.resultMessage?.fail || ""}
@@ -312,7 +315,7 @@ export function QuizSection({
 					)}
 
 					<div
-						aria-label="Quiz settings actions"
+						aria-label={t("actionsAria")}
 						className="flex items-center justify-between"
 						role="group"
 					>
@@ -324,14 +327,14 @@ export function QuizSection({
 									size="sm"
 									variant="ghost"
 								>
-									Reset
+									{tCommon("reset")}
 								</Button>
 							)}
 						</div>
 						<div className="flex items-center gap-2">
 							<Button
 								aria-describedby="quiz-description"
-								aria-label="Save quiz settings"
+								aria-label={t("saveAria")}
 								disabled={saving || !hasChanges}
 								loading={saving}
 								onClick={saveQuiz}
@@ -342,7 +345,7 @@ export function QuizSection({
 									}
 								}}
 							>
-								Save
+								{tCommon("save")}
 							</Button>
 						</div>
 					</div>

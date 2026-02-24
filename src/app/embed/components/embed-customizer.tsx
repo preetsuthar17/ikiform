@@ -1,6 +1,7 @@
 "use client";
 
 import { Code2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -50,6 +51,7 @@ export default function EmbedCustomizer({
 	form,
 	formId,
 }: EmbedCustomizerProps) {
+	const t = useTranslations("product.embed.customizer");
 	const [config, setConfig] = useState<EmbedConfig>(defaultConfig);
 	const [activeView, setActiveView] = useState<"desktop" | "mobile">("desktop");
 	const [isCodeModalOpen, setIsCodeModalOpen] = useState(false);
@@ -69,7 +71,7 @@ export default function EmbedCustomizer({
 						{getInternalFormTitle(form.schema)}
 					</h1>
 					<p className="text-muted-foreground">
-						Customize and generate embed code for your form
+						{t("subtitle")}
 					</p>
 				</div>
 				<Button
@@ -77,7 +79,7 @@ export default function EmbedCustomizer({
 					onClick={() => setIsCodeModalOpen(true)}
 				>
 					<Code2 className="size-4" />
-					Show Code
+					{t("showCode")}
 				</Button>
 			</div>
 
@@ -86,7 +88,7 @@ export default function EmbedCustomizer({
 				{}
 				<Card>
 					<CardHeader>
-						<CardTitle>Settings</CardTitle>
+						<CardTitle>{t("settings")}</CardTitle>
 					</CardHeader>
 					<CardContent>
 						<EmbedSettings config={config} updateConfig={updateConfig} />
@@ -97,7 +99,7 @@ export default function EmbedCustomizer({
 				<Card className="flex flex-col gap-6">
 					<CardHeader>
 						<div className="flex items-center justify-between">
-							<CardTitle>Preview</CardTitle>
+							<CardTitle>{t("preview")}</CardTitle>
 							<div className="flex items-center gap-2">
 								<Button
 									className={`h-8 px-3 text-xs ${
@@ -109,7 +111,7 @@ export default function EmbedCustomizer({
 									size="sm"
 									variant="ghost"
 								>
-									Desktop
+									{t("desktop")}
 								</Button>
 								<Button
 									className={`h-8 px-3 text-xs ${
@@ -121,7 +123,7 @@ export default function EmbedCustomizer({
 									size="sm"
 									variant="ghost"
 								>
-									Mobile
+									{t("mobile")}
 								</Button>
 							</div>
 						</div>

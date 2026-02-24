@@ -1,23 +1,26 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useTranslations } from "next-intl";
 import type { FieldSettingsProps } from "./types";
 
 export function NumberFieldSettings({
 	field,
 	onUpdateSettings,
 }: FieldSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.number");
+
 	return (
 		<Card className="gap-2 p-4 shadow-none">
 			<CardHeader className="p-0">
 				<CardTitle className="flex items-center gap-2 text-lg">
-					Number Field Settings
+					{t("title")}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 p-0">
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="number-min">
-						Minimum Value
+						{t("minValue")}
 					</Label>
 					<Input
 						aria-describedby="number-min-help"
@@ -34,17 +37,17 @@ export function NumberFieldSettings({
 								e.currentTarget.blur();
 							}
 						}}
-						placeholder="No minimum"
+						placeholder={t("noMinimum")}
 						type="number"
 						value={field.settings?.min || ""}
 					/>
 					<p className="text-muted-foreground text-xs" id="number-min-help">
-						Minimum numeric value allowed
+						{t("minValueHelp")}
 					</p>
 				</div>
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="number-max">
-						Maximum Value
+						{t("maxValue")}
 					</Label>
 					<Input
 						aria-describedby="number-max-help"
@@ -61,17 +64,17 @@ export function NumberFieldSettings({
 								e.currentTarget.blur();
 							}
 						}}
-						placeholder="No maximum"
+						placeholder={t("noMaximum")}
 						type="number"
 						value={field.settings?.max || ""}
 					/>
 					<p className="text-muted-foreground text-xs" id="number-max-help">
-						Maximum numeric value allowed
+						{t("maxValueHelp")}
 					</p>
 				</div>
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="number-step">
-						Step Size
+						{t("stepSize")}
 					</Label>
 					<Input
 						aria-describedby="number-step-help"
@@ -94,12 +97,12 @@ export function NumberFieldSettings({
 						value={field.settings?.step || 1}
 					/>
 					<p className="text-muted-foreground text-xs" id="number-step-help">
-						Increment/decrement step size for the number input
+						{t("stepSizeHelp")}
 					</p>
 				</div>
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="number-default">
-						Default Value
+						{t("defaultValue")}
 					</Label>
 					<Input
 						aria-describedby="number-default-help"
@@ -116,12 +119,12 @@ export function NumberFieldSettings({
 								e.currentTarget.blur();
 							}
 						}}
-						placeholder="No default"
+						placeholder={t("noDefault")}
 						type="number"
 						value={field.settings?.defaultValue || ""}
 					/>
 					<p className="text-muted-foreground text-xs" id="number-default-help">
-						Pre-filled value when the form loads
+						{t("defaultValueHelp")}
 					</p>
 				</div>
 			</CardContent>

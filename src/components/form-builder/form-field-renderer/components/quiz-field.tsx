@@ -271,7 +271,7 @@ export function QuizField({
 
 						{explanation && (
 							<div className="mt-2 flex gap-2">
-								<Info className="mt-0.5 size-4 flex-shrink-0 text-blue-600" />
+								<Info className="mt-0.5 size-4 shrink-0 text-blue-600" />
 								<p className="text-muted-foreground text-sm">{explanation}</p>
 							</div>
 						)}

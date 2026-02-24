@@ -1,6 +1,7 @@
 "use client";
 
 import { Check, Copy, Download, Globe, QrCode, Share } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import QRCode from "qrcode";
 import { useEffect, useState } from "react";
@@ -41,6 +42,7 @@ export function ShareFormModal({
 	isPublished,
 	onPublish,
 }: ShareFormModalProps) {
+	const t = useTranslations("dashboard.formsManagement.shareModal");
 	const [copying, setCopying] = useState(false);
 	const [publishing, setPublishing] = useState(false);
 	const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string>("");
@@ -98,7 +100,7 @@ export function ShareFormModal({
 			setQrCodeDataUrl(canvas.toDataURL("image/png"));
 		} catch (error) {
 			console.error("Error generating QR code:", error);
-			toast.error("Failed to generate QR code");
+			toast.error(t("toasts.failedGenerateQr"));
 		} finally {
 			setGeneratingQr(false);
 		}
@@ -112,13 +114,13 @@ export function ShareFormModal({
 			const { copyWithToast } = await import("@/lib/utils/clipboard");
 			await copyWithToast(
 				shareUrl,
-				"Link copied to clipboard!",
-				"Failed to copy link. Please copy manually."
+				t("toasts.linkCopied"),
+				t("toasts.failedCopyLink")
 			);
 		} catch (error) {
 			console.error("Failed to copy link:", error);
 			const { toast } = await import("@/hooks/use-toast");
-			toast.error("Failed to copy link. Please copy manually.");
+			toast.error(t("toasts.failedCopyLink"));
 		} finally {
 			setTimeout(() => {
 				setCopying(false);
@@ -137,10 +139,10 @@ export function ShareFormModal({
 			document.body.appendChild(link);
 			link.click();
 			document.body.removeChild(link);
-			toast.success("QR code downloaded successfully!");
+			toast.success(t("toasts.qrDownloaded"));
 		} catch (error) {
 			console.error("Failed to download QR code:", error);
-			toast.error("Failed to download QR code");
+			toast.error(t("toasts.failedDownloadQr"));
 		} finally {
 			setDownloading(false);
 		}
@@ -167,12 +169,12 @@ export function ShareFormModal({
 				<DialogHeader className="flex flex-col gap-5">
 					<DialogTitle className="flex items-center gap-2">
 						<Share aria-hidden="true" className="size-5" />
-						Share Form
+						{t("title")}
 					</DialogTitle>
 					<DialogDescription className="text-left">
 						{isPublished
-							? "Share your form with others using the link or QR code below"
-							: "Publish your form to make it shareable with others"}
+							? t("publishedDescription")
+							: t("unpublishedDescription")}
 					</DialogDescription>
 				</DialogHeader>
 
@@ -185,7 +187,7 @@ export function ShareFormModal({
 										aria-hidden="true"
 										className="size-4 text-muted-foreground"
 									/>
-									<span className="font-medium text-sm">Share Link</span>
+									<span className="font-medium text-sm">{t("shareLink")}</span>
 								</div>
 								<div className="flex gap-2">
 									<Input
@@ -202,12 +204,12 @@ export function ShareFormModal({
 										{copying ? (
 											<>
 												<Check className="size-4" />
-												<span className="sr-only">Copied</span>
+												<span className="sr-only">{t("copied")}</span>
 											</>
 										) : (
 											<>
 												<Copy className="size-4" />
-												<span className="sr-only">Copy link</span>
+												<span className="sr-only">{t("copyLink")}</span>
 											</>
 										)}
 									</Button>
@@ -224,7 +226,7 @@ export function ShareFormModal({
 												className="size-4 text-muted-foreground"
 											/>
 											<span className="font-medium text-sm">
-												{showQr ? "Hide" : "Show"} QR Code
+												{showQr ? t("hide") : t("show")} {t("qrCode")}
 											</span>
 										</div>
 									</Button>
@@ -236,7 +238,7 @@ export function ShareFormModal({
 											<div className="rounded-lg border bg-white p-3">
 												{qrCodeDataUrl && !generatingQr ? (
 													<img
-														alt="QR Code for form"
+														alt={t("qrCodeForForm")}
 														className="size-24"
 														src={qrCodeDataUrl}
 													/>
@@ -246,7 +248,7 @@ export function ShareFormModal({
 															<div className="flex flex-col items-center gap-2">
 																<div className="size-5 animate-spin rounded-full border-2 border-primary border-t-transparent" />
 																<span className="text-muted-foreground text-xs">
-																	Generating...
+																	{t("generating")}
 																</span>
 															</div>
 														) : (
@@ -257,7 +259,7 @@ export function ShareFormModal({
 											</div>
 											<div className="text-center">
 												<p className="mb-2 text-muted-foreground text-xs">
-													Scan for easy mobile access
+													{t("scanForMobile")}
 												</p>
 												<Button
 													className="w-full"
@@ -269,7 +271,7 @@ export function ShareFormModal({
 													variant="outline"
 												>
 													<Download className="size-4" />
-													{downloading ? "Downloading..." : "Download QR"}
+													{downloading ? t("downloading") : t("downloadQr")}
 												</Button>
 											</div>
 										</div>
@@ -285,8 +287,7 @@ export function ShareFormModal({
 									className="mx-auto mb-3 size-12 text-muted-foreground"
 								/>
 								<p className="text-muted-foreground text-sm">
-									Your form needs to be published before it can be shared
-									publicly.
+									{t("needsPublish")}
 								</p>
 							</div>
 							<Button
@@ -294,7 +295,7 @@ export function ShareFormModal({
 								disabled={!formId || publishing}
 								onClick={handlePublish}
 							>
-								{publishing ? "Publishing..." : "Publish Form"}
+								{publishing ? t("publishing") : t("publishForm")}
 							</Button>
 						</div>
 					)}

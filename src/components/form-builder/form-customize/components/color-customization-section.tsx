@@ -1,6 +1,7 @@
 "use client";
 
 import { Paintbrush } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { EnhancedColorPicker } from "@/components/ui/enhanced-color-picker";
@@ -15,6 +16,7 @@ export function ColorCustomizationSection({
 	localSettings,
 	updateSettings,
 }: ColorCustomizationSectionProps) {
+	const t = useTranslations("product.formBuilder.customize.colors");
 	const backgroundColor = localSettings.colors?.background || "#ffffff";
 	const textColor = localSettings.colors?.text || "#000000";
 	const primaryColor = localSettings.colors?.primary || "#2563eb";
@@ -72,10 +74,10 @@ export function ColorCustomizationSection({
 			<div>
 				<div className="mb-2 flex items-center gap-2">
 					<Paintbrush className="size-4 text-primary" />
-					<h2 className="font-semibold text-lg">Color Settings</h2>
+					<h2 className="font-semibold text-lg">{t("title")}</h2>
 				</div>
 				<p className="text-muted-foreground text-xs">
-					Customize colors and theme
+					{t("description")}
 				</p>
 			</div>
 
@@ -85,12 +87,12 @@ export function ColorCustomizationSection({
 						<CardContent className="flex flex-col gap-3 p-0">
 							<EnhancedColorPicker
 								allowTransparent={true}
-								label="Background Color"
+								label={t("backgroundColorLabel")}
 								onChange={handleBackgroundColorChange}
 								value={backgroundColor}
 							/>
 							<p className="text-muted-foreground text-xs">
-								Sets the background color of the form container
+								{t("backgroundColorHelp")}
 							</p>
 						</CardContent>
 					</Card>
@@ -99,12 +101,12 @@ export function ColorCustomizationSection({
 						<CardContent className="flex flex-col gap-3 p-0">
 							<EnhancedColorPicker
 								allowTransparent={false}
-								label="Text Color"
+								label={t("textColorLabel")}
 								onChange={handleTextColorChange}
 								value={textColor}
 							/>
 							<p className="text-muted-foreground text-xs">
-								Sets the color of all text elements in the form
+								{t("textColorHelp")}
 							</p>
 						</CardContent>
 					</Card>
@@ -113,12 +115,12 @@ export function ColorCustomizationSection({
 						<CardContent className="flex flex-col gap-3 p-0">
 							<EnhancedColorPicker
 								allowTransparent={false}
-								label="Primary Color (Buttons & Accent)"
+								label={t("primaryColorLabel")}
 								onChange={handlePrimaryColorChange}
 								value={primaryColor}
 							/>
 							<p className="text-muted-foreground text-xs">
-								Sets the color for buttons, focus states, and accent elements
+								{t("primaryColorHelp")}
 							</p>
 						</CardContent>
 					</Card>
@@ -127,12 +129,12 @@ export function ColorCustomizationSection({
 						<CardContent className="flex flex-col gap-3 p-0">
 							<EnhancedColorPicker
 								allowTransparent={true}
-								label="Border Color"
+								label={t("borderColorLabel")}
 								onChange={handleBorderColorChange}
 								value={borderColor}
 							/>
 							<p className="text-muted-foreground text-xs">
-								Sets the color for input field borders and dividers
+								{t("borderColorHelp")}
 							</p>
 						</CardContent>
 					</Card>
@@ -141,12 +143,12 @@ export function ColorCustomizationSection({
 						<CardContent className="flex flex-col gap-3 p-0">
 							<EnhancedColorPicker
 								allowTransparent={false}
-								label="Website Background Color"
+								label={t("websiteBackgroundColorLabel")}
 								onChange={handleWebsiteBackgroundColorChange}
 								value={websiteBackgroundColor}
 							/>
 							<p className="text-muted-foreground text-xs">
-								Sets the background color of the entire website/page
+								{t("websiteBackgroundColorHelp")}
 							</p>
 						</CardContent>
 					</Card>

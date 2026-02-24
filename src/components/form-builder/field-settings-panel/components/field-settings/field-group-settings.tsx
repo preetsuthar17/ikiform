@@ -1,4 +1,5 @@
 import { ChevronDown, Plus, Settings, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -38,6 +39,8 @@ export function FieldGroupSettings({
 	onUpdateSettings,
 	onFieldUpdate,
 }: FieldSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.fieldGroup");
+	const tPalette = useTranslations("product.formBuilder.fieldPalette");
 	const groupFields = field.settings?.groupFields || [];
 	const groupLayout = field.settings?.groupLayout || "horizontal";
 	const groupSpacing = field.settings?.groupSpacing || "normal";
@@ -93,13 +96,13 @@ export function FieldGroupSettings({
 			<Card className="gap-2 p-4 shadow-none">
 				<CardHeader className="p-0">
 					<CardTitle className="flex items-center gap-2 text-lg">
-						Layout Settings
+						{t("layoutTitle")}
 					</CardTitle>
 				</CardHeader>
 				<CardContent className="flex flex-col gap-2 p-0">
 					<div className="flex flex-col gap-2">
 						<Label className="font-medium text-sm" htmlFor="group-layout">
-							Layout Direction
+							{t("layoutDirection")}
 						</Label>
 						<Select
 							onValueChange={(value) =>
@@ -113,21 +116,19 @@ export function FieldGroupSettings({
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent>
-								<SelectItem value="horizontal">
-									Horizontal (Side by Side)
-								</SelectItem>
-								<SelectItem value="vertical">Vertical (Stacked)</SelectItem>
+								<SelectItem value="horizontal">{t("layoutHorizontal")}</SelectItem>
+								<SelectItem value="vertical">{t("layoutVertical")}</SelectItem>
 							</SelectContent>
 						</Select>
 						<p className="text-muted-foreground text-xs" id="group-layout-help">
-							How fields are arranged within the group
+							{t("layoutDirectionHelp")}
 						</p>
 					</div>
 
 					{groupLayout === "horizontal" && (
 						<div className="flex flex-col gap-2">
 							<Label className="font-medium text-sm" htmlFor="group-columns">
-								Number of Columns
+								{t("columns")}
 							</Label>
 							<Select
 								onValueChange={(value) =>
@@ -141,23 +142,23 @@ export function FieldGroupSettings({
 									<SelectValue />
 								</SelectTrigger>
 								<SelectContent>
-									<SelectItem value="2">2 Columns</SelectItem>
-									<SelectItem value="3">3 Columns</SelectItem>
-									<SelectItem value="4">4 Columns</SelectItem>
+									<SelectItem value="2">{t("columns2")}</SelectItem>
+									<SelectItem value="3">{t("columns3")}</SelectItem>
+									<SelectItem value="4">{t("columns4")}</SelectItem>
 								</SelectContent>
 							</Select>
 							<p
 								className="text-muted-foreground text-xs"
 								id="group-columns-help"
 							>
-								Number of columns for horizontal layout
+								{t("columnsHelp")}
 							</p>
 						</div>
 					)}
 
 					<div className="flex flex-col gap-2">
 						<Label className="font-medium text-sm" htmlFor="group-spacing">
-							Field Spacing
+							{t("spacing")}
 						</Label>
 						<Select
 							onValueChange={(value) =>
@@ -171,16 +172,16 @@ export function FieldGroupSettings({
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent>
-								<SelectItem value="compact">Compact</SelectItem>
-								<SelectItem value="normal">Normal</SelectItem>
-								<SelectItem value="relaxed">Relaxed</SelectItem>
+								<SelectItem value="compact">{t("spacingCompact")}</SelectItem>
+								<SelectItem value="normal">{t("spacingNormal")}</SelectItem>
+								<SelectItem value="relaxed">{t("spacingRelaxed")}</SelectItem>
 							</SelectContent>
 						</Select>
 						<p
 							className="text-muted-foreground text-xs"
 							id="group-spacing-help"
 						>
-							Spacing between fields in the group
+							{t("spacingHelp")}
 						</p>
 					</div>
 				</CardContent>
@@ -189,7 +190,7 @@ export function FieldGroupSettings({
 			<Card className="gap-2 p-4 shadow-none">
 				<CardHeader className="p-0">
 					<CardTitle className="flex items-center gap-2 text-lg">
-						Group Fields ({groupFields.length})
+						{t("groupFields", { count: groupFields.length })}
 					</CardTitle>
 				</CardHeader>
 				<CardContent className="flex flex-col gap-2 p-0">
@@ -197,26 +198,26 @@ export function FieldGroupSettings({
 						<Dialog onOpenChange={setPickerOpen} open={pickerOpen}>
 							<DialogTrigger asChild>
 								<Button
-									aria-label="Add field to group"
+									aria-label={t("addFieldAria")}
 									className="focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
 									size="sm"
 									type="button"
 									variant="outline"
 								>
 									<Plus aria-hidden="true" className="size-4" />
-									Add field
+									{t("addField")}
 								</Button>
 							</DialogTrigger>
 							<DialogContent className="p-0">
 								<DialogHeader className="px-4 pt-4">
-									<DialogTitle>Add a field</DialogTitle>
+									<DialogTitle>{t("addFieldDialogTitle")}</DialogTitle>
 								</DialogHeader>
 								<ScrollArea className="max-h-[70vh] p-4 pt-2">
 									<div className="grid grid-cols-1 gap-6">
-										{Object.entries(FIELD_CATEGORIES).map(([key, title]) => (
+										{Object.entries(FIELD_CATEGORIES).map(([key]) => (
 											<div className="flex flex-col gap-3" key={key}>
 												<div className="px-1 text-muted-foreground text-xs uppercase tracking-wide">
-													{title}
+													{tPalette(`categories.${key}`)}
 												</div>
 												<div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
 													{FIELD_TYPE_CONFIGS.filter(
@@ -234,10 +235,10 @@ export function FieldGroupSettings({
 														>
 															<div className="flex flex-col">
 																<span className="font-medium text-foreground text-sm">
-																	{f.label}
+																	{tPalette(`fields.${f.type}.label`)}
 																</span>
 																<span className="text-wrap text-muted-foreground text-xs">
-																	{f.description}
+																	{tPalette(`fields.${f.type}.description`)}
 																</span>
 															</div>
 														</Button>
@@ -257,9 +258,9 @@ export function FieldGroupSettings({
 							className="rounded-md border border-border border-dashed p-6 text-center text-muted-foreground"
 							role="status"
 						>
-							<p className="text-sm">No fields in this group yet.</p>
+							<p className="text-sm">{t("emptyStateTitle")}</p>
 							<p className="text-xs">
-								Add fields using the dropdown or quick add buttons above.
+								{t("emptyStateDescription")}
 							</p>
 						</div>
 					) : (
@@ -268,17 +269,20 @@ export function FieldGroupSettings({
 								<Card className="gap-2 p-4 shadow-none" key={groupField.id}>
 									<div className="flex flex-col gap-4">
 										<div className="flex items-center justify-between">
-											<div className="flex items-center gap-2">
-												<h4 className="font-medium text-card-foreground text-sm">
-													{groupField.label || `${groupField.type} Field`}
-												</h4>
+										<div className="flex items-center gap-2">
+											<h4 className="font-medium text-card-foreground text-sm">
+												{groupField.label ||
+													t("fieldFallback", { type: groupField.type })}
+											</h4>
 												<span className="rounded bg-muted px-2 py-1 text-muted-foreground text-xs">
 													{groupField.type}
 												</span>
 											</div>
 											<div className="flex items-center gap-1">
 												<Button
-													aria-label={`Settings for ${groupField.label || groupField.type} field`}
+													aria-label={t("settingsAria", {
+														name: groupField.label || groupField.type,
+													})}
 													className="size-8"
 													onClick={() => handleSettingsButton(groupField.id)}
 													onKeyDown={(e) => {
@@ -294,7 +298,9 @@ export function FieldGroupSettings({
 													<Settings aria-hidden="true" className="size-4" />
 												</Button>
 												<Button
-													aria-label={`Remove ${groupField.label || groupField.type} field`}
+													aria-label={t("removeAria", {
+														name: groupField.label || groupField.type,
+													})}
 													className="size-8"
 													onClick={() => removeFieldFromGroup(groupField.id)}
 													onKeyDown={(e) => {
@@ -318,7 +324,7 @@ export function FieldGroupSettings({
 													className="font-medium text-sm"
 													htmlFor={`${groupField.id}-label`}
 												>
-													Field Label
+													{t("fieldLabel")}
 												</Label>
 												<Input
 													aria-describedby={`${groupField.id}-label-help`}
@@ -335,7 +341,7 @@ export function FieldGroupSettings({
 															e.currentTarget.blur();
 														}
 													}}
-													placeholder="Enter field label"
+													placeholder={t("fieldLabelPlaceholder")}
 													type="text"
 													value={groupField.label}
 												/>
@@ -343,7 +349,7 @@ export function FieldGroupSettings({
 													className="text-muted-foreground text-xs"
 													id={`${groupField.id}-label-help`}
 												>
-													Label for this field
+													{t("fieldLabelHelp")}
 												</p>
 											</div>
 											<div className="flex flex-col gap-2">
@@ -351,7 +357,7 @@ export function FieldGroupSettings({
 													className="font-medium text-sm"
 													htmlFor={`${groupField.id}-placeholder`}
 												>
-													Placeholder Text
+													{t("placeholder")}
 												</Label>
 												<Input
 													aria-describedby={`${groupField.id}-placeholder-help`}
@@ -368,7 +374,7 @@ export function FieldGroupSettings({
 															e.currentTarget.blur();
 														}
 													}}
-													placeholder="Enter placeholder text"
+													placeholder={t("placeholderPlaceholder")}
 													type="text"
 													value={groupField.placeholder || ""}
 												/>
@@ -376,7 +382,7 @@ export function FieldGroupSettings({
 													className="text-muted-foreground text-xs"
 													id={`${groupField.id}-placeholder-help`}
 												>
-													Placeholder text for this field
+													{t("placeholderHelp")}
 												</p>
 											</div>
 										</div>
@@ -387,10 +393,10 @@ export function FieldGroupSettings({
 													className="font-medium text-sm"
 													htmlFor={`${groupField.id}-required`}
 												>
-													Required field
+													{t("required")}
 												</Label>
 												<p className="text-muted-foreground text-xs">
-													Make this field mandatory
+													{t("requiredHelp")}
 												</p>
 											</div>
 											<Switch
@@ -412,7 +418,9 @@ export function FieldGroupSettings({
 										>
 											<CollapsibleTrigger asChild>
 												<Button
-													aria-label={`Toggle advanced settings for ${groupField.label || groupField.type}`}
+													aria-label={t("advancedAria", {
+														name: groupField.label || groupField.type,
+													})}
 													className="w-full justify-between"
 													onKeyDown={(e) => {
 														if (e.key === "Enter" || e.key === " ") {
@@ -427,7 +435,7 @@ export function FieldGroupSettings({
 													variant="outline"
 												>
 													<span className="text-card-foreground text-sm">
-														Advanced Settings
+														{t("advanced")}
 													</span>
 													<ChevronDown
 														aria-hidden="true"

@@ -8,6 +8,7 @@ import {
 	UserCheck,
 	UserX,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { ConfirmationModal } from "@/components/dashboard/modals/form-delete-confirmation-modal";
 import { Button } from "@/components/ui/button";
@@ -36,6 +37,7 @@ export function AdminControls({
 	removePremium,
 	deleteUser,
 }: AdminControlsProps) {
+	const t = useTranslations("dashboard.admin.userControls");
 	const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
 	const handleDeleteClick = () => {
@@ -52,17 +54,17 @@ export function AdminControls({
 			<CardHeader className="p-0">
 				<CardTitle className="flex items-center gap-2 text-orange-700">
 					<Shield className="size-5" />
-					Admin Controls
+					{t("title")}
 				</CardTitle>
 				<p className="text-muted-foreground text-sm">
-					Manage user status and permissions
+					{t("description")}
 				</p>
 			</CardHeader>
 			<CardContent className="p-0">
 				<div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 					<div className="flex flex-col gap-2">
 						<div className="font-medium text-muted-foreground text-sm">
-							Free Trial
+							{t("sections.freeTrial")}
 						</div>
 						<div className="flex gap-2">
 							{hasFreeTrial ? (
@@ -74,7 +76,7 @@ export function AdminControls({
 										variant="outline"
 									>
 										<UserX className="size-4" />
-										Remove Trial
+										{t("actions.removeTrial")}
 									</Button>
 								</form>
 							) : (
@@ -86,7 +88,7 @@ export function AdminControls({
 										variant="outline"
 									>
 										<UserCheck className="size-4" />
-										Assign Trial
+										{t("actions.assignTrial")}
 									</Button>
 								</form>
 							)}
@@ -96,7 +98,7 @@ export function AdminControls({
 					{}
 					<div className="flex flex-col gap-2">
 						<div className="font-medium text-muted-foreground text-sm">
-							Premium Status
+							{t("sections.premiumStatus")}
 						</div>
 						<div className="flex gap-2">
 							{hasPremium ? (
@@ -108,7 +110,7 @@ export function AdminControls({
 										variant="outline"
 									>
 										<ShieldOff className="size-4" />
-										Remove Premium
+										{t("actions.removePremium")}
 									</Button>
 								</form>
 							) : (
@@ -120,7 +122,7 @@ export function AdminControls({
 										variant="outline"
 									>
 										<Crown className="size-4" />
-										Assign Premium
+										{t("actions.assignPremium")}
 									</Button>
 								</form>
 							)}
@@ -130,7 +132,7 @@ export function AdminControls({
 					{}
 					<div className="flex flex-col gap-2">
 						<div className="font-medium text-muted-foreground text-sm">
-							Danger Zone
+							{t("sections.dangerZone")}
 						</div>
 						<div className="flex gap-2">
 							<Button
@@ -141,7 +143,7 @@ export function AdminControls({
 								variant="destructive"
 							>
 								<Trash2 className="size-4" />
-								Delete User
+								{t("actions.deleteUser")}
 							</Button>
 						</div>
 					</div>
@@ -149,21 +151,19 @@ export function AdminControls({
 
 				<div className="mt-4 rounded-md border border-yellow-200 bg-yellow-50 p-3">
 					<p className="text-xs text-yellow-800">
-						<strong>Warning:</strong> Deleting a user will permanently remove
-						all their forms, submissions, and data. This action cannot be
-						undone.
+						<strong>{t("warning.label")}</strong> {t("warning.message")}
 					</p>
 				</div>
 			</CardContent>
 
 			<ConfirmationModal
-				cancelText="Cancel"
-				confirmText="Delete User"
-				description={`Are you sure you want to delete user "${userName}"? This action cannot be undone and will delete all their forms and data.`}
+				cancelText={t("confirm.cancel")}
+				confirmText={t("confirm.confirm")}
+				description={t("confirm.description", { userName })}
 				onConfirm={handleConfirmDelete}
 				onOpenChange={setShowDeleteConfirm}
 				open={showDeleteConfirm}
-				title="Delete User"
+				title={t("confirm.title")}
 				variant="destructive"
 			/>
 		</Card>

@@ -3,22 +3,22 @@ import { expect, test, type Locator, type Page } from "@playwright/test";
 test.describe.configure({ timeout: 90_000 });
 
 const ROUTES = [
-	"/",
-	"/login",
-	"/reset-password",
-	"/changelog",
-	"/embed",
-	"/embed/test",
-	"/demo-form-builder",
+	"/en",
+	"/en/login",
+	"/en/reset-password",
+	"/en/changelog",
+	"/en/embed",
+	"/en/embed/test",
+	"/en/demo-form-builder",
 	"/form-builder",
-	"/ai-builder",
+	"/en/ai-builder",
 	"/dashboard",
 	"/admin",
-	"/legal/privacy",
-	"/legal/terms",
-	"/legal/gdpr",
-	"/legal/dpa",
-	"/success",
+	"/en/legal/privacy",
+	"/en/legal/terms",
+	"/en/legal/gdpr",
+	"/en/legal/dpa",
+	"/en/success",
 ] as const;
 
 const INTERACTION_BUDGET_MS = 20_000;

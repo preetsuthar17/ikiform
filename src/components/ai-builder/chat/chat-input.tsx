@@ -1,8 +1,8 @@
 import { Send } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Kbd } from "@/components/ui/kbd";
 import { Textarea } from "@/components/ui/textarea";
 
 interface ChatInputProps {
@@ -18,6 +18,7 @@ export function ChatInput({
 	onSubmit,
 	isLoading,
 }: ChatInputProps) {
+	const t = useTranslations("product.aiBuilder.chatInput");
 	const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 	const isSubmittingRef = useRef(false);
 	const [isMultiline, setIsMultiline] = useState(false);
@@ -54,7 +55,7 @@ export function ChatInput({
 			>
 				<Textarea
 					aria-describedby="chat-input-help"
-					aria-label="Message to Kiko AI"
+					aria-label={t("messageToKiko")}
 					autoCapitalize="sentences"
 					autoComplete="off"
 					autoCorrect="on"
@@ -79,35 +80,35 @@ export function ChatInput({
 							(e.target as HTMLTextAreaElement).form?.requestSubmit();
 						}
 					}}
-					placeholder="Describe the form you want to create…"
+					placeholder={t("placeholder")}
 					ref={textareaRef}
 					rows={1}
 					value={input}
 				/>
 				{}
 				<Button
-					aria-label="Send message"
+					aria-label={t("sendMessage")}
 					className={`absolute right-2 transition-all duration-200 ease-out md:hidden ${
 						isMultiline && hasText ? "bottom-2" : "top-1/2 -translate-y-1/2"
 					}`}
 					disabled={isLoading || !input.trim()}
 					loading={isLoading}
 					size="icon-lg"
-					title="Send message"
+					title={t("sendMessage")}
 					type="submit"
 				>
 					{!isLoading && <Send className="size-5" />}
 				</Button>
 				{}
 				<Button
-					aria-label="Send message"
+					aria-label={t("sendMessage")}
 					className={`absolute right-3 hidden transition-all duration-200 ease-out md:inline-flex ${
 						isMultiline && hasText ? "bottom-2" : "top-1/2 -translate-y-1/2"
 					}`}
 					disabled={isLoading || !input.trim()}
 					loading={isLoading}
 					size="icon"
-					title="Send message"
+					title={t("sendMessage")}
 					type="submit"
 				>
 					{!isLoading && <Send className="size-4" />}
@@ -117,8 +118,7 @@ export function ChatInput({
 				className="mx-auto w-full max-w-3xl gap-2 px-2 text-center text-[11px] text-muted-foreground md:px-0 md:text-xs"
 				id="chat-input-help"
 			>
-				Press <Kbd>Enter</Kbd> to send, <Kbd>Shift+Enter</Kbd> for new line, or{" "}
-				<Kbd>⌘/Ctrl+Enter</Kbd> to send
+				{t("sendHelp")}
 			</div>
 		</div>
 	);

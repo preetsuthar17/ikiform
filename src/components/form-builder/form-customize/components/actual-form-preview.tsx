@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import React from "react";
 import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
 import type { LocalSettings } from "@/components/form-builder/form-settings-modal/types";
@@ -61,6 +62,7 @@ export function ActualFormPreview({
 	schema,
 	className,
 }: ActualFormPreviewProps) {
+	const t = useTranslations("product.formBuilder.customize.preview");
 	const layout = localSettings.layout || {};
 	const colors = localSettings.colors || {};
 	const typography = localSettings.typography || {};
@@ -319,7 +321,7 @@ export function ActualFormPreview({
 									{isMultiStep ? (
 										<div className="flex justify-between gap-4">
 											<Button
-												aria-label="Previous step"
+												aria-label={t("previousStepAria")}
 												className="flex-1"
 												disabled
 												style={{
@@ -328,10 +330,10 @@ export function ActualFormPreview({
 												}}
 												variant="outline"
 											>
-												Previous
+												{t("previousStep")}
 											</Button>
 											<Button
-												aria-label="Next step"
+												aria-label={t("nextStepAria")}
 												className="flex-1"
 												disabled
 												style={{
@@ -340,13 +342,13 @@ export function ActualFormPreview({
 													color: "#ffffff",
 												}}
 											>
-												Next
+												{t("nextStep")}
 											</Button>
 										</div>
 									) : (
 										<div className="flex justify-end">
 											<Button
-												aria-label="Submit form"
+												aria-label={t("submitAria")}
 												disabled
 												style={{
 													backgroundColor: colors.primary || "#2563eb",
@@ -354,7 +356,7 @@ export function ActualFormPreview({
 													color: "#ffffff",
 												}}
 											>
-												{localSettings.submitText || "Submit Form"}
+												{localSettings.submitText || t("submitButton")}
 											</Button>
 										</div>
 									)}

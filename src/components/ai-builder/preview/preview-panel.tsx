@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { FormPreview } from "@/components/form-builder/form-preview";
 
 import type { PreviewPanelProps } from "@/lib/ai-builder/types";
@@ -11,6 +12,8 @@ export function PreviewPanel({
 	setShowJsonModal,
 	activeForm,
 }: PreviewPanelProps) {
+	const t = useTranslations("product.aiBuilder.preview");
+
 	const handleUseForm = () => {
 		if (activeForm?.schema) {
 			localStorage.setItem(
@@ -52,7 +55,7 @@ export function PreviewPanel({
 					/>
 				) : (
 					<div className="flex items-center justify-center text-center text-muted-foreground">
-						No form selected.
+						{t("noFormSelected")}
 					</div>
 				)}
 			</div>

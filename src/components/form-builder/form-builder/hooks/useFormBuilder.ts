@@ -22,7 +22,12 @@ import {
 	saveDraftToStorage,
 } from "../utils";
 
-export const useFormBuilder = (formId?: string) => {
+export const useFormBuilder = (
+	formId?: string,
+	messages?: {
+		loadFailed?: string;
+	}
+) => {
 	const router = useRouter();
 	const { user, loading: authLoading } = useAuth();
 
@@ -216,7 +221,9 @@ export const useFormBuilder = (formId?: string) => {
 			removeDraftFromStorage(draftKey);
 		} catch (error) {
 			console.error("Error loading form:", error);
-			toast.error("Failed to load form. Please try again.");
+			toast.error(
+				messages?.loadFailed ?? "Failed to load form. Please try again."
+			);
 		} finally {
 			actions.setLoading(false);
 		}

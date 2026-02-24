@@ -1,6 +1,7 @@
 "use client";
 
 import { Check, Code2, Copy, FileText, Globe } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -30,6 +31,8 @@ export default function EmbedCodeModal({
 	embedUrl,
 	formId,
 }: EmbedCodeModalProps) {
+	const t = useTranslations("product.embed.codeModal");
+	const iframeTitle = t("iframeTitle");
 	const [embedMode, setEmbedMode] = useState<EmbedMode>("html");
 	const [copied, setCopied] = useState(false);
 
@@ -66,7 +69,7 @@ export default function EmbedCodeModal({
 		code += `<iframe
   src="${embedUrl}"
   style="${iframeStyle}"
-  title="Form"
+  title="${iframeTitle}"
   loading="${config.loadingMode}"
   allow="clipboard-write; camera; microphone"
   sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"`;
@@ -127,7 +130,7 @@ export default function EmbedCodeModal({
 		code += `<iframe
         src="${embedUrl}"
         style={iframeStyle}
-        title="Form"
+        title="${iframeTitle}"
         loading="${config.loadingMode}"
         allow="clipboard-write; camera; microphone"
         sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"`;
@@ -194,7 +197,7 @@ export default function EmbedCodeModal({
 		code += `<iframe
         src="${embedUrl}"
         style={iframeStyle}
-        title="Form"
+        title="${iframeTitle}"
         loading="${config.loadingMode}"
         allow="clipboard-write; camera; microphone"
         sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"`;
@@ -226,7 +229,7 @@ export default function EmbedCodeModal({
 		code += `<iframe
       :src="embedUrl"
       :style="iframeStyle"
-      title="Form"
+      title="${iframeTitle}"
       loading="${config.loadingMode}"
       allow="clipboard-write; camera; microphone"
       sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"`;
@@ -318,34 +321,40 @@ export default function EmbedCodeModal({
 			id: "html",
 			name: "HTML",
 			icon: Globe,
-			description: "Universal HTML iframe",
+			description: t("modes.htmlDescription"),
 		},
-		{ id: "react", name: "React", icon: Code2, description: "React component" },
+		{
+			id: "react",
+			name: "React",
+			icon: Code2,
+			description: t("modes.reactDescription"),
+		},
 		{
 			id: "nextjs",
 			name: "Next.js",
 			icon: Code2,
-			description: "Next.js component",
+			description: t("modes.nextjsDescription"),
 		},
-		{ id: "vue", name: "Vue", icon: Code2, description: "Vue.js component" },
+		{
+			id: "vue",
+			name: "Vue",
+			icon: Code2,
+			description: t("modes.vueDescription"),
+		},
 		{
 			id: "wordpress",
 			name: "WordPress",
 			icon: FileText,
-			description: "WordPress shortcode",
+			description: t("modes.wordpressDescription"),
 		},
 	];
-
-	const activeMode = embedModes.find((mode) => mode.id === embedMode);
 
 	return (
 		<Modal onOpenChange={onClose} open={isOpen}>
 			<ModalContent className="flex max-w-3xl flex-col gap-6">
 				<ModalHeader>
-					<ModalTitle>Embed Code</ModalTitle>
-					<ModalDescription>
-						Choose your framework and copy the code
-					</ModalDescription>
+					<ModalTitle>{t("title")}</ModalTitle>
+					<ModalDescription>{t("description")}</ModalDescription>
 				</ModalHeader>
 
 				<div className="flex flex-col gap-4">
@@ -367,7 +376,9 @@ export default function EmbedCodeModal({
 					<div className="flex flex-col gap-2">
 						<div className="flex items-center justify-between">
 							<span className="font-medium text-sm">
-								{embedModes.find((m) => m.id === embedMode)?.name} Code
+								{t("codeLabel", {
+									mode: embedModes.find((m) => m.id === embedMode)?.name ?? "",
+								})}
 							</span>
 							<Button
 								className="flex items-center gap-2"
@@ -378,12 +389,12 @@ export default function EmbedCodeModal({
 								{copied ? (
 									<>
 										<Check className="size-4" />
-										Copied!
+										{t("copied")}
 									</>
 								) : (
 									<>
 										<Copy className="size-4" />
-										Copy
+										{t("copy")}
 									</>
 								)}
 							</Button>
@@ -399,7 +410,7 @@ export default function EmbedCodeModal({
 
 				<ModalFooter>
 					<Button onClick={onClose} variant="outline">
-						Close
+						{t("close")}
 					</Button>
 				</ModalFooter>
 			</ModalContent>
