@@ -6,7 +6,7 @@ import { loadMessagesForLocale } from "@/i18n/request";
 import { routing } from "@/i18n/routing";
 
 export const dynamic = "force-static";
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export function generateStaticParams() {
 	return routing.locales.map((locale) => ({ locale }));

@@ -5,16 +5,9 @@ const LOCALE_PREFIX_REGEX = /^\/(en|es|fr|de|pt|hi|ja|zh|it|ar|ko|ru|tr|nl)(?=\/
 const STRIP_LOCALE_PREFIX_REGEX = /^\/(?:en|es|fr|de|pt|hi|ja|zh|it|ar|ko|ru|tr|nl)(?=\/|$)/;
 
 export async function updateSession(
-	request: NextRequest,
-	requestHeaders?: Headers
+	request: NextRequest
 ): Promise<NextResponse> {
-	const supabaseResponse = requestHeaders
-		? NextResponse.next({
-				request: {
-					headers: requestHeaders,
-				},
-			})
-		: NextResponse.next({ request });
+	const supabaseResponse = NextResponse.next({ request });
 
 	const authHeader = request.headers.get("authorization");
 	const accessToken = authHeader?.startsWith("Bearer ")

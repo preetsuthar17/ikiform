@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
@@ -20,7 +22,7 @@ async function getAuthenticatedUser() {
 	} = await supabase.auth.getUser();
 
 	if (userError || !user) {
-		redirect("/auth/signin");
+		redirect("/login");
 	}
 
 	return { user, supabase };
