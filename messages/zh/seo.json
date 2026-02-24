@@ -1,0 +1,70 @@
+{
+  "siteName": "Ikiform",
+  "routes": {
+    "home": {
+      "title": "轻松创建表单、收集回复并分析数据。",
+      "description": "使用Ikiform创建精美表单，轻松分析回复。",
+      "keywords": ["表单构建器", "在线表单", "问卷构建器", "typeform替代", "google表单替代"]
+    },
+    "changelog": {
+      "title": "更新日志",
+      "description": "跟踪Ikiform的产品更新、发布和改进。",
+      "keywords": ["更新日志", "产品更新", "发布说明", "ikiform更新"]
+    },
+    "legalPrivacy": {
+      "title": "隐私政策",
+      "description": "了解Ikiform如何收集、使用和保护您的个人数据。",
+      "keywords": ["隐私政策", "数据保护", "ikiform隐私"]
+    },
+    "legalTerms": {
+      "title": "服务条款",
+      "description": "阅读Ikiform关于访问和使用服务的条款。",
+      "keywords": ["服务条款", "条款", "ikiform法律信息"]
+    },
+    "legalGdpr": {
+      "title": "GDPR合规",
+      "description": "了解Ikiform的GDPR控制和数据处理态势。",
+      "keywords": ["gdpr", "隐私", "合规"]
+    },
+    "legalDpa": {
+      "title": "数据处理协议",
+      "description": "阅读面向企业客户的Ikiform数据处理协议。",
+      "keywords": ["dpa", "数据处理协议", "合规"]
+    },
+    "aiBuilder": {
+      "title": "AI表单构建器",
+      "description": "在Ikiform中使用AI辅助创建和自定义表单。",
+      "keywords": ["ai表单构建器", "表单生成器", "ikiform ai"]
+    },
+    "demoFormBuilder": {
+      "title": "演示表单构建器",
+      "description": "试用Ikiform的实时演示表单构建器，即刻探索功能。",
+      "keywords": ["表单构建器演示", "ikiform演示", "交互式表单构建器"]
+    },
+    "login": {
+      "title": "登录",
+      "description": "登录您的Ikiform账户。",
+      "keywords": ["ikiform登录", "登录"]
+    },
+    "resetPassword": {
+      "title": "重置密码",
+      "description": "重置您的Ikiform账户密码。",
+      "keywords": ["重置密码", "账户恢复"]
+    },
+    "success": {
+      "title": "成功",
+      "description": "操作已成功完成。",
+      "keywords": ["成功"]
+    },
+    "embed": {
+      "title": "嵌入",
+      "description": "将Ikiform表单嵌入您的网站。",
+      "keywords": ["嵌入表单", "表单嵌入", "ikiform嵌入"]
+    },
+    "embedTest": {
+      "title": "嵌入测试",
+      "description": "预览和测试嵌入的Ikiform表单。",
+      "keywords": ["嵌入测试", "表单预览"]
+    }
+  }
+}

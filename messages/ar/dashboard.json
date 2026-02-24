@@ -1,0 +1,517 @@
+{
+  "common": {
+    "dashboard": "لوحة التحكم",
+    "feedback": "ملاحظات",
+    "logOut": "تسجيل الخروج",
+    "loading": "جارٍ التحميل",
+    "loadingProfile": "جارٍ تحميل الملف الشخصي",
+    "loadingFormsSidebar": "جارٍ تحميل الشريط الجانبي للنماذج",
+    "loadingFormsManagement": "جارٍ تحميل إدارة النماذج"
+  },
+  "profile": {
+    "userProfileInformation": "معلومات الملف الشخصي للمستخدم",
+    "userNameAria": "اسم المستخدم: {name}",
+    "premiumUserBadge": "شارة المستخدم المميز",
+    "userEmailAria": "بريد المستخدم الإلكتروني: {email}"
+  },
+  "formsManagement": {
+    "aria": {
+      "management": "إدارة النماذج"
+    },
+    "header": {
+      "title": "نماذجك",
+      "subtitle": "أنشئ نماذجك وأدرها وحللها بسهولة",
+      "createNewForm": "إنشاء نموذج جديد",
+      "createDialogTitle": "إنشاء نموذج جديد",
+      "createDialogDescription": "اختر طريقة البدء. يمكنك التوليد بالذكاء الاصطناعي، أو البناء يدويًا، أو استيراد ملف مشفر."
+    },
+    "createOptions": {
+      "aiBadge": "الأكثر توصية",
+      "aiCta": "ابدأ بالذكاء الاصطناعي",
+      "aiTitle": "استخدم Kiko AI",
+      "aiDescription": "صف نموذجك ودع Kiko AI يُنشئ مسودة أولى كاملة بالحقول والمنطق والهيكل.",
+      "manualCta": "إنشاء يدوي",
+      "manualTitle": "إنشاء يدوي",
+      "manualDescription": "ابدأ بنموذج فارغ وقم بتهيئة الحقول يدويًا.",
+      "importCta": "استيراد ملف",
+      "importTitle": "استيراد من ملف",
+      "importDescription": "استورد ملف .ikiform محميًا بعبارة مرور كمسودة نموذج جديدة."
+    },
+    "emptyState": {
+      "aria": "حالة فارغة - لم يتم إنشاء أي نماذج بعد",
+      "title": "لا توجد نماذج بعد",
+      "description": "ابدأ بإنشاء أول نموذج لك. الأمر سريع وسهل!",
+      "createFirstForm": "إنشاء نموذجك الأول",
+      "dialog": {
+        "title": "كيف تريد إنشاء نموذجك؟",
+        "description": "اختر إنشاء نموذجك يدويًا أو دع Kiko AI يُنشئه لك.",
+        "createWithAI": "استخدم Kiko AI",
+        "createManually": "إنشاء يدوي"
+      }
+    },
+    "search": {
+      "aria": "البحث في النماذج والفلاتر",
+      "searchAria": "البحث في النماذج",
+      "placeholder": "ابحث في النماذج بالعنوان أو الوصف أو المعرّف...",
+      "openFilterMenu": "فتح قائمة الفلاتر",
+      "activeFiltersAria": "{count} فلتر نشط",
+      "statusLabel": "الحالة",
+      "filterByAll": "تصفية حسب جميع الحالات",
+      "all": "الكل",
+      "filterByPublished": "تصفية النماذج المنشورة",
+      "published": "منشور",
+      "filterByDraft": "تصفية المسودات",
+      "draft": "مسودة",
+      "sortByLabel": "ترتيب حسب",
+      "sortByLastUpdated": "ترتيب حسب آخر تحديث",
+      "lastUpdated": "آخر تحديث",
+      "sortByDateCreated": "ترتيب حسب تاريخ الإنشاء",
+      "dateCreated": "تاريخ الإنشاء",
+      "sortByTitle": "ترتيب حسب العنوان أبجديًا",
+      "titleAz": "العنوان (أ-ي)",
+      "clearAllFilters": "مسح جميع الفلاتر",
+      "activeFiltersGroup": "الفلاتر النشطة",
+      "badgeSearch": "البحث: \"{query}\"",
+      "clearSearch": "مسح البحث",
+      "badgeStatus": "الحالة: {status}",
+      "clearStatus": "مسح فلتر الحالة",
+      "badgeSort": "الترتيب: {sort}",
+      "sortTitleShort": "العنوان",
+      "sortCreatedShort": "تاريخ الإنشاء",
+      "resetSort": "إعادة تعيين الترتيب إلى آخر تحديث"
+    },
+    "list": {
+      "untitledForm": "نموذج بدون عنوان",
+      "viewAnalyticsFor": "عرض تحليلات {title}",
+      "formStatusAria": "حالة النموذج: {status}",
+      "published": "منشور",
+      "draft": "مسودة",
+      "publicTitle": "عام: \"{title}\"",
+      "updated": "تم التحديث {date}",
+      "actionsFor": "إجراءات {title}",
+      "formActions": "إجراءات النموذج",
+      "editForm": "تعديل النموذج",
+      "shareForm": "مشاركة النموذج",
+      "duplicate": "نسخ",
+      "viewForm": "عرض النموذج",
+      "viewAnalytics": "عرض التحليلات",
+      "embed": "تضمين",
+      "export": "تصدير",
+      "deleteForm": "حذف النموذج",
+      "formsListAria": "قائمة النماذج"
+    },
+    "stats": {
+      "totalForms": "إجمالي النماذج",
+      "published": "المنشورة",
+      "drafts": "المسودات",
+      "loadingAria": "جارٍ تحميل إحصاءات النماذج",
+      "aria": "إحصاءات النماذج",
+      "sidebarAria": "الشريط الجانبي لإحصاءات النماذج"
+    },
+    "emptySearch": {
+      "noMatch": "لا توجد نماذج تتطابق مع معايير البحث.",
+      "clearFilters": "مسح الفلاتر",
+      "clearAria": "مسح جميع فلاتر البحث"
+    },
+    "deleteModal": {
+      "cancel": "إلغاء",
+      "confirm": "حذف النموذج",
+      "title": "حذف النموذج",
+      "description": "هل أنت متأكد من حذف \"{formTitle}\"؟ لا يمكن التراجع عن هذا الإجراء وستُفقد جميع بيانات النموذج بشكل دائم."
+    },
+    "toasts": {
+      "failedLoadForms": "فشل تحميل النماذج",
+      "failedShareForm": "فشل مشاركة النموذج",
+      "formDuplicated": "تم نسخ النموذج",
+      "failedDuplicateForm": "فشل نسخ النموذج",
+      "formImportedSuccess": "تم استيراد النموذج بنجاح.",
+      "failedImportForm": "فشل استيراد النموذج.",
+      "formDeletedSuccess": "تم حذف النموذج بنجاح",
+      "failedDeleteForm": "فشل حذف النموذج"
+    },
+    "shareModal": {
+      "title": "مشاركة النموذج",
+      "publishedDescription": "شارك نموذجك مع الآخرين باستخدام الرابط أو رمز QR أدناه",
+      "unpublishedDescription": "انشر نموذجك لتتمكن من مشاركته مع الآخرين",
+      "shareLink": "رابط المشاركة",
+      "copied": "تم النسخ",
+      "copyLink": "نسخ الرابط",
+      "hide": "إخفاء",
+      "show": "عرض",
+      "qrCode": "رمز QR",
+      "qrCodeForForm": "رمز QR للنموذج",
+      "generating": "جارٍ التوليد...",
+      "scanForMobile": "امسح للوصول السهل من الجوال",
+      "downloading": "جارٍ التنزيل...",
+      "downloadQr": "تنزيل QR",
+      "needsPublish": "يجب نشر نموذجك قبل مشاركته علنًا.",
+      "publishing": "جارٍ النشر...",
+      "publishForm": "نشر النموذج",
+      "toasts": {
+        "failedGenerateQr": "فشل توليد رمز QR",
+        "linkCopied": "تم نسخ الرابط إلى الحافظة!",
+        "failedCopyLink": "فشل نسخ الرابط. يرجى النسخ يدويًا.",
+        "qrDownloaded": "تم تنزيل رمز QR بنجاح!",
+        "failedDownloadQr": "فشل تنزيل رمز QR"
+      }
+    },
+    "secureImport": {
+      "title": "استيراد النموذج من ملف مشفر",
+      "description": "فك تشفير ملف .ikiform وإنشاء مسودة نموذج جديدة.",
+      "encryptedFileLabel": "الملف المشفر",
+      "encryptedFileHelp": "ارفع ملف تصدير مشفر بصيغة .ikiform.",
+      "passphraseLabel": "عبارة المرور",
+      "passphrasePlaceholder": "أدخل عبارة المرور المستخدمة عند التصدير",
+      "passphraseHelp": "يجب أن يحتوي على {count} أحرف على الأقل.",
+      "decrypting": "جارٍ فك التشفير...",
+      "decryptFile": "فك تشفير الملف",
+      "importedForm": "النموذج المستورد",
+      "decryptToLoadSettings": "افك تشفير الملف لتحميل إعدادات الاستيراد.",
+      "preserveApiSettings": "الاحتفاظ بإعدادات API (مفتاح API وحالة التفعيل)",
+      "preservePassword": "الاحتفاظ بكلمة مرور الحماية",
+      "preserveNotificationEmail": "الاحتفاظ ببريد المستلم للإشعارات",
+      "cancel": "إلغاء",
+      "importing": "جارٍ الاستيراد...",
+      "importAsNewForm": "استيراد كنموذج جديد",
+      "decryptToPreview": "افك تشفير الملف لمعاينة النموذج المستورد.",
+      "errors": {
+        "chooseFile": "يرجى اختيار ملف .ikiform مشفر.",
+        "passphraseMinChars": "يجب أن تحتوي عبارة المرور على {count} أحرف على الأقل.",
+        "failedDecrypt": "فشل فك تشفير ملف الاستيراد.",
+        "wrongPassphrase": "عبارة مرور خاطئة أو قد يكون الملف معدلًا.",
+        "decryptBeforeImport": "افك تشفير الملف قبل الاستيراد.",
+        "failedImport": "فشل استيراد النموذج."
+      },
+      "toasts": {
+        "fixHighlightedFields": "يرجى تصحيح الحقول المظللة.",
+        "fileDecrypted": "تم فك تشفير الملف. راجع خيارات الاستيراد."
+      }
+    },
+    "secureExport": {
+      "title": "تصدير النموذج (آمن)",
+      "description": "أنشئ ملف .ikiform مشفرًا لهذا النموذج. ستحتاج إلى نفس عبارة المرور لاستيراده.",
+      "untitledForm": "نموذج بدون عنوان",
+      "formLabel": "النموذج",
+      "unknownForm": "نموذج غير معروف",
+      "passphraseSetup": "إعداد عبارة المرور",
+      "passphraseLabel": "عبارة المرور",
+      "passphrasePlaceholder": "على الأقل {count} أحرف",
+      "passphraseHelper": "استخدم 12 حرفًا على الأقل للحصول على تشفير أقوى.",
+      "confirmPassphraseLabel": "تأكيد عبارة المرور",
+      "confirmPassphrasePlaceholder": "أعد إدخال عبارة المرور",
+      "confirmPassphraseHelper": "أعد إدخال نفس عبارة المرور بالضبط.",
+      "hidePassphrase": "إخفاء عبارة المرور",
+      "viewPassphrase": "عرض عبارة المرور",
+      "hideConfirmPassphrase": "إخفاء تأكيد عبارة المرور",
+      "viewConfirmPassphrase": "عرض تأكيد عبارة المرور",
+      "cancel": "إلغاء",
+      "exporting": "جارٍ التصدير...",
+      "exportEncryptedFile": "تصدير الملف المشفر",
+      "strength": {
+        "notSet": "غير محددة",
+        "weak": "ضعيفة",
+        "good": "جيدة",
+        "strong": "قوية"
+      },
+      "errors": {
+        "passphraseMinChars": "يجب أن تحتوي عبارة المرور على {count} أحرف على الأقل.",
+        "confirmPassphraseMinChars": "يجب أن يحتوي تأكيد عبارة المرور على {count} أحرف على الأقل.",
+        "passphrasesDoNotMatch": "عبارتا المرور غير متطابقتين.",
+        "noFormSelected": "لم يتم تحديد أي نموذج للتصدير.",
+        "enterValidPassphrase": "يرجى إدخال وتأكيد عبارة مرور صحيحة.",
+        "failedExport": "فشل تصدير النموذج."
+      },
+      "toasts": {
+        "exportCreated": "تم إنشاء تصدير النموذج المشفر."
+      }
+    }
+  },
+  "admin": {
+    "page": {
+      "aria": {
+        "dashboard": "لوحة تحكم المسؤول",
+        "announcements": "إدارة الإعلانات",
+        "expireTrials": "إدارة انتهاء صلاحية الفترات التجريبية",
+        "users": "إدارة المستخدمين"
+      },
+      "announcements": {
+        "title": "إرسال الإعلانات",
+        "signedInAs": "مسجل الدخول كـ {email}"
+      },
+      "expireTrials": {
+        "title": "إنهاء الفترات التجريبية",
+        "description": "تشغيل مهمة cron يدويًا لإنهاء الفترات التجريبية المجانية"
+      },
+      "users": {
+        "title": "جميع المستخدمين ({count})",
+        "description": "إدارة وعرض جميع المستخدمين المسجلين"
+      }
+    },
+    "announcementForm": {
+      "labels": {
+        "recipientEmails": "بريد المستلمين الإلكتروني",
+        "subject": "الموضوع",
+        "content": "المحتوى (يدعم Markdown)"
+      },
+      "placeholders": {
+        "recipientEmails": "one@example.com, two@example.com\\nأو\\nthree@example.com",
+        "subject": "موضوع الإعلان",
+        "content": "# العنوان\\n\\nالتفاصيل هنا..."
+      },
+      "help": {
+        "recipientFormat": "مفصولة بفاصلة أو سطر جديد."
+      },
+      "actions": {
+        "loading": "جارٍ التحميل...",
+        "prefillFromUsers": "ملء تلقائي من المستخدمين",
+        "sendAnnouncement": "إرسال الإعلان"
+      },
+      "toasts": {
+        "fetchEmailsFailed": "فشل جلب عناوين البريد الإلكتروني",
+        "loadedEmails": "تم تحميل {count} بريد إلكتروني",
+        "sending": "جارٍ إرسال الإعلانات...",
+        "sentCount": "تم إرسال {count} رسالة",
+        "failedWithError": "فشل: {error}",
+        "failedToSendFallback": "فشل الإرسال"
+      }
+    },
+    "expireTrialsControl": {
+      "title": "إنهاء الفترات التجريبية",
+      "description": "تشغيل مهمة cron يدويًا لإنهاء الفترات التجريبية المجانية الأقدم من 14 يومًا",
+      "unknownError": "خطأ غير معروف",
+      "actions": {
+        "running": "جارٍ التشغيل...",
+        "run": "تشغيل إنهاء الفترات التجريبية"
+      },
+      "result": {
+        "success": "نجاح",
+        "error": "خطأ",
+        "updatedUsersCount": "تم تحديث {count} مستخدم",
+        "updatedUsers": "المستخدمون المحدّثون:"
+      },
+      "toasts": {
+        "updatedSuccess": "تم تحديث {count} مستخدم بنجاح من تجريبي إلى مجاني",
+        "failedWithError": "فشل: {error}",
+        "errorWithMessage": "خطأ: {message}"
+      }
+    },
+    "usersTable": {
+      "search": {
+        "aria": "البحث عن المستخدمين",
+        "placeholder": "ابحث عن المستخدمين بالاسم أو البريد الإلكتروني أو اسم العميل أو معرّف Polar..."
+      },
+      "filters": {
+        "premiumAria": "تصفية حسب الحالة المميزة",
+        "trialAria": "تصفية حسب حالة الفترة التجريبية",
+        "allPremium": "جميع المميزين",
+        "premiumOnly": "المميزون فقط",
+        "freeOnly": "المجانيون فقط",
+        "allTrial": "جميع التجريبيين",
+        "trialOnly": "التجريبيون فقط",
+        "noTrial": "بدون تجربة",
+        "clearAria": "مسح جميع الفلاتر",
+        "clear": "مسح",
+        "filteredBy": "تمت التصفية حسب:"
+      },
+      "columns": {
+        "uid": "المعرّف",
+        "name": "الاسم",
+        "email": "البريد الإلكتروني",
+        "premium": "مميز",
+        "trial": "تجريبي",
+        "customerName": "اسم العميل",
+        "polarId": "معرّف Polar",
+        "created": "تاريخ الإنشاء",
+        "updated": "تاريخ التحديث"
+      },
+      "sort": {
+        "uidAria": "ترتيب حسب المعرّف",
+        "nameAria": "ترتيب حسب الاسم",
+        "emailAria": "ترتيب حسب البريد الإلكتروني",
+        "premiumAria": "ترتيب حسب الحالة المميزة",
+        "trialAria": "ترتيب حسب حالة الفترة التجريبية",
+        "createdAria": "ترتيب حسب تاريخ الإنشاء",
+        "updatedAria": "ترتيب حسب تاريخ التحديث"
+      },
+      "table": {
+        "aria": "جدول المستخدمين"
+      },
+      "badges": {
+        "premium": "مميز",
+        "free": "مجاني",
+        "freeTrial": "تجربة مجانية",
+        "noFreeTrial": "بدون تجربة مجانية"
+      },
+      "row": {
+        "viewDetailsFor": "عرض تفاصيل {name}",
+        "premiumStatusAria": "الحالة المميزة: {status}",
+        "trialStatusAria": "حالة الفترة التجريبية: {status}"
+      },
+      "showingRange": "عرض {start}-{end} من {total} مستخدم",
+      "showLabel": "عرض:",
+      "itemsPerPageAria": "عناصر في الصفحة",
+      "empty": {
+        "filtered": "لا يوجد مستخدمون يطابقون الفلاتر",
+        "default": "لم يتم العثور على مستخدمين"
+      },
+      "pagination": {
+        "pageOf": "الصفحة {current} من {total}",
+        "previousAria": "الانتقال إلى الصفحة السابقة",
+        "previous": "السابقة",
+        "goToPageAria": "الانتقال إلى الصفحة {page}",
+        "nextAria": "الانتقال إلى الصفحة التالية",
+        "next": "التالية"
+      }
+    },
+    "userControls": {
+      "title": "أدوات التحكم للمسؤول",
+      "description": "إدارة حالة المستخدم وصلاحياته",
+      "sections": {
+        "freeTrial": "التجربة المجانية",
+        "premiumStatus": "الحالة المميزة",
+        "dangerZone": "منطقة الخطر"
+      },
+      "actions": {
+        "removeTrial": "إزالة التجربة",
+        "assignTrial": "منح التجربة",
+        "removePremium": "إزالة المميز",
+        "assignPremium": "منح المميز",
+        "deleteUser": "حذف المستخدم"
+      },
+      "warning": {
+        "label": "تحذير:",
+        "message": "سيؤدي حذف المستخدم إلى إزالة جميع نماذجه وإرساله وبياناته بشكل دائم. لا يمكن التراجع عن هذا الإجراء."
+      },
+      "confirm": {
+        "title": "حذف المستخدم",
+        "confirm": "حذف المستخدم",
+        "cancel": "إلغاء",
+        "description": "هل أنت متأكد من حذف المستخدم {userName}؟ لا يمكن التراجع عن هذا الإجراء وسيتم حذف جميع نماذجه وبياناته."
+      }
+    },
+    "userProfile": {
+      "backToAdmin": "العودة إلى الإدارة",
+      "invalidUserId": {
+        "title": "معرّف مستخدم غير صالح",
+        "description": "لم يتم توفير معرّف مستخدم في عنوان URL."
+      },
+      "notFound": {
+        "title": "المستخدم غير موجود",
+        "description": "المستخدم الذي تبحث عنه غير موجود."
+      },
+      "userInformation": "معلومات المستخدم",
+      "labels": {
+        "uid": "المعرّف",
+        "premiumStatus": "الحالة المميزة",
+        "trialStatus": "حالة الفترة التجريبية",
+        "customerName": "اسم العميل",
+        "polarCustomerId": "معرّف عميل Polar",
+        "memberSince": "عضو منذ"
+      },
+      "badges": {
+        "premium": "مميز",
+        "free": "مجاني",
+        "freeTrial": "تجربة مجانية",
+        "noTrial": "بدون تجربة"
+      },
+      "trialStatus": {
+        "title": "حالة التجربة المجانية",
+        "expiredBadge": "انتهت التجربة",
+        "endedDaysAgo": "انتهت التجربة المجانية منذ {days} أيام",
+        "expiringSoonBadge": "تنتهي قريبًا",
+        "activeBadge": "تجربة نشطة",
+        "daysLeft": "{days, plural, one {# يوم متبقٍ في التجربة المجانية} other {# أيام متبقية في التجربة المجانية}}",
+        "startedOn": "بدأت التجربة في:"
+      },
+      "forms": {
+        "title": "النماذج ({count})",
+        "description": "جميع النماذج التي أنشأها هذا المستخدم",
+        "empty": "لم يُنشئ هذا المستخدم أي نماذج بعد.",
+        "table": {
+          "formTitle": "عنوان النموذج",
+          "description": "الوصف",
+          "status": "الحالة",
+          "submissions": "الإرسالات",
+          "created": "تاريخ الإنشاء",
+          "actions": "الإجراءات"
+        },
+        "status": {
+          "published": "منشور",
+          "draft": "مسودة"
+        },
+        "actions": {
+          "view": "عرض",
+          "details": "تفاصيل"
+        }
+      }
+    },
+    "formDetails": {
+      "pageAria": "صفحة تفاصيل النموذج",
+      "backToAdmin": "العودة إلى الإدارة",
+      "backToAdminAria": "العودة إلى لوحة تحكم المسؤول",
+      "noDescription": "لم يتم توفير وصف",
+      "viewForm": "عرض النموذج",
+      "viewFormAria": "عرض النموذج في علامة تبويب جديدة",
+      "invalidFormId": {
+        "aria": "خطأ معرّف نموذج غير صالح",
+        "title": "معرّف نموذج غير صالح",
+        "description": "لم يتم توفير معرّف نموذج في عنوان URL."
+      },
+      "notFound": {
+        "aria": "خطأ النموذج غير موجود",
+        "title": "النموذج غير موجود",
+        "description": "النموذج الذي تبحث عنه غير موجود."
+      },
+      "badges": {
+        "published": "منشور",
+        "draft": "مسودة",
+        "enabled": "مفعّل",
+        "disabled": "معطّل"
+      },
+      "statistics": {
+        "aria": "إحصاءات النموذج",
+        "status": "الحالة",
+        "formStatusAria": "حالة النموذج: {status}",
+        "submissions": "الإرسالات",
+        "submissionsCountAria": "{count} إرسالة",
+        "created": "تاريخ الإنشاء",
+        "createdOnAria": "تم الإنشاء في {date}",
+        "apiStatus": "حالة API",
+        "apiStatusAria": "حالة API: {status}"
+      },
+      "details": {
+        "title": "تفاصيل النموذج",
+        "formId": "معرّف النموذج",
+        "formIdAria": "معرّف النموذج: {id}",
+        "owner": "المالك",
+        "viewOwnerAria": "عرض تفاصيل المالك لـ {name}",
+        "unknown": "غير معروف",
+        "slug": "المعرّف النصي",
+        "slugAria": "معرّف النموذج النصي: {slug}",
+        "notSet": "غير محدد",
+        "lastUpdated": "آخر تحديث",
+        "lastUpdatedAria": "آخر تحديث: {date}",
+        "apiKey": "مفتاح API",
+        "apiKeyAria": "مفتاح API: {key}"
+      },
+      "schema": {
+        "title": "مخطط النموذج",
+        "aria": "JSON مخطط النموذج"
+      },
+      "submissions": {
+        "title": "إرسالات النموذج ({count})",
+        "description": "جميع الردود المرسلة إلى هذا النموذج",
+        "emptyAria": "لا توجد إرسالات للنموذج",
+        "empty": "لا توجد إرسالات بعد.",
+        "listAria": "قائمة إرسالات النموذج",
+        "itemAria": "إرسالة {number}",
+        "itemLabel": "إرسالة #{number}",
+        "submittedOnAria": "تم الإرسال في {date}",
+        "ipAria": "عنوان IP: {ip}",
+        "ipLabel": "IP: {ip}",
+        "fieldAria": "الحقل: {key}",
+        "valueAria": "قيمة {key}: {value}"
+      }
+    }
+  }
+}

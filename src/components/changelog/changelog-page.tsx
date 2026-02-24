@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui";
 import { Separator } from "@/components/ui/separator";
 import { getChangelogEntries } from "@/lib/utils/changelog";
 
-const CHANGELOG_DATE_LOCALE: Record<AppLocale, string> = {
+const CHANGELOG_DATE_LOCALE: Partial<Record<AppLocale, string>> = {
 	en: "en-US",
 	es: "es-ES",
 };
@@ -15,7 +15,7 @@ function formatChangelogDate(dateString: string, locale: AppLocale): string {
 	try {
 		const date = new Date(`${dateString}T00:00:00Z`);
 		if (!isNaN(date.getTime())) {
-			return new Intl.DateTimeFormat(CHANGELOG_DATE_LOCALE[locale], {
+			return new Intl.DateTimeFormat(CHANGELOG_DATE_LOCALE[locale] ?? "en-US", {
 				year: "numeric",
 				month: "long",
 				day: "numeric",
@@ -109,12 +109,12 @@ const markdownComponents = {
 	),
 };
 
-const CHANGELOG_LABEL: Record<AppLocale, string> = {
+const CHANGELOG_LABEL: Partial<Record<AppLocale, string>> = {
 	en: "CHANGELOG",
 	es: "NOVEDADES",
 };
 
-const UNRELEASED_LABEL: Record<AppLocale, string> = {
+const UNRELEASED_LABEL: Partial<Record<AppLocale, string>> = {
 	en: "Unreleased",
 	es: "Sin publicar",
 };
@@ -137,14 +137,16 @@ export async function ChangelogPage({ locale }: { locale: AppLocale }) {
 									</time>
 								</Badge>
 							) : (
-								<Badge variant="outline">{UNRELEASED_LABEL[locale]}</Badge>
+								<Badge variant="outline">
+									{UNRELEASED_LABEL[locale] ?? UNRELEASED_LABEL.en}
+								</Badge>
 							)}
 						</div>
 
 						<div className="flex min-w-0 flex-1 flex-col gap-6">
 							{index === 0 && (
 								<h1 className="font-semibold text-muted-foreground text-sm tracking-tight">
-									{CHANGELOG_LABEL[locale]}
+									{CHANGELOG_LABEL[locale] ?? CHANGELOG_LABEL.en}
 								</h1>
 							)}
 							<div className="flex flex-col gap-4">
@@ -156,7 +158,9 @@ export async function ChangelogPage({ locale }: { locale: AppLocale }) {
 											</time>
 										</Badge>
 									) : (
-										<Badge variant="outline">{UNRELEASED_LABEL[locale]}</Badge>
+										<Badge variant="outline">
+											{UNRELEASED_LABEL[locale] ?? UNRELEASED_LABEL.en}
+										</Badge>
 									)}
 								</div>
 								<h2 className="font-semibold text-2xl tracking-tight">

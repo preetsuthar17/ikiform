@@ -1,0 +1,517 @@
+{
+  "common": {
+    "dashboard": "Dashboard",
+    "feedback": "Feedback",
+    "logOut": "Esci",
+    "loading": "Caricamento",
+    "loadingProfile": "Caricamento profilo",
+    "loadingFormsSidebar": "Caricamento barra laterale moduli",
+    "loadingFormsManagement": "Caricamento gestione moduli"
+  },
+  "profile": {
+    "userProfileInformation": "Informazioni profilo utente",
+    "userNameAria": "Nome utente: {name}",
+    "premiumUserBadge": "Badge utente premium",
+    "userEmailAria": "Email utente: {email}"
+  },
+  "formsManagement": {
+    "aria": {
+      "management": "Gestione moduli"
+    },
+    "header": {
+      "title": "I tuoi moduli",
+      "subtitle": "Crea, gestisci e analizza i tuoi moduli con facilità",
+      "createNewForm": "Crea nuovo modulo",
+      "createDialogTitle": "Crea un nuovo modulo",
+      "createDialogDescription": "Scegli come vuoi iniziare. Puoi generare con l'AI, creare manualmente o importare un file crittografato."
+    },
+    "createOptions": {
+      "aiBadge": "Più consigliato",
+      "aiCta": "Inizia con l'AI",
+      "aiTitle": "Usa Kiko AI",
+      "aiDescription": "Descrivi il tuo modulo e lascia che Kiko AI generi una prima bozza completa con campi, logica e struttura.",
+      "manualCta": "Crea manualmente",
+      "manualTitle": "Crea manualmente",
+      "manualDescription": "Inizia da un modulo vuoto e configura i campi manualmente.",
+      "importCta": "Importa file",
+      "importTitle": "Importa da file",
+      "importDescription": "Importa un file .ikiform protetto da passphrase come nuova bozza di modulo."
+    },
+    "emptyState": {
+      "aria": "Stato vuoto - nessun modulo creato ancora",
+      "title": "Nessun modulo ancora",
+      "description": "Inizia creando il tuo primo modulo. È veloce e facile!",
+      "createFirstForm": "Crea il tuo primo modulo",
+      "dialog": {
+        "title": "Come vuoi creare il tuo modulo?",
+        "description": "Scegli di creare il modulo manualmente o lascia che Kiko AI lo generi per te.",
+        "createWithAI": "Usa Kiko AI",
+        "createManually": "Crea manualmente"
+      }
+    },
+    "search": {
+      "aria": "Ricerca e filtri moduli",
+      "searchAria": "Cerca moduli",
+      "placeholder": "Cerca moduli per titolo, descrizione o ID...",
+      "openFilterMenu": "Apri menu filtri",
+      "activeFiltersAria": "{count} filtri attivi",
+      "statusLabel": "Stato",
+      "filterByAll": "Filtra per tutti gli stati",
+      "all": "Tutti",
+      "filterByPublished": "Filtra per moduli pubblicati",
+      "published": "Pubblicato",
+      "filterByDraft": "Filtra per bozze",
+      "draft": "Bozza",
+      "sortByLabel": "Ordina per",
+      "sortByLastUpdated": "Ordina per ultimo aggiornamento",
+      "lastUpdated": "Ultimo aggiornamento",
+      "sortByDateCreated": "Ordina per data di creazione",
+      "dateCreated": "Data di creazione",
+      "sortByTitle": "Ordina per titolo in ordine alfabetico",
+      "titleAz": "Titolo (A-Z)",
+      "clearAllFilters": "Cancella tutti i filtri",
+      "activeFiltersGroup": "Filtri attivi",
+      "badgeSearch": "Ricerca: \"{query}\"",
+      "clearSearch": "Cancella ricerca",
+      "badgeStatus": "Stato: {status}",
+      "clearStatus": "Cancella filtro stato",
+      "badgeSort": "Ordinamento: {sort}",
+      "sortTitleShort": "Titolo",
+      "sortCreatedShort": "Creato",
+      "resetSort": "Reimposta l'ordinamento all'ultimo aggiornamento"
+    },
+    "list": {
+      "untitledForm": "Modulo senza titolo",
+      "viewAnalyticsFor": "Visualizza analisi per {title}",
+      "formStatusAria": "Stato modulo: {status}",
+      "published": "Pubblicato",
+      "draft": "Bozza",
+      "publicTitle": "Pubblico: \"{title}\"",
+      "updated": "Aggiornato {date}",
+      "actionsFor": "Azioni per {title}",
+      "formActions": "Azioni modulo",
+      "editForm": "Modifica modulo",
+      "shareForm": "Condividi modulo",
+      "duplicate": "Duplica",
+      "viewForm": "Visualizza modulo",
+      "viewAnalytics": "Visualizza analisi",
+      "embed": "Incorpora",
+      "export": "Esporta",
+      "deleteForm": "Elimina modulo",
+      "formsListAria": "Elenco moduli"
+    },
+    "stats": {
+      "totalForms": "Totale moduli",
+      "published": "Pubblicati",
+      "drafts": "Bozze",
+      "loadingAria": "Caricamento statistiche moduli",
+      "aria": "Statistiche moduli",
+      "sidebarAria": "Barra laterale statistiche moduli"
+    },
+    "emptySearch": {
+      "noMatch": "Nessun modulo corrisponde ai criteri di ricerca.",
+      "clearFilters": "Cancella filtri",
+      "clearAria": "Cancella tutti i filtri di ricerca"
+    },
+    "deleteModal": {
+      "cancel": "Annulla",
+      "confirm": "Elimina modulo",
+      "title": "Elimina modulo",
+      "description": "Sei sicuro di voler eliminare \"{formTitle}\"? Questa azione non può essere annullata e tutti i dati del modulo andranno persi definitivamente."
+    },
+    "toasts": {
+      "failedLoadForms": "Impossibile caricare i moduli",
+      "failedShareForm": "Impossibile condividere il modulo",
+      "formDuplicated": "Modulo duplicato",
+      "failedDuplicateForm": "Impossibile duplicare il modulo",
+      "formImportedSuccess": "Modulo importato con successo.",
+      "failedImportForm": "Impossibile importare il modulo.",
+      "formDeletedSuccess": "Modulo eliminato con successo",
+      "failedDeleteForm": "Impossibile eliminare il modulo"
+    },
+    "shareModal": {
+      "title": "Condividi modulo",
+      "publishedDescription": "Condividi il tuo modulo con altri tramite il link o il codice QR qui sotto",
+      "unpublishedDescription": "Pubblica il tuo modulo per renderlo condivisibile con altri",
+      "shareLink": "Link di condivisione",
+      "copied": "Copiato",
+      "copyLink": "Copia link",
+      "hide": "Nascondi",
+      "show": "Mostra",
+      "qrCode": "Codice QR",
+      "qrCodeForForm": "Codice QR per il modulo",
+      "generating": "Generazione in corso...",
+      "scanForMobile": "Scansiona per un accesso mobile facile",
+      "downloading": "Download in corso...",
+      "downloadQr": "Scarica QR",
+      "needsPublish": "Il tuo modulo deve essere pubblicato prima di poter essere condiviso pubblicamente.",
+      "publishing": "Pubblicazione in corso...",
+      "publishForm": "Pubblica modulo",
+      "toasts": {
+        "failedGenerateQr": "Impossibile generare il codice QR",
+        "linkCopied": "Link copiato negli appunti!",
+        "failedCopyLink": "Impossibile copiare il link. Si prega di copiare manualmente.",
+        "qrDownloaded": "Codice QR scaricato con successo!",
+        "failedDownloadQr": "Impossibile scaricare il codice QR"
+      }
+    },
+    "secureImport": {
+      "title": "Importa modulo da file crittografato",
+      "description": "Decripta un file .ikiform e crea una nuova bozza di modulo.",
+      "encryptedFileLabel": "File crittografato",
+      "encryptedFileHelp": "Carica un file di esportazione crittografato .ikiform.",
+      "passphraseLabel": "Passphrase",
+      "passphrasePlaceholder": "Inserisci la passphrase usata durante l'esportazione",
+      "passphraseHelp": "Sono richiesti almeno {count} caratteri.",
+      "decrypting": "Decrittografia in corso...",
+      "decryptFile": "Decripta file",
+      "importedForm": "Modulo importato",
+      "decryptToLoadSettings": "Decripta un file per caricare le impostazioni di importazione.",
+      "preserveApiSettings": "Conserva impostazioni API (chiave API e stato abilitato)",
+      "preservePassword": "Conserva password di protezione",
+      "preserveNotificationEmail": "Conserva email destinatario notifiche",
+      "cancel": "Annulla",
+      "importing": "Importazione in corso...",
+      "importAsNewForm": "Importa come nuovo modulo",
+      "decryptToPreview": "Decripta un file per visualizzare l'anteprima del modulo importato.",
+      "errors": {
+        "chooseFile": "Si prega di scegliere un file .ikiform crittografato.",
+        "passphraseMinChars": "La passphrase deve contenere almeno {count} caratteri.",
+        "failedDecrypt": "Impossibile decrittografare il file di importazione.",
+        "wrongPassphrase": "Passphrase errata o il file potrebbe essere stato alterato.",
+        "decryptBeforeImport": "Decripta un file prima di importarlo.",
+        "failedImport": "Impossibile importare il modulo."
+      },
+      "toasts": {
+        "fixHighlightedFields": "Si prega di correggere i campi evidenziati.",
+        "fileDecrypted": "File decrittografato. Rivedi le opzioni di importazione."
+      }
+    },
+    "secureExport": {
+      "title": "Esporta modulo (sicuro)",
+      "description": "Crea un file .ikiform crittografato per questo modulo. Avrai bisogno della stessa passphrase per importarlo.",
+      "untitledForm": "Modulo senza titolo",
+      "formLabel": "Modulo",
+      "unknownForm": "Modulo sconosciuto",
+      "passphraseSetup": "Impostazione passphrase",
+      "passphraseLabel": "Passphrase",
+      "passphrasePlaceholder": "Almeno {count} caratteri",
+      "passphraseHelper": "Usa almeno 12 caratteri per una crittografia più robusta.",
+      "confirmPassphraseLabel": "Conferma passphrase",
+      "confirmPassphrasePlaceholder": "Reinserisci la passphrase",
+      "confirmPassphraseHelper": "Reinserisci esattamente la stessa passphrase.",
+      "hidePassphrase": "Nascondi passphrase",
+      "viewPassphrase": "Visualizza passphrase",
+      "hideConfirmPassphrase": "Nascondi conferma passphrase",
+      "viewConfirmPassphrase": "Visualizza conferma passphrase",
+      "cancel": "Annulla",
+      "exporting": "Esportazione in corso...",
+      "exportEncryptedFile": "Esporta file crittografato",
+      "strength": {
+        "notSet": "Non impostata",
+        "weak": "Debole",
+        "good": "Buona",
+        "strong": "Forte"
+      },
+      "errors": {
+        "passphraseMinChars": "La passphrase deve contenere almeno {count} caratteri.",
+        "confirmPassphraseMinChars": "La conferma della passphrase deve contenere almeno {count} caratteri.",
+        "passphrasesDoNotMatch": "Le passphrase non corrispondono.",
+        "noFormSelected": "Nessun modulo selezionato per l'esportazione.",
+        "enterValidPassphrase": "Si prega di inserire e confermare una passphrase valida.",
+        "failedExport": "Impossibile esportare il modulo."
+      },
+      "toasts": {
+        "exportCreated": "Esportazione modulo crittografato creata."
+      }
+    }
+  },
+  "admin": {
+    "page": {
+      "aria": {
+        "dashboard": "Dashboard amministratore",
+        "announcements": "Gestione annunci",
+        "expireTrials": "Gestione scadenza prove",
+        "users": "Gestione utenti"
+      },
+      "announcements": {
+        "title": "Invia annunci",
+        "signedInAs": "Accesso come {email}"
+      },
+      "expireTrials": {
+        "title": "Scadenza prove",
+        "description": "Esegui manualmente il cron job per far scadere le prove gratuite"
+      },
+      "users": {
+        "title": "Tutti gli utenti ({count})",
+        "description": "Gestisci e visualizza tutti gli utenti registrati"
+      }
+    },
+    "announcementForm": {
+      "labels": {
+        "recipientEmails": "Email destinatari",
+        "subject": "Oggetto",
+        "content": "Contenuto (supporto Markdown)"
+      },
+      "placeholders": {
+        "recipientEmails": "uno@esempio.com, due@esempio.com\\no\\ntre@esempio.com",
+        "subject": "Oggetto dell'annuncio",
+        "content": "# Titolo\\n\\nDettagli qui..."
+      },
+      "help": {
+        "recipientFormat": "Separati da virgola o a capo."
+      },
+      "actions": {
+        "loading": "Caricamento...",
+        "prefillFromUsers": "Precompila dagli utenti",
+        "sendAnnouncement": "Invia annuncio"
+      },
+      "toasts": {
+        "fetchEmailsFailed": "Impossibile recuperare le email",
+        "loadedEmails": "{count} email caricate",
+        "sending": "Invio annunci in corso...",
+        "sentCount": "{count} email inviate",
+        "failedWithError": "Errore: {error}",
+        "failedToSendFallback": "Invio non riuscito"
+      }
+    },
+    "expireTrialsControl": {
+      "title": "Scadenza prove",
+      "description": "Esegui manualmente il cron job per far scadere le prove gratuite più vecchie di 14 giorni",
+      "unknownError": "Errore sconosciuto",
+      "actions": {
+        "running": "In esecuzione...",
+        "run": "Esegui scadenza prove"
+      },
+      "result": {
+        "success": "Successo",
+        "error": "Errore",
+        "updatedUsersCount": "{count} utente/i aggiornato/i",
+        "updatedUsers": "Utenti aggiornati:"
+      },
+      "toasts": {
+        "updatedSuccess": "{count} utente/i aggiornato/i con successo da prova a gratuito",
+        "failedWithError": "Errore: {error}",
+        "errorWithMessage": "Errore: {message}"
+      }
+    },
+    "usersTable": {
+      "search": {
+        "aria": "Cerca utenti",
+        "placeholder": "Cerca utenti per nome, email, nome cliente o ID Polar..."
+      },
+      "filters": {
+        "premiumAria": "Filtra per stato premium",
+        "trialAria": "Filtra per stato prova",
+        "allPremium": "Tutti i premium",
+        "premiumOnly": "Solo premium",
+        "freeOnly": "Solo gratuiti",
+        "allTrial": "Tutte le prove",
+        "trialOnly": "Solo in prova",
+        "noTrial": "Nessuna prova",
+        "clearAria": "Cancella tutti i filtri",
+        "clear": "Cancella",
+        "filteredBy": "Filtrato per:"
+      },
+      "columns": {
+        "uid": "UID",
+        "name": "Nome",
+        "email": "Email",
+        "premium": "Premium",
+        "trial": "Prova",
+        "customerName": "Nome cliente",
+        "polarId": "ID Polar",
+        "created": "Creato",
+        "updated": "Aggiornato"
+      },
+      "sort": {
+        "uidAria": "Ordina per UID",
+        "nameAria": "Ordina per nome",
+        "emailAria": "Ordina per email",
+        "premiumAria": "Ordina per stato premium",
+        "trialAria": "Ordina per stato prova",
+        "createdAria": "Ordina per data di creazione",
+        "updatedAria": "Ordina per data di aggiornamento"
+      },
+      "table": {
+        "aria": "Tabella utenti"
+      },
+      "badges": {
+        "premium": "Premium",
+        "free": "Gratuito",
+        "freeTrial": "Prova gratuita",
+        "noFreeTrial": "Nessuna prova gratuita"
+      },
+      "row": {
+        "viewDetailsFor": "Visualizza dettagli di {name}",
+        "premiumStatusAria": "Stato premium: {status}",
+        "trialStatusAria": "Stato prova: {status}"
+      },
+      "showingRange": "Visualizzazione {start}-{end} di {total} utenti",
+      "showLabel": "Mostra:",
+      "itemsPerPageAria": "Elementi per pagina",
+      "empty": {
+        "filtered": "Nessun utente corrisponde ai tuoi filtri",
+        "default": "Nessun utente trovato"
+      },
+      "pagination": {
+        "pageOf": "Pagina {current} di {total}",
+        "previousAria": "Vai alla pagina precedente",
+        "previous": "Precedente",
+        "goToPageAria": "Vai alla pagina {page}",
+        "nextAria": "Vai alla pagina successiva",
+        "next": "Successiva"
+      }
+    },
+    "userControls": {
+      "title": "Controlli amministratore",
+      "description": "Gestisci lo stato e i permessi degli utenti",
+      "sections": {
+        "freeTrial": "Prova gratuita",
+        "premiumStatus": "Stato premium",
+        "dangerZone": "Zona pericolosa"
+      },
+      "actions": {
+        "removeTrial": "Rimuovi prova",
+        "assignTrial": "Assegna prova",
+        "removePremium": "Rimuovi premium",
+        "assignPremium": "Assegna premium",
+        "deleteUser": "Elimina utente"
+      },
+      "warning": {
+        "label": "Attenzione:",
+        "message": "L'eliminazione di un utente rimuoverà permanentemente tutti i suoi moduli, invii e dati. Questa azione non può essere annullata."
+      },
+      "confirm": {
+        "title": "Elimina utente",
+        "confirm": "Elimina utente",
+        "cancel": "Annulla",
+        "description": "Sei sicuro di voler eliminare l'utente {userName}? Questa azione non può essere annullata e cancellerà tutti i suoi moduli e dati."
+      }
+    },
+    "userProfile": {
+      "backToAdmin": "Torna all'amministrazione",
+      "invalidUserId": {
+        "title": "ID utente non valido",
+        "description": "Nessun ID utente fornito nell'URL."
+      },
+      "notFound": {
+        "title": "Utente non trovato",
+        "description": "L'utente che stai cercando non esiste."
+      },
+      "userInformation": "Informazioni utente",
+      "labels": {
+        "uid": "UID",
+        "premiumStatus": "Stato premium",
+        "trialStatus": "Stato prova",
+        "customerName": "Nome cliente",
+        "polarCustomerId": "ID cliente Polar",
+        "memberSince": "Membro dal"
+      },
+      "badges": {
+        "premium": "Premium",
+        "free": "Gratuito",
+        "freeTrial": "Prova gratuita",
+        "noTrial": "Nessuna prova"
+      },
+      "trialStatus": {
+        "title": "Stato prova gratuita",
+        "expiredBadge": "Prova scaduta",
+        "endedDaysAgo": "La prova gratuita è terminata {days} giorni fa",
+        "expiringSoonBadge": "In scadenza",
+        "activeBadge": "Prova attiva",
+        "daysLeft": "{days, plural, one {# giorno rimanente nella prova gratuita} other {# giorni rimanenti nella prova gratuita}}",
+        "startedOn": "Prova iniziata:"
+      },
+      "forms": {
+        "title": "Moduli ({count})",
+        "description": "Tutti i moduli creati da questo utente",
+        "empty": "Questo utente non ha ancora creato alcun modulo.",
+        "table": {
+          "formTitle": "Titolo modulo",
+          "description": "Descrizione",
+          "status": "Stato",
+          "submissions": "Invii",
+          "created": "Creato",
+          "actions": "Azioni"
+        },
+        "status": {
+          "published": "Pubblicato",
+          "draft": "Bozza"
+        },
+        "actions": {
+          "view": "Visualizza",
+          "details": "Dettagli"
+        }
+      }
+    },
+    "formDetails": {
+      "pageAria": "Pagina dettagli modulo",
+      "backToAdmin": "Torna all'amministrazione",
+      "backToAdminAria": "Torna alla dashboard amministratore",
+      "noDescription": "Nessuna descrizione fornita",
+      "viewForm": "Visualizza modulo",
+      "viewFormAria": "Visualizza modulo in una nuova scheda",
+      "invalidFormId": {
+        "aria": "Errore ID modulo non valido",
+        "title": "ID modulo non valido",
+        "description": "Nessun ID modulo fornito nell'URL."
+      },
+      "notFound": {
+        "aria": "Errore modulo non trovato",
+        "title": "Modulo non trovato",
+        "description": "Il modulo che stai cercando non esiste."
+      },
+      "badges": {
+        "published": "Pubblicato",
+        "draft": "Bozza",
+        "enabled": "Abilitato",
+        "disabled": "Disabilitato"
+      },
+      "statistics": {
+        "aria": "Statistiche modulo",
+        "status": "Stato",
+        "formStatusAria": "Stato modulo: {status}",
+        "submissions": "Invii",
+        "submissionsCountAria": "{count} invii",
+        "created": "Creato",
+        "createdOnAria": "Creato il {date}",
+        "apiStatus": "Stato API",
+        "apiStatusAria": "Stato API: {status}"
+      },
+      "details": {
+        "title": "Dettagli modulo",
+        "formId": "ID modulo",
+        "formIdAria": "ID modulo: {id}",
+        "owner": "Proprietario",
+        "viewOwnerAria": "Visualizza dettagli proprietario per {name}",
+        "unknown": "Sconosciuto",
+        "slug": "Slug",
+        "slugAria": "Slug modulo: {slug}",
+        "notSet": "Non impostato",
+        "lastUpdated": "Ultimo aggiornamento",
+        "lastUpdatedAria": "Ultimo aggiornamento: {date}",
+        "apiKey": "Chiave API",
+        "apiKeyAria": "Chiave API: {key}"
+      },
+      "schema": {
+        "title": "Schema modulo",
+        "aria": "JSON schema modulo"
+      },
+      "submissions": {
+        "title": "Invii modulo ({count})",
+        "description": "Tutte le risposte inviate a questo modulo",
+        "emptyAria": "Nessun invio modulo",
+        "empty": "Nessun invio ancora.",
+        "listAria": "Elenco invii modulo",
+        "itemAria": "Invio {number}",
+        "itemLabel": "Invio #{number}",
+        "submittedOnAria": "Inviato il {date}",
+        "ipAria": "Indirizzo IP: {ip}",
+        "ipLabel": "IP: {ip}",
+        "fieldAria": "Campo: {key}",
+        "valueAria": "Valore per {key}: {value}"
+      }
+    }
+  }
+}

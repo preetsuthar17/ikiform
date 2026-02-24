@@ -6,6 +6,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import React from "react";
 import { FaDiscord, FaGithub, FaXTwitter } from "react-icons/fa6";
+import { routing } from "@/i18n/routing";
 import {
 	getLocaleFromPathname,
 	stripLocalePrefix,
@@ -48,6 +49,24 @@ const BADGES = [
 			height: 32,
 		},
 	},
+] as const;
+
+const LANGUAGE_SELECTOR_LABEL = "Language";
+const LANGUAGE_OPTIONS = [
+	{ value: "en", label: "English" },
+	{ value: "es", label: "Spanish" },
+	{ value: "fr", label: "French" },
+	{ value: "de", label: "German" },
+	{ value: "pt", label: "Portuguese" },
+	{ value: "hi", label: "Hindi" },
+	{ value: "ja", label: "Japanese" },
+	{ value: "zh", label: "Chinese" },
+	{ value: "it", label: "Italian" },
+	{ value: "ar", label: "Arabic" },
+	{ value: "ko", label: "Korean" },
+	{ value: "ru", label: "Russian" },
+	{ value: "tr", label: "Turkish" },
+	{ value: "nl", label: "Dutch" },
 ] as const;
 
 const FooterLogo = React.memo(function FooterLogo() {
@@ -307,7 +326,6 @@ const ProductsLinks = React.memo(function ProductsLinks() {
 });
 
 const LanguageSwitcher = React.memo(function LanguageSwitcher() {
-	const tNav = useTranslations("nav");
 	const pathname = usePathname();
 	const router = useRouter();
 	const searchParams = useSearchParams();
@@ -316,10 +334,12 @@ const LanguageSwitcher = React.memo(function LanguageSwitcher() {
 
 	return (
 		<div className="flex items-center gap-2">
-			<span className="text-muted-foreground text-sm">{tNav("language")}</span>
+			<span className="text-muted-foreground text-sm">
+				{LANGUAGE_SELECTOR_LABEL}
+			</span>
 			<Select
 				onValueChange={(value) => {
-					if (value !== "en" && value !== "es") return;
+					if (!routing.locales.includes(value as typeof locale)) return;
 					if (value === locale) return;
 
 					const localizedPath = withLocaleHref(normalizedPathname, value);
@@ -331,15 +351,18 @@ const LanguageSwitcher = React.memo(function LanguageSwitcher() {
 				value={locale}
 			>
 				<SelectTrigger
-					aria-label={tNav("language")}
+					aria-label={LANGUAGE_SELECTOR_LABEL}
 					className="h-8 min-w-[130px]"
 					size="sm"
 				>
 					<SelectValue />
 				</SelectTrigger>
 				<SelectContent>
-					<SelectItem value="en">{tNav("english")}</SelectItem>
-					<SelectItem value="es">{tNav("spanish")}</SelectItem>
+					{LANGUAGE_OPTIONS.map((option) => (
+						<SelectItem key={option.value} value={option.value}>
+							{option.label}
+						</SelectItem>
+					))}
 				</SelectContent>
 			</Select>
 		</div>

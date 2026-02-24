@@ -1,0 +1,2211 @@
+{
+  "common": {
+    "na": "該当なし",
+    "premium": {
+      "title": "プレミアムが必要です",
+      "viewPricing": "価格を見る",
+      "aiBuilderDescription": "AIフォームビルダーを使用するにはプレミアムサブスクリプションが必要です。すべての機能をアンロックするにはアップグレードしてください。",
+      "formBuilderDescription": "フォームビルダーを使用するにはプレミアムサブスクリプションが必要です。すべての機能をアンロックするにはアップグレードしてください。"
+    }
+  },
+  "formBuilder": {
+    "header": {
+      "title": "フォームビルダー",
+      "goToDashboard": "ダッシュボードに行く",
+      "fieldCount": "{count} フィールド",
+      "fieldCount_plural": "{count} フィールド",
+      "saving": "保存中",
+      "moreActions": "その他の操作",
+      "multiStepForm": "マルチステップフォーム",
+      "toggleMultiStepMode": "マルチステップモードを切り替える",
+      "viewJson": "JSONを表示",
+      "analytics": "分析",
+      "share": "共有",
+      "useKiko": "Kikoを使用する",
+      "settings": "設定",
+      "publish": "公開",
+      "published": "公開済み",
+      "publishing": "公開中...",
+      "unpublishing": "公開解除中...",
+      "publishForm": "フォームを公開",
+      "unpublishForm": "フォームを公開解除",
+      "save": "保存",
+      "saveForm": "フォームを保存",
+      "actionsAria": "フォームビルダーの操作"
+    },
+    "modals": {
+      "formSettings": "フォーム設定",
+      "internalTitle": "内部タイトル",
+      "internalTitlePlaceholder": "内部で参照するためのタイトルを入力してください...",
+      "internalTitleDescription": "このタイトルはダッシュボードとフォームビルダーでのみ表示されます",
+      "publicTitle": "公開タイトル",
+      "publicTitlePlaceholder": "ユーザーに表示するタイトルを入力してください...",
+      "publicTitleDescription": "このタイトルは実際のフォームでユーザーに表示されます。空の場合は内部タイトルを使用します。",
+      "description": "説明",
+      "descriptionPlaceholder": "フォームの説明を入力してください",
+      "submitButtonText": "送信ボタン テキスト",
+      "submitButtonTextPlaceholder": "送信ボタン テキスト",
+      "submit": "送信",
+      "successMessage": "成功メッセージ",
+      "successMessagePlaceholder": "正常に送信された後に表示されるメッセージ",
+      "redirectUrlOptional": "リダイレクトURL (オプション)",
+      "redirectUrlPlaceholder": "https://example.com/thank-you",
+      "cancel": "キャンセル",
+      "saveSettings": "設定を保存"
+    },
+    "page": {
+      "formFields": "フォームフィールド",
+      "authRequired": "認証が必要です",
+      "authRequiredDescription": "フォームビルダーを使用するにはログインしてください。",
+      "goToLogin": "ログインに行く",
+      "stepDefaultTitle": "{index} ステップ",
+      "stepDefaultDescription": "フォームの最初のステップ",
+      "loadingCustomization": "カスタマイゼーションを読み込み中..."
+    },
+    "blockManager": {
+      "header": {
+        "title": "フォーム構造",
+        "stepsCount": "{count, plural, one {# ステップ} other {# ステップ}}",
+        "description": "フォームを論理的なセクションに整理する",
+        "addStepAria": "フォームに新しいステップを追加する",
+        "addStep": "ステップを追加"
+      },
+      "item": {
+        "dragHandleAria": "{title} ステップを並べ替える",
+        "dragToReorder": "並べ替える"
+      },
+      "headerActions": {
+        "stepBadge": "{index} ステップ",
+        "editStepAria": "{title} ステップを編集",
+        "deleteStepAria": "{title} ステップを削除",
+        "editStep": "ステップを編集",
+        "deleteStep": "ステップを削除",
+        "collapseStep": "ステップを折りたたむ",
+        "expandStep": "ステップを展開"
+      },
+      "editForm": {
+        "stepTitlePlaceholder": "ステップタイトル",
+        "stepDescriptionPlaceholder": "ステップ説明 (オプション)",
+        "save": "保存",
+        "cancel": "キャンセル"
+      },
+      "fieldsList": {
+        "empty": "まだフィールドがありません。右側のパレットからフィールドを追加してください。"
+      }
+    },
+    "multiStepNavigation": {
+      "deleteStep": "ステップを削除",
+      "addStep": "ステップを追加",
+      "deleteDialogTitle": "ステップを削除",
+      "deleteDialogDescription": "このステップを削除してもよろしいですか？この操作は元に戻すことができません。",
+      "cancel": "キャンセル"
+    },
+    "formFields": {
+      "addFieldToFormAria": "フォームにフィールドを追加",
+      "addField": "フィールドを追加",
+      "addSpecificFieldAria": "{label} フィールドを追加",
+      "formFields": "フォームフィールド",
+      "noFieldsInStep": "このステップにフィールドはありません",
+      "noFieldsYet": "まだフィールドが追加されていません",
+      "addFieldsToStep": "このステップにパレットからフィールドを追加してください",
+      "addFieldsFromLeftPanel": "フォームを作成するには、左のパネルからフィールドを追加してください",
+      "fieldsCount": "{count, plural, one {# 項目} other {# 項目}}",
+      "fieldAria": "{type} フィールド",
+      "deleteFieldAria": "{type} フィールドを削除",
+      "deleteField": "フィールドを削除"
+    },
+    "jsonViewModal": {
+      "title": "フォームスキーマJSON",
+      "description": "現在のフォームスキーマの読み取り専用ビュー。コピーボタンを使用してJSONをコピーしてください。",
+      "copySuccess": "JSONをクリップボードにコピーしました！",
+      "copyError": "JSONをコピーできませんでした",
+      "copied": "コピーされました",
+      "copyJson": "JSONをコピー"
+    },
+    "settingsMobile": {
+      "sectionsAria": "設定セクション",
+      "goToSectionAria": "{section} 設定に移動",
+      "backToListAria": "設定リストに戻る",
+      "settings": "設定"
+    },
+    "creation": {
+      "title": "新しいフォームを作成",
+      "cancel": "キャンセル",
+      "back": "戻る",
+      "createForm": "フォームを作成",
+      "reviewAction": "確認",
+      "next": "次へ",
+      "types": {
+        "single": {
+          "title": "シングルページ フォーム",
+          "description": "すべてのフィールドが1ページに表示される従来のフォーム"
+        },
+        "multi": {
+          "title": "マルチステップ フォーム",
+          "description": "複数のステップを持つガイド付きフォームエクスペリエンス"
+        }
+      },
+      "typePreview": {
+        "stepOf": "{step} / {total}"
+      },
+      "configuration": {
+        "title": "フォームの詳細",
+        "description": "フォームの内部および公開情報を設定します。",
+        "internalTitle": "内部タイトル",
+        "internalTitlePlaceholder": "内部参照用のタイトルを入力してください…",
+        "internalTitleHelp": "ダッシュボードおよびビルダーでのみ表示されます。",
+        "publicTitle": "公開タイトル",
+        "publicTitlePlaceholder": "ユーザーに表示するタイトルを入力してください…",
+        "publicTitleHelp": "フォームに表示されます。内部タイトルを再利用するには空にしてください。",
+        "formDescription": "フォームの説明",
+        "formDescriptionPlaceholder": "ユーザーをガイドするための短い説明を入力してください…",
+        "formDescriptionHelp": "オプション。フォームの目的を理解するのに役立ちます。"
+      },
+      "review": {
+        "formType": "フォームの種類",
+        "multiStepForm": "マルチステップ フォーム",
+        "singlePageForm": "シングルページ フォーム",
+        "multiStep": "マルチステップ",
+        "singlePage": "シングルページ",
+        "editFormType": "フォームの種類を編集",
+        "formConfiguration": "フォームの設定",
+        "editFormConfiguration": "フォームの設定を編集",
+        "internalTitle": "内部タイトル",
+        "publicTitle": "公開タイトル",
+        "description": "説明",
+        "preview": "プレビュー",
+        "previewDescription": "フォームのスナップショット。"
+      },
+      "stepIndicator": {
+        "progress": "進行状況",
+        "stepCompleted": "{index} ステップが完了しました",
+        "stepCurrent": "{index} ステップ (現在)",
+        "step": "{index} ステップ"
+      }
+    },
+    "customize": {
+      "page": {
+        "savedCustomization": "カスタマイズを保存しました",
+        "saveFailed": "変更を保存できませんでした。もう一度試してください。",
+        "tabs": {
+          "presets": "プリセット",
+          "layout": "レイアウト",
+          "colors": "色",
+          "text": "テキスト"
+        },
+        "backToCustomize": "カスタマイズに戻る",
+        "previewForm": "フォームをプレビュー",
+        "customizeForm": "フォームをカスタマイズ",
+        "publicTitle": "公開タイトル: \"{title}\"",
+        "customizationActions": "カスタマイズアクション",
+        "back": "戻る",
+        "save": "保存",
+        "customize": "カスタマイズ"
+      },
+      "colors": {
+        "title": "カラー設定",
+        "description": "色とテーマをカスタマイズ",
+        "backgroundColorLabel": "背景色",
+        "backgroundColorHelp": "フォームコンテナの背景色を設定します",
+        "textColorLabel": "テキスト色",
+        "textColorHelp": "フォーム内のすべてのテキスト要素の色を設定します",
+        "primaryColorLabel": "プライマリーカラー（ボタンとアクセント）",
+        "primaryColorHelp": "ボタン、フォーカス状態、アクセント要素の色を設定します",
+        "borderColorLabel": "境界線の色",
+        "borderColorHelp": "入力フィールドの境界線と仕切りの色を設定します",
+        "websiteBackgroundColorLabel": "ウェブサイトの背景色",
+        "websiteBackgroundColorHelp": "ウェブサイト/ページ全体の背景色を設定します"
+      },
+      "typography": {
+        "title": "タイポグラフィー設定",
+        "description": "フォントとテキストスタイルをカスタマイズ",
+        "fontFamily": "フォントファミリー",
+        "fontFamilyPlaceholder": "Googleフォントを選択...",
+        "fontPreview": "フォントプレビュー",
+        "previewLine1": "The quick brown fox jumps over the lazy dog",
+        "previewLine2": "数字を含むサンプルフォームテキスト 1234567890",
+        "fontHelp": "Googleフォントを数百種類から選択できます。フォントは自動的に読み込まれます。",
+        "fontSize": "フォントサイズ",
+        "fontWeight": "フォントウェイト",
+        "selected": "選択済み:",
+        "fontSizeOptions": {
+          "xs": {
+            "label": "エキストラスモール",
+            "description": "12px"
+          },
+          "sm": {
+            "label": "スモール",
+            "description": "14px"
+          },
+          "base": {
+            "label": "ベース",
+            "description": "16px"
+          },
+          "lg": {
+            "label": "ラージ",
+            "description": "18px"
+          },
+          "xl": {
+            "label": "エキストララージ",
+            "description": "20px"
+          }
+        },
+        "fontWeightOptions": {
+          "light": {
+            "label": "ライト",
+            "description": "300"
+          },
+          "normal": {
+            "label": "ノーマル",
+            "description": "400"
+          },
+          "medium": {
+            "label": "ミディアム",
+            "description": "500"
+          },
+          "semibold": {
+            "label": "セミボールド",
+            "description": "600"
+          },
+          "bold": {
+            "label": "ボールド",
+            "description": "700"
+          }
+        }
+      },
+      "layout": {
+        "title": "レイアウト設定",
+        "description": "スペーシングと構造を設定",
+        "showProgressBar": "プログレスバーを表示",
+        "formWidth": "フォーム幅",
+        "formWidthHelp": "フォームコンテナの最大幅を制御します",
+        "customWidth": "カスタム幅（例：600px、80％、50rem）",
+        "customWidthPlaceholder": "カスタム幅を入力",
+        "internalPadding": "内部パディング",
+        "internalPaddingHelp": "フォームコンテナ内のスペースを制御します",
+        "externalMargin": "外部マージン",
+        "externalMarginHelp": "フォームコンテナの周りのスペースを制御します",
+        "cornerRadius": "コーナー半径",
+        "cornerRadiusHelp": "フォームのコーナーがどの程度丸くなるかを制御します",
+        "widthOptions": {
+          "sm": {
+            "label": "スモール",
+            "description": "400px 最大幅"
+          },
+          "md": {
+            "label": "ミディアム",
+            "description": "600px 最大幅"
+          },
+          "lg": {
+            "label": "ラージ",
+            "description": "800px 最大幅"
+          },
+          "xl": {
+            "label": "エキストララージ",
+            "description": "1000px 最大幅"
+          },
+          "full": {
+            "label": "全幅",
+            "description": "100％幅"
+          },
+          "custom": {
+            "label": "カスタム",
+            "description": "カスタム幅の値"
+          }
+        },
+        "paddingOptions": {
+          "none": {
+            "label": "なし",
+            "description": "0pxパディング"
+          },
+          "sm": {
+            "label": "スモール",
+            "description": "16pxパディング"
+          },
+          "md": {
+            "label": "ミディアム",
+            "description": "24pxパディング"
+          },
+          "lg": {
+            "label": "ラージ",
+            "description": "32pxパディング"
+          }
+        },
+        "marginOptions": {
+          "none": {
+            "label": "なし",
+            "description": "マージンなし"
+          },
+          "sm": {
+            "label": "スモール",
+            "description": "8px"
+          },
+          "md": {
+            "label": "ミディアム",
+            "description": "16px"
+          },
+          "lg": {
+            "label": "ラージ",
+            "description": "32px"
+          }
+        },
+        "radiusOptions": {
+          "none": {
+            "label": "なし",
+            "description": "0px（鋭角）"
+          },
+          "sm": {
+            "label": "スモール",
+            "description": "4px境界半径"
+          },
+          "md": {
+            "label": "ミディアム",
+            "description": "8px境界半径"
+          },
+          "lg": {
+            "label": "ラージ",
+            "description": "16px境界半径"
+          },
+          "xl": {
+            "label": "エキストララージ",
+            "description": "24px境界半径"
+          }
+        }
+      },
+      "presets": {
+        "title": "デザイン プリセット",
+        "description": "美しい事前にデザインされたフォームスタイルで素早く開始",
+        "category": "カテゴリ",
+        "allPresets": "すべてのプリセット",
+        "presets": "プリセット",
+        "presetCount": "{count, plural, one {# プリセット} other {# プリセット}}",
+        "presetList": "プリセット一覧",
+        "applyPresetAria": "{name}プリセットを適用",
+        "appliedPreset": "\"{name}\"プリセットを適用しました",
+        "formTitle": "フォームタイトル",
+        "submit": "送信"
+      },
+      "preview": {
+        "title": "ライブプレビュー",
+        "description": "適用されたカスタマイゼーションでフォームがどのように表示されるかを確認",
+        "sampleTitle": "サンプルフォーム",
+        "sampleDescription": "現在のデザイン設定でフォームがどのように表示されるかです.",
+        "nameLabel": "名前 *",
+        "namePlaceholder": "名前を入力してください",
+        "emailLabel": "メール *",
+        "emailPlaceholder": "メールアドレスを入力してください",
+        "categoryLabel": "カテゴリ",
+        "categoryPlaceholder": "カテゴリを選択してください",
+        "categoryGeneral": "一般のお問い合わせ",
+        "categorySupport": "サポート",
+        "categorySales": "営業",
+        "messageLabel": "メッセージ",
+        "messagePlaceholder": "メッセージを入力してください",
+        "submitButton": "フォームを送信",
+        "previousStepAria": "前のステップ",
+        "previousStep": "前へ",
+        "nextStepAria": "次のステップ",
+        "nextStep": "次へ",
+        "submitAria": "フォームを送信"
+      }
+    },
+    "toasts": {
+      "loginRequiredToSave": "フォームを保存するにはログインしてください.",
+      "formSaved": "フォームを保存しました！",
+      "formCreated": "フォームを作成しました！",
+      "saveFailed": "フォームの保存に失敗しました。もう一度試してください.",
+      "saveBeforeShare": "共有する前にフォームを保存してください.",
+      "formPublished": "フォームを公開しました！",
+      "publishFailed": "フォームの公開に失敗しました。もう一度試してください.",
+      "saveBeforeAnalytics": "分析を表示する前にフォームを保存してください.",
+      "loadingAnalytics": "分析を読み込み中",
+      "saveBeforePublish": "公開する前にフォームを保存してください.",
+      "userAuthRequired": "ユーザー認証が必要です",
+      "formUnpublished": "フォームを非公開にしました！",
+      "updateStatusFailed": "フォームのステータスを更新できませんでした。もう一度試してください.",
+      "saveSettingsFailed": "設定の保存に失敗しました。もう一度試してください.",
+      "loadFailed": "フォームを読み込めませんでした。もう一度試してください."
+    },
+    "formPreview": {
+      "titlePlaceholder": "タイトルを追加するにはクリック...",
+      "descriptionPlaceholder": "説明を追加するにはクリック...",
+      "publicTitle": "公開タイトル: \"{title}\"",
+      "stepTitlePlaceholder": "ステップタイトルを追加するにはクリック...",
+      "stepDescriptionPlaceholder": "ステップ説明を追加するにはクリック...",
+      "stepBadge": "{index} ステップ",
+      "editFieldAria": "フィールドを編集",
+      "clickToEdit": "クリックして編集"
+    },
+    "fieldPalette": {
+      "headerTitle": "フォームフィールド",
+      "headerDescription": "フォームにフィールドを追加するにはクリック",
+      "ariaPalette": "フィールドパレット",
+      "searchAria": "フィールドを検索",
+      "searchPlaceholder": "フィールドを検索...",
+      "categoryFieldsAria": "{category} フィールド",
+      "noFieldsFound": "「{searchTerm}」に一致するフィールドが見つかりませんでした",
+      "searchHint": "フィールド名、説明、またはタイプで検索してみてください",
+      "addFieldAria": "{label} フィールドを追加",
+      "categories": {
+        "input": "入力フィールド",
+        "selection": "選択フィールド",
+        "media": "メディアフィールド",
+        "layout": "レイアウトフィールド",
+        "advanced": "高度なフィールド"
+      },
+      "fields": {
+        "text": {
+          "label": "テキスト入力",
+          "description": "短いテキスト応答のための1行。"
+        },
+        "email": {
+          "label": "メール",
+          "description": "有効なメールアドレスを収集します。"
+        },
+        "number": {
+          "label": "数字",
+          "description": "数値入力用。"
+        },
+        "phone": {
+          "label": "電話番号",
+          "description": "バリデーション付きの電話番号入力。"
+        },
+        "textarea": {
+          "label": "テキストエリア",
+          "description": "長いテキストのための複数行フィールド。"
+        },
+        "date": {
+          "label": "日付",
+          "description": "カレンダーから日付を選択します。"
+        },
+        "time": {
+          "label": "時間",
+          "description": "時間値を選択または入力します。"
+        },
+        "address": {
+          "label": "住所",
+          "description": "通り、市区町村、その他の住所詳細の入力。"
+        },
+        "link": {
+          "label": "リンク",
+          "description": "有効なウェブサイトのURL入力。"
+        },
+        "select": {
+          "label": "セレクトドロップダウン",
+          "description": "1つのオプションを選択するためのドロップダウン。"
+        },
+        "radio": {
+          "label": "ラジオボタン",
+          "description": "リストから1つのオプションを選択します。"
+        },
+        "checkbox": {
+          "label": "チェックボックス",
+          "description": "1つ以上のオプションを選択します。"
+        },
+        "slider": {
+          "label": "スライダー",
+          "description": "ハンドルをスライドして値を選択します。"
+        },
+        "rating": {
+          "label": "評価",
+          "description": "星またはアイコンの評価を収集します。"
+        },
+        "poll": {
+          "label": "投票",
+          "description": "複数のオプションにユーザーが投票できます。"
+        },
+        "file": {
+          "label": "ファイルアップロード",
+          "description": "サイズとタイプの制限付きでファイルをアップロードします。"
+        },
+        "signature": {
+          "label": "署名",
+          "description": "マウスまたはタッチで描画または署名します。"
+        },
+        "statement": {
+          "label": "ステートメント",
+          "description": "フォームにヘディングまたは説明を表示します。"
+        },
+        "banner": {
+          "label": "バナー",
+          "description": "強調されたメッセージまたは警告を表示します。"
+        },
+        "field-group": {
+          "label": "フィールドグループ",
+          "description": "フィールドを1行にグループ化します。"
+        },
+        "tags": {
+          "label": "タグ入力",
+          "description": "複数のタグを入力および管理します。"
+        },
+        "social": {
+          "label": "ソーシャルメディア",
+          "description": "ソーシャルメディアプロファイルリンクを追加します。"
+        },
+        "scheduler": {
+          "label": "スケジューラー",
+          "description": "スケジューリングリンクを埋め込みます (例: Calendly)。"
+        }
+      }
+    },
+    "fieldSettings": {
+      "header": {
+        "title": "フィールド設定",
+        "closeAria": "フィールド設定を閉じる"
+      },
+      "emptyState": {
+        "title": "フィールドが選択されていません",
+        "description": "プレビューでフィールドをクリックして設定を編集してください"
+      },
+      "basic": {
+        "title": "基本設定",
+        "fieldLabel": "フィールドラベル",
+        "fieldLabelPlaceholder": "フィールドラベルを入力してください",
+        "fieldLabelHelp": "フィールドの上に表示されるラベル",
+        "placeholder": "プレースホルダー",
+        "placeholderPlaceholder": "プレースホルダーテキストを入力してください",
+        "placeholderHelp": "フィールド内に表示されるヒントテキスト",
+        "description": "説明",
+        "descriptionPlaceholder": "フィールドの説明を入力してください（フィールドの下に表示されます）",
+        "descriptionHelp": "フィールドの下に表示される追加のヘルプテキスト",
+        "required": "必須フィールド",
+        "requiredHelp": "ユーザーはフォームを送信するにはこのフィールドを入力する必要があります"
+      },
+      "validation": {
+        "title": "検証",
+        "minLength": "最小文字数",
+        "minLengthPlaceholder": "最小文字数",
+        "minLengthHelp": "入力必須の最小文字数",
+        "maxLength": "最大文字数",
+        "maxLengthPlaceholder": "最大文字数",
+        "maxLengthHelp": "許可される最大文字数",
+        "pattern": "パターン（正規表現）",
+        "patternPlaceholder": "正規表現",
+        "patternHelp": "検証用の正規表現パターン",
+        "minValue": "最小値",
+        "minValuePlaceholder": "最小値",
+        "minValueHelp": "許可される最小数値",
+        "maxValue": "最大値",
+        "maxValuePlaceholder": "最大値",
+        "maxValueHelp": "許可される最大数値"
+      },
+      "errorMessages": {
+        "title": "カスタムエラーメッセージ",
+        "requiredFieldMessage": "必須フィールドメッセージ",
+        "requiredFieldPlaceholder": "このフィールドは必須です",
+        "minLengthMessage": "最小文字数エラーメッセージ",
+        "minLengthPlaceholder": "少なくとも {count} 文字を入力する必要があります",
+        "maxLengthMessage": "最大文字数エラーメッセージ",
+        "maxLengthPlaceholder": " {count} 文字以下で入力する必要があります",
+        "patternMessage": "パターンエラーメッセージ",
+        "patternPlaceholder": "有効な形式を入力してください",
+        "emailMessage": "メールエラーメッセージ",
+        "emailPlaceholder": "有効なメールアドレスを入力してください",
+        "minValueMessage": "最小値エラーメッセージ",
+        "minValuePlaceholder": "少なくとも {value} を入力する必要があります",
+        "maxValueMessage": "最大値エラーメッセージ",
+        "maxValuePlaceholder": " {value} 以下で入力する必要があります",
+        "invalidNumberMessage": "無効な数字メッセージ",
+        "invalidNumberPlaceholder": "有効な数字を入力してください"
+      },
+      "options": {
+        "title": "オプション",
+        "addOptionAria": "新しいオプションを追加",
+        "addOption": "オプションを追加",
+        "optionPlaceholder": "オプション {index}",
+        "removeOptionAria": "オプション {index} を削除",
+        "none": "まだオプションが追加されていません",
+        "or": "または",
+        "orAria": "または",
+        "fetchFromApi": "APIから取得",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "オプションを取得するAPIエンドポイント",
+        "valueKeyPlaceholder": "値キー（例：id）",
+        "valueKeyHelp": "オプション値のキー",
+        "labelKeyPlaceholder": "ラベルキー（例：name）",
+        "labelKeyHelp": "オプションラベルのキー",
+        "apiGuidanceTitle": "APIデータガイダンス：",
+        "apiGuidanceIntro": "このフィールドは、APIエンドポイントからオプションを取得します：",
+        "apiShouldReturn": "APIは、以下のいずれかを返す必要があります：",
+        "apiType1Hint": "（文字列の配列）",
+        "apiType2Hint": "（オブジェクトの配列）",
+        "apiType3Hint": "（オプションの配列を持つオブジェクト）",
+        "apiType4Hint": "（カスタムキー）",
+        "apiCustomKeysHelp": "上記でカスタムキーを指定して、APIデータをマッピングできます。",
+        "apiValueLabelHelp": "各オプションには、",
+        "apiValueLabelHelpOr": "プロパティ（またはカスタムキー）が必要です。",
+        "apiValueLabelHelpSuffix": "はオプションです。"
+      },
+      "prepopulation": {
+        "title": "事前入力",
+        "unknownError": "不明なエラー",
+        "enabled": "事前入力を有効にする",
+        "enabledHelp": "このフィールドを既存のデータで自動的に入力する",
+        "dataSource": "データソース",
+        "sources": {
+          "url": "URLパラメータ",
+          "api": "外部API",
+          "profile": "ユーザープロファイル",
+          "previous": "前の提出"
+        },
+        "urlParamName": "URLパラメータ名",
+        "urlParamPlaceholder": "例：name, email, phone",
+        "urlParamHelp": "URLクエリ文字列から抽出するパラメータ名",
+        "fallbackValue": "フォールバック値",
+        "fallbackValuePlaceholder": "パラメータが欠落している場合のデフォルト値",
+        "fallbackValueHelp": "URLパラメータが欠落している場合に使用するデフォルト値",
+        "overwriteExisting": "上書きする",
+        "overwriteExistingHelp": "ユーザ入力を事前に設定された値で置き換える",
+        "generatePreviewAria": "プレビューURLを生成する",
+        "generatePreview": "プレビューURLを生成する",
+        "previewUrlLabel": "プレビューURL：",
+        "previewUrlHelp": "このURLはフィールドを\"Sample {label}\"で事前に設定します",
+        "apiEndpoint": "APIエンドポイント",
+        "apiEndpointPlaceholder": "https://api.example.com/user-data",
+        "apiEndpointHelp": "データを取得するAPIエンドポイント",
+        "httpMethod": "HTTPメソッド",
+        "requestHeaders": "リクエストヘッダー（JSON）",
+        "requestHeadersHelp": "APIリクエストのHTTPヘッダーを含むJSONオブジェクト",
+        "testApiAria": "APIエンドポイントをテストする",
+        "testApi": "APIエンドポイントをテストする",
+        "comingSoonLabel": "近日公開：",
+        "profileComingSoon": "ユーザープロファイルの事前設定は将来のアップデートで利用可能になります",
+        "previousComingSoon": "前の提出の事前設定は将来のアップデートで利用可能になります",
+        "toasts": {
+          "missingUrlParam": "まずURLパラメータ名を入力してください",
+          "previewUrlCopied": "プレビューURLをクリップボードにコピーしました",
+          "previewUrlCopyFailed": "プレビューURLのコピーに失敗しました",
+          "missingApiEndpoint": "まずAPIエンドポイントを入力してください",
+          "apiReachable": "APIエンドポイントに到達できます",
+          "apiTestFailedStatus": "APIテストに失敗しました： {status} {statusText}",
+          "apiTestFailedError": "APIテストに失敗しました： {error}"
+        }
+      },
+      "date": {
+        "title": "日付フィールド設定",
+        "minDate": "最小日付",
+        "selectMinDate": "最小日付を選択する",
+        "maxDate": "最大日付",
+        "selectMaxDate": "最大日付を選択する",
+        "defaultDate": "デフォルト日付",
+        "selectDefaultDate": "デフォルト日付を選択する"
+      },
+      "number": {
+        "title": "数値フィールド設定",
+        "minValue": "最小値",
+        "noMinimum": "なし（最小）",
+        "minValueHelp": "許可される最小数値",
+        "maxValue": "最大値",
+        "noMaximum": "なし（最大）",
+        "maxValueHelp": "許可される最大数値",
+        "stepSize": "ステップサイズ",
+        "stepSizeHelp": "数値入力の増減ステップサイズ",
+        "defaultValue": "デフォルト値",
+        "noDefault": "なし（デフォルト）",
+        "defaultValueHelp": "フォームがロードされたときの事前設定値"
+      },
+      "radio": {
+        "title": "クイズ設定",
+        "enableQuizQuestion": "クイズの質問として有効にする",
+        "correctAnswer": "正解",
+        "correctAnswerPlaceholder": "正解を選択する",
+        "points": "正解のポイント",
+        "showCorrectAnswer": "送信後に正解を表示する",
+        "explanation": "説明（オプション）",
+        "explanationPlaceholder": "なぜこれが正解であるかを説明する..."
+      },
+      "address": {
+        "title": "住所フィールド設定",
+        "requiredLines": "必須の住所行",
+        "requiredLinesPlaceholder": "例：2（住所行1と市が必要）",
+        "requiredLinesHelp": "入力が必要な住所行の数（1-5）",
+        "customErrorMessage": "カスタムエラーメッセージ",
+        "customErrorPlaceholder": "すべての必須の住所フィールドを完了してください",
+        "customErrorHelp": "必須の住所フィールドが不完全な場合に表示されるカスタムエラーメッセージ"
+      },
+      "phone": {
+        "title": "電話フィールド設定",
+        "pattern": "カスタム正規表現パターン",
+        "patternPlaceholder": "例: ^\\+?[0-9]{10,15}$",
+        "patternHelp": "電話番号の検証用正規表現パターン",
+        "errorMessage": "カスタムエラーメッセージ",
+        "errorMessagePlaceholder": "有効な電話番号を入力してください",
+        "errorMessageHelp": "電話番号の検証に失敗した場合に表示するカスタムエラーメッセージ"
+      },
+      "statement": {
+        "title": "ステートメントフィールド設定",
+        "heading": "見出し",
+        "headingPlaceholder": "ステートメントの見出しを入力してください",
+        "headingHelp": "ステートメントのメイン見出し",
+        "description": "説明",
+        "descriptionPlaceholder": "ステートメントの説明を入力してください",
+        "descriptionHelp": "ステートメントの詳細な説明",
+        "alignment": "配置",
+        "alignmentPlaceholder": "配置を選択してください",
+        "alignLeft": "左",
+        "alignCenter": "中央",
+        "alignRight": "右",
+        "alignmentHelp": "ステートメントのテキスト配置",
+        "size": "サイズ",
+        "sizePlaceholder": "サイズを選択してください",
+        "sizeSmall": "スモール",
+        "sizeMedium": "ミディアム",
+        "sizeLarge": "ラージ",
+        "sizeHelp": "ステートメントのフォントサイズ"
+      },
+      "slider": {
+        "title": "スライダー設定",
+        "mode": "スライダーモード",
+        "modePlaceholder": "スライダーモードを選択してください",
+        "modeSingle": "単一の値",
+        "modeRange": "範囲 (最小 + 最大)",
+        "modeHelp": "1 つの値を選択するか、ユーザーが最小値と最大値を選択できるようにする",
+        "min": "最小値",
+        "minHelp": "スライダーの最小値",
+        "max": "最大値",
+        "maxHelp": "スライダーの最大値",
+        "step": "ステップサイズ",
+        "stepHelp": "スライダーの増分/減分ステップサイズ",
+        "defaultMin": "デフォルトの最小値",
+        "defaultMinHelp": "フォームが読み込まれたときのデフォルトの最小値",
+        "defaultMax": "デフォルトの最大値",
+        "defaultMaxHelp": "フォームが読み込まれたときのデフォルトの最大値",
+        "defaultValue": "デフォルト値",
+        "defaultValueHelp": "フォームがロードされたときの事前設定値"
+      },
+      "text": {
+        "title": "テキストフィールド設定",
+        "maxLength": "最大文字数",
+        "maxLengthPlaceholder": "制限なし",
+        "maxLengthHelp": "許可される最大文字数 (1-1000)",
+        "minLength": "最小文字数",
+        "minLengthPlaceholder": "なし（最小）",
+        "minLengthHelp": "必須の最小文字数 (0-1000)"
+      },
+      "checkbox": {
+        "title": "チェックボックスオプション",
+        "options": "オプション",
+        "addOptionPlaceholder": "オプションを追加する",
+        "addOptionAria": "チェックボックスオプションを追加する",
+        "optionsHelp": "ユーザーが選択できるチェックボックスオプションを追加する",
+        "removeOptionAria": "オプション {index} を削除",
+        "allowMultiple": "複数選択を許可する",
+        "allowMultipleHelp": "有効にすると、ユーザーは複数のオプションを選択できます。無効にすると、1 つのオプションのみを選択できます。"
+      },
+      "link": {
+        "title": "リンクフィールド設定",
+        "pattern": "カスタム正規表現パターン",
+        "patternPlaceholder": "例: ^https?://.+$",
+        "patternHelp": "URL の検証用正規表現パターン",
+        "errorMessage": "カスタムエラーメッセージ",
+        "errorMessagePlaceholder": "有効な URL を入力してください",
+        "errorMessageHelp": "URL の検証に失敗した場合に表示するカスタムエラーメッセージ"
+      },
+      "poll": {
+        "title": "投票設定",
+        "pollOptions": "投票オプション",
+        "addOptionPlaceholder": "オプションを追加する",
+        "addOptionAria": "投票オプションを追加する",
+        "optionsHelp": "ユーザーが投票できる投票オプションを追加する",
+        "editOptionAria": "投票オプション {index} を編集する",
+        "removeOptionAria": "投票オプション {index} を削除する",
+        "orAria": "またはセパレーター",
+        "or": "または",
+        "fetchFromApi": "API からオプションをフェッチする",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "投票オプションをフェッチする API エンドポイント",
+        "valueKeyPlaceholder": "値キー（例：id）",
+        "valueKeyHelp": "オプション値のキー",
+        "labelKeyPlaceholder": "ラベルキー（例：name）",
+        "labelKeyHelp": "オプションラベルのキー",
+        "apiGuidanceTitle": "APIデータガイダンス：",
+        "apiGuidanceIntro": "このフィールドは、APIエンドポイントからオプションを取得します：",
+        "apiShouldReturn": "APIは、以下のいずれかを返す必要があります：",
+        "apiType1Hint": "（文字列の配列）",
+        "apiType2Hint": "（オブジェクトの配列）",
+        "apiType3Hint": "（オプションの配列を持つオブジェクト）",
+        "apiType4Hint": "（カスタムキー）",
+        "apiCustomKeysHelp": "上記でカスタムキーを指定して、APIデータをマッピングできます。",
+        "apiValueLabelHelp": "各オプションには、",
+        "apiValueLabelHelpOr": "プロパティ（またはカスタムキー）が必要です。",
+        "apiValueLabelHelpSuffix": "はオプションです。",
+        "showResults": "投票後に結果を表示する",
+        "showResultsHelp": "ユーザーが投票した後に投票結果を表示する"
+      },
+      "social": {
+        "title": "ソーシャルプラットフォーム",
+        "availablePlatforms": "利用可能なプラットフォーム",
+        "platforms": {
+          "github": "GitHub",
+          "twitter": "Twitter",
+          "linkedin": "LinkedIn",
+          "facebook": "Facebook",
+          "instagram": "Instagram",
+          "youtube": "YouTube",
+          "website": "ウェブサイト"
+        },
+        "platformsHelp": "フィールドに含めるソーシャルプラットフォームを選択してください",
+        "customLinks": "カスタムリンク",
+        "labelPlaceholder": "ラベル",
+        "placeholderPlaceholder": "プレースホルダー (オプション)",
+        "removeCustomLinkAria": "カスタムリンク {index} を削除",
+        "addCustomLinkAria": "カスタムリンクを追加",
+        "addCustomLink": "カスタムリンクを追加",
+        "customLinksHelp": "カスタムラベルとプレースホルダーを使用したカスタムソーシャルリンクを追加"
+      },
+      "emailValidation": {
+        "title": "メール検証",
+        "removeBlockedDomainAria": "{domain} をブロックされたドメインから削除",
+        "removeAllowedDomainAria": "{domain} を許可されたドメインから削除",
+        "autoCompleteDomain": "オートコンプリートドメイン",
+        "autoCompletePlaceholder": "例: business.com",
+        "setAutoCompleteAria": "オートコンプリートドメインを設定",
+        "set": "設定",
+        "removeAutoCompleteAria": "{domain} ドメインを削除",
+        "autoCompleteHelp": "ユーザーはユーザー名のみを入力し、ドメインは自動補完されます",
+        "allowedDomains": "許可されたドメイン",
+        "allowedPlaceholder": "例: company.com",
+        "addAllowedDomainAria": "許可されたドメインを追加",
+        "allowedHelp": "これらのドメインからのメールのみが受け入れられます",
+        "blockedDomains": "ブロックされたドメイン",
+        "blockedPlaceholder": "例: temp-mail.org",
+        "addBlockedDomainAria": "ブロックされたドメインを追加",
+        "blockedHelp": "これらのドメインからのメールは拒否されます (一時的なメールサービスはデフォルトでブロックされます)",
+        "requireBusinessEmail": "ビジネスメールを要求",
+        "requireBusinessEmailHelp": "ビジネスドメインのみを許可 (Gmail, Yahoo, などをブロック)",
+        "customValidationMessage": "カスタム検証メッセージ",
+        "customValidationPlaceholder": "メール検証のためのカスタムエラーメッセージ",
+        "customValidationHelp": "デフォルトのメッセージを使用するには空にしてください"
+      },
+      "file": {
+        "title": "ファイルアップロード設定",
+        "bytesUnit": "バイト",
+        "maxFiles": "最大ファイル数",
+        "maxFilesPlaceholder": "10",
+        "maxFilesHelp": "ユーザーがアップロードできるファイルの最大数 (1-50)",
+        "maxFileSize": "最大ファイルサイズ",
+        "maxFileSizePlaceholder": "50",
+        "mbUnit": "MB",
+        "setMaxSizePresetAria": "{size} に最大ファイルサイズを設定",
+        "currentSize": "現在のサイズ: {size}",
+        "allowedFileTypes": "許可されたファイルタイプ",
+        "quickSelect": "クイック選択:",
+        "commonTypes": {
+          "images": "画像",
+          "documents": "ドキュメント",
+          "spreadsheets": "スプレッドシート",
+          "videos": "動画",
+          "audio": "オーディオ",
+          "archives": "アーカイブ"
+        },
+        "toggleFileTypeAria": "{type} ファイルタイプを切り替え",
+        "customExtensions": "カスタムファイル拡張子",
+        "customExtensionsPlaceholder": "例: txt, csv, json",
+        "addCustomExtensionAria": "カスタムファイル拡張子を追加",
+        "customExtensionsHelp": "カスタムファイル拡張子を追加 (ドットなし)",
+        "selectedExtensions": "選択された拡張子:",
+        "removeExtensionAria": "{extension} ファイル拡張子を削除",
+        "htmlAccept": "HTML Accept 属性 (読み取り専用)",
+        "htmlAcceptHelp": "これは上記の選択に基づいて自動的に生成されます",
+        "helpText": "ヘルプテキスト",
+        "helpTextPlaceholder": "ユーザーがファイルをアップロードするための追加の説明...",
+        "helpTextHelp": "ユーザーがファイルをアップロードするのを支援するためのオプションの説明"
+      },
+      "scheduler": {
+        "title": "スケジューラー設定",
+        "provider": "スケジューラープロバイダー",
+        "providerPlaceholder": "プロバイダーを選択",
+        "providerHelp": "好みのスケジューリングプラットフォームを選択してください",
+        "calcomLink": "Cal.com リンク",
+        "calendlyLink": "Calendly リンク",
+        "tidycalLink": "TidyCal リンク",
+        "schedulerLink": "スケジューラーリンク",
+        "linkPlaceholder": "https://...",
+        "linkHelp": "{provider} スケジューラーの埋め込み URL",
+        "buttonText": "カレンダーオープンボタンのテキスト",
+        "buttonTextPlaceholder": "例：電話を予約する",
+        "buttonTextHelp": "スケジューラーボタンに表示されるテキスト",
+        "preview": "プレビュー",
+        "openScheduler": "スケジューラーを開く",
+        "previewHelp": "スケジューラーがどのように表示されるかプレビューするにはクリックしてください",
+        "previewModalTitle": "スケジューラープレビュー",
+        "iframeTitle": "スケジューラー埋め込み",
+        "closePreviewAria": "スケジューラープレビューを閉じる",
+        "close": "閉じる",
+        "providerCalcom": "Cal.com",
+        "providerCalendly": "Calendly",
+        "providerTidycal": "TidyCal"
+      },
+      "banner": {
+        "title": "バナー設定",
+        "alertType": "アラートタイプ",
+        "alertTypePlaceholder": "アラートタイプを選択",
+        "warning": "警告",
+        "error": "エラー",
+        "info": "情報",
+        "success": "成功",
+        "alertTypeHelp": "バナーのビジュアルスタイルと配色スキームを選択してください",
+        "bannerTitle": "タイトル",
+        "bannerTitlePlaceholder": "禁煙",
+        "bannerTitleHelp": "バナーのメインタイトルテキスト",
+        "description": "説明",
+        "descriptionPlaceholder": "当社の宿泊施設は完全に禁煙です...",
+        "descriptionHelp": "バナーの詳細説明文"
+      },
+      "fieldGroup": {
+        "layoutTitle": "レイアウト設定",
+        "layoutDirection": "レイアウト方向",
+        "layoutHorizontal": "水平（横並び）",
+        "layoutVertical": "垂直（積み重ね）",
+        "layoutDirectionHelp": "グループ内のフィールドの配置方法",
+        "columns": "列の数",
+        "columns2": "2列",
+        "columns3": "3列",
+        "columns4": "4列",
+        "columnsHelp": "水平レイアウトの列数",
+        "spacing": "フィールド間隔",
+        "spacingCompact": "コンパクト",
+        "spacingNormal": "ノーマル",
+        "spacingRelaxed": "リラックス",
+        "spacingHelp": "グループ内のフィールド間の間隔",
+        "groupFields": "グループフィールド（{count}）",
+        "addFieldAria": "フィールドをグループに追加",
+        "addField": "フィールドを追加",
+        "addFieldDialogTitle": "フィールドを追加する",
+        "emptyStateTitle": "このグループにはフィールドがありません.",
+        "emptyStateDescription": "上のドロップダウンまたはクイック追加ボタンを使用してフィールドを追加してください.",
+        "fieldFallback": "{type} フィールド",
+        "settingsAria": "{name} フィールドの設定",
+        "removeAria": "{name} フィールドを削除",
+        "fieldLabel": "フィールドラベル",
+        "fieldLabelPlaceholder": "フィールドラベルを入力してください",
+        "fieldLabelHelp": "このフィールドのラベル",
+        "placeholder": "プレースホルダーテキスト",
+        "placeholderPlaceholder": "プレースホルダーテキストを入力してください",
+        "placeholderHelp": "このフィールドのプレースホルダーテキスト",
+        "required": "必須フィールド",
+        "requiredHelp": "このフィールドを必須にする",
+        "advancedAria": "{name} の詳細設定を切り替え",
+        "advanced": "詳細設定"
+      },
+      "rating": {
+        "title": "評価設定",
+        "starCount": "評価の星の数",
+        "starCountHelp": "評価の星の数（1-10）",
+        "starSize": "星のサイズ",
+        "starSizeHelp": "評価星のサイズ (16-64px)",
+        "iconType": "アイコンタイプ",
+        "star": "星",
+        "heart": "ハート",
+        "iconTypeHelp": "評価のアイコンタイプを選択してください",
+        "iconColor": "アイコンカラー",
+        "iconColorHelp": "評価アイコンのカラー"
+      },
+      "tags": {
+        "title": "タグ設定",
+        "maxTags": "最大タグ数",
+        "maxTagsHelp": "ユーザーが追加できるタグの最大数 (最小1)",
+        "allowDuplicates": "重複タグを許可する",
+        "allowDuplicatesHelp": "ユーザーが同じタグを複数回追加できるようにする"
+      },
+      "textarea": {
+        "title": "テキストエリアフィールド設定",
+        "rows": "行数",
+        "rowsHelp": "テキストエリアの初期高さ (2-20行)"
+      },
+      "time": {
+        "title": "時間フィールド設定",
+        "showCurrentTimeButton": "'現在の時刻を設定' ボタンを表示する",
+        "showCurrentTimeButtonHelp": "現在の時刻を自動的に設定するボタンを表示する"
+      },
+      "email": {
+        "title": "メールフィールド設定",
+        "allowedDomains": "許可されたドメイン (カンマ区切り)",
+        "allowedDomainsPlaceholder": "gmail.com, company.com",
+        "blockedDomains": "ブロックされたドメイン (カンマ区切り)",
+        "blockedDomainsPlaceholder": "tempmail.com, spam.com",
+        "requireBusinessEmail": "ビジネスメールのみを要求する",
+        "customValidationMessage": "カスタム検証メッセージ",
+        "customValidationPlaceholder": "有効なメールアドレスを入力してください"
+      }
+    },
+    "formSettings": {
+      "title": "フォーム設定",
+      "exportSecure": "エクスポート (セキュリティ保護)",
+      "preparing": "準備中...",
+      "saveFormFirstAccess": "設定にアクセスするには、まずフォームを保存してください。",
+      "saveFormFirstExport": "フォームを保存してから、安全にエクスポートしてください。",
+      "exportPrepareFailed": "安全なエクスポートの準備に失敗しました。",
+      "settingsSectionsAria": "設定セクション",
+      "goToSectionSettingsAria": "{section} 設定に移動",
+      "sections": {
+        "basic": "基本情報",
+        "limits": "制限",
+        "security": "セキュリティ",
+        "quiz": "クイズとスコアリング",
+        "branding": "ブランディング",
+        "notifications": "通知",
+        "api": "APIアクセス",
+        "webhooks": "ウェブフック",
+        "design": "デザイン",
+        "metadata": "メタデータ"
+      },
+      "search": {
+        "aria": "検索設定",
+        "placeholder": "検索設定…",
+        "resultsAria": "検索結果",
+        "noMatches": "一致なし",
+        "items": {
+          "basic-info-title": {
+            "label": "基本情報"
+          },
+          "behavior-title": {
+            "label": "フォームの動作"
+          },
+          "rate-limit-title": {
+            "label": "レート制限"
+          },
+          "response-limit-title": {
+            "label": "レスポンス制限"
+          },
+          "password-protection-title": {
+            "label": "パスワード保護"
+          },
+          "duplicate-prevention-title": {
+            "label": "重複防止"
+          },
+          "profanity-filter-title": {
+            "label": "不適切な言葉のフィルター"
+          },
+          "bot-protection-title": {
+            "label": "ボット保護"
+          },
+          "branding-title": {
+            "label": "ブランディング"
+          },
+          "social-media-links-title": {
+            "label": "ソーシャルメディアリンク"
+          },
+          "quiz-title": {
+            "label": "クイズとスコアリング"
+          },
+          "notifications-title": {
+            "label": "通知"
+          },
+          "api-access-title": {
+            "label": "APIアクセス"
+          },
+          "webhooks-title": {
+            "label": "ウェブフック"
+          },
+          "design-title": {
+            "label": "デザイン"
+          },
+          "metadata-title": {
+            "label": "SEO"
+          },
+          "social-metadata-title": {
+            "label": "ソーシャルメタデータ"
+          },
+          "search-engine-indexing-title": {
+            "label": "検索エンジンのインデックス登録"
+          }
+        }
+      },
+      "defaults": {
+        "submitText": "送信",
+        "notificationSubject": "新しいフォーム送信",
+        "notificationMessage": "あなたはあなたのフォームで新しい送信を受け取りました。"
+      },
+      "common": {
+        "unsavedChanges": "保存されていない変更",
+        "reset": "リセット",
+        "save": "保存",
+        "saved": "保存済み",
+        "formIdRequiredToSaveSettings": "フォームIDは設定を保存するために必要です",
+        "validValueBetween": "{min}から{max}までの有効な値を入力してください",
+        "fillRequiredFields": "必須フィールドを入力してください",
+        "requiredAria": "必須",
+        "fieldRequired": "このフィールドは必須です"
+      },
+      "basicInfoSection": {
+        "ariaSettings": "基本的なフォーム設定",
+        "basicTitle": "基本情報",
+        "basicDescription": "フォームの基本情報を設定する",
+        "internalTitleLabel": "内部タイトル",
+        "internalTitleDescription": "このタイトルはダッシュボードとフォームビルダーでのみ表示されます",
+        "internalTitlePlaceholder": "内部で参照するためのタイトルを入力してください...",
+        "publicTitleLabel": "公開タイトル",
+        "publicTitleDescription": "このタイトルは実際のフォームでユーザーに表示されます。空の場合は内部タイトルを使用します。",
+        "publicTitlePlaceholder": "ユーザーに表示するタイトルを入力してください...",
+        "formDescriptionLabel": "フォームの説明",
+        "formDescriptionPlaceholder": "フォームの説明を入力してください",
+        "submitButtonTextLabel": "送信ボタン テキスト",
+        "submitButtonTextPlaceholder": "送信",
+        "successMessageLabel": "成功メッセージ",
+        "successMessagePlaceholder": "送信ありがとうございます！",
+        "redirectUrlLabel": "リダイレクトURL（オプション）",
+        "redirectUrlDescription": "送信成功後にユーザーをリダイレクトするURL",
+        "redirectUrlPlaceholder": "https://example.com/thank-you",
+        "basicActionsAria": "基本情報アクション",
+        "saveBasicAria": "基本情報を保存する",
+        "saveBasicSuccess": "基本情報の保存に成功しました",
+        "saveBasicFailed": "基本情報の保存に失敗しました",
+        "behaviorTitle": "フォームの動作",
+        "behaviorDescription": "フォームの動作と表示を設定する",
+        "hideHeaderLabel": "ヘッドを非表示",
+        "hideHeaderDescription": "埋め込みで公開タイトルと説明を非表示にする",
+        "rtlLabel": "右から左へのモード",
+        "rtlDescription": "フォームをRTL（右から左）モードで表示する",
+        "autoFocusLabel": "最初のフィールドに自動フォーカス",
+        "autoFocusDescription": "フォーム読み込み時に最初のフィールドに自動フォーカスする",
+        "behaviorActionsAria": "フォーム動作アクション",
+        "saveBehaviorAria": "フォーム動作設定を保存する",
+        "saveBehaviorSuccess": "フォーム動作設定の保存に成功しました",
+        "saveBehaviorFailed": "フォーム動作設定の保存に失敗しました"
+      },
+      "passwordProtectionSection": {
+        "ariaSettings": "パスワード保護設定",
+        "title": "パスワード保護",
+        "description": "パスワードでフォームへのアクセスを制限する",
+        "enableLabel": "パスワード保護を有効にする",
+        "enableDescription": "ユーザーがフォームにアクセスするにはパスワードの入力が必要",
+        "passwordLabel": "パスワード",
+        "passwordPlaceholder": "フォームのパスワードを入力する",
+        "hidePasswordAria": "パスワードを隠す",
+        "showPasswordAria": "パスワードを表示する",
+        "passwordDescription": "ユーザーはこのパスワードを入力してフォームにアクセスする必要があります",
+        "customMessageLabel": "カスタムメッセージ",
+        "customMessagePlaceholder": "パスワード入力時のカスタムメッセージを入力する",
+        "customMessageDescription": "パスワード入力時にユーザーに表示されるメッセージ",
+        "currentConfiguration": "現在の設定",
+        "summaryPrefix": "パスワード保護は",
+        "enabled": "有効",
+        "summarySuffix": ". ユーザーはパスワードを入力してフォームにアクセスする必要があります.",
+        "disabledDescription": "パスワード保護によって、ユーザーがパスワードを入力してからフォームを表示および送信できるようになります。",
+        "actionsAria": "パスワード保護アクション",
+        "saveAria": "パスワード保護設定を保存する",
+        "saved": "パスワード保護設定の保存に成功しました",
+        "saveFailed": "パスワード保護設定の保存に失敗しました",
+        "defaultMessage": "このフォームはパスワードで保護されています。続行するにはパスワードを入力してください。"
+      },
+      "duplicatePreventionSection": {
+        "ariaSettings": "重複送信防止設定",
+        "title": "重複防止",
+        "description": "ユーザーが同じフォームを複数回送信しないようにする",
+        "enableLabel": "重複送信防止を有効にする",
+        "enableDescription": "ユーザーが同じフォームを複数回送信しないようにする",
+        "preventionModeLabel": "防止モード",
+        "oneTimeLabel": "1回限りの送信",
+        "oneTimeDescription": "ユーザーが1回だけ送信できるようにする",
+        "timeBasedLabel": "時間ベースの防止",
+        "timeBasedDescription": "指定された時間内に重複送信を防止する",
+        "preventionStrategyLabel": "防止戦略",
+        "selectStrategyPlaceholder": "戦略を選択する",
+        "strategyCombinedLabel": "複合（IP +メール+セッション）- 最も安全",
+        "strategyEmailLabel": "メールアドレス - 登録に最適",
+        "strategyIpLabel": "IPアドレス - シンプル＆信頼性",
+        "strategySessionLabel": "セッションID - ブラウザベース",
+        "strategyCombinedDescription": "IP、メール、セッションの組み合わせで最大精度を追跡する",
+        "strategyEmailDescription": "メールアドレスで追跡する（フォームにメールフィールドが必要）",
+        "strategyIpDescription": "IPアドレスのみで追跡する",
+        "strategySessionDescription": "ブラウザセッションで追跡する",
+        "timeWindowLabel": "時間ウィンドウ（分）",
+        "timeWindowDescription": "重複送信を防止する時間",
+        "timeWindowPlaceholder": "1440",
+        "maxAttemptsLabel": "最大試行回数",
+        "maxAttemptsDescription": "時間内に許可される最大試行回数",
+        "maxAttemptsPlaceholder": "1",
+        "errorMessageLabel": "エラーメッセージ",
+        "errorMessageDescription": "ユーザーが重複したデータを送信しようとしたときに表示されるメッセージ",
+        "allowOverrideLabel": "上書きを許可",
+        "allowOverrideDescription": "防止をバイパスすることを許可する (推奨されません)",
+        "currentConfiguration": "現在の設定",
+        "currentSettings": "現在の設定",
+        "summaryModeOneTime": "1回のみ送信可能",
+        "summaryModeTimeBased": "{maxAttempts} 通の送信を {timeWindow} 分ごとに許可",
+        "summaryStrategyCombined": "IP + メール + セッション",
+        "summaryStrategyEmail": "メールアドレス",
+        "summaryStrategyIp": "IPアドレス",
+        "summaryStrategySession": "セッションID",
+        "summarySentence": "{mode} は {strategy} を使用して追跡されます。",
+        "summaryOverrideEnabled": "上書きが有効です。",
+        "disabledDescription": "データの品質を維持するために、ユーザーが同じフォームを複数回送信するのを防ぎます。時間ベースの防止または1回のみ送信モードのいずれかを選択します。",
+        "actionsAria": "重複防止アクション",
+        "saveAria": "重複防止設定を保存",
+        "saved": "重複防止設定を正常に保存しました",
+        "saveFailed": "重複防止設定の保存に失敗しました",
+        "defaultMessageOneTime": "このフォームはすでに送信されています。ユーザーは1回のみ送信できます。",
+        "defaultMessageTimeBased": "このフォームはすでに送信されています。しばらく待ってから再度送信してください。"
+      },
+      "profanityFilterSection": {
+        "ariaSettings": "不適切なコンテンツフィルター設定",
+        "title": "不適切な言葉のフィルター",
+        "description": "不適切なコンテンツを自動的に検出してフィルターする",
+        "enableLabel": "不適切なコンテンツフィルターを有効にする",
+        "enableDescription": "不適切なコンテンツを自動的に検出してフィルターする",
+        "filterModeLabel": "フィルター モード",
+        "strictModeOption": "厳格モード - 不適切なコンテンツを含む投稿を拒否する",
+        "replaceModeOption": "置換モード - 不適切なコンテンツをアスタリスクに置き換える",
+        "customMessageLabel": "カスタムメッセージ",
+        "customMessagePlaceholder": "不適切なコンテンツが検出されたときに表示するカスタムメッセージを入力",
+        "customWordsTitle": "フィルターするカスタムワード",
+        "whitelistedWordsTitle": "ホワイトリスト登録されたワード",
+        "customWordsPlaceholder": "フィルターするワードを入力（複数の場合はカンマ区切り）",
+        "whitelistPlaceholder": "ホワイトリスト登録するワードを入力（複数の場合はカンマ区切り）",
+        "addWord": "追加",
+        "addFilteredWordAria": "フィルターするワードを追加",
+        "addWhitelistedWordAria": "ホワイトリスト登録されたワードを追加",
+        "removeWordAria": "{word} を削除",
+        "currentConfiguration": "現在の設定",
+        "summaryPrefix": "不適切なコンテンツフィルターは",
+        "enabled": "有効",
+        "summaryIn": "に",
+        "strictMode": "厳格モード",
+        "replaceMode": "置換モード",
+        "summaryPeriod": "です。",
+        "customWordsConfigured": "{count} 個のカスタムワードが構成されています。",
+        "whitelistedWordsConfigured": "{count} 個のホワイトリスト登録されたワードがあります。",
+        "disabledDescription": "不適切なコンテンツフィルターは、フォーム投稿で不適切なコンテンツを自動的に検出してフィルターすることで、清潔でプロフェッショナルな環境を維持するのに役立ちます。",
+        "actionsAria": "不適切なコンテンツフィルターアクション",
+        "saveAria": "不適切なコンテンツフィルター設定を保存",
+        "saved": "不適切なコンテンツフィルター設定を正常に保存しました",
+        "saveFailed": "不適切なコンテンツフィルター設定の保存に失敗しました"
+      },
+      "notificationsSection": {
+        "title": "通知",
+        "description": "新しいフォーム投稿のメールアラートを設定する",
+        "enableLabel": "メール通知",
+        "enableDescription": "新しい投稿のメール通知を有効にする",
+        "emailLabel": "通知メール",
+        "emailPlaceholder": "owner@email.com",
+        "subjectLabel": "メールの件名",
+        "messageLabel": "メールのメッセージ",
+        "customLinksLabel": "カスタムリンク",
+        "linkLabelPlaceholder": "ラベル",
+        "linkUrlPlaceholder": "https://example.com",
+        "removeLink": "削除",
+        "addLink": "追加",
+        "actionsAria": "通知設定アクション",
+        "saveAria": "通知設定を保存",
+        "saved": "通知設定を正常に保存しました",
+        "saveFailed": "通知設定の保存に失敗しました"
+      },
+      "brandingSection": {
+        "title": "ブランディング",
+        "description": "Ikiformのブランドとソーシャルメディアへのリンクを管理する",
+        "showPoweredByLabel": "\"Powered by Ikiform\"を表示",
+        "showPoweredByDescription": "フッターに小さなプロフィールを表示する",
+        "socialMediaLabel": "ソーシャルメディアリンク",
+        "socialMediaDescription": "フォームへのソーシャルプロフィールへのリンクを有効にする",
+        "platforms": {
+          "linkedin": {
+            "label": "LinkedIn",
+            "placeholder": "https://linkedin.com/in/username"
+          },
+          "twitter": {
+            "label": "X（Twitter）",
+            "placeholder": "https://x.com/username"
+          },
+          "youtube": {
+            "label": "YouTube",
+            "placeholder": "https://youtube.com/@channel"
+          },
+          "instagram": {
+            "label": "Instagram",
+            "placeholder": "https://instagram.com/username"
+          },
+          "facebook": {
+            "label": "Facebook",
+            "placeholder": "https://facebook.com/username"
+          },
+          "github": {
+            "label": "GitHub",
+            "placeholder": "https://github.com/username"
+          },
+          "website": {
+            "label": "ウェブサイト",
+            "placeholder": "https://example.com"
+          }
+        },
+        "iconSizeLabel": "アイコンサイズ",
+        "iconSizes": {
+          "small": "スモール",
+          "medium": "ミディアム",
+          "large": "ラージ"
+        },
+        "positionLabel": "ポジション",
+        "positions": {
+          "footer": "フッター",
+          "header": "ヘッダー",
+          "both": "両方"
+        },
+        "previewLabel": "プレビュー",
+        "disabledDescription": "フォームにソーシャルプロファイルを表示するためのソーシャルメディアリンクを有効にします。",
+        "actionsAria": "ブランディング設定アクション",
+        "saveAria": "ブランディング設定を保存",
+        "saved": "ブランディング設定を保存しました",
+        "saveFailed": "ブランディング設定の保存に失敗しました",
+        "authRequired": "ユーザー認証が必要です"
+      },
+      "metadataSection": {
+        "basicTitle": "基本的なSEO",
+        "basicDescription": "タイトル、説明、canonical URL",
+        "pageTitleLabel": "ページタイトル",
+        "pageTitlePlaceholder": "ページタイトルを入力（最大60文字）",
+        "metaDescriptionLabel": "メタ説明",
+        "metaDescriptionPlaceholder": "メタ説明を入力（最大160文字）",
+        "characterCount": "{count}/{max} 文字",
+        "keywordsLabel": "キーワード",
+        "keywordsPlaceholder": "カンマで区切られたキーワードを入力",
+        "authorLabel": "作者",
+        "authorPlaceholder": "作者名を入力",
+        "canonicalUrlLabel": "正規URL",
+        "canonicalUrlPlaceholder": "https://example.com/form",
+        "canonicalUrlDescription": "このフォームページの推奨URL",
+        "basicActionsAria": "基本的なSEOアクション",
+        "saveBasicAria": "基本的なSEO設定を保存",
+        "basicSaved": "基本的なSEOを保存しました",
+        "basicSaveFailed": "基本的なSEOの保存に失敗しました",
+        "socialTitle": "ソーシャルメタデータ",
+        "socialDescription": "Open GraphとTwitterの設定",
+        "ogTitleLabel": "Open Graphタイトル",
+        "ogTitlePlaceholder": "Open Graphタイトルを入力",
+        "ogTitleDescription": "Facebook、LinkedInなどで共有されたときに表示されるタイトル",
+        "ogDescriptionLabel": "Open Graph説明",
+        "ogDescriptionPlaceholder": "Open Graph説明を入力",
+        "ogDescriptionDescription": "ソーシャルメディアで共有されたときに表示される説明",
+        "ogImageLabel": "Open GraphイメージURL",
+        "ogImagePlaceholder": "https://example.com/image.jpg",
+        "ogTypeLabel": "Open Graphタイプ",
+        "ogTypePlaceholder": "Open Graphタイプを選択",
+        "ogTypes": {
+          "website": "ウェブサイト",
+          "article": "記事",
+          "profile": "プロファイル",
+          "video": "ビデオ"
+        },
+        "twitterCardLabel": "Twitterカードタイプ",
+        "twitterCardPlaceholder": "Twitterカードタイプを選択",
+        "twitterCards": {
+          "summary": "サマリー",
+          "summaryLargeImage": "サマリー大きな画像",
+          "app": "アプリ",
+          "player": "プレーヤー"
+        },
+        "twitterTitleLabel": "Twitterタイトル",
+        "twitterTitlePlaceholder": "Twitterタイトルを入力",
+        "twitterImageLabel": "TwitterイメージURL",
+        "twitterImagePlaceholder": "https://example.com/twitter-image.jpg",
+        "twitterDescriptionLabel": "Twitter説明",
+        "twitterDescriptionPlaceholder": "Twitter説明を入力",
+        "twitterSiteLabel": "Twitterサイト",
+        "twitterSitePlaceholder": "@yourhandle",
+        "twitterCreatorLabel": "Twitterクリエーター",
+        "twitterCreatorPlaceholder": "@creatorhandle",
+        "socialActionsAria": "ソーシャルメタデータアクション",
+        "saveSocialAria": "ソーシャルメタデータ設定を保存",
+        "socialSaved": "ソーシャルメタデータを保存しました",
+        "socialSaveFailed": "ソーシャルメタデータの保存に失敗しました",
+        "indexingTitle": "検索エンジンのインデックス登録",
+        "indexingDescription": "検索エンジンがこのフォームをクロールする方法を制御する",
+        "indexingBehaviorLabel": "検索エンジンのインデックス登録",
+        "indexingBehaviorPlaceholder": "インデックス登録動作を選択",
+        "indexingOptions": {
+          "index": "インデックス登録してフォロー（デフォルト）",
+          "noindex": "インデックス登録しない",
+          "nofollow": "フォローしない",
+          "noindexNofollow": "インデックス登録しない、フォローしない"
+        },
+        "indexingBehaviorDescription": "検索エンジンがこのページのインデックス登録とリンクのフォローを行うかどうかを制御します",
+        "switches": {
+          "noArchive": "アーカイブなし",
+          "noSnippet": "スニペットなし",
+          "noImageIndex": "画像インデックスなし",
+          "noTranslate": "翻訳なし"
+        },
+        "indexingActionsAria": "インデックス処理アクション",
+        "saveIndexingAria": "インデックス設定を保存",
+        "indexingSaved": "インデックス設定を保存しました",
+        "indexingSaveFailed": "インデックス設定の保存に失敗しました",
+        "updatedAnnouncement": "メタデータが更新されました",
+        "authRequired": "ユーザー認証が必要です"
+      },
+      "rateLimitSection": {
+        "title": "レート制限",
+        "description": "スパムや悪用を防ぐために送信頻度を制御する",
+        "ariaSettings": "レート制限設定",
+        "enableLabel": "レート制限を有効にする",
+        "enableDescription": "同じIPアドレスからの送信を制限する",
+        "maxSubmissionsLabel": "最大送信回数",
+        "maxSubmissionsDescription": "許可される最大送信回数",
+        "timeWindowLabel": "時間ウィンドウ（分）",
+        "timeWindowDescription": "送信をカウントする時間帯",
+        "blockDurationLabel": "ブロック継続時間（分）",
+        "blockDurationDescription": "制限に達した後のブロック時間",
+        "messageLabel": "レート制限超過時に表示されるメッセージ",
+        "messagePlaceholder": "多くの送信がありました。しばらく時間をおいてから再度お試しください。",
+        "messageDescription": "レート制限超過時に表示されるカスタムメッセージ",
+        "currentConfiguration": "現在の設定",
+        "summarySentence": "{maxSubmissions}回の送信を{timeWindow}分ごとに許可する。超過した場合、{blockDuration}分間ブロックする。",
+        "summaryExample": "例：ユーザーが{timeWindow}分以内に{maxSubmissions}回送信した場合、{blockDuration}分間ブロックされます。",
+        "disabledDescription": "レート制限は、送信頻度を制御することでフォームのスパムや悪用から保護するのに役立ちます。",
+        "actionsAria": "レート制限アクション",
+        "saveAria": "レート制限設定を保存",
+        "saved": "レート制限設定を保存しました",
+        "saveFailed": "レート制限設定の保存に失敗しました",
+        "defaultMessage": "多くの送信がありました。しばらく時間をおいてから再度お試しください。"
+      },
+      "responseLimitSection": {
+        "title": "レスポンス制限",
+        "description": "設定された合計数に達した後、送信を受け付けない",
+        "enableLabel": "レスポンス制限を有効にする",
+        "enableDescription": "このフォームが受け付ける送信の合計数を制限する",
+        "maxResponsesLabel": "最大レスポンス数",
+        "maxResponsesDescription": "このフォームが受け付けるレスポンスの合計数を制限する。制限に達すると、新しい送信はブロックされます。",
+        "limitReachedLabel": "制限に達したときのメッセージ",
+        "limitReachedDescription": "合計レスポンス制限に達した後に表示されるメッセージ",
+        "limitReachedPlaceholder": "このフォームはもう送信を受け付けていません。",
+        "disabledDescription": "フォームが上限なしで送信を受け付ける場合は、この設定を無効にしてください。",
+        "actionsAria": "レスポンス制限アクション",
+        "saveAria": "レスポンス制限設定を保存",
+        "saved": "レスポンス制限を保存しました",
+        "saveFailed": "レスポンス制限の保存に失敗しました",
+        "defaultMessage": "このフォームはもう送信を受け付けていません。"
+      },
+      "botProtectionSection": {
+        "title": "ボット保護",
+        "description": "自動化された送信を自動検出してブロックする",
+        "ariaSettings": "ボット保護設定",
+        "enableLabel": "ボット保護を有効にする",
+        "enableDescription": "フォーム送信のためのアンチボットチェックを追加する",
+        "detectionMessageLabel": "検出メッセージ",
+        "detectionMessagePlaceholder": "不審なボットアクティビティにより送信がブロックされました。",
+        "detectionMessageDescription": "自動化された送信がブロックされたときに表示されるメッセージ",
+        "currentConfiguration": "現在の設定",
+        "statusEnabledPrefix": "ボット保護は現在",
+        "enabled": "有効",
+        "statusEnabledSuffix": "このフォームのため有効です。",
+        "vercelTitle": "Vercel保護",
+        "vercelDescription": "Vercelにデプロイされている場合、追加の不正利用対策チェックが適用される場合があります。",
+        "disabledDescription": "ボット保護を有効にして、自動化されたツールやスクリプトトラフィックからのスパムを減らす。",
+        "actionsAria": "ボット保護アクション",
+        "saveAria": "ボット保護設定を保存",
+        "saved": "ボット保護設定を保存しました",
+        "saveFailed": "ボット保護設定の保存に失敗しました"
+      },
+      "quizSection": {
+        "title": "クイズとスコアリング",
+        "description": "クイズの動作とスコアリングルールを設定する",
+        "ariaSettings": "クイズ設定",
+        "enableLabel": "クイズモードを有効にする",
+        "enableDescription": "スコアリングや結果メッセージなどのクイズ機能を有効にする",
+        "passingScoreLabel": "合格スコア（％）",
+        "passingScoreDescription": "合格に必要な最小パーセンテージを設定する",
+        "timeLimitLabel": "時間制限（分）",
+        "timeLimitDescription": "クイズ完了のための任意の時間制限",
+        "timeLimitPlaceholder": "空白の場合、制限なし",
+        "showScoreLabel": "ユーザーのスコアを表示する",
+        "showScoreDescription": "フォーム送信後にユーザーのスコアを表示する",
+        "showCorrectAnswersLabel": "正解を表示する",
+        "showCorrectAnswersDescription": "送信後に正解と解説を表示する",
+        "allowRetakeLabel": "再受験を許可する",
+        "allowRetakeDescription": "ユーザーがスコアを向上させるためにクイズを再受験できるようにする",
+        "customMessagesLabel": "カスタム結果メッセージ",
+        "successMessageLabel": "成功メッセージ",
+        "successMessagePlaceholder": "素晴らしい仕事です！ クイズに合格しました。",
+        "improvementMessageLabel": "改善メッセージ",
+        "improvementMessagePlaceholder": "確認して再度試してください。",
+        "messagePlaceholderHelp": "{score}、{percentage}、{total}をプレースホルダとして使用する",
+        "actionsAria": "クイズアクション",
+        "saveAria": "クイズ設定を保存する",
+        "saved": "クイズ設定を保存しました",
+        "savedToast": "クイズ設定を保存しました",
+        "saveFailed": "クイズ設定の保存に失敗しました"
+      },
+      "apiSection": {
+        "title": "APIアクセス",
+        "description": "APIエンドポイントによる送信を許可するトグル",
+        "authRequired": "ユーザー認証が必要です",
+        "enableSupportLabel": "APIサポートを有効にする",
+        "enableSupportDescription": "安全なAPIキーによる外部送信を有効にする。",
+        "apiEndpointLabel": "APIエンドポイント",
+        "copyEndpointAria": "APIエンドポイントをコピーする",
+        "endpointCopied": "APIエンドポイントをコピーしました",
+        "apiKeyLabel": "APIキー",
+        "apiKeySecretHint": "このキーを秘密にしてください。 これを持っている人は誰でもこのフォームに送信できます。",
+        "generateApiKey": "APIキーを生成する",
+        "regenerateKey": "キーを再生成する",
+        "revokeKey": "キーを取り消す",
+        "generating": "生成中...",
+        "revoking": "取り消し中...",
+        "copyApiKeyAria": "APIキーをコピーする",
+        "showApiKeyAria": "APIキーを表示する",
+        "hideApiKeyAria": "APIキーを隠す",
+        "keyCopied": "APIキーをコピーしました",
+        "keyGenerated": "APIキーを生成しました",
+        "keyGenerateFailed": "APIキーの生成に失敗しました",
+        "keyRevoked": "APIキーを取り消しました",
+        "keyRevokeFailed": "APIキーの取り消しに失敗しました",
+        "showCodeExamples": "コード例を表示する",
+        "hideCodeExamples": "コード例を隠す",
+        "javascriptNodeLabel": "JavaScript / Node.js",
+        "sampleName": "Jane Doe",
+        "sampleEmail": "jane@example.com",
+        "sampleMessage": "APIからのHello",
+        "sampleValue": "サンプル値",
+        "copyCodeAria": "例コードをコピーする",
+        "downloadCodeAria": "例コードをダウンロードする",
+        "codeCopied": "例コードをコピーしました",
+        "codeDownloaded": "例コードをダウンロードしました",
+        "betaBadge": "BETA",
+        "integrationRateLimiting": "レート制限",
+        "integrationRateLimitingDescription": "スパムバーストからエンドポイントを保護する。",
+        "integrationResponseLimits": "レスポンス制限",
+        "integrationResponseLimitsDescription": "受け入れられた送信の合計を制限する。",
+        "integrationDuplicatePrevention": "重複防止",
+        "integrationDuplicatePreventionDescription": "同じユーザーからの繰り返し送信を減らす。",
+        "integrationProfanityFilter": "不適切なコンテンツフィルター",
+        "integrationProfanityFilterDescription": "不適切なコンテンツをブロックまたはサニタイズする。",
+        "emptyStateDescription": "APIを有効にして、安全なAPIキーを生成してください。",
+        "actionsAria": "APIアクセスアクション",
+        "saveAria": "API設定を保存",
+        "resetAria": "API設定をリセット",
+        "settingsSaved": "API設定が正常に保存されました",
+        "settingsSaveFailed": "API設定の保存に失敗しました"
+      },
+      "webhooks": {
+        "panel": {
+          "endpointsTitle": "Webhookエンドポイント",
+          "endpointsDescription": "外部サービスに送信を送信します。",
+          "addWebhook": "Webhookを追加"
+        },
+        "list": {
+          "emptyState": "まだWebhookが構成されていません。フォーム送信を受け取るために最初のWebhookを追加してください。",
+          "active": "アクティブ",
+          "inactive": "非アクティブ",
+          "edit": "編集",
+          "delete": "削除",
+          "test": "テスト",
+          "viewLogs": "ログを表示",
+          "events": {
+            "formSubmitted": "フォームが送信されました",
+            "formViewed": "フォームが表示されました",
+            "formStarted": "フォームが開始されました"
+          }
+        },
+        "hook": {
+          "fetchFailed": "Webhookの取得に失敗しました",
+          "created": "Webhookが正常に作成されました",
+          "createFailed": "Webhookの作成に失敗しました",
+          "updated": "Webhookが正常に更新されました",
+          "updateFailed": "Webhookの更新に失敗しました",
+          "deleted": "Webhookが正常に削除されました",
+          "deleteFailed": "Webhookの削除に失敗しました"
+        },
+        "formModal": {
+          "addTitle": "Webhookを追加",
+          "editTitle": "Webhookを編集",
+          "stepsAria": "Webhookの設定手順",
+          "steps": {
+            "basics": "基本",
+            "events": "イベント",
+            "headers": "ヘッダー",
+            "payload": "ペイロード",
+            "notifications": "通知",
+            "details": "確認"
+          },
+          "errors": {
+            "missingBasics": "Webhook URLが必要です。",
+            "missingEvent": "少なくとも1つのイベントを選択してください。",
+            "missingBasicsAndEvent": "Webhook URLと少なくとも1つのイベントが必要です。"
+          },
+          "webhookUrl": "Webhook URL",
+          "webhookUrlPlaceholder": "https://example.com/webhook",
+          "nameOptional": "名前（オプション）",
+          "namePlaceholder": "Slack通知",
+          "descriptionOptional": "説明（オプション）",
+          "descriptionPlaceholder": "このWebhookはフォームデータをどこに送信する必要がありますか",
+          "eventsHelp": "どのイベントがこのWebhookをトリガーするべきかを選択してください。",
+          "events": {
+            "formSubmitted": "フォームが送信されました",
+            "formViewed": "フォームが表示されました",
+            "formStarted": "フォームが開始されました"
+          },
+          "httpMethod": "HTTPメソッド",
+          "selectHttpMethodAria": "HTTPメソッドを選択",
+          "selectMethodPlaceholder": "メソッドを選択",
+          "httpMethodDescriptions": {
+            "post": "新しいリソースを作成するか、ペイロードデータを送信します。",
+            "put": "既存のリソースを置き換えます。",
+            "patch": "既存のリソースを部分的に更新します。",
+            "delete": "リソースを削除します。",
+            "get": "データを変更せずに情報を取得します。",
+            "head": "ヘッダーのみを取得します。"
+          },
+          "addHeader": "ヘッダーを追加",
+          "headerName": "ヘッダー名",
+          "headerNamePlaceholder": "認証",
+          "headerNameAria": "Webhookヘッダー名",
+          "headerValue": "ヘッダー値",
+          "headerValuePlaceholder": "ベアラートークン",
+          "headerValueAria": "Webhookヘッダー値",
+          "removeHeaderAria": "ヘッダーを削除",
+          "headersHelp": "カスタムヘッダーはオプションで、各Webhookリクエストとともに送信されます。",
+          "payloadTemplateOptional": "ペイロードテンプレート（オプション）",
+          "availableVariables": "利用可能な変数",
+          "variables": {
+            "formData": "送信されたフォームデータオブジェクト",
+            "formId": "フォーム識別子",
+            "submissionId": "送信識別子",
+            "event": "イベントをトリガー",
+            "timestamp": "イベントのタイムスタンプ",
+            "formatted": "わかりやすい要約"
+          },
+          "notificationEmailOptional": "通知メール (オプション)",
+          "notificationEmailPlaceholder": "alerts@example.com",
+          "emailOnSuccess": "正常に配信された場合のメール通知",
+          "emailOnFailure": "配信に失敗した場合のメール通知",
+          "selectAll": "すべて選択",
+          "clear": "クリア",
+          "back": "戻る",
+          "next": "次へ",
+          "skip": "スキップ",
+          "cancel": "キャンセル",
+          "createWebhook": "Webhookを作成する",
+          "updateWebhook": "Webhookを更新する"
+        },
+        "testDialog": {
+          "title": "Webhookをテストする",
+          "description": "エンドポイントを検証するためにテストイベントを送信します",
+          "endpointTitle": "エンドポイント",
+          "nameLabel": "名前",
+          "untitledWebhook": "無題のWebhook",
+          "descriptionLabel": "説明",
+          "methodLabel": "HTTPメソッド",
+          "urlLabel": "URL",
+          "triggersTitle": "トリガー",
+          "events": {
+            "formSubmitted": "フォームが送信されました",
+            "formViewed": "フォームが表示されました",
+            "formStarted": "フォームが開始されました"
+          },
+          "modeTitle": "テストモード",
+          "mode": {
+            "real": "実際のペイロードを送信する",
+            "success": "成功レスポンスを強制する",
+            "failure": "失敗レスポンスを強制する"
+          },
+          "sendTest": "テストを送信する",
+          "close": "閉じる",
+          "success": "テストは正常に送信されました",
+          "failed": "テストに失敗しました",
+          "testSent": "Webhookテストを送信しました",
+          "testFailed": "Webhookテストに失敗しました",
+          "testFailedNetwork": "Webhookテストを送信できませんでした"
+        },
+        "logDialog": {
+          "title": "Webhookログ",
+          "status": "ステータス",
+          "response": "レスポンス",
+          "attempt": "試行回数",
+          "resend": "再送信",
+          "resendSuccess": "Webhookを再送信しました",
+          "resendFailed": "Webhookを再送信できませんでした",
+          "copied": "クリップボードにコピーしました",
+          "copyFailed": "コピーに失敗しました",
+          "copyCodeAria": "ペイロードをコピーする",
+          "viewPayload": "ペイロードを表示する",
+          "payloadTitle": "ペイロード",
+          "noPayloadDataTitle": "ペイロードデータなし",
+          "noPayloadDataDescription": "このログエントリーのペイロードは利用できません",
+          "noPayloadReasonMethod": "このリクエストタイプにはペイロードが含まれていません",
+          "noPayloadReasonError": "エラーによりペイロードのキャプチャに失敗しました",
+          "noPayloadReasonEmpty": "ペイロードデータが保存されませんでした",
+          "eventInformation": "イベント情報",
+          "eventLabel": "イベント",
+          "formNameLabel": "フォーム名",
+          "formIdLabel": "フォームID",
+          "submissionIdLabel": "送信ID",
+          "ipAddressLabel": "IPアドレス",
+          "formFields": "フォームフィールド",
+          "rawFormData": "生のフォームデータ",
+          "rawJson": "生のJSON",
+          "formatted": "フォーマット済み",
+          "additionalData": "追加データ",
+          "notAvailable": "利用不可",
+          "unknown": "不明",
+          "complexObject": "複雑なオブジェクト",
+          "complexArray": "複雑な配列",
+          "failedCount": "{count} に失敗しました",
+          "pendingCount": "{count} は保留中です",
+          "successfulCount": "{count} に成功しました",
+          "noLogsTitle": "ログがありません",
+          "noLogsDescription": "このWebhookにイベントを送信して、配信履歴を表示します",
+          "errorTitle": "ログを読み込めませんでした",
+          "fetchFailed": "ウェブフックログの読み込みに失敗しました"
+        }
+      },
+      "designSection": {
+        "title": "デザイン",
+        "description": "表示とカスタマイズを制御する",
+        "advancedTitle": "高度なカスタマイズ",
+        "advancedDescription": "フォーカスされたパネルで、色、タイポグラフィ、スペーシングなどを微調整します。",
+        "openAria": "新しいタブでカスタマイズパネルを開く",
+        "openLabel": "カスタマイズパネルを開く…"
+      }
+    },
+    "fieldRenderer": {
+      "scheduler": {
+        "title": "スケジューラー",
+        "openScheduler": "スケジューラーを開く",
+        "embedTitle": "スケジューラー埋め込み",
+        "notConfigured": "スケジューラーのリンクが構成されていません。",
+        "close": "閉じる"
+      },
+      "email": {
+        "defaultPlaceholder": "メールアドレスを入力してください",
+        "autocompleteHint": "Tabを押すかクリックして完了: ",
+        "completeEmailAria": "メールアドレスを完了する",
+        "completeButton": "完了",
+        "autocompleteBadge": "自動補完: ",
+        "allowedDomainsLabel": "許可されているドメイン: "
+      },
+      "fileUpload": {
+        "bytesUnit": "バイト",
+        "uploadFailed": "アップロードに失敗しました",
+        "uploadErrorTitle": "アップロードエラー",
+        "uploadedFiles": "アップロードされたファイル ({count})",
+        "uploadedBadge": "アップロード済み",
+        "removeFileAria": "{name} を削除する",
+        "maxFilesAndSize": "{maxFiles} ファイルまで、{maxSize} まで許可",
+        "allowedTypes": "許可されている種類"
+      },
+      "social": {
+        "platforms": {
+          "linkedin": "LinkedIn",
+          "twitter": "X（Twitter）",
+          "youtube": "YouTube",
+          "instagram": "Instagram",
+          "facebook": "Facebook",
+          "github": "GitHub",
+          "website": "ウェブサイト"
+        },
+        "customLink": "カスタムリンク {index}",
+        "customLinkPlaceholder": "https://example.com",
+        "preview": "プレビュー"
+      },
+      "signature": {
+        "drawHere": "ここに署名を描いてください",
+        "clear": "クリア",
+        "preview": "プレビュー",
+        "previewAlt": "署名プレビュー"
+      },
+      "rating": {
+        "groupAria": "評価",
+        "rateAria": "{index} {type} を評価する"
+      },
+      "poll": {
+        "fetchFailed": "オプションの取得に失敗しました",
+        "resultsTitle": "投票結果",
+        "totalVotes": "{count} 票",
+        "votes": "{count} 票"
+      }
+    },
+    "formRenderer": {
+      "shared": {
+        "poweredBy": "Powered by",
+        "incorrectPassword": "パスワードが正しくありません!",
+        "passwordProtectionMessage": "このフォームはパスワードで保護されています。続行するにはパスワードを入力してください。"
+      },
+      "successScreen": {
+        "title": "ありがとうございます!",
+        "defaultMessage": "フォームが正常に送信されました。",
+        "redirecting": "しばらくしてリダイレクトします...",
+        "poweredBy": "Powered by"
+      },
+      "quizResults": {
+        "titlePassed": "おめでとうございます!",
+        "titleComplete": "クイズ完了",
+        "descriptionPassed": "クイズに正常に完了しました!",
+        "descriptionRetry": "クイズを受けてくれてありがとう。練習を続けてください!",
+        "score": "スコア",
+        "points": "ポイント",
+        "answered": "回答した",
+        "totalQuestions": "合計質問数",
+        "passed": "合格",
+        "needsImprovement": "改善が必要",
+        "retakeQuiz": "クイズを再度受験する",
+        "questionByQuestion": "質問別結果",
+        "questionLabel": "質問 {index}: {label}",
+        "yourAnswer": "あなたの答え: ",
+        "noAnswer": "回答なし",
+        "correctAnswer": "正解: ",
+        "pointsLower": "ポイント"
+      },
+      "multiStep": {
+        "previous": "前へ",
+        "next": "次へ",
+        "submit": "送信",
+        "defaults": {
+          "formTitle": "フォーム"
+        },
+        "validation": {
+          "required": "このフィールドは必須です",
+          "emailInvalid": "有効なメールアドレスを入力してください",
+          "minLength": "少なくとも {count} 文字を入力する必要があります",
+          "maxLength": " {count} 文字以下で入力する必要があります"
+        },
+        "toasts": {
+          "submitSuccess": "フォームが正常に送信されました!",
+          "botDetected": "ボットが検出されました。アクセスが拒否されました。",
+          "duplicateSubmission": "このフォームはすでに送信されています。",
+          "rateLimitExceeded": "リクエストが多すぎます。後で再度試してください。",
+          "responseLimitReached": "このフォームはもう送信を受け付けていません。",
+          "contentValidationFailed": "送信内容に不適切なコンテンツが含まれています。",
+          "submitFailed": "フォームの送信に失敗しました",
+          "submitFailedTryAgain": "フォームの送信に失敗しました。後で再度試してください。"
+        }
+      },
+      "singleStep": {
+        "fixHighlightedErrors": "送信前にハイライトされたエラーを修正してください。",
+        "submit": "送信"
+      },
+      "duplicateSubmission": {
+        "title": "重複した送信が検出されました",
+        "wait": "{time} 待ってください",
+        "attemptsLeft": "{count, plural, one {残り # 回} other {残り # 回}}",
+        "tryAgain": "再度試してください",
+        "waitBeforeRetry": "再度送信する前にしばらく待ってください。",
+        "units": {
+          "seconds": "{count, plural, one {# 秒} other {# 秒}}",
+          "minutes": "{count, plural, one {# 分} other {# 分}}",
+          "hours": "{count, plural, one {# 時間} other {# 時間}}",
+          "days": "{count, plural, one {# 日} other {# 日}}"
+        }
+      }
+    }
+  },
+  "aiBuilder": {
+    "client": {
+      "createFormWithKiko": "Kikoでフォームを作成する",
+      "streamError": "エラー: {error}",
+      "generatingResponse": "応答を生成しています…",
+      "loading": "読み込み中…",
+      "suggestions": {
+        "contactForm": "お問い合わせフォームを作成する",
+        "customerFeedbackSurvey": "顧客フィードバック調査",
+        "eventRegistrationForm": "イベント登録フォーム",
+        "jobApplicationForm": "求人応募フォーム"
+      }
+    },
+    "chatHeader": {
+      "backToFormBuilder": "フォームビルダーに戻る",
+      "title": "Kiko AI"
+    },
+    "chatInput": {
+      "messageToKiko": "Kiko AIへのメッセージ",
+      "placeholder": "作成したいフォームを説明してください…",
+      "sendMessage": "メッセージを送信する",
+      "sendHelp": "Enterを押して送信、Shift+Enterで改行、または⌘/Ctrl+Enterで送信"
+    },
+    "welcome": {
+      "heading": "今日はKikoがどのように支援できますか?",
+      "description": "こんにちは、私はKiko—AI搭載のフォームアシスタントです。\nフォームの作成、編集、または分析を依頼してください!"
+    },
+    "preview": {
+      "title": "Kiko AI",
+      "formFallback": "フォーム {index}",
+      "viewJson": "JSONを表示",
+      "useThisForm": "このフォームを使用する",
+      "noFormSelected": "フォームが選択されていません。"
+    },
+    "jsonModal": {
+      "title": "フォームJSONスキーマ",
+      "description": "フォームの生成されたJSONスキーマを表示またはコピーする",
+      "close": "閉じる"
+    }
+  },
+  "analytics": {
+    "formAnalytics": {
+      "submissionExported": "送信のエクスポートに成功しました",
+      "formDeleted": "フォームが正常に削除されました",
+      "failedDeleteForm": "フォームの削除に失敗しました",
+      "backToDashboard": "ダッシュボードに戻る",
+      "published": "公開済み",
+      "draft": "下書き",
+      "analyticsSubtitle": "フォーム分析と送信データ",
+      "formActions": "フォームアクション",
+      "editForm": "フォームを編集する",
+      "shareForm": "フォームを共有する",
+      "viewSubmissions": "送信を表示する",
+      "moreActions": "その他の操作",
+      "exportCsv": "CSVをエクスポートする",
+      "exportJson": "JSONをエクスポートする",
+      "deleteForm": "フォームを削除する",
+      "openKiko": "Kiko AIを開く",
+      "kiko": "Kiko AI",
+      "kikoTooltip": "AIフォーム分析",
+      "recentSubmissions": "最近の送信",
+      "viewAll": "すべてを表示する",
+      "noSubmissionsTitle": "まだ送信はありません",
+      "noSubmissionsDescription": "ユーザーがフォームの入力を開始すると、レスポンスがここに表示されます。",
+      "submission": "送信 {id}",
+      "fieldsCount": "{count} フィールド",
+      "view": "表示する",
+      "viewSubmissionDetails": "送信の詳細を表示する",
+      "viewMoreSubmissions": "さらに {count} 件の送信を表示する",
+      "noDataToExport": "エクスポートするデータがありません",
+      "csvExportSuccess": "データがCSVに正常にエクスポートされました!",
+      "jsonExportSuccess": "データが正常にエクスポートされました!",
+      "deleteModalTitle": "フォームを削除する",
+      "deleteModalConfirm": "フォームを削除する",
+      "deleteModalCancel": "キャンセル",
+      "deleteModalDescription": "「{title}」を削除してもよろしいですか？この操作は元に戻すことができず、フォームとすべての送信が完全に削除されます。",
+      "formPublished": "フォームが公開されました！"
+    },
+    "statsCards": {
+      "totalSubmissions": "合計送信数",
+      "formFields": "フォームフィールド",
+      "completionRate": "完了率",
+      "last30Days": "過去30日間",
+      "avgDailySubmissions": "1日平均送信数",
+      "bounceRate": "バウンス率",
+      "peakHour": "ピーク時間",
+      "uniqueResponses": "ユニークレスポンス"
+    },
+    "infoCards": {
+      "lastSubmission": "最後の送信",
+      "fromIp": "{ip} から",
+      "noSubmissionsYet": "まだ送信はありません",
+      "formStatus": "フォームステータス",
+      "published": "公開済み",
+      "created": "作成された",
+      "updated": "更新された",
+      "yes": "はい",
+      "no": "いいえ",
+      "quickStats": "クイック統計",
+      "avgFieldsCompleted": "平均完了フィールド数",
+      "mostActiveDay": "最もアクティブな日",
+      "submissions": "{count} 件の提出",
+      "formType": "フォームの種類",
+      "multiStep": "マルチステップ",
+      "singlePage": "シングルページ"
+    },
+    "trendsChart": {
+      "title": "送信動向",
+      "noData": "データが利用できません",
+      "submissions": "送信内容"
+    },
+    "dropoff": {
+      "title": "離脱分析",
+      "onlyMultiStep": "離脱分析は、複数ステップのフォームでのみ利用可能です。",
+      "subtitle": "フォームのどこでユーザーが離脱しているかを理解する",
+      "step": "ステップ",
+      "reached": "到達",
+      "dropoffPercent": "離脱率",
+      "completionPercent": "完了率",
+      "ofTotal": "{total} のうち",
+      "stepFallback": "{index} ステップ",
+      "dropoffBarAria": "ステップ {index} の離脱バー",
+      "completionBarAria": "ステップ {index} の完了バー"
+    },
+    "chatModal": {
+      "title": "キコ",
+      "description": "フォーム分析について AI とチャットする"
+    },
+    "chat": {
+      "emptyTitle": "キコに何でも聞く",
+      "emptyDescription": "フォームデータから即時洞察と分析を取得する。自然言語で質問を入力する。",
+      "thinking": "考え中...",
+      "inputPlaceholder": "フォーム分析について尋ねる...",
+      "inputHelp": "<enter></enter> を押して送信、<shiftEnter></shiftEnter> で改行"
+    },
+    "submissionDetails": {
+      "title": "{id} の送信詳細",
+      "submissionId": "送信ID",
+      "submittedAt": "送信日時",
+      "ipAddress": "IPアドレス",
+      "formData": "フォームデータ",
+      "emptyValue": "—"
+    },
+    "submissions": {
+      "backToAnalytics": "分析に戻る",
+      "published": "公開済み",
+      "draft": "下書き",
+      "formSubmissions": "フォーム送信 ({count})",
+      "exportActions": "エクスポートアクション",
+      "exportCsv": "CSVをエクスポートする",
+      "exportJson": "JSONをエクスポートする",
+      "viewDetailedAnalytics": "詳細分析を表示",
+      "submissions": "送信内容",
+      "searchSubmissions": "送信を検索...",
+      "noMatchingSubmissions": "一致する送信がありません",
+      "noSubmissionsYet": "まだ送信はありません",
+      "noSubmissionsDescription": "ユーザーがフォームの入力を開始すると、レスポンスがここに表示されます。",
+      "adjustSearchTerms": "検索条件を調整して送信を探してみてください。",
+      "id": "ID",
+      "submitted": "送信日時",
+      "ipAddress": "IPアドレス",
+      "fields": "フィールド",
+      "actions": "アクション",
+      "fieldsCount": "{count} フィールド",
+      "fieldsCount_plural": "{count} フィールド",
+      "view": "表示する",
+      "showingRange": "{start}-{end} の {total} 件の送信を表示",
+      "previous": "前へ",
+      "next": "次へ",
+      "pageOf": "ページ {page} / {total}",
+      "noSubmissionsToExport": "エクスポートする送信がありません",
+      "submissionId": "送信ID",
+      "submittedAt": "送信日時",
+      "csvExportedSuccess": "CSV をエクスポートしました",
+      "jsonExportedSuccess": "JSON をエクスポートしました"
+    },
+    "premiumRequired": {
+      "analytics": {
+        "title": "プレミアムが必要です",
+        "description": "フォーム分析にアクセスするにはプレミアムサブスクリプションが必要です。すべての機能をアンロックするにはアップグレードしてください。",
+        "viewPricing": "価格を見る"
+      },
+      "submissions": {
+        "title": "プレミアムが必要です",
+        "description": "フォーム送信にアクセスするにはプレミアムサブスクリプションが必要です。すべての機能をアンロックするにはアップグレードしてください。",
+        "viewPricing": "価格を見る"
+      }
+    }
+  },
+  "trialBanner": {
+    "aria": {
+      "status": "トライアルステータスの通知"
+    },
+    "endsInPrefix": "無料トライアルは ",
+    "remainingSuffix": "残り",
+    "expired": "トライアル期限切れ",
+    "units": {
+      "day": "日",
+      "hour": "時間",
+      "minute": "分",
+      "second": "秒"
+    }
+  },
+  "embed": {
+    "customizer": {
+      "subtitle": "フォームのカスタマイズと埋め込みコードの生成",
+      "showCode": "コードを表示",
+      "settings": "設定",
+      "preview": "プレビュー",
+      "desktop": "デスクトップ",
+      "mobile": "モバイル"
+    },
+    "settings": {
+      "dimensions": {
+        "title": "寸法",
+        "width": "幅",
+        "widthPlaceholder": "例: 100%, 800px",
+        "height": "高さ",
+        "heightPlaceholder": "例: 600px, 100vh",
+        "makeResponsive": "レスポンシブ (コンテナ幅に調整)"
+      },
+      "appearance": {
+        "title": "外観",
+        "backgroundColor": "背景色",
+        "allowTransparentBackground": "透明背景を許可 (背景色を上書き)"
+      },
+      "border": {
+        "title": "境界線とスタイル設定",
+        "showBorder": "境界線を表示",
+        "borderColor": "境界線の色",
+        "borderWidth": "ボーダー幅（px）",
+        "borderRadius": "ボーダー半径（px）",
+        "padding": "パディング（px）",
+        "paddingHelp": "iframe 周辺のスペース"
+      },
+      "performance": {
+        "title": "パフォーマンス",
+        "loadingMode": "ロードモード",
+        "loadingModePlaceholder": "ロードモードを選択",
+        "lazy": "遅延（推奨）",
+        "eager": "イーガー",
+        "help": "遅延読み込みは、ページのパフォーマンスを向上させ、iframe が表示されるまで読み込みを遅らせます"
+      }
+    },
+    "codeModal": {
+      "title": "埋め込みコード",
+      "description": "フレームワークを選択してコードをコピー",
+      "codeLabel": "{mode} コード",
+      "copied": "コピーしました！",
+      "copy": "コピー",
+      "close": "閉じる",
+      "modes": {
+        "htmlDescription": "ユニバーサル HTML iframe",
+        "reactDescription": "React コンポーネント",
+        "nextjsDescription": "Next.js コンポーネント",
+        "vueDescription": "Vue.js コンポーネント",
+        "wordpressDescription": "WordPress ショートコード"
+      },
+      "iframeTitle": "フォーム"
+    },
+    "testPage": {
+      "metadata": {
+        "title": "埋め込みテスト - IkiForm",
+        "description": "フォーム埋め込み機能を実証するテストページ"
+      },
+      "title": "フォーム埋め込みテストページ",
+      "descriptionPrefix": "このページは、フォームをさまざまな構成で埋め込む方法を示しています。",
+      "descriptionSuffix": "独自の埋め込みをカスタマイズするには、",
+      "tryCustomizer": "埋め込みカスタマイザーを試す",
+      "cards": {
+        "standard": {
+          "title": "標準埋め込み",
+          "description": "600px 高さ - デスクトップ表示に最適",
+          "badge": "レスポンシブ",
+          "iframeTitle": "標準フォーム埋め込み"
+        },
+        "compact": {
+          "title": "コンパクト埋め込み",
+          "description": "400px 高さ - サイドバーや小さなスペースに最適",
+          "badge": "ミニマル",
+          "iframeTitle": "コンパクトフォーム埋め込み"
+        },
+        "fixed": {
+          "title": "固定幅埋め込み",
+          "description": "800px 幅、中央揃え - 特定のレイアウトに最適",
+          "badge": "カスタムスタイル",
+          "iframeTitle": "固定幅フォーム埋め込み"
+        },
+        "react": {
+          "title": "React コンポーネントの例",
+          "description": "適切な型付けを使用した TypeScript React コンポーネント",
+          "codeIframeTitle": "フォーム"
+        }
+      },
+      "guide": {
+        "title": "埋め込み機能の使い方",
+        "description": "フォームの埋め込みに関するステップバイステップガイド",
+        "steps": {
+          "step1": {
+            "title": "埋め込みカスタマイザーにアクセス",
+            "prefix": "に移動",
+            "suffix": "または、フォームダッシュボードの埋め込みボタンをクリックします。"
+          },
+          "step2": {
+            "title": "埋め込みをカスタマイズ",
+            "item1": "幅と高さの寸法を調整",
+            "item2": "テーマ（ライト、ダーク、自動）を選択",
+            "item3": "境界線とスタイルを設定",
+            "item4": "ロード動作を設定"
+          },
+          "step3": {
+            "title": "コードを取得",
+            "description": "生成された HTML、React、Next.js、Vue、または WordPress コードをコピーして、ウェブサイトに貼り付けます。"
+          },
+          "step4": {
+            "title": "ダッシュボード統合",
+            "description": "フォームアクションの埋め込みボタンを使用して、フォームダッシュボードから直接埋め込みオプションにアクセスします。"
+          }
+        }
+      }
+    }
+  }
+}

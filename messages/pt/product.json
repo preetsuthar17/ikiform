@@ -1,0 +1,2211 @@
+{
+  "common": {
+    "na": "N/A",
+    "premium": {
+      "title": "Requer Premium",
+      "viewPricing": "Ver Preços",
+      "aiBuilderDescription": "Você precisa de uma assinatura premium para usar o construtor de formulários de IA. Atualize para desbloquear todos os recursos.",
+      "formBuilderDescription": "Você precisa de uma assinatura premium para usar o construtor de formulários. Atualize para desbloquear todos os recursos."
+    }
+  },
+  "formBuilder": {
+    "header": {
+      "title": "Construtor de Formulários",
+      "goToDashboard": "Ir para o Painel",
+      "fieldCount": "{count} campo",
+      "fieldCount_plural": "{count} campos",
+      "saving": "Salvando",
+      "moreActions": "Mais ações",
+      "multiStepForm": "Formulário multi-etapa",
+      "toggleMultiStepMode": "Alternar modo multi-etapa",
+      "viewJson": "Ver JSON",
+      "analytics": "Análises",
+      "share": "Compartilhar",
+      "useKiko": "Usar Kiko",
+      "settings": "Configurações",
+      "publish": "Publicar",
+      "published": "Publicado",
+      "publishing": "Publicando...",
+      "unpublishing": "Despublicando...",
+      "publishForm": "Publicar formulário",
+      "unpublishForm": "Despublicar formulário",
+      "save": "Salvar",
+      "saveForm": "Salvar Formulário",
+      "actionsAria": "Ações do construtor de formulários"
+    },
+    "modals": {
+      "formSettings": "Configurações do Formulário",
+      "internalTitle": "Título Interno",
+      "internalTitlePlaceholder": "Digite o título interno para sua referência...",
+      "internalTitleDescription": "Este título é apenas visível para você no painel e no construtor de formulários",
+      "publicTitle": "Título Público",
+      "publicTitlePlaceholder": "Digite o título a ser exibido aos usuários...",
+      "publicTitleDescription": "Este título será exibido aos usuários no formulário real. Deixe em branco para usar o título interno.",
+      "description": "Descrição",
+      "descriptionPlaceholder": "Digite a descrição do formulário",
+      "submitButtonText": "Texto do Botão de Envio",
+      "submitButtonTextPlaceholder": "Texto do botão de envio",
+      "submit": "Enviar",
+      "successMessage": "Mensagem de Sucesso",
+      "successMessagePlaceholder": "Mensagem exibida após envio bem-sucedido",
+      "redirectUrlOptional": "URL de Redirecionamento (opcional)",
+      "redirectUrlPlaceholder": "https://example.com/thank-you",
+      "cancel": "Cancelar",
+      "saveSettings": "Salvar Configurações"
+    },
+    "page": {
+      "formFields": "Campos do Formulário",
+      "authRequired": "Autenticação Requerida",
+      "authRequiredDescription": "Faça login para usar o construtor de formulários.",
+      "goToLogin": "Ir para Login",
+      "stepDefaultTitle": "Etapa {index}",
+      "stepDefaultDescription": "Primeira etapa do seu formulário",
+      "loadingCustomization": "Carregando personalização..."
+    },
+    "blockManager": {
+      "header": {
+        "title": "Estrutura do Formulário",
+        "stepsCount": "{count, plural, one {# etapa} other {# etapas}}",
+        "description": "Organize seu formulário em seções lógicas",
+        "addStepAria": "Adicionar nova etapa ao formulário",
+        "addStep": "Adicionar Etapa"
+      },
+      "item": {
+        "dragHandleAria": "Arraste para reordenar a etapa {title}",
+        "dragToReorder": "Arraste para reordenar"
+      },
+      "headerActions": {
+        "stepBadge": "Etapa {index}",
+        "editStepAria": "Editar etapa {title}",
+        "deleteStepAria": "Excluir etapa {title}",
+        "editStep": "Editar etapa",
+        "deleteStep": "Excluir etapa",
+        "collapseStep": "Recolher etapa",
+        "expandStep": "Expandir etapa"
+      },
+      "editForm": {
+        "stepTitlePlaceholder": "Título da etapa",
+        "stepDescriptionPlaceholder": "Descrição da etapa (opcional)",
+        "save": "Salvar",
+        "cancel": "Cancelar"
+      },
+      "fieldsList": {
+        "empty": "Ainda não há campos. Adicione campos do painel à direita."
+      }
+    },
+    "multiStepNavigation": {
+      "deleteStep": "Excluir etapa",
+      "addStep": "Adicionar etapa",
+      "deleteDialogTitle": "Excluir Etapa",
+      "deleteDialogDescription": "Tem certeza de que deseja excluir esta etapa? Esta ação não pode ser desfeita.",
+      "cancel": "Cancelar"
+    },
+    "formFields": {
+      "addFieldToFormAria": "Adicionar campo ao formulário",
+      "addField": "Adicionar Campo",
+      "addSpecificFieldAria": "Adicionar campo {label}",
+      "formFields": "Campos do formulário",
+      "noFieldsInStep": "Nenhum campo nesta etapa",
+      "noFieldsYet": "Nenhum campo adicionado ainda",
+      "addFieldsToStep": "Adicione campos do painel à esquerda para começar a criar seu formulário",
+      "addFieldsFromLeftPanel": "Adicione campos do painel à esta etapa",
+      "fieldsCount": "{count, plural, one {# campo} other {# campos}}",
+      "fieldAria": "campo {type}",
+      "deleteFieldAria": "Excluir campo {type}",
+      "deleteField": "Excluir campo"
+    },
+    "jsonViewModal": {
+      "title": "Esquema JSON do Formulário",
+      "description": "Visualização somente leitura do esquema atual do formulário. Use o botão de copiar para copiar o JSON.",
+      "copySuccess": "JSON copiado para a área de transferência!",
+      "copyError": "Falha ao copiar o JSON",
+      "copied": "Copiado",
+      "copyJson": "Copiar JSON"
+    },
+    "settingsMobile": {
+      "sectionsAria": "Seções de configurações",
+      "goToSectionAria": "Ir para as configurações de {section}",
+      "backToListAria": "Voltar para a lista de configurações",
+      "settings": "Configurações"
+    },
+    "creation": {
+      "title": "Criar um Novo Formulário",
+      "cancel": "Cancelar",
+      "back": "Voltar",
+      "createForm": "Criar Formulário",
+      "reviewAction": "Revisar",
+      "next": "Próximo",
+      "types": {
+        "single": {
+          "title": "Formulário de Uma Página",
+          "description": "Formulário tradicional com todos os campos em uma página"
+        },
+        "multi": {
+          "title": "Formulário Multi-Etapa",
+          "description": "Experiência de formulário guiado com várias etapas"
+        }
+      },
+      "typePreview": {
+        "stepOf": "Etapa {step} de {total}"
+      },
+      "configuration": {
+        "title": "Detalhes do formulário",
+        "description": "Defina as informações internas e públicas do seu formulário.",
+        "internalTitle": "Título Interno",
+        "internalTitlePlaceholder": "Digite o título interno para sua referência…",
+        "internalTitleHelp": "Somente visível no painel de controle e construtor.",
+        "publicTitle": "Título Público",
+        "publicTitlePlaceholder": "Digite o título a ser exibido aos usuários…",
+        "publicTitleHelp": "Exibido aos usuários no formulário. Deixe vazio para reutilizar o título interno.",
+        "formDescription": "Descrição do Formulário",
+        "formDescriptionPlaceholder": "Digite uma breve descrição para orientar os usuários…",
+        "formDescriptionHelp": "Opcional. Ajuda os usuários a entender o propósito do formulário."
+      },
+      "review": {
+        "formType": "Tipo de Formulário",
+        "multiStepForm": "Formulário Multi-Etapa",
+        "singlePageForm": "Formulário de Uma Página",
+        "multiStep": "Multi-Etapa",
+        "singlePage": "Uma Página",
+        "editFormType": "Editar tipo de formulário",
+        "formConfiguration": "Configuração do Formulário",
+        "editFormConfiguration": "Editar configuração do formulário",
+        "internalTitle": "Título Interno",
+        "publicTitle": "Título Público",
+        "description": "Descrição",
+        "preview": "Pré-visualização",
+        "previewDescription": "Captura de tela do seu formulário."
+      },
+      "stepIndicator": {
+        "progress": "Progresso",
+        "stepCompleted": "Etapa {index} concluída",
+        "stepCurrent": "Etapa {index} atual",
+        "step": "Etapa {index}"
+      }
+    },
+    "customize": {
+      "page": {
+        "savedCustomization": "Personalização salva",
+        "saveFailed": "Falha ao salvar alterações. Tente novamente.",
+        "tabs": {
+          "presets": "Predefinições",
+          "layout": "Layout",
+          "colors": "Cores",
+          "text": "Texto"
+        },
+        "backToCustomize": "Voltar para Personalizar",
+        "previewForm": "Pré-visualizar Formulário",
+        "customizeForm": "Personalizar Formulário",
+        "publicTitle": "Título público: \"{title}\"",
+        "customizationActions": "Ações de personalização",
+        "back": "Voltar",
+        "save": "Salvar",
+        "customize": "Personalizar"
+      },
+      "colors": {
+        "title": "Configurações de Cor",
+        "description": "Personalizar cores e tema",
+        "backgroundColorLabel": "Cor de Fundo",
+        "backgroundColorHelp": "Define a cor de fundo do contêiner do formulário",
+        "textColorLabel": "Cor do Texto",
+        "textColorHelp": "Define a cor de todos os elementos de texto no formulário",
+        "primaryColorLabel": "Cor Primária (Botões e Destaque)",
+        "primaryColorHelp": "Define a cor para botões, estados de foco e elementos de destaque",
+        "borderColorLabel": "Cor da Borda",
+        "borderColorHelp": "Define a cor para bordas de campos de entrada e divisores",
+        "websiteBackgroundColorLabel": "Cor de Fundo do Site",
+        "websiteBackgroundColorHelp": "Define a cor de fundo de todo o site/página"
+      },
+      "typography": {
+        "title": "Configurações de Tipografia",
+        "description": "Personalizar fontes e estilo de texto",
+        "fontFamily": "Família de Fonte",
+        "fontFamilyPlaceholder": "Selecione uma Fonte do Google...",
+        "fontPreview": "Pré-visualização da Fonte",
+        "previewLine1": "A raposa marrom ágil pula sobre o cachorro preguiçoso",
+        "previewLine2": "Texto de exemplo do formulário com números 1234567890",
+        "fontHelp": "Escolha entre centenas de Fontes do Google. A fonte será carregada automaticamente.",
+        "fontSize": "Tamanho da Fonte",
+        "fontWeight": "Peso da Fonte",
+        "selected": "Selecionado:",
+        "fontSizeOptions": {
+          "xs": {
+            "label": "Extra Pequeno",
+            "description": "12px"
+          },
+          "sm": {
+            "label": "Pequeno",
+            "description": "14px"
+          },
+          "base": {
+            "label": "Base",
+            "description": "16px"
+          },
+          "lg": {
+            "label": "Grande",
+            "description": "18px"
+          },
+          "xl": {
+            "label": "Extra Grande",
+            "description": "20px"
+          }
+        },
+        "fontWeightOptions": {
+          "light": {
+            "label": "Leve",
+            "description": "300"
+          },
+          "normal": {
+            "label": "Normal",
+            "description": "400"
+          },
+          "medium": {
+            "label": "Médio",
+            "description": "500"
+          },
+          "semibold": {
+            "label": "Semibold",
+            "description": "600"
+          },
+          "bold": {
+            "label": "Negrito",
+            "description": "700"
+          }
+        }
+      },
+      "layout": {
+        "title": "Configurações de Layout",
+        "description": "Configurar espaçamento e estrutura",
+        "showProgressBar": "Mostrar Barra de Progresso",
+        "formWidth": "Largura do Formulário",
+        "formWidthHelp": "Controla a largura máxima do contêiner do formulário",
+        "customWidth": "Largura Personalizada (por exemplo, 600px, 80%, 50rem)",
+        "customWidthPlaceholder": "Digite a largura personalizada",
+        "internalPadding": "Preenchimento Interno",
+        "internalPaddingHelp": "Controla o espaço dentro do contêiner do formulário",
+        "externalMargin": "Margem Externa",
+        "externalMarginHelp": "Controla o espaço ao redor do contêiner do formulário",
+        "cornerRadius": "Raio de Canto",
+        "cornerRadiusHelp": "Controla como os cantos do formulário aparecem arredondados",
+        "widthOptions": {
+          "sm": {
+            "label": "Pequeno",
+            "description": "Largura máxima de 400px"
+          },
+          "md": {
+            "label": "Médio",
+            "description": "Largura máxima de 600px"
+          },
+          "lg": {
+            "label": "Grande",
+            "description": "Largura máxima de 800px"
+          },
+          "xl": {
+            "label": "Extra Grande",
+            "description": "Largura máxima de 1000px"
+          },
+          "full": {
+            "label": "Largura Total",
+            "description": "100% de largura"
+          },
+          "custom": {
+            "label": "Personalizado",
+            "description": "Valor de largura personalizado"
+          }
+        },
+        "paddingOptions": {
+          "none": {
+            "label": "Nenhum",
+            "description": "Preenchimento de 0px"
+          },
+          "sm": {
+            "label": "Pequeno",
+            "description": "Preenchimento de 16px"
+          },
+          "md": {
+            "label": "Médio",
+            "description": "Preenchimento de 24px"
+          },
+          "lg": {
+            "label": "Grande",
+            "description": "Preenchimento de 32px"
+          }
+        },
+        "marginOptions": {
+          "none": {
+            "label": "Nenhum",
+            "description": "Sem margem"
+          },
+          "sm": {
+            "label": "Pequeno",
+            "description": "8px"
+          },
+          "md": {
+            "label": "Médio",
+            "description": "16px"
+          },
+          "lg": {
+            "label": "Grande",
+            "description": "32px"
+          }
+        },
+        "radiusOptions": {
+          "none": {
+            "label": "Nenhum",
+            "description": "0px (cantos afiados)"
+          },
+          "sm": {
+            "label": "Pequeno",
+            "description": "Raio de borda de 4px"
+          },
+          "md": {
+            "label": "Médio",
+            "description": "Raio de borda de 8px"
+          },
+          "lg": {
+            "label": "Grande",
+            "description": "Raio de borda de 16px"
+          },
+          "xl": {
+            "label": "Extra Grande",
+            "description": "Raio de borda de 24px"
+          }
+        }
+      },
+      "presets": {
+        "title": "Presets de Design",
+        "description": "Iniciar rapidamente com estilos de formulários pré-projetados lindos",
+        "category": "Categoria",
+        "allPresets": "Todos os Presets",
+        "presets": "Predefinições",
+        "presetCount": "{count, plural, one {# predefinição} other {# predefinições}}",
+        "presetList": "Lista de presets",
+        "applyPresetAria": "Aplicar preset {name}",
+        "appliedPreset": "Preset \"{name}\" aplicado",
+        "formTitle": "Título do Formulário",
+        "submit": "Enviar"
+      },
+      "preview": {
+        "title": "Pré-visualização ao vivo",
+        "description": "Veja como o seu formulário irá parecer com as personalizações aplicadas",
+        "sampleTitle": "Formulário de amostra",
+        "sampleDescription": "É assim que o seu formulário irá aparecer com as configurações de design atuais.",
+        "nameLabel": "Nome *",
+        "namePlaceholder": "Digite seu nome",
+        "emailLabel": "E-mail *",
+        "emailPlaceholder": "Digite seu e-mail",
+        "categoryLabel": "Categoria",
+        "categoryPlaceholder": "Selecione uma categoria",
+        "categoryGeneral": "Consulta geral",
+        "categorySupport": "Suporte",
+        "categorySales": "Vendas",
+        "messageLabel": "Mensagem",
+        "messagePlaceholder": "Digite sua mensagem",
+        "submitButton": "Enviar Formulário",
+        "previousStepAria": "Etapa anterior",
+        "previousStep": "Anterior",
+        "nextStepAria": "Próxima etapa",
+        "nextStep": "Próximo",
+        "submitAria": "Enviar formulário"
+      }
+    },
+    "toasts": {
+      "loginRequiredToSave": "Por favor, faça login para salvar seu formulário.",
+      "formSaved": "Formulário salvo com sucesso!",
+      "formCreated": "Formulário criado com sucesso!",
+      "saveFailed": "Falha ao salvar o formulário. Por favor, tente novamente.",
+      "saveBeforeShare": "Por favor, salve seu formulário antes de compartilhar.",
+      "formPublished": "Formulário publicado com sucesso!",
+      "publishFailed": "Falha ao publicar o formulário. Por favor, tente novamente.",
+      "saveBeforeAnalytics": "Por favor, salve seu formulário antes de visualizar análises.",
+      "loadingAnalytics": "Carregando Análises",
+      "saveBeforePublish": "Por favor, salve seu formulário antes de publicar.",
+      "userAuthRequired": "Autenticação de usuário necessária",
+      "formUnpublished": "Formulário despublicado com sucesso!",
+      "updateStatusFailed": "Falha ao atualizar o status do formulário. Por favor, tente novamente.",
+      "saveSettingsFailed": "Falha ao salvar configurações. Por favor, tente novamente.",
+      "loadFailed": "Falha ao carregar o formulário. Por favor, tente novamente."
+    },
+    "formPreview": {
+      "titlePlaceholder": "Clique para adicionar título...",
+      "descriptionPlaceholder": "Clique para adicionar uma descrição...",
+      "publicTitle": "Título público: \"{title}\"",
+      "stepTitlePlaceholder": "Clique para adicionar título de etapa...",
+      "stepDescriptionPlaceholder": "Clique para adicionar uma descrição de etapa...",
+      "stepBadge": "Etapa {index}",
+      "editFieldAria": "Editar campo",
+      "clickToEdit": "Clique para editar"
+    },
+    "fieldPalette": {
+      "headerTitle": "Campos do Formulário",
+      "headerDescription": "Clique para adicionar campos ao seu formulário",
+      "ariaPalette": "Paleta de campos",
+      "searchAria": "Pesquisar campos",
+      "searchPlaceholder": "Pesquisar campos...",
+      "categoryFieldsAria": "{category} campos",
+      "noFieldsFound": "Nenhum campo encontrado correspondendo a \"{searchTerm}\"",
+      "searchHint": "Tente pesquisar por nome de campo, descrição ou tipo",
+      "addFieldAria": "Adicionar campo {label}",
+      "categories": {
+        "input": "Campos de Entrada",
+        "selection": "Campos de Seleção",
+        "media": "Campos de Mídia",
+        "layout": "Campos de Layout",
+        "advanced": "Campos Avançados"
+      },
+      "fields": {
+        "text": {
+          "label": "Entrada de Texto",
+          "description": "Uma linha para respostas de texto curtas."
+        },
+        "email": {
+          "label": "E-mail",
+          "description": "Coletar um endereço de e-mail válido."
+        },
+        "number": {
+          "label": "Número",
+          "description": "Entrada para valores numéricos."
+        },
+        "phone": {
+          "label": "Número de Telefone",
+          "description": "Entrada para números de telefone com validação."
+        },
+        "textarea": {
+          "label": "Área de Texto",
+          "description": "Um campo multilinha para texto mais longo."
+        },
+        "date": {
+          "label": "Data",
+          "description": "Escolha uma data de um calendário."
+        },
+        "time": {
+          "label": "Hora",
+          "description": "Selecione ou insira um valor de hora."
+        },
+        "address": {
+          "label": "Endereço",
+          "description": "Entrada para rua, cidade e outros detalhes de endereço."
+        },
+        "link": {
+          "label": "Link",
+          "description": "Entrada para uma URL de site válida."
+        },
+        "select": {
+          "label": "Selecione Dropdown",
+          "description": "Dropdown para escolher uma opção."
+        },
+        "radio": {
+          "label": "Botões de Rádio",
+          "description": "Escolha uma opção única de uma lista."
+        },
+        "checkbox": {
+          "label": "Caixas de Seleção",
+          "description": "Selecione uma ou mais opções."
+        },
+        "slider": {
+          "label": "Slider",
+          "description": "Escolha um valor deslizando uma alavanca."
+        },
+        "rating": {
+          "label": "Avaliação",
+          "description": "Coletar uma avaliação de estrelas ou ícones."
+        },
+        "poll": {
+          "label": "Enquete",
+          "description": "Deixe os usuários votar em várias opções."
+        },
+        "file": {
+          "label": "Upload de Arquivo",
+          "description": "Faça upload de arquivos com limites de tamanho e tipo."
+        },
+        "signature": {
+          "label": "Assinatura",
+          "description": "Desenhe ou assine com mouse ou toque."
+        },
+        "statement": {
+          "label": "Declaração",
+          "description": "Exibir um título ou descrição no formulário."
+        },
+        "banner": {
+          "label": "Banner",
+          "description": "Mostrar uma mensagem ou aviso destacado."
+        },
+        "field-group": {
+          "label": "Grupo de Campos",
+          "description": "Agrupar campos em uma linha."
+        },
+        "tags": {
+          "label": "Entrada de Tag",
+          "description": "Inserir e gerenciar várias tags."
+        },
+        "social": {
+          "label": "Mídias Sociais",
+          "description": "Adicionar links de perfis de mídia social."
+        },
+        "scheduler": {
+          "label": "Agendador",
+          "description": "Incorporar um link de agendamento (por exemplo, Calendly)."
+        }
+      }
+    },
+    "fieldSettings": {
+      "header": {
+        "title": "Configurações de Campo",
+        "closeAria": "Fechar configurações de campo"
+      },
+      "emptyState": {
+        "title": "Nenhum campo selecionado",
+        "description": "Clique em um campo na pré-visualização para editar suas configurações"
+      },
+      "basic": {
+        "title": "Configurações Básicas",
+        "fieldLabel": "Rótulo do Campo",
+        "fieldLabelPlaceholder": "Inserir rótulo do campo",
+        "fieldLabelHelp": "O rótulo que aparece acima do campo",
+        "placeholder": "Placeholder",
+        "placeholderPlaceholder": "Inserir texto de espaço reservado",
+        "placeholderHelp": "Texto de dica que aparece dentro do campo",
+        "description": "Descrição",
+        "descriptionPlaceholder": "Insira a descrição do campo (mostrada abaixo do campo)",
+        "descriptionHelp": "Texto de ajuda adicional mostrado abaixo do campo",
+        "required": "Campo obrigatório",
+        "requiredHelp": "Os usuários devem preencher este campo para enviar o formulário"
+      },
+      "validation": {
+        "title": "Validação",
+        "minLength": "Comprimento mínimo",
+        "minLengthPlaceholder": "Mín. caracteres",
+        "minLengthHelp": "Número mínimo de caracteres exigidos",
+        "maxLength": "Comprimento máximo",
+        "maxLengthPlaceholder": "Máx. caracteres",
+        "maxLengthHelp": "Número máximo de caracteres permitidos",
+        "pattern": "Padrão (Regex)",
+        "patternPlaceholder": "Expressão regular",
+        "patternHelp": "Padrão de expressão regular para validação",
+        "minValue": "Valor mínimo",
+        "minValuePlaceholder": "Mín. valor",
+        "minValueHelp": "Valor numérico mínimo permitido",
+        "maxValue": "Valor máximo",
+        "maxValuePlaceholder": "Máx. valor",
+        "maxValueHelp": "Valor numérico máximo permitido"
+      },
+      "errorMessages": {
+        "title": "Mensagens de erro personalizadas",
+        "requiredFieldMessage": "Mensagem de campo obrigatório",
+        "requiredFieldPlaceholder": "Este campo é obrigatório",
+        "minLengthMessage": "Mensagem de erro de comprimento mínimo",
+        "minLengthPlaceholder": "Deve ter pelo menos {count} caracteres",
+        "maxLengthMessage": "Mensagem de erro de comprimento máximo",
+        "maxLengthPlaceholder": "Não pode ter mais de {count} caracteres",
+        "patternMessage": "Mensagem de erro de padrão",
+        "patternPlaceholder": "Por favor, insira um formato válido",
+        "emailMessage": "Mensagem de erro de e-mail",
+        "emailPlaceholder": "Por favor, insira um endereço de e-mail válido",
+        "minValueMessage": "Mensagem de erro de valor mínimo",
+        "minValuePlaceholder": "Deve ser pelo menos {value}",
+        "maxValueMessage": "Mensagem de erro de valor máximo",
+        "maxValuePlaceholder": "Não pode ser mais de {value}",
+        "invalidNumberMessage": "Mensagem de número inválido",
+        "invalidNumberPlaceholder": "Por favor, insira um número válido"
+      },
+      "options": {
+        "title": "Opções",
+        "addOptionAria": "Adicionar nova opção",
+        "addOption": "Adicionar opção",
+        "optionPlaceholder": "Opção {index}",
+        "removeOptionAria": "Remover opção {index}",
+        "none": "Nenhuma opção adicionada ainda",
+        "or": "OU",
+        "orAria": "ou",
+        "fetchFromApi": "Buscar de API",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "Endpoint de API para buscar opções",
+        "valueKeyPlaceholder": "Chave de valor (por exemplo, id)",
+        "valueKeyHelp": "Chave para valores de opção",
+        "labelKeyPlaceholder": "Chave de rótulo (por exemplo, nome)",
+        "labelKeyHelp": "Chave para rótulos de opção",
+        "apiGuidanceTitle": "Orientação de dados de API:",
+        "apiGuidanceIntro": "Este campo buscará opções do endpoint de API:",
+        "apiShouldReturn": "A API deve retornar:",
+        "apiType1Hint": "(matriz de strings)",
+        "apiType2Hint": "(matriz de objetos)",
+        "apiType3Hint": "(objeto com matriz de opções)",
+        "apiType4Hint": "(chaves personalizadas)",
+        "apiCustomKeysHelp": "Você pode especificar chaves personalizadas acima para mapear seus dados de API.",
+        "apiValueLabelHelp": "Cada opção deve ter uma",
+        "apiValueLabelHelpOr": "propriedade (ou sua chave personalizada).",
+        "apiValueLabelHelpSuffix": "é opcional."
+      },
+      "prepopulation": {
+        "title": "Pré-população",
+        "unknownError": "Erro desconhecido",
+        "enabled": "Habilitar pré-população",
+        "enabledHelp": "Preencher este campo automaticamente com dados existentes",
+        "dataSource": "Fonte de Dados",
+        "sources": {
+          "url": "Parâmetros de URL",
+          "api": "API Externa",
+          "profile": "Perfil do Usuário",
+          "previous": "Envio Anterior"
+        },
+        "urlParamName": "Nome do Parâmetro de URL",
+        "urlParamPlaceholder": "por exemplo, nome, e-mail, telefone",
+        "urlParamHelp": "O nome do parâmetro a ser extraído da string de consulta de URL",
+        "fallbackValue": "Valor de Fallback",
+        "fallbackValuePlaceholder": "Valor padrão se o parâmetro estiver ausente",
+        "fallbackValueHelp": "Valor padrão a ser usado se o parâmetro de URL estiver ausente",
+        "overwriteExisting": "Sobrescrever Existente",
+        "overwriteExistingHelp": "Substituir entrada do usuário com valor pré-populado",
+        "generatePreviewAria": "Gerar URL de pré-visualização",
+        "generatePreview": "Gerar URL de Pré-Visualização",
+        "previewUrlLabel": "URL de Pré-Visualização:",
+        "previewUrlHelp": "Esta URL preencherá o campo com \"Sample {label}\"",
+        "apiEndpoint": "Endpoint da API",
+        "apiEndpointPlaceholder": "https://api.example.com/user-data",
+        "apiEndpointHelp": "O endpoint da API para buscar dados",
+        "httpMethod": "Método HTTP",
+        "requestHeaders": "Cabeçalhos de Solicitação (JSON)",
+        "requestHeadersHelp": "Objeto JSON contendo cabeçalhos HTTP para a solicitação da API",
+        "testApiAria": "Testar endpoint da API",
+        "testApi": "Testar Endpoint da API",
+        "comingSoonLabel": "Em Breve:",
+        "profileComingSoon": "A pré-população do perfil do usuário estará disponível em uma atualização futura.",
+        "previousComingSoon": "A pré-população de envio anterior estará disponível em uma atualização futura.",
+        "toasts": {
+          "missingUrlParam": "Por favor, insira primeiro o nome do parâmetro de URL",
+          "previewUrlCopied": "URL de pré-visualização copiada para a área de transferência!",
+          "previewUrlCopyFailed": "Falha ao copiar a URL de pré-visualização",
+          "missingApiEndpoint": "Por favor, insira primeiro um endpoint da API",
+          "apiReachable": "O endpoint da API está acessível!",
+          "apiTestFailedStatus": "Teste da API falhou: {status} {statusText}",
+          "apiTestFailedError": "Teste da API falhou: {error}"
+        }
+      },
+      "date": {
+        "title": "Configurações do Campo de Data",
+        "minDate": "Data Mínima",
+        "selectMinDate": "Selecione a data mínima",
+        "maxDate": "Data Máxima",
+        "selectMaxDate": "Selecione a data máxima",
+        "defaultDate": "Data Padrão",
+        "selectDefaultDate": "Selecione a data padrão"
+      },
+      "number": {
+        "title": "Configurações do Campo Numérico",
+        "minValue": "Valor mínimo",
+        "noMinimum": "Sem mínimo",
+        "minValueHelp": "Valor numérico mínimo permitido",
+        "maxValue": "Valor máximo",
+        "noMaximum": "Sem máximo",
+        "maxValueHelp": "Valor numérico máximo permitido",
+        "stepSize": "Tamanho do Passo",
+        "stepSizeHelp": "Tamanho do passo de incremento/decremento para a entrada numérica",
+        "defaultValue": "Valor Padrão",
+        "noDefault": "Sem padrão",
+        "defaultValueHelp": "Valor pré-preenchido quando o formulário é carregado"
+      },
+      "radio": {
+        "title": "Configurações do Quiz",
+        "enableQuizQuestion": "Habilitar como Pergunta do Quiz",
+        "correctAnswer": "Resposta Correta",
+        "correctAnswerPlaceholder": "Selecione a resposta correta",
+        "points": "Pontos para Resposta Correta",
+        "showCorrectAnswer": "Mostrar resposta correta após o envio",
+        "explanation": "Explicação (Opcional)",
+        "explanationPlaceholder": "Explique por que esta é a resposta correta..."
+      },
+      "address": {
+        "title": "Configurações do Campo de Endereço",
+        "requiredLines": "Linhas de Endereço Obrigatórias",
+        "requiredLinesPlaceholder": "por exemplo, 2 (Endereço 1 e Cidade obrigatórios)",
+        "requiredLinesHelp": "Número de linhas de endereço que devem ser preenchidas (1-5)",
+        "customErrorMessage": "Mensagem de Erro Personalizada",
+        "customErrorPlaceholder": "Por favor, complete todos os campos de endereço obrigatórios",
+        "customErrorHelp": "Mensagem de erro personalizada exibida quando os campos de endereço obrigatórios estão incompletos"
+      },
+      "phone": {
+        "title": "Configurações do Campo de Telefone",
+        "pattern": "Padrão de Regex Personalizado",
+        "patternPlaceholder": "e.g. ^\\+?[0-9]{10,15}$",
+        "patternHelp": "Padrão de expressão regular para validação de número de telefone",
+        "errorMessage": "Mensagem de Erro Personalizada",
+        "errorMessagePlaceholder": "Por favor, insira um número de telefone válido",
+        "errorMessageHelp": "Mensagem de erro personalizada exibida quando a validação do telefone falha"
+      },
+      "statement": {
+        "title": "Configurações do Campo de Declaração",
+        "heading": "Cabeçalho",
+        "headingPlaceholder": "Insira o cabeçalho da declaração",
+        "headingHelp": "Cabeçalho principal para a declaração",
+        "description": "Descrição",
+        "descriptionPlaceholder": "Insira a descrição da declaração",
+        "descriptionHelp": "Descrição detalhada para a declaração",
+        "alignment": "Alinhamento",
+        "alignmentPlaceholder": "Selecione o alinhamento",
+        "alignLeft": "Esquerda",
+        "alignCenter": "Centro",
+        "alignRight": "Direita",
+        "alignmentHelp": "Alinhamento de texto para a declaração",
+        "size": "Tamanho",
+        "sizePlaceholder": "Selecione o tamanho",
+        "sizeSmall": "Pequeno",
+        "sizeMedium": "Médio",
+        "sizeLarge": "Grande",
+        "sizeHelp": "Tamanho da fonte para a declaração"
+      },
+      "slider": {
+        "title": "Configurações do Controle deslizante",
+        "mode": "Modo do Controle deslizante",
+        "modePlaceholder": "Selecione o modo do controle deslizante",
+        "modeSingle": "Valor único",
+        "modeRange": "Intervalo (mín + máx)",
+        "modeHelp": "Escolha um valor ou permita que os usuários escolham um mínimo e um máximo",
+        "min": "Valor mínimo",
+        "minHelp": "Valor mínimo para o controle deslizante",
+        "max": "Valor máximo",
+        "maxHelp": "Valor máximo para o controle deslizante",
+        "step": "Tamanho do Passo",
+        "stepHelp": "Tamanho do passo de incremento/decremento para o controle deslizante",
+        "defaultMin": "Mínimo padrão",
+        "defaultMinHelp": "Valor mínimo pré-preenchido quando o formulário é carregado",
+        "defaultMax": "Máximo padrão",
+        "defaultMaxHelp": "Valor máximo pré-preenchido quando o formulário é carregado",
+        "defaultValue": "Valor Padrão",
+        "defaultValueHelp": "Valor pré-preenchido quando o formulário é carregado"
+      },
+      "text": {
+        "title": "Configurações do Campo de Texto",
+        "maxLength": "Comprimento máximo",
+        "maxLengthPlaceholder": "Sem limite",
+        "maxLengthHelp": "Número máximo de caracteres permitidos (1-1000)",
+        "minLength": "Comprimento mínimo",
+        "minLengthPlaceholder": "Sem mínimo",
+        "minLengthHelp": "Número mínimo de caracteres necessários (0-1000)"
+      },
+      "checkbox": {
+        "title": "Opções de Caixa de Seleção",
+        "options": "Opções",
+        "addOptionPlaceholder": "Adicionar opção",
+        "addOptionAria": "Adicionar opção de caixa de seleção",
+        "optionsHelp": "Adicionar opções de caixa de seleção que os usuários podem selecionar",
+        "removeOptionAria": "Remover opção {index}",
+        "allowMultiple": "Permitir seleção múltipla",
+        "allowMultipleHelp": "Se habilitado, os usuários podem selecionar mais de uma opção. Se desabilitado, apenas uma opção pode ser selecionada."
+      },
+      "link": {
+        "title": "Configurações do Campo de Link",
+        "pattern": "Padrão de Regex Personalizado",
+        "patternPlaceholder": "e.g. ^https?://.+$",
+        "patternHelp": "Padrão de expressão regular para validação de URL",
+        "errorMessage": "Mensagem de Erro Personalizada",
+        "errorMessagePlaceholder": "Por favor, insira uma URL válida",
+        "errorMessageHelp": "Mensagem de erro personalizada exibida quando a validação de URL falha"
+      },
+      "poll": {
+        "title": "Configurações da Enquete",
+        "pollOptions": "Opções da Enquete",
+        "addOptionPlaceholder": "Adicionar opção",
+        "addOptionAria": "Adicionar opção de enquete",
+        "optionsHelp": "Adicionar opções de enquete nas quais os usuários podem votar",
+        "editOptionAria": "Editar opção de enquete {index}",
+        "removeOptionAria": "Remover opção de enquete {index}",
+        "orAria": "ou separador",
+        "or": "OU",
+        "fetchFromApi": "Buscar Opções de API",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "Endpoint de API para buscar opções de enquete",
+        "valueKeyPlaceholder": "Chave de valor (por exemplo, id)",
+        "valueKeyHelp": "Chave para valores de opção",
+        "labelKeyPlaceholder": "Chave de rótulo (por exemplo, nome)",
+        "labelKeyHelp": "Chave para rótulos de opção",
+        "apiGuidanceTitle": "Orientação de dados de API:",
+        "apiGuidanceIntro": "Este campo buscará opções do endpoint de API:",
+        "apiShouldReturn": "A API deve retornar:",
+        "apiType1Hint": "(matriz de strings)",
+        "apiType2Hint": "(matriz de objetos)",
+        "apiType3Hint": "(objeto com matriz de opções)",
+        "apiType4Hint": "(chaves personalizadas)",
+        "apiCustomKeysHelp": "Você pode especificar chaves personalizadas acima para mapear seus dados de API.",
+        "apiValueLabelHelp": "Cada opção deve ter uma",
+        "apiValueLabelHelpOr": "propriedade (ou sua chave personalizada).",
+        "apiValueLabelHelpSuffix": "é opcional.",
+        "showResults": "Mostrar resultados após votação",
+        "showResultsHelp": "Exibir resultados da enquete para os usuários após eles votarem"
+      },
+      "social": {
+        "title": "Plataformas Sociais",
+        "availablePlatforms": "Plataformas Disponíveis",
+        "platforms": {
+          "github": "GitHub",
+          "twitter": "Twitter",
+          "linkedin": "LinkedIn",
+          "facebook": "Facebook",
+          "instagram": "Instagram",
+          "youtube": "YouTube",
+          "website": "Site"
+        },
+        "platformsHelp": "Selecione quais plataformas sociais incluir no campo",
+        "customLinks": "Links Personalizados",
+        "labelPlaceholder": "Rótulo",
+        "placeholderPlaceholder": "Placeholder (opcional)",
+        "removeCustomLinkAria": "Remover link personalizado {index}",
+        "addCustomLinkAria": "Adicionar link personalizado",
+        "addCustomLink": "Adicionar Link Personalizado",
+        "customLinksHelp": "Adicionar links sociais personalizados com rótulos e placeholders personalizados"
+      },
+      "emailValidation": {
+        "title": "Validação de E-mail",
+        "removeBlockedDomainAria": "Remover {domain} de domínios bloqueados",
+        "removeAllowedDomainAria": "Remover {domain} de domínios permitidos",
+        "autoCompleteDomain": "Auto-completar Domínio",
+        "autoCompletePlaceholder": "por exemplo, business.com",
+        "setAutoCompleteAria": "Definir domínio de auto-completar",
+        "set": "Definir",
+        "removeAutoCompleteAria": "Remover domínio {domain}",
+        "autoCompleteHelp": "Os usuários podem inserir apenas o nome de usuário e o domínio será auto-completado",
+        "allowedDomains": "Domínios Permitidos",
+        "allowedPlaceholder": "por exemplo, company.com",
+        "addAllowedDomainAria": "Adicionar domínio permitido",
+        "allowedHelp": "Somente e-mails de desses domínios serão aceitos",
+        "blockedDomains": "Domínios Bloqueados",
+        "blockedPlaceholder": "por exemplo, temp-mail.org",
+        "addBlockedDomainAria": "Adicionar domínio bloqueado",
+        "blockedHelp": "E-mails de desses domínios serão rejeitados (serviços de e-mail temporários são bloqueados por padrão)",
+        "requireBusinessEmail": "Requerer E-mail Empresarial",
+        "requireBusinessEmailHelp": "Somente permitir domínios empresariais (bloqueia Gmail, Yahoo, etc.)",
+        "customValidationMessage": "Mensagem de Validação Personalizada",
+        "customValidationPlaceholder": "Mensagem de erro personalizada para validação de e-mail",
+        "customValidationHelp": "Deixe vazio para usar mensagens padrão"
+      },
+      "file": {
+        "title": "Configurações de Upload de Arquivos",
+        "bytesUnit": "Bytes",
+        "maxFiles": "Número Máximo de Arquivos",
+        "maxFilesPlaceholder": "10",
+        "maxFilesHelp": "Número máximo de arquivos que os usuários podem fazer upload (1-50)",
+        "maxFileSize": "Tamanho Máximo do Arquivo",
+        "maxFileSizePlaceholder": "50",
+        "mbUnit": "MB",
+        "setMaxSizePresetAria": "Definir tamanho máximo do arquivo para {size}",
+        "currentSize": "Atual: {size}",
+        "allowedFileTypes": "Tipos de Arquivos Permitidos",
+        "quickSelect": "Seleção Rápida:",
+        "commonTypes": {
+          "images": "Imagens",
+          "documents": "Documentos",
+          "spreadsheets": "Planilhas",
+          "videos": "Vídeos",
+          "audio": "Áudio",
+          "archives": "Arquivos"
+        },
+        "toggleFileTypeAria": "Alternar tipos de arquivo {type}",
+        "customExtensions": "Extensões de Arquivo Personalizadas",
+        "customExtensionsPlaceholder": "por exemplo, txt, csv, json",
+        "addCustomExtensionAria": "Adicionar extensão de arquivo personalizada",
+        "customExtensionsHelp": "Adicionar extensões de arquivo personalizadas (sem o ponto)",
+        "selectedExtensions": "Extensões selecionadas:",
+        "removeExtensionAria": "Remover extensão de arquivo {extension}",
+        "htmlAccept": "Atributo HTML Accept (somente leitura)",
+        "htmlAcceptHelp": "Isso é gerado automaticamente com base em suas seleções acima",
+        "helpText": "Texto de Ajuda",
+        "helpTextPlaceholder": "Instruções adicionais para os usuários...",
+        "helpTextHelp": "Instruções opcionais para ajudar os usuários a entender quais arquivos fazer upload"
+      },
+      "scheduler": {
+        "title": "Configurações do Agendador",
+        "provider": "Provedor de Agendamento",
+        "providerPlaceholder": "Selecione o provedor",
+        "providerHelp": "Escolha sua plataforma de agendamento preferida",
+        "calcomLink": "Link do Cal.com",
+        "calendlyLink": "Link do Calendly",
+        "tidycalLink": "Link do TidyCal",
+        "schedulerLink": "Link do Agendamento",
+        "linkPlaceholder": "https://...",
+        "linkHelp": "URL de incorporação para o seu agendador {provider}",
+        "buttonText": "Texto do Botão de Abrir Calendário",
+        "buttonTextPlaceholder": "por exemplo. Agendar uma Chamada",
+        "buttonTextHelp": "Texto exibido no botão do agendador",
+        "preview": "Pré-visualização",
+        "openScheduler": "Abrir Agendador",
+        "previewHelp": "Clique para visualizar como o agendador será exibido",
+        "previewModalTitle": "Pré-visualização do Agendador",
+        "iframeTitle": "Incorporação do Agendador",
+        "closePreviewAria": "Fechar pré-visualização do agendador",
+        "close": "Fechar",
+        "providerCalcom": "Cal.com",
+        "providerCalendly": "Calendly",
+        "providerTidycal": "TidyCal"
+      },
+      "banner": {
+        "title": "Configurações do Banner",
+        "alertType": "Tipo de Alerta",
+        "alertTypePlaceholder": "Selecione o tipo de alerta",
+        "warning": "Aviso",
+        "error": "Erro",
+        "info": "Info",
+        "success": "Sucesso",
+        "alertTypeHelp": "Escolha o estilo visual e o esquema de cores para o banner",
+        "bannerTitle": "Título",
+        "bannerTitlePlaceholder": "Sem fumo",
+        "bannerTitleHelp": "Texto do título principal para o banner",
+        "description": "Descrição",
+        "descriptionPlaceholder": "Nossos acomodações são estritamente sem fumo...",
+        "descriptionHelp": "Texto de descrição detalhada para o banner"
+      },
+      "fieldGroup": {
+        "layoutTitle": "Configurações de Layout",
+        "layoutDirection": "Direção do Layout",
+        "layoutHorizontal": "Horizontal (Lado a Lado)",
+        "layoutVertical": "Vertical (Empilhado)",
+        "layoutDirectionHelp": "Como os campos são organizados dentro do grupo",
+        "columns": "Número de Colunas",
+        "columns2": "2 Colunas",
+        "columns3": "3 Colunas",
+        "columns4": "4 Colunas",
+        "columnsHelp": "Número de colunas para layout horizontal",
+        "spacing": "Espaçamento entre Campos",
+        "spacingCompact": "Compacto",
+        "spacingNormal": "Normal",
+        "spacingRelaxed": "Relaxado",
+        "spacingHelp": "Espaçamento entre campos no grupo",
+        "groupFields": "Campos do Grupo ({count})",
+        "addFieldAria": "Adicionar campo ao grupo",
+        "addField": "Adicionar campo",
+        "addFieldDialogTitle": "Adicionar um campo",
+        "emptyStateTitle": "Nenhum campo neste grupo ainda.",
+        "emptyStateDescription": "Adicione campos usando o menu suspenso ou botões de adição rápida acima.",
+        "fieldFallback": "Campo {type}",
+        "settingsAria": "Configurações para o campo {name}",
+        "removeAria": "Remover campo {name}",
+        "fieldLabel": "Rótulo do Campo",
+        "fieldLabelPlaceholder": "Inserir rótulo do campo",
+        "fieldLabelHelp": "Rótulo para este campo",
+        "placeholder": "Texto de Espaçamento",
+        "placeholderPlaceholder": "Inserir texto de espaço reservado",
+        "placeholderHelp": "Texto de espaçamento para este campo",
+        "required": "Campo obrigatório",
+        "requiredHelp": "Tornar este campo obrigatório",
+        "advancedAria": "Alternar configurações avançadas para {name}",
+        "advanced": "Configurações Avançadas"
+      },
+      "rating": {
+        "title": "Configurações de Avaliação",
+        "starCount": "Número de Estrelas",
+        "starCountHelp": "Número de estrelas de avaliação (1-10)",
+        "starSize": "Tamanho da Estrela",
+        "starSizeHelp": "Tamanho das estrelas de avaliação (16-64px)",
+        "iconType": "Tipo de ícone",
+        "star": "Estrela",
+        "heart": "Coração",
+        "iconTypeHelp": "Escolha o tipo de ícone para avaliações",
+        "iconColor": "Cor do ícone",
+        "iconColorHelp": "Cor dos ícones de avaliação"
+      },
+      "tags": {
+        "title": "Configurações de tags",
+        "maxTags": "Número máximo de tags",
+        "maxTagsHelp": "Número máximo de tags que os usuários podem adicionar (mínimo 1)",
+        "allowDuplicates": "Permitir tags duplicadas",
+        "allowDuplicatesHelp": "Permitir que os usuários adicionem a mesma tag várias vezes"
+      },
+      "textarea": {
+        "title": "Configurações do campo de texto",
+        "rows": "Número de linhas",
+        "rowsHelp": "Altura inicial do campo de texto (2-20 linhas)"
+      },
+      "time": {
+        "title": "Configurações do campo de tempo",
+        "showCurrentTimeButton": "Mostrar botão 'Definir hora atual'",
+        "showCurrentTimeButtonHelp": "Exibir um botão para definir automaticamente a hora atual"
+      },
+      "email": {
+        "title": "Configurações do campo de e-mail",
+        "allowedDomains": "Domínios permitidos (separados por vírgulas)",
+        "allowedDomainsPlaceholder": "gmail.com, empresa.com",
+        "blockedDomains": "Domínios bloqueados (separados por vírgulas)",
+        "blockedDomainsPlaceholder": "tempmail.com, spam.com",
+        "requireBusinessEmail": "Requerer apenas e-mail comercial",
+        "customValidationMessage": "Mensagem de Validação Personalizada",
+        "customValidationPlaceholder": "Por favor, insira um endereço de e-mail válido"
+      }
+    },
+    "formSettings": {
+      "title": "Configurações do Formulário",
+      "exportSecure": "Exportar (seguro)",
+      "preparing": "Preparando...",
+      "saveFormFirstAccess": "Por favor, salve o formulário primeiro para acessar as configurações.",
+      "saveFormFirstExport": "Salve o formulário primeiro para exportá-lo com segurança.",
+      "exportPrepareFailed": "Falha ao preparar exportação segura.",
+      "settingsSectionsAria": "Seções de configurações",
+      "goToSectionSettingsAria": "Ir para as configurações de {section}",
+      "sections": {
+        "basic": "Informações básicas",
+        "limits": "Limites",
+        "security": "Segurança",
+        "quiz": "Quiz e pontuação",
+        "branding": "Branding",
+        "notifications": "Notificações",
+        "api": "Acesso à API",
+        "webhooks": "Webhooks",
+        "design": "Design",
+        "metadata": "Metadados"
+      },
+      "search": {
+        "aria": "Configurações de busca",
+        "placeholder": "Configurações de busca…",
+        "resultsAria": "Resultados da busca",
+        "noMatches": "Nenhum resultado",
+        "items": {
+          "basic-info-title": {
+            "label": "Informações básicas"
+          },
+          "behavior-title": {
+            "label": "Comportamento do formulário"
+          },
+          "rate-limit-title": {
+            "label": "Limitação de taxa"
+          },
+          "response-limit-title": {
+            "label": "Limite de respostas"
+          },
+          "password-protection-title": {
+            "label": "Proteção por senha"
+          },
+          "duplicate-prevention-title": {
+            "label": "Prevenção de duplicatas"
+          },
+          "profanity-filter-title": {
+            "label": "Filtro de palavrões"
+          },
+          "bot-protection-title": {
+            "label": "Proteção contra bots"
+          },
+          "branding-title": {
+            "label": "Branding"
+          },
+          "social-media-links-title": {
+            "label": "Links de mídia social"
+          },
+          "quiz-title": {
+            "label": "Quiz e pontuação"
+          },
+          "notifications-title": {
+            "label": "Notificações"
+          },
+          "api-access-title": {
+            "label": "Acesso à API"
+          },
+          "webhooks-title": {
+            "label": "Webhooks"
+          },
+          "design-title": {
+            "label": "Design"
+          },
+          "metadata-title": {
+            "label": "SEO"
+          },
+          "social-metadata-title": {
+            "label": "Metadados sociais"
+          },
+          "search-engine-indexing-title": {
+            "label": "Indexação do mecanismo de busca"
+          }
+        }
+      },
+      "defaults": {
+        "submitText": "Enviar",
+        "notificationSubject": "Nova submissão de formulário",
+        "notificationMessage": "Você recebeu uma nova submissão no seu formulário."
+      },
+      "common": {
+        "unsavedChanges": "Alterações não salvas",
+        "reset": "Redefinir",
+        "save": "Salvar",
+        "saved": "Salvo",
+        "formIdRequiredToSaveSettings": "O ID do formulário é necessário para salvar as configurações",
+        "validValueBetween": "Insira um valor válido entre {min} e {max}",
+        "fillRequiredFields": "Por favor, preencha os campos obrigatórios",
+        "requiredAria": "obrigatório",
+        "fieldRequired": "Este campo é obrigatório"
+      },
+      "basicInfoSection": {
+        "ariaSettings": "Configurações básicas do formulário",
+        "basicTitle": "Informações básicas",
+        "basicDescription": "Configure os detalhes básicos do seu formulário",
+        "internalTitleLabel": "Título Interno",
+        "internalTitleDescription": "Este título é apenas visível para você no painel e no construtor de formulários",
+        "internalTitlePlaceholder": "Digite o título interno para sua referência...",
+        "publicTitleLabel": "Título Público",
+        "publicTitleDescription": "Este título será exibido aos usuários no formulário real. Deixe em branco para usar o título interno.",
+        "publicTitlePlaceholder": "Digite o título a ser exibido aos usuários...",
+        "formDescriptionLabel": "Descrição do Formulário",
+        "formDescriptionPlaceholder": "Digite a descrição do formulário",
+        "submitButtonTextLabel": "Texto do Botão de Envio",
+        "submitButtonTextPlaceholder": "Enviar",
+        "successMessageLabel": "Mensagem de Sucesso",
+        "successMessagePlaceholder": "Obrigado por sua inscrição!",
+        "redirectUrlLabel": "URL de redirecionamento (Opcional)",
+        "redirectUrlDescription": "URL para redirecionar usuários após envio bem-sucedido",
+        "redirectUrlPlaceholder": "https://example.com/thank-you",
+        "basicActionsAria": "Ações de informações básicas",
+        "saveBasicAria": "Salvar informações básicas",
+        "saveBasicSuccess": "Informações básicas salvas com sucesso",
+        "saveBasicFailed": "Falha ao salvar informações básicas",
+        "behaviorTitle": "Comportamento do formulário",
+        "behaviorDescription": "Configure como seu formulário se comporta e aparece para os usuários",
+        "hideHeaderLabel": "Ocultar cabeçalho",
+        "hideHeaderDescription": "Oculta título e descrição públicos em incorporações",
+        "rtlLabel": "Modo da direita para a esquerda",
+        "rtlDescription": "Exibir formulário em modo RTL (da direita para a esquerda)",
+        "autoFocusLabel": "Foco automático no primeiro campo",
+        "autoFocusDescription": "Focar automaticamente no primeiro campo quando o formulário carrega",
+        "behaviorActionsAria": "Ações de comportamento do formulário",
+        "saveBehaviorAria": "Salvar configurações de comportamento do formulário",
+        "saveBehaviorSuccess": "Configurações de comportamento do formulário salvas com sucesso",
+        "saveBehaviorFailed": "Falha ao salvar comportamento do formulário"
+      },
+      "passwordProtectionSection": {
+        "ariaSettings": "Configurações de proteção por senha",
+        "title": "Proteção por senha",
+        "description": "Restringir acesso ao seu formulário com uma senha",
+        "enableLabel": "Habilitar proteção por senha",
+        "enableDescription": "Exigir que os usuários insiram uma senha para acessar o formulário",
+        "passwordLabel": "Senha",
+        "passwordPlaceholder": "Inserir senha do formulário",
+        "hidePasswordAria": "Ocultar senha",
+        "showPasswordAria": "Mostrar senha",
+        "passwordDescription": "Os usuários precisarão inserir essa senha para acessar o formulário",
+        "customMessageLabel": "Mensagem personalizada",
+        "customMessagePlaceholder": "Inserir mensagem personalizada para prompt de senha",
+        "customMessageDescription": "Mensagem exibida aos usuários quando eles precisam inserir a senha",
+        "currentConfiguration": "Configuração atual",
+        "summaryPrefix": "A proteção por senha está",
+        "enabled": "habilitada",
+        "summarySuffix": ". Os usuários precisarão inserir a senha para acessar o formulário.",
+        "disabledDescription": "A proteção por senha restringe o acesso ao seu formulário, exigindo que os usuários insiram uma senha antes de visualizá-lo e enviá-lo.",
+        "actionsAria": "Ações de proteção por senha",
+        "saveAria": "Salvar configurações de proteção por senha",
+        "saved": "Configurações de proteção por senha salvas com sucesso",
+        "saveFailed": "Falha ao salvar configurações de proteção por senha",
+        "defaultMessage": "Este formulário é protegido por senha. Por favor, insira a senha para continuar."
+      },
+      "duplicatePreventionSection": {
+        "ariaSettings": "Configurações de prevenção de duplicatas",
+        "title": "Prevenção de duplicatas",
+        "description": "Prevenir que os usuários enviem o mesmo formulário várias vezes",
+        "enableLabel": "Habilitar prevenção de duplicatas",
+        "enableDescription": "Prevenir que os usuários enviem o mesmo formulário várias vezes",
+        "preventionModeLabel": "Modo de prevenção",
+        "oneTimeLabel": "Envio único",
+        "oneTimeDescription": "Permitir apenas um envio por usuário, sempre",
+        "timeBasedLabel": "Prevenção baseada em tempo",
+        "timeBasedDescription": "Prevenir envios duplicados dentro de uma janela de tempo especificada",
+        "preventionStrategyLabel": "Estratégia de prevenção",
+        "selectStrategyPlaceholder": "Selecionar estratégia",
+        "strategyCombinedLabel": "Combinada (IP + E-mail + Sessão) - Mais segura",
+        "strategyEmailLabel": "Endereço de e-mail - Melhor para registro",
+        "strategyIpLabel": "Endereço IP - Simples e confiável",
+        "strategySessionLabel": "ID de sessão - Baseado em navegador",
+        "strategyCombinedDescription": "Rastrear por combinação de IP, e-mail e sessão para máxima precisão",
+        "strategyEmailDescription": "Rastrear por endereço de e-mail (exige campo de e-mail no formulário)",
+        "strategyIpDescription": "Rastrear por endereço IP apenas",
+        "strategySessionDescription": "Rastrear por sessão do navegador",
+        "timeWindowLabel": "Janela de tempo (minutos)",
+        "timeWindowDescription": "Quanto tempo prevenir envios duplicados",
+        "timeWindowPlaceholder": "1440",
+        "maxAttemptsLabel": "Tentativas máximas",
+        "maxAttemptsDescription": "Tentativas máximas permitidas dentro da janela de tempo",
+        "maxAttemptsPlaceholder": "1",
+        "errorMessageLabel": "Mensagem de Erro",
+        "errorMessageDescription": "Mensagem exibida aos usuários quando tentam enviar um formulário duplicado",
+        "allowOverrideLabel": "Permitir Substituição",
+        "allowOverrideDescription": "Permitir que os usuários ignorem a prevenção (não recomendado)",
+        "currentConfiguration": "Configuração atual",
+        "currentSettings": "Configurações Atuais",
+        "summaryModeOneTime": "somente uma submissão por vez",
+        "summaryModeTimeBased": "{maxAttempts} submissão(ões) a cada {timeWindow} minutos",
+        "summaryStrategyCombined": "IP + E-mail + Sessão",
+        "summaryStrategyEmail": "Endereço de E-mail",
+        "summaryStrategyIp": "Endereço IP",
+        "summaryStrategySession": "ID da Sessão",
+        "summarySentence": "{mode} usando {strategy} rastreamento.",
+        "summaryOverrideEnabled": "Substituição habilitada.",
+        "disabledDescription": "A prevenção de duplicatas ajuda a manter a qualidade dos dados, impedindo que os usuários enviem o mesmo formulário várias vezes. Escolha entre prevenção baseada em tempo ou modo de submissão única.",
+        "actionsAria": "Ações de prevenção de duplicatas",
+        "saveAria": "Salvar configurações de prevenção de duplicatas",
+        "saved": "Configurações de prevenção de duplicatas salvas com sucesso",
+        "saveFailed": "Falha ao salvar configurações de prevenção de duplicatas",
+        "defaultMessageOneTime": "Você já enviou este formulário. Cada usuário só pode enviar uma vez.",
+        "defaultMessageTimeBased": "Você já enviou este formulário. Aguarde antes de enviar novamente."
+      },
+      "profanityFilterSection": {
+        "ariaSettings": "Configurações do filtro de palavrões",
+        "title": "Filtro de palavrões",
+        "description": "Detectar e filtrar automaticamente conteúdo impróprio",
+        "enableLabel": "Habilitar Filtro de Palavrões",
+        "enableDescription": "Detectar e filtrar automaticamente conteúdo impróprio",
+        "filterModeLabel": "Modo de Filtro",
+        "strictModeOption": "Modo Rigoroso - Recusar submissões com palavrões",
+        "replaceModeOption": "Modo de Substituição - Substituir palavrões por asteriscos",
+        "customMessageLabel": "Mensagem personalizada",
+        "customMessagePlaceholder": "Inserir uma mensagem personalizada para exibir quando palavrões são detectados",
+        "customWordsTitle": "Palavras personalizadas a filtrar",
+        "whitelistedWordsTitle": "Palavras na lista branca",
+        "customWordsPlaceholder": "Inserir palavra(s) a filtrar (separadas por vírgulas para várias)",
+        "whitelistPlaceholder": "Inserir palavra(s) na lista branca (separadas por vírgulas para várias)",
+        "addWord": "Adicionar",
+        "addFilteredWordAria": "Adicionar palavra filtrada",
+        "addWhitelistedWordAria": "Adicionar palavra na lista branca",
+        "removeWordAria": "Remover {word}",
+        "currentConfiguration": "Configuração atual",
+        "summaryPrefix": "O filtro de palavrões está",
+        "enabled": "habilitada",
+        "summaryIn": "em",
+        "strictMode": "modo rigoroso",
+        "replaceMode": "modo de substituição",
+        "summaryPeriod": ".",
+        "customWordsConfigured": "{count} palavras personalizadas configuradas.",
+        "whitelistedWordsConfigured": "{count} palavras na lista branca.",
+        "disabledDescription": "O filtro de palavrões ajuda a manter um ambiente limpo e profissional, detectando e filtrando automaticamente conteúdo impróprio em submissões de formulários.",
+        "actionsAria": "Ações do filtro de palavrões",
+        "saveAria": "Salvar configurações do filtro de palavrões",
+        "saved": "Configurações do filtro de palavrões salvas com sucesso",
+        "saveFailed": "Falha ao salvar configurações do filtro de palavrões"
+      },
+      "notificationsSection": {
+        "title": "Notificações",
+        "description": "Configurar alertas de e-mail para novas submissões de formulários",
+        "enableLabel": "Notificações por E-mail",
+        "enableDescription": "Habilitar notificações por e-mail para novas submissões",
+        "emailLabel": "E-mail de Notificação",
+        "emailPlaceholder": "dono@email.com",
+        "subjectLabel": "Assunto do E-mail",
+        "messageLabel": "Mensagem do E-mail",
+        "customLinksLabel": "Links Personalizados",
+        "linkLabelPlaceholder": "Rótulo",
+        "linkUrlPlaceholder": "https://example.com",
+        "removeLink": "Remover",
+        "addLink": "Adicionar",
+        "actionsAria": "Ações de configurações de notificação",
+        "saveAria": "Salvar configurações de notificação",
+        "saved": "Configurações de notificação salvas com sucesso",
+        "saveFailed": "Falha ao salvar configurações de notificação"
+      },
+      "brandingSection": {
+        "title": "Branding",
+        "description": "Gerenciar marcação Ikiform e links de mídia social",
+        "showPoweredByLabel": "Exibir \"Powered by Ikiform\"",
+        "showPoweredByDescription": "Exibir uma pequena atribuição no rodapé",
+        "socialMediaLabel": "Links de mídia social",
+        "socialMediaDescription": "Habilitar links para seus perfis sociais no formulário",
+        "platforms": {
+          "linkedin": {
+            "label": "LinkedIn",
+            "placeholder": "https://linkedin.com/in/username"
+          },
+          "twitter": {
+            "label": "X (Twitter)",
+            "placeholder": "https://x.com/username"
+          },
+          "youtube": {
+            "label": "YouTube",
+            "placeholder": "https://youtube.com/@channel"
+          },
+          "instagram": {
+            "label": "Instagram",
+            "placeholder": "https://instagram.com/username"
+          },
+          "facebook": {
+            "label": "Facebook",
+            "placeholder": "https://facebook.com/username"
+          },
+          "github": {
+            "label": "GitHub",
+            "placeholder": "https://github.com/username"
+          },
+          "website": {
+            "label": "Site",
+            "placeholder": "https://example.com"
+          }
+        },
+        "iconSizeLabel": "Tamanho do Ícone",
+        "iconSizes": {
+          "small": "Pequeno",
+          "medium": "Médio",
+          "large": "Grande"
+        },
+        "positionLabel": "Posição",
+        "positions": {
+          "footer": "Rodapé",
+          "header": "Cabeçalho",
+          "both": "Ambos"
+        },
+        "previewLabel": "Pré-visualização",
+        "disabledDescription": "Habilite links de mídia social para exibir seus perfis sociais em seus formulários.",
+        "actionsAria": "Ações de configurações de marca",
+        "saveAria": "Salvar configurações de marca",
+        "saved": "Configurações de marca salvas com sucesso",
+        "saveFailed": "Falha ao salvar configurações de marca",
+        "authRequired": "Autenticação de usuário necessária"
+      },
+      "metadataSection": {
+        "basicTitle": "SEO básico",
+        "basicDescription": "Títulos, descrições e URL canônica",
+        "pageTitleLabel": "Título da página",
+        "pageTitlePlaceholder": "Digite o título da página (máx. 60 caracteres)",
+        "metaDescriptionLabel": "Meta Descrição",
+        "metaDescriptionPlaceholder": "Digite a meta descrição (máx. 160 caracteres)",
+        "characterCount": "{count}/{max} caracteres",
+        "keywordsLabel": "Palavras-chave",
+        "keywordsPlaceholder": "Digite palavras-chave separadas por vírgulas",
+        "authorLabel": "Autor",
+        "authorPlaceholder": "Digite o nome do autor",
+        "canonicalUrlLabel": "URL canônica",
+        "canonicalUrlPlaceholder": "https://example.com/form",
+        "canonicalUrlDescription": "A URL preferida para esta página do formulário",
+        "basicActionsAria": "Ações de SEO básico",
+        "saveBasicAria": "Salvar configurações de SEO básico",
+        "basicSaved": "SEO básico salvo",
+        "basicSaveFailed": "Falha ao salvar SEO básico",
+        "socialTitle": "Metadados sociais",
+        "socialDescription": "Configurações de Open Graph e Twitter",
+        "ogTitleLabel": "Título do Open Graph",
+        "ogTitlePlaceholder": "Digite o título do Open Graph",
+        "ogTitleDescription": "Título exibido quando compartilhado no Facebook, LinkedIn, etc.",
+        "ogDescriptionLabel": "Descrição do Open Graph",
+        "ogDescriptionPlaceholder": "Digite a descrição do Open Graph",
+        "ogDescriptionDescription": "Descrição exibida quando compartilhada em mídias sociais",
+        "ogImageLabel": "URL da imagem do Open Graph",
+        "ogImagePlaceholder": "https://example.com/image.jpg",
+        "ogTypeLabel": "Tipo do Open Graph",
+        "ogTypePlaceholder": "Selecione o tipo do Open Graph",
+        "ogTypes": {
+          "website": "Site",
+          "article": "Artigo",
+          "profile": "Perfil",
+          "video": "Vídeo"
+        },
+        "twitterCardLabel": "Tipo de cartão do Twitter",
+        "twitterCardPlaceholder": "Selecione o tipo de cartão do Twitter",
+        "twitterCards": {
+          "summary": "Resumo",
+          "summaryLargeImage": "Resumo com imagem grande",
+          "app": "Aplicativo",
+          "player": "Reprodutor"
+        },
+        "twitterTitleLabel": "Título do Twitter",
+        "twitterTitlePlaceholder": "Digite o título do Twitter",
+        "twitterImageLabel": "URL da imagem do Twitter",
+        "twitterImagePlaceholder": "https://example.com/twitter-image.jpg",
+        "twitterDescriptionLabel": "Descrição do Twitter",
+        "twitterDescriptionPlaceholder": "Digite a descrição do Twitter",
+        "twitterSiteLabel": "Site do Twitter",
+        "twitterSitePlaceholder": "@seuhandle",
+        "twitterCreatorLabel": "Criador do Twitter",
+        "twitterCreatorPlaceholder": "@handlecriador",
+        "socialActionsAria": "Ações de metadados sociais",
+        "saveSocialAria": "Salvar configurações de metadados sociais",
+        "socialSaved": "Metadados sociais salvos",
+        "socialSaveFailed": "Falha ao salvar metadados sociais",
+        "indexingTitle": "Indexação do mecanismo de busca",
+        "indexingDescription": "Controle como os motores de busca rastreiam este formulário",
+        "indexingBehaviorLabel": "Indexação do mecanismo de busca",
+        "indexingBehaviorPlaceholder": "Selecione o comportamento de indexação",
+        "indexingOptions": {
+          "index": "Indexar e seguir (Padrão)",
+          "noindex": "Não indexar",
+          "nofollow": "Não seguir",
+          "noindexNofollow": "Não indexar, não seguir"
+        },
+        "indexingBehaviorDescription": "Controles se os motores de busca podem indexar e seguir links nesta página",
+        "switches": {
+          "noArchive": "Sem Arquivo",
+          "noSnippet": "Sem Trecho",
+          "noImageIndex": "Sem Índice de Imagem",
+          "noTranslate": "Sem Tradução"
+        },
+        "indexingActionsAria": "Ações de indexação",
+        "saveIndexingAria": "Salvar configurações de indexação",
+        "indexingSaved": "Configurações de indexação salvas",
+        "indexingSaveFailed": "Falha ao salvar configurações de indexação",
+        "updatedAnnouncement": "Metadados atualizados",
+        "authRequired": "Autenticação de usuário necessária"
+      },
+      "rateLimitSection": {
+        "title": "Limitação de taxa",
+        "description": "Controlar a frequência de envio para evitar spam e abuso",
+        "ariaSettings": "Configurações de limitação de taxa",
+        "enableLabel": "Habilitar limitação de taxa",
+        "enableDescription": "Limitar envios do mesmo endereço IP",
+        "maxSubmissionsLabel": "Máximo de envios",
+        "maxSubmissionsDescription": "Máximo de envios permitidos",
+        "timeWindowLabel": "Janela de tempo (minutos)",
+        "timeWindowDescription": "Período de tempo para contar envios",
+        "blockDurationLabel": "Duração do bloqueio (minutos)",
+        "blockDurationDescription": "Quanto tempo bloquear após o limite ser atingido",
+        "messageLabel": "Mensagem exibida quando o limite de taxa é excedido",
+        "messagePlaceholder": "Muitos envios. Por favor, tente novamente mais tarde.",
+        "messageDescription": "Mensagem personalizada exibida quando o limite de taxa é excedido",
+        "currentConfiguration": "Configuração atual",
+        "summarySentence": "Permitir {maxSubmissions} envios a cada {timeWindow} minutos. Bloquear por {blockDuration} minutos quando excedido.",
+        "summaryExample": "Exemplo: Se um usuário enviar {maxSubmissions} vezes em {timeWindow} minutos, ele será bloqueado por {blockDuration} minutos.",
+        "disabledDescription": "A limitação de taxa ajuda a proteger seu formulário contra spam e abuso controlando a frequência de envios.",
+        "actionsAria": "Ações de limitação de taxa",
+        "saveAria": "Salvar configurações de limitação de taxa",
+        "saved": "Configurações de limitação de taxa salvas com sucesso",
+        "saveFailed": "Falha ao salvar configurações de limitação de taxa",
+        "defaultMessage": "Muitos envios. Por favor, tente novamente mais tarde."
+      },
+      "responseLimitSection": {
+        "title": "Limite de respostas",
+        "description": "Parar de aceitar envios após uma contagem total definida",
+        "enableLabel": "Habilitar limite de resposta",
+        "enableDescription": "Limitar o número total de envios que este formulário aceita",
+        "maxResponsesLabel": "Máximo de respostas",
+        "maxResponsesDescription": "Limitar o número total de respostas que este formulário pode aceitar. Uma vez que o limite seja atingido, novos envios serão bloqueados.",
+        "limitReachedLabel": "Mensagem quando o limite é atingido",
+        "limitReachedDescription": "Mensagem exibida após o limite total de respostas ser atingido",
+        "limitReachedPlaceholder": "Este formulário não aceita mais respostas.",
+        "disabledDescription": "Mantenha isso desativado se seu formulário deve continuar aceitando envios sem limite.",
+        "actionsAria": "Ações de limite de resposta",
+        "saveAria": "Salvar configurações de limite de resposta",
+        "saved": "Limite de resposta salvo com sucesso",
+        "saveFailed": "Falha ao salvar limite de resposta",
+        "defaultMessage": "Este formulário não aceita mais respostas."
+      },
+      "botProtectionSection": {
+        "title": "Proteção contra bots",
+        "description": "Detectar e bloquear automaticamente envios automatizados",
+        "ariaSettings": "Configurações de proteção contra bots",
+        "enableLabel": "Habilitar proteção contra bots",
+        "enableDescription": "Adicionar verificações anti-bots para envios de formulário",
+        "detectionMessageLabel": "Mensagem de detecção",
+        "detectionMessagePlaceholder": "Envio bloqueado devido a atividade suspeita de bot.",
+        "detectionMessageDescription": "Mensagem exibida quando um envio automatizado é bloqueado",
+        "currentConfiguration": "Configuração atual",
+        "statusEnabledPrefix": "A proteção contra bots está atualmente",
+        "enabled": "habilitada",
+        "statusEnabledSuffix": "para este formulário.",
+        "vercelTitle": "Proteção Vercel",
+        "vercelDescription": "Se implantado no Vercel, verificações adicionais anti-abuso podem ser aplicadas.",
+        "disabledDescription": "Habilitar proteção contra bots para reduzir spam de ferramentas automatizadas e tráfego roteado.",
+        "actionsAria": "Ações de proteção contra bots",
+        "saveAria": "Salvar configurações de proteção contra bots",
+        "saved": "Configurações de proteção contra bots salvas com sucesso",
+        "saveFailed": "Falha ao salvar configurações de proteção contra bots"
+      },
+      "quizSection": {
+        "title": "Quiz e pontuação",
+        "description": "Configure o comportamento do quiz e as regras de pontuação",
+        "ariaSettings": "Configurações do Quiz",
+        "enableLabel": "Habilitar Modo Quiz",
+        "enableDescription": "Ativar recursos de quiz como pontuação e mensagens de resultado",
+        "passingScoreLabel": "Pontuação Mínima para Aprovação (%)",
+        "passingScoreDescription": "Definir a porcentagem mínima necessária para aprovação",
+        "timeLimitLabel": "Limite de Tempo (minutos)",
+        "timeLimitDescription": "Limite de tempo opcional para conclusão do quiz",
+        "timeLimitPlaceholder": "Deixe em branco para sem limite",
+        "showScoreLabel": "Mostrar Pontuação ao Usuário",
+        "showScoreDescription": "Exibir a pontuação do usuário após o envio do formulário",
+        "showCorrectAnswersLabel": "Mostrar Respostas Corretas",
+        "showCorrectAnswersDescription": "Mostrar respostas corretas e explicações após o envio",
+        "allowRetakeLabel": "Permitir Nova Tentativa",
+        "allowRetakeDescription": "Permitir que os usuários façam o quiz novamente para melhorar sua pontuação",
+        "customMessagesLabel": "Mensagens de Resultado Personalizadas",
+        "successMessageLabel": "Mensagem de Sucesso",
+        "successMessagePlaceholder": "Parabéns! Você passou no quiz.",
+        "improvementMessageLabel": "Mensagem de Melhoria",
+        "improvementMessagePlaceholder": "Por favor, revise e tente novamente.",
+        "messagePlaceholderHelp": "Use {score}, {percentage}, {total} como espaços reservados",
+        "actionsAria": "Ações do Quiz",
+        "saveAria": "Salvar configurações do quiz",
+        "saved": "Configurações do quiz salvas com sucesso",
+        "savedToast": "Configurações do quiz salvas",
+        "saveFailed": "Falha ao salvar configurações do quiz"
+      },
+      "apiSection": {
+        "title": "Acesso à API",
+        "description": "Alternar para permitir envios via endpoint de API",
+        "authRequired": "Autenticação de usuário necessária",
+        "enableSupportLabel": "Habilitar Suporte a API",
+        "enableSupportDescription": "Habilitar envios externos via uma chave de API segura.",
+        "apiEndpointLabel": "Endpoint da API",
+        "copyEndpointAria": "Copiar endpoint de API",
+        "endpointCopied": "Endpoint de API copiado",
+        "apiKeyLabel": "Chave de API",
+        "apiKeySecretHint": "Mantenha esta chave secreta. Qualquer pessoa com ela pode enviar para este formulário.",
+        "generateApiKey": "Gerar Chave de API",
+        "regenerateKey": "Regerar chave",
+        "revokeKey": "Revogar chave",
+        "generating": "Gerando...",
+        "revoking": "Revogando...",
+        "copyApiKeyAria": "Copiar Chave de API",
+        "showApiKeyAria": "Mostrar Chave de API",
+        "hideApiKeyAria": "Ocultar Chave de API",
+        "keyCopied": "Chave de API copiada",
+        "keyGenerated": "Chave de API gerada",
+        "keyGenerateFailed": "Falha ao gerar Chave de API",
+        "keyRevoked": "Chave de API revogada",
+        "keyRevokeFailed": "Falha ao revogar Chave de API",
+        "showCodeExamples": "Mostrar exemplos de código",
+        "hideCodeExamples": "Ocultar exemplos de código",
+        "javascriptNodeLabel": "JavaScript / Node.js",
+        "sampleName": "Jane Doe",
+        "sampleEmail": "jane@example.com",
+        "sampleMessage": "Olá da API",
+        "sampleValue": "Valor de exemplo",
+        "copyCodeAria": "Copiar código de exemplo",
+        "downloadCodeAria": "Baixar código de exemplo",
+        "codeCopied": "Código de exemplo copiado",
+        "codeDownloaded": "Código de exemplo baixado",
+        "betaBadge": "BETA",
+        "integrationRateLimiting": "Limitação de taxa",
+        "integrationRateLimitingDescription": "Proteger seu endpoint contra rajadas de spam.",
+        "integrationResponseLimits": "Limites de resposta",
+        "integrationResponseLimitsDescription": "Limitar o total de envios aceitos.",
+        "integrationDuplicatePrevention": "Prevenção de duplicatas",
+        "integrationDuplicatePreventionDescription": "Reduzir envios repetidos do mesmo usuário.",
+        "integrationProfanityFilter": "Filtro de palavrões",
+        "integrationProfanityFilterDescription": "Bloquear ou higienizar conteúdo impróprio.",
+        "emptyStateDescription": "Ative o suporte à API para gerar uma chave de API segura.",
+        "actionsAria": "Ações de acesso à API",
+        "saveAria": "Salvar configurações de API",
+        "resetAria": "Redefinir configurações de API",
+        "settingsSaved": "Configurações de API salvas com sucesso",
+        "settingsSaveFailed": "Falha ao salvar configurações de API"
+      },
+      "webhooks": {
+        "panel": {
+          "endpointsTitle": "Endpoints de Webhook",
+          "endpointsDescription": "Enviar envios para serviços externos.",
+          "addWebhook": "Adicionar Webhook"
+        },
+        "list": {
+          "emptyState": "Nenhum webhook configurado ainda. Adicione seu primeiro webhook para receber envios de formulários.",
+          "active": "Ativo",
+          "inactive": "Inativo",
+          "edit": "Editar",
+          "delete": "Excluir",
+          "test": "Testar",
+          "viewLogs": "Visualizar logs",
+          "events": {
+            "formSubmitted": "Formulário enviado",
+            "formViewed": "Formulário visualizado",
+            "formStarted": "Formulário iniciado"
+          }
+        },
+        "hook": {
+          "fetchFailed": "Falha ao buscar webhooks",
+          "created": "Webhook criado com sucesso",
+          "createFailed": "Falha ao criar webhook",
+          "updated": "Webhook atualizado com sucesso",
+          "updateFailed": "Falha ao atualizar webhook",
+          "deleted": "Webhook excluído com sucesso",
+          "deleteFailed": "Falha ao excluir webhook"
+        },
+        "formModal": {
+          "addTitle": "Adicionar webhook",
+          "editTitle": "Editar webhook",
+          "stepsAria": "Passos de configuração de webhook",
+          "steps": {
+            "basics": "Básico",
+            "events": "Eventos",
+            "headers": "Cabeçalhos",
+            "payload": "Carga útil",
+            "notifications": "Notificações",
+            "details": "Revisar"
+          },
+          "errors": {
+            "missingBasics": "URL do webhook é obrigatória.",
+            "missingEvent": "Selecione pelo menos um evento.",
+            "missingBasicsAndEvent": "URL do webhook e pelo menos um evento são obrigatórios."
+          },
+          "webhookUrl": "URL do webhook",
+          "webhookUrlPlaceholder": "https://example.com/webhook",
+          "nameOptional": "Nome (opcional)",
+          "namePlaceholder": "Notificações do Slack",
+          "descriptionOptional": "Descrição (opcional)",
+          "descriptionPlaceholder": "Onde este webhook deve enviar dados do formulário",
+          "eventsHelp": "Escolha quais eventos devem acionar este webhook.",
+          "events": {
+            "formSubmitted": "Formulário enviado",
+            "formViewed": "Formulário visualizado",
+            "formStarted": "Formulário iniciado"
+          },
+          "httpMethod": "Método HTTP",
+          "selectHttpMethodAria": "Selecione o método HTTP",
+          "selectMethodPlaceholder": "Selecione o método",
+          "httpMethodDescriptions": {
+            "post": "Criar recursos novos ou enviar dados de carga útil.",
+            "put": "Substituir um recurso existente.",
+            "patch": "Atualizar parcialmente um recurso existente.",
+            "delete": "Excluir um recurso.",
+            "get": "Buscar informações sem alterar dados.",
+            "head": "Buscar apenas cabeçalhos."
+          },
+          "addHeader": "Adicionar cabeçalho",
+          "headerName": "Nome do cabeçalho",
+          "headerNamePlaceholder": "Autenticação",
+          "headerNameAria": "Nome do cabeçalho do webhook",
+          "headerValue": "Valor do cabeçalho",
+          "headerValuePlaceholder": "Token de portador",
+          "headerValueAria": "Valor do cabeçalho do webhook",
+          "removeHeaderAria": "Remover cabeçalho",
+          "headersHelp": "Cabeçalhos personalizados são opcionais e enviados com cada solicitação de webhook.",
+          "payloadTemplateOptional": "Modelo de carga útil (opcional)",
+          "availableVariables": "Variáveis disponíveis",
+          "variables": {
+            "formData": "Objeto de dados do formulário enviado",
+            "formId": "Identificador do formulário",
+            "submissionId": "Identificador do envio",
+            "event": "Evento de gatilho",
+            "timestamp": "Carimbo de data/hora do evento",
+            "formatted": "Resumo legível para humanos"
+          },
+          "notificationEmailOptional": "E-mail de notificação (opcional)",
+          "notificationEmailPlaceholder": "alerts@example.com",
+          "emailOnSuccess": "E-mail ao entregar com sucesso",
+          "emailOnFailure": "E-mail ao falhar na entrega",
+          "selectAll": "Selecionar tudo",
+          "clear": "Limpar",
+          "back": "Voltar",
+          "next": "Próximo",
+          "skip": "Pular",
+          "cancel": "Cancelar",
+          "createWebhook": "Criar webhook",
+          "updateWebhook": "Atualizar webhook"
+        },
+        "testDialog": {
+          "title": "Testar webhook",
+          "description": "Enviar um evento de teste para verificar seu endpoint.",
+          "endpointTitle": "Endpoint",
+          "nameLabel": "Nome",
+          "untitledWebhook": "Webhook sem título",
+          "descriptionLabel": "Descrição",
+          "methodLabel": "Método HTTP",
+          "urlLabel": "URL",
+          "triggersTitle": "Gatilhos",
+          "events": {
+            "formSubmitted": "Formulário enviado",
+            "formViewed": "Formulário visualizado",
+            "formStarted": "Formulário iniciado"
+          },
+          "modeTitle": "Modo de teste",
+          "mode": {
+            "real": "Enviar um payload real",
+            "success": "Forçar resposta de sucesso",
+            "failure": "Forçar resposta de falha"
+          },
+          "sendTest": "Enviar teste",
+          "close": "Fechar",
+          "success": "Teste enviado com sucesso",
+          "failed": "Teste falhou",
+          "testSent": "Teste de webhook enviado",
+          "testFailed": "Teste de webhook falhou",
+          "testFailedNetwork": "Não foi possível enviar o teste de webhook"
+        },
+        "logDialog": {
+          "title": "Logs de webhook",
+          "status": "Status",
+          "response": "Resposta",
+          "attempt": "Tentativa",
+          "resend": "Reenviar",
+          "resendSuccess": "Webhook reenviado com sucesso",
+          "resendFailed": "Falha ao reenviar webhook",
+          "copied": "Copiado para a área de transferência",
+          "copyFailed": "Falha ao copiar",
+          "copyCodeAria": "Copiar payload",
+          "viewPayload": "Ver payload",
+          "payloadTitle": "Carga útil",
+          "noPayloadDataTitle": "Sem dados de payload",
+          "noPayloadDataDescription": "Payload indisponível para esta entrada de log.",
+          "noPayloadReasonMethod": "Este tipo de solicitação não incluiu um payload.",
+          "noPayloadReasonError": "Captura de payload falhou devido a um erro.",
+          "noPayloadReasonEmpty": "Nenhum dado de payload foi armazenado.",
+          "eventInformation": "Informações do evento",
+          "eventLabel": "Evento",
+          "formNameLabel": "Nome do formulário",
+          "formIdLabel": "ID do formulário",
+          "submissionIdLabel": "ID de envio",
+          "ipAddressLabel": "Endereço IP",
+          "formFields": "Campos do formulário",
+          "rawFormData": "Dados do formulário bruto",
+          "rawJson": "JSON bruto",
+          "formatted": "Formatado",
+          "additionalData": "Dados adicionais",
+          "notAvailable": "Não disponível",
+          "unknown": "Desconhecido",
+          "complexObject": "Objeto complexo",
+          "complexArray": "Matriz complexa",
+          "failedCount": "{count} falhou",
+          "pendingCount": "{count} pendente",
+          "successfulCount": "{count} bem-sucedido",
+          "noLogsTitle": "Sem logs ainda",
+          "noLogsDescription": "Envie eventos para este webhook para ver o histórico de entrega.",
+          "errorTitle": "Não foi possível carregar logs",
+          "fetchFailed": "Falha ao carregar logs de webhook"
+        }
+      },
+      "designSection": {
+        "title": "Design",
+        "description": "Controle de aparência e personalização",
+        "advancedTitle": "Personalização avançada",
+        "advancedDescription": "Ajuste fino de cores, tipografia, espaçamento e muito mais em um painel focado.",
+        "openAria": "Abrir painel de personalização em uma nova guia",
+        "openLabel": "Abrir painel de personalização…"
+      }
+    },
+    "fieldRenderer": {
+      "scheduler": {
+        "title": "Agendador",
+        "openScheduler": "Abrir Agendador",
+        "embedTitle": "Incorporação do Agendador",
+        "notConfigured": "Nenhum link de agendamento configurado.",
+        "close": "Fechar"
+      },
+      "email": {
+        "defaultPlaceholder": "Digite o endereço de e-mail",
+        "autocompleteHint": "Pressione Tab ou clique para concluir:",
+        "completeEmailAria": "Conclua o endereço de e-mail",
+        "completeButton": "Concluir",
+        "autocompleteBadge": "Auto-completar:",
+        "allowedDomainsLabel": "Domínios permitidos:"
+      },
+      "fileUpload": {
+        "bytesUnit": "Bytes",
+        "uploadFailed": "Upload falhou",
+        "uploadErrorTitle": "Erro de upload",
+        "uploadedFiles": "Arquivos enviados ({count})",
+        "uploadedBadge": "Enviado",
+        "removeFileAria": "Remover {name}",
+        "maxFilesAndSize": "Máximo de {maxFiles} arquivos, até {maxSize} cada",
+        "allowedTypes": "Tipos permitidos"
+      },
+      "social": {
+        "platforms": {
+          "linkedin": "LinkedIn",
+          "twitter": "X (Twitter)",
+          "youtube": "YouTube",
+          "instagram": "Instagram",
+          "facebook": "Facebook",
+          "github": "GitHub",
+          "website": "Site"
+        },
+        "customLink": "Link personalizado {index}",
+        "customLinkPlaceholder": "https://example.com",
+        "preview": "Pré-visualização"
+      },
+      "signature": {
+        "drawHere": "Desenhe sua assinatura aqui",
+        "clear": "Limpar",
+        "preview": "Pré-visualização",
+        "previewAlt": "Visualização da assinatura"
+      },
+      "rating": {
+        "groupAria": "Avaliação",
+        "rateAria": "Avalie {index} {type}"
+      },
+      "poll": {
+        "fetchFailed": "Falha ao buscar opções",
+        "resultsTitle": "Resultados da enquete",
+        "totalVotes": "{count} votos totais",
+        "votes": "{count} votos"
+      }
+    },
+    "formRenderer": {
+      "shared": {
+        "poweredBy": "Powered by",
+        "incorrectPassword": "Senha incorreta!",
+        "passwordProtectionMessage": "Este formulário é protegido por senha. Por favor, insira a senha para continuar."
+      },
+      "successScreen": {
+        "title": "Obrigado!",
+        "defaultMessage": "Seu formulário foi enviado com sucesso.",
+        "redirecting": "Redirecionando você em um momento...",
+        "poweredBy": "Powered by"
+      },
+      "quizResults": {
+        "titlePassed": "Parabéns!",
+        "titleComplete": "Quiz concluído",
+        "descriptionPassed": "Você concluiu com sucesso o quiz!",
+        "descriptionRetry": "Obrigado por fazer o quiz. Continue praticando!",
+        "score": "Pontuação",
+        "points": "Pontos",
+        "answered": "Respondidas",
+        "totalQuestions": "Total de perguntas",
+        "passed": "Aprovado",
+        "needsImprovement": "Precisa de melhoria",
+        "retakeQuiz": "Refazer quiz",
+        "questionByQuestion": "Resultados por pergunta",
+        "questionLabel": "Pergunta {index}: {label}",
+        "yourAnswer": "Sua resposta:",
+        "noAnswer": "Sem resposta",
+        "correctAnswer": "Resposta correta:",
+        "pointsLower": "pontos"
+      },
+      "multiStep": {
+        "previous": "Anterior",
+        "next": "Próximo",
+        "submit": "Enviar",
+        "defaults": {
+          "formTitle": "Formulário"
+        },
+        "validation": {
+          "required": "Este campo é obrigatório",
+          "emailInvalid": "Por favor, insira um endereço de e-mail válido",
+          "minLength": "Deve ter pelo menos {count} caracteres",
+          "maxLength": "Não pode ter mais de {count} caracteres"
+        },
+        "toasts": {
+          "submitSuccess": "Formulário enviado com sucesso!",
+          "botDetected": "Bot detectado. Acesso negado.",
+          "duplicateSubmission": "Você já enviou este formulário.",
+          "rateLimitExceeded": "Muitas solicitações. Por favor, tente novamente mais tarde.",
+          "responseLimitReached": "Este formulário não aceita mais respostas.",
+          "contentValidationFailed": "Seu envio contém conteúdo inapropriado.",
+          "submitFailed": "Falha ao enviar formulário",
+          "submitFailedTryAgain": "Falha ao enviar formulário. Por favor, tente novamente."
+        }
+      },
+      "singleStep": {
+        "fixHighlightedErrors": "Por favor, corrija os erros destacados antes de enviar.",
+        "submit": "Enviar"
+      },
+      "duplicateSubmission": {
+        "title": "Envio duplicado detectado",
+        "wait": "Espere {time}",
+        "attemptsLeft": "{count, plural, one {# tentativa restante} other {# tentativas restantes}}",
+        "tryAgain": "Tente novamente",
+        "waitBeforeRetry": "Por favor, aguarde antes de tentar enviar novamente.",
+        "units": {
+          "seconds": "{count, plural, one {# segundo} other {# segundos}}",
+          "minutes": "{count, plural, one {# minuto} other {# minutos}}",
+          "hours": "{count, plural, one {# hora} other {# horas}}",
+          "days": "{count, plural, one {# dia} other {# dias}}"
+        }
+      }
+    }
+  },
+  "aiBuilder": {
+    "client": {
+      "createFormWithKiko": "Criar formulário com Kiko",
+      "streamError": "Erro: {error}",
+      "generatingResponse": "Gerando resposta…",
+      "loading": "Carregando…",
+      "suggestions": {
+        "contactForm": "Criar um formulário de contato",
+        "customerFeedbackSurvey": "Pesquisa de feedback do cliente",
+        "eventRegistrationForm": "Formulário de inscrição em evento",
+        "jobApplicationForm": "Formulário de candidatura a emprego"
+      }
+    },
+    "chatHeader": {
+      "backToFormBuilder": "Voltar para o construtor de formulários",
+      "title": "Kiko AI"
+    },
+    "chatInput": {
+      "messageToKiko": "Mensagem para Kiko AI",
+      "placeholder": "Descreva o formulário que você deseja criar…",
+      "sendMessage": "Enviar mensagem",
+      "sendHelp": "Pressione Enter para enviar, Shift+Enter para nova linha ou ⌘/Ctrl+Enter para enviar"
+    },
+    "welcome": {
+      "heading": "Como posso ajudar você hoje?",
+      "description": "Olá, sou Kiko — seu assistente de formulários com IA.\nPeça-me para criar, editar ou analisar formulários para você!"
+    },
+    "preview": {
+      "title": "Kiko AI",
+      "formFallback": "Formulário {index}",
+      "viewJson": "Ver JSON",
+      "useThisForm": "Usar este formulário",
+      "noFormSelected": "Nenhum formulário selecionado."
+    },
+    "jsonModal": {
+      "title": "Esquema JSON do Formulário",
+      "description": "Visualizar ou copiar o esquema JSON gerado para o seu formulário",
+      "close": "Fechar"
+    }
+  },
+  "analytics": {
+    "formAnalytics": {
+      "submissionExported": "Envio exportado com sucesso",
+      "formDeleted": "Formulário excluído com sucesso",
+      "failedDeleteForm": "Falha ao excluir formulário",
+      "backToDashboard": "Voltar para o Painel",
+      "published": "Publicado",
+      "draft": "Rascunho",
+      "analyticsSubtitle": "Análise de Formulário e Dados de Envio",
+      "formActions": "Ações do Formulário",
+      "editForm": "Editar formulário",
+      "shareForm": "Compartilhar formulário",
+      "viewSubmissions": "Visualizar envios",
+      "moreActions": "Mais ações",
+      "exportCsv": "Exportar CSV",
+      "exportJson": "Exportar JSON",
+      "deleteForm": "Excluir formulário",
+      "openKiko": "Abrir Kiko AI",
+      "kiko": "Kiko AI",
+      "kikoTooltip": "Análise de formulários com IA",
+      "recentSubmissions": "Envios Recentes",
+      "viewAll": "Visualizar Todos",
+      "noSubmissionsTitle": "Nenhum envio ainda",
+      "noSubmissionsDescription": "Quando as pessoas começarem a preencher o seu formulário, as respostas delas aparecerão aqui.",
+      "submission": "Envio {id}",
+      "fieldsCount": "{count} campos",
+      "view": "Visualizar",
+      "viewSubmissionDetails": "Visualizar detalhes do envio",
+      "viewMoreSubmissions": "Visualizar {count} envios mais",
+      "noDataToExport": "Nenhados para exportar",
+      "csvExportSuccess": "Dados exportados para CSV com sucesso!",
+      "jsonExportSuccess": "Dados exportados com sucesso!",
+      "deleteModalTitle": "Excluir Formulário",
+      "deleteModalConfirm": "Excluir Formulário",
+      "deleteModalCancel": "Cancelar",
+      "deleteModalDescription": "Tem certeza de que deseja excluir \"{title}\"? Esta ação não pode ser desfeita e removerá permanentemente o formulário e todos os seus envios.",
+      "formPublished": "Formulário publicado!"
+    },
+    "statsCards": {
+      "totalSubmissions": "Total de Envios",
+      "formFields": "Campos do Formulário",
+      "completionRate": "Taxa de Conclusão",
+      "last30Days": "Últimos 30 Dias",
+      "avgDailySubmissions": "Envios Diários Médios",
+      "bounceRate": "Taxa de Rebote",
+      "peakHour": "Hora de Pico",
+      "uniqueResponses": "Respostas Únicas"
+    },
+    "infoCards": {
+      "lastSubmission": "Último Envio",
+      "fromIp": "De {ip}",
+      "noSubmissionsYet": "Nenhum envio ainda",
+      "formStatus": "Status do Formulário",
+      "published": "Publicado",
+      "created": "Criado",
+      "updated": "Atualizado",
+      "yes": "Sim",
+      "no": "Não",
+      "quickStats": "Estatísticas Rápidas",
+      "avgFieldsCompleted": "Campos Completados Médios",
+      "mostActiveDay": "Dia Mais Ativo",
+      "submissions": "{count} envios",
+      "formType": "Tipo de Formulário",
+      "multiStep": "Multi-Etapa",
+      "singlePage": "Uma Página"
+    },
+    "trendsChart": {
+      "title": "Tendências de Envio",
+      "noData": "Nenhum dado disponível",
+      "submissions": "Envios"
+    },
+    "dropoff": {
+      "title": "Análise de abandono",
+      "onlyMultiStep": "A análise de abandono está disponível apenas para formulários com várias etapas.",
+      "subtitle": "Entenda onde os usuários abandonam seus formulários.",
+      "step": "Etapa",
+      "reached": "Atingido",
+      "dropoffPercent": "Taxa de abandono %",
+      "completionPercent": "Taxa de conclusão %",
+      "ofTotal": "de {total}",
+      "stepFallback": "Etapa {index}",
+      "dropoffBarAria": "Barra de abandono para a etapa {index}",
+      "completionBarAria": "Barra de conclusão para a etapa {index}"
+    },
+    "chatModal": {
+      "title": "Kiko",
+      "description": "Converse com a IA sobre suas análises de formulário"
+    },
+    "chat": {
+      "emptyTitle": "Pergunte ao Kiko Qualquer Coisa",
+      "emptyDescription": "Obtenha insights e análises instantâneas de seus dados de formulário. Pergunte em linguagem natural.",
+      "thinking": "Pensando...",
+      "inputPlaceholder": "Pergunte sobre suas análises de formulário...",
+      "inputHelp": "Pressione <enter></enter> para enviar, <shiftEnter></shiftEnter> para nova linha"
+    },
+    "submissionDetails": {
+      "title": "Detalhes do Envio - {id}",
+      "submissionId": "ID de envio",
+      "submittedAt": "Enviado em",
+      "ipAddress": "Endereço IP",
+      "formData": "Dados do Formulário",
+      "emptyValue": "—"
+    },
+    "submissions": {
+      "backToAnalytics": "Voltar para Análise",
+      "published": "Publicado",
+      "draft": "Rascunho",
+      "formSubmissions": "Envios de Formulário ({count})",
+      "exportActions": "Ações de Exportação",
+      "exportCsv": "Exportar CSV",
+      "exportJson": "Exportar JSON",
+      "viewDetailedAnalytics": "Visualizar Análise Detalhada",
+      "submissions": "Envios",
+      "searchSubmissions": "Pesquisar envios...",
+      "noMatchingSubmissions": "Nenhum envio correspondente",
+      "noSubmissionsYet": "Nenhum envio ainda",
+      "noSubmissionsDescription": "Quando as pessoas começarem a preencher o seu formulário, as respostas delas aparecerão aqui.",
+      "adjustSearchTerms": "Tente ajustar seus termos de pesquisa para encontrar envios.",
+      "id": "ID",
+      "submitted": "Enviado",
+      "ipAddress": "Endereço IP",
+      "fields": "Campos",
+      "actions": "Ações",
+      "fieldsCount": "{count} campo",
+      "fieldsCount_plural": "{count} campos",
+      "view": "Visualizar",
+      "showingRange": "Mostrando {start}-{end} de {total} envios",
+      "previous": "Anterior",
+      "next": "Próximo",
+      "pageOf": "Página {page} de {total}",
+      "noSubmissionsToExport": "Nenhum envio para exportar",
+      "submissionId": "ID de envio",
+      "submittedAt": "Enviado em",
+      "csvExportedSuccess": "CSV exportado com sucesso",
+      "jsonExportedSuccess": "JSON exportado com sucesso"
+    },
+    "premiumRequired": {
+      "analytics": {
+        "title": "Requer Premium",
+        "description": "Você precisa de uma assinatura premium para acessar análises de formulário. Atualize para desbloquear todos os recursos.",
+        "viewPricing": "Ver Preços"
+      },
+      "submissions": {
+        "title": "Requer Premium",
+        "description": "Você precisa de uma assinatura premium para acessar envios de formulário. Atualize para desbloquear todos os recursos.",
+        "viewPricing": "Ver Preços"
+      }
+    }
+  },
+  "trialBanner": {
+    "aria": {
+      "status": "Notificação de status de teste"
+    },
+    "endsInPrefix": "Seu teste gratuito termina em ",
+    "remainingSuffix": " restante",
+    "expired": "Teste expirado",
+    "units": {
+      "day": "d",
+      "hour": "h",
+      "minute": "m",
+      "second": "s"
+    }
+  },
+  "embed": {
+    "customizer": {
+      "subtitle": "Personalize e gere código de incorporação para seu formulário",
+      "showCode": "Mostrar Código",
+      "settings": "Configurações",
+      "preview": "Pré-visualização",
+      "desktop": "Desktop",
+      "mobile": "Celular"
+    },
+    "settings": {
+      "dimensions": {
+        "title": "Dimensões",
+        "width": "Largura",
+        "widthPlaceholder": "por exemplo, 100%, 800px",
+        "height": "Altura",
+        "heightPlaceholder": "por exemplo, 600px, 100vh",
+        "makeResponsive": "Tornar responsivo (ajusta à largura do contêiner)"
+      },
+      "appearance": {
+        "title": "Aparência",
+        "backgroundColor": "Cor de Fundo",
+        "allowTransparentBackground": "Permitir fundo transparente (sobrepõe a cor de fundo)"
+      },
+      "border": {
+        "title": "Borda e Estilo",
+        "showBorder": "Mostrar borda",
+        "borderColor": "Cor da Borda",
+        "borderWidth": "Largura da Borda (px)",
+        "borderRadius": "Raio da Borda (px)",
+        "padding": "Preenchimento (px)",
+        "paddingHelp": "Espaço ao redor do iframe"
+      },
+      "performance": {
+        "title": "Desempenho",
+        "loadingMode": "Modo de Carregamento",
+        "loadingModePlaceholder": "Selecione o modo de carregamento",
+        "lazy": "Preguiçoso (recomendado)",
+        "eager": "Ansioso",
+        "help": "O carregamento preguiçoso melhora o desempenho da página carregando o iframe somente quando ele entra em vista"
+      }
+    },
+    "codeModal": {
+      "title": "Código de Incorporação",
+      "description": "Escolha seu framework e copie o código",
+      "codeLabel": "{mode} Código",
+      "copied": "Copiado!",
+      "copy": "Copiar",
+      "close": "Fechar",
+      "modes": {
+        "htmlDescription": "Iframe HTML universal",
+        "reactDescription": "Componente React",
+        "nextjsDescription": "Componente Next.js",
+        "vueDescription": "Componente Vue.js",
+        "wordpressDescription": "Shortcode WordPress"
+      },
+      "iframeTitle": "Formulário"
+    },
+    "testPage": {
+      "metadata": {
+        "title": "Teste de Incorporação - IkiForm",
+        "description": "Página de teste para demonstrar capacidades de incorporação de formulários"
+      },
+      "title": "Página de Teste de Incorporação de Formulário",
+      "descriptionPrefix": "Esta página demonstra como os formulários podem ser incorporados usando diferentes configurações. Visite",
+      "descriptionSuffix": "para personalizar sua própria incorporação.",
+      "tryCustomizer": "Tente Personalizar a Incorporação",
+      "cards": {
+        "standard": {
+          "title": "Incorporação Padrão",
+          "description": "Altura de 600px - perfeita para visualização em desktop",
+          "badge": "Responsivo",
+          "iframeTitle": "Incorporação de Formulário Padrão"
+        },
+        "compact": {
+          "title": "Incorporação Compacta",
+          "description": "Altura de 400px - ideal para barras laterais e espaços menores",
+          "badge": "Mínimo",
+          "iframeTitle": "Incorporação de Formulário Compacto"
+        },
+        "fixed": {
+          "title": "Incorporação de Largura Fixa",
+          "description": "Largura de 800px, centralizada - perfeita para layouts específicos",
+          "badge": "Estilo Personalizado",
+          "iframeTitle": "Incorporação de Formulário de Largura Fixa"
+        },
+        "react": {
+          "title": "Exemplo de Componente React",
+          "description": "Componente React de tipo seguro com digitação adequada",
+          "codeIframeTitle": "Formulário"
+        }
+      },
+      "guide": {
+        "title": "Como Usar o Recurso de Incorporação",
+        "description": "Guia passo a passo para incorporar seus formulários",
+        "steps": {
+          "step1": {
+            "title": "Acessar o Personalizador de Incorporação",
+            "prefix": "Ir para",
+            "suffix": "ou clique no botão de incorporação no painel do seu formulário."
+          },
+          "step2": {
+            "title": "Personalizar Sua Incorporação",
+            "item1": "Ajustar dimensões de largura e altura",
+            "item2": "Escolher tema (claro, escuro, automático)",
+            "item3": "Configurar bordas e estilo",
+            "item4": "Definir comportamento de carregamento"
+          },
+          "step3": {
+            "title": "Obter Seu Código",
+            "description": "Copie o código gerado para HTML, React, Next.js, Vue ou WordPress e cole-o no seu site."
+          },
+          "step4": {
+            "title": "Integração com o Painel",
+            "description": "Acessar opções de incorporação diretamente do painel do seu formulário usando o botão de incorporação nas ações do formulário."
+          }
+        }
+      }
+    }
+  }
+}

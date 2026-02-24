@@ -1,0 +1,517 @@
+{
+  "common": {
+    "dashboard": "ダッシュボード",
+    "feedback": "フィードバック",
+    "logOut": "ログアウト",
+    "loading": "読み込み中",
+    "loadingProfile": "プロフィールを読み込み中",
+    "loadingFormsSidebar": "フォームサイドバーを読み込み中",
+    "loadingFormsManagement": "フォーム管理を読み込み中"
+  },
+  "profile": {
+    "userProfileInformation": "ユーザープロフィール情報",
+    "userNameAria": "ユーザー名: {name}",
+    "premiumUserBadge": "プレミアムユーザーバッジ",
+    "userEmailAria": "ユーザーメール: {email}"
+  },
+  "formsManagement": {
+    "aria": {
+      "management": "フォーム管理"
+    },
+    "header": {
+      "title": "あなたのフォーム",
+      "subtitle": "フォームを簡単に作成、管理、分析できます",
+      "createNewForm": "新しいフォームを作成",
+      "createDialogTitle": "新しいフォームを作成",
+      "createDialogDescription": "開始方法を選択してください。AIで生成、手動で作成、または暗号化ファイルのインポートが選択できます。"
+    },
+    "createOptions": {
+      "aiBadge": "最もおすすめ",
+      "aiCta": "AIで始める",
+      "aiTitle": "Kiko AIを使用",
+      "aiDescription": "フォームの内容を説明するだけで、Kiko AIがフィールド、ロジック、構造を含む完全な初稿を生成します。",
+      "manualCta": "手動で作成",
+      "manualTitle": "手動で作成",
+      "manualDescription": "空のフォームから始めて、フィールドを手動で設定します。",
+      "importCta": "ファイルをインポート",
+      "importTitle": "ファイルからインポート",
+      "importDescription": "パスフレーズで保護された .ikiform ファイルを新しい下書きフォームにインポートします。"
+    },
+    "emptyState": {
+      "aria": "空の状態 - まだフォームが作成されていません",
+      "title": "フォームはまだありません",
+      "description": "最初のフォームを作成して始めましょう。すぐに簡単にできます！",
+      "createFirstForm": "最初のフォームを作成",
+      "dialog": {
+        "title": "フォームをどのように作成しますか？",
+        "description": "手動でフォームを作成するか、Kiko AIに生成させるかを選択してください。",
+        "createWithAI": "Kiko AIを使用",
+        "createManually": "手動で作成"
+      }
+    },
+    "search": {
+      "aria": "フォームの検索とフィルター",
+      "searchAria": "フォームを検索",
+      "placeholder": "タイトル、説明、またはIDでフォームを検索...",
+      "openFilterMenu": "フィルターメニューを開く",
+      "activeFiltersAria": "{count}個のフィルターが有効",
+      "statusLabel": "ステータス",
+      "filterByAll": "すべてのステータスでフィルター",
+      "all": "すべて",
+      "filterByPublished": "公開済みフォームでフィルター",
+      "published": "公開済み",
+      "filterByDraft": "下書きでフィルター",
+      "draft": "下書き",
+      "sortByLabel": "並び替え",
+      "sortByLastUpdated": "最終更新日で並び替え",
+      "lastUpdated": "最終更新",
+      "sortByDateCreated": "作成日で並び替え",
+      "dateCreated": "作成日",
+      "sortByTitle": "タイトルのアルファベット順で並び替え",
+      "titleAz": "タイトル (A-Z)",
+      "clearAllFilters": "すべてのフィルターをクリア",
+      "activeFiltersGroup": "有効なフィルター",
+      "badgeSearch": "検索: \"{query}\"",
+      "clearSearch": "検索クエリをクリア",
+      "badgeStatus": "ステータス: {status}",
+      "clearStatus": "ステータスフィルターをクリア",
+      "badgeSort": "並び替え: {sort}",
+      "sortTitleShort": "タイトル",
+      "sortCreatedShort": "作成日",
+      "resetSort": "最終更新日の並び替えにリセット"
+    },
+    "list": {
+      "untitledForm": "無題のフォーム",
+      "viewAnalyticsFor": "{title}の分析を表示",
+      "formStatusAria": "フォームステータス: {status}",
+      "published": "公開済み",
+      "draft": "下書き",
+      "publicTitle": "公開: \"{title}\"",
+      "updated": "{date}に更新",
+      "actionsFor": "{title}のアクション",
+      "formActions": "フォームのアクション",
+      "editForm": "フォームを編集",
+      "shareForm": "フォームを共有",
+      "duplicate": "複製",
+      "viewForm": "フォームを表示",
+      "viewAnalytics": "分析を表示",
+      "embed": "埋め込み",
+      "export": "エクスポート",
+      "deleteForm": "フォームを削除",
+      "formsListAria": "フォーム一覧"
+    },
+    "stats": {
+      "totalForms": "フォーム合計",
+      "published": "公開済み",
+      "drafts": "下書き",
+      "loadingAria": "フォーム統計を読み込み中",
+      "aria": "フォーム統計",
+      "sidebarAria": "フォーム統計サイドバー"
+    },
+    "emptySearch": {
+      "noMatch": "検索条件に一致するフォームはありません。",
+      "clearFilters": "フィルターをクリア",
+      "clearAria": "すべての検索フィルターをクリア"
+    },
+    "deleteModal": {
+      "cancel": "キャンセル",
+      "confirm": "フォームを削除",
+      "title": "フォームを削除",
+      "description": "\"{formTitle}\"を削除してもよろしいですか？この操作は元に戻せず、フォームのすべてのデータが完全に失われます。"
+    },
+    "toasts": {
+      "failedLoadForms": "フォームの読み込みに失敗しました",
+      "failedShareForm": "フォームの共有に失敗しました",
+      "formDuplicated": "フォームを複製しました",
+      "failedDuplicateForm": "フォームの複製に失敗しました",
+      "formImportedSuccess": "フォームのインポートに成功しました。",
+      "failedImportForm": "フォームのインポートに失敗しました。",
+      "formDeletedSuccess": "フォームを削除しました",
+      "failedDeleteForm": "フォームの削除に失敗しました"
+    },
+    "shareModal": {
+      "title": "フォームを共有",
+      "publishedDescription": "以下のリンクまたはQRコードを使ってフォームを共有してください",
+      "unpublishedDescription": "フォームを公開して他のユーザーと共有できるようにしてください",
+      "shareLink": "共有リンク",
+      "copied": "コピーしました",
+      "copyLink": "リンクをコピー",
+      "hide": "非表示",
+      "show": "表示",
+      "qrCode": "QRコード",
+      "qrCodeForForm": "フォームのQRコード",
+      "generating": "生成中...",
+      "scanForMobile": "モバイルから簡単にアクセスするためにスキャン",
+      "downloading": "ダウンロード中...",
+      "downloadQr": "QRをダウンロード",
+      "needsPublish": "フォームを公開しないと一般に共有できません。",
+      "publishing": "公開中...",
+      "publishForm": "フォームを公開",
+      "toasts": {
+        "failedGenerateQr": "QRコードの生成に失敗しました",
+        "linkCopied": "リンクをクリップボードにコピーしました！",
+        "failedCopyLink": "リンクのコピーに失敗しました。手動でコピーしてください。",
+        "qrDownloaded": "QRコードのダウンロードに成功しました！",
+        "failedDownloadQr": "QRコードのダウンロードに失敗しました"
+      }
+    },
+    "secureImport": {
+      "title": "暗号化ファイルからフォームをインポート",
+      "description": ".ikiform ファイルを復号化して新しい下書きフォームを作成します。",
+      "encryptedFileLabel": "暗号化ファイル",
+      "encryptedFileHelp": ".ikiform 暗号化エクスポートファイルをアップロードしてください。",
+      "passphraseLabel": "パスフレーズ",
+      "passphrasePlaceholder": "エクスポート時に使用したパスフレーズを入力",
+      "passphraseHelp": "最低{count}文字が必要です。",
+      "decrypting": "復号化中...",
+      "decryptFile": "ファイルを復号化",
+      "importedForm": "インポートされたフォーム",
+      "decryptToLoadSettings": "インポート設定を読み込むにはファイルを復号化してください。",
+      "preserveApiSettings": "API設定を保持（APIキーと有効状態）",
+      "preservePassword": "パスワード保護のパスワードを保持",
+      "preserveNotificationEmail": "通知受信者のメールを保持",
+      "cancel": "キャンセル",
+      "importing": "インポート中...",
+      "importAsNewForm": "新しいフォームとしてインポート",
+      "decryptToPreview": "インポートされたフォームをプレビューするにはファイルを復号化してください。",
+      "errors": {
+        "chooseFile": "暗号化された .ikiform ファイルを選択してください。",
+        "passphraseMinChars": "パスフレーズは少なくとも{count}文字必要です。",
+        "failedDecrypt": "インポートファイルの復号化に失敗しました。",
+        "wrongPassphrase": "パスフレーズが間違っているか、ファイルが改ざんされている可能性があります。",
+        "decryptBeforeImport": "インポートする前にファイルを復号化してください。",
+        "failedImport": "フォームのインポートに失敗しました。"
+      },
+      "toasts": {
+        "fixHighlightedFields": "強調表示されたフィールドを修正してください。",
+        "fileDecrypted": "ファイルを復号化しました。インポートオプションを確認してください。"
+      }
+    },
+    "secureExport": {
+      "title": "フォームをエクスポート（セキュア）",
+      "description": "このフォームの暗号化された .ikiform ファイルを作成します。インポートには同じパスフレーズが必要です。",
+      "untitledForm": "無題のフォーム",
+      "formLabel": "フォーム",
+      "unknownForm": "不明なフォーム",
+      "passphraseSetup": "パスフレーズの設定",
+      "passphraseLabel": "パスフレーズ",
+      "passphrasePlaceholder": "最低{count}文字",
+      "passphraseHelper": "より強力な暗号化のために12文字以上を使用してください。",
+      "confirmPassphraseLabel": "パスフレーズの確認",
+      "confirmPassphrasePlaceholder": "パスフレーズを再入力",
+      "confirmPassphraseHelper": "まったく同じパスフレーズを再入力してください。",
+      "hidePassphrase": "パスフレーズを非表示",
+      "viewPassphrase": "パスフレーズを表示",
+      "hideConfirmPassphrase": "確認パスフレーズを非表示",
+      "viewConfirmPassphrase": "確認パスフレーズを表示",
+      "cancel": "キャンセル",
+      "exporting": "エクスポート中...",
+      "exportEncryptedFile": "暗号化ファイルをエクスポート",
+      "strength": {
+        "notSet": "未設定",
+        "weak": "弱い",
+        "good": "良い",
+        "strong": "強い"
+      },
+      "errors": {
+        "passphraseMinChars": "パスフレーズは少なくとも{count}文字必要です。",
+        "confirmPassphraseMinChars": "確認パスフレーズは少なくとも{count}文字必要です。",
+        "passphrasesDoNotMatch": "パスフレーズが一致しません。",
+        "noFormSelected": "エクスポートするフォームが選択されていません。",
+        "enterValidPassphrase": "有効なパスフレーズを入力して確認してください。",
+        "failedExport": "フォームのエクスポートに失敗しました。"
+      },
+      "toasts": {
+        "exportCreated": "暗号化フォームのエクスポートを作成しました。"
+      }
+    }
+  },
+  "admin": {
+    "page": {
+      "aria": {
+        "dashboard": "管理者ダッシュボード",
+        "announcements": "お知らせ管理",
+        "expireTrials": "トライアル期限管理",
+        "users": "ユーザー管理"
+      },
+      "announcements": {
+        "title": "お知らせを送信",
+        "signedInAs": "{email}でサインイン中"
+      },
+      "expireTrials": {
+        "title": "トライアルを期限切れにする",
+        "description": "無料トライアルを期限切れにするcronジョブを手動実行します"
+      },
+      "users": {
+        "title": "すべてのユーザー ({count})",
+        "description": "登録済みの全ユーザーを管理・閲覧します"
+      }
+    },
+    "announcementForm": {
+      "labels": {
+        "recipientEmails": "受信者メールアドレス",
+        "subject": "件名",
+        "content": "内容（Markdown対応）"
+      },
+      "placeholders": {
+        "recipientEmails": "one@example.com, two@example.com\\nまたは\\nthree@example.com",
+        "subject": "お知らせの件名",
+        "content": "# タイトル\\n\\n詳細はこちら..."
+      },
+      "help": {
+        "recipientFormat": "カンマまたは改行で区切ります。"
+      },
+      "actions": {
+        "loading": "読み込み中...",
+        "prefillFromUsers": "ユーザーから自動入力",
+        "sendAnnouncement": "お知らせを送信"
+      },
+      "toasts": {
+        "fetchEmailsFailed": "メールアドレスの取得に失敗しました",
+        "loadedEmails": "{count}件のメールアドレスを読み込みました",
+        "sending": "お知らせを送信中...",
+        "sentCount": "{count}件のメールを送信しました",
+        "failedWithError": "失敗: {error}",
+        "failedToSendFallback": "送信に失敗しました"
+      }
+    },
+    "expireTrialsControl": {
+      "title": "トライアルを期限切れにする",
+      "description": "14日以上経過した無料トライアルを期限切れにするcronジョブを手動実行します",
+      "unknownError": "不明なエラー",
+      "actions": {
+        "running": "実行中...",
+        "run": "トライアル期限切れを実行"
+      },
+      "result": {
+        "success": "成功",
+        "error": "エラー",
+        "updatedUsersCount": "{count}人のユーザーを更新しました",
+        "updatedUsers": "更新されたユーザー:"
+      },
+      "toasts": {
+        "updatedSuccess": "{count}人のユーザーをトライアルから無料プランに正常に更新しました",
+        "failedWithError": "失敗: {error}",
+        "errorWithMessage": "エラー: {message}"
+      }
+    },
+    "usersTable": {
+      "search": {
+        "aria": "ユーザーを検索",
+        "placeholder": "名前、メール、顧客名、またはPolar IDでユーザーを検索..."
+      },
+      "filters": {
+        "premiumAria": "プレミアムステータスでフィルター",
+        "trialAria": "トライアルステータスでフィルター",
+        "allPremium": "すべてのプレミアム",
+        "premiumOnly": "プレミアムのみ",
+        "freeOnly": "無料のみ",
+        "allTrial": "すべてのトライアル",
+        "trialOnly": "トライアルのみ",
+        "noTrial": "トライアルなし",
+        "clearAria": "すべてのフィルターをクリア",
+        "clear": "クリア",
+        "filteredBy": "フィルター:"
+      },
+      "columns": {
+        "uid": "UID",
+        "name": "名前",
+        "email": "メール",
+        "premium": "プレミアム",
+        "trial": "トライアル",
+        "customerName": "顧客名",
+        "polarId": "Polar ID",
+        "created": "作成日",
+        "updated": "更新日"
+      },
+      "sort": {
+        "uidAria": "UIDで並び替え",
+        "nameAria": "名前で並び替え",
+        "emailAria": "メールで並び替え",
+        "premiumAria": "プレミアムステータスで並び替え",
+        "trialAria": "トライアルステータスで並び替え",
+        "createdAria": "作成日で並び替え",
+        "updatedAria": "更新日で並び替え"
+      },
+      "table": {
+        "aria": "ユーザーテーブル"
+      },
+      "badges": {
+        "premium": "プレミアム",
+        "free": "無料",
+        "freeTrial": "無料トライアル",
+        "noFreeTrial": "無料トライアルなし"
+      },
+      "row": {
+        "viewDetailsFor": "{name}の詳細を表示",
+        "premiumStatusAria": "プレミアムステータス: {status}",
+        "trialStatusAria": "トライアルステータス: {status}"
+      },
+      "showingRange": "{total}人中{start}-{end}件を表示",
+      "showLabel": "表示:",
+      "itemsPerPageAria": "1ページあたりの件数",
+      "empty": {
+        "filtered": "フィルターに一致するユーザーはいません",
+        "default": "ユーザーが見つかりません"
+      },
+      "pagination": {
+        "pageOf": "{total}ページ中{current}ページ",
+        "previousAria": "前のページへ",
+        "previous": "前へ",
+        "goToPageAria": "{page}ページへ",
+        "nextAria": "次のページへ",
+        "next": "次へ"
+      }
+    },
+    "userControls": {
+      "title": "管理者コントロール",
+      "description": "ユーザーのステータスと権限を管理します",
+      "sections": {
+        "freeTrial": "無料トライアル",
+        "premiumStatus": "プレミアムステータス",
+        "dangerZone": "危険ゾーン"
+      },
+      "actions": {
+        "removeTrial": "トライアルを削除",
+        "assignTrial": "トライアルを付与",
+        "removePremium": "プレミアムを削除",
+        "assignPremium": "プレミアムを付与",
+        "deleteUser": "ユーザーを削除"
+      },
+      "warning": {
+        "label": "警告:",
+        "message": "ユーザーを削除すると、すべてのフォーム、送信データが永久に削除されます。この操作は元に戻せません。"
+      },
+      "confirm": {
+        "title": "ユーザーを削除",
+        "confirm": "ユーザーを削除",
+        "cancel": "キャンセル",
+        "description": "ユーザー{userName}を削除してもよろしいですか？この操作は元に戻せず、すべてのフォームとデータが削除されます。"
+      }
+    },
+    "userProfile": {
+      "backToAdmin": "管理者に戻る",
+      "invalidUserId": {
+        "title": "無効なユーザーID",
+        "description": "URLにユーザーIDが指定されていません。"
+      },
+      "notFound": {
+        "title": "ユーザーが見つかりません",
+        "description": "お探しのユーザーは存在しません。"
+      },
+      "userInformation": "ユーザー情報",
+      "labels": {
+        "uid": "UID",
+        "premiumStatus": "プレミアムステータス",
+        "trialStatus": "トライアルステータス",
+        "customerName": "顧客名",
+        "polarCustomerId": "Polar顧客ID",
+        "memberSince": "登録日"
+      },
+      "badges": {
+        "premium": "プレミアム",
+        "free": "無料",
+        "freeTrial": "無料トライアル",
+        "noTrial": "トライアルなし"
+      },
+      "trialStatus": {
+        "title": "無料トライアルの状態",
+        "expiredBadge": "トライアル期限切れ",
+        "endedDaysAgo": "無料トライアルは{days}日前に終了しました",
+        "expiringSoonBadge": "まもなく期限切れ",
+        "activeBadge": "アクティブなトライアル",
+        "daysLeft": "{days, plural, other {無料トライアル残り#日}}",
+        "startedOn": "トライアル開始日:"
+      },
+      "forms": {
+        "title": "フォーム ({count})",
+        "description": "このユーザーが作成したすべてのフォーム",
+        "empty": "このユーザーはまだフォームを作成していません。",
+        "table": {
+          "formTitle": "フォームタイトル",
+          "description": "説明",
+          "status": "ステータス",
+          "submissions": "送信数",
+          "created": "作成日",
+          "actions": "アクション"
+        },
+        "status": {
+          "published": "公開済み",
+          "draft": "下書き"
+        },
+        "actions": {
+          "view": "表示",
+          "details": "詳細"
+        }
+      }
+    },
+    "formDetails": {
+      "pageAria": "フォーム詳細ページ",
+      "backToAdmin": "管理者に戻る",
+      "backToAdminAria": "管理者ダッシュボードに戻る",
+      "noDescription": "説明がありません",
+      "viewForm": "フォームを表示",
+      "viewFormAria": "新しいタブでフォームを表示",
+      "invalidFormId": {
+        "aria": "無効なフォームIDエラー",
+        "title": "無効なフォームID",
+        "description": "URLにフォームIDが指定されていません。"
+      },
+      "notFound": {
+        "aria": "フォームが見つからないエラー",
+        "title": "フォームが見つかりません",
+        "description": "お探しのフォームは存在しません。"
+      },
+      "badges": {
+        "published": "公開済み",
+        "draft": "下書き",
+        "enabled": "有効",
+        "disabled": "無効"
+      },
+      "statistics": {
+        "aria": "フォーム統計",
+        "status": "ステータス",
+        "formStatusAria": "フォームステータス: {status}",
+        "submissions": "送信数",
+        "submissionsCountAria": "{count}件の送信",
+        "created": "作成日",
+        "createdOnAria": "{date}に作成",
+        "apiStatus": "APIステータス",
+        "apiStatusAria": "APIステータス: {status}"
+      },
+      "details": {
+        "title": "フォームの詳細",
+        "formId": "フォームID",
+        "formIdAria": "フォームID: {id}",
+        "owner": "オーナー",
+        "viewOwnerAria": "{name}のオーナー詳細を表示",
+        "unknown": "不明",
+        "slug": "スラッグ",
+        "slugAria": "フォームスラッグ: {slug}",
+        "notSet": "未設定",
+        "lastUpdated": "最終更新",
+        "lastUpdatedAria": "最終更新: {date}",
+        "apiKey": "APIキー",
+        "apiKeyAria": "APIキー: {key}"
+      },
+      "schema": {
+        "title": "フォームスキーマ",
+        "aria": "フォームスキーマJSON"
+      },
+      "submissions": {
+        "title": "フォームの送信 ({count})",
+        "description": "このフォームに送信されたすべての回答",
+        "emptyAria": "フォームの送信なし",
+        "empty": "まだ送信がありません。",
+        "listAria": "フォーム送信一覧",
+        "itemAria": "送信 {number}",
+        "itemLabel": "送信 #{number}",
+        "submittedOnAria": "{date}に送信",
+        "ipAria": "IPアドレス: {ip}",
+        "ipLabel": "IP: {ip}",
+        "fieldAria": "フィールド: {key}",
+        "valueAria": "{key}の値: {value}"
+      }
+    }
+  }
+}

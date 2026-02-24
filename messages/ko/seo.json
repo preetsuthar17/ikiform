@@ -1,0 +1,70 @@
+{
+  "siteName": "Ikiform",
+  "routes": {
+    "home": {
+      "title": "폼을 만들고, 응답을 수집하고, 데이터를 손쉽게 분석하세요.",
+      "description": "Ikiform으로 아름다운 폼을 만들고 응답을 손쉽게 분석하세요.",
+      "keywords": ["폼 빌더", "온라인 폼", "설문조사 빌더", "typeform 대안", "google forms 대안"]
+    },
+    "changelog": {
+      "title": "변경 로그",
+      "description": "Ikiform의 제품 업데이트, 릴리스 및 개선 사항을 추적하세요.",
+      "keywords": ["변경 로그", "제품 업데이트", "릴리스 노트", "ikiform 업데이트"]
+    },
+    "legalPrivacy": {
+      "title": "개인정보 처리방침",
+      "description": "Ikiform이 개인 데이터를 수집, 사용 및 보호하는 방법을 알아보세요.",
+      "keywords": ["개인정보 처리방침", "데이터 보호", "ikiform 개인정보"]
+    },
+    "legalTerms": {
+      "title": "서비스 이용약관",
+      "description": "서비스 접근 및 사용에 관한 Ikiform 약관을 확인하세요.",
+      "keywords": ["서비스 이용약관", "약관", "ikiform 법적 고지"]
+    },
+    "legalGdpr": {
+      "title": "GDPR 준수",
+      "description": "Ikiform의 GDPR 통제 및 데이터 처리 체계를 이해하세요.",
+      "keywords": ["gdpr", "개인정보", "규정 준수"]
+    },
+    "legalDpa": {
+      "title": "데이터 처리 계약",
+      "description": "기업 고객을 위한 Ikiform의 데이터 처리 계약을 확인하세요.",
+      "keywords": ["dpa", "데이터 처리 계약", "규정 준수"]
+    },
+    "aiBuilder": {
+      "title": "AI 폼 빌더",
+      "description": "Ikiform에서 AI 기반 지원으로 폼을 만들고 맞춤 설정하세요.",
+      "keywords": ["ai 폼 빌더", "폼 생성기", "ikiform ai"]
+    },
+    "demoFormBuilder": {
+      "title": "데모 폼 빌더",
+      "description": "Ikiform의 라이브 데모 폼 빌더를 체험하고 기능을 즉시 탐색하세요.",
+      "keywords": ["폼 빌더 데모", "ikiform 데모", "인터랙티브 폼 빌더"]
+    },
+    "login": {
+      "title": "로그인",
+      "description": "Ikiform 계정에 로그인하세요.",
+      "keywords": ["ikiform 로그인", "로그인"]
+    },
+    "resetPassword": {
+      "title": "비밀번호 재설정",
+      "description": "Ikiform 계정 비밀번호를 재설정하세요.",
+      "keywords": ["비밀번호 재설정", "계정 복구"]
+    },
+    "success": {
+      "title": "성공",
+      "description": "작업이 성공적으로 완료되었습니다.",
+      "keywords": ["성공"]
+    },
+    "embed": {
+      "title": "임베드",
+      "description": "Ikiform 폼을 웹사이트에 임베드하세요.",
+      "keywords": ["폼 임베드", "폼 삽입", "ikiform 임베드"]
+    },
+    "embedTest": {
+      "title": "임베드 테스트",
+      "description": "임베드된 Ikiform 폼을 미리 보고 테스트하세요.",
+      "keywords": ["임베드 테스트", "폼 미리보기"]
+    }
+  }
+}

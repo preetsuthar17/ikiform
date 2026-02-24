@@ -2,8 +2,20 @@ import type { AppLocale } from "@/i18n/routing";
 import { routing } from "@/i18n/routing";
 import { withLocalePath } from "@/lib/i18n/pathname";
 import type { Metadata } from "next";
+import arSeoMessages from "../../../messages/ar/seo.json";
+import deSeoMessages from "../../../messages/de/seo.json";
 import enSeoMessages from "../../../messages/en/seo.json";
 import esSeoMessages from "../../../messages/es/seo.json";
+import frSeoMessages from "../../../messages/fr/seo.json";
+import hiSeoMessages from "../../../messages/hi/seo.json";
+import itSeoMessages from "../../../messages/it/seo.json";
+import jaSeoMessages from "../../../messages/ja/seo.json";
+import koSeoMessages from "../../../messages/ko/seo.json";
+import nlSeoMessages from "../../../messages/nl/seo.json";
+import ptSeoMessages from "../../../messages/pt/seo.json";
+import ruSeoMessages from "../../../messages/ru/seo.json";
+import trSeoMessages from "../../../messages/tr/seo.json";
+import zhSeoMessages from "../../../messages/zh/seo.json";
 import {
 	DEFAULT_OG_IMAGE,
 	OPEN_GRAPH_ALTERNATE_LOCALES,
@@ -19,6 +31,18 @@ type SeoMessages = typeof enSeoMessages;
 const SEO_MESSAGES: Record<AppLocale, SeoMessages> = {
 	en: enSeoMessages,
 	es: esSeoMessages,
+	fr: frSeoMessages,
+	de: deSeoMessages,
+	pt: ptSeoMessages,
+	hi: hiSeoMessages,
+	ja: jaSeoMessages,
+	zh: zhSeoMessages,
+	it: itSeoMessages,
+	ar: arSeoMessages,
+	ko: koSeoMessages,
+	ru: ruSeoMessages,
+	tr: trSeoMessages,
+	nl: nlSeoMessages,
 };
 
 export function buildMetadata({
@@ -35,9 +59,12 @@ export function buildMetadata({
 
 	const localizedPath = withLocalePath(routePath, locale);
 	const canonicalUrl = `${SITE_URL}${localizedPath}`;
-	const enUrl = `${SITE_URL}${withLocalePath(routePath, "en")}`;
-	const esUrl = `${SITE_URL}${withLocalePath(routePath, "es")}`;
 	const xDefaultUrl = `${SITE_URL}${withLocalePath(routePath, routing.defaultLocale)}`;
+
+	const languages: Record<string, string> = { "x-default": xDefaultUrl };
+	for (const l of routing.locales) {
+		languages[l] = `${SITE_URL}${withLocalePath(routePath, l)}`;
+	}
 
 	return {
 		title: seo.title,
@@ -47,11 +74,7 @@ export function buildMetadata({
 		metadataBase: new URL(SITE_URL),
 		alternates: {
 			canonical: canonicalUrl,
-			languages: {
-				en: enUrl,
-				es: esUrl,
-				"x-default": xDefaultUrl,
-			},
+			languages,
 		},
 		openGraph: {
 			type: "website",

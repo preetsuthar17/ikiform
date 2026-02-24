@@ -1,0 +1,70 @@
+{
+  "siteName": "Ikiform",
+  "routes": {
+    "home": {
+      "title": "Maak formulieren, verzamel reacties en analyseer gegevens moeiteloos.",
+      "description": "Maak mooie formulieren met Ikiform en analyseer reacties moeiteloos.",
+      "keywords": ["formulierenbouwer", "online formulieren", "enquetebouwer", "typeform alternatief", "google forms alternatief"]
+    },
+    "changelog": {
+      "title": "Wijzigingslogboek",
+      "description": "Volg productupdates, releases en verbeteringen in Ikiform.",
+      "keywords": ["wijzigingslogboek", "productupdates", "release-opmerkingen", "ikiform updates"]
+    },
+    "legalPrivacy": {
+      "title": "Privacybeleid",
+      "description": "Lees hoe Ikiform uw persoonlijke gegevens verzamelt, gebruikt en beschermt.",
+      "keywords": ["privacybeleid", "gegevensbescherming", "ikiform privacy"]
+    },
+    "legalTerms": {
+      "title": "Servicevoorwaarden",
+      "description": "Lees de voorwaarden van Ikiform voor toegang tot en gebruik van de dienst.",
+      "keywords": ["servicevoorwaarden", "voorwaarden", "ikiform juridisch"]
+    },
+    "legalGdpr": {
+      "title": "AVG-naleving",
+      "description": "Begrijp de AVG-controles en gegevensverwerking van Ikiform.",
+      "keywords": ["avg", "privacy", "naleving"]
+    },
+    "legalDpa": {
+      "title": "Gegevensverwerkingsovereenkomst",
+      "description": "Lees de Gegevensverwerkingsovereenkomst van Ikiform voor zakelijke klanten.",
+      "keywords": ["gegevensverwerkingsovereenkomst", "gegevensverwerking", "naleving"]
+    },
+    "aiBuilder": {
+      "title": "AI-formulierenbouwer",
+      "description": "Maak en pas formulieren aan met AI-ondersteuning in Ikiform.",
+      "keywords": ["ai formulierenbouwer", "formulierengenerator", "ikiform ai"]
+    },
+    "demoFormBuilder": {
+      "title": "Demo formulierenbouwer",
+      "description": "Probeer de live demo-formulierenbouwer van Ikiform en ontdek direct de functies.",
+      "keywords": ["formulierenbouwer demo", "ikiform demo", "interactieve formulierenbouwer"]
+    },
+    "login": {
+      "title": "Inloggen",
+      "description": "Log in op uw Ikiform-account.",
+      "keywords": ["ikiform inloggen", "aanmelden"]
+    },
+    "resetPassword": {
+      "title": "Wachtwoord herstellen",
+      "description": "Herstel het wachtwoord van uw Ikiform-account.",
+      "keywords": ["wachtwoord herstellen", "accountherstel"]
+    },
+    "success": {
+      "title": "Gelukt",
+      "description": "Actie succesvol voltooid.",
+      "keywords": ["gelukt"]
+    },
+    "embed": {
+      "title": "Insluiten",
+      "description": "Sluit Ikiform-formulieren in op uw website.",
+      "keywords": ["formulier insluiten", "formulier embedden", "ikiform insluiten"]
+    },
+    "embedTest": {
+      "title": "Insluitingstest",
+      "description": "Bekijk en test ingesloten Ikiform-formulieren.",
+      "keywords": ["insluitingstest", "formuliervoorbeeld"]
+    }
+  }
+}

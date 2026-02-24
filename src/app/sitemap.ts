@@ -13,17 +13,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
 			const localizedPath = withLocalePath(routePath, locale);
 			const url = `${SITE_URL}${localizedPath}`;
 
+			const languages: Record<string, string> = {};
+			for (const l of routing.locales) {
+				languages[l] = `${SITE_URL}${withLocalePath(routePath, l)}`;
+			}
+
 			return {
 				url,
 				lastModified,
 				changeFrequency: "daily",
 				priority: routePath === "/" ? 1 : 0.7,
-				alternates: {
-					languages: {
-						en: `${SITE_URL}${withLocalePath(routePath, "en")}`,
-						es: `${SITE_URL}${withLocalePath(routePath, "es")}`,
-					},
-				},
+				alternates: { languages },
 			};
 		});
 	});

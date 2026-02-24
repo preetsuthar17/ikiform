@@ -1,0 +1,70 @@
+{
+  "siteName": "Ikiform",
+  "routes": {
+    "home": {
+      "title": "フォームを作成し、回答を収集し、データを簡単に分析。",
+      "description": "Ikiformで美しいフォームを作成し、回答を簡単に分析しましょう。",
+      "keywords": ["フォームビルダー", "オンラインフォーム", "アンケートビルダー", "typeform代替", "googleフォーム代替"]
+    },
+    "changelog": {
+      "title": "変更履歴",
+      "description": "Ikiformの製品アップデート、リリース、改善を追跡します。",
+      "keywords": ["変更履歴", "製品アップデート", "リリースノート", "ikiformアップデート"]
+    },
+    "legalPrivacy": {
+      "title": "プライバシーポリシー",
+      "description": "Ikiformが個人データをどのように収集、使用、保護するかをご覧ください。",
+      "keywords": ["プライバシーポリシー", "データ保護", "ikiformプライバシー"]
+    },
+    "legalTerms": {
+      "title": "利用規約",
+      "description": "サービスへのアクセスと使用を規定するIkiformの利用規約をお読みください。",
+      "keywords": ["利用規約", "規約", "ikiform法的情報"]
+    },
+    "legalGdpr": {
+      "title": "GDPRコンプライアンス",
+      "description": "IkiformのGDPR管理とデータ処理体制について理解します。",
+      "keywords": ["gdpr", "プライバシー", "コンプライアンス"]
+    },
+    "legalDpa": {
+      "title": "データ処理契約",
+      "description": "法人顧客向けのIkiformデータ処理契約をお読みください。",
+      "keywords": ["dpa", "データ処理契約", "コンプライアンス"]
+    },
+    "aiBuilder": {
+      "title": "AIフォームビルダー",
+      "description": "IkiformでAIを活用してフォームを作成・カスタマイズしましょう。",
+      "keywords": ["aiフォームビルダー", "フォームジェネレーター", "ikiform ai"]
+    },
+    "demoFormBuilder": {
+      "title": "デモフォームビルダー",
+      "description": "Ikiformのライブデモフォームビルダーを試して、機能をすぐに体験しましょう。",
+      "keywords": ["フォームビルダーデモ", "ikiformデモ", "インタラクティブフォームビルダー"]
+    },
+    "login": {
+      "title": "ログイン",
+      "description": "Ikiformアカウントにサインインします。",
+      "keywords": ["ikiformログイン", "サインイン"]
+    },
+    "resetPassword": {
+      "title": "パスワードリセット",
+      "description": "Ikiformアカウントのパスワードをリセットします。",
+      "keywords": ["パスワードリセット", "アカウント復旧"]
+    },
+    "success": {
+      "title": "成功",
+      "description": "アクションが正常に完了しました。",
+      "keywords": ["成功"]
+    },
+    "embed": {
+      "title": "埋め込み",
+      "description": "Ikiformフォームをウェブサイトに埋め込みます。",
+      "keywords": ["フォーム埋め込み", "フォームエンベッド", "ikiform埋め込み"]
+    },
+    "embedTest": {
+      "title": "埋め込みテスト",
+      "description": "埋め込みIkiformフォームをプレビューしてテストします。",
+      "keywords": ["埋め込みテスト", "フォームプレビュー"]
+    }
+  }
+}

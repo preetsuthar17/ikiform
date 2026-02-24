@@ -1,0 +1,2211 @@
+{
+  "common": {
+    "na": "Н/Д",
+    "premium": {
+      "title": "Требуется Premium",
+      "viewPricing": "Посмотреть тарифы",
+      "aiBuilderDescription": "Вам нужна премиум-подписка, чтобы использовать конструктор форм AI. Обновите подписку, чтобы разблокировать все функции.",
+      "formBuilderDescription": "Вам нужна премиум-подписка, чтобы использовать конструктор форм. Обновите подписку, чтобы разблокировать все функции."
+    }
+  },
+  "formBuilder": {
+    "header": {
+      "title": "Конструктор форм",
+      "goToDashboard": "Перейти в панель управления",
+      "fieldCount": "{count} поле",
+      "fieldCount_plural": "{count} поля",
+      "saving": "Сохранение",
+      "moreActions": "Больше действий",
+      "multiStepForm": "Многошаговая форма",
+      "toggleMultiStepMode": "Переключить многошаговый режим",
+      "viewJson": "Посмотреть JSON",
+      "analytics": "Аналитика",
+      "share": "Поделиться",
+      "useKiko": "Использовать Kiko",
+      "settings": "Настройки",
+      "publish": "Опубликовать",
+      "published": "Опубликовано",
+      "publishing": "Публикуется...",
+      "unpublishing": "Снимается с публикации...",
+      "publishForm": "Опубликовать форму",
+      "unpublishForm": "Снять с публикации форму",
+      "save": "Сохранить",
+      "saveForm": "Сохранить форму",
+      "actionsAria": "Действия конструктора форм"
+    },
+    "modals": {
+      "formSettings": "Настройки формы",
+      "internalTitle": "Внутренний заголовок",
+      "internalTitlePlaceholder": "Введите внутренний заголовок для вашего справочника...",
+      "internalTitleDescription": "Этот заголовок виден только вам в панели управления и конструкторе форм",
+      "publicTitle": "Публичный заголовок",
+      "publicTitlePlaceholder": "Введите заголовок, отображаемый пользователям...",
+      "publicTitleDescription": "Этот заголовок будет отображаться пользователям на фактической форме. Оставьте пустым, чтобы использовать внутренний заголовок.",
+      "description": "Описание",
+      "descriptionPlaceholder": "Введите описание формы",
+      "submitButtonText": "Текст кнопки отправки",
+      "submitButtonTextPlaceholder": "Текст кнопки отправки",
+      "submit": "Отправить",
+      "successMessage": "Сообщение об успехе",
+      "successMessagePlaceholder": "Сообщение, отображаемое после успешной отправки",
+      "redirectUrlOptional": "URL-адрес перенаправления (необязательно)",
+      "redirectUrlPlaceholder": "https://example.com/thank-you",
+      "cancel": "Отмена",
+      "saveSettings": "Сохранить настройки"
+    },
+    "page": {
+      "formFields": "Поля формы",
+      "authRequired": "Требуется аутентификация",
+      "authRequiredDescription": "Пожалуйста, войдите, чтобы использовать конструктор форм.",
+      "goToLogin": "Перейти к входу",
+      "stepDefaultTitle": "Шаг {index}",
+      "stepDefaultDescription": "Первый шаг вашей формы",
+      "loadingCustomization": "Загрузка настройки..."
+    },
+    "blockManager": {
+      "header": {
+        "title": "Структура формы",
+        "stepsCount": "{count, plural, one {# шаг} other {# шагов}}",
+        "description": "Организуйте свою форму в логические разделы",
+        "addStepAria": "Добавить новый шаг в форму",
+        "addStep": "Добавить шаг"
+      },
+      "item": {
+        "dragHandleAria": "Перетащите, чтобы изменить порядок {title} шага",
+        "dragToReorder": "Перетащите, чтобы изменить порядок"
+      },
+      "headerActions": {
+        "stepBadge": "Шаг {index}",
+        "editStepAria": "Редактировать {title} шаг",
+        "deleteStepAria": "Удалить {title} шаг",
+        "editStep": "Редактировать шаг",
+        "deleteStep": "Удалить шаг",
+        "collapseStep": "Свернуть шаг",
+        "expandStep": "Развернуть шаг"
+      },
+      "editForm": {
+        "stepTitlePlaceholder": "Заголовок шага",
+        "stepDescriptionPlaceholder": "Описание шага (необязательно)",
+        "save": "Сохранить",
+        "cancel": "Отмена"
+      },
+      "fieldsList": {
+        "empty": "Еще нет полей. Добавьте поля из палитры справа."
+      }
+    },
+    "multiStepNavigation": {
+      "deleteStep": "Удалить шаг",
+      "addStep": "Добавить шаг",
+      "deleteDialogTitle": "Удалить шаг",
+      "deleteDialogDescription": "Вы уверены, что хотите удалить этот шаг? Это действие нельзя отменить.",
+      "cancel": "Отмена"
+    },
+    "formFields": {
+      "addFieldToFormAria": "Добавить поле в форму",
+      "addField": "Добавить поле",
+      "addSpecificFieldAria": "Добавить поле {label}",
+      "formFields": "Поля формы",
+      "noFieldsInStep": "Нет полей на этом шаге",
+      "noFieldsYet": "Пока нет добавленных полей",
+      "addFieldsToStep": "Добавьте поля из палитры на этот шаг",
+      "addFieldsFromLeftPanel": "Добавьте поля из левой панели, чтобы начать создавать форму",
+      "fieldsCount": "{count, plural, one {# поле} other {# полей}}",
+      "fieldAria": "{type} поле",
+      "deleteFieldAria": "Удалить поле {type}",
+      "deleteField": "Удалить поле"
+    },
+    "jsonViewModal": {
+      "title": "Схема JSON формы",
+      "description": "Только для чтения представление текущей схемы формы. Используйте кнопку копирования, чтобы скопировать JSON.",
+      "copySuccess": "JSON скопирован в буфер обмена!",
+      "copyError": "Не удалось скопировать JSON",
+      "copied": "Скопировано",
+      "copyJson": "Копировать JSON"
+    },
+    "settingsMobile": {
+      "sectionsAria": "Разделы настроек",
+      "goToSectionAria": "Перейти к настройкам {section}",
+      "backToListAria": "Вернуться к списку настроек",
+      "settings": "Настройки"
+    },
+    "creation": {
+      "title": "Создать новую форму",
+      "cancel": "Отмена",
+      "back": "Назад",
+      "createForm": "Создать форму",
+      "reviewAction": "Просмотр",
+      "next": "Далее",
+      "types": {
+        "single": {
+          "title": "Форма на одной странице",
+          "description": "Традиционная форма со всеми полями на одной странице"
+        },
+        "multi": {
+          "title": "Мульти-шаговая форма",
+          "description": "Руководящий опыт формы с несколькими шагами"
+        }
+      },
+      "typePreview": {
+        "stepOf": "Шаг {step} из {total}"
+      },
+      "configuration": {
+        "title": "Детали формы",
+        "description": "Установите внутреннюю и публичную информацию для вашей формы.",
+        "internalTitle": "Внутренний заголовок",
+        "internalTitlePlaceholder": "Введите внутренний заголовок для вашего справочника…",
+        "internalTitleHelp": "Виден только в панели управления и конструкторе.",
+        "publicTitle": "Публичный заголовок",
+        "publicTitlePlaceholder": "Введите заголовок, отображаемый пользователям…",
+        "publicTitleHelp": "Отображается пользователям на форме. Оставьте пустым, чтобы повторно использовать внутренний заголовок.",
+        "formDescription": "Описание формы",
+        "formDescriptionPlaceholder": "Введите краткое описание, чтобы руководить пользователями…",
+        "formDescriptionHelp": "Необязательно. Помогает пользователям понять цель формы."
+      },
+      "review": {
+        "formType": "Тип формы",
+        "multiStepForm": "Мульти-шаговая форма",
+        "singlePageForm": "Форма на одной странице",
+        "multiStep": "Мульти-шаговый",
+        "singlePage": "Одна страница",
+        "editFormType": "Изменить тип формы",
+        "formConfiguration": "Конфигурация формы",
+        "editFormConfiguration": "Изменить конфигурацию формы",
+        "internalTitle": "Внутренний заголовок",
+        "publicTitle": "Публичный заголовок",
+        "description": "Описание",
+        "preview": "Просмотр",
+        "previewDescription": "Снимок вашей формы."
+      },
+      "stepIndicator": {
+        "progress": "Прогресс",
+        "stepCompleted": "Шаг {index} завершен",
+        "stepCurrent": "Шаг {index} текущий",
+        "step": "Шаг {index}"
+      }
+    },
+    "customize": {
+      "page": {
+        "savedCustomization": "Сохраненная настройка",
+        "saveFailed": "Не удалось сохранить изменения. Пожалуйста, попробуйте снова.",
+        "tabs": {
+          "presets": "Предустановки",
+          "layout": "Макет",
+          "colors": "Цвета",
+          "text": "Текст"
+        },
+        "backToCustomize": "Вернуться к настройкам",
+        "previewForm": "Просмотр формы",
+        "customizeForm": "Настройка формы",
+        "publicTitle": "Публичный заголовок: \"{title}\"",
+        "customizationActions": "Действия настройки",
+        "back": "Назад",
+        "save": "Сохранить",
+        "customize": "Настройка"
+      },
+      "colors": {
+        "title": "Настройки цвета",
+        "description": "Настройка цветов и темы",
+        "backgroundColorLabel": "Фоновая цвет",
+        "backgroundColorHelp": "Устанавливает фоновый цвет контейнера формы",
+        "textColorLabel": "Цвет текста",
+        "textColorHelp": "Устанавливает цвет всех текстовых элементов в форме",
+        "primaryColorLabel": "Основной цвет (кнопки и акцент)",
+        "primaryColorHelp": "Устанавливает цвет для кнопок, состояний фокуса и акцентных элементов",
+        "borderColorLabel": "Цвет границы",
+        "borderColorHelp": "Задает цвет для границ и разделителей полей ввода",
+        "websiteBackgroundColorLabel": "Цвет фона веб-сайта",
+        "websiteBackgroundColorHelp": "Задает цвет фона всего веб-сайта/страницы"
+      },
+      "typography": {
+        "title": "Настройки типографики",
+        "description": "Настройка шрифтов и стиля текста",
+        "fontFamily": "Семейство шрифтов",
+        "fontFamilyPlaceholder": "Выберите шрифт Google...",
+        "fontPreview": "Предпросмотр шрифта",
+        "previewLine1": "Быстрый коричневый лис прыгает через ленивого собаку",
+        "previewLine2": "Образец текста формы с числами 1234567890",
+        "fontHelp": "Выберите один из сотен шрифтов Google. Шрифт будет загружен автоматически.",
+        "fontSize": "Размер шрифта",
+        "fontWeight": "Вес шрифта",
+        "selected": "Выбрано:",
+        "fontSizeOptions": {
+          "xs": {
+            "label": "Очень маленький",
+            "description": "12px"
+          },
+          "sm": {
+            "label": "Маленький",
+            "description": "14px"
+          },
+          "base": {
+            "label": "Базовый",
+            "description": "16px"
+          },
+          "lg": {
+            "label": "Большой",
+            "description": "18px"
+          },
+          "xl": {
+            "label": "Очень большой",
+            "description": "20px"
+          }
+        },
+        "fontWeightOptions": {
+          "light": {
+            "label": "Светлый",
+            "description": "300"
+          },
+          "normal": {
+            "label": "Обычный",
+            "description": "400"
+          },
+          "medium": {
+            "label": "Средний",
+            "description": "500"
+          },
+          "semibold": {
+            "label": "Полужирный",
+            "description": "600"
+          },
+          "bold": {
+            "label": "Жирный",
+            "description": "700"
+          }
+        }
+      },
+      "layout": {
+        "title": "Настройки макета",
+        "description": "Настройка间距 и структуры",
+        "showProgressBar": "Показать индикатор прогресса",
+        "formWidth": "Ширина формы",
+        "formWidthHelp": "Регулирует максимальную ширину контейнера формы",
+        "customWidth": "Пользовательская ширина (например, 600px, 80%, 50rem)",
+        "customWidthPlaceholder": "Введите пользовательскую ширину",
+        "internalPadding": "Внутренний отступ",
+        "internalPaddingHelp": "Регулирует пространство внутри контейнера формы",
+        "externalMargin": "Внешний отступ",
+        "externalMarginHelp": "Регулирует пространство вокруг контейнера формы",
+        "cornerRadius": "Радиус угла",
+        "cornerRadiusHelp": "Регулирует степень закругления углов формы",
+        "widthOptions": {
+          "sm": {
+            "label": "Маленький",
+            "description": "Максимальная ширина 400px"
+          },
+          "md": {
+            "label": "Средний",
+            "description": "Максимальная ширина 600px"
+          },
+          "lg": {
+            "label": "Большой",
+            "description": "Максимальная ширина 800px"
+          },
+          "xl": {
+            "label": "Очень большой",
+            "description": "Максимальная ширина 1000px"
+          },
+          "full": {
+            "label": "Полная ширина",
+            "description": "100% ширины"
+          },
+          "custom": {
+            "label": "Пользовательский",
+            "description": "Пользовательское значение ширины"
+          }
+        },
+        "paddingOptions": {
+          "none": {
+            "label": "Нет",
+            "description": "0px отступа"
+          },
+          "sm": {
+            "label": "Маленький",
+            "description": "16px отступа"
+          },
+          "md": {
+            "label": "Средний",
+            "description": "24px отступа"
+          },
+          "lg": {
+            "label": "Большой",
+            "description": "32px отступа"
+          }
+        },
+        "marginOptions": {
+          "none": {
+            "label": "Нет",
+            "description": "Нет отступа"
+          },
+          "sm": {
+            "label": "Маленький",
+            "description": "8px"
+          },
+          "md": {
+            "label": "Средний",
+            "description": "16px"
+          },
+          "lg": {
+            "label": "Большой",
+            "description": "32px"
+          }
+        },
+        "radiusOptions": {
+          "none": {
+            "label": "Нет",
+            "description": "0px (острые углы)"
+          },
+          "sm": {
+            "label": "Маленький",
+            "description": "4px радиус угла"
+          },
+          "md": {
+            "label": "Средний",
+            "description": "8px радиус угла"
+          },
+          "lg": {
+            "label": "Большой",
+            "description": "16px радиус угла"
+          },
+          "xl": {
+            "label": "Очень большой",
+            "description": "24px радиус угла"
+          }
+        }
+      },
+      "presets": {
+        "title": "Предустановленные дизайны",
+        "description": "Быстрый старт с красивыми предустановленными стилями форм",
+        "category": "Категория",
+        "allPresets": "Все пресеты",
+        "presets": "Предустановки",
+        "presetCount": "{count, plural, one {# пресет} other {# пресетов}}",
+        "presetList": "Список пресетов",
+        "applyPresetAria": "Применить пресет {name}",
+        "appliedPreset": "Применён пресет \"{name}\"",
+        "formTitle": "Заголовок формы",
+        "submit": "Отправить"
+      },
+      "preview": {
+        "title": "Живой просмотр",
+        "description": "Посмотреть, как будет выглядеть ваша форма с применёнными настройками",
+        "sampleTitle": "Образец формы",
+        "sampleDescription": "Вот как будет выглядеть ваша форма с текущими настройками дизайна.",
+        "nameLabel": "Имя *",
+        "namePlaceholder": "Введите ваше имя",
+        "emailLabel": "Email *",
+        "emailPlaceholder": "Введите ваш email",
+        "categoryLabel": "Категория",
+        "categoryPlaceholder": "Выберите категорию",
+        "categoryGeneral": "Общий запрос",
+        "categorySupport": "Поддержка",
+        "categorySales": "Продажи",
+        "messageLabel": "Сообщение",
+        "messagePlaceholder": "Введите ваше сообщение",
+        "submitButton": "Отправить форму",
+        "previousStepAria": "Предыдущий шаг",
+        "previousStep": "Предыдущий",
+        "nextStepAria": "Следующий шаг",
+        "nextStep": "Далее",
+        "submitAria": "Отправить форму"
+      }
+    },
+    "toasts": {
+      "loginRequiredToSave": "Пожалуйста, войдите, чтобы сохранить вашу форму.",
+      "formSaved": "Форма успешно сохранена!",
+      "formCreated": "Форма успешно создана!",
+      "saveFailed": "Не удалось сохранить форму. Пожалуйста, попробуйте снова.",
+      "saveBeforeShare": "Пожалуйста, сохраните вашу форму перед тем, как поделиться ею.",
+      "formPublished": "Форма успешно опубликована!",
+      "publishFailed": "Не удалось опубликовать форму. Пожалуйста, попробуйте снова.",
+      "saveBeforeAnalytics": "Пожалуйста, сохраните вашу форму перед просмотром аналитики.",
+      "loadingAnalytics": "Загрузка аналитики",
+      "saveBeforePublish": "Пожалуйста, сохраните вашу форму перед публикацией.",
+      "userAuthRequired": "Требуется аутентификация пользователя",
+      "formUnpublished": "Форма успешно снята с публикации!",
+      "updateStatusFailed": "Не удалось обновить статус формы. Пожалуйста, попробуйте снова.",
+      "saveSettingsFailed": "Не удалось сохранить настройки. Пожалуйста, попробуйте снова.",
+      "loadFailed": "Не удалось загрузить форму. Пожалуйста, попробуйте снова."
+    },
+    "formPreview": {
+      "titlePlaceholder": "Нажмите, чтобы добавить заголовок...",
+      "descriptionPlaceholder": "Нажмите, чтобы добавить описание...",
+      "publicTitle": "Публичный заголовок: \"{title}\"",
+      "stepTitlePlaceholder": "Нажмите, чтобы добавить заголовок шага...",
+      "stepDescriptionPlaceholder": "Нажмите, чтобы добавить описание шага...",
+      "stepBadge": "Шаг {index}",
+      "editFieldAria": "Редактировать поле",
+      "clickToEdit": "Нажмите, чтобы редактировать"
+    },
+    "fieldPalette": {
+      "headerTitle": "Поля формы",
+      "headerDescription": "Нажмите, чтобы добавить поля в вашу форму",
+      "ariaPalette": "Палитра полей",
+      "searchAria": "Поиск полей",
+      "searchPlaceholder": "Поиск полей...",
+      "categoryFieldsAria": "Поля {category}",
+      "noFieldsFound": "Не найдено полей, соответствующих \"{searchTerm}\"",
+      "searchHint": "Попробуйте искать по имени поля, описанию или типу",
+      "addFieldAria": "Добавить поле {label}",
+      "categories": {
+        "input": "Поля ввода",
+        "selection": "Поля выбора",
+        "media": "Поля медиа",
+        "layout": "Поля макета",
+        "advanced": "Расширенные поля"
+      },
+      "fields": {
+        "text": {
+          "label": "Текстовый ввод",
+          "description": "Однострочное поле для коротких текстовых ответов."
+        },
+        "email": {
+          "label": "Email",
+          "description": "Собирать действительный адрес электронной почты."
+        },
+        "number": {
+          "label": "Число",
+          "description": "Поле для числовых значений."
+        },
+        "phone": {
+          "label": "Номер телефона",
+          "description": "Поле для номеров телефонов с проверкой."
+        },
+        "textarea": {
+          "label": "Текстовое поле",
+          "description": "Многострочное поле для более длинных текстов."
+        },
+        "date": {
+          "label": "Дата",
+          "description": "Выберите дату из календаря."
+        },
+        "time": {
+          "label": "Время",
+          "description": "Выберите или введите значение времени."
+        },
+        "address": {
+          "label": "Адрес",
+          "description": "Поле для ввода улицы, города и других деталей адреса."
+        },
+        "link": {
+          "label": "Ссылка",
+          "description": "Поле для ввода действующего URL-адреса сайта."
+        },
+        "select": {
+          "label": "Выпадающий список",
+          "description": "Выпадающий список для выбора одного варианта."
+        },
+        "radio": {
+          "label": "Кнопки радио",
+          "description": "Выберите один вариант из списка."
+        },
+        "checkbox": {
+          "label": "Флажки",
+          "description": "Выберите один или несколько вариантов."
+        },
+        "slider": {
+          "label": "Ползунок",
+          "description": "Выберите значение, перемещая ползунок."
+        },
+        "rating": {
+          "label": "Рейтинг",
+          "description": "Соберите звездный или иконный рейтинг."
+        },
+        "poll": {
+          "label": "Опрос",
+          "description": "Позвольте пользователям голосовать за несколько вариантов."
+        },
+        "file": {
+          "label": "Загрузка файла",
+          "description": "Загрузите файлы с ограничениями по размеру и типу."
+        },
+        "signature": {
+          "label": "Подпись",
+          "description": "Нарисуйте или подпишите мышью или прикосновением."
+        },
+        "statement": {
+          "label": "Заявление",
+          "description": "Отобразите заголовок или описание в форме."
+        },
+        "banner": {
+          "label": "Баннер",
+          "description": "Показать выделенное сообщение или предупреждение."
+        },
+        "field-group": {
+          "label": "Группа полей",
+          "description": "Сгруппируйте поля вместе в строку."
+        },
+        "tags": {
+          "label": "Ввод тегов",
+          "description": "Введите и управляйте несколькими тегами."
+        },
+        "social": {
+          "label": "Социальные сети",
+          "description": "Добавьте ссылки на профили в социальных сетях."
+        },
+        "scheduler": {
+          "label": "Расписание",
+          "description": "Вставьте ссылку на расписание (например, Calendly)."
+        }
+      }
+    },
+    "fieldSettings": {
+      "header": {
+        "title": "Настройки поля",
+        "closeAria": "Закрыть настройки поля"
+      },
+      "emptyState": {
+        "title": "Не выбрано поле",
+        "description": "Нажмите на поле в предпросмотре, чтобы изменить его настройки"
+      },
+      "basic": {
+        "title": "Базовые настройки",
+        "fieldLabel": "Метка поля",
+        "fieldLabelPlaceholder": "Введите метку поля",
+        "fieldLabelHelp": "Метка, которая появляется над полем",
+        "placeholder": "Заполнитель",
+        "placeholderPlaceholder": "Введите текст заполнителя",
+        "placeholderHelp": "Подсказка, которая появляется внутри поля",
+        "description": "Описание",
+        "descriptionPlaceholder": "Введите описание поля (показывается под полем)",
+        "descriptionHelp": "Дополнительный текст справки, показанный под полем",
+        "required": "Обязательное поле",
+        "requiredHelp": "Пользователи должны заполнить это поле, чтобы отправить форму"
+      },
+      "validation": {
+        "title": "Валидация",
+        "minLength": "Минимальная длина",
+        "minLengthPlaceholder": "Мин. символов",
+        "minLengthHelp": "Требуемое минимальное количество символов",
+        "maxLength": "Максимальная длина",
+        "maxLengthPlaceholder": "Макс. символов",
+        "maxLengthHelp": "Максимально допустимое количество символов",
+        "pattern": "Шаблон (регулярное выражение)",
+        "patternPlaceholder": "Регулярное выражение",
+        "patternHelp": "Шаблон регулярного выражения для валидации",
+        "minValue": "Минимальное значение",
+        "minValuePlaceholder": "Мин. значение",
+        "minValueHelp": "Минимальное числовое значение, разрешенное",
+        "maxValue": "Максимальное значение",
+        "maxValuePlaceholder": "Макс. значение",
+        "maxValueHelp": "Максимальное числовое значение, разрешенное"
+      },
+      "errorMessages": {
+        "title": "Пользовательские сообщения об ошибках",
+        "requiredFieldMessage": "Сообщение об обязательном поле",
+        "requiredFieldPlaceholder": "Это поле обязательно",
+        "minLengthMessage": "Сообщение об ошибке мин. длины",
+        "minLengthPlaceholder": "Должно быть не менее {count} символов",
+        "maxLengthMessage": "Сообщение об ошибке максимальной длины",
+        "maxLengthPlaceholder": "Должно быть не более {count} символов",
+        "patternMessage": "Сообщение об ошибке шаблона",
+        "patternPlaceholder": "Пожалуйста, введите действительный формат",
+        "emailMessage": "Сообщение об ошибке электронной почты",
+        "emailPlaceholder": "Пожалуйста, введите действительный адрес электронной почты",
+        "minValueMessage": "Сообщение об ошибке минимального значения",
+        "minValuePlaceholder": "Должно быть не менее {value}",
+        "maxValueMessage": "Сообщение об ошибке максимального значения",
+        "maxValuePlaceholder": "Должно быть не более {value}",
+        "invalidNumberMessage": "Сообщение о недопустимом номере",
+        "invalidNumberPlaceholder": "Пожалуйста, введите действительное число"
+      },
+      "options": {
+        "title": "Варианты",
+        "addOptionAria": "Добавить новый вариант",
+        "addOption": "Добавить вариант",
+        "optionPlaceholder": "Вариант {index}",
+        "removeOptionAria": "Удалить вариант {index}",
+        "none": "Варианты ещё не добавлены",
+        "or": "ИЛИ",
+        "orAria": "или",
+        "fetchFromApi": "Получить из API",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "Конечная точка API для получения вариантов",
+        "valueKeyPlaceholder": "Ключ значения (например, id)",
+        "valueKeyHelp": "Ключ для значений вариантов",
+        "labelKeyPlaceholder": "Ключ метки (например, name)",
+        "labelKeyHelp": "Ключ для меток вариантов",
+        "apiGuidanceTitle": "Руководство по данным API:",
+        "apiGuidanceIntro": "Это поле будет получать варианты из конечной точки API:",
+        "apiShouldReturn": "API должен возвращать либо:",
+        "apiType1Hint": "(массив строк)",
+        "apiType2Hint": "(массив объектов)",
+        "apiType3Hint": "(объект с массивом вариантов)",
+        "apiType4Hint": "(специальные ключи)",
+        "apiCustomKeysHelp": "Вы можете указать специальные ключи выше для сопоставления данных API.",
+        "apiValueLabelHelp": "Каждый вариант должен иметь",
+        "apiValueLabelHelpOr": "свойство (или ваш собственный ключ).",
+        "apiValueLabelHelpSuffix": "необязательно."
+      },
+      "prepopulation": {
+        "title": "Предварительное заполнение",
+        "unknownError": "Неизвестная ошибка",
+        "enabled": "Включить предварительное заполнение",
+        "enabledHelp": "Автоматически заполнить это поле существующими данными",
+        "dataSource": "Источник данных",
+        "sources": {
+          "url": "Параметры URL",
+          "api": "Внешний API",
+          "profile": "Профиль пользователя",
+          "previous": "Предыдущая отправка"
+        },
+        "urlParamName": "Имя параметра URL",
+        "urlParamPlaceholder": "например, имя, email, телефон",
+        "urlParamHelp": "Имя параметра для извлечения из строки запроса URL",
+        "fallbackValue": "Значение по умолчанию",
+        "fallbackValuePlaceholder": "Значение по умолчанию, если параметр отсутствует",
+        "fallbackValueHelp": "Значение по умолчанию для использования, если параметр URL отсутствует",
+        "overwriteExisting": "Перезаписать существующее",
+        "overwriteExistingHelp": "Заменить пользовательский ввод предварительно заполненным значением",
+        "generatePreviewAria": "Сгенерировать URL предварительного просмотра",
+        "generatePreview": "Сгенерировать URL предварительного просмотра",
+        "previewUrlLabel": "URL предварительного просмотра:",
+        "previewUrlHelp": "Этот URL будет предварительно заполнять поле с \"Образец {label}\"",
+        "apiEndpoint": "Конечная точка API",
+        "apiEndpointPlaceholder": "https://api.example.com/user-data",
+        "apiEndpointHelp": "Конечная точка API для получения данных",
+        "httpMethod": "Метод HTTP",
+        "requestHeaders": "Заголовки запроса (JSON)",
+        "requestHeadersHelp": "JSON-объект, содержащий заголовки HTTP для запроса API",
+        "testApiAria": "Тестировать конечную точку API",
+        "testApi": "Тестировать конечную точку API",
+        "comingSoonLabel": "Скоро:",
+        "profileComingSoon": "Предварительное заполнение профиля пользователя будет доступно в будущем обновлении.",
+        "previousComingSoon": "Предварительное заполнение предыдущей отправки будет доступно в будущем обновлении.",
+        "toasts": {
+          "missingUrlParam": "Пожалуйста, введите имя параметра URL сначала",
+          "previewUrlCopied": "URL предварительного просмотра скопирован в буфер обмена!",
+          "previewUrlCopyFailed": "Не удалось скопировать URL предварительного просмотра",
+          "missingApiEndpoint": "Пожалуйста, введите конечную точку API сначала",
+          "apiReachable": "Конечная точка API доступна!",
+          "apiTestFailedStatus": "Тест API не пройден: {status} {statusText}",
+          "apiTestFailedError": "Тест API не пройден: {error}"
+        }
+      },
+      "date": {
+        "title": "Настройки поля даты",
+        "minDate": "Минимальная дата",
+        "selectMinDate": "Выберите минимальную дату",
+        "maxDate": "Максимальная дата",
+        "selectMaxDate": "Выберите максимальную дату",
+        "defaultDate": "Дата по умолчанию",
+        "selectDefaultDate": "Выберите дату по умолчанию"
+      },
+      "number": {
+        "title": "Настройки поля числа",
+        "minValue": "Минимальное значение",
+        "noMinimum": "Нет минимума",
+        "minValueHelp": "Минимальное числовое значение, разрешенное",
+        "maxValue": "Максимальное значение",
+        "noMaximum": "Нет максимума",
+        "maxValueHelp": "Максимальное числовое значение, разрешенное",
+        "stepSize": "Шаг размера",
+        "stepSizeHelp": "Шаг инкремента/декремента для числового ввода",
+        "defaultValue": "Значение по умолчанию",
+        "noDefault": "Нет значения по умолчанию",
+        "defaultValueHelp": "Предзаполненное значение при загрузке формы"
+      },
+      "radio": {
+        "title": "Настройки квиза",
+        "enableQuizQuestion": "Включить как вопрос квиза",
+        "correctAnswer": "Правильный ответ",
+        "correctAnswerPlaceholder": "Выберите правильный ответ",
+        "points": "Баллы за правильный ответ",
+        "showCorrectAnswer": "Показать правильный ответ после отправки",
+        "explanation": "Объяснение (необязательно)",
+        "explanationPlaceholder": "Объясните, почему это правильный ответ..."
+      },
+      "address": {
+        "title": "Настройки поля адреса",
+        "requiredLines": "Обязательные строки адреса",
+        "requiredLinesPlaceholder": "например, 2 (требуются Адресная строка 1 и Город)",
+        "requiredLinesHelp": "Количество строк адреса, которые должны быть заполнены (1-5)",
+        "customErrorMessage": "Пользовательское сообщение об ошибке",
+        "customErrorPlaceholder": "Пожалуйста, заполните все обязательные поля адреса",
+        "customErrorHelp": "Пользовательское сообщение об ошибке, отображаемое при незаполненных обязательных полях адреса"
+      },
+      "phone": {
+        "title": "Настройки поля телефона",
+        "pattern": "Пользовательский шаблон регулярного выражения",
+        "patternPlaceholder": "например, ^\\+?[0-9]{10,15}$",
+        "patternHelp": "Шаблон регулярного выражения для проверки номера телефона",
+        "errorMessage": "Пользовательское сообщение об ошибке",
+        "errorMessagePlaceholder": "Пожалуйста, введите действительный номер телефона",
+        "errorMessageHelp": "Пользовательское сообщение об ошибке, отображаемое при сбое проверки телефона"
+      },
+      "statement": {
+        "title": "Настройки поля заявления",
+        "heading": "Заголовок",
+        "headingPlaceholder": "Введите заголовок заявления",
+        "headingHelp": "Основной заголовок для заявления",
+        "description": "Описание",
+        "descriptionPlaceholder": "Введите описание заявления",
+        "descriptionHelp": "Подробное описание для заявления",
+        "alignment": "Выравнивание",
+        "alignmentPlaceholder": "Выберите выравнивание",
+        "alignLeft": "Слева",
+        "alignCenter": "По центру",
+        "alignRight": "Справа",
+        "alignmentHelp": "Выравнивание текста для заявления",
+        "size": "Размер",
+        "sizePlaceholder": "Выберите размер",
+        "sizeSmall": "Маленький",
+        "sizeMedium": "Средний",
+        "sizeLarge": "Большой",
+        "sizeHelp": "Размер шрифта для заявления"
+      },
+      "slider": {
+        "title": "Настройки слайдера",
+        "mode": "Режим слайдера",
+        "modePlaceholder": "Выберите режим слайдера",
+        "modeSingle": "Одно значение",
+        "modeRange": "Диапазон (мин + макс)",
+        "modeHelp": "Выберите одно значение или позвольте пользователям выбрать минимум и максимум",
+        "min": "Минимальное значение",
+        "minHelp": "Минимальное значение для слайдера",
+        "max": "Максимальное значение",
+        "maxHelp": "Максимальное значение для слайдера",
+        "step": "Шаг размера",
+        "stepHelp": "Шаг инкремента/декремента для слайдера",
+        "defaultMin": "Минимальное значение по умолчанию",
+        "defaultMinHelp": "Предзаполненное минимальное значение при загрузке формы",
+        "defaultMax": "Максимальное значение по умолчанию",
+        "defaultMaxHelp": "Предзаполненное максимальное значение при загрузке формы",
+        "defaultValue": "Значение по умолчанию",
+        "defaultValueHelp": "Предзаполненное значение при загрузке формы"
+      },
+      "text": {
+        "title": "Настройки текстового поля",
+        "maxLength": "Максимальная длина",
+        "maxLengthPlaceholder": "Нет ограничений",
+        "maxLengthHelp": "Максимальное количество символов (1-1000)",
+        "minLength": "Минимальная длина",
+        "minLengthPlaceholder": "Нет минимума",
+        "minLengthHelp": "Минимальное количество символов (0-1000)"
+      },
+      "checkbox": {
+        "title": "Параметры чекбокса",
+        "options": "Варианты",
+        "addOptionPlaceholder": "Добавить вариант",
+        "addOptionAria": "Добавить вариант чекбокса",
+        "optionsHelp": "Добавить варианты чекбокса, которые могут быть выбраны пользователями",
+        "removeOptionAria": "Удалить вариант {index}",
+        "allowMultiple": "Разрешить множественный выбор",
+        "allowMultipleHelp": "Если включено, пользователи могут выбрать более одного варианта. Если отключено, можно выбрать только один вариант."
+      },
+      "link": {
+        "title": "Настройки поля ссылки",
+        "pattern": "Пользовательский шаблон регулярного выражения",
+        "patternPlaceholder": "например, ^https?://.+$",
+        "patternHelp": "Шаблон регулярного выражения для проверки URL",
+        "errorMessage": "Пользовательское сообщение об ошибке",
+        "errorMessagePlaceholder": "Пожалуйста, введите действительный URL",
+        "errorMessageHelp": "Пользовательское сообщение об ошибке при сбое проверки URL"
+      },
+      "poll": {
+        "title": "Настройки опроса",
+        "pollOptions": "Варианты опроса",
+        "addOptionPlaceholder": "Добавить вариант",
+        "addOptionAria": "Добавить вариант опроса",
+        "optionsHelp": "Добавить варианты опроса, за которые пользователи могут голосовать",
+        "editOptionAria": "Редактировать вариант опроса {index}",
+        "removeOptionAria": "Удалить вариант опроса {index}",
+        "orAria": "или разделитель",
+        "or": "ИЛИ",
+        "fetchFromApi": "Получить варианты из API",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "Конечная точка API для получения вариантов опроса",
+        "valueKeyPlaceholder": "Ключ значения (например, id)",
+        "valueKeyHelp": "Ключ для значений вариантов",
+        "labelKeyPlaceholder": "Ключ метки (например, name)",
+        "labelKeyHelp": "Ключ для меток вариантов",
+        "apiGuidanceTitle": "Руководство по данным API:",
+        "apiGuidanceIntro": "Это поле будет получать варианты из конечной точки API:",
+        "apiShouldReturn": "API должен возвращать либо:",
+        "apiType1Hint": "(массив строк)",
+        "apiType2Hint": "(массив объектов)",
+        "apiType3Hint": "(объект с массивом вариантов)",
+        "apiType4Hint": "(специальные ключи)",
+        "apiCustomKeysHelp": "Вы можете указать специальные ключи выше для сопоставления данных API.",
+        "apiValueLabelHelp": "Каждый вариант должен иметь",
+        "apiValueLabelHelpOr": "свойство (или ваш собственный ключ).",
+        "apiValueLabelHelpSuffix": "необязательно.",
+        "showResults": "Показать результаты после голосования",
+        "showResultsHelp": "Отображать результаты опроса пользователям после того, как они проголосуют"
+      },
+      "social": {
+        "title": "Социальные платформы",
+        "availablePlatforms": "Доступные платформы",
+        "platforms": {
+          "github": "GitHub",
+          "twitter": "Twitter",
+          "linkedin": "LinkedIn",
+          "facebook": "Facebook",
+          "instagram": "Instagram",
+          "youtube": "YouTube",
+          "website": "Сайт"
+        },
+        "platformsHelp": "Выберите социальные платформы, которые будут включены в поле",
+        "customLinks": "Пользовательские ссылки",
+        "labelPlaceholder": "Метка",
+        "placeholderPlaceholder": "Заполнитель (необязательно)",
+        "removeCustomLinkAria": "Удалить пользовательскую ссылку {index}",
+        "addCustomLinkAria": "Добавить пользовательскую ссылку",
+        "addCustomLink": "Добавить пользовательскую ссылку",
+        "customLinksHelp": "Добавить пользовательские социальные ссылки с пользовательскими метками и заполнителями"
+      },
+      "emailValidation": {
+        "title": "Проверка электронной почты",
+        "removeBlockedDomainAria": "Удалить {domain} из заблокированных доменов",
+        "removeAllowedDomainAria": "Удалить {domain} из разрешенных доменов",
+        "autoCompleteDomain": "Автозаполнение домена",
+        "autoCompletePlaceholder": "например, business.com",
+        "setAutoCompleteAria": "Установить автозаполнение домена",
+        "set": "Установить",
+        "removeAutoCompleteAria": "Удалить домен {domain}",
+        "autoCompleteHelp": "Пользователи могут ввести только имя пользователя, и домен будет автозаполнен",
+        "allowedDomains": "Разрешенные домены",
+        "allowedPlaceholder": "например, company.com",
+        "addAllowedDomainAria": "Добавить разрешенный домен",
+        "allowedHelp": "Только электронные письма с этих доменов будут приняты",
+        "blockedDomains": "Заблокированные домены",
+        "blockedPlaceholder": "например, temp-mail.org",
+        "addBlockedDomainAria": "Добавить заблокированный домен",
+        "blockedHelp": "Электронные письма с этих доменов будут отклонены (временные почтовые службы заблокированы по умолчанию)",
+        "requireBusinessEmail": "Требовать рабочий адрес электронной почты",
+        "requireBusinessEmailHelp": "Разрешить только рабочие домены (блокирует Gmail, Yahoo и т. д.)",
+        "customValidationMessage": "Пользовательское сообщение об ошибке",
+        "customValidationPlaceholder": "Пользовательское сообщение об ошибке для проверки электронной почты",
+        "customValidationHelp": "Оставьте пустым, чтобы использовать сообщения по умолчанию"
+      },
+      "file": {
+        "title": "Настройки загрузки файла",
+        "bytesUnit": "Байты",
+        "maxFiles": "Максимальное количество файлов",
+        "maxFilesPlaceholder": "10",
+        "maxFilesHelp": "Максимальное количество файлов, которые пользователи могут загрузить (1-50)",
+        "maxFileSize": "Максимальный размер файла",
+        "maxFileSizePlaceholder": "50",
+        "mbUnit": "МБ",
+        "setMaxSizePresetAria": "Установите максимальный размер файла до {size}",
+        "currentSize": "Текущий: {size}",
+        "allowedFileTypes": "Допустимые типы файлов",
+        "quickSelect": "Быстрый выбор:",
+        "commonTypes": {
+          "images": "Изображения",
+          "documents": "Документы",
+          "spreadsheets": "Таблицы",
+          "videos": "Видео",
+          "audio": "Аудио",
+          "archives": "Архивы"
+        },
+        "toggleFileTypeAria": "Переключить {type} типы файлов",
+        "customExtensions": "Пользовательские расширения файлов",
+        "customExtensionsPlaceholder": "например, txt, csv, json",
+        "addCustomExtensionAria": "Добавить пользовательское расширение файла",
+        "customExtensionsHelp": "Добавить пользовательские расширения файлов (без точки)",
+        "selectedExtensions": "Выбранные расширения:",
+        "removeExtensionAria": "Удалить {extension} расширение файла",
+        "htmlAccept": "HTML атрибут Accept (только для чтения)",
+        "htmlAcceptHelp": "Это автоматически генерируется на основе ваших выборов выше",
+        "helpText": "Текстовый помощник",
+        "helpTextPlaceholder": "Дополнительные инструкции для пользователей...",
+        "helpTextHelp": "Необязательные инструкции, чтобы помочь пользователям понять, какие файлы загружать"
+      },
+      "scheduler": {
+        "title": "Настройки планировщика",
+        "provider": "Поставщик планировщика",
+        "providerPlaceholder": "Выберите поставщика",
+        "providerHelp": "Выберите предпочитаемую платформу планирования",
+        "calcomLink": "Ссылка Cal.com",
+        "calendlyLink": "Ссылка Calendly",
+        "tidycalLink": "Ссылка TidyCal",
+        "schedulerLink": "Ссылка планировщика",
+        "linkPlaceholder": "https://...",
+        "linkHelp": "Вставьте URL для вашего {provider} планировщика",
+        "buttonText": "Текст кнопки открытия календаря",
+        "buttonTextPlaceholder": "например, Забронировать звонок",
+        "buttonTextHelp": "Текст, отображаемый на кнопке планировщика",
+        "preview": "Просмотр",
+        "openScheduler": "Открыть планировщик",
+        "previewHelp": "Нажмите, чтобы просмотреть, как будет выглядеть планировщик",
+        "previewModalTitle": "Предпросмотр планировщика",
+        "iframeTitle": "Внедрение планировщика",
+        "closePreviewAria": "Закрыть предпросмотр планировщика",
+        "close": "Закрыть",
+        "providerCalcom": "Cal.com",
+        "providerCalendly": "Calendly",
+        "providerTidycal": "TidyCal"
+      },
+      "banner": {
+        "title": "Настройки баннера",
+        "alertType": "Тип оповещения",
+        "alertTypePlaceholder": "Выберите тип оповещения",
+        "warning": "Предупреждение",
+        "error": "Ошибка",
+        "info": "Информация",
+        "success": "Успех",
+        "alertTypeHelp": "Выберите визуальный стиль и цветовую схему для баннера",
+        "bannerTitle": "Заголовок",
+        "bannerTitlePlaceholder": "Без курения",
+        "bannerTitleHelp": "Основной текст заголовка для баннера",
+        "description": "Описание",
+        "descriptionPlaceholder": "Наши помещения строго запрещены для курения...",
+        "descriptionHelp": "Подробное описание текста для баннера"
+      },
+      "fieldGroup": {
+        "layoutTitle": "Настройки макета",
+        "layoutDirection": "Направление макета",
+        "layoutHorizontal": "Горизонтальное (бок о бок)",
+        "layoutVertical": "Вертикальное (стек) ",
+        "layoutDirectionHelp": "Как поля расположены внутри группы",
+        "columns": "Количество столбцов",
+        "columns2": "2 столбца",
+        "columns3": "3 столбца",
+        "columns4": "4 столбца",
+        "columnsHelp": "Количество столбцов для горизонтального макета",
+        "spacing": "Расстояние между полями",
+        "spacingCompact": "Компактное",
+        "spacingNormal": "Обычный",
+        "spacingRelaxed": "Релаксированное",
+        "spacingHelp": "Интервал между полями в группе",
+        "groupFields": "Групповые поля ({count})",
+        "addFieldAria": "Добавить поле в группу",
+        "addField": "Добавить поле",
+        "addFieldDialogTitle": "Добавить поле",
+        "emptyStateTitle": "В этой группе пока нет полей.",
+        "emptyStateDescription": "Добавить поля с помощью выпадающего меню или кнопок быстрого добавления выше.",
+        "fieldFallback": "{type} поле",
+        "settingsAria": "Настройки поля {name}",
+        "removeAria": "Удалить поле {name}",
+        "fieldLabel": "Метка поля",
+        "fieldLabelPlaceholder": "Введите метку поля",
+        "fieldLabelHelp": "Метка для этого поля",
+        "placeholder": "Текст-заполнитель",
+        "placeholderPlaceholder": "Введите текст заполнителя",
+        "placeholderHelp": "Текст-заполнитель для этого поля",
+        "required": "Обязательное поле",
+        "requiredHelp": "Сделать это поле обязательным",
+        "advancedAria": "Переключить расширенные настройки для {name}",
+        "advanced": "Расширенные настройки"
+      },
+      "rating": {
+        "title": "Настройки рейтинга",
+        "starCount": "Количество звезд",
+        "starCountHelp": "Количество звезд для рейтинга (1-10)",
+        "starSize": "Размер звезд",
+        "starSizeHelp": "Размер звезд для рейтинга (16-64px)",
+        "iconType": "Тип значка",
+        "star": "Звезда",
+        "heart": "Сердце",
+        "iconTypeHelp": "Выберите тип значка для рейтинга",
+        "iconColor": "Цвет значка",
+        "iconColorHelp": "Цвет значков рейтинга"
+      },
+      "tags": {
+        "title": "Настройки тегов",
+        "maxTags": "Максимальное количество тегов",
+        "maxTagsHelp": "Максимальное количество тегов, которые могут добавить пользователи (минимум 1)",
+        "allowDuplicates": "Разрешить повторяющиеся теги",
+        "allowDuplicatesHelp": "Разрешить пользователям добавлять один и тот же тег несколько раз"
+      },
+      "textarea": {
+        "title": "Настройки текстового поля",
+        "rows": "Количество строк",
+        "rowsHelp": "Начальная высота текстового поля (2-20 строк)"
+      },
+      "time": {
+        "title": "Настройки поля даты и времени",
+        "showCurrentTimeButton": "Показать кнопку 'Установить текущее время'",
+        "showCurrentTimeButtonHelp": "Отобразить кнопку для автоматического установления текущего времени"
+      },
+      "email": {
+        "title": "Настройки поля электронной почты",
+        "allowedDomains": "Разрешенные домены (через запятую)",
+        "allowedDomainsPlaceholder": "gmail.com, company.com",
+        "blockedDomains": "Заблокированные домены (через запятую)",
+        "blockedDomainsPlaceholder": "tempmail.com, spam.com",
+        "requireBusinessEmail": "Требовать только рабочий адрес электронной почты",
+        "customValidationMessage": "Пользовательское сообщение об ошибке",
+        "customValidationPlaceholder": "Пожалуйста, введите действительный адрес электронной почты"
+      }
+    },
+    "formSettings": {
+      "title": "Настройки формы",
+      "exportSecure": "Экспорт (защищенный)",
+      "preparing": "Подготовка...",
+      "saveFormFirstAccess": "Сначала сохраните форму, чтобы получить доступ к настройкам.",
+      "saveFormFirstExport": "Сначала сохраните форму, чтобы экспортировать ее защищенно.",
+      "exportPrepareFailed": "Не удалось подготовить защищенный экспорт.",
+      "settingsSectionsAria": "Разделы настроек",
+      "goToSectionSettingsAria": "Перейти к настройкам {section}",
+      "sections": {
+        "basic": "Базовая информация",
+        "limits": "Ограничения",
+        "security": "Безопасность",
+        "quiz": "Тесты и оценка",
+        "branding": "Брендинг",
+        "notifications": "Уведомления",
+        "api": "Доступ к API",
+        "webhooks": "Вебхуки",
+        "design": "Дизайн",
+        "metadata": "Метаданные"
+      },
+      "search": {
+        "aria": "Настройки поиска",
+        "placeholder": "Настройки поиска…",
+        "resultsAria": "Результаты поиска",
+        "noMatches": "Нет совпадений",
+        "items": {
+          "basic-info-title": {
+            "label": "Базовая информация"
+          },
+          "behavior-title": {
+            "label": "Поведение формы"
+          },
+          "rate-limit-title": {
+            "label": "Ограничение скорости"
+          },
+          "response-limit-title": {
+            "label": "Ограничение ответов"
+          },
+          "password-protection-title": {
+            "label": "Защита паролем"
+          },
+          "duplicate-prevention-title": {
+            "label": "Предотвращение дублирования"
+          },
+          "profanity-filter-title": {
+            "label": "Фильтр нецензурной лексики"
+          },
+          "bot-protection-title": {
+            "label": "Защита от ботов"
+          },
+          "branding-title": {
+            "label": "Брендинг"
+          },
+          "social-media-links-title": {
+            "label": "Ссылки на социальные сети"
+          },
+          "quiz-title": {
+            "label": "Тесты и оценка"
+          },
+          "notifications-title": {
+            "label": "Уведомления"
+          },
+          "api-access-title": {
+            "label": "Доступ к API"
+          },
+          "webhooks-title": {
+            "label": "Вебхуки"
+          },
+          "design-title": {
+            "label": "Дизайн"
+          },
+          "metadata-title": {
+            "label": "SEO"
+          },
+          "social-metadata-title": {
+            "label": "Социальные метаданные"
+          },
+          "search-engine-indexing-title": {
+            "label": "Индексирование поисковыми системами"
+          }
+        }
+      },
+      "defaults": {
+        "submitText": "Отправить",
+        "notificationSubject": "Новая отправка формы",
+        "notificationMessage": "Вы получили новую отправку формы."
+      },
+      "common": {
+        "unsavedChanges": "Несохраненные изменения",
+        "reset": "Сбросить",
+        "save": "Сохранить",
+        "saved": "Сохранено",
+        "formIdRequiredToSaveSettings": "Идентификатор формы требуется для сохранения настроек",
+        "validValueBetween": "Введите допустимое значение между {min} и {max}",
+        "fillRequiredFields": "Пожалуйста, заполните обязательные поля",
+        "requiredAria": "обязательно",
+        "fieldRequired": "Это поле обязательно"
+      },
+      "basicInfoSection": {
+        "ariaSettings": "Базовые настройки формы",
+        "basicTitle": "Базовая информация",
+        "basicDescription": "Настройте базовые детали вашей формы",
+        "internalTitleLabel": "Внутренний заголовок",
+        "internalTitleDescription": "Этот заголовок виден только вам в панели управления и конструкторе форм",
+        "internalTitlePlaceholder": "Введите внутренний заголовок для вашего справочника...",
+        "publicTitleLabel": "Публичный заголовок",
+        "publicTitleDescription": "Этот заголовок будет отображаться пользователям на фактической форме. Оставьте пустым, чтобы использовать внутренний заголовок.",
+        "publicTitlePlaceholder": "Введите заголовок, отображаемый пользователям...",
+        "formDescriptionLabel": "Описание формы",
+        "formDescriptionPlaceholder": "Введите описание формы",
+        "submitButtonTextLabel": "Текст кнопки отправки",
+        "submitButtonTextPlaceholder": "Отправить",
+        "successMessageLabel": "Сообщение об успехе",
+        "successMessagePlaceholder": "Спасибо за вашу отправку!",
+        "redirectUrlLabel": "URL-адрес перенаправления (необязательно)",
+        "redirectUrlDescription": "URL-адрес для перенаправления пользователей после успешной отправки",
+        "redirectUrlPlaceholder": "https://example.com/thank-you",
+        "basicActionsAria": "Действия с базовой информацией",
+        "saveBasicAria": "Сохранить базовую информацию",
+        "saveBasicSuccess": "Базовая информация успешно сохранена",
+        "saveBasicFailed": "Не удалось сохранить базовую информацию",
+        "behaviorTitle": "Поведение формы",
+        "behaviorDescription": "Настройте, как ваша форма behaves и appears для пользователей",
+        "hideHeaderLabel": "Скрыть заголовок",
+        "hideHeaderDescription": "Скрывает публичный заголовок и описание в embeds",
+        "rtlLabel": "Режим справа налево",
+        "rtlDescription": "Отображать форму в режиме RTL (справа налево)",
+        "autoFocusLabel": "Автоматически фокусироваться на первом поле",
+        "autoFocusDescription": "Автоматически фокусироваться на первом поле при загрузке формы",
+        "behaviorActionsAria": "Действия с поведением формы",
+        "saveBehaviorAria": "Сохранить настройки поведения формы",
+        "saveBehaviorSuccess": "Настройки поведения формы успешно сохранены",
+        "saveBehaviorFailed": "Не удалось сохранить поведение формы"
+      },
+      "passwordProtectionSection": {
+        "ariaSettings": "Настройки защиты паролем",
+        "title": "Защита паролем",
+        "description": "Ограничить доступ к вашей форме паролем",
+        "enableLabel": "Включить защиту паролем",
+        "enableDescription": "Требовать от пользователей ввода пароля для доступа к форме",
+        "passwordLabel": "Пароль",
+        "passwordPlaceholder": "Введите пароль формы",
+        "hidePasswordAria": "Скрыть пароль",
+        "showPasswordAria": "Показать пароль",
+        "passwordDescription": "Пользователям необходимо ввести этот пароль для доступа к форме",
+        "customMessageLabel": "Пользовательское сообщение",
+        "customMessagePlaceholder": "Введите пользовательское сообщение для запроса пароля",
+        "customMessageDescription": "Сообщение, отображаемое пользователям, когда им необходимо ввести пароль",
+        "currentConfiguration": "Текущая конфигурация",
+        "summaryPrefix": "Защита паролем",
+        "enabled": "включена",
+        "summarySuffix": ". Пользователям необходимо ввести пароль для доступа к форме.",
+        "disabledDescription": "Защита паролем ограничивает доступ к вашей форме, требуя от пользователей ввода пароля, прежде чем они смогут просмотреть и отправить форму.",
+        "actionsAria": "Действия с защитой паролем",
+        "saveAria": "Сохранить настройки защиты паролем",
+        "saved": "Настройки защиты паролем успешно сохранены",
+        "saveFailed": "Не удалось сохранить настройки защиты паролем",
+        "defaultMessage": "Эта форма защищена паролем. Пожалуйста, введите пароль, чтобы продолжить."
+      },
+      "duplicatePreventionSection": {
+        "ariaSettings": "Настройки предотвращения дублирования",
+        "title": "Предотвращение дублирования",
+        "description": "Предотвратить отправку пользователями одной и той же формы несколько раз",
+        "enableLabel": "Включить предотвращение дублирования",
+        "enableDescription": "Предотвратить отправку пользователями одной и той же формы несколько раз",
+        "preventionModeLabel": "Режим предотвращения",
+        "oneTimeLabel": "Отправка один раз",
+        "oneTimeDescription": "Разрешить только одну отправку на пользователя, навсегда",
+        "timeBasedLabel": "Предотвращение на основе времени",
+        "timeBasedDescription": "Предотвратить дублирование отправок в течение заданного временного окна",
+        "preventionStrategyLabel": "Стратегия предотвращения",
+        "selectStrategyPlaceholder": "Выбрать стратегию",
+        "strategyCombinedLabel": "Комбинированная (IP + Email + Session) - наиболее безопасная",
+        "strategyEmailLabel": "Адрес электронной почты - лучше всего для регистрации",
+        "strategyIpLabel": "IP-адрес - просто и надежно",
+        "strategySessionLabel": "Идентификатор сеанса - на основе браузера",
+        "strategyCombinedDescription": "Отслеживать по комбинации IP, электронной почты и сеанса для максимальной точности",
+        "strategyEmailDescription": "Отслеживать по адресу электронной почты (требуется поле электронной почты в форме)",
+        "strategyIpDescription": "Отслеживать только по IP-адресу",
+        "strategySessionDescription": "Отслеживать по сеансу браузера",
+        "timeWindowLabel": "Временное окно (минуты)",
+        "timeWindowDescription": "Как долго предотвращать повторные отправки",
+        "timeWindowPlaceholder": "1440",
+        "maxAttemptsLabel": "Максимальное количество попыток",
+        "maxAttemptsDescription": "Максимальное количество попыток, разрешенных в течение временного окна",
+        "maxAttemptsPlaceholder": "1",
+        "errorMessageLabel": "Сообщение об ошибке",
+        "errorMessageDescription": "Сообщение, отображаемое пользователям при попытке отправить дубликат",
+        "allowOverrideLabel": "Разрешить переопределение",
+        "allowOverrideDescription": "Разрешить пользователям обходить предотвращение (не рекомендуется)",
+        "currentConfiguration": "Текущая конфигурация",
+        "currentSettings": "Текущие настройки",
+        "summaryModeOneTime": "только одна отправка",
+        "summaryModeTimeBased": "{maxAttempts} отправок(и) каждые {timeWindow} минут",
+        "summaryStrategyCombined": "IP + Электронная почта + Сеанс",
+        "summaryStrategyEmail": "Адрес электронной почты",
+        "summaryStrategyIp": "IP-адрес",
+        "summaryStrategySession": "Идентификатор сеанса",
+        "summarySentence": "{mode} с использованием {strategy} отслеживания.",
+        "summaryOverrideEnabled": "Переопределение включено.",
+        "disabledDescription": "Предотвращение дублирования помогает поддерживать качество данных, предотвращая отправку пользователями одной и той же формы несколько раз. Выберите между предотвращением на основе времени или режимом одной отправки.",
+        "actionsAria": "Действия предотвращения дублирования",
+        "saveAria": "Сохранить настройки предотвращения дублирования",
+        "saved": "Настройки предотвращения дублирования успешно сохранены",
+        "saveFailed": "Не удалось сохранить настройки предотвращения дублирования",
+        "defaultMessageOneTime": "Вы уже отправили эту форму. Каждый пользователь может отправлять только один раз.",
+        "defaultMessageTimeBased": "Вы уже отправили эту форму. Пожалуйста, подождите, прежде чем отправлять снова."
+      },
+      "profanityFilterSection": {
+        "ariaSettings": "Настройки фильтра нецензурной лексики",
+        "title": "Фильтр нецензурной лексики",
+        "description": "Автоматически обнаруживать и фильтровать неуместный контент",
+        "enableLabel": "Включить фильтр нецензурной лексики",
+        "enableDescription": "Автоматически обнаруживать и фильтровать неуместный контент",
+        "filterModeLabel": "Режим фильтра",
+        "strictModeOption": "Строгий режим - отклонять отправки с нецензурной лексикой",
+        "replaceModeOption": "Режим замены - заменять нецензурную лексику звездочками",
+        "customMessageLabel": "Пользовательское сообщение",
+        "customMessagePlaceholder": "Введите пользовательское сообщение для отображения при обнаружении нецензурной лексики",
+        "customWordsTitle": "Пользовательские слова для фильтрации",
+        "whitelistedWordsTitle": "Разрешенные слова",
+        "customWordsPlaceholder": "Введите слово(а) для фильтрации (через запятую для нескольких)",
+        "whitelistPlaceholder": "Введите слово(а) для разрешения (через запятую для нескольких)",
+        "addWord": "Добавить",
+        "addFilteredWordAria": "Добавить отфильтрованное слово",
+        "addWhitelistedWordAria": "Добавить разрешенное слово",
+        "removeWordAria": "Удалить {word}",
+        "currentConfiguration": "Текущая конфигурация",
+        "summaryPrefix": "Фильтр нецензурной лексики",
+        "enabled": "включена",
+        "summaryIn": "в",
+        "strictMode": "строгом режиме",
+        "replaceMode": "режиме замены",
+        "summaryPeriod": ".",
+        "customWordsConfigured": "{count} пользовательских слов настроено.",
+        "whitelistedWordsConfigured": "{count} разрешенных слов.",
+        "disabledDescription": "Фильтр нецензурной лексики помогает поддерживать чистую и профессиональную среду, автоматически обнаруживая и фильтруя неуместный контент в отправках форм.",
+        "actionsAria": "Действия фильтра нецензурной лексики",
+        "saveAria": "Сохранить настройки фильтра нецензурной лексики",
+        "saved": "Настройки фильтра нецензурной лексики успешно сохранены",
+        "saveFailed": "Не удалось сохранить настройки фильтра нецензурной лексики"
+      },
+      "notificationsSection": {
+        "title": "Уведомления",
+        "description": "Настройка email-уведомлений для новых отправок форм",
+        "enableLabel": "Email-уведомления",
+        "enableDescription": "Включить email-уведомления для новых отправок",
+        "emailLabel": "Email для уведомлений",
+        "emailPlaceholder": "owner@email.com",
+        "subjectLabel": "Тема email",
+        "messageLabel": "Сообщение email",
+        "customLinksLabel": "Пользовательские ссылки",
+        "linkLabelPlaceholder": "Метка",
+        "linkUrlPlaceholder": "https://example.com",
+        "removeLink": "Удалить",
+        "addLink": "Добавить",
+        "actionsAria": "Действия настроек уведомлений",
+        "saveAria": "Сохранить настройки уведомлений",
+        "saved": "Настройки уведомлений успешно сохранены",
+        "saveFailed": "Не удалось сохранить настройки уведомлений"
+      },
+      "brandingSection": {
+        "title": "Брендинг",
+        "description": "Управление брендингом Ikiform и ссылками на социальные сети",
+        "showPoweredByLabel": "Показать \"Powered by Ikiform\"",
+        "showPoweredByDescription": "Отобразить небольшую атрибуцию в футере",
+        "socialMediaLabel": "Ссылки на социальные сети",
+        "socialMediaDescription": "Включить ссылки на ваши социальные профили в форме",
+        "platforms": {
+          "linkedin": {
+            "label": "LinkedIn",
+            "placeholder": "https://linkedin.com/in/username"
+          },
+          "twitter": {
+            "label": "X (Twitter)",
+            "placeholder": "https://x.com/username"
+          },
+          "youtube": {
+            "label": "YouTube",
+            "placeholder": "https://youtube.com/@channel"
+          },
+          "instagram": {
+            "label": "Instagram",
+            "placeholder": "https://instagram.com/username"
+          },
+          "facebook": {
+            "label": "Facebook",
+            "placeholder": "https://facebook.com/username"
+          },
+          "github": {
+            "label": "GitHub",
+            "placeholder": "https://github.com/username"
+          },
+          "website": {
+            "label": "Сайт",
+            "placeholder": "https://example.com"
+          }
+        },
+        "iconSizeLabel": "Размер значка",
+        "iconSizes": {
+          "small": "Маленький",
+          "medium": "Средний",
+          "large": "Большой"
+        },
+        "positionLabel": "Позиция",
+        "positions": {
+          "footer": "Футер",
+          "header": "Заголовок",
+          "both": "Оба"
+        },
+        "previewLabel": "Просмотр",
+        "disabledDescription": "Включить ссылки на социальные сети для отображения ваших профилей в формах.",
+        "actionsAria": "Действия настроек брендинга",
+        "saveAria": "Сохранить настройки брендинга",
+        "saved": "Настройки брендинга успешно сохранены",
+        "saveFailed": "Не удалось сохранить настройки брендинга",
+        "authRequired": "Требуется аутентификация пользователя"
+      },
+      "metadataSection": {
+        "basicTitle": "Базовая SEO",
+        "basicDescription": "Заголовки, описания и канонический URL",
+        "pageTitleLabel": "Заголовок страницы",
+        "pageTitlePlaceholder": "Введите заголовок страницы (макс 60 символов)",
+        "metaDescriptionLabel": "Мета-описание",
+        "metaDescriptionPlaceholder": "Введите мета-описание (макс 160 символов)",
+        "characterCount": "{count}/{max} символов",
+        "keywordsLabel": "Ключевые слова",
+        "keywordsPlaceholder": "Введите ключевые слова, разделенные запятыми",
+        "authorLabel": "Автор",
+        "authorPlaceholder": "Введите имя автора",
+        "canonicalUrlLabel": "Канонический URL",
+        "canonicalUrlPlaceholder": "https://example.com/form",
+        "canonicalUrlDescription": "Предпочтительный URL для этой страницы формы",
+        "basicActionsAria": "Действия базовой SEO",
+        "saveBasicAria": "Сохранить базовые настройки SEO",
+        "basicSaved": "Базовая SEO сохранена",
+        "basicSaveFailed": "Не удалось сохранить базовую SEO",
+        "socialTitle": "Социальные метаданные",
+        "socialDescription": "Настройки Open Graph и Twitter",
+        "ogTitleLabel": "Заголовок Open Graph",
+        "ogTitlePlaceholder": "Введите заголовок Open Graph",
+        "ogTitleDescription": "Заголовок, отображаемый при обмене в Facebook, LinkedIn и т. д.",
+        "ogDescriptionLabel": "Описание Open Graph",
+        "ogDescriptionPlaceholder": "Введите описание Open Graph",
+        "ogDescriptionDescription": "Описание, отображаемое при обмене в социальных сетях",
+        "ogImageLabel": "URL изображения Open Graph",
+        "ogImagePlaceholder": "https://example.com/image.jpg",
+        "ogTypeLabel": "Тип Open Graph",
+        "ogTypePlaceholder": "Выберите тип Open Graph",
+        "ogTypes": {
+          "website": "Сайт",
+          "article": "Статья",
+          "profile": "Профиль",
+          "video": "Видео"
+        },
+        "twitterCardLabel": "Тип карты Twitter",
+        "twitterCardPlaceholder": "Выберите тип карты Twitter",
+        "twitterCards": {
+          "summary": "Резюме",
+          "summaryLargeImage": "Резюме с большим изображением",
+          "app": "Приложение",
+          "player": "Проигрыватель"
+        },
+        "twitterTitleLabel": "Заголовок Twitter",
+        "twitterTitlePlaceholder": "Введите заголовок Twitter",
+        "twitterImageLabel": "URL изображения Twitter",
+        "twitterImagePlaceholder": "https://example.com/twitter-image.jpg",
+        "twitterDescriptionLabel": "Описание Twitter",
+        "twitterDescriptionPlaceholder": "Введите описание Twitter",
+        "twitterSiteLabel": "Сайт Twitter",
+        "twitterSitePlaceholder": "@yourhandle",
+        "twitterCreatorLabel": "Создатель Twitter",
+        "twitterCreatorPlaceholder": "@creatorhandle",
+        "socialActionsAria": "Действия социальных метаданных",
+        "saveSocialAria": "Сохранить настройки социальных метаданных",
+        "socialSaved": "Социальные метаданные сохранены",
+        "socialSaveFailed": "Не удалось сохранить социальные метаданные",
+        "indexingTitle": "Индексирование поисковыми системами",
+        "indexingDescription": "Управляйте тем, как поисковые системы сканируют эту форму",
+        "indexingBehaviorLabel": "Индексирование поисковыми системами",
+        "indexingBehaviorPlaceholder": "Выберите поведение индексирования",
+        "indexingOptions": {
+          "index": "Индексировать и следовать (по умолчанию)",
+          "noindex": "Не индексировать",
+          "nofollow": "Не следовать",
+          "noindexNofollow": "Не индексировать, не следовать"
+        },
+        "indexingBehaviorDescription": "Контролирует, могут ли поисковые системы индексировать и следовать ссылкам на этой странице",
+        "switches": {
+          "noArchive": "Нет архива",
+          "noSnippet": "Нет сниппета",
+          "noImageIndex": "Нет индекса изображений",
+          "noTranslate": "Нет перевода"
+        },
+        "indexingActionsAria": "Действия индексации",
+        "saveIndexingAria": "Сохранить настройки индексации",
+        "indexingSaved": "Настройки индексации сохранены",
+        "indexingSaveFailed": "Не удалось сохранить настройки индексации",
+        "updatedAnnouncement": "Метаданные обновлены",
+        "authRequired": "Требуется аутентификация пользователя"
+      },
+      "rateLimitSection": {
+        "title": "Ограничение скорости",
+        "description": "Управление частотой отправки для предотвращения спама и злоупотреблений",
+        "ariaSettings": "Настройки ограничения скорости",
+        "enableLabel": "Включить ограничение скорости",
+        "enableDescription": "Ограничить отправки с одного и того же IP-адреса",
+        "maxSubmissionsLabel": "Максимальное количество отправок",
+        "maxSubmissionsDescription": "Максимальное количество разрешенных отправок",
+        "timeWindowLabel": "Временное окно (минуты)",
+        "timeWindowDescription": "Временной интервал для подсчета отправок",
+        "blockDurationLabel": "Продолжительность блокировки (минуты)",
+        "blockDurationDescription": "Как долго блокировать после достижения лимита",
+        "messageLabel": "Сообщение, отображаемое при превышении лимита скорости",
+        "messagePlaceholder": "Слишком много отправок. Пожалуйста, попробуйте позже.",
+        "messageDescription": "Пользовательское сообщение, отображаемое при превышении лимита скорости",
+        "currentConfiguration": "Текущая конфигурация",
+        "summarySentence": "Разрешить {maxSubmissions} отправок каждые {timeWindow} минут. Блокировать на {blockDuration} минут при превышении.",
+        "summaryExample": "Пример: Если пользователь отправляет {maxSubmissions} раз в {timeWindow} минут, он будет заблокирован на {blockDuration} минут.",
+        "disabledDescription": "Ограничение скорости помогает защитить вашу форму от спама и злоупотреблений путем контроля частоты отправки.",
+        "actionsAria": "Действия ограничения скорости",
+        "saveAria": "Сохранить настройки ограничения скорости",
+        "saved": "Настройки ограничения скорости успешно сохранены",
+        "saveFailed": "Не удалось сохранить настройки ограничения скорости",
+        "defaultMessage": "Слишком много отправок. Пожалуйста, попробуйте позже."
+      },
+      "responseLimitSection": {
+        "title": "Ограничение ответов",
+        "description": "Прекратить прием отправок после достижения установленного общего количества",
+        "enableLabel": "Включить лимит ответов",
+        "enableDescription": "Ограничить общее количество отправок, которое принимает эта форма",
+        "maxResponsesLabel": "Максимальное количество ответов",
+        "maxResponsesDescription": "Ограничить общее количество ответов, которое может принять эта форма. Как только лимит будет достигнут, новые отправки будут заблокированы.",
+        "limitReachedLabel": "Сообщение, когда лимит достигнут",
+        "limitReachedDescription": "Сообщение, отображаемое после достижения общего лимита ответов",
+        "limitReachedPlaceholder": "Эта форма больше не принимает ответы.",
+        "disabledDescription": "Оставьте это отключенным, если ваша форма должна продолжать принимать отправки без ограничения.",
+        "actionsAria": "Действия ограничения ответов",
+        "saveAria": "Сохранить настройки ограничения ответов",
+        "saved": "Ограничение ответов успешно сохранено",
+        "saveFailed": "Не удалось сохранить ограничение ответов",
+        "defaultMessage": "Эта форма больше не принимает ответы."
+      },
+      "botProtectionSection": {
+        "title": "Защита от ботов",
+        "description": "Автоматически обнаруживать и блокировать автоматические отправки",
+        "ariaSettings": "Настройки защиты от ботов",
+        "enableLabel": "Включить защиту от ботов",
+        "enableDescription": "Добавить анти-бот проверки для отправки форм",
+        "detectionMessageLabel": "Сообщение обнаружения",
+        "detectionMessagePlaceholder": "Отправка заблокирована из-за подозрительной активности бота.",
+        "detectionMessageDescription": "Сообщение, отображаемое при блокировке автоматической отправки",
+        "currentConfiguration": "Текущая конфигурация",
+        "statusEnabledPrefix": "Защита от ботов в настоящее время",
+        "enabled": "включена",
+        "statusEnabledSuffix": "для этой формы.",
+        "vercelTitle": "Защита Vercel",
+        "vercelDescription": "Если развернуто на Vercel, могут применяться дополнительные анти-спамовые проверки.",
+        "disabledDescription": "Включить защиту от ботов, чтобы уменьшить спам от автоматических инструментов и скриптового трафика.",
+        "actionsAria": "Действия защиты от ботов",
+        "saveAria": "Сохранить настройки защиты от ботов",
+        "saved": "Настройки защиты от ботов успешно сохранены",
+        "saveFailed": "Не удалось сохранить настройки защиты от ботов"
+      },
+      "quizSection": {
+        "title": "Тесты и оценка",
+        "description": "Настроить поведение квиза и правила оценки",
+        "ariaSettings": "Настройки квиза",
+        "enableLabel": "Включить режим квиза",
+        "enableDescription": "Включить функции квиза, такие как оценка и сообщения о результатах",
+        "passingScoreLabel": "Проходной балл (%)",
+        "passingScoreDescription": "Установить минимальный процент, необходимый для прохождения",
+        "timeLimitLabel": "Ограничение времени (минуты)",
+        "timeLimitDescription": "Необязательный лимит времени для завершения теста",
+        "timeLimitPlaceholder": "Оставьте пустым для отсутствия лимита",
+        "showScoreLabel": "Показать пользователю его оценку",
+        "showScoreDescription": "Отображать оценку пользователя после отправки формы",
+        "showCorrectAnswersLabel": "Показать правильные ответы",
+        "showCorrectAnswersDescription": "Показать правильные ответы и объяснения после отправки",
+        "allowRetakeLabel": "Разрешить пересдачу",
+        "allowRetakeDescription": "Позволить пользователям пересдать тест для улучшения своей оценки",
+        "customMessagesLabel": "Пользовательские сообщения о результатах",
+        "successMessageLabel": "Сообщение об успехе",
+        "successMessagePlaceholder": "Отличная работа! Вы прошли тест.",
+        "improvementMessageLabel": "Сообщение об улучшении",
+        "improvementMessagePlaceholder": "Пожалуйста, просмотрите и попробуйте снова.",
+        "messagePlaceholderHelp": "Используйте {score}, {percentage}, {total} в качестве заполнителей",
+        "actionsAria": "Действия с тестом",
+        "saveAria": "Сохранить настройки теста",
+        "saved": "Настройки теста успешно сохранены",
+        "savedToast": "Настройки теста сохранены",
+        "saveFailed": "Не удалось сохранить настройки теста"
+      },
+      "apiSection": {
+        "title": "Доступ к API",
+        "description": "Переключите, чтобы разрешить отправку через конечную точку API",
+        "authRequired": "Требуется аутентификация пользователя",
+        "enableSupportLabel": "Включить поддержку API",
+        "enableSupportDescription": "Включить внешние отправки через безопасный ключ API.",
+        "apiEndpointLabel": "Конечная точка API",
+        "copyEndpointAria": "Копировать конечную точку API",
+        "endpointCopied": "Конечная точка API скопирована",
+        "apiKeyLabel": "Ключ API",
+        "apiKeySecretHint": "Сохраните этот ключ в секрете. Любой, у кого он есть, может отправить данные в эту форму.",
+        "generateApiKey": "Сгенерировать ключ API",
+        "regenerateKey": "Перегенерировать ключ",
+        "revokeKey": "Отозвать ключ",
+        "generating": "Генерируется...",
+        "revoking": "Отзывается...",
+        "copyApiKeyAria": "Копировать ключ API",
+        "showApiKeyAria": "Показать ключ API",
+        "hideApiKeyAria": "Скрыть ключ API",
+        "keyCopied": "Ключ API скопирован",
+        "keyGenerated": "Ключ API сгенерирован",
+        "keyGenerateFailed": "Не удалось сгенерировать ключ API",
+        "keyRevoked": "Ключ API отозван",
+        "keyRevokeFailed": "Не удалось отозвать ключ API",
+        "showCodeExamples": "Показать примеры кода",
+        "hideCodeExamples": "Скрыть примеры кода",
+        "javascriptNodeLabel": "JavaScript / Node.js",
+        "sampleName": "Джейн Доу",
+        "sampleEmail": "jane@example.com",
+        "sampleMessage": "Привет от API",
+        "sampleValue": "Образец значения",
+        "copyCodeAria": "Копировать пример кода",
+        "downloadCodeAria": "Скачать пример кода",
+        "codeCopied": "Пример кода скопирован",
+        "codeDownloaded": "Пример кода скачан",
+        "betaBadge": "БЕТА",
+        "integrationRateLimiting": "Ограничение скорости",
+        "integrationRateLimitingDescription": "Защитите свою конечную точку от всплесков спама.",
+        "integrationResponseLimits": "Ограничения на ответы",
+        "integrationResponseLimitsDescription": "Ограничьте общее количество принятых отправок.",
+        "integrationDuplicatePrevention": "Предотвращение дублирования",
+        "integrationDuplicatePreventionDescription": "Снизьте количество повторных отправок от одного и того же пользователя.",
+        "integrationProfanityFilter": "Фильтр нецензурной лексики",
+        "integrationProfanityFilterDescription": "Заблокировать или очистить неподходящий контент.",
+        "emptyStateDescription": "Включите поддержку API, чтобы сгенерировать безопасный ключ API.",
+        "actionsAria": "Действия с доступом к API",
+        "saveAria": "Сохранить настройки API",
+        "resetAria": "Сбросить настройки API",
+        "settingsSaved": "Настройки API успешно сохранены",
+        "settingsSaveFailed": "Не удалось сохранить настройки API"
+      },
+      "webhooks": {
+        "panel": {
+          "endpointsTitle": "Конечные точки веб-хука",
+          "endpointsDescription": "Отправлять отправки во внешние сервисы.",
+          "addWebhook": "Добавить веб-хук"
+        },
+        "list": {
+          "emptyState": "Веб-хуки еще не настроены. Добавьте свой первый веб-хук, чтобы получать отправки формы.",
+          "active": "Активный",
+          "inactive": "Неактивный",
+          "edit": "Редактировать",
+          "delete": "Удалить",
+          "test": "Тест",
+          "viewLogs": "Просмотреть журналы",
+          "events": {
+            "formSubmitted": "Форма отправлена",
+            "formViewed": "Форма просмотрена",
+            "formStarted": "Форма начата"
+          }
+        },
+        "hook": {
+          "fetchFailed": "Не удалось получить вебхуки",
+          "created": "Вебхук успешно создан",
+          "createFailed": "Не удалось создать вебхук",
+          "updated": "Вебхук успешно обновлен",
+          "updateFailed": "Не удалось обновить вебхук",
+          "deleted": "Вебхук успешно удален",
+          "deleteFailed": "Не удалось удалить вебхук"
+        },
+        "formModal": {
+          "addTitle": "Добавить вебхук",
+          "editTitle": "Редактировать вебхук",
+          "stepsAria": "Шаги настройки вебхука",
+          "steps": {
+            "basics": "Основы",
+            "events": "События",
+            "headers": "Заголовки",
+            "payload": "Полезная нагрузка",
+            "notifications": "Уведомления",
+            "details": "Просмотр"
+          },
+          "errors": {
+            "missingBasics": "Требуется URL вебхука.",
+            "missingEvent": "Выберите хотя бы одно событие.",
+            "missingBasicsAndEvent": "Требуется URL вебхука и хотя бы одно событие."
+          },
+          "webhookUrl": "URL вебхука",
+          "webhookUrlPlaceholder": "https://example.com/webhook",
+          "nameOptional": "Имя (необязательно)",
+          "namePlaceholder": "Уведомления Slack",
+          "descriptionOptional": "Описание (необязательно)",
+          "descriptionPlaceholder": "Куда следует отправлять данные формы",
+          "eventsHelp": "Выберите события, которые должны запускать этот вебхук.",
+          "events": {
+            "formSubmitted": "Форма отправлена",
+            "formViewed": "Форма просмотрена",
+            "formStarted": "Форма начата"
+          },
+          "httpMethod": "Метод HTTP",
+          "selectHttpMethodAria": "Выберите метод HTTP",
+          "selectMethodPlaceholder": "Выберите метод",
+          "httpMethodDescriptions": {
+            "post": "Создать новые ресурсы или отправить данные полезной нагрузки.",
+            "put": "Заменить существующий ресурс.",
+            "patch": "Частично обновить существующий ресурс.",
+            "delete": "Удалить ресурс.",
+            "get": "Получить информацию без изменения данных.",
+            "head": "Получить только заголовки."
+          },
+          "addHeader": "Добавить заголовок",
+          "headerName": "Имя заголовка",
+          "headerNamePlaceholder": "Авторизация",
+          "headerNameAria": "Имя заголовка вебхука",
+          "headerValue": "Значение заголовка",
+          "headerValuePlaceholder": "Токен носителя",
+          "headerValueAria": "Значение заголовка вебхука",
+          "removeHeaderAria": "Удалить заголовок",
+          "headersHelp": "Пользовательские заголовки необязательны и отправляются с каждым запросом вебхука.",
+          "payloadTemplateOptional": "Шаблон полезной нагрузки (необязательно)",
+          "availableVariables": "Доступные переменные",
+          "variables": {
+            "formData": "Объект данных отправленной формы",
+            "formId": "Идентификатор формы",
+            "submissionId": "Идентификатор отправки",
+            "event": "Событие-триггер",
+            "timestamp": "Таймстамп события",
+            "formatted": "Человекочитаемое резюме"
+          },
+          "notificationEmailOptional": "Адрес электронной почты для уведомлений (необязательно)",
+          "notificationEmailPlaceholder": "alerts@example.com",
+          "emailOnSuccess": "Электронная почта при успешной доставке",
+          "emailOnFailure": "Электронная почта при неудачной доставке",
+          "selectAll": "Выбрать все",
+          "clear": "Очистить",
+          "back": "Назад",
+          "next": "Далее",
+          "skip": "Пропустить",
+          "cancel": "Отмена",
+          "createWebhook": "Создать вебхук",
+          "updateWebhook": "Обновить вебхук"
+        },
+        "testDialog": {
+          "title": "Тестировать вебхук",
+          "description": "Отправить тестовое событие для проверки конечной точки.",
+          "endpointTitle": "Конечная точка",
+          "nameLabel": "Имя",
+          "untitledWebhook": "Безымянный вебхук",
+          "descriptionLabel": "Описание",
+          "methodLabel": "Метод HTTP",
+          "urlLabel": "URL",
+          "triggersTitle": "Триггеры",
+          "events": {
+            "formSubmitted": "Форма отправлена",
+            "formViewed": "Форма просмотрена",
+            "formStarted": "Форма начата"
+          },
+          "modeTitle": "Тестовый режим",
+          "mode": {
+            "real": "Отправить реальный полезный груз",
+            "success": "Принудительный ответ успеха",
+            "failure": "Принудительный ответ неудачи"
+          },
+          "sendTest": "Отправить тест",
+          "close": "Закрыть",
+          "success": "Тест успешно отправлен",
+          "failed": "Тест не прошел",
+          "testSent": "Тест вебхука отправлен",
+          "testFailed": "Тест вебхука не прошел",
+          "testFailedNetwork": "Не удалось отправить тест вебхука"
+        },
+        "logDialog": {
+          "title": "Журналы вебхука",
+          "status": "Статус",
+          "response": "Ответ",
+          "attempt": "Попытка",
+          "resend": "Повторить отправку",
+          "resendSuccess": "Вебхук успешно отправлен повторно",
+          "resendFailed": "Не удалось отправить вебхук повторно",
+          "copied": "Скопировано в буфер обмена",
+          "copyFailed": "Не удалось скопировать",
+          "copyCodeAria": "Копировать полезный груз",
+          "viewPayload": "Просмотреть полезный груз",
+          "payloadTitle": "Полезная нагрузка",
+          "noPayloadDataTitle": "Нет данных полезного груза",
+          "noPayloadDataDescription": "Полезный груз недоступен для этой записи журнала.",
+          "noPayloadReasonMethod": "Этот тип запроса не включал полезный груз.",
+          "noPayloadReasonError": "Захват полезного груза не удался из-за ошибки.",
+          "noPayloadReasonEmpty": "Данные полезного груза не были сохранены.",
+          "eventInformation": "Информация о событии",
+          "eventLabel": "Событие",
+          "formNameLabel": "Имя формы",
+          "formIdLabel": "ID формы",
+          "submissionIdLabel": "ID отправки",
+          "ipAddressLabel": "IP-адрес",
+          "formFields": "Поля формы",
+          "rawFormData": "Исходные данные формы",
+          "rawJson": "Исходный JSON",
+          "formatted": "Отформатировано",
+          "additionalData": "Дополнительные данные",
+          "notAvailable": "Недоступно",
+          "unknown": "Неизвестно",
+          "complexObject": "Сложный объект",
+          "complexArray": "Сложный массив",
+          "failedCount": "{count} не удалось",
+          "pendingCount": "{count} в ожидании",
+          "successfulCount": "{count} успешно",
+          "noLogsTitle": "Еще нет журналов",
+          "noLogsDescription": "Отправьте события на этот вебхук, чтобы увидеть историю доставки.",
+          "errorTitle": "Не удалось загрузить журналы",
+          "fetchFailed": "Не удалось загрузить журналы вебхука"
+        }
+      },
+      "designSection": {
+        "title": "Дизайн",
+        "description": "Управление внешним видом и настройками",
+        "advancedTitle": "Расширенная настройка",
+        "advancedDescription": "Тонко настройте цвета, типографику, интервалы и многое другое в специальном panel.",
+        "openAria": "Открыть панель настройки в новой вкладке",
+        "openLabel": "Открыть панель настройки…"
+      }
+    },
+    "fieldRenderer": {
+      "scheduler": {
+        "title": "Расписание",
+        "openScheduler": "Открыть планировщик",
+        "embedTitle": "Внедрение планировщика",
+        "notConfigured": "Ссылка на планировщик не настроена.",
+        "close": "Закрыть"
+      },
+      "email": {
+        "defaultPlaceholder": "Введите адрес электронной почты",
+        "autocompleteHint": "Нажмите Tab или кликните, чтобы завершить:",
+        "completeEmailAria": "Завершить адрес электронной почты",
+        "completeButton": "Завершить",
+        "autocompleteBadge": "Автозаполнение:",
+        "allowedDomainsLabel": "Разрешенные домены:"
+      },
+      "fileUpload": {
+        "bytesUnit": "Байты",
+        "uploadFailed": "Загрузка не удалась",
+        "uploadErrorTitle": "Ошибка загрузки",
+        "uploadedFiles": "Загруженные файлы ({count})",
+        "uploadedBadge": "Загружено",
+        "removeFileAria": "Удалить {name}",
+        "maxFilesAndSize": "Максимально {maxFiles} файлов, до {maxSize} каждый",
+        "allowedTypes": "Разрешенные типы"
+      },
+      "social": {
+        "platforms": {
+          "linkedin": "LinkedIn",
+          "twitter": "X (Twitter)",
+          "youtube": "YouTube",
+          "instagram": "Instagram",
+          "facebook": "Facebook",
+          "github": "GitHub",
+          "website": "Сайт"
+        },
+        "customLink": "Пользовательская ссылка {index}",
+        "customLinkPlaceholder": "https://example.com",
+        "preview": "Просмотр"
+      },
+      "signature": {
+        "drawHere": "Нарисуйте свою подпись здесь",
+        "clear": "Очистить",
+        "preview": "Просмотр",
+        "previewAlt": "Предпросмотр подписи"
+      },
+      "rating": {
+        "groupAria": "Рейтинг",
+        "rateAria": "Оцените {index} {type}"
+      },
+      "poll": {
+        "fetchFailed": "Не удалось получить параметры",
+        "resultsTitle": "Результаты опроса",
+        "totalVotes": "{count} всего голосов",
+        "votes": "{count} голосов"
+      }
+    },
+    "formRenderer": {
+      "shared": {
+        "poweredBy": "Работает на",
+        "incorrectPassword": "Неправильный пароль!",
+        "passwordProtectionMessage": "Эта форма защищена паролем. Пожалуйста, введите пароль, чтобы продолжить."
+      },
+      "successScreen": {
+        "title": "Спасибо!",
+        "defaultMessage": "Ваша форма успешно отправлена.",
+        "redirecting": "Перенаправляем вас через мгновение...",
+        "poweredBy": "Работает на"
+      },
+      "quizResults": {
+        "titlePassed": "Поздравляем!",
+        "titleComplete": "Тест завершен",
+        "descriptionPassed": "Вы успешно прошли тест!",
+        "descriptionRetry": "Спасибо за прохождение теста. Продолжайте практиковаться!",
+        "score": "Оценка",
+        "points": "Баллы",
+        "answered": "Ответы",
+        "totalQuestions": "Всего вопросов",
+        "passed": "Пройдено",
+        "needsImprovement": "Требует улучшения",
+        "retakeQuiz": "Пересдать тест",
+        "questionByQuestion": "Результаты по вопросам",
+        "questionLabel": "Вопрос {index}: {label}",
+        "yourAnswer": "Ваш ответ:",
+        "noAnswer": "Нет ответа",
+        "correctAnswer": "Правильный ответ:",
+        "pointsLower": "баллов"
+      },
+      "multiStep": {
+        "previous": "Предыдущий",
+        "next": "Далее",
+        "submit": "Отправить",
+        "defaults": {
+          "formTitle": "Форма"
+        },
+        "validation": {
+          "required": "Это поле обязательно",
+          "emailInvalid": "Пожалуйста, введите действительный адрес электронной почты",
+          "minLength": "Должно быть не менее {count} символов",
+          "maxLength": "Должно быть не более {count} символов"
+        },
+        "toasts": {
+          "submitSuccess": "Форма успешно отправлена!",
+          "botDetected": "Обнаружен бот. Доступ запрещен.",
+          "duplicateSubmission": "Вы уже отправили эту форму.",
+          "rateLimitExceeded": "Слишком много запросов. Пожалуйста, попробуйте позже.",
+          "responseLimitReached": "Эта форма больше не принимает ответы.",
+          "contentValidationFailed": "Ваша заявка содержит недопустимый контент.",
+          "submitFailed": "Не удалось отправить форму",
+          "submitFailedTryAgain": "Не удалось отправить форму. Пожалуйста, попробуйте снова."
+        }
+      },
+      "singleStep": {
+        "fixHighlightedErrors": "Пожалуйста, исправьте выделенные ошибки перед отправкой.",
+        "submit": "Отправить"
+      },
+      "duplicateSubmission": {
+        "title": "Обнаружена повторная отправка",
+        "wait": "Ждите {time}",
+        "attemptsLeft": "{count, plural, one {осталась # попытка} other {осталось # попыток}}",
+        "tryAgain": "Попробуйте снова",
+        "waitBeforeRetry": "Пожалуйста, подождите перед повторной отправкой.",
+        "units": {
+          "seconds": "{count, plural, one {# секунда} other {# секунд}}",
+          "minutes": "{count, plural, one {# минута} other {# минут}}",
+          "hours": "{count, plural, one {# час} other {# часов}}",
+          "days": "{count, plural, one {# день} other {# дней}}"
+        }
+      }
+    }
+  },
+  "aiBuilder": {
+    "client": {
+      "createFormWithKiko": "Создать форму с Kiko",
+      "streamError": "Ошибка: {error}",
+      "generatingResponse": "Генерируется ответ…",
+      "loading": "Загрузка…",
+      "suggestions": {
+        "contactForm": "Создать форму обратной связи",
+        "customerFeedbackSurvey": "Опрос для сбора отзывов клиентов",
+        "eventRegistrationForm": "Форма регистрации на мероприятие",
+        "jobApplicationForm": "Форма заявки на работу"
+      }
+    },
+    "chatHeader": {
+      "backToFormBuilder": "Вернуться к конструктору форм",
+      "title": "Kiko AI"
+    },
+    "chatInput": {
+      "messageToKiko": "Сообщение Kiko AI",
+      "placeholder": "Опишите форму, которую вы хотите создать…",
+      "sendMessage": "Отправить сообщение",
+      "sendHelp": "Нажмите Enter для отправки, Shift+Enter для новой строки или ⌘/Ctrl+Enter для отправки"
+    },
+    "welcome": {
+      "heading": "Чем я могу вам помочь сегодня?",
+      "description": "Здравствуйте, я Kiko — ваш AI-ассистент для форм.\nПопросите меня создать, изменить или проанализировать формы для вас!"
+    },
+    "preview": {
+      "title": "Kiko AI",
+      "formFallback": "Форма {index}",
+      "viewJson": "Посмотреть JSON",
+      "useThisForm": "Использовать эту форму",
+      "noFormSelected": "Не выбрано формы."
+    },
+    "jsonModal": {
+      "title": "Схема JSON формы",
+      "description": "Просмотреть или скопировать сгенерированную схему JSON для вашей формы",
+      "close": "Закрыть"
+    }
+  },
+  "analytics": {
+    "formAnalytics": {
+      "submissionExported": "Экспорт отправки успешно завершен",
+      "formDeleted": "Форма успешно удалена",
+      "failedDeleteForm": "Не удалось удалить форму",
+      "backToDashboard": "Вернуться на панель управления",
+      "published": "Опубликовано",
+      "draft": "Черновик",
+      "analyticsSubtitle": "Аналитика форм и данные отправки",
+      "formActions": "Действия с формой",
+      "editForm": "Изменить форму",
+      "shareForm": "Поделиться формой",
+      "viewSubmissions": "Просмотреть отправки",
+      "moreActions": "Больше действий",
+      "exportCsv": "Экспортировать в CSV",
+      "exportJson": "Экспортировать в JSON",
+      "deleteForm": "Удалить форму",
+      "openKiko": "Открыть Kiko AI",
+      "kiko": "Kiko AI",
+      "kikoTooltip": "Аналитика форм ИИ",
+      "recentSubmissions": "Последние отправки",
+      "viewAll": "Просмотреть все",
+      "noSubmissionsTitle": "Отправок нет",
+      "noSubmissionsDescription": "Как только люди начнут заполнять вашу форму, их ответы появятся здесь.",
+      "submission": "Отправка {id}",
+      "fieldsCount": "{count} поля",
+      "view": "Просмотреть",
+      "viewSubmissionDetails": "Просмотреть детали отправки",
+      "viewMoreSubmissions": "Просмотреть {count} больше отправок",
+      "noDataToExport": "Нет данных для экспорта",
+      "csvExportSuccess": "Данные успешно экспортированы в CSV!",
+      "jsonExportSuccess": "Данные успешно экспортированы!",
+      "deleteModalTitle": "Удалить форму",
+      "deleteModalConfirm": "Удалить форму",
+      "deleteModalCancel": "Отмена",
+      "deleteModalDescription": "Вы уверены, что хотите удалить \"{title}\"? Это действие нельзя отменить и навсегда удалит форму и все ее отправки.",
+      "formPublished": "Форма опубликована!"
+    },
+    "statsCards": {
+      "totalSubmissions": "Всего отправок",
+      "formFields": "Поля формы",
+      "completionRate": "Коэффициент завершения",
+      "last30Days": "Последние 30 дней",
+      "avgDailySubmissions": "Среднее количество отправок в день",
+      "bounceRate": "Коэффициент отказов",
+      "peakHour": "Час пик",
+      "uniqueResponses": "Уникальные ответы"
+    },
+    "infoCards": {
+      "lastSubmission": "Последняя отправка",
+      "fromIp": "От {ip}",
+      "noSubmissionsYet": "Отправок нет",
+      "formStatus": "Статус формы",
+      "published": "Опубликовано",
+      "created": "Создана",
+      "updated": "Обновлена",
+      "yes": "Да",
+      "no": "Нет",
+      "quickStats": "Быстрая статистика",
+      "avgFieldsCompleted": "Среднее количество завершенных полей",
+      "mostActiveDay": "Самый активный день",
+      "submissions": "{count} отправок",
+      "formType": "Тип формы",
+      "multiStep": "Мульти-шаговый",
+      "singlePage": "Одна страница"
+    },
+    "trendsChart": {
+      "title": "Тенденции отправок",
+      "noData": "Нет доступных данных",
+      "submissions": "Отправки"
+    },
+    "dropoff": {
+      "title": "Аналитика отказов",
+      "onlyMultiStep": "Аналитика отказов доступна только для многошаговых форм.",
+      "subtitle": "Понять, где пользователи отказываются от вашей формы.",
+      "step": "Шаг",
+      "reached": "Достигнуто",
+      "dropoffPercent": "Процент отказов",
+      "completionPercent": "Процент завершения",
+      "ofTotal": "из {total}",
+      "stepFallback": "Шаг {index}",
+      "dropoffBarAria": "Полоса отказов для шага {index}",
+      "completionBarAria": "Полоса завершения для шага {index}"
+    },
+    "chatModal": {
+      "title": "Kiko",
+      "description": "Поговорить с ИИ об аналитике вашей формы"
+    },
+    "chat": {
+      "emptyTitle": "Спросить Kiko что угодно",
+      "emptyDescription": "Получить мгновенные инсайты и анализ из данных вашей формы. Задайте вопросы на естественном языке.",
+      "thinking": "Думаю...",
+      "inputPlaceholder": "Спросить об аналитике вашей формы...",
+      "inputHelp": "Нажмите <enter></enter> чтобы отправить, <shiftEnter></shiftEnter> для новой строки"
+    },
+    "submissionDetails": {
+      "title": "Детали отправки - {id}",
+      "submissionId": "ID отправки",
+      "submittedAt": "Отправлено в",
+      "ipAddress": "IP-адрес",
+      "formData": "Данные формы",
+      "emptyValue": "—"
+    },
+    "submissions": {
+      "backToAnalytics": "Вернуться к аналитике",
+      "published": "Опубликовано",
+      "draft": "Черновик",
+      "formSubmissions": "Отправки формы ({count})",
+      "exportActions": "Экспорт действий",
+      "exportCsv": "Экспортировать в CSV",
+      "exportJson": "Экспортировать в JSON",
+      "viewDetailedAnalytics": "Просмотреть подробную аналитику",
+      "submissions": "Отправки",
+      "searchSubmissions": "Поиск отправок...",
+      "noMatchingSubmissions": "Нет совпадающих отправок",
+      "noSubmissionsYet": "Отправок нет",
+      "noSubmissionsDescription": "Как только люди начнут заполнять вашу форму, их ответы появятся здесь.",
+      "adjustSearchTerms": "Попробуйте изменить условия поиска, чтобы найти отправки.",
+      "id": "ID",
+      "submitted": "Отправлено",
+      "ipAddress": "IP-адрес",
+      "fields": "Поля",
+      "actions": "Действия",
+      "fieldsCount": "{count} поле",
+      "fieldsCount_plural": "{count} поля",
+      "view": "Просмотреть",
+      "showingRange": "Показано {start}-{end} из {total} отправок",
+      "previous": "Предыдущий",
+      "next": "Далее",
+      "pageOf": "Страница {page} из {total}",
+      "noSubmissionsToExport": "Нет отправок для экспорта",
+      "submissionId": "ID отправки",
+      "submittedAt": "Отправлено в",
+      "csvExportedSuccess": "CSV экспортирован успешно",
+      "jsonExportedSuccess": "JSON экспортирован успешно"
+    },
+    "premiumRequired": {
+      "analytics": {
+        "title": "Требуется Premium",
+        "description": "Вам необходима премиум-подписка для доступа к аналитике формы. Обновите подписку, чтобы разблокировать все функции.",
+        "viewPricing": "Посмотреть тарифы"
+      },
+      "submissions": {
+        "title": "Требуется Premium",
+        "description": "Вам необходима премиум-подписка для доступа к отправкам формы. Обновите подписку, чтобы разблокировать все функции.",
+        "viewPricing": "Посмотреть тарифы"
+      }
+    }
+  },
+  "trialBanner": {
+    "aria": {
+      "status": "Уведомление о статусе пробной версии"
+    },
+    "endsInPrefix": "Ваша бесплатная пробная версия заканчивается через ",
+    "remainingSuffix": " осталось",
+    "expired": "Пробная версия истекла",
+    "units": {
+      "day": "д",
+      "hour": "ч",
+      "minute": "м",
+      "second": "с"
+    }
+  },
+  "embed": {
+    "customizer": {
+      "subtitle": "Настройте и сгенерируйте код для встраивания вашей формы",
+      "showCode": "Показать код",
+      "settings": "Настройки",
+      "preview": "Просмотр",
+      "desktop": "Настольный компьютер",
+      "mobile": "Мобильное устройство"
+    },
+    "settings": {
+      "dimensions": {
+        "title": "Размеры",
+        "width": "Ширина",
+        "widthPlaceholder": "например, 100%, 800px",
+        "height": "Высота",
+        "heightPlaceholder": "например, 600px, 100vh",
+        "makeResponsive": "Сделать адаптивным (подстраивается под ширину контейнера)"
+      },
+      "appearance": {
+        "title": "Внешний вид",
+        "backgroundColor": "Фоновая цвет",
+        "allowTransparentBackground": "Разрешить прозрачный фон (переопределяет цвет фона)"
+      },
+      "border": {
+        "title": "Граница и стилизация",
+        "showBorder": "Показать границу",
+        "borderColor": "Цвет границы",
+        "borderWidth": "Ширина границы (px)",
+        "borderRadius": "Радиус границы (px)",
+        "padding": "Отступ (px)",
+        "paddingHelp": "Пространство вокруг iframe"
+      },
+      "performance": {
+        "title": "Производительность",
+        "loadingMode": "Режим загрузки",
+        "loadingModePlaceholder": "Выберите режим загрузки",
+        "lazy": "Ленивая загрузка (рекомендуется)",
+        "eager": "Немедленная загрузка",
+        "help": "Ленивая загрузка улучшает производительность страницы, загружая iframe только когда он попадает в поле зрения"
+      }
+    },
+    "codeModal": {
+      "title": "Код для встраивания",
+      "description": "Выберите фреймворк и скопируйте код",
+      "codeLabel": "{mode} код",
+      "copied": "Скопировано!",
+      "copy": "Копировать",
+      "close": "Закрыть",
+      "modes": {
+        "htmlDescription": "Универсальный HTML iframe",
+        "reactDescription": "Компонент React",
+        "nextjsDescription": "Компонент Next.js",
+        "vueDescription": "Компонент Vue.js",
+        "wordpressDescription": "Шорткод WordPress"
+      },
+      "iframeTitle": "Форма"
+    },
+    "testPage": {
+      "metadata": {
+        "title": "Тест внедрения - IkiForm",
+        "description": "Тестовая страница для демонстрации возможностей внедрения форм"
+      },
+      "title": "Страница тестирования внедрения форм",
+      "descriptionPrefix": "Эта страница демонстрирует, как формы можно внедрять с помощью различных конфигураций. Посетите",
+      "descriptionSuffix": "чтобы настроить свой собственный внедряемый модуль.",
+      "tryCustomizer": "Попробовать настройщик внедрения",
+      "cards": {
+        "standard": {
+          "title": "Стандартное внедрение",
+          "description": "Высота 600px - идеально для просмотра на настольном компьютере",
+          "badge": "Адаптивное",
+          "iframeTitle": "Стандартное внедрение формы"
+        },
+        "compact": {
+          "title": "Компактное внедрение",
+          "description": "Высота 400px - идеально для боковых панелей и небольших пространств",
+          "badge": "Минимальное",
+          "iframeTitle": "Компактное внедрение формы"
+        },
+        "fixed": {
+          "title": "Внедрение с фиксированной шириной",
+          "description": "Ширина 800px, по центру - идеально для конкретных макетов",
+          "badge": "Пользовательский стиль",
+          "iframeTitle": "Встраиваемая форма фиксированной ширины"
+        },
+        "react": {
+          "title": "Пример компонента React",
+          "description": "Компонент React на TypeScript с правильной типизацией",
+          "codeIframeTitle": "Форма"
+        }
+      },
+      "guide": {
+        "title": "Как использовать функцию встраивания",
+        "description": "Пошаговое руководство по встраиванию ваших форм",
+        "steps": {
+          "step1": {
+            "title": "Доступ к настройкам встраивания",
+            "prefix": "Перейти к",
+            "suffix": "или нажмите кнопку встраивания на панели управления вашей формы."
+          },
+          "step2": {
+            "title": "Настройка вашего встраивания",
+            "item1": "Настройка размеров ширины и высоты",
+            "item2": "Выберите тему (светлая, темная, авто)",
+            "item3": "Настройка границ и стилей",
+            "item4": "Настройка поведения загрузки"
+          },
+          "step3": {
+            "title": "Получите ваш код",
+            "description": "Скопируйте сгенерированный код для HTML, React, Next.js, Vue или WordPress и вставьте его на ваш сайт."
+          },
+          "step4": {
+            "title": "Интеграция с панелью управления",
+            "description": "Доступ к опциям встраивания прямо из панели управления вашей формы с помощью кнопки встраивания в действиях формы."
+          }
+        }
+      }
+    }
+  }
+}

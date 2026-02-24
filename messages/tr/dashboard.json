@@ -1,0 +1,517 @@
+{
+  "common": {
+    "dashboard": "Kontrol Paneli",
+    "feedback": "Geri Bildirim",
+    "logOut": "Çıkış Yap",
+    "loading": "Yükleniyor",
+    "loadingProfile": "Profil yükleniyor",
+    "loadingFormsSidebar": "Form yan çubuğu yükleniyor",
+    "loadingFormsManagement": "Form yönetimi yükleniyor"
+  },
+  "profile": {
+    "userProfileInformation": "Kullanıcı profil bilgileri",
+    "userNameAria": "Kullanıcı adı: {name}",
+    "premiumUserBadge": "Premium kullanıcı rozeti",
+    "userEmailAria": "Kullanıcı e-postası: {email}"
+  },
+  "formsManagement": {
+    "aria": {
+      "management": "Form yönetimi"
+    },
+    "header": {
+      "title": "Formlarınız",
+      "subtitle": "Formlarınızı kolayca oluşturun, yönetin ve analiz edin",
+      "createNewForm": "Yeni Form Oluştur",
+      "createDialogTitle": "Yeni Form Oluştur",
+      "createDialogDescription": "Nasıl başlamak istediğinizi seçin. Yapay zeka ile oluşturabilir, manuel olarak yapılandırabilir veya şifreli dosya içe aktarabilirsiniz."
+    },
+    "createOptions": {
+      "aiBadge": "En Çok Önerilen",
+      "aiCta": "Yapay Zeka ile Başla",
+      "aiTitle": "Kiko AI Kullan",
+      "aiDescription": "Formunuzu açıklayın, Kiko AI alanlar, mantık ve yapıyı içeren eksiksiz bir ilk taslak oluştursun.",
+      "manualCta": "Manuel oluştur",
+      "manualTitle": "Manuel Oluştur",
+      "manualDescription": "Boş bir formla başlayın ve alanları manuel olarak yapılandırın.",
+      "importCta": "Dosya içe aktar",
+      "importTitle": "Dosyadan İçe Aktar",
+      "importDescription": "Parola korumalı bir .ikiform dosyasını yeni bir taslak form olarak içe aktarın."
+    },
+    "emptyState": {
+      "aria": "Boş durum - henüz form oluşturulmadı",
+      "title": "Henüz form yok",
+      "description": "İlk formunuzu oluşturarak başlayın. Hızlı ve kolaydır!",
+      "createFirstForm": "İlk Formunuzu Oluşturun",
+      "dialog": {
+        "title": "Formunuzu nasıl oluşturmak istersiniz?",
+        "description": "Formunuzu manuel olarak oluşturmayı veya Kiko AI'ın sizin için oluşturmasına izin vermeyi seçin.",
+        "createWithAI": "Kiko AI Kullan",
+        "createManually": "Manuel Oluştur"
+      }
+    },
+    "search": {
+      "aria": "Form arama ve filtreler",
+      "searchAria": "Form ara",
+      "placeholder": "Formlarda başlık, açıklama veya ID ile ara...",
+      "openFilterMenu": "Filtre menüsünü aç",
+      "activeFiltersAria": "{count} aktif filtre",
+      "statusLabel": "Durum",
+      "filterByAll": "Tüm durumlara göre filtrele",
+      "all": "Tümü",
+      "filterByPublished": "Yayınlanan formlara göre filtrele",
+      "published": "Yayınlandı",
+      "filterByDraft": "Taslak formlara göre filtrele",
+      "draft": "Taslak",
+      "sortByLabel": "Sırala",
+      "sortByLastUpdated": "Son güncellemeye göre sırala",
+      "lastUpdated": "Son Güncelleme",
+      "sortByDateCreated": "Oluşturma tarihine göre sırala",
+      "dateCreated": "Oluşturma Tarihi",
+      "sortByTitle": "Başlığa göre alfabetik sırala",
+      "titleAz": "Başlık (A-Z)",
+      "clearAllFilters": "Tüm filtreleri temizle",
+      "activeFiltersGroup": "Aktif filtreler",
+      "badgeSearch": "Arama: \"{query}\"",
+      "clearSearch": "Arama sorgusunu temizle",
+      "badgeStatus": "Durum: {status}",
+      "clearStatus": "Durum filtresini temizle",
+      "badgeSort": "Sıralama: {sort}",
+      "sortTitleShort": "Başlık",
+      "sortCreatedShort": "Oluşturuldu",
+      "resetSort": "Sıralamayı son güncellemeye sıfırla"
+    },
+    "list": {
+      "untitledForm": "Başlıksız Form",
+      "viewAnalyticsFor": "{title} için analizleri görüntüle",
+      "formStatusAria": "Form durumu: {status}",
+      "published": "Yayınlandı",
+      "draft": "Taslak",
+      "publicTitle": "Genel: \"{title}\"",
+      "updated": "{date} güncellendi",
+      "actionsFor": "{title} için işlemler",
+      "formActions": "Form işlemleri",
+      "editForm": "Formu düzenle",
+      "shareForm": "Formu paylaş",
+      "duplicate": "Çoğalt",
+      "viewForm": "Formu görüntüle",
+      "viewAnalytics": "Analizleri görüntüle",
+      "embed": "Göm",
+      "export": "Dışa Aktar",
+      "deleteForm": "Formu sil",
+      "formsListAria": "Form listesi"
+    },
+    "stats": {
+      "totalForms": "Toplam Form",
+      "published": "Yayınlandı",
+      "drafts": "Taslaklar",
+      "loadingAria": "Form istatistikleri yükleniyor",
+      "aria": "Form istatistikleri",
+      "sidebarAria": "Form istatistikleri yan çubuğu"
+    },
+    "emptySearch": {
+      "noMatch": "Arama kriterlerinizle eşleşen form yok.",
+      "clearFilters": "Filtreleri temizle",
+      "clearAria": "Tüm arama filtrelerini temizle"
+    },
+    "deleteModal": {
+      "cancel": "İptal",
+      "confirm": "Formu Sil",
+      "title": "Formu Sil",
+      "description": "\"{formTitle}\" formunu silmek istediğinizden emin misiniz? Bu işlem geri alınamaz ve tüm form verileri kalıcı olarak kaybolacaktır."
+    },
+    "toasts": {
+      "failedLoadForms": "Formlar yüklenemedi",
+      "failedShareForm": "Form paylaşılamadı",
+      "formDuplicated": "Form çoğaltıldı",
+      "failedDuplicateForm": "Form çoğaltılamadı",
+      "formImportedSuccess": "Form başarıyla içe aktarıldı.",
+      "failedImportForm": "Form içe aktarılamadı.",
+      "formDeletedSuccess": "Form başarıyla silindi",
+      "failedDeleteForm": "Form silinemedi"
+    },
+    "shareModal": {
+      "title": "Formu Paylaş",
+      "publishedDescription": "Aşağıdaki bağlantı veya QR kodu kullanarak formunuzu paylaşın",
+      "unpublishedDescription": "Formunuzu başkalarıyla paylaşılabilir hale getirmek için yayınlayın",
+      "shareLink": "Paylaşım Bağlantısı",
+      "copied": "Kopyalandı",
+      "copyLink": "Bağlantıyı kopyala",
+      "hide": "Gizle",
+      "show": "Göster",
+      "qrCode": "QR Kodu",
+      "qrCodeForForm": "Form için QR Kodu",
+      "generating": "Oluşturuluyor...",
+      "scanForMobile": "Mobil erişim için tarayın",
+      "downloading": "İndiriliyor...",
+      "downloadQr": "QR İndir",
+      "needsPublish": "Formunuzun herkesle paylaşılabilmesi için önce yayınlanması gerekiyor.",
+      "publishing": "Yayınlanıyor...",
+      "publishForm": "Formu Yayınla",
+      "toasts": {
+        "failedGenerateQr": "QR kodu oluşturulamadı",
+        "linkCopied": "Bağlantı panoya kopyalandı!",
+        "failedCopyLink": "Bağlantı kopyalanamadı. Lütfen manuel olarak kopyalayın.",
+        "qrDownloaded": "QR kodu başarıyla indirildi!",
+        "failedDownloadQr": "QR kodu indirilemedi"
+      }
+    },
+    "secureImport": {
+      "title": "Şifreli Dosyadan Form İçe Aktar",
+      "description": "Bir .ikiform dosyasının şifresini çözün ve yeni bir taslak form oluşturun.",
+      "encryptedFileLabel": "Şifreli dosya",
+      "encryptedFileHelp": "Bir .ikiform şifreli dışa aktarma dosyası yükleyin.",
+      "passphraseLabel": "Parola",
+      "passphrasePlaceholder": "Dışa aktarmada kullanılan parolayı girin",
+      "passphraseHelp": "En az {count} karakter gereklidir.",
+      "decrypting": "Şifre çözülüyor...",
+      "decryptFile": "Dosyanın Şifresini Çöz",
+      "importedForm": "İçe aktarılan form",
+      "decryptToLoadSettings": "İçe aktarma ayarlarını yüklemek için bir dosyanın şifresini çözün.",
+      "preserveApiSettings": "API ayarlarını koru (API anahtarı ve etkin durum)",
+      "preservePassword": "Parola koruması parolasını koru",
+      "preserveNotificationEmail": "Bildirim alıcısı e-postasını koru",
+      "cancel": "İptal",
+      "importing": "İçe aktarılıyor...",
+      "importAsNewForm": "Yeni Form Olarak İçe Aktar",
+      "decryptToPreview": "İçe aktarılan formu önizlemek için bir dosyanın şifresini çözün.",
+      "errors": {
+        "chooseFile": "Lütfen şifreli bir .ikiform dosyası seçin.",
+        "passphraseMinChars": "Parola en az {count} karakter olmalıdır.",
+        "failedDecrypt": "İçe aktarma dosyasının şifresi çözülemedi.",
+        "wrongPassphrase": "Yanlış parola veya dosya değiştirilmiş olabilir.",
+        "decryptBeforeImport": "İçe aktarmadan önce bir dosyanın şifresini çözün.",
+        "failedImport": "Form içe aktarılamadı."
+      },
+      "toasts": {
+        "fixHighlightedFields": "Lütfen vurgulanan alanları düzeltin.",
+        "fileDecrypted": "Dosya şifresi çözüldü. İçe aktarma seçeneklerini inceleyin."
+      }
+    },
+    "secureExport": {
+      "title": "Formu Dışa Aktar (Güvenli)",
+      "description": "Bu form için şifreli bir .ikiform dosyası oluşturun. İçe aktarmak için aynı parolaya ihtiyacınız olacaktır.",
+      "untitledForm": "Başlıksız Form",
+      "formLabel": "Form",
+      "unknownForm": "Bilinmeyen form",
+      "passphraseSetup": "Parola kurulumu",
+      "passphraseLabel": "Parola",
+      "passphrasePlaceholder": "En az {count} karakter",
+      "passphraseHelper": "Daha güçlü şifreleme için en az 12 karakter kullanın.",
+      "confirmPassphraseLabel": "Parolayı onayla",
+      "confirmPassphrasePlaceholder": "Parolayı yeniden girin",
+      "confirmPassphraseHelper": "Aynı parolayı tekrar girin.",
+      "hidePassphrase": "Parolayı gizle",
+      "viewPassphrase": "Parolayı görüntüle",
+      "hideConfirmPassphrase": "Onay parolasını gizle",
+      "viewConfirmPassphrase": "Onay parolasını görüntüle",
+      "cancel": "İptal",
+      "exporting": "Dışa aktarılıyor...",
+      "exportEncryptedFile": "Şifreli Dosyayı Dışa Aktar",
+      "strength": {
+        "notSet": "Ayarlanmadı",
+        "weak": "Zayıf",
+        "good": "İyi",
+        "strong": "Güçlü"
+      },
+      "errors": {
+        "passphraseMinChars": "Parola en az {count} karakter olmalıdır.",
+        "confirmPassphraseMinChars": "Onay parolası en az {count} karakter olmalıdır.",
+        "passphrasesDoNotMatch": "Parolalar eşleşmiyor.",
+        "noFormSelected": "Dışa aktarmak için form seçilmedi.",
+        "enterValidPassphrase": "Lütfen geçerli bir parola girin ve onaylayın.",
+        "failedExport": "Form dışa aktarılamadı."
+      },
+      "toasts": {
+        "exportCreated": "Şifreli form dışa aktarımı oluşturuldu."
+      }
+    }
+  },
+  "admin": {
+    "page": {
+      "aria": {
+        "dashboard": "Yönetici paneli",
+        "announcements": "Duyuru yönetimi",
+        "expireTrials": "Deneme süresi yönetimi",
+        "users": "Kullanıcı yönetimi"
+      },
+      "announcements": {
+        "title": "Duyuru Gönder",
+        "signedInAs": "{email} olarak giriş yapıldı"
+      },
+      "expireTrials": {
+        "title": "Denemeleri Sona Erdir",
+        "description": "Ücretsiz denemeleri sona erdirmek için cron görevini manuel olarak çalıştırın"
+      },
+      "users": {
+        "title": "Tüm Kullanıcılar ({count})",
+        "description": "Kayıtlı tüm kullanıcıları yönetin ve görüntüleyin"
+      }
+    },
+    "announcementForm": {
+      "labels": {
+        "recipientEmails": "Alıcı e-postaları",
+        "subject": "Konu",
+        "content": "İçerik (Markdown desteklenir)"
+      },
+      "placeholders": {
+        "recipientEmails": "bir@ornek.com, iki@ornek.com\\nveya\\nuc@ornek.com",
+        "subject": "Duyuru konusu",
+        "content": "# Başlık\\n\\nAyrıntılar burada..."
+      },
+      "help": {
+        "recipientFormat": "Virgül veya yeni satırla ayrılır."
+      },
+      "actions": {
+        "loading": "Yükleniyor...",
+        "prefillFromUsers": "Kullanıcılardan doldur",
+        "sendAnnouncement": "Duyuru Gönder"
+      },
+      "toasts": {
+        "fetchEmailsFailed": "E-postalar getirilemedi",
+        "loadedEmails": "{count} e-posta yüklendi",
+        "sending": "Duyurular gönderiliyor...",
+        "sentCount": "{count} e-posta gönderildi",
+        "failedWithError": "Başarısız: {error}",
+        "failedToSendFallback": "Gönderilemedi"
+      }
+    },
+    "expireTrialsControl": {
+      "title": "Denemeleri Sona Erdir",
+      "description": "14 günden eski ücretsiz denemeleri sona erdirmek için cron görevini manuel olarak çalıştırın",
+      "unknownError": "Bilinmeyen hata",
+      "actions": {
+        "running": "Çalışıyor...",
+        "run": "Deneme Süresi Bitirimini Çalıştır"
+      },
+      "result": {
+        "success": "Başarılı",
+        "error": "Hata",
+        "updatedUsersCount": "{count} kullanıcı güncellendi",
+        "updatedUsers": "Güncellenen Kullanıcılar:"
+      },
+      "toasts": {
+        "updatedSuccess": "{count} kullanıcı başarıyla denemeden ücretsize güncellendi",
+        "failedWithError": "Başarısız: {error}",
+        "errorWithMessage": "Hata: {message}"
+      }
+    },
+    "usersTable": {
+      "search": {
+        "aria": "Kullanıcı ara",
+        "placeholder": "Kullanıcıları isim, e-posta, müşteri adı veya Polar ID ile arayın..."
+      },
+      "filters": {
+        "premiumAria": "Premium duruma göre filtrele",
+        "trialAria": "Deneme durumuna göre filtrele",
+        "allPremium": "Tüm Premium",
+        "premiumOnly": "Yalnızca Premium",
+        "freeOnly": "Yalnızca Ücretsiz",
+        "allTrial": "Tüm Denemeler",
+        "trialOnly": "Yalnızca Deneme",
+        "noTrial": "Deneme Yok",
+        "clearAria": "Tüm filtreleri temizle",
+        "clear": "Temizle",
+        "filteredBy": "Filtre:"
+      },
+      "columns": {
+        "uid": "UID",
+        "name": "Ad",
+        "email": "E-posta",
+        "premium": "Premium",
+        "trial": "Deneme",
+        "customerName": "Müşteri Adı",
+        "polarId": "Polar ID",
+        "created": "Oluşturuldu",
+        "updated": "Güncellendi"
+      },
+      "sort": {
+        "uidAria": "UID'ye göre sırala",
+        "nameAria": "Ada göre sırala",
+        "emailAria": "E-postaya göre sırala",
+        "premiumAria": "Premium duruma göre sırala",
+        "trialAria": "Deneme durumuna göre sırala",
+        "createdAria": "Oluşturma tarihine göre sırala",
+        "updatedAria": "Güncelleme tarihine göre sırala"
+      },
+      "table": {
+        "aria": "Kullanıcı tablosu"
+      },
+      "badges": {
+        "premium": "Premium",
+        "free": "Ücretsiz",
+        "freeTrial": "Ücretsiz Deneme",
+        "noFreeTrial": "Ücretsiz Deneme Yok"
+      },
+      "row": {
+        "viewDetailsFor": "{name} için ayrıntıları görüntüle",
+        "premiumStatusAria": "Premium durum: {status}",
+        "trialStatusAria": "Deneme durumu: {status}"
+      },
+      "showingRange": "{total} kullanıcıdan {start}-{end} gösteriliyor",
+      "showLabel": "Göster:",
+      "itemsPerPageAria": "Sayfa başına öğe",
+      "empty": {
+        "filtered": "Filtrelerinizle eşleşen kullanıcı yok",
+        "default": "Kullanıcı bulunamadı"
+      },
+      "pagination": {
+        "pageOf": "{total} sayfadan {current}. sayfa",
+        "previousAria": "Önceki sayfaya git",
+        "previous": "Önceki",
+        "goToPageAria": "{page}. sayfaya git",
+        "nextAria": "Sonraki sayfaya git",
+        "next": "Sonraki"
+      }
+    },
+    "userControls": {
+      "title": "Yönetici Kontrolleri",
+      "description": "Kullanıcı durumunu ve izinlerini yönetin",
+      "sections": {
+        "freeTrial": "Ücretsiz Deneme",
+        "premiumStatus": "Premium Durum",
+        "dangerZone": "Tehlikeli Bölge"
+      },
+      "actions": {
+        "removeTrial": "Denemeyi Kaldır",
+        "assignTrial": "Deneme Ata",
+        "removePremium": "Premiumu Kaldır",
+        "assignPremium": "Premium Ata",
+        "deleteUser": "Kullanıcıyı Sil"
+      },
+      "warning": {
+        "label": "Uyarı:",
+        "message": "Kullanıcı silindiğinde tüm formları, gönderileri ve verileri kalıcı olarak kaldırılır. Bu işlem geri alınamaz."
+      },
+      "confirm": {
+        "title": "Kullanıcıyı Sil",
+        "confirm": "Kullanıcıyı Sil",
+        "cancel": "İptal",
+        "description": "{userName} kullanıcısını silmek istediğinizden emin misiniz? Bu işlem geri alınamaz ve tüm formları ile verileri silinecektir."
+      }
+    },
+    "userProfile": {
+      "backToAdmin": "Yöneticiye Dön",
+      "invalidUserId": {
+        "title": "Geçersiz Kullanıcı ID'si",
+        "description": "URL'de kullanıcı ID'si sağlanmadı."
+      },
+      "notFound": {
+        "title": "Kullanıcı Bulunamadı",
+        "description": "Aradığınız kullanıcı mevcut değil."
+      },
+      "userInformation": "Kullanıcı Bilgileri",
+      "labels": {
+        "uid": "UID",
+        "premiumStatus": "Premium Durum",
+        "trialStatus": "Deneme Durumu",
+        "customerName": "Müşteri Adı",
+        "polarCustomerId": "Polar Müşteri ID'si",
+        "memberSince": "Üyelik Tarihi"
+      },
+      "badges": {
+        "premium": "Premium",
+        "free": "Ücretsiz",
+        "freeTrial": "Ücretsiz Deneme",
+        "noTrial": "Deneme Yok"
+      },
+      "trialStatus": {
+        "title": "Ücretsiz Deneme Durumu",
+        "expiredBadge": "Deneme Süresi Doldu",
+        "endedDaysAgo": "Ücretsiz deneme {days} gün önce sona erdi",
+        "expiringSoonBadge": "Yakında Sona Eriyor",
+        "activeBadge": "Aktif Deneme",
+        "daysLeft": "{days, plural, one {ücretsiz denemede # gün kaldı} other {ücretsiz denemede # gün kaldı}}",
+        "startedOn": "Deneme başladı:"
+      },
+      "forms": {
+        "title": "Formlar ({count})",
+        "description": "Bu kullanıcı tarafından oluşturulan tüm formlar",
+        "empty": "Bu kullanıcı henüz form oluşturmamış.",
+        "table": {
+          "formTitle": "Form Başlığı",
+          "description": "Açıklama",
+          "status": "Durum",
+          "submissions": "Gönderiler",
+          "created": "Oluşturuldu",
+          "actions": "İşlemler"
+        },
+        "status": {
+          "published": "Yayınlandı",
+          "draft": "Taslak"
+        },
+        "actions": {
+          "view": "Görüntüle",
+          "details": "Ayrıntılar"
+        }
+      }
+    },
+    "formDetails": {
+      "pageAria": "Form ayrıntıları sayfası",
+      "backToAdmin": "Yöneticiye Dön",
+      "backToAdminAria": "Yönetici paneline dön",
+      "noDescription": "Açıklama sağlanmadı",
+      "viewForm": "Formu Görüntüle",
+      "viewFormAria": "Formu yeni sekmede görüntüle",
+      "invalidFormId": {
+        "aria": "Geçersiz form ID'si hatası",
+        "title": "Geçersiz Form ID'si",
+        "description": "URL'de form ID'si sağlanmadı."
+      },
+      "notFound": {
+        "aria": "Form bulunamadı hatası",
+        "title": "Form Bulunamadı",
+        "description": "Aradığınız form mevcut değil."
+      },
+      "badges": {
+        "published": "Yayınlandı",
+        "draft": "Taslak",
+        "enabled": "Etkin",
+        "disabled": "Devre Dışı"
+      },
+      "statistics": {
+        "aria": "Form istatistikleri",
+        "status": "Durum",
+        "formStatusAria": "Form durumu: {status}",
+        "submissions": "Gönderiler",
+        "submissionsCountAria": "{count} gönderisi",
+        "created": "Oluşturuldu",
+        "createdOnAria": "{date} tarihinde oluşturuldu",
+        "apiStatus": "API Durumu",
+        "apiStatusAria": "API durumu: {status}"
+      },
+      "details": {
+        "title": "Form Ayrıntıları",
+        "formId": "Form ID'si",
+        "formIdAria": "Form ID'si: {id}",
+        "owner": "Sahip",
+        "viewOwnerAria": "{name} için sahip ayrıntılarını görüntüle",
+        "unknown": "Bilinmiyor",
+        "slug": "Slug",
+        "slugAria": "Form slug'ı: {slug}",
+        "notSet": "Ayarlanmadı",
+        "lastUpdated": "Son Güncelleme",
+        "lastUpdatedAria": "Son güncelleme: {date}",
+        "apiKey": "API Anahtarı",
+        "apiKeyAria": "API Anahtarı: {key}"
+      },
+      "schema": {
+        "title": "Form Şeması",
+        "aria": "Form şeması JSON"
+      },
+      "submissions": {
+        "title": "Form Gönderimleri ({count})",
+        "description": "Bu forma gönderilen tüm yanıtlar",
+        "emptyAria": "Form gönderimleri yok",
+        "empty": "Henüz gönderim yok.",
+        "listAria": "Form gönderim listesi",
+        "itemAria": "Gönderim {number}",
+        "itemLabel": "Gönderim #{number}",
+        "submittedOnAria": "{date} tarihinde gönderildi",
+        "ipAria": "IP adresi: {ip}",
+        "ipLabel": "IP: {ip}",
+        "fieldAria": "Alan: {key}",
+        "valueAria": "{key} için değer: {value}"
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "siteName": "Ikiform",
+  "routes": {
+    "home": {
+      "title": "Formulare erstellen, Antworten sammeln und Daten mühelos analysieren.",
+      "description": "Erstellen Sie ansprechende Formulare mit Ikiform und analysieren Sie Antworten mühelos.",
+      "keywords": ["Formular-Builder", "Online-Formulare", "Umfrage-Builder", "Typeform-Alternative", "Google Forms-Alternative"]
+    },
+    "changelog": {
+      "title": "Änderungsprotokoll",
+      "description": "Verfolgen Sie Produktaktualisierungen, Versionen und Verbesserungen in Ikiform.",
+      "keywords": ["Änderungsprotokoll", "Produktaktualisierungen", "Versionshinweise", "Ikiform-Updates"]
+    },
+    "legalPrivacy": {
+      "title": "Datenschutzrichtlinie",
+      "description": "Erfahren Sie, wie Ikiform Ihre personenbezogenen Daten erhebt, verwendet und schützt.",
+      "keywords": ["Datenschutzrichtlinie", "Datenschutz", "Ikiform Datenschutz"]
+    },
+    "legalTerms": {
+      "title": "Nutzungsbedingungen",
+      "description": "Lesen Sie die Nutzungsbedingungen von Ikiform für den Zugang und die Nutzung des Dienstes.",
+      "keywords": ["Nutzungsbedingungen", "Bedingungen", "Ikiform Rechtliches"]
+    },
+    "legalGdpr": {
+      "title": "DSGVO-Konformität",
+      "description": "Verstehen Sie die DSGVO-Kontrollen und die Datenverarbeitungspraxis von Ikiform.",
+      "keywords": ["DSGVO", "Datenschutz", "Konformität"]
+    },
+    "legalDpa": {
+      "title": "Auftragsverarbeitungsvertrag",
+      "description": "Lesen Sie den Auftragsverarbeitungsvertrag von Ikiform für Geschäftskunden.",
+      "keywords": ["AVV", "Auftragsverarbeitungsvertrag", "Konformität"]
+    },
+    "aiBuilder": {
+      "title": "KI-Formular-Builder",
+      "description": "Erstellen und passen Sie Formulare mit KI-gestützter Unterstützung in Ikiform an.",
+      "keywords": ["KI-Formular-Builder", "Formulargenerator", "Ikiform KI"]
+    },
+    "demoFormBuilder": {
+      "title": "Demo-Formular-Builder",
+      "description": "Testen Sie den Live-Demo-Formular-Builder von Ikiform und erkunden Sie die Funktionen sofort.",
+      "keywords": ["Formular-Builder-Demo", "Ikiform-Demo", "interaktiver Formular-Builder"]
+    },
+    "login": {
+      "title": "Anmelden",
+      "description": "Melden Sie sich bei Ihrem Ikiform-Konto an.",
+      "keywords": ["Ikiform Anmeldung", "anmelden"]
+    },
+    "resetPassword": {
+      "title": "Passwort zurücksetzen",
+      "description": "Setzen Sie das Passwort Ihres Ikiform-Kontos zurück.",
+      "keywords": ["Passwort zurücksetzen", "Kontowiederherstellung"]
+    },
+    "success": {
+      "title": "Erfolg",
+      "description": "Aktion erfolgreich abgeschlossen.",
+      "keywords": ["Erfolg"]
+    },
+    "embed": {
+      "title": "Einbetten",
+      "description": "Betten Sie Ikiform-Formulare in Ihre Website ein.",
+      "keywords": ["Formular einbetten", "Formular-Einbettung", "Ikiform einbetten"]
+    },
+    "embedTest": {
+      "title": "Einbettungstest",
+      "description": "Vorschau und Test eingebetteter Ikiform-Formulare.",
+      "keywords": ["Einbettungstest", "Formularvorschau"]
+    }
+  }
+}

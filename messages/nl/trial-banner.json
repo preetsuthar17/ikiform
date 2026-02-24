@@ -1,0 +1,16 @@
+{
+  "trialBanner": {
+    "aria": {
+      "status": "Melding proefperiodestatus"
+    },
+    "endsInPrefix": "Uw gratis proefperiode eindigt over ",
+    "remainingSuffix": " resterend",
+    "expired": "Proefperiode verlopen",
+    "units": {
+      "day": "d",
+      "hour": "u",
+      "minute": "m",
+      "second": "s"
+    }
+  }
+}

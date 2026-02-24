@@ -1,0 +1,2211 @@
+{
+  "common": {
+    "na": "N/D",
+    "premium": {
+      "title": "Richiede Premium",
+      "viewPricing": "Visualizza prezzi",
+      "aiBuilderDescription": "È necessario un abbonamento premium per utilizzare il costruttore di moduli AI. Aggiorna per sbloccare tutte le funzionalità.",
+      "formBuilderDescription": "È necessario un abbonamento premium per utilizzare il costruttore di moduli. Aggiorna per sbloccare tutte le funzionalità."
+    }
+  },
+  "formBuilder": {
+    "header": {
+      "title": "Costruttore di moduli",
+      "goToDashboard": "Vai alla dashboard",
+      "fieldCount": "{count} campo",
+      "fieldCount_plural": "{count} campi",
+      "saving": "Salvataggio",
+      "moreActions": "Altre azioni",
+      "multiStepForm": "Modulo a più passaggi",
+      "toggleMultiStepMode": "Attiva/disattiva modalità a più passaggi",
+      "viewJson": "Visualizza JSON",
+      "analytics": "Analisi",
+      "share": "Condividi",
+      "useKiko": "Usa Kiko",
+      "settings": "Impostazioni",
+      "publish": "Pubblica",
+      "published": "Pubblicato",
+      "publishing": "Pubblicazione...",
+      "unpublishing": "Annullamento pubblicazione...",
+      "publishForm": "Pubblica modulo",
+      "unpublishForm": "Annulla pubblicazione modulo",
+      "save": "Salva",
+      "saveForm": "Salva modulo",
+      "actionsAria": "Azioni del costruttore di moduli"
+    },
+    "modals": {
+      "formSettings": "Impostazioni modulo",
+      "internalTitle": "Titolo interno",
+      "internalTitlePlaceholder": "Inserisci il titolo interno per il tuo riferimento...",
+      "internalTitleDescription": "Questo titolo è visibile solo a te nella dashboard e nel costruttore di moduli",
+      "publicTitle": "Titolo pubblico",
+      "publicTitlePlaceholder": "Inserisci il titolo da mostrare agli utenti...",
+      "publicTitleDescription": "Questo titolo verrà mostrato agli utenti nel modulo effettivo. Lascia vuoto per usare il titolo interno.",
+      "description": "Descrizione",
+      "descriptionPlaceholder": "Inserisci la descrizione del modulo",
+      "submitButtonText": "Testo del pulsante di invio",
+      "submitButtonTextPlaceholder": "Testo del pulsante di invio",
+      "submit": "Invia",
+      "successMessage": "Messaggio di successo",
+      "successMessagePlaceholder": "Messaggio mostrato dopo l'invio riuscito",
+      "redirectUrlOptional": "URL di reindirizzamento (opzionale)",
+      "redirectUrlPlaceholder": "https://esempio.com/grazie",
+      "cancel": "Annulla",
+      "saveSettings": "Salva impostazioni"
+    },
+    "page": {
+      "formFields": "Campi del modulo",
+      "authRequired": "Autenticazione richiesta",
+      "authRequiredDescription": "Accedi per utilizzare il costruttore di moduli.",
+      "goToLogin": "Vai al login",
+      "stepDefaultTitle": "Passaggio {index}",
+      "stepDefaultDescription": "Primo passaggio del tuo modulo",
+      "loadingCustomization": "Caricamento personalizzazione..."
+    },
+    "blockManager": {
+      "header": {
+        "title": "Struttura del modulo",
+        "stepsCount": "{count, plural, one {# passaggio} other {# passaggi}}",
+        "description": "Organizza il tuo modulo in sezioni logiche",
+        "addStepAria": "Aggiungi nuovo passaggio al modulo",
+        "addStep": "Aggiungi passaggio"
+      },
+      "item": {
+        "dragHandleAria": "Trascina per riordinare il passaggio {title}",
+        "dragToReorder": "Trascina per riordinare"
+      },
+      "headerActions": {
+        "stepBadge": "Passaggio {index}",
+        "editStepAria": "Modifica il passaggio {title}",
+        "deleteStepAria": "Elimina il passaggio {title}",
+        "editStep": "Modifica passaggio",
+        "deleteStep": "Elimina passaggio",
+        "collapseStep": "Comprimi passaggio",
+        "expandStep": "Espandi passaggio"
+      },
+      "editForm": {
+        "stepTitlePlaceholder": "Titolo del passaggio",
+        "stepDescriptionPlaceholder": "Descrizione del passaggio (opzionale)",
+        "save": "Salva",
+        "cancel": "Annulla"
+      },
+      "fieldsList": {
+        "empty": "Nessun campo ancora. Aggiungi campi dalla palette a destra."
+      }
+    },
+    "multiStepNavigation": {
+      "deleteStep": "Elimina passaggio",
+      "addStep": "Aggiungi passaggio",
+      "deleteDialogTitle": "Elimina passaggio",
+      "deleteDialogDescription": "Sei sicuro di voler eliminare questo passaggio? Questa azione non può essere annullata.",
+      "cancel": "Annulla"
+    },
+    "formFields": {
+      "addFieldToFormAria": "Aggiungi campo al modulo",
+      "addField": "Aggiungi campo",
+      "addSpecificFieldAria": "Aggiungi campo {label}",
+      "formFields": "Campi del modulo",
+      "noFieldsInStep": "Nessun campo in questo passaggio",
+      "noFieldsYet": "Nessun campo aggiunto ancora",
+      "addFieldsToStep": "Aggiungi campi dalla palette a questo passaggio",
+      "addFieldsFromLeftPanel": "Aggiungi campi dal pannello sinistro per iniziare a costruire il tuo modulo",
+      "fieldsCount": "{count, plural, one {# campo} other {# campi}}",
+      "fieldAria": "Campo {type}",
+      "deleteFieldAria": "Elimina campo {type}",
+      "deleteField": "Elimina campo"
+    },
+    "jsonViewModal": {
+      "title": "JSON schema del modulo",
+      "description": "Visualizzazione in sola lettura dello schema del modulo corrente. Usa il pulsante copia per copiare il JSON.",
+      "copySuccess": "JSON copiato negli appunti!",
+      "copyError": "Impossibile copiare il JSON",
+      "copied": "Copiato",
+      "copyJson": "Copia JSON"
+    },
+    "settingsMobile": {
+      "sectionsAria": "Sezioni impostazioni",
+      "goToSectionAria": "Vai alle impostazioni di {section}",
+      "backToListAria": "Torna all'elenco impostazioni",
+      "settings": "Impostazioni"
+    },
+    "creation": {
+      "title": "Crea un nuovo modulo",
+      "cancel": "Annulla",
+      "back": "Indietro",
+      "createForm": "Crea modulo",
+      "reviewAction": "Revisione",
+      "next": "Avanti",
+      "types": {
+        "single": {
+          "title": "Modulo a pagina singola",
+          "description": "Modulo tradizionale con tutti i campi su una pagina"
+        },
+        "multi": {
+          "title": "Modulo a più passaggi",
+          "description": "Esperienza guidata con più passaggi"
+        }
+      },
+      "typePreview": {
+        "stepOf": "Passaggio {step} di {total}"
+      },
+      "configuration": {
+        "title": "Dettagli del modulo",
+        "description": "Imposta le informazioni interne e pubbliche del tuo modulo.",
+        "internalTitle": "Titolo interno",
+        "internalTitlePlaceholder": "Inserisci il titolo interno per il tuo riferimento…",
+        "internalTitleHelp": "Visibile solo nella dashboard e nel costruttore.",
+        "publicTitle": "Titolo pubblico",
+        "publicTitlePlaceholder": "Inserisci il titolo da mostrare agli utenti…",
+        "publicTitleHelp": "Mostrato agli utenti nel modulo. Lascia vuoto per riutilizzare il titolo interno.",
+        "formDescription": "Descrizione del modulo",
+        "formDescriptionPlaceholder": "Inserisci una breve descrizione per guidare gli utenti…",
+        "formDescriptionHelp": "Opzionale. Aiuta gli utenti a capire lo scopo del modulo."
+      },
+      "review": {
+        "formType": "Tipo di modulo",
+        "multiStepForm": "Modulo a più passaggi",
+        "singlePageForm": "Modulo a pagina singola",
+        "multiStep": "A più passaggi",
+        "singlePage": "Pagina singola",
+        "editFormType": "Modifica tipo di modulo",
+        "formConfiguration": "Configurazione del modulo",
+        "editFormConfiguration": "Modifica configurazione del modulo",
+        "internalTitle": "Titolo interno",
+        "publicTitle": "Titolo pubblico",
+        "description": "Descrizione",
+        "preview": "Anteprima",
+        "previewDescription": "Istantanea del tuo modulo."
+      },
+      "stepIndicator": {
+        "progress": "Avanzamento",
+        "stepCompleted": "Passaggio {index} completato",
+        "stepCurrent": "Passaggio {index} corrente",
+        "step": "Passaggio {index}"
+      }
+    },
+    "customize": {
+      "page": {
+        "savedCustomization": "Personalizzazione salvata",
+        "saveFailed": "Impossibile salvare le modifiche. Riprova.",
+        "tabs": {
+          "presets": "Preset",
+          "layout": "Layout",
+          "colors": "Colori",
+          "text": "Testo"
+        },
+        "backToCustomize": "Torna alla personalizzazione",
+        "previewForm": "Anteprima modulo",
+        "customizeForm": "Personalizza modulo",
+        "publicTitle": "Titolo pubblico: \"{title}\"",
+        "customizationActions": "Azioni di personalizzazione",
+        "back": "Indietro",
+        "save": "Salva",
+        "customize": "Personalizza"
+      },
+      "colors": {
+        "title": "Impostazioni colore",
+        "description": "Personalizza colori e tema",
+        "backgroundColorLabel": "Colore di sfondo",
+        "backgroundColorHelp": "Imposta il colore di sfondo del contenitore del modulo",
+        "textColorLabel": "Colore del testo",
+        "textColorHelp": "Imposta il colore di tutti gli elementi di testo nel modulo",
+        "primaryColorLabel": "Colore primario (pulsanti e accento)",
+        "primaryColorHelp": "Imposta il colore per pulsanti, stati di focus ed elementi di accento",
+        "borderColorLabel": "Colore del bordo",
+        "borderColorHelp": "Imposta il colore per i bordi dei campi di input e i divisori",
+        "websiteBackgroundColorLabel": "Colore di sfondo del sito web",
+        "websiteBackgroundColorHelp": "Imposta il colore di sfondo dell'intero sito web/pagina"
+      },
+      "typography": {
+        "title": "Impostazioni tipografia",
+        "description": "Personalizza font e stile del testo",
+        "fontFamily": "Famiglia di font",
+        "fontFamilyPlaceholder": "Seleziona un Google Font...",
+        "fontPreview": "Anteprima font",
+        "previewLine1": "La volpe veloce salta sul cane pigro",
+        "previewLine2": "Testo del modulo di esempio con numeri 1234567890",
+        "fontHelp": "Scegli tra centinaia di Google Fonts. Il font verrà caricato automaticamente.",
+        "fontSize": "Dimensione del font",
+        "fontWeight": "Peso del font",
+        "selected": "Selezionato:",
+        "fontSizeOptions": {
+          "xs": {
+            "label": "Molto piccolo",
+            "description": "12px"
+          },
+          "sm": {
+            "label": "Piccolo",
+            "description": "14px"
+          },
+          "base": {
+            "label": "Base",
+            "description": "16px"
+          },
+          "lg": {
+            "label": "Grande",
+            "description": "18px"
+          },
+          "xl": {
+            "label": "Molto grande",
+            "description": "20px"
+          }
+        },
+        "fontWeightOptions": {
+          "light": {
+            "label": "Leggero",
+            "description": "300"
+          },
+          "normal": {
+            "label": "Normale",
+            "description": "400"
+          },
+          "medium": {
+            "label": "Medio",
+            "description": "500"
+          },
+          "semibold": {
+            "label": "Semi-grassetto",
+            "description": "600"
+          },
+          "bold": {
+            "label": "Grassetto",
+            "description": "700"
+          }
+        }
+      },
+      "layout": {
+        "title": "Impostazioni layout",
+        "description": "Configura spaziatura e struttura",
+        "showProgressBar": "Mostra barra di avanzamento",
+        "formWidth": "Larghezza modulo",
+        "formWidthHelp": "Controlla la larghezza massima del contenitore del modulo",
+        "customWidth": "Larghezza personalizzata (es. 600px, 80%, 50rem)",
+        "customWidthPlaceholder": "Inserisci larghezza personalizzata",
+        "internalPadding": "Padding interno",
+        "internalPaddingHelp": "Controlla lo spazio all'interno del contenitore del modulo",
+        "externalMargin": "Margine esterno",
+        "externalMarginHelp": "Controlla lo spazio attorno al contenitore del modulo",
+        "cornerRadius": "Raggio degli angoli",
+        "cornerRadiusHelp": "Controlla quanto sono arrotondati gli angoli del modulo",
+        "widthOptions": {
+          "sm": {
+            "label": "Piccolo",
+            "description": "Larghezza max 400px"
+          },
+          "md": {
+            "label": "Medio",
+            "description": "Larghezza max 600px"
+          },
+          "lg": {
+            "label": "Grande",
+            "description": "Larghezza max 800px"
+          },
+          "xl": {
+            "label": "Molto grande",
+            "description": "Larghezza max 1000px"
+          },
+          "full": {
+            "label": "Larghezza piena",
+            "description": "Larghezza 100%"
+          },
+          "custom": {
+            "label": "Personalizzato",
+            "description": "Valore di larghezza personalizzato"
+          }
+        },
+        "paddingOptions": {
+          "none": {
+            "label": "Nessuno",
+            "description": "Padding 0px"
+          },
+          "sm": {
+            "label": "Piccolo",
+            "description": "Padding 16px"
+          },
+          "md": {
+            "label": "Medio",
+            "description": "Padding 24px"
+          },
+          "lg": {
+            "label": "Grande",
+            "description": "Padding 32px"
+          }
+        },
+        "marginOptions": {
+          "none": {
+            "label": "Nessuno",
+            "description": "Nessun margine"
+          },
+          "sm": {
+            "label": "Piccolo",
+            "description": "8px"
+          },
+          "md": {
+            "label": "Medio",
+            "description": "16px"
+          },
+          "lg": {
+            "label": "Grande",
+            "description": "32px"
+          }
+        },
+        "radiusOptions": {
+          "none": {
+            "label": "Nessuno",
+            "description": "0px (angoli netti)"
+          },
+          "sm": {
+            "label": "Piccolo",
+            "description": "Raggio bordo 4px"
+          },
+          "md": {
+            "label": "Medio",
+            "description": "Raggio bordo 8px"
+          },
+          "lg": {
+            "label": "Grande",
+            "description": "Raggio bordo 16px"
+          },
+          "xl": {
+            "label": "Molto grande",
+            "description": "Raggio bordo 24px"
+          }
+        }
+      },
+      "presets": {
+        "title": "Preset di design",
+        "description": "Inizia subito con stili di modulo pre-progettati e bellissimi",
+        "category": "Categoria",
+        "allPresets": "Tutti i preset",
+        "presets": "Preset",
+        "presetCount": "{count, plural, one {# preset} other {# preset}}",
+        "presetList": "Elenco preset",
+        "applyPresetAria": "Applica preset {name}",
+        "appliedPreset": "Preset \"{name}\" applicato",
+        "formTitle": "Titolo del modulo",
+        "submit": "Invia"
+      },
+      "preview": {
+        "title": "Anteprima in tempo reale",
+        "description": "Guarda come apparirà il tuo modulo con le personalizzazioni applicate",
+        "sampleTitle": "Modulo di esempio",
+        "sampleDescription": "Ecco come apparirà il tuo modulo con le impostazioni di design correnti.",
+        "nameLabel": "Nome *",
+        "namePlaceholder": "Inserisci il tuo nome",
+        "emailLabel": "Email *",
+        "emailPlaceholder": "Inserisci la tua email",
+        "categoryLabel": "Categoria",
+        "categoryPlaceholder": "Seleziona una categoria",
+        "categoryGeneral": "Richiesta generale",
+        "categorySupport": "Supporto",
+        "categorySales": "Vendite",
+        "messageLabel": "Messaggio",
+        "messagePlaceholder": "Inserisci il tuo messaggio",
+        "submitButton": "Invia modulo",
+        "previousStepAria": "Passaggio precedente",
+        "previousStep": "Precedente",
+        "nextStepAria": "Passaggio successivo",
+        "nextStep": "Avanti",
+        "submitAria": "Invia modulo"
+      }
+    },
+    "toasts": {
+      "loginRequiredToSave": "Accedi per salvare il tuo modulo.",
+      "formSaved": "Modulo salvato con successo!",
+      "formCreated": "Modulo creato con successo!",
+      "saveFailed": "Impossibile salvare il modulo. Riprova.",
+      "saveBeforeShare": "Salva il modulo prima di condividerlo.",
+      "formPublished": "Modulo pubblicato con successo!",
+      "publishFailed": "Impossibile pubblicare il modulo. Riprova.",
+      "saveBeforeAnalytics": "Salva il modulo prima di visualizzare le analisi.",
+      "loadingAnalytics": "Caricamento analisi",
+      "saveBeforePublish": "Salva il modulo prima di pubblicarlo.",
+      "userAuthRequired": "Autenticazione utente richiesta",
+      "formUnpublished": "Pubblicazione del modulo annullata con successo!",
+      "updateStatusFailed": "Impossibile aggiornare lo stato del modulo. Riprova.",
+      "saveSettingsFailed": "Impossibile salvare le impostazioni. Riprova.",
+      "loadFailed": "Impossibile caricare il modulo. Riprova."
+    },
+    "formPreview": {
+      "titlePlaceholder": "Clicca per aggiungere un titolo...",
+      "descriptionPlaceholder": "Clicca per aggiungere una descrizione...",
+      "publicTitle": "Titolo pubblico: \"{title}\"",
+      "stepTitlePlaceholder": "Clicca per aggiungere il titolo del passaggio...",
+      "stepDescriptionPlaceholder": "Clicca per aggiungere una descrizione del passaggio...",
+      "stepBadge": "Passaggio {index}",
+      "editFieldAria": "Modifica campo",
+      "clickToEdit": "Clicca per modificare"
+    },
+    "fieldPalette": {
+      "headerTitle": "Campi del modulo",
+      "headerDescription": "Clicca per aggiungere campi al tuo modulo",
+      "ariaPalette": "Palette dei campi",
+      "searchAria": "Cerca campi",
+      "searchPlaceholder": "Cerca campi...",
+      "categoryFieldsAria": "Campi {category}",
+      "noFieldsFound": "Nessun campo trovato corrispondente a \"{searchTerm}\"",
+      "searchHint": "Prova a cercare per nome campo, descrizione o tipo",
+      "addFieldAria": "Aggiungi campo {label}",
+      "categories": {
+        "input": "Campi di input",
+        "selection": "Campi di selezione",
+        "media": "Campi multimediali",
+        "layout": "Campi di layout",
+        "advanced": "Campi avanzati"
+      },
+      "fields": {
+        "text": {
+          "label": "Input di testo",
+          "description": "Una riga singola per risposte di testo breve."
+        },
+        "email": {
+          "label": "Email",
+          "description": "Raccogli un indirizzo email valido."
+        },
+        "number": {
+          "label": "Numero",
+          "description": "Input per valori numerici."
+        },
+        "phone": {
+          "label": "Numero di telefono",
+          "description": "Input per numeri di telefono con validazione."
+        },
+        "textarea": {
+          "label": "Area di testo",
+          "description": "Un campo a più righe per testi più lunghi."
+        },
+        "date": {
+          "label": "Data",
+          "description": "Seleziona una data da un calendario."
+        },
+        "time": {
+          "label": "Ora",
+          "description": "Seleziona o inserisci un orario."
+        },
+        "address": {
+          "label": "Indirizzo",
+          "description": "Input per via, città e altri dettagli dell'indirizzo."
+        },
+        "link": {
+          "label": "Collegamento",
+          "description": "Input per un URL di sito web valido."
+        },
+        "select": {
+          "label": "Menu a discesa",
+          "description": "Menu a discesa per scegliere un'opzione."
+        },
+        "radio": {
+          "label": "Pulsanti radio",
+          "description": "Scegli una singola opzione da un elenco."
+        },
+        "checkbox": {
+          "label": "Caselle di controllo",
+          "description": "Seleziona una o più opzioni."
+        },
+        "slider": {
+          "label": "Cursore",
+          "description": "Scegli un valore trascinando un indicatore."
+        },
+        "rating": {
+          "label": "Valutazione",
+          "description": "Raccogli una valutazione a stelle o icone."
+        },
+        "poll": {
+          "label": "Sondaggio",
+          "description": "Lascia che gli utenti votino su più opzioni."
+        },
+        "file": {
+          "label": "Caricamento file",
+          "description": "Carica file con limiti di dimensione e tipo."
+        },
+        "signature": {
+          "label": "Firma",
+          "description": "Disegna o firma con mouse o tocco."
+        },
+        "statement": {
+          "label": "Dichiarazione",
+          "description": "Mostra un titolo o una descrizione nel modulo."
+        },
+        "banner": {
+          "label": "Banner",
+          "description": "Mostra un messaggio evidenziato o un avviso."
+        },
+        "field-group": {
+          "label": "Gruppo di campi",
+          "description": "Raggruppa i campi insieme in una riga."
+        },
+        "tags": {
+          "label": "Input tag",
+          "description": "Inserisci e gestisci più tag."
+        },
+        "social": {
+          "label": "Social media",
+          "description": "Aggiungi link ai profili social media."
+        },
+        "scheduler": {
+          "label": "Pianificatore",
+          "description": "Incorpora un link di pianificazione (es. Calendly)."
+        }
+      }
+    },
+    "fieldSettings": {
+      "header": {
+        "title": "Impostazioni campo",
+        "closeAria": "Chiudi impostazioni campo"
+      },
+      "emptyState": {
+        "title": "Nessun campo selezionato",
+        "description": "Clicca su un campo nell'anteprima per modificare le sue impostazioni"
+      },
+      "basic": {
+        "title": "Impostazioni di base",
+        "fieldLabel": "Etichetta campo",
+        "fieldLabelPlaceholder": "Inserisci etichetta campo",
+        "fieldLabelHelp": "L'etichetta che appare sopra il campo",
+        "placeholder": "Segnaposto",
+        "placeholderPlaceholder": "Inserisci testo segnaposto",
+        "placeholderHelp": "Testo suggerimento che appare all'interno del campo",
+        "description": "Descrizione",
+        "descriptionPlaceholder": "Inserisci la descrizione del campo (mostrata sotto il campo)",
+        "descriptionHelp": "Testo di aiuto aggiuntivo mostrato sotto il campo",
+        "required": "Campo obbligatorio",
+        "requiredHelp": "Gli utenti devono compilare questo campo per inviare il modulo"
+      },
+      "validation": {
+        "title": "Validazione",
+        "minLength": "Lunghezza minima",
+        "minLengthPlaceholder": "Min caratteri",
+        "minLengthHelp": "Numero minimo di caratteri richiesti",
+        "maxLength": "Lunghezza massima",
+        "maxLengthPlaceholder": "Max caratteri",
+        "maxLengthHelp": "Numero massimo di caratteri consentiti",
+        "pattern": "Pattern (Regex)",
+        "patternPlaceholder": "Espressione regolare",
+        "patternHelp": "Pattern di espressione regolare per la validazione",
+        "minValue": "Valore minimo",
+        "minValuePlaceholder": "Valore min",
+        "minValueHelp": "Valore numerico minimo consentito",
+        "maxValue": "Valore massimo",
+        "maxValuePlaceholder": "Valore max",
+        "maxValueHelp": "Valore numerico massimo consentito"
+      },
+      "errorMessages": {
+        "title": "Messaggi di errore personalizzati",
+        "requiredFieldMessage": "Messaggio campo obbligatorio",
+        "requiredFieldPlaceholder": "Questo campo è obbligatorio",
+        "minLengthMessage": "Messaggio errore lunghezza minima",
+        "minLengthPlaceholder": "Deve contenere almeno {count} caratteri",
+        "maxLengthMessage": "Messaggio errore lunghezza massima",
+        "maxLengthPlaceholder": "Non può superare {count} caratteri",
+        "patternMessage": "Messaggio errore pattern",
+        "patternPlaceholder": "Inserisci un formato valido",
+        "emailMessage": "Messaggio errore email",
+        "emailPlaceholder": "Inserisci un indirizzo email valido",
+        "minValueMessage": "Messaggio errore valore minimo",
+        "minValuePlaceholder": "Deve essere almeno {value}",
+        "maxValueMessage": "Messaggio errore valore massimo",
+        "maxValuePlaceholder": "Non può superare {value}",
+        "invalidNumberMessage": "Messaggio numero non valido",
+        "invalidNumberPlaceholder": "Inserisci un numero valido"
+      },
+      "options": {
+        "title": "Opzioni",
+        "addOptionAria": "Aggiungi nuova opzione",
+        "addOption": "Aggiungi opzione",
+        "optionPlaceholder": "Opzione {index}",
+        "removeOptionAria": "Rimuovi opzione {index}",
+        "none": "Nessuna opzione aggiunta ancora",
+        "or": "O",
+        "orAria": "oppure",
+        "fetchFromApi": "Recupera da API",
+        "apiEndpointPlaceholder": "https://tua-api.com/opzioni",
+        "apiEndpointHelp": "Endpoint API da cui recuperare le opzioni",
+        "valueKeyPlaceholder": "Chiave valore (es. id)",
+        "valueKeyHelp": "Chiave per i valori delle opzioni",
+        "labelKeyPlaceholder": "Chiave etichetta (es. nome)",
+        "labelKeyHelp": "Chiave per le etichette delle opzioni",
+        "apiGuidanceTitle": "Guida ai dati API:",
+        "apiGuidanceIntro": "Questo campo recupererà le opzioni dall'endpoint API:",
+        "apiShouldReturn": "L'API dovrebbe restituire:",
+        "apiType1Hint": "(array di stringhe)",
+        "apiType2Hint": "(array di oggetti)",
+        "apiType3Hint": "(oggetto con array di opzioni)",
+        "apiType4Hint": "(chiavi personalizzate)",
+        "apiCustomKeysHelp": "Puoi specificare chiavi personalizzate sopra per mappare i dati della tua API.",
+        "apiValueLabelHelp": "Ogni opzione deve avere una proprietà",
+        "apiValueLabelHelpOr": "(o la tua chiave personalizzata).",
+        "apiValueLabelHelpSuffix": "è opzionale."
+      },
+      "prepopulation": {
+        "title": "Pre-compilazione",
+        "unknownError": "Errore sconosciuto",
+        "enabled": "Abilita pre-compilazione",
+        "enabledHelp": "Compila automaticamente questo campo con i dati esistenti",
+        "dataSource": "Fonte dati",
+        "sources": {
+          "url": "Parametri URL",
+          "api": "API esterna",
+          "profile": "Profilo utente",
+          "previous": "Invio precedente"
+        },
+        "urlParamName": "Nome parametro URL",
+        "urlParamPlaceholder": "es. nome, email, telefono",
+        "urlParamHelp": "Il nome del parametro da estrarre dalla stringa di query URL",
+        "fallbackValue": "Valore di fallback",
+        "fallbackValuePlaceholder": "Valore predefinito se il parametro manca",
+        "fallbackValueHelp": "Valore predefinito da usare se il parametro URL è assente",
+        "overwriteExisting": "Sovrascrivi esistente",
+        "overwriteExistingHelp": "Sostituisci l'input dell'utente con il valore pre-compilato",
+        "generatePreviewAria": "Genera URL di anteprima",
+        "generatePreview": "Genera URL di anteprima",
+        "previewUrlLabel": "URL di anteprima:",
+        "previewUrlHelp": "Questo URL pre-compilerà il campo con \"{label} di esempio\"",
+        "apiEndpoint": "Endpoint API",
+        "apiEndpointPlaceholder": "https://api.esempio.com/dati-utente",
+        "apiEndpointHelp": "L'endpoint API da cui recuperare i dati",
+        "httpMethod": "Metodo HTTP",
+        "requestHeaders": "Intestazioni richiesta (JSON)",
+        "requestHeadersHelp": "Oggetto JSON contenente intestazioni HTTP per la richiesta API",
+        "testApiAria": "Testa endpoint API",
+        "testApi": "Testa endpoint API",
+        "comingSoonLabel": "Prossimamente:",
+        "profileComingSoon": "La pre-compilazione del profilo utente sarà disponibile in un aggiornamento futuro.",
+        "previousComingSoon": "La pre-compilazione dell'invio precedente sarà disponibile in un aggiornamento futuro.",
+        "toasts": {
+          "missingUrlParam": "Inserisci prima un nome di parametro URL",
+          "previewUrlCopied": "URL di anteprima copiato negli appunti!",
+          "previewUrlCopyFailed": "Impossibile copiare l'URL di anteprima",
+          "missingApiEndpoint": "Inserisci prima un endpoint API",
+          "apiReachable": "L'endpoint API è raggiungibile!",
+          "apiTestFailedStatus": "Test API fallito: {status} {statusText}",
+          "apiTestFailedError": "Test API fallito: {error}"
+        }
+      },
+      "date": {
+        "title": "Impostazioni campo data",
+        "minDate": "Data minima",
+        "selectMinDate": "Seleziona data minima",
+        "maxDate": "Data massima",
+        "selectMaxDate": "Seleziona data massima",
+        "defaultDate": "Data predefinita",
+        "selectDefaultDate": "Seleziona data predefinita"
+      },
+      "number": {
+        "title": "Impostazioni campo numero",
+        "minValue": "Valore minimo",
+        "noMinimum": "Nessun minimo",
+        "minValueHelp": "Valore numerico minimo consentito",
+        "maxValue": "Valore massimo",
+        "noMaximum": "Nessun massimo",
+        "maxValueHelp": "Valore numerico massimo consentito",
+        "stepSize": "Dimensione passo",
+        "stepSizeHelp": "Dimensione del passo di incremento/decremento per l'input numerico",
+        "defaultValue": "Valore predefinito",
+        "noDefault": "Nessun predefinito",
+        "defaultValueHelp": "Valore pre-compilato quando il modulo viene caricato"
+      },
+      "radio": {
+        "title": "Impostazioni quiz",
+        "enableQuizQuestion": "Abilita come domanda di quiz",
+        "correctAnswer": "Risposta corretta",
+        "correctAnswerPlaceholder": "Seleziona la risposta corretta",
+        "points": "Punti per risposta corretta",
+        "showCorrectAnswer": "Mostra risposta corretta dopo l'invio",
+        "explanation": "Spiegazione (opzionale)",
+        "explanationPlaceholder": "Spiega perché questa è la risposta corretta..."
+      },
+      "address": {
+        "title": "Impostazioni campo indirizzo",
+        "requiredLines": "Righe indirizzo obbligatorie",
+        "requiredLinesPlaceholder": "es. 2 (Riga indirizzo 1 e Città obbligatorie)",
+        "requiredLinesHelp": "Numero di righe indirizzo che devono essere compilate (1-5)",
+        "customErrorMessage": "Messaggio di errore personalizzato",
+        "customErrorPlaceholder": "Completa tutti i campi indirizzo obbligatori",
+        "customErrorHelp": "Messaggio di errore personalizzato mostrato quando i campi indirizzo obbligatori sono incompleti"
+      },
+      "phone": {
+        "title": "Impostazioni campo telefono",
+        "pattern": "Pattern Regex personalizzato",
+        "patternPlaceholder": "es. ^\\+?[0-9]{10,15}$",
+        "patternHelp": "Pattern di espressione regolare per la validazione del numero di telefono",
+        "errorMessage": "Messaggio di errore personalizzato",
+        "errorMessagePlaceholder": "Inserisci un numero di telefono valido",
+        "errorMessageHelp": "Messaggio di errore personalizzato mostrato quando la validazione del telefono fallisce"
+      },
+      "statement": {
+        "title": "Impostazioni campo dichiarazione",
+        "heading": "Intestazione",
+        "headingPlaceholder": "Inserisci intestazione dichiarazione",
+        "headingHelp": "Intestazione principale per la dichiarazione",
+        "description": "Descrizione",
+        "descriptionPlaceholder": "Inserisci descrizione dichiarazione",
+        "descriptionHelp": "Descrizione dettagliata per la dichiarazione",
+        "alignment": "Allineamento",
+        "alignmentPlaceholder": "Seleziona allineamento",
+        "alignLeft": "Sinistra",
+        "alignCenter": "Centro",
+        "alignRight": "Destra",
+        "alignmentHelp": "Allineamento del testo per la dichiarazione",
+        "size": "Dimensione",
+        "sizePlaceholder": "Seleziona dimensione",
+        "sizeSmall": "Piccola",
+        "sizeMedium": "Media",
+        "sizeLarge": "Grande",
+        "sizeHelp": "Dimensione del font per la dichiarazione"
+      },
+      "slider": {
+        "title": "Impostazioni cursore",
+        "mode": "Modalità cursore",
+        "modePlaceholder": "Seleziona modalità cursore",
+        "modeSingle": "Valore singolo",
+        "modeRange": "Intervallo (min + max)",
+        "modeHelp": "Scegli un valore o lascia che gli utenti scelgano un minimo e un massimo",
+        "min": "Valore minimo",
+        "minHelp": "Valore minimo per il cursore",
+        "max": "Valore massimo",
+        "maxHelp": "Valore massimo per il cursore",
+        "step": "Dimensione passo",
+        "stepHelp": "Dimensione del passo di incremento/decremento per il cursore",
+        "defaultMin": "Minimo predefinito",
+        "defaultMinHelp": "Valore minimo pre-compilato quando il modulo viene caricato",
+        "defaultMax": "Massimo predefinito",
+        "defaultMaxHelp": "Valore massimo pre-compilato quando il modulo viene caricato",
+        "defaultValue": "Valore predefinito",
+        "defaultValueHelp": "Valore pre-compilato quando il modulo viene caricato"
+      },
+      "text": {
+        "title": "Impostazioni campo testo",
+        "maxLength": "Lunghezza massima",
+        "maxLengthPlaceholder": "Nessun limite",
+        "maxLengthHelp": "Numero massimo di caratteri consentiti (1-1000)",
+        "minLength": "Lunghezza minima",
+        "minLengthPlaceholder": "Nessun minimo",
+        "minLengthHelp": "Numero minimo di caratteri richiesti (0-1000)"
+      },
+      "checkbox": {
+        "title": "Opzioni caselle di controllo",
+        "options": "Opzioni",
+        "addOptionPlaceholder": "Aggiungi opzione",
+        "addOptionAria": "Aggiungi opzione casella di controllo",
+        "optionsHelp": "Aggiungi opzioni tra cui gli utenti possono scegliere",
+        "removeOptionAria": "Rimuovi opzione {index}",
+        "allowMultiple": "Consenti selezione multipla",
+        "allowMultipleHelp": "Se abilitato, gli utenti possono selezionare più di un'opzione. Se disabilitato, è selezionabile solo un'opzione."
+      },
+      "link": {
+        "title": "Impostazioni campo collegamento",
+        "pattern": "Pattern Regex personalizzato",
+        "patternPlaceholder": "es. ^https?://.+$",
+        "patternHelp": "Pattern di espressione regolare per la validazione URL",
+        "errorMessage": "Messaggio di errore personalizzato",
+        "errorMessagePlaceholder": "Inserisci un URL valido",
+        "errorMessageHelp": "Messaggio di errore personalizzato mostrato quando la validazione URL fallisce"
+      },
+      "poll": {
+        "title": "Impostazioni sondaggio",
+        "pollOptions": "Opzioni sondaggio",
+        "addOptionPlaceholder": "Aggiungi opzione",
+        "addOptionAria": "Aggiungi opzione sondaggio",
+        "optionsHelp": "Aggiungi opzioni su cui gli utenti possono votare",
+        "editOptionAria": "Modifica opzione sondaggio {index}",
+        "removeOptionAria": "Rimuovi opzione sondaggio {index}",
+        "orAria": "separatore oppure",
+        "or": "O",
+        "fetchFromApi": "Recupera opzioni da API",
+        "apiEndpointPlaceholder": "https://tua-api.com/opzioni",
+        "apiEndpointHelp": "Endpoint API da cui recuperare le opzioni del sondaggio",
+        "valueKeyPlaceholder": "Chiave valore (es. id)",
+        "valueKeyHelp": "Chiave per i valori delle opzioni",
+        "labelKeyPlaceholder": "Chiave etichetta (es. nome)",
+        "labelKeyHelp": "Chiave per le etichette delle opzioni",
+        "apiGuidanceTitle": "Guida ai dati API:",
+        "apiGuidanceIntro": "Questo campo recupererà le opzioni dall'endpoint API:",
+        "apiShouldReturn": "L'API dovrebbe restituire:",
+        "apiType1Hint": "(array di stringhe)",
+        "apiType2Hint": "(array di oggetti)",
+        "apiType3Hint": "(oggetto con array di opzioni)",
+        "apiType4Hint": "(chiavi personalizzate)",
+        "apiCustomKeysHelp": "Puoi specificare chiavi personalizzate sopra per mappare i dati della tua API.",
+        "apiValueLabelHelp": "Ogni opzione deve avere una proprietà",
+        "apiValueLabelHelpOr": "(o la tua chiave personalizzata).",
+        "apiValueLabelHelpSuffix": "è opzionale.",
+        "showResults": "Mostra risultati dopo il voto",
+        "showResultsHelp": "Mostra i risultati del sondaggio agli utenti dopo che hanno votato"
+      },
+      "social": {
+        "title": "Piattaforme social",
+        "availablePlatforms": "Piattaforme disponibili",
+        "platforms": {
+          "github": "GitHub",
+          "twitter": "Twitter",
+          "linkedin": "LinkedIn",
+          "facebook": "Facebook",
+          "instagram": "Instagram",
+          "youtube": "YouTube",
+          "website": "Sito web"
+        },
+        "platformsHelp": "Seleziona le piattaforme social da includere nel campo",
+        "customLinks": "Link personalizzati",
+        "labelPlaceholder": "Etichetta",
+        "placeholderPlaceholder": "Segnaposto (opzionale)",
+        "removeCustomLinkAria": "Rimuovi link personalizzato {index}",
+        "addCustomLinkAria": "Aggiungi link personalizzato",
+        "addCustomLink": "Aggiungi link personalizzato",
+        "customLinksHelp": "Aggiungi link social personalizzati con etichette e segnaposto personalizzati"
+      },
+      "emailValidation": {
+        "title": "Validazione email",
+        "removeBlockedDomainAria": "Rimuovi {domain} dai domini bloccati",
+        "removeAllowedDomainAria": "Rimuovi {domain} dai domini consentiti",
+        "autoCompleteDomain": "Dominio completamento automatico",
+        "autoCompletePlaceholder": "es. azienda.com",
+        "setAutoCompleteAria": "Imposta dominio completamento automatico",
+        "set": "Imposta",
+        "removeAutoCompleteAria": "Rimuovi dominio {domain}",
+        "autoCompleteHelp": "Gli utenti possono inserire solo il nome utente e il dominio verrà completato automaticamente",
+        "allowedDomains": "Domini consentiti",
+        "allowedPlaceholder": "es. azienda.com",
+        "addAllowedDomainAria": "Aggiungi dominio consentito",
+        "allowedHelp": "Verranno accettate solo email da questi domini",
+        "blockedDomains": "Domini bloccati",
+        "blockedPlaceholder": "es. email-temp.org",
+        "addBlockedDomainAria": "Aggiungi dominio bloccato",
+        "blockedHelp": "Le email da questi domini saranno rifiutate (i servizi di email temporanea sono bloccati per impostazione predefinita)",
+        "requireBusinessEmail": "Richiedi email aziendale",
+        "requireBusinessEmailHelp": "Consenti solo domini aziendali (blocca Gmail, Yahoo, ecc.)",
+        "customValidationMessage": "Messaggio di validazione personalizzato",
+        "customValidationPlaceholder": "Messaggio di errore personalizzato per la validazione email",
+        "customValidationHelp": "Lascia vuoto per usare i messaggi predefiniti"
+      },
+      "file": {
+        "title": "Impostazioni caricamento file",
+        "bytesUnit": "Byte",
+        "maxFiles": "File massimi",
+        "maxFilesPlaceholder": "10",
+        "maxFilesHelp": "Numero massimo di file che gli utenti possono caricare (1-50)",
+        "maxFileSize": "Dimensione massima file",
+        "maxFileSizePlaceholder": "50",
+        "mbUnit": "MB",
+        "setMaxSizePresetAria": "Imposta dimensione massima file a {size}",
+        "currentSize": "Corrente: {size}",
+        "allowedFileTypes": "Tipi di file consentiti",
+        "quickSelect": "Selezione rapida:",
+        "commonTypes": {
+          "images": "Immagini",
+          "documents": "Documenti",
+          "spreadsheets": "Fogli di calcolo",
+          "videos": "Video",
+          "audio": "Audio",
+          "archives": "Archivi"
+        },
+        "toggleFileTypeAria": "Attiva/disattiva tipi di file {type}",
+        "customExtensions": "Estensioni file personalizzate",
+        "customExtensionsPlaceholder": "es. txt, csv, json",
+        "addCustomExtensionAria": "Aggiungi estensione file personalizzata",
+        "customExtensionsHelp": "Aggiungi estensioni file personalizzate (senza il punto)",
+        "selectedExtensions": "Estensioni selezionate:",
+        "removeExtensionAria": "Rimuovi estensione file {extension}",
+        "htmlAccept": "Attributo HTML Accept (sola lettura)",
+        "htmlAcceptHelp": "Generato automaticamente in base alle tue selezioni sopra",
+        "helpText": "Testo di aiuto",
+        "helpTextPlaceholder": "Istruzioni aggiuntive per gli utenti...",
+        "helpTextHelp": "Istruzioni opzionali per aiutare gli utenti a capire quali file caricare"
+      },
+      "scheduler": {
+        "title": "Impostazioni pianificatore",
+        "provider": "Provider pianificatore",
+        "providerPlaceholder": "Seleziona provider",
+        "providerHelp": "Scegli la tua piattaforma di pianificazione preferita",
+        "calcomLink": "Link Cal.com",
+        "calendlyLink": "Link Calendly",
+        "tidycalLink": "Link TidyCal",
+        "schedulerLink": "Link pianificatore",
+        "linkPlaceholder": "https://...",
+        "linkHelp": "URL incorporato per il tuo pianificatore {provider}",
+        "buttonText": "Testo pulsante apertura calendario",
+        "buttonTextPlaceholder": "es. Prenota una chiamata",
+        "buttonTextHelp": "Testo visualizzato sul pulsante del pianificatore",
+        "preview": "Anteprima",
+        "openScheduler": "Apri pianificatore",
+        "previewHelp": "Clicca per vedere come apparirà il pianificatore",
+        "previewModalTitle": "Anteprima pianificatore",
+        "iframeTitle": "Pianificatore incorporato",
+        "closePreviewAria": "Chiudi anteprima pianificatore",
+        "close": "Chiudi",
+        "providerCalcom": "Cal.com",
+        "providerCalendly": "Calendly",
+        "providerTidycal": "TidyCal"
+      },
+      "banner": {
+        "title": "Impostazioni banner",
+        "alertType": "Tipo di avviso",
+        "alertTypePlaceholder": "Seleziona tipo di avviso",
+        "warning": "Avvertimento",
+        "error": "Errore",
+        "info": "Informazione",
+        "success": "Successo",
+        "alertTypeHelp": "Scegli lo stile visivo e la combinazione di colori per il banner",
+        "bannerTitle": "Titolo",
+        "bannerTitlePlaceholder": "Vietato fumare",
+        "bannerTitleHelp": "Testo del titolo principale per il banner",
+        "description": "Descrizione",
+        "descriptionPlaceholder": "Il nostro alloggio è rigorosamente vietato fumare...",
+        "descriptionHelp": "Testo di descrizione dettagliato per il banner"
+      },
+      "fieldGroup": {
+        "layoutTitle": "Impostazioni layout",
+        "layoutDirection": "Direzione layout",
+        "layoutHorizontal": "Orizzontale (affiancato)",
+        "layoutVertical": "Verticale (impilato)",
+        "layoutDirectionHelp": "Come sono disposti i campi all'interno del gruppo",
+        "columns": "Numero di colonne",
+        "columns2": "2 colonne",
+        "columns3": "3 colonne",
+        "columns4": "4 colonne",
+        "columnsHelp": "Numero di colonne per il layout orizzontale",
+        "spacing": "Spaziatura campi",
+        "spacingCompact": "Compatta",
+        "spacingNormal": "Normale",
+        "spacingRelaxed": "Ampia",
+        "spacingHelp": "Spaziatura tra i campi del gruppo",
+        "groupFields": "Campi del gruppo ({count})",
+        "addFieldAria": "Aggiungi campo al gruppo",
+        "addField": "Aggiungi campo",
+        "addFieldDialogTitle": "Aggiungi un campo",
+        "emptyStateTitle": "Nessun campo in questo gruppo ancora.",
+        "emptyStateDescription": "Aggiungi campi usando il menu a discesa o i pulsanti di aggiunta rapida sopra.",
+        "fieldFallback": "Campo {type}",
+        "settingsAria": "Impostazioni per il campo {name}",
+        "removeAria": "Rimuovi campo {name}",
+        "fieldLabel": "Etichetta campo",
+        "fieldLabelPlaceholder": "Inserisci etichetta campo",
+        "fieldLabelHelp": "Etichetta per questo campo",
+        "placeholder": "Testo segnaposto",
+        "placeholderPlaceholder": "Inserisci testo segnaposto",
+        "placeholderHelp": "Testo segnaposto per questo campo",
+        "required": "Campo obbligatorio",
+        "requiredHelp": "Rendi questo campo obbligatorio",
+        "advancedAria": "Attiva/disattiva impostazioni avanzate per {name}",
+        "advanced": "Impostazioni avanzate"
+      },
+      "rating": {
+        "title": "Impostazioni valutazione",
+        "starCount": "Numero di stelle",
+        "starCountHelp": "Numero di stelle di valutazione (1-10)",
+        "starSize": "Dimensione stelle",
+        "starSizeHelp": "Dimensione delle stelle di valutazione (16-64px)",
+        "iconType": "Tipo di icona",
+        "star": "Stella",
+        "heart": "Cuore",
+        "iconTypeHelp": "Scegli il tipo di icona per le valutazioni",
+        "iconColor": "Colore icona",
+        "iconColorHelp": "Colore delle icone di valutazione"
+      },
+      "tags": {
+        "title": "Impostazioni tag",
+        "maxTags": "Tag massimi",
+        "maxTagsHelp": "Numero massimo di tag che gli utenti possono aggiungere (minimo 1)",
+        "allowDuplicates": "Consenti tag duplicati",
+        "allowDuplicatesHelp": "Consenti agli utenti di aggiungere lo stesso tag più volte"
+      },
+      "textarea": {
+        "title": "Impostazioni campo area di testo",
+        "rows": "Numero di righe",
+        "rowsHelp": "Altezza iniziale dell'area di testo (2-20 righe)"
+      },
+      "time": {
+        "title": "Impostazioni campo orario",
+        "showCurrentTimeButton": "Mostra pulsante 'Imposta ora corrente'",
+        "showCurrentTimeButtonHelp": "Mostra un pulsante per impostare automaticamente l'ora corrente"
+      },
+      "email": {
+        "title": "Impostazioni campo email",
+        "allowedDomains": "Domini consentiti (separati da virgola)",
+        "allowedDomainsPlaceholder": "gmail.com, azienda.com",
+        "blockedDomains": "Domini bloccati (separati da virgola)",
+        "blockedDomainsPlaceholder": "emailtemp.com, spam.com",
+        "requireBusinessEmail": "Richiedi solo email aziendale",
+        "customValidationMessage": "Messaggio di validazione personalizzato",
+        "customValidationPlaceholder": "Inserisci un indirizzo email valido"
+      }
+    },
+    "formSettings": {
+      "title": "Impostazioni modulo",
+      "exportSecure": "Esporta (sicuro)",
+      "preparing": "Preparazione...",
+      "saveFormFirstAccess": "Salva il modulo prima di accedere alle impostazioni.",
+      "saveFormFirstExport": "Salva il modulo prima di esportarlo in modo sicuro.",
+      "exportPrepareFailed": "Impossibile preparare l'esportazione sicura.",
+      "settingsSectionsAria": "Sezioni impostazioni",
+      "goToSectionSettingsAria": "Vai alle impostazioni di {section}",
+      "sections": {
+        "basic": "Informazioni di base",
+        "limits": "Limiti",
+        "security": "Sicurezza",
+        "quiz": "Quiz e punteggio",
+        "branding": "Branding",
+        "notifications": "Notifiche",
+        "api": "Accesso API",
+        "webhooks": "Webhook",
+        "design": "Design",
+        "metadata": "Metadati"
+      },
+      "search": {
+        "aria": "Cerca impostazioni",
+        "placeholder": "Cerca impostazioni…",
+        "resultsAria": "Risultati ricerca",
+        "noMatches": "Nessuna corrispondenza",
+        "items": {
+          "basic-info-title": {
+            "label": "Informazioni di base"
+          },
+          "behavior-title": {
+            "label": "Comportamento modulo"
+          },
+          "rate-limit-title": {
+            "label": "Limitazione frequenza"
+          },
+          "response-limit-title": {
+            "label": "Limite risposte"
+          },
+          "password-protection-title": {
+            "label": "Protezione password"
+          },
+          "duplicate-prevention-title": {
+            "label": "Prevenzione duplicati"
+          },
+          "profanity-filter-title": {
+            "label": "Filtro parolacce"
+          },
+          "bot-protection-title": {
+            "label": "Protezione bot"
+          },
+          "branding-title": {
+            "label": "Branding"
+          },
+          "social-media-links-title": {
+            "label": "Link social media"
+          },
+          "quiz-title": {
+            "label": "Quiz e punteggio"
+          },
+          "notifications-title": {
+            "label": "Notifiche"
+          },
+          "api-access-title": {
+            "label": "Accesso API"
+          },
+          "webhooks-title": {
+            "label": "Webhook"
+          },
+          "design-title": {
+            "label": "Design"
+          },
+          "metadata-title": {
+            "label": "SEO"
+          },
+          "social-metadata-title": {
+            "label": "Metadati social"
+          },
+          "search-engine-indexing-title": {
+            "label": "Indicizzazione motori di ricerca"
+          }
+        }
+      },
+      "defaults": {
+        "submitText": "Invia",
+        "notificationSubject": "Nuovo invio modulo",
+        "notificationMessage": "Hai ricevuto un nuovo invio sul tuo modulo."
+      },
+      "common": {
+        "unsavedChanges": "Modifiche non salvate",
+        "reset": "Reimposta",
+        "save": "Salva",
+        "saved": "Salvato",
+        "formIdRequiredToSaveSettings": "L'ID modulo è obbligatorio per salvare le impostazioni",
+        "validValueBetween": "Inserisci un valore valido tra {min} e {max}",
+        "fillRequiredFields": "Compila i campi obbligatori",
+        "requiredAria": "obbligatorio",
+        "fieldRequired": "Questo campo è obbligatorio"
+      },
+      "basicInfoSection": {
+        "ariaSettings": "Impostazioni di base del modulo",
+        "basicTitle": "Informazioni di base",
+        "basicDescription": "Configura i dettagli di base del tuo modulo",
+        "internalTitleLabel": "Titolo interno",
+        "internalTitleDescription": "Questo titolo è visibile solo a te nella dashboard e nel costruttore di moduli",
+        "internalTitlePlaceholder": "Inserisci il titolo interno per il tuo riferimento...",
+        "publicTitleLabel": "Titolo pubblico",
+        "publicTitleDescription": "Questo titolo verrà mostrato agli utenti nel modulo effettivo. Lascia vuoto per usare il titolo interno.",
+        "publicTitlePlaceholder": "Inserisci il titolo da mostrare agli utenti...",
+        "formDescriptionLabel": "Descrizione del modulo",
+        "formDescriptionPlaceholder": "Inserisci la descrizione del modulo",
+        "submitButtonTextLabel": "Testo pulsante di invio",
+        "submitButtonTextPlaceholder": "Invia",
+        "successMessageLabel": "Messaggio di successo",
+        "successMessagePlaceholder": "Grazie per il tuo invio!",
+        "redirectUrlLabel": "URL di reindirizzamento (opzionale)",
+        "redirectUrlDescription": "URL a cui reindirizzare gli utenti dopo l'invio riuscito",
+        "redirectUrlPlaceholder": "https://esempio.com/grazie",
+        "basicActionsAria": "Azioni informazioni di base",
+        "saveBasicAria": "Salva informazioni di base",
+        "saveBasicSuccess": "Informazioni di base salvate con successo",
+        "saveBasicFailed": "Impossibile salvare le informazioni di base",
+        "behaviorTitle": "Comportamento modulo",
+        "behaviorDescription": "Configura come si comporta e appare il tuo modulo agli utenti",
+        "hideHeaderLabel": "Nascondi intestazione",
+        "hideHeaderDescription": "Nasconde il titolo pubblico e la descrizione nelle incorporazioni",
+        "rtlLabel": "Modalità da destra a sinistra",
+        "rtlDescription": "Mostra il modulo in modalità RTL (da destra a sinistra)",
+        "autoFocusLabel": "Messa a fuoco automatica primo campo",
+        "autoFocusDescription": "Mette automaticamente a fuoco il primo campo quando il modulo viene caricato",
+        "behaviorActionsAria": "Azioni comportamento modulo",
+        "saveBehaviorAria": "Salva impostazioni comportamento modulo",
+        "saveBehaviorSuccess": "Comportamento modulo salvato con successo",
+        "saveBehaviorFailed": "Impossibile salvare il comportamento del modulo"
+      },
+      "passwordProtectionSection": {
+        "ariaSettings": "Impostazioni protezione password",
+        "title": "Protezione password",
+        "description": "Limita l'accesso al tuo modulo con una password",
+        "enableLabel": "Abilita protezione password",
+        "enableDescription": "Richiedi agli utenti di inserire una password per accedere al modulo",
+        "passwordLabel": "Password",
+        "passwordPlaceholder": "Inserisci password modulo",
+        "hidePasswordAria": "Nascondi password",
+        "showPasswordAria": "Mostra password",
+        "passwordDescription": "Gli utenti dovranno inserire questa password per accedere al modulo",
+        "customMessageLabel": "Messaggio personalizzato",
+        "customMessagePlaceholder": "Inserisci un messaggio personalizzato per la richiesta di password",
+        "customMessageDescription": "Messaggio mostrato agli utenti quando devono inserire la password",
+        "currentConfiguration": "Configurazione attuale",
+        "summaryPrefix": "La protezione password è",
+        "enabled": "abilitata",
+        "summarySuffix": ". Gli utenti dovranno inserire la password per accedere al modulo.",
+        "disabledDescription": "La protezione password limita l'accesso al tuo modulo richiedendo agli utenti di inserire una password prima di poter visualizzare e inviare il modulo.",
+        "actionsAria": "Azioni protezione password",
+        "saveAria": "Salva impostazioni protezione password",
+        "saved": "Impostazioni protezione password salvate con successo",
+        "saveFailed": "Impossibile salvare le impostazioni protezione password",
+        "defaultMessage": "Questo modulo è protetto da password. Inserisci la password per continuare."
+      },
+      "duplicatePreventionSection": {
+        "ariaSettings": "Impostazioni prevenzione duplicati",
+        "title": "Prevenzione duplicati",
+        "description": "Impedisci agli utenti di inviare lo stesso modulo più volte",
+        "enableLabel": "Abilita prevenzione duplicati",
+        "enableDescription": "Impedisci agli utenti di inviare lo stesso modulo più volte",
+        "preventionModeLabel": "Modalità prevenzione",
+        "oneTimeLabel": "Invio unico",
+        "oneTimeDescription": "Consenti solo un invio per utente, per sempre",
+        "timeBasedLabel": "Prevenzione basata sul tempo",
+        "timeBasedDescription": "Impedisci invii duplicati entro una finestra temporale specificata",
+        "preventionStrategyLabel": "Strategia di prevenzione",
+        "selectStrategyPlaceholder": "Seleziona strategia",
+        "strategyCombinedLabel": "Combinata (IP + Email + Sessione) - Più sicura",
+        "strategyEmailLabel": "Indirizzo email - Ideale per la registrazione",
+        "strategyIpLabel": "Indirizzo IP - Semplice e affidabile",
+        "strategySessionLabel": "ID sessione - Basato sul browser",
+        "strategyCombinedDescription": "Traccia per combinazione di IP, email e sessione per la massima precisione",
+        "strategyEmailDescription": "Traccia per indirizzo email (richiede un campo email nel modulo)",
+        "strategyIpDescription": "Traccia solo per indirizzo IP",
+        "strategySessionDescription": "Traccia per sessione del browser",
+        "timeWindowLabel": "Finestra temporale (minuti)",
+        "timeWindowDescription": "Per quanto tempo impedire invii duplicati",
+        "timeWindowPlaceholder": "1440",
+        "maxAttemptsLabel": "Tentativi massimi",
+        "maxAttemptsDescription": "Tentativi massimi consentiti nella finestra temporale",
+        "maxAttemptsPlaceholder": "1",
+        "errorMessageLabel": "Messaggio di errore",
+        "errorMessageDescription": "Messaggio mostrato agli utenti quando tentano di inviare un duplicato",
+        "allowOverrideLabel": "Consenti override",
+        "allowOverrideDescription": "Consenti agli utenti di bypassare la prevenzione (non consigliato)",
+        "currentConfiguration": "Configurazione attuale",
+        "currentSettings": "Impostazioni attuali",
+        "summaryModeOneTime": "invio unico",
+        "summaryModeTimeBased": "{maxAttempts} invio/i ogni {timeWindow} minuti",
+        "summaryStrategyCombined": "IP + Email + Sessione",
+        "summaryStrategyEmail": "Indirizzo email",
+        "summaryStrategyIp": "Indirizzo IP",
+        "summaryStrategySession": "ID sessione",
+        "summarySentence": "{mode} usando il tracciamento {strategy}.",
+        "summaryOverrideEnabled": "L'override è abilitato.",
+        "disabledDescription": "La prevenzione duplicati aiuta a mantenere la qualità dei dati impedendo agli utenti di inviare lo stesso modulo più volte. Scegli tra prevenzione basata sul tempo o modalità di invio unico.",
+        "actionsAria": "Azioni prevenzione duplicati",
+        "saveAria": "Salva impostazioni prevenzione duplicati",
+        "saved": "Impostazioni prevenzione duplicati salvate con successo",
+        "saveFailed": "Impossibile salvare le impostazioni prevenzione duplicati",
+        "defaultMessageOneTime": "Hai già inviato questo modulo. Ogni utente può inviare solo una volta.",
+        "defaultMessageTimeBased": "Hai già inviato questo modulo. Attendi prima di inviare di nuovo."
+      },
+      "profanityFilterSection": {
+        "ariaSettings": "Impostazioni filtro parolacce",
+        "title": "Filtro parolacce",
+        "description": "Rileva e filtra automaticamente i contenuti inappropriati",
+        "enableLabel": "Abilita filtro parolacce",
+        "enableDescription": "Rileva e filtra automaticamente i contenuti inappropriati",
+        "filterModeLabel": "Modalità filtro",
+        "strictModeOption": "Modalità rigorosa - Rifiuta invii con parolacce",
+        "replaceModeOption": "Modalità sostituzione - Sostituisci le parolacce con asterischi",
+        "customMessageLabel": "Messaggio personalizzato",
+        "customMessagePlaceholder": "Inserisci un messaggio personalizzato da mostrare quando viene rilevata una parolaccia",
+        "customWordsTitle": "Parole personalizzate da filtrare",
+        "whitelistedWordsTitle": "Parole in whitelist",
+        "customWordsPlaceholder": "Inserisci parola/e da filtrare (separate da virgola per più parole)",
+        "whitelistPlaceholder": "Inserisci parola/e in whitelist (separate da virgola per più parole)",
+        "addWord": "Aggiungi",
+        "addFilteredWordAria": "Aggiungi parola filtrata",
+        "addWhitelistedWordAria": "Aggiungi parola in whitelist",
+        "removeWordAria": "Rimuovi {word}",
+        "currentConfiguration": "Configurazione attuale",
+        "summaryPrefix": "Il filtro parolacce è",
+        "enabled": "abilitato",
+        "summaryIn": "in",
+        "strictMode": "modalità rigorosa",
+        "replaceMode": "modalità sostituzione",
+        "summaryPeriod": ".",
+        "customWordsConfigured": "{count} parole personalizzate configurate.",
+        "whitelistedWordsConfigured": "{count} parole in whitelist.",
+        "disabledDescription": "Il filtro parolacce aiuta a mantenere un ambiente pulito e professionale rilevando e filtrando automaticamente i contenuti inappropriati negli invii dei moduli.",
+        "actionsAria": "Azioni filtro parolacce",
+        "saveAria": "Salva impostazioni filtro parolacce",
+        "saved": "Impostazioni filtro parolacce salvate con successo",
+        "saveFailed": "Impossibile salvare le impostazioni filtro parolacce"
+      },
+      "notificationsSection": {
+        "title": "Notifiche",
+        "description": "Configura gli avvisi email per i nuovi invii dei moduli",
+        "enableLabel": "Notifiche email",
+        "enableDescription": "Abilita le notifiche email per i nuovi invii",
+        "emailLabel": "Email di notifica",
+        "emailPlaceholder": "proprietario@email.com",
+        "subjectLabel": "Oggetto email",
+        "messageLabel": "Messaggio email",
+        "customLinksLabel": "Link personalizzati",
+        "linkLabelPlaceholder": "Etichetta",
+        "linkUrlPlaceholder": "https://esempio.com",
+        "removeLink": "Rimuovi",
+        "addLink": "Aggiungi",
+        "actionsAria": "Azioni impostazioni notifiche",
+        "saveAria": "Salva impostazioni notifiche",
+        "saved": "Impostazioni notifiche salvate con successo",
+        "saveFailed": "Impossibile salvare le impostazioni notifiche"
+      },
+      "brandingSection": {
+        "title": "Branding",
+        "description": "Gestisci il branding di Ikiform e i link social media",
+        "showPoweredByLabel": "Mostra \"Powered by Ikiform\"",
+        "showPoweredByDescription": "Mostra una piccola attribuzione nel footer",
+        "socialMediaLabel": "Link social media",
+        "socialMediaDescription": "Abilita i link ai tuoi profili social nel modulo",
+        "platforms": {
+          "linkedin": {
+            "label": "LinkedIn",
+            "placeholder": "https://linkedin.com/in/nomeutente"
+          },
+          "twitter": {
+            "label": "X (Twitter)",
+            "placeholder": "https://x.com/nomeutente"
+          },
+          "youtube": {
+            "label": "YouTube",
+            "placeholder": "https://youtube.com/@canale"
+          },
+          "instagram": {
+            "label": "Instagram",
+            "placeholder": "https://instagram.com/nomeutente"
+          },
+          "facebook": {
+            "label": "Facebook",
+            "placeholder": "https://facebook.com/nomeutente"
+          },
+          "github": {
+            "label": "GitHub",
+            "placeholder": "https://github.com/nomeutente"
+          },
+          "website": {
+            "label": "Sito web",
+            "placeholder": "https://esempio.com"
+          }
+        },
+        "iconSizeLabel": "Dimensione icona",
+        "iconSizes": {
+          "small": "Piccola",
+          "medium": "Media",
+          "large": "Grande"
+        },
+        "positionLabel": "Posizione",
+        "positions": {
+          "footer": "Footer",
+          "header": "Intestazione",
+          "both": "Entrambi"
+        },
+        "previewLabel": "Anteprima",
+        "disabledDescription": "Abilita i link social media per mostrare i tuoi profili social nei tuoi moduli.",
+        "actionsAria": "Azioni impostazioni branding",
+        "saveAria": "Salva impostazioni branding",
+        "saved": "Impostazioni branding salvate con successo",
+        "saveFailed": "Impossibile salvare le impostazioni branding",
+        "authRequired": "Autenticazione utente richiesta"
+      },
+      "metadataSection": {
+        "basicTitle": "SEO di base",
+        "basicDescription": "Titoli, descrizioni e URL canonico",
+        "pageTitleLabel": "Titolo pagina",
+        "pageTitlePlaceholder": "Inserisci titolo pagina (max 60 caratteri)",
+        "metaDescriptionLabel": "Meta descrizione",
+        "metaDescriptionPlaceholder": "Inserisci meta descrizione (max 160 caratteri)",
+        "characterCount": "{count}/{max} caratteri",
+        "keywordsLabel": "Parole chiave",
+        "keywordsPlaceholder": "Inserisci parole chiave separate da virgole",
+        "authorLabel": "Autore",
+        "authorPlaceholder": "Inserisci nome autore",
+        "canonicalUrlLabel": "URL canonico",
+        "canonicalUrlPlaceholder": "https://esempio.com/modulo",
+        "canonicalUrlDescription": "L'URL preferito per questa pagina del modulo",
+        "basicActionsAria": "Azioni SEO di base",
+        "saveBasicAria": "Salva impostazioni SEO di base",
+        "basicSaved": "SEO di base salvato",
+        "basicSaveFailed": "Impossibile salvare le impostazioni SEO di base",
+        "socialTitle": "Metadati social",
+        "socialDescription": "Impostazioni Open Graph e Twitter",
+        "ogTitleLabel": "Titolo Open Graph",
+        "ogTitlePlaceholder": "Inserisci titolo Open Graph",
+        "ogTitleDescription": "Titolo mostrato quando condiviso su Facebook, LinkedIn, ecc.",
+        "ogDescriptionLabel": "Descrizione Open Graph",
+        "ogDescriptionPlaceholder": "Inserisci descrizione Open Graph",
+        "ogDescriptionDescription": "Descrizione mostrata quando condiviso sui social media",
+        "ogImageLabel": "URL immagine Open Graph",
+        "ogImagePlaceholder": "https://esempio.com/immagine.jpg",
+        "ogTypeLabel": "Tipo Open Graph",
+        "ogTypePlaceholder": "Seleziona tipo Open Graph",
+        "ogTypes": {
+          "website": "Sito web",
+          "article": "Articolo",
+          "profile": "Profilo",
+          "video": "Video"
+        },
+        "twitterCardLabel": "Tipo di card Twitter",
+        "twitterCardPlaceholder": "Seleziona tipo card Twitter",
+        "twitterCards": {
+          "summary": "Riepilogo",
+          "summaryLargeImage": "Riepilogo con immagine grande",
+          "app": "App",
+          "player": "Player"
+        },
+        "twitterTitleLabel": "Titolo Twitter",
+        "twitterTitlePlaceholder": "Inserisci titolo Twitter",
+        "twitterImageLabel": "URL immagine Twitter",
+        "twitterImagePlaceholder": "https://esempio.com/immagine-twitter.jpg",
+        "twitterDescriptionLabel": "Descrizione Twitter",
+        "twitterDescriptionPlaceholder": "Inserisci descrizione Twitter",
+        "twitterSiteLabel": "Sito Twitter",
+        "twitterSitePlaceholder": "@tuoaccount",
+        "twitterCreatorLabel": "Creatore Twitter",
+        "twitterCreatorPlaceholder": "@accountcreatore",
+        "socialActionsAria": "Azioni metadati social",
+        "saveSocialAria": "Salva impostazioni metadati social",
+        "socialSaved": "Metadati social salvati",
+        "socialSaveFailed": "Impossibile salvare i metadati social",
+        "indexingTitle": "Indicizzazione motori di ricerca",
+        "indexingDescription": "Controlla come i motori di ricerca eseguono la scansione di questo modulo",
+        "indexingBehaviorLabel": "Indicizzazione motori di ricerca",
+        "indexingBehaviorPlaceholder": "Seleziona comportamento di indicizzazione",
+        "indexingOptions": {
+          "index": "Indicizza e segui (predefinito)",
+          "noindex": "Non indicizzare",
+          "nofollow": "Non seguire",
+          "noindexNofollow": "Non indicizzare, non seguire"
+        },
+        "indexingBehaviorDescription": "Controlla se i motori di ricerca possono indicizzare e seguire i link su questa pagina",
+        "switches": {
+          "noArchive": "Nessun archivio",
+          "noSnippet": "Nessun frammento",
+          "noImageIndex": "Nessun indice immagini",
+          "noTranslate": "Nessuna traduzione"
+        },
+        "indexingActionsAria": "Azioni indicizzazione",
+        "saveIndexingAria": "Salva impostazioni indicizzazione",
+        "indexingSaved": "Impostazioni indicizzazione salvate",
+        "indexingSaveFailed": "Impossibile salvare le impostazioni indicizzazione",
+        "updatedAnnouncement": "Metadati aggiornati",
+        "authRequired": "Autenticazione utente richiesta"
+      },
+      "rateLimitSection": {
+        "title": "Limitazione frequenza",
+        "description": "Controlla la frequenza di invio per prevenire spam e abusi",
+        "ariaSettings": "Impostazioni limitazione frequenza",
+        "enableLabel": "Abilita limitazione frequenza",
+        "enableDescription": "Limita gli invii dallo stesso indirizzo IP",
+        "maxSubmissionsLabel": "Invii massimi",
+        "maxSubmissionsDescription": "Numero massimo di invii consentiti",
+        "timeWindowLabel": "Finestra temporale (minuti)",
+        "timeWindowDescription": "Periodo di tempo per contare gli invii",
+        "blockDurationLabel": "Durata blocco (minuti)",
+        "blockDurationDescription": "Per quanto tempo bloccare dopo aver raggiunto il limite",
+        "messageLabel": "Messaggio mostrato quando il limite di frequenza viene superato",
+        "messagePlaceholder": "Troppi invii. Riprova più tardi.",
+        "messageDescription": "Messaggio personalizzato mostrato quando il limite di frequenza viene superato",
+        "currentConfiguration": "Configurazione attuale",
+        "summarySentence": "Consenti {maxSubmissions} invii ogni {timeWindow} minuti. Blocca per {blockDuration} minuti quando superato.",
+        "summaryExample": "Esempio: se un utente invia {maxSubmissions} volte in {timeWindow} minuti, verrà bloccato per {blockDuration} minuti.",
+        "disabledDescription": "La limitazione di frequenza aiuta a proteggere il tuo modulo da spam e abusi controllando la frequenza di invio.",
+        "actionsAria": "Azioni limitazione frequenza",
+        "saveAria": "Salva impostazioni limitazione frequenza",
+        "saved": "Impostazioni limitazione frequenza salvate con successo",
+        "saveFailed": "Impossibile salvare le impostazioni limitazione frequenza",
+        "defaultMessage": "Troppi invii. Riprova più tardi."
+      },
+      "responseLimitSection": {
+        "title": "Limite risposte",
+        "description": "Smetti di accettare invii dopo un numero totale impostato",
+        "enableLabel": "Abilita limite risposte",
+        "enableDescription": "Limita il numero totale di invii accettati da questo modulo",
+        "maxResponsesLabel": "Risposte massime",
+        "maxResponsesDescription": "Limita il numero totale di risposte che questo modulo può accettare. Una volta raggiunto il limite, i nuovi invii verranno bloccati.",
+        "limitReachedLabel": "Messaggio quando il limite è raggiunto",
+        "limitReachedDescription": "Messaggio mostrato dopo che il limite totale di risposte è stato raggiunto",
+        "limitReachedPlaceholder": "Questo modulo non accetta più risposte.",
+        "disabledDescription": "Mantieni disabilitato se il tuo modulo dovrebbe continuare ad accettare invii senza un limite.",
+        "actionsAria": "Azioni limite risposte",
+        "saveAria": "Salva impostazioni limite risposte",
+        "saved": "Limite risposte salvato con successo",
+        "saveFailed": "Impossibile salvare il limite risposte",
+        "defaultMessage": "Questo modulo non accetta più risposte."
+      },
+      "botProtectionSection": {
+        "title": "Protezione bot",
+        "description": "Rileva e blocca automaticamente gli invii automatizzati",
+        "ariaSettings": "Impostazioni protezione bot",
+        "enableLabel": "Abilita protezione bot",
+        "enableDescription": "Aggiungi controlli anti-bot per gli invii dei moduli",
+        "detectionMessageLabel": "Messaggio di rilevamento",
+        "detectionMessagePlaceholder": "Invio bloccato per sospetta attività bot.",
+        "detectionMessageDescription": "Messaggio mostrato quando un invio automatizzato viene bloccato",
+        "currentConfiguration": "Configurazione attuale",
+        "statusEnabledPrefix": "La protezione bot è attualmente",
+        "enabled": "abilitata",
+        "statusEnabledSuffix": "per questo modulo.",
+        "vercelTitle": "Protezione Vercel",
+        "vercelDescription": "Se distribuito su Vercel, potrebbero essere applicati ulteriori controlli anti-abuso.",
+        "disabledDescription": "Abilita la protezione bot per ridurre lo spam da strumenti automatizzati e traffico con script.",
+        "actionsAria": "Azioni protezione bot",
+        "saveAria": "Salva impostazioni protezione bot",
+        "saved": "Impostazioni protezione bot salvate con successo",
+        "saveFailed": "Impossibile salvare le impostazioni protezione bot"
+      },
+      "quizSection": {
+        "title": "Quiz e punteggio",
+        "description": "Configura il comportamento del quiz e le regole di punteggio",
+        "ariaSettings": "Impostazioni quiz",
+        "enableLabel": "Abilita modalità quiz",
+        "enableDescription": "Attiva le funzionalità quiz come punteggio e messaggi di risultato",
+        "passingScoreLabel": "Punteggio minimo (%)",
+        "passingScoreDescription": "Imposta la percentuale minima richiesta per passare",
+        "timeLimitLabel": "Limite di tempo (minuti)",
+        "timeLimitDescription": "Limite di tempo opzionale per il completamento del quiz",
+        "timeLimitPlaceholder": "Lascia vuoto per nessun limite",
+        "showScoreLabel": "Mostra punteggio all'utente",
+        "showScoreDescription": "Mostra il punteggio dell'utente dopo l'invio del modulo",
+        "showCorrectAnswersLabel": "Mostra risposte corrette",
+        "showCorrectAnswersDescription": "Mostra risposte corrette e spiegazioni dopo l'invio",
+        "allowRetakeLabel": "Consenti di ripetere",
+        "allowRetakeDescription": "Consenti agli utenti di ripetere il quiz per migliorare il punteggio",
+        "customMessagesLabel": "Messaggi di risultato personalizzati",
+        "successMessageLabel": "Messaggio di successo",
+        "successMessagePlaceholder": "Ottimo lavoro! Hai superato il quiz.",
+        "improvementMessageLabel": "Messaggio di miglioramento",
+        "improvementMessagePlaceholder": "Rivedi e riprova.",
+        "messagePlaceholderHelp": "Usa {score}, {percentage}, {total} come segnaposto",
+        "actionsAria": "Azioni quiz",
+        "saveAria": "Salva impostazioni quiz",
+        "saved": "Impostazioni quiz salvate con successo",
+        "savedToast": "Impostazioni quiz salvate",
+        "saveFailed": "Impossibile salvare le impostazioni quiz"
+      },
+      "apiSection": {
+        "title": "Accesso API",
+        "description": "Attiva/disattiva per consentire gli invii tramite l'endpoint API",
+        "authRequired": "Autenticazione utente richiesta",
+        "enableSupportLabel": "Abilita supporto API",
+        "enableSupportDescription": "Abilita gli invii esterni tramite una chiave API sicura.",
+        "apiEndpointLabel": "Endpoint API",
+        "copyEndpointAria": "Copia endpoint API",
+        "endpointCopied": "Endpoint API copiato",
+        "apiKeyLabel": "Chiave API",
+        "apiKeySecretHint": "Mantieni questa chiave segreta. Chiunque la abbia può inviare a questo modulo.",
+        "generateApiKey": "Genera chiave API",
+        "regenerateKey": "Rigenera chiave",
+        "revokeKey": "Revoca chiave",
+        "generating": "Generazione...",
+        "revoking": "Revoca...",
+        "copyApiKeyAria": "Copia chiave API",
+        "showApiKeyAria": "Mostra chiave API",
+        "hideApiKeyAria": "Nascondi chiave API",
+        "keyCopied": "Chiave API copiata",
+        "keyGenerated": "Chiave API generata",
+        "keyGenerateFailed": "Impossibile generare la chiave API",
+        "keyRevoked": "Chiave API revocata",
+        "keyRevokeFailed": "Impossibile revocare la chiave API",
+        "showCodeExamples": "Mostra esempi di codice",
+        "hideCodeExamples": "Nascondi esempi di codice",
+        "javascriptNodeLabel": "JavaScript / Node.js",
+        "sampleName": "Mario Rossi",
+        "sampleEmail": "mario@esempio.com",
+        "sampleMessage": "Ciao dall'API",
+        "sampleValue": "Valore di esempio",
+        "copyCodeAria": "Copia codice di esempio",
+        "downloadCodeAria": "Scarica codice di esempio",
+        "codeCopied": "Codice di esempio copiato",
+        "codeDownloaded": "Codice di esempio scaricato",
+        "betaBadge": "BETA",
+        "integrationRateLimiting": "Limitazione frequenza",
+        "integrationRateLimitingDescription": "Proteggi il tuo endpoint da picchi di spam.",
+        "integrationResponseLimits": "Limiti di risposta",
+        "integrationResponseLimitsDescription": "Limita il totale degli invii accettati.",
+        "integrationDuplicatePrevention": "Prevenzione duplicati",
+        "integrationDuplicatePreventionDescription": "Riduci gli invii ripetuti dallo stesso utente.",
+        "integrationProfanityFilter": "Filtro parolacce",
+        "integrationProfanityFilterDescription": "Blocca o sanifica i contenuti inappropriati.",
+        "emptyStateDescription": "Abilita il supporto API per generare una chiave API sicura.",
+        "actionsAria": "Azioni accesso API",
+        "saveAria": "Salva impostazioni API",
+        "resetAria": "Reimposta impostazioni API",
+        "settingsSaved": "Impostazioni API salvate con successo",
+        "settingsSaveFailed": "Impossibile salvare le impostazioni API"
+      },
+      "webhooks": {
+        "panel": {
+          "endpointsTitle": "Endpoint webhook",
+          "endpointsDescription": "Invia gli invii a servizi esterni.",
+          "addWebhook": "Aggiungi webhook"
+        },
+        "list": {
+          "emptyState": "Nessun webhook configurato ancora. Aggiungi il tuo primo webhook per ricevere gli invii dei moduli.",
+          "active": "Attivo",
+          "inactive": "Inattivo",
+          "edit": "Modifica",
+          "delete": "Elimina",
+          "test": "Testa",
+          "viewLogs": "Visualizza log",
+          "events": {
+            "formSubmitted": "Modulo inviato",
+            "formViewed": "Modulo visualizzato",
+            "formStarted": "Modulo avviato"
+          }
+        },
+        "hook": {
+          "fetchFailed": "Impossibile recuperare i webhook",
+          "created": "Webhook creato con successo",
+          "createFailed": "Impossibile creare il webhook",
+          "updated": "Webhook aggiornato con successo",
+          "updateFailed": "Impossibile aggiornare il webhook",
+          "deleted": "Webhook eliminato con successo",
+          "deleteFailed": "Impossibile eliminare il webhook"
+        },
+        "formModal": {
+          "addTitle": "Aggiungi webhook",
+          "editTitle": "Modifica webhook",
+          "stepsAria": "Passaggi configurazione webhook",
+          "steps": {
+            "basics": "Basi",
+            "events": "Eventi",
+            "headers": "Intestazioni",
+            "payload": "Payload",
+            "notifications": "Notifiche",
+            "details": "Revisione"
+          },
+          "errors": {
+            "missingBasics": "L'URL del webhook è obbligatorio.",
+            "missingEvent": "Seleziona almeno un evento.",
+            "missingBasicsAndEvent": "L'URL del webhook e almeno un evento sono obbligatori."
+          },
+          "webhookUrl": "URL webhook",
+          "webhookUrlPlaceholder": "https://esempio.com/webhook",
+          "nameOptional": "Nome (opzionale)",
+          "namePlaceholder": "Notifiche Slack",
+          "descriptionOptional": "Descrizione (opzionale)",
+          "descriptionPlaceholder": "Dove questo webhook dovrebbe inviare i dati del modulo",
+          "eventsHelp": "Scegli quali eventi dovrebbero attivare questo webhook.",
+          "events": {
+            "formSubmitted": "Modulo inviato",
+            "formViewed": "Modulo visualizzato",
+            "formStarted": "Modulo avviato"
+          },
+          "httpMethod": "Metodo HTTP",
+          "selectHttpMethodAria": "Seleziona metodo HTTP",
+          "selectMethodPlaceholder": "Seleziona metodo",
+          "httpMethodDescriptions": {
+            "post": "Crea nuove risorse o invia dati payload.",
+            "put": "Sostituisci una risorsa esistente.",
+            "patch": "Aggiorna parzialmente una risorsa esistente.",
+            "delete": "Elimina una risorsa.",
+            "get": "Recupera informazioni senza mutare i dati.",
+            "head": "Recupera solo le intestazioni."
+          },
+          "addHeader": "Aggiungi intestazione",
+          "headerName": "Nome intestazione",
+          "headerNamePlaceholder": "Authorization",
+          "headerNameAria": "Nome intestazione webhook",
+          "headerValue": "Valore intestazione",
+          "headerValuePlaceholder": "Token Bearer",
+          "headerValueAria": "Valore intestazione webhook",
+          "removeHeaderAria": "Rimuovi intestazione",
+          "headersHelp": "Le intestazioni personalizzate sono opzionali e vengono inviate con ogni richiesta webhook.",
+          "payloadTemplateOptional": "Template payload (opzionale)",
+          "availableVariables": "Variabili disponibili",
+          "variables": {
+            "formData": "Oggetto dati del modulo inviato",
+            "formId": "Identificatore modulo",
+            "submissionId": "Identificatore invio",
+            "event": "Evento di attivazione",
+            "timestamp": "Timestamp evento",
+            "formatted": "Riepilogo leggibile"
+          },
+          "notificationEmailOptional": "Email di notifica (opzionale)",
+          "notificationEmailPlaceholder": "avvisi@esempio.com",
+          "emailOnSuccess": "Email alla consegna riuscita",
+          "emailOnFailure": "Email alla consegna fallita",
+          "selectAll": "Seleziona tutto",
+          "clear": "Cancella",
+          "back": "Indietro",
+          "next": "Avanti",
+          "skip": "Salta",
+          "cancel": "Annulla",
+          "createWebhook": "Crea webhook",
+          "updateWebhook": "Aggiorna webhook"
+        },
+        "testDialog": {
+          "title": "Testa webhook",
+          "description": "Invia un evento di test per verificare il tuo endpoint.",
+          "endpointTitle": "Endpoint",
+          "nameLabel": "Nome",
+          "untitledWebhook": "Webhook senza titolo",
+          "descriptionLabel": "Descrizione",
+          "methodLabel": "Metodo HTTP",
+          "urlLabel": "URL",
+          "triggersTitle": "Trigger",
+          "events": {
+            "formSubmitted": "Modulo inviato",
+            "formViewed": "Modulo visualizzato",
+            "formStarted": "Modulo avviato"
+          },
+          "modeTitle": "Modalità test",
+          "mode": {
+            "real": "Invia un payload reale",
+            "success": "Forza risposta di successo",
+            "failure": "Forza risposta di fallimento"
+          },
+          "sendTest": "Invia test",
+          "close": "Chiudi",
+          "success": "Test inviato con successo",
+          "failed": "Test fallito",
+          "testSent": "Test webhook inviato",
+          "testFailed": "Test webhook fallito",
+          "testFailedNetwork": "Impossibile inviare il test webhook"
+        },
+        "logDialog": {
+          "title": "Log webhook",
+          "status": "Stato",
+          "response": "Risposta",
+          "attempt": "Tentativo",
+          "resend": "Reinvia",
+          "resendSuccess": "Webhook reinviato con successo",
+          "resendFailed": "Impossibile reinviare il webhook",
+          "copied": "Copiato negli appunti",
+          "copyFailed": "Impossibile copiare",
+          "copyCodeAria": "Copia payload",
+          "viewPayload": "Visualizza payload",
+          "payloadTitle": "Payload",
+          "noPayloadDataTitle": "Nessun dato payload",
+          "noPayloadDataDescription": "Il payload non è disponibile per questa voce di log.",
+          "noPayloadReasonMethod": "Questo tipo di richiesta non includeva un payload.",
+          "noPayloadReasonError": "L'acquisizione del payload è fallita a causa di un errore.",
+          "noPayloadReasonEmpty": "Nessun dato payload è stato memorizzato.",
+          "eventInformation": "Informazioni sull'evento",
+          "eventLabel": "Evento",
+          "formNameLabel": "Nome modulo",
+          "formIdLabel": "ID modulo",
+          "submissionIdLabel": "ID invio",
+          "ipAddressLabel": "Indirizzo IP",
+          "formFields": "Campi del modulo",
+          "rawFormData": "Dati del modulo grezzi",
+          "rawJson": "JSON grezzo",
+          "formatted": "Formattato",
+          "additionalData": "Dati aggiuntivi",
+          "notAvailable": "Non disponibile",
+          "unknown": "Sconosciuto",
+          "complexObject": "Oggetto complesso",
+          "complexArray": "Array complesso",
+          "failedCount": "{count} falliti",
+          "pendingCount": "{count} in attesa",
+          "successfulCount": "{count} riusciti",
+          "noLogsTitle": "Nessun log ancora",
+          "noLogsDescription": "Invia eventi a questo webhook per vedere la cronologia delle consegne.",
+          "errorTitle": "Impossibile caricare i log",
+          "fetchFailed": "Impossibile caricare i log webhook"
+        }
+      },
+      "designSection": {
+        "title": "Design",
+        "description": "Controlla l'aspetto e la personalizzazione",
+        "advancedTitle": "Personalizzazione avanzata",
+        "advancedDescription": "Perfeziona colori, tipografia, spaziatura e altro in un pannello dedicato.",
+        "openAria": "Apri pannello di personalizzazione in una nuova scheda",
+        "openLabel": "Apri pannello di personalizzazione…"
+      }
+    },
+    "fieldRenderer": {
+      "scheduler": {
+        "title": "Pianificatore",
+        "openScheduler": "Apri pianificatore",
+        "embedTitle": "Pianificatore incorporato",
+        "notConfigured": "Nessun link pianificatore configurato.",
+        "close": "Chiudi"
+      },
+      "email": {
+        "defaultPlaceholder": "Inserisci indirizzo email",
+        "autocompleteHint": "Premi Tab o clicca per completare:",
+        "completeEmailAria": "Completa indirizzo email",
+        "completeButton": "Completa",
+        "autocompleteBadge": "Completamento automatico:",
+        "allowedDomainsLabel": "Domini consentiti:"
+      },
+      "fileUpload": {
+        "bytesUnit": "Byte",
+        "uploadFailed": "Caricamento fallito",
+        "uploadErrorTitle": "Errore di caricamento",
+        "uploadedFiles": "File caricati ({count})",
+        "uploadedBadge": "Caricato",
+        "removeFileAria": "Rimuovi {name}",
+        "maxFilesAndSize": "Max {maxFiles} file, fino a {maxSize} ciascuno",
+        "allowedTypes": "Tipi consentiti"
+      },
+      "social": {
+        "platforms": {
+          "linkedin": "LinkedIn",
+          "twitter": "X (Twitter)",
+          "youtube": "YouTube",
+          "instagram": "Instagram",
+          "facebook": "Facebook",
+          "github": "GitHub",
+          "website": "Sito web"
+        },
+        "customLink": "Link personalizzato {index}",
+        "customLinkPlaceholder": "https://esempio.com",
+        "preview": "Anteprima"
+      },
+      "signature": {
+        "drawHere": "Disegna la tua firma qui",
+        "clear": "Cancella",
+        "preview": "Anteprima",
+        "previewAlt": "Anteprima firma"
+      },
+      "rating": {
+        "groupAria": "Valutazione",
+        "rateAria": "Valuta {index} {type}"
+      },
+      "poll": {
+        "fetchFailed": "Impossibile recuperare le opzioni",
+        "resultsTitle": "Risultati sondaggio",
+        "totalVotes": "{count} voti totali",
+        "votes": "{count} voti"
+      }
+    },
+    "formRenderer": {
+      "shared": {
+        "poweredBy": "Powered by",
+        "incorrectPassword": "Password errata!",
+        "passwordProtectionMessage": "Questo modulo è protetto da password. Inserisci la password per continuare."
+      },
+      "successScreen": {
+        "title": "Grazie!",
+        "defaultMessage": "Il tuo modulo è stato inviato con successo.",
+        "redirecting": "Reindirizzamento in corso...",
+        "poweredBy": "Powered by"
+      },
+      "quizResults": {
+        "titlePassed": "Congratulazioni!",
+        "titleComplete": "Quiz completato",
+        "descriptionPassed": "Hai completato il quiz con successo!",
+        "descriptionRetry": "Grazie per aver partecipato al quiz. Continua a esercitarti!",
+        "score": "Punteggio",
+        "points": "Punti",
+        "answered": "Risposte date",
+        "totalQuestions": "Domande totali",
+        "passed": "Superato",
+        "needsImprovement": "Da migliorare",
+        "retakeQuiz": "Ripeti il quiz",
+        "questionByQuestion": "Risultati domanda per domanda",
+        "questionLabel": "Domanda {index}: {label}",
+        "yourAnswer": "La tua risposta:",
+        "noAnswer": "Nessuna risposta",
+        "correctAnswer": "Risposta corretta:",
+        "pointsLower": "punti"
+      },
+      "multiStep": {
+        "previous": "Precedente",
+        "next": "Avanti",
+        "submit": "Invia",
+        "defaults": {
+          "formTitle": "Modulo"
+        },
+        "validation": {
+          "required": "Questo campo è obbligatorio",
+          "emailInvalid": "Inserisci un indirizzo email valido",
+          "minLength": "Deve contenere almeno {count} caratteri",
+          "maxLength": "Non può superare {count} caratteri"
+        },
+        "toasts": {
+          "submitSuccess": "Modulo inviato con successo!",
+          "botDetected": "Bot rilevato. Accesso negato.",
+          "duplicateSubmission": "Hai già inviato questo modulo.",
+          "rateLimitExceeded": "Troppe richieste. Riprova più tardi.",
+          "responseLimitReached": "Questo modulo non accetta più risposte.",
+          "contentValidationFailed": "Il tuo invio contiene contenuti inappropriati.",
+          "submitFailed": "Impossibile inviare il modulo",
+          "submitFailedTryAgain": "Impossibile inviare il modulo. Riprova."
+        }
+      },
+      "singleStep": {
+        "fixHighlightedErrors": "Correggi gli errori evidenziati prima di inviare.",
+        "submit": "Invia"
+      },
+      "duplicateSubmission": {
+        "title": "Invio duplicato rilevato",
+        "wait": "Attendi {time}",
+        "attemptsLeft": "{count, plural, one {# tentativo rimasto} other {# tentativi rimasti}}",
+        "tryAgain": "Riprova",
+        "waitBeforeRetry": "Attendi prima di tentare di inviare nuovamente.",
+        "units": {
+          "seconds": "{count, plural, one {# secondo} other {# secondi}}",
+          "minutes": "{count, plural, one {# minuto} other {# minuti}}",
+          "hours": "{count, plural, one {# ora} other {# ore}}",
+          "days": "{count, plural, one {# giorno} other {# giorni}}"
+        }
+      }
+    }
+  },
+  "aiBuilder": {
+    "client": {
+      "createFormWithKiko": "Crea modulo con Kiko",
+      "streamError": "Errore: {error}",
+      "generatingResponse": "Generazione risposta…",
+      "loading": "Caricamento…",
+      "suggestions": {
+        "contactForm": "Crea un modulo di contatto",
+        "customerFeedbackSurvey": "Sondaggio feedback clienti",
+        "eventRegistrationForm": "Modulo di registrazione evento",
+        "jobApplicationForm": "Modulo di candidatura lavoro"
+      }
+    },
+    "chatHeader": {
+      "backToFormBuilder": "Torna al costruttore di moduli",
+      "title": "Kiko AI"
+    },
+    "chatInput": {
+      "messageToKiko": "Messaggio a Kiko AI",
+      "placeholder": "Descrivi il modulo che vuoi creare…",
+      "sendMessage": "Invia messaggio",
+      "sendHelp": "Premi Invio per inviare, Shift+Invio per nuova riga, o ⌘/Ctrl+Invio per inviare"
+    },
+    "welcome": {
+      "heading": "Come può aiutarti Kiko oggi?",
+      "description": "Ciao, sono Kiko—il tuo assistente AI per i moduli.\nChiedimi di creare, modificare o analizzare moduli per te!"
+    },
+    "preview": {
+      "title": "Kiko AI",
+      "formFallback": "Modulo {index}",
+      "viewJson": "Visualizza JSON",
+      "useThisForm": "Usa questo modulo",
+      "noFormSelected": "Nessun modulo selezionato."
+    },
+    "jsonModal": {
+      "title": "Schema JSON del modulo",
+      "description": "Visualizza o copia lo schema JSON generato per il tuo modulo",
+      "close": "Chiudi"
+    }
+  },
+  "analytics": {
+    "formAnalytics": {
+      "submissionExported": "Invio esportato con successo",
+      "formDeleted": "Modulo eliminato con successo",
+      "failedDeleteForm": "Impossibile eliminare il modulo",
+      "backToDashboard": "Torna alla dashboard",
+      "published": "Pubblicato",
+      "draft": "Bozza",
+      "analyticsSubtitle": "Analisi modulo e dati di invio",
+      "formActions": "Azioni modulo",
+      "editForm": "Modifica modulo",
+      "shareForm": "Condividi modulo",
+      "viewSubmissions": "Visualizza invii",
+      "moreActions": "Altre azioni",
+      "exportCsv": "Esporta CSV",
+      "exportJson": "Esporta JSON",
+      "deleteForm": "Elimina modulo",
+      "openKiko": "Apri Kiko AI",
+      "kiko": "Kiko AI",
+      "kikoTooltip": "Analisi modulo AI",
+      "recentSubmissions": "Invii recenti",
+      "viewAll": "Visualizza tutti",
+      "noSubmissionsTitle": "Nessun invio ancora",
+      "noSubmissionsDescription": "Una volta che le persone iniziano a compilare il tuo modulo, le loro risposte appariranno qui.",
+      "submission": "Invio {id}",
+      "fieldsCount": "{count} campi",
+      "view": "Visualizza",
+      "viewSubmissionDetails": "Visualizza dettagli invio",
+      "viewMoreSubmissions": "Visualizza altri {count} invii",
+      "noDataToExport": "Nessun dato da esportare",
+      "csvExportSuccess": "Dati esportati in CSV con successo!",
+      "jsonExportSuccess": "Dati esportati con successo!",
+      "deleteModalTitle": "Elimina modulo",
+      "deleteModalConfirm": "Elimina modulo",
+      "deleteModalCancel": "Annulla",
+      "deleteModalDescription": "Sei sicuro di voler eliminare \"{title}\"? Questa azione non può essere annullata e rimuoverà permanentemente il modulo e tutti i suoi invii.",
+      "formPublished": "Modulo pubblicato!"
+    },
+    "statsCards": {
+      "totalSubmissions": "Invii totali",
+      "formFields": "Campi del modulo",
+      "completionRate": "Tasso di completamento",
+      "last30Days": "Ultimi 30 giorni",
+      "avgDailySubmissions": "Invii giornalieri medi",
+      "bounceRate": "Frequenza di rimbalzo",
+      "peakHour": "Ora di punta",
+      "uniqueResponses": "Risposte uniche"
+    },
+    "infoCards": {
+      "lastSubmission": "Ultimo invio",
+      "fromIp": "Da {ip}",
+      "noSubmissionsYet": "Nessun invio ancora",
+      "formStatus": "Stato modulo",
+      "published": "Pubblicato",
+      "created": "Creato",
+      "updated": "Aggiornato",
+      "yes": "Sì",
+      "no": "No",
+      "quickStats": "Statistiche rapide",
+      "avgFieldsCompleted": "Campi completati in media",
+      "mostActiveDay": "Giorno più attivo",
+      "submissions": "{count} invii",
+      "formType": "Tipo di modulo",
+      "multiStep": "A più passaggi",
+      "singlePage": "Pagina singola"
+    },
+    "trendsChart": {
+      "title": "Tendenze invii",
+      "noData": "Nessun dato disponibile",
+      "submissions": "Invii"
+    },
+    "dropoff": {
+      "title": "Analisi abbandono",
+      "onlyMultiStep": "L'analisi abbandono è disponibile solo per i moduli a più passaggi.",
+      "subtitle": "Comprendi dove gli utenti abbandonano i tuoi moduli.",
+      "step": "Passaggio",
+      "reached": "Raggiunto",
+      "dropoffPercent": "% abbandono",
+      "completionPercent": "% completamento",
+      "ofTotal": "di {total}",
+      "stepFallback": "Passaggio {index}",
+      "dropoffBarAria": "Barra abbandono per il passaggio {index}",
+      "completionBarAria": "Barra completamento per il passaggio {index}"
+    },
+    "chatModal": {
+      "title": "Kiko",
+      "description": "Chatta con l'AI sulle analisi del tuo modulo"
+    },
+    "chat": {
+      "emptyTitle": "Chiedi a Kiko qualsiasi cosa",
+      "emptyDescription": "Ottieni informazioni e analisi immediate dai dati del tuo modulo. Fai domande in linguaggio naturale.",
+      "thinking": "Pensando...",
+      "inputPlaceholder": "Chiedi delle analisi del tuo modulo...",
+      "inputHelp": "Premi <enter></enter> per inviare, <shiftEnter></shiftEnter> per nuova riga"
+    },
+    "submissionDetails": {
+      "title": "Dettagli invio - {id}",
+      "submissionId": "ID invio",
+      "submittedAt": "Inviato il",
+      "ipAddress": "Indirizzo IP",
+      "formData": "Dati del modulo",
+      "emptyValue": "—"
+    },
+    "submissions": {
+      "backToAnalytics": "Torna alle analisi",
+      "published": "Pubblicato",
+      "draft": "Bozza",
+      "formSubmissions": "Invii modulo ({count})",
+      "exportActions": "Azioni di esportazione",
+      "exportCsv": "Esporta CSV",
+      "exportJson": "Esporta JSON",
+      "viewDetailedAnalytics": "Visualizza analisi dettagliate",
+      "submissions": "Invii",
+      "searchSubmissions": "Cerca invii...",
+      "noMatchingSubmissions": "Nessun invio corrispondente",
+      "noSubmissionsYet": "Nessun invio ancora",
+      "noSubmissionsDescription": "Una volta che le persone iniziano a compilare il tuo modulo, le loro risposte appariranno qui.",
+      "adjustSearchTerms": "Prova a modificare i termini di ricerca per trovare gli invii.",
+      "id": "ID",
+      "submitted": "Inviato",
+      "ipAddress": "Indirizzo IP",
+      "fields": "Campi",
+      "actions": "Azioni",
+      "fieldsCount": "{count} campo",
+      "fieldsCount_plural": "{count} campi",
+      "view": "Visualizza",
+      "showingRange": "Mostrando {start}-{end} di {total} invii",
+      "previous": "Precedente",
+      "next": "Avanti",
+      "pageOf": "Pagina {page} di {total}",
+      "noSubmissionsToExport": "Nessun invio da esportare",
+      "submissionId": "ID invio",
+      "submittedAt": "Inviato il",
+      "csvExportedSuccess": "CSV esportato con successo",
+      "jsonExportedSuccess": "JSON esportato con successo"
+    },
+    "premiumRequired": {
+      "analytics": {
+        "title": "Richiede Premium",
+        "description": "È necessario un abbonamento premium per accedere alle analisi del modulo. Aggiorna per sbloccare tutte le funzionalità.",
+        "viewPricing": "Visualizza prezzi"
+      },
+      "submissions": {
+        "title": "Richiede Premium",
+        "description": "È necessario un abbonamento premium per accedere agli invii del modulo. Aggiorna per sbloccare tutte le funzionalità.",
+        "viewPricing": "Visualizza prezzi"
+      }
+    }
+  },
+  "trialBanner": {
+    "aria": {
+      "status": "Notifica stato prova"
+    },
+    "endsInPrefix": "La tua prova gratuita termina tra ",
+    "remainingSuffix": " rimanenti",
+    "expired": "Prova scaduta",
+    "units": {
+      "day": "g",
+      "hour": "h",
+      "minute": "m",
+      "second": "s"
+    }
+  },
+  "embed": {
+    "customizer": {
+      "subtitle": "Personalizza e genera il codice di incorporamento per il tuo modulo",
+      "showCode": "Mostra codice",
+      "settings": "Impostazioni",
+      "preview": "Anteprima",
+      "desktop": "Desktop",
+      "mobile": "Mobile"
+    },
+    "settings": {
+      "dimensions": {
+        "title": "Dimensioni",
+        "width": "Larghezza",
+        "widthPlaceholder": "es. 100%, 800px",
+        "height": "Altezza",
+        "heightPlaceholder": "es. 600px, 100vh",
+        "makeResponsive": "Rendi reattivo (si adatta alla larghezza del contenitore)"
+      },
+      "appearance": {
+        "title": "Aspetto",
+        "backgroundColor": "Colore di sfondo",
+        "allowTransparentBackground": "Consenti sfondo trasparente (sovrascrive il colore di sfondo)"
+      },
+      "border": {
+        "title": "Bordo e stile",
+        "showBorder": "Mostra bordo",
+        "borderColor": "Colore bordo",
+        "borderWidth": "Larghezza bordo (px)",
+        "borderRadius": "Raggio bordo (px)",
+        "padding": "Padding (px)",
+        "paddingHelp": "Spazio attorno all'iframe"
+      },
+      "performance": {
+        "title": "Prestazioni",
+        "loadingMode": "Modalità caricamento",
+        "loadingModePlaceholder": "Seleziona modalità caricamento",
+        "lazy": "Lazy (consigliato)",
+        "eager": "Immediato",
+        "help": "Il caricamento lazy migliora le prestazioni della pagina caricando l'iframe solo quando entra nella visualizzazione"
+      }
+    },
+    "codeModal": {
+      "title": "Codice di incorporamento",
+      "description": "Scegli il tuo framework e copia il codice",
+      "codeLabel": "Codice {mode}",
+      "copied": "Copiato!",
+      "copy": "Copia",
+      "close": "Chiudi",
+      "modes": {
+        "htmlDescription": "iframe HTML universale",
+        "reactDescription": "Componente React",
+        "nextjsDescription": "Componente Next.js",
+        "vueDescription": "Componente Vue.js",
+        "wordpressDescription": "Shortcode WordPress"
+      },
+      "iframeTitle": "Modulo"
+    },
+    "testPage": {
+      "metadata": {
+        "title": "Test incorporamento - IkiForm",
+        "description": "Pagina di test per dimostrare le capacità di incorporamento dei moduli"
+      },
+      "title": "Pagina di test incorporamento moduli",
+      "descriptionPrefix": "Questa pagina dimostra come i moduli possono essere incorporati usando diverse configurazioni. Visita",
+      "descriptionSuffix": "per personalizzare il tuo incorporamento.",
+      "tryCustomizer": "Prova il personalizzatore di incorporamento",
+      "cards": {
+        "standard": {
+          "title": "Incorporamento standard",
+          "description": "Altezza 600px - perfetto per la visualizzazione desktop",
+          "badge": "Reattivo",
+          "iframeTitle": "Incorporamento modulo standard"
+        },
+        "compact": {
+          "title": "Incorporamento compatto",
+          "description": "Altezza 400px - ideale per barre laterali e spazi più piccoli",
+          "badge": "Minimale",
+          "iframeTitle": "Incorporamento modulo compatto"
+        },
+        "fixed": {
+          "title": "Incorporamento larghezza fissa",
+          "description": "Larghezza 800px, centrato - perfetto per layout specifici",
+          "badge": "Stile personalizzato",
+          "iframeTitle": "Incorporamento modulo larghezza fissa"
+        },
+        "react": {
+          "title": "Esempio componente React",
+          "description": "Componente React TypeScript con tipizzazione corretta",
+          "codeIframeTitle": "Modulo"
+        }
+      },
+      "guide": {
+        "title": "Come usare la funzione di incorporamento",
+        "description": "Guida passo-passo per incorporare i tuoi moduli",
+        "steps": {
+          "step1": {
+            "title": "Accedi al personalizzatore di incorporamento",
+            "prefix": "Vai a",
+            "suffix": "o clicca il pulsante di incorporamento nella dashboard del modulo."
+          },
+          "step2": {
+            "title": "Personalizza il tuo incorporamento",
+            "item1": "Regola le dimensioni di larghezza e altezza",
+            "item2": "Scegli il tema (chiaro, scuro, automatico)",
+            "item3": "Configura bordi e stile",
+            "item4": "Imposta il comportamento di caricamento"
+          },
+          "step3": {
+            "title": "Ottieni il tuo codice",
+            "description": "Copia il codice generato per HTML, React, Next.js, Vue o WordPress e incollalo nel tuo sito web."
+          },
+          "step4": {
+            "title": "Integrazione dashboard",
+            "description": "Accedi alle opzioni di incorporamento direttamente dalla dashboard del modulo usando il pulsante di incorporamento nelle azioni del modulo."
+          }
+        }
+      }
+    }
+  }
+}

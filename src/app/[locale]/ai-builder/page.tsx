@@ -11,7 +11,7 @@ import type { Metadata } from "next";
 const LABELS = {
 	en: "AI Form Builder",
 	es: "Creador de formularios con IA",
-};
+} as const;
 
 export async function generateMetadata({
 	params,
@@ -39,7 +39,12 @@ export default async function LocalizedAiBuilder({
 			<JsonLd
 				data={getBreadcrumbJsonLd(currentLocale, [
 					{ name: "Ikiform", path: "/" },
-					{ name: LABELS[currentLocale], path: "/ai-builder" },
+					{
+						name:
+							LABELS[currentLocale as keyof typeof LABELS] ??
+							"AI Form Builder",
+						path: "/ai-builder",
+					},
 				])}
 			/>
 			<AiBuilderPage />

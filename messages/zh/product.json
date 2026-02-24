@@ -1,0 +1,2211 @@
+{
+  "common": {
+    "na": "N/A",
+    "premium": {
+      "title": "需要高级订阅",
+      "viewPricing": "查看定价",
+      "aiBuilderDescription": "您需要高级订阅才能使用 AI 表单构建器。升级以解锁所有功能。",
+      "formBuilderDescription": "您需要高级订阅才能使用表单构建器。升级以解锁所有功能。"
+    }
+  },
+  "formBuilder": {
+    "header": {
+      "title": "表单构建器",
+      "goToDashboard": "前往仪表盘",
+      "fieldCount": "{count} 字段",
+      "fieldCount_plural": "{count} 个字段",
+      "saving": "保存中",
+      "moreActions": "更多操作",
+      "multiStepForm": "多步骤表单",
+      "toggleMultiStepMode": "切换多步骤模式",
+      "viewJson": "查看 JSON",
+      "analytics": "分析",
+      "share": "分享",
+      "useKiko": "使用 Kiko",
+      "settings": "设置",
+      "publish": "发布",
+      "published": "已发布",
+      "publishing": "发布中...",
+      "unpublishing": "取消发布中...",
+      "publishForm": "发布表单",
+      "unpublishForm": "取消发布表单",
+      "save": "保存",
+      "saveForm": "保存表单",
+      "actionsAria": "表单操作"
+    },
+    "modals": {
+      "formSettings": "表单设置",
+      "internalTitle": "内部标题",
+      "internalTitlePlaceholder": "请输入内部标题以便参考...",
+      "internalTitleDescription": "此标题仅在仪表盘和表单构建器中对您可见",
+      "publicTitle": "公开标题",
+      "publicTitlePlaceholder": "请输入向用户显示的标题...",
+      "publicTitleDescription": "此标题将在实际表单中向用户显示。留空以使用内部标题。",
+      "description": "描述",
+      "descriptionPlaceholder": "请输入表单描述",
+      "submitButtonText": "提交按钮文本",
+      "submitButtonTextPlaceholder": "提交按钮文本",
+      "submit": "提交",
+      "successMessage": "成功消息",
+      "successMessagePlaceholder": "提交成功后显示的消息",
+      "redirectUrlOptional": "重定向 URL（可选）",
+      "redirectUrlPlaceholder": "https://example.com/thank-you",
+      "cancel": "取消",
+      "saveSettings": "保存设置"
+    },
+    "page": {
+      "formFields": "表单字段",
+      "authRequired": "需要身份验证",
+      "authRequiredDescription": "请登录以使用表单构建器。",
+      "goToLogin": "前往登录",
+      "stepDefaultTitle": "{index} 步",
+      "stepDefaultDescription": "表单的第一步",
+      "loadingCustomization": "加载自定义中..."
+    },
+    "blockManager": {
+      "header": {
+        "title": "表单结构",
+        "stepsCount": "{count, plural, one {# 个步骤} other {# 个步骤}}",
+        "description": "将表单组织成逻辑部分",
+        "addStepAria": "为表单添加新步骤",
+        "addStep": "添加步骤"
+      },
+      "item": {
+        "dragHandleAria": "拖动以重新排序 {title} 步",
+        "dragToReorder": "拖动以重新排序"
+      },
+      "headerActions": {
+        "stepBadge": "{index} 步",
+        "editStepAria": "编辑 {title} 步",
+        "deleteStepAria": "删除 {title} 步",
+        "editStep": "编辑步骤",
+        "deleteStep": "删除步骤",
+        "collapseStep": "折叠步骤",
+        "expandStep": "展开步骤"
+      },
+      "editForm": {
+        "stepTitlePlaceholder": "步骤标题",
+        "stepDescriptionPlaceholder": "步骤描述（可选）",
+        "save": "保存",
+        "cancel": "取消"
+      },
+      "fieldsList": {
+        "empty": "暂无字段。 从右侧调色板中添加字段。"
+      }
+    },
+    "multiStepNavigation": {
+      "deleteStep": "删除步骤",
+      "addStep": "添加步骤",
+      "deleteDialogTitle": "删除步骤",
+      "deleteDialogDescription": "您确定要删除此步骤吗？此操作无法撤销。",
+      "cancel": "取消"
+    },
+    "formFields": {
+      "addFieldToFormAria": "为表单添加字段",
+      "addField": "添加字段",
+      "addSpecificFieldAria": "添加 {label} 字段",
+      "formFields": "表单字段",
+      "noFieldsInStep": "此步骤中无字段",
+      "noFieldsYet": "尚未添加字段",
+      "addFieldsToStep": "从调色板中为此步骤添加字段",
+      "addFieldsFromLeftPanel": "从左侧面板添加字段以开始构建表单",
+      "fieldsCount": "{count, plural, one {# 个字段} other {# 个字段}}",
+      "fieldAria": "{type} 字段",
+      "deleteFieldAria": "删除 {type} 字段",
+      "deleteField": "删除字段"
+    },
+    "jsonViewModal": {
+      "title": "表单模式 JSON",
+      "description": "当前表单模式的只读视图。使用复制按钮复制 JSON。",
+      "copySuccess": "JSON 已复制到剪贴板！",
+      "copyError": "复制 JSON 失败",
+      "copied": "已复制",
+      "copyJson": "复制 JSON"
+    },
+    "settingsMobile": {
+      "sectionsAria": "设置部分",
+      "goToSectionAria": "前往 {section} 设置",
+      "backToListAria": "返回设置列表",
+      "settings": "设置"
+    },
+    "creation": {
+      "title": "创建新表单",
+      "cancel": "取消",
+      "back": "返回",
+      "createForm": "创建表单",
+      "reviewAction": "查看",
+      "next": "下一步",
+      "types": {
+        "single": {
+          "title": "单页表单",
+          "description": "传统表单，所有字段都在一页上"
+        },
+        "multi": {
+          "title": "多步骤表单",
+          "description": "具有多个步骤的引导式表单体验"
+        }
+      },
+      "typePreview": {
+        "stepOf": "{step} / {total}"
+      },
+      "configuration": {
+        "title": "表单详情",
+        "description": "设置表单的内部和公开信息。",
+        "internalTitle": "内部标题",
+        "internalTitlePlaceholder": "输入内部标题以供参考…",
+        "internalTitleHelp": "仅在仪表板和构建器中可见。",
+        "publicTitle": "公开标题",
+        "publicTitlePlaceholder": "输入向用户显示的标题…",
+        "publicTitleHelp": "在表单上向用户显示。留空以重用内部标题。",
+        "formDescription": "表单描述",
+        "formDescriptionPlaceholder": "输入简短描述以指导用户…",
+        "formDescriptionHelp": "可选。帮助用户了解表单的用途。"
+      },
+      "review": {
+        "formType": "表单类型",
+        "multiStepForm": "多步骤表单",
+        "singlePageForm": "单页表单",
+        "multiStep": "多步骤",
+        "singlePage": "单页",
+        "editFormType": "编辑表单类型",
+        "formConfiguration": "表单配置",
+        "editFormConfiguration": "编辑表单配置",
+        "internalTitle": "内部标题",
+        "publicTitle": "公开标题",
+        "description": "描述",
+        "preview": "预览",
+        "previewDescription": "表单快照。"
+      },
+      "stepIndicator": {
+        "progress": "进度",
+        "stepCompleted": "{index} 步骤已完成",
+        "stepCurrent": "{index} 步骤当前",
+        "step": "{index} 步"
+      }
+    },
+    "customize": {
+      "page": {
+        "savedCustomization": "已保存自定义",
+        "saveFailed": "保存更改失败。请再试一次。",
+        "tabs": {
+          "presets": "预设",
+          "layout": "布局",
+          "colors": "颜色",
+          "text": "文本"
+        },
+        "backToCustomize": "返回自定义",
+        "previewForm": "表单预览",
+        "customizeForm": "自定义表单",
+        "publicTitle": "公共标题：\"{title}\"",
+        "customizationActions": "自定义操作",
+        "back": "返回",
+        "save": "保存",
+        "customize": "自定义"
+      },
+      "colors": {
+        "title": "颜色设置",
+        "description": "自定义颜色和主题",
+        "backgroundColorLabel": "背景颜色",
+        "backgroundColorHelp": "设置表单容器的背景颜色",
+        "textColorLabel": "文本颜色",
+        "textColorHelp": "设置表单中所有文本元素的颜色",
+        "primaryColorLabel": "主要颜色（按钮和强调色）",
+        "primaryColorHelp": "设置按钮、焦点状态和强调元素的颜色",
+        "borderColorLabel": "边框颜色",
+        "borderColorHelp": "设置输入字段边框和分隔线的颜色",
+        "websiteBackgroundColorLabel": "网站背景颜色",
+        "websiteBackgroundColorHelp": "设置整个网站/页面的背景颜色"
+      },
+      "typography": {
+        "title": "字体设置",
+        "description": "自定义字体和文本样式",
+        "fontFamily": "字体系列",
+        "fontFamilyPlaceholder": "选择一个谷歌字体...",
+        "fontPreview": "字体预览",
+        "previewLine1": "敏捷的棕色狐狸跳过懒惰的狗",
+        "previewLine2": "带有数字 1234567890 的示例表单文本",
+        "fontHelp": "从数百种谷歌字体中选择。字体将自动加载。",
+        "fontSize": "字体大小",
+        "fontWeight": "字体粗细",
+        "selected": "已选:",
+        "fontSizeOptions": {
+          "xs": {
+            "label": "超小",
+            "description": "12像素"
+          },
+          "sm": {
+            "label": "小",
+            "description": "14像素"
+          },
+          "base": {
+            "label": "基准",
+            "description": "16像素"
+          },
+          "lg": {
+            "label": "大",
+            "description": "18像素"
+          },
+          "xl": {
+            "label": "超大",
+            "description": "20像素"
+          }
+        },
+        "fontWeightOptions": {
+          "light": {
+            "label": "浅",
+            "description": "300"
+          },
+          "normal": {
+            "label": "正常",
+            "description": "400"
+          },
+          "medium": {
+            "label": "中等",
+            "description": "500"
+          },
+          "semibold": {
+            "label": "半粗",
+            "description": "600"
+          },
+          "bold": {
+            "label": "粗",
+            "description": "700"
+          }
+        }
+      },
+      "layout": {
+        "title": "布局设置",
+        "description": "配置间距和结构",
+        "showProgressBar": "显示进度条",
+        "formWidth": "表单宽度",
+        "formWidthHelp": "控制表单容器的最大宽度",
+        "customWidth": "自定义宽度（例如 600px、80%、50rem）",
+        "customWidthPlaceholder": "输入自定义宽度",
+        "internalPadding": "内部填充",
+        "internalPaddingHelp": "控制表单容器内的空间",
+        "externalMargin": "外部边距",
+        "externalMarginHelp": "控制表单容器周围的空间",
+        "cornerRadius": "角半径",
+        "cornerRadiusHelp": "控制表单角的圆润程度",
+        "widthOptions": {
+          "sm": {
+            "label": "小",
+            "description": "最大宽度 400px"
+          },
+          "md": {
+            "label": "中等",
+            "description": "最大宽度 600px"
+          },
+          "lg": {
+            "label": "大",
+            "description": "最大宽度 800px"
+          },
+          "xl": {
+            "label": "超大",
+            "description": "最大宽度 1000px"
+          },
+          "full": {
+            "label": "全宽",
+            "description": "100% 宽度"
+          },
+          "custom": {
+            "label": "自定义",
+            "description": "自定义宽度值"
+          }
+        },
+        "paddingOptions": {
+          "none": {
+            "label": "无",
+            "description": "0像素填充"
+          },
+          "sm": {
+            "label": "小",
+            "description": "16像素填充"
+          },
+          "md": {
+            "label": "中等",
+            "description": "24像素填充"
+          },
+          "lg": {
+            "label": "大",
+            "description": "32像素填充"
+          }
+        },
+        "marginOptions": {
+          "none": {
+            "label": "无",
+            "description": "无边距"
+          },
+          "sm": {
+            "label": "小",
+            "description": "8像素"
+          },
+          "md": {
+            "label": "中等",
+            "description": "16像素"
+          },
+          "lg": {
+            "label": "大",
+            "description": "32像素"
+          }
+        },
+        "radiusOptions": {
+          "none": {
+            "label": "无",
+            "description": "0像素（锐角）"
+          },
+          "sm": {
+            "label": "小",
+            "description": "4像素边框半径"
+          },
+          "md": {
+            "label": "中等",
+            "description": "8像素边框半径"
+          },
+          "lg": {
+            "label": "大",
+            "description": "16像素边框半径"
+          },
+          "xl": {
+            "label": "超大",
+            "description": "24像素边框半径"
+          }
+        }
+      },
+      "presets": {
+        "title": "设计预设",
+        "description": "使用精美的预设计表单样式快速启动",
+        "category": "分类",
+        "allPresets": "所有预设",
+        "presets": "预设",
+        "presetCount": "{count, plural, one {# 个预设} other {# 个预设}}",
+        "presetList": "预设列表",
+        "applyPresetAria": "应用 {name} 预设",
+        "appliedPreset": "已应用 \"{name}\" 预设",
+        "formTitle": "表单标题",
+        "submit": "提交"
+      },
+      "preview": {
+        "title": "实时预览",
+        "description": "查看应用自定义设置后表单的显示效果",
+        "sampleTitle": "示例表单",
+        "sampleDescription": "这是当前设计设置下表单的显示效果。",
+        "nameLabel": "姓名 *",
+        "namePlaceholder": "请输入您的姓名",
+        "emailLabel": "电子邮件 *",
+        "emailPlaceholder": "请输入您的电子邮件",
+        "categoryLabel": "分类",
+        "categoryPlaceholder": "选择分类",
+        "categoryGeneral": "一般咨询",
+        "categorySupport": "支持",
+        "categorySales": "销售",
+        "messageLabel": "消息",
+        "messagePlaceholder": "请输入您的消息",
+        "submitButton": "提交表单",
+        "previousStepAria": "上一步",
+        "previousStep": "上一页",
+        "nextStepAria": "下一步",
+        "nextStep": "下一步",
+        "submitAria": "提交表单"
+      }
+    },
+    "toasts": {
+      "loginRequiredToSave": "请登录以保存您的表单。",
+      "formSaved": "表单保存成功！",
+      "formCreated": "表单创建成功！",
+      "saveFailed": "保存表单失败，请重试。",
+      "saveBeforeShare": "分享表单前请先保存。",
+      "formPublished": "表单发布成功！",
+      "publishFailed": "发布表单失败，请重试。",
+      "saveBeforeAnalytics": "查看分析数据前请先保存表单。",
+      "loadingAnalytics": "加载分析数据...",
+      "saveBeforePublish": "发布表单前请先保存。",
+      "userAuthRequired": "用户身份验证 required",
+      "formUnpublished": "表单取消发布成功！",
+      "updateStatusFailed": "更新表单状态失败，请重试。",
+      "saveSettingsFailed": "保存设置失败，请重试。",
+      "loadFailed": "加载表单失败，请重试。"
+    },
+    "formPreview": {
+      "titlePlaceholder": "点击添加标题...",
+      "descriptionPlaceholder": "点击添加描述...",
+      "publicTitle": "公共标题：\"{title}\"",
+      "stepTitlePlaceholder": "点击添加步骤标题...",
+      "stepDescriptionPlaceholder": "点击添加步骤描述...",
+      "stepBadge": "{index} 步",
+      "editFieldAria": "编辑字段",
+      "clickToEdit": "点击编辑"
+    },
+    "fieldPalette": {
+      "headerTitle": "表单字段",
+      "headerDescription": "点击为表单添加字段",
+      "ariaPalette": "字段调色板",
+      "searchAria": "搜索字段",
+      "searchPlaceholder": "搜索字段...",
+      "categoryFieldsAria": "{category} 字段",
+      "noFieldsFound": "未找到与 \"{searchTerm}\" 匹配的字段",
+      "searchHint": "尝试按字段名称、描述或类型搜索",
+      "addFieldAria": "添加 {label} 字段",
+      "categories": {
+        "input": "输入字段",
+        "selection": "选择字段",
+        "media": "媒体字段",
+        "layout": "布局字段",
+        "advanced": "高级字段"
+      },
+      "fields": {
+        "text": {
+          "label": "文本输入",
+          "description": "用于短文本回复的单行输入框。"
+        },
+        "email": {
+          "label": "电子邮件",
+          "description": "收集有效的电子邮件地址。"
+        },
+        "number": {
+          "label": "数字",
+          "description": "用于数字值的输入框。"
+        },
+        "phone": {
+          "label": "电话号码",
+          "description": "用于带有验证的电话号码的输入框。"
+        },
+        "textarea": {
+          "label": "文本区域",
+          "description": "用于较长文本的多行输入框。"
+        },
+        "date": {
+          "label": "日期",
+          "description": "从日历中选择日期。"
+        },
+        "time": {
+          "label": "时间",
+          "description": "选择或输入时间值。"
+        },
+        "address": {
+          "label": "地址",
+          "description": "输入街道、城市和其他地址详细信息。"
+        },
+        "link": {
+          "label": "链接",
+          "description": "输入有效的网站网址。"
+        },
+        "select": {
+          "label": "选择下拉菜单",
+          "description": "下拉菜单，选择一个选项。"
+        },
+        "radio": {
+          "label": "单选按钮",
+          "description": "从列表中选择一个选项。"
+        },
+        "checkbox": {
+          "label": "复选框",
+          "description": "选择一个或多个选项。"
+        },
+        "slider": {
+          "label": "滑块",
+          "description": "通过滑动手柄选择值。"
+        },
+        "rating": {
+          "label": "评分",
+          "description": "收集星级或图标评分。"
+        },
+        "poll": {
+          "label": "投票",
+          "description": "让用户对多个选项进行投票。"
+        },
+        "file": {
+          "label": "文件上传",
+          "description": "上传有限定大小和类型的檔案。"
+        },
+        "signature": {
+          "label": "签名",
+          "description": "用鼠标或触摸绘制或签名。"
+        },
+        "statement": {
+          "label": "声明",
+          "description": "在表单中显示标题或描述。"
+        },
+        "banner": {
+          "label": "横幅",
+          "description": "显示突出显示的消息或警告。"
+        },
+        "field-group": {
+          "label": "字段组",
+          "description": "将字段组合在一行中。"
+        },
+        "tags": {
+          "label": "标签输入",
+          "description": "输入和管理多个标签。"
+        },
+        "social": {
+          "label": "社交媒体",
+          "description": "添加社交媒体个人资料链接。"
+        },
+        "scheduler": {
+          "label": "调度器",
+          "description": "嵌入调度链接（例如Calendly）。"
+        }
+      }
+    },
+    "fieldSettings": {
+      "header": {
+        "title": "字段设置",
+        "closeAria": "关闭字段设置"
+      },
+      "emptyState": {
+        "title": "未选择字段",
+        "description": "点击预览中的字段编辑其设置"
+      },
+      "basic": {
+        "title": "基本设置",
+        "fieldLabel": "字段标签",
+        "fieldLabelPlaceholder": "输入字段标签",
+        "fieldLabelHelp": "显示在字段上方的标签",
+        "placeholder": "占位符",
+        "placeholderPlaceholder": "输入占位符文本",
+        "placeholderHelp": "显示在字段内的提示文本",
+        "description": "描述",
+        "descriptionPlaceholder": "输入字段描述（显示在字段下方）",
+        "descriptionHelp": "显示在字段下方的额外帮助文本",
+        "required": "必填字段",
+        "requiredHelp": "用户必须填写此字段才能提交表单"
+      },
+      "validation": {
+        "title": "验证",
+        "minLength": "最小长度",
+        "minLengthPlaceholder": "最少字符",
+        "minLengthHelp": "必填的最小字符数",
+        "maxLength": "最大长度",
+        "maxLengthPlaceholder": "最多字符",
+        "maxLengthHelp": "允许的最大字符数",
+        "pattern": "模式（正则表达式）",
+        "patternPlaceholder": "正则表达式",
+        "patternHelp": "用于验证的正则表达式模式",
+        "minValue": "最小值",
+        "minValuePlaceholder": "最小值",
+        "minValueHelp": "允许的最小数值",
+        "maxValue": "最大值",
+        "maxValuePlaceholder": "最大值",
+        "maxValueHelp": "允许的最大数值"
+      },
+      "errorMessages": {
+        "title": "自定义错误消息",
+        "requiredFieldMessage": "必填字段消息",
+        "requiredFieldPlaceholder": "此字段是必填项",
+        "minLengthMessage": "最小长度错误消息",
+        "minLengthPlaceholder": "必须至少有 {count} 个字符",
+        "maxLengthMessage": "最大长度错误信息",
+        "maxLengthPlaceholder": "长度不能超过 {count} 个字符",
+        "patternMessage": "模式错误信息",
+        "patternPlaceholder": "请输入有效格式",
+        "emailMessage": "电子邮件错误信息",
+        "emailPlaceholder": "请输入有效的电子邮件地址",
+        "minValueMessage": "最小值错误信息",
+        "minValuePlaceholder": "必须至少 {value}",
+        "maxValueMessage": "最大值错误信息",
+        "maxValuePlaceholder": "不能超过 {value}",
+        "invalidNumberMessage": "无效数字信息",
+        "invalidNumberPlaceholder": "请输入有效的数字"
+      },
+      "options": {
+        "title": "选项",
+        "addOptionAria": "添加新选项",
+        "addOption": "添加选项",
+        "optionPlaceholder": "选项 {index}",
+        "removeOptionAria": "移除选项 {index}",
+        "none": "暂无选项",
+        "or": "或",
+        "orAria": "或者",
+        "fetchFromApi": "从 API 获取",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "用于从 API 获取选项的端点",
+        "valueKeyPlaceholder": "值键（例如 id）",
+        "valueKeyHelp": "选项值键",
+        "labelKeyPlaceholder": "标签键（例如 name）",
+        "labelKeyHelp": "选项标签键",
+        "apiGuidanceTitle": "API 数据指南：",
+        "apiGuidanceIntro": "此字段将从 API 端点获取选项：",
+        "apiShouldReturn": "API 应返回以下格式：",
+        "apiType1Hint": "（字符串数组）",
+        "apiType2Hint": "（对象数组）",
+        "apiType3Hint": "（带有选项数组的对象）",
+        "apiType4Hint": "（自定义键）",
+        "apiCustomKeysHelp": "您可以指定自定义键来映射 API 数据",
+        "apiValueLabelHelp": "每个选项必须具有",
+        "apiValueLabelHelpOr": "属性（或自定义键）",
+        "apiValueLabelHelpSuffix": "是可选的"
+      },
+      "prepopulation": {
+        "title": "预填充",
+        "unknownError": "未知错误",
+        "enabled": "启用预填充",
+        "enabledHelp": "自动用现有数据填充此字段",
+        "dataSource": "数据源",
+        "sources": {
+          "url": "URL 参数",
+          "api": "外部 API",
+          "profile": "用户资料",
+          "previous": "上一次提交"
+        },
+        "urlParamName": "URL 参数名",
+        "urlParamPlaceholder": "例如，name、email、phone",
+        "urlParamHelp": "从 URL 查询字符串中提取的参数名",
+        "fallbackValue": "备用值",
+        "fallbackValuePlaceholder": "参数缺失时的默认值",
+        "fallbackValueHelp": "如果 URL 参数缺失，则使用默认值",
+        "overwriteExisting": "覆盖现有值",
+        "overwriteExistingHelp": "用预填充值替换用户输入",
+        "generatePreviewAria": "生成预览 URL",
+        "generatePreview": "生成预览 URL",
+        "previewUrlLabel": "预览 URL：",
+        "previewUrlHelp": "此 URL 将用 \"示例 {label}\" 预填充字段",
+        "apiEndpoint": "API 端点",
+        "apiEndpointPlaceholder": "https://api.example.com/user-data",
+        "apiEndpointHelp": "用于获取数据的 API 端点",
+        "httpMethod": "HTTP 方法",
+        "requestHeaders": "请求头（JSON）",
+        "requestHeadersHelp": "包含 API 请求的 HTTP 请求头的 JSON 对象",
+        "testApiAria": "测试 API 端点",
+        "testApi": "测试 API 端点",
+        "comingSoonLabel": "即将推出：",
+        "profileComingSoon": "用户资料预填充功能将在未来更新中提供。",
+        "previousComingSoon": "上一次提交预填充功能将在未来更新中提供。",
+        "toasts": {
+          "missingUrlParam": "请先输入 URL 参数名",
+          "previewUrlCopied": "预览 URL 已复制到剪贴板！",
+          "previewUrlCopyFailed": "复制预览网址失败",
+          "missingApiEndpoint": "请先输入 API 端点",
+          "apiReachable": "API 端点可达！",
+          "apiTestFailedStatus": "API 测试失败： {status} {statusText}",
+          "apiTestFailedError": "API 测试失败： {error}"
+        }
+      },
+      "date": {
+        "title": "日期字段设置",
+        "minDate": "最小日期",
+        "selectMinDate": "选择最小日期",
+        "maxDate": "最大日期",
+        "selectMaxDate": "选择最大日期",
+        "defaultDate": "默认日期",
+        "selectDefaultDate": "选择默认日期"
+      },
+      "number": {
+        "title": "数字字段设置",
+        "minValue": "最小值",
+        "noMinimum": "无最小值",
+        "minValueHelp": "允许的最小数值",
+        "maxValue": "最大值",
+        "noMaximum": "无最大值",
+        "maxValueHelp": "允许的最大数值",
+        "stepSize": "步长",
+        "stepSizeHelp": "数字输入的增减步长",
+        "defaultValue": "默认值",
+        "noDefault": "无默认值",
+        "defaultValueHelp": "表单加载时的预填充值"
+      },
+      "radio": {
+        "title": "测验设置",
+        "enableQuizQuestion": "启用为测验问题",
+        "correctAnswer": "正确答案",
+        "correctAnswerPlaceholder": "选择正确答案",
+        "points": "正确回答分数",
+        "showCorrectAnswer": "提交后显示正确答案",
+        "explanation": "解释（可选）",
+        "explanationPlaceholder": "解释为什么这是正确答案..."
+      },
+      "address": {
+        "title": "地址字段设置",
+        "requiredLines": "必填地址行",
+        "requiredLinesPlaceholder": "例如 2（必填地址行 1 和城市）",
+        "requiredLinesHelp": "必须填写的地址行数（1-5）",
+        "customErrorMessage": "自定义错误消息",
+        "customErrorPlaceholder": "请填写所有必填地址字段",
+        "customErrorHelp": "当必填地址字段不完整时显示的自定义错误消息"
+      },
+      "phone": {
+        "title": "电话字段设置",
+        "pattern": "自定义正则表达式模式",
+        "patternPlaceholder": "例如 ^\\+?[0-9]{10,15}$",
+        "patternHelp": "用于电话号码验证的正则表达式模式",
+        "errorMessage": "自定义错误消息",
+        "errorMessagePlaceholder": "请输入有效的电话号码",
+        "errorMessageHelp": "当电话验证失败时显示的自定义错误消息"
+      },
+      "statement": {
+        "title": "陈述字段设置",
+        "heading": "标题",
+        "headingPlaceholder": "输入陈述标题",
+        "headingHelp": "陈述的主要标题",
+        "description": "描述",
+        "descriptionPlaceholder": "输入陈述描述",
+        "descriptionHelp": "陈述的详细描述",
+        "alignment": "对齐方式",
+        "alignmentPlaceholder": "选择对齐方式",
+        "alignLeft": "左对齐",
+        "alignCenter": "居中对齐",
+        "alignRight": "右对齐",
+        "alignmentHelp": "陈述的文本对齐方式",
+        "size": "大小",
+        "sizePlaceholder": "选择大小",
+        "sizeSmall": "小",
+        "sizeMedium": "中等",
+        "sizeLarge": "大",
+        "sizeHelp": "陈述的字体大小"
+      },
+      "slider": {
+        "title": "滑块设置",
+        "mode": "滑块模式",
+        "modePlaceholder": "选择滑块模式",
+        "modeSingle": "单值",
+        "modeRange": "范围（最小值 + 最大值）",
+        "modeHelp": "选择一个值或让用户选择最小值和最大值",
+        "min": "最小值",
+        "minHelp": "滑块的最小值",
+        "max": "最大值",
+        "maxHelp": "滑块的最大值",
+        "step": "步长",
+        "stepHelp": "滑块的增减步长",
+        "defaultMin": "默认最小值",
+        "defaultMinHelp": "表单加载时的预填充最小值",
+        "defaultMax": "默认最大值",
+        "defaultMaxHelp": "表单加载时的预填充最大值",
+        "defaultValue": "默认值",
+        "defaultValueHelp": "表单加载时的预填充值"
+      },
+      "text": {
+        "title": "文本字段设置",
+        "maxLength": "最大长度",
+        "maxLengthPlaceholder": "无限制",
+        "maxLengthHelp": "允许的最大字符数（1-1000）",
+        "minLength": "最小长度",
+        "minLengthPlaceholder": "无最小值",
+        "minLengthHelp": "最少需要的字符数（0-1000）"
+      },
+      "checkbox": {
+        "title": "复选框选项",
+        "options": "选项",
+        "addOptionPlaceholder": "添加选项",
+        "addOptionAria": "添加复选框选项",
+        "optionsHelp": "添加用户可以选择的复选框选项",
+        "removeOptionAria": "移除选项 {index}",
+        "allowMultiple": "允许多选",
+        "allowMultipleHelp": "启用后，用户可以选择多个选项。禁用后，只能选择一个选项。"
+      },
+      "link": {
+        "title": "链接字段设置",
+        "pattern": "自定义正则表达式模式",
+        "patternPlaceholder": "例如 ^https?://.+$",
+        "patternHelp": "URL 验证的正则表达式模式",
+        "errorMessage": "自定义错误消息",
+        "errorMessagePlaceholder": "请输入有效的网址",
+        "errorMessageHelp": "URL 验证失败时显示的自定义错误消息"
+      },
+      "poll": {
+        "title": "投票设置",
+        "pollOptions": "投票选项",
+        "addOptionPlaceholder": "添加选项",
+        "addOptionAria": "添加投票选项",
+        "optionsHelp": "添加用户可以投票的投票选项",
+        "editOptionAria": "编辑投票选项 {index}",
+        "removeOptionAria": "删除投票选项 {index}",
+        "orAria": "或分隔符",
+        "or": "或",
+        "fetchFromApi": "从 API 获取选项",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "从中获取投票选项的 API 端点",
+        "valueKeyPlaceholder": "值键（例如 id）",
+        "valueKeyHelp": "选项值键",
+        "labelKeyPlaceholder": "标签键（例如 name）",
+        "labelKeyHelp": "选项标签键",
+        "apiGuidanceTitle": "API 数据指南：",
+        "apiGuidanceIntro": "此字段将从 API 端点获取选项：",
+        "apiShouldReturn": "API 应返回以下格式：",
+        "apiType1Hint": "（字符串数组）",
+        "apiType2Hint": "（对象数组）",
+        "apiType3Hint": "（带有选项数组的对象）",
+        "apiType4Hint": "（自定义键）",
+        "apiCustomKeysHelp": "您可以指定自定义键来映射 API 数据",
+        "apiValueLabelHelp": "每个选项必须具有",
+        "apiValueLabelHelpOr": "属性（或自定义键）",
+        "apiValueLabelHelpSuffix": "是可选的",
+        "showResults": "投票后显示结果",
+        "showResultsHelp": "在用户投票后显示投票结果"
+      },
+      "social": {
+        "title": "社交平台",
+        "availablePlatforms": "可用平台",
+        "platforms": {
+          "github": "GitHub",
+          "twitter": "Twitter",
+          "linkedin": "LinkedIn",
+          "facebook": "Facebook",
+          "instagram": "Instagram",
+          "youtube": "YouTube",
+          "website": "网站"
+        },
+        "platformsHelp": "选择要在字段中包含哪些社交平台",
+        "customLinks": "自定义链接",
+        "labelPlaceholder": "标签",
+        "placeholderPlaceholder": "占位符（可选）",
+        "removeCustomLinkAria": "删除自定义链接 {index}",
+        "addCustomLinkAria": "添加自定义链接",
+        "addCustomLink": "添加自定义链接",
+        "customLinksHelp": "添加带有自定义标签和占位符的自定义社交链接"
+      },
+      "emailValidation": {
+        "title": "电子邮件验证",
+        "removeBlockedDomainAria": "从阻止的域中删除 {domain}",
+        "removeAllowedDomainAria": "从允许的域中删除 {domain}",
+        "autoCompleteDomain": "自动完成域",
+        "autoCompletePlaceholder": "例如，business.com",
+        "setAutoCompleteAria": "设置自动完成域",
+        "set": "设置",
+        "removeAutoCompleteAria": "删除 {domain} 域",
+        "autoCompleteHelp": "用户只需输入用户名，域将自动完成",
+        "allowedDomains": "允许的域",
+        "allowedPlaceholder": "例如，company.com",
+        "addAllowedDomainAria": "添加允许的域",
+        "allowedHelp": "只接受来自这些域的电子邮件",
+        "blockedDomains": "阻止的域",
+        "blockedPlaceholder": "例如，temp-mail.org",
+        "addBlockedDomainAria": "添加阻止的域",
+        "blockedHelp": "来自这些域的电子邮件将被拒绝（默认阻止临时电子邮件服务）",
+        "requireBusinessEmail": "需要商业电子邮件",
+        "requireBusinessEmailHelp": "仅允许商业域（阻止 Gmail，Yahoo 等）",
+        "customValidationMessage": "自定义验证消息",
+        "customValidationPlaceholder": "电子邮件验证的自定义错误消息",
+        "customValidationHelp": "留空以使用默认消息"
+      },
+      "file": {
+        "title": "文件上传设置",
+        "bytesUnit": "字节",
+        "maxFiles": "最大文件数",
+        "maxFilesPlaceholder": "10",
+        "maxFilesHelp": "用户可以上传的最大文件数（1-50）",
+        "maxFileSize": "最大文件大小",
+        "maxFileSizePlaceholder": "50",
+        "mbUnit": "MB",
+        "setMaxSizePresetAria": "设置最大文件大小为 {size}",
+        "currentSize": "当前：{size}",
+        "allowedFileTypes": "允许的文件类型",
+        "quickSelect": "快速选择：",
+        "commonTypes": {
+          "images": "图像",
+          "documents": "文档",
+          "spreadsheets": "电子表格",
+          "videos": "视频",
+          "audio": "音频",
+          "archives": "存档"
+        },
+        "toggleFileTypeAria": "切换 {type} 文件类型",
+        "customExtensions": "自定义文件扩展名",
+        "customExtensionsPlaceholder": "例如，txt, csv, json",
+        "addCustomExtensionAria": "添加自定义文件扩展名",
+        "customExtensionsHelp": "添加自定义文件扩展名（不带点）",
+        "selectedExtensions": "已选扩展名：",
+        "removeExtensionAria": "删除 {extension} 文件扩展名",
+        "htmlAccept": "HTML 接受属性（只读）",
+        "htmlAcceptHelp": "根据以上选择自动生成",
+        "helpText": "帮助文本",
+        "helpTextPlaceholder": "用户额外说明...",
+        "helpTextHelp": "可选说明，帮助用户了解要上传的文件"
+      },
+      "scheduler": {
+        "title": "调度设置",
+        "provider": "调度提供商",
+        "providerPlaceholder": "选择提供商",
+        "providerHelp": "选择您首选的调度平台",
+        "calcomLink": "Cal.com 链接",
+        "calendlyLink": "Calendly 链接",
+        "tidycalLink": "TidyCal 链接",
+        "schedulerLink": "调度链接",
+        "linkPlaceholder": "https://...",
+        "linkHelp": "嵌入 {provider} 调度器的 URL",
+        "buttonText": "日历开启按钮文本",
+        "buttonTextPlaceholder": "例如 预约通话",
+        "buttonTextHelp": "调度器按钮上显示的文本",
+        "preview": "预览",
+        "openScheduler": "打开调度器",
+        "previewHelp": "点击预览调度器的显示效果",
+        "previewModalTitle": "调度器预览",
+        "iframeTitle": "调度器嵌入",
+        "closePreviewAria": "关闭调度器预览",
+        "close": "关闭",
+        "providerCalcom": "Cal.com",
+        "providerCalendly": "Calendly",
+        "providerTidycal": "TidyCal"
+      },
+      "banner": {
+        "title": "横幅设置",
+        "alertType": "警报类型",
+        "alertTypePlaceholder": "选择警报类型",
+        "warning": "警告",
+        "error": "错误",
+        "info": "信息",
+        "success": "成功",
+        "alertTypeHelp": "选择横幅的视觉样式和配色方案",
+        "bannerTitle": "标题",
+        "bannerTitlePlaceholder": "无烟",
+        "bannerTitleHelp": "横幅主要标题文本",
+        "description": "描述",
+        "descriptionPlaceholder": "我们的住宿严禁吸烟...",
+        "descriptionHelp": "横幅详细描述文本"
+      },
+      "fieldGroup": {
+        "layoutTitle": "布局设置",
+        "layoutDirection": "布局方向",
+        "layoutHorizontal": "水平（并排）",
+        "layoutVertical": "垂直（堆叠）",
+        "layoutDirectionHelp": "组内字段的排列方式",
+        "columns": "列数",
+        "columns2": "2 列",
+        "columns3": "3 列",
+        "columns4": "4 列",
+        "columnsHelp": "水平布局的列数",
+        "spacing": "字段间距",
+        "spacingCompact": "紧凑",
+        "spacingNormal": "正常",
+        "spacingRelaxed": "宽松",
+        "spacingHelp": "字段之间的间距",
+        "groupFields": "表单字段组 ({count})",
+        "addFieldAria": "向组添加字段",
+        "addField": "添加字段",
+        "addFieldDialogTitle": "添加一个字段",
+        "emptyStateTitle": "此组中暂无字段.",
+        "emptyStateDescription": "使用下拉菜单或快速添加按钮添加字段.",
+        "fieldFallback": "{type} 字段",
+        "settingsAria": "{name} 字段设置",
+        "removeAria": "移除 {name} 字段",
+        "fieldLabel": "字段标签",
+        "fieldLabelPlaceholder": "输入字段标签",
+        "fieldLabelHelp": "此字段的标签",
+        "placeholder": "占位文本",
+        "placeholderPlaceholder": "输入占位符文本",
+        "placeholderHelp": "此字段的占位文本",
+        "required": "必填字段",
+        "requiredHelp": "必填字段",
+        "advancedAria": "切换 {name} 的高级设置",
+        "advanced": "高级设置"
+      },
+      "rating": {
+        "title": "评分设置",
+        "starCount": "星级数量",
+        "starCountHelp": "评分星级数量 (1-10)",
+        "starSize": "星级大小",
+        "starSizeHelp": "评分星级大小 (16-64px)",
+        "iconType": "图标类型",
+        "star": "星星",
+        "heart": "心形",
+        "iconTypeHelp": "选择评分图标类型",
+        "iconColor": "图标颜色",
+        "iconColorHelp": "评分图标颜色"
+      },
+      "tags": {
+        "title": "标签设置",
+        "maxTags": "最大标签数量",
+        "maxTagsHelp": "用户可添加的最大标签数量 (最少 1)",
+        "allowDuplicates": "允许重复标签",
+        "allowDuplicatesHelp": "允许用户多次添加相同标签"
+      },
+      "textarea": {
+        "title": "文本域字段设置",
+        "rows": "行数",
+        "rowsHelp": "文本域初始高度 (2-20 行)"
+      },
+      "time": {
+        "title": "时间字段设置",
+        "showCurrentTimeButton": "显示 '设为当前时间' 按钮",
+        "showCurrentTimeButtonHelp": "显示自动设为当前时间的按钮"
+      },
+      "email": {
+        "title": "电子邮件字段设置",
+        "allowedDomains": "允许的域名 (逗号分隔)",
+        "allowedDomainsPlaceholder": "gmail.com, company.com",
+        "blockedDomains": "阻止的域名 (逗号分隔)",
+        "blockedDomainsPlaceholder": "tempmail.com, spam.com",
+        "requireBusinessEmail": "仅限商业邮箱",
+        "customValidationMessage": "自定义验证消息",
+        "customValidationPlaceholder": "请输入有效的电子邮件地址"
+      }
+    },
+    "formSettings": {
+      "title": "表单设置",
+      "exportSecure": "导出（安全）",
+      "preparing": "准备中...",
+      "saveFormFirstAccess": "请先保存表单才能访问设置.",
+      "saveFormFirstExport": "请先保存表单以安全导出.",
+      "exportPrepareFailed": "安全导出准备失败.",
+      "settingsSectionsAria": "设置部分",
+      "goToSectionSettingsAria": "前往 {section} 设置",
+      "sections": {
+        "basic": "基本信息",
+        "limits": "限制",
+        "security": "安全",
+        "quiz": "测验与评分",
+        "branding": "品牌",
+        "notifications": "通知",
+        "api": "API 访问",
+        "webhooks": "网络钩子",
+        "design": "设计",
+        "metadata": "元数据"
+      },
+      "search": {
+        "aria": "搜索设置",
+        "placeholder": "搜索设置...",
+        "resultsAria": "搜索结果",
+        "noMatches": "无匹配结果",
+        "items": {
+          "basic-info-title": {
+            "label": "基本信息"
+          },
+          "behavior-title": {
+            "label": "表单行为"
+          },
+          "rate-limit-title": {
+            "label": "速率限制"
+          },
+          "response-limit-title": {
+            "label": "响应限制"
+          },
+          "password-protection-title": {
+            "label": "密码保护"
+          },
+          "duplicate-prevention-title": {
+            "label": "防止重复提交"
+          },
+          "profanity-filter-title": {
+            "label": "脏话过滤"
+          },
+          "bot-protection-title": {
+            "label": "Bot Protection"
+          },
+          "branding-title": {
+            "label": "品牌"
+          },
+          "social-media-links-title": {
+            "label": "社交媒体链接"
+          },
+          "quiz-title": {
+            "label": "测验与评分"
+          },
+          "notifications-title": {
+            "label": "通知"
+          },
+          "api-access-title": {
+            "label": "API 访问"
+          },
+          "webhooks-title": {
+            "label": "网络钩子"
+          },
+          "design-title": {
+            "label": "设计"
+          },
+          "metadata-title": {
+            "label": "SEO"
+          },
+          "social-metadata-title": {
+            "label": "社交媒体元数据"
+          },
+          "search-engine-indexing-title": {
+            "label": "搜索引擎索引"
+          }
+        }
+      },
+      "defaults": {
+        "submitText": "提交",
+        "notificationSubject": "新的表单提交",
+        "notificationMessage": "您已收到一个新的表单提交。"
+      },
+      "common": {
+        "unsavedChanges": "未保存的更改",
+        "reset": "重置",
+        "save": "保存",
+        "saved": "已保存",
+        "formIdRequiredToSaveSettings": "需要表单ID才能保存设置",
+        "validValueBetween": "请输入{min}和{max}之间的有效值",
+        "fillRequiredFields": "请填写必填字段",
+        "requiredAria": "必填",
+        "fieldRequired": "此字段是必填项"
+      },
+      "basicInfoSection": {
+        "ariaSettings": "基本表单设置",
+        "basicTitle": "基本信息",
+        "basicDescription": "配置您的表单的基本细节",
+        "internalTitleLabel": "内部标题",
+        "internalTitleDescription": "此标题仅在仪表盘和表单构建器中对您可见",
+        "internalTitlePlaceholder": "请输入内部标题以便参考...",
+        "publicTitleLabel": "公开标题",
+        "publicTitleDescription": "此标题将在实际表单中向用户显示。留空以使用内部标题。",
+        "publicTitlePlaceholder": "请输入向用户显示的标题...",
+        "formDescriptionLabel": "表单描述",
+        "formDescriptionPlaceholder": "请输入表单描述",
+        "submitButtonTextLabel": "提交按钮文本",
+        "submitButtonTextPlaceholder": "提交",
+        "successMessageLabel": "成功消息",
+        "successMessagePlaceholder": "感谢您的提交！",
+        "redirectUrlLabel": "重定向URL（可选）",
+        "redirectUrlDescription": "成功提交后重定向用户的URL",
+        "redirectUrlPlaceholder": "https://example.com/thank-you",
+        "basicActionsAria": "基本信息操作",
+        "saveBasicAria": "保存基本信息",
+        "saveBasicSuccess": "基本信息保存成功",
+        "saveBasicFailed": "保存基本信息失败",
+        "behaviorTitle": "表单行为",
+        "behaviorDescription": "配置您的表单对用户如何表现和显示",
+        "hideHeaderLabel": "隐藏头部",
+        "hideHeaderDescription": "隐藏公共标题和描述在嵌入中",
+        "rtlLabel": "从右到左模式",
+        "rtlDescription": "以RTL（从右到左）模式显示表单",
+        "autoFocusLabel": "自动聚焦第一个字段",
+        "autoFocusDescription": "表单加载时自动聚焦第一个字段",
+        "behaviorActionsAria": "表单行为操作",
+        "saveBehaviorAria": "保存表单行为设置",
+        "saveBehaviorSuccess": "表单行为保存成功",
+        "saveBehaviorFailed": "保存表单行为失败"
+      },
+      "passwordProtectionSection": {
+        "ariaSettings": "密码保护设置",
+        "title": "密码保护",
+        "description": "用密码限制对您的表单的访问",
+        "enableLabel": "启用密码保护",
+        "enableDescription": "要求用户输入密码才能访问表单",
+        "passwordLabel": "密码",
+        "passwordPlaceholder": "输入表单密码",
+        "hidePasswordAria": "隐藏密码",
+        "showPasswordAria": "显示密码",
+        "passwordDescription": "用户需要输入此密码才能访问表单",
+        "customMessageLabel": "自定义消息",
+        "customMessagePlaceholder": "输入密码提示的自定义消息",
+        "customMessageDescription": "当用户需要输入密码时显示的消息",
+        "currentConfiguration": "当前配置",
+        "summaryPrefix": "密码保护是",
+        "enabled": "已启用",
+        "summarySuffix": ". 用户需要输入密码才能访问表单.",
+        "disabledDescription": "密码保护通过要求用户在查看和提交表单之前输入密码来限制对表单的访问.",
+        "actionsAria": "密码保护操作",
+        "saveAria": "保存密码保护设置",
+        "saved": "密码保护设置保存成功",
+        "saveFailed": "保存密码保护设置失败",
+        "defaultMessage": "此表单受密码保护。请输入密码继续。"
+      },
+      "duplicatePreventionSection": {
+        "ariaSettings": "重复提交预防设置",
+        "title": "防止重复提交",
+        "description": "防止用户多次提交相同的表单",
+        "enableLabel": "启用重复提交预防",
+        "enableDescription": "防止用户多次提交相同的表单",
+        "preventionModeLabel": "预防模式",
+        "oneTimeLabel": "一次性提交",
+        "oneTimeDescription": "允许每个用户仅提交一次",
+        "timeBasedLabel": "基于时间预防",
+        "timeBasedDescription": "在指定的时间窗口内防止重复提交",
+        "preventionStrategyLabel": "预防策略",
+        "selectStrategyPlaceholder": "选择策略",
+        "strategyCombinedLabel": "组合（IP + 邮箱 + 会话）- 最安全",
+        "strategyEmailLabel": "电子邮件地址 - 最适合注册",
+        "strategyIpLabel": "IP地址 - 简单可靠",
+        "strategySessionLabel": "会话ID - 基于浏览器",
+        "strategyCombinedDescription": "通过 IP、邮箱和会话组合跟踪以获得最大准确性",
+        "strategyEmailDescription": "通过电子邮件地址跟踪（需要表格中包含电子邮件字段）",
+        "strategyIpDescription": "仅通过 IP 地址跟踪",
+        "strategySessionDescription": "通过浏览器会话跟踪",
+        "timeWindowLabel": "时间窗口（分钟）",
+        "timeWindowDescription": "防止重复提交的时间长度",
+        "timeWindowPlaceholder": "1440",
+        "maxAttemptsLabel": "最大尝试次数",
+        "maxAttemptsDescription": "时间窗口内允许的最大尝试次数",
+        "maxAttemptsPlaceholder": "1",
+        "errorMessageLabel": "错误信息",
+        "errorMessageDescription": "当用户尝试提交重复内容时显示的信息",
+        "allowOverrideLabel": "允许覆盖",
+        "allowOverrideDescription": "允许用户绕过防护（不推荐）",
+        "currentConfiguration": "当前配置",
+        "currentSettings": "当前设置",
+        "summaryModeOneTime": "仅一次性提交",
+        "summaryModeTimeBased": "{maxAttempts} 次提交，每 {timeWindow} 分钟",
+        "summaryStrategyCombined": "IP + 邮箱 + 会话",
+        "summaryStrategyEmail": "电子邮件地址",
+        "summaryStrategyIp": "IP地址",
+        "summaryStrategySession": "会话 ID",
+        "summarySentence": "{mode} 使用 {strategy} 跟踪.",
+        "summaryOverrideEnabled": "已启用覆盖.",
+        "disabledDescription": "重复提交防护有助于通过防止用户多次提交相同的表格来维护数据质量。请选择基于时间的防护或一次性提交模式。",
+        "actionsAria": "重复提交防护操作",
+        "saveAria": "保存重复提交防护设置",
+        "saved": "重复提交防护设置保存成功",
+        "saveFailed": "保存重复提交防护设置失败",
+        "defaultMessageOneTime": "您已经提交过此表格。每个用户只能提交一次。",
+        "defaultMessageTimeBased": "您已经提交过此表格。请等待再次提交。"
+      },
+      "profanityFilterSection": {
+        "ariaSettings": "脏话过滤器设置",
+        "title": "脏话过滤",
+        "description": "自动检测和过滤不适当的内容",
+        "enableLabel": "启用脏话过滤器",
+        "enableDescription": "自动检测和过滤不适当的内容",
+        "filterModeLabel": "过滤模式",
+        "strictModeOption": "严格模式 - 拒绝包含脏话的提交",
+        "replaceModeOption": "替换模式 - 用星号替换脏话",
+        "customMessageLabel": "自定义消息",
+        "customMessagePlaceholder": "请输入检测到脏话时显示的自定义消息",
+        "customWordsTitle": "自定义过滤词汇",
+        "whitelistedWordsTitle": "白名单词汇",
+        "customWordsPlaceholder": "请输入过滤词汇（多个用逗号分隔）",
+        "whitelistPlaceholder": "请输入白名单词汇（多个用逗号分隔）",
+        "addWord": "添加",
+        "addFilteredWordAria": "添加过滤词汇",
+        "addWhitelistedWordAria": "添加白名单词汇",
+        "removeWordAria": "移除 {word}",
+        "currentConfiguration": "当前配置",
+        "summaryPrefix": "脏话过滤器处于",
+        "enabled": "已启用",
+        "summaryIn": "in",
+        "strictMode": "严格模式",
+        "replaceMode": "替换模式",
+        "summaryPeriod": ".",
+        "customWordsConfigured": "{count} 个自定义词汇已配置.",
+        "whitelistedWordsConfigured": "{count} 个白名单词汇.",
+        "disabledDescription": "脏话过滤器通过自动检测和过滤表单提交中的不适当内容来帮助维护干净和专业的环境。",
+        "actionsAria": "脏话过滤器操作",
+        "saveAria": "保存脏话过滤器设置",
+        "saved": "脏话过滤器设置保存成功",
+        "saveFailed": "保存脏话过滤器设置失败"
+      },
+      "notificationsSection": {
+        "title": "通知",
+        "description": "为新表单提交配置电子邮件提醒",
+        "enableLabel": "电子邮件通知",
+        "enableDescription": "为新提交启用电子邮件通知",
+        "emailLabel": "通知电子邮件",
+        "emailPlaceholder": "owner@email.com",
+        "subjectLabel": "电子邮件主题",
+        "messageLabel": "电子邮件消息",
+        "customLinksLabel": "自定义链接",
+        "linkLabelPlaceholder": "标签",
+        "linkUrlPlaceholder": "https://example.com",
+        "removeLink": "移除",
+        "addLink": "添加",
+        "actionsAria": "通知设置操作",
+        "saveAria": "保存通知设置",
+        "saved": "通知设置保存成功",
+        "saveFailed": "保存通知设置失败"
+      },
+      "brandingSection": {
+        "title": "品牌",
+        "description": "管理 Ikiform 品牌和社交媒体链接",
+        "showPoweredByLabel": "显示 \"Powered by Ikiform\"",
+        "showPoweredByDescription": "在页脚显示小标志",
+        "socialMediaLabel": "社交媒体链接",
+        "socialMediaDescription": "在表单上启用社交媒体链接",
+        "platforms": {
+          "linkedin": {
+            "label": "LinkedIn",
+            "placeholder": "https://linkedin.com/in/username"
+          },
+          "twitter": {
+            "label": "X（推特）",
+            "placeholder": "https://x.com/username"
+          },
+          "youtube": {
+            "label": "YouTube",
+            "placeholder": "https://youtube.com/@channel"
+          },
+          "instagram": {
+            "label": "Instagram",
+            "placeholder": "https://instagram.com/username"
+          },
+          "facebook": {
+            "label": "Facebook",
+            "placeholder": "https://facebook.com/username"
+          },
+          "github": {
+            "label": "GitHub",
+            "placeholder": "https://github.com/username"
+          },
+          "website": {
+            "label": "网站",
+            "placeholder": "https://example.com"
+          }
+        },
+        "iconSizeLabel": "图标大小",
+        "iconSizes": {
+          "small": "小",
+          "medium": "中等",
+          "large": "大"
+        },
+        "positionLabel": "位置",
+        "positions": {
+          "footer": "页脚",
+          "header": "页头",
+          "both": "两者"
+        },
+        "previewLabel": "预览",
+        "disabledDescription": "启用社交媒体链接以在您的表单上显示您的社交媒体资料。",
+        "actionsAria": "品牌设置操作",
+        "saveAria": "保存品牌设置",
+        "saved": "品牌设置已成功保存",
+        "saveFailed": "保存品牌设置失败",
+        "authRequired": "用户身份验证 required"
+      },
+      "metadataSection": {
+        "basicTitle": "基本SEO",
+        "basicDescription": "标题、描述和规范URL",
+        "pageTitleLabel": "页面标题",
+        "pageTitlePlaceholder": "输入页面标题（最多60个字符）",
+        "metaDescriptionLabel": "元描述",
+        "metaDescriptionPlaceholder": "输入元描述（最多160个字符）",
+        "characterCount": "{count}/{max} 个字符",
+        "keywordsLabel": "关键词",
+        "keywordsPlaceholder": "输入用逗号分隔的关键词",
+        "authorLabel": "作者",
+        "authorPlaceholder": "输入作者姓名",
+        "canonicalUrlLabel": "规范URL",
+        "canonicalUrlPlaceholder": "https://example.com/form",
+        "canonicalUrlDescription": "此表单页的首选URL",
+        "basicActionsAria": "基本SEO操作",
+        "saveBasicAria": "保存基本SEO设置",
+        "basicSaved": "基本SEO已保存",
+        "basicSaveFailed": "保存基本SEO失败",
+        "socialTitle": "社交媒体元数据",
+        "socialDescription": "开放图谱和推特设置",
+        "ogTitleLabel": "开放图谱标题",
+        "ogTitlePlaceholder": "输入开放图谱标题",
+        "ogTitleDescription": "在Facebook、领英等社交媒体上分享时显示的标题",
+        "ogDescriptionLabel": "开放图谱描述",
+        "ogDescriptionPlaceholder": "输入开放图谱描述",
+        "ogDescriptionDescription": "在社交媒体上分享时显示的描述",
+        "ogImageLabel": "开放图谱图像网址",
+        "ogImagePlaceholder": "https://example.com/image.jpg",
+        "ogTypeLabel": "开放图谱类型",
+        "ogTypePlaceholder": "选择开放图谱类型",
+        "ogTypes": {
+          "website": "网站",
+          "article": "文章",
+          "profile": "个人资料",
+          "video": "视频"
+        },
+        "twitterCardLabel": "推特卡片类型",
+        "twitterCardPlaceholder": "选择推特卡片类型",
+        "twitterCards": {
+          "summary": "摘要",
+          "summaryLargeImage": "摘要大图",
+          "app": "应用",
+          "player": "播放器"
+        },
+        "twitterTitleLabel": "推特标题",
+        "twitterTitlePlaceholder": "输入推特标题",
+        "twitterImageLabel": "推特图像网址",
+        "twitterImagePlaceholder": "https://example.com/twitter-image.jpg",
+        "twitterDescriptionLabel": "推特描述",
+        "twitterDescriptionPlaceholder": "输入推特描述",
+        "twitterSiteLabel": "推特网站",
+        "twitterSitePlaceholder": "@你的账号",
+        "twitterCreatorLabel": "推特创作者",
+        "twitterCreatorPlaceholder": "@创作者账号",
+        "socialActionsAria": "社交元数据操作",
+        "saveSocialAria": "保存社交元数据设置",
+        "socialSaved": "社交元数据已保存",
+        "socialSaveFailed": "保存社交元数据失败",
+        "indexingTitle": "搜索引擎索引",
+        "indexingDescription": "控制搜索引擎如何爬取此表单",
+        "indexingBehaviorLabel": "搜索引擎索引",
+        "indexingBehaviorPlaceholder": "选择索引行为",
+        "indexingOptions": {
+          "index": "索引和跟随（默认）",
+          "noindex": "不索引",
+          "nofollow": "不跟随",
+          "noindexNofollow": "不索引，不跟随"
+        },
+        "indexingBehaviorDescription": "控制搜索引擎是否可以索引和跟随此页面的链接",
+        "switches": {
+          "noArchive": "无存档",
+          "noSnippet": "无摘要",
+          "noImageIndex": "无图片索引",
+          "noTranslate": "不翻译"
+        },
+        "indexingActionsAria": "索引操作",
+        "saveIndexingAria": "保存索引设置",
+        "indexingSaved": "索引设置已保存",
+        "indexingSaveFailed": "保存索引设置失败",
+        "updatedAnnouncement": "元数据已更新",
+        "authRequired": "用户身份验证 required"
+      },
+      "rateLimitSection": {
+        "title": "速率限制",
+        "description": "控制提交频率以防止垃圾邮件和滥用",
+        "ariaSettings": "速率限制设置",
+        "enableLabel": "启用速率限制",
+        "enableDescription": "限制来自同一IP地址的提交次数",
+        "maxSubmissionsLabel": "最大提交次数",
+        "maxSubmissionsDescription": "允许的最大提交次数",
+        "timeWindowLabel": "时间窗口（分钟）",
+        "timeWindowDescription": "用于计算提交次数的时间段",
+        "blockDurationLabel": "阻止持续时间（分钟）",
+        "blockDurationDescription": "达到限制后阻止多长时间",
+        "messageLabel": "速率限制超出时显示的消息",
+        "messagePlaceholder": "提交次数过多，请稍后再试。",
+        "messageDescription": "速率限制超出时显示的自定义消息",
+        "currentConfiguration": "当前配置",
+        "summarySentence": "允许 {maxSubmissions} 次提交，每 {timeWindow} 分钟。超出限制时阻止 {blockDuration} 分钟。",
+        "summaryExample": "示例：如果用户在 {timeWindow} 分钟内提交 {maxSubmissions} 次，则会被阻止 {blockDuration} 分钟。",
+        "disabledDescription": "速率限制通过控制提交频率帮助保护您的表单免受垃圾邮件和滥用。",
+        "actionsAria": "速率限制操作",
+        "saveAria": "保存速率限制设置",
+        "saved": "速率限制设置已成功保存",
+        "saveFailed": "保存速率限制设置失败",
+        "defaultMessage": "提交次数过多，请稍后再试。"
+      },
+      "responseLimitSection": {
+        "title": "响应限制",
+        "description": "在达到总计数后停止接受提交",
+        "enableLabel": "启用响应限制",
+        "enableDescription": "限制此表单接受的总提交次数",
+        "maxResponsesLabel": "最大响应次数",
+        "maxResponsesDescription": "限制此表单可以接受的总响应次数。一旦达到限制，新的提交将被阻止。",
+        "limitReachedLabel": "达到限制时的消息",
+        "limitReachedDescription": "总响应限制达到后显示的消息",
+        "limitReachedPlaceholder": "此表单不再接受响应。",
+        "disabledDescription": "如果您的表单应继续无限制地接受提交，请保持此选项禁用。",
+        "actionsAria": "响应限制操作",
+        "saveAria": "保存响应限制设置",
+        "saved": "响应限制已成功保存",
+        "saveFailed": "保存响应限制失败",
+        "defaultMessage": "此表单不再接受响应。"
+      },
+      "botProtectionSection": {
+        "title": "Bot Protection",
+        "description": "自动检测和阻止自动化提交",
+        "ariaSettings": "机器人保护设置",
+        "enableLabel": "启用机器人保护",
+        "enableDescription": "为表单提交添加反机器人检查",
+        "detectionMessageLabel": "检测消息",
+        "detectionMessagePlaceholder": "由于可疑的机器人活动，提交被阻止。",
+        "detectionMessageDescription": "自动化提交被阻止时显示的消息",
+        "currentConfiguration": "当前配置",
+        "statusEnabledPrefix": "机器人保护当前为",
+        "enabled": "已启用",
+        "statusEnabledSuffix": "此表单。",
+        "vercelTitle": "Vercel保护",
+        "vercelDescription": "如果部署在Vercel上，可能会应用额外的反滥用检查。",
+        "disabledDescription": "启用机器人保护以减少来自自动化工具和脚本流量的垃圾邮件。",
+        "actionsAria": "机器人保护操作",
+        "saveAria": "保存机器人保护设置",
+        "saved": "机器人保护设置已成功保存",
+        "saveFailed": "保存机器人保护设置失败"
+      },
+      "quizSection": {
+        "title": "测验与评分",
+        "description": "配置测验行为和评分规则",
+        "ariaSettings": "测验设置",
+        "enableLabel": "启用测验模式",
+        "enableDescription": "启用测验功能，如评分和结果消息",
+        "passingScoreLabel": "及格分数（%）",
+        "passingScoreDescription": "设置通过所需的最低百分比",
+        "timeLimitLabel": "时间限制（分钟）",
+        "timeLimitDescription": "测验完成的_optional时间限制",
+        "timeLimitPlaceholder": "留空表示无限制",
+        "showScoreLabel": "向用户显示得分",
+        "showScoreDescription": "在提交表单后显示用户的得分",
+        "showCorrectAnswersLabel": "显示正确答案",
+        "showCorrectAnswersDescription": "在提交后显示正确答案和解释",
+        "allowRetakeLabel": "允许重考",
+        "allowRetakeDescription": "允许用户重考以提高他们的分数",
+        "customMessagesLabel": "自定义结果消息",
+        "successMessageLabel": "成功消息",
+        "successMessagePlaceholder": "干得好！您通过了测验。",
+        "improvementMessageLabel": "改进消息",
+        "improvementMessagePlaceholder": "请复习并重试。",
+        "messagePlaceholderHelp": "使用 {score}、{percentage}、{total} 作为占位符",
+        "actionsAria": "测验操作",
+        "saveAria": "保存测验设置",
+        "saved": "测验设置已成功保存",
+        "savedToast": "测验设置已保存",
+        "saveFailed": "保存测验设置失败"
+      },
+      "apiSection": {
+        "title": "API 访问",
+        "description": "切换以允许通过 API 端点提交",
+        "authRequired": "用户身份验证 required",
+        "enableSupportLabel": "启用 API 支持",
+        "enableSupportDescription": "通过安全 API 密钥启用外部提交。",
+        "apiEndpointLabel": "API 端点",
+        "copyEndpointAria": "复制 API 端点",
+        "endpointCopied": "API 端点已复制",
+        "apiKeyLabel": "API 密钥",
+        "apiKeySecretHint": "请保密此密钥。拥有它的人可以提交此表单。",
+        "generateApiKey": "生成 API 密钥",
+        "regenerateKey": "重新生成密钥",
+        "revokeKey": "吊销密钥",
+        "generating": "生成中...",
+        "revoking": "吊销中...",
+        "copyApiKeyAria": "复制 API 密钥",
+        "showApiKeyAria": "显示 API 密钥",
+        "hideApiKeyAria": "隐藏 API 密钥",
+        "keyCopied": "API 密钥已复制",
+        "keyGenerated": "API 密钥已生成",
+        "keyGenerateFailed": "生成 API 密钥失败",
+        "keyRevoked": "API 密钥已吊销",
+        "keyRevokeFailed": "吊销 API 密钥失败",
+        "showCodeExamples": "显示代码示例",
+        "hideCodeExamples": "隐藏代码示例",
+        "javascriptNodeLabel": "JavaScript / Node.js",
+        "sampleName": "Jane Doe",
+        "sampleEmail": "jane@example.com",
+        "sampleMessage": "Hello from API",
+        "sampleValue": "示例值",
+        "copyCodeAria": "复制示例代码",
+        "downloadCodeAria": "下载示例代码",
+        "codeCopied": "示例代码已复制",
+        "codeDownloaded": "示例代码已下载",
+        "betaBadge": "BETA",
+        "integrationRateLimiting": "速率限制",
+        "integrationRateLimitingDescription": "保护您的端点免受垃圾邮件突发的影响。",
+        "integrationResponseLimits": "响应限制",
+        "integrationResponseLimitsDescription": "限制总接受提交次数。",
+        "integrationDuplicatePrevention": "重复预防",
+        "integrationDuplicatePreventionDescription": "减少同一用户重复提交。",
+        "integrationProfanityFilter": "脏话过滤器",
+        "integrationProfanityFilterDescription": "阻止或净化不适当的内容。",
+        "emptyStateDescription": "启用 API 支持以生成安全 API 密钥。",
+        "actionsAria": "API 访问操作",
+        "saveAria": "保存 API 设置",
+        "resetAria": "重置 API 设置",
+        "settingsSaved": "API 设置已成功保存",
+        "settingsSaveFailed": "保存 API 设置失败"
+      },
+      "webhooks": {
+        "panel": {
+          "endpointsTitle": "Webhook 端点",
+          "endpointsDescription": "将提交内容发送到外部服务。",
+          "addWebhook": "添加 Webhook"
+        },
+        "list": {
+          "emptyState": "尚未配置 Webhook。请添加您的第一个 Webhook 以接收表单提交。",
+          "active": "活动",
+          "inactive": "非活动",
+          "edit": "编辑",
+          "delete": "删除",
+          "test": "测试",
+          "viewLogs": "查看日志",
+          "events": {
+            "formSubmitted": "表单已提交",
+            "formViewed": "表单已查看",
+            "formStarted": "表单已开始"
+          }
+        },
+        "hook": {
+          "fetchFailed": "获取webhook失败",
+          "created": "Webhook创建成功",
+          "createFailed": "创建webhook失败",
+          "updated": "Webhook更新成功",
+          "updateFailed": "更新webhook失败",
+          "deleted": "Webhook删除成功",
+          "deleteFailed": "删除webhook失败"
+        },
+        "formModal": {
+          "addTitle": "添加webhook",
+          "editTitle": "编辑webhook",
+          "stepsAria": "Webhook设置步骤",
+          "steps": {
+            "basics": "基本信息",
+            "events": "事件",
+            "headers": "头部",
+            "payload": "负载",
+            "notifications": "通知",
+            "details": "查看"
+          },
+          "errors": {
+            "missingBasics": "需要填写Webhook URL.",
+            "missingEvent": "至少选择一个事件.",
+            "missingBasicsAndEvent": "需要填写Webhook URL和至少一个事件."
+          },
+          "webhookUrl": "Webhook URL",
+          "webhookUrlPlaceholder": "https://example.com/webhook",
+          "nameOptional": "名称（可选）",
+          "namePlaceholder": "Slack通知",
+          "descriptionOptional": "描述（可选）",
+          "descriptionPlaceholder": "此webhook应发送表单数据到哪里",
+          "eventsHelp": "选择哪些事件应该触发此webhook.",
+          "events": {
+            "formSubmitted": "表单已提交",
+            "formViewed": "表单已查看",
+            "formStarted": "表单已开始"
+          },
+          "httpMethod": "HTTP 方法",
+          "selectHttpMethodAria": "选择HTTP方法",
+          "selectMethodPlaceholder": "选择方法",
+          "httpMethodDescriptions": {
+            "post": "创建新资源或发送负载数据.",
+            "put": "替换现有资源.",
+            "patch": "部分更新现有资源.",
+            "delete": "删除资源.",
+            "get": "获取信息而不修改数据.",
+            "head": "仅获取头部."
+          },
+          "addHeader": "添加头部",
+          "headerName": "头部名称",
+          "headerNamePlaceholder": "授权",
+          "headerNameAria": "Webhook头部名称",
+          "headerValue": "头部值",
+          "headerValuePlaceholder": "Bearer令牌",
+          "headerValueAria": "Webhook头部值",
+          "removeHeaderAria": "移除头部",
+          "headersHelp": "自定义头部是可选的，并且会随每个webhook请求发送.",
+          "payloadTemplateOptional": "负载模板（可选）",
+          "availableVariables": "可用变量",
+          "variables": {
+            "formData": "已提交的表单数据对象",
+            "formId": "表单标识符",
+            "submissionId": "提交标识符",
+            "event": "触发事件",
+            "timestamp": "事件时间戳",
+            "formatted": "人类可读的摘要"
+          },
+          "notificationEmailOptional": "通知邮箱（可选）",
+          "notificationEmailPlaceholder": "alerts@example.com",
+          "emailOnSuccess": "成功交付时发送邮件",
+          "emailOnFailure": "交付失败时发送邮件",
+          "selectAll": "全选",
+          "clear": "清除",
+          "back": "返回",
+          "next": "下一步",
+          "skip": "跳过",
+          "cancel": "取消",
+          "createWebhook": "创建webhook",
+          "updateWebhook": "更新webhook"
+        },
+        "testDialog": {
+          "title": "测试webhook",
+          "description": "发送测试事件以验证您的端点.",
+          "endpointTitle": "端点",
+          "nameLabel": "名称",
+          "untitledWebhook": "未命名webhook",
+          "descriptionLabel": "描述",
+          "methodLabel": "HTTP方法",
+          "urlLabel": "网址",
+          "triggersTitle": "触发器",
+          "events": {
+            "formSubmitted": "表单已提交",
+            "formViewed": "表单已查看",
+            "formStarted": "表单已开始"
+          },
+          "modeTitle": "测试模式",
+          "mode": {
+            "real": "发送真实数据",
+            "success": "强制成功响应",
+            "failure": "强制失败响应"
+          },
+          "sendTest": "发送测试",
+          "close": "关闭",
+          "success": "测试发送成功",
+          "failed": "测试失败",
+          "testSent": "Webhook 测试已发送",
+          "testFailed": "Webhook 测试失败",
+          "testFailedNetwork": "无法发送 Webhook 测试"
+        },
+        "logDialog": {
+          "title": "Webhook 日志",
+          "status": "状态",
+          "response": "响应",
+          "attempt": "尝试",
+          "resend": "重新发送",
+          "resendSuccess": "Webhook 重新发送成功",
+          "resendFailed": "重新发送 Webhook 失败",
+          "copied": "已复制到剪贴板",
+          "copyFailed": "复制失败",
+          "copyCodeAria": "复制数据",
+          "viewPayload": "查看数据",
+          "payloadTitle": "负载",
+          "noPayloadDataTitle": "无数据",
+          "noPayloadDataDescription": "此日志条目无可用数据。",
+          "noPayloadReasonMethod": "此请求类型不包含数据。",
+          "noPayloadReasonError": "数据捕获因错误而失败。",
+          "noPayloadReasonEmpty": "未存储数据。",
+          "eventInformation": "事件信息",
+          "eventLabel": "事件",
+          "formNameLabel": "表单名称",
+          "formIdLabel": "表单 ID",
+          "submissionIdLabel": "提交 ID",
+          "ipAddressLabel": "IP地址",
+          "formFields": "表单字段",
+          "rawFormData": "原始表单数据",
+          "rawJson": "原始 JSON",
+          "formatted": "格式化",
+          "additionalData": "附加数据",
+          "notAvailable": "不可用",
+          "unknown": "未知",
+          "complexObject": "复杂对象",
+          "complexArray": "复杂数组",
+          "failedCount": "{count} 失败",
+          "pendingCount": "{count} 待处理",
+          "successfulCount": "{count} 成功",
+          "noLogsTitle": "暂无日志",
+          "noLogsDescription": "发送事件到此 Webhook 以查看投递历史。",
+          "errorTitle": "无法加载日志",
+          "fetchFailed": "加载 Webhook 日志失败"
+        }
+      },
+      "designSection": {
+        "title": "设计",
+        "description": "控制外观和自定义",
+        "advancedTitle": "高级自定义",
+        "advancedDescription": "在专注的面板中微调颜色、字体、间距等。",
+        "openAria": "在新标签页中打开自定义面板",
+        "openLabel": "打开自定义面板…"
+      }
+    },
+    "fieldRenderer": {
+      "scheduler": {
+        "title": "调度器",
+        "openScheduler": "打开调度器",
+        "embedTitle": "调度器嵌入",
+        "notConfigured": "未配置调度器链接。",
+        "close": "关闭"
+      },
+      "email": {
+        "defaultPlaceholder": "输入电子邮件地址",
+        "autocompleteHint": "按 Tab 或点击以完成：",
+        "completeEmailAria": "完成电子邮件地址",
+        "completeButton": "完成",
+        "autocompleteBadge": "自动完成：",
+        "allowedDomainsLabel": "允许的域名："
+      },
+      "fileUpload": {
+        "bytesUnit": "字节",
+        "uploadFailed": "上传失败",
+        "uploadErrorTitle": "上传错误",
+        "uploadedFiles": "已上传文件（{count}）",
+        "uploadedBadge": "已上传",
+        "removeFileAria": "移除 {name}",
+        "maxFilesAndSize": "最多 {maxFiles} 个文件，每个文件最多 {maxSize}",
+        "allowedTypes": "允许的类型"
+      },
+      "social": {
+        "platforms": {
+          "linkedin": "LinkedIn",
+          "twitter": "X（推特）",
+          "youtube": "YouTube",
+          "instagram": "Instagram",
+          "facebook": "Facebook",
+          "github": "GitHub",
+          "website": "网站"
+        },
+        "customLink": "自定义链接 {index}",
+        "customLinkPlaceholder": "https://example.com",
+        "preview": "预览"
+      },
+      "signature": {
+        "drawHere": "在此绘制您的签名",
+        "clear": "清除",
+        "preview": "预览",
+        "previewAlt": "签名预览"
+      },
+      "rating": {
+        "groupAria": "评分",
+        "rateAria": "评分 {index} {type}"
+      },
+      "poll": {
+        "fetchFailed": "获取选项失败",
+        "resultsTitle": "投票结果",
+        "totalVotes": "{count} 票",
+        "votes": "{count} 票"
+      }
+    },
+    "formRenderer": {
+      "shared": {
+        "poweredBy": "由以下提供",
+        "incorrectPassword": "密码错误！",
+        "passwordProtectionMessage": "此表单受密码保护。请输入密码继续。"
+      },
+      "successScreen": {
+        "title": "感谢您！",
+        "defaultMessage": "您的表单已成功提交。",
+        "redirecting": "请稍候片刻，页面将自动跳转...",
+        "poweredBy": "由以下提供"
+      },
+      "quizResults": {
+        "titlePassed": "恭喜！",
+        "titleComplete": "测验完成",
+        "descriptionPassed": "您已成功完成测验！",
+        "descriptionRetry": "感谢您参加测验，请继续练习！",
+        "score": "分数",
+        "points": "分",
+        "answered": "已回答",
+        "totalQuestions": "总题目",
+        "passed": "通过",
+        "needsImprovement": "需要改进",
+        "retakeQuiz": "重新测验",
+        "questionByQuestion": "逐题结果",
+        "questionLabel": "问题 {index}: {label}",
+        "yourAnswer": "您的答案:",
+        "noAnswer": "无答案",
+        "correctAnswer": "正确答案:",
+        "pointsLower": "分"
+      },
+      "multiStep": {
+        "previous": "上一页",
+        "next": "下一步",
+        "submit": "提交",
+        "defaults": {
+          "formTitle": "表单"
+        },
+        "validation": {
+          "required": "此字段是必填项",
+          "emailInvalid": "请输入有效的电子邮件地址",
+          "minLength": "必须至少有 {count} 个字符",
+          "maxLength": "长度不能超过 {count} 个字符"
+        },
+        "toasts": {
+          "submitSuccess": "表单提交成功！",
+          "botDetected": "检测到机器人，访问被拒绝。",
+          "duplicateSubmission": "您已经提交过此表单。",
+          "rateLimitExceeded": "请求过多，请稍后再试。",
+          "responseLimitReached": "此表单不再接受响应。",
+          "contentValidationFailed": "您的提交内容包含不适当信息。",
+          "submitFailed": "提交表单失败",
+          "submitFailedTryAgain": "提交表单失败，请重试。"
+        }
+      },
+      "singleStep": {
+        "fixHighlightedErrors": "请在提交前修复高亮的错误。",
+        "submit": "提交"
+      },
+      "duplicateSubmission": {
+        "title": "检测到重复提交",
+        "wait": "等待 {time}",
+        "attemptsLeft": "{count, plural, one {剩余 # 次尝试} other {剩余 # 次尝试}}",
+        "tryAgain": "重试",
+        "waitBeforeRetry": "请等待片刻后再尝试提交。",
+        "units": {
+          "seconds": "{count, plural, one {# 秒} other {# 秒}}",
+          "minutes": "{count, plural, one {# 分钟} other {# 分钟}}",
+          "hours": "{count, plural, one {# 小时} other {# 小时}}",
+          "days": "{count, plural, one {# 天} other {# 天}}"
+        }
+      }
+    }
+  },
+  "aiBuilder": {
+    "client": {
+      "createFormWithKiko": "使用 Kiko 创建表单",
+      "streamError": "错误：{error}",
+      "generatingResponse": "生成响应中...",
+      "loading": "加载中...",
+      "suggestions": {
+        "contactForm": "创建一个联系表单",
+        "customerFeedbackSurvey": "客户反馈调查表",
+        "eventRegistrationForm": "活动注册表单",
+        "jobApplicationForm": "职位申请表"
+      }
+    },
+    "chatHeader": {
+      "backToFormBuilder": "返回表单构建器",
+      "title": "Kiko AI"
+    },
+    "chatInput": {
+      "messageToKiko": "发送消息到 Kiko AI",
+      "placeholder": "描述您要创建的表单...",
+      "sendMessage": "发送消息",
+      "sendHelp": "按 Enter 发送，按 Shift+Enter 换行，或按 ⌘/Ctrl+Enter 发送"
+    },
+    "welcome": {
+      "heading": "Kiko 今天能帮您什么？",
+      "description": "您好，我是 Kiko - 您的 AI 智能表单助手。\n请我为您创建、编辑或分析表单！"
+    },
+    "preview": {
+      "title": "Kiko AI",
+      "formFallback": "表单 {index}",
+      "viewJson": "查看 JSON",
+      "useThisForm": "使用此表单",
+      "noFormSelected": "未选择表单。"
+    },
+    "jsonModal": {
+      "title": "表单 JSON 模式",
+      "description": "查看或复制为您的表单生成的 JSON 模式",
+      "close": "关闭"
+    }
+  },
+  "analytics": {
+    "formAnalytics": {
+      "submissionExported": "导出提交成功",
+      "formDeleted": "表单删除成功",
+      "failedDeleteForm": "删除表单失败",
+      "backToDashboard": "返回仪表盘",
+      "published": "已发布",
+      "draft": "草稿",
+      "analyticsSubtitle": "表单分析与提交数据",
+      "formActions": "表单操作",
+      "editForm": "编辑表单",
+      "shareForm": "分享表单",
+      "viewSubmissions": "查看提交内容",
+      "moreActions": "更多操作",
+      "exportCsv": "导出 CSV",
+      "exportJson": "导出 JSON",
+      "deleteForm": "删除表单",
+      "openKiko": "开启 Kiko AI",
+      "kiko": "Kiko AI",
+      "kikoTooltip": "AI 表单分析",
+      "recentSubmissions": "最近提交内容",
+      "viewAll": "查看全部",
+      "noSubmissionsTitle": "暂无提交内容",
+      "noSubmissionsDescription": "当用户开始填写您的表单时，他们的回答将显示在这里。",
+      "submission": "提交内容 {id}",
+      "fieldsCount": "{count} 个字段",
+      "view": "查看",
+      "viewSubmissionDetails": "查看提交内容详情",
+      "viewMoreSubmissions": "查看 {count} 条更多提交内容",
+      "noDataToExport": "无数据可导出",
+      "csvExportSuccess": "数据成功导出至 CSV！",
+      "jsonExportSuccess": "数据导出成功！",
+      "deleteModalTitle": "删除表单",
+      "deleteModalConfirm": "删除表单",
+      "deleteModalCancel": "取消",
+      "deleteModalDescription": "您确定要删除 \"{title}\"？此操作无法撤销，并将永久删除表单和所有提交内容。",
+      "formPublished": "表单已发布！"
+    },
+    "statsCards": {
+      "totalSubmissions": "总提交次数",
+      "formFields": "表单字段",
+      "completionRate": "完成率",
+      "last30Days": "最近 30 天",
+      "avgDailySubmissions": "平均每日提交次数",
+      "bounceRate": "跳出率",
+      "peakHour": "高峰时段",
+      "uniqueResponses": "独特回答次数"
+    },
+    "infoCards": {
+      "lastSubmission": "最近提交内容",
+      "fromIp": "来自 {ip}",
+      "noSubmissionsYet": "暂无提交内容",
+      "formStatus": "表单状态",
+      "published": "已发布",
+      "created": "创建时间",
+      "updated": "更新时间",
+      "yes": "是",
+      "no": "否",
+      "quickStats": "快速统计",
+      "avgFieldsCompleted": "平均完成字段数",
+      "mostActiveDay": "最活跃日",
+      "submissions": "{count} 次提交",
+      "formType": "表单类型",
+      "multiStep": "多步骤",
+      "singlePage": "单页"
+    },
+    "trendsChart": {
+      "title": "提交趋势",
+      "noData": "暂无数据",
+      "submissions": "提交内容"
+    },
+    "dropoff": {
+      "title": "放弃分析",
+      "onlyMultiStep": "放弃分析仅适用于多步骤表单。",
+      "subtitle": "了解用户在您的表单中放弃的位置。",
+      "step": "步骤",
+      "reached": "到达",
+      "dropoffPercent": "放弃率",
+      "completionPercent": "完成率",
+      "ofTotal": "占 {total}",
+      "stepFallback": "{index} 步",
+      "dropoffBarAria": "步骤 {index} 的放弃栏",
+      "completionBarAria": "步骤 {index} 的完成栏"
+    },
+    "chatModal": {
+      "title": "Kiko",
+      "description": "与 AI 聊天关于您的表单分析"
+    },
+    "chat": {
+      "emptyTitle": "询问 Kiko 任何问题",
+      "emptyDescription": "从您的表单数据中获取即时洞察和分析。可以用自然语言提问。",
+      "thinking": "思考中...",
+      "inputPlaceholder": "询问您的表单分析...",
+      "inputHelp": "按下 <enter></enter> 发送，<shiftEnter></shiftEnter> 换行"
+    },
+    "submissionDetails": {
+      "title": "{id} 的提交详情",
+      "submissionId": "提交 ID",
+      "submittedAt": "提交时间",
+      "ipAddress": "IP地址",
+      "formData": "表单数据",
+      "emptyValue": "—"
+    },
+    "submissions": {
+      "backToAnalytics": "返回分析",
+      "published": "已发布",
+      "draft": "草稿",
+      "formSubmissions": "{count} 的表单提交内容",
+      "exportActions": "导出操作",
+      "exportCsv": "导出 CSV",
+      "exportJson": "导出 JSON",
+      "viewDetailedAnalytics": "查看详细分析",
+      "submissions": "提交内容",
+      "searchSubmissions": "搜索提交内容...",
+      "noMatchingSubmissions": "无匹配提交内容",
+      "noSubmissionsYet": "暂无提交内容",
+      "noSubmissionsDescription": "当用户开始填写您的表单时，他们的回答将显示在这里。",
+      "adjustSearchTerms": "尝试调整搜索条件以查找提交内容。",
+      "id": "ID",
+      "submitted": "已提交",
+      "ipAddress": "IP地址",
+      "fields": "字段",
+      "actions": "操作",
+      "fieldsCount": "{count} 字段",
+      "fieldsCount_plural": "{count} 个字段",
+      "view": "查看",
+      "showingRange": "显示 {start}-{end} 共 {total} 条提交记录",
+      "previous": "上一页",
+      "next": "下一步",
+      "pageOf": "第 {page} 页，共 {total} 页",
+      "noSubmissionsToExport": "没有可导出的提交记录",
+      "submissionId": "提交 ID",
+      "submittedAt": "提交时间",
+      "csvExportedSuccess": "CSV 导出成功",
+      "jsonExportedSuccess": "JSON 导出成功"
+    },
+    "premiumRequired": {
+      "analytics": {
+        "title": "需要高级订阅",
+        "description": "您需要付费订阅才能访问表单分析。升级以解锁所有功能。",
+        "viewPricing": "查看定价"
+      },
+      "submissions": {
+        "title": "需要高级订阅",
+        "description": "您需要付费订阅才能访问表单提交记录。升级以解锁所有功能。",
+        "viewPricing": "查看定价"
+      }
+    }
+  },
+  "trialBanner": {
+    "aria": {
+      "status": "试用状态通知"
+    },
+    "endsInPrefix": "您的免费试用期剩余 ",
+    "remainingSuffix": " 天",
+    "expired": "试用期已过期",
+    "units": {
+      "day": "天",
+      "hour": "小时",
+      "minute": "分钟",
+      "second": "秒"
+    }
+  },
+  "embed": {
+    "customizer": {
+      "subtitle": "自定义并生成表单嵌入代码",
+      "showCode": "显示代码",
+      "settings": "设置",
+      "preview": "预览",
+      "desktop": "桌面端",
+      "mobile": "移动端"
+    },
+    "settings": {
+      "dimensions": {
+        "title": "尺寸",
+        "width": "宽度",
+        "widthPlaceholder": "例如：100%，800px",
+        "height": "高度",
+        "heightPlaceholder": "例如：600px，100vh",
+        "makeResponsive": "自适应（根据容器宽度调整）"
+      },
+      "appearance": {
+        "title": "外观",
+        "backgroundColor": "背景颜色",
+        "allowTransparentBackground": "允许透明背景（覆盖背景色）"
+      },
+      "border": {
+        "title": "边框和样式",
+        "showBorder": "显示边框",
+        "borderColor": "边框颜色",
+        "borderWidth": "边框宽度（像素）",
+        "borderRadius": "边框半径（像素）",
+        "padding": "内边距（像素）",
+        "paddingHelp": "iframe周围的空间"
+      },
+      "performance": {
+        "title": "性能",
+        "loadingMode": "加载模式",
+        "loadingModePlaceholder": "选择加载模式",
+        "lazy": "延迟加载（推荐）",
+        "eager": "立即加载",
+        "help": "延迟加载通过仅在iframe进入视野时加载来提高页面性能"
+      }
+    },
+    "codeModal": {
+      "title": "嵌入代码",
+      "description": "选择框架并复制代码",
+      "codeLabel": "{mode} 代码",
+      "copied": "已复制！",
+      "copy": "复制",
+      "close": "关闭",
+      "modes": {
+        "htmlDescription": "通用HTML iframe",
+        "reactDescription": "React 组件",
+        "nextjsDescription": "Next.js 组件",
+        "vueDescription": "Vue.js 组件",
+        "wordpressDescription": "WordPress 短代码"
+      },
+      "iframeTitle": "表单"
+    },
+    "testPage": {
+      "metadata": {
+        "title": "嵌入测试 - IkiForm",
+        "description": "测试页面，演示表单嵌入功能"
+      },
+      "title": "表单嵌入测试页面",
+      "descriptionPrefix": "此页面演示如何使用不同的配置嵌入表单。访问",
+      "descriptionSuffix": "自定义您的嵌入",
+      "tryCustomizer": "尝试嵌入自定义器",
+      "cards": {
+        "standard": {
+          "title": "标准嵌入",
+          "description": "600px 高度 - 适合桌面端查看",
+          "badge": "自适应",
+          "iframeTitle": "标准表单嵌入"
+        },
+        "compact": {
+          "title": "紧凑嵌入",
+          "description": "400px 高度 - 适合侧边栏和较小空间",
+          "badge": "极简",
+          "iframeTitle": "紧凑表单嵌入"
+        },
+        "fixed": {
+          "title": "固定宽度嵌入",
+          "description": "800px 宽度，居中 - 适合特定布局",
+          "badge": "自定义样式",
+          "iframeTitle": "固定宽度表单嵌入"
+        },
+        "react": {
+          "title": "React 组件示例",
+          "description": "带有适当类型的 TypeScript React 组件",
+          "codeIframeTitle": "表单"
+        }
+      },
+      "guide": {
+        "title": "如何使用嵌入功能",
+        "description": "逐步嵌入表单指南",
+        "steps": {
+          "step1": {
+            "title": "访问嵌入自定义器",
+            "prefix": "前往",
+            "suffix": "或在表单仪表盘中点击嵌入按钮。"
+          },
+          "step2": {
+            "title": "自定义您的嵌入",
+            "item1": "调整宽度和高度尺寸",
+            "item2": "选择主题（浅色，深色，自动）",
+            "item3": "配置边框和样式",
+            "item4": "设置加载行为"
+          },
+          "step3": {
+            "title": "获取您的代码",
+            "description": "复制为 HTML、React、Next.js、Vue 或 WordPress 生成的代码，并将其粘贴到您的网站中。"
+          },
+          "step4": {
+            "title": "仪表盘集成",
+            "description": "通过表单操作中的嵌入按钮，直接从表单仪表盘访问嵌入选项。"
+          }
+        }
+      }
+    }
+  }
+}

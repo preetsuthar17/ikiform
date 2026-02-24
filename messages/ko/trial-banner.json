@@ -1,0 +1,16 @@
+{
+  "trialBanner": {
+    "aria": {
+      "status": "체험판 상태 알림"
+    },
+    "endsInPrefix": "무료 체험판이 ",
+    "remainingSuffix": " 남음",
+    "expired": "체험판 만료",
+    "units": {
+      "day": "일",
+      "hour": "시",
+      "minute": "분",
+      "second": "초"
+    }
+  }
+}

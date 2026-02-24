@@ -1,0 +1,252 @@
+{
+  "name": "Ikiform",
+  "tagline": "Crea moduli, raccogli risposte e analizza i dati senza sforzo.",
+  "footer": {
+    "madeBy": "Creato da"
+  },
+  "cta": {
+    "heading": "Crea il tuo primo modulo in un attimo.",
+    "subheading": "Inizia con Ikiform per creare moduli, sondaggi, raccogliere risposte e molto altro in pochi secondi!",
+    "goToDashboard": "Vai alla dashboard",
+    "createFirstForm": "Crea il tuo primo modulo",
+    "tryDemo": "Prova la demo"
+  },
+  "hero": {
+    "unableToLoadFormDemo": "Impossibile caricare la demo del modulo. Prova ad aggiornare la pagina.",
+    "reload": "Ricarica",
+    "iframeTitle": "Modulo dimostrativo Ikiform",
+    "sponsoredByAria": "Sponsorizzato da Vercel (si apre in una nuova scheda)",
+    "sponsoredBy": "Sponsorizzato da",
+    "heading": "Crea moduli, raccogli risposte e analizza.",
+    "subheading": "La piattaforma open source per la raccolta e l'analisi dei dati senza sforzo.",
+    "fiveStarRating": "Valutazione di 5 stelle su 5",
+    "totalUsersSrOnly": "Utenti totali:",
+    "lovedByUsers": "Amato da {count} utenti",
+    "createFirstForm": "Crea il tuo primo modulo",
+    "tryDemo": "Prova la demo",
+    "openFullscreenAria": "Apri la demo del costruttore di moduli a schermo intero (premi Invio o Spazio)",
+    "clickToViewFullscreen": "Clicca per visualizzare a schermo intero",
+    "tabs": {
+      "formDemo": "Demo del modulo",
+      "formBuilderDemo": "Demo del costruttore di moduli"
+    }
+  },
+  "pricing": {
+    "title": "Prezzi semplici e trasparenti per tutto ciò di cui hai bisogno.",
+    "description": "Scegli il piano più adatto alle tue esigenze e inizia a raccogliere risposte.",
+    "popular": "Popolare",
+    "noCard": "Nessuna carta di credito richiesta",
+    "features": {
+      "unlimitedForms": "Moduli e risposte illimitati",
+      "apiWebhooks": "API e webhook per l'automazione",
+      "responseLimits": "Controlla i limiti e la frequenza delle risposte",
+      "quizScoring": "Crea quiz con punteggio",
+      "formDataApi": "Accedi ai dati dei moduli tramite API",
+      "customBranding": "Branding personalizzato e incorporamento ovunque",
+      "spamProtection": "Blocco automatico di spam e bot",
+      "passwordProfanity": "Filtro parolacce e protezione con password"
+    },
+    "plans": {
+      "monthly": {
+        "title": "Piano mensile",
+        "byline": "Fatturazione mensile • Cancella quando vuoi"
+      },
+      "lifetime": {
+        "title": "Accesso a vita",
+        "byline": "Pagamento unico • Accesso a vita"
+      },
+      "yearly": {
+        "title": "Piano annuale",
+        "byline": "Fatturazione annuale ($192/anno) • Cancella quando vuoi"
+      }
+    },
+    "cta": {
+      "startTrial": "Inizia la tua prova gratuita di 14 giorni",
+      "getLifetime": "Ottieni l'accesso a vita"
+    }
+  },
+  "faq": {
+    "title": "Domande frequenti",
+    "featureBoardLabel": "Bacheca funzionalità",
+    "githubLabel": "GitHub",
+    "q1": {
+      "question": "Cos'è Ikiform?",
+      "answer": "Ikiform è un'alternativa open source a Google Forms. Ti aiuta a creare facilmente moduli belli e interattivi."
+    },
+    "q2": {
+      "question": "C'è una prova gratuita?",
+      "answer": "Sì, c'è una prova gratuita di 14 giorni senza carta di credito. Puoi cancellare in qualsiasi momento."
+    },
+    "q3": {
+      "question": "Perché usare Ikiform invece di Google Forms o Typeform?",
+      "answer": "Ikiform è open source e ti dà il pieno controllo sui tuoi dati e sul tuo branding. Non ci sono costi nascosti e puoi ospitarlo autonomamente per maggiore privacy e flessibilità."
+    },
+    "q4": {
+      "question": "Che tipi di moduli posso creare?",
+      "answer": "Puoi creare moduli a pagina singola e moduli a più passaggi con monitoraggio del progresso."
+    },
+    "q5": {
+      "question": "Quali campi sono supportati?",
+      "answer": "I campi supportati includono Testo, E-mail, Numero, Numero di telefono, Area di testo, Data, Ora, Indirizzo, Link, Menu a tendina, Pulsanti radio, Caselle di controllo, Cursore, Tag, Campi social, Caricamento file, Firma, Dichiarazione, Banner, Gruppo di campi, Input tag, Social media, Pianificatore, Sondaggio, Valutazione, Quiz e altro."
+    },
+    "q6": {
+      "question": "Come vengono protetti i miei dati?",
+      "answer": "I moduli possono avere protezione con password, limitazione della frequenza, filtri anti-parolacce, protezione anti-spam, protezione anti-bot e sono conformi al GDPR."
+    },
+    "q7": {
+      "question": "I dati che invio vengono condivisi con qualcuno?",
+      "answer": "No, i tuoi dati non vengono venduti né condivisi con terze parti, ad eccezione dei fornitori fidati necessari per il funzionamento di Ikiform."
+    },
+    "q8": {
+      "question": "Posso personalizzare i miei moduli?",
+      "answer": "Puoi modificare colori, caratteri, layout, aggiungere il tuo logo e controllare l'aspetto di ogni campo."
+    },
+    "q9": {
+      "question": "Dove posso suggerire nuove funzionalità?",
+      "answerPrefix": "Puoi suggerire funzionalità su"
+    },
+    "q10": {
+      "question": "Dove vengono archiviati i miei dati?",
+      "answer": "I tuoi dati sono crittografati e archiviati in modo sicuro nell'UE tramite Supabase."
+    },
+    "q11": {
+      "question": "Come vengono protetti i miei dati?",
+      "answer": "Utilizziamo rigorose misure di sicurezza e solo il personale autorizzato può accedere ai tuoi dati."
+    },
+    "q12": {
+      "question": "I miei dati verranno eliminati se cancello il mio account?",
+      "answer": "Sì. Puoi eliminare i tuoi dati in qualsiasi momento. I dati eliminati vengono rimossi dai backup entro 30 giorni."
+    },
+    "q13": {
+      "question": "Posso eliminare i miei dati?",
+      "answer": "Sì. Puoi richiedere l'accesso o l'eliminazione dei tuoi dati in qualsiasi momento inviando un'e-mail a hi@ikiform.com."
+    },
+    "q14": {
+      "question": "Chi è il proprietario dei dati inviati tramite i miei moduli?",
+      "answer": "Tutti i dati che raccogli sono tuoi. Ikiform li conserva semplicemente per te."
+    },
+    "q15": {
+      "question": "Ikiform è open source?",
+      "answerPrefix": "Ikiform è completamente open source e disponibile su"
+    }
+  },
+  "bento": {
+    "preview": {
+      "aiForm": {
+        "demoAria": "Demo del costruttore di moduli IA",
+        "step0Label": "Cosa vorresti creare?",
+        "step0Placeholder": "Es. Modulo di contatto",
+        "step1Label": "Raccogli nome",
+        "step2Label": "Raccogli e-mail",
+        "step3Label": "Messaggio",
+        "statusGenerating": "L'IA sta costruendo il tuo modulo…",
+        "statusGenerated": "Modulo generato",
+        "examplePrompt": "potresti creare un semplice modulo di contatto?",
+        "generatedIn": "Generato in 2,3 s",
+        "useThisForm": "Usa questo modulo"
+      },
+      "unlimited": {
+        "aria": "Anteprima invii illimitati",
+        "copy": "Moduli, campi, utenti e risposte illimitati."
+      },
+      "analytics": {
+        "weeklyResponses": "Risposte settimanali",
+        "liveUpdating": "Dati in aggiornamento in tempo reale…",
+        "responsesThisWeek": "1,2k risposte questa settimana"
+      },
+      "logic": {
+        "ifPrefix": "SE",
+        "thenPrefix": "ALLORA",
+        "elsePrefix": "ALTRIMENTI",
+        "userResponds": "L'utente risponde",
+        "yesValue": "“Sì”",
+        "showEmailField": "Mostra campo e-mail",
+        "skip": "Salta",
+        "srDescription": "Anteprima di una logica condizionale semplice: se l'utente risponde \"Sì\", allora mostra il campo e-mail; altrimenti, salta."
+      },
+      "api": {
+        "nameLabel": "Nome",
+        "emailLabel": "E-mail",
+        "planLabel": "Piano",
+        "premiumPlan": "Piano Premium",
+        "statusReady": "Pronto",
+        "statusFetching": "Recupero in corso…",
+        "statusFetched": "Recuperato!",
+        "srReady": "Pronto per la demo di integrazione API.",
+        "srFetching": "Contatto con l'API Stripe, caricamento dati…",
+        "srSuccess": "Dati dell'API Stripe ricevuti e visualizzati."
+      },
+      "signatures": {
+        "statusIdle": "In attesa di firma…",
+        "statusSigning": "Firma in corso",
+        "statusDone": "Firmato in modo sicuro",
+        "signAgreement": "Firma l'accordo",
+        "signed": "✓ Firmato",
+        "verified": "Verificato",
+        "signatureVerified": "Firma verificata",
+        "srIdle": "In attesa di firma elettronica. Firma per continuare.",
+        "srSigning": "La firma è in fase di redazione.",
+        "srDone": "Firma completata e verificata."
+      },
+      "notifications": {
+        "title": "Notifica e-mail",
+        "none": "nessuna",
+        "newNotifications": "Hai {count} nuove notifiche",
+        "justNow": "Proprio ora",
+        "noNewNotifications": "Nessuna nuova notifica al momento.",
+        "noNewEmailNotifications": "Nessuna nuova notifica e-mail al momento.",
+        "newEmailNotification": "Nuova notifica e-mail: {title} da {from}, {time}",
+        "templates": {
+          "contactForm": "Modulo di contatto",
+          "newsletterSignup": "Iscrizione alla newsletter",
+          "supportRequest": "Richiesta di supporto",
+          "feedbackForm": "Modulo di feedback",
+          "jobApplication": "Candidatura",
+          "twoMinutesAgo": "2 minuti fa",
+          "fiveMinutesAgo": "5 minuti fa",
+          "eightMinutesAgo": "8 minuti fa",
+          "twelveMinutesAgo": "12 minuti fa",
+          "fifteenMinutesAgo": "15 minuti fa"
+        }
+      }
+    },
+    "cards": {
+      "aiFormBuilder": {
+        "title": "Costruttore di moduli IA",
+        "highlight": "Creazione istantanea di moduli",
+        "description": "—descrivilo e lancialo. Converti i visitatori in pochi secondi."
+      },
+      "unlimitedEverything": {
+        "title": "Tutto illimitato",
+        "highlight": "moduli e risposte illimitati",
+        "description": " Cresci senza limiti."
+      },
+      "aiAnalytics": {
+        "title": "Analisi IA",
+        "prefix": "Scopri chi converte e perché—",
+        "highlight": "ottieni insight chiari e utilizzabili"
+      },
+      "smartNotifications": {
+        "title": "Notifiche intelligenti",
+        "prefix": "Non perdere mai un lead—",
+        "highlight": "ricevi avvisi istantanei e automatizza i follow-up."
+      },
+      "apiWebhooks": {
+        "title": "API e Webhook",
+        "highlight": "Sincronizza i lead ovunque",
+        "description": "—collegati a qualsiasi servizio o flusso di lavoro."
+      },
+      "formSignatures": {
+        "title": "Firme nei moduli",
+        "prefix": "Aggiungi campi firma per ",
+        "highlight": "raccogliere firme elettroniche",
+        "suffix": " in qualsiasi modulo."
+      },
+      "visualLogicBuilder": {
+        "title": "Costruttore di logica visuale",
+        "highlight": "Personalizza ogni percorso",
+        "description": "—mostra o nascondi domande in base alle risposte."
+      }
+    }
+  }
+}

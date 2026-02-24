@@ -1,0 +1,16 @@
+{
+  "trialBanner": {
+    "aria": {
+      "status": "ट्रायल स्थिति सूचना"
+    },
+    "endsInPrefix": "आपका निःशुल्क ट्रायल समाप्त होगा ",
+    "remainingSuffix": " शेष",
+    "expired": "ट्रायल समाप्त हो गया",
+    "units": {
+      "day": "दि",
+      "hour": "घं",
+      "minute": "मि",
+      "second": "से"
+    }
+  }
+}
