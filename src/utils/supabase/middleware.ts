@@ -45,8 +45,9 @@ export async function updateSession(
 		} = await supabase.auth.getUser();
 
 		const pathname = request.nextUrl.pathname;
-		const normalizedPathname =
-			pathname.replace(/^\/(?:en|es)(?=\/|$)/, "") || "/";
+		const localeMatch = pathname.match(/^\/(en|es)(?=\/|$)/);
+		const localePrefix = localeMatch ? `/${localeMatch[1]}` : "";
+		const normalizedPathname = pathname.replace(/^\/(?:en|es)(?=\/|$)/, "") || "/";
 		const isProtectedPath =
 			normalizedPathname.startsWith("/dashboard") ||
 			normalizedPathname.startsWith("/form-builder") ||
@@ -56,7 +57,15 @@ export async function updateSession(
 
 		if (!user && isProtectedPath) {
 			const url = request.nextUrl.clone();
-			url.pathname = "/login";
+			url.pathname = localePrefix ? `${localePrefix}/login` : "/login";
+			url.searchParams.set("next", `${pathname}${request.nextUrl.search}`);
+			return NextResponse.redirect(url);
+		}
+
+		if (user && normalizedPathname.startsWith("/login")) {
+			const url = request.nextUrl.clone();
+			url.pathname = localePrefix ? `${localePrefix}/dashboard` : "/dashboard";
+			url.searchParams.delete("next");
 			return NextResponse.redirect(url);
 		}
 	} catch (error) {

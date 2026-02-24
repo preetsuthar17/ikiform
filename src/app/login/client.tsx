@@ -13,7 +13,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { useAuth } from "@/hooks/use-auth";
 import { toast } from "@/hooks/use-toast";
 import { getLocaleFromPathname, withLocaleHref } from "@/lib/i18n/pathname";
 import { createClient } from "@/utils/supabase/client";
@@ -23,7 +22,6 @@ const baseInputClass =
 
 export default function LoginForm() {
 	const t = useTranslations("auth.login");
-	const { user } = useAuth();
 	const pathname = usePathname();
 	const router = useRouter();
 	const [isSignUp, setIsSignUp] = useState(false);
@@ -51,6 +49,13 @@ export default function LoginForm() {
 		(path: string) => (locale ? withLocaleHref(path, locale) : path),
 		[locale]
 	);
+	const getPostLoginPath = useCallback(() => {
+		const nextParam = new URLSearchParams(window.location.search).get("next");
+		if (nextParam?.startsWith("/")) {
+			return toLocalePath(nextParam);
+		}
+		return toLocalePath("/dashboard");
+	}, [toLocalePath]);
 
 	useEffect(() => {
 		setLastLoginMethod(localStorage.getItem("lastLoginMethod"));
@@ -62,20 +67,6 @@ export default function LoginForm() {
 		if (step === "name") nameRef.current?.focus();
 		if (step === "password") passwordRef.current?.focus();
 	}, [step, loading]);
-
-	useEffect(() => {
-		if (!user) return;
-		const redirectUrl =
-			typeof window !== "undefined"
-				? sessionStorage.getItem("redirectAfterLogin")
-				: null;
-		if (redirectUrl) {
-			sessionStorage.removeItem("redirectAfterLogin");
-			router.replace(redirectUrl);
-		} else {
-			router.replace(toLocalePath("/dashboard"));
-		}
-	}, [router, toLocalePath, user]);
 
 	const handleInput = useCallback((field: string, value: string) => {
 		setForm((f) => ({ ...f, [field]: value }));
@@ -209,6 +200,8 @@ export default function LoginForm() {
 						});
 					} catch {}
 					toast.success(t("toasts.signInSuccess"));
+					router.replace(getPostLoginPath());
+					router.refresh();
 				}
 			}
 		} catch {
@@ -216,7 +209,7 @@ export default function LoginForm() {
 		} finally {
 			setLoading(false);
 		}
-	}, [form.email, form.name, form.password, isSignUp, t]);
+	}, [form.email, form.name, form.password, getPostLoginPath, isSignUp, router, t]);
 
 	const handleOAuth = useCallback(async (provider: "github" | "google") => {
 		localStorage.setItem("lastLoginMethod", provider);
@@ -228,11 +221,14 @@ export default function LoginForm() {
 			})
 		);
 		const supabase = createClient();
+		const redirectPath = encodeURIComponent(getPostLoginPath());
 		await supabase.auth.signInWithOAuth({
 			provider,
-			options: { redirectTo: `${window.location.origin}/auth/callback` },
+			options: {
+				redirectTo: `${window.location.origin}/auth/callback?next=${redirectPath}`,
+			},
 		});
-	}, [t]);
+	}, [getPostLoginPath, t]);
 
 	const renderInput = useCallback(
 		(
