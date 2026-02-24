@@ -1,8 +1,8 @@
 import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 
-const LOCALE_PREFIX_REGEX = /^\/(en|es)(?=\/|$)/;
-const STRIP_LOCALE_PREFIX_REGEX = /^\/(?:en|es)(?=\/|$)/;
+const LOCALE_PREFIX_REGEX = /^\/(en|es|fr|de|pt|hi|ja|zh|it|ar|ko|ru|tr|nl)(?=\/|$)/;
+const STRIP_LOCALE_PREFIX_REGEX = /^\/(?:en|es|fr|de|pt|hi|ja|zh|it|ar|ko|ru|tr|nl)(?=\/|$)/;
 
 export async function updateSession(
 	request: NextRequest,
