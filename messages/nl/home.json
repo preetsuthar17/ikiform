@@ -1,0 +1,252 @@
+{
+  "name": "Ikiform",
+  "tagline": "Maak formulieren, verzamel reacties en analyseer gegevens moeiteloos.",
+  "footer": {
+    "madeBy": "Gemaakt door"
+  },
+  "cta": {
+    "heading": "Maak uw eerste formulier in een mum van tijd.",
+    "subheading": "Begin met Ikiform om formulieren, enquêtes te maken, reacties te verzamelen en meer – in enkele seconden!",
+    "goToDashboard": "Ga naar dashboard",
+    "createFirstForm": "Maak uw eerste formulier",
+    "tryDemo": "Probeer de demo"
+  },
+  "hero": {
+    "unableToLoadFormDemo": "Kan de formulierdemo niet laden. Vernieuw de pagina.",
+    "reload": "Herladen",
+    "iframeTitle": "Ikiform demoformulier",
+    "sponsoredByAria": "Gesponsord door Vercel (opent in een nieuw tabblad)",
+    "sponsoredBy": "Gesponsord door",
+    "heading": "Maak formulieren, verzamel reacties en analyseer.",
+    "subheading": "Het open-source formulierplatform voor moeiteloze gegevensverzameling en -analyse.",
+    "fiveStarRating": "Beoordeling van 5 uit 5 sterren",
+    "totalUsersSrOnly": "Totaal aantal gebruikers:",
+    "lovedByUsers": "Geliefd bij {count} gebruikers",
+    "createFirstForm": "Maak uw eerste formulier",
+    "tryDemo": "Probeer de demo",
+    "openFullscreenAria": "Open de formulierbouwer-demo op volledig scherm (druk op Enter of Spatie)",
+    "clickToViewFullscreen": "Klik om op volledig scherm te bekijken",
+    "tabs": {
+      "formDemo": "Formulierdemo",
+      "formBuilderDemo": "Formulierbouwer-demo"
+    }
+  },
+  "pricing": {
+    "title": "Eenvoudige, transparante prijzen voor alles wat u nodig heeft.",
+    "description": "Kies het plan dat het beste bij uw behoeften past en begin met het verzamelen van reacties.",
+    "popular": "Populair",
+    "noCard": "Geen creditcard vereist",
+    "features": {
+      "unlimitedForms": "Onbeperkte formulieren en reacties",
+      "apiWebhooks": "API en webhooks voor automatisering",
+      "responseLimits": "Beheer reactielimieten en -snelheid",
+      "quizScoring": "Maak quizzen met scores",
+      "formDataApi": "Toegang tot formuliergegevens via API",
+      "customBranding": "Aangepaste huisstijl en overal insluiten",
+      "spamProtection": "Spam en bots automatisch blokkeren",
+      "passwordProfanity": "Filter grof taalgebruik en vereis wachtwoorden"
+    },
+    "plans": {
+      "monthly": {
+        "title": "Maandplan",
+        "byline": "Maandelijkse facturering • Op elk moment opzegbaar"
+      },
+      "lifetime": {
+        "title": "Levenslange toegang",
+        "byline": "Eenmalige betaling • Levenslange toegang"
+      },
+      "yearly": {
+        "title": "Jaarplan",
+        "byline": "Jaarlijkse facturering ($192/jaar) • Op elk moment opzegbaar"
+      }
+    },
+    "cta": {
+      "startTrial": "Start uw gratis proefperiode van 14 dagen",
+      "getLifetime": "Levenslange toegang verkrijgen"
+    }
+  },
+  "faq": {
+    "title": "Veelgestelde vragen",
+    "featureBoardLabel": "Functiebord",
+    "githubLabel": "GitHub",
+    "q1": {
+      "question": "Wat is Ikiform?",
+      "answer": "Ikiform is een open-source alternatief voor Google Forms. Het helpt u moeiteloos mooie, interactieve formulieren te maken."
+    },
+    "q2": {
+      "question": "Is er een gratis proefperiode?",
+      "answer": "Ja, er is een gratis proefperiode van 14 dagen zonder creditcard. U kunt op elk moment opzeggen."
+    },
+    "q3": {
+      "question": "Waarom Ikiform gebruiken in plaats van Google Forms of Typeform?",
+      "answer": "Ikiform is open source en geeft u volledige controle over uw gegevens en huisstijl. Er zijn geen verborgen kosten en u kunt het zelf hosten voor extra privacy en flexibiliteit."
+    },
+    "q4": {
+      "question": "Welke soorten formulieren kan ik maken?",
+      "answer": "U kunt enkelpagina-formulieren en meerstapsformulieren met voortgangsregistratie maken."
+    },
+    "q5": {
+      "question": "Welke velden worden ondersteund?",
+      "answer": "Ondersteunde velden zijn onder andere Tekst, E-mail, Nummer, Telefoonnummer, Tekstvak, Datum, Tijd, Adres, Link, Keuzelijst, Keuzerondjes, Selectievakjes, Schuifregelaar, Tags, Sociale velden, Bestandsupload, Handtekening, Verklaring, Banner, Veldgroep, Taginvoer, Social media, Planner, Peiling, Beoordeling, Quiz en meer."
+    },
+    "q6": {
+      "question": "Hoe worden mijn gegevens beschermd?",
+      "answer": "Formulieren kunnen wachtwoordbeveiliging, snelheidsbeperking, filters voor grof taalgebruik, spambescherming, botbescherming hebben en zijn AVG-conform."
+    },
+    "q7": {
+      "question": "Worden de gegevens die ik indien gedeeld met anderen?",
+      "answer": "Nee, uw gegevens worden niet verkocht of gedeeld met derden, behalve met vertrouwde providers die nodig zijn om Ikiform te laten draaien."
+    },
+    "q8": {
+      "question": "Kan ik mijn formulieren aanpassen?",
+      "answer": "U kunt kleuren, lettertypen, lay-out wijzigen, uw logo toevoegen en het uiterlijk van elk veld beheren."
+    },
+    "q9": {
+      "question": "Waar kan ik nieuwe functies voorstellen?",
+      "answerPrefix": "U kunt functies voorstellen op"
+    },
+    "q10": {
+      "question": "Waar worden mijn gegevens opgeslagen?",
+      "answer": "Uw gegevens worden versleuteld en veilig opgeslagen in de EU via Supabase."
+    },
+    "q11": {
+      "question": "Hoe worden mijn gegevens veilig gehouden?",
+      "answer": "We gebruiken strenge beveiligingsmaatregelen en alleen geautoriseerd personeel heeft toegang tot uw gegevens."
+    },
+    "q12": {
+      "question": "Worden mijn gegevens verwijderd als ik mijn account opzeg?",
+      "answer": "Ja. U kunt uw gegevens op elk moment verwijderen. Verwijderde gegevens worden binnen 30 dagen uit back-ups verwijderd."
+    },
+    "q13": {
+      "question": "Kan ik mijn gegevens verwijderen?",
+      "answer": "Ja. U kunt op elk moment toegang tot of verwijdering van uw gegevens aanvragen door een e-mail te sturen naar hi@ikiform.com."
+    },
+    "q14": {
+      "question": "Wie is eigenaar van mijn formulierinzendingsgegevens?",
+      "answer": "Alle gegevens die u verzamelt zijn van u. Ikiform slaat ze alleen voor u op."
+    },
+    "q15": {
+      "question": "Is Ikiform open source?",
+      "answerPrefix": "Ikiform is volledig open source en beschikbaar op"
+    }
+  },
+  "bento": {
+    "preview": {
+      "aiForm": {
+        "demoAria": "AI-formulierbouwer-demo",
+        "step0Label": "Wat wilt u maken?",
+        "step0Placeholder": "Bijv. Contactformulier",
+        "step1Label": "Naam verzamelen",
+        "step2Label": "E-mail verzamelen",
+        "step3Label": "Bericht",
+        "statusGenerating": "AI bouwt uw formulier…",
+        "statusGenerated": "Formulier gegenereerd",
+        "examplePrompt": "kunt u een eenvoudig contactformulier maken?",
+        "generatedIn": "Gegenereerd in 2,3 s",
+        "useThisForm": "Dit formulier gebruiken"
+      },
+      "unlimited": {
+        "aria": "Voorbeeld van onbeperkte inzendingen",
+        "copy": "Onbeperkte formulieren, velden, gebruikers en reacties."
+      },
+      "analytics": {
+        "weeklyResponses": "Wekelijkse reacties",
+        "liveUpdating": "Livegegevens worden bijgewerkt…",
+        "responsesThisWeek": "1,2k reacties deze week"
+      },
+      "logic": {
+        "ifPrefix": "ALS",
+        "thenPrefix": "DAN",
+        "elsePrefix": "ANDERS",
+        "userResponds": "Gebruiker antwoordt",
+        "yesValue": "“Ja”",
+        "showEmailField": "Toon e-mailveld",
+        "skip": "Overslaan",
+        "srDescription": "Voorbeeld van eenvoudige voorwaardelijke logica: als de gebruiker \"Ja\" antwoordt, toon dan het e-mailveld; anders overslaan."
+      },
+      "api": {
+        "nameLabel": "Naam",
+        "emailLabel": "E-mail",
+        "planLabel": "Plan",
+        "premiumPlan": "Premium-plan",
+        "statusReady": "Gereed",
+        "statusFetching": "Ophalen…",
+        "statusFetched": "Opgehaald!",
+        "srReady": "Gereed voor de API-integratiedemo.",
+        "srFetching": "Contact met Stripe-API, gegevens worden geladen…",
+        "srSuccess": "Stripe-API-gegevens ontvangen en weergegeven."
+      },
+      "signatures": {
+        "statusIdle": "Wacht op handtekening…",
+        "statusSigning": "Ondertekening bezig",
+        "statusDone": "Veilig ondertekend",
+        "signAgreement": "Overeenkomst ondertekenen",
+        "signed": "✓ Ondertekend",
+        "verified": "Geverifieerd",
+        "signatureVerified": "Handtekening geverifieerd",
+        "srIdle": "Wacht op elektronische handtekening. Onderteken om door te gaan.",
+        "srSigning": "Handtekening wordt geplaatst.",
+        "srDone": "Handtekening voltooid en geverifieerd."
+      },
+      "notifications": {
+        "title": "E-mailnotificatie",
+        "none": "geen",
+        "newNotifications": "U heeft {count} nieuwe notificaties",
+        "justNow": "Zojuist",
+        "noNewNotifications": "Nog geen nieuwe notificaties.",
+        "noNewEmailNotifications": "Nog geen nieuwe e-mailnotificaties.",
+        "newEmailNotification": "Nieuwe e-mailnotificatie: {title} van {from}, {time}",
+        "templates": {
+          "contactForm": "Contactformulier",
+          "newsletterSignup": "Nieuwsbriefaanmelding",
+          "supportRequest": "Ondersteuningsverzoek",
+          "feedbackForm": "Feedbackformulier",
+          "jobApplication": "Sollicitatie",
+          "twoMinutesAgo": "2 minuten geleden",
+          "fiveMinutesAgo": "5 minuten geleden",
+          "eightMinutesAgo": "8 minuten geleden",
+          "twelveMinutesAgo": "12 minuten geleden",
+          "fifteenMinutesAgo": "15 minuten geleden"
+        }
+      }
+    },
+    "cards": {
+      "aiFormBuilder": {
+        "title": "AI-formulierbouwer",
+        "highlight": "Direct formulieren maken",
+        "description": "—beschrijf het en lanceer. Converteer bezoekers in seconden."
+      },
+      "unlimitedEverything": {
+        "title": "Alles onbeperkt",
+        "highlight": "onbeperkte formulieren en reacties",
+        "description": " Groei zonder grenzen."
+      },
+      "aiAnalytics": {
+        "title": "AI-analyse",
+        "prefix": "Zie wie converteert en waarom—",
+        "highlight": "krijg duidelijke, bruikbare inzichten"
+      },
+      "smartNotifications": {
+        "title": "Slimme notificaties",
+        "prefix": "Mis nooit een lead—",
+        "highlight": "ontvang directe meldingen en automatiseer opvolging."
+      },
+      "apiWebhooks": {
+        "title": "API en Webhooks",
+        "highlight": "Synchroniseer leads overal",
+        "description": "—verbind met elke service of workflow."
+      },
+      "formSignatures": {
+        "title": "Formulierhandtekeningen",
+        "prefix": "Voeg handtekeningvelden toe om ",
+        "highlight": "elektronische handtekeningen te verzamelen",
+        "suffix": " in elk formulier."
+      },
+      "visualLogicBuilder": {
+        "title": "Visuele logicabouwer",
+        "highlight": "Personaliseer elke route",
+        "description": "—toon of verberg vragen op basis van antwoorden."
+      }
+    }
+  }
+}

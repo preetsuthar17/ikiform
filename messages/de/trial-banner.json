@@ -1,0 +1,16 @@
+{
+  "trialBanner": {
+    "aria": {
+      "status": "Benachrichtigung zum Teststatus"
+    },
+    "endsInPrefix": "Ihre kostenlose Testphase endet in ",
+    "remainingSuffix": " verbleibend",
+    "expired": "Testphase abgelaufen",
+    "units": {
+      "day": "T",
+      "hour": "Std",
+      "minute": "Min",
+      "second": "Sek"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "trialBanner": {
+    "aria": {
+      "status": "Notification du statut de l'essai"
+    },
+    "endsInPrefix": "Votre essai gratuit se termine dans ",
+    "remainingSuffix": " restant",
+    "expired": "Essai expiré",
+    "units": {
+      "day": "j",
+      "hour": "h",
+      "minute": "m",
+      "second": "s"
+    }
+  }
+}

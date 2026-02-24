@@ -1,0 +1,252 @@
+{
+  "name": "Ikiform",
+  "tagline": "Form oluşturun, yanıtları toplayın ve verileri kolaylıkla analiz edin.",
+  "footer": {
+    "madeBy": "Yapımcı"
+  },
+  "cta": {
+    "heading": "İlk Formunuzu Hemen Oluşturun.",
+    "subheading": "Saniyeler içinde form, anket oluşturmak ve yanıt toplamak için Ikiform'u kullanmaya başlayın!",
+    "goToDashboard": "Panele Git",
+    "createFirstForm": "İlk Formunuzu Oluşturun",
+    "tryDemo": "Demoyu Deneyin"
+  },
+  "hero": {
+    "unableToLoadFormDemo": "Form demosu yüklenemedi. Lütfen sayfayı yenilemeyi deneyin.",
+    "reload": "Yenile",
+    "iframeTitle": "Ikiform demo formu",
+    "sponsoredByAria": "Vercel tarafından desteklenmektedir (yeni sekmede açılır)",
+    "sponsoredBy": "Destekleyen",
+    "heading": "Form Oluşturun, Yanıtları Toplayın ve Analiz Edin.",
+    "subheading": "Zahmetsiz veri toplama ve analiz için açık kaynaklı form platformu.",
+    "fiveStarRating": "5 üzerinden 5 yıldız puanı",
+    "totalUsersSrOnly": "Toplam kullanıcılar:",
+    "lovedByUsers": "{count} kullanıcı tarafından seviliyor",
+    "createFirstForm": "İlk Formunuzu Oluşturun",
+    "tryDemo": "Demoyu Deneyin",
+    "openFullscreenAria": "Form oluşturucu demosunu tam ekranda açın (Enter veya Boşluk tuşuna basın)",
+    "clickToViewFullscreen": "Tam ekranda görüntülemek için tıklayın",
+    "tabs": {
+      "formDemo": "Form Demosu",
+      "formBuilderDemo": "Form Oluşturucu Demosu"
+    }
+  },
+  "pricing": {
+    "title": "İhtiyacınız Olan Her Şey İçin Sade ve Şeffaf Fiyatlandırma.",
+    "description": "İhtiyaçlarınıza en uygun planı seçin ve yanıt toplamaya başlayın.",
+    "popular": "Popüler",
+    "noCard": "Kredi kartı gerekmez",
+    "features": {
+      "unlimitedForms": "Sınırsız form ve yanıt",
+      "apiWebhooks": "Otomasyon için API ve webhook'lar",
+      "responseLimits": "Yanıt limiti ve hızını kontrol edin",
+      "quizScoring": "Puanlamalı sınavlar oluşturun",
+      "formDataApi": "Form verilerine API üzerinden erişin",
+      "customBranding": "Özel marka kimliği ve her yere gömme",
+      "spamProtection": "Spam ve botları otomatik olarak engelleyin",
+      "passwordProfanity": "Küfür filtreleyin ve şifre gerektirin"
+    },
+    "plans": {
+      "monthly": {
+        "title": "Aylık Plan",
+        "byline": "Aylık faturalandırılır • İstediğiniz zaman iptal edin"
+      },
+      "lifetime": {
+        "title": "Ömür Boyu Erişim",
+        "byline": "Tek seferlik ödeme • Ömür boyu erişim"
+      },
+      "yearly": {
+        "title": "Yıllık Plan",
+        "byline": "Yıllık faturalandırılır (192$/yıl) • İstediğiniz zaman iptal edin"
+      }
+    },
+    "cta": {
+      "startTrial": "14 günlük ücretsiz denemenizi başlatın",
+      "getLifetime": "Ömür Boyu Erişim Edinin"
+    }
+  },
+  "faq": {
+    "title": "Sıkça Sorulan Sorular",
+    "featureBoardLabel": "Özellik Panosu",
+    "githubLabel": "GitHub",
+    "q1": {
+      "question": "Ikiform nedir?",
+      "answer": "Ikiform, Google Forms'a açık kaynaklı bir alternatiftir. Güzel ve etkileşimli formları kolayca oluşturmanıza yardımcı olur."
+    },
+    "q2": {
+      "question": "Ücretsiz deneme var mı?",
+      "answer": "Evet, herhangi bir kredi kartı gerektirmeyen 14 günlük ücretsiz deneme mevcuttur. İstediğiniz zaman iptal edebilirsiniz."
+    },
+    "q3": {
+      "question": "Google Forms veya Typeform yerine neden Ikiform kullanmalıyım?",
+      "answer": "Ikiform açık kaynaklıdır ve verileriniz ile marka kimliğiniz üzerinde tam kontrol sağlar. Gizli maliyet yoktur; ekstra gizlilik ve esneklik için kendi sunucunuzda barındırabilirsiniz."
+    },
+    "q4": {
+      "question": "Hangi tür formları oluşturabilirim?",
+      "answer": "İlerleme takibi ile tek sayfalık ve çok adımlı formlar oluşturabilirsiniz."
+    },
+    "q5": {
+      "question": "Hangi alanlar destekleniyor?",
+      "answer": "Desteklenen alanlar şunlardır: Metin, E-posta, Sayı, Telefon Numarası, Metin Alanı, Tarih, Saat, Adres, Bağlantı, Açılır Seçim, Radyo Düğmeleri, Onay Kutuları, Kaydırıcı, Etiketler, Sosyal Alanlar, Dosya Yükleme, İmza, Açıklama, Banner, Alan Grubu, Etiket Girişi, Sosyal Medya, Zamanlayıcı, Anket, Derecelendirme, Sınav ve daha fazlası."
+    },
+    "q6": {
+      "question": "Verilerim nasıl korunuyor?",
+      "answer": "Formlar şifre koruması, hız sınırlama, küfür filtreleri, spam koruması, bot koruması içerebilir ve GDPR uyumludur."
+    },
+    "q7": {
+      "question": "Gönderdiğim veriler başkalarıyla paylaşılıyor mu?",
+      "answer": "Hayır, verileriniz üçüncü taraflarla satılmaz veya paylaşılmaz; yalnızca Ikiform'u işletmek için ihtiyaç duyulan güvenilir sağlayıcılarla çalışılır."
+    },
+    "q8": {
+      "question": "Formlarımı özelleştirebilir miyim?",
+      "answer": "Renkleri, yazı tiplerini, düzeni değiştirebilir, logonuzu ekleyebilir ve her alanın görünümünü kontrol edebilirsiniz."
+    },
+    "q9": {
+      "question": "Yeni özellikler nereden önerebilirim?",
+      "answerPrefix": "Herhangi bir özelliği şu adreste önerebilirsiniz:"
+    },
+    "q10": {
+      "question": "Verilerim nerede saklanıyor?",
+      "answer": "Verileriniz şifrelenerek Supabase kullanılarak AB'de güvenli bir şekilde depolanır."
+    },
+    "q11": {
+      "question": "Verilerim nasıl güvende tutuluyor?",
+      "answer": "Güçlü güvenlik önlemleri kullanıyoruz ve yalnızca yetkili personel verilerinize erişebilir."
+    },
+    "q12": {
+      "question": "Hesabımı iptal edersem verilerim silinir mi?",
+      "answer": "Evet. Verilerinizi istediğiniz zaman silebilirsiniz. Silinen veriler 30 gün içinde yedeklerden kaldırılır."
+    },
+    "q13": {
+      "question": "Verilerimi silebilir miyim?",
+      "answer": "Evet. hi@ikiform.com adresine e-posta göndererek verilerinize erişim veya silinme talebinde bulunabilirsiniz."
+    },
+    "q14": {
+      "question": "Form gönderme verilerimin sahibi kim?",
+      "answer": "Topladığınız tüm verilerin sahibi sizsiniz. Ikiform yalnızca verileri sizin adınıza saklar."
+    },
+    "q15": {
+      "question": "Ikiform açık kaynaklı mı?",
+      "answerPrefix": "Ikiform tamamen açık kaynaklıdır ve şu adreste mevcuttur:"
+    }
+  },
+  "bento": {
+    "preview": {
+      "aiForm": {
+        "demoAria": "Yapay Zeka Form Oluşturucu Demosu",
+        "step0Label": "Ne oluşturmak istersiniz?",
+        "step0Placeholder": "Örn. İletişim Formu",
+        "step1Label": "İsim toplayın",
+        "step2Label": "E-posta toplayın",
+        "step3Label": "Mesaj",
+        "statusGenerating": "Yapay zeka formunuzu oluşturuyor…",
+        "statusGenerated": "Form oluşturuldu",
+        "examplePrompt": "basit bir iletişim formu oluşturabilir misiniz?",
+        "generatedIn": "2,3 saniyede oluşturuldu",
+        "useThisForm": "Bu formu kullan"
+      },
+      "unlimited": {
+        "aria": "Sınırsız gönderim önizlemesi",
+        "copy": "Sınırsız Form, Alan, Kullanıcı ve Yanıt."
+      },
+      "analytics": {
+        "weeklyResponses": "Haftalık Yanıtlar",
+        "liveUpdating": "Veriler canlı güncelleniyor...",
+        "responsesThisWeek": "Bu hafta 1.200 yanıt"
+      },
+      "logic": {
+        "ifPrefix": "EĞER",
+        "thenPrefix": "O ZAMAN",
+        "elsePrefix": "DEĞİLSE",
+        "userResponds": "Kullanıcı yanıt verir",
+        "yesValue": "“Evet”",
+        "showEmailField": "E-posta alanını göster",
+        "skip": "Atla",
+        "srDescription": "Basit bir koşullu mantığın önizlemesi: kullanıcı \"Evet\" yanıtı verirse e-posta alanını göster; aksi takdirde atla."
+      },
+      "api": {
+        "nameLabel": "İsim",
+        "emailLabel": "E-posta",
+        "planLabel": "Plan",
+        "premiumPlan": "Premium Plan",
+        "statusReady": "Hazır",
+        "statusFetching": "Getiriliyor...",
+        "statusFetched": "Getirildi!",
+        "srReady": "API entegrasyon demosu için hazır.",
+        "srFetching": "Stripe API ile iletişime geçiliyor, veriler yükleniyor...",
+        "srSuccess": "Stripe API verileri alındı ve görüntülendi."
+      },
+      "signatures": {
+        "statusIdle": "İmza bekleniyor…",
+        "statusSigning": "İmzalama devam ediyor",
+        "statusDone": "Güvenli şekilde imzalandı",
+        "signAgreement": "Sözleşmeyi İmzala",
+        "signed": "✓ İmzalandı",
+        "verified": "Doğrulandı",
+        "signatureVerified": "İmza Doğrulandı",
+        "srIdle": "E-imza bekleniyor. Devam etmek için lütfen imzalayın.",
+        "srSigning": "İmza yazılıyor.",
+        "srDone": "İmza tamamlandı ve doğrulandı."
+      },
+      "notifications": {
+        "title": "E-posta Bildirimi",
+        "none": "hiç",
+        "newNotifications": "{count} yeni bildiriminiz var",
+        "justNow": "Az önce",
+        "noNewNotifications": "Henüz yeni bildirim yok.",
+        "noNewEmailNotifications": "Henüz yeni e-posta bildirimi yok.",
+        "newEmailNotification": "Yeni e-posta bildirimi: {from} kişisinden {title}, {time}",
+        "templates": {
+          "contactForm": "İletişim Formu",
+          "newsletterSignup": "Bülten Kaydı",
+          "supportRequest": "Destek Talebi",
+          "feedbackForm": "Geri Bildirim Formu",
+          "jobApplication": "İş Başvurusu",
+          "twoMinutesAgo": "2 dakika önce",
+          "fiveMinutesAgo": "5 dakika önce",
+          "eightMinutesAgo": "8 dakika önce",
+          "twelveMinutesAgo": "12 dakika önce",
+          "fifteenMinutesAgo": "15 dakika önce"
+        }
+      }
+    },
+    "cards": {
+      "aiFormBuilder": {
+        "title": "Yapay Zeka Form Oluşturucu",
+        "highlight": "Anında form oluşturma",
+        "description": "—sadece tarif edin ve yayına alın. Saniyeler içinde ziyaretçileri dönüştürün."
+      },
+      "unlimitedEverything": {
+        "title": "Her Şey Sınırsız",
+        "highlight": "sınırsız form ve yanıt",
+        "description": " Sınır tanımadan büyüyün."
+      },
+      "aiAnalytics": {
+        "title": "Yapay Zeka Analitiği",
+        "prefix": "Kimin neden dönüştüğünü görün—",
+        "highlight": "net, eyleme dönüştürülebilir içgörüler elde edin"
+      },
+      "smartNotifications": {
+        "title": "Akıllı Bildirimler",
+        "prefix": "Hiçbir müşteri adayını kaçırmayın—",
+        "highlight": "anında uyarılar alın ve takipleri otomatikleştirin."
+      },
+      "apiWebhooks": {
+        "title": "API ve Webhook'lar",
+        "highlight": "Müşteri adaylarını her yere senkronize edin",
+        "description": "—herhangi bir hizmet veya iş akışıyla bağlantı kurun."
+      },
+      "formSignatures": {
+        "title": "Form İmzaları",
+        "prefix": "İmza alanları ekleyerek ",
+        "highlight": "e-imza toplayın",
+        "suffix": " herhangi bir formda."
+      },
+      "visualLogicBuilder": {
+        "title": "Görsel Mantık Oluşturucu",
+        "highlight": "Her deneyimi kişiselleştirin",
+        "description": "—yanıtlara göre soruları gösterin veya gizleyin."
+      }
+    }
+  }
+}

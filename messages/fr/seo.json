@@ -1,0 +1,70 @@
+{
+  "siteName": "Ikiform",
+  "routes": {
+    "home": {
+      "title": "Créez des formulaires, collectez des réponses et analysez vos données facilement.",
+      "description": "Créez de magnifiques formulaires avec Ikiform et analysez les réponses sans effort.",
+      "keywords": ["créateur de formulaires", "formulaires en ligne", "créateur de sondages", "alternative à typeform", "alternative à google forms"]
+    },
+    "changelog": {
+      "title": "Journal des modifications",
+      "description": "Suivez les mises à jour, les versions et les améliorations du produit Ikiform.",
+      "keywords": ["journal des modifications", "mises à jour du produit", "notes de version", "mises à jour ikiform"]
+    },
+    "legalPrivacy": {
+      "title": "Politique de confidentialité",
+      "description": "Découvrez comment Ikiform collecte, utilise et protège vos données personnelles.",
+      "keywords": ["politique de confidentialité", "protection des données", "confidentialité ikiform"]
+    },
+    "legalTerms": {
+      "title": "Conditions d'utilisation",
+      "description": "Lisez les conditions d'utilisation d'Ikiform régissant l'accès et l'utilisation du service.",
+      "keywords": ["conditions d'utilisation", "conditions", "mentions légales ikiform"]
+    },
+    "legalGdpr": {
+      "title": "Conformité RGPD",
+      "description": "Comprenez les contrôles RGPD et la posture de traitement des données d'Ikiform.",
+      "keywords": ["rgpd", "confidentialité", "conformité"]
+    },
+    "legalDpa": {
+      "title": "Accord de traitement des données",
+      "description": "Lisez l'accord de traitement des données d'Ikiform pour les clients professionnels.",
+      "keywords": ["atd", "accord de traitement des données", "conformité"]
+    },
+    "aiBuilder": {
+      "title": "Constructeur de formulaires IA",
+      "description": "Créez et personnalisez des formulaires avec l'assistance de l'IA dans Ikiform.",
+      "keywords": ["constructeur de formulaires ia", "générateur de formulaires", "ikiform ia"]
+    },
+    "demoFormBuilder": {
+      "title": "Démo du constructeur de formulaires",
+      "description": "Essayez la démo en direct du constructeur de formulaires Ikiform et explorez les fonctionnalités instantanément.",
+      "keywords": ["démo constructeur de formulaires", "démo ikiform", "constructeur de formulaires interactif"]
+    },
+    "login": {
+      "title": "Connexion",
+      "description": "Connectez-vous à votre compte Ikiform.",
+      "keywords": ["connexion ikiform", "se connecter"]
+    },
+    "resetPassword": {
+      "title": "Réinitialiser le mot de passe",
+      "description": "Réinitialisez le mot de passe de votre compte Ikiform.",
+      "keywords": ["réinitialiser le mot de passe", "récupération de compte"]
+    },
+    "success": {
+      "title": "Succès",
+      "description": "Action terminée avec succès.",
+      "keywords": ["succès"]
+    },
+    "embed": {
+      "title": "Intégration",
+      "description": "Intégrez les formulaires Ikiform dans votre site web.",
+      "keywords": ["intégrer formulaire", "intégration de formulaire", "intégration ikiform"]
+    },
+    "embedTest": {
+      "title": "Test d'intégration",
+      "description": "Prévisualisez et testez les formulaires Ikiform intégrés.",
+      "keywords": ["test d'intégration", "aperçu du formulaire"]
+    }
+  }
+}

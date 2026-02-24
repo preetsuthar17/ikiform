@@ -1,0 +1,70 @@
+{
+  "siteName": "Ikiform",
+  "routes": {
+    "home": {
+      "title": "Formlar olusturun, yanitlar toplayin ve verileri zahmetsizce analiz edin.",
+      "description": "Ikiform ile guzel formlar olusturun ve yanitlari zahmetsizce analiz edin.",
+      "keywords": ["form olusturucu", "cevrimici formlar", "anket olusturucu", "typeform alternatifi", "google forms alternatifi"]
+    },
+    "changelog": {
+      "title": "Degisiklik Gunlugu",
+      "description": "Ikiform'daki urun guncellemelerini, surumlerini ve iyilestirmelerini takip edin.",
+      "keywords": ["degisiklik gunlugu", "urun guncellemeleri", "surum notlari", "ikiform guncellemeleri"]
+    },
+    "legalPrivacy": {
+      "title": "Gizlilik Politikasi",
+      "description": "Ikiform'un kisisel verilerinizi nasil topladigini, kullandigini ve korudugunu ogrenin.",
+      "keywords": ["gizlilik politikasi", "veri koruma", "ikiform gizlilik"]
+    },
+    "legalTerms": {
+      "title": "Hizmet Kosullari",
+      "description": "Hizmete erisimi ve kullanimini duzenleyen Ikiform kosullarini okuyun.",
+      "keywords": ["hizmet kosullari", "kosullar", "ikiform yasal"]
+    },
+    "legalGdpr": {
+      "title": "GDPR Uyumlulugu",
+      "description": "Ikiform GDPR kontrolleri ve veri isleme yaklasimini anlayin.",
+      "keywords": ["gdpr", "gizlilik", "uyumluluk"]
+    },
+    "legalDpa": {
+      "title": "Veri Isleme Sozlesmesi",
+      "description": "Kurumsal musteriler icin Ikiform Veri Isleme Sozlesmesi'ni okuyun.",
+      "keywords": ["veri isleme sozlesmesi", "veri isleme", "uyumluluk"]
+    },
+    "aiBuilder": {
+      "title": "Yapay Zeka Form Olusturucu",
+      "description": "Ikiform'da yapay zeka destekli yardimla formlar olusturun ve ozellestirin.",
+      "keywords": ["yapay zeka form olusturucu", "form uretici", "ikiform yapay zeka"]
+    },
+    "demoFormBuilder": {
+      "title": "Demo Form Olusturucu",
+      "description": "Ikiform'un canli demo form olusturucusunu deneyin ve ozellikleri aninda kesfedin.",
+      "keywords": ["form olusturucu demo", "ikiform demo", "etkilesimli form olusturucu"]
+    },
+    "login": {
+      "title": "Giris",
+      "description": "Ikiform hesabiniza giris yapin.",
+      "keywords": ["ikiform giris", "oturum ac"]
+    },
+    "resetPassword": {
+      "title": "Sifre Sifirlama",
+      "description": "Ikiform hesap sifrenizi sifirlayin.",
+      "keywords": ["sifre sifirlama", "hesap kurtarma"]
+    },
+    "success": {
+      "title": "Basarili",
+      "description": "Islem basariyla tamamlandi.",
+      "keywords": ["basarili"]
+    },
+    "embed": {
+      "title": "Gom",
+      "description": "Ikiform formlarini web sitenize gomun.",
+      "keywords": ["form gom", "form gomme", "ikiform gomme"]
+    },
+    "embedTest": {
+      "title": "Gomme Testi",
+      "description": "Gomulu Ikiform formlarini onizleyin ve test edin.",
+      "keywords": ["gomme testi", "form onizleme"]
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "siteName": "Ikiform",
+  "routes": {
+    "home": {
+      "title": "Crea moduli, raccogli risposte e analizza i dati senza sforzo.",
+      "description": "Crea bellissimi moduli con Ikiform e analizza le risposte senza sforzo.",
+      "keywords": ["creatore di moduli", "moduli online", "creatore di sondaggi", "alternativa a typeform", "alternativa a google forms"]
+    },
+    "changelog": {
+      "title": "Registro modifiche",
+      "description": "Segui gli aggiornamenti del prodotto, le versioni e i miglioramenti di Ikiform.",
+      "keywords": ["registro modifiche", "aggiornamenti prodotto", "note di rilascio", "aggiornamenti ikiform"]
+    },
+    "legalPrivacy": {
+      "title": "Informativa sulla privacy",
+      "description": "Scopri come Ikiform raccoglie, utilizza e protegge i tuoi dati personali.",
+      "keywords": ["informativa sulla privacy", "protezione dei dati", "privacy ikiform"]
+    },
+    "legalTerms": {
+      "title": "Termini di servizio",
+      "description": "Leggi i termini di Ikiform che regolano l'accesso e l'uso del servizio.",
+      "keywords": ["termini di servizio", "termini", "legale ikiform"]
+    },
+    "legalGdpr": {
+      "title": "Conformità GDPR",
+      "description": "Comprendi i controlli GDPR e la gestione dei dati di Ikiform.",
+      "keywords": ["gdpr", "privacy", "conformità"]
+    },
+    "legalDpa": {
+      "title": "Accordo sul trattamento dei dati",
+      "description": "Leggi l'Accordo sul trattamento dei dati di Ikiform per i clienti aziendali.",
+      "keywords": ["dpa", "accordo sul trattamento dei dati", "conformità"]
+    },
+    "aiBuilder": {
+      "title": "Costruttore di moduli IA",
+      "description": "Crea e personalizza moduli con l'assistenza dell'intelligenza artificiale in Ikiform.",
+      "keywords": ["costruttore moduli ia", "generatore di moduli", "ikiform ia"]
+    },
+    "demoFormBuilder": {
+      "title": "Demo costruttore di moduli",
+      "description": "Prova la demo dal vivo del costruttore di moduli di Ikiform ed esplora le funzionalità istantaneamente.",
+      "keywords": ["demo costruttore moduli", "demo ikiform", "costruttore moduli interattivo"]
+    },
+    "login": {
+      "title": "Accedi",
+      "description": "Accedi al tuo account Ikiform.",
+      "keywords": ["accesso ikiform", "accedi"]
+    },
+    "resetPassword": {
+      "title": "Reimposta password",
+      "description": "Reimposta la password del tuo account Ikiform.",
+      "keywords": ["reimposta password", "recupero account"]
+    },
+    "success": {
+      "title": "Successo",
+      "description": "Azione completata con successo.",
+      "keywords": ["successo"]
+    },
+    "embed": {
+      "title": "Incorpora",
+      "description": "Incorpora i moduli Ikiform nel tuo sito web.",
+      "keywords": ["incorpora modulo", "modulo incorporato", "ikiform incorpora"]
+    },
+    "embedTest": {
+      "title": "Test incorporamento",
+      "description": "Anteprima e test dei moduli Ikiform incorporati.",
+      "keywords": ["test incorporamento", "anteprima modulo"]
+    }
+  }
+}

@@ -1,0 +1,252 @@
+{
+  "name": "Ikiform",
+  "tagline": "폼을 만들고, 응답을 수집하고, 데이터를 손쉽게 분석하세요.",
+  "footer": {
+    "madeBy": "만든 이"
+  },
+  "cta": {
+    "heading": "첫 번째 폼을 순식간에 만들어 보세요.",
+    "subheading": "Ikiform으로 폼, 설문조사 생성, 응답 수집 등을 몇 초 만에 시작하세요!",
+    "goToDashboard": "대시보드로 이동",
+    "createFirstForm": "첫 번째 폼 만들기",
+    "tryDemo": "데모 체험하기"
+  },
+  "hero": {
+    "unableToLoadFormDemo": "폼 데모를 불러올 수 없습니다. 페이지를 새로고침해 주세요.",
+    "reload": "새로고침",
+    "iframeTitle": "Ikiform 데모 폼",
+    "sponsoredByAria": "Vercel 후원 (새 탭에서 열림)",
+    "sponsoredBy": "후원",
+    "heading": "폼을 만들고, 응답을 수집하고, 분석하세요.",
+    "subheading": "손쉬운 데이터 수집과 분석을 위한 오픈소스 폼 플랫폼.",
+    "fiveStarRating": "별점 5점 만점",
+    "totalUsersSrOnly": "전체 사용자:",
+    "lovedByUsers": "{count}명의 사용자가 사랑합니다",
+    "createFirstForm": "첫 번째 폼 만들기",
+    "tryDemo": "데모 체험하기",
+    "openFullscreenAria": "폼 빌더 데모를 전체 화면으로 열기 (Enter 또는 Space 키를 누르세요)",
+    "clickToViewFullscreen": "클릭하여 전체 화면으로 보기",
+    "tabs": {
+      "formDemo": "폼 데모",
+      "formBuilderDemo": "폼 빌더 데모"
+    }
+  },
+  "pricing": {
+    "title": "필요한 모든 것을 위한 간단하고 투명한 요금제.",
+    "description": "필요에 가장 적합한 요금제를 선택하고 응답 수집을 시작하세요.",
+    "popular": "인기",
+    "noCard": "신용카드 불필요",
+    "features": {
+      "unlimitedForms": "무제한 폼 및 응답",
+      "apiWebhooks": "자동화를 위한 API 및 웹훅",
+      "responseLimits": "응답 제한 및 빈도 제어",
+      "quizScoring": "채점 기능이 있는 퀴즈 제작",
+      "formDataApi": "API를 통한 폼 데이터 접근",
+      "customBranding": "맞춤 브랜딩 및 어디서나 임베드",
+      "spamProtection": "스팸 및 봇 자동 차단",
+      "passwordProfanity": "비속어 필터링 및 비밀번호 요구"
+    },
+    "plans": {
+      "monthly": {
+        "title": "월간 요금제",
+        "byline": "월별 결제 · 언제든 해지 가능"
+      },
+      "lifetime": {
+        "title": "평생 이용권",
+        "byline": "일회성 결제 · 평생 이용"
+      },
+      "yearly": {
+        "title": "연간 요금제",
+        "byline": "연간 결제 ($192/년) · 언제든 해지 가능"
+      }
+    },
+    "cta": {
+      "startTrial": "14일 무료 체험 시작",
+      "getLifetime": "평생 이용권 받기"
+    }
+  },
+  "faq": {
+    "title": "자주 묻는 질문",
+    "featureBoardLabel": "기능 보드",
+    "githubLabel": "GitHub",
+    "q1": {
+      "question": "Ikiform이란 무엇인가요?",
+      "answer": "Ikiform은 Google 설문지의 오픈소스 대안입니다. 아름답고 인터랙티브한 폼을 쉽게 만들 수 있도록 도와줍니다."
+    },
+    "q2": {
+      "question": "무료 체험이 있나요?",
+      "answer": "네, 신용카드 없이 14일간 무료 체험을 이용하실 수 있습니다. 언제든 해지할 수 있습니다."
+    },
+    "q3": {
+      "question": "Google Forms나 Typeform 대신 Ikiform을 사용해야 하는 이유는?",
+      "answer": "Ikiform은 오픈소스이며 데이터와 브랜딩을 완전히 제어할 수 있습니다. 숨겨진 비용이 없으며, 추가적인 프라이버시와 유연성을 위해 셀프 호스팅할 수 있습니다."
+    },
+    "q4": {
+      "question": "어떤 종류의 폼을 만들 수 있나요?",
+      "answer": "진행 상황 추적이 가능한 단일 페이지 폼과 다단계 폼을 만들 수 있습니다."
+    },
+    "q5": {
+      "question": "어떤 필드가 지원되나요?",
+      "answer": "지원되는 필드에는 텍스트, 이메일, 숫자, 전화번호, 텍스트 영역, 날짜, 시간, 주소, 링크, 선택 드롭다운, 라디오 버튼, 체크박스, 슬라이더, 태그, 소셜 필드, 파일 업로드, 서명, 설명문, 배너, 필드 그룹, 태그 입력, 소셜 미디어, 스케줄러, 투표, 평점, 퀴즈 등이 있습니다."
+    },
+    "q6": {
+      "question": "내 데이터는 어떻게 보호되나요?",
+      "answer": "폼에는 비밀번호 보호, 빈도 제한, 비속어 필터, 스팸 보호, 봇 보호 기능이 있으며, GDPR을 준수합니다."
+    },
+    "q7": {
+      "question": "제출한 데이터가 다른 사람과 공유되나요?",
+      "answer": "아니요, 귀하의 데이터는 Ikiform 운영에 필요한 신뢰할 수 있는 제공업체를 제외하고 제3자에게 판매되거나 공유되지 않습니다."
+    },
+    "q8": {
+      "question": "폼을 맞춤 설정할 수 있나요?",
+      "answer": "색상, 글꼴, 레이아웃을 변경하고, 로고를 추가하며, 각 필드의 모양을 제어할 수 있습니다."
+    },
+    "q9": {
+      "question": "새로운 기능을 어디서 제안할 수 있나요?",
+      "answerPrefix": "다음에서 기능을 제안할 수 있습니다"
+    },
+    "q10": {
+      "question": "내 데이터는 어디에 저장되나요?",
+      "answer": "귀하의 데이터는 Supabase를 사용하여 EU 내에서 암호화되어 안전하게 저장됩니다."
+    },
+    "q11": {
+      "question": "내 데이터는 어떻게 안전하게 유지되나요?",
+      "answer": "강력한 보안 조치를 적용하고 있으며, 승인된 직원만 귀하의 데이터에 접근할 수 있습니다."
+    },
+    "q12": {
+      "question": "계정을 해지하면 데이터가 삭제되나요?",
+      "answer": "네. 언제든 데이터를 삭제할 수 있습니다. 삭제된 데이터는 30일 이내에 백업에서도 제거됩니다."
+    },
+    "q13": {
+      "question": "내 데이터를 삭제할 수 있나요?",
+      "answer": "네. hi@ikiform.com으로 이메일을 보내 언제든 데이터 접근 또는 삭제를 요청할 수 있습니다."
+    },
+    "q14": {
+      "question": "폼 제출 데이터의 소유자는 누구인가요?",
+      "answer": "수집한 모든 데이터는 귀하의 소유입니다. Ikiform은 단지 보관해 드릴 뿐입니다."
+    },
+    "q15": {
+      "question": "Ikiform은 오픈소스인가요?",
+      "answerPrefix": "Ikiform은 완전한 오픈소스이며 다음에서 이용 가능합니다"
+    }
+  },
+  "bento": {
+    "preview": {
+      "aiForm": {
+        "demoAria": "AI 폼 빌더 데모",
+        "step0Label": "무엇을 만들고 싶으세요?",
+        "step0Placeholder": "예: 문의 양식",
+        "step1Label": "이름 수집",
+        "step2Label": "이메일 수집",
+        "step3Label": "메시지",
+        "statusGenerating": "AI가 폼을 만들고 있습니다…",
+        "statusGenerated": "폼이 생성되었습니다",
+        "examplePrompt": "간단한 문의 양식을 만들어 줄 수 있나요?",
+        "generatedIn": "2.3초 만에 생성",
+        "useThisForm": "이 폼 사용하기"
+      },
+      "unlimited": {
+        "aria": "무제한 제출 미리보기",
+        "copy": "무제한 폼, 필드, 사용자 및 응답."
+      },
+      "analytics": {
+        "weeklyResponses": "주간 응답",
+        "liveUpdating": "실시간 데이터 업데이트 중...",
+        "responsesThisWeek": "이번 주 1.2k 응답"
+      },
+      "logic": {
+        "ifPrefix": "만약",
+        "thenPrefix": "그러면",
+        "elsePrefix": "그렇지 않으면",
+        "userResponds": "사용자가 응답",
+        "yesValue": "“예”",
+        "showEmailField": "이메일 필드 표시",
+        "skip": "건너뛰기",
+        "srDescription": "간단한 조건부 로직 미리보기: 사용자가 \"예\"라고 응답하면 이메일 필드를 표시하고, 그렇지 않으면 건너뜁니다."
+      },
+      "api": {
+        "nameLabel": "이름",
+        "emailLabel": "이메일",
+        "planLabel": "요금제",
+        "premiumPlan": "프리미엄 요금제",
+        "statusReady": "준비 완료",
+        "statusFetching": "가져오는 중...",
+        "statusFetched": "가져오기 완료!",
+        "srReady": "API 연동 데모 준비 완료.",
+        "srFetching": "Stripe API에 연결 중, 데이터 로딩...",
+        "srSuccess": "Stripe API 데이터를 수신하여 표시했습니다."
+      },
+      "signatures": {
+        "statusIdle": "서명 대기 중…",
+        "statusSigning": "서명 진행 중",
+        "statusDone": "안전하게 서명됨",
+        "signAgreement": "계약서 서명",
+        "signed": "✓ 서명됨",
+        "verified": "검증됨",
+        "signatureVerified": "서명 검증 완료",
+        "srIdle": "전자 서명 대기 중. 계속하려면 서명해 주세요.",
+        "srSigning": "서명이 작성되고 있습니다.",
+        "srDone": "서명이 완료되고 검증되었습니다."
+      },
+      "notifications": {
+        "title": "이메일 알림",
+        "none": "없음",
+        "newNotifications": "{count}개의 새 알림이 있습니다",
+        "justNow": "방금",
+        "noNewNotifications": "아직 새 알림이 없습니다.",
+        "noNewEmailNotifications": "아직 새 이메일 알림이 없습니다.",
+        "newEmailNotification": "새 이메일 알림: {title}, {from}으로부터, {time}",
+        "templates": {
+          "contactForm": "문의 양식",
+          "newsletterSignup": "뉴스레터 구독",
+          "supportRequest": "지원 요청",
+          "feedbackForm": "피드백 양식",
+          "jobApplication": "입사 지원",
+          "twoMinutesAgo": "2분 전",
+          "fiveMinutesAgo": "5분 전",
+          "eightMinutesAgo": "8분 전",
+          "twelveMinutesAgo": "12분 전",
+          "fifteenMinutesAgo": "15분 전"
+        }
+      }
+    },
+    "cards": {
+      "aiFormBuilder": {
+        "title": "AI 폼 빌더",
+        "highlight": "즉시 폼 생성",
+        "description": "—설명만 하면 바로 실행. 몇 초 만에 방문자를 전환하세요."
+      },
+      "unlimitedEverything": {
+        "title": "모든 것이 무제한",
+        "highlight": "무제한 폼과 응답",
+        "description": " 제한 없이 성장하세요."
+      },
+      "aiAnalytics": {
+        "title": "AI 분석",
+        "prefix": "누가 전환하는지, 왜 전환하는지 파악—",
+        "highlight": "명확하고 실행 가능한 인사이트 확보"
+      },
+      "smartNotifications": {
+        "title": "스마트 알림",
+        "prefix": "리드를 놓치지 마세요—",
+        "highlight": "즉시 알림을 받고 후속 조치를 자동화하세요."
+      },
+      "apiWebhooks": {
+        "title": "API 및 웹훅",
+        "highlight": "리드를 어디서나 동기화",
+        "description": "—모든 서비스나 워크플로우와 연결하세요."
+      },
+      "formSignatures": {
+        "title": "폼 서명",
+        "prefix": "서명 필드를 추가하여 ",
+        "highlight": "전자 서명 수집",
+        "suffix": " 모든 폼에서."
+      },
+      "visualLogicBuilder": {
+        "title": "비주얼 로직 빌더",
+        "highlight": "모든 여정을 맞춤화",
+        "description": "—응답에 따라 질문을 표시하거나 숨기세요."
+      }
+    }
+  }
+}

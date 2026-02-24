@@ -1,0 +1,16 @@
+{
+  "trialBanner": {
+    "aria": {
+      "status": "إشعار حالة الفترة التجريبية"
+    },
+    "endsInPrefix": "تنتهي فترتك التجريبية المجانية خلال ",
+    "remainingSuffix": " متبقية",
+    "expired": "انتهت الفترة التجريبية",
+    "units": {
+      "day": "ي",
+      "hour": "س",
+      "minute": "د",
+      "second": "ث"
+    }
+  }
+}

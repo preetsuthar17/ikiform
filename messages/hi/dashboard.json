@@ -1,0 +1,517 @@
+{
+  "common": {
+    "dashboard": "डैशबोर्ड",
+    "feedback": "प्रतिक्रिया",
+    "logOut": "लॉग आउट",
+    "loading": "लोड हो रहा है",
+    "loadingProfile": "प्रोफ़ाइल लोड हो रही है",
+    "loadingFormsSidebar": "फ़ॉर्म साइडबार लोड हो रहा है",
+    "loadingFormsManagement": "फ़ॉर्म प्रबंधन लोड हो रहा है"
+  },
+  "profile": {
+    "userProfileInformation": "उपयोगकर्ता प्रोफ़ाइल जानकारी",
+    "userNameAria": "उपयोगकर्ता का नाम: {name}",
+    "premiumUserBadge": "प्रीमियम उपयोगकर्ता बैज",
+    "userEmailAria": "उपयोगकर्ता का ईमेल: {email}"
+  },
+  "formsManagement": {
+    "aria": {
+      "management": "फ़ॉर्म प्रबंधन"
+    },
+    "header": {
+      "title": "आपके फ़ॉर्म",
+      "subtitle": "अपने फ़ॉर्म आसानी से बनाएँ, प्रबंधित करें और उनका विश्लेषण करें",
+      "createNewForm": "नया फ़ॉर्म बनाएँ",
+      "createDialogTitle": "नया फ़ॉर्म बनाएँ",
+      "createDialogDescription": "चुनें कि आप कैसे शुरू करना चाहते हैं। आप AI से जनरेट कर सकते हैं, मैन्युअली बना सकते हैं, या एन्क्रिप्टेड फ़ाइल इम्पोर्ट कर सकते हैं।"
+    },
+    "createOptions": {
+      "aiBadge": "सबसे अनुशंसित",
+      "aiCta": "AI से शुरू करें",
+      "aiTitle": "Kiko AI का उपयोग करें",
+      "aiDescription": "अपने फ़ॉर्म का वर्णन करें और Kiko AI को फ़ील्ड, लॉजिक और संरचना के साथ एक पूर्ण प्रारंभिक ड्राफ़्ट तैयार करने दें।",
+      "manualCta": "मैन्युअली बनाएँ",
+      "manualTitle": "मैन्युअली बनाएँ",
+      "manualDescription": "एक खाली फ़ॉर्म से शुरू करें और फ़ील्ड मैन्युअली कॉन्फ़िगर करें।",
+      "importCta": "फ़ाइल इम्पोर्ट करें",
+      "importTitle": "फ़ाइल से इम्पोर्ट करें",
+      "importDescription": "पासफ़्रेज़-संरक्षित .ikiform फ़ाइल को नए ड्राफ़्ट फ़ॉर्म में इम्पोर्ट करें।"
+    },
+    "emptyState": {
+      "aria": "खाली स्थिति - अभी तक कोई फ़ॉर्म नहीं बनाया गया",
+      "title": "अभी तक कोई फ़ॉर्म नहीं",
+      "description": "अपना पहला फ़ॉर्म बनाकर शुरू करें। यह तेज़ और आसान है!",
+      "createFirstForm": "अपना पहला फ़ॉर्म बनाएँ",
+      "dialog": {
+        "title": "आप अपना फ़ॉर्म कैसे बनाना चाहेंगे?",
+        "description": "अपना फ़ॉर्म मैन्युअली बनाएँ या Kiko AI से जनरेट करवाएँ।",
+        "createWithAI": "Kiko AI का उपयोग करें",
+        "createManually": "मैन्युअली बनाएँ"
+      }
+    },
+    "search": {
+      "aria": "फ़ॉर्म खोज और फ़िल्टर",
+      "searchAria": "फ़ॉर्म खोजें",
+      "placeholder": "शीर्षक, विवरण या ID से फ़ॉर्म खोजें...",
+      "openFilterMenu": "फ़िल्टर मेनू खोलें",
+      "activeFiltersAria": "{count} सक्रिय फ़िल्टर",
+      "statusLabel": "स्थिति",
+      "filterByAll": "सभी स्थितियों द्वारा फ़िल्टर करें",
+      "all": "सभी",
+      "filterByPublished": "प्रकाशित फ़ॉर्म द्वारा फ़िल्टर करें",
+      "published": "प्रकाशित",
+      "filterByDraft": "ड्राफ़्ट फ़ॉर्म द्वारा फ़िल्टर करें",
+      "draft": "ड्राफ़्ट",
+      "sortByLabel": "क्रमबद्ध करें",
+      "sortByLastUpdated": "अंतिम अपडेट के अनुसार",
+      "lastUpdated": "अंतिम अपडेट",
+      "sortByDateCreated": "बनाने की तारीख के अनुसार",
+      "dateCreated": "बनाने की तारीख",
+      "sortByTitle": "शीर्षक के अनुसार वर्णानुक्रम में",
+      "titleAz": "शीर्षक (A-Z)",
+      "clearAllFilters": "सभी फ़िल्टर साफ़ करें",
+      "activeFiltersGroup": "सक्रिय फ़िल्टर",
+      "badgeSearch": "खोज: \"{query}\"",
+      "clearSearch": "खोज क्वेरी साफ़ करें",
+      "badgeStatus": "स्थिति: {status}",
+      "clearStatus": "स्थिति फ़िल्टर साफ़ करें",
+      "badgeSort": "क्रम: {sort}",
+      "sortTitleShort": "शीर्षक",
+      "sortCreatedShort": "बनाया गया",
+      "resetSort": "क्रम को अंतिम अपडेट पर रीसेट करें"
+    },
+    "list": {
+      "untitledForm": "शीर्षकहीन फ़ॉर्म",
+      "viewAnalyticsFor": "{title} के लिए एनालिटिक्स देखें",
+      "formStatusAria": "फ़ॉर्म की स्थिति: {status}",
+      "published": "प्रकाशित",
+      "draft": "ड्राफ़्ट",
+      "publicTitle": "सार्वजनिक: \"{title}\"",
+      "updated": "{date} को अपडेट किया गया",
+      "actionsFor": "{title} के लिए कार्रवाइयाँ",
+      "formActions": "फ़ॉर्म कार्रवाइयाँ",
+      "editForm": "फ़ॉर्म संपादित करें",
+      "shareForm": "फ़ॉर्म साझा करें",
+      "duplicate": "डुप्लिकेट",
+      "viewForm": "फ़ॉर्म देखें",
+      "viewAnalytics": "एनालिटिक्स देखें",
+      "embed": "एम्बेड",
+      "export": "एक्सपोर्ट",
+      "deleteForm": "फ़ॉर्म हटाएँ",
+      "formsListAria": "फ़ॉर्म सूची"
+    },
+    "stats": {
+      "totalForms": "कुल फ़ॉर्म",
+      "published": "प्रकाशित",
+      "drafts": "ड्राफ़्ट",
+      "loadingAria": "फ़ॉर्म आँकड़े लोड हो रहे हैं",
+      "aria": "फ़ॉर्म आँकड़े",
+      "sidebarAria": "फ़ॉर्म आँकड़े साइडबार"
+    },
+    "emptySearch": {
+      "noMatch": "आपकी खोज मानदंडों से कोई फ़ॉर्म मेल नहीं खाता।",
+      "clearFilters": "फ़िल्टर साफ़ करें",
+      "clearAria": "सभी खोज फ़िल्टर साफ़ करें"
+    },
+    "deleteModal": {
+      "cancel": "रद्द करें",
+      "confirm": "फ़ॉर्म हटाएँ",
+      "title": "फ़ॉर्म हटाएँ",
+      "description": "क्या आप वाकई \"{formTitle}\" को हटाना चाहते हैं? यह कार्रवाई पूर्ववत नहीं की जा सकती और सभी फ़ॉर्म डेटा स्थायी रूप से हट जाएगा।"
+    },
+    "toasts": {
+      "failedLoadForms": "फ़ॉर्म लोड करने में विफल",
+      "failedShareForm": "फ़ॉर्म साझा करने में विफल",
+      "formDuplicated": "फ़ॉर्म डुप्लिकेट किया गया",
+      "failedDuplicateForm": "फ़ॉर्म डुप्लिकेट करने में विफल",
+      "formImportedSuccess": "फ़ॉर्म सफलतापूर्वक इम्पोर्ट किया गया।",
+      "failedImportForm": "फ़ॉर्म इम्पोर्ट करने में विफल।",
+      "formDeletedSuccess": "फ़ॉर्म सफलतापूर्वक हटाया गया",
+      "failedDeleteForm": "फ़ॉर्म हटाने में विफल"
+    },
+    "shareModal": {
+      "title": "फ़ॉर्म साझा करें",
+      "publishedDescription": "नीचे दिए गए लिंक या QR कोड का उपयोग करके अपना फ़ॉर्म दूसरों के साथ साझा करें",
+      "unpublishedDescription": "अपना फ़ॉर्म दूसरों के साथ साझा करने योग्य बनाने के लिए प्रकाशित करें",
+      "shareLink": "लिंक साझा करें",
+      "copied": "कॉपी किया गया",
+      "copyLink": "लिंक कॉपी करें",
+      "hide": "छुपाएँ",
+      "show": "दिखाएँ",
+      "qrCode": "QR कोड",
+      "qrCodeForForm": "फ़ॉर्म के लिए QR कोड",
+      "generating": "जनरेट हो रहा है...",
+      "scanForMobile": "आसान मोबाइल एक्सेस के लिए स्कैन करें",
+      "downloading": "डाउनलोड हो रहा है...",
+      "downloadQr": "QR डाउनलोड करें",
+      "needsPublish": "आपका फ़ॉर्म सार्वजनिक रूप से साझा करने से पहले प्रकाशित करना आवश्यक है।",
+      "publishing": "प्रकाशित हो रहा है...",
+      "publishForm": "फ़ॉर्म प्रकाशित करें",
+      "toasts": {
+        "failedGenerateQr": "QR कोड जनरेट करने में विफल",
+        "linkCopied": "लिंक क्लिपबोर्ड पर कॉपी किया गया!",
+        "failedCopyLink": "लिंक कॉपी करने में विफल। कृपया मैन्युअली कॉपी करें।",
+        "qrDownloaded": "QR कोड सफलतापूर्वक डाउनलोड किया गया!",
+        "failedDownloadQr": "QR कोड डाउनलोड करने में विफल"
+      }
+    },
+    "secureImport": {
+      "title": "एन्क्रिप्टेड फ़ाइल से फ़ॉर्म इम्पोर्ट करें",
+      "description": ".ikiform फ़ाइल को डिक्रिप्ट करें और एक नया ड्राफ़्ट फ़ॉर्म बनाएँ।",
+      "encryptedFileLabel": "एन्क्रिप्टेड फ़ाइल",
+      "encryptedFileHelp": ".ikiform एन्क्रिप्टेड एक्सपोर्ट फ़ाइल अपलोड करें।",
+      "passphraseLabel": "पासफ़्रेज़",
+      "passphrasePlaceholder": "एक्सपोर्ट के दौरान उपयोग किया गया पासफ़्रेज़ दर्ज करें",
+      "passphraseHelp": "कम से कम {count} अक्षर आवश्यक हैं।",
+      "decrypting": "डिक्रिप्ट हो रहा है...",
+      "decryptFile": "फ़ाइल डिक्रिप्ट करें",
+      "importedForm": "इम्पोर्ट किया गया फ़ॉर्म",
+      "decryptToLoadSettings": "इम्पोर्ट सेटिंग्स लोड करने के लिए फ़ाइल डिक्रिप्ट करें।",
+      "preserveApiSettings": "API सेटिंग्स सुरक्षित रखें (API कुंजी और सक्रिय स्थिति)",
+      "preservePassword": "पासवर्ड-सुरक्षा पासवर्ड सुरक्षित रखें",
+      "preserveNotificationEmail": "अधिसूचना प्राप्तकर्ता ईमेल सुरक्षित रखें",
+      "cancel": "रद्द करें",
+      "importing": "इम्पोर्ट हो रहा है...",
+      "importAsNewForm": "नए फ़ॉर्म के रूप में इम्पोर्ट करें",
+      "decryptToPreview": "इम्पोर्ट किए गए फ़ॉर्म का पूर्वावलोकन करने के लिए फ़ाइल डिक्रिप्ट करें।",
+      "errors": {
+        "chooseFile": "कृपया एक एन्क्रिप्टेड .ikiform फ़ाइल चुनें।",
+        "passphraseMinChars": "पासफ़्रेज़ कम से कम {count} अक्षरों का होना चाहिए।",
+        "failedDecrypt": "इम्पोर्ट फ़ाइल डिक्रिप्ट करने में विफल।",
+        "wrongPassphrase": "गलत पासफ़्रेज़ या फ़ाइल में छेड़छाड़ हो सकती है।",
+        "decryptBeforeImport": "इम्पोर्ट करने से पहले फ़ाइल डिक्रिप्ट करें।",
+        "failedImport": "फ़ॉर्म इम्पोर्ट करने में विफल।"
+      },
+      "toasts": {
+        "fixHighlightedFields": "कृपया हाइलाइट किए गए फ़ील्ड ठीक करें।",
+        "fileDecrypted": "फ़ाइल डिक्रिप्ट की गई। इम्पोर्ट विकल्पों की समीक्षा करें।"
+      }
+    },
+    "secureExport": {
+      "title": "फ़ॉर्म एक्सपोर्ट करें (सुरक्षित)",
+      "description": "इस फ़ॉर्म के लिए एन्क्रिप्टेड .ikiform फ़ाइल बनाएँ। इम्पोर्ट करने के लिए आपको वही पासफ़्रेज़ चाहिए होगा।",
+      "untitledForm": "शीर्षकहीन फ़ॉर्म",
+      "formLabel": "फ़ॉर्म",
+      "unknownForm": "अज्ञात फ़ॉर्म",
+      "passphraseSetup": "पासफ़्रेज़ सेटअप",
+      "passphraseLabel": "पासफ़्रेज़",
+      "passphrasePlaceholder": "कम से कम {count} अक्षर",
+      "passphraseHelper": "मज़बूत एन्क्रिप्शन के लिए कम से कम 12 अक्षरों का उपयोग करें।",
+      "confirmPassphraseLabel": "पासफ़्रेज़ की पुष्टि करें",
+      "confirmPassphrasePlaceholder": "पासफ़्रेज़ दोबारा दर्ज करें",
+      "confirmPassphraseHelper": "वही पासफ़्रेज़ दोबारा दर्ज करें।",
+      "hidePassphrase": "पासफ़्रेज़ छुपाएँ",
+      "viewPassphrase": "पासफ़्रेज़ देखें",
+      "hideConfirmPassphrase": "पुष्टि पासफ़्रेज़ छुपाएँ",
+      "viewConfirmPassphrase": "पुष्टि पासफ़्रेज़ देखें",
+      "cancel": "रद्द करें",
+      "exporting": "एक्सपोर्ट हो रहा है...",
+      "exportEncryptedFile": "एन्क्रिप्टेड फ़ाइल एक्सपोर्ट करें",
+      "strength": {
+        "notSet": "सेट नहीं है",
+        "weak": "कमज़ोर",
+        "good": "अच्छा",
+        "strong": "मज़बूत"
+      },
+      "errors": {
+        "passphraseMinChars": "पासफ़्रेज़ कम से कम {count} अक्षरों का होना चाहिए।",
+        "confirmPassphraseMinChars": "पुष्टि पासफ़्रेज़ कम से कम {count} अक्षरों का होना चाहिए।",
+        "passphrasesDoNotMatch": "पासफ़्रेज़ मेल नहीं खाते।",
+        "noFormSelected": "एक्सपोर्ट के लिए कोई फ़ॉर्म चयनित नहीं है।",
+        "enterValidPassphrase": "कृपया एक वैध पासफ़्रेज़ दर्ज करें और पुष्टि करें।",
+        "failedExport": "फ़ॉर्म एक्सपोर्ट करने में विफल।"
+      },
+      "toasts": {
+        "exportCreated": "एन्क्रिप्टेड फ़ॉर्म एक्सपोर्ट बनाया गया।"
+      }
+    }
+  },
+  "admin": {
+    "page": {
+      "aria": {
+        "dashboard": "एडमिन डैशबोर्ड",
+        "announcements": "घोषणा प्रबंधन",
+        "expireTrials": "ट्रायल समाप्ति प्रबंधन",
+        "users": "उपयोगकर्ता प्रबंधन"
+      },
+      "announcements": {
+        "title": "घोषणाएँ भेजें",
+        "signedInAs": "{email} के रूप में साइन इन"
+      },
+      "expireTrials": {
+        "title": "ट्रायल समाप्त करें",
+        "description": "नि:शुल्क ट्रायल समाप्त करने के लिए क्रॉन जॉब मैन्युअली चलाएँ"
+      },
+      "users": {
+        "title": "सभी उपयोगकर्ता ({count})",
+        "description": "सभी पंजीकृत उपयोगकर्ताओं को प्रबंधित करें और देखें"
+      }
+    },
+    "announcementForm": {
+      "labels": {
+        "recipientEmails": "प्राप्तकर्ता ईमेल",
+        "subject": "विषय",
+        "content": "सामग्री (Markdown समर्थित)"
+      },
+      "placeholders": {
+        "recipientEmails": "one@example.com, two@example.com\\nor\\nthree@example.com",
+        "subject": "घोषणा का विषय",
+        "content": "# शीर्षक\\n\\nविवरण यहाँ..."
+      },
+      "help": {
+        "recipientFormat": "अल्पविराम या नई पंक्ति से अलग करें।"
+      },
+      "actions": {
+        "loading": "लोड हो रहा है...",
+        "prefillFromUsers": "उपयोगकर्ताओं से प्रीफ़िल करें",
+        "sendAnnouncement": "घोषणा भेजें"
+      },
+      "toasts": {
+        "fetchEmailsFailed": "ईमेल प्राप्त करने में विफल",
+        "loadedEmails": "{count} ईमेल लोड किए गए",
+        "sending": "घोषणाएँ भेजी जा रही हैं...",
+        "sentCount": "{count} ईमेल भेजे गए",
+        "failedWithError": "विफल: {error}",
+        "failedToSendFallback": "भेजने में विफल"
+      }
+    },
+    "expireTrialsControl": {
+      "title": "ट्रायल समाप्त करें",
+      "description": "14 दिनों से पुराने नि:शुल्क ट्रायल समाप्त करने के लिए क्रॉन जॉब मैन्युअली चलाएँ",
+      "unknownError": "अज्ञात त्रुटि",
+      "actions": {
+        "running": "चल रहा है...",
+        "run": "ट्रायल समाप्ति चलाएँ"
+      },
+      "result": {
+        "success": "सफल",
+        "error": "त्रुटि",
+        "updatedUsersCount": "{count} उपयोगकर्ता अपडेट किए गए",
+        "updatedUsers": "अपडेट किए गए उपयोगकर्ता:"
+      },
+      "toasts": {
+        "updatedSuccess": "{count} उपयोगकर्ता सफलतापूर्वक ट्रायल से मुफ़्त में अपडेट किए गए",
+        "failedWithError": "विफल: {error}",
+        "errorWithMessage": "त्रुटि: {message}"
+      }
+    },
+    "usersTable": {
+      "search": {
+        "aria": "उपयोगकर्ता खोजें",
+        "placeholder": "नाम, ईमेल, ग्राहक नाम या Polar ID से उपयोगकर्ता खोजें..."
+      },
+      "filters": {
+        "premiumAria": "प्रीमियम स्थिति द्वारा फ़िल्टर करें",
+        "trialAria": "ट्रायल स्थिति द्वारा फ़िल्टर करें",
+        "allPremium": "सभी प्रीमियम",
+        "premiumOnly": "केवल प्रीमियम",
+        "freeOnly": "केवल मुफ़्त",
+        "allTrial": "सभी ट्रायल",
+        "trialOnly": "केवल ट्रायल",
+        "noTrial": "कोई ट्रायल नहीं",
+        "clearAria": "सभी फ़िल्टर साफ़ करें",
+        "clear": "साफ़ करें",
+        "filteredBy": "फ़िल्टर:"
+      },
+      "columns": {
+        "uid": "UID",
+        "name": "नाम",
+        "email": "ईमेल",
+        "premium": "प्रीमियम",
+        "trial": "ट्रायल",
+        "customerName": "ग्राहक का नाम",
+        "polarId": "Polar ID",
+        "created": "बनाया गया",
+        "updated": "अपडेट किया गया"
+      },
+      "sort": {
+        "uidAria": "UID के अनुसार क्रमबद्ध करें",
+        "nameAria": "नाम के अनुसार क्रमबद्ध करें",
+        "emailAria": "ईमेल के अनुसार क्रमबद्ध करें",
+        "premiumAria": "प्रीमियम स्थिति के अनुसार क्रमबद्ध करें",
+        "trialAria": "ट्रायल स्थिति के अनुसार क्रमबद्ध करें",
+        "createdAria": "बनाने की तारीख के अनुसार क्रमबद्ध करें",
+        "updatedAria": "अपडेट की तारीख के अनुसार क्रमबद्ध करें"
+      },
+      "table": {
+        "aria": "उपयोगकर्ता तालिका"
+      },
+      "badges": {
+        "premium": "प्रीमियम",
+        "free": "मुफ़्त",
+        "freeTrial": "नि:शुल्क ट्रायल",
+        "noFreeTrial": "कोई नि:शुल्क ट्रायल नहीं"
+      },
+      "row": {
+        "viewDetailsFor": "{name} के लिए विवरण देखें",
+        "premiumStatusAria": "प्रीमियम स्थिति: {status}",
+        "trialStatusAria": "ट्रायल स्थिति: {status}"
+      },
+      "showingRange": "{total} में से {start}-{end} उपयोगकर्ता दिखाए जा रहे हैं",
+      "showLabel": "दिखाएँ:",
+      "itemsPerPageAria": "प्रति पृष्ठ आइटम",
+      "empty": {
+        "filtered": "आपके फ़िल्टर से कोई उपयोगकर्ता मेल नहीं खाता",
+        "default": "कोई उपयोगकर्ता नहीं मिला"
+      },
+      "pagination": {
+        "pageOf": "पृष्ठ {current} / {total}",
+        "previousAria": "पिछले पृष्ठ पर जाएँ",
+        "previous": "पिछला",
+        "goToPageAria": "पृष्ठ {page} पर जाएँ",
+        "nextAria": "अगले पृष्ठ पर जाएँ",
+        "next": "अगला"
+      }
+    },
+    "userControls": {
+      "title": "एडमिन नियंत्रण",
+      "description": "उपयोगकर्ता स्थिति और अनुमतियाँ प्रबंधित करें",
+      "sections": {
+        "freeTrial": "नि:शुल्क ट्रायल",
+        "premiumStatus": "प्रीमियम स्थिति",
+        "dangerZone": "खतरनाक ज़ोन"
+      },
+      "actions": {
+        "removeTrial": "ट्रायल हटाएँ",
+        "assignTrial": "ट्रायल असाइन करें",
+        "removePremium": "प्रीमियम हटाएँ",
+        "assignPremium": "प्रीमियम असाइन करें",
+        "deleteUser": "उपयोगकर्ता हटाएँ"
+      },
+      "warning": {
+        "label": "चेतावनी:",
+        "message": "उपयोगकर्ता को हटाने से उनके सभी फ़ॉर्म, सबमिशन और डेटा स्थायी रूप से हट जाएंगे। यह कार्रवाई पूर्ववत नहीं की जा सकती।"
+      },
+      "confirm": {
+        "title": "उपयोगकर्ता हटाएँ",
+        "confirm": "उपयोगकर्ता हटाएँ",
+        "cancel": "रद्द करें",
+        "description": "क्या आप वाकई उपयोगकर्ता {userName} को हटाना चाहते हैं? यह कार्रवाई पूर्ववत नहीं की जा सकती और उनके सभी फ़ॉर्म और डेटा हट जाएंगे।"
+      }
+    },
+    "userProfile": {
+      "backToAdmin": "एडमिन पर वापस जाएँ",
+      "invalidUserId": {
+        "title": "अमान्य उपयोगकर्ता ID",
+        "description": "URL में कोई उपयोगकर्ता ID प्रदान नहीं की गई।"
+      },
+      "notFound": {
+        "title": "उपयोगकर्ता नहीं मिला",
+        "description": "जिस उपयोगकर्ता को आप ढूँढ रहे हैं वह मौजूद नहीं है।"
+      },
+      "userInformation": "उपयोगकर्ता जानकारी",
+      "labels": {
+        "uid": "UID",
+        "premiumStatus": "प्रीमियम स्थिति",
+        "trialStatus": "ट्रायल स्थिति",
+        "customerName": "ग्राहक का नाम",
+        "polarCustomerId": "Polar ग्राहक ID",
+        "memberSince": "सदस्यता तिथि"
+      },
+      "badges": {
+        "premium": "प्रीमियम",
+        "free": "मुफ़्त",
+        "freeTrial": "नि:शुल्क ट्रायल",
+        "noTrial": "कोई ट्रायल नहीं"
+      },
+      "trialStatus": {
+        "title": "नि:शुल्क ट्रायल स्थिति",
+        "expiredBadge": "ट्रायल समाप्त",
+        "endedDaysAgo": "नि:शुल्क ट्रायल {days} दिन पहले समाप्त हुआ",
+        "expiringSoonBadge": "जल्द समाप्त हो रहा है",
+        "activeBadge": "सक्रिय ट्रायल",
+        "daysLeft": "{days, plural, one {# दिन शेष नि:शुल्क ट्रायल में} other {# दिन शेष नि:शुल्क ट्रायल में}}",
+        "startedOn": "ट्रायल शुरू हुआ:"
+      },
+      "forms": {
+        "title": "फ़ॉर्म ({count})",
+        "description": "इस उपयोगकर्ता द्वारा बनाए गए सभी फ़ॉर्म",
+        "empty": "इस उपयोगकर्ता ने अभी तक कोई फ़ॉर्म नहीं बनाया है।",
+        "table": {
+          "formTitle": "फ़ॉर्म शीर्षक",
+          "description": "विवरण",
+          "status": "स्थिति",
+          "submissions": "सबमिशन",
+          "created": "बनाया गया",
+          "actions": "कार्रवाइयाँ"
+        },
+        "status": {
+          "published": "प्रकाशित",
+          "draft": "ड्राफ़्ट"
+        },
+        "actions": {
+          "view": "देखें",
+          "details": "विवरण"
+        }
+      }
+    },
+    "formDetails": {
+      "pageAria": "फ़ॉर्म विवरण पृष्ठ",
+      "backToAdmin": "एडमिन पर वापस जाएँ",
+      "backToAdminAria": "एडमिन डैशबोर्ड पर वापस जाएँ",
+      "noDescription": "कोई विवरण प्रदान नहीं किया गया",
+      "viewForm": "फ़ॉर्म देखें",
+      "viewFormAria": "नई टैब में फ़ॉर्म देखें",
+      "invalidFormId": {
+        "aria": "अमान्य फ़ॉर्म ID त्रुटि",
+        "title": "अमान्य फ़ॉर्म ID",
+        "description": "URL में कोई फ़ॉर्म ID प्रदान नहीं की गई।"
+      },
+      "notFound": {
+        "aria": "फ़ॉर्म नहीं मिला त्रुटि",
+        "title": "फ़ॉर्म नहीं मिला",
+        "description": "जिस फ़ॉर्म को आप ढूँढ रहे हैं वह मौजूद नहीं है।"
+      },
+      "badges": {
+        "published": "प्रकाशित",
+        "draft": "ड्राफ़्ट",
+        "enabled": "सक्रिय",
+        "disabled": "निष्क्रिय"
+      },
+      "statistics": {
+        "aria": "फ़ॉर्म आँकड़े",
+        "status": "स्थिति",
+        "formStatusAria": "फ़ॉर्म की स्थिति: {status}",
+        "submissions": "सबमिशन",
+        "submissionsCountAria": "{count} सबमिशन",
+        "created": "बनाया गया",
+        "createdOnAria": "{date} को बनाया गया",
+        "apiStatus": "API स्थिति",
+        "apiStatusAria": "API स्थिति: {status}"
+      },
+      "details": {
+        "title": "फ़ॉर्म विवरण",
+        "formId": "फ़ॉर्म ID",
+        "formIdAria": "फ़ॉर्म ID: {id}",
+        "owner": "स्वामी",
+        "viewOwnerAria": "{name} के लिए स्वामी विवरण देखें",
+        "unknown": "अज्ञात",
+        "slug": "स्लग",
+        "slugAria": "फ़ॉर्म स्लग: {slug}",
+        "notSet": "सेट नहीं है",
+        "lastUpdated": "अंतिम अपडेट",
+        "lastUpdatedAria": "अंतिम अपडेट: {date}",
+        "apiKey": "API कुंजी",
+        "apiKeyAria": "API कुंजी: {key}"
+      },
+      "schema": {
+        "title": "फ़ॉर्म स्कीमा",
+        "aria": "फ़ॉर्म स्कीमा JSON"
+      },
+      "submissions": {
+        "title": "फ़ॉर्म सबमिशन ({count})",
+        "description": "इस फ़ॉर्म पर सबमिट किए गए सभी उत्तर",
+        "emptyAria": "कोई फ़ॉर्म सबमिशन नहीं",
+        "empty": "अभी तक कोई सबमिशन नहीं।",
+        "listAria": "फ़ॉर्म सबमिशन सूची",
+        "itemAria": "सबमिशन {number}",
+        "itemLabel": "सबमिशन #{number}",
+        "submittedOnAria": "{date} को सबमिट किया गया",
+        "ipAria": "IP पता: {ip}",
+        "ipLabel": "IP: {ip}",
+        "fieldAria": "फ़ील्ड: {key}",
+        "valueAria": "{key} का मान: {value}"
+      }
+    }
+  }
+}

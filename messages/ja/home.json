@@ -1,0 +1,252 @@
+{
+  "name": "Ikiform",
+  "tagline": "フォームを作成し、回答を収集し、データを簡単に分析。",
+  "footer": {
+    "madeBy": "開発元"
+  },
+  "cta": {
+    "heading": "あっという間に最初のフォームを作成しましょう。",
+    "subheading": "Ikiformを使って、フォームやアンケートの作成、回答の収集などを数秒で始めましょう！",
+    "goToDashboard": "ダッシュボードへ",
+    "createFirstForm": "最初のフォームを作成",
+    "tryDemo": "デモを試す"
+  },
+  "hero": {
+    "unableToLoadFormDemo": "フォームデモを読み込めません。ページを更新してください。",
+    "reload": "再読み込み",
+    "iframeTitle": "Ikiformデモフォーム",
+    "sponsoredByAria": "Vercel提供（新しいタブで開きます）",
+    "sponsoredBy": "提供",
+    "heading": "フォームを作成し、回答を収集し、分析。",
+    "subheading": "手軽なデータ収集と分析のためのオープンソースフォームプラットフォーム。",
+    "fiveStarRating": "5つ星中5つ星の評価",
+    "totalUsersSrOnly": "総ユーザー数：",
+    "lovedByUsers": "{count}人のユーザーに愛されています",
+    "createFirstForm": "最初のフォームを作成",
+    "tryDemo": "デモを試す",
+    "openFullscreenAria": "フォームビルダーデモをフルスクリーンで開く（EnterまたはSpaceキーを押してください）",
+    "clickToViewFullscreen": "クリックしてフルスクリーンで表示",
+    "tabs": {
+      "formDemo": "フォームデモ",
+      "formBuilderDemo": "フォームビルダーデモ"
+    }
+  },
+  "pricing": {
+    "title": "必要なものすべてに対応する、シンプルで透明な料金体系。",
+    "description": "ニーズに最適なプランを選択して、回答の収集を始めましょう。",
+    "popular": "人気",
+    "noCard": "クレジットカード不要",
+    "features": {
+      "unlimitedForms": "フォームと回答が無制限",
+      "apiWebhooks": "自動化のためのAPIとWebhook",
+      "responseLimits": "回答制限とレートを制御",
+      "quizScoring": "スコアリング付きクイズを作成",
+      "formDataApi": "APIでフォームデータにアクセス",
+      "customBranding": "カスタムブランディングとどこでも埋め込み",
+      "spamProtection": "スパムとボットを自動ブロック",
+      "passwordProfanity": "不適切な言葉のフィルタリングとパスワード要求"
+    },
+    "plans": {
+      "monthly": {
+        "title": "月額プラン",
+        "byline": "月額課金・いつでも解約可能"
+      },
+      "lifetime": {
+        "title": "永久アクセス",
+        "byline": "一度のお支払い・永久アクセス"
+      },
+      "yearly": {
+        "title": "年間プラン",
+        "byline": "年額課金（$192/年）・いつでも解約可能"
+      }
+    },
+    "cta": {
+      "startTrial": "14日間の無料トライアルを開始",
+      "getLifetime": "永久アクセスを取得"
+    }
+  },
+  "faq": {
+    "title": "よくある質問",
+    "featureBoardLabel": "フィーチャーボード",
+    "githubLabel": "GitHub",
+    "q1": {
+      "question": "Ikiformとは？",
+      "answer": "IkiformはGoogleフォームのオープンソース代替ツールです。美しくインタラクティブなフォームを簡単に作成できます。"
+    },
+    "q2": {
+      "question": "無料トライアルはありますか？",
+      "answer": "はい、クレジットカード不要で14日間の無料トライアルをご利用いただけます。いつでも解約可能です。"
+    },
+    "q3": {
+      "question": "GoogleフォームやTypeformの代わりにIkiformを使う理由は？",
+      "answer": "Ikiformはオープンソースで、データとブランディングを完全にコントロールできます。隠れたコストはなく、セルフホスティングでさらなるプライバシーと柔軟性を確保できます。"
+    },
+    "q4": {
+      "question": "どのような種類のフォームを作成できますか？",
+      "answer": "進行状況トラッキング付きのシングルページフォームとマルチステップフォームを作成できます。"
+    },
+    "q5": {
+      "question": "どのフィールドがサポートされていますか？",
+      "answer": "サポートされているフィールドには、テキスト、メール、数値、電話番号、テキストエリア、日付、時刻、住所、リンク、セレクトドロップダウン、ラジオボタン、チェックボックス、スライダー、タグ、ソーシャルフィールド、ファイルアップロード、署名、ステートメント、バナー、フィールドグループ、タグ入力、ソーシャルメディア、スケジューラー、投票、評価、クイズなどがあります。"
+    },
+    "q6": {
+      "question": "データはどのように保護されていますか？",
+      "answer": "フォームにはパスワード保護、レート制限、不適切な言葉のフィルタリング、スパム保護、ボット保護を設定でき、GDPRに準拠しています。"
+    },
+    "q7": {
+      "question": "送信したデータは誰かと共有されますか？",
+      "answer": "いいえ、お客様のデータはIkiformの運営に必要な信頼できるプロバイダーを除き、第三者に販売・共有されることはありません。"
+    },
+    "q8": {
+      "question": "フォームをカスタマイズできますか？",
+      "answer": "色、フォント、レイアウトの変更、ロゴの追加、各フィールドの見た目の制御が可能です。"
+    },
+    "q9": {
+      "question": "新機能はどこで提案できますか？",
+      "answerPrefix": "機能の提案はこちらからお願いします"
+    },
+    "q10": {
+      "question": "データはどこに保存されますか？",
+      "answer": "お客様のデータはSupabaseを使用してEU内で暗号化され、安全に保存されています。"
+    },
+    "q11": {
+      "question": "データはどのように安全に保たれていますか？",
+      "answer": "強力なセキュリティ対策を講じており、承認されたスタッフのみがお客様のデータにアクセスできます。"
+    },
+    "q12": {
+      "question": "アカウントを解約するとデータは削除されますか？",
+      "answer": "はい。いつでもデータを削除できます。削除されたデータは30日以内にバックアップからも削除されます。"
+    },
+    "q13": {
+      "question": "データを削除できますか？",
+      "answer": "はい。hi@ikiform.comにメールすることで、いつでもデータへのアクセスや削除をリクエストできます。"
+    },
+    "q14": {
+      "question": "フォーム送信データの所有者は誰ですか？",
+      "answer": "収集したすべてのデータはお客様のものです。Ikiformはそれをお預かりしているだけです。"
+    },
+    "q15": {
+      "question": "Ikiformはオープンソースですか？",
+      "answerPrefix": "Ikiformは完全にオープンソースで、以下で公開されています"
+    }
+  },
+  "bento": {
+    "preview": {
+      "aiForm": {
+        "demoAria": "AIフォームビルダーデモ",
+        "step0Label": "何を作成しますか？",
+        "step0Placeholder": "例：お問い合わせフォーム",
+        "step1Label": "名前を収集",
+        "step2Label": "メールを収集",
+        "step3Label": "メッセージ",
+        "statusGenerating": "AIがフォームを作成中…",
+        "statusGenerated": "フォームが生成されました",
+        "examplePrompt": "シンプルなお問い合わせフォームを作成してもらえますか？",
+        "generatedIn": "2.3秒で生成",
+        "useThisForm": "このフォームを使用"
+      },
+      "unlimited": {
+        "aria": "無制限の送信プレビュー",
+        "copy": "フォーム、フィールド、ユーザー、回答がすべて無制限。"
+      },
+      "analytics": {
+        "weeklyResponses": "週間回答数",
+        "liveUpdating": "リアルタイムでデータ更新中...",
+        "responsesThisWeek": "今週1.2k件の回答"
+      },
+      "logic": {
+        "ifPrefix": "もし",
+        "thenPrefix": "ならば",
+        "elsePrefix": "それ以外",
+        "userResponds": "ユーザーが回答",
+        "yesValue": "「はい」",
+        "showEmailField": "メールフィールドを表示",
+        "skip": "スキップ",
+        "srDescription": "シンプルな条件分岐のプレビュー：ユーザーが「はい」と回答した場合、メールフィールドを表示し、それ以外の場合はスキップします。"
+      },
+      "api": {
+        "nameLabel": "名前",
+        "emailLabel": "メール",
+        "planLabel": "プラン",
+        "premiumPlan": "プレミアムプラン",
+        "statusReady": "準備完了",
+        "statusFetching": "取得中...",
+        "statusFetched": "取得完了！",
+        "srReady": "API連携デモの準備ができました。",
+        "srFetching": "Stripe APIに接続中、データを読み込んでいます...",
+        "srSuccess": "Stripe APIデータを受信し、表示しました。"
+      },
+      "signatures": {
+        "statusIdle": "署名を待っています…",
+        "statusSigning": "署名中",
+        "statusDone": "安全に署名済み",
+        "signAgreement": "契約書に署名",
+        "signed": "✓ 署名済み",
+        "verified": "確認済み",
+        "signatureVerified": "署名確認済み",
+        "srIdle": "電子署名を待っています。続行するには署名してください。",
+        "srSigning": "署名が記入されています。",
+        "srDone": "署名が完了し、確認されました。"
+      },
+      "notifications": {
+        "title": "メール通知",
+        "none": "なし",
+        "newNotifications": "{count}件の新しい通知があります",
+        "justNow": "たった今",
+        "noNewNotifications": "新しい通知はまだありません。",
+        "noNewEmailNotifications": "新しいメール通知はまだありません。",
+        "newEmailNotification": "新しいメール通知：{title}（{from}より）、{time}",
+        "templates": {
+          "contactForm": "お問い合わせフォーム",
+          "newsletterSignup": "ニュースレター登録",
+          "supportRequest": "サポートリクエスト",
+          "feedbackForm": "フィードバックフォーム",
+          "jobApplication": "求人応募",
+          "twoMinutesAgo": "2分前",
+          "fiveMinutesAgo": "5分前",
+          "eightMinutesAgo": "8分前",
+          "twelveMinutesAgo": "12分前",
+          "fifteenMinutesAgo": "15分前"
+        }
+      }
+    },
+    "cards": {
+      "aiFormBuilder": {
+        "title": "AIフォームビルダー",
+        "highlight": "瞬時にフォーム作成",
+        "description": "—説明するだけですぐに公開。数秒で訪問者をコンバージョン。"
+      },
+      "unlimitedEverything": {
+        "title": "すべて無制限",
+        "highlight": "フォームも回答も無制限",
+        "description": " 制限なく成長できます。"
+      },
+      "aiAnalytics": {
+        "title": "AIアナリティクス",
+        "prefix": "誰がコンバージョンし、なぜかを把握—",
+        "highlight": "明確で実用的なインサイトを取得"
+      },
+      "smartNotifications": {
+        "title": "スマート通知",
+        "prefix": "リードを見逃さない—",
+        "highlight": "即座にアラートを受け取り、フォローアップを自動化。"
+      },
+      "apiWebhooks": {
+        "title": "APIとWebhook",
+        "highlight": "リードをどこでも同期",
+        "description": "—あらゆるサービスやワークフローと連携。"
+      },
+      "formSignatures": {
+        "title": "フォーム署名",
+        "prefix": "署名フィールドを追加して",
+        "highlight": "電子署名を収集",
+        "suffix": "あらゆるフォームで。"
+      },
+      "visualLogicBuilder": {
+        "title": "ビジュアルロジックビルダー",
+        "highlight": "すべてのジャーニーをパーソナライズ",
+        "description": "—回答に基づいて質問を表示・非表示。"
+      }
+    }
+  }
+}

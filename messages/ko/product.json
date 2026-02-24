@@ -1,0 +1,2211 @@
+{
+  "common": {
+    "na": "N/A",
+    "premium": {
+      "title": "프리미엄 필요",
+      "viewPricing": "가격 보기",
+      "aiBuilderDescription": "AI 폼 빌더를 사용하려면 프리미엄 구독이 필요합니다. 모든 기능을 잠금 해제하려면 업그레이드하세요.",
+      "formBuilderDescription": "폼 빌더를 사용하려면 프리미엄 구독이 필요합니다. 모든 기능을 잠금 해제하려면 업그레이드하세요."
+    }
+  },
+  "formBuilder": {
+    "header": {
+      "title": "폼 빌더",
+      "goToDashboard": "대시보드로 이동",
+      "fieldCount": "{count} 필드",
+      "fieldCount_plural": "{count} 필드",
+      "saving": "저장 중",
+      "moreActions": "더 많은 작업",
+      "multiStepForm": "다단계 폼",
+      "toggleMultiStepMode": "다단계 모드 전환",
+      "viewJson": "JSON 보기",
+      "analytics": "분석",
+      "share": "공유",
+      "useKiko": "Kiko 사용",
+      "settings": "설정",
+      "publish": "게시",
+      "published": "게시됨",
+      "publishing": "게시 중...",
+      "unpublishing": "게시 취소 중...",
+      "publishForm": "폼 게시",
+      "unpublishForm": "폼 게시 취소",
+      "save": "저장",
+      "saveForm": "폼 저장",
+      "actionsAria": "폼 빌더 작업"
+    },
+    "modals": {
+      "formSettings": "폼 설정",
+      "internalTitle": "내부 제목",
+      "internalTitlePlaceholder": "참조용 내부 제목을 입력하세요...",
+      "internalTitleDescription": "이 제목은 대시보드와 폼 빌더에서만 표시됩니다.",
+      "publicTitle": "공개 제목",
+      "publicTitlePlaceholder": "사용자에게 표시할 제목을 입력하세요...",
+      "publicTitleDescription": "이 제목은 실제 폼에서 사용자에게 표시됩니다. 비워두면 내부 제목을 사용합니다.",
+      "description": "설명",
+      "descriptionPlaceholder": "폼 설명을 입력하세요",
+      "submitButtonText": "제출 버튼 텍스트",
+      "submitButtonTextPlaceholder": "제출 버튼 텍스트",
+      "submit": "제출",
+      "successMessage": "성공 메시지",
+      "successMessagePlaceholder": "성공적으로 제출된 후 표시되는 메시지",
+      "redirectUrlOptional": "리디렉션 URL (선택 사항)",
+      "redirectUrlPlaceholder": "https://example.com/thank-you",
+      "cancel": "취소",
+      "saveSettings": "설정 저장"
+    },
+    "page": {
+      "formFields": "폼 필드",
+      "authRequired": "인증 필요",
+      "authRequiredDescription": "폼 빌더를 사용하려면 로그인하세요.",
+      "goToLogin": "로그인으로 이동",
+      "stepDefaultTitle": "{index} 단계",
+      "stepDefaultDescription": "폼의 첫 단계",
+      "loadingCustomization": "맞춤 설정 로딩 중..."
+    },
+    "blockManager": {
+      "header": {
+        "title": "폼 구조",
+        "stepsCount": "{count, plural, one {#단계} other {#단계}}",
+        "description": "폼을 논리적인 섹션으로 구성하세요",
+        "addStepAria": "폼에 새 단계 추가",
+        "addStep": "단계 추가"
+      },
+      "item": {
+        "dragHandleAria": "{title} 단계를 재정렬하려면 드래그하세요",
+        "dragToReorder": "재정렬하려면 드래그하세요"
+      },
+      "headerActions": {
+        "stepBadge": "{index} 단계",
+        "editStepAria": "{title} 단계 편집",
+        "deleteStepAria": "{title} 단계 삭제",
+        "editStep": "단계 편집",
+        "deleteStep": "단계 삭제",
+        "collapseStep": "단계 축소",
+        "expandStep": "단계 확장"
+      },
+      "editForm": {
+        "stepTitlePlaceholder": "단계 제목",
+        "stepDescriptionPlaceholder": "단계 설명 (선택 사항)",
+        "save": "저장",
+        "cancel": "취소"
+      },
+      "fieldsList": {
+        "empty": "아직 필드가 없습니다. 오른쪽 팔레트에서 필드를 추가하세요."
+      }
+    },
+    "multiStepNavigation": {
+      "deleteStep": "단계 삭제",
+      "addStep": "단계 추가",
+      "deleteDialogTitle": "단계 삭제",
+      "deleteDialogDescription": "이 단계를 삭제하시겠습니까? 이 작업은 취소할 수 없습니다.",
+      "cancel": "취소"
+    },
+    "formFields": {
+      "addFieldToFormAria": "폼에 필드 추가",
+      "addField": "필드 추가",
+      "addSpecificFieldAria": "{label} 필드 추가",
+      "formFields": "폼 필드",
+      "noFieldsInStep": "이 단계에 필드가 없습니다",
+      "noFieldsYet": "아직 필드가 추가되지 않았습니다",
+      "addFieldsToStep": "이 단계에 팔레트에서 필드를 추가하세요",
+      "addFieldsFromLeftPanel": "시작하려면 왼쪽 패널에서 필드를 추가하세요",
+      "fieldsCount": "{count, plural, one {#필드} other {#필드}}",
+      "fieldAria": "{type} 필드",
+      "deleteFieldAria": "{type} 필드 삭제",
+      "deleteField": "필드 삭제"
+    },
+    "jsonViewModal": {
+      "title": "폼 스키마 JSON",
+      "description": "현재 폼 스키마의 읽기 전용 보기. 복사 버튼을 사용하여 JSON을 복사하세요.",
+      "copySuccess": "JSON이 클립보드에 복사되었습니다!",
+      "copyError": "JSON 복사 실패",
+      "copied": "복사됨",
+      "copyJson": "JSON 복사"
+    },
+    "settingsMobile": {
+      "sectionsAria": "설정 섹션",
+      "goToSectionAria": "{section} 설정으로 이동",
+      "backToListAria": "설정 목록으로 돌아가기",
+      "settings": "설정"
+    },
+    "creation": {
+      "title": "새 폼 만들기",
+      "cancel": "취소",
+      "back": "뒤로",
+      "createForm": "폼 만들기",
+      "reviewAction": "검토",
+      "next": "다음",
+      "types": {
+        "single": {
+          "title": "단일 페이지 폼",
+          "description": "모든 필드가 한 페이지에 있는 전통적인 폼"
+        },
+        "multi": {
+          "title": "다단계 폼",
+          "description": "여러 단계를 가진 안내식 폼 경험"
+        }
+      },
+      "typePreview": {
+        "stepOf": "{step} / {total} 단계"
+      },
+      "configuration": {
+        "title": "폼 세부 정보",
+        "description": "폼의 내부 및 공개 정보를 설정하세요.",
+        "internalTitle": "내부 제목",
+        "internalTitlePlaceholder": "참조용 내부 제목을 입력하세요…",
+        "internalTitleHelp": "대시보드 및 빌더에서만 표시됩니다.",
+        "publicTitle": "공개 제목",
+        "publicTitlePlaceholder": "사용자에게 표시할 제목을 입력하세요…",
+        "publicTitleHelp": "폼에 표시됩니다. 비워두면 내부 제목을 재사용합니다.",
+        "formDescription": "폼 설명",
+        "formDescriptionPlaceholder": "사용자를 안내하기 위해 짧은 설명을 입력하세요…",
+        "formDescriptionHelp": "선택 사항. 폼의 목적을 이해하는 데 도움이 됩니다."
+      },
+      "review": {
+        "formType": "폼 유형",
+        "multiStepForm": "다단계 폼",
+        "singlePageForm": "단일 페이지 폼",
+        "multiStep": "다단계",
+        "singlePage": "단일 페이지",
+        "editFormType": "폼 유형 편집",
+        "formConfiguration": "폼 구성",
+        "editFormConfiguration": "폼 구성 편집",
+        "internalTitle": "내부 제목",
+        "publicTitle": "공개 제목",
+        "description": "설명",
+        "preview": "미리보기",
+        "previewDescription": "폼의 스냅샷."
+      },
+      "stepIndicator": {
+        "progress": "진행률",
+        "stepCompleted": "{index} 단계 완료",
+        "stepCurrent": "{index} 단계 현재",
+        "step": "{index} 단계"
+      }
+    },
+    "customize": {
+      "page": {
+        "savedCustomization": "사용자 지정 저장",
+        "saveFailed": "변경 사항 저장 실패. 다시 시도하세요.",
+        "tabs": {
+          "presets": "프리셋",
+          "layout": "레이아웃",
+          "colors": "색상",
+          "text": "텍스트"
+        },
+        "backToCustomize": "사용자 지정으로 돌아가기",
+        "previewForm": "폼 미리보기",
+        "customizeForm": "폼 사용자 지정",
+        "publicTitle": "공개 제목: \"{title}\"",
+        "customizationActions": "사용자 지정 작업",
+        "back": "뒤로",
+        "save": "저장",
+        "customize": "사용자 지정"
+      },
+      "colors": {
+        "title": "색상 설정",
+        "description": "색상 및 테마 사용자 지정",
+        "backgroundColorLabel": "배경색",
+        "backgroundColorHelp": "폼 컨테이너의 배경색을 설정합니다",
+        "textColorLabel": "텍스트 색상",
+        "textColorHelp": "폼의 모든 텍스트 요소의 색상을 설정합니다",
+        "primaryColorLabel": "기본 색상(버튼 및 악센트)",
+        "primaryColorHelp": "버튼, 초점 상태 및 악센트 요소의 색상을 설정합니다",
+        "borderColorLabel": "테두리 색상",
+        "borderColorHelp": "입력 필드 테두리 및 구분선에 대한 색상을 설정합니다",
+        "websiteBackgroundColorLabel": "웹사이트 배경 색상",
+        "websiteBackgroundColorHelp": "전체 웹사이트/페이지의 배경 색상을 설정합니다"
+      },
+      "typography": {
+        "title": "타이포그래피 설정",
+        "description": "글꼴 및 텍스트 스타일링을 사용자 정의합니다",
+        "fontFamily": "글꼴 패밀리",
+        "fontFamilyPlaceholder": "구글 글꼴 선택...",
+        "fontPreview": "글꼴 미리보기",
+        "previewLine1": "The quick brown fox jumps over the lazy dog",
+        "previewLine2": "숫자가 포함된 샘플 폼 텍스트 1234567890",
+        "fontHelp": "수백 가지의 구글 글꼴 중에서 선택하세요. 글꼴은 자동으로 로드됩니다.",
+        "fontSize": "글꼴 크기",
+        "fontWeight": "글꼴 굵기",
+        "selected": "선택됨: ",
+        "fontSizeOptions": {
+          "xs": {
+            "label": "매우 작음",
+            "description": "12px"
+          },
+          "sm": {
+            "label": "작음",
+            "description": "14px"
+          },
+          "base": {
+            "label": "기본",
+            "description": "16px"
+          },
+          "lg": {
+            "label": "큼",
+            "description": "18px"
+          },
+          "xl": {
+            "label": "매우 큼",
+            "description": "20px"
+          }
+        },
+        "fontWeightOptions": {
+          "light": {
+            "label": "가볍게",
+            "description": "300"
+          },
+          "normal": {
+            "label": "보통",
+            "description": "400"
+          },
+          "medium": {
+            "label": "중간",
+            "description": "500"
+          },
+          "semibold": {
+            "label": "세미볼드",
+            "description": "600"
+          },
+          "bold": {
+            "label": "볼드",
+            "description": "700"
+          }
+        }
+      },
+      "layout": {
+        "title": "레이아웃 설정",
+        "description": "간격 및 구조를 구성합니다",
+        "showProgressBar": "진행률 표시줄 표시",
+        "formWidth": "폼 너비",
+        "formWidthHelp": "폼 컨테이너의 최대 너비를 제어합니다",
+        "customWidth": "사용자 지정 너비(예: 600px, 80%, 50rem)",
+        "customWidthPlaceholder": "사용자 지정 너비 입력",
+        "internalPadding": "내부 패딩",
+        "internalPaddingHelp": "폼 컨테이너 내부의 공간을 제어합니다",
+        "externalMargin": "외부 여백",
+        "externalMarginHelp": "폼 컨테이너 주변의 공간을 제어합니다",
+        "cornerRadius": "모서리 반경",
+        "cornerRadiusHelp": "폼 모서리가 얼마나 둥글게 나타나는지 제어합니다",
+        "widthOptions": {
+          "sm": {
+            "label": "작음",
+            "description": "400px 최대 너비"
+          },
+          "md": {
+            "label": "중간",
+            "description": "600px 최대 너비"
+          },
+          "lg": {
+            "label": "큼",
+            "description": "800px 최대 너비"
+          },
+          "xl": {
+            "label": "매우 큼",
+            "description": "1000px 최대 너비"
+          },
+          "full": {
+            "label": "전체 너비",
+            "description": "100% 너비"
+          },
+          "custom": {
+            "label": "사용자 지정",
+            "description": "사용자 지정 너비 값"
+          }
+        },
+        "paddingOptions": {
+          "none": {
+            "label": "없음",
+            "description": "0px 패딩"
+          },
+          "sm": {
+            "label": "작음",
+            "description": "16px 패딩"
+          },
+          "md": {
+            "label": "중간",
+            "description": "24px 패딩"
+          },
+          "lg": {
+            "label": "큼",
+            "description": "32px 패딩"
+          }
+        },
+        "marginOptions": {
+          "none": {
+            "label": "없음",
+            "description": "여백 없음"
+          },
+          "sm": {
+            "label": "작음",
+            "description": "8px"
+          },
+          "md": {
+            "label": "중간",
+            "description": "16px"
+          },
+          "lg": {
+            "label": "큼",
+            "description": "32px"
+          }
+        },
+        "radiusOptions": {
+          "none": {
+            "label": "없음",
+            "description": "0px (뾰족한 모서리)"
+          },
+          "sm": {
+            "label": "작음",
+            "description": "4px 테두리 반경"
+          },
+          "md": {
+            "label": "중간",
+            "description": "8px 테두리 반경"
+          },
+          "lg": {
+            "label": "큼",
+            "description": "16px 테두리 반경"
+          },
+          "xl": {
+            "label": "매우 큼",
+            "description": "24px 테두리 반경"
+          }
+        }
+      },
+      "presets": {
+        "title": "디자인 사전 설정",
+        "description": "아름다운 사전 디자인된 폼 스타일로 빠르게 시작하세요",
+        "category": "카테고리",
+        "allPresets": "모든 사전설정",
+        "presets": "프리셋",
+        "presetCount": "{count, plural, one {#프리셋} other {#프리셋}}",
+        "presetList": "사전설정 목록",
+        "applyPresetAria": "{name} 사전설정 적용",
+        "appliedPreset": "\"{name}\" 사전설정 적용됨",
+        "formTitle": "폼 제목",
+        "submit": "제출"
+      },
+      "preview": {
+        "title": "라이브 미리보기",
+        "description": "적용된 사용자 지정 사항으로 폼이 어떻게 표시되는지 확인",
+        "sampleTitle": "샘플 폼",
+        "sampleDescription": "현재 디자인 설정으로 폼이 표시되는 방식입니다.",
+        "nameLabel": "이름 *",
+        "namePlaceholder": "이름을 입력하세요",
+        "emailLabel": "이메일 *",
+        "emailPlaceholder": "이메일을 입력하세요",
+        "categoryLabel": "카테고리",
+        "categoryPlaceholder": "카테고리 선택",
+        "categoryGeneral": "일반 문의",
+        "categorySupport": "지원",
+        "categorySales": "판매",
+        "messageLabel": "메시지",
+        "messagePlaceholder": "메시지를 입력하세요",
+        "submitButton": "폼 제출",
+        "previousStepAria": "이전 단계",
+        "previousStep": "이전",
+        "nextStepAria": "다음 단계",
+        "nextStep": "다음",
+        "submitAria": "폼 제출"
+      }
+    },
+    "toasts": {
+      "loginRequiredToSave": "폼을 저장하려면 로그인하세요.",
+      "formSaved": "폼이 성공적으로 저장되었습니다!",
+      "formCreated": "폼이 성공적으로 생성되었습니다!",
+      "saveFailed": "폼을 저장하지 못했습니다. 다시 시도하세요.",
+      "saveBeforeShare": "공유하기 전에 폼을 저장하세요.",
+      "formPublished": "폼이 성공적으로 게시되었습니다!",
+      "publishFailed": "폼을 게시하지 못했습니다. 다시 시도하세요.",
+      "saveBeforeAnalytics": "분석을 보기 전에 폼을 저장하세요.",
+      "loadingAnalytics": "분석 로딩",
+      "saveBeforePublish": "게시하기 전에 폼을 저장하세요.",
+      "userAuthRequired": "사용자 인증 필요",
+      "formUnpublished": "폼이 성공적으로 게시 해제되었습니다!",
+      "updateStatusFailed": "폼 상태를 업데이트하지 못했습니다. 다시 시도하세요.",
+      "saveSettingsFailed": "설정을 저장하지 못했습니다. 다시 시도하세요.",
+      "loadFailed": "폼을 로드하지 못했습니다. 다시 시도하세요."
+    },
+    "formPreview": {
+      "titlePlaceholder": "제목을 추가하려면 클릭...",
+      "descriptionPlaceholder": "설명을 추가하려면 클릭...",
+      "publicTitle": "공개 제목: \"{title}\"",
+      "stepTitlePlaceholder": "단계 제목을 추가하려면 클릭...",
+      "stepDescriptionPlaceholder": "단계 설명을 추가하려면 클릭...",
+      "stepBadge": "{index} 단계",
+      "editFieldAria": "필드 편집",
+      "clickToEdit": "편집하려면 클릭"
+    },
+    "fieldPalette": {
+      "headerTitle": "폼 필드",
+      "headerDescription": "폼에 필드를 추가하려면 클릭",
+      "ariaPalette": "필드 팔레트",
+      "searchAria": "필드 검색",
+      "searchPlaceholder": "필드 검색...",
+      "categoryFieldsAria": "{category} 필드",
+      "noFieldsFound": "\"{searchTerm}\"과 일치하는 필드를 찾지 못했습니다",
+      "searchHint": "필드 이름, 설명 또는 유형으로 검색해 보세요",
+      "addFieldAria": "{label} 필드 추가",
+      "categories": {
+        "input": "입력 필드",
+        "selection": "선택 필드",
+        "media": "미디어 필드",
+        "layout": "레이아웃 필드",
+        "advanced": "고급 필드"
+      },
+      "fields": {
+        "text": {
+          "label": "텍스트 입력",
+          "description": "짧은 텍스트 응답을 위한 한 줄 입력란."
+        },
+        "email": {
+          "label": "이메일",
+          "description": "유효한 이메일 주소를 수집합니다."
+        },
+        "number": {
+          "label": "번호",
+          "description": "숫자 값 입력란."
+        },
+        "phone": {
+          "label": "전화번호",
+          "description": "유효성 검사와 함께 전화번호를 입력합니다."
+        },
+        "textarea": {
+          "label": "텍스트 영역",
+          "description": "긴 텍스트를 위한 여러 줄 입력란."
+        },
+        "date": {
+          "label": "날짜",
+          "description": "캘린더에서 날짜를 선택합니다."
+        },
+        "time": {
+          "label": "시간",
+          "description": "시간 값을 선택하거나 입력하세요."
+        },
+        "address": {
+          "label": "주소",
+          "description": "거리, 도시 및 기타 주소 세부정보를 입력하세요."
+        },
+        "link": {
+          "label": "링크",
+          "description": "유효한 웹사이트 URL을 입력하세요."
+        },
+        "select": {
+          "label": "선택 목록",
+          "description": "옵션 하나를 선택하세요."
+        },
+        "radio": {
+          "label": "라디오 버튼",
+          "description": "목록에서 하나의 옵션을 선택하세요."
+        },
+        "checkbox": {
+          "label": "체크박스",
+          "description": "하나 이상의 옵션을 선택하세요."
+        },
+        "slider": {
+          "label": "슬라이더",
+          "description": "핸들을 슬라이딩하여 값을 선택하세요."
+        },
+        "rating": {
+          "label": "평가",
+          "description": "별 또는 아이콘 평가를 수집하세요."
+        },
+        "poll": {
+          "label": "투표",
+          "description": "사용자가 여러 옵션을 투표할 수 있습니다."
+        },
+        "file": {
+          "label": "파일 업로드",
+          "description": "크기 및 유형 제한이 있는 파일을 업로드하세요."
+        },
+        "signature": {
+          "label": "서명",
+          "description": "마우스나 터치로 그리기 또는 서명하세요."
+        },
+        "statement": {
+          "label": "문구",
+          "description": "폼에 제목 또는 설명을 표시하세요."
+        },
+        "banner": {
+          "label": "배너",
+          "description": "강조된 메시지 또는 경고를 표시하세요."
+        },
+        "field-group": {
+          "label": "필드 그룹",
+          "description": "행에 필드를 그룹화하세요."
+        },
+        "tags": {
+          "label": "태그 입력",
+          "description": "여러 태그를 입력하고 관리하세요."
+        },
+        "social": {
+          "label": "소셜 미디어",
+          "description": "소셜 미디어 프로필 링크를 추가하세요."
+        },
+        "scheduler": {
+          "label": "스케줄러",
+          "description": "스케줄링 링크(예: Calendly)를 포함하세요."
+        }
+      }
+    },
+    "fieldSettings": {
+      "header": {
+        "title": "필드 설정",
+        "closeAria": "필드 설정 닫기"
+      },
+      "emptyState": {
+        "title": "선택된 필드 없음",
+        "description": "미리보기의 필드를 클릭하여 설정 편집"
+      },
+      "basic": {
+        "title": "기본 설정",
+        "fieldLabel": "필드 라벨",
+        "fieldLabelPlaceholder": "필드 라벨 입력",
+        "fieldLabelHelp": "필드 위에 표시되는 라벨",
+        "placeholder": "플레이스홀더",
+        "placeholderPlaceholder": "플레이스홀더 텍스트 입력",
+        "placeholderHelp": "필드 안에 표시되는 힌트 텍스트",
+        "description": "설명",
+        "descriptionPlaceholder": "필드 설명 입력(필드 아래에 표시)",
+        "descriptionHelp": "필드 아래에 표시되는 추가 도움말 텍스트",
+        "required": "필드 필수",
+        "requiredHelp": "사용자가 이 필드를 작성해야 폼 제출 가능"
+      },
+      "validation": {
+        "title": "유효성 검사",
+        "minLength": "최소 길이",
+        "minLengthPlaceholder": "최소 문자 수",
+        "minLengthHelp": "필수 최소 문자 수",
+        "maxLength": "최대 길이",
+        "maxLengthPlaceholder": "최대 문자 수",
+        "maxLengthHelp": "허용되는 최대 문자 수",
+        "pattern": "패턴(Regex)",
+        "patternPlaceholder": "정규식",
+        "patternHelp": "유효성 검사를 위한 정규식 패턴",
+        "minValue": "최소값",
+        "minValuePlaceholder": "최소값",
+        "minValueHelp": "허용되는 최소 숫자 값",
+        "maxValue": "최대값",
+        "maxValuePlaceholder": "최대값",
+        "maxValueHelp": "허용되는 최대 숫자 값"
+      },
+      "errorMessages": {
+        "title": "사용자 지정 오류 메시지",
+        "requiredFieldMessage": "필수 필드 메시지",
+        "requiredFieldPlaceholder": "이 필드는 필수입니다",
+        "minLengthMessage": "최소 길이 오류 메시지",
+        "minLengthPlaceholder": "최소 {count} 개의 문자여야 합니다",
+        "maxLengthMessage": "최대 길이 오류 메시지",
+        "maxLengthPlaceholder": "길이는 {count} 이하로 입력해야 합니다",
+        "patternMessage": "패턴 오류 메시지",
+        "patternPlaceholder": "유효한 형식으로 입력해 주세요",
+        "emailMessage": "이메일 오류 메시지",
+        "emailPlaceholder": "유효한 이메일 주소를 입력해 주세요",
+        "minValueMessage": "최소값 오류 메시지",
+        "minValuePlaceholder": "최소 {value} 이상이어야 합니다",
+        "maxValueMessage": "최대값 오류 메시지",
+        "maxValuePlaceholder": "최대 {value} 이하로 입력해야 합니다",
+        "invalidNumberMessage": "유효하지 않은 숫자 메시지",
+        "invalidNumberPlaceholder": "유효한 숫자를 입력해 주세요"
+      },
+      "options": {
+        "title": "옵션",
+        "addOptionAria": "새 옵션 추가",
+        "addOption": "옵션 추가",
+        "optionPlaceholder": "옵션 {index}",
+        "removeOptionAria": "옵션 {index} 제거",
+        "none": "아직 옵션이 추가되지 않았습니다",
+        "or": "또는",
+        "orAria": "또는",
+        "fetchFromApi": "API에서 가져오기",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "옵션을 가져올 API 엔드포인트",
+        "valueKeyPlaceholder": "값 키(예: id)",
+        "valueKeyHelp": "옵션 값에 대한 키",
+        "labelKeyPlaceholder": "레이블 키(예: name)",
+        "labelKeyHelp": "옵션 레이블에 대한 키",
+        "apiGuidanceTitle": "API 데이터 안내:",
+        "apiGuidanceIntro": "이 필드는 API 엔드포인트에서 옵션을 가져옵니다:",
+        "apiShouldReturn": "API는 다음 중 하나를 반환해야 합니다:",
+        "apiType1Hint": "(문자열 배열)",
+        "apiType2Hint": "(객체 배열)",
+        "apiType3Hint": "(옵션 배열이 있는 객체)",
+        "apiType4Hint": "(사용자 지정 키)",
+        "apiCustomKeysHelp": "사용자 지정 키를 위에서 지정하여 API 데이터를 매핑할 수 있습니다.",
+        "apiValueLabelHelp": "각 옵션은 다음을 가져야 합니다",
+        "apiValueLabelHelpOr": "속성 (또는 사용자 지정 키).",
+        "apiValueLabelHelpSuffix": "는 선택 사항입니다."
+      },
+      "prepopulation": {
+        "title": "사전 입력",
+        "unknownError": "알 수 없는 오류",
+        "enabled": "사전 입력 활성화",
+        "enabledHelp": "이 필드를 기존 데이터로 자동 채우기",
+        "dataSource": "데이터 소스",
+        "sources": {
+          "url": "URL 매개변수",
+          "api": "외부 API",
+          "profile": "사용자 프로필",
+          "previous": "이전 제출"
+        },
+        "urlParamName": "URL 매개변수 이름",
+        "urlParamPlaceholder": "예: 이름, 이메일, 전화번호",
+        "urlParamHelp": "URL 쿼리 문자열에서 추출할 매개변수 이름",
+        "fallbackValue": "기본값",
+        "fallbackValuePlaceholder": "매개변수가 없는 경우 기본값",
+        "fallbackValueHelp": "URL 매개변수가 없는 경우 사용할 기본값",
+        "overwriteExisting": "기존 값 덮어쓰기",
+        "overwriteExistingHelp": "사용자 입력값을 사전 입력된 값으로 대체",
+        "generatePreviewAria": "미리보기 URL 생성",
+        "generatePreview": "미리보기 URL 생성",
+        "previewUrlLabel": "미리보기 URL:",
+        "previewUrlHelp": "이 URL은 필드를 \"Sample {label}\"으로 사전 입력합니다.",
+        "apiEndpoint": "API 엔드포인트",
+        "apiEndpointPlaceholder": "https://api.example.com/user-data",
+        "apiEndpointHelp": "데이터를 가져올 API 엔드포인트",
+        "httpMethod": "HTTP 메서드",
+        "requestHeaders": "요청 헤더 (JSON)",
+        "requestHeadersHelp": "API 요청에 대한 HTTP 헤더를 포함하는 JSON 객체",
+        "testApiAria": "API 엔드포인트 테스트",
+        "testApi": "API 엔드포인트 테스트",
+        "comingSoonLabel": "곧 출시:",
+        "profileComingSoon": "사용자 프로필 사전 입력은 향후 업데이트에서 제공됩니다.",
+        "previousComingSoon": "이전 제출 사전 입력은 향후 업데이트에서 제공됩니다.",
+        "toasts": {
+          "missingUrlParam": "먼저 URL 매개변수 이름을 입력하십시오",
+          "previewUrlCopied": "미리보기 URL이 클립보드에 복사되었습니다!",
+          "previewUrlCopyFailed": "미리보기 URL 복사 실패",
+          "missingApiEndpoint": "API 엔드포인트를 먼저 입력하십시오",
+          "apiReachable": "API 엔드포인트에 연결되었습니다!",
+          "apiTestFailedStatus": "API 테스트 실패: {status} {statusText}",
+          "apiTestFailedError": "API 테스트 실패: {error}"
+        }
+      },
+      "date": {
+        "title": "날짜 필드 설정",
+        "minDate": "최소 날짜",
+        "selectMinDate": "최소 날짜를 선택하십시오",
+        "maxDate": "최대 날짜",
+        "selectMaxDate": "최대 날짜를 선택하십시오",
+        "defaultDate": "기본 날짜",
+        "selectDefaultDate": "기본 날짜를 선택하십시오"
+      },
+      "number": {
+        "title": "숫자 필드 설정",
+        "minValue": "최소값",
+        "noMinimum": "최소값 없음",
+        "minValueHelp": "허용되는 최소 숫자 값",
+        "maxValue": "최대값",
+        "noMaximum": "최대값 없음",
+        "maxValueHelp": "허용되는 최대 숫자 값",
+        "stepSize": "단계 크기",
+        "stepSizeHelp": "숫자 입력의 증가/감소 단계 크기",
+        "defaultValue": "기본값",
+        "noDefault": "기본값 없음",
+        "defaultValueHelp": "폼이 로드될 때 미리 채워진 값"
+      },
+      "radio": {
+        "title": "퀴즈 설정",
+        "enableQuizQuestion": "퀴즈 질문으로 사용",
+        "correctAnswer": "정답",
+        "correctAnswerPlaceholder": "정답을 선택하십시오",
+        "points": "정답 포인트",
+        "showCorrectAnswer": "제출 후 정답 표시",
+        "explanation": "설명 (선택 사항)",
+        "explanationPlaceholder": "왜 이것이 정답인지 설명..."
+      },
+      "address": {
+        "title": "주소 필드 설정",
+        "requiredLines": "필수 주소 라인",
+        "requiredLinesPlaceholder": "예: 2 (주소 라인 1 및 도시 필요)",
+        "requiredLinesHelp": "필수 주소 라인 수 (1-5)",
+        "customErrorMessage": "사용자 지정 오류 메시지",
+        "customErrorPlaceholder": "모든 필수 주소 필드를 완료하십시오",
+        "customErrorHelp": "필수 주소 필드가 불완전한 경우 표시되는 사용자 지정 오류 메시지"
+      },
+      "phone": {
+        "title": "전화 필드 설정",
+        "pattern": "사용자 지정 정규식 패턴",
+        "patternPlaceholder": "예: ^\\+?[0-9]{10,15}$",
+        "patternHelp": "전화번호 유효성 검사를 위한 정규식 패턴",
+        "errorMessage": "사용자 지정 오류 메시지",
+        "errorMessagePlaceholder": "유효한 전화번호를 입력하십시오",
+        "errorMessageHelp": "전화번호 유효성 검사에 실패한 경우 표시되는 사용자 지정 오류 메시지"
+      },
+      "statement": {
+        "title": "문장 필드 설정",
+        "heading": "제목",
+        "headingPlaceholder": "문장 제목을 입력하십시오",
+        "headingHelp": "문장의 주요 제목",
+        "description": "설명",
+        "descriptionPlaceholder": "문장 설명을 입력하십시오",
+        "descriptionHelp": "문장의 상세 설명",
+        "alignment": "정렬",
+        "alignmentPlaceholder": "정렬을 선택하십시오",
+        "alignLeft": "왼쪽",
+        "alignCenter": "가운데",
+        "alignRight": "오른쪽",
+        "alignmentHelp": "문장의 텍스트 정렬",
+        "size": "크기",
+        "sizePlaceholder": "크기를 선택하십시오",
+        "sizeSmall": "작음",
+        "sizeMedium": "중간",
+        "sizeLarge": "큼",
+        "sizeHelp": "문장의 글꼴 크기"
+      },
+      "slider": {
+        "title": "슬라이더 설정",
+        "mode": "슬라이더 모드",
+        "modePlaceholder": "슬라이더 모드를 선택하십시오",
+        "modeSingle": "단일 값",
+        "modeRange": "범위 (최소 + 최대)",
+        "modeHelp": "하나의 값을 선택하거나 사용자가 최소값과 최대값을 선택하도록 함",
+        "min": "최소값",
+        "minHelp": "슬라이더의 최소값",
+        "max": "최대값",
+        "maxHelp": "슬라이더의 최대값",
+        "step": "단계 크기",
+        "stepHelp": "슬라이더의 증가/감소 단계 크기",
+        "defaultMin": "기본 최소값",
+        "defaultMinHelp": "폼이 로드될 때 미리 채워진 최소값",
+        "defaultMax": "기본 최대값",
+        "defaultMaxHelp": "폼이 로드될 때 미리 채워진 최대값",
+        "defaultValue": "기본값",
+        "defaultValueHelp": "폼이 로드될 때 미리 채워진 값"
+      },
+      "text": {
+        "title": "텍스트 필드 설정",
+        "maxLength": "최대 길이",
+        "maxLengthPlaceholder": "제한 없음",
+        "maxLengthHelp": "허용되는 최대 문자 수 (1-1000)",
+        "minLength": "최소 길이",
+        "minLengthPlaceholder": "최소값 없음",
+        "minLengthHelp": "최소 요구 문자 수 (0-1000)"
+      },
+      "checkbox": {
+        "title": "체크박스 옵션",
+        "options": "옵션",
+        "addOptionPlaceholder": "옵션 추가",
+        "addOptionAria": "체크박스 옵션 추가",
+        "optionsHelp": "사용자가 선택할 수 있는 체크박스 옵션 추가",
+        "removeOptionAria": "옵션 {index} 제거",
+        "allowMultiple": "다중 선택 허용",
+        "allowMultipleHelp": "활성화된 경우, 사용자는 하나 이상의 옵션을 선택할 수 있습니다. 비활성화된 경우, 하나의 옵션만 선택할 수 있습니다."
+      },
+      "link": {
+        "title": "링크 필드 설정",
+        "pattern": "사용자 지정 정규식 패턴",
+        "patternPlaceholder": "예: ^https?://.+$",
+        "patternHelp": "URL 유효성 검사를 위한 정규식 패턴",
+        "errorMessage": "사용자 지정 오류 메시지",
+        "errorMessagePlaceholder": "유효한 URL을 입력하십시오",
+        "errorMessageHelp": "URL 유효성 검사에 실패할 때 표시되는 사용자 지정 오류 메시지"
+      },
+      "poll": {
+        "title": "투표 설정",
+        "pollOptions": "투표 옵션",
+        "addOptionPlaceholder": "옵션 추가",
+        "addOptionAria": "투표 옵션 추가",
+        "optionsHelp": "사용자가 투표할 수 있는 투표 옵션 추가",
+        "editOptionAria": "투표 옵션 {index} 편집",
+        "removeOptionAria": "투표 옵션 {index} 제거",
+        "orAria": "또는 구분자",
+        "or": "또는",
+        "fetchFromApi": "API에서 옵션 가져오기",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "투표 옵션을 가져올 API 엔드포인트",
+        "valueKeyPlaceholder": "값 키(예: id)",
+        "valueKeyHelp": "옵션 값에 대한 키",
+        "labelKeyPlaceholder": "레이블 키(예: name)",
+        "labelKeyHelp": "옵션 레이블에 대한 키",
+        "apiGuidanceTitle": "API 데이터 안내:",
+        "apiGuidanceIntro": "이 필드는 API 엔드포인트에서 옵션을 가져옵니다:",
+        "apiShouldReturn": "API는 다음 중 하나를 반환해야 합니다:",
+        "apiType1Hint": "(문자열 배열)",
+        "apiType2Hint": "(객체 배열)",
+        "apiType3Hint": "(옵션 배열이 있는 객체)",
+        "apiType4Hint": "(사용자 지정 키)",
+        "apiCustomKeysHelp": "사용자 지정 키를 위에서 지정하여 API 데이터를 매핑할 수 있습니다.",
+        "apiValueLabelHelp": "각 옵션은 다음을 가져야 합니다",
+        "apiValueLabelHelpOr": "속성 (또는 사용자 지정 키).",
+        "apiValueLabelHelpSuffix": "는 선택 사항입니다.",
+        "showResults": "투표 후 결과 표시",
+        "showResultsHelp": "사용자가 투표한 후 투표 결과 표시"
+      },
+      "social": {
+        "title": "소셜 플랫폼",
+        "availablePlatforms": "사용 가능한 플랫폼",
+        "platforms": {
+          "github": "GitHub",
+          "twitter": "Twitter",
+          "linkedin": "LinkedIn",
+          "facebook": "Facebook",
+          "instagram": "Instagram",
+          "youtube": "YouTube",
+          "website": "웹사이트"
+        },
+        "platformsHelp": "필드에 포함할 소셜 플랫폼 선택",
+        "customLinks": "사용자 지정 링크",
+        "labelPlaceholder": "레이블",
+        "placeholderPlaceholder": "플레이스홀더 (선택 사항)",
+        "removeCustomLinkAria": "사용자 지정 링크 {index} 제거",
+        "addCustomLinkAria": "사용자 지정 링크 추가",
+        "addCustomLink": "사용자 지정 링크 추가",
+        "customLinksHelp": "사용자 지정 라벨 및 플레이스홀더가 있는 사용자 지정 소셜 링크 추가"
+      },
+      "emailValidation": {
+        "title": "이메일 유효성 검사",
+        "removeBlockedDomainAria": "차단된 도메인에서 {domain} 제거",
+        "removeAllowedDomainAria": "허용된 도메인에서 {domain} 제거",
+        "autoCompleteDomain": "도메인 자동 완성",
+        "autoCompletePlaceholder": "예: business.com",
+        "setAutoCompleteAria": "도메인 자동 완성 설정",
+        "set": "설정",
+        "removeAutoCompleteAria": "{domain} 도메인 제거",
+        "autoCompleteHelp": "사용자가 사용자 이름만 입력하고 도메인이 자동 완성되도록 허용",
+        "allowedDomains": "허용된 도메인",
+        "allowedPlaceholder": "예: company.com",
+        "addAllowedDomainAria": "허용된 도메인 추가",
+        "allowedHelp": "이 도메인의 이메일만 허용됨",
+        "blockedDomains": "차단된 도메인",
+        "blockedPlaceholder": "예: temp-mail.org",
+        "addBlockedDomainAria": "차단된 도메인 추가",
+        "blockedHelp": "이 도메인의 이메일은 거부됨 (임시 이메일 서비스는 기본적으로 차단됨)",
+        "requireBusinessEmail": "비즈니스 이메일 요구",
+        "requireBusinessEmailHelp": "비즈니스 도메인만 허용 (Gmail, Yahoo 등 차단)",
+        "customValidationMessage": "사용자 지정 유효성 검사 메시지",
+        "customValidationPlaceholder": "이메일 유효성 검사를 위한 사용자 지정 오류 메시지",
+        "customValidationHelp": "기본 메시지 사용을 위해 빈 값으로 둠"
+      },
+      "file": {
+        "title": "파일 업로드 설정",
+        "bytesUnit": "바이트",
+        "maxFiles": "최대 파일 수",
+        "maxFilesPlaceholder": "10",
+        "maxFilesHelp": "사용자가 업로드할 수 있는 최대 파일 수 (1-50)",
+        "maxFileSize": "최대 파일 크기",
+        "maxFileSizePlaceholder": "50",
+        "mbUnit": "MB",
+        "setMaxSizePresetAria": "최대 파일 크기를 {size}로 설정",
+        "currentSize": "현재: {size}",
+        "allowedFileTypes": "허용되는 파일 유형",
+        "quickSelect": "빠른 선택:",
+        "commonTypes": {
+          "images": "이미지",
+          "documents": "문서",
+          "spreadsheets": "스프레드시트",
+          "videos": "비디오",
+          "audio": "오디오",
+          "archives": "압축 파일"
+        },
+        "toggleFileTypeAria": "{type} 파일 유형 토글",
+        "customExtensions": "사용자 지정 파일 확장자",
+        "customExtensionsPlaceholder": "예: txt, csv, json",
+        "addCustomExtensionAria": "사용자 지정 파일 확장자 추가",
+        "customExtensionsHelp": "사용자 지정 파일 확장자 추가 (점 없이)",
+        "selectedExtensions": "선택한 확장자:",
+        "removeExtensionAria": "{extension} 파일 확장자 제거",
+        "htmlAccept": "HTML Accept 속성 (읽기 전용)",
+        "htmlAcceptHelp": "이것은 위의 선택 사항에 따라 자동으로 생성됩니다",
+        "helpText": "도움말 텍스트",
+        "helpTextPlaceholder": "사용자를 위한 추가 지침...",
+        "helpTextHelp": "사용자가 업로드할 파일을 이해하도록 돕는 선택적 지침"
+      },
+      "scheduler": {
+        "title": "스케줄러 설정",
+        "provider": "스케줄러 제공업체",
+        "providerPlaceholder": "제공업체 선택",
+        "providerHelp": "기본 스케줄링 플랫폼 선택",
+        "calcomLink": "Cal.com 링크",
+        "calendlyLink": "Calendly 링크",
+        "tidycalLink": "TidyCal 링크",
+        "schedulerLink": "스케줄러 링크",
+        "linkPlaceholder": "https://...",
+        "linkHelp": "{provider} 스케줄러에 대한 임베드 URL",
+        "buttonText": "캘린더 열기 버튼 텍스트",
+        "buttonTextPlaceholder": "예: 통화 예약",
+        "buttonTextHelp": "스케줄러 버튼에 표시되는 텍스트",
+        "preview": "미리보기",
+        "openScheduler": "스케줄러 열기",
+        "previewHelp": "스케줄러가 표시되는 방식 미리보기 클릭",
+        "previewModalTitle": "스케줄러 미리보기",
+        "iframeTitle": "스케줄러 임베드",
+        "closePreviewAria": "스케줄러 미리보기 닫기",
+        "close": "닫기",
+        "providerCalcom": "Cal.com",
+        "providerCalendly": "Calendly",
+        "providerTidycal": "TidyCal"
+      },
+      "banner": {
+        "title": "배너 설정",
+        "alertType": "경고 유형",
+        "alertTypePlaceholder": "경고 유형 선택",
+        "warning": "경고",
+        "error": "오류",
+        "info": "정보",
+        "success": "성공",
+        "alertTypeHelp": "배너에 대한 시각적 스타일 및 색 구성표 선택",
+        "bannerTitle": "제목",
+        "bannerTitlePlaceholder": "금연",
+        "bannerTitleHelp": "배너에 대한 기본 제목 텍스트",
+        "description": "설명",
+        "descriptionPlaceholder": "숙박 시설은 엄격히 금연입니다...",
+        "descriptionHelp": "배너에 대한 세부 설명 텍스트"
+      },
+      "fieldGroup": {
+        "layoutTitle": "레이아웃 설정",
+        "layoutDirection": "레이아웃 방향",
+        "layoutHorizontal": "수평 (나란히)",
+        "layoutVertical": "수직 (스택)",
+        "layoutDirectionHelp": "그룹 내 필드의 배치 방법",
+        "columns": "열 수",
+        "columns2": "2 열",
+        "columns3": "3 열",
+        "columns4": "4 열",
+        "columnsHelp": "수평 레이아웃에 대한 열 수",
+        "spacing": "필드 간격",
+        "spacingCompact": "컴팩트",
+        "spacingNormal": "보통",
+        "spacingRelaxed": "느슨함",
+        "spacingHelp": "필드 사이의 간격",
+        "groupFields": "그룹 필드 ({count})",
+        "addFieldAria": "그룹에 필드 추가",
+        "addField": "필드 추가",
+        "addFieldDialogTitle": "필드 추가",
+        "emptyStateTitle": "이 그룹에 필드가 아직 없습니다.",
+        "emptyStateDescription": "위의 드롭다운 또는 빠른 추가 버튼을 사용하여 필드를 추가하세요.",
+        "fieldFallback": "{type} 필드",
+        "settingsAria": "{name} 필드 설정",
+        "removeAria": "{name} 필드 제거",
+        "fieldLabel": "필드 라벨",
+        "fieldLabelPlaceholder": "필드 라벨 입력",
+        "fieldLabelHelp": "이 필드의 레이블",
+        "placeholder": "플레이스홀더 텍스트",
+        "placeholderPlaceholder": "플레이스홀더 텍스트 입력",
+        "placeholderHelp": "이 필드의 플레이스홀더 텍스트",
+        "required": "필드 필수",
+        "requiredHelp": "필드를 필수로 입력",
+        "advancedAria": "{name} 고급 설정 토글",
+        "advanced": "고급 설정"
+      },
+      "rating": {
+        "title": "평가 설정",
+        "starCount": "별 개수",
+        "starCountHelp": "평가 별 개수 (1-10)",
+        "starSize": "별 크기",
+        "starSizeHelp": "평가 별 크기 (16-64px)",
+        "iconType": "아이콘 유형",
+        "star": "별",
+        "heart": "하트",
+        "iconTypeHelp": "평가에 사용할 아이콘 유형을 선택하세요",
+        "iconColor": "아이콘 색상",
+        "iconColorHelp": "평가 아이콘 색상"
+      },
+      "tags": {
+        "title": "태그 설정",
+        "maxTags": "최대 태그 개수",
+        "maxTagsHelp": "사용자가 추가할 수 있는 최대 태그 개수 (최소 1)",
+        "allowDuplicates": "중복 태그 허용",
+        "allowDuplicatesHelp": "사용자가 동일한 태그를 여러 번 추가할 수 있음"
+      },
+      "textarea": {
+        "title": "텍스트 영역 필드 설정",
+        "rows": "행 개수",
+        "rowsHelp": "텍스트 영역의 초기 높이 (2-20 행)"
+      },
+      "time": {
+        "title": "시간 필드 설정",
+        "showCurrentTimeButton": "'현재 시간 설정' 버튼 표시",
+        "showCurrentTimeButtonHelp": "현재 시간을 자동으로 설정하는 버튼 표시"
+      },
+      "email": {
+        "title": "이메일 필드 설정",
+        "allowedDomains": "허용된 도메인 (콤마로 구분)",
+        "allowedDomainsPlaceholder": "gmail.com, company.com",
+        "blockedDomains": "차단된 도메인 (콤마로 구분)",
+        "blockedDomainsPlaceholder": "tempmail.com, spam.com",
+        "requireBusinessEmail": "비즈니스 이메일만 필수",
+        "customValidationMessage": "사용자 지정 유효성 검사 메시지",
+        "customValidationPlaceholder": "유효한 이메일 주소를 입력해 주세요"
+      }
+    },
+    "formSettings": {
+      "title": "폼 설정",
+      "exportSecure": "내보내기 (안전)",
+      "preparing": "준비중...",
+      "saveFormFirstAccess": "설정을 액세스하려면 먼저 양식을 저장하세요.",
+      "saveFormFirstExport": "양식을 먼저 저장하여 안전하게 내보내세요.",
+      "exportPrepareFailed": "안전한 내보내기를 준비하지 못했습니다.",
+      "settingsSectionsAria": "설정 섹션",
+      "goToSectionSettingsAria": "{section} 설정으로 이동",
+      "sections": {
+        "basic": "기본 정보",
+        "limits": "제한",
+        "security": "보안",
+        "quiz": "퀴즈 및 점수",
+        "branding": "브랜딩",
+        "notifications": "알림",
+        "api": "API 액세스",
+        "webhooks": "웹훅",
+        "design": "디자인",
+        "metadata": "메타데이터"
+      },
+      "search": {
+        "aria": "검색 설정",
+        "placeholder": "검색 설정…",
+        "resultsAria": "검색 결과",
+        "noMatches": "일치하는 항목 없음",
+        "items": {
+          "basic-info-title": {
+            "label": "기본 정보"
+          },
+          "behavior-title": {
+            "label": "양식 동작"
+          },
+          "rate-limit-title": {
+            "label": "속도 제한"
+          },
+          "response-limit-title": {
+            "label": "응답 제한"
+          },
+          "password-protection-title": {
+            "label": "비밀번호 보호"
+          },
+          "duplicate-prevention-title": {
+            "label": "중복 방지"
+          },
+          "profanity-filter-title": {
+            "label": "욕설 필터"
+          },
+          "bot-protection-title": {
+            "label": "봇 보호"
+          },
+          "branding-title": {
+            "label": "브랜딩"
+          },
+          "social-media-links-title": {
+            "label": "소셜 미디어 링크"
+          },
+          "quiz-title": {
+            "label": "퀴즈 및 점수"
+          },
+          "notifications-title": {
+            "label": "알림"
+          },
+          "api-access-title": {
+            "label": "API 액세스"
+          },
+          "webhooks-title": {
+            "label": "웹훅"
+          },
+          "design-title": {
+            "label": "디자인"
+          },
+          "metadata-title": {
+            "label": "SEO"
+          },
+          "social-metadata-title": {
+            "label": "소셜 메타데이터"
+          },
+          "search-engine-indexing-title": {
+            "label": "검색 엔진 색인"
+          }
+        }
+      },
+      "defaults": {
+        "submitText": "제출",
+        "notificationSubject": "새 양식 제출",
+        "notificationMessage": "새로운 제출 내역을 받았습니다."
+      },
+      "common": {
+        "unsavedChanges": "저장되지 않은 변경 사항",
+        "reset": "초기화",
+        "save": "저장",
+        "saved": "저장됨",
+        "formIdRequiredToSaveSettings": "설정을 저장하려면 양식 ID가 필요합니다.",
+        "validValueBetween": "{min}와 {max} 사이의 유효한 값을 입력하십시오.",
+        "fillRequiredFields": "필수 항목을 모두 작성하십시오.",
+        "requiredAria": "필수",
+        "fieldRequired": "이 필드는 필수입니다"
+      },
+      "basicInfoSection": {
+        "ariaSettings": "기본 양식 설정",
+        "basicTitle": "기본 정보",
+        "basicDescription": "양식의 기본 정보를 구성합니다.",
+        "internalTitleLabel": "내부 제목",
+        "internalTitleDescription": "이 제목은 대시보드와 폼 빌더에서만 표시됩니다.",
+        "internalTitlePlaceholder": "참조용 내부 제목을 입력하세요...",
+        "publicTitleLabel": "공개 제목",
+        "publicTitleDescription": "이 제목은 실제 폼에서 사용자에게 표시됩니다. 비워두면 내부 제목을 사용합니다.",
+        "publicTitlePlaceholder": "사용자에게 표시할 제목을 입력하세요...",
+        "formDescriptionLabel": "폼 설명",
+        "formDescriptionPlaceholder": "폼 설명을 입력하세요",
+        "submitButtonTextLabel": "제출 버튼 텍스트",
+        "submitButtonTextPlaceholder": "제출",
+        "successMessageLabel": "성공 메시지",
+        "successMessagePlaceholder": "제출해 주셔서 감사합니다!",
+        "redirectUrlLabel": "리디렉션 URL (선택 사항)",
+        "redirectUrlDescription": "성공적으로 제출한 후 사용자를 리디렉션할 URL",
+        "redirectUrlPlaceholder": "https://example.com/thank-you",
+        "basicActionsAria": "기본 정보 작업",
+        "saveBasicAria": "기본 정보 저장",
+        "saveBasicSuccess": "기본 정보가 성공적으로 저장되었습니다.",
+        "saveBasicFailed": "기본 정보 저장에 실패했습니다.",
+        "behaviorTitle": "양식 동작",
+        "behaviorDescription": "사용자에게 표시되는 양식의 동작 및 모양을 구성합니다.",
+        "hideHeaderLabel": "헤더 숨기기",
+        "hideHeaderDescription": "임베드에서 공개 제목 및 설명을 숨깁니다.",
+        "rtlLabel": "오른쪽에서 왼쪽 모드",
+        "rtlDescription": "양식을 RTL (오른쪽에서 왼쪽) 모드로 표시합니다.",
+        "autoFocusLabel": "첫 번째 필드 자동 초점",
+        "autoFocusDescription": "양식이 로드되면 첫 번째 필드에 자동으로 초점을 맞춥니다.",
+        "behaviorActionsAria": "양식 동작 작업",
+        "saveBehaviorAria": "양식 동작 설정 저장",
+        "saveBehaviorSuccess": "양식 동작이 성공적으로 저장되었습니다.",
+        "saveBehaviorFailed": "양식 동작 저장에 실패했습니다."
+      },
+      "passwordProtectionSection": {
+        "ariaSettings": "비밀번호 보호 설정",
+        "title": "비밀번호 보호",
+        "description": "비밀번호로 양식에 대한 액세스를 제한합니다.",
+        "enableLabel": "비밀번호 보호 활성화",
+        "enableDescription": "사용자가 양식에 액세스하려면 비밀번호를 입력하도록 요구합니다.",
+        "passwordLabel": "비밀번호",
+        "passwordPlaceholder": "양식 비밀번호를 입력하십시오.",
+        "hidePasswordAria": "비밀번호 숨기기",
+        "showPasswordAria": "비밀번호 표시",
+        "passwordDescription": "사용자는 이 비밀번호를 입력해야 양식에 액세스할 수 있습니다.",
+        "customMessageLabel": "사용자 지정 메시지",
+        "customMessagePlaceholder": "비밀번호 프롬프트에 대한 사용자 지정 메시지 입력",
+        "customMessageDescription": "사용자가 비밀번호를 입력해야 할 때 표시되는 메시지",
+        "currentConfiguration": "현재 구성",
+        "summaryPrefix": "비밀번호 보호가",
+        "enabled": "활성화됨",
+        "summarySuffix": ". 사용자가 비밀번호를 입력해야 양식에 액세스할 수 있습니다.",
+        "disabledDescription": "비밀번호 보호는 사용자가 양식을 보기 및 제출하기 전에 비밀번호를 입력하도록 요구하여 양식에 대한 액세스를 제한합니다.",
+        "actionsAria": "비밀번호 보호 작업",
+        "saveAria": "비밀번호 보호 설정 저장",
+        "saved": "비밀번호 보호 설정이 성공적으로 저장되었습니다.",
+        "saveFailed": "비밀번호 보호 설정 저장에 실패했습니다.",
+        "defaultMessage": "이 양식은 비밀번호로 보호됩니다. 계속하려면 비밀번호를 입력하십시오."
+      },
+      "duplicatePreventionSection": {
+        "ariaSettings": "중복 방지 설정",
+        "title": "중복 방지",
+        "description": "사용자가 동일한 양식을 여러 번 제출하지 못하도록 방지합니다.",
+        "enableLabel": "중복 방지 활성화",
+        "enableDescription": "사용자가 동일한 양식을 여러 번 제출하지 못하도록 방지합니다.",
+        "preventionModeLabel": "방지 모드",
+        "oneTimeLabel": "한 번 제출",
+        "oneTimeDescription": "사용자당 한 번의 제출만 허용합니다.",
+        "timeBasedLabel": "시간 기반 방지",
+        "timeBasedDescription": "지정된 시간 창 내에서 중복 제출을 방지합니다.",
+        "preventionStrategyLabel": "방지 전략",
+        "selectStrategyPlaceholder": "전략 선택",
+        "strategyCombinedLabel": "결합됨 (IP + 이메일 + 세션) - 가장 안전함",
+        "strategyEmailLabel": "이메일 주소 - 등록에 가장 좋음",
+        "strategyIpLabel": "IP 주소 - 간단하고 안정적임",
+        "strategySessionLabel": "세션 ID - 브라우저 기반",
+        "strategyCombinedDescription": "IP, 이메일 및 세션의 조합으로 최대 정확도로 추적",
+        "strategyEmailDescription": "이메일 주소로 추적 (양식에 이메일 필드 필요)",
+        "strategyIpDescription": "IP 주소로만 추적",
+        "strategySessionDescription": "브라우저 세션으로 추적",
+        "timeWindowLabel": "시간 창 (분)",
+        "timeWindowDescription": "중복 제출을 방지할 기간",
+        "timeWindowPlaceholder": "1440",
+        "maxAttemptsLabel": "최대 시도 횟수",
+        "maxAttemptsDescription": "시간 창 내에서 허용되는 최대 시도 횟수",
+        "maxAttemptsPlaceholder": "1",
+        "errorMessageLabel": "오류 메시지",
+        "errorMessageDescription": "사용자가 중복 제출을 시도할 때 표시되는 메시지",
+        "allowOverrideLabel": "재정의 허용",
+        "allowOverrideDescription": "사용자가 재정의하도록 허용 (추천하지 않음)",
+        "currentConfiguration": "현재 구성",
+        "currentSettings": "현재 설정",
+        "summaryModeOneTime": "한 번 제출만 허용",
+        "summaryModeTimeBased": "{maxAttempts} 제출 횟수마다 {timeWindow} 분",
+        "summaryStrategyCombined": "IP + 이메일 + 세션",
+        "summaryStrategyEmail": "이메일 주소",
+        "summaryStrategyIp": "IP 주소",
+        "summaryStrategySession": "세션 ID",
+        "summarySentence": "{mode} 에서 {strategy} 추적 사용.",
+        "summaryOverrideEnabled": "재정의가 활성화되었습니다.",
+        "disabledDescription": "중복 방지는 사용자가 동일한 양식을 여러 번 제출하는 것을 방지하여 데이터 품질을 유지하는 데 도움이 됩니다. 시간 기반 방지 또는 한 번 제출 모드 중에서 선택하십시오.",
+        "actionsAria": "중복 방지 작업",
+        "saveAria": "중복 방지 설정 저장",
+        "saved": "중복 방지 설정이 성공적으로 저장되었습니다",
+        "saveFailed": "중복 방지 설정 저장 실패",
+        "defaultMessageOneTime": "이미 이 양식을 제출했습니다. 각 사용자는 한 번만 제출할 수 있습니다.",
+        "defaultMessageTimeBased": "이미 이 양식을 제출했습니다. 다시 제출하기 전에 기다려 주십시오."
+      },
+      "profanityFilterSection": {
+        "ariaSettings": "욕설 필터 설정",
+        "title": "욕설 필터",
+        "description": "부적절한 콘텐츠를 자동으로 감지하고 필터링",
+        "enableLabel": "욕설 필터 활성화",
+        "enableDescription": "부적절한 콘텐츠를 자동으로 감지하고 필터링",
+        "filterModeLabel": "필터 모드",
+        "strictModeOption": "엄격 모드 - 욕설이 포함된 제출 거부",
+        "replaceModeOption": "대체 모드 - 욕설을 별표로 대체",
+        "customMessageLabel": "사용자 지정 메시지",
+        "customMessagePlaceholder": "욕설이 감지되면 표시할 사용자 지정 메시지 입력",
+        "customWordsTitle": "필터링할 사용자 지정 단어",
+        "whitelistedWordsTitle": "화이트리스트된 단어",
+        "customWordsPlaceholder": "필터링할 단어 입력 (여러 개는 쉼표로 구분)",
+        "whitelistPlaceholder": "화이트리스트할 단어 입력 (여러 개는 쉼표로 구분)",
+        "addWord": "추가",
+        "addFilteredWordAria": "필터링된 단어 추가",
+        "addWhitelistedWordAria": "화이트리스트된 단어 추가",
+        "removeWordAria": "{word} 제거",
+        "currentConfiguration": "현재 구성",
+        "summaryPrefix": "욕설 필터는",
+        "enabled": "활성화됨",
+        "summaryIn": "에",
+        "strictMode": "엄격 모드",
+        "replaceMode": "대체 모드",
+        "summaryPeriod": ".",
+        "customWordsConfigured": "{count} 개의 사용자 지정 단어 구성됨.",
+        "whitelistedWordsConfigured": "{count} 개의 화이트리스트된 단어.",
+        "disabledDescription": "욕설 필터는 양식 제출에서 부적절한 콘텐츠를 자동으로 감지하고 필터링하여 깨끗하고 전문적인 환경을 유지하는 데 도움이 됩니다.",
+        "actionsAria": "욕설 필터 작업",
+        "saveAria": "욕설 필터 설정 저장",
+        "saved": "욕설 필터 설정이 성공적으로 저장되었습니다",
+        "saveFailed": "욕설 필터 설정 저장 실패"
+      },
+      "notificationsSection": {
+        "title": "알림",
+        "description": "새 양식 제출에 대한 이메일 알림 구성",
+        "enableLabel": "이메일 알림",
+        "enableDescription": "새 제출에 대한 이메일 알림 활성화",
+        "emailLabel": "알림 이메일",
+        "emailPlaceholder": "owner@email.com",
+        "subjectLabel": "이메일 제목",
+        "messageLabel": "이메일 메시지",
+        "customLinksLabel": "사용자 지정 링크",
+        "linkLabelPlaceholder": "레이블",
+        "linkUrlPlaceholder": "https://example.com",
+        "removeLink": "제거",
+        "addLink": "추가",
+        "actionsAria": "알림 설정 작업",
+        "saveAria": "알림 설정 저장",
+        "saved": "알림 설정이 성공적으로 저장되었습니다",
+        "saveFailed": "알림 설정 저장 실패"
+      },
+      "brandingSection": {
+        "title": "브랜딩",
+        "description": "Ikiform 브랜딩 및 소셜 미디어 링크 관리",
+        "showPoweredByLabel": "아이키폼 제공 표시",
+        "showPoweredByDescription": "푸터에 작은 출처 표시",
+        "socialMediaLabel": "소셜 미디어 링크",
+        "socialMediaDescription": "폼에 소셜 프로필 링크 활성화",
+        "platforms": {
+          "linkedin": {
+            "label": "LinkedIn",
+            "placeholder": "https://linkedin.com/in/username"
+          },
+          "twitter": {
+            "label": "X (트위터)",
+            "placeholder": "https://x.com/username"
+          },
+          "youtube": {
+            "label": "YouTube",
+            "placeholder": "https://youtube.com/@channel"
+          },
+          "instagram": {
+            "label": "Instagram",
+            "placeholder": "https://instagram.com/username"
+          },
+          "facebook": {
+            "label": "Facebook",
+            "placeholder": "https://facebook.com/username"
+          },
+          "github": {
+            "label": "GitHub",
+            "placeholder": "https://github.com/username"
+          },
+          "website": {
+            "label": "웹사이트",
+            "placeholder": "https://example.com"
+          }
+        },
+        "iconSizeLabel": "아이콘 크기",
+        "iconSizes": {
+          "small": "작음",
+          "medium": "중간",
+          "large": "큼"
+        },
+        "positionLabel": "위치",
+        "positions": {
+          "footer": "푸터",
+          "header": "헤더",
+          "both": "둘 다"
+        },
+        "previewLabel": "미리보기",
+        "disabledDescription": "폼에 소셜 프로필 링크를 표시합니다.",
+        "actionsAria": "브랜딩 설정 작업",
+        "saveAria": "브랜딩 설정 저장",
+        "saved": "브랜딩 설정이 성공적으로 저장되었습니다.",
+        "saveFailed": "브랜딩 설정 저장 실패",
+        "authRequired": "사용자 인증 필요"
+      },
+      "metadataSection": {
+        "basicTitle": "기본 SEO",
+        "basicDescription": "타이틀, 설명 및 표준 URL",
+        "pageTitleLabel": "페이지 타이틀",
+        "pageTitlePlaceholder": "페이지 타이틀 입력 (최대 60자)",
+        "metaDescriptionLabel": "메타 설명",
+        "metaDescriptionPlaceholder": "메타 설명 입력 (최대 160자)",
+        "characterCount": "{count}/{max} 자",
+        "keywordsLabel": "키워드",
+        "keywordsPlaceholder": "키워드 입력 (콤마로 구분)",
+        "authorLabel": "작성자",
+        "authorPlaceholder": "작성자 이름 입력",
+        "canonicalUrlLabel": "표준 URL",
+        "canonicalUrlPlaceholder": "https://example.com/form",
+        "canonicalUrlDescription": "이 폼 페이지의 선호 URL",
+        "basicActionsAria": "기본 SEO 작업",
+        "saveBasicAria": "기본 SEO 설정 저장",
+        "basicSaved": "기본 SEO 저장됨",
+        "basicSaveFailed": "기본 SEO 저장 실패",
+        "socialTitle": "소셜 메타데이터",
+        "socialDescription": "오픈 그래프 및 트위터 설정",
+        "ogTitleLabel": "오픈 그래프 타이틀",
+        "ogTitlePlaceholder": "오픈 그래프 타이틀 입력",
+        "ogTitleDescription": "Facebook, LinkedIn 등에 공유할 때 표시되는 타이틀",
+        "ogDescriptionLabel": "오픈 그래프 설명",
+        "ogDescriptionPlaceholder": "오픈 그래프 설명 입력",
+        "ogDescriptionDescription": "소셜 미디어에 공유할 때 표시되는 설명",
+        "ogImageLabel": "오픈 그래프 이미지 URL",
+        "ogImagePlaceholder": "https://example.com/image.jpg",
+        "ogTypeLabel": "오픈 그래프 유형",
+        "ogTypePlaceholder": "오픈 그래프 유형 선택",
+        "ogTypes": {
+          "website": "웹사이트",
+          "article": "기사",
+          "profile": "프로필",
+          "video": "영상"
+        },
+        "twitterCardLabel": "트위터 카드 유형",
+        "twitterCardPlaceholder": "트위터 카드 유형 선택",
+        "twitterCards": {
+          "summary": "요약",
+          "summaryLargeImage": "요약 대형 이미지",
+          "app": "앱",
+          "player": "플레이어"
+        },
+        "twitterTitleLabel": "트위터 타이틀",
+        "twitterTitlePlaceholder": "트위터 타이틀 입력",
+        "twitterImageLabel": "트위터 이미지 URL",
+        "twitterImagePlaceholder": "https://example.com/twitter-image.jpg",
+        "twitterDescriptionLabel": "트위터 설명",
+        "twitterDescriptionPlaceholder": "트위터 설명 입력",
+        "twitterSiteLabel": "트위터 사이트",
+        "twitterSitePlaceholder": "@yourhandle",
+        "twitterCreatorLabel": "트위터 제작자",
+        "twitterCreatorPlaceholder": "@creatorhandle",
+        "socialActionsAria": "소셜 메타데이터 작업",
+        "saveSocialAria": "소셜 메타데이터 설정 저장",
+        "socialSaved": "소셜 메타데이터 저장됨",
+        "socialSaveFailed": "소셜 메타데이터 저장 실패",
+        "indexingTitle": "검색 엔진 색인",
+        "indexingDescription": "이 폼에 대한 검색 엔진 크롤링 제어",
+        "indexingBehaviorLabel": "검색 엔진 색인",
+        "indexingBehaviorPlaceholder": "인덱싱 동작 선택",
+        "indexingOptions": {
+          "index": "인덱스 및 팔로우 (기본)",
+          "noindex": "인덱스하지 않음",
+          "nofollow": "팔로우하지 않음",
+          "noindexNofollow": "인덱스하지 않고 팔로우하지 않음"
+        },
+        "indexingBehaviorDescription": "검색 엔진이 이 페이지의 색인 및 링크를 따를 수 있는지 제어",
+        "switches": {
+          "noArchive": "아카이브 없음",
+          "noSnippet": "스니펫 없음",
+          "noImageIndex": "이미지 색인 없음",
+          "noTranslate": "번역 없음"
+        },
+        "indexingActionsAria": "색인 작업",
+        "saveIndexingAria": "색인 설정 저장",
+        "indexingSaved": "색인 설정 저장됨",
+        "indexingSaveFailed": "색인 설정 저장 실패",
+        "updatedAnnouncement": "메타데이터 업데이트됨",
+        "authRequired": "사용자 인증 필요"
+      },
+      "rateLimitSection": {
+        "title": "속도 제한",
+        "description": "스팸 및 남용 방지를 위해 제출 빈도 제어",
+        "ariaSettings": "속도 제한 설정",
+        "enableLabel": "속도 제한 활성화",
+        "enableDescription": "동일한 IP 주소에서 제출 제한",
+        "maxSubmissionsLabel": "최대 제출 횟수",
+        "maxSubmissionsDescription": "허용되는 최대 제출 횟수",
+        "timeWindowLabel": "시간 창 (분)",
+        "timeWindowDescription": "제출 횟수를 계산하는 시간 기간",
+        "blockDurationLabel": "블록 기간(분)",
+        "blockDurationDescription": "제한에 도달한 후 차단할 기간",
+        "messageLabel": "속도 제한이 초과되었을 때 표시되는 메시지",
+        "messagePlaceholder": "너무 많은 제출. 나중에 다시 시도하십시오.",
+        "messageDescription": "속도 제한이 초과되었을 때 표시되는 사용자 정의 메시지",
+        "currentConfiguration": "현재 구성",
+        "summarySentence": "{maxSubmissions} 제출을 {timeWindow} 분마다 허용합니다. 초과하면 {blockDuration} 분 동안 차단합니다.",
+        "summaryExample": "예: 사용자가 {timeWindow} 분 내에 {maxSubmissions} 번 제출하면 {blockDuration} 분 동안 차단됩니다.",
+        "disabledDescription": "속도 제한은 제출 빈도를 제어하여 스팸 및 남용으로부터 양식을 보호하는 데 도움이 됩니다.",
+        "actionsAria": "속도 제한 작업",
+        "saveAria": "속도 제한 설정 저장",
+        "saved": "속도 제한 설정 저장 성공",
+        "saveFailed": "속도 제한 설정 저장 실패",
+        "defaultMessage": "너무 많은 제출. 나중에 다시 시도하십시오."
+      },
+      "responseLimitSection": {
+        "title": "응답 제한",
+        "description": "설정된 총 횟수 이후 제출 수락 중단",
+        "enableLabel": "응답 제한 활성화",
+        "enableDescription": "이 양식이 허용하는 총 제출 횟수 제한",
+        "maxResponsesLabel": "최대 응답",
+        "maxResponsesDescription": "이 양식이 받아들일 수 있는 응답의 총 수를 제한합니다. 한도에 도달하면 새 제출이 차단됩니다.",
+        "limitReachedLabel": "한도에 도달했을 때 표시할 메시지",
+        "limitReachedDescription": "총 응답 제한에 도달한 후 표시되는 메시지",
+        "limitReachedPlaceholder": "이 양식은 더 이상 응답을 받아들이지 않습니다.",
+        "disabledDescription": "양식이 상한 없이 계속 제출을 받아들여야 하는 경우 이 옵션을 비활성화하십시오.",
+        "actionsAria": "응답 제한 작업",
+        "saveAria": "응답 제한 설정 저장",
+        "saved": "응답 제한이 성공적으로 저장되었습니다.",
+        "saveFailed": "응답 제한을 저장하지 못했습니다.",
+        "defaultMessage": "이 양식은 더 이상 응답을 받아들이지 않습니다."
+      },
+      "botProtectionSection": {
+        "title": "봇 보호",
+        "description": "자동화된 제출을 자동으로 감지하고 차단합니다.",
+        "ariaSettings": "봇 보호 설정",
+        "enableLabel": "봇 보호 활성화",
+        "enableDescription": "양식 제출에 대한 안티 봇 검사 추가",
+        "detectionMessageLabel": "탐지 메시지",
+        "detectionMessagePlaceholder": "의심스러운 봇 활동으로 인해 제출이 차단되었습니다.",
+        "detectionMessageDescription": "자동화된 제출이 차단되었을 때 표시되는 메시지",
+        "currentConfiguration": "현재 구성",
+        "statusEnabledPrefix": "봇 보호 기능은 현재",
+        "enabled": "활성화됨",
+        "statusEnabledSuffix": "이 양식에 대해",
+        "vercelTitle": "Vercel 보호",
+        "vercelDescription": "Vercel에 배포된 경우 추가적인 악용 방지 검사가 적용될 수 있습니다.",
+        "disabledDescription": "자동화된 도구 및 스크립트 트래픽으로 인한 스팸을 줄이기 위해 봇 보호를 활성화하세요.",
+        "actionsAria": "봇 보호 작업",
+        "saveAria": "봇 보호 설정 저장",
+        "saved": "봇 보호 설정이 성공적으로 저장되었습니다",
+        "saveFailed": "봇 보호 설정 저장에 실패했습니다"
+      },
+      "quizSection": {
+        "title": "퀴즈 및 점수",
+        "description": "퀴즈 행동 및 점수 규칙 구성",
+        "ariaSettings": "퀴즈 설정",
+        "enableLabel": "퀴즈 모드 활성화",
+        "enableDescription": "퀴즈 기능 활성화, 퀴즈 점수 및 결과 메시지",
+        "passingScoreLabel": "통과 점수 (%)",
+        "passingScoreDescription": "합격하기 위해 요구되는 최소 비율 설정",
+        "timeLimitLabel": "시간 제한 (분)",
+        "timeLimitDescription": "퀴즈 완료 시간 제한(선택사항)",
+        "timeLimitPlaceholder": "제한 없음으로 두고 싶으면 빈칸으로 두세요",
+        "showScoreLabel": "사용자에게 점수 표시",
+        "showScoreDescription": "폼 제출 후 사용자의 점수를 표시합니다",
+        "showCorrectAnswersLabel": "정답 표시",
+        "showCorrectAnswersDescription": "제출 후 정답과 설명을 표시합니다",
+        "allowRetakeLabel": "재응시 허용",
+        "allowRetakeDescription": "사용자가 점수를 개선하기 위해 퀴즈를 재응시하도록 허용합니다",
+        "customMessagesLabel": "맞춤형 결과 메시지",
+        "successMessageLabel": "성공 메시지",
+        "successMessagePlaceholder": "잘했습니다! 퀴즈에 합격했습니다.",
+        "improvementMessageLabel": "개선 메시지",
+        "improvementMessagePlaceholder": "다시 검토하고 시도해 주세요.",
+        "messagePlaceholderHelp": "{score}, {percentage}, {total}를 플레이스홀더로 사용",
+        "actionsAria": "퀴즈 작업",
+        "saveAria": "퀴즈 설정 저장",
+        "saved": "퀴즈 설정이 성공적으로 저장되었습니다",
+        "savedToast": "퀴즈 설정 저장됨",
+        "saveFailed": "퀴즈 설정 저장 실패"
+      },
+      "apiSection": {
+        "title": "API 액세스",
+        "description": "API 엔드포인트를 통한 제출 허용 토글",
+        "authRequired": "사용자 인증 필요",
+        "enableSupportLabel": "API 지원 활성화",
+        "enableSupportDescription": "안전한 API 키를 통해 외부 제출을 활성화합니다.",
+        "apiEndpointLabel": "API 엔드포인트",
+        "copyEndpointAria": "API 엔드포인트 복사",
+        "endpointCopied": "API 엔드포인트 복사됨",
+        "apiKeyLabel": "API 키",
+        "apiKeySecretHint": "이 키를 비밀리에 보관하십시오. 이 키를 가진 사람은 이 폼에 제출할 수 있습니다.",
+        "generateApiKey": "API 키 생성",
+        "regenerateKey": "키 재생성",
+        "revokeKey": "키 취소",
+        "generating": "생성 중...",
+        "revoking": "취소 중...",
+        "copyApiKeyAria": "API 키 복사",
+        "showApiKeyAria": "API 키 표시",
+        "hideApiKeyAria": "API 키 숨기기",
+        "keyCopied": "API 키 복사됨",
+        "keyGenerated": "API 키 생성됨",
+        "keyGenerateFailed": "API 키 생성 실패",
+        "keyRevoked": "API 키 취소됨",
+        "keyRevokeFailed": "API 키 취소 실패",
+        "showCodeExamples": "코드 예시 표시",
+        "hideCodeExamples": "코드 예시 숨기기",
+        "javascriptNodeLabel": "자바스크립트 / Node.js",
+        "sampleName": "Jane Doe",
+        "sampleEmail": "jane@example.com",
+        "sampleMessage": "API에서 인사드립니다",
+        "sampleValue": "샘플 값",
+        "copyCodeAria": "예시 코드 복사",
+        "downloadCodeAria": "예시 코드 다운로드",
+        "codeCopied": "예시 코드 복사됨",
+        "codeDownloaded": "예시 코드 다운로드됨",
+        "betaBadge": "BETA",
+        "integrationRateLimiting": "속도 제한",
+        "integrationRateLimitingDescription": "스팸 폭주로부터 엔드포인트를 보호합니다.",
+        "integrationResponseLimits": "응답 제한",
+        "integrationResponseLimitsDescription": "허용되는 총 제출 횟수를 제한합니다.",
+        "integrationDuplicatePrevention": "중복 방지",
+        "integrationDuplicatePreventionDescription": "동일한 사용자의 반복 제출을 줄입니다.",
+        "integrationProfanityFilter": "욕설 필터",
+        "integrationProfanityFilterDescription": "부적절한 콘텐츠를 차단하거나 샌니타이즈합니다.",
+        "emptyStateDescription": "안전한 API 키를 생성하려면 API 지원을 활성화하십시오.",
+        "actionsAria": "API 액세스 작업",
+        "saveAria": "API 설정 저장",
+        "resetAria": "API 설정 재설정",
+        "settingsSaved": "API 설정이 성공적으로 저장되었습니다",
+        "settingsSaveFailed": "API 설정 저장 실패"
+      },
+      "webhooks": {
+        "panel": {
+          "endpointsTitle": "웹훅 엔드포인트",
+          "endpointsDescription": "외부 서비스에 제출을 전송합니다.",
+          "addWebhook": "웹훅 추가"
+        },
+        "list": {
+          "emptyState": "웹훅이 아직 설정되지 않았습니다. 첫 번째 웹훅을 추가하여 폼 제출을 받습니다.",
+          "active": "활성",
+          "inactive": "비활성",
+          "edit": "편집",
+          "delete": "삭제",
+          "test": "테스트",
+          "viewLogs": "로그 보기",
+          "events": {
+            "formSubmitted": "폼 제출됨",
+            "formViewed": "폼 보기",
+            "formStarted": "폼 시작됨"
+          }
+        },
+        "hook": {
+          "fetchFailed": "웹훅을 가져오는데 실패했습니다",
+          "created": "웹훅이 성공적으로 생성되었습니다",
+          "createFailed": "웹훅 생성에 실패했습니다",
+          "updated": "웹훅이 성공적으로 업데이트되었습니다",
+          "updateFailed": "웹훅 업데이트에 실패했습니다",
+          "deleted": "웹훅이 성공적으로 삭제되었습니다",
+          "deleteFailed": "웹훅 삭제에 실패했습니다"
+        },
+        "formModal": {
+          "addTitle": "웹훅 추가",
+          "editTitle": "웹훅 편집",
+          "stepsAria": "웹훅 설정 단계",
+          "steps": {
+            "basics": "기본 정보",
+            "events": "이벤트",
+            "headers": "헤더",
+            "payload": "페이로드",
+            "notifications": "알림",
+            "details": "검토"
+          },
+          "errors": {
+            "missingBasics": "웹훅 URL이 필요합니다.",
+            "missingEvent": "최소 하나의 이벤트를 선택하세요.",
+            "missingBasicsAndEvent": "웹훅 URL과 최소 하나의 이벤트가 필요합니다."
+          },
+          "webhookUrl": "웹훅 URL",
+          "webhookUrlPlaceholder": "https://example.com/webhook",
+          "nameOptional": "이름 (선택 사항)",
+          "namePlaceholder": "슬랙 알림",
+          "descriptionOptional": "설명 (선택 사항)",
+          "descriptionPlaceholder": "폼 데이터를 전송할 웹훅",
+          "eventsHelp": "이 웹훅을 트리거할 이벤트를 선택하세요.",
+          "events": {
+            "formSubmitted": "폼 제출됨",
+            "formViewed": "폼 보기",
+            "formStarted": "폼 시작됨"
+          },
+          "httpMethod": "HTTP 메서드",
+          "selectHttpMethodAria": "HTTP 메서드 선택",
+          "selectMethodPlaceholder": "메서드 선택",
+          "httpMethodDescriptions": {
+            "post": "새 리소스 생성 또는 페이로드 데이터 전송",
+            "put": "기존 리소스 교체",
+            "patch": "기존 리소스 부분 업데이트",
+            "delete": "리소스 삭제",
+            "get": "데이터를 변경하지 않고 정보 가져오기",
+            "head": "헤더만 가져오기"
+          },
+          "addHeader": "헤더 추가",
+          "headerName": "헤더 이름",
+          "headerNamePlaceholder": "인증",
+          "headerNameAria": "웹훅 헤더 이름",
+          "headerValue": "헤더 값",
+          "headerValuePlaceholder": "베어러 토큰",
+          "headerValueAria": "웹훅 헤더 값",
+          "removeHeaderAria": "헤더 제거",
+          "headersHelp": "사용자 지정 헤더는 선택 사항이며 각 웹훅 요청과 함께 전송됩니다.",
+          "payloadTemplateOptional": "페이로드 템플릿 (선택 사항)",
+          "availableVariables": "사용 가능한 변수",
+          "variables": {
+            "formData": "제출된 폼 데이터 객체",
+            "formId": "폼 식별자",
+            "submissionId": "제출 식별자",
+            "event": "이벤트 트리거",
+            "timestamp": "이벤트 타임스탬프",
+            "formatted": "사람이 읽을 수 있는 요약"
+          },
+          "notificationEmailOptional": "알림 이메일 (선택 사항)",
+          "notificationEmailPlaceholder": "alerts@example.com",
+          "emailOnSuccess": "성공한 전달에 대한 이메일",
+          "emailOnFailure": "실패한 전달에 대한 이메일",
+          "selectAll": "모두 선택",
+          "clear": "지우기",
+          "back": "뒤로",
+          "next": "다음",
+          "skip": "건너뛰기",
+          "cancel": "취소",
+          "createWebhook": "웹훅 생성",
+          "updateWebhook": "웹훅 업데이트"
+        },
+        "testDialog": {
+          "title": "웹훅 테스트",
+          "description": "엔드포인트를 확인하기 위해 테스트 이벤트를 전송합니다.",
+          "endpointTitle": "엔드포인트",
+          "nameLabel": "이름",
+          "untitledWebhook": "제목 없는 웹훅",
+          "descriptionLabel": "설명",
+          "methodLabel": "HTTP 메서드",
+          "urlLabel": "URL",
+          "triggersTitle": "트리거",
+          "events": {
+            "formSubmitted": "폼 제출됨",
+            "formViewed": "폼 보기",
+            "formStarted": "폼 시작됨"
+          },
+          "modeTitle": "테스트 모드",
+          "mode": {
+            "real": "실제 페이로드를 전송",
+            "success": "성공 응답 강제",
+            "failure": "실패 응답 강제"
+          },
+          "sendTest": "테스트 전송",
+          "close": "닫기",
+          "success": "테스트가 성공적으로 전송됨",
+          "failed": "테스트 실패",
+          "testSent": "웹훅 테스트 전송됨",
+          "testFailed": "웹훅 테스트 실패",
+          "testFailedNetwork": "웹훅 테스트 전송 실패"
+        },
+        "logDialog": {
+          "title": "웹훅 로그",
+          "status": "상태",
+          "response": "응답",
+          "attempt": "시도",
+          "resend": "재전송",
+          "resendSuccess": "웹훅 재전송 성공",
+          "resendFailed": "웹훅 재전송 실패",
+          "copied": "클립보드에 복사됨",
+          "copyFailed": "복사 실패",
+          "copyCodeAria": "페이로드 복사",
+          "viewPayload": "페이로드 보기",
+          "payloadTitle": "페이로드",
+          "noPayloadDataTitle": "페이로드 데이터 없음",
+          "noPayloadDataDescription": "이 로그 항목에 대해 페이로드가 제공되지 않음",
+          "noPayloadReasonMethod": "이 요청 유형에는 페이로드가 포함되지 않음",
+          "noPayloadReasonError": "오류로 인해 페이로드 캡처 실패",
+          "noPayloadReasonEmpty": "페이로드 데이터가 저장되지 않음",
+          "eventInformation": "이벤트 정보",
+          "eventLabel": "이벤트",
+          "formNameLabel": "폼 이름",
+          "formIdLabel": "폼 ID",
+          "submissionIdLabel": "제출 ID",
+          "ipAddressLabel": "IP 주소",
+          "formFields": "폼 필드",
+          "rawFormData": "원시 폼 데이터",
+          "rawJson": "원시 JSON",
+          "formatted": "포맷됨",
+          "additionalData": "추가 데이터",
+          "notAvailable": "사용 불가",
+          "unknown": "알 수 없음",
+          "complexObject": "복잡한 객체",
+          "complexArray": "복잡한 배열",
+          "failedCount": "{count} 실패",
+          "pendingCount": "{count} 보류",
+          "successfulCount": "{count} 성공",
+          "noLogsTitle": "아직 로그 없음",
+          "noLogsDescription": "전달 기록을 보려면 이 웹훅에 이벤트를 전송하세요",
+          "errorTitle": "로드를 실패",
+          "fetchFailed": "웹훅 로그 로드 실패"
+        }
+      },
+      "designSection": {
+        "title": "디자인",
+        "description": "표시 및 사용자 지정 제어",
+        "advancedTitle": "고급 사용자 지정",
+        "advancedDescription": "집중된 패널에서 색상, 타이포그래피, 간격 등을 미세 조정하세요",
+        "openAria": "새 탭에서 사용자 지정 패널 열기",
+        "openLabel": "사용자 지정 패널 열기…"
+      }
+    },
+    "fieldRenderer": {
+      "scheduler": {
+        "title": "스케줄러",
+        "openScheduler": "스케줄러 열기",
+        "embedTitle": "스케줄러 임베드",
+        "notConfigured": "스케줄러 링크가 설정되지 않음",
+        "close": "닫기"
+      },
+      "email": {
+        "defaultPlaceholder": "이메일 주소 입력",
+        "autocompleteHint": "탭 또는 클릭하여 완료: ",
+        "completeEmailAria": "이메일 주소 완료",
+        "completeButton": "완료",
+        "autocompleteBadge": "자동 완성: ",
+        "allowedDomainsLabel": "허용된 도메인: "
+      },
+      "fileUpload": {
+        "bytesUnit": "바이트",
+        "uploadFailed": "업로드 실패",
+        "uploadErrorTitle": "업로드 오류",
+        "uploadedFiles": "업로드된 파일 ({count})",
+        "uploadedBadge": "업로드됨",
+        "removeFileAria": "{name} 제거",
+        "maxFilesAndSize": "최대 {maxFiles} 파일, 각각 최대 {maxSize}",
+        "allowedTypes": "허용된 유형"
+      },
+      "social": {
+        "platforms": {
+          "linkedin": "LinkedIn",
+          "twitter": "X (트위터)",
+          "youtube": "YouTube",
+          "instagram": "Instagram",
+          "facebook": "Facebook",
+          "github": "GitHub",
+          "website": "웹사이트"
+        },
+        "customLink": "사용자 지정 링크 {index}",
+        "customLinkPlaceholder": "https://example.com",
+        "preview": "미리보기"
+      },
+      "signature": {
+        "drawHere": "여기에 서명을 그리세요",
+        "clear": "지우기",
+        "preview": "미리보기",
+        "previewAlt": "시그니처 미리보기"
+      },
+      "rating": {
+        "groupAria": "평가",
+        "rateAria": "비율 {index} {type}"
+      },
+      "poll": {
+        "fetchFailed": "옵션을 불러오는데 실패했습니다",
+        "resultsTitle": "투표 결과",
+        "totalVotes": "{count} 총 투표수",
+        "votes": "{count} 투표"
+      }
+    },
+    "formRenderer": {
+      "shared": {
+        "poweredBy": "제공: ",
+        "incorrectPassword": "비밀번호가 틀렸습니다!",
+        "passwordProtectionMessage": "이 양식은 비밀번호로 보호됩니다. 계속하려면 비밀번호를 입력하십시오."
+      },
+      "successScreen": {
+        "title": "감사합니다!",
+        "defaultMessage": "폼이 성공적으로 제출되었습니다.",
+        "redirecting": "잠시 후 리디렉션됩니다...",
+        "poweredBy": "제공: "
+      },
+      "quizResults": {
+        "titlePassed": "축하합니다!",
+        "titleComplete": "퀴즈 완료",
+        "descriptionPassed": "퀴즈를 성공적으로 완료했습니다!",
+        "descriptionRetry": "퀴즈에 참여해주셔서 감사합니다. 계속 연습하세요!",
+        "score": "점수",
+        "points": "포인트",
+        "answered": "답변함",
+        "totalQuestions": "총 질문 수",
+        "passed": "통과",
+        "needsImprovement": "개선 필요",
+        "retakeQuiz": "퀴즈 다시 보기",
+        "questionByQuestion": "문제별 결과",
+        "questionLabel": "문제 {index}: {label}",
+        "yourAnswer": "당신의 답변:",
+        "noAnswer": "답변 없음",
+        "correctAnswer": "정답:",
+        "pointsLower": "포인트"
+      },
+      "multiStep": {
+        "previous": "이전",
+        "next": "다음",
+        "submit": "제출",
+        "defaults": {
+          "formTitle": "폼"
+        },
+        "validation": {
+          "required": "이 필드는 필수입니다",
+          "emailInvalid": "유효한 이메일 주소를 입력해 주세요",
+          "minLength": "최소 {count} 개의 문자여야 합니다",
+          "maxLength": "길이는 {count} 이하로 입력해야 합니다"
+        },
+        "toasts": {
+          "submitSuccess": "폼이 성공적으로 제출되었습니다!",
+          "botDetected": "봇 감지됨. 접근 거부됨.",
+          "duplicateSubmission": "이미 이 폼을 제출했습니다.",
+          "rateLimitExceeded": "너무 많은 요청. 나중에 다시 시도하세요.",
+          "responseLimitReached": "이 양식은 더 이상 응답을 받아들이지 않습니다.",
+          "contentValidationFailed": "제출물에 부적절한 콘텐츠가 포함되어 있습니다.",
+          "submitFailed": "폼 제출 실패",
+          "submitFailedTryAgain": "폼 제출 실패. 다시 시도하세요."
+        }
+      },
+      "singleStep": {
+        "fixHighlightedErrors": "제출 전에 강조 표시된 오류를 수정하세요.",
+        "submit": "제출"
+      },
+      "duplicateSubmission": {
+        "title": "중복 제출 감지됨",
+        "wait": "잠시 기다리세요 {time}",
+        "attemptsLeft": "{count, plural, one {남은 시도 #회} other {남은 시도 #회}}",
+        "tryAgain": "다시 시도",
+        "waitBeforeRetry": "다시 제출하기 전에 잠시 기다리세요.",
+        "units": {
+          "seconds": "{count, plural, one {#초} other {#초}}",
+          "minutes": "{count, plural, one {#분} other {#분}}",
+          "hours": "{count, plural, one {#시간} other {#시간}}",
+          "days": "{count, plural, one {#일} other {#일}}"
+        }
+      }
+    }
+  },
+  "aiBuilder": {
+    "client": {
+      "createFormWithKiko": "Kiko로 폼 만들기",
+      "streamError": "오류: {error}",
+      "generatingResponse": "응답 생성 중…",
+      "loading": "로딩 중…",
+      "suggestions": {
+        "contactForm": "연락처 폼 만들기",
+        "customerFeedbackSurvey": "고객 피드백 설문조사",
+        "eventRegistrationForm": "이벤트 등록 폼",
+        "jobApplicationForm": "구직 신청 폼"
+      }
+    },
+    "chatHeader": {
+      "backToFormBuilder": "폼 빌더로 돌아가기",
+      "title": "Kiko AI"
+    },
+    "chatInput": {
+      "messageToKiko": "Kiko AI에게 메시지 보내기",
+      "placeholder": "생성하려는 폼을 설명하세요…",
+      "sendMessage": "메시지 보내기",
+      "sendHelp": "엔터 키를 눌러 보내거나, 쉬프트+엔터 키로 새 줄로 이동, 또는 ⌘/컨트롤+엔터 키로 보내기"
+    },
+    "welcome": {
+      "heading": "Kiko가 오늘 도와드릴 수 있는 방법은 무엇인가요?",
+      "description": "안녕하세요, 저는 Kiko - AI 기반 폼 어시스턴트입니다.\n폼 생성, 편집 또는 분석을 요청하세요!"
+    },
+    "preview": {
+      "title": "Kiko AI",
+      "formFallback": "폼 {index}",
+      "viewJson": "JSON 보기",
+      "useThisForm": "이 폼 사용",
+      "noFormSelected": "폼이 선택되지 않았습니다."
+    },
+    "jsonModal": {
+      "title": "폼 JSON 스키마",
+      "description": "폼에 대해 생성된 JSON 스키마 보기 또는 복사",
+      "close": "닫기"
+    }
+  },
+  "analytics": {
+    "formAnalytics": {
+      "submissionExported": "제출 내보내기 성공",
+      "formDeleted": "폼 삭제 성공",
+      "failedDeleteForm": "폼 삭제 실패",
+      "backToDashboard": "대시보드로 돌아가기",
+      "published": "게시됨",
+      "draft": "초안",
+      "analyticsSubtitle": "폼 분석 및 제출 데이터",
+      "formActions": "폼 작업",
+      "editForm": "폼 편집",
+      "shareForm": "공유 양식",
+      "viewSubmissions": "제출 내역 보기",
+      "moreActions": "더 많은 작업",
+      "exportCsv": "CSV로 내보내기",
+      "exportJson": "JSON으로 내보내기",
+      "deleteForm": "양식 삭제",
+      "openKiko": "Kiko AI 열기",
+      "kiko": "Kiko AI",
+      "kikoTooltip": "AI 양식 분석",
+      "recentSubmissions": "최근 제출 내역",
+      "viewAll": "전체 보기",
+      "noSubmissionsTitle": "아직 제출 내역이 없습니다",
+      "noSubmissionsDescription": "사용자가 양식을 작성하기 시작하면 응답이 여기에 표시됩니다.",
+      "submission": "제출 내역 {id}",
+      "fieldsCount": "{count} 필드",
+      "view": "보기",
+      "viewSubmissionDetails": "제출 내역 자세히 보기",
+      "viewMoreSubmissions": "더 보기 {count}개의 제출 내역",
+      "noDataToExport": "내보낼 데이터가 없습니다",
+      "csvExportSuccess": "데이터를 CSV로 내보냈습니다!",
+      "jsonExportSuccess": "데이터를 내보냈습니다!",
+      "deleteModalTitle": "양식 삭제",
+      "deleteModalConfirm": "양식 삭제",
+      "deleteModalCancel": "취소",
+      "deleteModalDescription": "\"{title}\"을(를) 삭제하시겠습니까? 이 작업은 취소할 수 없으며 양식과 모든 제출 내역을 영구적으로 제거합니다.",
+      "formPublished": "양식이 게시되었습니다!"
+    },
+    "statsCards": {
+      "totalSubmissions": "총 제출 내역",
+      "formFields": "폼 필드",
+      "completionRate": "완료율",
+      "last30Days": "최근 30일",
+      "avgDailySubmissions": "평균 일일 제출 내역",
+      "bounceRate": "반송률",
+      "peakHour": "성수기",
+      "uniqueResponses": "고유 응답"
+    },
+    "infoCards": {
+      "lastSubmission": "마지막 제출 내역",
+      "fromIp": "부터 {ip}",
+      "noSubmissionsYet": "아직 제출 내역이 없습니다",
+      "formStatus": "양식 상태",
+      "published": "게시됨",
+      "created": "생성됨",
+      "updated": "업데이트됨",
+      "yes": "예",
+      "no": "아니오",
+      "quickStats": "빠른 통계",
+      "avgFieldsCompleted": "평균 작성 필드",
+      "mostActiveDay": "가장 활동적인 날",
+      "submissions": "{count}개의 제출 내역",
+      "formType": "폼 유형",
+      "multiStep": "다단계",
+      "singlePage": "단일 페이지"
+    },
+    "trendsChart": {
+      "title": "제출 내역 동향",
+      "noData": "데이터를 사용할 수 없습니다",
+      "submissions": "제출 내역"
+    },
+    "dropoff": {
+      "title": "중단점 분석",
+      "onlyMultiStep": "중단점 분석은 다단계 양식에 대해서만 제공됩니다.",
+      "subtitle": "사용자가 양식에서 중단되는 위치를 이해합니다.",
+      "step": "단계",
+      "reached": "도달함",
+      "dropoffPercent": "중단률",
+      "completionPercent": "완료율",
+      "ofTotal": "{total}의",
+      "stepFallback": "{index} 단계",
+      "dropoffBarAria": "단계 {index} 중단 막대",
+      "completionBarAria": "단계 {index} 완료 막대"
+    },
+    "chatModal": {
+      "title": "Kiko",
+      "description": "양식 분석에 대해 AI와 대화"
+    },
+    "chat": {
+      "emptyTitle": "Kiko에게 무엇이든 물어보세요",
+      "emptyDescription": "양식 데이터에서 즉시 통찰력과 분석을 얻습니다. 자연어로 질문을 입력하세요.",
+      "thinking": "생각 중...",
+      "inputPlaceholder": "양식 분석에 대해 물어보세요...",
+      "inputHelp": "전송하려면 <enter></enter>를 누르고, 새 줄은 <shiftEnter></shiftEnter>를 누르세요"
+    },
+    "submissionDetails": {
+      "title": "{id} 제출 내역 세부 정보",
+      "submissionId": "제출 ID",
+      "submittedAt": "제출 시간",
+      "ipAddress": "IP 주소",
+      "formData": "양식 데이터",
+      "emptyValue": "—"
+    },
+    "submissions": {
+      "backToAnalytics": "분석으로 돌아가기",
+      "published": "게시됨",
+      "draft": "초안",
+      "formSubmissions": "양식 제출 내역 ({count})",
+      "exportActions": "작업 내보내기",
+      "exportCsv": "CSV로 내보내기",
+      "exportJson": "JSON으로 내보내기",
+      "viewDetailedAnalytics": "자세한 분석 보기",
+      "submissions": "제출 내역",
+      "searchSubmissions": "제출 내역 검색...",
+      "noMatchingSubmissions": "일치하는 제출 내역이 없습니다",
+      "noSubmissionsYet": "아직 제출 내역이 없습니다",
+      "noSubmissionsDescription": "사용자가 양식을 작성하기 시작하면 응답이 여기에 표시됩니다.",
+      "adjustSearchTerms": "제출 내역을 찾으려면 검색어를 조정해 보세요.",
+      "id": "ID",
+      "submitted": "제출됨",
+      "ipAddress": "IP 주소",
+      "fields": "필드",
+      "actions": "작업",
+      "fieldsCount": "{count} 필드",
+      "fieldsCount_plural": "{count} 필드",
+      "view": "보기",
+      "showingRange": "{start}-{end} 중 {total} 건의 제출 내역 표시",
+      "previous": "이전",
+      "next": "다음",
+      "pageOf": "페이지 {page} / {total}",
+      "noSubmissionsToExport": "내보낼 제출 내역이 없습니다",
+      "submissionId": "제출 ID",
+      "submittedAt": "제출 시간",
+      "csvExportedSuccess": "CSV 내보내기를 성공적으로 완료했습니다",
+      "jsonExportedSuccess": "JSON 내보내기를 성공적으로 완료했습니다"
+    },
+    "premiumRequired": {
+      "analytics": {
+        "title": "프리미엄 필요",
+        "description": "폼 분석에 액세스하려면 프리미엄 구독이 필요합니다. 모든 기능을 잠금 해제하려면 업그레이드하세요.",
+        "viewPricing": "가격 보기"
+      },
+      "submissions": {
+        "title": "프리미엄 필요",
+        "description": "폼 제출 내역에 액세스하려면 프리미엄 구독이 필요합니다. 모든 기능을 잠금 해제하려면 업그레이드하세요.",
+        "viewPricing": "가격 보기"
+      }
+    }
+  },
+  "trialBanner": {
+    "aria": {
+      "status": "평가판 상태 알림"
+    },
+    "endsInPrefix": "무료 평가판이 종료됩니다: ",
+    "remainingSuffix": " 남음",
+    "expired": "평가판이 만료되었습니다",
+    "units": {
+      "day": "일",
+      "hour": "시간",
+      "minute": "분",
+      "second": "초"
+    }
+  },
+  "embed": {
+    "customizer": {
+      "subtitle": "폼에 대한 임베드 코드 사용자 지정 및 생성",
+      "showCode": "코드 보기",
+      "settings": "설정",
+      "preview": "미리보기",
+      "desktop": "데스크탑",
+      "mobile": "모바일"
+    },
+    "settings": {
+      "dimensions": {
+        "title": "크기",
+        "width": "너비",
+        "widthPlaceholder": "예: 100%, 800px",
+        "height": "높이",
+        "heightPlaceholder": "예: 600px, 100vh",
+        "makeResponsive": "반응형으로 만들기 (컨테이너 너비에 맞게 조정)"
+      },
+      "appearance": {
+        "title": "모양",
+        "backgroundColor": "배경색",
+        "allowTransparentBackground": "투명한 배경 허용 (배경색을 덮어씀)"
+      },
+      "border": {
+        "title": "테두리 및 스타일링",
+        "showBorder": "테두리 표시",
+        "borderColor": "테두리 색상",
+        "borderWidth": "테두리 너비 (px)",
+        "borderRadius": "테두리 반경 (px)",
+        "padding": "패딩 (px)",
+        "paddingHelp": "iframe 주변의 공간"
+      },
+      "performance": {
+        "title": "성능",
+        "loadingMode": "로딩 모드",
+        "loadingModePlaceholder": "로딩 모드 선택",
+        "lazy": "게으른 로딩 (추천)",
+        "eager": "즉시 로딩",
+        "help": "게으른 로딩은 iframe이 뷰포트에 들어올 때만 로딩하여 페이지 성능을 개선합니다"
+      }
+    },
+    "codeModal": {
+      "title": "임베드 코드",
+      "description": "프레임워크를 선택하고 코드를 복사하세요",
+      "codeLabel": "{mode} 코드",
+      "copied": "복사됨!",
+      "copy": "복사",
+      "close": "닫기",
+      "modes": {
+        "htmlDescription": "범용 HTML iframe",
+        "reactDescription": "React 컴포넌트",
+        "nextjsDescription": "Next.js 컴포넌트",
+        "vueDescription": "Vue.js 컴포넌트",
+        "wordpressDescription": "WordPress 숏코드"
+      },
+      "iframeTitle": "폼"
+    },
+    "testPage": {
+      "metadata": {
+        "title": "임베드 테스트 - IkiForm",
+        "description": "폼 임베딩 기능을 시연하기 위한 테스트 페이지"
+      },
+      "title": "폼 임베딩 테스트 페이지",
+      "descriptionPrefix": "이 페이지는 폼을 다양한 구성으로 임베딩하는 방법을 시연합니다. 방문",
+      "descriptionSuffix": "자신만의 임베드를 사용자 지정하려면",
+      "tryCustomizer": "임베드 사용자 지정 테스트",
+      "cards": {
+        "standard": {
+          "title": "표준 임베드",
+          "description": "600px 높이 - 데스크탑 보기에 적합",
+          "badge": "반응형",
+          "iframeTitle": "표준 폼 임베드"
+        },
+        "compact": {
+          "title": "컴팩트 임베드",
+          "description": "400px 높이 - 사이드바 및 작은 공간에 이상적",
+          "badge": "최소",
+          "iframeTitle": "컴팩트 폼 임베드"
+        },
+        "fixed": {
+          "title": "고정 너비 임베드",
+          "description": "800px 너비, 중앙에 배치 - 특정 레이아웃에 적합",
+          "badge": "사용자 지정 스타일",
+          "iframeTitle": "고정 너비 Form 삽입"
+        },
+        "react": {
+          "title": "React 컴포넌트 예제",
+          "description": "올바른 타이핑이 포함된 TypeScript React 컴포넌트",
+          "codeIframeTitle": "폼"
+        }
+      },
+      "guide": {
+        "title": "삽입 기능 사용 방법",
+        "description": "폼 삽입 단계별 가이드",
+        "steps": {
+          "step1": {
+            "title": "삽입 사용자화 도구 접근",
+            "prefix": "로 이동",
+            "suffix": "또는 폼 대시보드에서 삽입 버튼을 클릭하세요."
+          },
+          "step2": {
+            "title": "삽입 사용자화",
+            "item1": "너비 및 높이 치수 조정",
+            "item2": "테마 선택 (밝음, 어둡음, 자동)",
+            "item3": "테두리 및 스타일링 구성",
+            "item4": "로딩 동작 설정"
+          },
+          "step3": {
+            "title": "코드 가져오기",
+            "description": "HTML, React, Next.js, Vue 또는 WordPress에 대해 생성된 코드를 복사하여 웹사이트에 붙여넣습니다."
+          },
+          "step4": {
+            "title": "대시보드 통합",
+            "description": "폼 작업에서 삽입 버튼을 사용하여 폼 대시보드에서 직접 삽입 옵션을 액세스합니다."
+          }
+        }
+      }
+    }
+  }
+}

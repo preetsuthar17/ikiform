@@ -1,0 +1,517 @@
+{
+  "common": {
+    "dashboard": "控制台",
+    "feedback": "反馈",
+    "logOut": "退出登录",
+    "loading": "加载中",
+    "loadingProfile": "加载个人资料中",
+    "loadingFormsSidebar": "加载表单侧边栏中",
+    "loadingFormsManagement": "加载表单管理中"
+  },
+  "profile": {
+    "userProfileInformation": "用户个人资料信息",
+    "userNameAria": "用户名：{name}",
+    "premiumUserBadge": "高级用户徽章",
+    "userEmailAria": "用户邮箱：{email}"
+  },
+  "formsManagement": {
+    "aria": {
+      "management": "表单管理"
+    },
+    "header": {
+      "title": "我的表单",
+      "subtitle": "轻松创建、管理和分析您的表单",
+      "createNewForm": "创建新表单",
+      "createDialogTitle": "创建新表单",
+      "createDialogDescription": "选择您的开始方式。您可以使用 AI 生成、手动构建或导入加密文件。"
+    },
+    "createOptions": {
+      "aiBadge": "最推荐",
+      "aiCta": "使用 AI 开始",
+      "aiTitle": "使用 Kiko AI",
+      "aiDescription": "描述您的表单，让 Kiko AI 生成包含字段、逻辑和结构的完整初稿。",
+      "manualCta": "手动构建",
+      "manualTitle": "手动创建",
+      "manualDescription": "从空白表单开始，手动配置字段。",
+      "importCta": "导入文件",
+      "importTitle": "从文件导入",
+      "importDescription": "将受密码短语保护的 .ikiform 文件导入为新的草稿表单。"
+    },
+    "emptyState": {
+      "aria": "空状态 - 尚未创建任何表单",
+      "title": "暂无表单",
+      "description": "创建您的第一个表单开始使用吧。快速又简单！",
+      "createFirstForm": "创建第一个表单",
+      "dialog": {
+        "title": "您想如何创建表单？",
+        "description": "选择手动构建表单，或让 Kiko AI 为您生成。",
+        "createWithAI": "使用 Kiko AI",
+        "createManually": "手动创建"
+      }
+    },
+    "search": {
+      "aria": "表单搜索和筛选",
+      "searchAria": "搜索表单",
+      "placeholder": "按标题、描述或 ID 搜索表单...",
+      "openFilterMenu": "打开筛选菜单",
+      "activeFiltersAria": "{count} 个活跃筛选器",
+      "statusLabel": "状态",
+      "filterByAll": "按所有状态筛选",
+      "all": "全部",
+      "filterByPublished": "按已发布表单筛选",
+      "published": "已发布",
+      "filterByDraft": "按草稿筛选",
+      "draft": "草稿",
+      "sortByLabel": "排序方式",
+      "sortByLastUpdated": "按最后更新时间排序",
+      "lastUpdated": "最后更新",
+      "sortByDateCreated": "按创建日期排序",
+      "dateCreated": "创建日期",
+      "sortByTitle": "按标题字母顺序排序",
+      "titleAz": "标题 (A-Z)",
+      "clearAllFilters": "清除所有筛选器",
+      "activeFiltersGroup": "活跃筛选器",
+      "badgeSearch": "搜索：\"{query}\"",
+      "clearSearch": "清除搜索条件",
+      "badgeStatus": "状态：{status}",
+      "clearStatus": "清除状态筛选器",
+      "badgeSort": "排序：{sort}",
+      "sortTitleShort": "标题",
+      "sortCreatedShort": "创建时间",
+      "resetSort": "重置排序为最后更新"
+    },
+    "list": {
+      "untitledForm": "无标题表单",
+      "viewAnalyticsFor": "查看 {title} 的分析",
+      "formStatusAria": "表单状态：{status}",
+      "published": "已发布",
+      "draft": "草稿",
+      "publicTitle": "公开：\"{title}\"",
+      "updated": "{date} 更新",
+      "actionsFor": "{title} 的操作",
+      "formActions": "表单操作",
+      "editForm": "编辑表单",
+      "shareForm": "分享表单",
+      "duplicate": "复制",
+      "viewForm": "查看表单",
+      "viewAnalytics": "查看分析",
+      "embed": "嵌入",
+      "export": "导出",
+      "deleteForm": "删除表单",
+      "formsListAria": "表单列表"
+    },
+    "stats": {
+      "totalForms": "表单总数",
+      "published": "已发布",
+      "drafts": "草稿",
+      "loadingAria": "加载表单统计数据中",
+      "aria": "表单统计数据",
+      "sidebarAria": "表单统计侧边栏"
+    },
+    "emptySearch": {
+      "noMatch": "没有符合您搜索条件的表单。",
+      "clearFilters": "清除筛选器",
+      "clearAria": "清除所有搜索筛选器"
+    },
+    "deleteModal": {
+      "cancel": "取消",
+      "confirm": "删除表单",
+      "title": "删除表单",
+      "description": "确定要删除 \"{formTitle}\" 吗？此操作无法撤销，所有表单数据将永久丢失。"
+    },
+    "toasts": {
+      "failedLoadForms": "加载表单失败",
+      "failedShareForm": "分享表单失败",
+      "formDuplicated": "表单已复制",
+      "failedDuplicateForm": "复制表单失败",
+      "formImportedSuccess": "表单导入成功。",
+      "failedImportForm": "导入表单失败。",
+      "formDeletedSuccess": "表单删除成功",
+      "failedDeleteForm": "删除表单失败"
+    },
+    "shareModal": {
+      "title": "分享表单",
+      "publishedDescription": "使用以下链接或二维码与他人分享您的表单",
+      "unpublishedDescription": "发布您的表单以便与他人分享",
+      "shareLink": "分享链接",
+      "copied": "已复制",
+      "copyLink": "复制链接",
+      "hide": "隐藏",
+      "show": "显示",
+      "qrCode": "二维码",
+      "qrCodeForForm": "表单二维码",
+      "generating": "生成中...",
+      "scanForMobile": "扫描以便移动端快速访问",
+      "downloading": "下载中...",
+      "downloadQr": "下载二维码",
+      "needsPublish": "您的表单需要先发布才能公开分享。",
+      "publishing": "发布中...",
+      "publishForm": "发布表单",
+      "toasts": {
+        "failedGenerateQr": "生成二维码失败",
+        "linkCopied": "链接已复制到剪贴板！",
+        "failedCopyLink": "复制链接失败。请手动复制。",
+        "qrDownloaded": "二维码下载成功！",
+        "failedDownloadQr": "下载二维码失败"
+      }
+    },
+    "secureImport": {
+      "title": "从加密文件导入表单",
+      "description": "解密 .ikiform 文件并创建新的草稿表单。",
+      "encryptedFileLabel": "加密文件",
+      "encryptedFileHelp": "上传 .ikiform 加密导出文件。",
+      "passphraseLabel": "密码短语",
+      "passphrasePlaceholder": "输入导出时使用的密码短语",
+      "passphraseHelp": "至少需要 {count} 个字符。",
+      "decrypting": "解密中...",
+      "decryptFile": "解密文件",
+      "importedForm": "已导入表单",
+      "decryptToLoadSettings": "解密文件以加载导入设置。",
+      "preserveApiSettings": "保留 API 设置（API 密钥和启用状态）",
+      "preservePassword": "保留密码保护密码",
+      "preserveNotificationEmail": "保留通知接收者邮箱",
+      "cancel": "取消",
+      "importing": "导入中...",
+      "importAsNewForm": "作为新表单导入",
+      "decryptToPreview": "解密文件以预览导入的表单。",
+      "errors": {
+        "chooseFile": "请选择一个加密的 .ikiform 文件。",
+        "passphraseMinChars": "密码短语至少需要 {count} 个字符。",
+        "failedDecrypt": "解密导入文件失败。",
+        "wrongPassphrase": "密码短语错误或文件可能已被篡改。",
+        "decryptBeforeImport": "请在导入前解密文件。",
+        "failedImport": "导入表单失败。"
+      },
+      "toasts": {
+        "fixHighlightedFields": "请修复高亮显示的字段。",
+        "fileDecrypted": "文件已解密。请查看导入选项。"
+      }
+    },
+    "secureExport": {
+      "title": "导出表单（安全）",
+      "description": "为此表单创建加密的 .ikiform 文件。导入时需要相同的密码短语。",
+      "untitledForm": "无标题表单",
+      "formLabel": "表单",
+      "unknownForm": "未知表单",
+      "passphraseSetup": "密码短语设置",
+      "passphraseLabel": "密码短语",
+      "passphrasePlaceholder": "至少 {count} 个字符",
+      "passphraseHelper": "使用至少 12 个字符以获得更强的加密。",
+      "confirmPassphraseLabel": "确认密码短语",
+      "confirmPassphrasePlaceholder": "重新输入密码短语",
+      "confirmPassphraseHelper": "请重新输入完全相同的密码短语。",
+      "hidePassphrase": "隐藏密码短语",
+      "viewPassphrase": "查看密码短语",
+      "hideConfirmPassphrase": "隐藏确认密码短语",
+      "viewConfirmPassphrase": "查看确认密码短语",
+      "cancel": "取消",
+      "exporting": "导出中...",
+      "exportEncryptedFile": "导出加密文件",
+      "strength": {
+        "notSet": "未设置",
+        "weak": "弱",
+        "good": "良好",
+        "strong": "强"
+      },
+      "errors": {
+        "passphraseMinChars": "密码短语至少需要 {count} 个字符。",
+        "confirmPassphraseMinChars": "确认密码短语至少需要 {count} 个字符。",
+        "passphrasesDoNotMatch": "密码短语不匹配。",
+        "noFormSelected": "未选择要导出的表单。",
+        "enterValidPassphrase": "请输入并确认有效的密码短语。",
+        "failedExport": "导出表单失败。"
+      },
+      "toasts": {
+        "exportCreated": "已创建加密表单导出。"
+      }
+    }
+  },
+  "admin": {
+    "page": {
+      "aria": {
+        "dashboard": "管理员控制台",
+        "announcements": "公告管理",
+        "expireTrials": "试用期到期管理",
+        "users": "用户管理"
+      },
+      "announcements": {
+        "title": "发送公告",
+        "signedInAs": "以 {email} 登录"
+      },
+      "expireTrials": {
+        "title": "使试用期到期",
+        "description": "手动运行定时任务以使免费试用期到期"
+      },
+      "users": {
+        "title": "所有用户（{count}）",
+        "description": "管理和查看所有注册用户"
+      }
+    },
+    "announcementForm": {
+      "labels": {
+        "recipientEmails": "收件人邮箱",
+        "subject": "主题",
+        "content": "内容（支持 Markdown）"
+      },
+      "placeholders": {
+        "recipientEmails": "one@example.com, two@example.com\\n或\\nthree@example.com",
+        "subject": "公告主题",
+        "content": "# 标题\\n\\n详情..."
+      },
+      "help": {
+        "recipientFormat": "用逗号或换行分隔。"
+      },
+      "actions": {
+        "loading": "加载中...",
+        "prefillFromUsers": "从用户自动填充",
+        "sendAnnouncement": "发送公告"
+      },
+      "toasts": {
+        "fetchEmailsFailed": "获取邮箱失败",
+        "loadedEmails": "已加载 {count} 个邮箱",
+        "sending": "正在发送公告...",
+        "sentCount": "已发送 {count} 封邮件",
+        "failedWithError": "失败：{error}",
+        "failedToSendFallback": "发送失败"
+      }
+    },
+    "expireTrialsControl": {
+      "title": "使试用期到期",
+      "description": "手动运行定时任务以使超过 14 天的免费试用期到期",
+      "unknownError": "未知错误",
+      "actions": {
+        "running": "运行中...",
+        "run": "运行试用期到期"
+      },
+      "result": {
+        "success": "成功",
+        "error": "错误",
+        "updatedUsersCount": "已更新 {count} 位用户",
+        "updatedUsers": "已更新用户："
+      },
+      "toasts": {
+        "updatedSuccess": "已成功将 {count} 位用户从试用版更新为免费版",
+        "failedWithError": "失败：{error}",
+        "errorWithMessage": "错误：{message}"
+      }
+    },
+    "usersTable": {
+      "search": {
+        "aria": "搜索用户",
+        "placeholder": "按名称、邮箱、客户名或 Polar ID 搜索用户..."
+      },
+      "filters": {
+        "premiumAria": "按高级状态筛选",
+        "trialAria": "按试用状态筛选",
+        "allPremium": "所有高级",
+        "premiumOnly": "仅高级",
+        "freeOnly": "仅免费",
+        "allTrial": "所有试用",
+        "trialOnly": "仅试用",
+        "noTrial": "无试用",
+        "clearAria": "清除所有筛选器",
+        "clear": "清除",
+        "filteredBy": "筛选条件："
+      },
+      "columns": {
+        "uid": "UID",
+        "name": "姓名",
+        "email": "邮箱",
+        "premium": "高级",
+        "trial": "试用",
+        "customerName": "客户名",
+        "polarId": "Polar ID",
+        "created": "创建时间",
+        "updated": "更新时间"
+      },
+      "sort": {
+        "uidAria": "按 UID 排序",
+        "nameAria": "按姓名排序",
+        "emailAria": "按邮箱排序",
+        "premiumAria": "按高级状态排序",
+        "trialAria": "按试用状态排序",
+        "createdAria": "按创建日期排序",
+        "updatedAria": "按更新日期排序"
+      },
+      "table": {
+        "aria": "用户表格"
+      },
+      "badges": {
+        "premium": "高级",
+        "free": "免费",
+        "freeTrial": "免费试用",
+        "noFreeTrial": "无免费试用"
+      },
+      "row": {
+        "viewDetailsFor": "查看 {name} 的详情",
+        "premiumStatusAria": "高级状态：{status}",
+        "trialStatusAria": "试用状态：{status}"
+      },
+      "showingRange": "显示第 {start}-{end} 条，共 {total} 位用户",
+      "showLabel": "显示：",
+      "itemsPerPageAria": "每页条数",
+      "empty": {
+        "filtered": "没有符合筛选条件的用户",
+        "default": "未找到用户"
+      },
+      "pagination": {
+        "pageOf": "第 {current} 页，共 {total} 页",
+        "previousAria": "转到上一页",
+        "previous": "上一页",
+        "goToPageAria": "转到第 {page} 页",
+        "nextAria": "转到下一页",
+        "next": "下一页"
+      }
+    },
+    "userControls": {
+      "title": "管理员控制",
+      "description": "管理用户状态和权限",
+      "sections": {
+        "freeTrial": "免费试用",
+        "premiumStatus": "高级状态",
+        "dangerZone": "危险区域"
+      },
+      "actions": {
+        "removeTrial": "移除试用",
+        "assignTrial": "分配试用",
+        "removePremium": "移除高级",
+        "assignPremium": "分配高级",
+        "deleteUser": "删除用户"
+      },
+      "warning": {
+        "label": "警告：",
+        "message": "删除用户将永久删除其所有表单、提交记录和数据。此操作无法撤销。"
+      },
+      "confirm": {
+        "title": "删除用户",
+        "confirm": "删除用户",
+        "cancel": "取消",
+        "description": "确定要删除用户 {userName} 吗？此操作无法撤销，将删除其所有表单和数据。"
+      }
+    },
+    "userProfile": {
+      "backToAdmin": "返回管理员",
+      "invalidUserId": {
+        "title": "无效的用户 ID",
+        "description": "URL 中未提供用户 ID。"
+      },
+      "notFound": {
+        "title": "找不到用户",
+        "description": "您查找的用户不存在。"
+      },
+      "userInformation": "用户信息",
+      "labels": {
+        "uid": "UID",
+        "premiumStatus": "高级状态",
+        "trialStatus": "试用状态",
+        "customerName": "客户名",
+        "polarCustomerId": "Polar 客户 ID",
+        "memberSince": "注册时间"
+      },
+      "badges": {
+        "premium": "高级",
+        "free": "免费",
+        "freeTrial": "免费试用",
+        "noTrial": "无试用"
+      },
+      "trialStatus": {
+        "title": "免费试用状态",
+        "expiredBadge": "试用已到期",
+        "endedDaysAgo": "免费试用于 {days} 天前结束",
+        "expiringSoonBadge": "即将到期",
+        "activeBadge": "试用中",
+        "daysLeft": "{days, plural, other {免费试用剩余 # 天}}",
+        "startedOn": "试用开始时间："
+      },
+      "forms": {
+        "title": "表单（{count}）",
+        "description": "此用户创建的所有表单",
+        "empty": "此用户尚未创建任何表单。",
+        "table": {
+          "formTitle": "表单标题",
+          "description": "描述",
+          "status": "状态",
+          "submissions": "提交数",
+          "created": "创建时间",
+          "actions": "操作"
+        },
+        "status": {
+          "published": "已发布",
+          "draft": "草稿"
+        },
+        "actions": {
+          "view": "查看",
+          "details": "详情"
+        }
+      }
+    },
+    "formDetails": {
+      "pageAria": "表单详情页",
+      "backToAdmin": "返回管理员",
+      "backToAdminAria": "返回管理员控制台",
+      "noDescription": "未提供描述",
+      "viewForm": "查看表单",
+      "viewFormAria": "在新标签页中查看表单",
+      "invalidFormId": {
+        "aria": "无效表单 ID 错误",
+        "title": "无效的表单 ID",
+        "description": "URL 中未提供表单 ID。"
+      },
+      "notFound": {
+        "aria": "表单未找到错误",
+        "title": "找不到表单",
+        "description": "您查找的表单不存在。"
+      },
+      "badges": {
+        "published": "已发布",
+        "draft": "草稿",
+        "enabled": "已启用",
+        "disabled": "已禁用"
+      },
+      "statistics": {
+        "aria": "表单统计数据",
+        "status": "状态",
+        "formStatusAria": "表单状态：{status}",
+        "submissions": "提交数",
+        "submissionsCountAria": "{count} 条提交",
+        "created": "创建时间",
+        "createdOnAria": "创建于 {date}",
+        "apiStatus": "API 状态",
+        "apiStatusAria": "API 状态：{status}"
+      },
+      "details": {
+        "title": "表单详情",
+        "formId": "表单 ID",
+        "formIdAria": "表单 ID：{id}",
+        "owner": "所有者",
+        "viewOwnerAria": "查看 {name} 的所有者详情",
+        "unknown": "未知",
+        "slug": "别名",
+        "slugAria": "表单别名：{slug}",
+        "notSet": "未设置",
+        "lastUpdated": "最后更新",
+        "lastUpdatedAria": "最后更新：{date}",
+        "apiKey": "API 密钥",
+        "apiKeyAria": "API 密钥：{key}"
+      },
+      "schema": {
+        "title": "表单架构",
+        "aria": "表单架构 JSON"
+      },
+      "submissions": {
+        "title": "表单提交（{count}）",
+        "description": "提交到此表单的所有回复",
+        "emptyAria": "无表单提交",
+        "empty": "暂无提交。",
+        "listAria": "表单提交列表",
+        "itemAria": "提交 {number}",
+        "itemLabel": "提交 #{number}",
+        "submittedOnAria": "提交于 {date}",
+        "ipAria": "IP 地址：{ip}",
+        "ipLabel": "IP：{ip}",
+        "fieldAria": "字段：{key}",
+        "valueAria": "{key} 的值：{value}"
+      }
+    }
+  }
+}

@@ -1,0 +1,2211 @@
+{
+  "common": {
+    "na": "Yok",
+    "premium": {
+      "title": "Premium gerektirir",
+      "viewPricing": "Fiyatları Gör",
+      "aiBuilderDescription": "AI form builder'ı kullanmak için premium abonelikが必要です. Tüm özellikleri kilidini açmak için yükseltin.",
+      "formBuilderDescription": "Form builder'ı kullanmak için premium abonelikが必要です. Tüm özellikleri kilidini açmak için yükseltin."
+    }
+  },
+  "formBuilder": {
+    "header": {
+      "title": "Form Oluşturucu",
+      "goToDashboard": "Gösterge Panosuna Git",
+      "fieldCount": "{count} alanı",
+      "fieldCount_plural": "{count} alanları",
+      "saving": "Kaydediliyor",
+      "moreActions": "Daha fazla işlem",
+      "multiStepForm": "Çok adımlı form",
+      "toggleMultiStepMode": "Çok adımlı modu değiştir",
+      "viewJson": "JSON'u Gör",
+      "analytics": "Analitik",
+      "share": "Paylaş",
+      "useKiko": "Kiko'yu Kullan",
+      "settings": "Ayarlar",
+      "publish": "Yayınla",
+      "published": "Yayınlandı",
+      "publishing": "Yayınlanıyor...",
+      "unpublishing": "Yayınlanmıyor...",
+      "publishForm": "Formu yayınla",
+      "unpublishForm": "Formu yayınlama",
+      "save": "Kaydet",
+      "saveForm": "Formu Kaydet",
+      "actionsAria": "Form oluşturucu işlemleri"
+    },
+    "modals": {
+      "formSettings": "Form Ayarları",
+      "internalTitle": "İç Başlık",
+      "internalTitlePlaceholder": "Referansınız için dahili başlık girin...",
+      "internalTitleDescription": "Bu başlık yalnızca sizin için gösterge panosunda ve form oluşturucuda görünür",
+      "publicTitle": "Kamu Başlığı",
+      "publicTitlePlaceholder": "Kullanıcılara gösterilecek başlık girin...",
+      "publicTitleDescription": "Bu başlık, kullanıcılara gerçek formda gösterilecektir. Boş bırakın ve dahili başlığı kullanın.",
+      "description": "Açıklama",
+      "descriptionPlaceholder": "Form açıklaması girin",
+      "submitButtonText": "Gönderme Düğmesi Metni",
+      "submitButtonTextPlaceholder": "Gönderme düğmesi metni",
+      "submit": "Gönder",
+      "successMessage": "Başarı Mesajı",
+      "successMessagePlaceholder": "Başarılı gönderim sonrası gösterilen mesaj",
+      "redirectUrlOptional": "Yönlendirme URL'si (isteğe bağlı)",
+      "redirectUrlPlaceholder": "https://example.com/thank-you",
+      "cancel": "İptal",
+      "saveSettings": "Ayarları Kaydet"
+    },
+    "page": {
+      "formFields": "Form Alanları",
+      "authRequired": "Kimlik Doğrulaması Gereklidir",
+      "authRequiredDescription": "Form oluşturucuyu kullanmak için lütfen giriş yapın.",
+      "goToLogin": "Girişe Git",
+      "stepDefaultTitle": "{index}. Adım",
+      "stepDefaultDescription": "Formunuzun ilk adımı",
+      "loadingCustomization": "Özelleştirme yükleniyor..."
+    },
+    "blockManager": {
+      "header": {
+        "title": "Form Yapısı",
+        "stepsCount": "{count, plural, one {# adım} other {# adım}}",
+        "description": "Formunuzu mantıksal bölümlere organize edin",
+        "addStepAria": "Forma yeni adım ekle",
+        "addStep": "Adım Ekle"
+      },
+      "item": {
+        "dragHandleAria": "{title}. adımı yeniden sıralamak için sürükleyin",
+        "dragToReorder": "Yeniden sıralamak için sürükleyin"
+      },
+      "headerActions": {
+        "stepBadge": "{index}. Adım",
+        "editStepAria": "{title}. adımı düzenle",
+        "deleteStepAria": "{title}. adımı sil",
+        "editStep": "Adımı düzenle",
+        "deleteStep": "Adımı sil",
+        "collapseStep": "Adımı daralt",
+        "expandStep": "Adımı genişlet"
+      },
+      "editForm": {
+        "stepTitlePlaceholder": "Adım başlığı",
+        "stepDescriptionPlaceholder": "Adım açıklaması (isteğe bağlı)",
+        "save": "Kaydet",
+        "cancel": "İptal"
+      },
+      "fieldsList": {
+        "empty": "Henüz alan yok. Sağdaki paletten alan ekleyin."
+      }
+    },
+    "multiStepNavigation": {
+      "deleteStep": "Adımı sil",
+      "addStep": "Adım ekle",
+      "deleteDialogTitle": "Adımı Sil",
+      "deleteDialogDescription": "Bu adımı silmek istediğinize emin misiniz? Bu işlem geri alınamaz.",
+      "cancel": "İptal"
+    },
+    "formFields": {
+      "addFieldToFormAria": "Forma alan ekle",
+      "addField": "Alan Ekle",
+      "addSpecificFieldAria": " {label} alanı ekle",
+      "formFields": "Form alanları",
+      "noFieldsInStep": "Bu adımda hiç alan yok",
+      "noFieldsYet": "Henüz hiç alan eklenmedi",
+      "addFieldsToStep": "Bu adıma paletten alanlar ekleyin",
+      "addFieldsFromLeftPanel": "Form oluşturmaya başlamak için sol panelden alanlar ekleyin",
+      "fieldsCount": "{count, plural, one {# alan} other {# alan}}",
+      "fieldAria": "{type} alanı",
+      "deleteFieldAria": "{type} alanını sil",
+      "deleteField": "Alan sil"
+    },
+    "jsonViewModal": {
+      "title": "Form Şeması JSON",
+      "description": "Geçerli form şemasının salt okunur görünümü. JSON'u kopyalamak için kopya düğmesini kullanın.",
+      "copySuccess": "JSON kopyalandı!",
+      "copyError": "JSON kopyalama başarısız oldu",
+      "copied": "Kopyalandı",
+      "copyJson": "JSON'u kopyala"
+    },
+    "settingsMobile": {
+      "sectionsAria": "Ayar bölümleri",
+      "goToSectionAria": "{section} ayarlarına git",
+      "backToListAria": "Ayarlar listesine geri dön",
+      "settings": "Ayarlar"
+    },
+    "creation": {
+      "title": "Yeni Form Oluştur",
+      "cancel": "İptal",
+      "back": "Geri",
+      "createForm": "Form Oluştur",
+      "reviewAction": "İncele",
+      "next": "İleri",
+      "types": {
+        "single": {
+          "title": "Tek Sayfa Formu",
+          "description": "Tüm alanların bir sayfada olduğu geleneksel form"
+        },
+        "multi": {
+          "title": "Çok Adımlı Form",
+          "description": "Çok adımlı kılavuz form deneyimi"
+        }
+      },
+      "typePreview": {
+        "stepOf": "{step}. adım {total}"
+      },
+      "configuration": {
+        "title": "Form detayları",
+        "description": "Formunuz için dahili ve genel bilgileri ayarlayın.",
+        "internalTitle": "İç Başlık",
+        "internalTitlePlaceholder": "Referansınız için dahili başlık girin…",
+        "internalTitleHelp": "Sadece pano ve oluşturucu görünür.",
+        "publicTitle": "Kamu Başlığı",
+        "publicTitlePlaceholder": "Kullanıcılara gösterilecek başlığı girin…",
+        "publicTitleHelp": "Formda kullanıcılara gösterilir. Dahili başlığı yeniden kullanmak için boş bırakın.",
+        "formDescription": "Form Açıklaması",
+        "formDescriptionPlaceholder": "Kullanıcıları yönlendirmek için kısa bir açıklama girin…",
+        "formDescriptionHelp": "İsteğe bağlı. Kullanıcıların formun amacını anlamasına yardımcı olur."
+      },
+      "review": {
+        "formType": "Form Türü",
+        "multiStepForm": "Çok Adımlı Form",
+        "singlePageForm": "Tek Sayfa Formu",
+        "multiStep": "Çok Adımlı",
+        "singlePage": "Tek Sayfa",
+        "editFormType": "Form türünü düzenle",
+        "formConfiguration": "Form Yapılandırması",
+        "editFormConfiguration": "Form yapılandırmasını düzenle",
+        "internalTitle": "İç Başlık",
+        "publicTitle": "Kamu Başlığı",
+        "description": "Açıklama",
+        "preview": "Önizleme",
+        "previewDescription": "Formunuzun anlık görüntüsü."
+      },
+      "stepIndicator": {
+        "progress": "İlerleme",
+        "stepCompleted": "{index}. adım tamamlandı",
+        "stepCurrent": "{index}. adım şu anda",
+        "step": "{index}. Adım"
+      }
+    },
+    "customize": {
+      "page": {
+        "savedCustomization": "Kaydedilen özelleştirme",
+        "saveFailed": "Değişiklikleri kaydetme başarısız oldu. Lütfen tekrar deneyin.",
+        "tabs": {
+          "presets": "Ön ayarlar",
+          "layout": "Düzen",
+          "colors": "Renkler",
+          "text": "Metin"
+        },
+        "backToCustomize": "Özelleştirmeye Geri Dön",
+        "previewForm": "Formu Önizle",
+        "customizeForm": "Formu Özelleştir",
+        "publicTitle": "\"{title}\" Genel başlığı:",
+        "customizationActions": "Özelleştirme işlemleri",
+        "back": "Geri",
+        "save": "Kaydet",
+        "customize": "Özelleştir"
+      },
+      "colors": {
+        "title": "Renk Ayarları",
+        "description": "Renkleri ve temayı özelleştir",
+        "backgroundColorLabel": "Arka Plan Rengi",
+        "backgroundColorHelp": "Form kabının arka plan rengini ayarlar",
+        "textColorLabel": "Metin Rengi",
+        "textColorHelp": "Formdaki tüm metin öğelerinin rengini ayarlar",
+        "primaryColorLabel": "Birinci Renk (Düğmeler ve Vurgu)",
+        "primaryColorHelp": "Düğmeler, odak durumları ve vurgu öğeleri için rengi ayarlar",
+        "borderColorLabel": "Sınır Rengi",
+        "borderColorHelp": "Giriş alanı sınırları ve bölücüler için renk ayarlar",
+        "websiteBackgroundColorLabel": "Websitesi Arka Plan Rengi",
+        "websiteBackgroundColorHelp": "Tüm websitesi/sayfa arka plan rengini ayarlar"
+      },
+      "typography": {
+        "title": "Tipografi Ayarları",
+        "description": "Yazı tiplerini ve metin stilini özelleştir",
+        "fontFamily": "Yazı Tipi Ailesi",
+        "fontFamilyPlaceholder": "Bir Google Yazı Tipi seç...",
+        "fontPreview": "Yazı Tipi Önizlemesi",
+        "previewLine1": "Hızlı kahverengi tilki tembel köpeğin üzerinden atlar",
+        "previewLine2": "Sayılarla örnek form metni 1234567890",
+        "fontHelp": "Yüzlerce Google Yazı Tipinden seçim yapın. Yazı tipi otomatik olarak yüklenecektir.",
+        "fontSize": "Yazı Tipi Boyutu",
+        "fontWeight": "Yazı Tipi Ağırlığı",
+        "selected": "Seçildi:",
+        "fontSizeOptions": {
+          "xs": {
+            "label": "Çok Küçük",
+            "description": "12px"
+          },
+          "sm": {
+            "label": "Küçük",
+            "description": "14px"
+          },
+          "base": {
+            "label": "Temel",
+            "description": "16px"
+          },
+          "lg": {
+            "label": "Büyük",
+            "description": "18px"
+          },
+          "xl": {
+            "label": "Çok Büyük",
+            "description": "20px"
+          }
+        },
+        "fontWeightOptions": {
+          "light": {
+            "label": "Hafif",
+            "description": "300"
+          },
+          "normal": {
+            "label": "Normal",
+            "description": "400"
+          },
+          "medium": {
+            "label": "Orta",
+            "description": "500"
+          },
+          "semibold": {
+            "label": "Yarı Kalın",
+            "description": "600"
+          },
+          "bold": {
+            "label": "Kalın",
+            "description": "700"
+          }
+        }
+      },
+      "layout": {
+        "title": "Düzen Ayarları",
+        "description": "Boşlukları ve yapıyı yapılandır",
+        "showProgressBar": "İlerleme Çubuğunu Göster",
+        "formWidth": "Form Genişliği",
+        "formWidthHelp": "Form konteynırının maksimum genişliğini kontrol eder",
+        "customWidth": "Özel Genişlik (örneğin, 600px, %80, 50rem)",
+        "customWidthPlaceholder": "Özel genişlik girin",
+        "internalPadding": "Dahili Dolgu",
+        "internalPaddingHelp": "Form konteynırının içindeki boşluğu kontrol eder",
+        "externalMargin": "Harici Kenar Boşluğu",
+        "externalMarginHelp": "Form konteynırının etrafındaki boşluğu kontrol eder",
+        "cornerRadius": "Köşe Yarıçapı",
+        "cornerRadiusHelp": "Form köşelerinin ne kadar yuvarlak görüneceğini kontrol eder",
+        "widthOptions": {
+          "sm": {
+            "label": "Küçük",
+            "description": "400px maksimum genişlik"
+          },
+          "md": {
+            "label": "Orta",
+            "description": "600px maksimum genişlik"
+          },
+          "lg": {
+            "label": "Büyük",
+            "description": "800px maksimum genişlik"
+          },
+          "xl": {
+            "label": "Çok Büyük",
+            "description": "1000px maksimum genişlik"
+          },
+          "full": {
+            "label": "Tam Genişlik",
+            "description": "Yüzde 100 genişlik"
+          },
+          "custom": {
+            "label": "Özel",
+            "description": "Özel genişlik değeri"
+          }
+        },
+        "paddingOptions": {
+          "none": {
+            "label": "Hiçbiri",
+            "description": "0px dolgu"
+          },
+          "sm": {
+            "label": "Küçük",
+            "description": "16px dolgu"
+          },
+          "md": {
+            "label": "Orta",
+            "description": "24px dolgu"
+          },
+          "lg": {
+            "label": "Büyük",
+            "description": "32px dolgu"
+          }
+        },
+        "marginOptions": {
+          "none": {
+            "label": "Hiçbiri",
+            "description": "Kenar boşluğu yok"
+          },
+          "sm": {
+            "label": "Küçük",
+            "description": "8px"
+          },
+          "md": {
+            "label": "Orta",
+            "description": "16px"
+          },
+          "lg": {
+            "label": "Büyük",
+            "description": "32px"
+          }
+        },
+        "radiusOptions": {
+          "none": {
+            "label": "Hiçbiri",
+            "description": "0px (keskin köşeler)"
+          },
+          "sm": {
+            "label": "Küçük",
+            "description": "4px sınır yarıçapı"
+          },
+          "md": {
+            "label": "Orta",
+            "description": "8px sınır yarıçapı"
+          },
+          "lg": {
+            "label": "Büyük",
+            "description": "16px sınır yarıçapı"
+          },
+          "xl": {
+            "label": "Çok Büyük",
+            "description": "24px sınır yarıçapı"
+          }
+        }
+      },
+      "presets": {
+        "title": "Tasarım Önbellekleri",
+        "description": "Güzel tasarımlı form stilleriyle hızlı başlangıç",
+        "category": "Kategori",
+        "allPresets": "Tüm Ön Ayarlar",
+        "presets": "Ön ayarlar",
+        "presetCount": "{count, plural, one {# hazır ayar} other {# hazır ayarlar}}",
+        "presetList": "Ön ayar listesi",
+        "applyPresetAria": "Uygula {name} ön ayarını",
+        "appliedPreset": "\"{name}\" ön ayarı uygulandı",
+        "formTitle": "Form Başlığı",
+        "submit": "Gönder"
+      },
+      "preview": {
+        "title": "Canlı Önizleme",
+        "description": "Formunuzun uygulanan özelleştirmelerle nasıl görüneceğini görün",
+        "sampleTitle": "Örnek Form",
+        "sampleDescription": "Formunuzun mevcut tasarım ayarlarıyla nasıl görüneceği aşağıdadır.",
+        "nameLabel": "Adı *",
+        "namePlaceholder": "Adınızı girin",
+        "emailLabel": "E-posta *",
+        "emailPlaceholder": "E-postanızı girin",
+        "categoryLabel": "Kategori",
+        "categoryPlaceholder": "Bir kategori seçin",
+        "categoryGeneral": "Genel Sorgu",
+        "categorySupport": "Destek",
+        "categorySales": "Satış",
+        "messageLabel": "Mesaj",
+        "messagePlaceholder": "Mesajınızı girin",
+        "submitButton": "Formu Gönder",
+        "previousStepAria": "Önceki adım",
+        "previousStep": "Önceki",
+        "nextStepAria": "Sonraki adım",
+        "nextStep": "İleri",
+        "submitAria": "Formu gönder"
+      }
+    },
+    "toasts": {
+      "loginRequiredToSave": "Lütfen formunuzu kaydetmek için giriş yapın.",
+      "formSaved": "Form başarıyla kaydedildi!",
+      "formCreated": "Form başarıyla oluşturuldu!",
+      "saveFailed": "Formu kaydetme başarısız. Lütfen tekrar deneyin.",
+      "saveBeforeShare": "Lütfen paylaşmadan önce formunuzu kaydedin.",
+      "formPublished": "Form başarıyla yayınlandı!",
+      "publishFailed": "Formu yayınlama başarısız. Lütfen tekrar deneyin.",
+      "saveBeforeAnalytics": "Lütfen analizleri görüntülemek için formunuzu kaydedin.",
+      "loadingAnalytics": "Analitik Yükleniyor",
+      "saveBeforePublish": "Yayınlamadan önce lütfen formunuzu kaydedin.",
+      "userAuthRequired": "Kullanıcı kimlik doğrulaması gerekiyor",
+      "formUnpublished": "Form başarıyla yayınlandı!",
+      "updateStatusFailed": "Form durumunu güncelleme başarısız. Lütfen tekrar deneyin.",
+      "saveSettingsFailed": "Ayarları kaydetme başarısız. Lütfen tekrar deneyin.",
+      "loadFailed": "Form yüklenemedi. Lütfen tekrar deneyin."
+    },
+    "formPreview": {
+      "titlePlaceholder": "Başlık eklemek için tıklayın...",
+      "descriptionPlaceholder": "Açıklama eklemek için tıklayın...",
+      "publicTitle": "\"{title}\" Genel başlığı:",
+      "stepTitlePlaceholder": "Adım başlığı eklemek için tıklayın...",
+      "stepDescriptionPlaceholder": "Adım açıklaması eklemek için tıklayın...",
+      "stepBadge": "{index}. Adım",
+      "editFieldAria": "Alanı düzenle",
+      "clickToEdit": "Düzenlemek için tıklayın"
+    },
+    "fieldPalette": {
+      "headerTitle": "Form Alanları",
+      "headerDescription": "Formunuza alan eklemek için tıklayın",
+      "ariaPalette": "Alan paleti",
+      "searchAria": "Alanları ara",
+      "searchPlaceholder": "Alanları ara...",
+      "categoryFieldsAria": "{category} alanları",
+      "noFieldsFound": "\"{searchTerm}\" ifadesine eşleşen alan bulunamadı",
+      "searchHint": "Alan adı, açıklama veya türüne göre arama yapmayı deneyin",
+      "addFieldAria": " {label} alanı ekle",
+      "categories": {
+        "input": "Giriş Alanları",
+        "selection": "Seçim Alanları",
+        "media": "Medya Alanları",
+        "layout": "Düzen Alanları",
+        "advanced": "İleri Alanlar"
+      },
+      "fields": {
+        "text": {
+          "label": "Metin Girişi",
+          "description": "Kısa metin yanıtları için tek satır."
+        },
+        "email": {
+          "label": "E-posta",
+          "description": "Geçerli bir e-posta adresi toplayın."
+        },
+        "number": {
+          "label": "Numara",
+          "description": "Sayısal değerler için girdi."
+        },
+        "phone": {
+          "label": "Telefon Numarası",
+          "description": "Doğrulama ile telefon numaraları için girdi."
+        },
+        "textarea": {
+          "label": "Textarea",
+          "description": "Daha uzun metin için çok satırlı bir alan."
+        },
+        "date": {
+          "label": "Tarih",
+          "description": "Bir takvimden bir tarih seçin."
+        },
+        "time": {
+          "label": "Zaman",
+          "description": "Bir zaman değeri seçin veya girin."
+        },
+        "address": {
+          "label": "Adres",
+          "description": "Kaldırım, şehir ve diğer adres ayrıntıları için girdi."
+        },
+        "link": {
+          "label": "Bağlantı",
+          "description": "Geçerli bir web sitesi URL'si için girdi."
+        },
+        "select": {
+          "label": "Seçimli Açılır Liste",
+          "description": "Bir seçenek seçmek için açılır liste."
+        },
+        "radio": {
+          "label": "Seçenek Düğmeleri",
+          "description": "Bir listeから tek bir seçenek seçin."
+        },
+        "checkbox": {
+          "label": "İşaret Kutuları",
+          "description": "Bir veya daha fazla seçenek seçin."
+        },
+        "slider": {
+          "label": "Kaydırıcı",
+          "description": "Bir değer seçmek için bir tutamağı kaydırın."
+        },
+        "rating": {
+          "label": "Derecelendirme",
+          "description": "Bir yıldız veya simge derecelendirmesi topla."
+        },
+        "poll": {
+          "label": "Anket",
+          "description": "Kullanıcıların birden fazla seçenek üzerinde oy kullanmasına izin verin."
+        },
+        "file": {
+          "label": "Dosya Yükleme",
+          "description": "Boyut ve tür sınırlamaları ile dosyaları yükleyin."
+        },
+        "signature": {
+          "label": "İmza",
+          "description": "Fare veya dokunmatik ekranla çizin veya imzalayın."
+        },
+        "statement": {
+          "label": "İfade",
+          "description": "Formda bir başlık veya açıklama görüntüleyin."
+        },
+        "banner": {
+          "label": "Banner",
+          "description": "Vurgulu bir mesaj veya uyarı gösterin."
+        },
+        "field-group": {
+          "label": "Alan Grubu",
+          "description": "Alanları bir satırda gruplandırın."
+        },
+        "tags": {
+          "label": "Etiket Girişi",
+          "description": "Birden fazla etiket girin ve yönetin."
+        },
+        "social": {
+          "label": "Sosyal Medya",
+          "description": "Sosyal medya profili bağlantıları ekleyin."
+        },
+        "scheduler": {
+          "label": "Programlayıcı",
+          "description": "Bir planlama bağlantısı yerleştirin (ör. Calendly)."
+        }
+      }
+    },
+    "fieldSettings": {
+      "header": {
+        "title": "Alan Ayarları",
+        "closeAria": "Alan ayarlarını kapat"
+      },
+      "emptyState": {
+        "title": "Seçilen alan yok",
+        "description": "Düzenlemeleri için önizlemede bir alan seçin"
+      },
+      "basic": {
+        "title": "Temel Ayarlar",
+        "fieldLabel": "Alan Etiketi",
+        "fieldLabelPlaceholder": "Alan etiketi girin",
+        "fieldLabelHelp": "Alanın üzerinde görünen etiket",
+        "placeholder": "Yer Tutucu",
+        "placeholderPlaceholder": "Yer tutucu metni girin",
+        "placeholderHelp": "Alanın içine görünen ipucu metni",
+        "description": "Açıklama",
+        "descriptionPlaceholder": "Alan açıklaması girin (alanın altında gösterilir)",
+        "descriptionHelp": "Alanın altında gösterilen ek yardım metni",
+        "required": "Zorunlu alan",
+        "requiredHelp": "Kullanıcılar bu alanı doldurmak zorundadırlar"
+      },
+      "validation": {
+        "title": "Doğrulama",
+        "minLength": "Minimum Uzunluk",
+        "minLengthPlaceholder": "Min karakter",
+        "minLengthHelp": "Gerekli minimum karakter sayısı",
+        "maxLength": "Maksimum Uzunluk",
+        "maxLengthPlaceholder": "Max karakter",
+        "maxLengthHelp": "İzin verilen maksimum karakter sayısı",
+        "pattern": "Desen (Regex)",
+        "patternPlaceholder": "Düzenli ifade",
+        "patternHelp": "Doğrulama için düzenli ifade deseni",
+        "minValue": "Minimum Değer",
+        "minValuePlaceholder": "Min değer",
+        "minValueHelp": "İzin verilen minimum sayısal değer",
+        "maxValue": "Maksimum Değer",
+        "maxValuePlaceholder": "Max değer",
+        "maxValueHelp": "İzin verilen maksimum sayısal değer"
+      },
+      "errorMessages": {
+        "title": "Özel Hata Mesajları",
+        "requiredFieldMessage": "Zorunlu Alan Mesajı",
+        "requiredFieldPlaceholder": "Bu alan gereklidir",
+        "minLengthMessage": "Min Uzunluk Hata Mesajı",
+        "minLengthPlaceholder": "En az {count} karakter olmalıdır",
+        "maxLengthMessage": "Maksimum Uzunluk Hata Mesajı",
+        "maxLengthPlaceholder": "En fazla {count} karakter olmalıdır",
+        "patternMessage": "Desen Hata Mesajı",
+        "patternPlaceholder": "Lütfen geçerli bir format girin",
+        "emailMessage": "E-posta Hata Mesajı",
+        "emailPlaceholder": "Lütfen geçerli bir e-posta adresi girin",
+        "minValueMessage": "Minimum Değer Hata Mesajı",
+        "minValuePlaceholder": "En az {value} olmalıdır",
+        "maxValueMessage": "Maksimum Değer Hata Mesajı",
+        "maxValuePlaceholder": "En fazla {value} olmalıdır",
+        "invalidNumberMessage": "Geçersiz Sayı Mesajı",
+        "invalidNumberPlaceholder": "Lütfen geçerli bir sayı girin"
+      },
+      "options": {
+        "title": "Seçenekler",
+        "addOptionAria": "Yeni seçenek ekle",
+        "addOption": "Seçenek Ekle",
+        "optionPlaceholder": "{index} Seçeneği",
+        "removeOptionAria": "{index} seçeneğini kaldır",
+        "none": "Henüz seçenek eklenmedi",
+        "or": "Veya",
+        "orAria": "veya",
+        "fetchFromApi": "API'den Al",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "Seçenekleri almak için API uç noktası",
+        "valueKeyPlaceholder": "Değer anahtarı (örneğin id)",
+        "valueKeyHelp": "Seçenek değerleri için anahtar",
+        "labelKeyPlaceholder": "Etiket anahtarı (örneğin name)",
+        "labelKeyHelp": "Seçenek etiketleri için anahtar",
+        "apiGuidanceTitle": "API Veri Kılavuzu:",
+        "apiGuidanceIntro": "Bu alan, seçenekleri API uç noktasından alacak:",
+        "apiShouldReturn": "API'nin dönüşü şu şekilde olmalıdır:",
+        "apiType1Hint": "(dizisi dizeleri)",
+        "apiType2Hint": "(dizisi nesneler)",
+        "apiType3Hint": "(seçenek dizisi içeren nesne)",
+        "apiType4Hint": "(özel anahtarlar)",
+        "apiCustomKeysHelp": "API verilerinizi eşleştirmek için yukarıda özel anahtarlar belirleyebilirsiniz.",
+        "apiValueLabelHelp": "Her seçeneğin bir",
+        "apiValueLabelHelpOr": "özelliği (veya özel anahtarınız) olmalıdır.",
+        "apiValueLabelHelpSuffix": "isteğe bağlıdır."
+      },
+      "prepopulation": {
+        "title": "Önceden doldurma",
+        "unknownError": "Bilinmeyen hata",
+        "enabled": "Önceden doldurmayı etkinleştir",
+        "enabledHelp": "Bu alanı mevcut verilerle otomatik olarak doldur",
+        "dataSource": "Veri Kaynağı",
+        "sources": {
+          "url": "URL Parametreleri",
+          "api": "Harici API",
+          "profile": "Kullanıcı Profili",
+          "previous": "Önceki Gönderim"
+        },
+        "urlParamName": "URL Parametre Adı",
+        "urlParamPlaceholder": "örneğin, ad, e-posta, telefon",
+        "urlParamHelp": "URL sorgu dizisinden çıkarılacak parametre adı",
+        "fallbackValue": "Düşük Değer",
+        "fallbackValuePlaceholder": "Parametre eksikse kullanılacak varsayılan değer",
+        "fallbackValueHelp": "Varsayılan değer, URL parametresi eksikse kullanılacak",
+        "overwriteExisting": "Mevcut Değerin Üzerine Yaz",
+        "overwriteExistingHelp": "Kullanıcı girişinin üzerine önceden doldurulmuş değer yaz",
+        "generatePreviewAria": "Önizleme URL'si oluştur",
+        "generatePreview": "Önizleme URL'si oluştur",
+        "previewUrlLabel": "Önizleme URL'si:",
+        "previewUrlHelp": "Bu URL alanı \"Örnek {label}\" ile önceden dolduracaktır",
+        "apiEndpoint": "API Uç Noktası",
+        "apiEndpointPlaceholder": "https://api.example.com/user-data",
+        "apiEndpointHelp": "Veri alınacak API uç noktası",
+        "httpMethod": "HTTP Metodu",
+        "requestHeaders": "İstek Başlıkları (JSON)",
+        "requestHeadersHelp": "API isteği için HTTP başlıkları içeren JSON nesnesi",
+        "testApiAria": "API uç noktasını test et",
+        "testApi": "API Uç Noktasını Test Et",
+        "comingSoonLabel": "Gelecekte geliyor:",
+        "profileComingSoon": "Kullanıcı profili önceden doldurulması gelecekteki bir güncellemede kullanılabilir olacaktır.",
+        "previousComingSoon": "Önceki gönderim önceden doldurulması gelecekteki bir güncellemede kullanılabilir olacaktır.",
+        "toasts": {
+          "missingUrlParam": "Lütfen önce bir URL parametre adı girin",
+          "previewUrlCopied": "Önizleme URL'si panoya kopyalandı!",
+          "previewUrlCopyFailed": "Önizleme URL'sini kopyalama başarısız oldu",
+          "missingApiEndpoint": "Lütfen önce bir API uç noktası girin",
+          "apiReachable": "API uç noktası erişilebilir!",
+          "apiTestFailedStatus": "API testi başarısız oldu: {status} {statusText}",
+          "apiTestFailedError": "API testi başarısız oldu: {error}"
+        }
+      },
+      "date": {
+        "title": "Tarih Alanı Ayarları",
+        "minDate": "Minimum Tarih",
+        "selectMinDate": "Minimum tarih seç",
+        "maxDate": "Maksimum Tarih",
+        "selectMaxDate": "Maksimum tarih seç",
+        "defaultDate": "Varsayılan Tarih",
+        "selectDefaultDate": "Varsayılan tarih seç"
+      },
+      "number": {
+        "title": "Sayı Alanı Ayarları",
+        "minValue": "Minimum Değer",
+        "noMinimum": "Minimum yok",
+        "minValueHelp": "İzin verilen minimum sayısal değer",
+        "maxValue": "Maksimum Değer",
+        "noMaximum": "Maksimum yok",
+        "maxValueHelp": "İzin verilen maksimum sayısal değer",
+        "stepSize": "Adım Boyutu",
+        "stepSizeHelp": "Sayısal girdi için artış/azalış adım boyutu",
+        "defaultValue": "Varsayılan Değer",
+        "noDefault": "Varsayılan yok",
+        "defaultValueHelp": "Form yüklendiğinde önceden doldurulmuş değer"
+      },
+      "radio": {
+        "title": "Quiz Ayarları",
+        "enableQuizQuestion": "Quiz sorusu olarak etkinleştir",
+        "correctAnswer": "Doğru Cevap",
+        "correctAnswerPlaceholder": "Doğru cevabı seç",
+        "points": "Doğru Cevap için Puan",
+        "showCorrectAnswer": "Gönderimden sonra doğru cevabı göster",
+        "explanation": "Açıklama (İsteğe Bağlı)",
+        "explanationPlaceholder": "Bu doğru cevap olduğu için açıkla..."
+      },
+      "address": {
+        "title": "Adres Alanı Ayarları",
+        "requiredLines": "Gerekli Adres Satırları",
+        "requiredLinesPlaceholder": "örneğin 2 (Adres Satırı 1 & Şehir gerekli)",
+        "requiredLinesHelp": "Doldurulması gereken adres satır sayısı (1-5)",
+        "customErrorMessage": "Özel Hata Mesajı",
+        "customErrorPlaceholder": "Lütfen tüm gerekli adres alanlarını tamamlayın",
+        "customErrorHelp": "Gerekli adres alanları eksik olduğunda gösterilen özel hata mesajı"
+      },
+      "phone": {
+        "title": "Telefon Alanı Ayarları",
+        "pattern": "Özel Regex Desen",
+        "patternPlaceholder": "örneğin ^\\+?[0-9]{10,15}$",
+        "patternHelp": "Telefon numarası doğrulama için düzenli ifade deseni",
+        "errorMessage": "Özel Hata Mesajı",
+        "errorMessagePlaceholder": "Lütfen geçerli bir telefon numarası girin",
+        "errorMessageHelp": "Telefon doğrulaması başarısız olduğunda gösterilen özel hata mesajı"
+      },
+      "statement": {
+        "title": "İfade Alanı Ayarları",
+        "heading": "Başlık",
+        "headingPlaceholder": "İfade başlığı girin",
+        "headingHelp": "İfade için ana başlık",
+        "description": "Açıklama",
+        "descriptionPlaceholder": "İfade açıklaması girin",
+        "descriptionHelp": "Detaylı açıklama için ifade",
+        "alignment": "Hizalama",
+        "alignmentPlaceholder": "Hizalamayı seç",
+        "alignLeft": "Sol",
+        "alignCenter": "Merkez",
+        "alignRight": "Sağ",
+        "alignmentHelp": "İfade için metin hizalaması",
+        "size": "Boyut",
+        "sizePlaceholder": "Boyutu seç",
+        "sizeSmall": "Küçük",
+        "sizeMedium": "Orta",
+        "sizeLarge": "Büyük",
+        "sizeHelp": "İfade için yazı boyutu"
+      },
+      "slider": {
+        "title": "Kaydırıcı Ayarları",
+        "mode": "Kaydırıcı Modu",
+        "modePlaceholder": "Kaydırıcı modunu seç",
+        "modeSingle": "Tek değer",
+        "modeRange": "Aralık (min + max)",
+        "modeHelp": "Bir değer seçin veya kullanıcıların minimum ve maksimum değerlerini seçmesine izin verin",
+        "min": "Minimum Değer",
+        "minHelp": "Kaydırıcı için minimum değer",
+        "max": "Maksimum Değer",
+        "maxHelp": "Kaydırıcı için maksimum değer",
+        "step": "Adım Boyutu",
+        "stepHelp": "Kaydırıcı için artış/azalış adım boyutu",
+        "defaultMin": "Varsayılan Minimum",
+        "defaultMinHelp": "Form yüklendiğinde önceden doldurulmuş minimum değer",
+        "defaultMax": "Varsayılan Maksimum",
+        "defaultMaxHelp": "Form yüklendiğinde önceden doldurulmuş maksimum değer",
+        "defaultValue": "Varsayılan Değer",
+        "defaultValueHelp": "Form yüklendiğinde önceden doldurulmuş değer"
+      },
+      "text": {
+        "title": "Metin Alanı Ayarları",
+        "maxLength": "Maksimum Uzunluk",
+        "maxLengthPlaceholder": "Sınır yok",
+        "maxLengthHelp": "İzin verilen maksimum karakter sayısı (1-1000)",
+        "minLength": "Minimum Uzunluk",
+        "minLengthPlaceholder": "Minimum yok",
+        "minLengthHelp": "Gerekli minimum karakter sayısı (0-1000)"
+      },
+      "checkbox": {
+        "title": "Seçim Kutusu Seçenekleri",
+        "options": "Seçenekler",
+        "addOptionPlaceholder": "Seçenek ekle",
+        "addOptionAria": "Seçim kutusu seçeneği ekle",
+        "optionsHelp": "Kullanıcıların seçebileceği seçim kutusu seçenekleri ekle",
+        "removeOptionAria": "{index} seçeneğini kaldır",
+        "allowMultiple": "Çoklu seçim izin ver",
+        "allowMultipleHelp": "Etkinse, kullanıcılar birden fazla seçenek seçebilir. Devre dışıysa, yalnızca bir seçenek seçilebilir."
+      },
+      "link": {
+        "title": "Bağlantı Alanı Ayarları",
+        "pattern": "Özel Regex Desen",
+        "patternPlaceholder": "ör. ^https?://.+$",
+        "patternHelp": "URL doğrulaması için düzenli ifade deseni",
+        "errorMessage": "Özel Hata Mesajı",
+        "errorMessagePlaceholder": "Lütfen geçerli bir URL girin",
+        "errorMessageHelp": "URL doğrulaması başarısız olduğunda gösterilen özel hata mesajı"
+      },
+      "poll": {
+        "title": "Anket Ayarları",
+        "pollOptions": "Anket Seçenekleri",
+        "addOptionPlaceholder": "Seçenek ekle",
+        "addOptionAria": "Anket seçeneği ekle",
+        "optionsHelp": "Kullanıcıların oy kullanabileceği anket seçenekleri ekle",
+        "editOptionAria": "Anket seçeneğini düzenle {index}",
+        "removeOptionAria": "Anket seçeneğini kaldır {index}",
+        "orAria": "veya ayırıcı",
+        "or": "Veya",
+        "fetchFromApi": "API'den Seçenekleri Al",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "Anket seçeneklerini almak için API uç noktası",
+        "valueKeyPlaceholder": "Değer anahtarı (örneğin id)",
+        "valueKeyHelp": "Seçenek değerleri için anahtar",
+        "labelKeyPlaceholder": "Etiket anahtarı (örneğin name)",
+        "labelKeyHelp": "Seçenek etiketleri için anahtar",
+        "apiGuidanceTitle": "API Veri Kılavuzu:",
+        "apiGuidanceIntro": "Bu alan, seçenekleri API uç noktasından alacak:",
+        "apiShouldReturn": "API'nin dönüşü şu şekilde olmalıdır:",
+        "apiType1Hint": "(dizisi dizeleri)",
+        "apiType2Hint": "(dizisi nesneler)",
+        "apiType3Hint": "(seçenek dizisi içeren nesne)",
+        "apiType4Hint": "(özel anahtarlar)",
+        "apiCustomKeysHelp": "API verilerinizi eşleştirmek için yukarıda özel anahtarlar belirleyebilirsiniz.",
+        "apiValueLabelHelp": "Her seçeneğin bir",
+        "apiValueLabelHelpOr": "özelliği (veya özel anahtarınız) olmalıdır.",
+        "apiValueLabelHelpSuffix": "isteğe bağlıdır.",
+        "showResults": "Oylamadan sonra sonuçları göster",
+        "showResultsHelp": "Kullanıcıların oy kullandıktan sonra anket sonuçlarını görüntüle"
+      },
+      "social": {
+        "title": "Sosyal Platformlar",
+        "availablePlatforms": "Mevcut Platformlar",
+        "platforms": {
+          "github": "GitHub",
+          "twitter": "Twitter",
+          "linkedin": "LinkedIn",
+          "facebook": "Facebook",
+          "instagram": "Instagram",
+          "youtube": "YouTube",
+          "website": "Web sitesi"
+        },
+        "platformsHelp": "Alana dahil edilecek sosyal platformları seç",
+        "customLinks": "Özel Bağlantılar",
+        "labelPlaceholder": "Etiket",
+        "placeholderPlaceholder": "İsteğe bağlı yer tutucu",
+        "removeCustomLinkAria": "Özel bağlantıyı kaldır {index}",
+        "addCustomLinkAria": "Özel bağlantı ekle",
+        "addCustomLink": "Özel Bağlantı Ekle",
+        "customLinksHelp": "Özel etiketler ve yer tutucular ile özel sosyal bağlantılar ekle"
+      },
+      "emailValidation": {
+        "title": "E-posta Doğrulaması",
+        "removeBlockedDomainAria": "Bloke edilmiş alanlardan {domain} kaldır",
+        "removeAllowedDomainAria": "İzin verilen alanlardan {domain} kaldır",
+        "autoCompleteDomain": "Otomatik Tamamlama Alanı",
+        "autoCompletePlaceholder": "ör. business.com",
+        "setAutoCompleteAria": "Otomatik tamamlama alanını ayarla",
+        "set": "Ayarla",
+        "removeAutoCompleteAria": "Alanını kaldır {domain}",
+        "autoCompleteHelp": "Kullanıcılar yalnızca kullanıcı adlarını girebilir ve alan otomatik olarak tamamlanır",
+        "allowedDomains": "İzin Verilen Alanlar",
+        "allowedPlaceholder": "ör. company.com",
+        "addAllowedDomainAria": "İzin verilen alan ekle",
+        "allowedHelp": "Sadece bu alanlardan gelen e-postalar kabul edilir",
+        "blockedDomains": "Bloke Edilen Alanlar",
+        "blockedPlaceholder": "ör. temp-mail.org",
+        "addBlockedDomainAria": "Bloke edilen alan ekle",
+        "blockedHelp": "Bu alanlardan gelen e-postalar reddedilir (geçici e-posta hizmetleri varsayılan olarak bloke edilir)",
+        "requireBusinessEmail": "İş E-postası Gerekli",
+        "requireBusinessEmailHelp": "Sadece iş alanlarını izin ver (Gmail, Yahoo, vb. engeller)",
+        "customValidationMessage": "Özel Doğrulama Mesajı",
+        "customValidationPlaceholder": "E-posta doğrulaması için özel hata mesajı",
+        "customValidationHelp": "Varsayılan mesajları kullanmak için boş bırak"
+      },
+      "file": {
+        "title": "Dosya Yükleme Ayarları",
+        "bytesUnit": "Bayt",
+        "maxFiles": "Maksimum Dosya",
+        "maxFilesPlaceholder": "10",
+        "maxFilesHelp": "Kullanıcıların yükleyebileceği maksimum dosya sayısı (1-50)",
+        "maxFileSize": "Maksimum Dosya Boyutu",
+        "maxFileSizePlaceholder": "50",
+        "mbUnit": "MB",
+        "setMaxSizePresetAria": "Maksimum dosya boyutunu {size} olarak ayarla",
+        "currentSize": "Geçerli: {size}",
+        "allowedFileTypes": "İzin Verilen Dosya Tipleri",
+        "quickSelect": "Hızlı Seçim:",
+        "commonTypes": {
+          "images": "Resimler",
+          "documents": "Belgeler",
+          "spreadsheets": "E-Tablolar",
+          "videos": "Videolar",
+          "audio": "Ses",
+          "archives": "Arşivler"
+        },
+        "toggleFileTypeAria": "{type} dosya tiplerini değiştir",
+        "customExtensions": "Özel Dosya Uzantıları",
+        "customExtensionsPlaceholder": "örneğin, txt, csv, json",
+        "addCustomExtensionAria": "Özel dosya uzantısı ekle",
+        "customExtensionsHelp": "Özel dosya uzantıları ekle (nokta olmadan)",
+        "selectedExtensions": "Seçilen uzantılar:",
+        "removeExtensionAria": "{extension} dosya uzantısını kaldır",
+        "htmlAccept": "HTML Kabul Özelliği (salt okunur)",
+        "htmlAcceptHelp": "Bu, yukarıdaki seçimlerinize bağlı olarak otomatik olarak oluşturulur",
+        "helpText": "Yardım Metni",
+        "helpTextPlaceholder": "Kullanıcılar için ek talimatlar...",
+        "helpTextHelp": "Kullanıcıların hangi dosyaları yüklemeli olduğunu anlamalarına yardımcı olmak için isteğe bağlı talimatlar"
+      },
+      "scheduler": {
+        "title": "Planlayıcı Ayarları",
+        "provider": "Planlayıcı Sağlayıcı",
+        "providerPlaceholder": "Sağlayıcı seç",
+        "providerHelp": "Tercih ettiğiniz planlama platformunu seçin",
+        "calcomLink": "Cal.com Bağlantısı",
+        "calendlyLink": "Calendly Bağlantısı",
+        "tidycalLink": "TidyCal Bağlantısı",
+        "schedulerLink": "Planlayıcı Bağlantısı",
+        "linkPlaceholder": "https://...",
+        "linkHelp": "{provider} planlayıcınız için gömülü URL",
+        "buttonText": "Takvim Açıcı Düğme Metni",
+        "buttonTextPlaceholder": "örneğin. Bir Çağrı Kitap",
+        "buttonTextHelp": "Planlayıcı düğmesinde görüntülenen metin",
+        "preview": "Önizleme",
+        "openScheduler": "Planlayıcıyı Aç",
+        "previewHelp": "Planlayıcının nasıl görüneceğini önizlemek için tıklayın",
+        "previewModalTitle": "Planlayıcı Önizlemesi",
+        "iframeTitle": "Planlayıcı Gömme",
+        "closePreviewAria": "Planlayıcı önizlemesini kapat",
+        "close": "Kapat",
+        "providerCalcom": "Cal.com",
+        "providerCalendly": "Calendly",
+        "providerTidycal": "TidyCal"
+      },
+      "banner": {
+        "title": "Banner Ayarları",
+        "alertType": "Uyarı Türü",
+        "alertTypePlaceholder": "Uyarı türünü seç",
+        "warning": "Uyarı",
+        "error": "Hata",
+        "info": "Bilgi",
+        "success": "Başarı",
+        "alertTypeHelp": "Banner için görsel stil ve renk şemasını seçin",
+        "bannerTitle": "Başlık",
+        "bannerTitlePlaceholder": "Dumanızsız",
+        "bannerTitleHelp": "Banner için ana başlık metni",
+        "description": "Açıklama",
+        "descriptionPlaceholder": "Konaklamalarımız kesinlikle dumanızsız...",
+        "descriptionHelp": "Banner için ayrıntılı açıklama metni"
+      },
+      "fieldGroup": {
+        "layoutTitle": "Düzen Ayarları",
+        "layoutDirection": "Düzen Yönü",
+        "layoutHorizontal": "Yatay (Yan Yana)",
+        "layoutVertical": "Dikey (Yığılmış)",
+        "layoutDirectionHelp": "Grup içindeki alanların düzenlenmesi",
+        "columns": "Sütun Sayısı",
+        "columns2": "2 Sütun",
+        "columns3": "3 Sütun",
+        "columns4": "4 Sütun",
+        "columnsHelp": "Yatay düzen için sütun sayısı",
+        "spacing": "Alan Aralığı",
+        "spacingCompact": "Sıkışık",
+        "spacingNormal": "Normal",
+        "spacingRelaxed": "Rahat",
+        "spacingHelp": "Alanlar arasındaki boşluk",
+        "groupFields": "Grup Alanları ({count})",
+        "addFieldAria": "Gruba alan ekle",
+        "addField": "Alan ekle",
+        "addFieldDialogTitle": "Bir alan ekle",
+        "emptyStateTitle": "Bu grupta henüz alan yok.",
+        "emptyStateDescription": "Yukarıdaki açılır menü veya hızlı ekleme düğmelerini kullanarak alan ekleyin.",
+        "fieldFallback": "{type} Alanı",
+        "settingsAria": "{name} alanı ayarları",
+        "removeAria": "{name} alanını kaldır",
+        "fieldLabel": "Alan Etiketi",
+        "fieldLabelPlaceholder": "Alan etiketi girin",
+        "fieldLabelHelp": "Bu alan için etiket",
+        "placeholder": "Yer tutucu Metin",
+        "placeholderPlaceholder": "Yer tutucu metni girin",
+        "placeholderHelp": "Bu alan için yer tutucu metin",
+        "required": "Zorunlu alan",
+        "requiredHelp": "Bu alanı zorunlu kıl",
+        "advancedAria": "{name} için gelişmiş ayarları değiştir",
+        "advanced": "Gelişmiş Ayarlar"
+      },
+      "rating": {
+        "title": "Derecelendirme Ayarları",
+        "starCount": "Yıldız Sayısı",
+        "starCountHelp": "Derecelendirme yıldız sayısı (1-10)",
+        "starSize": "Yıldız Boyutu",
+        "starSizeHelp": "Derecelendirme yıldızlarının boyutu (16-64px)",
+        "iconType": "Simge Türü",
+        "star": "Yıldız",
+        "heart": "Kalp",
+        "iconTypeHelp": "Derecelendirmeler için simge türünü seçin",
+        "iconColor": "Simge Rengi",
+        "iconColorHelp": "Derecelendirme simgelerinin rengi"
+      },
+      "tags": {
+        "title": "Etiket Ayarları",
+        "maxTags": "Maksimum Etiket",
+        "maxTagsHelp": "Kullanıcıların ekleyebileceği maksimum etiket sayısı (minimum 1)",
+        "allowDuplicates": "Tekrarlayan Etiketlere İzin Ver",
+        "allowDuplicatesHelp": "Kullanıcıların aynı etiketi birden fazla kez eklemesine izin ver"
+      },
+      "textarea": {
+        "title": "Textarea Alanı Ayarları",
+        "rows": "Satır Sayısı",
+        "rowsHelp": "Textarea'nın ilk yüksekliği (2-20 satır)"
+      },
+      "time": {
+        "title": "Zaman Alanı Ayarları",
+        "showCurrentTimeButton": "'Geçerli Zamanı Ayarla' Düğmesini Göster",
+        "showCurrentTimeButtonHelp": "Geçerli zamanı otomatik olarak ayarlamak için bir düğme görüntüle"
+      },
+      "email": {
+        "title": "E-posta Alanı Ayarları",
+        "allowedDomains": "İzin Verilen Alanlar (virgülle ayrılmış)",
+        "allowedDomainsPlaceholder": "gmail.com, company.com",
+        "blockedDomains": "Engellenen Alanlar (virgülle ayrılmış)",
+        "blockedDomainsPlaceholder": "tempmail.com, spam.com",
+        "requireBusinessEmail": "Sadece iş e-postası gereksin",
+        "customValidationMessage": "Özel Doğrulama Mesajı",
+        "customValidationPlaceholder": "Lütfen geçerli bir e-posta adresi girin"
+      }
+    },
+    "formSettings": {
+      "title": "Form Ayarları",
+      "exportSecure": "İhracat (Güvenli)",
+      "preparing": "Hazırlanıyor...",
+      "saveFormFirstAccess": "Lütfen ayarlara erişmek için formu önce kaydedin.",
+      "saveFormFirstExport": "Formu önce kaydedin ve güvenli bir şekilde dışa aktarın.",
+      "exportPrepareFailed": "Güvenli ihracat hazırlanamadı.",
+      "settingsSectionsAria": "Ayar bölümleri",
+      "goToSectionSettingsAria": "{section} ayarlarına git",
+      "sections": {
+        "basic": "Temel Bilgiler",
+        "limits": "Sınırlar",
+        "security": "Güvenlik",
+        "quiz": "Quiz ve Puanlama",
+        "branding": "Markalaşma",
+        "notifications": "Bildirimler",
+        "api": "API Erişimi",
+        "webhooks": "Webhooks",
+        "design": "Tasarım",
+        "metadata": "Meta Veriler"
+      },
+      "search": {
+        "aria": "Arama ayarları",
+        "placeholder": "Arama ayarları…",
+        "resultsAria": "Arama sonuçları",
+        "noMatches": "Eşleşme yok",
+        "items": {
+          "basic-info-title": {
+            "label": "Temel Bilgiler"
+          },
+          "behavior-title": {
+            "label": "Form Davranışı"
+          },
+          "rate-limit-title": {
+            "label": "Hız Sınırlaması"
+          },
+          "response-limit-title": {
+            "label": "Yanıt Sınırı"
+          },
+          "password-protection-title": {
+            "label": "Parola Koruması"
+          },
+          "duplicate-prevention-title": {
+            "label": "Tekrar Önleme"
+          },
+          "profanity-filter-title": {
+            "label": "Kaba Söz Filtresi"
+          },
+          "bot-protection-title": {
+            "label": "Bot Koruması"
+          },
+          "branding-title": {
+            "label": "Markalaşma"
+          },
+          "social-media-links-title": {
+            "label": "Sosyal Medya Bağlantıları"
+          },
+          "quiz-title": {
+            "label": "Quiz ve Puanlama"
+          },
+          "notifications-title": {
+            "label": "Bildirimler"
+          },
+          "api-access-title": {
+            "label": "API Erişimi"
+          },
+          "webhooks-title": {
+            "label": "Webhooks"
+          },
+          "design-title": {
+            "label": "Tasarım"
+          },
+          "metadata-title": {
+            "label": "SEO"
+          },
+          "social-metadata-title": {
+            "label": "Sosyal Medya Verileri"
+          },
+          "search-engine-indexing-title": {
+            "label": "Arama Motoru Dizinleme"
+          }
+        }
+      },
+      "defaults": {
+        "submitText": "Gönder",
+        "notificationSubject": "Yeni Form Gönderimi",
+        "notificationMessage": "Formunuza yeni bir gönderim aldınız."
+      },
+      "common": {
+        "unsavedChanges": "Kaydedilmemiş değişiklikler",
+        "reset": "Sıfırla",
+        "save": "Kaydet",
+        "saved": "Kaydedildi",
+        "formIdRequiredToSaveSettings": "Form ID'si ayarları kaydetmek için gereklidir",
+        "validValueBetween": "Lütfen {min} ve {max} arasında geçerli bir değer girin",
+        "fillRequiredFields": "Lütfen gerekli alanları doldurun",
+        "requiredAria": "gerekli",
+        "fieldRequired": "Bu alan gereklidir"
+      },
+      "basicInfoSection": {
+        "ariaSettings": "Temel form ayarları",
+        "basicTitle": "Temel Bilgiler",
+        "basicDescription": "Formunuzun temel ayrıntılarını yapılandırın",
+        "internalTitleLabel": "İç Başlık",
+        "internalTitleDescription": "Bu başlık yalnızca sizin için gösterge panosunda ve form oluşturucuda görünür",
+        "internalTitlePlaceholder": "Referansınız için dahili başlık girin...",
+        "publicTitleLabel": "Kamu Başlığı",
+        "publicTitleDescription": "Bu başlık, kullanıcılara gerçek formda gösterilecektir. Boş bırakın ve dahili başlığı kullanın.",
+        "publicTitlePlaceholder": "Kullanıcılara gösterilecek başlık girin...",
+        "formDescriptionLabel": "Form Açıklaması",
+        "formDescriptionPlaceholder": "Form açıklaması girin",
+        "submitButtonTextLabel": "Gönderme Düğmesi Metni",
+        "submitButtonTextPlaceholder": "Gönder",
+        "successMessageLabel": "Başarı Mesajı",
+        "successMessagePlaceholder": "Gönderiminiz için teşekkür ederiz!",
+        "redirectUrlLabel": "Yönlendirme URL'si (İsteğe Bağlı)",
+        "redirectUrlDescription": "Başarılı gönderimden sonra kullanıcıları yönlendirmek için URL",
+        "redirectUrlPlaceholder": "https://example.com/thank-you",
+        "basicActionsAria": "Temel bilgi eylemleri",
+        "saveBasicAria": "Temel bilgileri kaydet",
+        "saveBasicSuccess": "Temel bilgiler başarıyla kaydedildi",
+        "saveBasicFailed": "Temel bilgileri kaydetme başarısız oldu",
+        "behaviorTitle": "Form Davranışı",
+        "behaviorDescription": "Formunuzun kullanıcılar için nasıl davrandığını ve göründüğünü yapılandırın",
+        "hideHeaderLabel": "Başlığı Gizle",
+        "hideHeaderDescription": "Gömülü içeriklerde genel başlığı ve açıklamayı gizler",
+        "rtlLabel": "Sağa sola mod",
+        "rtlDescription": "Formu RTL (Sağa-Sola) modunda görüntüle",
+        "autoFocusLabel": "İlk Alanı Otomatik Odağı",
+        "autoFocusDescription": "Form yüklendiğinde ilk alana otomatik olarak odaklan",
+        "behaviorActionsAria": "Form davranışı eylemleri",
+        "saveBehaviorAria": "Form davranışı ayarlarını kaydet",
+        "saveBehaviorSuccess": "Form davranışı ayarları başarıyla kaydedildi",
+        "saveBehaviorFailed": "Form davranışını kaydetme başarısız oldu"
+      },
+      "passwordProtectionSection": {
+        "ariaSettings": "Parola koruma ayarları",
+        "title": "Parola Koruması",
+        "description": "Formunuza erişimi parola ile kısıtlayın",
+        "enableLabel": "Parola Korumasını Etkinleştir",
+        "enableDescription": "Kullanıcıların forma erişmek için parolayı girmelerini gerektir",
+        "passwordLabel": "Parola",
+        "passwordPlaceholder": "Form parolasını girin",
+        "hidePasswordAria": "Parolayı gizle",
+        "showPasswordAria": "Parolayı göster",
+        "passwordDescription": "Kullanıcıların forma erişmek için bu parolayı girmeleri gerekecek",
+        "customMessageLabel": "Özel Mesaj",
+        "customMessagePlaceholder": "Parola istemi için özel mesaj girin",
+        "customMessageDescription": "Kullanıcıların parolayı girmeleri gerektiğinde gösterilen mesaj",
+        "currentConfiguration": "Geçerli Yapılandırma",
+        "summaryPrefix": "Parola koruması",
+        "enabled": "etkin",
+        "summarySuffix": ". Kullanıcıların forma erişmek için parolayı girmeleri gerekecek.",
+        "disabledDescription": "Parola koruması, kullanıcıların forma erişmek için bir parolayı girmelerini gerektirmek suretiyle formunuza erişimi kısıtlar.",
+        "actionsAria": "Parola koruma eylemleri",
+        "saveAria": "Parola koruma ayarlarını kaydet",
+        "saved": "Parola koruma ayarları başarıyla kaydedildi",
+        "saveFailed": "Parola koruma ayarlarını kaydetme başarısız oldu",
+        "defaultMessage": "Bu form parola korumalıdır. Devam etmek için lütfen parolayı girin."
+      },
+      "duplicatePreventionSection": {
+        "ariaSettings": "Tekrar önleme ayarları",
+        "title": "Tekrar Önleme",
+        "description": "Kullanıcıların aynı formu birden fazla kez göndermesini önle",
+        "enableLabel": "Tekrar Önlemeyi Etkinleştir",
+        "enableDescription": "Kullanıcıların aynı formu birden fazla kez göndermesini önle",
+        "preventionModeLabel": "Önleme Modu",
+        "oneTimeLabel": "Tek seferlik gönderim",
+        "oneTimeDescription": "Her kullanıcıdan yalnızca bir gönderim kabul et",
+        "timeBasedLabel": "Zaman tabanlı önleme",
+        "timeBasedDescription": "Belirtilen bir zaman penceresi içinde yinelenen gönderimleri önle",
+        "preventionStrategyLabel": "Önleme Stratejisi",
+        "selectStrategyPlaceholder": "Strateji seç",
+        "strategyCombinedLabel": "Birleşik (IP + E-posta + Oturum) - En Güvenli",
+        "strategyEmailLabel": "E-posta Adresi - Kayıt için en iyisi",
+        "strategyIpLabel": "IP Adresi - Basit ve Güvenilir",
+        "strategySessionLabel": "Oturum Kimliği - Tarayıcı tabanlı",
+        "strategyCombinedDescription": "IP, e-posta ve oturum kombinasyonuna göre maksimum doğruluk için izleme",
+        "strategyEmailDescription": "E-posta adresine göre izleme (formda e-posta alanı gerektirir)",
+        "strategyIpDescription": "Sadece IP adresine göre izleme",
+        "strategySessionDescription": "Tarayıcı oturumuna göre izleme",
+        "timeWindowLabel": "Zaman Penceresi (dakika)",
+        "timeWindowDescription": "Yinelenen göndermeleri önlemek için ne kadar süre",
+        "timeWindowPlaceholder": "1440",
+        "maxAttemptsLabel": "Maksimum Denemeler",
+        "maxAttemptsDescription": "Zaman penceresi içinde izin verilen maksimum deneme sayısı",
+        "maxAttemptsPlaceholder": "1",
+        "errorMessageLabel": "Hata Mesajı",
+        "errorMessageDescription": "Kullanıcılar yinelenen gönderi yapmaya çalıştığında gösterilen mesaj",
+        "allowOverrideLabel": "Geçersiz kılmaya izin ver",
+        "allowOverrideDescription": "Kullanıcıların önleme işlemini geçersiz kılmasına izin ver (önerilmez)",
+        "currentConfiguration": "Geçerli Yapılandırma",
+        "currentSettings": "Geçerli Ayarlar",
+        "summaryModeOneTime": "tek seferlik gönderme",
+        "summaryModeTimeBased": "{maxAttempts} gönderi(ler) her {timeWindow} dakika",
+        "summaryStrategyCombined": "IP + E-posta + Oturum",
+        "summaryStrategyEmail": "E-posta Adresi",
+        "summaryStrategyIp": "IP Adresi",
+        "summaryStrategySession": "Oturum Kimliği",
+        "summarySentence": "{mode} {strategy} izleme kullanıyor.",
+        "summaryOverrideEnabled": "Geçersiz kılma etkin.",
+        "disabledDescription": "Yinelenen gönderi önleme, kullanıcıların aynı formu birden fazla göndermesini önleyerek veri kalitesini korur. Zaman tabanlı önleme veya tek seferlik gönderme modu arasında seçim yapın.",
+        "actionsAria": "Yinelenen gönderi önleme eylemleri",
+        "saveAria": "Yinelenen gönderi önleme ayarlarını kaydet",
+        "saved": "Yinelenen gönderi önleme ayarları başarıyla kaydedildi",
+        "saveFailed": "Yinelenen gönderi önleme ayarlarını kaydetme başarısız oldu",
+        "defaultMessageOneTime": "Bu formu zaten gönderdiniz. Her kullanıcı sadece bir kez gönderebilir.",
+        "defaultMessageTimeBased": "Bu formu zaten gönderdiniz. Lütfen tekrar göndermeden önce bekleyin."
+      },
+      "profanityFilterSection": {
+        "ariaSettings": "Kaba filtre ayarları",
+        "title": "Kaba Söz Filtresi",
+        "description": "Uygunsuz içerikleri otomatik olarak algıla ve filtrele",
+        "enableLabel": "Kaba Filtreyi Etkinleştir",
+        "enableDescription": "Uygunsuz içerikleri otomatik olarak algıla ve filtrele",
+        "filterModeLabel": "Filtre Modu",
+        "strictModeOption": "Katı Mod - Kaba içerikli gönderileri reddet",
+        "replaceModeOption": "Değiştirme Modu - Kaba içerikleri yıldızlarla değiştir",
+        "customMessageLabel": "Özel Mesaj",
+        "customMessagePlaceholder": "Kaba içerik algılandığında gösterilecek özel mesaj girin",
+        "customWordsTitle": "Filtrelenecek Özel Kelimeler",
+        "whitelistedWordsTitle": "İzin Verilen Kelimeler",
+        "customWordsPlaceholder": "Filtrelenecek kelime(ler) girin (birden fazla için virgülle ayırın)",
+        "whitelistPlaceholder": "İzin verilen kelime(ler) girin (birden fazla için virgülle ayırın)",
+        "addWord": "Ekle",
+        "addFilteredWordAria": "Filtrelenen kelime ekle",
+        "addWhitelistedWordAria": "İzin verilen kelime ekle",
+        "removeWordAria": "{word}'i kaldır",
+        "currentConfiguration": "Geçerli Yapılandırma",
+        "summaryPrefix": "Kaba filtre",
+        "enabled": "etkin",
+        "summaryIn": "içinde",
+        "strictMode": "katı mod",
+        "replaceMode": "değiştirme modu",
+        "summaryPeriod": ".",
+        "customWordsConfigured": "{count} özel kelime yapılandırıldı.",
+        "whitelistedWordsConfigured": "{count} izin verilen kelime.",
+        "disabledDescription": "Kaba filtre, form gönderilerinde uygunsuz içerikleri otomatik olarak algılayarak ve filtreleyerek temiz ve profesyonel bir ortam sağlar.",
+        "actionsAria": "Kaba filtre eylemleri",
+        "saveAria": "Kaba filtre ayarlarını kaydet",
+        "saved": "Kaba filtre ayarları başarıyla kaydedildi",
+        "saveFailed": "Kaba filtre ayarlarını kaydetme başarısız oldu"
+      },
+      "notificationsSection": {
+        "title": "Bildirimler",
+        "description": "Yeni form gönderileri için e-posta bildirimlerini yapılandır",
+        "enableLabel": "E-posta Bildirimleri",
+        "enableDescription": "Yeni gönderiler için e-posta bildirimlerini etkinleştir",
+        "emailLabel": "Bildirim E-posta",
+        "emailPlaceholder": "sahip@e-posta.com",
+        "subjectLabel": "E-posta Konusu",
+        "messageLabel": "E-posta Mesajı",
+        "customLinksLabel": "Özel Bağlantılar",
+        "linkLabelPlaceholder": "Etiket",
+        "linkUrlPlaceholder": "https://example.com",
+        "removeLink": "Kaldır",
+        "addLink": "Ekle",
+        "actionsAria": "Bildirim ayarları eylemleri",
+        "saveAria": "Bildirim ayarlarını kaydet",
+        "saved": "Bildirim ayarları başarıyla kaydedildi",
+        "saveFailed": "Bildirim ayarlarını kaydetme başarısız oldu"
+      },
+      "brandingSection": {
+        "title": "Markalaşma",
+        "description": "Ikiform markalaşma ve sosyal medya bağlantılarını yönet",
+        "showPoweredByLabel": "\"Ikiform\" tarafından desteklenmektedir göster",
+        "showPoweredByDescription": "Küçük bir attribution'ı footer'da göster",
+        "socialMediaLabel": "Sosyal Medya Bağlantıları",
+        "socialMediaDescription": "Formda sosyal profillerinize bağlantıları etkinleştir",
+        "platforms": {
+          "linkedin": {
+            "label": "LinkedIn",
+            "placeholder": "https://linkedin.com/in/username"
+          },
+          "twitter": {
+            "label": "X (Twitter)",
+            "placeholder": "https://x.com/username"
+          },
+          "youtube": {
+            "label": "YouTube",
+            "placeholder": "https://youtube.com/@channel"
+          },
+          "instagram": {
+            "label": "Instagram",
+            "placeholder": "https://instagram.com/username"
+          },
+          "facebook": {
+            "label": "Facebook",
+            "placeholder": "https://facebook.com/username"
+          },
+          "github": {
+            "label": "GitHub",
+            "placeholder": "https://github.com/username"
+          },
+          "website": {
+            "label": "Web sitesi",
+            "placeholder": "https://example.com"
+          }
+        },
+        "iconSizeLabel": "İkon Boyutu",
+        "iconSizes": {
+          "small": "Küçük",
+          "medium": "Orta",
+          "large": "Büyük"
+        },
+        "positionLabel": "Konum",
+        "positions": {
+          "footer": "Footer",
+          "header": "Header",
+          "both": "Her ikisi"
+        },
+        "previewLabel": "Önizleme",
+        "disabledDescription": "Formlarınızda sosyal profillerinizi göstermek için sosyal medya bağlantılarını etkinleştir",
+        "actionsAria": "Markalaşma ayarları işlemleri",
+        "saveAria": "Markalaşma ayarlarını kaydet",
+        "saved": "Markalaşma ayarları başarıyla kaydedildi",
+        "saveFailed": "Markalaşma ayarlarını kaydetme başarısız oldu",
+        "authRequired": "Kullanıcı kimlik doğrulaması gerekiyor"
+      },
+      "metadataSection": {
+        "basicTitle": "Temel SEO",
+        "basicDescription": "Başlıklar, açıklamalar ve kanonik URL",
+        "pageTitleLabel": "Sayfa Başlığı",
+        "pageTitlePlaceholder": "Sayfa başlığını girin (maks 60 karakter)",
+        "metaDescriptionLabel": "Meta Açıklama",
+        "metaDescriptionPlaceholder": "Meta açıklamayı girin (maks 160 karakter)",
+        "characterCount": "{count}/{max} karakter",
+        "keywordsLabel": "Anahtar Kelimeler",
+        "keywordsPlaceholder": "Virgül ile ayrılmış anahtar kelimeleri girin",
+        "authorLabel": "Yazar",
+        "authorPlaceholder": "Yazar adını girin",
+        "canonicalUrlLabel": "Kanonik URL",
+        "canonicalUrlPlaceholder": "https://example.com/form",
+        "canonicalUrlDescription": "Bu form sayfası için tercih edilen URL",
+        "basicActionsAria": "Temel SEO işlemleri",
+        "saveBasicAria": "Temel SEO ayarlarını kaydet",
+        "basicSaved": "Temel SEO kaydedildi",
+        "basicSaveFailed": "Temel SEO kaydetme başarısız oldu",
+        "socialTitle": "Sosyal Medya Verileri",
+        "socialDescription": "Open Graph ve Twitter ayarları",
+        "ogTitleLabel": "Open Graph Başlığı",
+        "ogTitlePlaceholder": "Open Graph başlığını girin",
+        "ogTitleDescription": "Facebook, LinkedIn vb. ile paylaşıldığında gösterilen başlık",
+        "ogDescriptionLabel": "Open Graph Açıklaması",
+        "ogDescriptionPlaceholder": "Open Graph açıklamasını girin",
+        "ogDescriptionDescription": "Sosyal medyada paylaşıldığında gösterilen açıklama",
+        "ogImageLabel": "Open Graph Resim URL'si",
+        "ogImagePlaceholder": "https://example.com/image.jpg",
+        "ogTypeLabel": "Open Graph Türü",
+        "ogTypePlaceholder": "Open Graph türünü seç",
+        "ogTypes": {
+          "website": "Web sitesi",
+          "article": "Makale",
+          "profile": "Profil",
+          "video": "Video"
+        },
+        "twitterCardLabel": "Twitter Kart Türü",
+        "twitterCardPlaceholder": "Twitter kart türünü seç",
+        "twitterCards": {
+          "summary": "Özet",
+          "summaryLargeImage": "Özet Büyük Resim",
+          "app": "Uygulama",
+          "player": "Oynatıcı"
+        },
+        "twitterTitleLabel": "Twitter Başlığı",
+        "twitterTitlePlaceholder": "Twitter başlığını girin",
+        "twitterImageLabel": "Twitter Resim URL'si",
+        "twitterImagePlaceholder": "https://example.com/twitter-image.jpg",
+        "twitterDescriptionLabel": "Twitter Açıklaması",
+        "twitterDescriptionPlaceholder": "Twitter açıklamasını girin",
+        "twitterSiteLabel": "Twitter Sitesi",
+        "twitterSitePlaceholder": "@yourhandle",
+        "twitterCreatorLabel": "Twitter Yaratıcısı",
+        "twitterCreatorPlaceholder": "@creatorhandle",
+        "socialActionsAria": "Sosyal meta veri işlemleri",
+        "saveSocialAria": "Sosyal meta veri ayarlarını kaydet",
+        "socialSaved": "Sosyal meta veri kaydedildi",
+        "socialSaveFailed": "Sosyal meta veri kaydetme başarısız oldu",
+        "indexingTitle": "Arama Motoru Dizinleme",
+        "indexingDescription": "Arama motorlarının bu formu nasıl tarayacağını kontrol et",
+        "indexingBehaviorLabel": "Arama Motoru Dizinleme",
+        "indexingBehaviorPlaceholder": "Dizinleme davranışını seç",
+        "indexingOptions": {
+          "index": "Dizinle ve Takip Et (Varsayılan)",
+          "noindex": "Dizinleme Yok",
+          "nofollow": "Takipli Yok",
+          "noindexNofollow": "Dizinleme Yok, Takipli Yok"
+        },
+        "indexingBehaviorDescription": "Arama motorlarının bu sayfadaki bağlantıları dizinleyebileceği ve takip edebileceği kontrolleri yapar",
+        "switches": {
+          "noArchive": "Arşiv Yok",
+          "noSnippet": "Özet Yok",
+          "noImageIndex": "Görüntü Dizini Yok",
+          "noTranslate": "Çeviri Yok"
+        },
+        "indexingActionsAria": "Dizinleme eylemleri",
+        "saveIndexingAria": "Dizinleme ayarlarını kaydet",
+        "indexingSaved": "Dizinleme ayarları kaydedildi",
+        "indexingSaveFailed": "Dizinleme ayarlarını kaydetme başarısız",
+        "updatedAnnouncement": "Meta veriler güncellenmiştir",
+        "authRequired": "Kullanıcı kimlik doğrulaması gerekiyor"
+      },
+      "rateLimitSection": {
+        "title": "Hız Sınırlaması",
+        "description": "Spam ve kötüye kullanım önlemek için gönderim sıklığını kontrol et",
+        "ariaSettings": "Hız sınırlama ayarları",
+        "enableLabel": "Hız Sınırlamasını Etkinleştir",
+        "enableDescription": "Aynı IP adresinden gelen gönderimleri sınırlı",
+        "maxSubmissionsLabel": "Maksimum Gönderim",
+        "maxSubmissionsDescription": "İzin verilen maksimum gönderim sayısı",
+        "timeWindowLabel": "Zaman Penceresi (dakika)",
+        "timeWindowDescription": "Gönderim sayısını sayma süresi",
+        "blockDurationLabel": "Blok Süresi (dakika)",
+        "blockDurationDescription": "Limit aşılırsa bloke süresi",
+        "messageLabel": "Hız limiti aşıldığında gösterilen mesaj",
+        "messagePlaceholder": "Çok fazla gönderim. Lütfen daha sonra tekrar deneyin.",
+        "messageDescription": "Hız limiti aşıldığında gösterilen özel mesaj",
+        "currentConfiguration": "Geçerli Yapılandırma",
+        "summarySentence": " {maxSubmissions} gönderim her {timeWindow} dakika. Aşıldığında {blockDuration} dakika blok.",
+        "summaryExample": "Örnek: Bir kullanıcı {maxSubmissions} kez {timeWindow} dakika içinde gönderim yaparsa, {blockDuration} dakika boyunca bloke olacaktır.",
+        "disabledDescription": "Hız sınırlaması, gönderim sıklığını kontrol ederek formunuzu spam ve kötüye kullanımdan korur.",
+        "actionsAria": "Hız sınırlama eylemleri",
+        "saveAria": "Hız sınırlama ayarlarını kaydet",
+        "saved": "Hız sınırlama ayarları başarıyla kaydedildi",
+        "saveFailed": "Hız sınırlama ayarlarını kaydetme başarısız",
+        "defaultMessage": "Çok fazla gönderim. Lütfen daha sonra tekrar deneyin."
+      },
+      "responseLimitSection": {
+        "title": "Yanıt Sınırı",
+        "description": "Belirli bir toplam sayıya ulaşıldıktan sonra gönderimleri kabul etmeyi durdur",
+        "enableLabel": "Yanıt Sınırını Etkinleştir",
+        "enableDescription": "Bu formun kabul ettiği toplam gönderim sayısını sınırlı",
+        "maxResponsesLabel": "Maksimum Yanıt",
+        "maxResponsesDescription": "Bu formun kabul edebileceği toplam yanıt sayısını sınırlı. Limit aşılırsa, yeni gönderimler bloke olacaktır.",
+        "limitReachedLabel": "Limit aşılırsa mesaj",
+        "limitReachedDescription": "Toplam yanıt limiti aşıldığında gösterilen mesaj",
+        "limitReachedPlaceholder": "Bu form artık yanıt kabul etmiyor.",
+        "disabledDescription": "Formunuz sınırsız gönderim kabul etmelidir ise bunu devre dışı bırakın.",
+        "actionsAria": "Yanıt limiti eylemleri",
+        "saveAria": "Yanıt limiti ayarlarını kaydet",
+        "saved": "Yanıt limiti başarıyla kaydedildi",
+        "saveFailed": "Yanıt limitini kaydetme başarısız",
+        "defaultMessage": "Bu form artık yanıt kabul etmiyor."
+      },
+      "botProtectionSection": {
+        "title": "Bot Koruması",
+        "description": "Otomatik gönderimleri algıla ve bloke et",
+        "ariaSettings": "Bot koruma ayarları",
+        "enableLabel": "Bot Korumasını Etkinleştir",
+        "enableDescription": "Form gönderimleri için anti-bot kontrolleri ekle",
+        "detectionMessageLabel": "Algılama Mesajı",
+        "detectionMessagePlaceholder": "Şüpheli bot etkinliği nedeniyle gönderim bloke edildi.",
+        "detectionMessageDescription": "Otomatik gönderim bloke edildiğinde gösterilen mesaj",
+        "currentConfiguration": "Geçerli Yapılandırma",
+        "statusEnabledPrefix": "Bot koruması şu anda",
+        "enabled": "etkin",
+        "statusEnabledSuffix": "bu form için.",
+        "vercelTitle": "Vercel Koruması",
+        "vercelDescription": "Vercel'e dağıtıldığında, ek anti-abuse kontrolleri uygulanabilir.",
+        "disabledDescription": "Bot koruması, otomatik araçlar ve betik trafiğinden spam azaltmak için etkinleştirin.",
+        "actionsAria": "Bot koruma eylemleri",
+        "saveAria": "Bot koruma ayarlarını kaydet",
+        "saved": "Bot koruma ayarları başarıyla kaydedildi",
+        "saveFailed": "Bot koruma ayarlarını kaydetme başarısız"
+      },
+      "quizSection": {
+        "title": "Quiz ve Puanlama",
+        "description": "Quiz davranışını ve puanlama kurallarını yapılandır",
+        "ariaSettings": "Quiz ayarları",
+        "enableLabel": "Quiz Modunu Etkinleştir",
+        "enableDescription": "Puanlama ve sonuç mesajları gibi quiz özelliklerini aç",
+        "passingScoreLabel": "Geçme Puanı (%)",
+        "passingScoreDescription": "Geçmek için gereken minimum yüzdelik oranını ayarla",
+        "timeLimitLabel": "Zaman Limiti (dakika)",
+        "timeLimitDescription": "İsteğe bağlı quiz tamamlama süresi limiti",
+        "timeLimitPlaceholder": "Sınırsız bırakmak için boş bırakın",
+        "showScoreLabel": "Kullanıcıya Puanı Göster",
+        "showScoreDescription": "Form gönderildikten sonra kullanıcının puanını görüntüle",
+        "showCorrectAnswersLabel": "Doğru Cevapları Göster",
+        "showCorrectAnswersDescription": "Gönderildikten sonra doğru cevapları ve açıklamaları göster",
+        "allowRetakeLabel": "Tekrar Alma İzni",
+        "allowRetakeDescription": "Kullanıcıların puanlarını iyileştirmek için quiz'i tekrar almasına izin ver",
+        "customMessagesLabel": "Özel Sonuç Mesajları",
+        "successMessageLabel": "Başarı Mesajı",
+        "successMessagePlaceholder": "Harika iş! Quiz'i geçtin.",
+        "improvementMessageLabel": "İyileştirme Mesajı",
+        "improvementMessagePlaceholder": "Lütfen gözden geçirin ve tekrar deneyin.",
+        "messagePlaceholderHelp": "{score}, {percentage}, {total} gibi yer tutucuları kullanın",
+        "actionsAria": "Quiz eylemleri",
+        "saveAria": "Quiz ayarlarını kaydet",
+        "saved": "Quiz ayarları başarıyla kaydedildi",
+        "savedToast": "Quiz ayarları kaydedildi",
+        "saveFailed": "Quiz ayarlarını kaydetme başarısız oldu"
+      },
+      "apiSection": {
+        "title": "API Erişimi",
+        "description": "API uç noktasından gönderimleri izin vermek için geçiş yapın",
+        "authRequired": "Kullanıcı kimlik doğrulaması gerekiyor",
+        "enableSupportLabel": "API Desteğini Etkinleştir",
+        "enableSupportDescription": "Güvenli bir API anahtarı aracılığıyla harici gönderimleri etkinleştir.",
+        "apiEndpointLabel": "API Uç Noktası",
+        "copyEndpointAria": "API uç noktasını kopyala",
+        "endpointCopied": "API uç noktası kopyalandı",
+        "apiKeyLabel": "API Anahtarı",
+        "apiKeySecretHint": "Bu anahtarı gizli tutun. Herhangi biriyle bu forma gönderebilir.",
+        "generateApiKey": "API anahtarı oluştur",
+        "regenerateKey": "Anahtarı yeniden oluştur",
+        "revokeKey": "Anahtarı iptal et",
+        "generating": "Oluşturuluyor...",
+        "revoking": "İptal ediliyor...",
+        "copyApiKeyAria": "API anahtarını kopyala",
+        "showApiKeyAria": "API anahtarını göster",
+        "hideApiKeyAria": "API anahtarını gizle",
+        "keyCopied": "API anahtarı kopyalandı",
+        "keyGenerated": "API anahtarı oluşturuldu",
+        "keyGenerateFailed": "API anahtarı oluşturma başarısız oldu",
+        "keyRevoked": "API anahtarı iptal edildi",
+        "keyRevokeFailed": "API anahtarını iptal etme başarısız oldu",
+        "showCodeExamples": "Kod örneklerini göster",
+        "hideCodeExamples": "Kod örneklerini gizle",
+        "javascriptNodeLabel": "JavaScript / Node.js",
+        "sampleName": "Jane Doe",
+        "sampleEmail": "jane@example.com",
+        "sampleMessage": "API'den selam",
+        "sampleValue": "Örnek değer",
+        "copyCodeAria": "Örnek kodu kopyala",
+        "downloadCodeAria": "Örnek kodu indir",
+        "codeCopied": "Örnek kod kopyalandı",
+        "codeDownloaded": "Örnek kod indirildi",
+        "betaBadge": "BETA",
+        "integrationRateLimiting": "Hız sınırlaması",
+        "integrationRateLimitingDescription": "Uç noktanızı spam patlamalarından koruyun.",
+        "integrationResponseLimits": "Cevap limitleri",
+        "integrationResponseLimitsDescription": "Kabul edilen toplam gönderimleri sınırlayın.",
+        "integrationDuplicatePrevention": "Tekrar önleme",
+        "integrationDuplicatePreventionDescription": "Aynı kullanıcıdan tekrarlanan gönderimleri azaltın.",
+        "integrationProfanityFilter": "Kaba filtre",
+        "integrationProfanityFilterDescription": "Uygunsuz içerği engelle veya temizle.",
+        "emptyStateDescription": "Güvenli bir API anahtarı oluşturmak için API desteğini etkinleştir.",
+        "actionsAria": "API erişim eylemleri",
+        "saveAria": "API ayarlarını kaydet",
+        "resetAria": "API ayarlarını sıfırla",
+        "settingsSaved": "API ayarları başarıyla kaydedildi",
+        "settingsSaveFailed": "API ayarlarını kaydetme başarısız oldu"
+      },
+      "webhooks": {
+        "panel": {
+          "endpointsTitle": "Webhook Uç Noktaları",
+          "endpointsDescription": "Gönderimleri harici hizmetlere gönderin.",
+          "addWebhook": "Webhook Ekle"
+        },
+        "list": {
+          "emptyState": "Henüz hiç webhook yapılandırılmadı. İlk webhook'unuzu ekleyin ve form gönderimlerini alın.",
+          "active": "Aktif",
+          "inactive": "Pasif",
+          "edit": "Düzenle",
+          "delete": "Sil",
+          "test": "Test",
+          "viewLogs": "Günlükleri görüntüle",
+          "events": {
+            "formSubmitted": "Form gönderildi",
+            "formViewed": "Form görüntülendi",
+            "formStarted": "Form başlatıldı"
+          }
+        },
+        "hook": {
+          "fetchFailed": "Webhook'leri getirirken hata oluştu",
+          "created": "Webhook başarıyla oluşturuldu",
+          "createFailed": "Webhook oluştururken hata oluştu",
+          "updated": "Webhook başarıyla güncellendi",
+          "updateFailed": "Webhook güncellenirken hata oluştu",
+          "deleted": "Webhook başarıyla silindi",
+          "deleteFailed": "Webhook silinirken hata oluştu"
+        },
+        "formModal": {
+          "addTitle": "Webhook ekle",
+          "editTitle": "Webhook düzenle",
+          "stepsAria": "Webhook kurulum adımları",
+          "steps": {
+            "basics": "Temel bilgiler",
+            "events": "Olaylar",
+            "headers": "Başlıklar",
+            "payload": "Yük",
+            "notifications": "Bildirimler",
+            "details": "İncele"
+          },
+          "errors": {
+            "missingBasics": "Webhook URL'si gereklidir.",
+            "missingEvent": "En az bir olay seçmelisiniz.",
+            "missingBasicsAndEvent": "Webhook URL'si ve en az bir olay gereklidir."
+          },
+          "webhookUrl": "Webhook URL'si",
+          "webhookUrlPlaceholder": "https://example.com/webhook",
+          "nameOptional": "Ad (isteğe bağlı)",
+          "namePlaceholder": "Slack bildirimleri",
+          "descriptionOptional": "Açıklama (isteğe bağlı)",
+          "descriptionPlaceholder": "Bu webhook'un form verilerini nereye göndermesi gerektiği",
+          "eventsHelp": "Hangi olayların bu webhook'u tetiklemesi gerektiğini seçin.",
+          "events": {
+            "formSubmitted": "Form gönderildi",
+            "formViewed": "Form görüntülendi",
+            "formStarted": "Form başlatıldı"
+          },
+          "httpMethod": "HTTP Metodu",
+          "selectHttpMethodAria": "HTTP yöntemi seç",
+          "selectMethodPlaceholder": "Yöntem seç",
+          "httpMethodDescriptions": {
+            "post": "Yeni kaynaklar oluştur veya yük verilerini gönder.",
+            "put": "Mevcut bir kaynağı değiştir.",
+            "patch": "Mevcut bir kaynağı kısmen güncelle.",
+            "delete": "Bir kaynağı sil.",
+            "get": "Verileri değiştirmeden bilgi al.",
+            "head": "Sadece başlıkları al."
+          },
+          "addHeader": "Başlık ekle",
+          "headerName": "Başlık adı",
+          "headerNamePlaceholder": "Yetkilendirme",
+          "headerNameAria": "Webhook başlık adı",
+          "headerValue": "Başlık değeri",
+          "headerValuePlaceholder": "Taşıyıcı jetonu",
+          "headerValueAria": "Webhook başlık değeri",
+          "removeHeaderAria": "Başlığı kaldır",
+          "headersHelp": "Özel başlıklar isteğe bağlıdır ve her webhook isteğiyle gönderilir.",
+          "payloadTemplateOptional": "Yük şablonu (isteğe bağlı)",
+          "availableVariables": "Mevcut değişkenler",
+          "variables": {
+            "formData": "Gönderilen form verileri nesnesi",
+            "formId": "Form tanımlayıcısı",
+            "submissionId": "Gönderme tanımlayıcısı",
+            "event": "Olayı tetikle",
+            "timestamp": "Olay zaman damgası",
+            "formatted": "İnsan tarafından okunabilir özet"
+          },
+          "notificationEmailOptional": "Bildirim e-postası (isteğe bağlı)",
+          "notificationEmailPlaceholder": "alerts@example.com",
+          "emailOnSuccess": "Başarılı teslimat üzerine e-posta gönder",
+          "emailOnFailure": "Başarısız teslimat üzerine e-posta gönder",
+          "selectAll": "Tümünü seç",
+          "clear": "Temizle",
+          "back": "Geri",
+          "next": "İleri",
+          "skip": "Atla",
+          "cancel": "İptal",
+          "createWebhook": "Webhook oluştur",
+          "updateWebhook": "Webhook güncelle"
+        },
+        "testDialog": {
+          "title": "Webhook testi",
+          "description": "Uç noktasını doğrulamak için test olayı gönder.",
+          "endpointTitle": "Uç nokta",
+          "nameLabel": "Ad",
+          "untitledWebhook": "Adlandırılmamış webhook",
+          "descriptionLabel": "Açıklama",
+          "methodLabel": "HTTP yöntemi",
+          "urlLabel": "URL",
+          "triggersTitle": "Tetikler",
+          "events": {
+            "formSubmitted": "Form gönderildi",
+            "formViewed": "Form görüntülendi",
+            "formStarted": "Form başlatıldı"
+          },
+          "modeTitle": "Test modu",
+          "mode": {
+            "real": "Gerçek bir yük gönder",
+            "success": "Başarı yanıtı zorla",
+            "failure": "Hata yanıtı zorla"
+          },
+          "sendTest": "Test gönder",
+          "close": "Kapat",
+          "success": "Test başarıyla gönderildi",
+          "failed": "Test başarısız oldu",
+          "testSent": "Webhook testi gönderildi",
+          "testFailed": "Webhook testi başarısız oldu",
+          "testFailedNetwork": "Webhook testi gönderilemedi"
+        },
+        "logDialog": {
+          "title": "Webhook günlükleri",
+          "status": "Durum",
+          "response": "Yanıt",
+          "attempt": "Deneme",
+          "resend": "Tekrar gönder",
+          "resendSuccess": "Webhook başarıyla tekrar gönderildi",
+          "resendFailed": "Webhook tekrar gönderilemedi",
+          "copied": "Panoya kopyalandı",
+          "copyFailed": "Kopyalama başarısız oldu",
+          "copyCodeAria": "Yükü kopyala",
+          "viewPayload": "Yükü görüntüle",
+          "payloadTitle": "Yük",
+          "noPayloadDataTitle": "Yük verisi yok",
+          "noPayloadDataDescription": "Bu günlük girişi için yük mevcut değil.",
+          "noPayloadReasonMethod": "Bu istek türü yük içermiyor.",
+          "noPayloadReasonError": "Yük yakalama hatası nedeniyle başarısız oldu.",
+          "noPayloadReasonEmpty": "Yük verisi depolanmadı.",
+          "eventInformation": "Olay bilgileri",
+          "eventLabel": "Olay",
+          "formNameLabel": "Form adı",
+          "formIdLabel": "Form Kimliği",
+          "submissionIdLabel": "Gönderim Kimliği",
+          "ipAddressLabel": "IP adresi",
+          "formFields": "Form alanları",
+          "rawFormData": "Ham form verileri",
+          "rawJson": "Ham JSON",
+          "formatted": "Formatlı",
+          "additionalData": "Ek veriler",
+          "notAvailable": "Mevcut değil",
+          "unknown": "Bilinmeyen",
+          "complexObject": "Karmaşık nesne",
+          "complexArray": "Karmaşık dizi",
+          "failedCount": "{count} başarısız oldu",
+          "pendingCount": "{count} beklemede",
+          "successfulCount": "{count} başarılı",
+          "noLogsTitle": "Henüz günlük yok",
+          "noLogsDescription": "Bu webhook'a olay göndermek için teslimat geçmişini görün.",
+          "errorTitle": "Günlükler yüklenemedi",
+          "fetchFailed": "Webhook günlükleri yüklenemedi"
+        }
+      },
+      "designSection": {
+        "title": "Tasarım",
+        "description": "Görünüm ve özelleştirme kontrolü",
+        "advancedTitle": "İleri özelleştirme",
+        "advancedDescription": "Renkleri, tipografiyi, aralığı ve daha fazlasını odaklanmış bir panelde ince ayar yapın.",
+        "openAria": "Özelleştirme panelini yeni sekmede aç",
+        "openLabel": "Özelleştirme panelini aç..."
+      }
+    },
+    "fieldRenderer": {
+      "scheduler": {
+        "title": "Programlayıcı",
+        "openScheduler": "Planlayıcıyı Aç",
+        "embedTitle": "Planlayıcı Gömme",
+        "notConfigured": "No scheduler link configured.",
+        "close": "Kapat"
+      },
+      "email": {
+        "defaultPlaceholder": "E-posta adresini girin",
+        "autocompleteHint": "Tab tuşuna basın veya tıklayın:",
+        "completeEmailAria": "E-posta adresini tamamla",
+        "completeButton": "Tamamla",
+        "autocompleteBadge": "Otomatik tamamlama:",
+        "allowedDomainsLabel": "İzin verilen alanlar:"
+      },
+      "fileUpload": {
+        "bytesUnit": "Bayt",
+        "uploadFailed": "Yükleme başarısız oldu",
+        "uploadErrorTitle": "Yükleme Hatası",
+        "uploadedFiles": "Yüklenen Dosyalar ({count})",
+        "uploadedBadge": "Yüklenmiş",
+        "removeFileAria": "{name} dosyasını kaldır",
+        "maxFilesAndSize": "Max {maxFiles} dosyaları, {maxSize} her biri",
+        "allowedTypes": "İzin verilen türler"
+      },
+      "social": {
+        "platforms": {
+          "linkedin": "LinkedIn",
+          "twitter": "X (Twitter)",
+          "youtube": "YouTube",
+          "instagram": "Instagram",
+          "facebook": "Facebook",
+          "github": "GitHub",
+          "website": "Web sitesi"
+        },
+        "customLink": "Özel Bağlantı {index}",
+        "customLinkPlaceholder": "https://example.com",
+        "preview": "Önizleme"
+      },
+      "signature": {
+        "drawHere": "İmzanızı burada çizin",
+        "clear": "Temizle",
+        "preview": "Önizleme",
+        "previewAlt": "Önizleme"
+      },
+      "rating": {
+        "groupAria": "Derecelendirme",
+        "rateAria": "Oran {index} {type}"
+      },
+      "poll": {
+        "fetchFailed": "Seçenekleri getirirken hata oluştu",
+        "resultsTitle": "Anket Sonuçları",
+        "totalVotes": "{count} toplam oy",
+        "votes": "{count} oy"
+      }
+    },
+    "formRenderer": {
+      "shared": {
+        "poweredBy": "Güçlendirici",
+        "incorrectPassword": "Hatalı şifre!",
+        "passwordProtectionMessage": "Bu form parola korumalıdır. Devam etmek için lütfen parolayı girin."
+      },
+      "successScreen": {
+        "title": "Teşekkür ederiz!",
+        "defaultMessage": "Formunuz başarıyla gönderildi.",
+        "redirecting": "Birkaç saniye içinde yönlendiriyoruz...",
+        "poweredBy": "Güçlendirici"
+      },
+      "quizResults": {
+        "titlePassed": "Tebrikler!",
+        "titleComplete": "Quiz Tamamlandı",
+        "descriptionPassed": "Quiz'i başarıyla tamamladınız!",
+        "descriptionRetry": "Quiz'i aldığınız için teşekkür ederiz. Daha fazla pratik yapın!",
+        "score": "Skor",
+        "points": "Puan",
+        "answered": "Cevaplandı",
+        "totalQuestions": "Toplam Sorular",
+        "passed": "Geçti",
+        "needsImprovement": "İyileştirme Gerekiyor",
+        "retakeQuiz": "Quiz'i Tekrar Al",
+        "questionByQuestion": "Soru Soruları Sonuçları",
+        "questionLabel": "Soru {index}: {label}",
+        "yourAnswer": "Cevabınız:",
+        "noAnswer": "Cevap yok",
+        "correctAnswer": "Doğru cevap:",
+        "pointsLower": "puan"
+      },
+      "multiStep": {
+        "previous": "Önceki",
+        "next": "İleri",
+        "submit": "Gönder",
+        "defaults": {
+          "formTitle": "Form"
+        },
+        "validation": {
+          "required": "Bu alan gereklidir",
+          "emailInvalid": "Lütfen geçerli bir e-posta adresi girin",
+          "minLength": "En az {count} karakter olmalıdır",
+          "maxLength": "En fazla {count} karakter olmalıdır"
+        },
+        "toasts": {
+          "submitSuccess": "Form başarıyla gönderildi!",
+          "botDetected": "Bot algılandı. Erişim reddedildi.",
+          "duplicateSubmission": "Bu formu zaten gönderdiniz.",
+          "rateLimitExceeded": "Çok fazla istek. Lütfen daha sonra tekrar deneyin.",
+          "responseLimitReached": "Bu form artık yanıt kabul etmiyor.",
+          "contentValidationFailed": "Gönderiminiz uygunsuz içerik içerir.",
+          "submitFailed": "Formu gönderirken hata oluştu",
+          "submitFailedTryAgain": "Formu gönderirken hata oluştu. Lütfen tekrar deneyin."
+        }
+      },
+      "singleStep": {
+        "fixHighlightedErrors": "Lütfen göndermeden önce vurgulanan hataları düzeltin.",
+        "submit": "Gönder"
+      },
+      "duplicateSubmission": {
+        "title": "Tekrarlanan Gönderim Algılandı",
+        "wait": "Bekle {time}",
+        "attemptsLeft": "{count, plural, one {# deneme kaldı} other {# deneme kaldı}}",
+        "tryAgain": "Tekrar Deneyin",
+        "waitBeforeRetry": "Lütfen tekrar göndermeden önce bekleyin.",
+        "units": {
+          "seconds": "{count, plural, one {# saniye} other {# saniye}}",
+          "minutes": "{count, plural, one {# dakika} other {# dakika}}",
+          "hours": "{count, plural, one {# saat} other {# saat}}",
+          "days": "{count, plural, one {# gün} other {# gün}}"
+        }
+      }
+    }
+  },
+  "aiBuilder": {
+    "client": {
+      "createFormWithKiko": "Kiko ile Form Oluştur",
+      "streamError": "Hata: {error}",
+      "generatingResponse": "Cevap oluşturuluyor…",
+      "loading": "Yükleniyor…",
+      "suggestions": {
+        "contactForm": "Bir iletişim formu oluştur",
+        "customerFeedbackSurvey": "Müşteri geri bildirim anketi",
+        "eventRegistrationForm": "Etkinlik kayıt formu",
+        "jobApplicationForm": "İş başvuru formu"
+      }
+    },
+    "chatHeader": {
+      "backToFormBuilder": "Form oluşturucuya geri",
+      "title": "Kiko AI"
+    },
+    "chatInput": {
+      "messageToKiko": "Kiko AI'ye mesaj",
+      "placeholder": "Oluşturmak istediğiniz formu tanımlayın…",
+      "sendMessage": "Mesaj gönder",
+      "sendHelp": "Göndermek için Enter'a basın, yeni satır için Shift+Enter'a basın veya ⌘/Ctrl+Enter'a basın"
+    },
+    "welcome": {
+      "heading": "Kiko bugün size nasıl yardımcı olabilir?",
+      "description": "Merhaba, ben Kiko - yapay zeka destekli form asistanınız.\nForm oluşturmanıza, düzenlemenize veya analiz etmenize yardımcı olmak için bana sorun!"
+    },
+    "preview": {
+      "title": "Kiko AI",
+      "formFallback": "Form {index}",
+      "viewJson": "JSON'u Gör",
+      "useThisForm": "Bu formu kullan",
+      "noFormSelected": "Form seçilmedi."
+    },
+    "jsonModal": {
+      "title": "Form JSON Şeması",
+      "description": "Formunuzun oluşturduğu JSON şemasını görüntüleyin veya kopyalayın",
+      "close": "Kapat"
+    }
+  },
+  "analytics": {
+    "formAnalytics": {
+      "submissionExported": "Gönderim başarıyla dışa aktarıldı",
+      "formDeleted": "Form başarıyla silindi",
+      "failedDeleteForm": "Formu silerken hata oluştu",
+      "backToDashboard": "Gösterge Tablosuna Geri",
+      "published": "Yayınlandı",
+      "draft": "Taslak",
+      "analyticsSubtitle": "Form Analizleri ve Gönderim Verileri",
+      "formActions": "Form Eylemleri",
+      "editForm": "Formu düzenle",
+      "shareForm": "Paylaşım formu",
+      "viewSubmissions": "Gönderileri görüntüle",
+      "moreActions": "Daha fazla işlem",
+      "exportCsv": "CSV olarak dışa aktar",
+      "exportJson": "JSON olarak dışa aktar",
+      "deleteForm": "Formu sil",
+      "openKiko": "Kiko AI'yi aç",
+      "kiko": "Kiko AI",
+      "kikoTooltip": "AI Form analitiği",
+      "recentSubmissions": "Son Gönderiler",
+      "viewAll": "Tümünü Gör",
+      "noSubmissionsTitle": "Henüz gönderi yok",
+      "noSubmissionsDescription": "İnsanlar formunuzu doldurmaya başladığında, yanıtları burada görünecektir.",
+      "submission": "Gönderi {id}",
+      "fieldsCount": "{count} alanları",
+      "view": "Görüntüle",
+      "viewSubmissionDetails": "Gönderi detaylarını görüntüle",
+      "viewMoreSubmissions": "{count} daha fazla gönderi görüntüle",
+      "noDataToExport": "Dışa aktarmak için veri yok",
+      "csvExportSuccess": "Veriler CSV'ye başarıyla dışa aktarıldı!",
+      "jsonExportSuccess": "Veriler başarıyla dışa aktarıldı!",
+      "deleteModalTitle": "Formu Sil",
+      "deleteModalConfirm": "Formu Sil",
+      "deleteModalCancel": "İptal",
+      "deleteModalDescription": "\"{title}\"'i silmek istediğinize emin misiniz? Bu eylem geri alınamaz ve formu ve tüm gönderilerini kalıcı olarak kaldıracaktır.",
+      "formPublished": "Form yayınlandı!"
+    },
+    "statsCards": {
+      "totalSubmissions": "Toplam Gönderiler",
+      "formFields": "Form Alanları",
+      "completionRate": "Tamamlama Oranı",
+      "last30Days": "Son 30 Gün",
+      "avgDailySubmissions": "Ortalama Günlük Gönderiler",
+      "bounceRate": "Zorunlu Bırakma Oranı",
+      "peakHour": "Zamanın Zirvesi",
+      "uniqueResponses": "Eşsiz Yanıtlar"
+    },
+    "infoCards": {
+      "lastSubmission": "Son Gönderi",
+      "fromIp": "{ip}'den",
+      "noSubmissionsYet": "Henüz gönderi yok",
+      "formStatus": "Form Durumu",
+      "published": "Yayınlandı",
+      "created": "Oluşturuldu",
+      "updated": "Güncellendi",
+      "yes": "Evet",
+      "no": "Hayır",
+      "quickStats": "Hızlı İstatistikler",
+      "avgFieldsCompleted": "Ortalama Tamamlanan Alanlar",
+      "mostActiveDay": "En Aktif Gün",
+      "submissions": "{count} gönderiler",
+      "formType": "Form Türü",
+      "multiStep": "Çok Adımlı",
+      "singlePage": "Tek Sayfa"
+    },
+    "trendsChart": {
+      "title": "Gönderi Trendleri",
+      "noData": "Veri yok",
+      "submissions": "Gönderiler"
+    },
+    "dropoff": {
+      "title": "Düşüş analitiği",
+      "onlyMultiStep": "Düşüş analitiği yalnızca çok adımlı formlar için kullanılabilir.",
+      "subtitle": "Kullanıcıların formlarınızda düştüğü yerleri anlayın.",
+      "step": "Adım",
+      "reached": "Ulaşıldı",
+      "dropoffPercent": "Düşüş %",
+      "completionPercent": "Tamamlama %",
+      "ofTotal": "{total}'i",
+      "stepFallback": "{index}. Adım",
+      "dropoffBarAria": "{index}. adım için düşüş çubuğu",
+      "completionBarAria": "{index}. adım için tamamlama çubuğu"
+    },
+    "chatModal": {
+      "title": "Kiko",
+      "description": "Form analitiğiniz hakkında AI ile sohbet edin"
+    },
+    "chat": {
+      "emptyTitle": "Kiko'ya Herhangi Bir Şey Sor",
+      "emptyDescription": "Form verilerinizden anlık içgörüler ve analizler alın. Doğal dilde sorular sorabilirsiniz.",
+      "thinking": "Düşünüyor...",
+      "inputPlaceholder": "Form analitiğiniz hakkında sor...",
+      "inputHelp": "<enter></enter>'i göndermek için basın, <shiftEnter></shiftEnter> yeni satır için"
+    },
+    "submissionDetails": {
+      "title": "{id} - Gönderi Detayları",
+      "submissionId": "Gönderim Kimliği",
+      "submittedAt": "Gönderildi",
+      "ipAddress": "IP Adresi",
+      "formData": "Form Verileri",
+      "emptyValue": "—"
+    },
+    "submissions": {
+      "backToAnalytics": "Analitiklere Geri",
+      "published": "Yayınlandı",
+      "draft": "Taslak",
+      "formSubmissions": "Form Gönderileri ({count})",
+      "exportActions": "Dışa Aktarma Eylemleri",
+      "exportCsv": "CSV olarak dışa aktar",
+      "exportJson": "JSON olarak dışa aktar",
+      "viewDetailedAnalytics": "Detaylı Analitikleri Görüntüle",
+      "submissions": "Gönderiler",
+      "searchSubmissions": "Gönderileri ara...",
+      "noMatchingSubmissions": "Eşleşen gönderiler yok",
+      "noSubmissionsYet": "Henüz gönderi yok",
+      "noSubmissionsDescription": "İnsanlar formunuzu doldurmaya başladığında, yanıtları burada görünecektir.",
+      "adjustSearchTerms": "Gönderileri bulmak için arama terimlerinizi ayarlamayı deneyin.",
+      "id": "ID",
+      "submitted": "Gönderildi",
+      "ipAddress": "IP Adresi",
+      "fields": "Alanlar",
+      "actions": "Eylemler",
+      "fieldsCount": "{count} alanı",
+      "fieldsCount_plural": "{count} alanları",
+      "view": "Görüntüle",
+      "showingRange": "Gösterilen {start}-{end} / {total} gönderim",
+      "previous": "Önceki",
+      "next": "İleri",
+      "pageOf": "Sayfa {page} / {total}",
+      "noSubmissionsToExport": "İhraç edilecek gönderim yok",
+      "submissionId": "Gönderim Kimliği",
+      "submittedAt": "Gönderildi",
+      "csvExportedSuccess": "CSV başarıyla ihraç edildi",
+      "jsonExportedSuccess": "JSON başarıyla ihraç edildi"
+    },
+    "premiumRequired": {
+      "analytics": {
+        "title": "Premium gerektirir",
+        "description": "Form analizine erişmek için premium abonelikが必要です. Tüm özellikleri kilidini açmak için yükseltin.",
+        "viewPricing": "Fiyatları Gör"
+      },
+      "submissions": {
+        "title": "Premium gerektirir",
+        "description": "Form gönderimlerine erişmek için premium abonelikが必要です. Tüm özellikleri kilidini açmak için yükseltin.",
+        "viewPricing": "Fiyatları Gör"
+      }
+    }
+  },
+  "trialBanner": {
+    "aria": {
+      "status": "Deneme durumu bildirimi"
+    },
+    "endsInPrefix": "Ücretsiz denemeniz ",
+    "remainingSuffix": " geri sayım",
+    "expired": "Deneme süresi sona erdi",
+    "units": {
+      "day": "g",
+      "hour": "s",
+      "minute": "d",
+      "second": "h"
+    }
+  },
+  "embed": {
+    "customizer": {
+      "subtitle": "Formunuzu özelleştirin ve gömülü kod oluşturun",
+      "showCode": "Kod Göster",
+      "settings": "Ayarlar",
+      "preview": "Önizleme",
+      "desktop": "Masaüstü",
+      "mobile": "Mobil"
+    },
+    "settings": {
+      "dimensions": {
+        "title": "Boyutlar",
+        "width": "Genişlik",
+        "widthPlaceholder": "örneğin, 100%, 800px",
+        "height": "Yükseklik",
+        "heightPlaceholder": "örneğin, 600px, 100vh",
+        "makeResponsive": "Yanıtlayıcı yapın (kap container genişliğine göre ayarlar)"
+      },
+      "appearance": {
+        "title": "Görünüm",
+        "backgroundColor": "Arka Plan Rengi",
+        "allowTransparentBackground": "Şeffaf arka planı izin ver (arka plan rengini geçersiz kılar)"
+      },
+      "border": {
+        "title": "Sınır ve Stili",
+        "showBorder": "Sınır göster",
+        "borderColor": "Sınır Rengi",
+        "borderWidth": "Sınır Genişliği (px)",
+        "borderRadius": "Sınır Yarıçapı (px)",
+        "padding": "Dolgu (px)",
+        "paddingHelp": "Iframe çevresindeki boşluk"
+      },
+      "performance": {
+        "title": "Performans",
+        "loadingMode": "Yükleme Modu",
+        "loadingModePlaceholder": "Yükleme modunu seçin",
+        "lazy": "Gecikmeli (tavsiye edilir)",
+        "eager": "Hemen",
+        "help": "Gecikmeli yükleme, iframe yalnızca görünüm alanına geldiğinde yüklenerek sayfa performansını iyileştirir"
+      }
+    },
+    "codeModal": {
+      "title": "Gömülü Kod",
+      "description": "Çerçeveyi seçin ve kodu kopyalayın",
+      "codeLabel": "{mode} Kodu",
+      "copied": "Kopyalandı!",
+      "copy": "Kopyala",
+      "close": "Kapat",
+      "modes": {
+        "htmlDescription": "Evrensel HTML iframe",
+        "reactDescription": "React bileşeni",
+        "nextjsDescription": "Next.js bileşeni",
+        "vueDescription": "Vue.js bileşeni",
+        "wordpressDescription": "WordPress shortcode"
+      },
+      "iframeTitle": "Form"
+    },
+    "testPage": {
+      "metadata": {
+        "title": "Gömülü Test - IkiForm",
+        "description": "Form gömme yeteneklerini göstermek için test sayfası"
+      },
+      "title": "Form Gömme Test Sayfası",
+      "descriptionPrefix": "Bu sayfa, formların farklı konfigürasyonlar kullanılarak nasıl gömülebileceğini gösterir. Ziyaret",
+      "descriptionSuffix": "kendi gömülü'nü özelleştirmek için.",
+      "tryCustomizer": "Gömülü Özelleştiriciyi Dene",
+      "cards": {
+        "standard": {
+          "title": "Standart Gömülü",
+          "description": "600px yükseklik - masaüstü görüntüleme için mükemmel",
+          "badge": "Yanıtlayıcı",
+          "iframeTitle": "Standart Form Gömülü"
+        },
+        "compact": {
+          "title": "Kompakt Gömülü",
+          "description": "400px yükseklik - yan çubuklar ve daha küçük alanlar için ideal",
+          "badge": "Minimal",
+          "iframeTitle": "Kompakt Form Gömülü"
+        },
+        "fixed": {
+          "title": "Sabit Genişlik Gömülü",
+          "description": "800px genişlik, merkezlenmiş - belirli düzenler için mükemmel",
+          "badge": "Özel Stil",
+          "iframeTitle": "Sabit Genişlikli Form Embed"
+        },
+        "react": {
+          "title": "React Bileşen Örneği",
+          "description": "Düzgün yazımlı TypeScript React bileşeni",
+          "codeIframeTitle": "Form"
+        }
+      },
+      "guide": {
+        "title": "Embed Özelliği Nasıl Kullanılır",
+        "description": "Formlarınızı gömmek için adım adım kılavuz",
+        "steps": {
+          "step1": {
+            "title": "Embed Özelleştiricisine Erişin",
+            "prefix": "Git",
+            "suffix": "veya form panonuzda gömülü düğmeye tıklayın."
+          },
+          "step2": {
+            "title": "Gömünüzü Özelleştirin",
+            "item1": "Genişlik ve yükseklik boyutlarını ayarlayın",
+            "item2": "Tema seçin (hafif, koyu, otomatik)",
+            "item3": "Sınırları ve stillemeyi yapılandırın",
+            "item4": "Yükleme davranışını ayarlayın"
+          },
+          "step3": {
+            "title": "Kodunuzu Alın",
+            "description": "HTML, React, Next.js, Vue veya WordPress için oluşturulan kodu kopyalayın ve web sitenize yapıştırın."
+          },
+          "step4": {
+            "title": "Pano Entegrasyonu",
+            "description": "Form eylemlerindeki gömülü düğmeyi kullanarak form panonuzdan doğrudan embed seçeneklerine erişin."
+          }
+        }
+      }
+    }
+  }
+}

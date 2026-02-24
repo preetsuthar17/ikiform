@@ -1,0 +1,252 @@
+{
+  "name": "Ikiform",
+  "tagline": "轻松创建表单、收集回复并分析数据。",
+  "footer": {
+    "madeBy": "开发者"
+  },
+  "cta": {
+    "heading": "立即创建您的第一个表单。",
+    "subheading": "使用 Ikiform 在几秒钟内创建表单、问卷调查、收集回复等！",
+    "goToDashboard": "前往仪表板",
+    "createFirstForm": "创建您的第一个表单",
+    "tryDemo": "试用演示"
+  },
+  "hero": {
+    "unableToLoadFormDemo": "无法加载表单演示。请尝试刷新页面。",
+    "reload": "重新加载",
+    "iframeTitle": "Ikiform 演示表单",
+    "sponsoredByAria": "由 Vercel 赞助（在新标签页中打开）",
+    "sponsoredBy": "赞助商",
+    "heading": "创建表单、收集回复并进行分析。",
+    "subheading": "用于轻松数据收集和分析的开源表单平台。",
+    "fiveStarRating": "五星满分评价",
+    "totalUsersSrOnly": "总用户数：",
+    "lovedByUsers": "深受 {count} 位用户喜爱",
+    "createFirstForm": "创建您的第一个表单",
+    "tryDemo": "试用演示",
+    "openFullscreenAria": "全屏打开表单构建器演示（按 Enter 或 Space 键）",
+    "clickToViewFullscreen": "点击全屏查看",
+    "tabs": {
+      "formDemo": "表单演示",
+      "formBuilderDemo": "表单构建器演示"
+    }
+  },
+  "pricing": {
+    "title": "满足一切所需的简单、透明定价。",
+    "description": "选择最适合您需求的方案，开始收集回复。",
+    "popular": "热门",
+    "noCard": "无需信用卡",
+    "features": {
+      "unlimitedForms": "无限表单和回复",
+      "apiWebhooks": "用于自动化的 API 和 Webhook",
+      "responseLimits": "控制回复限制和频率",
+      "quizScoring": "创建带评分的测验",
+      "formDataApi": "通过 API 访问表单数据",
+      "customBranding": "自定义品牌，随处嵌入",
+      "spamProtection": "自动拦截垃圾信息和机器人",
+      "passwordProfanity": "过滤不良内容，要求密码验证"
+    },
+    "plans": {
+      "monthly": {
+        "title": "月度计划",
+        "byline": "按月计费 · 随时取消"
+      },
+      "lifetime": {
+        "title": "终身访问",
+        "byline": "一次性付款 · 终身访问"
+      },
+      "yearly": {
+        "title": "年度计划",
+        "byline": "按年计费（$192/年）· 随时取消"
+      }
+    },
+    "cta": {
+      "startTrial": "开始 14 天免费试用",
+      "getLifetime": "获取终身访问"
+    }
+  },
+  "faq": {
+    "title": "常见问题",
+    "featureBoardLabel": "功能看板",
+    "githubLabel": "GitHub",
+    "q1": {
+      "question": "什么是 Ikiform？",
+      "answer": "Ikiform 是 Google 表单的开源替代方案。它帮助您轻松创建美观、交互式的表单。"
+    },
+    "q2": {
+      "question": "有免费试用吗？",
+      "answer": "有，提供 14 天免费试用，无需信用卡。您可以随时取消。"
+    },
+    "q3": {
+      "question": "为什么使用 Ikiform 而不是 Google 表单或 Typeform？",
+      "answer": "Ikiform 是开源的，让您完全掌控数据和品牌。没有隐藏费用，您还可以自托管以获得更高的隐私性和灵活性。"
+    },
+    "q4": {
+      "question": "我可以创建哪些类型的表单？",
+      "answer": "您可以创建单页表单和带进度跟踪的多步骤表单。"
+    },
+    "q5": {
+      "question": "支持哪些字段？",
+      "answer": "支持的字段包括文本、电子邮件、数字、电话号码、文本区域、日期、时间、地址、链接、下拉选择、单选按钮、复选框、滑块、标签、社交字段、文件上传、签名、声明、横幅、字段组、标签输入、社交媒体、日程安排、投票、评分、测验等。"
+    },
+    "q6": {
+      "question": "我的数据如何受到保护？",
+      "answer": "表单可以设置密码保护、速率限制、不良内容过滤、垃圾信息防护、机器人防护，并符合 GDPR 规定。"
+    },
+    "q7": {
+      "question": "我提交的数据会与他人共享吗？",
+      "answer": "不会，您的数据不会被出售或与第三方共享，仅限运行 Ikiform 所需的可信服务提供商除外。"
+    },
+    "q8": {
+      "question": "我可以自定义表单吗？",
+      "answer": "您可以更改颜色、字体、布局，添加您的徽标，并控制每个字段的外观。"
+    },
+    "q9": {
+      "question": "我可以在哪里建议新功能？",
+      "answerPrefix": "您可以在以下位置提出功能建议"
+    },
+    "q10": {
+      "question": "我的数据存储在哪里？",
+      "answer": "您的数据使用 Supabase 加密并安全存储在欧盟。"
+    },
+    "q11": {
+      "question": "我的数据如何保持安全？",
+      "answer": "我们采用严格的安全措施，只有授权人员才能访问您的数据。"
+    },
+    "q12": {
+      "question": "如果我取消账户，数据会被删除吗？",
+      "answer": "是的。您可以随时删除数据。已删除的数据将在 30 天内从备份中移除。"
+    },
+    "q13": {
+      "question": "我可以删除我的数据吗？",
+      "answer": "可以。您可以随时通过发送电子邮件至 hi@ikiform.com 请求访问或删除您的数据。"
+    },
+    "q14": {
+      "question": "谁拥有我的表单提交数据？",
+      "answer": "您收集的所有数据都属于您。Ikiform 只是为您存储这些数据。"
+    },
+    "q15": {
+      "question": "Ikiform 是开源的吗？",
+      "answerPrefix": "Ikiform 完全开源，可在以下位置获取"
+    }
+  },
+  "bento": {
+    "preview": {
+      "aiForm": {
+        "demoAria": "AI 表单构建器演示",
+        "step0Label": "您想创建什么？",
+        "step0Placeholder": "例如：联系表单",
+        "step1Label": "收集姓名",
+        "step2Label": "收集邮箱",
+        "step3Label": "留言",
+        "statusGenerating": "AI 正在构建您的表单…",
+        "statusGenerated": "表单已生成",
+        "examplePrompt": "能帮我创建一个简单的联系表单吗？",
+        "generatedIn": "2.3 秒内生成",
+        "useThisForm": "使用此表单"
+      },
+      "unlimited": {
+        "aria": "无限提交预览",
+        "copy": "无限表单、字段、用户和回复。"
+      },
+      "analytics": {
+        "weeklyResponses": "每周回复",
+        "liveUpdating": "数据实时更新中...",
+        "responsesThisWeek": "本周 1.2k 条回复"
+      },
+      "logic": {
+        "ifPrefix": "如果",
+        "thenPrefix": "那么",
+        "elsePrefix": "否则",
+        "userResponds": "用户回答",
+        "yesValue": "“是”",
+        "showEmailField": "显示邮箱字段",
+        "skip": "跳过",
+        "srDescription": "简单条件逻辑预览：如果用户回答“是”，则显示邮箱字段；否则跳过。"
+      },
+      "api": {
+        "nameLabel": "姓名",
+        "emailLabel": "邮箱",
+        "planLabel": "计划",
+        "premiumPlan": "高级计划",
+        "statusReady": "就绪",
+        "statusFetching": "获取中...",
+        "statusFetched": "已获取！",
+        "srReady": "API 集成演示已就绪。",
+        "srFetching": "正在连接 Stripe API，加载数据...",
+        "srSuccess": "Stripe API 数据已接收并显示。"
+      },
+      "signatures": {
+        "statusIdle": "等待签名…",
+        "statusSigning": "正在签名",
+        "statusDone": "已安全签署",
+        "signAgreement": "签署协议",
+        "signed": "✓ 已签署",
+        "verified": "已验证",
+        "signatureVerified": "签名已验证",
+        "srIdle": "等待电子签名。请签名以继续。",
+        "srSigning": "签名正在书写中。",
+        "srDone": "签名完成并已验证。"
+      },
+      "notifications": {
+        "title": "邮件通知",
+        "none": "无",
+        "newNotifications": "您有 {count} 条新通知",
+        "justNow": "刚刚",
+        "noNewNotifications": "暂无新通知。",
+        "noNewEmailNotifications": "暂无新邮件通知。",
+        "newEmailNotification": "新邮件通知：{title}，来自 {from}，{time}",
+        "templates": {
+          "contactForm": "联系表单",
+          "newsletterSignup": "新闻通讯订阅",
+          "supportRequest": "支持请求",
+          "feedbackForm": "反馈表单",
+          "jobApplication": "求职申请",
+          "twoMinutesAgo": "2 分钟前",
+          "fiveMinutesAgo": "5 分钟前",
+          "eightMinutesAgo": "8 分钟前",
+          "twelveMinutesAgo": "12 分钟前",
+          "fifteenMinutesAgo": "15 分钟前"
+        }
+      }
+    },
+    "cards": {
+      "aiFormBuilder": {
+        "title": "AI 表单构建器",
+        "highlight": "即时创建表单",
+        "description": "——只需描述即可发布。几秒钟内转化访客。"
+      },
+      "unlimitedEverything": {
+        "title": "一切无限",
+        "highlight": "无限表单和回复",
+        "description": " 无限制增长。"
+      },
+      "aiAnalytics": {
+        "title": "AI 分析",
+        "prefix": "了解谁在转化以及原因——",
+        "highlight": "获取清晰、可操作的洞察"
+      },
+      "smartNotifications": {
+        "title": "智能通知",
+        "prefix": "不错过任何线索——",
+        "highlight": "即时获取提醒，自动跟进。"
+      },
+      "apiWebhooks": {
+        "title": "API 和 Webhook",
+        "highlight": "将线索同步到任何地方",
+        "description": "——连接任何服务或工作流程。"
+      },
+      "formSignatures": {
+        "title": "表单签名",
+        "prefix": "添加签名字段以",
+        "highlight": "收集电子签名",
+        "suffix": "，适用于任何表单。"
+      },
+      "visualLogicBuilder": {
+        "title": "可视化逻辑构建器",
+        "highlight": "个性化每段旅程",
+        "description": "——根据答案显示或隐藏问题。"
+      }
+    }
+  }
+}

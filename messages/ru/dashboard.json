@@ -1,0 +1,517 @@
+{
+  "common": {
+    "dashboard": "Панель управления",
+    "feedback": "Обратная связь",
+    "logOut": "Выйти",
+    "loading": "Загрузка",
+    "loadingProfile": "Загрузка профиля",
+    "loadingFormsSidebar": "Загрузка боковой панели форм",
+    "loadingFormsManagement": "Загрузка управления формами"
+  },
+  "profile": {
+    "userProfileInformation": "Информация профиля пользователя",
+    "userNameAria": "Имя пользователя: {name}",
+    "premiumUserBadge": "Значок премиум-пользователя",
+    "userEmailAria": "Email пользователя: {email}"
+  },
+  "formsManagement": {
+    "aria": {
+      "management": "Управление формами"
+    },
+    "header": {
+      "title": "Ваши формы",
+      "subtitle": "Создавайте, управляйте и анализируйте формы с лёгкостью",
+      "createNewForm": "Создать новую форму",
+      "createDialogTitle": "Создать новую форму",
+      "createDialogDescription": "Выберите способ начала. Вы можете сгенерировать с помощью ИИ, создать вручную или импортировать зашифрованный файл."
+    },
+    "createOptions": {
+      "aiBadge": "Наиболее рекомендуемый",
+      "aiCta": "Начать с ИИ",
+      "aiTitle": "Использовать Kiko AI",
+      "aiDescription": "Опишите форму и позвольте Kiko AI создать полный первый черновик с полями, логикой и структурой.",
+      "manualCta": "Создать вручную",
+      "manualTitle": "Создать вручную",
+      "manualDescription": "Начните с пустой формы и настройте поля вручную.",
+      "importCta": "Импортировать файл",
+      "importTitle": "Импортировать из файла",
+      "importDescription": "Импортировать защищённый паролем файл .ikiform как новый черновик формы."
+    },
+    "emptyState": {
+      "aria": "Пустое состояние — формы ещё не созданы",
+      "title": "Форм пока нет",
+      "description": "Начните, создав свою первую форму. Это быстро и просто!",
+      "createFirstForm": "Создать первую форму",
+      "dialog": {
+        "title": "Как вы хотите создать форму?",
+        "description": "Выберите создание формы вручную или доверьте это Kiko AI.",
+        "createWithAI": "Использовать Kiko AI",
+        "createManually": "Создать вручную"
+      }
+    },
+    "search": {
+      "aria": "Поиск форм и фильтры",
+      "searchAria": "Поиск форм",
+      "placeholder": "Поиск форм по названию, описанию или ID...",
+      "openFilterMenu": "Открыть меню фильтров",
+      "activeFiltersAria": "{count} активных фильтра",
+      "statusLabel": "Статус",
+      "filterByAll": "Фильтр по всем статусам",
+      "all": "Все",
+      "filterByPublished": "Фильтр по опубликованным формам",
+      "published": "Опубликовано",
+      "filterByDraft": "Фильтр по черновикам",
+      "draft": "Черновик",
+      "sortByLabel": "Сортировать по",
+      "sortByLastUpdated": "Сортировать по последнему обновлению",
+      "lastUpdated": "Последнее обновление",
+      "sortByDateCreated": "Сортировать по дате создания",
+      "dateCreated": "Дата создания",
+      "sortByTitle": "Сортировать по названию в алфавитном порядке",
+      "titleAz": "Название (А-Я)",
+      "clearAllFilters": "Очистить все фильтры",
+      "activeFiltersGroup": "Активные фильтры",
+      "badgeSearch": "Поиск: \"{query}\"",
+      "clearSearch": "Очистить поиск",
+      "badgeStatus": "Статус: {status}",
+      "clearStatus": "Очистить фильтр статуса",
+      "badgeSort": "Сортировка: {sort}",
+      "sortTitleShort": "Название",
+      "sortCreatedShort": "Создано",
+      "resetSort": "Сбросить сортировку на последнее обновление"
+    },
+    "list": {
+      "untitledForm": "Форма без названия",
+      "viewAnalyticsFor": "Просмотр аналитики для {title}",
+      "formStatusAria": "Статус формы: {status}",
+      "published": "Опубликовано",
+      "draft": "Черновик",
+      "publicTitle": "Публичная: \"{title}\"",
+      "updated": "Обновлено {date}",
+      "actionsFor": "Действия для {title}",
+      "formActions": "Действия с формой",
+      "editForm": "Редактировать форму",
+      "shareForm": "Поделиться формой",
+      "duplicate": "Дублировать",
+      "viewForm": "Просмотр формы",
+      "viewAnalytics": "Просмотр аналитики",
+      "embed": "Встроить",
+      "export": "Экспорт",
+      "deleteForm": "Удалить форму",
+      "formsListAria": "Список форм"
+    },
+    "stats": {
+      "totalForms": "Всего форм",
+      "published": "Опубликовано",
+      "drafts": "Черновики",
+      "loadingAria": "Загрузка статистики форм",
+      "aria": "Статистика форм",
+      "sidebarAria": "Боковая панель статистики форм"
+    },
+    "emptySearch": {
+      "noMatch": "Нет форм, соответствующих критериям поиска.",
+      "clearFilters": "Очистить фильтры",
+      "clearAria": "Очистить все фильтры поиска"
+    },
+    "deleteModal": {
+      "cancel": "Отмена",
+      "confirm": "Удалить форму",
+      "title": "Удалить форму",
+      "description": "Вы уверены, что хотите удалить \"{formTitle}\"? Это действие нельзя отменить, и все данные формы будут безвозвратно потеряны."
+    },
+    "toasts": {
+      "failedLoadForms": "Не удалось загрузить формы",
+      "failedShareForm": "Не удалось поделиться формой",
+      "formDuplicated": "Форма продублирована",
+      "failedDuplicateForm": "Не удалось продублировать форму",
+      "formImportedSuccess": "Форма успешно импортирована.",
+      "failedImportForm": "Не удалось импортировать форму.",
+      "formDeletedSuccess": "Форма успешно удалена",
+      "failedDeleteForm": "Не удалось удалить форму"
+    },
+    "shareModal": {
+      "title": "Поделиться формой",
+      "publishedDescription": "Поделитесь формой с другими с помощью ссылки или QR-кода ниже",
+      "unpublishedDescription": "Опубликуйте форму, чтобы её можно было поделиться с другими",
+      "shareLink": "Ссылка для публикации",
+      "copied": "Скопировано",
+      "copyLink": "Копировать ссылку",
+      "hide": "Скрыть",
+      "show": "Показать",
+      "qrCode": "QR-код",
+      "qrCodeForForm": "QR-код формы",
+      "generating": "Генерация...",
+      "scanForMobile": "Отсканируйте для быстрого доступа с мобильного",
+      "downloading": "Загрузка...",
+      "downloadQr": "Скачать QR",
+      "needsPublish": "Форму нужно опубликовать, прежде чем ею можно будет поделиться публично.",
+      "publishing": "Публикация...",
+      "publishForm": "Опубликовать форму",
+      "toasts": {
+        "failedGenerateQr": "Не удалось сгенерировать QR-код",
+        "linkCopied": "Ссылка скопирована в буфер обмена!",
+        "failedCopyLink": "Не удалось скопировать ссылку. Пожалуйста, скопируйте вручную.",
+        "qrDownloaded": "QR-код успешно загружен!",
+        "failedDownloadQr": "Не удалось загрузить QR-код"
+      }
+    },
+    "secureImport": {
+      "title": "Импорт формы из зашифрованного файла",
+      "description": "Расшифруйте файл .ikiform и создайте новый черновик формы.",
+      "encryptedFileLabel": "Зашифрованный файл",
+      "encryptedFileHelp": "Загрузите зашифрованный файл экспорта .ikiform.",
+      "passphraseLabel": "Парольная фраза",
+      "passphrasePlaceholder": "Введите парольную фразу, использованную при экспорте",
+      "passphraseHelp": "Необходимо не менее {count} символов.",
+      "decrypting": "Расшифровка...",
+      "decryptFile": "Расшифровать файл",
+      "importedForm": "Импортированная форма",
+      "decryptToLoadSettings": "Расшифруйте файл для загрузки настроек импорта.",
+      "preserveApiSettings": "Сохранить настройки API (ключ API и состояние включения)",
+      "preservePassword": "Сохранить пароль защиты паролем",
+      "preserveNotificationEmail": "Сохранить email получателя уведомлений",
+      "cancel": "Отмена",
+      "importing": "Импорт...",
+      "importAsNewForm": "Импортировать как новую форму",
+      "decryptToPreview": "Расшифруйте файл для предварительного просмотра импортируемой формы.",
+      "errors": {
+        "chooseFile": "Пожалуйста, выберите зашифрованный файл .ikiform.",
+        "passphraseMinChars": "Парольная фраза должна содержать не менее {count} символов.",
+        "failedDecrypt": "Не удалось расшифровать файл импорта.",
+        "wrongPassphrase": "Неверная парольная фраза или файл может быть изменён.",
+        "decryptBeforeImport": "Расшифруйте файл перед импортом.",
+        "failedImport": "Не удалось импортировать форму."
+      },
+      "toasts": {
+        "fixHighlightedFields": "Пожалуйста, исправьте выделенные поля.",
+        "fileDecrypted": "Файл расшифрован. Проверьте параметры импорта."
+      }
+    },
+    "secureExport": {
+      "title": "Экспорт формы (защищённый)",
+      "description": "Создайте зашифрованный файл .ikiform для этой формы. Для импорта потребуется та же парольная фраза.",
+      "untitledForm": "Форма без названия",
+      "formLabel": "Форма",
+      "unknownForm": "Неизвестная форма",
+      "passphraseSetup": "Настройка парольной фразы",
+      "passphraseLabel": "Парольная фраза",
+      "passphrasePlaceholder": "Не менее {count} символов",
+      "passphraseHelper": "Используйте не менее 12 символов для более надёжного шифрования.",
+      "confirmPassphraseLabel": "Подтвердите парольную фразу",
+      "confirmPassphrasePlaceholder": "Повторите парольную фразу",
+      "confirmPassphraseHelper": "Введите ту же парольную фразу ещё раз.",
+      "hidePassphrase": "Скрыть парольную фразу",
+      "viewPassphrase": "Показать парольную фразу",
+      "hideConfirmPassphrase": "Скрыть подтверждение парольной фразы",
+      "viewConfirmPassphrase": "Показать подтверждение парольной фразы",
+      "cancel": "Отмена",
+      "exporting": "Экспорт...",
+      "exportEncryptedFile": "Экспортировать зашифрованный файл",
+      "strength": {
+        "notSet": "Не задана",
+        "weak": "Слабая",
+        "good": "Хорошая",
+        "strong": "Надёжная"
+      },
+      "errors": {
+        "passphraseMinChars": "Парольная фраза должна содержать не менее {count} символов.",
+        "confirmPassphraseMinChars": "Подтверждение парольной фразы должно содержать не менее {count} символов.",
+        "passphrasesDoNotMatch": "Парольные фразы не совпадают.",
+        "noFormSelected": "Не выбрана форма для экспорта.",
+        "enterValidPassphrase": "Пожалуйста, введите и подтвердите действительную парольную фразу.",
+        "failedExport": "Не удалось экспортировать форму."
+      },
+      "toasts": {
+        "exportCreated": "Зашифрованный экспорт формы создан."
+      }
+    }
+  },
+  "admin": {
+    "page": {
+      "aria": {
+        "dashboard": "Панель администратора",
+        "announcements": "Управление объявлениями",
+        "expireTrials": "Управление истечением пробных периодов",
+        "users": "Управление пользователями"
+      },
+      "announcements": {
+        "title": "Отправить объявления",
+        "signedInAs": "Вы вошли как {email}"
+      },
+      "expireTrials": {
+        "title": "Завершить пробные периоды",
+        "description": "Вручную запустить задание cron для завершения бесплатных пробных периодов"
+      },
+      "users": {
+        "title": "Все пользователи ({count})",
+        "description": "Управление и просмотр всех зарегистрированных пользователей"
+      }
+    },
+    "announcementForm": {
+      "labels": {
+        "recipientEmails": "Email получателей",
+        "subject": "Тема",
+        "content": "Содержимое (поддерживается Markdown)"
+      },
+      "placeholders": {
+        "recipientEmails": "one@example.com, two@example.com\\nили\\nthree@example.com",
+        "subject": "Тема объявления",
+        "content": "# Заголовок\\n\\nПодробности здесь..."
+      },
+      "help": {
+        "recipientFormat": "Разделяйте запятыми или переносом строки."
+      },
+      "actions": {
+        "loading": "Загрузка...",
+        "prefillFromUsers": "Заполнить из пользователей",
+        "sendAnnouncement": "Отправить объявление"
+      },
+      "toasts": {
+        "fetchEmailsFailed": "Не удалось получить email-адреса",
+        "loadedEmails": "Загружено {count} email-адресов",
+        "sending": "Отправка объявлений...",
+        "sentCount": "Отправлено {count} писем",
+        "failedWithError": "Ошибка: {error}",
+        "failedToSendFallback": "Не удалось отправить"
+      }
+    },
+    "expireTrialsControl": {
+      "title": "Завершить пробные периоды",
+      "description": "Вручную запустить задание cron для завершения бесплатных пробных периодов старше 14 дней",
+      "unknownError": "Неизвестная ошибка",
+      "actions": {
+        "running": "Выполняется...",
+        "run": "Запустить завершение пробных периодов"
+      },
+      "result": {
+        "success": "Успех",
+        "error": "Ошибка",
+        "updatedUsersCount": "Обновлено {count} пользователей",
+        "updatedUsers": "Обновлённые пользователи:"
+      },
+      "toasts": {
+        "updatedSuccess": "Успешно обновлено {count} пользователей с пробного на бесплатный",
+        "failedWithError": "Ошибка: {error}",
+        "errorWithMessage": "Ошибка: {message}"
+      }
+    },
+    "usersTable": {
+      "search": {
+        "aria": "Поиск пользователей",
+        "placeholder": "Поиск пользователей по имени, email, имени клиента или Polar ID..."
+      },
+      "filters": {
+        "premiumAria": "Фильтр по премиум-статусу",
+        "trialAria": "Фильтр по статусу пробного периода",
+        "allPremium": "Все премиум",
+        "premiumOnly": "Только премиум",
+        "freeOnly": "Только бесплатные",
+        "allTrial": "Все пробные",
+        "trialOnly": "Только пробные",
+        "noTrial": "Без пробного периода",
+        "clearAria": "Очистить все фильтры",
+        "clear": "Очистить",
+        "filteredBy": "Фильтр:"
+      },
+      "columns": {
+        "uid": "UID",
+        "name": "Имя",
+        "email": "Email",
+        "premium": "Премиум",
+        "trial": "Пробный",
+        "customerName": "Имя клиента",
+        "polarId": "Polar ID",
+        "created": "Создан",
+        "updated": "Обновлён"
+      },
+      "sort": {
+        "uidAria": "Сортировать по UID",
+        "nameAria": "Сортировать по имени",
+        "emailAria": "Сортировать по email",
+        "premiumAria": "Сортировать по премиум-статусу",
+        "trialAria": "Сортировать по статусу пробного периода",
+        "createdAria": "Сортировать по дате создания",
+        "updatedAria": "Сортировать по дате обновления"
+      },
+      "table": {
+        "aria": "Таблица пользователей"
+      },
+      "badges": {
+        "premium": "Премиум",
+        "free": "Бесплатно",
+        "freeTrial": "Бесплатный пробный",
+        "noFreeTrial": "Без бесплатного пробного"
+      },
+      "row": {
+        "viewDetailsFor": "Просмотр деталей {name}",
+        "premiumStatusAria": "Премиум-статус: {status}",
+        "trialStatusAria": "Статус пробного периода: {status}"
+      },
+      "showingRange": "Показано {start}-{end} из {total} пользователей",
+      "showLabel": "Показать:",
+      "itemsPerPageAria": "Записей на страницу",
+      "empty": {
+        "filtered": "Нет пользователей, соответствующих вашим фильтрам",
+        "default": "Пользователи не найдены"
+      },
+      "pagination": {
+        "pageOf": "Страница {current} из {total}",
+        "previousAria": "Перейти на предыдущую страницу",
+        "previous": "Назад",
+        "goToPageAria": "Перейти на страницу {page}",
+        "nextAria": "Перейти на следующую страницу",
+        "next": "Далее"
+      }
+    },
+    "userControls": {
+      "title": "Панель администратора",
+      "description": "Управление статусом и правами пользователя",
+      "sections": {
+        "freeTrial": "Бесплатный пробный период",
+        "premiumStatus": "Премиум-статус",
+        "dangerZone": "Опасная зона"
+      },
+      "actions": {
+        "removeTrial": "Убрать пробный период",
+        "assignTrial": "Назначить пробный период",
+        "removePremium": "Убрать премиум",
+        "assignPremium": "Назначить премиум",
+        "deleteUser": "Удалить пользователя"
+      },
+      "warning": {
+        "label": "Предупреждение:",
+        "message": "Удаление пользователя безвозвратно удалит все его формы, отправки и данные. Это действие нельзя отменить."
+      },
+      "confirm": {
+        "title": "Удалить пользователя",
+        "confirm": "Удалить пользователя",
+        "cancel": "Отмена",
+        "description": "Вы уверены, что хотите удалить пользователя {userName}? Это действие нельзя отменить, и все его формы и данные будут удалены."
+      }
+    },
+    "userProfile": {
+      "backToAdmin": "Вернуться в панель администратора",
+      "invalidUserId": {
+        "title": "Недействительный ID пользователя",
+        "description": "В URL не указан ID пользователя."
+      },
+      "notFound": {
+        "title": "Пользователь не найден",
+        "description": "Искомый пользователь не существует."
+      },
+      "userInformation": "Информация о пользователе",
+      "labels": {
+        "uid": "UID",
+        "premiumStatus": "Премиум-статус",
+        "trialStatus": "Статус пробного периода",
+        "customerName": "Имя клиента",
+        "polarCustomerId": "ID клиента Polar",
+        "memberSince": "Участник с"
+      },
+      "badges": {
+        "premium": "Премиум",
+        "free": "Бесплатно",
+        "freeTrial": "Бесплатный пробный",
+        "noTrial": "Без пробного периода"
+      },
+      "trialStatus": {
+        "title": "Статус бесплатного пробного периода",
+        "expiredBadge": "Пробный период истёк",
+        "endedDaysAgo": "Бесплатный пробный период закончился {days} дней назад",
+        "expiringSoonBadge": "Скоро истекает",
+        "activeBadge": "Активный пробный период",
+        "daysLeft": "{days, plural, one {# день осталось в бесплатном пробном периоде} few {# дня осталось в бесплатном пробном периоде} other {# дней осталось в бесплатном пробном периоде}}",
+        "startedOn": "Пробный период начался:"
+      },
+      "forms": {
+        "title": "Формы ({count})",
+        "description": "Все формы, созданные этим пользователем",
+        "empty": "Этот пользователь ещё не создал ни одной формы.",
+        "table": {
+          "formTitle": "Название формы",
+          "description": "Описание",
+          "status": "Статус",
+          "submissions": "Отправки",
+          "created": "Создан",
+          "actions": "Действия"
+        },
+        "status": {
+          "published": "Опубликовано",
+          "draft": "Черновик"
+        },
+        "actions": {
+          "view": "Просмотр",
+          "details": "Подробности"
+        }
+      }
+    },
+    "formDetails": {
+      "pageAria": "Страница деталей формы",
+      "backToAdmin": "Вернуться в панель администратора",
+      "backToAdminAria": "Вернуться на панель администратора",
+      "noDescription": "Описание не предоставлено",
+      "viewForm": "Просмотр формы",
+      "viewFormAria": "Просмотр формы в новой вкладке",
+      "invalidFormId": {
+        "aria": "Ошибка недействительного ID формы",
+        "title": "Недействительный ID формы",
+        "description": "В URL не указан ID формы."
+      },
+      "notFound": {
+        "aria": "Ошибка: форма не найдена",
+        "title": "Форма не найдена",
+        "description": "Искомая форма не существует."
+      },
+      "badges": {
+        "published": "Опубликовано",
+        "draft": "Черновик",
+        "enabled": "Включено",
+        "disabled": "Отключено"
+      },
+      "statistics": {
+        "aria": "Статистика формы",
+        "status": "Статус",
+        "formStatusAria": "Статус формы: {status}",
+        "submissions": "Отправки",
+        "submissionsCountAria": "{count} отправок",
+        "created": "Создано",
+        "createdOnAria": "Создано {date}",
+        "apiStatus": "Статус API",
+        "apiStatusAria": "Статус API: {status}"
+      },
+      "details": {
+        "title": "Детали формы",
+        "formId": "ID формы",
+        "formIdAria": "ID формы: {id}",
+        "owner": "Владелец",
+        "viewOwnerAria": "Просмотр деталей владельца для {name}",
+        "unknown": "Неизвестно",
+        "slug": "Slug",
+        "slugAria": "Slug формы: {slug}",
+        "notSet": "Не задано",
+        "lastUpdated": "Последнее обновление",
+        "lastUpdatedAria": "Последнее обновление: {date}",
+        "apiKey": "Ключ API",
+        "apiKeyAria": "Ключ API: {key}"
+      },
+      "schema": {
+        "title": "Схема формы",
+        "aria": "JSON схемы формы"
+      },
+      "submissions": {
+        "title": "Отправки формы ({count})",
+        "description": "Все ответы, отправленные в эту форму",
+        "emptyAria": "Нет отправок формы",
+        "empty": "Отправок пока нет.",
+        "listAria": "Список отправок формы",
+        "itemAria": "Отправка {number}",
+        "itemLabel": "Отправка #{number}",
+        "submittedOnAria": "Отправлено {date}",
+        "ipAria": "IP-адрес: {ip}",
+        "ipLabel": "IP: {ip}",
+        "fieldAria": "Поле: {key}",
+        "valueAria": "Значение для {key}: {value}"
+      }
+    }
+  }
+}

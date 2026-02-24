@@ -2,13 +2,9 @@ import { LegalMarkdownPage } from "@/components/legal/legal-markdown-page";
 import { JsonLd } from "@/components/seo/json-ld";
 import { requireLocale } from "@/lib/i18n/locale";
 import { buildMetadata } from "@/lib/seo/build-metadata";
+import { getLegalLabel } from "@/lib/seo/legal-labels";
 import { getBreadcrumbJsonLd } from "@/lib/seo/structured-data";
 import type { Metadata } from "next";
-
-const LABELS = {
-	en: "Data Processing Agreement",
-	es: "Acuerdo de tratamiento de datos",
-};
 
 export async function generateMetadata({
 	params,
@@ -35,7 +31,7 @@ export default async function LocalizedDpa({
 			<JsonLd
 				data={getBreadcrumbJsonLd(currentLocale, [
 					{ name: "Ikiform", path: "/" },
-					{ name: LABELS[currentLocale], path: "/legal/dpa" },
+					{ name: getLegalLabel("dpa", currentLocale), path: "/legal/dpa" },
 				])}
 			/>
 			<LegalMarkdownPage document="dpa" locale={currentLocale} />

@@ -1,0 +1,2211 @@
+{
+  "common": {
+    "na": "لا يوجد",
+    "premium": {
+      "title": "يتطلب بريميوم",
+      "viewPricing": "عرض الأسعار",
+      "aiBuilderDescription": "تحتاج إلى اشتراك بريميوم لاستخدام منشئ النماذج الذكية. 업그레이드 لفتح جميع الميزات.",
+      "formBuilderDescription": "تحتاج إلى اشتراك بريميوم لاستخدام منشئ النماذج. 업그레이드 لفتح جميع الميزات."
+    }
+  },
+  "formBuilder": {
+    "header": {
+      "title": "منشئ النماذج",
+      "goToDashboard": "الذهاب إلى لوحة القيادة",
+      "fieldCount": "{count} حقل",
+      "fieldCount_plural": "{count} حقول",
+      "saving": "حفظ",
+      "moreActions": "المزيد من الإجراءات",
+      "multiStepForm": "نموذج متعدد الخطوات",
+      "toggleMultiStepMode": "تبديل وضع الخطوات المتعددة",
+      "viewJson": "عرض JSON",
+      "analytics": "التحليلات",
+      "share": "مشاركة",
+      "useKiko": "استخدام كيكو",
+      "settings": "الإعدادات",
+      "publish": "نشر",
+      "published": "منشور",
+      "publishing": "نشر...",
+      "unpublishing": "إلغاء النشر...",
+      "publishForm": "نشر النموذج",
+      "unpublishForm": "إلغاء نشر النموذج",
+      "save": "حفظ",
+      "saveForm": "حفظ النموذج",
+      "actionsAria": "إجراءات منشئ النماذج"
+    },
+    "modals": {
+      "formSettings": "إعدادات النموذج",
+      "internalTitle": "العنوان الداخلي",
+      "internalTitlePlaceholder": "أدخل عنوانًا داخليًا للرجوع إليه...",
+      "internalTitleDescription": "هذا العنوان مرئي لك فقط في لوحة القيادة ومنشئ النماذج",
+      "publicTitle": "العنوان العام",
+      "publicTitlePlaceholder": "أدخل عنوانًا لعرضه للمستخدمين...",
+      "publicTitleDescription": "سيتم عرض هذا العنوان للمستخدمين على النموذج الفعلي. اتركه فارغًا لاستخدام العنوان الداخلي.",
+      "description": "الوصف",
+      "descriptionPlaceholder": "أدخل وصفًا للنموذج",
+      "submitButtonText": "نص زر الإرسال",
+      "submitButtonTextPlaceholder": "نص زر الإرسال",
+      "submit": "إرسال",
+      "successMessage": "رسالة النجاح",
+      "successMessagePlaceholder": "الرسالة المعروضة بعد الإرسال الناجح",
+      "redirectUrlOptional": "عنوان URL للتحويل (اختياري)",
+      "redirectUrlPlaceholder": "https://example.com/thank-you",
+      "cancel": "إلغاء",
+      "saveSettings": "حفظ الإعدادات"
+    },
+    "page": {
+      "formFields": "حقول النموذج",
+      "authRequired": "المصادقة مطلوبة",
+      "authRequiredDescription": "يرجى تسجيل الدخول لاستخدام منشئ النماذج.",
+      "goToLogin": "الذهاب إلى تسجيل الدخول",
+      "stepDefaultTitle": "الخطوة {index}",
+      "stepDefaultDescription": "الخطوة الأولى من نموذجك",
+      "loadingCustomization": "تحميل التخصيص..."
+    },
+    "blockManager": {
+      "header": {
+        "title": "هيكل النموذج",
+        "stepsCount": "{count, plural, one {# خطوة} other {# خطوات}}",
+        "description": "تنظيم نموذجك في أقسام منطقية",
+        "addStepAria": "إضافة خطوة جديدة إلى النموذج",
+        "addStep": "إضافة خطوة"
+      },
+      "item": {
+        "dragHandleAria": "اسحب لإعادة ترتيب الخطوة {title}",
+        "dragToReorder": "اسحب لإعادة الترتيب"
+      },
+      "headerActions": {
+        "stepBadge": "الخطوة {index}",
+        "editStepAria": "تحرير الخطوة {title}",
+        "deleteStepAria": "حذف الخطوة {title}",
+        "editStep": "تحرير الخطوة",
+        "deleteStep": "حذف الخطوة",
+        "collapseStep": "طي الخطوة",
+        "expandStep": "توسيع الخطوة"
+      },
+      "editForm": {
+        "stepTitlePlaceholder": "عنوان الخطوة",
+        "stepDescriptionPlaceholder": "وصف الخطوة (اختياري)",
+        "save": "حفظ",
+        "cancel": "إلغاء"
+      },
+      "fieldsList": {
+        "empty": "لا توجد حقول حتى الآن. أضف حقولًا من اللوحة على اليمين."
+      }
+    },
+    "multiStepNavigation": {
+      "deleteStep": "حذف الخطوة",
+      "addStep": "إضافة خطوة",
+      "deleteDialogTitle": "حذف الخطوة",
+      "deleteDialogDescription": "هل أنت متأكد من حذف هذه الخطوة؟ لا يمكن التراجع عن هذا الإجراء.",
+      "cancel": "إلغاء"
+    },
+    "formFields": {
+      "addFieldToFormAria": "إضافة حقل إلى النموذج",
+      "addField": "إضافة حقل",
+      "addSpecificFieldAria": "إضافة حقل {label}",
+      "formFields": "حقول النموذج",
+      "noFieldsInStep": "لا توجد حقول في هذه الخطوة",
+      "noFieldsYet": "لم يتم إضافة حقول بعد",
+      "addFieldsToStep": "إضافة حقول من اللوحة الجانبية إلى هذه الخطوة",
+      "addFieldsFromLeftPanel": "إضافة حقول من اللوحة الجانبية اليسرى لبدء إنشاء النموذج",
+      "fieldsCount": "{count, plural, one {# حقل} other {# حقول}}",
+      "fieldAria": "{type} حقل",
+      "deleteFieldAria": "حذف حقل {type}",
+      "deleteField": "حذف الحقل"
+    },
+    "jsonViewModal": {
+      "title": "مخطط النموذج JSON",
+      "description": "عرض للقراءة فقط للمخطط الحالي للنموذج. استخدم زر النسخ لنسخ JSON.",
+      "copySuccess": "تم نسخ JSON إلى الحافظة!",
+      "copyError": "فشل في نسخ JSON",
+      "copied": "تم النسخ",
+      "copyJson": "نسخ JSON"
+    },
+    "settingsMobile": {
+      "sectionsAria": "أقسام الإعدادات",
+      "goToSectionAria": "الذهاب إلى إعدادات {section}",
+      "backToListAria": "العودة إلى قائمة الإعدادات",
+      "settings": "الإعدادات"
+    },
+    "creation": {
+      "title": "إنشاء نموذج جديد",
+      "cancel": "إلغاء",
+      "back": "رجوع",
+      "createForm": "إنشاء النموذج",
+      "reviewAction": "مراجعة",
+      "next": "التالي",
+      "types": {
+        "single": {
+          "title": "نموذج صفحة واحدة",
+          "description": "نموذج تقليدي مع جميع الحقول في صفحة واحدة"
+        },
+        "multi": {
+          "title": "نموذج متعدد الخطوات",
+          "description": "تجربة نموذج موجهة مع خطوات متعددة"
+        }
+      },
+      "typePreview": {
+        "stepOf": "الخطوة {step} من {total}"
+      },
+      "configuration": {
+        "title": "تفاصيل النموذج",
+        "description": "تعيين المعلومات الداخلية والعامة للنموذج.",
+        "internalTitle": "العنوان الداخلي",
+        "internalTitlePlaceholder": "إدخال عنوان داخلي للرجوع إليه…",
+        "internalTitleHelp": "مرئي فقط في لوحة القيادة والمُنشئ.",
+        "publicTitle": "العنوان العام",
+        "publicTitlePlaceholder": "إدخال عنوان لعرضه للمستخدمين…",
+        "publicTitleHelp": "يظهر للمستخدمين على النموذج. اتركه فارغًا لإعادة استخدام العنوان الداخلي.",
+        "formDescription": "وصف النموذج",
+        "formDescriptionPlaceholder": "إدخال وصف قصير لتوجيه المستخدمين…",
+        "formDescriptionHelp": "اختياري. يساعد المستخدمين على فهم غرض النموذج."
+      },
+      "review": {
+        "formType": "نوع النموذج",
+        "multiStepForm": "نموذج متعدد الخطوات",
+        "singlePageForm": "نموذج صفحة واحدة",
+        "multiStep": "متعدد الخطوات",
+        "singlePage": "صفحة واحدة",
+        "editFormType": "تحرير نوع النموذج",
+        "formConfiguration": "تكوين النموذج",
+        "editFormConfiguration": "تحرير تكوين النموذج",
+        "internalTitle": "العنوان الداخلي",
+        "publicTitle": "العنوان العام",
+        "description": "الوصف",
+        "preview": "معاينة",
+        "previewDescription": "لقطة من النموذج."
+      },
+      "stepIndicator": {
+        "progress": "التقدم",
+        "stepCompleted": "الخطوة {index} مكتملة",
+        "stepCurrent": "الخطوة {index} الحالية",
+        "step": "الخطوة {index}"
+      }
+    },
+    "customize": {
+      "page": {
+        "savedCustomization": "حفظ التخصيص",
+        "saveFailed": "فشل في حفظ التغييرات. يرجى المحاولة مرة أخرى.",
+        "tabs": {
+          "presets": "الإعدادات المسبقة",
+          "layout": "التخطيط",
+          "colors": "الألوان",
+          "text": "النص"
+        },
+        "backToCustomize": "العودة إلى التخصيص",
+        "previewForm": "معاينة النموذج",
+        "customizeForm": "تخصيص النموذج",
+        "publicTitle": "عنوان عام: \"{title}\"",
+        "customizationActions": "إجراءات التخصيص",
+        "back": "رجوع",
+        "save": "حفظ",
+        "customize": "تخصيص"
+      },
+      "colors": {
+        "title": "إعدادات الألوان",
+        "description": "تخصيص الألوان والمظهر",
+        "backgroundColorLabel": "لون الخلفية",
+        "backgroundColorHelp": "يضبط لون خلفية حاوية النموذج",
+        "textColorLabel": "لون النص",
+        "textColorHelp": "يضبط لون جميع عناصر النص في النموذج",
+        "primaryColorLabel": "الألوان الأساسية (الأزرار واللون المميز)",
+        "primaryColorHelp": "يضبط لون الأزرار وحالات التركيز وعناصر اللون المميز",
+        "borderColorLabel": "لون الحدود",
+        "borderColorHelp": "تعيين اللون لحدود حقول الإدخال والمقسمات",
+        "websiteBackgroundColorLabel": "لون خلفية الموقع",
+        "websiteBackgroundColorHelp": "تعيين لون خلفية الموقع/الصفحة بالكامل"
+      },
+      "typography": {
+        "title": "إعدادات الطباعة",
+        "description": "تخصيص الخطوط ونمط النص",
+        "fontFamily": "عائلة الخط",
+        "fontFamilyPlaceholder": "اختر خط جوجل...",
+        "fontPreview": "معاينة الخط",
+        "previewLine1": "الثعلب البني السريع يقفز فوق الكلب الكسول",
+        "previewLine2": "نص نموذجي مع أرقام 1234567890",
+        "fontHelp": "اختر من مئات الخطوط من جوجل. سيتم تحميل الخط تلقائيًا.",
+        "fontSize": "حجم الخط",
+        "fontWeight": "وزن الخط",
+        "selected": "محدد:",
+        "fontSizeOptions": {
+          "xs": {
+            "label": "صغير جدًا",
+            "description": "12 بكسل"
+          },
+          "sm": {
+            "label": "صغير",
+            "description": "14 بكسل"
+          },
+          "base": {
+            "label": "أساسي",
+            "description": "16 بكسل"
+          },
+          "lg": {
+            "label": "كبير",
+            "description": "18 بكسل"
+          },
+          "xl": {
+            "label": "كبير جدًا",
+            "description": "20 بكسل"
+          }
+        },
+        "fontWeightOptions": {
+          "light": {
+            "label": "فاتح",
+            "description": "300"
+          },
+          "normal": {
+            "label": "طبيعي",
+            "description": "400"
+          },
+          "medium": {
+            "label": "متوسط",
+            "description": "500"
+          },
+          "semibold": {
+            "label": "شبه عريض",
+            "description": "600"
+          },
+          "bold": {
+            "label": "عريض",
+            "description": "700"
+          }
+        }
+      },
+      "layout": {
+        "title": "إعدادات التصميم",
+        "description": "تكوين المسافات والهيكل",
+        "showProgressBar": "عرض شريط التقدم",
+        "formWidth": "عرض النموذج",
+        "formWidthHelp": "يتحكم في العرض الأقصى لحاوية النموذج",
+        "customWidth": "عرض مخصص (مثل 600 بكسل، 80%، 50rem)",
+        "customWidthPlaceholder": "أدخل عرضًا مخصصًا",
+        "internalPadding": "التوسيد الداخلي",
+        "internalPaddingHelp": "يتحكم في المساحة داخل حاوية النموذج",
+        "externalMargin": "الهامش الخارجي",
+        "externalMarginHelp": "يتحكم في المساحة حول حاوية النموذج",
+        "cornerRadius": "نصف القطر الزاوي",
+        "cornerRadiusHelp": "يتحكم في مدى استدارة زوايا النموذج",
+        "widthOptions": {
+          "sm": {
+            "label": "صغير",
+            "description": "400 بكسل عرض أقصى"
+          },
+          "md": {
+            "label": "متوسط",
+            "description": "600 بكسل عرض أقصى"
+          },
+          "lg": {
+            "label": "كبير",
+            "description": "800 بكسل عرض أقصى"
+          },
+          "xl": {
+            "label": "كبير جدًا",
+            "description": "1000 بكسل عرض أقصى"
+          },
+          "full": {
+            "label": "عرض كامل",
+            "description": "100% عرض"
+          },
+          "custom": {
+            "label": "مخصص",
+            "description": "قيمة عرض مخصصة"
+          }
+        },
+        "paddingOptions": {
+          "none": {
+            "label": "لا شيء",
+            "description": "0 بكسل توسيد"
+          },
+          "sm": {
+            "label": "صغير",
+            "description": "16 بكسل توسيد"
+          },
+          "md": {
+            "label": "متوسط",
+            "description": "24 بكسل توسيد"
+          },
+          "lg": {
+            "label": "كبير",
+            "description": "32 بكسل توسيد"
+          }
+        },
+        "marginOptions": {
+          "none": {
+            "label": "لا شيء",
+            "description": "لا هامش"
+          },
+          "sm": {
+            "label": "صغير",
+            "description": "8 بكسل"
+          },
+          "md": {
+            "label": "متوسط",
+            "description": "16 بكسل"
+          },
+          "lg": {
+            "label": "كبير",
+            "description": "32 بكسل"
+          }
+        },
+        "radiusOptions": {
+          "none": {
+            "label": "لا شيء",
+            "description": "0 بكسل (زوايا حادة)"
+          },
+          "sm": {
+            "label": "صغير",
+            "description": "4 بكسل نصف القطر الزاوي"
+          },
+          "md": {
+            "label": "متوسط",
+            "description": "8 بكسل نصف القطر الزاوي"
+          },
+          "lg": {
+            "label": "كبير",
+            "description": "16 بكسل نصف القطر الزاوي"
+          },
+          "xl": {
+            "label": "كبير جدًا",
+            "description": "24 بكسل نصف القطر الزاوي"
+          }
+        }
+      },
+      "presets": {
+        "title": "تصميمات مسبقة",
+        "description": "بدء سريع مع أنماط نموذجية مصممة مسبقًا جميلة",
+        "category": "التصنيف",
+        "allPresets": "كل الإعدادات المسبقة",
+        "presets": "الإعدادات المسبقة",
+        "presetCount": "{count, plural, one {# إعداد مسبق} other {# إعدادات مسبقة}}",
+        "presetList": "قائمة الإعدادات المسبقة",
+        "applyPresetAria": "تطبيق الإعداد المسبق {name}",
+        "appliedPreset": "تم تطبيق الإعداد المسبق \"{name}\"",
+        "formTitle": "عنوان النموذج",
+        "submit": "إرسال"
+      },
+      "preview": {
+        "title": "معاينة حية",
+        "description": "انظر كيف سيبدو نموذجك مع التخصيصات المطبقة",
+        "sampleTitle": "نموذج العينة",
+        "sampleDescription": "هذا هو كيف سيظهر نموذجك مع إعدادات التصميم الحالية.",
+        "nameLabel": "الاسم *",
+        "namePlaceholder": "أدخل اسمك",
+        "emailLabel": "البريد الإلكتروني *",
+        "emailPlaceholder": "أدخل بريدك الإلكتروني",
+        "categoryLabel": "التصنيف",
+        "categoryPlaceholder": "اختر تصنيفًا",
+        "categoryGeneral": "استفسار عام",
+        "categorySupport": "دعم",
+        "categorySales": "مبيعات",
+        "messageLabel": "الرسالة",
+        "messagePlaceholder": "أدخل رسالتك",
+        "submitButton": "إرسال النموذج",
+        "previousStepAria": "الخطوة السابقة",
+        "previousStep": "السابق",
+        "nextStepAria": "الخطوة التالية",
+        "nextStep": "التالي",
+        "submitAria": "إرسال النموذج"
+      }
+    },
+    "toasts": {
+      "loginRequiredToSave": "يرجى تسجيل الدخول لحفظ النموذج.",
+      "formSaved": "تم حفظ النموذج بنجاح!",
+      "formCreated": "تم إنشاء النموذج بنجاح!",
+      "saveFailed": "فشل حفظ النموذج. يرجى المحاولة مرة أخرى.",
+      "saveBeforeShare": "يرجى حفظ النموذج قبل مشاركته.",
+      "formPublished": "تم نشر النموذج بنجاح!",
+      "publishFailed": "فشل نشر النموذج. يرجى المحاولة مرة أخرى.",
+      "saveBeforeAnalytics": "يرجى حفظ النموذج قبل عرض التحليلات.",
+      "loadingAnalytics": "تحميل التحليلات",
+      "saveBeforePublish": "يرجى حفظ النموذج قبل النشر.",
+      "userAuthRequired": "مطلوب مصادقة المستخدم",
+      "formUnpublished": "تم إلغاء نشر النموذج بنجاح!",
+      "updateStatusFailed": "فشل تحديث حالة النموذج. يرجى المحاولة مرة أخرى.",
+      "saveSettingsFailed": "فشل حفظ الإعدادات. يرجى المحاولة مرة أخرى.",
+      "loadFailed": "فشل تحميل النموذج. يرجى المحاولة مرة أخرى."
+    },
+    "formPreview": {
+      "titlePlaceholder": "انقر لإضافة عنوان...",
+      "descriptionPlaceholder": "انقر لإضافة وصف...",
+      "publicTitle": "عنوان عام: \"{title}\"",
+      "stepTitlePlaceholder": "انقر لإضافة عنوان الخطوة...",
+      "stepDescriptionPlaceholder": "انقر لإضافة وصف الخطوة...",
+      "stepBadge": "الخطوة {index}",
+      "editFieldAria": "تحرير الحقل",
+      "clickToEdit": "انقر لتحرير"
+    },
+    "fieldPalette": {
+      "headerTitle": "حقول النموذج",
+      "headerDescription": "انقر لإضافة الحقول إلى نموذجك",
+      "ariaPalette": "لوحة الحقول",
+      "searchAria": "بحث الحقول",
+      "searchPlaceholder": "بحث الحقول...",
+      "categoryFieldsAria": "حقول {category}",
+      "noFieldsFound": "لم يتم العثور على حقول مطابقة لـ \"{searchTerm}\"",
+      "searchHint": "جرب البحث عن طريق اسم الحقل أو الوصف أو النوع",
+      "addFieldAria": "إضافة حقل {label}",
+      "categories": {
+        "input": "الحقول المدخلة",
+        "selection": "حقول التحديد",
+        "media": "حقول الوسائط",
+        "layout": "حقول التصميم",
+        "advanced": "الحقول المتقدمة"
+      },
+      "fields": {
+        "text": {
+          "label": "إدخال النص",
+          "description": "خط واحد للإجابات النصية القصيرة."
+        },
+        "email": {
+          "label": "البريد الإلكتروني",
+          "description": "جمع عنوان بريد إلكتروني صالح."
+        },
+        "number": {
+          "label": "الرقم",
+          "description": "إدخال للقيم الرقمية."
+        },
+        "phone": {
+          "label": "رقم الهاتف",
+          "description": "إدخال لأرقام الهواتف مع التحقق."
+        },
+        "textarea": {
+          "label": "المنطقة النصية",
+          "description": "حقل متعدد الخطوط للنصوص الأطول."
+        },
+        "date": {
+          "label": "التاريخ",
+          "description": "اختر تاريخًا من التقويم."
+        },
+        "time": {
+          "label": "الوقت",
+          "description": "حدد أو أدخل قيمة زمنية."
+        },
+        "address": {
+          "label": "العنوان",
+          "description": "إدخال لاسم الشارع و المدينة وتفاصيل العنوان الأخرى."
+        },
+        "link": {
+          "label": "رابط",
+          "description": "إدخال لرابط موقع إلكتروني صالح."
+        },
+        "select": {
+          "label": "اختيار من القائمة المنسدلة",
+          "description": "قائمة منسدلة لاختيار خيار واحد."
+        },
+        "radio": {
+          "label": "أزرار الاختيار",
+          "description": "اختر خيارًا واحدًا من قائمة."
+        },
+        "checkbox": {
+          "label": "مربعات الاختيار",
+          "description": "حدد خيارًا واحدًا أو أكثر."
+        },
+        "slider": {
+          "label": "شريط التمرير",
+          "description": "اختر قيمة عن طريق تمرير المقبض."
+        },
+        "rating": {
+          "label": "التقييم",
+          "description": "اجمع تقييمًا بنجمة أو رمز."
+        },
+        "poll": {
+          "label": "استطلاع الرأي",
+          "description": "اسمح للمستخدمين بالتصويت على خيارات متعددة."
+        },
+        "file": {
+          "label": "تحميل الملفات",
+          "description": "تحميل الملفات ذات حجم ونوع محدودين."
+        },
+        "signature": {
+          "label": "التوقيع",
+          "description": "ارسم أو قم بالتوقيع بالماوس أو اللمس."
+        },
+        "statement": {
+          "label": "بيان",
+          "description": "عرض عنوان أو وصف في النموذج."
+        },
+        "banner": {
+          "label": "لافتة",
+          "description": "عرض رسالة أو تحذير بارز."
+        },
+        "field-group": {
+          "label": "مجموعة الحقول",
+          "description": "جمّع الحقول معًا في صف."
+        },
+        "tags": {
+          "label": "إدخال العلامات",
+          "description": "أدخل وادارة علامات متعددة."
+        },
+        "social": {
+          "label": "وسائل التواصل الاجتماعي",
+          "description": "أضف روابط ملفات تعريف الوسائط الاجتماعية."
+        },
+        "scheduler": {
+          "label": "المجدول",
+          "description": "تضمين رابط جدولة (مثل Calendly)."
+        }
+      }
+    },
+    "fieldSettings": {
+      "header": {
+        "title": "إعدادات الحقل",
+        "closeAria": "إغلاق إعدادات الحقل"
+      },
+      "emptyState": {
+        "title": "لا يوجد حقل محدد",
+        "description": "انقر على حقل في المعاينة لتحرير إعداداته"
+      },
+      "basic": {
+        "title": "الإعدادات الأساسية",
+        "fieldLabel": "تسمية الحقل",
+        "fieldLabelPlaceholder": "أدخل تسمية الحقل",
+        "fieldLabelHelp": "التسمية التي تظهر فوق الحقل",
+        "placeholder": "نص العنصر النائب",
+        "placeholderPlaceholder": "أدخل نص العنصر النائب",
+        "placeholderHelp": "نص تلميح يظهر داخل الحقل",
+        "description": "الوصف",
+        "descriptionPlaceholder": "أدخل وصف الحقل (يظهر تحت الحقل)",
+        "descriptionHelp": "نص مساعدة إضافي يظهر تحت الحقل",
+        "required": "حقل مطلوب",
+        "requiredHelp": "يجب على المستخدمين ملء هذا الحقل لتقديم النموذج"
+      },
+      "validation": {
+        "title": "التحقق من الصحة",
+        "minLength": "الحد الأدنى للطول",
+        "minLengthPlaceholder": "الحد الأدنى للأحرف",
+        "minLengthHelp": "الحد الأدنى لعدد الأحرف المطلوبة",
+        "maxLength": "الحد الأقصى للطول",
+        "maxLengthPlaceholder": "الحد الأقصى للأحرف",
+        "maxLengthHelp": "الحد الأقصى لعدد الأحرف المسموح بها",
+        "pattern": "النمط (Regex)",
+        "patternPlaceholder": "تعبير عادي",
+        "patternHelp": "نمط تعبير عادي للتحقق من الصحة",
+        "minValue": "الحد الأدنى للقيمة",
+        "minValuePlaceholder": "الحد الأدنى للقيمة",
+        "minValueHelp": "الحد الأدنى للقيمة الرقمية المسموح بها",
+        "maxValue": "الحد الأقصى للقيمة",
+        "maxValuePlaceholder": "الحد الأقصى للقيمة",
+        "maxValueHelp": "الحد الأقصى للقيمة الرقمية المسموح بها"
+      },
+      "errorMessages": {
+        "title": "رسائل الخطأ المخصصة",
+        "requiredFieldMessage": "رسالة الحقل المطلوب",
+        "requiredFieldPlaceholder": "هذا الحقل مطلوب",
+        "minLengthMessage": "رسالة خطأ الحد الأدنى للطول",
+        "minLengthPlaceholder": "يجب أن يكون على الأقل {count} أحرف",
+        "maxLengthMessage": "خطأ الحد الأقصى لطول الرسالة",
+        "maxLengthPlaceholder": "يجب ألا يكون أكثر من {count} حرف",
+        "patternMessage": "خطأ نمط الرسالة",
+        "patternPlaceholder": "الرجاء إدخال تنسيق صالح",
+        "emailMessage": "خطأ رسالة البريد الإلكتروني",
+        "emailPlaceholder": "الرجاء إدخال عنوان بريد إلكتروني صالح",
+        "minValueMessage": "خطأ الحد الأدنى للقيمة",
+        "minValuePlaceholder": "يجب أن يكون على الأقل {value}",
+        "maxValueMessage": "خطأ الحد الأقصى للقيمة",
+        "maxValuePlaceholder": "يجب ألا يكون أكثر من {value}",
+        "invalidNumberMessage": "رسالة رقم غير صالح",
+        "invalidNumberPlaceholder": "الرجاء إدخال رقم صالح"
+      },
+      "options": {
+        "title": "خيارات",
+        "addOptionAria": "إضافة خيار جديد",
+        "addOption": "إضافة خيار",
+        "optionPlaceholder": "خيار {index}",
+        "removeOptionAria": "إزالة خيار {index}",
+        "none": "لم يتم إضافة خيارات حتى الآن",
+        "or": "أو",
+        "orAria": "أو",
+        "fetchFromApi": "جلب من API",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "نقطة نهاية API لجلب الخيارات منها",
+        "valueKeyPlaceholder": "مفتاح القيمة (مثل id)",
+        "valueKeyHelp": "مفتاح لقيم الخيارات",
+        "labelKeyPlaceholder": "مفتاح التسمية (مثل name)",
+        "labelKeyHelp": "مفتاح لتسميات الخيارات",
+        "apiGuidanceTitle": "إرشادات بيانات API:",
+        "apiGuidanceIntro": "سيتم جلب الخيارات من نقطة نهاية API هذه:",
+        "apiShouldReturn": "يجب أن تعيد API إما:",
+        "apiType1Hint": "(مصفوفة من السلاسل)",
+        "apiType2Hint": "(مصفوفة من الكائنات)",
+        "apiType3Hint": "(كائن مع مصفوفة خيارات)",
+        "apiType4Hint": "(مفاتيح مخصصة)",
+        "apiCustomKeysHelp": "يمكنك تحديد مفاتيح مخصصة أعلاه لتعيين بيانات API الخاصة بك.",
+        "apiValueLabelHelp": "يجب أن يكون لكل خيار",
+        "apiValueLabelHelpOr": "خاصية (أو مفتاحك المخصص).",
+        "apiValueLabelHelpSuffix": "هو اختياري."
+      },
+      "prepopulation": {
+        "title": "التعبئة المسبقة",
+        "unknownError": "خطأ غير معروف",
+        "enabled": "تمكين التعبئة المسبقة",
+        "enabledHelp": "ملء هذا الحقل تلقائيًا بالبيانات الموجودة",
+        "dataSource": "مصدر البيانات",
+        "sources": {
+          "url": "معلمات URL",
+          "api": "API خارجي",
+          "profile": "ملف تعريف المستخدم",
+          "previous": "تقديم سابق"
+        },
+        "urlParamName": "اسم معلمة URL",
+        "urlParamPlaceholder": "مثل، الاسم، البريد الإلكتروني، الهاتف",
+        "urlParamHelp": "اسم المعلمة لاستخراجها من سلسلة استعلام URL",
+        "fallbackValue": "قيمة الاحتياط",
+        "fallbackValuePlaceholder": "قيمة افتراضية إذا كانت المعلمة مفقودة",
+        "fallbackValueHelp": "قيمة افتراضية لاستخدامها إذا كانت معلمة URL مفقودة",
+        "overwriteExisting": "الكتابة فوق الموجود",
+        "overwriteExistingHelp": "استبدال إدخال المستخدم بقيمة مملوءة مسبقًا",
+        "generatePreviewAria": "إنشاء عنوان URL للمعاينة",
+        "generatePreview": "إنشاء عنوان URL للمعاينة",
+        "previewUrlLabel": "عنوان URL للمعاينة:",
+        "previewUrlHelp": "سيتم مملء هذا الحقل بـ \"عينة {label}\"",
+        "apiEndpoint": "نقطة نهاية API",
+        "apiEndpointPlaceholder": "https://api.example.com/user-data",
+        "apiEndpointHelp": "نقطة نهاية API لجلب البيانات منها",
+        "httpMethod": "طريقة HTTP",
+        "requestHeaders": "رؤوس الطلب (JSON)",
+        "requestHeadersHelp": "كائن JSON يحتوي على رؤوس HTTP لطلب API",
+        "testApiAria": "اختبار نقطة نهاية API",
+        "testApi": "اختبار نقطة نهاية API",
+        "comingSoonLabel": "قادم قريبًا:",
+        "profileComingSoon": "سيكون ملء ملف تعريف المستخدم متاحًا في تحديث مستقبلي.",
+        "previousComingSoon": "سيكون ملء التقديم السابق متاحًا في تحديث مستقبلي.",
+        "toasts": {
+          "missingUrlParam": "الرجاء إدخال اسم معلمة URL أولاً",
+          "previewUrlCopied": "تم نسخ عنوان URL للمعاينة إلى الحافظة!",
+          "previewUrlCopyFailed": "فشل نسخ عنوان URL للمعاينة",
+          "missingApiEndpoint": "الرجاء إدخال نقطة نهاية API أولاً",
+          "apiReachable": "نقطة نهاية API قابلة للوصول!",
+          "apiTestFailedStatus": "فشل اختبار API: {status} {statusText}",
+          "apiTestFailedError": "فشل اختبار API: {error}"
+        }
+      },
+      "date": {
+        "title": "إعدادات حقل التاريخ",
+        "minDate": "التاريخ الأدنى",
+        "selectMinDate": "حدد التاريخ الأدنى",
+        "maxDate": "التاريخ الأقصى",
+        "selectMaxDate": "حدد التاريخ الأقصى",
+        "defaultDate": "التاريخ الافتراضي",
+        "selectDefaultDate": "حدد التاريخ الافتراضي"
+      },
+      "number": {
+        "title": "إعدادات حقل الرقم",
+        "minValue": "الحد الأدنى للقيمة",
+        "noMinimum": "لا يوجد حد أدنى",
+        "minValueHelp": "الحد الأدنى للقيمة الرقمية المسموح بها",
+        "maxValue": "الحد الأقصى للقيمة",
+        "noMaximum": "لا يوجد حد أقصى",
+        "maxValueHelp": "الحد الأقصى للقيمة الرقمية المسموح بها",
+        "stepSize": "حجم الخطوة",
+        "stepSizeHelp": "زيادة/نقص حجم الخطوة لمدخلات الرقم",
+        "defaultValue": "القيمة الافتراضية",
+        "noDefault": "لا توجد قيمة افتراضية",
+        "defaultValueHelp": "قيمة مملوءة مسبقًا عند تحميل النموذج"
+      },
+      "radio": {
+        "title": "إعدادات الاختبار",
+        "enableQuizQuestion": "تمكين كسؤال اختبار",
+        "correctAnswer": "الإجابة الصحيحة",
+        "correctAnswerPlaceholder": "حدد الإجابة الصحيحة",
+        "points": "النقاط للإجابة الصحيحة",
+        "showCorrectAnswer": "عرض الإجابة الصحيحة بعد التقديم",
+        "explanation": "التفسير (اختياري)",
+        "explanationPlaceholder": "اشرح سبب كون هذه هي الإجابة الصحيحة..."
+      },
+      "address": {
+        "title": "إعدادات حقل العنوان",
+        "requiredLines": "خطوط العنوان المطلوبة",
+        "requiredLinesPlaceholder": "على سبيل المثال 2 (خط العنوان 1 والمدينة مطلوبان)",
+        "requiredLinesHelp": "عدد خطوط العنوان التي يجب ملؤها (1-5)",
+        "customErrorMessage": "رسالة الخطأ المخصصة",
+        "customErrorPlaceholder": "الرجاء إكمال جميع الحقول المطلوبة للعنوان",
+        "customErrorHelp": "رسالة الخطأ المخصصة المعروضة عند عدم اكتمال الحقول المطلوبة للعنوان"
+      },
+      "phone": {
+        "title": "إعدادات حقل الهاتف",
+        "pattern": "نمط التعبير العادي المخصص",
+        "patternPlaceholder": "على سبيل المثال ^\\+?[0-9]{10,15}$",
+        "patternHelp": "نمط التعبير العادي لتحقق صحة رقم الهاتف",
+        "errorMessage": "رسالة الخطأ المخصصة",
+        "errorMessagePlaceholder": "الرجاء إدخال رقم هاتف صالح",
+        "errorMessageHelp": "رسالة الخطأ المخصصة المعروضة عند فشل تحقق صحة الهاتف"
+      },
+      "statement": {
+        "title": "إعدادات حقل البيان",
+        "heading": "العنوان",
+        "headingPlaceholder": "أدخل عنوان البيان",
+        "headingHelp": "العنوان الرئيسي للبيان",
+        "description": "الوصف",
+        "descriptionPlaceholder": "أدخل وصف البيان",
+        "descriptionHelp": "وصف مفصل للبيان",
+        "alignment": "المحاذاة",
+        "alignmentPlaceholder": "حدد المحاذاة",
+        "alignLeft": "يسار",
+        "alignCenter": "مركز",
+        "alignRight": "يمين",
+        "alignmentHelp": "محاذاة النص للبيان",
+        "size": "الحجم",
+        "sizePlaceholder": "حدد الحجم",
+        "sizeSmall": "صغير",
+        "sizeMedium": "متوسط",
+        "sizeLarge": "كبير",
+        "sizeHelp": "حجم الخط للبيان"
+      },
+      "slider": {
+        "title": "إعدادات شريط التمرير",
+        "mode": "وضع شريط التمرير",
+        "modePlaceholder": "حدد وضع شريط التمرير",
+        "modeSingle": "قيمة واحدة",
+        "modeRange": "نطاق (الحد الأدنى + الحد الأقصى)",
+        "modeHelp": "اختر قيمة واحدة أو اسمح للمستخدمين باختيار الحد الأدنى والحد الأقصى",
+        "min": "الحد الأدنى للقيمة",
+        "minHelp": "الحد الأدنى لقيمة شريط التمرير",
+        "max": "الحد الأقصى للقيمة",
+        "maxHelp": "الحد الأقصى لقيمة شريط التمرير",
+        "step": "حجم الخطوة",
+        "stepHelp": "زيادة/نقص حجم الخطوة لشريط التمرير",
+        "defaultMin": "الحد الأدنى الافتراضي",
+        "defaultMinHelp": "قيمة الحد الأدنى المملوءة مسبقًا عند تحميل النموذج",
+        "defaultMax": "الحد الأقصى الافتراضي",
+        "defaultMaxHelp": "قيمة الحد الأقصى المملوءة مسبقًا عند تحميل النموذج",
+        "defaultValue": "القيمة الافتراضية",
+        "defaultValueHelp": "قيمة مملوءة مسبقًا عند تحميل النموذج"
+      },
+      "text": {
+        "title": "إعدادات حقل النص",
+        "maxLength": "الحد الأقصى للطول",
+        "maxLengthPlaceholder": "لا يوجد حد",
+        "maxLengthHelp": "الحد الأقصى لعدد الأحرف المسموح بها (1-1000)",
+        "minLength": "الحد الأدنى للطول",
+        "minLengthPlaceholder": "لا يوجد حد أدنى",
+        "minLengthHelp": "الحد الأدنى لعدد الأحرف المطلوبة (0-1000)"
+      },
+      "checkbox": {
+        "title": "خيارات خانة الاختيار",
+        "options": "خيارات",
+        "addOptionPlaceholder": "إضافة خيار",
+        "addOptionAria": "إضافة خيار خانة اختيار",
+        "optionsHelp": "إضافة خيارات خانة اختيار يمكن للمستخدمين اختيارها من",
+        "removeOptionAria": "إزالة خيار {index}",
+        "allowMultiple": "السماح باختيار متعدد",
+        "allowMultipleHelp": "إذا تم تمكينها، يمكن للمستخدمين اختيار أكثر من خيار واحد. إذا تم تعطيلها، يمكن اختيار خيار واحد فقط."
+      },
+      "link": {
+        "title": "إعدادات حقل الارتباط",
+        "pattern": "نمط التعبير العادي المخصص",
+        "patternPlaceholder": "على سبيل المثال ^https?://.+$",
+        "patternHelp": "نمط التعبير العادي للتحقق من صحة عنوان URL",
+        "errorMessage": "رسالة الخطأ المخصصة",
+        "errorMessagePlaceholder": "الرجاء إدخال عنوان URL صالح",
+        "errorMessageHelp": "رسالة خطأ مخصصة تظهر عند فشل التحقق من صحة عنوان URL"
+      },
+      "poll": {
+        "title": "إعدادات الاستطلاع",
+        "pollOptions": "خيارات الاستطلاع",
+        "addOptionPlaceholder": "إضافة خيار",
+        "addOptionAria": "إضافة خيار استطلاع",
+        "optionsHelp": "إضافة خيارات استطلاع يمكن للمستخدمين التصويت عليها",
+        "editOptionAria": "تحرير خيار الاستطلاع {index}",
+        "removeOptionAria": "إزالة خيار الاستطلاع {index}",
+        "orAria": "أو فاصل",
+        "or": "أو",
+        "fetchFromApi": "جلب الخيارات من API",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "نقطة نهاية API لجلب خيارات الاستطلاع منها",
+        "valueKeyPlaceholder": "مفتاح القيمة (مثل id)",
+        "valueKeyHelp": "مفتاح لقيم الخيارات",
+        "labelKeyPlaceholder": "مفتاح التسمية (مثل name)",
+        "labelKeyHelp": "مفتاح لتسميات الخيارات",
+        "apiGuidanceTitle": "إرشادات بيانات API:",
+        "apiGuidanceIntro": "سيتم جلب الخيارات من نقطة نهاية API هذه:",
+        "apiShouldReturn": "يجب أن تعيد API إما:",
+        "apiType1Hint": "(مصفوفة من السلاسل)",
+        "apiType2Hint": "(مصفوفة من الكائنات)",
+        "apiType3Hint": "(كائن مع مصفوفة خيارات)",
+        "apiType4Hint": "(مفاتيح مخصصة)",
+        "apiCustomKeysHelp": "يمكنك تحديد مفاتيح مخصصة أعلاه لتعيين بيانات API الخاصة بك.",
+        "apiValueLabelHelp": "يجب أن يكون لكل خيار",
+        "apiValueLabelHelpOr": "خاصية (أو مفتاحك المخصص).",
+        "apiValueLabelHelpSuffix": "هو اختياري.",
+        "showResults": "عرض النتائج بعد التصويت",
+        "showResultsHelp": "عرض نتائج الاستطلاع للمستخدمين بعد أن يصوتوا"
+      },
+      "social": {
+        "title": "المنصات الاجتماعية",
+        "availablePlatforms": "المنصات المتاحة",
+        "platforms": {
+          "github": "GitHub",
+          "twitter": "Twitter",
+          "linkedin": "LinkedIn",
+          "facebook": "Facebook",
+          "instagram": "Instagram",
+          "youtube": "YouTube",
+          "website": "موقع إلكتروني"
+        },
+        "platformsHelp": "اختيار المنصات الاجتماعية التي سيتم تضمينها في الحقل",
+        "customLinks": "الروابط المخصصة",
+        "labelPlaceholder": "التسمية",
+        "placeholderPlaceholder": "المشغل (اختياري)",
+        "removeCustomLinkAria": "إزالة الرابط المخصص {index}",
+        "addCustomLinkAria": "إضافة رابط مخصص",
+        "addCustomLink": "إضافة رابط مخصص",
+        "customLinksHelp": "إضافة روابط اجتماعية مخصصة مع تسميات ومشغلات مخصصة"
+      },
+      "emailValidation": {
+        "title": "التحقق من صحة البريد الإلكتروني",
+        "removeBlockedDomainAria": "إزالة {domain} من النطاقات المحظورة",
+        "removeAllowedDomainAria": "إزالة {domain} من النطاقات المسموح بها",
+        "autoCompleteDomain": "استكمال النطاق تلقائيًا",
+        "autoCompletePlaceholder": "على سبيل المثال، business.com",
+        "setAutoCompleteAria": "تعيين النطاق التلقائي",
+        "set": "تعيين",
+        "removeAutoCompleteAria": "إزالة النطاق {domain}",
+        "autoCompleteHelp": "يمكن للمستخدمين إدخال اسم المستخدم فقط وسيتم استكمال النطاق تلقائيًا",
+        "allowedDomains": "النطاقات المسموح بها",
+        "allowedPlaceholder": "على سبيل المثال، company.com",
+        "addAllowedDomainAria": "إضافة نطاق مسموح به",
+        "allowedHelp": "سيتم قبول البريد الإلكتروني فقط من هذه النطاقات",
+        "blockedDomains": "النطاقات المحظورة",
+        "blockedPlaceholder": "على سبيل المثال، temp-mail.org",
+        "addBlockedDomainAria": "إضافة نطاق محظور",
+        "blockedHelp": "سيتم رفض البريد الإلكتروني من هذه النطاقات (خدمات البريد الإلكتروني المؤقتة محظورة افتراضيًا)",
+        "requireBusinessEmail": "يتطلب بريد إلكتروني تجاري",
+        "requireBusinessEmailHelp": "السماح فقط بالنطاقات التجارية (تحظر Gmail، Yahoo، إلخ.)",
+        "customValidationMessage": "رسالة التحقق المخصصة",
+        "customValidationPlaceholder": "رسالة خطأ مخصصة للتحقق من صحة البريد الإلكتروني",
+        "customValidationHelp": "اتركه فارغًا لاستخدام الرسائل الافتراضية"
+      },
+      "file": {
+        "title": "إعدادات تحميل الملفات",
+        "bytesUnit": "بايت",
+        "maxFiles": "الحد الأقصى للملفات",
+        "maxFilesPlaceholder": "10",
+        "maxFilesHelp": "الحد الأقصى لعدد الملفات التي يمكن للمستخدمين تحميلها (1-50)",
+        "maxFileSize": "الحد الأقصى لحجم الملف",
+        "maxFileSizePlaceholder": "50",
+        "mbUnit": "ميغابايت",
+        "setMaxSizePresetAria": "تعيين الحد الأقصى لحجم الملف إلى {size}",
+        "currentSize": "الحالي: {size}",
+        "allowedFileTypes": "أنواع الملفات المسموح بها",
+        "quickSelect": "اختيار سريع:",
+        "commonTypes": {
+          "images": "الصور",
+          "documents": "الوثائق",
+          "spreadsheets": "جداول البيانات",
+          "videos": "الفيديو",
+          "audio": "الصوت",
+          "archives": "الأرشيفات"
+        },
+        "toggleFileTypeAria": "تبديل {type} أنواع الملفات",
+        "customExtensions": "امتدادات الملفات المخصصة",
+        "customExtensionsPlaceholder": "على سبيل المثال، txt، csv، json",
+        "addCustomExtensionAria": "إضافة امتداد ملف مخصص",
+        "customExtensionsHelp": "إضافة امتدادات ملفات مخصصة (بدون النقطة)",
+        "selectedExtensions": "الامتدادات المحددة:",
+        "removeExtensionAria": "إزالة {extension} امتداد الملف",
+        "htmlAccept": "سمة HTML لقبول (للقراءة فقط)",
+        "htmlAcceptHelp": "يتم إنشاؤها تلقائيًا بناءً على اختيارك أعلاه",
+        "helpText": "نص المساعدة",
+        "helpTextPlaceholder": "تعليمات إضافية للمستخدمين...",
+        "helpTextHelp": "تعليمات اختيارية لمساعدة المستخدمين على فهم ما يجب تحميله"
+      },
+      "scheduler": {
+        "title": "إعدادات المجدول",
+        "provider": "موفر المجدول",
+        "providerPlaceholder": "اختر موفر",
+        "providerHelp": "اختر منصة الجدولة المفضلة لديك",
+        "calcomLink": "رابط Cal.com",
+        "calendlyLink": "رابط Calendly",
+        "tidycalLink": "رابط TidyCal",
+        "schedulerLink": "رابط المجدول",
+        "linkPlaceholder": "https://...",
+        "linkHelp": "تضمين عنوان URL لمجدول {provider}",
+        "buttonText": "نص زر فتحة التقويم",
+        "buttonTextPlaceholder": "على سبيل المثال، احجز مكالمة",
+        "buttonTextHelp": "النص المعروض على زر المجدول",
+        "preview": "معاينة",
+        "openScheduler": "فتح المجدول",
+        "previewHelp": "انقر لمعاينة كيفية ظهور المجدول",
+        "previewModalTitle": "معاينة المجدول",
+        "iframeTitle": "تضمين المجدول",
+        "closePreviewAria": "إغلاق معاينة المجدول",
+        "close": "إغلاق",
+        "providerCalcom": "Cal.com",
+        "providerCalendly": "Calendly",
+        "providerTidycal": "TidyCal"
+      },
+      "banner": {
+        "title": "إعدادات الشريط",
+        "alertType": "نوع التنبيه",
+        "alertTypePlaceholder": "اختر نوع التنبيه",
+        "warning": "تحذير",
+        "error": "خطأ",
+        "info": "معلومات",
+        "success": "نجاح",
+        "alertTypeHelp": "اختر النمط المرئي ونظام الألوان للشريط",
+        "bannerTitle": "العنوان",
+        "bannerTitlePlaceholder": "خالي من الدخان",
+        "bannerTitleHelp": "نص العنوان الرئيسي للشريط",
+        "description": "الوصف",
+        "descriptionPlaceholder": "مناطق إقامتنا صارم بدون تدخين...",
+        "descriptionHelp": "نص الوصف التفصيلي للشريط"
+      },
+      "fieldGroup": {
+        "layoutTitle": "إعدادات التصميم",
+        "layoutDirection": "اتجاه التخطيط",
+        "layoutHorizontal": "أفقي (جنب إلى جنب)",
+        "layoutVertical": "عمودي (مكدس)",
+        "layoutDirectionHelp": "كيف يتم ترتيب الحقول داخل المجموعة",
+        "columns": "عدد الأعمدة",
+        "columns2": "2 أعمدة",
+        "columns3": "3 أعمدة",
+        "columns4": "4 أعمدة",
+        "columnsHelp": "عدد الأعمدة للتخطيط الأفقي",
+        "spacing": "تباعد الحقول",
+        "spacingCompact": "مضغوط",
+        "spacingNormal": "طبيعي",
+        "spacingRelaxed": "مرتاح",
+        "spacingHelp": "المسافة بين الحقول في المجموعة",
+        "groupFields": "حقول المجموعة ({count})",
+        "addFieldAria": "إضافة حقل إلى المجموعة",
+        "addField": "إضافة حقل",
+        "addFieldDialogTitle": "إضافة حقل",
+        "emptyStateTitle": "لا توجد حقول في هذه المجموعة حتى الآن.",
+        "emptyStateDescription": "إضافة حقول باستخدام القائمة المنسدلة أو أزرار الإضافة السريعة أعلاه.",
+        "fieldFallback": "{type} حقل",
+        "settingsAria": "الإعدادات الخاصة بـ {name} حقل",
+        "removeAria": "إزالة {name} حقل",
+        "fieldLabel": "تسمية الحقل",
+        "fieldLabelPlaceholder": "أدخل تسمية الحقل",
+        "fieldLabelHelp": "التسمية الخاصة بهذا الحقل",
+        "placeholder": "النص البديل",
+        "placeholderPlaceholder": "أدخل نص العنصر النائب",
+        "placeholderHelp": "النص البديل لهذا الحقل",
+        "required": "حقل مطلوب",
+        "requiredHelp": "جعل هذا الحقل إجباريًا",
+        "advancedAria": "تبديل الإعدادات المتقدمة لـ {name}",
+        "advanced": "الإعدادات المتقدمة"
+      },
+      "rating": {
+        "title": "إعدادات التقييم",
+        "starCount": "عدد النجوم",
+        "starCountHelp": "عدد نجوم التقييم (1-10)",
+        "starSize": "حجم النجم",
+        "starSizeHelp": "حجم نجوم التقييم (16-64 بكسل)",
+        "iconType": "نوع الأيقونة",
+        "star": "نجم",
+        "heart": "قلب",
+        "iconTypeHelp": "اختر نوع الأيقونة للتقييمات",
+        "iconColor": "لون الأيقونة",
+        "iconColorHelp": "لون أيقونات التقييم"
+      },
+      "tags": {
+        "title": "إعدادات العلامات",
+        "maxTags": "الحد الأقصى للعلامات",
+        "maxTagsHelp": "الحد الأقصى لعدد العلامات التي يمكن للمستخدم إضافتها (الحد الأدنى 1)",
+        "allowDuplicates": "السماح بالعلامات المكررة",
+        "allowDuplicatesHelp": "السماح للمستخدمين بإضافة نفس العلامة عدة مرات"
+      },
+      "textarea": {
+        "title": "إعدادات حقل النصيّة",
+        "rows": "عدد الصفوف",
+        "rowsHelp": "الارتفاع الأولي لحقل النصيّة (2-20 صفًا)"
+      },
+      "time": {
+        "title": "إعدادات حقل الوقت",
+        "showCurrentTimeButton": "عرض زر 'تعيين الوقت الحالي'",
+        "showCurrentTimeButtonHelp": "عرض زر لتعيين الوقت الحالي تلقائيًا"
+      },
+      "email": {
+        "title": "إعدادات حقل البريد الإلكتروني",
+        "allowedDomains": "النطاقات المسموح بها (مفصولة بفواصل)",
+        "allowedDomainsPlaceholder": "gmail.com, company.com",
+        "blockedDomains": "النطاقات المحظورة (مفصولة بفواصل)",
+        "blockedDomainsPlaceholder": "tempmail.com, spam.com",
+        "requireBusinessEmail": "يتطلب بريدًا إلكترونيًا تجاريًا فقط",
+        "customValidationMessage": "رسالة التحقق المخصصة",
+        "customValidationPlaceholder": "الرجاء إدخال عنوان بريد إلكتروني صالح"
+      }
+    },
+    "formSettings": {
+      "title": "إعدادات النموذج",
+      "exportSecure": "تصدير (آمن)",
+      "preparing": "يتم التحضير...",
+      "saveFormFirstAccess": "يرجى حفظ النموذج أولاً للوصول إلى الإعدادات.",
+      "saveFormFirstExport": "حفظ النموذج أولاً لتصديره بشكل آمن.",
+      "exportPrepareFailed": "فشل تحضير التصدير الآمن.",
+      "settingsSectionsAria": "أقسام الإعدادات",
+      "goToSectionSettingsAria": "الذهاب إلى إعدادات {section}",
+      "sections": {
+        "basic": "معلومات أساسية",
+        "limits": "الحدود",
+        "security": "الأمان",
+        "quiz": "الاختبار والتقييم",
+        "branding": "العلامة التجارية",
+        "notifications": "الإشعارات",
+        "api": "الوصول إلى API",
+        "webhooks": "Webhooks",
+        "design": "التصميم",
+        "metadata": "البيانات الوصفية"
+      },
+      "search": {
+        "aria": "إعدادات البحث",
+        "placeholder": "إعدادات البحث…",
+        "resultsAria": "نتائج البحث",
+        "noMatches": "لا توجد مباريات",
+        "items": {
+          "basic-info-title": {
+            "label": "معلومات أساسية"
+          },
+          "behavior-title": {
+            "label": "سلوك النموذج"
+          },
+          "rate-limit-title": {
+            "label": "تحديد الحد الأقصى للطلبات"
+          },
+          "response-limit-title": {
+            "label": "الحد الأقصى للاستجابات"
+          },
+          "password-protection-title": {
+            "label": "حماية كلمة المرور"
+          },
+          "duplicate-prevention-title": {
+            "label": "منع التكرار"
+          },
+          "profanity-filter-title": {
+            "label": "مرشح الإباحية"
+          },
+          "bot-protection-title": {
+            "label": "حماية الروبوت"
+          },
+          "branding-title": {
+            "label": "العلامة التجارية"
+          },
+          "social-media-links-title": {
+            "label": "روابط وسائل التواصل الاجتماعي"
+          },
+          "quiz-title": {
+            "label": "الاختبار والتقييم"
+          },
+          "notifications-title": {
+            "label": "الإشعارات"
+          },
+          "api-access-title": {
+            "label": "الوصول إلى API"
+          },
+          "webhooks-title": {
+            "label": "Webhooks"
+          },
+          "design-title": {
+            "label": "التصميم"
+          },
+          "metadata-title": {
+            "label": "SEO"
+          },
+          "social-metadata-title": {
+            "label": "البيانات الوصفية الاجتماعية"
+          },
+          "search-engine-indexing-title": {
+            "label": "فهرسة محرك البحث"
+          }
+        }
+      },
+      "defaults": {
+        "submitText": "إرسال",
+        "notificationSubject": "إرسال نموذج جديد",
+        "notificationMessage": "لقد تلقيت إرسالًا جديدًا على نموذجك."
+      },
+      "common": {
+        "unsavedChanges": "تغييرات غير محفوظة",
+        "reset": "إعادة تعيين",
+        "save": "حفظ",
+        "saved": "تم الحفظ",
+        "formIdRequiredToSaveSettings": "معرف النموذج مطلوب لحفظ الإعدادات",
+        "validValueBetween": "أدخل قيمة صالحة بين {min} و {max}",
+        "fillRequiredFields": "يرجى ملء الحقول المطلوبة",
+        "requiredAria": "مطلوب",
+        "fieldRequired": "هذا الحقل مطلوب"
+      },
+      "basicInfoSection": {
+        "ariaSettings": "إعدادات النموذج الأساسية",
+        "basicTitle": "معلومات أساسية",
+        "basicDescription": "تكوين التفاصيل الأساسية لنموذجك",
+        "internalTitleLabel": "العنوان الداخلي",
+        "internalTitleDescription": "هذا العنوان مرئي لك فقط في لوحة القيادة ومنشئ النماذج",
+        "internalTitlePlaceholder": "أدخل عنوانًا داخليًا للرجوع إليه...",
+        "publicTitleLabel": "العنوان العام",
+        "publicTitleDescription": "سيتم عرض هذا العنوان للمستخدمين على النموذج الفعلي. اتركه فارغًا لاستخدام العنوان الداخلي.",
+        "publicTitlePlaceholder": "أدخل عنوانًا لعرضه للمستخدمين...",
+        "formDescriptionLabel": "وصف النموذج",
+        "formDescriptionPlaceholder": "أدخل وصفًا للنموذج",
+        "submitButtonTextLabel": "نص زر الإرسال",
+        "submitButtonTextPlaceholder": "إرسال",
+        "successMessageLabel": "رسالة النجاح",
+        "successMessagePlaceholder": "شكرًا على إرسالك!",
+        "redirectUrlLabel": "عنوان URL للتحويل (اختياري)",
+        "redirectUrlDescription": "عنوان URL لتحويل المستخدمين بعد الإرسال الناجح",
+        "redirectUrlPlaceholder": "https://example.com/thank-you",
+        "basicActionsAria": "إجراءات المعلومات الأساسية",
+        "saveBasicAria": "حفظ المعلومات الأساسية",
+        "saveBasicSuccess": "تم حفظ المعلومات الأساسية بنجاح",
+        "saveBasicFailed": "فشل حفظ المعلومات الأساسية",
+        "behaviorTitle": "سلوك النموذج",
+        "behaviorDescription": "تكوين كيفية تصرف النموذج ومظهره للمستخدمين",
+        "hideHeaderLabel": "إخفاء الرأس",
+        "hideHeaderDescription": "يخفي العنوان العام والوصف في التضمين",
+        "rtlLabel": "الوضع من اليمين إلى اليسار",
+        "rtlDescription": "عرض النموذج في وضع RTL (من اليمين إلى اليسار)",
+        "autoFocusLabel": "التركيز التلقائي على الحقل الأول",
+        "autoFocusDescription": "التركيز تلقائيًا على الحقل الأول عند تحميل النموذج",
+        "behaviorActionsAria": "إجراءات سلوك النموذج",
+        "saveBehaviorAria": "حفظ إعدادات سلوك النموذج",
+        "saveBehaviorSuccess": "تم حفظ إعدادات سلوك النموذج بنجاح",
+        "saveBehaviorFailed": "فشل حفظ سلوك النموذج"
+      },
+      "passwordProtectionSection": {
+        "ariaSettings": "إعدادات حماية كلمة المرور",
+        "title": "حماية كلمة المرور",
+        "description": "تقييد الوصول إلى نموذجك بكلمة مرور",
+        "enableLabel": "تمكين حماية كلمة المرور",
+        "enableDescription": "يتطلب من المستخدمين إدخال كلمة مرور للوصول إلى النموذج",
+        "passwordLabel": "كلمة المرور",
+        "passwordPlaceholder": "أدخل كلمة مرور النموذج",
+        "hidePasswordAria": "إخفاء كلمة المرور",
+        "showPasswordAria": "عرض كلمة المرور",
+        "passwordDescription": "سيحتاج المستخدمون إلى إدخال هذه كلمة المرور للوصول إلى النموذج",
+        "customMessageLabel": "رسالة مخصصة",
+        "customMessagePlaceholder": "أدخل رسالة مخصصة لطلب كلمة المرور",
+        "customMessageDescription": "الرسالة المعروضة للمستخدمين عند الحاجة إلى إدخال كلمة المرور",
+        "currentConfiguration": "التكوين الحالي",
+        "summaryPrefix": "حماية كلمة المرور هي",
+        "enabled": "ممكن",
+        "summarySuffix": ". سيحتاج المستخدمون إلى إدخال كلمة المرور للوصول إلى النموذج.",
+        "disabledDescription": "تقييد حماية كلمة المرور الوصول إلى نموذجك من خلال مطالبة المستخدمين بإدخال كلمة مرور قبل أن يتمكنوا من عرض وتقديم النموذج.",
+        "actionsAria": "إجراءات حماية كلمة المرور",
+        "saveAria": "حفظ إعدادات حماية كلمة المرور",
+        "saved": "تم حفظ إعدادات حماية كلمة المرور بنجاح",
+        "saveFailed": "فشل حفظ إعدادات حماية كلمة المرور",
+        "defaultMessage": "هذا النموذج محمي بكلمة مرور. يرجى إدخال كلمة المرور للمتابعة."
+      },
+      "duplicatePreventionSection": {
+        "ariaSettings": "إعدادات منع التكرار",
+        "title": "منع التكرار",
+        "description": "منع المستخدمين من تقديم نفس النموذج عدة مرات",
+        "enableLabel": "تمكين منع التكرار",
+        "enableDescription": "منع المستخدمين من تقديم نفس النموذج عدة مرات",
+        "preventionModeLabel": "وضع الوقاية",
+        "oneTimeLabel": "إرسال واحد",
+        "oneTimeDescription": "السماح بتقديم واحد فقط لكل مستخدم، دائمًا",
+        "timeBasedLabel": "منع الوقت",
+        "timeBasedDescription": "منع التقديم المكرر داخل نافذة زمنية محددة",
+        "preventionStrategyLabel": "استراتيجية الوقاية",
+        "selectStrategyPlaceholder": "اختر استراتيجية",
+        "strategyCombinedLabel": "مدمج (IP + البريد الإلكتروني + الجلسة) - الأكثر أمانًا",
+        "strategyEmailLabel": "عنوان البريد الإلكتروني - الأفضل للتسجيل",
+        "strategyIpLabel": "عنوان IP - بسيط وموثوق",
+        "strategySessionLabel": "معرف الجلسة - قائم على المتصفح",
+        "strategyCombinedDescription": "تتبع حسب مجموعة من IP، البريد الإلكتروني، والجلسة للحصول على دقة قصوى",
+        "strategyEmailDescription": "تتبع عن طريق عنوان البريد الإلكتروني (يتطلب حقل البريد الإلكتروني في النموذج)",
+        "strategyIpDescription": "تتبع عن طريق عنوان IP فقط",
+        "strategySessionDescription": "تتبع حسب جلسة المتصفح",
+        "timeWindowLabel": "فترة زمنية (دقائق)",
+        "timeWindowDescription": "مدة منع التقديم المكرر",
+        "timeWindowPlaceholder": "1440",
+        "maxAttemptsLabel": "الحد الأقصى للمحاولات",
+        "maxAttemptsDescription": "الحد الأقصى للمحاولات المسموح بها ضمن الفترة الزمنية",
+        "maxAttemptsPlaceholder": "1",
+        "errorMessageLabel": "رسالة الخطأ",
+        "errorMessageDescription": "الرسالة المعروضة للمستخدمين عند محاولة تقديم نسخة مكررة",
+        "allowOverrideLabel": "السماح بالتجاوز",
+        "allowOverrideDescription": "السماح للمستخدمين بتجاوز منع التقديم المكرر (لا يوصى به)",
+        "currentConfiguration": "التكوين الحالي",
+        "currentSettings": "الإعدادات الحالية",
+        "summaryModeOneTime": "تقديم واحد فقط",
+        "summaryModeTimeBased": "{maxAttempts} تقديم(ات) كل {timeWindow} دقائق",
+        "summaryStrategyCombined": "IP + البريد الإلكتروني + الجلسة",
+        "summaryStrategyEmail": "عنوان البريد الإلكتروني",
+        "summaryStrategyIp": "عنوان IP",
+        "summaryStrategySession": "معرف الجلسة",
+        "summarySentence": "{mode} باستخدام {strategy} تتبع.",
+        "summaryOverrideEnabled": "التجاوز ممكّن.",
+        "disabledDescription": "منع التقديم المكرر يساعد في الحفاظ على جودة البيانات عن طريق منع المستخدمين من تقديم نفس النموذج عدة مرات. اختر بين منع التقديم المكرر المستند إلى الوقت أو وضع التقديم مرة واحدة.",
+        "actionsAria": "إجراءات منع التقديم المكرر",
+        "saveAria": "حفظ إعدادات منع التقديم المكرر",
+        "saved": "تم حفظ إعدادات منع التقديم المكرر بنجاح",
+        "saveFailed": "فشل حفظ إعدادات منع التقديم المكرر",
+        "defaultMessageOneTime": "لقد قمت بتقديم هذا النموذج بالفعل. يمكن لكل مستخدم تقديم مرة واحدة فقط.",
+        "defaultMessageTimeBased": "لقد قمت بتقديم هذا النموذج بالفعل. يرجى الانتظار قبل تقديم مرة أخرى."
+      },
+      "profanityFilterSection": {
+        "ariaSettings": "إعدادات فلتر السباحة",
+        "title": "مرشح الإباحية",
+        "description": "اكتشاف تلقائي وفلترة المحتوى غير اللائق",
+        "enableLabel": "تمكين فلتر السباحة",
+        "enableDescription": "اكتشاف تلقائي وفلترة المحتوى غير اللائق",
+        "filterModeLabel": "وضع الفلتر",
+        "strictModeOption": "الوضع الصارم - رفض التقديمات التي تحتوي على سباحة",
+        "replaceModeOption": "وضع الاستبدال - استبدال السباحة بنجوم",
+        "customMessageLabel": "رسالة مخصصة",
+        "customMessagePlaceholder": "أدخل رسالة مخصصة لعرضها عند اكتشاف سباحة",
+        "customWordsTitle": "كلمات مخصصة لفلترة",
+        "whitelistedWordsTitle": "كلمات مسموح بها",
+        "customWordsPlaceholder": "أدخل كلمة(ات) لفلترة (فصل متعدد بفاصلة)",
+        "whitelistPlaceholder": "أدخل كلمة(ات) للسماح بها (فصل متعدد بفاصلة)",
+        "addWord": "إضافة",
+        "addFilteredWordAria": "إضافة كلمة فلترة",
+        "addWhitelistedWordAria": "إضافة كلمة مسموح بها",
+        "removeWordAria": "إزالة {word}",
+        "currentConfiguration": "التكوين الحالي",
+        "summaryPrefix": "فلتر السباحة هو",
+        "enabled": "ممكن",
+        "summaryIn": "في",
+        "strictMode": "الوضع الصارم",
+        "replaceMode": "وضع الاستبدال",
+        "summaryPeriod": ".",
+        "customWordsConfigured": "{count} كلمات مخصصة 구성된.",
+        "whitelistedWordsConfigured": "{count} كلمات مسموح بها.",
+        "disabledDescription": "يساعد فلتر السباحة في الحفاظ على بيئة نظيفة ومهنية عن طريق اكتشاف الفلترة التلقائية للمحتوى غير اللائق في التقديمات.",
+        "actionsAria": "إجراءات فلتر السباحة",
+        "saveAria": "حفظ إعدادات فلتر السباحة",
+        "saved": "تم حفظ إعدادات فلتر السباحة بنجاح",
+        "saveFailed": "فشل حفظ إعدادات فلتر السباحة"
+      },
+      "notificationsSection": {
+        "title": "الإشعارات",
+        "description": "تكوين إشعارات البريد الإلكتروني للتقديمات الجديدة",
+        "enableLabel": "إشعارات البريد الإلكتروني",
+        "enableDescription": "تمكين إشعارات البريد الإلكتروني للتقديمات الجديدة",
+        "emailLabel": "بريد إلكتروني الإشعار",
+        "emailPlaceholder": "مالك@البريد الإلكتروني.com",
+        "subjectLabel": "موضوع البريد الإلكتروني",
+        "messageLabel": "رسالة البريد الإلكتروني",
+        "customLinksLabel": "الروابط المخصصة",
+        "linkLabelPlaceholder": "التسمية",
+        "linkUrlPlaceholder": "https://example.com",
+        "removeLink": "إزالة",
+        "addLink": "إضافة",
+        "actionsAria": "إجراءات إعدادات الإشعار",
+        "saveAria": "حفظ إعدادات الإشعار",
+        "saved": "تم حفظ إعدادات الإشعار بنجاح",
+        "saveFailed": "فشل حفظ إعدادات الإشعار"
+      },
+      "brandingSection": {
+        "title": "العلامة التجارية",
+        "description": "إدارة علامة Ikiform التجارية وصلات وسائل التواصل الاجتماعي",
+        "showPoweredByLabel": "عرض \"مدعوم من Ikiform\"",
+        "showPoweredByDescription": "عرض إشارة صغيرة في التذييل",
+        "socialMediaLabel": "روابط وسائل التواصل الاجتماعي",
+        "socialMediaDescription": "تمكين الروابط إلى ملفاتك الشخصية على وسائل التواصل الاجتماعي على النموذج",
+        "platforms": {
+          "linkedin": {
+            "label": "LinkedIn",
+            "placeholder": "https://linkedin.com/in/username"
+          },
+          "twitter": {
+            "label": "X (تويتر)",
+            "placeholder": "https://x.com/username"
+          },
+          "youtube": {
+            "label": "YouTube",
+            "placeholder": "https://youtube.com/@channel"
+          },
+          "instagram": {
+            "label": "Instagram",
+            "placeholder": "https://instagram.com/username"
+          },
+          "facebook": {
+            "label": "Facebook",
+            "placeholder": "https://facebook.com/username"
+          },
+          "github": {
+            "label": "GitHub",
+            "placeholder": "https://github.com/username"
+          },
+          "website": {
+            "label": "موقع إلكتروني",
+            "placeholder": "https://example.com"
+          }
+        },
+        "iconSizeLabel": "حجم الأيقونة",
+        "iconSizes": {
+          "small": "صغير",
+          "medium": "متوسط",
+          "large": "كبير"
+        },
+        "positionLabel": "الموضع",
+        "positions": {
+          "footer": "تذييل",
+          "header": "رأس",
+          "both": "كليهما"
+        },
+        "previewLabel": "معاينة",
+        "disabledDescription": "تمكين روابط وسائل التواصل الاجتماعي لعرض ملفاتك الشخصية على نماذجك.",
+        "actionsAria": "إجراءات إعدادات العلامة التجارية",
+        "saveAria": "حفظ إعدادات العلامة التجارية",
+        "saved": "تم حفظ إعدادات العلامة التجارية بنجاح",
+        "saveFailed": "فشل حفظ إعدادات العلامة التجارية",
+        "authRequired": "مطلوب مصادقة المستخدم"
+      },
+      "metadataSection": {
+        "basicTitle": "SEO أساسي",
+        "basicDescription": "العناوين والأوصاف و URL النمطي",
+        "pageTitleLabel": "عنوان الصفحة",
+        "pageTitlePlaceholder": "أدخل عنوان الصفحة (الحد الأقصى 60 حرفًا)",
+        "metaDescriptionLabel": "وصف ميتا",
+        "metaDescriptionPlaceholder": "أدخل وصف ميتا (الحد الأقصى 160 حرفًا)",
+        "characterCount": "{count}/{max} أحرف",
+        "keywordsLabel": "الكلمات الدلالية",
+        "keywordsPlaceholder": "أدخل الكلمات الدلالية مفصولة بفواصل",
+        "authorLabel": "المؤلف",
+        "authorPlaceholder": "أدخل اسم المؤلف",
+        "canonicalUrlLabel": "URL النمطي",
+        "canonicalUrlPlaceholder": "https://example.com/form",
+        "canonicalUrlDescription": "URL المفضل لهذه صفحة النموذج",
+        "basicActionsAria": "إجراءات SEO الأساسية",
+        "saveBasicAria": "حفظ إعدادات SEO الأساسية",
+        "basicSaved": "تم حفظ SEO الأساسي",
+        "basicSaveFailed": "فشل حفظ SEO الأساسي",
+        "socialTitle": "البيانات الوصفية الاجتماعية",
+        "socialDescription": "إعدادات Open Graph وتويتر",
+        "ogTitleLabel": "عنوان Open Graph",
+        "ogTitlePlaceholder": "أدخل عنوان Open Graph",
+        "ogTitleDescription": "العنوان المعروض عند مشاركة على فيسبوك، لينكدان، إلخ.",
+        "ogDescriptionLabel": "وصف Open Graph",
+        "ogDescriptionPlaceholder": "أدخل وصف Open Graph",
+        "ogDescriptionDescription": "الوصف المعروض عند مشاركة على وسائل التواصل الاجتماعي",
+        "ogImageLabel": "URL صورة Open Graph",
+        "ogImagePlaceholder": "https://example.com/image.jpg",
+        "ogTypeLabel": "نوع Open Graph",
+        "ogTypePlaceholder": "حدد نوع Open Graph",
+        "ogTypes": {
+          "website": "موقع إلكتروني",
+          "article": "مقال",
+          "profile": "ملف تعريف",
+          "video": "فيديو"
+        },
+        "twitterCardLabel": "نوع بطاقة تويتر",
+        "twitterCardPlaceholder": "حدد نوع بطاقة تويتر",
+        "twitterCards": {
+          "summary": "ملخص",
+          "summaryLargeImage": "ملخص صورة كبيرة",
+          "app": "تطبيق",
+          "player": "لاعب"
+        },
+        "twitterTitleLabel": "عنوان تويتر",
+        "twitterTitlePlaceholder": "أدخل عنوان تويتر",
+        "twitterImageLabel": "URL صورة تويتر",
+        "twitterImagePlaceholder": "https://example.com/twitter-image.jpg",
+        "twitterDescriptionLabel": "وصف تويتر",
+        "twitterDescriptionPlaceholder": "أدخل وصف تويتر",
+        "twitterSiteLabel": "موقع تويتر",
+        "twitterSitePlaceholder": "@اسمك",
+        "twitterCreatorLabel": "مؤلف تويتر",
+        "twitterCreatorPlaceholder": "@اسم_المؤلف",
+        "socialActionsAria": "إجراءات البيانات الوصفية الاجتماعية",
+        "saveSocialAria": "حفظ إعدادات البيانات الوصفية الاجتماعية",
+        "socialSaved": "تم حفظ البيانات الوصفية الاجتماعية",
+        "socialSaveFailed": "فشل حفظ البيانات الوصفية الاجتماعية",
+        "indexingTitle": "فهرسة محرك البحث",
+        "indexingDescription": "تحكم في كيفية تجريف محركات البحث لهذا النموذج",
+        "indexingBehaviorLabel": "فهرسة محرك البحث",
+        "indexingBehaviorPlaceholder": "حدد سلوك الفهرسة",
+        "indexingOptions": {
+          "index": "فهرسة ومتابعة (افتراضي)",
+          "noindex": "عدم فهرسة",
+          "nofollow": "عدم متابعة",
+          "noindexNofollow": "عدم فهرسة، عدم متابعة"
+        },
+        "indexingBehaviorDescription": "يتحكم فيما إذا كانت محركات البحث يمكنها فهرسة ومتابعة الروابط على هذه الصفحة",
+        "switches": {
+          "noArchive": "لا أرشيف",
+          "noSnippet": "لا مقتطف",
+          "noImageIndex": "لا فهرسة صور",
+          "noTranslate": "لا ترجمة"
+        },
+        "indexingActionsAria": "إجراءات الفهرسة",
+        "saveIndexingAria": "حفظ إعدادات الفهرسة",
+        "indexingSaved": "تم حفظ إعدادات الفهرسة",
+        "indexingSaveFailed": "فشل حفظ إعدادات الفهرسة",
+        "updatedAnnouncement": "تم تحديث البيانات الوصفية",
+        "authRequired": "مطلوب مصادقة المستخدم"
+      },
+      "rateLimitSection": {
+        "title": "تحديد الحد الأقصى للطلبات",
+        "description": "التحكم في تردد الإرسال لمنع الرسائل العشوائية والإساءة",
+        "ariaSettings": "إعدادات الحد من المعدل",
+        "enableLabel": "تمكين الحد من المعدل",
+        "enableDescription": "تحديد الحد من الإرسالات من نفس عنوان IP",
+        "maxSubmissionsLabel": "الحد الأقصى للإرسالات",
+        "maxSubmissionsDescription": "الحد الأقصى للإرسالات المسموح بها",
+        "timeWindowLabel": "فترة زمنية (دقائق)",
+        "timeWindowDescription": "فترة زمنية لحساب الإرسالات",
+        "blockDurationLabel": "مدة الحظر (دقائق)",
+        "blockDurationDescription": "مدة الحظر بعد الوصول إلى الحد",
+        "messageLabel": "الرسالة المعروضة عند تجاوز الحد من المعدل",
+        "messagePlaceholder": "تم إرسال الكثير من الطلبات. يرجى المحاولة مرة أخرى لاحقًا.",
+        "messageDescription": "الرسالة المخصصة المعروضة عند تجاوز الحد من المعدل",
+        "currentConfiguration": "التكوين الحالي",
+        "summarySentence": "السماح بـ {maxSubmissions} إرسالات كل {timeWindow} دقائق. الحظر لمدة {blockDuration} دقائق عند تجاوز الحد.",
+        "summaryExample": "مثال: إذا أرسل المستخدم {maxSubmissions} مرة واحدة في {timeWindow} دقائق، سيتم حظره لمدة {blockDuration} دقائق.",
+        "disabledDescription": "يساعد الحد من المعدل في حماية نموذجك من الرسائل العشوائية والإساءة عن طريق التحكم في تردد الإرسال.",
+        "actionsAria": "إجراءات الحد من المعدل",
+        "saveAria": "حفظ إعدادات الحد من المعدل",
+        "saved": "تم حفظ إعدادات الحد من المعدل بنجاح",
+        "saveFailed": "فشل حفظ إعدادات الحد من المعدل",
+        "defaultMessage": "تم إرسال الكثير من الطلبات. يرجى المحاولة مرة أخرى لاحقًا."
+      },
+      "responseLimitSection": {
+        "title": "الحد الأقصى للاستجابات",
+        "description": "إيقاف قبول الإرسالات بعد عدد محدد من الطلبات",
+        "enableLabel": "تمكين الحد من الاستجابات",
+        "enableDescription": "تحديد الحد الأقصى لعدد الإرسالات التي يقبلها هذا النموذج",
+        "maxResponsesLabel": "الحد الأقصى للاستجابات",
+        "maxResponsesDescription": "تحديد الحد الأقصى لعدد الاستجابات التي يمكن أن يقبلها هذا النموذج. عند الوصول إلى الحد، سيتم حظر الإرسالات الجديدة.",
+        "limitReachedLabel": "الرسالة عند الوصول إلى الحد",
+        "limitReachedDescription": "الرسالة المعروضة بعد الوصول إلى الحد الأقصى للاستجابات",
+        "limitReachedPlaceholder": "هذا النموذج لم يعد يقبل الاستجابات.",
+        "disabledDescription": "احتفظ بهذا الخيار معطلاً إذا كان نموذجك يجب أن يستمر في قبول الإرسالات بدون حد.",
+        "actionsAria": "إجراءات الحد من الاستجابات",
+        "saveAria": "حفظ إعدادات الحد من الاستجابات",
+        "saved": "تم حفظ الحد من الاستجابات بنجاح",
+        "saveFailed": "فشل حفظ الحد من الاستجابات",
+        "defaultMessage": "هذا النموذج لم يعد يقبل الاستجابات."
+      },
+      "botProtectionSection": {
+        "title": "حماية الروبوت",
+        "description": "الكشف تلقائيًا عن الحظر والمنع من الإرسالات الآلية",
+        "ariaSettings": "إعدادات حماية البوت",
+        "enableLabel": "تمكين حماية البوت",
+        "enableDescription": "إضافة فحوصات مضادة للبوت لإرسالات النموذج",
+        "detectionMessageLabel": "رسالة الكشف",
+        "detectionMessagePlaceholder": "تم حظر الإرسال بسبب نشاط البوت المشبوه.",
+        "detectionMessageDescription": "الرسالة المعروضة عند حظر إرسال آلي",
+        "currentConfiguration": "التكوين الحالي",
+        "statusEnabledPrefix": "حماية البوت هي حاليًا",
+        "enabled": "ممكن",
+        "statusEnabledSuffix": "لـهذا النموذج.",
+        "vercelTitle": "حماية Vercel",
+        "vercelDescription": "إذا تم النشر على Vercel، قد تنطبق فحوصات إضافية لمكافحة الإساءة.",
+        "disabledDescription": "تمكين حماية البوت لتقليل الرسائل العشوائية من الأدوات الآلية والحركة البرمجية.",
+        "actionsAria": "إجراءات حماية البوت",
+        "saveAria": "حفظ إعدادات حماية البوت",
+        "saved": "تم حفظ إعدادات حماية البوت بنجاح",
+        "saveFailed": "فشل حفظ إعدادات حماية البوت"
+      },
+      "quizSection": {
+        "title": "الاختبار والتقييم",
+        "description": "تكوين سلوك المسابقة وقواعد التسجيل",
+        "ariaSettings": "إعدادات المسابقة",
+        "enableLabel": "تمكين وضع المسابقة",
+        "enableDescription": "تشغيل ميزات المسابقة مثل التسجيل ورسائل النتائج",
+        "passingScoreLabel": "النتيجة المطلوبة للنجاح (%)",
+        "passingScoreDescription": "تحديد النسبة المئوية الدنيا المطلوبة للنجاح",
+        "timeLimitLabel": "الحد الزمني (دقائق)",
+        "timeLimitDescription": "حد زمني اختياري لإكمال الاختبار",
+        "timeLimitPlaceholder": "اتركه فارغًا لعدم وجود حد",
+        "showScoreLabel": "عرض النتيجة للمستخدم",
+        "showScoreDescription": "عرض نتيجة المستخدم بعد تقديم النموذج",
+        "showCorrectAnswersLabel": "عرض الإجابات الصحيحة",
+        "showCorrectAnswersDescription": "عرض الإجابات الصحيحة والشروحات بعد التقديم",
+        "allowRetakeLabel": "السماح بإعادة الاختبار",
+        "allowRetakeDescription": "السماح للمستخدمين بإعادة الاختبار لتحسين درجاتهم",
+        "customMessagesLabel": "رسائل النتائج المخصصة",
+        "successMessageLabel": "رسالة النجاح",
+        "successMessagePlaceholder": "عمل جيد! لقد اجتازت الاختبار.",
+        "improvementMessageLabel": "رسالة تحسين",
+        "improvementMessagePlaceholder": "يرجى المراجعة والمحاولة مرة أخرى.",
+        "messagePlaceholderHelp": "استخدم {score}, {percentage}, {total} كعناصر نائبة",
+        "actionsAria": "إجراءات الاختبار",
+        "saveAria": "حفظ إعدادات الاختبار",
+        "saved": "تم حفظ إعدادات الاختبار بنجاح",
+        "savedToast": "تم حفظ إعدادات الاختبار",
+        "saveFailed": "فشل في حفظ إعدادات الاختبار"
+      },
+      "apiSection": {
+        "title": "الوصول إلى API",
+        "description": "تبديل للسماح بالإرسال عبر نقطة النهاية API",
+        "authRequired": "مطلوب مصادقة المستخدم",
+        "enableSupportLabel": "تمكين دعم API",
+        "enableSupportDescription": "تمكين الإرسال الخارجي عبر مفتاح API آمن.",
+        "apiEndpointLabel": "نقطة نهاية API",
+        "copyEndpointAria": "نسخ نقطة النهاية API",
+        "endpointCopied": "تم نسخ نقطة النهاية API",
+        "apiKeyLabel": "مفتاح API",
+        "apiKeySecretHint": "احتفظ بهذا المفتاح سريًا. أي شخص لديه يمكنه الإرسال إلى هذا النموذج.",
+        "generateApiKey": "إنشاء مفتاح API",
+        "regenerateKey": "إعادة إنشاء المفتاح",
+        "revokeKey": "إبطال المفتاح",
+        "generating": "يتم إنشاؤه...",
+        "revoking": "يتم إبطاله...",
+        "copyApiKeyAria": "نسخ مفتاح API",
+        "showApiKeyAria": "عرض مفتاح API",
+        "hideApiKeyAria": "إخفاء مفتاح API",
+        "keyCopied": "تم نسخ مفتاح API",
+        "keyGenerated": "تم إنشاء مفتاح API",
+        "keyGenerateFailed": "فشل في إنشاء مفتاح API",
+        "keyRevoked": "تم إبطال مفتاح API",
+        "keyRevokeFailed": "فشل في إبطال مفتاح API",
+        "showCodeExamples": "عرض أمثلة التعليمات البرمجية",
+        "hideCodeExamples": "إخفاء أمثلة التعليمات البرمجية",
+        "javascriptNodeLabel": "JavaScript / Node.js",
+        "sampleName": "جين دو",
+        "sampleEmail": "jane@example.com",
+        "sampleMessage": "مرحبا من API",
+        "sampleValue": "قيمة عينة",
+        "copyCodeAria": "نسخ مثال التعليمات البرمجية",
+        "downloadCodeAria": "تنزيل مثال التعليمات البرمجية",
+        "codeCopied": "تم نسخ مثال التعليمات البرمجية",
+        "codeDownloaded": "تم تنزيل مثال التعليمات البرمجية",
+        "betaBadge": "بيتا",
+        "integrationRateLimiting": "تحديد المعدل",
+        "integrationRateLimitingDescription": "حماية نقطة النهاية من وابل الرسائل.",
+        "integrationResponseLimits": "حدود الرد",
+        "integrationResponseLimitsDescription": "تقييد إجمالي الطلبات المقبولة.",
+        "integrationDuplicatePrevention": "منع التكرار",
+        "integrationDuplicatePreventionDescription": "تقليل الطلبات المتكررة من نفس المستخدم.",
+        "integrationProfanityFilter": "مرشح الإباحية",
+        "integrationProfanityFilterDescription": "حظر أو تنقية المحتوى غير اللائق.",
+        "emptyStateDescription": "تمكين دعم API لإنشاء مفتاح API آمن.",
+        "actionsAria": "إجراءات الوصول إلى API",
+        "saveAria": "حفظ إعدادات API",
+        "resetAria": "إعادة تعيين إعدادات API",
+        "settingsSaved": "تم حفظ إعدادات API بنجاح",
+        "settingsSaveFailed": "فشل في حفظ إعدادات API"
+      },
+      "webhooks": {
+        "panel": {
+          "endpointsTitle": "نقاط نهاية الويب",
+          "endpointsDescription": "إرسال الطلبات إلى الخدمات الخارجية.",
+          "addWebhook": "إضافة ويب هوك"
+        },
+        "list": {
+          "emptyState": "لا توجد ويب هوكس 구성된 حتى الآن. إضافة أول ويب هوك لتلقي طلبات النموذج.",
+          "active": "نشط",
+          "inactive": "غير نشط",
+          "edit": "تحرير",
+          "delete": "حذف",
+          "test": "اختبار",
+          "viewLogs": "عرض السجلات",
+          "events": {
+            "formSubmitted": "تم تقديم النموذج",
+            "formViewed": "تم عرض النموذج",
+            "formStarted": "بدء النموذج"
+          }
+        },
+        "hook": {
+          "fetchFailed": "فشل في جلب الويب هوكس",
+          "created": "تم إنشاء الويب هوك بنجاح",
+          "createFailed": "فشل في إنشاء الويب هوك",
+          "updated": "تم تحديث الويب هوك بنجاح",
+          "updateFailed": "فشل في تحديث الويب هوك",
+          "deleted": "تم حذف الويب هوك بنجاح",
+          "deleteFailed": "فشل في حذف الويب هوك"
+        },
+        "formModal": {
+          "addTitle": "إضافة ويب هوك",
+          "editTitle": "تحرير ويب هوك",
+          "stepsAria": "خطوات إعداد الويب هوك",
+          "steps": {
+            "basics": "الأساسيات",
+            "events": "الأحداث",
+            "headers": "العناوين",
+            "payload": "الحمولة",
+            "notifications": "الإشعارات",
+            "details": "مراجعة"
+          },
+          "errors": {
+            "missingBasics": "عنوان الويب هوك مطلوب.",
+            "missingEvent": "حدد على الأقل حدثًا واحدًا.",
+            "missingBasicsAndEvent": "عنوان الويب هوك وحدث واحد على الأقل مطلوبان."
+          },
+          "webhookUrl": "عنوان الويب هوك",
+          "webhookUrlPlaceholder": "https://example.com/webhook",
+          "nameOptional": "الاسم (اختياري)",
+          "namePlaceholder": "إشعارات سلاك",
+          "descriptionOptional": "الوصف (اختياري)",
+          "descriptionPlaceholder": "أين يجب أن يرسل هذا الويب هوك بيانات النموذج",
+          "eventsHelp": "اختر الأحداث التي يجب أن تشغل هذا الويب هوك.",
+          "events": {
+            "formSubmitted": "تم تقديم النموذج",
+            "formViewed": "تم عرض النموذج",
+            "formStarted": "بدء النموذج"
+          },
+          "httpMethod": "طريقة HTTP",
+          "selectHttpMethodAria": "حدد طريقة HTTP",
+          "selectMethodPlaceholder": "حدد الطريقة",
+          "httpMethodDescriptions": {
+            "post": "إنشاء موارد جديدة أو إرسال بيانات الحمولة.",
+            "put": "استبدل موردًا موجودًا.",
+            "patch": "تحديث جزئي لمورد موجود.",
+            "delete": "حذف مورد.",
+            "get": "جلب معلومات دون تغيير البيانات.",
+            "head": "جلب العناوين فقط."
+          },
+          "addHeader": "إضافة عنوان",
+          "headerName": "اسم العنوان",
+          "headerNamePlaceholder": "المصادقة",
+          "headerNameAria": "اسم عنوان الويب هوك",
+          "headerValue": "قيمة العنوان",
+          "headerValuePlaceholder": "رمز الوصول",
+          "headerValueAria": "قيمة عنوان الويب هوك",
+          "removeHeaderAria": "إزالة العنوان",
+          "headersHelp": "العناوين المخصصة اختيارية وترسل مع كل طلب ويب هوك.",
+          "payloadTemplateOptional": "قالب الحمولة (اختياري)",
+          "availableVariables": "المتغيرات المتاحة",
+          "variables": {
+            "formData": "كائن بيانات النموذج المقدم",
+            "formId": "معرف النموذج",
+            "submissionId": "معرف التقديم",
+            "event": "تشغيل الحدث",
+            "timestamp": "طابع الوقت للحدث",
+            "formatted": "ملخص قابل للقراءة"
+          },
+          "notificationEmailOptional": "البريد الإلكتروني للإشعار (اختياري)",
+          "notificationEmailPlaceholder": "alerts@example.com",
+          "emailOnSuccess": "بريد إلكتروني عند التسليم الناجح",
+          "emailOnFailure": "بريد إلكتروني عند الفشل في التسليم",
+          "selectAll": "اختر الكل",
+          "clear": "مسح",
+          "back": "رجوع",
+          "next": "التالي",
+          "skip": "تخطي",
+          "cancel": "إلغاء",
+          "createWebhook": "إنشاء ويب هوك",
+          "updateWebhook": "تحديث ويب هوك"
+        },
+        "testDialog": {
+          "title": "اختبار ويب هوك",
+          "description": "إرسال حدث اختبار للتحقق من نقطة النهاية.",
+          "endpointTitle": "نقطة النهاية",
+          "nameLabel": "الاسم",
+          "untitledWebhook": "ويب هوك غير مسمى",
+          "descriptionLabel": "الوصف",
+          "methodLabel": "طريقة HTTP",
+          "urlLabel": "عنوان URL",
+          "triggersTitle": "المشغلات",
+          "events": {
+            "formSubmitted": "تم تقديم النموذج",
+            "formViewed": "تم عرض النموذج",
+            "formStarted": "بدء النموذج"
+          },
+          "modeTitle": "الوضع التجريبي",
+          "mode": {
+            "real": "إرسال حمولة حقيقية",
+            "success": "فرض استجابة النجاح",
+            "failure": "فرض استجابة الفشل"
+          },
+          "sendTest": "إرسال اختبار",
+          "close": "إغلاق",
+          "success": "تم إرسال الاختبار بنجاح",
+          "failed": "فشل الاختبار",
+          "testSent": "تم إرسال اختبار الويب هوك",
+          "testFailed": "فشل اختبار الويب هوك",
+          "testFailedNetwork": "تعذر إرسال اختبار الويب هوك"
+        },
+        "logDialog": {
+          "title": "سجلات الويب هوك",
+          "status": "الحالة",
+          "response": "الاستجابة",
+          "attempt": "المحاولة",
+          "resend": "إعادة الإرسال",
+          "resendSuccess": "تم إعادة إرسال الويب هوك بنجاح",
+          "resendFailed": "فشل إعادة إرسال الويب هوك",
+          "copied": "تم نسخ إلى الحافظة",
+          "copyFailed": "فشل النسخ",
+          "copyCodeAria": "نسخ الحمولة",
+          "viewPayload": "عرض الحمولة",
+          "payloadTitle": "الحمولة",
+          "noPayloadDataTitle": "لا توجد بيانات حمولة",
+          "noPayloadDataDescription": "الحمولة غير متاحة لهذا السجل.",
+          "noPayloadReasonMethod": "لم يتضمن نوع الطلب هذا حمولة.",
+          "noPayloadReasonError": "فشل التقاط الحمولة بسبب خطأ.",
+          "noPayloadReasonEmpty": "لم يتم تخزين بيانات الحمولة.",
+          "eventInformation": "معلومات الحدث",
+          "eventLabel": "الحدث",
+          "formNameLabel": "اسم النموذج",
+          "formIdLabel": "معرف النموذج",
+          "submissionIdLabel": "معرف التقديم",
+          "ipAddressLabel": "عنوان IP",
+          "formFields": "حقول النموذج",
+          "rawFormData": "بيانات النموذج الخام",
+          "rawJson": "الـ JSON الخام",
+          "formatted": "منسق",
+          "additionalData": "بيانات إضافية",
+          "notAvailable": "غير متاح",
+          "unknown": "غير معروف",
+          "complexObject": "كائن معقد",
+          "complexArray": "مصفوفة معقدة",
+          "failedCount": "{count} فشل",
+          "pendingCount": "{count} معلق",
+          "successfulCount": "{count} ناجح",
+          "noLogsTitle": "لا توجد سجلات حتى الآن",
+          "noLogsDescription": "إرسال الأحداث إلى هذا الويب هوك لرؤية تاريخ التسليم.",
+          "errorTitle": "تعذر تحميل السجلات",
+          "fetchFailed": "فشل تحميل سجلات الويب هوك"
+        }
+      },
+      "designSection": {
+        "title": "التصميم",
+        "description": "التحكم في المظهر والتخصيص",
+        "advancedTitle": "تخصيص متقدم",
+        "advancedDescription": "ضبط الألوان والطباعة والتباعد والمزيد في لوحة مركزية.",
+        "openAria": "فتح لوحة التخصيص في علامة تبويب جديدة",
+        "openLabel": "فتح لوحة التخصيص…"
+      }
+    },
+    "fieldRenderer": {
+      "scheduler": {
+        "title": "المجدول",
+        "openScheduler": "فتح المجدول",
+        "embedTitle": "تضمين المجدول",
+        "notConfigured": "لا يوجد ارتباط بالمجدول.",
+        "close": "إغلاق"
+      },
+      "email": {
+        "defaultPlaceholder": "أدخل عنوان البريد الإلكتروني",
+        "autocompleteHint": "اضغط على Tab أو انقر لإكمال:",
+        "completeEmailAria": "إكمال عنوان البريد الإلكتروني",
+        "completeButton": "إكمال",
+        "autocompleteBadge": "الإكمال التلقائي:",
+        "allowedDomainsLabel": "النطاقات المسموح بها:"
+      },
+      "fileUpload": {
+        "bytesUnit": "بايت",
+        "uploadFailed": "فشل التحميل",
+        "uploadErrorTitle": "خطأ التحميل",
+        "uploadedFiles": "الملفات التي تم تحميلها ({count})",
+        "uploadedBadge": "تم التحميل",
+        "removeFileAria": "إزالة {name}",
+        "maxFilesAndSize": "الحد الأقصى {maxFiles} ملفات، حتى {maxSize} لكل",
+        "allowedTypes": "الأنواع المسموح بها"
+      },
+      "social": {
+        "platforms": {
+          "linkedin": "LinkedIn",
+          "twitter": "X (تويتر)",
+          "youtube": "YouTube",
+          "instagram": "Instagram",
+          "facebook": "Facebook",
+          "github": "GitHub",
+          "website": "موقع إلكتروني"
+        },
+        "customLink": "رابط مخصص {index}",
+        "customLinkPlaceholder": "https://example.com",
+        "preview": "معاينة"
+      },
+      "signature": {
+        "drawHere": "ارسم توقيعك هنا",
+        "clear": "مسح",
+        "preview": "معاينة",
+        "previewAlt": "معاينة التوقيع"
+      },
+      "rating": {
+        "groupAria": "التقييم",
+        "rateAria": "معدل {index} {type}"
+      },
+      "poll": {
+        "fetchFailed": "فشل في جلب الخيارات",
+        "resultsTitle": "نتائج الاستطلاع",
+        "totalVotes": "{count} مجموع الأصوات",
+        "votes": "{count} أصوات"
+      }
+    },
+    "formRenderer": {
+      "shared": {
+        "poweredBy": "مدعوم بواسطة",
+        "incorrectPassword": "كلمة المرور غير صحيحة!",
+        "passwordProtectionMessage": "هذا النموذج محمي بكلمة مرور. يرجى إدخال كلمة المرور للمتابعة."
+      },
+      "successScreen": {
+        "title": "شكراً!",
+        "defaultMessage": "تم تقديم النموذج بنجاح.",
+        "redirecting": "سيتم إعادة توجيهك في لحظة...",
+        "poweredBy": "مدعوم بواسطة"
+      },
+      "quizResults": {
+        "titlePassed": "تهانينا!",
+        "titleComplete": "استكمال الاختبار",
+        "descriptionPassed": "لقد استكملت الاختبار بنجاح!",
+        "descriptionRetry": "شكراً على تقديم الاختبار. استمر في التدريب!",
+        "score": "النتيجة",
+        "points": "نقاط",
+        "answered": "تم الإجابة",
+        "totalQuestions": "مجموع الأسئلة",
+        "passed": "تم اجتيازه",
+        "needsImprovement": "يحتاج إلى تحسين",
+        "retakeQuiz": "إعادة الاختبار",
+        "questionByQuestion": "نتائج السؤال لكل سؤال",
+        "questionLabel": "السؤال {index}: {label}",
+        "yourAnswer": "إجابتك:",
+        "noAnswer": "لا إجابة",
+        "correctAnswer": "الإجابة الصحيحة:",
+        "pointsLower": "نقاط"
+      },
+      "multiStep": {
+        "previous": "السابق",
+        "next": "التالي",
+        "submit": "إرسال",
+        "defaults": {
+          "formTitle": "نموذج"
+        },
+        "validation": {
+          "required": "هذا الحقل مطلوب",
+          "emailInvalid": "الرجاء إدخال عنوان بريد إلكتروني صالح",
+          "minLength": "يجب أن يكون على الأقل {count} أحرف",
+          "maxLength": "يجب ألا يكون أكثر من {count} حرف"
+        },
+        "toasts": {
+          "submitSuccess": "تم تقديم النموذج بنجاح!",
+          "botDetected": "تم اكتشاف بوت. الوصول مرفوض.",
+          "duplicateSubmission": "لقد قمت بتقديم هذا النموذج مسبقاً.",
+          "rateLimitExceeded": "طلبات كثيرة. يرجى المحاولة مرة أخرى لاحقاً.",
+          "responseLimitReached": "هذا النموذج لم يعد يقبل الاستجابات.",
+          "contentValidationFailed": "طلبك يحتوي على محتوى غير لائق.",
+          "submitFailed": "فشل في تقديم النموذج",
+          "submitFailedTryAgain": "فشل في تقديم النموذج. يرجى المحاولة مرة أخرى."
+        }
+      },
+      "singleStep": {
+        "fixHighlightedErrors": "يرجى إصلاح الأخطاء المحددة قبل تقديم النموذج.",
+        "submit": "إرسال"
+      },
+      "duplicateSubmission": {
+        "title": "تم اكتشاف تقديم مكرر",
+        "wait": "انتظر {time}",
+        "attemptsLeft": "{count, plural, one {# محاولة متبقية} other {# محاولات متبقية}}",
+        "tryAgain": "حاول مرة أخرى",
+        "waitBeforeRetry": "يرجى الانتظار قبل محاولة تقديم النموذج مرة أخرى.",
+        "units": {
+          "seconds": "{count, plural, one {# ثانية} other {# ثوانٍ}}",
+          "minutes": "{count, plural, one {# دقيقة} other {# دقائق}}",
+          "hours": "{count, plural, one {# ساعة} other {# ساعات}}",
+          "days": "{count, plural, one {# يوم} other {# أيام}}"
+        }
+      }
+    }
+  },
+  "aiBuilder": {
+    "client": {
+      "createFormWithKiko": "إنشاء نموذج مع كايكو",
+      "streamError": "خطأ: {error}",
+      "generatingResponse": "يتم إنشاء الرد…",
+      "loading": "يتم التحميل…",
+      "suggestions": {
+        "contactForm": "إنشاء نموذج اتصال",
+        "customerFeedbackSurvey": "استبيان ملاحظات العملاء",
+        "eventRegistrationForm": "نموذج تسجيل الحدث",
+        "jobApplicationForm": "نموذج طلب الوظيفة"
+      }
+    },
+    "chatHeader": {
+      "backToFormBuilder": "العودة إلى منشئ النموذج",
+      "title": "كايكو AI"
+    },
+    "chatInput": {
+      "messageToKiko": "رسالة إلى كايكو AI",
+      "placeholder": "صف النموذج الذي تريد إنشاؤه…",
+      "sendMessage": "إرسال الرسالة",
+      "sendHelp": "اضغط على Enter لإرسال الرسالة، Shift+Enter للسطر الجديد، أو ⌘/Ctrl+Enter لإرسال الرسالة"
+    },
+    "welcome": {
+      "heading": "كيف يمكن لكايكو مساعدتك اليوم?",
+      "description": "مرحباً، أنا كايكو - مساعدك الذكي لتشكيل النماذج.\nاطلب مني إنشاء أو تعديل أو تحليل النماذج لك!"
+    },
+    "preview": {
+      "title": "كايكو AI",
+      "formFallback": "نموذج {index}",
+      "viewJson": "عرض JSON",
+      "useThisForm": "استخدم هذا النموذج",
+      "noFormSelected": "لا نموذج محدد."
+    },
+    "jsonModal": {
+      "title": "مخطط JSON للنموذج",
+      "description": "عرض أو نسخ المخطط JSON الذي تم إنشاؤه للنموذج",
+      "close": "إغلاق"
+    }
+  },
+  "analytics": {
+    "formAnalytics": {
+      "submissionExported": "تم تصدير التقديم بنجاح",
+      "formDeleted": "تم حذف النموذج بنجاح",
+      "failedDeleteForm": "فشل في حذف النموذج",
+      "backToDashboard": "العودة إلى لوحة القيادة",
+      "published": "منشور",
+      "draft": "مسودة",
+      "analyticsSubtitle": "تحليلات النموذج وبيانات التقديم",
+      "formActions": "إجراءات النموذج",
+      "editForm": "تعديل النموذج",
+      "shareForm": "شارك النموذج",
+      "viewSubmissions": "عرض التقديمات",
+      "moreActions": "المزيد من الإجراءات",
+      "exportCsv": "تصدير CSV",
+      "exportJson": "تصدير JSON",
+      "deleteForm": "حذف النموذج",
+      "openKiko": "افتح Kiko AI",
+      "kiko": "كايكو AI",
+      "kikoTooltip": "تحليلات النموذج الذكية",
+      "recentSubmissions": "التقديمات الأخيرة",
+      "viewAll": "عرض الكل",
+      "noSubmissionsTitle": "لا توجد تقديمات حتى الآن",
+      "noSubmissionsDescription": "بمجرد أن يبدأ الأشخاص في ملء نموذجك، ستظهر ردودهم هنا.",
+      "submission": "التقديم {id}",
+      "fieldsCount": "{count} حقول",
+      "view": "عرض",
+      "viewSubmissionDetails": "عرض تفاصيل التقديم",
+      "viewMoreSubmissions": "عرض {count} مزيد من التقديمات",
+      "noDataToExport": "لا توجد بيانات للتصدير",
+      "csvExportSuccess": "تم تصدير البيانات إلى CSV بنجاح!",
+      "jsonExportSuccess": "تم تصدير البيانات بنجاح!",
+      "deleteModalTitle": "حذف النموذج",
+      "deleteModalConfirm": "حذف النموذج",
+      "deleteModalCancel": "إلغاء",
+      "deleteModalDescription": "هل أنت متأكد من حذف \"{title}\"؟ لا يمكن التراجع عن هذا الإجراء وسيتم حذف النموذج وجميع التقديمات بشكل دائم.",
+      "formPublished": "تم نشر النموذج!"
+    },
+    "statsCards": {
+      "totalSubmissions": "إجمالي التقديمات",
+      "formFields": "حقول النموذج",
+      "completionRate": "معدل الإكمال",
+      "last30Days": "آخر 30 يومًا",
+      "avgDailySubmissions": "متوسط التقديمات اليومية",
+      "bounceRate": "معدل الارتداد",
+      "peakHour": "الساعة الذروة",
+      "uniqueResponses": "الردود الفريدة"
+    },
+    "infoCards": {
+      "lastSubmission": "آخر تقديم",
+      "fromIp": "من {ip}",
+      "noSubmissionsYet": "لا توجد تقديمات حتى الآن",
+      "formStatus": "حالة النموذج",
+      "published": "منشور",
+      "created": "تم إنشاؤه",
+      "updated": "تم التحديث",
+      "yes": "نعم",
+      "no": "لا",
+      "quickStats": "إحصائيات سريعة",
+      "avgFieldsCompleted": "متوسط الحقول المكتملة",
+      "mostActiveDay": "أكثر يوم نشط",
+      "submissions": "{count} تقديمات",
+      "formType": "نوع النموذج",
+      "multiStep": "متعدد الخطوات",
+      "singlePage": "صفحة واحدة"
+    },
+    "trendsChart": {
+      "title": "اتجاهات التقديم",
+      "noData": "لا توجد بيانات متاحة",
+      "submissions": "التقديمات"
+    },
+    "dropoff": {
+      "title": "تحليلات الانخفاض",
+      "onlyMultiStep": "تحليلات الانخفاض متاحة فقط للنموذج متعدد الخطوات.",
+      "subtitle": "فهم أين يتوقف المستخدمون عن إكمال نموذجك.",
+      "step": "الخطوة",
+      "reached": "تم الوصول إليها",
+      "dropoffPercent": "معدل الانخفاض",
+      "completionPercent": "معدل الإكمال",
+      "ofTotal": "من {total}",
+      "stepFallback": "الخطوة {index}",
+      "dropoffBarAria": "شريط الانخفاض للخطوة {index}",
+      "completionBarAria": "شريط الإكمال للخطوة {index}"
+    },
+    "chatModal": {
+      "title": "كيكو",
+      "description": "الدردشة مع الذكاء الاصطناعي حول تحليلات نموذجك"
+    },
+    "chat": {
+      "emptyTitle": "اسأل كيكو أي شيء",
+      "emptyDescription": "احصل على رؤى وتحليلات فورية من بيانات نموذجك. اسأل الأسئلة بلغة طبيعية.",
+      "thinking": "يعتقد...",
+      "inputPlaceholder": "اسأل عن تحليلات نموذجك...",
+      "inputHelp": "اضغط <enter></enter> لإرسال، <shiftEnter></shiftEnter> لبدء سطر جديد"
+    },
+    "submissionDetails": {
+      "title": "تفاصيل التقديم - {id}",
+      "submissionId": "معرف التقديم",
+      "submittedAt": "تم تقديمه في",
+      "ipAddress": "عنوان IP",
+      "formData": "بيانات النموذج",
+      "emptyValue": "—"
+    },
+    "submissions": {
+      "backToAnalytics": "العودة إلى التحليلات",
+      "published": "منشور",
+      "draft": "مسودة",
+      "formSubmissions": "تقديمات النموذج ({count})",
+      "exportActions": "إجراءات التصدير",
+      "exportCsv": "تصدير CSV",
+      "exportJson": "تصدير JSON",
+      "viewDetailedAnalytics": "عرض التحليلات التفصيلية",
+      "submissions": "التقديمات",
+      "searchSubmissions": "بحث عن التقديمات...",
+      "noMatchingSubmissions": "لا توجد تقديمات مطابقة",
+      "noSubmissionsYet": "لا توجد تقديمات حتى الآن",
+      "noSubmissionsDescription": "بمجرد أن يبدأ الأشخاص في ملء نموذجك، ستظهر ردودهم هنا.",
+      "adjustSearchTerms": "حاول تعديل شروط البحث للعثور على التقديمات.",
+      "id": "المعرف",
+      "submitted": "تم تقديمه",
+      "ipAddress": "عنوان IP",
+      "fields": "الحقول",
+      "actions": "الإجراءات",
+      "fieldsCount": "{count} حقل",
+      "fieldsCount_plural": "{count} حقول",
+      "view": "عرض",
+      "showingRange": "عرض {start}-{end} من {total} التقديمات",
+      "previous": "السابق",
+      "next": "التالي",
+      "pageOf": "الصفحة {page} من {total}",
+      "noSubmissionsToExport": "لا توجد تقديمات للتصدير",
+      "submissionId": "معرف التقديم",
+      "submittedAt": "تم تقديمه في",
+      "csvExportedSuccess": "تم تصدير CSV بنجاح",
+      "jsonExportedSuccess": "تم تصدير JSON بنجاح"
+    },
+    "premiumRequired": {
+      "analytics": {
+        "title": "يتطلب بريميوم",
+        "description": "تحتاج إلى اشتراك مميز للوصول إلى تحليلات النموذج. قم بالترقية لفتح جميع الميزات.",
+        "viewPricing": "عرض الأسعار"
+      },
+      "submissions": {
+        "title": "يتطلب بريميوم",
+        "description": "تحتاج إلى اشتراك مميز للوصول إلى تقديمات النموذج. قم بالترقية لفتح جميع الميزات.",
+        "viewPricing": "عرض الأسعار"
+      }
+    }
+  },
+  "trialBanner": {
+    "aria": {
+      "status": "إشعار حالة التجربة"
+    },
+    "endsInPrefix": "تنتهي تجربتك المجانية في ",
+    "remainingSuffix": " المتبقية",
+    "expired": "انتهت التجربة",
+    "units": {
+      "day": "ي",
+      "hour": "س",
+      "minute": "د",
+      "second": "ث"
+    }
+  },
+  "embed": {
+    "customizer": {
+      "subtitle": "تخصيص وإنشاء رمز التضمين للنموذج",
+      "showCode": "إظهار الرمز",
+      "settings": "الإعدادات",
+      "preview": "معاينة",
+      "desktop": "سطح المكتب",
+      "mobile": "الهاتف المحمول"
+    },
+    "settings": {
+      "dimensions": {
+        "title": "الأبعاد",
+        "width": "العرض",
+        "widthPlaceholder": "على سبيل المثال، 100٪، 800 بكسل",
+        "height": "الارتفاع",
+        "heightPlaceholder": "على سبيل المثال، 600 بكسل، 100vh",
+        "makeResponsive": "جعلها متجاوبة (تعديل عرض الحاوية)"
+      },
+      "appearance": {
+        "title": "المظهر",
+        "backgroundColor": "لون الخلفية",
+        "allowTransparentBackground": "السماح بخلفية شفافة (يتجاوز لون الخلفية)"
+      },
+      "border": {
+        "title": "الحدود والتصميم",
+        "showBorder": "إظهار الحدود",
+        "borderColor": "لون الحدود",
+        "borderWidth": "عرض الحدود (بكسل)",
+        "borderRadius": "نصف قطر الحدود (بكسل)",
+        "padding": "التباعد (بكسل)",
+        "paddingHelp": "الفضاء حول iframe"
+      },
+      "performance": {
+        "title": "الأداء",
+        "loadingMode": "وضع التحميل",
+        "loadingModePlaceholder": "اختر وضع التحميل",
+        "lazy": "كسل (مستحسن)",
+        "eager": "متحمس",
+        "help": "تحسين تحميل الكسل يحسن أداء الصفحة عن طريق تحميل iframe فقط عند ظهوره"
+      }
+    },
+    "codeModal": {
+      "title": "رمز التضمين",
+      "description": "اختر إطارك وانسخ الرمز",
+      "codeLabel": "{mode} الرمز",
+      "copied": "تم النسخ!",
+      "copy": "نسخ",
+      "close": "إغلاق",
+      "modes": {
+        "htmlDescription": "iframe HTML عالمي",
+        "reactDescription": "مكون React",
+        "nextjsDescription": "مكون Next.js",
+        "vueDescription": "مكون Vue.js",
+        "wordpressDescription": "رمز WordPress القصير"
+      },
+      "iframeTitle": "نموذج"
+    },
+    "testPage": {
+      "metadata": {
+        "title": "تضمين الاختبار - IkiForm",
+        "description": "صفحة اختبار لتوضيح قدرات تضمين النموذج"
+      },
+      "title": "صفحة اختبار تضمين النموذج",
+      "descriptionPrefix": "تعرض هذه الصفحة كيفية تضمين النماذج باستخدام تكوينات مختلفة. تفضل بزيارة",
+      "descriptionSuffix": "لإنشاء تضمينك الخاص.",
+      "tryCustomizer": "جرب مخصص التضمين",
+      "cards": {
+        "standard": {
+          "title": "تضمين قياسي",
+          "description": "ارتفاع 600 بكسل - مثالي لمشاهدة سطح المكتب",
+          "badge": "متجاوب",
+          "iframeTitle": "تضمين النموذج القياسي"
+        },
+        "compact": {
+          "title": "تضمين مدمج",
+          "description": "ارتفاع 400 بكسل - مثالي للشرفات الجانبية والمساحات الأصغر",
+          "badge": "بسيط",
+          "iframeTitle": "تضمين النموذج المدمج"
+        },
+        "fixed": {
+          "title": "تضمين العرض الثابت",
+          "description": "عرض 800 بكسل، مركز - مثالي للتخطيطات المحددة",
+          "badge": "نمط مخصص",
+          "iframeTitle": "تضمين نموذج العرض الثابت"
+        },
+        "react": {
+          "title": "مثال على مكون React",
+          "description": "مكون TypeScript React مع كتابة صحيحة",
+          "codeIframeTitle": "نموذج"
+        }
+      },
+      "guide": {
+        "title": "كيفية استخدام ميزة التضمين",
+        "description": "دليل خطوة بخطوة لتضمين النماذج الخاصة بك",
+        "steps": {
+          "step1": {
+            "title": "الوصول إلى مخصص التضمين",
+            "prefix": "انتقل إلى",
+            "suffix": "أو انقر على زر التضمين في لوحة تحكم النموذج."
+          },
+          "step2": {
+            "title": "تخصيص التضمين الخاص بك",
+            "item1": "ضبط أبعاد العرض والارتفاع",
+            "item2": "اختر السمة (فاتح، غامق، تلقائي)",
+            "item3": "تكوين الحدود والتصميم",
+            "item4": "ضبط سلوك التحميل"
+          },
+          "step3": {
+            "title": "احصل على الرمز الخاص بك",
+            "description": "انسخ الرمز الذي تم إنشاؤه لـ HTML، React، Next.js، Vue، أو WordPress والصقه في موقع الويب الخاص بك."
+          },
+          "step4": {
+            "title": "تكامل لوحة التحكم",
+            "description": "الوصول إلى خيارات التضمين مباشرة من لوحة تحكم النموذج باستخدام زر التضمين في إجراءات النموذج."
+          }
+        }
+      }
+    }
+  }
+}

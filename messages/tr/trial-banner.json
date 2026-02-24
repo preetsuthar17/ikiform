@@ -1,0 +1,16 @@
+{
+  "trialBanner": {
+    "aria": {
+      "status": "Deneme durumu bildirimi"
+    },
+    "endsInPrefix": "Ucretsiz denemeniz sona eriyor: ",
+    "remainingSuffix": " kaldi",
+    "expired": "Deneme suresi doldu",
+    "units": {
+      "day": "g",
+      "hour": "s",
+      "minute": "d",
+      "second": "sn"
+    }
+  }
+}

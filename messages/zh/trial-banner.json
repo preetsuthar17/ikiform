@@ -1,0 +1,16 @@
+{
+  "trialBanner": {
+    "aria": {
+      "status": "试用状态通知"
+    },
+    "endsInPrefix": "您的免费试用将在",
+    "remainingSuffix": "后结束",
+    "expired": "试用已过期",
+    "units": {
+      "day": "天",
+      "hour": "时",
+      "minute": "分",
+      "second": "秒"
+    }
+  }
+}

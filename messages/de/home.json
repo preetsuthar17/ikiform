@@ -1,0 +1,252 @@
+{
+  "name": "Ikiform",
+  "tagline": "Erstellen Sie Formulare, sammeln Sie Antworten und analysieren Sie Daten mühelos.",
+  "footer": {
+    "madeBy": "Erstellt von"
+  },
+  "cta": {
+    "heading": "Erstellen Sie Ihr erstes Formular im Handumdrehen.",
+    "subheading": "Starten Sie mit Ikiform, um Formulare, Umfragen zu erstellen, Antworten zu sammeln und vieles mehr – in Sekunden!",
+    "goToDashboard": "Zum Dashboard",
+    "createFirstForm": "Erstellen Sie Ihr erstes Formular",
+    "tryDemo": "Demo ausprobieren"
+  },
+  "hero": {
+    "unableToLoadFormDemo": "Die Formular-Demo konnte nicht geladen werden. Bitte aktualisieren Sie die Seite.",
+    "reload": "Neu laden",
+    "iframeTitle": "Ikiform Demo-Formular",
+    "sponsoredByAria": "Gesponsert von Vercel (öffnet in neuem Tab)",
+    "sponsoredBy": "Gesponsert von",
+    "heading": "Formulare erstellen, Antworten sammeln und analysieren.",
+    "subheading": "Die Open-Source-Formularplattform für mühelose Datenerfassung und -analyse.",
+    "fiveStarRating": "Bewertung von 5 von 5 Sternen",
+    "totalUsersSrOnly": "Gesamtzahl der Nutzer:",
+    "lovedByUsers": "Beliebt bei {count} Nutzern",
+    "createFirstForm": "Erstellen Sie Ihr erstes Formular",
+    "tryDemo": "Demo ausprobieren",
+    "openFullscreenAria": "Formular-Builder-Demo im Vollbild öffnen (Eingabetaste oder Leertaste drücken)",
+    "clickToViewFullscreen": "Klicken Sie für die Vollbildansicht",
+    "tabs": {
+      "formDemo": "Formular-Demo",
+      "formBuilderDemo": "Formular-Builder-Demo"
+    }
+  },
+  "pricing": {
+    "title": "Einfache, transparente Preise für alles, was Sie brauchen.",
+    "description": "Wählen Sie den Plan, der am besten zu Ihren Bedürfnissen passt, und beginnen Sie, Antworten zu sammeln.",
+    "popular": "Beliebt",
+    "noCard": "Keine Kreditkarte erforderlich",
+    "features": {
+      "unlimitedForms": "Unbegrenzte Formulare und Antworten",
+      "apiWebhooks": "API und Webhooks für Automatisierung",
+      "responseLimits": "Antwortlimits und -raten steuern",
+      "quizScoring": "Quizze mit Bewertung erstellen",
+      "formDataApi": "Formulardaten über die API abrufen",
+      "customBranding": "Individuelles Branding und überall einbetten",
+      "spamProtection": "Spam und Bots automatisch blockieren",
+      "passwordProfanity": "Beleidigungen filtern und Passwörter erfordern"
+    },
+    "plans": {
+      "monthly": {
+        "title": "Monatsplan",
+        "byline": "Monatliche Abrechnung • Jederzeit kündbar"
+      },
+      "lifetime": {
+        "title": "Lebenslanger Zugang",
+        "byline": "Einmalzahlung • Lebenslanger Zugang"
+      },
+      "yearly": {
+        "title": "Jahresplan",
+        "byline": "Jährliche Abrechnung (192 $/Jahr) • Jederzeit kündbar"
+      }
+    },
+    "cta": {
+      "startTrial": "Starten Sie Ihre 14-tägige kostenlose Testphase",
+      "getLifetime": "Lebenslangen Zugang erhalten"
+    }
+  },
+  "faq": {
+    "title": "Häufig gestellte Fragen",
+    "featureBoardLabel": "Feature-Board",
+    "githubLabel": "GitHub",
+    "q1": {
+      "question": "Was ist Ikiform?",
+      "answer": "Ikiform ist eine Open-Source-Alternative zu Google Forms. Es hilft Ihnen, mühelos schöne, interaktive Formulare zu erstellen."
+    },
+    "q2": {
+      "question": "Gibt es eine kostenlose Testphase?",
+      "answer": "Ja, es gibt eine 14-tägige kostenlose Testphase ohne Kreditkarte. Sie können jederzeit kündigen."
+    },
+    "q3": {
+      "question": "Warum Ikiform statt Google Forms oder Typeform?",
+      "answer": "Ikiform ist Open Source und gibt Ihnen die volle Kontrolle über Ihre Daten und Ihr Branding. Es gibt keine versteckten Kosten, und Sie können es selbst hosten für zusätzlichen Datenschutz und Flexibilität."
+    },
+    "q4": {
+      "question": "Welche Arten von Formularen kann ich erstellen?",
+      "answer": "Sie können einseitige Formulare und mehrstufige Formulare mit Fortschrittsverfolgung erstellen."
+    },
+    "q5": {
+      "question": "Welche Felder werden unterstützt?",
+      "answer": "Unterstützte Felder umfassen Text, E-Mail, Zahl, Telefonnummer, Textbereich, Datum, Uhrzeit, Adresse, Link, Dropdown-Auswahl, Radiobuttons, Kontrollkästchen, Schieberegler, Tags, soziale Felder, Datei-Upload, Unterschrift, Erklärung, Banner, Feldgruppe, Tag-Eingabe, Social Media, Terminplaner, Umfrage, Bewertung, Quiz und mehr."
+    },
+    "q6": {
+      "question": "Wie werden meine Daten geschützt?",
+      "answer": "Formulare können Passwortschutz, Ratenbegrenzung, Beleidigungsfilter, Spam-Schutz, Bot-Schutz haben und sind DSGVO-konform."
+    },
+    "q7": {
+      "question": "Werden die Daten, die ich übermittle, mit anderen geteilt?",
+      "answer": "Nein, Ihre Daten werden nicht verkauft oder an Dritte weitergegeben, außer an vertrauenswürdige Anbieter, die für den Betrieb von Ikiform erforderlich sind."
+    },
+    "q8": {
+      "question": "Kann ich meine Formulare anpassen?",
+      "answer": "Sie können Farben, Schriftarten, Layout ändern, Ihr Logo hinzufügen und das Erscheinungsbild jedes Feldes steuern."
+    },
+    "q9": {
+      "question": "Wo kann ich neue Funktionen vorschlagen?",
+      "answerPrefix": "Sie können Funktionen vorschlagen unter"
+    },
+    "q10": {
+      "question": "Wo werden meine Daten gespeichert?",
+      "answer": "Ihre Daten werden verschlüsselt und sicher in der EU über Supabase gespeichert."
+    },
+    "q11": {
+      "question": "Wie werden meine Daten geschützt?",
+      "answer": "Wir verwenden strenge Sicherheitsmaßnahmen und nur autorisiertes Personal kann auf Ihre Daten zugreifen."
+    },
+    "q12": {
+      "question": "Werden meine Daten gelöscht, wenn ich mein Konto kündige?",
+      "answer": "Ja. Sie können Ihre Daten jederzeit löschen. Gelöschte Daten werden innerhalb von 30 Tagen aus den Backups entfernt."
+    },
+    "q13": {
+      "question": "Kann ich meine Daten löschen?",
+      "answer": "Ja. Sie können jederzeit Zugang zu Ihren Daten anfordern oder deren Löschung beantragen, indem Sie eine E-Mail an hi@ikiform.com senden."
+    },
+    "q14": {
+      "question": "Wem gehören die Daten meiner Formularübermittlungen?",
+      "answer": "Alle Daten, die Sie sammeln, gehören Ihnen. Ikiform speichert sie lediglich für Sie."
+    },
+    "q15": {
+      "question": "Ist Ikiform Open Source?",
+      "answerPrefix": "Ikiform ist vollständig Open Source und verfügbar auf"
+    }
+  },
+  "bento": {
+    "preview": {
+      "aiForm": {
+        "demoAria": "KI-Formular-Builder-Demo",
+        "step0Label": "Was möchten Sie erstellen?",
+        "step0Placeholder": "Z. B. Kontaktformular",
+        "step1Label": "Name erfassen",
+        "step2Label": "E-Mail erfassen",
+        "step3Label": "Nachricht",
+        "statusGenerating": "KI erstellt Ihr Formular…",
+        "statusGenerated": "Formular generiert",
+        "examplePrompt": "Könnten Sie ein einfaches Kontaktformular erstellen?",
+        "generatedIn": "Generiert in 2,3 s",
+        "useThisForm": "Dieses Formular verwenden"
+      },
+      "unlimited": {
+        "aria": "Vorschau unbegrenzter Übermittlungen",
+        "copy": "Unbegrenzte Formulare, Felder, Nutzer und Antworten."
+      },
+      "analytics": {
+        "weeklyResponses": "Wöchentliche Antworten",
+        "liveUpdating": "Livedaten werden aktualisiert…",
+        "responsesThisWeek": "1,2k Antworten diese Woche"
+      },
+      "logic": {
+        "ifPrefix": "WENN",
+        "thenPrefix": "DANN",
+        "elsePrefix": "SONST",
+        "userResponds": "Nutzer antwortet",
+        "yesValue": "„Ja“",
+        "showEmailField": "E-Mail-Feld anzeigen",
+        "skip": "Überspringen",
+        "srDescription": "Vorschau einer einfachen bedingten Logik: Wenn der Nutzer „Ja“ antwortet, dann E-Mail-Feld anzeigen; andernfalls überspringen."
+      },
+      "api": {
+        "nameLabel": "Name",
+        "emailLabel": "E-Mail",
+        "planLabel": "Plan",
+        "premiumPlan": "Premium-Plan",
+        "statusReady": "Bereit",
+        "statusFetching": "Wird abgerufen…",
+        "statusFetched": "Abgerufen!",
+        "srReady": "Bereit für die API-Integrationsdemo.",
+        "srFetching": "Stripe-API wird kontaktiert, Daten werden geladen…",
+        "srSuccess": "Stripe-API-Daten empfangen und angezeigt."
+      },
+      "signatures": {
+        "statusIdle": "Warten auf Unterschrift…",
+        "statusSigning": "Unterschrift wird geleistet",
+        "statusDone": "Sicher unterschrieben",
+        "signAgreement": "Vereinbarung unterschreiben",
+        "signed": "✓ Unterschrieben",
+        "verified": "Verifiziert",
+        "signatureVerified": "Unterschrift verifiziert",
+        "srIdle": "Warten auf elektronische Unterschrift. Bitte unterschreiben Sie, um fortzufahren.",
+        "srSigning": "Unterschrift wird geschrieben.",
+        "srDone": "Unterschrift abgeschlossen und verifiziert."
+      },
+      "notifications": {
+        "title": "E-Mail-Benachrichtigung",
+        "none": "keine",
+        "newNotifications": "Sie haben {count} neue Benachrichtigungen",
+        "justNow": "Gerade eben",
+        "noNewNotifications": "Noch keine neuen Benachrichtigungen.",
+        "noNewEmailNotifications": "Noch keine neuen E-Mail-Benachrichtigungen.",
+        "newEmailNotification": "Neue E-Mail-Benachrichtigung: {title} von {from}, {time}",
+        "templates": {
+          "contactForm": "Kontaktformular",
+          "newsletterSignup": "Newsletter-Anmeldung",
+          "supportRequest": "Supportanfrage",
+          "feedbackForm": "Feedback-Formular",
+          "jobApplication": "Bewerbung",
+          "twoMinutesAgo": "Vor 2 Minuten",
+          "fiveMinutesAgo": "Vor 5 Minuten",
+          "eightMinutesAgo": "Vor 8 Minuten",
+          "twelveMinutesAgo": "Vor 12 Minuten",
+          "fifteenMinutesAgo": "Vor 15 Minuten"
+        }
+      }
+    },
+    "cards": {
+      "aiFormBuilder": {
+        "title": "KI-Formular-Builder",
+        "highlight": "Sofortige Formularerstellung",
+        "description": "—beschreiben Sie es einfach und starten Sie. Konvertieren Sie Besucher in Sekunden."
+      },
+      "unlimitedEverything": {
+        "title": "Alles unbegrenzt",
+        "highlight": "unbegrenzte Formulare und Antworten",
+        "description": " Wachsen Sie ohne Grenzen."
+      },
+      "aiAnalytics": {
+        "title": "KI-Analytik",
+        "prefix": "Sehen Sie, wer konvertiert und warum—",
+        "highlight": "erhalten Sie klare, umsetzbare Erkenntnisse"
+      },
+      "smartNotifications": {
+        "title": "Intelligente Benachrichtigungen",
+        "prefix": "Verpassen Sie nie einen Lead—",
+        "highlight": "erhalten Sie sofortige Benachrichtigungen und automatisieren Sie Follow-ups."
+      },
+      "apiWebhooks": {
+        "title": "API und Webhooks",
+        "highlight": "Leads überall synchronisieren",
+        "description": "—verbinden Sie sich mit jedem Service oder Workflow."
+      },
+      "formSignatures": {
+        "title": "Formular-Unterschriften",
+        "prefix": "Fügen Sie Unterschriftsfelder hinzu, um ",
+        "highlight": "elektronische Unterschriften zu erfassen",
+        "suffix": " in jedem Formular."
+      },
+      "visualLogicBuilder": {
+        "title": "Visueller Logik-Builder",
+        "highlight": "Personalisieren Sie jeden Pfad",
+        "description": "—zeigen oder verbergen Sie Fragen basierend auf Antworten."
+      }
+    }
+  }
+}

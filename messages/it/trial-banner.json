@@ -1,0 +1,16 @@
+{
+  "trialBanner": {
+    "aria": {
+      "status": "Notifica stato prova"
+    },
+    "endsInPrefix": "La tua prova gratuita termina tra ",
+    "remainingSuffix": " rimanenti",
+    "expired": "Prova scaduta",
+    "units": {
+      "day": "g",
+      "hour": "h",
+      "minute": "m",
+      "second": "s"
+    }
+  }
+}

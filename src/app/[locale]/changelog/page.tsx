@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 const BREADCRUMB_LABEL = {
 	en: "Changelog",
 	es: "Novedades",
-};
+} as const;
 
 export async function generateMetadata({
 	params,
@@ -36,7 +36,9 @@ export default async function LocalizedChangelog({
 				data={getBreadcrumbJsonLd(currentLocale, [
 					{ name: "Ikiform", path: "/" },
 					{
-						name: BREADCRUMB_LABEL[currentLocale],
+						name:
+							BREADCRUMB_LABEL[currentLocale as keyof typeof BREADCRUMB_LABEL] ??
+							"Changelog",
 						path: "/changelog",
 					},
 				])}

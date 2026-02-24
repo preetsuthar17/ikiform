@@ -1,0 +1,16 @@
+{
+  "trialBanner": {
+    "aria": {
+      "status": "トライアル状況通知"
+    },
+    "endsInPrefix": "無料トライアル終了まで",
+    "remainingSuffix": " 残り",
+    "expired": "トライアル期限切れ",
+    "units": {
+      "day": "日",
+      "hour": "時",
+      "minute": "分",
+      "second": "秒"
+    }
+  }
+}

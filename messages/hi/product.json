@@ -1,0 +1,2211 @@
+{
+  "common": {
+    "na": "N/A",
+    "premium": {
+      "title": "प्रीमियम आवश्यक है",
+      "viewPricing": "मूल्य देखें",
+      "aiBuilderDescription": "आपको AI फॉर्म बिल्डर का उपयोग करने के लिए एक प्रीमियम सदस्यता की आवश्यकता है। सभी सुविधाओं को अनलॉक करने के लिए अपग्रेड करें।",
+      "formBuilderDescription": "आपको फॉर्म बिल्डर का उपयोग करने के लिए एक प्रीमियम सदस्यता की आवश्यकता है। सभी सुविधाओं को अनलॉक करने के लिए अपग्रेड करें।"
+    }
+  },
+  "formBuilder": {
+    "header": {
+      "title": "फॉर्म बिल्डर",
+      "goToDashboard": "डैशबोर्ड पर जाएं",
+      "fieldCount": "{count} क्षेत्र",
+      "fieldCount_plural": "{count} क्षेत्र",
+      "saving": "सहेज रहा है",
+      "moreActions": "अधिक कार्रवाइयाँ",
+      "multiStepForm": "मल्टी-स्टेप फॉर्म",
+      "toggleMultiStepMode": "मल्टी-स्टेप मोड टॉगल करें",
+      "viewJson": "JSON देखें",
+      "analytics": "विश्लेषिकी",
+      "share": "साझा करें",
+      "useKiko": "Kiko का उपयोग करें",
+      "settings": "सेटिंग्स",
+      "publish": "प्रकाशित करें",
+      "published": "प्रकाशित",
+      "publishing": "प्रकाशित कर रहा है...",
+      "unpublishing": "अप्रकाशित कर रहा है...",
+      "publishForm": "फॉर्म प्रकाशित करें",
+      "unpublishForm": "फॉर्म अप्रकाशित करें",
+      "save": "सहेजें",
+      "saveForm": "फॉर्म सहेजें",
+      "actionsAria": "फॉर्म बिल्डर कार्रवाइयाँ"
+    },
+    "modals": {
+      "formSettings": "फॉर्म सेटिंग्स",
+      "internalTitle": "आंतरिक शीर्षक",
+      "internalTitlePlaceholder": "अपने संदर्भ के लिए आंतरिक शीर्षक दर्ज करें...",
+      "internalTitleDescription": "यह शीर्षक केवल आपके लिए डैशबोर्ड और फॉर्म बिल्डर में दिखाई देता है",
+      "publicTitle": "सार्वजनिक शीर्षक",
+      "publicTitlePlaceholder": "उपयोगकर्ताओं को प्रदर्शित करने के लिए शीर्षक दर्ज करें...",
+      "publicTitleDescription": "यह शीर्षक वास्तविक फॉर्म पर उपयोगकर्ताओं को प्रदर्शित किया जाएगा। आंतरिक शीर्षक का उपयोग करने के लिए खाली छोड़ दें।",
+      "description": "विवरण",
+      "descriptionPlaceholder": "फॉर्म विवरण दर्ज करें",
+      "submitButtonText": "सबमिट बटन पाठ",
+      "submitButtonTextPlaceholder": "सबमिट बटन पाठ",
+      "submit": "सबमिट",
+      "successMessage": "सफलता संदेश",
+      "successMessagePlaceholder": "सफलतापूर्वक सबमिशन के बाद दिखाया गया संदेश",
+      "redirectUrlOptional": "रीडायरेक्ट URL (वैकल्पिक)",
+      "redirectUrlPlaceholder": "https://example.com/thank-you",
+      "cancel": "रद्द करें",
+      "saveSettings": "सेटिंग्स सहेजें"
+    },
+    "page": {
+      "formFields": "फॉर्म फ़ील्ड",
+      "authRequired": "प्रमाणीकरण आवश्यक है",
+      "authRequiredDescription": "कृपया फॉर्म बिल्डर का उपयोग करने के लिए लॉग इन करें।",
+      "goToLogin": "लॉगिन पर जाएं",
+      "stepDefaultTitle": "{index} चरण",
+      "stepDefaultDescription": "आपके फॉर्म का पहला चरण",
+      "loadingCustomization": "कस्टमाइज़ेशन लोड हो रहा है..."
+    },
+    "blockManager": {
+      "header": {
+        "title": "फॉर्म संरचना",
+        "stepsCount": "{count, plural, one {# चरण} other {# चरण}}",
+        "description": "अपने फॉर्म को तर्कसंगत अनुभागों में व्यवस्थित करें",
+        "addStepAria": "फॉर्म में नया चरण जोड़ें",
+        "addStep": "चरण जोड़ें"
+      },
+      "item": {
+        "dragHandleAria": "{title} चरण को पुन: क्रमबद्ध करने के लिए खींचें",
+        "dragToReorder": "पुन: क्रमबद्ध करने के लिए खींचें"
+      },
+      "headerActions": {
+        "stepBadge": "{index} चरण",
+        "editStepAria": "{title} चरण संपादित करें",
+        "deleteStepAria": "{title} चरण हटाएं",
+        "editStep": "चरण संपादित करें",
+        "deleteStep": "चरण हटाएं",
+        "collapseStep": "चरण को संक्षिप्त करें",
+        "expandStep": "चरण का विस्तार करें"
+      },
+      "editForm": {
+        "stepTitlePlaceholder": "चरण शीर्षक",
+        "stepDescriptionPlaceholder": "चरण विवरण (वैकल्पिक)",
+        "save": "सहेजें",
+        "cancel": "रद्द करें"
+      },
+      "fieldsList": {
+        "empty": "अभी तक कोई फ़ील्ड नहीं। दाईं ओर के पैलेट से फ़ील्ड जोड़ें।"
+      }
+    },
+    "multiStepNavigation": {
+      "deleteStep": "चरण हटाएं",
+      "addStep": "चरण जोड़ें",
+      "deleteDialogTitle": "चरण हटाएं",
+      "deleteDialogDescription": "क्या आप इस चरण को हटाना चाहते हैं? यह क्रिया पूर्ववत नहीं की जा सकती।",
+      "cancel": "रद्द करें"
+    },
+    "formFields": {
+      "addFieldToFormAria": "फ़ॉर्म में फ़ील्ड जोड़ें",
+      "addField": "फ़ील्ड जोड़ें",
+      "addSpecificFieldAria": " {label} फ़ील्ड जोड़ें",
+      "formFields": "फ़ॉर्म फ़ील्ड",
+      "noFieldsInStep": "इस चरण में कोई फ़ील्ड नहीं",
+      "noFieldsYet": "अभी तक कोई फ़ील्ड नहीं जोड़े गए",
+      "addFieldsToStep": "इस चरण में पैलेट से फ़ील्ड जोड़ें",
+      "addFieldsFromLeftPanel": "फ़ॉर्म बनाने के लिए बाईं ओर के पैनल से फ़ील्ड जोड़ें",
+      "fieldsCount": "{count, plural, one {# फ़ील्ड} other {# फ़ील्ड}}",
+      "fieldAria": "{type} फ़ील्ड",
+      "deleteFieldAria": "{type} फ़ील्ड हटाएं",
+      "deleteField": "फ़ील्ड हटाएं"
+    },
+    "jsonViewModal": {
+      "title": "फ़ॉर्म स्कीमा JSON",
+      "description": "वर्तमान फ़ॉर्म स्कीमा का केवल-पढ़ने के लिए दृश्य। JSON की प्रतिलिपि बनाने के लिए प्रतिलिपि बटन का उपयोग करें।",
+      "copySuccess": "JSON क्लिपबोर्ड में कॉपी किया गया!",
+      "copyError": "JSON की प्रतिलिपि बनाने में विफल",
+      "copied": "कॉपी किया गया",
+      "copyJson": "JSON की प्रतिलिपि बनाएं"
+    },
+    "settingsMobile": {
+      "sectionsAria": "सेटिंग्स अनुभाग",
+      "goToSectionAria": " {section} सेटिंग्स पर जाएं",
+      "backToListAria": "सेटिंग्स सूची पर वापस जाएं",
+      "settings": "सेटिंग्स"
+    },
+    "creation": {
+      "title": "एक नया फ़ॉर्म बनाएं",
+      "cancel": "रद्द करें",
+      "back": "वापस",
+      "createForm": "फ़ॉर्म बनाएं",
+      "reviewAction": "समीक्षा करें",
+      "next": "अगला",
+      "types": {
+        "single": {
+          "title": "एकल पृष्ठ फ़ॉर्म",
+          "description": "एक पृष्ठ पर सभी फ़ील्ड के साथ पारंपरिक फ़ॉर्म"
+        },
+        "multi": {
+          "title": "मल्टी-स्टेप फ़ॉर्म",
+          "description": "एकाधिक चरणों के साथ निर्देशित फ़ॉर्म अनुभव"
+        }
+      },
+      "typePreview": {
+        "stepOf": "{step} का {total} चरण"
+      },
+      "configuration": {
+        "title": "फ़ॉर्म विवरण",
+        "description": "अपने फ़ॉर्म के लिए आंतरिक और सार्वजनिक जानकारी सेट करें।",
+        "internalTitle": "आंतरिक शीर्षक",
+        "internalTitlePlaceholder": "अपने संदर्भ के लिए आंतरिक शीर्षक दर्ज करें…",
+        "internalTitleHelp": "केवल डैशबोर्ड और बिल्डर में दृश्यमान।",
+        "publicTitle": "सार्वजनिक शीर्षक",
+        "publicTitlePlaceholder": "उपयोगकर्ताओं को प्रदर्शित करने के लिए शीर्षक दर्ज करें…",
+        "publicTitleHelp": "फ़ॉर्म पर उपयोगकर्ताओं को दिखाया गया। आंतरिक शीर्षक को पुन: उपयोग करने के लिए खाली छोड़ दें।",
+        "formDescription": "फ़ॉर्म विवरण",
+        "formDescriptionPlaceholder": "उपयोगकर्ताओं को मार्गदर्शन करने के लिए एक छोटा विवरण दर्ज करें…",
+        "formDescriptionHelp": "वैकल्पिक। उपयोगकर्ताओं को फ़ॉर्म के उद्देश्य को समझने में मदद करता है।"
+      },
+      "review": {
+        "formType": "फ़ॉर्म प्रकार",
+        "multiStepForm": "मल्टी-स्टेप फ़ॉर्म",
+        "singlePageForm": "एकल पृष्ठ फ़ॉर्म",
+        "multiStep": "मल्टी-स्टेप",
+        "singlePage": "एकल पृष्ठ",
+        "editFormType": "फ़ॉर्म प्रकार संपादित करें",
+        "formConfiguration": "फ़ॉर्म कॉन्फ़िगरेशन",
+        "editFormConfiguration": "फ़ॉर्म कॉन्फ़िगरेशन संपादित करें",
+        "internalTitle": "आंतरिक शीर्षक",
+        "publicTitle": "सार्वजनिक शीर्षक",
+        "description": "विवरण",
+        "preview": "पूर्वावलोकन",
+        "previewDescription": "आपके फ़ॉर्म का स्नैपशॉट।"
+      },
+      "stepIndicator": {
+        "progress": "प्रगति",
+        "stepCompleted": "{index} चरण पूरा हुआ",
+        "stepCurrent": "{index} चरण वर्तमान",
+        "step": "{index} चरण"
+      }
+    },
+    "customize": {
+      "page": {
+        "savedCustomization": "कस्टमाइज़ेशन सहेजा गया",
+        "saveFailed": "परिवर्तनों को सहेजने में विफल। कृपया पुनः प्रयास करें।",
+        "tabs": {
+          "presets": "प्रीसेट",
+          "layout": "लेआउट",
+          "colors": "रंग",
+          "text": "पाठ"
+        },
+        "backToCustomize": "कस्टमाइज़ पर वापस जाएं",
+        "previewForm": "फ़ॉर्म पूर्वावलोकन",
+        "customizeForm": "फ़ॉर्म कस्टमाइज़ करें",
+        "publicTitle": "सार्वजनिक शीर्षक: \"{title}\"",
+        "customizationActions": "कस्टमाइज़ेशन क्रियाएं",
+        "back": "वापस",
+        "save": "सहेजें",
+        "customize": "अनुकूलित करें"
+      },
+      "colors": {
+        "title": "रंग सेटिंग्स",
+        "description": "रंग और थीम को अनुकूलित करें",
+        "backgroundColorLabel": "पृष्ठभूमि रंग",
+        "backgroundColorHelp": "फ़ॉर्म कंटेनर का पृष्ठभूमि रंग सेट करता है",
+        "textColorLabel": "पाठ रंग",
+        "textColorHelp": "फ़ॉर्म में सभी पाठ तत्वों का रंग सेट करता है",
+        "primaryColorLabel": "प्राथमिक रंग (बटन और एक्सेंट)",
+        "primaryColorHelp": "बटन, फ़ोकस स्थितियों और एक्सेंट तत्वों के लिए रंग सेट करता है",
+        "borderColorLabel": "सीमा रंग",
+        "borderColorHelp": "इनपुट फ़ील्ड सीमाओं और विभाजकों के लिए रंग सेट करता है",
+        "websiteBackgroundColorLabel": "वेबसाइट पृष्ठभूमि रंग",
+        "websiteBackgroundColorHelp": "पूरे वेबसाइट/पृष्ठ का पृष्ठभूमि रंग सेट करता है"
+      },
+      "typography": {
+        "title": "टाइपोग्राफी सेटिंग्स",
+        "description": "फ़ॉन्ट और पाठ स्टाइलिंग को अनुकूलित करें",
+        "fontFamily": "फ़ॉन्ट परिवार",
+        "fontFamilyPlaceholder": "एक Google फ़ॉन्ट चुनें...",
+        "fontPreview": "फ़ॉन्ट पूर्वावलोकन",
+        "previewLine1": "द क्विक ब्राउन फॉक्स जंप्स ओवर द लेज़ी डॉग",
+        "previewLine2": "नमूना फ़ॉर्म पाठ जिसमें संख्याएं 1234567890 हैं",
+        "fontHelp": "सैकड़ों Google फ़ॉन्ट्स में से चुनें। फ़ॉन्ट स्वचालित रूप से लोड हो जाएगा।",
+        "fontSize": "फ़ॉन्ट आकार",
+        "fontWeight": "फ़ॉन्ट वजन",
+        "selected": "चयनित:",
+        "fontSizeOptions": {
+          "xs": {
+            "label": "अतिरिक्त छोटा",
+            "description": "12px"
+          },
+          "sm": {
+            "label": "छोटा",
+            "description": "14px"
+          },
+          "base": {
+            "label": "आधार",
+            "description": "16px"
+          },
+          "lg": {
+            "label": "बड़ा",
+            "description": "18px"
+          },
+          "xl": {
+            "label": "अतिरिक्त बड़ा",
+            "description": "20px"
+          }
+        },
+        "fontWeightOptions": {
+          "light": {
+            "label": "हल्का",
+            "description": "300"
+          },
+          "normal": {
+            "label": "सामान्य",
+            "description": "400"
+          },
+          "medium": {
+            "label": "मध्यम",
+            "description": "500"
+          },
+          "semibold": {
+            "label": "सेमीबोल्ड",
+            "description": "600"
+          },
+          "bold": {
+            "label": "बोल्ड",
+            "description": "700"
+          }
+        }
+      },
+      "layout": {
+        "title": "लेआउट सेटिंग्स",
+        "description": "स्थान और संरचना को कॉन्फ़िगर करें",
+        "showProgressBar": "प्रगति बार दिखाएं",
+        "formWidth": "फ़ॉर्म चौड़ाई",
+        "formWidthHelp": "फ़ॉर्म कंटेनर की अधिकतम चौड़ाई नियंत्रित करता है",
+        "customWidth": "कस्टम चौड़ाई (उदा., 600px, 80%, 50rem)",
+        "customWidthPlaceholder": "कस्टम चौड़ाई दर्ज करें",
+        "internalPadding": "आंतरिक पैडिंग",
+        "internalPaddingHelp": "फ़ॉर्म कंटेनर के अंदर स्थान नियंत्रित करता है",
+        "externalMargin": "बाहरी मार्जिन",
+        "externalMarginHelp": "फ़ॉर्म कंटेनर के चारों ओर स्थान नियंत्रित करता है",
+        "cornerRadius": "कोने की त्रिज्या",
+        "cornerRadiusHelp": "फ़ॉर्म कोने कितने गोल दिखाई देते हैं, इसे नियंत्रित करता है",
+        "widthOptions": {
+          "sm": {
+            "label": "छोटा",
+            "description": "400px अधिकतम चौड़ाई"
+          },
+          "md": {
+            "label": "मध्यम",
+            "description": "600px अधिकतम चौड़ाई"
+          },
+          "lg": {
+            "label": "बड़ा",
+            "description": "800px अधिकतम चौड़ाई"
+          },
+          "xl": {
+            "label": "अतिरिक्त बड़ा",
+            "description": "1000px अधिकतम चौड़ाई"
+          },
+          "full": {
+            "label": "पूर्ण चौड़ाई",
+            "description": "100% चौड़ाई"
+          },
+          "custom": {
+            "label": "कस्टम",
+            "description": "कस्टम चौड़ाई मान"
+          }
+        },
+        "paddingOptions": {
+          "none": {
+            "label": "कोई नहीं",
+            "description": "0px पैडिंग"
+          },
+          "sm": {
+            "label": "छोटा",
+            "description": "16px पैडिंग"
+          },
+          "md": {
+            "label": "मध्यम",
+            "description": "24px पैडिंग"
+          },
+          "lg": {
+            "label": "बड़ा",
+            "description": "32px पैडिंग"
+          }
+        },
+        "marginOptions": {
+          "none": {
+            "label": "कोई नहीं",
+            "description": "कोई मार्जिन नहीं"
+          },
+          "sm": {
+            "label": "छोटा",
+            "description": "8px"
+          },
+          "md": {
+            "label": "मध्यम",
+            "description": "16px"
+          },
+          "lg": {
+            "label": "बड़ा",
+            "description": "32px"
+          }
+        },
+        "radiusOptions": {
+          "none": {
+            "label": "कोई नहीं",
+            "description": "0px (नुकीले कोने)"
+          },
+          "sm": {
+            "label": "छोटा",
+            "description": "4px बॉर्डर रेडियस"
+          },
+          "md": {
+            "label": "मध्यम",
+            "description": "8px बॉर्डर रेडियस"
+          },
+          "lg": {
+            "label": "बड़ा",
+            "description": "16px बॉर्डर रेडियस"
+          },
+          "xl": {
+            "label": "अतिरिक्त बड़ा",
+            "description": "24px बॉर्डर रेडियस"
+          }
+        }
+      },
+      "presets": {
+        "title": "डिज़ाइन प्रीसेट",
+        "description": "सुंदर प्री-डिज़ाइन किए गए फॉर्म शैलियों के साथ त्वरित-प्रारंभ करें",
+        "category": "श्रेणी",
+        "allPresets": "सभी प्रीसेट",
+        "presets": "प्रीसेट",
+        "presetCount": "{count, plural, one {# प्रीसेट} other {# प्रीसेट}}",
+        "presetList": "प्रीसेट सूची",
+        "applyPresetAria": " {name} प्रीसेट लागू करें",
+        "appliedPreset": "\"{name}\" प्रीसेट लागू किया गया",
+        "formTitle": "फ़ॉर्म शीर्षक",
+        "submit": "सबमिट"
+      },
+      "preview": {
+        "title": "लाइव पूर्वावलोकन",
+        "description": "देखें कि आपका फॉर्म लागू कस्टमाइज़ेशन के साथ कैसा दिखेगा",
+        "sampleTitle": "नमूना फ़ॉर्म",
+        "sampleDescription": "यह है कि आपका फॉर्म वर्तमान डिज़ाइन सेटिंग्स के साथ कैसा दिखाई देगा।",
+        "nameLabel": "नाम *",
+        "namePlaceholder": "अपना नाम दर्ज करें",
+        "emailLabel": "ईमेल *",
+        "emailPlaceholder": "अपना ईमेल दर्ज करें",
+        "categoryLabel": "श्रेणी",
+        "categoryPlaceholder": "एक श्रेणी चुनें",
+        "categoryGeneral": "सामान्य पूछताछ",
+        "categorySupport": "समर्थन",
+        "categorySales": "बिक्री",
+        "messageLabel": "संदेश",
+        "messagePlaceholder": "अपना संदेश दर्ज करें",
+        "submitButton": "फ़ॉर्म जमा करें",
+        "previousStepAria": "पिछला चरण",
+        "previousStep": "पिछला",
+        "nextStepAria": "अगला चरण",
+        "nextStep": "अगला",
+        "submitAria": "फ़ॉर्म जमा करें"
+      }
+    },
+    "toasts": {
+      "loginRequiredToSave": "कृपया अपना फॉर्म सहेजने के लिए लॉग इन करें।",
+      "formSaved": "फ़ॉर्म सफलतापूर्वक सहेजा गया!",
+      "formCreated": "फ़ॉर्म सफलतापूर्वक बनाया गया!",
+      "saveFailed": "फ़ॉर्म को सहेजने में विफल। कृपया पुनः प्रयास करें।",
+      "saveBeforeShare": "कृपया साझा करने से पहले अपना फॉर्म सहेजें।",
+      "formPublished": "फ़ॉर्म सफलतापूर्वक प्रकाशित किया गया!",
+      "publishFailed": "फ़ॉर्म को प्रकाशित करने में विफल। कृपया पुनः प्रयास करें।",
+      "saveBeforeAnalytics": "कृपया विश्लेषिकी देखने से पहले अपना फॉर्म सहेजें।",
+      "loadingAnalytics": "विश्लेषिकी लोड हो रही है",
+      "saveBeforePublish": "कृपया प्रकाशित करने से पहले अपना फॉर्म सहेजें।",
+      "userAuthRequired": "उपयोगकर्ता प्रमाणीकरण आवश्यक है",
+      "formUnpublished": "फ़ॉर्म सफलतापूर्वक अपब्लिश किया गया!",
+      "updateStatusFailed": "फ़ॉर्म की स्थिति अपडेट करने में विफल। कृपया पुनः प्रयास करें।",
+      "saveSettingsFailed": "सेटिंग्स को सहेजने में विफल। कृपया पुनः प्रयास करें।",
+      "loadFailed": "फ़ॉर्म को लोड करने में विफल। कृपया पुनः प्रयास करें।"
+    },
+    "formPreview": {
+      "titlePlaceholder": "शीर्षक जोड़ने के लिए क्लिक करें...",
+      "descriptionPlaceholder": "विवरण जोड़ने के लिए क्लिक करें...",
+      "publicTitle": "सार्वजनिक शीर्षक: \"{title}\"",
+      "stepTitlePlaceholder": "चरण शीर्षक जोड़ने के लिए क्लिक करें...",
+      "stepDescriptionPlaceholder": "चरण विवरण जोड़ने के लिए क्लिक करें...",
+      "stepBadge": "{index} चरण",
+      "editFieldAria": "फ़ील्ड संपादित करें",
+      "clickToEdit": "संपादन करने के लिए क्लिक करें"
+    },
+    "fieldPalette": {
+      "headerTitle": "फॉर्म फ़ील्ड",
+      "headerDescription": "अपने फॉर्म में फ़ील्ड जोड़ने के लिए क्लिक करें",
+      "ariaPalette": "फ़ील्ड पैलेट",
+      "searchAria": "फ़ील्ड खोजें",
+      "searchPlaceholder": "फ़ील्ड खोजें...",
+      "categoryFieldsAria": "{category} फ़ील्ड",
+      "noFieldsFound": "\"{searchTerm}\" से मेल खाते कोई फ़ील्ड नहीं मिले",
+      "searchHint": "फ़ील्ड का नाम, विवरण या प्रकार से खोजने का प्रयास करें",
+      "addFieldAria": " {label} फ़ील्ड जोड़ें",
+      "categories": {
+        "input": "इनपुट फ़ील्ड",
+        "selection": "चयन फ़ील्ड",
+        "media": "मीडिया फ़ील्ड",
+        "layout": "लेआउट फ़ील्ड",
+        "advanced": "उन्नत फ़ील्ड"
+      },
+      "fields": {
+        "text": {
+          "label": "पाठ इनपुट",
+          "description": "छोटे पाठ उत्तरों के लिए एक पंक्ति"
+        },
+        "email": {
+          "label": "ईमेल",
+          "description": "एक वैध ईमेल पते को इकट्ठा करें"
+        },
+        "number": {
+          "label": "संख्या",
+          "description": "संख्यात्मक मानों के लिए इनपुट"
+        },
+        "phone": {
+          "label": "फ़ोन नंबर",
+          "description": "मान्यता के साथ फ़ोन नंबरों के लिए इनपुट"
+        },
+        "textarea": {
+          "label": "टेक्स्टएरिया",
+          "description": "लंबे पाठ के लिए एक बहु-पंक्ति फ़ील्ड"
+        },
+        "date": {
+          "label": "तारीख",
+          "description": "एक कैलेंडर से एक तारीख चुनें"
+        },
+        "time": {
+          "label": "समय",
+          "description": "एक समय मान चुनें या दर्ज करें"
+        },
+        "address": {
+          "label": "पता",
+          "description": "सड़क, शहर और अन्य पते विवरण के लिए इनपुट"
+        },
+        "link": {
+          "label": "लिंक",
+          "description": "एक वैध वेबसाइट URL के लिए इनपुट"
+        },
+        "select": {
+          "label": "चयन ड्रॉपडाउन",
+          "description": "एक विकल्प चुनने के लिए ड्रॉपडाउन"
+        },
+        "radio": {
+          "label": "रेडियो बटन",
+          "description": "एक सूची से एक विकल्प चुनें"
+        },
+        "checkbox": {
+          "label": "चेकबॉक्स",
+          "description": "एक या अधिक विकल्प चुनें"
+        },
+        "slider": {
+          "label": "स्लाइडर",
+          "description": "एक हैंडल स्लाइड करके एक मान चुनें"
+        },
+        "rating": {
+          "label": "रेटिंग",
+          "description": "एक स्टार या आइकन रेटिंग इकट्ठा करें"
+        },
+        "poll": {
+          "label": "मतदान",
+          "description": "उपयोगकर्ताओं को कई विकल्पों पर वोट करने दें"
+        },
+        "file": {
+          "label": "फ़ाइल अपलोड",
+          "description": "फ़ाइल आकार और प्रकार सीमाओं के साथ अपलोड करें"
+        },
+        "signature": {
+          "label": "हस्ताक्षर",
+          "description": "माउस या टच के साथ ड्रॉ या साइन करें"
+        },
+        "statement": {
+          "label": "विवरण",
+          "description": "फ़ॉर्म में एक शीर्षक या विवरण प्रदर्शित करें"
+        },
+        "banner": {
+          "label": "बैनर",
+          "description": "एक हाइलाइट किया गया संदेश या चेतावनी दिखाएं"
+        },
+        "field-group": {
+          "label": "फ़ील्ड समूह",
+          "description": "फ़ील्ड को एक पंक्ति में एक साथ समूहित करें"
+        },
+        "tags": {
+          "label": "टैग इनपुट",
+          "description": "एकाधिक टैग दर्ज करें और प्रबंधित करें"
+        },
+        "social": {
+          "label": "सोशल मीडिया",
+          "description": "सोशल मीडिया प्रोफ़ाइल लिंक जोड़ें"
+        },
+        "scheduler": {
+          "label": "शेड्यूलर",
+          "description": "एक शेड्यूलिंग लिंक एम्बेड करें (जैसे कैलेंडली)"
+        }
+      }
+    },
+    "fieldSettings": {
+      "header": {
+        "title": "फ़ील्ड सेटिंग्स",
+        "closeAria": "फ़ील्ड सेटिंग्स बंद करें"
+      },
+      "emptyState": {
+        "title": "कोई फ़ील्ड चयनित नहीं",
+        "description": "अपनी सेटिंग्स संपादित करने के लिए पूर्वावलोकन में एक फ़ील्ड पर क्लिक करें"
+      },
+      "basic": {
+        "title": "बुनियादी सेटिंग्स",
+        "fieldLabel": "फ़ील्ड लेबल",
+        "fieldLabelPlaceholder": "फ़ील्ड लेबल दर्ज करें",
+        "fieldLabelHelp": "लेबल जो फ़ील्ड के ऊपर दिखाई देता है",
+        "placeholder": "प्लेसहोल्डर",
+        "placeholderPlaceholder": "प्लेसहोल्डर पाठ दर्ज करें",
+        "placeholderHelp": "संकेत पाठ जो फ़ील्ड के अंदर दिखाई देता है",
+        "description": "विवरण",
+        "descriptionPlaceholder": "फ़ील्ड का विवरण दर्ज करें (फ़ील्ड के नीचे दिखाया गया है)",
+        "descriptionHelp": "फ़ील्ड के नीचे दिखाया गया अतिरिक्त सहायता पाठ",
+        "required": "आवश्यक फ़ील्ड",
+        "requiredHelp": "उपयोगकर्ताओं को फ़ॉर्म जमा करने के लिए इस फ़ील्ड को भरना होगा"
+      },
+      "validation": {
+        "title": "मान्यता",
+        "minLength": "न्यूनतम लंबाई",
+        "minLengthPlaceholder": "न्यूनतम वर्ण",
+        "minLengthHelp": "न्यूनतम आवश्यक वर्णों की संख्या",
+        "maxLength": "अधिकतम लंबाई",
+        "maxLengthPlaceholder": "अधिकतम वर्ण",
+        "maxLengthHelp": "अनुमत अधिकतम वर्णों की संख्या",
+        "pattern": "पैटर्न (रेगेक्स)",
+        "patternPlaceholder": "नियमित अभिव्यक्ति",
+        "patternHelp": "मान्यता के लिए नियमित अभिव्यक्ति पैटर्न",
+        "minValue": "न्यूनतम मान",
+        "minValuePlaceholder": "न्यूनतम मान",
+        "minValueHelp": "अनुमत न्यूनतम संख्यात्मक मान",
+        "maxValue": "अधिकतम मान",
+        "maxValuePlaceholder": "अधिकतम मान",
+        "maxValueHelp": "अनुमत अधिकतम संख्यात्मक मान"
+      },
+      "errorMessages": {
+        "title": "कस्टम त्रुटि संदेश",
+        "requiredFieldMessage": "आवश्यक फ़ील्ड संदेश",
+        "requiredFieldPlaceholder": "यह फ़ील्ड आवश्यक है",
+        "minLengthMessage": "न्यूनतम लंबाई त्रुटि संदेश",
+        "minLengthPlaceholder": "कम से कम {count} वर्ण होना चाहिए",
+        "maxLengthMessage": "अधिकतम लंबाई त्रुटि संदेश",
+        "maxLengthPlaceholder": " {count} वर्ण से अधिक नहीं होना चाहिए",
+        "patternMessage": "पैटर्न त्रुटि संदेश",
+        "patternPlaceholder": "कृपया एक वैध प्रारूप दर्ज करें",
+        "emailMessage": "ईमेल त्रुटि संदेश",
+        "emailPlaceholder": "कृपया एक वैध ईमेल पता दर्ज करें",
+        "minValueMessage": "न्यूनतम मान त्रुटि संदेश",
+        "minValuePlaceholder": "कम से कम {value} होना चाहिए",
+        "maxValueMessage": "अधिकतम मान त्रुटि संदेश",
+        "maxValuePlaceholder": " {value} से अधिक नहीं होना चाहिए",
+        "invalidNumberMessage": "अमान्य संख्या संदेश",
+        "invalidNumberPlaceholder": "कृपया एक वैध संख्या दर्ज करें"
+      },
+      "options": {
+        "title": "विकल्प",
+        "addOptionAria": "नया विकल्प जोड़ें",
+        "addOption": "विकल्प जोड़ें",
+        "optionPlaceholder": "विकल्प {index}",
+        "removeOptionAria": "विकल्प {index} हटाएं",
+        "none": "अभी तक कोई विकल्प नहीं जोड़े गए हैं",
+        "or": "या",
+        "orAria": "या",
+        "fetchFromApi": "एपीआई से प्राप्त करें",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "विकल्पों को प्राप्त करने के लिए एपीआई एंडपॉइंट",
+        "valueKeyPlaceholder": "मान कुंजी (जैसे आईडी)",
+        "valueKeyHelp": "विकल्प मानों के लिए कुंजी",
+        "labelKeyPlaceholder": "लेबल कुंजी (जैसे नाम)",
+        "labelKeyHelp": "विकल्प लेबल के लिए कुंजी",
+        "apiGuidanceTitle": "एपीआई डेटा मार्गदर्शन:",
+        "apiGuidanceIntro": "यह फ़ील्ड विकल्पों को एपीआई एंडपॉइंट से प्राप्त करेगी:",
+        "apiShouldReturn": "एपीआई को या तो वापस करना चाहिए:",
+        "apiType1Hint": "(स्ट्रिंग्स की सरणी)",
+        "apiType2Hint": "(वस्तुओं की सरणी)",
+        "apiType3Hint": "(विकल्पों के साथ वस्तु)",
+        "apiType4Hint": "(कस्टम कुंजी)",
+        "apiCustomKeysHelp": "आप अपने एपीआई डेटा को मैप करने के लिए ऊपर कस्टम कुंजी निर्दिष्ट कर सकते हैं।",
+        "apiValueLabelHelp": "प्रत्येक विकल्प में एक",
+        "apiValueLabelHelpOr": "गुण (या आपकी कस्टम कुंजी) होना चाहिए।",
+        "apiValueLabelHelpSuffix": "वैकल्पिक है।"
+      },
+      "prepopulation": {
+        "title": "प्री-पॉपुलेशन",
+        "unknownError": "अज्ञात त्रुटि",
+        "enabled": "प्री-पॉपुलेशन सक्षम करें",
+        "enabledHelp": "इस क्षेत्र को मौजूदा डेटा से स्वचालित रूप से भरें",
+        "dataSource": "डेटा स्रोत",
+        "sources": {
+          "url": "यूआरएल पैरामीटर",
+          "api": "बाहरी एपीआई",
+          "profile": "उपयोगकर्ता प्रोफ़ाइल",
+          "previous": "पिछला सबमिशन"
+        },
+        "urlParamName": "यूआरएल पैरामीटर नाम",
+        "urlParamPlaceholder": "उदा., नाम, ईमेल, फ़ोन",
+        "urlParamHelp": "यूआरएल क्वेरी स्ट्रिंग से निकालने के लिए पैरामीटर नाम",
+        "fallbackValue": "फॉलबैक मान",
+        "fallbackValuePlaceholder": "पैरामीटर गुम होने पर डिफ़ॉल्ट मान",
+        "fallbackValueHelp": "यूआरएल पैरामीटर गुम होने पर उपयोग करने के लिए डिफ़ॉल्ट मान",
+        "overwriteExisting": "मौजूदा को अधिलेखित करें",
+        "overwriteExistingHelp": "उपयोगकर्ता इनपुट को पहले से भरे हुए मान से बदलें",
+        "generatePreviewAria": "पूर्वावलोकन यूआरएल उत्पन्न करें",
+        "generatePreview": "पूर्वावलोकन यूआरएल उत्पन्न करें",
+        "previewUrlLabel": "पूर्वावलोकन यूआरएल:",
+        "previewUrlHelp": "यह यूआरएल क्षेत्र को \"सैंपल {label}\" से पहले से भर देगा",
+        "apiEndpoint": "एपीआई एंडपॉइंट",
+        "apiEndpointPlaceholder": "https://api.example.com/user-data",
+        "apiEndpointHelp": "जिससे डेटा प्राप्त किया जाना है वह एपीआई एंडपॉइंट",
+        "httpMethod": "एचटीटीपी विधि",
+        "requestHeaders": "अनुरोध हेडर (जेएसओएन)",
+        "requestHeadersHelp": "एपीआई अनुरोध के लिए एचटीटीपी हेडर युक्त जेएसओएन ऑब्जेक्ट",
+        "testApiAria": "एपीआई एंडपॉइंट का परीक्षण करें",
+        "testApi": "एपीआई एंडपॉइंट का परीक्षण करें",
+        "comingSoonLabel": "जल्द ही आ रहा है:",
+        "profileComingSoon": "भविष्य के अपडेट में उपयोगकर्ता प्रोफ़ाइल पहले से भरने की सुविधा उपलब्ध होगी।",
+        "previousComingSoon": "भविष्य के अपडेट में पिछला सबमिशन पहले से भरने की सुविधा उपलब्ध होगी।",
+        "toasts": {
+          "missingUrlParam": "कृपया पहले एक यूआरएल पैरामीटर नाम दर्ज करें",
+          "previewUrlCopied": "पूर्वावलोकन यूआरएल क्लिपबोर्ड पर कॉपी हो गया!",
+          "previewUrlCopyFailed": "पूर्वावलोकन यूआरएल की प्रतिलिपि बनाने में विफल",
+          "missingApiEndpoint": "कृपया पहले एक एपीआई एंडपॉइंट दर्ज करें",
+          "apiReachable": "एपीआई एंडपॉइंट पहुंच योग्य है!",
+          "apiTestFailedStatus": "एपीआई परीक्षण विफल: {status} {statusText}",
+          "apiTestFailedError": "एपीआई परीक्षण विफल: {error}"
+        }
+      },
+      "date": {
+        "title": "तिथि फ़ील्ड सेटिंग्स",
+        "minDate": "न्यूनतम तिथि",
+        "selectMinDate": "न्यूनतम तिथि का चयन करें",
+        "maxDate": "अधिकतम तिथि",
+        "selectMaxDate": "अधिकतम तिथि का चयन करें",
+        "defaultDate": "डिफ़ॉल्ट तिथि",
+        "selectDefaultDate": "डिफ़ॉल्ट तिथि का चयन करें"
+      },
+      "number": {
+        "title": "संख्या फ़ील्ड सेटिंग्स",
+        "minValue": "न्यूनतम मान",
+        "noMinimum": "कोई न्यूनतम नहीं",
+        "minValueHelp": "अनुमत न्यूनतम संख्यात्मक मान",
+        "maxValue": "अधिकतम मान",
+        "noMaximum": "कोई अधिकतम नहीं",
+        "maxValueHelp": "अनुमत अधिकतम संख्यात्मक मान",
+        "stepSize": "चरण आकार",
+        "stepSizeHelp": "संख्या इनपुट के लिए वृद्धि/कमी चरण आकार",
+        "defaultValue": "डिफ़ॉल्ट मान",
+        "noDefault": "कोई डिफ़ॉल्ट नहीं",
+        "defaultValueHelp": "फ़ॉर्म लोड होने पर पहले से भरा हुआ मान"
+      },
+      "radio": {
+        "title": "क्विज़ सेटिंग्स",
+        "enableQuizQuestion": "क्विज़ प्रश्न के रूप में सक्षम करें",
+        "correctAnswer": "सही उत्तर",
+        "correctAnswerPlaceholder": "सही उत्तर का चयन करें",
+        "points": "सही उत्तर के लिए अंक",
+        "showCorrectAnswer": "सबमिशन के बाद सही उत्तर दिखाएं",
+        "explanation": "व्याख्या (वैकल्पिक)",
+        "explanationPlaceholder": "व्याख्या करें कि यह सही उत्तर क्यों है..."
+      },
+      "address": {
+        "title": "पता फ़ील्ड सेटिंग्स",
+        "requiredLines": "आवश्यक पता पंक्तियाँ",
+        "requiredLinesPlaceholder": "उदा. 2 (पता पंक्ति 1 और शहर आवश्यक)",
+        "requiredLinesHelp": "पता पंक्तियों की संख्या जो भरी जानी चाहिए (1-5)",
+        "customErrorMessage": "कस्टम त्रुटि संदेश",
+        "customErrorPlaceholder": "कृपया सभी आवश्यक पता फ़ील्ड पूरे करें",
+        "customErrorHelp": "आवश्यक पता फ़ील्ड अधूरे होने पर दिखाया जाने वाला कस्टम त्रुटि संदेश"
+      },
+      "phone": {
+        "title": "फ़ोन फ़ील्ड सेटिंग्स",
+        "pattern": "कस्टम रेगेक्स पैटर्न",
+        "patternPlaceholder": "उदाहरण के लिए ^\\+?[0-9]{10,15}$",
+        "patternHelp": "फ़ोन नंबर सत्यापन के लिए नियमित अभिव्यक्ति पैटर्न",
+        "errorMessage": "कस्टम त्रुटि संदेश",
+        "errorMessagePlaceholder": "कृपया एक मान्य फ़ोन नंबर दर्ज करें @@IKI_*@@",
+        "errorMessageHelp": "फ़ोन सत्यापन विफल होने पर दिखाई देने वाला कस्टम त्रुटि संदेश"
+      },
+      "statement": {
+        "title": "विवरण क्षेत्र सेटिंग्स",
+        "heading": "शीर्षक",
+        "headingPlaceholder": "विवरण शीर्षक दर्ज करें",
+        "headingHelp": "मुख्य शीर्षक बयान के लिए",
+        "description": "विवरण",
+        "descriptionPlaceholder": "कथन विवरण दर्ज करें",
+        "descriptionHelp": "विवरण विवरण के लिए बयान",
+        "alignment": "संरेखण",
+        "alignmentPlaceholder": "संरेखण चुनें",
+        "alignLeft": "बायाँ",
+        "alignCenter": "केंद्र",
+        "alignRight": "दायाँ",
+        "alignmentHelp": "विवरण के लिए पाठ संरेखण",
+        "size": "आकार",
+        "sizePlaceholder": "आकार चुनें",
+        "sizeSmall": "छोटा",
+        "sizeMedium": "मध्यम",
+        "sizeLarge": "बड़ा",
+        "sizeHelp": "विवरण के लिए फ़ॉन्ट आकार"
+      },
+      "slider": {
+        "title": "स्लाइडर सेटिंग्स",
+        "mode": "स्लाइडर मोड",
+        "modePlaceholder": "स्लाइडर मोड चुनें",
+        "modeSingle": "एकल मान",
+        "modeRange": "सीमा (न्यूनतम + अधिकतम)",
+        "modeHelp": "एक मान चुनें या उपयोगकर्ताओं को न्यूनतम और अधिकतम का चयन करने दें",
+        "min": "न्यूनतम मान",
+        "minHelp": "स्लाइडर के लिए न्यूनतम मान",
+        "max": "अधिकतम मान",
+        "maxHelp": "स्लाइडर के लिए अधिकतम मान",
+        "step": "चरण आकार",
+        "stepHelp": "स्लाइडर के लिए वृद्धि/कमी चरण आकार",
+        "defaultMin": "डिफ़ॉल्ट न्यूनतम",
+        "defaultMinHelp": "फॉर्म लोड होने पर पूर्व-भरा गया न्यूनतम मान",
+        "defaultMax": "डिफ़ॉल्ट अधिकतम",
+        "defaultMaxHelp": "फॉर्म लोड होने पर पहले से भरा गया अधिकतम मान",
+        "defaultValue": "डिफ़ॉल्ट मान",
+        "defaultValueHelp": "फ़ॉर्म लोड होने पर पहले से भरा हुआ मान"
+      },
+      "text": {
+        "title": "पाठ फ़ील्ड सेटिंग्स",
+        "maxLength": "अधिकतम लंबाई",
+        "maxLengthPlaceholder": "कोई सीमा नहीं",
+        "maxLengthHelp": "अधिकतम अनुमत अक्षर संख्या (१-१०००)",
+        "minLength": "न्यूनतम लंबाई",
+        "minLengthPlaceholder": "कोई न्यूनतम नहीं",
+        "minLengthHelp": "न्यूनतम आवश्यक वर्णों की संख्या (0-1000)"
+      },
+      "checkbox": {
+        "title": "चेकबॉक्स विकल्प",
+        "options": "विकल्प",
+        "addOptionPlaceholder": "विकल्प जोड़ें",
+        "addOptionAria": "चेकबॉक्स विकल्प जोड़ें",
+        "optionsHelp": "चेकबॉक्स विकल्प जोड़ें जिन्हें उपयोगकर्ता चुन सकते हैं",
+        "removeOptionAria": "विकल्प {index} हटाएं",
+        "allowMultiple": "एकाधिक चयन की अनुमति दें @@IKI_SELECTION_LIMIT@@",
+        "allowMultipleHelp": "यदि सक्षम किया गया है, तो उपयोगकर्ता एक से अधिक विकल्पों का चयन कर सकते हैं। यदि अक्षम किया गया है, तो केवल एक विकल्प का चयन किया जा सकता है।"
+      },
+      "link": {
+        "title": "लिंक फील्ड सेटिंग्स",
+        "pattern": "कस्टम रेगेक्स पैटर्न",
+        "patternPlaceholder": "उदाहरण के लिए ^https?://.+$",
+        "patternHelp": "URL सत्यापन के लिए नियमित अभिव्यक्ति पैटर्न",
+        "errorMessage": "कस्टम त्रुटि संदेश",
+        "errorMessagePlaceholder": "कृपया एक मान्य URL दर्ज करें @@IKI_*@@",
+        "errorMessageHelp": "यूआरएल सत्यापन विफल होने पर दिखाई जाने वाली कस्टम त्रुटि संदेश"
+      },
+      "poll": {
+        "title": "मतदान सेटिंग्स",
+        "pollOptions": "मतदान विकल्प",
+        "addOptionPlaceholder": "विकल्प जोड़ें",
+        "addOptionAria": "मतदान विकल्प जोड़ें",
+        "optionsHelp": "मतदान विकल्प जोड़ें जिस पर उपयोगकर्ता मतदान कर सकते हैं",
+        "editOptionAria": "पोल विकल्प {index} संपादित करें",
+        "removeOptionAria": "मतदान विकल्प {index} हटाएं",
+        "orAria": "या विभाजक",
+        "or": "या",
+        "fetchFromApi": "एपीआई से विकल्प प्राप्त करें",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "पोल विकल्पों को लाने के लिए API अंतिम बिंदु @@IKI_FETCH_POLL_OPTIONS_ENDPOINT@@ से",
+        "valueKeyPlaceholder": "मान कुंजी (जैसे आईडी)",
+        "valueKeyHelp": "विकल्प मानों के लिए कुंजी",
+        "labelKeyPlaceholder": "लेबल कुंजी (जैसे नाम)",
+        "labelKeyHelp": "विकल्प लेबल के लिए कुंजी",
+        "apiGuidanceTitle": "एपीआई डेटा मार्गदर्शन:",
+        "apiGuidanceIntro": "यह फ़ील्ड विकल्पों को एपीआई एंडपॉइंट से प्राप्त करेगी:",
+        "apiShouldReturn": "एपीआई को या तो वापस करना चाहिए:",
+        "apiType1Hint": "(स्ट्रिंग्स की सरणी)",
+        "apiType2Hint": "(वस्तुओं की सरणी)",
+        "apiType3Hint": "(विकल्पों के साथ वस्तु)",
+        "apiType4Hint": "(कस्टम कुंजी)",
+        "apiCustomKeysHelp": "आप अपने एपीआई डेटा को मैप करने के लिए ऊपर कस्टम कुंजी निर्दिष्ट कर सकते हैं।",
+        "apiValueLabelHelp": "प्रत्येक विकल्प में एक",
+        "apiValueLabelHelpOr": "गुण (या आपकी कस्टम कुंजी) होना चाहिए।",
+        "apiValueLabelHelpSuffix": "वैकल्पिक है।",
+        "showResults": "वोटिंग के बाद परिणाम दिखाएं",
+        "showResultsHelp": "उपयोगकर्ताओं को मतदान करने के बाद मतदान परिणाम प्रदर्शित करें"
+      },
+      "social": {
+        "title": "सामाजिक मंच",
+        "availablePlatforms": "उपलब्ध प्लेटफ़ॉर्म",
+        "platforms": {
+          "github": "गिटहब",
+          "twitter": "ट्विटर",
+          "linkedin": "लिंक्डइन",
+          "facebook": "फेसबुक",
+          "instagram": "इंस्टाग्राम",
+          "youtube": "यूट्यूब",
+          "website": "वेबसाइट"
+        },
+        "platformsHelp": "चयन करें कि फील्ड में कौन से सोशल प्लेटफ़ॉर्म शामिल करें",
+        "customLinks": "कस्टम लिंक",
+        "labelPlaceholder": "लेबल",
+        "placeholderPlaceholder": "प्लेसहोल्डर (वैकल्पिक)",
+        "removeCustomLinkAria": "कस्टम लिंक {index} हटाएं",
+        "addCustomLinkAria": "कस्टम लिंक जोड़ें",
+        "addCustomLink": "कस्टम लिंक जोड़ें",
+        "customLinksHelp": "कस्टम लेबल और प्लेसहोल्डर के साथ कस्टम सोशल लिंक जोड़ें"
+      },
+      "emailValidation": {
+        "title": "ईमेल सत्यापन",
+        "removeBlockedDomainAria": "{domain} को ब्लॉक किए गए डोमेन से हटाएं",
+        "removeAllowedDomainAria": "{domain} को अनुमति प्राप्त डोमेन से हटाएं",
+        "autoCompleteDomain": "ऑटो-कंप्लीट डोमेन",
+        "autoCompletePlaceholder": "उदा., business.com",
+        "setAutoCompleteAria": "ऑटो-कंप्लीट डोमेन सेट करें",
+        "set": "सेट करें",
+        "removeAutoCompleteAria": "{domain} डोमेन हटाएं",
+        "autoCompleteHelp": "उपयोगकर्ता केवल अपना उपयोगकर्ता नाम दर्ज कर सकते हैं और डोमेन ऑटो-कंप्लीट होगा",
+        "allowedDomains": "अनुमति प्राप्त डोमेन",
+        "allowedPlaceholder": "उदा., company.com",
+        "addAllowedDomainAria": "अनुमति प्राप्त डोमेन जोड़ें",
+        "allowedHelp": "केवल इन डोमेन से ईमेल स्वीकार किए जाएंगे",
+        "blockedDomains": "ब्लॉक किए गए डोमेन",
+        "blockedPlaceholder": "उदा., temp-mail.org",
+        "addBlockedDomainAria": "ब्लॉक किए गए डोमेन जोड़ें",
+        "blockedHelp": "इन डोमेन से ईमेल अस्वीकार किए जाएंगे (अस्थायी ईमेल सेवाएं डिफ़ॉल्ट रूप से ब्लॉक की जाती हैं)",
+        "requireBusinessEmail": "व्यवसाय ईमेल आवश्यक",
+        "requireBusinessEmailHelp": "केवल व्यवसाय डोमेन की अनुमति दें (जीमेल, याहू, आदि को ब्लॉक करता है)",
+        "customValidationMessage": "कस्टम सत्यापन संदेश",
+        "customValidationPlaceholder": "ईमेल सत्यापन के लिए कस्टम त्रुटि संदेश",
+        "customValidationHelp": "डिफ़ॉल्ट संदेशों का उपयोग करने के लिए खाली छोड़ दें"
+      },
+      "file": {
+        "title": "फ़ाइल अपलोड सेटिंग्स",
+        "bytesUnit": "बाइट्स",
+        "maxFiles": "अधिकतम फ़ाइलें",
+        "maxFilesPlaceholder": "10",
+        "maxFilesHelp": "उपयोगकर्ता अपलोड कर सकते हैं अधिकतम फ़ाइलें (1-50)",
+        "maxFileSize": "अधिकतम फ़ाइल आकार",
+        "maxFileSizePlaceholder": "50",
+        "mbUnit": "एमबी",
+        "setMaxSizePresetAria": "{size} के लिए अधिकतम फ़ाइल आकार सेट करें",
+        "currentSize": "वर्तमान: {size}",
+        "allowedFileTypes": "अनुमति प्राप्त फ़ाइल प्रकार",
+        "quickSelect": "त्वरित चयन:",
+        "commonTypes": {
+          "images": "छवियां",
+          "documents": "दस्तावेज़",
+          "spreadsheets": "स्प्रेडशीट",
+          "videos": "वीडियो",
+          "audio": "ऑडियो",
+          "archives": "आर्काइव"
+        },
+        "toggleFileTypeAria": "{type} फ़ाइल प्रकार टॉगल करें",
+        "customExtensions": "कस्टम फ़ाइल एक्सटेंशन",
+        "customExtensionsPlaceholder": "उदा., txt, csv, json",
+        "addCustomExtensionAria": "कस्टम फ़ाइल एक्सटेंशन जोड़ें",
+        "customExtensionsHelp": "कस्टम फ़ाइल एक्सटेंशन जोड़ें (बिंदु के बिना)",
+        "selectedExtensions": "चयनित एक्सटेंशन:",
+        "removeExtensionAria": "{extension} फ़ाइल एक्सटेंशन हटाएं",
+        "htmlAccept": "एचटीएमएल स्वीकृति विशेषता (केवल पढ़ने के लिए)",
+        "htmlAcceptHelp": "यह आपके ऊपर दिए गए चयन के आधार पर स्वचालित रूप से उत्पन्न होता है",
+        "helpText": "सहायता पाठ",
+        "helpTextPlaceholder": "उपयोगकर्ताओं के लिए अतिरिक्त निर्देश...",
+        "helpTextHelp": "वैकल्पिक निर्देश जो उपयोगकर्ताओं को समझने में मदद करते हैं कि कौन सी फ़ाइलें अपलोड करनी हैं"
+      },
+      "scheduler": {
+        "title": "शेड्यूलर सेटिंग्स",
+        "provider": "शेड्यूलर प्रदाता",
+        "providerPlaceholder": "प्रदाता चुनें",
+        "providerHelp": "अपना पसंदीदा शेड्यूलिंग प्लेटफ़ॉर्म चुनें",
+        "calcomLink": "कैल.कॉम लिंक",
+        "calendlyLink": "कैलेंडली लिंक",
+        "tidycalLink": "टिडीकेल लिंक",
+        "schedulerLink": "शेड्यूलर लिंक",
+        "linkPlaceholder": "https://...",
+        "linkHelp": "अपने {provider} शेड्यूलर के लिए एम्बेड URL",
+        "buttonText": "कैलेंडर ओपनर बटन पाठ",
+        "buttonTextPlaceholder": "उदा. कॉल बुक करें",
+        "buttonTextHelp": "शेड्यूलर बटन पर प्रदर्शित पाठ",
+        "preview": "पूर्वावलोकन",
+        "openScheduler": "शेड्यूलर खोलें",
+        "previewHelp": "यह देखने के लिए क्लिक करें कि शेड्यूलर कैसे दिखाई देगा",
+        "previewModalTitle": "शेड्यूलर पूर्वावलोकन",
+        "iframeTitle": "शेड्यूलर एम्बेड",
+        "closePreviewAria": "शेड्यूलर पूर्वावलोकन बंद करें",
+        "close": "बंद करें",
+        "providerCalcom": "कैल.कॉम",
+        "providerCalendly": "कैलेंडली",
+        "providerTidycal": "टिडीकेल"
+      },
+      "banner": {
+        "title": "बैनर सेटिंग्स",
+        "alertType": "अलर्ट प्रकार",
+        "alertTypePlaceholder": "अलर्ट प्रकार चुनें",
+        "warning": "चेतावनी",
+        "error": "त्रुटि",
+        "info": "जानकारी",
+        "success": "सफलता",
+        "alertTypeHelp": "बैनर के लिए दृश्य शैली और रंग योजना चुनें",
+        "bannerTitle": "शीर्षक",
+        "bannerTitlePlaceholder": "धूम्रपान मुक्त",
+        "bannerTitleHelp": "बैनर के लिए मुख्य शीर्षक पाठ",
+        "description": "विवरण",
+        "descriptionPlaceholder": "हमारे आवास सख्ती से धूम्रपान मुक्त हैं...",
+        "descriptionHelp": "बैनर के लिए विस्तृत विवरण पाठ"
+      },
+      "fieldGroup": {
+        "layoutTitle": "लेआउट सेटिंग्स",
+        "layoutDirection": "लेआउट दिशा",
+        "layoutHorizontal": "क्षैतिज (साइड बाय साइड)",
+        "layoutVertical": "ऊर्ध्वाधर (स्टैक्ड)",
+        "layoutDirectionHelp": "समूह के भीतर फ़ील्ड कैसे व्यवस्थित किए जाते हैं",
+        "columns": "कॉलम की संख्या",
+        "columns2": "2 कॉलम",
+        "columns3": "3 कॉलम",
+        "columns4": "4 कॉलम",
+        "columnsHelp": "क्षैतिज लेआउट के लिए कॉलम की संख्या",
+        "spacing": "फ़ील्ड स्पेसिंग",
+        "spacingCompact": "कॉम्पैक्ट",
+        "spacingNormal": "सामान्य",
+        "spacingRelaxed": "आराम से",
+        "spacingHelp": "समूह में फ़ील्ड के बीच स्पेसिंग",
+        "groupFields": "समूह फ़ील्ड ({count})",
+        "addFieldAria": "समूह में फ़ील्ड जोड़ें",
+        "addField": "फ़ील्ड जोड़ें",
+        "addFieldDialogTitle": "एक फ़ील्ड जोड़ें",
+        "emptyStateTitle": "इस समूह में अभी तक कोई फ़ील्ड नहीं हैं।",
+        "emptyStateDescription": "ऊपर दिए गए ड्रॉपडाउन या त्वरित जोड़ें बटन का उपयोग करके फ़ील्ड जोड़ें।",
+        "fieldFallback": "{type} फ़ील्ड",
+        "settingsAria": "{name} फ़ील्ड के लिए सेटिंग्स",
+        "removeAria": "{name} फ़ील्ड हटाएं",
+        "fieldLabel": "फ़ील्ड लेबल",
+        "fieldLabelPlaceholder": "फ़ील्ड लेबल दर्ज करें",
+        "fieldLabelHelp": "इस फ़ील्ड के लिए लेबल",
+        "placeholder": "प्लेसहोल्डर पाठ",
+        "placeholderPlaceholder": "प्लेसहोल्डर पाठ दर्ज करें",
+        "placeholderHelp": "इस फ़ील्ड के लिए प्लेसहोल्डर पाठ",
+        "required": "आवश्यक फ़ील्ड",
+        "requiredHelp": "इस फ़ील्ड को अनिवार्य बनाएं",
+        "advancedAria": "{name} के लिए उन्नत सेटिंग्स टॉगल करें",
+        "advanced": "उन्नत सेटिंग्स"
+      },
+      "rating": {
+        "title": "रेटिंग सेटिंग्स",
+        "starCount": "सितारों की संख्या",
+        "starCountHelp": "रेटिंग सितारों की संख्या (1-10)",
+        "starSize": "सितारा आकार",
+        "starSizeHelp": "रेटिंग सितारों का आकार (16-64px)",
+        "iconType": "आइकन प्रकार",
+        "star": "सितारा",
+        "heart": "हृदय",
+        "iconTypeHelp": "रेटिंग के लिए आइकन प्रकार चुनें",
+        "iconColor": "आइकन रंग",
+        "iconColorHelp": "रेटिंग आइकन का रंग"
+      },
+      "tags": {
+        "title": "टैग सेटिंग्स",
+        "maxTags": "अधिकतम टैग",
+        "maxTagsHelp": "उपयोगकर्ता अधिकतम टैग जोड़ सकते हैं (न्यूनतम 1)",
+        "allowDuplicates": "डुप्लिकेट टैग अनुमति दें",
+        "allowDuplicatesHelp": "उपयोगकर्ताओं को एक ही टैग कई बार जोड़ने की अनुमति दें"
+      },
+      "textarea": {
+        "title": "टेक्स्टएरिया फ़ील्ड सेटिंग्स",
+        "rows": "पंक्तियों की संख्या",
+        "rowsHelp": "टेक्स्टएरिया की प्रारंभिक ऊंचाई (2-20 पंक्तियाँ)"
+      },
+      "time": {
+        "title": "समय फ़ील्ड सेटिंग्स",
+        "showCurrentTimeButton": "'वर्तमान समय सेट करें' बटन दिखाएं",
+        "showCurrentTimeButtonHelp": "वर्तमान समय को स्वचालित रूप से सेट करने के लिए एक बटन प्रदर्शित करें"
+      },
+      "email": {
+        "title": "ईमेल फ़ील्ड सेटिंग्स",
+        "allowedDomains": "अनुमत डोमेन (कॉमा-अलग)",
+        "allowedDomainsPlaceholder": "gmail.com, company.com",
+        "blockedDomains": "ब्लॉक किए गए डोमेन (कॉमा-अलग)",
+        "blockedDomainsPlaceholder": "tempmail.com, spam.com",
+        "requireBusinessEmail": "केवल व्यावसायिक ईमेल आवश्यक है",
+        "customValidationMessage": "कस्टम सत्यापन संदेश",
+        "customValidationPlaceholder": "कृपया एक वैध ईमेल पता दर्ज करें"
+      }
+    },
+    "formSettings": {
+      "title": "फॉर्म सेटिंग्स",
+      "exportSecure": "निर्यात (सुरक्षित)",
+      "preparing": "तैयार हो रहा है...",
+      "saveFormFirstAccess": "कृपया सेटिंग्स तक पहुँचने के लिए पहले फ़ॉर्म सहेजें।",
+      "saveFormFirstExport": "निर्यात को सुरक्षित रूप से करने के लिए पहले फ़ॉर्म सहेजें।",
+      "exportPrepareFailed": "सुरक्षित निर्यात तैयार करने में विफल।",
+      "settingsSectionsAria": "सेटिंग्स अनुभाग",
+      "goToSectionSettingsAria": " {section} सेटिंग्स पर जाएं",
+      "sections": {
+        "basic": "मूल जानकारी",
+        "limits": "सीमाएं",
+        "security": "सुरक्षा",
+        "quiz": "क्विज़ और स्कोरिंग",
+        "branding": "ब्रांडिंग",
+        "notifications": "सूचनाएं",
+        "api": "एपीआई एक्सेस",
+        "webhooks": "वेबहुक्स",
+        "design": "डिज़ाइन",
+        "metadata": "मेटाडेटा"
+      },
+      "search": {
+        "aria": "खोज सेटिंग्स",
+        "placeholder": "खोज सेटिंग्स…",
+        "resultsAria": "खोज परिणाम",
+        "noMatches": "कोई मेल नहीं",
+        "items": {
+          "basic-info-title": {
+            "label": "मूल जानकारी"
+          },
+          "behavior-title": {
+            "label": "फ़ॉर्म व्यवहार"
+          },
+          "rate-limit-title": {
+            "label": "दर सीमा"
+          },
+          "response-limit-title": {
+            "label": "प्रतिक्रिया सीमा"
+          },
+          "password-protection-title": {
+            "label": "पासवर्ड संरक्षण"
+          },
+          "duplicate-prevention-title": {
+            "label": "डुप्लिकेट रोकथाम"
+          },
+          "profanity-filter-title": {
+            "label": "अपमानजनक फ़िल्टर"
+          },
+          "bot-protection-title": {
+            "label": "बॉट संरक्षण"
+          },
+          "branding-title": {
+            "label": "ब्रांडिंग"
+          },
+          "social-media-links-title": {
+            "label": "सोशल मीडिया लिंक"
+          },
+          "quiz-title": {
+            "label": "क्विज़ और स्कोरिंग"
+          },
+          "notifications-title": {
+            "label": "सूचनाएं"
+          },
+          "api-access-title": {
+            "label": "एपीआई एक्सेस"
+          },
+          "webhooks-title": {
+            "label": "वेबहुक्स"
+          },
+          "design-title": {
+            "label": "डिज़ाइन"
+          },
+          "metadata-title": {
+            "label": "एसईओ"
+          },
+          "social-metadata-title": {
+            "label": "सोशल मेटाडेटा"
+          },
+          "search-engine-indexing-title": {
+            "label": "सर्च इंजन इंडेक्सिंग"
+          }
+        }
+      },
+      "defaults": {
+        "submitText": "सबमिट",
+        "notificationSubject": "नया फ़ॉर्म सबमिशन",
+        "notificationMessage": "आपको अपने फ़ॉर्म पर एक नया सबमिशन प्राप्त हुआ है।"
+      },
+      "common": {
+        "unsavedChanges": "असावधान परिवर्तन",
+        "reset": "रीसेट",
+        "save": "सहेजें",
+        "saved": "सहेजा गया",
+        "formIdRequiredToSaveSettings": "फ़ॉर्म आईडी सेटिंग्स को सहेजने के लिए आवश्यक है",
+        "validValueBetween": "कृपया {min} और {max} के बीच एक मान दर्ज करें",
+        "fillRequiredFields": "कृपया आवश्यक फ़ील्ड भरें",
+        "requiredAria": "आवश्यक",
+        "fieldRequired": "यह फ़ील्ड आवश्यक है"
+      },
+      "basicInfoSection": {
+        "ariaSettings": "मूल फ़ॉर्म सेटिंग्स",
+        "basicTitle": "मूल जानकारी",
+        "basicDescription": "अपने फॉर्म की मूल बातें कॉन्फ़िगर करें",
+        "internalTitleLabel": "आंतरिक शीर्षक",
+        "internalTitleDescription": "यह शीर्षक केवल आपके लिए डैशबोर्ड और फॉर्म बिल्डर में दिखाई देता है",
+        "internalTitlePlaceholder": "अपने संदर्भ के लिए आंतरिक शीर्षक दर्ज करें...",
+        "publicTitleLabel": "सार्वजनिक शीर्षक",
+        "publicTitleDescription": "यह शीर्षक वास्तविक फॉर्म पर उपयोगकर्ताओं को प्रदर्शित किया जाएगा। आंतरिक शीर्षक का उपयोग करने के लिए खाली छोड़ दें।",
+        "publicTitlePlaceholder": "उपयोगकर्ताओं को प्रदर्शित करने के लिए शीर्षक दर्ज करें...",
+        "formDescriptionLabel": "फ़ॉर्म विवरण",
+        "formDescriptionPlaceholder": "फॉर्म विवरण दर्ज करें",
+        "submitButtonTextLabel": "सबमिट बटन पाठ",
+        "submitButtonTextPlaceholder": "सबमिट",
+        "successMessageLabel": "सफलता संदेश",
+        "successMessagePlaceholder": "आपके सबमिशन के लिए धन्यवाद!",
+        "redirectUrlLabel": "रीडायरेक्ट URL (वैकल्पिक)",
+        "redirectUrlDescription": "सफल सबमिशन के बाद उपयोगकर्ताओं को रीडायरेक्ट करने के लिए URL",
+        "redirectUrlPlaceholder": "https://example.com/thank-you",
+        "basicActionsAria": "मूल जानकारी क्रियाएं",
+        "saveBasicAria": "मूल जानकारी सहेजें",
+        "saveBasicSuccess": "मूल जानकारी सफलतापूर्वक सहेजी गई",
+        "saveBasicFailed": "मूल जानकारी सहेजने में विफल",
+        "behaviorTitle": "फ़ॉर्म व्यवहार",
+        "behaviorDescription": "कॉन्फ़िगर करें कि आपका फॉर्म उपयोगकर्ताओं को कैसे व्यवहार करता है और दिखाई देता है",
+        "hideHeaderLabel": "हेडर छुपाएं",
+        "hideHeaderDescription": "एम्बेड्स में सार्वजनिक शीर्षक और विवरण छुपाता है",
+        "rtlLabel": "दाएं-से-बाएं मोड",
+        "rtlDescription": "फॉर्म को RTL (दाएं-से-बाएं) मोड में प्रदर्शित करें",
+        "autoFocusLabel": "पहले फ़ील्ड पर ऑटो फ़ोकस करें",
+        "autoFocusDescription": "फॉर्म लोड होने पर पहले फ़ील्ड पर स्वचालित रूप से ध्यान केंद्रित करें",
+        "behaviorActionsAria": "फॉर्म व्यवहार क्रियाएं",
+        "saveBehaviorAria": "फॉर्म व्यवहार सेटिंग्स सहेजें",
+        "saveBehaviorSuccess": "फॉर्म व्यवहार सफलतापूर्वक सहेजा गया",
+        "saveBehaviorFailed": "फॉर्म व्यवहार सहेजने में विफल"
+      },
+      "passwordProtectionSection": {
+        "ariaSettings": "पासवर्ड सुरक्षा सेटिंग्स",
+        "title": "पासवर्ड संरक्षण",
+        "description": "अपने फॉर्म तक पहुंच को पासवर्ड के साथ प्रतिबंधित करें",
+        "enableLabel": "पासवर्ड सुरक्षा सक्षम करें",
+        "enableDescription": "फॉर्म तक पहुंचने के लिए उपयोगकर्ताओं को पासवर्ड दर्ज करने की आवश्यकता है",
+        "passwordLabel": "पासवर्ड",
+        "passwordPlaceholder": "फॉर्म पासवर्ड दर्ज करें",
+        "hidePasswordAria": "पासवर्ड छुपाएं",
+        "showPasswordAria": "पासवर्ड दिखाएं",
+        "passwordDescription": "उपयोगकर्ताओं को फॉर्म तक पहुंचने के लिए इस पासवर्ड को दर्ज करना होगा",
+        "customMessageLabel": "कस्टम संदेश",
+        "customMessagePlaceholder": "पासवर्ड प्रॉम्प्ट के लिए कस्टम संदेश दर्ज करें",
+        "customMessageDescription": "संदेश उपयोगकर्ताओं को पासवर्ड दर्ज करने की आवश्यकता होने पर दिखाया जाता है",
+        "currentConfiguration": "वर्तमान कॉन्फ़िगरेशन",
+        "summaryPrefix": "पासवर्ड सुरक्षा है",
+        "enabled": "सक्षम",
+        "summarySuffix": ". उपयोगकर्ताओं को फॉर्म तक पहुंचने के लिए पासवर्ड दर्ज करना होगा।",
+        "disabledDescription": "पासवर्ड सुरक्षा आपके फॉर्म तक पहुंच को प्रतिबंधित करती है, उपयोगकर्ताओं को देखने और सबमिट करने से पहले पासवर्ड दर्ज करने की आवश्यकता होती है।",
+        "actionsAria": "पासवर्ड सुरक्षा क्रियाएं",
+        "saveAria": "पासवर्ड सुरक्षा सेटिंग्स सहेजें",
+        "saved": "पासवर्ड सुरक्षा सेटिंग्स सफलतापूर्वक सहेजी गईं",
+        "saveFailed": "पासवर्ड सुरक्षा सेटिंग्स सहेजने में विफल",
+        "defaultMessage": "यह फॉर्म पासवर्ड संरक्षित है। जारी रखने के लिए पासवर्ड दर्ज करें।"
+      },
+      "duplicatePreventionSection": {
+        "ariaSettings": "डुप्लिकेट रोकथाम सेटिंग्स",
+        "title": "डुप्लिकेट रोकथाम",
+        "description": "उपयोगकर्ताओं को एक ही फॉर्म कई बार सबमिट करने से रोकें",
+        "enableLabel": "डुप्लिकेट रोकथाम सक्षम करें",
+        "enableDescription": "उपयोगकर्ताओं को एक ही फॉर्म कई बार सबमिट करने से रोकें",
+        "preventionModeLabel": "रोकथाम मोड",
+        "oneTimeLabel": "एक बार सबमिशन",
+        "oneTimeDescription": "प्रति उपयोगकर्ता केवल एक सबमिशन की अनुमति दें, कभी भी",
+        "timeBasedLabel": "समय-आधारित रोकथाम",
+        "timeBasedDescription": "निर्दिष्ट समय विंडो के भीतर डुप्लिकेट सबमिशन को रोकें",
+        "preventionStrategyLabel": "रोकथाम रणनीति",
+        "selectStrategyPlaceholder": "रणनीति चुनें",
+        "strategyCombinedLabel": "संयुक्त (आईपी + ईमेल + सत्र) - सबसे सुरक्षित",
+        "strategyEmailLabel": "ईमेल पता - पंजीकरण के लिए सर्वश्रेष्ठ",
+        "strategyIpLabel": "आईपी पता - सरल और विश्वसनीय",
+        "strategySessionLabel": "सत्र आईडी - ब्राउज़र-आधारित",
+        "strategyCombinedDescription": "आईपी, ईमेल और सत्र के संयोजन द्वारा ट्रैक करें अधिकतम सटीकता के लिए",
+        "strategyEmailDescription": "ईमेल पते द्वारा ट्रैक करें (फॉर्म में ईमेल फ़ील्ड की आवश्यकता होती है)",
+        "strategyIpDescription": "केवल आईपी पते द्वारा ट्रैक करें",
+        "strategySessionDescription": "ब्राउज़र सत्र द्वारा ट्रैक करें",
+        "timeWindowLabel": "समय विंडो (मिनट)",
+        "timeWindowDescription": "डुप्लिकेट सबमिशन को रोकने के लिए कितना समय",
+        "timeWindowPlaceholder": "1440",
+        "maxAttemptsLabel": "अधिकतम प्रयास",
+        "maxAttemptsDescription": "समय विंडो के भीतर अधिकतम प्रयासों की अनुमति दी गई",
+        "maxAttemptsPlaceholder": "1",
+        "errorMessageLabel": "त्रुटि संदेश",
+        "errorMessageDescription": "उपयोगकर्ताओं को डुप्लिकेट जमा करने का प्रयास करते समय दिखाया गया संदेश",
+        "allowOverrideLabel": "ओवरराइड की अनुमति दें",
+        "allowOverrideDescription": "उपयोगकर्ताओं को रोकथाम को दरकिनार करने की अनुमति दें (अनुशंसित नहीं)",
+        "currentConfiguration": "वर्तमान कॉन्फ़िगरेशन",
+        "currentSettings": "वर्तमान सेटिंग्स",
+        "summaryModeOneTime": "एक बार प्रस्तुत करना",
+        "summaryModeTimeBased": "{maxAttempts} प्रस्तुतियाँ हर {timeWindow} मिनट",
+        "summaryStrategyCombined": "आईपी + ईमेल + सत्र",
+        "summaryStrategyEmail": "ईमेल पता",
+        "summaryStrategyIp": "आईपी पता",
+        "summaryStrategySession": "सत्र आईडी",
+        "summarySentence": "{mode} {strategy} ट्रैकिंग का उपयोग कर",
+        "summaryOverrideEnabled": "ओवरराइड सक्षम है।",
+        "disabledDescription": "डुप्लिकेट रोकथाम डेटा गुणवत्ता को बनाए रखने में मदद करती है जिससे उपयोगकर्ता एक ही फॉर्म को कई बार जमा नहीं कर सकते। समय-आधारित रोकथाम या एक बार प्रस्तुत करने के मोड के बीच चयन करें।",
+        "actionsAria": "डुप्लिकेट रोकथाम कार्रवाइयाँ",
+        "saveAria": "डुप्लिकेट रोकथाम सेटिंग्स सहेजें",
+        "saved": "डुप्लिकेट रोकथाम सेटिंग्स सफलतापूर्वक सहेजी गईं",
+        "saveFailed": "डुप्लिकेट रोकथाम सेटिंग्स सहेजने में विफल",
+        "defaultMessageOneTime": "आप पहले ही यह फॉर्म जमा कर चुके हैं। प्रत्येक उपयोगकर्ता केवल एक बार जमा कर सकता है।",
+        "defaultMessageTimeBased": "आप पहले ही यह फॉर्म जमा कर चुके हैं। कृपया पुनः जमा करने से पहले प्रतीक्षा करें।"
+      },
+      "profanityFilterSection": {
+        "ariaSettings": "अपमानजनक शब्दों की फ़िल्टर सेटिंग्स",
+        "title": "अपमानजनक फ़िल्टर",
+        "description": "स्वचालित रूप से अश्लील सामग्री का पता लगाएं और फ़िल्टर करें",
+        "enableLabel": "अपमानजनक शब्दों की फ़िल्टर सक्षम करें",
+        "enableDescription": "स्वचालित रूप से अश्लील सामग्री का पता लगाएं और फ़िल्टर करें",
+        "filterModeLabel": "फ़िल्टर मोड",
+        "strictModeOption": "कठोर मोड - अपमानजनक शब्दों के साथ प्रस्तुतियों को अस्वीकार करें",
+        "replaceModeOption": "प्रतिस्थापन मोड - अपमानजनक शब्दों को तारों से बदलें",
+        "customMessageLabel": "कस्टम संदेश",
+        "customMessagePlaceholder": "अपमानजनक शब्दों का पता चलने पर दिखाने के लिए एक कस्टम संदेश दर्ज करें",
+        "customWordsTitle": "फ़िल्टर करने के लिए कस्टम शब्द",
+        "whitelistedWordsTitle": "श्वेतसूचीबद्ध शब्द",
+        "customWordsPlaceholder": "फ़िल्टर करने के लिए शब्द (ऐसे) दर्ज करें (एकाधिक के लिए अल्पविराम से अलग)",
+        "whitelistPlaceholder": "श्वेतसूचीबद्ध शब्द (ऐसे) दर्ज करें (एकाधिक के लिए अल्पविराम से अलग)",
+        "addWord": "जोड़ें",
+        "addFilteredWordAria": "फ़िल्टर किया गया शब्द जोड़ें",
+        "addWhitelistedWordAria": "श्वेतसूचीबद्ध शब्द जोड़ें",
+        "removeWordAria": "{word} हटाएं",
+        "currentConfiguration": "वर्तमान कॉन्फ़िगरेशन",
+        "summaryPrefix": "अपमानजनक शब्दों की फ़िल्टर है",
+        "enabled": "सक्षम",
+        "summaryIn": "में",
+        "strictMode": "कठोर मोड",
+        "replaceMode": "प्रतिस्थापन मोड",
+        "summaryPeriod": ".",
+        "customWordsConfigured": "{count} कस्टम शब्द कॉन्फ़िगर किए गए।",
+        "whitelistedWordsConfigured": "{count} श्वेतसूचीबद्ध शब्द।",
+        "disabledDescription": "अपमानजनक शब्दों की फ़िल्टर फॉर्म प्रस्तुतियों में अश्लील सामग्री का स्वचालित रूप से पता लगाकर और फ़िल्टर करके एक स्वच्छ और पेशेवर वातावरण बनाए रखने में मदद करती है।",
+        "actionsAria": "अपमानजनक शब्दों की फ़िल्टर कार्रवाइयाँ",
+        "saveAria": "अपमानजनक शब्दों की फ़िल्टर सेटिंग्स सहेजें",
+        "saved": "अपमानजनक शब्दों की फ़िल्टर सेटिंग्स सफलतापूर्वक सहेजी गईं",
+        "saveFailed": "अपमानजनक शब्दों की फ़िल्टर सेटिंग्स सहेजने में विफल"
+      },
+      "notificationsSection": {
+        "title": "सूचनाएं",
+        "description": "नए फॉर्म प्रस्तुतियों के लिए ईमेल अलर्ट कॉन्फ़िगर करें",
+        "enableLabel": "ईमेल सूचनाएं",
+        "enableDescription": "नई प्रस्तुतियों के लिए ईमेल सूचनाएं सक्षम करें",
+        "emailLabel": "सूचना ईमेल",
+        "emailPlaceholder": "owner@email.com",
+        "subjectLabel": "ईमेल विषय",
+        "messageLabel": "ईमेल संदेश",
+        "customLinksLabel": "कस्टम लिंक",
+        "linkLabelPlaceholder": "लेबल",
+        "linkUrlPlaceholder": "https://example.com",
+        "removeLink": "हटाएं",
+        "addLink": "जोड़ें",
+        "actionsAria": "सूचना सेटिंग्स कार्रवाइयाँ",
+        "saveAria": "सूचना सेटिंग्स सहेजें",
+        "saved": "सूचना सेटिंग्स सफलतापूर्वक सहेजी गईं",
+        "saveFailed": "सूचना सेटिंग्स सहेजने में विफल"
+      },
+      "brandingSection": {
+        "title": "ब्रांडिंग",
+        "description": "Ikiform ब्रांडिंग और सोशल मीडिया लिंक्स प्रबंधित करें",
+        "showPoweredByLabel": "\"पावर्ड बाय Ikiform\" दिखाएं",
+        "showPoweredByDescription": "फ़ूटर में एक छोटा श्रेय दिखाएं",
+        "socialMediaLabel": "सोशल मीडिया लिंक",
+        "socialMediaDescription": "फॉर्म पर अपने सामाजिक प्रोफाइलों के लिंक सक्षम करें",
+        "platforms": {
+          "linkedin": {
+            "label": "लिंक्डइन",
+            "placeholder": "https://linkedin.com/in/username"
+          },
+          "twitter": {
+            "label": "एक्स (ट्विटर)",
+            "placeholder": "https://x.com/username"
+          },
+          "youtube": {
+            "label": "यूट्यूब",
+            "placeholder": "https://youtube.com/@channel"
+          },
+          "instagram": {
+            "label": "इंस्टाग्राम",
+            "placeholder": "https://instagram.com/username"
+          },
+          "facebook": {
+            "label": "फेसबुक",
+            "placeholder": "https://facebook.com/username"
+          },
+          "github": {
+            "label": "गिटहब",
+            "placeholder": "https://github.com/username"
+          },
+          "website": {
+            "label": "वेबसाइट",
+            "placeholder": "https://example.com"
+          }
+        },
+        "iconSizeLabel": "आइकन आकार",
+        "iconSizes": {
+          "small": "छोटा",
+          "medium": "मध्यम",
+          "large": "बड़ा"
+        },
+        "positionLabel": "स्थिति",
+        "positions": {
+          "footer": "फ़ूटर",
+          "header": "हेडर",
+          "both": "दोनों"
+        },
+        "previewLabel": "पूर्वावलोकन",
+        "disabledDescription": "फ़ॉर्म पर आपके सामाजिक प्रोफाइल प्रदर्शित करने के लिए सामाजिक मीडिया लिंक सक्षम करें।",
+        "actionsAria": "ब्रांडिंग सेटिंग्स क्रियाएं",
+        "saveAria": "ब्रांडिंग सेटिंग्स सहेजें",
+        "saved": "ब्रांडिंग सेटिंग्स सफलतापूर्वक सहेजी गईं",
+        "saveFailed": "ब्रांडिंग सेटिंग्स सहेजने में विफल",
+        "authRequired": "उपयोगकर्ता प्रमाणीकरण आवश्यक है"
+      },
+      "metadataSection": {
+        "basicTitle": "बुनियादी एसईओ",
+        "basicDescription": "शीर्षक, विवरण और कैनोनिकल यूआरएल",
+        "pageTitleLabel": "पृष्ठ शीर्षक",
+        "pageTitlePlaceholder": "पृष्ठ शीर्षक दर्ज करें (अधिकतम 60 अक्षर)",
+        "metaDescriptionLabel": "मेटा विवरण",
+        "metaDescriptionPlaceholder": "मेटा विवरण दर्ज करें (अधिकतम 160 अक्षर)",
+        "characterCount": "{count}/{max} अक्षर",
+        "keywordsLabel": "कीवर्ड",
+        "keywordsPlaceholder": "कॉमा द्वारा अलग किए गए कीवर्ड दर्ज करें",
+        "authorLabel": "लेखक",
+        "authorPlaceholder": "लेखक नाम दर्ज करें",
+        "canonicalUrlLabel": "कैनोनिकल यूआरएल",
+        "canonicalUrlPlaceholder": "https://example.com/form",
+        "canonicalUrlDescription": "इस फ़ॉर्म पृष्ठ के लिए पसंदीदा यूआरएल",
+        "basicActionsAria": "बुनियादी एसईओ क्रियाएं",
+        "saveBasicAria": "बुनियादी एसईओ सेटिंग्स सहेजें",
+        "basicSaved": "बुनियादी एसईओ सहेजा गया",
+        "basicSaveFailed": "बुनियादी एसईओ सहेजने में विफल",
+        "socialTitle": "सोशल मेटाडेटा",
+        "socialDescription": "ओपन ग्राफ और ट्विटर सेटिंग्स",
+        "ogTitleLabel": "ओपन ग्राफ शीर्षक",
+        "ogTitlePlaceholder": "ओपन ग्राफ शीर्षक दर्ज करें",
+        "ogTitleDescription": "फेसबुक, लिंक्डइन आदि पर साझा किए जाने पर दिखाया जाने वाला शीर्षक",
+        "ogDescriptionLabel": "ओपन ग्राफ विवरण",
+        "ogDescriptionPlaceholder": "ओपन ग्राफ विवरण दर्ज करें",
+        "ogDescriptionDescription": "सामाजिक मीडिया पर साझा किए जाने पर दिखाया जाने वाला विवरण",
+        "ogImageLabel": "ओपन ग्राफ छवि यूआरएल",
+        "ogImagePlaceholder": "https://example.com/image.jpg",
+        "ogTypeLabel": "ओपन ग्राफ प्रकार",
+        "ogTypePlaceholder": "ओपन ग्राफ प्रकार चुनें",
+        "ogTypes": {
+          "website": "वेबसाइट",
+          "article": "लेख",
+          "profile": "प्रोफ़ाइल",
+          "video": "वीडियो"
+        },
+        "twitterCardLabel": "ट्विटर कार्ड प्रकार",
+        "twitterCardPlaceholder": "ट्विटर कार्ड प्रकार चुनें",
+        "twitterCards": {
+          "summary": "सारांश",
+          "summaryLargeImage": "सारांश बड़ी छवि",
+          "app": "ऐप",
+          "player": "प्लेयर"
+        },
+        "twitterTitleLabel": "ट्विटर शीर्षक",
+        "twitterTitlePlaceholder": "ट्विटर शीर्षक दर्ज करें",
+        "twitterImageLabel": "ट्विटर छवि यूआरएल",
+        "twitterImagePlaceholder": "https://example.com/twitter-image.jpg",
+        "twitterDescriptionLabel": "ट्विटर विवरण",
+        "twitterDescriptionPlaceholder": "ट्विटर विवरण दर्ज करें",
+        "twitterSiteLabel": "ट्विटर साइट",
+        "twitterSitePlaceholder": "@yourhandle",
+        "twitterCreatorLabel": "ट्विटर निर्माता",
+        "twitterCreatorPlaceholder": "@creatorhandle",
+        "socialActionsAria": "सामाजिक मेटाडेटा क्रियाएं",
+        "saveSocialAria": "सामाजिक मेटाडेटा सेटिंग्स सहेजें",
+        "socialSaved": "सामाजिक मेटाडेटा सहेजा गया",
+        "socialSaveFailed": "सामाजिक मेटाडेटा सहेजने में विफल",
+        "indexingTitle": "सर्च इंजन इंडेक्सिंग",
+        "indexingDescription": "नियंत्रित करें कि खोज इंजन इस फ़ॉर्म को कैसे क्रॉल करें",
+        "indexingBehaviorLabel": "सर्च इंजन इंडेक्सिंग",
+        "indexingBehaviorPlaceholder": "इंडेक्सिंग व्यवहार चुनें",
+        "indexingOptions": {
+          "index": "इंडेक्स और फ़ॉलो (डिफ़ॉल्ट)",
+          "noindex": "कोई इंडेक्स नहीं",
+          "nofollow": "कोई फ़ॉलो नहीं",
+          "noindexNofollow": "कोई इंडेक्स नहीं, कोई फ़ॉलो नहीं"
+        },
+        "indexingBehaviorDescription": "नियंत्रित करता है कि खोज इंजन इस पृष्ठ पर इंडेक्स और फ़ॉलो लिंक कर सकते हैं या नहीं",
+        "switches": {
+          "noArchive": "कोई संग्रह नहीं",
+          "noSnippet": "कोई स्निपेट नहीं",
+          "noImageIndex": "कोई छवि अनुक्रमणिका नहीं",
+          "noTranslate": "कोई अनुवाद नहीं"
+        },
+        "indexingActionsAria": "अनुक्रमणिका क्रियाएं",
+        "saveIndexingAria": "अनुक्रमणिका सेटिंग्स सहेजें",
+        "indexingSaved": "अनुक्रमणिका सेटिंग्स सहेजी गईं",
+        "indexingSaveFailed": "अनुक्रमणिका सेटिंग्स सहेजने में विफल",
+        "updatedAnnouncement": "मेटाडेटा अद्यतन",
+        "authRequired": "उपयोगकर्ता प्रमाणीकरण आवश्यक है"
+      },
+      "rateLimitSection": {
+        "title": "दर सीमा",
+        "description": "स्पैम और दुरुपयोग को रोकने के लिए सबमिशन आवृत्ति को नियंत्रित करें",
+        "ariaSettings": "दर सीमित करने की सेटिंग्स",
+        "enableLabel": "दर सीमित करना सक्षम करें",
+        "enableDescription": "एक ही आईपी पते से सबमिशन सीमित करें",
+        "maxSubmissionsLabel": "अधिकतम सबमिशन",
+        "maxSubmissionsDescription": "अनुमत अधिकतम सबमिशन",
+        "timeWindowLabel": "समय विंडो (मिनट)",
+        "timeWindowDescription": "सबमिशन की गणना के लिए समय अवधि",
+        "blockDurationLabel": "ब्लॉक अवधि (मिनट)",
+        "blockDurationDescription": "सीमा पहुंचने के बाद ब्लॉक करने की अवधि",
+        "messageLabel": "दर सीमा पार होने पर दिखाया जाने वाला संदेश",
+        "messagePlaceholder": "बहुत सारे सबमिशन। कृपया बाद में पुनः प्रयास करें।",
+        "messageDescription": "दर सीमा पार होने पर दिखाया जाने वाला कस्टम संदेश",
+        "currentConfiguration": "वर्तमान कॉन्फ़िगरेशन",
+        "summarySentence": " {maxSubmissions} सबमिशन हर {timeWindow} मिनटों में अनुमति दें। जब पार हो जाए तो {blockDuration} मिनटों के लिए ब्लॉक करें।",
+        "summaryExample": "उदाहरण: यदि कोई उपयोगकर्ता {timeWindow} मिनटों में {maxSubmissions} बार सबमिट करता है, तो उसे {blockDuration} मिनटों के लिए ब्लॉक कर दिया जाएगा।",
+        "disabledDescription": "दर सीमित करने से स्पैम और दुरुपयोग से बचाने में मदद मिलती है फॉर्म द्वारा सबमिशन आवृत्ति को नियंत्रित करके।",
+        "actionsAria": "दर सीमित करने की क्रियाएं",
+        "saveAria": "दर सीमित करने की सेटिंग्स सहेजें",
+        "saved": "दर सीमित करने की सेटिंग्स सफलतापूर्वक सहेजी गईं",
+        "saveFailed": "दर सीमित करने की सेटिंग्स सहेजने में विफल",
+        "defaultMessage": "बहुत सारे सबमिशन। कृपया बाद में पुनः प्रयास करें।"
+      },
+      "responseLimitSection": {
+        "title": "प्रतिक्रिया सीमा",
+        "description": "एक सेट कुल गणना के बाद सबमिशन स्वीकार करना बंद करें",
+        "enableLabel": "प्रतिक्रिया सीमा सक्षम करें",
+        "enableDescription": "इस फॉर्म द्वारा स्वीकृत कुल सबमिशन की सीमा निर्धारित करें",
+        "maxResponsesLabel": "अधिकतम प्रतिक्रियाएं",
+        "maxResponsesDescription": "इस फॉर्म द्वारा स्वीकृत कुल प्रतिक्रियाओं की सीमा निर्धारित करें। एक बार सीमा पहुंच जाने पर, नए सबमिशन ब्लॉक कर दिए जाएंगे।",
+        "limitReachedLabel": "सीमा पहुंचने पर संदेश",
+        "limitReachedDescription": "कुल प्रतिक्रिया सीमा पहुंच जाने के बाद दिखाया जाने वाला संदेश",
+        "limitReachedPlaceholder": "यह फॉर्म अब और प्रतिक्रियाएं स्वीकार नहीं कर रहा है।",
+        "disabledDescription": "यदि आपका फॉर्म बिना कैप के सबमिशन स्वीकार करना जारी रखना चाहिए तो इसे अक्षम रखें।",
+        "actionsAria": "प्रतिक्रिया सीमा क्रियाएं",
+        "saveAria": "प्रतिक्रिया सीमा सेटिंग्स सहेजें",
+        "saved": "प्रतिक्रिया सीमा सफलतापूर्वक सहेजी गई",
+        "saveFailed": "प्रतिक्रिया सीमा सहेजने में विफल",
+        "defaultMessage": "यह फॉर्म अब और प्रतिक्रियाएं स्वीकार नहीं कर रहा है।"
+      },
+      "botProtectionSection": {
+        "title": "बॉट संरक्षण",
+        "description": "स्वचालित रूप से पता लगाएं और स्वचालित सबमिशन को ब्लॉक करें",
+        "ariaSettings": "बॉट सुरक्षा सेटिंग्स",
+        "enableLabel": "बॉट सुरक्षा सक्षम करें",
+        "enableDescription": "फॉर्म सबमिशन के लिए एंटी-बॉट जांच जोड़ें",
+        "detectionMessageLabel": "पहचान संदेश",
+        "detectionMessagePlaceholder": "संदिग्ध बॉट गतिविधि के कारण सबमिशन ब्लॉक कर दिया गया।",
+        "detectionMessageDescription": "स्वचालित सबमिशन ब्लॉक होने पर दिखाया जाने वाला संदेश",
+        "currentConfiguration": "वर्तमान कॉन्फ़िगरेशन",
+        "statusEnabledPrefix": "बॉट सुरक्षा वर्तमान में",
+        "enabled": "सक्षम",
+        "statusEnabledSuffix": "इस फॉर्म के लिए",
+        "vercelTitle": "वेरसेल सुरक्षा",
+        "vercelDescription": "यदि वेरसेल पर तैनात किया जाता है, तो अतिरिक्त एंटी-अब्यूज़ जांच लागू हो सकती हैं।",
+        "disabledDescription": "बॉट सुरक्षा सक्षम करें ताकि स्वचालित टूल और स्क्रिप्टेड ट्रैफिक से स्पैम कम हो सके।",
+        "actionsAria": "बॉट सुरक्षा क्रियाएं",
+        "saveAria": "बॉट सुरक्षा सेटिंग्स सहेजें",
+        "saved": "बॉट सुरक्षा सेटिंग्स सफलतापूर्वक सहेजी गईं",
+        "saveFailed": "बॉट सुरक्षा सेटिंग्स सहेजने में विफल"
+      },
+      "quizSection": {
+        "title": "क्विज़ और स्कोरिंग",
+        "description": "क्विज़ व्यवहार और स्कोरिंग नियमों को कॉन्फ़िगर करें",
+        "ariaSettings": "क्विज़ सेटिंग्स",
+        "enableLabel": "क्विज़ मोड सक्षम करें",
+        "enableDescription": "स्कोरिंग और परिणाम संदेशों जैसी क्विज़ सुविधाओं को चालू करें",
+        "passingScoreLabel": "पासिंग स्कोर (%)",
+        "passingScoreDescription": "पास होने के लिए आवश्यक न्यूनतम प्रतिशत निर्धारित करें",
+        "timeLimitLabel": "समय सीमा (मिनट)",
+        "timeLimitDescription": "क्विज़ पूरा करने के लिए वैकल्पिक समय सीमा",
+        "timeLimitPlaceholder": "सीमा के लिए खाली छोड़ दें",
+        "showScoreLabel": "उपयोगकर्ता को स्कोर दिखाएं",
+        "showScoreDescription": "फ़ॉर्म सबमिशन के बाद उपयोगकर्ता का स्कोर प्रदर्शित करें",
+        "showCorrectAnswersLabel": "सही उत्तर दिखाएं",
+        "showCorrectAnswersDescription": "सबमिशन के बाद सही उत्तर और स्पष्टीकरण दिखाएं",
+        "allowRetakeLabel": "पुनः प्रयास करने की अनुमति दें",
+        "allowRetakeDescription": "उपयोगकर्ताओं को अपना स्कोर सुधारने के लिए क्विज़ पुनः प्रयास करने दें",
+        "customMessagesLabel": "कस्टम परिणाम संदेश",
+        "successMessageLabel": "सफलता संदेश",
+        "successMessagePlaceholder": "बहुत अच्छा! आप क्विज़ पास कर चुके हैं।",
+        "improvementMessageLabel": "सुधार संदेश",
+        "improvementMessagePlaceholder": "कृपया समीक्षा करें और पुनः प्रयास करें।",
+        "messagePlaceholderHelp": " {score}, {percentage}, {total} जैसे प्लेसहोल्डर का उपयोग करें",
+        "actionsAria": "क्विज़ क्रियाएं",
+        "saveAria": "क्विज़ सेटिंग्स सहेजें",
+        "saved": "क्विज़ सेटिंग्स सफलतापूर्वक सहेजी गईं",
+        "savedToast": "क्विज़ सेटिंग्स सहेजी गईं",
+        "saveFailed": "क्विज़ सेटिंग्स सहेजने में विफल"
+      },
+      "apiSection": {
+        "title": "एपीआई एक्सेस",
+        "description": "API एंडपॉइंट के माध्यम से सबमिशन की अनुमति देने के लिए टॉगल करें",
+        "authRequired": "उपयोगकर्ता प्रमाणीकरण आवश्यक है",
+        "enableSupportLabel": "API समर्थन सक्षम करें",
+        "enableSupportDescription": "एक सुरक्षित API कुंजी के माध्यम से बाहरी सबमिशन सक्षम करें।",
+        "apiEndpointLabel": "एपीआई एंडपॉइंट",
+        "copyEndpointAria": "API एंडपॉइंट कॉपी करें",
+        "endpointCopied": "API एंडपॉइंट कॉपी किया गया",
+        "apiKeyLabel": "API कुंजी",
+        "apiKeySecretHint": "इस कुंजी को गुप्त रखें। इसके साथ कोई भी इस फ़ॉर्म में सबमिट कर सकता है।",
+        "generateApiKey": "API कुंजी उत्पन्न करें",
+        "regenerateKey": "कुंजी पुनः उत्पन्न करें",
+        "revokeKey": "कुंजी रद्द करें",
+        "generating": "उत्पन्न हो रहा है...",
+        "revoking": "रद्द हो रहा है...",
+        "copyApiKeyAria": "API कुंजी कॉपी करें",
+        "showApiKeyAria": "API कुंजी दिखाएं",
+        "hideApiKeyAria": "API कुंजी छुपाएं",
+        "keyCopied": "API कुंजी कॉपी की गई",
+        "keyGenerated": "API कुंजी उत्पन्न की गई",
+        "keyGenerateFailed": "API कुंजी उत्पन्न करने में विफल",
+        "keyRevoked": "API कुंजी रद्द की गई",
+        "keyRevokeFailed": "API कुंजी रद्द करने में विफल",
+        "showCodeExamples": "कोड उदाहरण दिखाएं",
+        "hideCodeExamples": "कोड उदाहरण छुपाएं",
+        "javascriptNodeLabel": "जावास्क्रिप्ट / नोड.जेएस",
+        "sampleName": "जेन डो",
+        "sampleEmail": "jane@example.com",
+        "sampleMessage": "एपीआई से नमस्ते",
+        "sampleValue": "नमूना मूल्य",
+        "copyCodeAria": "उदाहरण कोड कॉपी करें",
+        "downloadCodeAria": "उदाहरण कोड डाउनलोड करें",
+        "codeCopied": "उदाहरण कोड कॉपी किया गया",
+        "codeDownloaded": "उदाहरण कोड डाउनलोड किया गया",
+        "betaBadge": "बीटा",
+        "integrationRateLimiting": "दर सीमित करना",
+        "integrationRateLimitingDescription": "स्पैम विस्फोट से अपने एंडपॉइंट की रक्षा करें।",
+        "integrationResponseLimits": "प्रतिक्रिया सीमाएं",
+        "integrationResponseLimitsDescription": "कुल स्वीकृत सबमिशन को सीमित करें।",
+        "integrationDuplicatePrevention": "डुप्लिकेट रोकथाम",
+        "integrationDuplicatePreventionDescription": "एक ही उपयोगकर्ता से दोहराए जाने वाले सबमिशन को कम करें।",
+        "integrationProfanityFilter": "अपमानजनक सामग्री फ़िल्टर",
+        "integrationProfanityFilterDescription": "अनुचित सामग्री को ब्लॉक या सैनिटाइज़ करें।",
+        "emptyStateDescription": "एपीआई समर्थन सक्षम करें एक सुरक्षित एपीआई कुंजी उत्पन्न करने के लिए।",
+        "actionsAria": "एपीआई अभिगम क्रियाएं",
+        "saveAria": "एपीआई सेटिंग्स सहेजें",
+        "resetAria": "एपीआई सेटिंग्स रीसेट करें",
+        "settingsSaved": "एपीआई सेटिंग्स सफलतापूर्वक सहेजी गईं",
+        "settingsSaveFailed": "एपीआई सेटिंग्स सहेजने में विफल"
+      },
+      "webhooks": {
+        "panel": {
+          "endpointsTitle": "वेबहुक एंडपॉइंट्स",
+          "endpointsDescription": "बाहरी सेवाओं को सबमिशन भेजें।",
+          "addWebhook": "वेबहुक जोड़ें"
+        },
+        "list": {
+          "emptyState": "अभी तक कोई वेबहुक कॉन्फ़िगर नहीं किए गए हैं। अपने पहले वेबहुक को जोड़ें ताकि फॉर्म सबमिशन प्राप्त हो सकें।",
+          "active": "सक्रिय",
+          "inactive": "निष्क्रिय",
+          "edit": "संपादित करें",
+          "delete": "हटाएं",
+          "test": "परीक्षण करें",
+          "viewLogs": "लॉग देखें",
+          "events": {
+            "formSubmitted": "फॉर्म सबमिट किया गया",
+            "formViewed": "फॉर्म देखा गया",
+            "formStarted": "फॉर्म शुरू किया गया"
+          }
+        },
+        "hook": {
+          "fetchFailed": "वेबहुक प्राप्त करने में विफल",
+          "created": "वेबहुक सफलतापूर्वक बनाया गया",
+          "createFailed": "वेबहुक बनाने में विफल",
+          "updated": "वेबहुक सफलतापूर्वक अद्यतन किया गया",
+          "updateFailed": "वेबहुक अद्यतन करने में विफल",
+          "deleted": "वेबहुक सफलतापूर्वक हटाया गया",
+          "deleteFailed": "वेबहुक हटाने में विफल"
+        },
+        "formModal": {
+          "addTitle": "वेबहुक जोड़ें",
+          "editTitle": "वेबहुक संपादित करें",
+          "stepsAria": "वेबहुक सेटअप चरण",
+          "steps": {
+            "basics": "मूल बातें",
+            "events": "घटनाएं",
+            "headers": "हेडर",
+            "payload": "पेलोड",
+            "notifications": "सूचनाएं",
+            "details": "समीक्षा करें"
+          },
+          "errors": {
+            "missingBasics": "वेबहुक यूआरएल आवश्यक है।",
+            "missingEvent": "कम से कम एक घटना का चयन करें।",
+            "missingBasicsAndEvent": "वेबहुक यूआरएल और कम से कम एक घटना आवश्यक हैं।"
+          },
+          "webhookUrl": "वेबहुक यूआरएल",
+          "webhookUrlPlaceholder": "https://example.com/webhook",
+          "nameOptional": "नाम (वैकल्पिक)",
+          "namePlaceholder": "स्लैक नोटिफिकेशन",
+          "descriptionOptional": "विवरण (वैकल्पिक)",
+          "descriptionPlaceholder": "जहां इस वेबहुक को फॉर्म डेटा भेजना चाहिए",
+          "eventsHelp": "चुनें कि कौन सी घटनाएं इस वेबहुक को ट्रिगर करनी चाहिए।",
+          "events": {
+            "formSubmitted": "फॉर्म सबमिट किया गया",
+            "formViewed": "फॉर्म देखा गया",
+            "formStarted": "फॉर्म शुरू किया गया"
+          },
+          "httpMethod": "एचटीटीपी विधि",
+          "selectHttpMethodAria": "एचटीटीपी विधि का चयन करें",
+          "selectMethodPlaceholder": "विधि का चयन करें",
+          "httpMethodDescriptions": {
+            "post": "नए संसाधन बनाएं या पेलोड डेटा भेजें।",
+            "put": "एक मौजूदा संसाधन को बदलें।",
+            "patch": "एक मौजूदा संसाधन को आंशिक रूप से अद्यतन करें।",
+            "delete": "एक संसाधन को हटाएं।",
+            "get": "डेटा को बदलने के बिना जानकारी प्राप्त करें।",
+            "head": "केवल हेडर प्राप्त करें।"
+          },
+          "addHeader": "हेडर जोड़ें",
+          "headerName": "हेडर नाम",
+          "headerNamePlaceholder": "अनुमোदान",
+          "headerNameAria": "वेबहुक हेडर नाम",
+          "headerValue": "हेडर मान",
+          "headerValuePlaceholder": "बियरर टोकन",
+          "headerValueAria": "वेबहुक हेडर मान",
+          "removeHeaderAria": "हेडर हटाएं",
+          "headersHelp": "कस्टम हेडर वैकल्पिक हैं और प्रत्येक वेबहुक अनुरोध के साथ भेजे जाते हैं।",
+          "payloadTemplateOptional": "पेलोड टेम्पलेट (वैकल्पिक)",
+          "availableVariables": "उपलब्ध चर",
+          "variables": {
+            "formData": "सबमिट किए गए फॉर्म डेटा ऑब्जेक्ट",
+            "formId": "फॉर्म पहचानकर्ता",
+            "submissionId": "सबमिशन पहचानकर्ता",
+            "event": "ट्रिगर घटना",
+            "timestamp": "घटना टाइमस्टैम्प",
+            "formatted": "मानव-पठनीय सारांश"
+          },
+          "notificationEmailOptional": "सूचना ईमेल (वैकल्पिक)",
+          "notificationEmailPlaceholder": "alerts@example.com",
+          "emailOnSuccess": "सफल वितरण पर ईमेल",
+          "emailOnFailure": "विफल वितरण पर ईमेल",
+          "selectAll": "सभी का चयन करें",
+          "clear": "साफ़ करें",
+          "back": "वापस",
+          "next": "अगला",
+          "skip": "छข้าม करें",
+          "cancel": "रद्द करें",
+          "createWebhook": "वेबहुक बनाएं",
+          "updateWebhook": "वेबहुक अद्यतन करें"
+        },
+        "testDialog": {
+          "title": "वेबहुक परीक्षण करें",
+          "description": "अपने अंतिम बिंदु को सत्यापित करने के लिए एक परीक्षण घटना भेजें।",
+          "endpointTitle": "अंतिम बिंदु",
+          "nameLabel": "नाम",
+          "untitledWebhook": "बिना शीर्षक वाला वेबहुक",
+          "descriptionLabel": "विवरण",
+          "methodLabel": "एचटीटीपी विधि",
+          "urlLabel": "यूआरएल",
+          "triggersTitle": "ट्रिगर्स",
+          "events": {
+            "formSubmitted": "फॉर्म सबमिट किया गया",
+            "formViewed": "फॉर्म देखा गया",
+            "formStarted": "फॉर्म शुरू किया गया"
+          },
+          "modeTitle": "परीक्षण मोड",
+          "mode": {
+            "real": "एक वास्तविक पेलोड भेजें",
+            "success": "बल सफलता प्रतिक्रिया",
+            "failure": "बल विफलता प्रतिक्रिया"
+          },
+          "sendTest": "परीक्षण भेजें",
+          "close": "बंद करें",
+          "success": "परीक्षण सफलतापूर्वक भेजा गया",
+          "failed": "परीक्षण विफल रहा",
+          "testSent": "वेबहुक परीक्षण भेजा गया",
+          "testFailed": "वेबहुक परीक्षण विफल रहा",
+          "testFailedNetwork": "वेबहुक परीक्षण भेजने में असमर्थ"
+        },
+        "logDialog": {
+          "title": "वेबहुक लॉग",
+          "status": "स्थिति",
+          "response": "प्रतिक्रिया",
+          "attempt": "प्रयास",
+          "resend": "पुनः भेजें",
+          "resendSuccess": "वेबहुक सफलतापूर्वक पुनः भेजा गया",
+          "resendFailed": "वेबहुक पुनः भेजने में विफल",
+          "copied": "क्लिपबोर्ड पर कॉपी किया गया",
+          "copyFailed": "कॉपी करने में विफल",
+          "copyCodeAria": "पेलोड कॉपी करें",
+          "viewPayload": "पेलोड देखें",
+          "payloadTitle": "पेलोड",
+          "noPayloadDataTitle": "कोई पेलोड डेटा नहीं",
+          "noPayloadDataDescription": "इस लॉग प्रविष्टि के लिए पेलोड अनुपलब्ध है।",
+          "noPayloadReasonMethod": "इस अनुरोध प्रकार में पेलोड शामिल नहीं था।",
+          "noPayloadReasonError": "पेलोड कैप्चर एक त्रुटि के कारण विफल रहा।",
+          "noPayloadReasonEmpty": "कोई पेलोड डेटा संग्रहीत नहीं किया गया।",
+          "eventInformation": "घटना जानकारी",
+          "eventLabel": "घटना",
+          "formNameLabel": "फॉर्म नाम",
+          "formIdLabel": "फॉर्म आईडी",
+          "submissionIdLabel": "सबमिशन आईडी",
+          "ipAddressLabel": "आईपी पता",
+          "formFields": "फ़ॉर्म फ़ील्ड",
+          "rawFormData": "कच्चा फॉर्म डेटा",
+          "rawJson": "कच्चा जेएसओएन",
+          "formatted": "स्वरूपित",
+          "additionalData": "अतिरिक्त डेटा",
+          "notAvailable": "उपलब्ध नहीं",
+          "unknown": "अज्ञात",
+          "complexObject": "जटिल वस्तु",
+          "complexArray": "जटिल सरणी",
+          "failedCount": "{count} विफल",
+          "pendingCount": "{count} लंबित",
+          "successfulCount": "{count} सफल",
+          "noLogsTitle": "अभी तक कोई लॉग नहीं",
+          "noLogsDescription": "इस वेबहुक को घटनाएं भेजें वितरण इतिहास देखने के लिए।",
+          "errorTitle": "लोड करने में असमर्थ लॉग",
+          "fetchFailed": "वेबहुक लॉग लोड करने में विफल"
+        }
+      },
+      "designSection": {
+        "title": "डिज़ाइन",
+        "description": "उपस्थिति और अनुकूलन नियंत्रण करें",
+        "advancedTitle": "उन्नत अनुकूलन",
+        "advancedDescription": "किसी केंद्रित पैनल में रंग, टाइपोग्राफी, स्पेसिंग और बहुत कुछ को बारीकी से समायोजित करें।",
+        "openAria": "नई टैब में अनुकूलन पैनल खोलें",
+        "openLabel": "अनुकूलन पैनल खोलें…"
+      }
+    },
+    "fieldRenderer": {
+      "scheduler": {
+        "title": "शेड्यूलर",
+        "openScheduler": "शेड्यूलर खोलें",
+        "embedTitle": "शेड्यूलर एम्बेड",
+        "notConfigured": "कोई शेड्यूलर लिंक कॉन्फ़िगर नहीं किया गया है।",
+        "close": "बंद करें"
+      },
+      "email": {
+        "defaultPlaceholder": "ईमेल पता दर्ज करें",
+        "autocompleteHint": "टैब दबाएं या पूरा करने के लिए क्लिक करें:",
+        "completeEmailAria": "ईमेल पता पूरा करें",
+        "completeButton": "पूरा करें",
+        "autocompleteBadge": "ऑटो-पूरा:",
+        "allowedDomainsLabel": "अनुमत डोमेन:"
+      },
+      "fileUpload": {
+        "bytesUnit": "बाइट्स",
+        "uploadFailed": "अपलोड विफल",
+        "uploadErrorTitle": "अपलोड त्रुटि",
+        "uploadedFiles": "अपलोड की गई फ़ाइलें ({count})",
+        "uploadedBadge": "अपलोड किया गया",
+        "removeFileAria": "{name} हटाएं",
+        "maxFilesAndSize": "अधिकतम {maxFiles} फ़ाइलें, प्रत्येक {maxSize} तक",
+        "allowedTypes": "अनुमत प्रकार"
+      },
+      "social": {
+        "platforms": {
+          "linkedin": "लिंक्डइन",
+          "twitter": "एक्स (ट्विटर)",
+          "youtube": "यूट्यूब",
+          "instagram": "इंस्टाग्राम",
+          "facebook": "फेसबुक",
+          "github": "गिटहब",
+          "website": "वेबसाइट"
+        },
+        "customLink": "कस्टम लिंक {index}",
+        "customLinkPlaceholder": "https://example.com",
+        "preview": "पूर्वावलोकन"
+      },
+      "signature": {
+        "drawHere": "अपनी हस्ताक्षर यहाँ ड्राइंग करें",
+        "clear": "साफ़ करें",
+        "preview": "पूर्वावलोकन",
+        "previewAlt": "हस्ताक्षर पूर्वावलोकन"
+      },
+      "rating": {
+        "groupAria": "रेटिंग",
+        "rateAria": "दर {index} {type}"
+      },
+      "poll": {
+        "fetchFailed": "विकल्प प्राप्त करने में विफल",
+        "resultsTitle": "पोल परिणाम",
+        "totalVotes": "{count} कुल वोट",
+        "votes": "{count} वोट"
+      }
+    },
+    "formRenderer": {
+      "shared": {
+        "poweredBy": "द्वारा संचालित",
+        "incorrectPassword": "गलत पासवर्ड!",
+        "passwordProtectionMessage": "यह फॉर्म पासवर्ड संरक्षित है। जारी रखने के लिए पासवर्ड दर्ज करें।"
+      },
+      "successScreen": {
+        "title": "धन्यवाद!",
+        "defaultMessage": "आपका फॉर्म सफलतापूर्वक जमा हो गया है।",
+        "redirecting": "आपको एक पल में रीडायरेक्ट किया जा रहा है...",
+        "poweredBy": "द्वारा संचालित"
+      },
+      "quizResults": {
+        "titlePassed": "बधाई हो!",
+        "titleComplete": "क्विज़ पूरा",
+        "descriptionPassed": "आपने क्विज़ को सफलतापूर्वक पूरा कर लिया है!",
+        "descriptionRetry": "क्विज़ लेने के लिए धन्यवाद। अभ्यास करते रहें!",
+        "score": "स्कोर",
+        "points": "बिंदु",
+        "answered": "उत्तर दिया",
+        "totalQuestions": "कुल प्रश्न",
+        "passed": "पास",
+        "needsImprovement": "सुधार की आवश्यकता है",
+        "retakeQuiz": "क्विज़ फिर से लें",
+        "questionByQuestion": "प्रश्न-दर-प्रश्न परिणाम",
+        "questionLabel": "प्रश्न {index}: {label}",
+        "yourAnswer": "आपका उत्तर:",
+        "noAnswer": "कोई उत्तर नहीं",
+        "correctAnswer": "सही उत्तर:",
+        "pointsLower": "बिंदु"
+      },
+      "multiStep": {
+        "previous": "पिछला",
+        "next": "अगला",
+        "submit": "सबमिट",
+        "defaults": {
+          "formTitle": "फॉर्म"
+        },
+        "validation": {
+          "required": "यह फ़ील्ड आवश्यक है",
+          "emailInvalid": "कृपया एक वैध ईमेल पता दर्ज करें",
+          "minLength": "कम से कम {count} वर्ण होना चाहिए",
+          "maxLength": " {count} वर्ण से अधिक नहीं होना चाहिए"
+        },
+        "toasts": {
+          "submitSuccess": "फॉर्म सफलतापूर्वक जमा हो गया!",
+          "botDetected": "बॉट का पता चला। अभिगम अस्वीकार।",
+          "duplicateSubmission": "आपने पहले ही यह फॉर्म जमा कर दिया है।",
+          "rateLimitExceeded": "बहुत सारे अनुरोध। कृपया बाद में फिर से प्रयास करें।",
+          "responseLimitReached": "यह फॉर्म अब और प्रतिक्रियाएं स्वीकार नहीं कर रहा है।",
+          "contentValidationFailed": "आपके सबमिशन में अनुपयुक्त सामग्री है।",
+          "submitFailed": "फॉर्म जमा करने में विफल",
+          "submitFailedTryAgain": "फॉर्म जमा करने में विफल। कृपया फिर से प्रयास करें।"
+        }
+      },
+      "singleStep": {
+        "fixHighlightedErrors": "कृपया सबमिट करने से पहले हाइलाइट की गई त्रुटियों को ठीक करें।",
+        "submit": "सबमिट"
+      },
+      "duplicateSubmission": {
+        "title": "डुप्लिकेट सबमिशन का पता चला",
+        "wait": "{time} तक प्रतीक्षा करें",
+        "attemptsLeft": "{count, plural, one {# प्रयास शेष} other {# प्रयास शेष}}",
+        "tryAgain": "फिर से प्रयास करें",
+        "waitBeforeRetry": "कृपया फिर से प्रयास करने से पहले प्रतीक्षा करें।",
+        "units": {
+          "seconds": "{count, plural, one {# सेकंड} other {# सेकंड}}",
+          "minutes": "{count, plural, one {# मिनट} other {# मिनट}}",
+          "hours": "{count, plural, one {# घंटा} other {# घंटे}}",
+          "days": "{count, plural, one {# दिन} other {# दिन}}"
+        }
+      }
+    }
+  },
+  "aiBuilder": {
+    "client": {
+      "createFormWithKiko": "किको के साथ फॉर्म बनाएं",
+      "streamError": "त्रुटि: {error}",
+      "generatingResponse": "प्रतिक्रिया उत्पन्न कर रहा है…",
+      "loading": "लोड हो रहा है…",
+      "suggestions": {
+        "contactForm": "संपर्क फ़ॉर्म बनाएं",
+        "customerFeedbackSurvey": "ग्राहक प्रतिक्रिया सर्वेक्षण",
+        "eventRegistrationForm": "इवेंट पंजीकरण फ़ॉर्म",
+        "jobApplicationForm": "नौकरी आवेदन फ़ॉर्म"
+      }
+    },
+    "chatHeader": {
+      "backToFormBuilder": "फ़ॉर्म बिल्डर पर वापस",
+      "title": "Kiko AI"
+    },
+    "chatInput": {
+      "messageToKiko": "Kiko AI को संदेश",
+      "placeholder": "वह फ़ॉर्म वर्णित करें जिसे आप बनाना चाहते हैं…",
+      "sendMessage": "संदेश भेजें",
+      "sendHelp": "संदेश भेजने के लिए Enter दबाएं, Shift+Enter नई पंक्ति के लिए, या ⌘/Ctrl+Enter भेजने के लिए"
+    },
+    "welcome": {
+      "heading": "आज Kiko आपकी कैसे सहायता कर सकता है?",
+      "description": "नमस्ते, मैं Kiko हूँ - आपका AI-संचालित फ़ॉर्म सहायक।\nमुझसे फ़ॉर्म बनाने, संपादित करने या विश्लेषण करने के लिए कहें!"
+    },
+    "preview": {
+      "title": "Kiko AI",
+      "formFallback": "फ़ॉर्म {index}",
+      "viewJson": "JSON देखें",
+      "useThisForm": "इस फ़ॉर्म का उपयोग करें",
+      "noFormSelected": "कोई फ़ॉर्म चयनित नहीं है।"
+    },
+    "jsonModal": {
+      "title": "फ़ॉर्म JSON स्कीमा",
+      "description": "अपने फ़ॉर्म के लिए उत्पन्न JSON स्कीमा देखें या कॉपी करें",
+      "close": "बंद करें"
+    }
+  },
+  "analytics": {
+    "formAnalytics": {
+      "submissionExported": "प्रस्तुतिकरण सफलतापूर्वक निर्यात किया गया",
+      "formDeleted": "फ़ॉर्म सफलतापूर्वक हटाया गया",
+      "failedDeleteForm": "फ़ॉर्म हटाने में विफल",
+      "backToDashboard": "डैशबोर्ड पर वापस",
+      "published": "प्रकाशित",
+      "draft": "मसौदा",
+      "analyticsSubtitle": "फ़ॉर्म एनालिटिक्स और प्रस्तुतिकरण डेटा",
+      "formActions": "फ़ॉर्म क्रियाएं",
+      "editForm": "फ़ॉर्म संपादित करें",
+      "shareForm": "फ़ॉर्म साझा करें",
+      "viewSubmissions": "प्रस्तुतिकरण देखें",
+      "moreActions": "अधिक कार्रवाइयाँ",
+      "exportCsv": "CSV निर्यात करें",
+      "exportJson": "JSON निर्यात करें",
+      "deleteForm": "फ़ॉर्म हटाएं",
+      "openKiko": "Kiko AI खोलें",
+      "kiko": "Kiko AI",
+      "kikoTooltip": "AI फ़ॉर्म एनालिटिक्स",
+      "recentSubmissions": "हाल के प्रस्तुतिकरण",
+      "viewAll": "सभी देखें",
+      "noSubmissionsTitle": "अभी कोई प्रस्तुतिकरण नहीं",
+      "noSubmissionsDescription": "जब लोग आपके फ़ॉर्म भरना शुरू करेंगे, तो उनके उत्तर यहाँ दिखाई देंगे।",
+      "submission": "प्रस्तुतिकरण {id}",
+      "fieldsCount": "{count} क्षेत्र",
+      "view": "देखें",
+      "viewSubmissionDetails": "प्रस्तुतिकरण विवरण देखें",
+      "viewMoreSubmissions": "{count} और प्रस्तुतिकरण देखें",
+      "noDataToExport": "निर्यात करने के लिए कोई डेटा नहीं",
+      "csvExportSuccess": "डेटा CSV में सफलतापूर्वक निर्यात किया गया!",
+      "jsonExportSuccess": "डेटा सफलतापूर्वक निर्यात किया गया!",
+      "deleteModalTitle": "फ़ॉर्म हटाएं",
+      "deleteModalConfirm": "फ़ॉर्म हटाएं",
+      "deleteModalCancel": "रद्द करें",
+      "deleteModalDescription": "क्या आप \"{title}\" को हटाना सुनिश्चित करना चाहते हैं? यह क्रिया पूर्ववत नहीं की जा सकती है और फ़ॉर्म और उसके सभी प्रस्तुतिकरण को स्थायी रूप से हटा देगी।",
+      "formPublished": "फ़ॉर्म प्रकाशित!"
+    },
+    "statsCards": {
+      "totalSubmissions": "कुल प्रस्तुतिकरण",
+      "formFields": "फॉर्म फ़ील्ड",
+      "completionRate": "पूर्णता दर",
+      "last30Days": "पिछले 30 दिन",
+      "avgDailySubmissions": "औसत दैनिक प्रस्तुतिकरण",
+      "bounceRate": "बाउंस दर",
+      "peakHour": "पीक घंटा",
+      "uniqueResponses": "अद्वितीय प्रतिक्रियाएं"
+    },
+    "infoCards": {
+      "lastSubmission": "अंतिम प्रस्तुतिकरण",
+      "fromIp": "से {ip}",
+      "noSubmissionsYet": "अभी कोई प्रस्तुतिकरण नहीं",
+      "formStatus": "फ़ॉर्म स्थिति",
+      "published": "प्रकाशित",
+      "created": "बनाया गया",
+      "updated": "अद्यतन",
+      "yes": "हाँ",
+      "no": "नहीं",
+      "quickStats": "त्वरित आँकड़े",
+      "avgFieldsCompleted": "औसत पूर्ण क्षेत्र",
+      "mostActiveDay": "सबसे सक्रिय दिन",
+      "submissions": "{count} प्रस्तुतियाँ",
+      "formType": "फ़ॉर्म प्रकार",
+      "multiStep": "मल्टी-स्टेप",
+      "singlePage": "एकल पृष्ठ"
+    },
+    "trendsChart": {
+      "title": "प्रस्तुति रुझान",
+      "noData": "कोई डेटा उपलब्ध नहीं",
+      "submissions": "प्रस्तुतियाँ"
+    },
+    "dropoff": {
+      "title": "छूटने की विश्लेषणा",
+      "onlyMultiStep": "छूटने की विश्लेषणा केवल बहु-चरणीय फॉर्म के लिए उपलब्ध है।",
+      "subtitle": "यह समझें कि उपयोगकर्ता आपके फॉर्म में कहां से बाहर निकलते हैं।",
+      "step": "चरण",
+      "reached": "पहुँचा",
+      "dropoffPercent": "छूटने का प्रतिशत",
+      "completionPercent": "पूर्णता प्रतिशत",
+      "ofTotal": "{total} का",
+      "stepFallback": "{index} चरण",
+      "dropoffBarAria": "चरण {index} के लिए छूटने का बार",
+      "completionBarAria": "चरण {index} के लिए पूर्णता बार"
+    },
+    "chatModal": {
+      "title": "किको",
+      "description": "अपने फॉर्म विश्लेषणा के बारे में एआई से बात करें"
+    },
+    "chat": {
+      "emptyTitle": "किको से कुछ भी पूछें",
+      "emptyDescription": "अपने फॉर्म डेटा से तुरंत जानकारी और विश्लेषण प्राप्त करें। प्राकृतिक भाषा में प्रश्न पूछें।",
+      "thinking": "सोच रहा हूँ...",
+      "inputPlaceholder": "अपने फॉर्म विश्लेषणा के बारे में पूछें...",
+      "inputHelp": " <enter></enter> दबाएं भेजने के लिए, <shiftEnter></shiftEnter> नई पंक्ति के लिए"
+    },
+    "submissionDetails": {
+      "title": "प्रस्तुति विवरण - {id}",
+      "submissionId": "सबमिशन आईडी",
+      "submittedAt": "प्रस्तुत किया गया",
+      "ipAddress": "आईपी पता",
+      "formData": "फॉर्म डेटा",
+      "emptyValue": "—"
+    },
+    "submissions": {
+      "backToAnalytics": "विश्लेषणा पर वापस",
+      "published": "प्रकाशित",
+      "draft": "मसौदा",
+      "formSubmissions": "फॉर्म प्रस्तुतियाँ ({count})",
+      "exportActions": "निर्यात क्रियाएं",
+      "exportCsv": "CSV निर्यात करें",
+      "exportJson": "JSON निर्यात करें",
+      "viewDetailedAnalytics": "विस्तृत विश्लेषणा देखें",
+      "submissions": "प्रस्तुतियाँ",
+      "searchSubmissions": "प्रस्तुतियों की खोज करें...",
+      "noMatchingSubmissions": "कोई मेल खाने वाली प्रस्तुतियाँ नहीं",
+      "noSubmissionsYet": "अभी कोई प्रस्तुतिकरण नहीं",
+      "noSubmissionsDescription": "जब लोग आपके फ़ॉर्म भरना शुरू करेंगे, तो उनके उत्तर यहाँ दिखाई देंगे।",
+      "adjustSearchTerms": "अपनी खोज शर्तों को समायोजित करने का प्रयास करें प्रस्तुतियों को खोजने के लिए।",
+      "id": "आईडी",
+      "submitted": "प्रस्तुत किया गया",
+      "ipAddress": "आईपी पता",
+      "fields": "फ़ील्ड",
+      "actions": "क्रियाएं",
+      "fieldsCount": "{count} क्षेत्र",
+      "fieldsCount_plural": "{count} क्षेत्र",
+      "view": "देखें",
+      "showingRange": "{start}-{end} में से {total} प्रस्तुतियाँ दिखा रहा है",
+      "previous": "पिछला",
+      "next": "अगला",
+      "pageOf": "पृष्ठ {page} का {total}",
+      "noSubmissionsToExport": "निर्यात करने के लिए कोई प्रस्तुतियाँ नहीं",
+      "submissionId": "सबमिशन आईडी",
+      "submittedAt": "प्रस्तुत किया गया",
+      "csvExportedSuccess": "सीएसवी सफलतापूर्वक निर्यात किया गया",
+      "jsonExportedSuccess": "जेएसओएन सफलतापूर्वक निर्यात किया गया"
+    },
+    "premiumRequired": {
+      "analytics": {
+        "title": "प्रीमियम आवश्यक है",
+        "description": "आपको फॉर्म विश्लेषणा तक पहुंचने के लिए एक प्रीमियम सदस्यता की आवश्यकता है। सभी सुविधाओं को अनलॉक करने के लिए अपग्रेड करें।",
+        "viewPricing": "मूल्य देखें"
+      },
+      "submissions": {
+        "title": "प्रीमियम आवश्यक है",
+        "description": "आपको फॉर्म प्रस्तुतियों तक पहुंचने के लिए एक प्रीमियम सदस्यता की आवश्यकता है। सभी सुविधाओं को अनलॉक करने के लिए अपग्रेड करें।",
+        "viewPricing": "मूल्य देखें"
+      }
+    }
+  },
+  "trialBanner": {
+    "aria": {
+      "status": "परीक्षण स्थिति अधिसूचना"
+    },
+    "endsInPrefix": "आपका नि:शुल्क परीक्षण समाप्त हो रहा है ",
+    "remainingSuffix": "बाकी",
+    "expired": "परीक्षण समाप्त हो गया",
+    "units": {
+      "day": "दिन",
+      "hour": "घंटे",
+      "minute": "मिनट",
+      "second": "सेकंड"
+    }
+  },
+  "embed": {
+    "customizer": {
+      "subtitle": "अपने फॉर्म के लिए एम्बेड कोड को अनुकूलित और उत्पन्न करें",
+      "showCode": "कोड दिखाएं",
+      "settings": "सेटिंग्स",
+      "preview": "पूर्वावलोकन",
+      "desktop": "डेस्कटॉप",
+      "mobile": "मोबाइल"
+    },
+    "settings": {
+      "dimensions": {
+        "title": "आयाम",
+        "width": "चौड़ाई",
+        "widthPlaceholder": "उदा., 100%, 800px",
+        "height": "ऊंचाई",
+        "heightPlaceholder": "उदा., 600px, 100vh",
+        "makeResponsive": "प्रतिसादी बनाएं (कंटेनर की चौड़ाई को समायोजित करता है)"
+      },
+      "appearance": {
+        "title": "दिखावट",
+        "backgroundColor": "पृष्ठभूमि रंग",
+        "allowTransparentBackground": "पारदर्शी पृष्ठभूमि की अनुमति दें (पृष्ठभूमि रंग को ओवरराइड करता है)"
+      },
+      "border": {
+        "title": "सीमा और स्टाइलिंग",
+        "showBorder": "सीमा दिखाएं",
+        "borderColor": "सीमा रंग",
+        "borderWidth": "बॉर्डर चौड़ाई (पिक्सल)",
+        "borderRadius": "बॉर्डर त्रिज्या (पिक्सल)",
+        "padding": "पैडिंग (पिक्सल)",
+        "paddingHelp": "iframe के चारों ओर स्थान"
+      },
+      "performance": {
+        "title": "प्रदर्शन",
+        "loadingMode": "लोडिंग मोड",
+        "loadingModePlaceholder": "लोडिंग मोड चुनें",
+        "lazy": "आलसी (अनुशंसित)",
+        "eager": "उत्सुक",
+        "help": "आलसी लोडिंग पृष्ठ प्रदर्शन में सुधार करता है iframe को केवल तब लोड करके जब यह दृश्य में आता है"
+      }
+    },
+    "codeModal": {
+      "title": "एम्बेड कोड",
+      "description": "अपना ढांचा चुनें और कोड कॉपी करें",
+      "codeLabel": "{mode} कोड",
+      "copied": "कॉपी किया!",
+      "copy": "कॉपी",
+      "close": "बंद करें",
+      "modes": {
+        "htmlDescription": "सार्वभौमिक HTML iframe",
+        "reactDescription": "रिएक्ट घटक",
+        "nextjsDescription": "नेक्स्ट.जेएस घटक",
+        "vueDescription": "व्यू.जेएस घटक",
+        "wordpressDescription": "वर्डप्रेस शॉर्टकोड"
+      },
+      "iframeTitle": "फॉर्म"
+    },
+    "testPage": {
+      "metadata": {
+        "title": "एम्बेड टेस्ट - IkiForm",
+        "description": "फॉर्म एम्बेडिंग क्षमताओं को प्रदर्शित करने के लिए परीक्षण पृष्ठ"
+      },
+      "title": "फॉर्म एम्बेडिंग टेस्ट पेज",
+      "descriptionPrefix": "यह पृष्ठ दिखाता है कि विभिन्न कॉन्फ़िगरेशन का उपयोग करके फॉर्म कैसे एम्बेड किए जा सकते हैं। यात्रा",
+      "descriptionSuffix": "अपने एम्बेड को अनुकूलित करने के लिए",
+      "tryCustomizer": "एम्बेड कस्टमाइज़र आज़माएं",
+      "cards": {
+        "standard": {
+          "title": "मानक एम्बेड",
+          "description": "600px ऊंचाई - डेस्कटॉप देखने के लिए उपयुक्त",
+          "badge": "प्रतिसादी",
+          "iframeTitle": "मानक फॉर्म एम्बेड"
+        },
+        "compact": {
+          "title": "कॉम्पैक्ट एम्बेड",
+          "description": "400px ऊंचाई - साइडबार और छोटे स्थानों के लिए आदर्श",
+          "badge": "न्यूनतम",
+          "iframeTitle": "कॉम्पैक्ट फॉर्म एम्बेड"
+        },
+        "fixed": {
+          "title": "निश्चित चौड़ाई एम्बेड",
+          "description": "800px चौड़ाई, केंद्रित - विशिष्ट लेआउट के लिए उपयुक्त",
+          "badge": "कस्टम शैली",
+          "iframeTitle": "निश्चित चौड़ाई फॉर्म एम्बेड"
+        },
+        "react": {
+          "title": "रिएक्ट घटक उदाहरण",
+          "description": "उचित टाइपिंग के साथ टाइपस्क्रिप्ट रिएक्ट घटक",
+          "codeIframeTitle": "फॉर्म"
+        }
+      },
+      "guide": {
+        "title": "एम्बेड सुविधा का उपयोग कैसे करें",
+        "description": "अपने फॉर्म को एम्बेड करने के लिए चरण-दर-चरण मार्गदर्शिका",
+        "steps": {
+          "step1": {
+            "title": "एम्बेड कस्टमाइज़र तक पहुंचें",
+            "prefix": "पर जाएं",
+            "suffix": "या अपने फॉर्म डैशबोर्ड में एम्बेड बटन पर क्लिक करें।"
+          },
+          "step2": {
+            "title": "अपने एम्बेड को अनुकूलित करें",
+            "item1": "चौड़ाई और ऊंचाई आयाम समायोजित करें",
+            "item2": "थीम चुनें (प्रकाश, अंधेरा, स्वतः)",
+            "item3": "सीमाओं और स्टाइलिंग को कॉन्फ़िगर करें",
+            "item4": "लोडिंग व्यवहार सेट करें"
+          },
+          "step3": {
+            "title": "अपना कोड प्राप्त करें",
+            "description": "HTML, रिएक्ट, नेक्स्ट.जेएस, व्यू, या वर्डप्रेस के लिए जenerated कोड कॉपी करें और इसे अपनी वेबसाइट में पेस्ट करें।"
+          },
+          "step4": {
+            "title": "डैशबोर्ड एकीकरण",
+            "description": "फॉर्म क्रियाओं में एम्बेड बटन का उपयोग करके अपने फॉर्म डैशबोर्ड से सीधे एम्बेड विकल्पों तक पहुंचें।"
+          }
+        }
+      }
+    }
+  }
+}

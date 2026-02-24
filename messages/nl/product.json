@@ -1,0 +1,2211 @@
+{
+  "common": {
+    "na": "N.v.t.",
+    "premium": {
+      "title": "Premium vereist",
+      "viewPricing": "Bekijk prijzen",
+      "aiBuilderDescription": "Je hebt een premium abonnement nodig om de AI-formulierbouwer te gebruiken. Upgrade om alle functies te ontgrendelen.",
+      "formBuilderDescription": "Je hebt een premium abonnement nodig om de formulierbouwer te gebruiken. Upgrade om alle functies te ontgrendelen."
+    }
+  },
+  "formBuilder": {
+    "header": {
+      "title": "Formulierbouwer",
+      "goToDashboard": "Ga naar dashboard",
+      "fieldCount": "{count} veld",
+      "fieldCount_plural": "{count} velden",
+      "saving": "Opslaan",
+      "moreActions": "Meer acties",
+      "multiStepForm": "Meerstappig formulier",
+      "toggleMultiStepMode": "Schakel meerstappige modus in",
+      "viewJson": "Bekijk JSON",
+      "analytics": "Analytica",
+      "share": "Delen",
+      "useKiko": "Gebruik Kiko",
+      "settings": "Instellingen",
+      "publish": "Publiceren",
+      "published": "Gepubliceerd",
+      "publishing": "Publiceert...",
+      "unpublishing": "Depubliceert...",
+      "publishForm": "Formulier publiceren",
+      "unpublishForm": "Formulier depubliceren",
+      "save": "Opslaan",
+      "saveForm": "Formulier opslaan",
+      "actionsAria": "Formulieracties"
+    },
+    "modals": {
+      "formSettings": "Formulierinstellingen",
+      "internalTitle": "Interne titel",
+      "internalTitlePlaceholder": "Voer interne titel in voor je referentie...",
+      "internalTitleDescription": "Deze titel is alleen zichtbaar voor jou in het dashboard en de formulierbouwer",
+      "publicTitle": "Openbare titel",
+      "publicTitlePlaceholder": "Voer titel in om weer te geven aan gebruikers...",
+      "publicTitleDescription": "Deze titel wordt weergegeven aan gebruikers op het daadwerkelijke formulier. Laat leeg om de interne titel te gebruiken.",
+      "description": "Beschrijving",
+      "descriptionPlaceholder": "Voer formulierbeschrijving in",
+      "submitButtonText": "Invoeren knoptekst",
+      "submitButtonTextPlaceholder": "Invoeren knoptekst",
+      "submit": "Invoeren",
+      "successMessage": "Succesbericht",
+      "successMessagePlaceholder": "Bericht getoond na succesvolle indiening",
+      "redirectUrlOptional": "Omleidings-URL (optioneel)",
+      "redirectUrlPlaceholder": "https://example.com/thank-you",
+      "cancel": "Annuleren",
+      "saveSettings": "Instellingen opslaan"
+    },
+    "page": {
+      "formFields": "Formuliervelden",
+      "authRequired": "Authenticatie vereist",
+      "authRequiredDescription": "Log in om de formulierbouwer te gebruiken.",
+      "goToLogin": "Ga naar inloggen",
+      "stepDefaultTitle": "Stap {index}",
+      "stepDefaultDescription": "Eerste stap van je formulier",
+      "loadingCustomization": "Bezig met het laden van aanpassingen..."
+    },
+    "blockManager": {
+      "header": {
+        "title": "Formulierstructuur",
+        "stepsCount": "{count, plural, one {# stap} other {# stappen}}",
+        "description": "Organiseer je formulier in logische secties",
+        "addStepAria": "Voeg nieuwe stap toe aan formulier",
+        "addStep": "Voeg stap toe"
+      },
+      "item": {
+        "dragHandleAria": "Slepen om {title} stap opnieuw te ordenen",
+        "dragToReorder": "Slepen om opnieuw te ordenen"
+      },
+      "headerActions": {
+        "stepBadge": "Stap {index}",
+        "editStepAria": "Bewerk {title} stap",
+        "deleteStepAria": "Verwijder {title} stap",
+        "editStep": "Bewerk stap",
+        "deleteStep": "Verwijder stap",
+        "collapseStep": "Stap samenvouwen",
+        "expandStep": "Stap uitklappen"
+      },
+      "editForm": {
+        "stepTitlePlaceholder": "Staptitel",
+        "stepDescriptionPlaceholder": "Stapbeschrijving (optioneel)",
+        "save": "Opslaan",
+        "cancel": "Annuleren"
+      },
+      "fieldsList": {
+        "empty": "Nog geen velden. Voeg velden toe vanuit de palet rechts."
+      }
+    },
+    "multiStepNavigation": {
+      "deleteStep": "Verwijder stap",
+      "addStep": "Voeg stap toe",
+      "deleteDialogTitle": "Verwijder stap",
+      "deleteDialogDescription": "Weet je zeker dat je deze stap wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+      "cancel": "Annuleren"
+    },
+    "formFields": {
+      "addFieldToFormAria": "Voeg veld toe aan formulier",
+      "addField": "Voeg veld toe",
+      "addSpecificFieldAria": "Voeg {label} veld toe",
+      "formFields": "Vormvelden",
+      "noFieldsInStep": "Geen velden in deze stap",
+      "noFieldsYet": "Nog geen velden toegevoegd",
+      "addFieldsToStep": "Voeg velden toe vanuit de palet naar deze stap",
+      "addFieldsFromLeftPanel": "Voeg velden toe vanuit het linkerdeelvenster om je vorm te beginnen bouwen",
+      "fieldsCount": "{count, plural, one {# veld} other {# velden}}",
+      "fieldAria": "{type} veld",
+      "deleteFieldAria": "Verwijder {type} veld",
+      "deleteField": "Verwijder veld"
+    },
+    "jsonViewModal": {
+      "title": "Vormschema JSON",
+      "description": "Lezen-only weergave van het huidige vormschema. Gebruik de kopieerknop om JSON te kopiëren.",
+      "copySuccess": "JSON gekopieerd naar klembord!",
+      "copyError": "Kon JSON niet kopiëren",
+      "copied": "Gekopieerd",
+      "copyJson": "Kopieer JSON"
+    },
+    "settingsMobile": {
+      "sectionsAria": "Instellingen secties",
+      "goToSectionAria": "Ga naar {section} instellingen",
+      "backToListAria": "Ga terug naar instellingenlijst",
+      "settings": "Instellingen"
+    },
+    "creation": {
+      "title": "Maak een nieuwe vorm",
+      "cancel": "Annuleren",
+      "back": "Terug",
+      "createForm": "Maak vorm",
+      "reviewAction": "Beoordelen",
+      "next": "Volgende",
+      "types": {
+        "single": {
+          "title": "Enkele pagina vorm",
+          "description": "Traditionele vorm met alle velden op één pagina"
+        },
+        "multi": {
+          "title": "Multi-stap vorm",
+          "description": "Begeleide vormervaring met meerdere stappen"
+        }
+      },
+      "typePreview": {
+        "stepOf": "Stap {step} van {total}"
+      },
+      "configuration": {
+        "title": "Vormdetails",
+        "description": "Stel de interne en openbare informatie voor je vorm in.",
+        "internalTitle": "Interne titel",
+        "internalTitlePlaceholder": "Voer interne titel in voor je referentie…",
+        "internalTitleHelp": "Alleen zichtbaar in het dashboard en bouwer.",
+        "publicTitle": "Openbare titel",
+        "publicTitlePlaceholder": "Voer titel in om weer te geven aan gebruikers…",
+        "publicTitleHelp": "Weergegeven aan gebruikers op de vorm. Laat leeg om de interne titel opnieuw te gebruiken.",
+        "formDescription": "Vormbeschrijving",
+        "formDescriptionPlaceholder": "Voer een korte beschrijving in om gebruikers te begeleiden…",
+        "formDescriptionHelp": "Optioneel. Helpt gebruikers de doel van de vorm te begrijpen."
+      },
+      "review": {
+        "formType": "Vormtype",
+        "multiStepForm": "Multi-stap vorm",
+        "singlePageForm": "Enkele pagina vorm",
+        "multiStep": "Multi-stap",
+        "singlePage": "Enkele pagina",
+        "editFormType": "Bewerk vormtype",
+        "formConfiguration": "Vormconfiguratie",
+        "editFormConfiguration": "Bewerk vormconfiguratie",
+        "internalTitle": "Interne titel",
+        "publicTitle": "Openbare titel",
+        "description": "Beschrijving",
+        "preview": "Voorbeeld",
+        "previewDescription": "Snapshot van je vorm."
+      },
+      "stepIndicator": {
+        "progress": "Vorderingen",
+        "stepCompleted": "Stap {index} voltooid",
+        "stepCurrent": "Stap {index} huidig",
+        "step": "Stap {index}"
+      }
+    },
+    "customize": {
+      "page": {
+        "savedCustomization": "Opgeslagen aanpassingen",
+        "saveFailed": "Kon wijzigingen niet opslaan. Probeer het opnieuw.",
+        "tabs": {
+          "presets": "Voorkeuren",
+          "layout": "Indeling",
+          "colors": "Kleuren",
+          "text": "Tekst"
+        },
+        "backToCustomize": "Terug naar aanpassen",
+        "previewForm": "Voorbeeldvorm",
+        "customizeForm": "Aanpasvorm",
+        "publicTitle": "Publieke titel: \"{title}\"",
+        "customizationActions": "Aanpassingsacties",
+        "back": "Terug",
+        "save": "Opslaan",
+        "customize": "Aanpassen"
+      },
+      "colors": {
+        "title": "Kleurinstellingen",
+        "description": "Aanpas kleuren en thema",
+        "backgroundColorLabel": "Achtergrondkleur",
+        "backgroundColorHelp": "Stelt de achtergrondkleur van de vormcontainer in",
+        "textColorLabel": "Tekstkleur",
+        "textColorHelp": "Stelt de kleur van alle tekstelementen in de vorm in",
+        "primaryColorLabel": "Primaire kleur (knoppen en accent)",
+        "primaryColorHelp": "Stelt de kleur voor knoppen, focusstatussen en accentelementen in",
+        "borderColorLabel": "Randkleur",
+        "borderColorHelp": "Stelt de kleur in voor invoerveldgrenzen en dividers",
+        "websiteBackgroundColorLabel": "Website Achtergrondkleur",
+        "websiteBackgroundColorHelp": "Stelt de achtergrondkleur van de hele website/pagina in"
+      },
+      "typography": {
+        "title": "Typografie-instellingen",
+        "description": "Pas lettertypen en tekststijlen aan",
+        "fontFamily": "Lettertypefamilie",
+        "fontFamilyPlaceholder": "Selecteer een Google-lettertype...",
+        "fontPreview": "Lettertypevoorbeeld",
+        "previewLine1": "De snelle bruine vos springt over de luie hond",
+        "previewLine2": "Voorbeeldtekst voor formulier met nummers 1234567890",
+        "fontHelp": "Kies uit honderden Google-lettertypen. Het lettertype wordt automatisch geladen.",
+        "fontSize": "Lettertypegrootte",
+        "fontWeight": "Lettertypegewicht",
+        "selected": "Geselecteerd:",
+        "fontSizeOptions": {
+          "xs": {
+            "label": "Extra klein",
+            "description": "12px"
+          },
+          "sm": {
+            "label": "Klein",
+            "description": "14px"
+          },
+          "base": {
+            "label": "Basis",
+            "description": "16px"
+          },
+          "lg": {
+            "label": "Groot",
+            "description": "18px"
+          },
+          "xl": {
+            "label": "Extra groot",
+            "description": "20px"
+          }
+        },
+        "fontWeightOptions": {
+          "light": {
+            "label": "Licht",
+            "description": "300"
+          },
+          "normal": {
+            "label": "Normaal",
+            "description": "400"
+          },
+          "medium": {
+            "label": "Middelmatig",
+            "description": "500"
+          },
+          "semibold": {
+            "label": "Half dik",
+            "description": "600"
+          },
+          "bold": {
+            "label": "Dik",
+            "description": "700"
+          }
+        }
+      },
+      "layout": {
+        "title": "Lay-outinstellingen",
+        "description": "Configureer afstand en structuur",
+        "showProgressBar": "Toon voortgangsbalk",
+        "formWidth": "Formulierbreedte",
+        "formWidthHelp": "Beheert de maximale breedte van de formuliercontainer",
+        "customWidth": "Aangepaste breedte (bijv. 600px, 80%, 50rem)",
+        "customWidthPlaceholder": "Voer aangepaste breedte in",
+        "internalPadding": "Interne opvulling",
+        "internalPaddingHelp": "Beheert de ruimte binnen de formuliercontainer",
+        "externalMargin": "Externe marge",
+        "externalMarginHelp": "Beheert de ruimte rond de formuliercontainer",
+        "cornerRadius": "Hoekradius",
+        "cornerRadiusHelp": "Beheert hoe afgerond de formulierhoeken verschijnen",
+        "widthOptions": {
+          "sm": {
+            "label": "Klein",
+            "description": "400px maximale breedte"
+          },
+          "md": {
+            "label": "Middelmatig",
+            "description": "600px maximale breedte"
+          },
+          "lg": {
+            "label": "Groot",
+            "description": "800px maximale breedte"
+          },
+          "xl": {
+            "label": "Extra groot",
+            "description": "1000px maximale breedte"
+          },
+          "full": {
+            "label": "Volledige breedte",
+            "description": "100% breedte"
+          },
+          "custom": {
+            "label": "Aangepast",
+            "description": "Aangepaste breedtewaarde"
+          }
+        },
+        "paddingOptions": {
+          "none": {
+            "label": "Geen",
+            "description": "0px opvulling"
+          },
+          "sm": {
+            "label": "Klein",
+            "description": "16px opvulling"
+          },
+          "md": {
+            "label": "Middelmatig",
+            "description": "24px opvulling"
+          },
+          "lg": {
+            "label": "Groot",
+            "description": "32px opvulling"
+          }
+        },
+        "marginOptions": {
+          "none": {
+            "label": "Geen",
+            "description": "Geen marge"
+          },
+          "sm": {
+            "label": "Klein",
+            "description": "8px"
+          },
+          "md": {
+            "label": "Middelmatig",
+            "description": "16px"
+          },
+          "lg": {
+            "label": "Groot",
+            "description": "32px"
+          }
+        },
+        "radiusOptions": {
+          "none": {
+            "label": "Geen",
+            "description": "0px (scherpe hoeken)"
+          },
+          "sm": {
+            "label": "Klein",
+            "description": "4px randradius"
+          },
+          "md": {
+            "label": "Middelmatig",
+            "description": "8px randradius"
+          },
+          "lg": {
+            "label": "Groot",
+            "description": "16px randradius"
+          },
+          "xl": {
+            "label": "Extra groot",
+            "description": "24px randradius"
+          }
+        }
+      },
+      "presets": {
+        "title": "Ontwerp presets",
+        "description": "Snel starten met prachtig vormgegeven formulierstijlen",
+        "category": "Categorie",
+        "allPresets": "Alle presets",
+        "presets": "Voorkeuren",
+        "presetCount": "{count, plural, one {# voorinstelling} other {# voorinstellingen}}",
+        "presetList": "Presetlijst",
+        "applyPresetAria": "Pas {name} preset toe",
+        "appliedPreset": "Preset \"{name}\" toegepast",
+        "formTitle": "Formuliertitel",
+        "submit": "Invoeren"
+      },
+      "preview": {
+        "title": "Live preview",
+        "description": "Bekijk hoe uw formulier eruit zal zien met de toegepaste aanpassingen",
+        "sampleTitle": "Voorbeeldformulier",
+        "sampleDescription": "Dit is hoe uw formulier eruit zal zien met de huidige ontwerpinstellingen.",
+        "nameLabel": "Naam *",
+        "namePlaceholder": "Voer uw naam in",
+        "emailLabel": "E-mail *",
+        "emailPlaceholder": "Voer uw e-mailadres in",
+        "categoryLabel": "Categorie",
+        "categoryPlaceholder": "Selecteer een categorie",
+        "categoryGeneral": "Algemene vraag",
+        "categorySupport": "Ondersteuning",
+        "categorySales": "Verkoop",
+        "messageLabel": "Bericht",
+        "messagePlaceholder": "Voer uw bericht in",
+        "submitButton": "Formulier indienen",
+        "previousStepAria": "Vorige stap",
+        "previousStep": "Vorige",
+        "nextStepAria": "Volgende stap",
+        "nextStep": "Volgende",
+        "submitAria": "Formulier indienen"
+      }
+    },
+    "toasts": {
+      "loginRequiredToSave": "Log in om uw formulier op te slaan.",
+      "formSaved": "Formulier succesvol opgeslagen!",
+      "formCreated": "Formulier succesvol gemaakt!",
+      "saveFailed": "Mislukt om formulier op te slaan. Probeer opnieuw.",
+      "saveBeforeShare": "Sla uw formulier op voordat u het deelt.",
+      "formPublished": "Formulier succesvol gepubliceerd!",
+      "publishFailed": "Mislukt om formulier te publiceren. Probeer opnieuw.",
+      "saveBeforeAnalytics": "Sla uw formulier op voordat u de analyse bekijkt.",
+      "loadingAnalytics": "Analyses laden",
+      "saveBeforePublish": "Sla uw formulier op voordat u het publiceert.",
+      "userAuthRequired": "Gebruikersauthenticatie vereist",
+      "formUnpublished": "Formulier succesvol niet gepubliceerd!",
+      "updateStatusFailed": "Mislukt om formulierstatus bij te werken. Probeer opnieuw.",
+      "saveSettingsFailed": "Mislukt om instellingen op te slaan. Probeer opnieuw.",
+      "loadFailed": "Mislukt om formulier te laden. Probeer opnieuw."
+    },
+    "formPreview": {
+      "titlePlaceholder": "Klik om titel toe te voegen...",
+      "descriptionPlaceholder": "Klik om beschrijving toe te voegen...",
+      "publicTitle": "Publieke titel: \"{title}\"",
+      "stepTitlePlaceholder": "Klik om stap titel toe te voegen...",
+      "stepDescriptionPlaceholder": "Klik om stap beschrijving toe te voegen...",
+      "stepBadge": "Stap {index}",
+      "editFieldAria": "Veld bewerken",
+      "clickToEdit": "Klik om te bewerken"
+    },
+    "fieldPalette": {
+      "headerTitle": "Formuliervelden",
+      "headerDescription": "Klik om velden toe te voegen aan uw formulier",
+      "ariaPalette": "Veldpalet",
+      "searchAria": "Zoek velden",
+      "searchPlaceholder": "Zoek velden...",
+      "categoryFieldsAria": "{category} velden",
+      "noFieldsFound": "Geen velden gevonden die overeenkomen met \"{searchTerm}\"",
+      "searchHint": "Probeer te zoeken op veldnaam, beschrijving of type",
+      "addFieldAria": "Voeg {label} veld toe",
+      "categories": {
+        "input": "Invoer velden",
+        "selection": "Selectie velden",
+        "media": "Media velden",
+        "layout": "Lay-out velden",
+        "advanced": "Geavanceerde velden"
+      },
+      "fields": {
+        "text": {
+          "label": "Tekstinvoer",
+          "description": "Een enkele regel voor korte tekstreacties."
+        },
+        "email": {
+          "label": "E-mail",
+          "description": "Verzamel een geldig e-mailadres."
+        },
+        "number": {
+          "label": "Nummer",
+          "description": "Invoer voor numerieke waarden."
+        },
+        "phone": {
+          "label": "Telefoonnummer",
+          "description": "Invoer voor telefoonnummer met validatie."
+        },
+        "textarea": {
+          "label": "Tekstveld",
+          "description": "Een veld met meerdere regels voor langere tekst."
+        },
+        "date": {
+          "label": "Datum",
+          "description": "Kies een datum uit een kalender."
+        },
+        "time": {
+          "label": "Tijd",
+          "description": "Selecteer of voer een tijdswaarde in."
+        },
+        "address": {
+          "label": "Adres",
+          "description": "Invoer voor straat, stad en andere adresgegevens."
+        },
+        "link": {
+          "label": "Link",
+          "description": "Invoer voor een geldige website-URL."
+        },
+        "select": {
+          "label": "Selecteer Dropdown",
+          "description": "Dropdown om één optie te kiezen."
+        },
+        "radio": {
+          "label": "Radio Knoppen",
+          "description": "Kies één optie uit een lijst."
+        },
+        "checkbox": {
+          "label": "Checkboxes",
+          "description": "Selecteer één of meer opties."
+        },
+        "slider": {
+          "label": "Slider",
+          "description": "Kies een waarde door een handvat te verschuiven."
+        },
+        "rating": {
+          "label": "Waardering",
+          "description": "Verzamel een ster- of pictogramwaardering."
+        },
+        "poll": {
+          "label": "Poll",
+          "description": "Laat gebruikers stemmen op meerdere opties."
+        },
+        "file": {
+          "label": "Bestand uploaden",
+          "description": "Upload bestanden met grootte- en typebeperkingen."
+        },
+        "signature": {
+          "label": "Handtekening",
+          "description": "Teken of onderteken met muis of aanraking."
+        },
+        "statement": {
+          "label": "Verklaring",
+          "description": "Toon een koptekst of beschrijving in het formulier."
+        },
+        "banner": {
+          "label": "Banner",
+          "description": "Toon een gemarkeerde boodschap of waarschuwing."
+        },
+        "field-group": {
+          "label": "Veldgroep",
+          "description": "Groep velden samen in een rij."
+        },
+        "tags": {
+          "label": "Tag Invoer",
+          "description": "Voer en beheer meerdere tags."
+        },
+        "social": {
+          "label": "Sociale Media",
+          "description": "Voeg sociale media-profielkoppelingen toe."
+        },
+        "scheduler": {
+          "label": "Planner",
+          "description": "Inbedden van een planningskoppeling (bijv. Calendly)."
+        }
+      }
+    },
+    "fieldSettings": {
+      "header": {
+        "title": "Veldinstellingen",
+        "closeAria": "Sluit veldinstellingen"
+      },
+      "emptyState": {
+        "title": "Geen veld geselecteerd",
+        "description": "Klik op een veld in de preview om de instellingen te bewerken"
+      },
+      "basic": {
+        "title": "Basisinstellingen",
+        "fieldLabel": "Veldlabel",
+        "fieldLabelPlaceholder": "Voer veldlabel in",
+        "fieldLabelHelp": "De label die boven het veld verschijnt",
+        "placeholder": "Plaats tekst",
+        "placeholderPlaceholder": "Voer plaats tekst in",
+        "placeholderHelp": "Hint tekst die binnen het veld verschijnt",
+        "description": "Beschrijving",
+        "descriptionPlaceholder": "Voer veldbeschrijving in (getoond onder het veld)",
+        "descriptionHelp": "Aanvullende hulpttekst getoond onder het veld",
+        "required": "Vereist veld",
+        "requiredHelp": "Gebruikers moeten dit veld invullen om het formulier te verzenden"
+      },
+      "validation": {
+        "title": "Validatie",
+        "minLength": "Minimale lengte",
+        "minLengthPlaceholder": "Min karakters",
+        "minLengthHelp": "Minimaal aantal karakters vereist",
+        "maxLength": "Maximale lengte",
+        "maxLengthPlaceholder": "Max karakters",
+        "maxLengthHelp": "Maximum aantal karakters toegestaan",
+        "pattern": "Patroon (Regex)",
+        "patternPlaceholder": "Reguliere expressie",
+        "patternHelp": "Reguliere expressie patroon voor validatie",
+        "minValue": "Minimale waarde",
+        "minValuePlaceholder": "Min waarde",
+        "minValueHelp": "Minimaal numerieke waarde toegestaan",
+        "maxValue": "Maximale waarde",
+        "maxValuePlaceholder": "Max waarde",
+        "maxValueHelp": "Maximum numerieke waarde toegestaan"
+      },
+      "errorMessages": {
+        "title": "Aangepaste foutberichten",
+        "requiredFieldMessage": "Vereist veldbericht",
+        "requiredFieldPlaceholder": "Dit veld is vereist",
+        "minLengthMessage": "Foutbericht min lengte",
+        "minLengthPlaceholder": "Moet ten minste {count} karakters zijn",
+        "maxLengthMessage": "Foutbericht voor maximale lengte",
+        "maxLengthPlaceholder": "Mag niet meer zijn dan {count} tekens",
+        "patternMessage": "Foutbericht voor patroon",
+        "patternPlaceholder": "Voer een geldige indeling in",
+        "emailMessage": "Foutbericht voor e-mail",
+        "emailPlaceholder": "Voer een geldig e-mailadres in",
+        "minValueMessage": "Foutbericht voor minimale waarde",
+        "minValuePlaceholder": "Moet ten minste {value} zijn",
+        "maxValueMessage": "Foutbericht voor maximale waarde",
+        "maxValuePlaceholder": "Mag niet meer zijn dan {value}",
+        "invalidNumberMessage": "Foutbericht voor ongeldig nummer",
+        "invalidNumberPlaceholder": "Voer een geldig nummer in"
+      },
+      "options": {
+        "title": "Opties",
+        "addOptionAria": "Voeg nieuwe optie toe",
+        "addOption": "Voeg optie toe",
+        "optionPlaceholder": "Optie {index}",
+        "removeOptionAria": "Verwijder optie {index}",
+        "none": "Nog geen opties toegevoegd",
+        "or": "OF",
+        "orAria": "of",
+        "fetchFromApi": "Ophalen van API",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "API-eindpunt om opties van op te halen",
+        "valueKeyPlaceholder": "Waarde sleutel (bijv. id)",
+        "valueKeyHelp": "Sleutel voor optie waarden",
+        "labelKeyPlaceholder": "Label sleutel (bijv. naam)",
+        "labelKeyHelp": "Sleutel voor optie labels",
+        "apiGuidanceTitle": "API-gegevenshandleiding:",
+        "apiGuidanceIntro": "Dit veld zal opties ophalen van het API-eindpunt:",
+        "apiShouldReturn": "De API moet het volgende retourneren:",
+        "apiType1Hint": "(array van strings)",
+        "apiType2Hint": "(array van objecten)",
+        "apiType3Hint": "(object met opties array)",
+        "apiType4Hint": "(aangepaste sleutels)",
+        "apiCustomKeysHelp": "U kunt aangepaste sleutels hierboven opgeven om uw API-gegevens te mappen.",
+        "apiValueLabelHelp": "Elke optie moet een",
+        "apiValueLabelHelpOr": "eigenschap (of uw aangepaste sleutel) hebben.",
+        "apiValueLabelHelpSuffix": "is optioneel."
+      },
+      "prepopulation": {
+        "title": "Voorpopulatie",
+        "unknownError": "Onbekende fout",
+        "enabled": "Voorpopulatie inschakelen",
+        "enabledHelp": "Dit veld automatisch vullen met bestaande gegevens",
+        "dataSource": "Gegevensbron",
+        "sources": {
+          "url": "URL-parameters",
+          "api": "Externe API",
+          "profile": "Gebruikersprofiel",
+          "previous": "Vorige inzending"
+        },
+        "urlParamName": "URL-parameternaam",
+        "urlParamPlaceholder": "bijv. naam, e-mail, telefoon",
+        "urlParamHelp": "De parameternaam om uit de URL-querystring te halen",
+        "fallbackValue": "Fallback-waarde",
+        "fallbackValuePlaceholder": "Standaardwaarde als parameter ontbreekt",
+        "fallbackValueHelp": "Standaardwaarde om te gebruiken als de URL-parameter ontbreekt",
+        "overwriteExisting": "Bestaande gegevens overschrijven",
+        "overwriteExistingHelp": "Gebruikersinvoer vervangen door vooringevulde waarde",
+        "generatePreviewAria": "Preview-URL genereren",
+        "generatePreview": "Preview-URL genereren",
+        "previewUrlLabel": "Preview-URL:",
+        "previewUrlHelp": "Deze URL zal het veld voorpopuleren met \"Voorbeeld {label}\"",
+        "apiEndpoint": "API-eindpunt",
+        "apiEndpointPlaceholder": "https://api.example.com/user-data",
+        "apiEndpointHelp": "Het API-eindpunt om gegevens van op te halen",
+        "httpMethod": "HTTP-methode",
+        "requestHeaders": "Verzoekheaders (JSON)",
+        "requestHeadersHelp": "JSON-object dat HTTP-headers voor het API-verzoek bevat",
+        "testApiAria": "API-eindpunt testen",
+        "testApi": "API-eindpunt testen",
+        "comingSoonLabel": "Binnenkort:",
+        "profileComingSoon": "Voorpopulatie van gebruikersprofiel zal beschikbaar zijn in een toekomstige update.",
+        "previousComingSoon": "Voorpopulatie van vorige inzending zal beschikbaar zijn in een toekomstige update.",
+        "toasts": {
+          "missingUrlParam": "Voer eerst een URL-parameternaam in",
+          "previewUrlCopied": "Preview-URL gekopieerd naar klembord!",
+          "previewUrlCopyFailed": "Kon niet kopiëren preview URL",
+          "missingApiEndpoint": "Voer eerst een API-eindpunt in",
+          "apiReachable": "API-eindpunt is bereikbaar!",
+          "apiTestFailedStatus": "API-test mislukt: {status} {statusText}",
+          "apiTestFailedError": "API-test mislukt: {error}"
+        }
+      },
+      "date": {
+        "title": "Datumveldinstellingen",
+        "minDate": "Minimale datum",
+        "selectMinDate": "Selecteer minimale datum",
+        "maxDate": "Maximale datum",
+        "selectMaxDate": "Selecteer maximale datum",
+        "defaultDate": "Standaarddatum",
+        "selectDefaultDate": "Selecteer standaarddatum"
+      },
+      "number": {
+        "title": "Getalveldinstellingen",
+        "minValue": "Minimale waarde",
+        "noMinimum": "Geen minimum",
+        "minValueHelp": "Minimaal numerieke waarde toegestaan",
+        "maxValue": "Maximale waarde",
+        "noMaximum": "Geen maximum",
+        "maxValueHelp": "Maximum numerieke waarde toegestaan",
+        "stepSize": "Stapgrootte",
+        "stepSizeHelp": "Stapgrootte voor verhogen/verlagen van het getal",
+        "defaultValue": "Standaardwaarde",
+        "noDefault": "Geen standaard",
+        "defaultValueHelp": "Voorgevulde waarde wanneer het formulier laadt"
+      },
+      "radio": {
+        "title": "Quizinstellingen",
+        "enableQuizQuestion": "Inschakelen als quizvraag",
+        "correctAnswer": "Correct antwoord",
+        "correctAnswerPlaceholder": "Selecteer het correcte antwoord",
+        "points": "Punten voor correct antwoord",
+        "showCorrectAnswer": "Toon correct antwoord na indienen",
+        "explanation": "Uitleg (optioneel)",
+        "explanationPlaceholder": "Leg uit waarom dit het correcte antwoord is..."
+      },
+      "address": {
+        "title": "Adresveldinstellingen",
+        "requiredLines": "Vereiste adresregels",
+        "requiredLinesPlaceholder": "bijv. 2 (Adresregel 1 & Stad vereist)",
+        "requiredLinesHelp": "Aantal adresregels dat moet worden ingevuld (1-5)",
+        "customErrorMessage": "Aangepaste foutmelding",
+        "customErrorPlaceholder": "Vul alle vereiste adresvelden in",
+        "customErrorHelp": "Aangepaste foutmelding getoond wanneer vereiste adresvelden onvolledig zijn"
+      },
+      "phone": {
+        "title": "Telefoonveldinstellingen",
+        "pattern": "Aangepast regex-patroon",
+        "patternPlaceholder": "bijv. ^\\+?[0-9]{10,15}$",
+        "patternHelp": "Regelmatig expressiepatroon voor telefoonnummervalidatie",
+        "errorMessage": "Aangepaste foutmelding",
+        "errorMessagePlaceholder": "Voer een geldig telefoonnummer in",
+        "errorMessageHelp": "Aangepaste foutmelding getoond wanneer telefoonvalidatie mislukt"
+      },
+      "statement": {
+        "title": "Tekstveldinstellingen",
+        "heading": "Koptekst",
+        "headingPlaceholder": "Voer koptekst in",
+        "headingHelp": "Hoofdkoptekst voor de tekst",
+        "description": "Beschrijving",
+        "descriptionPlaceholder": "Voer tekstbeschrijving in",
+        "descriptionHelp": "Gedetailleerde beschrijving voor de tekst",
+        "alignment": "Uitlijning",
+        "alignmentPlaceholder": "Selecteer uitlijning",
+        "alignLeft": "Links",
+        "alignCenter": "Centraal",
+        "alignRight": "Rechts",
+        "alignmentHelp": "Tekstuitlijning voor de tekst",
+        "size": "Grootte",
+        "sizePlaceholder": "Selecteer grootte",
+        "sizeSmall": "Klein",
+        "sizeMedium": "Middelmatig",
+        "sizeLarge": "Groot",
+        "sizeHelp": "Lettergrootte voor de tekst"
+      },
+      "slider": {
+        "title": "Schuifregelaarinstellingen",
+        "mode": "Schuifregelaarmodus",
+        "modePlaceholder": "Selecteer schuifregelaarmodus",
+        "modeSingle": "Enkele waarde",
+        "modeRange": "Bereik (min + max)",
+        "modeHelp": "Kies één waarde of laat gebruikers een minimum en maximum selecteren",
+        "min": "Minimale waarde",
+        "minHelp": "Minimale waarde voor de schuifregelaar",
+        "max": "Maximale waarde",
+        "maxHelp": "Maximale waarde voor de schuifregelaar",
+        "step": "Stapgrootte",
+        "stepHelp": "Stapgrootte voor verhogen/verlagen van de schuifregelaar",
+        "defaultMin": "Standaardminimum",
+        "defaultMinHelp": "Voorgevulde minimale waarde wanneer het formulier laadt",
+        "defaultMax": "Standaardmaximum",
+        "defaultMaxHelp": "Voorgevulde maximale waarde wanneer het formulier laadt",
+        "defaultValue": "Standaardwaarde",
+        "defaultValueHelp": "Voorgevulde waarde wanneer het formulier laadt"
+      },
+      "text": {
+        "title": "Tekstveldinstellingen",
+        "maxLength": "Maximale lengte",
+        "maxLengthPlaceholder": "Geen limiet",
+        "maxLengthHelp": "Maximum aantal tekens toegestaan (1-1000)",
+        "minLength": "Minimale lengte",
+        "minLengthPlaceholder": "Geen minimum",
+        "minLengthHelp": "Minimum aantal tekens vereist (0-1000)"
+      },
+      "checkbox": {
+        "title": "Selectievakje Opties",
+        "options": "Opties",
+        "addOptionPlaceholder": "Toevoegen",
+        "addOptionAria": "Selectievakje optie toevoegen",
+        "optionsHelp": "Selectievakje opties toevoegen die gebruikers kunnen selecteren",
+        "removeOptionAria": "Verwijder optie {index}",
+        "allowMultiple": "Meerdere selectie toestaan",
+        "allowMultipleHelp": "Als ingeschakeld, kunnen gebruikers meer dan één optie selecteren. Als uitgeschakeld, kan alleen één optie worden geselecteerd."
+      },
+      "link": {
+        "title": "Linkveldinstellingen",
+        "pattern": "Aangepast regex-patroon",
+        "patternPlaceholder": "bijv. ^https?://.+$",
+        "patternHelp": "Reguliere expressiepatroon voor URL-validatie",
+        "errorMessage": "Aangepaste foutmelding",
+        "errorMessagePlaceholder": "Voer een geldige URL in",
+        "errorMessageHelp": "Aangepast foutbericht weergegeven wanneer URL-validatie mislukt"
+      },
+      "poll": {
+        "title": "Poll-instellingen",
+        "pollOptions": "Poll-opties",
+        "addOptionPlaceholder": "Toevoegen",
+        "addOptionAria": "Poll-optie toevoegen",
+        "optionsHelp": "Poll-opties toevoegen waar gebruikers op kunnen stemmen",
+        "editOptionAria": "Poll-optie {index} bewerken",
+        "removeOptionAria": "Poll-optie {index} verwijderen",
+        "orAria": "of scheidingsteken",
+        "or": "OF",
+        "fetchFromApi": "Opties ophalen uit API",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "API-eindpunt om poll-opties uit op te halen",
+        "valueKeyPlaceholder": "Waarde sleutel (bijv. id)",
+        "valueKeyHelp": "Sleutel voor optie waarden",
+        "labelKeyPlaceholder": "Label sleutel (bijv. naam)",
+        "labelKeyHelp": "Sleutel voor optie labels",
+        "apiGuidanceTitle": "API-gegevenshandleiding:",
+        "apiGuidanceIntro": "Dit veld zal opties ophalen van het API-eindpunt:",
+        "apiShouldReturn": "De API moet het volgende retourneren:",
+        "apiType1Hint": "(array van strings)",
+        "apiType2Hint": "(array van objecten)",
+        "apiType3Hint": "(object met opties array)",
+        "apiType4Hint": "(aangepaste sleutels)",
+        "apiCustomKeysHelp": "U kunt aangepaste sleutels hierboven opgeven om uw API-gegevens te mappen.",
+        "apiValueLabelHelp": "Elke optie moet een",
+        "apiValueLabelHelpOr": "eigenschap (of uw aangepaste sleutel) hebben.",
+        "apiValueLabelHelpSuffix": "is optioneel.",
+        "showResults": "Resultaten weergeven na stemmen",
+        "showResultsHelp": "Poll-resultaten weergeven aan gebruikers nadat ze hebben gestemd"
+      },
+      "social": {
+        "title": "Sociale platforms",
+        "availablePlatforms": "Beschikbare platforms",
+        "platforms": {
+          "github": "GitHub",
+          "twitter": "Twitter",
+          "linkedin": "LinkedIn",
+          "facebook": "Facebook",
+          "instagram": "Instagram",
+          "youtube": "YouTube",
+          "website": "Website"
+        },
+        "platformsHelp": "Selecteer welke sociale platforms in het veld moeten worden opgenomen",
+        "customLinks": "Aangepaste links",
+        "labelPlaceholder": "Label",
+        "placeholderPlaceholder": "Plaatsnaam (optioneel)",
+        "removeCustomLinkAria": "Aangepaste link {index} verwijderen",
+        "addCustomLinkAria": "Aangepaste link toevoegen",
+        "addCustomLink": "Aangepaste link toevoegen",
+        "customLinksHelp": "Aangepaste sociale links toevoegen met aangepaste labels en plaatsnamen"
+      },
+      "emailValidation": {
+        "title": "E-mailvalidatie",
+        "removeBlockedDomainAria": "{domain} verwijderen uit geblokkeerde domeinen",
+        "removeAllowedDomainAria": "{domain} verwijderen uit toegestane domeinen",
+        "autoCompleteDomain": "Domein automatisch aanvullen",
+        "autoCompletePlaceholder": "bijv. business.com",
+        "setAutoCompleteAria": "Domein automatisch aanvullen",
+        "set": "Instellen",
+        "removeAutoCompleteAria": "{domain} domein verwijderen",
+        "autoCompleteHelp": "Gebruikers kunnen alleen hun gebruikersnaam invoeren en het domein wordt automatisch aangevuld",
+        "allowedDomains": "Toegestane domeinen",
+        "allowedPlaceholder": "bijv. company.com",
+        "addAllowedDomainAria": "Toegestaan domein toevoegen",
+        "allowedHelp": "Alleen e-mails van deze domeinen worden geaccepteerd",
+        "blockedDomains": "Geblokkeerde domeinen",
+        "blockedPlaceholder": "bijv. temp-mail.org",
+        "addBlockedDomainAria": "Geblokkeerd domein toevoegen",
+        "blockedHelp": "E-mails van deze domeinen worden afgewezen (tijdelijke e-mailservices worden standaard geblokkeerd)",
+        "requireBusinessEmail": "Zakelijke e-mail vereist",
+        "requireBusinessEmailHelp": "Alleen zakelijke domeinen toestaan (blokkeert Gmail, Yahoo, enz.)",
+        "customValidationMessage": "Aangepast validatiebericht",
+        "customValidationPlaceholder": "Aangepast foutbericht voor e-mailvalidatie",
+        "customValidationHelp": "Laat leeg om standaardberichten te gebruiken"
+      },
+      "file": {
+        "title": "Bestand uploadinstellingen",
+        "bytesUnit": "Bytes",
+        "maxFiles": "Maximum aantal bestanden",
+        "maxFilesPlaceholder": "10",
+        "maxFilesHelp": "Maximum aantal bestanden dat gebruikers kunnen uploaden (1-50)",
+        "maxFileSize": "Maximale bestandsgrootte",
+        "maxFileSizePlaceholder": "50",
+        "mbUnit": "MB",
+        "setMaxSizePresetAria": "Stel maximale bestandsgrootte in op {size}",
+        "currentSize": "Huidig: {size}",
+        "allowedFileTypes": "Toegestane bestandstypen",
+        "quickSelect": "Snel selecteren:",
+        "commonTypes": {
+          "images": "Afbeeldingen",
+          "documents": "Documenten",
+          "spreadsheets": "Spreadsheets",
+          "videos": "Videos",
+          "audio": "Audio",
+          "archives": "Archieven"
+        },
+        "toggleFileTypeAria": "Schakel {type} bestandstypen in",
+        "customExtensions": "Aangepaste bestandsextensies",
+        "customExtensionsPlaceholder": "bijv. txt, csv, json",
+        "addCustomExtensionAria": "Voeg aangepaste bestandsextensie toe",
+        "customExtensionsHelp": "Voeg aangepaste bestandsextensies toe (zonder de punt)",
+        "selectedExtensions": "Geselecteerde extensies:",
+        "removeExtensionAria": "Verwijder {extension} bestandsextensie",
+        "htmlAccept": "HTML Accept-attribuut (alleen-lezen)",
+        "htmlAcceptHelp": "Dit wordt automatisch gegenereerd op basis van uw selecties hierboven",
+        "helpText": "Hulptekst",
+        "helpTextPlaceholder": "Aanvullende instructies voor gebruikers...",
+        "helpTextHelp": "Optionele instructies om gebruikers te helpen begrijpen welke bestanden moeten worden geüpload"
+      },
+      "scheduler": {
+        "title": "Planner-instellingen",
+        "provider": "Plannerprovider",
+        "providerPlaceholder": "Selecteer provider",
+        "providerHelp": "Kies uw voorkeursplannerplatform",
+        "calcomLink": "Cal.com Link",
+        "calendlyLink": "Calendly Link",
+        "tidycalLink": "TidyCal Link",
+        "schedulerLink": "Plannerlink",
+        "linkPlaceholder": "https://...",
+        "linkHelp": "Inbed-URL voor uw {provider} planner",
+        "buttonText": "Knoptekst voor kalenderopener",
+        "buttonTextPlaceholder": "bijv. Boek een oproep",
+        "buttonTextHelp": "Tekst weergegeven op de plannerknop",
+        "preview": "Voorbeeld",
+        "openScheduler": "Opener planner",
+        "previewHelp": "Klik om een voorbeeld te bekijken van hoe de planner eruit zal zien",
+        "previewModalTitle": "Plannervoorbeeld",
+        "iframeTitle": "Plannerinbed",
+        "closePreviewAria": "Sluit plannervoorbeeld",
+        "close": "Sluiten",
+        "providerCalcom": "Cal.com",
+        "providerCalendly": "Calendly",
+        "providerTidycal": "TidyCal"
+      },
+      "banner": {
+        "title": "Bannersettings",
+        "alertType": "Waarschuwingsstype",
+        "alertTypePlaceholder": "Selecteer waarschuwingsstype",
+        "warning": "Waarschuwing",
+        "error": "Fout",
+        "info": "Info",
+        "success": "Succes",
+        "alertTypeHelp": "Kies de visuele stijl en kleurenschema voor de banner",
+        "bannerTitle": "Titel",
+        "bannerTitlePlaceholder": "Rookvrij",
+        "bannerTitleHelp": "Hoofdtekst voor de banner",
+        "description": "Beschrijving",
+        "descriptionPlaceholder": "Onze accommodaties zijn strikt rookvrij...",
+        "descriptionHelp": "Gedetailleerde beschrijvingstext voor de banner"
+      },
+      "fieldGroup": {
+        "layoutTitle": "Lay-outinstellingen",
+        "layoutDirection": "Lay-outrichting",
+        "layoutHorizontal": "Horizontaal (naast elkaar)",
+        "layoutVertical": "Verticaal (gestapeld)",
+        "layoutDirectionHelp": "Hoe velden zijn gerangschikt binnen de groep",
+        "columns": "Aantal kolommen",
+        "columns2": "2 kolommen",
+        "columns3": "3 kolommen",
+        "columns4": "4 kolommen",
+        "columnsHelp": "Aantal kolommen voor horizontale lay-out",
+        "spacing": "Veldafstand",
+        "spacingCompact": "Compact",
+        "spacingNormal": "Normaal",
+        "spacingRelaxed": "Ontspannen",
+        "spacingHelp": "Ruimte tussen velden in de groep",
+        "groupFields": "Groep Velden ({count})",
+        "addFieldAria": "Voeg veld toe aan groep",
+        "addField": "Voeg veld toe",
+        "addFieldDialogTitle": "Voeg een veld toe",
+        "emptyStateTitle": "Geen velden in deze groep nog.",
+        "emptyStateDescription": "Voeg velden toe met behulp van de dropdown- of snelknoppen hierboven.",
+        "fieldFallback": "{type} Veld",
+        "settingsAria": "Instellingen voor {name} veld",
+        "removeAria": "Verwijder {name} veld",
+        "fieldLabel": "Veldlabel",
+        "fieldLabelPlaceholder": "Voer veldlabel in",
+        "fieldLabelHelp": "Label voor dit veld",
+        "placeholder": "Plaatshoudertekst",
+        "placeholderPlaceholder": "Voer plaats tekst in",
+        "placeholderHelp": "Plaatshoudertekst voor dit veld",
+        "required": "Vereist veld",
+        "requiredHelp": "Maak dit veld verplicht",
+        "advancedAria": "Schakel geavanceerde instellingen voor {name}",
+        "advanced": "Geavanceerde instellingen"
+      },
+      "rating": {
+        "title": "Beoordelingsinstellingen",
+        "starCount": "Aantal sterren",
+        "starCountHelp": "Aantal beoordelingssterren (1-10)",
+        "starSize": "Grootte van de ster",
+        "starSizeHelp": "Grootte van de beoordelingssterren (16-64px)",
+        "iconType": "Type pictogram",
+        "star": "Ster",
+        "heart": "Hart",
+        "iconTypeHelp": "Kies het type pictogram voor beoordelingen",
+        "iconColor": "Kleur van het pictogram",
+        "iconColorHelp": "Kleur van de beoordelingspictogrammen"
+      },
+      "tags": {
+        "title": "Tags-instellingen",
+        "maxTags": "Maximum aantal tags",
+        "maxTagsHelp": "Maximum aantal tags dat gebruikers kunnen toevoegen (minimaal 1)",
+        "allowDuplicates": "Sta dubbele tags toe",
+        "allowDuplicatesHelp": "Sta gebruikers toe om hetzelfde tag meerdere keren toe te voegen"
+      },
+      "textarea": {
+        "title": "Textarea-veldinstellingen",
+        "rows": "Aantal rijen",
+        "rowsHelp": "Initiële hoogte van het textarea (2-20 rijen)"
+      },
+      "time": {
+        "title": "Tijdveldinstellingen",
+        "showCurrentTimeButton": "Toon 'Stel huidige tijd in'-knop",
+        "showCurrentTimeButtonHelp": "Toon een knop om de huidige tijd automatisch in te stellen"
+      },
+      "email": {
+        "title": "E-mailveldinstellingen",
+        "allowedDomains": "Toegestane domeinen (komma-gescheiden)",
+        "allowedDomainsPlaceholder": "gmail.com, company.com",
+        "blockedDomains": "Geblokkeerde domeinen (komma-gescheiden)",
+        "blockedDomainsPlaceholder": "tempmail.com, spam.com",
+        "requireBusinessEmail": "Vereis alleen zakelijke e-mail",
+        "customValidationMessage": "Aangepast validatiebericht",
+        "customValidationPlaceholder": "Voer een geldig e-mailadres in"
+      }
+    },
+    "formSettings": {
+      "title": "Formulierinstellingen",
+      "exportSecure": "Exporteren (Veilig)",
+      "preparing": "Bezig...",
+      "saveFormFirstAccess": "Sla het formulier eerst op om toegang te krijgen tot de instellingen.",
+      "saveFormFirstExport": "Sla het formulier eerst op om het veilig te exporteren.",
+      "exportPrepareFailed": "Mislukt om veilige export voor te bereiden.",
+      "settingsSectionsAria": "Instellingen secties",
+      "goToSectionSettingsAria": "Ga naar {section} instellingen",
+      "sections": {
+        "basic": "Basisinformatie",
+        "limits": "Limieten",
+        "security": "Beveiliging",
+        "quiz": "Quiz & Scoren",
+        "branding": "Merken",
+        "notifications": "Meldingen",
+        "api": "API-toegang",
+        "webhooks": "Webhooks",
+        "design": "Ontwerp",
+        "metadata": "Metagegevens"
+      },
+      "search": {
+        "aria": "Zoekinstellingen",
+        "placeholder": "Zoekinstellingen…",
+        "resultsAria": "Zoekresultaten",
+        "noMatches": "Geen overeenkomsten",
+        "items": {
+          "basic-info-title": {
+            "label": "Basisinformatie"
+          },
+          "behavior-title": {
+            "label": "Formuliergedrag"
+          },
+          "rate-limit-title": {
+            "label": "Snelheidslimiet"
+          },
+          "response-limit-title": {
+            "label": "Antwoordlimiet"
+          },
+          "password-protection-title": {
+            "label": "Wachtwoordbeveiliging"
+          },
+          "duplicate-prevention-title": {
+            "label": "Voorkomen van duplicaten"
+          },
+          "profanity-filter-title": {
+            "label": "Vulkaanfilter"
+          },
+          "bot-protection-title": {
+            "label": "Botbeveiliging"
+          },
+          "branding-title": {
+            "label": "Merken"
+          },
+          "social-media-links-title": {
+            "label": "Sociale media-links"
+          },
+          "quiz-title": {
+            "label": "Quiz & Scoren"
+          },
+          "notifications-title": {
+            "label": "Meldingen"
+          },
+          "api-access-title": {
+            "label": "API-toegang"
+          },
+          "webhooks-title": {
+            "label": "Webhooks"
+          },
+          "design-title": {
+            "label": "Ontwerp"
+          },
+          "metadata-title": {
+            "label": "SEO"
+          },
+          "social-metadata-title": {
+            "label": "Social Metadata"
+          },
+          "search-engine-indexing-title": {
+            "label": "Indexering zoekmachine"
+          }
+        }
+      },
+      "defaults": {
+        "submitText": "Invoeren",
+        "notificationSubject": "Nieuw formulier ingediend",
+        "notificationMessage": "Je hebt een nieuwe inzending ontvangen op je formulier."
+      },
+      "common": {
+        "unsavedChanges": "Niet opgeslagen wijzigingen",
+        "reset": "Herstellen",
+        "save": "Opslaan",
+        "saved": "Opgeslagen",
+        "formIdRequiredToSaveSettings": "Formulier-ID is vereist om instellingen op te slaan",
+        "validValueBetween": "Voer een geldige waarde in tussen {min} en {max}",
+        "fillRequiredFields": "Vul alle vereiste velden in",
+        "requiredAria": "vereist",
+        "fieldRequired": "Dit veld is vereist"
+      },
+      "basicInfoSection": {
+        "ariaSettings": "Basisformulierinstellingen",
+        "basicTitle": "Basisinformatie",
+        "basicDescription": "Configureer de basisdetails van je formulier",
+        "internalTitleLabel": "Interne titel",
+        "internalTitleDescription": "Deze titel is alleen zichtbaar voor jou in het dashboard en de formulierbouwer",
+        "internalTitlePlaceholder": "Voer interne titel in voor je referentie...",
+        "publicTitleLabel": "Openbare titel",
+        "publicTitleDescription": "Deze titel wordt weergegeven aan gebruikers op het daadwerkelijke formulier. Laat leeg om de interne titel te gebruiken.",
+        "publicTitlePlaceholder": "Voer titel in om weer te geven aan gebruikers...",
+        "formDescriptionLabel": "Vormbeschrijving",
+        "formDescriptionPlaceholder": "Voer formulierbeschrijving in",
+        "submitButtonTextLabel": "Invoeren knoptekst",
+        "submitButtonTextPlaceholder": "Invoeren",
+        "successMessageLabel": "Succesbericht",
+        "successMessagePlaceholder": "Bedankt voor je inzending!",
+        "redirectUrlLabel": "Doorgestuurde URL (optioneel)",
+        "redirectUrlDescription": "URL om gebruikers door te sturen na succesvolle inzending",
+        "redirectUrlPlaceholder": "https://example.com/thank-you",
+        "basicActionsAria": "Basisinformatie-acties",
+        "saveBasicAria": "Sla basisinformatie op",
+        "saveBasicSuccess": "Basisinformatie succesvol opgeslagen",
+        "saveBasicFailed": "Kan basisinformatie niet opslaan",
+        "behaviorTitle": "Formuliergedrag",
+        "behaviorDescription": "Configureer hoe je formulier zich gedraagt en eruitziet voor gebruikers",
+        "hideHeaderLabel": "Verberg header",
+        "hideHeaderDescription": "Verbergt openbare titel en beschrijving in inbeds",
+        "rtlLabel": "Rechts-naar-links-modus",
+        "rtlDescription": "Toon formulier in RTL-modus (rechts-naar-links)",
+        "autoFocusLabel": "Automatisch eerste veld focussen",
+        "autoFocusDescription": "Automatisch focussen op het eerste veld wanneer formulier laadt",
+        "behaviorActionsAria": "Formuliergedragsacties",
+        "saveBehaviorAria": "Sla formuliergedragsinstellingen op",
+        "saveBehaviorSuccess": "Formuliergedragsinstellingen succesvol opgeslagen",
+        "saveBehaviorFailed": "Kan formuliergedragsinstellingen niet opslaan"
+      },
+      "passwordProtectionSection": {
+        "ariaSettings": "Instellingen voor wachtwoordbeveiliging",
+        "title": "Wachtwoordbeveiliging",
+        "description": "Beperk toegang tot je formulier met een wachtwoord",
+        "enableLabel": "Wachtwoordbeveiliging inschakelen",
+        "enableDescription": "Vereis dat gebruikers een wachtwoord invoeren om toegang te krijgen tot het formulier",
+        "passwordLabel": "Wachtwoord",
+        "passwordPlaceholder": "Voer wachtwoord voor formulier in",
+        "hidePasswordAria": "Wachtwoord verbergen",
+        "showPasswordAria": "Wachtwoord tonen",
+        "passwordDescription": "Gebruikers zullen dit wachtwoord moeten invoeren om toegang te krijgen tot het formulier",
+        "customMessageLabel": "Aangepast bericht",
+        "customMessagePlaceholder": "Voer aangepast bericht in voor wachtwoordprompt",
+        "customMessageDescription": "Bericht getoond aan gebruikers wanneer ze het wachtwoord moeten invoeren",
+        "currentConfiguration": "Huidige configuratie",
+        "summaryPrefix": "Wachtwoordbeveiliging is",
+        "enabled": "ingeschakeld",
+        "summarySuffix": ". Gebruikers zullen het wachtwoord moeten invoeren om toegang te krijgen tot het formulier.",
+        "disabledDescription": "Wachtwoordbeveiliging beperkt toegang tot je formulier door gebruikers te vereisen een wachtwoord in te voeren voordat ze het formulier kunnen bekijken en indienen.",
+        "actionsAria": "Wachtwoordbeveiligingsacties",
+        "saveAria": "Sla wachtwoordbeveiligingsinstellingen op",
+        "saved": "Wachtwoordbeveiligingsinstellingen succesvol opgeslagen",
+        "saveFailed": "Kan wachtwoordbeveiligingsinstellingen niet opslaan",
+        "defaultMessage": "Dit formulier is wachtwoordbeveiligd. Voer het wachtwoord in om door te gaan."
+      },
+      "duplicatePreventionSection": {
+        "ariaSettings": "Instellingen voor duplicatiepreventie",
+        "title": "Voorkomen van duplicaten",
+        "description": "Voorkom dat gebruikers hetzelfde formulier meerdere keren indienen",
+        "enableLabel": "Duplicatiepreventie inschakelen",
+        "enableDescription": "Voorkom dat gebruikers hetzelfde formulier meerdere keren indienen",
+        "preventionModeLabel": "Preventiemodus",
+        "oneTimeLabel": "Eénmalige inzending",
+        "oneTimeDescription": "Sta slechts één inzending per gebruiker toe, ooit",
+        "timeBasedLabel": "Tijdgebaseerde preventie",
+        "timeBasedDescription": "Voorkom dubbele inzendingen binnen een opgegeven tijdvenster",
+        "preventionStrategyLabel": "Preventiestrategie",
+        "selectStrategyPlaceholder": "Selecteer strategie",
+        "strategyCombinedLabel": "Gecombineerd (IP + E-mail + Sessie) - Meest veilig",
+        "strategyEmailLabel": "E-mailadres - Geschikt voor registratie",
+        "strategyIpLabel": "IP-adres - Eenvoudig en betrouwbaar",
+        "strategySessionLabel": "Sessie-ID - Gebaseerd op browser",
+        "strategyCombinedDescription": "Volg bij combinatie van IP, e-mail en sessie voor maximale nauwkeurigheid",
+        "strategyEmailDescription": "Volg bij e-mailadres (vereist e-mailveld in formulier)",
+        "strategyIpDescription": "Volg bij IP-adres alleen",
+        "strategySessionDescription": "Volg bij browser sessie",
+        "timeWindowLabel": "Tijdvenster (minuten)",
+        "timeWindowDescription": "Hoe lang om dubbele inzendingen te voorkomen",
+        "timeWindowPlaceholder": "1440",
+        "maxAttemptsLabel": "Maximaal aantal pogingen",
+        "maxAttemptsDescription": "Maximum aantal pogingen toegestaan binnen tijdvenster",
+        "maxAttemptsPlaceholder": "1",
+        "errorMessageLabel": "Foutbericht",
+        "errorMessageDescription": "Bericht getoond aan gebruikers wanneer ze proberen een dubbele inzending te doen",
+        "allowOverrideLabel": "Overschrijven toestaan",
+        "allowOverrideDescription": "Toestaan dat gebruikers de preventie omzeilen (niet aanbevolen)",
+        "currentConfiguration": "Huidige configuratie",
+        "currentSettings": "Huidige instellingen",
+        "summaryModeOneTime": "eenmalige inzending alleen",
+        "summaryModeTimeBased": "{maxAttempts} inzending(en) elke {timeWindow} minuten",
+        "summaryStrategyCombined": "IP + E-mail + Sessie",
+        "summaryStrategyEmail": "E-mailadres",
+        "summaryStrategyIp": "IP-adres",
+        "summaryStrategySession": "Sessie-ID",
+        "summarySentence": "{mode} met {strategy} tracking.",
+        "summaryOverrideEnabled": "Overschrijven is ingeschakeld.",
+        "disabledDescription": "Dubbele preventie helpt de gegevenskwaliteit te behouden door te voorkomen dat gebruikers hetzelfde formulier meerdere keren indienen. Kies tussen tijdgebaseerde preventie of eenmalige inzendingmodus.",
+        "actionsAria": "Acties voor dubbele preventie",
+        "saveAria": "Dubbele preventie-instellingen opslaan",
+        "saved": "Dubbele preventie-instellingen succesvol opgeslagen",
+        "saveFailed": "Kan dubbele preventie-instellingen niet opslaan",
+        "defaultMessageOneTime": "U hebt dit formulier al ingediend. Elke gebruiker kan slechts één keer indienen.",
+        "defaultMessageTimeBased": "U hebt dit formulier al ingediend. Wacht voordat u opnieuw indient."
+      },
+      "profanityFilterSection": {
+        "ariaSettings": "Instellingen voor obscene filter",
+        "title": "Vulkaanfilter",
+        "description": "Automatisch detecteren en filteren van ongepaste inhoud",
+        "enableLabel": "Obscene filter inschakelen",
+        "enableDescription": "Automatisch detecteren en filteren van ongepaste inhoud",
+        "filterModeLabel": "Filtermodus",
+        "strictModeOption": "Strenge modus - Inzendingen met obscene inhoud weigeren",
+        "replaceModeOption": "Vervangingsmodus - Obscene inhoud vervangen door sterretjes",
+        "customMessageLabel": "Aangepast bericht",
+        "customMessagePlaceholder": "Voer een aangepast bericht in om weer te geven wanneer obscene inhoud wordt gedetecteerd",
+        "customWordsTitle": "Aangepaste woorden om te filteren",
+        "whitelistedWordsTitle": "Goedgekeurde woorden",
+        "customWordsPlaceholder": "Voer woord(en) in om te filteren (komma-gescheiden voor meerdere)",
+        "whitelistPlaceholder": "Voer woord(en) in om goed te keuren (komma-gescheiden voor meerdere)",
+        "addWord": "Toevoegen",
+        "addFilteredWordAria": "Gefilterd woord toevoegen",
+        "addWhitelistedWordAria": "Goedgekeurd woord toevoegen",
+        "removeWordAria": "Verwijderen {word}",
+        "currentConfiguration": "Huidige configuratie",
+        "summaryPrefix": "Obscene filter is",
+        "enabled": "ingeschakeld",
+        "summaryIn": "in",
+        "strictMode": "strenge modus",
+        "replaceMode": "vervangingsmodus",
+        "summaryPeriod": ".",
+        "customWordsConfigured": "{count} aangepaste woorden geconfigureerd.",
+        "whitelistedWordsConfigured": "{count} goedgekeurde woorden.",
+        "disabledDescription": "Obscene filter helpt een schone en professionele omgeving te behouden door automatisch ongepaste inhoud in formulierinzendingen te detecteren en te filteren.",
+        "actionsAria": "Acties voor obscene filter",
+        "saveAria": "Instellingen voor obscene filter opslaan",
+        "saved": "Instellingen voor obscene filter succesvol opgeslagen",
+        "saveFailed": "Kan instellingen voor obscene filter niet opslaan"
+      },
+      "notificationsSection": {
+        "title": "Meldingen",
+        "description": "Configureer e-mailmeldingen voor nieuwe formulierinzendingen",
+        "enableLabel": "E-mailmeldingen",
+        "enableDescription": "E-mailmeldingen voor nieuwe inzendingen inschakelen",
+        "emailLabel": "Meldings-e-mail",
+        "emailPlaceholder": "eigenaar@e-mail.com",
+        "subjectLabel": "E-mailonderwerp",
+        "messageLabel": "E-mailbericht",
+        "customLinksLabel": "Aangepaste links",
+        "linkLabelPlaceholder": "Label",
+        "linkUrlPlaceholder": "https://example.com",
+        "removeLink": "Verwijderen",
+        "addLink": "Toevoegen",
+        "actionsAria": "Acties voor meldingsinstellingen",
+        "saveAria": "Meldingsinstellingen opslaan",
+        "saved": "Meldingsinstellingen succesvol opgeslagen",
+        "saveFailed": "Kan meldingsinstellingen niet opslaan"
+      },
+      "brandingSection": {
+        "title": "Merken",
+        "description": "Beheer Ikiform-branding en sociale media-links",
+        "showPoweredByLabel": "Toon \"Powered by Ikiform\"",
+        "showPoweredByDescription": "Toon een kleine vermelding in de footer",
+        "socialMediaLabel": "Sociale media-links",
+        "socialMediaDescription": "Schakel links naar je sociale profielen op het formulier in",
+        "platforms": {
+          "linkedin": {
+            "label": "LinkedIn",
+            "placeholder": "https://linkedin.com/in/username"
+          },
+          "twitter": {
+            "label": "X (Twitter)",
+            "placeholder": "https://x.com/username"
+          },
+          "youtube": {
+            "label": "YouTube",
+            "placeholder": "https://youtube.com/@channel"
+          },
+          "instagram": {
+            "label": "Instagram",
+            "placeholder": "https://instagram.com/username"
+          },
+          "facebook": {
+            "label": "Facebook",
+            "placeholder": "https://facebook.com/username"
+          },
+          "github": {
+            "label": "GitHub",
+            "placeholder": "https://github.com/username"
+          },
+          "website": {
+            "label": "Website",
+            "placeholder": "https://example.com"
+          }
+        },
+        "iconSizeLabel": "Icoongrootte",
+        "iconSizes": {
+          "small": "Klein",
+          "medium": "Middelmatig",
+          "large": "Groot"
+        },
+        "positionLabel": "Positie",
+        "positions": {
+          "footer": "Footer",
+          "header": "Header",
+          "both": "Beide"
+        },
+        "previewLabel": "Voorbeeld",
+        "disabledDescription": "Schakel sociale media-links in om je sociale profielen op je formulieren weer te geven.",
+        "actionsAria": "Branding instellingen acties",
+        "saveAria": "Bewaren branding instellingen",
+        "saved": "Branding instellingen succesvol opgeslagen",
+        "saveFailed": "Kan branding instellingen niet opslaan",
+        "authRequired": "Gebruikersauthenticatie vereist"
+      },
+      "metadataSection": {
+        "basicTitle": "Basis SEO",
+        "basicDescription": "Titels, beschrijvingen en canonieke URL",
+        "pageTitleLabel": "Paginatitel",
+        "pageTitlePlaceholder": "Voer paginatitel in (max 60 tekens)",
+        "metaDescriptionLabel": "Meta Beschrijving",
+        "metaDescriptionPlaceholder": "Voer meta beschrijving in (max 160 tekens)",
+        "characterCount": "{count}/{max} tekens",
+        "keywordsLabel": "Trefwoorden",
+        "keywordsPlaceholder": "Voer trefwoorden in, gescheiden door komma's",
+        "authorLabel": "Auteur",
+        "authorPlaceholder": "Voer auteursnaam in",
+        "canonicalUrlLabel": "Canonieke URL",
+        "canonicalUrlPlaceholder": "https://example.com/form",
+        "canonicalUrlDescription": "De voorkeurs-URL voor deze formulierpagina",
+        "basicActionsAria": "Basis SEO acties",
+        "saveBasicAria": "Bewaren basis SEO instellingen",
+        "basicSaved": "Basis SEO opgeslagen",
+        "basicSaveFailed": "Kan Basis SEO niet opslaan",
+        "socialTitle": "Social Metadata",
+        "socialDescription": "Open Graph en Twitter instellingen",
+        "ogTitleLabel": "Open Graph Titel",
+        "ogTitlePlaceholder": "Voer Open Graph titel in",
+        "ogTitleDescription": "Titel getoond wanneer gedeeld op Facebook, LinkedIn, etc.",
+        "ogDescriptionLabel": "Open Graph Beschrijving",
+        "ogDescriptionPlaceholder": "Voer Open Graph beschrijving in",
+        "ogDescriptionDescription": "Beschrijving getoond wanneer gedeeld op sociale media",
+        "ogImageLabel": "Open Graph Afbeeldings-URL",
+        "ogImagePlaceholder": "https://example.com/image.jpg",
+        "ogTypeLabel": "Open Graph Type",
+        "ogTypePlaceholder": "Selecteer Open Graph type",
+        "ogTypes": {
+          "website": "Website",
+          "article": "Artikel",
+          "profile": "Profiel",
+          "video": "Video"
+        },
+        "twitterCardLabel": "Twitter Kaart Type",
+        "twitterCardPlaceholder": "Selecteer Twitter kaart type",
+        "twitterCards": {
+          "summary": "Samenvatting",
+          "summaryLargeImage": "Samenvatting Grote Afbeelding",
+          "app": "App",
+          "player": "Speler"
+        },
+        "twitterTitleLabel": "Twitter Titel",
+        "twitterTitlePlaceholder": "Voer Twitter titel in",
+        "twitterImageLabel": "Twitter Afbeeldings-URL",
+        "twitterImagePlaceholder": "https://example.com/twitter-image.jpg",
+        "twitterDescriptionLabel": "Twitter Beschrijving",
+        "twitterDescriptionPlaceholder": "Voer Twitter beschrijving in",
+        "twitterSiteLabel": "Twitter Site",
+        "twitterSitePlaceholder": "@yourhandle",
+        "twitterCreatorLabel": "Twitter Maker",
+        "twitterCreatorPlaceholder": "@creatorhandle",
+        "socialActionsAria": "Sociale metadata acties",
+        "saveSocialAria": "Bewaren sociale metadata instellingen",
+        "socialSaved": "Sociale metadata opgeslagen",
+        "socialSaveFailed": "Kan sociale metadata niet opslaan",
+        "indexingTitle": "Indexering zoekmachine",
+        "indexingDescription": "Beheers hoe zoekmachines dit formulier crawlen",
+        "indexingBehaviorLabel": "Indexering zoekmachine",
+        "indexingBehaviorPlaceholder": "Selecteer indexeringsgedrag",
+        "indexingOptions": {
+          "index": "Indexeren en volgen (standaard)",
+          "noindex": "Geen index",
+          "nofollow": "Geen volgen",
+          "noindexNofollow": "Geen index, geen volgen"
+        },
+        "indexingBehaviorDescription": "Beheert of zoekmachines deze pagina kunnen indexeren en volgen",
+        "switches": {
+          "noArchive": "Geen archief",
+          "noSnippet": "Geen snippet",
+          "noImageIndex": "Geen afbeeldingsindex",
+          "noTranslate": "Geen vertaling"
+        },
+        "indexingActionsAria": "Indexeringsacties",
+        "saveIndexingAria": "Indexeringsinstellingen opslaan",
+        "indexingSaved": "Indexeringsinstellingen opgeslagen",
+        "indexingSaveFailed": "Kan indexeringsinstellingen niet opslaan",
+        "updatedAnnouncement": "Metagegevens bijgewerkt",
+        "authRequired": "Gebruikersauthenticatie vereist"
+      },
+      "rateLimitSection": {
+        "title": "Snelheidslimiet",
+        "description": "Beperk het aantal inzendingen om spam en misbruik te voorkomen",
+        "ariaSettings": "Instellingen voor tariefbeperking",
+        "enableLabel": "Tariefbeperking inschakelen",
+        "enableDescription": "Beperk inzendingen van hetzelfde IP-adres",
+        "maxSubmissionsLabel": "Maximaal aantal inzendingen",
+        "maxSubmissionsDescription": "Maximaal aantal inzendingen toegestaan",
+        "timeWindowLabel": "Tijdvenster (minuten)",
+        "timeWindowDescription": "Tijdperk voor het tellen van inzendingen",
+        "blockDurationLabel": "Blokkeerduur (minuten)",
+        "blockDurationDescription": "Hoe lang blokkeren nadat de limiet is bereikt",
+        "messageLabel": "Bericht getoond wanneer tarief limiet wordt overschreden",
+        "messagePlaceholder": "Te veel inzendingen. Probeer het later opnieuw.",
+        "messageDescription": "Aangepast bericht getoond wanneer de tarief limiet wordt overschreden",
+        "currentConfiguration": "Huidige configuratie",
+        "summarySentence": "Sta {maxSubmissions} inzendingen toe elke {timeWindow} minuten. Blokkeer voor {blockDuration} minuten wanneer overschreden.",
+        "summaryExample": "Voorbeeld: Als een gebruiker {maxSubmissions} keer in {timeWindow} minuten inzendt, wordt hij voor {blockDuration} minuten geblokkeerd.",
+        "disabledDescription": "Tariefbeperking helpt uw formulier beschermen tegen spam en misbruik door het aantal inzendingen te controleren.",
+        "actionsAria": "Acties voor tariefbeperking",
+        "saveAria": "Instellingen voor tariefbeperking opslaan",
+        "saved": "Instellingen voor tariefbeperking succesvol opgeslagen",
+        "saveFailed": "Kan instellingen voor tariefbeperking niet opslaan",
+        "defaultMessage": "Te veel inzendingen. Probeer het later opnieuw."
+      },
+      "responseLimitSection": {
+        "title": "Antwoordlimiet",
+        "description": "Stop met het accepteren van inzendingen na een bepaalde totaal telling",
+        "enableLabel": "Antwoordlimiet inschakelen",
+        "enableDescription": "Beperk het totale aantal inzendingen dat dit formulier accepteert",
+        "maxResponsesLabel": "Maximaal aantal antwoorden",
+        "maxResponsesDescription": "Beperk het totale aantal antwoorden dat dit formulier kan accepteren. Zodra de limiet is bereikt, worden nieuwe inzendingen geblokkeerd.",
+        "limitReachedLabel": "Bericht wanneer limiet wordt bereikt",
+        "limitReachedDescription": "Bericht getoond nadat de totale antwoordlimiet is bereikt",
+        "limitReachedPlaceholder": "Dit formulier accepteert geen inzendingen meer.",
+        "disabledDescription": "Houd dit uitgeschakeld als uw formulier moet blijven accepteren zonder een limiet.",
+        "actionsAria": "Acties voor antwoordlimiet",
+        "saveAria": "Instellingen voor antwoordlimiet opslaan",
+        "saved": "Antwoordlimiet succesvol opgeslagen",
+        "saveFailed": "Kan antwoordlimiet niet opslaan",
+        "defaultMessage": "Dit formulier accepteert geen inzendingen meer."
+      },
+      "botProtectionSection": {
+        "title": "Botbeveiliging",
+        "description": "Automatisch detecteren en blokkeren van geautomatiseerde inzendingen",
+        "ariaSettings": "Instellingen voor botbescherming",
+        "enableLabel": "Botbescherming inschakelen",
+        "enableDescription": "Voeg anti-bot controles toe voor formulierinzendingen",
+        "detectionMessageLabel": "Detectieberichten",
+        "detectionMessagePlaceholder": "Inzending geblokkeerd vanwege verdachte botactiviteit.",
+        "detectionMessageDescription": "Bericht getoond wanneer een geautomatiseerde inzending wordt geblokkeerd",
+        "currentConfiguration": "Huidige configuratie",
+        "statusEnabledPrefix": "Botbescherming is momenteel",
+        "enabled": "ingeschakeld",
+        "statusEnabledSuffix": "voor dit formulier.",
+        "vercelTitle": "Vercel-bescherming",
+        "vercelDescription": "Als geïmplementeerd op Vercel, kunnen aanvullende anti-misbruik controles van toepassing zijn.",
+        "disabledDescription": "Botbescherming inschakelen om spam van geautomatiseerde tools en gescripte verkeer te verminderen.",
+        "actionsAria": "Acties voor botbescherming",
+        "saveAria": "Instellingen voor botbescherming opslaan",
+        "saved": "Instellingen voor botbescherming succesvol opgeslagen",
+        "saveFailed": "Kan instellingen voor botbescherming niet opslaan"
+      },
+      "quizSection": {
+        "title": "Quiz & Scoren",
+        "description": "Configureer quizgedrag en scoreregels",
+        "ariaSettings": "Quizinstellingen",
+        "enableLabel": "Quizmodus inschakelen",
+        "enableDescription": "Schakel quizfuncties zoals scoren en resultaatberichten in",
+        "passingScoreLabel": "Slaagscore (%)",
+        "passingScoreDescription": "Stel het minimumpercentage vereist om te slagen",
+        "timeLimitLabel": "Tijdslimiet (minuten)",
+        "timeLimitDescription": "Optionele tijdslimiet voor quiz voltooiing",
+        "timeLimitPlaceholder": "Laat leeg voor geen limiet",
+        "showScoreLabel": "Toon Score aan Gebruiker",
+        "showScoreDescription": "Toon de score van de gebruiker na het indienen van het formulier",
+        "showCorrectAnswersLabel": "Toon Juiste Antwoorden",
+        "showCorrectAnswersDescription": "Toon juiste antwoorden en uitleg na het indienen",
+        "allowRetakeLabel": "Sta Herhaling toe",
+        "allowRetakeDescription": "Laat gebruikers de quiz opnieuw doen om hun score te verbeteren",
+        "customMessagesLabel": "Aangepaste Resultaatberichten",
+        "successMessageLabel": "Succesbericht",
+        "successMessagePlaceholder": "Geweldig werk! Je hebt de quiz gehaald.",
+        "improvementMessageLabel": "Verbeteringsbericht",
+        "improvementMessagePlaceholder": "Bekijk en probeer opnieuw.",
+        "messagePlaceholderHelp": "Gebruik {score}, {percentage}, {total} als tijdelijke aanduidingen",
+        "actionsAria": "Quiz acties",
+        "saveAria": "Bewaren quiz instellingen",
+        "saved": "Quiz instellingen succesvol opgeslagen",
+        "savedToast": "Quiz instellingen opgeslagen",
+        "saveFailed": "Kon quiz instellingen niet opslaan"
+      },
+      "apiSection": {
+        "title": "API-toegang",
+        "description": "Schakel in om inzendingen via API-eindpunt toe te staan",
+        "authRequired": "Gebruikersauthenticatie vereist",
+        "enableSupportLabel": "Inschakelen API-ondersteuning",
+        "enableSupportDescription": "Inschakelen externe inzendingen via een beveiligde API-sleutel.",
+        "apiEndpointLabel": "API-eindpunt",
+        "copyEndpointAria": "Kopieer API-eindpunt",
+        "endpointCopied": "API-eindpunt gekopieerd",
+        "apiKeyLabel": "API-sleutel",
+        "apiKeySecretHint": "Houd deze sleutel geheim. Iedereen met deze sleutel kan naar dit formulier inzenden.",
+        "generateApiKey": "Genereer API-sleutel",
+        "regenerateKey": "Regenereer sleutel",
+        "revokeKey": "Intrekken sleutel",
+        "generating": "Bezig met genereren...",
+        "revoking": "Bezig met intrekken...",
+        "copyApiKeyAria": "Kopieer API-sleutel",
+        "showApiKeyAria": "Toon API-sleutel",
+        "hideApiKeyAria": "Verberg API-sleutel",
+        "keyCopied": "API-sleutel gekopieerd",
+        "keyGenerated": "API-sleutel gegenereerd",
+        "keyGenerateFailed": "Kon API-sleutel niet genereren",
+        "keyRevoked": "API-sleutel ingetrokken",
+        "keyRevokeFailed": "Kon API-sleutel niet intrekken",
+        "showCodeExamples": "Toon code voorbeelden",
+        "hideCodeExamples": "Verberg code voorbeelden",
+        "javascriptNodeLabel": "JavaScript / Node.js",
+        "sampleName": "Jane Doe",
+        "sampleEmail": "jane@example.com",
+        "sampleMessage": "Hallo vanuit API",
+        "sampleValue": "Voorbeeldwaarde",
+        "copyCodeAria": "Kopieer voorbeeldcode",
+        "downloadCodeAria": "Download voorbeeldcode",
+        "codeCopied": "Voorbeeldcode gekopieerd",
+        "codeDownloaded": "Voorbeeldcode gedownload",
+        "betaBadge": "BETA",
+        "integrationRateLimiting": "Snelheidslimiet",
+        "integrationRateLimitingDescription": "Bescherm je eindpunt tegen spam uitbarstingen.",
+        "integrationResponseLimits": "Antwoordlimieten",
+        "integrationResponseLimitsDescription": "Beperk totaal aantal aanvaarde inzendingen.",
+        "integrationDuplicatePrevention": "Dubbele inzendingen voorkomen",
+        "integrationDuplicatePreventionDescription": "Verminder herhaalde inzendingen van dezelfde gebruiker.",
+        "integrationProfanityFilter": "Grof taal filter",
+        "integrationProfanityFilterDescription": "Blockeer of ontsmet ongepaste inhoud.",
+        "emptyStateDescription": "Inschakelen API-ondersteuning om een beveiligde API-sleutel te genereren.",
+        "actionsAria": "API-toegang acties",
+        "saveAria": "Bewaren API-instellingen",
+        "resetAria": "Reset API-instellingen",
+        "settingsSaved": "API-instellingen succesvol opgeslagen",
+        "settingsSaveFailed": "Kon API-instellingen niet opslaan"
+      },
+      "webhooks": {
+        "panel": {
+          "endpointsTitle": "Webhook Eindpunten",
+          "endpointsDescription": "Stuur inzendingen naar externe diensten.",
+          "addWebhook": "Toevoegen Webhook"
+        },
+        "list": {
+          "emptyState": "Geen webhooks geconfigureerd. Voeg je eerste webhook toe om formulierinzendingen te ontvangen.",
+          "active": "Actief",
+          "inactive": "Inactief",
+          "edit": "Bewerken",
+          "delete": "Verwijderen",
+          "test": "Testen",
+          "viewLogs": "Bekijk logs",
+          "events": {
+            "formSubmitted": "Formulier ingediend",
+            "formViewed": "Formulier weergegeven",
+            "formStarted": "Formulier gestart"
+          }
+        },
+        "hook": {
+          "fetchFailed": "Kan webhooks niet ophalen",
+          "created": "Webhook gemaakt met succes",
+          "createFailed": "Kan webhook niet maken",
+          "updated": "Webhook bijgewerkt met succes",
+          "updateFailed": "Kan webhook niet bijwerken",
+          "deleted": "Webhook verwijderd met succes",
+          "deleteFailed": "Kan webhook niet verwijderen"
+        },
+        "formModal": {
+          "addTitle": "Webhook toevoegen",
+          "editTitle": "Webhook bewerken",
+          "stepsAria": "Webhook-installatiestappen",
+          "steps": {
+            "basics": "Basis",
+            "events": "Evenementen",
+            "headers": "Headers",
+            "payload": "Payload",
+            "notifications": "Meldingen",
+            "details": "Beoordelen"
+          },
+          "errors": {
+            "missingBasics": "Webhook-URL is vereist.",
+            "missingEvent": "Selecteer ten minste één evenement.",
+            "missingBasicsAndEvent": "Webhook-URL en ten minste één evenement zijn vereist."
+          },
+          "webhookUrl": "Webhook-URL",
+          "webhookUrlPlaceholder": "https://example.com/webhook",
+          "nameOptional": "Naam (optioneel)",
+          "namePlaceholder": "Slack-meldingen",
+          "descriptionOptional": "Beschrijving (optioneel)",
+          "descriptionPlaceholder": "Waar deze webhook formuliergegevens moet verzenden",
+          "eventsHelp": "Kies welke evenementen deze webhook moeten activeren.",
+          "events": {
+            "formSubmitted": "Formulier ingediend",
+            "formViewed": "Formulier weergegeven",
+            "formStarted": "Formulier gestart"
+          },
+          "httpMethod": "HTTP-methode",
+          "selectHttpMethodAria": "Selecteer HTTP-methode",
+          "selectMethodPlaceholder": "Selecteer methode",
+          "httpMethodDescriptions": {
+            "post": "Maak nieuwe bronnen of stuur payload-gegevens.",
+            "put": " Vervang een bestaande bron.",
+            "patch": "Deel van een bestaande bron bijwerken.",
+            "delete": "Bron verwijderen.",
+            "get": "Informatie ophalen zonder gegevens te wijzigen.",
+            "head": "Alleen headers ophalen."
+          },
+          "addHeader": "Header toevoegen",
+          "headerName": "Headernaam",
+          "headerNamePlaceholder": "Autorisatie",
+          "headerNameAria": "Webhook-headernaam",
+          "headerValue": "Headerwaarde",
+          "headerValuePlaceholder": "Bearer-token",
+          "headerValueAria": "Webhook-headerwaarde",
+          "removeHeaderAria": "Header verwijderen",
+          "headersHelp": "Aangepaste headers zijn optioneel en worden met elk webhook-verzoek verzonden.",
+          "payloadTemplateOptional": "Payloadsjabloon (optioneel)",
+          "availableVariables": "Beschikbare variabelen",
+          "variables": {
+            "formData": "Ingediend formuliergegevensobject",
+            "formId": "Formulieridentificatie",
+            "submissionId": "Inzending identificatie",
+            "event": "Trigger-evenement",
+            "timestamp": "Evenement-tijdstempel",
+            "formatted": "Samenvatting in mensentaal"
+          },
+          "notificationEmailOptional": "Meldings-e-mail (optioneel)",
+          "notificationEmailPlaceholder": "alerts@example.com",
+          "emailOnSuccess": "E-mail bij succesvolle levering",
+          "emailOnFailure": "E-mail bij mislukte levering",
+          "selectAll": "Alles selecteren",
+          "clear": "Wissen",
+          "back": "Terug",
+          "next": "Volgende",
+          "skip": "Overslaan",
+          "cancel": "Annuleren",
+          "createWebhook": "Webhook maken",
+          "updateWebhook": "Webhook bijwerken"
+        },
+        "testDialog": {
+          "title": "Webhook testen",
+          "description": "Stuur een testgebeurtenis om uw eindpunt te verifiëren.",
+          "endpointTitle": "Eindpunt",
+          "nameLabel": "Naam",
+          "untitledWebhook": "Ongetitelde webhook",
+          "descriptionLabel": "Beschrijving",
+          "methodLabel": "HTTP-methode",
+          "urlLabel": "URL",
+          "triggersTitle": "Triggers",
+          "events": {
+            "formSubmitted": "Formulier ingediend",
+            "formViewed": "Formulier weergegeven",
+            "formStarted": "Formulier gestart"
+          },
+          "modeTitle": "Testmodus",
+          "mode": {
+            "real": "Stuur een echte payload",
+            "success": "Forceer succesreactie",
+            "failure": "Forceer mislukte reactie"
+          },
+          "sendTest": "Test sturen",
+          "close": "Sluiten",
+          "success": "Test succesvol verzonden",
+          "failed": "Test mislukt",
+          "testSent": "Webhook-test verzonden",
+          "testFailed": "Webhook-test mislukt",
+          "testFailedNetwork": "Kon webhook-test niet verzenden"
+        },
+        "logDialog": {
+          "title": "Webhook-logs",
+          "status": "Status",
+          "response": "Reactie",
+          "attempt": "Poging",
+          "resend": "Opnieuw sturen",
+          "resendSuccess": "Webhook opnieuw succesvol verzonden",
+          "resendFailed": "Mislukt om webhook opnieuw te sturen",
+          "copied": "Gekopieerd naar klembord",
+          "copyFailed": "Mislukt om te kopiëren",
+          "copyCodeAria": "Kopieer payload",
+          "viewPayload": "Bekijk payload",
+          "payloadTitle": "Payload",
+          "noPayloadDataTitle": "Geen payload-gegevens",
+          "noPayloadDataDescription": "Payload is niet beschikbaar voor deze logentry.",
+          "noPayloadReasonMethod": "Dit verzoektype bevatte geen payload.",
+          "noPayloadReasonError": "Payload-vangst mislukt door een fout.",
+          "noPayloadReasonEmpty": "Geen payload-gegevens opgeslagen.",
+          "eventInformation": "Gebeurtenisinformatie",
+          "eventLabel": "Gebeurtenis",
+          "formNameLabel": "Formuliernaam",
+          "formIdLabel": "Formulier-ID",
+          "submissionIdLabel": "Invoerings-ID",
+          "ipAddressLabel": "IP-adres",
+          "formFields": "Vormvelden",
+          "rawFormData": "Ruwe formuliergegevens",
+          "rawJson": "Ruww JSON",
+          "formatted": "Opgeformatteerd",
+          "additionalData": "Aanvullende gegevens",
+          "notAvailable": "Niet beschikbaar",
+          "unknown": "Onbekend",
+          "complexObject": "Complex object",
+          "complexArray": "Complexe array",
+          "failedCount": "{count} mislukt",
+          "pendingCount": "{count} in behandeling",
+          "successfulCount": "{count} succesvol",
+          "noLogsTitle": "Nog geen logs",
+          "noLogsDescription": "Stuur gebeurtenissen naar deze webhook om leveringsgeschiedenis te zien.",
+          "errorTitle": "Kon logs niet laden",
+          "fetchFailed": "Mislukt om webhook-logs te laden"
+        }
+      },
+      "designSection": {
+        "title": "Ontwerp",
+        "description": "Uiterlijk en aanpassing beheren",
+        "advancedTitle": "Geavanceerde aanpassing",
+        "advancedDescription": "Verfijn kleuren, typografie, spatiëring en meer in een gerichte panel.",
+        "openAria": "Open aanpassings paneel in een nieuw tabblad",
+        "openLabel": "Open aanpassings paneel…"
+      }
+    },
+    "fieldRenderer": {
+      "scheduler": {
+        "title": "Planner",
+        "openScheduler": "Opener planner",
+        "embedTitle": "Plannerinbed",
+        "notConfigured": "Geen scheduler-link geconfigureerd.",
+        "close": "Sluiten"
+      },
+      "email": {
+        "defaultPlaceholder": "Voer e-mailadres in",
+        "autocompleteHint": "Druk op Tab of klik om te voltooien:",
+        "completeEmailAria": "Voltooien e-mailadres",
+        "completeButton": "Voltooien",
+        "autocompleteBadge": "Auto-voltooien:",
+        "allowedDomainsLabel": "Toegestane domeinen:"
+      },
+      "fileUpload": {
+        "bytesUnit": "Bytes",
+        "uploadFailed": "Uploaden mislukt",
+        "uploadErrorTitle": "Uploadfout",
+        "uploadedFiles": "Geüploade bestanden ({count})",
+        "uploadedBadge": "Geüpload",
+        "removeFileAria": "Verwijder {name}",
+        "maxFilesAndSize": "Max {maxFiles} bestanden, tot {maxSize} elk",
+        "allowedTypes": "Toegestane typen"
+      },
+      "social": {
+        "platforms": {
+          "linkedin": "LinkedIn",
+          "twitter": "X (Twitter)",
+          "youtube": "YouTube",
+          "instagram": "Instagram",
+          "facebook": "Facebook",
+          "github": "GitHub",
+          "website": "Website"
+        },
+        "customLink": "Aangepaste link {index}",
+        "customLinkPlaceholder": "https://example.com",
+        "preview": "Voorbeeld"
+      },
+      "signature": {
+        "drawHere": "Teken je handtekening hier",
+        "clear": "Wissen",
+        "preview": "Voorbeeld",
+        "previewAlt": "Signaturevoorbeeld"
+      },
+      "rating": {
+        "groupAria": "Waardering",
+        "rateAria": "Tarief {index} {type}"
+      },
+      "poll": {
+        "fetchFailed": "Kan opties niet ophalen",
+        "resultsTitle": "Pollresultaten",
+        "totalVotes": "{count} totale stemmen",
+        "votes": "{count} stemmen"
+      }
+    },
+    "formRenderer": {
+      "shared": {
+        "poweredBy": "Powered by",
+        "incorrectPassword": "Incorrect wachtwoord!",
+        "passwordProtectionMessage": "Dit formulier is wachtwoordbeveiligd. Voer het wachtwoord in om door te gaan."
+      },
+      "successScreen": {
+        "title": "Bedankt!",
+        "defaultMessage": "Je formulier is succesvol ingediend.",
+        "redirecting": "Je wordt binnenkort doorgestuurd...",
+        "poweredBy": "Powered by"
+      },
+      "quizResults": {
+        "titlePassed": "Gefeliciteerd!",
+        "titleComplete": "Quiz voltooid",
+        "descriptionPassed": "Je hebt de quiz succesvol voltooid!",
+        "descriptionRetry": "Bedankt voor het maken van de quiz. Blijf oefenen!",
+        "score": "Score",
+        "points": "Punten",
+        "answered": "Beantwoord",
+        "totalQuestions": "Totaal aantal vragen",
+        "passed": "Geslaagd",
+        "needsImprovement": "Heeft verbetering nodig",
+        "retakeQuiz": "Quiz opnieuw doen",
+        "questionByQuestion": "Resultaten per vraag",
+        "questionLabel": "Vraag {index}: {label}",
+        "yourAnswer": "Jouw antwoord:",
+        "noAnswer": "Geen antwoord",
+        "correctAnswer": "Correct antwoord:",
+        "pointsLower": "punten"
+      },
+      "multiStep": {
+        "previous": "Vorige",
+        "next": "Volgende",
+        "submit": "Invoeren",
+        "defaults": {
+          "formTitle": "Formulier"
+        },
+        "validation": {
+          "required": "Dit veld is vereist",
+          "emailInvalid": "Voer een geldig e-mailadres in",
+          "minLength": "Moet ten minste {count} karakters zijn",
+          "maxLength": "Mag niet meer zijn dan {count} tekens"
+        },
+        "toasts": {
+          "submitSuccess": "Formulier succesvol ingediend!",
+          "botDetected": "Bot gedetecteerd. Toegang geweigerd.",
+          "duplicateSubmission": "Je hebt dit formulier al ingediend.",
+          "rateLimitExceeded": "Te veel verzoeken. Probeer het later opnieuw.",
+          "responseLimitReached": "Dit formulier accepteert geen inzendingen meer.",
+          "contentValidationFailed": "Je inzending bevat ongepaste inhoud.",
+          "submitFailed": "Kan formulier niet indienen",
+          "submitFailedTryAgain": "Kan formulier niet indienen. Probeer het opnieuw."
+        }
+      },
+      "singleStep": {
+        "fixHighlightedErrors": "Repareer de gemarkeerde fouten voordat je het formulier indient.",
+        "submit": "Invoeren"
+      },
+      "duplicateSubmission": {
+        "title": "Dubbele inzending gedetecteerd",
+        "wait": "Wacht {time}",
+        "attemptsLeft": "{count, plural, one {# poging over} other {# pogingen over}}",
+        "tryAgain": "Probeer opnieuw",
+        "waitBeforeRetry": "Wacht voordat je opnieuw probeert in te dienen.",
+        "units": {
+          "seconds": "{count, plural, one {# seconde} other {# seconden}}",
+          "minutes": "{count, plural, one {# minuut} other {# minuten}}",
+          "hours": "{count, plural, one {# uur} other {# uur}}",
+          "days": "{count, plural, one {# dag} other {# dagen}}"
+        }
+      }
+    }
+  },
+  "aiBuilder": {
+    "client": {
+      "createFormWithKiko": "Maak een formulier met Kiko",
+      "streamError": "Fout: {error}",
+      "generatingResponse": "Bezig met het genereren van een reactie…",
+      "loading": "Bezig met laden…",
+      "suggestions": {
+        "contactForm": "Maak een contactformulier",
+        "customerFeedbackSurvey": "Klantfeedbackenquête",
+        "eventRegistrationForm": "Evenementregistratieformulier",
+        "jobApplicationForm": "Sollicitatieformulier"
+      }
+    },
+    "chatHeader": {
+      "backToFormBuilder": "Terug naar formulierbouwer",
+      "title": "Kiko AI"
+    },
+    "chatInput": {
+      "messageToKiko": "Bericht aan Kiko AI",
+      "placeholder": "Beschrijf het formulier dat je wilt maken…",
+      "sendMessage": "Stuur bericht",
+      "sendHelp": "Druk op Enter om te sturen, Shift+Enter voor een nieuwe regel, of ⌘/Ctrl+Enter om te sturen"
+    },
+    "welcome": {
+      "heading": "Hoe kan Kiko je vandaag helpen?",
+      "description": "Hallo, ik ben Kiko — je AI-aangedreven formulierassistent.\nVraag me om formulieren voor je te maken, te bewerken of te analyseren!"
+    },
+    "preview": {
+      "title": "Kiko AI",
+      "formFallback": "Formulier {index}",
+      "viewJson": "Bekijk JSON",
+      "useThisForm": "Gebruik dit formulier",
+      "noFormSelected": "Geen formulier geselecteerd."
+    },
+    "jsonModal": {
+      "title": "Formulier JSON-schema",
+      "description": "Bekijk of kopieer het gegenereerde JSON-schema voor je formulier",
+      "close": "Sluiten"
+    }
+  },
+  "analytics": {
+    "formAnalytics": {
+      "submissionExported": "Inzending succesvol geëxporteerd",
+      "formDeleted": "Formulier succesvol verwijderd",
+      "failedDeleteForm": "Kan formulier niet verwijderen",
+      "backToDashboard": "Terug naar dashboard",
+      "published": "Gepubliceerd",
+      "draft": "Brouillon",
+      "analyticsSubtitle": "Formulieranalyse en -inzendinggegevens",
+      "formActions": "Formulieracties",
+      "editForm": "Formulier bewerken",
+      "shareForm": "Deel formulier",
+      "viewSubmissions": "Bekijk inzendingen",
+      "moreActions": "Meer acties",
+      "exportCsv": "Exporteer CSV",
+      "exportJson": "Exporteer JSON",
+      "deleteForm": "Verwijder formulier",
+      "openKiko": "Open Kiko AI",
+      "kiko": "Kiko AI",
+      "kikoTooltip": "AI-formulieranalyse",
+      "recentSubmissions": "Recente inzendingen",
+      "viewAll": "Bekijk alles",
+      "noSubmissionsTitle": "Geen inzendingen nog",
+      "noSubmissionsDescription": "Zodra mensen uw formulier beginnen in te vullen, zullen hun antwoorden hier verschijnen.",
+      "submission": "Inzending {id}",
+      "fieldsCount": "{count} velden",
+      "view": "Bekijk",
+      "viewSubmissionDetails": "Bekijk details van inzending",
+      "viewMoreSubmissions": "Bekijk {count} meer inzendingen",
+      "noDataToExport": "Geen gegevens om te exporteren",
+      "csvExportSuccess": "Gegevens succesvol geëxporteerd naar CSV!",
+      "jsonExportSuccess": "Gegevens succesvol geëxporteerd!",
+      "deleteModalTitle": "Verwijder formulier",
+      "deleteModalConfirm": "Verwijder formulier",
+      "deleteModalCancel": "Annuleren",
+      "deleteModalDescription": "Weet u zeker dat u \"{title}\" wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt en zal het formulier en al zijn inzendingen permanent verwijderen.",
+      "formPublished": "Formulier gepubliceerd!"
+    },
+    "statsCards": {
+      "totalSubmissions": "Totaal aantal inzendingen",
+      "formFields": "Formuliervelden",
+      "completionRate": "Voltooiingspercentage",
+      "last30Days": "Laatste 30 dagen",
+      "avgDailySubmissions": "Gemiddeld aantal dagelijkse inzendingen",
+      "bounceRate": "Terugstootpercentage",
+      "peakHour": "Piekuur",
+      "uniqueResponses": "Unieke antwoorden"
+    },
+    "infoCards": {
+      "lastSubmission": "Laatste inzending",
+      "fromIp": "Van {ip}",
+      "noSubmissionsYet": "Geen inzendingen nog",
+      "formStatus": "Formulierstatus",
+      "published": "Gepubliceerd",
+      "created": "Gemaakt",
+      "updated": "Bijgewerkt",
+      "yes": "Ja",
+      "no": "Nee",
+      "quickStats": "Snelstatistieken",
+      "avgFieldsCompleted": "Gemiddeld aantal voltooide velden",
+      "mostActiveDay": "Meest actieve dag",
+      "submissions": "{count} inzendingen",
+      "formType": "Vormtype",
+      "multiStep": "Multi-stap",
+      "singlePage": "Enkele pagina"
+    },
+    "trendsChart": {
+      "title": "Inzendingtrends",
+      "noData": "Geen gegevens beschikbaar",
+      "submissions": "Inzendingen"
+    },
+    "dropoff": {
+      "title": "Afbreekanalyse",
+      "onlyMultiStep": "Afbreekanalyse is alleen beschikbaar voor meertrapsformulieren.",
+      "subtitle": "Begrijp waar gebruikers afbreken in uw formulieren.",
+      "step": "Stap",
+      "reached": "Bereikt",
+      "dropoffPercent": "Afbreekpercentage",
+      "completionPercent": "Voltooiingspercentage",
+      "ofTotal": "van {total}",
+      "stepFallback": "Stap {index}",
+      "dropoffBarAria": "Afbreekbalk voor stap {index}",
+      "completionBarAria": "Voltooiingsbalk voor stap {index}"
+    },
+    "chatModal": {
+      "title": "Kiko",
+      "description": "Chat met AI over uw formulieranalyse"
+    },
+    "chat": {
+      "emptyTitle": "Vraag Kiko Anything",
+      "emptyDescription": "Krijg directe inzichten en analyse van uw formuliergegevens. Stel vragen in natuurlijke taal.",
+      "thinking": "Aan het denken...",
+      "inputPlaceholder": "Vraag over uw formulieranalyse...",
+      "inputHelp": "Druk <enter></enter> om te verzenden, <shiftEnter></shiftEnter> voor nieuwe regel"
+    },
+    "submissionDetails": {
+      "title": "Inzendingdetails - {id}",
+      "submissionId": "Invoerings-ID",
+      "submittedAt": "Ingediend op",
+      "ipAddress": "IP-adres",
+      "formData": "Formuliergegevens",
+      "emptyValue": "—"
+    },
+    "submissions": {
+      "backToAnalytics": "Terug naar analyse",
+      "published": "Gepubliceerd",
+      "draft": "Brouillon",
+      "formSubmissions": "Formulierinzendingen ({count})",
+      "exportActions": "Exporteer acties",
+      "exportCsv": "Exporteer CSV",
+      "exportJson": "Exporteer JSON",
+      "viewDetailedAnalytics": "Bekijk gedetailleerde analyse",
+      "submissions": "Inzendingen",
+      "searchSubmissions": "Zoek inzendingen...",
+      "noMatchingSubmissions": "Geen overeenkomende inzendingen",
+      "noSubmissionsYet": "Geen inzendingen nog",
+      "noSubmissionsDescription": "Zodra mensen uw formulier beginnen in te vullen, zullen hun antwoorden hier verschijnen.",
+      "adjustSearchTerms": "Probeer uw zoektermen aan te passen om inzendingen te vinden.",
+      "id": "ID",
+      "submitted": "Ingediend",
+      "ipAddress": "IP-adres",
+      "fields": "Velden",
+      "actions": "Acties",
+      "fieldsCount": "{count} veld",
+      "fieldsCount_plural": "{count} velden",
+      "view": "Bekijk",
+      "showingRange": "Toont {start}-{end} van {total} inzendingen",
+      "previous": "Vorige",
+      "next": "Volgende",
+      "pageOf": "Pagina {page} van {total}",
+      "noSubmissionsToExport": "Geen inzendingen om te exporteren",
+      "submissionId": "Invoerings-ID",
+      "submittedAt": "Ingediend op",
+      "csvExportedSuccess": "CSV succesvol geëxporteerd",
+      "jsonExportedSuccess": "JSON succesvol geëxporteerd"
+    },
+    "premiumRequired": {
+      "analytics": {
+        "title": "Premium vereist",
+        "description": "Je hebt een premium abonnement nodig om toegang te krijgen tot formulieranalyse. Upgrade om alle functies te ontgrendelen.",
+        "viewPricing": "Bekijk prijzen"
+      },
+      "submissions": {
+        "title": "Premium vereist",
+        "description": "Je hebt een premium abonnement nodig om toegang te krijgen tot formulierinzendingen. Upgrade om alle functies te ontgrendelen.",
+        "viewPricing": "Bekijk prijzen"
+      }
+    }
+  },
+  "trialBanner": {
+    "aria": {
+      "status": "Proefabonnement notificatie"
+    },
+    "endsInPrefix": "Je gratis proefabonnement eindigt over ",
+    "remainingSuffix": " resterend",
+    "expired": "Proefabonnement verlopen",
+    "units": {
+      "day": "d",
+      "hour": "u",
+      "minute": "m",
+      "second": "s"
+    }
+  },
+  "embed": {
+    "customizer": {
+      "subtitle": "Pas aan en genereer embedcode voor je formulier",
+      "showCode": "Toon Code",
+      "settings": "Instellingen",
+      "preview": "Voorbeeld",
+      "desktop": "Bureaublad",
+      "mobile": "Mobiel"
+    },
+    "settings": {
+      "dimensions": {
+        "title": "Afmetingen",
+        "width": "Breedte",
+        "widthPlaceholder": "bijv. 100%, 800px",
+        "height": "Hoogte",
+        "heightPlaceholder": "bijv. 600px, 100vh",
+        "makeResponsive": "Maak responsief (past aan aan containerbreedte)"
+      },
+      "appearance": {
+        "title": "Uiterlijk",
+        "backgroundColor": "Achtergrondkleur",
+        "allowTransparentBackground": "Sta doorzichtige achtergrond toe (negeert achtergrondkleur)"
+      },
+      "border": {
+        "title": "Rand & Stijlen",
+        "showBorder": "Toon rand",
+        "borderColor": "Randkleur",
+        "borderWidth": "Randbreedte (px)",
+        "borderRadius": "Randradius (px)",
+        "padding": "Opvulling (px)",
+        "paddingHelp": "Ruimte rondom de iframe"
+      },
+      "performance": {
+        "title": "Prestaties",
+        "loadingMode": "Laadmodus",
+        "loadingModePlaceholder": "Selecteer laadmodus",
+        "lazy": "Lazy (aanbevolen)",
+        "eager": "Eager",
+        "help": "Lazy laden verbetert de prestaties van de pagina door de iframe alleen te laden wanneer deze in beeld komt"
+      }
+    },
+    "codeModal": {
+      "title": "Embedcode",
+      "description": "Kies je framework en kopieer de code",
+      "codeLabel": "{mode} Code",
+      "copied": "Gekopieerd!",
+      "copy": "Kopieer",
+      "close": "Sluiten",
+      "modes": {
+        "htmlDescription": "Universele HTML iframe",
+        "reactDescription": "React component",
+        "nextjsDescription": "Next.js component",
+        "vueDescription": "Vue.js component",
+        "wordpressDescription": "WordPress shortcode"
+      },
+      "iframeTitle": "Formulier"
+    },
+    "testPage": {
+      "metadata": {
+        "title": "Inbedtest - IkiForm",
+        "description": "Testpagina om formulierinbedmogelijkheden te demonstreren"
+      },
+      "title": "Formulierinbedtestpagina",
+      "descriptionPrefix": "Deze pagina demonstreert hoe formulieren kunnen worden ingebed met verschillende configuraties. Bezoek",
+      "descriptionSuffix": "om je eigen inbed aan te passen.",
+      "tryCustomizer": "Probeer Inbedaanpasser",
+      "cards": {
+        "standard": {
+          "title": "Standaardinbed",
+          "description": "600px hoogte - perfect voor bureaubladweergave",
+          "badge": "Responsief",
+          "iframeTitle": "Standaardformulierinbed"
+        },
+        "compact": {
+          "title": "Compacte inbed",
+          "description": "400px hoogte - ideaal voor zijbalken en kleinere ruimtes",
+          "badge": "Minimaal",
+          "iframeTitle": "Compacte formulierinbed"
+        },
+        "fixed": {
+          "title": "Vaste breedteinbed",
+          "description": "800px breedte, gecentreerd - perfect voor specifieke lay-outs",
+          "badge": "Aangepaste stijl",
+          "iframeTitle": "Vaste breedte formulierinbedding"
+        },
+        "react": {
+          "title": "React-componentvoorbeeld",
+          "description": "TypeScript React-component met juiste typisering",
+          "codeIframeTitle": "Formulier"
+        }
+      },
+      "guide": {
+        "title": "Hoe de inbeddingsfunctie te gebruiken",
+        "description": "Stapsgewijze handleiding voor het inbedden van uw formulieren",
+        "steps": {
+          "step1": {
+            "title": "Toegang tot de inbeddingsaanpasser",
+            "prefix": "Ga naar",
+            "suffix": "of klik op de inbeddingsknop in uw formulierdashboard."
+          },
+          "step2": {
+            "title": "Pas uw inbedding aan",
+            "item1": "Pas breedte- en hoogteafmetingen aan",
+            "item2": "Kies thema (licht, donker, automatisch)",
+            "item3": "Configureer randen en stijlen",
+            "item4": "Stel laadgedrag in"
+          },
+          "step3": {
+            "title": "Krijg uw code",
+            "description": "Kopieer de gegenereerde code voor HTML, React, Next.js, Vue of WordPress en plak deze in uw website."
+          },
+          "step4": {
+            "title": "Dashboard-integratie",
+            "description": "Toegang tot inbeddingsopties rechtstreeks vanuit uw formulierdashboard met behulp van de inbeddingsknop in de formulieracties."
+          }
+        }
+      }
+    }
+  }
+}

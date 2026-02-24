@@ -11,7 +11,7 @@ import type { Metadata } from "next";
 const LABELS = {
 	en: "Demo Form Builder",
 	es: "Demo del creador de formularios",
-};
+} as const;
 
 export async function generateMetadata({
 	params,
@@ -39,7 +39,10 @@ export default async function LocalizedDemoFormBuilder({
 			<JsonLd
 				data={getBreadcrumbJsonLd(currentLocale, [
 					{ name: "Ikiform", path: "/" },
-					{ name: LABELS[currentLocale], path: "/demo-form-builder" },
+					{
+						name: LABELS[currentLocale as keyof typeof LABELS] ?? "Demo Form Builder",
+						path: "/demo-form-builder",
+					},
 				])}
 			/>
 			<DemoFormBuilderPage />

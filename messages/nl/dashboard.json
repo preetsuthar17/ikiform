@@ -1,0 +1,517 @@
+{
+  "common": {
+    "dashboard": "Dashboard",
+    "feedback": "Feedback",
+    "logOut": "Uitloggen",
+    "loading": "Laden",
+    "loadingProfile": "Profiel laden",
+    "loadingFormsSidebar": "Formulieren zijbalk laden",
+    "loadingFormsManagement": "Formulierenbeheer laden"
+  },
+  "profile": {
+    "userProfileInformation": "Gebruikersprofielinformatie",
+    "userNameAria": "Gebruikersnaam: {name}",
+    "premiumUserBadge": "Premium gebruikersbadge",
+    "userEmailAria": "E-mail gebruiker: {email}"
+  },
+  "formsManagement": {
+    "aria": {
+      "management": "Formulierenbeheer"
+    },
+    "header": {
+      "title": "Uw formulieren",
+      "subtitle": "Maak, beheer en analyseer uw formulieren eenvoudig",
+      "createNewForm": "Nieuw formulier aanmaken",
+      "createDialogTitle": "Een nieuw formulier aanmaken",
+      "createDialogDescription": "Kies hoe u wilt beginnen. U kunt genereren met AI, handmatig bouwen of een versleuteld bestand importeren."
+    },
+    "createOptions": {
+      "aiBadge": "Meest aanbevolen",
+      "aiCta": "Beginnen met AI",
+      "aiTitle": "Kiko AI gebruiken",
+      "aiDescription": "Beschrijf uw formulier en laat Kiko AI een volledig eerste concept genereren met velden, logica en structuur.",
+      "manualCta": "Handmatig bouwen",
+      "manualTitle": "Handmatig aanmaken",
+      "manualDescription": "Begin met een leeg formulier en configureer velden handmatig.",
+      "importCta": "Bestand importeren",
+      "importTitle": "Importeren uit bestand",
+      "importDescription": "Importeer een met wachtwoordzin beveiligd .ikiform-bestand als nieuw conceptformulier."
+    },
+    "emptyState": {
+      "aria": "Lege toestand - nog geen formulieren aangemaakt",
+      "title": "Nog geen formulieren",
+      "description": "Begin door uw eerste formulier aan te maken. Het is snel en eenvoudig!",
+      "createFirstForm": "Uw eerste formulier aanmaken",
+      "dialog": {
+        "title": "Hoe wilt u uw formulier aanmaken?",
+        "description": "Kies om uw formulier handmatig te bouwen of laat Kiko AI het voor u genereren.",
+        "createWithAI": "Kiko AI gebruiken",
+        "createManually": "Handmatig aanmaken"
+      }
+    },
+    "search": {
+      "aria": "Formulieren zoeken en filters",
+      "searchAria": "Formulieren zoeken",
+      "placeholder": "Formulieren zoeken op titel, beschrijving of ID...",
+      "openFilterMenu": "Filtermenu openen",
+      "activeFiltersAria": "{count} actieve filters",
+      "statusLabel": "Status",
+      "filterByAll": "Filteren op alle statussen",
+      "all": "Alle",
+      "filterByPublished": "Filteren op gepubliceerde formulieren",
+      "published": "Gepubliceerd",
+      "filterByDraft": "Filteren op concepten",
+      "draft": "Concept",
+      "sortByLabel": "Sorteren op",
+      "sortByLastUpdated": "Sorteren op laatste update",
+      "lastUpdated": "Laatste update",
+      "sortByDateCreated": "Sorteren op aanmaakdatum",
+      "dateCreated": "Aanmaakdatum",
+      "sortByTitle": "Sorteren op titel alfabetisch",
+      "titleAz": "Titel (A-Z)",
+      "clearAllFilters": "Alle filters wissen",
+      "activeFiltersGroup": "Actieve filters",
+      "badgeSearch": "Zoeken: \"{query}\"",
+      "clearSearch": "Zoekopdracht wissen",
+      "badgeStatus": "Status: {status}",
+      "clearStatus": "Statusfilter wissen",
+      "badgeSort": "Sorteren: {sort}",
+      "sortTitleShort": "Titel",
+      "sortCreatedShort": "Aangemaakt",
+      "resetSort": "Sortering terugzetten naar laatste update"
+    },
+    "list": {
+      "untitledForm": "Formulier zonder titel",
+      "viewAnalyticsFor": "Analyses bekijken voor {title}",
+      "formStatusAria": "Formulierstatus: {status}",
+      "published": "Gepubliceerd",
+      "draft": "Concept",
+      "publicTitle": "Openbaar: \"{title}\"",
+      "updated": "Bijgewerkt {date}",
+      "actionsFor": "Acties voor {title}",
+      "formActions": "Formulieracties",
+      "editForm": "Formulier bewerken",
+      "shareForm": "Formulier delen",
+      "duplicate": "Dupliceren",
+      "viewForm": "Formulier bekijken",
+      "viewAnalytics": "Analyses bekijken",
+      "embed": "Insluiten",
+      "export": "Exporteren",
+      "deleteForm": "Formulier verwijderen",
+      "formsListAria": "Formulierenlijst"
+    },
+    "stats": {
+      "totalForms": "Totaal formulieren",
+      "published": "Gepubliceerd",
+      "drafts": "Concepten",
+      "loadingAria": "Formulierstatistieken laden",
+      "aria": "Formulierstatistieken",
+      "sidebarAria": "Formulierstatistieken zijbalk"
+    },
+    "emptySearch": {
+      "noMatch": "Geen formulieren komen overeen met uw zoekcriteria.",
+      "clearFilters": "Filters wissen",
+      "clearAria": "Alle zoekfilters wissen"
+    },
+    "deleteModal": {
+      "cancel": "Annuleren",
+      "confirm": "Formulier verwijderen",
+      "title": "Formulier verwijderen",
+      "description": "Weet u zeker dat u \"{formTitle}\" wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt en alle formuliergegevens gaan permanent verloren."
+    },
+    "toasts": {
+      "failedLoadForms": "Formulieren laden mislukt",
+      "failedShareForm": "Formulier delen mislukt",
+      "formDuplicated": "Formulier gedupliceerd",
+      "failedDuplicateForm": "Formulier dupliceren mislukt",
+      "formImportedSuccess": "Formulier succesvol geïmporteerd.",
+      "failedImportForm": "Formulier importeren mislukt.",
+      "formDeletedSuccess": "Formulier succesvol verwijderd",
+      "failedDeleteForm": "Formulier verwijderen mislukt"
+    },
+    "shareModal": {
+      "title": "Formulier delen",
+      "publishedDescription": "Deel uw formulier met anderen via de onderstaande link of QR-code",
+      "unpublishedDescription": "Publiceer uw formulier zodat u het met anderen kunt delen",
+      "shareLink": "Deellink",
+      "copied": "Gekopieerd",
+      "copyLink": "Link kopiëren",
+      "hide": "Verbergen",
+      "show": "Weergeven",
+      "qrCode": "QR-code",
+      "qrCodeForForm": "QR-code voor formulier",
+      "generating": "Genereren...",
+      "scanForMobile": "Scannen voor eenvoudige mobiele toegang",
+      "downloading": "Downloaden...",
+      "downloadQr": "QR downloaden",
+      "needsPublish": "Uw formulier moet worden gepubliceerd voordat het openbaar gedeeld kan worden.",
+      "publishing": "Publiceren...",
+      "publishForm": "Formulier publiceren",
+      "toasts": {
+        "failedGenerateQr": "QR-code genereren mislukt",
+        "linkCopied": "Link gekopieerd naar klembord!",
+        "failedCopyLink": "Link kopiëren mislukt. Kopieer handmatig.",
+        "qrDownloaded": "QR-code succesvol gedownload!",
+        "failedDownloadQr": "QR-code downloaden mislukt"
+      }
+    },
+    "secureImport": {
+      "title": "Formulier importeren uit versleuteld bestand",
+      "description": "Ontsleutel een .ikiform-bestand en maak een nieuw conceptformulier aan.",
+      "encryptedFileLabel": "Versleuteld bestand",
+      "encryptedFileHelp": "Upload een versleuteld exportbestand met de extensie .ikiform.",
+      "passphraseLabel": "Wachtwoordzin",
+      "passphrasePlaceholder": "Voer de wachtwoordzin in die bij het exporteren is gebruikt",
+      "passphraseHelp": "Minimaal {count} tekens vereist.",
+      "decrypting": "Ontsleutelen...",
+      "decryptFile": "Bestand ontsleutelen",
+      "importedForm": "Geïmporteerd formulier",
+      "decryptToLoadSettings": "Ontsleutel een bestand om importinstellingen te laden.",
+      "preserveApiSettings": "API-instellingen bewaren (API-sleutel en ingeschakelde status)",
+      "preservePassword": "Wachtwoord voor wachtwoordbeveiliging bewaren",
+      "preserveNotificationEmail": "E-mail van notificatieontvanger bewaren",
+      "cancel": "Annuleren",
+      "importing": "Importeren...",
+      "importAsNewForm": "Importeren als nieuw formulier",
+      "decryptToPreview": "Ontsleutel een bestand om het geïmporteerde formulier te bekijken.",
+      "errors": {
+        "chooseFile": "Kies een versleuteld .ikiform-bestand.",
+        "passphraseMinChars": "De wachtwoordzin moet minimaal {count} tekens bevatten.",
+        "failedDecrypt": "Importbestand ontsleutelen mislukt.",
+        "wrongPassphrase": "Verkeerde wachtwoordzin of het bestand is mogelijk gemanipuleerd.",
+        "decryptBeforeImport": "Ontsleutel een bestand voordat u importeert.",
+        "failedImport": "Formulier importeren mislukt."
+      },
+      "toasts": {
+        "fixHighlightedFields": "Corrigeer de gemarkeerde velden.",
+        "fileDecrypted": "Bestand ontsleuteld. Bekijk de importopties."
+      }
+    },
+    "secureExport": {
+      "title": "Formulier exporteren (beveiligd)",
+      "description": "Maak een versleuteld .ikiform-bestand voor dit formulier. U heeft dezelfde wachtwoordzin nodig om het te importeren.",
+      "untitledForm": "Formulier zonder titel",
+      "formLabel": "Formulier",
+      "unknownForm": "Onbekend formulier",
+      "passphraseSetup": "Wachtwoordzin instellen",
+      "passphraseLabel": "Wachtwoordzin",
+      "passphrasePlaceholder": "Minimaal {count} tekens",
+      "passphraseHelper": "Gebruik minimaal 12 tekens voor sterkere versleuteling.",
+      "confirmPassphraseLabel": "Wachtwoordzin bevestigen",
+      "confirmPassphrasePlaceholder": "Wachtwoordzin opnieuw invoeren",
+      "confirmPassphraseHelper": "Voer exact dezelfde wachtwoordzin opnieuw in.",
+      "hidePassphrase": "Wachtwoordzin verbergen",
+      "viewPassphrase": "Wachtwoordzin bekijken",
+      "hideConfirmPassphrase": "Bevestigingswachtwoordzin verbergen",
+      "viewConfirmPassphrase": "Bevestigingswachtwoordzin bekijken",
+      "cancel": "Annuleren",
+      "exporting": "Exporteren...",
+      "exportEncryptedFile": "Versleuteld bestand exporteren",
+      "strength": {
+        "notSet": "Niet ingesteld",
+        "weak": "Zwak",
+        "good": "Goed",
+        "strong": "Sterk"
+      },
+      "errors": {
+        "passphraseMinChars": "De wachtwoordzin moet minimaal {count} tekens bevatten.",
+        "confirmPassphraseMinChars": "De bevestigingswachtwoordzin moet minimaal {count} tekens bevatten.",
+        "passphrasesDoNotMatch": "Wachtwoordzinnen komen niet overeen.",
+        "noFormSelected": "Geen formulier geselecteerd voor export.",
+        "enterValidPassphrase": "Voer een geldige wachtwoordzin in en bevestig deze.",
+        "failedExport": "Formulier exporteren mislukt."
+      },
+      "toasts": {
+        "exportCreated": "Versleutelde formulierexport aangemaakt."
+      }
+    }
+  },
+  "admin": {
+    "page": {
+      "aria": {
+        "dashboard": "Beheerderspaneel",
+        "announcements": "Aankondigingenbeheer",
+        "expireTrials": "Proefperiodebeheer",
+        "users": "Gebruikersbeheer"
+      },
+      "announcements": {
+        "title": "Aankondigingen verzenden",
+        "signedInAs": "Ingelogd als {email}"
+      },
+      "expireTrials": {
+        "title": "Proefperiodes laten verlopen",
+        "description": "Voer de cron-taak handmatig uit om gratis proefperiodes te laten verlopen"
+      },
+      "users": {
+        "title": "Alle gebruikers ({count})",
+        "description": "Alle geregistreerde gebruikers beheren en bekijken"
+      }
+    },
+    "announcementForm": {
+      "labels": {
+        "recipientEmails": "E-mails ontvanger",
+        "subject": "Onderwerp",
+        "content": "Inhoud (Markdown ondersteund)"
+      },
+      "placeholders": {
+        "recipientEmails": "een@voorbeeld.com, twee@voorbeeld.com\\nof\\ndrie@voorbeeld.com",
+        "subject": "Aankondigingsonderwerp",
+        "content": "# Titel\\n\\nDetails hier..."
+      },
+      "help": {
+        "recipientFormat": "Komma- of regeleinde-gescheiden."
+      },
+      "actions": {
+        "loading": "Laden...",
+        "prefillFromUsers": "Voorinvullen vanuit gebruikers",
+        "sendAnnouncement": "Aankondiging verzenden"
+      },
+      "toasts": {
+        "fetchEmailsFailed": "E-mails ophalen mislukt",
+        "loadedEmails": "{count} e-mails geladen",
+        "sending": "Aankondigingen verzenden...",
+        "sentCount": "{count} e-mail(s) verzonden",
+        "failedWithError": "Mislukt: {error}",
+        "failedToSendFallback": "Verzenden mislukt"
+      }
+    },
+    "expireTrialsControl": {
+      "title": "Proefperiodes laten verlopen",
+      "description": "Voer de cron-taak handmatig uit om gratis proefperiodes ouder dan 14 dagen te laten verlopen",
+      "unknownError": "Onbekende fout",
+      "actions": {
+        "running": "Uitvoeren...",
+        "run": "Proefperiodes laten verlopen"
+      },
+      "result": {
+        "success": "Geslaagd",
+        "error": "Fout",
+        "updatedUsersCount": "{count} gebruiker(s) bijgewerkt",
+        "updatedUsers": "Bijgewerkte gebruikers:"
+      },
+      "toasts": {
+        "updatedSuccess": "{count} gebruiker(s) succesvol bijgewerkt van proef naar gratis",
+        "failedWithError": "Mislukt: {error}",
+        "errorWithMessage": "Fout: {message}"
+      }
+    },
+    "usersTable": {
+      "search": {
+        "aria": "Gebruikers zoeken",
+        "placeholder": "Gebruikers zoeken op naam, e-mail, klantnaam of Polar ID..."
+      },
+      "filters": {
+        "premiumAria": "Filteren op premiumstatus",
+        "trialAria": "Filteren op proefstatus",
+        "allPremium": "Alle premium",
+        "premiumOnly": "Alleen premium",
+        "freeOnly": "Alleen gratis",
+        "allTrial": "Alle proef",
+        "trialOnly": "Alleen proef",
+        "noTrial": "Geen proef",
+        "clearAria": "Alle filters wissen",
+        "clear": "Wissen",
+        "filteredBy": "Gefilterd op:"
+      },
+      "columns": {
+        "uid": "UID",
+        "name": "Naam",
+        "email": "E-mail",
+        "premium": "Premium",
+        "trial": "Proef",
+        "customerName": "Klantnaam",
+        "polarId": "Polar ID",
+        "created": "Aangemaakt",
+        "updated": "Bijgewerkt"
+      },
+      "sort": {
+        "uidAria": "Sorteren op UID",
+        "nameAria": "Sorteren op naam",
+        "emailAria": "Sorteren op e-mail",
+        "premiumAria": "Sorteren op premiumstatus",
+        "trialAria": "Sorteren op proefstatus",
+        "createdAria": "Sorteren op aanmaakdatum",
+        "updatedAria": "Sorteren op bijwerkdatum"
+      },
+      "table": {
+        "aria": "Gebruikerstabel"
+      },
+      "badges": {
+        "premium": "Premium",
+        "free": "Gratis",
+        "freeTrial": "Gratis proef",
+        "noFreeTrial": "Geen gratis proef"
+      },
+      "row": {
+        "viewDetailsFor": "Details bekijken voor {name}",
+        "premiumStatusAria": "Premiumstatus: {status}",
+        "trialStatusAria": "Proefstatus: {status}"
+      },
+      "showingRange": "{start}-{end} van {total} gebruikers weergegeven",
+      "showLabel": "Weergeven:",
+      "itemsPerPageAria": "Items per pagina",
+      "empty": {
+        "filtered": "Geen gebruikers komen overeen met uw filters",
+        "default": "Geen gebruikers gevonden"
+      },
+      "pagination": {
+        "pageOf": "Pagina {current} van {total}",
+        "previousAria": "Naar vorige pagina",
+        "previous": "Vorige",
+        "goToPageAria": "Naar pagina {page}",
+        "nextAria": "Naar volgende pagina",
+        "next": "Volgende"
+      }
+    },
+    "userControls": {
+      "title": "Beheerderscontroles",
+      "description": "Gebruikersstatus en machtigingen beheren",
+      "sections": {
+        "freeTrial": "Gratis proef",
+        "premiumStatus": "Premiumstatus",
+        "dangerZone": "Gevaarlijke zone"
+      },
+      "actions": {
+        "removeTrial": "Proef verwijderen",
+        "assignTrial": "Proef toewijzen",
+        "removePremium": "Premium verwijderen",
+        "assignPremium": "Premium toewijzen",
+        "deleteUser": "Gebruiker verwijderen"
+      },
+      "warning": {
+        "label": "Waarschuwing:",
+        "message": "Het verwijderen van een gebruiker verwijdert permanent al hun formulieren, inzendingen en gegevens. Deze actie kan niet ongedaan worden gemaakt."
+      },
+      "confirm": {
+        "title": "Gebruiker verwijderen",
+        "confirm": "Gebruiker verwijderen",
+        "cancel": "Annuleren",
+        "description": "Weet u zeker dat u gebruiker {userName} wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt en verwijdert al hun formulieren en gegevens."
+      }
+    },
+    "userProfile": {
+      "backToAdmin": "Terug naar beheer",
+      "invalidUserId": {
+        "title": "Ongeldig gebruikers-ID",
+        "description": "Geen gebruikers-ID opgegeven in de URL."
+      },
+      "notFound": {
+        "title": "Gebruiker niet gevonden",
+        "description": "De gebruiker die u zoekt bestaat niet."
+      },
+      "userInformation": "Gebruikersinformatie",
+      "labels": {
+        "uid": "UID",
+        "premiumStatus": "Premiumstatus",
+        "trialStatus": "Proefstatus",
+        "customerName": "Klantnaam",
+        "polarCustomerId": "Polar klant-ID",
+        "memberSince": "Lid sinds"
+      },
+      "badges": {
+        "premium": "Premium",
+        "free": "Gratis",
+        "freeTrial": "Gratis proef",
+        "noTrial": "Geen proef"
+      },
+      "trialStatus": {
+        "title": "Gratis proefstatus",
+        "expiredBadge": "Proef verlopen",
+        "endedDaysAgo": "Gratis proef eindigde {days} dagen geleden",
+        "expiringSoonBadge": "Verloopt binnenkort",
+        "activeBadge": "Actieve proef",
+        "daysLeft": "{days, plural, one {# dag resterend in gratis proef} other {# dagen resterend in gratis proef}}",
+        "startedOn": "Proef gestart:"
+      },
+      "forms": {
+        "title": "Formulieren ({count})",
+        "description": "Alle formulieren aangemaakt door deze gebruiker",
+        "empty": "Deze gebruiker heeft nog geen formulieren aangemaakt.",
+        "table": {
+          "formTitle": "Formuliertitel",
+          "description": "Beschrijving",
+          "status": "Status",
+          "submissions": "Inzendingen",
+          "created": "Aangemaakt",
+          "actions": "Acties"
+        },
+        "status": {
+          "published": "Gepubliceerd",
+          "draft": "Concept"
+        },
+        "actions": {
+          "view": "Bekijken",
+          "details": "Details"
+        }
+      }
+    },
+    "formDetails": {
+      "pageAria": "Formulierdetailspagina",
+      "backToAdmin": "Terug naar beheer",
+      "backToAdminAria": "Terug naar beheerderspaneel",
+      "noDescription": "Geen beschrijving opgegeven",
+      "viewForm": "Formulier bekijken",
+      "viewFormAria": "Formulier bekijken in nieuw tabblad",
+      "invalidFormId": {
+        "aria": "Ongeldige formulier-ID-fout",
+        "title": "Ongeldig formulier-ID",
+        "description": "Geen formulier-ID opgegeven in de URL."
+      },
+      "notFound": {
+        "aria": "Formulier niet gevonden fout",
+        "title": "Formulier niet gevonden",
+        "description": "Het formulier dat u zoekt bestaat niet."
+      },
+      "badges": {
+        "published": "Gepubliceerd",
+        "draft": "Concept",
+        "enabled": "Ingeschakeld",
+        "disabled": "Uitgeschakeld"
+      },
+      "statistics": {
+        "aria": "Formulierstatistieken",
+        "status": "Status",
+        "formStatusAria": "Formulierstatus: {status}",
+        "submissions": "Inzendingen",
+        "submissionsCountAria": "{count} inzendingen",
+        "created": "Aangemaakt",
+        "createdOnAria": "Aangemaakt op {date}",
+        "apiStatus": "API-status",
+        "apiStatusAria": "API-status: {status}"
+      },
+      "details": {
+        "title": "Formulierdetails",
+        "formId": "Formulier-ID",
+        "formIdAria": "Formulier-ID: {id}",
+        "owner": "Eigenaar",
+        "viewOwnerAria": "Eigenaardetails bekijken voor {name}",
+        "unknown": "Onbekend",
+        "slug": "Slug",
+        "slugAria": "Formulierslug: {slug}",
+        "notSet": "Niet ingesteld",
+        "lastUpdated": "Laatste update",
+        "lastUpdatedAria": "Laatste update: {date}",
+        "apiKey": "API-sleutel",
+        "apiKeyAria": "API-sleutel: {key}"
+      },
+      "schema": {
+        "title": "Formulierschema",
+        "aria": "Formulierschema JSON"
+      },
+      "submissions": {
+        "title": "Formulierinzendingen ({count})",
+        "description": "Alle reacties ingediend voor dit formulier",
+        "emptyAria": "Geen formulierinzendingen",
+        "empty": "Nog geen inzendingen.",
+        "listAria": "Lijst met formulierinzendingen",
+        "itemAria": "Inzending {number}",
+        "itemLabel": "Inzending #{number}",
+        "submittedOnAria": "Ingediend op {date}",
+        "ipAria": "IP-adres: {ip}",
+        "ipLabel": "IP: {ip}",
+        "fieldAria": "Veld: {key}",
+        "valueAria": "Waarde voor {key}: {value}"
+      }
+    }
+  }
+}
