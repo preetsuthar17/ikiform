@@ -60,6 +60,9 @@ export async function updateSession(
 			normalizedPathname.startsWith("/portal");
 
 		if (!user && isProtectedPath) {
+			if (normalizedPathname.startsWith("/dashboard")) {
+				return supabaseResponse;
+			}
 			const url = request.nextUrl.clone();
 			url.pathname = localePrefix ? `${localePrefix}/login` : "/login";
 			url.searchParams.set("next", `${pathname}${request.nextUrl.search}`);

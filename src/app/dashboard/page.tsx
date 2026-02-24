@@ -1,7 +1,7 @@
-import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { ensureDefaultFormSettings } from "@/lib/forms";
 import { createClient } from "@/utils/supabase/server";
+import DashboardAuthRecovery from "./dashboard-auth-recovery";
 import DashboardClient from "./dashboard-client";
 
 // Skeleton components for streaming
@@ -20,10 +20,10 @@ function DashboardSkeleton() {
 						</div>
 					</div>
 					<div className="grid grid-cols-3 gap-4">
-						{Array.from({ length: 3 }).map((_, i) => (
+						{["skeleton-1", "skeleton-2", "skeleton-3"].map((key) => (
 							<div
 								className="h-20 animate-pulse rounded-2xl border bg-card"
-								key={i}
+								key={key}
 							/>
 						))}
 					</div>
@@ -35,10 +35,17 @@ function DashboardSkeleton() {
 							<div className="h-10 w-28 animate-pulse rounded bg-accent" />
 						</div>
 						<div className="flex flex-col gap-2">
-							{Array.from({ length: 6 }).map((_, i) => (
+							{[
+								"skeleton-1",
+								"skeleton-2",
+								"skeleton-3",
+								"skeleton-4",
+								"skeleton-5",
+								"skeleton-6",
+							].map((key) => (
 								<div
 									className="h-20 animate-pulse rounded-xl border bg-card"
-									key={i}
+									key={key}
 								/>
 							))}
 						</div>
@@ -58,7 +65,7 @@ async function DashboardData() {
 	} = await supabase.auth.getUser();
 
 	if (userError || !user) {
-		redirect("/login");
+		return <DashboardAuthRecovery />;
 	}
 
 	// Parallel fetch: forms and premium status at the same time
