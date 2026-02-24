@@ -117,7 +117,7 @@ export async function proxy(request: NextRequest) {
 	}
 
 	const response = shouldRefreshAuthSession(normalizedPathname)
-		? await updateSession(request, localeResponse?.headers)
+		? await updateSession(request)
 		: localeResponse ?? NextResponse.next();
 
 	if (localeResponse && response !== localeResponse) {
