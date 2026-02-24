@@ -1,6 +1,7 @@
 "use client";
 
 import { Search } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -56,21 +57,31 @@ export function SettingsSearch({
 	activeSection: FormSettingsSection;
 	onSectionChange: (section: FormSettingsSection) => void;
 }) {
+	const t = useTranslations("product.formBuilder.formSettings.search");
+	const tSections = useTranslations("product.formBuilder.formSettings");
 	const [query, setQuery] = useState("");
 	const [open, setOpen] = useState(false);
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [activeIndex, setActiveIndex] = useState<number | null>(null);
+	const localizedIndex = useMemo(
+		() =>
+			SETTINGS_SEARCH_INDEX.map((item) => ({
+				...item,
+				label: t(`items.${item.anchorId}.label`),
+			})),
+		[t]
+	);
 
 	const results = useMemo(() => {
 		const q = query.trim().toLowerCase();
 		if (!q) return [] as SettingsSearchItem[];
-		return SETTINGS_SEARCH_INDEX.filter((item) => {
+		return localizedIndex.filter((item) => {
 			const hay = [item.label, ...(item.keywords || [])]
 				.join(" ")
 				.toLowerCase();
 			return hay.includes(q);
 		}).slice(0, 20);
-	}, [query]);
+	}, [query, localizedIndex]);
 
 	useEffect(() => {
 		if (open) inputRef.current?.focus();
@@ -100,7 +111,7 @@ export function SettingsSearch({
 				<Input
 					aria-controls={open ? "settings-search-results" : undefined}
 					aria-expanded={open}
-					aria-label="Search settings"
+					aria-label={t("aria")}
 					className="pl-9 text-base md:text-sm"
 					name="settings-search"
 					onChange={(e) => {
@@ -151,7 +162,7 @@ export function SettingsSearch({
 							});
 						}
 					}}
-					placeholder="Search settings…"
+					placeholder={t("placeholder")}
 					ref={inputRef}
 					type="search"
 					value={query}
@@ -164,7 +175,7 @@ export function SettingsSearch({
 			{}
 			{open && results.length > 0 && (
 				<div
-					aria-label="Search results"
+					aria-label={t("resultsAria")}
 					className="absolute top-full left-0 z-50 mt-2 w-full overflow-hidden rounded-md border bg-background shadow-xs"
 					id="settings-search-results"
 					role="listbox"
@@ -198,7 +209,7 @@ export function SettingsSearch({
 										>
 											<span className="truncate">
 												<span className="text-muted-foreground">
-													{sectionLabel(r.section)} /{" "}
+													{tSections(`sections.${r.section}`)} /{" "}
 												</span>
 												{highlightText(r.label, query)}
 											</span>
@@ -219,36 +230,9 @@ export function SettingsSearch({
 						overscrollBehavior: "contain",
 					}}
 				>
-					No matches
+					{t("noMatches")}
 				</div>
 			)}
 		</div>
 	);
-}
-
-function sectionLabel(section: string) {
-	switch (section) {
-		case "basic":
-			return "Basic";
-		case "limits":
-			return "Limits";
-		case "security":
-			return "Security";
-		case "branding":
-			return "Branding";
-		case "notifications":
-			return "Notifications";
-		case "quiz":
-			return "Quiz";
-		case "api":
-			return "API";
-		case "webhooks":
-			return "Webhooks";
-		case "design":
-			return "Design";
-		case "metadata":
-			return "Metadata";
-		default:
-			return section;
-	}
 }

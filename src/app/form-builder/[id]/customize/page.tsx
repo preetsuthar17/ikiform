@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import { FormCustomizePage } from "@/components/form-builder/form-customize";
 import { ensureDefaultFormSettings } from "@/lib/forms";
@@ -28,6 +29,7 @@ async function getAuthenticatedUser() {
 
 export default async function CustomizePage({ params }: PageProps) {
 	const { id } = await params;
+	const t = await getTranslations("product.formBuilder.customize.page");
 
 	try {
 		const { user, supabase } = await getAuthenticatedUser();
@@ -58,7 +60,7 @@ export default async function CustomizePage({ params }: PageProps) {
 		};
 
 		return (
-			<Suspense fallback={<div>Loading customization...</div>}>
+			<Suspense fallback={<div>{t("loadingCustomization")}</div>}>
 				<FormCustomizePage formId={id} schema={form.schema} />
 			</Suspense>
 		);

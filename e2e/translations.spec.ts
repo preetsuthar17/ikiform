@@ -12,12 +12,18 @@ const ES_HOME_TITLE_SNIPPET =
 const EN_FOOTER_NAV = "Navigation";
 const ES_FOOTER_NAV = "Navegación";
 const ES_FOOTER_RESOURCES = "Recursos";
+const EN_PRIMARY_NAV = "Primary navigation";
+const ES_PRIMARY_NAV = "Navegación principal";
 const EN_HEADER_HOME = "Home";
 const ES_HEADER_HOME = "Inicio";
 const ES_PATH_REGEX = /\/es$/;
 const ES_LOGIN_PATH_REGEX = /\/es\/login(?:\?.*)?$/;
 const ES_PREMIUM_REQUIRED = "Requiere Premium";
 const ES_VIEW_PRICING = "Ver precios";
+const ES_SETTINGS = "Configuración";
+const ES_FORM_SETTINGS_TITLE = "Configuración del formulario";
+const ES_BASIC_INFORMATION = "Información básica";
+const ES_FORM_BEHAVIOR = "Comportamiento del formulario";
 
 test("privacy page content is localized for en and es", async ({ page }) => {
 	await page.goto("/en/legal/privacy", { waitUntil: "domcontentloaded" });
@@ -64,7 +70,7 @@ test("footer language switcher changes locale and translated labels", async ({
 }) => {
 	await page.goto("/en", { waitUntil: "domcontentloaded" });
 	await expect(
-		page.getByRole("navigation", { name: "Primary navigation" }).getByRole(
+		page.getByRole("navigation", { name: EN_PRIMARY_NAV }).getByRole(
 			"link",
 			{ name: EN_HEADER_HOME, exact: true }
 		)
@@ -76,7 +82,7 @@ test("footer language switcher changes locale and translated labels", async ({
 
 	await expect(page).toHaveURL(ES_PATH_REGEX);
 	await expect(
-		page.getByRole("navigation", { name: "Primary navigation" }).getByRole(
+		page.getByRole("navigation", { name: ES_PRIMARY_NAV }).getByRole(
 			"link",
 			{ name: ES_HEADER_HOME, exact: true }
 		)
@@ -104,4 +110,17 @@ test("ai builder premium gate is localized in spanish", async ({ page }) => {
 	await expect(
 		page.getByRole("button", { name: ES_VIEW_PRICING })
 	).toBeVisible();
+});
+
+test("form settings modal is localized in spanish", async ({ page }) => {
+	await page.goto("/es/demo-form-builder", { waitUntil: "domcontentloaded" });
+
+	await page.getByRole("button", { name: ES_SETTINGS }).first().click();
+	await expect(
+		page.getByRole("heading", { name: ES_FORM_SETTINGS_TITLE })
+	).toBeVisible();
+	await expect(page.locator("#basic-info-title")).toContainText(
+		ES_BASIC_INFORMATION
+	);
+	await expect(page.locator("#behavior-title")).toContainText(ES_FORM_BEHAVIOR);
 });

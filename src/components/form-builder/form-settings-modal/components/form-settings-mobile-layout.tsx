@@ -22,6 +22,7 @@ export function FormSettingsMobileLayout({
 	sectionProps,
 }: FormSettingsMobileLayoutProps) {
 	const t = useTranslations("product.formBuilder.settingsMobile");
+	const tSections = useTranslations("product.formBuilder.formSettings");
 	const [showSectionList, setShowSectionList] = useState(true);
 
 	const handleSectionClick = (sectionId: FormSettingsSection) => {
@@ -53,42 +54,43 @@ export function FormSettingsMobileLayout({
 						className="flex flex-col gap-1 overflow-auto p-2"
 						role="navigation"
 					>
-						{FORM_SETTINGS_SECTIONS.map((section, index) => (
-							<button
-								aria-label={t("goToSectionAria", { section: section.label })}
-								className="flex w-full items-center justify-between rounded-md px-4 py-4 text-left font-medium text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-								key={section.id}
-								onClick={() => handleSectionClick(section.id)}
-								onKeyDown={(e) => {
-									if (e.key === "Enter" || e.key === " ") {
-										e.preventDefault();
-										handleSectionClick(section.id);
-									}
-									if (
-										e.key === "ArrowDown" &&
-										index < FORM_SETTINGS_SECTIONS.length - 1
-									) {
-										e.preventDefault();
-										const nextButton = e.currentTarget.parentElement?.children[
-											index + 1
-										] as HTMLElement;
-										nextButton?.focus();
-									}
-									if (e.key === "ArrowUp" && index > 0) {
-										e.preventDefault();
-										const prevButton = e.currentTarget.parentElement?.children[
-											index - 1
-										] as HTMLElement;
-										prevButton?.focus();
-									}
-								}}
-								role="menuitem"
-								tabIndex={0}
-							>
-								<span>{section.label}</span>
-								<ArrowLeft aria-hidden="true" className="size-4 rotate-180" />
-							</button>
-						))}
+						{FORM_SETTINGS_SECTIONS.map((section, index) => {
+							const sectionLabel = tSections(`sections.${section.id}`);
+							return (
+								<button
+									aria-label={t("goToSectionAria", { section: sectionLabel })}
+									className="flex w-full items-center justify-between rounded-md px-4 py-4 text-left font-medium text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+									key={section.id}
+									onClick={() => handleSectionClick(section.id)}
+									onKeyDown={(e) => {
+										if (e.key === "Enter" || e.key === " ") {
+											e.preventDefault();
+											handleSectionClick(section.id);
+										}
+										if (
+											e.key === "ArrowDown" &&
+											index < FORM_SETTINGS_SECTIONS.length - 1
+										) {
+											e.preventDefault();
+											const nextButton = e.currentTarget.parentElement
+												?.children[index + 1] as HTMLElement;
+											nextButton?.focus();
+										}
+										if (e.key === "ArrowUp" && index > 0) {
+											e.preventDefault();
+											const prevButton = e.currentTarget.parentElement
+												?.children[index - 1] as HTMLElement;
+											prevButton?.focus();
+										}
+									}}
+									role="menuitem"
+									tabIndex={0}
+								>
+									<span>{sectionLabel}</span>
+									<ArrowLeft aria-hidden="true" className="size-4 rotate-180" />
+								</button>
+							);
+						})}
 					</nav>
 				</ScrollArea>
 			</div>

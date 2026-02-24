@@ -51,6 +51,7 @@ const BADGES = [
 ] as const;
 
 const FooterLogo = React.memo(function FooterLogo() {
+	const tNav = useTranslations("nav");
 	const pathname = usePathname();
 	const locale = getLocaleFromPathname(pathname);
 	const homeHref = locale ? withLocaleHref("/", locale) : "/";
@@ -59,7 +60,7 @@ const FooterLogo = React.memo(function FooterLogo() {
 		<Link className="inline-flex" href={homeHref}>
 			<span className="flex items-center gap-3 text-3xl tracking-tight">
 				<Image
-					alt="Ikiform Logo"
+					alt={tNav("ikiformLogo")}
 					className="size-10 rounded-lg"
 					height={40}
 					loading="lazy"
@@ -346,10 +347,11 @@ const LanguageSwitcher = React.memo(function LanguageSwitcher() {
 });
 
 const SocialLinks = React.memo(function SocialLinks() {
+	const tNav = useTranslations("nav");
 	return (
 		<div className="flex flex-wrap items-center gap-4 text-muted-foreground text-sm">
 			<Link
-				aria-label="Ikiform on GitHub (opens in a new tab)"
+				aria-label={tNav("socialGithubAria")}
 				className="flex items-center gap-2 transition-colors hover:text-foreground"
 				href="/github"
 				rel="noopener noreferrer"
@@ -358,7 +360,7 @@ const SocialLinks = React.memo(function SocialLinks() {
 				<FaGithub aria-hidden className="size-4" />
 			</Link>
 			<Link
-				aria-label="Ikiform on Twitter (opens in a new tab)"
+				aria-label={tNav("socialTwitterAria")}
 				className="flex items-center gap-2 transition-colors hover:text-foreground"
 				href="/twitter"
 				rel="noopener noreferrer"
@@ -367,7 +369,7 @@ const SocialLinks = React.memo(function SocialLinks() {
 				<FaXTwitter aria-hidden className="size-4" />
 			</Link>
 			<Link
-				aria-label="Ikiform on Discord (opens in a new tab)"
+				aria-label={tNav("socialDiscordAria")}
 				className="flex items-center gap-2 transition-colors hover:text-foreground"
 				href="/discord"
 				rel="noopener noreferrer"
@@ -376,7 +378,7 @@ const SocialLinks = React.memo(function SocialLinks() {
 				<FaDiscord aria-hidden className="size-5" />
 			</Link>
 			<Link
-				aria-label="Email Ikiform (opens in a new tab)"
+				aria-label={tNav("socialEmailAria")}
 				className="flex items-center gap-2 transition-colors hover:text-foreground"
 				href="/email"
 				rel="noopener noreferrer"

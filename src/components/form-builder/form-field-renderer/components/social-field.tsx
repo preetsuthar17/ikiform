@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,7 +10,7 @@ import { getBaseClasses } from "../utils";
 
 interface SocialPlatformConfig {
 	platform: string;
-	label: string;
+	labelKey: string;
 	placeholder: string;
 	icon: string;
 }
@@ -17,49 +18,50 @@ interface SocialPlatformConfig {
 const AVAILABLE_SOCIAL_PLATFORMS: SocialPlatformConfig[] = [
 	{
 		platform: "linkedin",
-		label: "LinkedIn",
+		labelKey: "linkedin",
 		placeholder: "https://linkedin.com/in/username",
 		icon: "linkedin",
 	},
 	{
 		platform: "twitter",
-		label: "X (Twitter)",
+		labelKey: "twitter",
 		placeholder: "https://x.com/username",
 		icon: "twitter",
 	},
 	{
 		platform: "youtube",
-		label: "YouTube",
+		labelKey: "youtube",
 		placeholder: "https://youtube.com/@channel",
 		icon: "youtube",
 	},
 	{
 		platform: "instagram",
-		label: "Instagram",
+		labelKey: "instagram",
 		placeholder: "https://instagram.com/username",
 		icon: "instagram",
 	},
 	{
 		platform: "facebook",
-		label: "Facebook",
+		labelKey: "facebook",
 		placeholder: "https://facebook.com/username",
 		icon: "facebook",
 	},
 	{
 		platform: "github",
-		label: "GitHub",
+		labelKey: "github",
 		placeholder: "https://github.com/username",
 		icon: "github",
 	},
 	{
 		platform: "website",
-		label: "Website",
+		labelKey: "website",
 		placeholder: "https://example.com",
 		icon: "website",
 	},
 ];
 
 export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
+	const t = useTranslations("product.formBuilder.fieldRenderer.social");
 	const baseClasses = getBaseClasses(field, error);
 	const socialData = value || {};
 
@@ -109,7 +111,7 @@ export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
 								className="font-medium text-sm"
 								htmlFor={`${field.id}-${platform.platform}`}
 							>
-								{platform.label}
+								{t(`platforms.${platform.labelKey}`)}
 							</Label>
 							<Input
 								autoComplete="url"
@@ -133,7 +135,7 @@ export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
 								className="font-medium text-sm"
 								htmlFor={`${field.id}-custom-${index}`}
 							>
-								{link.label || `Custom Link ${index + 1}`}
+								{link.label || t("customLink", { index: index + 1 })}
 							</Label>
 							<Input
 								autoComplete="url"
@@ -142,7 +144,7 @@ export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
 								name={`${field.id}-custom-${index}`}
 								onChange={(e) => handleCustomLinkChange(index, e.target.value)}
 								onKeyDown={handleInputKeyDown}
-								placeholder={link.placeholder || "https://example.com"}
+								placeholder={link.placeholder || t("customLinkPlaceholder")}
 								type="url"
 								value={socialData[`custom_${index}`] || ""}
 							/>
@@ -159,7 +161,9 @@ export function SocialField({ field, value, onChange, error }: BaseFieldProps) {
 		return (
 			<Card className="border-0 bg-muted/30 shadow-none">
 				<CardContent className="p-4">
-					<Label className="mb-3 block font-semibold text-sm">Preview</Label>
+					<Label className="mb-3 block font-semibold text-sm">
+						{t("preview")}
+					</Label>
 					<SocialMediaIcons
 						className="justify-center"
 						iconSize={previewIconSize}

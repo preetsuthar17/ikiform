@@ -2,7 +2,8 @@
 
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { FaGithub } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
@@ -14,25 +15,17 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { useAuth } from "@/hooks/use-auth";
 import { toast } from "@/hooks/use-toast";
+import { getLocaleFromPathname, withLocaleHref } from "@/lib/i18n/pathname";
 import { createClient } from "@/utils/supabase/client";
 
 const baseInputClass =
 	"linear h-12 rounded-md px-4 py-3 text-sm transition-all duration-300 border-border";
 
-const stepTitles: Record<string, string> = {
-	email: "Welcome back",
-	name: "What's your name?",
-	password: "Enter your password",
-};
-
-const stepTitlesSignUp: Record<string, string> = {
-	email: "Create account",
-	name: "What's your name?",
-	password: "Enter your password",
-};
-
 export default function LoginForm() {
+	const t = useTranslations("auth.login");
 	const { user } = useAuth();
+	const pathname = usePathname();
+	const router = useRouter();
 	const [isSignUp, setIsSignUp] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [step, setStep] = useState<"email" | "name" | "password">("email");
@@ -53,6 +46,11 @@ export default function LoginForm() {
 	const emailRef = useRef<HTMLInputElement | null>(null);
 	const nameRef = useRef<HTMLInputElement | null>(null);
 	const passwordRef = useRef<HTMLInputElement | null>(null);
+	const locale = getLocaleFromPathname(pathname);
+	const toLocalePath = useCallback(
+		(path: string) => (locale ? withLocaleHref(path, locale) : path),
+		[locale]
+	);
 
 	useEffect(() => {
 		setLastLoginMethod(localStorage.getItem("lastLoginMethod"));
@@ -73,11 +71,11 @@ export default function LoginForm() {
 				: null;
 		if (redirectUrl) {
 			sessionStorage.removeItem("redirectAfterLogin");
-			redirect(redirectUrl);
+			router.replace(redirectUrl);
 		} else {
-			redirect("/dashboard");
+			router.replace(toLocalePath("/dashboard"));
 		}
-	}, [user]);
+	}, [router, toLocalePath, user]);
 
 	const handleInput = useCallback((field: string, value: string) => {
 		setForm((f) => ({ ...f, [field]: value }));
@@ -86,38 +84,38 @@ export default function LoginForm() {
 
 	const validateEmail = useCallback(() => {
 		if (!form.email) {
-			setErrors((e) => ({ ...e, email: "Email is required" }));
+			setErrors((e) => ({ ...e, email: t("errors.emailRequired") }));
 			return false;
 		}
 		if (!form.email.includes("@")) {
-			setErrors((e) => ({ ...e, email: "Please enter a valid email address" }));
+			setErrors((e) => ({ ...e, email: t("errors.emailInvalid") }));
 			return false;
 		}
 		return true;
-	}, [form.email]);
+	}, [form.email, t]);
 
 	const validatePassword = useCallback(() => {
 		if (!form.password) {
-			setErrors((e) => ({ ...e, password: "Password is required" }));
+			setErrors((e) => ({ ...e, password: t("errors.passwordRequired") }));
 			return false;
 		}
 		if (form.password.length < 6) {
 			setErrors((e) => ({
 				...e,
-				password: "Password must be at least 6 characters",
+				password: t("errors.passwordMin"),
 			}));
 			return false;
 		}
 		return true;
-	}, [form.password]);
+	}, [form.password, t]);
 
 	const validateName = useCallback(() => {
 		if (!form.name.trim()) {
-			setErrors((e) => ({ ...e, name: "Name is required for sign up" }));
+			setErrors((e) => ({ ...e, name: t("errors.nameRequired") }));
 			return false;
 		}
 		return true;
-	}, [form.name]);
+	}, [form.name, t]);
 
 	const next = useCallback(
 		async (e: React.FormEvent) => {
@@ -150,24 +148,22 @@ export default function LoginForm() {
 	}, []);
 
 	const handleForgot = useCallback(async () => {
-		if (!form.email)
-			return toast.error("Please enter your email address first");
-		if (!form.email.includes("@"))
-			return toast.error("Please enter a valid email address");
+		if (!form.email) return toast.error(t("errors.enterEmailFirst"));
+		if (!form.email.includes("@")) return toast.error(t("errors.emailInvalid"));
 		setLoading(true);
 		const supabase = createClient();
 		try {
 			const { error } = await supabase.auth.resetPasswordForEmail(form.email, {
-				redirectTo: `${window.location.origin}/reset-password`,
+				redirectTo: `${window.location.origin}${toLocalePath("/reset-password")}`,
 			});
 			if (error) toast.error(error.message);
-			else toast.success("Password reset link sent!");
+			else toast.success(t("toasts.resetSent"));
 		} catch {
-			toast.error("An unexpected error occurred. Please try again.");
+			toast.error(t("toasts.unexpectedError"));
 		} finally {
 			setLoading(false);
 		}
-	}, [form.email]);
+	}, [form.email, t, toLocalePath]);
 
 	const handleAuth = useCallback(async () => {
 		setLoading(true);
@@ -181,20 +177,16 @@ export default function LoginForm() {
 				});
 				if (error) {
 					if (error.message.includes("already registered"))
-						toast.error(
-							"This email is already registered. Try signing in instead."
-						);
+						toast.error(t("toasts.emailAlreadyRegistered"));
 					else toast.error(error.message);
 				} else {
 					try {
 						await fetch("/api/user", { method: "POST" });
 					} catch {}
 					if (data.user?.email_confirmed_at)
-						toast.success("Account created and verified!");
+						toast.success(t("toasts.accountCreatedVerified"));
 					else
-						toast.success(
-							"Account created! Please check your email for verification."
-						);
+						toast.success(t("toasts.accountCreatedCheckEmail"));
 				}
 			} else {
 				const { data, error } = await supabase.auth.signInWithPassword({
@@ -203,12 +195,10 @@ export default function LoginForm() {
 				});
 				if (error) {
 					if (error.message.includes("Invalid login credentials")) {
-						setErrors((e) => ({ ...e, password: "Invalid email or password" }));
+						setErrors((e) => ({ ...e, password: t("errors.invalidCredentials") }));
 						passwordRef.current?.focus();
 					} else if (error.message.includes("Email not confirmed")) {
-						toast.error(
-							"Please check your email and click the verification link before signing in."
-						);
+						toast.error(t("toasts.emailNotConfirmed"));
 					} else toast.error(error.message);
 				} else {
 					try {
@@ -218,26 +208,31 @@ export default function LoginForm() {
 							body: JSON.stringify({ ensureOnly: true }),
 						});
 					} catch {}
-					toast.success("Signed in successfully!");
+					toast.success(t("toasts.signInSuccess"));
 				}
 			}
 		} catch {
-			toast.error("An unexpected error occurred. Please try again.");
+			toast.error(t("toasts.unexpectedError"));
 		} finally {
 			setLoading(false);
 		}
-	}, [isSignUp, form.email, form.password, form.name]);
+	}, [form.email, form.name, form.password, isSignUp, t]);
 
 	const handleOAuth = useCallback(async (provider: "github" | "google") => {
 		localStorage.setItem("lastLoginMethod", provider);
 		setLastLoginMethod(provider);
-		toast(`Logging in with ${provider === "google" ? "Google" : "GitHub"}`);
+		toast(
+			t("toasts.oauthLogin", {
+				provider:
+					provider === "google" ? t("providers.google") : t("providers.github"),
+			})
+		);
 		const supabase = createClient();
 		await supabase.auth.signInWithOAuth({
 			provider,
 			options: { redirectTo: `${window.location.origin}/auth/callback` },
 		});
-	}, []);
+	}, [t]);
 
 	const renderInput = useCallback(
 		(
@@ -276,7 +271,11 @@ export default function LoginForm() {
 				</Label>
 				{field === "password" && (
 					<button
-						aria-label={showPassword ? "Hide password" : "Show password"}
+						aria-label={
+							showPassword
+								? t("actions.hidePassword")
+								: t("actions.showPassword")
+						}
 						aria-pressed={showPassword}
 						className="absolute top-1/2 right-2 -translate-y-1/2 rounded-md p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
 						onClick={() => setShowPassword((v) => !v)}
@@ -298,12 +297,21 @@ export default function LoginForm() {
 				)}
 			</div>
 		),
-		[form, errors, focused, loading, showPassword, handleInput]
+		[errors, form, focused, handleInput, loading, showPassword, t]
 	);
 
 	const currentTitle = useMemo(
-		() => (isSignUp ? stepTitlesSignUp : stepTitles)[step],
-		[isSignUp, step]
+		() => {
+			if (isSignUp) {
+				if (step === "email") return t("titles.signUp.email");
+				if (step === "name") return t("titles.signUp.name");
+				return t("titles.signUp.password");
+			}
+			if (step === "email") return t("titles.signIn.email");
+			if (step === "name") return t("titles.signIn.name");
+			return t("titles.signIn.password");
+		},
+		[isSignUp, step, t]
 	);
 
 	return (
@@ -327,16 +335,22 @@ export default function LoginForm() {
 						>
 							{}
 							{step === "email" &&
-								renderInput(emailRef, "email", "Enter your email", "email", {
+								renderInput(
+									emailRef,
+									"email",
+									t("inputs.emailLabel"),
+									"email",
+									{
 									autoComplete: "email",
 									spellCheck: false,
 									inputMode: "email",
-								})}
+									}
+								)}
 
 							{}
 							{step === "name" &&
 								isSignUp &&
-								renderInput(nameRef, "name", "Enter your name", "text", {
+								renderInput(nameRef, "name", t("inputs.nameLabel"), "text", {
 									autoComplete: "name",
 								})}
 
@@ -345,7 +359,7 @@ export default function LoginForm() {
 								renderInput(
 									passwordRef,
 									"password",
-									"Enter your password",
+									t("inputs.passwordLabel"),
 									showPassword ? "text" : "password",
 									{
 										autoComplete: isSignUp
@@ -357,12 +371,12 @@ export default function LoginForm() {
 							<Button
 								aria-label={
 									loading
-										? "Processing..."
+										? t("actions.processing")
 										: step === "password"
 											? isSignUp
-												? "Create account"
-												: "Sign in"
-											: "Continue"
+												? t("actions.createAccount")
+												: t("actions.signIn")
+											: t("actions.continue")
 								}
 								className="h-12 w-full rounded-md text-sm"
 								disabled={loading}
@@ -373,22 +387,22 @@ export default function LoginForm() {
 									? ""
 									: step === "password"
 										? isSignUp
-											? "Create account"
-											: "Sign in"
-										: "Continue"}
+											? t("actions.createAccount")
+											: t("actions.signIn")
+										: t("actions.continue")}
 							</Button>
 
 							{}
 							{step !== "email" && (
 								<Button
-									aria-label="Go back to previous step"
+									aria-label={t("actions.goBackAria")}
 									className="flex h-12 w-full items-center justify-center gap-2 rounded-md text-sm"
 									disabled={loading}
 									onClick={back}
 									type="button"
 									variant="ghost"
 								>
-									Back
+									{t("actions.back")}
 								</Button>
 							)}
 
@@ -396,14 +410,14 @@ export default function LoginForm() {
 							{step === "password" && !isSignUp && (
 								<div className="text-center">
 									<Button
-										aria-label="Forgot your password? Reset it"
+										aria-label={t("actions.forgotPasswordAria")}
 										className="h-auto p-0 text-muted-foreground text-sm"
 										disabled={loading}
 										onClick={handleForgot}
 										type="button"
 										variant="link"
 									>
-										Forgot your password?
+										{t("actions.forgotPassword")}
 									</Button>
 								</div>
 							)}
@@ -414,7 +428,9 @@ export default function LoginForm() {
 							<div className="text-center">
 								<Button
 									aria-label={
-										isSignUp ? "Switch to sign in" : "Switch to sign up"
+										isSignUp
+											? t("actions.switchToSignInAria")
+											: t("actions.switchToSignUpAria")
 									}
 									className="h-auto p-0 text-sm"
 									disabled={loading}
@@ -426,8 +442,8 @@ export default function LoginForm() {
 									variant="link"
 								>
 									{isSignUp
-										? "Already have an account? Sign in"
-										: "Don't have an account? Sign up"}
+										? t("actions.alreadyHaveAccount")
+										: t("actions.noAccount")}
 								</Button>
 							</div>
 						)}
@@ -444,14 +460,14 @@ export default function LoginForm() {
 											aria-hidden="true"
 											className="bg-background px-2 text-muted-foreground"
 										>
-											Or
+											{t("actions.or")}
 										</span>
 									</div>
 								</div>
 								<div className="flex w-full flex-col items-start justify-center gap-2">
 									<div className="relative w-full">
 										<Button
-											aria-label="Continue with Google"
+											aria-label={t("actions.continueWithGoogleAria")}
 											className="flex h-12 w-full items-center gap-2 rounded-md bg-card font-medium text-sm"
 											disabled={loading}
 											onClick={() => handleOAuth("google")}
@@ -459,21 +475,21 @@ export default function LoginForm() {
 											variant="outline"
 										>
 											<FcGoogle size={22} />
-											Continue with Google
+											{t("actions.continueWithGoogle")}
 										</Button>
 										{lastLoginMethod === "google" && (
 											<Badge
-												aria-label="Last used login method"
+												aria-label={t("badges.lastUsedAria")}
 												className="absolute -top-1 -right-1 rounded-full bg-background"
 												variant="outline"
 											>
-												Last used
+												{t("badges.lastUsed")}
 											</Badge>
 										)}
 									</div>
 									<div className="relative w-full">
 										<Button
-											aria-label="Continue with GitHub"
+											aria-label={t("actions.continueWithGithubAria")}
 											className="flex h-12 w-full items-center gap-2 rounded-md bg-card font-medium text-sm"
 											disabled={loading}
 											onClick={() => handleOAuth("github")}
@@ -481,15 +497,15 @@ export default function LoginForm() {
 											variant="outline"
 										>
 											<FaGithub size={22} />
-											Continue with GitHub
+											{t("actions.continueWithGithub")}
 										</Button>
 										{lastLoginMethod === "github" && (
 											<Badge
-												aria-label="Last used login method"
+												aria-label={t("badges.lastUsedAria")}
 												className="absolute -right-1 -bottom-1 rounded-full bg-background"
 												variant="outline"
 											>
-												Last used
+												{t("badges.lastUsed")}
 											</Badge>
 										)}
 									</div>
@@ -502,13 +518,17 @@ export default function LoginForm() {
 
 			<div className="text-center text-muted-foreground text-sm">
 				<p>
-					By signing {isSignUp ? "up" : "in"}, you agree to our{" "}
+					{t("legal.agree", {
+						action: isSignUp
+							? t("legal.actions.signUp")
+							: t("legal.actions.signIn"),
+					})}{" "}
 					<Link
 						className="text-muted-foreground underline"
-						href="/legal/terms"
+						href={toLocalePath("/legal/terms")}
 						target="_blank"
 					>
-						Terms of Service
+						{t("legal.termsOfService")}
 					</Link>
 				</p>
 			</div>

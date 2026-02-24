@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,20 +23,21 @@ export default function EmbedSettings({
 	config,
 	updateConfig,
 }: EmbedSettingsProps) {
+	const t = useTranslations("product.embed.settings");
 	return (
 		<div className="flex flex-col gap-6">
 			{}
 			<div className="flex flex-col gap-3">
-				<h3 className="font-medium text-sm">Dimensions</h3>
+				<h3 className="font-medium text-sm">{t("dimensions.title")}</h3>
 
 				<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
 					<div className="flex flex-col gap-2">
-						<Label>Width</Label>
+						<Label>{t("dimensions.width")}</Label>
 						<div className="flex gap-2">
 							<Input
 								className="flex-1"
 								onChange={(e) => updateConfig({ width: e.target.value })}
-								placeholder="e.g., 100%, 800px"
+								placeholder={t("dimensions.widthPlaceholder")}
 								value={config.width}
 							/>
 							<Button
@@ -56,12 +58,12 @@ export default function EmbedSettings({
 					</div>
 
 					<div className="flex flex-col gap-2">
-						<Label>Height</Label>
+						<Label>{t("dimensions.height")}</Label>
 						<div className="flex gap-2">
 							<Input
 								className="flex-1"
 								onChange={(e) => updateConfig({ height: e.target.value })}
-								placeholder="e.g., 600px, 100vh"
+								placeholder={t("dimensions.heightPlaceholder")}
 								value={config.height}
 							/>
 							<Button
@@ -87,17 +89,17 @@ export default function EmbedSettings({
 						checked={config.responsive}
 						onCheckedChange={(checked) => updateConfig({ responsive: checked })}
 					/>
-					<Label>Make responsive (adjusts to container width)</Label>
+					<Label>{t("dimensions.makeResponsive")}</Label>
 				</div>
 			</div>
 
 			{}
 			<div className="flex flex-col gap-3">
-				<h3 className="font-medium text-sm">Appearance</h3>
+				<h3 className="font-medium text-sm">{t("appearance.title")}</h3>
 
 				<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
 					<div className="flex flex-col gap-2">
-						<Label>Background Color</Label>
+						<Label>{t("appearance.backgroundColor")}</Label>
 						<div className="flex gap-2">
 							<input
 								className="h-10 w-12 cursor-pointer rounded-xl border border-border"
@@ -127,27 +129,27 @@ export default function EmbedSettings({
 						}
 					/>
 					<Label>
-						Allow transparent background (overrides background color)
+						{t("appearance.allowTransparentBackground")}
 					</Label>
 				</div>
 			</div>
 
 			{}
 			<div className="flex flex-col gap-3">
-				<h3 className="font-medium text-sm">Border & Styling</h3>
+				<h3 className="font-medium text-sm">{t("border.title")}</h3>
 
 				<div className="flex items-center gap-2">
 					<Switch
 						checked={config.showBorder}
 						onCheckedChange={(checked) => updateConfig({ showBorder: checked })}
 					/>
-					<Label>Show border</Label>
+					<Label>{t("border.showBorder")}</Label>
 				</div>
 
 				{config.showBorder && (
 					<div className="grid grid-cols-1 gap-6 md:grid-cols-3">
 						<div className="flex flex-col gap-2">
-							<Label>Border Color</Label>
+							<Label>{t("border.borderColor")}</Label>
 							<div className="flex gap-2">
 								<input
 									className="h-10 w-12 cursor-pointer rounded-xl border border-border"
@@ -169,7 +171,7 @@ export default function EmbedSettings({
 						</div>
 
 						<div className="flex flex-col gap-2">
-							<Label>Border Width (px)</Label>
+							<Label>{t("border.borderWidth")}</Label>
 							<Input
 								max="10"
 								min="0"
@@ -184,7 +186,7 @@ export default function EmbedSettings({
 						</div>
 
 						<div className="flex flex-col gap-2">
-							<Label>Border Radius (px)</Label>
+							<Label>{t("border.borderRadius")}</Label>
 							<Input
 								max="50"
 								min="0"
@@ -201,7 +203,7 @@ export default function EmbedSettings({
 				)}
 
 				<div className="flex flex-col gap-2">
-					<Label>Padding (px)</Label>
+					<Label>{t("border.padding")}</Label>
 					<Input
 						className="w-full md:w-32"
 						max="100"
@@ -213,16 +215,16 @@ export default function EmbedSettings({
 						value={config.padding.toString()}
 					/>
 					<p className="text-muted-foreground text-xs">
-						Space around the iframe
+						{t("border.paddingHelp")}
 					</p>
 				</div>
 			</div>
 
 			{}
 			<div className="flex flex-col gap-3">
-				<h3 className="font-medium text-sm">Performance</h3>
+				<h3 className="font-medium text-sm">{t("performance.title")}</h3>
 				<div className="flex flex-col gap-2">
-					<Label>Loading Mode</Label>
+					<Label>{t("performance.loadingMode")}</Label>
 					<Select
 						onValueChange={(value) =>
 							updateConfig({ loadingMode: value as "eager" | "lazy" })
@@ -230,16 +232,15 @@ export default function EmbedSettings({
 						value={config.loadingMode}
 					>
 						<SelectTrigger>
-							<SelectValue placeholder="Select loading mode" />
+							<SelectValue placeholder={t("performance.loadingModePlaceholder")} />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem value="lazy">Lazy (recommended)</SelectItem>
-							<SelectItem value="eager">Eager</SelectItem>
+							<SelectItem value="lazy">{t("performance.lazy")}</SelectItem>
+							<SelectItem value="eager">{t("performance.eager")}</SelectItem>
 						</SelectContent>
 					</Select>
 					<p className="text-muted-foreground text-xs">
-						Lazy loading improves page performance by loading the iframe only
-						when it comes into view
+						{t("performance.help")}
 					</p>
 				</div>
 			</div>

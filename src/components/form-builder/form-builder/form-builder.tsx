@@ -48,6 +48,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 	const router = useRouter();
 	const locale = useLocale();
 	const t = useTranslations("product.formBuilder.page");
+	const tToasts = useTranslations("product.formBuilder.toasts");
 	const {
 		state,
 		actions,
@@ -57,7 +58,9 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 		debouncedAutoSave,
 		lastSavedSchemaRef,
 		lastManuallySavedSchemaRef,
-	} = useFormBuilder(formId);
+	} = useFormBuilder(formId, {
+		loadFailed: tToasts("loadFailed"),
+	});
 
 	const isMobile = useIsMobile();
 	const [showFieldPalette, setShowFieldPalette] = useState(false);
@@ -133,7 +136,9 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 	const addBlock = () => {
 		const newBlock: FormBlock = {
 			id: generateBlockId(),
-			title: `Step ${state.formSchema.blocks.length + 1}`,
+			title: t("stepDefaultTitle", {
+				index: state.formSchema.blocks.length + 1,
+			}),
 			description: "",
 			fields: [],
 		};
@@ -214,7 +219,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 
 	const saveForm = async () => {
 		if (!user) {
-			toast.error("Please log in to save your form.");
+			toast.error(tToasts("loginRequiredToSave"));
 			return;
 		}
 
@@ -222,7 +227,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 		try {
 			if (formId && user) {
 				await formsDb.updateForm(formId, user.id, { schema: state.formSchema });
-				toast.success("Form saved successfully!");
+				toast.success(tToasts("formSaved"));
 			} else {
 				const newForm = await formsDb.createForm(
 					user.id,
@@ -230,12 +235,12 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 					state.formSchema
 				);
 				router.push(`/form-builder/${newForm.id}`);
-				toast.success("Form created successfully!");
+				toast.success(tToasts("formCreated"));
 			}
 			removeDraftFromStorage(DRAFT_KEYS.getDraftKey(formId));
 		} catch (error) {
 			console.error("Error saving form:", error);
-			toast.error("Failed to save form. Please try again.");
+			toast.error(tToasts("saveFailed"));
 		} finally {
 			actions.setSaving(false);
 		}
@@ -243,7 +248,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 
 	const shareForm = () => {
 		if (!formId) {
-			toast.error("Please save your form before sharing.");
+			toast.error(tToasts("saveBeforeShare"));
 			return;
 		}
 		actions.setShowShareModal(true);
@@ -255,30 +260,30 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 		try {
 			await formsDb.togglePublishForm(formId, user.id, true);
 			actions.setIsPublished(true);
-			toast.success("Form published successfully!");
+			toast.success(tToasts("formPublished"));
 		} catch (error) {
 			console.error("Error publishing form:", error);
-			toast.error("Failed to publish form. Please try again.");
+			toast.error(tToasts("publishFailed"));
 			throw error;
 		}
 	};
 
 	const viewAnalytics = () => {
 		if (!formId) {
-			toast.error("Please save your form before viewing analytics.");
+			toast.error(tToasts("saveBeforeAnalytics"));
 			return;
 		}
-		toast.success("Loading Analytics");
+		toast.success(tToasts("loadingAnalytics"));
 		router.push(`/dashboard/forms/${formId}/analytics`);
 	};
 
 	const togglePublish = async () => {
 		if (!formId) {
-			toast.error("Please save your form before publishing.");
+			toast.error(tToasts("saveBeforePublish"));
 			return;
 		}
 		if (!user) {
-			toast.error("User authentication required");
+			toast.error(tToasts("userAuthRequired"));
 			return;
 		}
 
@@ -289,13 +294,13 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 			actions.setIsPublished(newPublishState);
 
 			if (newPublishState) {
-				toast.success("Form published successfully!");
+				toast.success(tToasts("formPublished"));
 			} else {
-				toast.success("Form unpublished successfully!");
+				toast.success(tToasts("formUnpublished"));
 			}
 		} catch (error) {
 			console.error("Error toggling publish state:", error);
-			toast.error("Failed to update form status. Please try again.");
+			toast.error(tToasts("updateStatusFailed"));
 		} finally {
 			actions.setPublishing(false);
 		}
@@ -343,8 +348,8 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 						blocks: [
 							{
 								id: "step-1",
-								title: "Step 1",
-								description: "First step of your form",
+								title: t("stepDefaultTitle", { index: 1 }),
+								description: t("stepDefaultDescription"),
 								fields: currentFields,
 							},
 						],
@@ -520,7 +525,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 								lastManuallySavedSchemaRef.current = updatedSchema;
 							} catch (error) {
 								console.error("Error saving settings:", error);
-								toast.error("Failed to save settings. Please try again.");
+								toast.error(tToasts("saveSettingsFailed"));
 								actions.setHasUnsavedChanges(true);
 							}
 						} else {
@@ -614,7 +619,7 @@ export const FormBuilder: React.FC<FormBuilderProps> = ({ formId }) => {
 							lastManuallySavedSchemaRef.current = updatedSchema;
 						} catch (error) {
 							console.error("Error saving settings:", error);
-							toast.error("Failed to save settings. Please try again.");
+							toast.error(tToasts("saveSettingsFailed"));
 
 							actions.setHasUnsavedChanges(true);
 						}

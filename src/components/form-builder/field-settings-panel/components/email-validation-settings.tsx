@@ -1,4 +1,5 @@
 import { Plus, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -18,6 +19,7 @@ export function EmailValidationSettings({
 	field,
 	onUpdateSettings,
 }: EmailValidationSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.emailValidation");
 	const [newAllowedDomain, setNewAllowedDomain] = useState("");
 	const [newBlockedDomain, setNewBlockedDomain] = useState("");
 	const [newAutoCompleteDomain, setNewAutoCompleteDomain] = useState("");
@@ -103,7 +105,11 @@ export function EmailValidationSettings({
 			>
 				@{domain}
 				<Button
-					aria-label={`Remove ${domain}${variant === "destructive" ? " from blocked domains" : " from allowed domains"}`}
+					aria-label={
+						variant === "destructive"
+							? t("removeBlockedDomainAria", { domain })
+							: t("removeAllowedDomainAria", { domain })
+					}
 					className="ml-1 size-6 rounded-none p-0"
 					onClick={onRemove}
 					onKeyDown={(e) => {
@@ -125,14 +131,14 @@ export function EmailValidationSettings({
 		<Card className="gap-2 p-4 shadow-none">
 			<CardHeader className="p-0">
 				<CardTitle className="flex items-center gap-2 text-lg">
-					Email Validation
+					{t("title")}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 p-0">
 				{}
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="auto-complete-domain">
-						Auto-complete Domain
+						{t("autoCompleteDomain")}
 					</Label>
 					<div className="flex gap-2">
 						<Input
@@ -149,12 +155,12 @@ export function EmailValidationSettings({
 									setAutoCompleteDomain();
 								}
 							}}
-							placeholder="e.g., business.com"
+							placeholder={t("autoCompletePlaceholder")}
 							type="text"
 							value={newAutoCompleteDomain}
 						/>
 						<Button
-							aria-label="Set auto-complete domain"
+							aria-label={t("setAutoCompleteAria")}
 							className=""
 							disabled={!newAutoCompleteDomain.trim()}
 							onClick={setAutoCompleteDomain}
@@ -165,7 +171,7 @@ export function EmailValidationSettings({
 								}
 							}}
 						>
-							Set
+							{t("set")}
 						</Button>
 					</div>
 					{emailSettings.autoCompleteDomain && (
@@ -176,7 +182,9 @@ export function EmailValidationSettings({
 							>
 								@{emailSettings.autoCompleteDomain}
 								<Button
-									aria-label={`Remove ${emailSettings.autoCompleteDomain} domain`}
+									aria-label={t("removeAutoCompleteAria", {
+										domain: emailSettings.autoCompleteDomain,
+									})}
 									className="ml-1 size-6 p-0"
 									onClick={removeAutoCompleteDomain}
 									onKeyDown={(e) => {
@@ -197,15 +205,14 @@ export function EmailValidationSettings({
 						className="text-muted-foreground text-xs"
 						id="auto-complete-domain-help"
 					>
-						Users can enter just their username and the domain will be
-						auto-completed
+						{t("autoCompleteHelp")}
 					</p>
 				</div>
 
 				{}
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="allowed-domains">
-						Allowed Domains
+						{t("allowedDomains")}
 					</Label>
 					<div className="flex gap-2">
 						<Input
@@ -222,12 +229,12 @@ export function EmailValidationSettings({
 									addAllowedDomain();
 								}
 							}}
-							placeholder="e.g., company.com"
+							placeholder={t("allowedPlaceholder")}
 							type="text"
 							value={newAllowedDomain}
 						/>
 						<Button
-							aria-label="Add allowed domain"
+							aria-label={t("addAllowedDomainAria")}
 							className=""
 							disabled={!newAllowedDomain.trim()}
 							onClick={addAllowedDomain}
@@ -259,14 +266,14 @@ export function EmailValidationSettings({
 						className="text-muted-foreground text-xs"
 						id="allowed-domains-help"
 					>
-						Only emails from these domains will be accepted
+						{t("allowedHelp")}
 					</p>
 				</div>
 
 				{}
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="blocked-domains">
-						Blocked Domains
+						{t("blockedDomains")}
 					</Label>
 					<div className="flex gap-2">
 						<Input
@@ -283,12 +290,12 @@ export function EmailValidationSettings({
 									addBlockedDomain();
 								}
 							}}
-							placeholder="e.g., temp-mail.org"
+							placeholder={t("blockedPlaceholder")}
 							type="text"
 							value={newBlockedDomain}
 						/>
 						<Button
-							aria-label="Add blocked domain"
+							aria-label={t("addBlockedDomainAria")}
 							className=""
 							disabled={!newBlockedDomain.trim()}
 							onClick={addBlockedDomain}
@@ -319,8 +326,7 @@ export function EmailValidationSettings({
 						className="text-muted-foreground text-xs"
 						id="blocked-domains-help"
 					>
-						Emails from these domains will be rejected (temporary email services
-						are blocked by default)
+						{t("blockedHelp")}
 					</p>
 				</div>
 
@@ -331,10 +337,10 @@ export function EmailValidationSettings({
 							className="font-medium text-sm"
 							htmlFor="require-business-email"
 						>
-							Require Business Email
+							{t("requireBusinessEmail")}
 						</Label>
 						<p className="text-muted-foreground text-xs">
-							Only allow business domains (blocks Gmail, Yahoo, etc.)
+							{t("requireBusinessEmailHelp")}
 						</p>
 					</div>
 					<Switch
@@ -354,7 +360,7 @@ export function EmailValidationSettings({
 						className="font-medium text-sm"
 						htmlFor="custom-validation-message"
 					>
-						Custom Validation Message
+						{t("customValidationMessage")}
 					</Label>
 					<Input
 						aria-describedby="custom-validation-message-help"
@@ -371,7 +377,7 @@ export function EmailValidationSettings({
 								e.currentTarget.blur();
 							}
 						}}
-						placeholder="Custom error message for email validation"
+						placeholder={t("customValidationPlaceholder")}
 						type="text"
 						value={emailSettings.customValidationMessage || ""}
 					/>
@@ -379,7 +385,7 @@ export function EmailValidationSettings({
 						className="text-muted-foreground text-xs"
 						id="custom-validation-message-help"
 					>
-						Leave empty to use default messages
+						{t("customValidationHelp")}
 					</p>
 				</div>
 			</CardContent>

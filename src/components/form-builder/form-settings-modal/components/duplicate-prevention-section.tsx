@@ -1,4 +1,5 @@
 import { UserCheck } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -34,14 +35,37 @@ export function DuplicatePreventionSection({
 }: DuplicatePreventionSectionProps & {
 	onSchemaUpdate?: (updates: Partial<any>) => void;
 }) {
+	const t = useTranslations(
+		"product.formBuilder.formSettings.duplicatePreventionSection"
+	);
+	const tCommon = useTranslations("product.formBuilder.formSettings.common");
+	const localizeLegacyDefault = (
+		value: string | undefined,
+		oneTimeFallback: string,
+		timeBasedFallback: string
+	) => {
+		if (!value) return oneTimeFallback;
+		if (value === "You have already submitted this form. Each user can only submit once.") {
+			return oneTimeFallback;
+		}
+		if (
+			value ===
+			"You have already submitted this form. Please wait before submitting again."
+		) {
+			return timeBasedFallback;
+		}
+		return value;
+	};
 	const [duplicatePreventionSettings, setDuplicatePreventionSettings] =
 		useState({
 			enabled: localSettings.duplicatePrevention?.enabled,
 			strategy: localSettings.duplicatePrevention?.strategy || "combined",
 			mode: localSettings.duplicatePrevention?.mode || "one-time",
-			message:
-				localSettings.duplicatePrevention?.message ||
-				"You have already submitted this form. Each user can only submit once.",
+			message: localizeLegacyDefault(
+				localSettings.duplicatePrevention?.message,
+				t("defaultMessageOneTime"),
+				t("defaultMessageTimeBased")
+			),
 			timeWindow: localSettings.duplicatePrevention?.timeWindow || 1440,
 			maxAttempts: localSettings.duplicatePrevention?.maxAttempts || 1,
 			allowOverride: localSettings.duplicatePrevention?.allowOverride,
@@ -79,9 +103,11 @@ export function DuplicatePreventionSection({
 			enabled: localSettings.duplicatePrevention?.enabled,
 			strategy: localSettings.duplicatePrevention?.strategy || "combined",
 			mode: localSettings.duplicatePrevention?.mode || "one-time",
-			message:
-				localSettings.duplicatePrevention?.message ||
-				"You have already submitted this form. Each user can only submit once.",
+			message: localizeLegacyDefault(
+				localSettings.duplicatePrevention?.message,
+				t("defaultMessageOneTime"),
+				t("defaultMessageTimeBased")
+			),
 			timeWindow: localSettings.duplicatePrevention?.timeWindow || 1440,
 			maxAttempts: localSettings.duplicatePrevention?.maxAttempts || 1,
 			allowOverride: localSettings.duplicatePrevention?.allowOverride,
@@ -91,7 +117,7 @@ export function DuplicatePreventionSection({
 
 	const saveDuplicatePrevention = async () => {
 		if (!formId) {
-			toast.error("Form ID is required to save settings");
+			toast.error(tCommon("formIdRequiredToSaveSettings"));
 			return;
 		}
 
@@ -112,12 +138,12 @@ export function DuplicatePreventionSection({
 			updateDuplicatePrevention(trimmed);
 			setSaved(true);
 			setHasChanges(false);
-			toast.success("Duplicate prevention settings saved successfully");
+			toast.success(t("saved"));
 
 			setTimeout(() => setSaved(false), 2000);
 		} catch (error) {
 			console.error("Error saving duplicate prevention:", error);
-			toast.error("Failed to save duplicate prevention settings");
+			toast.error(t("saveFailed"));
 		} finally {
 			setSaving(false);
 		}
@@ -138,19 +164,18 @@ export function DuplicatePreventionSection({
 			announcement.setAttribute("aria-live", "polite");
 			announcement.setAttribute("aria-atomic", "true");
 			announcement.className = "sr-only";
-			announcement.textContent =
-				"Duplicate prevention settings saved successfully";
+			announcement.textContent = t("saved");
 			document.body.appendChild(announcement);
 
 			setTimeout(() => {
 				document.body.removeChild(announcement);
 			}, 1000);
 		}
-	}, [saved]);
+	}, [saved, t]);
 
 	return (
 		<div
-			aria-label="Duplicate prevention settings"
+			aria-label={t("ariaSettings")}
 			className="flex flex-col gap-4"
 			onKeyDown={(e) => {
 				const target = e.target as HTMLElement;
@@ -178,16 +203,16 @@ export function DuplicatePreventionSection({
 								className="flex items-center gap-2 text-lg tracking-tight"
 								id="duplicate-prevention-title"
 							>
-								Duplicate Prevention{" "}
+								{t("title")}{" "}
 								{hasChanges && (
 									<Badge className="gap-2" variant="secondary">
 										<div className="size-2 rounded-full bg-orange-500" />
-										Unsaved changes
+										{tCommon("unsavedChanges")}
 									</Badge>
 								)}
 							</CardTitle>
 							<CardDescription id="duplicate-prevention-description">
-								Prevent users from submitting the same form multiple times
+								{t("description")}
 							</CardDescription>
 						</div>
 					</div>
@@ -199,13 +224,13 @@ export function DuplicatePreventionSection({
 								className="font-medium text-sm"
 								htmlFor="duplicate-prevention-enabled"
 							>
-								Enable Duplicate Prevention
+								{t("enableLabel")}
 							</Label>
 							<p
 								className="text-muted-foreground text-xs"
 								id="duplicate-prevention-enabled-description"
 							>
-								Prevent users from submitting the same form multiple times
+								{t("enableDescription")}
 							</p>
 						</div>
 						<Switch
@@ -223,24 +248,29 @@ export function DuplicatePreventionSection({
 							<div className="flex flex-col gap-4">
 								<PreventionModeSection
 									duplicatePrevention={duplicatePreventionSettings}
+									t={t}
 									updateSettings={handleDuplicatePreventionChange}
 								/>
 								<PreventionStrategySection
 									duplicatePrevention={duplicatePreventionSettings}
+									t={t}
 									updateSettings={handleDuplicatePreventionChange}
 								/>
 								{duplicatePreventionSettings.mode === "time-based" && (
 									<TimeBasedSettingsSection
 										duplicatePrevention={duplicatePreventionSettings}
+										t={t}
 										updateSettings={handleDuplicatePreventionChange}
 									/>
 								)}
 								<ErrorMessageSection
 									duplicatePrevention={duplicatePreventionSettings}
+									t={t}
 									updateSettings={handleDuplicatePreventionChange}
 								/>
 								<OverrideSection
 									duplicatePrevention={duplicatePreventionSettings}
+									t={t}
 									updateSettings={handleDuplicatePreventionChange}
 								/>
 							</div>
@@ -252,10 +282,11 @@ export function DuplicatePreventionSection({
 							>
 								<div className="flex flex-col gap-2">
 									<h4 className="font-medium text-foreground text-sm">
-										Current Configuration
+										{t("currentConfiguration")}
 									</h4>
 									<DuplicatePreventionSummary
 										duplicatePrevention={duplicatePreventionSettings}
+										t={t}
 									/>
 								</div>
 							</div>
@@ -265,15 +296,13 @@ export function DuplicatePreventionSection({
 					{!duplicatePreventionSettings.enabled && (
 						<div className="rounded-lg bg-muted/30 p-4">
 							<p className="text-muted-foreground text-sm">
-								Duplicate prevention helps maintain data quality by preventing
-								users from submitting the same form multiple times. Choose
-								between time-based prevention or one-time submission mode.
+								{t("disabledDescription")}
 							</p>
 						</div>
 					)}
 
 					<div
-						aria-label="Duplicate prevention actions"
+						aria-label={t("actionsAria")}
 						className="flex items-center justify-between"
 						role="group"
 					>
@@ -285,14 +314,14 @@ export function DuplicatePreventionSection({
 									size="sm"
 									variant="ghost"
 								>
-									Reset
+									{tCommon("reset")}
 								</Button>
 							)}
 						</div>
 						<div className="flex items-center gap-2">
 							<Button
 								aria-describedby="duplicate-prevention-description"
-								aria-label="Save duplicate prevention settings"
+								aria-label={t("saveAria")}
 								disabled={saving || !hasChanges}
 								loading={saving}
 								onClick={saveDuplicatePrevention}
@@ -303,7 +332,7 @@ export function DuplicatePreventionSection({
 									}
 								}}
 							>
-								Save
+								{tCommon("save")}
 							</Button>
 						</div>
 					</div>
@@ -315,22 +344,24 @@ export function DuplicatePreventionSection({
 
 function PreventionModeSection({
 	duplicatePrevention,
+	t,
 	updateSettings,
 }: {
 	duplicatePrevention: any;
+	t: ReturnType<typeof useTranslations>;
 	updateSettings: (field: string, value: any) => void;
 }) {
 	return (
 		<div className="flex flex-col gap-2">
-			<Label className="font-medium text-sm">Prevention Mode</Label>
+			<Label className="font-medium text-sm">{t("preventionModeLabel")}</Label>
 			<RadioGroup
 				onValueChange={(value) => {
 					updateSettings("mode", value as "time-based" | "one-time");
 					updateSettings(
 						"message",
 						value === "one-time"
-							? "You have already submitted this form. Each user can only submit once."
-							: "You have already submitted this form. Please wait before submitting again."
+							? t("defaultMessageOneTime")
+							: t("defaultMessageTimeBased")
 					);
 				}}
 				value={duplicatePrevention.mode || "one-time"}
@@ -339,26 +370,26 @@ function PreventionModeSection({
 					<div className="flex items-center gap-2">
 						<RadioGroupItem id="one-time" value="one-time" />
 						<Label className="text-sm" htmlFor="one-time">
-							One-time submission
+							{t("oneTimeLabel")}
 						</Label>
 					</div>
 					<div className="flex items-start gap-2">
 						<div className="size-4" />
 						<p className="text-muted-foreground text-xs">
-							Allow only one submission per user, ever
+							{t("oneTimeDescription")}
 						</p>
 					</div>
 
 					<div className="flex items-center gap-2">
 						<RadioGroupItem id="time-based" value="time-based" />
 						<Label className="text-sm" htmlFor="time-based">
-							Time-based prevention
+							{t("timeBasedLabel")}
 						</Label>
 					</div>
 					<div className="flex items-start gap-2">
 						<div className="size-4" />
 						<p className="text-muted-foreground text-xs">
-							Prevent duplicate submissions within a specified time window
+							{t("timeBasedDescription")}
 						</p>
 					</div>
 				</div>
@@ -369,14 +400,16 @@ function PreventionModeSection({
 
 function PreventionStrategySection({
 	duplicatePrevention,
+	t,
 	updateSettings,
 }: {
 	duplicatePrevention: any;
+	t: ReturnType<typeof useTranslations>;
 	updateSettings: (field: string, value: any) => void;
 }) {
 	return (
 		<div className="flex flex-col gap-2">
-			<Label className="font-medium text-sm">Prevention Strategy</Label>
+			<Label className="font-medium text-sm">{t("preventionStrategyLabel")}</Label>
 			<Select
 				onValueChange={(value: "ip" | "email" | "session" | "combined") =>
 					updateSettings("strategy", value)
@@ -384,27 +417,23 @@ function PreventionStrategySection({
 				value={duplicatePrevention.strategy || "combined"}
 			>
 				<SelectTrigger>
-					<SelectValue placeholder="Select strategy" />
+					<SelectValue placeholder={t("selectStrategyPlaceholder")} />
 				</SelectTrigger>
 				<SelectContent>
-					<SelectItem value="combined">
-						Combined (IP + Email + Session) - Most Secure
-					</SelectItem>
-					<SelectItem value="email">
-						Email Address - Best for Registration
-					</SelectItem>
-					<SelectItem value="ip">IP Address - Simple & Reliable</SelectItem>
-					<SelectItem value="session">Session ID - Browser-based</SelectItem>
+					<SelectItem value="combined">{t("strategyCombinedLabel")}</SelectItem>
+					<SelectItem value="email">{t("strategyEmailLabel")}</SelectItem>
+					<SelectItem value="ip">{t("strategyIpLabel")}</SelectItem>
+					<SelectItem value="session">{t("strategySessionLabel")}</SelectItem>
 				</SelectContent>
 			</Select>
 			<p className="text-muted-foreground text-xs">
 				{duplicatePrevention.strategy === "combined" &&
-					"Track by combination of IP, email, and session for maximum accuracy"}
+					t("strategyCombinedDescription")}
 				{duplicatePrevention.strategy === "email" &&
-					"Track by email address (requires email field in form)"}
-				{duplicatePrevention.strategy === "ip" && "Track by IP address only"}
+					t("strategyEmailDescription")}
+				{duplicatePrevention.strategy === "ip" && t("strategyIpDescription")}
 				{duplicatePrevention.strategy === "session" &&
-					"Track by browser session"}
+					t("strategySessionDescription")}
 			</p>
 		</div>
 	);
@@ -412,31 +441,33 @@ function PreventionStrategySection({
 
 function TimeBasedSettingsSection({
 	duplicatePrevention,
+	t,
 	updateSettings,
 }: {
 	duplicatePrevention: any;
+	t: ReturnType<typeof useTranslations>;
 	updateSettings: (field: string, value: any) => void;
 }) {
 	return (
 		<div className="grid grid-cols-2 gap-4">
 			<DuplicatePreventionInput
-				description="How long to prevent duplicate submissions"
+				description={t("timeWindowDescription")}
 				id="time-window"
-				label="Time Window (minutes)"
+				label={t("timeWindowLabel")}
 				max={10_080}
 				min={1}
 				onChange={(value) => updateSettings("timeWindow", value)}
-				placeholder="1440"
+				placeholder={t("timeWindowPlaceholder")}
 				value={duplicatePrevention.timeWindow || 1440}
 			/>
 			<DuplicatePreventionInput
-				description="Maximum attempts allowed within time window"
+				description={t("maxAttemptsDescription")}
 				id="max-attempts"
-				label="Max Attempts"
+				label={t("maxAttemptsLabel")}
 				max={10}
 				min={1}
 				onChange={(value) => updateSettings("maxAttempts", value)}
-				placeholder="1"
+				placeholder={t("maxAttemptsPlaceholder")}
 				value={duplicatePrevention.maxAttempts || 1}
 			/>
 		</div>
@@ -445,14 +476,16 @@ function TimeBasedSettingsSection({
 
 function ErrorMessageSection({
 	duplicatePrevention,
+	t,
 	updateSettings,
 }: {
 	duplicatePrevention: any;
+	t: ReturnType<typeof useTranslations>;
 	updateSettings: (field: string, value: any) => void;
 }) {
 	return (
 		<div className="flex flex-col gap-2">
-			<Label htmlFor="duplicate-message">Error Message</Label>
+			<Label htmlFor="duplicate-message">{t("errorMessageLabel")}</Label>
 			<Textarea
 				autoComplete="off"
 				id="duplicate-message"
@@ -465,19 +498,19 @@ function ErrorMessageSection({
 				}}
 				placeholder={
 					duplicatePrevention.mode === "one-time"
-						? "You have already submitted this form. Each user can only submit once."
-						: "You have already submitted this form. Please wait before submitting again."
+						? t("defaultMessageOneTime")
+						: t("defaultMessageTimeBased")
 				}
 				rows={2}
 				value={
 					duplicatePrevention.message ||
 					(duplicatePrevention.mode === "one-time"
-						? "You have already submitted this form. Each user can only submit once."
-						: "You have already submitted this form. Please wait before submitting again.")
+						? t("defaultMessageOneTime")
+						: t("defaultMessageTimeBased"))
 				}
 			/>
 			<p className="text-muted-foreground text-xs">
-				Message shown to users when they try to submit a duplicate
+				{t("errorMessageDescription")}
 			</p>
 		</div>
 	);
@@ -485,9 +518,11 @@ function ErrorMessageSection({
 
 function OverrideSection({
 	duplicatePrevention,
+	t,
 	updateSettings,
 }: {
 	duplicatePrevention: any;
+	t: ReturnType<typeof useTranslations>;
 	updateSettings: (field: string, value: any) => void;
 }) {
 	return (
@@ -502,10 +537,10 @@ function OverrideSection({
 					className="font-medium text-sm"
 					htmlFor="duplicate-allow-override"
 				>
-					Allow Override
+					{t("allowOverrideLabel")}
 				</Label>
 				<p className="text-muted-foreground text-xs">
-					Allow users to bypass prevention (not recommended)
+					{t("allowOverrideDescription")}
 				</p>
 			</div>
 		</div>
@@ -556,34 +591,41 @@ function DuplicatePreventionInput({
 
 function DuplicatePreventionSummary({
 	duplicatePrevention,
+	t,
 }: {
 	duplicatePrevention: any;
+	t: ReturnType<typeof useTranslations>;
 }) {
 	const modeText =
 		duplicatePrevention.mode === "one-time"
-			? "one-time submission only"
-			: `${duplicatePrevention.maxAttempts || 1} submission(s) every ${duplicatePrevention.timeWindow || 1440} minutes`;
+			? t("summaryModeOneTime")
+			: t("summaryModeTimeBased", {
+					maxAttempts: duplicatePrevention.maxAttempts || 1,
+					timeWindow: duplicatePrevention.timeWindow || 1440,
+				});
 
 	const strategyText =
 		duplicatePrevention.strategy === "combined"
-			? "IP + Email + Session"
+			? t("summaryStrategyCombined")
 			: duplicatePrevention.strategy === "email"
-				? "Email Address"
+				? t("summaryStrategyEmail")
 				: duplicatePrevention.strategy === "ip"
-					? "IP Address"
-					: "Session ID";
+					? t("summaryStrategyIp")
+					: t("summaryStrategySession");
 
 	return (
 		<div className="rounded-2xl bg-muted/50 p-4">
 			<div className="flex items-center gap-2">
 				<UserCheck className="size-4 text-muted-foreground" />
-				<span className="font-medium text-sm">Current Settings</span>
+				<span className="font-medium text-sm">{t("currentSettings")}</span>
 			</div>
 			<p className="text-muted-foreground text-sm">
-				<span className="font-medium">{modeText}</span> using{" "}
-				<span className="font-medium">{strategyText}</span> tracking.
+				{t("summarySentence", { mode: modeText, strategy: strategyText })}
 				{duplicatePrevention.allowOverride && (
-					<span className="text-orange-600"> Override is enabled.</span>
+					<span className="text-orange-600">
+						{" "}
+						{t("summaryOverrideEnabled")}
+					</span>
 				)}
 			</p>
 		</div>

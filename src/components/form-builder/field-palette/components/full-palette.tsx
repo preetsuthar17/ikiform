@@ -1,4 +1,5 @@
 import { Search } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import {
 	InputGroup,
@@ -6,12 +7,7 @@ import {
 	InputGroupInput,
 } from "@/components/ui/input-group";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-	FIELD_CATEGORIES,
-	FIELD_TYPE_CONFIGS,
-} from "@/lib/fields/field-config";
-
-import { PALETTE_CONFIG } from "../constants";
+import { FIELD_TYPE_CONFIGS } from "@/lib/fields/field-config";
 
 import type { FieldPaletteProps } from "../types";
 import { FieldItem } from "./field-item";
@@ -20,24 +16,35 @@ import { PaletteHeader } from "./palette-header";
 export function FullPalette({
 	onAddField,
 }: Pick<FieldPaletteProps, "onAddField" | "formSchema" | "onSchemaUpdate">) {
+	const t = useTranslations("product.formBuilder.fieldPalette");
 	const [searchTerm, setSearchTerm] = useState("");
+	const localizedFields = useMemo(
+		() =>
+			FIELD_TYPE_CONFIGS.map((field) => ({
+				...field,
+				label: t(`fields.${field.type}.label`),
+				description: t(`fields.${field.type}.description`),
+				categoryLabel: t(`categories.${field.category}`),
+			})),
+		[t]
+	);
 
 	const filteredFields = useMemo(() => {
 		if (!searchTerm.trim()) {
-			return FIELD_TYPE_CONFIGS;
+			return localizedFields;
 		}
 
 		const term = searchTerm.toLowerCase();
-		return FIELD_TYPE_CONFIGS.filter(
+		return localizedFields.filter(
 			(field) =>
 				field.label.toLowerCase().includes(term) ||
 				field.description.toLowerCase().includes(term) ||
 				field.type.toLowerCase().includes(term)
 		);
-	}, [searchTerm]);
+	}, [searchTerm, localizedFields]);
 
 	const groupedFields = useMemo(() => {
-		const groups: Record<string, typeof FIELD_TYPE_CONFIGS> = {};
+		const groups: Record<string, typeof localizedFields> = {};
 
 		filteredFields.forEach((field) => {
 			if (!groups[field.category]) {
@@ -47,11 +54,11 @@ export function FullPalette({
 		});
 
 		return groups;
-	}, [filteredFields]);
+	}, [filteredFields, localizedFields]);
 
 	return (
 		<div
-			aria-label="Field palette"
+			aria-label={t("ariaPalette")}
 			className="flex h-full flex-col gap-6 border-border p-2 lg:border-r lg:p-4"
 			role="complementary"
 			style={{
@@ -60,8 +67,8 @@ export function FullPalette({
 		>
 			<div className="flex flex-col gap-4">
 				<PaletteHeader
-					description={PALETTE_CONFIG.HEADER.DESCRIPTION}
-					title={PALETTE_CONFIG.HEADER.TITLE}
+					description={t("headerDescription")}
+					title={t("headerTitle")}
 				/>
 			</div>
 			<InputGroup>
@@ -69,7 +76,7 @@ export function FullPalette({
 					<Search aria-hidden="true" className="size-4 text-muted-foreground" />
 				</InputGroupAddon>
 				<InputGroupInput
-					aria-label="Search fields"
+					aria-label={t("searchAria")}
 					autoComplete="off"
 					name="field-search"
 					onChange={(e) => setSearchTerm(e.target.value)}
@@ -79,7 +86,7 @@ export function FullPalette({
 							e.currentTarget.blur();
 						}
 					}}
-					placeholder="Search fields..."
+					placeholder={t("searchPlaceholder")}
 					type="search"
 					value={searchTerm}
 				/>
@@ -106,10 +113,12 @@ export function FullPalette({
 										className="px-1 text-muted-foreground text-xs uppercase tracking-wide"
 										role="heading"
 									>
-										{FIELD_CATEGORIES[key as keyof typeof FIELD_CATEGORIES]}
+										{fields[0]?.categoryLabel ?? t(`categories.${key}`)}
 									</div>
 									<div
-										aria-label={`${FIELD_CATEGORIES[key as keyof typeof FIELD_CATEGORIES]} fields`}
+										aria-label={t("categoryFieldsAria", {
+											category: fields[0]?.categoryLabel ?? t(`categories.${key}`),
+										})}
 										className="grid grid-cols-1 gap-2 rounded-2xl"
 										role="list"
 									>
@@ -144,10 +153,10 @@ export function FullPalette({
 								className="size-8 text-muted-foreground"
 							/>
 							<p className="text-muted-foreground text-sm">
-								No fields found matching "{searchTerm}"
+								{t("noFieldsFound", { searchTerm })}
 							</p>
 							<p className="text-muted-foreground text-xs">
-								Try searching by field name, description, or type
+								{t("searchHint")}
 							</p>
 						</div>
 					)}

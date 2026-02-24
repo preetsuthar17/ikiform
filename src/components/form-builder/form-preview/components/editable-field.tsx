@@ -1,4 +1,5 @@
 import { Edit3 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type React from "react";
 
 import { Input } from "@/components/ui/input";
@@ -34,6 +35,7 @@ export function EditableField({
 	disabled = false,
 	children,
 }: EditableFieldProps) {
+	const t = useTranslations("product.formBuilder.formPreview");
 	const {
 		isEditing,
 		tempValue,
@@ -84,7 +86,7 @@ export function EditableField({
 				<Tooltip>
 					<TooltipTrigger asChild>
 						<div
-							aria-label="Edit field"
+							aria-label={t("editFieldAria")}
 							className="flex w-full cursor-pointer items-center gap-2 rounded-xl p-2 transition-colors hover:bg-accent/10"
 							onClick={() => setIsEditing(true)}
 							onKeyDown={(e) => {
@@ -109,7 +111,7 @@ export function EditableField({
 						</div>
 					</TooltipTrigger>
 					<TooltipContent align="start" side="top">
-						Click to edit
+						{t("clickToEdit")}
 					</TooltipContent>
 				</Tooltip>
 			)}

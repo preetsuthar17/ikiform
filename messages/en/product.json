@@ -30,7 +30,8 @@
       "publishForm": "Publish form",
       "unpublishForm": "Unpublish form",
       "save": "Save",
-      "saveForm": "Save Form"
+      "saveForm": "Save Form",
+      "actionsAria": "Form builder actions"
     },
     "modals": {
       "formSettings": "Form Settings",
@@ -56,7 +57,10 @@
       "formFields": "Form Fields",
       "authRequired": "Authentication Required",
       "authRequiredDescription": "Please log in to use the form builder.",
-      "goToLogin": "Go to Login"
+      "goToLogin": "Go to Login",
+      "stepDefaultTitle": "Step {index}",
+      "stepDefaultDescription": "First step of your form",
+      "loadingCustomization": "Loading customization..."
     },
     "blockManager": {
       "header": {
@@ -225,18 +229,48 @@
         "fontWeight": "Font Weight",
         "selected": "Selected:",
         "fontSizeOptions": {
-          "xs": { "label": "Extra Small", "description": "12px" },
-          "sm": { "label": "Small", "description": "14px" },
-          "base": { "label": "Base", "description": "16px" },
-          "lg": { "label": "Large", "description": "18px" },
-          "xl": { "label": "Extra Large", "description": "20px" }
+          "xs": {
+            "label": "Extra Small",
+            "description": "12px"
+          },
+          "sm": {
+            "label": "Small",
+            "description": "14px"
+          },
+          "base": {
+            "label": "Base",
+            "description": "16px"
+          },
+          "lg": {
+            "label": "Large",
+            "description": "18px"
+          },
+          "xl": {
+            "label": "Extra Large",
+            "description": "20px"
+          }
         },
         "fontWeightOptions": {
-          "light": { "label": "Light", "description": "300" },
-          "normal": { "label": "Normal", "description": "400" },
-          "medium": { "label": "Medium", "description": "500" },
-          "semibold": { "label": "Semibold", "description": "600" },
-          "bold": { "label": "Bold", "description": "700" }
+          "light": {
+            "label": "Light",
+            "description": "300"
+          },
+          "normal": {
+            "label": "Normal",
+            "description": "400"
+          },
+          "medium": {
+            "label": "Medium",
+            "description": "500"
+          },
+          "semibold": {
+            "label": "Semibold",
+            "description": "600"
+          },
+          "bold": {
+            "label": "Bold",
+            "description": "700"
+          }
         }
       },
       "layout": {
@@ -254,31 +288,88 @@
         "cornerRadius": "Corner Radius",
         "cornerRadiusHelp": "Controls how rounded the form corners appear",
         "widthOptions": {
-          "sm": { "label": "Small", "description": "400px max width" },
-          "md": { "label": "Medium", "description": "600px max width" },
-          "lg": { "label": "Large", "description": "800px max width" },
-          "xl": { "label": "Extra Large", "description": "1000px max width" },
-          "full": { "label": "Full Width", "description": "100% width" },
-          "custom": { "label": "Custom", "description": "Custom width value" }
+          "sm": {
+            "label": "Small",
+            "description": "400px max width"
+          },
+          "md": {
+            "label": "Medium",
+            "description": "600px max width"
+          },
+          "lg": {
+            "label": "Large",
+            "description": "800px max width"
+          },
+          "xl": {
+            "label": "Extra Large",
+            "description": "1000px max width"
+          },
+          "full": {
+            "label": "Full Width",
+            "description": "100% width"
+          },
+          "custom": {
+            "label": "Custom",
+            "description": "Custom width value"
+          }
         },
         "paddingOptions": {
-          "none": { "label": "None", "description": "0px padding" },
-          "sm": { "label": "Small", "description": "16px padding" },
-          "md": { "label": "Medium", "description": "24px padding" },
-          "lg": { "label": "Large", "description": "32px padding" }
+          "none": {
+            "label": "None",
+            "description": "0px padding"
+          },
+          "sm": {
+            "label": "Small",
+            "description": "16px padding"
+          },
+          "md": {
+            "label": "Medium",
+            "description": "24px padding"
+          },
+          "lg": {
+            "label": "Large",
+            "description": "32px padding"
+          }
         },
         "marginOptions": {
-          "none": { "label": "None", "description": "No margin" },
-          "sm": { "label": "Small", "description": "8px" },
-          "md": { "label": "Medium", "description": "16px" },
-          "lg": { "label": "Large", "description": "32px" }
+          "none": {
+            "label": "None",
+            "description": "No margin"
+          },
+          "sm": {
+            "label": "Small",
+            "description": "8px"
+          },
+          "md": {
+            "label": "Medium",
+            "description": "16px"
+          },
+          "lg": {
+            "label": "Large",
+            "description": "32px"
+          }
         },
         "radiusOptions": {
-          "none": { "label": "None", "description": "0px (sharp corners)" },
-          "sm": { "label": "Small", "description": "4px border radius" },
-          "md": { "label": "Medium", "description": "8px border radius" },
-          "lg": { "label": "Large", "description": "16px border radius" },
-          "xl": { "label": "Extra Large", "description": "24px border radius" }
+          "none": {
+            "label": "None",
+            "description": "0px (sharp corners)"
+          },
+          "sm": {
+            "label": "Small",
+            "description": "4px border radius"
+          },
+          "md": {
+            "label": "Medium",
+            "description": "8px border radius"
+          },
+          "lg": {
+            "label": "Large",
+            "description": "16px border radius"
+          },
+          "xl": {
+            "label": "Extra Large",
+            "description": "24px border radius"
+          }
         }
       },
       "presets": {
@@ -293,6 +384,1505 @@
         "appliedPreset": "Applied \"{name}\" preset",
         "formTitle": "Form Title",
         "submit": "Submit"
+      },
+      "preview": {
+        "title": "Live Preview",
+        "description": "See how your form will look with the applied customizations",
+        "sampleTitle": "Sample Form",
+        "sampleDescription": "This is how your form will appear with the current design settings.",
+        "nameLabel": "Name *",
+        "namePlaceholder": "Enter your name",
+        "emailLabel": "Email *",
+        "emailPlaceholder": "Enter your email",
+        "categoryLabel": "Category",
+        "categoryPlaceholder": "Select a category",
+        "categoryGeneral": "General Inquiry",
+        "categorySupport": "Support",
+        "categorySales": "Sales",
+        "messageLabel": "Message",
+        "messagePlaceholder": "Enter your message",
+        "submitButton": "Submit Form",
+        "previousStepAria": "Previous step",
+        "previousStep": "Previous",
+        "nextStepAria": "Next step",
+        "nextStep": "Next",
+        "submitAria": "Submit form"
+      }
+    },
+    "toasts": {
+      "loginRequiredToSave": "Please log in to save your form.",
+      "formSaved": "Form saved successfully!",
+      "formCreated": "Form created successfully!",
+      "saveFailed": "Failed to save form. Please try again.",
+      "saveBeforeShare": "Please save your form before sharing.",
+      "formPublished": "Form published successfully!",
+      "publishFailed": "Failed to publish form. Please try again.",
+      "saveBeforeAnalytics": "Please save your form before viewing analytics.",
+      "loadingAnalytics": "Loading Analytics",
+      "saveBeforePublish": "Please save your form before publishing.",
+      "userAuthRequired": "User authentication required",
+      "formUnpublished": "Form unpublished successfully!",
+      "updateStatusFailed": "Failed to update form status. Please try again.",
+      "saveSettingsFailed": "Failed to save settings. Please try again.",
+      "loadFailed": "Failed to load form. Please try again."
+    },
+    "formPreview": {
+      "titlePlaceholder": "Click to add title...",
+      "descriptionPlaceholder": "Click to add a description...",
+      "publicTitle": "Public title: \"{title}\"",
+      "stepTitlePlaceholder": "Click to add step title...",
+      "stepDescriptionPlaceholder": "Click to add a step description...",
+      "stepBadge": "Step {index}",
+      "editFieldAria": "Edit field",
+      "clickToEdit": "Click to edit"
+    },
+    "fieldPalette": {
+      "headerTitle": "Form Fields",
+      "headerDescription": "Click to add fields to your form",
+      "ariaPalette": "Field palette",
+      "searchAria": "Search fields",
+      "searchPlaceholder": "Search fields...",
+      "categoryFieldsAria": "{category} fields",
+      "noFieldsFound": "No fields found matching \"{searchTerm}\"",
+      "searchHint": "Try searching by field name, description, or type",
+      "addFieldAria": "Add {label} field",
+      "categories": {
+        "input": "Input Fields",
+        "selection": "Selection Fields",
+        "media": "Media Fields",
+        "layout": "Layout Fields",
+        "advanced": "Advanced Fields"
+      },
+      "fields": {
+        "text": {
+          "label": "Text Input",
+          "description": "A single line for short text responses."
+        },
+        "email": {
+          "label": "Email",
+          "description": "Collect a valid email address."
+        },
+        "number": {
+          "label": "Number",
+          "description": "Input for numeric values."
+        },
+        "phone": {
+          "label": "Phone Number",
+          "description": "Input for phone numbers with validation."
+        },
+        "textarea": {
+          "label": "Textarea",
+          "description": "A multi-line field for longer text."
+        },
+        "date": {
+          "label": "Date",
+          "description": "Pick a date from a calendar."
+        },
+        "time": {
+          "label": "Time",
+          "description": "Select or enter a time value."
+        },
+        "address": {
+          "label": "Address",
+          "description": "Input for street, city, and other address details."
+        },
+        "link": {
+          "label": "Link",
+          "description": "Input for a valid website URL."
+        },
+        "select": {
+          "label": "Select Dropdown",
+          "description": "Dropdown to choose one option."
+        },
+        "radio": {
+          "label": "Radio Buttons",
+          "description": "Pick a single option from a list."
+        },
+        "checkbox": {
+          "label": "Checkboxes",
+          "description": "Select one or more options."
+        },
+        "slider": {
+          "label": "Slider",
+          "description": "Pick a value by sliding a handle."
+        },
+        "rating": {
+          "label": "Rating",
+          "description": "Collect a star or icon rating."
+        },
+        "poll": {
+          "label": "Poll",
+          "description": "Let users vote on multiple options."
+        },
+        "file": {
+          "label": "File Upload",
+          "description": "Upload files with size and type limits."
+        },
+        "signature": {
+          "label": "Signature",
+          "description": "Draw or sign with mouse or touch."
+        },
+        "statement": {
+          "label": "Statement",
+          "description": "Display a heading or description in the form."
+        },
+        "banner": {
+          "label": "Banner",
+          "description": "Show a highlighted message or warning."
+        },
+        "field-group": {
+          "label": "Field Group",
+          "description": "Group fields together in a row."
+        },
+        "tags": {
+          "label": "Tag Input",
+          "description": "Enter and manage multiple tags."
+        },
+        "social": {
+          "label": "Social Media",
+          "description": "Add social media profile links."
+        },
+        "scheduler": {
+          "label": "Scheduler",
+          "description": "Embed a scheduling link (e.g. Calendly)."
+        }
+      }
+    },
+    "fieldSettings": {
+      "header": {
+        "title": "Field Settings",
+        "closeAria": "Close field settings"
+      },
+      "emptyState": {
+        "title": "No field selected",
+        "description": "Click on a field in the preview to edit its settings"
+      },
+      "basic": {
+        "title": "Basic Settings",
+        "fieldLabel": "Field Label",
+        "fieldLabelPlaceholder": "Enter field label",
+        "fieldLabelHelp": "The label that appears above the field",
+        "placeholder": "Placeholder",
+        "placeholderPlaceholder": "Enter placeholder text",
+        "placeholderHelp": "Hint text that appears inside the field",
+        "description": "Description",
+        "descriptionPlaceholder": "Enter field description (shown below the field)",
+        "descriptionHelp": "Additional help text shown below the field",
+        "required": "Required field",
+        "requiredHelp": "Users must fill this field to submit the form"
+      },
+      "validation": {
+        "title": "Validation",
+        "minLength": "Minimum Length",
+        "minLengthPlaceholder": "Min characters",
+        "minLengthHelp": "Minimum number of characters required",
+        "maxLength": "Maximum Length",
+        "maxLengthPlaceholder": "Max characters",
+        "maxLengthHelp": "Maximum number of characters allowed",
+        "pattern": "Pattern (Regex)",
+        "patternPlaceholder": "Regular expression",
+        "patternHelp": "Regular expression pattern for validation",
+        "minValue": "Minimum Value",
+        "minValuePlaceholder": "Min value",
+        "minValueHelp": "Minimum numeric value allowed",
+        "maxValue": "Maximum Value",
+        "maxValuePlaceholder": "Max value",
+        "maxValueHelp": "Maximum numeric value allowed"
+      },
+      "errorMessages": {
+        "title": "Custom Error Messages",
+        "requiredFieldMessage": "Required Field Message",
+        "requiredFieldPlaceholder": "This field is required",
+        "minLengthMessage": "Min Length Error Message",
+        "minLengthPlaceholder": "Must be at least {count} characters",
+        "maxLengthMessage": "Max Length Error Message",
+        "maxLengthPlaceholder": "Must be no more than {count} characters",
+        "patternMessage": "Pattern Error Message",
+        "patternPlaceholder": "Please enter a valid format",
+        "emailMessage": "Email Error Message",
+        "emailPlaceholder": "Please enter a valid email address",
+        "minValueMessage": "Min Value Error Message",
+        "minValuePlaceholder": "Must be at least {value}",
+        "maxValueMessage": "Max Value Error Message",
+        "maxValuePlaceholder": "Must be no more than {value}",
+        "invalidNumberMessage": "Invalid Number Message",
+        "invalidNumberPlaceholder": "Please enter a valid number"
+      },
+      "options": {
+        "title": "Options",
+        "addOptionAria": "Add new option",
+        "addOption": "Add Option",
+        "optionPlaceholder": "Option {index}",
+        "removeOptionAria": "Remove option {index}",
+        "none": "No options added yet",
+        "or": "OR",
+        "orAria": "or",
+        "fetchFromApi": "Fetch from API",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "API endpoint to fetch options from",
+        "valueKeyPlaceholder": "Value key (e.g. id)",
+        "valueKeyHelp": "Key for option values",
+        "labelKeyPlaceholder": "Label key (e.g. name)",
+        "labelKeyHelp": "Key for option labels",
+        "apiGuidanceTitle": "API Data Guidance:",
+        "apiGuidanceIntro": "This field will fetch options from the API endpoint:",
+        "apiShouldReturn": "The API should return either:",
+        "apiType1Hint": "(array of strings)",
+        "apiType2Hint": "(array of objects)",
+        "apiType3Hint": "(object with options array)",
+        "apiType4Hint": "(custom keys)",
+        "apiCustomKeysHelp": "You can specify custom keys above to map your API data.",
+        "apiValueLabelHelp": "Each option must have a",
+        "apiValueLabelHelpOr": "property (or your custom key).",
+        "apiValueLabelHelpSuffix": "is optional."
+      },
+      "prepopulation": {
+        "title": "Pre-population",
+        "unknownError": "Unknown error",
+        "enabled": "Enable Pre-population",
+        "enabledHelp": "Automatically fill this field with existing data",
+        "dataSource": "Data Source",
+        "sources": {
+          "url": "URL Parameters",
+          "api": "External API",
+          "profile": "User Profile",
+          "previous": "Previous Submission"
+        },
+        "urlParamName": "URL Parameter Name",
+        "urlParamPlaceholder": "e.g., name, email, phone",
+        "urlParamHelp": "The parameter name to extract from the URL query string",
+        "fallbackValue": "Fallback Value",
+        "fallbackValuePlaceholder": "Default value if parameter is missing",
+        "fallbackValueHelp": "Default value to use if the URL parameter is missing",
+        "overwriteExisting": "Overwrite Existing",
+        "overwriteExistingHelp": "Replace user input with pre-populated value",
+        "generatePreviewAria": "Generate preview URL",
+        "generatePreview": "Generate Preview URL",
+        "previewUrlLabel": "Preview URL:",
+        "previewUrlHelp": "This URL will pre-populate the field with \"Sample {label}\"",
+        "apiEndpoint": "API Endpoint",
+        "apiEndpointPlaceholder": "https://api.example.com/user-data",
+        "apiEndpointHelp": "The API endpoint to fetch data from",
+        "httpMethod": "HTTP Method",
+        "requestHeaders": "Request Headers (JSON)",
+        "requestHeadersHelp": "JSON object containing HTTP headers for the API request",
+        "testApiAria": "Test API endpoint",
+        "testApi": "Test API Endpoint",
+        "comingSoonLabel": "Coming Soon:",
+        "profileComingSoon": "User profile pre-population will be available in a future update.",
+        "previousComingSoon": "Previous submission pre-population will be available in a future update.",
+        "toasts": {
+          "missingUrlParam": "Please enter a URL parameter name first",
+          "previewUrlCopied": "Preview URL copied to clipboard!",
+          "previewUrlCopyFailed": "Failed to copy preview URL",
+          "missingApiEndpoint": "Please enter an API endpoint first",
+          "apiReachable": "API endpoint is reachable!",
+          "apiTestFailedStatus": "API test failed: {status} {statusText}",
+          "apiTestFailedError": "API test failed: {error}"
+        }
+      },
+      "date": {
+        "title": "Date Field Settings",
+        "minDate": "Minimum Date",
+        "selectMinDate": "Select minimum date",
+        "maxDate": "Maximum Date",
+        "selectMaxDate": "Select maximum date",
+        "defaultDate": "Default Date",
+        "selectDefaultDate": "Select default date"
+      },
+      "number": {
+        "title": "Number Field Settings",
+        "minValue": "Minimum Value",
+        "noMinimum": "No minimum",
+        "minValueHelp": "Minimum numeric value allowed",
+        "maxValue": "Maximum Value",
+        "noMaximum": "No maximum",
+        "maxValueHelp": "Maximum numeric value allowed",
+        "stepSize": "Step Size",
+        "stepSizeHelp": "Increment/decrement step size for the number input",
+        "defaultValue": "Default Value",
+        "noDefault": "No default",
+        "defaultValueHelp": "Pre-filled value when the form loads"
+      },
+      "radio": {
+        "title": "Quiz Settings",
+        "enableQuizQuestion": "Enable as Quiz Question",
+        "correctAnswer": "Correct Answer",
+        "correctAnswerPlaceholder": "Select the correct answer",
+        "points": "Points for Correct Answer",
+        "showCorrectAnswer": "Show correct answer after submission",
+        "explanation": "Explanation (Optional)",
+        "explanationPlaceholder": "Explain why this is the correct answer..."
+      },
+      "address": {
+        "title": "Address Field Settings",
+        "requiredLines": "Required Address Lines",
+        "requiredLinesPlaceholder": "e.g. 2 (Address Line 1 & City required)",
+        "requiredLinesHelp": "Number of address lines that must be filled (1-5)",
+        "customErrorMessage": "Custom Error Message",
+        "customErrorPlaceholder": "Please complete all required address fields",
+        "customErrorHelp": "Custom error message shown when required address fields are incomplete"
+      },
+      "phone": {
+        "title": "Phone Field Settings",
+        "pattern": "Custom Regex Pattern",
+        "patternPlaceholder": "e.g. ^\\+?[0-9]{10,15}$",
+        "patternHelp": "Regular expression pattern for phone number validation",
+        "errorMessage": "Custom Error Message",
+        "errorMessagePlaceholder": "Please enter a valid phone number",
+        "errorMessageHelp": "Custom error message shown when phone validation fails"
+      },
+      "statement": {
+        "title": "Statement Field Settings",
+        "heading": "Heading",
+        "headingPlaceholder": "Enter statement heading",
+        "headingHelp": "Main heading for the statement",
+        "description": "Description",
+        "descriptionPlaceholder": "Enter statement description",
+        "descriptionHelp": "Detailed description for the statement",
+        "alignment": "Alignment",
+        "alignmentPlaceholder": "Select alignment",
+        "alignLeft": "Left",
+        "alignCenter": "Center",
+        "alignRight": "Right",
+        "alignmentHelp": "Text alignment for the statement",
+        "size": "Size",
+        "sizePlaceholder": "Select size",
+        "sizeSmall": "Small",
+        "sizeMedium": "Medium",
+        "sizeLarge": "Large",
+        "sizeHelp": "Font size for the statement"
+      },
+      "slider": {
+        "title": "Slider Settings",
+        "mode": "Slider Mode",
+        "modePlaceholder": "Select slider mode",
+        "modeSingle": "Single value",
+        "modeRange": "Range (min + max)",
+        "modeHelp": "Choose one value or let users pick a minimum and maximum",
+        "min": "Minimum Value",
+        "minHelp": "Minimum value for the slider",
+        "max": "Maximum Value",
+        "maxHelp": "Maximum value for the slider",
+        "step": "Step Size",
+        "stepHelp": "Increment/decrement step size for the slider",
+        "defaultMin": "Default Minimum",
+        "defaultMinHelp": "Pre-filled minimum value when the form loads",
+        "defaultMax": "Default Maximum",
+        "defaultMaxHelp": "Pre-filled maximum value when the form loads",
+        "defaultValue": "Default Value",
+        "defaultValueHelp": "Pre-filled value when the form loads"
+      },
+      "text": {
+        "title": "Text Field Settings",
+        "maxLength": "Maximum Length",
+        "maxLengthPlaceholder": "No limit",
+        "maxLengthHelp": "Maximum number of characters allowed (1-1000)",
+        "minLength": "Minimum Length",
+        "minLengthPlaceholder": "No minimum",
+        "minLengthHelp": "Minimum number of characters required (0-1000)"
+      },
+      "checkbox": {
+        "title": "Checkbox Options",
+        "options": "Options",
+        "addOptionPlaceholder": "Add option",
+        "addOptionAria": "Add checkbox option",
+        "optionsHelp": "Add checkbox options that users can select from",
+        "removeOptionAria": "Remove option {index}",
+        "allowMultiple": "Allow multiple selection",
+        "allowMultipleHelp": "If enabled, users can select more than one option. If disabled, only one option can be selected."
+      },
+      "link": {
+        "title": "Link Field Settings",
+        "pattern": "Custom Regex Pattern",
+        "patternPlaceholder": "e.g. ^https?://.+$",
+        "patternHelp": "Regular expression pattern for URL validation",
+        "errorMessage": "Custom Error Message",
+        "errorMessagePlaceholder": "Please enter a valid URL",
+        "errorMessageHelp": "Custom error message shown when URL validation fails"
+      },
+      "poll": {
+        "title": "Poll Settings",
+        "pollOptions": "Poll Options",
+        "addOptionPlaceholder": "Add option",
+        "addOptionAria": "Add poll option",
+        "optionsHelp": "Add poll options that users can vote on",
+        "editOptionAria": "Edit poll option {index}",
+        "removeOptionAria": "Remove poll option {index}",
+        "orAria": "or separator",
+        "or": "OR",
+        "fetchFromApi": "Fetch Options from API",
+        "apiEndpointPlaceholder": "https://your-api.com/options",
+        "apiEndpointHelp": "API endpoint to fetch poll options from",
+        "valueKeyPlaceholder": "Value key (e.g. id)",
+        "valueKeyHelp": "Key for option values",
+        "labelKeyPlaceholder": "Label key (e.g. name)",
+        "labelKeyHelp": "Key for option labels",
+        "apiGuidanceTitle": "API Data Guidance:",
+        "apiGuidanceIntro": "This field will fetch options from the API endpoint:",
+        "apiShouldReturn": "The API should return either:",
+        "apiType1Hint": "(array of strings)",
+        "apiType2Hint": "(array of objects)",
+        "apiType3Hint": "(object with options array)",
+        "apiType4Hint": "(custom keys)",
+        "apiCustomKeysHelp": "You can specify custom keys above to map your API data.",
+        "apiValueLabelHelp": "Each option must have a",
+        "apiValueLabelHelpOr": "property (or your custom key).",
+        "apiValueLabelHelpSuffix": "is optional.",
+        "showResults": "Show results after voting",
+        "showResultsHelp": "Display poll results to users after they vote"
+      },
+      "social": {
+        "title": "Social Platforms",
+        "availablePlatforms": "Available Platforms",
+        "platforms": {
+          "github": "GitHub",
+          "twitter": "Twitter",
+          "linkedin": "LinkedIn",
+          "facebook": "Facebook",
+          "instagram": "Instagram",
+          "youtube": "YouTube",
+          "website": "Website"
+        },
+        "platformsHelp": "Select which social platforms to include in the field",
+        "customLinks": "Custom Links",
+        "labelPlaceholder": "Label",
+        "placeholderPlaceholder": "Placeholder (optional)",
+        "removeCustomLinkAria": "Remove custom link {index}",
+        "addCustomLinkAria": "Add custom link",
+        "addCustomLink": "Add Custom Link",
+        "customLinksHelp": "Add custom social links with custom labels and placeholders"
+      },
+      "emailValidation": {
+        "title": "Email Validation",
+        "removeBlockedDomainAria": "Remove {domain} from blocked domains",
+        "removeAllowedDomainAria": "Remove {domain} from allowed domains",
+        "autoCompleteDomain": "Auto-complete Domain",
+        "autoCompletePlaceholder": "e.g., business.com",
+        "setAutoCompleteAria": "Set auto-complete domain",
+        "set": "Set",
+        "removeAutoCompleteAria": "Remove {domain} domain",
+        "autoCompleteHelp": "Users can enter just their username and the domain will be auto-completed",
+        "allowedDomains": "Allowed Domains",
+        "allowedPlaceholder": "e.g., company.com",
+        "addAllowedDomainAria": "Add allowed domain",
+        "allowedHelp": "Only emails from these domains will be accepted",
+        "blockedDomains": "Blocked Domains",
+        "blockedPlaceholder": "e.g., temp-mail.org",
+        "addBlockedDomainAria": "Add blocked domain",
+        "blockedHelp": "Emails from these domains will be rejected (temporary email services are blocked by default)",
+        "requireBusinessEmail": "Require Business Email",
+        "requireBusinessEmailHelp": "Only allow business domains (blocks Gmail, Yahoo, etc.)",
+        "customValidationMessage": "Custom Validation Message",
+        "customValidationPlaceholder": "Custom error message for email validation",
+        "customValidationHelp": "Leave empty to use default messages"
+      },
+      "file": {
+        "title": "File Upload Settings",
+        "bytesUnit": "Bytes",
+        "maxFiles": "Maximum Files",
+        "maxFilesPlaceholder": "10",
+        "maxFilesHelp": "Maximum number of files users can upload (1-50)",
+        "maxFileSize": "Maximum File Size",
+        "maxFileSizePlaceholder": "50",
+        "mbUnit": "MB",
+        "setMaxSizePresetAria": "Set maximum file size to {size}",
+        "currentSize": "Current: {size}",
+        "allowedFileTypes": "Allowed File Types",
+        "quickSelect": "Quick Select:",
+        "commonTypes": {
+          "images": "Images",
+          "documents": "Documents",
+          "spreadsheets": "Spreadsheets",
+          "videos": "Videos",
+          "audio": "Audio",
+          "archives": "Archives"
+        },
+        "toggleFileTypeAria": "Toggle {type} file types",
+        "customExtensions": "Custom File Extensions",
+        "customExtensionsPlaceholder": "e.g., txt, csv, json",
+        "addCustomExtensionAria": "Add custom file extension",
+        "customExtensionsHelp": "Add custom file extensions (without the dot)",
+        "selectedExtensions": "Selected extensions:",
+        "removeExtensionAria": "Remove {extension} file extension",
+        "htmlAccept": "HTML Accept Attribute (readonly)",
+        "htmlAcceptHelp": "This is automatically generated based on your selections above",
+        "helpText": "Help Text",
+        "helpTextPlaceholder": "Additional instructions for users...",
+        "helpTextHelp": "Optional instructions to help users understand what files to upload"
+      },
+      "scheduler": {
+        "title": "Scheduler Settings",
+        "provider": "Scheduler Provider",
+        "providerPlaceholder": "Select provider",
+        "providerHelp": "Choose your preferred scheduling platform",
+        "calcomLink": "Cal.com Link",
+        "calendlyLink": "Calendly Link",
+        "tidycalLink": "TidyCal Link",
+        "schedulerLink": "Scheduler Link",
+        "linkPlaceholder": "https://...",
+        "linkHelp": "Embed URL for your {provider} scheduler",
+        "buttonText": "Calendar Opener Button Text",
+        "buttonTextPlaceholder": "e.g. Book a Call",
+        "buttonTextHelp": "Text displayed on the scheduler button",
+        "preview": "Preview",
+        "openScheduler": "Open Scheduler",
+        "previewHelp": "Click to preview how the scheduler will appear",
+        "previewModalTitle": "Scheduler Preview",
+        "iframeTitle": "Scheduler Embed",
+        "closePreviewAria": "Close scheduler preview",
+        "close": "Close",
+        "providerCalcom": "Cal.com",
+        "providerCalendly": "Calendly",
+        "providerTidycal": "TidyCal"
+      },
+      "banner": {
+        "title": "Banner Settings",
+        "alertType": "Alert Type",
+        "alertTypePlaceholder": "Select alert type",
+        "warning": "Warning",
+        "error": "Error",
+        "info": "Info",
+        "success": "Success",
+        "alertTypeHelp": "Choose the visual style and color scheme for the banner",
+        "bannerTitle": "Title",
+        "bannerTitlePlaceholder": "Smoke-free",
+        "bannerTitleHelp": "Main title text for the banner",
+        "description": "Description",
+        "descriptionPlaceholder": "Our accommodations are strictly smoke-free...",
+        "descriptionHelp": "Detailed description text for the banner"
+      },
+      "fieldGroup": {
+        "layoutTitle": "Layout Settings",
+        "layoutDirection": "Layout Direction",
+        "layoutHorizontal": "Horizontal (Side by Side)",
+        "layoutVertical": "Vertical (Stacked)",
+        "layoutDirectionHelp": "How fields are arranged within the group",
+        "columns": "Number of Columns",
+        "columns2": "2 Columns",
+        "columns3": "3 Columns",
+        "columns4": "4 Columns",
+        "columnsHelp": "Number of columns for horizontal layout",
+        "spacing": "Field Spacing",
+        "spacingCompact": "Compact",
+        "spacingNormal": "Normal",
+        "spacingRelaxed": "Relaxed",
+        "spacingHelp": "Spacing between fields in the group",
+        "groupFields": "Group Fields ({count})",
+        "addFieldAria": "Add field to group",
+        "addField": "Add field",
+        "addFieldDialogTitle": "Add a field",
+        "emptyStateTitle": "No fields in this group yet.",
+        "emptyStateDescription": "Add fields using the dropdown or quick add buttons above.",
+        "fieldFallback": "{type} Field",
+        "settingsAria": "Settings for {name} field",
+        "removeAria": "Remove {name} field",
+        "fieldLabel": "Field Label",
+        "fieldLabelPlaceholder": "Enter field label",
+        "fieldLabelHelp": "Label for this field",
+        "placeholder": "Placeholder Text",
+        "placeholderPlaceholder": "Enter placeholder text",
+        "placeholderHelp": "Placeholder text for this field",
+        "required": "Required field",
+        "requiredHelp": "Make this field mandatory",
+        "advancedAria": "Toggle advanced settings for {name}",
+        "advanced": "Advanced Settings"
+      },
+      "rating": {
+        "title": "Rating Settings",
+        "starCount": "Number of Stars",
+        "starCountHelp": "Number of rating stars (1-10)",
+        "starSize": "Star Size",
+        "starSizeHelp": "Size of the rating stars (16-64px)",
+        "iconType": "Icon Type",
+        "star": "Star",
+        "heart": "Heart",
+        "iconTypeHelp": "Choose the icon type for ratings",
+        "iconColor": "Icon Color",
+        "iconColorHelp": "Color of the rating icons"
+      },
+      "tags": {
+        "title": "Tags Settings",
+        "maxTags": "Maximum Tags",
+        "maxTagsHelp": "Maximum number of tags users can add (minimum 1)",
+        "allowDuplicates": "Allow Duplicate Tags",
+        "allowDuplicatesHelp": "Allow users to add the same tag multiple times"
+      },
+      "textarea": {
+        "title": "Textarea Field Settings",
+        "rows": "Number of Rows",
+        "rowsHelp": "Initial height of the textarea (2-20 rows)"
+      },
+      "time": {
+        "title": "Time Field Settings",
+        "showCurrentTimeButton": "Show 'Set Current Time' Button",
+        "showCurrentTimeButtonHelp": "Display a button to automatically set the current time"
+      },
+      "email": {
+        "title": "Email Field Settings",
+        "allowedDomains": "Allowed Domains (comma-separated)",
+        "allowedDomainsPlaceholder": "gmail.com, company.com",
+        "blockedDomains": "Blocked Domains (comma-separated)",
+        "blockedDomainsPlaceholder": "tempmail.com, spam.com",
+        "requireBusinessEmail": "Require business email only",
+        "customValidationMessage": "Custom Validation Message",
+        "customValidationPlaceholder": "Please enter a valid email address"
+      }
+    },
+    "formSettings": {
+      "title": "Form Settings",
+      "exportSecure": "Export (Secure)",
+      "preparing": "Preparing...",
+      "saveFormFirstAccess": "Please save the form first to access the settings.",
+      "saveFormFirstExport": "Save the form first to export it securely.",
+      "exportPrepareFailed": "Failed to prepare secure export.",
+      "settingsSectionsAria": "Settings sections",
+      "goToSectionSettingsAria": "Go to {section} settings",
+      "sections": {
+        "basic": "Basic Info",
+        "limits": "Limits",
+        "security": "Security",
+        "quiz": "Quiz & Scoring",
+        "branding": "Branding",
+        "notifications": "Notifications",
+        "api": "API Access",
+        "webhooks": "Webhooks",
+        "design": "Design",
+        "metadata": "Metadata"
+      },
+      "search": {
+        "aria": "Search settings",
+        "placeholder": "Search settings…",
+        "resultsAria": "Search results",
+        "noMatches": "No matches",
+        "items": {
+          "basic-info-title": {
+            "label": "Basic Information"
+          },
+          "behavior-title": {
+            "label": "Form Behavior"
+          },
+          "rate-limit-title": {
+            "label": "Rate Limiting"
+          },
+          "response-limit-title": {
+            "label": "Response Limit"
+          },
+          "password-protection-title": {
+            "label": "Password Protection"
+          },
+          "duplicate-prevention-title": {
+            "label": "Duplicate Prevention"
+          },
+          "profanity-filter-title": {
+            "label": "Profanity Filter"
+          },
+          "bot-protection-title": {
+            "label": "Bot Protection"
+          },
+          "branding-title": {
+            "label": "Branding"
+          },
+          "social-media-links-title": {
+            "label": "Social Media Links"
+          },
+          "quiz-title": {
+            "label": "Quiz & Scoring"
+          },
+          "notifications-title": {
+            "label": "Notifications"
+          },
+          "api-access-title": {
+            "label": "API Access"
+          },
+          "webhooks-title": {
+            "label": "Webhooks"
+          },
+          "design-title": {
+            "label": "Design"
+          },
+          "metadata-title": {
+            "label": "SEO"
+          },
+          "social-metadata-title": {
+            "label": "Social Metadata"
+          },
+          "search-engine-indexing-title": {
+            "label": "Search Engine Indexing"
+          }
+        }
+      },
+      "defaults": {
+        "submitText": "Submit",
+        "notificationSubject": "New Form Submission",
+        "notificationMessage": "You have received a new submission on your form."
+      },
+      "common": {
+        "unsavedChanges": "Unsaved changes",
+        "reset": "Reset",
+        "save": "Save",
+        "saved": "Saved",
+        "formIdRequiredToSaveSettings": "Form ID is required to save settings",
+        "validValueBetween": "Enter a valid value between {min} and {max}",
+        "fillRequiredFields": "Please fill out required fields",
+        "requiredAria": "required",
+        "fieldRequired": "This field is required"
+      },
+      "basicInfoSection": {
+        "ariaSettings": "Basic form settings",
+        "basicTitle": "Basic Information",
+        "basicDescription": "Configure the basic details of your form",
+        "internalTitleLabel": "Internal Title",
+        "internalTitleDescription": "This title is only visible to you in the dashboard and form builder",
+        "internalTitlePlaceholder": "Enter internal title for your reference...",
+        "publicTitleLabel": "Public Title",
+        "publicTitleDescription": "This title will be displayed to users on the actual form. Leave empty to use the internal title.",
+        "publicTitlePlaceholder": "Enter title to display to users...",
+        "formDescriptionLabel": "Form Description",
+        "formDescriptionPlaceholder": "Enter form description",
+        "submitButtonTextLabel": "Submit Button Text",
+        "submitButtonTextPlaceholder": "Submit",
+        "successMessageLabel": "Success Message",
+        "successMessagePlaceholder": "Thank you for your submission!",
+        "redirectUrlLabel": "Redirect URL (Optional)",
+        "redirectUrlDescription": "URL to redirect users after successful submission",
+        "redirectUrlPlaceholder": "https://example.com/thank-you",
+        "basicActionsAria": "Basic information actions",
+        "saveBasicAria": "Save basic information",
+        "saveBasicSuccess": "Basic information saved successfully",
+        "saveBasicFailed": "Failed to save basic information",
+        "behaviorTitle": "Form Behavior",
+        "behaviorDescription": "Configure how your form behaves and appears to users",
+        "hideHeaderLabel": "Hide Header",
+        "hideHeaderDescription": "Hides public title and description in embeds",
+        "rtlLabel": "Right-to-Left Mode",
+        "rtlDescription": "Display form in RTL (Right-to-Left) mode",
+        "autoFocusLabel": "Auto Focus First Field",
+        "autoFocusDescription": "Automatically focus on the first field when form loads",
+        "behaviorActionsAria": "Form behavior actions",
+        "saveBehaviorAria": "Save form behavior settings",
+        "saveBehaviorSuccess": "Form behavior saved successfully",
+        "saveBehaviorFailed": "Failed to save form behavior"
+      },
+      "passwordProtectionSection": {
+        "ariaSettings": "Password protection settings",
+        "title": "Password Protection",
+        "description": "Restrict access to your form with a password",
+        "enableLabel": "Enable Password Protection",
+        "enableDescription": "Require users to enter a password to access the form",
+        "passwordLabel": "Password",
+        "passwordPlaceholder": "Enter form password",
+        "hidePasswordAria": "Hide password",
+        "showPasswordAria": "Show password",
+        "passwordDescription": "Users will need to enter this password to access the form",
+        "customMessageLabel": "Custom Message",
+        "customMessagePlaceholder": "Enter custom message for password prompt",
+        "customMessageDescription": "Message shown to users when they need to enter the password",
+        "currentConfiguration": "Current Configuration",
+        "summaryPrefix": "Password protection is",
+        "enabled": "enabled",
+        "summarySuffix": ". Users will need to enter the password to access the form.",
+        "disabledDescription": "Password protection restricts access to your form by requiring users to enter a password before they can view and submit the form.",
+        "actionsAria": "Password protection actions",
+        "saveAria": "Save password protection settings",
+        "saved": "Password protection settings saved successfully",
+        "saveFailed": "Failed to save password protection settings",
+        "defaultMessage": "This form is password protected. Please enter the password to continue."
+      },
+      "duplicatePreventionSection": {
+        "ariaSettings": "Duplicate prevention settings",
+        "title": "Duplicate Prevention",
+        "description": "Prevent users from submitting the same form multiple times",
+        "enableLabel": "Enable Duplicate Prevention",
+        "enableDescription": "Prevent users from submitting the same form multiple times",
+        "preventionModeLabel": "Prevention Mode",
+        "oneTimeLabel": "One-time submission",
+        "oneTimeDescription": "Allow only one submission per user, ever",
+        "timeBasedLabel": "Time-based prevention",
+        "timeBasedDescription": "Prevent duplicate submissions within a specified time window",
+        "preventionStrategyLabel": "Prevention Strategy",
+        "selectStrategyPlaceholder": "Select strategy",
+        "strategyCombinedLabel": "Combined (IP + Email + Session) - Most Secure",
+        "strategyEmailLabel": "Email Address - Best for Registration",
+        "strategyIpLabel": "IP Address - Simple & Reliable",
+        "strategySessionLabel": "Session ID - Browser-based",
+        "strategyCombinedDescription": "Track by combination of IP, email, and session for maximum accuracy",
+        "strategyEmailDescription": "Track by email address (requires email field in form)",
+        "strategyIpDescription": "Track by IP address only",
+        "strategySessionDescription": "Track by browser session",
+        "timeWindowLabel": "Time Window (minutes)",
+        "timeWindowDescription": "How long to prevent duplicate submissions",
+        "timeWindowPlaceholder": "1440",
+        "maxAttemptsLabel": "Max Attempts",
+        "maxAttemptsDescription": "Maximum attempts allowed within time window",
+        "maxAttemptsPlaceholder": "1",
+        "errorMessageLabel": "Error Message",
+        "errorMessageDescription": "Message shown to users when they try to submit a duplicate",
+        "allowOverrideLabel": "Allow Override",
+        "allowOverrideDescription": "Allow users to bypass prevention (not recommended)",
+        "currentConfiguration": "Current Configuration",
+        "currentSettings": "Current Settings",
+        "summaryModeOneTime": "one-time submission only",
+        "summaryModeTimeBased": "{maxAttempts} submission(s) every {timeWindow} minutes",
+        "summaryStrategyCombined": "IP + Email + Session",
+        "summaryStrategyEmail": "Email Address",
+        "summaryStrategyIp": "IP Address",
+        "summaryStrategySession": "Session ID",
+        "summarySentence": "{mode} using {strategy} tracking.",
+        "summaryOverrideEnabled": "Override is enabled.",
+        "disabledDescription": "Duplicate prevention helps maintain data quality by preventing users from submitting the same form multiple times. Choose between time-based prevention or one-time submission mode.",
+        "actionsAria": "Duplicate prevention actions",
+        "saveAria": "Save duplicate prevention settings",
+        "saved": "Duplicate prevention settings saved successfully",
+        "saveFailed": "Failed to save duplicate prevention settings",
+        "defaultMessageOneTime": "You have already submitted this form. Each user can only submit once.",
+        "defaultMessageTimeBased": "You have already submitted this form. Please wait before submitting again."
+      },
+      "profanityFilterSection": {
+        "ariaSettings": "Profanity filter settings",
+        "title": "Profanity Filter",
+        "description": "Automatically detect and filter inappropriate content",
+        "enableLabel": "Enable Profanity Filter",
+        "enableDescription": "Automatically detect and filter inappropriate content",
+        "filterModeLabel": "Filter Mode",
+        "strictModeOption": "Strict Mode - Reject submissions with profanity",
+        "replaceModeOption": "Replace Mode - Replace profanity with asterisks",
+        "customMessageLabel": "Custom Message",
+        "customMessagePlaceholder": "Enter a custom message to show when profanity is detected",
+        "customWordsTitle": "Custom Words to Filter",
+        "whitelistedWordsTitle": "Whitelisted Words",
+        "customWordsPlaceholder": "Enter word(s) to filter (comma-separated for multiple)",
+        "whitelistPlaceholder": "Enter word(s) to whitelist (comma-separated for multiple)",
+        "addWord": "Add",
+        "addFilteredWordAria": "Add filtered word",
+        "addWhitelistedWordAria": "Add whitelisted word",
+        "removeWordAria": "Remove {word}",
+        "currentConfiguration": "Current Configuration",
+        "summaryPrefix": "Profanity filter is",
+        "enabled": "enabled",
+        "summaryIn": "in",
+        "strictMode": "strict mode",
+        "replaceMode": "replace mode",
+        "summaryPeriod": ".",
+        "customWordsConfigured": "{count} custom words configured.",
+        "whitelistedWordsConfigured": "{count} whitelisted words.",
+        "disabledDescription": "Profanity filter helps maintain a clean and professional environment by automatically detecting and filtering inappropriate content in form submissions.",
+        "actionsAria": "Profanity filter actions",
+        "saveAria": "Save profanity filter settings",
+        "saved": "Profanity filter settings saved successfully",
+        "saveFailed": "Failed to save profanity filter settings"
+      },
+      "notificationsSection": {
+        "title": "Notifications",
+        "description": "Configure email alerts for new form submissions",
+        "enableLabel": "Email Notifications",
+        "enableDescription": "Enable email notifications for new submissions",
+        "emailLabel": "Notification Email",
+        "emailPlaceholder": "owner@email.com",
+        "subjectLabel": "Email Subject",
+        "messageLabel": "Email Message",
+        "customLinksLabel": "Custom Links",
+        "linkLabelPlaceholder": "Label",
+        "linkUrlPlaceholder": "https://example.com",
+        "removeLink": "Remove",
+        "addLink": "Add",
+        "actionsAria": "Notification settings actions",
+        "saveAria": "Save notification settings",
+        "saved": "Notification settings saved successfully",
+        "saveFailed": "Failed to save notification settings"
+      },
+      "brandingSection": {
+        "title": "Branding",
+        "description": "Manage Ikiform branding and social media links",
+        "showPoweredByLabel": "Show \"Powered by Ikiform\"",
+        "showPoweredByDescription": "Display a small attribution in the footer",
+        "socialMediaLabel": "Social Media Links",
+        "socialMediaDescription": "Enable links to your social profiles on the form",
+        "platforms": {
+          "linkedin": {
+            "label": "LinkedIn",
+            "placeholder": "https://linkedin.com/in/username"
+          },
+          "twitter": {
+            "label": "X (Twitter)",
+            "placeholder": "https://x.com/username"
+          },
+          "youtube": {
+            "label": "YouTube",
+            "placeholder": "https://youtube.com/@channel"
+          },
+          "instagram": {
+            "label": "Instagram",
+            "placeholder": "https://instagram.com/username"
+          },
+          "facebook": {
+            "label": "Facebook",
+            "placeholder": "https://facebook.com/username"
+          },
+          "github": {
+            "label": "GitHub",
+            "placeholder": "https://github.com/username"
+          },
+          "website": {
+            "label": "Website",
+            "placeholder": "https://example.com"
+          }
+        },
+        "iconSizeLabel": "Icon Size",
+        "iconSizes": {
+          "small": "Small",
+          "medium": "Medium",
+          "large": "Large"
+        },
+        "positionLabel": "Position",
+        "positions": {
+          "footer": "Footer",
+          "header": "Header",
+          "both": "Both"
+        },
+        "previewLabel": "Preview",
+        "disabledDescription": "Enable social media links to display your social profiles on your forms.",
+        "actionsAria": "Branding settings actions",
+        "saveAria": "Save branding settings",
+        "saved": "Branding settings saved successfully",
+        "saveFailed": "Failed to save branding settings",
+        "authRequired": "User authentication required"
+      },
+      "metadataSection": {
+        "basicTitle": "Basic SEO",
+        "basicDescription": "Titles, descriptions and canonical URL",
+        "pageTitleLabel": "Page Title",
+        "pageTitlePlaceholder": "Enter page title (max 60 characters)",
+        "metaDescriptionLabel": "Meta Description",
+        "metaDescriptionPlaceholder": "Enter meta description (max 160 characters)",
+        "characterCount": "{count}/{max} characters",
+        "keywordsLabel": "Keywords",
+        "keywordsPlaceholder": "Enter keywords separated by commas",
+        "authorLabel": "Author",
+        "authorPlaceholder": "Enter author name",
+        "canonicalUrlLabel": "Canonical URL",
+        "canonicalUrlPlaceholder": "https://example.com/form",
+        "canonicalUrlDescription": "The preferred URL for this form page",
+        "basicActionsAria": "Basic SEO actions",
+        "saveBasicAria": "Save basic SEO settings",
+        "basicSaved": "Basic SEO saved",
+        "basicSaveFailed": "Failed to save Basic SEO",
+        "socialTitle": "Social Metadata",
+        "socialDescription": "Open Graph and Twitter settings",
+        "ogTitleLabel": "Open Graph Title",
+        "ogTitlePlaceholder": "Enter Open Graph title",
+        "ogTitleDescription": "Title shown when shared on Facebook, LinkedIn, etc.",
+        "ogDescriptionLabel": "Open Graph Description",
+        "ogDescriptionPlaceholder": "Enter Open Graph description",
+        "ogDescriptionDescription": "Description shown when shared on social media",
+        "ogImageLabel": "Open Graph Image URL",
+        "ogImagePlaceholder": "https://example.com/image.jpg",
+        "ogTypeLabel": "Open Graph Type",
+        "ogTypePlaceholder": "Select Open Graph type",
+        "ogTypes": {
+          "website": "Website",
+          "article": "Article",
+          "profile": "Profile",
+          "video": "Video"
+        },
+        "twitterCardLabel": "Twitter Card Type",
+        "twitterCardPlaceholder": "Select Twitter card type",
+        "twitterCards": {
+          "summary": "Summary",
+          "summaryLargeImage": "Summary Large Image",
+          "app": "App",
+          "player": "Player"
+        },
+        "twitterTitleLabel": "Twitter Title",
+        "twitterTitlePlaceholder": "Enter Twitter title",
+        "twitterImageLabel": "Twitter Image URL",
+        "twitterImagePlaceholder": "https://example.com/twitter-image.jpg",
+        "twitterDescriptionLabel": "Twitter Description",
+        "twitterDescriptionPlaceholder": "Enter Twitter description",
+        "twitterSiteLabel": "Twitter Site",
+        "twitterSitePlaceholder": "@yourhandle",
+        "twitterCreatorLabel": "Twitter Creator",
+        "twitterCreatorPlaceholder": "@creatorhandle",
+        "socialActionsAria": "Social metadata actions",
+        "saveSocialAria": "Save social metadata settings",
+        "socialSaved": "Social metadata saved",
+        "socialSaveFailed": "Failed to save social metadata",
+        "indexingTitle": "Search Engine Indexing",
+        "indexingDescription": "Control how search engines crawl this form",
+        "indexingBehaviorLabel": "Search Engine Indexing",
+        "indexingBehaviorPlaceholder": "Select indexing behavior",
+        "indexingOptions": {
+          "index": "Index and Follow (Default)",
+          "noindex": "No Index",
+          "nofollow": "No Follow",
+          "noindexNofollow": "No Index, No Follow"
+        },
+        "indexingBehaviorDescription": "Controls whether search engines can index and follow links on this page",
+        "switches": {
+          "noArchive": "No Archive",
+          "noSnippet": "No Snippet",
+          "noImageIndex": "No Image Index",
+          "noTranslate": "No Translate"
+        },
+        "indexingActionsAria": "Indexing actions",
+        "saveIndexingAria": "Save indexing settings",
+        "indexingSaved": "Indexing settings saved",
+        "indexingSaveFailed": "Failed to save indexing settings",
+        "updatedAnnouncement": "Metadata updated",
+        "authRequired": "User authentication required"
+      },
+      "rateLimitSection": {
+        "title": "Rate Limiting",
+        "description": "Control submission frequency to prevent spam and abuse",
+        "ariaSettings": "Rate limiting settings",
+        "enableLabel": "Enable Rate Limiting",
+        "enableDescription": "Limit submissions from the same IP address",
+        "maxSubmissionsLabel": "Max Submissions",
+        "maxSubmissionsDescription": "Maximum submissions allowed",
+        "timeWindowLabel": "Time Window (minutes)",
+        "timeWindowDescription": "Time period for counting submissions",
+        "blockDurationLabel": "Block Duration (minutes)",
+        "blockDurationDescription": "How long to block after limit is reached",
+        "messageLabel": "Message shown when rate limit is exceeded",
+        "messagePlaceholder": "Too many submissions. Please try again later.",
+        "messageDescription": "Custom message shown when the rate limit is exceeded",
+        "currentConfiguration": "Current Configuration",
+        "summarySentence": "Allow {maxSubmissions} submissions every {timeWindow} minutes. Block for {blockDuration} minutes when exceeded.",
+        "summaryExample": "Example: If a user submits {maxSubmissions} times in {timeWindow} minutes, they'll be blocked for {blockDuration} minutes.",
+        "disabledDescription": "Rate limiting helps protect your form from spam and abuse by controlling submission frequency.",
+        "actionsAria": "Rate limiting actions",
+        "saveAria": "Save rate limiting settings",
+        "saved": "Rate limiting settings saved successfully",
+        "saveFailed": "Failed to save rate limiting settings",
+        "defaultMessage": "Too many submissions. Please try again later."
+      },
+      "responseLimitSection": {
+        "title": "Response Limit",
+        "description": "Stop accepting submissions after a set total count",
+        "enableLabel": "Enable Response Limit",
+        "enableDescription": "Limit the total number of submissions this form accepts",
+        "maxResponsesLabel": "Max Responses",
+        "maxResponsesDescription": "Limit the total number of responses this form can accept. Once the limit is reached, new submissions will be blocked.",
+        "limitReachedLabel": "Message when limit is reached",
+        "limitReachedDescription": "Message shown after the total response limit is reached",
+        "limitReachedPlaceholder": "This form is no longer accepting responses.",
+        "disabledDescription": "Keep this disabled if your form should continue accepting submissions without a cap.",
+        "actionsAria": "Response limit actions",
+        "saveAria": "Save response limit settings",
+        "saved": "Response limit saved successfully",
+        "saveFailed": "Failed to save response limit",
+        "defaultMessage": "This form is no longer accepting responses."
+      },
+      "botProtectionSection": {
+        "title": "Bot Protection",
+        "description": "Automatically detect and block automated submissions",
+        "ariaSettings": "Bot protection settings",
+        "enableLabel": "Enable Bot Protection",
+        "enableDescription": "Add anti-bot checks for form submissions",
+        "detectionMessageLabel": "Detection Message",
+        "detectionMessagePlaceholder": "Submission blocked due to suspicious bot activity.",
+        "detectionMessageDescription": "Message shown when an automated submission is blocked",
+        "currentConfiguration": "Current Configuration",
+        "statusEnabledPrefix": "Bot protection is currently",
+        "enabled": "enabled",
+        "statusEnabledSuffix": "for this form.",
+        "vercelTitle": "Vercel Protection",
+        "vercelDescription": "If deployed on Vercel, additional anti-abuse checks may apply.",
+        "disabledDescription": "Enable bot protection to reduce spam from automated tools and scripted traffic.",
+        "actionsAria": "Bot protection actions",
+        "saveAria": "Save bot protection settings",
+        "saved": "Bot protection settings saved successfully",
+        "saveFailed": "Failed to save bot protection settings"
+      },
+      "quizSection": {
+        "title": "Quiz & Scoring",
+        "description": "Configure quiz behavior and scoring rules",
+        "ariaSettings": "Quiz settings",
+        "enableLabel": "Enable Quiz Mode",
+        "enableDescription": "Turn on quiz features like scoring and result messages",
+        "passingScoreLabel": "Passing Score (%)",
+        "passingScoreDescription": "Set the minimum percentage required to pass",
+        "timeLimitLabel": "Time Limit (minutes)",
+        "timeLimitDescription": "Optional time limit for quiz completion",
+        "timeLimitPlaceholder": "Leave blank for no limit",
+        "showScoreLabel": "Show Score to User",
+        "showScoreDescription": "Display the user's score after form submission",
+        "showCorrectAnswersLabel": "Show Correct Answers",
+        "showCorrectAnswersDescription": "Show correct answers and explanations after submission",
+        "allowRetakeLabel": "Allow Retake",
+        "allowRetakeDescription": "Let users retake the quiz to improve their score",
+        "customMessagesLabel": "Custom Result Messages",
+        "successMessageLabel": "Success Message",
+        "successMessagePlaceholder": "Great job! You passed the quiz.",
+        "improvementMessageLabel": "Improvement Message",
+        "improvementMessagePlaceholder": "Please review and try again.",
+        "messagePlaceholderHelp": "Use {score}, {percentage}, {total} as placeholders",
+        "actionsAria": "Quiz actions",
+        "saveAria": "Save quiz settings",
+        "saved": "Quiz settings saved successfully",
+        "savedToast": "Quiz settings saved",
+        "saveFailed": "Failed to save quiz settings"
+      },
+      "apiSection": {
+        "title": "API Access",
+        "description": "Toggle to allow submissions via the API endpoint",
+        "authRequired": "User authentication required",
+        "enableSupportLabel": "Enable API Support",
+        "enableSupportDescription": "Enable external submissions via a secure API key.",
+        "apiEndpointLabel": "API Endpoint",
+        "copyEndpointAria": "Copy API endpoint",
+        "endpointCopied": "API endpoint copied",
+        "apiKeyLabel": "API Key",
+        "apiKeySecretHint": "Keep this key secret. Anyone with it can submit to this form.",
+        "generateApiKey": "Generate API key",
+        "regenerateKey": "Regenerate key",
+        "revokeKey": "Revoke key",
+        "generating": "Generating...",
+        "revoking": "Revoking...",
+        "copyApiKeyAria": "Copy API key",
+        "showApiKeyAria": "Show API key",
+        "hideApiKeyAria": "Hide API key",
+        "keyCopied": "API key copied",
+        "keyGenerated": "API key generated",
+        "keyGenerateFailed": "Failed to generate API key",
+        "keyRevoked": "API key revoked",
+        "keyRevokeFailed": "Failed to revoke API key",
+        "showCodeExamples": "Show code examples",
+        "hideCodeExamples": "Hide code examples",
+        "javascriptNodeLabel": "JavaScript / Node.js",
+        "sampleName": "Jane Doe",
+        "sampleEmail": "jane@example.com",
+        "sampleMessage": "Hello from API",
+        "sampleValue": "Sample value",
+        "copyCodeAria": "Copy example code",
+        "downloadCodeAria": "Download example code",
+        "codeCopied": "Example code copied",
+        "codeDownloaded": "Example code downloaded",
+        "betaBadge": "BETA",
+        "integrationRateLimiting": "Rate limiting",
+        "integrationRateLimitingDescription": "Protect your endpoint from spam bursts.",
+        "integrationResponseLimits": "Response limits",
+        "integrationResponseLimitsDescription": "Cap total accepted submissions.",
+        "integrationDuplicatePrevention": "Duplicate prevention",
+        "integrationDuplicatePreventionDescription": "Reduce repeated submissions from the same user.",
+        "integrationProfanityFilter": "Profanity filter",
+        "integrationProfanityFilterDescription": "Block or sanitize inappropriate content.",
+        "emptyStateDescription": "Enable API support to generate a secure API key.",
+        "actionsAria": "API access actions",
+        "saveAria": "Save API settings",
+        "resetAria": "Reset API settings",
+        "settingsSaved": "API settings saved successfully",
+        "settingsSaveFailed": "Failed to save API settings"
+      },
+      "webhooks": {
+        "panel": {
+          "endpointsTitle": "Webhook Endpoints",
+          "endpointsDescription": "Send submissions to external services.",
+          "addWebhook": "Add Webhook"
+        },
+        "list": {
+          "emptyState": "No webhooks configured yet. Add your first webhook to receive form submissions.",
+          "active": "Active",
+          "inactive": "Inactive",
+          "edit": "Edit",
+          "delete": "Delete",
+          "test": "Test",
+          "viewLogs": "View logs",
+          "events": {
+            "formSubmitted": "Form submitted",
+            "formViewed": "Form viewed",
+            "formStarted": "Form started"
+          }
+        },
+        "hook": {
+          "fetchFailed": "Failed to fetch webhooks",
+          "created": "Webhook created successfully",
+          "createFailed": "Failed to create webhook",
+          "updated": "Webhook updated successfully",
+          "updateFailed": "Failed to update webhook",
+          "deleted": "Webhook deleted successfully",
+          "deleteFailed": "Failed to delete webhook"
+        },
+        "formModal": {
+          "addTitle": "Add webhook",
+          "editTitle": "Edit webhook",
+          "stepsAria": "Webhook setup steps",
+          "steps": {
+            "basics": "Basics",
+            "events": "Events",
+            "headers": "Headers",
+            "payload": "Payload",
+            "notifications": "Notifications",
+            "details": "Review"
+          },
+          "errors": {
+            "missingBasics": "Webhook URL is required.",
+            "missingEvent": "Select at least one event.",
+            "missingBasicsAndEvent": "Webhook URL and at least one event are required."
+          },
+          "webhookUrl": "Webhook URL",
+          "webhookUrlPlaceholder": "https://example.com/webhook",
+          "nameOptional": "Name (optional)",
+          "namePlaceholder": "Slack notifications",
+          "descriptionOptional": "Description (optional)",
+          "descriptionPlaceholder": "Where this webhook should send form data",
+          "eventsHelp": "Choose which events should trigger this webhook.",
+          "events": {
+            "formSubmitted": "Form submitted",
+            "formViewed": "Form viewed",
+            "formStarted": "Form started"
+          },
+          "httpMethod": "HTTP Method",
+          "selectHttpMethodAria": "Select HTTP method",
+          "selectMethodPlaceholder": "Select method",
+          "httpMethodDescriptions": {
+            "post": "Create new resources or send payload data.",
+            "put": "Replace an existing resource.",
+            "patch": "Partially update an existing resource.",
+            "delete": "Delete a resource.",
+            "get": "Fetch information without mutating data.",
+            "head": "Fetch headers only."
+          },
+          "addHeader": "Add header",
+          "headerName": "Header name",
+          "headerNamePlaceholder": "Authorization",
+          "headerNameAria": "Webhook header name",
+          "headerValue": "Header value",
+          "headerValuePlaceholder": "Bearer token",
+          "headerValueAria": "Webhook header value",
+          "removeHeaderAria": "Remove header",
+          "headersHelp": "Custom headers are optional and sent with each webhook request.",
+          "payloadTemplateOptional": "Payload template (optional)",
+          "availableVariables": "Available variables",
+          "variables": {
+            "formData": "Submitted form data object",
+            "formId": "Form identifier",
+            "submissionId": "Submission identifier",
+            "event": "Trigger event",
+            "timestamp": "Event timestamp",
+            "formatted": "Human-readable summary"
+          },
+          "notificationEmailOptional": "Notification email (optional)",
+          "notificationEmailPlaceholder": "alerts@example.com",
+          "emailOnSuccess": "Email on successful delivery",
+          "emailOnFailure": "Email on failed delivery",
+          "selectAll": "Select all",
+          "clear": "Clear",
+          "back": "Back",
+          "next": "Next",
+          "skip": "Skip",
+          "cancel": "Cancel",
+          "createWebhook": "Create webhook",
+          "updateWebhook": "Update webhook"
+        },
+        "testDialog": {
+          "title": "Test webhook",
+          "description": "Send a test event to verify your endpoint.",
+          "endpointTitle": "Endpoint",
+          "nameLabel": "Name",
+          "untitledWebhook": "Untitled webhook",
+          "descriptionLabel": "Description",
+          "methodLabel": "HTTP method",
+          "urlLabel": "URL",
+          "triggersTitle": "Triggers",
+          "events": {
+            "formSubmitted": "Form submitted",
+            "formViewed": "Form viewed",
+            "formStarted": "Form started"
+          },
+          "modeTitle": "Test mode",
+          "mode": {
+            "real": "Send a real payload",
+            "success": "Force success response",
+            "failure": "Force failure response"
+          },
+          "sendTest": "Send test",
+          "close": "Close",
+          "success": "Test sent successfully",
+          "failed": "Test failed",
+          "testSent": "Webhook test sent",
+          "testFailed": "Webhook test failed",
+          "testFailedNetwork": "Could not send webhook test"
+        },
+        "logDialog": {
+          "title": "Webhook logs",
+          "status": "Status",
+          "response": "Response",
+          "attempt": "Attempt",
+          "resend": "Resend",
+          "resendSuccess": "Webhook resent successfully",
+          "resendFailed": "Failed to resend webhook",
+          "copied": "Copied to clipboard",
+          "copyFailed": "Failed to copy",
+          "copyCodeAria": "Copy payload",
+          "viewPayload": "View payload",
+          "payloadTitle": "Payload",
+          "noPayloadDataTitle": "No payload data",
+          "noPayloadDataDescription": "Payload is unavailable for this log entry.",
+          "noPayloadReasonMethod": "This request type did not include a payload.",
+          "noPayloadReasonError": "Payload capture failed due to an error.",
+          "noPayloadReasonEmpty": "No payload data was stored.",
+          "eventInformation": "Event information",
+          "eventLabel": "Event",
+          "formNameLabel": "Form name",
+          "formIdLabel": "Form ID",
+          "submissionIdLabel": "Submission ID",
+          "ipAddressLabel": "IP address",
+          "formFields": "Form fields",
+          "rawFormData": "Raw form data",
+          "rawJson": "Raw JSON",
+          "formatted": "Formatted",
+          "additionalData": "Additional data",
+          "notAvailable": "Not available",
+          "unknown": "Unknown",
+          "complexObject": "Complex object",
+          "complexArray": "Complex array",
+          "failedCount": "{count} failed",
+          "pendingCount": "{count} pending",
+          "successfulCount": "{count} successful",
+          "noLogsTitle": "No logs yet",
+          "noLogsDescription": "Send events to this webhook to see delivery history.",
+          "errorTitle": "Could not load logs",
+          "fetchFailed": "Failed to load webhook logs"
+        }
+      },
+      "designSection": {
+        "title": "Design",
+        "description": "Control appearance and customization",
+        "advancedTitle": "Advanced customization",
+        "advancedDescription": "Fine-tune colors, typography, spacing, and more in a focused panel.",
+        "openAria": "Open customization panel in a new tab",
+        "openLabel": "Open customization panel…"
+      }
+    },
+    "fieldRenderer": {
+      "scheduler": {
+        "title": "Scheduler",
+        "openScheduler": "Open Scheduler",
+        "embedTitle": "Scheduler Embed",
+        "notConfigured": "No scheduler link configured.",
+        "close": "Close"
+      },
+      "email": {
+        "defaultPlaceholder": "Enter email address",
+        "autocompleteHint": "Press Tab or click to complete:",
+        "completeEmailAria": "Complete email address",
+        "completeButton": "Complete",
+        "autocompleteBadge": "Auto-complete:",
+        "allowedDomainsLabel": "Allowed domains:"
+      },
+      "fileUpload": {
+        "bytesUnit": "Bytes",
+        "uploadFailed": "Upload failed",
+        "uploadErrorTitle": "Upload Error",
+        "uploadedFiles": "Uploaded Files ({count})",
+        "uploadedBadge": "Uploaded",
+        "removeFileAria": "Remove {name}",
+        "maxFilesAndSize": "Max {maxFiles} files, up to {maxSize} each",
+        "allowedTypes": "Allowed types"
+      },
+      "social": {
+        "platforms": {
+          "linkedin": "LinkedIn",
+          "twitter": "X (Twitter)",
+          "youtube": "YouTube",
+          "instagram": "Instagram",
+          "facebook": "Facebook",
+          "github": "GitHub",
+          "website": "Website"
+        },
+        "customLink": "Custom Link {index}",
+        "customLinkPlaceholder": "https://example.com",
+        "preview": "Preview"
+      },
+      "signature": {
+        "drawHere": "Draw your signature here",
+        "clear": "Clear",
+        "preview": "Preview",
+        "previewAlt": "Signature preview"
+      },
+      "rating": {
+        "groupAria": "Rating",
+        "rateAria": "Rate {index} {type}"
+      },
+      "poll": {
+        "fetchFailed": "Failed to fetch options",
+        "resultsTitle": "Poll Results",
+        "totalVotes": "{count} total votes",
+        "votes": "{count} votes"
+      }
+    },
+    "formRenderer": {
+      "shared": {
+        "poweredBy": "Powered by",
+        "incorrectPassword": "Incorrect password!",
+        "passwordProtectionMessage": "This form is password protected. Please enter the password to continue."
+      },
+      "successScreen": {
+        "title": "Thank You!",
+        "defaultMessage": "Your form has been submitted successfully.",
+        "redirecting": "Redirecting you in a moment...",
+        "poweredBy": "Powered by"
+      },
+      "quizResults": {
+        "titlePassed": "Congratulations!",
+        "titleComplete": "Quiz Complete",
+        "descriptionPassed": "You've successfully completed the quiz!",
+        "descriptionRetry": "Thanks for taking the quiz. Keep practicing!",
+        "score": "Score",
+        "points": "Points",
+        "answered": "Answered",
+        "totalQuestions": "Total Questions",
+        "passed": "Passed",
+        "needsImprovement": "Needs Improvement",
+        "retakeQuiz": "Retake Quiz",
+        "questionByQuestion": "Question by Question Results",
+        "questionLabel": "Question {index}: {label}",
+        "yourAnswer": "Your answer:",
+        "noAnswer": "No answer",
+        "correctAnswer": "Correct answer:",
+        "pointsLower": "points"
+      },
+      "multiStep": {
+        "previous": "Previous",
+        "next": "Next",
+        "submit": "Submit",
+        "defaults": {
+          "formTitle": "Form"
+        },
+        "validation": {
+          "required": "This field is required",
+          "emailInvalid": "Please enter a valid email address",
+          "minLength": "Must be at least {count} characters",
+          "maxLength": "Must be no more than {count} characters"
+        },
+        "toasts": {
+          "submitSuccess": "Form submitted successfully!",
+          "botDetected": "Bot detected. Access denied.",
+          "duplicateSubmission": "You have already submitted this form.",
+          "rateLimitExceeded": "Too many requests. Please try again later.",
+          "responseLimitReached": "This form is no longer accepting responses.",
+          "contentValidationFailed": "Your submission contains inappropriate content.",
+          "submitFailed": "Failed to submit form",
+          "submitFailedTryAgain": "Failed to submit form. Please try again."
+        }
+      },
+      "singleStep": {
+        "fixHighlightedErrors": "Please fix the highlighted errors before submitting.",
+        "submit": "Submit"
+      },
+      "duplicateSubmission": {
+        "title": "Duplicate Submission Detected",
+        "wait": "Wait {time}",
+        "attemptsLeft": "{count, plural, one {# attempt left} other {# attempts left}}",
+        "tryAgain": "Try Again",
+        "waitBeforeRetry": "Please wait before attempting to submit again.",
+        "units": {
+          "seconds": "{count, plural, one {# second} other {# seconds}}",
+          "minutes": "{count, plural, one {# minute} other {# minutes}}",
+          "hours": "{count, plural, one {# hour} other {# hours}}",
+          "days": "{count, plural, one {# day} other {# days}}"
+        }
       }
     }
   },
@@ -301,7 +1891,13 @@
       "createFormWithKiko": "Create Form with Kiko",
       "streamError": "Error: {error}",
       "generatingResponse": "Generating response…",
-      "loading": "Loading…"
+      "loading": "Loading…",
+      "suggestions": {
+        "contactForm": "Create a contact form",
+        "customerFeedbackSurvey": "Customer feedback survey",
+        "eventRegistrationForm": "Event registration form",
+        "jobApplicationForm": "Job application form"
+      }
     },
     "chatHeader": {
       "backToFormBuilder": "Back to form builder",
@@ -465,6 +2061,151 @@
       "submittedAt": "Submitted At",
       "csvExportedSuccess": "CSV exported successfully",
       "jsonExportedSuccess": "JSON exported successfully"
+    },
+    "premiumRequired": {
+      "analytics": {
+        "title": "Requires Premium",
+        "description": "You need a premium subscription to access form analytics. Upgrade to unlock all features.",
+        "viewPricing": "View Pricing"
+      },
+      "submissions": {
+        "title": "Requires Premium",
+        "description": "You need a premium subscription to access form submissions. Upgrade to unlock all features.",
+        "viewPricing": "View Pricing"
+      }
+    }
+  },
+  "trialBanner": {
+    "aria": {
+      "status": "Trial status notification"
+    },
+    "endsInPrefix": "Your free trial ends in ",
+    "remainingSuffix": " remaining",
+    "expired": "Trial expired",
+    "units": {
+      "day": "d",
+      "hour": "h",
+      "minute": "m",
+      "second": "s"
+    }
+  },
+  "embed": {
+    "customizer": {
+      "subtitle": "Customize and generate embed code for your form",
+      "showCode": "Show Code",
+      "settings": "Settings",
+      "preview": "Preview",
+      "desktop": "Desktop",
+      "mobile": "Mobile"
+    },
+    "settings": {
+      "dimensions": {
+        "title": "Dimensions",
+        "width": "Width",
+        "widthPlaceholder": "e.g., 100%, 800px",
+        "height": "Height",
+        "heightPlaceholder": "e.g., 600px, 100vh",
+        "makeResponsive": "Make responsive (adjusts to container width)"
+      },
+      "appearance": {
+        "title": "Appearance",
+        "backgroundColor": "Background Color",
+        "allowTransparentBackground": "Allow transparent background (overrides background color)"
+      },
+      "border": {
+        "title": "Border & Styling",
+        "showBorder": "Show border",
+        "borderColor": "Border Color",
+        "borderWidth": "Border Width (px)",
+        "borderRadius": "Border Radius (px)",
+        "padding": "Padding (px)",
+        "paddingHelp": "Space around the iframe"
+      },
+      "performance": {
+        "title": "Performance",
+        "loadingMode": "Loading Mode",
+        "loadingModePlaceholder": "Select loading mode",
+        "lazy": "Lazy (recommended)",
+        "eager": "Eager",
+        "help": "Lazy loading improves page performance by loading the iframe only when it comes into view"
+      }
+    },
+    "codeModal": {
+      "title": "Embed Code",
+      "description": "Choose your framework and copy the code",
+      "codeLabel": "{mode} Code",
+      "copied": "Copied!",
+      "copy": "Copy",
+      "close": "Close",
+      "modes": {
+        "htmlDescription": "Universal HTML iframe",
+        "reactDescription": "React component",
+        "nextjsDescription": "Next.js component",
+        "vueDescription": "Vue.js component",
+        "wordpressDescription": "WordPress shortcode"
+      },
+      "iframeTitle": "Form"
+    },
+    "testPage": {
+      "metadata": {
+        "title": "Embed Test - IkiForm",
+        "description": "Test page to demonstrate form embedding capabilities"
+      },
+      "title": "Form Embedding Test Page",
+      "descriptionPrefix": "This page demonstrates how forms can be embedded using different configurations. Visit",
+      "descriptionSuffix": "to customize your own embed.",
+      "tryCustomizer": "Try Embed Customizer",
+      "cards": {
+        "standard": {
+          "title": "Standard Embed",
+          "description": "600px height - perfect for desktop viewing",
+          "badge": "Responsive",
+          "iframeTitle": "Standard Form Embed"
+        },
+        "compact": {
+          "title": "Compact Embed",
+          "description": "400px height - ideal for sidebars and smaller spaces",
+          "badge": "Minimal",
+          "iframeTitle": "Compact Form Embed"
+        },
+        "fixed": {
+          "title": "Fixed Width Embed",
+          "description": "800px width, centered - perfect for specific layouts",
+          "badge": "Custom Style",
+          "iframeTitle": "Fixed Width Form Embed"
+        },
+        "react": {
+          "title": "React Component Example",
+          "description": "TypeScript React component with proper typing",
+          "codeIframeTitle": "Form"
+        }
+      },
+      "guide": {
+        "title": "How to Use the Embed Feature",
+        "description": "Step-by-step guide to embedding your forms",
+        "steps": {
+          "step1": {
+            "title": "Access the Embed Customizer",
+            "prefix": "Go to",
+            "suffix": "or click the embed button in your form dashboard."
+          },
+          "step2": {
+            "title": "Customize Your Embed",
+            "item1": "Adjust width and height dimensions",
+            "item2": "Choose theme (light, dark, auto)",
+            "item3": "Configure borders and styling",
+            "item4": "Set loading behavior"
+          },
+          "step3": {
+            "title": "Get Your Code",
+            "description": "Copy the generated code for HTML, React, Next.js, Vue, or WordPress and paste it into your website."
+          },
+          "step4": {
+            "title": "Dashboard Integration",
+            "description": "Access embed options directly from your form dashboard using the embed button in the form actions."
+          }
+        }
+      }
     }
   }
 }

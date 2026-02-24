@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -59,8 +60,11 @@ type SortField =
 type SortDirection = "asc" | "desc";
 
 export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
+	const t = useTranslations("dashboard.admin.usersTable");
+	const locale = useLocale();
 	const router = useRouter();
 	const searchParams = useSearchParams();
+	const dateLocale = locale === "es" ? "es-ES" : "en-US";
 
 	const [searchTerm, setSearchTerm] = useState("");
 	const [sortField, setSortField] = useState<SortField>("created_at");
@@ -204,10 +208,10 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
 						className="absolute top-1/2 left-3 size-4 -translate-y-1/2 transform text-muted-foreground"
 					/>
 					<Input
-						aria-label="Search users"
+						aria-label={t("search.aria")}
 						className="pl-10"
 						onChange={(e) => setSearchTerm(e.target.value)}
-						placeholder="Search users by name, email, customer name, or Polar ID..."
+						placeholder={t("search.placeholder")}
 						type="search"
 						value={searchTerm}
 					/>
@@ -216,41 +220,41 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
 				<div className="flex gap-2">
 					<Select onValueChange={setPremiumFilter} value={premiumFilter}>
 						<SelectTrigger
-							aria-label="Filter by premium status"
+							aria-label={t("filters.premiumAria")}
 							className="w-[140px]"
 						>
-							<SelectValue placeholder="Premium" />
+							<SelectValue placeholder={t("columns.premium")} />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem value="all">All Premium</SelectItem>
-							<SelectItem value="premium">Premium Only</SelectItem>
-							<SelectItem value="free">Free Only</SelectItem>
+							<SelectItem value="all">{t("filters.allPremium")}</SelectItem>
+							<SelectItem value="premium">{t("filters.premiumOnly")}</SelectItem>
+							<SelectItem value="free">{t("filters.freeOnly")}</SelectItem>
 						</SelectContent>
 					</Select>
 
 					<Select onValueChange={setTrialFilter} value={trialFilter}>
 						<SelectTrigger
-							aria-label="Filter by trial status"
+							aria-label={t("filters.trialAria")}
 							className="w-[140px]"
 						>
-							<SelectValue placeholder="Trial" />
+							<SelectValue placeholder={t("columns.trial")} />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem value="all">All Trial</SelectItem>
-							<SelectItem value="trial">Trial Only</SelectItem>
-							<SelectItem value="no-trial">No Trial</SelectItem>
+							<SelectItem value="all">{t("filters.allTrial")}</SelectItem>
+							<SelectItem value="trial">{t("filters.trialOnly")}</SelectItem>
+							<SelectItem value="no-trial">{t("filters.noTrial")}</SelectItem>
 						</SelectContent>
 					</Select>
 
 					{hasActiveFilters && (
 						<Button
-							aria-label="Clear all filters"
+							aria-label={t("filters.clearAria")}
 							onClick={clearFilters}
 							size="sm"
 							variant="outline"
 						>
 							<X aria-hidden="true" className="size-4" />
-							Clear
+							{t("filters.clear")}
 						</Button>
 					)}
 				</div>
@@ -260,31 +264,41 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
 			<div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 				<div className="flex items-center gap-4 text-muted-foreground text-sm">
 					<span>
-						Showing {(currentPage - 1) * itemsPerPage + 1}-
-						{Math.min(
-							currentPage * itemsPerPage,
-							filteredAndSortedUsers.length
-						)}{" "}
-						of {filteredAndSortedUsers.length} users
+						{t("showingRange", {
+							start: (currentPage - 1) * itemsPerPage + 1,
+							end: Math.min(
+								currentPage * itemsPerPage,
+								filteredAndSortedUsers.length
+							),
+							total: filteredAndSortedUsers.length,
+						})}
 					</span>
 					{hasActiveFilters && (
 						<span className="text-xs">
-							Filtered by: {searchTerm && `"${searchTerm}"`}
+							{t("filters.filteredBy")} {searchTerm && `"${searchTerm}"`}
 							{premiumFilter !== "all" &&
-								` • ${premiumFilter === "premium" ? "Premium" : "Free"}`}
+								` • ${
+									premiumFilter === "premium"
+										? t("badges.premium")
+										: t("badges.free")
+								}`}
 							{trialFilter !== "all" &&
-								` • ${trialFilter === "trial" ? "Trial" : "No Trial"}`}
+								` • ${
+									trialFilter === "trial"
+										? t("badges.freeTrial")
+										: t("badges.noFreeTrial")
+								}`}
 						</span>
 					)}
 				</div>
 
 				<div className="flex items-center gap-2">
-					<span className="text-muted-foreground text-sm">Show:</span>
+					<span className="text-muted-foreground text-sm">{t("showLabel")}</span>
 					<Select
 						onValueChange={handleItemsPerPageChange}
 						value={itemsPerPage.toString()}
 					>
-						<SelectTrigger aria-label="Items per page" className="w-[80px]">
+						<SelectTrigger aria-label={t("itemsPerPageAria")} className="w-[80px]">
 							<SelectValue />
 						</SelectTrigger>
 						<SelectContent>
@@ -299,86 +313,86 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
 
 			{}
 			<div className="rounded-md border">
-				<Table aria-label="Users table" role="table">
+				<Table aria-label={t("table.aria")} role="table">
 					<TableHeader>
 						<TableRow>
 							<TableHead>
 								<Button
-									aria-label="Sort by UID"
+									aria-label={t("sort.uidAria")}
 									className="h-auto p-0 font-medium hover:bg-transparent"
 									onClick={() => handleSort("uid")}
 									size="sm"
 									variant="ghost"
 								>
-									UID {getSortIcon("uid")}
+									{t("columns.uid")} {getSortIcon("uid")}
 								</Button>
 							</TableHead>
 							<TableHead>
 								<Button
-									aria-label="Sort by Name"
+									aria-label={t("sort.nameAria")}
 									className="h-auto p-0 font-medium hover:bg-transparent"
 									onClick={() => handleSort("name")}
 									size="sm"
 									variant="ghost"
 								>
-									Name {getSortIcon("name")}
+									{t("columns.name")} {getSortIcon("name")}
 								</Button>
 							</TableHead>
 							<TableHead>
 								<Button
-									aria-label="Sort by Email"
+									aria-label={t("sort.emailAria")}
 									className="h-auto p-0 font-medium hover:bg-transparent"
 									onClick={() => handleSort("email")}
 									size="sm"
 									variant="ghost"
 								>
-									Email {getSortIcon("email")}
+									{t("columns.email")} {getSortIcon("email")}
 								</Button>
 							</TableHead>
 							<TableHead>
 								<Button
-									aria-label="Sort by Premium status"
+									aria-label={t("sort.premiumAria")}
 									className="h-auto p-0 font-medium hover:bg-transparent"
 									onClick={() => handleSort("has_premium")}
 									size="sm"
 									variant="ghost"
 								>
-									Premium {getSortIcon("has_premium")}
+									{t("columns.premium")} {getSortIcon("has_premium")}
 								</Button>
 							</TableHead>
 							<TableHead>
 								<Button
-									aria-label="Sort by Trial status"
+									aria-label={t("sort.trialAria")}
 									className="h-auto p-0 font-medium hover:bg-transparent"
 									onClick={() => handleSort("has_free_trial")}
 									size="sm"
 									variant="ghost"
 								>
-									Trial {getSortIcon("has_free_trial")}
+									{t("columns.trial")} {getSortIcon("has_free_trial")}
 								</Button>
 							</TableHead>
-							<TableHead>Customer Name</TableHead>
-							<TableHead>Polar ID</TableHead>
+							<TableHead>{t("columns.customerName")}</TableHead>
+							<TableHead>{t("columns.polarId")}</TableHead>
 							<TableHead>
 								<Button
-									aria-label="Sort by Created date"
+									aria-label={t("sort.createdAria")}
 									className="h-auto p-0 font-medium hover:bg-transparent"
 									onClick={() => handleSort("created_at")}
 									size="sm"
 									variant="ghost"
 								>
-									Created {getSortIcon("created_at")}
+									{t("columns.created")} {getSortIcon("created_at")}
 								</Button>
 							</TableHead>
 							<TableHead>
 								<Button
-									aria-label="Sort by Updated date"
+									aria-label={t("sort.updatedAria")}
 									className="h-auto p-0 font-medium hover:bg-transparent"
 									onClick={() => handleSort("updated_at")}
 									size="sm"
 									variant="ghost"
 								>
-									Updated {getSortIcon("updated_at")}
+									{t("columns.updated")} {getSortIcon("updated_at")}
 								</Button>
 							</TableHead>
 						</TableRow>
@@ -394,7 +408,7 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
 								</TableCell>
 								<TableCell className="font-medium">
 									<Link
-										aria-label={`View details for ${user.name}`}
+										aria-label={t("row.viewDetailsFor", { name: user.name })}
 										className="flex items-center gap-2 hover:text-primary"
 										href={`/admin/users/${user.uid}`}
 									>
@@ -408,20 +422,30 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
 								<TableCell>{user.email}</TableCell>
 								<TableCell>
 									<Badge
-										aria-label={`Premium status: ${user.has_premium ? "Premium" : "Free"}`}
+										aria-label={t("row.premiumStatusAria", {
+											status: user.has_premium
+												? t("badges.premium")
+												: t("badges.free"),
+										})}
 										className="w-full"
 										variant={user.has_premium ? "default" : "secondary"}
 									>
-										{user.has_premium ? "Premium" : "Free"}
+										{user.has_premium ? t("badges.premium") : t("badges.free")}
 									</Badge>
 								</TableCell>
 								<TableCell>
 									<Badge
-										aria-label={`Trial status: ${user.has_free_trial ? "Free Trial" : "No Free Trial"}`}
+										aria-label={t("row.trialStatusAria", {
+											status: user.has_free_trial
+												? t("badges.freeTrial")
+												: t("badges.noFreeTrial"),
+										})}
 										className="w-full"
 										variant={user.has_free_trial ? "default" : "secondary"}
 									>
-										{user.has_free_trial ? "Free Trial" : "No Free Trial"}
+										{user.has_free_trial
+											? t("badges.freeTrial")
+											: t("badges.noFreeTrial")}
 									</Badge>
 								</TableCell>
 								<TableCell>
@@ -443,14 +467,14 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
 									)}
 								</TableCell>
 								<TableCell className="text-xs">
-									{new Date(user.created_at).toLocaleDateString("en-US", {
+									{new Date(user.created_at).toLocaleDateString(dateLocale, {
 										year: "numeric",
 										month: "2-digit",
 										day: "2-digit",
 									})}
 								</TableCell>
 								<TableCell className="text-xs">
-									{new Date(user.updated_at).toLocaleDateString("en-US", {
+									{new Date(user.updated_at).toLocaleDateString(dateLocale, {
 										year: "numeric",
 										month: "2-digit",
 										day: "2-digit",
@@ -464,7 +488,7 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
 
 			{paginatedUsers.length === 0 && (
 				<div className="py-8 text-center text-muted-foreground">
-					{hasActiveFilters ? "No users match your filters" : "No users found"}
+					{hasActiveFilters ? t("empty.filtered") : t("empty.default")}
 				</div>
 			)}
 
@@ -472,19 +496,19 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
 			{totalPages > 1 && (
 				<div className="flex items-center justify-between">
 					<div className="text-muted-foreground text-sm">
-						Page {currentPage} of {totalPages}
+						{t("pagination.pageOf", { current: currentPage, total: totalPages })}
 					</div>
 
 					<div className="flex items-center gap-2">
 						<Button
-							aria-label="Go to previous page"
+							aria-label={t("pagination.previousAria")}
 							disabled={currentPage === 1}
 							onClick={() => handlePageChange(currentPage - 1)}
 							size="sm"
 							variant="outline"
 						>
 							<ChevronLeft aria-hidden="true" className="size-4" />
-							Previous
+							{t("pagination.previous")}
 						</Button>
 
 						<div className="flex items-center gap-1">
@@ -503,7 +527,9 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
 								return (
 									<Button
 										aria-current={currentPage === pageNum ? "page" : undefined}
-										aria-label={`Go to page ${pageNum}`}
+										aria-label={t("pagination.goToPageAria", {
+											page: pageNum,
+										})}
 										className="size-8 p-0"
 										key={pageNum}
 										onClick={() => handlePageChange(pageNum)}
@@ -517,13 +543,13 @@ export const UsersTable = memo(function UsersTable({ users }: UsersTableProps) {
 						</div>
 
 						<Button
-							aria-label="Go to next page"
+							aria-label={t("pagination.nextAria")}
 							disabled={currentPage === totalPages}
 							onClick={() => handlePageChange(currentPage + 1)}
 							size="sm"
 							variant="outline"
 						>
-							Next
+							{t("pagination.next")}
 							<ChevronRight aria-hidden="true" className="size-4" />
 						</Button>
 					</div>

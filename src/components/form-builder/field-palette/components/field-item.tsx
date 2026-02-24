@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 import type { FieldItemProps } from "../types";
 
 export function FieldItem({ fieldType, onAddField }: FieldItemProps) {
+	const t = useTranslations("product.formBuilder.fieldPalette");
 	const IconComponent = fieldType.icon;
 	return (
 		<Button
-			aria-label={`Add ${fieldType.label} field`}
+			aria-label={t("addFieldAria", { label: fieldType.label })}
 			className="group h-auto min-h-11 w-full justify-start p-4 text-left"
 			onClick={() => onAddField(fieldType.type)}
 			onKeyDown={(e) => {

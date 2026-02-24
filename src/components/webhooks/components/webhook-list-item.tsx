@@ -1,4 +1,5 @@
 import { Edit, FileText, MoreHorizontal, Play, Trash2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,6 +29,14 @@ export function WebhookListItem({
 	onTest,
 	onViewLogs,
 }: WebhookListItemProps) {
+	const t = useTranslations("product.formBuilder.formSettings.webhooks.list");
+	const getEventLabel = (event: string) => {
+		if (event === "form_submitted") return t("events.formSubmitted");
+		if (event === "form_viewed") return t("events.formViewed");
+		if (event === "form_started") return t("events.formStarted");
+		return event;
+	};
+
 	return (
 		<div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
 			<div className="min-w-0 flex-1">
@@ -65,7 +74,7 @@ export function WebhookListItem({
 							/>
 						</div>
 						<Badge variant={webhook.enabled ? "default" : "secondary"}>
-							{webhook.enabled ? "Active" : "Inactive"}
+							{webhook.enabled ? t("active") : t("inactive")}
 						</Badge>
 					</div>
 				</div>
@@ -77,7 +86,7 @@ export function WebhookListItem({
 							key={event}
 							variant="secondary"
 						>
-							{event}
+							{getEventLabel(event)}
 						</Badge>
 					))}
 				</div>
@@ -87,6 +96,7 @@ export function WebhookListItem({
 				<div className="flex items-center gap-1 sm:hidden">
 					<Button
 						className=""
+						aria-label={t("edit")}
 						onClick={(e) => {
 							e.stopPropagation();
 							onEdit();
@@ -98,6 +108,7 @@ export function WebhookListItem({
 					</Button>
 					<Button
 						className=""
+						aria-label={t("test")}
 						onClick={(e) => {
 							e.stopPropagation();
 							onTest();
@@ -109,6 +120,7 @@ export function WebhookListItem({
 					</Button>
 					<Button
 						className=""
+						aria-label={t("viewLogs")}
 						onClick={(e) => {
 							e.stopPropagation();
 							onViewLogs();
@@ -120,6 +132,7 @@ export function WebhookListItem({
 					</Button>
 					<Button
 						className="text-destructive"
+						aria-label={t("delete")}
 						onClick={(e) => {
 							e.stopPropagation();
 							onDelete();
@@ -151,7 +164,7 @@ export function WebhookListItem({
 							}}
 						>
 							<Edit className="size-4" />
-							Edit
+							{t("edit")}
 						</DropdownMenuItem>
 						<DropdownMenuItem
 							onClick={(e) => {
@@ -160,7 +173,7 @@ export function WebhookListItem({
 							}}
 						>
 							<Play className="size-4" />
-							Test
+							{t("test")}
 						</DropdownMenuItem>
 						<DropdownMenuItem
 							onClick={(e) => {
@@ -169,7 +182,7 @@ export function WebhookListItem({
 							}}
 						>
 							<FileText className="size-4" />
-							View Logs
+							{t("viewLogs")}
 						</DropdownMenuItem>
 						<DropdownMenuItem
 							onClick={(e) => {
@@ -179,7 +192,7 @@ export function WebhookListItem({
 							variant="destructive"
 						>
 							<Trash2 className="size-4" />
-							Delete
+							{t("delete")}
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>

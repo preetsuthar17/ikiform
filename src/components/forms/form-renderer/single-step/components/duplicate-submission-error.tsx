@@ -1,6 +1,6 @@
 import { AlertCircle, Clock, RefreshCw } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
-import { formatTimeRemaining } from "@/lib/forms/duplicate-prevention";
 
 interface DuplicateSubmissionErrorProps {
 	message: string;
@@ -15,10 +15,28 @@ export function DuplicateSubmissionError({
 	attemptsRemaining,
 	onRetry,
 }: DuplicateSubmissionErrorProps) {
+	const t = useTranslations(
+		"product.formBuilder.formRenderer.duplicateSubmission"
+	);
 	const hasTimeRestriction = !!timeRemaining && timeRemaining > 0;
 	const hasAttemptRestriction =
 		attemptsRemaining !== undefined && attemptsRemaining > 0;
 	const canRetry = onRetry && (!hasTimeRestriction || timeRemaining === 0);
+	const formatTimeRemainingLocalized = (seconds: number) => {
+		if (seconds < 60) {
+			return t("units.seconds", { count: seconds });
+		}
+		if (seconds < 3600) {
+			const minutes = Math.ceil(seconds / 60);
+			return t("units.minutes", { count: minutes });
+		}
+		if (seconds < 86_400) {
+			const hours = Math.ceil(seconds / 3600);
+			return t("units.hours", { count: hours });
+		}
+		const days = Math.ceil(seconds / 86_400);
+		return t("units.days", { count: days });
+	};
 
 	return (
 		<div className="rounded-md border-l-2 border-l-destructive/10 bg-destructive/2 p-4">
@@ -31,7 +49,7 @@ export function DuplicateSubmissionError({
 				<div className="flex flex-col gap-4">
 					<div className="flex flex-col gap-2">
 						<p className="font-semibold text-lg">
-							Duplicate Submission Detected
+							{t("title")}
 						</p>
 						<p className="text-muted-foreground text-sm">{message}</p>
 					</div>
@@ -45,7 +63,9 @@ export function DuplicateSubmissionError({
 										className="size-3 text-destructive"
 									/>
 									<span className="font-medium text-destructive text-xs">
-										Wait {formatTimeRemaining(timeRemaining)}
+										{t("wait", {
+											time: formatTimeRemainingLocalized(timeRemaining),
+										})}
 									</span>
 								</div>
 							)}
@@ -57,8 +77,7 @@ export function DuplicateSubmissionError({
 										className="size-3 text-destructive"
 									/>
 									<span className="font-medium text-destructive text-xs">
-										{attemptsRemaining} attempt
-										{attemptsRemaining > 1 ? "s" : ""} left
+										{t("attemptsLeft", { count: attemptsRemaining })}
 									</span>
 								</div>
 							)}
@@ -68,13 +87,13 @@ export function DuplicateSubmissionError({
 					{canRetry && (
 						<Button className="w-fit" onClick={onRetry} variant="destructive">
 							<RefreshCw className="size-4 shrink-0" />
-							Try Again
+							{t("tryAgain")}
 						</Button>
 					)}
 
 					{!canRetry && hasTimeRestriction && (
 						<div className="text-muted-foreground text-xs">
-							Please wait before attempting to submit again.
+							{t("waitBeforeRetry")}
 						</div>
 					)}
 				</div>

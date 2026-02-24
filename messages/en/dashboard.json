@@ -3,7 +3,10 @@
     "dashboard": "Dashboard",
     "feedback": "Feedback",
     "logOut": "Log out",
-    "loading": "Loading"
+    "loading": "Loading",
+    "loadingProfile": "Loading profile",
+    "loadingFormsSidebar": "Loading forms sidebar",
+    "loadingFormsManagement": "Loading forms management"
   },
   "profile": {
     "userProfileInformation": "User profile information",
@@ -220,6 +223,294 @@
       },
       "toasts": {
         "exportCreated": "Encrypted form export created."
+      }
+    }
+  },
+  "admin": {
+    "page": {
+      "aria": {
+        "dashboard": "Admin dashboard",
+        "announcements": "Announcements management",
+        "expireTrials": "Expire trials management",
+        "users": "Users management"
+      },
+      "announcements": {
+        "title": "Send Announcements",
+        "signedInAs": "Signed in as {email}"
+      },
+      "expireTrials": {
+        "title": "Expire Trials",
+        "description": "Manually run the cron job to expire free trials"
+      },
+      "users": {
+        "title": "All Users ({count})",
+        "description": "Manage and view all registered users"
+      }
+    },
+    "announcementForm": {
+      "labels": {
+        "recipientEmails": "Recipient emails",
+        "subject": "Subject",
+        "content": "Content (Markdown supported)"
+      },
+      "placeholders": {
+        "recipientEmails": "one@example.com, two@example.com\\nor\\nthree@example.com",
+        "subject": "Announcement subject",
+        "content": "# Title\\n\\nDetails here..."
+      },
+      "help": {
+        "recipientFormat": "Comma- or newline-separated."
+      },
+      "actions": {
+        "loading": "Loading...",
+        "prefillFromUsers": "Prefill from users",
+        "sendAnnouncement": "Send Announcement"
+      },
+      "toasts": {
+        "fetchEmailsFailed": "Failed to fetch emails",
+        "loadedEmails": "Loaded {count} emails",
+        "sending": "Sending announcements...",
+        "sentCount": "Sent {count} email(s)",
+        "failedWithError": "Failed: {error}",
+        "failedToSendFallback": "Failed to send"
+      }
+    },
+    "expireTrialsControl": {
+      "title": "Expire Trials",
+      "description": "Manually run the cron job to expire free trials older than 14 days",
+      "unknownError": "Unknown error",
+      "actions": {
+        "running": "Running...",
+        "run": "Run Expire Trials"
+      },
+      "result": {
+        "success": "Success",
+        "error": "Error",
+        "updatedUsersCount": "{count} user(s) updated",
+        "updatedUsers": "Updated Users:"
+      },
+      "toasts": {
+        "updatedSuccess": "Successfully updated {count} user(s) from trial to free",
+        "failedWithError": "Failed: {error}",
+        "errorWithMessage": "Error: {message}"
+      }
+    },
+    "usersTable": {
+      "search": {
+        "aria": "Search users",
+        "placeholder": "Search users by name, email, customer name, or Polar ID..."
+      },
+      "filters": {
+        "premiumAria": "Filter by premium status",
+        "trialAria": "Filter by trial status",
+        "allPremium": "All Premium",
+        "premiumOnly": "Premium Only",
+        "freeOnly": "Free Only",
+        "allTrial": "All Trial",
+        "trialOnly": "Trial Only",
+        "noTrial": "No Trial",
+        "clearAria": "Clear all filters",
+        "clear": "Clear",
+        "filteredBy": "Filtered by:"
+      },
+      "columns": {
+        "uid": "UID",
+        "name": "Name",
+        "email": "Email",
+        "premium": "Premium",
+        "trial": "Trial",
+        "customerName": "Customer Name",
+        "polarId": "Polar ID",
+        "created": "Created",
+        "updated": "Updated"
+      },
+      "sort": {
+        "uidAria": "Sort by UID",
+        "nameAria": "Sort by Name",
+        "emailAria": "Sort by Email",
+        "premiumAria": "Sort by Premium status",
+        "trialAria": "Sort by Trial status",
+        "createdAria": "Sort by Created date",
+        "updatedAria": "Sort by Updated date"
+      },
+      "table": {
+        "aria": "Users table"
+      },
+      "badges": {
+        "premium": "Premium",
+        "free": "Free",
+        "freeTrial": "Free Trial",
+        "noFreeTrial": "No Free Trial"
+      },
+      "row": {
+        "viewDetailsFor": "View details for {name}",
+        "premiumStatusAria": "Premium status: {status}",
+        "trialStatusAria": "Trial status: {status}"
+      },
+      "showingRange": "Showing {start}-{end} of {total} users",
+      "showLabel": "Show:",
+      "itemsPerPageAria": "Items per page",
+      "empty": {
+        "filtered": "No users match your filters",
+        "default": "No users found"
+      },
+      "pagination": {
+        "pageOf": "Page {current} of {total}",
+        "previousAria": "Go to previous page",
+        "previous": "Previous",
+        "goToPageAria": "Go to page {page}",
+        "nextAria": "Go to next page",
+        "next": "Next"
+      }
+    },
+    "userControls": {
+      "title": "Admin Controls",
+      "description": "Manage user status and permissions",
+      "sections": {
+        "freeTrial": "Free Trial",
+        "premiumStatus": "Premium Status",
+        "dangerZone": "Danger Zone"
+      },
+      "actions": {
+        "removeTrial": "Remove Trial",
+        "assignTrial": "Assign Trial",
+        "removePremium": "Remove Premium",
+        "assignPremium": "Assign Premium",
+        "deleteUser": "Delete User"
+      },
+      "warning": {
+        "label": "Warning:",
+        "message": "Deleting a user will permanently remove all their forms, submissions, and data. This action cannot be undone."
+      },
+      "confirm": {
+        "title": "Delete User",
+        "confirm": "Delete User",
+        "cancel": "Cancel",
+        "description": "Are you sure you want to delete user {userName}? This action cannot be undone and will delete all their forms and data."
+      }
+    },
+    "userProfile": {
+      "backToAdmin": "Back to Admin",
+      "invalidUserId": {
+        "title": "Invalid User ID",
+        "description": "No user ID provided in the URL."
+      },
+      "notFound": {
+        "title": "User Not Found",
+        "description": "The user you're looking for doesn't exist."
+      },
+      "userInformation": "User Information",
+      "labels": {
+        "uid": "UID",
+        "premiumStatus": "Premium Status",
+        "trialStatus": "Trial Status",
+        "customerName": "Customer Name",
+        "polarCustomerId": "Polar Customer ID",
+        "memberSince": "Member Since"
+      },
+      "badges": {
+        "premium": "Premium",
+        "free": "Free",
+        "freeTrial": "Free Trial",
+        "noTrial": "No Trial"
+      },
+      "trialStatus": {
+        "title": "Free Trial Status",
+        "expiredBadge": "Trial Expired",
+        "endedDaysAgo": "Free trial ended {days} days ago",
+        "expiringSoonBadge": "Expiring Soon",
+        "activeBadge": "Active Trial",
+        "daysLeft": "{days, plural, one {# day left in free trial} other {# days left in free trial}}",
+        "startedOn": "Trial started:"
+      },
+      "forms": {
+        "title": "Forms ({count})",
+        "description": "All forms created by this user",
+        "empty": "This user hasn't created any forms yet.",
+        "table": {
+          "formTitle": "Form Title",
+          "description": "Description",
+          "status": "Status",
+          "submissions": "Submissions",
+          "created": "Created",
+          "actions": "Actions"
+        },
+        "status": {
+          "published": "Published",
+          "draft": "Draft"
+        },
+        "actions": {
+          "view": "View",
+          "details": "Details"
+        }
+      }
+    },
+    "formDetails": {
+      "pageAria": "Form details page",
+      "backToAdmin": "Back to Admin",
+      "backToAdminAria": "Return to admin dashboard",
+      "noDescription": "No description provided",
+      "viewForm": "View Form",
+      "viewFormAria": "View form in new tab",
+      "invalidFormId": {
+        "aria": "Invalid form ID error",
+        "title": "Invalid Form ID",
+        "description": "No form ID provided in the URL."
+      },
+      "notFound": {
+        "aria": "Form not found error",
+        "title": "Form Not Found",
+        "description": "The form you're looking for doesn't exist."
+      },
+      "badges": {
+        "published": "Published",
+        "draft": "Draft",
+        "enabled": "Enabled",
+        "disabled": "Disabled"
+      },
+      "statistics": {
+        "aria": "Form statistics",
+        "status": "Status",
+        "formStatusAria": "Form status: {status}",
+        "submissions": "Submissions",
+        "submissionsCountAria": "{count} submissions",
+        "created": "Created",
+        "createdOnAria": "Created on {date}",
+        "apiStatus": "API Status",
+        "apiStatusAria": "API status: {status}"
+      },
+      "details": {
+        "title": "Form Details",
+        "formId": "Form ID",
+        "formIdAria": "Form ID: {id}",
+        "owner": "Owner",
+        "viewOwnerAria": "View owner details for {name}",
+        "unknown": "Unknown",
+        "slug": "Slug",
+        "slugAria": "Form slug: {slug}",
+        "notSet": "Not set",
+        "lastUpdated": "Last Updated",
+        "lastUpdatedAria": "Last updated: {date}",
+        "apiKey": "API Key",
+        "apiKeyAria": "API Key: {key}"
+      },
+      "schema": {
+        "title": "Form Schema",
+        "aria": "Form schema JSON"
+      },
+      "submissions": {
+        "title": "Form Submissions ({count})",
+        "description": "All responses submitted to this form",
+        "emptyAria": "No form submissions",
+        "empty": "No submissions yet.",
+        "listAria": "Form submissions list",
+        "itemAria": "Submission {number}",
+        "itemLabel": "Submission #{number}",
+        "submittedOnAria": "Submitted on {date}",
+        "ipAria": "IP address: {ip}",
+        "ipLabel": "IP: {ip}",
+        "fieldAria": "Field: {key}",
+        "valueAria": "Value for {key}: {value}"
       }
     }
   }

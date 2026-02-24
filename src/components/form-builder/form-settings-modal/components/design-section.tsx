@@ -1,4 +1,5 @@
 import { ExternalLink } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -13,6 +14,8 @@ interface DesignSectionProps {
 }
 
 export function DesignSection({ formId }: DesignSectionProps) {
+	const t = useTranslations("product.formBuilder.formSettings.designSection");
+
 	return (
 		<Card aria-labelledby="design-title" className="shadow-none" role="region">
 			<CardHeader>
@@ -22,10 +25,10 @@ export function DesignSection({ formId }: DesignSectionProps) {
 							className="flex items-center gap-2 text-lg tracking-tight"
 							id="design-title"
 						>
-							Design
+							{t("title")}
 						</CardTitle>
 						<CardDescription>
-							Control appearance and customization
+							{t("description")}
 						</CardDescription>
 					</div>
 				</div>
@@ -34,14 +37,13 @@ export function DesignSection({ formId }: DesignSectionProps) {
 				<div className="rounded-lg border bg-muted/40 p-4">
 					<div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
 						<div className="flex-1">
-							<h4 className="font-medium text-sm">Advanced customization</h4>
+							<h4 className="font-medium text-sm">{t("advancedTitle")}</h4>
 							<p className="mt-1 text-muted-foreground text-xs">
-								Fine-tune colors, typography, spacing, and more in a focused
-								panel.
+								{t("advancedDescription")}
 							</p>
 						</div>
 						<Button
-							aria-label="Open customization panel in a new tab"
+							aria-label={t("openAria")}
 							asChild
 							size="sm"
 							variant="outline"
@@ -53,7 +55,7 @@ export function DesignSection({ formId }: DesignSectionProps) {
 								target="_blank"
 							>
 								<ExternalLink className="size-4" />
-								Open customization panel…
+								{t("openLabel")}
 							</a>
 						</Button>
 					</div>

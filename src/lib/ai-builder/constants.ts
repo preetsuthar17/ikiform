@@ -1,6 +1,6 @@
-export const CHAT_SUGGESTIONS = [
-	"Create a contact form",
-	"Customer feedback survey",
-	"Event registration form",
-	"Job application form",
-];
+export const CHAT_SUGGESTION_KEYS = [
+	"suggestions.contactForm",
+	"suggestions.customerFeedbackSurvey",
+	"suggestions.eventRegistrationForm",
+	"suggestions.jobApplicationForm",
+] as const;

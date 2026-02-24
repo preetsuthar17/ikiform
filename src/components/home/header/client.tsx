@@ -100,6 +100,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
 	signOut,
 	dashboardHref,
 }: UserDropdownMenuProps) {
+	const tNav = useTranslations("nav");
 	const name =
 		user.user_metadata?.name ?? user.user_metadata?.full_name ?? "Account";
 	const email = user.email ?? "";
@@ -121,7 +122,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
 			<DropdownMenuTrigger asChild>
 				<Button
 					aria-expanded={false}
-					aria-label="Open user menu"
+					aria-label={tNav("openUserMenu")}
 					className="inline-flex items-center gap-2 rounded-full focus-visible:ring-[3px] focus-visible:ring-ring/50"
 					size="icon"
 					variant="outline"
@@ -159,7 +160,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
 							className="flex min-h-[40px] w-full items-center gap-2"
 							href={dashboardHref}
 						>
-							<span>Dashboard</span>
+							<span>{tNav("dashboard")}</span>
 						</Link>
 					</DropdownMenuItem>
 					<DropdownMenuItem
@@ -170,7 +171,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
 							className="flex min-h-[40px] w-full items-center gap-2"
 							href="/feedback"
 						>
-							<span>Feedback</span>
+							<span>{tNav("feedback")}</span>
 						</Link>
 					</DropdownMenuItem>
 				</div>
@@ -179,7 +180,7 @@ const UserDropdownMenu = React.memo(function UserDropdownMenu({
 					className="min-h-[40px] font-medium text-destructive opacity-70 transition-opacity hover:opacity-100 mt-2 cursor-pointer"
 					onSelect={handleSignOut}
 				>
-					<span className="text-destructive">Log out</span>
+					<span className="text-destructive">{tNav("logOut")}</span>
 					<LogOut className="ml-auto size-4 text-destructive" />
 				</DropdownMenuItem>
 			</DropdownMenuContent>
@@ -200,8 +201,9 @@ interface DesktopActionsProps {
 }
 
 const DesktopActionsSkeleton = React.memo(function DesktopActionsSkeleton() {
+	const tNav = useTranslations("nav");
 	return (
-		<div aria-label="Loading" className="hidden items-center gap-2 md:flex">
+		<div aria-label={tNav("loading")} className="hidden items-center gap-2 md:flex">
 			<Skeleton className="h-9 w-26" />
 			<Skeleton className="size-9 rounded-full" />
 		</div>
@@ -263,8 +265,9 @@ const DrawerLinks = React.memo(function DrawerLinks({
 	links,
 	getLabel,
 }: DrawerLinksProps) {
+	const tNav = useTranslations("nav");
 	return (
-		<nav aria-label="Navigation links" className="flex w-full flex-col">
+		<nav aria-label={tNav("navigationLinks")} className="flex w-full flex-col">
 			{links.map(({ href, labelKey }) => (
 				<Link
 					className="flex min-h-[44px] items-center justify-between rounded-lg px-3 opacity-70 transition-all duration-200 hover:bg-accent hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:scale-[0.98]"
@@ -292,6 +295,7 @@ const DrawerProfileSection = React.memo(function DrawerProfileSection({
 	signOut,
 	dashboardHref,
 }: DrawerProfileSectionProps) {
+	const tNav = useTranslations("nav");
 	const handleSignOut = useCallback(async () => {
 		try {
 			await signOut();
@@ -307,7 +311,7 @@ const DrawerProfileSection = React.memo(function DrawerProfileSection({
 	const email = user.email ?? "";
 
 	return (
-		<section aria-label="User profile" className="flex flex-col gap-3">
+		<section aria-label={tNav("userProfile")} className="flex flex-col gap-3">
 			<div className="flex items-center justify-start gap-3">
 				<Avatar className="size-9">
 					<AvatarImage
@@ -328,13 +332,13 @@ const DrawerProfileSection = React.memo(function DrawerProfileSection({
 					className="flex min-h-[44px] items-center rounded-lg px-3 opacity-70 transition-all duration-200 hover:bg-accent hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:scale-[0.98]"
 					href={dashboardHref}
 				>
-					<span>Dashboard</span>
+					<span>{tNav("dashboard")}</span>
 				</Link>
 				<Link
 					className="flex min-h-[44px] items-center rounded-lg px-3 opacity-70 transition-all duration-200 hover:bg-accent hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:scale-[0.98]"
 					href="/feedback"
 				>
-					<span>Feedback</span>
+					<span>{tNav("feedback")}</span>
 				</Link>
 			</div>
 		</section>
@@ -379,25 +383,26 @@ const MobileDrawer = React.memo(function MobileDrawer({
 	dashboardLabel,
 	getLabel,
 }: MobileDrawerProps) {
+	const tNav = useTranslations("nav");
 	return (
 		<div className="flex items-center md:hidden">
 			<Drawer>
 				<DrawerTrigger asChild>
 					<Button
 						aria-expanded={false}
-						aria-label="Open navigation menu"
+						aria-label={tNav("openNavigationMenu")}
 						className="min-h-[44px] min-w-[44px] touch-manipulation"
 						size="icon"
 						variant="ghost"
 					>
-						<span className="sr-only">Open menu</span>
+						<span className="sr-only">{tNav("openMenu")}</span>
 						<AlignJustify aria-hidden="true" className="size-6" />
 					</Button>
 				</DrawerTrigger>
 				<DrawerContent className="flex flex-col gap-6 overscroll-contain p-6 pt-0 pb-10">
-					<DrawerTitle className="sr-only">Navigation Menu</DrawerTitle>
+					<DrawerTitle className="sr-only">{tNav("navigationMenu")}</DrawerTitle>
 					<DrawerDescription className="sr-only">
-						Main navigation links and user actions for Ikiform.
+						{tNav("navigationMenuDescription")}
 					</DrawerDescription>
 					<div className="flex w-full flex-col gap-6">
 						<DrawerProfileSection
@@ -431,7 +436,7 @@ const MobileDrawer = React.memo(function MobileDrawer({
 						<Separator />
 
 						<Button
-							aria-label="Sign out"
+							aria-label={tNav("signOut")}
 							className={cn(
 								"flex min-h-[44px] items-center px-3 text-left transition-all",
 								"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-2",
@@ -442,7 +447,7 @@ const MobileDrawer = React.memo(function MobileDrawer({
 							type="button"
 							variant={"secondary"}
 						>
-							<span className="font-medium">Log Out</span>
+							<span className="font-medium">{tNav("logOut")}</span>
 						</Button>
 					</div>
 				</DrawerContent>
@@ -461,7 +466,7 @@ const PrimaryNavLinks = React.memo(function PrimaryNavLinks() {
 
 	return (
 		<nav
-			aria-label="Primary navigation"
+			aria-label={tNav("primaryNavigation")}
 			className="flex items-center"
 			role="list"
 		>

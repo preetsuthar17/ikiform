@@ -8,6 +8,7 @@ import {
 	Video,
 	X,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useState } from "react";
 import { Alert } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
@@ -35,6 +36,7 @@ interface UploadedFile {
 
 export function FileUploadField(props: BaseFieldProps) {
 	const { field, value, onChange, error, disabled, formId } = props;
+	const t = useTranslations("product.formBuilder.fieldRenderer.fileUpload");
 	const builderMode = props.builderMode;
 	const [isUploading, setIsUploading] = useState(false);
 	const [uploadError, setUploadError] = useState<string | null>(null);
@@ -81,12 +83,12 @@ export function FileUploadField(props: BaseFieldProps) {
 	}, []);
 
 	const formatFileSize = useCallback((bytes: number): string => {
-		if (!bytes) return "0 Bytes";
+		if (!bytes) return `0 ${t("bytesUnit")}`;
 		const k = 1024;
-		const sizes = ["Bytes", "KB", "MB", "GB"];
+		const sizes = [t("bytesUnit"), "KB", "MB", "GB"];
 		const i = Math.floor(Math.log(bytes) / Math.log(k));
 		return `${(bytes / k ** i).toFixed(1)} ${sizes[i]}`;
-	}, []);
+	}, [t]);
 
 	const createMockFile = (file: File, index: number) => ({
 		id: `preview-${Date.now()}-${index}`,
@@ -125,7 +127,7 @@ export function FileUploadField(props: BaseFieldProps) {
 
 					if (!response.ok) {
 						const errorData = await response.json();
-						throw new Error(errorData.error || "Upload failed");
+						throw new Error(errorData.error || t("uploadFailed"));
 					}
 
 					const result = await response.json();
@@ -137,14 +139,14 @@ export function FileUploadField(props: BaseFieldProps) {
 				onChange([...currentFiles, ...newUploadedFiles]);
 			} catch (error) {
 				setUploadError(
-					error instanceof Error ? error.message : "Upload failed"
+					error instanceof Error ? error.message : t("uploadFailed")
 				);
 				throw error;
 			} finally {
 				setIsUploading(false);
 			}
 		},
-		[field.id, value, onChange]
+		[field.id, onChange, t, value]
 	);
 
 	const handleRemoveUploadedFile = useCallback(
@@ -213,7 +215,7 @@ export function FileUploadField(props: BaseFieldProps) {
 
 			{uploadError && (
 				<Alert variant="destructive">
-					<p className="font-medium">Upload Error</p>
+					<p className="font-medium">{t("uploadErrorTitle")}</p>
 					<p className="text-sm">{uploadError}</p>
 				</Alert>
 			)}
@@ -221,7 +223,7 @@ export function FileUploadField(props: BaseFieldProps) {
 			{uploadedFiles.length > 0 && (
 				<div className="flex flex-col gap-2">
 					<h4 className="font-medium text-sm">
-						Uploaded Files ({uploadedFiles.length})
+						{t("uploadedFiles", { count: uploadedFiles.length })}
 					</h4>
 					<div className="grid gap-2">
 						{uploadedFiles.map((file) => {
@@ -253,12 +255,12 @@ export function FileUploadField(props: BaseFieldProps) {
 											<p className="text-muted-foreground text-xs">
 												{formatFileSize(file.size)}
 											</p>
-											<Badge variant="secondary">Uploaded</Badge>
+											<Badge variant="secondary">{t("uploadedBadge")}</Badge>
 										</div>
 									</div>
 
 									<Button
-										aria-label={`Remove ${file.name}`}
+										aria-label={t("removeFileAria", { name: file.name })}
 										className="shrink-0"
 										disabled={disabled || builderMode}
 										onClick={() => handleRemoveButtonClick(file.id)}
@@ -277,10 +279,15 @@ export function FileUploadField(props: BaseFieldProps) {
 
 			<div className="text-muted-foreground text-xs">
 				<p>
-					Max {constraints.maxFiles} files, up to {constraints.maxSize} each
+					{t("maxFilesAndSize", {
+						maxFiles: constraints.maxFiles,
+						maxSize: constraints.maxSize,
+					})}
 				</p>
 				{constraints.allowedTypes && (
-					<p>Allowed types: {constraints.allowedTypes.join(", ")}</p>
+					<p>
+						{t("allowedTypes")}: {constraints.allowedTypes.join(", ")}
+					</p>
 				)}
 			</div>
 		</div>

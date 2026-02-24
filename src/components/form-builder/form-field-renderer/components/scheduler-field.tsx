@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -14,6 +15,7 @@ import type { BaseFieldProps } from "../types";
 import { getBaseClasses } from "../utils";
 
 export function SchedulerField({ field, error, disabled }: BaseFieldProps) {
+	const t = useTranslations("product.formBuilder.fieldRenderer.scheduler");
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
 	const baseClasses = getBaseClasses(field, error);
 
@@ -25,7 +27,7 @@ export function SchedulerField({ field, error, disabled }: BaseFieldProps) {
 	};
 
 	const getButtonText = () =>
-		field.settings?.schedulerButtonText || "Open Scheduler";
+		field.settings?.schedulerButtonText || t("openScheduler");
 
 	const handleOpenScheduler = () => {
 		setIsDialogOpen(true);
@@ -48,14 +50,14 @@ export function SchedulerField({ field, error, disabled }: BaseFieldProps) {
 					allow="camera; microphone; fullscreen"
 					className="h-full w-full rounded-xl border-none"
 					src={getSchedulerLink()}
-					title="Scheduler Embed"
+					title={t("embedTitle")}
 				/>
 			);
 		}
 
 		return (
 			<div className="flex h-full items-center justify-center text-muted-foreground text-sm">
-				No scheduler link configured.
+				{t("notConfigured")}
 			</div>
 		);
 	};
@@ -83,12 +85,12 @@ export function SchedulerField({ field, error, disabled }: BaseFieldProps) {
 			<Dialog onOpenChange={setIsDialogOpen} open={isDialogOpen}>
 				<DialogContent className="flex h-[95vh] w-full flex-col gap-4 sm:max-w-[95vw]">
 					<DialogHeader>
-						<DialogTitle>Scheduler</DialogTitle>
+						<DialogTitle>{t("title")}</DialogTitle>
 					</DialogHeader>
 					<div className="h-full">{renderSchedulerContent()}</div>
 					<DialogFooter>
 						<Button onClick={handleCloseScheduler} variant="outline">
-							Close
+							{t("close")}
 						</Button>
 					</DialogFooter>
 				</DialogContent>

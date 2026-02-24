@@ -3,18 +3,22 @@
 import { Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
+import { getLocaleFromPathname, withLocaleHref } from "@/lib/i18n/pathname";
 import { constantTimeCompare } from "@/lib/utils/constant-time-compare";
 import { createClient } from "@/utils/supabase/client";
 
 export default function ResetPasswordClient() {
+	const t = useTranslations("auth.resetPassword");
 	const searchParams = useSearchParams();
+	const pathname = usePathname();
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
 	const [showPassword, setShowPassword] = useState(false);
@@ -24,6 +28,11 @@ export default function ResetPasswordClient() {
 		password: "",
 		confirmPassword: "",
 	});
+	const locale = getLocaleFromPathname(pathname);
+	const toLocalePath = useCallback(
+		(path: string) => (locale ? withLocaleHref(path, locale) : path),
+		[locale]
+	);
 
 	useEffect(() => {
 		const handleRecoverySession = async () => {
@@ -41,30 +50,30 @@ export default function ResetPasswordClient() {
 
 					if (error) {
 						console.error("Session error:", error);
-						toast.error(
-							"Invalid or expired reset link. Please request a new one."
-						);
-						router.push("/login");
+						toast.error(t("toasts.invalidOrExpiredLink"));
+						router.push(toLocalePath("/login"));
 					} else if (data.session) {
 						setSessionReady(true);
-						toast.success("Ready to reset your password!");
-						window.history.replaceState({}, "", "/reset-password");
+						toast.success(t("toasts.readyToReset"));
+						window.history.replaceState(
+							{},
+							"",
+							toLocalePath("/reset-password")
+						);
 					}
 				} catch (error) {
 					console.error("Recovery session error:", error);
-					toast.error("Something went wrong. Please try again.");
-					router.push("/login");
+					toast.error(t("toasts.somethingWentWrong"));
+					router.push(toLocalePath("/login"));
 				}
 			} else {
-				toast.error(
-					"No reset token found. Please request a new password reset."
-				);
-				router.push("/login");
+				toast.error(t("toasts.noResetToken"));
+				router.push(toLocalePath("/login"));
 			}
 		};
 
 		handleRecoverySession();
-	}, [searchParams, router]);
+	}, [router, searchParams, t, toLocalePath]);
 
 	const handlePasswordChange = (field: string, value: string) => {
 		setPasswords((prev) => ({ ...prev, [field]: value }));
@@ -74,17 +83,17 @@ export default function ResetPasswordClient() {
 		const { password, confirmPassword } = passwords;
 
 		if (!(password && confirmPassword)) {
-			toast.error("Please fill in both password fields");
+			toast.error(t("errors.fillBothFields"));
 			return false;
 		}
 
 		if (password.length < 6) {
-			toast.error("Password must be at least 6 characters long");
+			toast.error(t("errors.passwordMin"));
 			return false;
 		}
 
 		if (!constantTimeCompare(password, confirmPassword)) {
-			toast.error("Passwords do not match");
+			toast.error(t("errors.passwordMismatch"));
 			return false;
 		}
 
@@ -107,12 +116,12 @@ export default function ResetPasswordClient() {
 			if (error) {
 				toast.error(error.message);
 			} else {
-				toast.success("Password updated successfully!");
-				router.push("/dashboard");
+				toast.success(t("toasts.passwordUpdated"));
+				router.push(toLocalePath("/dashboard"));
 			}
 		} catch (error) {
 			console.error("Password reset error:", error);
-			toast.error("An unexpected error occurred. Please try again.");
+			toast.error(t("toasts.unexpectedError"));
 		} finally {
 			setLoading(false);
 		}
@@ -126,7 +135,7 @@ export default function ResetPasswordClient() {
 						<div className="flex flex-col items-center gap-4">
 							<div className="size-8 animate-spin rounded-full border-primary border-b-2" />
 							<p className="text-muted-foreground text-sm">
-								Verifying reset token...
+								{t("loading.verifyingToken")}
 							</p>
 						</div>
 					</CardContent>
@@ -140,10 +149,10 @@ export default function ResetPasswordClient() {
 			<Card className="flex w-full max-w-sm flex-col items-center justify-center gap-6 text-center">
 				<CardHeader>
 					<div className="shrink-0">
-						<Link href="/">
+						<Link href={toLocalePath("/")}>
 							<span className="flex items-center justify-center gap-2 font-semibold text-3xl tracking-tight">
 								<Image
-									alt="Ikiform Logo"
+									alt={t("brand.logoAlt")}
 									height={40}
 									src="/favicon.ico"
 									width={40}
@@ -153,9 +162,9 @@ export default function ResetPasswordClient() {
 						</Link>
 					</div>
 					<div className="mt-4">
-						<h2 className="font-semibold text-2xl">Reset Password</h2>
+						<h2 className="font-semibold text-2xl">{t("title")}</h2>
 						<p className="text-muted-foreground text-sm">
-							Enter your new password below
+							{t("subtitle")}
 						</p>
 					</div>
 				</CardHeader>
@@ -163,7 +172,7 @@ export default function ResetPasswordClient() {
 				<CardContent className="flex w-full flex-col gap-4">
 					<form className="flex flex-col gap-4" onSubmit={handleResetPassword}>
 						<div className="flex flex-col gap-2">
-							<Label htmlFor="password">New Password</Label>
+							<Label htmlFor="password">{t("labels.newPassword")}</Label>
 							<div className="relative">
 								<Input
 									className="pr-10"
@@ -172,7 +181,7 @@ export default function ResetPasswordClient() {
 									onChange={(e) =>
 										handlePasswordChange("password", e.target.value)
 									}
-									placeholder="Enter your new password"
+									placeholder={t("placeholders.newPassword")}
 									required
 									type={showPassword ? "text" : "password"}
 									value={passwords.password}
@@ -195,7 +204,9 @@ export default function ResetPasswordClient() {
 						</div>
 
 						<div className="flex flex-col gap-2">
-							<Label htmlFor="confirmPassword">Confirm New Password</Label>
+							<Label htmlFor="confirmPassword">
+								{t("labels.confirmPassword")}
+							</Label>
 							<div className="relative">
 								<Input
 									className="pr-10"
@@ -204,7 +215,7 @@ export default function ResetPasswordClient() {
 									onChange={(e) =>
 										handlePasswordChange("confirmPassword", e.target.value)
 									}
-									placeholder="Confirm your new password"
+									placeholder={t("placeholders.confirmPassword")}
 									required
 									type={showConfirmPassword ? "text" : "password"}
 									value={passwords.confirmPassword}
@@ -225,7 +236,7 @@ export default function ResetPasswordClient() {
 								</Button>
 							</div>
 							<p className="text-muted-foreground text-xs">
-								Password must be at least 6 characters long
+								{t("passwordHint")}
 							</p>
 						</div>
 
@@ -235,13 +246,13 @@ export default function ResetPasswordClient() {
 							size="lg"
 							type="submit"
 						>
-							{loading ? "Updating..." : "Update Password"}
+							{loading ? t("actions.updating") : t("actions.updatePassword")}
 						</Button>
 					</form>
 
 					<div className="text-center">
 						<Button asChild className="text-sm" type="button" variant="link">
-							<Link href="/login">Back to Sign In</Link>
+							<Link href={toLocalePath("/login")}>{t("actions.backToSignIn")}</Link>
 						</Button>
 					</div>
 				</CardContent>

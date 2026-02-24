@@ -1,17 +1,20 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useTranslations } from "next-intl";
 import type { FieldSettingsProps } from "./types";
 
 export function AddressFieldSettings({
 	field,
 	onUpdateSettings,
 }: FieldSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.address");
+
 	return (
 		<Card className="gap-2 p-4 shadow-none">
 			<CardHeader className="p-0">
 				<CardTitle className="flex items-center gap-2 text-lg">
-					Address Field Settings
+					{t("title")}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 p-0">
@@ -20,7 +23,7 @@ export function AddressFieldSettings({
 						className="font-medium text-sm"
 						htmlFor="address-required-lines"
 					>
-						Required Address Lines
+						{t("requiredLines")}
 					</Label>
 					<Input
 						aria-describedby="address-required-lines-help"
@@ -39,7 +42,7 @@ export function AddressFieldSettings({
 								e.currentTarget.blur();
 							}
 						}}
-						placeholder="e.g. 2 (Address Line 1 & City required)"
+						placeholder={t("requiredLinesPlaceholder")}
 						type="number"
 						value={field.settings?.requiredLines ?? ""}
 					/>
@@ -47,12 +50,12 @@ export function AddressFieldSettings({
 						className="text-muted-foreground text-xs"
 						id="address-required-lines-help"
 					>
-						Number of address lines that must be filled (1-5)
+						{t("requiredLinesHelp")}
 					</p>
 				</div>
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="address-message">
-						Custom Error Message
+						{t("customErrorMessage")}
 					</Label>
 					<Input
 						aria-describedby="address-message-help"
@@ -67,7 +70,7 @@ export function AddressFieldSettings({
 								e.currentTarget.blur();
 							}
 						}}
-						placeholder="Please complete all required address fields"
+						placeholder={t("customErrorPlaceholder")}
 						type="text"
 						value={field.settings?.requiredMessage ?? ""}
 					/>
@@ -75,8 +78,7 @@ export function AddressFieldSettings({
 						className="text-muted-foreground text-xs"
 						id="address-message-help"
 					>
-						Custom error message shown when required address fields are
-						incomplete
+						{t("customErrorHelp")}
 					</p>
 				</div>
 			</CardContent>

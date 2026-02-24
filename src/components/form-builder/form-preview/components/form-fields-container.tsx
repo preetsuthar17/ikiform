@@ -17,7 +17,7 @@ import {
 	TooltipContent,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { FIELD_TYPES } from "../../field-palette/constants";
+import { FIELD_TYPE_CONFIGS } from "@/lib/fields/field-config";
 
 import { FormFieldRenderer } from "../../form-field-renderer";
 
@@ -37,8 +37,17 @@ export function FormFieldsContainer({
 	showLogicCues = false,
 }: FormFieldsContainerProps & { showLogicCues?: boolean }) {
 	const t = useTranslations("product.formBuilder.formFields");
+	const tPalette = useTranslations("product.formBuilder.fieldPalette");
 	const itemRefs = React.useRef<Record<string, HTMLDivElement | null>>({});
 	const addButtonRef = React.useRef<HTMLButtonElement | null>(null);
+	const localizedFieldTypes = React.useMemo(
+		() =>
+			FIELD_TYPE_CONFIGS.map((field) => ({
+				type: field.type,
+				label: tPalette(`fields.${field.type}.label`),
+			})),
+		[tPalette]
+	);
 
 	const handleDragEnd = (result: any) => {
 		if (!(result.destination && onFieldsReorder)) {
@@ -85,22 +94,18 @@ export function FormFieldsContainer({
 				}}
 			>
 				<ScrollArea type="always">
-					{FIELD_TYPES.map((fieldType: { type: string; label: string }) => (
+					{localizedFieldTypes.map((fieldType) => (
 						<DropdownMenuItem
 							aria-label={t("addSpecificFieldAria", { label: fieldType.label })}
 							className="cursor-pointer"
 							key={fieldType.type}
 							onClick={() =>
-								onAddField?.(
-									fieldType.type as (typeof FIELD_TYPES)[number]["type"]
-								)
+								onAddField?.(fieldType.type)
 							}
 							onKeyDown={(e) => {
 								if (e.key === "Enter" || e.key === " ") {
 									e.preventDefault();
-									onAddField?.(
-										fieldType.type as (typeof FIELD_TYPES)[number]["type"]
-									);
+									onAddField?.(fieldType.type);
 								}
 							}}
 						>

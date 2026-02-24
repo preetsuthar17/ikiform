@@ -1,5 +1,6 @@
 import { Shield } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,6 +26,9 @@ export function BotProtectionSection({
 }: BotProtectionSectionProps & {
 	onSchemaUpdate?: (updates: Partial<any>) => void;
 }) {
+	const t = useTranslations("product.formBuilder.formSettings.botProtectionSection");
+	const tCommon = useTranslations("product.formBuilder.formSettings.common");
+
 	const [botProtectionSettings, setBotProtectionSettings] = useState({
 		enabled: localSettings.botProtection?.enabled,
 		message: localSettings.botProtection?.message || "",
@@ -67,7 +71,7 @@ export function BotProtectionSection({
 
 	const saveBotProtection = async () => {
 		if (!formId) {
-			toast.error("Form ID is required to save settings");
+			toast.error(tCommon("formIdRequiredToSaveSettings"));
 			return;
 		}
 
@@ -88,12 +92,12 @@ export function BotProtectionSection({
 			updateBotProtection(trimmed);
 			setSaved(true);
 			setHasChanges(false);
-			toast.success("Bot protection settings saved successfully");
+			toast.success(t("saved"));
 
 			setTimeout(() => setSaved(false), 2000);
 		} catch (error) {
 			console.error("Error saving bot protection:", error);
-			toast.error("Failed to save bot protection settings");
+			toast.error(t("saveFailed"));
 		} finally {
 			setSaving(false);
 		}
@@ -114,18 +118,18 @@ export function BotProtectionSection({
 			announcement.setAttribute("aria-live", "polite");
 			announcement.setAttribute("aria-atomic", "true");
 			announcement.className = "sr-only";
-			announcement.textContent = "Bot protection settings saved successfully";
+			announcement.textContent = t("saved");
 			document.body.appendChild(announcement);
 
 			setTimeout(() => {
 				document.body.removeChild(announcement);
 			}, 1000);
 		}
-	}, [saved]);
+	}, [saved, t]);
 
 	return (
 		<div
-			aria-label="Bot protection settings"
+			aria-label={t("ariaSettings")}
 			className="flex flex-col gap-4"
 			onKeyDown={(e) => {
 				const target = e.target as HTMLElement;
@@ -153,16 +157,16 @@ export function BotProtectionSection({
 								className="flex items-center gap-2 text-lg tracking-tight"
 								id="bot-protection-title"
 							>
-								Bot Protection{" "}
+								{t("title")}{" "}
 								{hasChanges && (
 									<Badge className="gap-2" variant="secondary">
 										<div className="size-2 rounded-full bg-orange-500" />
-										Unsaved changes
+										{tCommon("unsavedChanges")}
 									</Badge>
 								)}
 							</CardTitle>
 							<CardDescription id="bot-protection-description">
-								Automatically detect and block automated submissions
+								{t("description")}
 							</CardDescription>
 						</div>
 					</div>
@@ -174,13 +178,13 @@ export function BotProtectionSection({
 								className="font-medium text-sm"
 								htmlFor="bot-protection-enabled"
 							>
-								Enable Bot Protection
+								{t("enableLabel")}
 							</Label>
 							<p
 								className="text-muted-foreground text-xs"
 								id="bot-protection-enabled-description"
 							>
-								Automatically detect and block automated submissions
+								{t("enableDescription")}
 							</p>
 						</div>
 						<Switch
@@ -198,7 +202,7 @@ export function BotProtectionSection({
 							<div className="flex flex-col gap-4">
 								<div className="flex flex-col gap-2">
 									<Label className="font-medium text-sm" htmlFor="bot-message">
-										Bot Detection Message
+										{t("detectionMessageLabel")}
 									</Label>
 									<Textarea
 										autoComplete="off"
@@ -213,13 +217,12 @@ export function BotProtectionSection({
 												(e.target as HTMLElement).blur();
 											}
 										}}
-										placeholder="Enter a custom message to show when a bot is detected"
+										placeholder={t("detectionMessagePlaceholder")}
 										rows={2}
 										value={botProtectionSettings.message}
 									/>
 									<p className="text-muted-foreground text-xs">
-										This message will be shown to users when bot activity is
-										detected
+										{t("detectionMessageDescription")}
 									</p>
 								</div>
 							</div>
@@ -236,12 +239,10 @@ export function BotProtectionSection({
 									/>
 									<div className="flex flex-col gap-2">
 										<h4 className="font-medium text-blue-900 text-sm dark:text-blue-100">
-											Powered by Vercel BotID
+											{t("vercelTitle")}
 										</h4>
 										<p className="text-blue-700 text-xs dark:text-blue-300">
-											Uses advanced machine learning to detect and block
-											automated bots while allowing legitimate users through. No
-											CAPTCHAs required.
+											{t("vercelDescription")}
 										</p>
 									</div>
 								</div>
@@ -254,15 +255,14 @@ export function BotProtectionSection({
 							>
 								<div className="flex flex-col gap-2">
 									<h4 className="font-medium text-foreground text-sm">
-										Current Configuration
+										{t("currentConfiguration")}
 									</h4>
 									<p className="text-muted-foreground text-sm">
-										Bot protection is{" "}
+										{t("statusEnabledPrefix")}{" "}
 										<span className="font-semibold text-foreground">
-											enabled
+											{t("enabled")}
 										</span>
-										. Automated submissions will be automatically detected and
-										blocked.
+										{t("statusEnabledSuffix")}
 									</p>
 								</div>
 							</div>
@@ -270,21 +270,18 @@ export function BotProtectionSection({
 					)}
 
 					{!botProtectionSettings.enabled && (
-						<div className="rounded-lg bg-muted/30 p-4">
-							<p className="text-muted-foreground text-sm">
-								Bot protection uses Vercel's BotID to automatically detect and
-								block automated submissions while allowing legitimate users
-								through. This helps prevent spam and abuse without requiring
-								CAPTCHAs.
-							</p>
-						</div>
-					)}
+					<div className="rounded-lg bg-muted/30 p-4">
+						<p className="text-muted-foreground text-sm">
+							{t("disabledDescription")}
+						</p>
+					</div>
+				)}
 
-					<div
-						aria-label="Bot protection actions"
-						className="flex items-center justify-between"
-						role="group"
-					>
+				<div
+					aria-label={t("actionsAria")}
+					className="flex items-center justify-between"
+					role="group"
+				>
 						<div className="flex items-center gap-2">
 							{hasChanges && (
 								<Button
@@ -293,14 +290,14 @@ export function BotProtectionSection({
 									size="sm"
 									variant="ghost"
 								>
-									Reset
+									{tCommon("reset")}
 								</Button>
 							)}
 						</div>
 						<div className="flex items-center gap-2">
 							<Button
 								aria-describedby="bot-protection-description"
-								aria-label="Save bot protection settings"
+								aria-label={t("saveAria")}
 								className="min-h-10"
 								disabled={saving || !hasChanges}
 								loading={saving}
@@ -312,7 +309,7 @@ export function BotProtectionSection({
 									}
 								}}
 							>
-								Save
+								{tCommon("save")}
 							</Button>
 						</div>
 					</div>

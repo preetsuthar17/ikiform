@@ -88,7 +88,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
 				</div>
 
 				<nav
-					aria-label="Form builder actions"
+					aria-label={t("actionsAria")}
 					className="relative w-full px-2 md:hidden"
 				>
 					<ScrollArea className="w-full">
@@ -223,7 +223,7 @@ export const FormBuilderHeader: React.FC<FormBuilderHeaderProps> = ({
 				</nav>
 
 				<nav
-					aria-label="Form builder actions"
+					aria-label={t("actionsAria")}
 					className="hidden items-center gap-2 md:flex"
 				>
 					<div className="flex items-center gap-2">

@@ -1,4 +1,5 @@
 import type React from "react";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
 import { getLivePatternError } from "@/components/form-builder/form-field-renderer/components/text-input-field";
@@ -41,6 +42,7 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
 	logicMessages,
 	duplicateError,
 }) => {
+	const t = useTranslations("product.formBuilder.formRenderer.singleStep");
 	const firstFieldRef = useRef<any>(null);
 	const { customStyles, getFieldStyles, getButtonStyles } =
 		useFormStyling(schema);
@@ -135,7 +137,7 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
 						) {
 							return (
 								<div className="mb-2 text-destructive text-xs">
-									Please fix the highlighted errors before submitting.
+									{t("fixHighlightedErrors")}
 								</div>
 							);
 						}
@@ -158,7 +160,7 @@ export const SingleStepFormContent: React.FC<SingleStepFormContentProps> = ({
 						style={getButtonStyles(true)}
 						type="submit"
 					>
-						{schema.settings.submitText || "Submit"}
+						{schema.settings.submitText || t("submit")}
 					</Button>
 				</div>
 			</form>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import type React from "react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -22,6 +23,7 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
 	schema,
 	dir,
 }) => {
+	const t = useTranslations("product.formBuilder.formRenderer.shared");
 	const fields = getAllFields(schema);
 	const {
 		formData,
@@ -60,7 +62,7 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
 			setPasswordVerified(true);
 			setShowPasswordModal(false);
 		} else {
-			toast.error("Incorrect password!");
+			toast.error(t("incorrectPassword"));
 		}
 	};
 
@@ -102,7 +104,7 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
 				isOpen={showPasswordModal}
 				message={
 					schema.settings.passwordProtection?.message ||
-					"This form is password protected. Please enter the password to continue."
+					t("passwordProtectionMessage")
 				}
 				onCancel={handlePasswordCancel}
 				onPasswordSubmit={handlePasswordSubmit}
@@ -171,7 +173,7 @@ export const SingleStepForm: React.FC<PublicFormProps & { dir?: string }> = ({
 							(schema.settings.branding as any).showIkiformBranding !== false
 					) && (
 						<p className="text-muted-foreground text-sm">
-							Powered by{" "}
+							{t("poweredBy")}{" "}
 							<span className="font-medium text-foreground underline">
 								<Link href="https://www.ikiform.com">Ikiform</Link>
 							</span>

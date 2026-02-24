@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
+import { useTranslations } from "next-intl";
 import {
 	Select,
 	SelectContent,
@@ -15,6 +16,8 @@ export function StatementFieldSettings({
 	onUpdateSettings,
 	onFieldUpdate,
 }: FieldSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.statement");
+
 	const updateStatementHeading = (heading: string) => {
 		onUpdateSettings({ statementHeading: heading });
 	};
@@ -35,13 +38,13 @@ export function StatementFieldSettings({
 		<Card className="gap-2 p-4 shadow-none">
 			<CardHeader className="p-0">
 				<CardTitle className="flex items-center gap-2 text-lg">
-					Statement Field Settings
+					{t("title")}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 p-0">
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="statement-heading">
-						Heading
+						{t("heading")}
 					</Label>
 					<Textarea
 						aria-describedby="statement-heading-help"
@@ -57,7 +60,7 @@ export function StatementFieldSettings({
 								e.currentTarget.blur();
 							}
 						}}
-						placeholder="Enter statement heading"
+						placeholder={t("headingPlaceholder")}
 						rows={2}
 						value={field.settings?.statementHeading || ""}
 					/>
@@ -65,7 +68,7 @@ export function StatementFieldSettings({
 						className="text-muted-foreground text-xs"
 						id="statement-heading-help"
 					>
-						Main heading for the statement
+						{t("headingHelp")}
 					</p>
 				</div>
 
@@ -74,7 +77,7 @@ export function StatementFieldSettings({
 						className="font-medium text-sm"
 						htmlFor="statement-description"
 					>
-						Description
+						{t("description")}
 					</Label>
 					<Textarea
 						aria-describedby="statement-description-help"
@@ -90,7 +93,7 @@ export function StatementFieldSettings({
 								e.currentTarget.blur();
 							}
 						}}
-						placeholder="Enter statement description"
+						placeholder={t("descriptionPlaceholder")}
 						rows={3}
 						value={field.settings?.statementDescription || ""}
 					/>
@@ -98,54 +101,54 @@ export function StatementFieldSettings({
 						className="text-muted-foreground text-xs"
 						id="statement-description-help"
 					>
-						Detailed description for the statement
+						{t("descriptionHelp")}
 					</p>
 				</div>
 
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="statement-align">
-						Alignment
+						{t("alignment")}
 					</Label>
 					<Select
 						onValueChange={updateStatementAlign}
 						value={field.settings?.statementAlign || "left"}
 					>
 						<SelectTrigger className="w-full" id="statement-align">
-							<SelectValue placeholder="Select alignment" />
+							<SelectValue placeholder={t("alignmentPlaceholder")} />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem value="left">Left</SelectItem>
-							<SelectItem value="center">Center</SelectItem>
-							<SelectItem value="right">Right</SelectItem>
+							<SelectItem value="left">{t("alignLeft")}</SelectItem>
+							<SelectItem value="center">{t("alignCenter")}</SelectItem>
+							<SelectItem value="right">{t("alignRight")}</SelectItem>
 						</SelectContent>
 					</Select>
 					<p
 						className="text-muted-foreground text-xs"
 						id="statement-align-help"
 					>
-						Text alignment for the statement
+						{t("alignmentHelp")}
 					</p>
 				</div>
 
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="statement-size">
-						Size
+						{t("size")}
 					</Label>
 					<Select
 						onValueChange={updateStatementSize}
 						value={field.settings?.statementSize || "md"}
 					>
 						<SelectTrigger className="w-full" id="statement-size">
-							<SelectValue placeholder="Select size" />
+							<SelectValue placeholder={t("sizePlaceholder")} />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem value="sm">Small</SelectItem>
-							<SelectItem value="md">Medium</SelectItem>
-							<SelectItem value="lg">Large</SelectItem>
+							<SelectItem value="sm">{t("sizeSmall")}</SelectItem>
+							<SelectItem value="md">{t("sizeMedium")}</SelectItem>
+							<SelectItem value="lg">{t("sizeLarge")}</SelectItem>
 						</SelectContent>
 					</Select>
 					<p className="text-muted-foreground text-xs" id="statement-size-help">
-						Font size for the statement
+						{t("sizeHelp")}
 					</p>
 				</div>
 			</CardContent>

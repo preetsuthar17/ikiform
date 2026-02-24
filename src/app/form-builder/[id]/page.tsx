@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import { FormBuilder } from "@/components/form-builder/form-builder";
 import { Button } from "@/components/ui/button";
@@ -25,16 +26,17 @@ async function getAuthenticatedUser() {
 	return { user, supabase };
 }
 
-function PremiumRequired() {
+async function PremiumRequired() {
+	const tPremium = await getTranslations("product.common.premium");
+
 	return (
 		<div className="flex min-h-screen flex-col items-center justify-center gap-6">
-			<div className="font-semibold text-2xl">Requires Premium</div>
+			<div className="font-semibold text-2xl">{tPremium("title")}</div>
 			<div className="max-w-md text-center text-muted-foreground">
-				You need a premium subscription to use the form builder. Upgrade to
-				unlock all features.
+				{tPremium("formBuilderDescription")}
 			</div>
 			<Link href="/#pricing">
-				<Button size="lg">View Pricing</Button>
+				<Button size="lg">{tPremium("viewPricing")}</Button>
 			</Link>
 		</div>
 	);
@@ -59,7 +61,7 @@ export default async function FormBuilderPage({
 	const hasPremium = subscriptionResult.data?.has_premium;
 
 	if (!hasPremium) {
-		return <PremiumRequired />;
+		return <>{await PremiumRequired()}</>;
 	}
 
 	if (formResult.error || !formResult.data) {

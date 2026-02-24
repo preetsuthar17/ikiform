@@ -17,7 +17,7 @@ import { Separator } from "@/components/ui/separator";
 import { useAIBuilder } from "@/hooks/ai-builder/use-ai-builder";
 import { useAuth } from "@/hooks/use-auth";
 import { usePremiumStatus } from "@/hooks/use-premium-status";
-import { CHAT_SUGGESTIONS } from "@/lib/ai-builder/constants";
+import { CHAT_SUGGESTION_KEYS } from "@/lib/ai-builder/constants";
 import { ChatPanel } from "./chat/chat-panel";
 import { MobileChatDrawerWrapper } from "./drawer/mobile-chat-drawer-wrapper";
 import { PremiumGuard } from "./guards/premium-guard";
@@ -61,11 +61,11 @@ export function AIBuilderClient() {
 
 	const suggestions = useMemo(
 		() =>
-			CHAT_SUGGESTIONS.map((text) => ({
-				text,
+			CHAT_SUGGESTION_KEYS.map((key) => ({
+				text: t(key),
 				icon: <Sparkles className="size-4" />,
 			})),
-		[]
+		[t]
 	);
 
 	useEffect(() => {

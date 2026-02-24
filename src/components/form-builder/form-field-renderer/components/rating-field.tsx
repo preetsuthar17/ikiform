@@ -1,4 +1,5 @@
 import { Heart, Star } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type React from "react";
 import { useRef } from "react";
 
@@ -21,6 +22,7 @@ export function RatingField({
 	error,
 	disabled,
 }: BaseFieldProps) {
+	const t = useTranslations("product.formBuilder.fieldRenderer.rating");
 	const getRatingCount = () =>
 		field.settings?.starCount || DEFAULT_RATING_COUNT;
 
@@ -94,7 +96,7 @@ export function RatingField({
 		return (
 			<div
 				aria-disabled={disabled || undefined}
-				aria-label="Rating"
+				aria-label={t("groupAria")}
 				className="flex items-center gap-1"
 				onKeyDown={handleKeyDown}
 				role="radiogroup"
@@ -102,7 +104,10 @@ export function RatingField({
 				{Array.from({ length: ratingCount }).map((_, index) => (
 					<button
 						aria-checked={isRatingActive(index)}
-						aria-label={`Rate ${index + 1} ${getIconType()}`}
+						aria-label={t("rateAria", {
+							index: index + 1,
+							type: getIconType(),
+						})}
 						className="focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
 						disabled={disabled}
 						key={index}

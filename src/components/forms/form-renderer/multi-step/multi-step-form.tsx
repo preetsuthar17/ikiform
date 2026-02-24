@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import toast from "react-hot-toast";
 import { FormFieldRenderer } from "@/components/form-builder/form-field-renderer";
 import { getLivePatternError } from "@/components/form-builder/form-field-renderer/components/text-input-field";
@@ -43,6 +44,7 @@ interface FormState {
 }
 
 function SuccessScreen({ schema }: { schema: FormSchema }) {
+	const t = useTranslations("product.formBuilder.formRenderer.successScreen");
 	return (
 		<main className="flex min-h-screen items-center justify-center bg-background py-8">
 			<div className="mx-auto flex w-full max-w-lg flex-col gap-6">
@@ -64,15 +66,15 @@ function SuccessScreen({ schema }: { schema: FormSchema }) {
 							</svg>
 						</div>
 						<h1 className="font-semibold text-3xl text-foreground tracking-tight">
-							Thank You!
+							{t("title")}
 						</h1>
 						<p className="text-center text-base text-muted-foreground">
 							{schema.settings.successMessage ||
-								"Your form has been submitted successfully."}
+								t("defaultMessage")}
 						</p>
 						{schema.settings.redirectUrl && (
 							<p className="pt-1 text-muted-foreground/70 text-sm italic">
-								Redirecting you in a moment…
+								{t("redirecting")}
 							</p>
 						)}
 					</div>
@@ -82,7 +84,7 @@ function SuccessScreen({ schema }: { schema: FormSchema }) {
 						(schema.settings.branding as any).showIkiformBranding !== false
 				) && (
 					<p className="text-center text-muted-foreground text-sm">
-						Powered by{" "}
+						{t("poweredBy")}{" "}
 						<span className="font-medium text-foreground underline">
 							Ikiform
 						</span>
@@ -259,6 +261,7 @@ function FormNavigation({
 	formData: Record<string, any>;
 	errors: Record<string, string>;
 }) {
+	const t = useTranslations("product.formBuilder.formRenderer.multiStep");
 	const isLastStep = currentStep === totalSteps - 1;
 	const { getButtonStyles } = useFormStyling(schema);
 
@@ -296,7 +299,7 @@ function FormNavigation({
 							strokeWidth={2}
 						/>
 					</svg>
-					Previous
+					{t("previous")}
 				</Button>
 
 				<Button
@@ -308,10 +311,10 @@ function FormNavigation({
 					type="button"
 				>
 					{isLastStep ? (
-						schema.settings.submitText || "Submit"
+						schema.settings.submitText || t("submit")
 					) : (
 						<>
-							Next
+							{t("next")}
 							<svg
 								className="size-4"
 								fill="none"
@@ -334,6 +337,7 @@ function FormNavigation({
 }
 
 function FormFooter({ schema }: { schema: FormSchema }) {
+	const t = useTranslations("product.formBuilder.formRenderer.shared");
 	return (
 		<div className="flex flex-col gap-4 text-center">
 			{schema.settings.branding?.socialMedia?.enabled &&
@@ -351,7 +355,7 @@ function FormFooter({ schema }: { schema: FormSchema }) {
 					(schema.settings.branding as any).showIkiformBranding !== false
 			) && (
 				<p className="text-muted-foreground text-sm">
-					Powered by{" "}
+					{t("poweredBy")}{" "}
 					<span className="font-medium text-foreground underline">Ikiform</span>
 				</p>
 			)}
@@ -384,6 +388,8 @@ function MultiStepFormLoading() {
 }
 
 export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
+	const t = useTranslations("product.formBuilder.formRenderer.multiStep");
+	const tShared = useTranslations("product.formBuilder.formRenderer.shared");
 	const [currentStep, setCurrentStep] = useState(0);
 	const [formData, setFormData] = useState<Record<string, any>>({});
 	const [errors, setErrors] = useState<Record<string, string>>({});
@@ -403,13 +409,13 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
 					? [
 							{
 								id: "default",
-								title: "Form",
+								title: t("defaults.formTitle"),
 								description: "",
 								fields: schema.fields,
 							},
 						]
 					: [],
-		[schema.blocks, schema.fields]
+		[schema.blocks, schema.fields, t]
 	);
 
 	const totalSteps = blocks.length;
@@ -490,7 +496,7 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
 
 				if (isEmpty) {
 					stepErrors[field.id] =
-						field.validation?.requiredMessage || "This field is required";
+						field.validation?.requiredMessage || t("validation.required");
 				}
 			}
 
@@ -501,7 +507,7 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
 				);
 				if (!emailValidation.isValid) {
 					stepErrors[field.id] =
-						emailValidation.message || "Please enter a valid email address";
+						emailValidation.message || t("validation.emailInvalid");
 				}
 			}
 
@@ -512,7 +518,9 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
 				) {
 					stepErrors[field.id] =
 						field.validation?.minLengthMessage ||
-						`Must be at least ${field.validation.minLength} characters`;
+						t("validation.minLength", {
+							count: field.validation.minLength,
+						});
 				}
 				if (
 					field.validation?.maxLength &&
@@ -520,7 +528,9 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
 				) {
 					stepErrors[field.id] =
 						field.validation?.maxLengthMessage ||
-						`Must be no more than ${field.validation.maxLength} characters`;
+						t("validation.maxLength", {
+							count: field.validation.maxLength,
+						});
 				}
 			}
 		});
@@ -529,7 +539,7 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
 			errors: stepErrors,
 			isValid: Object.keys(stepErrors).length === 0,
 		};
-	}, [blocks, currentStep, formData]);
+	}, [blocks, currentStep, formData, t]);
 
 	const handlePasswordSubmit = (password: string) => {
 		const expectedPassword = schema.settings.passwordProtection?.password;
@@ -537,7 +547,7 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
 			setPasswordVerified(true);
 			setShowPasswordModal(false);
 		} else {
-			toast.error("Incorrect password!");
+			toast.error(tShared("incorrectPassword"));
 		}
 	};
 
@@ -588,33 +598,27 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
 
 			if (response.ok) {
 				setSubmitted(true);
-				toast.success("Form submitted successfully!");
+				toast.success(t("toasts.submitSuccess"));
 				if (schema.settings.redirectUrl) {
 					setTimeout(() => {
 						window.location.href = schema.settings.redirectUrl!;
 					}, 2000);
 				}
 			} else if (result.error === "Bot detected") {
-				toast.error(result.message || "Bot detected. Access denied.");
+				toast.error(result.message || t("toasts.botDetected"));
 			} else if (result.error === "Duplicate submission detected") {
-				toast.error(result.message || "You have already submitted this form.");
+				toast.error(result.message || t("toasts.duplicateSubmission"));
 			} else if (result.error === "Rate limit exceeded") {
-				toast.error(
-					result.message || "Too many requests. Please try again later."
-				);
+				toast.error(result.message || t("toasts.rateLimitExceeded"));
 			} else if (result.error === "Response limit reached") {
-				toast.error(
-					result.message || "This form is no longer accepting responses."
-				);
+				toast.error(result.message || t("toasts.responseLimitReached"));
 			} else if (result.error === "Content validation failed") {
-				toast.error(
-					result.message || "Your submission contains inappropriate content."
-				);
+				toast.error(result.message || t("toasts.contentValidationFailed"));
 			} else {
-				toast.error(result.message || "Failed to submit form");
+				toast.error(result.message || t("toasts.submitFailed"));
 			}
 		} catch (error) {
-			toast.error("Failed to submit form. Please try again.");
+			toast.error(t("toasts.submitFailedTryAgain"));
 		} finally {
 			setSubmitting(false);
 		}
@@ -630,7 +634,7 @@ export function MultiStepForm({ formId, schema, dir }: MultiStepFormProps) {
 				isOpen={showPasswordModal}
 				message={
 					schema.settings.passwordProtection?.message ||
-					"This form is password protected. Please enter the password to continue."
+					tShared("passwordProtectionMessage")
 				}
 				onCancel={handlePasswordCancel}
 				onPasswordSubmit={handlePasswordSubmit}

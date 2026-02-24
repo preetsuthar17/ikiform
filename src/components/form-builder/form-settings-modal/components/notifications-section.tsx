@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,6 +32,20 @@ export function NotificationsSection({
 }: NotificationsSectionProps & {
 	onSchemaUpdate?: (updates: Partial<any>) => void;
 }) {
+	const t = useTranslations("product.formBuilder.formSettings.notificationsSection");
+	const tCommon = useTranslations("product.formBuilder.formSettings.common");
+	const tDefaults = useTranslations("product.formBuilder.formSettings.defaults");
+	const localizeLegacyDefault = (
+		value: string | undefined,
+		legacyDefault: string,
+		localizedDefault: string
+	) => {
+		if (!value || value === legacyDefault) return localizedDefault;
+		return value;
+	};
+	const localizedSubjectDefault = tDefaults("notificationSubject");
+	const localizedMessageDefault = tDefaults("notificationMessage");
+
 	const notifications = localSettings.notifications || {};
 	const customLinks = notifications.customLinks || [];
 	const [newLink, setNewLink] = useState({ label: "", url: "" });
@@ -79,7 +94,7 @@ export function NotificationsSection({
 
 	const saveNotifications = async () => {
 		if (!formId) {
-			toast.error("Form ID is required to save settings");
+			toast.error(tCommon("formIdRequiredToSaveSettings"));
 			return;
 		}
 		setSaving(true);
@@ -106,11 +121,11 @@ export function NotificationsSection({
 			}
 			setSaved(true);
 			setHasChanges(false);
-			toast.success("Notification settings saved successfully");
+			toast.success(t("saved"));
 			setTimeout(() => setSaved(false), 2000);
 		} catch (e) {
 			console.error(e);
-			toast.error("Failed to save notification settings");
+			toast.error(t("saveFailed"));
 		} finally {
 			setSaving(false);
 		}
@@ -122,13 +137,13 @@ export function NotificationsSection({
 			announcement.setAttribute("aria-live", "polite");
 			announcement.setAttribute("aria-atomic", "true");
 			announcement.className = "sr-only";
-			announcement.textContent = "Notification settings saved successfully";
+			announcement.textContent = t("saved");
 			document.body.appendChild(announcement);
 			setTimeout(() => {
 				document.body.removeChild(announcement);
 			}, 1000);
 		}
-	}, [saved]);
+	}, [saved, t]);
 
 	return (
 		<Card
@@ -154,16 +169,16 @@ export function NotificationsSection({
 							className="flex items-center gap-2 text-lg tracking-tight"
 							id="notifications-title"
 						>
-							Notifications{" "}
+							{t("title")}{" "}
 							{hasChanges && (
 								<Badge className="gap-2" variant="secondary">
 									<div className="size-2 rounded-full bg-orange-500" />
-									Unsaved changes
+									{tCommon("unsavedChanges")}
 								</Badge>
 							)}
 						</CardTitle>
 						<CardDescription id="notifications-description">
-							Configure email alerts for new form submissions
+							{t("description")}
 						</CardDescription>
 					</div>
 				</div>
@@ -175,10 +190,10 @@ export function NotificationsSection({
 							className="font-medium text-sm"
 							htmlFor="notifications-enabled"
 						>
-							Email Notifications
+							{t("enableLabel")}
 						</Label>
 						<p className="text-muted-foreground text-xs">
-							Enable email notifications for new submissions
+							{t("enableDescription")}
 						</p>
 					</div>
 					<Switch
@@ -189,7 +204,7 @@ export function NotificationsSection({
 				</div>
 				{notifications.enabled && (
 					<div className="flex flex-col gap-2">
-						<Label htmlFor="notification-email">Notification Email</Label>
+						<Label htmlFor="notification-email">{t("emailLabel")}</Label>
 						<Input
 							autoComplete="email"
 							disabled={!notifications.enabled}
@@ -201,7 +216,7 @@ export function NotificationsSection({
 									(e.target as HTMLElement).blur();
 								}
 							}}
-							placeholder="owner@email.com"
+							placeholder={t("emailPlaceholder")}
 							type="email"
 							value={notifications.email || ""}
 						/>
@@ -209,7 +224,7 @@ export function NotificationsSection({
 				)}
 				{notifications.enabled && (
 					<div className="flex flex-col gap-2">
-						<Label htmlFor="notification-subject">Email Subject</Label>
+						<Label htmlFor="notification-subject">{t("subjectLabel")}</Label>
 						<Input
 							disabled={!notifications.enabled}
 							id="notification-subject"
@@ -220,14 +235,18 @@ export function NotificationsSection({
 									(e.target as HTMLElement).blur();
 								}
 							}}
-							placeholder="New Form Submission"
-							value={notifications.subject || "New Form Submission"}
+							placeholder={localizedSubjectDefault}
+							value={localizeLegacyDefault(
+								notifications.subject,
+								"New Form Submission",
+								localizedSubjectDefault
+							)}
 						/>
 					</div>
 				)}
 				{notifications.enabled && (
 					<div className="flex flex-col gap-2">
-						<Label htmlFor="notification-message">Email Message</Label>
+						<Label htmlFor="notification-message">{t("messageLabel")}</Label>
 						<Textarea
 							disabled={!notifications.enabled}
 							id="notification-message"
@@ -238,18 +257,19 @@ export function NotificationsSection({
 									(e.target as HTMLElement).blur();
 								}
 							}}
-							placeholder="You have received a new submission on your form."
+							placeholder={localizedMessageDefault}
 							rows={3}
-							value={
-								notifications.message ||
-								"You have received a new submission on your form."
-							}
+							value={localizeLegacyDefault(
+								notifications.message,
+								"You have received a new submission on your form.",
+								localizedMessageDefault
+							)}
 						/>
 					</div>
 				)}
 				{notifications.enabled && (
 					<div className="flex flex-col gap-2">
-						<Label>Custom Links</Label>
+						<Label>{t("customLinksLabel")}</Label>
 						<div className="flex flex-col gap-2">
 							{customLinks.map((link, idx) => (
 								<div className="flex items-center gap-2" key={idx}>
@@ -266,7 +286,7 @@ export function NotificationsSection({
 												(e.target as HTMLElement).blur();
 											}
 										}}
-										placeholder="Label"
+										placeholder={t("linkLabelPlaceholder")}
 										value={link.label}
 									/>
 									<Input
@@ -284,7 +304,7 @@ export function NotificationsSection({
 												(e.target as HTMLElement).blur();
 											}
 										}}
-										placeholder="https://example.com"
+										placeholder={t("linkUrlPlaceholder")}
 										type="url"
 										value={link.url}
 									/>
@@ -295,7 +315,7 @@ export function NotificationsSection({
 										type="button"
 										variant="destructive"
 									>
-										Remove
+										{t("removeLink")}
 									</Button>
 								</div>
 							))}
@@ -312,7 +332,7 @@ export function NotificationsSection({
 										(e.target as HTMLElement).blur();
 									}
 								}}
-								placeholder="Label"
+								placeholder={t("linkLabelPlaceholder")}
 								value={newLink.label}
 							/>
 							<Input
@@ -328,7 +348,7 @@ export function NotificationsSection({
 										(e.target as HTMLElement).blur();
 									}
 								}}
-								placeholder="https://example.com"
+								placeholder={t("linkUrlPlaceholder")}
 								type="url"
 								value={newLink.url}
 							/>
@@ -337,14 +357,14 @@ export function NotificationsSection({
 								onClick={handleAddLink}
 								type="button"
 							>
-								Add
+								{t("addLink")}
 							</Button>
 						</div>
 					</div>
 				)}
 
 				<div
-					aria-label="Notification settings actions"
+					aria-label={t("actionsAria")}
 					className="flex items-center justify-between"
 					role="group"
 				>
@@ -356,19 +376,19 @@ export function NotificationsSection({
 								size="sm"
 								variant="ghost"
 							>
-								Reset
+								{tCommon("reset")}
 							</Button>
 						)}
 					</div>
 					<div className="flex items-center gap-2">
 						<Button
 							aria-describedby="notifications-description"
-							aria-label="Save notification settings"
+							aria-label={t("saveAria")}
 							disabled={saving || !hasChanges}
 							loading={saving}
 							onClick={saveNotifications}
 						>
-							Save
+							{tCommon("save")}
 						</Button>
 					</div>
 				</div>

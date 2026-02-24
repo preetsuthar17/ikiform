@@ -1,4 +1,5 @@
 import { Plus, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -10,17 +11,19 @@ export function SocialFieldSettings({
 	field,
 	onUpdateSettings,
 }: FieldSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.social");
+
 	return (
 		<Card className="gap-2 p-4 shadow-none">
 			<CardHeader className="p-0">
 				<CardTitle className="flex items-center gap-2 text-lg">
-					Social Platforms
+					{t("title")}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 p-0">
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="social-platforms">
-						Available Platforms
+						{t("availablePlatforms")}
 					</Label>
 					<div
 						aria-labelledby="social-platforms"
@@ -29,13 +32,13 @@ export function SocialFieldSettings({
 						role="group"
 					>
 						{[
-							{ key: "github", label: "GitHub" },
-							{ key: "twitter", label: "Twitter" },
-							{ key: "linkedin", label: "LinkedIn" },
-							{ key: "facebook", label: "Facebook" },
-							{ key: "instagram", label: "Instagram" },
-							{ key: "youtube", label: "YouTube" },
-							{ key: "website", label: "Website" },
+							{ key: "github" },
+							{ key: "twitter" },
+							{ key: "linkedin" },
+							{ key: "facebook" },
+							{ key: "instagram" },
+							{ key: "youtube" },
+							{ key: "website" },
 						].map((platform) => (
 							<div
 								className="flex items-center gap-2 rounded-md p-2 focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-1 hover:bg-accent"
@@ -61,7 +64,7 @@ export function SocialFieldSettings({
 									className="text-sm"
 									htmlFor={`social-platform-${platform.key}`}
 								>
-									{platform.label}
+									{t(`platforms.${platform.key}`)}
 								</Label>
 							</div>
 						))}
@@ -70,12 +73,12 @@ export function SocialFieldSettings({
 						className="text-muted-foreground text-xs"
 						id="social-platforms-help"
 					>
-						Select which social platforms to include in the field
+						{t("platformsHelp")}
 					</p>
 				</div>
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="custom-links">
-						Custom Links
+						{t("customLinks")}
 					</Label>
 					<div className="flex flex-col gap-2">
 						{(field.settings?.customLinks || []).map((link, idx) => (
@@ -99,7 +102,7 @@ export function SocialFieldSettings({
 											e.currentTarget.blur();
 										}
 									}}
-									placeholder="Label"
+									placeholder={t("labelPlaceholder")}
 									type="text"
 									value={link.label}
 								/>
@@ -122,12 +125,12 @@ export function SocialFieldSettings({
 											e.currentTarget.blur();
 										}
 									}}
-									placeholder="Placeholder (optional)"
+									placeholder={t("placeholderPlaceholder")}
 									type="text"
 									value={link.placeholder || ""}
 								/>
 								<Button
-									aria-label={`Remove custom link ${idx + 1}`}
+									aria-label={t("removeCustomLinkAria", { index: idx + 1 })}
 									className="shrink-0 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
 									onClick={() => {
 										const updated = [...(field.settings?.customLinks || [])];
@@ -151,7 +154,7 @@ export function SocialFieldSettings({
 							</div>
 						))}
 						<Button
-							aria-label="Add custom link"
+							aria-label={t("addCustomLinkAria")}
 							className="w-fit focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
 							onClick={() => {
 								const updated = [
@@ -175,11 +178,11 @@ export function SocialFieldSettings({
 							variant="outline"
 						>
 							<Plus aria-hidden="true" className="size-4" />
-							Add Custom Link
+							{t("addCustomLink")}
 						</Button>
 					</div>
 					<p className="text-muted-foreground text-xs" id="custom-links-help">
-						Add custom social links with custom labels and placeholders
+						{t("customLinksHelp")}
 					</p>
 				</div>
 			</CardContent>

@@ -9,8 +9,10 @@ import { type AppLocale, routing } from "@/i18n/routing";
 import { getLocaleFromPathname, stripLocalePrefix } from "@/lib/i18n/pathname";
 import enFooterMessages from "../../messages/en/footer.json";
 import enNavMessages from "../../messages/en/nav.json";
+import enProductMessages from "../../messages/en/product.json";
 import esFooterMessages from "../../messages/es/footer.json";
 import esNavMessages from "../../messages/es/nav.json";
+import esProductMessages from "../../messages/es/product.json";
 
 interface ConditionalLayoutProps {
 	children: React.ReactNode;
@@ -18,15 +20,27 @@ interface ConditionalLayoutProps {
 
 const CHROME_MESSAGES: Record<
 	AppLocale,
-	{ nav: typeof enNavMessages; footer: typeof enFooterMessages }
+	{
+		nav: typeof enNavMessages;
+		footer: typeof enFooterMessages;
+		product: {
+			trialBanner: typeof enProductMessages.trialBanner;
+		};
+	}
 > = {
 	en: {
 		nav: enNavMessages,
 		footer: enFooterMessages,
+		product: {
+			trialBanner: enProductMessages.trialBanner,
+		},
 	},
 	es: {
 		nav: esNavMessages,
 		footer: esFooterMessages,
+		product: {
+			trialBanner: esProductMessages.trialBanner,
+		},
 	},
 };
 

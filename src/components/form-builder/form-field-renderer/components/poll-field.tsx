@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -17,6 +18,8 @@ export function PollField({
 	fieldRef,
 	disabled,
 }: BaseFieldProps) {
+	const t = useTranslations("product.formBuilder.fieldRenderer.poll");
+	const fetchFailedMessage = t("fetchFailed");
 	const [apiOptions, setApiOptions] = React.useState<Array<
 		string | { value: string; label?: string }
 	> | null>(null);
@@ -54,7 +57,7 @@ export function PollField({
 
 			setApiOptions(sanitizeOptions(options));
 		} catch (error) {
-			setFetchError("Failed to fetch options");
+			setFetchError(fetchFailedMessage);
 		} finally {
 			setIsLoading(false);
 		}
@@ -62,7 +65,7 @@ export function PollField({
 
 	React.useEffect(() => {
 		fetchPollOptions();
-	}, [field.optionsApi, field.valueKey ?? "", field.labelKey ?? ""]);
+	}, [field.optionsApi, field.valueKey ?? "", field.labelKey ?? "", fetchFailedMessage]);
 
 	const getPollOptions = () => apiOptions ?? field.settings?.pollOptions ?? [];
 
@@ -154,9 +157,9 @@ export function PollField({
 			<Card className="mt-4 border-0 bg-muted/30 shadow-none">
 				<CardContent className="p-4">
 					<div className="mb-4 flex items-center justify-between">
-						<h4 className="font-semibold text-sm">Poll Results</h4>
+						<h4 className="font-semibold text-sm">{t("resultsTitle")}</h4>
 						<Badge className="text-xs" variant="secondary">
-							{totalVotes} total votes
+							{t("totalVotes", { count: totalVotes })}
 						</Badge>
 					</div>
 					<div className="flex flex-col gap-4">
@@ -170,7 +173,7 @@ export function PollField({
 										<span className="font-medium text-sm">{result.label}</span>
 										<div className="flex items-center gap-2">
 											<span className="text-muted-foreground text-sm">
-												{result.votes} votes
+												{t("votes", { count: result.votes })}
 											</span>
 											<Badge className="text-xs" variant="outline">
 												{percentage.toFixed(1)}%

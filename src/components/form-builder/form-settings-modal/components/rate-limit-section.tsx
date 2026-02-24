@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,14 +26,28 @@ export function RateLimitSection({
 }: RateLimitSectionProps & {
 	onSchemaUpdate?: (updates: Partial<any>) => void;
 }) {
+	const t = useTranslations("product.formBuilder.formSettings.rateLimitSection");
+	const tCommon = useTranslations("product.formBuilder.formSettings.common");
+	const localizeLegacyDefault = (
+		value: string | undefined,
+		legacyDefault: string,
+		localizedDefault: string
+	) => {
+		if (!value || value === legacyDefault) return localizedDefault;
+		return value;
+	};
+
 	const [rateLimitSettings, setRateLimitSettings] = useState({
 		enabled: localSettings.rateLimit?.enabled,
 		maxSubmissions: localSettings.rateLimit?.maxSubmissions || 5,
 		timeWindow: localSettings.rateLimit?.timeWindow || 10,
 		blockDuration: localSettings.rateLimit?.blockDuration || 60,
 		message:
-			localSettings.rateLimit?.message ||
-			"Too many submissions. Please try again later.",
+			localizeLegacyDefault(
+				localSettings.rateLimit?.message,
+				"Too many submissions. Please try again later.",
+				t("defaultMessage")
+			),
 	});
 
 	const [saving, setSaving] = useState(false);
@@ -69,15 +84,18 @@ export function RateLimitSection({
 			timeWindow: localSettings.rateLimit?.timeWindow || 10,
 			blockDuration: localSettings.rateLimit?.blockDuration || 60,
 			message:
-				localSettings.rateLimit?.message ||
-				"Too many submissions. Please try again later.",
+				localizeLegacyDefault(
+					localSettings.rateLimit?.message,
+					"Too many submissions. Please try again later.",
+					t("defaultMessage")
+				),
 		});
 		setHasChanges(false);
 	};
 
 	const saveRateLimit = async () => {
 		if (!formId) {
-			toast.error("Form ID is required to save settings");
+			toast.error(tCommon("formIdRequiredToSaveSettings"));
 			return;
 		}
 
@@ -98,12 +116,12 @@ export function RateLimitSection({
 			updateRateLimit(trimmed);
 			setSaved(true);
 			setHasChanges(false);
-			toast.success("Rate limiting settings saved successfully");
+			toast.success(t("saved"));
 
 			setTimeout(() => setSaved(false), 2000);
 		} catch (error) {
 			console.error("Error saving rate limit:", error);
-			toast.error("Failed to save rate limiting settings");
+			toast.error(t("saveFailed"));
 		} finally {
 			setSaving(false);
 		}
@@ -124,14 +142,14 @@ export function RateLimitSection({
 			announcement.setAttribute("aria-live", "polite");
 			announcement.setAttribute("aria-atomic", "true");
 			announcement.className = "sr-only";
-			announcement.textContent = "Rate limiting settings saved successfully";
+			announcement.textContent = t("saved");
 			document.body.appendChild(announcement);
 
 			setTimeout(() => {
 				document.body.removeChild(announcement);
 			}, 1000);
 		}
-	}, [saved]);
+	}, [saved, t]);
 
 	return (
 		<ScrollArea
@@ -141,7 +159,7 @@ export function RateLimitSection({
 			}}
 		>
 			<div
-				aria-label="Rate limiting settings"
+				aria-label={t("ariaSettings")}
 				className="flex flex-col gap-4"
 				onKeyDown={(e) => {
 					const target = e.target as HTMLElement;
@@ -166,16 +184,16 @@ export function RateLimitSection({
 									className="flex items-center gap-2 text-lg"
 									id="rate-limit-title"
 								>
-									Rate Limiting{" "}
+									{t("title")}{" "}
 									{hasChanges && (
 										<Badge className="gap-2" variant="secondary">
 											<div className="size-2 rounded-full bg-orange-500" />
-											Unsaved changes
+											{tCommon("unsavedChanges")}
 										</Badge>
 									)}
 								</CardTitle>
 								<CardDescription id="rate-limit-description">
-									Control submission frequency to prevent spam and abuse
+									{t("description")}
 								</CardDescription>
 							</div>
 						</div>
@@ -187,10 +205,10 @@ export function RateLimitSection({
 									className="font-medium text-sm"
 									htmlFor="rate-limit-enabled"
 								>
-									Enable Rate Limiting
+									{t("enableLabel")}
 								</Label>
 								<p className="text-muted-foreground text-xs">
-									Limit submissions from the same IP address
+									{t("enableDescription")}
 								</p>
 							</div>
 							<Switch
@@ -208,9 +226,13 @@ export function RateLimitSection({
 								<div className="flex flex-col gap-4">
 									<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
 										<RateLimitField
-											description="Maximum submissions allowed"
+											description={t("maxSubmissionsDescription")}
 											id="max-submissions"
-											label="Max Submissions"
+											invalidMessage={tCommon("validValueBetween", {
+												max: 100,
+												min: 1,
+											})}
+											label={t("maxSubmissionsLabel")}
 											max={100}
 											min={1}
 											onChange={(value) =>
@@ -221,9 +243,13 @@ export function RateLimitSection({
 											value={rateLimitSettings.maxSubmissions}
 										/>
 										<RateLimitField
-											description="Time period for counting submissions"
+											description={t("timeWindowDescription")}
 											id="time-window"
-											label="Time Window (minutes)"
+											invalidMessage={tCommon("validValueBetween", {
+												max: 1440,
+												min: 1,
+											})}
+											label={t("timeWindowLabel")}
 											max={1440}
 											min={1}
 											onChange={(value) =>
@@ -236,9 +262,13 @@ export function RateLimitSection({
 									</div>
 
 									<RateLimitField
-										description="How long to block after limit is reached"
+										description={t("blockDurationDescription")}
 										id="block-duration"
-										label="Block Duration (minutes)"
+										invalidMessage={tCommon("validValueBetween", {
+											max: 10_080,
+											min: 1,
+										})}
+										label={t("blockDurationLabel")}
 										max={10_080}
 										min={1}
 										onChange={(value) =>
@@ -259,7 +289,7 @@ export function RateLimitSection({
 											htmlFor="rate-limit-message"
 											id="rate-limit-message-label"
 										>
-											Rate Limit Message
+											{t("messageLabel")}
 										</Label>
 										<Textarea
 											className="resize-none text-base shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1 md:text-sm"
@@ -273,12 +303,12 @@ export function RateLimitSection({
 													(e.target as HTMLElement).blur();
 												}
 											}}
-											placeholder="Too many submissions. Please try again later."
+											placeholder={t("messagePlaceholder")}
 											rows={2}
 											value={rateLimitSettings.message}
 										/>
 										<p className="text-muted-foreground text-xs">
-											Message shown when rate limit is exceeded
+											{t("messageDescription")}
 										</p>
 									</div>
 								</div>
@@ -290,29 +320,22 @@ export function RateLimitSection({
 								>
 									<div className="flex flex-col gap-2">
 										<h4 className="font-medium text-foreground text-sm">
-											Current Configuration
+											{t("currentConfiguration")}
 										</h4>
 										<p className="text-muted-foreground text-sm">
-											Allow{" "}
-											<span className="font-semibold text-foreground">
-												{rateLimitSettings.maxSubmissions}
-											</span>{" "}
-											submissions every{" "}
-											<span className="font-semibold text-foreground">
-												{rateLimitSettings.timeWindow}
-											</span>{" "}
-											minutes. Block for{" "}
-											<span className="font-semibold text-foreground">
-												{rateLimitSettings.blockDuration}
-											</span>{" "}
-											minutes when exceeded.
+											{t("summarySentence", {
+												blockDuration: rateLimitSettings.blockDuration,
+												maxSubmissions: rateLimitSettings.maxSubmissions,
+												timeWindow: rateLimitSettings.timeWindow,
+											})}
 										</p>
 										<div className="text-muted-foreground text-xs">
 											<p>
-												Example: If a user submits{" "}
-												{rateLimitSettings.maxSubmissions} times in{" "}
-												{rateLimitSettings.timeWindow} minutes, they'll be
-												blocked for {rateLimitSettings.blockDuration} minutes.
+												{t("summaryExample", {
+													blockDuration: rateLimitSettings.blockDuration,
+													maxSubmissions: rateLimitSettings.maxSubmissions,
+													timeWindow: rateLimitSettings.timeWindow,
+												})}
 											</p>
 										</div>
 									</div>
@@ -323,15 +346,13 @@ export function RateLimitSection({
 						{!rateLimitSettings.enabled && (
 							<div className="rounded-lg bg-muted/30 p-4">
 								<p className="text-muted-foreground text-sm">
-									Rate limiting helps protect your form from spam and abuse by
-									limiting the number of submissions from the same IP address
-									within a specified time period.
+									{t("disabledDescription")}
 								</p>
 							</div>
 						)}
 
 						<div
-							aria-label="Rate limiting actions"
+							aria-label={t("actionsAria")}
 							className="flex items-center justify-between"
 							role="group"
 						>
@@ -343,14 +364,14 @@ export function RateLimitSection({
 										size="sm"
 										variant="ghost"
 									>
-										Reset
+										{tCommon("reset")}
 									</Button>
 								)}
 							</div>
 							<div className="flex items-center gap-2">
 								<Button
 									aria-describedby="rate-limit-description"
-									aria-label="Save rate limiting settings"
+									aria-label={t("saveAria")}
 									disabled={saving || !hasChanges}
 									loading={saving}
 									onClick={saveRateLimit}
@@ -361,7 +382,7 @@ export function RateLimitSection({
 										}
 									}}
 								>
-									Save
+									{tCommon("save")}
 								</Button>
 							</div>
 						</div>
@@ -380,6 +401,7 @@ function RateLimitField({
 	max,
 	placeholder,
 	description,
+	invalidMessage,
 	onChange,
 	required = false,
 }: {
@@ -390,6 +412,7 @@ function RateLimitField({
 	max: number;
 	placeholder: string;
 	description: string;
+	invalidMessage: string;
 	onChange: (value: number) => void;
 	required?: boolean;
 }) {
@@ -441,7 +464,7 @@ function RateLimitField({
 			</p>
 			{required && (!value || value < min || value > max) && (
 				<p className="text-destructive text-xs" role="alert">
-					Please enter a valid value between {min} and {max}
+					{invalidMessage}
 				</p>
 			)}
 		</div>

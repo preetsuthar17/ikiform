@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createAdminClient } from "@/utils/supabase/admin";
 import { createClient } from "@/utils/supabase/server";
@@ -43,6 +44,7 @@ async function getUsers(): Promise<User[]> {
 
 const AdminPage = async function AdminPage() {
 	try {
+		const t = await getTranslations("dashboard.admin.page");
 		const supabase = await createClient();
 		const { data } = await supabase.auth.getUser();
 		const user = data.user;
@@ -55,19 +57,19 @@ const AdminPage = async function AdminPage() {
 
 		return (
 			<main
-				aria-label="Admin dashboard"
+				aria-label={t("aria.dashboard")}
 				className="mx-auto flex w-full max-w-7xl flex-col gap-6"
 			>
 				{}
 				<Card
-					aria-label="Announcements management"
+					aria-label={t("aria.announcements")}
 					className="p-4 shadow-none md:p-6"
 					role="region"
 				>
 					<CardHeader className="p-0">
-						<CardTitle>Send Announcements</CardTitle>
+						<CardTitle>{t("announcements.title")}</CardTitle>
 						<p className="text-muted-foreground text-sm">
-							Signed in as {user.email}
+							{t("announcements.signedInAs", { email: user.email ?? "" })}
 						</p>
 					</CardHeader>
 					<CardContent className="p-0">
@@ -79,14 +81,14 @@ const AdminPage = async function AdminPage() {
 
 				{}
 				<Card
-					aria-label="Expire trials management"
+					aria-label={t("aria.expireTrials")}
 					className="p-4 shadow-none md:p-6"
 					role="region"
 				>
 					<CardHeader className="p-0">
-						<CardTitle>Expire Trials</CardTitle>
+						<CardTitle>{t("expireTrials.title")}</CardTitle>
 						<p className="text-muted-foreground text-sm">
-							Manually run the cron job to expire free trials
+							{t("expireTrials.description")}
 						</p>
 					</CardHeader>
 					<CardContent className="p-0">
@@ -98,14 +100,14 @@ const AdminPage = async function AdminPage() {
 
 				{}
 				<Card
-					aria-label="Users management"
+					aria-label={t("aria.users")}
 					className="p-4 shadow-none md:p-6"
 					role="region"
 				>
 					<CardHeader className="p-0">
-						<CardTitle>All Users ({users.length})</CardTitle>
+						<CardTitle>{t("users.title", { count: users.length })}</CardTitle>
 						<p className="text-muted-foreground text-sm">
-							Manage and view all registered users
+							{t("users.description")}
 						</p>
 					</CardHeader>
 					<CardContent className="p-0">

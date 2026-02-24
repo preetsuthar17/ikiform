@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useTranslations } from "next-intl";
 
 import type { FormField } from "@/lib/database";
 
@@ -13,6 +14,7 @@ export function ValidationSettings({
 	field,
 	onUpdateValidation,
 }: ValidationSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.validation");
 	const isTextType = ["text", "email", "textarea"].includes(field.type);
 	const isNumberType = field.type === "number";
 
@@ -24,7 +26,7 @@ export function ValidationSettings({
 		<Card className="gap-2 p-4 shadow-none">
 			<CardHeader className="p-0">
 				<CardTitle className="flex items-center gap-2 text-lg">
-					Validation
+					{t("title")}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 p-0">
@@ -32,7 +34,7 @@ export function ValidationSettings({
 					<>
 						<div className="flex flex-col gap-2">
 							<Label className="font-medium text-sm" htmlFor="min-length">
-								Minimum Length
+								{t("minLength")}
 							</Label>
 							<Input
 								aria-describedby="min-length-help"
@@ -49,17 +51,17 @@ export function ValidationSettings({
 										e.currentTarget.blur();
 									}
 								}}
-								placeholder="Min characters"
+								placeholder={t("minLengthPlaceholder")}
 								type="number"
 								value={field.validation?.minLength || ""}
 							/>
 							<p className="text-muted-foreground text-xs" id="min-length-help">
-								Minimum number of characters required
+								{t("minLengthHelp")}
 							</p>
 						</div>
 						<div className="flex flex-col gap-2">
 							<Label className="font-medium text-sm" htmlFor="max-length">
-								Maximum Length
+								{t("maxLength")}
 							</Label>
 							<Input
 								aria-describedby="max-length-help"
@@ -76,17 +78,17 @@ export function ValidationSettings({
 										e.currentTarget.blur();
 									}
 								}}
-								placeholder="Max characters"
+								placeholder={t("maxLengthPlaceholder")}
 								type="number"
 								value={field.validation?.maxLength || ""}
 							/>
 							<p className="text-muted-foreground text-xs" id="max-length-help">
-								Maximum number of characters allowed
+								{t("maxLengthHelp")}
 							</p>
 						</div>
 						<div className="flex flex-col gap-2">
 							<Label className="font-medium text-sm" htmlFor="pattern">
-								Pattern (Regex)
+								{t("pattern")}
 							</Label>
 							<Input
 								aria-describedby="pattern-help"
@@ -103,12 +105,12 @@ export function ValidationSettings({
 										e.currentTarget.blur();
 									}
 								}}
-								placeholder="Regular expression"
+								placeholder={t("patternPlaceholder")}
 								type="text"
 								value={field.validation?.pattern || ""}
 							/>
 							<p className="text-muted-foreground text-xs" id="pattern-help">
-								Regular expression pattern for validation
+								{t("patternHelp")}
 							</p>
 						</div>
 					</>
@@ -118,7 +120,7 @@ export function ValidationSettings({
 					<>
 						<div className="flex flex-col gap-2">
 							<Label className="font-medium text-sm" htmlFor="min-value">
-								Minimum Value
+								{t("minValue")}
 							</Label>
 							<Input
 								aria-describedby="min-value-help"
@@ -135,17 +137,17 @@ export function ValidationSettings({
 										e.currentTarget.blur();
 									}
 								}}
-								placeholder="Min value"
+								placeholder={t("minValuePlaceholder")}
 								type="number"
 								value={field.validation?.min || ""}
 							/>
 							<p className="text-muted-foreground text-xs" id="min-value-help">
-								Minimum numeric value allowed
+								{t("minValueHelp")}
 							</p>
 						</div>
 						<div className="flex flex-col gap-2">
 							<Label className="font-medium text-sm" htmlFor="max-value">
-								Maximum Value
+								{t("maxValue")}
 							</Label>
 							<Input
 								aria-describedby="max-value-help"
@@ -162,12 +164,12 @@ export function ValidationSettings({
 										e.currentTarget.blur();
 									}
 								}}
-								placeholder="Max value"
+								placeholder={t("maxValuePlaceholder")}
 								type="number"
 								value={field.validation?.max || ""}
 							/>
 							<p className="text-muted-foreground text-xs" id="max-value-help">
-								Maximum numeric value allowed
+								{t("maxValueHelp")}
 							</p>
 						</div>
 					</>

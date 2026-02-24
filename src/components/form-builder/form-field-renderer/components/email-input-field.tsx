@@ -1,5 +1,6 @@
 import type React from "react";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,6 +10,7 @@ import { applyBuilderMode, getBaseClasses, getBuilderMode } from "../utils";
 
 export function EmailInputField(props: BaseFieldProps) {
 	const { field, value, onChange, error, disabled } = props;
+	const t = useTranslations("product.formBuilder.fieldRenderer.email");
 	const builderMode = getBuilderMode(props);
 	const baseClasses = getBaseClasses(field, error);
 	const [inputValue, setInputValue] = useState(value || "");
@@ -23,7 +25,7 @@ export function EmailInputField(props: BaseFieldProps) {
 			field.placeholder ||
 			(emailSettings?.autoCompleteDomain
 				? `username@${emailSettings.autoCompleteDomain}`
-				: "Enter email address")
+				: t("defaultPlaceholder"))
 		);
 	};
 
@@ -84,7 +86,6 @@ export function EmailInputField(props: BaseFieldProps) {
 			setShowAutoComplete(false);
 		}
 
-		const validation = validateEmailField(newValue);
 		onChange(newValue);
 	};
 
@@ -138,19 +139,19 @@ export function EmailInputField(props: BaseFieldProps) {
 			<div className="absolute top-full right-0 left-0 z-10 mt-1 rounded-xl border border-border bg-accent p-2">
 				<div className="flex items-center justify-between">
 					<span className="text-muted-foreground text-sm">
-						Press Tab or click to complete:{" "}
+						{t("autocompleteHint")}{" "}
 						<strong>
 							{inputValue}@{emailSettings.autoCompleteDomain}
 						</strong>
 					</span>
 					<Button
-						aria-label="Complete email address"
+						aria-label={t("completeEmailAria")}
 						className="h-6 px-2 text-xs"
 						onClick={handleAutoCompleteButtonClick}
 						size="sm"
 						variant="outline"
 					>
-						Complete
+						{t("completeButton")}
 					</Button>
 				</div>
 			</div>
@@ -164,7 +165,7 @@ export function EmailInputField(props: BaseFieldProps) {
 		return (
 			<div className="flex items-center gap-2">
 				<Badge className="text-xs" variant="secondary">
-					Auto-complete: @{emailSettings?.autoCompleteDomain ?? ""}
+					{t("autocompleteBadge")} @{emailSettings?.autoCompleteDomain ?? ""}
 				</Badge>
 			</div>
 		);
@@ -176,7 +177,9 @@ export function EmailInputField(props: BaseFieldProps) {
 		const emailSettings = getEmailSettings();
 		return (
 			<div className="flex flex-wrap gap-1">
-				<span className="text-muted-foreground text-xs">Allowed domains:</span>
+				<span className="text-muted-foreground text-xs">
+					{t("allowedDomainsLabel")}
+				</span>
 				{(emailSettings?.allowedDomains ?? []).map((domain, index) => (
 					<Badge className="text-xs" key={index} variant="outline">
 						@{domain}

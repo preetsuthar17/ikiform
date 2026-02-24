@@ -315,7 +315,7 @@ export function FormAnalytics({ form }: FormAnalyticsProps) {
 											/>
 										</Button>
 									</DropdownMenuTrigger>
-									<DropdownMenuContent align="end" className={'w-full'}>
+									<DropdownMenuContent align="end" className="w-full">
 										<DropdownMenuItem onClick={handleExportCsv}>
 											<Download
 												aria-hidden="true"

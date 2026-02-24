@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useTranslations } from "next-intl";
 import {
 	Select,
 	SelectContent,
@@ -15,17 +16,19 @@ export function RatingFieldSettings({
 	field,
 	onUpdateSettings,
 }: FieldSettingsProps) {
+	const t = useTranslations("product.formBuilder.fieldSettings.rating");
+
 	return (
 		<Card className="gap-2 p-4 shadow-none">
 			<CardHeader className="p-0">
 				<CardTitle className="flex items-center gap-2 text-lg">
-					Rating Settings
+					{t("title")}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 p-0">
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="rating-star-count">
-						Number of Stars
+						{t("starCount")}
 					</Label>
 					<Input
 						aria-describedby="rating-star-count-help"
@@ -55,12 +58,12 @@ export function RatingFieldSettings({
 						className="text-muted-foreground text-xs"
 						id="rating-star-count-help"
 					>
-						Number of rating stars (1-10)
+						{t("starCountHelp")}
 					</p>
 				</div>
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="rating-star-size">
-						Star Size
+						{t("starSize")}
 					</Label>
 					<div className="flex items-center gap-2">
 						<Slider
@@ -80,12 +83,12 @@ export function RatingFieldSettings({
 						className="text-muted-foreground text-xs"
 						id="rating-star-size-help"
 					>
-						Size of the rating stars (16-64px)
+						{t("starSizeHelp")}
 					</p>
 				</div>
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="rating-icon">
-						Icon Type
+						{t("iconType")}
 					</Label>
 					<Select
 						onValueChange={(val) => onUpdateSettings({ icon: val })}
@@ -95,17 +98,17 @@ export function RatingFieldSettings({
 							<SelectValue />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem value="star">Star</SelectItem>
-							<SelectItem value="heart">Heart</SelectItem>
+							<SelectItem value="star">{t("star")}</SelectItem>
+							<SelectItem value="heart">{t("heart")}</SelectItem>
 						</SelectContent>
 					</Select>
 					<p className="text-muted-foreground text-xs" id="rating-icon-help">
-						Choose the icon type for ratings
+						{t("iconTypeHelp")}
 					</p>
 				</div>
 				<div className="flex flex-col gap-2">
 					<Label className="font-medium text-sm" htmlFor="rating-color">
-						Icon Color
+						{t("iconColor")}
 					</Label>
 					<Input
 						aria-describedby="rating-color-help"
@@ -117,7 +120,7 @@ export function RatingFieldSettings({
 						value={field.settings?.color || "#fbbf24"}
 					/>
 					<p className="text-muted-foreground text-xs" id="rating-color-help">
-						Color of the rating icons
+						{t("iconColorHelp")}
 					</p>
 				</div>
 			</CardContent>

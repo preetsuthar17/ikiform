@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -27,12 +28,28 @@ export function ResponseLimitSection({
 	schema?: any;
 	onSchemaUpdate?: (updates: Partial<any>) => void;
 }) {
+	const t = useTranslations(
+		"product.formBuilder.formSettings.responseLimitSection"
+	);
+	const tCommon = useTranslations("product.formBuilder.formSettings.common");
+	const localizeLegacyDefault = (
+		value: string | undefined,
+		legacyDefault: string,
+		localizedDefault: string
+	) => {
+		if (!value || value === legacyDefault) return localizedDefault;
+		return value;
+	};
+
 	const [settings, setSettings] = useState({
 		enabled: !!localSettings.responseLimit?.enabled,
 		maxResponses: localSettings.responseLimit?.maxResponses || 100,
 		message:
-			localSettings.responseLimit?.message ||
-			"This form is no longer accepting responses.",
+			localizeLegacyDefault(
+				localSettings.responseLimit?.message,
+				"This form is no longer accepting responses.",
+				t("defaultMessage")
+			),
 	});
 
 	const [saving, setSaving] = useState(false);
@@ -67,15 +84,18 @@ export function ResponseLimitSection({
 			enabled: !!localSettings.responseLimit?.enabled,
 			maxResponses: localSettings.responseLimit?.maxResponses || 100,
 			message:
-				localSettings.responseLimit?.message ||
-				"This form is no longer accepting responses.",
+				localizeLegacyDefault(
+					localSettings.responseLimit?.message,
+					"This form is no longer accepting responses.",
+					t("defaultMessage")
+				),
 		});
 		setHasChanges(false);
 	};
 
 	const save = async () => {
 		if (!formId) {
-			toast.error("Form ID is required to save settings");
+			toast.error(tCommon("formIdRequiredToSaveSettings"));
 			return;
 		}
 		setSaving(true);
@@ -95,12 +115,12 @@ export function ResponseLimitSection({
 			updateResponseLimit(trimmed);
 			setSaved(true);
 			setHasChanges(false);
-			toast.success("Response limit saved successfully");
+			toast.success(t("saved"));
 
 			setTimeout(() => setSaved(false), 2000);
 		} catch (error) {
 			console.error("Error saving response limit:", error);
-			toast.error("Failed to save response limit");
+			toast.error(t("saveFailed"));
 		} finally {
 			setSaving(false);
 		}
@@ -121,14 +141,14 @@ export function ResponseLimitSection({
 			announcement.setAttribute("aria-live", "polite");
 			announcement.setAttribute("aria-atomic", "true");
 			announcement.className = "sr-only";
-			announcement.textContent = "Response limit saved successfully";
+			announcement.textContent = t("saved");
 			document.body.appendChild(announcement);
 
 			setTimeout(() => {
 				document.body.removeChild(announcement);
 			}, 1000);
 		}
-	}, [saved]);
+	}, [saved, t]);
 
 	return (
 		<Card
@@ -155,16 +175,16 @@ export function ResponseLimitSection({
 							className="flex items-center gap-2 text-lg"
 							id="response-limit-title"
 						>
-							Response Limit{" "}
+							{t("title")}{" "}
 							{hasChanges && (
 								<Badge className="gap-2" variant="secondary">
 									<div className="size-2 rounded-full bg-orange-500" />
-									Unsaved changes
+									{tCommon("unsavedChanges")}
 								</Badge>
 							)}
 						</CardTitle>
 						<CardDescription>
-							Stop accepting submissions after a set total count
+							{t("description")}
 						</CardDescription>
 					</div>
 				</div>
@@ -176,10 +196,10 @@ export function ResponseLimitSection({
 							className="font-medium text-sm"
 							htmlFor="response-limit-enabled"
 						>
-							Enable Response Limit
+							{t("enableLabel")}
 						</Label>
 						<p className="text-muted-foreground text-xs">
-							Limit the total number of submissions this form accepts
+							{t("enableDescription")}
 						</p>
 					</div>
 					<Switch
@@ -194,9 +214,13 @@ export function ResponseLimitSection({
 					<div className="flex flex-col gap-6">
 						<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
 							<ResponseLimitField
-								description="Maximum total responses allowed"
+								description={t("maxResponsesDescription")}
 								id="max-responses"
-								label="Max Responses"
+								invalidMessage={tCommon("validValueBetween", {
+									max: 1_000_000,
+									min: 1,
+								})}
+								label={t("maxResponsesLabel")}
 								max={1_000_000}
 								min={1}
 								onChange={(value) => handleChange("maxResponses", value)}
@@ -216,7 +240,7 @@ export function ResponseLimitSection({
 								htmlFor="response-limit-message"
 								id="response-limit-message-label"
 							>
-								Limit Reached Message
+								{t("limitReachedLabel")}
 							</Label>
 							<Textarea
 								className="resize-none text-base shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1 md:text-sm"
@@ -228,12 +252,12 @@ export function ResponseLimitSection({
 										(e.target as HTMLElement).blur();
 									}
 								}}
-								placeholder="This form is no longer accepting responses."
+								placeholder={t("limitReachedPlaceholder")}
 								rows={2}
 								value={settings.message}
 							/>
 							<p className="text-muted-foreground text-xs">
-								Message shown once the limit is reached
+								{t("limitReachedDescription")}
 							</p>
 						</div>
 					</div>
@@ -242,14 +266,13 @@ export function ResponseLimitSection({
 				{!settings.enabled && (
 					<div className="rounded-lg bg-muted/30 p-4">
 						<p className="text-muted-foreground text-sm">
-							Limit the total number of responses this form can accept. Once the
-							limit is reached, new submissions will be blocked.
+							{t("disabledDescription")}
 						</p>
 					</div>
 				)}
 
 				<div
-					aria-label="Response limit actions"
+					aria-label={t("actionsAria")}
 					className="flex items-center justify-between"
 					role="group"
 				>
@@ -261,13 +284,13 @@ export function ResponseLimitSection({
 								size="sm"
 								variant="ghost"
 							>
-								Reset
+								{tCommon("reset")}
 							</Button>
 						)}
 					</div>
 					<div className="flex items-center gap-2">
 						<Button
-							aria-label="Save response limit settings"
+							aria-label={t("saveAria")}
 							disabled={saving || !hasChanges}
 							loading={saving}
 							onClick={save}
@@ -278,7 +301,7 @@ export function ResponseLimitSection({
 								}
 							}}
 						>
-							Save
+							{tCommon("save")}
 						</Button>
 					</div>
 				</div>
@@ -295,6 +318,7 @@ function ResponseLimitField({
 	max,
 	placeholder,
 	description,
+	invalidMessage,
 	onChange,
 	required = false,
 }: {
@@ -305,6 +329,7 @@ function ResponseLimitField({
 	max: number;
 	placeholder: string;
 	description: string;
+	invalidMessage: string;
 	onChange: (value: number) => void;
 	required?: boolean;
 }) {
@@ -356,7 +381,7 @@ function ResponseLimitField({
 			</p>
 			{required && (!value || value < min || value > max) && (
 				<p className="text-destructive text-xs" role="alert">
-					Please enter a valid value between {min} and {max}
+					{invalidMessage}
 				</p>
 			)}
 		</div>

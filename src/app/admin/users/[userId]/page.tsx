@@ -10,6 +10,7 @@ import {
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -255,6 +256,9 @@ export default async function UserProfilePage({
 }: {
 	params: Promise<{ userId: string }>;
 }) {
+	const t = await getTranslations("dashboard.admin.userProfile");
+	const locale = await getLocale();
+	const dateLocale = locale === "es" ? "es-ES" : "en-US";
 	const { userId } = await params;
 
 	console.log("UserProfilePage userId:", userId);
@@ -274,14 +278,14 @@ export default async function UserProfilePage({
 				<Card>
 					<CardContent className="p-6">
 						<div className="text-center">
-							<h1 className="font-bold text-2xl">Invalid User ID</h1>
+							<h1 className="font-bold text-2xl">{t("invalidUserId.title")}</h1>
 							<p className="mt-2 text-muted-foreground">
-								No user ID provided in the URL.
+								{t("invalidUserId.description")}
 							</p>
 							<Link href="/admin">
 								<Button className="">
 									<ArrowLeft className="size-4" />
-									Back to Admin
+									{t("backToAdmin")}
 								</Button>
 							</Link>
 						</div>
@@ -304,14 +308,14 @@ export default async function UserProfilePage({
 				<Card>
 					<CardContent className="p-6">
 						<div className="text-center">
-							<h1 className="font-bold text-2xl">User Not Found</h1>
+							<h1 className="font-bold text-2xl">{t("notFound.title")}</h1>
 							<p className="mt-2 text-muted-foreground">
-								The user you're looking for doesn't exist.
+								{t("notFound.description")}
 							</p>
 							<Link href="/admin">
 								<Button className="">
 									<ArrowLeft className="size-4" />
-									Back to Admin
+									{t("backToAdmin")}
 								</Button>
 							</Link>
 						</div>
@@ -329,7 +333,7 @@ export default async function UserProfilePage({
 					<Link href="/admin">
 						<Button size="sm" variant="outline">
 							<ArrowLeft className="size-4" />
-							Back to Admin
+							{t("backToAdmin")}
 						</Button>
 					</Link>
 					<div>
@@ -344,48 +348,52 @@ export default async function UserProfilePage({
 				<CardHeader className="p-0">
 					<CardTitle className="flex items-center gap-2">
 						<Users className="size-5" />
-						User Information
+						{t("userInformation")}
 					</CardTitle>
 				</CardHeader>
 				<CardContent className="p-0">
 					<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 						<div>
 							<label className="font-medium text-muted-foreground text-sm">
-								UID
+								{t("labels.uid")}
 							</label>
 							<p className="font-mono text-sm">{userData.uid}</p>
 						</div>
 						<div>
 							<label className="font-medium text-muted-foreground text-sm">
-								Premium Status
+								{t("labels.premiumStatus")}
 							</label>
 							<div className="mt-1">
 								<Badge variant={userData.has_premium ? "default" : "secondary"}>
-									{userData.has_premium ? "Premium" : "Free"}
+									{userData.has_premium
+										? t("badges.premium")
+										: t("badges.free")}
 								</Badge>
 							</div>
 						</div>
 						<div>
 							<label className="font-medium text-muted-foreground text-sm">
-								Trial Status
+								{t("labels.trialStatus")}
 							</label>
 							<div className="mt-1">
 								<Badge
 									variant={userData.has_free_trial ? "default" : "secondary"}
 								>
-									{userData.has_free_trial ? "Free Trial" : "No Trial"}
+									{userData.has_free_trial
+										? t("badges.freeTrial")
+										: t("badges.noTrial")}
 								</Badge>
 							</div>
 						</div>
 						<div>
 							<label className="font-medium text-muted-foreground text-sm">
-								Customer Name
+								{t("labels.customerName")}
 							</label>
 							<p className="text-sm">{userData.customer_name || "-"}</p>
 						</div>
 						<div>
 							<label className="font-medium text-muted-foreground text-sm">
-								Polar Customer ID
+								{t("labels.polarCustomerId")}
 							</label>
 							<p className="font-mono text-sm">
 								{userData.polar_customer_id || "-"}
@@ -393,10 +401,10 @@ export default async function UserProfilePage({
 						</div>
 						<div>
 							<label className="font-medium text-muted-foreground text-sm">
-								Member Since
+								{t("labels.memberSince")}
 							</label>
 							<p className="text-sm">
-								{new Date(userData.created_at).toLocaleDateString("en-US", {
+								{new Date(userData.created_at).toLocaleDateString(dateLocale, {
 									year: "numeric",
 									month: "2-digit",
 									day: "2-digit",
@@ -437,7 +445,7 @@ export default async function UserProfilePage({
 									) : (
 										<Clock className="size-5" />
 									)}
-									Free Trial Status
+									{t("trialStatus.title")}
 								</CardTitle>
 							</CardHeader>
 							<CardContent className="p-0">
@@ -445,10 +453,12 @@ export default async function UserProfilePage({
 									{trialInfo.isExpired ? (
 										<div className="flex items-center gap-2">
 											<Badge className="text-sm" variant="destructive">
-												Trial Expired
+												{t("trialStatus.expiredBadge")}
 											</Badge>
 											<span className="text-muted-foreground text-sm">
-												Free trial ended {Math.abs(trialInfo.daysLeft)} days ago
+												{t("trialStatus.endedDaysAgo", {
+													days: Math.abs(trialInfo.daysLeft),
+												})}
 											</span>
 										</div>
 									) : trialInfo.isExpiringSoon ? (
@@ -457,12 +467,12 @@ export default async function UserProfilePage({
 												className="border-yellow-300 bg-yellow-100 text-sm text-yellow-800"
 												variant="secondary"
 											>
-												Expiring Soon
+												{t("trialStatus.expiringSoonBadge")}
 											</Badge>
 											<span className="text-muted-foreground text-sm">
-												{trialInfo.daysLeft}{" "}
-												{trialInfo.daysLeft === 1 ? "day" : "days"} left in free
-												trial
+												{t("trialStatus.daysLeft", {
+													days: trialInfo.daysLeft,
+												})}
 											</span>
 										</div>
 									) : (
@@ -471,19 +481,19 @@ export default async function UserProfilePage({
 												className="border-blue-300 bg-blue-100 text-blue-800 text-sm"
 												variant="secondary"
 											>
-												Active Trial
+												{t("trialStatus.activeBadge")}
 											</Badge>
 											<span className="text-muted-foreground text-sm">
-												{trialInfo.daysLeft}{" "}
-												{trialInfo.daysLeft === 1 ? "day" : "days"} left in free
-												trial
+												{t("trialStatus.daysLeft", {
+													days: trialInfo.daysLeft,
+												})}
 											</span>
 										</div>
 									)}
 
 									<div className="mt-3 text-muted-foreground text-xs">
-										Trial started:{" "}
-										{new Date(userData.created_at).toLocaleDateString("en-US", {
+										{t("trialStatus.startedOn")}{" "}
+										{new Date(userData.created_at).toLocaleDateString(dateLocale, {
 											year: "numeric",
 											month: "long",
 											day: "numeric",
@@ -513,29 +523,29 @@ export default async function UserProfilePage({
 				<CardHeader className="p-0">
 					<CardTitle className="flex items-center gap-2">
 						<FileText className="size-5" />
-						Forms ({forms.length})
+						{t("forms.title", { count: forms.length })}
 					</CardTitle>
 					<p className="text-muted-foreground text-sm">
-						All forms created by this user
+						{t("forms.description")}
 					</p>
 				</CardHeader>
 				<CardContent className="p-0">
 					{forms.length === 0 ? (
 						<div className="py-8 text-center text-muted-foreground">
 							<FileText className="mx-auto mb-4 size-12 opacity-50" />
-							<p>This user hasn't created any forms yet.</p>
+							<p>{t("forms.empty")}</p>
 						</div>
 					) : (
 						<div className="rounded-md border">
 							<Table>
 								<TableHeader>
 									<TableRow>
-										<TableHead>Form Title</TableHead>
-										<TableHead>Description</TableHead>
-										<TableHead>Status</TableHead>
-										<TableHead>Submissions</TableHead>
-										<TableHead>Created</TableHead>
-										<TableHead>Actions</TableHead>
+										<TableHead>{t("forms.table.formTitle")}</TableHead>
+										<TableHead>{t("forms.table.description")}</TableHead>
+										<TableHead>{t("forms.table.status")}</TableHead>
+										<TableHead>{t("forms.table.submissions")}</TableHead>
+										<TableHead>{t("forms.table.created")}</TableHead>
+										<TableHead>{t("forms.table.actions")}</TableHead>
 									</TableRow>
 								</TableHeader>
 								<TableBody>
@@ -560,7 +570,9 @@ export default async function UserProfilePage({
 												<Badge
 													variant={form.is_published ? "default" : "secondary"}
 												>
-													{form.is_published ? "Published" : "Draft"}
+													{form.is_published
+														? t("forms.status.published")
+														: t("forms.status.draft")}
 												</Badge>
 											</TableCell>
 											<TableCell>
@@ -570,7 +582,7 @@ export default async function UserProfilePage({
 												</div>
 											</TableCell>
 											<TableCell>
-												{new Date(form.created_at).toLocaleDateString("en-US", {
+												{new Date(form.created_at).toLocaleDateString(dateLocale, {
 													year: "numeric",
 													month: "2-digit",
 													day: "2-digit",
@@ -585,13 +597,13 @@ export default async function UserProfilePage({
 													>
 														<Button size="sm" variant="outline">
 															<ExternalLink className="size-3" />
-															View
+															{t("forms.actions.view")}
 														</Button>
 													</Link>
 													<Link href={`/admin/forms/${form.id}`}>
 														<Button size="sm" variant="outline">
 															<Eye className="size-3" />
-															Details
+															{t("forms.actions.details")}
 														</Button>
 													</Link>
 												</div>

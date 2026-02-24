@@ -1,4 +1,5 @@
 import { Eye, EyeOff } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -31,13 +32,27 @@ export function PasswordProtectionSection({
 }: PasswordProtectionSectionProps & {
 	onSchemaUpdate?: (updates: Partial<any>) => void;
 }) {
+	const t = useTranslations(
+		"product.formBuilder.formSettings.passwordProtectionSection"
+	);
+	const tCommon = useTranslations("product.formBuilder.formSettings.common");
+	const localizeLegacyDefault = (
+		value: string | undefined,
+		legacyDefault: string,
+		localizedDefault: string
+	) => {
+		if (!value || value === legacyDefault) return localizedDefault;
+		return value;
+	};
 	const [showPassword, setShowPassword] = useState(false);
 	const [passwordProtectionSettings, setPasswordProtectionSettings] = useState({
 		enabled: localSettings.passwordProtection?.enabled,
 		password: localSettings.passwordProtection?.password || "",
-		message:
-			localSettings.passwordProtection?.message ||
+		message: localizeLegacyDefault(
+			localSettings.passwordProtection?.message,
 			"This form is password protected. Please enter the password to continue.",
+			t("defaultMessage")
+		),
 	});
 
 	const [saving, setSaving] = useState(false);
@@ -71,16 +86,18 @@ export function PasswordProtectionSection({
 		setPasswordProtectionSettings({
 			enabled: localSettings.passwordProtection?.enabled,
 			password: localSettings.passwordProtection?.password || "",
-			message:
-				localSettings.passwordProtection?.message ||
+			message: localizeLegacyDefault(
+				localSettings.passwordProtection?.message,
 				"This form is password protected. Please enter the password to continue.",
+				t("defaultMessage")
+			),
 		});
 		setHasChanges(false);
 	};
 
 	const savePasswordProtection = async () => {
 		if (!formId) {
-			toast.error("Form ID is required to save settings");
+			toast.error(tCommon("formIdRequiredToSaveSettings"));
 			return;
 		}
 
@@ -102,12 +119,12 @@ export function PasswordProtectionSection({
 			updatePasswordProtection(trimmed);
 			setSaved(true);
 			setHasChanges(false);
-			toast.success("Password protection settings saved successfully");
+			toast.success(t("saved"));
 
 			setTimeout(() => setSaved(false), 2000);
 		} catch (error) {
 			console.error("Error saving password protection:", error);
-			toast.error("Failed to save password protection settings");
+			toast.error(t("saveFailed"));
 		} finally {
 			setSaving(false);
 		}
@@ -128,19 +145,18 @@ export function PasswordProtectionSection({
 			announcement.setAttribute("aria-live", "polite");
 			announcement.setAttribute("aria-atomic", "true");
 			announcement.className = "sr-only";
-			announcement.textContent =
-				"Password protection settings saved successfully";
+			announcement.textContent = t("saved");
 			document.body.appendChild(announcement);
 
 			setTimeout(() => {
 				document.body.removeChild(announcement);
 			}, 1000);
 		}
-	}, [saved]);
+	}, [saved, t]);
 
 	return (
 		<div
-			aria-label="Password protection settings"
+			aria-label={t("ariaSettings")}
 			className="flex flex-col gap-4"
 			onKeyDown={(e) => {
 				const target = e.target as HTMLElement;
@@ -168,16 +184,16 @@ export function PasswordProtectionSection({
 								className="flex items-center gap-2 text-lg tracking-tight"
 								id="password-protection-title"
 							>
-								Password Protection{" "}
+								{t("title")}{" "}
 								{hasChanges && (
 									<Badge className="gap-2" variant="secondary">
 										<div className="size-2 rounded-full bg-orange-500" />
-										Unsaved changes
+										{tCommon("unsavedChanges")}
 									</Badge>
 								)}
 							</CardTitle>
 							<CardDescription id="password-protection-description">
-								Restrict access to your form with a password
+								{t("description")}
 							</CardDescription>
 						</div>
 					</div>
@@ -189,13 +205,13 @@ export function PasswordProtectionSection({
 								className="font-medium text-sm"
 								htmlFor="password-protection-enabled"
 							>
-								Enable Password Protection
+								{t("enableLabel")}
 							</Label>
 							<p
 								className="text-muted-foreground text-xs"
 								id="password-protection-enabled-description"
 							>
-								Require users to enter a password to access the form
+								{t("enableDescription")}
 							</p>
 						</div>
 						<Switch
@@ -216,7 +232,7 @@ export function PasswordProtectionSection({
 										className="font-medium text-sm"
 										htmlFor="form-password"
 									>
-										Password
+										{t("passwordLabel")}
 									</Label>
 									<div className="relative">
 										<Input
@@ -235,13 +251,15 @@ export function PasswordProtectionSection({
 													(e.target as HTMLElement).blur();
 												}
 											}}
-											placeholder="Enter form password"
+											placeholder={t("passwordPlaceholder")}
 											type={showPassword ? "text" : "password"}
 											value={passwordProtectionSettings.password}
 										/>
 										<Button
 											aria-label={
-												showPassword ? "Hide password" : "Show password"
+												showPassword
+													? t("hidePasswordAria")
+													: t("showPasswordAria")
 											}
 											className="absolute top-0 right-0 h-full px-3 py-2 hover:bg-transparent"
 											onClick={() => setShowPassword(!showPassword)}
@@ -257,7 +275,7 @@ export function PasswordProtectionSection({
 										</Button>
 									</div>
 									<p className="text-muted-foreground text-xs">
-										Users will need to enter this password to access the form
+										{t("passwordDescription")}
 									</p>
 								</div>
 
@@ -266,7 +284,7 @@ export function PasswordProtectionSection({
 										className="font-medium text-sm"
 										htmlFor="password-message"
 									>
-										Custom Message
+										{t("customMessageLabel")}
 									</Label>
 									<Textarea
 										className="resize-none text-base shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-1 md:text-sm"
@@ -280,12 +298,12 @@ export function PasswordProtectionSection({
 												(e.target as HTMLElement).blur();
 											}
 										}}
-										placeholder="Enter custom message for password prompt"
+										placeholder={t("customMessagePlaceholder")}
 										rows={2}
 										value={passwordProtectionSettings.message}
 									/>
 									<p className="text-muted-foreground text-xs">
-										Message shown to users when they need to enter the password
+										{t("customMessageDescription")}
 									</p>
 								</div>
 							</div>
@@ -297,14 +315,14 @@ export function PasswordProtectionSection({
 							>
 								<div className="flex flex-col gap-2">
 									<h4 className="font-medium text-foreground text-sm">
-										Current Configuration
+										{t("currentConfiguration")}
 									</h4>
 									<p className="text-muted-foreground text-sm">
-										Password protection is{" "}
+										{t("summaryPrefix")}{" "}
 										<span className="font-semibold text-foreground">
-											enabled
+											{t("enabled")}
 										</span>
-										. Users will need to enter the password to access the form.
+										{t("summarySuffix")}
 									</p>
 								</div>
 							</div>
@@ -314,15 +332,13 @@ export function PasswordProtectionSection({
 					{!passwordProtectionSettings.enabled && (
 						<div className="rounded-lg bg-muted/30 p-4">
 							<p className="text-muted-foreground text-sm">
-								Password protection restricts access to your form by requiring
-								users to enter a password before they can view and submit the
-								form.
+								{t("disabledDescription")}
 							</p>
 						</div>
 					)}
 
 					<div
-						aria-label="Password protection actions"
+						aria-label={t("actionsAria")}
 						className="flex items-center justify-between"
 						role="group"
 					>
@@ -334,14 +350,14 @@ export function PasswordProtectionSection({
 									size="sm"
 									variant="ghost"
 								>
-									Reset
+									{tCommon("reset")}
 								</Button>
 							)}
 						</div>
 						<div className="flex items-center gap-2">
 							<Button
 								aria-describedby="password-protection-description"
-								aria-label="Save password protection settings"
+								aria-label={t("saveAria")}
 								disabled={saving || !hasChanges}
 								loading={saving}
 								onClick={savePasswordProtection}
@@ -352,7 +368,7 @@ export function PasswordProtectionSection({
 									}
 								}}
 							>
-								Save
+								{tCommon("save")}
 							</Button>
 						</div>
 					</div>

@@ -3,7 +3,10 @@
     "dashboard": "Panel",
     "feedback": "Comentarios",
     "logOut": "Cerrar sesión",
-    "loading": "Cargando"
+    "loading": "Cargando",
+    "loadingProfile": "Cargando perfil",
+    "loadingFormsSidebar": "Cargando barra lateral de formularios",
+    "loadingFormsManagement": "Cargando gestión de formularios"
   },
   "profile": {
     "userProfileInformation": "Información del perfil de usuario",
@@ -220,6 +223,294 @@
       },
       "toasts": {
         "exportCreated": "Exportación cifrada del formulario creada."
+      }
+    }
+  },
+  "admin": {
+    "page": {
+      "aria": {
+        "dashboard": "Panel de administración",
+        "announcements": "Gestión de anuncios",
+        "expireTrials": "Gestión de expiración de pruebas",
+        "users": "Gestión de usuarios"
+      },
+      "announcements": {
+        "title": "Enviar anuncios",
+        "signedInAs": "Sesión iniciada como {email}"
+      },
+      "expireTrials": {
+        "title": "Expirar pruebas",
+        "description": "Ejecuta manualmente el cron para expirar pruebas gratuitas"
+      },
+      "users": {
+        "title": "Todos los usuarios ({count})",
+        "description": "Gestiona y revisa todos los usuarios registrados"
+      }
+    },
+    "announcementForm": {
+      "labels": {
+        "recipientEmails": "Correos destinatarios",
+        "subject": "Asunto",
+        "content": "Contenido (compatible con Markdown)"
+      },
+      "placeholders": {
+        "recipientEmails": "uno@ejemplo.com, dos@ejemplo.com\\no\\ntres@ejemplo.com",
+        "subject": "Asunto del anuncio",
+        "content": "# Título\\n\\nDetalles aquí..."
+      },
+      "help": {
+        "recipientFormat": "Separado por comas o por líneas."
+      },
+      "actions": {
+        "loading": "Cargando...",
+        "prefillFromUsers": "Rellenar desde usuarios",
+        "sendAnnouncement": "Enviar anuncio"
+      },
+      "toasts": {
+        "fetchEmailsFailed": "No se pudieron obtener los correos",
+        "loadedEmails": "Se cargaron {count} correos",
+        "sending": "Enviando anuncios...",
+        "sentCount": "Se enviaron {count} correo(s)",
+        "failedWithError": "Error: {error}",
+        "failedToSendFallback": "No se pudo enviar"
+      }
+    },
+    "expireTrialsControl": {
+      "title": "Expirar pruebas",
+      "description": "Ejecuta manualmente el cron para expirar pruebas gratuitas con más de 14 días",
+      "unknownError": "Error desconocido",
+      "actions": {
+        "running": "Ejecutando...",
+        "run": "Ejecutar expiración de pruebas"
+      },
+      "result": {
+        "success": "Éxito",
+        "error": "Error",
+        "updatedUsersCount": "{count} usuario(s) actualizados",
+        "updatedUsers": "Usuarios actualizados:"
+      },
+      "toasts": {
+        "updatedSuccess": "Se actualizaron correctamente {count} usuario(s) de prueba a gratis",
+        "failedWithError": "Error: {error}",
+        "errorWithMessage": "Error: {message}"
+      }
+    },
+    "usersTable": {
+      "search": {
+        "aria": "Buscar usuarios",
+        "placeholder": "Buscar usuarios por nombre, correo, nombre de cliente o ID de Polar..."
+      },
+      "filters": {
+        "premiumAria": "Filtrar por estado premium",
+        "trialAria": "Filtrar por estado de prueba",
+        "allPremium": "Todos (premium)",
+        "premiumOnly": "Solo premium",
+        "freeOnly": "Solo gratis",
+        "allTrial": "Todas las pruebas",
+        "trialOnly": "Solo en prueba",
+        "noTrial": "Sin prueba",
+        "clearAria": "Limpiar todos los filtros",
+        "clear": "Limpiar",
+        "filteredBy": "Filtrado por:"
+      },
+      "columns": {
+        "uid": "UID",
+        "name": "Nombre",
+        "email": "Correo",
+        "premium": "Premium",
+        "trial": "Prueba",
+        "customerName": "Nombre del cliente",
+        "polarId": "ID de Polar",
+        "created": "Creado",
+        "updated": "Actualizado"
+      },
+      "sort": {
+        "uidAria": "Ordenar por UID",
+        "nameAria": "Ordenar por nombre",
+        "emailAria": "Ordenar por correo",
+        "premiumAria": "Ordenar por estado premium",
+        "trialAria": "Ordenar por estado de prueba",
+        "createdAria": "Ordenar por fecha de creación",
+        "updatedAria": "Ordenar por fecha de actualización"
+      },
+      "table": {
+        "aria": "Tabla de usuarios"
+      },
+      "badges": {
+        "premium": "Premium",
+        "free": "Gratis",
+        "freeTrial": "Prueba gratis",
+        "noFreeTrial": "Sin prueba gratis"
+      },
+      "row": {
+        "viewDetailsFor": "Ver detalles de {name}",
+        "premiumStatusAria": "Estado premium: {status}",
+        "trialStatusAria": "Estado de prueba: {status}"
+      },
+      "showingRange": "Mostrando {start}-{end} de {total} usuarios",
+      "showLabel": "Mostrar:",
+      "itemsPerPageAria": "Elementos por página",
+      "empty": {
+        "filtered": "Ningún usuario coincide con tus filtros",
+        "default": "No se encontraron usuarios"
+      },
+      "pagination": {
+        "pageOf": "Página {current} de {total}",
+        "previousAria": "Ir a la página anterior",
+        "previous": "Anterior",
+        "goToPageAria": "Ir a la página {page}",
+        "nextAria": "Ir a la página siguiente",
+        "next": "Siguiente"
+      }
+    },
+    "userControls": {
+      "title": "Controles de administración",
+      "description": "Gestiona el estado y permisos del usuario",
+      "sections": {
+        "freeTrial": "Prueba gratis",
+        "premiumStatus": "Estado premium",
+        "dangerZone": "Zona de peligro"
+      },
+      "actions": {
+        "removeTrial": "Quitar prueba",
+        "assignTrial": "Asignar prueba",
+        "removePremium": "Quitar premium",
+        "assignPremium": "Asignar premium",
+        "deleteUser": "Eliminar usuario"
+      },
+      "warning": {
+        "label": "Advertencia:",
+        "message": "Eliminar un usuario eliminará permanentemente todos sus formularios, envíos y datos. Esta acción no se puede deshacer."
+      },
+      "confirm": {
+        "title": "Eliminar usuario",
+        "confirm": "Eliminar usuario",
+        "cancel": "Cancelar",
+        "description": "¿Seguro que quieres eliminar al usuario {userName}? Esta acción no se puede deshacer y eliminará todos sus formularios y datos."
+      }
+    },
+    "userProfile": {
+      "backToAdmin": "Volver a admin",
+      "invalidUserId": {
+        "title": "ID de usuario inválido",
+        "description": "No se proporcionó un ID de usuario en la URL."
+      },
+      "notFound": {
+        "title": "Usuario no encontrado",
+        "description": "El usuario que buscas no existe."
+      },
+      "userInformation": "Información del usuario",
+      "labels": {
+        "uid": "UID",
+        "premiumStatus": "Estado premium",
+        "trialStatus": "Estado de prueba",
+        "customerName": "Nombre del cliente",
+        "polarCustomerId": "ID de cliente de Polar",
+        "memberSince": "Miembro desde"
+      },
+      "badges": {
+        "premium": "Premium",
+        "free": "Gratis",
+        "freeTrial": "Prueba gratis",
+        "noTrial": "Sin prueba"
+      },
+      "trialStatus": {
+        "title": "Estado de prueba gratis",
+        "expiredBadge": "Prueba vencida",
+        "endedDaysAgo": "La prueba gratis terminó hace {days} días",
+        "expiringSoonBadge": "Vence pronto",
+        "activeBadge": "Prueba activa",
+        "daysLeft": "{days, plural, one {# día restante de prueba gratis} other {# días restantes de prueba gratis}}",
+        "startedOn": "Prueba iniciada:"
+      },
+      "forms": {
+        "title": "Formularios ({count})",
+        "description": "Todos los formularios creados por este usuario",
+        "empty": "Este usuario aún no ha creado formularios.",
+        "table": {
+          "formTitle": "Título del formulario",
+          "description": "Descripción",
+          "status": "Estado",
+          "submissions": "Envíos",
+          "created": "Creado",
+          "actions": "Acciones"
+        },
+        "status": {
+          "published": "Publicado",
+          "draft": "Borrador"
+        },
+        "actions": {
+          "view": "Ver",
+          "details": "Detalles"
+        }
+      }
+    },
+    "formDetails": {
+      "pageAria": "Página de detalles del formulario",
+      "backToAdmin": "Volver a admin",
+      "backToAdminAria": "Volver al panel de administración",
+      "noDescription": "No se proporcionó descripción",
+      "viewForm": "Ver formulario",
+      "viewFormAria": "Ver formulario en una nueva pestaña",
+      "invalidFormId": {
+        "aria": "Error de ID de formulario inválido",
+        "title": "ID de formulario inválido",
+        "description": "No se proporcionó un ID de formulario en la URL."
+      },
+      "notFound": {
+        "aria": "Error de formulario no encontrado",
+        "title": "Formulario no encontrado",
+        "description": "El formulario que buscas no existe."
+      },
+      "badges": {
+        "published": "Publicado",
+        "draft": "Borrador",
+        "enabled": "Habilitado",
+        "disabled": "Deshabilitado"
+      },
+      "statistics": {
+        "aria": "Estadísticas del formulario",
+        "status": "Estado",
+        "formStatusAria": "Estado del formulario: {status}",
+        "submissions": "Envíos",
+        "submissionsCountAria": "{count} envíos",
+        "created": "Creado",
+        "createdOnAria": "Creado el {date}",
+        "apiStatus": "Estado de API",
+        "apiStatusAria": "Estado de API: {status}"
+      },
+      "details": {
+        "title": "Detalles del formulario",
+        "formId": "ID del formulario",
+        "formIdAria": "ID del formulario: {id}",
+        "owner": "Propietario",
+        "viewOwnerAria": "Ver detalles del propietario {name}",
+        "unknown": "Desconocido",
+        "slug": "Slug",
+        "slugAria": "Slug del formulario: {slug}",
+        "notSet": "Sin establecer",
+        "lastUpdated": "Última actualización",
+        "lastUpdatedAria": "Última actualización: {date}",
+        "apiKey": "Clave API",
+        "apiKeyAria": "Clave API: {key}"
+      },
+      "schema": {
+        "title": "Esquema del formulario",
+        "aria": "JSON del esquema del formulario"
+      },
+      "submissions": {
+        "title": "Envíos del formulario ({count})",
+        "description": "Todas las respuestas enviadas a este formulario",
+        "emptyAria": "Sin envíos de formulario",
+        "empty": "Aún no hay envíos.",
+        "listAria": "Lista de envíos del formulario",
+        "itemAria": "Envío {number}",
+        "itemLabel": "Envío #{number}",
+        "submittedOnAria": "Enviado el {date}",
+        "ipAria": "Dirección IP: {ip}",
+        "ipLabel": "IP: {ip}",
+        "fieldAria": "Campo: {key}",
+        "valueAria": "Valor de {key}: {value}"
       }
     }
   }

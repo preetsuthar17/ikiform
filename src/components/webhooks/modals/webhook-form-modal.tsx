@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -25,23 +26,14 @@ import type {
 	WebhookMethod,
 } from "../hooks/useWebhookManagement";
 
-const EVENT_OPTIONS = [
-	{ label: "Form Submitted", value: "form_submitted" },
-	{ label: "Form Viewed", value: "form_viewed" },
-	{ label: "Form Started", value: "form_started" },
-];
-
-const HTTP_METHODS: {
-	value: WebhookMethod;
-	label: string;
-	description: string;
-}[] = [
-	{ value: "GET", label: "GET", description: "Retrieve data (no body)" },
-	{ value: "POST", label: "POST", description: "Create or submit data" },
-	{ value: "PUT", label: "PUT", description: "Update entire resource" },
-	{ value: "PATCH", label: "PATCH", description: "Update partial resource" },
-	{ value: "DELETE", label: "DELETE", description: "Remove resource" },
-	{ value: "HEAD", label: "HEAD", description: "Get headers only" },
+const EVENT_VALUES = ["form_submitted", "form_viewed", "form_started"] as const;
+const HTTP_METHOD_VALUES: WebhookMethod[] = [
+	"GET",
+	"POST",
+	"PUT",
+	"PATCH",
+	"DELETE",
+	"HEAD",
 ];
 
 export function WebhookFormModal({
@@ -57,14 +49,56 @@ export function WebhookFormModal({
 	initialWebhook?: WebhookConfig;
 	loading?: boolean;
 }) {
+	const t = useTranslations("product.formBuilder.formSettings.webhooks.formModal");
 	const steps = [
-		{ id: "details", label: "Details", required: false },
-		{ id: "basics", label: "Basics", required: true },
-		{ id: "events", label: "Events", required: true },
-		{ id: "headers", label: "Headers", required: false },
-		{ id: "payload", label: "Payload", required: false },
-		{ id: "notifications", label: "Notifications", required: false },
+		{ id: "details", label: t("steps.details"), required: false },
+		{ id: "basics", label: t("steps.basics"), required: true },
+		{ id: "events", label: t("steps.events"), required: true },
+		{ id: "headers", label: t("steps.headers"), required: false },
+		{ id: "payload", label: t("steps.payload"), required: false },
+		{ id: "notifications", label: t("steps.notifications"), required: false },
 	] as const;
+	const eventOptions = [
+		{ label: t("events.formSubmitted"), value: EVENT_VALUES[0] },
+		{ label: t("events.formViewed"), value: EVENT_VALUES[1] },
+		{ label: t("events.formStarted"), value: EVENT_VALUES[2] },
+	] as const;
+	const httpMethods: {
+		value: WebhookMethod;
+		label: string;
+		description: string;
+	}[] = [
+		{
+			value: "GET",
+			label: "GET",
+			description: t("httpMethodDescriptions.get"),
+		},
+		{
+			value: "POST",
+			label: "POST",
+			description: t("httpMethodDescriptions.post"),
+		},
+		{
+			value: "PUT",
+			label: "PUT",
+			description: t("httpMethodDescriptions.put"),
+		},
+		{
+			value: "PATCH",
+			label: "PATCH",
+			description: t("httpMethodDescriptions.patch"),
+		},
+		{
+			value: "DELETE",
+			label: "DELETE",
+			description: t("httpMethodDescriptions.delete"),
+		},
+		{
+			value: "HEAD",
+			label: "HEAD",
+			description: t("httpMethodDescriptions.head"),
+		},
+	];
 
 	const [currentStep, setCurrentStep] = useState(0);
 	const [name, setName] = useState(initialWebhook?.name || "");
@@ -131,9 +165,7 @@ export function WebhookFormModal({
 		setFormError(null);
 
 		if (!(url && Array.isArray(events)) || events.length === 0 || !method) {
-			setFormError(
-				"Please provide a Webhook URL, select at least one event, and choose a method."
-			);
+			setFormError(t("errors.missingBasicsAndEvent"));
 			requestAnimationFrame(() => {
 				urlInputRef.current?.focus();
 			});
@@ -202,7 +234,7 @@ export function WebhookFormModal({
 	}
 
 	function toggleAllEvents(selectAll: boolean) {
-		setEvents(selectAll ? EVENT_OPTIONS.map((e) => e.value) : []);
+		setEvents(selectAll ? eventOptions.map((e) => e.value) : []);
 	}
 
 	useEffect(() => {
@@ -241,7 +273,7 @@ export function WebhookFormModal({
 	function canProceedFromStep(stepIndex: number) {
 		const stepId = steps[stepIndex]?.id;
 		if (stepId === "basics" && !(url && method)) {
-			setFormError("Please provide a Webhook URL and select a method.");
+			setFormError(t("errors.missingBasics"));
 			requestAnimationFrame(() => {
 				urlInputRef.current?.focus();
 			});
@@ -251,7 +283,7 @@ export function WebhookFormModal({
 			stepId === "events" &&
 			(!Array.isArray(events) || events.length === 0)
 		) {
-			setFormError("Please select at least one event.");
+			setFormError(t("errors.missingEvent"));
 			return false;
 		}
 		setFormError(null);
@@ -274,7 +306,7 @@ export function WebhookFormModal({
 				<div className="px-6 pt-5 pb-3">
 					<DialogHeader className="flex flex-row items-center justify-between p-0">
 						<DialogTitle>
-							{initialWebhook ? "Edit Webhook" : "Add Webhook"}
+							{initialWebhook ? t("editTitle") : t("addTitle")}
 						</DialogTitle>
 					</DialogHeader>
 					{formError ? (
@@ -306,7 +338,7 @@ export function WebhookFormModal({
 					onSubmit={handleSubmit}
 				>
 					<div className="flex items-center gap-3 px-6 py-3">
-						<ol aria-label="Steps" className="flex items-center gap-2 text-sm">
+						<ol aria-label={t("stepsAria")} className="flex items-center gap-2 text-sm">
 							{steps.map((step, idx) => {
 								const isCurrent = idx === currentStep;
 								const isCompleted = idx < currentStep;
@@ -348,25 +380,25 @@ export function WebhookFormModal({
 								<div className="flex flex-col gap-3">
 									<div className="grid gap-4 md:grid-cols-2">
 										<div className="flex flex-col gap-2">
-											<Label htmlFor="webhook-name">Name (optional)</Label>
+											<Label htmlFor="webhook-name">{t("nameOptional")}</Label>
 											<Input
 												autoComplete="off"
 												id="webhook-name"
 												onChange={(e) => setName(e.target.value)}
-												placeholder="Production Webhook"
+												placeholder={t("namePlaceholder")}
 												ref={nameInputRef}
 												value={name}
 											/>
 										</div>
 										<div className="flex flex-col gap-2">
 											<Label htmlFor="webhook-description">
-												Description (optional)
+												{t("descriptionOptional")}
 											</Label>
 											<Input
 												autoComplete="off"
 												id="webhook-description"
 												onChange={(e) => setDescription(e.target.value)}
-												placeholder="Sends submissions to our backend"
+												placeholder={t("descriptionPlaceholder")}
 												value={description}
 											/>
 										</div>
@@ -377,13 +409,13 @@ export function WebhookFormModal({
 								<div className="flex flex-col gap-3">
 									<div className="grid gap-4 md:grid-cols-2">
 										<div className="flex flex-col gap-2">
-											<Label htmlFor="webhook-url">Webhook URL</Label>
+											<Label htmlFor="webhook-url">{t("webhookUrl")}</Label>
 											<Input
 												autoFocus
 												id="webhook-url"
 												inputMode="url"
 												onChange={(e) => setUrl(e.target.value)}
-												placeholder="https://example.com/webhook"
+												placeholder={t("webhookUrlPlaceholder")}
 												ref={urlInputRef}
 												required
 												type="url"
@@ -391,24 +423,24 @@ export function WebhookFormModal({
 											/>
 										</div>
 										<div className="flex flex-col gap-2">
-											<Label htmlFor="webhook-method">HTTP Method</Label>
+											<Label htmlFor="webhook-method">{t("httpMethod")}</Label>
 											<Select
 												onValueChange={(val) => setMethod(val as WebhookMethod)}
 												value={method}
 											>
 												<SelectTrigger
-													aria-label="Select HTTP method"
+													aria-label={t("selectHttpMethodAria")}
 													className="text-left"
 													id="webhook-method"
 												>
 													<SelectValue
 														className="flex items-center"
-														placeholder="Select method"
+														placeholder={t("selectMethodPlaceholder")}
 													/>
 												</SelectTrigger>
 												<SelectContent>
 													<div className="max-h-64 overflow-y-auto">
-														{HTTP_METHODS.map((httpMethod) => (
+														{httpMethods.map((httpMethod) => (
 															<SelectItem
 																className="flex cursor-pointer items-center gap-2 rounded px-2 py-1.5 outline-none transition-colors focus:bg-accent focus:text-accent-foreground"
 																description={httpMethod.description}
@@ -435,7 +467,7 @@ export function WebhookFormModal({
 											className="text-muted-foreground text-xs"
 											id="events-help"
 										>
-											Choose when to trigger this webhook.
+											{t("eventsHelp")}
 										</p>
 										<div className="flex gap-2">
 											<Button
@@ -444,7 +476,7 @@ export function WebhookFormModal({
 												type="button"
 												variant="outline"
 											>
-												Select all
+												{t("selectAll")}
 											</Button>
 											<Button
 												onClick={() => toggleAllEvents(false)}
@@ -452,7 +484,7 @@ export function WebhookFormModal({
 												type="button"
 												variant="outline"
 											>
-												Clear
+												{t("clear")}
 											</Button>
 										</div>
 									</div>
@@ -460,7 +492,7 @@ export function WebhookFormModal({
 										aria-describedby="events-help"
 										className="grid grid-cols-1 gap-3 sm:grid-cols-2"
 									>
-										{EVENT_OPTIONS.map((opt) => {
+										{eventOptions.map((opt) => {
 											const checked = events.includes(opt.value);
 											return (
 												<Label
@@ -478,7 +510,7 @@ export function WebhookFormModal({
 															)
 														}
 														ref={
-															opt.value === EVENT_OPTIONS[0].value
+															opt.value === eventOptions[0].value
 																? firstEventCheckboxRef
 																: undefined
 														}
@@ -494,7 +526,7 @@ export function WebhookFormModal({
 							{steps[currentStep]?.id === "headers" ? (
 								<div className="flex flex-col gap-3">
 									<p className="text-muted-foreground text-xs">
-										Optional HTTP headers sent with each request.
+										{t("headersHelp")}
 									</p>
 									<div className="flex flex-col gap-3">
 										{headerEntries.map(([k, v], i) => (
@@ -504,36 +536,42 @@ export function WebhookFormModal({
 											>
 												<div className="col-span-5 flex flex-col gap-2">
 													<Label htmlFor={`header-name-${i}`}>
-														Header name
+														{t("headerName")}
 													</Label>
 													<Input
-														aria-label={`Header ${i + 1} name`}
+														aria-label={t("headerNameAria", {
+															index: i + 1,
+														})}
 														id={`header-name-${i}`}
 														onChange={(e) =>
 															updateHeaderAt(i, e.target.value, v)
 														}
-														placeholder="Header name (e.g., Authorization)"
+														placeholder={t("headerNamePlaceholder")}
 														ref={i === 0 ? firstHeaderInputRef : undefined}
 														value={k}
 													/>
 												</div>
 												<div className="col-span-6 flex flex-col gap-2">
 													<Label htmlFor={`header-value-${i}`}>
-														Header value
+														{t("headerValue")}
 													</Label>
 													<Input
-														aria-label={`Header ${i + 1} value`}
+														aria-label={t("headerValueAria", {
+															index: i + 1,
+														})}
 														id={`header-value-${i}`}
 														onChange={(e) =>
 															updateHeaderAt(i, k, e.target.value)
 														}
-														placeholder="Header value"
+														placeholder={t("headerValuePlaceholder")}
 														value={v}
 													/>
 												</div>
 												<div className="col-span-1 flex justify-end">
 													<Button
-														aria-label={`Remove header ${i + 1}`}
+														aria-label={t("removeHeaderAria", {
+															index: i + 1,
+														})}
 														onClick={() => removeHeaderAt(i)}
 														type="button"
 														variant="outline"
@@ -549,7 +587,7 @@ export function WebhookFormModal({
 												type="button"
 												variant="secondary"
 											>
-												Add header
+												{t("addHeader")}
 											</Button>
 										</div>
 									</div>
@@ -561,7 +599,7 @@ export function WebhookFormModal({
 									<div className="flex flex-col gap-4">
 										<div className="flex min-w-[250px] flex-1 flex-col gap-2">
 											<Label htmlFor="webhook-payload">
-												Payload Template (optional)
+												{t("payloadTemplateOptional")}
 											</Label>
 											<Textarea
 												className="min-h-[140px] font-mono"
@@ -574,27 +612,26 @@ export function WebhookFormModal({
 										</div>
 										<div className="min-w-[250px] flex-1">
 											<div className="flex flex-col gap-2 rounded border p-3 text-sm">
-												<b>Available Variables:</b>
+												<b>{t("availableVariables")}</b>
 												<ul className="flex flex-col gap-2 text-xs">
 													<li>
-														<code>{"{{event}}"}</code> - Event type (e.g.,
-														form_submitted)
+														<code>{"{{event}}"}</code> - {t("variables.event")}
 													</li>
 													<li>
-														<code>{"{{formId}}"}</code> - Form ID
+														<code>{"{{formId}}"}</code> - {t("variables.formId")}
 													</li>
 													<li>
-														<code>{"{{formData}}"}</code> - Raw form data
+														<code>{"{{formData}}"}</code> - {t("variables.formData")}
 													</li>
 													<li>
-														<code>{"{{formatted}}"}</code> - Human-friendly
-														formatted data
+														<code>{"{{formatted}}"}</code> - {t("variables.formatted")}
 													</li>
 													<li>
-														<code>{"{{timestamp}}"}</code> - ISO timestamp
+														<code>{"{{timestamp}}"}</code> - {t("variables.timestamp")}
 													</li>
 													<li>
-														<code>{"{{submissionId}}"}</code> - Submission ID
+														<code>{"{{submissionId}}"}</code> -{" "}
+														{t("variables.submissionId")}
 													</li>
 												</ul>
 											</div>
@@ -608,14 +645,14 @@ export function WebhookFormModal({
 									<div className="flex flex-col gap-4">
 										<div className="flex flex-col gap-2">
 											<Label htmlFor="notification-email">
-												Notification Email (optional)
+												{t("notificationEmailOptional")}
 											</Label>
 											<Input
 												autoComplete="email"
 												id="notification-email"
 												inputMode="email"
 												onChange={(e) => setNotificationEmail(e.target.value)}
-												placeholder="you@example.com"
+												placeholder={t("notificationEmailPlaceholder")}
 												ref={notificationEmailRef}
 												type="email"
 												value={notificationEmail}
@@ -629,7 +666,7 @@ export function WebhookFormModal({
 														setNotifyOnSuccess(!!checked)
 													}
 												/>
-												<span className="text-sm">Email on success</span>
+												<span className="text-sm">{t("emailOnSuccess")}</span>
 											</Label>
 											<Label className="flex cursor-pointer items-center gap-2">
 												<Checkbox
@@ -638,7 +675,7 @@ export function WebhookFormModal({
 														setNotifyOnFailure(!!checked)
 													}
 												/>
-												<span className="text-sm">Email on failure</span>
+												<span className="text-sm">{t("emailOnFailure")}</span>
 											</Label>
 										</div>
 									</div>
@@ -651,7 +688,7 @@ export function WebhookFormModal({
 					<div className="flex items-center justify-between gap-2 px-6 py-4">
 						<div className="flex items-center gap-2">
 							<Button onClick={handleClose} type="button" variant="outline">
-								Cancel
+								{t("cancel")}
 							</Button>
 						</div>
 						<div className="flex items-center gap-2">
@@ -665,7 +702,7 @@ export function WebhookFormModal({
 								type="button"
 								variant="outline"
 							>
-								Back
+								{t("back")}
 							</Button>
 							{currentStep < steps.length - 1 ? (
 								<Button
@@ -677,18 +714,18 @@ export function WebhookFormModal({
 									type="button"
 								>
 									{steps[currentStep]?.required
-										? "Next"
+										? t("next")
 										: (steps[currentStep]?.id === "details" &&
 													(name.trim() || description.trim())) ||
 												(steps[currentStep]?.id === "headers" && hasHeaders) ||
 												(steps[currentStep]?.id === "payload" &&
 													payloadTemplate.trim())
-											? "Next"
-											: "Skip"}
+											? t("next")
+											: t("skip")}
 								</Button>
 							) : (
 								<Button disabled={loading} loading={loading} type="submit">
-									{initialWebhook ? "Update" : "Create"} Webhook
+									{initialWebhook ? t("updateWebhook") : t("createWebhook")}
 								</Button>
 							)}
 						</div>

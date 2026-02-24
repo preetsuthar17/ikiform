@@ -8,6 +8,7 @@ import {
 	Trophy,
 	XCircle,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -30,6 +31,7 @@ export function QuizResults({
 	onRetake,
 	customMessage,
 }: QuizResultsProps) {
+	const t = useTranslations("product.formBuilder.formRenderer.quizResults");
 	const {
 		score,
 		totalPossible,
@@ -69,7 +71,7 @@ export function QuizResults({
 				</div>
 
 				<h2 className="mb-4 font-bold text-2xl text-foreground">
-					{passed ? "Congratulations!" : "Quiz Complete"}
+					{passed ? t("titlePassed") : t("titleComplete")}
 				</h2>
 
 				{customMessage ? (
@@ -77,8 +79,8 @@ export function QuizResults({
 				) : (
 					<p className="mb-6 text-muted-foreground">
 						{passed
-							? "You've successfully completed the quiz!"
-							: "Thanks for taking the quiz. Keep practicing!"}
+							? t("descriptionPassed")
+							: t("descriptionRetry")}
 					</p>
 				)}
 
@@ -89,13 +91,13 @@ export function QuizResults({
 							<div className={`font-bold text-4xl ${getScoreColor()}`}>
 								{percentage}%
 							</div>
-							<p className="text-muted-foreground text-sm">Score</p>
+							<p className="text-muted-foreground text-sm">{t("score")}</p>
 						</div>
 						<div className="text-center">
 							<div className="font-bold text-2xl text-foreground">
 								{score}/{totalPossible}
 							</div>
-							<p className="text-muted-foreground text-sm">Points</p>
+							<p className="text-muted-foreground text-sm">{t("points")}</p>
 						</div>
 					</div>
 
@@ -108,13 +110,15 @@ export function QuizResults({
 						<div className="font-semibold text-foreground">
 							{answeredQuestions}
 						</div>
-						<p className="text-muted-foreground text-sm">Answered</p>
+						<p className="text-muted-foreground text-sm">{t("answered")}</p>
 					</div>
 					<div className="text-center">
 						<div className="font-semibold text-foreground">
 							{totalQuestions}
 						</div>
-						<p className="text-muted-foreground text-sm">Total Questions</p>
+						<p className="text-muted-foreground text-sm">
+							{t("totalQuestions")}
+						</p>
 					</div>
 				</div>
 
@@ -126,12 +130,12 @@ export function QuizResults({
 					{passed ? (
 						<>
 							<Award className="size-4" />
-							Passed
+							{t("passed")}
 						</>
 					) : (
 						<>
 							<TrendingUp className="size-4" />
-							Needs Improvement
+							{t("needsImprovement")}
 						</>
 					)}
 				</Badge>
@@ -141,7 +145,7 @@ export function QuizResults({
 					<div className="mt-6">
 						<Button className="gap-2" onClick={onRetake} variant="outline">
 							<RotateCcw className="size-4" />
-							Retake Quiz
+							{t("retakeQuiz")}
 						</Button>
 					</div>
 				)}
@@ -153,7 +157,7 @@ export function QuizResults({
 					<div className="mb-4 flex items-center gap-2">
 						<Info className="size-5 text-primary" />
 						<h3 className="font-semibold text-foreground text-lg">
-							Question by Question Results
+							{t("questionByQuestion")}
 						</h3>
 					</div>
 
@@ -164,7 +168,10 @@ export function QuizResults({
 									<div className="flex-1">
 										<div className="mb-2 flex items-center gap-2">
 											<span className="font-medium text-foreground text-sm">
-												Question {index + 1}: {fieldResult.fieldLabel}
+												{t("questionLabel", {
+													index: index + 1,
+													label: fieldResult.fieldLabel,
+												})}
 											</span>
 											{fieldResult.isCorrect ? (
 												<CheckCircle className="size-4 text-green-600" />
@@ -176,7 +183,7 @@ export function QuizResults({
 										<div className="flex flex-col gap-2 text-sm">
 											<div className="flex gap-4">
 												<span className="text-muted-foreground">
-													Your answer:
+													{t("yourAnswer")}
 												</span>
 												<span
 													className={
@@ -187,14 +194,14 @@ export function QuizResults({
 												>
 													{Array.isArray(fieldResult.userAnswer)
 														? fieldResult.userAnswer.join(", ")
-														: fieldResult.userAnswer || "No answer"}
+														: fieldResult.userAnswer || t("noAnswer")}
 												</span>
 											</div>
 
 											{!fieldResult.isCorrect && (
 												<div className="flex gap-4">
 													<span className="text-muted-foreground">
-														Correct answer:
+														{t("correctAnswer")}
 													</span>
 													<span className="text-green-600">
 														{Array.isArray(fieldResult.correctAnswer)
@@ -221,7 +228,9 @@ export function QuizResults({
 										<div className="font-semibold text-sm">
 											{fieldResult.points}/{fieldResult.maxPoints}
 										</div>
-										<div className="text-muted-foreground text-xs">points</div>
+										<div className="text-muted-foreground text-xs">
+											{t("pointsLower")}
+										</div>
 									</div>
 								</div>
 
