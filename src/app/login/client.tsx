@@ -112,15 +112,14 @@ export default function LoginForm() {
 			if (ignore || !isSessionReady) {
 				return;
 			}
-			router.replace(getPostLoginPath());
-			router.refresh();
+			window.location.assign(getPostLoginPath());
 		};
 
 		void syncAndRedirect();
 		return () => {
 			ignore = true;
 		};
-	}, [authLoading, ensureServerSession, getPostLoginPath, router, user]);
+	}, [authLoading, ensureServerSession, getPostLoginPath, user]);
 
 	const handleInput = useCallback((field: string, value: string) => {
 		setForm((f) => ({ ...f, [field]: value }));
@@ -259,7 +258,7 @@ export default function LoginForm() {
 						toast.error(t("toasts.unexpectedError"));
 						return;
 					}
-					router.replace(getPostLoginPath());
+					window.location.assign(getPostLoginPath());
 				}
 			}
 		} catch {
@@ -274,7 +273,6 @@ export default function LoginForm() {
 		form.password,
 		getPostLoginPath,
 		isSignUp,
-		router,
 		t,
 	]);
 
