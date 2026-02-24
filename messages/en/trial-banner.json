@@ -1,0 +1,16 @@
+{
+  "trialBanner": {
+    "aria": {
+      "status": "Trial status notification"
+    },
+    "endsInPrefix": "Your free trial ends in ",
+    "remainingSuffix": " remaining",
+    "expired": "Trial expired",
+    "units": {
+      "day": "d",
+      "hour": "h",
+      "minute": "m",
+      "second": "s"
+    }
+  }
+}

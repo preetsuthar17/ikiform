@@ -9,10 +9,10 @@ import { type AppLocale, routing } from "@/i18n/routing";
 import { getLocaleFromPathname, stripLocalePrefix } from "@/lib/i18n/pathname";
 import enFooterMessages from "../../messages/en/footer.json";
 import enNavMessages from "../../messages/en/nav.json";
-import enProductMessages from "../../messages/en/product.json";
+import enTrialBannerMessages from "../../messages/en/trial-banner.json";
 import esFooterMessages from "../../messages/es/footer.json";
 import esNavMessages from "../../messages/es/nav.json";
-import esProductMessages from "../../messages/es/product.json";
+import esTrialBannerMessages from "../../messages/es/trial-banner.json";
 
 interface ConditionalLayoutProps {
 	children: React.ReactNode;
@@ -24,7 +24,7 @@ const CHROME_MESSAGES: Record<
 		nav: typeof enNavMessages;
 		footer: typeof enFooterMessages;
 		product: {
-			trialBanner: typeof enProductMessages.trialBanner;
+			trialBanner: typeof enTrialBannerMessages.trialBanner;
 		};
 	}
 > = {
@@ -32,14 +32,14 @@ const CHROME_MESSAGES: Record<
 		nav: enNavMessages,
 		footer: enFooterMessages,
 		product: {
-			trialBanner: enProductMessages.trialBanner,
+			trialBanner: enTrialBannerMessages.trialBanner,
 		},
 	},
 	es: {
 		nav: esNavMessages,
 		footer: esFooterMessages,
 		product: {
-			trialBanner: esProductMessages.trialBanner,
+			trialBanner: esTrialBannerMessages.trialBanner,
 		},
 	},
 };
@@ -62,28 +62,21 @@ export default function ConditionalLayout({
 		normalizedPathname.includes("/demo-form-builder");
 
 	const isDashboard = normalizedPathname === "/dashboard";
-	const isHomePage = normalizedPathname === "/";
 
 	if (hideHeaderFooter) {
 		return <>{children}</>;
 	}
 
 	return (
-		<>
+		<NextIntlClientProvider locale={locale} messages={chromeMessages}>
 			<div
 				className={`z-10 flex min-h-screen flex-col gap-12 px-4 md:px-8 ${isDashboard ? "justify-start" : "justify-between"} ${isDashboard ? "pb-12" : ""}`}
 			>
-				<NextIntlClientProvider locale={locale} messages={chromeMessages}>
-					<Header />
-					<TrialBannerWrapper />
-				</NextIntlClientProvider>
+				<Header />
+				<TrialBannerWrapper />
 				{children}
-				{!isDashboard && (
-					<NextIntlClientProvider locale={locale} messages={chromeMessages}>
-						<Footer />
-					</NextIntlClientProvider>
-				)}
+				{!isDashboard && <Footer />}
 			</div>
-		</>
+		</NextIntlClientProvider>
 	);
 }
