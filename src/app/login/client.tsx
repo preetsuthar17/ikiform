@@ -97,8 +97,10 @@ export default function LoginForm() {
 		if (step === "password") passwordRef.current?.focus();
 	}, [step, loading]);
 
+	const [autoRedirectFailed, setAutoRedirectFailed] = useState(false);
+
 	useEffect(() => {
-		if (authLoading || !user) {
+		if (authLoading || !user || autoRedirectFailed) {
 			return;
 		}
 
@@ -109,7 +111,11 @@ export default function LoginForm() {
 				data: { session },
 			} = await supabase.auth.getSession();
 			const isSessionReady = await ensureServerSession(session);
-			if (ignore || !isSessionReady) {
+			if (ignore) {
+				return;
+			}
+			if (!isSessionReady) {
+				setAutoRedirectFailed(true);
 				return;
 			}
 			window.location.assign(getPostLoginPath());
@@ -119,7 +125,7 @@ export default function LoginForm() {
 		return () => {
 			ignore = true;
 		};
-	}, [authLoading, ensureServerSession, getPostLoginPath, user]);
+	}, [authLoading, autoRedirectFailed, ensureServerSession, getPostLoginPath, user]);
 
 	const handleInput = useCallback((field: string, value: string) => {
 		setForm((f) => ({ ...f, [field]: value }));
@@ -227,10 +233,12 @@ export default function LoginForm() {
 					try {
 						await fetch("/api/user", { method: "POST" });
 					} catch {}
-					if (data.user?.email_confirmed_at)
+					if (data.user?.email_confirmed_at) {
 						toast.success(t("toasts.accountCreatedVerified"));
-					else
+						setAutoRedirectFailed(false);
+					} else {
 						toast.success(t("toasts.accountCreatedCheckEmail"));
+					}
 				}
 			} else {
 				const { data, error } = await supabase.auth.signInWithPassword({
