@@ -21,8 +21,18 @@ const nextConfig: NextConfig = {
 	async redirects() {
 		return [
 			{
+				source: "/:locale(en|es)/feedback",
+				destination: "https://www.ikiform.com/f/feedback-form-ag334n",
+				permanent: false,
+			},
+			{
 				source: "/feedback",
 				destination: "https://www.ikiform.com/f/feedback-form-ag334n",
+				permanent: false,
+			},
+			{
+				source: "/:locale(en|es)/feature-request",
+				destination: "https://www.ikiform.com/f/feature-request-form-zo0tg5",
 				permanent: false,
 			},
 			{
@@ -31,8 +41,18 @@ const nextConfig: NextConfig = {
 				permanent: false,
 			},
 			{
+				source: "/:locale(en|es)/bug-report",
+				destination: "https://www.ikiform.com/f/bug-report-form-82iwa5",
+				permanent: false,
+			},
+			{
 				source: "/bug-report",
 				destination: "https://www.ikiform.com/f/bug-report-form-82iwa5",
+				permanent: false,
+			},
+			{
+				source: "/:locale(en|es)/github",
+				destination: "https://github.com/preetsuthar17/ikiform",
 				permanent: false,
 			},
 			{
@@ -41,13 +61,28 @@ const nextConfig: NextConfig = {
 				permanent: false,
 			},
 			{
+				source: "/:locale(en|es)/discord",
+				destination: "https://discord.gg/jM5BgDMaGX",
+				permanent: false,
+			},
+			{
 				source: "/discord",
 				destination: "https://discord.gg/jM5BgDMaGX",
 				permanent: false,
 			},
 			{
+				source: "/:locale(en|es)/email",
+				destination: "mailto:hi@ikiform.com",
+				permanent: false,
+			},
+			{
 				source: "/email",
 				destination: "mailto:hi@ikiform.com",
+				permanent: false,
+			},
+			{
+				source: "/:locale(en|es)/twitter",
+				destination: "https://x.com/preetsuthar17",
 				permanent: false,
 			},
 			{

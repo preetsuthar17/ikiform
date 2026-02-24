@@ -75,6 +75,7 @@ export async function proxy(request: NextRequest) {
 	const { pathname } = request.nextUrl;
 	const normalizedPathname = stripLocalePrefix(pathname);
 	const localeFromPath = getLocaleFromPathname(pathname);
+	let localeResponse: NextResponse | null = null;
 
 	if (normalizedPathname.startsWith("/forms/")) {
 		const id = normalizedPathname.split("/")[2];
@@ -108,15 +109,26 @@ export async function proxy(request: NextRequest) {
 	}
 
 	if (localeFromPath) {
-		const localeResponse = handleI18nRouting(request);
+		localeResponse = handleI18nRouting(request);
 		if (localeResponse.headers.has("location")) {
 			return localeResponse;
 		}
 	}
 
 	const response = shouldRefreshAuthSession(normalizedPathname)
-		? await updateSession(request)
-		: NextResponse.next();
+		? await updateSession(request, localeResponse?.headers)
+		: localeResponse ?? NextResponse.next();
+
+	if (localeResponse && response !== localeResponse) {
+		for (const [key, value] of localeResponse.headers.entries()) {
+			const lowerKey = key.toLowerCase();
+			if (lowerKey === "set-cookie" || lowerKey === "location") {
+				continue;
+			}
+			response.headers.set(key, value);
+		}
+	}
+
 	if (localeFromPath) {
 		response.cookies.set("NEXT_LOCALE", localeFromPath, {
 			path: "/",
