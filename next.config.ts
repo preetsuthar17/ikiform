@@ -21,6 +21,16 @@ const nextConfig: NextConfig = {
 	async redirects() {
 		return [
 			{
+				source: "/:locale(en|es)/f/:slug*",
+				destination: "/f/:slug*",
+				permanent: false,
+			},
+			{
+				source: "/:locale(en|es)/forms/:id/:path*",
+				destination: "/forms/:id/:path*",
+				permanent: false,
+			},
+			{
 				source: "/:locale(en|es)/feedback",
 				destination: "https://www.ikiform.com/f/feedback-form-ag334n",
 				permanent: false,
