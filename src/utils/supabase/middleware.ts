@@ -1,6 +1,9 @@
 import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 
+const LOCALE_PREFIX_REGEX = /^\/(en|es)(?=\/|$)/;
+const STRIP_LOCALE_PREFIX_REGEX = /^\/(?:en|es)(?=\/|$)/;
+
 export async function updateSession(
 	request: NextRequest,
 	requestHeaders?: Headers
@@ -45,9 +48,10 @@ export async function updateSession(
 		} = await supabase.auth.getUser();
 
 		const pathname = request.nextUrl.pathname;
-		const localeMatch = pathname.match(/^\/(en|es)(?=\/|$)/);
+		const localeMatch = pathname.match(LOCALE_PREFIX_REGEX);
 		const localePrefix = localeMatch ? `/${localeMatch[1]}` : "";
-		const normalizedPathname = pathname.replace(/^\/(?:en|es)(?=\/|$)/, "") || "/";
+		const normalizedPathname =
+			pathname.replace(STRIP_LOCALE_PREFIX_REGEX, "") || "/";
 		const isProtectedPath =
 			normalizedPathname.startsWith("/dashboard") ||
 			normalizedPathname.startsWith("/form-builder") ||

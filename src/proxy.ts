@@ -1,6 +1,6 @@
-import createMiddleware from "next-intl/middleware";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import createMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
 import {
 	getLocaleFromPathname,
@@ -62,6 +62,7 @@ function isNoindexPath(pathname: string) {
 
 function shouldRefreshAuthSession(pathname: string) {
 	return (
+		pathname === "/login" ||
 		pathname.startsWith("/dashboard") ||
 		pathname.startsWith("/form-builder") ||
 		pathname.startsWith("/admin") ||
