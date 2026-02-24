@@ -21,17 +21,17 @@ const nextConfig: NextConfig = {
 	async redirects() {
 		return [
 			{
-				source: "/:locale(en|es)/f/:slug*",
+				source: "/:locale(en|es|fr|de|pt|hi|ja|zh|it|ar|ko|ru|tr|nl)/f/:slug*",
 				destination: "/f/:slug*",
 				permanent: false,
 			},
 			{
-				source: "/:locale(en|es)/forms/:id/:path*",
+				source: "/:locale(en|es|fr|de|pt|hi|ja|zh|it|ar|ko|ru|tr|nl)/forms/:id/:path*",
 				destination: "/forms/:id/:path*",
 				permanent: false,
 			},
 			{
-				source: "/:locale(en|es)/feedback",
+				source: "/:locale(en|es|fr|de|pt|hi|ja|zh|it|ar|ko|ru|tr|nl)/feedback",
 				destination: "https://www.ikiform.com/f/feedback-form-ag334n",
 				permanent: false,
 			},
@@ -41,7 +41,7 @@ const nextConfig: NextConfig = {
 				permanent: false,
 			},
 			{
-				source: "/:locale(en|es)/feature-request",
+				source: "/:locale(en|es|fr|de|pt|hi|ja|zh|it|ar|ko|ru|tr|nl)/feature-request",
 				destination: "https://www.ikiform.com/f/feature-request-form-zo0tg5",
 				permanent: false,
 			},
@@ -51,7 +51,7 @@ const nextConfig: NextConfig = {
 				permanent: false,
 			},
 			{
-				source: "/:locale(en|es)/bug-report",
+				source: "/:locale(en|es|fr|de|pt|hi|ja|zh|it|ar|ko|ru|tr|nl)/bug-report",
 				destination: "https://www.ikiform.com/f/bug-report-form-82iwa5",
 				permanent: false,
 			},
@@ -61,7 +61,7 @@ const nextConfig: NextConfig = {
 				permanent: false,
 			},
 			{
-				source: "/:locale(en|es)/github",
+				source: "/:locale(en|es|fr|de|pt|hi|ja|zh|it|ar|ko|ru|tr|nl)/github",
 				destination: "https://github.com/preetsuthar17/ikiform",
 				permanent: false,
 			},
@@ -71,7 +71,7 @@ const nextConfig: NextConfig = {
 				permanent: false,
 			},
 			{
-				source: "/:locale(en|es)/discord",
+				source: "/:locale(en|es|fr|de|pt|hi|ja|zh|it|ar|ko|ru|tr|nl)/discord",
 				destination: "https://discord.gg/jM5BgDMaGX",
 				permanent: false,
 			},
@@ -81,7 +81,7 @@ const nextConfig: NextConfig = {
 				permanent: false,
 			},
 			{
-				source: "/:locale(en|es)/email",
+				source: "/:locale(en|es|fr|de|pt|hi|ja|zh|it|ar|ko|ru|tr|nl)/email",
 				destination: "mailto:hi@ikiform.com",
 				permanent: false,
 			},
@@ -91,7 +91,7 @@ const nextConfig: NextConfig = {
 				permanent: false,
 			},
 			{
-				source: "/:locale(en|es)/twitter",
+				source: "/:locale(en|es|fr|de|pt|hi|ja|zh|it|ar|ko|ru|tr|nl)/twitter",
 				destination: "https://x.com/preetsuthar17",
 				permanent: false,
 			},
