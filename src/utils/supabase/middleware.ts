@@ -66,12 +66,8 @@ export async function updateSession(
 			return NextResponse.redirect(url);
 		}
 
-		if (user && normalizedPathname.startsWith("/login")) {
-			const url = request.nextUrl.clone();
-			url.pathname = localePrefix ? `${localePrefix}/dashboard` : "/dashboard";
-			url.searchParams.delete("next");
-			return NextResponse.redirect(url);
-		}
+		// Avoid redirect loops when server-rendered protected pages and middleware
+		// temporarily disagree about session validity.
 	} catch (error) {
 		// Don't take down page/API requests when an auth cookie is malformed.
 		console.error("[updateSession] Failed to refresh auth session:", error);
