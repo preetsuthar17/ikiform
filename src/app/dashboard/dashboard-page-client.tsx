@@ -3,7 +3,7 @@
 import type { User } from "@supabase/supabase-js";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import type { Form } from "@/lib/database";
+import type { Form, FormSchema } from "@/lib/database";
 import { ensureDefaultFormSettings } from "@/lib/forms";
 import { getLocaleFromPathname, withLocaleHref } from "@/lib/i18n/pathname";
 import { createClient } from "@/utils/supabase/client";
@@ -112,7 +112,7 @@ export default function DashboardPageClient() {
 			const forms: Form[] = (formsResult.data || []).map((form) => ({
 				...form,
 				schema: ensureDefaultFormSettings(
-					(form.schema as Record<string, unknown> | null) || {}
+					(form.schema || {}) as FormSchema
 				),
 			}));
 
