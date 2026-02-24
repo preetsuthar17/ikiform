@@ -1,5 +1,6 @@
 "use client";
 
+import type { Session } from "@supabase/supabase-js";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -13,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { useAuth } from "@/hooks/use-auth";
 import { toast } from "@/hooks/use-toast";
 import { getLocaleFromPathname, withLocaleHref } from "@/lib/i18n/pathname";
 import { createClient } from "@/utils/supabase/client";
@@ -24,6 +26,7 @@ export default function LoginForm() {
 	const t = useTranslations("auth.login");
 	const pathname = usePathname();
 	const router = useRouter();
+	const { user, loading: authLoading } = useAuth();
 	const [isSignUp, setIsSignUp] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [step, setStep] = useState<"email" | "name" | "password">("email");
@@ -56,6 +59,32 @@ export default function LoginForm() {
 		}
 		return toLocalePath("/dashboard");
 	}, [toLocalePath]);
+	const ensureServerSession = useCallback(
+		async (session: null | Session) => {
+			if (!(session?.access_token && session.refresh_token)) {
+				return false;
+			}
+
+			const syncResponse = await fetch("/api/auth/sync-session", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					accessToken: session.access_token,
+					refreshToken: session.refresh_token,
+				}),
+			});
+			if (!syncResponse.ok) {
+				return false;
+			}
+
+			const verifyResponse = await fetch("/api/user", {
+				cache: "no-store",
+				method: "GET",
+			});
+			return verifyResponse.ok;
+		},
+		[]
+	);
 
 	useEffect(() => {
 		setLastLoginMethod(localStorage.getItem("lastLoginMethod"));
@@ -67,6 +96,31 @@ export default function LoginForm() {
 		if (step === "name") nameRef.current?.focus();
 		if (step === "password") passwordRef.current?.focus();
 	}, [step, loading]);
+
+	useEffect(() => {
+		if (authLoading || !user) {
+			return;
+		}
+
+		let ignore = false;
+		const syncAndRedirect = async () => {
+			const supabase = createClient();
+			const {
+				data: { session },
+			} = await supabase.auth.getSession();
+			const isSessionReady = await ensureServerSession(session);
+			if (ignore || !isSessionReady) {
+				return;
+			}
+			router.replace(getPostLoginPath());
+			router.refresh();
+		};
+
+		void syncAndRedirect();
+		return () => {
+			ignore = true;
+		};
+	}, [authLoading, ensureServerSession, getPostLoginPath, router, user]);
 
 	const handleInput = useCallback((field: string, value: string) => {
 		setForm((f) => ({ ...f, [field]: value }));
@@ -200,8 +254,12 @@ export default function LoginForm() {
 						});
 					} catch {}
 					toast.success(t("toasts.signInSuccess"));
+					const isSessionReady = await ensureServerSession(data.session);
+					if (!isSessionReady) {
+						toast.error(t("toasts.unexpectedError"));
+						return;
+					}
 					router.replace(getPostLoginPath());
-					router.refresh();
 				}
 			}
 		} catch {
@@ -209,7 +267,16 @@ export default function LoginForm() {
 		} finally {
 			setLoading(false);
 		}
-	}, [form.email, form.name, form.password, getPostLoginPath, isSignUp, router, t]);
+	}, [
+		ensureServerSession,
+		form.email,
+		form.name,
+		form.password,
+		getPostLoginPath,
+		isSignUp,
+		router,
+		t,
+	]);
 
 	const handleOAuth = useCallback(async (provider: "github" | "google") => {
 		localStorage.setItem("lastLoginMethod", provider);
